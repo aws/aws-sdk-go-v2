@@ -4,11 +4,10 @@ package guardduty
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops GuardDuty monitoring for the specified member accounts. Use the
@@ -53,6 +52,19 @@ type StopMonitoringMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMonitoringMembersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMonitoringMembersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMonitoringMembersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.StopMonitoringMembersRequest_AccountIds, v.AccountIds)
+	if v.DetectorId != nil {
+		s.WriteString(schemas.StopMonitoringMembersRequest_DetectorId, *v.DetectorId)
+	}
+}
+
 type StopMonitoringMembersOutput struct {
 
 	// A list of objects that contain an accountId for each account that could not be
@@ -67,77 +79,45 @@ type StopMonitoringMembersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMonitoringMembersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMonitoringMembersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMonitoringMembersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnprocessedAccounts(s, schemas.StopMonitoringMembersResponse_UnprocessedAccounts, v.UnprocessedAccounts)
+}
+func (v *StopMonitoringMembersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMonitoringMembersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopMonitoringMembersResponse_UnprocessedAccounts:
+			return deserializeUnprocessedAccounts(d, schemas.StopMonitoringMembersResponse_UnprocessedAccounts, &v.UnprocessedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopMonitoringMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMonitoringMembers, schemas.StopMonitoringMembersRequest, schemas.StopMonitoringMembersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopMonitoringMembers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMonitoringMembers, schemas.StopMonitoringMembersRequest, schemas.StopMonitoringMembersResponse), output: &StopMonitoringMembersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopMonitoringMembers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopMonitoringMembers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopMonitoringMembersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopMonitoringMembers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +132,8 @@ func (c *Client) addOperationStopMonitoringMembersMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopMonitoringMembers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopMonitoringMembers",
-	}
 }

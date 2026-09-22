@@ -4,11 +4,10 @@ package connectcases
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a domain, which is a container for all case data, such as cases,
@@ -47,6 +46,28 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDomainRequest_name, *v.Name)
+	}
+}
+func (v *CreateDomainInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDomainRequest_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type CreateDomainOutput struct {
 
 	// The Amazon Resource Name (ARN) for the Cases domain.
@@ -70,77 +91,64 @@ type CreateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainArn != nil {
+		s.WriteString(schemas.CreateDomainResponse_domainArn, *v.DomainArn)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreateDomainResponse_domainId, *v.DomainId)
+	}
+	if v.DomainStatus != "" {
+		s.WriteString(schemas.CreateDomainResponse_domainStatus, string(v.DomainStatus))
+	}
+}
+func (v *CreateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainResponse_domainArn:
+			v.DomainArn = new(string)
+			return d.ReadString(schemas.CreateDomainResponse_domainArn, v.DomainArn)
+		case schemas.CreateDomainResponse_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateDomainResponse_domainId, v.DomainId)
+		case schemas.CreateDomainResponse_domainStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateDomainResponse_domainStatus, &ev); err != nil {
+				return err
+			}
+			v.DomainStatus = types.DomainStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResponse), output: &CreateDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +163,8 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDomain",
-	}
 }

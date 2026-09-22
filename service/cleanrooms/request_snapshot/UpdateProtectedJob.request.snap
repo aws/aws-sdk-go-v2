@@ -1,0 +1,5 @@
+PATCH /memberships/__MembershipIdentifier__/protectedJobs/__ProtectedJobIdentifier__
+
+Content-Type: application/json
+
+{"targetStatus":"CANCELLED"}

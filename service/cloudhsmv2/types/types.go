@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -66,6 +68,111 @@ type Backup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Backup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Backup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Backup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupArn != nil {
+		s.WriteString(schemas.Backup_BackupArn, *v.BackupArn)
+	}
+	if v.BackupId != nil {
+		s.WriteString(schemas.Backup_BackupId, *v.BackupId)
+	}
+	if v.BackupState != "" {
+		s.WriteString(schemas.Backup_BackupState, string(v.BackupState))
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.Backup_ClusterId, *v.ClusterId)
+	}
+	if v.CopyTimestamp != nil {
+		s.WriteTime(schemas.Backup_CopyTimestamp, *v.CopyTimestamp)
+	}
+	if v.CreateTimestamp != nil {
+		s.WriteTime(schemas.Backup_CreateTimestamp, *v.CreateTimestamp)
+	}
+	if v.DeleteTimestamp != nil {
+		s.WriteTime(schemas.Backup_DeleteTimestamp, *v.DeleteTimestamp)
+	}
+	if v.HsmType != nil {
+		s.WriteString(schemas.Backup_HsmType, *v.HsmType)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.Backup_Mode, string(v.Mode))
+	}
+	if v.NeverExpires != nil {
+		s.WriteBool(schemas.Backup_NeverExpires, *v.NeverExpires)
+	}
+	if v.SourceBackup != nil {
+		s.WriteString(schemas.Backup_SourceBackup, *v.SourceBackup)
+	}
+	if v.SourceCluster != nil {
+		s.WriteString(schemas.Backup_SourceCluster, *v.SourceCluster)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.Backup_SourceRegion, *v.SourceRegion)
+	}
+	serializeTagList(s, schemas.Backup_TagList, v.TagList)
+}
+func (v *Backup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Backup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Backup_BackupArn:
+			v.BackupArn = new(string)
+			return d.ReadString(schemas.Backup_BackupArn, v.BackupArn)
+		case schemas.Backup_BackupId:
+			v.BackupId = new(string)
+			return d.ReadString(schemas.Backup_BackupId, v.BackupId)
+		case schemas.Backup_BackupState:
+			var ev string
+			if err := d.ReadString(schemas.Backup_BackupState, &ev); err != nil {
+				return err
+			}
+			v.BackupState = BackupState(ev)
+			return nil
+		case schemas.Backup_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.Backup_ClusterId, v.ClusterId)
+		case schemas.Backup_CopyTimestamp:
+			v.CopyTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Backup_CopyTimestamp, v.CopyTimestamp)
+		case schemas.Backup_CreateTimestamp:
+			v.CreateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Backup_CreateTimestamp, v.CreateTimestamp)
+		case schemas.Backup_DeleteTimestamp:
+			v.DeleteTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Backup_DeleteTimestamp, v.DeleteTimestamp)
+		case schemas.Backup_HsmType:
+			v.HsmType = new(string)
+			return d.ReadString(schemas.Backup_HsmType, v.HsmType)
+		case schemas.Backup_Mode:
+			var ev string
+			if err := d.ReadString(schemas.Backup_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = ClusterMode(ev)
+			return nil
+		case schemas.Backup_NeverExpires:
+			v.NeverExpires = new(bool)
+			return d.ReadBool(schemas.Backup_NeverExpires, v.NeverExpires)
+		case schemas.Backup_SourceBackup:
+			v.SourceBackup = new(string)
+			return d.ReadString(schemas.Backup_SourceBackup, v.SourceBackup)
+		case schemas.Backup_SourceCluster:
+			v.SourceCluster = new(string)
+			return d.ReadString(schemas.Backup_SourceCluster, v.SourceCluster)
+		case schemas.Backup_SourceRegion:
+			v.SourceRegion = new(string)
+			return d.ReadString(schemas.Backup_SourceRegion, v.SourceRegion)
+		case schemas.Backup_TagList:
+			return deserializeTagList(d, schemas.Backup_TagList, &v.TagList)
+		}
+		return nil
+	})
+}
+
 // A policy that defines the number of days to retain backups.
 type BackupRetentionPolicy struct {
 
@@ -77,6 +184,38 @@ type BackupRetentionPolicy struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BackupRetentionPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupRetentionPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupRetentionPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.BackupRetentionPolicy_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.BackupRetentionPolicy_Value, *v.Value)
+	}
+}
+func (v *BackupRetentionPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupRetentionPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupRetentionPolicy_Type:
+			var ev string
+			if err := d.ReadString(schemas.BackupRetentionPolicy_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = BackupRetentionType(ev)
+			return nil
+		case schemas.BackupRetentionPolicy_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.BackupRetentionPolicy_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Contains one or more certificates or a certificate signing request (CSR).
@@ -100,6 +239,52 @@ type Certificates struct {
 	ManufacturerHardwareCertificate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Certificates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Certificates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Certificates) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsHardwareCertificate != nil {
+		s.WriteString(schemas.Certificates_AwsHardwareCertificate, *v.AwsHardwareCertificate)
+	}
+	if v.ClusterCertificate != nil {
+		s.WriteString(schemas.Certificates_ClusterCertificate, *v.ClusterCertificate)
+	}
+	if v.ClusterCsr != nil {
+		s.WriteString(schemas.Certificates_ClusterCsr, *v.ClusterCsr)
+	}
+	if v.HsmCertificate != nil {
+		s.WriteString(schemas.Certificates_HsmCertificate, *v.HsmCertificate)
+	}
+	if v.ManufacturerHardwareCertificate != nil {
+		s.WriteString(schemas.Certificates_ManufacturerHardwareCertificate, *v.ManufacturerHardwareCertificate)
+	}
+}
+func (v *Certificates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Certificates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Certificates_AwsHardwareCertificate:
+			v.AwsHardwareCertificate = new(string)
+			return d.ReadString(schemas.Certificates_AwsHardwareCertificate, v.AwsHardwareCertificate)
+		case schemas.Certificates_ClusterCertificate:
+			v.ClusterCertificate = new(string)
+			return d.ReadString(schemas.Certificates_ClusterCertificate, v.ClusterCertificate)
+		case schemas.Certificates_ClusterCsr:
+			v.ClusterCsr = new(string)
+			return d.ReadString(schemas.Certificates_ClusterCsr, v.ClusterCsr)
+		case schemas.Certificates_HsmCertificate:
+			v.HsmCertificate = new(string)
+			return d.ReadString(schemas.Certificates_HsmCertificate, v.HsmCertificate)
+		case schemas.Certificates_ManufacturerHardwareCertificate:
+			v.ManufacturerHardwareCertificate = new(string)
+			return d.ReadString(schemas.Certificates_ManufacturerHardwareCertificate, v.ManufacturerHardwareCertificate)
+		}
+		return nil
+	})
 }
 
 // Contains information about an CloudHSM cluster.
@@ -173,6 +358,141 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Cluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Cluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPolicy != "" {
+		s.WriteString(schemas.Cluster_BackupPolicy, string(v.BackupPolicy))
+	}
+	if v.BackupRetentionPolicy != nil {
+		s.WriteStruct(schemas.Cluster_BackupRetentionPolicy)
+		v.BackupRetentionPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Certificates != nil {
+		s.WriteStruct(schemas.Cluster_Certificates)
+		v.Certificates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.Cluster_ClusterId, *v.ClusterId)
+	}
+	if v.CreateTimestamp != nil {
+		s.WriteTime(schemas.Cluster_CreateTimestamp, *v.CreateTimestamp)
+	}
+	if v.HsmType != nil {
+		s.WriteString(schemas.Cluster_HsmType, *v.HsmType)
+	}
+	if v.HsmTypeRollbackExpiration != nil {
+		s.WriteTime(schemas.Cluster_HsmTypeRollbackExpiration, *v.HsmTypeRollbackExpiration)
+	}
+	serializeHsms(s, schemas.Cluster_Hsms, v.Hsms)
+	if v.Mode != "" {
+		s.WriteString(schemas.Cluster_Mode, string(v.Mode))
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.Cluster_NetworkType, string(v.NetworkType))
+	}
+	if v.PreCoPassword != nil {
+		s.WriteString(schemas.Cluster_PreCoPassword, *v.PreCoPassword)
+	}
+	if v.SecurityGroup != nil {
+		s.WriteString(schemas.Cluster_SecurityGroup, *v.SecurityGroup)
+	}
+	if v.SourceBackupId != nil {
+		s.WriteString(schemas.Cluster_SourceBackupId, *v.SourceBackupId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Cluster_State, string(v.State))
+	}
+	if v.StateMessage != nil {
+		s.WriteString(schemas.Cluster_StateMessage, *v.StateMessage)
+	}
+	serializeExternalSubnetMapping(s, schemas.Cluster_SubnetMapping, v.SubnetMapping)
+	serializeTagList(s, schemas.Cluster_TagList, v.TagList)
+	if v.VpcId != nil {
+		s.WriteString(schemas.Cluster_VpcId, *v.VpcId)
+	}
+}
+func (v *Cluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Cluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Cluster_BackupPolicy:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_BackupPolicy, &ev); err != nil {
+				return err
+			}
+			v.BackupPolicy = BackupPolicy(ev)
+			return nil
+		case schemas.Cluster_BackupRetentionPolicy:
+			v.BackupRetentionPolicy = &BackupRetentionPolicy{}
+			return v.BackupRetentionPolicy.Deserialize(d)
+		case schemas.Cluster_Certificates:
+			v.Certificates = &Certificates{}
+			return v.Certificates.Deserialize(d)
+		case schemas.Cluster_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.Cluster_ClusterId, v.ClusterId)
+		case schemas.Cluster_CreateTimestamp:
+			v.CreateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Cluster_CreateTimestamp, v.CreateTimestamp)
+		case schemas.Cluster_HsmType:
+			v.HsmType = new(string)
+			return d.ReadString(schemas.Cluster_HsmType, v.HsmType)
+		case schemas.Cluster_HsmTypeRollbackExpiration:
+			v.HsmTypeRollbackExpiration = new(time.Time)
+			return d.ReadTime(schemas.Cluster_HsmTypeRollbackExpiration, v.HsmTypeRollbackExpiration)
+		case schemas.Cluster_Hsms:
+			return deserializeHsms(d, schemas.Cluster_Hsms, &v.Hsms)
+		case schemas.Cluster_Mode:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = ClusterMode(ev)
+			return nil
+		case schemas.Cluster_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.Cluster_PreCoPassword:
+			v.PreCoPassword = new(string)
+			return d.ReadString(schemas.Cluster_PreCoPassword, v.PreCoPassword)
+		case schemas.Cluster_SecurityGroup:
+			v.SecurityGroup = new(string)
+			return d.ReadString(schemas.Cluster_SecurityGroup, v.SecurityGroup)
+		case schemas.Cluster_SourceBackupId:
+			v.SourceBackupId = new(string)
+			return d.ReadString(schemas.Cluster_SourceBackupId, v.SourceBackupId)
+		case schemas.Cluster_State:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_State, &ev); err != nil {
+				return err
+			}
+			v.State = ClusterState(ev)
+			return nil
+		case schemas.Cluster_StateMessage:
+			v.StateMessage = new(string)
+			return d.ReadString(schemas.Cluster_StateMessage, v.StateMessage)
+		case schemas.Cluster_SubnetMapping:
+			return deserializeExternalSubnetMapping(d, schemas.Cluster_SubnetMapping, &v.SubnetMapping)
+		case schemas.Cluster_TagList:
+			return deserializeTagList(d, schemas.Cluster_TagList, &v.TagList)
+		case schemas.Cluster_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.Cluster_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Contains information about the backup that will be copied and created by the CopyBackupToRegion
 // operation.
 type DestinationBackup struct {
@@ -192,6 +512,46 @@ type DestinationBackup struct {
 	SourceRegion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DestinationBackup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationBackup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationBackup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTimestamp != nil {
+		s.WriteTime(schemas.DestinationBackup_CreateTimestamp, *v.CreateTimestamp)
+	}
+	if v.SourceBackup != nil {
+		s.WriteString(schemas.DestinationBackup_SourceBackup, *v.SourceBackup)
+	}
+	if v.SourceCluster != nil {
+		s.WriteString(schemas.DestinationBackup_SourceCluster, *v.SourceCluster)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.DestinationBackup_SourceRegion, *v.SourceRegion)
+	}
+}
+func (v *DestinationBackup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationBackup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationBackup_CreateTimestamp:
+			v.CreateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DestinationBackup_CreateTimestamp, v.CreateTimestamp)
+		case schemas.DestinationBackup_SourceBackup:
+			v.SourceBackup = new(string)
+			return d.ReadString(schemas.DestinationBackup_SourceBackup, v.SourceBackup)
+		case schemas.DestinationBackup_SourceCluster:
+			v.SourceCluster = new(string)
+			return d.ReadString(schemas.DestinationBackup_SourceCluster, v.SourceCluster)
+		case schemas.DestinationBackup_SourceRegion:
+			v.SourceRegion = new(string)
+			return d.ReadString(schemas.DestinationBackup_SourceRegion, v.SourceRegion)
+		}
+		return nil
+	})
 }
 
 // Contains information about a hardware security module (HSM) in an CloudHSM
@@ -233,6 +593,86 @@ type Hsm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Hsm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Hsm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Hsm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.Hsm_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.Hsm_ClusterId, *v.ClusterId)
+	}
+	if v.EniId != nil {
+		s.WriteString(schemas.Hsm_EniId, *v.EniId)
+	}
+	if v.EniIp != nil {
+		s.WriteString(schemas.Hsm_EniIp, *v.EniIp)
+	}
+	if v.EniIpV6 != nil {
+		s.WriteString(schemas.Hsm_EniIpV6, *v.EniIpV6)
+	}
+	if v.HsmId != nil {
+		s.WriteString(schemas.Hsm_HsmId, *v.HsmId)
+	}
+	if v.HsmType != nil {
+		s.WriteString(schemas.Hsm_HsmType, *v.HsmType)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Hsm_State, string(v.State))
+	}
+	if v.StateMessage != nil {
+		s.WriteString(schemas.Hsm_StateMessage, *v.StateMessage)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.Hsm_SubnetId, *v.SubnetId)
+	}
+}
+func (v *Hsm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Hsm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Hsm_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.Hsm_AvailabilityZone, v.AvailabilityZone)
+		case schemas.Hsm_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.Hsm_ClusterId, v.ClusterId)
+		case schemas.Hsm_EniId:
+			v.EniId = new(string)
+			return d.ReadString(schemas.Hsm_EniId, v.EniId)
+		case schemas.Hsm_EniIp:
+			v.EniIp = new(string)
+			return d.ReadString(schemas.Hsm_EniIp, v.EniIp)
+		case schemas.Hsm_EniIpV6:
+			v.EniIpV6 = new(string)
+			return d.ReadString(schemas.Hsm_EniIpV6, v.EniIpV6)
+		case schemas.Hsm_HsmId:
+			v.HsmId = new(string)
+			return d.ReadString(schemas.Hsm_HsmId, v.HsmId)
+		case schemas.Hsm_HsmType:
+			v.HsmType = new(string)
+			return d.ReadString(schemas.Hsm_HsmType, v.HsmType)
+		case schemas.Hsm_State:
+			var ev string
+			if err := d.ReadString(schemas.Hsm_State, &ev); err != nil {
+				return err
+			}
+			v.State = HsmState(ev)
+			return nil
+		case schemas.Hsm_StateMessage:
+			v.StateMessage = new(string)
+			return d.ReadString(schemas.Hsm_StateMessage, v.StateMessage)
+		case schemas.Hsm_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.Hsm_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
+}
+
 // Contains a tag. A tag is a key-value pair.
 type Tag struct {
 
@@ -247,6 +687,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

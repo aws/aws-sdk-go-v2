@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.StartBgpFailoverTest
+
+{"bgpPeers":["__Member__","__Member__"],"testDurationInMinutes":1,"virtualInterfaceId":"__VirtualInterfaceId__"}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeScalingActivities&ActivityIds.member.1=__Member__&ActivityIds.member.2=__Member__&AutoScalingGroupName=__AutoScalingGroupName__&Filters.member.1.Name=__Name__&Filters.member.1.Values.member.1=__Member__&Filters.member.1.Values.member.2=__Member__&Filters.member.2.Name=__Name__&Filters.member.2.Values.member.1=__Member__&Filters.member.2.Values.member.2=__Member__&IncludeDeletedGroups=true&MaxRecords=1&NextToken=__NextToken__&Version=2011-01-01

@@ -5,10 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the specified registration type definitions. You can use
@@ -48,6 +48,23 @@ type DescribeRegistrationTypeDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistrationTypeDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistrationTypeDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistrationTypeDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegistrationTypeFilterList(s, schemas.DescribeRegistrationTypeDefinitionsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRegistrationTypeDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegistrationTypeDefinitionsRequest_NextToken, *v.NextToken)
+	}
+	serializeRegistrationTypeList(s, schemas.DescribeRegistrationTypeDefinitionsRequest_RegistrationTypes, v.RegistrationTypes)
+}
+
 type DescribeRegistrationTypeDefinitionsOutput struct {
 
 	// The type of registration form. The list of RegistrationTypes can be found using
@@ -66,77 +83,51 @@ type DescribeRegistrationTypeDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRegistrationTypeDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRegistrationTypeDefinitionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRegistrationTypeDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRegistrationTypeDefinitionsResult_NextToken, *v.NextToken)
+	}
+	serializeRegistrationTypeDefinitionList(s, schemas.DescribeRegistrationTypeDefinitionsResult_RegistrationTypeDefinitions, v.RegistrationTypeDefinitions)
+}
+func (v *DescribeRegistrationTypeDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRegistrationTypeDefinitionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRegistrationTypeDefinitionsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRegistrationTypeDefinitionsResult_NextToken, v.NextToken)
+		case schemas.DescribeRegistrationTypeDefinitionsResult_RegistrationTypeDefinitions:
+			return deserializeRegistrationTypeDefinitionList(d, schemas.DescribeRegistrationTypeDefinitionsResult_RegistrationTypeDefinitions, &v.RegistrationTypeDefinitions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRegistrationTypeDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationTypeDefinitions, schemas.DescribeRegistrationTypeDefinitionsRequest, schemas.DescribeRegistrationTypeDefinitionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRegistrationTypeDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRegistrationTypeDefinitions, schemas.DescribeRegistrationTypeDefinitionsRequest, schemas.DescribeRegistrationTypeDefinitionsResult), output: &DescribeRegistrationTypeDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRegistrationTypeDefinitions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRegistrationTypeDefinitions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRegistrationTypeDefinitionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRegistrationTypeDefinitions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +140,6 @@ func (c *Client) addOperationDescribeRegistrationTypeDefinitionsMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +243,3 @@ type DescribeRegistrationTypeDefinitionsAPIClient interface {
 }
 
 var _ DescribeRegistrationTypeDefinitionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeRegistrationTypeDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRegistrationTypeDefinitions",
-	}
-}

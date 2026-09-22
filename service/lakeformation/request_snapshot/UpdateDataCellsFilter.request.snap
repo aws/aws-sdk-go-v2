@@ -1,0 +1,5 @@
+POST /UpdateDataCellsFilter
+
+Content-Type: application/json
+
+{"TableData":{"ColumnNames":["__Member__","__Member__"],"ColumnWildcard":{"ExcludedColumnNames":["__Member__","__Member__"]},"DatabaseName":"__DatabaseName__","Name":"__Name__","RowFilter":{"AllRowsWildcard":{},"FilterExpression":"__FilterExpression__"},"TableCatalogId":"__TableCatalogId__","TableName":"__TableName__","VersionId":"__VersionId__"}}

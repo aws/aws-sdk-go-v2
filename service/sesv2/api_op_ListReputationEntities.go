@@ -5,10 +5,10 @@ package sesv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List reputation entities in your Amazon SES account in the current Amazon Web
@@ -54,6 +54,22 @@ type ListReputationEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReputationEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReputationEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReputationEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReputationEntityFilter(s, schemas.ListReputationEntitiesRequest_Filter, v.Filter)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReputationEntitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListReputationEntitiesRequest_PageSize, *v.PageSize)
+	}
+}
+
 // A list of reputation entities in your account.
 type ListReputationEntitiesOutput struct {
 
@@ -72,74 +88,48 @@ type ListReputationEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReputationEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReputationEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReputationEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReputationEntitiesResponse_NextToken, *v.NextToken)
+	}
+	serializeReputationEntitiesList(s, schemas.ListReputationEntitiesResponse_ReputationEntities, v.ReputationEntities)
+}
+func (v *ListReputationEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReputationEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReputationEntitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReputationEntitiesResponse_NextToken, v.NextToken)
+		case schemas.ListReputationEntitiesResponse_ReputationEntities:
+			return deserializeReputationEntitiesList(d, schemas.ListReputationEntitiesResponse_ReputationEntities, &v.ReputationEntities)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReputationEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReputationEntities, schemas.ListReputationEntitiesRequest, schemas.ListReputationEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReputationEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReputationEntities, schemas.ListReputationEntitiesRequest, schemas.ListReputationEntitiesResponse), output: &ListReputationEntitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReputationEntities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReputationEntities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReputationEntities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +142,6 @@ func (c *Client) addOperationListReputationEntitiesMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +246,3 @@ type ListReputationEntitiesAPIClient interface {
 }
 
 var _ ListReputationEntitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListReputationEntities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListReputationEntities",
-	}
-}

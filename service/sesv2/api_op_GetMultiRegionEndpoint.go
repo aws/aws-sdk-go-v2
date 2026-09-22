@@ -4,11 +4,10 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,18 @@ type GetMultiRegionEndpointInput struct {
 	EndpointName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMultiRegionEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMultiRegionEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMultiRegionEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointName != nil {
+		s.WriteString(schemas.GetMultiRegionEndpointRequest_EndpointName, *v.EndpointName)
+	}
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the
@@ -79,77 +90,79 @@ type GetMultiRegionEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMultiRegionEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMultiRegionEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMultiRegionEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetMultiRegionEndpointResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.GetMultiRegionEndpointResponse_EndpointId, *v.EndpointId)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.GetMultiRegionEndpointResponse_EndpointName, *v.EndpointName)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetMultiRegionEndpointResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	serializeRoutes(s, schemas.GetMultiRegionEndpointResponse_Routes, v.Routes)
+	if v.Status != "" {
+		s.WriteString(schemas.GetMultiRegionEndpointResponse_Status, string(v.Status))
+	}
+}
+func (v *GetMultiRegionEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMultiRegionEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMultiRegionEndpointResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetMultiRegionEndpointResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetMultiRegionEndpointResponse_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.GetMultiRegionEndpointResponse_EndpointId, v.EndpointId)
+		case schemas.GetMultiRegionEndpointResponse_EndpointName:
+			v.EndpointName = new(string)
+			return d.ReadString(schemas.GetMultiRegionEndpointResponse_EndpointName, v.EndpointName)
+		case schemas.GetMultiRegionEndpointResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetMultiRegionEndpointResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetMultiRegionEndpointResponse_Routes:
+			return deserializeRoutes(d, schemas.GetMultiRegionEndpointResponse_Routes, &v.Routes)
+		case schemas.GetMultiRegionEndpointResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetMultiRegionEndpointResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMultiRegionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMultiRegionEndpoint, schemas.GetMultiRegionEndpointRequest, schemas.GetMultiRegionEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMultiRegionEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMultiRegionEndpoint, schemas.GetMultiRegionEndpointRequest, schemas.GetMultiRegionEndpointResponse), output: &GetMultiRegionEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMultiRegionEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMultiRegionEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMultiRegionEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMultiRegionEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +177,8 @@ func (c *Client) addOperationGetMultiRegionEndpointMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMultiRegionEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMultiRegionEndpoint",
-	}
 }

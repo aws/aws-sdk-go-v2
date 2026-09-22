@@ -4,15 +4,24 @@ package ssoadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update the details for the instance of IAM Identity Center that is owned by the
 // Amazon Web Services account.
+//
+// In a single UpdateInstance request, you can perform only one of the following
+// operations:
+//
+//   - Update the encryption configuration of the instance by specifying
+//     EncryptionConfiguration .
+//
+//   - Enable permission sets for the instance by specifying PermissionSetsEnabled .
+//
+// A request that specifies both EncryptionConfiguration and PermissionSetsEnabled
+// returns a ValidationException . To perform both operations, call UpdateInstance
+// separately for each. The two calls can be made in parallel.
 func (c *Client) UpdateInstance(ctx context.Context, params *UpdateInstanceInput, optFns ...func(*Options)) (*UpdateInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateInstanceInput{}
@@ -45,6 +54,14 @@ type UpdateInstanceInput struct {
 	// Updates the instance name.
 	Name *string
 
+	// Enables permission sets for this Identity Center instance. The only accepted
+	// value is true . After permission sets are enabled, they cannot be disabled.
+	//
+	// You can't set EncryptionConfiguration and PermissionSetsEnabled in the same
+	// request. To configure both, make two separate UpdateInstance calls. These calls
+	// can be made in parallel.
+	PermissionSetsEnabled *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -56,9 +73,6 @@ type UpdateInstanceOutput struct {
 }
 
 func (c *Client) addOperationUpdateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateInstance{}, middleware.After)
 	if err != nil {
 		return err
@@ -67,65 +81,20 @@ func (c *Client) addOperationUpdateInstanceMiddlewares(stack *middleware.Stack, 
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +109,8 @@ func (c *Client) addOperationUpdateInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateInstance",
-	}
 }

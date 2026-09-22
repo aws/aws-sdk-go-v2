@@ -4,11 +4,10 @@ package workmail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets details for a mail domain, including domain records required to configure
@@ -43,6 +42,21 @@ type GetMailDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMailDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMailDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMailDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetMailDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.GetMailDomainRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type GetMailDomainOutput struct {
 
 	// Indicates the status of a DKIM verification.
@@ -70,77 +84,75 @@ type GetMailDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMailDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMailDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMailDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DkimVerificationStatus != "" {
+		s.WriteString(schemas.GetMailDomainResponse_DkimVerificationStatus, string(v.DkimVerificationStatus))
+	}
+	if v.IsDefault != false {
+		s.WriteBool(schemas.GetMailDomainResponse_IsDefault, v.IsDefault)
+	}
+	if v.IsTestDomain != false {
+		s.WriteBool(schemas.GetMailDomainResponse_IsTestDomain, v.IsTestDomain)
+	}
+	if v.OwnershipVerificationStatus != "" {
+		s.WriteString(schemas.GetMailDomainResponse_OwnershipVerificationStatus, string(v.OwnershipVerificationStatus))
+	}
+	serializeDnsRecords(s, schemas.GetMailDomainResponse_Records, v.Records)
+}
+func (v *GetMailDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMailDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMailDomainResponse_DkimVerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetMailDomainResponse_DkimVerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.DkimVerificationStatus = types.DnsRecordVerificationStatus(ev)
+			return nil
+		case schemas.GetMailDomainResponse_IsDefault:
+			return d.ReadBool(schemas.GetMailDomainResponse_IsDefault, &v.IsDefault)
+		case schemas.GetMailDomainResponse_IsTestDomain:
+			return d.ReadBool(schemas.GetMailDomainResponse_IsTestDomain, &v.IsTestDomain)
+		case schemas.GetMailDomainResponse_OwnershipVerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetMailDomainResponse_OwnershipVerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.OwnershipVerificationStatus = types.DnsRecordVerificationStatus(ev)
+			return nil
+		case schemas.GetMailDomainResponse_Records:
+			return deserializeDnsRecords(d, schemas.GetMailDomainResponse_Records, &v.Records)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMailDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMailDomain, schemas.GetMailDomainRequest, schemas.GetMailDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetMailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMailDomain, schemas.GetMailDomainRequest, schemas.GetMailDomainResponse), output: &GetMailDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetMailDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMailDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMailDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMailDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +167,8 @@ func (c *Client) addOperationGetMailDomainMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMailDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMailDomain",
-	}
 }

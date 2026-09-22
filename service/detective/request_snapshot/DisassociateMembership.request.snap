@@ -1,0 +1,5 @@
+POST /membership/removal
+
+Content-Type: application/json
+
+{"GraphArn":"__GraphArn__"}

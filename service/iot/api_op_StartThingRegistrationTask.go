@@ -4,10 +4,9 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a bulk thing provisioning task.
@@ -57,6 +56,27 @@ type StartThingRegistrationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartThingRegistrationTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartThingRegistrationTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartThingRegistrationTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputFileBucket != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskRequest_inputFileBucket, *v.InputFileBucket)
+	}
+	if v.InputFileKey != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskRequest_inputFileKey, *v.InputFileKey)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskRequest_roleArn, *v.RoleArn)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskRequest_templateBody, *v.TemplateBody)
+	}
+}
+
 type StartThingRegistrationTaskOutput struct {
 
 	// The bulk thing provisioning task ID.
@@ -68,77 +88,48 @@ type StartThingRegistrationTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartThingRegistrationTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartThingRegistrationTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartThingRegistrationTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartThingRegistrationTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *StartThingRegistrationTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartThingRegistrationTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartThingRegistrationTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartThingRegistrationTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartThingRegistrationTask, schemas.StartThingRegistrationTaskRequest, schemas.StartThingRegistrationTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartThingRegistrationTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartThingRegistrationTask, schemas.StartThingRegistrationTaskRequest, schemas.StartThingRegistrationTaskResponse), output: &StartThingRegistrationTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartThingRegistrationTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartThingRegistrationTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartThingRegistrationTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartThingRegistrationTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +144,8 @@ func (c *Client) addOperationStartThingRegistrationTaskMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartThingRegistrationTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartThingRegistrationTask",
-	}
 }

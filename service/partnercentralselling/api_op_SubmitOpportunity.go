@@ -4,11 +4,10 @@ package partnercentralselling
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this action to submit an Opportunity that was previously created by partner
@@ -72,6 +71,27 @@ type SubmitOpportunityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitOpportunityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitOpportunityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitOpportunityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.SubmitOpportunityRequest_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.SubmitOpportunityRequest_Identifier, *v.Identifier)
+	}
+	if v.InvolvementType != "" {
+		s.WriteString(schemas.SubmitOpportunityRequest_InvolvementType, string(v.InvolvementType))
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.SubmitOpportunityRequest_Visibility, string(v.Visibility))
+	}
+}
+
 type SubmitOpportunityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,77 +99,42 @@ type SubmitOpportunityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitOpportunityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitOpportunityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SubmitOpportunityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitOpportunityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitOpportunity, schemas.SubmitOpportunityRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSubmitOpportunity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitOpportunity, schemas.SubmitOpportunityRequest, nil), output: &SubmitOpportunityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSubmitOpportunity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SubmitOpportunity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSubmitOpportunityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitOpportunity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +149,8 @@ func (c *Client) addOperationSubmitOpportunityMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSubmitOpportunity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SubmitOpportunity",
-	}
 }

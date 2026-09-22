@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a gateway's maintenance window schedule, with settings for monthly or
@@ -94,6 +93,35 @@ type UpdateMaintenanceStartTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMaintenanceStartTimeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMaintenanceStartTimeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMaintenanceStartTimeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfMonth != nil {
+		s.WriteInt32(schemas.UpdateMaintenanceStartTimeInput_DayOfMonth, *v.DayOfMonth)
+	}
+	if v.DayOfWeek != nil {
+		s.WriteInt32(schemas.UpdateMaintenanceStartTimeInput_DayOfWeek, *v.DayOfWeek)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateMaintenanceStartTimeInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.HourOfDay != nil {
+		s.WriteInt32(schemas.UpdateMaintenanceStartTimeInput_HourOfDay, *v.HourOfDay)
+	}
+	if v.MinuteOfHour != nil {
+		s.WriteInt32(schemas.UpdateMaintenanceStartTimeInput_MinuteOfHour, *v.MinuteOfHour)
+	}
+	if v.SoftwareUpdatePreferences != nil {
+		s.WriteStruct(schemas.UpdateMaintenanceStartTimeInput_SoftwareUpdatePreferences)
+		v.SoftwareUpdatePreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
 // maintenance start time is updated.
 type UpdateMaintenanceStartTimeOutput struct {
@@ -108,77 +136,48 @@ type UpdateMaintenanceStartTimeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMaintenanceStartTimeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMaintenanceStartTimeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMaintenanceStartTimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.UpdateMaintenanceStartTimeOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *UpdateMaintenanceStartTimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMaintenanceStartTimeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMaintenanceStartTimeOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.UpdateMaintenanceStartTimeOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMaintenanceStartTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMaintenanceStartTime, schemas.UpdateMaintenanceStartTimeInput, schemas.UpdateMaintenanceStartTimeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateMaintenanceStartTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMaintenanceStartTime, schemas.UpdateMaintenanceStartTimeInput, schemas.UpdateMaintenanceStartTimeOutput), output: &UpdateMaintenanceStartTimeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateMaintenanceStartTime{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMaintenanceStartTime"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateMaintenanceStartTimeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMaintenanceStartTime(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,22 +192,8 @@ func (c *Client) addOperationUpdateMaintenanceStartTimeMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateMaintenanceStartTime(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMaintenanceStartTime",
-	}
 }

@@ -4,12 +4,13 @@ package jsonrpc10
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/internal/document"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +39,31 @@ type OperationWithDefaultsInput struct {
 	TopLevelDefault *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OperationWithDefaultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithDefaultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithDefaultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientOptionalDefaults != nil {
+		s.WriteStruct(schemas.OperationWithDefaultsInput_clientOptionalDefaults)
+		v.ClientOptionalDefaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Defaults != nil {
+		s.WriteStruct(schemas.OperationWithDefaultsInput_defaults)
+		v.Defaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OtherTopLevelDefault != 0 {
+		s.WriteInt32(schemas.OperationWithDefaultsInput_otherTopLevelDefault, v.OtherTopLevelDefault)
+	}
+	if v.TopLevelDefault != nil {
+		s.WriteString(schemas.OperationWithDefaultsInput_topLevelDefault, *v.TopLevelDefault)
+	}
 }
 
 type OperationWithDefaultsOutput struct {
@@ -103,74 +129,230 @@ type OperationWithDefaultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithDefaultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithDefaultsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithDefaultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultBlob != nil {
+		s.WriteBlob(schemas.OperationWithDefaultsOutput_defaultBlob, v.DefaultBlob)
+	}
+	if v.DefaultBoolean != nil {
+		s.WriteBool(schemas.OperationWithDefaultsOutput_defaultBoolean, *v.DefaultBoolean)
+	}
+	if v.DefaultByte != nil {
+		s.WriteInt8(schemas.OperationWithDefaultsOutput_defaultByte, *v.DefaultByte)
+	}
+	if v.DefaultDocumentBoolean != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentBoolean, &smithydocument.Opaque{Value: v.DefaultDocumentBoolean})
+	}
+	if v.DefaultDocumentList != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentList, &smithydocument.Opaque{Value: v.DefaultDocumentList})
+	}
+	if v.DefaultDocumentMap != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentMap, &smithydocument.Opaque{Value: v.DefaultDocumentMap})
+	}
+	if v.DefaultDocumentString != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultDocumentString, &smithydocument.Opaque{Value: v.DefaultDocumentString})
+	}
+	if v.DefaultDouble != nil {
+		s.WriteFloat64(schemas.OperationWithDefaultsOutput_defaultDouble, *v.DefaultDouble)
+	}
+	if v.DefaultEnum != "" {
+		s.WriteString(schemas.OperationWithDefaultsOutput_defaultEnum, string(v.DefaultEnum))
+	}
+	if v.DefaultFloat != nil {
+		s.WriteFloat32(schemas.OperationWithDefaultsOutput_defaultFloat, *v.DefaultFloat)
+	}
+	if v.DefaultIntEnum != 0 {
+		s.WriteInt32(schemas.OperationWithDefaultsOutput_defaultIntEnum, int32(v.DefaultIntEnum))
+	}
+	if v.DefaultInteger != nil {
+		s.WriteInt32(schemas.OperationWithDefaultsOutput_defaultInteger, *v.DefaultInteger)
+	}
+	serializeTestStringList(s, schemas.OperationWithDefaultsOutput_defaultList, v.DefaultList)
+	if v.DefaultLong != nil {
+		s.WriteInt64(schemas.OperationWithDefaultsOutput_defaultLong, *v.DefaultLong)
+	}
+	serializeTestStringMap(s, schemas.OperationWithDefaultsOutput_defaultMap, v.DefaultMap)
+	if v.DefaultNullDocument != nil {
+		s.WriteDocument(schemas.OperationWithDefaultsOutput_defaultNullDocument, &smithydocument.Opaque{Value: v.DefaultNullDocument})
+	}
+	if v.DefaultShort != nil {
+		s.WriteInt16(schemas.OperationWithDefaultsOutput_defaultShort, *v.DefaultShort)
+	}
+	if v.DefaultString != nil {
+		s.WriteString(schemas.OperationWithDefaultsOutput_defaultString, *v.DefaultString)
+	}
+	if v.DefaultTimestamp != nil {
+		s.WriteTime(schemas.OperationWithDefaultsOutput_defaultTimestamp, *v.DefaultTimestamp)
+	}
+	if v.EmptyBlob != nil {
+		s.WriteBlob(schemas.OperationWithDefaultsOutput_emptyBlob, v.EmptyBlob)
+	}
+	if v.EmptyString != nil {
+		s.WriteString(schemas.OperationWithDefaultsOutput_emptyString, *v.EmptyString)
+	}
+	if v.FalseBoolean != false {
+		s.WriteBool(schemas.OperationWithDefaultsOutput_falseBoolean, v.FalseBoolean)
+	}
+	if v.ZeroByte != 0 {
+		s.WriteInt8(schemas.OperationWithDefaultsOutput_zeroByte, v.ZeroByte)
+	}
+	if v.ZeroDouble != 0 {
+		s.WriteFloat64(schemas.OperationWithDefaultsOutput_zeroDouble, v.ZeroDouble)
+	}
+	if v.ZeroFloat != 0 {
+		s.WriteFloat32(schemas.OperationWithDefaultsOutput_zeroFloat, v.ZeroFloat)
+	}
+	if v.ZeroInteger != 0 {
+		s.WriteInt32(schemas.OperationWithDefaultsOutput_zeroInteger, v.ZeroInteger)
+	}
+	if v.ZeroLong != 0 {
+		s.WriteInt64(schemas.OperationWithDefaultsOutput_zeroLong, v.ZeroLong)
+	}
+	if v.ZeroShort != 0 {
+		s.WriteInt16(schemas.OperationWithDefaultsOutput_zeroShort, v.ZeroShort)
+	}
+}
+func (v *OperationWithDefaultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationWithDefaultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationWithDefaultsOutput_defaultBlob:
+			return d.ReadBlob(schemas.OperationWithDefaultsOutput_defaultBlob, &v.DefaultBlob)
+		case schemas.OperationWithDefaultsOutput_defaultBoolean:
+			v.DefaultBoolean = new(bool)
+			return d.ReadBool(schemas.OperationWithDefaultsOutput_defaultBoolean, v.DefaultBoolean)
+		case schemas.OperationWithDefaultsOutput_defaultByte:
+			v.DefaultByte = new(int8)
+			return d.ReadInt8(schemas.OperationWithDefaultsOutput_defaultByte, v.DefaultByte)
+		case schemas.OperationWithDefaultsOutput_defaultDocumentBoolean:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.OperationWithDefaultsOutput_defaultDocumentBoolean, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DefaultDocumentBoolean = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.OperationWithDefaultsOutput_defaultDocumentList:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.OperationWithDefaultsOutput_defaultDocumentList, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DefaultDocumentList = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.OperationWithDefaultsOutput_defaultDocumentMap:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.OperationWithDefaultsOutput_defaultDocumentMap, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DefaultDocumentMap = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.OperationWithDefaultsOutput_defaultDocumentString:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.OperationWithDefaultsOutput_defaultDocumentString, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DefaultDocumentString = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.OperationWithDefaultsOutput_defaultDouble:
+			v.DefaultDouble = new(float64)
+			return d.ReadFloat64(schemas.OperationWithDefaultsOutput_defaultDouble, v.DefaultDouble)
+		case schemas.OperationWithDefaultsOutput_defaultEnum:
+			var ev string
+			if err := d.ReadString(schemas.OperationWithDefaultsOutput_defaultEnum, &ev); err != nil {
+				return err
+			}
+			v.DefaultEnum = types.TestEnum(ev)
+			return nil
+		case schemas.OperationWithDefaultsOutput_defaultFloat:
+			v.DefaultFloat = new(float32)
+			return d.ReadFloat32(schemas.OperationWithDefaultsOutput_defaultFloat, v.DefaultFloat)
+		case schemas.OperationWithDefaultsOutput_defaultIntEnum:
+			var ev int32
+			if err := d.ReadInt32(schemas.OperationWithDefaultsOutput_defaultIntEnum, &ev); err != nil {
+				return err
+			}
+			v.DefaultIntEnum = types.TestIntEnum(ev)
+			return nil
+		case schemas.OperationWithDefaultsOutput_defaultInteger:
+			v.DefaultInteger = new(int32)
+			return d.ReadInt32(schemas.OperationWithDefaultsOutput_defaultInteger, v.DefaultInteger)
+		case schemas.OperationWithDefaultsOutput_defaultList:
+			return deserializeTestStringList(d, schemas.OperationWithDefaultsOutput_defaultList, &v.DefaultList)
+		case schemas.OperationWithDefaultsOutput_defaultLong:
+			v.DefaultLong = new(int64)
+			return d.ReadInt64(schemas.OperationWithDefaultsOutput_defaultLong, v.DefaultLong)
+		case schemas.OperationWithDefaultsOutput_defaultMap:
+			return deserializeTestStringMap(d, schemas.OperationWithDefaultsOutput_defaultMap, &v.DefaultMap)
+		case schemas.OperationWithDefaultsOutput_defaultNullDocument:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.OperationWithDefaultsOutput_defaultNullDocument, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DefaultNullDocument = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.OperationWithDefaultsOutput_defaultShort:
+			v.DefaultShort = new(int16)
+			return d.ReadInt16(schemas.OperationWithDefaultsOutput_defaultShort, v.DefaultShort)
+		case schemas.OperationWithDefaultsOutput_defaultString:
+			v.DefaultString = new(string)
+			return d.ReadString(schemas.OperationWithDefaultsOutput_defaultString, v.DefaultString)
+		case schemas.OperationWithDefaultsOutput_defaultTimestamp:
+			v.DefaultTimestamp = new(time.Time)
+			return d.ReadTime(schemas.OperationWithDefaultsOutput_defaultTimestamp, v.DefaultTimestamp)
+		case schemas.OperationWithDefaultsOutput_emptyBlob:
+			return d.ReadBlob(schemas.OperationWithDefaultsOutput_emptyBlob, &v.EmptyBlob)
+		case schemas.OperationWithDefaultsOutput_emptyString:
+			v.EmptyString = new(string)
+			return d.ReadString(schemas.OperationWithDefaultsOutput_emptyString, v.EmptyString)
+		case schemas.OperationWithDefaultsOutput_falseBoolean:
+			return d.ReadBool(schemas.OperationWithDefaultsOutput_falseBoolean, &v.FalseBoolean)
+		case schemas.OperationWithDefaultsOutput_zeroByte:
+			return d.ReadInt8(schemas.OperationWithDefaultsOutput_zeroByte, &v.ZeroByte)
+		case schemas.OperationWithDefaultsOutput_zeroDouble:
+			return d.ReadFloat64(schemas.OperationWithDefaultsOutput_zeroDouble, &v.ZeroDouble)
+		case schemas.OperationWithDefaultsOutput_zeroFloat:
+			return d.ReadFloat32(schemas.OperationWithDefaultsOutput_zeroFloat, &v.ZeroFloat)
+		case schemas.OperationWithDefaultsOutput_zeroInteger:
+			return d.ReadInt32(schemas.OperationWithDefaultsOutput_zeroInteger, &v.ZeroInteger)
+		case schemas.OperationWithDefaultsOutput_zeroLong:
+			return d.ReadInt64(schemas.OperationWithDefaultsOutput_zeroLong, &v.ZeroLong)
+		case schemas.OperationWithDefaultsOutput_zeroShort:
+			return d.ReadInt16(schemas.OperationWithDefaultsOutput_zeroShort, &v.ZeroShort)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOperationWithDefaultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithDefaults, schemas.OperationWithDefaultsInput, schemas.OperationWithDefaultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpOperationWithDefaults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithDefaults, schemas.OperationWithDefaultsInput, schemas.OperationWithDefaultsOutput), output: &OperationWithDefaultsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpOperationWithDefaults{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "OperationWithDefaults"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithDefaults(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +367,8 @@ func (c *Client) addOperationOperationWithDefaultsMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opOperationWithDefaults(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "OperationWithDefaults",
-	}
 }

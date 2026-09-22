@@ -4,11 +4,10 @@ package devicefarm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Specifies and starts a remote access session.
@@ -72,6 +71,41 @@ type CreateRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRemoteAccessSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRemoteAccessSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRemoteAccessSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_appArn, *v.AppArn)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateRemoteAccessSessionRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceArn != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_deviceArn, *v.DeviceArn)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_instanceArn, *v.InstanceArn)
+	}
+	if v.InteractionMode != "" {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_interactionMode, string(v.InteractionMode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_name, *v.Name)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.CreateRemoteAccessSessionRequest_projectArn, *v.ProjectArn)
+	}
+	if v.SkipAppResign != nil {
+		s.WriteBool(schemas.CreateRemoteAccessSessionRequest_skipAppResign, *v.SkipAppResign)
+	}
+}
+
 // Represents the server response from a request to create a remote access session.
 type CreateRemoteAccessSessionOutput struct {
 
@@ -85,77 +119,50 @@ type CreateRemoteAccessSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRemoteAccessSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRemoteAccessSessionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRemoteAccessSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RemoteAccessSession != nil {
+		s.WriteStruct(schemas.CreateRemoteAccessSessionResult_remoteAccessSession)
+		v.RemoteAccessSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRemoteAccessSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRemoteAccessSessionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRemoteAccessSessionResult_remoteAccessSession:
+			v.RemoteAccessSession = &types.RemoteAccessSession{}
+			return v.RemoteAccessSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRemoteAccessSession, schemas.CreateRemoteAccessSessionRequest, schemas.CreateRemoteAccessSessionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRemoteAccessSession, schemas.CreateRemoteAccessSessionRequest, schemas.CreateRemoteAccessSessionResult), output: &CreateRemoteAccessSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRemoteAccessSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRemoteAccessSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRemoteAccessSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRemoteAccessSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +177,8 @@ func (c *Client) addOperationCreateRemoteAccessSessionMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRemoteAccessSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRemoteAccessSession",
-	}
 }

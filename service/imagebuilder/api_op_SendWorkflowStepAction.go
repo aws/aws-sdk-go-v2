@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Pauses or resumes image creation when the associated workflow runs a
@@ -30,21 +30,27 @@ func (c *Client) SendWorkflowStepAction(ctx context.Context, params *SendWorkflo
 
 type SendWorkflowStepActionInput struct {
 
-	// The action for the image creation process to take while a workflow WaitForAction
-	// step waits for an asynchronous action to complete.
+	// The action to perform on the paused workflow step. The workflow step must be in
+	// a waiting state to accept an action. The request fails if the step has already
+	// timed out or been actioned.
 	//
 	// This member is required.
 	Action types.WorkflowStepActionType
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the image build version to send action for.
+	// The Amazon Resource Name (ARN) of the image build version associated with the
+	// workflow step execution. This value must match the image that owns the waiting
+	// step. If the ARN does not correspond to the image running the workflow, then the
+	// request fails with a validation error.
 	//
 	// This member is required.
 	ImageBuildVersionArn *string
@@ -54,10 +60,35 @@ type SendWorkflowStepActionInput struct {
 	// This member is required.
 	StepExecutionId *string
 
-	// The reason why this action is sent.
+	// The reason for the action. This value is stored with the step execution record
+	// and is accessible in subsequent workflow steps via step output references.
 	Reason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SendWorkflowStepActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendWorkflowStepActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendWorkflowStepActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_action, string(v.Action))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_reason, *v.Reason)
+	}
+	if v.StepExecutionId != nil {
+		s.WriteString(schemas.SendWorkflowStepActionRequest_stepExecutionId, *v.StepExecutionId)
+	}
 }
 
 type SendWorkflowStepActionOutput struct {
@@ -78,65 +109,54 @@ type SendWorkflowStepActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendWorkflowStepActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendWorkflowStepActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendWorkflowStepActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendWorkflowStepActionResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.SendWorkflowStepActionResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.StepExecutionId != nil {
+		s.WriteString(schemas.SendWorkflowStepActionResponse_stepExecutionId, *v.StepExecutionId)
+	}
+}
+func (v *SendWorkflowStepActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendWorkflowStepActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendWorkflowStepActionResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.SendWorkflowStepActionResponse_clientToken, v.ClientToken)
+		case schemas.SendWorkflowStepActionResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.SendWorkflowStepActionResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.SendWorkflowStepActionResponse_stepExecutionId:
+			v.StepExecutionId = new(string)
+			return d.ReadString(schemas.SendWorkflowStepActionResponse_stepExecutionId, v.StepExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendWorkflowStepActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWorkflowStepAction, schemas.SendWorkflowStepActionRequest, schemas.SendWorkflowStepActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendWorkflowStepAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendWorkflowStepAction, schemas.SendWorkflowStepActionRequest, schemas.SendWorkflowStepActionResponse), output: &SendWorkflowStepActionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendWorkflowStepAction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendWorkflowStepAction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -146,12 +166,6 @@ func (c *Client) addOperationSendWorkflowStepActionMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpSendWorkflowStepActionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendWorkflowStepAction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +178,6 @@ func (c *Client) addOperationSendWorkflowStepActionMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -209,12 +217,4 @@ func (m *idempotencyToken_initializeOpSendWorkflowStepAction) HandleInitialize(c
 }
 func addIdempotencyToken_opSendWorkflowStepActionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpSendWorkflowStepAction{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opSendWorkflowStepAction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendWorkflowStepAction",
-	}
 }

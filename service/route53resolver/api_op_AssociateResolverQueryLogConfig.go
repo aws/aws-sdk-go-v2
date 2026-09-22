@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates an Amazon VPC with a specified query logging configuration. Route 53
@@ -56,6 +55,21 @@ type AssociateResolverQueryLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResolverQueryLogConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResolverQueryLogConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResolverQueryLogConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverQueryLogConfigId != nil {
+		s.WriteString(schemas.AssociateResolverQueryLogConfigRequest_ResolverQueryLogConfigId, *v.ResolverQueryLogConfigId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.AssociateResolverQueryLogConfigRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type AssociateResolverQueryLogConfigOutput struct {
 
 	// A complex type that contains settings for a specified association between an
@@ -68,77 +82,50 @@ type AssociateResolverQueryLogConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResolverQueryLogConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResolverQueryLogConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResolverQueryLogConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverQueryLogConfigAssociation != nil {
+		s.WriteStruct(schemas.AssociateResolverQueryLogConfigResponse_ResolverQueryLogConfigAssociation)
+		v.ResolverQueryLogConfigAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateResolverQueryLogConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResolverQueryLogConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResolverQueryLogConfigResponse_ResolverQueryLogConfigAssociation:
+			v.ResolverQueryLogConfigAssociation = &types.ResolverQueryLogConfigAssociation{}
+			return v.ResolverQueryLogConfigAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResolverQueryLogConfig, schemas.AssociateResolverQueryLogConfigRequest, schemas.AssociateResolverQueryLogConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateResolverQueryLogConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResolverQueryLogConfig, schemas.AssociateResolverQueryLogConfigRequest, schemas.AssociateResolverQueryLogConfigResponse), output: &AssociateResolverQueryLogConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateResolverQueryLogConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateResolverQueryLogConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateResolverQueryLogConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateResolverQueryLogConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +140,8 @@ func (c *Client) addOperationAssociateResolverQueryLogConfigMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateResolverQueryLogConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateResolverQueryLogConfig",
-	}
 }

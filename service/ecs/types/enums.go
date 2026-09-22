@@ -639,6 +639,50 @@ func (DaemonDeploymentStatus) Values() []DaemonDeploymentStatus {
 	}
 }
 
+type DaemonIpcMode string
+
+// Enum values for DaemonIpcMode
+const (
+	// The daemon gets its own isolated IPC namespace.
+	DaemonIpcModeNone DaemonIpcMode = "none"
+	// The daemon shares the IPC namespace with co-located tasks on the same container
+	// instance.
+	DaemonIpcModeShared DaemonIpcMode = "shared"
+)
+
+// Values returns all known values for DaemonIpcMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DaemonIpcMode) Values() []DaemonIpcMode {
+	return []DaemonIpcMode{
+		"none",
+		"shared",
+	}
+}
+
+type DaemonPidMode string
+
+// Enum values for DaemonPidMode
+const (
+	// The daemon gets its own isolated PID namespace.
+	DaemonPidModeNone DaemonPidMode = "none"
+	// The daemon shares the PID namespace with co-located tasks on the same container
+	// instance.
+	DaemonPidModeShared DaemonPidMode = "shared"
+)
+
+// Values returns all known values for DaemonPidMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DaemonPidMode) Values() []DaemonPidMode {
+	return []DaemonPidMode{
+		"none",
+		"shared",
+	}
+}
+
 type DaemonPropagateTags string
 
 // Enum values for DaemonPropagateTags
@@ -1036,6 +1080,25 @@ func (ExecuteCommandLogging) Values() []ExecuteCommandLogging {
 	}
 }
 
+type ExpressCpuArchitecture string
+
+// Enum values for ExpressCpuArchitecture
+const (
+	ExpressCpuArchitectureX8664 ExpressCpuArchitecture = "X86_64"
+	ExpressCpuArchitectureArm64 ExpressCpuArchitecture = "ARM64"
+)
+
+// Values returns all known values for ExpressCpuArchitecture. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExpressCpuArchitecture) Values() []ExpressCpuArchitecture {
+	return []ExpressCpuArchitecture{
+		"X86_64",
+		"ARM64",
+	}
+}
+
 type ExpressGatewayServiceInclude string
 
 // Enum values for ExpressGatewayServiceInclude
@@ -1187,6 +1250,7 @@ const (
 	InstanceHealthCheckTypeContainerRuntime   InstanceHealthCheckType = "CONTAINER_RUNTIME"
 	InstanceHealthCheckTypeAcceleratedCompute InstanceHealthCheckType = "ACCELERATED_COMPUTE"
 	InstanceHealthCheckTypeDaemon             InstanceHealthCheckType = "DAEMON"
+	InstanceHealthCheckTypeAgentConnectivity  InstanceHealthCheckType = "AGENT_CONNECTIVITY"
 )
 
 // Values returns all known values for InstanceHealthCheckType. Note that this can
@@ -1198,6 +1262,7 @@ func (InstanceHealthCheckType) Values() []InstanceHealthCheckType {
 		"CONTAINER_RUNTIME",
 		"ACCELERATED_COMPUTE",
 		"DAEMON",
+		"AGENT_CONNECTIVITY",
 	}
 }
 
@@ -1557,7 +1622,8 @@ type PlatformDeviceType string
 
 // Enum values for PlatformDeviceType
 const (
-	PlatformDeviceTypeGpu PlatformDeviceType = "GPU"
+	PlatformDeviceTypeGpu          PlatformDeviceType = "GPU"
+	PlatformDeviceTypeNeuronDevice PlatformDeviceType = "NEURON_DEVICE"
 )
 
 // Values returns all known values for PlatformDeviceType. Note that this can be
@@ -1567,6 +1633,7 @@ const (
 func (PlatformDeviceType) Values() []PlatformDeviceType {
 	return []PlatformDeviceType{
 		"GPU",
+		"NEURON_DEVICE",
 	}
 }
 
@@ -1652,6 +1719,7 @@ type ResourceType string
 const (
 	ResourceTypeGpu                  ResourceType = "GPU"
 	ResourceTypeInferenceAccelerator ResourceType = "InferenceAccelerator"
+	ResourceTypeNeuronDevice         ResourceType = "NeuronDevice"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1662,6 +1730,7 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"GPU",
 		"InferenceAccelerator",
+		"NeuronDevice",
 	}
 }
 
@@ -1867,6 +1936,25 @@ const (
 func (ServiceField) Values() []ServiceField {
 	return []ServiceField{
 		"TAGS",
+	}
+}
+
+type ServiceRevisionCleanup string
+
+// Enum values for ServiceRevisionCleanup
+const (
+	ServiceRevisionCleanupBlocking ServiceRevisionCleanup = "BLOCKING"
+	ServiceRevisionCleanupDeferred ServiceRevisionCleanup = "DEFERRED"
+)
+
+// Values returns all known values for ServiceRevisionCleanup. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceRevisionCleanup) Values() []ServiceRevisionCleanup {
+	return []ServiceRevisionCleanup{
+		"BLOCKING",
+		"DEFERRED",
 	}
 }
 
@@ -2145,6 +2233,7 @@ const (
 	TaskStopCodeServiceSchedulerInitiated TaskStopCode = "ServiceSchedulerInitiated"
 	TaskStopCodeSpotInterruption          TaskStopCode = "SpotInterruption"
 	TaskStopCodeTerminationNotice         TaskStopCode = "TerminationNotice"
+	TaskStopCodeInfrastructureHealth      TaskStopCode = "InfrastructureHealth"
 )
 
 // Values returns all known values for TaskStopCode. Note that this can be
@@ -2159,6 +2248,36 @@ func (TaskStopCode) Values() []TaskStopCode {
 		"ServiceSchedulerInitiated",
 		"SpotInterruption",
 		"TerminationNotice",
+		"InfrastructureHealth",
+	}
+}
+
+type ThresholdType string
+
+// Enum values for ThresholdType
+const (
+	// Amazon ECS uses the integer provided in value directly as the failure threshold.
+	ThresholdTypeCount ThresholdType = "COUNT"
+	// Amazon ECS calculates the failure threshold by multiplying value by the latest
+	// service desired count, then clamping the result to a minimum of 3 and a maximum
+	// of 200 . This is the default threshold type, with a default value of 50 .
+	ThresholdTypeBoundedPercent ThresholdType = "BOUNDED_PERCENT"
+	// Amazon ECS calculates the failure threshold by multiplying value by the latest
+	// service desired count, without applying the 3 -to- 200 bounds. Use this when
+	// the desired count is large enough that the calculated threshold should be
+	// allowed to exceed 200 .
+	ThresholdTypeUnboundedPercent ThresholdType = "UNBOUNDED_PERCENT"
+)
+
+// Values returns all known values for ThresholdType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ThresholdType) Values() []ThresholdType {
+	return []ThresholdType{
+		"COUNT",
+		"BOUNDED_PERCENT",
+		"UNBOUNDED_PERCENT",
 	}
 }
 

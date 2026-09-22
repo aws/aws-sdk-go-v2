@@ -5,10 +5,10 @@ package fms
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a AdminAccounts object that lists the Firewall Manager administrators
@@ -48,6 +48,21 @@ type ListAdminAccountsForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdminAccountsForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdminAccountsForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdminAccountsForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdminAccountsForOrganizationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdminAccountsForOrganizationRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAdminAccountsForOrganizationOutput struct {
 
 	// A list of Firewall Manager administrator accounts within the organization that
@@ -67,74 +82,48 @@ type ListAdminAccountsForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdminAccountsForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdminAccountsForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdminAccountsForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdminAccountSummaryList(s, schemas.ListAdminAccountsForOrganizationResponse_AdminAccounts, v.AdminAccounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdminAccountsForOrganizationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAdminAccountsForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdminAccountsForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdminAccountsForOrganizationResponse_AdminAccounts:
+			return deserializeAdminAccountSummaryList(d, schemas.ListAdminAccountsForOrganizationResponse_AdminAccounts, &v.AdminAccounts)
+		case schemas.ListAdminAccountsForOrganizationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdminAccountsForOrganizationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdminAccountsForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdminAccountsForOrganization, schemas.ListAdminAccountsForOrganizationRequest, schemas.ListAdminAccountsForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAdminAccountsForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdminAccountsForOrganization, schemas.ListAdminAccountsForOrganizationRequest, schemas.ListAdminAccountsForOrganizationResponse), output: &ListAdminAccountsForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAdminAccountsForOrganization{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAdminAccountsForOrganization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAdminAccountsForOrganization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +136,6 @@ func (c *Client) addOperationListAdminAccountsForOrganizationMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +242,3 @@ type ListAdminAccountsForOrganizationAPIClient interface {
 }
 
 var _ ListAdminAccountsForOrganizationAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAdminAccountsForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAdminAccountsForOrganization",
-	}
-}

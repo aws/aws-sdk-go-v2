@@ -1,0 +1,5 @@
+POST /graphs/__GraphIdentifier__/importtasks
+
+Content-Type: application/json
+
+{"blankNodeHandling":"convertToIri","failOnError":true,"format":"CSV","importOptions":{"neptune":{"preserveDefaultVertexLabels":true,"preserveEdgeIds":true,"s3ExportKmsKeyId":"__S3ExportKmsKeyId__","s3ExportPath":"__S3ExportPath__"}},"parquetType":"COLUMNAR","roleArn":"__RoleArn__","source":"__Source__"}

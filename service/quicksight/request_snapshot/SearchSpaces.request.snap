@@ -1,0 +1,5 @@
+POST /v1/accounts/__AwsAccountId__/search/spaces
+
+Content-Type: application/json
+
+{"Filters":[{"name":"SPACE_ID","operator":"STRING_EQUALS","value":"__Value__"},{"name":"SPACE_ID","operator":"STRING_EQUALS","value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

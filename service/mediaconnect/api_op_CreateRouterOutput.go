@@ -5,10 +5,10 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new router output in AWS Elemental MediaConnect.
@@ -64,6 +64,9 @@ type CreateRouterOutputInput struct {
 	// A unique identifier for the request to ensure idempotency.
 	ClientToken *string
 
+	// The fabric configuration settings for the router output.
+	FabricConfiguration *types.FabricConfiguration
+
 	// The maintenance configuration settings for the router output, including
 	// preferred maintenance windows and schedules.
 	MaintenanceConfiguration types.MaintenanceConfiguration
@@ -76,6 +79,44 @@ type CreateRouterOutputInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateRouterOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterOutputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateRouterOutputRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRouterOutputRequest_ClientToken, *v.ClientToken)
+	}
+	serializeRouterOutputConfiguration(s, schemas.CreateRouterOutputRequest_Configuration, v.Configuration)
+	if v.FabricConfiguration != nil {
+		s.WriteStruct(schemas.CreateRouterOutputRequest_FabricConfiguration)
+		v.FabricConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMaintenanceConfiguration(s, schemas.CreateRouterOutputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.MaximumBitrate != nil {
+		s.WriteInt64(schemas.CreateRouterOutputRequest_MaximumBitrate, *v.MaximumBitrate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRouterOutputRequest_Name, *v.Name)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.CreateRouterOutputRequest_RegionName, *v.RegionName)
+	}
+	if v.RoutingScope != "" {
+		s.WriteString(schemas.CreateRouterOutputRequest_RoutingScope, string(v.RoutingScope))
+	}
+	serialize__mapOfString(s, schemas.CreateRouterOutputRequest_Tags, v.Tags)
+	if v.Tier != "" {
+		s.WriteString(schemas.CreateRouterOutputRequest_Tier, string(v.Tier))
+	}
 }
 
 type CreateRouterOutputOutput struct {
@@ -91,65 +132,44 @@ type CreateRouterOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouterOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterOutputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterOutput != nil {
+		s.WriteStruct(schemas.CreateRouterOutputResponse_RouterOutput)
+		v.RouterOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRouterOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRouterOutputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRouterOutputResponse_RouterOutput:
+			v.RouterOutput = &types.RouterOutput{}
+			return v.RouterOutput.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRouterOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterOutput, schemas.CreateRouterOutputRequest, schemas.CreateRouterOutputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRouterOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterOutput, schemas.CreateRouterOutputRequest, schemas.CreateRouterOutputResponse), output: &CreateRouterOutputOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRouterOutput{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRouterOutput"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -159,12 +179,6 @@ func (c *Client) addOperationCreateRouterOutputMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateRouterOutputValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRouterOutput(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,12 +191,6 @@ func (c *Client) addOperationCreateRouterOutputMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -222,12 +230,4 @@ func (m *idempotencyToken_initializeOpCreateRouterOutput) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateRouterOutputMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateRouterOutput{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateRouterOutput(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRouterOutput",
-	}
 }

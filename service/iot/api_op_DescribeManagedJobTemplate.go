@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // View details of a managed job template.
@@ -39,6 +38,21 @@ type DescribeManagedJobTemplateInput struct {
 	TemplateVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeManagedJobTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeManagedJobTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeManagedJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DescribeManagedJobTemplateRequest_templateName, *v.TemplateName)
+	}
+	if v.TemplateVersion != nil {
+		s.WriteString(schemas.DescribeManagedJobTemplateRequest_templateVersion, *v.TemplateVersion)
+	}
 }
 
 type DescribeManagedJobTemplateOutput struct {
@@ -75,77 +89,78 @@ type DescribeManagedJobTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeManagedJobTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeManagedJobTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeManagedJobTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeManagedJobTemplateResponse_description, *v.Description)
+	}
+	if v.Document != nil {
+		s.WriteString(schemas.DescribeManagedJobTemplateResponse_document, *v.Document)
+	}
+	serializeDocumentParameters(s, schemas.DescribeManagedJobTemplateResponse_documentParameters, v.DocumentParameters)
+	serializeEnvironments(s, schemas.DescribeManagedJobTemplateResponse_environments, v.Environments)
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.DescribeManagedJobTemplateResponse_templateArn, *v.TemplateArn)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DescribeManagedJobTemplateResponse_templateName, *v.TemplateName)
+	}
+	if v.TemplateVersion != nil {
+		s.WriteString(schemas.DescribeManagedJobTemplateResponse_templateVersion, *v.TemplateVersion)
+	}
+}
+func (v *DescribeManagedJobTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeManagedJobTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeManagedJobTemplateResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeManagedJobTemplateResponse_description, v.Description)
+		case schemas.DescribeManagedJobTemplateResponse_document:
+			v.Document = new(string)
+			return d.ReadString(schemas.DescribeManagedJobTemplateResponse_document, v.Document)
+		case schemas.DescribeManagedJobTemplateResponse_documentParameters:
+			return deserializeDocumentParameters(d, schemas.DescribeManagedJobTemplateResponse_documentParameters, &v.DocumentParameters)
+		case schemas.DescribeManagedJobTemplateResponse_environments:
+			return deserializeEnvironments(d, schemas.DescribeManagedJobTemplateResponse_environments, &v.Environments)
+		case schemas.DescribeManagedJobTemplateResponse_templateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.DescribeManagedJobTemplateResponse_templateArn, v.TemplateArn)
+		case schemas.DescribeManagedJobTemplateResponse_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.DescribeManagedJobTemplateResponse_templateName, v.TemplateName)
+		case schemas.DescribeManagedJobTemplateResponse_templateVersion:
+			v.TemplateVersion = new(string)
+			return d.ReadString(schemas.DescribeManagedJobTemplateResponse_templateVersion, v.TemplateVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeManagedJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeManagedJobTemplate, schemas.DescribeManagedJobTemplateRequest, schemas.DescribeManagedJobTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeManagedJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeManagedJobTemplate, schemas.DescribeManagedJobTemplateRequest, schemas.DescribeManagedJobTemplateResponse), output: &DescribeManagedJobTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeManagedJobTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeManagedJobTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeManagedJobTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeManagedJobTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +175,8 @@ func (c *Client) addOperationDescribeManagedJobTemplateMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeManagedJobTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeManagedJobTemplate",
-	}
 }

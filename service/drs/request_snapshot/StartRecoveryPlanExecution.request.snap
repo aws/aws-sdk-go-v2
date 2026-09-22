@@ -1,0 +1,5 @@
+POST /StartRecoveryPlanExecution
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","mode":"DRILL","recoveryPlanArn":"__RecoveryPlanArn__","sourceServers":[{"recoverySnapshotID":"__RecoverySnapshotID__","sourceServerID":"__SourceServerID__"},{"recoverySnapshotID":"__RecoverySnapshotID__","sourceServerID":"__SourceServerID__"}],"tags":{"key0":"__Value__"}}

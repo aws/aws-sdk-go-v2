@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"BadRequestException","detail":{"codeErrors":[{"errorType":"__ErrorType__","location":{"column":1,"line":1,"span":1},"value":"__Value__"},{"errorType":"__ErrorType__","location":{"column":1,"line":1,"span":1},"value":"__Value__"}]},"message":"__Message__","reason":"CODE_ERROR"}

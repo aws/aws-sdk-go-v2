@@ -4,11 +4,10 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates a list of evidence from an assessment report in Audit Manager.
@@ -47,6 +46,22 @@ type BatchDisassociateAssessmentReportEvidenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateAssessmentReportEvidenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateAssessmentReportEvidenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateAssessmentReportEvidenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.BatchDisassociateAssessmentReportEvidenceRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.EvidenceFolderId != nil {
+		s.WriteString(schemas.BatchDisassociateAssessmentReportEvidenceRequest_evidenceFolderId, *v.EvidenceFolderId)
+	}
+	serializeEvidenceIds(s, schemas.BatchDisassociateAssessmentReportEvidenceRequest_evidenceIds, v.EvidenceIds)
+}
+
 type BatchDisassociateAssessmentReportEvidenceOutput struct {
 
 	//  A list of errors that the BatchDisassociateAssessmentReportEvidence API
@@ -62,77 +77,48 @@ type BatchDisassociateAssessmentReportEvidenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateAssessmentReportEvidenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateAssessmentReportEvidenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateAssessmentReportEvidenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentReportEvidenceErrors(s, schemas.BatchDisassociateAssessmentReportEvidenceResponse_errors, v.Errors)
+	serializeEvidenceIds(s, schemas.BatchDisassociateAssessmentReportEvidenceResponse_evidenceIds, v.EvidenceIds)
+}
+func (v *BatchDisassociateAssessmentReportEvidenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateAssessmentReportEvidenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateAssessmentReportEvidenceResponse_errors:
+			return deserializeAssessmentReportEvidenceErrors(d, schemas.BatchDisassociateAssessmentReportEvidenceResponse_errors, &v.Errors)
+		case schemas.BatchDisassociateAssessmentReportEvidenceResponse_evidenceIds:
+			return deserializeEvidenceIds(d, schemas.BatchDisassociateAssessmentReportEvidenceResponse_evidenceIds, &v.EvidenceIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateAssessmentReportEvidenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateAssessmentReportEvidence, schemas.BatchDisassociateAssessmentReportEvidenceRequest, schemas.BatchDisassociateAssessmentReportEvidenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDisassociateAssessmentReportEvidence{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateAssessmentReportEvidence, schemas.BatchDisassociateAssessmentReportEvidenceRequest, schemas.BatchDisassociateAssessmentReportEvidenceResponse), output: &BatchDisassociateAssessmentReportEvidenceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDisassociateAssessmentReportEvidence{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDisassociateAssessmentReportEvidence"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDisassociateAssessmentReportEvidenceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateAssessmentReportEvidence(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +133,8 @@ func (c *Client) addOperationBatchDisassociateAssessmentReportEvidenceMiddleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDisassociateAssessmentReportEvidence(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDisassociateAssessmentReportEvidence",
-	}
 }

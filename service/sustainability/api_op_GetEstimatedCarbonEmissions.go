@@ -5,10 +5,8 @@ package sustainability
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/sustainability/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns estimated carbon emission values based on customer grouping and
@@ -31,7 +29,8 @@ func (c *Client) GetEstimatedCarbonEmissions(ctx context.Context, params *GetEst
 
 type GetEstimatedCarbonEmissionsInput struct {
 
-	// The date range for fetching estimated carbon emissions.
+	//  The date range for fetching estimated carbon emissions. The range must include
+	// the start date of a month for that month's data to be included in the response.
 	//
 	// This member is required.
 	TimePeriod *types.TimePeriod
@@ -40,10 +39,18 @@ type GetEstimatedCarbonEmissionsInput struct {
 	// TOTAL_LBM_CARBON_EMISSIONS and TOTAL_MBM_CARBON_EMISSIONS emissions types.
 	EmissionsTypes []types.EmissionsType
 
-	// The criteria for filtering estimated carbon emissions.
+	//  The criteria for filtering estimated carbon emissions. To determine which
+	// dimensions are available to be filtered by, you can first call GetEstimatedCarbonEmissionsDimensionValues
 	FilterBy *types.FilterExpression
 
-	// The time granularity for the results. If absent, uses MONTHLY time granularity.
+	//  The time granularity for the results. If absent, uses MONTHLY time
+	// granularity. The smallest supported granularity for carbon emissions is MONTHLY
+	// .
+	//
+	// If requesting partial time periods, data will be returned based on the smallest
+	// supported granularity. For example, requesting 2025-04-01T00:00:00Z to
+	// 2026-04-01T00:00:00Z with YEARLY_CALENDAR granularity will return the last 9
+	// months for 2025 and the first 3 months of 2026.
 	Granularity types.TimeGranularity
 
 	// Configuration for fiscal year calculations when using YEARLY_FISCAL or
@@ -53,7 +60,7 @@ type GetEstimatedCarbonEmissionsInput struct {
 	// The dimensions available for grouping estimated carbon emissions.
 	GroupBy []types.Dimension
 
-	// The maximum number of results to return in a single call. Default is 40.
+	// The maximum number of results to return in a single call. Default is 1000.
 	MaxResults *int32
 
 	// The pagination token specifying which page of results to return in the
@@ -81,9 +88,6 @@ type GetEstimatedCarbonEmissionsOutput struct {
 }
 
 func (c *Client) addOperationGetEstimatedCarbonEmissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEstimatedCarbonEmissions{}, middleware.After)
 	if err != nil {
 		return err
@@ -92,65 +96,20 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsMiddlewares(stack *middl
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEstimatedCarbonEmissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEstimatedCarbonEmissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEstimatedCarbonEmissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +124,6 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -180,7 +133,7 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsMiddlewares(stack *middl
 // GetEstimatedCarbonEmissionsPaginatorOptions is the paginator options for
 // GetEstimatedCarbonEmissions
 type GetEstimatedCarbonEmissionsPaginatorOptions struct {
-	// The maximum number of results to return in a single call. Default is 40.
+	// The maximum number of results to return in a single call. Default is 1000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -272,11 +225,3 @@ type GetEstimatedCarbonEmissionsAPIClient interface {
 }
 
 var _ GetEstimatedCarbonEmissionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetEstimatedCarbonEmissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEstimatedCarbonEmissions",
-	}
-}

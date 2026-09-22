@@ -1,0 +1,7 @@
+POST /service/AWSKendraRerankingFrontendService/operation/UpdateRescoreExecutionPlan
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤bIdf__Id__dNameh__Name__kDescriptiono__Description__mCapacityUnits¡tRescoreCapacityUnits

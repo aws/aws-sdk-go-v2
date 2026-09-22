@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetItem&AttributesToGet.member.1=__Member__&AttributesToGet.member.2=__Member__&ConsistentRead=true&ExpressionAttributeNames.entry.1.key=key0&ExpressionAttributeNames.entry.1.value=__Value__&Key.entry.1.value.1.key=key0&Key.entry.1.value.1.value.value.S=__AttributeValueMemberS__&ProjectionExpression=__ProjectionExpression__&ReturnConsumedCapacity=__ReturnConsumedCapacity__&TableName=__TableName__&Version=1999-12-31

@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes all versions of a bot, including the Draft version. To delete a
@@ -53,6 +52,21 @@ type DeleteBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotRequest_botId, *v.BotId)
+	}
+	if v.SkipResourceInUseCheck != false {
+		s.WriteBool(schemas.DeleteBotRequest_skipResourceInUseCheck, v.SkipResourceInUseCheck)
+	}
+}
+
 type DeleteBotOutput struct {
 
 	// The unique identifier of the bot that Amazon Lex is deleting.
@@ -68,77 +82,58 @@ type DeleteBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotResponse_botId, *v.BotId)
+	}
+	if v.BotStatus != "" {
+		s.WriteString(schemas.DeleteBotResponse_botStatus, string(v.BotStatus))
+	}
+}
+func (v *DeleteBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBotResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DeleteBotResponse_botId, v.BotId)
+		case schemas.DeleteBotResponse_botStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteBotResponse_botStatus, &ev); err != nil {
+				return err
+			}
+			v.BotStatus = types.BotStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBot, schemas.DeleteBotRequest, schemas.DeleteBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBot, schemas.DeleteBotRequest, schemas.DeleteBotResponse), output: &DeleteBotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteBotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +148,8 @@ func (c *Client) addOperationDeleteBotMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteBot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteBot",
-	}
 }

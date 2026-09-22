@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about a destination phone number, including whether the
@@ -39,6 +38,18 @@ type CarrierLookupInput struct {
 	PhoneNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CarrierLookupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CarrierLookupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CarrierLookupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.CarrierLookupRequest_PhoneNumber, *v.PhoneNumber)
+	}
 }
 
 type CarrierLookupOutput struct {
@@ -83,77 +94,94 @@ type CarrierLookupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CarrierLookupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CarrierLookupResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CarrierLookupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Carrier != nil {
+		s.WriteString(schemas.CarrierLookupResult_Carrier, *v.Carrier)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.CarrierLookupResult_Country, *v.Country)
+	}
+	if v.DialingCountryCode != nil {
+		s.WriteString(schemas.CarrierLookupResult_DialingCountryCode, *v.DialingCountryCode)
+	}
+	if v.E164PhoneNumber != nil {
+		s.WriteString(schemas.CarrierLookupResult_E164PhoneNumber, *v.E164PhoneNumber)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.CarrierLookupResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.MCC != nil {
+		s.WriteString(schemas.CarrierLookupResult_MCC, *v.MCC)
+	}
+	if v.MNC != nil {
+		s.WriteString(schemas.CarrierLookupResult_MNC, *v.MNC)
+	}
+	if v.PhoneNumberType != "" {
+		s.WriteString(schemas.CarrierLookupResult_PhoneNumberType, string(v.PhoneNumberType))
+	}
+}
+func (v *CarrierLookupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CarrierLookupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CarrierLookupResult_Carrier:
+			v.Carrier = new(string)
+			return d.ReadString(schemas.CarrierLookupResult_Carrier, v.Carrier)
+		case schemas.CarrierLookupResult_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.CarrierLookupResult_Country, v.Country)
+		case schemas.CarrierLookupResult_DialingCountryCode:
+			v.DialingCountryCode = new(string)
+			return d.ReadString(schemas.CarrierLookupResult_DialingCountryCode, v.DialingCountryCode)
+		case schemas.CarrierLookupResult_E164PhoneNumber:
+			v.E164PhoneNumber = new(string)
+			return d.ReadString(schemas.CarrierLookupResult_E164PhoneNumber, v.E164PhoneNumber)
+		case schemas.CarrierLookupResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.CarrierLookupResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.CarrierLookupResult_MCC:
+			v.MCC = new(string)
+			return d.ReadString(schemas.CarrierLookupResult_MCC, v.MCC)
+		case schemas.CarrierLookupResult_MNC:
+			v.MNC = new(string)
+			return d.ReadString(schemas.CarrierLookupResult_MNC, v.MNC)
+		case schemas.CarrierLookupResult_PhoneNumberType:
+			var ev string
+			if err := d.ReadString(schemas.CarrierLookupResult_PhoneNumberType, &ev); err != nil {
+				return err
+			}
+			v.PhoneNumberType = types.PhoneNumberType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCarrierLookupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CarrierLookup, schemas.CarrierLookupRequest, schemas.CarrierLookupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCarrierLookup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CarrierLookup, schemas.CarrierLookupRequest, schemas.CarrierLookupResult), output: &CarrierLookupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCarrierLookup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CarrierLookup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCarrierLookupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCarrierLookup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +196,8 @@ func (c *Client) addOperationCarrierLookupMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCarrierLookup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CarrierLookup",
-	}
 }

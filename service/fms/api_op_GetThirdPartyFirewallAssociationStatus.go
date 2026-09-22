@@ -4,11 +4,10 @@ package fms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The onboarding status of a Firewall Manager admin account to third-party
@@ -36,6 +35,18 @@ type GetThirdPartyFirewallAssociationStatusInput struct {
 	ThirdPartyFirewall types.ThirdPartyFirewall
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetThirdPartyFirewallAssociationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThirdPartyFirewallAssociationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThirdPartyFirewallAssociationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThirdPartyFirewall != "" {
+		s.WriteString(schemas.GetThirdPartyFirewallAssociationStatusRequest_ThirdPartyFirewall, string(v.ThirdPartyFirewall))
+	}
 }
 
 type GetThirdPartyFirewallAssociationStatusOutput struct {
@@ -80,77 +91,62 @@ type GetThirdPartyFirewallAssociationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetThirdPartyFirewallAssociationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThirdPartyFirewallAssociationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThirdPartyFirewallAssociationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MarketplaceOnboardingStatus != "" {
+		s.WriteString(schemas.GetThirdPartyFirewallAssociationStatusResponse_MarketplaceOnboardingStatus, string(v.MarketplaceOnboardingStatus))
+	}
+	if v.ThirdPartyFirewallStatus != "" {
+		s.WriteString(schemas.GetThirdPartyFirewallAssociationStatusResponse_ThirdPartyFirewallStatus, string(v.ThirdPartyFirewallStatus))
+	}
+}
+func (v *GetThirdPartyFirewallAssociationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetThirdPartyFirewallAssociationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetThirdPartyFirewallAssociationStatusResponse_MarketplaceOnboardingStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetThirdPartyFirewallAssociationStatusResponse_MarketplaceOnboardingStatus, &ev); err != nil {
+				return err
+			}
+			v.MarketplaceOnboardingStatus = types.MarketplaceSubscriptionOnboardingStatus(ev)
+			return nil
+		case schemas.GetThirdPartyFirewallAssociationStatusResponse_ThirdPartyFirewallStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetThirdPartyFirewallAssociationStatusResponse_ThirdPartyFirewallStatus, &ev); err != nil {
+				return err
+			}
+			v.ThirdPartyFirewallStatus = types.ThirdPartyFirewallAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetThirdPartyFirewallAssociationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThirdPartyFirewallAssociationStatus, schemas.GetThirdPartyFirewallAssociationStatusRequest, schemas.GetThirdPartyFirewallAssociationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetThirdPartyFirewallAssociationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThirdPartyFirewallAssociationStatus, schemas.GetThirdPartyFirewallAssociationStatusRequest, schemas.GetThirdPartyFirewallAssociationStatusResponse), output: &GetThirdPartyFirewallAssociationStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetThirdPartyFirewallAssociationStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetThirdPartyFirewallAssociationStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetThirdPartyFirewallAssociationStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetThirdPartyFirewallAssociationStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +161,8 @@ func (c *Client) addOperationGetThirdPartyFirewallAssociationStatusMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetThirdPartyFirewallAssociationStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetThirdPartyFirewallAssociationStatus",
-	}
 }

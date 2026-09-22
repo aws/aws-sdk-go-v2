@@ -5,10 +5,10 @@ package snowball
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This action returns a list of the different Amazon EC2-compatible Amazon
@@ -48,6 +48,21 @@ type ListCompatibleImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCompatibleImagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCompatibleImagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCompatibleImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCompatibleImagesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCompatibleImagesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCompatibleImagesOutput struct {
 
 	// A JSON-formatted object that describes a compatible AMI, including the ID and
@@ -64,77 +79,51 @@ type ListCompatibleImagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCompatibleImagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCompatibleImagesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCompatibleImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompatibleImageList(s, schemas.ListCompatibleImagesResult_CompatibleImages, v.CompatibleImages)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCompatibleImagesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCompatibleImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCompatibleImagesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCompatibleImagesResult_CompatibleImages:
+			return deserializeCompatibleImageList(d, schemas.ListCompatibleImagesResult_CompatibleImages, &v.CompatibleImages)
+		case schemas.ListCompatibleImagesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCompatibleImagesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCompatibleImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCompatibleImages, schemas.ListCompatibleImagesRequest, schemas.ListCompatibleImagesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListCompatibleImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCompatibleImages, schemas.ListCompatibleImagesRequest, schemas.ListCompatibleImagesResult), output: &ListCompatibleImagesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListCompatibleImages{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCompatibleImages"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCompatibleImages(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +136,6 @@ func (c *Client) addOperationListCompatibleImagesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,11 +238,3 @@ type ListCompatibleImagesAPIClient interface {
 }
 
 var _ ListCompatibleImagesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCompatibleImages(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCompatibleImages",
-	}
-}

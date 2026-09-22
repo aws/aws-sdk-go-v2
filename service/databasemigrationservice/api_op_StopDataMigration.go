@@ -4,11 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops the specified data migration.
@@ -37,6 +36,18 @@ type StopDataMigrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDataMigrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDataMigrationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDataMigrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataMigrationIdentifier != nil {
+		s.WriteString(schemas.StopDataMigrationMessage_DataMigrationIdentifier, *v.DataMigrationIdentifier)
+	}
+}
+
 type StopDataMigrationOutput struct {
 
 	// The data migration that DMS stopped.
@@ -48,77 +59,50 @@ type StopDataMigrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDataMigrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDataMigrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDataMigrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataMigration != nil {
+		s.WriteStruct(schemas.StopDataMigrationResponse_DataMigration)
+		v.DataMigration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StopDataMigrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopDataMigrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopDataMigrationResponse_DataMigration:
+			v.DataMigration = &types.DataMigration{}
+			return v.DataMigration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDataMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDataMigration, schemas.StopDataMigrationMessage, schemas.StopDataMigrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDataMigration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDataMigration, schemas.StopDataMigrationMessage, schemas.StopDataMigrationResponse), output: &StopDataMigrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopDataMigration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopDataMigration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopDataMigrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopDataMigration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -133,22 +117,8 @@ func (c *Client) addOperationStopDataMigrationMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopDataMigration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopDataMigration",
-	}
 }

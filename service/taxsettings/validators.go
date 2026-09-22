@@ -247,6 +247,16 @@ func validateAdditionalInfoRequest(v *types.AdditionalInfoRequest) error {
 			invalidParams.AddNested("UkraineAdditionalInfo", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FranceAdditionalInfo != nil {
+		if err := validateFranceAdditionalInfo(v.FranceAdditionalInfo); err != nil {
+			invalidParams.AddNested("FranceAdditionalInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MonacoAdditionalInfo != nil {
+		if err := validateMonacoAdditionalInfo(v.MonacoAdditionalInfo); err != nil {
+			invalidParams.AddNested("MonacoAdditionalInfo", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -259,12 +269,6 @@ func validateAddress(v *types.Address) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Address"}
-	if v.AddressLine1 == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AddressLine1"))
-	}
-	if v.City == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("City"))
-	}
 	if v.PostalCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PostalCode"))
 	}
@@ -341,6 +345,21 @@ func validateExemptionCertificate(v *types.ExemptionCertificate) error {
 	}
 }
 
+func validateFranceAdditionalInfo(v *types.FranceAdditionalInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FranceAdditionalInfo"}
+	if v.SirenNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SirenNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGeorgiaAdditionalInfo(v *types.GeorgiaAdditionalInfo) error {
 	if v == nil {
 		return nil
@@ -381,6 +400,21 @@ func validateKenyaAdditionalInfo(v *types.KenyaAdditionalInfo) error {
 	invalidParams := smithy.InvalidParamsError{Context: "KenyaAdditionalInfo"}
 	if len(v.PersonType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PersonType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonacoAdditionalInfo(v *types.MonacoAdditionalInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonacoAdditionalInfo"}
+	if v.BusinessNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BusinessNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

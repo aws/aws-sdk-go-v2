@@ -4,11 +4,10 @@ package sfn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,18 @@ type DescribeActivityInput struct {
 	ActivityArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeActivityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActivityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityArn != nil {
+		s.WriteString(schemas.DescribeActivityInput_activityArn, *v.ActivityArn)
+	}
 }
 
 type DescribeActivityOutput struct {
@@ -86,77 +97,68 @@ type DescribeActivityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeActivityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeActivityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeActivityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivityArn != nil {
+		s.WriteString(schemas.DescribeActivityOutput_activityArn, *v.ActivityArn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeActivityOutput_creationDate, *v.CreationDate)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DescribeActivityOutput_encryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeActivityOutput_name, *v.Name)
+	}
+}
+func (v *DescribeActivityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeActivityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeActivityOutput_activityArn:
+			v.ActivityArn = new(string)
+			return d.ReadString(schemas.DescribeActivityOutput_activityArn, v.ActivityArn)
+		case schemas.DescribeActivityOutput_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeActivityOutput_creationDate, v.CreationDate)
+		case schemas.DescribeActivityOutput_encryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.DescribeActivityOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeActivityOutput_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivity, schemas.DescribeActivityInput, schemas.DescribeActivityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeActivity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeActivity, schemas.DescribeActivityInput, schemas.DescribeActivityOutput), output: &DescribeActivityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeActivity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeActivity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeActivityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeActivity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +173,8 @@ func (c *Client) addOperationDescribeActivityMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeActivity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeActivity",
-	}
 }

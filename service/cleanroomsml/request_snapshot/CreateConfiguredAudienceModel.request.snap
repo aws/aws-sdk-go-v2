@@ -1,0 +1,5 @@
+POST /configured-audience-model
+
+Content-Type: application/json
+
+{"audienceModelArn":"__AudienceModelArn__","audienceSizeConfig":{"audienceSizeBins":[1,1],"audienceSizeType":"ABSOLUTE"},"childResourceTagOnCreatePolicy":"FROM_PARENT_RESOURCE","description":"__Description__","minMatchingSeedSize":1,"name":"__Name__","outputConfig":{"destination":{"s3Destination":{"s3Uri":"__S3Uri__"}},"roleArn":"__RoleArn__"},"sharedAudienceMetrics":["ALL","ALL"],"tags":{"key0":"__Value__"}}

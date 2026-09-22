@@ -11,7 +11,7 @@ import (
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"testing"
 )
@@ -74,7 +74,7 @@ func TestClient_XmlNamespaces_Deserialize(t *testing.T) {
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody
@@ -101,88 +101,6 @@ func TestClient_XmlNamespaces_Deserialize(t *testing.T) {
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
-			}
-		})
-	}
-}
-
-func BenchmarkClient_XmlNamespaces_Deserialize(b *testing.B) {
-	cases := map[string]struct {
-		StatusCode    int
-		Header        http.Header
-		BodyMediaType string
-		Body          []byte
-		ExpectResult  *XmlNamespacesOutput
-	}{
-		"Ec2XmlNamespaces": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type": []string{"text/xml;charset=UTF-8"},
-			},
-			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlNamespacesResponse xmlns="https://example.com/">
-			    <nested>
-			        <foo xmlns:baz="http://baz.com">Foo</foo>
-			        <values xmlns="http://qux.com">
-			            <member xmlns="http://bux.com">Bar</member>
-			            <member xmlns="http://bux.com">Baz</member>
-			        </values>
-			    </nested>
-			    <requestId>requestid</requestId>
-			</XmlNamespacesResponse>
-			`),
-			ExpectResult: &XmlNamespacesOutput{
-				Nested: &types.XmlNamespaceNested{
-					Foo: ptr.String("Foo"),
-					Values: []string{
-						"Bar",
-						"Baz",
-					},
-				},
-			},
-		},
-	}
-	for name, c := range cases {
-		b.Run(name, func(b *testing.B) {
-			var params XmlNamespacesInput
-			serverURL := "http://localhost:8888/"
-			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					headers := http.Header{}
-					for k, vs := range c.Header {
-						for _, v := range vs {
-							headers.Add(k, v)
-						}
-					}
-					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
-						headers.Set("Content-Type", c.BodyMediaType)
-					}
-					response := &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     headers,
-						Request:    r,
-					}
-					if len(c.Body) != 0 {
-						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
-					} else {
-
-						response.Body = http.NoBody
-					}
-					return response, nil
-				}),
-				APIOptions: []func(*middleware.Stack) error{
-					func(s *middleware.Stack) error {
-						s.Finalize.Clear()
-						s.Initialize.Remove(`OperationInputValidation`)
-						return nil
-					},
-				},
-				EndpointResolverV2:       &protocolTestEndpointResolver{serverURL},
-				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
-			})
-			for i := 0; i < b.N; i++ {
-				client.XmlNamespaces(context.Background(), &params)
 			}
 		})
 	}

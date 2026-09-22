@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.AssociateAwsTrainingCertificationEmailDomain
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","Email":"__Email__","EmailVerificationCode":"__EmailVerificationCode__","Identifier":"__Identifier__"}

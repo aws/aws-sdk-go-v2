@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.ListProcurementPortals
+
+{"NextToken":"__NextToken__","ProcurementPortals":[{"DefaultFeatureConfigurations":{"InvoiceConfiguration":{"AttachmentTypes":["INVOICE_PDF","INVOICE_PDF"],"DocumentTypes":["AWS_CLOUD_INVOICE","AWS_CLOUD_INVOICE"]}},"PortalDisplayName":"__PortalDisplayName__","PortalIdentifier":"__PortalIdentifier__","PortalName":"SAP_BUSINESS_NETWORK"},{"DefaultFeatureConfigurations":{"InvoiceConfiguration":{"AttachmentTypes":["INVOICE_PDF","INVOICE_PDF"],"DocumentTypes":["AWS_CLOUD_INVOICE","AWS_CLOUD_INVOICE"]}},"PortalDisplayName":"__PortalDisplayName__","PortalIdentifier":"__PortalIdentifier__","PortalName":"SAP_BUSINESS_NETWORK"}]}

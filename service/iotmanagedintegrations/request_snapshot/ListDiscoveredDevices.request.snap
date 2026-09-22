@@ -1,0 +1,3 @@
+GET /device-discoveries/__Identifier__/devices?MaxResults=1&NextToken=__NextToken__
+
+

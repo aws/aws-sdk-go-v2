@@ -4,10 +4,9 @@ package devicefarm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,12 +42,28 @@ type CreateTestGridUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestGridUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestGridUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestGridUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiresInSeconds != nil {
+		s.WriteInt32(schemas.CreateTestGridUrlRequest_expiresInSeconds, *v.ExpiresInSeconds)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.CreateTestGridUrlRequest_projectArn, *v.ProjectArn)
+	}
+}
+
 type CreateTestGridUrlOutput struct {
 
-	// The number of seconds the URL from CreateTestGridUrlResult$url stays active.
+	// The number of seconds the URL stays active from creation.
 	Expires *time.Time
 
-	// A signed URL, expiring in CreateTestGridUrlRequest$expiresInSeconds seconds, to be passed to a RemoteWebDriver .
+	// A signed URL, expiring in the time specified by the CreateTestGridUrlRequest ,
+	// to be passed to a RemoteWebDriver .
 	Url *string
 
 	// Metadata pertaining to the operation's result.
@@ -57,77 +72,54 @@ type CreateTestGridUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestGridUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestGridUrlResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestGridUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expires != nil {
+		s.WriteTime(schemas.CreateTestGridUrlResult_expires, *v.Expires)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.CreateTestGridUrlResult_url, *v.Url)
+	}
+}
+func (v *CreateTestGridUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTestGridUrlResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTestGridUrlResult_expires:
+			v.Expires = new(time.Time)
+			return d.ReadTime(schemas.CreateTestGridUrlResult_expires, v.Expires)
+		case schemas.CreateTestGridUrlResult_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.CreateTestGridUrlResult_url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTestGridUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestGridUrl, schemas.CreateTestGridUrlRequest, schemas.CreateTestGridUrlResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTestGridUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestGridUrl, schemas.CreateTestGridUrlRequest, schemas.CreateTestGridUrlResult), output: &CreateTestGridUrlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTestGridUrl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTestGridUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTestGridUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTestGridUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +134,8 @@ func (c *Client) addOperationCreateTestGridUrlMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateTestGridUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTestGridUrl",
-	}
 }

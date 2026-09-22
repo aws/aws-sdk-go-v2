@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/data-sources/__DataSourceId__
+
+Content-Type: application/json
+
+{"Credentials":{"CopySourceArn":"__CopySourceArn__","CredentialPair":{"AlternateDataSourceParameters":[{"AmazonElasticsearchParameters":{"Domain":"__Domain__"}},{"AmazonElasticsearchParameters":{"Domain":"__Domain__"}}],"Password":"__Password__","Username":"__Username__"},"KeyPairCredentials":{"KeyPairUsername":"__KeyPairUsername__","PrivateKey":"__PrivateKey__","PrivateKeyPassphrase":"__PrivateKeyPassphrase__"},"OAuthClientCredentials":{"ClientId":"__ClientId__","ClientSecret":"__ClientSecret__","Username":"__Username__"},"SecretArn":"__SecretArn__","WebProxyCredentials":{"WebProxyPassword":"__WebProxyPassword__","WebProxyUsername":"__WebProxyUsername__"}},"DataSourceParameters":{"AmazonElasticsearchParameters":{"Domain":"__Domain__"}},"Name":"__Name__","SslProperties":{"DisableSsl":true},"VpcConnectionProperties":{"VpcConnectionArn":"__VpcConnectionArn__"}}

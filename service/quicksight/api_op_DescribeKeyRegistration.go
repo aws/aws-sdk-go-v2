@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes all customer managed key registrations in a Quick Sight account.
@@ -41,6 +40,21 @@ type DescribeKeyRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKeyRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKeyRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKeyRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeKeyRegistrationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DefaultKeyOnly != false {
+		s.WriteBool(schemas.DescribeKeyRegistrationRequest_DefaultKeyOnly, v.DefaultKeyOnly)
+	}
+}
+
 type DescribeKeyRegistrationOutput struct {
 
 	// The ID of the Amazon Web Services account that contains the customer managed
@@ -65,77 +79,70 @@ type DescribeKeyRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeKeyRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeKeyRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeKeyRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeKeyRegistrationResponse_AwsAccountId, *v.AwsAccountId)
+	}
+	serializeKeyRegistration(s, schemas.DescribeKeyRegistrationResponse_KeyRegistration, v.KeyRegistration)
+	if v.QDataKey != nil {
+		s.WriteStruct(schemas.DescribeKeyRegistrationResponse_QDataKey)
+		v.QDataKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeKeyRegistrationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeKeyRegistrationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeKeyRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeKeyRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeKeyRegistrationResponse_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.DescribeKeyRegistrationResponse_AwsAccountId, v.AwsAccountId)
+		case schemas.DescribeKeyRegistrationResponse_KeyRegistration:
+			return deserializeKeyRegistration(d, schemas.DescribeKeyRegistrationResponse_KeyRegistration, &v.KeyRegistration)
+		case schemas.DescribeKeyRegistrationResponse_QDataKey:
+			v.QDataKey = &types.QDataKey{}
+			return v.QDataKey.Deserialize(d)
+		case schemas.DescribeKeyRegistrationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeKeyRegistrationResponse_RequestId, v.RequestId)
+		case schemas.DescribeKeyRegistrationResponse_Status:
+			return d.ReadInt32(schemas.DescribeKeyRegistrationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeKeyRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKeyRegistration, schemas.DescribeKeyRegistrationRequest, schemas.DescribeKeyRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeKeyRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeKeyRegistration, schemas.DescribeKeyRegistrationRequest, schemas.DescribeKeyRegistrationResponse), output: &DescribeKeyRegistrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeKeyRegistration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeKeyRegistration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeKeyRegistrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeKeyRegistration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +157,8 @@ func (c *Client) addOperationDescribeKeyRegistrationMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeKeyRegistration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeKeyRegistration",
-	}
 }

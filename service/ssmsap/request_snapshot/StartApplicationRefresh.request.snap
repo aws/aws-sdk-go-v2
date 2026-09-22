@@ -1,0 +1,5 @@
+POST /start-application-refresh
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__"}

@@ -1,0 +1,5 @@
+POST /GetTelemetryPipeline
+
+Content-Type: application/json
+
+{"PipelineIdentifier":"__PipelineIdentifier__"}

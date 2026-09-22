@@ -1,0 +1,5 @@
+POST /resourceconfigurations
+
+Content-Type: application/json
+
+{"allowAssociationToShareableServiceNetwork":true,"clientToken":"__ClientToken__","customDomainName":"__CustomDomainName__","domainVerificationIdentifier":"__DomainVerificationIdentifier__","groupDomain":"__GroupDomain__","name":"__Name__","portRanges":["__Member__","__Member__"],"protocol":"TCP","resourceConfigurationDefinition":{"dnsResource":{"domainName":"__DomainName__","ipAddressType":"IPV4"}},"resourceConfigurationGroupIdentifier":"__ResourceConfigurationGroupIdentifier__","resourceGatewayIdentifier":"__ResourceGatewayIdentifier__","tags":{"key0":"__Value__"},"type":"GROUP"}

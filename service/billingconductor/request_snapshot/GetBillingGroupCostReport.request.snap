@@ -1,0 +1,5 @@
+POST /get-billing-group-cost-report
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","BillingPeriodRange":{"ExclusiveEndBillingPeriod":"__ExclusiveEndBillingPeriod__","InclusiveStartBillingPeriod":"__InclusiveStartBillingPeriod__"},"GroupBy":["PRODUCT_NAME","PRODUCT_NAME"],"MaxResults":1,"NextToken":"__NextToken__"}

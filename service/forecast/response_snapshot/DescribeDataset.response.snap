@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.DescribeDataset
+
+{"CreationTime":946684800,"DataFrequency":"__DataFrequency__","DatasetArn":"__DatasetArn__","DatasetName":"__DatasetName__","DatasetType":"TARGET_TIME_SERIES","Domain":"RETAIL","EncryptionConfig":{"KMSKeyArn":"__KMSKeyArn__","RoleArn":"__RoleArn__"},"LastModificationTime":946684800,"Schema":{"Attributes":[{"AttributeName":"__AttributeName__","AttributeType":"string"},{"AttributeName":"__AttributeName__","AttributeType":"string"}]},"Status":"__Status__"}

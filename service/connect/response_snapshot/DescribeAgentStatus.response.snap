@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AgentStatus":{"AgentStatusARN":"__AgentStatusARN__","AgentStatusId":"__AgentStatusId__","Description":"__Description__","DisplayOrder":1,"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","State":"ENABLED","Tags":{"key0":"__Value__"},"Type":"ROUTABLE"}}

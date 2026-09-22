@@ -4,10 +4,9 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a new run of the specified blueprint.
@@ -44,6 +43,24 @@ type StartBlueprintRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBlueprintRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBlueprintRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBlueprintRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlueprintName != nil {
+		s.WriteString(schemas.StartBlueprintRunRequest_BlueprintName, *v.BlueprintName)
+	}
+	if v.Parameters != nil {
+		s.WriteString(schemas.StartBlueprintRunRequest_Parameters, *v.Parameters)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartBlueprintRunRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type StartBlueprintRunOutput struct {
 
 	// The run ID for this blueprint run.
@@ -55,77 +72,48 @@ type StartBlueprintRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBlueprintRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBlueprintRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBlueprintRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.StartBlueprintRunResponse_RunId, *v.RunId)
+	}
+}
+func (v *StartBlueprintRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBlueprintRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBlueprintRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.StartBlueprintRunResponse_RunId, v.RunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartBlueprintRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBlueprintRun, schemas.StartBlueprintRunRequest, schemas.StartBlueprintRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartBlueprintRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBlueprintRun, schemas.StartBlueprintRunRequest, schemas.StartBlueprintRunResponse), output: &StartBlueprintRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartBlueprintRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartBlueprintRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartBlueprintRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartBlueprintRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +128,8 @@ func (c *Client) addOperationStartBlueprintRunMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartBlueprintRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartBlueprintRun",
-	}
 }

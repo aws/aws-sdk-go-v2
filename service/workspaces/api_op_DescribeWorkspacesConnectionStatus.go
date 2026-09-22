@@ -4,11 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the connection status of the specified WorkSpaces.
@@ -39,6 +38,19 @@ type DescribeWorkspacesConnectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspacesConnectionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspacesConnectionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspacesConnectionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspacesConnectionStatusRequest_NextToken, *v.NextToken)
+	}
+	serializeWorkspaceIdList(s, schemas.DescribeWorkspacesConnectionStatusRequest_WorkspaceIds, v.WorkspaceIds)
+}
+
 type DescribeWorkspacesConnectionStatusOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -54,74 +66,48 @@ type DescribeWorkspacesConnectionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspacesConnectionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspacesConnectionStatusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspacesConnectionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeWorkspacesConnectionStatusResult_NextToken, *v.NextToken)
+	}
+	serializeWorkspaceConnectionStatusList(s, schemas.DescribeWorkspacesConnectionStatusResult_WorkspacesConnectionStatus, v.WorkspacesConnectionStatus)
+}
+func (v *DescribeWorkspacesConnectionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspacesConnectionStatusResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspacesConnectionStatusResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeWorkspacesConnectionStatusResult_NextToken, v.NextToken)
+		case schemas.DescribeWorkspacesConnectionStatusResult_WorkspacesConnectionStatus:
+			return deserializeWorkspaceConnectionStatusList(d, schemas.DescribeWorkspacesConnectionStatusResult_WorkspacesConnectionStatus, &v.WorkspacesConnectionStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspacesConnectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspacesConnectionStatus, schemas.DescribeWorkspacesConnectionStatusRequest, schemas.DescribeWorkspacesConnectionStatusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkspacesConnectionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspacesConnectionStatus, schemas.DescribeWorkspacesConnectionStatusRequest, schemas.DescribeWorkspacesConnectionStatusResult), output: &DescribeWorkspacesConnectionStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkspacesConnectionStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkspacesConnectionStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkspacesConnectionStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +122,8 @@ func (c *Client) addOperationDescribeWorkspacesConnectionStatusMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeWorkspacesConnectionStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkspacesConnectionStatus",
-	}
 }

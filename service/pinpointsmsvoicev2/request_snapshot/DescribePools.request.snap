@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribePools
+
+{"Filters":[{"Name":"status","Values":["__Member__","__Member__"]},{"Name":"status","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","Owner":"SELF","PoolIds":["__Member__","__Member__"]}

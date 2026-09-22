@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateVolume&AvailabilityZone=__AvailabilityZone__&AvailabilityZoneId=__AvailabilityZoneId__&ClientToken=__ClientToken__&DryRun=true&Encrypted=true&Iops=1&KmsKeyId=__KmsKeyId__&MultiAttachEnabled=true&Operator.Principal=__Principal__&OutpostArn=__OutpostArn__&Size=1&SnapshotId=__SnapshotId__&TagSpecification.1.ResourceType=capacity-reservation&TagSpecification.1.Tag.1.Key=__Key__&TagSpecification.1.Tag.1.Value=__Value__&TagSpecification.1.Tag.2.Key=__Key__&TagSpecification.1.Tag.2.Value=__Value__&TagSpecification.2.ResourceType=capacity-reservation&TagSpecification.2.Tag.1.Key=__Key__&TagSpecification.2.Tag.1.Value=__Value__&TagSpecification.2.Tag.2.Key=__Key__&TagSpecification.2.Tag.2.Value=__Value__&Throughput=1&Version=2016-11-15&VolumeInitializationRate=1&VolumeType=standard

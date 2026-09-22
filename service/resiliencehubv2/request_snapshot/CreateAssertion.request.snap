@@ -1,0 +1,5 @@
+POST /v2/create-assertion
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","serviceArn":"__ServiceArn__","text":"__Text__"}

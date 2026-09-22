@@ -4,10 +4,9 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2
@@ -57,6 +56,21 @@ type DeleteVpcPeeringConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcPeeringConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcPeeringConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcPeeringConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DeleteVpcPeeringConnectionInput_FleetId, *v.FleetId)
+	}
+	if v.VpcPeeringConnectionId != nil {
+		s.WriteString(schemas.DeleteVpcPeeringConnectionInput_VpcPeeringConnectionId, *v.VpcPeeringConnectionId)
+	}
+}
+
 type DeleteVpcPeeringConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,65 +78,36 @@ type DeleteVpcPeeringConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVpcPeeringConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVpcPeeringConnectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVpcPeeringConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteVpcPeeringConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVpcPeeringConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcPeeringConnection, schemas.DeleteVpcPeeringConnectionInput, schemas.DeleteVpcPeeringConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDeleteVpcPeeringConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVpcPeeringConnection, schemas.DeleteVpcPeeringConnectionInput, schemas.DeleteVpcPeeringConnectionOutput), output: &DeleteVpcPeeringConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDeleteVpcPeeringConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteVpcPeeringConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -132,12 +117,6 @@ func (c *Client) addOperationDeleteVpcPeeringConnectionMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpDeleteVpcPeeringConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVpcPeeringConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +131,8 @@ func (c *Client) addOperationDeleteVpcPeeringConnectionMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteVpcPeeringConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteVpcPeeringConnection",
-	}
 }

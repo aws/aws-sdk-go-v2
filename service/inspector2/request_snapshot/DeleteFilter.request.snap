@@ -1,0 +1,5 @@
+POST /filters/delete
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

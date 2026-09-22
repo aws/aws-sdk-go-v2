@@ -1,0 +1,5 @@
+POST /client/register
+
+Content-Type: application/json
+
+{"clientName":"__ClientName__","clientType":"__ClientType__","entitledApplicationArn":"__EntitledApplicationArn__","grantTypes":["__Member__","__Member__"],"issuerUrl":"__IssuerUrl__","redirectUris":["__Member__","__Member__"],"scopes":["__Member__","__Member__"]}

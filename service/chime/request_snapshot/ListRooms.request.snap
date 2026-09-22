@@ -1,0 +1,3 @@
+GET /accounts/__AccountId__/rooms?max-results=1&member-id=__MemberId__&next-token=__NextToken__
+
+

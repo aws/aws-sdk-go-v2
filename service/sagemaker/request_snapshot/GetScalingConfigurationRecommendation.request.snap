@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.GetScalingConfigurationRecommendation
+
+{"EndpointName":"__EndpointName__","InferenceRecommendationsJobName":"__InferenceRecommendationsJobName__","RecommendationId":"__RecommendationId__","ScalingPolicyObjective":{"MaxInvocationsPerMinute":1,"MinInvocationsPerMinute":1},"TargetCpuUtilizationPerCore":1}

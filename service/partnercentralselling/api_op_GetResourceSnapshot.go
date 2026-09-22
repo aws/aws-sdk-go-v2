@@ -4,11 +4,10 @@ package partnercentralselling
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -75,6 +74,33 @@ type GetResourceSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetResourceSnapshotRequest_Catalog, *v.Catalog)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.GetResourceSnapshotRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.GetResourceSnapshotRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceSnapshotTemplateIdentifier != nil {
+		s.WriteString(schemas.GetResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier, *v.ResourceSnapshotTemplateIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetResourceSnapshotRequest_ResourceType, string(v.ResourceType))
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.GetResourceSnapshotRequest_Revision, *v.Revision)
+	}
+}
+
 type GetResourceSnapshotOutput struct {
 
 	// The catalog in which the snapshot was created. Matches the Catalog specified in
@@ -129,77 +155,106 @@ type GetResourceSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetResourceSnapshotResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetResourceSnapshotResponse_Catalog, *v.Catalog)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetResourceSnapshotResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetResourceSnapshotResponse_CreatedBy, *v.CreatedBy)
+	}
+	if v.EngagementId != nil {
+		s.WriteString(schemas.GetResourceSnapshotResponse_EngagementId, *v.EngagementId)
+	}
+	serializeResourceSnapshotPayload(s, schemas.GetResourceSnapshotResponse_Payload, v.Payload)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetResourceSnapshotResponse_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceSnapshotTemplateName != nil {
+		s.WriteString(schemas.GetResourceSnapshotResponse_ResourceSnapshotTemplateName, *v.ResourceSnapshotTemplateName)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.GetResourceSnapshotResponse_ResourceType, string(v.ResourceType))
+	}
+	if v.Revision != nil {
+		s.WriteInt32(schemas.GetResourceSnapshotResponse_Revision, *v.Revision)
+	}
+	serializeAwsAccountIdOrAliasList(s, schemas.GetResourceSnapshotResponse_TargetMemberAccounts, v.TargetMemberAccounts)
+}
+func (v *GetResourceSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceSnapshotResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotResponse_Arn, v.Arn)
+		case schemas.GetResourceSnapshotResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotResponse_Catalog, v.Catalog)
+		case schemas.GetResourceSnapshotResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetResourceSnapshotResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetResourceSnapshotResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotResponse_CreatedBy, v.CreatedBy)
+		case schemas.GetResourceSnapshotResponse_EngagementId:
+			v.EngagementId = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotResponse_EngagementId, v.EngagementId)
+		case schemas.GetResourceSnapshotResponse_Payload:
+			return deserializeResourceSnapshotPayload(d, schemas.GetResourceSnapshotResponse_Payload, &v.Payload)
+		case schemas.GetResourceSnapshotResponse_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotResponse_ResourceId, v.ResourceId)
+		case schemas.GetResourceSnapshotResponse_ResourceSnapshotTemplateName:
+			v.ResourceSnapshotTemplateName = new(string)
+			return d.ReadString(schemas.GetResourceSnapshotResponse_ResourceSnapshotTemplateName, v.ResourceSnapshotTemplateName)
+		case schemas.GetResourceSnapshotResponse_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.GetResourceSnapshotResponse_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.GetResourceSnapshotResponse_Revision:
+			v.Revision = new(int32)
+			return d.ReadInt32(schemas.GetResourceSnapshotResponse_Revision, v.Revision)
+		case schemas.GetResourceSnapshotResponse_TargetMemberAccounts:
+			return deserializeAwsAccountIdOrAliasList(d, schemas.GetResourceSnapshotResponse_TargetMemberAccounts, &v.TargetMemberAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceSnapshot, schemas.GetResourceSnapshotRequest, schemas.GetResourceSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetResourceSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceSnapshot, schemas.GetResourceSnapshotRequest, schemas.GetResourceSnapshotResponse), output: &GetResourceSnapshotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetResourceSnapshot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResourceSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,22 +269,8 @@ func (c *Client) addOperationGetResourceSnapshotMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetResourceSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResourceSnapshot",
-	}
 }

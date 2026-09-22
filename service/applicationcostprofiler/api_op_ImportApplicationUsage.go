@@ -4,11 +4,10 @@ package applicationcostprofiler
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Ingests application usage data from Amazon Simple Storage Service (Amazon S3).
@@ -41,6 +40,20 @@ type ImportApplicationUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportApplicationUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportApplicationUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportApplicationUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceS3Location != nil {
+		s.WriteStruct(schemas.ImportApplicationUsageRequest_sourceS3Location)
+		v.SourceS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ImportApplicationUsageOutput struct {
 
 	// ID of the import request.
@@ -54,77 +67,48 @@ type ImportApplicationUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportApplicationUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportApplicationUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportApplicationUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportId != nil {
+		s.WriteString(schemas.ImportApplicationUsageResult_importId, *v.ImportId)
+	}
+}
+func (v *ImportApplicationUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportApplicationUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportApplicationUsageResult_importId:
+			v.ImportId = new(string)
+			return d.ReadString(schemas.ImportApplicationUsageResult_importId, v.ImportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportApplicationUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportApplicationUsage, schemas.ImportApplicationUsageRequest, schemas.ImportApplicationUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportApplicationUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportApplicationUsage, schemas.ImportApplicationUsageRequest, schemas.ImportApplicationUsageResult), output: &ImportApplicationUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportApplicationUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportApplicationUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpImportApplicationUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportApplicationUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +123,8 @@ func (c *Client) addOperationImportApplicationUsageMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opImportApplicationUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportApplicationUsage",
-	}
 }

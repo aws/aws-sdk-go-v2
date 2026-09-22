@@ -1,0 +1,5 @@
+POST /PutAuditEvents?channelArn=__ChannelArn__&externalId=__ExternalId__
+
+Content-Type: application/json
+
+{"auditEvents":[{"eventData":"__EventData__","eventDataChecksum":"__EventDataChecksum__","id":"__Id__"},{"eventData":"__EventData__","eventDataChecksum":"__EventDataChecksum__","id":"__Id__"}]}

@@ -4,11 +4,10 @@ package organizations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Declines a Handshake.
@@ -50,6 +49,18 @@ type DeclineHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeclineHandshakeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeclineHandshakeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeclineHandshakeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HandshakeId != nil {
+		s.WriteString(schemas.DeclineHandshakeRequest_HandshakeId, *v.HandshakeId)
+	}
+}
+
 type DeclineHandshakeOutput struct {
 
 	// A Handshake object. Contains details for the declined handshake.
@@ -61,77 +72,50 @@ type DeclineHandshakeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeclineHandshakeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeclineHandshakeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeclineHandshakeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Handshake != nil {
+		s.WriteStruct(schemas.DeclineHandshakeResponse_Handshake)
+		v.Handshake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeclineHandshakeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeclineHandshakeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeclineHandshakeResponse_Handshake:
+			v.Handshake = &types.Handshake{}
+			return v.Handshake.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeclineHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeclineHandshake, schemas.DeclineHandshakeRequest, schemas.DeclineHandshakeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeclineHandshake{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeclineHandshake, schemas.DeclineHandshakeRequest, schemas.DeclineHandshakeResponse), output: &DeclineHandshakeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeclineHandshake{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeclineHandshake"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeclineHandshakeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeclineHandshake(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +130,8 @@ func (c *Client) addOperationDeclineHandshakeMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeclineHandshake(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeclineHandshake",
-	}
 }

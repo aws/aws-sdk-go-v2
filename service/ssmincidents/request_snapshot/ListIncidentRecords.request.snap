@@ -1,0 +1,5 @@
+POST /listIncidentRecords
+
+Content-Type: application/json
+
+{"filters":[{"condition":{"before":946684800},"key":"__Key__"},{"condition":{"before":946684800},"key":"__Key__"}],"maxResults":1,"nextToken":"__NextToken__"}

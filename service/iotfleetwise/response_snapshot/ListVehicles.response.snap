@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.ListVehicles
+
+{"nextToken":"__NextToken__","vehicleSummaries":[{"arn":"__Arn__","attributes":{"key0":"__Value__"},"creationTime":946684800,"decoderManifestArn":"__DecoderManifestArn__","lastModificationTime":946684800,"modelManifestArn":"__ModelManifestArn__","vehicleName":"__VehicleName__"},{"arn":"__Arn__","attributes":{"key0":"__Value__"},"creationTime":946684800,"decoderManifestArn":"__DecoderManifestArn__","lastModificationTime":946684800,"modelManifestArn":"__ModelManifestArn__","vehicleName":"__VehicleName__"}]}

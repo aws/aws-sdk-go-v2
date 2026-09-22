@@ -1,0 +1,5 @@
+POST /queues/__InstanceId__/__QueueId__/name
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__"}

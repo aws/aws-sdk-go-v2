@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"operationDetails":{"endTime":"2000-01-01T00:00:00Z","operationIdentifier":"__OperationIdentifier__","operationType":"DELETE","startTime":"2000-01-01T00:00:00Z","status":"SUCCEEDED","statusMessage":"__StatusMessage__"}}

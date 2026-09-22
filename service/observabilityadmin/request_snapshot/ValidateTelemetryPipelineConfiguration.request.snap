@@ -1,0 +1,5 @@
+POST /ValidateTelemetryPipelineConfiguration
+
+Content-Type: application/json
+
+{"Configuration":{"Body":"__Body__"}}

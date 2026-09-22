@@ -1,0 +1,5 @@
+POST /CreateAgentSpace
+
+Content-Type: application/json
+
+{"awsResources":{"iamRoles":["__Member__","__Member__"],"lambdaFunctionArns":["__Member__","__Member__"],"logGroups":["__Member__","__Member__"],"s3Buckets":["__Member__","__Member__"],"secretArns":["__Member__","__Member__"],"vpcs":[{"securityGroupArns":["__Member__","__Member__"],"subnetArns":["__Member__","__Member__"],"vpcArn":"__VpcArn__"},{"securityGroupArns":["__Member__","__Member__"],"subnetArns":["__Member__","__Member__"],"vpcArn":"__VpcArn__"}]},"codeReviewSettings":{"controlsScanning":true,"generalPurposeScanning":true},"description":"__Description__","kmsKeyId":"__KmsKeyId__","name":"__Name__","tags":{"key0":"__Value__"},"targetDomainIds":["__Member__","__Member__"]}

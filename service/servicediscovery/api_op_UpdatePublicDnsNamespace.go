@@ -5,10 +5,10 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a public DNS namespace.
@@ -48,6 +48,26 @@ type UpdatePublicDnsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePublicDnsNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePublicDnsNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePublicDnsNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdatePublicDnsNamespaceRequest_Id, *v.Id)
+	}
+	if v.Namespace != nil {
+		s.WriteStruct(schemas.UpdatePublicDnsNamespaceRequest_Namespace)
+		v.Namespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdaterRequestId != nil {
+		s.WriteString(schemas.UpdatePublicDnsNamespaceRequest_UpdaterRequestId, *v.UpdaterRequestId)
+	}
+}
+
 type UpdatePublicDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
@@ -62,65 +82,42 @@ type UpdatePublicDnsNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePublicDnsNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePublicDnsNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePublicDnsNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.UpdatePublicDnsNamespaceResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *UpdatePublicDnsNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePublicDnsNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePublicDnsNamespaceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.UpdatePublicDnsNamespaceResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePublicDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePublicDnsNamespace, schemas.UpdatePublicDnsNamespaceRequest, schemas.UpdatePublicDnsNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePublicDnsNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePublicDnsNamespace, schemas.UpdatePublicDnsNamespaceRequest, schemas.UpdatePublicDnsNamespaceResponse), output: &UpdatePublicDnsNamespaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePublicDnsNamespace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePublicDnsNamespace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -130,12 +127,6 @@ func (c *Client) addOperationUpdatePublicDnsNamespaceMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpUpdatePublicDnsNamespaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePublicDnsNamespace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +139,6 @@ func (c *Client) addOperationUpdatePublicDnsNamespaceMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -193,12 +178,4 @@ func (m *idempotencyToken_initializeOpUpdatePublicDnsNamespace) HandleInitialize
 }
 func addIdempotencyToken_opUpdatePublicDnsNamespaceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdatePublicDnsNamespace{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdatePublicDnsNamespace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePublicDnsNamespace",
-	}
 }

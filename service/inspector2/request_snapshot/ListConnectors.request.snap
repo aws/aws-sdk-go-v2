@@ -1,0 +1,5 @@
+POST /connector/list
+
+Content-Type: application/json
+
+{"filterCriteria":{"accounts":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"awsConfigConnectorArns":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"connectorArns":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"connectorType":[{"comparison":"EQUALS","value":"CUSTOMER_MANAGED"},{"comparison":"EQUALS","value":"CUSTOMER_MANAGED"}],"provider":[{"comparison":"EQUALS","value":"AZURE"},{"comparison":"EQUALS","value":"AZURE"}]},"maxResults":1,"nextToken":"__NextToken__"}

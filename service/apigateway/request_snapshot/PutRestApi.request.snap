@@ -1,0 +1,6 @@
+PUT /restapis/__RestApiId__?failonwarnings=true&key0=__Value__&mode=merge
+
+Accept: application/json
+Content-Type: application/octet-stream
+
+blob

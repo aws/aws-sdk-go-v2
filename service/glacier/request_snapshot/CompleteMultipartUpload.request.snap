@@ -1,0 +1,6 @@
+POST /__AccountId__/vaults/__VaultName__/multipart-uploads/__UploadId__
+
+X-Amz-Archive-Size: __ArchiveSize__
+X-Amz-Glacier-Version: 2012-06-01
+X-Amz-Sha256-Tree-Hash: __Checksum__
+

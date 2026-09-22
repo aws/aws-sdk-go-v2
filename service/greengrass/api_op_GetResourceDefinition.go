@@ -4,10 +4,9 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a resource definition, including its creation time
@@ -35,6 +34,18 @@ type GetResourceDefinitionInput struct {
 	ResourceDefinitionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetResourceDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceDefinitionId != nil {
+		s.WriteString(schemas.GetResourceDefinitionRequest_ResourceDefinitionId, *v.ResourceDefinitionId)
+	}
 }
 
 type GetResourceDefinitionOutput struct {
@@ -69,77 +80,87 @@ type GetResourceDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetResourceDefinitionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetResourceDefinitionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetResourceDefinitionResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.GetResourceDefinitionResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.GetResourceDefinitionResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.GetResourceDefinitionResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetResourceDefinitionResponse_Name, *v.Name)
+	}
+	serializeTags(s, schemas.GetResourceDefinitionResponse_tags, v.Tags)
+}
+func (v *GetResourceDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceDefinitionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionResponse_Arn, v.Arn)
+		case schemas.GetResourceDefinitionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetResourceDefinitionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionResponse_Id, v.Id)
+		case schemas.GetResourceDefinitionResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetResourceDefinitionResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionResponse_LatestVersion, v.LatestVersion)
+		case schemas.GetResourceDefinitionResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.GetResourceDefinitionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetResourceDefinitionResponse_Name, v.Name)
+		case schemas.GetResourceDefinitionResponse_tags:
+			return deserializeTags(d, schemas.GetResourceDefinitionResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceDefinition, schemas.GetResourceDefinitionRequest, schemas.GetResourceDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceDefinition, schemas.GetResourceDefinitionRequest, schemas.GetResourceDefinitionResponse), output: &GetResourceDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResourceDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +175,8 @@ func (c *Client) addOperationGetResourceDefinitionMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetResourceDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResourceDefinition",
-	}
 }

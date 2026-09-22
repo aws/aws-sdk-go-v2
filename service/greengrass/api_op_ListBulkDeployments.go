@@ -4,11 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of bulk deployments.
@@ -39,6 +38,21 @@ type ListBulkDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBulkDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBulkDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBulkDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteString(schemas.ListBulkDeploymentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBulkDeploymentsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListBulkDeploymentsOutput struct {
 
 	// A list of bulk deployments.
@@ -54,74 +68,48 @@ type ListBulkDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBulkDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBulkDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBulkDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBulkDeployments(s, schemas.ListBulkDeploymentsResponse_BulkDeployments, v.BulkDeployments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBulkDeploymentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBulkDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBulkDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBulkDeploymentsResponse_BulkDeployments:
+			return deserializeBulkDeployments(d, schemas.ListBulkDeploymentsResponse_BulkDeployments, &v.BulkDeployments)
+		case schemas.ListBulkDeploymentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBulkDeploymentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBulkDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBulkDeployments, schemas.ListBulkDeploymentsRequest, schemas.ListBulkDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBulkDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBulkDeployments, schemas.ListBulkDeploymentsRequest, schemas.ListBulkDeploymentsResponse), output: &ListBulkDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBulkDeployments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBulkDeployments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBulkDeployments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +124,8 @@ func (c *Client) addOperationListBulkDeploymentsMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListBulkDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBulkDeployments",
-	}
 }

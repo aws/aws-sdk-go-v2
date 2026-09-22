@@ -4,11 +4,10 @@ package opensearchserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns attributes for one or more collections, including the collection
@@ -46,6 +45,28 @@ type BatchGetCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollectionIds(s, schemas.BatchGetCollectionRequest_ids, v.Ids)
+	serializeCollectionNames(s, schemas.BatchGetCollectionRequest_names, v.Names)
+}
+func (v *BatchGetCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCollectionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCollectionRequest_ids:
+			return deserializeCollectionIds(d, schemas.BatchGetCollectionRequest_ids, &v.Ids)
+		case schemas.BatchGetCollectionRequest_names:
+			return deserializeCollectionNames(d, schemas.BatchGetCollectionRequest_names, &v.Names)
+		}
+		return nil
+	})
+}
+
 type BatchGetCollectionOutput struct {
 
 	// Details about each collection.
@@ -60,74 +81,45 @@ type BatchGetCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollectionDetails(s, schemas.BatchGetCollectionResponse_collectionDetails, v.CollectionDetails)
+	serializeCollectionErrorDetails(s, schemas.BatchGetCollectionResponse_collectionErrorDetails, v.CollectionErrorDetails)
+}
+func (v *BatchGetCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCollectionResponse_collectionDetails:
+			return deserializeCollectionDetails(d, schemas.BatchGetCollectionResponse_collectionDetails, &v.CollectionDetails)
+		case schemas.BatchGetCollectionResponse_collectionErrorDetails:
+			return deserializeCollectionErrorDetails(d, schemas.BatchGetCollectionResponse_collectionErrorDetails, &v.CollectionErrorDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCollection, schemas.BatchGetCollectionRequest, schemas.BatchGetCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchGetCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCollection, schemas.BatchGetCollectionRequest, schemas.BatchGetCollectionResponse), output: &BatchGetCollectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchGetCollection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetCollection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetCollection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +134,8 @@ func (c *Client) addOperationBatchGetCollectionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetCollection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetCollection",
-	}
 }

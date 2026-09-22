@@ -1,0 +1,7 @@
+PUT /browsers/__BrowserIdentifier__/sessions/stop?sessionId=__SessionId__
+
+Content-Type: application/json
+Traceparent: __TraceParent__
+X-Amzn-Trace-Id: __TraceId__
+
+{"clientToken":"__ClientToken__"}

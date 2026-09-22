@@ -4,11 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a custom insight in Security Hub CSPM. An insight is a consolidation of
@@ -54,6 +53,26 @@ type CreateInsightInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInsightInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInsightRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInsightInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.CreateInsightRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupByAttribute != nil {
+		s.WriteString(schemas.CreateInsightRequest_GroupByAttribute, *v.GroupByAttribute)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateInsightRequest_Name, *v.Name)
+	}
+}
+
 type CreateInsightOutput struct {
 
 	// The ARN of the insight created.
@@ -67,77 +86,48 @@ type CreateInsightOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInsightOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInsightResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInsightOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightArn != nil {
+		s.WriteString(schemas.CreateInsightResponse_InsightArn, *v.InsightArn)
+	}
+}
+func (v *CreateInsightOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInsightResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInsightResponse_InsightArn:
+			v.InsightArn = new(string)
+			return d.ReadString(schemas.CreateInsightResponse_InsightArn, v.InsightArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInsight, schemas.CreateInsightRequest, schemas.CreateInsightResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInsight{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInsight, schemas.CreateInsightRequest, schemas.CreateInsightResponse), output: &CreateInsightOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInsight{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInsight"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateInsightValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInsight(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +142,8 @@ func (c *Client) addOperationCreateInsightMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateInsight(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateInsight",
-	}
 }

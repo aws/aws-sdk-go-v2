@@ -1,0 +1,5 @@
+POST /UpdateRecoveryPlanExecutionStep
+
+Content-Type: application/json
+
+{"recoveryPlanExecutionStepArn":"__RecoveryPlanExecutionStepArn__","servers":[{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"},{"impactLevel":"CRITICAL","serverArn":"__ServerArn__"}],"status":"NOT_STARTED","waitDurationMinutes":1}

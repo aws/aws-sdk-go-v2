@@ -1,3 +1,127 @@
+# v1.27.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
+# v1.24.0 (2026-08-31)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.23.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.0 (2026-08-27)
+
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2026-08-26)
+
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.8 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.7 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.6 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.5 (2026-08-10)
+
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.4 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
+# v1.21.2 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.0 (2026-07-21)
+
+* **Feature**: Add an option to clients to disable clock skew
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.20.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+* **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+
+# v1.19.7 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.6 (2026-06-29)
+
+* No change notes available for this release.
+
+# v1.19.5 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.4 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
+# v1.19.3 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.2 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.1 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.0 (2026-05-29)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.3 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

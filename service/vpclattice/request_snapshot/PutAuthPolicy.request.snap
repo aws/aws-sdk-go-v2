@@ -1,0 +1,5 @@
+PUT /authpolicy/__ResourceIdentifier__
+
+Content-Type: application/json
+
+{"policy":"__Policy__"}

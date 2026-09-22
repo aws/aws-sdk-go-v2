@@ -1,0 +1,5 @@
+POST /list-control-mappings?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"Filter":{"CommonControlArns":["__Member__","__Member__"],"ControlArns":["__Member__","__Member__"],"MappingTypes":["FRAMEWORK","FRAMEWORK"]}}

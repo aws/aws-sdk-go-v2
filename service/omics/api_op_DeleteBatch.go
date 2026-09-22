@@ -5,7 +5,6 @@ package omics
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,9 +14,9 @@ import (
 // before calling DeleteBatch .
 //
 // DeleteBatch requires the batch to be in a terminal state: PROCESSED , FAILED ,
-// CANCELLED , or RUNS_DELETED . After DeleteBatch completes, the batch metadata
-// is no longer accessible. You cannot call GetBatch , ListRunsInBatch ,
-// DeleteRunBatch , or CancelRunBatch on a deleted batch.
+// CANCELLED , RUNS_DELETE_FAILED , or RUNS_DELETED . After DeleteBatch completes,
+// the batch metadata is no longer accessible. You cannot call GetBatch ,
+// ListRunsInBatch , DeleteRunBatch , or CancelRunBatch on a deleted batch.
 func (c *Client) DeleteBatch(ctx context.Context, params *DeleteBatchInput, optFns ...func(*Options)) (*DeleteBatchOutput, error) {
 	if params == nil {
 		params = &DeleteBatchInput{}
@@ -51,9 +50,6 @@ type DeleteBatchOutput struct {
 }
 
 func (c *Client) addOperationDeleteBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBatch{}, middleware.After)
 	if err != nil {
 		return err
@@ -62,53 +58,14 @@ func (c *Client) addOperationDeleteBatchMiddlewares(stack *middleware.Stack, opt
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBatch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -118,12 +75,6 @@ func (c *Client) addOperationDeleteBatchMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpDeleteBatchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBatch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,12 +87,6 @@ func (c *Client) addOperationDeleteBatchMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -175,12 +120,4 @@ func (m *endpointPrefix_opDeleteBatchMiddleware) HandleFinalize(ctx context.Cont
 }
 func addEndpointPrefix_opDeleteBatchMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDeleteBatchMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDeleteBatch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteBatch",
-	}
 }

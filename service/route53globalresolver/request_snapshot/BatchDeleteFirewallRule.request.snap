@@ -1,0 +1,5 @@
+POST /firewall-rules/batch-delete
+
+Content-Type: application/json
+
+{"firewallRules":[{"firewallRuleId":"__FirewallRuleId__"},{"firewallRuleId":"__FirewallRuleId__"}]}

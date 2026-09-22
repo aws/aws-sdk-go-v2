@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"associationTime":"2000-01-01T00:00:00Z","content":{"contact":{"channel":"__Channel__","connectedToSystemTime":"2000-01-01T00:00:00Z","contactArn":"__ContactArn__"}},"createdBy":{"userArn":"__UserUnionMemberUserArn__"},"lastUpdatedUser":{"userArn":"__UserUnionMemberUserArn__"},"relatedItemArn":"__RelatedItemArn__","relatedItemId":"__RelatedItemId__","tags":{"key0":"__Value__"},"type":"Contact"}

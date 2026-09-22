@@ -1,0 +1,5 @@
+POST /sequencestore/__SequenceStoreId__/upload/__UploadId__/complete
+
+Content-Type: application/json
+
+{"parts":[{"checksum":"__Checksum__","partNumber":1,"partSource":"SOURCE1"},{"checksum":"__Checksum__","partNumber":1,"partSource":"SOURCE1"}]}

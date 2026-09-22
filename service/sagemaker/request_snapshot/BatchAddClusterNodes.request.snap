@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.BatchAddClusterNodes
+
+{"ClientToken":"__ClientToken__","ClusterName":"__ClusterName__","NodesToAdd":[{"AvailabilityZones":["__Member__","__Member__"],"IncrementTargetCountBy":1,"InstanceGroupName":"__InstanceGroupName__","InstanceTypes":["ml.p4d.24xlarge","ml.p4d.24xlarge"]},{"AvailabilityZones":["__Member__","__Member__"],"IncrementTargetCountBy":1,"InstanceGroupName":"__InstanceGroupName__","InstanceTypes":["ml.p4d.24xlarge","ml.p4d.24xlarge"]}]}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteCacheParameterGroup&CacheParameterGroupName=__CacheParameterGroupName__&Version=2015-02-02

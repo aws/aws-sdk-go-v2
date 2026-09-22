@@ -4,11 +4,10 @@ package chimesdkidentity
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the details of an AppInstanceUserEndpoint . You can update the name and
@@ -51,6 +50,27 @@ type UpdateAppInstanceUserEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppInstanceUserEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppInstanceUserEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppInstanceUserEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowMessages != "" {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointRequest_AllowMessages, string(v.AllowMessages))
+	}
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointRequest_EndpointId, *v.EndpointId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointRequest_Name, *v.Name)
+	}
+}
+
 type UpdateAppInstanceUserEndpointOutput struct {
 
 	// The ARN of the AppInstanceUser .
@@ -65,77 +85,54 @@ type UpdateAppInstanceUserEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppInstanceUserEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppInstanceUserEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppInstanceUserEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointResponse_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointResponse_EndpointId, *v.EndpointId)
+	}
+}
+func (v *UpdateAppInstanceUserEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppInstanceUserEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppInstanceUserEndpointResponse_AppInstanceUserArn:
+			v.AppInstanceUserArn = new(string)
+			return d.ReadString(schemas.UpdateAppInstanceUserEndpointResponse_AppInstanceUserArn, v.AppInstanceUserArn)
+		case schemas.UpdateAppInstanceUserEndpointResponse_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.UpdateAppInstanceUserEndpointResponse_EndpointId, v.EndpointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppInstanceUserEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppInstanceUserEndpoint, schemas.UpdateAppInstanceUserEndpointRequest, schemas.UpdateAppInstanceUserEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAppInstanceUserEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppInstanceUserEndpoint, schemas.UpdateAppInstanceUserEndpointRequest, schemas.UpdateAppInstanceUserEndpointResponse), output: &UpdateAppInstanceUserEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAppInstanceUserEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAppInstanceUserEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAppInstanceUserEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAppInstanceUserEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +147,8 @@ func (c *Client) addOperationUpdateAppInstanceUserEndpointMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAppInstanceUserEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAppInstanceUserEndpoint",
-	}
 }

@@ -4,11 +4,10 @@ package freetier
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/freetier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/freetier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -32,6 +31,15 @@ func (c *Client) GetAccountPlanState(ctx context.Context, params *GetAccountPlan
 
 type GetAccountPlanStateInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetAccountPlanStateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountPlanStateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountPlanStateInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type GetAccountPlanStateOutput struct {
@@ -63,74 +71,79 @@ type GetAccountPlanStateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountPlanStateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountPlanStateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountPlanStateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetAccountPlanStateResponse_accountId, *v.AccountId)
+	}
+	if v.AccountPlanExpirationDate != nil {
+		s.WriteTime(schemas.GetAccountPlanStateResponse_accountPlanExpirationDate, *v.AccountPlanExpirationDate)
+	}
+	if v.AccountPlanRemainingCredits != nil {
+		s.WriteStruct(schemas.GetAccountPlanStateResponse_accountPlanRemainingCredits)
+		v.AccountPlanRemainingCredits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AccountPlanStatus != "" {
+		s.WriteString(schemas.GetAccountPlanStateResponse_accountPlanStatus, string(v.AccountPlanStatus))
+	}
+	if v.AccountPlanType != "" {
+		s.WriteString(schemas.GetAccountPlanStateResponse_accountPlanType, string(v.AccountPlanType))
+	}
+}
+func (v *GetAccountPlanStateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountPlanStateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountPlanStateResponse_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.GetAccountPlanStateResponse_accountId, v.AccountId)
+		case schemas.GetAccountPlanStateResponse_accountPlanExpirationDate:
+			v.AccountPlanExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.GetAccountPlanStateResponse_accountPlanExpirationDate, v.AccountPlanExpirationDate)
+		case schemas.GetAccountPlanStateResponse_accountPlanRemainingCredits:
+			v.AccountPlanRemainingCredits = &types.MonetaryAmount{}
+			return v.AccountPlanRemainingCredits.Deserialize(d)
+		case schemas.GetAccountPlanStateResponse_accountPlanStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountPlanStateResponse_accountPlanStatus, &ev); err != nil {
+				return err
+			}
+			v.AccountPlanStatus = types.AccountPlanStatus(ev)
+			return nil
+		case schemas.GetAccountPlanStateResponse_accountPlanType:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountPlanStateResponse_accountPlanType, &ev); err != nil {
+				return err
+			}
+			v.AccountPlanType = types.AccountPlanType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountPlanStateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountPlanState, schemas.GetAccountPlanStateRequest, schemas.GetAccountPlanStateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAccountPlanState{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountPlanState, schemas.GetAccountPlanStateRequest, schemas.GetAccountPlanStateResponse), output: &GetAccountPlanStateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAccountPlanState{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccountPlanState"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccountPlanState(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +158,8 @@ func (c *Client) addOperationGetAccountPlanStateMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAccountPlanState(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAccountPlanState",
-	}
 }

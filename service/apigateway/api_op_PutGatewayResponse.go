@@ -4,11 +4,10 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a customization of a GatewayResponse of a specified response type and
@@ -56,6 +55,26 @@ type PutGatewayResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutGatewayResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutGatewayResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutGatewayResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfStringToString(s, schemas.PutGatewayResponseRequest_responseParameters, v.ResponseParameters)
+	serializeMapOfStringToString(s, schemas.PutGatewayResponseRequest_responseTemplates, v.ResponseTemplates)
+	if v.ResponseType != "" {
+		s.WriteString(schemas.PutGatewayResponseRequest_responseType, string(v.ResponseType))
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.PutGatewayResponseRequest_restApiId, *v.RestApiId)
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.PutGatewayResponseRequest_statusCode, *v.StatusCode)
+	}
+}
+
 // A gateway response of a given response type and status code, with optional
 // response parameters and mapping templates.
 type PutGatewayResponseOutput struct {
@@ -85,77 +104,69 @@ type PutGatewayResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutGatewayResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutGatewayResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultResponse != false {
+		s.WriteBool(schemas.GatewayResponse_defaultResponse, v.DefaultResponse)
+	}
+	serializeMapOfStringToString(s, schemas.GatewayResponse_responseParameters, v.ResponseParameters)
+	serializeMapOfStringToString(s, schemas.GatewayResponse_responseTemplates, v.ResponseTemplates)
+	if v.ResponseType != "" {
+		s.WriteString(schemas.GatewayResponse_responseType, string(v.ResponseType))
+	}
+	if v.StatusCode != nil {
+		s.WriteString(schemas.GatewayResponse_statusCode, *v.StatusCode)
+	}
+}
+func (v *PutGatewayResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayResponse_defaultResponse:
+			return d.ReadBool(schemas.GatewayResponse_defaultResponse, &v.DefaultResponse)
+		case schemas.GatewayResponse_responseParameters:
+			return deserializeMapOfStringToString(d, schemas.GatewayResponse_responseParameters, &v.ResponseParameters)
+		case schemas.GatewayResponse_responseTemplates:
+			return deserializeMapOfStringToString(d, schemas.GatewayResponse_responseTemplates, &v.ResponseTemplates)
+		case schemas.GatewayResponse_responseType:
+			var ev string
+			if err := d.ReadString(schemas.GatewayResponse_responseType, &ev); err != nil {
+				return err
+			}
+			v.ResponseType = types.GatewayResponseType(ev)
+			return nil
+		case schemas.GatewayResponse_statusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.GatewayResponse_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGatewayResponse, schemas.PutGatewayResponseRequest, schemas.GatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutGatewayResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGatewayResponse, schemas.PutGatewayResponseRequest, schemas.GatewayResponse), output: &PutGatewayResponseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutGatewayResponse{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutGatewayResponse"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutGatewayResponseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutGatewayResponse(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +184,8 @@ func (c *Client) addOperationPutGatewayResponseMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutGatewayResponse(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutGatewayResponse",
-	}
 }

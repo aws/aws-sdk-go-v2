@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.AttachVolume
+
+{"DiskId":"__DiskId__","GatewayARN":"__GatewayARN__","NetworkInterfaceId":"__NetworkInterfaceId__","TargetName":"__TargetName__","VolumeARN":"__VolumeARN__"}

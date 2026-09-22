@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CreateInstances
+
+{"addOns":[{"addOnType":"AutoSnapshot","autoSnapshotAddOnRequest":{"snapshotTimeOfDay":"__SnapshotTimeOfDay__"},"stopInstanceOnIdleRequest":{"duration":"__Duration__","threshold":"__Threshold__"}},{"addOnType":"AutoSnapshot","autoSnapshotAddOnRequest":{"snapshotTimeOfDay":"__SnapshotTimeOfDay__"},"stopInstanceOnIdleRequest":{"duration":"__Duration__","threshold":"__Threshold__"}}],"availabilityZone":"__AvailabilityZone__","blueprintId":"__BlueprintId__","bundleId":"__BundleId__","customImageName":"__CustomImageName__","instanceNames":["__Member__","__Member__"],"ipAddressType":"dualstack","keyPairName":"__KeyPairName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"userData":"__UserData__"}

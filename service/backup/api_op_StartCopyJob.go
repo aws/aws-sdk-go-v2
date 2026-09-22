@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -90,6 +90,35 @@ type StartCopyJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCopyJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCopyJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCopyJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationBackupVaultArn != nil {
+		s.WriteString(schemas.StartCopyJobInput_DestinationBackupVaultArn, *v.DestinationBackupVaultArn)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.StartCopyJobInput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartCopyJobInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.StartCopyJobInput_Lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.StartCopyJobInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.SourceBackupVaultName != nil {
+		s.WriteString(schemas.StartCopyJobInput_SourceBackupVaultName, *v.SourceBackupVaultName)
+	}
+}
+
 type StartCopyJobOutput struct {
 
 	// Uniquely identifies a copy job.
@@ -111,65 +140,53 @@ type StartCopyJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCopyJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCopyJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCopyJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyJobId != nil {
+		s.WriteString(schemas.StartCopyJobOutput_CopyJobId, *v.CopyJobId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.StartCopyJobOutput_CreationDate, *v.CreationDate)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.StartCopyJobOutput_IsParent, v.IsParent)
+	}
+}
+func (v *StartCopyJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCopyJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartCopyJobOutput_CopyJobId:
+			v.CopyJobId = new(string)
+			return d.ReadString(schemas.StartCopyJobOutput_CopyJobId, v.CopyJobId)
+		case schemas.StartCopyJobOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.StartCopyJobOutput_CreationDate, v.CreationDate)
+		case schemas.StartCopyJobOutput_IsParent:
+			return d.ReadBool(schemas.StartCopyJobOutput_IsParent, &v.IsParent)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCopyJob, schemas.StartCopyJobInput, schemas.StartCopyJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCopyJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCopyJob, schemas.StartCopyJobInput, schemas.StartCopyJobOutput), output: &StartCopyJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCopyJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartCopyJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -179,12 +196,6 @@ func (c *Client) addOperationStartCopyJobMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpStartCopyJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartCopyJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,12 +208,6 @@ func (c *Client) addOperationStartCopyJobMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -242,12 +247,4 @@ func (m *idempotencyToken_initializeOpStartCopyJob) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opStartCopyJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartCopyJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartCopyJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartCopyJob",
-	}
 }

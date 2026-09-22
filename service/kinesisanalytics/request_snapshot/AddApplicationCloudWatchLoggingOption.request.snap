@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20150814.AddApplicationCloudWatchLoggingOption
+
+{"ApplicationName":"__ApplicationName__","CloudWatchLoggingOption":{"LogStreamARN":"__LogStreamARN__","RoleARN":"__RoleARN__"},"CurrentApplicationVersionId":1}

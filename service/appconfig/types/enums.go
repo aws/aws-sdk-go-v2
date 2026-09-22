@@ -67,6 +67,25 @@ func (BytesMeasure) Values() []BytesMeasure {
 	}
 }
 
+type DeleteType string
+
+// Enum values for DeleteType
+const (
+	DeleteTypeArchive DeleteType = "ARCHIVE"
+	DeleteTypeDestroy DeleteType = "DESTROY"
+)
+
+// Values returns all known values for DeleteType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeleteType) Values() []DeleteType {
+	return []DeleteType{
+		"ARCHIVE",
+		"DESTROY",
+	}
+}
+
 type DeletionProtectionCheck string
 
 // Enum values for DeletionProtectionCheck
@@ -146,6 +165,25 @@ func (DeploymentState) Values() []DeploymentState {
 	}
 }
 
+type DeploymentType string
+
+// Enum values for DeploymentType
+const (
+	DeploymentTypeUser    DeploymentType = "USER"
+	DeploymentTypeManaged DeploymentType = "MANAGED"
+)
+
+// Values returns all known values for DeploymentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeploymentType) Values() []DeploymentType {
+	return []DeploymentType{
+		"USER",
+		"MANAGED",
+	}
+}
+
 type EnvironmentState string
 
 // Enum values for EnvironmentState
@@ -168,6 +206,69 @@ func (EnvironmentState) Values() []EnvironmentState {
 		"ROLLING_BACK",
 		"ROLLED_BACK",
 		"REVERTED",
+	}
+}
+
+type ExperimentDefinitionStatus string
+
+// Enum values for ExperimentDefinitionStatus
+const (
+	ExperimentDefinitionStatusActive   ExperimentDefinitionStatus = "ACTIVE"
+	ExperimentDefinitionStatusIdle     ExperimentDefinitionStatus = "IDLE"
+	ExperimentDefinitionStatusArchived ExperimentDefinitionStatus = "ARCHIVED"
+)
+
+// Values returns all known values for ExperimentDefinitionStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExperimentDefinitionStatus) Values() []ExperimentDefinitionStatus {
+	return []ExperimentDefinitionStatus{
+		"ACTIVE",
+		"IDLE",
+		"ARCHIVED",
+	}
+}
+
+type ExperimentRunEventType string
+
+// Enum values for ExperimentRunEventType
+const (
+	ExperimentRunEventTypeRunStarted       ExperimentRunEventType = "RUN_STARTED"
+	ExperimentRunEventTypeExposureUpdated  ExperimentRunEventType = "EXPOSURE_UPDATED"
+	ExperimentRunEventTypeOverridesUpdated ExperimentRunEventType = "OVERRIDES_UPDATED"
+	ExperimentRunEventTypeRunStopped       ExperimentRunEventType = "RUN_STOPPED"
+)
+
+// Values returns all known values for ExperimentRunEventType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExperimentRunEventType) Values() []ExperimentRunEventType {
+	return []ExperimentRunEventType{
+		"RUN_STARTED",
+		"EXPOSURE_UPDATED",
+		"OVERRIDES_UPDATED",
+		"RUN_STOPPED",
+	}
+}
+
+type ExperimentRunStatus string
+
+// Enum values for ExperimentRunStatus
+const (
+	ExperimentRunStatusRunning ExperimentRunStatus = "RUNNING"
+	ExperimentRunStatusDone    ExperimentRunStatus = "DONE"
+)
+
+// Values returns all known values for ExperimentRunStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExperimentRunStatus) Values() []ExperimentRunStatus {
+	return []ExperimentRunStatus{
+		"RUNNING",
+		"DONE",
 	}
 }
 

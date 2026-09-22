@@ -98,6 +98,17 @@ type DefaultApplication struct {
 	noSmithyDocumentSerde
 }
 
+// The virtual monitor settings for a stream session, including the resolution. If
+// not specified, the stream session uses the default resolution of 1920 × 1080.
+type DisplayConfiguration struct {
+
+	// The resolution to apply to the stream session's virtual monitor. When
+	// specified, this value overrides the default resolution of 1920 × 1080.
+	Resolution *Resolution
+
+	noSmithyDocumentSerde
+}
+
 // Provides details about the stream session's exported files.
 type ExportFilesMetadata struct {
 
@@ -310,6 +321,26 @@ type ReplicationStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the width and height dimensions, in pixels, that define the resolution
+// of the stream session's virtual monitor. The total number of pixels (width ×
+// height) must not exceed 2,073,600 (equivalent to 1920 × 1080).
+type Resolution struct {
+
+	// The height of the stream session's virtual monitor, in pixels. The value must
+	// be an even number.
+	//
+	// This member is required.
+	Height *int32
+
+	// The width of the stream session's virtual monitor, in pixels. The value must be
+	// an even number.
+	//
+	// This member is required.
+	Width *int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration settings that identify the operating system for an application
 // resource. This can also include a compatibility layer and other drivers.
 //
@@ -342,6 +373,62 @@ type RuntimeEnvironment struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a shader cache associated with an Amazon GameLift Streams application.
+type ShaderCacheSummary struct {
+
+	// An [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example ARN:
+	// arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	//
+	// This member is required.
+	ApplicationArn *string
+
+	// A unique identifier for the shader cache, formatted as a 32-character
+	// hexadecimal string. Format is 1271e693c50b940e228582f1ccdd4e27 .
+	//
+	// This member is required.
+	Identifier *string
+
+	// The stream groups compatible with this shader cache. Compatibility is based on
+	// GPU type and GPU driver version. For more information on shader cache
+	// compatibility, see [Shader caches]in the Amazon GameLift Streams Developer Guide.
+	//
+	// This value is a set of [Amazon Resource Names (ARNs)] that uniquely identify stream group resources. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	//
+	// [Shader caches]: https://docs.aws.amazon.com/gameliftstreams/latest/developerguide/shader-caches.html
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	AssociatedStreamGroups []string
+
+	// A timestamp that indicates when this resource was last updated. Timestamps are
+	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
+	LastUpdatedAt *time.Time
+
+	// The current status of the shader cache. Possible statuses include the following:
+	//
+	//   - INITIALIZED : Amazon GameLift Streams received the request and is preparing
+	//   the shader cache.
+	//
+	//   - PROCESSING : Amazon GameLift Streams is replicating the shader cache to the
+	//   streaming locations in the associated stream groups.
+	//
+	//   - READY : The shader cache is replicated and available for use in stream
+	//   sessions.
+	//
+	//   - DELETING : Amazon GameLift Streams is deleting the shader cache.
+	//
+	//   - ERROR : An error occurred during shader cache processing. Create a new
+	//   shader cache to try again.
+	Status ShaderCacheStatus
+
+	// The total storage used by all compiled shader files in this shader cache, in
+	// bytes.
+	StorageBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -419,7 +506,7 @@ type StreamGroupSummary struct {
 	//   scene complexity which require maximum resources. Runs applications on Microsoft
 	//   Windows Server 2022 Base and supports DirectX 12. Compatible with Unreal Engine
 	//   versions up through 5.6, 32 and 64-bit applications, and anti-cheat technology.
-	//   Uses NVIDIA L4 Tensor Core GPU.
+	//   Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -430,8 +517,8 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen6n_pro (NVIDIA, pro) Supports applications with extremely high 3D scene
-	//   complexity which require maximum resources. Uses dedicated NVIDIA L4 Tensor Core
-	//   GPU.
+	//   complexity which require maximum resources. Powered by NVIDIA L4 Tensor Core
+	//   GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -444,7 +531,7 @@ type StreamGroupSummary struct {
 	//   - gen6n_ultra_win2022 (NVIDIA, ultra) Supports applications with high 3D scene
 	//   complexity. Runs applications on Microsoft Windows Server 2022 Base and supports
 	//   DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32 and 64-bit
-	//   applications, and anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+	//   applications, and anti-cheat technology. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -455,7 +542,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen6n_ultra (NVIDIA, ultra) Supports applications with high 3D scene
-	//   complexity. Uses dedicated NVIDIA L4 Tensor Core GPU.
+	//   complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -466,7 +553,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen6n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -477,7 +564,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen6n_medium (NVIDIA, medium) Supports applications with moderate 3D scene
-	//   complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//   complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -488,7 +575,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports up to 4 concurrent stream sessions
 	//
 	//   - gen6n_small (NVIDIA, small) Supports applications with lightweight 3D scene
-	//   complexity and low CPU usage. Uses NVIDIA L4 Tensor Core GPU.
+	//   complexity and low CPU usage. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -499,7 +586,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports up to 12 concurrent stream sessions
 	//
 	//   - gen6n_medium_win2022 (NVIDIA, medium) Supports applications with low 3D
-	//   scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -510,7 +597,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen6n_small_win2022 (NVIDIA, small) Supports applications with low 3D scene
-	//   complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//   complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -520,11 +607,37 @@ type StreamGroupSummary struct {
 	//
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
+	//   - gen6e_pro_win2022 (NVIDIA, pro) Supports applications with extremely high 3D
+	//   scene complexity which require maximum resources. Runs applications on Microsoft
+	//   Windows Server 2022 Base and supports DirectX 12. Compatible with Unreal Engine
+	//   versions up through 5.6, 32 and 64-bit applications, and anti-cheat technology.
+	//   Powered by NVIDIA L40S Tensor Core GPUs.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 16 vCPUs, 128 GB RAM, 48 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6e_pro (NVIDIA, pro) Supports applications with extremely high 3D scene
+	//   complexity which require maximum resources. Powered by NVIDIA L40S Tensor Core
+	//   GPUs.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 16 vCPUs, 128 GB RAM, 48 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
 	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32
-	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor Core
-	//   GPU.
+	//   and 64-bit applications, and anti-cheat technology. Powered by NVIDIA A10G
+	//   Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -535,7 +648,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen5n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA A10G Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA A10G Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -546,7 +659,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen5n_ultra (NVIDIA, ultra) Supports applications with extremely high 3D
-	//   scene complexity. Uses dedicated NVIDIA A10G Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA A10G Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -559,8 +672,8 @@ type StreamGroupSummary struct {
 	//   - gen4n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
 	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32
-	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor Core
-	//   GPU.
+	//   and 64-bit applications, and anti-cheat technology. Powered by NVIDIA T4 Tensor
+	//   Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -571,7 +684,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen4n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA T4 Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA T4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -582,7 +695,7 @@ type StreamGroupSummary struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen4n_ultra (NVIDIA, ultra) Supports applications with high 3D scene
-	//   complexity. Uses dedicated NVIDIA T4 Tensor Core GPU.
+	//   complexity. Powered by NVIDIA T4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -635,6 +748,11 @@ type StreamSessionSummary struct {
 
 	// The data transfer protocol in use with the stream session.
 	Protocol Protocol
+
+	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
+	// GameLift Streams assumes on behalf of your application during the stream
+	// session.
+	RoleArn *string
 
 	// The current status of the stream session resource.
 	//
@@ -712,6 +830,104 @@ type StreamSessionSummary struct {
 
 	//  An opaque, unique identifier for an end-user, defined by the developer.
 	UserId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a stream URL. This is a summary view that omits the full
+// configuration, such as launch arguments and display settings. To retrieve the
+// complete configuration, call [GetStreamUrl].
+//
+// [GetStreamUrl]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamUrl.html
+type StreamUrlSummary struct {
+
+	// The [Amazon Resource Name (ARN)] that uniquely identifies the stream URL across all Amazon Web Services
+	// Regions. Format is arn:aws:gameliftstreams:[AWS Region]:[AWS
+	// account]:streamurl/[stream group resource ID]/[stream URL resource ID] .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	//
+	// This member is required.
+	Arn *string
+
+	// The application that runs in the stream sessions.
+	//
+	// This value is an [Amazon Resource Name (ARN)] that uniquely identifies the application resource. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:application/a-9ZY8X7Wv6 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	ApplicationArn *string
+
+	// A timestamp that indicates when this resource was created. Timestamps are
+	// expressed using in ISO8601 format, such as: 2022-12-27T22:29:40+00:00 (UTC).
+	CreatedAt *time.Time
+
+	// The descriptive label for the stream URL.
+	Description *string
+
+	// The date and time when the stream URL expires and stops accepting new stream
+	// sessions. Timestamps are expressed using in ISO8601 format, such as:
+	// 2022-12-27T22:29:40+00:00 (UTC).
+	ExpiresAt *time.Time
+
+	// The number of times the stream URL can still be used to start a stream session.
+	RemainingUses *int32
+
+	// The maximum length of time, in seconds, that a stream session started from this
+	// stream URL can run.
+	SessionLengthSeconds *int32
+
+	// The current status of the stream URL. Possible statuses include the following:
+	//
+	//   - ACTIVE : The stream URL is valid and can start stream sessions.
+	//
+	//   - EXPIRED : The stream URL has passed its expiration time and can no longer
+	//   start stream sessions.
+	//
+	//   - REVOKED : The stream URL was revoked and can no longer start stream sessions.
+	//
+	//   - LIMIT_REACHED : The stream URL has been used the maximum number of times and
+	//   can no longer start stream sessions.
+	Status StreamUrlStatus
+
+	// Additional information about why the stream URL is in its current status.
+	// Amazon GameLift Streams populates this value when the status is REVOKED .
+	// Possible values include the following:
+	//
+	//   - userRevoked : You revoked the stream URL.
+	//
+	//   - revokedAndTerminatingSessions : You revoked the stream URL and Amazon
+	//   GameLift Streams is ending its running stream sessions.
+	//
+	//   - revokedAndSessionsTerminated : You revoked the stream URL and its running
+	//   stream sessions have ended.
+	//
+	//   - streamGroupDeleted : The stream group was deleted, which revoked the stream
+	//   URL.
+	//
+	//   - applicationDeleted : The application was deleted, which revoked the stream
+	//   URL.
+	StatusReason StreamUrlStatusReason
+
+	// The stream group that runs the stream sessions.
+	//
+	// This value is an [Amazon Resource Name (ARN)] that uniquely identifies the stream group resource. Example
+	// ARN: arn:aws:gameliftstreams:us-west-2:111122223333:streamgroup/sg-1AB2C3De4 .
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	StreamGroupArn *string
+
+	// The shareable stream URL. Distribute this URL to end users so that they can
+	// start and play a stream session in a hosted web player. Treat the stream URL as
+	// a secret. Anyone who has it can start a stream session until the stream URL
+	// expires, is revoked, or reaches its usage limit.
+	StreamUrl *string
+
+	// The unique identifier for the stream URL resource, for example su-1AB2C3De4 .
+	StreamUrlId *string
+
+	// The maximum number of times the stream URL can start a stream session.
+	UsageLimit *int32
 
 	noSmithyDocumentSerde
 }

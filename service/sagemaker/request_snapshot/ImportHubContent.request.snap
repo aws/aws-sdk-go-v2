@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ImportHubContent
+
+{"DocumentSchemaVersion":"__DocumentSchemaVersion__","HubContentDescription":"__HubContentDescription__","HubContentDisplayName":"__HubContentDisplayName__","HubContentDocument":"__HubContentDocument__","HubContentMarkdown":"__HubContentMarkdown__","HubContentName":"__HubContentName__","HubContentSearchKeywords":["__Member__","__Member__"],"HubContentType":"Model","HubContentVersion":"__HubContentVersion__","HubName":"__HubName__","SupportStatus":"Supported","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

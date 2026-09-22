@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.ListEventBuses
+
+{"EventBuses":[{"Arn":"__Arn__","CreationTime":946684800,"Description":"__Description__","LastModifiedTime":946684800,"Name":"__Name__","Policy":"__Policy__"},{"Arn":"__Arn__","CreationTime":946684800,"Description":"__Description__","LastModifiedTime":946684800,"Name":"__Name__","Policy":"__Policy__"}],"NextToken":"__NextToken__"}

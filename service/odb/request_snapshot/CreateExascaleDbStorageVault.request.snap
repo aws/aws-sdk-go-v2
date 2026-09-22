@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.CreateExascaleDbStorageVault
+
+{"additionalFlashCacheInPercent":1,"autoscaleLimitInGBs":1,"availabilityZone":"__AvailabilityZone__","availabilityZoneId":"__AvailabilityZoneId__","clientToken":"__ClientToken__","description":"__Description__","displayName":"__DisplayName__","highCapacityDatabaseStorageTotalSizeInGBs":1,"isAutoscaleEnabled":true,"tags":{"key0":"__Value__"},"timeZone":"__TimeZone__"}

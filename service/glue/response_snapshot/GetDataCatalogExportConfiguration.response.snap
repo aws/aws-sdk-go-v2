@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetDataCatalogExportConfiguration
+
+{"CreatedAt":946684800,"EncryptionConfiguration":{"KmsKeyArn":"__KmsKeyArn__","SseAlgorithm":"__SseAlgorithm__"},"ExportSetting":"ENABLED","S3TableBucketArn":"__S3TableBucketArn__","Status":"ENABLING","UpdatedAt":946684800}

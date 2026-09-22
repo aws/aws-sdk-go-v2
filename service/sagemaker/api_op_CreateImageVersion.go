@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a version of the SageMaker AI image specified by ImageName . The version
@@ -100,6 +100,46 @@ type CreateImageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSageMakerImageVersionAliases(s, schemas.CreateImageVersionRequest_Aliases, v.Aliases)
+	if v.BaseImage != nil {
+		s.WriteString(schemas.CreateImageVersionRequest_BaseImage, *v.BaseImage)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateImageVersionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Horovod != nil {
+		s.WriteBool(schemas.CreateImageVersionRequest_Horovod, *v.Horovod)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.CreateImageVersionRequest_ImageName, *v.ImageName)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.CreateImageVersionRequest_JobType, string(v.JobType))
+	}
+	if v.MLFramework != nil {
+		s.WriteString(schemas.CreateImageVersionRequest_MLFramework, *v.MLFramework)
+	}
+	if v.Processor != "" {
+		s.WriteString(schemas.CreateImageVersionRequest_Processor, string(v.Processor))
+	}
+	if v.ProgrammingLang != nil {
+		s.WriteString(schemas.CreateImageVersionRequest_ProgrammingLang, *v.ProgrammingLang)
+	}
+	if v.ReleaseNotes != nil {
+		s.WriteString(schemas.CreateImageVersionRequest_ReleaseNotes, *v.ReleaseNotes)
+	}
+	if v.VendorGuidance != "" {
+		s.WriteString(schemas.CreateImageVersionRequest_VendorGuidance, string(v.VendorGuidance))
+	}
+}
+
 type CreateImageVersionOutput struct {
 
 	// The ARN of the image version.
@@ -111,65 +151,42 @@ type CreateImageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateImageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateImageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateImageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageVersionArn != nil {
+		s.WriteString(schemas.CreateImageVersionResponse_ImageVersionArn, *v.ImageVersionArn)
+	}
+}
+func (v *CreateImageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateImageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateImageVersionResponse_ImageVersionArn:
+			v.ImageVersionArn = new(string)
+			return d.ReadString(schemas.CreateImageVersionResponse_ImageVersionArn, v.ImageVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImageVersion, schemas.CreateImageVersionRequest, schemas.CreateImageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateImageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateImageVersion, schemas.CreateImageVersionRequest, schemas.CreateImageVersionResponse), output: &CreateImageVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateImageVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateImageVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -179,12 +196,6 @@ func (c *Client) addOperationCreateImageVersionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateImageVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImageVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,12 +208,6 @@ func (c *Client) addOperationCreateImageVersionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -242,12 +247,4 @@ func (m *idempotencyToken_initializeOpCreateImageVersion) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateImageVersionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateImageVersion{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateImageVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateImageVersion",
-	}
 }

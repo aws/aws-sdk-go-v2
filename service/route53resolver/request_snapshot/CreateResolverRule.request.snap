@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.CreateResolverRule
+
+{"CreatorRequestId":"__CreatorRequestId__","DelegationRecord":"__DelegationRecord__","DomainName":"__DomainName__","Name":"__Name__","ResolverEndpointId":"__ResolverEndpointId__","RuleType":"FORWARD","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TargetIps":[{"Ip":"__Ip__","Ipv6":"__Ipv6__","Port":1,"Protocol":"DoH","ServerNameIndication":"__ServerNameIndication__"},{"Ip":"__Ip__","Ipv6":"__Ipv6__","Port":1,"Protocol":"DoH","ServerNameIndication":"__ServerNameIndication__"}]}

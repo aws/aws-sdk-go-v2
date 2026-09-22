@@ -4,11 +4,8 @@ package elasticache
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Valkey or Redis OSS (cluster mode disabled) or a Valkey or Redis OSS
@@ -88,15 +85,13 @@ type CreateReplicationGroupInput struct {
 	// This member is required.
 	ReplicationGroupId *string
 
-	// A flag that enables encryption at rest when set to true .
+	// A flag that enables encryption at-rest on the replication group when set to true
+	// . In some cases, encryption at-rest may be enabled even when this value is
+	// false. Use StorageEncryptionType to view the effective encryption state of a
+	// cluster.
 	//
 	// You cannot modify the value of AtRestEncryptionEnabled after the replication
-	// group is created. To enable encryption at rest on a replication group you must
-	// set AtRestEncryptionEnabled to true when you create the replication group.
-	//
-	// Required: Only available when creating a replication group in an Amazon VPC
-	// using Valkey 7.2 and later, Redis OSS version 3.2.6 , or Redis OSS 4.x and
-	// later.
+	// group is created.
 	//
 	// Default: true when using Valkey, false when using Redis OSS
 	AtRestEncryptionEnabled *bool
@@ -277,6 +272,15 @@ type CreateReplicationGroupInput struct {
 	//
 	// [Data tiering]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/data-tiering.html
 	DataTieringEnabled *bool
+
+	// Specifies the durability setting for the replication group. When set to default
+	// , the service determines the effective durability based on the engine version,
+	// cluster mode, and other parameters. The resolved setting is reflected in the
+	// EffectiveDurability property of the replication group. For more information, see [Durability]
+	// .
+	//
+	// [Durability]: https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/durability.html
+	Durability types.Durability
 
 	// The name of the cache engine to be used for the clusters in this replication
 	// group. The value must be set to valkey or redis .
@@ -520,9 +524,6 @@ type CreateReplicationGroupOutput struct {
 }
 
 func (c *Client) addOperationCreateReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateReplicationGroup{}, middleware.After)
 	if err != nil {
 		return err
@@ -531,65 +532,20 @@ func (c *Client) addOperationCreateReplicationGroupMiddlewares(stack *middleware
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateReplicationGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateReplicationGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReplicationGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -604,22 +560,8 @@ func (c *Client) addOperationCreateReplicationGroupMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateReplicationGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateReplicationGroup",
-	}
 }

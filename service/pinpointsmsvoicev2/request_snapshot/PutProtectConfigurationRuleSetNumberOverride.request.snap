@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.PutProtectConfigurationRuleSetNumberOverride
+
+{"Action":"ALLOW","ClientToken":"__ClientToken__","DestinationPhoneNumber":"__DestinationPhoneNumber__","ExpirationTimestamp":946684800,"ProtectConfigurationId":"__ProtectConfigurationId__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DisassociateOriginationIdentity
+
+{"ClientToken":"__ClientToken__","IsoCountryCode":"__IsoCountryCode__","OriginationIdentity":"__OriginationIdentity__","PoolId":"__PoolId__"}

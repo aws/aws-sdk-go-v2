@@ -4,11 +4,10 @@ package wafv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Defines the versions of your managed rule set that you are offering to the
@@ -99,6 +98,31 @@ type PutManagedRuleSetVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutManagedRuleSetVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutManagedRuleSetVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutManagedRuleSetVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_Id, *v.Id)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_LockToken, *v.LockToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_Name, *v.Name)
+	}
+	if v.RecommendedVersion != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_RecommendedVersion, *v.RecommendedVersion)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.PutManagedRuleSetVersionsRequest_Scope, string(v.Scope))
+	}
+	serializeVersionsToPublish(s, schemas.PutManagedRuleSetVersionsRequest_VersionsToPublish, v.VersionsToPublish)
+}
+
 type PutManagedRuleSetVersionsOutput struct {
 
 	// A token used for optimistic locking. WAF returns a token to your get and list
@@ -116,77 +140,48 @@ type PutManagedRuleSetVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutManagedRuleSetVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutManagedRuleSetVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutManagedRuleSetVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextLockToken != nil {
+		s.WriteString(schemas.PutManagedRuleSetVersionsResponse_NextLockToken, *v.NextLockToken)
+	}
+}
+func (v *PutManagedRuleSetVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutManagedRuleSetVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutManagedRuleSetVersionsResponse_NextLockToken:
+			v.NextLockToken = new(string)
+			return d.ReadString(schemas.PutManagedRuleSetVersionsResponse_NextLockToken, v.NextLockToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutManagedRuleSetVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutManagedRuleSetVersions, schemas.PutManagedRuleSetVersionsRequest, schemas.PutManagedRuleSetVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutManagedRuleSetVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutManagedRuleSetVersions, schemas.PutManagedRuleSetVersionsRequest, schemas.PutManagedRuleSetVersionsResponse), output: &PutManagedRuleSetVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutManagedRuleSetVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutManagedRuleSetVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutManagedRuleSetVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutManagedRuleSetVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,22 +196,8 @@ func (c *Client) addOperationPutManagedRuleSetVersionsMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutManagedRuleSetVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutManagedRuleSetVersions",
-	}
 }

@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this operation to update your workforce. You can use this operation to
@@ -96,6 +95,36 @@ type UpdateWorkforceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkforceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkforceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkforceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.UpdateWorkforceRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.OidcConfig != nil {
+		s.WriteStruct(schemas.UpdateWorkforceRequest_OidcConfig)
+		v.OidcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceIpConfig != nil {
+		s.WriteStruct(schemas.UpdateWorkforceRequest_SourceIpConfig)
+		v.SourceIpConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkforceName != nil {
+		s.WriteString(schemas.UpdateWorkforceRequest_WorkforceName, *v.WorkforceName)
+	}
+	if v.WorkforceVpcConfig != nil {
+		s.WriteStruct(schemas.UpdateWorkforceRequest_WorkforceVpcConfig)
+		v.WorkforceVpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateWorkforceOutput struct {
 
 	// A single private workforce. You can create one private work force in each
@@ -114,77 +143,50 @@ type UpdateWorkforceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkforceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkforceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkforceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workforce != nil {
+		s.WriteStruct(schemas.UpdateWorkforceResponse_Workforce)
+		v.Workforce.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkforceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkforceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkforceResponse_Workforce:
+			v.Workforce = &types.Workforce{}
+			return v.Workforce.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkforce, schemas.UpdateWorkforceRequest, schemas.UpdateWorkforceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkforce{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkforce, schemas.UpdateWorkforceRequest, schemas.UpdateWorkforceResponse), output: &UpdateWorkforceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWorkforce{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkforce"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateWorkforceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkforce(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +201,8 @@ func (c *Client) addOperationUpdateWorkforceMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateWorkforce(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWorkforce",
-	}
 }

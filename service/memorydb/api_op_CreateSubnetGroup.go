@@ -4,11 +4,10 @@ package memorydb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a subnet group. A subnet group is a collection of subnets (typically
@@ -57,6 +56,23 @@ type CreateSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubnetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubnetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubnetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSubnetGroupRequest_Description, *v.Description)
+	}
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.CreateSubnetGroupRequest_SubnetGroupName, *v.SubnetGroupName)
+	}
+	serializeSubnetIdentifierList(s, schemas.CreateSubnetGroupRequest_SubnetIds, v.SubnetIds)
+	serializeTagList(s, schemas.CreateSubnetGroupRequest_Tags, v.Tags)
+}
+
 type CreateSubnetGroupOutput struct {
 
 	// The newly-created subnet group.
@@ -68,77 +84,50 @@ type CreateSubnetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubnetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubnetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubnetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubnetGroup != nil {
+		s.WriteStruct(schemas.CreateSubnetGroupResponse_SubnetGroup)
+		v.SubnetGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSubnetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSubnetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSubnetGroupResponse_SubnetGroup:
+			v.SubnetGroup = &types.SubnetGroup{}
+			return v.SubnetGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.CreateSubnetGroupRequest, schemas.CreateSubnetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubnetGroup, schemas.CreateSubnetGroupRequest, schemas.CreateSubnetGroupResponse), output: &CreateSubnetGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSubnetGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSubnetGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSubnetGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSubnetGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +142,8 @@ func (c *Client) addOperationCreateSubnetGroupMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSubnetGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSubnetGroup",
-	}
 }

@@ -1,0 +1,8 @@
+PUT /?metadataInventoryTable=
+
+Content-Md5: __ContentMD5__
+Content-Type: application/xml
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+
+<InventoryTableConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><ConfigurationState>ENABLED</ConfigurationState><EncryptionConfiguration><KmsKeyArn>__KmsKeyArn__</KmsKeyArn><SseAlgorithm>aws:kms</SseAlgorithm></EncryptionConfiguration></InventoryTableConfiguration>

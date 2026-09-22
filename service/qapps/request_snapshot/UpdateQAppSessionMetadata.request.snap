@@ -1,0 +1,6 @@
+POST /runtime.updateQAppSessionMetadata
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"sessionId":"__SessionId__","sessionName":"__SessionName__","sharingConfiguration":{"acceptResponses":true,"enabled":true,"revealCards":true}}

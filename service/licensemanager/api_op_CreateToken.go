@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a long-lived token.
@@ -58,6 +57,26 @@ type CreateTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTokenRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ExpirationInDays != nil {
+		s.WriteInt32(schemas.CreateTokenRequest_ExpirationInDays, *v.ExpirationInDays)
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CreateTokenRequest_LicenseArn, *v.LicenseArn)
+	}
+	serializeArnList(s, schemas.CreateTokenRequest_RoleArns, v.RoleArns)
+	serializeMaxSize3StringList(s, schemas.CreateTokenRequest_TokenProperties, v.TokenProperties)
+}
+
 type CreateTokenOutput struct {
 
 	// Refresh token, encoded as a JWT token.
@@ -75,77 +94,64 @@ type CreateTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Token != nil {
+		s.WriteString(schemas.CreateTokenResponse_Token, *v.Token)
+	}
+	if v.TokenId != nil {
+		s.WriteString(schemas.CreateTokenResponse_TokenId, *v.TokenId)
+	}
+	if v.TokenType != "" {
+		s.WriteString(schemas.CreateTokenResponse_TokenType, string(v.TokenType))
+	}
+}
+func (v *CreateTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTokenResponse_Token:
+			v.Token = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_Token, v.Token)
+		case schemas.CreateTokenResponse_TokenId:
+			v.TokenId = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_TokenId, v.TokenId)
+		case schemas.CreateTokenResponse_TokenType:
+			var ev string
+			if err := d.ReadString(schemas.CreateTokenResponse_TokenType, &ev); err != nil {
+				return err
+			}
+			v.TokenType = types.TokenType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateToken, schemas.CreateTokenRequest, schemas.CreateTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateToken, schemas.CreateTokenRequest, schemas.CreateTokenResponse), output: &CreateTokenOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateToken{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateToken"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTokenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateToken(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +166,8 @@ func (c *Client) addOperationCreateTokenMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateToken(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateToken",
-	}
 }

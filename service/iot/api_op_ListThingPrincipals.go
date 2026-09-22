@@ -5,9 +5,9 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the principals associated with the specified thing. A principal can be
@@ -50,6 +50,24 @@ type ListThingPrincipalsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingPrincipalsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingPrincipalsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingPrincipalsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThingPrincipalsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingPrincipalsRequest_nextToken, *v.NextToken)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListThingPrincipalsRequest_thingName, *v.ThingName)
+	}
+}
+
 // The output from the ListThingPrincipals operation.
 type ListThingPrincipalsOutput struct {
 
@@ -66,77 +84,51 @@ type ListThingPrincipalsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingPrincipalsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingPrincipalsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingPrincipalsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingPrincipalsResponse_nextToken, *v.NextToken)
+	}
+	serializePrincipals(s, schemas.ListThingPrincipalsResponse_principals, v.Principals)
+}
+func (v *ListThingPrincipalsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThingPrincipalsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThingPrincipalsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThingPrincipalsResponse_nextToken, v.NextToken)
+		case schemas.ListThingPrincipalsResponse_principals:
+			return deserializePrincipals(d, schemas.ListThingPrincipalsResponse_principals, &v.Principals)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThingPrincipalsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingPrincipals, schemas.ListThingPrincipalsRequest, schemas.ListThingPrincipalsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThingPrincipals{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingPrincipals, schemas.ListThingPrincipalsRequest, schemas.ListThingPrincipalsResponse), output: &ListThingPrincipalsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThingPrincipals{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListThingPrincipals"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListThingPrincipalsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListThingPrincipals(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +141,6 @@ func (c *Client) addOperationListThingPrincipalsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +242,3 @@ type ListThingPrincipalsAPIClient interface {
 }
 
 var _ ListThingPrincipalsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListThingPrincipals(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListThingPrincipals",
-	}
-}

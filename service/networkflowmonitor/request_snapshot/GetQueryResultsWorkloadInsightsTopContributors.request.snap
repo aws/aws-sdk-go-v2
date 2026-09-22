@@ -1,0 +1,3 @@
+GET /workloadInsights/__ScopeId__/topContributorsQueries/__QueryId__/results?maxResults=1&nextToken=__NextToken__
+
+

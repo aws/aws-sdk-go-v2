@@ -4,11 +4,10 @@ package ssmsap
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Request is an operation to stop an application.
@@ -50,6 +49,24 @@ type StopApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.StopApplicationInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.IncludeEc2InstanceShutdown != nil {
+		s.WriteBool(schemas.StopApplicationInput_IncludeEc2InstanceShutdown, *v.IncludeEc2InstanceShutdown)
+	}
+	if v.StopConnectedEntity != "" {
+		s.WriteString(schemas.StopApplicationInput_StopConnectedEntity, string(v.StopConnectedEntity))
+	}
+}
+
 type StopApplicationOutput struct {
 
 	// The ID of the operation.
@@ -61,77 +78,48 @@ type StopApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopApplicationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.StopApplicationOutput_OperationId, *v.OperationId)
+	}
+}
+func (v *StopApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopApplicationOutput_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.StopApplicationOutput_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopApplication, schemas.StopApplicationInput, schemas.StopApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopApplication, schemas.StopApplicationInput, schemas.StopApplicationOutput), output: &StopApplicationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopApplication{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +134,8 @@ func (c *Client) addOperationStopApplicationMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopApplication",
-	}
 }

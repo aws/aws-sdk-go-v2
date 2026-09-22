@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/policies/managed/DOMAIN_UNIT/__EntityIdentifier__/grants?maxResults=1&nextToken=__NextToken__&policyType=CREATE_DOMAIN_UNIT
+
+

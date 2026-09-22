@@ -4,11 +4,10 @@ package kendra
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeIndexInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeIndexRequest_Id, *v.Id)
+	}
 }
 
 type DescribeIndexOutput struct {
@@ -111,77 +122,152 @@ type DescribeIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityUnits != nil {
+		s.WriteStruct(schemas.DescribeIndexResponse_CapacityUnits)
+		v.CapacityUnits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeIndexResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeIndexResponse_Description, *v.Description)
+	}
+	serializeDocumentMetadataConfigurationList(s, schemas.DescribeIndexResponse_DocumentMetadataConfigurations, v.DocumentMetadataConfigurations)
+	if v.Edition != "" {
+		s.WriteString(schemas.DescribeIndexResponse_Edition, string(v.Edition))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeIndexResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeIndexResponse_Id, *v.Id)
+	}
+	if v.IndexStatistics != nil {
+		s.WriteStruct(schemas.DescribeIndexResponse_IndexStatistics)
+		v.IndexStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeIndexResponse_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeIndexResponse_RoleArn, *v.RoleArn)
+	}
+	if v.ServerSideEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.DescribeIndexResponse_ServerSideEncryptionConfiguration)
+		v.ServerSideEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeIndexResponse_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeIndexResponse_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.UserContextPolicy != "" {
+		s.WriteString(schemas.DescribeIndexResponse_UserContextPolicy, string(v.UserContextPolicy))
+	}
+	if v.UserGroupResolutionConfiguration != nil {
+		s.WriteStruct(schemas.DescribeIndexResponse_UserGroupResolutionConfiguration)
+		v.UserGroupResolutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUserTokenConfigurationList(s, schemas.DescribeIndexResponse_UserTokenConfigurations, v.UserTokenConfigurations)
+}
+func (v *DescribeIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIndexResponse_CapacityUnits:
+			v.CapacityUnits = &types.CapacityUnitsConfiguration{}
+			return v.CapacityUnits.Deserialize(d)
+		case schemas.DescribeIndexResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeIndexResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeIndexResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_Description, v.Description)
+		case schemas.DescribeIndexResponse_DocumentMetadataConfigurations:
+			return deserializeDocumentMetadataConfigurationList(d, schemas.DescribeIndexResponse_DocumentMetadataConfigurations, &v.DocumentMetadataConfigurations)
+		case schemas.DescribeIndexResponse_Edition:
+			var ev string
+			if err := d.ReadString(schemas.DescribeIndexResponse_Edition, &ev); err != nil {
+				return err
+			}
+			v.Edition = types.IndexEdition(ev)
+			return nil
+		case schemas.DescribeIndexResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeIndexResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_Id, v.Id)
+		case schemas.DescribeIndexResponse_IndexStatistics:
+			v.IndexStatistics = &types.IndexStatistics{}
+			return v.IndexStatistics.Deserialize(d)
+		case schemas.DescribeIndexResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_Name, v.Name)
+		case schemas.DescribeIndexResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeIndexResponse_ServerSideEncryptionConfiguration:
+			v.ServerSideEncryptionConfiguration = &types.ServerSideEncryptionConfiguration{}
+			return v.ServerSideEncryptionConfiguration.Deserialize(d)
+		case schemas.DescribeIndexResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeIndexResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IndexStatus(ev)
+			return nil
+		case schemas.DescribeIndexResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeIndexResponse_UpdatedAt, v.UpdatedAt)
+		case schemas.DescribeIndexResponse_UserContextPolicy:
+			var ev string
+			if err := d.ReadString(schemas.DescribeIndexResponse_UserContextPolicy, &ev); err != nil {
+				return err
+			}
+			v.UserContextPolicy = types.UserContextPolicy(ev)
+			return nil
+		case schemas.DescribeIndexResponse_UserGroupResolutionConfiguration:
+			v.UserGroupResolutionConfiguration = &types.UserGroupResolutionConfiguration{}
+			return v.UserGroupResolutionConfiguration.Deserialize(d)
+		case schemas.DescribeIndexResponse_UserTokenConfigurations:
+			return deserializeUserTokenConfigurationList(d, schemas.DescribeIndexResponse_UserTokenConfigurations, &v.UserTokenConfigurations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndex, schemas.DescribeIndexRequest, schemas.DescribeIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndex, schemas.DescribeIndexRequest, schemas.DescribeIndexResponse), output: &DescribeIndexOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeIndex{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeIndex"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeIndexValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeIndex(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +282,8 @@ func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeIndex(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeIndex",
-	}
 }

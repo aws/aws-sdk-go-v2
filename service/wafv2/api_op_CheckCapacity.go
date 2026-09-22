@@ -4,11 +4,10 @@ package wafv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the web ACL capacity unit (WCU) requirements for a specified scope and
@@ -63,6 +62,19 @@ type CheckCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckCapacityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckCapacityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckCapacityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRules(s, schemas.CheckCapacityRequest_Rules, v.Rules)
+	if v.Scope != "" {
+		s.WriteString(schemas.CheckCapacityRequest_Scope, string(v.Scope))
+	}
+}
+
 type CheckCapacityOutput struct {
 
 	// The capacity required by the rules and scope.
@@ -74,77 +86,47 @@ type CheckCapacityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckCapacityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckCapacityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckCapacityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Capacity != 0 {
+		s.WriteInt64(schemas.CheckCapacityResponse_Capacity, v.Capacity)
+	}
+}
+func (v *CheckCapacityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckCapacityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckCapacityResponse_Capacity:
+			return d.ReadInt64(schemas.CheckCapacityResponse_Capacity, &v.Capacity)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckCapacity, schemas.CheckCapacityRequest, schemas.CheckCapacityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckCapacity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckCapacity, schemas.CheckCapacityRequest, schemas.CheckCapacityResponse), output: &CheckCapacityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCheckCapacity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CheckCapacity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCheckCapacityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCheckCapacity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +141,8 @@ func (c *Client) addOperationCheckCapacityMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCheckCapacity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CheckCapacity",
-	}
 }

@@ -1,0 +1,5 @@
+POST /metadata-transfer-jobs-list
+
+Content-Type: application/json
+
+{"destinationType":"s3","filters":[{"workspaceId":"__ListMetadataTransferJobsFilterMemberWorkspaceId__"},{"workspaceId":"__ListMetadataTransferJobsFilterMemberWorkspaceId__"}],"maxResults":1,"nextToken":"__NextToken__","sourceType":"s3"}

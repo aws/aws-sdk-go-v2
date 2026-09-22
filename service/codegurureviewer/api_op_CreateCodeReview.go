@@ -5,10 +5,10 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use to create a code review with a [CodeReviewType] of RepositoryAnalysis . This type of code
@@ -66,6 +66,29 @@ type CreateCodeReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeReviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeReviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateCodeReviewRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCodeReviewRequest_Name, *v.Name)
+	}
+	if v.RepositoryAssociationArn != nil {
+		s.WriteString(schemas.CreateCodeReviewRequest_RepositoryAssociationArn, *v.RepositoryAssociationArn)
+	}
+	if v.Type != nil {
+		s.WriteStruct(schemas.CreateCodeReviewRequest_Type)
+		v.Type.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateCodeReviewOutput struct {
 
 	// Information about a code review. A code review belongs to the associated
@@ -78,65 +101,44 @@ type CreateCodeReviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeReviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeReviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeReviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReview != nil {
+		s.WriteStruct(schemas.CreateCodeReviewResponse_CodeReview)
+		v.CodeReview.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCodeReviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCodeReviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCodeReviewResponse_CodeReview:
+			v.CodeReview = &types.CodeReview{}
+			return v.CodeReview.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeReview, schemas.CreateCodeReviewRequest, schemas.CreateCodeReviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCodeReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeReview, schemas.CreateCodeReviewRequest, schemas.CreateCodeReviewResponse), output: &CreateCodeReviewOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCodeReview{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCodeReview"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -146,12 +148,6 @@ func (c *Client) addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreateCodeReviewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCodeReview(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +160,6 @@ func (c *Client) addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -209,12 +199,4 @@ func (m *idempotencyToken_initializeOpCreateCodeReview) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreateCodeReviewMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCodeReview{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCodeReview(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCodeReview",
-	}
 }

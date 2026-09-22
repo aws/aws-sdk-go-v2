@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,76 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_Message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The agent message does not fit within the current conversation context. Start a
+// new conversation or provide a message that relates to the current profile
+// customization session.
+type AgentMessageOutOfContextException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AgentMessageOutOfContextException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AgentMessageOutOfContextException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AgentMessageOutOfContextException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AgentMessageOutOfContextException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AgentMessageOutOfContextException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AgentMessageOutOfContextException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentMessageOutOfContextException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentMessageOutOfContextException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AgentMessageOutOfContextException_Message, *v.Message)
+	}
+}
+func (v *AgentMessageOutOfContextException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentMessageOutOfContextException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentMessageOutOfContextException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AgentMessageOutOfContextException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The data store is in a transition state and the user requested action cannot be
 // performed.
@@ -59,6 +130,122 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The specified conversation identifier does not exist. Verify the conversation
+// ID or omit it to start a new conversation.
+type ConversationNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConversationNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConversationNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConversationNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConversationNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConversationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConversationNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConversationNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConversationNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConversationNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ConversationNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConversationNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConversationNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConversationNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// A dependent service failed to fulfill the request.
+type FailedDependencyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *FailedDependencyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FailedDependencyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FailedDependencyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "FailedDependencyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *FailedDependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FailedDependencyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedDependencyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedDependencyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FailedDependencyException_Message, *v.Message)
+	}
+}
+func (v *FailedDependencyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedDependencyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedDependencyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FailedDependencyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An unknown internal error occurred in the service.
 type InternalServerException struct {
@@ -85,6 +272,75 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerException_Message, *v.Message)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The requested operation is not yet available. Check the service documentation
+// for a list of supported operations.
+type NotImplementedOperationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NotImplementedOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NotImplementedOperationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NotImplementedOperationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "NotImplementedOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NotImplementedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *NotImplementedOperationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotImplementedOperationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotImplementedOperationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotImplementedOperationException_Message, *v.Message)
+	}
+}
+func (v *NotImplementedOperationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotImplementedOperationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotImplementedOperationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotImplementedOperationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested data store was not found.
 type ResourceNotFoundException struct {
@@ -111,6 +367,74 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The request exceeds the service quota.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The user has exceeded their maximum number of allowed calls to the given API.
 type ThrottlingException struct {
@@ -137,6 +461,123 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_Message, *v.Message)
+	}
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// You are not authorized to make this request. Verify that your Amazon Web
+// Services credentials are valid and that you have the required permissions.
+type UnauthorizedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnauthorizedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnauthorizedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnauthorizedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnauthorizedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnauthorizedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnauthorizedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnauthorizedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnauthorizedException_Message, *v.Message)
+	}
+}
+func (v *UnauthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnauthorizedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnauthorizedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnauthorizedException_Message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The content type in your request is not supported. Use a supported content type
+// for this operation.
+type UnsupportedMIMETypeException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnsupportedMIMETypeException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedMIMETypeException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedMIMETypeException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnsupportedMIMETypeException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnsupportedMIMETypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedMIMETypeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedMIMETypeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedMIMETypeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedMIMETypeException_Message, *v.Message)
+	}
+}
+func (v *UnsupportedMIMETypeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedMIMETypeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedMIMETypeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedMIMETypeException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The user input parameter was invalid.
 type ValidationException struct {
@@ -163,3 +604,24 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationException_Message, *v.Message)
+	}
+}
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_Message, v.Message)
+		}
+		return nil
+	})
+}

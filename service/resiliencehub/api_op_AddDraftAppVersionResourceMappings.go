@@ -4,11 +4,10 @@ package resiliencehub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds the source of resource-maps to the draft version of an application. During
@@ -57,6 +56,31 @@ type AddDraftAppVersionResourceMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDraftAppVersionResourceMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddDraftAppVersionResourceMappingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddDraftAppVersionResourceMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.AddDraftAppVersionResourceMappingsRequest_appArn, *v.AppArn)
+	}
+	serializeResourceMappingList(s, schemas.AddDraftAppVersionResourceMappingsRequest_resourceMappings, v.ResourceMappings)
+}
+func (v *AddDraftAppVersionResourceMappingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddDraftAppVersionResourceMappingsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddDraftAppVersionResourceMappingsRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.AddDraftAppVersionResourceMappingsRequest_appArn, v.AppArn)
+		case schemas.AddDraftAppVersionResourceMappingsRequest_resourceMappings:
+			return deserializeResourceMappingList(d, schemas.AddDraftAppVersionResourceMappingsRequest_resourceMappings, &v.ResourceMappings)
+		}
+		return nil
+	})
+}
+
 type AddDraftAppVersionResourceMappingsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -87,77 +111,57 @@ type AddDraftAppVersionResourceMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddDraftAppVersionResourceMappingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddDraftAppVersionResourceMappingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddDraftAppVersionResourceMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.AddDraftAppVersionResourceMappingsResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.AddDraftAppVersionResourceMappingsResponse_appVersion, *v.AppVersion)
+	}
+	serializeResourceMappingList(s, schemas.AddDraftAppVersionResourceMappingsResponse_resourceMappings, v.ResourceMappings)
+}
+func (v *AddDraftAppVersionResourceMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddDraftAppVersionResourceMappingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddDraftAppVersionResourceMappingsResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.AddDraftAppVersionResourceMappingsResponse_appArn, v.AppArn)
+		case schemas.AddDraftAppVersionResourceMappingsResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.AddDraftAppVersionResourceMappingsResponse_appVersion, v.AppVersion)
+		case schemas.AddDraftAppVersionResourceMappingsResponse_resourceMappings:
+			return deserializeResourceMappingList(d, schemas.AddDraftAppVersionResourceMappingsResponse_resourceMappings, &v.ResourceMappings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddDraftAppVersionResourceMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDraftAppVersionResourceMappings, schemas.AddDraftAppVersionResourceMappingsRequest, schemas.AddDraftAppVersionResourceMappingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddDraftAppVersionResourceMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddDraftAppVersionResourceMappings, schemas.AddDraftAppVersionResourceMappingsRequest, schemas.AddDraftAppVersionResourceMappingsResponse), output: &AddDraftAppVersionResourceMappingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddDraftAppVersionResourceMappings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddDraftAppVersionResourceMappings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAddDraftAppVersionResourceMappingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddDraftAppVersionResourceMappings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +176,8 @@ func (c *Client) addOperationAddDraftAppVersionResourceMappingsMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAddDraftAppVersionResourceMappings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AddDraftAppVersionResourceMappings",
-	}
 }

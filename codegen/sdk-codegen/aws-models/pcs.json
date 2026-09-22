@@ -58,6 +58,194 @@
                 },
                 "smithy.api#documentation": "<p>Parallel Computing Service (PCS) is a managed service that makes it easier for you to run and scale your high performance computing (HPC) workloads, and build scientific and engineering models on Amazon Web Services using Slurm. For more information, see the <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide\">Parallel Computing Service User Guide</a>.</p> <p>This reference describes the actions and data types of the service management API. You can use the Amazon Web Services SDKs to call the API actions in software, or use the Command Line Interface (CLI) to call the API actions manually. These API actions manage the service through an Amazon Web Services account.</p> <p>The API actions operate on PCS resources. A <i>resource</i> is an entity in Amazon Web Services that you can work with. Amazon Web Services services create resources when you use the features of the service. Examples of PCS resources include clusters, compute node groups, and queues. For more information about resources in Amazon Web Services, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-resource\">Resource</a> in the <i>Resource Explorer User Guide</i>. </p> <p>An PCS <i>compute node</i> is an Amazon EC2 instance. You don't launch compute nodes directly. PCS uses configuration information that you provide to launch compute nodes in your Amazon Web Services account. You receive billing charges for your running compute nodes. PCS automatically terminates your compute nodes when you delete the PCS resources related to those compute nodes.</p>",
                 "smithy.api#title": "AWS Parallel Computing Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://pcs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://pcs-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://pcs.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://pcs.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1307,6 +1495,12 @@
                 "slurmConfiguration": {
                     "target": "com.amazonaws.pcs#ComputeNodeGroupSlurmConfiguration"
                 },
+                "nodeLifecycleActions": {
+                    "target": "com.amazonaws.pcs#NodeLifecycleActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle actions to run on compute nodes in the compute node group. Use lifecycle actions to run custom scripts at defined stages of a compute node's lifecycle, such as when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>"
+                    }
+                },
                 "errorInfo": {
                     "target": "com.amazonaws.pcs#ErrorInfoList",
                     "traits": {
@@ -1404,10 +1598,26 @@
         "com.amazonaws.pcs#ComputeNodeGroupSlurmConfiguration": {
             "type": "structure",
             "members": {
+                "scaleDownIdleTimeInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (in seconds) before an idle node is scaled down. If not specified, the cluster-level setting applies. This overrides the cluster-level <code>scaleDownIdleTimeInSeconds</code> setting. A value of <code>-1</code> removes the override and applies the cluster-level setting to this compute node group. Requires Slurm version 25.11 or later.</p>",
+                        "smithy.api#range": {
+                            "min": -1,
+                            "max": 10000000
+                        }
+                    }
+                },
                 "slurmCustomSettings": {
                     "target": "com.amazonaws.pcs#SlurmCustomSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>"
+                    }
+                },
+                "gresCustomSettings": {
+                    "target": "com.amazonaws.pcs#GresCustomSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional Slurm <code>gres.conf</code> records for the compute node group. Each item is a map of <code>gres.conf</code> attribute names to values that describes one <code>gres.conf</code> record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the <code>NodeName=</code> prefix and merges these records with the GPU record it derives from the instance type.</p>"
                     }
                 }
             },
@@ -1418,10 +1628,26 @@
         "com.amazonaws.pcs#ComputeNodeGroupSlurmConfigurationRequest": {
             "type": "structure",
             "members": {
+                "scaleDownIdleTimeInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (in seconds) before an idle node is scaled down. If not specified, the cluster-level setting applies. This overrides the cluster-level <code>scaleDownIdleTimeInSeconds</code> setting. A value of <code>-1</code> removes the override and applies the cluster-level setting to this compute node group. Requires Slurm version 25.11 or later.</p>",
+                        "smithy.api#range": {
+                            "min": -1,
+                            "max": 10000000
+                        }
+                    }
+                },
                 "slurmCustomSettings": {
                     "target": "com.amazonaws.pcs#SlurmCustomSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>"
+                    }
+                },
+                "gresCustomSettings": {
+                    "target": "com.amazonaws.pcs#GresCustomSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional Slurm <code>gres.conf</code> records for the compute node group. Each item is a map of <code>gres.conf</code> attribute names to values that describes one <code>gres.conf</code> record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the <code>NodeName=</code> prefix and merges these records with the GPU record it derives from the instance type.</p>"
                     }
                 }
             },
@@ -1848,6 +2074,12 @@
                     "target": "com.amazonaws.pcs#ComputeNodeGroupSlurmConfigurationRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional options related to the Slurm scheduler.</p>"
+                    }
+                },
+                "nodeLifecycleActions": {
+                    "target": "com.amazonaws.pcs#NodeLifecycleActionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle actions to run on compute nodes in the compute node group. Use lifecycle actions to run custom scripts at defined stages of a compute node's lifecycle, such as when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>"
                     }
                 },
                 "clientToken": {
@@ -2308,6 +2540,26 @@
                 "target": "com.amazonaws.pcs#ErrorInfo"
             }
         },
+        "com.amazonaws.pcs#ExecutionPolicy": {
+            "type": "enum",
+            "members": {
+                "FIRST_BOOT_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIRST_BOOT_ONLY"
+                    }
+                },
+                "EVERY_BOOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVERY_BOOT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The policy that determines when a node lifecycle script runs. Valid values:</p> <ul> <li> <p> <code>FIRST_BOOT_ONLY</code> – Runs the script only the first time the compute node boots.</p> </li> <li> <p> <code>EVERY_BOOT</code> – Runs the script every time the compute node boots, including reboots.</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.pcs#GetCluster": {
             "type": "operation",
             "input": {
@@ -2562,6 +2814,24 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pcs#GresCustomSettingMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single Slurm <code>gres.conf</code> record, expressed as a map of <code>gres.conf</code> attribute names to their values. For example, <code>{\"Name\": \"gpu\", \"Type\": \"a100\", \"File\": \"/dev/nvidia[0-7]\"}</code> or <code>{\"AutoDetect\": \"nvml\"}</code>. PCS adds the <code>NodeName=</code> prefix for the compute node group.</p> <important> <p>PCS supports a subset of <code>gres.conf</code> settings. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/gres-custom-settings.html\">Configuring custom GRES settings in PCS</a> in the <i>PCS User Guide</i>.</p> </important>"
+            }
+        },
+        "com.amazonaws.pcs#GresCustomSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pcs#GresCustomSettingMap"
             }
         },
         "com.amazonaws.pcs#InstanceConfig": {
@@ -3109,6 +3379,174 @@
                 "smithy.api#documentation": "<p>The networking configuration for the cluster's control plane.</p>"
             }
         },
+        "com.amazonaws.pcs#NodeLifecycleActions": {
+            "type": "structure",
+            "members": {
+                "stages": {
+                    "target": "com.amazonaws.pcs#NodeLifecycleStages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle stages where you configure scripts to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scriptCachingPolicy": {
+                    "target": "com.amazonaws.pcs#ScriptCachingPolicy",
+                    "traits": {
+                        "smithy.api#default": "CACHE_ONCE",
+                        "smithy.api#documentation": "<p>The caching policy for node lifecycle scripts. The default value is <code>CACHE_ONCE</code>. Valid values:</p> <ul> <li> <p> <code>CACHE_ONCE</code> – Downloads each script once and reuses it on subsequent boots.</p> </li> <li> <p> <code>REFRESH_ON_REBOOT</code> – Downloads each script on every boot.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle actions configured on a compute node group. Lifecycle actions define scripts that PCS runs on compute nodes at specific stages of their lifecycle.</p>"
+            }
+        },
+        "com.amazonaws.pcs#NodeLifecycleActionsRequest": {
+            "type": "structure",
+            "members": {
+                "stages": {
+                    "target": "com.amazonaws.pcs#NodeLifecycleStages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle stages where you configure scripts to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scriptCachingPolicy": {
+                    "target": "com.amazonaws.pcs#ScriptCachingPolicy",
+                    "traits": {
+                        "smithy.api#default": "CACHE_ONCE",
+                        "smithy.api#documentation": "<p>The caching policy for node lifecycle scripts. The default value is <code>CACHE_ONCE</code>. Valid values:</p> <ul> <li> <p> <code>CACHE_ONCE</code> – Downloads each script once and reuses it on subsequent boots.</p> </li> <li> <p> <code>REFRESH_ON_REBOOT</code> – Downloads each script on every boot.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle actions to configure on a compute node group when you create it. Lifecycle actions define scripts that PCS runs on compute nodes at specific stages of their lifecycle.</p>"
+            }
+        },
+        "com.amazonaws.pcs#NodeLifecycleScript": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the script. The name can be up to 64 characters long. Valid characters are letters, numbers, spaces, underscores (<code>_</code>), and hyphens (<code>-</code>). The first character must be a letter or a number.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9 _-]*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scriptSource": {
+                    "target": "com.amazonaws.pcs#ScriptSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source location and integrity information for the script.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arguments": {
+                    "target": "com.amazonaws.pcs#NodeLifecycleScriptArguments",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command-line arguments to pass to the script. You can specify up to 20 arguments, and each argument can be up to 256 characters long.</p>"
+                    }
+                },
+                "onError": {
+                    "target": "com.amazonaws.pcs#OnError",
+                    "traits": {
+                        "smithy.api#default": "TERMINATE",
+                        "smithy.api#documentation": "<p>The behavior when the script fails. The default value is <code>TERMINATE</code>. Valid values:</p> <ul> <li> <p> <code>TERMINATE</code> – Terminates the compute node.</p> </li> <li> <p> <code>STOP_SEQUENCE</code> – Stops running subsequent scripts in the sequence but doesn't terminate the compute node.</p> </li> <li> <p> <code>CONTINUE</code> – Ignores the error and continues running the next script.</p> </li> </ul>"
+                    }
+                },
+                "executionPolicy": {
+                    "target": "com.amazonaws.pcs#ExecutionPolicy",
+                    "traits": {
+                        "smithy.api#default": "FIRST_BOOT_ONLY",
+                        "smithy.api#documentation": "<p>The policy that determines when the script runs. The default value is <code>FIRST_BOOT_ONLY</code>. Valid values:</p> <ul> <li> <p> <code>FIRST_BOOT_ONLY</code> – Runs the script only the first time the compute node boots.</p> </li> <li> <p> <code>EVERY_BOOT</code> – Runs the script every time the compute node boots, including reboots.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A script to run during a compute node lifecycle stage.</p>"
+            }
+        },
+        "com.amazonaws.pcs#NodeLifecycleScriptArgument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.pcs#NodeLifecycleScriptArguments": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pcs#NodeLifecycleScriptArgument"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.pcs#NodeLifecycleScriptList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pcs#NodeLifecycleScript"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.pcs#NodeLifecycleStages": {
+            "type": "structure",
+            "members": {
+                "nodeBootstrapped": {
+                    "target": "com.amazonaws.pcs#NodeLifecycleScriptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scripts to run after PCS finishes setting up the compute node and before the Slurm daemon (<code>slurmd</code>) starts. Use this stage for tasks that must complete before the node accepts jobs, such as mounting shared storage, configuring networking, or installing software packages.</p>"
+                    }
+                },
+                "nodeReady": {
+                    "target": "com.amazonaws.pcs#NodeLifecycleScriptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scripts to run after the Slurm daemon (<code>slurmd</code>) starts and the compute node registers with the Slurm controller. Use this stage for tasks that require Slurm to be running, such as running Slurm commands.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The stages of a compute node's lifecycle where you can configure scripts to run.</p>"
+            }
+        },
+        "com.amazonaws.pcs#OnError": {
+            "type": "enum",
+            "members": {
+                "TERMINATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATE"
+                    }
+                },
+                "STOP_SEQUENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_SEQUENCE"
+                    }
+                },
+                "CONTINUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTINUE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The behavior when a node lifecycle script fails. Valid values:</p> <ul> <li> <p> <code>TERMINATE</code> – Terminates the compute node.</p> </li> <li> <p> <code>STOP_SEQUENCE</code> – Stops running subsequent scripts in the sequence but doesn't terminate the compute node.</p> </li> <li> <p> <code>CONTINUE</code> – Ignores the error and continues running the next script.</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.pcs#PurchaseOption": {
             "type": "enum",
             "members": {
@@ -3496,6 +3934,30 @@
                         "smithy.api#documentation": "<p>The list of endpoints available for interaction with the scheduler.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "clusterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster that the compute node registered into.</p>"
+                    }
+                },
+                "computeNodeGroupId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the compute node group that the compute node registered into.</p>"
+                    }
+                },
+                "computeNodeGroupName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the compute node group that the compute node registered into.</p>"
+                    }
+                },
+                "nodeLifecycleActions": {
+                    "target": "com.amazonaws.pcs#NodeLifecycleActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The node lifecycle actions configured for the node group, including scripts to run when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3638,7 +4100,7 @@
                 "version": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11 | 25.05 | 25.11</code> </p>",
+                        "smithy.api#documentation": "<p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. You can update this version using the <code>UpdateCluster</code> API action. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html\">Updating the scheduler version on a cluster</a> and <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>23.11 | 24.05 | 24.11 | 25.05 | 25.11 | 26.05</code> </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3660,7 +4122,7 @@
                 "version": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>24.11 | 25.05 | 25.11</code> </p>",
+                        "smithy.api#documentation": "<p>The version of the specified scheduling software that PCS uses to manage cluster scaling and job scheduling. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html\">Slurm versions in PCS</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>24.11 | 25.05 | 25.11 | 26.05</code> </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3678,6 +4140,66 @@
                         "smithy.api#enumValue": "SLURM"
                     }
                 }
+            }
+        },
+        "com.amazonaws.pcs#ScriptCachingPolicy": {
+            "type": "enum",
+            "members": {
+                "CACHE_ONCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CACHE_ONCE"
+                    }
+                },
+                "REFRESH_ON_REBOOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REFRESH_ON_REBOOT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The caching policy for a node lifecycle script. Valid values:</p> <ul> <li> <p> <code>CACHE_ONCE</code> – Downloads the script once and reuses it on subsequent boots.</p> </li> <li> <p> <code>REFRESH_ON_REBOOT</code> – Downloads the script on every boot.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.pcs#ScriptSource": {
+            "type": "structure",
+            "members": {
+                "scriptLocation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the script. Specify either an Amazon S3 URI in the format <code>s3://bucket-name/key</code> or an HTTPS URL.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1024
+                        },
+                        "smithy.api#pattern": "^(s3://[a-z0-9][a-z0-9.-]{1,61}[a-z0-9]/.+|https://([a-zA-Z0-9](?:[a-zA-Z0-9_-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]{2,63}(?::[0-9]{1,5})?(?:[/?#][^\\s]*)?)$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3VersionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 version ID of the script. Use this value to pin the script to a specific version in a versioned Amazon S3 bucket. This value is only valid when <code>scriptLocation</code> is an Amazon S3 URI.</p>",
+                        "smithy.api#length": {
+                            "max": 1024
+                        }
+                    }
+                },
+                "checksum": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA-256 checksum of the script content, as a 64-character hexadecimal string. This value is optional. When specified, PCS uses this value to verify the integrity of the downloaded script.</p>",
+                        "smithy.api#length": {
+                            "min": 64,
+                            "max": 64
+                        },
+                        "smithy.api#pattern": "^[a-fA-F0-9]{64}$"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The source location and integrity information for a node lifecycle script.</p>"
             }
         },
         "com.amazonaws.pcs#SecurityGroupId": {
@@ -4206,7 +4728,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a cluster configuration. You can modify Slurm scheduler settings, accounting configuration, and security groups for an existing cluster. </p> <note> <p>You can only update clusters that are in <code>ACTIVE</code>, <code>UPDATE_FAILED</code>, or <code>SUSPENDED</code> state. All associated resources (queues and compute node groups) must be in <code>ACTIVE</code> state before you can update the cluster.</p> </note>",
+                "smithy.api#documentation": "<p>Updates a cluster configuration. You can update the scheduler version, modify scheduler settings, and update accounting configuration for an existing cluster. For more information about updating the scheduler version, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html\">Updating the scheduler version on a cluster</a> in the <i>PCS User Guide</i>. </p> <note> <p>You can only update clusters that are in <code>ACTIVE</code>, <code>UPDATE_FAILED</code>, or <code>SUSPENDED</code> state. All associated resources (queues and compute node groups) must be in <code>ACTIVE</code> state before you can update the cluster.</p> </note>",
                 "smithy.api#idempotent": {},
                 "smithy.api#tags": [
                     "Cluster"
@@ -4251,6 +4773,12 @@
                     "target": "com.amazonaws.pcs#UpdateClusterSlurmConfigurationRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional options related to the Slurm scheduler.</p>"
+                    }
+                },
+                "scheduler": {
+                    "target": "com.amazonaws.pcs#UpdateSchedulerRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduler configuration to update for the cluster. Use this to update the scheduler version. For more information, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html\">Updating the scheduler version on a cluster</a> in the <i>PCS User Guide</i>.</p>"
                     }
                 }
             },
@@ -4415,6 +4943,12 @@
                         "smithy.api#documentation": "<p>Additional options related to the Slurm scheduler.</p>"
                     }
                 },
+                "nodeLifecycleActions": {
+                    "target": "com.amazonaws.pcs#UpdateNodeLifecycleActionsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle actions to run on compute nodes in the compute node group. Use lifecycle actions to run custom scripts at defined stages of a compute node's lifecycle, such as when a compute node finishes bootstrapping or becomes ready to accept jobs.</p>"
+                    }
+                },
                 "clientToken": {
                     "target": "com.amazonaws.pcs#SBClientToken",
                     "traits": {
@@ -4441,15 +4975,53 @@
         "com.amazonaws.pcs#UpdateComputeNodeGroupSlurmConfigurationRequest": {
             "type": "structure",
             "members": {
+                "scaleDownIdleTimeInSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (in seconds) before an idle node is scaled down. If not specified, the cluster-level setting applies. This overrides the cluster-level <code>scaleDownIdleTimeInSeconds</code> setting. A value of <code>-1</code> removes the override and applies the cluster-level setting to this compute node group. Requires Slurm version 25.11 or later.</p>",
+                        "smithy.api#range": {
+                            "min": -1,
+                            "max": 10000000
+                        }
+                    }
+                },
                 "slurmCustomSettings": {
                     "target": "com.amazonaws.pcs#SlurmCustomSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Additional Slurm-specific configuration that directly maps to Slurm settings.</p>"
                     }
+                },
+                "gresCustomSettings": {
+                    "target": "com.amazonaws.pcs#GresCustomSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The additional Slurm <code>gres.conf</code> records for the compute node group. Each item is a map of <code>gres.conf</code> attribute names to values that describes one <code>gres.conf</code> record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the <code>NodeName=</code> prefix and merges these records with the GPU record it derives from the instance type.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Additional options related to the Slurm scheduler.</p>"
+            }
+        },
+        "com.amazonaws.pcs#UpdateNodeLifecycleActionsRequest": {
+            "type": "structure",
+            "members": {
+                "stages": {
+                    "target": "com.amazonaws.pcs#NodeLifecycleStages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle stages where you configure scripts to run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "scriptCachingPolicy": {
+                    "target": "com.amazonaws.pcs#ScriptCachingPolicy",
+                    "traits": {
+                        "smithy.api#default": "CACHE_ONCE",
+                        "smithy.api#documentation": "<p>The caching policy for node lifecycle scripts. The default value is <code>CACHE_ONCE</code>. Valid values:</p> <ul> <li> <p> <code>CACHE_ONCE</code> – Downloads each script once and reuses it on subsequent boots.</p> </li> <li> <p> <code>REFRESH_ON_REBOOT</code> – Downloads each script on every boot.</p> </li> </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The lifecycle actions to configure on a compute node group when you update it. Lifecycle actions define scripts that PCS runs on compute nodes at specific stages of their lifecycle.</p>"
             }
         },
         "com.amazonaws.pcs#UpdateQueue": {
@@ -4555,6 +5127,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Additional options related to the Slurm scheduler.</p>"
+            }
+        },
+        "com.amazonaws.pcs#UpdateSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "version": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scheduler version to update the cluster to. You can only update to a newer version. For more information about supported versions and update paths, see <a href=\"https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html\">Updating the scheduler version on a cluster</a> in the <i>PCS User Guide</i>.</p> <p>Valid Values: <code>24.05 | 24.11 | 25.05 | 25.11 | 26.05</code> </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The scheduler configuration for updating a cluster. Use this to specify the scheduler version to update to.</p>"
             }
         },
         "com.amazonaws.pcs#UpdateSlurmRestRequest": {

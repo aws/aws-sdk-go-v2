@@ -1688,9 +1688,6 @@ func validateSnowflakeConnectorProfileCredentials(v *types.SnowflakeConnectorPro
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

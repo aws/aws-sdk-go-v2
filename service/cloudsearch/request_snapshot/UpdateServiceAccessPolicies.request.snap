@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+AccessPolicies=__AccessPolicies__&Action=UpdateServiceAccessPolicies&DomainName=__DomainName__&Version=2013-01-01

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.GetRateBasedStatementManagedKeys
+
+{"ManagedKeysIPV4":{"Addresses":["__Member__","__Member__"],"IPAddressVersion":"IPV4"},"ManagedKeysIPV6":{"Addresses":["__Member__","__Member__"],"IPAddressVersion":"IPV4"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DataSetId":"__DataSetId__","ResourceShareArn":"__ResourceShareArn__","ResourceShareId":"__ResourceShareId__","TargetAccountId":"__TargetAccountId__"}

@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeOptimizationJobInput struct {
 	OptimizationJobName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeOptimizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOptimizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOptimizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptimizationJobName != nil {
+		s.WriteString(schemas.DescribeOptimizationJobRequest_OptimizationJobName, *v.OptimizationJobName)
+	}
 }
 
 type DescribeOptimizationJobOutput struct {
@@ -131,6 +142,12 @@ type DescribeOptimizationJobOutput struct {
 	// The time when the optimization job started.
 	OptimizationStartTime *time.Time
 
+	// The Amazon Resource Name (ARN) of the training plan associated with this
+	// optimization job. This field appears only when you specified a training plan
+	// when you created the job. Optimization jobs that use on-demand capacity don't
+	// return this field.
+	TrainingPlanArns []string
+
 	// A VPC in Amazon VPC that your optimized model has access to.
 	VpcConfig *types.OptimizationVpcConfig
 
@@ -140,77 +157,165 @@ type DescribeOptimizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOptimizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOptimizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeOptimizationJobResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DeploymentInstanceType != "" {
+		s.WriteString(schemas.DescribeOptimizationJobResponse_DeploymentInstanceType, string(v.DeploymentInstanceType))
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeOptimizationJobResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeOptimizationJobResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MaxInstanceCount != nil {
+		s.WriteInt32(schemas.DescribeOptimizationJobResponse_MaxInstanceCount, *v.MaxInstanceCount)
+	}
+	if v.ModelSource != nil {
+		s.WriteStruct(schemas.DescribeOptimizationJobResponse_ModelSource)
+		v.ModelSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOptimizationConfigs(s, schemas.DescribeOptimizationJobResponse_OptimizationConfigs, v.OptimizationConfigs)
+	if v.OptimizationEndTime != nil {
+		s.WriteTime(schemas.DescribeOptimizationJobResponse_OptimizationEndTime, *v.OptimizationEndTime)
+	}
+	serializeOptimizationJobEnvironmentVariables(s, schemas.DescribeOptimizationJobResponse_OptimizationEnvironment, v.OptimizationEnvironment)
+	if v.OptimizationJobArn != nil {
+		s.WriteString(schemas.DescribeOptimizationJobResponse_OptimizationJobArn, *v.OptimizationJobArn)
+	}
+	if v.OptimizationJobName != nil {
+		s.WriteString(schemas.DescribeOptimizationJobResponse_OptimizationJobName, *v.OptimizationJobName)
+	}
+	if v.OptimizationJobStatus != "" {
+		s.WriteString(schemas.DescribeOptimizationJobResponse_OptimizationJobStatus, string(v.OptimizationJobStatus))
+	}
+	if v.OptimizationOutput != nil {
+		s.WriteStruct(schemas.DescribeOptimizationJobResponse_OptimizationOutput)
+		v.OptimizationOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OptimizationStartTime != nil {
+		s.WriteTime(schemas.DescribeOptimizationJobResponse_OptimizationStartTime, *v.OptimizationStartTime)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.DescribeOptimizationJobResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeOptimizationJobResponse_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.DescribeOptimizationJobResponse_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOptimizationJobTrainingPlanArns(s, schemas.DescribeOptimizationJobResponse_TrainingPlanArns, v.TrainingPlanArns)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DescribeOptimizationJobResponse_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeOptimizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOptimizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOptimizationJobResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeOptimizationJobResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeOptimizationJobResponse_DeploymentInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeOptimizationJobResponse_DeploymentInstanceType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentInstanceType = types.OptimizationJobDeploymentInstanceType(ev)
+			return nil
+		case schemas.DescribeOptimizationJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeOptimizationJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeOptimizationJobResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeOptimizationJobResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeOptimizationJobResponse_MaxInstanceCount:
+			v.MaxInstanceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeOptimizationJobResponse_MaxInstanceCount, v.MaxInstanceCount)
+		case schemas.DescribeOptimizationJobResponse_ModelSource:
+			v.ModelSource = &types.OptimizationJobModelSource{}
+			return v.ModelSource.Deserialize(d)
+		case schemas.DescribeOptimizationJobResponse_OptimizationConfigs:
+			return deserializeOptimizationConfigs(d, schemas.DescribeOptimizationJobResponse_OptimizationConfigs, &v.OptimizationConfigs)
+		case schemas.DescribeOptimizationJobResponse_OptimizationEndTime:
+			v.OptimizationEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeOptimizationJobResponse_OptimizationEndTime, v.OptimizationEndTime)
+		case schemas.DescribeOptimizationJobResponse_OptimizationEnvironment:
+			return deserializeOptimizationJobEnvironmentVariables(d, schemas.DescribeOptimizationJobResponse_OptimizationEnvironment, &v.OptimizationEnvironment)
+		case schemas.DescribeOptimizationJobResponse_OptimizationJobArn:
+			v.OptimizationJobArn = new(string)
+			return d.ReadString(schemas.DescribeOptimizationJobResponse_OptimizationJobArn, v.OptimizationJobArn)
+		case schemas.DescribeOptimizationJobResponse_OptimizationJobName:
+			v.OptimizationJobName = new(string)
+			return d.ReadString(schemas.DescribeOptimizationJobResponse_OptimizationJobName, v.OptimizationJobName)
+		case schemas.DescribeOptimizationJobResponse_OptimizationJobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeOptimizationJobResponse_OptimizationJobStatus, &ev); err != nil {
+				return err
+			}
+			v.OptimizationJobStatus = types.OptimizationJobStatus(ev)
+			return nil
+		case schemas.DescribeOptimizationJobResponse_OptimizationOutput:
+			v.OptimizationOutput = &types.OptimizationOutput{}
+			return v.OptimizationOutput.Deserialize(d)
+		case schemas.DescribeOptimizationJobResponse_OptimizationStartTime:
+			v.OptimizationStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeOptimizationJobResponse_OptimizationStartTime, v.OptimizationStartTime)
+		case schemas.DescribeOptimizationJobResponse_OutputConfig:
+			v.OutputConfig = &types.OptimizationJobOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.DescribeOptimizationJobResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeOptimizationJobResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeOptimizationJobResponse_StoppingCondition:
+			v.StoppingCondition = &types.StoppingCondition{}
+			return v.StoppingCondition.Deserialize(d)
+		case schemas.DescribeOptimizationJobResponse_TrainingPlanArns:
+			return deserializeOptimizationJobTrainingPlanArns(d, schemas.DescribeOptimizationJobResponse_TrainingPlanArns, &v.TrainingPlanArns)
+		case schemas.DescribeOptimizationJobResponse_VpcConfig:
+			v.VpcConfig = &types.OptimizationVpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOptimizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOptimizationJob, schemas.DescribeOptimizationJobRequest, schemas.DescribeOptimizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOptimizationJob, schemas.DescribeOptimizationJobRequest, schemas.DescribeOptimizationJobResponse), output: &DescribeOptimizationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeOptimizationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOptimizationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeOptimizationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOptimizationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -225,22 +330,8 @@ func (c *Client) addOperationDescribeOptimizationJobMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeOptimizationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeOptimizationJob",
-	}
 }

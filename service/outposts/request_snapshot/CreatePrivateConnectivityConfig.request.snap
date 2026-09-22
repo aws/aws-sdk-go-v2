@@ -1,0 +1,5 @@
+POST /outposts/__OutpostId__/privateConnectivity
+
+Content-Type: application/json
+
+{"VpcInformationList":[{"SubnetIds":["__Member__","__Member__"],"VpcEndpointId":"__VpcEndpointId__","VpcId":"__VpcId__"},{"SubnetIds":["__Member__","__Member__"],"VpcEndpointId":"__VpcEndpointId__","VpcId":"__VpcId__"}]}

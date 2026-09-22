@@ -1,0 +1,5 @@
+PUT /reportDefinition/__ReportId__
+
+Content-Type: application/json
+
+{"destinationS3Location":{"bucket":"__Bucket__","prefix":"__Prefix__"},"format":"CSV","reportDescription":"__ReportDescription__","reportFrequency":"MONTHLY"}

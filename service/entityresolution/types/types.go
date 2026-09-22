@@ -417,15 +417,15 @@ type IdNamespaceSummary struct {
 // Optional. An object that defines the incremental run type. This object contains
 // only the incrementalRunType field, which appears as "Automatic" in the console.
 //
-// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
-// processing is not supported.
+// For workflows where resolutionType is PROVIDER , incremental processing is not
+// supported.
 type IncrementalRunConfig struct {
 
 	// The type of incremental run. The only valid value is IMMEDIATE . This appears as
 	// "Automatic" in the console.
 	//
-	// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
-	// processing is not supported.
+	// For workflows where resolutionType is PROVIDER , incremental processing is not
+	// supported.
 	IncrementalRunType IncrementalRunType
 
 	noSmithyDocumentSerde
@@ -929,6 +929,11 @@ type ResolutionTechniques struct {
 	//
 	// This member is required.
 	ResolutionType ResolutionType
+
+	// Specifies whether real-time matching is enabled for the rule-based matching
+	// workflow. When you enable real-time matching, you can use the GenerateMatchId
+	// operation with the workflow.
+	EnableRealTimeMatching *bool
 
 	// The properties of the provider service.
 	ProviderProperties *ProviderProperties

@@ -6,11 +6,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -44,6 +44,18 @@ type DescribeFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.DescribeFlowRequest_FlowArn, *v.FlowArn)
+	}
+}
+
 type DescribeFlowOutput struct {
 
 	// The flow that you requested a description of.
@@ -59,77 +71,58 @@ type DescribeFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Flow != nil {
+		s.WriteStruct(schemas.DescribeFlowResponse_Flow)
+		v.Flow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Messages != nil {
+		s.WriteStruct(schemas.DescribeFlowResponse_Messages)
+		v.Messages.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFlowResponse_Flow:
+			v.Flow = &types.Flow{}
+			return v.Flow.Deserialize(d)
+		case schemas.DescribeFlowResponse_Messages:
+			v.Messages = &types.Messages{}
+			return v.Messages.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlow, schemas.DescribeFlowRequest, schemas.DescribeFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFlow, schemas.DescribeFlowRequest, schemas.DescribeFlowResponse), output: &DescribeFlowOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFlow{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFlow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFlowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFlow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +135,6 @@ func (c *Client) addOperationDescribeFlowMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -853,11 +840,3 @@ type DescribeFlowAPIClient interface {
 }
 
 var _ DescribeFlowAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeFlow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFlow",
-	}
-}

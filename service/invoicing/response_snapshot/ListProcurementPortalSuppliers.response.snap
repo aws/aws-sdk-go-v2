@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.ListProcurementPortalSuppliers
+
+{"NextToken":"__NextToken__","ProcurementPortalSuppliers":[{"CountryCode":"__CountryCode__","Environment":"PROD","SellerOfRecord":"__SellerOfRecord__","SupplierIdentifier":"__SupplierIdentifier__"},{"CountryCode":"__CountryCode__","Environment":"PROD","SellerOfRecord":"__SellerOfRecord__","SupplierIdentifier":"__SupplierIdentifier__"}]}

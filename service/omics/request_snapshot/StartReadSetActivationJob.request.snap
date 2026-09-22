@@ -1,0 +1,5 @@
+POST /sequencestore/__SequenceStoreId__/activationjob
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","sources":[{"readSetId":"__ReadSetId__"},{"readSetId":"__ReadSetId__"}]}

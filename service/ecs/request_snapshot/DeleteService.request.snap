@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.DeleteService
+
+{"cluster":"__Cluster__","force":true,"service":"__Service__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.DescribeWorkspacesPoolSessions
+
+{"NextToken":"__NextToken__","Sessions":[{"AuthenticationType":"SAML","ConnectionState":"CONNECTED","ExpirationTime":946684800,"InstanceId":"__InstanceId__","NetworkAccessConfiguration":{"EniId":"__EniId__","EniPrivateIpAddress":"__EniPrivateIpAddress__"},"PoolId":"__PoolId__","SessionId":"__SessionId__","StartTime":946684800,"UserId":"__UserId__"},{"AuthenticationType":"SAML","ConnectionState":"CONNECTED","ExpirationTime":946684800,"InstanceId":"__InstanceId__","NetworkAccessConfiguration":{"EniId":"__EniId__","EniPrivateIpAddress":"__EniPrivateIpAddress__"},"PoolId":"__PoolId__","SessionId":"__SessionId__","StartTime":946684800,"UserId":"__UserId__"}]}

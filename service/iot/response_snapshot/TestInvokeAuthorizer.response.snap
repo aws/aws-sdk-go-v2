@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"disconnectAfterInSeconds":1,"isAuthenticated":true,"policyDocuments":["__Member__","__Member__"],"principalId":"__PrincipalId__","refreshAfterInSeconds":1}

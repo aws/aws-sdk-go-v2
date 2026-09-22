@@ -1,0 +1,5 @@
+POST /places/v0/indexes
+
+Content-Type: application/json
+
+{"DataSource":"__DataSource__","DataSourceConfiguration":{"IntendedUse":"SingleUse"},"Description":"__Description__","IndexName":"__IndexName__","PricingPlan":"RequestBasedUsage","Tags":{"key0":"__Value__"}}

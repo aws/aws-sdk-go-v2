@@ -5,10 +5,10 @@ package ivs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets summary information about stream keys for the specified channel.
@@ -44,6 +44,40 @@ type ListStreamKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.ListStreamKeysRequest_channelArn, *v.ChannelArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStreamKeysRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamKeysRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListStreamKeysInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamKeysRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamKeysRequest_channelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.ListStreamKeysRequest_channelArn, v.ChannelArn)
+		case schemas.ListStreamKeysRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListStreamKeysRequest_maxResults, v.MaxResults)
+		case schemas.ListStreamKeysRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamKeysRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListStreamKeysOutput struct {
 
 	// List of stream keys.
@@ -61,77 +95,51 @@ type ListStreamKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamKeysResponse_nextToken, *v.NextToken)
+	}
+	serializeStreamKeyList(s, schemas.ListStreamKeysResponse_streamKeys, v.StreamKeys)
+}
+func (v *ListStreamKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamKeysResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamKeysResponse_nextToken, v.NextToken)
+		case schemas.ListStreamKeysResponse_streamKeys:
+			return deserializeStreamKeyList(d, schemas.ListStreamKeysResponse_streamKeys, &v.StreamKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamKeys, schemas.ListStreamKeysRequest, schemas.ListStreamKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStreamKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamKeys, schemas.ListStreamKeysRequest, schemas.ListStreamKeysResponse), output: &ListStreamKeysOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStreamKeys{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStreamKeys"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListStreamKeysValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStreamKeys(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +152,6 @@ func (c *Client) addOperationListStreamKeysMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +252,3 @@ type ListStreamKeysAPIClient interface {
 }
 
 var _ ListStreamKeysAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListStreamKeys(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListStreamKeys",
-	}
-}

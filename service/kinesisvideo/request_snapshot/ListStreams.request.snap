@@ -1,0 +1,5 @@
+POST /listStreams
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","StreamNameCondition":{"ComparisonOperator":"BEGINS_WITH","ComparisonValue":"__ComparisonValue__"}}

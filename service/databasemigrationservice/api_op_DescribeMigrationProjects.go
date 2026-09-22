@@ -5,14 +5,18 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of migration projects for your account in the current
 // region.
+//
+// Required permissions: dms:ListMigrationProjects . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeMigrationProjects(ctx context.Context, params *DescribeMigrationProjectsInput, optFns ...func(*Options)) (*DescribeMigrationProjectsOutput, error) {
 	if params == nil {
 		params = &DescribeMigrationProjectsInput{}
@@ -30,16 +34,19 @@ func (c *Client) DescribeMigrationProjects(ctx context.Context, params *Describe
 
 type DescribeMigrationProjectsInput struct {
 
-	// Filters applied to the migration projects described in the form of key-value
-	// pairs.
+	// The filters to apply to the migration projects.
 	//
-	// Valid filter names and values:
+	// The following filter names are supported:
 	//
-	//   - instance-profile-identifier, instance profile arn or name
+	//   - migration-project-identifier – The migration project name or ARN.
 	//
-	//   - data-provider-identifier, data provider arn or name
+	//   - instance-profile-identifier – The instance profile name or ARN.
 	//
-	//   - migration-project-identifier, migration project arn or name
+	//   - data-provider-identifier – The source or target data provider name or ARN.
+	//
+	//   - source-data-provider-identifier – The source data provider name or ARN.
+	//
+	//   - target-data-provider-identifier – The target data provider name or ARN.
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -58,6 +65,22 @@ type DescribeMigrationProjectsInput struct {
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMigrationProjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMigrationProjectsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMigrationProjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeMigrationProjectsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMigrationProjectsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeMigrationProjectsMessage_MaxRecords, *v.MaxRecords)
+	}
 }
 
 type DescribeMigrationProjectsOutput struct {
@@ -81,77 +104,51 @@ type DescribeMigrationProjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMigrationProjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMigrationProjectsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMigrationProjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMigrationProjectsResponse_Marker, *v.Marker)
+	}
+	serializeMigrationProjectList(s, schemas.DescribeMigrationProjectsResponse_MigrationProjects, v.MigrationProjects)
+}
+func (v *DescribeMigrationProjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMigrationProjectsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMigrationProjectsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeMigrationProjectsResponse_Marker, v.Marker)
+		case schemas.DescribeMigrationProjectsResponse_MigrationProjects:
+			return deserializeMigrationProjectList(d, schemas.DescribeMigrationProjectsResponse_MigrationProjects, &v.MigrationProjects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMigrationProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMigrationProjects, schemas.DescribeMigrationProjectsMessage, schemas.DescribeMigrationProjectsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMigrationProjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMigrationProjects, schemas.DescribeMigrationProjectsMessage, schemas.DescribeMigrationProjectsResponse), output: &DescribeMigrationProjectsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMigrationProjects{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeMigrationProjects"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeMigrationProjectsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMigrationProjects(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +161,6 @@ func (c *Client) addOperationDescribeMigrationProjectsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +265,3 @@ type DescribeMigrationProjectsAPIClient interface {
 }
 
 var _ DescribeMigrationProjectsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeMigrationProjects(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeMigrationProjects",
-	}
-}

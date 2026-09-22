@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.ListForecastExportJobs
+
+{"ForecastExportJobs":[{"CreationTime":946684800,"Destination":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"ForecastExportJobArn":"__ForecastExportJobArn__","ForecastExportJobName":"__ForecastExportJobName__","LastModificationTime":946684800,"Message":"__Message__","Status":"__Status__"},{"CreationTime":946684800,"Destination":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"ForecastExportJobArn":"__ForecastExportJobArn__","ForecastExportJobName":"__ForecastExportJobName__","LastModificationTime":946684800,"Message":"__Message__","Status":"__Status__"}],"NextToken":"__NextToken__"}

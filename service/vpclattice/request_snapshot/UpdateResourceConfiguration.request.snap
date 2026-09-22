@@ -1,0 +1,5 @@
+PATCH /resourceconfigurations/__ResourceConfigurationIdentifier__
+
+Content-Type: application/json
+
+{"allowAssociationToShareableServiceNetwork":true,"portRanges":["__Member__","__Member__"],"resourceConfigurationDefinition":{"dnsResource":{"domainName":"__DomainName__","ipAddressType":"IPV4"}}}

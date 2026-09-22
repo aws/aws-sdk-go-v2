@@ -1,0 +1,5 @@
+POST /v2/email/templates
+
+Content-Type: application/json
+
+{"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TemplateContent":{"Html":"__Html__","Subject":"__Subject__","Text":"__Text__"},"TemplateName":"__TemplateName__"}

@@ -4,11 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a dashboard if it does not already exist, or updates an existing
@@ -52,7 +51,7 @@ type PutDashboardInput struct {
 	//
 	// For more information about the syntax, see [Dashboard Body Structure and Syntax].
 	//
-	// [Dashboard Body Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html
+	// [Dashboard Body Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html
 	//
 	// This member is required.
 	DashboardBody *string
@@ -83,6 +82,22 @@ type PutDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDashboardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardBody != nil {
+		s.WriteString(schemas.PutDashboardInput_DashboardBody, *v.DashboardBody)
+	}
+	if v.DashboardName != nil {
+		s.WriteString(schemas.PutDashboardInput_DashboardName, *v.DashboardName)
+	}
+	serializeTagList(s, schemas.PutDashboardInput_Tags, v.Tags)
+}
+
 type PutDashboardOutput struct {
 
 	// If the input for PutDashboard was correct and the dashboard was successfully
@@ -102,65 +117,39 @@ type PutDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDashboardOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDashboardValidationMessages(s, schemas.PutDashboardOutput_DashboardValidationMessages, v.DashboardValidationMessages)
+}
+func (v *PutDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDashboardOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutDashboardOutput_DashboardValidationMessages:
+			return deserializeDashboardValidationMessages(d, schemas.PutDashboardOutput_DashboardValidationMessages, &v.DashboardValidationMessages)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDashboard, schemas.PutDashboardInput, schemas.PutDashboardOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDashboard, schemas.PutDashboardInput, schemas.PutDashboardOutput), output: &PutDashboardOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutDashboard{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDashboard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -170,12 +159,6 @@ func (c *Client) addOperationPutDashboardMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpPutDashboardValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutDashboard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +173,8 @@ func (c *Client) addOperationPutDashboardMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutDashboard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutDashboard",
-	}
 }

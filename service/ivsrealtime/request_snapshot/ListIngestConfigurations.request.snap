@@ -1,0 +1,5 @@
+POST /ListIngestConfigurations
+
+Content-Type: application/json
+
+{"filterByStageArn":"__FilterByStageArn__","filterByState":"ACTIVE","maxResults":1,"nextToken":"__NextToken__"}

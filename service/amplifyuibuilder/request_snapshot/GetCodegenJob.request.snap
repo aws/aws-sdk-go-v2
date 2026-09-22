@@ -1,0 +1,3 @@
+GET /app/__AppId__/environment/__EnvironmentName__/codegen-jobs/__Id__
+
+

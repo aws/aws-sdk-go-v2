@@ -1,0 +1,5 @@
+POST /automated-reasoning-policies/__PolicyArn__/versions
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","lastUpdatedDefinitionHash":"__LastUpdatedDefinitionHash__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

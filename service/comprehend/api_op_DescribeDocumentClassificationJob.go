@@ -4,11 +4,10 @@ package comprehend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the properties associated with a document classification job. Use this
@@ -39,6 +38,18 @@ type DescribeDocumentClassificationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentClassificationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentClassificationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeDocumentClassificationJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeDocumentClassificationJobOutput struct {
 
 	// An object that describes the properties associated with the document
@@ -51,77 +62,50 @@ type DescribeDocumentClassificationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDocumentClassificationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDocumentClassificationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDocumentClassificationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentClassificationJobProperties != nil {
+		s.WriteStruct(schemas.DescribeDocumentClassificationJobResponse_DocumentClassificationJobProperties)
+		v.DocumentClassificationJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDocumentClassificationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDocumentClassificationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDocumentClassificationJobResponse_DocumentClassificationJobProperties:
+			v.DocumentClassificationJobProperties = &types.DocumentClassificationJobProperties{}
+			return v.DocumentClassificationJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDocumentClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentClassificationJob, schemas.DescribeDocumentClassificationJobRequest, schemas.DescribeDocumentClassificationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDocumentClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDocumentClassificationJob, schemas.DescribeDocumentClassificationJobRequest, schemas.DescribeDocumentClassificationJobResponse), output: &DescribeDocumentClassificationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDocumentClassificationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDocumentClassificationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDocumentClassificationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDocumentClassificationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +120,8 @@ func (c *Client) addOperationDescribeDocumentClassificationJobMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDocumentClassificationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDocumentClassificationJob",
-	}
 }

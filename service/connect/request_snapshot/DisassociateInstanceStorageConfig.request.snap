@@ -1,0 +1,3 @@
+DELETE /instance/__InstanceId__/storage-config/__AssociationId__?clientToken=__ClientToken__&resourceType=CHAT_TRANSCRIPTS
+
+

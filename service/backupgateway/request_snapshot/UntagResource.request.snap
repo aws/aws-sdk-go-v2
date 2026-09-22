@@ -1,0 +1,7 @@
+POST /service/BackupOnPremises_v20210101/operation/UntagResource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢gTagKeys‚j__Member__j__Member__kResourceARNo__ResourceARN__

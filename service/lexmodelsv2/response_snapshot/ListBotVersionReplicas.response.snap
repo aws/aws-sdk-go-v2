@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botVersionReplicaSummaries":[{"botVersion":"__BotVersion__","botVersionReplicationStatus":"Creating","creationDateTime":946684800,"failureReasons":["__Member__","__Member__"]},{"botVersion":"__BotVersion__","botVersionReplicationStatus":"Creating","creationDateTime":946684800,"failureReasons":["__Member__","__Member__"]}],"nextToken":"__NextToken__","replicaRegion":"__ReplicaRegion__","sourceRegion":"__SourceRegion__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetStaticIp
+
+{"staticIp":{"arn":"__Arn__","attachedTo":"__AttachedTo__","createdAt":946684800,"ipAddress":"__IpAddress__","isAttached":true,"location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"name":"__Name__","resourceType":"ContainerService","supportCode":"__SupportCode__"}}

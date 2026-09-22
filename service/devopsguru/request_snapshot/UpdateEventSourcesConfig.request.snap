@@ -1,0 +1,5 @@
+PUT /event-sources
+
+Content-Type: application/json
+
+{"EventSources":{"AmazonCodeGuruProfiler":{"Status":"ENABLED"}}}

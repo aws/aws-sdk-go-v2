@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/CreateStreamingURL
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¦nSessionContextr__SessionContext__iStackNamem__StackName__iFleetNamem__FleetName__fUserIdj__UserId__mApplicationIdq__ApplicationId__hValidity

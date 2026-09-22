@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DiscoveryIntegrationStatus":"ENABLED","JiraConfiguration":{"IntegrationStatus":"CONFIGURED","IssueManagementStatus":"ENABLED","IssueManagementType":"AUTO","JiraProjectKey":"__JiraProjectKey__","StatusMessage":"__StatusMessage__","Subdomain":"__Subdomain__"},"OrganizationSharingStatus":"ENABLED"}

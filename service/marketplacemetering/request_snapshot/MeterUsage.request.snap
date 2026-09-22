@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMPMeteringService.MeterUsage
+
+{"ClientToken":"__ClientToken__","DryRun":true,"ProductCode":"__ProductCode__","Timestamp":946684800,"UsageAllocations":[{"AllocatedUsageQuantity":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},{"AllocatedUsageQuantity":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}],"UsageDimension":"__UsageDimension__","UsageQuantity":1}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","UseCaseSummaryList":[{"UseCaseArn":"__UseCaseArn__","UseCaseId":"__UseCaseId__","UseCaseType":"RULES_EVALUATION"},{"UseCaseArn":"__UseCaseArn__","UseCaseId":"__UseCaseId__","UseCaseType":"RULES_EVALUATION"}]}

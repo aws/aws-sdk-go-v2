@@ -1,0 +1,4 @@
+GET /runtime.getQAppSessionMetadata?sessionId=__SessionId__
+
+Instance-Id: __InstanceId__
+

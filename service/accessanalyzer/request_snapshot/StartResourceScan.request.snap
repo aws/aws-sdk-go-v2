@@ -1,0 +1,5 @@
+POST /resource/scan
+
+Content-Type: application/json
+
+{"analyzerArn":"__AnalyzerArn__","resourceArn":"__ResourceArn__","resourceOwnerAccount":"__ResourceOwnerAccount__"}

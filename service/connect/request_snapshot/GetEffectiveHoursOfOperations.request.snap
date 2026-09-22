@@ -1,0 +1,3 @@
+GET /effective-hours-of-operations/__InstanceId__/__HoursOfOperationId__?fromDate=__FromDate__&toDate=__ToDate__
+
+

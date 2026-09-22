@@ -1,0 +1,5 @@
+PUT /finding
+
+Content-Type: application/json
+
+{"analyzerArn":"__AnalyzerArn__","clientToken":"__ClientToken__","ids":["__Member__","__Member__"],"resourceArn":"__ResourceArn__","status":"ACTIVE"}

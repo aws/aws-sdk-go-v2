@@ -1,0 +1,5 @@
+POST /provisioning-templates/__TemplateName__/versions?setAsDefault=true
+
+Content-Type: application/json
+
+{"templateBody":"__TemplateBody__"}

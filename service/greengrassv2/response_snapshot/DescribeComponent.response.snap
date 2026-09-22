@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","componentName":"__ComponentName__","componentVersion":"__ComponentVersion__","creationTimestamp":946684800,"description":"__Description__","platforms":[{"attributes":{"key0":"__Value__"},"name":"__Name__"},{"attributes":{"key0":"__Value__"},"name":"__Name__"}],"publisher":"__Publisher__","status":{"componentState":"REQUESTED","errors":{"key0":"__Value__"},"message":"__Message__","vendorGuidance":"ACTIVE","vendorGuidanceMessage":"__VendorGuidanceMessage__"},"tags":{"key0":"__Value__"}}

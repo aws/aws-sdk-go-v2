@@ -4,11 +4,10 @@ package networkmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an existing global network. You must first delete all global network
@@ -39,6 +38,18 @@ type DeleteGlobalNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlobalNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlobalNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlobalNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.DeleteGlobalNetworkRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+}
+
 type DeleteGlobalNetworkOutput struct {
 
 	// Information about the global network.
@@ -50,77 +61,50 @@ type DeleteGlobalNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlobalNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlobalNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlobalNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetwork != nil {
+		s.WriteStruct(schemas.DeleteGlobalNetworkResponse_GlobalNetwork)
+		v.GlobalNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteGlobalNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGlobalNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGlobalNetworkResponse_GlobalNetwork:
+			v.GlobalNetwork = &types.GlobalNetwork{}
+			return v.GlobalNetwork.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalNetwork, schemas.DeleteGlobalNetworkRequest, schemas.DeleteGlobalNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGlobalNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalNetwork, schemas.DeleteGlobalNetworkRequest, schemas.DeleteGlobalNetworkResponse), output: &DeleteGlobalNetworkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGlobalNetwork{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteGlobalNetwork"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteGlobalNetworkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGlobalNetwork(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +119,8 @@ func (c *Client) addOperationDeleteGlobalNetworkMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteGlobalNetwork(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteGlobalNetwork",
-	}
 }

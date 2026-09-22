@@ -1,0 +1,3 @@
+GET /metrics/definitions/__InstanceId__?maxResults=1&nextToken=__NextToken__&type=AWS_MANAGED
+
+

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"jobs":[{"consumableResourceProperties":{"consumableResourceList":[{"consumableResource":"__ConsumableResource__","quantity":1},{"consumableResource":"__ConsumableResource__","quantity":1}]},"createdAt":1,"jobArn":"__JobArn__","jobDefinitionArn":"__JobDefinitionArn__","jobName":"__JobName__","jobQueueArn":"__JobQueueArn__","jobStatus":"__JobStatus__","quantity":1,"shareIdentifier":"__ShareIdentifier__","startedAt":1,"statusReason":"__StatusReason__"},{"consumableResourceProperties":{"consumableResourceList":[{"consumableResource":"__ConsumableResource__","quantity":1},{"consumableResource":"__ConsumableResource__","quantity":1}]},"createdAt":1,"jobArn":"__JobArn__","jobDefinitionArn":"__JobDefinitionArn__","jobName":"__JobName__","jobQueueArn":"__JobQueueArn__","jobStatus":"__JobStatus__","quantity":1,"shareIdentifier":"__ShareIdentifier__","startedAt":1,"statusReason":"__StatusReason__"}],"nextToken":"__NextToken__"}

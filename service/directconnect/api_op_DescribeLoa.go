@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the LOA-CFA for a connection, interconnect, or link aggregation group
@@ -54,6 +53,24 @@ type DescribeLoaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.DescribeLoaRequest_connectionId, *v.ConnectionId)
+	}
+	if v.LoaContentType != "" {
+		s.WriteString(schemas.DescribeLoaRequest_loaContentType, string(v.LoaContentType))
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.DescribeLoaRequest_providerName, *v.ProviderName)
+	}
+}
+
 // Information about a Letter of Authorization - Connecting Facility Assignment
 // (LOA-CFA) for a connection.
 type DescribeLoaOutput struct {
@@ -71,77 +88,57 @@ type DescribeLoaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Loa)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoaContent != nil {
+		s.WriteBlob(schemas.Loa_loaContent, v.LoaContent)
+	}
+	if v.LoaContentType != "" {
+		s.WriteString(schemas.Loa_loaContentType, string(v.LoaContentType))
+	}
+}
+func (v *DescribeLoaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Loa, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Loa_loaContent:
+			return d.ReadBlob(schemas.Loa_loaContent, &v.LoaContent)
+		case schemas.Loa_loaContentType:
+			var ev string
+			if err := d.ReadString(schemas.Loa_loaContentType, &ev); err != nil {
+				return err
+			}
+			v.LoaContentType = types.LoaContentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLoaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoa, schemas.DescribeLoaRequest, schemas.Loa)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLoa{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoa, schemas.DescribeLoaRequest, schemas.Loa), output: &DescribeLoaOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLoa{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLoa"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeLoaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLoa(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +153,8 @@ func (c *Client) addOperationDescribeLoaMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeLoa(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLoa",
-	}
 }

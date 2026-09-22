@@ -1,0 +1,3 @@
+GET /experimentdefinitions?application_identifier=__ApplicationIdentifier__&configuration_profile_identifier=__ConfigurationProfileIdentifier__&environment_identifier=__EnvironmentIdentifier__&max_results=1&next_token=__NextToken__&status=ACTIVE
+
+

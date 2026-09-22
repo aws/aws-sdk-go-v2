@@ -5,24 +5,21 @@ package verifiedpermissions
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
 // Creates a policy store. A policy store is a container for policy resources.
 //
-// Although [Cedar supports multiple namespaces], Verified Permissions currently supports only one namespace per
-// policy store.
+// As of May 2026, Verified Permissions has aligned with Cedar and now supports
+// multiple namespaces.
 //
 // Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
 // element to propagate through the service and be visible in the results of other
 // Verified Permissions operations.
 //
 // [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
-// [Cedar supports multiple namespaces]: https://docs.cedarpolicy.com/schema/schema.html#namespace
 func (c *Client) CreatePolicyStore(ctx context.Context, params *CreatePolicyStoreInput, optFns ...func(*Options)) (*CreatePolicyStoreOutput, error) {
 	if params == nil {
 		params = &CreatePolicyStoreInput{}
@@ -127,9 +124,6 @@ type CreatePolicyStoreOutput struct {
 }
 
 func (c *Client) addOperationCreatePolicyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreatePolicyStore{}, middleware.After)
 	if err != nil {
 		return err
@@ -138,53 +132,14 @@ func (c *Client) addOperationCreatePolicyStoreMiddlewares(stack *middleware.Stac
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePolicyStore"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -194,12 +149,6 @@ func (c *Client) addOperationCreatePolicyStoreMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreatePolicyStoreValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePolicyStore(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,12 +161,6 @@ func (c *Client) addOperationCreatePolicyStoreMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,12 +200,4 @@ func (m *idempotencyToken_initializeOpCreatePolicyStore) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreatePolicyStoreMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePolicyStore{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePolicyStore(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePolicyStore",
-	}
 }

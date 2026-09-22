@@ -5,10 +5,10 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the improvements of a particular lens review.
@@ -75,6 +75,36 @@ type ListLensReviewImprovementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLensReviewImprovementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLensReviewImprovementsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLensReviewImprovementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListLensReviewImprovementsInput_LensAlias, *v.LensAlias)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLensReviewImprovementsInput_MaxResults, *v.MaxResults)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.ListLensReviewImprovementsInput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLensReviewImprovementsInput_NextToken, *v.NextToken)
+	}
+	if v.PillarId != nil {
+		s.WriteString(schemas.ListLensReviewImprovementsInput_PillarId, *v.PillarId)
+	}
+	if v.QuestionPriority != "" {
+		s.WriteString(schemas.ListLensReviewImprovementsInput_QuestionPriority, string(v.QuestionPriority))
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListLensReviewImprovementsInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a list lens review improvements call.
 type ListLensReviewImprovementsOutput struct {
 
@@ -117,77 +147,75 @@ type ListLensReviewImprovementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLensReviewImprovementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLensReviewImprovementsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLensReviewImprovementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImprovementSummaries(s, schemas.ListLensReviewImprovementsOutput_ImprovementSummaries, v.ImprovementSummaries)
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListLensReviewImprovementsOutput_LensAlias, *v.LensAlias)
+	}
+	if v.LensArn != nil {
+		s.WriteString(schemas.ListLensReviewImprovementsOutput_LensArn, *v.LensArn)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.ListLensReviewImprovementsOutput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLensReviewImprovementsOutput_NextToken, *v.NextToken)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListLensReviewImprovementsOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *ListLensReviewImprovementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLensReviewImprovementsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLensReviewImprovementsOutput_ImprovementSummaries:
+			return deserializeImprovementSummaries(d, schemas.ListLensReviewImprovementsOutput_ImprovementSummaries, &v.ImprovementSummaries)
+		case schemas.ListLensReviewImprovementsOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.ListLensReviewImprovementsOutput_LensAlias, v.LensAlias)
+		case schemas.ListLensReviewImprovementsOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.ListLensReviewImprovementsOutput_LensArn, v.LensArn)
+		case schemas.ListLensReviewImprovementsOutput_MilestoneNumber:
+			v.MilestoneNumber = new(int32)
+			return d.ReadInt32(schemas.ListLensReviewImprovementsOutput_MilestoneNumber, v.MilestoneNumber)
+		case schemas.ListLensReviewImprovementsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLensReviewImprovementsOutput_NextToken, v.NextToken)
+		case schemas.ListLensReviewImprovementsOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.ListLensReviewImprovementsOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLensReviewImprovementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLensReviewImprovements, schemas.ListLensReviewImprovementsInput, schemas.ListLensReviewImprovementsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLensReviewImprovements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLensReviewImprovements, schemas.ListLensReviewImprovementsInput, schemas.ListLensReviewImprovementsOutput), output: &ListLensReviewImprovementsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLensReviewImprovements{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLensReviewImprovements"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListLensReviewImprovementsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLensReviewImprovements(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,12 +228,6 @@ func (c *Client) addOperationListLensReviewImprovementsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -309,11 +331,3 @@ type ListLensReviewImprovementsAPIClient interface {
 }
 
 var _ ListLensReviewImprovementsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLensReviewImprovements(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLensReviewImprovements",
-	}
-}

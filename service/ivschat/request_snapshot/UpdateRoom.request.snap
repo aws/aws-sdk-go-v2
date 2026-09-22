@@ -1,0 +1,5 @@
+POST /UpdateRoom
+
+Content-Type: application/json
+
+{"identifier":"__Identifier__","loggingConfigurationIdentifiers":["__Member__","__Member__"],"maximumMessageLength":1,"maximumMessageRatePerSecond":1,"messageReviewHandler":{"fallbackResult":"ALLOW","uri":"__Uri__"},"name":"__Name__"}

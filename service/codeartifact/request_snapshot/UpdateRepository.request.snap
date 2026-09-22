@@ -1,0 +1,5 @@
+PUT /v1/repository?domain=__Domain__&domain-owner=__DomainOwner__&repository=__Repository__
+
+Content-Type: application/json
+
+{"description":"__Description__","upstreams":[{"repositoryName":"__RepositoryName__"},{"repositoryName":"__RepositoryName__"}]}

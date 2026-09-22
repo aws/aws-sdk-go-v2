@@ -1,0 +1,5 @@
+PATCH /exclusion-windows
+
+Content-Type: application/json
+
+{"AddExclusionWindows":[{"Reason":"__Reason__","RecurrenceRule":{"Expression":"__Expression__"},"StartTime":946684800,"Window":{"Duration":1,"DurationUnit":"MINUTE"}},{"Reason":"__Reason__","RecurrenceRule":{"Expression":"__Expression__"},"StartTime":946684800,"Window":{"Duration":1,"DurationUnit":"MINUTE"}}],"RemoveExclusionWindows":[{"Reason":"__Reason__","RecurrenceRule":{"Expression":"__Expression__"},"StartTime":946684800,"Window":{"Duration":1,"DurationUnit":"MINUTE"}},{"Reason":"__Reason__","RecurrenceRule":{"Expression":"__Expression__"},"StartTime":946684800,"Window":{"Duration":1,"DurationUnit":"MINUTE"}}],"SloIds":["__Member__","__Member__"]}

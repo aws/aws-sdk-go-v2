@@ -328,7 +328,7 @@ func TestEndpointCase9(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -456,7 +456,7 @@ func TestEndpointCase12(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -509,7 +509,7 @@ func TestEndpointCase13(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
@@ -562,7 +562,7 @@ func TestEndpointCase14(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
@@ -615,7 +615,7 @@ func TestEndpointCase15(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
@@ -668,7 +668,7 @@ func TestEndpointCase16(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
@@ -721,7 +721,7 @@ func TestEndpointCase17(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -774,7 +774,7 @@ func TestEndpointCase18(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")

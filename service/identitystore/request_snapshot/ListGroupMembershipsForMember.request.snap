@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSIdentityStore.ListGroupMembershipsForMember
+
+{"IdentityStoreId":"__IdentityStoreId__","MaxResults":1,"MemberId":{"UserId":"__MemberIdMemberUserId__"},"NextToken":"__NextToken__"}

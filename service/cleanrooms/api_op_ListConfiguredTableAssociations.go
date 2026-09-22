@@ -5,10 +5,10 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists configured table associations for a membership.
@@ -46,6 +46,40 @@ type ListConfiguredTableAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredTableAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredTableAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredTableAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfiguredTableAssociationsInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListConfiguredTableAssociationsInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredTableAssociationsInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfiguredTableAssociationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfiguredTableAssociationsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfiguredTableAssociationsInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListConfiguredTableAssociationsInput_maxResults, v.MaxResults)
+		case schemas.ListConfiguredTableAssociationsInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.ListConfiguredTableAssociationsInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.ListConfiguredTableAssociationsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfiguredTableAssociationsInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListConfiguredTableAssociationsOutput struct {
 
 	// The retrieved list of configured table associations.
@@ -62,77 +96,51 @@ type ListConfiguredTableAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredTableAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredTableAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredTableAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguredTableAssociationSummaryList(s, schemas.ListConfiguredTableAssociationsOutput_configuredTableAssociationSummaries, v.ConfiguredTableAssociationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredTableAssociationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfiguredTableAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfiguredTableAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfiguredTableAssociationsOutput_configuredTableAssociationSummaries:
+			return deserializeConfiguredTableAssociationSummaryList(d, schemas.ListConfiguredTableAssociationsOutput_configuredTableAssociationSummaries, &v.ConfiguredTableAssociationSummaries)
+		case schemas.ListConfiguredTableAssociationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfiguredTableAssociationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfiguredTableAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredTableAssociations, schemas.ListConfiguredTableAssociationsInput, schemas.ListConfiguredTableAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfiguredTableAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredTableAssociations, schemas.ListConfiguredTableAssociationsInput, schemas.ListConfiguredTableAssociationsOutput), output: &ListConfiguredTableAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfiguredTableAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConfiguredTableAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListConfiguredTableAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfiguredTableAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +153,6 @@ func (c *Client) addOperationListConfiguredTableAssociationsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +258,3 @@ type ListConfiguredTableAssociationsAPIClient interface {
 }
 
 var _ ListConfiguredTableAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListConfiguredTableAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListConfiguredTableAssociations",
-	}
-}

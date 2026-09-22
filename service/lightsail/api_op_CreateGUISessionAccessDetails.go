@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates two URLs that are used to access a virtual computer’s graphical user
@@ -42,6 +41,18 @@ type CreateGUISessionAccessDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGUISessionAccessDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGUISessionAccessDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGUISessionAccessDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceName != nil {
+		s.WriteString(schemas.CreateGUISessionAccessDetailsRequest_resourceName, *v.ResourceName)
+	}
+}
+
 type CreateGUISessionAccessDetailsOutput struct {
 
 	// The reason the operation failed.
@@ -65,77 +76,73 @@ type CreateGUISessionAccessDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGUISessionAccessDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGUISessionAccessDetailsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGUISessionAccessDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CreateGUISessionAccessDetailsResult_failureReason, *v.FailureReason)
+	}
+	if v.PercentageComplete != nil {
+		s.WriteInt32(schemas.CreateGUISessionAccessDetailsResult_percentageComplete, *v.PercentageComplete)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.CreateGUISessionAccessDetailsResult_resourceName, *v.ResourceName)
+	}
+	serializeSessions(s, schemas.CreateGUISessionAccessDetailsResult_sessions, v.Sessions)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateGUISessionAccessDetailsResult_status, string(v.Status))
+	}
+}
+func (v *CreateGUISessionAccessDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGUISessionAccessDetailsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGUISessionAccessDetailsResult_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CreateGUISessionAccessDetailsResult_failureReason, v.FailureReason)
+		case schemas.CreateGUISessionAccessDetailsResult_percentageComplete:
+			v.PercentageComplete = new(int32)
+			return d.ReadInt32(schemas.CreateGUISessionAccessDetailsResult_percentageComplete, v.PercentageComplete)
+		case schemas.CreateGUISessionAccessDetailsResult_resourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.CreateGUISessionAccessDetailsResult_resourceName, v.ResourceName)
+		case schemas.CreateGUISessionAccessDetailsResult_sessions:
+			return deserializeSessions(d, schemas.CreateGUISessionAccessDetailsResult_sessions, &v.Sessions)
+		case schemas.CreateGUISessionAccessDetailsResult_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateGUISessionAccessDetailsResult_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGUISessionAccessDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGUISessionAccessDetails, schemas.CreateGUISessionAccessDetailsRequest, schemas.CreateGUISessionAccessDetailsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGUISessionAccessDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGUISessionAccessDetails, schemas.CreateGUISessionAccessDetailsRequest, schemas.CreateGUISessionAccessDetailsResult), output: &CreateGUISessionAccessDetailsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGUISessionAccessDetails{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGUISessionAccessDetails"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateGUISessionAccessDetailsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGUISessionAccessDetails(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +157,8 @@ func (c *Client) addOperationCreateGUISessionAccessDetailsMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGUISessionAccessDetails(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGUISessionAccessDetails",
-	}
 }

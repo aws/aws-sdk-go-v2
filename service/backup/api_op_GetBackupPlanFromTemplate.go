@@ -4,11 +4,10 @@ package backup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the template specified by its templateId as a backup plan.
@@ -37,6 +36,18 @@ type GetBackupPlanFromTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupPlanFromTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupPlanFromTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupPlanFromTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanTemplateId != nil {
+		s.WriteString(schemas.GetBackupPlanFromTemplateInput_BackupPlanTemplateId, *v.BackupPlanTemplateId)
+	}
+}
+
 type GetBackupPlanFromTemplateOutput struct {
 
 	// Returns the body of a backup plan based on the target template, including the
@@ -49,77 +60,50 @@ type GetBackupPlanFromTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackupPlanFromTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackupPlanFromTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackupPlanFromTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanDocument != nil {
+		s.WriteStruct(schemas.GetBackupPlanFromTemplateOutput_BackupPlanDocument)
+		v.BackupPlanDocument.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBackupPlanFromTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackupPlanFromTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackupPlanFromTemplateOutput_BackupPlanDocument:
+			v.BackupPlanDocument = &types.BackupPlan{}
+			return v.BackupPlanDocument.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackupPlanFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupPlanFromTemplate, schemas.GetBackupPlanFromTemplateInput, schemas.GetBackupPlanFromTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackupPlanFromTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackupPlanFromTemplate, schemas.GetBackupPlanFromTemplateInput, schemas.GetBackupPlanFromTemplateOutput), output: &GetBackupPlanFromTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackupPlanFromTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBackupPlanFromTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBackupPlanFromTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBackupPlanFromTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +118,8 @@ func (c *Client) addOperationGetBackupPlanFromTemplateMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBackupPlanFromTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBackupPlanFromTemplate",
-	}
 }

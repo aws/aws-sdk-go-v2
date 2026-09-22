@@ -1,0 +1,5 @@
+PUT /sip-media-applications/__SipMediaApplicationId__
+
+Content-Type: application/json
+
+{"Endpoints":[{"LambdaArn":"__LambdaArn__"},{"LambdaArn":"__LambdaArn__"}],"Name":"__Name__"}

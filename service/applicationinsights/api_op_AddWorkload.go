@@ -4,11 +4,10 @@ package applicationinsights
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a workload to a component. Each component can have at most five workloads.
@@ -48,6 +47,26 @@ type AddWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddWorkloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddWorkloadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.AddWorkloadRequest_ComponentName, *v.ComponentName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.AddWorkloadRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.WorkloadConfiguration != nil {
+		s.WriteStruct(schemas.AddWorkloadRequest_WorkloadConfiguration)
+		v.WorkloadConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AddWorkloadOutput struct {
 
 	// The configuration settings of the workload. The value is the escaped JSON of
@@ -63,77 +82,59 @@ type AddWorkloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddWorkloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddWorkloadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddWorkloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadConfiguration != nil {
+		s.WriteStruct(schemas.AddWorkloadResponse_WorkloadConfiguration)
+		v.WorkloadConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.AddWorkloadResponse_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *AddWorkloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddWorkloadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddWorkloadResponse_WorkloadConfiguration:
+			v.WorkloadConfiguration = &types.WorkloadConfiguration{}
+			return v.WorkloadConfiguration.Deserialize(d)
+		case schemas.AddWorkloadResponse_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.AddWorkloadResponse_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddWorkload, schemas.AddWorkloadRequest, schemas.AddWorkloadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddWorkload, schemas.AddWorkloadRequest, schemas.AddWorkloadResponse), output: &AddWorkloadOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddWorkload{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddWorkload"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAddWorkloadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddWorkload(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +149,8 @@ func (c *Client) addOperationAddWorkloadMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAddWorkload(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AddWorkload",
-	}
 }

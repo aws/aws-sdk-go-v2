@@ -7,6 +7,49 @@ import (
 	"time"
 )
 
+// A constraint on which AWS account a deployment can be initiated from. Specify
+// one of the supported constraint types.
+//
+// The following types satisfy this interface:
+//
+//	AccountConstraintMemberDelegatedAdmin
+//	AccountConstraintMemberManagementAccount
+type AccountConstraint interface {
+	isAccountConstraint()
+}
+
+// The deployment must be initiated from a delegated administrator account for the
+// specified service principal.
+type AccountConstraintMemberDelegatedAdmin struct {
+	Value DelegatedAdminConstraint
+
+	noSmithyDocumentSerde
+}
+
+func (*AccountConstraintMemberDelegatedAdmin) isAccountConstraint() {}
+
+// The deployment must be initiated from the AWS Organizations management account.
+type AccountConstraintMemberManagementAccount struct {
+	Value ManagementAccountConstraint
+
+	noSmithyDocumentSerde
+}
+
+func (*AccountConstraintMemberManagementAccount) isAccountConstraint() {}
+
+// The deployment must be initiated from a delegated administrator account for the
+// specified service principal.
+type DelegatedAdminConstraint struct {
+
+	// The service principal for which the account must be a delegated administrator.
+	// For example, stacksets.cloudformation.amazonaws.com .
+	//
+	// This member is required.
+	ServicePrincipal *string
+
+	noSmithyDocumentSerde
+}
+
 // A field that details a condition of the specifications for a deployment.
 type DeploymentConditionalField struct {
 
@@ -106,6 +149,11 @@ type DeploymentEventDataSummary struct {
 	// The description of the deployment event.
 	Description *string
 
+	// A map of metadata key-value pairs associated with a deployment event. For error
+	// detection events, contains workload context and log excerpts used for
+	// troubleshooting.
+	Metadata map[string]string
+
 	// The name of the deployment event.
 	Name *string
 
@@ -198,8 +246,20 @@ type DeploymentSpecificationsField struct {
 	noSmithyDocumentSerde
 }
 
+// The deployment must be initiated from the AWS Organizations management account.
+type ManagementAccountConstraint struct {
+	noSmithyDocumentSerde
+}
+
 // Describes a workload.
 type WorkloadData struct {
+
+	// Optional list of constraints describing what kind of AWS account is allowed to
+	// deploy this workload or deployment pattern. Within a single list the semantics
+	// are OR: an account satisfies the list if it satisfies any entry. Workload-level
+	// and pattern-level lists combine with AND at deployment time. An absent or empty
+	// list at this level means no constraint at this level.
+	AccountConstraints []AccountConstraint
 
 	// The description of a workload.
 	Description *string
@@ -230,6 +290,13 @@ type WorkloadData struct {
 // Describes workload data.
 type WorkloadDataSummary struct {
 
+	// Optional list of constraints describing what kind of AWS account is allowed to
+	// deploy this workload or deployment pattern. Within a single list the semantics
+	// are OR: an account satisfies the list if it satisfies any entry. Workload-level
+	// and pattern-level lists combine with AND at deployment time. An absent or empty
+	// list at this level means no constraint at this level.
+	AccountConstraints []AccountConstraint
+
 	// The display name of the workload data.
 	DisplayName *string
 
@@ -244,6 +311,13 @@ type WorkloadDataSummary struct {
 
 // The data that details a workload deployment pattern.
 type WorkloadDeploymentPatternData struct {
+
+	// Optional list of constraints describing what kind of AWS account is allowed to
+	// deploy this workload or deployment pattern. Within a single list the semantics
+	// are OR: an account satisfies the list if it satisfies any entry. Workload-level
+	// and pattern-level lists combine with AND at deployment time. An absent or empty
+	// list at this level means no constraint at this level.
+	AccountConstraints []AccountConstraint
 
 	// The name of the deployment pattern.
 	DeploymentPatternName *string
@@ -285,6 +359,13 @@ type WorkloadDeploymentPatternData struct {
 // Describes a workload deployment pattern.
 type WorkloadDeploymentPatternDataSummary struct {
 
+	// Optional list of constraints describing what kind of AWS account is allowed to
+	// deploy this workload or deployment pattern. Within a single list the semantics
+	// are OR: an account satisfies the list if it satisfies any entry. Workload-level
+	// and pattern-level lists combine with AND at deployment time. An absent or empty
+	// list at this level means no constraint at this level.
+	AccountConstraints []AccountConstraint
+
 	// The name of a workload deployment pattern.
 	DeploymentPatternName *string
 
@@ -313,3 +394,14 @@ type WorkloadDeploymentPatternDataSummary struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isAccountConstraint() {}

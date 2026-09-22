@@ -2613,12 +2613,6 @@ func validateOpCreateImportedImageInput(v *CreateImportedImageInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.SourceAmiId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceAmiId"))
-	}
-	if v.IamRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
-	}
 	if v.AppCatalogConfig != nil {
 		if err := validateAppCatalogConfig(v.AppCatalogConfig); err != nil {
 			invalidParams.AddNested("AppCatalogConfig", err.(smithy.InvalidParamsError))

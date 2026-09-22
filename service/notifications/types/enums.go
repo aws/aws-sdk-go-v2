@@ -438,6 +438,7 @@ const (
 	TextPartTypeLocalizedText TextPartType = "LOCALIZED_TEXT"
 	TextPartTypePlainText     TextPartType = "PLAIN_TEXT"
 	TextPartTypeUrl           TextPartType = "URL"
+	TextPartTypePortableText  TextPartType = "PORTABLE_TEXT"
 )
 
 // Values returns all known values for TextPartType. Note that this can be
@@ -449,6 +450,7 @@ func (TextPartType) Values() []TextPartType {
 		"LOCALIZED_TEXT",
 		"PLAIN_TEXT",
 		"URL",
+		"PORTABLE_TEXT",
 	}
 }
 

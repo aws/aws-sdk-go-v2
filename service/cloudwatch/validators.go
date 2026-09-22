@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateDatasetKmsKey struct {
+}
+
+func (*validateOpAssociateDatasetKmsKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateDatasetKmsKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateDatasetKmsKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateDatasetKmsKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAlarmMuteRule struct {
 }
 
@@ -230,6 +250,26 @@ func (m *validateOpDisableInsightRules) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateDatasetKmsKey struct {
+}
+
+func (*validateOpDisassociateDatasetKmsKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateDatasetKmsKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateDatasetKmsKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateDatasetKmsKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableAlarmActions struct {
 }
 
@@ -305,6 +345,26 @@ func (m *validateOpGetDashboard) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDashboardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataset struct {
+}
+
+func (*validateOpGetDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDatasetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +630,26 @@ func (m *validateOpPutInsightRule) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutLogAlarm struct {
+}
+
+func (*validateOpPutLogAlarm) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutLogAlarm) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutLogAlarmInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutLogAlarmInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutManagedInsightRules struct {
 }
 
@@ -750,6 +830,10 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateDatasetKmsKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateDatasetKmsKey{}, middleware.After)
+}
+
 func addOpDeleteAlarmMuteRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlarmMuteRule{}, middleware.After)
 }
@@ -794,6 +878,10 @@ func addOpDisableInsightRulesValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDisableInsightRules{}, middleware.After)
 }
 
+func addOpDisassociateDatasetKmsKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateDatasetKmsKey{}, middleware.After)
+}
+
 func addOpEnableAlarmActionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableAlarmActions{}, middleware.After)
 }
@@ -808,6 +896,10 @@ func addOpGetAlarmMuteRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDashboard{}, middleware.After)
+}
+
+func addOpGetDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataset{}, middleware.After)
 }
 
 func addOpGetInsightRuleReportValidationMiddleware(stack *middleware.Stack) error {
@@ -860,6 +952,10 @@ func addOpPutDashboardValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutInsightRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutInsightRule{}, middleware.After)
+}
+
+func addOpPutLogAlarmValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutLogAlarm{}, middleware.After)
 }
 
 func addOpPutManagedInsightRulesValidationMiddleware(stack *middleware.Stack) error {
@@ -1389,6 +1485,57 @@ func validateSchedule(v *types.Schedule) error {
 	}
 }
 
+func validateScheduleConfiguration(v *types.ScheduleConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfiguration"}
+	if v.ScheduleExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if v.StartTimeOffset == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeOffset"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduledQueryConfiguration(v *types.ScheduledQueryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduledQueryConfiguration"}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if v.ScheduledQueryRoleARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledQueryRoleARN"))
+	}
+	if v.ScheduleConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfiguration"))
+	} else if v.ScheduleConfiguration != nil {
+		if err := validateScheduleConfiguration(v.ScheduleConfiguration); err != nil {
+			invalidParams.AddNested("ScheduleConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AggregationExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregationExpression"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSingleMetricAnomalyDetector(v *types.SingleMetricAnomalyDetector) error {
 	if v == nil {
 		return nil
@@ -1457,6 +1604,39 @@ func validateTagList(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWarmUpConfiguration(v *types.WarmUpConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WarmUpConfiguration"}
+	if v.WarmUpPeriodDurationInMinutes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WarmUpPeriodDurationInMinutes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateDatasetKmsKeyInput(v *AssociateDatasetKmsKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateDatasetKmsKeyInput"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
+	}
+	if v.KmsKeyArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1652,6 +1832,21 @@ func validateOpDisableInsightRulesInput(v *DisableInsightRulesInput) error {
 	}
 }
 
+func validateOpDisassociateDatasetKmsKeyInput(v *DisassociateDatasetKmsKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDatasetKmsKeyInput"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEnableAlarmActionsInput(v *EnableAlarmActionsInput) error {
 	if v == nil {
 		return nil
@@ -1704,6 +1899,21 @@ func validateOpGetDashboardInput(v *GetDashboardInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetDashboardInput"}
 	if v.DashboardName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DashboardName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDatasetInput(v *GetDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDatasetInput"}
+	if v.DatasetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2003,6 +2213,50 @@ func validateOpPutInsightRuleInput(v *PutInsightRuleInput) error {
 	}
 }
 
+func validateOpPutLogAlarmInput(v *PutLogAlarmInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutLogAlarmInput"}
+	if v.AlarmName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmName"))
+	}
+	if v.ScheduledQueryConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledQueryConfiguration"))
+	} else if v.ScheduledQueryConfiguration != nil {
+		if err := validateScheduledQueryConfiguration(v.ScheduledQueryConfiguration); err != nil {
+			invalidParams.AddNested("ScheduledQueryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.QueryResultsToEvaluate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryResultsToEvaluate"))
+	}
+	if v.QueryResultsToAlarm == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryResultsToAlarm"))
+	}
+	if v.Threshold == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
+	}
+	if len(v.ComparisonOperator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WarmUpConfiguration != nil {
+		if err := validateWarmUpConfiguration(v.WarmUpConfiguration); err != nil {
+			invalidParams.AddNested("WarmUpConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutManagedInsightRulesInput(v *PutManagedInsightRulesInput) error {
 	if v == nil {
 		return nil
@@ -2043,6 +2297,11 @@ func validateOpPutMetricAlarmInput(v *PutMetricAlarmInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WarmUpConfiguration != nil {
+		if err := validateWarmUpConfiguration(v.WarmUpConfiguration); err != nil {
+			invalidParams.AddNested("WarmUpConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.EvaluationCriteria != nil {

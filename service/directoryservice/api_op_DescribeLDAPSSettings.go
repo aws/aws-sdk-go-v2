@@ -5,10 +5,10 @@ package directoryservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the status of LDAP security for the specified directory.
@@ -47,6 +47,27 @@ type DescribeLDAPSSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLDAPSSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLDAPSSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLDAPSSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeLDAPSSettingsRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeLDAPSSettingsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLDAPSSettingsRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeLDAPSSettingsRequest_Type, string(v.Type))
+	}
+}
+
 type DescribeLDAPSSettingsOutput struct {
 
 	// Information about LDAP security for the specified directory, including status
@@ -63,77 +84,51 @@ type DescribeLDAPSSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLDAPSSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLDAPSSettingsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLDAPSSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLDAPSSettingsInfo(s, schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo, v.LDAPSSettingsInfo)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLDAPSSettingsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLDAPSSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLDAPSSettingsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo:
+			return deserializeLDAPSSettingsInfo(d, schemas.DescribeLDAPSSettingsResult_LDAPSSettingsInfo, &v.LDAPSSettingsInfo)
+		case schemas.DescribeLDAPSSettingsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeLDAPSSettingsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLDAPSSettings, schemas.DescribeLDAPSSettingsRequest, schemas.DescribeLDAPSSettingsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLDAPSSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLDAPSSettings, schemas.DescribeLDAPSSettingsRequest, schemas.DescribeLDAPSSettingsResult), output: &DescribeLDAPSSettingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLDAPSSettings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLDAPSSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeLDAPSSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLDAPSSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +141,6 @@ func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +242,3 @@ type DescribeLDAPSSettingsAPIClient interface {
 }
 
 var _ DescribeLDAPSSettingsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeLDAPSSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLDAPSSettings",
-	}
-}

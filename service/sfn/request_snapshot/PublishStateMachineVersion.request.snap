@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.PublishStateMachineVersion
+
+{"description":"__Description__","revisionId":"__RevisionId__","stateMachineArn":"__StateMachineArn__"}

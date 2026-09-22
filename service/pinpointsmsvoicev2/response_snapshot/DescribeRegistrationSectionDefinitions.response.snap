@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeRegistrationSectionDefinitions
+
+{"NextToken":"__NextToken__","RegistrationSectionDefinitions":[{"DisplayHints":{"DocumentationLink":"__DocumentationLink__","DocumentationTitle":"__DocumentationTitle__","LongDescription":"__LongDescription__","ShortDescription":"__ShortDescription__","Title":"__Title__"},"SectionPath":"__SectionPath__"},{"DisplayHints":{"DocumentationLink":"__DocumentationLink__","DocumentationTitle":"__DocumentationTitle__","LongDescription":"__LongDescription__","ShortDescription":"__ShortDescription__","Title":"__Title__"},"SectionPath":"__SectionPath__"}],"RegistrationType":"__RegistrationType__"}

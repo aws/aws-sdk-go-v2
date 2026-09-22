@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an access entry.
@@ -75,6 +75,28 @@ type UpdateAccessEntryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessEntryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessEntryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessEntryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateAccessEntryRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateAccessEntryRequest_clusterName, *v.ClusterName)
+	}
+	serializeStringList(s, schemas.UpdateAccessEntryRequest_kubernetesGroups, v.KubernetesGroups)
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.UpdateAccessEntryRequest_principalArn, *v.PrincipalArn)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.UpdateAccessEntryRequest_username, *v.Username)
+	}
+}
+
 type UpdateAccessEntryOutput struct {
 
 	// The ARN of the IAM principal for the AccessEntry .
@@ -86,65 +108,44 @@ type UpdateAccessEntryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessEntryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessEntryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessEntryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessEntry != nil {
+		s.WriteStruct(schemas.UpdateAccessEntryResponse_accessEntry)
+		v.AccessEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAccessEntryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccessEntryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccessEntryResponse_accessEntry:
+			v.AccessEntry = &types.AccessEntry{}
+			return v.AccessEntry.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccessEntryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessEntry, schemas.UpdateAccessEntryRequest, schemas.UpdateAccessEntryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccessEntry{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessEntry, schemas.UpdateAccessEntryRequest, schemas.UpdateAccessEntryResponse), output: &UpdateAccessEntryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccessEntry{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccessEntry"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -154,12 +155,6 @@ func (c *Client) addOperationUpdateAccessEntryMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpUpdateAccessEntryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccessEntry(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +167,6 @@ func (c *Client) addOperationUpdateAccessEntryMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -217,12 +206,4 @@ func (m *idempotencyToken_initializeOpUpdateAccessEntry) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opUpdateAccessEntryMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateAccessEntry{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateAccessEntry(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAccessEntry",
-	}
 }

@@ -4,11 +4,10 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the security policy that is attached to your server or SFTP
@@ -42,6 +41,18 @@ type DescribeSecurityPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityPolicyName != nil {
+		s.WriteString(schemas.DescribeSecurityPolicyRequest_SecurityPolicyName, *v.SecurityPolicyName)
+	}
+}
+
 type DescribeSecurityPolicyOutput struct {
 
 	// An array containing the properties of the security policy.
@@ -55,77 +66,50 @@ type DescribeSecurityPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSecurityPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSecurityPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSecurityPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityPolicy != nil {
+		s.WriteStruct(schemas.DescribeSecurityPolicyResponse_SecurityPolicy)
+		v.SecurityPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSecurityPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSecurityPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSecurityPolicyResponse_SecurityPolicy:
+			v.SecurityPolicy = &types.DescribedSecurityPolicy{}
+			return v.SecurityPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSecurityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityPolicy, schemas.DescribeSecurityPolicyRequest, schemas.DescribeSecurityPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSecurityPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSecurityPolicy, schemas.DescribeSecurityPolicyRequest, schemas.DescribeSecurityPolicyResponse), output: &DescribeSecurityPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSecurityPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSecurityPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeSecurityPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSecurityPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +124,8 @@ func (c *Client) addOperationDescribeSecurityPolicyMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeSecurityPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeSecurityPolicy",
-	}
 }

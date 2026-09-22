@@ -4,11 +4,10 @@ package eks
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns configuration options.
@@ -46,6 +45,21 @@ type DescribeAddonConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAddonConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAddonConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAddonConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.DescribeAddonConfigurationRequest_addonName, *v.AddonName)
+	}
+	if v.AddonVersion != nil {
+		s.WriteString(schemas.DescribeAddonConfigurationRequest_addonVersion, *v.AddonVersion)
+	}
+}
+
 type DescribeAddonConfigurationOutput struct {
 
 	// The name of the add-on.
@@ -71,77 +85,63 @@ type DescribeAddonConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAddonConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAddonConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAddonConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.DescribeAddonConfigurationResponse_addonName, *v.AddonName)
+	}
+	if v.AddonVersion != nil {
+		s.WriteString(schemas.DescribeAddonConfigurationResponse_addonVersion, *v.AddonVersion)
+	}
+	if v.ConfigurationSchema != nil {
+		s.WriteString(schemas.DescribeAddonConfigurationResponse_configurationSchema, *v.ConfigurationSchema)
+	}
+	serializeAddonPodIdentityConfigurationList(s, schemas.DescribeAddonConfigurationResponse_podIdentityConfiguration, v.PodIdentityConfiguration)
+}
+func (v *DescribeAddonConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAddonConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAddonConfigurationResponse_addonName:
+			v.AddonName = new(string)
+			return d.ReadString(schemas.DescribeAddonConfigurationResponse_addonName, v.AddonName)
+		case schemas.DescribeAddonConfigurationResponse_addonVersion:
+			v.AddonVersion = new(string)
+			return d.ReadString(schemas.DescribeAddonConfigurationResponse_addonVersion, v.AddonVersion)
+		case schemas.DescribeAddonConfigurationResponse_configurationSchema:
+			v.ConfigurationSchema = new(string)
+			return d.ReadString(schemas.DescribeAddonConfigurationResponse_configurationSchema, v.ConfigurationSchema)
+		case schemas.DescribeAddonConfigurationResponse_podIdentityConfiguration:
+			return deserializeAddonPodIdentityConfigurationList(d, schemas.DescribeAddonConfigurationResponse_podIdentityConfiguration, &v.PodIdentityConfiguration)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAddonConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAddonConfiguration, schemas.DescribeAddonConfigurationRequest, schemas.DescribeAddonConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAddonConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAddonConfiguration, schemas.DescribeAddonConfigurationRequest, schemas.DescribeAddonConfigurationResponse), output: &DescribeAddonConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAddonConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAddonConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAddonConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAddonConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +156,8 @@ func (c *Client) addOperationDescribeAddonConfigurationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAddonConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAddonConfiguration",
-	}
 }

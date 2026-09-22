@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ResourceGroupsTaggingAPI_20170126.ListRequiredTags
+
+{"NextToken":"__NextToken__","RequiredTags":[{"CloudFormationResourceTypes":["__Member__","__Member__"],"ReportingTagKeys":["__Member__","__Member__"],"ResourceType":"__ResourceType__"},{"CloudFormationResourceTypes":["__Member__","__Member__"],"ReportingTagKeys":["__Member__","__Member__"],"ResourceType":"__ResourceType__"}]}

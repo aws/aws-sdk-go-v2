@@ -4,11 +4,8 @@ package timestreaminfluxdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Timestream for InfluxDB cluster.
@@ -64,6 +61,9 @@ type CreateDbClusterInput struct {
 	// organization.
 	Bucket *string
 
+	// A list of backup configurations to enable automated backups for the DB cluster.
+	DbBackupConfigurations []types.DbBackupConfiguration
+
 	// The ID of the DB parameter group to assign to your DB cluster. DB parameter
 	// groups specify how the database is configured. For example, DB parameter groups
 	// can specify the limit for query concurrency.
@@ -87,6 +87,10 @@ type CreateDbClusterInput struct {
 	// Specifies the behavior of failure recovery when the primary node of the cluster
 	// fails.
 	FailoverMode types.FailoverMode
+
+	// The Amazon Web Services KMS key identifier to use for encryption of the DB
+	// cluster. Can be a key ID, key ARN, alias name, or alias ARN.
+	KmsKeyId *string
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
@@ -152,9 +156,6 @@ type CreateDbClusterOutput struct {
 }
 
 func (c *Client) addOperationCreateDbClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateDbCluster{}, middleware.After)
 	if err != nil {
 		return err
@@ -163,65 +164,20 @@ func (c *Client) addOperationCreateDbClusterMiddlewares(stack *middleware.Stack,
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDbCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDbClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDbCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -236,22 +192,8 @@ func (c *Client) addOperationCreateDbClusterMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDbCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDbCluster",
-	}
 }

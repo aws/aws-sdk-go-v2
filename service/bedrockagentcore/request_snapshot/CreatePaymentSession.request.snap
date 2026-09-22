@@ -1,0 +1,7 @@
+POST /payments/createPaymentSession
+
+Content-Type: application/json
+X-Amzn-Bedrock-Agentcore-Payments-Agent-Name: __AgentName__
+X-Amzn-Bedrock-Agentcore-Payments-User-Id: __UserId__
+
+{"clientToken":"__ClientToken__","expiryTimeInMinutes":1,"limits":{"maxSpendAmount":{"currency":"USD","value":"__Value__"}},"paymentManagerArn":"__PaymentManagerArn__"}

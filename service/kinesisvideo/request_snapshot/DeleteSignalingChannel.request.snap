@@ -1,0 +1,5 @@
+POST /deleteSignalingChannel
+
+Content-Type: application/json
+
+{"ChannelARN":"__ChannelARN__","CurrentVersion":"__CurrentVersion__"}

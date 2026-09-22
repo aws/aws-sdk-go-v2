@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetIdentityHeadersInNotificationsEnabled&Enabled=true&Identity=__Identity__&NotificationType=Bounce&Version=2010-12-01

@@ -1,0 +1,5 @@
+POST /2013-04-01/hostedzone
+
+Content-Type: application/xml
+
+<CreateHostedZoneRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><CallerReference>__CallerReference__</CallerReference><DelegationSetId>__DelegationSetId__</DelegationSetId><HostedZoneConfig><Comment>__Comment__</Comment><PrivateZone>true</PrivateZone></HostedZoneConfig><Name>__Name__</Name><VPC><VPCId>__VPCId__</VPCId><VPCRegion>us-east-1</VPCRegion></VPC></CreateHostedZoneRequest>

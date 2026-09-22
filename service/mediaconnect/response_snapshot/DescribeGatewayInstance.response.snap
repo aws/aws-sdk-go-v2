@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"gatewayInstance":{"bridgePlacement":"AVAILABLE","connectionStatus":"CONNECTED","gatewayArn":"__GatewayArn__","gatewayInstanceArn":"__GatewayInstanceArn__","instanceId":"__InstanceId__","instanceMessages":[{"code":"__Code__","message":"__Message__","resourceName":"__ResourceName__"},{"code":"__Code__","message":"__Message__","resourceName":"__ResourceName__"}],"instanceState":"REGISTERING","runningBridgeCount":1}}

@@ -5,10 +5,10 @@ package migrationhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the created artifacts attached to a given migration task in an update
@@ -59,6 +59,27 @@ type ListCreatedArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCreatedArtifactsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCreatedArtifactsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCreatedArtifactsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCreatedArtifactsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.ListCreatedArtifactsRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCreatedArtifactsRequest_NextToken, *v.NextToken)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.ListCreatedArtifactsRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type ListCreatedArtifactsOutput struct {
 
 	// List of created artifacts up to the maximum number of results specified in the
@@ -75,77 +96,51 @@ type ListCreatedArtifactsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCreatedArtifactsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCreatedArtifactsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCreatedArtifactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreatedArtifactList(s, schemas.ListCreatedArtifactsResult_CreatedArtifactList, v.CreatedArtifactList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCreatedArtifactsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCreatedArtifactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCreatedArtifactsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCreatedArtifactsResult_CreatedArtifactList:
+			return deserializeCreatedArtifactList(d, schemas.ListCreatedArtifactsResult_CreatedArtifactList, &v.CreatedArtifactList)
+		case schemas.ListCreatedArtifactsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCreatedArtifactsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCreatedArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCreatedArtifacts, schemas.ListCreatedArtifactsRequest, schemas.ListCreatedArtifactsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCreatedArtifacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCreatedArtifacts, schemas.ListCreatedArtifactsRequest, schemas.ListCreatedArtifactsResult), output: &ListCreatedArtifactsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCreatedArtifacts{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCreatedArtifacts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCreatedArtifactsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCreatedArtifacts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +153,6 @@ func (c *Client) addOperationListCreatedArtifactsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +254,3 @@ type ListCreatedArtifactsAPIClient interface {
 }
 
 var _ ListCreatedArtifactsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCreatedArtifacts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCreatedArtifacts",
-	}
-}

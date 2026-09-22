@@ -4,11 +4,10 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a code generation job to convert network migration mappings into
@@ -47,6 +46,22 @@ type StartNetworkMigrationCodeGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationCodeGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationCodeGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationCodeGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeGenerationOutputFormatTypes(s, schemas.StartNetworkMigrationCodeGenerationRequest_codeGenerationOutputFormatTypes, v.CodeGenerationOutputFormatTypes)
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationCodeGenerationRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationCodeGenerationRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+}
+
 type StartNetworkMigrationCodeGenerationOutput struct {
 
 	// The unique identifier of the code generation job that was started.
@@ -58,77 +73,48 @@ type StartNetworkMigrationCodeGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationCodeGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationCodeGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationCodeGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobID != nil {
+		s.WriteString(schemas.StartNetworkMigrationCodeGenerationResponse_jobID, *v.JobID)
+	}
+}
+func (v *StartNetworkMigrationCodeGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNetworkMigrationCodeGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNetworkMigrationCodeGenerationResponse_jobID:
+			v.JobID = new(string)
+			return d.ReadString(schemas.StartNetworkMigrationCodeGenerationResponse_jobID, v.JobID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNetworkMigrationCodeGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationCodeGeneration, schemas.StartNetworkMigrationCodeGenerationRequest, schemas.StartNetworkMigrationCodeGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNetworkMigrationCodeGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationCodeGeneration, schemas.StartNetworkMigrationCodeGenerationRequest, schemas.StartNetworkMigrationCodeGenerationResponse), output: &StartNetworkMigrationCodeGenerationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNetworkMigrationCodeGeneration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartNetworkMigrationCodeGeneration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartNetworkMigrationCodeGenerationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartNetworkMigrationCodeGeneration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +129,8 @@ func (c *Client) addOperationStartNetworkMigrationCodeGenerationMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartNetworkMigrationCodeGeneration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartNetworkMigrationCodeGeneration",
-	}
 }

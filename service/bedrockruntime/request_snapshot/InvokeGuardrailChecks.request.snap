@@ -1,0 +1,5 @@
+POST /guardrail-checks/invoke
+
+Content-Type: application/json
+
+{"checks":{"contentFilter":{"categories":[{"category":"VIOLENCE"},{"category":"VIOLENCE"}]},"promptAttack":{"categories":[{"category":"JAILBREAK"},{"category":"JAILBREAK"}]},"sensitiveInformation":{"entities":[{"type":"ADDRESS"},{"type":"ADDRESS"}]}},"messages":[{"content":[{"text":"__GuardrailChecksContentBlockMemberText__"},{"text":"__GuardrailChecksContentBlockMemberText__"}],"role":"user"},{"content":[{"text":"__GuardrailChecksContentBlockMemberText__"},{"text":"__GuardrailChecksContentBlockMemberText__"}],"role":"user"}]}

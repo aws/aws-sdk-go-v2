@@ -5,7 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -35,6 +36,18 @@ type GetFarmInput struct {
 	FarmId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFarmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetFarmRequest_farmId, *v.FarmId)
+	}
 }
 
 // Mixin that adds an optional ARN field to response structures. Apply to
@@ -94,65 +107,90 @@ type GetFarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFarmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFarmResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostScaleFactor != nil {
+		s.WriteFloat32(schemas.GetFarmResponse_costScaleFactor, *v.CostScaleFactor)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetFarmResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetFarmResponse_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFarmResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetFarmResponse_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetFarmResponse_farmId, *v.FarmId)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetFarmResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetFarmResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetFarmResponse_updatedBy, *v.UpdatedBy)
+	}
+}
+func (v *GetFarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFarmResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFarmResponse_costScaleFactor:
+			v.CostScaleFactor = new(float32)
+			return d.ReadFloat32(schemas.GetFarmResponse_costScaleFactor, v.CostScaleFactor)
+		case schemas.GetFarmResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFarmResponse_createdAt, v.CreatedAt)
+		case schemas.GetFarmResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetFarmResponse_createdBy, v.CreatedBy)
+		case schemas.GetFarmResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFarmResponse_description, v.Description)
+		case schemas.GetFarmResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetFarmResponse_displayName, v.DisplayName)
+		case schemas.GetFarmResponse_farmId:
+			v.FarmId = new(string)
+			return d.ReadString(schemas.GetFarmResponse_farmId, v.FarmId)
+		case schemas.GetFarmResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetFarmResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetFarmResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFarmResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetFarmResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetFarmResponse_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFarm, schemas.GetFarmRequest, schemas.GetFarmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFarm, schemas.GetFarmRequest, schemas.GetFarmResponse), output: &GetFarmOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFarm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFarm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -162,12 +200,6 @@ func (c *Client) addOperationGetFarmMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addOpGetFarmValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFarm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +212,6 @@ func (c *Client) addOperationGetFarmMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -219,12 +245,4 @@ func (m *endpointPrefix_opGetFarmMiddleware) HandleFinalize(ctx context.Context,
 }
 func addEndpointPrefix_opGetFarmMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetFarmMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetFarm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFarm",
-	}
 }

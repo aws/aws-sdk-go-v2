@@ -1,0 +1,5 @@
+POST /GetTelemetryRule
+
+Content-Type: application/json
+
+{"RuleIdentifier":"__RuleIdentifier__"}

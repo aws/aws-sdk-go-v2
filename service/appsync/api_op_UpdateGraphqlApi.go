@@ -4,11 +4,10 @@ package appsync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a GraphqlApi object.
@@ -106,6 +105,68 @@ type UpdateGraphqlApiInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGraphqlApiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGraphqlApiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGraphqlApiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalAuthenticationProviders(s, schemas.UpdateGraphqlApiRequest_additionalAuthenticationProviders, v.AdditionalAuthenticationProviders)
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_apiId, *v.ApiId)
+	}
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_authenticationType, string(v.AuthenticationType))
+	}
+	if v.EnhancedMetricsConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_enhancedMetricsConfig)
+		v.EnhancedMetricsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntrospectionConfig != "" {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_introspectionConfig, string(v.IntrospectionConfig))
+	}
+	if v.LambdaAuthorizerConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_lambdaAuthorizerConfig)
+		v.LambdaAuthorizerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_logConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MergedApiExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_mergedApiExecutionRoleArn, *v.MergedApiExecutionRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_name, *v.Name)
+	}
+	if v.OpenIDConnectConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_openIDConnectConfig)
+		v.OpenIDConnectConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OwnerContact != nil {
+		s.WriteString(schemas.UpdateGraphqlApiRequest_ownerContact, *v.OwnerContact)
+	}
+	if v.QueryDepthLimit != 0 {
+		s.WriteInt32(schemas.UpdateGraphqlApiRequest_queryDepthLimit, v.QueryDepthLimit)
+	}
+	if v.ResolverCountLimit != 0 {
+		s.WriteInt32(schemas.UpdateGraphqlApiRequest_resolverCountLimit, v.ResolverCountLimit)
+	}
+	if v.UserPoolConfig != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiRequest_userPoolConfig)
+		v.UserPoolConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.XrayEnabled != false {
+		s.WriteBool(schemas.UpdateGraphqlApiRequest_xrayEnabled, v.XrayEnabled)
+	}
+}
+
 type UpdateGraphqlApiOutput struct {
 
 	// The updated GraphqlApi object.
@@ -117,77 +178,50 @@ type UpdateGraphqlApiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGraphqlApiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGraphqlApiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGraphqlApiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphqlApi != nil {
+		s.WriteStruct(schemas.UpdateGraphqlApiResponse_graphqlApi)
+		v.GraphqlApi.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGraphqlApiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGraphqlApiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGraphqlApiResponse_graphqlApi:
+			v.GraphqlApi = &types.GraphqlApi{}
+			return v.GraphqlApi.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGraphqlApi, schemas.UpdateGraphqlApiRequest, schemas.UpdateGraphqlApiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGraphqlApi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGraphqlApi, schemas.UpdateGraphqlApiRequest, schemas.UpdateGraphqlApiResponse), output: &UpdateGraphqlApiOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGraphqlApi{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGraphqlApi"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateGraphqlApiValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGraphqlApi(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,22 +236,8 @@ func (c *Client) addOperationUpdateGraphqlApiMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGraphqlApi(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGraphqlApi",
-	}
 }

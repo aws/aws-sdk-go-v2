@@ -1,0 +1,34 @@
+InvokeEndpointWithBidirectionalStream
+	Initialize stack step
+		OperationInputValidation
+	Serialize stack step
+		setOperationInput
+		ResolveEndpoint
+		OperationSerializer
+	Build stack step
+		EventStreamBuildMiddleware
+		ClientRequestID
+		UserAgent
+		RecursionDetection
+	Finalize stack step
+		ComputePayloadHash
+		SigV4ContentSHA256Header
+		InterceptBeforeRetryLoop
+		Retry
+		InterceptAttempt
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		setLegacyContextSigningOptions
+		Signing
+		InitializeStreamWriter
+	Deserialize stack step
+		AddRawResponseToMetadata
+		OperationEventStreamDeserializer
+		RequireMinimumProtocol
+		ResponseErrorWrapper
+		RequestIDRetriever
+		OperationDeserializer
+		RecordResponseTiming
+		RequestResponseLogger

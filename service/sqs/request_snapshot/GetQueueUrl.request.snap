@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.GetQueueUrl
+X-Amzn-Query-Mode: true
+
+{"QueueName":"__QueueName__","QueueOwnerAWSAccountId":"__QueueOwnerAWSAccountId__"}

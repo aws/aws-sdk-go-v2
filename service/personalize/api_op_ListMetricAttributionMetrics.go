@@ -5,10 +5,10 @@ package personalize
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the metrics for the metric attribution.
@@ -43,6 +43,24 @@ type ListMetricAttributionMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricAttributionMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricAttributionMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricAttributionMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMetricAttributionMetricsRequest_maxResults, *v.MaxResults)
+	}
+	if v.MetricAttributionArn != nil {
+		s.WriteString(schemas.ListMetricAttributionMetricsRequest_metricAttributionArn, *v.MetricAttributionArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricAttributionMetricsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListMetricAttributionMetricsOutput struct {
 
 	// The metrics for the specified metric attribution.
@@ -59,74 +77,48 @@ type ListMetricAttributionMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMetricAttributionMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMetricAttributionMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMetricAttributionMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricAttributes(s, schemas.ListMetricAttributionMetricsResponse_metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMetricAttributionMetricsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListMetricAttributionMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMetricAttributionMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMetricAttributionMetricsResponse_metrics:
+			return deserializeMetricAttributes(d, schemas.ListMetricAttributionMetricsResponse_metrics, &v.Metrics)
+		case schemas.ListMetricAttributionMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMetricAttributionMetricsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMetricAttributionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetricAttributionMetrics, schemas.ListMetricAttributionMetricsRequest, schemas.ListMetricAttributionMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMetricAttributionMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMetricAttributionMetrics, schemas.ListMetricAttributionMetricsRequest, schemas.ListMetricAttributionMetricsResponse), output: &ListMetricAttributionMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMetricAttributionMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMetricAttributionMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMetricAttributionMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,12 +131,6 @@ func (c *Client) addOperationListMetricAttributionMetricsMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +234,3 @@ type ListMetricAttributionMetricsAPIClient interface {
 }
 
 var _ ListMetricAttributionMetricsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMetricAttributionMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMetricAttributionMetrics",
-	}
-}

@@ -1,0 +1,5 @@
+POST /backlog/agent-space/__AgentSpaceId__/tasks/list
+
+Content-Type: application/json
+
+{"filter":{"createdAfter":"2000-01-01T00:00:00Z","createdBefore":"2000-01-01T00:00:00Z","primaryTaskId":"__PrimaryTaskId__","priority":["CRITICAL","CRITICAL"],"status":["PENDING_TRIAGE","PENDING_TRIAGE"],"taskType":["INVESTIGATION","INVESTIGATION"]},"limit":1,"nextToken":"__NextToken__","order":"ASC","sortField":"CREATED_AT"}

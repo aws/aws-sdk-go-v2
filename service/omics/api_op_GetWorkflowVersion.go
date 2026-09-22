@@ -5,7 +5,6 @@ package omics
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -98,6 +97,15 @@ type GetWorkflowVersionOutput struct {
 	// The parameter template for the workflow version.
 	ParameterTemplate map[string]types.WorkflowParameter
 
+	// A mapping of profile names to their parameter templates. Each profile defines
+	// its own set of parameters that you can use when starting a run with that
+	// profile.
+	ProfileParameterTemplates map[string]map[string]types.WorkflowParameter
+
+	// The list of Nextflow profiles that are available for this workflow version.
+	// Profiles allow you to select predefined configuration settings at runtime.
+	Profiles []string
+
 	// The README content for the workflow version, providing documentation and usage
 	// information specific to this version.
 	Readme *string
@@ -145,9 +153,6 @@ type GetWorkflowVersionOutput struct {
 }
 
 func (c *Client) addOperationGetWorkflowVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkflowVersion{}, middleware.After)
 	if err != nil {
 		return err
@@ -156,53 +161,14 @@ func (c *Client) addOperationGetWorkflowVersionMiddlewares(stack *middleware.Sta
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkflowVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -212,12 +178,6 @@ func (c *Client) addOperationGetWorkflowVersionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpGetWorkflowVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWorkflowVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,12 +190,6 @@ func (c *Client) addOperationGetWorkflowVersionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -485,11 +439,3 @@ type GetWorkflowVersionAPIClient interface {
 }
 
 var _ GetWorkflowVersionAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetWorkflowVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWorkflowVersion",
-	}
-}

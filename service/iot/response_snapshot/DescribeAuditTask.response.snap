@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"auditDetails":{"key0":{"checkCompliant":true,"checkRunStatus":"IN_PROGRESS","errorCode":"__ErrorCode__","message":"__Message__","nonCompliantResourcesCount":1,"suppressedNonCompliantResourcesCount":1,"totalResourcesCount":1}},"scheduledAuditName":"__ScheduledAuditName__","taskStartTime":946684800,"taskStatistics":{"canceledChecks":1,"compliantChecks":1,"failedChecks":1,"inProgressChecks":1,"nonCompliantChecks":1,"totalChecks":1,"waitingForDataCollectionChecks":1},"taskStatus":"IN_PROGRESS","taskType":"ON_DEMAND_AUDIT_TASK"}

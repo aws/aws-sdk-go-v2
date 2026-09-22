@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/assets/__Identifier__/revisions
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","formsInput":[{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}],"glossaryTerms":["__Member__","__Member__"],"name":"__Name__","predictionConfiguration":{"businessNameGeneration":{"enabled":true}},"typeRevision":"__TypeRevision__"}

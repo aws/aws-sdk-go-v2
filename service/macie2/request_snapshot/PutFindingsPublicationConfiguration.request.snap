@@ -1,0 +1,5 @@
+PUT /findings-publication-configuration
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","securityHubConfiguration":{"publishClassificationFindings":true,"publishPolicyFindings":true}}

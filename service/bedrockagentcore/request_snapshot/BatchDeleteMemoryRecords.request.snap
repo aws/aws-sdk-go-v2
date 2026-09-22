@@ -1,0 +1,5 @@
+POST /memories/__MemoryId__/memoryRecords/batchDelete
+
+Content-Type: application/json
+
+{"records":[{"memoryRecordId":"__MemoryRecordId__","namespace":"__Namespace__"},{"memoryRecordId":"__MemoryRecordId__","namespace":"__Namespace__"}]}

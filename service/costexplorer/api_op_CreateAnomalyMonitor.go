@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new cost anomaly detection monitor with the requested type and
@@ -65,6 +64,21 @@ type CreateAnomalyMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalyMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalyMonitorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalyMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyMonitor != nil {
+		s.WriteStruct(schemas.CreateAnomalyMonitorRequest_AnomalyMonitor)
+		v.AnomalyMonitor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTagList(s, schemas.CreateAnomalyMonitorRequest_ResourceTags, v.ResourceTags)
+}
+
 type CreateAnomalyMonitorOutput struct {
 
 	// The unique identifier of your newly created cost anomaly detection monitor.
@@ -78,77 +92,48 @@ type CreateAnomalyMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalyMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalyMonitorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalyMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.CreateAnomalyMonitorResponse_MonitorArn, *v.MonitorArn)
+	}
+}
+func (v *CreateAnomalyMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAnomalyMonitorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAnomalyMonitorResponse_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.CreateAnomalyMonitorResponse_MonitorArn, v.MonitorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalyMonitor, schemas.CreateAnomalyMonitorRequest, schemas.CreateAnomalyMonitorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAnomalyMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalyMonitor, schemas.CreateAnomalyMonitorRequest, schemas.CreateAnomalyMonitorResponse), output: &CreateAnomalyMonitorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAnomalyMonitor{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAnomalyMonitor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAnomalyMonitorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAnomalyMonitor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +148,8 @@ func (c *Client) addOperationCreateAnomalyMonitorMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAnomalyMonitor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAnomalyMonitor",
-	}
 }

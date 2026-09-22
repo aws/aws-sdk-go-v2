@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Domains_v20140515.ViewBilling
+
+{"End":946684800,"Marker":"__Marker__","MaxItems":1,"Start":946684800}

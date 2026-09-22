@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeLoadBalancers&LoadBalancerArns.member.1=__Member__&LoadBalancerArns.member.2=__Member__&Marker=__Marker__&Names.member.1=__Member__&Names.member.2=__Member__&PageSize=1&Version=2015-12-01

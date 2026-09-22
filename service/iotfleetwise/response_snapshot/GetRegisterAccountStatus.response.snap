@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.GetRegisterAccountStatus
+
+{"accountStatus":"REGISTRATION_PENDING","creationTime":946684800,"customerAccountId":"__CustomerAccountId__","iamRegistrationResponse":{"errorMessage":"__ErrorMessage__","registrationStatus":"REGISTRATION_PENDING","roleArn":"__RoleArn__"},"lastModificationTime":946684800,"timestreamRegistrationResponse":{"errorMessage":"__ErrorMessage__","registrationStatus":"REGISTRATION_PENDING","timestreamDatabaseArn":"__TimestreamDatabaseArn__","timestreamDatabaseName":"__TimestreamDatabaseName__","timestreamTableArn":"__TimestreamTableArn__","timestreamTableName":"__TimestreamTableName__"}}

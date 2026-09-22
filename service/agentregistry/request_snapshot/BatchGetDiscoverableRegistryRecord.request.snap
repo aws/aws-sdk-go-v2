@@ -1,0 +1,5 @@
+POST /discoverable-records-batch
+
+Content-Type: application/json
+
+{"entries":[{"recordIds":["__Member__","__Member__"],"registryId":"__RegistryId__"},{"recordIds":["__Member__","__Member__"],"registryId":"__RegistryId__"}]}

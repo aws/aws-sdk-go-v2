@@ -4,10 +4,9 @@ package paymentcryptography
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables [Multi-Region key replication] settings for your Amazon Web Services account, causing new keys to be
@@ -66,6 +65,16 @@ type EnableDefaultKeyReplicationRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableDefaultKeyReplicationRegionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableDefaultKeyReplicationRegionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableDefaultKeyReplicationRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegions(s, schemas.EnableDefaultKeyReplicationRegionsInput_ReplicationRegions, v.ReplicationRegions)
+}
+
 // Output from enabling default key replication regions for the account.
 type EnableDefaultKeyReplicationRegionsOutput struct {
 
@@ -84,77 +93,45 @@ type EnableDefaultKeyReplicationRegionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableDefaultKeyReplicationRegionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableDefaultKeyReplicationRegionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableDefaultKeyReplicationRegionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegions(s, schemas.EnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions, v.EnabledReplicationRegions)
+}
+func (v *EnableDefaultKeyReplicationRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableDefaultKeyReplicationRegionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions:
+			return deserializeRegions(d, schemas.EnableDefaultKeyReplicationRegionsOutput_EnabledReplicationRegions, &v.EnabledReplicationRegions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableDefaultKeyReplicationRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDefaultKeyReplicationRegions, schemas.EnableDefaultKeyReplicationRegionsInput, schemas.EnableDefaultKeyReplicationRegionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpEnableDefaultKeyReplicationRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableDefaultKeyReplicationRegions, schemas.EnableDefaultKeyReplicationRegionsInput, schemas.EnableDefaultKeyReplicationRegionsOutput), output: &EnableDefaultKeyReplicationRegionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpEnableDefaultKeyReplicationRegions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableDefaultKeyReplicationRegions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpEnableDefaultKeyReplicationRegionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableDefaultKeyReplicationRegions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +146,8 @@ func (c *Client) addOperationEnableDefaultKeyReplicationRegionsMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opEnableDefaultKeyReplicationRegions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EnableDefaultKeyReplicationRegions",
-	}
 }

@@ -2,6 +2,77 @@
 
 package types
 
+type AccessPointType string
+
+// Enum values for AccessPointType
+const (
+	AccessPointTypeDelivery  AccessPointType = "Delivery"
+	AccessPointTypeEmergency AccessPointType = "Emergency"
+	AccessPointTypeEntrance  AccessPointType = "Entrance"
+	AccessPointTypeLoading   AccessPointType = "Loading"
+	AccessPointTypeOther     AccessPointType = "Other"
+	AccessPointTypeParking   AccessPointType = "Parking"
+	AccessPointTypeTaxi      AccessPointType = "Taxi"
+)
+
+// Values returns all known values for AccessPointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessPointType) Values() []AccessPointType {
+	return []AccessPointType{
+		"Delivery",
+		"Emergency",
+		"Entrance",
+		"Loading",
+		"Other",
+		"Parking",
+		"Taxi",
+	}
+}
+
+type AddressTranslationComponent string
+
+// Enum values for AddressTranslationComponent
+const (
+	AddressTranslationComponentDistrict  AddressTranslationComponent = "District"
+	AddressTranslationComponentLocality  AddressTranslationComponent = "Locality"
+	AddressTranslationComponentRegion    AddressTranslationComponent = "Region"
+	AddressTranslationComponentSubRegion AddressTranslationComponent = "SubRegion"
+)
+
+// Values returns all known values for AddressTranslationComponent. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AddressTranslationComponent) Values() []AddressTranslationComponent {
+	return []AddressTranslationComponent{
+		"District",
+		"Locality",
+		"Region",
+		"SubRegion",
+	}
+}
+
+type AdminNamesPreference string
+
+// Enum values for AdminNamesPreference
+const (
+	AdminNamesPreferenceAlternative AdminNamesPreference = "Alternative"
+	AdminNamesPreferencePrimary     AdminNamesPreference = "Primary"
+)
+
+// Values returns all known values for AdminNamesPreference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdminNamesPreference) Values() []AdminNamesPreference {
+	return []AdminNamesPreference{
+		"Alternative",
+		"Primary",
+	}
+}
+
 type AutocompleteAdditionalFeature string
 
 // Enum values for AutocompleteAdditionalFeature
@@ -24,8 +95,14 @@ type AutocompleteFilterPlaceType string
 
 // Enum values for AutocompleteFilterPlaceType
 const (
-	AutocompleteFilterPlaceTypeLocality   AutocompleteFilterPlaceType = "Locality"
-	AutocompleteFilterPlaceTypePostalCode AutocompleteFilterPlaceType = "PostalCode"
+	AutocompleteFilterPlaceTypeLocality            AutocompleteFilterPlaceType = "Locality"
+	AutocompleteFilterPlaceTypePostalCode          AutocompleteFilterPlaceType = "PostalCode"
+	AutocompleteFilterPlaceTypeStreet              AutocompleteFilterPlaceType = "Street"
+	AutocompleteFilterPlaceTypeIntersection        AutocompleteFilterPlaceType = "Intersection"
+	AutocompleteFilterPlaceTypePointAddress        AutocompleteFilterPlaceType = "PointAddress"
+	AutocompleteFilterPlaceTypeInterpolatedAddress AutocompleteFilterPlaceType = "InterpolatedAddress"
+	AutocompleteFilterPlaceTypeCountry             AutocompleteFilterPlaceType = "Country"
+	AutocompleteFilterPlaceTypeRegion              AutocompleteFilterPlaceType = "Region"
 )
 
 // Values returns all known values for AutocompleteFilterPlaceType. Note that this
@@ -36,6 +113,12 @@ func (AutocompleteFilterPlaceType) Values() []AutocompleteFilterPlaceType {
 	return []AutocompleteFilterPlaceType{
 		"Locality",
 		"PostalCode",
+		"Street",
+		"Intersection",
+		"PointAddress",
+		"InterpolatedAddress",
+		"Country",
+		"Region",
 	}
 }
 
@@ -81,6 +164,25 @@ func (GeocodeAdditionalFeature) Values() []GeocodeAdditionalFeature {
 	}
 }
 
+type GeocodeAddressNamesMode string
+
+// Enum values for GeocodeAddressNamesMode
+const (
+	GeocodeAddressNamesModeMatched        GeocodeAddressNamesMode = "Matched"
+	GeocodeAddressNamesModeAdministrative GeocodeAddressNamesMode = "Administrative"
+)
+
+// Values returns all known values for GeocodeAddressNamesMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GeocodeAddressNamesMode) Values() []GeocodeAddressNamesMode {
+	return []GeocodeAddressNamesMode{
+		"Matched",
+		"Administrative",
+	}
+}
+
 type GeocodeFilterPlaceType string
 
 // Enum values for GeocodeFilterPlaceType
@@ -91,6 +193,10 @@ const (
 	GeocodeFilterPlaceTypeStreet              GeocodeFilterPlaceType = "Street"
 	GeocodeFilterPlaceTypePointAddress        GeocodeFilterPlaceType = "PointAddress"
 	GeocodeFilterPlaceTypeInterpolatedAddress GeocodeFilterPlaceType = "InterpolatedAddress"
+	GeocodeFilterPlaceTypeSecondaryAddress    GeocodeFilterPlaceType = "SecondaryAddress"
+	GeocodeFilterPlaceTypePointOfInterest     GeocodeFilterPlaceType = "PointOfInterest"
+	GeocodeFilterPlaceTypeCountry             GeocodeFilterPlaceType = "Country"
+	GeocodeFilterPlaceTypeRegion              GeocodeFilterPlaceType = "Region"
 )
 
 // Values returns all known values for GeocodeFilterPlaceType. Note that this can
@@ -105,6 +211,10 @@ func (GeocodeFilterPlaceType) Values() []GeocodeFilterPlaceType {
 		"Street",
 		"PointAddress",
 		"InterpolatedAddress",
+		"SecondaryAddress",
+		"PointOfInterest",
+		"Country",
+		"Region",
 	}
 }
 
@@ -139,6 +249,7 @@ const (
 	GetPlaceAdditionalFeatureAccess             GetPlaceAdditionalFeature = "Access"
 	GetPlaceAdditionalFeatureContact            GetPlaceAdditionalFeature = "Contact"
 	GetPlaceAdditionalFeatureSecondaryAddresses GetPlaceAdditionalFeature = "SecondaryAddresses"
+	GetPlaceAdditionalFeatureCrossReferences    GetPlaceAdditionalFeature = "CrossReferences"
 )
 
 // Values returns all known values for GetPlaceAdditionalFeature. Note that this
@@ -152,6 +263,24 @@ func (GetPlaceAdditionalFeature) Values() []GetPlaceAdditionalFeature {
 		"Access",
 		"Contact",
 		"SecondaryAddresses",
+		"CrossReferences",
+	}
+}
+
+type GetPlaceAddressNamesMode string
+
+// Enum values for GetPlaceAddressNamesMode
+const (
+	GetPlaceAddressNamesModeAdministrative GetPlaceAddressNamesMode = "Administrative"
+)
+
+// Values returns all known values for GetPlaceAddressNamesMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GetPlaceAddressNamesMode) Values() []GetPlaceAddressNamesMode {
+	return []GetPlaceAddressNamesMode{
+		"Administrative",
 	}
 }
 
@@ -174,6 +303,23 @@ func (GetPlaceIntendedUse) Values() []GetPlaceIntendedUse {
 	return []GetPlaceIntendedUse{
 		"SingleUse",
 		"Storage",
+	}
+}
+
+type PlaceAttribute string
+
+// Enum values for PlaceAttribute
+const (
+	PlaceAttributeDriveThrough PlaceAttribute = "DriveThrough"
+)
+
+// Values returns all known values for PlaceAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PlaceAttribute) Values() []PlaceAttribute {
+	return []PlaceAttribute{
+		"DriveThrough",
 	}
 }
 
@@ -247,6 +393,7 @@ type PostalCodeMode string
 const (
 	PostalCodeModeMergeAllSpannedLocalities  PostalCodeMode = "MergeAllSpannedLocalities"
 	PostalCodeModeEnumerateSpannedLocalities PostalCodeMode = "EnumerateSpannedLocalities"
+	PostalCodeModeEnumerateSpannedDistricts  PostalCodeMode = "EnumerateSpannedDistricts"
 )
 
 // Values returns all known values for PostalCodeMode. Note that this can be
@@ -257,6 +404,7 @@ func (PostalCodeMode) Values() []PostalCodeMode {
 	return []PostalCodeMode{
 		"MergeAllSpannedLocalities",
 		"EnumerateSpannedLocalities",
+		"EnumerateSpannedDistricts",
 	}
 }
 
@@ -347,6 +495,24 @@ func (ReverseGeocodeAdditionalFeature) Values() []ReverseGeocodeAdditionalFeatur
 	}
 }
 
+type ReverseGeocodeAddressNamesMode string
+
+// Enum values for ReverseGeocodeAddressNamesMode
+const (
+	ReverseGeocodeAddressNamesModeAdministrative ReverseGeocodeAddressNamesMode = "Administrative"
+)
+
+// Values returns all known values for ReverseGeocodeAddressNamesMode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReverseGeocodeAddressNamesMode) Values() []ReverseGeocodeAddressNamesMode {
+	return []ReverseGeocodeAddressNamesMode{
+		"Administrative",
+	}
+}
+
 type ReverseGeocodeFilterPlaceType string
 
 // Enum values for ReverseGeocodeFilterPlaceType
@@ -356,6 +522,8 @@ const (
 	ReverseGeocodeFilterPlaceTypeStreet              ReverseGeocodeFilterPlaceType = "Street"
 	ReverseGeocodeFilterPlaceTypePointAddress        ReverseGeocodeFilterPlaceType = "PointAddress"
 	ReverseGeocodeFilterPlaceTypeInterpolatedAddress ReverseGeocodeFilterPlaceType = "InterpolatedAddress"
+	ReverseGeocodeFilterPlaceTypeSecondaryAddress    ReverseGeocodeFilterPlaceType = "SecondaryAddress"
+	ReverseGeocodeFilterPlaceTypePointOfInterest     ReverseGeocodeFilterPlaceType = "PointOfInterest"
 )
 
 // Values returns all known values for ReverseGeocodeFilterPlaceType. Note that
@@ -370,6 +538,8 @@ func (ReverseGeocodeFilterPlaceType) Values() []ReverseGeocodeFilterPlaceType {
 		"Street",
 		"PointAddress",
 		"InterpolatedAddress",
+		"SecondaryAddress",
+		"PointOfInterest",
 	}
 }
 
@@ -399,10 +569,11 @@ type SearchNearbyAdditionalFeature string
 
 // Enum values for SearchNearbyAdditionalFeature
 const (
-	SearchNearbyAdditionalFeatureTimeZone SearchNearbyAdditionalFeature = "TimeZone"
-	SearchNearbyAdditionalFeaturePhonemes SearchNearbyAdditionalFeature = "Phonemes"
-	SearchNearbyAdditionalFeatureAccess   SearchNearbyAdditionalFeature = "Access"
-	SearchNearbyAdditionalFeatureContact  SearchNearbyAdditionalFeature = "Contact"
+	SearchNearbyAdditionalFeatureTimeZone        SearchNearbyAdditionalFeature = "TimeZone"
+	SearchNearbyAdditionalFeaturePhonemes        SearchNearbyAdditionalFeature = "Phonemes"
+	SearchNearbyAdditionalFeatureAccess          SearchNearbyAdditionalFeature = "Access"
+	SearchNearbyAdditionalFeatureContact         SearchNearbyAdditionalFeature = "Contact"
+	SearchNearbyAdditionalFeatureCrossReferences SearchNearbyAdditionalFeature = "CrossReferences"
 )
 
 // Values returns all known values for SearchNearbyAdditionalFeature. Note that
@@ -416,6 +587,7 @@ func (SearchNearbyAdditionalFeature) Values() []SearchNearbyAdditionalFeature {
 		"Phonemes",
 		"Access",
 		"Contact",
+		"CrossReferences",
 	}
 }
 
@@ -445,10 +617,11 @@ type SearchTextAdditionalFeature string
 
 // Enum values for SearchTextAdditionalFeature
 const (
-	SearchTextAdditionalFeatureTimeZone SearchTextAdditionalFeature = "TimeZone"
-	SearchTextAdditionalFeaturePhonemes SearchTextAdditionalFeature = "Phonemes"
-	SearchTextAdditionalFeatureAccess   SearchTextAdditionalFeature = "Access"
-	SearchTextAdditionalFeatureContact  SearchTextAdditionalFeature = "Contact"
+	SearchTextAdditionalFeatureTimeZone        SearchTextAdditionalFeature = "TimeZone"
+	SearchTextAdditionalFeaturePhonemes        SearchTextAdditionalFeature = "Phonemes"
+	SearchTextAdditionalFeatureAccess          SearchTextAdditionalFeature = "Access"
+	SearchTextAdditionalFeatureContact         SearchTextAdditionalFeature = "Contact"
+	SearchTextAdditionalFeatureCrossReferences SearchTextAdditionalFeature = "CrossReferences"
 )
 
 // Values returns all known values for SearchTextAdditionalFeature. Note that this
@@ -461,6 +634,7 @@ func (SearchTextAdditionalFeature) Values() []SearchTextAdditionalFeature {
 		"Phonemes",
 		"Access",
 		"Contact",
+		"CrossReferences",
 	}
 }
 
@@ -486,14 +660,36 @@ func (SearchTextIntendedUse) Values() []SearchTextIntendedUse {
 	}
 }
 
+type SearchTextTravelMode string
+
+// Enum values for SearchTextTravelMode
+const (
+	SearchTextTravelModeCar     SearchTextTravelMode = "Car"
+	SearchTextTravelModeScooter SearchTextTravelMode = "Scooter"
+	SearchTextTravelModeTruck   SearchTextTravelMode = "Truck"
+)
+
+// Values returns all known values for SearchTextTravelMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchTextTravelMode) Values() []SearchTextTravelMode {
+	return []SearchTextTravelMode{
+		"Car",
+		"Scooter",
+		"Truck",
+	}
+}
+
 type SuggestAdditionalFeature string
 
 // Enum values for SuggestAdditionalFeature
 const (
-	SuggestAdditionalFeatureCore     SuggestAdditionalFeature = "Core"
-	SuggestAdditionalFeatureTimeZone SuggestAdditionalFeature = "TimeZone"
-	SuggestAdditionalFeaturePhonemes SuggestAdditionalFeature = "Phonemes"
-	SuggestAdditionalFeatureAccess   SuggestAdditionalFeature = "Access"
+	SuggestAdditionalFeatureCore            SuggestAdditionalFeature = "Core"
+	SuggestAdditionalFeatureTimeZone        SuggestAdditionalFeature = "TimeZone"
+	SuggestAdditionalFeaturePhonemes        SuggestAdditionalFeature = "Phonemes"
+	SuggestAdditionalFeatureAccess          SuggestAdditionalFeature = "Access"
+	SuggestAdditionalFeatureCrossReferences SuggestAdditionalFeature = "CrossReferences"
 )
 
 // Values returns all known values for SuggestAdditionalFeature. Note that this
@@ -506,6 +702,7 @@ func (SuggestAdditionalFeature) Values() []SuggestAdditionalFeature {
 		"TimeZone",
 		"Phonemes",
 		"Access",
+		"CrossReferences",
 	}
 }
 
@@ -547,6 +744,54 @@ func (SuggestResultItemType) Values() []SuggestResultItemType {
 	}
 }
 
+type SuggestTravelMode string
+
+// Enum values for SuggestTravelMode
+const (
+	SuggestTravelModeCar     SuggestTravelMode = "Car"
+	SuggestTravelModeScooter SuggestTravelMode = "Scooter"
+	SuggestTravelModeTruck   SuggestTravelMode = "Truck"
+)
+
+// Values returns all known values for SuggestTravelMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SuggestTravelMode) Values() []SuggestTravelMode {
+	return []SuggestTravelMode{
+		"Car",
+		"Scooter",
+		"Truck",
+	}
+}
+
+type TranslationNameType string
+
+// Enum values for TranslationNameType
+const (
+	TranslationNameTypeAbbreviation TranslationNameType = "Abbreviation"
+	TranslationNameTypeAreaCode     TranslationNameType = "AreaCode"
+	TranslationNameTypeBaseName     TranslationNameType = "BaseName"
+	TranslationNameTypeExonym       TranslationNameType = "Exonym"
+	TranslationNameTypeShortened    TranslationNameType = "Shortened"
+	TranslationNameTypeSynonym      TranslationNameType = "Synonym"
+)
+
+// Values returns all known values for TranslationNameType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TranslationNameType) Values() []TranslationNameType {
+	return []TranslationNameType{
+		"Abbreviation",
+		"AreaCode",
+		"BaseName",
+		"Exonym",
+		"Shortened",
+		"Synonym",
+	}
+}
+
 type TypePlacement string
 
 // Enum values for TypePlacement
@@ -573,12 +818,8 @@ const (
 	// No such operation is supported.
 	ValidationExceptionReasonUnknownOperation ValidationExceptionReason = "UnknownOperation"
 	// The required input is missing.
-	ValidationExceptionReasonMissing ValidationExceptionReason = "Missing"
-	// The input cannot be parsed. For example a required JSON document, ARN
-	// identifier, date value, or numeric field cannot be parsed.
-	ValidationExceptionReasonCannotParse ValidationExceptionReason = "CannotParse"
-	// The input is present and parsable, but it is otherwise invalid. For example, a
-	// required numeric argument is outside the allowed range.
+	ValidationExceptionReasonMissing               ValidationExceptionReason = "Missing"
+	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "CannotParse"
 	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FieldValidationFailed"
 	// The input is invalid but no more specific reason is applicable.
 	ValidationExceptionReasonOther ValidationExceptionReason = "Other"

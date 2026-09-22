@@ -1,0 +1,5 @@
+PUT /2023-10-12/farms/__FarmId__/fleets/__FleetId__/members/__PrincipalId__
+
+Content-Type: application/json
+
+{"identityCenterRegion":"__IdentityCenterRegion__","identityStoreId":"__IdentityStoreId__","membershipLevel":"VIEWER","principalType":"USER"}

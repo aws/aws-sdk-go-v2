@@ -4,11 +4,10 @@ package lexruntimev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends user input to Amazon Lex V2. Client applications use this API to send
@@ -93,6 +92,36 @@ type RecognizeTextInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecognizeTextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecognizeTextRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecognizeTextInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotAliasId != nil {
+		s.WriteString(schemas.RecognizeTextRequest_botAliasId, *v.BotAliasId)
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.RecognizeTextRequest_botId, *v.BotId)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.RecognizeTextRequest_localeId, *v.LocaleId)
+	}
+	serializeStringMap(s, schemas.RecognizeTextRequest_requestAttributes, v.RequestAttributes)
+	if v.SessionId != nil {
+		s.WriteString(schemas.RecognizeTextRequest_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteStruct(schemas.RecognizeTextRequest_sessionState)
+		v.SessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.RecognizeTextRequest_text, *v.Text)
+	}
+}
+
 type RecognizeTextOutput struct {
 
 	// A list of intents that Amazon Lex V2 determined might satisfy the user's
@@ -129,77 +158,73 @@ type RecognizeTextOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecognizeTextOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecognizeTextResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecognizeTextOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInterpretations(s, schemas.RecognizeTextResponse_interpretations, v.Interpretations)
+	serializeMessages(s, schemas.RecognizeTextResponse_messages, v.Messages)
+	if v.RecognizedBotMember != nil {
+		s.WriteStruct(schemas.RecognizeTextResponse_recognizedBotMember)
+		v.RecognizedBotMember.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringMap(s, schemas.RecognizeTextResponse_requestAttributes, v.RequestAttributes)
+	if v.SessionId != nil {
+		s.WriteString(schemas.RecognizeTextResponse_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteStruct(schemas.RecognizeTextResponse_sessionState)
+		v.SessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RecognizeTextOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecognizeTextResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecognizeTextResponse_interpretations:
+			return deserializeInterpretations(d, schemas.RecognizeTextResponse_interpretations, &v.Interpretations)
+		case schemas.RecognizeTextResponse_messages:
+			return deserializeMessages(d, schemas.RecognizeTextResponse_messages, &v.Messages)
+		case schemas.RecognizeTextResponse_recognizedBotMember:
+			v.RecognizedBotMember = &types.RecognizedBotMember{}
+			return v.RecognizedBotMember.Deserialize(d)
+		case schemas.RecognizeTextResponse_requestAttributes:
+			return deserializeStringMap(d, schemas.RecognizeTextResponse_requestAttributes, &v.RequestAttributes)
+		case schemas.RecognizeTextResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.RecognizeTextResponse_sessionId, v.SessionId)
+		case schemas.RecognizeTextResponse_sessionState:
+			v.SessionState = &types.SessionState{}
+			return v.SessionState.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRecognizeTextMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecognizeText, schemas.RecognizeTextRequest, schemas.RecognizeTextResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRecognizeText{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RecognizeText, schemas.RecognizeTextRequest, schemas.RecognizeTextResponse), output: &RecognizeTextOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRecognizeText{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RecognizeText"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRecognizeTextValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRecognizeText(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,22 +239,8 @@ func (c *Client) addOperationRecognizeTextMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRecognizeText(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RecognizeText",
-	}
 }

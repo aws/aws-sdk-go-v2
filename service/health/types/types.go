@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,36 @@ type AccountEntityAggregate struct {
 	Statuses map[string]int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountEntityAggregate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountEntityAggregate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountEntityAggregate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountEntityAggregate_accountId, *v.AccountId)
+	}
+	if v.Count != 0 {
+		s.WriteInt32(schemas.AccountEntityAggregate_count, v.Count)
+	}
+	serializeentityStatuses(s, schemas.AccountEntityAggregate_statuses, v.Statuses)
+}
+func (v *AccountEntityAggregate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountEntityAggregate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountEntityAggregate_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountEntityAggregate_accountId, v.AccountId)
+		case schemas.AccountEntityAggregate_count:
+			return d.ReadInt32(schemas.AccountEntityAggregate_count, &v.Count)
+		case schemas.AccountEntityAggregate_statuses:
+			return deserializeentityStatuses(d, schemas.AccountEntityAggregate_statuses, &v.Statuses)
+		}
+		return nil
+	})
 }
 
 // Information about an entity that is affected by a Health event.
@@ -69,6 +101,74 @@ type AffectedEntity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AffectedEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AffectedEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AffectedEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.AffectedEntity_awsAccountId, *v.AwsAccountId)
+	}
+	if v.EntityArn != nil {
+		s.WriteString(schemas.AffectedEntity_entityArn, *v.EntityArn)
+	}
+	serializeentityMetadata(s, schemas.AffectedEntity_entityMetadata, v.EntityMetadata)
+	if v.EntityUrl != nil {
+		s.WriteString(schemas.AffectedEntity_entityUrl, *v.EntityUrl)
+	}
+	if v.EntityValue != nil {
+		s.WriteString(schemas.AffectedEntity_entityValue, *v.EntityValue)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.AffectedEntity_eventArn, *v.EventArn)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.AffectedEntity_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.AffectedEntity_statusCode, string(v.StatusCode))
+	}
+	serializetagSet(s, schemas.AffectedEntity_tags, v.Tags)
+}
+func (v *AffectedEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AffectedEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AffectedEntity_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.AffectedEntity_awsAccountId, v.AwsAccountId)
+		case schemas.AffectedEntity_entityArn:
+			v.EntityArn = new(string)
+			return d.ReadString(schemas.AffectedEntity_entityArn, v.EntityArn)
+		case schemas.AffectedEntity_entityMetadata:
+			return deserializeentityMetadata(d, schemas.AffectedEntity_entityMetadata, &v.EntityMetadata)
+		case schemas.AffectedEntity_entityUrl:
+			v.EntityUrl = new(string)
+			return d.ReadString(schemas.AffectedEntity_entityUrl, v.EntityUrl)
+		case schemas.AffectedEntity_entityValue:
+			v.EntityValue = new(string)
+			return d.ReadString(schemas.AffectedEntity_entityValue, v.EntityValue)
+		case schemas.AffectedEntity_eventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.AffectedEntity_eventArn, v.EventArn)
+		case schemas.AffectedEntity_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.AffectedEntity_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.AffectedEntity_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.AffectedEntity_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = EntityStatusCode(ev)
+			return nil
+		case schemas.AffectedEntity_tags:
+			return deserializetagSet(d, schemas.AffectedEntity_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // A range of dates and times that is used by the [EventFilter] and [EntityFilter] objects. If from is set
 // and to is set: match items where the timestamp ( startTime , endTime , or
 // lastUpdatedTime ) is between from and to inclusive. If from is set and to is
@@ -87,6 +187,34 @@ type DateTimeRange struct {
 	To *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DateTimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateTimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.From != nil {
+		s.WriteTime(schemas.DateTimeRange_from, *v.From)
+	}
+	if v.To != nil {
+		s.WriteTime(schemas.DateTimeRange_to, *v.To)
+	}
+}
+func (v *DateTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateTimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateTimeRange_from:
+			v.From = new(time.Time)
+			return d.ReadTime(schemas.DateTimeRange_from, v.From)
+		case schemas.DateTimeRange_to:
+			v.To = new(time.Time)
+			return d.ReadTime(schemas.DateTimeRange_to, v.To)
+		}
+		return nil
+	})
 }
 
 // A JSON set of elements including the awsAccountId , eventArn and a set of
@@ -114,6 +242,37 @@ type EntityAccountFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntityAccountFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityAccountFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityAccountFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.EntityAccountFilter_awsAccountId, *v.AwsAccountId)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.EntityAccountFilter_eventArn, *v.EventArn)
+	}
+	serializeentityStatusCodeList(s, schemas.EntityAccountFilter_statusCodes, v.StatusCodes)
+}
+func (v *EntityAccountFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityAccountFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityAccountFilter_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.EntityAccountFilter_awsAccountId, v.AwsAccountId)
+		case schemas.EntityAccountFilter_eventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.EntityAccountFilter_eventArn, v.EventArn)
+		case schemas.EntityAccountFilter_statusCodes:
+			return deserializeentityStatusCodeList(d, schemas.EntityAccountFilter_statusCodes, &v.StatusCodes)
+		}
+		return nil
+	})
+}
+
 // The number of entities that are affected by one or more events. Returned by the [DescribeEntityAggregates]
 // operation.
 //
@@ -136,6 +295,36 @@ type EntityAggregate struct {
 	Statuses map[string]int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityAggregate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityAggregate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityAggregate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != 0 {
+		s.WriteInt32(schemas.EntityAggregate_count, v.Count)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.EntityAggregate_eventArn, *v.EventArn)
+	}
+	serializeentityStatuses(s, schemas.EntityAggregate_statuses, v.Statuses)
+}
+func (v *EntityAggregate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityAggregate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityAggregate_count:
+			return d.ReadInt32(schemas.EntityAggregate_count, &v.Count)
+		case schemas.EntityAggregate_eventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.EntityAggregate_eventArn, v.EventArn)
+		case schemas.EntityAggregate_statuses:
+			return deserializeentityStatuses(d, schemas.EntityAggregate_statuses, &v.Statuses)
+		}
+		return nil
+	})
 }
 
 // The values to use to filter results from the [DescribeAffectedEntities] operation.
@@ -168,6 +357,40 @@ type EntityFilter struct {
 	Tags []map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeentityArnList(s, schemas.EntityFilter_entityArns, v.EntityArns)
+	serializeentityValueList(s, schemas.EntityFilter_entityValues, v.EntityValues)
+	serializeeventArnList(s, schemas.EntityFilter_eventArns, v.EventArns)
+	serializedateTimeRangeList(s, schemas.EntityFilter_lastUpdatedTimes, v.LastUpdatedTimes)
+	serializeentityStatusCodeList(s, schemas.EntityFilter_statusCodes, v.StatusCodes)
+	serializetagFilter(s, schemas.EntityFilter_tags, v.Tags)
+}
+func (v *EntityFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityFilter_entityArns:
+			return deserializeentityArnList(d, schemas.EntityFilter_entityArns, &v.EntityArns)
+		case schemas.EntityFilter_entityValues:
+			return deserializeentityValueList(d, schemas.EntityFilter_entityValues, &v.EntityValues)
+		case schemas.EntityFilter_eventArns:
+			return deserializeeventArnList(d, schemas.EntityFilter_eventArns, &v.EventArns)
+		case schemas.EntityFilter_lastUpdatedTimes:
+			return deserializedateTimeRangeList(d, schemas.EntityFilter_lastUpdatedTimes, &v.LastUpdatedTimes)
+		case schemas.EntityFilter_statusCodes:
+			return deserializeentityStatusCodeList(d, schemas.EntityFilter_statusCodes, &v.StatusCodes)
+		case schemas.EntityFilter_tags:
+			return deserializetagFilter(d, schemas.EntityFilter_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Summary information about an Health event.
@@ -265,6 +488,113 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Event) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Event)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actionability != "" {
+		s.WriteString(schemas.Event_actionability, string(v.Actionability))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Event_arn, *v.Arn)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.Event_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Event_endTime, *v.EndTime)
+	}
+	if v.EventScopeCode != "" {
+		s.WriteString(schemas.Event_eventScopeCode, string(v.EventScopeCode))
+	}
+	if v.EventTypeCategory != "" {
+		s.WriteString(schemas.Event_eventTypeCategory, string(v.EventTypeCategory))
+	}
+	if v.EventTypeCode != nil {
+		s.WriteString(schemas.Event_eventTypeCode, *v.EventTypeCode)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.Event_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	serializeEventPersonaList(s, schemas.Event_personas, v.Personas)
+	if v.Region != nil {
+		s.WriteString(schemas.Event_region, *v.Region)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.Event_service, *v.Service)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Event_startTime, *v.StartTime)
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.Event_statusCode, string(v.StatusCode))
+	}
+}
+func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Event, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Event_actionability:
+			var ev string
+			if err := d.ReadString(schemas.Event_actionability, &ev); err != nil {
+				return err
+			}
+			v.Actionability = EventActionability(ev)
+			return nil
+		case schemas.Event_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Event_arn, v.Arn)
+		case schemas.Event_availabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.Event_availabilityZone, v.AvailabilityZone)
+		case schemas.Event_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Event_endTime, v.EndTime)
+		case schemas.Event_eventScopeCode:
+			var ev string
+			if err := d.ReadString(schemas.Event_eventScopeCode, &ev); err != nil {
+				return err
+			}
+			v.EventScopeCode = EventScopeCode(ev)
+			return nil
+		case schemas.Event_eventTypeCategory:
+			var ev string
+			if err := d.ReadString(schemas.Event_eventTypeCategory, &ev); err != nil {
+				return err
+			}
+			v.EventTypeCategory = EventTypeCategory(ev)
+			return nil
+		case schemas.Event_eventTypeCode:
+			v.EventTypeCode = new(string)
+			return d.ReadString(schemas.Event_eventTypeCode, v.EventTypeCode)
+		case schemas.Event_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.Event_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.Event_personas:
+			return deserializeEventPersonaList(d, schemas.Event_personas, &v.Personas)
+		case schemas.Event_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Event_region, v.Region)
+		case schemas.Event_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.Event_service, v.Service)
+		case schemas.Event_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Event_startTime, v.StartTime)
+		case schemas.Event_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.Event_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = EventStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The values used to filter results from the [DescribeEventDetailsForOrganization] and [DescribeAffectedEntitiesForOrganization] operations.
 //
 // [DescribeEventDetailsForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html
@@ -289,6 +619,34 @@ type EventAccountFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventAccountFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventAccountFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventAccountFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.EventAccountFilter_awsAccountId, *v.AwsAccountId)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.EventAccountFilter_eventArn, *v.EventArn)
+	}
+}
+func (v *EventAccountFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventAccountFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventAccountFilter_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.EventAccountFilter_awsAccountId, v.AwsAccountId)
+		case schemas.EventAccountFilter_eventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.EventAccountFilter_eventArn, v.EventArn)
+		}
+		return nil
+	})
+}
+
 // The number of events of each issue type. Returned by the [DescribeEventAggregates] operation.
 //
 // [DescribeEventAggregates]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventAggregates.html
@@ -303,6 +661,33 @@ type EventAggregate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventAggregate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventAggregate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventAggregate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateValue != nil {
+		s.WriteString(schemas.EventAggregate_aggregateValue, *v.AggregateValue)
+	}
+	if v.Count != 0 {
+		s.WriteInt32(schemas.EventAggregate_count, v.Count)
+	}
+}
+func (v *EventAggregate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventAggregate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventAggregate_aggregateValue:
+			v.AggregateValue = new(string)
+			return d.ReadString(schemas.EventAggregate_aggregateValue, v.AggregateValue)
+		case schemas.EventAggregate_count:
+			return d.ReadInt32(schemas.EventAggregate_count, &v.Count)
+		}
+		return nil
+	})
+}
+
 // The detailed description of the event. Included in the information returned by
 // the [DescribeEventDetails]operation.
 //
@@ -313,6 +698,28 @@ type EventDescription struct {
 	LatestDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestDescription != nil {
+		s.WriteString(schemas.EventDescription_latestDescription, *v.LatestDescription)
+	}
+}
+func (v *EventDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDescription_latestDescription:
+			v.LatestDescription = new(string)
+			return d.ReadString(schemas.EventDescription_latestDescription, v.LatestDescription)
+		}
+		return nil
+	})
 }
 
 // Detailed information about an event. A combination of an [Event] object, an [EventDescription] object,
@@ -333,6 +740,41 @@ type EventDetails struct {
 	EventMetadata map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != nil {
+		s.WriteStruct(schemas.EventDetails_event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDescription != nil {
+		s.WriteStruct(schemas.EventDetails_eventDescription)
+		v.EventDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeeventMetadata(s, schemas.EventDetails_eventMetadata, v.EventMetadata)
+}
+func (v *EventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDetails_event:
+			v.Event = &Event{}
+			return v.Event.Deserialize(d)
+		case schemas.EventDetails_eventDescription:
+			v.EventDescription = &EventDescription{}
+			return v.EventDescription.Deserialize(d)
+		case schemas.EventDetails_eventMetadata:
+			return deserializeeventMetadata(d, schemas.EventDetails_eventMetadata, &v.EventMetadata)
+		}
+		return nil
+	})
 }
 
 // Error information returned when a [DescribeEventDetails] operation can't find a specified event.
@@ -356,6 +798,40 @@ type EventDetailsErrorItem struct {
 	EventArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventDetailsErrorItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventDetailsErrorItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventDetailsErrorItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.EventDetailsErrorItem_errorMessage, *v.ErrorMessage)
+	}
+	if v.ErrorName != nil {
+		s.WriteString(schemas.EventDetailsErrorItem_errorName, *v.ErrorName)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.EventDetailsErrorItem_eventArn, *v.EventArn)
+	}
+}
+func (v *EventDetailsErrorItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventDetailsErrorItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventDetailsErrorItem_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.EventDetailsErrorItem_errorMessage, v.ErrorMessage)
+		case schemas.EventDetailsErrorItem_errorName:
+			v.ErrorName = new(string)
+			return d.ReadString(schemas.EventDetailsErrorItem_errorName, v.ErrorName)
+		case schemas.EventDetailsErrorItem_eventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.EventDetailsErrorItem_eventArn, v.EventArn)
+		}
+		return nil
+	})
 }
 
 // The values to use to filter results from the [DescribeEvents] and [DescribeEventAggregates] operations.
@@ -424,6 +900,67 @@ type EventFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventActionabilityList(s, schemas.EventFilter_actionabilities, v.Actionabilities)
+	serializeavailabilityZones(s, schemas.EventFilter_availabilityZones, v.AvailabilityZones)
+	serializedateTimeRangeList(s, schemas.EventFilter_endTimes, v.EndTimes)
+	serializeentityArnList(s, schemas.EventFilter_entityArns, v.EntityArns)
+	serializeentityValueList(s, schemas.EventFilter_entityValues, v.EntityValues)
+	serializeeventArnList(s, schemas.EventFilter_eventArns, v.EventArns)
+	serializeeventStatusCodeList(s, schemas.EventFilter_eventStatusCodes, v.EventStatusCodes)
+	serializeeventTypeCategoryList2(s, schemas.EventFilter_eventTypeCategories, v.EventTypeCategories)
+	serializeeventTypeList2(s, schemas.EventFilter_eventTypeCodes, v.EventTypeCodes)
+	serializedateTimeRangeList(s, schemas.EventFilter_lastUpdatedTimes, v.LastUpdatedTimes)
+	serializeEventPersonaList(s, schemas.EventFilter_personas, v.Personas)
+	serializeregionList(s, schemas.EventFilter_regions, v.Regions)
+	serializeserviceList(s, schemas.EventFilter_services, v.Services)
+	serializedateTimeRangeList(s, schemas.EventFilter_startTimes, v.StartTimes)
+	serializetagFilter(s, schemas.EventFilter_tags, v.Tags)
+}
+func (v *EventFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventFilter_actionabilities:
+			return deserializeEventActionabilityList(d, schemas.EventFilter_actionabilities, &v.Actionabilities)
+		case schemas.EventFilter_availabilityZones:
+			return deserializeavailabilityZones(d, schemas.EventFilter_availabilityZones, &v.AvailabilityZones)
+		case schemas.EventFilter_endTimes:
+			return deserializedateTimeRangeList(d, schemas.EventFilter_endTimes, &v.EndTimes)
+		case schemas.EventFilter_entityArns:
+			return deserializeentityArnList(d, schemas.EventFilter_entityArns, &v.EntityArns)
+		case schemas.EventFilter_entityValues:
+			return deserializeentityValueList(d, schemas.EventFilter_entityValues, &v.EntityValues)
+		case schemas.EventFilter_eventArns:
+			return deserializeeventArnList(d, schemas.EventFilter_eventArns, &v.EventArns)
+		case schemas.EventFilter_eventStatusCodes:
+			return deserializeeventStatusCodeList(d, schemas.EventFilter_eventStatusCodes, &v.EventStatusCodes)
+		case schemas.EventFilter_eventTypeCategories:
+			return deserializeeventTypeCategoryList2(d, schemas.EventFilter_eventTypeCategories, &v.EventTypeCategories)
+		case schemas.EventFilter_eventTypeCodes:
+			return deserializeeventTypeList2(d, schemas.EventFilter_eventTypeCodes, &v.EventTypeCodes)
+		case schemas.EventFilter_lastUpdatedTimes:
+			return deserializedateTimeRangeList(d, schemas.EventFilter_lastUpdatedTimes, &v.LastUpdatedTimes)
+		case schemas.EventFilter_personas:
+			return deserializeEventPersonaList(d, schemas.EventFilter_personas, &v.Personas)
+		case schemas.EventFilter_regions:
+			return deserializeregionList(d, schemas.EventFilter_regions, &v.Regions)
+		case schemas.EventFilter_services:
+			return deserializeserviceList(d, schemas.EventFilter_services, &v.Services)
+		case schemas.EventFilter_startTimes:
+			return deserializedateTimeRangeList(d, schemas.EventFilter_startTimes, &v.StartTimes)
+		case schemas.EventFilter_tags:
+			return deserializetagFilter(d, schemas.EventFilter_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Contains the metadata about a type of event that is reported by Health. The
 // EventType shows the category, service, and the event type code of the event. For
 // example, an issue might be the category, EC2 the service, and
@@ -471,6 +1008,57 @@ type EventType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actionability != "" {
+		s.WriteString(schemas.EventType_actionability, string(v.Actionability))
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.EventType_category, string(v.Category))
+	}
+	if v.Code != nil {
+		s.WriteString(schemas.EventType_code, *v.Code)
+	}
+	serializeEventTypePersonaList(s, schemas.EventType_personas, v.Personas)
+	if v.Service != nil {
+		s.WriteString(schemas.EventType_service, *v.Service)
+	}
+}
+func (v *EventType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventType_actionability:
+			var ev string
+			if err := d.ReadString(schemas.EventType_actionability, &ev); err != nil {
+				return err
+			}
+			v.Actionability = EventTypeActionability(ev)
+			return nil
+		case schemas.EventType_category:
+			var ev string
+			if err := d.ReadString(schemas.EventType_category, &ev); err != nil {
+				return err
+			}
+			v.Category = EventTypeCategory(ev)
+			return nil
+		case schemas.EventType_code:
+			v.Code = new(string)
+			return d.ReadString(schemas.EventType_code, v.Code)
+		case schemas.EventType_personas:
+			return deserializeEventTypePersonaList(d, schemas.EventType_personas, &v.Personas)
+		case schemas.EventType_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.EventType_service, v.Service)
+		}
+		return nil
+	})
+}
+
 // The values to use to filter results from the [DescribeEventTypes] operation.
 //
 // [DescribeEventTypes]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventTypes.html
@@ -497,6 +1085,37 @@ type EventTypeFilter struct {
 	Services []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventTypeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventTypeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventTypeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventTypeActionabilityList(s, schemas.EventTypeFilter_actionabilities, v.Actionabilities)
+	serializeEventTypeCategoryList(s, schemas.EventTypeFilter_eventTypeCategories, v.EventTypeCategories)
+	serializeEventTypeCodeList(s, schemas.EventTypeFilter_eventTypeCodes, v.EventTypeCodes)
+	serializeEventTypePersonaList(s, schemas.EventTypeFilter_personas, v.Personas)
+	serializeserviceList(s, schemas.EventTypeFilter_services, v.Services)
+}
+func (v *EventTypeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventTypeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventTypeFilter_actionabilities:
+			return deserializeEventTypeActionabilityList(d, schemas.EventTypeFilter_actionabilities, &v.Actionabilities)
+		case schemas.EventTypeFilter_eventTypeCategories:
+			return deserializeEventTypeCategoryList(d, schemas.EventTypeFilter_eventTypeCategories, &v.EventTypeCategories)
+		case schemas.EventTypeFilter_eventTypeCodes:
+			return deserializeEventTypeCodeList(d, schemas.EventTypeFilter_eventTypeCodes, &v.EventTypeCodes)
+		case schemas.EventTypeFilter_personas:
+			return deserializeEventTypePersonaList(d, schemas.EventTypeFilter_personas, &v.Personas)
+		case schemas.EventTypeFilter_services:
+			return deserializeserviceList(d, schemas.EventTypeFilter_services, &v.Services)
+		}
+		return nil
+	})
 }
 
 // Error information returned when a [DescribeAffectedEntitiesForOrganization] operation can't find or process a specific
@@ -533,6 +1152,46 @@ type OrganizationAffectedEntitiesErrorItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OrganizationAffectedEntitiesErrorItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationAffectedEntitiesErrorItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationAffectedEntitiesErrorItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.OrganizationAffectedEntitiesErrorItem_awsAccountId, *v.AwsAccountId)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.OrganizationAffectedEntitiesErrorItem_errorMessage, *v.ErrorMessage)
+	}
+	if v.ErrorName != nil {
+		s.WriteString(schemas.OrganizationAffectedEntitiesErrorItem_errorName, *v.ErrorName)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.OrganizationAffectedEntitiesErrorItem_eventArn, *v.EventArn)
+	}
+}
+func (v *OrganizationAffectedEntitiesErrorItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationAffectedEntitiesErrorItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationAffectedEntitiesErrorItem_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.OrganizationAffectedEntitiesErrorItem_awsAccountId, v.AwsAccountId)
+		case schemas.OrganizationAffectedEntitiesErrorItem_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.OrganizationAffectedEntitiesErrorItem_errorMessage, v.ErrorMessage)
+		case schemas.OrganizationAffectedEntitiesErrorItem_errorName:
+			v.ErrorName = new(string)
+			return d.ReadString(schemas.OrganizationAffectedEntitiesErrorItem_errorName, v.ErrorName)
+		case schemas.OrganizationAffectedEntitiesErrorItem_eventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.OrganizationAffectedEntitiesErrorItem_eventArn, v.EventArn)
+		}
+		return nil
+	})
+}
+
 // The aggregate results of entities affected by the specified event in your
 // organization. The results are aggregated by the entity status codes for the
 // specified set of accountsIDs.
@@ -556,6 +1215,39 @@ type OrganizationEntityAggregate struct {
 	Statuses map[string]int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrganizationEntityAggregate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationEntityAggregate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationEntityAggregate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountEntityAggregatesList(s, schemas.OrganizationEntityAggregate_accounts, v.Accounts)
+	if v.Count != 0 {
+		s.WriteInt32(schemas.OrganizationEntityAggregate_count, v.Count)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.OrganizationEntityAggregate_eventArn, *v.EventArn)
+	}
+	serializeentityStatuses(s, schemas.OrganizationEntityAggregate_statuses, v.Statuses)
+}
+func (v *OrganizationEntityAggregate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationEntityAggregate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationEntityAggregate_accounts:
+			return deserializeAccountEntityAggregatesList(d, schemas.OrganizationEntityAggregate_accounts, &v.Accounts)
+		case schemas.OrganizationEntityAggregate_count:
+			return d.ReadInt32(schemas.OrganizationEntityAggregate_count, &v.Count)
+		case schemas.OrganizationEntityAggregate_eventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.OrganizationEntityAggregate_eventArn, v.EventArn)
+		case schemas.OrganizationEntityAggregate_statuses:
+			return deserializeentityStatuses(d, schemas.OrganizationEntityAggregate_statuses, &v.Statuses)
+		}
+		return nil
+	})
 }
 
 // Summary information about an event, returned by the [DescribeEventsForOrganization] operation.
@@ -635,6 +1327,107 @@ type OrganizationEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OrganizationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Actionability != "" {
+		s.WriteString(schemas.OrganizationEvent_actionability, string(v.Actionability))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.OrganizationEvent_arn, *v.Arn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.OrganizationEvent_endTime, *v.EndTime)
+	}
+	if v.EventScopeCode != "" {
+		s.WriteString(schemas.OrganizationEvent_eventScopeCode, string(v.EventScopeCode))
+	}
+	if v.EventTypeCategory != "" {
+		s.WriteString(schemas.OrganizationEvent_eventTypeCategory, string(v.EventTypeCategory))
+	}
+	if v.EventTypeCode != nil {
+		s.WriteString(schemas.OrganizationEvent_eventTypeCode, *v.EventTypeCode)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.OrganizationEvent_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	serializeEventPersonaList(s, schemas.OrganizationEvent_personas, v.Personas)
+	if v.Region != nil {
+		s.WriteString(schemas.OrganizationEvent_region, *v.Region)
+	}
+	if v.Service != nil {
+		s.WriteString(schemas.OrganizationEvent_service, *v.Service)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.OrganizationEvent_startTime, *v.StartTime)
+	}
+	if v.StatusCode != "" {
+		s.WriteString(schemas.OrganizationEvent_statusCode, string(v.StatusCode))
+	}
+}
+func (v *OrganizationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationEvent_actionability:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationEvent_actionability, &ev); err != nil {
+				return err
+			}
+			v.Actionability = EventActionability(ev)
+			return nil
+		case schemas.OrganizationEvent_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.OrganizationEvent_arn, v.Arn)
+		case schemas.OrganizationEvent_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.OrganizationEvent_endTime, v.EndTime)
+		case schemas.OrganizationEvent_eventScopeCode:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationEvent_eventScopeCode, &ev); err != nil {
+				return err
+			}
+			v.EventScopeCode = EventScopeCode(ev)
+			return nil
+		case schemas.OrganizationEvent_eventTypeCategory:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationEvent_eventTypeCategory, &ev); err != nil {
+				return err
+			}
+			v.EventTypeCategory = EventTypeCategory(ev)
+			return nil
+		case schemas.OrganizationEvent_eventTypeCode:
+			v.EventTypeCode = new(string)
+			return d.ReadString(schemas.OrganizationEvent_eventTypeCode, v.EventTypeCode)
+		case schemas.OrganizationEvent_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.OrganizationEvent_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.OrganizationEvent_personas:
+			return deserializeEventPersonaList(d, schemas.OrganizationEvent_personas, &v.Personas)
+		case schemas.OrganizationEvent_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.OrganizationEvent_region, v.Region)
+		case schemas.OrganizationEvent_service:
+			v.Service = new(string)
+			return d.ReadString(schemas.OrganizationEvent_service, v.Service)
+		case schemas.OrganizationEvent_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.OrganizationEvent_startTime, v.StartTime)
+		case schemas.OrganizationEvent_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationEvent_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = EventStatusCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Detailed information about an event. A combination of an [Event] object, an [EventDescription] object,
 // and additional metadata about the event. Returned by the [DescribeEventDetailsForOrganization]operation.
 //
@@ -679,6 +1472,47 @@ type OrganizationEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OrganizationEventDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationEventDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationEventDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.OrganizationEventDetails_awsAccountId, *v.AwsAccountId)
+	}
+	if v.Event != nil {
+		s.WriteStruct(schemas.OrganizationEventDetails_event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDescription != nil {
+		s.WriteStruct(schemas.OrganizationEventDetails_eventDescription)
+		v.EventDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeeventMetadata(s, schemas.OrganizationEventDetails_eventMetadata, v.EventMetadata)
+}
+func (v *OrganizationEventDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationEventDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationEventDetails_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.OrganizationEventDetails_awsAccountId, v.AwsAccountId)
+		case schemas.OrganizationEventDetails_event:
+			v.Event = &Event{}
+			return v.Event.Deserialize(d)
+		case schemas.OrganizationEventDetails_eventDescription:
+			v.EventDescription = &EventDescription{}
+			return v.EventDescription.Deserialize(d)
+		case schemas.OrganizationEventDetails_eventMetadata:
+			return deserializeeventMetadata(d, schemas.OrganizationEventDetails_eventMetadata, &v.EventMetadata)
+		}
+		return nil
+	})
+}
+
 // Error information returned when a [DescribeEventDetailsForOrganization] operation can't find a specified event.
 //
 // [DescribeEventDetailsForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html
@@ -720,6 +1554,46 @@ type OrganizationEventDetailsErrorItem struct {
 	EventArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrganizationEventDetailsErrorItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationEventDetailsErrorItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationEventDetailsErrorItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.OrganizationEventDetailsErrorItem_awsAccountId, *v.AwsAccountId)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.OrganizationEventDetailsErrorItem_errorMessage, *v.ErrorMessage)
+	}
+	if v.ErrorName != nil {
+		s.WriteString(schemas.OrganizationEventDetailsErrorItem_errorName, *v.ErrorName)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.OrganizationEventDetailsErrorItem_eventArn, *v.EventArn)
+	}
+}
+func (v *OrganizationEventDetailsErrorItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationEventDetailsErrorItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationEventDetailsErrorItem_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.OrganizationEventDetailsErrorItem_awsAccountId, v.AwsAccountId)
+		case schemas.OrganizationEventDetailsErrorItem_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.OrganizationEventDetailsErrorItem_errorMessage, v.ErrorMessage)
+		case schemas.OrganizationEventDetailsErrorItem_errorName:
+			v.ErrorName = new(string)
+			return d.ReadString(schemas.OrganizationEventDetailsErrorItem_errorName, v.ErrorName)
+		case schemas.OrganizationEventDetailsErrorItem_eventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.OrganizationEventDetailsErrorItem_eventArn, v.EventArn)
+		}
+		return nil
+	})
 }
 
 // The values to filter results from the [DescribeEventsForOrganization] operation.
@@ -800,6 +1674,76 @@ type OrganizationEventFilter struct {
 	StartTime *DateTimeRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrganizationEventFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationEventFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationEventFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventActionabilityList(s, schemas.OrganizationEventFilter_actionabilities, v.Actionabilities)
+	serializeawsAccountIdsList(s, schemas.OrganizationEventFilter_awsAccountIds, v.AwsAccountIds)
+	if v.EndTime != nil {
+		s.WriteStruct(schemas.OrganizationEventFilter_endTime)
+		v.EndTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeentityArnList(s, schemas.OrganizationEventFilter_entityArns, v.EntityArns)
+	serializeentityValueList(s, schemas.OrganizationEventFilter_entityValues, v.EntityValues)
+	serializeeventStatusCodeList(s, schemas.OrganizationEventFilter_eventStatusCodes, v.EventStatusCodes)
+	serializeeventTypeCategoryList2(s, schemas.OrganizationEventFilter_eventTypeCategories, v.EventTypeCategories)
+	serializeeventTypeList2(s, schemas.OrganizationEventFilter_eventTypeCodes, v.EventTypeCodes)
+	if v.LastUpdatedTime != nil {
+		s.WriteStruct(schemas.OrganizationEventFilter_lastUpdatedTime)
+		v.LastUpdatedTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEventPersonaList(s, schemas.OrganizationEventFilter_personas, v.Personas)
+	serializeregionList(s, schemas.OrganizationEventFilter_regions, v.Regions)
+	serializeserviceList(s, schemas.OrganizationEventFilter_services, v.Services)
+	if v.StartTime != nil {
+		s.WriteStruct(schemas.OrganizationEventFilter_startTime)
+		v.StartTime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OrganizationEventFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationEventFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationEventFilter_actionabilities:
+			return deserializeEventActionabilityList(d, schemas.OrganizationEventFilter_actionabilities, &v.Actionabilities)
+		case schemas.OrganizationEventFilter_awsAccountIds:
+			return deserializeawsAccountIdsList(d, schemas.OrganizationEventFilter_awsAccountIds, &v.AwsAccountIds)
+		case schemas.OrganizationEventFilter_endTime:
+			v.EndTime = &DateTimeRange{}
+			return v.EndTime.Deserialize(d)
+		case schemas.OrganizationEventFilter_entityArns:
+			return deserializeentityArnList(d, schemas.OrganizationEventFilter_entityArns, &v.EntityArns)
+		case schemas.OrganizationEventFilter_entityValues:
+			return deserializeentityValueList(d, schemas.OrganizationEventFilter_entityValues, &v.EntityValues)
+		case schemas.OrganizationEventFilter_eventStatusCodes:
+			return deserializeeventStatusCodeList(d, schemas.OrganizationEventFilter_eventStatusCodes, &v.EventStatusCodes)
+		case schemas.OrganizationEventFilter_eventTypeCategories:
+			return deserializeeventTypeCategoryList2(d, schemas.OrganizationEventFilter_eventTypeCategories, &v.EventTypeCategories)
+		case schemas.OrganizationEventFilter_eventTypeCodes:
+			return deserializeeventTypeList2(d, schemas.OrganizationEventFilter_eventTypeCodes, &v.EventTypeCodes)
+		case schemas.OrganizationEventFilter_lastUpdatedTime:
+			v.LastUpdatedTime = &DateTimeRange{}
+			return v.LastUpdatedTime.Deserialize(d)
+		case schemas.OrganizationEventFilter_personas:
+			return deserializeEventPersonaList(d, schemas.OrganizationEventFilter_personas, &v.Personas)
+		case schemas.OrganizationEventFilter_regions:
+			return deserializeregionList(d, schemas.OrganizationEventFilter_regions, &v.Regions)
+		case schemas.OrganizationEventFilter_services:
+			return deserializeserviceList(d, schemas.OrganizationEventFilter_services, &v.Services)
+		case schemas.OrganizationEventFilter_startTime:
+			v.StartTime = &DateTimeRange{}
+			return v.StartTime.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

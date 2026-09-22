@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.CreateDataTransformationProfile
+
+{"ClientToken":"__ClientToken__","KmsKeyId":"__KmsKeyId__","ProfileDescription":"__ProfileDescription__","ProfileName":"__ProfileName__","Source":{"StarterProfile":{"StarterProfileName":"__StarterProfileName__"}},"SourceFormat":"CCDA","Tags":{"key0":"__Value__"}}

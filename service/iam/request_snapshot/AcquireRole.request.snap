@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AcquireRole&ReplacementValues.entry.1.key=key0&ReplacementValues.entry.1.value.Values.member.1=__Member__&ReplacementValues.entry.1.value.Values.member.2=__Member__&TemplateArn=__TemplateArn__&TemplateMinorVersion=1&Version=2010-05-08

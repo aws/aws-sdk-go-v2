@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteLoadBalancer&LoadBalancerArn=__LoadBalancerArn__&Version=2015-12-01

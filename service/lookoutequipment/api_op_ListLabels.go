@@ -5,10 +5,10 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -58,6 +58,36 @@ type ListLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLabelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Equipment != nil {
+		s.WriteString(schemas.ListLabelsRequest_Equipment, *v.Equipment)
+	}
+	if v.FaultCode != nil {
+		s.WriteString(schemas.ListLabelsRequest_FaultCode, *v.FaultCode)
+	}
+	if v.IntervalEndTime != nil {
+		s.WriteTime(schemas.ListLabelsRequest_IntervalEndTime, *v.IntervalEndTime)
+	}
+	if v.IntervalStartTime != nil {
+		s.WriteTime(schemas.ListLabelsRequest_IntervalStartTime, *v.IntervalStartTime)
+	}
+	if v.LabelGroupName != nil {
+		s.WriteString(schemas.ListLabelsRequest_LabelGroupName, *v.LabelGroupName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLabelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLabelsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLabelsOutput struct {
 
 	//  A summary of the items in the label group.
@@ -77,77 +107,51 @@ type ListLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLabelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLabelSummaries(s, schemas.ListLabelsResponse_LabelSummaries, v.LabelSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLabelsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLabelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLabelsResponse_LabelSummaries:
+			return deserializeLabelSummaries(d, schemas.ListLabelsResponse_LabelSummaries, &v.LabelSummaries)
+		case schemas.ListLabelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLabelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabels, schemas.ListLabelsRequest, schemas.ListLabelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabels, schemas.ListLabelsRequest, schemas.ListLabelsResponse), output: &ListLabelsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListLabels{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLabels"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListLabelsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLabels(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +164,6 @@ func (c *Client) addOperationListLabelsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +263,3 @@ type ListLabelsAPIClient interface {
 }
 
 var _ ListLabelsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLabels(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLabels",
-	}
-}

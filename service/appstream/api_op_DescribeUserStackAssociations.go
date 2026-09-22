@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list that describes the UserStackAssociation objects. You must
@@ -57,6 +56,30 @@ type DescribeUserStackAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserStackAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserStackAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserStackAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.DescribeUserStackAssociationsRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeUserStackAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUserStackAssociationsRequest_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeUserStackAssociationsRequest_StackName, *v.StackName)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.DescribeUserStackAssociationsRequest_UserName, *v.UserName)
+	}
+}
+
 type DescribeUserStackAssociationsOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -72,74 +95,51 @@ type DescribeUserStackAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserStackAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserStackAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserStackAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeUserStackAssociationsResult_NextToken, *v.NextToken)
+	}
+	serializeUserStackAssociationList(s, schemas.DescribeUserStackAssociationsResult_UserStackAssociations, v.UserStackAssociations)
+}
+func (v *DescribeUserStackAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserStackAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserStackAssociationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeUserStackAssociationsResult_NextToken, v.NextToken)
+		case schemas.DescribeUserStackAssociationsResult_UserStackAssociations:
+			return deserializeUserStackAssociationList(d, schemas.DescribeUserStackAssociationsResult_UserStackAssociations, &v.UserStackAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserStackAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserStackAssociations, schemas.DescribeUserStackAssociationsRequest, schemas.DescribeUserStackAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserStackAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserStackAssociations, schemas.DescribeUserStackAssociationsRequest, schemas.DescribeUserStackAssociationsResult), output: &DescribeUserStackAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUserStackAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeUserStackAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUserStackAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +154,8 @@ func (c *Client) addOperationDescribeUserStackAssociationsMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeUserStackAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeUserStackAssociations",
-	}
 }

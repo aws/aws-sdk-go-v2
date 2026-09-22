@@ -4,11 +4,10 @@ package wellarchitected
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get lens review.
@@ -61,6 +60,24 @@ type GetLensReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLensReviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLensReviewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLensReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.GetLensReviewInput_LensAlias, *v.LensAlias)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.GetLensReviewInput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.GetLensReviewInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a get lens review call.
 type GetLensReviewOutput struct {
 
@@ -82,77 +99,62 @@ type GetLensReviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLensReviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLensReviewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLensReviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensReview != nil {
+		s.WriteStruct(schemas.GetLensReviewOutput_LensReview)
+		v.LensReview.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.GetLensReviewOutput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.GetLensReviewOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *GetLensReviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLensReviewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLensReviewOutput_LensReview:
+			v.LensReview = &types.LensReview{}
+			return v.LensReview.Deserialize(d)
+		case schemas.GetLensReviewOutput_MilestoneNumber:
+			v.MilestoneNumber = new(int32)
+			return d.ReadInt32(schemas.GetLensReviewOutput_MilestoneNumber, v.MilestoneNumber)
+		case schemas.GetLensReviewOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.GetLensReviewOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLensReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLensReview, schemas.GetLensReviewInput, schemas.GetLensReviewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLensReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLensReview, schemas.GetLensReviewInput, schemas.GetLensReviewOutput), output: &GetLensReviewOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLensReview{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLensReview"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLensReviewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLensReview(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +169,8 @@ func (c *Client) addOperationGetLensReviewMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLensReview(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLensReview",
-	}
 }

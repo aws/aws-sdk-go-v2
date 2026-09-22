@@ -4,11 +4,10 @@ package batch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a job queue.
@@ -82,6 +81,30 @@ type UpdateJobQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputeEnvironmentOrders(s, schemas.UpdateJobQueueRequest_computeEnvironmentOrder, v.ComputeEnvironmentOrder)
+	if v.JobQueue != nil {
+		s.WriteString(schemas.UpdateJobQueueRequest_jobQueue, *v.JobQueue)
+	}
+	serializeJobStateTimeLimitActions(s, schemas.UpdateJobQueueRequest_jobStateTimeLimitActions, v.JobStateTimeLimitActions)
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateJobQueueRequest_priority, *v.Priority)
+	}
+	if v.SchedulingPolicyArn != nil {
+		s.WriteString(schemas.UpdateJobQueueRequest_schedulingPolicyArn, *v.SchedulingPolicyArn)
+	}
+	serializeServiceEnvironmentOrders(s, schemas.UpdateJobQueueRequest_serviceEnvironmentOrder, v.ServiceEnvironmentOrder)
+	if v.State != "" {
+		s.WriteString(schemas.UpdateJobQueueRequest_state, string(v.State))
+	}
+}
+
 type UpdateJobQueueOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job queue.
@@ -96,77 +119,54 @@ type UpdateJobQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobQueueArn != nil {
+		s.WriteString(schemas.UpdateJobQueueResponse_jobQueueArn, *v.JobQueueArn)
+	}
+	if v.JobQueueName != nil {
+		s.WriteString(schemas.UpdateJobQueueResponse_jobQueueName, *v.JobQueueName)
+	}
+}
+func (v *UpdateJobQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateJobQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateJobQueueResponse_jobQueueArn:
+			v.JobQueueArn = new(string)
+			return d.ReadString(schemas.UpdateJobQueueResponse_jobQueueArn, v.JobQueueArn)
+		case schemas.UpdateJobQueueResponse_jobQueueName:
+			v.JobQueueName = new(string)
+			return d.ReadString(schemas.UpdateJobQueueResponse_jobQueueName, v.JobQueueName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobQueue, schemas.UpdateJobQueueRequest, schemas.UpdateJobQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateJobQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJobQueue, schemas.UpdateJobQueueRequest, schemas.UpdateJobQueueResponse), output: &UpdateJobQueueOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateJobQueue{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateJobQueue"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateJobQueueValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateJobQueue(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +181,8 @@ func (c *Client) addOperationUpdateJobQueueMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateJobQueue(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateJobQueue",
-	}
 }

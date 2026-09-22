@@ -1,0 +1,5 @@
+POST /v1/data-sets/__DataSetId__/notification
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Comment":"__Comment__","Details":{"DataUpdate":{"DataUpdatedAt":"2000-01-01T00:00:00Z"},"Deprecation":{"DeprecationAt":"2000-01-01T00:00:00Z"},"SchemaChange":{"Changes":[{"Description":"__Description__","Name":"__Name__","Type":"ADD"},{"Description":"__Description__","Name":"__Name__","Type":"ADD"}],"SchemaChangeAt":"2000-01-01T00:00:00Z"}},"Scope":{"LakeFormationTagPolicies":[{"Database":"__Database__","Table":"__Table__"},{"Database":"__Database__","Table":"__Table__"}],"RedshiftDataShares":[{"Arn":"__Arn__","Database":"__Database__","Function":"__Function__","Schema":"__Schema__","Table":"__Table__","View":"__View__"},{"Arn":"__Arn__","Database":"__Database__","Function":"__Function__","Schema":"__Schema__","Table":"__Table__","View":"__View__"}],"S3DataAccesses":[{"KeyPrefixes":["__Member__","__Member__"],"Keys":["__Member__","__Member__"]},{"KeyPrefixes":["__Member__","__Member__"],"Keys":["__Member__","__Member__"]}]},"Type":"DATA_DELAY"}

@@ -1,0 +1,5 @@
+POST /streamgroups/__Identifier__/streamurls/__StreamUrlIdentifier__/revoke
+
+Content-Type: application/json
+
+{"RevocationMode":"REVOKE_URL"}

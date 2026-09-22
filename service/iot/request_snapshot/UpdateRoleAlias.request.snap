@@ -1,0 +1,5 @@
+PUT /role-aliases/__RoleAlias__
+
+Content-Type: application/json
+
+{"credentialDurationSeconds":1,"roleArn":"__RoleArn__"}

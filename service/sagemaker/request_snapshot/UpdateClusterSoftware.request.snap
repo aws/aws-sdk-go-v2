@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateClusterSoftware
+
+{"ClusterName":"__ClusterName__","DeploymentConfig":{"AutoRollbackConfiguration":[{"AlarmName":"__AlarmName__"},{"AlarmName":"__AlarmName__"}],"RollingUpdatePolicy":{"MaximumBatchSize":{"Type":"INSTANCE_COUNT","Value":1},"RollbackMaximumBatchSize":{"Type":"INSTANCE_COUNT","Value":1}},"WaitIntervalInSeconds":1},"ImageId":"__ImageId__","InstanceGroups":[{"ImageReleaseVersion":"__ImageReleaseVersion__","InstanceGroupName":"__InstanceGroupName__"},{"ImageReleaseVersion":"__ImageReleaseVersion__","InstanceGroupName":"__InstanceGroupName__"}]}

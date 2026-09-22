@@ -1,0 +1,5 @@
+PUT /profilingGroups/__ProfilingGroupName__/policy/agentPermissions
+
+Content-Type: application/json
+
+{"principals":["__Member__","__Member__"],"revisionId":"__RevisionId__"}

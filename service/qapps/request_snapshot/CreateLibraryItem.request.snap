@@ -1,0 +1,6 @@
+POST /catalog.createItem
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"appId":"__AppId__","appVersion":1,"categories":["__Member__","__Member__"]}

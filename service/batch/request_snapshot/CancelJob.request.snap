@@ -1,0 +1,5 @@
+POST /v1/canceljob
+
+Content-Type: application/json
+
+{"jobId":"__JobId__","reason":"__Reason__"}

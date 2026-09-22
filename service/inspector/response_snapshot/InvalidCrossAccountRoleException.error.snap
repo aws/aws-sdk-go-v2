@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.CreateAssessmentTarget
+
+{"__type":"InvalidCrossAccountRoleException","canRetry":true,"errorCode":"ROLE_DOES_NOT_EXIST_OR_INVALID_TRUST_RELATIONSHIP","message":"__Message__"}

@@ -4,11 +4,10 @@ package cloudwatchevents
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new event bus within your account. This can be a custom event bus
@@ -53,6 +52,22 @@ type CreateEventBusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventBusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventBusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventBusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventSourceName != nil {
+		s.WriteString(schemas.CreateEventBusRequest_EventSourceName, *v.EventSourceName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEventBusRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateEventBusRequest_Tags, v.Tags)
+}
+
 type CreateEventBusOutput struct {
 
 	// The ARN of the new event bus.
@@ -64,77 +79,48 @@ type CreateEventBusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEventBusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEventBusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEventBusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBusArn != nil {
+		s.WriteString(schemas.CreateEventBusResponse_EventBusArn, *v.EventBusArn)
+	}
+}
+func (v *CreateEventBusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEventBusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEventBusResponse_EventBusArn:
+			v.EventBusArn = new(string)
+			return d.ReadString(schemas.CreateEventBusResponse_EventBusArn, v.EventBusArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventBus, schemas.CreateEventBusRequest, schemas.CreateEventBusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEventBus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEventBus, schemas.CreateEventBusRequest, schemas.CreateEventBusResponse), output: &CreateEventBusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEventBus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEventBus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateEventBusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEventBus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +135,8 @@ func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateEventBus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEventBus",
-	}
 }

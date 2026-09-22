@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *BatchSizeLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BatchSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BatchSizeLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchSizeLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchSizeLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BatchSizeLimitExceededException_Message, *v.Message)
+	}
+}
+func (v *BatchSizeLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchSizeLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchSizeLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchSizeLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Concurrent modification of the tags associated with an Amazon Comprehend
 // resource is not supported.
@@ -60,6 +82,27 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConcurrentModificationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConcurrentModificationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConcurrentModificationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConcurrentModificationException_Message, *v.Message)
+	}
+}
+func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentModificationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentModificationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An internal server error occurred. Retry your request.
 type InternalServerException struct {
@@ -86,6 +129,27 @@ func (e *InternalServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerException_Message, *v.Message)
+	}
+}
+func (v *InternalServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The filter specified for the operation is invalid. Specify a different filter.
 type InvalidFilterException struct {
@@ -112,6 +176,27 @@ func (e *InvalidFilterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidFilterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidFilterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidFilterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidFilterException_Message, *v.Message)
+	}
+}
+func (v *InvalidFilterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidFilterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidFilterException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidFilterException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request is invalid.
 type InvalidRequestException struct {
@@ -141,6 +226,45 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Detail != nil {
+		s.WriteStruct(schemas.InvalidRequestException_Detail)
+		v.Detail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_Message, *v.Message)
+	}
+	if v.Reason != "" {
+		s.WriteString(schemas.InvalidRequestException_Reason, string(v.Reason))
+	}
+}
+func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestException_Detail:
+			v.Detail = &InvalidRequestDetail{}
+			return v.Detail.Deserialize(d)
+		case schemas.InvalidRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestException_Message, v.Message)
+		case schemas.InvalidRequestException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.InvalidRequestException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = InvalidRequestReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // The specified job was not found. Check the job ID and try again.
 type JobNotFoundException struct {
@@ -167,6 +291,27 @@ func (e *JobNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *JobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *JobNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.JobNotFoundException_Message, *v.Message)
+	}
+}
+func (v *JobNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.JobNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The KMS customer managed key (CMK) entered cannot be validated. Verify the key
 // and re-enter it.
@@ -194,6 +339,27 @@ func (e *KmsKeyValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KmsKeyValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *KmsKeyValidationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KmsKeyValidationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KmsKeyValidationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.KmsKeyValidationException_Message, *v.Message)
+	}
+}
+func (v *KmsKeyValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KmsKeyValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KmsKeyValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KmsKeyValidationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource name is already in use. Use a different name and try
 // your request again.
@@ -221,6 +387,27 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceInUseException_Message, *v.Message)
+	}
+}
+func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The maximum number of resources per account has been exceeded. Review the
 // resources, and then try your request again.
@@ -248,6 +435,27 @@ func (e *ResourceLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceLimitExceededException_Message, *v.Message)
+	}
+}
+func (v *ResourceLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource ARN was not found. Check the ARN and try your request
 // again.
@@ -275,6 +483,27 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource is not available. Check the resource and try your
 // request again.
@@ -302,6 +531,27 @@ func (e *ResourceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceUnavailableException_Message, *v.Message)
+	}
+}
+func (v *ResourceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceUnavailableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceUnavailableException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The size of the input text exceeds the limit. Use a smaller document.
 type TextSizeLimitExceededException struct {
@@ -328,6 +578,27 @@ func (e *TextSizeLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TextSizeLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextSizeLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextSizeLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TextSizeLimitExceededException_Message, *v.Message)
+	}
+}
+func (v *TextSizeLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextSizeLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextSizeLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TextSizeLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The number of requests exceeds the limit. Resubmit your request later.
 type TooManyRequestsException struct {
@@ -354,6 +625,27 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyRequestsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyRequestsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyRequestsException_Message, *v.Message)
+	}
+}
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request contains more tag keys than can be associated with a resource (50
 // tag keys per resource).
@@ -381,6 +673,27 @@ func (e *TooManyTagKeysException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagKeysException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagKeysException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagKeysException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagKeysException_Message, *v.Message)
+	}
+}
+func (v *TooManyTagKeysException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagKeysException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagKeysException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagKeysException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request contains more tags than can be associated with a resource (50 tags
 // per resource). The maximum number of tags includes both existing tags and those
@@ -409,6 +722,27 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsException_Message, *v.Message)
+	}
+}
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Amazon Comprehend can't process the language of the input text. For a list of
 // supported languages, [Supported languages]in the Comprehend Developer Guide.
@@ -438,3 +772,24 @@ func (e *UnsupportedLanguageException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedLanguageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedLanguageException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedLanguageException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedLanguageException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedLanguageException_Message, *v.Message)
+	}
+}
+func (v *UnsupportedLanguageException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedLanguageException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedLanguageException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedLanguageException_Message, v.Message)
+		}
+		return nil
+	})
+}

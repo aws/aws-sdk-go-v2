@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateEdgeDeploymentStage
+
+{"EdgeDeploymentPlanName":"__EdgeDeploymentPlanName__","Stages":[{"DeploymentConfig":{"FailureHandlingPolicy":"ROLLBACK_ON_FAILURE"},"DeviceSelectionConfig":{"DeviceNameContains":"__DeviceNameContains__","DeviceNames":["__Member__","__Member__"],"DeviceSubsetType":"PERCENTAGE","Percentage":1},"StageName":"__StageName__"},{"DeploymentConfig":{"FailureHandlingPolicy":"ROLLBACK_ON_FAILURE"},"DeviceSelectionConfig":{"DeviceNameContains":"__DeviceNameContains__","DeviceNames":["__Member__","__Member__"],"DeviceSubsetType":"PERCENTAGE","Percentage":1},"StageName":"__StageName__"}]}

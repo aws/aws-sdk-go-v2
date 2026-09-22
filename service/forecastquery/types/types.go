@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/forecastquery/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -16,6 +18,34 @@ type DataPoint struct {
 	Value *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timestamp != nil {
+		s.WriteString(schemas.DataPoint_Timestamp, *v.Timestamp)
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.DataPoint_Value, *v.Value)
+	}
+}
+func (v *DataPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataPoint_Timestamp:
+			v.Timestamp = new(string)
+			return d.ReadString(schemas.DataPoint_Timestamp, v.Timestamp)
+		case schemas.DataPoint_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.DataPoint_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides information about a forecast. Returned as part of the QueryForecast response.
@@ -39,6 +69,25 @@ type Forecast struct {
 	Predictions map[string][]DataPoint
 
 	noSmithyDocumentSerde
+}
+
+func (v *Forecast) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Forecast)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Forecast) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePredictions(s, schemas.Forecast_Predictions, v.Predictions)
+}
+func (v *Forecast) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Forecast, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Forecast_Predictions:
+			return deserializePredictions(d, schemas.Forecast_Predictions, &v.Predictions)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

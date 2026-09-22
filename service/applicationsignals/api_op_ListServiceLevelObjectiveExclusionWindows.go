@@ -5,10 +5,10 @@ package applicationsignals
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves all exclusion windows configured for a specific SLO.
@@ -45,6 +45,24 @@ type ListServiceLevelObjectiveExclusionWindowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceLevelObjectiveExclusionWindowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceLevelObjectiveExclusionWindowsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceLevelObjectiveExclusionWindowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ListServiceLevelObjectiveExclusionWindowsInput_Id, *v.Id)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceLevelObjectiveExclusionWindowsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceLevelObjectiveExclusionWindowsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListServiceLevelObjectiveExclusionWindowsOutput struct {
 
 	// A list of exclusion windows configured for the SLO.
@@ -62,77 +80,51 @@ type ListServiceLevelObjectiveExclusionWindowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceLevelObjectiveExclusionWindowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceLevelObjectiveExclusionWindowsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceLevelObjectiveExclusionWindowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExclusionWindows(s, schemas.ListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows, v.ExclusionWindows)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceLevelObjectiveExclusionWindowsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListServiceLevelObjectiveExclusionWindowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceLevelObjectiveExclusionWindowsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows:
+			return deserializeExclusionWindows(d, schemas.ListServiceLevelObjectiveExclusionWindowsOutput_ExclusionWindows, &v.ExclusionWindows)
+		case schemas.ListServiceLevelObjectiveExclusionWindowsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceLevelObjectiveExclusionWindowsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceLevelObjectiveExclusionWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceLevelObjectiveExclusionWindows, schemas.ListServiceLevelObjectiveExclusionWindowsInput, schemas.ListServiceLevelObjectiveExclusionWindowsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceLevelObjectiveExclusionWindows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceLevelObjectiveExclusionWindows, schemas.ListServiceLevelObjectiveExclusionWindowsInput, schemas.ListServiceLevelObjectiveExclusionWindowsOutput), output: &ListServiceLevelObjectiveExclusionWindowsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceLevelObjectiveExclusionWindows{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceLevelObjectiveExclusionWindows"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListServiceLevelObjectiveExclusionWindowsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceLevelObjectiveExclusionWindows(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +137,6 @@ func (c *Client) addOperationListServiceLevelObjectiveExclusionWindowsMiddleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,11 +241,3 @@ type ListServiceLevelObjectiveExclusionWindowsAPIClient interface {
 }
 
 var _ ListServiceLevelObjectiveExclusionWindowsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListServiceLevelObjectiveExclusionWindows(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListServiceLevelObjectiveExclusionWindows",
-	}
-}

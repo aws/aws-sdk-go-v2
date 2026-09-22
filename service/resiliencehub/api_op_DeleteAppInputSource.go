@@ -5,10 +5,10 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the input source and all of its imported resources from the Resilience
@@ -63,6 +63,56 @@ type DeleteAppInputSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppInputSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppInputSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppInputSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppInputSourceRequest_appArn, *v.AppArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAppInputSourceRequest_clientToken, *v.ClientToken)
+	}
+	if v.EksSourceClusterNamespace != nil {
+		s.WriteStruct(schemas.DeleteAppInputSourceRequest_eksSourceClusterNamespace)
+		v.EksSourceClusterNamespace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.DeleteAppInputSourceRequest_sourceArn, *v.SourceArn)
+	}
+	if v.TerraformSource != nil {
+		s.WriteStruct(schemas.DeleteAppInputSourceRequest_terraformSource)
+		v.TerraformSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAppInputSourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppInputSourceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppInputSourceRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppInputSourceRequest_appArn, v.AppArn)
+		case schemas.DeleteAppInputSourceRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteAppInputSourceRequest_clientToken, v.ClientToken)
+		case schemas.DeleteAppInputSourceRequest_eksSourceClusterNamespace:
+			v.EksSourceClusterNamespace = &types.EksSourceClusterNamespace{}
+			return v.EksSourceClusterNamespace.Deserialize(d)
+		case schemas.DeleteAppInputSourceRequest_sourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.DeleteAppInputSourceRequest_sourceArn, v.SourceArn)
+		case schemas.DeleteAppInputSourceRequest_terraformSource:
+			v.TerraformSource = &types.TerraformSource{}
+			return v.TerraformSource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type DeleteAppInputSourceOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -82,65 +132,50 @@ type DeleteAppInputSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppInputSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppInputSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppInputSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppInputSourceResponse_appArn, *v.AppArn)
+	}
+	if v.AppInputSource != nil {
+		s.WriteStruct(schemas.DeleteAppInputSourceResponse_appInputSource)
+		v.AppInputSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAppInputSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppInputSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppInputSourceResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppInputSourceResponse_appArn, v.AppArn)
+		case schemas.DeleteAppInputSourceResponse_appInputSource:
+			v.AppInputSource = &types.AppInputSource{}
+			return v.AppInputSource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppInputSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppInputSource, schemas.DeleteAppInputSourceRequest, schemas.DeleteAppInputSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAppInputSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppInputSource, schemas.DeleteAppInputSourceRequest, schemas.DeleteAppInputSourceResponse), output: &DeleteAppInputSourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAppInputSource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAppInputSource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -150,12 +185,6 @@ func (c *Client) addOperationDeleteAppInputSourceMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpDeleteAppInputSourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAppInputSource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +197,6 @@ func (c *Client) addOperationDeleteAppInputSourceMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -213,12 +236,4 @@ func (m *idempotencyToken_initializeOpDeleteAppInputSource) HandleInitialize(ctx
 }
 func addIdempotencyToken_opDeleteAppInputSourceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteAppInputSource{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteAppInputSource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteAppInputSource",
-	}
 }

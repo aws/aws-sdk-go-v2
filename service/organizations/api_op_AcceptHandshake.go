@@ -4,11 +4,10 @@ package organizations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts a handshake by sending an ACCEPTED response to the sender. You can view
@@ -30,6 +29,22 @@ import (
 //
 // For more information, see [Responding to invitations] and [Enabling all features] in the Organizations User Guide.
 //
+// When a handshake is accepted, Organizations logs membership events in
+// CloudTrail, available only in the management account's event history. If the
+// account was standalone and joined a new organization, an
+// AccountJoinedOrganization event is logged with joinedMethod:INVITED and
+// joinedTime fields. If the account departed one organization and joined another,
+// both an AccountDepartedOrganization event with departureMethod:LEFT and
+// departureTime and an AccountJoinedOrganization event with joinedMethod:INVITED
+// and joinedTime are logged in their respective management accounts.
+//
+// When a billing transfer ( TRANSFER_RESPONSIBILITY ) handshake is accepted,
+// Organizations publishes a ResponsibilityTransferAccepted service event to
+// CloudTrail. Each affected account receives this event, including upstream
+// participants such as distributors in a chained transfer. For an example log
+// entry, see [Example log entries: AcceptResponsibilityTransfer]in the Organizations User Guide.
+//
+// [Example log entries: AcceptResponsibilityTransfer]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_cloudtrail-integration.html#Log-entries-accept-responsibility-transfer
 // [Enabling all features]: https://docs.aws.amazon.com/organizations/latest/userguide/manage-begin-all-features-standard-migration.html#manage-approve-all-features-invite
 // [Responding to invitations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_accept-decline-invite.html
 // [Responding to a billing transfer invitation]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_transfer_billing-respond-invitation.html
@@ -63,6 +78,18 @@ type AcceptHandshakeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptHandshakeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptHandshakeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptHandshakeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HandshakeId != nil {
+		s.WriteString(schemas.AcceptHandshakeRequest_HandshakeId, *v.HandshakeId)
+	}
+}
+
 type AcceptHandshakeOutput struct {
 
 	// A Handshake object. Contains details for the handshake.
@@ -74,77 +101,50 @@ type AcceptHandshakeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptHandshakeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptHandshakeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptHandshakeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Handshake != nil {
+		s.WriteStruct(schemas.AcceptHandshakeResponse_Handshake)
+		v.Handshake.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AcceptHandshakeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptHandshakeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptHandshakeResponse_Handshake:
+			v.Handshake = &types.Handshake{}
+			return v.Handshake.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptHandshake, schemas.AcceptHandshakeRequest, schemas.AcceptHandshakeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptHandshake{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptHandshake, schemas.AcceptHandshakeRequest, schemas.AcceptHandshakeResponse), output: &AcceptHandshakeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAcceptHandshake{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptHandshake"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAcceptHandshakeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptHandshake(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +159,8 @@ func (c *Client) addOperationAcceptHandshakeMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAcceptHandshake(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AcceptHandshake",
-	}
 }

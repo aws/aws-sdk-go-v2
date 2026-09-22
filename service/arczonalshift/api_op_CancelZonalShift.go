@@ -4,11 +4,10 @@ package arczonalshift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,6 +40,18 @@ type CancelZonalShiftInput struct {
 	ZonalShiftId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelZonalShiftInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelZonalShiftRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelZonalShiftInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ZonalShiftId != nil {
+		s.WriteString(schemas.CancelZonalShiftRequest_zonalShiftId, *v.ZonalShiftId)
+	}
 }
 
 type CancelZonalShiftOutput struct {
@@ -125,77 +136,88 @@ type CancelZonalShiftOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelZonalShiftOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZonalShift)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelZonalShiftOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwayFrom != nil {
+		s.WriteString(schemas.ZonalShift_awayFrom, *v.AwayFrom)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.ZonalShift_comment, *v.Comment)
+	}
+	if v.ExpiryTime != nil {
+		s.WriteTime(schemas.ZonalShift_expiryTime, *v.ExpiryTime)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.ZonalShift_resourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ZonalShift_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ZonalShift_status, string(v.Status))
+	}
+	if v.ZonalShiftId != nil {
+		s.WriteString(schemas.ZonalShift_zonalShiftId, *v.ZonalShiftId)
+	}
+}
+func (v *CancelZonalShiftOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZonalShift, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZonalShift_awayFrom:
+			v.AwayFrom = new(string)
+			return d.ReadString(schemas.ZonalShift_awayFrom, v.AwayFrom)
+		case schemas.ZonalShift_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.ZonalShift_comment, v.Comment)
+		case schemas.ZonalShift_expiryTime:
+			v.ExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.ZonalShift_expiryTime, v.ExpiryTime)
+		case schemas.ZonalShift_resourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.ZonalShift_resourceIdentifier, v.ResourceIdentifier)
+		case schemas.ZonalShift_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ZonalShift_startTime, v.StartTime)
+		case schemas.ZonalShift_status:
+			var ev string
+			if err := d.ReadString(schemas.ZonalShift_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ZonalShiftStatus(ev)
+			return nil
+		case schemas.ZonalShift_zonalShiftId:
+			v.ZonalShiftId = new(string)
+			return d.ReadString(schemas.ZonalShift_zonalShiftId, v.ZonalShiftId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelZonalShiftMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelZonalShift, schemas.CancelZonalShiftRequest, schemas.ZonalShift)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelZonalShift{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelZonalShift, schemas.CancelZonalShiftRequest, schemas.ZonalShift), output: &CancelZonalShiftOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelZonalShift{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelZonalShift"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelZonalShiftValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelZonalShift(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,22 +232,8 @@ func (c *Client) addOperationCancelZonalShiftMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelZonalShift(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelZonalShift",
-	}
 }

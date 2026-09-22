@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/folders/__FolderId__
+
+Content-Type: application/json
+
+{"FolderType":"SHARED","Name":"__Name__","ParentFolderArn":"__ParentFolderArn__","Permissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"SharingModel":"ACCOUNT","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

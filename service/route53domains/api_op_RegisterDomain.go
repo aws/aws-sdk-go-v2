@@ -4,11 +4,10 @@ package route53domains
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation registers a domain. For some top-level domains (TLDs), this
@@ -180,6 +179,59 @@ type RegisterDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminContact != nil {
+		s.WriteStruct(schemas.RegisterDomainRequest_AdminContact)
+		v.AdminContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoRenew != nil {
+		s.WriteBool(schemas.RegisterDomainRequest_AutoRenew, *v.AutoRenew)
+	}
+	if v.BillingContact != nil {
+		s.WriteStruct(schemas.RegisterDomainRequest_BillingContact)
+		v.BillingContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.RegisterDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.DurationInYears != nil {
+		s.WriteInt32(schemas.RegisterDomainRequest_DurationInYears, *v.DurationInYears)
+	}
+	if v.IdnLangCode != nil {
+		s.WriteString(schemas.RegisterDomainRequest_IdnLangCode, *v.IdnLangCode)
+	}
+	if v.PrivacyProtectAdminContact != nil {
+		s.WriteBool(schemas.RegisterDomainRequest_PrivacyProtectAdminContact, *v.PrivacyProtectAdminContact)
+	}
+	if v.PrivacyProtectBillingContact != nil {
+		s.WriteBool(schemas.RegisterDomainRequest_PrivacyProtectBillingContact, *v.PrivacyProtectBillingContact)
+	}
+	if v.PrivacyProtectRegistrantContact != nil {
+		s.WriteBool(schemas.RegisterDomainRequest_PrivacyProtectRegistrantContact, *v.PrivacyProtectRegistrantContact)
+	}
+	if v.PrivacyProtectTechContact != nil {
+		s.WriteBool(schemas.RegisterDomainRequest_PrivacyProtectTechContact, *v.PrivacyProtectTechContact)
+	}
+	if v.RegistrantContact != nil {
+		s.WriteStruct(schemas.RegisterDomainRequest_RegistrantContact)
+		v.RegistrantContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TechContact != nil {
+		s.WriteStruct(schemas.RegisterDomainRequest_TechContact)
+		v.TechContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The RegisterDomain response includes the following element.
 type RegisterDomainOutput struct {
 
@@ -195,77 +247,48 @@ type RegisterDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.RegisterDomainResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *RegisterDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterDomainResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.RegisterDomainResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDomain, schemas.RegisterDomainRequest, schemas.RegisterDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDomain, schemas.RegisterDomainRequest, schemas.RegisterDomainResponse), output: &RegisterDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -280,22 +303,8 @@ func (c *Client) addOperationRegisterDomainMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterDomain",
-	}
 }

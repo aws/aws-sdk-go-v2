@@ -1,0 +1,3 @@
+GET /v2/list-dependencies?maxResults=1&nextToken=__NextToken__&queryRangeEndTime=2000-01-01T00%3A00%3A00Z&queryRangeGranularity=HOURLY&queryRangeStartTime=2000-01-01T00%3A00%3A00Z&serviceArn=__ServiceArn__
+
+

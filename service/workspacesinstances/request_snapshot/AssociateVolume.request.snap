@@ -1,0 +1,7 @@
+POST /service/EUCMIFrontendAPIService/operation/AssociateVolume
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£fDevicej__Device__sWorkspaceInstanceIdw__WorkspaceInstanceId__hVolumeIdl__VolumeId__

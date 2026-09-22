@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"dayOfMonth":"__DayOfMonth__","dayOfWeek":"SUN","frequency":"DAILY","scheduledAuditArn":"__ScheduledAuditArn__","scheduledAuditName":"__ScheduledAuditName__","targetCheckNames":["__Member__","__Member__"]}

@@ -4,11 +4,10 @@ package schemas
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a discoverer.
@@ -47,6 +46,25 @@ type CreateDiscovererInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDiscovererInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDiscovererRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDiscovererInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccount != nil {
+		s.WriteBool(schemas.CreateDiscovererRequest_CrossAccount, *v.CrossAccount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDiscovererRequest_Description, *v.Description)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.CreateDiscovererRequest_SourceArn, *v.SourceArn)
+	}
+	serializeTags(s, schemas.CreateDiscovererRequest_Tags, v.Tags)
+}
+
 type CreateDiscovererOutput struct {
 
 	// The Status if the discoverer will discover schemas from events sent from
@@ -77,77 +95,85 @@ type CreateDiscovererOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDiscovererOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDiscovererResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDiscovererOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccount != nil {
+		s.WriteBool(schemas.CreateDiscovererResponse_CrossAccount, *v.CrossAccount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDiscovererResponse_Description, *v.Description)
+	}
+	if v.DiscovererArn != nil {
+		s.WriteString(schemas.CreateDiscovererResponse_DiscovererArn, *v.DiscovererArn)
+	}
+	if v.DiscovererId != nil {
+		s.WriteString(schemas.CreateDiscovererResponse_DiscovererId, *v.DiscovererId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.CreateDiscovererResponse_SourceArn, *v.SourceArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateDiscovererResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.CreateDiscovererResponse_Tags, v.Tags)
+}
+func (v *CreateDiscovererOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDiscovererResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDiscovererResponse_CrossAccount:
+			v.CrossAccount = new(bool)
+			return d.ReadBool(schemas.CreateDiscovererResponse_CrossAccount, v.CrossAccount)
+		case schemas.CreateDiscovererResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateDiscovererResponse_Description, v.Description)
+		case schemas.CreateDiscovererResponse_DiscovererArn:
+			v.DiscovererArn = new(string)
+			return d.ReadString(schemas.CreateDiscovererResponse_DiscovererArn, v.DiscovererArn)
+		case schemas.CreateDiscovererResponse_DiscovererId:
+			v.DiscovererId = new(string)
+			return d.ReadString(schemas.CreateDiscovererResponse_DiscovererId, v.DiscovererId)
+		case schemas.CreateDiscovererResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.CreateDiscovererResponse_SourceArn, v.SourceArn)
+		case schemas.CreateDiscovererResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateDiscovererResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.DiscovererState(ev)
+			return nil
+		case schemas.CreateDiscovererResponse_Tags:
+			return deserializeTags(d, schemas.CreateDiscovererResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDiscoverer, schemas.CreateDiscovererRequest, schemas.CreateDiscovererResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDiscoverer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDiscoverer, schemas.CreateDiscovererRequest, schemas.CreateDiscovererResponse), output: &CreateDiscovererOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDiscoverer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDiscoverer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDiscovererValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDiscoverer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +188,8 @@ func (c *Client) addOperationCreateDiscovererMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDiscoverer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDiscoverer",
-	}
 }

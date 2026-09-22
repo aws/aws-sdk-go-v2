@@ -145,6 +145,26 @@
                 "smithy.api#documentation": "Choose the loudness measurement mode for your audio content. For music or advertisements: We recommend that you keep the default value, Program. For speech or other content: We recommend that you choose Anchor. When you do, MediaConvert optimizes the loudness of your output for clarify by applying speech gates."
             }
         },
+        "com.amazonaws.mediaconvert#AacPassthroughControl": {
+            "type": "enum",
+            "members": {
+                "WHEN_POSSIBLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WHEN_POSSIBLE"
+                    }
+                },
+                "NO_PASSTHROUGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_PASSTHROUGH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "When set to WHEN_POSSIBLE, input AAC audio will be passed through if it is present on the input. This detection is dynamic over the life of the transcode. Inputs that alternate between AAC and non-AAC content will have a consistent AAC output as the system alternates between passthrough and encoding."
+            }
+        },
         "com.amazonaws.mediaconvert#AacRateControlMode": {
             "type": "enum",
             "members": {
@@ -221,6 +241,13 @@
                     "traits": {
                         "smithy.api#documentation": "Choose the loudness measurement mode for your audio content. For music or advertisements: We recommend that you keep the default value, Program. For speech or other content: We recommend that you choose Anchor. When you do, MediaConvert optimizes the loudness of your output for clarify by applying speech gates.",
                         "smithy.api#jsonName": "loudnessMeasurementMode"
+                    }
+                },
+                "PassthroughControl": {
+                    "target": "com.amazonaws.mediaconvert#AacPassthroughControl",
+                    "traits": {
+                        "smithy.api#documentation": "When set to WHEN_POSSIBLE, input AAC audio will be passed through if it is present on the input. This detection is dynamic over the life of the transcode. Inputs that alternate between AAC and non-AAC content will have a consistent AAC output as the system alternates between passthrough and encoding.",
+                        "smithy.api#jsonName": "passthroughControl"
                     }
                 },
                 "RapInterval": {
@@ -1226,6 +1253,28 @@
                 "smithy.api#documentation": "The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting."
             }
         },
+        "com.amazonaws.mediaconvert#AspectRatio": {
+            "type": "structure",
+            "members": {
+                "Denominator": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The denominator, or bottom number, in the fractional aspect ratio. For example, for a display aspect ratio of 16 / 9, the denominator would be 9.",
+                        "smithy.api#jsonName": "denominator"
+                    }
+                },
+                "Numerator": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The numerator, or top number, in the fractional aspect ratio. For example, for a display aspect ratio of 16 / 9, the numerator would be 16.",
+                        "smithy.api#jsonName": "numerator"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use."
+            }
+        },
         "com.amazonaws.mediaconvert#AssociateCertificate": {
             "type": "operation",
             "input": {
@@ -1571,7 +1620,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Choose the audio codec for this output. Note that the option Dolby Digital passthrough applies only to Dolby Digital and Dolby Digital Plus audio inputs. Make sure that you choose a codec that's supported with your output container: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio For audio-only outputs, make sure that both your input audio codec and your output audio codec are supported for audio-only workflows. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html#reference-codecs-containers-input-audio-only and https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output"
+                "smithy.api#documentation": "Choose the audio codec for this output. Note that the option passthrough applies only to Dolby Digital, Dolby Digital Plus, AAC LC, AAC HEV1, and AAC HEV2 audio inputs. Make sure that you choose a codec that's supported with your output container: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio For audio-only outputs, make sure that both your input audio codec and your output audio codec are supported for audio-only workflows. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html#reference-codecs-containers-input-audio-only and https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output"
             }
         },
         "com.amazonaws.mediaconvert#AudioCodecSettings": {
@@ -1608,7 +1657,7 @@
                 "Codec": {
                     "target": "com.amazonaws.mediaconvert#AudioCodec",
                     "traits": {
-                        "smithy.api#documentation": "Choose the audio codec for this output. Note that the option Dolby Digital passthrough applies only to Dolby Digital and Dolby Digital Plus audio inputs. Make sure that you choose a codec that's supported with your output container: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio For audio-only outputs, make sure that both your input audio codec and your output audio codec are supported for audio-only workflows. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html#reference-codecs-containers-input-audio-only and https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output",
+                        "smithy.api#documentation": "Choose the audio codec for this output. Note that the option passthrough applies only to Dolby Digital, Dolby Digital Plus, AAC LC, AAC HEV1, and AAC HEV2 audio inputs. Make sure that you choose a codec that's supported with your output container: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio For audio-only outputs, make sure that both your input audio codec and your output audio codec are supported for audio-only workflows. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html#reference-codecs-containers-input-audio-only and https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output",
                         "smithy.api#jsonName": "codec"
                     }
                 },
@@ -2024,6 +2073,13 @@
                         "smithy.api#jsonName": "bitRate"
                     }
                 },
+                "ChannelLayout": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The audio channel layout of the track, such as \"mono\", \"stereo\", \"5.1\", or \"7.1\". Object-based or immersive audio is reported as \"5.1.4\" or \"7.1.4\".",
+                        "smithy.api#jsonName": "channelLayout"
+                    }
+                },
                 "Channels": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
@@ -2043,6 +2099,13 @@
                     "traits": {
                         "smithy.api#documentation": "The language code of the audio track, in three character ISO 639-3 format.",
                         "smithy.api#jsonName": "languageCode"
+                    }
+                },
+                "ObjectCount": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The number of audio objects in an object-based or immersive audio track. This field is present for codecs that support object-based audio, such as E-AC-3 with Joint Object Coding (JOC) or IAMF. This field is null when the audio track does not contain object-based audio metadata.",
+                        "smithy.api#jsonName": "objectCount"
                     }
                 },
                 "SampleRate": {
@@ -4303,11 +4366,11 @@
         "com.amazonaws.mediaconvert#CmafEncryptionSettings": {
             "type": "structure",
             "members": {
-                "ClearLead": {
-                    "target": "com.amazonaws.mediaconvert#HlsClearLead",
+                "ClearLeadSegments": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max9999",
                     "traits": {
-                        "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning.",
-                        "smithy.api#jsonName": "clearLead"
+                        "smithy.api#documentation": "Reduce video startup latency by leaving initial segments unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. Specify the number of initial segments to leave unencrypted. Omit this field to disable Clear Lead. The HLS manifest will omit #EXT-X-KEY tags during clear segments and insert the first #EXT-X-KEY immediately before the first encrypted segment. Because encryption is applied at the fragment level, the actual duration of unencrypted content may be slightly longer than expected if the segment length is not evenly divisible by the fragment length. In such cases, encryption begins at the next fragment boundary after the specified clear lead segments, rather than at the exact segment boundary. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio codec.",
+                        "smithy.api#jsonName": "clearLeadSegments"
                     }
                 },
                 "ConstantInitializationVector": {
@@ -4453,7 +4516,7 @@
                 "ImageBasedTrickPlay": {
                     "target": "com.amazonaws.mediaconvert#CmafImageBasedTrickPlay",
                     "traits": {
-                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. When you enable Write HLS manifest, MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest, MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
+                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. When you enable Write HLS manifest, MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest, MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
                         "smithy.api#jsonName": "imageBasedTrickPlay"
                     }
                 },
@@ -4462,6 +4525,13 @@
                     "traits": {
                         "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED",
                         "smithy.api#jsonName": "imageBasedTrickPlaySettings"
+                    }
+                },
+                "ImageBasedTrickPlayVariants": {
+                    "target": "com.amazonaws.mediaconvert#__listOfCmafImageBasedTrickPlayVariant",
+                    "traits": {
+                        "smithy.api#documentation": "Specify multiple image-based trick play variants. Each entry creates a separate set of JPEG tile images with its own resolution, tile layout, and cadence settings. Set imageBasedTrickPlay to VARIANTS when using this setting.",
+                        "smithy.api#jsonName": "imageBasedTrickPlayVariants"
                     }
                 },
                 "ManifestCompression": {
@@ -4607,10 +4677,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ADVANCED"
                     }
+                },
+                "VARIANTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARIANTS"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. When you enable Write HLS manifest, MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest, MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. When you enable Write HLS manifest, MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. When you enable Write DASH manifest, MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
             }
         },
         "com.amazonaws.mediaconvert#CmafImageBasedTrickPlaySettings": {
@@ -4647,7 +4723,7 @@
                 "TileHeight": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
                     "traits": {
-                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2.",
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
                         "smithy.api#jsonName": "tileHeight"
                     }
                 },
@@ -4661,6 +4737,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED"
+            }
+        },
+        "com.amazonaws.mediaconvert#CmafImageBasedTrickPlayVariant": {
+            "type": "structure",
+            "members": {
+                "IntervalCadence": {
+                    "target": "com.amazonaws.mediaconvert#CmafIntervalCadence",
+                    "traits": {
+                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling.",
+                        "smithy.api#jsonName": "intervalCadence"
+                    }
+                },
+                "ThumbnailHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin2Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Height of each thumbnail within each tile image, in pixels. Leave blank to maintain aspect ratio with thumbnail width. If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected. Must be divisible by 2.",
+                        "smithy.api#jsonName": "thumbnailHeight"
+                    }
+                },
+                "ThumbnailInterval": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the interval, in seconds, that MediaConvert uses to generate thumbnails. If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate. For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails.",
+                        "smithy.api#jsonName": "thumbnailInterval"
+                    }
+                },
+                "ThumbnailWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin8Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Width of each thumbnail within each tile image, in pixels. Default is 312. Must be divisible by 8.",
+                        "smithy.api#jsonName": "thumbnailWidth"
+                    }
+                },
+                "TileHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
+                        "smithy.api#jsonName": "tileHeight"
+                    }
+                },
+                "TileWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max512",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each row of a tile image. Set a value between 1 and 512.",
+                        "smithy.api#jsonName": "tileWidth"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for one image-based trick play variant. Each variant produces its own set of JPEG tile images and corresponding manifest entries."
             }
         },
         "com.amazonaws.mediaconvert#CmafInitializationVectorInManifest": {
@@ -5181,10 +5307,16 @@
                     "traits": {
                         "smithy.api#enumValue": "NONE"
                     }
+                },
+                "MANIFEST_CUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANIFEST_CUES"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want those SCTE-35 markers in this output."
+                "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want those SCTE-35 markers in this output. When your input is an HLS manifest, choose Manifest cues to pass through CUE markers in your HLS manifest as segment boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice point in the input manifest."
             }
         },
         "com.amazonaws.mediaconvert#CmfcSettings": {
@@ -5270,7 +5402,7 @@
                 "Scte35Source": {
                     "target": "com.amazonaws.mediaconvert#CmfcScte35Source",
                     "traits": {
-                        "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want those SCTE-35 markers in this output.",
+                        "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want those SCTE-35 markers in this output. When your input is an HLS manifest, choose Manifest cues to pass through CUE markers in your HLS manifest as segment boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice point in the input manifest.",
                         "smithy.api#jsonName": "scte35Source"
                     }
                 },
@@ -5375,6 +5507,12 @@
                         "smithy.api#enumValue": "AC3"
                     }
                 },
+                "AMR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMR"
+                    }
+                },
                 "EAC3": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5385,6 +5523,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FLAC"
+                    }
+                },
+                "MP2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MP2"
                     }
                 },
                 "MP3": {
@@ -5411,6 +5555,24 @@
                         "smithy.api#enumValue": "VORBIS"
                     }
                 },
+                "WMA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WMA"
+                    }
+                },
+                "WMA2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WMA2"
+                    }
+                },
+                "WMAPRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WMAPRO"
+                    }
+                },
                 "AV1": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -5421,6 +5583,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AVC"
+                    }
+                },
+                "DV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DV"
+                    }
+                },
+                "H263": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "H263"
                     }
                 },
                 "HEVC": {
@@ -5481,6 +5655,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UNCOMPRESSED"
+                    }
+                },
+                "VC1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VC1"
+                    }
+                },
+                "VC3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VC3"
                     }
                 },
                 "VFW": {
@@ -5552,6 +5738,41 @@
                         "smithy.api#jsonName": "colorPrimaries"
                     }
                 },
+                "ContentLightLevel": {
+                    "target": "com.amazonaws.mediaconvert#ContentLightLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Content light level information (CTA-861.3). Describes the light level characteristics of the content.",
+                        "smithy.api#jsonName": "contentLightLevel"
+                    }
+                },
+                "DisplayAspectRatio": {
+                    "target": "com.amazonaws.mediaconvert#AspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
+                        "smithy.api#jsonName": "displayAspectRatio"
+                    }
+                },
+                "DolbyVision": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "Dolby Vision characteristics of the video track: the profile and level, and whether the RPU (dynamic metadata), base layer, and enhancement layer are present. Use this to distinguish Dolby Vision content from standard HEVC and to choose your encoding or passthrough settings. Omitted when the content is not Dolby Vision.",
+                        "smithy.api#jsonName": "dolbyVision"
+                    }
+                },
+                "FieldOrder": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The field order of interlaced video, which indicates whether the top or bottom field is displayed first. Use this to select the correct deinterlacing behavior. One of \"TopFieldFirst\" or \"BottomFieldFirst\". This field is present only for interlaced video; it is omitted for progressive video and when the field order is not indicated by the source.",
+                        "smithy.api#jsonName": "fieldOrder"
+                    }
+                },
+                "Hdr10PlusPresence": {
+                    "target": "com.amazonaws.mediaconvert#Hdr10PlusPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Indicates that HDR10+ (SMPTE ST 2094-40) dynamic metadata was detected in the HEVC bitstream. Present only when detected.",
+                        "smithy.api#jsonName": "hdr10PlusPresence"
+                    }
+                },
                 "Height": {
                     "target": "com.amazonaws.mediaconvert#__integer",
                     "traits": {
@@ -5578,6 +5799,20 @@
                     "traits": {
                         "smithy.api#documentation": "The codec profile used to encode the video. Profiles define specific feature sets and capabilities within a codec standard. For example, H.264 profiles include Baseline, Main, and High, each supporting different encoding features and complexity levels.",
                         "smithy.api#jsonName": "profile"
+                    }
+                },
+                "Rotation": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The clockwise rotation angle of the video, in degrees, as specified in the codec bitstream via a Display Orientation SEI message (payload type 47 for both H.264 and H.265). This field is null when the video essence does not contain a Display Orientation SEI message or when the rotation is 0 degrees.",
+                        "smithy.api#jsonName": "rotation"
+                    }
+                },
+                "SampleAspectRatio": {
+                    "target": "com.amazonaws.mediaconvert#AspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
+                        "smithy.api#jsonName": "sampleAspectRatio"
                     }
                 },
                 "ScanType": {
@@ -6023,6 +6258,13 @@
         "com.amazonaws.mediaconvert#Container": {
             "type": "structure",
             "members": {
+                "BitRate": {
+                    "target": "com.amazonaws.mediaconvert#__long",
+                    "traits": {
+                        "smithy.api#documentation": "The overall bit rate of your media file, in bits per second. This is derived from the file size and duration as (file size in bytes * 8) / duration in seconds.",
+                        "smithy.api#jsonName": "bitRate"
+                    }
+                },
                 "Duration": {
                     "target": "com.amazonaws.mediaconvert#__double",
                     "traits": {
@@ -6033,7 +6275,7 @@
                 "Format": {
                     "target": "com.amazonaws.mediaconvert#Format",
                     "traits": {
-                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, or MPEG-TS. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
+                        "smithy.api#documentation": "The format of your media file. For example: MP4, QuickTime (MOV), Matroska (MKV), WebM, MXF, Wave, AVI, MPEG-TS, MPEG-PS, MP3, FLAC, ASF (Windows Media / WMA), or OGG. Note that this will be blank if your media file has a format that the MediaConvert Probe operation does not recognize.",
                         "smithy.api#jsonName": "format"
                     }
                 },
@@ -6217,6 +6459,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "Container for this output. Some containers require a container settings object. If not specified, the default object will be created."
+            }
+        },
+        "com.amazonaws.mediaconvert#ContentLightLevel": {
+            "type": "structure",
+            "members": {
+                "MaxContentLightLevel": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum content light level (MaxCLL), in cd/m².",
+                        "smithy.api#jsonName": "maxContentLightLevel"
+                    }
+                },
+                "MaxFrameAverageLightLevel": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum frame-average light level (MaxFALL), in cd/m².",
+                        "smithy.api#jsonName": "maxFrameAverageLightLevel"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Content light level information (CTA-861.3). Describes the light level characteristics of the content."
             }
         },
         "com.amazonaws.mediaconvert#CopyProtectionAction": {
@@ -6866,7 +7130,7 @@
                 "PlaybackDeviceCompatibility": {
                     "target": "com.amazonaws.mediaconvert#DashIsoPlaybackDeviceCompatibility",
                     "traits": {
-                        "smithy.api#documentation": "This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption. Choose Unencrypted SEI only to correct problems with playback on older devices. Otherwise, keep the default setting CENC v1. If you choose Unencrypted SEI, for that output, the service will exclude the access unit delimiter and will leave the SEI NAL units unencrypted.",
+                        "smithy.api#documentation": "This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH outputs with DRM encryption. Choose Unencrypted SEI only to correct problems with playback on older H.264 devices. Choose CENC v1 unencrypted headers to leave NAL unit headers and slice headers unencrypted for H.265 outputs, improving compatibility with strict HEVC decoders. Otherwise, keep the default setting CENC v1.",
                         "smithy.api#jsonName": "playbackDeviceCompatibility"
                     }
                 },
@@ -6978,7 +7242,7 @@
                 "ImageBasedTrickPlay": {
                     "target": "com.amazonaws.mediaconvert#DashIsoImageBasedTrickPlay",
                     "traits": {
-                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
+                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
                         "smithy.api#jsonName": "imageBasedTrickPlay"
                     }
                 },
@@ -6987,6 +7251,13 @@
                     "traits": {
                         "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED",
                         "smithy.api#jsonName": "imageBasedTrickPlaySettings"
+                    }
+                },
+                "ImageBasedTrickPlayVariants": {
+                    "target": "com.amazonaws.mediaconvert#__listOfDashIsoImageBasedTrickPlayVariant",
+                    "traits": {
+                        "smithy.api#documentation": "Specify multiple image-based trick play variants. Each entry creates a separate set of JPEG tile images with its own resolution, tile layout, and cadence settings. Set imageBasedTrickPlay to VARIANTS when using this setting.",
+                        "smithy.api#jsonName": "imageBasedTrickPlayVariants"
                     }
                 },
                 "MinBufferTime": {
@@ -7110,10 +7381,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ADVANCED"
                     }
+                },
+                "VARIANTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARIANTS"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. MediaConvert adds an entry in the .mpd manifest for each set of images that you generate. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
             }
         },
         "com.amazonaws.mediaconvert#DashIsoImageBasedTrickPlaySettings": {
@@ -7150,7 +7427,7 @@
                 "TileHeight": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
                     "traits": {
-                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2.",
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
                         "smithy.api#jsonName": "tileHeight"
                     }
                 },
@@ -7164,6 +7441,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED"
+            }
+        },
+        "com.amazonaws.mediaconvert#DashIsoImageBasedTrickPlayVariant": {
+            "type": "structure",
+            "members": {
+                "IntervalCadence": {
+                    "target": "com.amazonaws.mediaconvert#DashIsoIntervalCadence",
+                    "traits": {
+                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling.",
+                        "smithy.api#jsonName": "intervalCadence"
+                    }
+                },
+                "ThumbnailHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin2Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Height of each thumbnail within each tile image, in pixels. Leave blank to maintain aspect ratio with thumbnail width. If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected. Must be divisible by 2.",
+                        "smithy.api#jsonName": "thumbnailHeight"
+                    }
+                },
+                "ThumbnailInterval": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the interval, in seconds, that MediaConvert uses to generate thumbnails. If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate. For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails.",
+                        "smithy.api#jsonName": "thumbnailInterval"
+                    }
+                },
+                "ThumbnailWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin8Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Width of each thumbnail within each tile image, in pixels. Default is 312. Must be divisible by 8.",
+                        "smithy.api#jsonName": "thumbnailWidth"
+                    }
+                },
+                "TileHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
+                        "smithy.api#jsonName": "tileHeight"
+                    }
+                },
+                "TileWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max512",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each row of a tile image. Set a value between 1 and 512.",
+                        "smithy.api#jsonName": "tileWidth"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for one image-based trick play variant. Each variant produces its own set of JPEG tile images and corresponding manifest entries."
             }
         },
         "com.amazonaws.mediaconvert#DashIsoIntervalCadence": {
@@ -7246,10 +7573,16 @@
                     "traits": {
                         "smithy.api#enumValue": "UNENCRYPTED_SEI"
                     }
+                },
+                "CENC_V1_UNENCRYPTED_HEADERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CENC_V1_UNENCRYPTED_HEADERS"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption. Choose Unencrypted SEI only to correct problems with playback on older devices. Otherwise, keep the default setting CENC v1. If you choose Unencrypted SEI, for that output, the service will exclude the access unit delimiter and will leave the SEI NAL units unencrypted."
+                "smithy.api#documentation": "This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH outputs with DRM encryption. Choose Unencrypted SEI only to correct problems with playback on older H.264 devices. Choose CENC v1 unencrypted headers to leave NAL unit headers and slice headers unencrypted for H.265 outputs, improving compatibility with strict HEVC decoders. Otherwise, keep the default setting CENC v1."
             }
         },
         "com.amazonaws.mediaconvert#DashIsoPtsOffsetHandlingForBFrames": {
@@ -8125,6 +8458,69 @@
                 "smithy.api#documentation": "Required when you set Dolby Vision Profile to Profile 8.1. When you set Content mapping to None, content mapping is not applied to the HDR10-compatible signal. Depending on the source peak nit level, clipping might occur on HDR devices without Dolby Vision. When you set Content mapping to HDR10 1000, the transcoder creates a 1,000 nits peak HDR10-compatible signal by applying static content mapping to the source. This mode is speed-optimized for PQ10 sources with metadata that is created from analysis. For graded Dolby Vision content, be aware that creative intent might not be guaranteed with extreme 1,000 nits trims."
             }
         },
+        "com.amazonaws.mediaconvert#DolbyVisionMetadata": {
+            "type": "structure",
+            "members": {
+                "BaseLayer": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Whether a Dolby Vision component is present in the track.",
+                        "smithy.api#jsonName": "baseLayer"
+                    }
+                },
+                "EnhancementLayer": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Whether a Dolby Vision component is present in the track.",
+                        "smithy.api#jsonName": "enhancementLayer"
+                    }
+                },
+                "Level": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The Dolby Vision level, which indicates the maximum resolution and frame rate.",
+                        "smithy.api#jsonName": "level"
+                    }
+                },
+                "Profile": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The Dolby Vision profile, for example 5, 7, or 8. The profile determines the layer structure and playback compatibility of the content.",
+                        "smithy.api#jsonName": "profile"
+                    }
+                },
+                "Rpu": {
+                    "target": "com.amazonaws.mediaconvert#DolbyVisionPresence",
+                    "traits": {
+                        "smithy.api#documentation": "Whether a Dolby Vision component is present in the track.",
+                        "smithy.api#jsonName": "rpu"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dolby Vision characteristics of the video track: the profile and level, and whether the RPU (dynamic metadata), base layer, and enhancement layer are present. Use this to distinguish Dolby Vision content from standard HEVC and to choose your encoding or passthrough settings. Omitted when the content is not Dolby Vision."
+            }
+        },
+        "com.amazonaws.mediaconvert#DolbyVisionPresence": {
+            "type": "enum",
+            "members": {
+                "PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESENT"
+                    }
+                },
+                "ABSENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABSENT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Whether a Dolby Vision component is present in the track."
+            }
+        },
         "com.amazonaws.mediaconvert#DolbyVisionProfile": {
             "type": "enum",
             "members": {
@@ -8163,6 +8559,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "Applies only to 29.97 fps outputs. When this feature is enabled, the service will use drop-frame timecode on outputs. If it is not possible to use drop-frame timecode, the system will fall back to non-drop-frame. This setting is enabled by default when Timecode insertion or Timecode track is enabled."
+            }
+        },
+        "com.amazonaws.mediaconvert#DurationControl": {
+            "type": "structure",
+            "members": {
+                "IntegerDurationMaximumCompressionDenominator": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Required. Denominator of the maximum allowed compression ratio.",
+                        "smithy.api#jsonName": "integerDurationMaximumCompressionDenominator"
+                    }
+                },
+                "IntegerDurationMaximumCompressionNumerator": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Required. Numerator of the maximum allowed compression ratio, defined as overrun divided by target duration. For example, numerator 5 with denominator 100 means max 5% compression. Set to 0 to disable compression entirely (only trim or pad will be used).",
+                        "smithy.api#jsonName": "integerDurationMaximumCompressionNumerator"
+                    }
+                },
+                "IntegerDurationTrimThresholdMilliseconds": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max500",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum number of fractional milliseconds past an integer second that qualify for the trim path (frame dropping). Default is 0 (trimming disabled).",
+                        "smithy.api#jsonName": "integerDurationTrimThresholdMilliseconds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for integer-second duration normalization. When this preprocessor is present, the output duration will be adjusted to an exact integer-second boundary. If the input is within the trim threshold of an integer second, trailing frames are dropped. If within the compression threshold and less than 500ms over the previous integer second, the output is sped up slightly. Otherwise, black frames are padded to the next integer second."
             }
         },
         "com.amazonaws.mediaconvert#DvbNitSettings": {
@@ -10484,6 +10909,36 @@
                     "traits": {
                         "smithy.api#enumValue": "mpegts"
                     }
+                },
+                "mpegps": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mpegps"
+                    }
+                },
+                "mp3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mp3"
+                    }
+                },
+                "flac": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "flac"
+                    }
+                },
+                "asf": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "asf"
+                    }
+                },
+                "ogg": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ogg"
+                    }
                 }
             }
         },
@@ -11386,6 +11841,26 @@
                 "smithy.api#documentation": "Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC."
             }
         },
+        "com.amazonaws.mediaconvert#H264ExplicitWeightedPrediction": {
+            "type": "enum",
+            "members": {
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                },
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Enable or disable explicit weighted prediction for the H.264 encoder. Weighted prediction improves compression efficiency for content with fading or brightness changes between frames."
+            }
+        },
         "com.amazonaws.mediaconvert#H264FieldEncoding": {
             "type": "enum",
             "members": {
@@ -11812,6 +12287,13 @@
                     "traits": {
                         "smithy.api#documentation": "Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.",
                         "smithy.api#jsonName": "entropyEncoding"
+                    }
+                },
+                "ExplicitWeightedPrediction": {
+                    "target": "com.amazonaws.mediaconvert#H264ExplicitWeightedPrediction",
+                    "traits": {
+                        "smithy.api#documentation": "Enable or disable explicit weighted prediction for the H.264 encoder. Weighted prediction improves compression efficiency for content with fading or brightness changes between frames.",
+                        "smithy.api#jsonName": "explicitWeightedPrediction"
                     }
                 },
                 "FieldEncoding": {
@@ -13583,6 +14065,42 @@
                 "smithy.api#documentation": "Setting for HDR10+ metadata insertion"
             }
         },
+        "com.amazonaws.mediaconvert#Hdr10PlusPresence": {
+            "type": "enum",
+            "members": {
+                "PRESENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRESENT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Indicates that HDR10+ (SMPTE ST 2094-40) dynamic metadata was detected in the HEVC bitstream. Present only when detected."
+            }
+        },
+        "com.amazonaws.mediaconvert#HdrMetadata": {
+            "type": "structure",
+            "members": {
+                "ContentLightLevel": {
+                    "target": "com.amazonaws.mediaconvert#ContentLightLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Content light level information (CTA-861.3). Describes the light level characteristics of the content.",
+                        "smithy.api#jsonName": "contentLightLevel"
+                    }
+                },
+                "MasteringDisplayColorVolume": {
+                    "target": "com.amazonaws.mediaconvert#MasteringDisplayColorVolume",
+                    "traits": {
+                        "smithy.api#documentation": "Mastering display color volume metadata (SMPTE ST 2086). Describes the color volume of the display used to master the content. Chromaticity coordinates are in units of 0.00002. Luminance values are in units of 0.0001 cd/m².",
+                        "smithy.api#jsonName": "masteringDisplayColorVolume"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "HDR (High Dynamic Range) metadata extracted from the container, including mastering display color volume and content light level information. This metadata is present in HDR10 and similar HDR content."
+            }
+        },
         "com.amazonaws.mediaconvert#HlsAdMarkers": {
             "type": "enum",
             "members": {
@@ -13777,26 +14295,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "Set Caption segment length control to Match video to create caption segments that align with the video segments from the first video output in this output group. For example, if the video segments are 2 seconds long, your WebVTT segments will also be 2 seconds long. Keep the default setting, Large segments to create caption segments that are 300 seconds long."
-            }
-        },
-        "com.amazonaws.mediaconvert#HlsClearLead": {
-            "type": "enum",
-            "members": {
-                "ENABLED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "ENABLED"
-                    }
-                },
-                "DISABLED": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "DISABLED"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning."
             }
         },
         "com.amazonaws.mediaconvert#HlsClientCache": {
@@ -14053,7 +14551,7 @@
                 "ImageBasedTrickPlay": {
                     "target": "com.amazonaws.mediaconvert#HlsImageBasedTrickPlay",
                     "traits": {
-                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
+                        "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md",
                         "smithy.api#jsonName": "imageBasedTrickPlay"
                     }
                 },
@@ -14062,6 +14560,13 @@
                     "traits": {
                         "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED",
                         "smithy.api#jsonName": "imageBasedTrickPlaySettings"
+                    }
+                },
+                "ImageBasedTrickPlayVariants": {
+                    "target": "com.amazonaws.mediaconvert#__listOfHlsImageBasedTrickPlayVariant",
+                    "traits": {
+                        "smithy.api#documentation": "Specify multiple image-based trick play variants. Each entry creates a separate set of JPEG tile images with its own resolution, tile layout, and cadence settings. Set imageBasedTrickPlay to VARIANTS when using this setting.",
+                        "smithy.api#jsonName": "imageBasedTrickPlayVariants"
                     }
                 },
                 "ManifestCompression": {
@@ -14240,10 +14745,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ADVANCED"
                     }
+                },
+                "VARIANTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VARIANTS"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
+                "smithy.api#documentation": "Specify whether MediaConvert generates images for trick play. Keep the default value, None, to not generate any images. Choose Thumbnail to generate tiled thumbnails. Choose Thumbnail and full frame to generate tiled thumbnails and full-resolution images of single frames. Choose Advanced to customize thumbnail and tile settings for a single trick play variant. Choose Variants to specify multiple trick play variants, each with its own thumbnail and tile settings. MediaConvert creates a child manifest for each set of images that you generate and adds corresponding entries to the parent manifest. A common application for these images is Roku trick mode. The thumbnails and full-frame images that MediaConvert creates with this feature are compatible with this Roku specification: https://developer.roku.com/docs/developer-program/media-playback/trick-mode/hls-and-dash.md"
             }
         },
         "com.amazonaws.mediaconvert#HlsImageBasedTrickPlaySettings": {
@@ -14280,7 +14791,7 @@
                 "TileHeight": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
                     "traits": {
-                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2.",
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
                         "smithy.api#jsonName": "tileHeight"
                     }
                 },
@@ -14294,6 +14805,56 @@
             },
             "traits": {
                 "smithy.api#documentation": "Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED"
+            }
+        },
+        "com.amazonaws.mediaconvert#HlsImageBasedTrickPlayVariant": {
+            "type": "structure",
+            "members": {
+                "IntervalCadence": {
+                    "target": "com.amazonaws.mediaconvert#HlsIntervalCadence",
+                    "traits": {
+                        "smithy.api#documentation": "The cadence MediaConvert follows for generating thumbnails. If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence). If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval. If set to FOLLOW_SEGMENTATION, MediaConvert generates thumbnail playlist entries that align exactly with video segment boundaries. FOLLOW_SEGMENTATION requires 1x1 tiling.",
+                        "smithy.api#jsonName": "intervalCadence"
+                    }
+                },
+                "ThumbnailHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin2Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Height of each thumbnail within each tile image, in pixels. Leave blank to maintain aspect ratio with thumbnail width. If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected. Must be divisible by 2.",
+                        "smithy.api#jsonName": "thumbnailHeight"
+                    }
+                },
+                "ThumbnailInterval": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Enter the interval, in seconds, that MediaConvert uses to generate thumbnails. If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate. For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails.",
+                        "smithy.api#jsonName": "thumbnailInterval"
+                    }
+                },
+                "ThumbnailWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin8Max4096",
+                    "traits": {
+                        "smithy.api#documentation": "Width of each thumbnail within each tile image, in pixels. Default is 312. Must be divisible by 8.",
+                        "smithy.api#jsonName": "thumbnailWidth"
+                    }
+                },
+                "TileHeight": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2048",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each column of a tile image. Set a value between 1 and 2048.",
+                        "smithy.api#jsonName": "tileHeight"
+                    }
+                },
+                "TileWidth": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max512",
+                    "traits": {
+                        "smithy.api#documentation": "Number of thumbnails in each row of a tile image. Set a value between 1 and 512.",
+                        "smithy.api#jsonName": "tileWidth"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings for one image-based trick play variant. Each variant produces its own set of JPEG tile images and corresponding manifest entries."
             }
         },
         "com.amazonaws.mediaconvert#HlsInitializationVectorInManifest": {
@@ -16010,7 +16571,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -16283,7 +16844,7 @@
                 "FollowSource": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max150",
                     "traits": {
-                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings. MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
+                        "smithy.api#documentation": "Specify the input that MediaConvert references for your default output settings.  MediaConvert uses this input's Resolution, Frame rate, and Pixel aspect ratio for all  outputs that you don't manually specify different output settings for. Enabling this setting will disable \"Follow source\" for all other inputs.  If MediaConvert cannot follow your source, for example if you specify an audio-only input,  MediaConvert uses the first followable input instead. In your JSON job specification, enter an integer from 1 to 150 corresponding  to the order of your inputs.",
                         "smithy.api#jsonName": "followSource"
                     }
                 },
@@ -16354,7 +16915,7 @@
                 "Key": {
                     "target": "com.amazonaws.mediaconvert#JobsQueryFilterKey",
                     "traits": {
-                        "smithy.api#documentation": "Specify job details to filter for while performing a jobs query. You specify these filters as part of a key-value pair within the JobsQueryFilter array. The following list describes which keys are available and their possible values: * queue - Your Queue's name or ARN. * status - Your job's status. (SUBMITTED | PROGRESSING | COMPLETE | CANCELED | ERROR) * fileInput - Your input file URL, or partial input file name. * jobEngineVersionRequested - The Job engine version that you requested for your job. Valid versions are in a YYYY-MM-DD format. * jobEngineVersionUsed - The Job engine version that your job used. This may differ from the version that you requested. Valid versions are in a YYYY-MM-DD format. * audioCodec - Your output's audio codec. (AAC | MP2 | MP3 | WAV | AIFF | AC3| EAC3 | EAC3_ATMOS | VORBIS | OPUS | PASSTHROUGH | FLAC) * videoCodec - Your output's video codec. (AV1 | AVC_INTRA | FRAME_CAPTURE | H_264 | H_265 | MPEG2 | PASSTHROUGH | PRORES | UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC)",
+                        "smithy.api#documentation": "Specify job details to filter for while performing a jobs query. You specify these filters as part of a key-value pair within the JobsQueryFilter array. The following list describes which keys are available and their possible values: * queue - Your Queue's name or ARN. * status - Your job's status. (SUBMITTED | PROGRESSING | COMPLETE | CANCELED | ERROR) * fileInput - Your input file URL, or partial input file name. * jobEngineVersionRequested - The Job engine version that you requested for your job. Valid versions are in a YYYY-MM-DD format. * jobEngineVersionUsed - The Job engine version that your job used. This may differ from the version that you requested. Valid versions are in a YYYY-MM-DD format. * audioCodec - Your output's audio codec. (AAC | MP2 | MP3 | WAV | AIFF | AC3| EAC3 | EAC3_ATMOS | VORBIS | OPUS | PASSTHROUGH | FLAC) * videoCodec - Your output's video codec. (AV1 | AVC_INTRA | FRAME_CAPTURE | H_264 | H_265 | MPEG2 | PASSTHROUGH | PRORES | UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC) * errorCode - The error code that your job failed with. For example, 1010. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/mediaconvert_error_codes.html",
                         "smithy.api#jsonName": "key"
                     }
                 },
@@ -16414,10 +16975,16 @@
                     "traits": {
                         "smithy.api#enumValue": "videoCodec"
                     }
+                },
+                "errorCode": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "errorCode"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify job details to filter for while performing a jobs query. You specify these filters as part of a key-value pair within the JobsQueryFilter array. The following list describes which keys are available and their possible values: * queue - Your Queue's name or ARN. * status - Your job's status. (SUBMITTED | PROGRESSING | COMPLETE | CANCELED | ERROR) * fileInput - Your input file URL, or partial input file name. * jobEngineVersionRequested - The Job engine version that you requested for your job. Valid versions are in a YYYY-MM-DD format. * jobEngineVersionUsed - The Job engine version that your job used. This may differ from the version that you requested. Valid versions are in a YYYY-MM-DD format. * audioCodec - Your output's audio codec. (AAC | MP2 | MP3 | WAV | AIFF | AC3| EAC3 | EAC3_ATMOS | VORBIS | OPUS | PASSTHROUGH | FLAC) * videoCodec - Your output's video codec. (AV1 | AVC_INTRA | FRAME_CAPTURE | H_264 | H_265 | MPEG2 | PASSTHROUGH | PRORES | UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC)"
+                "smithy.api#documentation": "Specify job details to filter for while performing a jobs query. You specify these filters as part of a key-value pair within the JobsQueryFilter array. The following list describes which keys are available and their possible values: * queue - Your Queue's name or ARN. * status - Your job's status. (SUBMITTED | PROGRESSING | COMPLETE | CANCELED | ERROR) * fileInput - Your input file URL, or partial input file name. * jobEngineVersionRequested - The Job engine version that you requested for your job. Valid versions are in a YYYY-MM-DD format. * jobEngineVersionUsed - The Job engine version that your job used. This may differ from the version that you requested. Valid versions are in a YYYY-MM-DD format. * audioCodec - Your output's audio codec. (AAC | MP2 | MP3 | WAV | AIFF | AC3| EAC3 | EAC3_ATMOS | VORBIS | OPUS | PASSTHROUGH | FLAC) * videoCodec - Your output's video codec. (AV1 | AVC_INTRA | FRAME_CAPTURE | H_264 | H_265 | MPEG2 | PASSTHROUGH | PRORES | UNCOMPRESSED | VC3 | VP8 | VP9 | XAVC) * errorCode - The error code that your job failed with. For example, 1010. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/mediaconvert_error_codes.html"
             }
         },
         "com.amazonaws.mediaconvert#JobsQueryStatus": {
@@ -16491,7 +17058,7 @@
                     }
                 },
                 "KantarServerUrl": {
-                    "target": "com.amazonaws.mediaconvert#__stringPatternHttpsKantarmedia",
+                    "target": "com.amazonaws.mediaconvert#__stringPatternHttpsKantarmedia55Prod",
                     "traits": {
                         "smithy.api#documentation": "Provide the HTTPS endpoint to the Kantar server. You should get this endpoint from Kantar.",
                         "smithy.api#jsonName": "kantarServerUrl"
@@ -18612,10 +19179,16 @@
                     "traits": {
                         "smithy.api#enumValue": "NONE"
                     }
+                },
+                "MANIFEST_CUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANIFEST_CUES"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None. Also provide the ESAM XML as a string in the setting Signal processing notification XML. Also enable ESAM SCTE-35 (include the property scte35Esam)."
+                "smithy.api#documentation": "For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want SCTE-35 markers in this output. When your input is an HLS manifest, choose Manifest cues to pass through CUE markers in your HLS manifest as segment boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice point in the input manifest. For SCTE-35 markers from an ESAM XML document-- Choose None. Also provide the ESAM XML as a string in the setting Signal processing notification XML. Also enable ESAM SCTE-35 (include the property scte35Esam)."
             }
         },
         "com.amazonaws.mediaconvert#M2tsSegmentationMarkers": {
@@ -18940,7 +19513,7 @@
                 "Scte35Source": {
                     "target": "com.amazonaws.mediaconvert#M2tsScte35Source",
                     "traits": {
-                        "smithy.api#documentation": "For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None. Also provide the ESAM XML as a string in the setting Signal processing notification XML. Also enable ESAM SCTE-35 (include the property scte35Esam).",
+                        "smithy.api#documentation": "For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want SCTE-35 markers in this output. When your input is an HLS manifest, choose Manifest cues to pass through CUE markers in your HLS manifest as segment boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice point in the input manifest. For SCTE-35 markers from an ESAM XML document-- Choose None. Also provide the ESAM XML as a string in the setting Signal processing notification XML. Also enable ESAM SCTE-35 (include the property scte35Esam).",
                         "smithy.api#jsonName": "scte35Source"
                     }
                 },
@@ -19085,10 +19658,16 @@
                     "traits": {
                         "smithy.api#enumValue": "NONE"
                     }
+                },
+                "MANIFEST_CUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANIFEST_CUES"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None if you don't want manifest conditioning. Choose Passthrough and choose Ad markers if you do want manifest conditioning. In both cases, also provide the ESAM XML as a string in the setting Signal processing notification XML."
+                "smithy.api#documentation": "For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None if you don't want manifest conditioning. Choose Passthrough and choose Ad markers if you do want manifest conditioning. In both cases, also provide the ESAM XML as a string in the setting Signal processing notification XML. For SCTE-35 markers from your input HLS manifest-- Choose Manifest cues to pass through CUE markers in your HLS manifest as segment boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice point in the input manifest."
             }
         },
         "com.amazonaws.mediaconvert#M3u8Settings": {
@@ -19216,7 +19795,7 @@
                 "Scte35Source": {
                     "target": "com.amazonaws.mediaconvert#M3u8Scte35Source",
                     "traits": {
-                        "smithy.api#documentation": "For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None if you don't want manifest conditioning. Choose Passthrough and choose Ad markers if you do want manifest conditioning. In both cases, also provide the ESAM XML as a string in the setting Signal processing notification XML.",
+                        "smithy.api#documentation": "For SCTE-35 markers from your input-- Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want SCTE-35 markers in this output. For SCTE-35 markers from an ESAM XML document-- Choose None if you don't want manifest conditioning. Choose Passthrough and choose Ad markers if you do want manifest conditioning. In both cases, also provide the ESAM XML as a string in the setting Signal processing notification XML. For SCTE-35 markers from your input HLS manifest-- Choose Manifest cues to pass through CUE markers in your HLS manifest as segment boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice point in the input manifest.",
                         "smithy.api#jsonName": "scte35Source"
                     }
                 },
@@ -19251,6 +19830,84 @@
             },
             "traits": {
                 "smithy.api#documentation": "These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for the MPEG2-TS segments in your HLS outputs."
+            }
+        },
+        "com.amazonaws.mediaconvert#MasteringDisplayColorVolume": {
+            "type": "structure",
+            "members": {
+                "BluePrimaryX": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Blue primary chromaticity x coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "bluePrimaryX"
+                    }
+                },
+                "BluePrimaryY": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Blue primary chromaticity y coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "bluePrimaryY"
+                    }
+                },
+                "GreenPrimaryX": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Green primary chromaticity x coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "greenPrimaryX"
+                    }
+                },
+                "GreenPrimaryY": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Green primary chromaticity y coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "greenPrimaryY"
+                    }
+                },
+                "MaxLuminance": {
+                    "target": "com.amazonaws.mediaconvert#__long",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum display mastering luminance, in units of 0.0001 cd/m².",
+                        "smithy.api#jsonName": "maxLuminance"
+                    }
+                },
+                "MinLuminance": {
+                    "target": "com.amazonaws.mediaconvert#__long",
+                    "traits": {
+                        "smithy.api#documentation": "Minimum display mastering luminance, in units of 0.0001 cd/m².",
+                        "smithy.api#jsonName": "minLuminance"
+                    }
+                },
+                "RedPrimaryX": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Red primary chromaticity x coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "redPrimaryX"
+                    }
+                },
+                "RedPrimaryY": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "Red primary chromaticity y coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "redPrimaryY"
+                    }
+                },
+                "WhitePointX": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "White point chromaticity x coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "whitePointX"
+                    }
+                },
+                "WhitePointY": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "White point chromaticity y coordinate, in units of 0.00002.",
+                        "smithy.api#jsonName": "whitePointY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Mastering display color volume metadata (SMPTE ST 2086). Describes the color volume of the display used to master the content. Chromaticity coordinates are in units of 0.00002. Luminance values are in units of 0.0001 cd/m²."
             }
         },
         "com.amazonaws.mediaconvert#MatrixCoefficients": {
@@ -19493,6 +20150,236 @@
                 ],
                 "smithy.api#documentation": "AWS Elemental MediaConvert",
                 "smithy.api#title": "AWS Elemental MediaConvert",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                },
+                                "cn-northwest-1"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://mediaconvert-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://mediaconvert.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://mediaconvert-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://mediaconvert.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://subscribe.mediaconvert.cn-northwest-1.amazonaws.com.cn",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://mediaconvert.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 15,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAA4AAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAkAAAAGAAAABAAAAAgAAAAHAAAACAX14QsF9eEMAAAABQX14QkF9eEKAAAABAAAAAwAAAAKAAAABgAAAAsF9eEIAAAABwX14QYF9eEHAAAABQAAAA0F9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAPAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -20726,6 +21613,13 @@
         "com.amazonaws.mediaconvert#MovSettings": {
             "type": "structure",
             "members": {
+                "AudioDuration": {
+                    "target": "com.amazonaws.mediaconvert#CmfcAudioDuration",
+                    "traits": {
+                        "smithy.api#documentation": "Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration. In all other cases, keep the default value, Default codec duration. When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.",
+                        "smithy.api#jsonName": "audioDuration"
+                    }
+                },
                 "ClapAtom": {
                     "target": "com.amazonaws.mediaconvert#MovClapAtom",
                     "traits": {
@@ -21190,10 +22084,16 @@
                     "traits": {
                         "smithy.api#enumValue": "NONE"
                     }
+                },
+                "MANIFEST_CUES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANIFEST_CUES"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want those SCTE-35 markers in this output."
+                "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want those SCTE-35 markers in this output. When your input is an HLS manifest, choose Manifest cues to pass through CUE markers in your HLS manifest as segment boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice point in the input manifest."
             }
         },
         "com.amazonaws.mediaconvert#MpdSettings": {
@@ -21258,7 +22158,7 @@
                 "Scte35Source": {
                     "target": "com.amazonaws.mediaconvert#MpdScte35Source",
                     "traits": {
-                        "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want those SCTE-35 markers in this output.",
+                        "smithy.api#documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None if you don't want those SCTE-35 markers in this output. When your input is an HLS manifest, choose Manifest cues to pass through CUE markers in your HLS manifest as segment boundaries and SCTE-35 markers in this output at each EXT-X-CUE-OUT splice point in the input manifest.",
                         "smithy.api#jsonName": "scte35Source"
                     }
                 },
@@ -23583,6 +24483,9 @@
                 },
                 {
                     "target": "com.amazonaws.mediaconvert#TooManyRequestsException"
+                },
+                {
+                    "target": "com.amazonaws.mediaconvert#UnprocessableEntityException"
                 }
             ],
             "traits": {
@@ -24750,6 +25653,12 @@
                     "traits": {
                         "smithy.api#enumValue": "DEEP_ARCHIVE"
                     }
+                },
+                "GLACIER_IR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLACIER_IR"
+                    }
                 }
             },
             "traits": {
@@ -25497,7 +26406,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html",
+                "smithy.api#documentation": "Add tags to a MediaConvert queue, preset, job, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-mediaconvert-resources.html.",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2017-08-29/tags",
@@ -26171,19 +27080,197 @@
                 "smithy.api#documentation": "Specify the initial presentation timestamp (PTS) offset for your transport stream output. To let MediaConvert automatically determine the initial PTS offset: Keep the default value, Auto. We recommend that you choose Auto for the widest player compatibility. The initial PTS will be at least two seconds and vary depending on your output's bitrate, HRD buffer size and HRD buffer initial fill percentage. To manually specify an initial PTS offset: Choose Seconds or Milliseconds. Then specify the number of seconds or milliseconds with PTS offset."
             }
         },
+        "com.amazonaws.mediaconvert#TtmlBackgroundColor": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "BLACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLACK"
+                    }
+                },
+                "WHITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WHITE"
+                    }
+                },
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify the background color for TTML captions output."
+            }
+        },
         "com.amazonaws.mediaconvert#TtmlDestinationSettings": {
             "type": "structure",
             "members": {
+                "BackgroundColor": {
+                    "target": "com.amazonaws.mediaconvert#TtmlBackgroundColor",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the color of the rectangle behind the captions. If Style passthrough is set to enabled, leave blank or set to Auto to pass through the background color from your input captions. If Style passthrough is set to disabled, leave blank or set to Auto to use the default black.",
+                        "smithy.api#jsonName": "backgroundColor"
+                    }
+                },
+                "BackgroundOpacity": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max255",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the opacity of the background rectangle. Enter a value from 0 to 255, where 0 is transparent and 255 is opaque. If Style passthrough is set to enabled, leave blank to pass through the background style information in your input captions to your output captions. If Style passthrough is set to disabled and backgroundColor is set, leave blank to use a value of 255 (opaque).",
+                        "smithy.api#jsonName": "backgroundOpacity"
+                    }
+                },
+                "FontColor": {
+                    "target": "com.amazonaws.mediaconvert#TtmlFontColor",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the color of the captions text. If Style passthrough is set to enabled, leave blank or set to Auto to pass through the font color from your input captions. If Style passthrough is set to disabled, leave blank or set to Auto to use the default white.",
+                        "smithy.api#jsonName": "fontColor"
+                    }
+                },
+                "FontOpacity": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max255",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the opacity of the captions. Enter a value from 0 to 255, where 0 is transparent and 255 is opaque. If Style passthrough is set to enabled, leave blank to pass through the font opacity information in your input captions to your output captions. If Style passthrough is set to disabled and fontColor is set, leave blank to use a value of 255 (opaque).",
+                        "smithy.api#jsonName": "fontOpacity"
+                    }
+                },
+                "FontSize": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max96",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the Font size in pixels. Must be a positive integer. Set to 0, or leave blank, for automatic font size.",
+                        "smithy.api#jsonName": "fontSize"
+                    }
+                },
+                "FontStyle": {
+                    "target": "com.amazonaws.mediaconvert#TtmlFontStyle",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the font style of the caption text. If Style passthrough is set to enabled, leave blank to pass through the font style from your input captions. If Style passthrough is set to disabled, leave blank to use the default normal style.",
+                        "smithy.api#jsonName": "fontStyle"
+                    }
+                },
+                "FontWeight": {
+                    "target": "com.amazonaws.mediaconvert#TtmlFontWeight",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the font weight of the caption text. If Style passthrough is set to enabled, leave blank to pass through the font weight from your input captions. If Style passthrough is set to disabled, leave blank to use the default normal weight.",
+                        "smithy.api#jsonName": "fontWeight"
+                    }
+                },
                 "StylePassthrough": {
                     "target": "com.amazonaws.mediaconvert#TtmlStylePassthrough",
                     "traits": {
                         "smithy.api#documentation": "Pass through style and position information from a TTML-like input source (TTML, IMSC, SMPTE-TT) to the TTML output.",
                         "smithy.api#jsonName": "stylePassthrough"
                     }
+                },
+                "TextDecoration": {
+                    "target": "com.amazonaws.mediaconvert#TtmlTextDecoration",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the text decoration of the caption text. If Style passthrough is set to enabled, leave blank to pass through the text decoration from your input captions. If Style passthrough is set to disabled, leave blank to use the default of none.",
+                        "smithy.api#jsonName": "textDecoration"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Settings related to TTML captions. TTML is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html."
+            }
+        },
+        "com.amazonaws.mediaconvert#TtmlFontColor": {
+            "type": "enum",
+            "members": {
+                "WHITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WHITE"
+                    }
+                },
+                "BLACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLACK"
+                    }
+                },
+                "YELLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YELLOW"
+                    }
+                },
+                "RED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RED"
+                    }
+                },
+                "GREEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREEN"
+                    }
+                },
+                "BLUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLUE"
+                    }
+                },
+                "AUTO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTO"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify the font color for TTML captions output."
+            }
+        },
+        "com.amazonaws.mediaconvert#TtmlFontStyle": {
+            "type": "enum",
+            "members": {
+                "NORMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NORMAL"
+                    }
+                },
+                "ITALIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITALIC"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify the font style for TTML captions output."
+            }
+        },
+        "com.amazonaws.mediaconvert#TtmlFontWeight": {
+            "type": "enum",
+            "members": {
+                "NORMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NORMAL"
+                    }
+                },
+                "BOLD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOLD"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify the font weight for TTML captions output."
             }
         },
         "com.amazonaws.mediaconvert#TtmlStylePassthrough": {
@@ -26204,6 +27291,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Pass through style and position information from a TTML-like input source (TTML, IMSC, SMPTE-TT) to the TTML output."
+            }
+        },
+        "com.amazonaws.mediaconvert#TtmlTextDecoration": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "UNDERLINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNDERLINE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify the text decoration for TTML captions output."
             }
         },
         "com.amazonaws.mediaconvert#Type": {
@@ -26452,6 +27559,22 @@
                 "smithy.api#documentation": "When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine to create a smoother picture. When you keep the default value, None, MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture."
             }
         },
+        "com.amazonaws.mediaconvert#UnprocessableEntityException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The input file was recognized but appears to be malformed or corrupt.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 422
+            }
+        },
         "com.amazonaws.mediaconvert#UntagResource": {
             "type": "operation",
             "input": {
@@ -26484,7 +27607,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html",
+                "smithy.api#documentation": "Remove tags from a MediaConvert queue, preset, job, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-mediaconvert-resources.html.",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2017-08-29/tags/{Arn}",
@@ -27758,6 +28881,13 @@
                         "smithy.api#jsonName": "dolbyVision"
                     }
                 },
+                "DurationControl": {
+                    "target": "com.amazonaws.mediaconvert#DurationControl",
+                    "traits": {
+                        "smithy.api#documentation": "Enable integer-second duration normalization. When enabled, the output duration is adjusted to land on an exact integer-second boundary. The adjustment method (trim, compress, or pad) is chosen automatically based on how far the input duration is from the nearest integer second.",
+                        "smithy.api#jsonName": "durationControl"
+                    }
+                },
                 "Hdr10Plus": {
                     "target": "com.amazonaws.mediaconvert#Hdr10Plus",
                     "traits": {
@@ -27829,11 +28959,25 @@
                         "smithy.api#jsonName": "colorPrimaries"
                     }
                 },
+                "DisplayAspectRatio": {
+                    "target": "com.amazonaws.mediaconvert#AspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
+                        "smithy.api#jsonName": "displayAspectRatio"
+                    }
+                },
                 "FrameRate": {
                     "target": "com.amazonaws.mediaconvert#FrameRate",
                     "traits": {
                         "smithy.api#documentation": "The frame rate of the video or audio track, expressed as a fraction with numerator and denominator values.",
                         "smithy.api#jsonName": "frameRate"
+                    }
+                },
+                "HdrMetadata": {
+                    "target": "com.amazonaws.mediaconvert#HdrMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "HDR (High Dynamic Range) metadata extracted from the container, including mastering display color volume and content light level information. This metadata is present in HDR10 and similar HDR content.",
+                        "smithy.api#jsonName": "hdrMetadata"
                     }
                 },
                 "Height": {
@@ -27848,6 +28992,20 @@
                     "traits": {
                         "smithy.api#documentation": "The color space matrix coefficients of the video track, defining how RGB color values are converted to and from YUV color space. This affects color accuracy during encoding and decoding processes.",
                         "smithy.api#jsonName": "matrixCoefficients"
+                    }
+                },
+                "Rotation": {
+                    "target": "com.amazonaws.mediaconvert#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The clockwise rotation angle of the video track, in degrees, as derived from container-level metadata (e.g. the MP4 tkhd transformation matrix or the Matroska ProjectionPoseRoll element). Common values are 90, 180, and 270. This field is null when no rotation metadata is present or when the rotation is 0 degrees. For MP4, non-standard transformation matrices also yield null.",
+                        "smithy.api#jsonName": "rotation"
+                    }
+                },
+                "SampleAspectRatio": {
+                    "target": "com.amazonaws.mediaconvert#AspectRatio",
+                    "traits": {
+                        "smithy.api#documentation": "An aspect ratio expressed as a fraction with numerator and denominator values, reduced to lowest terms. Used for the sample (pixel) aspect ratio and the display aspect ratio of a video track. For example, a 720x576 anamorphic track has a sample aspect ratio of 64 / 45 and a display aspect ratio of 16 / 9. A video track can declare an aspect ratio in two independent places, and MediaConvert reports each one where it was found rather than choosing between them. The ratio declared by the container appears on the video track itself, and the ratio declared by the video essence appears under codecMetadata. When a file declares an aspect ratio in only one of the two places, the other is null; when it declares both and they disagree, you can compare them and decide which to use.",
+                        "smithy.api#jsonName": "sampleAspectRatio"
                     }
                 },
                 "TransferCharacteristics": {
@@ -29111,6 +30269,13 @@
         "com.amazonaws.mediaconvert#XavcHdIntraCbgProfileSettings": {
             "type": "structure",
             "members": {
+                "InterlaceMode": {
+                    "target": "com.amazonaws.mediaconvert#XavcInterlaceMode",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the scan line type for the output. Keep the default value, Progressive to create a progressive output, regardless of the scan type of your input. Use Top field first or Bottom field first to create an output that's interlaced with the same field polarity throughout. Use Follow, default top or Follow, default bottom to produce outputs with the same field polarity as the source. For jobs that have multiple inputs, the output field polarity might change over the course of the output. Follow behavior depends on the input scan type. If the source is interlaced, the output will be interlaced with the same polarity as the source. If the source is progressive, the output will be interlaced with top field bottom field first, depending on which of the Follow options you choose.",
+                        "smithy.api#jsonName": "interlaceMode"
+                    }
+                },
                 "XavcClass": {
                     "target": "com.amazonaws.mediaconvert#XavcHdIntraCbgProfileClass",
                     "traits": {
@@ -30164,6 +31329,15 @@
                 }
             }
         },
+        "com.amazonaws.mediaconvert#__integerMin1Max9999": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 9999
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#__integerMin2000Max30000": {
             "type": "integer",
             "traits": {
@@ -30593,6 +31767,12 @@
                 "target": "com.amazonaws.mediaconvert#CmafAdditionalManifest"
             }
         },
+        "com.amazonaws.mediaconvert#__listOfCmafImageBasedTrickPlayVariant": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#CmafImageBasedTrickPlayVariant"
+            }
+        },
         "com.amazonaws.mediaconvert#__listOfColorConversion3DLUTSetting": {
             "type": "list",
             "member": {
@@ -30603,6 +31783,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#DashAdditionalManifest"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfDashIsoImageBasedTrickPlayVariant": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#DashIsoImageBasedTrickPlayVariant"
             }
         },
         "com.amazonaws.mediaconvert#__listOfElementalInferenceFeature": {
@@ -30651,6 +31837,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#HlsCaptionLanguageMapping"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfHlsImageBasedTrickPlayVariant": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#HlsImageBasedTrickPlayVariant"
             }
         },
         "com.amazonaws.mediaconvert#__listOfHopDestination": {
@@ -31329,10 +32521,10 @@
                 "smithy.api#pattern": "^https:\\/\\/[^:@\\/]*(:\\d*)?(\\/.*)?$"
             }
         },
-        "com.amazonaws.mediaconvert#__stringPatternHttpsKantarmedia": {
+        "com.amazonaws.mediaconvert#__stringPatternHttpsKantarmedia55Prod": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^https:\\/\\/.*.kantarmedia.*$"
+                "smithy.api#pattern": "^https:\\/\\/.*.(kantarmedia|55-prod).*$"
             }
         },
         "com.amazonaws.mediaconvert#__stringPatternIdentityAZaZ26AZaZ09163": {

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","resources":[{"arn":"__Arn__","creationTime":946684800,"lastUpdatedTime":946684800,"resourceGroupArn":"__ResourceGroupArn__","resourceRegionScope":"REGIONAL","resourceShareArn":"__ResourceShareArn__","status":"AVAILABLE","statusMessage":"__StatusMessage__","type":"__Type__"},{"arn":"__Arn__","creationTime":946684800,"lastUpdatedTime":946684800,"resourceGroupArn":"__ResourceGroupArn__","resourceRegionScope":"REGIONAL","resourceShareArn":"__ResourceShareArn__","status":"AVAILABLE","statusMessage":"__StatusMessage__","type":"__Type__"}]}

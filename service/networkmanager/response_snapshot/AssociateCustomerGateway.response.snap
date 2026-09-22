@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CustomerGatewayAssociation":{"CustomerGatewayArn":"__CustomerGatewayArn__","DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkId":"__LinkId__","State":"PENDING"}}

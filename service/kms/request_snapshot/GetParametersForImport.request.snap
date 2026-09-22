@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TrentService.GetParametersForImport
+
+{"KeyId":"__KeyId__","WrappingAlgorithm":"RSAES_PKCS1_V1_5","WrappingKeySpec":"RSA_2048"}

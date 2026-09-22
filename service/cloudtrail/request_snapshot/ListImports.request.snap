@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.ListImports
+
+{"Destination":"__Destination__","ImportStatus":"INITIALIZING","MaxResults":1,"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+POST /list-configuration-check-operations
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","Filters":[{"Name":"__Name__","Operator":"Equals","Value":"__Value__"},{"Name":"__Name__","Operator":"Equals","Value":"__Value__"}],"ListMode":"ALL_OPERATIONS","MaxResults":1,"NextToken":"__NextToken__"}

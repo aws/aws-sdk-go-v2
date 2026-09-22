@@ -4,11 +4,10 @@ package ssmsap
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds permissions to the target database.
@@ -47,6 +46,44 @@ type PutResourcePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourcePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourcePermissionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourcePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != "" {
+		s.WriteString(schemas.PutResourcePermissionInput_ActionType, string(v.ActionType))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PutResourcePermissionInput_ResourceArn, *v.ResourceArn)
+	}
+	if v.SourceResourceArn != nil {
+		s.WriteString(schemas.PutResourcePermissionInput_SourceResourceArn, *v.SourceResourceArn)
+	}
+}
+func (v *PutResourcePermissionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutResourcePermissionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutResourcePermissionInput_ActionType:
+			var ev string
+			if err := d.ReadString(schemas.PutResourcePermissionInput_ActionType, &ev); err != nil {
+				return err
+			}
+			v.ActionType = types.PermissionActionType(ev)
+			return nil
+		case schemas.PutResourcePermissionInput_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.PutResourcePermissionInput_ResourceArn, v.ResourceArn)
+		case schemas.PutResourcePermissionInput_SourceResourceArn:
+			v.SourceResourceArn = new(string)
+			return d.ReadString(schemas.PutResourcePermissionInput_SourceResourceArn, v.SourceResourceArn)
+		}
+		return nil
+	})
+}
+
 type PutResourcePermissionOutput struct {
 
 	//
@@ -58,77 +95,48 @@ type PutResourcePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutResourcePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutResourcePermissionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutResourcePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.PutResourcePermissionOutput_Policy, *v.Policy)
+	}
+}
+func (v *PutResourcePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutResourcePermissionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutResourcePermissionOutput_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.PutResourcePermissionOutput_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutResourcePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePermission, schemas.PutResourcePermissionInput, schemas.PutResourcePermissionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutResourcePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutResourcePermission, schemas.PutResourcePermissionInput, schemas.PutResourcePermissionOutput), output: &PutResourcePermissionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutResourcePermission{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutResourcePermission"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutResourcePermissionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourcePermission(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +151,8 @@ func (c *Client) addOperationPutResourcePermissionMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutResourcePermission(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutResourcePermission",
-	}
 }

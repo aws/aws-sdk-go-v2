@@ -5,10 +5,10 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists partner accounts in the catalog, providing a summary view of all partners.
@@ -40,6 +40,21 @@ type ListPartnersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartnersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartnersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListPartnersRequest_Catalog, *v.Catalog)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPartnersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPartnersOutput struct {
 
 	// A list of partner summaries including basic information about each partner
@@ -57,77 +72,51 @@ type ListPartnersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartnersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartnersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPartnersResponse_NextToken, *v.NextToken)
+	}
+	serializePartnerSummaryList(s, schemas.ListPartnersResponse_PartnerSummaryList, v.PartnerSummaryList)
+}
+func (v *ListPartnersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPartnersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPartnersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPartnersResponse_NextToken, v.NextToken)
+		case schemas.ListPartnersResponse_PartnerSummaryList:
+			return deserializePartnerSummaryList(d, schemas.ListPartnersResponse_PartnerSummaryList, &v.PartnerSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPartnersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartners, schemas.ListPartnersRequest, schemas.ListPartnersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListPartners{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartners, schemas.ListPartnersRequest, schemas.ListPartnersResponse), output: &ListPartnersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListPartners{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPartners"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPartnersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPartners(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +129,6 @@ func (c *Client) addOperationListPartnersMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -233,11 +216,3 @@ type ListPartnersAPIClient interface {
 }
 
 var _ ListPartnersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPartners(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPartners",
-	}
-}

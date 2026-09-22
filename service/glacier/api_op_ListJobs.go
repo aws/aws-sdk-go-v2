@@ -5,11 +5,11 @@ package glacier
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation lists jobs for a vault, including jobs that are in-progress and
@@ -102,6 +102,33 @@ type ListJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListJobsInput_accountId, *v.AccountId)
+	}
+	if v.Completed != nil {
+		s.WriteString(schemas.ListJobsInput_completed, *v.Completed)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListJobsInput_limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListJobsInput_marker, *v.Marker)
+	}
+	if v.Statuscode != nil {
+		s.WriteString(schemas.ListJobsInput_statuscode, *v.Statuscode)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.ListJobsInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type ListJobsOutput struct {
 
@@ -120,77 +147,51 @@ type ListJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobList(s, schemas.ListJobsOutput_JobList, v.JobList)
+	if v.Marker != nil {
+		s.WriteString(schemas.ListJobsOutput_Marker, *v.Marker)
+	}
+}
+func (v *ListJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsOutput_JobList:
+			return deserializeJobList(d, schemas.ListJobsOutput_JobList, &v.JobList)
+		case schemas.ListJobsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListJobsOutput_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsInput, schemas.ListJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobs, schemas.ListJobsInput, schemas.ListJobsOutput), output: &ListJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListJobsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,12 +213,6 @@ func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -319,11 +314,3 @@ type ListJobsAPIClient interface {
 }
 
 var _ ListJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListJobs",
-	}
-}

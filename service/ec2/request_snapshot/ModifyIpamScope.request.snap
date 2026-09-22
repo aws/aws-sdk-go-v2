@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyIpamScope&Description=__Description__&DryRun=true&ExternalAuthorityConfiguration.ExternalResourceIdentifier=__ExternalResourceIdentifier__&ExternalAuthorityConfiguration.Type=infoblox&IpamScopeId=__IpamScopeId__&RemoveExternalAuthorityConfiguration=true&Version=2016-11-15

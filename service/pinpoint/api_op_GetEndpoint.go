@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about the settings and attributes of a specific endpoint
@@ -45,6 +44,21 @@ type GetEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetEndpointRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.GetEndpointRequest_EndpointId, *v.EndpointId)
+	}
+}
+
 type GetEndpointOutput struct {
 
 	// Provides information about the channel type and other settings for an endpoint.
@@ -58,77 +72,50 @@ type GetEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointResponse != nil {
+		s.WriteStruct(schemas.GetEndpointResponse_EndpointResponse)
+		v.EndpointResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEndpointResponse_EndpointResponse:
+			v.EndpointResponse = &types.EndpointResponse{}
+			return v.EndpointResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEndpoint, schemas.GetEndpointRequest, schemas.GetEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEndpoint, schemas.GetEndpointRequest, schemas.GetEndpointResponse), output: &GetEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +130,8 @@ func (c *Client) addOperationGetEndpointMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEndpoint",
-	}
 }

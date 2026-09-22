@@ -1,0 +1,5 @@
+POST /investigations/listIndicators
+
+Content-Type: application/json
+
+{"GraphArn":"__GraphArn__","IndicatorType":"TTP_OBSERVED","InvestigationId":"__InvestigationId__","MaxResults":1,"NextToken":"__NextToken__"}

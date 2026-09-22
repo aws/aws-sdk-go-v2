@@ -5,10 +5,10 @@ package securityhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a V2 automation rule.
@@ -66,6 +66,33 @@ type CreateAutomationRuleV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomationRuleV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomationRuleV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomationRuleV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomationRulesActionListV2(s, schemas.CreateAutomationRuleV2Request_Actions, v.Actions)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Request_ClientToken, *v.ClientToken)
+	}
+	serializeCriteria(s, schemas.CreateAutomationRuleV2Request_Criteria, v.Criteria)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Request_Description, *v.Description)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Request_RuleName, *v.RuleName)
+	}
+	if v.RuleOrder != nil {
+		s.WriteFloat32(schemas.CreateAutomationRuleV2Request_RuleOrder, *v.RuleOrder)
+	}
+	if v.RuleStatus != "" {
+		s.WriteString(schemas.CreateAutomationRuleV2Request_RuleStatus, string(v.RuleStatus))
+	}
+	serializeTagMap(s, schemas.CreateAutomationRuleV2Request_Tags, v.Tags)
+}
+
 type CreateAutomationRuleV2Output struct {
 
 	// The ARN of the V2 automation rule.
@@ -80,65 +107,48 @@ type CreateAutomationRuleV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomationRuleV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomationRuleV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomationRuleV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleArn != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Response_RuleArn, *v.RuleArn)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.CreateAutomationRuleV2Response_RuleId, *v.RuleId)
+	}
+}
+func (v *CreateAutomationRuleV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutomationRuleV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutomationRuleV2Response_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.CreateAutomationRuleV2Response_RuleArn, v.RuleArn)
+		case schemas.CreateAutomationRuleV2Response_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.CreateAutomationRuleV2Response_RuleId, v.RuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutomationRuleV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomationRuleV2, schemas.CreateAutomationRuleV2Request, schemas.CreateAutomationRuleV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAutomationRuleV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomationRuleV2, schemas.CreateAutomationRuleV2Request, schemas.CreateAutomationRuleV2Response), output: &CreateAutomationRuleV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAutomationRuleV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAutomationRuleV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -148,12 +158,6 @@ func (c *Client) addOperationCreateAutomationRuleV2Middlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateAutomationRuleV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutomationRuleV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,12 +170,6 @@ func (c *Client) addOperationCreateAutomationRuleV2Middlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -211,12 +209,4 @@ func (m *idempotencyToken_initializeOpCreateAutomationRuleV2) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateAutomationRuleV2Middleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAutomationRuleV2{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAutomationRuleV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAutomationRuleV2",
-	}
 }

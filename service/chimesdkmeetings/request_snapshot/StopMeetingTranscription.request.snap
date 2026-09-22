@@ -1,0 +1,3 @@
+POST /meetings/__MeetingId__/transcription?operation=stop
+
+

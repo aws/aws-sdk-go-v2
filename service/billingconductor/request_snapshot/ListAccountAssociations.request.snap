@@ -1,0 +1,5 @@
+POST /list-account-associations
+
+Content-Type: application/json
+
+{"BillingPeriod":"__BillingPeriod__","Filters":{"AccountId":"__AccountId__","AccountIds":["__Member__","__Member__"],"Association":"__Association__"},"NextToken":"__NextToken__"}

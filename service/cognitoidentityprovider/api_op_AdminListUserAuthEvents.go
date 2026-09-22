@@ -5,10 +5,10 @@ package cognitoidentityprovider
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Requests a history of user activity and any risks detected as part of Amazon
@@ -74,6 +74,27 @@ type AdminListUserAuthEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminListUserAuthEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminListUserAuthEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminListUserAuthEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.AdminListUserAuthEventsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.AdminListUserAuthEventsRequest_NextToken, *v.NextToken)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminListUserAuthEventsRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminListUserAuthEventsRequest_Username, *v.Username)
+	}
+}
+
 type AdminListUserAuthEventsOutput struct {
 
 	// The response object. It includes the EventID , EventType , CreationDate ,
@@ -92,77 +113,51 @@ type AdminListUserAuthEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminListUserAuthEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminListUserAuthEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminListUserAuthEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthEventsType(s, schemas.AdminListUserAuthEventsResponse_AuthEvents, v.AuthEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.AdminListUserAuthEventsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *AdminListUserAuthEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminListUserAuthEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminListUserAuthEventsResponse_AuthEvents:
+			return deserializeAuthEventsType(d, schemas.AdminListUserAuthEventsResponse_AuthEvents, &v.AuthEvents)
+		case schemas.AdminListUserAuthEventsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.AdminListUserAuthEventsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminListUserAuthEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminListUserAuthEvents, schemas.AdminListUserAuthEventsRequest, schemas.AdminListUserAuthEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminListUserAuthEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminListUserAuthEvents, schemas.AdminListUserAuthEventsRequest, schemas.AdminListUserAuthEventsResponse), output: &AdminListUserAuthEventsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminListUserAuthEvents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AdminListUserAuthEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAdminListUserAuthEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAdminListUserAuthEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +170,6 @@ func (c *Client) addOperationAdminListUserAuthEventsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -284,11 +273,3 @@ type AdminListUserAuthEventsAPIClient interface {
 }
 
 var _ AdminListUserAuthEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opAdminListUserAuthEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AdminListUserAuthEvents",
-	}
-}

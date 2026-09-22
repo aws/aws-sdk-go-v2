@@ -4,11 +4,10 @@ package route53domains
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The GetDomainSuggestions operation returns a list of suggested domain names.
@@ -71,6 +70,22 @@ type GetDomainSuggestionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainSuggestionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainSuggestionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainSuggestionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDomainSuggestionsRequest_DomainName, *v.DomainName)
+	}
+	if v.OnlyAvailable != nil {
+		s.WriteBool(schemas.GetDomainSuggestionsRequest_OnlyAvailable, *v.OnlyAvailable)
+	}
+	s.WriteInt32(schemas.GetDomainSuggestionsRequest_SuggestionCount, v.SuggestionCount)
+}
+
 type GetDomainSuggestionsOutput struct {
 
 	// A list of possible domain names. If you specified true for OnlyAvailable in the
@@ -83,77 +98,45 @@ type GetDomainSuggestionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainSuggestionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainSuggestionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainSuggestionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainSuggestionsList(s, schemas.GetDomainSuggestionsResponse_SuggestionsList, v.SuggestionsList)
+}
+func (v *GetDomainSuggestionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainSuggestionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainSuggestionsResponse_SuggestionsList:
+			return deserializeDomainSuggestionsList(d, schemas.GetDomainSuggestionsResponse_SuggestionsList, &v.SuggestionsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainSuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainSuggestions, schemas.GetDomainSuggestionsRequest, schemas.GetDomainSuggestionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDomainSuggestions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainSuggestions, schemas.GetDomainSuggestionsRequest, schemas.GetDomainSuggestionsResponse), output: &GetDomainSuggestionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDomainSuggestions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDomainSuggestions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDomainSuggestionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainSuggestions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +151,8 @@ func (c *Client) addOperationGetDomainSuggestionsMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDomainSuggestions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDomainSuggestions",
-	}
 }

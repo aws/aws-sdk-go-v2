@@ -1,0 +1,5 @@
+POST /agent-status/__InstanceId__/__AgentStatusId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","DisplayOrder":1,"Name":"__Name__","ResetOrderNumber":true,"State":"ENABLED"}

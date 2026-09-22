@@ -1,0 +1,7 @@
+200
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+
+¿gMetricsŸ¿jDimensionsŸ¿dNameh__Name__eValuei__Value__ÿ¿dNameh__Name__eValuei__Value__ÿÿjMetricNamen__MetricName__iNamespacem__Namespace__ÿ¿jDimensionsŸ¿dNameh__Name__eValuei__Value__ÿ¿dNameh__Name__eValuei__Value__ÿÿjMetricNamen__MetricName__iNamespacem__Namespace__ÿÿiNextTokenm__NextToken__nOwningAccountsŸj__Member__j__Member__ÿÿ

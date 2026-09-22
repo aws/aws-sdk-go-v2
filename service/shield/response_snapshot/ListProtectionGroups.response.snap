@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShield_20160616.ListProtectionGroups
+
+{"NextToken":"__NextToken__","ProtectionGroups":[{"Aggregation":"SUM","Members":["__Member__","__Member__"],"Pattern":"ALL","ProtectionGroupArn":"__ProtectionGroupArn__","ProtectionGroupId":"__ProtectionGroupId__","ResourceType":"CLOUDFRONT_DISTRIBUTION"},{"Aggregation":"SUM","Members":["__Member__","__Member__"],"Pattern":"ALL","ProtectionGroupArn":"__ProtectionGroupArn__","ProtectionGroupId":"__ProtectionGroupId__","ResourceType":"CLOUDFRONT_DISTRIBUTION"}]}

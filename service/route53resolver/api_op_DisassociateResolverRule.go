@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the association between a specified Resolver rule and a specified VPC.
@@ -46,6 +45,21 @@ type DisassociateResolverRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResolverRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResolverRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResolverRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverRuleId != nil {
+		s.WriteString(schemas.DisassociateResolverRuleRequest_ResolverRuleId, *v.ResolverRuleId)
+	}
+	if v.VPCId != nil {
+		s.WriteString(schemas.DisassociateResolverRuleRequest_VPCId, *v.VPCId)
+	}
+}
+
 type DisassociateResolverRuleOutput struct {
 
 	// Information about the DisassociateResolverRule request, including the status of
@@ -58,77 +72,50 @@ type DisassociateResolverRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResolverRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResolverRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResolverRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverRuleAssociation != nil {
+		s.WriteStruct(schemas.DisassociateResolverRuleResponse_ResolverRuleAssociation)
+		v.ResolverRuleAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateResolverRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateResolverRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateResolverRuleResponse_ResolverRuleAssociation:
+			v.ResolverRuleAssociation = &types.ResolverRuleAssociation{}
+			return v.ResolverRuleAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResolverRule, schemas.DisassociateResolverRuleRequest, schemas.DisassociateResolverRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateResolverRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResolverRule, schemas.DisassociateResolverRuleRequest, schemas.DisassociateResolverRuleResponse), output: &DisassociateResolverRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateResolverRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateResolverRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociateResolverRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateResolverRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +130,8 @@ func (c *Client) addOperationDisassociateResolverRuleMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociateResolverRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateResolverRule",
-	}
 }

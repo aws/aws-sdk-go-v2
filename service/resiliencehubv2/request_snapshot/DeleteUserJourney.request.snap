@@ -1,0 +1,5 @@
+POST /v2/delete-user-journey
+
+Content-Type: application/json
+
+{"systemArn":"__SystemArn__","userJourneyId":"__UserJourneyId__"}

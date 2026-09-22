@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: GlobalAccelerator_V20180706.CreateCustomRoutingListener
+
+{"AcceleratorArn":"__AcceleratorArn__","IdempotencyToken":"__IdempotencyToken__","PortRanges":[{"FromPort":1,"ToPort":1},{"FromPort":1,"ToPort":1}]}

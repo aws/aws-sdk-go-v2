@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a list of blueprints.
@@ -44,6 +43,22 @@ type BatchGetBlueprintsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetBlueprintsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetBlueprintsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetBlueprintsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeBlueprint != nil {
+		s.WriteBool(schemas.BatchGetBlueprintsRequest_IncludeBlueprint, *v.IncludeBlueprint)
+	}
+	if v.IncludeParameterSpec != nil {
+		s.WriteBool(schemas.BatchGetBlueprintsRequest_IncludeParameterSpec, *v.IncludeParameterSpec)
+	}
+	serializeBatchGetBlueprintNames(s, schemas.BatchGetBlueprintsRequest_Names, v.Names)
+}
+
 type BatchGetBlueprintsOutput struct {
 
 	// Returns a list of blueprint as a Blueprints object.
@@ -58,77 +73,48 @@ type BatchGetBlueprintsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetBlueprintsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetBlueprintsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetBlueprintsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlueprints(s, schemas.BatchGetBlueprintsResponse_Blueprints, v.Blueprints)
+	serializeBlueprintNames(s, schemas.BatchGetBlueprintsResponse_MissingBlueprints, v.MissingBlueprints)
+}
+func (v *BatchGetBlueprintsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetBlueprintsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetBlueprintsResponse_Blueprints:
+			return deserializeBlueprints(d, schemas.BatchGetBlueprintsResponse_Blueprints, &v.Blueprints)
+		case schemas.BatchGetBlueprintsResponse_MissingBlueprints:
+			return deserializeBlueprintNames(d, schemas.BatchGetBlueprintsResponse_MissingBlueprints, &v.MissingBlueprints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetBlueprints, schemas.BatchGetBlueprintsRequest, schemas.BatchGetBlueprintsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetBlueprints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetBlueprints, schemas.BatchGetBlueprintsRequest, schemas.BatchGetBlueprintsResponse), output: &BatchGetBlueprintsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetBlueprints{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetBlueprints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetBlueprintsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetBlueprints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +129,8 @@ func (c *Client) addOperationBatchGetBlueprintsMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetBlueprints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetBlueprints",
-	}
 }

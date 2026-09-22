@@ -246,6 +246,194 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>Amazon Kendra is a service for indexing large document sets.</p>",
                 "smithy.api#title": "AWSKendraFrontendService",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://kendra-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://kendra-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://kendra.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://kendra.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -4304,7 +4492,7 @@
                 "WorkDocsConfiguration": {
                     "target": "com.amazonaws.kendra#WorkDocsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Amazon WorkDocs as your data\n      source.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to WorkDocs as your data\n      source.</p>"
                     }
                 },
                 "FsxConfiguration": {
@@ -16163,7 +16351,7 @@
                 "OrganizationId": {
                     "target": "com.amazonaws.kendra#OrganizationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the directory corresponding to your \n            Amazon WorkDocs site repository.</p>\n         <p>You can find the organization ID in the \n            <a href=\"https://console.aws.amazon.com/directoryservicev2/\">Directory Service</a> by going to \n            <b>Active Directory</b>, then \n            <b>Directories</b>. Your Amazon WorkDocs site directory has an \n            ID, which is the organization ID. You can also set up a new Amazon WorkDocs \n            directory in the Directory Service console and enable a Amazon WorkDocs site \n            for the directory in the Amazon WorkDocs console.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the directory corresponding to your \n            WorkDocs site repository.</p>\n         <p>You can find the organization ID in the \n            <a href=\"https://console.aws.amazon.com/directoryservicev2/\">Directory Service</a> by going to \n            <b>Active Directory</b>, then \n            <b>Directories</b>. Your WorkDocs site directory has an \n            ID, which is the organization ID. You can also set up a new WorkDocs \n            directory in the Directory Service console and enable a WorkDocs site \n            for the directory in the WorkDocs console.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16178,30 +16366,30 @@
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to use the Amazon WorkDocs change log to determine \n            which documents require updating in the index. Depending on the change log's\n            size, it may take longer for Amazon Kendra to use the change log than to \n            scan all of your documents in Amazon WorkDocs.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to use the WorkDocs change log to determine \n            which documents require updating in the index. Depending on the change log's\n            size, it may take longer for Amazon Kendra to use the change log than to \n            scan all of your documents in WorkDocs.</p>"
                     }
                 },
                 "InclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain files \n            in your Amazon WorkDocs site repository. Files that match the patterns \n            are included in the index. Files that don't match the patterns are \n            excluded from the index. If a file matches both an inclusion and exclusion \n            pattern, the exclusion pattern takes precedence and the file isn't included \n            in the index.</p>"
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain files \n            in your WorkDocs site repository. Files that match the patterns \n            are included in the index. Files that don't match the patterns are \n            excluded from the index. If a file matches both an inclusion and exclusion \n            pattern, the exclusion pattern takes precedence and the file isn't included \n            in the index.</p>"
                     }
                 },
                 "ExclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain files \n            in your Amazon WorkDocs site repository. Files that match the patterns \n            are excluded from the index. Files that don’t match the patterns \n            are included in the index. If a file matches both an inclusion and exclusion \n            pattern, the exclusion pattern takes precedence and the file isn't included \n            in the index.</p>"
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain files \n            in your WorkDocs site repository. Files that match the patterns \n            are excluded from the index. Files that don’t match the patterns \n            are included in the index. If a file matches both an inclusion and exclusion \n            pattern, the exclusion pattern takes precedence and the file isn't included \n            in the index.</p>"
                     }
                 },
                 "FieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that \n            map Amazon WorkDocs data source attributes or field names to Amazon Kendra \n            index field names. To create custom fields, use the \n            <code>UpdateIndex</code> API before you map to Amazon WorkDocs fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping \n                data source fields</a>. The Amazon WorkDocs data source field names \n            must exist in your Amazon WorkDocs custom metadata.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that \n            map WorkDocs data source attributes or field names to Amazon Kendra \n            index field names. To create custom fields, use the \n            <code>UpdateIndex</code> API before you map to WorkDocs fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping \n                data source fields</a>. The WorkDocs data source field names \n            must exist in your WorkDocs custom metadata.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information to connect to Amazon WorkDocs \n            as your data source.</p>\n         <p>Amazon WorkDocs connector is available in Oregon, North Virginia, Sydney, Singapore and Ireland \n            regions.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to WorkDocs \n            as your data source.</p>\n         <p>WorkDocs connector is available in Oregon, North Virginia, Sydney, Singapore and Ireland \n            regions.</p>"
             }
         }
     }

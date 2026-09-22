@@ -4,11 +4,10 @@ package codebuild
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a build project.
@@ -164,6 +163,85 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Artifacts != nil {
+		s.WriteStruct(schemas.CreateProjectInput_artifacts)
+		v.Artifacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoRetryLimit != nil {
+		s.WriteInt32(schemas.CreateProjectInput_autoRetryLimit, *v.AutoRetryLimit)
+	}
+	if v.BadgeEnabled != nil {
+		s.WriteBool(schemas.CreateProjectInput_badgeEnabled, *v.BadgeEnabled)
+	}
+	if v.BuildBatchConfig != nil {
+		s.WriteStruct(schemas.CreateProjectInput_buildBatchConfig)
+		v.BuildBatchConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Cache != nil {
+		s.WriteStruct(schemas.CreateProjectInput_cache)
+		v.Cache.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConcurrentBuildLimit != nil {
+		s.WriteInt32(schemas.CreateProjectInput_concurrentBuildLimit, *v.ConcurrentBuildLimit)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateProjectInput_description, *v.Description)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.CreateProjectInput_encryptionKey, *v.EncryptionKey)
+	}
+	if v.Environment != nil {
+		s.WriteStruct(schemas.CreateProjectInput_environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProjectFileSystemLocations(s, schemas.CreateProjectInput_fileSystemLocations, v.FileSystemLocations)
+	if v.LogsConfig != nil {
+		s.WriteStruct(schemas.CreateProjectInput_logsConfig)
+		v.LogsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProjectInput_name, *v.Name)
+	}
+	if v.QueuedTimeoutInMinutes != nil {
+		s.WriteInt32(schemas.CreateProjectInput_queuedTimeoutInMinutes, *v.QueuedTimeoutInMinutes)
+	}
+	serializeProjectArtifactsList(s, schemas.CreateProjectInput_secondaryArtifacts, v.SecondaryArtifacts)
+	serializeProjectSecondarySourceVersions(s, schemas.CreateProjectInput_secondarySourceVersions, v.SecondarySourceVersions)
+	serializeProjectSources(s, schemas.CreateProjectInput_secondarySources, v.SecondarySources)
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.CreateProjectInput_serviceRole, *v.ServiceRole)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.CreateProjectInput_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.CreateProjectInput_sourceVersion, *v.SourceVersion)
+	}
+	serializeTagList(s, schemas.CreateProjectInput_tags, v.Tags)
+	if v.TimeoutInMinutes != nil {
+		s.WriteInt32(schemas.CreateProjectInput_timeoutInMinutes, *v.TimeoutInMinutes)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateProjectInput_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateProjectOutput struct {
 
 	// Information about the build project that was created.
@@ -175,77 +253,50 @@ type CreateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Project != nil {
+		s.WriteStruct(schemas.CreateProjectOutput_project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProjectOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProjectOutput_project:
+			v.Project = &types.Project{}
+			return v.Project.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectInput, schemas.CreateProjectOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectInput, schemas.CreateProjectOutput), output: &CreateProjectOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProject{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProject"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateProjectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProject(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -260,22 +311,8 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateProject(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProject",
-	}
 }

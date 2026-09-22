@@ -121,8 +121,9 @@ type CapacityDistributionStrategy string
 
 // Enum values for CapacityDistributionStrategy
 const (
-	CapacityDistributionStrategyBalancedOnly       CapacityDistributionStrategy = "balanced-only"
-	CapacityDistributionStrategyBalancedBestEffort CapacityDistributionStrategy = "balanced-best-effort"
+	CapacityDistributionStrategyBalancedOnly             CapacityDistributionStrategy = "balanced-only"
+	CapacityDistributionStrategyBalancedBestEffort       CapacityDistributionStrategy = "balanced-best-effort"
+	CapacityDistributionStrategyReservationsThenBalanced CapacityDistributionStrategy = "reservations-then-balanced"
 )
 
 // Values returns all known values for CapacityDistributionStrategy. Note that
@@ -134,6 +135,7 @@ func (CapacityDistributionStrategy) Values() []CapacityDistributionStrategy {
 	return []CapacityDistributionStrategy{
 		"balanced-only",
 		"balanced-best-effort",
+		"reservations-then-balanced",
 	}
 }
 
@@ -733,6 +735,29 @@ func (StandbyInstances) Values() []StandbyInstances {
 		"Terminate",
 		"Ignore",
 		"Wait",
+	}
+}
+
+type TargetCapacityType string
+
+// Enum values for TargetCapacityType
+const (
+	TargetCapacityTypeOnDemandCapacityReservation      TargetCapacityType = "on-demand-capacity-reservation"
+	TargetCapacityTypeCapacityBlock                    TargetCapacityType = "capacity-block"
+	TargetCapacityTypeInterruptibleCapacityReservation TargetCapacityType = "interruptible-capacity-reservation"
+	TargetCapacityTypeOnDemand                         TargetCapacityType = "on-demand"
+)
+
+// Values returns all known values for TargetCapacityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TargetCapacityType) Values() []TargetCapacityType {
+	return []TargetCapacityType{
+		"on-demand-capacity-reservation",
+		"capacity-block",
+		"interruptible-capacity-reservation",
+		"on-demand",
 	}
 }
 

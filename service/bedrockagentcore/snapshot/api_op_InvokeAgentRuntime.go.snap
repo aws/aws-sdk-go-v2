@@ -1,9 +1,6 @@
 InvokeAgentRuntime
 	Initialize stack step
-		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -11,16 +8,12 @@ InvokeAgentRuntime
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
@@ -30,7 +23,6 @@ InvokeAgentRuntime
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the description of specific Amazon FSx for Lustre or Amazon File Cache
@@ -61,6 +61,23 @@ type DescribeDataRepositoryTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataRepositoryTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataRepositoryTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataRepositoryTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataRepositoryTaskFilters(s, schemas.DescribeDataRepositoryTasksRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDataRepositoryTasksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataRepositoryTasksRequest_NextToken, *v.NextToken)
+	}
+	serializeTaskIds(s, schemas.DescribeDataRepositoryTasksRequest_TaskIds, v.TaskIds)
+}
+
 type DescribeDataRepositoryTasksOutput struct {
 
 	// The collection of data repository task descriptions returned.
@@ -77,74 +94,48 @@ type DescribeDataRepositoryTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataRepositoryTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataRepositoryTasksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataRepositoryTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataRepositoryTasks(s, schemas.DescribeDataRepositoryTasksResponse_DataRepositoryTasks, v.DataRepositoryTasks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataRepositoryTasksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDataRepositoryTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataRepositoryTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataRepositoryTasksResponse_DataRepositoryTasks:
+			return deserializeDataRepositoryTasks(d, schemas.DescribeDataRepositoryTasksResponse_DataRepositoryTasks, &v.DataRepositoryTasks)
+		case schemas.DescribeDataRepositoryTasksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDataRepositoryTasksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataRepositoryTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataRepositoryTasks, schemas.DescribeDataRepositoryTasksRequest, schemas.DescribeDataRepositoryTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataRepositoryTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataRepositoryTasks, schemas.DescribeDataRepositoryTasksRequest, schemas.DescribeDataRepositoryTasksResponse), output: &DescribeDataRepositoryTasksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataRepositoryTasks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDataRepositoryTasks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataRepositoryTasks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +148,6 @@ func (c *Client) addOperationDescribeDataRepositoryTasksMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +252,3 @@ type DescribeDataRepositoryTasksAPIClient interface {
 }
 
 var _ DescribeDataRepositoryTasksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeDataRepositoryTasks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDataRepositoryTasks",
-	}
-}

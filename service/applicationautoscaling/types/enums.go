@@ -102,6 +102,8 @@ const (
 	MetricTypeWorkSpacesAverageUserSessionsCapacityUtilization                   MetricType = "WorkSpacesAverageUserSessionsCapacityUtilization"
 	MetricTypeSageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution MetricType = "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution"
 	MetricTypeSageMakerVariantConcurrentRequestsPerModelHighResolution           MetricType = "SageMakerVariantConcurrentRequestsPerModelHighResolution"
+	MetricTypeECSServiceAverageCPUUtilizationHighResolution                      MetricType = "ECSServiceAverageCPUUtilizationHighResolution"
+	MetricTypeECSServiceAverageMemoryUtilizationHighResolution                   MetricType = "ECSServiceAverageMemoryUtilizationHighResolution"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -139,6 +141,8 @@ func (MetricType) Values() []MetricType {
 		"WorkSpacesAverageUserSessionsCapacityUtilization",
 		"SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution",
 		"SageMakerVariantConcurrentRequestsPerModelHighResolution",
+		"ECSServiceAverageCPUUtilizationHighResolution",
+		"ECSServiceAverageMemoryUtilizationHighResolution",
 	}
 }
 

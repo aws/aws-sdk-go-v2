@@ -1,0 +1,5 @@
+POST /cluster/get
+
+Content-Type: application/json
+
+{"filter":{"resourceId":"__ResourceId__"},"maxResults":1,"nextToken":"__NextToken__"}

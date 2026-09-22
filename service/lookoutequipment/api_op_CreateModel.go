@@ -5,10 +5,10 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -116,6 +116,66 @@ type CreateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateModelRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DataPreProcessingConfiguration != nil {
+		s.WriteStruct(schemas.CreateModelRequest_DataPreProcessingConfiguration)
+		v.DataPreProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.CreateModelRequest_DatasetName, *v.DatasetName)
+	}
+	if v.DatasetSchema != nil {
+		s.WriteStruct(schemas.CreateModelRequest_DatasetSchema)
+		v.DatasetSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationDataEndTime != nil {
+		s.WriteTime(schemas.CreateModelRequest_EvaluationDataEndTime, *v.EvaluationDataEndTime)
+	}
+	if v.EvaluationDataStartTime != nil {
+		s.WriteTime(schemas.CreateModelRequest_EvaluationDataStartTime, *v.EvaluationDataStartTime)
+	}
+	if v.LabelsInputConfiguration != nil {
+		s.WriteStruct(schemas.CreateModelRequest_LabelsInputConfiguration)
+		v.LabelsInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelDiagnosticsOutputConfiguration != nil {
+		s.WriteStruct(schemas.CreateModelRequest_ModelDiagnosticsOutputConfiguration)
+		v.ModelDiagnosticsOutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateModelRequest_ModelName, *v.ModelName)
+	}
+	if v.OffCondition != nil {
+		s.WriteString(schemas.CreateModelRequest_OffCondition, *v.OffCondition)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateModelRequest_RoleArn, *v.RoleArn)
+	}
+	if v.ServerSideKmsKeyId != nil {
+		s.WriteString(schemas.CreateModelRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
+	}
+	serializeTagList(s, schemas.CreateModelRequest_Tags, v.Tags)
+	if v.TrainingDataEndTime != nil {
+		s.WriteTime(schemas.CreateModelRequest_TrainingDataEndTime, *v.TrainingDataEndTime)
+	}
+	if v.TrainingDataStartTime != nil {
+		s.WriteTime(schemas.CreateModelRequest_TrainingDataStartTime, *v.TrainingDataStartTime)
+	}
+}
+
 type CreateModelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model being created.
@@ -130,65 +190,52 @@ type CreateModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CreateModelResponse_ModelArn, *v.ModelArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateModelResponse_Status, string(v.Status))
+	}
+}
+func (v *CreateModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.CreateModelResponse_ModelArn, v.ModelArn)
+		case schemas.CreateModelResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateModelResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModel, schemas.CreateModelRequest, schemas.CreateModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModel, schemas.CreateModelRequest, schemas.CreateModelResponse), output: &CreateModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -198,12 +245,6 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,12 +257,6 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,12 +296,4 @@ func (m *idempotencyToken_initializeOpCreateModel) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateModelMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateModel{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModel",
-	}
 }

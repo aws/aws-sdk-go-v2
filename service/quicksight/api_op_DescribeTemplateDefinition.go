@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a detailed description of the definition of a template.
@@ -56,6 +55,27 @@ type DescribeTemplateDefinitionInput struct {
 	VersionNumber *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeTemplateDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTemplateDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTemplateDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DescribeTemplateDefinitionRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeTemplateDefinitionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.DescribeTemplateDefinitionRequest_TemplateId, *v.TemplateId)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.DescribeTemplateDefinitionRequest_VersionNumber, *v.VersionNumber)
+	}
 }
 
 type DescribeTemplateDefinitionOutput struct {
@@ -107,77 +127,92 @@ type DescribeTemplateDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTemplateDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTemplateDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTemplateDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteStruct(schemas.DescribeTemplateDefinitionResponse_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTemplateErrorList(s, schemas.DescribeTemplateDefinitionResponse_Errors, v.Errors)
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeTemplateDefinitionResponse_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeTemplateDefinitionResponse_RequestId, *v.RequestId)
+	}
+	if v.ResourceStatus != "" {
+		s.WriteString(schemas.DescribeTemplateDefinitionResponse_ResourceStatus, string(v.ResourceStatus))
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeTemplateDefinitionResponse_Status, v.Status)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.DescribeTemplateDefinitionResponse_TemplateId, *v.TemplateId)
+	}
+	if v.ThemeArn != nil {
+		s.WriteString(schemas.DescribeTemplateDefinitionResponse_ThemeArn, *v.ThemeArn)
+	}
+}
+func (v *DescribeTemplateDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTemplateDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTemplateDefinitionResponse_Definition:
+			v.Definition = &types.TemplateVersionDefinition{}
+			return v.Definition.Deserialize(d)
+		case schemas.DescribeTemplateDefinitionResponse_Errors:
+			return deserializeTemplateErrorList(d, schemas.DescribeTemplateDefinitionResponse_Errors, &v.Errors)
+		case schemas.DescribeTemplateDefinitionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeTemplateDefinitionResponse_Name, v.Name)
+		case schemas.DescribeTemplateDefinitionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeTemplateDefinitionResponse_RequestId, v.RequestId)
+		case schemas.DescribeTemplateDefinitionResponse_ResourceStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeTemplateDefinitionResponse_ResourceStatus, &ev); err != nil {
+				return err
+			}
+			v.ResourceStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.DescribeTemplateDefinitionResponse_Status:
+			return d.ReadInt32(schemas.DescribeTemplateDefinitionResponse_Status, &v.Status)
+		case schemas.DescribeTemplateDefinitionResponse_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.DescribeTemplateDefinitionResponse_TemplateId, v.TemplateId)
+		case schemas.DescribeTemplateDefinitionResponse_ThemeArn:
+			v.ThemeArn = new(string)
+			return d.ReadString(schemas.DescribeTemplateDefinitionResponse_ThemeArn, v.ThemeArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTemplateDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTemplateDefinition, schemas.DescribeTemplateDefinitionRequest, schemas.DescribeTemplateDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeTemplateDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTemplateDefinition, schemas.DescribeTemplateDefinitionRequest, schemas.DescribeTemplateDefinitionResponse), output: &DescribeTemplateDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeTemplateDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTemplateDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeTemplateDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTemplateDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,22 +227,8 @@ func (c *Client) addOperationDescribeTemplateDefinitionMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeTemplateDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeTemplateDefinition",
-	}
 }

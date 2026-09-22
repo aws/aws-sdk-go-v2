@@ -1,0 +1,5 @@
+POST /list-control-operations
+
+Content-Type: application/json
+
+{"filter":{"controlIdentifiers":["__Member__","__Member__"],"controlOperationTypes":["ENABLE_CONTROL","ENABLE_CONTROL"],"enabledControlIdentifiers":["__Member__","__Member__"],"statuses":["SUCCEEDED","SUCCEEDED"],"targetIdentifiers":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

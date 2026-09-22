@@ -4,11 +4,10 @@ package chimesdkvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a Voice Connector's origination settings.
@@ -42,6 +41,23 @@ type PutVoiceConnectorOriginationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorOriginationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVoiceConnectorOriginationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVoiceConnectorOriginationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Origination != nil {
+		s.WriteStruct(schemas.PutVoiceConnectorOriginationRequest_Origination)
+		v.Origination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.PutVoiceConnectorOriginationRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type PutVoiceConnectorOriginationOutput struct {
 
 	// The updated origination settings.
@@ -53,77 +69,50 @@ type PutVoiceConnectorOriginationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorOriginationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVoiceConnectorOriginationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVoiceConnectorOriginationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Origination != nil {
+		s.WriteStruct(schemas.PutVoiceConnectorOriginationResponse_Origination)
+		v.Origination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutVoiceConnectorOriginationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutVoiceConnectorOriginationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutVoiceConnectorOriginationResponse_Origination:
+			v.Origination = &types.Origination{}
+			return v.Origination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutVoiceConnectorOriginationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorOrigination, schemas.PutVoiceConnectorOriginationRequest, schemas.PutVoiceConnectorOriginationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorOrigination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorOrigination, schemas.PutVoiceConnectorOriginationRequest, schemas.PutVoiceConnectorOriginationResponse), output: &PutVoiceConnectorOriginationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVoiceConnectorOrigination{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutVoiceConnectorOrigination"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutVoiceConnectorOriginationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutVoiceConnectorOrigination(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +127,8 @@ func (c *Client) addOperationPutVoiceConnectorOriginationMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutVoiceConnectorOrigination(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutVoiceConnectorOrigination",
-	}
 }

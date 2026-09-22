@@ -4,11 +4,10 @@ package sagemakermetrics
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakermetrics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakermetrics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Used to ingest training metrics into SageMaker. These metrics can be visualized
@@ -44,6 +43,19 @@ type BatchPutMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRawMetricDataList(s, schemas.BatchPutMetricsRequest_MetricData, v.MetricData)
+	if v.TrialComponentName != nil {
+		s.WriteString(schemas.BatchPutMetricsRequest_TrialComponentName, *v.TrialComponentName)
+	}
+}
+
 type BatchPutMetricsOutput struct {
 
 	// Lists any errors that occur when inserting metric data.
@@ -55,77 +67,45 @@ type BatchPutMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchPutMetricsErrorList(s, schemas.BatchPutMetricsResponse_Errors, v.Errors)
+}
+func (v *BatchPutMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutMetricsResponse_Errors:
+			return deserializeBatchPutMetricsErrorList(d, schemas.BatchPutMetricsResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutMetrics, schemas.BatchPutMetricsRequest, schemas.BatchPutMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutMetrics, schemas.BatchPutMetricsRequest, schemas.BatchPutMetricsResponse), output: &BatchPutMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchPutMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchPutMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchPutMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +120,8 @@ func (c *Client) addOperationBatchPutMetricsMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchPutMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchPutMetrics",
-	}
 }

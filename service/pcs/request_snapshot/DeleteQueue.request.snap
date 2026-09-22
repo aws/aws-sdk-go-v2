@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSParallelComputingService.DeleteQueue
+
+{"clientToken":"__ClientToken__","clusterIdentifier":"__ClusterIdentifier__","queueIdentifier":"__QueueIdentifier__"}

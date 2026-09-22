@@ -14,6 +14,7 @@ import (
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/iotdataplane/internal/endpoints"
 	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
+	"github.com/aws/smithy-go/endpoints/private/bdd"
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -229,6 +230,8 @@ func bindRegion(region string) (*string, error) {
 	return aws.String(endpoints.MapFIPSRegion(region)), nil
 }
 
+var _ = rulesfn.StringSlice(nil)
+
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
@@ -294,21 +297,273 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 	return p
 }
 
-type stringSlice []string
+const bddRoot int32 = 2
 
-func (s stringSlice) Get(i int) *string {
-	if i < 0 || i >= len(s) {
-		return nil
+var bddNodes = [72]int32{
+	-1, 1, -1, 0, 23, 3, 1, 4, 100000021, 2, 5, 100000021, 3, 12, 6, 4, 11, 7, 8, 100000017, 8, 10, 100000018, 9, 11, 100000019, 10, 12, 100000018, 100000020, 5, 100000015, 100000016, 4, 21, 13, 6, 14, 100000014, 7, 100000006, 15, 9, 100000007, 16, 13, 100000008, 17, 14, 100000009, 18, 15, 100000010, 19, 16, 100000011, 20, 17, 100000012, 100000013, 5, 22, 100000005, 6, 100000004, 100000005, 3, 100000001, 24, 4, 100000002, 100000003}
+
+type conditionContext struct {
+	PartitionResult *awsrulesfn.PartitionConfig
+}
+
+func evalCondition(idx int, params *EndpointParameters, c *conditionContext) bool {
+	switch idx {
+	case 0:
+		return params.Endpoint != nil
+	case 1:
+		return params.Region != nil
+	case 2:
+		if v := awsrulesfn.GetPartition(*params.Region); v != nil {
+			c.PartitionResult = v
+			return true
+		}
+		return false
+	case 3:
+		return *params.UseFIPS == true
+	case 4:
+		return *params.UseDualStack == true
+	case 5:
+		return c.PartitionResult.SupportsDualStack == true
+	case 6:
+		return c.PartitionResult.SupportsFIPS == true
+	case 7:
+		return *params.Region == "ca-central-1"
+	case 8:
+		return *params.Region == "cn-north-1"
+	case 9:
+		return *params.Region == "us-east-1"
+	case 10:
+		return c.PartitionResult.Name == "aws"
+	case 11:
+		return c.PartitionResult.Name == "aws-cn"
+	case 12:
+		return c.PartitionResult.Name == "aws-us-gov"
+	case 13:
+		return *params.Region == "us-east-2"
+	case 14:
+		return *params.Region == "us-west-1"
+	case 15:
+		return *params.Region == "us-west-2"
+	case 16:
+		return *params.Region == "us-gov-east-1"
+	case 17:
+		return *params.Region == "us-gov-west-1"
 	}
+	return false
+}
 
-	v := s[i]
-	return &v
+func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (smithyendpoints.Endpoint, error) {
+	switch idx {
+	case 0:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint resolution failed: no matching rule")
+	case 1:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS and custom endpoint are not supported")
+	case 2:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Dualstack and custom endpoint are not supported")
+	case 3:
+		uriString := *params.Endpoint
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 4:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://data-ats.iot-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 5:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "FIPS and DualStack are enabled, but this partition does not support one or both")
+	case 6:
+		uriString := "https://data.iot-fips.ca-central-1.amazonaws.com"
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 7:
+		uriString := "https://data.iot-fips.us-east-1.amazonaws.com"
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 8:
+		uriString := "https://data.iot-fips.us-east-2.amazonaws.com"
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 9:
+		uriString := "https://data.iot-fips.us-west-1.amazonaws.com"
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 10:
+		uriString := "https://data.iot-fips.us-west-2.amazonaws.com"
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 11:
+		uriString := "https://data.iot-fips.us-gov-east-1.amazonaws.com"
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 12:
+		uriString := "https://data.iot-fips.us-gov-west-1.amazonaws.com"
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 13:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://data-ats.iot-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 14:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
+	case 15:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://data-ats.iot.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 16:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
+	case 17:
+		uriString := "https://data.ats.iot.cn-north-1.amazonaws.com.cn"
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 18:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://data-ats.iot.")
+			out.WriteString(*params.Region)
+			out.WriteString(".amazonaws.com")
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 19:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://data-ats.iot.")
+			out.WriteString(*params.Region)
+			out.WriteString(".amazonaws.com.cn")
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 20:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://data-ats.iot.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 21:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
+	}
+	return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, invalid result index: %d", idx)
 }
 
 // EndpointResolverV2 provides the interface for resolving service endpoints.
 type EndpointResolverV2 interface {
-	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
-	// returning the endpoint if found. Otherwise an error is returned.
 	ResolveEndpoint(ctx context.Context, params EndpointParameters) (
 		smithyendpoints.Endpoint, error,
 	)
@@ -332,294 +587,12 @@ func (r *resolver) ResolveEndpoint(
 	if err = params.ValidateRequired(); err != nil {
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
 	}
-	_UseDualStack := *params.UseDualStack
-	_ = _UseDualStack
-	_UseFIPS := *params.UseFIPS
-	_ = _UseFIPS
 
-	if exprVal := params.Endpoint; exprVal != nil {
-		_Endpoint := *exprVal
-		_ = _Endpoint
-		if _UseFIPS == true {
-			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS and custom endpoint are not supported")
-		}
-		if _UseDualStack == true {
-			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Dualstack and custom endpoint are not supported")
-		}
-		uriString := _Endpoint
-
-		uri, err := url.Parse(uriString)
-		if err != nil {
-			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-		}
-
-		return smithyendpoints.Endpoint{
-			URI:     *uri,
-			Headers: http.Header{},
-		}, nil
-	}
-	if exprVal := params.Region; exprVal != nil {
-		_Region := *exprVal
-		_ = _Region
-		if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
-			_PartitionResult := *exprVal
-			_ = _PartitionResult
-			if _UseFIPS == true {
-				if _UseDualStack == true {
-					if true == _PartitionResult.SupportsFIPS {
-						if true == _PartitionResult.SupportsDualStack {
-							uriString := func() string {
-								var out strings.Builder
-								out.WriteString("https://data-ats.iot-fips.")
-								out.WriteString(_Region)
-								out.WriteString(".")
-								out.WriteString(_PartitionResult.DualStackDnsSuffix)
-								return out.String()
-							}()
-
-							uri, err := url.Parse(uriString)
-							if err != nil {
-								return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-							}
-
-							return smithyendpoints.Endpoint{
-								URI:     *uri,
-								Headers: http.Header{},
-							}, nil
-						}
-					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS and DualStack are enabled, but this partition does not support one or both")
-				}
-			}
-			if _UseFIPS == true {
-				if _PartitionResult.SupportsFIPS == true {
-					if _Region == "ca-central-1" {
-						uriString := "https://data.iot-fips.ca-central-1.amazonaws.com"
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					if _Region == "us-east-1" {
-						uriString := "https://data.iot-fips.us-east-1.amazonaws.com"
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					if _Region == "us-east-2" {
-						uriString := "https://data.iot-fips.us-east-2.amazonaws.com"
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					if _Region == "us-west-1" {
-						uriString := "https://data.iot-fips.us-west-1.amazonaws.com"
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					if _Region == "us-west-2" {
-						uriString := "https://data.iot-fips.us-west-2.amazonaws.com"
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					if _Region == "us-gov-east-1" {
-						uriString := "https://data.iot-fips.us-gov-east-1.amazonaws.com"
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					if _Region == "us-gov-west-1" {
-						uriString := "https://data.iot-fips.us-gov-west-1.amazonaws.com"
-
-						uri, err := url.Parse(uriString)
-						if err != nil {
-							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-						}
-
-						return smithyendpoints.Endpoint{
-							URI:     *uri,
-							Headers: http.Header{},
-						}, nil
-					}
-					uriString := func() string {
-						var out strings.Builder
-						out.WriteString("https://data-ats.iot-fips.")
-						out.WriteString(_Region)
-						out.WriteString(".")
-						out.WriteString(_PartitionResult.DnsSuffix)
-						return out.String()
-					}()
-
-					uri, err := url.Parse(uriString)
-					if err != nil {
-						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-					}
-
-					return smithyendpoints.Endpoint{
-						URI:     *uri,
-						Headers: http.Header{},
-					}, nil
-				}
-				return endpoint, fmt.Errorf("endpoint rule error, %s", "FIPS is enabled but this partition does not support FIPS")
-			}
-			if _UseDualStack == true {
-				if true == _PartitionResult.SupportsDualStack {
-					uriString := func() string {
-						var out strings.Builder
-						out.WriteString("https://data-ats.iot.")
-						out.WriteString(_Region)
-						out.WriteString(".")
-						out.WriteString(_PartitionResult.DualStackDnsSuffix)
-						return out.String()
-					}()
-
-					uri, err := url.Parse(uriString)
-					if err != nil {
-						return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-					}
-
-					return smithyendpoints.Endpoint{
-						URI:     *uri,
-						Headers: http.Header{},
-					}, nil
-				}
-				return endpoint, fmt.Errorf("endpoint rule error, %s", "DualStack is enabled but this partition does not support DualStack")
-			}
-			if _Region == "cn-north-1" {
-				uriString := "https://data.ats.iot.cn-north-1.amazonaws.com.cn"
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-				}, nil
-			}
-			if "aws" == _PartitionResult.Name {
-				uriString := func() string {
-					var out strings.Builder
-					out.WriteString("https://data-ats.iot.")
-					out.WriteString(_Region)
-					out.WriteString(".amazonaws.com")
-					return out.String()
-				}()
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-				}, nil
-			}
-			if "aws-cn" == _PartitionResult.Name {
-				uriString := func() string {
-					var out strings.Builder
-					out.WriteString("https://data-ats.iot.")
-					out.WriteString(_Region)
-					out.WriteString(".amazonaws.com.cn")
-					return out.String()
-				}()
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-				}, nil
-			}
-			if "aws-us-gov" == _PartitionResult.Name {
-				uriString := func() string {
-					var out strings.Builder
-					out.WriteString("https://data-ats.iot.")
-					out.WriteString(_Region)
-					out.WriteString(".amazonaws.com")
-					return out.String()
-				}()
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-				}, nil
-			}
-			uriString := func() string {
-				var out strings.Builder
-				out.WriteString("https://data-ats.iot.")
-				out.WriteString(_Region)
-				out.WriteString(".")
-				out.WriteString(_PartitionResult.DnsSuffix)
-				return out.String()
-			}()
-
-			uri, err := url.Parse(uriString)
-			if err != nil {
-				return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-			}
-
-			return smithyendpoints.Endpoint{
-				URI:     *uri,
-				Headers: http.Header{},
-			}, nil
-		}
-		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
-	}
-	return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
+	c := &conditionContext{}
+	ref := bdd.Evaluate(bddNodes[:], bddRoot, func(idx int) bool {
+		return evalCondition(idx, &params, c)
+	})
+	return resolveResult(ref, &params, c)
 }
 
 type endpointParamsBinder interface {

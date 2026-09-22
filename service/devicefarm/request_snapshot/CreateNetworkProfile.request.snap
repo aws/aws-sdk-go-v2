@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.CreateNetworkProfile
+
+{"description":"__Description__","downlinkBandwidthBits":1,"downlinkDelayMs":1,"downlinkJitterMs":1,"downlinkLossPercent":1,"name":"__Name__","projectArn":"__ProjectArn__","type":"CURATED","uplinkBandwidthBits":1,"uplinkDelayMs":1,"uplinkJitterMs":1,"uplinkLossPercent":1}

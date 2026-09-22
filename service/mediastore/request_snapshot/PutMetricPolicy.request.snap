@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MediaStore_20170901.PutMetricPolicy
+
+{"ContainerName":"__ContainerName__","MetricPolicy":{"ContainerLevelMetrics":"ENABLED","MetricPolicyRules":[{"ObjectGroup":"__ObjectGroup__","ObjectGroupName":"__ObjectGroupName__"},{"ObjectGroup":"__ObjectGroup__","ObjectGroupName":"__ObjectGroupName__"}]}}

@@ -4,10 +4,9 @@ package amplifybackend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides project-level details for your Amplify UI project.
@@ -40,6 +39,21 @@ type GetBackendInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+}
+
 type GetBackendOutput struct {
 
 	// A stringified version of the cli.json file for your Amplify project.
@@ -69,77 +83,81 @@ type GetBackendOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmplifyFeatureFlags != nil {
+		s.WriteString(schemas.GetBackendResponse_AmplifyFeatureFlags, *v.AmplifyFeatureFlags)
+	}
+	if v.AmplifyMetaConfig != nil {
+		s.WriteString(schemas.GetBackendResponse_AmplifyMetaConfig, *v.AmplifyMetaConfig)
+	}
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendResponse_AppId, *v.AppId)
+	}
+	if v.AppName != nil {
+		s.WriteString(schemas.GetBackendResponse_AppName, *v.AppName)
+	}
+	serializeListOf__string(s, schemas.GetBackendResponse_BackendEnvironmentList, v.BackendEnvironmentList)
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.GetBackendResponse_Error, *v.Error)
+	}
+}
+func (v *GetBackendOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackendResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackendResponse_AmplifyFeatureFlags:
+			v.AmplifyFeatureFlags = new(string)
+			return d.ReadString(schemas.GetBackendResponse_AmplifyFeatureFlags, v.AmplifyFeatureFlags)
+		case schemas.GetBackendResponse_AmplifyMetaConfig:
+			v.AmplifyMetaConfig = new(string)
+			return d.ReadString(schemas.GetBackendResponse_AmplifyMetaConfig, v.AmplifyMetaConfig)
+		case schemas.GetBackendResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.GetBackendResponse_AppId, v.AppId)
+		case schemas.GetBackendResponse_AppName:
+			v.AppName = new(string)
+			return d.ReadString(schemas.GetBackendResponse_AppName, v.AppName)
+		case schemas.GetBackendResponse_BackendEnvironmentList:
+			return deserializeListOf__string(d, schemas.GetBackendResponse_BackendEnvironmentList, &v.BackendEnvironmentList)
+		case schemas.GetBackendResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.GetBackendResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.GetBackendResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.GetBackendResponse_Error, v.Error)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackendMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackend, schemas.GetBackendRequest, schemas.GetBackendResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackend{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackend, schemas.GetBackendRequest, schemas.GetBackendResponse), output: &GetBackendOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackend{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBackend"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBackendValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBackend(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +172,8 @@ func (c *Client) addOperationGetBackendMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBackend(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBackend",
-	}
 }

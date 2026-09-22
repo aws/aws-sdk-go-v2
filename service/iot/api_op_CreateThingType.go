@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new thing type. If this call is made multiple times using the same
@@ -53,6 +52,24 @@ type CreateThingTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThingTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThingTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThingTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagList(s, schemas.CreateThingTypeRequest_tags, v.Tags)
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.CreateThingTypeRequest_thingTypeName, *v.ThingTypeName)
+	}
+	if v.ThingTypeProperties != nil {
+		s.WriteStruct(schemas.CreateThingTypeRequest_thingTypeProperties)
+		v.ThingTypeProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The output of the CreateThingType operation.
 type CreateThingTypeOutput struct {
 
@@ -71,77 +88,60 @@ type CreateThingTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThingTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThingTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThingTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingTypeArn != nil {
+		s.WriteString(schemas.CreateThingTypeResponse_thingTypeArn, *v.ThingTypeArn)
+	}
+	if v.ThingTypeId != nil {
+		s.WriteString(schemas.CreateThingTypeResponse_thingTypeId, *v.ThingTypeId)
+	}
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.CreateThingTypeResponse_thingTypeName, *v.ThingTypeName)
+	}
+}
+func (v *CreateThingTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThingTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThingTypeResponse_thingTypeArn:
+			v.ThingTypeArn = new(string)
+			return d.ReadString(schemas.CreateThingTypeResponse_thingTypeArn, v.ThingTypeArn)
+		case schemas.CreateThingTypeResponse_thingTypeId:
+			v.ThingTypeId = new(string)
+			return d.ReadString(schemas.CreateThingTypeResponse_thingTypeId, v.ThingTypeId)
+		case schemas.CreateThingTypeResponse_thingTypeName:
+			v.ThingTypeName = new(string)
+			return d.ReadString(schemas.CreateThingTypeResponse_thingTypeName, v.ThingTypeName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThingType, schemas.CreateThingTypeRequest, schemas.CreateThingTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThingType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThingType, schemas.CreateThingTypeRequest, schemas.CreateThingTypeResponse), output: &CreateThingTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateThingType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateThingType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateThingTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateThingType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +156,8 @@ func (c *Client) addOperationCreateThingTypeMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateThingType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateThingType",
-	}
 }

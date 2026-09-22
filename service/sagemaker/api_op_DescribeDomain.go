@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeDomainInput struct {
 	DomainId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeDomainRequest_DomainId, *v.DomainId)
+	}
 }
 
 type DescribeDomainOutput struct {
@@ -82,6 +93,9 @@ type DescribeDomainOutput struct {
 
 	// The failure reason.
 	FailureReason *string
+
+	// Indicates whether a home EFS file system is created for the domain.
+	HomeEfsFileSystemCreation types.HomeEfsFileSystemCreation
 
 	// The ID of the Amazon Elastic File System managed by this Domain.
 	HomeEfsFileSystemId *string
@@ -131,77 +145,213 @@ type DescribeDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppNetworkAccessType != "" {
+		s.WriteString(schemas.DescribeDomainResponse_AppNetworkAccessType, string(v.AppNetworkAccessType))
+	}
+	if v.AppSecurityGroupManagement != "" {
+		s.WriteString(schemas.DescribeDomainResponse_AppSecurityGroupManagement, string(v.AppSecurityGroupManagement))
+	}
+	if v.AuthMode != "" {
+		s.WriteString(schemas.DescribeDomainResponse_AuthMode, string(v.AuthMode))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeDomainResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DefaultSpaceSettings != nil {
+		s.WriteStruct(schemas.DescribeDomainResponse_DefaultSpaceSettings)
+		v.DefaultSpaceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultUserSettings != nil {
+		s.WriteStruct(schemas.DescribeDomainResponse_DefaultUserSettings)
+		v.DefaultUserSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainArn != nil {
+		s.WriteString(schemas.DescribeDomainResponse_DomainArn, *v.DomainArn)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeDomainResponse_DomainId, *v.DomainId)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeDomainResponse_DomainName, *v.DomainName)
+	}
+	if v.DomainSettings != nil {
+		s.WriteStruct(schemas.DescribeDomainResponse_DomainSettings)
+		v.DomainSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeDomainResponse_FailureReason, *v.FailureReason)
+	}
+	if v.HomeEfsFileSystemCreation != "" {
+		s.WriteString(schemas.DescribeDomainResponse_HomeEfsFileSystemCreation, string(v.HomeEfsFileSystemCreation))
+	}
+	if v.HomeEfsFileSystemId != nil {
+		s.WriteString(schemas.DescribeDomainResponse_HomeEfsFileSystemId, *v.HomeEfsFileSystemId)
+	}
+	if v.HomeEfsFileSystemKmsKeyId != nil {
+		s.WriteString(schemas.DescribeDomainResponse_HomeEfsFileSystemKmsKeyId, *v.HomeEfsFileSystemKmsKeyId)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DescribeDomainResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeDomainResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.SecurityGroupIdForDomainBoundary != nil {
+		s.WriteString(schemas.DescribeDomainResponse_SecurityGroupIdForDomainBoundary, *v.SecurityGroupIdForDomainBoundary)
+	}
+	if v.SingleSignOnApplicationArn != nil {
+		s.WriteString(schemas.DescribeDomainResponse_SingleSignOnApplicationArn, *v.SingleSignOnApplicationArn)
+	}
+	if v.SingleSignOnManagedApplicationInstanceId != nil {
+		s.WriteString(schemas.DescribeDomainResponse_SingleSignOnManagedApplicationInstanceId, *v.SingleSignOnManagedApplicationInstanceId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeDomainResponse_Status, string(v.Status))
+	}
+	serializeSubnets(s, schemas.DescribeDomainResponse_SubnetIds, v.SubnetIds)
+	if v.TagPropagation != "" {
+		s.WriteString(schemas.DescribeDomainResponse_TagPropagation, string(v.TagPropagation))
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.DescribeDomainResponse_Url, *v.Url)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DescribeDomainResponse_VpcId, *v.VpcId)
+	}
+}
+func (v *DescribeDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDomainResponse_AppNetworkAccessType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainResponse_AppNetworkAccessType, &ev); err != nil {
+				return err
+			}
+			v.AppNetworkAccessType = types.AppNetworkAccessType(ev)
+			return nil
+		case schemas.DescribeDomainResponse_AppSecurityGroupManagement:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainResponse_AppSecurityGroupManagement, &ev); err != nil {
+				return err
+			}
+			v.AppSecurityGroupManagement = types.AppSecurityGroupManagement(ev)
+			return nil
+		case schemas.DescribeDomainResponse_AuthMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainResponse_AuthMode, &ev); err != nil {
+				return err
+			}
+			v.AuthMode = types.AuthMode(ev)
+			return nil
+		case schemas.DescribeDomainResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDomainResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeDomainResponse_DefaultSpaceSettings:
+			v.DefaultSpaceSettings = &types.DefaultSpaceSettings{}
+			return v.DefaultSpaceSettings.Deserialize(d)
+		case schemas.DescribeDomainResponse_DefaultUserSettings:
+			v.DefaultUserSettings = &types.UserSettings{}
+			return v.DefaultUserSettings.Deserialize(d)
+		case schemas.DescribeDomainResponse_DomainArn:
+			v.DomainArn = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_DomainArn, v.DomainArn)
+		case schemas.DescribeDomainResponse_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_DomainId, v.DomainId)
+		case schemas.DescribeDomainResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_DomainName, v.DomainName)
+		case schemas.DescribeDomainResponse_DomainSettings:
+			v.DomainSettings = &types.DomainSettings{}
+			return v.DomainSettings.Deserialize(d)
+		case schemas.DescribeDomainResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeDomainResponse_HomeEfsFileSystemCreation:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainResponse_HomeEfsFileSystemCreation, &ev); err != nil {
+				return err
+			}
+			v.HomeEfsFileSystemCreation = types.HomeEfsFileSystemCreation(ev)
+			return nil
+		case schemas.DescribeDomainResponse_HomeEfsFileSystemId:
+			v.HomeEfsFileSystemId = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_HomeEfsFileSystemId, v.HomeEfsFileSystemId)
+		case schemas.DescribeDomainResponse_HomeEfsFileSystemKmsKeyId:
+			v.HomeEfsFileSystemKmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_HomeEfsFileSystemKmsKeyId, v.HomeEfsFileSystemKmsKeyId)
+		case schemas.DescribeDomainResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.DescribeDomainResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDomainResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeDomainResponse_SecurityGroupIdForDomainBoundary:
+			v.SecurityGroupIdForDomainBoundary = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_SecurityGroupIdForDomainBoundary, v.SecurityGroupIdForDomainBoundary)
+		case schemas.DescribeDomainResponse_SingleSignOnApplicationArn:
+			v.SingleSignOnApplicationArn = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_SingleSignOnApplicationArn, v.SingleSignOnApplicationArn)
+		case schemas.DescribeDomainResponse_SingleSignOnManagedApplicationInstanceId:
+			v.SingleSignOnManagedApplicationInstanceId = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_SingleSignOnManagedApplicationInstanceId, v.SingleSignOnManagedApplicationInstanceId)
+		case schemas.DescribeDomainResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DomainStatus(ev)
+			return nil
+		case schemas.DescribeDomainResponse_SubnetIds:
+			return deserializeSubnets(d, schemas.DescribeDomainResponse_SubnetIds, &v.SubnetIds)
+		case schemas.DescribeDomainResponse_TagPropagation:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainResponse_TagPropagation, &ev); err != nil {
+				return err
+			}
+			v.TagPropagation = types.TagPropagation(ev)
+			return nil
+		case schemas.DescribeDomainResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_Url, v.Url)
+		case schemas.DescribeDomainResponse_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DescribeDomainResponse_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomain, schemas.DescribeDomainRequest, schemas.DescribeDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomain, schemas.DescribeDomainRequest, schemas.DescribeDomainResponse), output: &DescribeDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,22 +366,8 @@ func (c *Client) addOperationDescribeDomainMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDomain",
-	}
 }

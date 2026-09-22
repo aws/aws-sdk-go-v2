@@ -4,11 +4,10 @@ package apprunner
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Return a description of an App Runner VPC connector resource.
@@ -40,6 +39,18 @@ type DescribeVpcConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcConnectorArn != nil {
+		s.WriteString(schemas.DescribeVpcConnectorRequest_VpcConnectorArn, *v.VpcConnectorArn)
+	}
+}
+
 type DescribeVpcConnectorOutput struct {
 
 	// A description of the App Runner VPC connector that you specified in this
@@ -54,77 +65,50 @@ type DescribeVpcConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVpcConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVpcConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVpcConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcConnector != nil {
+		s.WriteStruct(schemas.DescribeVpcConnectorResponse_VpcConnector)
+		v.VpcConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeVpcConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVpcConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVpcConnectorResponse_VpcConnector:
+			v.VpcConnector = &types.VpcConnector{}
+			return v.VpcConnector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVpcConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcConnector, schemas.DescribeVpcConnectorRequest, schemas.DescribeVpcConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeVpcConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVpcConnector, schemas.DescribeVpcConnectorRequest, schemas.DescribeVpcConnectorResponse), output: &DescribeVpcConnectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeVpcConnector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeVpcConnector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeVpcConnectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVpcConnector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +123,8 @@ func (c *Client) addOperationDescribeVpcConnectorMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeVpcConnector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeVpcConnector",
-	}
 }

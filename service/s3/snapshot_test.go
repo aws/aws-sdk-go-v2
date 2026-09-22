@@ -350,6 +350,18 @@ func TestCheckSnapshot_DeleteObject(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteObjectAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteObjectAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteObjectAnnotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteObjects(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteObjects(context.Background(), nil, func(o *Options) {
@@ -686,6 +698,18 @@ func TestCheckSnapshot_GetObjectAcl(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetObjectAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetObjectAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetObjectAnnotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetObjectAttributes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetObjectAttributes(context.Background(), nil, func(o *Options) {
@@ -871,6 +895,18 @@ func TestCheckSnapshot_ListMultipartUploads(t *testing.T) {
 	_, err := svc.ListMultipartUploads(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListMultipartUploads")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListObjectAnnotations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListObjectAnnotations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListObjectAnnotations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1178,6 +1214,18 @@ func TestCheckSnapshot_PutObjectAcl(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutObjectAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutObjectAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutObjectAnnotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutObjectLegalHold(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutObjectLegalHold(context.Background(), nil, func(o *Options) {
@@ -1267,6 +1315,18 @@ func TestCheckSnapshot_SelectObjectContent(t *testing.T) {
 	_, err := svc.SelectObjectContent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SelectObjectContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateBucketMetadataAnnotationTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBucketMetadataAnnotationTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateBucketMetadataAnnotationTableConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1633,6 +1693,18 @@ func TestUpdateSnapshot_DeleteObject(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteObjectAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteObjectAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteObjectAnnotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteObjects(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteObjects(context.Background(), nil, func(o *Options) {
@@ -1969,6 +2041,18 @@ func TestUpdateSnapshot_GetObjectAcl(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetObjectAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetObjectAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetObjectAnnotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetObjectAttributes(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetObjectAttributes(context.Background(), nil, func(o *Options) {
@@ -2154,6 +2238,18 @@ func TestUpdateSnapshot_ListMultipartUploads(t *testing.T) {
 	_, err := svc.ListMultipartUploads(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListMultipartUploads")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListObjectAnnotations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListObjectAnnotations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListObjectAnnotations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2461,6 +2557,18 @@ func TestUpdateSnapshot_PutObjectAcl(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutObjectAnnotation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutObjectAnnotation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutObjectAnnotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutObjectLegalHold(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutObjectLegalHold(context.Background(), nil, func(o *Options) {
@@ -2550,6 +2658,18 @@ func TestUpdateSnapshot_SelectObjectContent(t *testing.T) {
 	_, err := svc.SelectObjectContent(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SelectObjectContent")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateBucketMetadataAnnotationTableConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateBucketMetadataAnnotationTableConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateBucketMetadataAnnotationTableConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

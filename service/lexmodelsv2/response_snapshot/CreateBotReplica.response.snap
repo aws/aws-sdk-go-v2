@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botReplicaStatus":"Enabling","creationDateTime":946684800,"replicaRegion":"__ReplicaRegion__","sourceRegion":"__SourceRegion__"}

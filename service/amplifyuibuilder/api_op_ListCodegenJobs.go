@@ -5,10 +5,10 @@ package amplifyuibuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of code generation jobs for a specified Amplify app and
@@ -49,6 +49,27 @@ type ListCodegenJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodegenJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodegenJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodegenJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ListCodegenJobsRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ListCodegenJobsRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCodegenJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodegenJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCodegenJobsOutput struct {
 
 	// The list of code generation jobs for the Amplify app.
@@ -65,77 +86,51 @@ type ListCodegenJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodegenJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodegenJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodegenJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodegenJobSummaryList(s, schemas.ListCodegenJobsResponse_entities, v.Entities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodegenJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCodegenJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCodegenJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCodegenJobsResponse_entities:
+			return deserializeCodegenJobSummaryList(d, schemas.ListCodegenJobsResponse_entities, &v.Entities)
+		case schemas.ListCodegenJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCodegenJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCodegenJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodegenJobs, schemas.ListCodegenJobsRequest, schemas.ListCodegenJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodegenJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodegenJobs, schemas.ListCodegenJobsRequest, schemas.ListCodegenJobsResponse), output: &ListCodegenJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodegenJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCodegenJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCodegenJobsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCodegenJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +143,6 @@ func (c *Client) addOperationListCodegenJobsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +243,3 @@ type ListCodegenJobsAPIClient interface {
 }
 
 var _ ListCodegenJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCodegenJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCodegenJobs",
-	}
-}

@@ -4,11 +4,10 @@ package dynamodbstreams
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns an array of stream ARNs associated with the current account and
@@ -49,6 +48,24 @@ type ListStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExclusiveStartStreamArn != nil {
+		s.WriteString(schemas.ListStreamsInput_ExclusiveStartStreamArn, *v.ExclusiveStartStreamArn)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListStreamsInput_Limit, *v.Limit)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ListStreamsInput_TableName, *v.TableName)
+	}
+}
+
 // Represents the output of a ListStreams operation.
 type ListStreamsOutput struct {
 
@@ -73,74 +90,48 @@ type ListStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastEvaluatedStreamArn != nil {
+		s.WriteString(schemas.ListStreamsOutput_LastEvaluatedStreamArn, *v.LastEvaluatedStreamArn)
+	}
+	serializeStreamList(s, schemas.ListStreamsOutput_Streams, v.Streams)
+}
+func (v *ListStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamsOutput_LastEvaluatedStreamArn:
+			v.LastEvaluatedStreamArn = new(string)
+			return d.ReadString(schemas.ListStreamsOutput_LastEvaluatedStreamArn, v.LastEvaluatedStreamArn)
+		case schemas.ListStreamsOutput_Streams:
+			return deserializeStreamList(d, schemas.ListStreamsOutput_Streams, &v.Streams)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreams, schemas.ListStreamsInput, schemas.ListStreamsOutput), output: &ListStreamsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListStreams{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStreams"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStreams(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +146,8 @@ func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListStreams(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListStreams",
-	}
 }

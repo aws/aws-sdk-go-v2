@@ -1376,6 +1376,10 @@ func awsRestjson1_serializeEventStreamMedicalScribeInputStream(v types.MedicalSc
 		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("audioEvent"))
 		return awsRestjson1_serializeEventMessageMedicalScribeAudioEvent(&vv.Value, msg)
 
+	case *types.MedicalScribeInputStreamMemberBinaryAudioEvent:
+		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("binaryAudioEvent"))
+		return awsRestjson1_serializeEventMessageMedicalScribeBinaryAudioEvent(&vv.Value, msg)
+
 	case *types.MedicalScribeInputStreamMemberSessionControlEvent:
 		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("sessionControlEvent"))
 		return awsRestjson1_serializeEventMessageMedicalScribeSessionControlEvent(&vv.Value, msg)
@@ -1401,6 +1405,19 @@ func awsRestjson1_serializeEventMessageMedicalScribeAudioEvent(v *types.MedicalS
 		return err
 	}
 	msg.Payload = jsonEncoder.Bytes()
+	return nil
+}
+
+func awsRestjson1_serializeEventMessageMedicalScribeBinaryAudioEvent(v *types.MedicalScribeBinaryAudioEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	if v.AudioChunk != nil {
+		msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/octet-stream"))
+		msg.Payload = v.AudioChunk
+	}
 	return nil
 }
 

@@ -4,10 +4,9 @@ package mailmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,21 @@ type GetMemberOfAddressListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemberOfAddressListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMemberOfAddressListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMemberOfAddressListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.GetMemberOfAddressListRequest_Address, *v.Address)
+	}
+	if v.AddressListId != nil {
+		s.WriteString(schemas.GetMemberOfAddressListRequest_AddressListId, *v.AddressListId)
+	}
+}
+
 type GetMemberOfAddressListOutput struct {
 
 	// The address retrieved from the address list.
@@ -60,77 +74,57 @@ type GetMemberOfAddressListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemberOfAddressListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMemberOfAddressListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMemberOfAddressListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.GetMemberOfAddressListResponse_Address, *v.Address)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetMemberOfAddressListResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+}
+func (v *GetMemberOfAddressListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMemberOfAddressListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMemberOfAddressListResponse_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.GetMemberOfAddressListResponse_Address, v.Address)
+		case schemas.GetMemberOfAddressListResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetMemberOfAddressListResponse_CreatedTimestamp, v.CreatedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMemberOfAddressListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMemberOfAddressList, schemas.GetMemberOfAddressListRequest, schemas.GetMemberOfAddressListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetMemberOfAddressList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMemberOfAddressList, schemas.GetMemberOfAddressListRequest, schemas.GetMemberOfAddressListResponse), output: &GetMemberOfAddressListOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetMemberOfAddressList{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMemberOfAddressList"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMemberOfAddressListValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMemberOfAddressList(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +139,8 @@ func (c *Client) addOperationGetMemberOfAddressListMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMemberOfAddressList(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMemberOfAddressList",
-	}
 }

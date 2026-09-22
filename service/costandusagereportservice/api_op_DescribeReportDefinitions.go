@@ -5,10 +5,10 @@ package costandusagereportservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the Amazon Web Services Cost and Usage Report available to this account.
@@ -40,6 +40,21 @@ type DescribeReportDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReportDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReportDefinitionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReportDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeReportDefinitionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReportDefinitionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response.
 type DescribeReportDefinitionsOutput struct {
 
@@ -55,74 +70,48 @@ type DescribeReportDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReportDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReportDefinitionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReportDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReportDefinitionsResponse_NextToken, *v.NextToken)
+	}
+	serializeReportDefinitionList(s, schemas.DescribeReportDefinitionsResponse_ReportDefinitions, v.ReportDefinitions)
+}
+func (v *DescribeReportDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReportDefinitionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReportDefinitionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReportDefinitionsResponse_NextToken, v.NextToken)
+		case schemas.DescribeReportDefinitionsResponse_ReportDefinitions:
+			return deserializeReportDefinitionList(d, schemas.DescribeReportDefinitionsResponse_ReportDefinitions, &v.ReportDefinitions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReportDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReportDefinitions, schemas.DescribeReportDefinitionsRequest, schemas.DescribeReportDefinitionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReportDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReportDefinitions, schemas.DescribeReportDefinitionsRequest, schemas.DescribeReportDefinitionsResponse), output: &DescribeReportDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReportDefinitions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeReportDefinitions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReportDefinitions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,12 +124,6 @@ func (c *Client) addOperationDescribeReportDefinitionsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -244,11 +227,3 @@ type DescribeReportDefinitionsAPIClient interface {
 }
 
 var _ DescribeReportDefinitionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeReportDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeReportDefinitions",
-	}
-}

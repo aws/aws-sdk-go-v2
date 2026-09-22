@@ -309,7 +309,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -509,7 +509,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>"
                     }
@@ -529,6 +529,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of an Amazon Chime SDK Voice Connector call.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkvoice#CallDistributionType": {
+            "type": "enum",
+            "members": {
+                "PriorityWeightedDistribution": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PriorityWeightedDistribution"
+                    }
+                },
+                "LoadBalancedDistribution": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LoadBalancedDistribution"
+                    }
+                }
             }
         },
         "com.amazonaws.chimesdkvoice#CallLegType": {
@@ -982,6 +999,194 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>The Amazon Chime SDK telephony APIs in this section enable developers to create PSTN calling solutions that use Amazon Chime SDK Voice Connectors, and Amazon Chime SDK SIP media applications. Developers can \n          also order and manage phone numbers, create and manage Voice Connectors and SIP media applications, and run voice analytics.</p>",
                 "smithy.api#title": "Amazon Chime SDK Voice",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://voice-chime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://voice-chime-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://voice-chime.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://voice-chime.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1814,7 +2019,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a proxy session for the specified Amazon Chime SDK Voice Connector for \n            the specified participant phone numbers.</p>",
+                "smithy.api#deprecated": {
+                    "since": "2026-04-07",
+                    "message": "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_CreateProxySession.html"
+                },
+                "smithy.api#documentation": "<p>Creates a proxy session for the specified Amazon Chime SDK Voice Connector for \n            the specified participant phone numbers.</p>\n         <important>\n            <p>End of support notice: On April 7, 2026, AWS will end support for Amazon Chime SDK proxy sessions.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/voice-connectors/{VoiceConnectorId}/proxy-sessions",
@@ -1826,7 +2035,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -2169,7 +2378,8 @@
                 "TargetApplications": {
                     "target": "com.amazonaws.chimesdkvoice#SipRuleTargetApplicationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of SIP media applications, with priority and AWS Region. Only one SIP \n         application per AWS Region can be used.</p>"
+                        "smithy.api#documentation": "<p>List of SIP media applications, with priority and AWS Region. Only one SIP \n         application per AWS Region can be used.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -2253,6 +2463,9 @@
                     "target": "com.amazonaws.chimesdkvoice#ForbiddenException"
                 },
                 {
+                    "target": "com.amazonaws.chimesdkvoice#NotFoundException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkvoice#ResourceLimitExceededException"
                 },
                 {
@@ -2292,6 +2505,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Lists the Voice Connectors that inbound calls are routed to.</p>"
                     }
+                },
+                "CallDistributionType": {
+                    "target": "com.amazonaws.chimesdkvoice#CallDistributionType"
                 }
             },
             "traits": {
@@ -2344,13 +2560,13 @@
                 "IntegrationType": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorIntegrationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connectors for use with Amazon Connect.</p>\n         <p>The following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONNECT_CALL_TRANSFER_CONNECTOR</code> - Enables enterprises to integrate\n               Amazon Connect with other voice systems to directly transfer voice calls and\n               metadata without using the public telephone network. They can use Amazon Connect\n               telephony and Interactive Voice Response (IVR) with their existing voice systems to\n               modernize the IVR experience of their existing contact center and their enterprise\n               and branch voice systems. Additionally, enterprises migrating their contact center to\n               Amazon Connect can start with Connect telephony and IVR for immediate\n               modernization ahead of agent migration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONNECT_ANALYTICS_CONNECTOR</code> - Enables enterprises to integrate\n               Amazon Connect with other voice systems for real-time and post-call analytics.\n               They can use Amazon Connect Contact Lens with their existing voice systems to\n               provides call recordings, conversational analytics (including contact transcript,\n               sensitive data redaction, content categorization, theme detection, sentiment\n               analysis, real-time alerts, and post-contact summary), and agent performance\n               evaluations (including evaluation forms, automated evaluation, supervisor review)\n               with a rich user experience to display, search and filter customer interactions, and\n               programmatic access to data streams and the data lake. Additionally, enterprises\n               migrating their contact center to Amazon Connect can start with Contact Lens\n               analytics and performance insights ahead of agent migration.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The connectors for use with Connect Customer.</p>\n         <p>The following options are available:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONNECT_CALL_TRANSFER_CONNECTOR</code> - Enables enterprises to integrate\n               Connect Customer with other voice systems to directly transfer voice calls and\n               metadata without using the public telephone network. They can use Connect Customer\n               telephony and Interactive Voice Response (IVR) with their existing voice systems to\n               modernize the IVR experience of their existing contact center and their enterprise\n               and branch voice systems. Additionally, enterprises migrating their contact center to\n               Connect Customer can start with Connect telephony and IVR for immediate\n               modernization ahead of agent migration.</p>\n               <note>\n                  <p>This integration is a gated feature. Please reach out to your account team to\n                  discuss this feature with a Connect Specialist.</p>\n               </note>\n            </li>\n            <li>\n               <p>\n                  <code>CONNECT_ANALYTICS_CONNECTOR</code> - Enables enterprises to integrate\n               Connect Customer with other voice systems for real-time and post-call analytics.\n               They can use Connect Customer Contact Lens with their existing voice systems to\n               provides call recordings, conversational analytics (including contact transcript,\n               sensitive data redaction, content categorization, theme detection, sentiment\n               analysis, real-time alerts, and post-contact summary), and agent performance\n               evaluations (including evaluation forms, automated evaluation, supervisor review)\n               with a rich user experience to display, search and filter customer interactions, and\n               programmatic access to data streams and the data lake. Additionally, enterprises\n               migrating their contact center to Connect Customer can start with Contact Lens\n               analytics and performance insights ahead of agent migration.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NetworkType": {
                     "target": "com.amazonaws.chimesdkvoice#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of network for the Voice Connector. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>"
+                        "smithy.api#documentation": "<p>The type of network for the Voice Connector.</p>"
                     }
                 }
             },
@@ -2709,7 +2925,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified proxy session from the specified Amazon Chime SDK Voice \n            Connector.</p>",
+                "smithy.api#deprecated": {
+                    "since": "2026-04-07",
+                    "message": "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteProxySession.html"
+                },
+                "smithy.api#documentation": "<p>Deletes the specified proxy session from the specified Amazon Chime SDK Voice \n            Connector.</p>\n         <important>\n            <p>End of support notice: On April 7, 2026, AWS will end support for Amazon Chime SDK proxy sessions.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}",
@@ -2721,7 +2941,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -2946,7 +3166,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -3003,7 +3223,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Voice Connector for which to delete the external system\n         configuration.</p>",
                         "smithy.api#httpLabel": {},
@@ -3118,7 +3338,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -3162,7 +3382,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the proxy configuration from the specified Amazon Chime SDK Voice Connector.</p>",
+                "smithy.api#deprecated": {
+                    "since": "2026-04-07",
+                    "message": "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorProxy.html"
+                },
+                "smithy.api#documentation": "<p>Deletes the proxy configuration from the specified Amazon Chime SDK Voice Connector.</p>\n         <important>\n            <p>End of support notice: On April 7, 2026, AWS will end support for Amazon Chime SDK proxy sessions.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy",
@@ -3174,7 +3398,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -3190,7 +3414,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -3246,7 +3470,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -3342,7 +3566,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -3365,7 +3589,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -3622,7 +3846,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -3779,6 +4003,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Gone"
+                    }
+                },
+                "Validation": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Validation"
                     }
                 }
             }
@@ -4149,7 +4379,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the specified proxy session details for the specified Amazon Chime SDK Voice Connector.</p>",
+                "smithy.api#deprecated": {
+                    "since": "2026-04-07",
+                    "message": "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetProxySession.html"
+                },
+                "smithy.api#documentation": "<p>Retrieves the specified proxy session details for the specified Amazon Chime SDK Voice Connector.</p>\n         <important>\n            <p>End of support notice: On April 7, 2026, AWS will end support for Amazon Chime SDK proxy sessions.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}",
@@ -4161,7 +4395,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -4249,6 +4483,9 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#GoneException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#NotFoundException"
@@ -4528,7 +4765,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -4646,7 +4883,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -4716,7 +4953,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Voice Connector for which to return information about the\n         external system configuration.</p>",
                         "smithy.api#httpLabel": {},
@@ -4856,7 +5093,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -4926,7 +5163,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -4984,7 +5221,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the proxy configuration details for the specified Amazon Chime SDK Voice \n            Connector.</p>",
+                "smithy.api#deprecated": {
+                    "since": "2026-04-07",
+                    "message": "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_GetVoiceConnectorProxy.html"
+                },
+                "smithy.api#documentation": "<p>Retrieves the proxy configuration details for the specified Amazon Chime SDK Voice \n            Connector.</p>\n         <important>\n            <p>End of support notice: On April 7, 2026, AWS will end support for Amazon Chime SDK proxy sessions.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy",
@@ -4996,7 +5237,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -5026,7 +5267,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -5096,7 +5337,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -5206,7 +5447,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -5236,7 +5477,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -5458,7 +5699,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -5639,7 +5880,7 @@
             "type": "structure",
             "members": {
                 "NextToken": {
-                    "target": "com.amazonaws.chimesdkvoice#String",
+                    "target": "com.amazonaws.chimesdkvoice#NextTokenString",
                     "traits": {
                         "smithy.api#documentation": "<p>The token used to retrieve the next page of results.</p>",
                         "smithy.api#httpQuery": "next-token"
@@ -5824,7 +6065,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.</p>",
+                "smithy.api#deprecated": {
+                    "since": "2026-04-07",
+                    "message": "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListProxySessions.html"
+                },
+                "smithy.api#documentation": "<p>Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.</p>\n         <important>\n            <p>End of support notice: On April 7, 2026, AWS will end support for Amazon Chime SDK proxy sessions.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/voice-connectors/{VoiceConnectorId}/proxy-sessions",
@@ -5841,7 +6086,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -5993,6 +6238,9 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#NotFoundException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#ServiceFailureException"
@@ -6336,7 +6584,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -6991,6 +7239,9 @@
                         "smithy.api#documentation": "<p>The phone number, in E.164 format.</p>"
                     }
                 },
+                "PhoneNumberArn": {
+                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString"
+                },
                 "Country": {
                     "target": "com.amazonaws.chimesdkvoice#Alpha2CountryCode",
                     "traits": {
@@ -7303,7 +7554,7 @@
                     }
                 },
                 "FocDate": {
-                    "target": "com.amazonaws.chimesdkvoice#Iso8601Timestamp",
+                    "target": "com.amazonaws.chimesdkvoice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Firm Order Commitment (FOC) date for phone number porting orders. This field is null\n         if a phone number order is not a porting order.</p>"
                     }
@@ -7571,7 +7822,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>"
                     }
@@ -7703,6 +7954,9 @@
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkvoice#GoneException"
                 },
                 {
                     "target": "com.amazonaws.chimesdkvoice#NotFoundException"
@@ -7888,7 +8142,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -7969,7 +8223,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Voice Connector for which to add the external system\n         configuration.</p>",
                         "smithy.api#httpLabel": {},
@@ -8051,7 +8305,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -8094,6 +8348,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.chimesdkvoice#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.chimesdkvoice#BadRequestException"
                 },
                 {
@@ -8128,7 +8385,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -8196,7 +8453,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Puts the specified proxy configuration to the specified Amazon Chime SDK Voice Connector.</p>",
+                "smithy.api#deprecated": {
+                    "since": "2026-04-07",
+                    "message": "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_PutVoiceConnectorProxy.html"
+                },
+                "smithy.api#documentation": "<p>Puts the specified proxy configuration to the specified Amazon Chime SDK Voice Connector.</p>\n         <important>\n            <p>End of support notice: On April 7, 2026, AWS will end support for Amazon Chime SDK proxy sessions.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/voice-connectors/{VoiceConnectorId}/programmable-numbers/proxy",
@@ -8208,7 +8469,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -8304,7 +8565,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -8424,7 +8685,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -8446,7 +8707,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -8575,6 +8836,16 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.chimesdkvoice#S3BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^(?!(^xn--|.+-s3alias$))^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
             }
         },
         "com.amazonaws.chimesdkvoice#SMACreateCallArgumentsMap": {
@@ -9297,7 +9568,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -9408,7 +9679,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -9507,7 +9778,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -9580,7 +9851,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -10024,7 +10295,8 @@
                 "VoiceConnector": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Voice Connector settings.</p>"
+                        "smithy.api#documentation": "<p>The Voice Connector settings.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -10246,7 +10518,11 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified proxy session details, such as voice or SMS capabilities.</p>",
+                "smithy.api#deprecated": {
+                    "since": "2026-04-07",
+                    "message": "End of support notice: On April 7, 2026, AWS ended support for Amazon Chime SDK proxy sessions. For more information, refer to https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_UpdateProxySession.html"
+                },
+                "smithy.api#documentation": "<p>Updates the specified proxy session details, such as voice or SMS capabilities.</p>\n         <important>\n            <p>End of support notice: On April 7, 2026, AWS will end support for Amazon Chime SDK proxy sessions.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/voice-connectors/{VoiceConnectorId}/proxy-sessions/{ProxySessionId}",
@@ -10258,7 +10534,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString128",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -10680,6 +10956,9 @@
                         "smithy.api#documentation": "<p>The <code>VoiceConnectorItems</code> to associate with the Voice Connector \n         group.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "CallDistributionType": {
+                    "target": "com.amazonaws.chimesdkvoice#CallDistributionType"
                 }
             },
             "traits": {
@@ -10704,7 +10983,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#httpLabel": {},
@@ -11062,7 +11341,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector's ID.</p>"
                     }
@@ -11112,13 +11391,13 @@
                 "IntegrationType": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorIntegrationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connectors for use with Amazon Connect.</p>"
+                        "smithy.api#documentation": "<p>The connectors for use with Connect Customer.</p>"
                     }
                 },
                 "NetworkType": {
                     "target": "com.amazonaws.chimesdkvoice#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of network of the Voice Connector. Either IPv4 only or dual-stack (IPv4 and IPv6).</p>"
+                        "smithy.api#documentation": "<p>The type of network for the Voice Connector.</p>"
                     }
                 }
             },
@@ -11235,6 +11514,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the Voice Connector group.</p>"
                     }
+                },
+                "CallDistributionType": {
+                    "target": "com.amazonaws.chimesdkvoice#CallDistributionType"
                 }
             },
             "traits": {
@@ -11255,6 +11537,12 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9 _.-]+$"
+            }
+        },
+        "com.amazonaws.chimesdkvoice#VoiceConnectorId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^([a-z0-9]{21,22}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"
             }
         },
         "com.amazonaws.chimesdkvoice#VoiceConnectorIntegrationType": {
@@ -11278,7 +11566,7 @@
             "type": "structure",
             "members": {
                 "VoiceConnectorId": {
-                    "target": "com.amazonaws.chimesdkvoice#NonEmptyString",
+                    "target": "com.amazonaws.chimesdkvoice#VoiceConnectorId",
                     "traits": {
                         "smithy.api#documentation": "<p>The Voice Connector ID.</p>",
                         "smithy.api#required": {}
@@ -11287,8 +11575,9 @@
                 "Priority": {
                     "target": "com.amazonaws.chimesdkvoice#VoiceConnectorItemPriority",
                     "traits": {
-                        "smithy.api#documentation": "<p>The priority setting of a Voice Connector item. Calls are routed to hosts \n           in priority order, with 1 as the highest priority. When hosts have equal priority, \n           the system distributes calls among them based on their relative weight.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p>The priority setting of a Voice Connector item. Calls are routed to hosts \n           in priority order, with 1 as the highest priority. When hosts have equal priority, \n           the system distributes calls among them based on their relative weight.</p>"
                     }
                 }
             },
@@ -11331,7 +11620,7 @@
             "type": "structure",
             "members": {
                 "CdrBucket": {
-                    "target": "com.amazonaws.chimesdkvoice#String",
+                    "target": "com.amazonaws.chimesdkvoice#S3BucketName",
                     "traits": {
                         "smithy.api#documentation": "<p>The S3 bucket that stores the Voice Connector's call detail records.</p>"
                     }

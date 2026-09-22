@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes all the endpoints that are associated with a specific user ID.
@@ -43,6 +42,21 @@ type DeleteUserEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteUserEndpointsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.DeleteUserEndpointsRequest_UserId, *v.UserId)
+	}
+}
+
 type DeleteUserEndpointsOutput struct {
 
 	// Provides information about all the endpoints that are associated with a user ID.
@@ -56,77 +70,50 @@ type DeleteUserEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteUserEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteUserEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteUserEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointsResponse != nil {
+		s.WriteStruct(schemas.DeleteUserEndpointsResponse_EndpointsResponse)
+		v.EndpointsResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteUserEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteUserEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteUserEndpointsResponse_EndpointsResponse:
+			v.EndpointsResponse = &types.EndpointsResponse{}
+			return v.EndpointsResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteUserEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserEndpoints, schemas.DeleteUserEndpointsRequest, schemas.DeleteUserEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteUserEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteUserEndpoints, schemas.DeleteUserEndpointsRequest, schemas.DeleteUserEndpointsResponse), output: &DeleteUserEndpointsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteUserEndpoints{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteUserEndpoints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteUserEndpointsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUserEndpoints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +128,8 @@ func (c *Client) addOperationDeleteUserEndpointsMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteUserEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteUserEndpoints",
-	}
 }

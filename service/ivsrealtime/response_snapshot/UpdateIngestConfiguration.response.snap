@@ -1,0 +1,11 @@
+200
+Access-Control-Allow-Origin: __AccessControlAllowOrigin__
+Access-Control-Expose-Headers: __AccessControlExposeHeaders__
+Cache-Control: __CacheControl__
+Content-Security-Policy: __ContentSecurityPolicy__
+Content-Type: application/json
+Strict-Transport-Security: __StrictTransportSecurity__
+X-Content-Type-Options: __XContentTypeOptions__
+X-Frame-Options: __XFrameOptions__
+
+{"ingestConfiguration":{"arn":"__Arn__","attributes":{"key0":"__Value__"},"ingestProtocol":"RTMP","name":"__Name__","participantId":"__ParticipantId__","redundantIngest":true,"redundantIngestCredentials":[{"participantId":"__ParticipantId__","streamKey":"__StreamKey__"},{"participantId":"__ParticipantId__","streamKey":"__StreamKey__"}],"stageArn":"__StageArn__","state":"ACTIVE","streamKey":"__StreamKey__","tags":{"key0":"__Value__"},"userId":"__UserId__"}}

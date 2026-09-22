@@ -4,11 +4,10 @@ package arczonalshift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type CancelPracticeRunInput struct {
 	ZonalShiftId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelPracticeRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelPracticeRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelPracticeRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ZonalShiftId != nil {
+		s.WriteString(schemas.CancelPracticeRunRequest_zonalShiftId, *v.ZonalShiftId)
+	}
 }
 
 type CancelPracticeRunOutput struct {
@@ -96,77 +107,88 @@ type CancelPracticeRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelPracticeRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelPracticeRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelPracticeRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwayFrom != nil {
+		s.WriteString(schemas.CancelPracticeRunResponse_awayFrom, *v.AwayFrom)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.CancelPracticeRunResponse_comment, *v.Comment)
+	}
+	if v.ExpiryTime != nil {
+		s.WriteTime(schemas.CancelPracticeRunResponse_expiryTime, *v.ExpiryTime)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.CancelPracticeRunResponse_resourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CancelPracticeRunResponse_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CancelPracticeRunResponse_status, string(v.Status))
+	}
+	if v.ZonalShiftId != nil {
+		s.WriteString(schemas.CancelPracticeRunResponse_zonalShiftId, *v.ZonalShiftId)
+	}
+}
+func (v *CancelPracticeRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelPracticeRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelPracticeRunResponse_awayFrom:
+			v.AwayFrom = new(string)
+			return d.ReadString(schemas.CancelPracticeRunResponse_awayFrom, v.AwayFrom)
+		case schemas.CancelPracticeRunResponse_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.CancelPracticeRunResponse_comment, v.Comment)
+		case schemas.CancelPracticeRunResponse_expiryTime:
+			v.ExpiryTime = new(time.Time)
+			return d.ReadTime(schemas.CancelPracticeRunResponse_expiryTime, v.ExpiryTime)
+		case schemas.CancelPracticeRunResponse_resourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.CancelPracticeRunResponse_resourceIdentifier, v.ResourceIdentifier)
+		case schemas.CancelPracticeRunResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CancelPracticeRunResponse_startTime, v.StartTime)
+		case schemas.CancelPracticeRunResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CancelPracticeRunResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ZonalShiftStatus(ev)
+			return nil
+		case schemas.CancelPracticeRunResponse_zonalShiftId:
+			v.ZonalShiftId = new(string)
+			return d.ReadString(schemas.CancelPracticeRunResponse_zonalShiftId, v.ZonalShiftId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelPracticeRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelPracticeRun, schemas.CancelPracticeRunRequest, schemas.CancelPracticeRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelPracticeRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelPracticeRun, schemas.CancelPracticeRunRequest, schemas.CancelPracticeRunResponse), output: &CancelPracticeRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelPracticeRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelPracticeRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelPracticeRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelPracticeRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +203,8 @@ func (c *Client) addOperationCancelPracticeRunMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelPracticeRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelPracticeRun",
-	}
 }

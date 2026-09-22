@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.CreateFaq
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","FileFormat":"CSV","IndexId":"__IndexId__","LanguageCode":"__LanguageCode__","Name":"__Name__","RoleArn":"__RoleArn__","S3Path":{"Bucket":"__Bucket__","Key":"__Key__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /v2/email/account/details
+
+Content-Type: application/json
+
+{"AdditionalContactEmailAddresses":["__Member__","__Member__"],"ContactLanguage":"EN","MailType":"MARKETING","ProductionAccessEnabled":true,"UseCaseDescription":"__UseCaseDescription__","WebsiteURL":"__WebsiteURL__"}

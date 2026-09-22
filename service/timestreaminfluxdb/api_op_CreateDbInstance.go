@@ -4,11 +4,8 @@ package timestreaminfluxdb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -74,6 +71,9 @@ type CreateDbInstanceInput struct {
 	// organization.
 	Bucket *string
 
+	// A list of backup configurations to enable automated backups for the DB instance.
+	DbBackupConfigurations []types.DbBackupConfiguration
+
 	// The id of the DB parameter group to assign to your DB instance. DB parameter
 	// groups specify how the database is configured. For example, DB parameter groups
 	// can specify the limit for query concurrency.
@@ -94,6 +94,10 @@ type CreateDbInstanceInput struct {
 	// Specifies whether the DB instance will be deployed as a standalone instance or
 	// with a Multi-AZ standby for high availability.
 	DeploymentType types.DeploymentType
+
+	// The Amazon Web Services KMS key identifier to use for encryption of the DB
+	// instance. Can be a key ID, key ARN, alias name, or alias ARN.
+	KmsKeyId *string
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
@@ -166,6 +170,9 @@ type CreateDbInstanceOutput struct {
 	// The Availability Zone in which the DB instance resides.
 	AvailabilityZone *string
 
+	// The backup configurations for the DB instance.
+	DbBackupConfigurations []types.DbBackupConfigurationOutput
+
 	// Specifies the DbCluster to which this DbInstance belongs to.
 	DbClusterId *string
 
@@ -196,6 +203,9 @@ type CreateDbInstanceOutput struct {
 
 	// Specifies the DbInstance's roles in the cluster.
 	InstanceModes []types.InstanceMode
+
+	// The Amazon Web Services KMS key ARN used for encryption of the DB instance.
+	KmsKeyId *string
 
 	// The timestamp of the last completed maintenance operation on the DB instance.
 	LastMaintenanceTime *time.Time
@@ -238,9 +248,6 @@ type CreateDbInstanceOutput struct {
 }
 
 func (c *Client) addOperationCreateDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateDbInstance{}, middleware.After)
 	if err != nil {
 		return err
@@ -249,65 +256,20 @@ func (c *Client) addOperationCreateDbInstanceMiddlewares(stack *middleware.Stack
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDbInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDbInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDbInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -322,22 +284,8 @@ func (c *Client) addOperationCreateDbInstanceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDbInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDbInstance",
-	}
 }

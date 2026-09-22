@@ -1,0 +1,5 @@
+POST /datasources/search-resources
+
+Content-Type: application/json
+
+{"bucketCriteria":{"excludes":{"and":[{"simpleCriterion":{"comparator":"EQ","key":"ACCOUNT_ID","values":["__Member__","__Member__"]},"tagCriterion":{"comparator":"EQ","tagValues":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}},{"simpleCriterion":{"comparator":"EQ","key":"ACCOUNT_ID","values":["__Member__","__Member__"]},"tagCriterion":{"comparator":"EQ","tagValues":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}]},"includes":{"and":[{"simpleCriterion":{"comparator":"EQ","key":"ACCOUNT_ID","values":["__Member__","__Member__"]},"tagCriterion":{"comparator":"EQ","tagValues":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}},{"simpleCriterion":{"comparator":"EQ","key":"ACCOUNT_ID","values":["__Member__","__Member__"]},"tagCriterion":{"comparator":"EQ","tagValues":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}}]}},"maxResults":1,"nextToken":"__NextToken__","sortCriteria":{"attributeName":"ACCOUNT_ID","orderBy":"ASC"}}

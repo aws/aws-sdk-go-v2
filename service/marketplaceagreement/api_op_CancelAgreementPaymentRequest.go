@@ -4,11 +4,10 @@ package marketplaceagreement
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -48,6 +47,21 @@ type CancelAgreementPaymentRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelAgreementPaymentRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelAgreementPaymentRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelAgreementPaymentRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.CancelAgreementPaymentRequestInput_agreementId, *v.AgreementId)
+	}
+	if v.PaymentRequestId != nil {
+		s.WriteString(schemas.CancelAgreementPaymentRequestInput_paymentRequestId, *v.PaymentRequestId)
+	}
+}
+
 type CancelAgreementPaymentRequestOutput struct {
 
 	// The unique identifier of the agreement associated with this payment request.
@@ -83,77 +97,100 @@ type CancelAgreementPaymentRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelAgreementPaymentRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelAgreementPaymentRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelAgreementPaymentRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.CancelAgreementPaymentRequestOutput_agreementId, *v.AgreementId)
+	}
+	if v.ChargeAmount != nil {
+		s.WriteString(schemas.CancelAgreementPaymentRequestOutput_chargeAmount, *v.ChargeAmount)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CancelAgreementPaymentRequestOutput_createdAt, *v.CreatedAt)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.CancelAgreementPaymentRequestOutput_currencyCode, *v.CurrencyCode)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CancelAgreementPaymentRequestOutput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CancelAgreementPaymentRequestOutput_name, *v.Name)
+	}
+	if v.PaymentRequestId != nil {
+		s.WriteString(schemas.CancelAgreementPaymentRequestOutput_paymentRequestId, *v.PaymentRequestId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CancelAgreementPaymentRequestOutput_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CancelAgreementPaymentRequestOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CancelAgreementPaymentRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelAgreementPaymentRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelAgreementPaymentRequestOutput_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.CancelAgreementPaymentRequestOutput_agreementId, v.AgreementId)
+		case schemas.CancelAgreementPaymentRequestOutput_chargeAmount:
+			v.ChargeAmount = new(string)
+			return d.ReadString(schemas.CancelAgreementPaymentRequestOutput_chargeAmount, v.ChargeAmount)
+		case schemas.CancelAgreementPaymentRequestOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelAgreementPaymentRequestOutput_createdAt, v.CreatedAt)
+		case schemas.CancelAgreementPaymentRequestOutput_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.CancelAgreementPaymentRequestOutput_currencyCode, v.CurrencyCode)
+		case schemas.CancelAgreementPaymentRequestOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CancelAgreementPaymentRequestOutput_description, v.Description)
+		case schemas.CancelAgreementPaymentRequestOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CancelAgreementPaymentRequestOutput_name, v.Name)
+		case schemas.CancelAgreementPaymentRequestOutput_paymentRequestId:
+			v.PaymentRequestId = new(string)
+			return d.ReadString(schemas.CancelAgreementPaymentRequestOutput_paymentRequestId, v.PaymentRequestId)
+		case schemas.CancelAgreementPaymentRequestOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CancelAgreementPaymentRequestOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentRequestStatus(ev)
+			return nil
+		case schemas.CancelAgreementPaymentRequestOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelAgreementPaymentRequestOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelAgreementPaymentRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelAgreementPaymentRequest, schemas.CancelAgreementPaymentRequestInput, schemas.CancelAgreementPaymentRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelAgreementPaymentRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelAgreementPaymentRequest, schemas.CancelAgreementPaymentRequestInput, schemas.CancelAgreementPaymentRequestOutput), output: &CancelAgreementPaymentRequestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelAgreementPaymentRequest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelAgreementPaymentRequest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelAgreementPaymentRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelAgreementPaymentRequest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +205,8 @@ func (c *Client) addOperationCancelAgreementPaymentRequestMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelAgreementPaymentRequest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelAgreementPaymentRequest",
-	}
 }

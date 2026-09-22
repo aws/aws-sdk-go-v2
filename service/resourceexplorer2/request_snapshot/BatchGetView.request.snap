@@ -1,0 +1,5 @@
+POST /BatchGetView
+
+Content-Type: application/json
+
+{"ViewArns":["__Member__","__Member__"]}

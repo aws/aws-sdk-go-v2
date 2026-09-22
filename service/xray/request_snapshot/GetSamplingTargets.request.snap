@@ -1,0 +1,5 @@
+POST /SamplingTargets
+
+Content-Type: application/json
+
+{"SamplingBoostStatisticsDocuments":[{"AnomalyCount":1,"RuleName":"__RuleName__","SampledAnomalyCount":1,"ServiceName":"__ServiceName__","Timestamp":946684800,"TotalCount":1},{"AnomalyCount":1,"RuleName":"__RuleName__","SampledAnomalyCount":1,"ServiceName":"__ServiceName__","Timestamp":946684800,"TotalCount":1}],"SamplingStatisticsDocuments":[{"BorrowCount":1,"ClientID":"__ClientID__","RequestCount":1,"RuleName":"__RuleName__","SampledCount":1,"Timestamp":946684800},{"BorrowCount":1,"ClientID":"__ClientID__","RequestCount":1,"RuleName":"__RuleName__","SampledCount":1,"Timestamp":946684800}]}

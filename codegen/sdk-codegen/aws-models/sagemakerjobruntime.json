@@ -1,0 +1,1123 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.sagemakerjobruntime#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerjobruntime#FailureReason",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "You do not have permission to perform this operation.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#AgenticRFTRuntimeService": {
+            "type": "service",
+            "version": "2026-02-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#CompleteRollout"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#Sample"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#SampleWithResponseStream"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#UpdateReward"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SagemakerJobRuntime",
+                    "arnNamespace": "sagemaker",
+                    "endpointPrefix": "job-runtime.sagemaker"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sagemaker"
+                },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardRegionalEndpoints": {
+                    "partitionSpecialCases": {
+                        "aws": [
+                            {
+                                "endpoint": "https://job-runtime.sagemaker.{region}.{dualStackDnsSuffix}",
+                                "dualStack": true
+                            }
+                        ],
+                        "aws-cn": [
+                            {
+                                "endpoint": "https://job-runtime.sagemaker.{region}.{dualStackDnsSuffix}",
+                                "dualStack": true
+                            }
+                        ],
+                        "aws-us-gov": [
+                            {
+                                "endpoint": "https://job-runtime.sagemaker.{region}.{dualStackDnsSuffix}",
+                                "dualStack": true
+                            }
+                        ]
+                    }
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "Agentic RFT Runtime Service - manages trajectory and transition data\nfor reinforcement fine-tuning jobs.",
+                "smithy.api#title": "Sagemaker Job Runtime Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://job-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://job-runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 6,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QQF9eEDAAAAAwX14QEF9eEC"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://job-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-cn"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://job-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://job-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://job-runtime.sagemaker-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://job-runtime.sagemaker.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://job-runtime.sagemaker-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://job-runtime.sagemaker.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://job-runtime.sagemaker-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://job-runtime.sagemaker.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://job-runtime.sagemaker-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://job-runtime.sagemaker.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#CompleteRollout": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerjobruntime#CompleteRolloutRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakerjobruntime#CompleteRolloutResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Marks a rollout as complete, indicating that no further turns will be appended\nto the trajectory. After calling this operation, the trajectory is sealed and\neligible for reward submission via the UpdateReward operation.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke CompleteRollout",
+                        "documentation": "Marks a rollout as complete so the trajectory is sealed and eligible for reward submission.",
+                        "input": {
+                            "JobArn": "arn:aws:sagemaker:us-east-1:123456789012:job/AgentRFT/my-training-job",
+                            "TrajectoryId": "trajectory-001",
+                            "Status": "ready"
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/complete-rollout",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#CompleteRolloutRequest": {
+            "type": "structure",
+            "members": {
+                "JobArn": {
+                    "target": "com.amazonaws.sagemakerjobruntime#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "The job ARN.",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Job-Arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrajectoryId": {
+                    "target": "com.amazonaws.sagemakerjobruntime#TrajectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "The trajectory ID to mark as complete.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sagemakerjobruntime#CompletionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "The target status for the trajectory. Defaults to READY if not specified.\nSet to FAILED if the rollout encountered an error and the trajectory should\nnot be used for processing."
+                    }
+                },
+                "ClientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A unique, case-sensitive identifier that you provide to ensure the\nidempotency of the request.",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#CompleteRolloutResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#CompletionStatus": {
+            "type": "enum",
+            "members": {
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Trajectory completed successfully; sealed and eligible for reward submission.",
+                        "smithy.api#enumValue": "ready"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Trajectory failed; terminal state, no further processing.",
+                        "smithy.api#enumValue": "failed"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Allowed target statuses for the CompleteTrajectory operation."
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerjobruntime#FailureReason",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request conflicts with the current state of the resource.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#DoubleList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Double"
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#FailureReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#InferenceRequestBody": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "Sensitive binary payload containing customer inference data.",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#InferenceResponseBody": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "Sensitive binary payload containing model inference response data.",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#InternalServiceError": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerjobruntime#FailureReason",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An internal service error occurred. Retry the request.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#JobArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:job/[a-zA-Z0-9_\\-]+/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerjobruntime#FailureReason",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The specified resource was not found.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#ResponseStream": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#documentation": "Streaming response body composed of successive payload chunks.",
+                "smithy.api#sensitive": {},
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#Sample": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerjobruntime#SampleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakerjobruntime#SampleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Sends an inference request to the model during a job execution. The request\nand response bodies are forwarded to and from the model without modification.\nEach turn (prompt and response) is captured for later use.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke Sample",
+                        "documentation": "Sends an inference request to the model and receives the response.",
+                        "input": {
+                            "JobArn": "arn:aws:sagemaker:us-east-1:123456789012:job/AgentRFT/my-training-job",
+                            "TrajectoryId": "trajectory-001",
+                            "Body": "eyJtb2RlbCI6Im15LW1vZGVsIiwibWVzc2FnZXMiOlt7InJvbGUiOiJ1c2VyIiwiY29udGVudCI6IkhlbGxvIn1dfQ=="
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sample",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#SampleRequest": {
+            "type": "structure",
+            "members": {
+                "JobArn": {
+                    "target": "com.amazonaws.sagemakerjobruntime#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "The job ARN that identifies which model session\nto route the inference request to.",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Job-Arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrajectoryId": {
+                    "target": "com.amazonaws.sagemakerjobruntime#TrajectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "The trajectory ID for grouping turns into a single rollout. Each turn\n(prompt and response) is captured for later use.",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Trajectory-Id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.sagemakerjobruntime#InferenceRequestBody",
+                    "traits": {
+                        "smithy.api#documentation": "The raw inference request body in OpenAI-compatible JSON format.",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#SampleResponse": {
+            "type": "structure",
+            "members": {
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "MIME type of the inference result.",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.sagemakerjobruntime#InferenceResponseBody",
+                    "traits": {
+                        "smithy.api#documentation": "The raw inference response body from the model.",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#SampleWithResponseStream": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerjobruntime#SampleWithResponseStreamRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakerjobruntime#SampleWithResponseStreamResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Sends a streaming inference request to the model during a job execution.\nReturns the response as a stream of payload chunks. Each turn is captured\nfor later use.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke SampleWithResponseStream",
+                        "documentation": "Sends a streaming inference request and receives the response as a stream of payload chunks.",
+                        "input": {
+                            "JobArn": "arn:aws:sagemaker:us-east-1:123456789012:job/AgentRFT/my-training-job",
+                            "TrajectoryId": "trajectory-001",
+                            "Body": "eyJtb2RlbCI6Im15LW1vZGVsIiwibWVzc2FnZXMiOlt7InJvbGUiOiJ1c2VyIiwiY29udGVudCI6IkhlbGxvIn1dfQ=="
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/sample-with-response-stream",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#SampleWithResponseStreamRequest": {
+            "type": "structure",
+            "members": {
+                "JobArn": {
+                    "target": "com.amazonaws.sagemakerjobruntime#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "The job ARN that identifies which model session\nto route the inference request to.",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Job-Arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrajectoryId": {
+                    "target": "com.amazonaws.sagemakerjobruntime#TrajectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "The trajectory ID for grouping turns into a single rollout. Each turn\nis captured for later use.",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Trajectory-Id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.sagemakerjobruntime#InferenceRequestBody",
+                    "traits": {
+                        "smithy.api#documentation": "The raw inference request body in OpenAI-compatible JSON format.",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#SampleWithResponseStreamResponse": {
+            "type": "structure",
+            "members": {
+                "ContentType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "MIME type of the streaming inference result.",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "Body": {
+                    "target": "com.amazonaws.sagemakerjobruntime#ResponseStream",
+                    "traits": {
+                        "smithy.api#documentation": "The streaming response body, delivered as a series of PayloadPart events.",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerjobruntime#FailureReason",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "You have exceeded a service quota.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerjobruntime#FailureReason",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request was throttled. Retry the request after a brief wait.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#TrajectoryId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#UpdateReward": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerjobruntime#UpdateRewardRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakerjobruntime#UpdateRewardResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerjobruntime#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates the reward values for a trajectory and transitions it to\nreward-received status, signaling that it is eligible for processing. Call this\noperation after CompleteRollout to provide the computed reward scores.",
+                "smithy.api#examples": [
+                    {
+                        "title": "Invoke UpdateReward",
+                        "documentation": "Updates the reward values for a completed trajectory.",
+                        "input": {
+                            "JobArn": "arn:aws:sagemaker:us-east-1:123456789012:job/AgentRFT/my-training-job",
+                            "TrajectoryId": "trajectory-001",
+                            "Rewards": [
+                                0.85,
+                                0.92,
+                                0.78
+                            ]
+                        },
+                        "output": {}
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/update-reward",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "UpdateRewardFailure",
+                        "params": {
+                            "JobArn": "arn:aws:sagemaker:us-east-1:123456789012:job/AgentRFT/nonexistent-job",
+                            "TrajectoryId": "nonexistent-trajectory",
+                            "Rewards": [
+                                1.0
+                            ]
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.sagemakerjobruntime#AccessDeniedException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#UpdateRewardRequest": {
+            "type": "structure",
+            "members": {
+                "JobArn": {
+                    "target": "com.amazonaws.sagemakerjobruntime#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "The job ARN.",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Job-Arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrajectoryId": {
+                    "target": "com.amazonaws.sagemakerjobruntime#TrajectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "The trajectory ID to update with reward values.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rewards": {
+                    "target": "com.amazonaws.sagemakerjobruntime#DoubleList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of reward values to assign to this trajectory. Provide one reward\nvalue per turn in the trajectory.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "A unique, case-sensitive identifier that you provide to ensure the\nidempotency of the request.",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#UpdateRewardResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sagemakerjobruntime#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.sagemakerjobruntime#FailureReason",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request is not valid. Check the request syntax and parameters",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

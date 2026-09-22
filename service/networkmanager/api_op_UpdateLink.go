@@ -4,11 +4,10 @@ package networkmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the details for an existing link. To remove information for any of the
@@ -61,6 +60,35 @@ type UpdateLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bandwidth != nil {
+		s.WriteStruct(schemas.UpdateLinkRequest_Bandwidth)
+		v.Bandwidth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLinkRequest_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.UpdateLinkRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.UpdateLinkRequest_LinkId, *v.LinkId)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.UpdateLinkRequest_Provider, *v.Provider)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.UpdateLinkRequest_Type, *v.Type)
+	}
+}
+
 type UpdateLinkOutput struct {
 
 	// Information about the link.
@@ -72,77 +100,50 @@ type UpdateLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLinkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLinkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLinkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Link != nil {
+		s.WriteStruct(schemas.UpdateLinkResponse_Link)
+		v.Link.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLinkResponse_Link:
+			v.Link = &types.Link{}
+			return v.Link.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLink, schemas.UpdateLinkRequest, schemas.UpdateLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLink, schemas.UpdateLinkRequest, schemas.UpdateLinkResponse), output: &UpdateLinkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLink{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLink"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateLinkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLink(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +158,8 @@ func (c *Client) addOperationUpdateLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateLink(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateLink",
-	}
 }

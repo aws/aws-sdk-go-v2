@@ -4,11 +4,10 @@ package kendra
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -46,6 +45,21 @@ type DescribeQuerySuggestionsBlockListInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeQuerySuggestionsBlockListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuerySuggestionsBlockListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuerySuggestionsBlockListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeQuerySuggestionsBlockListRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeQuerySuggestionsBlockListRequest_IndexId, *v.IndexId)
+	}
 }
 
 type DescribeQuerySuggestionsBlockListOutput struct {
@@ -105,77 +119,120 @@ type DescribeQuerySuggestionsBlockListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQuerySuggestionsBlockListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuerySuggestionsBlockListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuerySuggestionsBlockListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeQuerySuggestionsBlockListResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeQuerySuggestionsBlockListResponse_Description, *v.Description)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeQuerySuggestionsBlockListResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.FileSizeBytes != nil {
+		s.WriteInt64(schemas.DescribeQuerySuggestionsBlockListResponse_FileSizeBytes, *v.FileSizeBytes)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeQuerySuggestionsBlockListResponse_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeQuerySuggestionsBlockListResponse_IndexId, *v.IndexId)
+	}
+	if v.ItemCount != nil {
+		s.WriteInt32(schemas.DescribeQuerySuggestionsBlockListResponse_ItemCount, *v.ItemCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeQuerySuggestionsBlockListResponse_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeQuerySuggestionsBlockListResponse_RoleArn, *v.RoleArn)
+	}
+	if v.SourceS3Path != nil {
+		s.WriteStruct(schemas.DescribeQuerySuggestionsBlockListResponse_SourceS3Path)
+		v.SourceS3Path.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeQuerySuggestionsBlockListResponse_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeQuerySuggestionsBlockListResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DescribeQuerySuggestionsBlockListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQuerySuggestionsBlockListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQuerySuggestionsBlockListResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeQuerySuggestionsBlockListResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_Description, v.Description)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_FileSizeBytes:
+			v.FileSizeBytes = new(int64)
+			return d.ReadInt64(schemas.DescribeQuerySuggestionsBlockListResponse_FileSizeBytes, v.FileSizeBytes)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_Id, v.Id)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_IndexId:
+			v.IndexId = new(string)
+			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_IndexId, v.IndexId)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_ItemCount:
+			v.ItemCount = new(int32)
+			return d.ReadInt32(schemas.DescribeQuerySuggestionsBlockListResponse_ItemCount, v.ItemCount)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_Name, v.Name)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_SourceS3Path:
+			v.SourceS3Path = &types.S3Path{}
+			return v.SourceS3Path.Deserialize(d)
+		case schemas.DescribeQuerySuggestionsBlockListResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQuerySuggestionsBlockListResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QuerySuggestionsBlockListStatus(ev)
+			return nil
+		case schemas.DescribeQuerySuggestionsBlockListResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeQuerySuggestionsBlockListResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQuerySuggestionsBlockListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuerySuggestionsBlockList, schemas.DescribeQuerySuggestionsBlockListRequest, schemas.DescribeQuerySuggestionsBlockListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeQuerySuggestionsBlockList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuerySuggestionsBlockList, schemas.DescribeQuerySuggestionsBlockListRequest, schemas.DescribeQuerySuggestionsBlockListResponse), output: &DescribeQuerySuggestionsBlockListOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeQuerySuggestionsBlockList{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeQuerySuggestionsBlockList"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeQuerySuggestionsBlockListValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeQuerySuggestionsBlockList(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +247,8 @@ func (c *Client) addOperationDescribeQuerySuggestionsBlockListMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeQuerySuggestionsBlockList(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeQuerySuggestionsBlockList",
-	}
 }

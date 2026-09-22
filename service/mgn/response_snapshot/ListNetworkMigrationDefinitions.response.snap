@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"arn":"__Arn__","name":"__Name__","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","scopeTags":{"key0":"__Value__"},"sourceEnvironment":"NSX","tags":{"key0":"__Value__"}},{"arn":"__Arn__","name":"__Name__","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","scopeTags":{"key0":"__Value__"},"sourceEnvironment":"NSX","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

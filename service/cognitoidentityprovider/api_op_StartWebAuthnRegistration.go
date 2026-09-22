@@ -4,11 +4,12 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Requests credential creation options from your user pool for the currently
@@ -44,6 +45,18 @@ type StartWebAuthnRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWebAuthnRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWebAuthnRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWebAuthnRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.StartWebAuthnRegistrationRequest_AccessToken, *v.AccessToken)
+	}
+}
+
 type StartWebAuthnRegistrationOutput struct {
 
 	// The information that a user can provide in their request to register with their
@@ -58,74 +71,51 @@ type StartWebAuthnRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWebAuthnRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWebAuthnRegistrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWebAuthnRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialCreationOptions != nil {
+		s.WriteDocument(schemas.StartWebAuthnRegistrationResponse_CredentialCreationOptions, &smithydocument.Opaque{Value: v.CredentialCreationOptions})
+	}
+}
+func (v *StartWebAuthnRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartWebAuthnRegistrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartWebAuthnRegistrationResponse_CredentialCreationOptions:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.StartWebAuthnRegistrationResponse_CredentialCreationOptions, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.CredentialCreationOptions = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWebAuthnRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWebAuthnRegistration, schemas.StartWebAuthnRegistrationRequest, schemas.StartWebAuthnRegistrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartWebAuthnRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWebAuthnRegistration, schemas.StartWebAuthnRegistrationRequest, schemas.StartWebAuthnRegistrationResponse), output: &StartWebAuthnRegistrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartWebAuthnRegistration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartWebAuthnRegistration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartWebAuthnRegistrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartWebAuthnRegistration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +130,8 @@ func (c *Client) addOperationStartWebAuthnRegistrationMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartWebAuthnRegistration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartWebAuthnRegistration",
-	}
 }

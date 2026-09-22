@@ -5,11 +5,11 @@ package transcribe
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -52,6 +52,18 @@ type GetTranscriptionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTranscriptionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTranscriptionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTranscriptionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TranscriptionJobName != nil {
+		s.WriteString(schemas.GetTranscriptionJobRequest_TranscriptionJobName, *v.TranscriptionJobName)
+	}
+}
+
 type GetTranscriptionJobOutput struct {
 
 	// Provides detailed information about the specified transcription job, including
@@ -64,77 +76,50 @@ type GetTranscriptionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTranscriptionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTranscriptionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTranscriptionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TranscriptionJob != nil {
+		s.WriteStruct(schemas.GetTranscriptionJobResponse_TranscriptionJob)
+		v.TranscriptionJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTranscriptionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTranscriptionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTranscriptionJobResponse_TranscriptionJob:
+			v.TranscriptionJob = &types.TranscriptionJob{}
+			return v.TranscriptionJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTranscriptionJob, schemas.GetTranscriptionJobRequest, schemas.GetTranscriptionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTranscriptionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTranscriptionJob, schemas.GetTranscriptionJobRequest, schemas.GetTranscriptionJobResponse), output: &GetTranscriptionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTranscriptionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTranscriptionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTranscriptionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTranscriptionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +132,6 @@ func (c *Client) addOperationGetTranscriptionJobMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -366,11 +345,3 @@ type GetTranscriptionJobAPIClient interface {
 }
 
 var _ GetTranscriptionJobAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetTranscriptionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTranscriptionJob",
-	}
-}

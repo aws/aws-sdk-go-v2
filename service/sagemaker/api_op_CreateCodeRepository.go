@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Git repository as a resource in your SageMaker AI account. You can
@@ -60,6 +59,24 @@ type CreateCodeRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeRepositoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeRepositoryName != nil {
+		s.WriteString(schemas.CreateCodeRepositoryInput_CodeRepositoryName, *v.CodeRepositoryName)
+	}
+	if v.GitConfig != nil {
+		s.WriteStruct(schemas.CreateCodeRepositoryInput_GitConfig)
+		v.GitConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCodeRepositoryInput_Tags, v.Tags)
+}
+
 type CreateCodeRepositoryOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new repository.
@@ -73,77 +90,48 @@ type CreateCodeRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCodeRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCodeRepositoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCodeRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeRepositoryArn != nil {
+		s.WriteString(schemas.CreateCodeRepositoryOutput_CodeRepositoryArn, *v.CodeRepositoryArn)
+	}
+}
+func (v *CreateCodeRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCodeRepositoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCodeRepositoryOutput_CodeRepositoryArn:
+			v.CodeRepositoryArn = new(string)
+			return d.ReadString(schemas.CreateCodeRepositoryOutput_CodeRepositoryArn, v.CodeRepositoryArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeRepository, schemas.CreateCodeRepositoryInput, schemas.CreateCodeRepositoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCodeRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCodeRepository, schemas.CreateCodeRepositoryInput, schemas.CreateCodeRepositoryOutput), output: &CreateCodeRepositoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCodeRepository{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCodeRepository"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCodeRepositoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCodeRepository(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +146,8 @@ func (c *Client) addOperationCreateCodeRepositoryMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCodeRepository(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCodeRepository",
-	}
 }

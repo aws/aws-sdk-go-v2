@@ -5,10 +5,10 @@ package gamelift
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -199,6 +199,36 @@ type SearchGameSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchGameSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchGameSessionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchGameSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_AliasId, *v.AliasId)
+	}
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_FilterExpression, *v.FilterExpression)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_FleetId, *v.FleetId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.SearchGameSessionsInput_Limit, *v.Limit)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_Location, *v.Location)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_NextToken, *v.NextToken)
+	}
+	if v.SortExpression != nil {
+		s.WriteString(schemas.SearchGameSessionsInput_SortExpression, *v.SortExpression)
+	}
+}
+
 type SearchGameSessionsOutput struct {
 
 	// A collection of objects containing game session properties for each session
@@ -216,77 +246,51 @@ type SearchGameSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchGameSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchGameSessionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchGameSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGameSessionList(s, schemas.SearchGameSessionsOutput_GameSessions, v.GameSessions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchGameSessionsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchGameSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchGameSessionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchGameSessionsOutput_GameSessions:
+			return deserializeGameSessionList(d, schemas.SearchGameSessionsOutput_GameSessions, &v.GameSessions)
+		case schemas.SearchGameSessionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchGameSessionsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchGameSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchGameSessions, schemas.SearchGameSessionsInput, schemas.SearchGameSessionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpSearchGameSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchGameSessions, schemas.SearchGameSessionsInput, schemas.SearchGameSessionsOutput), output: &SearchGameSessionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpSearchGameSessions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchGameSessions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchGameSessions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -299,12 +303,6 @@ func (c *Client) addOperationSearchGameSessionsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -408,11 +406,3 @@ type SearchGameSessionsAPIClient interface {
 }
 
 var _ SearchGameSessionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchGameSessions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchGameSessions",
-	}
-}

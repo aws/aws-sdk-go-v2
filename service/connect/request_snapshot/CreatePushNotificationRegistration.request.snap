@@ -1,0 +1,5 @@
+PUT /push-notification/__InstanceId__/registrations
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ContactConfiguration":{"ContactId":"__ContactId__","IncludeRawMessage":true,"ParticipantRole":"AGENT"},"DeviceToken":"__DeviceToken__","DeviceType":"GCM","PinpointAppArn":"__PinpointAppArn__"}

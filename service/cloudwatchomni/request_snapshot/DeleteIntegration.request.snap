@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/DeleteIntegration
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿jidentifier¡mintegrationIdx,__IntegrationIdentifierMemberIntegrationId__ÿ

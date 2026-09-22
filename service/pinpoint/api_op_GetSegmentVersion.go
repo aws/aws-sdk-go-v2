@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about the configuration, dimension, and other settings
@@ -49,6 +48,24 @@ type GetSegmentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetSegmentVersionRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.SegmentId != nil {
+		s.WriteString(schemas.GetSegmentVersionRequest_SegmentId, *v.SegmentId)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetSegmentVersionRequest_Version, *v.Version)
+	}
+}
+
 type GetSegmentVersionOutput struct {
 
 	// Provides information about the configuration, dimension, and other settings for
@@ -63,77 +80,50 @@ type GetSegmentVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSegmentVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSegmentVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSegmentVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SegmentResponse != nil {
+		s.WriteStruct(schemas.GetSegmentVersionResponse_SegmentResponse)
+		v.SegmentResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSegmentVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSegmentVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSegmentVersionResponse_SegmentResponse:
+			v.SegmentResponse = &types.SegmentResponse{}
+			return v.SegmentResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSegmentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentVersion, schemas.GetSegmentVersionRequest, schemas.GetSegmentVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSegmentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSegmentVersion, schemas.GetSegmentVersionRequest, schemas.GetSegmentVersionResponse), output: &GetSegmentVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSegmentVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSegmentVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSegmentVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSegmentVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +138,8 @@ func (c *Client) addOperationGetSegmentVersionMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSegmentVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSegmentVersion",
-	}
 }

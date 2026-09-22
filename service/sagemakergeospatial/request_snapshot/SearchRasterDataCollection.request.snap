@@ -1,0 +1,5 @@
+POST /search-raster-data-collection
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","NextToken":"__NextToken__","RasterDataCollectionQuery":{"AreaOfInterest":{"AreaOfInterestGeometry":{"PolygonGeometry":{"Coordinates":[[[1,1],[1,1]],[[1,1],[1,1]]]}}},"BandFilter":["__Member__","__Member__"],"PropertyFilters":{"LogicalOperator":"AND","Properties":[{"Property":{"EoCloudCover":{"LowerBound":1,"UpperBound":1}}},{"Property":{"EoCloudCover":{"LowerBound":1,"UpperBound":1}}}]},"TimeRangeFilter":{"EndTime":946684800,"StartTime":946684800}}}

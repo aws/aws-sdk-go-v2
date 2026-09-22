@@ -1,0 +1,6 @@
+PUT /amazonclouddirectory/2017-01-11/typedlink/facet
+
+Content-Type: application/json
+X-Amz-Data-Partition: __SchemaArn__
+
+{"AttributeUpdates":[{"Action":"CREATE_OR_UPDATE","Attribute":{"DefaultValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"IsImmutable":true,"Name":"__Name__","RequiredBehavior":"REQUIRED_ALWAYS","Rules":{"key0":{"Parameters":{"key0":"__Value__"},"Type":"BINARY_LENGTH"}},"Type":"STRING"}},{"Action":"CREATE_OR_UPDATE","Attribute":{"DefaultValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"IsImmutable":true,"Name":"__Name__","RequiredBehavior":"REQUIRED_ALWAYS","Rules":{"key0":{"Parameters":{"key0":"__Value__"},"Type":"BINARY_LENGTH"}},"Type":"STRING"}}],"IdentityAttributeOrder":["__Member__","__Member__"],"Name":"__Name__"}

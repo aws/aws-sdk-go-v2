@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","privateGraphEndpoints":[{"status":"CREATING","subnetIds":["__Member__","__Member__"],"vpcEndpointId":"__VpcEndpointId__","vpcId":"__VpcId__"},{"status":"CREATING","subnetIds":["__Member__","__Member__"],"vpcEndpointId":"__VpcEndpointId__","vpcId":"__VpcId__"}]}

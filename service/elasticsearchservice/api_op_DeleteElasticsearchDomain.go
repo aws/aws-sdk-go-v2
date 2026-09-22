@@ -4,11 +4,10 @@ package elasticsearchservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Permanently deletes the specified Elasticsearch domain and all of its data.
@@ -40,6 +39,18 @@ type DeleteElasticsearchDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteElasticsearchDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteElasticsearchDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteElasticsearchDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteElasticsearchDomainRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The result of a DeleteElasticsearchDomain request. Contains the status of the
 // pending deletion, or no status if the domain and all of its resources have been
 // deleted.
@@ -54,77 +65,50 @@ type DeleteElasticsearchDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteElasticsearchDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteElasticsearchDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteElasticsearchDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainStatus != nil {
+		s.WriteStruct(schemas.DeleteElasticsearchDomainResponse_DomainStatus)
+		v.DomainStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteElasticsearchDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteElasticsearchDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteElasticsearchDomainResponse_DomainStatus:
+			v.DomainStatus = &types.ElasticsearchDomainStatus{}
+			return v.DomainStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteElasticsearchDomain, schemas.DeleteElasticsearchDomainRequest, schemas.DeleteElasticsearchDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteElasticsearchDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteElasticsearchDomain, schemas.DeleteElasticsearchDomainRequest, schemas.DeleteElasticsearchDomainResponse), output: &DeleteElasticsearchDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteElasticsearchDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteElasticsearchDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteElasticsearchDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteElasticsearchDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +123,8 @@ func (c *Client) addOperationDeleteElasticsearchDomainMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteElasticsearchDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteElasticsearchDomain",
-	}
 }

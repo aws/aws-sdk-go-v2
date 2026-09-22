@@ -4,11 +4,10 @@ package elasticsearchservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows the destination domain owner to delete an existing inbound cross-cluster
@@ -39,6 +38,18 @@ type DeleteInboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInboundCrossClusterSearchConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInboundCrossClusterSearchConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInboundCrossClusterSearchConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossClusterSearchConnectionId != nil {
+		s.WriteString(schemas.DeleteInboundCrossClusterSearchConnectionRequest_CrossClusterSearchConnectionId, *v.CrossClusterSearchConnectionId)
+	}
+}
+
 // The result of a DeleteInboundCrossClusterSearchConnection operation. Contains details of deleted inbound connection.
 type DeleteInboundCrossClusterSearchConnectionOutput struct {
 
@@ -51,77 +62,50 @@ type DeleteInboundCrossClusterSearchConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteInboundCrossClusterSearchConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteInboundCrossClusterSearchConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteInboundCrossClusterSearchConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossClusterSearchConnection != nil {
+		s.WriteStruct(schemas.DeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection)
+		v.CrossClusterSearchConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteInboundCrossClusterSearchConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteInboundCrossClusterSearchConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteInboundCrossClusterSearchConnectionResponse_CrossClusterSearchConnection:
+			v.CrossClusterSearchConnection = &types.InboundCrossClusterSearchConnection{}
+			return v.CrossClusterSearchConnection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteInboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInboundCrossClusterSearchConnection, schemas.DeleteInboundCrossClusterSearchConnectionRequest, schemas.DeleteInboundCrossClusterSearchConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteInboundCrossClusterSearchConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteInboundCrossClusterSearchConnection, schemas.DeleteInboundCrossClusterSearchConnectionRequest, schemas.DeleteInboundCrossClusterSearchConnectionResponse), output: &DeleteInboundCrossClusterSearchConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteInboundCrossClusterSearchConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteInboundCrossClusterSearchConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteInboundCrossClusterSearchConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInboundCrossClusterSearchConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +120,8 @@ func (c *Client) addOperationDeleteInboundCrossClusterSearchConnectionMiddleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteInboundCrossClusterSearchConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteInboundCrossClusterSearchConnection",
-	}
 }

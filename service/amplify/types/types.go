@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -153,6 +155,202 @@ type App struct {
 	noSmithyDocumentSerde
 }
 
+func (v *App) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.App)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *App) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.App_appArn, *v.AppArn)
+	}
+	if v.AppId != nil {
+		s.WriteString(schemas.App_appId, *v.AppId)
+	}
+	if v.AutoBranchCreationConfig != nil {
+		s.WriteStruct(schemas.App_autoBranchCreationConfig)
+		v.AutoBranchCreationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoBranchCreationPatterns(s, schemas.App_autoBranchCreationPatterns, v.AutoBranchCreationPatterns)
+	if v.BasicAuthCredentials != nil {
+		s.WriteString(schemas.App_basicAuthCredentials, *v.BasicAuthCredentials)
+	}
+	if v.BuildSpec != nil {
+		s.WriteString(schemas.App_buildSpec, *v.BuildSpec)
+	}
+	if v.CacheConfig != nil {
+		s.WriteStruct(schemas.App_cacheConfig)
+		v.CacheConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputeRoleArn != nil {
+		s.WriteString(schemas.App_computeRoleArn, *v.ComputeRoleArn)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.App_createTime, *v.CreateTime)
+	}
+	if v.CustomHeaders != nil {
+		s.WriteString(schemas.App_customHeaders, *v.CustomHeaders)
+	}
+	serializeCustomRules(s, schemas.App_customRules, v.CustomRules)
+	if v.DefaultDomain != nil {
+		s.WriteString(schemas.App_defaultDomain, *v.DefaultDomain)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.App_description, *v.Description)
+	}
+	if v.EnableAutoBranchCreation != nil {
+		s.WriteBool(schemas.App_enableAutoBranchCreation, *v.EnableAutoBranchCreation)
+	}
+	if v.EnableBasicAuth != nil {
+		s.WriteBool(schemas.App_enableBasicAuth, *v.EnableBasicAuth)
+	}
+	if v.EnableBranchAutoBuild != nil {
+		s.WriteBool(schemas.App_enableBranchAutoBuild, *v.EnableBranchAutoBuild)
+	}
+	if v.EnableBranchAutoDeletion != nil {
+		s.WriteBool(schemas.App_enableBranchAutoDeletion, *v.EnableBranchAutoDeletion)
+	}
+	serializeEnvironmentVariables(s, schemas.App_environmentVariables, v.EnvironmentVariables)
+	if v.IamServiceRoleArn != nil {
+		s.WriteString(schemas.App_iamServiceRoleArn, *v.IamServiceRoleArn)
+	}
+	if v.JobConfig != nil {
+		s.WriteStruct(schemas.App_jobConfig)
+		v.JobConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.App_name, *v.Name)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.App_platform, string(v.Platform))
+	}
+	if v.ProductionBranch != nil {
+		s.WriteStruct(schemas.App_productionBranch)
+		v.ProductionBranch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.App_repository, *v.Repository)
+	}
+	if v.RepositoryCloneMethod != "" {
+		s.WriteString(schemas.App_repositoryCloneMethod, string(v.RepositoryCloneMethod))
+	}
+	serializeTagMap(s, schemas.App_tags, v.Tags)
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.App_updateTime, *v.UpdateTime)
+	}
+	if v.WafConfiguration != nil {
+		s.WriteStruct(schemas.App_wafConfiguration)
+		v.WafConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebhookCreateTime != nil {
+		s.WriteTime(schemas.App_webhookCreateTime, *v.WebhookCreateTime)
+	}
+}
+func (v *App) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.App, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.App_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.App_appArn, v.AppArn)
+		case schemas.App_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.App_appId, v.AppId)
+		case schemas.App_autoBranchCreationConfig:
+			v.AutoBranchCreationConfig = &AutoBranchCreationConfig{}
+			return v.AutoBranchCreationConfig.Deserialize(d)
+		case schemas.App_autoBranchCreationPatterns:
+			return deserializeAutoBranchCreationPatterns(d, schemas.App_autoBranchCreationPatterns, &v.AutoBranchCreationPatterns)
+		case schemas.App_basicAuthCredentials:
+			v.BasicAuthCredentials = new(string)
+			return d.ReadString(schemas.App_basicAuthCredentials, v.BasicAuthCredentials)
+		case schemas.App_buildSpec:
+			v.BuildSpec = new(string)
+			return d.ReadString(schemas.App_buildSpec, v.BuildSpec)
+		case schemas.App_cacheConfig:
+			v.CacheConfig = &CacheConfig{}
+			return v.CacheConfig.Deserialize(d)
+		case schemas.App_computeRoleArn:
+			v.ComputeRoleArn = new(string)
+			return d.ReadString(schemas.App_computeRoleArn, v.ComputeRoleArn)
+		case schemas.App_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.App_createTime, v.CreateTime)
+		case schemas.App_customHeaders:
+			v.CustomHeaders = new(string)
+			return d.ReadString(schemas.App_customHeaders, v.CustomHeaders)
+		case schemas.App_customRules:
+			return deserializeCustomRules(d, schemas.App_customRules, &v.CustomRules)
+		case schemas.App_defaultDomain:
+			v.DefaultDomain = new(string)
+			return d.ReadString(schemas.App_defaultDomain, v.DefaultDomain)
+		case schemas.App_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.App_description, v.Description)
+		case schemas.App_enableAutoBranchCreation:
+			v.EnableAutoBranchCreation = new(bool)
+			return d.ReadBool(schemas.App_enableAutoBranchCreation, v.EnableAutoBranchCreation)
+		case schemas.App_enableBasicAuth:
+			v.EnableBasicAuth = new(bool)
+			return d.ReadBool(schemas.App_enableBasicAuth, v.EnableBasicAuth)
+		case schemas.App_enableBranchAutoBuild:
+			v.EnableBranchAutoBuild = new(bool)
+			return d.ReadBool(schemas.App_enableBranchAutoBuild, v.EnableBranchAutoBuild)
+		case schemas.App_enableBranchAutoDeletion:
+			v.EnableBranchAutoDeletion = new(bool)
+			return d.ReadBool(schemas.App_enableBranchAutoDeletion, v.EnableBranchAutoDeletion)
+		case schemas.App_environmentVariables:
+			return deserializeEnvironmentVariables(d, schemas.App_environmentVariables, &v.EnvironmentVariables)
+		case schemas.App_iamServiceRoleArn:
+			v.IamServiceRoleArn = new(string)
+			return d.ReadString(schemas.App_iamServiceRoleArn, v.IamServiceRoleArn)
+		case schemas.App_jobConfig:
+			v.JobConfig = &JobConfig{}
+			return v.JobConfig.Deserialize(d)
+		case schemas.App_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.App_name, v.Name)
+		case schemas.App_platform:
+			var ev string
+			if err := d.ReadString(schemas.App_platform, &ev); err != nil {
+				return err
+			}
+			v.Platform = Platform(ev)
+			return nil
+		case schemas.App_productionBranch:
+			v.ProductionBranch = &ProductionBranch{}
+			return v.ProductionBranch.Deserialize(d)
+		case schemas.App_repository:
+			v.Repository = new(string)
+			return d.ReadString(schemas.App_repository, v.Repository)
+		case schemas.App_repositoryCloneMethod:
+			var ev string
+			if err := d.ReadString(schemas.App_repositoryCloneMethod, &ev); err != nil {
+				return err
+			}
+			v.RepositoryCloneMethod = RepositoryCloneMethod(ev)
+			return nil
+		case schemas.App_tags:
+			return deserializeTagMap(d, schemas.App_tags, &v.Tags)
+		case schemas.App_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.App_updateTime, v.UpdateTime)
+		case schemas.App_wafConfiguration:
+			v.WafConfiguration = &WafConfiguration{}
+			return v.WafConfiguration.Deserialize(d)
+		case schemas.App_webhookCreateTime:
+			v.WebhookCreateTime = new(time.Time)
+			return d.ReadTime(schemas.App_webhookCreateTime, v.WebhookCreateTime)
+		}
+		return nil
+	})
+}
+
 // Describes an artifact.
 type Artifact struct {
 
@@ -167,6 +365,34 @@ type Artifact struct {
 	ArtifactId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Artifact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Artifact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Artifact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactFileName != nil {
+		s.WriteString(schemas.Artifact_artifactFileName, *v.ArtifactFileName)
+	}
+	if v.ArtifactId != nil {
+		s.WriteString(schemas.Artifact_artifactId, *v.ArtifactId)
+	}
+}
+func (v *Artifact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Artifact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Artifact_artifactFileName:
+			v.ArtifactFileName = new(string)
+			return d.ReadString(schemas.Artifact_artifactFileName, v.ArtifactFileName)
+		case schemas.Artifact_artifactId:
+			v.ArtifactId = new(string)
+			return d.ReadString(schemas.Artifact_artifactId, v.ArtifactId)
+		}
+		return nil
+	})
 }
 
 // Describes the automated branch creation configuration.
@@ -211,6 +437,83 @@ type AutoBranchCreationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoBranchCreationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoBranchCreationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoBranchCreationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BasicAuthCredentials != nil {
+		s.WriteString(schemas.AutoBranchCreationConfig_basicAuthCredentials, *v.BasicAuthCredentials)
+	}
+	if v.BuildSpec != nil {
+		s.WriteString(schemas.AutoBranchCreationConfig_buildSpec, *v.BuildSpec)
+	}
+	if v.EnableAutoBuild != nil {
+		s.WriteBool(schemas.AutoBranchCreationConfig_enableAutoBuild, *v.EnableAutoBuild)
+	}
+	if v.EnableBasicAuth != nil {
+		s.WriteBool(schemas.AutoBranchCreationConfig_enableBasicAuth, *v.EnableBasicAuth)
+	}
+	if v.EnablePerformanceMode != nil {
+		s.WriteBool(schemas.AutoBranchCreationConfig_enablePerformanceMode, *v.EnablePerformanceMode)
+	}
+	if v.EnablePullRequestPreview != nil {
+		s.WriteBool(schemas.AutoBranchCreationConfig_enablePullRequestPreview, *v.EnablePullRequestPreview)
+	}
+	serializeEnvironmentVariables(s, schemas.AutoBranchCreationConfig_environmentVariables, v.EnvironmentVariables)
+	if v.Framework != nil {
+		s.WriteString(schemas.AutoBranchCreationConfig_framework, *v.Framework)
+	}
+	if v.PullRequestEnvironmentName != nil {
+		s.WriteString(schemas.AutoBranchCreationConfig_pullRequestEnvironmentName, *v.PullRequestEnvironmentName)
+	}
+	if v.Stage != "" {
+		s.WriteString(schemas.AutoBranchCreationConfig_stage, string(v.Stage))
+	}
+}
+func (v *AutoBranchCreationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoBranchCreationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoBranchCreationConfig_basicAuthCredentials:
+			v.BasicAuthCredentials = new(string)
+			return d.ReadString(schemas.AutoBranchCreationConfig_basicAuthCredentials, v.BasicAuthCredentials)
+		case schemas.AutoBranchCreationConfig_buildSpec:
+			v.BuildSpec = new(string)
+			return d.ReadString(schemas.AutoBranchCreationConfig_buildSpec, v.BuildSpec)
+		case schemas.AutoBranchCreationConfig_enableAutoBuild:
+			v.EnableAutoBuild = new(bool)
+			return d.ReadBool(schemas.AutoBranchCreationConfig_enableAutoBuild, v.EnableAutoBuild)
+		case schemas.AutoBranchCreationConfig_enableBasicAuth:
+			v.EnableBasicAuth = new(bool)
+			return d.ReadBool(schemas.AutoBranchCreationConfig_enableBasicAuth, v.EnableBasicAuth)
+		case schemas.AutoBranchCreationConfig_enablePerformanceMode:
+			v.EnablePerformanceMode = new(bool)
+			return d.ReadBool(schemas.AutoBranchCreationConfig_enablePerformanceMode, v.EnablePerformanceMode)
+		case schemas.AutoBranchCreationConfig_enablePullRequestPreview:
+			v.EnablePullRequestPreview = new(bool)
+			return d.ReadBool(schemas.AutoBranchCreationConfig_enablePullRequestPreview, v.EnablePullRequestPreview)
+		case schemas.AutoBranchCreationConfig_environmentVariables:
+			return deserializeEnvironmentVariables(d, schemas.AutoBranchCreationConfig_environmentVariables, &v.EnvironmentVariables)
+		case schemas.AutoBranchCreationConfig_framework:
+			v.Framework = new(string)
+			return d.ReadString(schemas.AutoBranchCreationConfig_framework, v.Framework)
+		case schemas.AutoBranchCreationConfig_pullRequestEnvironmentName:
+			v.PullRequestEnvironmentName = new(string)
+			return d.ReadString(schemas.AutoBranchCreationConfig_pullRequestEnvironmentName, v.PullRequestEnvironmentName)
+		case schemas.AutoBranchCreationConfig_stage:
+			var ev string
+			if err := d.ReadString(schemas.AutoBranchCreationConfig_stage, &ev); err != nil {
+				return err
+			}
+			v.Stage = Stage(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the backend associated with an Amplify Branch .
 //
 // This property is available to Amplify Gen 2 apps only. When you deploy an
@@ -222,6 +525,28 @@ type Backend struct {
 	StackArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Backend) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Backend)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Backend) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackArn != nil {
+		s.WriteString(schemas.Backend_stackArn, *v.StackArn)
+	}
+}
+func (v *Backend) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Backend, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Backend_stackArn:
+			v.StackArn = new(string)
+			return d.ReadString(schemas.Backend_stackArn, v.StackArn)
+		}
+		return nil
+	})
 }
 
 // Describes the backend environment associated with a Branch of a Gen 1 Amplify
@@ -259,6 +584,58 @@ type BackendEnvironment struct {
 	StackName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BackendEnvironment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackendEnvironment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackendEnvironment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackendEnvironmentArn != nil {
+		s.WriteString(schemas.BackendEnvironment_backendEnvironmentArn, *v.BackendEnvironmentArn)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.BackendEnvironment_createTime, *v.CreateTime)
+	}
+	if v.DeploymentArtifacts != nil {
+		s.WriteString(schemas.BackendEnvironment_deploymentArtifacts, *v.DeploymentArtifacts)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.BackendEnvironment_environmentName, *v.EnvironmentName)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.BackendEnvironment_stackName, *v.StackName)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.BackendEnvironment_updateTime, *v.UpdateTime)
+	}
+}
+func (v *BackendEnvironment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackendEnvironment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackendEnvironment_backendEnvironmentArn:
+			v.BackendEnvironmentArn = new(string)
+			return d.ReadString(schemas.BackendEnvironment_backendEnvironmentArn, v.BackendEnvironmentArn)
+		case schemas.BackendEnvironment_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.BackendEnvironment_createTime, v.CreateTime)
+		case schemas.BackendEnvironment_deploymentArtifacts:
+			v.DeploymentArtifacts = new(string)
+			return d.ReadString(schemas.BackendEnvironment_deploymentArtifacts, v.DeploymentArtifacts)
+		case schemas.BackendEnvironment_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.BackendEnvironment_environmentName, v.EnvironmentName)
+		case schemas.BackendEnvironment_stackName:
+			v.StackName = new(string)
+			return d.ReadString(schemas.BackendEnvironment_stackName, v.StackName)
+		case schemas.BackendEnvironment_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.BackendEnvironment_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
 }
 
 // The branch for an Amplify app, which maps to a third-party repository branch.
@@ -420,6 +797,196 @@ type Branch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Branch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Branch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Branch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveJobId != nil {
+		s.WriteString(schemas.Branch_activeJobId, *v.ActiveJobId)
+	}
+	serializeAssociatedResources(s, schemas.Branch_associatedResources, v.AssociatedResources)
+	if v.Backend != nil {
+		s.WriteStruct(schemas.Branch_backend)
+		v.Backend.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BackendEnvironmentArn != nil {
+		s.WriteString(schemas.Branch_backendEnvironmentArn, *v.BackendEnvironmentArn)
+	}
+	if v.BasicAuthCredentials != nil {
+		s.WriteString(schemas.Branch_basicAuthCredentials, *v.BasicAuthCredentials)
+	}
+	if v.BranchArn != nil {
+		s.WriteString(schemas.Branch_branchArn, *v.BranchArn)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.Branch_branchName, *v.BranchName)
+	}
+	if v.BuildSpec != nil {
+		s.WriteString(schemas.Branch_buildSpec, *v.BuildSpec)
+	}
+	if v.ComputeRoleArn != nil {
+		s.WriteString(schemas.Branch_computeRoleArn, *v.ComputeRoleArn)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.Branch_createTime, *v.CreateTime)
+	}
+	serializeCustomDomains(s, schemas.Branch_customDomains, v.CustomDomains)
+	if v.Description != nil {
+		s.WriteString(schemas.Branch_description, *v.Description)
+	}
+	if v.DestinationBranch != nil {
+		s.WriteString(schemas.Branch_destinationBranch, *v.DestinationBranch)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.Branch_displayName, *v.DisplayName)
+	}
+	if v.EnableAutoBuild != nil {
+		s.WriteBool(schemas.Branch_enableAutoBuild, *v.EnableAutoBuild)
+	}
+	if v.EnableBasicAuth != nil {
+		s.WriteBool(schemas.Branch_enableBasicAuth, *v.EnableBasicAuth)
+	}
+	if v.EnableNotification != nil {
+		s.WriteBool(schemas.Branch_enableNotification, *v.EnableNotification)
+	}
+	if v.EnablePerformanceMode != nil {
+		s.WriteBool(schemas.Branch_enablePerformanceMode, *v.EnablePerformanceMode)
+	}
+	if v.EnablePullRequestPreview != nil {
+		s.WriteBool(schemas.Branch_enablePullRequestPreview, *v.EnablePullRequestPreview)
+	}
+	if v.EnableSkewProtection != nil {
+		s.WriteBool(schemas.Branch_enableSkewProtection, *v.EnableSkewProtection)
+	}
+	serializeEnvironmentVariables(s, schemas.Branch_environmentVariables, v.EnvironmentVariables)
+	if v.Framework != nil {
+		s.WriteString(schemas.Branch_framework, *v.Framework)
+	}
+	if v.PullRequestEnvironmentName != nil {
+		s.WriteString(schemas.Branch_pullRequestEnvironmentName, *v.PullRequestEnvironmentName)
+	}
+	if v.SourceBranch != nil {
+		s.WriteString(schemas.Branch_sourceBranch, *v.SourceBranch)
+	}
+	if v.Stage != "" {
+		s.WriteString(schemas.Branch_stage, string(v.Stage))
+	}
+	serializeTagMap(s, schemas.Branch_tags, v.Tags)
+	if v.ThumbnailUrl != nil {
+		s.WriteString(schemas.Branch_thumbnailUrl, *v.ThumbnailUrl)
+	}
+	if v.TotalNumberOfJobs != nil {
+		s.WriteString(schemas.Branch_totalNumberOfJobs, *v.TotalNumberOfJobs)
+	}
+	if v.Ttl != nil {
+		s.WriteString(schemas.Branch_ttl, *v.Ttl)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.Branch_updateTime, *v.UpdateTime)
+	}
+}
+func (v *Branch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Branch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Branch_activeJobId:
+			v.ActiveJobId = new(string)
+			return d.ReadString(schemas.Branch_activeJobId, v.ActiveJobId)
+		case schemas.Branch_associatedResources:
+			return deserializeAssociatedResources(d, schemas.Branch_associatedResources, &v.AssociatedResources)
+		case schemas.Branch_backend:
+			v.Backend = &Backend{}
+			return v.Backend.Deserialize(d)
+		case schemas.Branch_backendEnvironmentArn:
+			v.BackendEnvironmentArn = new(string)
+			return d.ReadString(schemas.Branch_backendEnvironmentArn, v.BackendEnvironmentArn)
+		case schemas.Branch_basicAuthCredentials:
+			v.BasicAuthCredentials = new(string)
+			return d.ReadString(schemas.Branch_basicAuthCredentials, v.BasicAuthCredentials)
+		case schemas.Branch_branchArn:
+			v.BranchArn = new(string)
+			return d.ReadString(schemas.Branch_branchArn, v.BranchArn)
+		case schemas.Branch_branchName:
+			v.BranchName = new(string)
+			return d.ReadString(schemas.Branch_branchName, v.BranchName)
+		case schemas.Branch_buildSpec:
+			v.BuildSpec = new(string)
+			return d.ReadString(schemas.Branch_buildSpec, v.BuildSpec)
+		case schemas.Branch_computeRoleArn:
+			v.ComputeRoleArn = new(string)
+			return d.ReadString(schemas.Branch_computeRoleArn, v.ComputeRoleArn)
+		case schemas.Branch_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.Branch_createTime, v.CreateTime)
+		case schemas.Branch_customDomains:
+			return deserializeCustomDomains(d, schemas.Branch_customDomains, &v.CustomDomains)
+		case schemas.Branch_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Branch_description, v.Description)
+		case schemas.Branch_destinationBranch:
+			v.DestinationBranch = new(string)
+			return d.ReadString(schemas.Branch_destinationBranch, v.DestinationBranch)
+		case schemas.Branch_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.Branch_displayName, v.DisplayName)
+		case schemas.Branch_enableAutoBuild:
+			v.EnableAutoBuild = new(bool)
+			return d.ReadBool(schemas.Branch_enableAutoBuild, v.EnableAutoBuild)
+		case schemas.Branch_enableBasicAuth:
+			v.EnableBasicAuth = new(bool)
+			return d.ReadBool(schemas.Branch_enableBasicAuth, v.EnableBasicAuth)
+		case schemas.Branch_enableNotification:
+			v.EnableNotification = new(bool)
+			return d.ReadBool(schemas.Branch_enableNotification, v.EnableNotification)
+		case schemas.Branch_enablePerformanceMode:
+			v.EnablePerformanceMode = new(bool)
+			return d.ReadBool(schemas.Branch_enablePerformanceMode, v.EnablePerformanceMode)
+		case schemas.Branch_enablePullRequestPreview:
+			v.EnablePullRequestPreview = new(bool)
+			return d.ReadBool(schemas.Branch_enablePullRequestPreview, v.EnablePullRequestPreview)
+		case schemas.Branch_enableSkewProtection:
+			v.EnableSkewProtection = new(bool)
+			return d.ReadBool(schemas.Branch_enableSkewProtection, v.EnableSkewProtection)
+		case schemas.Branch_environmentVariables:
+			return deserializeEnvironmentVariables(d, schemas.Branch_environmentVariables, &v.EnvironmentVariables)
+		case schemas.Branch_framework:
+			v.Framework = new(string)
+			return d.ReadString(schemas.Branch_framework, v.Framework)
+		case schemas.Branch_pullRequestEnvironmentName:
+			v.PullRequestEnvironmentName = new(string)
+			return d.ReadString(schemas.Branch_pullRequestEnvironmentName, v.PullRequestEnvironmentName)
+		case schemas.Branch_sourceBranch:
+			v.SourceBranch = new(string)
+			return d.ReadString(schemas.Branch_sourceBranch, v.SourceBranch)
+		case schemas.Branch_stage:
+			var ev string
+			if err := d.ReadString(schemas.Branch_stage, &ev); err != nil {
+				return err
+			}
+			v.Stage = Stage(ev)
+			return nil
+		case schemas.Branch_tags:
+			return deserializeTagMap(d, schemas.Branch_tags, &v.Tags)
+		case schemas.Branch_thumbnailUrl:
+			v.ThumbnailUrl = new(string)
+			return d.ReadString(schemas.Branch_thumbnailUrl, v.ThumbnailUrl)
+		case schemas.Branch_totalNumberOfJobs:
+			v.TotalNumberOfJobs = new(string)
+			return d.ReadString(schemas.Branch_totalNumberOfJobs, v.TotalNumberOfJobs)
+		case schemas.Branch_ttl:
+			v.Ttl = new(string)
+			return d.ReadString(schemas.Branch_ttl, v.Ttl)
+		case schemas.Branch_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.Branch_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
+
 // Describes the cache configuration for an Amplify app.
 //
 // For more information about how Amplify applies an optimal cache configuration
@@ -443,6 +1010,32 @@ type CacheConfig struct {
 	Type CacheConfigType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CacheConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CacheConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CacheConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.CacheConfig_type, string(v.Type))
+	}
+}
+func (v *CacheConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CacheConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CacheConfig_type:
+			var ev string
+			if err := d.ReadString(schemas.CacheConfig_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CacheConfigType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the current SSL/TLS certificate that is in use for the domain. If you
@@ -477,6 +1070,44 @@ type Certificate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Certificate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Certificate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Certificate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateVerificationDNSRecord != nil {
+		s.WriteString(schemas.Certificate_certificateVerificationDNSRecord, *v.CertificateVerificationDNSRecord)
+	}
+	if v.CustomCertificateArn != nil {
+		s.WriteString(schemas.Certificate_customCertificateArn, *v.CustomCertificateArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Certificate_type, string(v.Type))
+	}
+}
+func (v *Certificate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Certificate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Certificate_certificateVerificationDNSRecord:
+			v.CertificateVerificationDNSRecord = new(string)
+			return d.ReadString(schemas.Certificate_certificateVerificationDNSRecord, v.CertificateVerificationDNSRecord)
+		case schemas.Certificate_customCertificateArn:
+			v.CustomCertificateArn = new(string)
+			return d.ReadString(schemas.Certificate_customCertificateArn, v.CustomCertificateArn)
+		case schemas.Certificate_type:
+			var ev string
+			if err := d.ReadString(schemas.Certificate_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CertificateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The type of SSL/TLS certificate to use for your custom domain. If a certificate
 // type isn't specified, Amplify uses the default AMPLIFY_MANAGED certificate.
 type CertificateSettings struct {
@@ -503,6 +1134,38 @@ type CertificateSettings struct {
 	CustomCertificateArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CertificateSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomCertificateArn != nil {
+		s.WriteString(schemas.CertificateSettings_customCertificateArn, *v.CustomCertificateArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CertificateSettings_type, string(v.Type))
+	}
+}
+func (v *CertificateSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateSettings_customCertificateArn:
+			v.CustomCertificateArn = new(string)
+			return d.ReadString(schemas.CertificateSettings_customCertificateArn, v.CustomCertificateArn)
+		case schemas.CertificateSettings_type:
+			var ev string
+			if err := d.ReadString(schemas.CertificateSettings_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CertificateType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a custom rewrite or redirect rule.
@@ -536,6 +1199,46 @@ type CustomRule struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != nil {
+		s.WriteString(schemas.CustomRule_condition, *v.Condition)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.CustomRule_source, *v.Source)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.CustomRule_status, *v.Status)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.CustomRule_target, *v.Target)
+	}
+}
+func (v *CustomRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomRule_condition:
+			v.Condition = new(string)
+			return d.ReadString(schemas.CustomRule_condition, v.Condition)
+		case schemas.CustomRule_source:
+			v.Source = new(string)
+			return d.ReadString(schemas.CustomRule_source, v.Source)
+		case schemas.CustomRule_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CustomRule_status, v.Status)
+		case schemas.CustomRule_target:
+			v.Target = new(string)
+			return d.ReadString(schemas.CustomRule_target, v.Target)
+		}
+		return nil
+	})
 }
 
 // Describes the association between a custom domain and an Amplify app.
@@ -624,6 +1327,92 @@ type DomainAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoSubDomainCreationPatterns(s, schemas.DomainAssociation_autoSubDomainCreationPatterns, v.AutoSubDomainCreationPatterns)
+	if v.AutoSubDomainIAMRole != nil {
+		s.WriteString(schemas.DomainAssociation_autoSubDomainIAMRole, *v.AutoSubDomainIAMRole)
+	}
+	if v.Certificate != nil {
+		s.WriteStruct(schemas.DomainAssociation_certificate)
+		v.Certificate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CertificateVerificationDNSRecord != nil {
+		s.WriteString(schemas.DomainAssociation_certificateVerificationDNSRecord, *v.CertificateVerificationDNSRecord)
+	}
+	if v.DomainAssociationArn != nil {
+		s.WriteString(schemas.DomainAssociation_domainAssociationArn, *v.DomainAssociationArn)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DomainAssociation_domainName, *v.DomainName)
+	}
+	if v.DomainStatus != "" {
+		s.WriteString(schemas.DomainAssociation_domainStatus, string(v.DomainStatus))
+	}
+	if v.EnableAutoSubDomain != nil {
+		s.WriteBool(schemas.DomainAssociation_enableAutoSubDomain, *v.EnableAutoSubDomain)
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.DomainAssociation_statusReason, *v.StatusReason)
+	}
+	serializeSubDomains(s, schemas.DomainAssociation_subDomains, v.SubDomains)
+	if v.UpdateStatus != "" {
+		s.WriteString(schemas.DomainAssociation_updateStatus, string(v.UpdateStatus))
+	}
+}
+func (v *DomainAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainAssociation_autoSubDomainCreationPatterns:
+			return deserializeAutoSubDomainCreationPatterns(d, schemas.DomainAssociation_autoSubDomainCreationPatterns, &v.AutoSubDomainCreationPatterns)
+		case schemas.DomainAssociation_autoSubDomainIAMRole:
+			v.AutoSubDomainIAMRole = new(string)
+			return d.ReadString(schemas.DomainAssociation_autoSubDomainIAMRole, v.AutoSubDomainIAMRole)
+		case schemas.DomainAssociation_certificate:
+			v.Certificate = &Certificate{}
+			return v.Certificate.Deserialize(d)
+		case schemas.DomainAssociation_certificateVerificationDNSRecord:
+			v.CertificateVerificationDNSRecord = new(string)
+			return d.ReadString(schemas.DomainAssociation_certificateVerificationDNSRecord, v.CertificateVerificationDNSRecord)
+		case schemas.DomainAssociation_domainAssociationArn:
+			v.DomainAssociationArn = new(string)
+			return d.ReadString(schemas.DomainAssociation_domainAssociationArn, v.DomainAssociationArn)
+		case schemas.DomainAssociation_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DomainAssociation_domainName, v.DomainName)
+		case schemas.DomainAssociation_domainStatus:
+			var ev string
+			if err := d.ReadString(schemas.DomainAssociation_domainStatus, &ev); err != nil {
+				return err
+			}
+			v.DomainStatus = DomainStatus(ev)
+			return nil
+		case schemas.DomainAssociation_enableAutoSubDomain:
+			v.EnableAutoSubDomain = new(bool)
+			return d.ReadBool(schemas.DomainAssociation_enableAutoSubDomain, v.EnableAutoSubDomain)
+		case schemas.DomainAssociation_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.DomainAssociation_statusReason, v.StatusReason)
+		case schemas.DomainAssociation_subDomains:
+			return deserializeSubDomains(d, schemas.DomainAssociation_subDomains, &v.SubDomains)
+		case schemas.DomainAssociation_updateStatus:
+			var ev string
+			if err := d.ReadString(schemas.DomainAssociation_updateStatus, &ev); err != nil {
+				return err
+			}
+			v.UpdateStatus = UpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes an execution job for an Amplify app.
 type Job struct {
 
@@ -638,6 +1427,33 @@ type Job struct {
 	Summary *JobSummary
 
 	noSmithyDocumentSerde
+}
+
+func (v *Job) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Job)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Job) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSteps(s, schemas.Job_steps, v.Steps)
+	if v.Summary != nil {
+		s.WriteStruct(schemas.Job_summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Job) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Job, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Job_steps:
+			return deserializeSteps(d, schemas.Job_steps, &v.Steps)
+		case schemas.Job_summary:
+			v.Summary = &JobSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration details that apply to the jobs for an Amplify app.
@@ -681,6 +1497,32 @@ type JobConfig struct {
 	BuildComputeType BuildComputeType
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildComputeType != "" {
+		s.WriteString(schemas.JobConfig_buildComputeType, string(v.BuildComputeType))
+	}
+}
+func (v *JobConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobConfig_buildComputeType:
+			var ev string
+			if err := d.ReadString(schemas.JobConfig_buildComputeType, &ev); err != nil {
+				return err
+			}
+			v.BuildComputeType = BuildComputeType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the summary for an execution job for an Amplify app.
@@ -749,6 +1591,100 @@ type JobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitId != nil {
+		s.WriteString(schemas.JobSummary_commitId, *v.CommitId)
+	}
+	if v.CommitMessage != nil {
+		s.WriteString(schemas.JobSummary_commitMessage, *v.CommitMessage)
+	}
+	if v.CommitTime != nil {
+		s.WriteTime(schemas.JobSummary_commitTime, *v.CommitTime)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.JobSummary_endTime, *v.EndTime)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.JobSummary_jobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.JobSummary_jobId, *v.JobId)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.JobSummary_jobType, string(v.JobType))
+	}
+	if v.SourceUrl != nil {
+		s.WriteString(schemas.JobSummary_sourceUrl, *v.SourceUrl)
+	}
+	if v.SourceUrlType != "" {
+		s.WriteString(schemas.JobSummary_sourceUrlType, string(v.SourceUrlType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.JobSummary_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.JobSummary_status, string(v.Status))
+	}
+}
+func (v *JobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobSummary_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.JobSummary_commitId, v.CommitId)
+		case schemas.JobSummary_commitMessage:
+			v.CommitMessage = new(string)
+			return d.ReadString(schemas.JobSummary_commitMessage, v.CommitMessage)
+		case schemas.JobSummary_commitTime:
+			v.CommitTime = new(time.Time)
+			return d.ReadTime(schemas.JobSummary_commitTime, v.CommitTime)
+		case schemas.JobSummary_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.JobSummary_endTime, v.EndTime)
+		case schemas.JobSummary_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.JobSummary_jobArn, v.JobArn)
+		case schemas.JobSummary_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.JobSummary_jobId, v.JobId)
+		case schemas.JobSummary_jobType:
+			var ev string
+			if err := d.ReadString(schemas.JobSummary_jobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = JobType(ev)
+			return nil
+		case schemas.JobSummary_sourceUrl:
+			v.SourceUrl = new(string)
+			return d.ReadString(schemas.JobSummary_sourceUrl, v.SourceUrl)
+		case schemas.JobSummary_sourceUrlType:
+			var ev string
+			if err := d.ReadString(schemas.JobSummary_sourceUrlType, &ev); err != nil {
+				return err
+			}
+			v.SourceUrlType = SourceUrlType(ev)
+			return nil
+		case schemas.JobSummary_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.JobSummary_startTime, v.StartTime)
+		case schemas.JobSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.JobSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the information about a production branch for an Amplify app.
 type ProductionBranch struct {
 
@@ -765,6 +1701,46 @@ type ProductionBranch struct {
 	ThumbnailUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProductionBranch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProductionBranch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProductionBranch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.ProductionBranch_branchName, *v.BranchName)
+	}
+	if v.LastDeployTime != nil {
+		s.WriteTime(schemas.ProductionBranch_lastDeployTime, *v.LastDeployTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ProductionBranch_status, *v.Status)
+	}
+	if v.ThumbnailUrl != nil {
+		s.WriteString(schemas.ProductionBranch_thumbnailUrl, *v.ThumbnailUrl)
+	}
+}
+func (v *ProductionBranch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProductionBranch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProductionBranch_branchName:
+			v.BranchName = new(string)
+			return d.ReadString(schemas.ProductionBranch_branchName, v.BranchName)
+		case schemas.ProductionBranch_lastDeployTime:
+			v.LastDeployTime = new(time.Time)
+			return d.ReadTime(schemas.ProductionBranch_lastDeployTime, v.LastDeployTime)
+		case schemas.ProductionBranch_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ProductionBranch_status, v.Status)
+		case schemas.ProductionBranch_thumbnailUrl:
+			v.ThumbnailUrl = new(string)
+			return d.ReadString(schemas.ProductionBranch_thumbnailUrl, v.ThumbnailUrl)
+		}
+		return nil
+	})
 }
 
 // Describes an execution step, for an execution job, for an Amplify app.
@@ -814,6 +1790,89 @@ type Step struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Step) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Step)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Step) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactsUrl != nil {
+		s.WriteString(schemas.Step_artifactsUrl, *v.ArtifactsUrl)
+	}
+	if v.Context != nil {
+		s.WriteString(schemas.Step_context, *v.Context)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Step_endTime, *v.EndTime)
+	}
+	if v.LogUrl != nil {
+		s.WriteString(schemas.Step_logUrl, *v.LogUrl)
+	}
+	serializeScreenshots(s, schemas.Step_screenshots, v.Screenshots)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Step_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Step_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.Step_statusReason, *v.StatusReason)
+	}
+	if v.StepName != nil {
+		s.WriteString(schemas.Step_stepName, *v.StepName)
+	}
+	if v.TestArtifactsUrl != nil {
+		s.WriteString(schemas.Step_testArtifactsUrl, *v.TestArtifactsUrl)
+	}
+	if v.TestConfigUrl != nil {
+		s.WriteString(schemas.Step_testConfigUrl, *v.TestConfigUrl)
+	}
+}
+func (v *Step) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Step, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Step_artifactsUrl:
+			v.ArtifactsUrl = new(string)
+			return d.ReadString(schemas.Step_artifactsUrl, v.ArtifactsUrl)
+		case schemas.Step_context:
+			v.Context = new(string)
+			return d.ReadString(schemas.Step_context, v.Context)
+		case schemas.Step_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Step_endTime, v.EndTime)
+		case schemas.Step_logUrl:
+			v.LogUrl = new(string)
+			return d.ReadString(schemas.Step_logUrl, v.LogUrl)
+		case schemas.Step_screenshots:
+			return deserializeScreenshots(d, schemas.Step_screenshots, &v.Screenshots)
+		case schemas.Step_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Step_startTime, v.StartTime)
+		case schemas.Step_status:
+			var ev string
+			if err := d.ReadString(schemas.Step_status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobStatus(ev)
+			return nil
+		case schemas.Step_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.Step_statusReason, v.StatusReason)
+		case schemas.Step_stepName:
+			v.StepName = new(string)
+			return d.ReadString(schemas.Step_stepName, v.StepName)
+		case schemas.Step_testArtifactsUrl:
+			v.TestArtifactsUrl = new(string)
+			return d.ReadString(schemas.Step_testArtifactsUrl, v.TestArtifactsUrl)
+		case schemas.Step_testConfigUrl:
+			v.TestConfigUrl = new(string)
+			return d.ReadString(schemas.Step_testConfigUrl, v.TestConfigUrl)
+		}
+		return nil
+	})
+}
+
 // The subdomain for the domain association.
 type SubDomain struct {
 
@@ -835,6 +1894,42 @@ type SubDomain struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubDomain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubDomain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubDomain) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DnsRecord != nil {
+		s.WriteString(schemas.SubDomain_dnsRecord, *v.DnsRecord)
+	}
+	if v.SubDomainSetting != nil {
+		s.WriteStruct(schemas.SubDomain_subDomainSetting)
+		v.SubDomainSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Verified != nil {
+		s.WriteBool(schemas.SubDomain_verified, *v.Verified)
+	}
+}
+func (v *SubDomain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubDomain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubDomain_dnsRecord:
+			v.DnsRecord = new(string)
+			return d.ReadString(schemas.SubDomain_dnsRecord, v.DnsRecord)
+		case schemas.SubDomain_subDomainSetting:
+			v.SubDomainSetting = &SubDomainSetting{}
+			return v.SubDomainSetting.Deserialize(d)
+		case schemas.SubDomain_verified:
+			v.Verified = new(bool)
+			return d.ReadBool(schemas.SubDomain_verified, v.Verified)
+		}
+		return nil
+	})
+}
+
 // Describes the settings for the subdomain.
 type SubDomainSetting struct {
 
@@ -849,6 +1944,34 @@ type SubDomainSetting struct {
 	Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubDomainSetting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubDomainSetting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubDomainSetting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.SubDomainSetting_branchName, *v.BranchName)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.SubDomainSetting_prefix, *v.Prefix)
+	}
+}
+func (v *SubDomainSetting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubDomainSetting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubDomainSetting_branchName:
+			v.BranchName = new(string)
+			return d.ReadString(schemas.SubDomainSetting_branchName, v.BranchName)
+		case schemas.SubDomainSetting_prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.SubDomainSetting_prefix, v.Prefix)
+		}
+		return nil
+	})
 }
 
 // Describes the Firewall configuration for a hosted Amplify application. Firewall
@@ -870,6 +1993,44 @@ type WafConfiguration struct {
 	WebAclArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WafConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WafConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WafConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusReason != nil {
+		s.WriteString(schemas.WafConfiguration_statusReason, *v.StatusReason)
+	}
+	if v.WafStatus != "" {
+		s.WriteString(schemas.WafConfiguration_wafStatus, string(v.WafStatus))
+	}
+	if v.WebAclArn != nil {
+		s.WriteString(schemas.WafConfiguration_webAclArn, *v.WebAclArn)
+	}
+}
+func (v *WafConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WafConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WafConfiguration_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.WafConfiguration_statusReason, v.StatusReason)
+		case schemas.WafConfiguration_wafStatus:
+			var ev string
+			if err := d.ReadString(schemas.WafConfiguration_wafStatus, &ev); err != nil {
+				return err
+			}
+			v.WafStatus = WafStatus(ev)
+			return nil
+		case schemas.WafConfiguration_webAclArn:
+			v.WebAclArn = new(string)
+			return d.ReadString(schemas.WafConfiguration_webAclArn, v.WebAclArn)
+		}
+		return nil
+	})
 }
 
 // Describes a webhook that connects repository events to an Amplify app.
@@ -914,6 +2075,70 @@ type Webhook struct {
 	AppId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Webhook) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Webhook)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Webhook) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.Webhook_appId, *v.AppId)
+	}
+	if v.BranchName != nil {
+		s.WriteString(schemas.Webhook_branchName, *v.BranchName)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.Webhook_createTime, *v.CreateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Webhook_description, *v.Description)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.Webhook_updateTime, *v.UpdateTime)
+	}
+	if v.WebhookArn != nil {
+		s.WriteString(schemas.Webhook_webhookArn, *v.WebhookArn)
+	}
+	if v.WebhookId != nil {
+		s.WriteString(schemas.Webhook_webhookId, *v.WebhookId)
+	}
+	if v.WebhookUrl != nil {
+		s.WriteString(schemas.Webhook_webhookUrl, *v.WebhookUrl)
+	}
+}
+func (v *Webhook) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Webhook, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Webhook_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.Webhook_appId, v.AppId)
+		case schemas.Webhook_branchName:
+			v.BranchName = new(string)
+			return d.ReadString(schemas.Webhook_branchName, v.BranchName)
+		case schemas.Webhook_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.Webhook_createTime, v.CreateTime)
+		case schemas.Webhook_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Webhook_description, v.Description)
+		case schemas.Webhook_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.Webhook_updateTime, v.UpdateTime)
+		case schemas.Webhook_webhookArn:
+			v.WebhookArn = new(string)
+			return d.ReadString(schemas.Webhook_webhookArn, v.WebhookArn)
+		case schemas.Webhook_webhookId:
+			v.WebhookId = new(string)
+			return d.ReadString(schemas.Webhook_webhookId, v.WebhookId)
+		case schemas.Webhook_webhookUrl:
+			v.WebhookUrl = new(string)
+			return d.ReadString(schemas.Webhook_webhookUrl, v.WebhookUrl)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

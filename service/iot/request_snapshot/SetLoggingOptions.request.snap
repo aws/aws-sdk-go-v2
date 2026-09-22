@@ -1,0 +1,5 @@
+POST /loggingOptions
+
+Content-Type: application/json
+
+{"logLevel":"DEBUG","roleArn":"__RoleArn__"}

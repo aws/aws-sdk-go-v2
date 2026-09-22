@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieve annotations for a data quality statistic.
@@ -47,6 +46,32 @@ type ListDataQualityStatisticAnnotationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityStatisticAnnotationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityStatisticAnnotationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityStatisticAnnotationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataQualityStatisticAnnotationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityStatisticAnnotationsRequest_NextToken, *v.NextToken)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ListDataQualityStatisticAnnotationsRequest_ProfileId, *v.ProfileId)
+	}
+	if v.StatisticId != nil {
+		s.WriteString(schemas.ListDataQualityStatisticAnnotationsRequest_StatisticId, *v.StatisticId)
+	}
+	if v.TimestampFilter != nil {
+		s.WriteStruct(schemas.ListDataQualityStatisticAnnotationsRequest_TimestampFilter)
+		v.TimestampFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListDataQualityStatisticAnnotationsOutput struct {
 
 	// A list of StatisticAnnotation applied to the Statistic
@@ -61,74 +86,48 @@ type ListDataQualityStatisticAnnotationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityStatisticAnnotationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityStatisticAnnotationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityStatisticAnnotationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationList(s, schemas.ListDataQualityStatisticAnnotationsResponse_Annotations, v.Annotations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityStatisticAnnotationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataQualityStatisticAnnotationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataQualityStatisticAnnotationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataQualityStatisticAnnotationsResponse_Annotations:
+			return deserializeAnnotationList(d, schemas.ListDataQualityStatisticAnnotationsResponse_Annotations, &v.Annotations)
+		case schemas.ListDataQualityStatisticAnnotationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataQualityStatisticAnnotationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataQualityStatisticAnnotationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityStatisticAnnotations, schemas.ListDataQualityStatisticAnnotationsRequest, schemas.ListDataQualityStatisticAnnotationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityStatisticAnnotations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityStatisticAnnotations, schemas.ListDataQualityStatisticAnnotationsRequest, schemas.ListDataQualityStatisticAnnotationsResponse), output: &ListDataQualityStatisticAnnotationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataQualityStatisticAnnotations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataQualityStatisticAnnotations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataQualityStatisticAnnotations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +142,8 @@ func (c *Client) addOperationListDataQualityStatisticAnnotationsMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListDataQualityStatisticAnnotations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataQualityStatisticAnnotations",
-	}
 }

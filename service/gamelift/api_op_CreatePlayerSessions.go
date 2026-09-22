@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -53,8 +52,9 @@ func (c *Client) CreatePlayerSessions(ctx context.Context, params *CreatePlayerS
 type CreatePlayerSessionsInput struct {
 
 	// An identifier for the game session that is unique across all regions to add
-	// players to. The value is always a full ARN in the following format:
-	// arn:aws:gamelift:::gamesession// .
+	// players to. The value is always a full ARN in the following format: For Home
+	// Region game session - arn:aws:gamelift:::gamesession// . For Remote Location
+	// game session - arn:aws:gamelift:::gamesession/// .
 	//
 	// This member is required.
 	GameSessionId *string
@@ -74,6 +74,20 @@ type CreatePlayerSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlayerSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlayerSessionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlayerSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.CreatePlayerSessionsInput_GameSessionId, *v.GameSessionId)
+	}
+	serializePlayerDataMap(s, schemas.CreatePlayerSessionsInput_PlayerDataMap, v.PlayerDataMap)
+	serializePlayerIdList(s, schemas.CreatePlayerSessionsInput_PlayerIds, v.PlayerIds)
+}
+
 type CreatePlayerSessionsOutput struct {
 
 	// A collection of player session objects created for the added players.
@@ -85,65 +99,39 @@ type CreatePlayerSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlayerSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlayerSessionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlayerSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePlayerSessionList(s, schemas.CreatePlayerSessionsOutput_PlayerSessions, v.PlayerSessions)
+}
+func (v *CreatePlayerSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePlayerSessionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePlayerSessionsOutput_PlayerSessions:
+			return deserializePlayerSessionList(d, schemas.CreatePlayerSessionsOutput_PlayerSessions, &v.PlayerSessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePlayerSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlayerSessions, schemas.CreatePlayerSessionsInput, schemas.CreatePlayerSessionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreatePlayerSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlayerSessions, schemas.CreatePlayerSessionsInput, schemas.CreatePlayerSessionsOutput), output: &CreatePlayerSessionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreatePlayerSessions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePlayerSessions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -153,12 +141,6 @@ func (c *Client) addOperationCreatePlayerSessionsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreatePlayerSessionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePlayerSessions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +155,8 @@ func (c *Client) addOperationCreatePlayerSessionsMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePlayerSessions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePlayerSessions",
-	}
 }

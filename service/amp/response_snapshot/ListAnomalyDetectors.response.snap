@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"anomalyDetectors":[{"alias":"__Alias__","anomalyDetectorId":"__AnomalyDetectorId__","arn":"__Arn__","createdAt":946684800,"modifiedAt":946684800,"status":{"statusCode":"CREATING","statusReason":"__StatusReason__"},"tags":{"key0":"__Value__"}},{"alias":"__Alias__","anomalyDetectorId":"__AnomalyDetectorId__","arn":"__Arn__","createdAt":946684800,"modifiedAt":946684800,"status":{"statusCode":"CREATING","statusReason":"__StatusReason__"},"tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

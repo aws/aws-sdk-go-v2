@@ -1,0 +1,5 @@
+POST /connector/update
+
+Content-Type: application/json
+
+{"connectorArn":"__ConnectorArn__","description":"__Description__","providerDetail":{"azure":{"autoInstallVMScanner":true,"azureRegions":["__Member__","__Member__"],"scopeConfiguration":{"containerImageScanning":{"scopeType":"TENANT","scopeValues":["__Member__","__Member__"]},"serverlessScanning":{"scopeType":"TENANT","scopeValues":["__Member__","__Member__"]},"vmScanning":{"scopeType":"TENANT","scopeValues":["__Member__","__Member__"]}}}}}

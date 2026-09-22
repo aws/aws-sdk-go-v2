@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disables the APNs channel for an application and deletes any existing settings
@@ -39,6 +38,18 @@ type DeleteApnsChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApnsChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApnsChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApnsChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DeleteApnsChannelRequest_ApplicationId, *v.ApplicationId)
+	}
+}
+
 type DeleteApnsChannelOutput struct {
 
 	// Provides information about the status and settings of the APNs (Apple Push
@@ -53,77 +64,50 @@ type DeleteApnsChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApnsChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApnsChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApnsChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.APNSChannelResponse != nil {
+		s.WriteStruct(schemas.DeleteApnsChannelResponse_APNSChannelResponse)
+		v.APNSChannelResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteApnsChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApnsChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteApnsChannelResponse_APNSChannelResponse:
+			v.APNSChannelResponse = &types.APNSChannelResponse{}
+			return v.APNSChannelResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApnsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApnsChannel, schemas.DeleteApnsChannelRequest, schemas.DeleteApnsChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApnsChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApnsChannel, schemas.DeleteApnsChannelRequest, schemas.DeleteApnsChannelResponse), output: &DeleteApnsChannelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApnsChannel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteApnsChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteApnsChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApnsChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +122,8 @@ func (c *Client) addOperationDeleteApnsChannelMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteApnsChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteApnsChannel",
-	}
 }

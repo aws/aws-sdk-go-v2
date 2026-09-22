@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/DescribeMatchmaking
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡iTicketIds‚j__Member__j__Member__

@@ -4,11 +4,10 @@ package mailmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetRuleSetInput struct {
 	RuleSetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleSetId != nil {
+		s.WriteString(schemas.GetRuleSetRequest_RuleSetId, *v.RuleSetId)
+	}
 }
 
 type GetRuleSetOutput struct {
@@ -76,77 +87,78 @@ type GetRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRuleSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.GetRuleSetResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.LastModificationDate != nil {
+		s.WriteTime(schemas.GetRuleSetResponse_LastModificationDate, *v.LastModificationDate)
+	}
+	if v.RuleSetArn != nil {
+		s.WriteString(schemas.GetRuleSetResponse_RuleSetArn, *v.RuleSetArn)
+	}
+	if v.RuleSetId != nil {
+		s.WriteString(schemas.GetRuleSetResponse_RuleSetId, *v.RuleSetId)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.GetRuleSetResponse_RuleSetName, *v.RuleSetName)
+	}
+	serializeRules(s, schemas.GetRuleSetResponse_Rules, v.Rules)
+}
+func (v *GetRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRuleSetResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetRuleSetResponse_CreatedDate, v.CreatedDate)
+		case schemas.GetRuleSetResponse_LastModificationDate:
+			v.LastModificationDate = new(time.Time)
+			return d.ReadTime(schemas.GetRuleSetResponse_LastModificationDate, v.LastModificationDate)
+		case schemas.GetRuleSetResponse_RuleSetArn:
+			v.RuleSetArn = new(string)
+			return d.ReadString(schemas.GetRuleSetResponse_RuleSetArn, v.RuleSetArn)
+		case schemas.GetRuleSetResponse_RuleSetId:
+			v.RuleSetId = new(string)
+			return d.ReadString(schemas.GetRuleSetResponse_RuleSetId, v.RuleSetId)
+		case schemas.GetRuleSetResponse_RuleSetName:
+			v.RuleSetName = new(string)
+			return d.ReadString(schemas.GetRuleSetResponse_RuleSetName, v.RuleSetName)
+		case schemas.GetRuleSetResponse_Rules:
+			return deserializeRules(d, schemas.GetRuleSetResponse_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRuleSet, schemas.GetRuleSetRequest, schemas.GetRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRuleSet, schemas.GetRuleSetRequest, schemas.GetRuleSetResponse), output: &GetRuleSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRuleSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRuleSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRuleSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRuleSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +173,8 @@ func (c *Client) addOperationGetRuleSetMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRuleSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRuleSet",
-	}
 }

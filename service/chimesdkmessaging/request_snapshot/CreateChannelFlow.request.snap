@@ -1,0 +1,5 @@
+POST /channel-flows
+
+Content-Type: application/json
+
+{"AppInstanceArn":"__AppInstanceArn__","ClientRequestToken":"__ClientRequestToken__","Name":"__Name__","Processors":[{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"},{"Configuration":{"Lambda":{"InvocationType":"ASYNC","ResourceArn":"__ResourceArn__"}},"ExecutionOrder":1,"FallbackAction":"CONTINUE","Name":"__Name__"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

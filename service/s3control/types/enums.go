@@ -806,6 +806,25 @@ func (RequestedJobStatus) Values() []RequestedJobStatus {
 	}
 }
 
+type S3AnnotationDirective string
+
+// Enum values for S3AnnotationDirective
+const (
+	S3AnnotationDirectiveCopy    S3AnnotationDirective = "COPY"
+	S3AnnotationDirectiveExclude S3AnnotationDirective = "EXCLUDE"
+)
+
+// Values returns all known values for S3AnnotationDirective. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3AnnotationDirective) Values() []S3AnnotationDirective {
+	return []S3AnnotationDirective{
+		"COPY",
+		"EXCLUDE",
+	}
+}
+
 type S3CannedAccessControlList string
 
 // Enum values for S3CannedAccessControlList
@@ -929,6 +948,25 @@ func (S3MetadataDirective) Values() []S3MetadataDirective {
 	}
 }
 
+type S3ObjectLockEventHold string
+
+// Enum values for S3ObjectLockEventHold
+const (
+	S3ObjectLockEventHoldOn  S3ObjectLockEventHold = "ON"
+	S3ObjectLockEventHoldOff S3ObjectLockEventHold = "OFF"
+)
+
+// Values returns all known values for S3ObjectLockEventHold. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3ObjectLockEventHold) Values() []S3ObjectLockEventHold {
+	return []S3ObjectLockEventHold{
+		"ON",
+		"OFF",
+	}
+}
+
 type S3ObjectLockLegalHoldStatus string
 
 // Enum values for S3ObjectLockLegalHoldStatus
@@ -964,6 +1002,26 @@ func (S3ObjectLockMode) Values() []S3ObjectLockMode {
 	return []S3ObjectLockMode{
 		"COMPLIANCE",
 		"GOVERNANCE",
+	}
+}
+
+type S3ObjectLockRetentionEventHold string
+
+// Enum values for S3ObjectLockRetentionEventHold
+const (
+	S3ObjectLockRetentionEventHoldOn  S3ObjectLockRetentionEventHold = "ON"
+	S3ObjectLockRetentionEventHoldOff S3ObjectLockRetentionEventHold = "OFF"
+)
+
+// Values returns all known values for S3ObjectLockRetentionEventHold. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3ObjectLockRetentionEventHold) Values() []S3ObjectLockRetentionEventHold {
+	return []S3ObjectLockRetentionEventHold{
+		"ON",
+		"OFF",
 	}
 }
 

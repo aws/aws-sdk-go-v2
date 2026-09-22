@@ -1,0 +1,5 @@
+POST /v1/introspect?x-amz-client-auth-method=iam
+
+Content-Type: application/json
+
+{"token":"__Token__","token_type_hint":"__TokenTypeHint__"}

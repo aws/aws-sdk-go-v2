@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.BatchGetPreparedStatement
+
+{"PreparedStatements":[{"Description":"__Description__","LastModifiedTime":946684800,"QueryStatement":"__QueryStatement__","StatementName":"__StatementName__","WorkGroupName":"__WorkGroupName__"},{"Description":"__Description__","LastModifiedTime":946684800,"QueryStatement":"__QueryStatement__","StatementName":"__StatementName__","WorkGroupName":"__WorkGroupName__"}],"UnprocessedPreparedStatementNames":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","StatementName":"__StatementName__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","StatementName":"__StatementName__"}]}

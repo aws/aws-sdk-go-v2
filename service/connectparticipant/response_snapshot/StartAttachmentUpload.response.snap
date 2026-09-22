@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AttachmentId":"__AttachmentId__","UploadMetadata":{"HeadersToInclude":{"key0":"__Value__"},"Url":"__Url__","UrlExpiry":"__UrlExpiry__"}}

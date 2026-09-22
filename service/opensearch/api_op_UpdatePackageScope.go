@@ -4,11 +4,10 @@ package opensearch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the scope of a package. Scope of the package defines users who can view
@@ -49,6 +48,22 @@ type UpdatePackageScopeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageScopeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageScopeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageScopeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != "" {
+		s.WriteString(schemas.UpdatePackageScopeRequest_Operation, string(v.Operation))
+	}
+	if v.PackageID != nil {
+		s.WriteString(schemas.UpdatePackageScopeRequest_PackageID, *v.PackageID)
+	}
+	serializePackageUserList(s, schemas.UpdatePackageScopeRequest_PackageUserList, v.PackageUserList)
+}
+
 type UpdatePackageScopeOutput struct {
 
 	// The operation that was performed on the package scope.
@@ -66,77 +81,61 @@ type UpdatePackageScopeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePackageScopeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePackageScopeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePackageScopeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != "" {
+		s.WriteString(schemas.UpdatePackageScopeResponse_Operation, string(v.Operation))
+	}
+	if v.PackageID != nil {
+		s.WriteString(schemas.UpdatePackageScopeResponse_PackageID, *v.PackageID)
+	}
+	serializePackageUserList(s, schemas.UpdatePackageScopeResponse_PackageUserList, v.PackageUserList)
+}
+func (v *UpdatePackageScopeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePackageScopeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePackageScopeResponse_Operation:
+			var ev string
+			if err := d.ReadString(schemas.UpdatePackageScopeResponse_Operation, &ev); err != nil {
+				return err
+			}
+			v.Operation = types.PackageScopeOperationEnum(ev)
+			return nil
+		case schemas.UpdatePackageScopeResponse_PackageID:
+			v.PackageID = new(string)
+			return d.ReadString(schemas.UpdatePackageScopeResponse_PackageID, v.PackageID)
+		case schemas.UpdatePackageScopeResponse_PackageUserList:
+			return deserializePackageUserList(d, schemas.UpdatePackageScopeResponse_PackageUserList, &v.PackageUserList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePackageScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageScope, schemas.UpdatePackageScopeRequest, schemas.UpdatePackageScopeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePackageScope{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePackageScope, schemas.UpdatePackageScopeRequest, schemas.UpdatePackageScopeResponse), output: &UpdatePackageScopeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePackageScope{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePackageScope"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePackageScopeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePackageScope(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +150,8 @@ func (c *Client) addOperationUpdatePackageScopeMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePackageScope(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePackageScope",
-	}
 }

@@ -4,11 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -30,23 +27,32 @@ func (c *Client) UpdateApiKeyCredentialProvider(ctx context.Context, params *Upd
 
 type UpdateApiKeyCredentialProviderInput struct {
 
-	// The new API key to use for authentication. This value replaces the existing API
-	// key and is encrypted and stored securely.
-	//
-	// This member is required.
-	ApiKey *string
-
 	// The name of the API key credential provider to update.
 	//
 	// This member is required.
 	Name *string
+
+	// The new API key to use for authentication. This value replaces the existing API
+	// key and is encrypted and stored securely.
+	ApiKey *string
+
+	// A reference to the Amazon Web Services Secrets Manager secret that stores the
+	// API key. This includes the secret ID and the JSON key used to extract the API
+	// key value from the secret. Required when apiKeySecretSource is set to EXTERNAL .
+	ApiKeySecretConfig *types.SecretReference
+
+	// The source type of the API key secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in Amazon Web
+	// Services Secrets Manager.
+	ApiKeySecretSource types.SecretSourceType
 
 	noSmithyDocumentSerde
 }
 
 type UpdateApiKeyCredentialProviderOutput struct {
 
-	// The Amazon Resource Name (ARN) of the API key secret in AWS Secrets Manager.
+	// The Amazon Resource Name (ARN) of the API key secret in Amazon Web Services
+	// Secrets Manager.
 	//
 	// This member is required.
 	ApiKeySecretArn *types.Secret
@@ -71,6 +77,15 @@ type UpdateApiKeyCredentialProviderOutput struct {
 	// This member is required.
 	Name *string
 
+	// The JSON key used to extract the API key value from the Amazon Web Services
+	// Secrets Manager secret.
+	ApiKeySecretJsonKey *string
+
+	// The source type of the API key secret. Either MANAGED if the secret is managed
+	// by the service, or EXTERNAL if managed by the user in Amazon Web Services
+	// Secrets Manager.
+	ApiKeySecretSource types.SecretSourceType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -78,9 +93,6 @@ type UpdateApiKeyCredentialProviderOutput struct {
 }
 
 func (c *Client) addOperationUpdateApiKeyCredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApiKeyCredentialProvider{}, middleware.After)
 	if err != nil {
 		return err
@@ -89,65 +101,20 @@ func (c *Client) addOperationUpdateApiKeyCredentialProviderMiddlewares(stack *mi
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApiKeyCredentialProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateApiKeyCredentialProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApiKeyCredentialProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +129,8 @@ func (c *Client) addOperationUpdateApiKeyCredentialProviderMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateApiKeyCredentialProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateApiKeyCredentialProvider",
-	}
 }

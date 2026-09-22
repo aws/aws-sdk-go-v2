@@ -1,0 +1,3 @@
+GET /v1/package/version/asset?asset=__Asset__&domain=__Domain__&domain-owner=__DomainOwner__&format=npm&namespace=__Namespace__&package=__Package__&repository=__Repository__&revision=__PackageVersionRevision__&version=__PackageVersion__
+
+

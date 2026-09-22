@@ -1,0 +1,6 @@
+POST /identitypools/__IdentityPoolId__/identities/__IdentityId__/datasets/__DatasetName__
+
+Content-Type: application/json
+X-Amz-Client-Context: __ClientContext__
+
+{"DeviceId":"__DeviceId__","RecordPatches":[{"DeviceLastModifiedDate":946684800,"Key":"__Key__","Op":"replace","SyncCount":1,"Value":"__Value__"},{"DeviceLastModifiedDate":946684800,"Key":"__Key__","Op":"replace","SyncCount":1,"Value":"__Value__"}],"SyncSessionToken":"__SyncSessionToken__"}

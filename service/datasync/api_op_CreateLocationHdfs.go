@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a transfer location for a Hadoop Distributed File System (HDFS).
@@ -47,8 +46,14 @@ type CreateLocationHdfsInput struct {
 
 	// The NameNode that manages the HDFS namespace. The NameNode performs operations
 	// such as opening, closing, and renaming files and directories. The NameNode
-	// contains the information to map blocks of data to the DataNodes. You can use
-	// only one NameNode.
+	// contains the information to map blocks of data to the DataNodes.
+	//
+	// The number of NameNodes you can specify depends on the task mode:
+	//
+	//   - Enhanced mode – You can specify multiple NameNodes for HDFS High
+	//   Availability (HA) configurations.
+	//
+	//   - Basic mode – You can specify only one NameNode.
 	//
 	// This member is required.
 	NameNodes []types.HdfsNameNode
@@ -144,6 +149,60 @@ type CreateLocationHdfsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationHdfsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationHdfsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationHdfsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentArnList(s, schemas.CreateLocationHdfsRequest_AgentArns, v.AgentArns)
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.CreateLocationHdfsRequest_AuthenticationType, string(v.AuthenticationType))
+	}
+	if v.BlockSize != nil {
+		s.WriteInt32(schemas.CreateLocationHdfsRequest_BlockSize, *v.BlockSize)
+	}
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationHdfsRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationHdfsRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KerberosKeytab != nil {
+		s.WriteBlob(schemas.CreateLocationHdfsRequest_KerberosKeytab, v.KerberosKeytab)
+	}
+	if v.KerberosKrb5Conf != nil {
+		s.WriteBlob(schemas.CreateLocationHdfsRequest_KerberosKrb5Conf, v.KerberosKrb5Conf)
+	}
+	if v.KerberosPrincipal != nil {
+		s.WriteString(schemas.CreateLocationHdfsRequest_KerberosPrincipal, *v.KerberosPrincipal)
+	}
+	if v.KmsKeyProviderUri != nil {
+		s.WriteString(schemas.CreateLocationHdfsRequest_KmsKeyProviderUri, *v.KmsKeyProviderUri)
+	}
+	serializeHdfsNameNodeList(s, schemas.CreateLocationHdfsRequest_NameNodes, v.NameNodes)
+	if v.QopConfiguration != nil {
+		s.WriteStruct(schemas.CreateLocationHdfsRequest_QopConfiguration)
+		v.QopConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicationFactor != nil {
+		s.WriteInt32(schemas.CreateLocationHdfsRequest_ReplicationFactor, *v.ReplicationFactor)
+	}
+	if v.SimpleUser != nil {
+		s.WriteString(schemas.CreateLocationHdfsRequest_SimpleUser, *v.SimpleUser)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationHdfsRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationHdfsRequest_Tags, v.Tags)
+}
+
 type CreateLocationHdfsOutput struct {
 
 	// The ARN of the source HDFS cluster location that you create.
@@ -155,77 +214,48 @@ type CreateLocationHdfsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationHdfsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationHdfsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationHdfsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationHdfsResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationHdfsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationHdfsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationHdfsResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationHdfsResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationHdfsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationHdfs, schemas.CreateLocationHdfsRequest, schemas.CreateLocationHdfsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationHdfs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationHdfs, schemas.CreateLocationHdfsRequest, schemas.CreateLocationHdfsResponse), output: &CreateLocationHdfsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationHdfs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLocationHdfs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLocationHdfsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationHdfs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -240,22 +270,8 @@ func (c *Client) addOperationCreateLocationHdfsMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLocationHdfs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLocationHdfs",
-	}
 }

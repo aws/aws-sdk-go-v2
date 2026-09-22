@@ -1,0 +1,14 @@
+200
+Content-Type: application/json
+X-Amz-Copy-Source-Version-Id: __CopySourceVersionId__
+X-Amz-Expiration: __Expiration__
+X-Amz-Request-Charged: __RequestCharged__
+X-Amz-Server-Side-Encryption: __ServerSideEncryption__
+X-Amz-Server-Side-Encryption-Aws-Kms-Key-Id: __SSEKMSKeyId__
+X-Amz-Server-Side-Encryption-Bucket-Key-Enabled: true
+X-Amz-Server-Side-Encryption-Context: __SSEKMSEncryptionContext__
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+X-Amz-Version-Id: __VersionId__
+
+{"ChecksumCRC32":"__ChecksumCRC32__","ChecksumCRC32C":"__ChecksumCRC32C__","ChecksumCRC64NVME":"__ChecksumCRC64NVME__","ChecksumSHA1":"__ChecksumSHA1__","ChecksumSHA256":"__ChecksumSHA256__","ChecksumType":"__ChecksumType__","ETag":"__ETag__","LastModified":946684800}

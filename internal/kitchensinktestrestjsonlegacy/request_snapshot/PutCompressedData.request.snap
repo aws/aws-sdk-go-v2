@@ -1,0 +1,5 @@
+POST /compressed
+
+Content-Type: application/json
+
+{"data":"__Data__"}

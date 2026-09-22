@@ -4,11 +4,10 @@ package sagemakerfeaturestoreruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a Record from a FeatureGroup in the OnlineStore . Feature Store supports
@@ -39,7 +38,7 @@ import (
 // using Amazon Athena or Apache Spark. For information on how to hard delete a
 // record from the OfflineStore with the Iceberg table format enabled, see [Delete records from the offline store].
 //
-// [Delete records from the offline store]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records-offline-store.html#feature-store-delete-records-offline-store
+// [Delete records from the offline store]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records.html#feature-store-delete-records-offline-store
 func (c *Client) DeleteRecord(ctx context.Context, params *DeleteRecordInput, optFns ...func(*Options)) (*DeleteRecordOutput, error) {
 	if params == nil {
 		params = &DeleteRecordInput{}
@@ -87,6 +86,28 @@ type DeleteRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRecordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionMode != "" {
+		s.WriteString(schemas.DeleteRecordRequest_DeletionMode, string(v.DeletionMode))
+	}
+	if v.EventTime != nil {
+		s.WriteString(schemas.DeleteRecordRequest_EventTime, *v.EventTime)
+	}
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.DeleteRecordRequest_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.RecordIdentifierValueAsString != nil {
+		s.WriteString(schemas.DeleteRecordRequest_RecordIdentifierValueAsString, *v.RecordIdentifierValueAsString)
+	}
+	serializeTargetStores(s, schemas.DeleteRecordRequest_TargetStores, v.TargetStores)
+}
+
 type DeleteRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -94,77 +115,42 @@ type DeleteRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecord, schemas.DeleteRecordRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRecord, schemas.DeleteRecordRequest, nil), output: &DeleteRecordOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteRecord{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRecord"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteRecordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRecord(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +165,8 @@ func (c *Client) addOperationDeleteRecordMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteRecord(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteRecord",
-	}
 }

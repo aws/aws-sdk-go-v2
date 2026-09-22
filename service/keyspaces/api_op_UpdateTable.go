@@ -4,11 +4,10 @@ package keyspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds new columns to the table or updates one of the table's settings, for
@@ -155,6 +154,110 @@ type UpdateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnDefinitionList(s, schemas.UpdateTableRequest_addColumns, v.AddColumns)
+	if v.AutoScalingSpecification != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_autoScalingSpecification)
+		v.AutoScalingSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CapacitySpecification != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_capacitySpecification)
+		v.CapacitySpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CdcSpecification != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_cdcSpecification)
+		v.CdcSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientSideTimestamps != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_clientSideTimestamps)
+		v.ClientSideTimestamps.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultTimeToLive != nil {
+		s.WriteInt32(schemas.UpdateTableRequest_defaultTimeToLive, *v.DefaultTimeToLive)
+	}
+	if v.EncryptionSpecification != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_encryptionSpecification)
+		v.EncryptionSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.UpdateTableRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.PointInTimeRecovery != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_pointInTimeRecovery)
+		v.PointInTimeRecovery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeReplicaSpecificationList(s, schemas.UpdateTableRequest_replicaSpecifications, v.ReplicaSpecifications)
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateTableRequest_tableName, *v.TableName)
+	}
+	if v.Ttl != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_ttl)
+		v.Ttl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WarmThroughputSpecification != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_warmThroughputSpecification)
+		v.WarmThroughputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTableRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTableRequest_addColumns:
+			return deserializeColumnDefinitionList(d, schemas.UpdateTableRequest_addColumns, &v.AddColumns)
+		case schemas.UpdateTableRequest_autoScalingSpecification:
+			v.AutoScalingSpecification = &types.AutoScalingSpecification{}
+			return v.AutoScalingSpecification.Deserialize(d)
+		case schemas.UpdateTableRequest_capacitySpecification:
+			v.CapacitySpecification = &types.CapacitySpecification{}
+			return v.CapacitySpecification.Deserialize(d)
+		case schemas.UpdateTableRequest_cdcSpecification:
+			v.CdcSpecification = &types.CdcSpecification{}
+			return v.CdcSpecification.Deserialize(d)
+		case schemas.UpdateTableRequest_clientSideTimestamps:
+			v.ClientSideTimestamps = &types.ClientSideTimestamps{}
+			return v.ClientSideTimestamps.Deserialize(d)
+		case schemas.UpdateTableRequest_defaultTimeToLive:
+			v.DefaultTimeToLive = new(int32)
+			return d.ReadInt32(schemas.UpdateTableRequest_defaultTimeToLive, v.DefaultTimeToLive)
+		case schemas.UpdateTableRequest_encryptionSpecification:
+			v.EncryptionSpecification = &types.EncryptionSpecification{}
+			return v.EncryptionSpecification.Deserialize(d)
+		case schemas.UpdateTableRequest_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.UpdateTableRequest_keyspaceName, v.KeyspaceName)
+		case schemas.UpdateTableRequest_pointInTimeRecovery:
+			v.PointInTimeRecovery = &types.PointInTimeRecovery{}
+			return v.PointInTimeRecovery.Deserialize(d)
+		case schemas.UpdateTableRequest_replicaSpecifications:
+			return deserializeReplicaSpecificationList(d, schemas.UpdateTableRequest_replicaSpecifications, &v.ReplicaSpecifications)
+		case schemas.UpdateTableRequest_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.UpdateTableRequest_tableName, v.TableName)
+		case schemas.UpdateTableRequest_ttl:
+			v.Ttl = &types.TimeToLive{}
+			return v.Ttl.Deserialize(d)
+		case schemas.UpdateTableRequest_warmThroughputSpecification:
+			v.WarmThroughputSpecification = &types.WarmThroughputSpecification{}
+			return v.WarmThroughputSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type UpdateTableOutput struct {
 
 	// The Amazon Resource Name (ARN) of the modified table.
@@ -168,77 +271,48 @@ type UpdateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateTableResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *UpdateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTableResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.UpdateTableResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTable, schemas.UpdateTableRequest, schemas.UpdateTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTable, schemas.UpdateTableRequest, schemas.UpdateTableResponse), output: &UpdateTableOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateTable{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -253,22 +327,8 @@ func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateTable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTable",
-	}
 }

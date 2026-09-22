@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +51,27 @@ type ListQueueEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueEnvironmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueEnvironmentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueEnvironmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListQueueEnvironmentsRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueueEnvironmentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueEnvironmentsRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListQueueEnvironmentsRequest_queueId, *v.QueueId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListQueueEnvironmentsOutput struct {
 
@@ -72,65 +94,45 @@ type ListQueueEnvironmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueueEnvironmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueueEnvironmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueueEnvironmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQueueEnvironmentSummaries(s, schemas.ListQueueEnvironmentsResponse_environments, v.Environments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueueEnvironmentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListQueueEnvironmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueueEnvironmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueueEnvironmentsResponse_environments:
+			return deserializeQueueEnvironmentSummaries(d, schemas.ListQueueEnvironmentsResponse_environments, &v.Environments)
+		case schemas.ListQueueEnvironmentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueueEnvironmentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueueEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueEnvironments, schemas.ListQueueEnvironmentsRequest, schemas.ListQueueEnvironmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQueueEnvironments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueueEnvironments, schemas.ListQueueEnvironmentsRequest, schemas.ListQueueEnvironmentsResponse), output: &ListQueueEnvironmentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQueueEnvironments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListQueueEnvironments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -140,12 +142,6 @@ func (c *Client) addOperationListQueueEnvironmentsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpListQueueEnvironmentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListQueueEnvironments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +154,6 @@ func (c *Client) addOperationListQueueEnvironmentsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -293,11 +283,3 @@ type ListQueueEnvironmentsAPIClient interface {
 }
 
 var _ ListQueueEnvironmentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListQueueEnvironments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListQueueEnvironments",
-	}
-}

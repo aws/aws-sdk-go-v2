@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.ListSignalCatalogs
+
+{"nextToken":"__NextToken__","summaries":[{"arn":"__Arn__","creationTime":946684800,"lastModificationTime":946684800,"name":"__Name__"},{"arn":"__Arn__","creationTime":946684800,"lastModificationTime":946684800,"name":"__Name__"}]}

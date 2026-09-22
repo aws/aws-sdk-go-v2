@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Opens ports for a specific Amazon Lightsail instance, and specifies the IP
@@ -50,6 +49,23 @@ type OpenInstancePublicPortsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenInstancePublicPortsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenInstancePublicPortsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenInstancePublicPortsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceName != nil {
+		s.WriteString(schemas.OpenInstancePublicPortsRequest_instanceName, *v.InstanceName)
+	}
+	if v.PortInfo != nil {
+		s.WriteStruct(schemas.OpenInstancePublicPortsRequest_portInfo)
+		v.PortInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type OpenInstancePublicPortsOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -63,77 +79,50 @@ type OpenInstancePublicPortsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OpenInstancePublicPortsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OpenInstancePublicPortsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OpenInstancePublicPortsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.OpenInstancePublicPortsResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OpenInstancePublicPortsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OpenInstancePublicPortsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OpenInstancePublicPortsResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOpenInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OpenInstancePublicPorts, schemas.OpenInstancePublicPortsRequest, schemas.OpenInstancePublicPortsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOpenInstancePublicPorts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OpenInstancePublicPorts, schemas.OpenInstancePublicPortsRequest, schemas.OpenInstancePublicPortsResult), output: &OpenInstancePublicPortsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpOpenInstancePublicPorts{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "OpenInstancePublicPorts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpOpenInstancePublicPortsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOpenInstancePublicPorts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +137,8 @@ func (c *Client) addOperationOpenInstancePublicPortsMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opOpenInstancePublicPorts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "OpenInstancePublicPorts",
-	}
 }

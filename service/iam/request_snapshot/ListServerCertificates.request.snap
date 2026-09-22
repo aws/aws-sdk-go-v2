@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListServerCertificates&Marker=__Marker__&MaxItems=1&PathPrefix=__PathPrefix__&Version=2010-05-08

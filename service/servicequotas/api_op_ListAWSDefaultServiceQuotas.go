@@ -5,10 +5,10 @@ package servicequotas
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the default values for the quotas for the specified Amazon Web Services
@@ -57,6 +57,24 @@ type ListAWSDefaultServiceQuotasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAWSDefaultServiceQuotasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAWSDefaultServiceQuotasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAWSDefaultServiceQuotasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAWSDefaultServiceQuotasRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAWSDefaultServiceQuotasRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ListAWSDefaultServiceQuotasRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type ListAWSDefaultServiceQuotasOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -74,77 +92,51 @@ type ListAWSDefaultServiceQuotasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAWSDefaultServiceQuotasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAWSDefaultServiceQuotasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAWSDefaultServiceQuotasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAWSDefaultServiceQuotasResponse_NextToken, *v.NextToken)
+	}
+	serializeServiceQuotaListDefinition(s, schemas.ListAWSDefaultServiceQuotasResponse_Quotas, v.Quotas)
+}
+func (v *ListAWSDefaultServiceQuotasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAWSDefaultServiceQuotasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAWSDefaultServiceQuotasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAWSDefaultServiceQuotasResponse_NextToken, v.NextToken)
+		case schemas.ListAWSDefaultServiceQuotasResponse_Quotas:
+			return deserializeServiceQuotaListDefinition(d, schemas.ListAWSDefaultServiceQuotasResponse_Quotas, &v.Quotas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAWSDefaultServiceQuotas, schemas.ListAWSDefaultServiceQuotasRequest, schemas.ListAWSDefaultServiceQuotasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAWSDefaultServiceQuotas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAWSDefaultServiceQuotas, schemas.ListAWSDefaultServiceQuotasRequest, schemas.ListAWSDefaultServiceQuotasResponse), output: &ListAWSDefaultServiceQuotasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAWSDefaultServiceQuotas{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAWSDefaultServiceQuotas"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAWSDefaultServiceQuotasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAWSDefaultServiceQuotas(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +149,6 @@ func (c *Client) addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -275,11 +261,3 @@ type ListAWSDefaultServiceQuotasAPIClient interface {
 }
 
 var _ ListAWSDefaultServiceQuotasAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAWSDefaultServiceQuotas(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAWSDefaultServiceQuotas",
-	}
-}

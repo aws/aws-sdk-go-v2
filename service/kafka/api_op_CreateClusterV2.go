@@ -4,11 +4,10 @@ package kafka
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new MSK cluster.
@@ -46,6 +45,29 @@ type CreateClusterV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateClusterV2Request_ClusterName, *v.ClusterName)
+	}
+	if v.Provisioned != nil {
+		s.WriteStruct(schemas.CreateClusterV2Request_Provisioned)
+		v.Provisioned.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Serverless != nil {
+		s.WriteStruct(schemas.CreateClusterV2Request_Serverless)
+		v.Serverless.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOf__string(s, schemas.CreateClusterV2Request_Tags, v.Tags)
+}
+
 type CreateClusterV2Output struct {
 
 	// The Amazon Resource Name (ARN) of the cluster.
@@ -67,77 +89,74 @@ type CreateClusterV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateClusterV2Response_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreateClusterV2Response_ClusterName, *v.ClusterName)
+	}
+	if v.ClusterType != "" {
+		s.WriteString(schemas.CreateClusterV2Response_ClusterType, string(v.ClusterType))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateClusterV2Response_State, string(v.State))
+	}
+}
+func (v *CreateClusterV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterV2Response_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.CreateClusterV2Response_ClusterArn, v.ClusterArn)
+		case schemas.CreateClusterV2Response_ClusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.CreateClusterV2Response_ClusterName, v.ClusterName)
+		case schemas.CreateClusterV2Response_ClusterType:
+			var ev string
+			if err := d.ReadString(schemas.CreateClusterV2Response_ClusterType, &ev); err != nil {
+				return err
+			}
+			v.ClusterType = types.ClusterType(ev)
+			return nil
+		case schemas.CreateClusterV2Response_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateClusterV2Response_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ClusterState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterV2, schemas.CreateClusterV2Request, schemas.CreateClusterV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateClusterV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterV2, schemas.CreateClusterV2Request, schemas.CreateClusterV2Response), output: &CreateClusterV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateClusterV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateClusterV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateClusterV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateClusterV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +171,8 @@ func (c *Client) addOperationCreateClusterV2Middlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateClusterV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateClusterV2",
-	}
 }

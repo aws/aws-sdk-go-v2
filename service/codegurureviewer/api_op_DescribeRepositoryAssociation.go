@@ -5,11 +5,11 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -47,6 +47,18 @@ type DescribeRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoryAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRepositoryAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRepositoryAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationArn != nil {
+		s.WriteString(schemas.DescribeRepositoryAssociationRequest_AssociationArn, *v.AssociationArn)
+	}
+}
+
 type DescribeRepositoryAssociationOutput struct {
 
 	// Information about the repository association.
@@ -69,77 +81,53 @@ type DescribeRepositoryAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRepositoryAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRepositoryAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRepositoryAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryAssociation != nil {
+		s.WriteStruct(schemas.DescribeRepositoryAssociationResponse_RepositoryAssociation)
+		v.RepositoryAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.DescribeRepositoryAssociationResponse_Tags, v.Tags)
+}
+func (v *DescribeRepositoryAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRepositoryAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRepositoryAssociationResponse_RepositoryAssociation:
+			v.RepositoryAssociation = &types.RepositoryAssociation{}
+			return v.RepositoryAssociation.Deserialize(d)
+		case schemas.DescribeRepositoryAssociationResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeRepositoryAssociationResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRepositoryAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepositoryAssociation, schemas.DescribeRepositoryAssociationRequest, schemas.DescribeRepositoryAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRepositoryAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRepositoryAssociation, schemas.DescribeRepositoryAssociationRequest, schemas.DescribeRepositoryAssociationResponse), output: &DescribeRepositoryAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRepositoryAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRepositoryAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRepositoryAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRepositoryAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +140,6 @@ func (c *Client) addOperationDescribeRepositoryAssociationMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -388,11 +370,3 @@ type DescribeRepositoryAssociationAPIClient interface {
 }
 
 var _ DescribeRepositoryAssociationAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeRepositoryAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRepositoryAssociation",
-	}
-}

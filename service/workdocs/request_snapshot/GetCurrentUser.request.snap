@@ -1,0 +1,4 @@
+GET /api/v1/me
+
+Authentication: __AuthenticationToken__
+

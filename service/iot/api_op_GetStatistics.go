@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the count, average, sum, minimum, maximum, sum of squares, variance,
@@ -53,6 +52,27 @@ type GetStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationField != nil {
+		s.WriteString(schemas.GetStatisticsRequest_aggregationField, *v.AggregationField)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.GetStatisticsRequest_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.GetStatisticsRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.GetStatisticsRequest_queryVersion, *v.QueryVersion)
+	}
+}
+
 type GetStatisticsOutput struct {
 
 	// The statistics returned by the Fleet Indexing service based on the query and
@@ -65,77 +85,50 @@ type GetStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Statistics != nil {
+		s.WriteStruct(schemas.GetStatisticsResponse_statistics)
+		v.Statistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStatisticsResponse_statistics:
+			v.Statistics = &types.Statistics{}
+			return v.Statistics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatistics, schemas.GetStatisticsRequest, schemas.GetStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatistics, schemas.GetStatisticsRequest, schemas.GetStatisticsResponse), output: &GetStatisticsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetStatistics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStatistics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetStatisticsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetStatistics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +143,8 @@ func (c *Client) addOperationGetStatisticsMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetStatistics",
-	}
 }

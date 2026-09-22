@@ -4,10 +4,9 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) MalformedContentTypeWithBody(ctx context.Context, params *MalformedContentTypeWithBodyInput, optFns ...func(*Options)) (*MalformedContentTypeWithBodyOutput, error) {
@@ -31,6 +30,28 @@ type MalformedContentTypeWithBodyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedContentTypeWithBodyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GreetingStruct)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedContentTypeWithBodyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hi != nil {
+		s.WriteString(schemas.GreetingStruct_hi, *v.Hi)
+	}
+}
+func (v *MalformedContentTypeWithBodyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GreetingStruct, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GreetingStruct_hi:
+			v.Hi = new(string)
+			return d.ReadString(schemas.GreetingStruct_hi, v.Hi)
+		}
+		return nil
+	})
+}
+
 type MalformedContentTypeWithBodyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -38,74 +59,39 @@ type MalformedContentTypeWithBodyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedContentTypeWithBodyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedContentTypeWithBodyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedContentTypeWithBodyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedContentTypeWithBodyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedContentTypeWithBody, schemas.GreetingStruct, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedContentTypeWithBody{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedContentTypeWithBody, schemas.GreetingStruct, nil), output: &MalformedContentTypeWithBodyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedContentTypeWithBody{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedContentTypeWithBody"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedContentTypeWithBody(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -120,22 +106,8 @@ func (c *Client) addOperationMalformedContentTypeWithBodyMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opMalformedContentTypeWithBody(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "MalformedContentTypeWithBody",
-	}
 }

@@ -5,10 +5,10 @@ package groundstation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of ground stations.
@@ -43,6 +43,40 @@ type ListGroundStationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroundStationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroundStationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroundStationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroundStationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroundStationsRequest_nextToken, *v.NextToken)
+	}
+	if v.SatelliteId != nil {
+		s.WriteString(schemas.ListGroundStationsRequest_satelliteId, *v.SatelliteId)
+	}
+}
+func (v *ListGroundStationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroundStationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroundStationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListGroundStationsRequest_maxResults, v.MaxResults)
+		case schemas.ListGroundStationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroundStationsRequest_nextToken, v.NextToken)
+		case schemas.ListGroundStationsRequest_satelliteId:
+			v.SatelliteId = new(string)
+			return d.ReadString(schemas.ListGroundStationsRequest_satelliteId, v.SatelliteId)
+		}
+		return nil
+	})
+}
+
 // Output for the ListGroundStations operation.
 type ListGroundStationsOutput struct {
 
@@ -59,74 +93,48 @@ type ListGroundStationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroundStationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroundStationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroundStationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroundStationList(s, schemas.ListGroundStationsResponse_groundStationList, v.GroundStationList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroundStationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGroundStationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroundStationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroundStationsResponse_groundStationList:
+			return deserializeGroundStationList(d, schemas.ListGroundStationsResponse_groundStationList, &v.GroundStationList)
+		case schemas.ListGroundStationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroundStationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroundStations, schemas.ListGroundStationsRequest, schemas.ListGroundStationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroundStations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroundStations, schemas.ListGroundStationsRequest, schemas.ListGroundStationsResponse), output: &ListGroundStationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroundStations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGroundStations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroundStations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,12 +147,6 @@ func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,11 +248,3 @@ type ListGroundStationsAPIClient interface {
 }
 
 var _ ListGroundStationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListGroundStations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListGroundStations",
-	}
-}

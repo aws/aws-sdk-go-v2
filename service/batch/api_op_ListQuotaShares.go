@@ -5,10 +5,10 @@ package batch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of Batch quota shares associated with a job queue.
@@ -57,6 +57,24 @@ type ListQuotaSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuotaSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQuotaSharesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuotaSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobQueue != nil {
+		s.WriteString(schemas.ListQuotaSharesRequest_jobQueue, *v.JobQueue)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQuotaSharesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQuotaSharesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListQuotaSharesOutput struct {
 
 	// The nextToken value to include in a future ListQuotaShares request. When the
@@ -74,77 +92,51 @@ type ListQuotaSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQuotaSharesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQuotaSharesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQuotaSharesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQuotaSharesResponse_nextToken, *v.NextToken)
+	}
+	serializeQuotaShareList(s, schemas.ListQuotaSharesResponse_quotaShares, v.QuotaShares)
+}
+func (v *ListQuotaSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQuotaSharesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQuotaSharesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQuotaSharesResponse_nextToken, v.NextToken)
+		case schemas.ListQuotaSharesResponse_quotaShares:
+			return deserializeQuotaShareList(d, schemas.ListQuotaSharesResponse_quotaShares, &v.QuotaShares)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQuotaSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuotaShares, schemas.ListQuotaSharesRequest, schemas.ListQuotaSharesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListQuotaShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQuotaShares, schemas.ListQuotaSharesRequest, schemas.ListQuotaSharesResponse), output: &ListQuotaSharesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListQuotaShares{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListQuotaShares"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListQuotaSharesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListQuotaShares(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +149,6 @@ func (c *Client) addOperationListQuotaSharesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +255,3 @@ type ListQuotaSharesAPIClient interface {
 }
 
 var _ ListQuotaSharesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListQuotaShares(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListQuotaShares",
-	}
-}

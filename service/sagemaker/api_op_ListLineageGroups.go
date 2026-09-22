@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -58,6 +58,33 @@ type ListLineageGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLineageGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLineageGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLineageGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListLineageGroupsRequest_CreatedAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListLineageGroupsRequest_CreatedBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLineageGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLineageGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListLineageGroupsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListLineageGroupsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListLineageGroupsOutput struct {
 
 	// A list of lineage groups and their properties.
@@ -73,74 +100,48 @@ type ListLineageGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLineageGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLineageGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLineageGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLineageGroupSummaries(s, schemas.ListLineageGroupsResponse_LineageGroupSummaries, v.LineageGroupSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLineageGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLineageGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLineageGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLineageGroupsResponse_LineageGroupSummaries:
+			return deserializeLineageGroupSummaries(d, schemas.ListLineageGroupsResponse_LineageGroupSummaries, &v.LineageGroupSummaries)
+		case schemas.ListLineageGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLineageGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLineageGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLineageGroups, schemas.ListLineageGroupsRequest, schemas.ListLineageGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLineageGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLineageGroups, schemas.ListLineageGroupsRequest, schemas.ListLineageGroupsResponse), output: &ListLineageGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLineageGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLineageGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLineageGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +154,6 @@ func (c *Client) addOperationListLineageGroupsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +255,3 @@ type ListLineageGroupsAPIClient interface {
 }
 
 var _ ListLineageGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLineageGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLineageGroups",
-	}
-}

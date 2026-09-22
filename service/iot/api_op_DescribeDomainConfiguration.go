@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,18 @@ type DescribeDomainConfigurationInput struct {
 	DomainConfigurationName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDomainConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainConfigurationName != nil {
+		s.WriteString(schemas.DescribeDomainConfigurationRequest_domainConfigurationName, *v.DomainConfigurationName)
+	}
 }
 
 type DescribeDomainConfigurationOutput struct {
@@ -125,77 +136,151 @@ type DescribeDomainConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationProtocol != "" {
+		s.WriteString(schemas.DescribeDomainConfigurationResponse_applicationProtocol, string(v.ApplicationProtocol))
+	}
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.DescribeDomainConfigurationResponse_authenticationType, string(v.AuthenticationType))
+	}
+	if v.AuthorizerConfig != nil {
+		s.WriteStruct(schemas.DescribeDomainConfigurationResponse_authorizerConfig)
+		v.AuthorizerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientCertificateConfig != nil {
+		s.WriteStruct(schemas.DescribeDomainConfigurationResponse_clientCertificateConfig)
+		v.ClientCertificateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainConfigurationArn != nil {
+		s.WriteString(schemas.DescribeDomainConfigurationResponse_domainConfigurationArn, *v.DomainConfigurationArn)
+	}
+	if v.DomainConfigurationName != nil {
+		s.WriteString(schemas.DescribeDomainConfigurationResponse_domainConfigurationName, *v.DomainConfigurationName)
+	}
+	if v.DomainConfigurationStatus != "" {
+		s.WriteString(schemas.DescribeDomainConfigurationResponse_domainConfigurationStatus, string(v.DomainConfigurationStatus))
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeDomainConfigurationResponse_domainName, *v.DomainName)
+	}
+	if v.DomainType != "" {
+		s.WriteString(schemas.DescribeDomainConfigurationResponse_domainType, string(v.DomainType))
+	}
+	if v.LastStatusChangeDate != nil {
+		s.WriteTime(schemas.DescribeDomainConfigurationResponse_lastStatusChangeDate, *v.LastStatusChangeDate)
+	}
+	if v.ServerCertificateConfig != nil {
+		s.WriteStruct(schemas.DescribeDomainConfigurationResponse_serverCertificateConfig)
+		v.ServerCertificateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeServerCertificates(s, schemas.DescribeDomainConfigurationResponse_serverCertificates, v.ServerCertificates)
+	if v.ServiceType != "" {
+		s.WriteString(schemas.DescribeDomainConfigurationResponse_serviceType, string(v.ServiceType))
+	}
+	if v.TlsConfig != nil {
+		s.WriteStruct(schemas.DescribeDomainConfigurationResponse_tlsConfig)
+		v.TlsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDomainConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDomainConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDomainConfigurationResponse_applicationProtocol:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainConfigurationResponse_applicationProtocol, &ev); err != nil {
+				return err
+			}
+			v.ApplicationProtocol = types.ApplicationProtocol(ev)
+			return nil
+		case schemas.DescribeDomainConfigurationResponse_authenticationType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainConfigurationResponse_authenticationType, &ev); err != nil {
+				return err
+			}
+			v.AuthenticationType = types.AuthenticationType(ev)
+			return nil
+		case schemas.DescribeDomainConfigurationResponse_authorizerConfig:
+			v.AuthorizerConfig = &types.AuthorizerConfig{}
+			return v.AuthorizerConfig.Deserialize(d)
+		case schemas.DescribeDomainConfigurationResponse_clientCertificateConfig:
+			v.ClientCertificateConfig = &types.ClientCertificateConfig{}
+			return v.ClientCertificateConfig.Deserialize(d)
+		case schemas.DescribeDomainConfigurationResponse_domainConfigurationArn:
+			v.DomainConfigurationArn = new(string)
+			return d.ReadString(schemas.DescribeDomainConfigurationResponse_domainConfigurationArn, v.DomainConfigurationArn)
+		case schemas.DescribeDomainConfigurationResponse_domainConfigurationName:
+			v.DomainConfigurationName = new(string)
+			return d.ReadString(schemas.DescribeDomainConfigurationResponse_domainConfigurationName, v.DomainConfigurationName)
+		case schemas.DescribeDomainConfigurationResponse_domainConfigurationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainConfigurationResponse_domainConfigurationStatus, &ev); err != nil {
+				return err
+			}
+			v.DomainConfigurationStatus = types.DomainConfigurationStatus(ev)
+			return nil
+		case schemas.DescribeDomainConfigurationResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DescribeDomainConfigurationResponse_domainName, v.DomainName)
+		case schemas.DescribeDomainConfigurationResponse_domainType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainConfigurationResponse_domainType, &ev); err != nil {
+				return err
+			}
+			v.DomainType = types.DomainType(ev)
+			return nil
+		case schemas.DescribeDomainConfigurationResponse_lastStatusChangeDate:
+			v.LastStatusChangeDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeDomainConfigurationResponse_lastStatusChangeDate, v.LastStatusChangeDate)
+		case schemas.DescribeDomainConfigurationResponse_serverCertificateConfig:
+			v.ServerCertificateConfig = &types.ServerCertificateConfig{}
+			return v.ServerCertificateConfig.Deserialize(d)
+		case schemas.DescribeDomainConfigurationResponse_serverCertificates:
+			return deserializeServerCertificates(d, schemas.DescribeDomainConfigurationResponse_serverCertificates, &v.ServerCertificates)
+		case schemas.DescribeDomainConfigurationResponse_serviceType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDomainConfigurationResponse_serviceType, &ev); err != nil {
+				return err
+			}
+			v.ServiceType = types.ServiceType(ev)
+			return nil
+		case schemas.DescribeDomainConfigurationResponse_tlsConfig:
+			v.TlsConfig = &types.TlsConfig{}
+			return v.TlsConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainConfiguration, schemas.DescribeDomainConfigurationRequest, schemas.DescribeDomainConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDomainConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainConfiguration, schemas.DescribeDomainConfigurationRequest, schemas.DescribeDomainConfigurationResponse), output: &DescribeDomainConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDomainConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDomainConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDomainConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomainConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,22 +295,8 @@ func (c *Client) addOperationDescribeDomainConfigurationMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDomainConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDomainConfiguration",
-	}
 }

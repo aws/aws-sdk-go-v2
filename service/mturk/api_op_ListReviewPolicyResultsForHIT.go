@@ -5,10 +5,10 @@ package mturk
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	The ListReviewPolicyResultsForHIT operation retrieves the computed results and
@@ -61,6 +61,31 @@ type ListReviewPolicyResultsForHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReviewPolicyResultsForHITInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReviewPolicyResultsForHITRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReviewPolicyResultsForHITInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HITId != nil {
+		s.WriteString(schemas.ListReviewPolicyResultsForHITRequest_HITId, *v.HITId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReviewPolicyResultsForHITRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReviewPolicyResultsForHITRequest_NextToken, *v.NextToken)
+	}
+	serializeReviewPolicyLevelList(s, schemas.ListReviewPolicyResultsForHITRequest_PolicyLevels, v.PolicyLevels)
+	if v.RetrieveActions != nil {
+		s.WriteBool(schemas.ListReviewPolicyResultsForHITRequest_RetrieveActions, *v.RetrieveActions)
+	}
+	if v.RetrieveResults != nil {
+		s.WriteBool(schemas.ListReviewPolicyResultsForHITRequest_RetrieveResults, *v.RetrieveResults)
+	}
+}
+
 type ListReviewPolicyResultsForHITOutput struct {
 
 	//  The name of the Assignment-level Review Policy. This contains only the
@@ -91,77 +116,86 @@ type ListReviewPolicyResultsForHITOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReviewPolicyResultsForHITOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReviewPolicyResultsForHITResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReviewPolicyResultsForHITOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentReviewPolicy != nil {
+		s.WriteStruct(schemas.ListReviewPolicyResultsForHITResponse_AssignmentReviewPolicy)
+		v.AssignmentReviewPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssignmentReviewReport != nil {
+		s.WriteStruct(schemas.ListReviewPolicyResultsForHITResponse_AssignmentReviewReport)
+		v.AssignmentReviewReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HITId != nil {
+		s.WriteString(schemas.ListReviewPolicyResultsForHITResponse_HITId, *v.HITId)
+	}
+	if v.HITReviewPolicy != nil {
+		s.WriteStruct(schemas.ListReviewPolicyResultsForHITResponse_HITReviewPolicy)
+		v.HITReviewPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HITReviewReport != nil {
+		s.WriteStruct(schemas.ListReviewPolicyResultsForHITResponse_HITReviewReport)
+		v.HITReviewReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReviewPolicyResultsForHITResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListReviewPolicyResultsForHITOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReviewPolicyResultsForHITResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReviewPolicyResultsForHITResponse_AssignmentReviewPolicy:
+			v.AssignmentReviewPolicy = &types.ReviewPolicy{}
+			return v.AssignmentReviewPolicy.Deserialize(d)
+		case schemas.ListReviewPolicyResultsForHITResponse_AssignmentReviewReport:
+			v.AssignmentReviewReport = &types.ReviewReport{}
+			return v.AssignmentReviewReport.Deserialize(d)
+		case schemas.ListReviewPolicyResultsForHITResponse_HITId:
+			v.HITId = new(string)
+			return d.ReadString(schemas.ListReviewPolicyResultsForHITResponse_HITId, v.HITId)
+		case schemas.ListReviewPolicyResultsForHITResponse_HITReviewPolicy:
+			v.HITReviewPolicy = &types.ReviewPolicy{}
+			return v.HITReviewPolicy.Deserialize(d)
+		case schemas.ListReviewPolicyResultsForHITResponse_HITReviewReport:
+			v.HITReviewReport = &types.ReviewReport{}
+			return v.HITReviewReport.Deserialize(d)
+		case schemas.ListReviewPolicyResultsForHITResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReviewPolicyResultsForHITResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReviewPolicyResultsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReviewPolicyResultsForHIT, schemas.ListReviewPolicyResultsForHITRequest, schemas.ListReviewPolicyResultsForHITResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReviewPolicyResultsForHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReviewPolicyResultsForHIT, schemas.ListReviewPolicyResultsForHITRequest, schemas.ListReviewPolicyResultsForHITResponse), output: &ListReviewPolicyResultsForHITOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReviewPolicyResultsForHIT{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReviewPolicyResultsForHIT"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListReviewPolicyResultsForHITValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReviewPolicyResultsForHIT(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +208,6 @@ func (c *Client) addOperationListReviewPolicyResultsForHITMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -283,11 +311,3 @@ type ListReviewPolicyResultsForHITAPIClient interface {
 }
 
 var _ ListReviewPolicyResultsForHITAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListReviewPolicyResultsForHIT(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListReviewPolicyResultsForHIT",
-	}
-}

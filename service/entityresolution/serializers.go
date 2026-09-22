@@ -3936,6 +3936,11 @@ func awsRestjson1_serializeDocumentResolutionTechniques(v *types.ResolutionTechn
 	object := value.Object()
 	defer object.Close()
 
+	if v.EnableRealTimeMatching != nil {
+		ok := object.Key("enableRealTimeMatching")
+		ok.Boolean(*v.EnableRealTimeMatching)
+	}
+
 	if v.ProviderProperties != nil {
 		ok := object.Key("providerProperties")
 		if err := awsRestjson1_serializeDocumentProviderProperties(v.ProviderProperties, ok); err != nil {

@@ -4,10 +4,9 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Null headers are not sent over the wire, empty headers are serialized to ""
@@ -36,6 +35,37 @@ type NullAndEmptyHeadersClientInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NullAndEmptyHeadersClientInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NullAndEmptyHeadersIO)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NullAndEmptyHeadersClientInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.A != nil {
+		s.WriteString(schemas.NullAndEmptyHeadersIO_a, *v.A)
+	}
+	if v.B != nil {
+		s.WriteString(schemas.NullAndEmptyHeadersIO_b, *v.B)
+	}
+	serializeStringList(s, schemas.NullAndEmptyHeadersIO_c, v.C)
+}
+func (v *NullAndEmptyHeadersClientInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NullAndEmptyHeadersIO, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NullAndEmptyHeadersIO_a:
+			v.A = new(string)
+			return d.ReadString(schemas.NullAndEmptyHeadersIO_a, v.A)
+		case schemas.NullAndEmptyHeadersIO_b:
+			v.B = new(string)
+			return d.ReadString(schemas.NullAndEmptyHeadersIO_b, v.B)
+		case schemas.NullAndEmptyHeadersIO_c:
+			return deserializeStringList(d, schemas.NullAndEmptyHeadersIO_c, &v.C)
+		}
+		return nil
+	})
+}
+
 type NullAndEmptyHeadersClientOutput struct {
 	A *string
 
@@ -49,74 +79,54 @@ type NullAndEmptyHeadersClientOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NullAndEmptyHeadersClientOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NullAndEmptyHeadersIO)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NullAndEmptyHeadersClientOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.A != nil {
+		s.WriteString(schemas.NullAndEmptyHeadersIO_a, *v.A)
+	}
+	if v.B != nil {
+		s.WriteString(schemas.NullAndEmptyHeadersIO_b, *v.B)
+	}
+	serializeStringList(s, schemas.NullAndEmptyHeadersIO_c, v.C)
+}
+func (v *NullAndEmptyHeadersClientOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NullAndEmptyHeadersIO, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NullAndEmptyHeadersIO_a:
+			v.A = new(string)
+			return d.ReadString(schemas.NullAndEmptyHeadersIO_a, v.A)
+		case schemas.NullAndEmptyHeadersIO_b:
+			v.B = new(string)
+			return d.ReadString(schemas.NullAndEmptyHeadersIO_b, v.B)
+		case schemas.NullAndEmptyHeadersIO_c:
+			return deserializeStringList(d, schemas.NullAndEmptyHeadersIO_c, &v.C)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNullAndEmptyHeadersClientMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NullAndEmptyHeadersClient, schemas.NullAndEmptyHeadersIO, schemas.NullAndEmptyHeadersIO)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpNullAndEmptyHeadersClient{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NullAndEmptyHeadersClient, schemas.NullAndEmptyHeadersIO, schemas.NullAndEmptyHeadersIO), output: &NullAndEmptyHeadersClientOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpNullAndEmptyHeadersClient{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "NullAndEmptyHeadersClient"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opNullAndEmptyHeadersClient(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,22 +141,8 @@ func (c *Client) addOperationNullAndEmptyHeadersClientMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opNullAndEmptyHeadersClient(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "NullAndEmptyHeadersClient",
-	}
 }

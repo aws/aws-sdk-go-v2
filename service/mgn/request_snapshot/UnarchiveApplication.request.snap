@@ -1,0 +1,5 @@
+POST /UnarchiveApplication
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","applicationID":"__ApplicationID__"}

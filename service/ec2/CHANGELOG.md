@@ -1,3 +1,214 @@
+# v1.336.0 (2026-09-22)
+
+* **Feature**: Amazon EC2 now supports quote-based start date changes for future-dated Capacity Reservations
+
+# v1.335.0 (2026-09-18)
+
+* **Feature**: This release adds documentation for the T8i instance family to the EC2 ModifyDefaultCreditSpecification and GetDefaultCreditSpecification APIs.
+
+# v1.334.0 (2026-09-17)
+
+* **Feature**: Adding support for "Tunnel" VPC Endpoint
+
+# v1.333.0 (2026-09-16)
+
+* **Feature**: Releasing new EC2 R9g and R9gd memory-optimized instances powered by AWS Graviton5 processors, with up to 25 percent better compute performance than R8g instances, faster DDR5 memory, and up to 100 Gbps network and 72 Gbps EBS bandwidth. R9gd instances additionally provide local NVMe SSD storage.
+
+# v1.332.0 (2026-09-10)
+
+* **Feature**: The CreateImage API now supports a BootModeOverride parameter to explicitly set UEFI boot mode on a new AMI, overriding the source instance's inherited boot mode.
+
+# v1.331.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Feature**: This release adds support for sharing Amazon EBS volumes across AWS accounts using AWS Resource Access Manager (RAM). Consuming accounts can view shared volume metadata and create copies of shared volumes within the same Availability Zone, with optional re-encryption using their own KMS key.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.330.0 (2026-09-08)
+
+* **Feature**: Adds the InterfaceTypes field to NetworkCardInfo in the DescribeInstanceTypes response. This field identifies the network interface types supported by each network card.
+
+# v1.329.0 (2026-09-04)
+
+* **Feature**: Adds support for ValidateSecurityGroupQuotasForInterface, an API that specifically authorized AWS services use to validate security group rule quotas before creating an elastic network interface.
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.328.0 (2026-09-02)
+
+* **Feature**: This release adds support to retain interruptible Capacity Reservations in an active state when all capacity is reclaimed.
+
+# v1.327.0 (2026-09-01)
+
+* **Feature**: Update UserData and UploadPolicy shapes to use SecureBlob
+
+# v1.326.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
+# v1.325.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.325.0 (2026-08-27)
+
+* **Feature**: EC2 allows AMI owners to define compatible instance types on their AMIs, blocking RunInstances calls automatically for launches on non-permitted instance types.
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.324.0 (2026-08-26)
+
+* **Feature**: Adds deleting state to possible VPC States.
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.323.0 (2026-08-25)
+
+* **Feature**: Fleet feature to support Capacity Reservation Resource Groups with Amazon EC2 Capacity Blocks and interruptible Capacity Reservations
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.322.0 (2026-08-20)
+
+* **Feature**: EC2 marks UEFI instance metadata field as sensitive.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.321.3 (2026-08-18)
+
+* **Documentation**: Doc release for CreateImage support for instances with local snapshots in Outpost
+
+# v1.321.2 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.321.1 (2026-08-10)
+
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.321.0 (2026-08-07)
+
+* **Feature**: This release adds support for BGP route protection in Amazon VPC IP Address Manager (IPAM), including route discovery, RPKI route protection findings, and delegated RPKI (Internet Registry Associations, routing policy registrations, and ROA management) for BYOIP prefixes.
+
+# v1.320.0 (2026-08-06)
+
+* **Feature**: Adds a new optional IncludeLocalZones parameter to the Spot Placement Score API that defaults to false. When set to true, the Spot Placement Score API will consider the relevant Local Zones with Spot capacity when computing the Spot Placement Score.
+
+# v1.319.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.319.0 (2026-08-04)
+
+* **Feature**: Amazon EC2 now supports Application Status Checks, a new status check that monitors your application's health through configurable HTTP(S) paths and ports, so you can detect and automatically respond to application-level impairments.
+
+# v1.318.1 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
+# v1.318.0 (2026-07-29)
+
+* **Feature**: This release adds support for policy-based routing on AWS Transit Gateway, enabling you to route traffic based on 5-tuple matching (source IP, destination IP, source port, destination port, and protocol) using new policy table entry APIs that direct matching traffic to a target route table.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.317.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.317.0 (2026-07-21)
+
+* **Feature**: Add an option to clients to disable clock skew
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.316.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.316.0 (2026-07-10)
+
+* **Feature**: New Amazon EC2 instances. M9g, M9gd, C9g, and C9gd on AWS Graviton5. C8in, M8in, and R8in add 600 Gbps network. C8ib, M8ib, and R8ib add 300 Gbps EBS. C8ine, M8ine, M8idn, R8idn, M8idb, and R8idb round out Intel Xeon 6. Mac-m3ultra with Apple M3 Ultra. G7 with NVIDIA RTX PRO 4500 Blackwell GPUs.
+
+# v1.315.0 (2026-07-09)
+
+* **Feature**: Added support for additional override parameters in CreateFleet, including LaunchTemplateSpecificationUserData, KeyName, IamInstanceProfile, and MetadataOptions. The CreateFleet response now also includes SubnetId, AvailabilityZone, and AvailabilityZoneId for launched instances.
+
+# v1.314.0 (2026-07-08)
+
+* **Feature**: Replace Root Volume now supports a VolumeId parameter. This allows the customer to pass in a pre-prepared volume as the target root volume for an RRV workflow.
+
+# v1.313.0 (2026-07-07)
+
+* **Feature**: This launch surfaces the public SSM parameter associated with public AMIs in the AMI metadata.
+
+# v1.312.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.311.0 (2026-07-01)
+
+* **Feature**: Use declarative policies to enable VPC Encryption Controls across your organization or select accounts. Added AMD SEV-SNP support for EC2 Dedicated Hosts. Managed resource visibility settings control whether AWS-provisioned resources in your account appear in console views and API list operations.
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.310.0 (2026-06-30)
+
+* **Feature**: Adds ModifyVpcEndpointPayerResponsibility API, which enables VPC endpoint service owners to modify the billing account for VPC endpoint usage charges at the individual endpoint level
+
+# v1.309.0 (2026-06-29)
+
+* **Feature**: Adds support for the precision time strategy and a parentGroupId parameter on CreatePlacementGroup and DescribePlacementGroups. Precision time placement groups and cluster placement groups with a parent precision time placement group ensure instances launch on precision time capable hardware.
+
+# v1.308.0 (2026-06-22)
+
+* **Feature**: This release adds support for AMI Watermark and Allowed AMIs integration
+
+# v1.307.1 (2026-06-18)
+
+* **Documentation**: Documentation updates clarifying CancelCapacityReservation cancellable states
+
+# v1.307.0 (2026-06-10)
+
+* **Feature**: This release adds support for AMI Watermark which a structured identifier that helps in tracking AMI provenance
+
+# v1.306.0 (2026-06-09)
+
+* **Feature**: Added TagFieldSpecifications to CreateFlowLogs and DescribeFlowLogs APIs. Customers can now specify tag keys in their Flow Logs subscriptions to capture associated EC2 resource tag values in their logs, enabling tag-based visibility.
+
+# v1.305.3 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.305.2 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.305.1 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.305.0 (2026-06-02)
+
+* **Feature**: Amazon EC2 now supports self-service cancellation of future-dated Capacity Reservations. A cancellation charge applies based on remaining commitment. Customers can generate a cancellation quote to review charges before confirming.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.304.2 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.304.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.304.0 (2026-05-22)
+
+* **Feature**: The ModifyInstanceAttribute API now supports modification of EnclaveOptions for the instance as a typed parameter.
+
 # v1.303.0 (2026-05-18)
 
 * **Feature**: Amazon VPC IP Address Manager (IPAM) now supports tags on IPAM pool allocations, enabling all standard tagging features for allocations including tag-on-create.

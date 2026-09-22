@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Network Firewall Firewall and accompanying FirewallStatus for a VPC.
@@ -98,6 +97,30 @@ type CreateFirewallInput struct {
 	// firewall, the operation initializes this setting to TRUE .
 	FirewallPolicyChangeProtection bool
 
+	// The NAT gateways that the firewall uses to proxy traffic when
+	// NoSourcePreservation is TRUE . Network Firewall attaches the firewall to each
+	// NAT gateway that you specify, so that egress traffic is proxied through the NAT
+	// gateway.
+	NatGatewayMappings []types.NatGatewayMapping
+
+	// Optional. Indicates whether the firewall operates in proxy mode, in which the
+	// source IP address of the traffic is not preserved. When set to TRUE , the
+	// firewall proxies traffic through a NAT gateway and the traffic reaching the
+	// destination uses the NAT gateway's IP address as the source.
+	//
+	// When you set this to TRUE , you must specify NatGatewayMappings and VpcEndpoint
+	// instead of a top-level VpcId and SubnetMappings .
+	//
+	// You can't change this setting after you create the firewall.
+	//
+	// Default value: FALSE
+	NoSourcePreservation bool
+
+	// The listener configuration for a proxy mode firewall, used when
+	// NoSourcePreservation is TRUE . This specifies the ports and protocols on which
+	// the firewall's proxy listens for traffic.
+	ProxySettings *types.ProxySettings
+
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
 	// the subnet associations for a firewall that is in use. When you create a
@@ -126,6 +149,14 @@ type CreateFirewallInput struct {
 	// [Considerations for transit gateway-attached firewalls]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/tgw-firewall-considerations.html
 	TransitGatewayId *string
 
+	// The VPC and subnets for the firewall endpoint, used when NoSourcePreservation
+	// is TRUE . Network Firewall creates the firewall endpoint in the subnets that you
+	// specify here.
+	//
+	// For proxy mode firewalls, provide the firewall's VPC and endpoint subnets
+	// through this parameter instead of the top-level VpcId and SubnetMappings .
+	VpcEndpoint *types.VpcEndpoint
+
 	// The unique identifier of the VPC where Network Firewall should create the
 	// firewall.
 	//
@@ -133,6 +164,65 @@ type CreateFirewallInput struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateFirewallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZoneChangeProtection != false {
+		s.WriteBool(schemas.CreateFirewallRequest_AvailabilityZoneChangeProtection, v.AvailabilityZoneChangeProtection)
+	}
+	serializeAvailabilityZoneMappings(s, schemas.CreateFirewallRequest_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	if v.DeleteProtection != false {
+		s.WriteBool(schemas.CreateFirewallRequest_DeleteProtection, v.DeleteProtection)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFirewallRequest_Description, *v.Description)
+	}
+	serializeEnabledAnalysisTypes(s, schemas.CreateFirewallRequest_EnabledAnalysisTypes, v.EnabledAnalysisTypes)
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateFirewallRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.CreateFirewallRequest_FirewallName, *v.FirewallName)
+	}
+	if v.FirewallPolicyArn != nil {
+		s.WriteString(schemas.CreateFirewallRequest_FirewallPolicyArn, *v.FirewallPolicyArn)
+	}
+	if v.FirewallPolicyChangeProtection != false {
+		s.WriteBool(schemas.CreateFirewallRequest_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
+	}
+	serializeNatGatewayMappingsList(s, schemas.CreateFirewallRequest_NatGatewayMappings, v.NatGatewayMappings)
+	if v.NoSourcePreservation != false {
+		s.WriteBool(schemas.CreateFirewallRequest_NoSourcePreservation, v.NoSourcePreservation)
+	}
+	if v.ProxySettings != nil {
+		s.WriteStruct(schemas.CreateFirewallRequest_ProxySettings)
+		v.ProxySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubnetChangeProtection != false {
+		s.WriteBool(schemas.CreateFirewallRequest_SubnetChangeProtection, v.SubnetChangeProtection)
+	}
+	serializeSubnetMappings(s, schemas.CreateFirewallRequest_SubnetMappings, v.SubnetMappings)
+	serializeTagList(s, schemas.CreateFirewallRequest_Tags, v.Tags)
+	if v.TransitGatewayId != nil {
+		s.WriteString(schemas.CreateFirewallRequest_TransitGatewayId, *v.TransitGatewayId)
+	}
+	if v.VpcEndpoint != nil {
+		s.WriteStruct(schemas.CreateFirewallRequest_VpcEndpoint)
+		v.VpcEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateFirewallRequest_VpcId, *v.VpcId)
+	}
 }
 
 type CreateFirewallOutput struct {
@@ -156,77 +246,58 @@ type CreateFirewallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Firewall != nil {
+		s.WriteStruct(schemas.CreateFirewallResponse_Firewall)
+		v.Firewall.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallStatus != nil {
+		s.WriteStruct(schemas.CreateFirewallResponse_FirewallStatus)
+		v.FirewallStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFirewallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFirewallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFirewallResponse_Firewall:
+			v.Firewall = &types.Firewall{}
+			return v.Firewall.Deserialize(d)
+		case schemas.CreateFirewallResponse_FirewallStatus:
+			v.FirewallStatus = &types.FirewallStatus{}
+			return v.FirewallStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewall, schemas.CreateFirewallRequest, schemas.CreateFirewallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewall, schemas.CreateFirewallRequest, schemas.CreateFirewallResponse), output: &CreateFirewallOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateFirewall{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFirewall"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFirewallValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFirewall(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -241,22 +312,8 @@ func (c *Client) addOperationCreateFirewallMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateFirewall(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFirewall",
-	}
 }

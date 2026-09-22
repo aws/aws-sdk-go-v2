@@ -4,11 +4,10 @@ package opensearch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Operation in the Amazon OpenSearch Service API for associating multiple
@@ -44,6 +43,19 @@ type AssociatePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.AssociatePackagesRequest_DomainName, *v.DomainName)
+	}
+	serializePackageDetailsForAssociationList(s, schemas.AssociatePackagesRequest_PackageList, v.PackageList)
+}
+
 type AssociatePackagesOutput struct {
 
 	// List of information about packages that are associated with a domain.
@@ -55,77 +67,45 @@ type AssociatePackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatePackagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatePackagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatePackagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainPackageDetailsList(s, schemas.AssociatePackagesResponse_DomainPackageDetailsList, v.DomainPackageDetailsList)
+}
+func (v *AssociatePackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatePackagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatePackagesResponse_DomainPackageDetailsList:
+			return deserializeDomainPackageDetailsList(d, schemas.AssociatePackagesResponse_DomainPackageDetailsList, &v.DomainPackageDetailsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociatePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePackages, schemas.AssociatePackagesRequest, schemas.AssociatePackagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociatePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociatePackages, schemas.AssociatePackagesRequest, schemas.AssociatePackagesResponse), output: &AssociatePackagesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociatePackages{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociatePackages"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociatePackagesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociatePackages(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +120,8 @@ func (c *Client) addOperationAssociatePackagesMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociatePackages(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociatePackages",
-	}
 }

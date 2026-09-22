@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of analysis segments for a real-time chat analysis session.
@@ -68,6 +68,31 @@ type ListRealtimeContactAnalysisSegmentsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRealtimeContactAnalysisSegmentsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRealtimeContactAnalysisSegmentsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRealtimeContactAnalysisSegmentsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Request_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Request_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRealtimeContactAnalysisSegmentsV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Request_NextToken, *v.NextToken)
+	}
+	if v.OutputType != "" {
+		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Request_OutputType, string(v.OutputType))
+	}
+	serializeRealTimeContactAnalysisSegmentTypes(s, schemas.ListRealtimeContactAnalysisSegmentsV2Request_SegmentTypes, v.SegmentTypes)
+}
+
 type ListRealtimeContactAnalysisSegmentsV2Output struct {
 
 	// The channel of the contact.
@@ -97,77 +122,71 @@ type ListRealtimeContactAnalysisSegmentsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRealtimeContactAnalysisSegmentsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRealtimeContactAnalysisSegmentsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRealtimeContactAnalysisSegmentsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != "" {
+		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_Channel, string(v.Channel))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_NextToken, *v.NextToken)
+	}
+	serializeRealtimeContactAnalysisSegments(s, schemas.ListRealtimeContactAnalysisSegmentsV2Response_Segments, v.Segments)
+	if v.Status != "" {
+		s.WriteString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_Status, string(v.Status))
+	}
+}
+func (v *ListRealtimeContactAnalysisSegmentsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRealtimeContactAnalysisSegmentsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRealtimeContactAnalysisSegmentsV2Response_Channel:
+			var ev string
+			if err := d.ReadString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_Channel, &ev); err != nil {
+				return err
+			}
+			v.Channel = types.RealTimeContactAnalysisSupportedChannel(ev)
+			return nil
+		case schemas.ListRealtimeContactAnalysisSegmentsV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_NextToken, v.NextToken)
+		case schemas.ListRealtimeContactAnalysisSegmentsV2Response_Segments:
+			return deserializeRealtimeContactAnalysisSegments(d, schemas.ListRealtimeContactAnalysisSegmentsV2Response_Segments, &v.Segments)
+		case schemas.ListRealtimeContactAnalysisSegmentsV2Response_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListRealtimeContactAnalysisSegmentsV2Response_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RealTimeContactAnalysisStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRealtimeContactAnalysisSegmentsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRealtimeContactAnalysisSegmentsV2, schemas.ListRealtimeContactAnalysisSegmentsV2Request, schemas.ListRealtimeContactAnalysisSegmentsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRealtimeContactAnalysisSegmentsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRealtimeContactAnalysisSegmentsV2, schemas.ListRealtimeContactAnalysisSegmentsV2Request, schemas.ListRealtimeContactAnalysisSegmentsV2Response), output: &ListRealtimeContactAnalysisSegmentsV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRealtimeContactAnalysisSegmentsV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRealtimeContactAnalysisSegmentsV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRealtimeContactAnalysisSegmentsV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRealtimeContactAnalysisSegmentsV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +199,6 @@ func (c *Client) addOperationListRealtimeContactAnalysisSegmentsV2Middlewares(st
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -289,11 +302,3 @@ type ListRealtimeContactAnalysisSegmentsV2APIClient interface {
 }
 
 var _ ListRealtimeContactAnalysisSegmentsV2APIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRealtimeContactAnalysisSegmentsV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRealtimeContactAnalysisSegmentsV2",
-	}
-}

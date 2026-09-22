@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.CreateKey
+
+{"DeriveKeyUsage":"TR31_B0_BASE_DERIVATION_KEY","Enabled":true,"Exportable":true,"KeyAttributes":{"KeyAlgorithm":"TDES_2KEY","KeyClass":"SYMMETRIC_KEY","KeyModesOfUse":{"Decrypt":true,"DeriveKey":true,"Encrypt":true,"Generate":true,"NoRestrictions":true,"Sign":true,"Unwrap":true,"Verify":true,"Wrap":true},"KeyUsage":"TR31_B0_BASE_DERIVATION_KEY"},"KeyCheckValueAlgorithm":"CMAC","ReplicationRegions":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /gateways/__GatewayIdentifier__/rules
+
+Content-Type: application/json
+
+{"actions":[{"configurationBundle":{"staticOverride":{"bundleArn":"__BundleArn__","bundleVersion":"__BundleVersion__"}}},{"configurationBundle":{"staticOverride":{"bundleArn":"__BundleArn__","bundleVersion":"__BundleVersion__"}}}],"clientToken":"__ClientToken__","conditions":[{"matchPrincipals":{"anyOf":[{"iamPrincipal":{"arn":"__Arn__","operator":"StringEquals"}},{"iamPrincipal":{"arn":"__Arn__","operator":"StringEquals"}}]}},{"matchPrincipals":{"anyOf":[{"iamPrincipal":{"arn":"__Arn__","operator":"StringEquals"}},{"iamPrincipal":{"arn":"__Arn__","operator":"StringEquals"}}]}}],"description":"__Description__","priority":1}

@@ -4,10 +4,9 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an email address metadata. For more information about email addresses,
@@ -60,6 +59,30 @@ type UpdateEmailAddressMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmailAddressMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmailAddressMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmailAddressMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_DisplayName, *v.DisplayName)
+	}
+	if v.EmailAddressId != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_EmailAddressId, *v.EmailAddressId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type UpdateEmailAddressMetadataOutput struct {
 
 	// The Amazon Resource Name (ARN) of the email address.
@@ -74,77 +97,54 @@ type UpdateEmailAddressMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEmailAddressMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEmailAddressMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEmailAddressMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddressArn != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataResponse_EmailAddressArn, *v.EmailAddressArn)
+	}
+	if v.EmailAddressId != nil {
+		s.WriteString(schemas.UpdateEmailAddressMetadataResponse_EmailAddressId, *v.EmailAddressId)
+	}
+}
+func (v *UpdateEmailAddressMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEmailAddressMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEmailAddressMetadataResponse_EmailAddressArn:
+			v.EmailAddressArn = new(string)
+			return d.ReadString(schemas.UpdateEmailAddressMetadataResponse_EmailAddressArn, v.EmailAddressArn)
+		case schemas.UpdateEmailAddressMetadataResponse_EmailAddressId:
+			v.EmailAddressId = new(string)
+			return d.ReadString(schemas.UpdateEmailAddressMetadataResponse_EmailAddressId, v.EmailAddressId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEmailAddressMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmailAddressMetadata, schemas.UpdateEmailAddressMetadataRequest, schemas.UpdateEmailAddressMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEmailAddressMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEmailAddressMetadata, schemas.UpdateEmailAddressMetadataRequest, schemas.UpdateEmailAddressMetadataResponse), output: &UpdateEmailAddressMetadataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEmailAddressMetadata{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEmailAddressMetadata"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateEmailAddressMetadataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEmailAddressMetadata(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +159,8 @@ func (c *Client) addOperationUpdateEmailAddressMetadataMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateEmailAddressMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEmailAddressMetadata",
-	}
 }

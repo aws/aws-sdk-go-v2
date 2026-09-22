@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyRouteServer&DryRun=true&PersistRoutes=enable&PersistRoutesDuration=1&RouteServerId=__RouteServerId__&SnsNotificationsEnabled=true&Version=2016-11-15

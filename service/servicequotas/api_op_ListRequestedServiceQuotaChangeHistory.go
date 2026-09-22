@@ -5,10 +5,10 @@ package servicequotas
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the quota increase requests for the specified Amazon Web Services
@@ -65,6 +65,30 @@ type ListRequestedServiceQuotaChangeHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRequestedServiceQuotaChangeHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRequestedServiceQuotaChangeHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRequestedServiceQuotaChangeHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRequestedServiceQuotaChangeHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryRequest_NextToken, *v.NextToken)
+	}
+	if v.QuotaRequestedAtLevel != "" {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryRequest_QuotaRequestedAtLevel, string(v.QuotaRequestedAtLevel))
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryRequest_ServiceCode, *v.ServiceCode)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryRequest_Status, string(v.Status))
+	}
+}
+
 type ListRequestedServiceQuotaChangeHistoryOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -82,74 +106,48 @@ type ListRequestedServiceQuotaChangeHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRequestedServiceQuotaChangeHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRequestedServiceQuotaChangeHistoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRequestedServiceQuotaChangeHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRequestedServiceQuotaChangeHistoryResponse_NextToken, *v.NextToken)
+	}
+	serializeRequestedServiceQuotaChangeHistoryListDefinition(s, schemas.ListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas, v.RequestedQuotas)
+}
+func (v *ListRequestedServiceQuotaChangeHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRequestedServiceQuotaChangeHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRequestedServiceQuotaChangeHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRequestedServiceQuotaChangeHistoryResponse_NextToken, v.NextToken)
+		case schemas.ListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas:
+			return deserializeRequestedServiceQuotaChangeHistoryListDefinition(d, schemas.ListRequestedServiceQuotaChangeHistoryResponse_RequestedQuotas, &v.RequestedQuotas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRequestedServiceQuotaChangeHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRequestedServiceQuotaChangeHistory, schemas.ListRequestedServiceQuotaChangeHistoryRequest, schemas.ListRequestedServiceQuotaChangeHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRequestedServiceQuotaChangeHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRequestedServiceQuotaChangeHistory, schemas.ListRequestedServiceQuotaChangeHistoryRequest, schemas.ListRequestedServiceQuotaChangeHistoryResponse), output: &ListRequestedServiceQuotaChangeHistoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRequestedServiceQuotaChangeHistory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRequestedServiceQuotaChangeHistory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRequestedServiceQuotaChangeHistory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +160,6 @@ func (c *Client) addOperationListRequestedServiceQuotaChangeHistoryMiddlewares(s
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -280,11 +272,3 @@ type ListRequestedServiceQuotaChangeHistoryAPIClient interface {
 }
 
 var _ ListRequestedServiceQuotaChangeHistoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRequestedServiceQuotaChangeHistory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRequestedServiceQuotaChangeHistory",
-	}
-}

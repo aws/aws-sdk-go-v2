@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConcurrentModificationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConcurrentModificationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConcurrentModificationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConcurrentModificationException_Message, *v.Message)
+	}
+}
+func (v *ConcurrentModificationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConcurrentModificationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConcurrentModificationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConcurrentModificationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because performing the operation would violate a constraint.
 //
@@ -75,6 +97,27 @@ func (e *ConstraintViolationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConstraintViolationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConstraintViolationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConstraintViolationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConstraintViolationException_Message, *v.Message)
+	}
+}
+func (v *ConstraintViolationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConstraintViolationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConstraintViolationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConstraintViolationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request processing failed because of an unknown error, exception, or
 // failure. You can retry the request.
@@ -102,6 +145,27 @@ func (e *InternalServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServiceException_Message, *v.Message)
+	}
+}
+func (v *InternalServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServiceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServiceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because of one of the following reasons:
 //
@@ -146,6 +210,27 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterException_Message, *v.Message)
+	}
+}
+func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because the specified PaginationToken has expired. A
 // PaginationToken is valid for a maximum of 15 minutes.
@@ -173,6 +258,27 @@ func (e *PaginationTokenExpiredException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PaginationTokenExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PaginationTokenExpiredException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaginationTokenExpiredException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaginationTokenExpiredException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PaginationTokenExpiredException_Message, *v.Message)
+	}
+}
+func (v *PaginationTokenExpiredException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaginationTokenExpiredException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaginationTokenExpiredException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PaginationTokenExpiredException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request failed because it exceeded the allowed frequency of submitted
 // requests.
@@ -200,3 +306,24 @@ func (e *ThrottledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottledException_Message, *v.Message)
+	}
+}
+func (v *ThrottledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottledException_Message, v.Message)
+		}
+		return nil
+	})
+}

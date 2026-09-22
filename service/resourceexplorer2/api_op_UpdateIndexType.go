@@ -4,11 +4,10 @@ package resourceexplorer2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -104,6 +103,38 @@ type UpdateIndexTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateIndexTypeInput_Arn, *v.Arn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateIndexTypeInput_Type, string(v.Type))
+	}
+}
+func (v *UpdateIndexTypeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIndexTypeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIndexTypeInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateIndexTypeInput_Arn, v.Arn)
+		case schemas.UpdateIndexTypeInput_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIndexTypeInput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IndexType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateIndexTypeOutput struct {
 
 	// The [Amazon resource name (ARN)] of the index that you updated.
@@ -127,77 +158,74 @@ type UpdateIndexTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIndexTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIndexTypeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIndexTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateIndexTypeOutput_Arn, *v.Arn)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.UpdateIndexTypeOutput_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateIndexTypeOutput_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateIndexTypeOutput_Type, string(v.Type))
+	}
+}
+func (v *UpdateIndexTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIndexTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIndexTypeOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateIndexTypeOutput_Arn, v.Arn)
+		case schemas.UpdateIndexTypeOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateIndexTypeOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateIndexTypeOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIndexTypeOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.IndexState(ev)
+			return nil
+		case schemas.UpdateIndexTypeOutput_Type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIndexTypeOutput_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IndexType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIndexTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexType, schemas.UpdateIndexTypeInput, schemas.UpdateIndexTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIndexType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIndexType, schemas.UpdateIndexTypeInput, schemas.UpdateIndexTypeOutput), output: &UpdateIndexTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIndexType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateIndexType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateIndexTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIndexType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,22 +240,8 @@ func (c *Client) addOperationUpdateIndexTypeMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateIndexType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateIndexType",
-	}
 }

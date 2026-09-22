@@ -5,10 +5,10 @@ package networkmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about one or more of your sites in a global network.
@@ -46,6 +46,25 @@ type GetSitesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSitesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSitesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSitesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GetSitesRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSitesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSitesRequest_NextToken, *v.NextToken)
+	}
+	serializeSiteIdList(s, schemas.GetSitesRequest_SiteIds, v.SiteIds)
+}
+
 type GetSitesOutput struct {
 
 	// The token for the next page of results.
@@ -60,77 +79,51 @@ type GetSitesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSitesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSitesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSitesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSitesResponse_NextToken, *v.NextToken)
+	}
+	serializeSiteList(s, schemas.GetSitesResponse_Sites, v.Sites)
+}
+func (v *GetSitesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSitesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSitesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSitesResponse_NextToken, v.NextToken)
+		case schemas.GetSitesResponse_Sites:
+			return deserializeSiteList(d, schemas.GetSitesResponse_Sites, &v.Sites)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSitesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSites, schemas.GetSitesRequest, schemas.GetSitesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSites{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSites, schemas.GetSitesRequest, schemas.GetSitesResponse), output: &GetSitesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSites{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSites"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSitesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSites(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +136,6 @@ func (c *Client) addOperationGetSitesMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +235,3 @@ type GetSitesAPIClient interface {
 }
 
 var _ GetSitesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetSites(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSites",
-	}
-}

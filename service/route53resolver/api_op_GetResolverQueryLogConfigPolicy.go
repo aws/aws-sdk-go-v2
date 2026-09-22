@@ -4,10 +4,9 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about a query logging policy. A query logging policy specifies
@@ -39,6 +38,18 @@ type GetResolverQueryLogConfigPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResolverQueryLogConfigPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResolverQueryLogConfigPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResolverQueryLogConfigPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetResolverQueryLogConfigPolicyRequest_Arn, *v.Arn)
+	}
+}
+
 type GetResolverQueryLogConfigPolicyOutput struct {
 
 	// Information about the query logging policy for the query logging configuration
@@ -51,77 +62,48 @@ type GetResolverQueryLogConfigPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResolverQueryLogConfigPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResolverQueryLogConfigPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResolverQueryLogConfigPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverQueryLogConfigPolicy != nil {
+		s.WriteString(schemas.GetResolverQueryLogConfigPolicyResponse_ResolverQueryLogConfigPolicy, *v.ResolverQueryLogConfigPolicy)
+	}
+}
+func (v *GetResolverQueryLogConfigPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResolverQueryLogConfigPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResolverQueryLogConfigPolicyResponse_ResolverQueryLogConfigPolicy:
+			v.ResolverQueryLogConfigPolicy = new(string)
+			return d.ReadString(schemas.GetResolverQueryLogConfigPolicyResponse_ResolverQueryLogConfigPolicy, v.ResolverQueryLogConfigPolicy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResolverQueryLogConfigPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResolverQueryLogConfigPolicy, schemas.GetResolverQueryLogConfigPolicyRequest, schemas.GetResolverQueryLogConfigPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResolverQueryLogConfigPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResolverQueryLogConfigPolicy, schemas.GetResolverQueryLogConfigPolicyRequest, schemas.GetResolverQueryLogConfigPolicyResponse), output: &GetResolverQueryLogConfigPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResolverQueryLogConfigPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResolverQueryLogConfigPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResolverQueryLogConfigPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResolverQueryLogConfigPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +118,8 @@ func (c *Client) addOperationGetResolverQueryLogConfigPolicyMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetResolverQueryLogConfigPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResolverQueryLogConfigPolicy",
-	}
 }

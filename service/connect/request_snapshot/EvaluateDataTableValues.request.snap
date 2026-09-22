@@ -1,0 +1,5 @@
+POST /data-tables/__InstanceId__/__DataTableId__/values/evaluate?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"TimeZone":"__TimeZone__","Values":[{"AttributeNames":["__Member__","__Member__"],"PrimaryValues":[{"AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeName":"__AttributeName__","Value":"__Value__"}]},{"AttributeNames":["__Member__","__Member__"],"PrimaryValues":[{"AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeName":"__AttributeName__","Value":"__Value__"}]}]}

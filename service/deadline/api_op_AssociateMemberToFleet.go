@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,7 +63,41 @@ type AssociateMemberToFleetInput struct {
 	// This member is required.
 	PrincipalType types.DeadlinePrincipalType
 
+	// The Region of the IAM Identity Center instance. If not provided, the service
+	// defaults to the Region of the farm.
+	IdentityCenterRegion *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *AssociateMemberToFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_fleetId, *v.FleetId)
+	}
+	if v.IdentityCenterRegion != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_identityCenterRegion, *v.IdentityCenterRegion)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_identityStoreId, *v.IdentityStoreId)
+	}
+	if v.MembershipLevel != "" {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_membershipLevel, string(v.MembershipLevel))
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_principalId, *v.PrincipalId)
+	}
+	if v.PrincipalType != "" {
+		s.WriteString(schemas.AssociateMemberToFleetRequest_principalType, string(v.PrincipalType))
+	}
 }
 
 type AssociateMemberToFleetOutput struct {
@@ -72,65 +107,36 @@ type AssociateMemberToFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateMemberToFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateMemberToFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateMemberToFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateMemberToFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateMemberToFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateMemberToFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToFleet, schemas.AssociateMemberToFleetRequest, schemas.AssociateMemberToFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateMemberToFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateMemberToFleet, schemas.AssociateMemberToFleetRequest, schemas.AssociateMemberToFleetResponse), output: &AssociateMemberToFleetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateMemberToFleet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateMemberToFleet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -140,12 +146,6 @@ func (c *Client) addOperationAssociateMemberToFleetMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpAssociateMemberToFleetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateMemberToFleet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +158,6 @@ func (c *Client) addOperationAssociateMemberToFleetMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -197,12 +191,4 @@ func (m *endpointPrefix_opAssociateMemberToFleetMiddleware) HandleFinalize(ctx c
 }
 func addEndpointPrefix_opAssociateMemberToFleetMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opAssociateMemberToFleetMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opAssociateMemberToFleet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateMemberToFleet",
-	}
 }

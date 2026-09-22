@@ -20,11 +20,9 @@ import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 import static software.amazon.smithy.go.codegen.SymbolUtils.buildPackageSymbol;
 
 import java.util.List;
-import java.util.Map;
 
 import software.amazon.smithy.aws.go.codegen.customization.AdjustAwsRestJsonContentType;
 import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
-import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
@@ -36,7 +34,6 @@ import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
 import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
-import software.amazon.smithy.go.codegen.middleware.FinalizeStepMiddleware;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.knowledge.EventStreamIndex;
 import software.amazon.smithy.utils.ListUtils;
@@ -64,17 +61,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 MiddlewareRegistrar.builder()
                                         .resolvedFunction(buildPackageSymbol("addClientRequestID"))
                                         .build()
-                        ).build(),
-
-                // Add ContentLengthMiddleware to operation stack
-                RuntimeClientPlugin.builder()
-                        .operationPredicate((model, service, operation) ->
-                                EventStreamIndex.of(model).getInputInfo(operation).isEmpty())
-                        .registerMiddleware(
-                                MiddlewareRegistrar.builder()
-                                        .resolvedFunction(buildPackageSymbol("addComputeContentLength"))
-                                        .build()
-                        ).build(),
+                        )
+                        .isCommon(true)
+                        .build(),
 
                 // Add endpoint serialize middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -159,6 +148,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                         buildPackageSymbol("c")
                                 ))
                                 .build())
+                        .isCommon(true)
                         .build(),
 
                 // Add middleware to store raw response omn metadata
@@ -167,24 +157,19 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 MiddlewareRegistrar.builder()
                                         .resolvedFunction(buildPackageSymbol("addRawResponseToMetadata"))
                                         .build()
-                        ).build(),
+                        )
+                        .isCommon(true)
+                        .build(),
 
                 // Add recordResponseTiming middleware to operation stack
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(
                                 MiddlewareRegistrar.builder()
                                         .resolvedFunction(buildPackageSymbol("addRecordResponseTiming"))
-                                        .build()
-                        ).build(),
-
-                // wrap the retry loop in a span
-                RuntimeClientPlugin.builder()
-                        .registerMiddleware(
-                                MiddlewareRegistrar.builder()
-                                        .resolvedFunction(buildPackageSymbol("addSpanRetryLoop"))
                                         .useClientOptions()
                                         .build()
-                        ).build(),
+                        )
+                        .build(),
 
                 // Add Client UserAgent
                 RuntimeClientPlugin.builder()
@@ -193,6 +178,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                         AwsClientUserAgent.MIDDLEWARE_RESOLVER).build())
                                 .useClientOptions()
                                 .build())
+                        .isCommon(true)
                         .build(),
 
                 // Add REST-JSON Content-Type Adjuster
@@ -208,7 +194,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 // Add Event Stream Input Writer (must be added AFTER retryer)
                 RuntimeClientPlugin.builder()
                         .operationPredicate((model, service, operation) ->
-                                EventStreamIndex.of(model).getInputInfo(operation).isPresent())
+                                // if !useLegacySerde then the smithy-go version is already added instead
+                                useLegacySerde && EventStreamIndex.of(model).getInputInfo(operation).isPresent()
+                        )
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                                 "AddInitializeStreamWriter",
@@ -223,58 +211,37 @@ public class AssembleMiddlewareStack implements GoIntegration {
     public void writeAdditionalFiles(GoSettings settings, Model model, SymbolProvider symbolProvider, GoDelegator goDelegator) {
         goDelegator.useFileWriter("api_client.go", settings.getModuleName(), writer -> {
             writer.write(addMiddleware());
-            writer.write(spanRetryLoopMiddleware());
             if (hasSigV4X(model, settings.getService(model))) {
                 writer.write(addSigV4XMiddleware());
             }
         });
     }
 
-    private Writable spanRetryLoopMiddleware() {
-        return new FinalizeStepMiddleware() {
-            public String getStructName() {
-                return "spanRetryLoop";
-            }
+    private boolean useLegacySerde;
 
-            public Map<String, Symbol> getFields() {
-                return Map.of("options", buildPackageSymbol("Options"));
-            }
-
-            public Writable getFuncBody() {
-                return goTemplate("""
-                        tracer := operationTracer(m.options.TracerProvider)
-                        ctx, span := tracer.StartSpan(ctx, "RetryLoop")
-                        defer span.End()
-
-                        return next.HandleFinalize(ctx, in)
-                        """);
-            }
-        };
+    // cheat for schema-serde to capture whether we're using it so we can not add the event stream writer setup
+    @Override
+    public void processFinalizedModel(GoSettings settings, Model model) {
+        useLegacySerde = settings.useLegacySerde();
     }
 
     private Writable addMiddleware() {
         return goTemplate("""
-                $D $D $D
+                $D $D
                 func addClientRequestID(stack *middleware.Stack) error {
                     return stack.Build.Add(&awsmiddleware.ClientRequestID{}, middleware.After)
-                }
-
-                func addComputeContentLength(stack *middleware.Stack) error {
-                    return stack.Build.Add(&smithyhttp.ComputeContentLength{}, middleware.After)
                 }
 
                 func addRawResponseToMetadata(stack *middleware.Stack) error {
                     return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
                 }
 
-                func addRecordResponseTiming(stack *middleware.Stack) error {
-                    return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
+                func addRecordResponseTiming(stack *middleware.Stack, options Options) error {
+                    return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{
+                        DisableClockSkewCorrection: options.DisableClockSkewCorrection,
+                    }, middleware.After)
                 }
-
-                func addSpanRetryLoop(stack *middleware.Stack, options Options) error {
-                    return stack.Finalize.Insert(&spanRetryLoop{options: options}, "Retry", middleware.Before)
-                }
-                """, SmithyGoDependency.SMITHY_MIDDLEWARE, AwsGoDependency.AWS_MIDDLEWARE, SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
+                """, SmithyGoDependency.SMITHY_MIDDLEWARE, AwsGoDependency.AWS_MIDDLEWARE);
     }
 
     private Writable addSigV4XMiddleware() {

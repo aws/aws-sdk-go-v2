@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A user pool domain hosts managed login, an authorization server and web server
@@ -91,10 +90,51 @@ type CreateUserPoolDomainInput struct {
 	// Managed login requires that your user pool be configured for any [feature plan] other than
 	// Lite .
 	//
+	// A ManagedLoginVersion value of 2 does not activate managed login pages for your
+	// app client. When you create an app client programmatically, your app client has
+	// no branding style. To use managed login, create a branding style using the [CreateManagedLoginBranding]
+	// operation. When you use the console, Amazon Cognito assigns a default branding
+	// style automatically. When you use the API or an SDK, you must create a branding
+	// style yourself.
+	//
+	// [CreateManagedLoginBranding]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateManagedLoginBranding.html
 	// [feature plan]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sign-in-feature-plans.html
 	ManagedLoginVersion *int32
 
+	// The configuration of routing for requests to the domain for replicas of a
+	// replicated user pool. The routing configuration is currently only supported for
+	// custom domains.
+	Routing *types.RoutingType
+
 	noSmithyDocumentSerde
+}
+
+func (v *CreateUserPoolDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomainConfig != nil {
+		s.WriteStruct(schemas.CreateUserPoolDomainRequest_CustomDomainConfig)
+		v.CustomDomainConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.CreateUserPoolDomainRequest_Domain, *v.Domain)
+	}
+	if v.ManagedLoginVersion != nil {
+		s.WriteInt32(schemas.CreateUserPoolDomainRequest_ManagedLoginVersion, *v.ManagedLoginVersion)
+	}
+	if v.Routing != nil {
+		s.WriteStruct(schemas.CreateUserPoolDomainRequest_Routing)
+		v.Routing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.CreateUserPoolDomainRequest_UserPoolId, *v.UserPoolId)
+	}
 }
 
 type CreateUserPoolDomainOutput struct {
@@ -111,83 +151,71 @@ type CreateUserPoolDomainOutput struct {
 	// indicates hosted UI (classic) and a version of 2 indicates managed login.
 	ManagedLoginVersion *int32
 
+	// The routing configuration that was applied to the user pool domain.
+	Routing *types.RoutingType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserPoolDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserPoolDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserPoolDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudFrontDomain != nil {
+		s.WriteString(schemas.CreateUserPoolDomainResponse_CloudFrontDomain, *v.CloudFrontDomain)
+	}
+	if v.ManagedLoginVersion != nil {
+		s.WriteInt32(schemas.CreateUserPoolDomainResponse_ManagedLoginVersion, *v.ManagedLoginVersion)
+	}
+	if v.Routing != nil {
+		s.WriteStruct(schemas.CreateUserPoolDomainResponse_Routing)
+		v.Routing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateUserPoolDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserPoolDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserPoolDomainResponse_CloudFrontDomain:
+			v.CloudFrontDomain = new(string)
+			return d.ReadString(schemas.CreateUserPoolDomainResponse_CloudFrontDomain, v.CloudFrontDomain)
+		case schemas.CreateUserPoolDomainResponse_ManagedLoginVersion:
+			v.ManagedLoginVersion = new(int32)
+			return d.ReadInt32(schemas.CreateUserPoolDomainResponse_ManagedLoginVersion, v.ManagedLoginVersion)
+		case schemas.CreateUserPoolDomainResponse_Routing:
+			v.Routing = &types.RoutingType{}
+			return v.Routing.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPoolDomain, schemas.CreateUserPoolDomainRequest, schemas.CreateUserPoolDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUserPoolDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUserPoolDomain, schemas.CreateUserPoolDomainRequest, schemas.CreateUserPoolDomainResponse), output: &CreateUserPoolDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUserPoolDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUserPoolDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateUserPoolDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUserPoolDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,22 +230,8 @@ func (c *Client) addOperationCreateUserPoolDomainMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateUserPoolDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateUserPoolDomain",
-	}
 }

@@ -4,11 +4,8 @@ package synthetics
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the configuration of a canary that has already been created.
@@ -55,6 +52,11 @@ type UpdateCanaryInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// A list of locations (Amazon Web Services Regions) to add as replicas for the
+	// canary. Each location specifies a Region and optional VPC configuration for the
+	// replica. You can add up to 50 replica locations.
+	AddReplicaLocations []types.AddReplicaLocationInput
 
 	// A structure that contains the configuration for canary artifacts, including the
 	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
@@ -111,6 +113,13 @@ type UpdateCanaryInput struct {
 	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	FailureRetentionPeriodInDays *int32
 
+	// The Amazon Resource Name (ARN) of the customer-managed AWS Key Management
+	// Service (AWS KMS) key used to encrypt the canary's AWS Lambda function
+	// environment variables at rest. If you don't specify a value, the service uses an
+	// AWS-managed key. If you omit this parameter, the service retains the existing
+	// value. To revert to the AWS-managed key, set this parameter to an empty string.
+	KmsKeyArn *string
+
 	// Specifies whether to also delete the Lambda functions and layers used by this
 	// canary when the canary is deleted.
 	//
@@ -120,6 +129,11 @@ type UpdateCanaryInput struct {
 	//
 	// [DeleteCanary]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DeleteCanary.html
 	ProvisionedResourceCleanup types.ProvisionedResourceCleanupSetting
+
+	// A list of locations (Amazon Web Services Regions) to remove as replicas for the
+	// canary. You must specify at least one location to remove. All replicas can be
+	// removed in a single API call and you cannot remove the primary location.
+	RemoveReplicaLocations []string
 
 	// A structure that contains the timeout value that is used for each individual
 	// run of the canary.
@@ -200,9 +214,6 @@ type UpdateCanaryOutput struct {
 }
 
 func (c *Client) addOperationUpdateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCanary{}, middleware.After)
 	if err != nil {
 		return err
@@ -211,65 +222,20 @@ func (c *Client) addOperationUpdateCanaryMiddlewares(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCanary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateCanaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCanary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -284,22 +250,8 @@ func (c *Client) addOperationUpdateCanaryMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateCanary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCanary",
-	}
 }

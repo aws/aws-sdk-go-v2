@@ -5,10 +5,10 @@ package greengrassv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a paginated list of deployment jobs that IoT Greengrass sends to
@@ -44,6 +44,24 @@ type ListEffectiveDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEffectiveDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEffectiveDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEffectiveDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreDeviceThingName != nil {
+		s.WriteString(schemas.ListEffectiveDeploymentsRequest_coreDeviceThingName, *v.CoreDeviceThingName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEffectiveDeploymentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEffectiveDeploymentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEffectiveDeploymentsOutput struct {
 
 	// A list that summarizes each deployment on the core device.
@@ -59,77 +77,51 @@ type ListEffectiveDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEffectiveDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEffectiveDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEffectiveDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEffectiveDeploymentsList(s, schemas.ListEffectiveDeploymentsResponse_effectiveDeployments, v.EffectiveDeployments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEffectiveDeploymentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEffectiveDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEffectiveDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEffectiveDeploymentsResponse_effectiveDeployments:
+			return deserializeEffectiveDeploymentsList(d, schemas.ListEffectiveDeploymentsResponse_effectiveDeployments, &v.EffectiveDeployments)
+		case schemas.ListEffectiveDeploymentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEffectiveDeploymentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEffectiveDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEffectiveDeployments, schemas.ListEffectiveDeploymentsRequest, schemas.ListEffectiveDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEffectiveDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEffectiveDeployments, schemas.ListEffectiveDeploymentsRequest, schemas.ListEffectiveDeploymentsResponse), output: &ListEffectiveDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEffectiveDeployments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEffectiveDeployments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEffectiveDeploymentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEffectiveDeployments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +134,6 @@ func (c *Client) addOperationListEffectiveDeploymentsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +236,3 @@ type ListEffectiveDeploymentsAPIClient interface {
 }
 
 var _ ListEffectiveDeploymentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEffectiveDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEffectiveDeployments",
-	}
-}

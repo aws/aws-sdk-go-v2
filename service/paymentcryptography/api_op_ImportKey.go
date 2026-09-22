@@ -4,11 +4,10 @@ package paymentcryptography
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Imports symmetric keys and public key certificates in PEM format (base64
@@ -232,7 +231,8 @@ type ImportKeyInput struct {
 	// zero, with the key to be checked and retaining the 3 highest order bytes of the
 	// encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where
 	// the input data is 16 bytes of zero and retaining the 3 highest order bytes of
-	// the encrypted result.
+	// the encrypted result. For HMAC keys, the KCV is computed using the hash selected
+	// at key creation on a zero-length message, taking the leftmost 3 bytes.
 	KeyCheckValueAlgorithm types.KeyCheckValueAlgorithm
 
 	// A list of Amazon Web Services Regions for key replication operations.
@@ -272,6 +272,27 @@ type ImportKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ImportKeyInput_Enabled, *v.Enabled)
+	}
+	if v.KeyCheckValueAlgorithm != "" {
+		s.WriteString(schemas.ImportKeyInput_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
+	}
+	serializeImportKeyMaterial(s, schemas.ImportKeyInput_KeyMaterial, v.KeyMaterial)
+	serializeRegions(s, schemas.ImportKeyInput_ReplicationRegions, v.ReplicationRegions)
+	if v.RequesterComment != nil {
+		s.WriteString(schemas.ImportKeyInput_RequesterComment, *v.RequesterComment)
+	}
+	serializeTags(s, schemas.ImportKeyInput_Tags, v.Tags)
+}
+
 type ImportKeyOutput struct {
 
 	// The KeyARN of the key material imported within Amazon Web Services Payment
@@ -286,77 +307,50 @@ type ImportKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.ImportKeyOutput_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportKeyOutput_Key:
+			v.Key = &types.Key{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportKey, schemas.ImportKeyInput, schemas.ImportKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpImportKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportKey, schemas.ImportKeyInput, schemas.ImportKeyOutput), output: &ImportKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpImportKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpImportKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -371,22 +365,8 @@ func (c *Client) addOperationImportKeyMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opImportKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportKey",
-	}
 }

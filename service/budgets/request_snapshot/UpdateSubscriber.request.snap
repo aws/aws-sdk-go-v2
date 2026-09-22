@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSBudgetServiceGateway.UpdateSubscriber
+
+{"AccountId":"__AccountId__","BudgetName":"__BudgetName__","NewSubscriber":{"Address":"__Address__","SubscriptionType":"SNS"},"Notification":{"ComparisonOperator":"GREATER_THAN","NotificationState":"OK","NotificationType":"ACTUAL","Threshold":1,"ThresholdType":"PERCENTAGE"},"OldSubscriber":{"Address":"__Address__","SubscriptionType":"SNS"}}

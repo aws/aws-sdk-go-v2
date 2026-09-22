@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Insight":{"Categories":["FAULT","FAULT"],"ClientRequestImpactStatistics":{"FaultCount":1,"OkCount":1,"TotalCount":1},"EndTime":946684800,"GroupARN":"__GroupARN__","GroupName":"__GroupName__","InsightId":"__InsightId__","RootCauseServiceId":{"AccountId":"__AccountId__","Name":"__Name__","Names":["__Member__","__Member__"],"Type":"__Type__"},"RootCauseServiceRequestImpactStatistics":{"FaultCount":1,"OkCount":1,"TotalCount":1},"StartTime":946684800,"State":"ACTIVE","Summary":"__Summary__","TopAnomalousServices":[{"ServiceId":{"AccountId":"__AccountId__","Name":"__Name__","Names":["__Member__","__Member__"],"Type":"__Type__"}},{"ServiceId":{"AccountId":"__AccountId__","Name":"__Name__","Names":["__Member__","__Member__"],"Type":"__Type__"}}]}}

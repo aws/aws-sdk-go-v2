@@ -1,0 +1,5 @@
+POST /Users/ListUsers?DirectoryId=__DirectoryId__
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","Realm":"__Realm__"}

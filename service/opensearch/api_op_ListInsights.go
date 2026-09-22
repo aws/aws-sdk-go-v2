@@ -4,11 +4,10 @@ package opensearch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists insights for an Amazon OpenSearch Service domain or Amazon Web Services
@@ -59,6 +58,34 @@ type ListInsightsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInsightsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInsightsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInsightsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.ListInsightsRequest_Entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInsightsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInsightsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListInsightsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.ListInsightsRequest_TimeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The result of a ListInsights request. Contains the list of insights and a
 // pagination token for retrieving the next page of results.
 type ListInsightsOutput struct {
@@ -77,77 +104,51 @@ type ListInsightsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInsightsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInsightsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInsightList(s, schemas.ListInsightsResponse_Insights, v.Insights)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInsightsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInsightsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInsightsResponse_Insights:
+			return deserializeInsightList(d, schemas.ListInsightsResponse_Insights, &v.Insights)
+		case schemas.ListInsightsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInsightsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInsights, schemas.ListInsightsRequest, schemas.ListInsightsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInsights{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInsights, schemas.ListInsightsRequest, schemas.ListInsightsResponse), output: &ListInsightsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInsights{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInsights"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListInsightsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInsights(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +163,8 @@ func (c *Client) addOperationListInsightsMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListInsights(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListInsights",
-	}
 }

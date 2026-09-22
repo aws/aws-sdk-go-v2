@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LensReviewSummaries":[{"LensAlias":"__LensAlias__","LensArn":"__LensArn__","LensName":"__LensName__","LensStatus":"CURRENT","LensVersion":"__LensVersion__","PrioritizedRiskCounts":{"key0":1},"Profiles":[{"ProfileArn":"__ProfileArn__","ProfileVersion":"__ProfileVersion__"},{"ProfileArn":"__ProfileArn__","ProfileVersion":"__ProfileVersion__"}],"RiskCounts":{"key0":1},"UpdatedAt":946684800},{"LensAlias":"__LensAlias__","LensArn":"__LensArn__","LensName":"__LensName__","LensStatus":"CURRENT","LensVersion":"__LensVersion__","PrioritizedRiskCounts":{"key0":1},"Profiles":[{"ProfileArn":"__ProfileArn__","ProfileVersion":"__ProfileVersion__"},{"ProfileArn":"__ProfileArn__","ProfileVersion":"__ProfileVersion__"}],"RiskCounts":{"key0":1},"UpdatedAt":946684800}],"MilestoneNumber":1,"NextToken":"__NextToken__","WorkloadId":"__WorkloadId__"}

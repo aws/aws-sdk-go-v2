@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.ImportCertificate
+
+{"CertificateIdentifier":"__CertificateIdentifier__","CertificatePem":"__CertificatePem__","CertificateWallet":"YmxvYg==","KmsKeyId":"__KmsKeyId__","Tags":[{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"},{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"}]}

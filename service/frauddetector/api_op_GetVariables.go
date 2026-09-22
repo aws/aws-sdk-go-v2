@@ -5,10 +5,10 @@ package frauddetector
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets all of the variables or the specific variable. This is a paginated API.
@@ -46,6 +46,24 @@ type GetVariablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVariablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVariablesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVariablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetVariablesRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetVariablesRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetVariablesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetVariablesOutput struct {
 
 	// The next page token to be used in subsequent requests.
@@ -60,74 +78,48 @@ type GetVariablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVariablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVariablesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVariablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetVariablesResult_nextToken, *v.NextToken)
+	}
+	serializeVariableList(s, schemas.GetVariablesResult_variables, v.Variables)
+}
+func (v *GetVariablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVariablesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVariablesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetVariablesResult_nextToken, v.NextToken)
+		case schemas.GetVariablesResult_variables:
+			return deserializeVariableList(d, schemas.GetVariablesResult_variables, &v.Variables)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVariablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVariables, schemas.GetVariablesRequest, schemas.GetVariablesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetVariables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVariables, schemas.GetVariablesRequest, schemas.GetVariablesResult), output: &GetVariablesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetVariables{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVariables"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVariables(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +132,6 @@ func (c *Client) addOperationGetVariablesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,11 +231,3 @@ type GetVariablesAPIClient interface {
 }
 
 var _ GetVariablesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetVariables(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetVariables",
-	}
-}

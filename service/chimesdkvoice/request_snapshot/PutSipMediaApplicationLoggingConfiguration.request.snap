@@ -1,0 +1,5 @@
+PUT /sip-media-applications/__SipMediaApplicationId__/logging-configuration
+
+Content-Type: application/json
+
+{"SipMediaApplicationLoggingConfiguration":{"EnableSipMediaApplicationMessageLogs":true}}

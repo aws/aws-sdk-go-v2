@@ -5,10 +5,10 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a knowledge base. A knowledge base contains your data sources so that
@@ -16,19 +16,25 @@ import (
 // must first set up your data sources and configure a supported vector store. For
 // more information, see [Set up a knowledge base].
 //
-// If you prefer to let Amazon Bedrock create and manage a vector store for you in
-// Amazon OpenSearch Service, use the console. For more information, see [Create a knowledge base].
+// To create a managed knowledge base, provide a managedKnowledgeBaseConfiguration
+// during creation. For more information, see [Build a managed knowledge base].
 //
 //   - Provide the name and an optional description .
 //
 //   - Provide the Amazon Resource Name (ARN) with permissions to create a
 //     knowledge base in the roleArn field.
 //
-//   - Provide the embedding model to use in the embeddingModelArn field in the
-//     knowledgeBaseConfiguration object.
+//   - For managed knowledge bases, set embeddingModelType to MANAGED to use the
+//     service-managed embedding model, or CUSTOM with an embeddingModelArn to use
+//     your own. To use your own KMS key for encryption, provide the ARN in
+//     serverSideEncryptionConfiguration . No vector store configuration is required
+//     for managed knowledge bases.
 //
-//   - Provide the configuration for your vector store in the storageConfiguration
-//     object.
+//   - For self-managed knowledge bases, provide the embedding model to use in the
+//     embeddingModelArn field in the knowledgeBaseConfiguration object.
+//
+//   - For self-managed knowledge bases, provide the configuration for your vector
+//     store in the storageConfiguration object.
 //
 //   - For an Amazon OpenSearch Service database, use the
 //     opensearchServerlessConfiguration object. For more information, see [Create a vector store in Amazon OpenSearch Service].
@@ -42,9 +48,9 @@ import (
 //   - For a Redis Enterprise Cloud database, use the
 //     redisEnterpriseCloudConfiguration object. For more information, see [Create a vector store in Redis Enterprise Cloud].
 //
-// [Create a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create
 // [Create a vector store in Amazon OpenSearch Service]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
 // [Create a vector store in Redis Enterprise Cloud]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html
+// [Build a managed knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html
 // [Set up a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowlege-base-prereq.html
 // [Create a vector store in Amazon Aurora]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
 // [Create a vector store in Pinecone]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html
@@ -102,6 +108,38 @@ type CreateKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_description, *v.Description)
+	}
+	if v.KnowledgeBaseConfiguration != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseRequest_knowledgeBaseConfiguration)
+		v.KnowledgeBaseConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateKnowledgeBaseRequest_roleArn, *v.RoleArn)
+	}
+	if v.StorageConfiguration != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseRequest_storageConfiguration)
+		v.StorageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateKnowledgeBaseRequest_tags, v.Tags)
+}
+
 type CreateKnowledgeBaseOutput struct {
 
 	// Contains details about the knowledge base.
@@ -115,65 +153,44 @@ type CreateKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBase != nil {
+		s.WriteStruct(schemas.CreateKnowledgeBaseResponse_knowledgeBase)
+		v.KnowledgeBase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKnowledgeBaseResponse_knowledgeBase:
+			v.KnowledgeBase = &types.KnowledgeBase{}
+			return v.KnowledgeBase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKnowledgeBase, schemas.CreateKnowledgeBaseRequest, schemas.CreateKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKnowledgeBase, schemas.CreateKnowledgeBaseRequest, schemas.CreateKnowledgeBaseResponse), output: &CreateKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKnowledgeBase{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKnowledgeBase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -183,12 +200,6 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateKnowledgeBaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKnowledgeBase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,12 +212,6 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,12 +251,4 @@ func (m *idempotencyToken_initializeOpCreateKnowledgeBase) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateKnowledgeBaseMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateKnowledgeBase{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateKnowledgeBase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateKnowledgeBase",
-	}
 }

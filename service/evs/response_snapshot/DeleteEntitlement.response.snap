@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonElasticVMwareService.DeleteEntitlement
+
+{"entitlements":[{"connectorId":"__ConnectorId__","environmentId":"__EnvironmentId__","errorDetail":{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},"lastSyncedAt":946684800,"startedAt":946684800,"status":"CREATING","stoppedAt":946684800,"type":"WINDOWS_SERVER","vmId":"__VmId__","vmName":"__VmName__"},{"connectorId":"__ConnectorId__","environmentId":"__EnvironmentId__","errorDetail":{"errorCode":"__ErrorCode__","errorMessage":"__ErrorMessage__"},"lastSyncedAt":946684800,"startedAt":946684800,"status":"CREATING","stoppedAt":946684800,"type":"WINDOWS_SERVER","vmId":"__VmId__","vmName":"__VmName__"}]}

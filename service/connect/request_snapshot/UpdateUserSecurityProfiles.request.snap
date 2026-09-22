@@ -1,0 +1,5 @@
+POST /users/__InstanceId__/__UserId__/security-profiles
+
+Content-Type: application/json
+
+{"SecurityProfileIds":["__Member__","__Member__"]}

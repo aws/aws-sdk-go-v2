@@ -5,10 +5,10 @@ package interconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/interconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/interconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts a connection proposal which was generated at a supported partner's
@@ -62,6 +62,26 @@ type AcceptConnectionProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptConnectionProposalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptConnectionProposalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptConnectionProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationKey != nil {
+		s.WriteString(schemas.AcceptConnectionProposalRequest_activationKey, *v.ActivationKey)
+	}
+	serializeAttachPoint(s, schemas.AcceptConnectionProposalRequest_attachPoint, v.AttachPoint)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AcceptConnectionProposalRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.AcceptConnectionProposalRequest_description, *v.Description)
+	}
+	serializeTagMap(s, schemas.AcceptConnectionProposalRequest_tags, v.Tags)
+}
+
 type AcceptConnectionProposalOutput struct {
 
 	// The created Connection object.
@@ -73,65 +93,44 @@ type AcceptConnectionProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptConnectionProposalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptConnectionProposalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptConnectionProposalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connection != nil {
+		s.WriteStruct(schemas.AcceptConnectionProposalResponse_connection)
+		v.Connection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AcceptConnectionProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptConnectionProposalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptConnectionProposalResponse_connection:
+			v.Connection = &types.Connection{}
+			return v.Connection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptConnectionProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptConnectionProposal, schemas.AcceptConnectionProposalRequest, schemas.AcceptConnectionProposalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAcceptConnectionProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptConnectionProposal, schemas.AcceptConnectionProposalRequest, schemas.AcceptConnectionProposalResponse), output: &AcceptConnectionProposalOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAcceptConnectionProposal{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptConnectionProposal"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -146,12 +145,6 @@ func (c *Client) addOperationAcceptConnectionProposalMiddlewares(stack *middlewa
 	if err = addOpAcceptConnectionProposalValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptConnectionProposal(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,12 +155,6 @@ func (c *Client) addOperationAcceptConnectionProposalMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -207,12 +194,4 @@ func (m *idempotencyToken_initializeOpAcceptConnectionProposal) HandleInitialize
 }
 func addIdempotencyToken_opAcceptConnectionProposalMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAcceptConnectionProposal{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAcceptConnectionProposal(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AcceptConnectionProposal",
-	}
 }

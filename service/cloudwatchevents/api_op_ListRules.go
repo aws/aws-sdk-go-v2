@@ -4,11 +4,10 @@ package cloudwatchevents
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists your Amazon EventBridge rules. You can either list all the rules or you
@@ -51,6 +50,27 @@ type ListRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBusName != nil {
+		s.WriteString(schemas.ListRulesRequest_EventBusName, *v.EventBusName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListRulesRequest_Limit, *v.Limit)
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListRulesRequest_NamePrefix, *v.NamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRulesOutput struct {
 
 	// Indicates whether there are additional results to retrieve. If there are no
@@ -66,74 +86,48 @@ type ListRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRulesResponse_NextToken, *v.NextToken)
+	}
+	serializeRuleResponseList(s, schemas.ListRulesResponse_Rules, v.Rules)
+}
+func (v *ListRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRulesResponse_NextToken, v.NextToken)
+		case schemas.ListRulesResponse_Rules:
+			return deserializeRuleResponseList(d, schemas.ListRulesResponse_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRules, schemas.ListRulesRequest, schemas.ListRulesResponse), output: &ListRulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +142,8 @@ func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListRules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRules",
-	}
 }

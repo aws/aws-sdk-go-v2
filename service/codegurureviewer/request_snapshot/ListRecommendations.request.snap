@@ -1,0 +1,3 @@
+GET /codereviews/__CodeReviewArn__/Recommendations?MaxResults=1&NextToken=__NextToken__
+
+

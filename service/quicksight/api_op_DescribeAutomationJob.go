@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -64,6 +63,33 @@ type DescribeAutomationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutomationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutomationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutomationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomationGroupId != nil {
+		s.WriteString(schemas.DescribeAutomationJobRequest_AutomationGroupId, *v.AutomationGroupId)
+	}
+	if v.AutomationId != nil {
+		s.WriteString(schemas.DescribeAutomationJobRequest_AutomationId, *v.AutomationId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAutomationJobRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.IncludeInputPayload != false {
+		s.WriteBool(schemas.DescribeAutomationJobRequest_IncludeInputPayload, v.IncludeInputPayload)
+	}
+	if v.IncludeOutputPayload != false {
+		s.WriteBool(schemas.DescribeAutomationJobRequest_IncludeOutputPayload, v.IncludeOutputPayload)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeAutomationJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeAutomationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the automation job.
@@ -102,77 +128,94 @@ type DescribeAutomationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAutomationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAutomationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAutomationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeAutomationJobResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeAutomationJobResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.DescribeAutomationJobResponse_EndedAt, *v.EndedAt)
+	}
+	if v.InputPayload != nil {
+		s.WriteString(schemas.DescribeAutomationJobResponse_InputPayload, *v.InputPayload)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DescribeAutomationJobResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.OutputPayload != nil {
+		s.WriteString(schemas.DescribeAutomationJobResponse_OutputPayload, *v.OutputPayload)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAutomationJobResponse_RequestId, *v.RequestId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.DescribeAutomationJobResponse_StartedAt, *v.StartedAt)
+	}
+}
+func (v *DescribeAutomationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAutomationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAutomationJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeAutomationJobResponse_Arn, v.Arn)
+		case schemas.DescribeAutomationJobResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeAutomationJobResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeAutomationJobResponse_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeAutomationJobResponse_EndedAt, v.EndedAt)
+		case schemas.DescribeAutomationJobResponse_InputPayload:
+			v.InputPayload = new(string)
+			return d.ReadString(schemas.DescribeAutomationJobResponse_InputPayload, v.InputPayload)
+		case schemas.DescribeAutomationJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAutomationJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.AutomationJobStatus(ev)
+			return nil
+		case schemas.DescribeAutomationJobResponse_OutputPayload:
+			v.OutputPayload = new(string)
+			return d.ReadString(schemas.DescribeAutomationJobResponse_OutputPayload, v.OutputPayload)
+		case schemas.DescribeAutomationJobResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAutomationJobResponse_RequestId, v.RequestId)
+		case schemas.DescribeAutomationJobResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeAutomationJobResponse_StartedAt, v.StartedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAutomationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutomationJob, schemas.DescribeAutomationJobRequest, schemas.DescribeAutomationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAutomationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAutomationJob, schemas.DescribeAutomationJobRequest, schemas.DescribeAutomationJobResponse), output: &DescribeAutomationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAutomationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAutomationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAutomationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAutomationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +230,8 @@ func (c *Client) addOperationDescribeAutomationJobMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAutomationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAutomationJob",
-	}
 }

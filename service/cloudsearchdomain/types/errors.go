@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,33 @@ func (e *DocumentServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DocumentServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DocumentServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DocumentServiceException_message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DocumentServiceException_status, *v.Status)
+	}
+}
+func (v *DocumentServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentServiceException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DocumentServiceException_message, v.Message)
+		case schemas.DocumentServiceException_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DocumentServiceException_status, v.Status)
+		}
+		return nil
+	})
+}
 
 // Information about any problems encountered while processing a search request.
 type SearchException struct {
@@ -60,3 +88,24 @@ func (e *SearchException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SearchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SearchException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SearchException_message, *v.Message)
+	}
+}
+func (v *SearchException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SearchException_message, v.Message)
+		}
+		return nil
+	})
+}

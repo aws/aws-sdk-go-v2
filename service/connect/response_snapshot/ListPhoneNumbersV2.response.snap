@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ListPhoneNumbersSummaryList":[{"InstanceId":"__InstanceId__","PhoneNumber":"__PhoneNumber__","PhoneNumberArn":"__PhoneNumberArn__","PhoneNumberCountryCode":"AF","PhoneNumberDescription":"__PhoneNumberDescription__","PhoneNumberId":"__PhoneNumberId__","PhoneNumberType":"TOLL_FREE","SourcePhoneNumberArn":"__SourcePhoneNumberArn__","TargetArn":"__TargetArn__"},{"InstanceId":"__InstanceId__","PhoneNumber":"__PhoneNumber__","PhoneNumberArn":"__PhoneNumberArn__","PhoneNumberCountryCode":"AF","PhoneNumberDescription":"__PhoneNumberDescription__","PhoneNumberId":"__PhoneNumberId__","PhoneNumberType":"TOLL_FREE","SourcePhoneNumberArn":"__SourcePhoneNumberArn__","TargetArn":"__TargetArn__"}],"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+POST /UpdateApplication
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","applicationID":"__ApplicationID__","description":"__Description__","name":"__Name__"}

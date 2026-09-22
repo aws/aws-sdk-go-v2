@@ -1,0 +1,3 @@
+GET /instance/__InstanceId__/task/template/__TaskTemplateId__?snapshotVersion=__SnapshotVersion__
+
+

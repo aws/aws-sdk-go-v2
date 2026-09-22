@@ -1,0 +1,3 @@
+GET /browsers/__BrowserIdentifier__/sessions/get?sessionId=__SessionId__
+
+

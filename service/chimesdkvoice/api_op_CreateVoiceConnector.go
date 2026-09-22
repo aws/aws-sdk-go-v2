@@ -4,11 +4,10 @@ package chimesdkvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Chime SDK Voice Connector. For more information about Voice
@@ -46,41 +45,68 @@ type CreateVoiceConnectorInput struct {
 	// Default value: us-east-1 .
 	AwsRegion types.VoiceConnectorAwsRegion
 
-	// The connectors for use with Amazon Connect.
+	// The connectors for use with Connect Customer.
 	//
 	// The following options are available:
 	//
-	//   - CONNECT_CALL_TRANSFER_CONNECTOR - Enables enterprises to integrate Amazon
-	//   Connect with other voice systems to directly transfer voice calls and metadata
-	//   without using the public telephone network. They can use Amazon Connect
+	//   - CONNECT_CALL_TRANSFER_CONNECTOR - Enables enterprises to integrate Connect
+	//   Customer with other voice systems to directly transfer voice calls and metadata
+	//   without using the public telephone network. They can use Connect Customer
 	//   telephony and Interactive Voice Response (IVR) with their existing voice systems
 	//   to modernize the IVR experience of their existing contact center and their
 	//   enterprise and branch voice systems. Additionally, enterprises migrating their
-	//   contact center to Amazon Connect can start with Connect telephony and IVR for
+	//   contact center to Connect Customer can start with Connect telephony and IVR for
 	//   immediate modernization ahead of agent migration.
 	//
-	//   - CONNECT_ANALYTICS_CONNECTOR - Enables enterprises to integrate Amazon
-	//   Connect with other voice systems for real-time and post-call analytics. They can
-	//   use Amazon Connect Contact Lens with their existing voice systems to provides
-	//   call recordings, conversational analytics (including contact transcript,
-	//   sensitive data redaction, content categorization, theme detection, sentiment
-	//   analysis, real-time alerts, and post-contact summary), and agent performance
-	//   evaluations (including evaluation forms, automated evaluation, supervisor
-	//   review) with a rich user experience to display, search and filter customer
-	//   interactions, and programmatic access to data streams and the data lake.
-	//   Additionally, enterprises migrating their contact center to Amazon Connect can
-	//   start with Contact Lens analytics and performance insights ahead of agent
-	//   migration.
+	// This integration is a gated feature. Please reach out to your account team to
+	//   discuss this feature with a Connect Specialist.
+	//
+	//   - CONNECT_ANALYTICS_CONNECTOR - Enables enterprises to integrate Connect
+	//   Customer with other voice systems for real-time and post-call analytics. They
+	//   can use Connect Customer Contact Lens with their existing voice systems to
+	//   provides call recordings, conversational analytics (including contact
+	//   transcript, sensitive data redaction, content categorization, theme detection,
+	//   sentiment analysis, real-time alerts, and post-contact summary), and agent
+	//   performance evaluations (including evaluation forms, automated evaluation,
+	//   supervisor review) with a rich user experience to display, search and filter
+	//   customer interactions, and programmatic access to data streams and the data
+	//   lake. Additionally, enterprises migrating their contact center to Connect
+	//   Customer can start with Contact Lens analytics and performance insights ahead of
+	//   agent migration.
 	IntegrationType types.VoiceConnectorIntegrationType
 
-	// The type of network for the Voice Connector. Either IPv4 only or dual-stack
-	// (IPv4 and IPv6).
+	// The type of network for the Voice Connector.
 	NetworkType types.NetworkType
 
 	// The tags assigned to the Voice Connector.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateVoiceConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsRegion != "" {
+		s.WriteString(schemas.CreateVoiceConnectorRequest_AwsRegion, string(v.AwsRegion))
+	}
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.CreateVoiceConnectorRequest_IntegrationType, string(v.IntegrationType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVoiceConnectorRequest_Name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateVoiceConnectorRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.RequireEncryption != nil {
+		s.WriteBool(schemas.CreateVoiceConnectorRequest_RequireEncryption, *v.RequireEncryption)
+	}
+	serializeTagList(s, schemas.CreateVoiceConnectorRequest_Tags, v.Tags)
 }
 
 type CreateVoiceConnectorOutput struct {
@@ -94,77 +120,50 @@ type CreateVoiceConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVoiceConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceConnector != nil {
+		s.WriteStruct(schemas.CreateVoiceConnectorResponse_VoiceConnector)
+		v.VoiceConnector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVoiceConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVoiceConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVoiceConnectorResponse_VoiceConnector:
+			v.VoiceConnector = &types.VoiceConnector{}
+			return v.VoiceConnector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnector, schemas.CreateVoiceConnectorRequest, schemas.CreateVoiceConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVoiceConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnector, schemas.CreateVoiceConnectorRequest, schemas.CreateVoiceConnectorResponse), output: &CreateVoiceConnectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVoiceConnector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVoiceConnector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateVoiceConnectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVoiceConnector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +178,8 @@ func (c *Client) addOperationCreateVoiceConnectorMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateVoiceConnector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVoiceConnector",
-	}
 }

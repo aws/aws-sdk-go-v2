@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"componentSummaries":[{"componentName":"__ComponentName__","componentPath":"__ComponentPath__","componentTypeId":"__ComponentTypeId__","definedIn":"__DefinedIn__","description":"__Description__","propertyGroups":{"key0":{"groupType":"TABULAR","isInherited":true,"propertyNames":["__Member__","__Member__"]}},"status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"syncSource":"__SyncSource__"},{"componentName":"__ComponentName__","componentPath":"__ComponentPath__","componentTypeId":"__ComponentTypeId__","definedIn":"__DefinedIn__","description":"__Description__","propertyGroups":{"key0":{"groupType":"TABULAR","isInherited":true,"propertyNames":["__Member__","__Member__"]}},"status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"syncSource":"__SyncSource__"}],"nextToken":"__NextToken__"}

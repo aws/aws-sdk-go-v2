@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.CreateEventSubscription
+
+{"Enabled":true,"EventCategories":["__Member__","__Member__"],"SnsTopicArn":"__SnsTopicArn__","SourceIds":["__Member__","__Member__"],"SourceType":"__SourceType__","SubscriptionName":"__SubscriptionName__","Tags":[{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"},{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"}]}

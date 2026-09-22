@@ -5,10 +5,10 @@ package cloudwatchlogs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the log streams for the specified log group. You can list all the log
@@ -90,6 +90,36 @@ type DescribeLogStreamsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLogStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLogStreamsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLogStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Descending != nil {
+		s.WriteBool(schemas.DescribeLogStreamsRequest_descending, *v.Descending)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeLogStreamsRequest_limit, *v.Limit)
+	}
+	if v.LogGroupIdentifier != nil {
+		s.WriteString(schemas.DescribeLogStreamsRequest_logGroupIdentifier, *v.LogGroupIdentifier)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.DescribeLogStreamsRequest_logGroupName, *v.LogGroupName)
+	}
+	if v.LogStreamNamePrefix != nil {
+		s.WriteString(schemas.DescribeLogStreamsRequest_logStreamNamePrefix, *v.LogStreamNamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLogStreamsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrderBy != "" {
+		s.WriteString(schemas.DescribeLogStreamsRequest_orderBy, string(v.OrderBy))
+	}
+}
+
 type DescribeLogStreamsOutput struct {
 
 	// The log streams.
@@ -104,74 +134,48 @@ type DescribeLogStreamsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLogStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLogStreamsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLogStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogStreams(s, schemas.DescribeLogStreamsResponse_logStreams, v.LogStreams)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeLogStreamsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeLogStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLogStreamsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLogStreamsResponse_logStreams:
+			return deserializeLogStreams(d, schemas.DescribeLogStreamsResponse_logStreams, &v.LogStreams)
+		case schemas.DescribeLogStreamsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeLogStreamsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLogStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLogStreams, schemas.DescribeLogStreamsRequest, schemas.DescribeLogStreamsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeLogStreams{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLogStreams, schemas.DescribeLogStreamsRequest, schemas.DescribeLogStreamsResponse), output: &DescribeLogStreamsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeLogStreams{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLogStreams"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLogStreams(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,12 +188,6 @@ func (c *Client) addOperationDescribeLogStreamsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -292,11 +290,3 @@ type DescribeLogStreamsAPIClient interface {
 }
 
 var _ DescribeLogStreamsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeLogStreams(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLogStreams",
-	}
-}

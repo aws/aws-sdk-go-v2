@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.UpdateWorkspacesPool
+
+{"ApplicationSettings":{"SettingsGroup":"__SettingsGroup__","Status":"DISABLED"},"BundleId":"__BundleId__","Capacity":{"DesiredUserSessions":1},"Description":"__Description__","DirectoryId":"__DirectoryId__","PoolId":"__PoolId__","RunningMode":"AUTO_STOP","TimeoutSettings":{"DisconnectTimeoutInSeconds":1,"IdleDisconnectTimeoutInSeconds":1,"MaxUserDurationInSeconds":1}}

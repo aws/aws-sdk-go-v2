@@ -5,10 +5,10 @@ package devicefarm
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about unique problems, such as exceptions or crashes.
@@ -47,6 +47,21 @@ type ListUniqueProblemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUniqueProblemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUniqueProblemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUniqueProblemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListUniqueProblemsRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUniqueProblemsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the result of a list unique problems request.
 type ListUniqueProblemsOutput struct {
 
@@ -80,77 +95,51 @@ type ListUniqueProblemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUniqueProblemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUniqueProblemsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUniqueProblemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUniqueProblemsResult_nextToken, *v.NextToken)
+	}
+	serializeUniqueProblemsByExecutionResultMap(s, schemas.ListUniqueProblemsResult_uniqueProblems, v.UniqueProblems)
+}
+func (v *ListUniqueProblemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUniqueProblemsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUniqueProblemsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUniqueProblemsResult_nextToken, v.NextToken)
+		case schemas.ListUniqueProblemsResult_uniqueProblems:
+			return deserializeUniqueProblemsByExecutionResultMap(d, schemas.ListUniqueProblemsResult_uniqueProblems, &v.UniqueProblems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUniqueProblemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUniqueProblems, schemas.ListUniqueProblemsRequest, schemas.ListUniqueProblemsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUniqueProblems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUniqueProblems, schemas.ListUniqueProblemsRequest, schemas.ListUniqueProblemsResult), output: &ListUniqueProblemsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUniqueProblems{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUniqueProblems"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListUniqueProblemsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUniqueProblems(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +152,6 @@ func (c *Client) addOperationListUniqueProblemsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +241,3 @@ type ListUniqueProblemsAPIClient interface {
 }
 
 var _ ListUniqueProblemsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListUniqueProblems(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListUniqueProblems",
-	}
-}

@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an endpoint configuration that SageMaker hosting services uses to
@@ -120,12 +119,9 @@ type CreateEndpointConfigInput struct {
 	//
 	// Certain Nitro-based instances include local storage, dependent on the instance
 	// type. Local storage volumes are encrypted using a hardware module on the
-	// instance. You can't request a KmsKeyId when using an instance type with local
-	// storage. If any of the models that you specify in the ProductionVariants
-	// parameter use nitro-based instances with local storage, do not specify a value
-	// for the KmsKeyId parameter. If you specify a value for KmsKeyId when using any
-	// nitro-based instances with local storage, the call to CreateEndpointConfig
-	// fails.
+	// instance. If any of the models that you specify in the ProductionVariants
+	// parameter use nitro-based instances with local storage, the KmsKeyId parameter
+	// does not encrypt instance local storage.
 	//
 	// For a list of instance types that support local instance storage, see [Instance Store Volumes].
 	//
@@ -163,6 +159,55 @@ type CreateEndpointConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsyncInferenceConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_AsyncInferenceConfig)
+		v.AsyncInferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataCaptureConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_DataCaptureConfig)
+		v.DataCaptureConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableNetworkIsolation != nil {
+		s.WriteBool(schemas.CreateEndpointConfigInput_EnableNetworkIsolation, *v.EnableNetworkIsolation)
+	}
+	if v.EndpointConfigName != nil {
+		s.WriteString(schemas.CreateEndpointConfigInput_EndpointConfigName, *v.EndpointConfigName)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateEndpointConfigInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.ExplainerConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_ExplainerConfig)
+		v.ExplainerConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateEndpointConfigInput_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MetricsConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_MetricsConfig)
+		v.MetricsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProductionVariantList(s, schemas.CreateEndpointConfigInput_ProductionVariants, v.ProductionVariants)
+	serializeProductionVariantList(s, schemas.CreateEndpointConfigInput_ShadowProductionVariants, v.ShadowProductionVariants)
+	serializeTagList(s, schemas.CreateEndpointConfigInput_Tags, v.Tags)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateEndpointConfigInput_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateEndpointConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) of the endpoint configuration.
@@ -176,77 +221,48 @@ type CreateEndpointConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEndpointConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEndpointConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEndpointConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointConfigArn != nil {
+		s.WriteString(schemas.CreateEndpointConfigOutput_EndpointConfigArn, *v.EndpointConfigArn)
+	}
+}
+func (v *CreateEndpointConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEndpointConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEndpointConfigOutput_EndpointConfigArn:
+			v.EndpointConfigArn = new(string)
+			return d.ReadString(schemas.CreateEndpointConfigOutput_EndpointConfigArn, v.EndpointConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEndpointConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointConfig, schemas.CreateEndpointConfigInput, schemas.CreateEndpointConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateEndpointConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEndpointConfig, schemas.CreateEndpointConfigInput, schemas.CreateEndpointConfigOutput), output: &CreateEndpointConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateEndpointConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEndpointConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateEndpointConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEndpointConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -261,22 +277,8 @@ func (c *Client) addOperationCreateEndpointConfigMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateEndpointConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEndpointConfig",
-	}
 }

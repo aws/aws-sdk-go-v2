@@ -4,21 +4,20 @@ package geoplaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // SearchNearby queries for points of interest within a radius from a central
 // coordinates, returning place results with optional filters such as categories,
 // business chains, food types and more. The API returns details such as a place
 // name, address, phone, category, food type, contact, opening hours. Also, the API
-// can return phonemes, time zones and more based on requested parameters.
+// can return phonemes, time zones and more based on requested parameters. Not
+// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
 //
 // For more information, see [Search Nearby] in the Amazon Location Service Developer Guide.
 //
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 // [Search Nearby]: https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html
 func (c *Client) SearchNearby(ctx context.Context, params *SearchNearbyInput, optFns ...func(*Options)) (*SearchNearbyOutput, error) {
 	if params == nil {
@@ -73,7 +72,7 @@ type SearchNearbyInput struct {
 	// is no data for the result in the requested language, data will be returned in
 	// the default language for the entry.
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.
@@ -124,9 +123,6 @@ type SearchNearbyOutput struct {
 }
 
 func (c *Client) addOperationSearchNearbyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchNearby{}, middleware.After)
 	if err != nil {
 		return err
@@ -135,65 +131,20 @@ func (c *Client) addOperationSearchNearbyMiddlewares(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchNearby"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchNearbyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchNearby(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,22 +159,8 @@ func (c *Client) addOperationSearchNearbyMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSearchNearby(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchNearby",
-	}
 }

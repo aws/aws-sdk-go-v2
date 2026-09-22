@@ -1,0 +1,5 @@
+POST /listprincipals
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","principals":["__Member__","__Member__"],"resourceArn":"__ResourceArn__","resourceOwner":"SELF","resourceShareArns":["__Member__","__Member__"],"resourceType":"__ResourceType__"}

@@ -4,10 +4,9 @@ package groundstation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Delete an ephemeris.
@@ -36,6 +35,18 @@ type DeleteEphemerisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEphemerisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEphemerisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEphemerisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EphemerisId != nil {
+		s.WriteString(schemas.DeleteEphemerisRequest_ephemerisId, *v.EphemerisId)
+	}
+}
+
 type DeleteEphemerisOutput struct {
 
 	// The AWS Ground Station ephemeris ID.
@@ -47,77 +58,48 @@ type DeleteEphemerisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEphemerisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EphemerisIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEphemerisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EphemerisId != nil {
+		s.WriteString(schemas.EphemerisIdResponse_ephemerisId, *v.EphemerisId)
+	}
+}
+func (v *DeleteEphemerisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EphemerisIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EphemerisIdResponse_ephemerisId:
+			v.EphemerisId = new(string)
+			return d.ReadString(schemas.EphemerisIdResponse_ephemerisId, v.EphemerisId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEphemerisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEphemeris, schemas.DeleteEphemerisRequest, schemas.EphemerisIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEphemeris{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEphemeris, schemas.DeleteEphemerisRequest, schemas.EphemerisIdResponse), output: &DeleteEphemerisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEphemeris{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEphemeris"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteEphemerisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEphemeris(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,22 +114,8 @@ func (c *Client) addOperationDeleteEphemerisMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteEphemeris(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteEphemeris",
-	}
 }

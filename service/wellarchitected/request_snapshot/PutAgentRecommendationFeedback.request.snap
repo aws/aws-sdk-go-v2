@@ -1,0 +1,5 @@
+PUT /api/v1/agent-recommendations/__RecommendationArn__/feedback
+
+Content-Type: application/json
+
+{"comments":"__Comments__","feedbackCategory":"OTHER","type":"USEFUL"}

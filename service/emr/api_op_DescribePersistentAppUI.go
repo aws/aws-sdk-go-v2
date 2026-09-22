@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes a persistent application user interface.
@@ -37,6 +36,18 @@ type DescribePersistentAppUIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePersistentAppUIInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePersistentAppUIInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePersistentAppUIInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersistentAppUIId != nil {
+		s.WriteString(schemas.DescribePersistentAppUIInput_PersistentAppUIId, *v.PersistentAppUIId)
+	}
+}
+
 type DescribePersistentAppUIOutput struct {
 
 	// The persistent application user interface.
@@ -48,77 +59,50 @@ type DescribePersistentAppUIOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePersistentAppUIOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePersistentAppUIOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePersistentAppUIOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersistentAppUI != nil {
+		s.WriteStruct(schemas.DescribePersistentAppUIOutput_PersistentAppUI)
+		v.PersistentAppUI.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribePersistentAppUIOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePersistentAppUIOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePersistentAppUIOutput_PersistentAppUI:
+			v.PersistentAppUI = &types.PersistentAppUI{}
+			return v.PersistentAppUI.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePersistentAppUIMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePersistentAppUI, schemas.DescribePersistentAppUIInput, schemas.DescribePersistentAppUIOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePersistentAppUI{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePersistentAppUI, schemas.DescribePersistentAppUIInput, schemas.DescribePersistentAppUIOutput), output: &DescribePersistentAppUIOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePersistentAppUI{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePersistentAppUI"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePersistentAppUIValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePersistentAppUI(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -133,22 +117,8 @@ func (c *Client) addOperationDescribePersistentAppUIMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribePersistentAppUI(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePersistentAppUI",
-	}
 }

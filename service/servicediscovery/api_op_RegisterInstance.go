@@ -5,9 +5,9 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates one or more records and, optionally, creates a health check
@@ -204,6 +204,25 @@ type RegisterInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.RegisterInstanceRequest_Attributes, v.Attributes)
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.RegisterInstanceRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.RegisterInstanceRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.RegisterInstanceRequest_ServiceId, *v.ServiceId)
+	}
+}
+
 type RegisterInstanceOutput struct {
 
 	// A value that you can use to determine whether the request completed
@@ -218,65 +237,42 @@ type RegisterInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.RegisterInstanceResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *RegisterInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterInstanceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.RegisterInstanceResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterInstance, schemas.RegisterInstanceRequest, schemas.RegisterInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterInstance, schemas.RegisterInstanceRequest, schemas.RegisterInstanceResponse), output: &RegisterInstanceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterInstance{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -286,12 +282,6 @@ func (c *Client) addOperationRegisterInstanceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpRegisterInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -304,12 +294,6 @@ func (c *Client) addOperationRegisterInstanceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -349,12 +333,4 @@ func (m *idempotencyToken_initializeOpRegisterInstance) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opRegisterInstanceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpRegisterInstance{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opRegisterInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterInstance",
-	}
 }

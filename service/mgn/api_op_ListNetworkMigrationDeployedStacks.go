@@ -5,10 +5,10 @@ package mgn
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists CloudFormation stacks that have been deployed as part of the network
@@ -49,6 +49,27 @@ type ListNetworkMigrationDeployedStacksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationDeployedStacksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationDeployedStacksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationDeployedStacksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNetworkMigrationDeployedStacksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationDeployedStacksRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.ListNetworkMigrationDeployedStacksRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationDeployedStacksRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListNetworkMigrationDeployedStacksOutput struct {
 
 	// A list of deployed stack details including status and resources.
@@ -64,77 +85,51 @@ type ListNetworkMigrationDeployedStacksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkMigrationDeployedStacksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkMigrationDeployedStacksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkMigrationDeployedStacksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkMigrationDeployedStacksList(s, schemas.ListNetworkMigrationDeployedStacksResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkMigrationDeployedStacksResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworkMigrationDeployedStacksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkMigrationDeployedStacksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkMigrationDeployedStacksResponse_items:
+			return deserializeNetworkMigrationDeployedStacksList(d, schemas.ListNetworkMigrationDeployedStacksResponse_items, &v.Items)
+		case schemas.ListNetworkMigrationDeployedStacksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworkMigrationDeployedStacksResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkMigrationDeployedStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationDeployedStacks, schemas.ListNetworkMigrationDeployedStacksRequest, schemas.ListNetworkMigrationDeployedStacksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNetworkMigrationDeployedStacks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkMigrationDeployedStacks, schemas.ListNetworkMigrationDeployedStacksRequest, schemas.ListNetworkMigrationDeployedStacksResponse), output: &ListNetworkMigrationDeployedStacksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNetworkMigrationDeployedStacks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNetworkMigrationDeployedStacks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListNetworkMigrationDeployedStacksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNetworkMigrationDeployedStacks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +142,6 @@ func (c *Client) addOperationListNetworkMigrationDeployedStacksMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +245,3 @@ type ListNetworkMigrationDeployedStacksAPIClient interface {
 }
 
 var _ ListNetworkMigrationDeployedStacksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListNetworkMigrationDeployedStacks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListNetworkMigrationDeployedStacks",
-	}
-}

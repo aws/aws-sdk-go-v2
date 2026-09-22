@@ -4,11 +4,10 @@ package textract
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the results for an Amazon Textract asynchronous operation that analyzes
@@ -70,6 +69,24 @@ type GetExpenseAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExpenseAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExpenseAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExpenseAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetExpenseAnalysisRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetExpenseAnalysisRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExpenseAnalysisRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetExpenseAnalysisOutput struct {
 
 	// The current model version of AnalyzeExpense.
@@ -105,77 +122,84 @@ type GetExpenseAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExpenseAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExpenseAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExpenseAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzeExpenseModelVersion != nil {
+		s.WriteString(schemas.GetExpenseAnalysisResponse_AnalyzeExpenseModelVersion, *v.AnalyzeExpenseModelVersion)
+	}
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.GetExpenseAnalysisResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpenseDocumentList(s, schemas.GetExpenseAnalysisResponse_ExpenseDocuments, v.ExpenseDocuments)
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetExpenseAnalysisResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExpenseAnalysisResponse_NextToken, *v.NextToken)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetExpenseAnalysisResponse_StatusMessage, *v.StatusMessage)
+	}
+	serializeWarnings(s, schemas.GetExpenseAnalysisResponse_Warnings, v.Warnings)
+}
+func (v *GetExpenseAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExpenseAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExpenseAnalysisResponse_AnalyzeExpenseModelVersion:
+			v.AnalyzeExpenseModelVersion = new(string)
+			return d.ReadString(schemas.GetExpenseAnalysisResponse_AnalyzeExpenseModelVersion, v.AnalyzeExpenseModelVersion)
+		case schemas.GetExpenseAnalysisResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.GetExpenseAnalysisResponse_ExpenseDocuments:
+			return deserializeExpenseDocumentList(d, schemas.GetExpenseAnalysisResponse_ExpenseDocuments, &v.ExpenseDocuments)
+		case schemas.GetExpenseAnalysisResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetExpenseAnalysisResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.GetExpenseAnalysisResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetExpenseAnalysisResponse_NextToken, v.NextToken)
+		case schemas.GetExpenseAnalysisResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetExpenseAnalysisResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetExpenseAnalysisResponse_Warnings:
+			return deserializeWarnings(d, schemas.GetExpenseAnalysisResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExpenseAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExpenseAnalysis, schemas.GetExpenseAnalysisRequest, schemas.GetExpenseAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetExpenseAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExpenseAnalysis, schemas.GetExpenseAnalysisRequest, schemas.GetExpenseAnalysisResponse), output: &GetExpenseAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetExpenseAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetExpenseAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetExpenseAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExpenseAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +214,8 @@ func (c *Client) addOperationGetExpenseAnalysisMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetExpenseAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetExpenseAnalysis",
-	}
 }

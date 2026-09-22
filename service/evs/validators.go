@@ -210,6 +210,26 @@ func (m *validateOpDisassociateEipFromVlan) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDepotUrl struct {
+}
+
+func (*validateOpGetDepotUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDepotUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDepotUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDepotUrlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEnvironment struct {
 }
 
@@ -330,6 +350,26 @@ func (m *validateOpListVmEntitlements) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountSettings struct {
+}
+
+func (*validateOpPutAccountSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -430,6 +470,10 @@ func addOpDisassociateEipFromVlanValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDisassociateEipFromVlan{}, middleware.After)
 }
 
+func addOpGetDepotUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDepotUrl{}, middleware.After)
+}
+
 func addOpGetEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEnvironment{}, middleware.After)
 }
@@ -454,6 +498,10 @@ func addOpListVmEntitlementsValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListVmEntitlements{}, middleware.After)
 }
 
+func addOpPutAccountSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountSettings{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -464,6 +512,41 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateEnvironmentConnectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnvironmentConnector{}, middleware.After)
+}
+
+func validateAccountSetting(v *types.AccountSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountSetting"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAccountSettingList(v []types.AccountSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccountSettingList"}
+	for i := range v {
+		if err := validateAccountSetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateConnectivityInfo(v *types.ConnectivityInfo) error {
@@ -798,13 +881,6 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	if v.TermsAccepted == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TermsAccepted"))
 	}
-	if v.LicenseInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("LicenseInfo"))
-	} else if v.LicenseInfo != nil {
-		if err := validateLicenseInfoList(v.LicenseInfo); err != nil {
-			invalidParams.AddNested("LicenseInfo", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.InitialVlans == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitialVlans"))
 	} else if v.InitialVlans != nil {
@@ -812,29 +888,25 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 			invalidParams.AddNested("InitialVlans", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.Hosts == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Hosts"))
-	} else if v.Hosts != nil {
-		if err := validateHostInfoForCreateList(v.Hosts); err != nil {
-			invalidParams.AddNested("Hosts", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ConnectivityInfo == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectivityInfo"))
-	} else if v.ConnectivityInfo != nil {
+	if v.ConnectivityInfo != nil {
 		if err := validateConnectivityInfo(v.ConnectivityInfo); err != nil {
 			invalidParams.AddNested("ConnectivityInfo", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.VcfHostnames == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("VcfHostnames"))
-	} else if v.VcfHostnames != nil {
+	if v.LicenseInfo != nil {
+		if err := validateLicenseInfoList(v.LicenseInfo); err != nil {
+			invalidParams.AddNested("LicenseInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Hosts != nil {
+		if err := validateHostInfoForCreateList(v.Hosts); err != nil {
+			invalidParams.AddNested("Hosts", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VcfHostnames != nil {
 		if err := validateVcfHostnames(v.VcfHostnames); err != nil {
 			invalidParams.AddNested("VcfHostnames", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SiteId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SiteId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -939,6 +1011,21 @@ func validateOpDisassociateEipFromVlanInput(v *DisassociateEipFromVlanInput) err
 	}
 }
 
+func validateOpGetDepotUrlInput(v *GetDepotUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDepotUrlInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEnvironmentInput(v *GetEnvironmentInput) error {
 	if v == nil {
 		return nil
@@ -1027,6 +1114,25 @@ func validateOpListVmEntitlementsInput(v *ListVmEntitlementsInput) error {
 	}
 	if len(v.EntitlementType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EntitlementType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountSettingsInput(v *PutAccountSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountSettingsInput"}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateAccountSettingList(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

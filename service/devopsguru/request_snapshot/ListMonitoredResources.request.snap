@@ -1,0 +1,5 @@
+POST /monitoredResources
+
+Content-Type: application/json
+
+{"Filters":{"ResourcePermission":"FULL_PERMISSION","ResourceTypeFilters":["LOG_GROUPS","LOG_GROUPS"]},"MaxResults":1,"NextToken":"__NextToken__"}

@@ -1,0 +1,7 @@
+POST /service/PartnerCentralRevenueMeasurement/operation/UpdateRevenueAttribution
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿gCatalogcAWSkClientTokeno__ClientToken__kDescriptiono__Description__jIdentifiern__Identifier__hRevisionl__Revision__ÿ

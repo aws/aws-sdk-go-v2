@@ -1,0 +1,5 @@
+POST /delete-ms-teams-configured-teams
+
+Content-Type: application/json
+
+{"TeamId":"__TeamId__"}

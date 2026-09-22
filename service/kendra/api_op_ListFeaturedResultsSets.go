@@ -4,11 +4,10 @@ package kendra
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all your sets of featured results for a given index. Features results are
@@ -47,6 +46,24 @@ type ListFeaturedResultsSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFeaturedResultsSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFeaturedResultsSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFeaturedResultsSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListFeaturedResultsSetsRequest_IndexId, *v.IndexId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFeaturedResultsSetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFeaturedResultsSetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFeaturedResultsSetsOutput struct {
 
 	// An array of summary information for one or more featured results sets.
@@ -62,77 +79,51 @@ type ListFeaturedResultsSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFeaturedResultsSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFeaturedResultsSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFeaturedResultsSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeaturedResultsSetSummaryItems(s, schemas.ListFeaturedResultsSetsResponse_FeaturedResultsSetSummaryItems, v.FeaturedResultsSetSummaryItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFeaturedResultsSetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFeaturedResultsSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFeaturedResultsSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFeaturedResultsSetsResponse_FeaturedResultsSetSummaryItems:
+			return deserializeFeaturedResultsSetSummaryItems(d, schemas.ListFeaturedResultsSetsResponse_FeaturedResultsSetSummaryItems, &v.FeaturedResultsSetSummaryItems)
+		case schemas.ListFeaturedResultsSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFeaturedResultsSetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFeaturedResultsSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFeaturedResultsSets, schemas.ListFeaturedResultsSetsRequest, schemas.ListFeaturedResultsSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFeaturedResultsSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFeaturedResultsSets, schemas.ListFeaturedResultsSetsRequest, schemas.ListFeaturedResultsSetsResponse), output: &ListFeaturedResultsSetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFeaturedResultsSets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFeaturedResultsSets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFeaturedResultsSetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFeaturedResultsSets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +138,8 @@ func (c *Client) addOperationListFeaturedResultsSetsMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListFeaturedResultsSets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFeaturedResultsSets",
-	}
 }

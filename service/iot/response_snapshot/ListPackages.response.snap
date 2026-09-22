@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","packageSummaries":[{"creationDate":946684800,"defaultVersionName":"__DefaultVersionName__","lastModifiedDate":946684800,"packageName":"__PackageName__"},{"creationDate":946684800,"defaultVersionName":"__DefaultVersionName__","lastModifiedDate":946684800,"packageName":"__PackageName__"}]}

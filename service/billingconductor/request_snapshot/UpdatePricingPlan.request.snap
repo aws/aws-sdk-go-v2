@@ -1,0 +1,5 @@
+PUT /update-pricing-plan
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","Description":"__Description__","Name":"__Name__"}

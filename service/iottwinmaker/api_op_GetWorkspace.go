@@ -5,7 +5,8 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -35,6 +36,28 @@ type GetWorkspaceInput struct {
 	WorkspaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetWorkspaceRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetWorkspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkspaceRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetWorkspaceRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
 }
 
 type GetWorkspaceOutput struct {
@@ -78,65 +101,81 @@ type GetWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetWorkspaceResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.GetWorkspaceResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetWorkspaceResponse_description, *v.Description)
+	}
+	serializeLinkedServices(s, schemas.GetWorkspaceResponse_linkedServices, v.LinkedServices)
+	if v.Role != nil {
+		s.WriteString(schemas.GetWorkspaceResponse_role, *v.Role)
+	}
+	if v.S3Location != nil {
+		s.WriteString(schemas.GetWorkspaceResponse_s3Location, *v.S3Location)
+	}
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.GetWorkspaceResponse_updateDateTime, *v.UpdateDateTime)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.GetWorkspaceResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *GetWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkspaceResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetWorkspaceResponse_arn, v.Arn)
+		case schemas.GetWorkspaceResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkspaceResponse_creationDateTime, v.CreationDateTime)
+		case schemas.GetWorkspaceResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetWorkspaceResponse_description, v.Description)
+		case schemas.GetWorkspaceResponse_linkedServices:
+			return deserializeLinkedServices(d, schemas.GetWorkspaceResponse_linkedServices, &v.LinkedServices)
+		case schemas.GetWorkspaceResponse_role:
+			v.Role = new(string)
+			return d.ReadString(schemas.GetWorkspaceResponse_role, v.Role)
+		case schemas.GetWorkspaceResponse_s3Location:
+			v.S3Location = new(string)
+			return d.ReadString(schemas.GetWorkspaceResponse_s3Location, v.S3Location)
+		case schemas.GetWorkspaceResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkspaceResponse_updateDateTime, v.UpdateDateTime)
+		case schemas.GetWorkspaceResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.GetWorkspaceResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkspace, schemas.GetWorkspaceRequest, schemas.GetWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkspace, schemas.GetWorkspaceRequest, schemas.GetWorkspaceResponse), output: &GetWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkspace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkspace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -146,12 +185,6 @@ func (c *Client) addOperationGetWorkspaceMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpGetWorkspaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWorkspace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +197,6 @@ func (c *Client) addOperationGetWorkspaceMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -203,12 +230,4 @@ func (m *endpointPrefix_opGetWorkspaceMiddleware) HandleFinalize(ctx context.Con
 }
 func addEndpointPrefix_opGetWorkspaceMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetWorkspaceMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetWorkspace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWorkspace",
-	}
 }

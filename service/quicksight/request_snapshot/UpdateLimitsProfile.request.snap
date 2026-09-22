@@ -1,0 +1,5 @@
+PUT /governance/limits/accounts/__AccountId__/profiles/__ProfileId__
+
+Content-Type: application/json
+
+{"description":"__Description__","profileName":"__ProfileName__","resourceLimits":{"key0":{"maxValue":1,"unit":"MB"}}}

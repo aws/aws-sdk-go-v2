@@ -4,11 +4,8 @@ package synthetics
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a canary. Canaries are scripts that monitor your endpoints and APIs
@@ -110,6 +107,11 @@ type CreateCanaryInput struct {
 	// This member is required.
 	Schedule *types.CanaryScheduleInput
 
+	// A list of locations (Amazon Web Services Regions) to add as replicas for the
+	// canary. Each location specifies a Region and optional VPC configuration for the
+	// replica. You can add up to 50 replica locations.
+	AddReplicaLocations []types.AddReplicaLocationInput
+
 	// A structure that contains the configuration for canary artifacts, including the
 	// encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
 	ArtifactConfig *types.ArtifactConfigInput
@@ -131,6 +133,12 @@ type CreateCanaryInput struct {
 	//
 	// [GetCanaryRuns]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanaryRuns.html
 	FailureRetentionPeriodInDays *int32
+
+	// The Amazon Resource Name (ARN) of the customer-managed AWS Key Management
+	// Service (AWS KMS) key used to encrypt the canary's AWS Lambda function
+	// environment variables at rest. If you don't specify a value, the service uses an
+	// AWS-managed key.
+	KmsKeyArn *string
 
 	// Specifies whether to also delete the Lambda functions and layers used by this
 	// canary when the canary is deleted. If you omit this parameter, the default of
@@ -204,9 +212,6 @@ type CreateCanaryOutput struct {
 }
 
 func (c *Client) addOperationCreateCanaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCanary{}, middleware.After)
 	if err != nil {
 		return err
@@ -215,65 +220,20 @@ func (c *Client) addOperationCreateCanaryMiddlewares(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCanary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCanaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCanary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -288,22 +248,8 @@ func (c *Client) addOperationCreateCanaryMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCanary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCanary",
-	}
 }

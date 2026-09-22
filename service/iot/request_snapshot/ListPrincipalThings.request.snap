@@ -1,0 +1,4 @@
+GET /principals/things?maxResults=1&nextToken=__NextToken__
+
+X-Amzn-Principal: __Principal__
+

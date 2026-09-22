@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -69,6 +68,24 @@ type DescribeDashboardSnapshotJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardSnapshotJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardSnapshotJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardSnapshotJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDashboardSnapshotJobRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardSnapshotJobRequest_DashboardId, *v.DashboardId)
+	}
+	if v.SnapshotJobId != nil {
+		s.WriteString(schemas.DescribeDashboardSnapshotJobRequest_SnapshotJobId, *v.SnapshotJobId)
+	}
+}
+
 type DescribeDashboardSnapshotJobOutput struct {
 
 	// The Amazon Resource Name (ARN) for the snapshot job. The job ARN is generated
@@ -124,77 +141,115 @@ type DescribeDashboardSnapshotJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardSnapshotJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardSnapshotJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardSnapshotJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeDashboardSnapshotJobResponse_Arn, *v.Arn)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDashboardSnapshotJobResponse_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.DescribeDashboardSnapshotJobResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardSnapshotJobResponse_DashboardId, *v.DashboardId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.DescribeDashboardSnapshotJobResponse_JobStatus, string(v.JobStatus))
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.DescribeDashboardSnapshotJobResponse_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDashboardSnapshotJobResponse_RequestId, *v.RequestId)
+	}
+	if v.SnapshotConfiguration != nil {
+		s.WriteStruct(schemas.DescribeDashboardSnapshotJobResponse_SnapshotConfiguration)
+		v.SnapshotConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotJobId != nil {
+		s.WriteString(schemas.DescribeDashboardSnapshotJobResponse_SnapshotJobId, *v.SnapshotJobId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDashboardSnapshotJobResponse_Status, v.Status)
+	}
+	if v.UserConfiguration != nil {
+		s.WriteStruct(schemas.DescribeDashboardSnapshotJobResponse_UserConfiguration)
+		v.UserConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDashboardSnapshotJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDashboardSnapshotJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDashboardSnapshotJobResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeDashboardSnapshotJobResponse_Arn, v.Arn)
+		case schemas.DescribeDashboardSnapshotJobResponse_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.DescribeDashboardSnapshotJobResponse_AwsAccountId, v.AwsAccountId)
+		case schemas.DescribeDashboardSnapshotJobResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDashboardSnapshotJobResponse_CreatedTime, v.CreatedTime)
+		case schemas.DescribeDashboardSnapshotJobResponse_DashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.DescribeDashboardSnapshotJobResponse_DashboardId, v.DashboardId)
+		case schemas.DescribeDashboardSnapshotJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDashboardSnapshotJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.SnapshotJobStatus(ev)
+			return nil
+		case schemas.DescribeDashboardSnapshotJobResponse_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDashboardSnapshotJobResponse_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.DescribeDashboardSnapshotJobResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDashboardSnapshotJobResponse_RequestId, v.RequestId)
+		case schemas.DescribeDashboardSnapshotJobResponse_SnapshotConfiguration:
+			v.SnapshotConfiguration = &types.SnapshotConfiguration{}
+			return v.SnapshotConfiguration.Deserialize(d)
+		case schemas.DescribeDashboardSnapshotJobResponse_SnapshotJobId:
+			v.SnapshotJobId = new(string)
+			return d.ReadString(schemas.DescribeDashboardSnapshotJobResponse_SnapshotJobId, v.SnapshotJobId)
+		case schemas.DescribeDashboardSnapshotJobResponse_Status:
+			return d.ReadInt32(schemas.DescribeDashboardSnapshotJobResponse_Status, &v.Status)
+		case schemas.DescribeDashboardSnapshotJobResponse_UserConfiguration:
+			v.UserConfiguration = &types.SnapshotUserConfigurationRedacted{}
+			return v.UserConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDashboardSnapshotJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardSnapshotJob, schemas.DescribeDashboardSnapshotJobRequest, schemas.DescribeDashboardSnapshotJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboardSnapshotJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardSnapshotJob, schemas.DescribeDashboardSnapshotJobRequest, schemas.DescribeDashboardSnapshotJobResponse), output: &DescribeDashboardSnapshotJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDashboardSnapshotJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDashboardSnapshotJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDashboardSnapshotJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDashboardSnapshotJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,22 +264,8 @@ func (c *Client) addOperationDescribeDashboardSnapshotJobMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDashboardSnapshotJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDashboardSnapshotJob",
-	}
 }

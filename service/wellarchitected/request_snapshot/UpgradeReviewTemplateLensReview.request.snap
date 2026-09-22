@@ -1,0 +1,5 @@
+PUT /reviewTemplates/__TemplateArn__/lensReviews/__LensAlias__/upgrade
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__"}

@@ -123,6 +123,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(v *InvokeEndpointIn
 		encoder.SetHeader(locationName).String(*v.InferenceId)
 	}
 
+	if v.PrefixAwareId != nil {
+		locationName := "X-Amzn-Sagemaker-Prefix-Aware-Id"
+		encoder.SetHeader(locationName).String(*v.PrefixAwareId)
+	}
+
 	if v.SessionId != nil {
 		locationName := "X-Amzn-Sagemaker-Session-Id"
 		encoder.SetHeader(locationName).String(*v.SessionId)
@@ -189,6 +194,18 @@ func (m *awsRestjson1_serializeOpInvokeEndpointAsync) HandleSerialize(ctx contex
 
 	if err := awsRestjson1_serializeOpHttpBindingsInvokeEndpointAsyncInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
+
+	if input.Body != nil {
+		payload := bytes.NewReader(input.Body)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -365,6 +382,11 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointWithResponseStreamInput(v
 	if v.InferenceId != nil {
 		locationName := "X-Amzn-Sagemaker-Inference-Id"
 		encoder.SetHeader(locationName).String(*v.InferenceId)
+	}
+
+	if v.PrefixAwareId != nil {
+		locationName := "X-Amzn-Sagemaker-Prefix-Aware-Id"
+		encoder.SetHeader(locationName).String(*v.PrefixAwareId)
 	}
 
 	if v.SessionId != nil {

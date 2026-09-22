@@ -5,10 +5,10 @@ package resourcegroups
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of existing Resource Groups in your account.
@@ -82,6 +82,22 @@ type ListGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupFilterList(s, schemas.ListGroupsInput_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroupsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListGroupsOutput struct {
 
 	// A list of GroupIdentifier objects. Each identifier is an object that contains both the Name
@@ -106,77 +122,54 @@ type ListGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupIdentifierList(s, schemas.ListGroupsOutput_GroupIdentifiers, v.GroupIdentifiers)
+	serializeGroupList(s, schemas.ListGroupsOutput_Groups, v.Groups)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupsOutput_GroupIdentifiers:
+			return deserializeGroupIdentifierList(d, schemas.ListGroupsOutput_GroupIdentifiers, &v.GroupIdentifiers)
+		case schemas.ListGroupsOutput_Groups:
+			return deserializeGroupList(d, schemas.ListGroupsOutput_Groups, &v.Groups)
+		case schemas.ListGroupsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroups, schemas.ListGroupsInput, schemas.ListGroupsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroups, schemas.ListGroupsInput, schemas.ListGroupsOutput), output: &ListGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListGroupsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,12 +182,6 @@ func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -302,11 +289,3 @@ type ListGroupsAPIClient interface {
 }
 
 var _ ListGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListGroups",
-	}
-}

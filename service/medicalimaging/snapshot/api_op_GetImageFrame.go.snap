@@ -1,8 +1,5 @@
 GetImageFrame
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -10,16 +7,12 @@ GetImageFrame
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
@@ -30,7 +23,6 @@ GetImageFrame
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer

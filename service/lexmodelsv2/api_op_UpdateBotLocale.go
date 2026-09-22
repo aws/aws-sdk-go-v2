@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -87,6 +86,58 @@ type UpdateBotLocaleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotLocaleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotLocaleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotLocaleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioFillerSettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleRequest_audioFillerSettings)
+		v.AudioFillerSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateBotLocaleRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateBotLocaleRequest_botVersion, *v.BotVersion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBotLocaleRequest_description, *v.Description)
+	}
+	if v.GenerativeAISettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleRequest_generativeAISettings)
+		v.GenerativeAISettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateBotLocaleRequest_localeId, *v.LocaleId)
+	}
+	if v.NluIntentConfidenceThreshold != nil {
+		s.WriteFloat64(schemas.UpdateBotLocaleRequest_nluIntentConfidenceThreshold, *v.NluIntentConfidenceThreshold)
+	}
+	if v.SpeechDetectionSensitivity != "" {
+		s.WriteString(schemas.UpdateBotLocaleRequest_speechDetectionSensitivity, string(v.SpeechDetectionSensitivity))
+	}
+	if v.SpeechRecognitionSettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleRequest_speechRecognitionSettings)
+		v.SpeechRecognitionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UnifiedSpeechSettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleRequest_unifiedSpeechSettings)
+		v.UnifiedSpeechSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceSettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleRequest_voiceSettings)
+		v.VoiceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateBotLocaleOutput struct {
 
 	// The updated audio filler settings for the bot locale.
@@ -152,77 +203,156 @@ type UpdateBotLocaleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotLocaleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotLocaleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioFillerSettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleResponse_audioFillerSettings)
+		v.AudioFillerSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateBotLocaleResponse_botId, *v.BotId)
+	}
+	if v.BotLocaleStatus != "" {
+		s.WriteString(schemas.UpdateBotLocaleResponse_botLocaleStatus, string(v.BotLocaleStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.UpdateBotLocaleResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.UpdateBotLocaleResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBotLocaleResponse_description, *v.Description)
+	}
+	serializeFailureReasons(s, schemas.UpdateBotLocaleResponse_failureReasons, v.FailureReasons)
+	if v.GenerativeAISettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleResponse_generativeAISettings)
+		v.GenerativeAISettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateBotLocaleResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.UpdateBotLocaleResponse_localeId, *v.LocaleId)
+	}
+	if v.LocaleName != nil {
+		s.WriteString(schemas.UpdateBotLocaleResponse_localeName, *v.LocaleName)
+	}
+	if v.NluIntentConfidenceThreshold != nil {
+		s.WriteFloat64(schemas.UpdateBotLocaleResponse_nluIntentConfidenceThreshold, *v.NluIntentConfidenceThreshold)
+	}
+	serializeRecommendedActions(s, schemas.UpdateBotLocaleResponse_recommendedActions, v.RecommendedActions)
+	if v.SpeechDetectionSensitivity != "" {
+		s.WriteString(schemas.UpdateBotLocaleResponse_speechDetectionSensitivity, string(v.SpeechDetectionSensitivity))
+	}
+	if v.SpeechRecognitionSettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleResponse_speechRecognitionSettings)
+		v.SpeechRecognitionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UnifiedSpeechSettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleResponse_unifiedSpeechSettings)
+		v.UnifiedSpeechSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VoiceSettings != nil {
+		s.WriteStruct(schemas.UpdateBotLocaleResponse_voiceSettings)
+		v.VoiceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBotLocaleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBotLocaleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBotLocaleResponse_audioFillerSettings:
+			v.AudioFillerSettings = &types.AudioFillerSettings{}
+			return v.AudioFillerSettings.Deserialize(d)
+		case schemas.UpdateBotLocaleResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.UpdateBotLocaleResponse_botId, v.BotId)
+		case schemas.UpdateBotLocaleResponse_botLocaleStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBotLocaleResponse_botLocaleStatus, &ev); err != nil {
+				return err
+			}
+			v.BotLocaleStatus = types.BotLocaleStatus(ev)
+			return nil
+		case schemas.UpdateBotLocaleResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.UpdateBotLocaleResponse_botVersion, v.BotVersion)
+		case schemas.UpdateBotLocaleResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateBotLocaleResponse_creationDateTime, v.CreationDateTime)
+		case schemas.UpdateBotLocaleResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateBotLocaleResponse_description, v.Description)
+		case schemas.UpdateBotLocaleResponse_failureReasons:
+			return deserializeFailureReasons(d, schemas.UpdateBotLocaleResponse_failureReasons, &v.FailureReasons)
+		case schemas.UpdateBotLocaleResponse_generativeAISettings:
+			v.GenerativeAISettings = &types.GenerativeAISettings{}
+			return v.GenerativeAISettings.Deserialize(d)
+		case schemas.UpdateBotLocaleResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateBotLocaleResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateBotLocaleResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.UpdateBotLocaleResponse_localeId, v.LocaleId)
+		case schemas.UpdateBotLocaleResponse_localeName:
+			v.LocaleName = new(string)
+			return d.ReadString(schemas.UpdateBotLocaleResponse_localeName, v.LocaleName)
+		case schemas.UpdateBotLocaleResponse_nluIntentConfidenceThreshold:
+			v.NluIntentConfidenceThreshold = new(float64)
+			return d.ReadFloat64(schemas.UpdateBotLocaleResponse_nluIntentConfidenceThreshold, v.NluIntentConfidenceThreshold)
+		case schemas.UpdateBotLocaleResponse_recommendedActions:
+			return deserializeRecommendedActions(d, schemas.UpdateBotLocaleResponse_recommendedActions, &v.RecommendedActions)
+		case schemas.UpdateBotLocaleResponse_speechDetectionSensitivity:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBotLocaleResponse_speechDetectionSensitivity, &ev); err != nil {
+				return err
+			}
+			v.SpeechDetectionSensitivity = types.SpeechDetectionSensitivity(ev)
+			return nil
+		case schemas.UpdateBotLocaleResponse_speechRecognitionSettings:
+			v.SpeechRecognitionSettings = &types.SpeechRecognitionSettings{}
+			return v.SpeechRecognitionSettings.Deserialize(d)
+		case schemas.UpdateBotLocaleResponse_unifiedSpeechSettings:
+			v.UnifiedSpeechSettings = &types.UnifiedSpeechSettings{}
+			return v.UnifiedSpeechSettings.Deserialize(d)
+		case schemas.UpdateBotLocaleResponse_voiceSettings:
+			v.VoiceSettings = &types.VoiceSettings{}
+			return v.VoiceSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBotLocale, schemas.UpdateBotLocaleRequest, schemas.UpdateBotLocaleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBotLocale{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBotLocale, schemas.UpdateBotLocaleRequest, schemas.UpdateBotLocaleResponse), output: &UpdateBotLocaleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBotLocale{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBotLocale"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateBotLocaleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBotLocale(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -237,22 +367,8 @@ func (c *Client) addOperationUpdateBotLocaleMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateBotLocale(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateBotLocale",
-	}
 }

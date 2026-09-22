@@ -4,11 +4,10 @@ package invoicing
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a URL to download the invoice document and supplemental documents
@@ -43,6 +42,18 @@ type GetInvoicePDFInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvoicePDFInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvoicePDFRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvoicePDFInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvoiceId != nil {
+		s.WriteString(schemas.GetInvoicePDFRequest_InvoiceId, *v.InvoiceId)
+	}
+}
+
 type GetInvoicePDFOutput struct {
 
 	//  The invoice document and supplemental documents associated with the invoice.
@@ -54,77 +65,50 @@ type GetInvoicePDFOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvoicePDFOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvoicePDFResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvoicePDFOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvoicePDF != nil {
+		s.WriteStruct(schemas.GetInvoicePDFResponse_InvoicePDF)
+		v.InvoicePDF.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetInvoicePDFOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInvoicePDFResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInvoicePDFResponse_InvoicePDF:
+			v.InvoicePDF = &types.InvoicePDF{}
+			return v.InvoicePDF.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInvoicePDFMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvoicePDF, schemas.GetInvoicePDFRequest, schemas.GetInvoicePDFResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetInvoicePDF{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvoicePDF, schemas.GetInvoicePDFRequest, schemas.GetInvoicePDFResponse), output: &GetInvoicePDFOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetInvoicePDF{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInvoicePDF"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetInvoicePDFValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInvoicePDF(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +123,8 @@ func (c *Client) addOperationGetInvoicePDFMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetInvoicePDF(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetInvoicePDF",
-	}
 }

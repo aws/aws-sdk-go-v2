@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyClusterSubnetGroup&ClusterSubnetGroupName=__ClusterSubnetGroupName__&Description=__Description__&SubnetIds.SubnetIdentifier.1=__Member__&SubnetIds.SubnetIdentifier.2=__Member__&Version=2012-12-01

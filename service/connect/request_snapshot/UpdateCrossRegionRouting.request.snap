@@ -1,0 +1,5 @@
+PUT /cross-region-routing/__InstanceId__
+
+Content-Type: application/json
+
+{"IsolatedAll":true}

@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates all properties for an attribute using all properties from
@@ -77,6 +76,41 @@ type UpdateDataTableAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTableAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTableAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTableAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_AttributeName, *v.AttributeName)
+	}
+	if v.DataTableId != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_DataTableId, *v.DataTableId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_Name, *v.Name)
+	}
+	if v.Primary != false {
+		s.WriteBool(schemas.UpdateDataTableAttributeRequest_Primary, v.Primary)
+	}
+	if v.Validation != nil {
+		s.WriteStruct(schemas.UpdateDataTableAttributeRequest_Validation)
+		v.Validation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValueType != "" {
+		s.WriteString(schemas.UpdateDataTableAttributeRequest_ValueType, string(v.ValueType))
+	}
+}
+
 type UpdateDataTableAttributeOutput struct {
 
 	// The new lock version for the attribute after the update.
@@ -95,77 +129,56 @@ type UpdateDataTableAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataTableAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataTableAttributeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataTableAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LockVersion != nil {
+		s.WriteStruct(schemas.UpdateDataTableAttributeResponse_LockVersion)
+		v.LockVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataTableAttributeResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateDataTableAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataTableAttributeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataTableAttributeResponse_LockVersion:
+			v.LockVersion = &types.DataTableLockVersion{}
+			return v.LockVersion.Deserialize(d)
+		case schemas.UpdateDataTableAttributeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDataTableAttributeResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataTableAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTableAttribute, schemas.UpdateDataTableAttributeRequest, schemas.UpdateDataTableAttributeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataTableAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataTableAttribute, schemas.UpdateDataTableAttributeRequest, schemas.UpdateDataTableAttributeResponse), output: &UpdateDataTableAttributeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataTableAttribute{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataTableAttribute"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDataTableAttributeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataTableAttribute(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +193,8 @@ func (c *Client) addOperationUpdateDataTableAttributeMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDataTableAttribute(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDataTableAttribute",
-	}
 }

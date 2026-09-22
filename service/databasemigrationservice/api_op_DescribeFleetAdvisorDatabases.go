@@ -5,10 +5,10 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	End of support notice: On May 20, 2026, Amazon Web Services will end support
@@ -68,6 +68,22 @@ type DescribeFleetAdvisorDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetAdvisorDatabasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetAdvisorDatabasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetAdvisorDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeFleetAdvisorDatabasesRequest_Filters, v.Filters)
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeFleetAdvisorDatabasesRequest_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetAdvisorDatabasesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFleetAdvisorDatabasesOutput struct {
 
 	// Provides descriptions of the Fleet Advisor collector databases, including the
@@ -86,77 +102,51 @@ type DescribeFleetAdvisorDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetAdvisorDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetAdvisorDatabasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetAdvisorDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseList(s, schemas.DescribeFleetAdvisorDatabasesResponse_Databases, v.Databases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetAdvisorDatabasesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFleetAdvisorDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetAdvisorDatabasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetAdvisorDatabasesResponse_Databases:
+			return deserializeDatabaseList(d, schemas.DescribeFleetAdvisorDatabasesResponse_Databases, &v.Databases)
+		case schemas.DescribeFleetAdvisorDatabasesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFleetAdvisorDatabasesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetAdvisorDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetAdvisorDatabases, schemas.DescribeFleetAdvisorDatabasesRequest, schemas.DescribeFleetAdvisorDatabasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFleetAdvisorDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetAdvisorDatabases, schemas.DescribeFleetAdvisorDatabasesRequest, schemas.DescribeFleetAdvisorDatabasesResponse), output: &DescribeFleetAdvisorDatabasesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFleetAdvisorDatabases{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFleetAdvisorDatabases"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFleetAdvisorDatabasesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleetAdvisorDatabases(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +159,6 @@ func (c *Client) addOperationDescribeFleetAdvisorDatabasesMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +262,3 @@ type DescribeFleetAdvisorDatabasesAPIClient interface {
 }
 
 var _ DescribeFleetAdvisorDatabasesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeFleetAdvisorDatabases(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFleetAdvisorDatabases",
-	}
-}

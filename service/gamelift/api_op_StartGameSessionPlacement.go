@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -155,9 +154,10 @@ type StartGameSessionPlacementInput struct {
 	GameSessionName *string
 
 	// A set of values, expressed in milliseconds, that indicates the amount of
-	// latency that a player experiences when connected to Amazon Web Services Regions.
-	// This information is used to try to place the new game session where it can offer
-	// the best possible gameplay experience for the players.
+	// latency that a player experiences when connected to a fleet location (Amazon Web
+	// Services Regions or custom locations for Amazon GameLift Servers Anywhere
+	// fleets). This information is used to try to place the new game session where it
+	// can offer the best possible gameplay experience for the players.
 	PlayerLatencies []types.PlayerLatency
 
 	// A prioritized list of locations to use for the game session placement and
@@ -174,6 +174,38 @@ type StartGameSessionPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartGameSessionPlacementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartGameSessionPlacementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartGameSessionPlacementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDesiredPlayerSessionList(s, schemas.StartGameSessionPlacementInput_DesiredPlayerSessions, v.DesiredPlayerSessions)
+	serializeGamePropertyList(s, schemas.StartGameSessionPlacementInput_GameProperties, v.GameProperties)
+	if v.GameSessionData != nil {
+		s.WriteString(schemas.StartGameSessionPlacementInput_GameSessionData, *v.GameSessionData)
+	}
+	if v.GameSessionName != nil {
+		s.WriteString(schemas.StartGameSessionPlacementInput_GameSessionName, *v.GameSessionName)
+	}
+	if v.GameSessionQueueName != nil {
+		s.WriteString(schemas.StartGameSessionPlacementInput_GameSessionQueueName, *v.GameSessionQueueName)
+	}
+	if v.MaximumPlayerSessionCount != nil {
+		s.WriteInt32(schemas.StartGameSessionPlacementInput_MaximumPlayerSessionCount, *v.MaximumPlayerSessionCount)
+	}
+	if v.PlacementId != nil {
+		s.WriteString(schemas.StartGameSessionPlacementInput_PlacementId, *v.PlacementId)
+	}
+	serializePlayerLatencyList(s, schemas.StartGameSessionPlacementInput_PlayerLatencies, v.PlayerLatencies)
+	if v.PriorityConfigurationOverride != nil {
+		s.WriteStruct(schemas.StartGameSessionPlacementInput_PriorityConfigurationOverride)
+		v.PriorityConfigurationOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartGameSessionPlacementOutput struct {
 
 	// Object that describes the newly created game session placement. This object
@@ -187,65 +219,44 @@ type StartGameSessionPlacementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartGameSessionPlacementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartGameSessionPlacementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartGameSessionPlacementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionPlacement != nil {
+		s.WriteStruct(schemas.StartGameSessionPlacementOutput_GameSessionPlacement)
+		v.GameSessionPlacement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartGameSessionPlacementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartGameSessionPlacementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartGameSessionPlacementOutput_GameSessionPlacement:
+			v.GameSessionPlacement = &types.GameSessionPlacement{}
+			return v.GameSessionPlacement.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartGameSessionPlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartGameSessionPlacement, schemas.StartGameSessionPlacementInput, schemas.StartGameSessionPlacementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartGameSessionPlacement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartGameSessionPlacement, schemas.StartGameSessionPlacementInput, schemas.StartGameSessionPlacementOutput), output: &StartGameSessionPlacementOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartGameSessionPlacement{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartGameSessionPlacement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -255,12 +266,6 @@ func (c *Client) addOperationStartGameSessionPlacementMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpStartGameSessionPlacementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartGameSessionPlacement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -275,22 +280,8 @@ func (c *Client) addOperationStartGameSessionPlacementMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartGameSessionPlacement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartGameSessionPlacement",
-	}
 }

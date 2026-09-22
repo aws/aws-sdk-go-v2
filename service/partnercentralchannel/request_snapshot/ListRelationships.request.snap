@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.ListRelationships
+
+{"associatedAccountIds":["__Member__","__Member__"],"associationTypes":["DOWNSTREAM_SELLER","DOWNSTREAM_SELLER"],"catalog":"__Catalog__","displayNames":["__Member__","__Member__"],"maxResults":1,"nextToken":"__NextToken__","programManagementAccountIdentifiers":["__Member__","__Member__"],"sort":{"sortBy":"UpdatedAt","sortOrder":"Ascending"}}

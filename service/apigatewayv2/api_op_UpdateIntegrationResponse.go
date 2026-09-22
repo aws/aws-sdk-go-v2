@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an IntegrationResponses.
@@ -88,6 +87,35 @@ type UpdateIntegrationResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntegrationResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntegrationResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntegrationResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateIntegrationResponseRequest_ApiId, *v.ApiId)
+	}
+	if v.ContentHandlingStrategy != "" {
+		s.WriteString(schemas.UpdateIntegrationResponseRequest_ContentHandlingStrategy, string(v.ContentHandlingStrategy))
+	}
+	if v.IntegrationId != nil {
+		s.WriteString(schemas.UpdateIntegrationResponseRequest_IntegrationId, *v.IntegrationId)
+	}
+	if v.IntegrationResponseId != nil {
+		s.WriteString(schemas.UpdateIntegrationResponseRequest_IntegrationResponseId, *v.IntegrationResponseId)
+	}
+	if v.IntegrationResponseKey != nil {
+		s.WriteString(schemas.UpdateIntegrationResponseRequest_IntegrationResponseKey, *v.IntegrationResponseKey)
+	}
+	serializeIntegrationParameters(s, schemas.UpdateIntegrationResponseRequest_ResponseParameters, v.ResponseParameters)
+	serializeTemplateMap(s, schemas.UpdateIntegrationResponseRequest_ResponseTemplates, v.ResponseTemplates)
+	if v.TemplateSelectionExpression != nil {
+		s.WriteString(schemas.UpdateIntegrationResponseRequest_TemplateSelectionExpression, *v.TemplateSelectionExpression)
+	}
+}
+
 type UpdateIntegrationResponseOutput struct {
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
@@ -138,77 +166,76 @@ type UpdateIntegrationResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIntegrationResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIntegrationResponseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIntegrationResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentHandlingStrategy != "" {
+		s.WriteString(schemas.UpdateIntegrationResponseResponse_ContentHandlingStrategy, string(v.ContentHandlingStrategy))
+	}
+	if v.IntegrationResponseId != nil {
+		s.WriteString(schemas.UpdateIntegrationResponseResponse_IntegrationResponseId, *v.IntegrationResponseId)
+	}
+	if v.IntegrationResponseKey != nil {
+		s.WriteString(schemas.UpdateIntegrationResponseResponse_IntegrationResponseKey, *v.IntegrationResponseKey)
+	}
+	serializeIntegrationParameters(s, schemas.UpdateIntegrationResponseResponse_ResponseParameters, v.ResponseParameters)
+	serializeTemplateMap(s, schemas.UpdateIntegrationResponseResponse_ResponseTemplates, v.ResponseTemplates)
+	if v.TemplateSelectionExpression != nil {
+		s.WriteString(schemas.UpdateIntegrationResponseResponse_TemplateSelectionExpression, *v.TemplateSelectionExpression)
+	}
+}
+func (v *UpdateIntegrationResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIntegrationResponseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIntegrationResponseResponse_ContentHandlingStrategy:
+			var ev string
+			if err := d.ReadString(schemas.UpdateIntegrationResponseResponse_ContentHandlingStrategy, &ev); err != nil {
+				return err
+			}
+			v.ContentHandlingStrategy = types.ContentHandlingStrategy(ev)
+			return nil
+		case schemas.UpdateIntegrationResponseResponse_IntegrationResponseId:
+			v.IntegrationResponseId = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResponseResponse_IntegrationResponseId, v.IntegrationResponseId)
+		case schemas.UpdateIntegrationResponseResponse_IntegrationResponseKey:
+			v.IntegrationResponseKey = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResponseResponse_IntegrationResponseKey, v.IntegrationResponseKey)
+		case schemas.UpdateIntegrationResponseResponse_ResponseParameters:
+			return deserializeIntegrationParameters(d, schemas.UpdateIntegrationResponseResponse_ResponseParameters, &v.ResponseParameters)
+		case schemas.UpdateIntegrationResponseResponse_ResponseTemplates:
+			return deserializeTemplateMap(d, schemas.UpdateIntegrationResponseResponse_ResponseTemplates, &v.ResponseTemplates)
+		case schemas.UpdateIntegrationResponseResponse_TemplateSelectionExpression:
+			v.TemplateSelectionExpression = new(string)
+			return d.ReadString(schemas.UpdateIntegrationResponseResponse_TemplateSelectionExpression, v.TemplateSelectionExpression)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntegrationResponse, schemas.UpdateIntegrationResponseRequest, schemas.UpdateIntegrationResponseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIntegrationResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIntegrationResponse, schemas.UpdateIntegrationResponseRequest, schemas.UpdateIntegrationResponseResponse), output: &UpdateIntegrationResponseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIntegrationResponse{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateIntegrationResponse"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateIntegrationResponseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIntegrationResponse(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -223,22 +250,8 @@ func (c *Client) addOperationUpdateIntegrationResponseMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateIntegrationResponse(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateIntegrationResponse",
-	}
 }

@@ -5,10 +5,10 @@ package bedrockagentruntime
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the sessions stored in the memory of the agent.
@@ -63,6 +63,33 @@ type GetAgentMemoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentMemoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentMemoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentMemoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAliasId != nil {
+		s.WriteString(schemas.GetAgentMemoryRequest_agentAliasId, *v.AgentAliasId)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.GetAgentMemoryRequest_agentId, *v.AgentId)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.GetAgentMemoryRequest_maxItems, *v.MaxItems)
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.GetAgentMemoryRequest_memoryId, *v.MemoryId)
+	}
+	if v.MemoryType != "" {
+		s.WriteString(schemas.GetAgentMemoryRequest_memoryType, string(v.MemoryType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAgentMemoryRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetAgentMemoryOutput struct {
 
 	// Contains details of the sessions stored in the memory
@@ -79,77 +106,51 @@ type GetAgentMemoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgentMemoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgentMemoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgentMemoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemories(s, schemas.GetAgentMemoryResponse_memoryContents, v.MemoryContents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAgentMemoryResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetAgentMemoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgentMemoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgentMemoryResponse_memoryContents:
+			return deserializeMemories(d, schemas.GetAgentMemoryResponse_memoryContents, &v.MemoryContents)
+		case schemas.GetAgentMemoryResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAgentMemoryResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgentMemoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentMemory, schemas.GetAgentMemoryRequest, schemas.GetAgentMemoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAgentMemory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgentMemory, schemas.GetAgentMemoryRequest, schemas.GetAgentMemoryResponse), output: &GetAgentMemoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAgentMemory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAgentMemory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAgentMemoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgentMemory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +163,6 @@ func (c *Client) addOperationGetAgentMemoryMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,11 +266,3 @@ type GetAgentMemoryAPIClient interface {
 }
 
 var _ GetAgentMemoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetAgentMemory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAgentMemory",
-	}
-}

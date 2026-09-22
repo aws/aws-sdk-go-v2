@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyAddressAttribute&AllocationId=__AllocationId__&DomainName=__DomainName__&DryRun=true&Version=2016-11-15

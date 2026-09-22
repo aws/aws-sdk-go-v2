@@ -1,0 +1,4 @@
+422
+Content-Type: application/json
+
+{"__type":"ValidationException","Message":"__Message__","ValidationExceptionFieldList":[{"ChangeType":"__ChangeType__","EntityId":"__EntityId__","EntityType":"__EntityType__","Field":"__Field__","Message":"__Message__","Reason":"UnknownOperation"},{"ChangeType":"__ChangeType__","EntityId":"__EntityId__","EntityType":"__EntityType__","Field":"__Field__","Message":"__Message__","Reason":"UnknownOperation"}]}

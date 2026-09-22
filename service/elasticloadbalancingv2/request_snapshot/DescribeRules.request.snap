@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeRules&ListenerArn=__ListenerArn__&Marker=__Marker__&PageSize=1&RuleArns.member.1=__Member__&RuleArns.member.2=__Member__&Version=2015-12-01

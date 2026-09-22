@@ -4,14 +4,20 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
+// The IoT Device Defender detect feature will no longer be available to new
+// customers starting August 31, 2026. If you would like to use the detect feature,
+// sign up prior to August 31, 2026. To learn about alternatives to IoT Device
+// Defender detect, see IoT Device Defender detect feature availability change in
+// the IoT Device Defender Developer Guide. There is no change to IoT Device
+// Defender audit availability.
+//
 // Updates the definition for a dimension. You cannot change the type of a
 // dimension after it is created (you can delete it and recreate it).
 //
@@ -51,6 +57,19 @@ type UpdateDimensionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDimensionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDimensionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDimensionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDimensionRequest_name, *v.Name)
+	}
+	serializeDimensionStringValues(s, schemas.UpdateDimensionRequest_stringValues, v.StringValues)
+}
+
 type UpdateDimensionOutput struct {
 
 	// The Amazon Resource Name (ARN)of the created dimension.
@@ -80,77 +99,79 @@ type UpdateDimensionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDimensionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDimensionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDimensionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDimensionResponse_arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.UpdateDimensionResponse_creationDate, *v.CreationDate)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.UpdateDimensionResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDimensionResponse_name, *v.Name)
+	}
+	serializeDimensionStringValues(s, schemas.UpdateDimensionResponse_stringValues, v.StringValues)
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateDimensionResponse_type, string(v.Type))
+	}
+}
+func (v *UpdateDimensionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDimensionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDimensionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDimensionResponse_arn, v.Arn)
+		case schemas.UpdateDimensionResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateDimensionResponse_creationDate, v.CreationDate)
+		case schemas.UpdateDimensionResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdateDimensionResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.UpdateDimensionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDimensionResponse_name, v.Name)
+		case schemas.UpdateDimensionResponse_stringValues:
+			return deserializeDimensionStringValues(d, schemas.UpdateDimensionResponse_stringValues, &v.StringValues)
+		case schemas.UpdateDimensionResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDimensionResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.DimensionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDimension, schemas.UpdateDimensionRequest, schemas.UpdateDimensionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDimension{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDimension, schemas.UpdateDimensionRequest, schemas.UpdateDimensionResponse), output: &UpdateDimensionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDimension{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDimension"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDimensionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDimension(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +186,8 @@ func (c *Client) addOperationUpdateDimensionMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDimension(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDimension",
-	}
 }

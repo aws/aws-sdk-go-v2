@@ -1,0 +1,5 @@
+POST /automated-reasoning-policies/__PolicyArn__/test-cases
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","confidenceThreshold":1,"expectedAggregatedFindingsResult":"VALID","guardContent":"__GuardContent__","queryContent":"__QueryContent__"}

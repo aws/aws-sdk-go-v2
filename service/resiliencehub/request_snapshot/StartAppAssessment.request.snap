@@ -1,0 +1,5 @@
+POST /start-app-assessment
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appVersion":"__AppVersion__","assessmentName":"__AssessmentName__","clientToken":"__ClientToken__","tags":{"key0":"__Value__"}}

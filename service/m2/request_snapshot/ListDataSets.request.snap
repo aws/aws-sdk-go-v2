@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/datasets?maxResults=1&nameFilter=__NameFilter__&nextToken=__NextToken__&prefix=__Prefix__
+
+

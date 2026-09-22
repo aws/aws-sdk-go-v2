@@ -4,11 +4,10 @@ package devicefarm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a link to a currently running remote access session.
@@ -40,6 +39,18 @@ type GetRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRemoteAccessSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRemoteAccessSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRemoteAccessSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetRemoteAccessSessionRequest_arn, *v.Arn)
+	}
+}
+
 // Represents the response from the server that lists detailed information about
 // the remote access session.
 type GetRemoteAccessSessionOutput struct {
@@ -53,77 +64,50 @@ type GetRemoteAccessSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRemoteAccessSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRemoteAccessSessionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRemoteAccessSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RemoteAccessSession != nil {
+		s.WriteStruct(schemas.GetRemoteAccessSessionResult_remoteAccessSession)
+		v.RemoteAccessSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetRemoteAccessSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRemoteAccessSessionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRemoteAccessSessionResult_remoteAccessSession:
+			v.RemoteAccessSession = &types.RemoteAccessSession{}
+			return v.RemoteAccessSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRemoteAccessSession, schemas.GetRemoteAccessSessionRequest, schemas.GetRemoteAccessSessionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRemoteAccessSession, schemas.GetRemoteAccessSessionRequest, schemas.GetRemoteAccessSessionResult), output: &GetRemoteAccessSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRemoteAccessSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRemoteAccessSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRemoteAccessSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRemoteAccessSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +122,8 @@ func (c *Client) addOperationGetRemoteAccessSessionMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRemoteAccessSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRemoteAccessSession",
-	}
 }

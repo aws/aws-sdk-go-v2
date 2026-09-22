@@ -4,11 +4,10 @@ package ivs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new ad configuration to be used for server-side ad insertion.
@@ -29,13 +28,21 @@ func (c *Client) CreateAdConfiguration(ctx context.Context, params *CreateAdConf
 
 type CreateAdConfigurationInput struct {
 
-	// List of integration configurations with media tailor resources.
+	// List of integration configurations with MediaTailor resources. The first item
+	// in the list is the default playback configuration used for the ad configuration.
+	// To select a different configuration per viewing session, see [Generate and Sign IVS Playback Tokens].
+	//
+	// [Generate and Sign IVS Playback Tokens]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
 	//
 	// This member is required.
 	MediaTailorPlaybackConfigurations []types.MediaTailorPlaybackConfiguration
 
 	// Ad configuration name. Defaults to “”.
 	Name *string
+
+	// Configuration for the post-roll ad break to use for this ad configuration.
+	// Default: disabled ( enabled set to false, durationSeconds set to 15).
+	PostRollConfiguration *types.PostRollConfiguration
 
 	// Array of 1-50 maps, each of the form string:string (key:value) . See [Best practices and strategies] in
 	// Tagging Amazon Web Services Resources and Tag Editor for details, including
@@ -46,6 +53,25 @@ type CreateAdConfigurationInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateAdConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMediaTailorPlaybackConfigurationsList(s, schemas.CreateAdConfigurationRequest_mediaTailorPlaybackConfigurations, v.MediaTailorPlaybackConfigurations)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAdConfigurationRequest_name, *v.Name)
+	}
+	if v.PostRollConfiguration != nil {
+		s.WriteStruct(schemas.CreateAdConfigurationRequest_postRollConfiguration)
+		v.PostRollConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateAdConfigurationRequest_tags, v.Tags)
 }
 
 type CreateAdConfigurationOutput struct {
@@ -61,77 +87,50 @@ type CreateAdConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAdConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdConfiguration != nil {
+		s.WriteStruct(schemas.CreateAdConfigurationResponse_adConfiguration)
+		v.AdConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAdConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAdConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAdConfigurationResponse_adConfiguration:
+			v.AdConfiguration = &types.AdConfiguration{}
+			return v.AdConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAdConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdConfiguration, schemas.CreateAdConfigurationRequest, schemas.CreateAdConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAdConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdConfiguration, schemas.CreateAdConfigurationRequest, schemas.CreateAdConfigurationResponse), output: &CreateAdConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAdConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAdConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAdConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAdConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +145,8 @@ func (c *Client) addOperationCreateAdConfigurationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAdConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAdConfiguration",
-	}
 }

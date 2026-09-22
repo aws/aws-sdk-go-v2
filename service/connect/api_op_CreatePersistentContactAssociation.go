@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables rehydration of chats for the lifespan of a contact. For more
@@ -123,6 +122,30 @@ type CreatePersistentContactAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePersistentContactAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePersistentContactAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePersistentContactAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InitialContactId != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_InitialContactId, *v.InitialContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_InstanceId, *v.InstanceId)
+	}
+	if v.RehydrationType != "" {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_RehydrationType, string(v.RehydrationType))
+	}
+	if v.SourceContactId != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationRequest_SourceContactId, *v.SourceContactId)
+	}
+}
+
 type CreatePersistentContactAssociationOutput struct {
 
 	// The contactId from which a persistent chat session is started. This field is
@@ -135,77 +158,48 @@ type CreatePersistentContactAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePersistentContactAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePersistentContactAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePersistentContactAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContinuedFromContactId != nil {
+		s.WriteString(schemas.CreatePersistentContactAssociationResponse_ContinuedFromContactId, *v.ContinuedFromContactId)
+	}
+}
+func (v *CreatePersistentContactAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePersistentContactAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePersistentContactAssociationResponse_ContinuedFromContactId:
+			v.ContinuedFromContactId = new(string)
+			return d.ReadString(schemas.CreatePersistentContactAssociationResponse_ContinuedFromContactId, v.ContinuedFromContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePersistentContactAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePersistentContactAssociation, schemas.CreatePersistentContactAssociationRequest, schemas.CreatePersistentContactAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePersistentContactAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePersistentContactAssociation, schemas.CreatePersistentContactAssociationRequest, schemas.CreatePersistentContactAssociationResponse), output: &CreatePersistentContactAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePersistentContactAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePersistentContactAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePersistentContactAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePersistentContactAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,22 +214,8 @@ func (c *Client) addOperationCreatePersistentContactAssociationMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePersistentContactAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePersistentContactAssociation",
-	}
 }

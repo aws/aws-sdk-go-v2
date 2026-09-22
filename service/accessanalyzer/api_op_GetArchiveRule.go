@@ -4,11 +4,10 @@ package accessanalyzer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about an archive rule.
@@ -48,6 +47,34 @@ type GetArchiveRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchiveRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchiveRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchiveRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerName != nil {
+		s.WriteString(schemas.GetArchiveRuleRequest_analyzerName, *v.AnalyzerName)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.GetArchiveRuleRequest_ruleName, *v.RuleName)
+	}
+}
+func (v *GetArchiveRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetArchiveRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetArchiveRuleRequest_analyzerName:
+			v.AnalyzerName = new(string)
+			return d.ReadString(schemas.GetArchiveRuleRequest_analyzerName, v.AnalyzerName)
+		case schemas.GetArchiveRuleRequest_ruleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.GetArchiveRuleRequest_ruleName, v.RuleName)
+		}
+		return nil
+	})
+}
+
 // The response to the request.
 type GetArchiveRuleOutput struct {
 
@@ -63,77 +90,50 @@ type GetArchiveRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetArchiveRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetArchiveRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetArchiveRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveRule != nil {
+		s.WriteStruct(schemas.GetArchiveRuleResponse_archiveRule)
+		v.ArchiveRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetArchiveRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetArchiveRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetArchiveRuleResponse_archiveRule:
+			v.ArchiveRule = &types.ArchiveRuleSummary{}
+			return v.ArchiveRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveRule, schemas.GetArchiveRuleRequest, schemas.GetArchiveRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetArchiveRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetArchiveRule, schemas.GetArchiveRuleRequest, schemas.GetArchiveRuleResponse), output: &GetArchiveRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetArchiveRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetArchiveRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetArchiveRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetArchiveRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +148,8 @@ func (c *Client) addOperationGetArchiveRuleMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetArchiveRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetArchiveRule",
-	}
 }

@@ -4,11 +4,10 @@ package paymentcryptographydata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Verifies Authorization Request Cryptogram (ARQC) for a EMV chip payment card
@@ -28,8 +27,8 @@ import (
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -41,6 +40,7 @@ import (
 // [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 // [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) VerifyAuthRequestCryptogram(ctx context.Context, params *VerifyAuthRequestCryptogramInput, optFns ...func(*Options)) (*VerifyAuthRequestCryptogramOutput, error) {
 	if params == nil {
@@ -103,6 +103,29 @@ type VerifyAuthRequestCryptogramInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyAuthRequestCryptogramInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyAuthRequestCryptogramInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyAuthRequestCryptogramInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthRequestCryptogram != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_AuthRequestCryptogram, *v.AuthRequestCryptogram)
+	}
+	serializeCryptogramAuthResponse(s, schemas.VerifyAuthRequestCryptogramInput_AuthResponseAttributes, v.AuthResponseAttributes)
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.MajorKeyDerivationMode != "" {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_MajorKeyDerivationMode, string(v.MajorKeyDerivationMode))
+	}
+	serializeSessionKeyDerivation(s, schemas.VerifyAuthRequestCryptogramInput_SessionKeyDerivationAttributes, v.SessionKeyDerivationAttributes)
+	if v.TransactionData != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramInput_TransactionData, *v.TransactionData)
+	}
+}
+
 type VerifyAuthRequestCryptogramOutput struct {
 
 	// The keyARN of the major encryption key that Amazon Web Services Payment
@@ -131,77 +154,60 @@ type VerifyAuthRequestCryptogramOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyAuthRequestCryptogramOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyAuthRequestCryptogramOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyAuthRequestCryptogramOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthResponseValue != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramOutput_AuthResponseValue, *v.AuthResponseValue)
+	}
+	if v.KeyArn != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramOutput_KeyArn, *v.KeyArn)
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.VerifyAuthRequestCryptogramOutput_KeyCheckValue, *v.KeyCheckValue)
+	}
+}
+func (v *VerifyAuthRequestCryptogramOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyAuthRequestCryptogramOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyAuthRequestCryptogramOutput_AuthResponseValue:
+			v.AuthResponseValue = new(string)
+			return d.ReadString(schemas.VerifyAuthRequestCryptogramOutput_AuthResponseValue, v.AuthResponseValue)
+		case schemas.VerifyAuthRequestCryptogramOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.VerifyAuthRequestCryptogramOutput_KeyArn, v.KeyArn)
+		case schemas.VerifyAuthRequestCryptogramOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.VerifyAuthRequestCryptogramOutput_KeyCheckValue, v.KeyCheckValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyAuthRequestCryptogramMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyAuthRequestCryptogram, schemas.VerifyAuthRequestCryptogramInput, schemas.VerifyAuthRequestCryptogramOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyAuthRequestCryptogram{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyAuthRequestCryptogram, schemas.VerifyAuthRequestCryptogramInput, schemas.VerifyAuthRequestCryptogramOutput), output: &VerifyAuthRequestCryptogramOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyAuthRequestCryptogram{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "VerifyAuthRequestCryptogram"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpVerifyAuthRequestCryptogramValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyAuthRequestCryptogram(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,22 +222,8 @@ func (c *Client) addOperationVerifyAuthRequestCryptogramMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opVerifyAuthRequestCryptogram(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "VerifyAuthRequestCryptogram",
-	}
 }

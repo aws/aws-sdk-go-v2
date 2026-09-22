@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns all the available versions for the specified Connect Customer instance
@@ -54,6 +54,27 @@ type ListViewVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListViewVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListViewVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListViewVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListViewVersionsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListViewVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListViewVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ViewId != nil {
+		s.WriteString(schemas.ListViewVersionsRequest_ViewId, *v.ViewId)
+	}
+}
+
 type ListViewVersionsOutput struct {
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -69,77 +90,51 @@ type ListViewVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListViewVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListViewVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListViewVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListViewVersionsResponse_NextToken, *v.NextToken)
+	}
+	serializeViewVersionSummaryList(s, schemas.ListViewVersionsResponse_ViewVersionSummaryList, v.ViewVersionSummaryList)
+}
+func (v *ListViewVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListViewVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListViewVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListViewVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListViewVersionsResponse_ViewVersionSummaryList:
+			return deserializeViewVersionSummaryList(d, schemas.ListViewVersionsResponse_ViewVersionSummaryList, &v.ViewVersionSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListViewVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListViewVersions, schemas.ListViewVersionsRequest, schemas.ListViewVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListViewVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListViewVersions, schemas.ListViewVersionsRequest, schemas.ListViewVersionsResponse), output: &ListViewVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListViewVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListViewVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListViewVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListViewVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +147,6 @@ func (c *Client) addOperationListViewVersionsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +248,3 @@ type ListViewVersionsAPIClient interface {
 }
 
 var _ ListViewVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListViewVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListViewVersions",
-	}
-}

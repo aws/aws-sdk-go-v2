@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the associations between your Direct Connect gateways and virtual private
@@ -92,6 +91,33 @@ type DescribeDirectConnectGatewayAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectConnectGatewayAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectConnectGatewayAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectConnectGatewayAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedGatewayId != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationsRequest_associatedGatewayId, *v.AssociatedGatewayId)
+	}
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationsRequest_associationId, *v.AssociationId)
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationsRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDirectConnectGatewayAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationsRequest_nextToken, *v.NextToken)
+	}
+	if v.VirtualGatewayId != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationsRequest_virtualGatewayId, *v.VirtualGatewayId)
+	}
+}
+
 type DescribeDirectConnectGatewayAssociationsOutput struct {
 
 	// Information about the associations.
@@ -106,74 +132,48 @@ type DescribeDirectConnectGatewayAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDirectConnectGatewayAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDirectConnectGatewayAssociationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDirectConnectGatewayAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDirectConnectGatewayAssociationList(s, schemas.DescribeDirectConnectGatewayAssociationsResult_directConnectGatewayAssociations, v.DirectConnectGatewayAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDirectConnectGatewayAssociationsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDirectConnectGatewayAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDirectConnectGatewayAssociationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDirectConnectGatewayAssociationsResult_directConnectGatewayAssociations:
+			return deserializeDirectConnectGatewayAssociationList(d, schemas.DescribeDirectConnectGatewayAssociationsResult_directConnectGatewayAssociations, &v.DirectConnectGatewayAssociations)
+		case schemas.DescribeDirectConnectGatewayAssociationsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDirectConnectGatewayAssociationsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDirectConnectGatewayAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectConnectGatewayAssociations, schemas.DescribeDirectConnectGatewayAssociationsRequest, schemas.DescribeDirectConnectGatewayAssociationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDirectConnectGatewayAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDirectConnectGatewayAssociations, schemas.DescribeDirectConnectGatewayAssociationsRequest, schemas.DescribeDirectConnectGatewayAssociationsResult), output: &DescribeDirectConnectGatewayAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDirectConnectGatewayAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDirectConnectGatewayAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDirectConnectGatewayAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +188,8 @@ func (c *Client) addOperationDescribeDirectConnectGatewayAssociationsMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDirectConnectGatewayAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDirectConnectGatewayAssociations",
-	}
 }

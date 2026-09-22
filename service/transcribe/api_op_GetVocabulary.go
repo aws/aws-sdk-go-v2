@@ -5,11 +5,11 @@ package transcribe
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -48,11 +48,31 @@ type GetVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.GetVocabularyRequest_VocabularyName, *v.VocabularyName)
+	}
+}
+
 type GetVocabularyOutput struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role used to access the Amazon S3
+	// bucket that contains your input files and, if applicable, the KMS key specified
+	// in EncryptionConfiguration .
+	DataAccessRoleArn *string
 
 	// The Amazon S3 location where the custom vocabulary is stored; use this URI to
 	// view or download the custom vocabulary.
 	DownloadUri *string
+
+	// The encryption configuration used for your custom vocabulary.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// If VocabularyState is FAILED , FailureReason contains information about why the
 	// custom vocabulary request failed. See also: [Common Errors].
@@ -82,77 +102,100 @@ type GetVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVocabularyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.GetVocabularyResponse_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.DownloadUri != nil {
+		s.WriteString(schemas.GetVocabularyResponse_DownloadUri, *v.DownloadUri)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.GetVocabularyResponse_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GetVocabularyResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.GetVocabularyResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetVocabularyResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.GetVocabularyResponse_VocabularyName, *v.VocabularyName)
+	}
+	if v.VocabularyState != "" {
+		s.WriteString(schemas.GetVocabularyResponse_VocabularyState, string(v.VocabularyState))
+	}
+}
+func (v *GetVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVocabularyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVocabularyResponse_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.GetVocabularyResponse_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.GetVocabularyResponse_DownloadUri:
+			v.DownloadUri = new(string)
+			return d.ReadString(schemas.GetVocabularyResponse_DownloadUri, v.DownloadUri)
+		case schemas.GetVocabularyResponse_EncryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.GetVocabularyResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetVocabularyResponse_FailureReason, v.FailureReason)
+		case schemas.GetVocabularyResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.GetVocabularyResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.LanguageCode(ev)
+			return nil
+		case schemas.GetVocabularyResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetVocabularyResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.GetVocabularyResponse_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.GetVocabularyResponse_VocabularyName, v.VocabularyName)
+		case schemas.GetVocabularyResponse_VocabularyState:
+			var ev string
+			if err := d.ReadString(schemas.GetVocabularyResponse_VocabularyState, &ev); err != nil {
+				return err
+			}
+			v.VocabularyState = types.VocabularyState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVocabulary, schemas.GetVocabularyRequest, schemas.GetVocabularyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVocabulary, schemas.GetVocabularyRequest, schemas.GetVocabularyResponse), output: &GetVocabularyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetVocabulary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVocabulary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetVocabularyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVocabulary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +208,6 @@ func (c *Client) addOperationGetVocabularyMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -370,11 +407,3 @@ type GetVocabularyAPIClient interface {
 }
 
 var _ GetVocabularyAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetVocabulary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetVocabulary",
-	}
-}

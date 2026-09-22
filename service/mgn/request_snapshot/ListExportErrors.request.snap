@@ -1,0 +1,5 @@
+POST /ListExportErrors
+
+Content-Type: application/json
+
+{"exportID":"__ExportID__","maxResults":1,"nextToken":"__NextToken__"}

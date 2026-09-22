@@ -110,6 +110,26 @@ func (m *validateOpGetAsyncInvoke) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpInvokeGuardrailChecks struct {
+}
+
+func (*validateOpInvokeGuardrailChecks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInvokeGuardrailChecks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InvokeGuardrailChecksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInvokeGuardrailChecksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpInvokeModel struct {
 }
 
@@ -208,6 +228,10 @@ func addOpCountTokensValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetAsyncInvokeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAsyncInvoke{}, middleware.After)
+}
+
+func addOpInvokeGuardrailChecksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInvokeGuardrailChecks{}, middleware.After)
 }
 
 func addOpInvokeModelValidationMiddleware(stack *middleware.Stack) error {
@@ -372,6 +396,16 @@ func validateContentBlock(v types.ContentBlock) error {
 			invalidParams.AddNested("[searchResult]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ContentBlockMemberToolAddition:
+		if err := validateToolAdditionBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[toolAddition]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ContentBlockMemberToolRemoval:
+		if err := validateToolRemovalBlock(&uv.Value); err != nil {
+			invalidParams.AddNested("[toolRemoval]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ContentBlockMemberToolResult:
 		if err := validateToolResultBlock(&uv.Value); err != nil {
 			invalidParams.AddNested("[toolResult]", err.(smithy.InvalidParamsError))
@@ -501,6 +535,221 @@ func validateDocumentSource(v types.DocumentSource) error {
 			invalidParams.AddNested("[s3Location]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksConfig(v *types.GuardrailChecksConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksConfig"}
+	if v.ContentFilter != nil {
+		if err := validateGuardrailChecksContentFilterConfig(v.ContentFilter); err != nil {
+			invalidParams.AddNested("ContentFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PromptAttack != nil {
+		if err := validateGuardrailChecksPromptAttackConfig(v.PromptAttack); err != nil {
+			invalidParams.AddNested("PromptAttack", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SensitiveInformation != nil {
+		if err := validateGuardrailChecksSensitiveInformationConfig(v.SensitiveInformation); err != nil {
+			invalidParams.AddNested("SensitiveInformation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksContentFilterCategoryConfig(v *types.GuardrailChecksContentFilterCategoryConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksContentFilterCategoryConfig"}
+	if len(v.Category) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Category"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksContentFilterCategoryConfigList(v []types.GuardrailChecksContentFilterCategoryConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksContentFilterCategoryConfigList"}
+	for i := range v {
+		if err := validateGuardrailChecksContentFilterCategoryConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksContentFilterConfig(v *types.GuardrailChecksContentFilterConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksContentFilterConfig"}
+	if v.Categories == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Categories"))
+	} else if v.Categories != nil {
+		if err := validateGuardrailChecksContentFilterCategoryConfigList(v.Categories); err != nil {
+			invalidParams.AddNested("Categories", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksMessage(v *types.GuardrailChecksMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksMessage"}
+	if len(v.Role) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksMessageList(v []types.GuardrailChecksMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksMessageList"}
+	for i := range v {
+		if err := validateGuardrailChecksMessage(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksPromptAttackCategoryConfig(v *types.GuardrailChecksPromptAttackCategoryConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksPromptAttackCategoryConfig"}
+	if len(v.Category) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Category"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksPromptAttackCategoryConfigList(v []types.GuardrailChecksPromptAttackCategoryConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksPromptAttackCategoryConfigList"}
+	for i := range v {
+		if err := validateGuardrailChecksPromptAttackCategoryConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksPromptAttackConfig(v *types.GuardrailChecksPromptAttackConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksPromptAttackConfig"}
+	if v.Categories == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Categories"))
+	} else if v.Categories != nil {
+		if err := validateGuardrailChecksPromptAttackCategoryConfigList(v.Categories); err != nil {
+			invalidParams.AddNested("Categories", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksSensitiveInformationConfig(v *types.GuardrailChecksSensitiveInformationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksSensitiveInformationConfig"}
+	if v.Entities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entities"))
+	} else if v.Entities != nil {
+		if err := validateGuardrailChecksSensitiveInformationEntityConfigList(v.Entities); err != nil {
+			invalidParams.AddNested("Entities", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksSensitiveInformationEntityConfig(v *types.GuardrailChecksSensitiveInformationEntityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksSensitiveInformationEntityConfig"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGuardrailChecksSensitiveInformationEntityConfigList(v []types.GuardrailChecksSensitiveInformationEntityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GuardrailChecksSensitiveInformationEntityConfigList"}
+	for i := range v {
+		if err := validateGuardrailChecksSensitiveInformationEntityConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1069,6 +1318,21 @@ func validateTool(v types.Tool) error {
 	}
 }
 
+func validateToolAdditionBlock(v *types.ToolAdditionBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolAdditionBlock"}
+	if v.Tool == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tool"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateToolChoice(v types.ToolChoice) error {
 	if v == nil {
 		return nil
@@ -1104,6 +1368,21 @@ func validateToolConfiguration(v *types.ToolConfiguration) error {
 		if err := validateToolChoice(v.ToolChoice); err != nil {
 			invalidParams.AddNested("ToolChoice", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateToolRemovalBlock(v *types.ToolRemovalBlock) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ToolRemovalBlock"}
+	if v.Tool == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tool"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1419,6 +1698,32 @@ func validateOpGetAsyncInvokeInput(v *GetAsyncInvokeInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetAsyncInvokeInput"}
 	if v.InvocationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InvocationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInvokeGuardrailChecksInput(v *InvokeGuardrailChecksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeGuardrailChecksInput"}
+	if v.Messages == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Messages"))
+	} else if v.Messages != nil {
+		if err := validateGuardrailChecksMessageList(v.Messages); err != nil {
+			invalidParams.AddNested("Messages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Checks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Checks"))
+	} else if v.Checks != nil {
+		if err := validateGuardrailChecksConfig(v.Checks); err != nil {
+			invalidParams.AddNested("Checks", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

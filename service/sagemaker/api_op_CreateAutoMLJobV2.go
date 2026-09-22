@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Autopilot job also referred to as Autopilot experiment or AutoML job
@@ -167,6 +166,54 @@ type CreateAutoMLJobV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoMLJobV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoMLJobV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoMLJobV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLComputeConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_AutoMLComputeConfig)
+		v.AutoMLComputeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoMLJobInputDataConfig(s, schemas.CreateAutoMLJobV2Request_AutoMLJobInputDataConfig, v.AutoMLJobInputDataConfig)
+	if v.AutoMLJobName != nil {
+		s.WriteString(schemas.CreateAutoMLJobV2Request_AutoMLJobName, *v.AutoMLJobName)
+	}
+	if v.AutoMLJobObjective != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_AutoMLJobObjective)
+		v.AutoMLJobObjective.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAutoMLProblemTypeConfig(s, schemas.CreateAutoMLJobV2Request_AutoMLProblemTypeConfig, v.AutoMLProblemTypeConfig)
+	if v.DataSplitConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_DataSplitConfig)
+		v.DataSplitConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelDeployConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_ModelDeployConfig)
+		v.ModelDeployConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateAutoMLJobV2Request_RoleArn, *v.RoleArn)
+	}
+	if v.SecurityConfig != nil {
+		s.WriteStruct(schemas.CreateAutoMLJobV2Request_SecurityConfig)
+		v.SecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateAutoMLJobV2Request_Tags, v.Tags)
+}
+
 type CreateAutoMLJobV2Output struct {
 
 	// The unique ARN assigned to the AutoMLJob when it is created.
@@ -180,77 +227,48 @@ type CreateAutoMLJobV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoMLJobV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoMLJobV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoMLJobV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoMLJobArn != nil {
+		s.WriteString(schemas.CreateAutoMLJobV2Response_AutoMLJobArn, *v.AutoMLJobArn)
+	}
+}
+func (v *CreateAutoMLJobV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutoMLJobV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutoMLJobV2Response_AutoMLJobArn:
+			v.AutoMLJobArn = new(string)
+			return d.ReadString(schemas.CreateAutoMLJobV2Response_AutoMLJobArn, v.AutoMLJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutoMLJobV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoMLJobV2, schemas.CreateAutoMLJobV2Request, schemas.CreateAutoMLJobV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAutoMLJobV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoMLJobV2, schemas.CreateAutoMLJobV2Request, schemas.CreateAutoMLJobV2Response), output: &CreateAutoMLJobV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAutoMLJobV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAutoMLJobV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAutoMLJobV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutoMLJobV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -265,22 +283,8 @@ func (c *Client) addOperationCreateAutoMLJobV2Middlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAutoMLJobV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAutoMLJobV2",
-	}
 }

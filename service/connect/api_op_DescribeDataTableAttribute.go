@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns detailed information for a specific data table attribute including its
@@ -50,6 +49,24 @@ type DescribeDataTableAttributeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataTableAttributeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataTableAttributeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataTableAttributeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.DescribeDataTableAttributeRequest_AttributeName, *v.AttributeName)
+	}
+	if v.DataTableId != nil {
+		s.WriteString(schemas.DescribeDataTableAttributeRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeDataTableAttributeRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeDataTableAttributeOutput struct {
 
 	// The complete attribute information including configuration, validation rules,
@@ -64,77 +81,50 @@ type DescribeDataTableAttributeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataTableAttributeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataTableAttributeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataTableAttributeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attribute != nil {
+		s.WriteStruct(schemas.DescribeDataTableAttributeResponse_Attribute)
+		v.Attribute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeDataTableAttributeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataTableAttributeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataTableAttributeResponse_Attribute:
+			v.Attribute = &types.DataTableAttribute{}
+			return v.Attribute.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataTableAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataTableAttribute, schemas.DescribeDataTableAttributeRequest, schemas.DescribeDataTableAttributeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDataTableAttribute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataTableAttribute, schemas.DescribeDataTableAttributeRequest, schemas.DescribeDataTableAttributeResponse), output: &DescribeDataTableAttributeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDataTableAttribute{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDataTableAttribute"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDataTableAttributeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataTableAttribute(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +139,8 @@ func (c *Client) addOperationDescribeDataTableAttributeMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDataTableAttribute(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDataTableAttribute",
-	}
 }

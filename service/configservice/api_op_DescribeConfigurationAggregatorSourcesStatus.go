@@ -5,10 +5,10 @@ package configservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns status information for sources within an aggregator. The status
@@ -57,6 +57,25 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationAggregatorSourcesStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationAggregatorSourcesStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationAggregatorSourcesStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.DescribeConfigurationAggregatorSourcesStatusRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeConfigurationAggregatorSourcesStatusRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigurationAggregatorSourcesStatusRequest_NextToken, *v.NextToken)
+	}
+	serializeAggregatedSourceStatusTypeList(s, schemas.DescribeConfigurationAggregatorSourcesStatusRequest_UpdateStatus, v.UpdateStatus)
+}
+
 type DescribeConfigurationAggregatorSourcesStatusOutput struct {
 
 	// Returns an AggregatedSourceStatus object.
@@ -72,77 +91,51 @@ type DescribeConfigurationAggregatorSourcesStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationAggregatorSourcesStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationAggregatorSourcesStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationAggregatorSourcesStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregatedSourceStatusList(s, schemas.DescribeConfigurationAggregatorSourcesStatusResponse_AggregatedSourceStatusList, v.AggregatedSourceStatusList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConfigurationAggregatorSourcesStatusResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConfigurationAggregatorSourcesStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationAggregatorSourcesStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationAggregatorSourcesStatusResponse_AggregatedSourceStatusList:
+			return deserializeAggregatedSourceStatusList(d, schemas.DescribeConfigurationAggregatorSourcesStatusResponse_AggregatedSourceStatusList, &v.AggregatedSourceStatusList)
+		case schemas.DescribeConfigurationAggregatorSourcesStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConfigurationAggregatorSourcesStatusResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationAggregatorSourcesStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationAggregatorSourcesStatus, schemas.DescribeConfigurationAggregatorSourcesStatusRequest, schemas.DescribeConfigurationAggregatorSourcesStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConfigurationAggregatorSourcesStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationAggregatorSourcesStatus, schemas.DescribeConfigurationAggregatorSourcesStatusRequest, schemas.DescribeConfigurationAggregatorSourcesStatusResponse), output: &DescribeConfigurationAggregatorSourcesStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConfigurationAggregatorSourcesStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConfigurationAggregatorSourcesStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeConfigurationAggregatorSourcesStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigurationAggregatorSourcesStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +148,6 @@ func (c *Client) addOperationDescribeConfigurationAggregatorSourcesStatusMiddlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +248,3 @@ type DescribeConfigurationAggregatorSourcesStatusAPIClient interface {
 }
 
 var _ DescribeConfigurationAggregatorSourcesStatusAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeConfigurationAggregatorSourcesStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConfigurationAggregatorSourcesStatus",
-	}
-}

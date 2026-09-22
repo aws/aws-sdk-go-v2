@@ -1,0 +1,5 @@
+POST /UpdateSourceServerReplicationType
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","replicationType":"AGENT_BASED","sourceServerID":"__SourceServerID__"}

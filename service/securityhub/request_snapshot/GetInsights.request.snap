@@ -1,0 +1,5 @@
+POST /insights/get
+
+Content-Type: application/json
+
+{"InsightArns":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__"}

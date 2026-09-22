@@ -4,11 +4,10 @@ package guardduty
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the filter specified by the filter name.
@@ -71,8 +70,6 @@ type UpdateFilterInput struct {
 	//   - createdAt
 	//
 	// Type: Timestamp in Unix Epoch millisecond format. Ex: 1486685375000
-	//
-	//   - description
 	//
 	//   - id
 	//
@@ -420,10 +417,6 @@ type UpdateFilterInput struct {
 	//
 	//   - resource.rdsDbInstanceDetails.publiclyAccessible
 	//
-	//   - resource.rdsDbInstanceDetails.tags.key
-	//
-	//   - resource.rdsDbInstanceDetails.tags.value
-	//
 	//   - resource.rdsDbInstanceDetails.vpcId
 	//
 	//   - resource.rdsDbInstanceDetails.vpcSecurityGroups.status
@@ -533,8 +526,6 @@ type UpdateFilterInput struct {
 	//   - schemaVersion
 	//
 	//   - service.action.actionType
-	//
-	//   - service.action.awsApiCallAction.affectedResources
 	//
 	//   - service.action.awsApiCallAction.api
 	//
@@ -832,10 +823,6 @@ type UpdateFilterInput struct {
 	//   - service.archived
 	//
 	//   - service.count
-	//
-	//   - service.detection.anomaly.profiles
-	//
-	//   - service.detection.anomaly.unusual.behavior
 	//
 	//   - service.detection.sequence.actors.id
 	//
@@ -1438,8 +1425,6 @@ type UpdateFilterInput struct {
 	//
 	// For more information, see [Findings severity levels]in the Amazon GuardDuty User Guide.
 	//
-	//   - title
-	//
 	//   - type
 	//
 	//   - updatedAt
@@ -1457,6 +1442,35 @@ type UpdateFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateFilterRequest_Action, string(v.Action))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFilterRequest_Description, *v.Description)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.UpdateFilterRequest_DetectorId, *v.DetectorId)
+	}
+	if v.FilterName != nil {
+		s.WriteString(schemas.UpdateFilterRequest_FilterName, *v.FilterName)
+	}
+	if v.FindingCriteria != nil {
+		s.WriteStruct(schemas.UpdateFilterRequest_FindingCriteria)
+		v.FindingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Rank != nil {
+		s.WriteInt32(schemas.UpdateFilterRequest_Rank, *v.Rank)
+	}
+}
+
 type UpdateFilterOutput struct {
 
 	// The name of the filter.
@@ -1470,77 +1484,48 @@ type UpdateFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFilterResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFilterResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateFilterResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFilter, schemas.UpdateFilterRequest, schemas.UpdateFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFilter, schemas.UpdateFilterRequest, schemas.UpdateFilterResponse), output: &UpdateFilterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFilter{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFilter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFilterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFilter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -1555,22 +1540,8 @@ func (c *Client) addOperationUpdateFilterMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateFilter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFilter",
-	}
 }

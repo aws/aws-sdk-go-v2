@@ -4,11 +4,10 @@ package paymentcryptography
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a certificate signing request (CSR) from a key pair.
@@ -47,6 +46,26 @@ type GetCertificateSigningRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateSigningRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateSigningRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateSigningRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateSubject != nil {
+		s.WriteStruct(schemas.GetCertificateSigningRequestInput_CertificateSubject)
+		v.CertificateSubject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.GetCertificateSigningRequestInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.SigningAlgorithm != "" {
+		s.WriteString(schemas.GetCertificateSigningRequestInput_SigningAlgorithm, string(v.SigningAlgorithm))
+	}
+}
+
 type GetCertificateSigningRequestOutput struct {
 
 	// The certificate signing request generated using the key pair associated with
@@ -61,77 +80,48 @@ type GetCertificateSigningRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificateSigningRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificateSigningRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificateSigningRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateSigningRequest != nil {
+		s.WriteString(schemas.GetCertificateSigningRequestOutput_CertificateSigningRequest, *v.CertificateSigningRequest)
+	}
+}
+func (v *GetCertificateSigningRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCertificateSigningRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCertificateSigningRequestOutput_CertificateSigningRequest:
+			v.CertificateSigningRequest = new(string)
+			return d.ReadString(schemas.GetCertificateSigningRequestOutput_CertificateSigningRequest, v.CertificateSigningRequest)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCertificateSigningRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateSigningRequest, schemas.GetCertificateSigningRequestInput, schemas.GetCertificateSigningRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCertificateSigningRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificateSigningRequest, schemas.GetCertificateSigningRequestInput, schemas.GetCertificateSigningRequestOutput), output: &GetCertificateSigningRequestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCertificateSigningRequest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCertificateSigningRequest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCertificateSigningRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCertificateSigningRequest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +136,8 @@ func (c *Client) addOperationGetCertificateSigningRequestMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCertificateSigningRequest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCertificateSigningRequest",
-	}
 }

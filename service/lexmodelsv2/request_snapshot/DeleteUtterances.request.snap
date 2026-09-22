@@ -1,0 +1,3 @@
+DELETE /bots/__BotId__/utterances?localeId=__LocaleId__&sessionId=__SessionId__
+
+

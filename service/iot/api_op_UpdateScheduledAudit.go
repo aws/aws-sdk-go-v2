@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a scheduled audit, including which checks are performed and how often
@@ -63,6 +62,28 @@ type UpdateScheduledAuditInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledAuditInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduledAuditRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledAuditInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfMonth != nil {
+		s.WriteString(schemas.UpdateScheduledAuditRequest_dayOfMonth, *v.DayOfMonth)
+	}
+	if v.DayOfWeek != "" {
+		s.WriteString(schemas.UpdateScheduledAuditRequest_dayOfWeek, string(v.DayOfWeek))
+	}
+	if v.Frequency != "" {
+		s.WriteString(schemas.UpdateScheduledAuditRequest_frequency, string(v.Frequency))
+	}
+	if v.ScheduledAuditName != nil {
+		s.WriteString(schemas.UpdateScheduledAuditRequest_scheduledAuditName, *v.ScheduledAuditName)
+	}
+	serializeTargetAuditCheckNames(s, schemas.UpdateScheduledAuditRequest_targetCheckNames, v.TargetCheckNames)
+}
+
 type UpdateScheduledAuditOutput struct {
 
 	// The ARN of the scheduled audit.
@@ -74,77 +95,48 @@ type UpdateScheduledAuditOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScheduledAuditOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScheduledAuditResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScheduledAuditOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduledAuditArn != nil {
+		s.WriteString(schemas.UpdateScheduledAuditResponse_scheduledAuditArn, *v.ScheduledAuditArn)
+	}
+}
+func (v *UpdateScheduledAuditOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateScheduledAuditResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateScheduledAuditResponse_scheduledAuditArn:
+			v.ScheduledAuditArn = new(string)
+			return d.ReadString(schemas.UpdateScheduledAuditResponse_scheduledAuditArn, v.ScheduledAuditArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledAudit, schemas.UpdateScheduledAuditRequest, schemas.UpdateScheduledAuditResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateScheduledAudit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScheduledAudit, schemas.UpdateScheduledAuditRequest, schemas.UpdateScheduledAuditResponse), output: &UpdateScheduledAuditOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateScheduledAudit{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateScheduledAudit"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateScheduledAuditValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateScheduledAudit(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +151,8 @@ func (c *Client) addOperationUpdateScheduledAuditMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateScheduledAudit(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateScheduledAudit",
-	}
 }

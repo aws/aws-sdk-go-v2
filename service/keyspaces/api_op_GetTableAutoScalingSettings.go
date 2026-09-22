@@ -4,11 +4,10 @@ package keyspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns auto scaling related settings of the specified table in JSON format. If
@@ -60,6 +59,21 @@ type GetTableAutoScalingSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableAutoScalingSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableAutoScalingSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableAutoScalingSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.GetTableAutoScalingSettingsRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableAutoScalingSettingsRequest_tableName, *v.TableName)
+	}
+}
+
 type GetTableAutoScalingSettingsOutput struct {
 
 	// The name of the keyspace.
@@ -90,77 +104,71 @@ type GetTableAutoScalingSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableAutoScalingSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableAutoScalingSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableAutoScalingSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingSpecification != nil {
+		s.WriteStruct(schemas.GetTableAutoScalingSettingsResponse_autoScalingSpecification)
+		v.AutoScalingSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.GetTableAutoScalingSettingsResponse_keyspaceName, *v.KeyspaceName)
+	}
+	serializeReplicaAutoScalingSpecificationList(s, schemas.GetTableAutoScalingSettingsResponse_replicaSpecifications, v.ReplicaSpecifications)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetTableAutoScalingSettingsResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableAutoScalingSettingsResponse_tableName, *v.TableName)
+	}
+}
+func (v *GetTableAutoScalingSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableAutoScalingSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableAutoScalingSettingsResponse_autoScalingSpecification:
+			v.AutoScalingSpecification = &types.AutoScalingSpecification{}
+			return v.AutoScalingSpecification.Deserialize(d)
+		case schemas.GetTableAutoScalingSettingsResponse_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.GetTableAutoScalingSettingsResponse_keyspaceName, v.KeyspaceName)
+		case schemas.GetTableAutoScalingSettingsResponse_replicaSpecifications:
+			return deserializeReplicaAutoScalingSpecificationList(d, schemas.GetTableAutoScalingSettingsResponse_replicaSpecifications, &v.ReplicaSpecifications)
+		case schemas.GetTableAutoScalingSettingsResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetTableAutoScalingSettingsResponse_resourceArn, v.ResourceArn)
+		case schemas.GetTableAutoScalingSettingsResponse_tableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.GetTableAutoScalingSettingsResponse_tableName, v.TableName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableAutoScalingSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableAutoScalingSettings, schemas.GetTableAutoScalingSettingsRequest, schemas.GetTableAutoScalingSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetTableAutoScalingSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableAutoScalingSettings, schemas.GetTableAutoScalingSettingsRequest, schemas.GetTableAutoScalingSettingsResponse), output: &GetTableAutoScalingSettingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetTableAutoScalingSettings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTableAutoScalingSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTableAutoScalingSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTableAutoScalingSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +183,8 @@ func (c *Client) addOperationGetTableAutoScalingSettingsMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTableAutoScalingSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTableAutoScalingSettings",
-	}
 }

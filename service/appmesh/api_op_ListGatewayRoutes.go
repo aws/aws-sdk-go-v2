@@ -5,10 +5,10 @@ package appmesh
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of existing gateway routes that are associated to a virtual
@@ -65,6 +65,52 @@ type ListGatewayRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewayRoutesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewayRoutesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewayRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListGatewayRoutesInput_limit, *v.Limit)
+	}
+	if v.MeshName != nil {
+		s.WriteString(schemas.ListGatewayRoutesInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.ListGatewayRoutesInput_meshOwner, *v.MeshOwner)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewayRoutesInput_nextToken, *v.NextToken)
+	}
+	if v.VirtualGatewayName != nil {
+		s.WriteString(schemas.ListGatewayRoutesInput_virtualGatewayName, *v.VirtualGatewayName)
+	}
+}
+func (v *ListGatewayRoutesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewayRoutesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewayRoutesInput_limit:
+			v.Limit = new(int32)
+			return d.ReadInt32(schemas.ListGatewayRoutesInput_limit, v.Limit)
+		case schemas.ListGatewayRoutesInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesInput_meshName, v.MeshName)
+		case schemas.ListGatewayRoutesInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesInput_meshOwner, v.MeshOwner)
+		case schemas.ListGatewayRoutesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesInput_nextToken, v.NextToken)
+		case schemas.ListGatewayRoutesInput_virtualGatewayName:
+			v.VirtualGatewayName = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesInput_virtualGatewayName, v.VirtualGatewayName)
+		}
+		return nil
+	})
+}
+
 type ListGatewayRoutesOutput struct {
 
 	// The list of existing gateway routes for the specified service mesh and virtual
@@ -85,77 +131,51 @@ type ListGatewayRoutesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewayRoutesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewayRoutesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewayRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGatewayRouteList(s, schemas.ListGatewayRoutesOutput_gatewayRoutes, v.GatewayRoutes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewayRoutesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGatewayRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewayRoutesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewayRoutesOutput_gatewayRoutes:
+			return deserializeGatewayRouteList(d, schemas.ListGatewayRoutesOutput_gatewayRoutes, &v.GatewayRoutes)
+		case schemas.ListGatewayRoutesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGatewayRoutesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayRoutes, schemas.ListGatewayRoutesInput, schemas.ListGatewayRoutesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGatewayRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGatewayRoutes, schemas.ListGatewayRoutesInput, schemas.ListGatewayRoutesOutput), output: &ListGatewayRoutesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGatewayRoutes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGatewayRoutes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListGatewayRoutesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGatewayRoutes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +188,6 @@ func (c *Client) addOperationListGatewayRoutesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -280,11 +294,3 @@ type ListGatewayRoutesAPIClient interface {
 }
 
 var _ ListGatewayRoutesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListGatewayRoutes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListGatewayRoutes",
-	}
-}

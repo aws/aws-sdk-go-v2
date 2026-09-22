@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.SignalWorkflowExecution
+
+{"domain":"__Domain__","input":"__Input__","runId":"__RunId__","signalName":"__SignalName__","workflowId":"__WorkflowId__"}

@@ -1,0 +1,4 @@
+GET /sdktypes?limit=1&position=__Position__
+
+Accept: application/json
+

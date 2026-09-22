@@ -1,0 +1,3 @@
+GET /api/instance?instanceNameFilter=__Member__&instanceNameFilter=__Member__&instanceStateFilter=Initializing&instanceStateFilter=Initializing&maxResults=1&nextToken=__NextToken__
+
+

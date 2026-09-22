@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.StartQuery
+
+{"DeliveryS3Uri":"__DeliveryS3Uri__","EventDataStoreOwnerAccountId":"__EventDataStoreOwnerAccountId__","QueryAlias":"__QueryAlias__","QueryParameters":["__Member__","__Member__"],"QueryStatement":"__QueryStatement__"}

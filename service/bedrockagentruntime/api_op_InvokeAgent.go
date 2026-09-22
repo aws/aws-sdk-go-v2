@@ -4,14 +4,19 @@ package bedrockagentruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
 )
 
+// Amazon Bedrock Agents (now Amazon Bedrock Agents Classic) is no longer open to
+// new customers. For capabilities similar to Bedrock Agents Classic, explore
+// Amazon Bedrock AgentCore. Existing customers can continue to use the service as
+// normal. For more information, see [Amazon Bedrock Agents Classic availability change].
+//
 // Sends a prompt for the agent to process and respond to. Note the following
 // fields for the request:
 //
@@ -46,6 +51,7 @@ import (
 //   - Errors are also surfaced in the response.
 //
 // [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-events
+// [Amazon Bedrock Agents Classic availability change]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html
 func (c *Client) InvokeAgent(ctx context.Context, params *InvokeAgentInput, optFns ...func(*Options)) (*InvokeAgentOutput, error) {
 	if params == nil {
 		params = &InvokeAgentInput{}
@@ -128,6 +134,59 @@ type InvokeAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentAliasId != nil {
+		s.WriteString(schemas.InvokeAgentRequest_agentAliasId, *v.AgentAliasId)
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.InvokeAgentRequest_agentId, *v.AgentId)
+	}
+	if v.BedrockModelConfigurations != nil {
+		s.WriteStruct(schemas.InvokeAgentRequest_bedrockModelConfigurations)
+		v.BedrockModelConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableTrace != nil {
+		s.WriteBool(schemas.InvokeAgentRequest_enableTrace, *v.EnableTrace)
+	}
+	if v.EndSession != nil {
+		s.WriteBool(schemas.InvokeAgentRequest_endSession, *v.EndSession)
+	}
+	if v.InputText != nil {
+		s.WriteString(schemas.InvokeAgentRequest_inputText, *v.InputText)
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.InvokeAgentRequest_memoryId, *v.MemoryId)
+	}
+	if v.PromptCreationConfigurations != nil {
+		s.WriteStruct(schemas.InvokeAgentRequest_promptCreationConfigurations)
+		v.PromptCreationConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeAgentRequest_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteStruct(schemas.InvokeAgentRequest_sessionState)
+		v.SessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.InvokeAgentRequest_sourceArn, *v.SourceArn)
+	}
+	if v.StreamingConfigurations != nil {
+		s.WriteStruct(schemas.InvokeAgentRequest_streamingConfigurations)
+		v.StreamingConfigurations.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type InvokeAgentOutput struct {
 
 	// The MIME type of the input data in the request. The default value is
@@ -152,79 +211,69 @@ type InvokeAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeAgentResponse_contentType, *v.ContentType)
+	}
+	if v.MemoryId != nil {
+		s.WriteString(schemas.InvokeAgentResponse_memoryId, *v.MemoryId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeAgentResponse_sessionId, *v.SessionId)
+	}
+}
+func (v *InvokeAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeAgentResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeAgentResponse_contentType, v.ContentType)
+		case schemas.InvokeAgentResponse_memoryId:
+			v.MemoryId = new(string)
+			return d.ReadString(schemas.InvokeAgentResponse_memoryId, v.MemoryId)
+		case schemas.InvokeAgentResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.InvokeAgentResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeAgentOutput) GetStream() *InvokeAgentEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationInvokeAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgent, schemas.InvokeAgentRequest, schemas.InvokeAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeAgent, schemas.InvokeAgentRequest, schemas.InvokeAgentResponse), output: &InvokeAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeAgent{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeAgent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addEventStreamInvokeAgentMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInvokeAgentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeAgent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -239,24 +288,10 @@ func (c *Client) addOperationInvokeAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInvokeAgent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeAgent",
-	}
 }
 
 // InvokeAgentEventStream provides the event stream handling for the InvokeAgent operation.

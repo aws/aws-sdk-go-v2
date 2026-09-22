@@ -1,0 +1,5 @@
+POST /crls
+
+Content-Type: application/json
+
+{"crlData":"YmxvYg==","enabled":true,"name":"__Name__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"trustAnchorArn":"__TrustAnchorArn__"}

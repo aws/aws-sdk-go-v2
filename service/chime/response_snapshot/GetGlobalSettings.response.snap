@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BusinessCalling":{"CdrBucket":"__CdrBucket__"},"VoiceConnector":{"CdrBucket":"__CdrBucket__"}}

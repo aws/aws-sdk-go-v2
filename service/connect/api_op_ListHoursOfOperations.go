@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides information about the hours of operation for the specified Connect
@@ -54,6 +54,24 @@ type ListHoursOfOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHoursOfOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHoursOfOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHoursOfOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListHoursOfOperationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHoursOfOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHoursOfOperationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListHoursOfOperationsOutput struct {
 
 	// Information about the hours of operation.
@@ -68,77 +86,51 @@ type ListHoursOfOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHoursOfOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHoursOfOperationSummaryList(s, schemas.ListHoursOfOperationsResponse_HoursOfOperationSummaryList, v.HoursOfOperationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHoursOfOperationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHoursOfOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHoursOfOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHoursOfOperationsResponse_HoursOfOperationSummaryList:
+			return deserializeHoursOfOperationSummaryList(d, schemas.ListHoursOfOperationsResponse_HoursOfOperationSummaryList, &v.HoursOfOperationSummaryList)
+		case schemas.ListHoursOfOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHoursOfOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHoursOfOperations, schemas.ListHoursOfOperationsRequest, schemas.ListHoursOfOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHoursOfOperations, schemas.ListHoursOfOperationsRequest, schemas.ListHoursOfOperationsResponse), output: &ListHoursOfOperationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHoursOfOperations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHoursOfOperations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListHoursOfOperationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHoursOfOperations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +143,6 @@ func (c *Client) addOperationListHoursOfOperationsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +245,3 @@ type ListHoursOfOperationsAPIClient interface {
 }
 
 var _ ListHoursOfOperationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListHoursOfOperations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListHoursOfOperations",
-	}
-}

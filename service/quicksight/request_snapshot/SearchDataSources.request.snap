@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/search/data-sources
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER","Operator":"StringEquals","Value":"__Value__"},{"Name":"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER","Operator":"StringEquals","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

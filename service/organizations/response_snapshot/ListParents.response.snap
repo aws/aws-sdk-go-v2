@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSOrganizationsV20161128.ListParents
+
+{"NextToken":"__NextToken__","Parents":[{"Id":"__Id__","Type":"ROOT"},{"Id":"__Id__","Type":"ROOT"}]}

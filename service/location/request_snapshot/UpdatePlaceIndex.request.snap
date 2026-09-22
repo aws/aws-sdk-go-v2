@@ -1,0 +1,5 @@
+PATCH /places/v0/indexes/__IndexName__
+
+Content-Type: application/json
+
+{"DataSourceConfiguration":{"IntendedUse":"SingleUse"},"Description":"__Description__","PricingPlan":"RequestBasedUsage"}

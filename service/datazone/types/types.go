@@ -624,6 +624,9 @@ type AssetScope struct {
 	// The error message of the asset scope.
 	ErrorMessage *string
 
+	// The name of the materialized asset scope.
+	ScopeName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1045,6 +1048,7 @@ type ConnectionCredentials struct {
 //
 //	ConnectionPropertiesInputMemberAmazonQProperties
 //	ConnectionPropertiesInputMemberAthenaProperties
+//	ConnectionPropertiesInputMemberGitProperties
 //	ConnectionPropertiesInputMemberGlueProperties
 //	ConnectionPropertiesInputMemberHyperPodProperties
 //	ConnectionPropertiesInputMemberIamProperties
@@ -1052,8 +1056,10 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberMlflowProperties
 //	ConnectionPropertiesInputMemberRedshiftProperties
 //	ConnectionPropertiesInputMemberS3Properties
+//	ConnectionPropertiesInputMemberSnowflakeProperties
 //	ConnectionPropertiesInputMemberSparkEmrProperties
 //	ConnectionPropertiesInputMemberSparkGlueProperties
+//	ConnectionPropertiesInputMemberVpcProperties
 //	ConnectionPropertiesInputMemberWorkflowsMwaaProperties
 //	ConnectionPropertiesInputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesInput interface {
@@ -1077,6 +1083,15 @@ type ConnectionPropertiesInputMemberAthenaProperties struct {
 }
 
 func (*ConnectionPropertiesInputMemberAthenaProperties) isConnectionPropertiesInput() {}
+
+// The Git properties of a connection.
+type ConnectionPropertiesInputMemberGitProperties struct {
+	Value GitPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberGitProperties) isConnectionPropertiesInput() {}
 
 // The Amazon Web Services Glue properties of a connection.
 type ConnectionPropertiesInputMemberGlueProperties struct {
@@ -1141,6 +1156,16 @@ type ConnectionPropertiesInputMemberS3Properties struct {
 
 func (*ConnectionPropertiesInputMemberS3Properties) isConnectionPropertiesInput() {}
 
+// The Snowflake-specific connection properties to use when creating the
+// connection.
+type ConnectionPropertiesInputMemberSnowflakeProperties struct {
+	Value SnowflakePropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberSnowflakeProperties) isConnectionPropertiesInput() {}
+
 // The Spark EMR properties of a connection.
 type ConnectionPropertiesInputMemberSparkEmrProperties struct {
 	Value SparkEmrPropertiesInput
@@ -1158,6 +1183,15 @@ type ConnectionPropertiesInputMemberSparkGlueProperties struct {
 }
 
 func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertiesInput() {}
+
+// The VPC properties of a connection.
+type ConnectionPropertiesInputMemberVpcProperties struct {
+	Value VpcPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberVpcProperties) isConnectionPropertiesInput() {}
 
 // The Amazon MWAA properties of a connection.
 type ConnectionPropertiesInputMemberWorkflowsMwaaProperties struct {
@@ -1183,6 +1217,7 @@ func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectio
 //
 //	ConnectionPropertiesOutputMemberAmazonQProperties
 //	ConnectionPropertiesOutputMemberAthenaProperties
+//	ConnectionPropertiesOutputMemberGitProperties
 //	ConnectionPropertiesOutputMemberGlueProperties
 //	ConnectionPropertiesOutputMemberHyperPodProperties
 //	ConnectionPropertiesOutputMemberIamProperties
@@ -1190,8 +1225,10 @@ func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectio
 //	ConnectionPropertiesOutputMemberMlflowProperties
 //	ConnectionPropertiesOutputMemberRedshiftProperties
 //	ConnectionPropertiesOutputMemberS3Properties
+//	ConnectionPropertiesOutputMemberSnowflakeProperties
 //	ConnectionPropertiesOutputMemberSparkEmrProperties
 //	ConnectionPropertiesOutputMemberSparkGlueProperties
+//	ConnectionPropertiesOutputMemberVpcProperties
 //	ConnectionPropertiesOutputMemberWorkflowsMwaaProperties
 //	ConnectionPropertiesOutputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesOutput interface {
@@ -1215,6 +1252,15 @@ type ConnectionPropertiesOutputMemberAthenaProperties struct {
 }
 
 func (*ConnectionPropertiesOutputMemberAthenaProperties) isConnectionPropertiesOutput() {}
+
+// The Git properties of a connection.
+type ConnectionPropertiesOutputMemberGitProperties struct {
+	Value GitPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberGitProperties) isConnectionPropertiesOutput() {}
 
 // The Amazon Web Services Glue properties of a connection.
 type ConnectionPropertiesOutputMemberGlueProperties struct {
@@ -1279,6 +1325,15 @@ type ConnectionPropertiesOutputMemberS3Properties struct {
 
 func (*ConnectionPropertiesOutputMemberS3Properties) isConnectionPropertiesOutput() {}
 
+// The Snowflake-specific connection properties for an existing connection.
+type ConnectionPropertiesOutputMemberSnowflakeProperties struct {
+	Value SnowflakePropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberSnowflakeProperties) isConnectionPropertiesOutput() {}
+
 // The Spark EMR properties of a connection.
 type ConnectionPropertiesOutputMemberSparkEmrProperties struct {
 	Value SparkEmrPropertiesOutput
@@ -1296,6 +1351,15 @@ type ConnectionPropertiesOutputMemberSparkGlueProperties struct {
 }
 
 func (*ConnectionPropertiesOutputMemberSparkGlueProperties) isConnectionPropertiesOutput() {}
+
+// The VPC properties of a connection.
+type ConnectionPropertiesOutputMemberVpcProperties struct {
+	Value VpcPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberVpcProperties) isConnectionPropertiesOutput() {}
 
 // The Amazon MWAA properties of a connection.
 type ConnectionPropertiesOutputMemberWorkflowsMwaaProperties struct {
@@ -1322,13 +1386,16 @@ func (*ConnectionPropertiesOutputMemberWorkflowsServerlessProperties) isConnecti
 //
 //	ConnectionPropertiesPatchMemberAmazonQProperties
 //	ConnectionPropertiesPatchMemberAthenaProperties
+//	ConnectionPropertiesPatchMemberGitProperties
 //	ConnectionPropertiesPatchMemberGlueProperties
 //	ConnectionPropertiesPatchMemberIamProperties
 //	ConnectionPropertiesPatchMemberLakehouseProperties
 //	ConnectionPropertiesPatchMemberMlflowProperties
 //	ConnectionPropertiesPatchMemberRedshiftProperties
 //	ConnectionPropertiesPatchMemberS3Properties
+//	ConnectionPropertiesPatchMemberSnowflakeProperties
 //	ConnectionPropertiesPatchMemberSparkEmrProperties
+//	ConnectionPropertiesPatchMemberVpcProperties
 type ConnectionPropertiesPatch interface {
 	isConnectionPropertiesPatch()
 }
@@ -1350,6 +1417,15 @@ type ConnectionPropertiesPatchMemberAthenaProperties struct {
 }
 
 func (*ConnectionPropertiesPatchMemberAthenaProperties) isConnectionPropertiesPatch() {}
+
+// The Git properties of a connection properties patch.
+type ConnectionPropertiesPatchMemberGitProperties struct {
+	Value GitPropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberGitProperties) isConnectionPropertiesPatch() {}
 
 // The Amazon Web Services Glue properties of a connection properties patch.
 type ConnectionPropertiesPatchMemberGlueProperties struct {
@@ -1405,6 +1481,15 @@ type ConnectionPropertiesPatchMemberS3Properties struct {
 
 func (*ConnectionPropertiesPatchMemberS3Properties) isConnectionPropertiesPatch() {}
 
+// The Snowflake-specific connection properties to update.
+type ConnectionPropertiesPatchMemberSnowflakeProperties struct {
+	Value SnowflakePropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberSnowflakeProperties) isConnectionPropertiesPatch() {}
+
 // The Spark EMR properties of a connection properties patch.
 type ConnectionPropertiesPatchMemberSparkEmrProperties struct {
 	Value SparkEmrPropertiesPatch
@@ -1413,6 +1498,15 @@ type ConnectionPropertiesPatchMemberSparkEmrProperties struct {
 }
 
 func (*ConnectionPropertiesPatchMemberSparkEmrProperties) isConnectionPropertiesPatch() {}
+
+// The VPC properties of a connection properties patch.
+type ConnectionPropertiesPatchMemberVpcProperties struct {
+	Value VpcPropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberVpcProperties) isConnectionPropertiesPatch() {}
 
 // The summary of a connection.
 type ConnectionSummary struct {
@@ -1461,6 +1555,63 @@ type ConnectionSummary struct {
 
 	// The scope of the connection.
 	Scope ConnectionScope
+
+	noSmithyDocumentSerde
+}
+
+// Contains the network and authentication settings for a connection, including
+// connection credentials, physical network requirements, and compute-environment
+// validation options.
+type ConnectivityProperties struct {
+
+	// The Athena properties for this configuration.
+	AthenaProperties map[string]string
+
+	// The authentication settings for this configuration.
+	AuthenticationConfiguration *AuthenticationConfigurationInput
+
+	// The connection properties for this configuration.
+	ConnectionProperties map[string]string
+
+	// The description of the connectivity configuration.
+	Description *string
+
+	// The name of the connectivity configuration.
+	Name *string
+
+	// The physical network requirements for the connection, such as the subnet,
+	// security group, and VPC settings needed to reach the data source.
+	PhysicalConnectionRequirements *PhysicalConnectionRequirements
+
+	// The Python properties for this configuration.
+	PythonProperties map[string]string
+
+	// The Spark properties for this configuration.
+	SparkProperties map[string]string
+
+	// Specifies whether to validate credentials for the connectivity configuration.
+	// Defaults to true if not specified.
+	ValidateCredentials *bool
+
+	// The compute environments to use when validating connectivity. The service
+	// validates that the connection is reachable from each specified environment.
+	ValidateForComputeEnvironments []ComputeEnvironments
+
+	noSmithyDocumentSerde
+}
+
+// Contains the connectivity settings to update on an existing connection. Include
+// only the fields you want to change.
+type ConnectivityPropertiesPatch struct {
+
+	// The authentication settings to update.
+	AuthenticationConfiguration *AuthenticationConfigurationPatch
+
+	// The connection properties to update.
+	ConnectionProperties map[string]string
+
+	// A description of the connectivity properties update.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -2045,6 +2196,18 @@ type DataSourceSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The progress of a domain deletion, including the number of projects that Amazon
+// DataZone successfully deleted. Amazon DataZone returns this structure in the
+// response to a GetDomain request while a cascade deletion is in progress.
+type DeleteProgress struct {
+
+	// The number of projects that Amazon DataZone successfully deleted during the
+	// domain deletion.
+	SuccessfullyDeletedProjectCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // The details of the last deployment of the environment.
 type Deployment struct {
 
@@ -2355,6 +2518,10 @@ type EnvironmentBlueprintConfigurationItem struct {
 	// This member is required.
 	EnvironmentBlueprintId *string
 
+	// Specifies whether user-provided resource configurations are allowed for the
+	// environment blueprint.
+	AllowUserProvidedConfigurations *bool
+
 	// The timestamp of when an environment blueprint was created.
 	CreatedAt *time.Time
 
@@ -2377,6 +2544,9 @@ type EnvironmentBlueprintConfigurationItem struct {
 
 	// The regional parameters of the environment blueprint.
 	RegionalParameters map[string]map[string]string
+
+	// The resource configurations of the environment blueprint.
+	ResourceConfigurations []ResourceConfiguration
 
 	// The timestamp of when the environment blueprint was updated.
 	UpdatedAt *time.Time
@@ -2737,6 +2907,19 @@ type FailureCause struct {
 	noSmithyDocumentSerde
 }
 
+// The details of a resource deletion failure during a cascade deletion of the
+// domain.
+type FailureReason struct {
+
+	// The identifier of the resource that failed to delete.
+	Id *string
+
+	// The error message associated with the resource that failed to delete.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // A search filter in Amazon DataZone.
 type Filter struct {
 
@@ -2934,6 +3117,109 @@ type FormTypeData struct {
 
 	// The status of the form type.
 	Status FormTypeStatus
+
+	noSmithyDocumentSerde
+}
+
+// The Git metadata for a notebook sync operation in Amazon SageMaker Unified
+// Studio. Contains information about the Git repository, branch, and commit
+// associated with the notebook.
+type GitMetadata struct {
+
+	// The name of the Git branch.
+	//
+	// This member is required.
+	Branch *string
+
+	// The commit hash in the Git repository.
+	//
+	// This member is required.
+	CommitHash *string
+
+	// The identifier of the Git connection.
+	//
+	// This member is required.
+	ConnectionId *string
+
+	// The name of the Git repository.
+	//
+	// This member is required.
+	Repository *string
+
+	// The commit message associated with the Git commit.
+	CommitMessage *string
+
+	// The timestamp of when the commit was made.
+	CommittedAt *time.Time
+
+	// The name of the file in the Git repository.
+	FileName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Git connection properties that you specify when creating a Git
+// connection.
+type GitPropertiesInput struct {
+
+	// The ARN of the CodeConnections connection used to connect to the Git repository.
+	//
+	// This member is required.
+	CodeConnectionArn *string
+
+	// The default branch of the Git repository.
+	//
+	// This member is required.
+	DefaultBranch *string
+
+	// The ID of the Git repository. This is the owner and repository name, for
+	// example, owner/repo-name.
+	//
+	// This member is required.
+	RepositoryId *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties of a Git connection returned by get and list operations,
+// including connection status and any error details.
+type GitPropertiesOutput struct {
+
+	// The ARN of the CodeConnections connection used to connect to the Git repository.
+	//
+	// This member is required.
+	CodeConnectionArn *string
+
+	// The default branch of the Git repository.
+	//
+	// This member is required.
+	DefaultBranch *string
+
+	// The ID of the Git repository. This is the owner and repository name, for
+	// example, owner/repo-name.
+	//
+	// This member is required.
+	RepositoryId *string
+
+	// The error message that describes why the Git connection failed. This member is
+	// populated when the connection status is CREATE_FAILED or UPDATE_FAILED.
+	ErrorMessage *string
+
+	// The status of the Git connection.
+	Status ConnectionStatus
+
+	noSmithyDocumentSerde
+}
+
+// The properties used to update an existing Git connection, such as the
+// CodeConnections ARN or the default branch.
+type GitPropertiesPatch struct {
+
+	// The ARN of the CodeConnections connection used to connect to the Git repository.
+	CodeConnectionArn *string
+
+	// The default branch of the Git repository.
+	DefaultBranch *string
 
 	noSmithyDocumentSerde
 }
@@ -3514,6 +3800,21 @@ type IamUserProfileDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the configuration for mapping user identities to Snowflake users,
+// including the username attribute and optional prefix applied during the mapping.
+type IdentityMapping struct {
+
+	// The username attribute used for the identity mapping.
+	//
+	// This member is required.
+	UsernameAttribute *string
+
+	// The prefix used for the identity mapping.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
 // The details of the import of the metadata form type.
 type Import struct {
 
@@ -3954,6 +4255,44 @@ type LineageSqlQueryRunDetails struct {
 
 	// The total queries processed in the SQL query run details of a data lineage run.
 	TotalQueriesProcessed *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains the settings for configuring lineage sync on a Snowflake connection,
+// including the schedule, timezone, and enabled state.
+type LineageSyncInput struct {
+
+	// Specifies whether lineage sync is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The schedule of the lineage sync.
+	Schedule *string
+
+	// The timezone of the lineage sync schedule.
+	Timezone Timezone
+
+	noSmithyDocumentSerde
+}
+
+// Contains the current state of lineage sync for a Snowflake connection,
+// including the schedule, timezone, enabled state, and the ID of the associated
+// lineage job.
+type LineageSyncOutput struct {
+
+	// Specifies whether lineage sync is enabled.
+	Enabled *bool
+
+	// The ID of the lineage sync job.
+	LineageJobId *string
+
+	// The schedule of the lineage sync.
+	Schedule *string
+
+	// The timezone of the lineage sync schedule.
+	Timezone Timezone
 
 	noSmithyDocumentSerde
 }
@@ -4518,6 +4857,9 @@ type NotebookSummary struct {
 
 	// The description of the notebook.
 	Description *string
+
+	// The type of the notebook.
+	Type NotebookType
 
 	// The timestamp of when the notebook was last updated.
 	UpdatedAt *time.Time
@@ -5376,6 +5718,30 @@ type ProvisioningPropertiesMemberCloudFormation struct {
 
 func (*ProvisioningPropertiesMemberCloudFormation) isProvisioningProperties() {}
 
+// The resource configuration that is used to configure the environment blueprint.
+type PutResourceConfiguration struct {
+
+	// The name of the resource configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The parameters of the resource configuration.
+	//
+	// This member is required.
+	Parameters map[string]string
+
+	// The Amazon Web Services Region of the resource configuration.
+	//
+	// This member is required.
+	Region *string
+
+	// The description of the resource configuration.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The recommendation to be updated as part of the UpdateDataSource action.
 type RecommendationConfiguration struct {
 
@@ -5793,6 +6159,35 @@ type Resource struct {
 
 	// The provider of a provisioned resource of this Amazon DataZone environment.
 	Provider *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the resource configuration.
+type ResourceConfiguration struct {
+
+	// The identifier of the resource configuration.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The name of the resource configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The parameters of the resource configuration.
+	//
+	// This member is required.
+	Parameters map[string]string
+
+	// The Amazon Web Services Region of the resource configuration.
+	//
+	// This member is required.
+	Region *string
+
+	// The description of the resource configuration.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -6466,6 +6861,78 @@ type SingleSignOn struct {
 
 	// The single sign-on user assignment in Amazon DataZone.
 	UserAssignment UserAssignment
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Snowflake-specific settings required when creating or updating a
+// connection, including the Snowflake role, identity mapping, and lineage sync
+// configuration.
+type SnowflakePropertiesInput struct {
+
+	// The identity mapping configuration for the Snowflake connection.
+	//
+	// This member is required.
+	IdentityMapping *IdentityMapping
+
+	// The Snowflake role used to access Snowflake resources.
+	//
+	// This member is required.
+	SnowflakeRole *string
+
+	// The connectivity properties of the Snowflake connection.
+	ConnectivityProperties *ConnectivityProperties
+
+	// The lineage sync configuration for the Snowflake connection.
+	LineageSync *LineageSyncInput
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Snowflake-specific settings returned for an existing connection,
+// including the current role, identity mapping, lineage sync state, and connection
+// status.
+type SnowflakePropertiesOutput struct {
+
+	// The identity mapping configuration for the Snowflake connection.
+	//
+	// This member is required.
+	IdentityMapping *IdentityMapping
+
+	// The lineage sync configuration for the Snowflake connection.
+	//
+	// This member is required.
+	LineageSync *LineageSyncOutput
+
+	// The Snowflake role used to access Snowflake resources.
+	//
+	// This member is required.
+	SnowflakeRole *string
+
+	// The status of the Snowflake connection.
+	//
+	// This member is required.
+	Status ConnectionStatus
+
+	// An error message returned if the Snowflake connection failed to establish or
+	// validate.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Snowflake-specific settings to update on an existing connection.
+// Include only the fields you want to change.
+type SnowflakePropertiesPatch struct {
+
+	// The connectivity properties patch of the Snowflake connection.
+	ConnectivityPropertiesPatch *ConnectivityPropertiesPatch
+
+	// The lineage sync configuration for the Snowflake connection.
+	LineageSync *LineageSyncInput
+
+	// The Snowflake role used to access Snowflake resources.
+	SnowflakeRole *string
 
 	noSmithyDocumentSerde
 }
@@ -7612,6 +8079,71 @@ type UserProfileSummary struct {
 
 	// The type of the user profile.
 	Type UserProfileType
+
+	noSmithyDocumentSerde
+}
+
+// The VPC connection properties used when creating a connection.
+type VpcPropertiesInput struct {
+
+	// The subnet IDs of the VPC connection. You can specify between 1 and 16 subnet
+	// IDs.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The identifier of the VPC. Must match the pattern ^vpc-[a-z0-9]+$ . Maximum
+	// length of 32.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The security group ID of the VPC connection. Must match the pattern
+	// ^sg-[a-z0-9]+$ . Maximum length of 32.
+	SecurityGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC connection properties returned in responses.
+type VpcPropertiesOutput struct {
+
+	// The status of the VPC connection.
+	//
+	// This member is required.
+	Status ConnectionStatus
+
+	// The subnet IDs of the VPC connection.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The identifier of the VPC.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The Amazon Web Services Glue connection names associated with the VPC
+	// connection.
+	GlueConnectionNames []string
+
+	// The security group ID of the VPC connection.
+	SecurityGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC connection properties used when updating a connection.
+type VpcPropertiesPatch struct {
+
+	// The security group ID of the VPC connection.
+	SecurityGroupId *string
+
+	// The subnet IDs of the VPC connection.
+	SubnetIds []string
+
+	// The identifier of the VPC.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

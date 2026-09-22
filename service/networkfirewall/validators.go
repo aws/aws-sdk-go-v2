@@ -110,6 +110,26 @@ func (m *validateOpAttachRuleGroupsToProxyConfiguration) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateContainerAssociation struct {
+}
+
+func (*validateOpCreateContainerAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContainerAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContainerAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContainerAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFirewall struct {
 }
 
@@ -770,6 +790,26 @@ func (m *validateOpUpdateAvailabilityZoneChangeProtection) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContainerAssociation struct {
+}
+
+func (*validateOpUpdateContainerAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContainerAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContainerAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContainerAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFirewallDeleteProtection struct {
 }
 
@@ -970,6 +1010,26 @@ func (m *validateOpUpdateProxyRulePriorities) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProxySettings struct {
+}
+
+func (*validateOpUpdateProxySettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProxySettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProxySettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProxySettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRuleGroup struct {
 }
 
@@ -1048,6 +1108,10 @@ func addOpAssociateSubnetsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpAttachRuleGroupsToProxyConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAttachRuleGroupsToProxyConfiguration{}, middleware.After)
+}
+
+func addOpCreateContainerAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContainerAssociation{}, middleware.After)
 }
 
 func addOpCreateFirewallValidationMiddleware(stack *middleware.Stack) error {
@@ -1182,6 +1246,10 @@ func addOpUpdateAvailabilityZoneChangeProtectionValidationMiddleware(stack *midd
 	return stack.Initialize.Add(&validateOpUpdateAvailabilityZoneChangeProtection{}, middleware.After)
 }
 
+func addOpUpdateContainerAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContainerAssociation{}, middleware.After)
+}
+
 func addOpUpdateFirewallDeleteProtectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFirewallDeleteProtection{}, middleware.After)
 }
@@ -1220,6 +1288,10 @@ func addOpUpdateProxyRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateProxyRulePrioritiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProxyRulePriorities{}, middleware.After)
+}
+
+func addOpUpdateProxySettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProxySettings{}, middleware.After)
 }
 
 func addOpUpdateRuleGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1305,6 +1377,78 @@ func validateAvailabilityZoneMappings(v []types.AvailabilityZoneMapping) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AvailabilityZoneMappings"}
 	for i := range v {
 		if err := validateAvailabilityZoneMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerAttribute(v *types.ContainerAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerAttribute"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerAttributes(v []types.ContainerAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerAttributes"}
+	for i := range v {
+		if err := validateContainerAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerMonitoringConfiguration(v *types.ContainerMonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerMonitoringConfiguration"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.AttributeFilters != nil {
+		if err := validateContainerAttributes(v.AttributeFilters); err != nil {
+			invalidParams.AddNested("AttributeFilters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContainerMonitoringConfigurations(v []types.ContainerMonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainerMonitoringConfigurations"}
+	for i := range v {
+		if err := validateContainerMonitoringConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1670,6 +1814,38 @@ func validateMatchAttributes(v *types.MatchAttributes) error {
 	}
 }
 
+func validateNatGatewayMapping(v *types.NatGatewayMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NatGatewayMapping"}
+	if v.NatGatewayId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NatGatewayId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNatGatewayMappingsList(v []types.NatGatewayMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NatGatewayMappingsList"}
+	for i := range v {
+		if err := validateNatGatewayMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePolicyVariables(v *types.PolicyVariables) error {
 	if v == nil {
 		return nil
@@ -1708,6 +1884,21 @@ func validatePortRanges(v []types.PortRange) error {
 		if err := validatePortRange(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProxySettings(v *types.ProxySettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProxySettings"}
+	if v.ListenerProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ListenerProperties"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2253,6 +2444,28 @@ func validateTLSInspectionConfiguration(v *types.TLSInspectionConfiguration) err
 	}
 }
 
+func validateVpcEndpoint(v *types.VpcEndpoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcEndpoint"}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetMappings"))
+	} else if v.SubnetMappings != nil {
+		if err := validateSubnetMappings(v.SubnetMappings); err != nil {
+			invalidParams.AddNested("SubnetMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptNetworkFirewallTransitGatewayAttachmentInput(v *AcceptNetworkFirewallTransitGatewayAttachmentInput) error {
 	if v == nil {
 		return nil
@@ -2339,6 +2552,36 @@ func validateOpAttachRuleGroupsToProxyConfigurationInput(v *AttachRuleGroupsToPr
 	}
 }
 
+func validateOpCreateContainerAssociationInput(v *CreateContainerAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContainerAssociationInput"}
+	if v.ContainerAssociationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerAssociationName"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ContainerMonitoringConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerMonitoringConfigurations"))
+	} else if v.ContainerMonitoringConfigurations != nil {
+		if err := validateContainerMonitoringConfigurations(v.ContainerMonitoringConfigurations); err != nil {
+			invalidParams.AddNested("ContainerMonitoringConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFirewallInput(v *CreateFirewallInput) error {
 	if v == nil {
 		return nil
@@ -2368,6 +2611,21 @@ func validateOpCreateFirewallInput(v *CreateFirewallInput) error {
 	if v.AvailabilityZoneMappings != nil {
 		if err := validateAvailabilityZoneMappings(v.AvailabilityZoneMappings); err != nil {
 			invalidParams.AddNested("AvailabilityZoneMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NatGatewayMappings != nil {
+		if err := validateNatGatewayMappingsList(v.NatGatewayMappings); err != nil {
+			invalidParams.AddNested("NatGatewayMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProxySettings != nil {
+		if err := validateProxySettings(v.ProxySettings); err != nil {
+			invalidParams.AddNested("ProxySettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VpcEndpoint != nil {
+		if err := validateVpcEndpoint(v.VpcEndpoint); err != nil {
+			invalidParams.AddNested("VpcEndpoint", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2990,6 +3248,36 @@ func validateOpUpdateAvailabilityZoneChangeProtectionInput(v *UpdateAvailability
 	}
 }
 
+func validateOpUpdateContainerAssociationInput(v *UpdateContainerAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContainerAssociationInput"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ContainerMonitoringConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerMonitoringConfigurations"))
+	} else if v.ContainerMonitoringConfigurations != nil {
+		if err := validateContainerMonitoringConfigurations(v.ContainerMonitoringConfigurations); err != nil {
+			invalidParams.AddNested("ContainerMonitoringConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UpdateToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFirewallDeleteProtectionInput(v *UpdateFirewallDeleteProtectionInput) error {
 	if v == nil {
 		return nil
@@ -3170,6 +3458,23 @@ func validateOpUpdateProxyRulePrioritiesInput(v *UpdateProxyRulePrioritiesInput)
 	}
 	if v.UpdateToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdateToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProxySettingsInput(v *UpdateProxySettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProxySettingsInput"}
+	if v.ProxySettings != nil {
+		if err := validateProxySettings(v.ProxySettings); err != nil {
+			invalidParams.AddNested("ProxySettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deregisters an Amazon ECS container instance from the specified cluster. This
@@ -75,6 +74,24 @@ type DeregisterContainerInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterContainerInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterContainerInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterContainerInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.DeregisterContainerInstanceRequest_cluster, *v.Cluster)
+	}
+	if v.ContainerInstance != nil {
+		s.WriteString(schemas.DeregisterContainerInstanceRequest_containerInstance, *v.ContainerInstance)
+	}
+	if v.Force != nil {
+		s.WriteBool(schemas.DeregisterContainerInstanceRequest_force, *v.Force)
+	}
+}
+
 type DeregisterContainerInstanceOutput struct {
 
 	// The container instance that was deregistered.
@@ -86,77 +103,50 @@ type DeregisterContainerInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterContainerInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterContainerInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterContainerInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerInstance != nil {
+		s.WriteStruct(schemas.DeregisterContainerInstanceResponse_containerInstance)
+		v.ContainerInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeregisterContainerInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterContainerInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterContainerInstanceResponse_containerInstance:
+			v.ContainerInstance = &types.ContainerInstance{}
+			return v.ContainerInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterContainerInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterContainerInstance, schemas.DeregisterContainerInstanceRequest, schemas.DeregisterContainerInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterContainerInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterContainerInstance, schemas.DeregisterContainerInstanceRequest, schemas.DeregisterContainerInstanceResponse), output: &DeregisterContainerInstanceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterContainerInstance{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeregisterContainerInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeregisterContainerInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterContainerInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +161,8 @@ func (c *Client) addOperationDeregisterContainerInstanceMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeregisterContainerInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeregisterContainerInstance",
-	}
 }

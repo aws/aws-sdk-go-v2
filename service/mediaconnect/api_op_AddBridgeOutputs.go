@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds outputs to an existing bridge.
@@ -42,6 +41,19 @@ type AddBridgeOutputsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddBridgeOutputsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddBridgeOutputsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddBridgeOutputsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.AddBridgeOutputsRequest_BridgeArn, *v.BridgeArn)
+	}
+	serialize__listOfAddBridgeOutputRequest(s, schemas.AddBridgeOutputsRequest_Outputs, v.Outputs)
+}
+
 type AddBridgeOutputsOutput struct {
 
 	//  The ARN of the bridge that you added outputs to.
@@ -56,77 +68,51 @@ type AddBridgeOutputsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddBridgeOutputsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddBridgeOutputsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddBridgeOutputsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgeArn != nil {
+		s.WriteString(schemas.AddBridgeOutputsResponse_BridgeArn, *v.BridgeArn)
+	}
+	serialize__listOfBridgeOutput(s, schemas.AddBridgeOutputsResponse_Outputs, v.Outputs)
+}
+func (v *AddBridgeOutputsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddBridgeOutputsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddBridgeOutputsResponse_BridgeArn:
+			v.BridgeArn = new(string)
+			return d.ReadString(schemas.AddBridgeOutputsResponse_BridgeArn, v.BridgeArn)
+		case schemas.AddBridgeOutputsResponse_Outputs:
+			return deserialize__listOfBridgeOutput(d, schemas.AddBridgeOutputsResponse_Outputs, &v.Outputs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddBridgeOutputsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddBridgeOutputs, schemas.AddBridgeOutputsRequest, schemas.AddBridgeOutputsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddBridgeOutputs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddBridgeOutputs, schemas.AddBridgeOutputsRequest, schemas.AddBridgeOutputsResponse), output: &AddBridgeOutputsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddBridgeOutputs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddBridgeOutputs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAddBridgeOutputsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddBridgeOutputs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +127,8 @@ func (c *Client) addOperationAddBridgeOutputsMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAddBridgeOutputs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AddBridgeOutputs",
-	}
 }

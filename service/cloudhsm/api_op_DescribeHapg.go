@@ -4,11 +4,10 @@ package cloudhsm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This is documentation for AWS CloudHSM Classic. For more information, see [AWS CloudHSM Classic FAQs], the [AWS CloudHSM Classic User Guide]
@@ -52,6 +51,18 @@ type DescribeHapgInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHapgInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHapgRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHapgInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HapgArn != nil {
+		s.WriteString(schemas.DescribeHapgRequest_HapgArn, *v.HapgArn)
+	}
+}
+
 // Contains the output of the DescribeHapg action.
 type DescribeHapgOutput struct {
 
@@ -89,77 +100,88 @@ type DescribeHapgOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHapgOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHapgResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHapgOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HapgArn != nil {
+		s.WriteString(schemas.DescribeHapgResponse_HapgArn, *v.HapgArn)
+	}
+	if v.HapgSerial != nil {
+		s.WriteString(schemas.DescribeHapgResponse_HapgSerial, *v.HapgSerial)
+	}
+	serializeHsmList(s, schemas.DescribeHapgResponse_HsmsLastActionFailed, v.HsmsLastActionFailed)
+	serializeHsmList(s, schemas.DescribeHapgResponse_HsmsPendingDeletion, v.HsmsPendingDeletion)
+	serializeHsmList(s, schemas.DescribeHapgResponse_HsmsPendingRegistration, v.HsmsPendingRegistration)
+	if v.Label != nil {
+		s.WriteString(schemas.DescribeHapgResponse_Label, *v.Label)
+	}
+	if v.LastModifiedTimestamp != nil {
+		s.WriteString(schemas.DescribeHapgResponse_LastModifiedTimestamp, *v.LastModifiedTimestamp)
+	}
+	serializePartitionSerialList(s, schemas.DescribeHapgResponse_PartitionSerialList, v.PartitionSerialList)
+	if v.State != "" {
+		s.WriteString(schemas.DescribeHapgResponse_State, string(v.State))
+	}
+}
+func (v *DescribeHapgOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHapgResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHapgResponse_HapgArn:
+			v.HapgArn = new(string)
+			return d.ReadString(schemas.DescribeHapgResponse_HapgArn, v.HapgArn)
+		case schemas.DescribeHapgResponse_HapgSerial:
+			v.HapgSerial = new(string)
+			return d.ReadString(schemas.DescribeHapgResponse_HapgSerial, v.HapgSerial)
+		case schemas.DescribeHapgResponse_HsmsLastActionFailed:
+			return deserializeHsmList(d, schemas.DescribeHapgResponse_HsmsLastActionFailed, &v.HsmsLastActionFailed)
+		case schemas.DescribeHapgResponse_HsmsPendingDeletion:
+			return deserializeHsmList(d, schemas.DescribeHapgResponse_HsmsPendingDeletion, &v.HsmsPendingDeletion)
+		case schemas.DescribeHapgResponse_HsmsPendingRegistration:
+			return deserializeHsmList(d, schemas.DescribeHapgResponse_HsmsPendingRegistration, &v.HsmsPendingRegistration)
+		case schemas.DescribeHapgResponse_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.DescribeHapgResponse_Label, v.Label)
+		case schemas.DescribeHapgResponse_LastModifiedTimestamp:
+			v.LastModifiedTimestamp = new(string)
+			return d.ReadString(schemas.DescribeHapgResponse_LastModifiedTimestamp, v.LastModifiedTimestamp)
+		case schemas.DescribeHapgResponse_PartitionSerialList:
+			return deserializePartitionSerialList(d, schemas.DescribeHapgResponse_PartitionSerialList, &v.PartitionSerialList)
+		case schemas.DescribeHapgResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHapgResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.CloudHsmObjectState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHapg, schemas.DescribeHapgRequest, schemas.DescribeHapgResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHapg{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHapg, schemas.DescribeHapgRequest, schemas.DescribeHapgResponse), output: &DescribeHapgOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHapg{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeHapg"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeHapgValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHapg(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +196,8 @@ func (c *Client) addOperationDescribeHapgMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeHapg(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeHapg",
-	}
 }

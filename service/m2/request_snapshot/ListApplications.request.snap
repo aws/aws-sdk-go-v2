@@ -1,0 +1,3 @@
+GET /applications?environmentId=__EnvironmentId__&maxResults=1&names=__Member__&names=__Member__&nextToken=__NextToken__
+
+

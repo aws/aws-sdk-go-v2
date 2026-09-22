@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.CreateExadbVmCluster
+
+{"clientToken":"__ClientToken__","clusterName":"__ClusterName__","dataCollectionOptions":{"isDiagnosticsEventsEnabled":true,"isHealthMonitoringEnabled":true,"isIncidentLogsEnabled":true},"displayName":"__DisplayName__","enabledEcpuCount":1,"exascaleDbStorageVaultId":"__ExascaleDbStorageVaultId__","gridImageId":"__GridImageId__","hostname":"__Hostname__","licenseModel":"BRING_YOUR_OWN_LICENSE","nodeCount":1,"odbNetworkId":"__OdbNetworkId__","scanListenerPortTcp":1,"scanListenerPortTcpSsl":1,"shape":"__Shape__","shapeAttribute":"SMART_STORAGE","sshPublicKeys":["__Member__","__Member__"],"systemVersion":"__SystemVersion__","tags":{"key0":"__Value__"},"timeZone":"__TimeZone__","totalEcpuCount":1,"vmFileSystemStorageTotalSizeInGBs":1}

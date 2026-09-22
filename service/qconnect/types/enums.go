@@ -437,6 +437,27 @@ func (FilterOperator) Values() []FilterOperator {
 	}
 }
 
+type GuardrailAction string
+
+// Enum values for GuardrailAction
+const (
+	GuardrailActionNone    GuardrailAction = "NONE"
+	GuardrailActionBlocked GuardrailAction = "BLOCKED"
+	GuardrailActionMasked  GuardrailAction = "MASKED"
+)
+
+// Values returns all known values for GuardrailAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailAction) Values() []GuardrailAction {
+	return []GuardrailAction{
+		"NONE",
+		"BLOCKED",
+		"MASKED",
+	}
+}
+
 type GuardrailContentFilterType string
 
 // Enum values for GuardrailContentFilterType
@@ -601,6 +622,33 @@ func (GuardrailPiiEntityType) Values() []GuardrailPiiEntityType {
 	}
 }
 
+type GuardrailPolicyType string
+
+// Enum values for GuardrailPolicyType
+const (
+	GuardrailPolicyTypeContentFilter             GuardrailPolicyType = "CONTENT_FILTER"
+	GuardrailPolicyTypeTopic                     GuardrailPolicyType = "TOPIC"
+	GuardrailPolicyTypeWord                      GuardrailPolicyType = "WORD"
+	GuardrailPolicyTypeSensitiveInformationPii   GuardrailPolicyType = "SENSITIVE_INFORMATION_PII"
+	GuardrailPolicyTypeSensitiveInformationRegex GuardrailPolicyType = "SENSITIVE_INFORMATION_REGEX"
+	GuardrailPolicyTypeContextualGrounding       GuardrailPolicyType = "CONTEXTUAL_GROUNDING"
+)
+
+// Values returns all known values for GuardrailPolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailPolicyType) Values() []GuardrailPolicyType {
+	return []GuardrailPolicyType{
+		"CONTENT_FILTER",
+		"TOPIC",
+		"WORD",
+		"SENSITIVE_INFORMATION_PII",
+		"SENSITIVE_INFORMATION_REGEX",
+		"CONTEXTUAL_GROUNDING",
+	}
+}
+
 type GuardrailSensitiveInformationAction string
 
 // Enum values for GuardrailSensitiveInformationAction
@@ -618,6 +666,25 @@ func (GuardrailSensitiveInformationAction) Values() []GuardrailSensitiveInformat
 	return []GuardrailSensitiveInformationAction{
 		"BLOCK",
 		"ANONYMIZE",
+	}
+}
+
+type GuardrailSource string
+
+// Enum values for GuardrailSource
+const (
+	GuardrailSourceInput  GuardrailSource = "INPUT"
+	GuardrailSourceOutput GuardrailSource = "OUTPUT"
+)
+
+// Values returns all known values for GuardrailSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GuardrailSource) Values() []GuardrailSource {
+	return []GuardrailSource{
+		"INPUT",
+		"OUTPUT",
 	}
 }
 
@@ -679,6 +746,25 @@ const (
 func (ImportJobType) Values() []ImportJobType {
 	return []ImportJobType{
 		"QUICK_RESPONSES",
+	}
+}
+
+type InteractionMode string
+
+// Enum values for InteractionMode
+const (
+	InteractionModeDelegate InteractionMode = "DELEGATE"
+	InteractionModeHandoff  InteractionMode = "HANDOFF"
+)
+
+// Values returns all known values for InteractionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InteractionMode) Values() []InteractionMode {
+	return []InteractionMode{
+		"DELEGATE",
+		"HANDOFF",
 	}
 }
 
@@ -842,6 +928,7 @@ type MessageType string
 const (
 	MessageTypeText          MessageType = "TEXT"
 	MessageTypeToolUseResult MessageType = "TOOL_USE_RESULT"
+	MessageTypeData          MessageType = "DATA"
 )
 
 // Values returns all known values for MessageType. Note that this can be expanded
@@ -852,6 +939,7 @@ func (MessageType) Values() []MessageType {
 	return []MessageType{
 		"TEXT",
 		"TOOL_USE_RESULT",
+		"DATA",
 	}
 }
 
@@ -1300,6 +1388,29 @@ func (RelevanceLevel) Values() []RelevanceLevel {
 		"HIGH",
 		"MEDIUM",
 		"LOW",
+	}
+}
+
+type ReturnReason string
+
+// Enum values for ReturnReason
+const (
+	ReturnReasonComplete          ReturnReason = "COMPLETE"
+	ReturnReasonCompleteWithError ReturnReason = "COMPLETE_WITH_ERROR"
+	ReturnReasonEscalate          ReturnReason = "ESCALATE"
+	ReturnReasonOutOfDomain       ReturnReason = "OUT_OF_DOMAIN"
+)
+
+// Values returns all known values for ReturnReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReturnReason) Values() []ReturnReason {
+	return []ReturnReason{
+		"COMPLETE",
+		"COMPLETE_WITH_ERROR",
+		"ESCALATE",
+		"OUT_OF_DOMAIN",
 	}
 }
 

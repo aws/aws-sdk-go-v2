@@ -4,11 +4,10 @@ package kafka
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this resource to update the intelligent rebalancing status of an Amazon MSK
@@ -50,6 +49,26 @@ type UpdateRebalancingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRebalancingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRebalancingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRebalancingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateRebalancingRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateRebalancingRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.Rebalancing != nil {
+		s.WriteStruct(schemas.UpdateRebalancingRequest_Rebalancing)
+		v.Rebalancing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRebalancingOutput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster whose intelligent rebalancing
@@ -65,77 +84,54 @@ type UpdateRebalancingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRebalancingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRebalancingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRebalancingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.UpdateRebalancingResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterOperationArn != nil {
+		s.WriteString(schemas.UpdateRebalancingResponse_ClusterOperationArn, *v.ClusterOperationArn)
+	}
+}
+func (v *UpdateRebalancingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRebalancingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRebalancingResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.UpdateRebalancingResponse_ClusterArn, v.ClusterArn)
+		case schemas.UpdateRebalancingResponse_ClusterOperationArn:
+			v.ClusterOperationArn = new(string)
+			return d.ReadString(schemas.UpdateRebalancingResponse_ClusterOperationArn, v.ClusterOperationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRebalancingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRebalancing, schemas.UpdateRebalancingRequest, schemas.UpdateRebalancingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRebalancing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRebalancing, schemas.UpdateRebalancingRequest, schemas.UpdateRebalancingResponse), output: &UpdateRebalancingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRebalancing{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRebalancing"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRebalancingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRebalancing(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +146,8 @@ func (c *Client) addOperationUpdateRebalancingMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRebalancing(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRebalancing",
-	}
 }

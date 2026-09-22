@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -13,7 +14,8 @@ type BadRequestException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -34,6 +36,36 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorAttribute != nil {
+		s.WriteString(schemas.BadRequestException_ErrorAttribute, *v.ErrorAttribute)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequestException_Message, *v.Message)
+	}
+	serialize__listOfResourceShareError(s, schemas.BadRequestException_ResourceShareErrors, v.ResourceShareErrors)
+}
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_ErrorAttribute:
+			v.ErrorAttribute = new(string)
+			return d.ReadString(schemas.BadRequestException_ErrorAttribute, v.ErrorAttribute)
+		case schemas.BadRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_Message, v.Message)
+		case schemas.BadRequestException_ResourceShareErrors:
+			return deserialize__listOfResourceShareError(d, schemas.BadRequestException_ResourceShareErrors, &v.ResourceShareErrors)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type ConflictException struct {
@@ -41,7 +73,8 @@ type ConflictException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -62,6 +95,36 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorAttribute != nil {
+		s.WriteString(schemas.ConflictException_ErrorAttribute, *v.ErrorAttribute)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+	serialize__listOfResourceShareError(s, schemas.ConflictException_ResourceShareErrors, v.ResourceShareErrors)
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_ErrorAttribute:
+			v.ErrorAttribute = new(string)
+			return d.ReadString(schemas.ConflictException_ErrorAttribute, v.ErrorAttribute)
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		case schemas.ConflictException_ResourceShareErrors:
+			return deserialize__listOfResourceShareError(d, schemas.ConflictException_ResourceShareErrors, &v.ResourceShareErrors)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type ForbiddenException struct {
@@ -69,7 +132,8 @@ type ForbiddenException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -90,6 +154,36 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ForbiddenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForbiddenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForbiddenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorAttribute != nil {
+		s.WriteString(schemas.ForbiddenException_ErrorAttribute, *v.ErrorAttribute)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ForbiddenException_Message, *v.Message)
+	}
+	serialize__listOfResourceShareError(s, schemas.ForbiddenException_ResourceShareErrors, v.ResourceShareErrors)
+}
+func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForbiddenException_ErrorAttribute:
+			v.ErrorAttribute = new(string)
+			return d.ReadString(schemas.ForbiddenException_ErrorAttribute, v.ErrorAttribute)
+		case schemas.ForbiddenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForbiddenException_Message, v.Message)
+		case schemas.ForbiddenException_ResourceShareErrors:
+			return deserialize__listOfResourceShareError(d, schemas.ForbiddenException_ResourceShareErrors, &v.ResourceShareErrors)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type InternalServerErrorException struct {
@@ -97,7 +191,8 @@ type InternalServerErrorException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -118,6 +213,36 @@ func (e *InternalServerErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorAttribute != nil {
+		s.WriteString(schemas.InternalServerErrorException_ErrorAttribute, *v.ErrorAttribute)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerErrorException_Message, *v.Message)
+	}
+	serialize__listOfResourceShareError(s, schemas.InternalServerErrorException_ResourceShareErrors, v.ResourceShareErrors)
+}
+func (v *InternalServerErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerErrorException_ErrorAttribute:
+			v.ErrorAttribute = new(string)
+			return d.ReadString(schemas.InternalServerErrorException_ErrorAttribute, v.ErrorAttribute)
+		case schemas.InternalServerErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerErrorException_Message, v.Message)
+		case schemas.InternalServerErrorException_ResourceShareErrors:
+			return deserialize__listOfResourceShareError(d, schemas.InternalServerErrorException_ResourceShareErrors, &v.ResourceShareErrors)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type NotFoundException struct {
@@ -125,7 +250,8 @@ type NotFoundException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -146,6 +272,36 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorAttribute != nil {
+		s.WriteString(schemas.NotFoundException_ErrorAttribute, *v.ErrorAttribute)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_Message, *v.Message)
+	}
+	serialize__listOfResourceShareError(s, schemas.NotFoundException_ResourceShareErrors, v.ResourceShareErrors)
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_ErrorAttribute:
+			v.ErrorAttribute = new(string)
+			return d.ReadString(schemas.NotFoundException_ErrorAttribute, v.ErrorAttribute)
+		case schemas.NotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_Message, v.Message)
+		case schemas.NotFoundException_ResourceShareErrors:
+			return deserialize__listOfResourceShareError(d, schemas.NotFoundException_ResourceShareErrors, &v.ResourceShareErrors)
+		}
+		return nil
+	})
+}
 
 // Returns information about an error.
 type UnauthorizedException struct {
@@ -153,7 +309,8 @@ type UnauthorizedException struct {
 
 	ErrorCodeOverride *string
 
-	ErrorAttribute *string
+	ErrorAttribute      *string
+	ResourceShareErrors []ResourceShareError
 
 	noSmithyDocumentSerde
 }
@@ -174,3 +331,33 @@ func (e *UnauthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnauthorizedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnauthorizedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnauthorizedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorAttribute != nil {
+		s.WriteString(schemas.UnauthorizedException_ErrorAttribute, *v.ErrorAttribute)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnauthorizedException_Message, *v.Message)
+	}
+	serialize__listOfResourceShareError(s, schemas.UnauthorizedException_ResourceShareErrors, v.ResourceShareErrors)
+}
+func (v *UnauthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnauthorizedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnauthorizedException_ErrorAttribute:
+			v.ErrorAttribute = new(string)
+			return d.ReadString(schemas.UnauthorizedException_ErrorAttribute, v.ErrorAttribute)
+		case schemas.UnauthorizedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnauthorizedException_Message, v.Message)
+		case schemas.UnauthorizedException_ResourceShareErrors:
+			return deserialize__listOfResourceShareError(d, schemas.UnauthorizedException_ResourceShareErrors, &v.ResourceShareErrors)
+		}
+		return nil
+	})
+}

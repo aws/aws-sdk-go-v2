@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deregisters the specified task definition by family and revision. Upon
@@ -59,6 +58,18 @@ type DeregisterTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTaskDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskDefinition != nil {
+		s.WriteString(schemas.DeregisterTaskDefinitionRequest_taskDefinition, *v.TaskDefinition)
+	}
+}
+
 type DeregisterTaskDefinitionOutput struct {
 
 	// The full description of the deregistered task.
@@ -70,77 +81,50 @@ type DeregisterTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTaskDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskDefinition != nil {
+		s.WriteStruct(schemas.DeregisterTaskDefinitionResponse_taskDefinition)
+		v.TaskDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeregisterTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterTaskDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterTaskDefinitionResponse_taskDefinition:
+			v.TaskDefinition = &types.TaskDefinition{}
+			return v.TaskDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTaskDefinition, schemas.DeregisterTaskDefinitionRequest, schemas.DeregisterTaskDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTaskDefinition, schemas.DeregisterTaskDefinitionRequest, schemas.DeregisterTaskDefinitionResponse), output: &DeregisterTaskDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterTaskDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeregisterTaskDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeregisterTaskDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterTaskDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +139,8 @@ func (c *Client) addOperationDeregisterTaskDefinitionMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeregisterTaskDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeregisterTaskDefinition",
-	}
 }

@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about all block storage disks in your AWS account and
@@ -40,6 +39,18 @@ type GetDisksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDisksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDisksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDisksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetDisksRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetDisksOutput struct {
 
 	// An array of objects containing information about all block storage disks.
@@ -59,74 +70,48 @@ type GetDisksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDisksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDisksResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDisksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiskList(s, schemas.GetDisksResult_disks, v.Disks)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetDisksResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetDisksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDisksResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDisksResult_disks:
+			return deserializeDiskList(d, schemas.GetDisksResult_disks, &v.Disks)
+		case schemas.GetDisksResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetDisksResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDisksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDisks, schemas.GetDisksRequest, schemas.GetDisksResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDisks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDisks, schemas.GetDisksRequest, schemas.GetDisksResult), output: &GetDisksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDisks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDisks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDisks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +126,8 @@ func (c *Client) addOperationGetDisksMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDisks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDisks",
-	}
 }

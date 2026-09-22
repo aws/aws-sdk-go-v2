@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,18 @@ type DeleteNotifyConfigurationInput struct {
 	NotifyConfigurationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteNotifyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotifyConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotifyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotifyConfigurationId != nil {
+		s.WriteString(schemas.DeleteNotifyConfigurationRequest_NotifyConfigurationId, *v.NotifyConfigurationId)
+	}
 }
 
 type DeleteNotifyConfigurationOutput struct {
@@ -116,77 +127,133 @@ type DeleteNotifyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNotifyConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNotifyConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNotifyConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteNotifyConfigurationResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DefaultTemplateId != nil {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_DefaultTemplateId, *v.DefaultTemplateId)
+	}
+	s.WriteBool(schemas.DeleteNotifyConfigurationResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_DisplayName, *v.DisplayName)
+	}
+	serializeNotifyEnabledChannelsList(s, schemas.DeleteNotifyConfigurationResult_EnabledChannels, v.EnabledChannels)
+	serializeIsoCountryCodeList(s, schemas.DeleteNotifyConfigurationResult_EnabledCountries, v.EnabledCountries)
+	if v.NotifyConfigurationArn != nil {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_NotifyConfigurationArn, *v.NotifyConfigurationArn)
+	}
+	if v.NotifyConfigurationId != nil {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_NotifyConfigurationId, *v.NotifyConfigurationId)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_PoolId, *v.PoolId)
+	}
+	if v.RejectionReason != nil {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_RejectionReason, *v.RejectionReason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_Status, string(v.Status))
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_Tier, string(v.Tier))
+	}
+	if v.TierUpgradeStatus != "" {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_TierUpgradeStatus, string(v.TierUpgradeStatus))
+	}
+	if v.UseCase != "" {
+		s.WriteString(schemas.DeleteNotifyConfigurationResult_UseCase, string(v.UseCase))
+	}
+}
+func (v *DeleteNotifyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNotifyConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteNotifyConfigurationResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteNotifyConfigurationResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteNotifyConfigurationResult_DefaultTemplateId:
+			v.DefaultTemplateId = new(string)
+			return d.ReadString(schemas.DeleteNotifyConfigurationResult_DefaultTemplateId, v.DefaultTemplateId)
+		case schemas.DeleteNotifyConfigurationResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.DeleteNotifyConfigurationResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.DeleteNotifyConfigurationResult_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DeleteNotifyConfigurationResult_DisplayName, v.DisplayName)
+		case schemas.DeleteNotifyConfigurationResult_EnabledChannels:
+			return deserializeNotifyEnabledChannelsList(d, schemas.DeleteNotifyConfigurationResult_EnabledChannels, &v.EnabledChannels)
+		case schemas.DeleteNotifyConfigurationResult_EnabledCountries:
+			return deserializeIsoCountryCodeList(d, schemas.DeleteNotifyConfigurationResult_EnabledCountries, &v.EnabledCountries)
+		case schemas.DeleteNotifyConfigurationResult_NotifyConfigurationArn:
+			v.NotifyConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteNotifyConfigurationResult_NotifyConfigurationArn, v.NotifyConfigurationArn)
+		case schemas.DeleteNotifyConfigurationResult_NotifyConfigurationId:
+			v.NotifyConfigurationId = new(string)
+			return d.ReadString(schemas.DeleteNotifyConfigurationResult_NotifyConfigurationId, v.NotifyConfigurationId)
+		case schemas.DeleteNotifyConfigurationResult_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.DeleteNotifyConfigurationResult_PoolId, v.PoolId)
+		case schemas.DeleteNotifyConfigurationResult_RejectionReason:
+			v.RejectionReason = new(string)
+			return d.ReadString(schemas.DeleteNotifyConfigurationResult_RejectionReason, v.RejectionReason)
+		case schemas.DeleteNotifyConfigurationResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteNotifyConfigurationResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotifyConfigurationStatus(ev)
+			return nil
+		case schemas.DeleteNotifyConfigurationResult_Tier:
+			var ev string
+			if err := d.ReadString(schemas.DeleteNotifyConfigurationResult_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = types.NotifyConfigurationTier(ev)
+			return nil
+		case schemas.DeleteNotifyConfigurationResult_TierUpgradeStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteNotifyConfigurationResult_TierUpgradeStatus, &ev); err != nil {
+				return err
+			}
+			v.TierUpgradeStatus = types.TierUpgradeStatus(ev)
+			return nil
+		case schemas.DeleteNotifyConfigurationResult_UseCase:
+			var ev string
+			if err := d.ReadString(schemas.DeleteNotifyConfigurationResult_UseCase, &ev); err != nil {
+				return err
+			}
+			v.UseCase = types.NotifyConfigurationUseCase(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteNotifyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotifyConfiguration, schemas.DeleteNotifyConfigurationRequest, schemas.DeleteNotifyConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteNotifyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteNotifyConfiguration, schemas.DeleteNotifyConfigurationRequest, schemas.DeleteNotifyConfigurationResult), output: &DeleteNotifyConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteNotifyConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteNotifyConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteNotifyConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteNotifyConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,22 +268,8 @@ func (c *Client) addOperationDeleteNotifyConfigurationMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteNotifyConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteNotifyConfiguration",
-	}
 }

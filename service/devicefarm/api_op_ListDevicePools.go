@@ -5,10 +5,10 @@ package devicefarm
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about device pools.
@@ -52,6 +52,24 @@ type ListDevicePoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicePoolsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicePoolsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicePoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListDevicePoolsRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicePoolsRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListDevicePoolsRequest_type, string(v.Type))
+	}
+}
+
 // Represents the result of a list device pools request.
 type ListDevicePoolsOutput struct {
 
@@ -69,77 +87,51 @@ type ListDevicePoolsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicePoolsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicePoolsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicePoolsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDevicePools(s, schemas.ListDevicePoolsResult_devicePools, v.DevicePools)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicePoolsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDevicePoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicePoolsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicePoolsResult_devicePools:
+			return deserializeDevicePools(d, schemas.ListDevicePoolsResult_devicePools, &v.DevicePools)
+		case schemas.ListDevicePoolsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicePoolsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevicePoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicePools, schemas.ListDevicePoolsRequest, schemas.ListDevicePoolsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDevicePools{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevicePools, schemas.ListDevicePoolsRequest, schemas.ListDevicePoolsResult), output: &ListDevicePoolsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDevicePools{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevicePools"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDevicePoolsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDevicePools(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +144,6 @@ func (c *Client) addOperationListDevicePoolsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,11 +232,3 @@ type ListDevicePoolsAPIClient interface {
 }
 
 var _ ListDevicePoolsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDevicePools(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDevicePools",
-	}
-}

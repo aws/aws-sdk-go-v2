@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -64,6 +64,45 @@ type ListAutoMLJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutoMLJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutoMLJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutoMLJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListAutoMLJobsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListAutoMLJobsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.LastModifiedTimeAfter != nil {
+		s.WriteTime(schemas.ListAutoMLJobsRequest_LastModifiedTimeAfter, *v.LastModifiedTimeAfter)
+	}
+	if v.LastModifiedTimeBefore != nil {
+		s.WriteTime(schemas.ListAutoMLJobsRequest_LastModifiedTimeBefore, *v.LastModifiedTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutoMLJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListAutoMLJobsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutoMLJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAutoMLJobsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAutoMLJobsRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListAutoMLJobsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListAutoMLJobsOutput struct {
 
 	// Returns a summary list of jobs.
@@ -81,74 +120,48 @@ type ListAutoMLJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutoMLJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutoMLJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutoMLJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoMLJobSummaries(s, schemas.ListAutoMLJobsResponse_AutoMLJobSummaries, v.AutoMLJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutoMLJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAutoMLJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutoMLJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutoMLJobsResponse_AutoMLJobSummaries:
+			return deserializeAutoMLJobSummaries(d, schemas.ListAutoMLJobsResponse_AutoMLJobSummaries, &v.AutoMLJobSummaries)
+		case schemas.ListAutoMLJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutoMLJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutoMLJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutoMLJobs, schemas.ListAutoMLJobsRequest, schemas.ListAutoMLJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAutoMLJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutoMLJobs, schemas.ListAutoMLJobsRequest, schemas.ListAutoMLJobsResponse), output: &ListAutoMLJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAutoMLJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutoMLJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAutoMLJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +174,6 @@ func (c *Client) addOperationListAutoMLJobsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +274,3 @@ type ListAutoMLJobsAPIClient interface {
 }
 
 var _ ListAutoMLJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAutoMLJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAutoMLJobs",
-	}
-}

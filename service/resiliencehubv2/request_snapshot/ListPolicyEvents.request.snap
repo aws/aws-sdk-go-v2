@@ -1,0 +1,3 @@
+GET /v2/list-policy-events?endTime=2000-01-01T00%3A00%3A00Z&eventTypes=POLICY_ATTACHED_TO_SERVICE&eventTypes=POLICY_ATTACHED_TO_SERVICE&maxResults=1&nextToken=__NextToken__&policyArn=__PolicyArn__&startTime=2000-01-01T00%3A00%3A00Z
+
+

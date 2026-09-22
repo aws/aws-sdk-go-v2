@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // An estimate of the number of aggregation functions that the member who can
@@ -44,6 +43,19 @@ type PreviewPrivacyImpactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreviewPrivacyImpactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreviewPrivacyImpactInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreviewPrivacyImpactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.PreviewPrivacyImpactInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	serializePreviewPrivacyImpactParametersInput(s, schemas.PreviewPrivacyImpactInput_parameters, v.Parameters)
+}
+
 type PreviewPrivacyImpactOutput struct {
 
 	// An estimate of the number of aggregation functions that the member who can
@@ -59,77 +71,45 @@ type PreviewPrivacyImpactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PreviewPrivacyImpactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreviewPrivacyImpactOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreviewPrivacyImpactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePrivacyImpact(s, schemas.PreviewPrivacyImpactOutput_privacyImpact, v.PrivacyImpact)
+}
+func (v *PreviewPrivacyImpactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreviewPrivacyImpactOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreviewPrivacyImpactOutput_privacyImpact:
+			return deserializePrivacyImpact(d, schemas.PreviewPrivacyImpactOutput_privacyImpact, &v.PrivacyImpact)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPreviewPrivacyImpactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PreviewPrivacyImpact, schemas.PreviewPrivacyImpactInput, schemas.PreviewPrivacyImpactOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPreviewPrivacyImpact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PreviewPrivacyImpact, schemas.PreviewPrivacyImpactInput, schemas.PreviewPrivacyImpactOutput), output: &PreviewPrivacyImpactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPreviewPrivacyImpact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PreviewPrivacyImpact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPreviewPrivacyImpactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPreviewPrivacyImpact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +124,8 @@ func (c *Client) addOperationPreviewPrivacyImpactMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPreviewPrivacyImpact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PreviewPrivacyImpact",
-	}
 }

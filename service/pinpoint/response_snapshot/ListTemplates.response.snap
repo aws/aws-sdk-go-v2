@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Item":[{"Arn":"__Arn__","CreationDate":"__CreationDate__","DefaultSubstitutions":"__DefaultSubstitutions__","LastModifiedDate":"__LastModifiedDate__","TemplateDescription":"__TemplateDescription__","TemplateName":"__TemplateName__","TemplateType":"EMAIL","Version":"__Version__","tags":{"key0":"__Value__"}},{"Arn":"__Arn__","CreationDate":"__CreationDate__","DefaultSubstitutions":"__DefaultSubstitutions__","LastModifiedDate":"__LastModifiedDate__","TemplateDescription":"__TemplateDescription__","TemplateName":"__TemplateName__","TemplateType":"EMAIL","Version":"__Version__","tags":{"key0":"__Value__"}}],"NextToken":"__NextToken__"}

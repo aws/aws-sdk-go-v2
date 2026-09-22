@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/templates
+
+Content-Type: application/json
+
+{"semanticVersion":"__SemanticVersion__"}

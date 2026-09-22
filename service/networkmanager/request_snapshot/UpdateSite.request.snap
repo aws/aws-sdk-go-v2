@@ -1,0 +1,5 @@
+PATCH /global-networks/__GlobalNetworkId__/sites/__SiteId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Location":{"Address":"__Address__","Latitude":"__Latitude__","Longitude":"__Longitude__"}}

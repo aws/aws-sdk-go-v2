@@ -5,10 +5,10 @@ package invoicing
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves your invoice details programmatically, without line item details.
@@ -42,12 +42,36 @@ type ListInvoiceSummariesInput struct {
 	// The maximum number of invoice summaries a paginated response can contain.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token for the next set of results. (You received this token from a previous
+	// call.)
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListInvoiceSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvoiceSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvoiceSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListInvoiceSummariesRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInvoiceSummariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvoiceSummariesRequest_NextToken, *v.NextToken)
+	}
+	if v.Selector != nil {
+		s.WriteStruct(schemas.ListInvoiceSummariesRequest_Selector)
+		v.Selector.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type ListInvoiceSummariesOutput struct {
@@ -57,9 +81,8 @@ type ListInvoiceSummariesOutput struct {
 	// This member is required.
 	InvoiceSummaries []types.InvoiceSummary
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
+	// The token to use to retrieve the next set of results, or null if there are no
+	// more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -68,77 +91,51 @@ type ListInvoiceSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInvoiceSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInvoiceSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInvoiceSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInvoiceSummaries(s, schemas.ListInvoiceSummariesResponse_InvoiceSummaries, v.InvoiceSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInvoiceSummariesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInvoiceSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInvoiceSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInvoiceSummariesResponse_InvoiceSummaries:
+			return deserializeInvoiceSummaries(d, schemas.ListInvoiceSummariesResponse_InvoiceSummaries, &v.InvoiceSummaries)
+		case schemas.ListInvoiceSummariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInvoiceSummariesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInvoiceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvoiceSummaries, schemas.ListInvoiceSummariesRequest, schemas.ListInvoiceSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListInvoiceSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInvoiceSummaries, schemas.ListInvoiceSummariesRequest, schemas.ListInvoiceSummariesResponse), output: &ListInvoiceSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListInvoiceSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInvoiceSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListInvoiceSummariesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInvoiceSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +148,6 @@ func (c *Client) addOperationListInvoiceSummariesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +249,3 @@ type ListInvoiceSummariesAPIClient interface {
 }
 
 var _ ListInvoiceSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListInvoiceSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListInvoiceSummaries",
-	}
-}

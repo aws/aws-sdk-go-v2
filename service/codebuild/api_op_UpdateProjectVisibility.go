@@ -4,11 +4,10 @@ package codebuild
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Changes the public visibility for a project. The project's build results, logs,
@@ -78,6 +77,24 @@ type UpdateProjectVisibilityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectVisibilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectVisibilityInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectVisibilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.UpdateProjectVisibilityInput_projectArn, *v.ProjectArn)
+	}
+	if v.ProjectVisibility != "" {
+		s.WriteString(schemas.UpdateProjectVisibilityInput_projectVisibility, string(v.ProjectVisibility))
+	}
+	if v.ResourceAccessRole != nil {
+		s.WriteString(schemas.UpdateProjectVisibilityInput_resourceAccessRole, *v.ResourceAccessRole)
+	}
+}
+
 type UpdateProjectVisibilityOutput struct {
 
 	// The Amazon Resource Name (ARN) of the build project.
@@ -99,77 +116,64 @@ type UpdateProjectVisibilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProjectVisibilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProjectVisibilityOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProjectVisibilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.UpdateProjectVisibilityOutput_projectArn, *v.ProjectArn)
+	}
+	if v.ProjectVisibility != "" {
+		s.WriteString(schemas.UpdateProjectVisibilityOutput_projectVisibility, string(v.ProjectVisibility))
+	}
+	if v.PublicProjectAlias != nil {
+		s.WriteString(schemas.UpdateProjectVisibilityOutput_publicProjectAlias, *v.PublicProjectAlias)
+	}
+}
+func (v *UpdateProjectVisibilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProjectVisibilityOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProjectVisibilityOutput_projectArn:
+			v.ProjectArn = new(string)
+			return d.ReadString(schemas.UpdateProjectVisibilityOutput_projectArn, v.ProjectArn)
+		case schemas.UpdateProjectVisibilityOutput_projectVisibility:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProjectVisibilityOutput_projectVisibility, &ev); err != nil {
+				return err
+			}
+			v.ProjectVisibility = types.ProjectVisibilityType(ev)
+			return nil
+		case schemas.UpdateProjectVisibilityOutput_publicProjectAlias:
+			v.PublicProjectAlias = new(string)
+			return d.ReadString(schemas.UpdateProjectVisibilityOutput_publicProjectAlias, v.PublicProjectAlias)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProjectVisibilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProjectVisibility, schemas.UpdateProjectVisibilityInput, schemas.UpdateProjectVisibilityOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProjectVisibility{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProjectVisibility, schemas.UpdateProjectVisibilityInput, schemas.UpdateProjectVisibilityOutput), output: &UpdateProjectVisibilityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProjectVisibility{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProjectVisibility"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateProjectVisibilityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProjectVisibility(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,22 +188,8 @@ func (c *Client) addOperationUpdateProjectVisibilityMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateProjectVisibility(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateProjectVisibility",
-	}
 }

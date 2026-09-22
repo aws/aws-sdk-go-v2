@@ -1,0 +1,3 @@
+GET /v1/registries/name/__RegistryName__/schemas/search?keywords=__Keywords__&limit=1&nextToken=__NextToken__
+
+

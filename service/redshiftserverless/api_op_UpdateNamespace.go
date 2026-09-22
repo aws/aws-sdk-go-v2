@@ -4,17 +4,18 @@ package redshiftserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a namespace with the specified settings. Unless required, you can't
 // update multiple parameters in one request. For example, you must specify both
 // adminUsername and adminUserPassword to update either field, but you can't
 // update both kmsKeyId and logExports in a single request.
+//
+// Similarly, an S3 Tables log-publishing update (a request where
+// logDestinationType is s3table ) cannot be combined with any other namespace
+// configuration change and must be submitted as its own request.
 func (c *Client) UpdateNamespace(ctx context.Context, params *UpdateNamespaceInput, optFns ...func(*Options)) (*UpdateNamespaceOutput, error) {
 	if params == nil {
 		params = &UpdateNamespaceInput{}
@@ -47,6 +48,10 @@ type UpdateNamespaceInput struct {
 	// namespace. This parameter must be updated together with adminUsername .
 	//
 	// You can't use adminUserPassword if manageAdminPassword is true.
+	//
+	// If your admin user account is locked, this operation also unlocks your account
+	// and resets the failed-login counter. This option is available only when account
+	// lockout security is enabled for the namespace.
 	AdminUserPassword *string
 
 	// The username of the administrator for the first database created in the
@@ -65,6 +70,12 @@ type UpdateNamespaceInput struct {
 	// your data.
 	KmsKeyId *string
 
+	// The destination for the log data. Valid values are s3table and cloudwatch .
+	//
+	// Set this to s3table to manage Amazon S3 Tables system-table publishing for the
+	// namespace.
+	LogDestinationType types.LogDestinationType
+
 	// The types of logs the namespace can export. The export types are userlog ,
 	// connectionlog , and useractivitylog .
 	LogExports []types.LogExport
@@ -74,6 +85,39 @@ type UpdateNamespaceInput struct {
 	// manageAdminPassword is false or not set, Amazon Redshift uses adminUserPassword
 	// for the admin user account's password.
 	ManageAdminPassword *bool
+
+	// Whether to enable or disable Amazon S3 Tables publishing. Valid values are
+	// Enable and Disable , matched case-insensitively.
+	//
+	// When omitted, defaults to Enable . Valid only when logDestinationType is s3table
+	// .
+	S3TableAction types.S3TableAction
+
+	// The scope of the Amazon S3 Tables destination. Valid values are namespace and
+	// account , matched case-insensitively. namespace scopes the published tables to
+	// this namespace; account scopes them to the Amazon Web Services account.
+	//
+	// Required when enabling. Omitting this parameter or passing a blank value fails
+	// with ValidationException . Valid only when logDestinationType is s3table .
+	S3TableGranularity types.S3TableGranularity
+
+	// The identifier of the Key Management Service key used to encrypt the published
+	// Amazon S3 Tables data. When omitted, the data is encrypted with SSE-S3 (Amazon
+	// S3 managed keys).
+	//
+	// Valid only when logDestinationType is s3table .
+	S3TableKmsKeyId *string
+
+	// The system tables to publish (on enable) or to stop publishing (on disable).
+	// Each value is either a system table view name that begins with sys_ or the
+	// keyword all .
+	//
+	// Omitting this parameter, passing an empty list, or including all each select
+	// every current and future system table. Each name must be 1-128 characters, and
+	// the list can contain up to 256 names.
+	//
+	// Valid only when logDestinationType is s3table .
+	S3TableNames []string
 
 	noSmithyDocumentSerde
 }
@@ -92,9 +136,6 @@ type UpdateNamespaceOutput struct {
 }
 
 func (c *Client) addOperationUpdateNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNamespace{}, middleware.After)
 	if err != nil {
 		return err
@@ -103,65 +144,20 @@ func (c *Client) addOperationUpdateNamespaceMiddlewares(stack *middleware.Stack,
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateNamespace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateNamespaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNamespace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +172,8 @@ func (c *Client) addOperationUpdateNamespaceMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateNamespace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateNamespace",
-	}
 }

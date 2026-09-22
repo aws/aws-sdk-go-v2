@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/reboot-broker
+
+Content-Type: application/json
+
+{"brokerIds":["__Member__","__Member__"]}

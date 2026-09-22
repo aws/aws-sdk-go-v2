@@ -1,0 +1,5 @@
+POST /2026-02-05/getOfferTerms
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","offerId":"__OfferId__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"QuickConnectARN":"__QuickConnectARN__","QuickConnectId":"__QuickConnectId__"}

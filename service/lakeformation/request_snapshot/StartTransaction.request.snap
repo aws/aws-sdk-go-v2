@@ -1,0 +1,5 @@
+POST /StartTransaction
+
+Content-Type: application/json
+
+{"TransactionType":"READ_AND_WRITE"}

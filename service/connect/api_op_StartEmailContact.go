@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an inbound email contact and initiates a flow to start the email
@@ -121,6 +121,55 @@ type StartEmailContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEmailContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEmailContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEmailContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalRecipients != nil {
+		s.WriteStruct(schemas.StartEmailContactRequest_AdditionalRecipients)
+		v.AdditionalRecipients.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEmailAttachments(s, schemas.StartEmailContactRequest_Attachments, v.Attachments)
+	serializeAttributes(s, schemas.StartEmailContactRequest_Attributes, v.Attributes)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartEmailContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartEmailContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartEmailContactRequest_Description, *v.Description)
+	}
+	if v.DestinationEmailAddress != nil {
+		s.WriteString(schemas.StartEmailContactRequest_DestinationEmailAddress, *v.DestinationEmailAddress)
+	}
+	if v.EmailMessage != nil {
+		s.WriteStruct(schemas.StartEmailContactRequest_EmailMessage)
+		v.EmailMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteStruct(schemas.StartEmailContactRequest_FromEmailAddress)
+		v.FromEmailAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartEmailContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartEmailContactRequest_Name, *v.Name)
+	}
+	serializeContactReferences(s, schemas.StartEmailContactRequest_References, v.References)
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartEmailContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	serializeSegmentAttributes(s, schemas.StartEmailContactRequest_SegmentAttributes, v.SegmentAttributes)
+}
+
 type StartEmailContactOutput struct {
 
 	// The identifier of this contact within the Connect Customer instance.
@@ -132,65 +181,42 @@ type StartEmailContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartEmailContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartEmailContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartEmailContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartEmailContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *StartEmailContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartEmailContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartEmailContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartEmailContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartEmailContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEmailContact, schemas.StartEmailContactRequest, schemas.StartEmailContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartEmailContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartEmailContact, schemas.StartEmailContactRequest, schemas.StartEmailContactResponse), output: &StartEmailContactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartEmailContact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartEmailContact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -200,12 +226,6 @@ func (c *Client) addOperationStartEmailContactMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpStartEmailContactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartEmailContact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -218,12 +238,6 @@ func (c *Client) addOperationStartEmailContactMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,12 +277,4 @@ func (m *idempotencyToken_initializeOpStartEmailContact) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opStartEmailContactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartEmailContact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartEmailContact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartEmailContact",
-	}
 }

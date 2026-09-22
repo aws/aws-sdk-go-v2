@@ -5,10 +5,10 @@ package guardduty
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists Amazon GuardDuty usage statistics over the last 30 days for the specified
@@ -72,6 +72,35 @@ type GetUsageStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetUsageStatisticsRequest_DetectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetUsageStatisticsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetUsageStatisticsRequest_NextToken, *v.NextToken)
+	}
+	if v.Unit != nil {
+		s.WriteString(schemas.GetUsageStatisticsRequest_Unit, *v.Unit)
+	}
+	if v.UsageCriteria != nil {
+		s.WriteStruct(schemas.GetUsageStatisticsRequest_UsageCriteria)
+		v.UsageCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UsageStatisticType != "" {
+		s.WriteString(schemas.GetUsageStatisticsRequest_UsageStatisticType, string(v.UsageStatisticType))
+	}
+}
+
 type GetUsageStatisticsOutput struct {
 
 	// The pagination parameter to be used on the next list operation to retrieve more
@@ -88,77 +117,56 @@ type GetUsageStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetUsageStatisticsResponse_NextToken, *v.NextToken)
+	}
+	if v.UsageStatistics != nil {
+		s.WriteStruct(schemas.GetUsageStatisticsResponse_UsageStatistics)
+		v.UsageStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetUsageStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageStatisticsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetUsageStatisticsResponse_NextToken, v.NextToken)
+		case schemas.GetUsageStatisticsResponse_UsageStatistics:
+			v.UsageStatistics = &types.UsageStatistics{}
+			return v.UsageStatistics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageStatistics, schemas.GetUsageStatisticsRequest, schemas.GetUsageStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsageStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageStatistics, schemas.GetUsageStatisticsRequest, schemas.GetUsageStatisticsResponse), output: &GetUsageStatisticsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUsageStatistics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUsageStatistics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUsageStatisticsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsageStatistics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +179,6 @@ func (c *Client) addOperationGetUsageStatisticsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +280,3 @@ type GetUsageStatisticsAPIClient interface {
 }
 
 var _ GetUsageStatisticsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetUsageStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUsageStatistics",
-	}
-}

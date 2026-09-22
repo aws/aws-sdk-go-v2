@@ -1,0 +1,3 @@
+DELETE /workflowstepgroup/__Id__?workflowId=__WorkflowId__
+
+

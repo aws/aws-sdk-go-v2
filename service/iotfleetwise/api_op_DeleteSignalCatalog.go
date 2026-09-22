@@ -4,10 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a signal catalog.
@@ -36,6 +35,28 @@ type DeleteSignalCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSignalCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSignalCatalogRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSignalCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteSignalCatalogRequest_name, *v.Name)
+	}
+}
+func (v *DeleteSignalCatalogInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSignalCatalogRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSignalCatalogRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteSignalCatalogRequest_name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeleteSignalCatalogOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted signal catalog.
@@ -54,77 +75,54 @@ type DeleteSignalCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSignalCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSignalCatalogResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSignalCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteSignalCatalogResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteSignalCatalogResponse_name, *v.Name)
+	}
+}
+func (v *DeleteSignalCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSignalCatalogResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSignalCatalogResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteSignalCatalogResponse_arn, v.Arn)
+		case schemas.DeleteSignalCatalogResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteSignalCatalogResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSignalCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSignalCatalog, schemas.DeleteSignalCatalogRequest, schemas.DeleteSignalCatalogResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteSignalCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSignalCatalog, schemas.DeleteSignalCatalogRequest, schemas.DeleteSignalCatalogResponse), output: &DeleteSignalCatalogOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteSignalCatalog{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSignalCatalog"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteSignalCatalogValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSignalCatalog(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +137,8 @@ func (c *Client) addOperationDeleteSignalCatalogMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteSignalCatalog(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteSignalCatalog",
-	}
 }

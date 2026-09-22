@@ -1,0 +1,4 @@
+GET /channels/__ChannelArn__/memberships?max-results=1&next-token=__NextToken__&sub-channel-id=__SubChannelId__&type=DEFAULT
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

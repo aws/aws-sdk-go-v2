@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Quick Sight user whose identity is associated with the
@@ -168,6 +167,52 @@ type RegisterUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.RegisterUserRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CustomFederationProviderUrl != nil {
+		s.WriteString(schemas.RegisterUserRequest_CustomFederationProviderUrl, *v.CustomFederationProviderUrl)
+	}
+	if v.CustomPermissionsName != nil {
+		s.WriteString(schemas.RegisterUserRequest_CustomPermissionsName, *v.CustomPermissionsName)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.RegisterUserRequest_Email, *v.Email)
+	}
+	if v.ExternalLoginFederationProviderType != nil {
+		s.WriteString(schemas.RegisterUserRequest_ExternalLoginFederationProviderType, *v.ExternalLoginFederationProviderType)
+	}
+	if v.ExternalLoginId != nil {
+		s.WriteString(schemas.RegisterUserRequest_ExternalLoginId, *v.ExternalLoginId)
+	}
+	if v.IamArn != nil {
+		s.WriteString(schemas.RegisterUserRequest_IamArn, *v.IamArn)
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.RegisterUserRequest_IdentityType, string(v.IdentityType))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.RegisterUserRequest_Namespace, *v.Namespace)
+	}
+	if v.SessionName != nil {
+		s.WriteString(schemas.RegisterUserRequest_SessionName, *v.SessionName)
+	}
+	serializeTagList(s, schemas.RegisterUserRequest_Tags, v.Tags)
+	if v.UserName != nil {
+		s.WriteString(schemas.RegisterUserRequest_UserName, *v.UserName)
+	}
+	if v.UserRole != "" {
+		s.WriteString(schemas.RegisterUserRequest_UserRole, string(v.UserRole))
+	}
+}
+
 type RegisterUserOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -189,77 +234,67 @@ type RegisterUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.RegisterUserResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.RegisterUserResponse_Status, v.Status)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.RegisterUserResponse_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserInvitationUrl != nil {
+		s.WriteString(schemas.RegisterUserResponse_UserInvitationUrl, *v.UserInvitationUrl)
+	}
+}
+func (v *RegisterUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterUserResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.RegisterUserResponse_RequestId, v.RequestId)
+		case schemas.RegisterUserResponse_Status:
+			return d.ReadInt32(schemas.RegisterUserResponse_Status, &v.Status)
+		case schemas.RegisterUserResponse_User:
+			v.User = &types.User{}
+			return v.User.Deserialize(d)
+		case schemas.RegisterUserResponse_UserInvitationUrl:
+			v.UserInvitationUrl = new(string)
+			return d.ReadString(schemas.RegisterUserResponse_UserInvitationUrl, v.UserInvitationUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterUser, schemas.RegisterUserRequest, schemas.RegisterUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterUser, schemas.RegisterUserRequest, schemas.RegisterUserResponse), output: &RegisterUserOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterUser{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -274,22 +309,8 @@ func (c *Client) addOperationRegisterUserMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterUser",
-	}
 }

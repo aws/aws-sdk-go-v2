@@ -1,0 +1,5 @@
+POST /policy/check-no-public-access
+
+Content-Type: application/json
+
+{"policyDocument":"__PolicyDocument__","resourceType":"AWS::DynamoDB::Table"}

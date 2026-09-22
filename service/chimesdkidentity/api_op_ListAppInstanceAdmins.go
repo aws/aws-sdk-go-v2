@@ -5,10 +5,10 @@ package chimesdkidentity
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the administrators in the AppInstance .
@@ -44,6 +44,24 @@ type ListAppInstanceAdminsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInstanceAdminsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppInstanceAdminsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppInstanceAdminsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceArn != nil {
+		s.WriteString(schemas.ListAppInstanceAdminsRequest_AppInstanceArn, *v.AppInstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppInstanceAdminsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppInstanceAdminsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAppInstanceAdminsOutput struct {
 
 	// The information for each administrator.
@@ -62,77 +80,57 @@ type ListAppInstanceAdminsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInstanceAdminsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppInstanceAdminsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppInstanceAdminsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppInstanceAdminList(s, schemas.ListAppInstanceAdminsResponse_AppInstanceAdmins, v.AppInstanceAdmins)
+	if v.AppInstanceArn != nil {
+		s.WriteString(schemas.ListAppInstanceAdminsResponse_AppInstanceArn, *v.AppInstanceArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppInstanceAdminsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAppInstanceAdminsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppInstanceAdminsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppInstanceAdminsResponse_AppInstanceAdmins:
+			return deserializeAppInstanceAdminList(d, schemas.ListAppInstanceAdminsResponse_AppInstanceAdmins, &v.AppInstanceAdmins)
+		case schemas.ListAppInstanceAdminsResponse_AppInstanceArn:
+			v.AppInstanceArn = new(string)
+			return d.ReadString(schemas.ListAppInstanceAdminsResponse_AppInstanceArn, v.AppInstanceArn)
+		case schemas.ListAppInstanceAdminsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppInstanceAdminsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppInstanceAdminsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInstanceAdmins, schemas.ListAppInstanceAdminsRequest, schemas.ListAppInstanceAdminsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppInstanceAdmins{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInstanceAdmins, schemas.ListAppInstanceAdminsRequest, schemas.ListAppInstanceAdminsResponse), output: &ListAppInstanceAdminsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppInstanceAdmins{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppInstanceAdmins"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAppInstanceAdminsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAppInstanceAdmins(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +143,6 @@ func (c *Client) addOperationListAppInstanceAdminsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +244,3 @@ type ListAppInstanceAdminsAPIClient interface {
 }
 
 var _ ListAppInstanceAdminsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAppInstanceAdmins(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAppInstanceAdmins",
-	}
-}

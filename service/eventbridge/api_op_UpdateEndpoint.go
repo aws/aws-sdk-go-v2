@@ -4,11 +4,10 @@ package eventbridge
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update an existing endpoint. For more information about global endpoints, see [Making applications Regional-fault tolerant with global endpoints and event replication]
@@ -55,6 +54,35 @@ type UpdateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEndpointRequest_Description, *v.Description)
+	}
+	serializeEndpointEventBusList(s, schemas.UpdateEndpointRequest_EventBuses, v.EventBuses)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEndpointRequest_Name, *v.Name)
+	}
+	if v.ReplicationConfig != nil {
+		s.WriteStruct(schemas.UpdateEndpointRequest_ReplicationConfig)
+		v.ReplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateEndpointRequest_RoleArn, *v.RoleArn)
+	}
+	if v.RoutingConfig != nil {
+		s.WriteStruct(schemas.UpdateEndpointRequest_RoutingConfig)
+		v.RoutingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateEndpointOutput struct {
 
 	// The ARN of the endpoint you updated in this request.
@@ -93,77 +121,101 @@ type UpdateEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_Arn, *v.Arn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_EndpointId, *v.EndpointId)
+	}
+	if v.EndpointUrl != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_EndpointUrl, *v.EndpointUrl)
+	}
+	serializeEndpointEventBusList(s, schemas.UpdateEndpointResponse_EventBuses, v.EventBuses)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_Name, *v.Name)
+	}
+	if v.ReplicationConfig != nil {
+		s.WriteStruct(schemas.UpdateEndpointResponse_ReplicationConfig)
+		v.ReplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateEndpointResponse_RoleArn, *v.RoleArn)
+	}
+	if v.RoutingConfig != nil {
+		s.WriteStruct(schemas.UpdateEndpointResponse_RoutingConfig)
+		v.RoutingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateEndpointResponse_State, string(v.State))
+	}
+}
+func (v *UpdateEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEndpointResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_Arn, v.Arn)
+		case schemas.UpdateEndpointResponse_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_EndpointId, v.EndpointId)
+		case schemas.UpdateEndpointResponse_EndpointUrl:
+			v.EndpointUrl = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_EndpointUrl, v.EndpointUrl)
+		case schemas.UpdateEndpointResponse_EventBuses:
+			return deserializeEndpointEventBusList(d, schemas.UpdateEndpointResponse_EventBuses, &v.EventBuses)
+		case schemas.UpdateEndpointResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_Name, v.Name)
+		case schemas.UpdateEndpointResponse_ReplicationConfig:
+			v.ReplicationConfig = &types.ReplicationConfig{}
+			return v.ReplicationConfig.Deserialize(d)
+		case schemas.UpdateEndpointResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateEndpointResponse_RoleArn, v.RoleArn)
+		case schemas.UpdateEndpointResponse_RoutingConfig:
+			v.RoutingConfig = &types.RoutingConfig{}
+			return v.RoutingConfig.Deserialize(d)
+		case schemas.UpdateEndpointResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEndpointResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EndpointState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpoint, schemas.UpdateEndpointRequest, schemas.UpdateEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEndpoint, schemas.UpdateEndpointRequest, schemas.UpdateEndpointResponse), output: &UpdateEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +230,8 @@ func (c *Client) addOperationUpdateEndpointMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEndpoint",
-	}
 }

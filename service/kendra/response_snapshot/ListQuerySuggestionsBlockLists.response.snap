@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.ListQuerySuggestionsBlockLists
+
+{"BlockListSummaryItems":[{"CreatedAt":946684800,"Id":"__Id__","ItemCount":1,"Name":"__Name__","Status":"ACTIVE","UpdatedAt":946684800},{"CreatedAt":946684800,"Id":"__Id__","ItemCount":1,"Name":"__Name__","Status":"ACTIVE","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

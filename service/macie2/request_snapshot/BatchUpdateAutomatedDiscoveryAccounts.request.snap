@@ -1,0 +1,5 @@
+PATCH /automated-discovery/accounts
+
+Content-Type: application/json
+
+{"accounts":[{"accountId":"__AccountId__","status":"ENABLED"},{"accountId":"__AccountId__","status":"ENABLED"}]}

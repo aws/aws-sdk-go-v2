@@ -4,11 +4,10 @@ package comprehend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Inspects the text of a batch of documents for named entities and returns
@@ -49,6 +48,19 @@ type BatchDetectEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.BatchDetectEntitiesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializeCustomerInputStringList(s, schemas.BatchDetectEntitiesRequest_TextList, v.TextList)
+}
+
 type BatchDetectEntitiesOutput struct {
 
 	// A list containing one object for each document that contained an error. The
@@ -73,77 +85,48 @@ type BatchDetectEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDetectEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDetectEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDetectEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchItemErrorList(s, schemas.BatchDetectEntitiesResponse_ErrorList, v.ErrorList)
+	serializeListOfDetectEntitiesResult(s, schemas.BatchDetectEntitiesResponse_ResultList, v.ResultList)
+}
+func (v *BatchDetectEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDetectEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDetectEntitiesResponse_ErrorList:
+			return deserializeBatchItemErrorList(d, schemas.BatchDetectEntitiesResponse_ErrorList, &v.ErrorList)
+		case schemas.BatchDetectEntitiesResponse_ResultList:
+			return deserializeListOfDetectEntitiesResult(d, schemas.BatchDetectEntitiesResponse_ResultList, &v.ResultList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectEntities, schemas.BatchDetectEntitiesRequest, schemas.BatchDetectEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDetectEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDetectEntities, schemas.BatchDetectEntitiesRequest, schemas.BatchDetectEntitiesResponse), output: &BatchDetectEntitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDetectEntities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDetectEntities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDetectEntitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDetectEntities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +141,8 @@ func (c *Client) addOperationBatchDetectEntitiesMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDetectEntities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDetectEntities",
-	}
 }

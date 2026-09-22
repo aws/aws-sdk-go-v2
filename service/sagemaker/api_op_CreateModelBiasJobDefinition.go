@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the definition for a model bias job.
@@ -79,6 +78,57 @@ type CreateModelBiasJobDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelBiasJobDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelBiasJobDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelBiasJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.CreateModelBiasJobDefinitionRequest_JobDefinitionName, *v.JobDefinitionName)
+	}
+	if v.JobResources != nil {
+		s.WriteStruct(schemas.CreateModelBiasJobDefinitionRequest_JobResources)
+		v.JobResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelBiasAppSpecification != nil {
+		s.WriteStruct(schemas.CreateModelBiasJobDefinitionRequest_ModelBiasAppSpecification)
+		v.ModelBiasAppSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelBiasBaselineConfig != nil {
+		s.WriteStruct(schemas.CreateModelBiasJobDefinitionRequest_ModelBiasBaselineConfig)
+		v.ModelBiasBaselineConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelBiasJobInput != nil {
+		s.WriteStruct(schemas.CreateModelBiasJobDefinitionRequest_ModelBiasJobInput)
+		v.ModelBiasJobInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelBiasJobOutputConfig != nil {
+		s.WriteStruct(schemas.CreateModelBiasJobDefinitionRequest_ModelBiasJobOutputConfig)
+		v.ModelBiasJobOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.CreateModelBiasJobDefinitionRequest_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateModelBiasJobDefinitionRequest_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.CreateModelBiasJobDefinitionRequest_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateModelBiasJobDefinitionRequest_Tags, v.Tags)
+}
+
 type CreateModelBiasJobDefinitionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model bias job.
@@ -92,77 +142,48 @@ type CreateModelBiasJobDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelBiasJobDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelBiasJobDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelBiasJobDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDefinitionArn != nil {
+		s.WriteString(schemas.CreateModelBiasJobDefinitionResponse_JobDefinitionArn, *v.JobDefinitionArn)
+	}
+}
+func (v *CreateModelBiasJobDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelBiasJobDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelBiasJobDefinitionResponse_JobDefinitionArn:
+			v.JobDefinitionArn = new(string)
+			return d.ReadString(schemas.CreateModelBiasJobDefinitionResponse_JobDefinitionArn, v.JobDefinitionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelBiasJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelBiasJobDefinition, schemas.CreateModelBiasJobDefinitionRequest, schemas.CreateModelBiasJobDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelBiasJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelBiasJobDefinition, schemas.CreateModelBiasJobDefinitionRequest, schemas.CreateModelBiasJobDefinitionResponse), output: &CreateModelBiasJobDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModelBiasJobDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModelBiasJobDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateModelBiasJobDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelBiasJobDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +198,8 @@ func (c *Client) addOperationCreateModelBiasJobDefinitionMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateModelBiasJobDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModelBiasJobDefinition",
-	}
 }

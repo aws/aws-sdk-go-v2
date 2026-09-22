@@ -1,0 +1,4 @@
+GET /__AccountId__/policies/data-retrieval
+
+X-Amz-Glacier-Version: 2012-06-01
+

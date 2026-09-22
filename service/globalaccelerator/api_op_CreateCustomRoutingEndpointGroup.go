@@ -5,10 +5,10 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create an endpoint group for the specified listener for a custom routing
@@ -57,6 +57,25 @@ type CreateCustomRoutingEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomRoutingEndpointGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomRoutingEndpointGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomRoutingEndpointGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomRoutingDestinationConfigurations(s, schemas.CreateCustomRoutingEndpointGroupRequest_DestinationConfigurations, v.DestinationConfigurations)
+	if v.EndpointGroupRegion != nil {
+		s.WriteString(schemas.CreateCustomRoutingEndpointGroupRequest_EndpointGroupRegion, *v.EndpointGroupRegion)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateCustomRoutingEndpointGroupRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.CreateCustomRoutingEndpointGroupRequest_ListenerArn, *v.ListenerArn)
+	}
+}
+
 type CreateCustomRoutingEndpointGroupOutput struct {
 
 	// The information about the endpoint group created for a custom routing
@@ -69,65 +88,44 @@ type CreateCustomRoutingEndpointGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomRoutingEndpointGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomRoutingEndpointGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomRoutingEndpointGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndpointGroup != nil {
+		s.WriteStruct(schemas.CreateCustomRoutingEndpointGroupResponse_EndpointGroup)
+		v.EndpointGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCustomRoutingEndpointGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomRoutingEndpointGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomRoutingEndpointGroupResponse_EndpointGroup:
+			v.EndpointGroup = &types.CustomRoutingEndpointGroup{}
+			return v.EndpointGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomRoutingEndpointGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomRoutingEndpointGroup, schemas.CreateCustomRoutingEndpointGroupRequest, schemas.CreateCustomRoutingEndpointGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCustomRoutingEndpointGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomRoutingEndpointGroup, schemas.CreateCustomRoutingEndpointGroupRequest, schemas.CreateCustomRoutingEndpointGroupResponse), output: &CreateCustomRoutingEndpointGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCustomRoutingEndpointGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomRoutingEndpointGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -137,12 +135,6 @@ func (c *Client) addOperationCreateCustomRoutingEndpointGroupMiddlewares(stack *
 		return err
 	}
 	if err = addOpCreateCustomRoutingEndpointGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomRoutingEndpointGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +147,6 @@ func (c *Client) addOperationCreateCustomRoutingEndpointGroupMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -200,12 +186,4 @@ func (m *idempotencyToken_initializeOpCreateCustomRoutingEndpointGroup) HandleIn
 }
 func addIdempotencyToken_opCreateCustomRoutingEndpointGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCustomRoutingEndpointGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCustomRoutingEndpointGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCustomRoutingEndpointGroup",
-	}
 }

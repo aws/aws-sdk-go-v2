@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/environments/__EnvironmentIdentifier__/actions
+
+Content-Type: application/json
+
+{"description":"__Description__","name":"__Name__","parameters":{"awsConsoleLink":{"uri":"__Uri__"}}}

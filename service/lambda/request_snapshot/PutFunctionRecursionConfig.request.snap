@@ -1,0 +1,5 @@
+PUT /2024-08-31/functions/__FunctionName__/recursion-config
+
+Content-Type: application/json
+
+{"RecursiveLoop":"Allow"}

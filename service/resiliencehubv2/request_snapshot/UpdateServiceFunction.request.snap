@@ -1,0 +1,5 @@
+POST /v2/update-function
+
+Content-Type: application/json
+
+{"criticality":"PRIMARY","description":"__Description__","name":"__Name__","serviceArn":"__ServiceArn__","serviceFunctionId":"__ServiceFunctionId__"}

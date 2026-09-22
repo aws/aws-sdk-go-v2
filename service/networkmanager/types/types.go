@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -18,6 +20,34 @@ type AccountStatus struct {
 	SLRDeploymentStatus *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountStatus_AccountId, *v.AccountId)
+	}
+	if v.SLRDeploymentStatus != nil {
+		s.WriteString(schemas.AccountStatus_SLRDeploymentStatus, *v.SLRDeploymentStatus)
+	}
+}
+func (v *AccountStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountStatus_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountStatus_AccountId, v.AccountId)
+		case schemas.AccountStatus_SLRDeploymentStatus:
+			v.SLRDeploymentStatus = new(string)
+			return d.ReadString(schemas.AccountStatus_SLRDeploymentStatus, v.SLRDeploymentStatus)
+		}
+		return nil
+	})
 }
 
 // Describes a core network attachment.
@@ -84,6 +114,133 @@ type Attachment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Attachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Attachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Attachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.Attachment_AttachmentId, *v.AttachmentId)
+	}
+	if v.AttachmentPolicyRuleNumber != nil {
+		s.WriteInt32(schemas.Attachment_AttachmentPolicyRuleNumber, *v.AttachmentPolicyRuleNumber)
+	}
+	if v.AttachmentType != "" {
+		s.WriteString(schemas.Attachment_AttachmentType, string(v.AttachmentType))
+	}
+	if v.CoreNetworkArn != nil {
+		s.WriteString(schemas.Attachment_CoreNetworkArn, *v.CoreNetworkArn)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.Attachment_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Attachment_CreatedAt, *v.CreatedAt)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.Attachment_EdgeLocation, *v.EdgeLocation)
+	}
+	serializeExternalRegionCodeList(s, schemas.Attachment_EdgeLocations, v.EdgeLocations)
+	serializeAttachmentErrorList(s, schemas.Attachment_LastModificationErrors, v.LastModificationErrors)
+	if v.NetworkFunctionGroupName != nil {
+		s.WriteString(schemas.Attachment_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.Attachment_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.ProposedNetworkFunctionGroupChange != nil {
+		s.WriteStruct(schemas.Attachment_ProposedNetworkFunctionGroupChange)
+		v.ProposedNetworkFunctionGroupChange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProposedSegmentChange != nil {
+		s.WriteStruct(schemas.Attachment_ProposedSegmentChange)
+		v.ProposedSegmentChange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.Attachment_ResourceArn, *v.ResourceArn)
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.Attachment_SegmentName, *v.SegmentName)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Attachment_State, string(v.State))
+	}
+	serializeTagList(s, schemas.Attachment_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Attachment_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *Attachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Attachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Attachment_AttachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.Attachment_AttachmentId, v.AttachmentId)
+		case schemas.Attachment_AttachmentPolicyRuleNumber:
+			v.AttachmentPolicyRuleNumber = new(int32)
+			return d.ReadInt32(schemas.Attachment_AttachmentPolicyRuleNumber, v.AttachmentPolicyRuleNumber)
+		case schemas.Attachment_AttachmentType:
+			var ev string
+			if err := d.ReadString(schemas.Attachment_AttachmentType, &ev); err != nil {
+				return err
+			}
+			v.AttachmentType = AttachmentType(ev)
+			return nil
+		case schemas.Attachment_CoreNetworkArn:
+			v.CoreNetworkArn = new(string)
+			return d.ReadString(schemas.Attachment_CoreNetworkArn, v.CoreNetworkArn)
+		case schemas.Attachment_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.Attachment_CoreNetworkId, v.CoreNetworkId)
+		case schemas.Attachment_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Attachment_CreatedAt, v.CreatedAt)
+		case schemas.Attachment_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.Attachment_EdgeLocation, v.EdgeLocation)
+		case schemas.Attachment_EdgeLocations:
+			return deserializeExternalRegionCodeList(d, schemas.Attachment_EdgeLocations, &v.EdgeLocations)
+		case schemas.Attachment_LastModificationErrors:
+			return deserializeAttachmentErrorList(d, schemas.Attachment_LastModificationErrors, &v.LastModificationErrors)
+		case schemas.Attachment_NetworkFunctionGroupName:
+			v.NetworkFunctionGroupName = new(string)
+			return d.ReadString(schemas.Attachment_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
+		case schemas.Attachment_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.Attachment_OwnerAccountId, v.OwnerAccountId)
+		case schemas.Attachment_ProposedNetworkFunctionGroupChange:
+			v.ProposedNetworkFunctionGroupChange = &ProposedNetworkFunctionGroupChange{}
+			return v.ProposedNetworkFunctionGroupChange.Deserialize(d)
+		case schemas.Attachment_ProposedSegmentChange:
+			v.ProposedSegmentChange = &ProposedSegmentChange{}
+			return v.ProposedSegmentChange.Deserialize(d)
+		case schemas.Attachment_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.Attachment_ResourceArn, v.ResourceArn)
+		case schemas.Attachment_SegmentName:
+			v.SegmentName = new(string)
+			return d.ReadString(schemas.Attachment_SegmentName, v.SegmentName)
+		case schemas.Attachment_State:
+			var ev string
+			if err := d.ReadString(schemas.Attachment_State, &ev); err != nil {
+				return err
+			}
+			v.State = AttachmentState(ev)
+			return nil
+		case schemas.Attachment_Tags:
+			return deserializeTagList(d, schemas.Attachment_Tags, &v.Tags)
+		case schemas.Attachment_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Attachment_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Describes the error associated with an attachment request.
 type AttachmentError struct {
 
@@ -100,6 +257,50 @@ type AttachmentError struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AttachmentError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachmentError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachmentError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.AttachmentError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AttachmentError_Message, *v.Message)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.AttachmentError_RequestId, *v.RequestId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AttachmentError_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *AttachmentError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachmentError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachmentError_Code:
+			var ev string
+			if err := d.ReadString(schemas.AttachmentError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = AttachmentErrorCode(ev)
+			return nil
+		case schemas.AttachmentError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AttachmentError_Message, v.Message)
+		case schemas.AttachmentError_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.AttachmentError_RequestId, v.RequestId)
+		case schemas.AttachmentError_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.AttachmentError_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // Summary information about routing policy associations for an attachment.
@@ -120,6 +321,40 @@ type AttachmentRoutingPolicyAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachmentRoutingPolicyAssociationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachmentRoutingPolicyAssociationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachmentRoutingPolicyAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConstrainedStringList(s, schemas.AttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies, v.AssociatedRoutingPolicies)
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.AttachmentRoutingPolicyAssociationSummary_AttachmentId, *v.AttachmentId)
+	}
+	serializeConstrainedStringList(s, schemas.AttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies, v.PendingRoutingPolicies)
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.AttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+}
+func (v *AttachmentRoutingPolicyAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachmentRoutingPolicyAssociationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies:
+			return deserializeConstrainedStringList(d, schemas.AttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies, &v.AssociatedRoutingPolicies)
+		case schemas.AttachmentRoutingPolicyAssociationSummary_AttachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.AttachmentRoutingPolicyAssociationSummary_AttachmentId, v.AttachmentId)
+		case schemas.AttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies:
+			return deserializeConstrainedStringList(d, schemas.AttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies, &v.PendingRoutingPolicies)
+		case schemas.AttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel:
+			v.RoutingPolicyLabel = new(string)
+			return d.ReadString(schemas.AttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel, v.RoutingPolicyLabel)
+		}
+		return nil
+	})
+}
+
 // Specifies a location in Amazon Web Services.
 type AWSLocation struct {
 
@@ -131,6 +366,34 @@ type AWSLocation struct {
 	Zone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AWSLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AWSLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AWSLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubnetArn != nil {
+		s.WriteString(schemas.AWSLocation_SubnetArn, *v.SubnetArn)
+	}
+	if v.Zone != nil {
+		s.WriteString(schemas.AWSLocation_Zone, *v.Zone)
+	}
+}
+func (v *AWSLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AWSLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AWSLocation_SubnetArn:
+			v.SubnetArn = new(string)
+			return d.ReadString(schemas.AWSLocation_SubnetArn, v.SubnetArn)
+		case schemas.AWSLocation_Zone:
+			v.Zone = new(string)
+			return d.ReadString(schemas.AWSLocation_Zone, v.Zone)
+		}
+		return nil
+	})
 }
 
 // Describes bandwidth information.
@@ -145,6 +408,34 @@ type Bandwidth struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Bandwidth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Bandwidth)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Bandwidth) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DownloadSpeed != nil {
+		s.WriteInt32(schemas.Bandwidth_DownloadSpeed, *v.DownloadSpeed)
+	}
+	if v.UploadSpeed != nil {
+		s.WriteInt32(schemas.Bandwidth_UploadSpeed, *v.UploadSpeed)
+	}
+}
+func (v *Bandwidth) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Bandwidth, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Bandwidth_DownloadSpeed:
+			v.DownloadSpeed = new(int32)
+			return d.ReadInt32(schemas.Bandwidth_DownloadSpeed, v.DownloadSpeed)
+		case schemas.Bandwidth_UploadSpeed:
+			v.UploadSpeed = new(int32)
+			return d.ReadInt32(schemas.Bandwidth_UploadSpeed, v.UploadSpeed)
+		}
+		return nil
+	})
+}
+
 // Describes the BGP options.
 type BgpOptions struct {
 
@@ -152,6 +443,28 @@ type BgpOptions struct {
 	PeerAsn *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *BgpOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BgpOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BgpOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PeerAsn != nil {
+		s.WriteInt64(schemas.BgpOptions_PeerAsn, *v.PeerAsn)
+	}
+}
+func (v *BgpOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BgpOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BgpOptions_PeerAsn:
+			v.PeerAsn = new(int64)
+			return d.ReadInt64(schemas.BgpOptions_PeerAsn, v.PeerAsn)
+		}
+		return nil
+	})
 }
 
 // Describes a core network Connect attachment.
@@ -169,6 +482,44 @@ type ConnectAttachment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attachment != nil {
+		s.WriteStruct(schemas.ConnectAttachment_Attachment)
+		v.Attachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.ConnectAttachment_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransportAttachmentId != nil {
+		s.WriteString(schemas.ConnectAttachment_TransportAttachmentId, *v.TransportAttachmentId)
+	}
+}
+func (v *ConnectAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectAttachment_Attachment:
+			v.Attachment = &Attachment{}
+			return v.Attachment.Deserialize(d)
+		case schemas.ConnectAttachment_Options:
+			v.Options = &ConnectAttachmentOptions{}
+			return v.Options.Deserialize(d)
+		case schemas.ConnectAttachment_TransportAttachmentId:
+			v.TransportAttachmentId = new(string)
+			return d.ReadString(schemas.ConnectAttachment_TransportAttachmentId, v.TransportAttachmentId)
+		}
+		return nil
+	})
+}
+
 // Describes a core network Connect attachment options.
 type ConnectAttachmentOptions struct {
 
@@ -176,6 +527,32 @@ type ConnectAttachmentOptions struct {
 	Protocol TunnelProtocol
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectAttachmentOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectAttachmentOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectAttachmentOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Protocol != "" {
+		s.WriteString(schemas.ConnectAttachmentOptions_Protocol, string(v.Protocol))
+	}
+}
+func (v *ConnectAttachmentOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectAttachmentOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectAttachmentOptions_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.ConnectAttachmentOptions_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = TunnelProtocol(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a connection.
@@ -217,6 +594,89 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Connection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectedDeviceId != nil {
+		s.WriteString(schemas.Connection_ConnectedDeviceId, *v.ConnectedDeviceId)
+	}
+	if v.ConnectedLinkId != nil {
+		s.WriteString(schemas.Connection_ConnectedLinkId, *v.ConnectedLinkId)
+	}
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.Connection_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.Connection_ConnectionId, *v.ConnectionId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Connection_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Connection_Description, *v.Description)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.Connection_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.Connection_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.Connection_LinkId, *v.LinkId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Connection_State, string(v.State))
+	}
+	serializeTagList(s, schemas.Connection_Tags, v.Tags)
+}
+func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connection_ConnectedDeviceId:
+			v.ConnectedDeviceId = new(string)
+			return d.ReadString(schemas.Connection_ConnectedDeviceId, v.ConnectedDeviceId)
+		case schemas.Connection_ConnectedLinkId:
+			v.ConnectedLinkId = new(string)
+			return d.ReadString(schemas.Connection_ConnectedLinkId, v.ConnectedLinkId)
+		case schemas.Connection_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.Connection_ConnectionArn, v.ConnectionArn)
+		case schemas.Connection_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.Connection_ConnectionId, v.ConnectionId)
+		case schemas.Connection_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Connection_CreatedAt, v.CreatedAt)
+		case schemas.Connection_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Connection_Description, v.Description)
+		case schemas.Connection_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.Connection_DeviceId, v.DeviceId)
+		case schemas.Connection_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.Connection_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.Connection_LinkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.Connection_LinkId, v.LinkId)
+		case schemas.Connection_State:
+			var ev string
+			if err := d.ReadString(schemas.Connection_State, &ev); err != nil {
+				return err
+			}
+			v.State = ConnectionState(ev)
+			return nil
+		case schemas.Connection_Tags:
+			return deserializeTagList(d, schemas.Connection_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes connection health.
 type ConnectionHealth struct {
 
@@ -230,6 +690,48 @@ type ConnectionHealth struct {
 	Type ConnectionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectionHealth) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionHealth)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionHealth) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.ConnectionHealth_Status, string(v.Status))
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.ConnectionHealth_Timestamp, *v.Timestamp)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ConnectionHealth_Type, string(v.Type))
+	}
+}
+func (v *ConnectionHealth) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionHealth, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionHealth_Status:
+			var ev string
+			if err := d.ReadString(schemas.ConnectionHealth_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ConnectionStatus(ev)
+			return nil
+		case schemas.ConnectionHealth_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.ConnectionHealth_Timestamp, v.Timestamp)
+		case schemas.ConnectionHealth_Type:
+			var ev string
+			if err := d.ReadString(schemas.ConnectionHealth_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ConnectionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a core network Connect peer.
@@ -269,6 +771,82 @@ type ConnectPeer struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectPeer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectPeer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectPeer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.ConnectPeer_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectAttachmentId != nil {
+		s.WriteString(schemas.ConnectPeer_ConnectAttachmentId, *v.ConnectAttachmentId)
+	}
+	if v.ConnectPeerId != nil {
+		s.WriteString(schemas.ConnectPeer_ConnectPeerId, *v.ConnectPeerId)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ConnectPeer_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ConnectPeer_CreatedAt, *v.CreatedAt)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.ConnectPeer_EdgeLocation, *v.EdgeLocation)
+	}
+	serializeConnectPeerErrorList(s, schemas.ConnectPeer_LastModificationErrors, v.LastModificationErrors)
+	if v.State != "" {
+		s.WriteString(schemas.ConnectPeer_State, string(v.State))
+	}
+	if v.SubnetArn != nil {
+		s.WriteString(schemas.ConnectPeer_SubnetArn, *v.SubnetArn)
+	}
+	serializeTagList(s, schemas.ConnectPeer_Tags, v.Tags)
+}
+func (v *ConnectPeer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectPeer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectPeer_Configuration:
+			v.Configuration = &ConnectPeerConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.ConnectPeer_ConnectAttachmentId:
+			v.ConnectAttachmentId = new(string)
+			return d.ReadString(schemas.ConnectPeer_ConnectAttachmentId, v.ConnectAttachmentId)
+		case schemas.ConnectPeer_ConnectPeerId:
+			v.ConnectPeerId = new(string)
+			return d.ReadString(schemas.ConnectPeer_ConnectPeerId, v.ConnectPeerId)
+		case schemas.ConnectPeer_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.ConnectPeer_CoreNetworkId, v.CoreNetworkId)
+		case schemas.ConnectPeer_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectPeer_CreatedAt, v.CreatedAt)
+		case schemas.ConnectPeer_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.ConnectPeer_EdgeLocation, v.EdgeLocation)
+		case schemas.ConnectPeer_LastModificationErrors:
+			return deserializeConnectPeerErrorList(d, schemas.ConnectPeer_LastModificationErrors, &v.LastModificationErrors)
+		case schemas.ConnectPeer_State:
+			var ev string
+			if err := d.ReadString(schemas.ConnectPeer_State, &ev); err != nil {
+				return err
+			}
+			v.State = ConnectPeerState(ev)
+			return nil
+		case schemas.ConnectPeer_SubnetArn:
+			v.SubnetArn = new(string)
+			return d.ReadString(schemas.ConnectPeer_SubnetArn, v.SubnetArn)
+		case schemas.ConnectPeer_Tags:
+			return deserializeTagList(d, schemas.ConnectPeer_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes a core network Connect peer association.
 type ConnectPeerAssociation struct {
 
@@ -290,6 +868,56 @@ type ConnectPeerAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectPeerAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectPeerAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectPeerAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectPeerId != nil {
+		s.WriteString(schemas.ConnectPeerAssociation_ConnectPeerId, *v.ConnectPeerId)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.ConnectPeerAssociation_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.ConnectPeerAssociation_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.ConnectPeerAssociation_LinkId, *v.LinkId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ConnectPeerAssociation_State, string(v.State))
+	}
+}
+func (v *ConnectPeerAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectPeerAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectPeerAssociation_ConnectPeerId:
+			v.ConnectPeerId = new(string)
+			return d.ReadString(schemas.ConnectPeerAssociation_ConnectPeerId, v.ConnectPeerId)
+		case schemas.ConnectPeerAssociation_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.ConnectPeerAssociation_DeviceId, v.DeviceId)
+		case schemas.ConnectPeerAssociation_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.ConnectPeerAssociation_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.ConnectPeerAssociation_LinkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.ConnectPeerAssociation_LinkId, v.LinkId)
+		case schemas.ConnectPeerAssociation_State:
+			var ev string
+			if err := d.ReadString(schemas.ConnectPeerAssociation_State, &ev); err != nil {
+				return err
+			}
+			v.State = ConnectPeerAssociationState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a core network BGP configuration.
 type ConnectPeerBgpConfiguration struct {
 
@@ -306,6 +934,46 @@ type ConnectPeerBgpConfiguration struct {
 	PeerAsn *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectPeerBgpConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectPeerBgpConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectPeerBgpConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkAddress != nil {
+		s.WriteString(schemas.ConnectPeerBgpConfiguration_CoreNetworkAddress, *v.CoreNetworkAddress)
+	}
+	if v.CoreNetworkAsn != nil {
+		s.WriteInt64(schemas.ConnectPeerBgpConfiguration_CoreNetworkAsn, *v.CoreNetworkAsn)
+	}
+	if v.PeerAddress != nil {
+		s.WriteString(schemas.ConnectPeerBgpConfiguration_PeerAddress, *v.PeerAddress)
+	}
+	if v.PeerAsn != nil {
+		s.WriteInt64(schemas.ConnectPeerBgpConfiguration_PeerAsn, *v.PeerAsn)
+	}
+}
+func (v *ConnectPeerBgpConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectPeerBgpConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectPeerBgpConfiguration_CoreNetworkAddress:
+			v.CoreNetworkAddress = new(string)
+			return d.ReadString(schemas.ConnectPeerBgpConfiguration_CoreNetworkAddress, v.CoreNetworkAddress)
+		case schemas.ConnectPeerBgpConfiguration_CoreNetworkAsn:
+			v.CoreNetworkAsn = new(int64)
+			return d.ReadInt64(schemas.ConnectPeerBgpConfiguration_CoreNetworkAsn, v.CoreNetworkAsn)
+		case schemas.ConnectPeerBgpConfiguration_PeerAddress:
+			v.PeerAddress = new(string)
+			return d.ReadString(schemas.ConnectPeerBgpConfiguration_PeerAddress, v.PeerAddress)
+		case schemas.ConnectPeerBgpConfiguration_PeerAsn:
+			v.PeerAsn = new(int64)
+			return d.ReadInt64(schemas.ConnectPeerBgpConfiguration_PeerAsn, v.PeerAsn)
+		}
+		return nil
+	})
 }
 
 // Describes a core network Connect peer configuration.
@@ -329,6 +997,50 @@ type ConnectPeerConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectPeerConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectPeerConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectPeerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectPeerBgpConfigurationList(s, schemas.ConnectPeerConfiguration_BgpConfigurations, v.BgpConfigurations)
+	if v.CoreNetworkAddress != nil {
+		s.WriteString(schemas.ConnectPeerConfiguration_CoreNetworkAddress, *v.CoreNetworkAddress)
+	}
+	serializeConstrainedStringList(s, schemas.ConnectPeerConfiguration_InsideCidrBlocks, v.InsideCidrBlocks)
+	if v.PeerAddress != nil {
+		s.WriteString(schemas.ConnectPeerConfiguration_PeerAddress, *v.PeerAddress)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.ConnectPeerConfiguration_Protocol, string(v.Protocol))
+	}
+}
+func (v *ConnectPeerConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectPeerConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectPeerConfiguration_BgpConfigurations:
+			return deserializeConnectPeerBgpConfigurationList(d, schemas.ConnectPeerConfiguration_BgpConfigurations, &v.BgpConfigurations)
+		case schemas.ConnectPeerConfiguration_CoreNetworkAddress:
+			v.CoreNetworkAddress = new(string)
+			return d.ReadString(schemas.ConnectPeerConfiguration_CoreNetworkAddress, v.CoreNetworkAddress)
+		case schemas.ConnectPeerConfiguration_InsideCidrBlocks:
+			return deserializeConstrainedStringList(d, schemas.ConnectPeerConfiguration_InsideCidrBlocks, &v.InsideCidrBlocks)
+		case schemas.ConnectPeerConfiguration_PeerAddress:
+			v.PeerAddress = new(string)
+			return d.ReadString(schemas.ConnectPeerConfiguration_PeerAddress, v.PeerAddress)
+		case schemas.ConnectPeerConfiguration_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.ConnectPeerConfiguration_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = TunnelProtocol(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes an error associated with a Connect peer request
 type ConnectPeerError struct {
 
@@ -345,6 +1057,50 @@ type ConnectPeerError struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectPeerError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectPeerError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectPeerError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.ConnectPeerError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ConnectPeerError_Message, *v.Message)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ConnectPeerError_RequestId, *v.RequestId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ConnectPeerError_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *ConnectPeerError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectPeerError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectPeerError_Code:
+			var ev string
+			if err := d.ReadString(schemas.ConnectPeerError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = ConnectPeerErrorCode(ev)
+			return nil
+		case schemas.ConnectPeerError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConnectPeerError_Message, v.Message)
+		case schemas.ConnectPeerError_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ConnectPeerError_RequestId, v.RequestId)
+		case schemas.ConnectPeerError_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ConnectPeerError_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // Summary description of a Connect peer.
@@ -375,6 +1131,71 @@ type ConnectPeerSummary struct {
 	Tags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectPeerSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectPeerSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectPeerSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectAttachmentId != nil {
+		s.WriteString(schemas.ConnectPeerSummary_ConnectAttachmentId, *v.ConnectAttachmentId)
+	}
+	if v.ConnectPeerId != nil {
+		s.WriteString(schemas.ConnectPeerSummary_ConnectPeerId, *v.ConnectPeerId)
+	}
+	if v.ConnectPeerState != "" {
+		s.WriteString(schemas.ConnectPeerSummary_ConnectPeerState, string(v.ConnectPeerState))
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.ConnectPeerSummary_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ConnectPeerSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.ConnectPeerSummary_EdgeLocation, *v.EdgeLocation)
+	}
+	if v.SubnetArn != nil {
+		s.WriteString(schemas.ConnectPeerSummary_SubnetArn, *v.SubnetArn)
+	}
+	serializeTagList(s, schemas.ConnectPeerSummary_Tags, v.Tags)
+}
+func (v *ConnectPeerSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectPeerSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectPeerSummary_ConnectAttachmentId:
+			v.ConnectAttachmentId = new(string)
+			return d.ReadString(schemas.ConnectPeerSummary_ConnectAttachmentId, v.ConnectAttachmentId)
+		case schemas.ConnectPeerSummary_ConnectPeerId:
+			v.ConnectPeerId = new(string)
+			return d.ReadString(schemas.ConnectPeerSummary_ConnectPeerId, v.ConnectPeerId)
+		case schemas.ConnectPeerSummary_ConnectPeerState:
+			var ev string
+			if err := d.ReadString(schemas.ConnectPeerSummary_ConnectPeerState, &ev); err != nil {
+				return err
+			}
+			v.ConnectPeerState = ConnectPeerState(ev)
+			return nil
+		case schemas.ConnectPeerSummary_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.ConnectPeerSummary_CoreNetworkId, v.CoreNetworkId)
+		case schemas.ConnectPeerSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectPeerSummary_CreatedAt, v.CreatedAt)
+		case schemas.ConnectPeerSummary_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.ConnectPeerSummary_EdgeLocation, v.EdgeLocation)
+		case schemas.ConnectPeerSummary_SubnetArn:
+			v.SubnetArn = new(string)
+			return d.ReadString(schemas.ConnectPeerSummary_SubnetArn, v.SubnetArn)
+		case schemas.ConnectPeerSummary_Tags:
+			return deserializeTagList(d, schemas.ConnectPeerSummary_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Describes a core network.
@@ -413,6 +1234,74 @@ type CoreNetwork struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CoreNetwork) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetwork)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetwork) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkArn != nil {
+		s.WriteString(schemas.CoreNetwork_CoreNetworkArn, *v.CoreNetworkArn)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CoreNetwork_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CoreNetwork_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CoreNetwork_Description, *v.Description)
+	}
+	serializeCoreNetworkEdgeList(s, schemas.CoreNetwork_Edges, v.Edges)
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.CoreNetwork_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	serializeCoreNetworkNetworkFunctionGroupList(s, schemas.CoreNetwork_NetworkFunctionGroups, v.NetworkFunctionGroups)
+	serializeCoreNetworkSegmentList(s, schemas.CoreNetwork_Segments, v.Segments)
+	if v.State != "" {
+		s.WriteString(schemas.CoreNetwork_State, string(v.State))
+	}
+	serializeTagList(s, schemas.CoreNetwork_Tags, v.Tags)
+}
+func (v *CoreNetwork) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetwork, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetwork_CoreNetworkArn:
+			v.CoreNetworkArn = new(string)
+			return d.ReadString(schemas.CoreNetwork_CoreNetworkArn, v.CoreNetworkArn)
+		case schemas.CoreNetwork_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.CoreNetwork_CoreNetworkId, v.CoreNetworkId)
+		case schemas.CoreNetwork_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CoreNetwork_CreatedAt, v.CreatedAt)
+		case schemas.CoreNetwork_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CoreNetwork_Description, v.Description)
+		case schemas.CoreNetwork_Edges:
+			return deserializeCoreNetworkEdgeList(d, schemas.CoreNetwork_Edges, &v.Edges)
+		case schemas.CoreNetwork_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.CoreNetwork_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.CoreNetwork_NetworkFunctionGroups:
+			return deserializeCoreNetworkNetworkFunctionGroupList(d, schemas.CoreNetwork_NetworkFunctionGroups, &v.NetworkFunctionGroups)
+		case schemas.CoreNetwork_Segments:
+			return deserializeCoreNetworkSegmentList(d, schemas.CoreNetwork_Segments, &v.Segments)
+		case schemas.CoreNetwork_State:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetwork_State, &ev); err != nil {
+				return err
+			}
+			v.State = CoreNetworkState(ev)
+			return nil
+		case schemas.CoreNetwork_Tags:
+			return deserializeTagList(d, schemas.CoreNetwork_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Details describing a core network change.
 type CoreNetworkChange struct {
 
@@ -437,6 +1326,70 @@ type CoreNetworkChange struct {
 	Type ChangeType
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.CoreNetworkChange_Action, string(v.Action))
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CoreNetworkChange_Identifier, *v.Identifier)
+	}
+	if v.IdentifierPath != nil {
+		s.WriteString(schemas.CoreNetworkChange_IdentifierPath, *v.IdentifierPath)
+	}
+	if v.NewValues != nil {
+		s.WriteStruct(schemas.CoreNetworkChange_NewValues)
+		v.NewValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreviousValues != nil {
+		s.WriteStruct(schemas.CoreNetworkChange_PreviousValues)
+		v.PreviousValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CoreNetworkChange_Type, string(v.Type))
+	}
+}
+func (v *CoreNetworkChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkChange_Action:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkChange_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.CoreNetworkChange_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.CoreNetworkChange_Identifier, v.Identifier)
+		case schemas.CoreNetworkChange_IdentifierPath:
+			v.IdentifierPath = new(string)
+			return d.ReadString(schemas.CoreNetworkChange_IdentifierPath, v.IdentifierPath)
+		case schemas.CoreNetworkChange_NewValues:
+			v.NewValues = &CoreNetworkChangeValues{}
+			return v.NewValues.Deserialize(d)
+		case schemas.CoreNetworkChange_PreviousValues:
+			v.PreviousValues = &CoreNetworkChangeValues{}
+			return v.PreviousValues.Deserialize(d)
+		case schemas.CoreNetworkChange_Type:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkChange_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ChangeType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a core network change event. This can be a change to a segment,
@@ -464,6 +1417,72 @@ type CoreNetworkChangeEvent struct {
 	Values *CoreNetworkChangeEventValues
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkChangeEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkChangeEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkChangeEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.CoreNetworkChangeEvent_Action, string(v.Action))
+	}
+	if v.EventTime != nil {
+		s.WriteTime(schemas.CoreNetworkChangeEvent_EventTime, *v.EventTime)
+	}
+	if v.IdentifierPath != nil {
+		s.WriteString(schemas.CoreNetworkChangeEvent_IdentifierPath, *v.IdentifierPath)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CoreNetworkChangeEvent_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CoreNetworkChangeEvent_Type, string(v.Type))
+	}
+	if v.Values != nil {
+		s.WriteStruct(schemas.CoreNetworkChangeEvent_Values)
+		v.Values.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CoreNetworkChangeEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkChangeEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkChangeEvent_Action:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkChangeEvent_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.CoreNetworkChangeEvent_EventTime:
+			v.EventTime = new(time.Time)
+			return d.ReadTime(schemas.CoreNetworkChangeEvent_EventTime, v.EventTime)
+		case schemas.CoreNetworkChangeEvent_IdentifierPath:
+			v.IdentifierPath = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeEvent_IdentifierPath, v.IdentifierPath)
+		case schemas.CoreNetworkChangeEvent_Status:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkChangeEvent_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ChangeStatus(ev)
+			return nil
+		case schemas.CoreNetworkChangeEvent_Type:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkChangeEvent_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ChangeType(ev)
+			return nil
+		case schemas.CoreNetworkChangeEvent_Values:
+			v.Values = &CoreNetworkChangeEventValues{}
+			return v.Values.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes a core network change event.
@@ -495,6 +1514,71 @@ type CoreNetworkChangeEventValues struct {
 	SegmentName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkChangeEventValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkChangeEventValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkChangeEventValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.CoreNetworkChangeEventValues_AttachmentId, *v.AttachmentId)
+	}
+	if v.Cidr != nil {
+		s.WriteString(schemas.CoreNetworkChangeEventValues_Cidr, *v.Cidr)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.CoreNetworkChangeEventValues_EdgeLocation, *v.EdgeLocation)
+	}
+	if v.NetworkFunctionGroupName != nil {
+		s.WriteString(schemas.CoreNetworkChangeEventValues_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
+	}
+	if v.PeerEdgeLocation != nil {
+		s.WriteString(schemas.CoreNetworkChangeEventValues_PeerEdgeLocation, *v.PeerEdgeLocation)
+	}
+	serializeRoutingPolicyAssociationDetailsList(s, schemas.CoreNetworkChangeEventValues_RoutingPolicyAssociationDetails, v.RoutingPolicyAssociationDetails)
+	if v.RoutingPolicyDirection != "" {
+		s.WriteString(schemas.CoreNetworkChangeEventValues_RoutingPolicyDirection, string(v.RoutingPolicyDirection))
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.CoreNetworkChangeEventValues_SegmentName, *v.SegmentName)
+	}
+}
+func (v *CoreNetworkChangeEventValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkChangeEventValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkChangeEventValues_AttachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeEventValues_AttachmentId, v.AttachmentId)
+		case schemas.CoreNetworkChangeEventValues_Cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeEventValues_Cidr, v.Cidr)
+		case schemas.CoreNetworkChangeEventValues_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeEventValues_EdgeLocation, v.EdgeLocation)
+		case schemas.CoreNetworkChangeEventValues_NetworkFunctionGroupName:
+			v.NetworkFunctionGroupName = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeEventValues_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
+		case schemas.CoreNetworkChangeEventValues_PeerEdgeLocation:
+			v.PeerEdgeLocation = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeEventValues_PeerEdgeLocation, v.PeerEdgeLocation)
+		case schemas.CoreNetworkChangeEventValues_RoutingPolicyAssociationDetails:
+			return deserializeRoutingPolicyAssociationDetailsList(d, schemas.CoreNetworkChangeEventValues_RoutingPolicyAssociationDetails, &v.RoutingPolicyAssociationDetails)
+		case schemas.CoreNetworkChangeEventValues_RoutingPolicyDirection:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkChangeEventValues_RoutingPolicyDirection, &ev); err != nil {
+				return err
+			}
+			v.RoutingPolicyDirection = RoutingPolicyDirection(ev)
+			return nil
+		case schemas.CoreNetworkChangeEventValues_SegmentName:
+			v.SegmentName = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeEventValues_SegmentName, v.SegmentName)
+		}
+		return nil
+	})
 }
 
 // Describes a core network change.
@@ -556,6 +1640,107 @@ type CoreNetworkChangeValues struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CoreNetworkChangeValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkChangeValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkChangeValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Asn != nil {
+		s.WriteInt64(schemas.CoreNetworkChangeValues_Asn, *v.Asn)
+	}
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.CoreNetworkChangeValues_AttachmentId, *v.AttachmentId)
+	}
+	if v.Cidr != nil {
+		s.WriteString(schemas.CoreNetworkChangeValues_Cidr, *v.Cidr)
+	}
+	if v.DestinationIdentifier != nil {
+		s.WriteString(schemas.CoreNetworkChangeValues_DestinationIdentifier, *v.DestinationIdentifier)
+	}
+	if v.DnsSupport != false {
+		s.WriteBool(schemas.CoreNetworkChangeValues_DnsSupport, v.DnsSupport)
+	}
+	serializeExternalRegionCodeList(s, schemas.CoreNetworkChangeValues_EdgeLocations, v.EdgeLocations)
+	serializeConstrainedStringList(s, schemas.CoreNetworkChangeValues_InsideCidrBlocks, v.InsideCidrBlocks)
+	if v.NetworkFunctionGroupName != nil {
+		s.WriteString(schemas.CoreNetworkChangeValues_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
+	}
+	serializeExternalRegionCodeList(s, schemas.CoreNetworkChangeValues_PeerEdgeLocations, v.PeerEdgeLocations)
+	if v.RoutingPolicy != nil {
+		s.WriteString(schemas.CoreNetworkChangeValues_RoutingPolicy, *v.RoutingPolicy)
+	}
+	serializeRoutingPolicyAssociationDetailsList(s, schemas.CoreNetworkChangeValues_RoutingPolicyAssociationDetails, v.RoutingPolicyAssociationDetails)
+	if v.RoutingPolicyDirection != "" {
+		s.WriteString(schemas.CoreNetworkChangeValues_RoutingPolicyDirection, string(v.RoutingPolicyDirection))
+	}
+	if v.SecurityGroupReferencingSupport != false {
+		s.WriteBool(schemas.CoreNetworkChangeValues_SecurityGroupReferencingSupport, v.SecurityGroupReferencingSupport)
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.CoreNetworkChangeValues_SegmentName, *v.SegmentName)
+	}
+	serializeServiceInsertionActionList(s, schemas.CoreNetworkChangeValues_ServiceInsertionActions, v.ServiceInsertionActions)
+	serializeConstrainedStringList(s, schemas.CoreNetworkChangeValues_SharedSegments, v.SharedSegments)
+	if v.VpnEcmpSupport != false {
+		s.WriteBool(schemas.CoreNetworkChangeValues_VpnEcmpSupport, v.VpnEcmpSupport)
+	}
+}
+func (v *CoreNetworkChangeValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkChangeValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkChangeValues_Asn:
+			v.Asn = new(int64)
+			return d.ReadInt64(schemas.CoreNetworkChangeValues_Asn, v.Asn)
+		case schemas.CoreNetworkChangeValues_AttachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeValues_AttachmentId, v.AttachmentId)
+		case schemas.CoreNetworkChangeValues_Cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeValues_Cidr, v.Cidr)
+		case schemas.CoreNetworkChangeValues_DestinationIdentifier:
+			v.DestinationIdentifier = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeValues_DestinationIdentifier, v.DestinationIdentifier)
+		case schemas.CoreNetworkChangeValues_DnsSupport:
+			return d.ReadBool(schemas.CoreNetworkChangeValues_DnsSupport, &v.DnsSupport)
+		case schemas.CoreNetworkChangeValues_EdgeLocations:
+			return deserializeExternalRegionCodeList(d, schemas.CoreNetworkChangeValues_EdgeLocations, &v.EdgeLocations)
+		case schemas.CoreNetworkChangeValues_InsideCidrBlocks:
+			return deserializeConstrainedStringList(d, schemas.CoreNetworkChangeValues_InsideCidrBlocks, &v.InsideCidrBlocks)
+		case schemas.CoreNetworkChangeValues_NetworkFunctionGroupName:
+			v.NetworkFunctionGroupName = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeValues_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
+		case schemas.CoreNetworkChangeValues_PeerEdgeLocations:
+			return deserializeExternalRegionCodeList(d, schemas.CoreNetworkChangeValues_PeerEdgeLocations, &v.PeerEdgeLocations)
+		case schemas.CoreNetworkChangeValues_RoutingPolicy:
+			v.RoutingPolicy = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeValues_RoutingPolicy, v.RoutingPolicy)
+		case schemas.CoreNetworkChangeValues_RoutingPolicyAssociationDetails:
+			return deserializeRoutingPolicyAssociationDetailsList(d, schemas.CoreNetworkChangeValues_RoutingPolicyAssociationDetails, &v.RoutingPolicyAssociationDetails)
+		case schemas.CoreNetworkChangeValues_RoutingPolicyDirection:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkChangeValues_RoutingPolicyDirection, &ev); err != nil {
+				return err
+			}
+			v.RoutingPolicyDirection = RoutingPolicyDirection(ev)
+			return nil
+		case schemas.CoreNetworkChangeValues_SecurityGroupReferencingSupport:
+			return d.ReadBool(schemas.CoreNetworkChangeValues_SecurityGroupReferencingSupport, &v.SecurityGroupReferencingSupport)
+		case schemas.CoreNetworkChangeValues_SegmentName:
+			v.SegmentName = new(string)
+			return d.ReadString(schemas.CoreNetworkChangeValues_SegmentName, v.SegmentName)
+		case schemas.CoreNetworkChangeValues_ServiceInsertionActions:
+			return deserializeServiceInsertionActionList(d, schemas.CoreNetworkChangeValues_ServiceInsertionActions, &v.ServiceInsertionActions)
+		case schemas.CoreNetworkChangeValues_SharedSegments:
+			return deserializeConstrainedStringList(d, schemas.CoreNetworkChangeValues_SharedSegments, &v.SharedSegments)
+		case schemas.CoreNetworkChangeValues_VpnEcmpSupport:
+			return d.ReadBool(schemas.CoreNetworkChangeValues_VpnEcmpSupport, &v.VpnEcmpSupport)
+		}
+		return nil
+	})
+}
+
 // Describes a core network edge.
 type CoreNetworkEdge struct {
 
@@ -569,6 +1754,37 @@ type CoreNetworkEdge struct {
 	InsideCidrBlocks []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkEdge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkEdge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkEdge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Asn != nil {
+		s.WriteInt64(schemas.CoreNetworkEdge_Asn, *v.Asn)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.CoreNetworkEdge_EdgeLocation, *v.EdgeLocation)
+	}
+	serializeConstrainedStringList(s, schemas.CoreNetworkEdge_InsideCidrBlocks, v.InsideCidrBlocks)
+}
+func (v *CoreNetworkEdge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkEdge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkEdge_Asn:
+			v.Asn = new(int64)
+			return d.ReadInt64(schemas.CoreNetworkEdge_Asn, v.Asn)
+		case schemas.CoreNetworkEdge_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.CoreNetworkEdge_EdgeLocation, v.EdgeLocation)
+		case schemas.CoreNetworkEdge_InsideCidrBlocks:
+			return deserializeConstrainedStringList(d, schemas.CoreNetworkEdge_InsideCidrBlocks, &v.InsideCidrBlocks)
+		}
+		return nil
+	})
 }
 
 // Describes a network function group.
@@ -586,6 +1802,39 @@ type CoreNetworkNetworkFunctionGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CoreNetworkNetworkFunctionGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkNetworkFunctionGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkNetworkFunctionGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExternalRegionCodeList(s, schemas.CoreNetworkNetworkFunctionGroup_EdgeLocations, v.EdgeLocations)
+	if v.Name != nil {
+		s.WriteString(schemas.CoreNetworkNetworkFunctionGroup_Name, *v.Name)
+	}
+	if v.Segments != nil {
+		s.WriteStruct(schemas.CoreNetworkNetworkFunctionGroup_Segments)
+		v.Segments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CoreNetworkNetworkFunctionGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkNetworkFunctionGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkNetworkFunctionGroup_EdgeLocations:
+			return deserializeExternalRegionCodeList(d, schemas.CoreNetworkNetworkFunctionGroup_EdgeLocations, &v.EdgeLocations)
+		case schemas.CoreNetworkNetworkFunctionGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CoreNetworkNetworkFunctionGroup_Name, v.Name)
+		case schemas.CoreNetworkNetworkFunctionGroup_Segments:
+			v.Segments = &ServiceInsertionSegments{}
+			return v.Segments.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a core network
 type CoreNetworkNetworkFunctionGroupIdentifier struct {
 
@@ -599,6 +1848,40 @@ type CoreNetworkNetworkFunctionGroupIdentifier struct {
 	NetworkFunctionGroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkNetworkFunctionGroupIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkNetworkFunctionGroupIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkNetworkFunctionGroupIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CoreNetworkNetworkFunctionGroupIdentifier_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.CoreNetworkNetworkFunctionGroupIdentifier_EdgeLocation, *v.EdgeLocation)
+	}
+	if v.NetworkFunctionGroupName != nil {
+		s.WriteString(schemas.CoreNetworkNetworkFunctionGroupIdentifier_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
+	}
+}
+func (v *CoreNetworkNetworkFunctionGroupIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkNetworkFunctionGroupIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkNetworkFunctionGroupIdentifier_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.CoreNetworkNetworkFunctionGroupIdentifier_CoreNetworkId, v.CoreNetworkId)
+		case schemas.CoreNetworkNetworkFunctionGroupIdentifier_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.CoreNetworkNetworkFunctionGroupIdentifier_EdgeLocation, v.EdgeLocation)
+		case schemas.CoreNetworkNetworkFunctionGroupIdentifier_NetworkFunctionGroupName:
+			v.NetworkFunctionGroupName = new(string)
+			return d.ReadString(schemas.CoreNetworkNetworkFunctionGroupIdentifier_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
+		}
+		return nil
+	})
 }
 
 // Describes a core network policy. You can have only one LIVE Core Policy.
@@ -634,6 +1917,75 @@ type CoreNetworkPolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CoreNetworkPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != "" {
+		s.WriteString(schemas.CoreNetworkPolicy_Alias, string(v.Alias))
+	}
+	if v.ChangeSetState != "" {
+		s.WriteString(schemas.CoreNetworkPolicy_ChangeSetState, string(v.ChangeSetState))
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CoreNetworkPolicy_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CoreNetworkPolicy_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CoreNetworkPolicy_Description, *v.Description)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.CoreNetworkPolicy_PolicyDocument, *v.PolicyDocument)
+	}
+	serializeCoreNetworkPolicyErrorList(s, schemas.CoreNetworkPolicy_PolicyErrors, v.PolicyErrors)
+	if v.PolicyVersionId != nil {
+		s.WriteInt32(schemas.CoreNetworkPolicy_PolicyVersionId, *v.PolicyVersionId)
+	}
+}
+func (v *CoreNetworkPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkPolicy_Alias:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkPolicy_Alias, &ev); err != nil {
+				return err
+			}
+			v.Alias = CoreNetworkPolicyAlias(ev)
+			return nil
+		case schemas.CoreNetworkPolicy_ChangeSetState:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkPolicy_ChangeSetState, &ev); err != nil {
+				return err
+			}
+			v.ChangeSetState = ChangeSetState(ev)
+			return nil
+		case schemas.CoreNetworkPolicy_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.CoreNetworkPolicy_CoreNetworkId, v.CoreNetworkId)
+		case schemas.CoreNetworkPolicy_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CoreNetworkPolicy_CreatedAt, v.CreatedAt)
+		case schemas.CoreNetworkPolicy_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CoreNetworkPolicy_Description, v.Description)
+		case schemas.CoreNetworkPolicy_PolicyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.CoreNetworkPolicy_PolicyDocument, v.PolicyDocument)
+		case schemas.CoreNetworkPolicy_PolicyErrors:
+			return deserializeCoreNetworkPolicyErrorList(d, schemas.CoreNetworkPolicy_PolicyErrors, &v.PolicyErrors)
+		case schemas.CoreNetworkPolicy_PolicyVersionId:
+			v.PolicyVersionId = new(int32)
+			return d.ReadInt32(schemas.CoreNetworkPolicy_PolicyVersionId, v.PolicyVersionId)
+		}
+		return nil
+	})
+}
+
 // Provides details about an error in a core network policy.
 type CoreNetworkPolicyError struct {
 
@@ -651,6 +2003,40 @@ type CoreNetworkPolicyError struct {
 	Path *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkPolicyError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkPolicyError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkPolicyError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.CoreNetworkPolicyError_ErrorCode, *v.ErrorCode)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CoreNetworkPolicyError_Message, *v.Message)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.CoreNetworkPolicyError_Path, *v.Path)
+	}
+}
+func (v *CoreNetworkPolicyError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkPolicyError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkPolicyError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.CoreNetworkPolicyError_ErrorCode, v.ErrorCode)
+		case schemas.CoreNetworkPolicyError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CoreNetworkPolicyError_Message, v.Message)
+		case schemas.CoreNetworkPolicyError_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.CoreNetworkPolicyError_Path, v.Path)
+		}
+		return nil
+	})
 }
 
 // Describes a core network policy version.
@@ -678,6 +2064,66 @@ type CoreNetworkPolicyVersion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CoreNetworkPolicyVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkPolicyVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkPolicyVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != "" {
+		s.WriteString(schemas.CoreNetworkPolicyVersion_Alias, string(v.Alias))
+	}
+	if v.ChangeSetState != "" {
+		s.WriteString(schemas.CoreNetworkPolicyVersion_ChangeSetState, string(v.ChangeSetState))
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CoreNetworkPolicyVersion_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CoreNetworkPolicyVersion_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CoreNetworkPolicyVersion_Description, *v.Description)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteInt32(schemas.CoreNetworkPolicyVersion_PolicyVersionId, *v.PolicyVersionId)
+	}
+}
+func (v *CoreNetworkPolicyVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkPolicyVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkPolicyVersion_Alias:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkPolicyVersion_Alias, &ev); err != nil {
+				return err
+			}
+			v.Alias = CoreNetworkPolicyAlias(ev)
+			return nil
+		case schemas.CoreNetworkPolicyVersion_ChangeSetState:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkPolicyVersion_ChangeSetState, &ev); err != nil {
+				return err
+			}
+			v.ChangeSetState = ChangeSetState(ev)
+			return nil
+		case schemas.CoreNetworkPolicyVersion_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.CoreNetworkPolicyVersion_CoreNetworkId, v.CoreNetworkId)
+		case schemas.CoreNetworkPolicyVersion_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CoreNetworkPolicyVersion_CreatedAt, v.CreatedAt)
+		case schemas.CoreNetworkPolicyVersion_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CoreNetworkPolicyVersion_Description, v.Description)
+		case schemas.CoreNetworkPolicyVersion_PolicyVersionId:
+			v.PolicyVersionId = new(int32)
+			return d.ReadInt32(schemas.CoreNetworkPolicyVersion_PolicyVersionId, v.PolicyVersionId)
+		}
+		return nil
+	})
+}
+
 // Routing information for a core network, including route details and BGP
 // attributes.
 type CoreNetworkRoutingInformation struct {
@@ -703,6 +2149,54 @@ type CoreNetworkRoutingInformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CoreNetworkRoutingInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkRoutingInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkRoutingInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConstrainedStringList(s, schemas.CoreNetworkRoutingInformation_AsPath, v.AsPath)
+	serializeConstrainedStringList(s, schemas.CoreNetworkRoutingInformation_Communities, v.Communities)
+	if v.LocalPreference != nil {
+		s.WriteString(schemas.CoreNetworkRoutingInformation_LocalPreference, *v.LocalPreference)
+	}
+	if v.Med != nil {
+		s.WriteString(schemas.CoreNetworkRoutingInformation_Med, *v.Med)
+	}
+	if v.NextHop != nil {
+		s.WriteStruct(schemas.CoreNetworkRoutingInformation_NextHop)
+		v.NextHop.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.CoreNetworkRoutingInformation_Prefix, *v.Prefix)
+	}
+}
+func (v *CoreNetworkRoutingInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkRoutingInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkRoutingInformation_AsPath:
+			return deserializeConstrainedStringList(d, schemas.CoreNetworkRoutingInformation_AsPath, &v.AsPath)
+		case schemas.CoreNetworkRoutingInformation_Communities:
+			return deserializeConstrainedStringList(d, schemas.CoreNetworkRoutingInformation_Communities, &v.Communities)
+		case schemas.CoreNetworkRoutingInformation_LocalPreference:
+			v.LocalPreference = new(string)
+			return d.ReadString(schemas.CoreNetworkRoutingInformation_LocalPreference, v.LocalPreference)
+		case schemas.CoreNetworkRoutingInformation_Med:
+			v.Med = new(string)
+			return d.ReadString(schemas.CoreNetworkRoutingInformation_Med, v.Med)
+		case schemas.CoreNetworkRoutingInformation_NextHop:
+			v.NextHop = &RoutingInformationNextHop{}
+			return v.NextHop.Deserialize(d)
+		case schemas.CoreNetworkRoutingInformation_Prefix:
+			v.Prefix = new(string)
+			return d.ReadString(schemas.CoreNetworkRoutingInformation_Prefix, v.Prefix)
+		}
+		return nil
+	})
+}
+
 // Describes a core network segment, which are dedicated routes. Only attachments
 // within this segment can communicate with each other.
 type CoreNetworkSegment struct {
@@ -719,6 +2213,34 @@ type CoreNetworkSegment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CoreNetworkSegment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExternalRegionCodeList(s, schemas.CoreNetworkSegment_EdgeLocations, v.EdgeLocations)
+	if v.Name != nil {
+		s.WriteString(schemas.CoreNetworkSegment_Name, *v.Name)
+	}
+	serializeConstrainedStringList(s, schemas.CoreNetworkSegment_SharedSegments, v.SharedSegments)
+}
+func (v *CoreNetworkSegment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkSegment_EdgeLocations:
+			return deserializeExternalRegionCodeList(d, schemas.CoreNetworkSegment_EdgeLocations, &v.EdgeLocations)
+		case schemas.CoreNetworkSegment_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CoreNetworkSegment_Name, v.Name)
+		case schemas.CoreNetworkSegment_SharedSegments:
+			return deserializeConstrainedStringList(d, schemas.CoreNetworkSegment_SharedSegments, &v.SharedSegments)
+		}
+		return nil
+	})
+}
+
 // Returns details about a core network edge.
 type CoreNetworkSegmentEdgeIdentifier struct {
 
@@ -732,6 +2254,40 @@ type CoreNetworkSegmentEdgeIdentifier struct {
 	SegmentName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CoreNetworkSegmentEdgeIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkSegmentEdgeIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkSegmentEdgeIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CoreNetworkSegmentEdgeIdentifier_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.CoreNetworkSegmentEdgeIdentifier_EdgeLocation, *v.EdgeLocation)
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.CoreNetworkSegmentEdgeIdentifier_SegmentName, *v.SegmentName)
+	}
+}
+func (v *CoreNetworkSegmentEdgeIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkSegmentEdgeIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkSegmentEdgeIdentifier_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.CoreNetworkSegmentEdgeIdentifier_CoreNetworkId, v.CoreNetworkId)
+		case schemas.CoreNetworkSegmentEdgeIdentifier_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.CoreNetworkSegmentEdgeIdentifier_EdgeLocation, v.EdgeLocation)
+		case schemas.CoreNetworkSegmentEdgeIdentifier_SegmentName:
+			v.SegmentName = new(string)
+			return d.ReadString(schemas.CoreNetworkSegmentEdgeIdentifier_SegmentName, v.SegmentName)
+		}
+		return nil
+	})
 }
 
 // Returns summary information about a core network.
@@ -761,6 +2317,65 @@ type CoreNetworkSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CoreNetworkSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CoreNetworkSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CoreNetworkSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkArn != nil {
+		s.WriteString(schemas.CoreNetworkSummary_CoreNetworkArn, *v.CoreNetworkArn)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CoreNetworkSummary_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CoreNetworkSummary_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.CoreNetworkSummary_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.CoreNetworkSummary_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CoreNetworkSummary_State, string(v.State))
+	}
+	serializeTagList(s, schemas.CoreNetworkSummary_Tags, v.Tags)
+}
+func (v *CoreNetworkSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CoreNetworkSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CoreNetworkSummary_CoreNetworkArn:
+			v.CoreNetworkArn = new(string)
+			return d.ReadString(schemas.CoreNetworkSummary_CoreNetworkArn, v.CoreNetworkArn)
+		case schemas.CoreNetworkSummary_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.CoreNetworkSummary_CoreNetworkId, v.CoreNetworkId)
+		case schemas.CoreNetworkSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CoreNetworkSummary_Description, v.Description)
+		case schemas.CoreNetworkSummary_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.CoreNetworkSummary_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.CoreNetworkSummary_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.CoreNetworkSummary_OwnerAccountId, v.OwnerAccountId)
+		case schemas.CoreNetworkSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.CoreNetworkSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = CoreNetworkState(ev)
+			return nil
+		case schemas.CoreNetworkSummary_Tags:
+			return deserializeTagList(d, schemas.CoreNetworkSummary_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes the association between a customer gateway, a device, and a link.
 type CustomerGatewayAssociation struct {
 
@@ -780,6 +2395,56 @@ type CustomerGatewayAssociation struct {
 	State CustomerGatewayAssociationState
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomerGatewayAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerGatewayAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerGatewayAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerGatewayArn != nil {
+		s.WriteString(schemas.CustomerGatewayAssociation_CustomerGatewayArn, *v.CustomerGatewayArn)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.CustomerGatewayAssociation_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.CustomerGatewayAssociation_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.CustomerGatewayAssociation_LinkId, *v.LinkId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CustomerGatewayAssociation_State, string(v.State))
+	}
+}
+func (v *CustomerGatewayAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerGatewayAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerGatewayAssociation_CustomerGatewayArn:
+			v.CustomerGatewayArn = new(string)
+			return d.ReadString(schemas.CustomerGatewayAssociation_CustomerGatewayArn, v.CustomerGatewayArn)
+		case schemas.CustomerGatewayAssociation_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.CustomerGatewayAssociation_DeviceId, v.DeviceId)
+		case schemas.CustomerGatewayAssociation_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.CustomerGatewayAssociation_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.CustomerGatewayAssociation_LinkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.CustomerGatewayAssociation_LinkId, v.LinkId)
+		case schemas.CustomerGatewayAssociation_State:
+			var ev string
+			if err := d.ReadString(schemas.CustomerGatewayAssociation_State, &ev); err != nil {
+				return err
+			}
+			v.State = CustomerGatewayAssociationState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a device.
@@ -830,6 +2495,111 @@ type Device struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Device) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Device)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Device) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSLocation != nil {
+		s.WriteStruct(schemas.Device_AWSLocation)
+		v.AWSLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Device_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Device_Description, *v.Description)
+	}
+	if v.DeviceArn != nil {
+		s.WriteString(schemas.Device_DeviceArn, *v.DeviceArn)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.Device_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.Device_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.Device_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Model != nil {
+		s.WriteString(schemas.Device_Model, *v.Model)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.Device_SerialNumber, *v.SerialNumber)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.Device_SiteId, *v.SiteId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Device_State, string(v.State))
+	}
+	serializeTagList(s, schemas.Device_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.Device_Type, *v.Type)
+	}
+	if v.Vendor != nil {
+		s.WriteString(schemas.Device_Vendor, *v.Vendor)
+	}
+}
+func (v *Device) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Device, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Device_AWSLocation:
+			v.AWSLocation = &AWSLocation{}
+			return v.AWSLocation.Deserialize(d)
+		case schemas.Device_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Device_CreatedAt, v.CreatedAt)
+		case schemas.Device_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Device_Description, v.Description)
+		case schemas.Device_DeviceArn:
+			v.DeviceArn = new(string)
+			return d.ReadString(schemas.Device_DeviceArn, v.DeviceArn)
+		case schemas.Device_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.Device_DeviceId, v.DeviceId)
+		case schemas.Device_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.Device_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.Device_Location:
+			v.Location = &Location{}
+			return v.Location.Deserialize(d)
+		case schemas.Device_Model:
+			v.Model = new(string)
+			return d.ReadString(schemas.Device_Model, v.Model)
+		case schemas.Device_SerialNumber:
+			v.SerialNumber = new(string)
+			return d.ReadString(schemas.Device_SerialNumber, v.SerialNumber)
+		case schemas.Device_SiteId:
+			v.SiteId = new(string)
+			return d.ReadString(schemas.Device_SiteId, v.SiteId)
+		case schemas.Device_State:
+			var ev string
+			if err := d.ReadString(schemas.Device_State, &ev); err != nil {
+				return err
+			}
+			v.State = DeviceState(ev)
+			return nil
+		case schemas.Device_Tags:
+			return deserializeTagList(d, schemas.Device_Tags, &v.Tags)
+		case schemas.Device_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Device_Type, v.Type)
+		case schemas.Device_Vendor:
+			v.Vendor = new(string)
+			return d.ReadString(schemas.Device_Vendor, v.Vendor)
+		}
+		return nil
+	})
+}
+
 // Describes a Direct Connect gateway attachment.
 type DirectConnectGatewayAttachment struct {
 
@@ -842,6 +2612,36 @@ type DirectConnectGatewayAttachment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DirectConnectGatewayAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectConnectGatewayAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectConnectGatewayAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attachment != nil {
+		s.WriteStruct(schemas.DirectConnectGatewayAttachment_Attachment)
+		v.Attachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DirectConnectGatewayArn != nil {
+		s.WriteString(schemas.DirectConnectGatewayAttachment_DirectConnectGatewayArn, *v.DirectConnectGatewayArn)
+	}
+}
+func (v *DirectConnectGatewayAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectConnectGatewayAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectConnectGatewayAttachment_Attachment:
+			v.Attachment = &Attachment{}
+			return v.Attachment.Deserialize(d)
+		case schemas.DirectConnectGatewayAttachment_DirectConnectGatewayArn:
+			v.DirectConnectGatewayArn = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAttachment_DirectConnectGatewayArn, v.DirectConnectGatewayArn)
+		}
+		return nil
+	})
+}
+
 // Describes the edge that's used for the override.
 type EdgeOverride struct {
 
@@ -852,6 +2652,31 @@ type EdgeOverride struct {
 	UseEdge *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EdgeOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EdgeOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EdgeOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEdgeSetList(s, schemas.EdgeOverride_EdgeSets, v.EdgeSets)
+	if v.UseEdge != nil {
+		s.WriteString(schemas.EdgeOverride_UseEdge, *v.UseEdge)
+	}
+}
+func (v *EdgeOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EdgeOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EdgeOverride_EdgeSets:
+			return deserializeEdgeSetList(d, schemas.EdgeOverride_EdgeSets, &v.EdgeSets)
+		case schemas.EdgeOverride_UseEdge:
+			v.UseEdge = new(string)
+			return d.ReadString(schemas.EdgeOverride_UseEdge, v.UseEdge)
+		}
+		return nil
+	})
 }
 
 // Describes a global network. This is a single private network acting as a
@@ -878,6 +2703,59 @@ type GlobalNetwork struct {
 	Tags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *GlobalNetwork) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalNetwork)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalNetwork) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GlobalNetwork_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GlobalNetwork_Description, *v.Description)
+	}
+	if v.GlobalNetworkArn != nil {
+		s.WriteString(schemas.GlobalNetwork_GlobalNetworkArn, *v.GlobalNetworkArn)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.GlobalNetwork_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GlobalNetwork_State, string(v.State))
+	}
+	serializeTagList(s, schemas.GlobalNetwork_Tags, v.Tags)
+}
+func (v *GlobalNetwork) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalNetwork, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalNetwork_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GlobalNetwork_CreatedAt, v.CreatedAt)
+		case schemas.GlobalNetwork_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GlobalNetwork_Description, v.Description)
+		case schemas.GlobalNetwork_GlobalNetworkArn:
+			v.GlobalNetworkArn = new(string)
+			return d.ReadString(schemas.GlobalNetwork_GlobalNetworkArn, v.GlobalNetworkArn)
+		case schemas.GlobalNetwork_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.GlobalNetwork_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.GlobalNetwork_State:
+			var ev string
+			if err := d.ReadString(schemas.GlobalNetwork_State, &ev); err != nil {
+				return err
+			}
+			v.State = GlobalNetworkState(ev)
+			return nil
+		case schemas.GlobalNetwork_Tags:
+			return deserializeTagList(d, schemas.GlobalNetwork_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Describes a link.
@@ -919,6 +2797,91 @@ type Link struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Link) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Link)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Link) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bandwidth != nil {
+		s.WriteStruct(schemas.Link_Bandwidth)
+		v.Bandwidth.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Link_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Link_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.Link_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkArn != nil {
+		s.WriteString(schemas.Link_LinkArn, *v.LinkArn)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.Link_LinkId, *v.LinkId)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.Link_Provider, *v.Provider)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.Link_SiteId, *v.SiteId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Link_State, string(v.State))
+	}
+	serializeTagList(s, schemas.Link_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.Link_Type, *v.Type)
+	}
+}
+func (v *Link) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Link, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Link_Bandwidth:
+			v.Bandwidth = &Bandwidth{}
+			return v.Bandwidth.Deserialize(d)
+		case schemas.Link_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Link_CreatedAt, v.CreatedAt)
+		case schemas.Link_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Link_Description, v.Description)
+		case schemas.Link_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.Link_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.Link_LinkArn:
+			v.LinkArn = new(string)
+			return d.ReadString(schemas.Link_LinkArn, v.LinkArn)
+		case schemas.Link_LinkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.Link_LinkId, v.LinkId)
+		case schemas.Link_Provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.Link_Provider, v.Provider)
+		case schemas.Link_SiteId:
+			v.SiteId = new(string)
+			return d.ReadString(schemas.Link_SiteId, v.SiteId)
+		case schemas.Link_State:
+			var ev string
+			if err := d.ReadString(schemas.Link_State, &ev); err != nil {
+				return err
+			}
+			v.State = LinkState(ev)
+			return nil
+		case schemas.Link_Tags:
+			return deserializeTagList(d, schemas.Link_Tags, &v.Tags)
+		case schemas.Link_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Link_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Describes the association between a device and a link.
 type LinkAssociation struct {
 
@@ -937,6 +2900,50 @@ type LinkAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LinkAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LinkAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LinkAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.LinkAssociation_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.LinkAssociation_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkAssociationState != "" {
+		s.WriteString(schemas.LinkAssociation_LinkAssociationState, string(v.LinkAssociationState))
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.LinkAssociation_LinkId, *v.LinkId)
+	}
+}
+func (v *LinkAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkAssociation_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.LinkAssociation_DeviceId, v.DeviceId)
+		case schemas.LinkAssociation_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.LinkAssociation_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.LinkAssociation_LinkAssociationState:
+			var ev string
+			if err := d.ReadString(schemas.LinkAssociation_LinkAssociationState, &ev); err != nil {
+				return err
+			}
+			v.LinkAssociationState = LinkAssociationState(ev)
+			return nil
+		case schemas.LinkAssociation_LinkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.LinkAssociation_LinkId, v.LinkId)
+		}
+		return nil
+	})
+}
+
 // Describes a location.
 type Location struct {
 
@@ -952,6 +2959,40 @@ type Location struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.Location_Address, *v.Address)
+	}
+	if v.Latitude != nil {
+		s.WriteString(schemas.Location_Latitude, *v.Latitude)
+	}
+	if v.Longitude != nil {
+		s.WriteString(schemas.Location_Longitude, *v.Longitude)
+	}
+}
+func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Location_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.Location_Address, v.Address)
+		case schemas.Location_Latitude:
+			v.Latitude = new(string)
+			return d.ReadString(schemas.Location_Latitude, v.Latitude)
+		case schemas.Location_Longitude:
+			v.Longitude = new(string)
+			return d.ReadString(schemas.Location_Longitude, v.Longitude)
+		}
+		return nil
+	})
+}
+
 // Describes a network function group for service insertion.
 type NetworkFunctionGroup struct {
 
@@ -959,6 +3000,28 @@ type NetworkFunctionGroup struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFunctionGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFunctionGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFunctionGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.NetworkFunctionGroup_Name, *v.Name)
+	}
+}
+func (v *NetworkFunctionGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFunctionGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFunctionGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NetworkFunctionGroup_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Describes a network resource.
@@ -1041,6 +3104,82 @@ type NetworkResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.NetworkResource_AccountId, *v.AccountId)
+	}
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.NetworkResource_AwsRegion, *v.AwsRegion)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.NetworkResource_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.Definition != nil {
+		s.WriteString(schemas.NetworkResource_Definition, *v.Definition)
+	}
+	if v.DefinitionTimestamp != nil {
+		s.WriteTime(schemas.NetworkResource_DefinitionTimestamp, *v.DefinitionTimestamp)
+	}
+	serializeNetworkResourceMetadataMap(s, schemas.NetworkResource_Metadata, v.Metadata)
+	if v.RegisteredGatewayArn != nil {
+		s.WriteString(schemas.NetworkResource_RegisteredGatewayArn, *v.RegisteredGatewayArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.NetworkResource_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.NetworkResource_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.NetworkResource_ResourceType, *v.ResourceType)
+	}
+	serializeTagList(s, schemas.NetworkResource_Tags, v.Tags)
+}
+func (v *NetworkResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkResource_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.NetworkResource_AccountId, v.AccountId)
+		case schemas.NetworkResource_AwsRegion:
+			v.AwsRegion = new(string)
+			return d.ReadString(schemas.NetworkResource_AwsRegion, v.AwsRegion)
+		case schemas.NetworkResource_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.NetworkResource_CoreNetworkId, v.CoreNetworkId)
+		case schemas.NetworkResource_Definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.NetworkResource_Definition, v.Definition)
+		case schemas.NetworkResource_DefinitionTimestamp:
+			v.DefinitionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.NetworkResource_DefinitionTimestamp, v.DefinitionTimestamp)
+		case schemas.NetworkResource_Metadata:
+			return deserializeNetworkResourceMetadataMap(d, schemas.NetworkResource_Metadata, &v.Metadata)
+		case schemas.NetworkResource_RegisteredGatewayArn:
+			v.RegisteredGatewayArn = new(string)
+			return d.ReadString(schemas.NetworkResource_RegisteredGatewayArn, v.RegisteredGatewayArn)
+		case schemas.NetworkResource_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.NetworkResource_ResourceArn, v.ResourceArn)
+		case schemas.NetworkResource_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.NetworkResource_ResourceId, v.ResourceId)
+		case schemas.NetworkResource_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.NetworkResource_ResourceType, v.ResourceType)
+		case schemas.NetworkResource_Tags:
+			return deserializeTagList(d, schemas.NetworkResource_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes a resource count.
 type NetworkResourceCount struct {
 
@@ -1051,6 +3190,34 @@ type NetworkResourceCount struct {
 	ResourceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkResourceCount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkResourceCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkResourceCount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.NetworkResourceCount_Count, *v.Count)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.NetworkResourceCount_ResourceType, *v.ResourceType)
+	}
+}
+func (v *NetworkResourceCount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkResourceCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkResourceCount_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.NetworkResourceCount_Count, v.Count)
+		case schemas.NetworkResourceCount_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.NetworkResourceCount_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Describes a network resource.
@@ -1078,6 +3245,57 @@ type NetworkResourceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkResourceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkResourceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteString(schemas.NetworkResourceSummary_Definition, *v.Definition)
+	}
+	if v.IsMiddlebox != false {
+		s.WriteBool(schemas.NetworkResourceSummary_IsMiddlebox, v.IsMiddlebox)
+	}
+	if v.NameTag != nil {
+		s.WriteString(schemas.NetworkResourceSummary_NameTag, *v.NameTag)
+	}
+	if v.RegisteredGatewayArn != nil {
+		s.WriteString(schemas.NetworkResourceSummary_RegisteredGatewayArn, *v.RegisteredGatewayArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.NetworkResourceSummary_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.NetworkResourceSummary_ResourceType, *v.ResourceType)
+	}
+}
+func (v *NetworkResourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkResourceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkResourceSummary_Definition:
+			v.Definition = new(string)
+			return d.ReadString(schemas.NetworkResourceSummary_Definition, v.Definition)
+		case schemas.NetworkResourceSummary_IsMiddlebox:
+			return d.ReadBool(schemas.NetworkResourceSummary_IsMiddlebox, &v.IsMiddlebox)
+		case schemas.NetworkResourceSummary_NameTag:
+			v.NameTag = new(string)
+			return d.ReadString(schemas.NetworkResourceSummary_NameTag, v.NameTag)
+		case schemas.NetworkResourceSummary_RegisteredGatewayArn:
+			v.RegisteredGatewayArn = new(string)
+			return d.ReadString(schemas.NetworkResourceSummary_RegisteredGatewayArn, v.RegisteredGatewayArn)
+		case schemas.NetworkResourceSummary_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.NetworkResourceSummary_ResourceArn, v.ResourceArn)
+		case schemas.NetworkResourceSummary_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.NetworkResourceSummary_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // Describes a network route.
 type NetworkRoute struct {
 
@@ -1097,6 +3315,57 @@ type NetworkRoute struct {
 	Type RouteType
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkRoute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkRoute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkRoute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationCidrBlock != nil {
+		s.WriteString(schemas.NetworkRoute_DestinationCidrBlock, *v.DestinationCidrBlock)
+	}
+	serializeNetworkRouteDestinationList(s, schemas.NetworkRoute_Destinations, v.Destinations)
+	if v.PrefixListId != nil {
+		s.WriteString(schemas.NetworkRoute_PrefixListId, *v.PrefixListId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.NetworkRoute_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.NetworkRoute_Type, string(v.Type))
+	}
+}
+func (v *NetworkRoute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkRoute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkRoute_DestinationCidrBlock:
+			v.DestinationCidrBlock = new(string)
+			return d.ReadString(schemas.NetworkRoute_DestinationCidrBlock, v.DestinationCidrBlock)
+		case schemas.NetworkRoute_Destinations:
+			return deserializeNetworkRouteDestinationList(d, schemas.NetworkRoute_Destinations, &v.Destinations)
+		case schemas.NetworkRoute_PrefixListId:
+			v.PrefixListId = new(string)
+			return d.ReadString(schemas.NetworkRoute_PrefixListId, v.PrefixListId)
+		case schemas.NetworkRoute_State:
+			var ev string
+			if err := d.ReadString(schemas.NetworkRoute_State, &ev); err != nil {
+				return err
+			}
+			v.State = RouteState(ev)
+			return nil
+		case schemas.NetworkRoute_Type:
+			var ev string
+			if err := d.ReadString(schemas.NetworkRoute_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RouteType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the destination of a network route.
@@ -1124,6 +3393,64 @@ type NetworkRouteDestination struct {
 	TransitGatewayAttachmentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkRouteDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkRouteDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkRouteDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkAttachmentId != nil {
+		s.WriteString(schemas.NetworkRouteDestination_CoreNetworkAttachmentId, *v.CoreNetworkAttachmentId)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.NetworkRouteDestination_EdgeLocation, *v.EdgeLocation)
+	}
+	if v.NetworkFunctionGroupName != nil {
+		s.WriteString(schemas.NetworkRouteDestination_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.NetworkRouteDestination_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.NetworkRouteDestination_ResourceType, *v.ResourceType)
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.NetworkRouteDestination_SegmentName, *v.SegmentName)
+	}
+	if v.TransitGatewayAttachmentId != nil {
+		s.WriteString(schemas.NetworkRouteDestination_TransitGatewayAttachmentId, *v.TransitGatewayAttachmentId)
+	}
+}
+func (v *NetworkRouteDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkRouteDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkRouteDestination_CoreNetworkAttachmentId:
+			v.CoreNetworkAttachmentId = new(string)
+			return d.ReadString(schemas.NetworkRouteDestination_CoreNetworkAttachmentId, v.CoreNetworkAttachmentId)
+		case schemas.NetworkRouteDestination_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.NetworkRouteDestination_EdgeLocation, v.EdgeLocation)
+		case schemas.NetworkRouteDestination_NetworkFunctionGroupName:
+			v.NetworkFunctionGroupName = new(string)
+			return d.ReadString(schemas.NetworkRouteDestination_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
+		case schemas.NetworkRouteDestination_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.NetworkRouteDestination_ResourceId, v.ResourceId)
+		case schemas.NetworkRouteDestination_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.NetworkRouteDestination_ResourceType, v.ResourceType)
+		case schemas.NetworkRouteDestination_SegmentName:
+			v.SegmentName = new(string)
+			return d.ReadString(schemas.NetworkRouteDestination_SegmentName, v.SegmentName)
+		case schemas.NetworkRouteDestination_TransitGatewayAttachmentId:
+			v.TransitGatewayAttachmentId = new(string)
+			return d.ReadString(schemas.NetworkRouteDestination_TransitGatewayAttachmentId, v.TransitGatewayAttachmentId)
+		}
+		return nil
+	})
 }
 
 // Describes the telemetry information for a resource.
@@ -1159,6 +3486,78 @@ type NetworkTelemetry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkTelemetry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkTelemetry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkTelemetry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.NetworkTelemetry_AccountId, *v.AccountId)
+	}
+	if v.Address != nil {
+		s.WriteString(schemas.NetworkTelemetry_Address, *v.Address)
+	}
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.NetworkTelemetry_AwsRegion, *v.AwsRegion)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.NetworkTelemetry_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.Health != nil {
+		s.WriteStruct(schemas.NetworkTelemetry_Health)
+		v.Health.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegisteredGatewayArn != nil {
+		s.WriteString(schemas.NetworkTelemetry_RegisteredGatewayArn, *v.RegisteredGatewayArn)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.NetworkTelemetry_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.NetworkTelemetry_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.NetworkTelemetry_ResourceType, *v.ResourceType)
+	}
+}
+func (v *NetworkTelemetry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkTelemetry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkTelemetry_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.NetworkTelemetry_AccountId, v.AccountId)
+		case schemas.NetworkTelemetry_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.NetworkTelemetry_Address, v.Address)
+		case schemas.NetworkTelemetry_AwsRegion:
+			v.AwsRegion = new(string)
+			return d.ReadString(schemas.NetworkTelemetry_AwsRegion, v.AwsRegion)
+		case schemas.NetworkTelemetry_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.NetworkTelemetry_CoreNetworkId, v.CoreNetworkId)
+		case schemas.NetworkTelemetry_Health:
+			v.Health = &ConnectionHealth{}
+			return v.Health.Deserialize(d)
+		case schemas.NetworkTelemetry_RegisteredGatewayArn:
+			v.RegisteredGatewayArn = new(string)
+			return d.ReadString(schemas.NetworkTelemetry_RegisteredGatewayArn, v.RegisteredGatewayArn)
+		case schemas.NetworkTelemetry_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.NetworkTelemetry_ResourceArn, v.ResourceArn)
+		case schemas.NetworkTelemetry_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.NetworkTelemetry_ResourceId, v.ResourceId)
+		case schemas.NetworkTelemetry_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.NetworkTelemetry_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
+}
+
 // The status of an Amazon Web Services Organization and the accounts within that
 // organization.
 type OrganizationStatus struct {
@@ -1181,6 +3580,43 @@ type OrganizationStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OrganizationStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountStatusList(s, schemas.OrganizationStatus_AccountStatusList, v.AccountStatusList)
+	if v.OrganizationAwsServiceAccessStatus != nil {
+		s.WriteString(schemas.OrganizationStatus_OrganizationAwsServiceAccessStatus, *v.OrganizationAwsServiceAccessStatus)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.OrganizationStatus_OrganizationId, *v.OrganizationId)
+	}
+	if v.SLRDeploymentStatus != nil {
+		s.WriteString(schemas.OrganizationStatus_SLRDeploymentStatus, *v.SLRDeploymentStatus)
+	}
+}
+func (v *OrganizationStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationStatus_AccountStatusList:
+			return deserializeAccountStatusList(d, schemas.OrganizationStatus_AccountStatusList, &v.AccountStatusList)
+		case schemas.OrganizationStatus_OrganizationAwsServiceAccessStatus:
+			v.OrganizationAwsServiceAccessStatus = new(string)
+			return d.ReadString(schemas.OrganizationStatus_OrganizationAwsServiceAccessStatus, v.OrganizationAwsServiceAccessStatus)
+		case schemas.OrganizationStatus_OrganizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.OrganizationStatus_OrganizationId, v.OrganizationId)
+		case schemas.OrganizationStatus_SLRDeploymentStatus:
+			v.SLRDeploymentStatus = new(string)
+			return d.ReadString(schemas.OrganizationStatus_SLRDeploymentStatus, v.SLRDeploymentStatus)
+		}
+		return nil
+	})
+}
+
 // Describes a path component.
 type PathComponent struct {
 
@@ -1194,6 +3630,42 @@ type PathComponent struct {
 	Sequence *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PathComponent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PathComponent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PathComponent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationCidrBlock != nil {
+		s.WriteString(schemas.PathComponent_DestinationCidrBlock, *v.DestinationCidrBlock)
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.PathComponent_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Sequence != nil {
+		s.WriteInt32(schemas.PathComponent_Sequence, *v.Sequence)
+	}
+}
+func (v *PathComponent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PathComponent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PathComponent_DestinationCidrBlock:
+			v.DestinationCidrBlock = new(string)
+			return d.ReadString(schemas.PathComponent_DestinationCidrBlock, v.DestinationCidrBlock)
+		case schemas.PathComponent_Resource:
+			v.Resource = &NetworkResourceSummary{}
+			return v.Resource.Deserialize(d)
+		case schemas.PathComponent_Sequence:
+			v.Sequence = new(int32)
+			return d.ReadInt32(schemas.PathComponent_Sequence, v.Sequence)
+		}
+		return nil
+	})
 }
 
 // Describes a peering connection.
@@ -1235,6 +3707,90 @@ type Peering struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Peering) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Peering)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Peering) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkArn != nil {
+		s.WriteString(schemas.Peering_CoreNetworkArn, *v.CoreNetworkArn)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.Peering_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Peering_CreatedAt, *v.CreatedAt)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.Peering_EdgeLocation, *v.EdgeLocation)
+	}
+	serializePeeringErrorList(s, schemas.Peering_LastModificationErrors, v.LastModificationErrors)
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.Peering_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.PeeringId != nil {
+		s.WriteString(schemas.Peering_PeeringId, *v.PeeringId)
+	}
+	if v.PeeringType != "" {
+		s.WriteString(schemas.Peering_PeeringType, string(v.PeeringType))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.Peering_ResourceArn, *v.ResourceArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Peering_State, string(v.State))
+	}
+	serializeTagList(s, schemas.Peering_Tags, v.Tags)
+}
+func (v *Peering) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Peering, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Peering_CoreNetworkArn:
+			v.CoreNetworkArn = new(string)
+			return d.ReadString(schemas.Peering_CoreNetworkArn, v.CoreNetworkArn)
+		case schemas.Peering_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.Peering_CoreNetworkId, v.CoreNetworkId)
+		case schemas.Peering_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Peering_CreatedAt, v.CreatedAt)
+		case schemas.Peering_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.Peering_EdgeLocation, v.EdgeLocation)
+		case schemas.Peering_LastModificationErrors:
+			return deserializePeeringErrorList(d, schemas.Peering_LastModificationErrors, &v.LastModificationErrors)
+		case schemas.Peering_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.Peering_OwnerAccountId, v.OwnerAccountId)
+		case schemas.Peering_PeeringId:
+			v.PeeringId = new(string)
+			return d.ReadString(schemas.Peering_PeeringId, v.PeeringId)
+		case schemas.Peering_PeeringType:
+			var ev string
+			if err := d.ReadString(schemas.Peering_PeeringType, &ev); err != nil {
+				return err
+			}
+			v.PeeringType = PeeringType(ev)
+			return nil
+		case schemas.Peering_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.Peering_ResourceArn, v.ResourceArn)
+		case schemas.Peering_State:
+			var ev string
+			if err := d.ReadString(schemas.Peering_State, &ev); err != nil {
+				return err
+			}
+			v.State = PeeringState(ev)
+			return nil
+		case schemas.Peering_Tags:
+			return deserializeTagList(d, schemas.Peering_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes an error associated with a peering request.
 type PeeringError struct {
 
@@ -1256,6 +3812,58 @@ type PeeringError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PeeringError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PeeringError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PeeringError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.PeeringError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PeeringError_Message, *v.Message)
+	}
+	if v.MissingPermissionsContext != nil {
+		s.WriteStruct(schemas.PeeringError_MissingPermissionsContext)
+		v.MissingPermissionsContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.PeeringError_RequestId, *v.RequestId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PeeringError_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *PeeringError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PeeringError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PeeringError_Code:
+			var ev string
+			if err := d.ReadString(schemas.PeeringError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = PeeringErrorCode(ev)
+			return nil
+		case schemas.PeeringError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PeeringError_Message, v.Message)
+		case schemas.PeeringError_MissingPermissionsContext:
+			v.MissingPermissionsContext = &PermissionsErrorContext{}
+			return v.MissingPermissionsContext.Deserialize(d)
+		case schemas.PeeringError_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.PeeringError_RequestId, v.RequestId)
+		case schemas.PeeringError_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.PeeringError_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
+
 // Describes additional information about missing permissions.
 type PermissionsErrorContext struct {
 
@@ -1263,6 +3871,28 @@ type PermissionsErrorContext struct {
 	MissingPermission *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PermissionsErrorContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionsErrorContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionsErrorContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MissingPermission != nil {
+		s.WriteString(schemas.PermissionsErrorContext_MissingPermission, *v.MissingPermission)
+	}
+}
+func (v *PermissionsErrorContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionsErrorContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionsErrorContext_MissingPermission:
+			v.MissingPermission = new(string)
+			return d.ReadString(schemas.PermissionsErrorContext_MissingPermission, v.MissingPermission)
+		}
+		return nil
+	})
 }
 
 // Information about a prefix list association with a core network.
@@ -1278,6 +3908,40 @@ type PrefixListAssociation struct {
 	PrefixListArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrefixListAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrefixListAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrefixListAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.PrefixListAssociation_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PrefixListAlias != nil {
+		s.WriteString(schemas.PrefixListAssociation_PrefixListAlias, *v.PrefixListAlias)
+	}
+	if v.PrefixListArn != nil {
+		s.WriteString(schemas.PrefixListAssociation_PrefixListArn, *v.PrefixListArn)
+	}
+}
+func (v *PrefixListAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrefixListAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrefixListAssociation_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.PrefixListAssociation_CoreNetworkId, v.CoreNetworkId)
+		case schemas.PrefixListAssociation_PrefixListAlias:
+			v.PrefixListAlias = new(string)
+			return d.ReadString(schemas.PrefixListAssociation_PrefixListAlias, v.PrefixListAlias)
+		case schemas.PrefixListAssociation_PrefixListArn:
+			v.PrefixListArn = new(string)
+			return d.ReadString(schemas.PrefixListAssociation_PrefixListArn, v.PrefixListArn)
+		}
+		return nil
+	})
 }
 
 // Describes proposed changes to a network function group.
@@ -1296,6 +3960,37 @@ type ProposedNetworkFunctionGroupChange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProposedNetworkFunctionGroupChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProposedNetworkFunctionGroupChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProposedNetworkFunctionGroupChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentPolicyRuleNumber != nil {
+		s.WriteInt32(schemas.ProposedNetworkFunctionGroupChange_AttachmentPolicyRuleNumber, *v.AttachmentPolicyRuleNumber)
+	}
+	if v.NetworkFunctionGroupName != nil {
+		s.WriteString(schemas.ProposedNetworkFunctionGroupChange_NetworkFunctionGroupName, *v.NetworkFunctionGroupName)
+	}
+	serializeTagList(s, schemas.ProposedNetworkFunctionGroupChange_Tags, v.Tags)
+}
+func (v *ProposedNetworkFunctionGroupChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProposedNetworkFunctionGroupChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProposedNetworkFunctionGroupChange_AttachmentPolicyRuleNumber:
+			v.AttachmentPolicyRuleNumber = new(int32)
+			return d.ReadInt32(schemas.ProposedNetworkFunctionGroupChange_AttachmentPolicyRuleNumber, v.AttachmentPolicyRuleNumber)
+		case schemas.ProposedNetworkFunctionGroupChange_NetworkFunctionGroupName:
+			v.NetworkFunctionGroupName = new(string)
+			return d.ReadString(schemas.ProposedNetworkFunctionGroupChange_NetworkFunctionGroupName, v.NetworkFunctionGroupName)
+		case schemas.ProposedNetworkFunctionGroupChange_Tags:
+			return deserializeTagList(d, schemas.ProposedNetworkFunctionGroupChange_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes a proposed segment change. In some cases, the segment change must
 // first be evaluated and accepted.
 type ProposedSegmentChange struct {
@@ -1312,6 +4007,37 @@ type ProposedSegmentChange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProposedSegmentChange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProposedSegmentChange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProposedSegmentChange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentPolicyRuleNumber != nil {
+		s.WriteInt32(schemas.ProposedSegmentChange_AttachmentPolicyRuleNumber, *v.AttachmentPolicyRuleNumber)
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.ProposedSegmentChange_SegmentName, *v.SegmentName)
+	}
+	serializeTagList(s, schemas.ProposedSegmentChange_Tags, v.Tags)
+}
+func (v *ProposedSegmentChange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProposedSegmentChange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProposedSegmentChange_AttachmentPolicyRuleNumber:
+			v.AttachmentPolicyRuleNumber = new(int32)
+			return d.ReadInt32(schemas.ProposedSegmentChange_AttachmentPolicyRuleNumber, v.AttachmentPolicyRuleNumber)
+		case schemas.ProposedSegmentChange_SegmentName:
+			v.SegmentName = new(string)
+			return d.ReadString(schemas.ProposedSegmentChange_SegmentName, v.SegmentName)
+		case schemas.ProposedSegmentChange_Tags:
+			return deserializeTagList(d, schemas.ProposedSegmentChange_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes a resource relationship.
 type Relationship struct {
 
@@ -1322,6 +4048,34 @@ type Relationship struct {
 	To *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Relationship) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Relationship)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Relationship) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.From != nil {
+		s.WriteString(schemas.Relationship_From, *v.From)
+	}
+	if v.To != nil {
+		s.WriteString(schemas.Relationship_To, *v.To)
+	}
+}
+func (v *Relationship) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Relationship, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Relationship_From:
+			v.From = new(string)
+			return d.ReadString(schemas.Relationship_From, v.From)
+		case schemas.Relationship_To:
+			v.To = new(string)
+			return d.ReadString(schemas.Relationship_To, v.To)
+		}
+		return nil
+	})
 }
 
 // Describes a route analysis.
@@ -1363,6 +4117,98 @@ type RouteAnalysis struct {
 	UseMiddleboxes bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *RouteAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteAnalysis)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteAnalysis) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.RouteAnalysis_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ForwardPath != nil {
+		s.WriteStruct(schemas.RouteAnalysis_ForwardPath)
+		v.ForwardPath.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.RouteAnalysis_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.IncludeReturnPath != false {
+		s.WriteBool(schemas.RouteAnalysis_IncludeReturnPath, v.IncludeReturnPath)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.RouteAnalysis_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.ReturnPath != nil {
+		s.WriteStruct(schemas.RouteAnalysis_ReturnPath)
+		v.ReturnPath.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RouteAnalysisId != nil {
+		s.WriteString(schemas.RouteAnalysis_RouteAnalysisId, *v.RouteAnalysisId)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.RouteAnalysis_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.RouteAnalysis_StartTimestamp, *v.StartTimestamp)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RouteAnalysis_Status, string(v.Status))
+	}
+	if v.UseMiddleboxes != false {
+		s.WriteBool(schemas.RouteAnalysis_UseMiddleboxes, v.UseMiddleboxes)
+	}
+}
+func (v *RouteAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteAnalysis, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteAnalysis_Destination:
+			v.Destination = &RouteAnalysisEndpointOptions{}
+			return v.Destination.Deserialize(d)
+		case schemas.RouteAnalysis_ForwardPath:
+			v.ForwardPath = &RouteAnalysisPath{}
+			return v.ForwardPath.Deserialize(d)
+		case schemas.RouteAnalysis_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.RouteAnalysis_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.RouteAnalysis_IncludeReturnPath:
+			return d.ReadBool(schemas.RouteAnalysis_IncludeReturnPath, &v.IncludeReturnPath)
+		case schemas.RouteAnalysis_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.RouteAnalysis_OwnerAccountId, v.OwnerAccountId)
+		case schemas.RouteAnalysis_ReturnPath:
+			v.ReturnPath = &RouteAnalysisPath{}
+			return v.ReturnPath.Deserialize(d)
+		case schemas.RouteAnalysis_RouteAnalysisId:
+			v.RouteAnalysisId = new(string)
+			return d.ReadString(schemas.RouteAnalysis_RouteAnalysisId, v.RouteAnalysisId)
+		case schemas.RouteAnalysis_Source:
+			v.Source = &RouteAnalysisEndpointOptions{}
+			return v.Source.Deserialize(d)
+		case schemas.RouteAnalysis_StartTimestamp:
+			v.StartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RouteAnalysis_StartTimestamp, v.StartTimestamp)
+		case schemas.RouteAnalysis_Status:
+			var ev string
+			if err := d.ReadString(schemas.RouteAnalysis_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RouteAnalysisStatus(ev)
+			return nil
+		case schemas.RouteAnalysis_UseMiddleboxes:
+			return d.ReadBool(schemas.RouteAnalysis_UseMiddleboxes, &v.UseMiddleboxes)
+		}
+		return nil
+	})
 }
 
 // Describes the status of an analysis at completion.
@@ -1407,6 +4253,45 @@ type RouteAnalysisCompletion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RouteAnalysisCompletion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteAnalysisCompletion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteAnalysisCompletion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.RouteAnalysisCompletion_ReasonCode, string(v.ReasonCode))
+	}
+	serializeReasonContextMap(s, schemas.RouteAnalysisCompletion_ReasonContext, v.ReasonContext)
+	if v.ResultCode != "" {
+		s.WriteString(schemas.RouteAnalysisCompletion_ResultCode, string(v.ResultCode))
+	}
+}
+func (v *RouteAnalysisCompletion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteAnalysisCompletion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteAnalysisCompletion_ReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.RouteAnalysisCompletion_ReasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = RouteAnalysisCompletionReasonCode(ev)
+			return nil
+		case schemas.RouteAnalysisCompletion_ReasonContext:
+			return deserializeReasonContextMap(d, schemas.RouteAnalysisCompletion_ReasonContext, &v.ReasonContext)
+		case schemas.RouteAnalysisCompletion_ResultCode:
+			var ev string
+			if err := d.ReadString(schemas.RouteAnalysisCompletion_ResultCode, &ev); err != nil {
+				return err
+			}
+			v.ResultCode = RouteAnalysisCompletionResultCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a source or a destination.
 type RouteAnalysisEndpointOptions struct {
 
@@ -1422,6 +4307,40 @@ type RouteAnalysisEndpointOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RouteAnalysisEndpointOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteAnalysisEndpointOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteAnalysisEndpointOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteString(schemas.RouteAnalysisEndpointOptions_IpAddress, *v.IpAddress)
+	}
+	if v.TransitGatewayArn != nil {
+		s.WriteString(schemas.RouteAnalysisEndpointOptions_TransitGatewayArn, *v.TransitGatewayArn)
+	}
+	if v.TransitGatewayAttachmentArn != nil {
+		s.WriteString(schemas.RouteAnalysisEndpointOptions_TransitGatewayAttachmentArn, *v.TransitGatewayAttachmentArn)
+	}
+}
+func (v *RouteAnalysisEndpointOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteAnalysisEndpointOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteAnalysisEndpointOptions_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.RouteAnalysisEndpointOptions_IpAddress, v.IpAddress)
+		case schemas.RouteAnalysisEndpointOptions_TransitGatewayArn:
+			v.TransitGatewayArn = new(string)
+			return d.ReadString(schemas.RouteAnalysisEndpointOptions_TransitGatewayArn, v.TransitGatewayArn)
+		case schemas.RouteAnalysisEndpointOptions_TransitGatewayAttachmentArn:
+			v.TransitGatewayAttachmentArn = new(string)
+			return d.ReadString(schemas.RouteAnalysisEndpointOptions_TransitGatewayAttachmentArn, v.TransitGatewayAttachmentArn)
+		}
+		return nil
+	})
+}
+
 // Describes a source or a destination.
 type RouteAnalysisEndpointOptionsSpecification struct {
 
@@ -1434,6 +4353,34 @@ type RouteAnalysisEndpointOptionsSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RouteAnalysisEndpointOptionsSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteAnalysisEndpointOptionsSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteAnalysisEndpointOptionsSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteString(schemas.RouteAnalysisEndpointOptionsSpecification_IpAddress, *v.IpAddress)
+	}
+	if v.TransitGatewayAttachmentArn != nil {
+		s.WriteString(schemas.RouteAnalysisEndpointOptionsSpecification_TransitGatewayAttachmentArn, *v.TransitGatewayAttachmentArn)
+	}
+}
+func (v *RouteAnalysisEndpointOptionsSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteAnalysisEndpointOptionsSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteAnalysisEndpointOptionsSpecification_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.RouteAnalysisEndpointOptionsSpecification_IpAddress, v.IpAddress)
+		case schemas.RouteAnalysisEndpointOptionsSpecification_TransitGatewayAttachmentArn:
+			v.TransitGatewayAttachmentArn = new(string)
+			return d.ReadString(schemas.RouteAnalysisEndpointOptionsSpecification_TransitGatewayAttachmentArn, v.TransitGatewayAttachmentArn)
+		}
+		return nil
+	})
+}
+
 // Describes a route analysis path.
 type RouteAnalysisPath struct {
 
@@ -1444,6 +4391,33 @@ type RouteAnalysisPath struct {
 	Path []PathComponent
 
 	noSmithyDocumentSerde
+}
+
+func (v *RouteAnalysisPath) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteAnalysisPath)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteAnalysisPath) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionStatus != nil {
+		s.WriteStruct(schemas.RouteAnalysisPath_CompletionStatus)
+		v.CompletionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePathComponentList(s, schemas.RouteAnalysisPath_Path, v.Path)
+}
+func (v *RouteAnalysisPath) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteAnalysisPath, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteAnalysisPath_CompletionStatus:
+			v.CompletionStatus = &RouteAnalysisCompletion{}
+			return v.CompletionStatus.Deserialize(d)
+		case schemas.RouteAnalysisPath_Path:
+			return deserializePathComponentList(d, schemas.RouteAnalysisPath_Path, &v.Path)
+		}
+		return nil
+	})
 }
 
 // Describes a route table.
@@ -1462,6 +4436,44 @@ type RouteTableIdentifier struct {
 	TransitGatewayRouteTableArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RouteTableIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteTableIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteTableIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkNetworkFunctionGroup != nil {
+		s.WriteStruct(schemas.RouteTableIdentifier_CoreNetworkNetworkFunctionGroup)
+		v.CoreNetworkNetworkFunctionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CoreNetworkSegmentEdge != nil {
+		s.WriteStruct(schemas.RouteTableIdentifier_CoreNetworkSegmentEdge)
+		v.CoreNetworkSegmentEdge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransitGatewayRouteTableArn != nil {
+		s.WriteString(schemas.RouteTableIdentifier_TransitGatewayRouteTableArn, *v.TransitGatewayRouteTableArn)
+	}
+}
+func (v *RouteTableIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteTableIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteTableIdentifier_CoreNetworkNetworkFunctionGroup:
+			v.CoreNetworkNetworkFunctionGroup = &CoreNetworkNetworkFunctionGroupIdentifier{}
+			return v.CoreNetworkNetworkFunctionGroup.Deserialize(d)
+		case schemas.RouteTableIdentifier_CoreNetworkSegmentEdge:
+			v.CoreNetworkSegmentEdge = &CoreNetworkSegmentEdgeIdentifier{}
+			return v.CoreNetworkSegmentEdge.Deserialize(d)
+		case schemas.RouteTableIdentifier_TransitGatewayRouteTableArn:
+			v.TransitGatewayRouteTableArn = new(string)
+			return d.ReadString(schemas.RouteTableIdentifier_TransitGatewayRouteTableArn, v.TransitGatewayRouteTableArn)
+		}
+		return nil
+	})
 }
 
 // Information about the next hop for a route in the core network.
@@ -1488,6 +4500,58 @@ type RoutingInformationNextHop struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RoutingInformationNextHop) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingInformationNextHop)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingInformationNextHop) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkAttachmentId != nil {
+		s.WriteString(schemas.RoutingInformationNextHop_CoreNetworkAttachmentId, *v.CoreNetworkAttachmentId)
+	}
+	if v.EdgeLocation != nil {
+		s.WriteString(schemas.RoutingInformationNextHop_EdgeLocation, *v.EdgeLocation)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.RoutingInformationNextHop_IpAddress, *v.IpAddress)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.RoutingInformationNextHop_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.RoutingInformationNextHop_ResourceType, *v.ResourceType)
+	}
+	if v.SegmentName != nil {
+		s.WriteString(schemas.RoutingInformationNextHop_SegmentName, *v.SegmentName)
+	}
+}
+func (v *RoutingInformationNextHop) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingInformationNextHop, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingInformationNextHop_CoreNetworkAttachmentId:
+			v.CoreNetworkAttachmentId = new(string)
+			return d.ReadString(schemas.RoutingInformationNextHop_CoreNetworkAttachmentId, v.CoreNetworkAttachmentId)
+		case schemas.RoutingInformationNextHop_EdgeLocation:
+			v.EdgeLocation = new(string)
+			return d.ReadString(schemas.RoutingInformationNextHop_EdgeLocation, v.EdgeLocation)
+		case schemas.RoutingInformationNextHop_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.RoutingInformationNextHop_IpAddress, v.IpAddress)
+		case schemas.RoutingInformationNextHop_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.RoutingInformationNextHop_ResourceId, v.ResourceId)
+		case schemas.RoutingInformationNextHop_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.RoutingInformationNextHop_ResourceType, v.ResourceType)
+		case schemas.RoutingInformationNextHop_SegmentName:
+			v.SegmentName = new(string)
+			return d.ReadString(schemas.RoutingInformationNextHop_SegmentName, v.SegmentName)
+		}
+		return nil
+	})
+}
+
 // Information about a routing policy association.
 type RoutingPolicyAssociationDetail struct {
 
@@ -1498,6 +4562,28 @@ type RoutingPolicyAssociationDetail struct {
 	SharedSegments []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RoutingPolicyAssociationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RoutingPolicyAssociationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RoutingPolicyAssociationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConstrainedStringList(s, schemas.RoutingPolicyAssociationDetail_RoutingPolicyNames, v.RoutingPolicyNames)
+	serializeConstrainedStringList(s, schemas.RoutingPolicyAssociationDetail_SharedSegments, v.SharedSegments)
+}
+func (v *RoutingPolicyAssociationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RoutingPolicyAssociationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RoutingPolicyAssociationDetail_RoutingPolicyNames:
+			return deserializeConstrainedStringList(d, schemas.RoutingPolicyAssociationDetail_RoutingPolicyNames, &v.RoutingPolicyNames)
+		case schemas.RoutingPolicyAssociationDetail_SharedSegments:
+			return deserializeConstrainedStringList(d, schemas.RoutingPolicyAssociationDetail_SharedSegments, &v.SharedSegments)
+		}
+		return nil
+	})
 }
 
 // Describes the action that the service insertion will take for any segments
@@ -1529,6 +4615,58 @@ type ServiceInsertionAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceInsertionAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceInsertionAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceInsertionAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ServiceInsertionAction_Action, string(v.Action))
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.ServiceInsertionAction_Mode, string(v.Mode))
+	}
+	if v.Via != nil {
+		s.WriteStruct(schemas.ServiceInsertionAction_Via)
+		v.Via.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WhenSentTo != nil {
+		s.WriteStruct(schemas.ServiceInsertionAction_WhenSentTo)
+		v.WhenSentTo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ServiceInsertionAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceInsertionAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceInsertionAction_Action:
+			var ev string
+			if err := d.ReadString(schemas.ServiceInsertionAction_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = SegmentActionServiceInsertion(ev)
+			return nil
+		case schemas.ServiceInsertionAction_Mode:
+			var ev string
+			if err := d.ReadString(schemas.ServiceInsertionAction_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = SendViaMode(ev)
+			return nil
+		case schemas.ServiceInsertionAction_Via:
+			v.Via = &Via{}
+			return v.Via.Deserialize(d)
+		case schemas.ServiceInsertionAction_WhenSentTo:
+			v.WhenSentTo = &WhenSentTo{}
+			return v.WhenSentTo.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the segments associated with the service insertion action.
 type ServiceInsertionSegments struct {
 
@@ -1539,6 +4677,28 @@ type ServiceInsertionSegments struct {
 	SendVia []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceInsertionSegments) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceInsertionSegments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceInsertionSegments) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConstrainedStringList(s, schemas.ServiceInsertionSegments_SendTo, v.SendTo)
+	serializeConstrainedStringList(s, schemas.ServiceInsertionSegments_SendVia, v.SendVia)
+}
+func (v *ServiceInsertionSegments) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceInsertionSegments, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceInsertionSegments_SendTo:
+			return deserializeConstrainedStringList(d, schemas.ServiceInsertionSegments_SendTo, &v.SendTo)
+		case schemas.ServiceInsertionSegments_SendVia:
+			return deserializeConstrainedStringList(d, schemas.ServiceInsertionSegments_SendVia, &v.SendVia)
+		}
+		return nil
+	})
 }
 
 // Describes a site.
@@ -1571,6 +4731,73 @@ type Site struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Site) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Site)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Site) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Site_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Site_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.Site_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.Site_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SiteArn != nil {
+		s.WriteString(schemas.Site_SiteArn, *v.SiteArn)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.Site_SiteId, *v.SiteId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Site_State, string(v.State))
+	}
+	serializeTagList(s, schemas.Site_Tags, v.Tags)
+}
+func (v *Site) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Site, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Site_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Site_CreatedAt, v.CreatedAt)
+		case schemas.Site_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Site_Description, v.Description)
+		case schemas.Site_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.Site_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.Site_Location:
+			v.Location = &Location{}
+			return v.Location.Deserialize(d)
+		case schemas.Site_SiteArn:
+			v.SiteArn = new(string)
+			return d.ReadString(schemas.Site_SiteArn, v.SiteArn)
+		case schemas.Site_SiteId:
+			v.SiteId = new(string)
+			return d.ReadString(schemas.Site_SiteId, v.SiteId)
+		case schemas.Site_State:
+			var ev string
+			if err := d.ReadString(schemas.Site_State, &ev); err != nil {
+				return err
+			}
+			v.State = SiteState(ev)
+			return nil
+		case schemas.Site_Tags:
+			return deserializeTagList(d, schemas.Site_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Creates a site-to-site VPN attachment.
 type SiteToSiteVpnAttachment struct {
 
@@ -1581,6 +4808,36 @@ type SiteToSiteVpnAttachment struct {
 	VpnConnectionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SiteToSiteVpnAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SiteToSiteVpnAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SiteToSiteVpnAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attachment != nil {
+		s.WriteStruct(schemas.SiteToSiteVpnAttachment_Attachment)
+		v.Attachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpnConnectionArn != nil {
+		s.WriteString(schemas.SiteToSiteVpnAttachment_VpnConnectionArn, *v.VpnConnectionArn)
+	}
+}
+func (v *SiteToSiteVpnAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SiteToSiteVpnAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SiteToSiteVpnAttachment_Attachment:
+			v.Attachment = &Attachment{}
+			return v.Attachment.Deserialize(d)
+		case schemas.SiteToSiteVpnAttachment_VpnConnectionArn:
+			v.VpnConnectionArn = new(string)
+			return d.ReadString(schemas.SiteToSiteVpnAttachment_VpnConnectionArn, v.VpnConnectionArn)
+		}
+		return nil
+	})
 }
 
 // Describes a tag.
@@ -1597,6 +4854,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes a transit gateway Connect peer association.
@@ -1620,6 +4905,56 @@ type TransitGatewayConnectPeerAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransitGatewayConnectPeerAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransitGatewayConnectPeerAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransitGatewayConnectPeerAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.TransitGatewayConnectPeerAssociation_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.TransitGatewayConnectPeerAssociation_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.TransitGatewayConnectPeerAssociation_LinkId, *v.LinkId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.TransitGatewayConnectPeerAssociation_State, string(v.State))
+	}
+	if v.TransitGatewayConnectPeerArn != nil {
+		s.WriteString(schemas.TransitGatewayConnectPeerAssociation_TransitGatewayConnectPeerArn, *v.TransitGatewayConnectPeerArn)
+	}
+}
+func (v *TransitGatewayConnectPeerAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransitGatewayConnectPeerAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransitGatewayConnectPeerAssociation_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.TransitGatewayConnectPeerAssociation_DeviceId, v.DeviceId)
+		case schemas.TransitGatewayConnectPeerAssociation_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.TransitGatewayConnectPeerAssociation_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.TransitGatewayConnectPeerAssociation_LinkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.TransitGatewayConnectPeerAssociation_LinkId, v.LinkId)
+		case schemas.TransitGatewayConnectPeerAssociation_State:
+			var ev string
+			if err := d.ReadString(schemas.TransitGatewayConnectPeerAssociation_State, &ev); err != nil {
+				return err
+			}
+			v.State = TransitGatewayConnectPeerAssociationState(ev)
+			return nil
+		case schemas.TransitGatewayConnectPeerAssociation_TransitGatewayConnectPeerArn:
+			v.TransitGatewayConnectPeerArn = new(string)
+			return d.ReadString(schemas.TransitGatewayConnectPeerAssociation_TransitGatewayConnectPeerArn, v.TransitGatewayConnectPeerArn)
+		}
+		return nil
+	})
+}
+
 // Describes a transit gateway peering attachment.
 type TransitGatewayPeering struct {
 
@@ -1633,6 +4968,42 @@ type TransitGatewayPeering struct {
 	TransitGatewayPeeringAttachmentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TransitGatewayPeering) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransitGatewayPeering)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransitGatewayPeering) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Peering != nil {
+		s.WriteStruct(schemas.TransitGatewayPeering_Peering)
+		v.Peering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransitGatewayArn != nil {
+		s.WriteString(schemas.TransitGatewayPeering_TransitGatewayArn, *v.TransitGatewayArn)
+	}
+	if v.TransitGatewayPeeringAttachmentId != nil {
+		s.WriteString(schemas.TransitGatewayPeering_TransitGatewayPeeringAttachmentId, *v.TransitGatewayPeeringAttachmentId)
+	}
+}
+func (v *TransitGatewayPeering) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransitGatewayPeering, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransitGatewayPeering_Peering:
+			v.Peering = &Peering{}
+			return v.Peering.Deserialize(d)
+		case schemas.TransitGatewayPeering_TransitGatewayArn:
+			v.TransitGatewayArn = new(string)
+			return d.ReadString(schemas.TransitGatewayPeering_TransitGatewayArn, v.TransitGatewayArn)
+		case schemas.TransitGatewayPeering_TransitGatewayPeeringAttachmentId:
+			v.TransitGatewayPeeringAttachmentId = new(string)
+			return d.ReadString(schemas.TransitGatewayPeering_TransitGatewayPeeringAttachmentId, v.TransitGatewayPeeringAttachmentId)
+		}
+		return nil
+	})
 }
 
 // Describes the registration of a transit gateway to a global network.
@@ -1650,6 +5021,42 @@ type TransitGatewayRegistration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransitGatewayRegistration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransitGatewayRegistration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransitGatewayRegistration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.TransitGatewayRegistration_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.TransitGatewayRegistration_State)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransitGatewayArn != nil {
+		s.WriteString(schemas.TransitGatewayRegistration_TransitGatewayArn, *v.TransitGatewayArn)
+	}
+}
+func (v *TransitGatewayRegistration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransitGatewayRegistration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransitGatewayRegistration_GlobalNetworkId:
+			v.GlobalNetworkId = new(string)
+			return d.ReadString(schemas.TransitGatewayRegistration_GlobalNetworkId, v.GlobalNetworkId)
+		case schemas.TransitGatewayRegistration_State:
+			v.State = &TransitGatewayRegistrationStateReason{}
+			return v.State.Deserialize(d)
+		case schemas.TransitGatewayRegistration_TransitGatewayArn:
+			v.TransitGatewayArn = new(string)
+			return d.ReadString(schemas.TransitGatewayRegistration_TransitGatewayArn, v.TransitGatewayArn)
+		}
+		return nil
+	})
+}
+
 // Describes the status of a transit gateway registration.
 type TransitGatewayRegistrationStateReason struct {
 
@@ -1660,6 +5067,38 @@ type TransitGatewayRegistrationStateReason struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TransitGatewayRegistrationStateReason) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransitGatewayRegistrationStateReason)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransitGatewayRegistrationStateReason) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.TransitGatewayRegistrationStateReason_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TransitGatewayRegistrationStateReason_Message, *v.Message)
+	}
+}
+func (v *TransitGatewayRegistrationStateReason) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransitGatewayRegistrationStateReason, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransitGatewayRegistrationStateReason_Code:
+			var ev string
+			if err := d.ReadString(schemas.TransitGatewayRegistrationStateReason_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = TransitGatewayRegistrationState(ev)
+			return nil
+		case schemas.TransitGatewayRegistrationStateReason_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TransitGatewayRegistrationStateReason_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Describes a transit gateway route table attachment.
@@ -1680,6 +5119,42 @@ type TransitGatewayRouteTableAttachment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransitGatewayRouteTableAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransitGatewayRouteTableAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransitGatewayRouteTableAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attachment != nil {
+		s.WriteStruct(schemas.TransitGatewayRouteTableAttachment_Attachment)
+		v.Attachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PeeringId != nil {
+		s.WriteString(schemas.TransitGatewayRouteTableAttachment_PeeringId, *v.PeeringId)
+	}
+	if v.TransitGatewayRouteTableArn != nil {
+		s.WriteString(schemas.TransitGatewayRouteTableAttachment_TransitGatewayRouteTableArn, *v.TransitGatewayRouteTableArn)
+	}
+}
+func (v *TransitGatewayRouteTableAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransitGatewayRouteTableAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransitGatewayRouteTableAttachment_Attachment:
+			v.Attachment = &Attachment{}
+			return v.Attachment.Deserialize(d)
+		case schemas.TransitGatewayRouteTableAttachment_PeeringId:
+			v.PeeringId = new(string)
+			return d.ReadString(schemas.TransitGatewayRouteTableAttachment_PeeringId, v.PeeringId)
+		case schemas.TransitGatewayRouteTableAttachment_TransitGatewayRouteTableArn:
+			v.TransitGatewayRouteTableArn = new(string)
+			return d.ReadString(schemas.TransitGatewayRouteTableAttachment_TransitGatewayRouteTableArn, v.TransitGatewayRouteTableArn)
+		}
+		return nil
+	})
+}
+
 // Describes a validation exception for a field.
 type ValidationExceptionField struct {
 
@@ -1694,6 +5169,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
+		case schemas.ValidationExceptionField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The list of network function groups and edge overrides for the service
@@ -1711,6 +5214,28 @@ type Via struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Via) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Via)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Via) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkFunctionGroupList(s, schemas.Via_NetworkFunctionGroups, v.NetworkFunctionGroups)
+	serializeWithEdgeOverridesList(s, schemas.Via_WithEdgeOverrides, v.WithEdgeOverrides)
+}
+func (v *Via) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Via, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Via_NetworkFunctionGroups:
+			return deserializeNetworkFunctionGroupList(d, schemas.Via_NetworkFunctionGroups, &v.NetworkFunctionGroups)
+		case schemas.Via_WithEdgeOverrides:
+			return deserializeWithEdgeOverridesList(d, schemas.Via_WithEdgeOverrides, &v.WithEdgeOverrides)
+		}
+		return nil
+	})
+}
+
 // Describes a VPC attachment.
 type VpcAttachment struct {
 
@@ -1724,6 +5249,41 @@ type VpcAttachment struct {
 	SubnetArns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attachment != nil {
+		s.WriteStruct(schemas.VpcAttachment_Attachment)
+		v.Attachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.VpcAttachment_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSubnetArnList(s, schemas.VpcAttachment_SubnetArns, v.SubnetArns)
+}
+func (v *VpcAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcAttachment_Attachment:
+			v.Attachment = &Attachment{}
+			return v.Attachment.Deserialize(d)
+		case schemas.VpcAttachment_Options:
+			v.Options = &VpcOptions{}
+			return v.Options.Deserialize(d)
+		case schemas.VpcAttachment_SubnetArns:
+			return deserializeSubnetArnList(d, schemas.VpcAttachment_SubnetArns, &v.SubnetArns)
+		}
+		return nil
+	})
 }
 
 // Describes the VPC options.
@@ -1748,6 +5308,46 @@ type VpcOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplianceModeSupport != nil {
+		s.WriteBool(schemas.VpcOptions_ApplianceModeSupport, *v.ApplianceModeSupport)
+	}
+	if v.DnsSupport != nil {
+		s.WriteBool(schemas.VpcOptions_DnsSupport, *v.DnsSupport)
+	}
+	if v.Ipv6Support != nil {
+		s.WriteBool(schemas.VpcOptions_Ipv6Support, *v.Ipv6Support)
+	}
+	if v.SecurityGroupReferencingSupport != nil {
+		s.WriteBool(schemas.VpcOptions_SecurityGroupReferencingSupport, *v.SecurityGroupReferencingSupport)
+	}
+}
+func (v *VpcOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcOptions_ApplianceModeSupport:
+			v.ApplianceModeSupport = new(bool)
+			return d.ReadBool(schemas.VpcOptions_ApplianceModeSupport, v.ApplianceModeSupport)
+		case schemas.VpcOptions_DnsSupport:
+			v.DnsSupport = new(bool)
+			return d.ReadBool(schemas.VpcOptions_DnsSupport, v.DnsSupport)
+		case schemas.VpcOptions_Ipv6Support:
+			v.Ipv6Support = new(bool)
+			return d.ReadBool(schemas.VpcOptions_Ipv6Support, v.Ipv6Support)
+		case schemas.VpcOptions_SecurityGroupReferencingSupport:
+			v.SecurityGroupReferencingSupport = new(bool)
+			return d.ReadBool(schemas.VpcOptions_SecurityGroupReferencingSupport, v.SecurityGroupReferencingSupport)
+		}
+		return nil
+	})
+}
+
 // Displays a list of the destination segments. Used only when the service
 // insertion action is send-to .
 type WhenSentTo struct {
@@ -1756,6 +5356,25 @@ type WhenSentTo struct {
 	WhenSentToSegmentsList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhenSentTo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhenSentTo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhenSentTo) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWhenSentToSegmentsList(s, schemas.WhenSentTo_WhenSentToSegmentsList, v.WhenSentToSegmentsList)
+}
+func (v *WhenSentTo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhenSentTo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhenSentTo_WhenSentToSegmentsList:
+			return deserializeWhenSentToSegmentsList(d, schemas.WhenSentTo_WhenSentToSegmentsList, &v.WhenSentToSegmentsList)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

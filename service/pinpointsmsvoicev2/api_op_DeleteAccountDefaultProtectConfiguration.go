@@ -4,10 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the current account default protect configuration.
@@ -30,6 +29,15 @@ type DeleteAccountDefaultProtectConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountDefaultProtectConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountDefaultProtectConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountDefaultProtectConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DeleteAccountDefaultProtectConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the account default protect configuration.
@@ -48,74 +56,51 @@ type DeleteAccountDefaultProtectConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAccountDefaultProtectConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAccountDefaultProtectConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAccountDefaultProtectConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultProtectConfigurationArn != nil {
+		s.WriteString(schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationArn, *v.DefaultProtectConfigurationArn)
+	}
+	if v.DefaultProtectConfigurationId != nil {
+		s.WriteString(schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationId, *v.DefaultProtectConfigurationId)
+	}
+}
+func (v *DeleteAccountDefaultProtectConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAccountDefaultProtectConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationArn:
+			v.DefaultProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationArn, v.DefaultProtectConfigurationArn)
+		case schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationId:
+			v.DefaultProtectConfigurationId = new(string)
+			return d.ReadString(schemas.DeleteAccountDefaultProtectConfigurationResult_DefaultProtectConfigurationId, v.DefaultProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAccountDefaultProtectConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountDefaultProtectConfiguration, schemas.DeleteAccountDefaultProtectConfigurationRequest, schemas.DeleteAccountDefaultProtectConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteAccountDefaultProtectConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAccountDefaultProtectConfiguration, schemas.DeleteAccountDefaultProtectConfigurationRequest, schemas.DeleteAccountDefaultProtectConfigurationResult), output: &DeleteAccountDefaultProtectConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteAccountDefaultProtectConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAccountDefaultProtectConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccountDefaultProtectConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -130,22 +115,8 @@ func (c *Client) addOperationDeleteAccountDefaultProtectConfigurationMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteAccountDefaultProtectConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteAccountDefaultProtectConfiguration",
-	}
 }

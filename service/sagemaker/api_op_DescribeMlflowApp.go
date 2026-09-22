@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type DescribeMlflowAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMlflowAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMlflowAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMlflowAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeMlflowAppRequest_Arn, *v.Arn)
+	}
+}
+
 type DescribeMlflowAppOutput struct {
 
 	// Indicates whether this MLflow app is the default for the entire account.
@@ -57,6 +68,11 @@ type DescribeMlflowAppOutput struct {
 
 	// List of SageMaker Domain IDs for which this MLflow App is the default.
 	DefaultDomainIdList []string
+
+	// The ID of the Amazon Web Services KMS key used to encrypt the data at rest
+	// associated with the MLflow App. This field is absent if the MLflow App is not
+	// encrypted with a customer-managed key.
+	KmsKeyId *string
 
 	// Information about the user who created or modified a SageMaker resource.
 	LastModifiedBy *types.UserContext
@@ -93,77 +109,155 @@ type DescribeMlflowAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMlflowAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMlflowAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMlflowAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountDefaultStatus != "" {
+		s.WriteString(schemas.DescribeMlflowAppResponse_AccountDefaultStatus, string(v.AccountDefaultStatus))
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeMlflowAppResponse_Arn, *v.Arn)
+	}
+	if v.ArtifactStoreUri != nil {
+		s.WriteString(schemas.DescribeMlflowAppResponse_ArtifactStoreUri, *v.ArtifactStoreUri)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeMlflowAppResponse_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeMlflowAppResponse_CreationTime, *v.CreationTime)
+	}
+	serializeDefaultDomainIdList(s, schemas.DescribeMlflowAppResponse_DefaultDomainIdList, v.DefaultDomainIdList)
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DescribeMlflowAppResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeMlflowAppResponse_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeMlflowAppResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MaintenanceStatus != "" {
+		s.WriteString(schemas.DescribeMlflowAppResponse_MaintenanceStatus, string(v.MaintenanceStatus))
+	}
+	if v.MlflowVersion != nil {
+		s.WriteString(schemas.DescribeMlflowAppResponse_MlflowVersion, *v.MlflowVersion)
+	}
+	if v.ModelRegistrationMode != "" {
+		s.WriteString(schemas.DescribeMlflowAppResponse_ModelRegistrationMode, string(v.ModelRegistrationMode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeMlflowAppResponse_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeMlflowAppResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeMlflowAppResponse_Status, string(v.Status))
+	}
+	if v.WeeklyMaintenanceWindowStart != nil {
+		s.WriteString(schemas.DescribeMlflowAppResponse_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
+	}
+}
+func (v *DescribeMlflowAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMlflowAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMlflowAppResponse_AccountDefaultStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMlflowAppResponse_AccountDefaultStatus, &ev); err != nil {
+				return err
+			}
+			v.AccountDefaultStatus = types.AccountDefaultStatus(ev)
+			return nil
+		case schemas.DescribeMlflowAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeMlflowAppResponse_Arn, v.Arn)
+		case schemas.DescribeMlflowAppResponse_ArtifactStoreUri:
+			v.ArtifactStoreUri = new(string)
+			return d.ReadString(schemas.DescribeMlflowAppResponse_ArtifactStoreUri, v.ArtifactStoreUri)
+		case schemas.DescribeMlflowAppResponse_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeMlflowAppResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMlflowAppResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeMlflowAppResponse_DefaultDomainIdList:
+			return deserializeDefaultDomainIdList(d, schemas.DescribeMlflowAppResponse_DefaultDomainIdList, &v.DefaultDomainIdList)
+		case schemas.DescribeMlflowAppResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeMlflowAppResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.DescribeMlflowAppResponse_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeMlflowAppResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMlflowAppResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeMlflowAppResponse_MaintenanceStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMlflowAppResponse_MaintenanceStatus, &ev); err != nil {
+				return err
+			}
+			v.MaintenanceStatus = types.MaintenanceStatus(ev)
+			return nil
+		case schemas.DescribeMlflowAppResponse_MlflowVersion:
+			v.MlflowVersion = new(string)
+			return d.ReadString(schemas.DescribeMlflowAppResponse_MlflowVersion, v.MlflowVersion)
+		case schemas.DescribeMlflowAppResponse_ModelRegistrationMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMlflowAppResponse_ModelRegistrationMode, &ev); err != nil {
+				return err
+			}
+			v.ModelRegistrationMode = types.ModelRegistrationMode(ev)
+			return nil
+		case schemas.DescribeMlflowAppResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeMlflowAppResponse_Name, v.Name)
+		case schemas.DescribeMlflowAppResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeMlflowAppResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeMlflowAppResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMlflowAppResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MlflowAppStatus(ev)
+			return nil
+		case schemas.DescribeMlflowAppResponse_WeeklyMaintenanceWindowStart:
+			v.WeeklyMaintenanceWindowStart = new(string)
+			return d.ReadString(schemas.DescribeMlflowAppResponse_WeeklyMaintenanceWindowStart, v.WeeklyMaintenanceWindowStart)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMlflowAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMlflowApp, schemas.DescribeMlflowAppRequest, schemas.DescribeMlflowAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMlflowApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMlflowApp, schemas.DescribeMlflowAppRequest, schemas.DescribeMlflowAppResponse), output: &DescribeMlflowAppOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMlflowApp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeMlflowApp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeMlflowAppValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMlflowApp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +272,8 @@ func (c *Client) addOperationDescribeMlflowAppMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeMlflowApp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeMlflowApp",
-	}
 }

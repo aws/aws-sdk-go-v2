@@ -4,11 +4,10 @@ package backupgateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a backup gateway. After you create a gateway, you can associate it with
@@ -51,6 +50,47 @@ type CreateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationKey != nil {
+		s.WriteString(schemas.CreateGatewayInput_ActivationKey, *v.ActivationKey)
+	}
+	if v.GatewayDisplayName != nil {
+		s.WriteString(schemas.CreateGatewayInput_GatewayDisplayName, *v.GatewayDisplayName)
+	}
+	if v.GatewayType != "" {
+		s.WriteString(schemas.CreateGatewayInput_GatewayType, string(v.GatewayType))
+	}
+	serializeTags(s, schemas.CreateGatewayInput_Tags, v.Tags)
+}
+func (v *CreateGatewayInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGatewayInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGatewayInput_ActivationKey:
+			v.ActivationKey = new(string)
+			return d.ReadString(schemas.CreateGatewayInput_ActivationKey, v.ActivationKey)
+		case schemas.CreateGatewayInput_GatewayDisplayName:
+			v.GatewayDisplayName = new(string)
+			return d.ReadString(schemas.CreateGatewayInput_GatewayDisplayName, v.GatewayDisplayName)
+		case schemas.CreateGatewayInput_GatewayType:
+			var ev string
+			if err := d.ReadString(schemas.CreateGatewayInput_GatewayType, &ev); err != nil {
+				return err
+			}
+			v.GatewayType = types.GatewayType(ev)
+			return nil
+		case schemas.CreateGatewayInput_Tags:
+			return deserializeTags(d, schemas.CreateGatewayInput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateGatewayOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway you create.
@@ -62,77 +102,51 @@ type CreateGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.CreateGatewayOutput_GatewayArn, *v.GatewayArn)
+	}
+}
+func (v *CreateGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGatewayOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGatewayOutput_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.CreateGatewayOutput_GatewayArn, v.GatewayArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayInput, schemas.CreateGatewayOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayInput, schemas.CreateGatewayOutput), output: &CreateGatewayOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateGateway{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +161,8 @@ func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGateway",
-	}
 }

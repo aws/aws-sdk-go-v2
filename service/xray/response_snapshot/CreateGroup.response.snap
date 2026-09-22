@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Group":{"FilterExpression":"__FilterExpression__","GroupARN":"__GroupARN__","GroupName":"__GroupName__","InsightsConfiguration":{"InsightsEnabled":true,"NotificationsEnabled":true}}}

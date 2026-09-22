@@ -4,11 +4,10 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides information about a specific identity, including the identity's
@@ -38,6 +37,18 @@ type GetEmailIdentityInput struct {
 	EmailIdentity *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEmailIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.GetEmailIdentityRequest_EmailIdentity, *v.EmailIdentity)
+	}
 }
 
 // Details about an email identity.
@@ -109,77 +120,108 @@ type GetEmailIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.GetEmailIdentityResponse_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.DkimAttributes != nil {
+		s.WriteStruct(schemas.GetEmailIdentityResponse_DkimAttributes)
+		v.DkimAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FeedbackForwardingStatus != false {
+		s.WriteBool(schemas.GetEmailIdentityResponse_FeedbackForwardingStatus, v.FeedbackForwardingStatus)
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.GetEmailIdentityResponse_IdentityType, string(v.IdentityType))
+	}
+	if v.MailFromAttributes != nil {
+		s.WriteStruct(schemas.GetEmailIdentityResponse_MailFromAttributes)
+		v.MailFromAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePolicyMap(s, schemas.GetEmailIdentityResponse_Policies, v.Policies)
+	serializeTagList(s, schemas.GetEmailIdentityResponse_Tags, v.Tags)
+	if v.VerificationInfo != nil {
+		s.WriteStruct(schemas.GetEmailIdentityResponse_VerificationInfo)
+		v.VerificationInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VerificationStatus != "" {
+		s.WriteString(schemas.GetEmailIdentityResponse_VerificationStatus, string(v.VerificationStatus))
+	}
+	if v.VerifiedForSendingStatus != false {
+		s.WriteBool(schemas.GetEmailIdentityResponse_VerifiedForSendingStatus, v.VerifiedForSendingStatus)
+	}
+}
+func (v *GetEmailIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEmailIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEmailIdentityResponse_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.GetEmailIdentityResponse_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.GetEmailIdentityResponse_DkimAttributes:
+			v.DkimAttributes = &types.DkimAttributes{}
+			return v.DkimAttributes.Deserialize(d)
+		case schemas.GetEmailIdentityResponse_FeedbackForwardingStatus:
+			return d.ReadBool(schemas.GetEmailIdentityResponse_FeedbackForwardingStatus, &v.FeedbackForwardingStatus)
+		case schemas.GetEmailIdentityResponse_IdentityType:
+			var ev string
+			if err := d.ReadString(schemas.GetEmailIdentityResponse_IdentityType, &ev); err != nil {
+				return err
+			}
+			v.IdentityType = types.IdentityType(ev)
+			return nil
+		case schemas.GetEmailIdentityResponse_MailFromAttributes:
+			v.MailFromAttributes = &types.MailFromAttributes{}
+			return v.MailFromAttributes.Deserialize(d)
+		case schemas.GetEmailIdentityResponse_Policies:
+			return deserializePolicyMap(d, schemas.GetEmailIdentityResponse_Policies, &v.Policies)
+		case schemas.GetEmailIdentityResponse_Tags:
+			return deserializeTagList(d, schemas.GetEmailIdentityResponse_Tags, &v.Tags)
+		case schemas.GetEmailIdentityResponse_VerificationInfo:
+			v.VerificationInfo = &types.VerificationInfo{}
+			return v.VerificationInfo.Deserialize(d)
+		case schemas.GetEmailIdentityResponse_VerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetEmailIdentityResponse_VerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.VerificationStatus = types.VerificationStatus(ev)
+			return nil
+		case schemas.GetEmailIdentityResponse_VerifiedForSendingStatus:
+			return d.ReadBool(schemas.GetEmailIdentityResponse_VerifiedForSendingStatus, &v.VerifiedForSendingStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailIdentity, schemas.GetEmailIdentityRequest, schemas.GetEmailIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailIdentity, schemas.GetEmailIdentityRequest, schemas.GetEmailIdentityResponse), output: &GetEmailIdentityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEmailIdentity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEmailIdentity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEmailIdentityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEmailIdentity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +236,8 @@ func (c *Client) addOperationGetEmailIdentityMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEmailIdentity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEmailIdentity",
-	}
 }

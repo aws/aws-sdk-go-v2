@@ -5,10 +5,10 @@ package proton
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List provisioned resources for a service instance with details.
@@ -49,6 +49,40 @@ type ListServiceInstanceProvisionedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceInstanceProvisionedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceInstanceProvisionedResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceInstanceProvisionedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceInstanceProvisionedResourcesInput_nextToken, *v.NextToken)
+	}
+	if v.ServiceInstanceName != nil {
+		s.WriteString(schemas.ListServiceInstanceProvisionedResourcesInput_serviceInstanceName, *v.ServiceInstanceName)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.ListServiceInstanceProvisionedResourcesInput_serviceName, *v.ServiceName)
+	}
+}
+func (v *ListServiceInstanceProvisionedResourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceInstanceProvisionedResourcesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceInstanceProvisionedResourcesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceInstanceProvisionedResourcesInput_nextToken, v.NextToken)
+		case schemas.ListServiceInstanceProvisionedResourcesInput_serviceInstanceName:
+			v.ServiceInstanceName = new(string)
+			return d.ReadString(schemas.ListServiceInstanceProvisionedResourcesInput_serviceInstanceName, v.ServiceInstanceName)
+		case schemas.ListServiceInstanceProvisionedResourcesInput_serviceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.ListServiceInstanceProvisionedResourcesInput_serviceName, v.ServiceName)
+		}
+		return nil
+	})
+}
+
 type ListServiceInstanceProvisionedResourcesOutput struct {
 
 	// An array of provisioned resources for a service instance.
@@ -67,77 +101,51 @@ type ListServiceInstanceProvisionedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceInstanceProvisionedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceInstanceProvisionedResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceInstanceProvisionedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceInstanceProvisionedResourcesOutput_nextToken, *v.NextToken)
+	}
+	serializeProvisionedResourceList(s, schemas.ListServiceInstanceProvisionedResourcesOutput_provisionedResources, v.ProvisionedResources)
+}
+func (v *ListServiceInstanceProvisionedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceInstanceProvisionedResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceInstanceProvisionedResourcesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceInstanceProvisionedResourcesOutput_nextToken, v.NextToken)
+		case schemas.ListServiceInstanceProvisionedResourcesOutput_provisionedResources:
+			return deserializeProvisionedResourceList(d, schemas.ListServiceInstanceProvisionedResourcesOutput_provisionedResources, &v.ProvisionedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceInstanceProvisionedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceInstanceProvisionedResources, schemas.ListServiceInstanceProvisionedResourcesInput, schemas.ListServiceInstanceProvisionedResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListServiceInstanceProvisionedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceInstanceProvisionedResources, schemas.ListServiceInstanceProvisionedResourcesInput, schemas.ListServiceInstanceProvisionedResourcesOutput), output: &ListServiceInstanceProvisionedResourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListServiceInstanceProvisionedResources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceInstanceProvisionedResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListServiceInstanceProvisionedResourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceInstanceProvisionedResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +158,6 @@ func (c *Client) addOperationListServiceInstanceProvisionedResourcesMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +249,3 @@ type ListServiceInstanceProvisionedResourcesAPIClient interface {
 }
 
 var _ ListServiceInstanceProvisionedResourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListServiceInstanceProvisionedResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListServiceInstanceProvisionedResources",
-	}
-}

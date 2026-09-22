@@ -5,10 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Request a new sender ID that doesn't require registration.
@@ -34,7 +34,10 @@ type RequestSenderIdInput struct {
 	// This member is required.
 	IsoCountryCode *string
 
-	// The sender ID string to request.
+	// The sender ID string to request. The sender ID can be 1-11 alphanumeric
+	// characters including letters (A-Z, a-z), numbers (0-9), or hyphens (-). The
+	// sender ID must contain at least one letter and cannot start or end with a
+	// hyphen.
 	//
 	// This member is required.
 	SenderId *string
@@ -57,6 +60,29 @@ type RequestSenderIdInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestSenderIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestSenderIdRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestSenderIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RequestSenderIdRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.RequestSenderIdRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.RequestSenderIdRequest_IsoCountryCode, *v.IsoCountryCode)
+	}
+	serializeMessageTypeList(s, schemas.RequestSenderIdRequest_MessageTypes, v.MessageTypes)
+	if v.SenderId != nil {
+		s.WriteString(schemas.RequestSenderIdRequest_SenderId, *v.SenderId)
+	}
+	serializeTagList(s, schemas.RequestSenderIdRequest_Tags, v.Tags)
 }
 
 type RequestSenderIdOutput struct {
@@ -108,65 +134,72 @@ type RequestSenderIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestSenderIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestSenderIdResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestSenderIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.RequestSenderIdResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.RequestSenderIdResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	serializeMessageTypeList(s, schemas.RequestSenderIdResult_MessageTypes, v.MessageTypes)
+	if v.MonthlyLeasingPrice != nil {
+		s.WriteString(schemas.RequestSenderIdResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
+	}
+	s.WriteBool(schemas.RequestSenderIdResult_Registered, v.Registered)
+	if v.SenderId != nil {
+		s.WriteString(schemas.RequestSenderIdResult_SenderId, *v.SenderId)
+	}
+	if v.SenderIdArn != nil {
+		s.WriteString(schemas.RequestSenderIdResult_SenderIdArn, *v.SenderIdArn)
+	}
+	serializeTagList(s, schemas.RequestSenderIdResult_Tags, v.Tags)
+}
+func (v *RequestSenderIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestSenderIdResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestSenderIdResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.RequestSenderIdResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.RequestSenderIdResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.RequestSenderIdResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.RequestSenderIdResult_MessageTypes:
+			return deserializeMessageTypeList(d, schemas.RequestSenderIdResult_MessageTypes, &v.MessageTypes)
+		case schemas.RequestSenderIdResult_MonthlyLeasingPrice:
+			v.MonthlyLeasingPrice = new(string)
+			return d.ReadString(schemas.RequestSenderIdResult_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
+		case schemas.RequestSenderIdResult_Registered:
+			return d.ReadBool(schemas.RequestSenderIdResult_Registered, &v.Registered)
+		case schemas.RequestSenderIdResult_SenderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.RequestSenderIdResult_SenderId, v.SenderId)
+		case schemas.RequestSenderIdResult_SenderIdArn:
+			v.SenderIdArn = new(string)
+			return d.ReadString(schemas.RequestSenderIdResult_SenderIdArn, v.SenderIdArn)
+		case schemas.RequestSenderIdResult_Tags:
+			return deserializeTagList(d, schemas.RequestSenderIdResult_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRequestSenderIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestSenderId, schemas.RequestSenderIdRequest, schemas.RequestSenderIdResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRequestSenderId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestSenderId, schemas.RequestSenderIdRequest, schemas.RequestSenderIdResult), output: &RequestSenderIdOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRequestSenderId{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RequestSenderId"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -176,12 +209,6 @@ func (c *Client) addOperationRequestSenderIdMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpRequestSenderIdValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRequestSenderId(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,12 +221,6 @@ func (c *Client) addOperationRequestSenderIdMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -239,12 +260,4 @@ func (m *idempotencyToken_initializeOpRequestSenderId) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opRequestSenderIdMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpRequestSenderId{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opRequestSenderId(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RequestSenderId",
-	}
 }

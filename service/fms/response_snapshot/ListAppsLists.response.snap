@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.ListAppsLists
+
+{"AppsLists":[{"AppsList":[{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"},{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"}],"ListArn":"__ListArn__","ListId":"__ListId__","ListName":"__ListName__"},{"AppsList":[{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"},{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"}],"ListArn":"__ListArn__","ListId":"__ListId__","ListName":"__ListName__"}],"NextToken":"__NextToken__"}

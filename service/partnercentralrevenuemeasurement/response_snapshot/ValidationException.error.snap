@@ -1,0 +1,6 @@
+400
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿f__typesValidationExceptioniFieldListŸ¿dCodevREQUIRED_FIELD_MISSINGgMessagek__Message__dNameh__Name__ÿ¿dCodevREQUIRED_FIELD_MISSINGgMessagek__Message__dNameh__Name__ÿÿgMessagek__Message__fReasonxREQUEST_VALIDATION_FAILEDÿ

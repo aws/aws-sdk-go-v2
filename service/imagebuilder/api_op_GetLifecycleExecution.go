@@ -4,15 +4,14 @@ package imagebuilder
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the runtime information that was logged for a specific runtime instance of
-// the lifecycle policy.
+// Retrieves the runtime information for a specific runtime instance of the
+// lifecycle policy.
 func (c *Client) GetLifecycleExecution(ctx context.Context, params *GetLifecycleExecutionInput, optFns ...func(*Options)) (*GetLifecycleExecutionOutput, error) {
 	if params == nil {
 		params = &GetLifecycleExecutionInput{}
@@ -30,13 +29,24 @@ func (c *Client) GetLifecycleExecution(ctx context.Context, params *GetLifecycle
 
 type GetLifecycleExecutionInput struct {
 
-	// Use the unique identifier for a runtime instance of the lifecycle policy to get
-	// runtime details.
+	// The unique identifier for a runtime instance of the lifecycle policy.
 	//
 	// This member is required.
 	LifecycleExecutionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLifecycleExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLifecycleExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLifecycleExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.GetLifecycleExecutionRequest_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
 }
 
 type GetLifecycleExecutionOutput struct {
@@ -50,77 +60,50 @@ type GetLifecycleExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLifecycleExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLifecycleExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLifecycleExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecution != nil {
+		s.WriteStruct(schemas.GetLifecycleExecutionResponse_lifecycleExecution)
+		v.LifecycleExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetLifecycleExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLifecycleExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLifecycleExecutionResponse_lifecycleExecution:
+			v.LifecycleExecution = &types.LifecycleExecution{}
+			return v.LifecycleExecution.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLifecycleExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLifecycleExecution, schemas.GetLifecycleExecutionRequest, schemas.GetLifecycleExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLifecycleExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLifecycleExecution, schemas.GetLifecycleExecutionRequest, schemas.GetLifecycleExecutionResponse), output: &GetLifecycleExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLifecycleExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLifecycleExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLifecycleExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLifecycleExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +118,8 @@ func (c *Client) addOperationGetLifecycleExecutionMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLifecycleExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLifecycleExecution",
-	}
 }

@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2 (FleetIQ)
@@ -23,11 +22,17 @@ import (
 // ensure that Amazon GameLift Servers FleetIQ can continue to perform instance
 // balancing activity. If successful, a GameServerGroup object is returned.
 //
+// Target tracking Auto Scaling policies on the Auto Scaling group cannot be
+// updated through the Amazon Web Services Management Console. Instead, use the
+// Amazon Elastic Compute Cloud Auto Scaling [PutScalingPolicy]PutScalingPolicy API action to update
+// these policies.
+//
 // # Learn more
 //
 // [Amazon GameLift Servers FleetIQ Guide]
 //
 // [Amazon GameLift Servers FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
+// [PutScalingPolicy]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PutScalingPolicy.html
 func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameServerGroupInput, optFns ...func(*Options)) (*UpdateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerGroupInput{}
@@ -104,6 +109,28 @@ type UpdateGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameServerGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameServerGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BalancingStrategy != "" {
+		s.WriteString(schemas.UpdateGameServerGroupInput_BalancingStrategy, string(v.BalancingStrategy))
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.UpdateGameServerGroupInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerProtectionPolicy != "" {
+		s.WriteString(schemas.UpdateGameServerGroupInput_GameServerProtectionPolicy, string(v.GameServerProtectionPolicy))
+	}
+	serializeInstanceDefinitions(s, schemas.UpdateGameServerGroupInput_InstanceDefinitions, v.InstanceDefinitions)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateGameServerGroupInput_RoleArn, *v.RoleArn)
+	}
+}
+
 type UpdateGameServerGroupOutput struct {
 
 	// An object that describes the game server group resource with updated
@@ -116,65 +143,44 @@ type UpdateGameServerGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGameServerGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGameServerGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGameServerGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroup != nil {
+		s.WriteStruct(schemas.UpdateGameServerGroupOutput_GameServerGroup)
+		v.GameServerGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateGameServerGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGameServerGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGameServerGroupOutput_GameServerGroup:
+			v.GameServerGroup = &types.GameServerGroup{}
+			return v.GameServerGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameServerGroup, schemas.UpdateGameServerGroupInput, schemas.UpdateGameServerGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGameServerGroup, schemas.UpdateGameServerGroupInput, schemas.UpdateGameServerGroupOutput), output: &UpdateGameServerGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateGameServerGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGameServerGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -184,12 +190,6 @@ func (c *Client) addOperationUpdateGameServerGroupMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpUpdateGameServerGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGameServerGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +204,8 @@ func (c *Client) addOperationUpdateGameServerGroupMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGameServerGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGameServerGroup",
-	}
 }

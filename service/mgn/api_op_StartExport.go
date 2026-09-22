@@ -4,11 +4,10 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Start export.
@@ -43,10 +42,47 @@ type StartExportInput struct {
 	// Start export request s3 bucket owner.
 	S3BucketOwner *string
 
-	// Start import request tags.
+	// Start export request tags.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.StartExportRequest_s3Bucket, *v.S3Bucket)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.StartExportRequest_s3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3Key != nil {
+		s.WriteString(schemas.StartExportRequest_s3Key, *v.S3Key)
+	}
+	serializeTagsMap(s, schemas.StartExportRequest_tags, v.Tags)
+}
+func (v *StartExportInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExportRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExportRequest_s3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.StartExportRequest_s3Bucket, v.S3Bucket)
+		case schemas.StartExportRequest_s3BucketOwner:
+			v.S3BucketOwner = new(string)
+			return d.ReadString(schemas.StartExportRequest_s3BucketOwner, v.S3BucketOwner)
+		case schemas.StartExportRequest_s3Key:
+			v.S3Key = new(string)
+			return d.ReadString(schemas.StartExportRequest_s3Key, v.S3Key)
+		case schemas.StartExportRequest_tags:
+			return deserializeTagsMap(d, schemas.StartExportRequest_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Start export response.
@@ -61,77 +97,50 @@ type StartExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportTask != nil {
+		s.WriteStruct(schemas.StartExportResponse_exportTask)
+		v.ExportTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartExportResponse_exportTask:
+			v.ExportTask = &types.ExportTask{}
+			return v.ExportTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExport, schemas.StartExportRequest, schemas.StartExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartExport, schemas.StartExportRequest, schemas.StartExportResponse), output: &StartExportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartExport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartExportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +155,8 @@ func (c *Client) addOperationStartExportMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartExport",
-	}
 }

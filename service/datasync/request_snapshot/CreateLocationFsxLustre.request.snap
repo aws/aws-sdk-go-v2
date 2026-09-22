@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.CreateLocationFsxLustre
+
+{"FsxFilesystemArn":"__FsxFilesystemArn__","SecurityGroupArns":["__Member__","__Member__"],"Subdirectory":"__Subdirectory__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

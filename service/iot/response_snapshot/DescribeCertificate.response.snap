@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"certificateDescription":{"caCertificateId":"__CaCertificateId__","certificateArn":"__CertificateArn__","certificateId":"__CertificateId__","certificateMode":"DEFAULT","certificatePem":"__CertificatePem__","creationDate":946684800,"customerVersion":1,"generationId":"__GenerationId__","lastModifiedDate":946684800,"ownedBy":"__OwnedBy__","previousOwnedBy":"__PreviousOwnedBy__","status":"ACTIVE","transferData":{"acceptDate":946684800,"rejectDate":946684800,"rejectReason":"__RejectReason__","transferDate":946684800,"transferMessage":"__TransferMessage__"},"validity":{"notAfter":946684800,"notBefore":946684800}}}

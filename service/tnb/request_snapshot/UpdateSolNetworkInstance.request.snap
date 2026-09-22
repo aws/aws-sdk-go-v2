@@ -1,0 +1,5 @@
+POST /sol/nslcm/v1/ns_instances/__NsInstanceId__/update
+
+Content-Type: application/json
+
+{"modifyVnfInfoData":{"vnfConfigurableProperties":"__Document__","vnfInstanceId":"__VnfInstanceId__"},"tags":{"key0":"__Value__"},"updateNs":{"additionalParamsForNs":"__Document__","nsdInfoId":"__NsdInfoId__"},"updateType":"MODIFY_VNF_INFORMATION"}

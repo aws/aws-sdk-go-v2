@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches evaluation forms in an Connect Customer instance, with optional
@@ -76,6 +75,34 @@ type SearchEvaluationFormsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchEvaluationFormsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchEvaluationFormsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchEvaluationFormsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchEvaluationFormsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchEvaluationFormsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchEvaluationFormsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchEvaluationFormsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchEvaluationFormsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchEvaluationFormsOutput struct {
 
 	// The total number of evaluation forms that matched your search query.
@@ -93,77 +120,57 @@ type SearchEvaluationFormsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchEvaluationFormsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchEvaluationFormsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchEvaluationFormsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchEvaluationFormsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	serializeEvaluationFormSearchSummaryList(s, schemas.SearchEvaluationFormsResponse_EvaluationFormSearchSummaryList, v.EvaluationFormSearchSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchEvaluationFormsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *SearchEvaluationFormsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchEvaluationFormsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchEvaluationFormsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchEvaluationFormsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchEvaluationFormsResponse_EvaluationFormSearchSummaryList:
+			return deserializeEvaluationFormSearchSummaryList(d, schemas.SearchEvaluationFormsResponse_EvaluationFormSearchSummaryList, &v.EvaluationFormSearchSummaryList)
+		case schemas.SearchEvaluationFormsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchEvaluationFormsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchEvaluationFormsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchEvaluationForms, schemas.SearchEvaluationFormsRequest, schemas.SearchEvaluationFormsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchEvaluationForms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchEvaluationForms, schemas.SearchEvaluationFormsRequest, schemas.SearchEvaluationFormsResponse), output: &SearchEvaluationFormsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchEvaluationForms{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchEvaluationForms"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchEvaluationFormsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchEvaluationForms(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +185,8 @@ func (c *Client) addOperationSearchEvaluationFormsMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSearchEvaluationForms(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchEvaluationForms",
-	}
 }

@@ -1,0 +1,5 @@
+POST /v1/feed/__Id__/disassociate
+
+Content-Type: application/json
+
+{"associatedResourceName":"__AssociatedResourceName__","dryRun":true}

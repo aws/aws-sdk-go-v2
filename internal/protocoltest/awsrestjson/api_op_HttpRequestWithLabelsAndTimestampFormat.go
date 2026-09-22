@@ -4,10 +4,9 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -54,6 +53,64 @@ type HttpRequestWithLabelsAndTimestampFormatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRequestWithLabelsAndTimestampFormatInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRequestWithLabelsAndTimestampFormatInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRequestWithLabelsAndTimestampFormatInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultFormat != nil {
+		s.WriteTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_defaultFormat, *v.DefaultFormat)
+	}
+	if v.MemberDateTime != nil {
+		s.WriteTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_memberDateTime, *v.MemberDateTime)
+	}
+	if v.MemberEpochSeconds != nil {
+		s.WriteTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_memberEpochSeconds, *v.MemberEpochSeconds)
+	}
+	if v.MemberHttpDate != nil {
+		s.WriteTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_memberHttpDate, *v.MemberHttpDate)
+	}
+	if v.TargetDateTime != nil {
+		s.WriteTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_targetDateTime, *v.TargetDateTime)
+	}
+	if v.TargetEpochSeconds != nil {
+		s.WriteTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_targetEpochSeconds, *v.TargetEpochSeconds)
+	}
+	if v.TargetHttpDate != nil {
+		s.WriteTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_targetHttpDate, *v.TargetHttpDate)
+	}
+}
+func (v *HttpRequestWithLabelsAndTimestampFormatInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRequestWithLabelsAndTimestampFormatInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRequestWithLabelsAndTimestampFormatInput_defaultFormat:
+			v.DefaultFormat = new(time.Time)
+			return d.ReadTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_defaultFormat, v.DefaultFormat)
+		case schemas.HttpRequestWithLabelsAndTimestampFormatInput_memberDateTime:
+			v.MemberDateTime = new(time.Time)
+			return d.ReadTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_memberDateTime, v.MemberDateTime)
+		case schemas.HttpRequestWithLabelsAndTimestampFormatInput_memberEpochSeconds:
+			v.MemberEpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_memberEpochSeconds, v.MemberEpochSeconds)
+		case schemas.HttpRequestWithLabelsAndTimestampFormatInput_memberHttpDate:
+			v.MemberHttpDate = new(time.Time)
+			return d.ReadTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_memberHttpDate, v.MemberHttpDate)
+		case schemas.HttpRequestWithLabelsAndTimestampFormatInput_targetDateTime:
+			v.TargetDateTime = new(time.Time)
+			return d.ReadTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_targetDateTime, v.TargetDateTime)
+		case schemas.HttpRequestWithLabelsAndTimestampFormatInput_targetEpochSeconds:
+			v.TargetEpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_targetEpochSeconds, v.TargetEpochSeconds)
+		case schemas.HttpRequestWithLabelsAndTimestampFormatInput_targetHttpDate:
+			v.TargetHttpDate = new(time.Time)
+			return d.ReadTime(schemas.HttpRequestWithLabelsAndTimestampFormatInput_targetHttpDate, v.TargetHttpDate)
+		}
+		return nil
+	})
+}
+
 type HttpRequestWithLabelsAndTimestampFormatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -61,77 +118,42 @@ type HttpRequestWithLabelsAndTimestampFormatOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRequestWithLabelsAndTimestampFormatOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRequestWithLabelsAndTimestampFormatOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *HttpRequestWithLabelsAndTimestampFormatOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpRequestWithLabelsAndTimestampFormat, schemas.HttpRequestWithLabelsAndTimestampFormatInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpRequestWithLabelsAndTimestampFormat, schemas.HttpRequestWithLabelsAndTimestampFormatInput, nil), output: &HttpRequestWithLabelsAndTimestampFormatOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpRequestWithLabelsAndTimestampFormat"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpHttpRequestWithLabelsAndTimestampFormatValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +168,8 @@ func (c *Client) addOperationHttpRequestWithLabelsAndTimestampFormatMiddlewares(
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opHttpRequestWithLabelsAndTimestampFormat(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "HttpRequestWithLabelsAndTimestampFormat",
-	}
 }

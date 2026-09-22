@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.DescribeWorkspaceImagePermissions
+
+{"ImageId":"__ImageId__","ImagePermissions":[{"SharedAccountId":"__SharedAccountId__"},{"SharedAccountId":"__SharedAccountId__"}],"NextToken":"__NextToken__"}

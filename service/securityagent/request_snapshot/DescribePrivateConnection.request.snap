@@ -1,0 +1,5 @@
+POST /DescribePrivateConnection
+
+Content-Type: application/json
+
+{"privateConnectionName":"__PrivateConnectionName__"}

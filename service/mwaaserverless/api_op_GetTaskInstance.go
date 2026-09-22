@@ -4,11 +4,10 @@ package mwaaserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -52,6 +51,24 @@ type GetTaskInstanceInput struct {
 	WorkflowArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTaskInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaskInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaskInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RunId != nil {
+		s.WriteString(schemas.GetTaskInstanceRequest_RunId, *v.RunId)
+	}
+	if v.TaskInstanceId != nil {
+		s.WriteString(schemas.GetTaskInstanceRequest_TaskInstanceId, *v.TaskInstanceId)
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.GetTaskInstanceRequest_WorkflowArn, *v.WorkflowArn)
+	}
 }
 
 type GetTaskInstanceOutput struct {
@@ -118,77 +135,133 @@ type GetTaskInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTaskInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTaskInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTaskInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttemptNumber != nil {
+		s.WriteInt32(schemas.GetTaskInstanceResponse_AttemptNumber, *v.AttemptNumber)
+	}
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.GetTaskInstanceResponse_DurationInSeconds, *v.DurationInSeconds)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetTaskInstanceResponse_EndedAt, *v.EndedAt)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetTaskInstanceResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.LogStream != nil {
+		s.WriteString(schemas.GetTaskInstanceResponse_LogStream, *v.LogStream)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.GetTaskInstanceResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.OperatorName != nil {
+		s.WriteString(schemas.GetTaskInstanceResponse_OperatorName, *v.OperatorName)
+	}
+	if v.RunId != nil {
+		s.WriteString(schemas.GetTaskInstanceResponse_RunId, *v.RunId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetTaskInstanceResponse_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTaskInstanceResponse_Status, string(v.Status))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetTaskInstanceResponse_TaskId, *v.TaskId)
+	}
+	if v.TaskInstanceId != nil {
+		s.WriteString(schemas.GetTaskInstanceResponse_TaskInstanceId, *v.TaskInstanceId)
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.GetTaskInstanceResponse_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.GetTaskInstanceResponse_WorkflowVersion, *v.WorkflowVersion)
+	}
+	serializeGenericMap(s, schemas.GetTaskInstanceResponse_Xcom, v.Xcom)
+}
+func (v *GetTaskInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTaskInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTaskInstanceResponse_AttemptNumber:
+			v.AttemptNumber = new(int32)
+			return d.ReadInt32(schemas.GetTaskInstanceResponse_AttemptNumber, v.AttemptNumber)
+		case schemas.GetTaskInstanceResponse_DurationInSeconds:
+			v.DurationInSeconds = new(int32)
+			return d.ReadInt32(schemas.GetTaskInstanceResponse_DurationInSeconds, v.DurationInSeconds)
+		case schemas.GetTaskInstanceResponse_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTaskInstanceResponse_EndedAt, v.EndedAt)
+		case schemas.GetTaskInstanceResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetTaskInstanceResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.GetTaskInstanceResponse_LogStream:
+			v.LogStream = new(string)
+			return d.ReadString(schemas.GetTaskInstanceResponse_LogStream, v.LogStream)
+		case schemas.GetTaskInstanceResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTaskInstanceResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.GetTaskInstanceResponse_OperatorName:
+			v.OperatorName = new(string)
+			return d.ReadString(schemas.GetTaskInstanceResponse_OperatorName, v.OperatorName)
+		case schemas.GetTaskInstanceResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.GetTaskInstanceResponse_RunId, v.RunId)
+		case schemas.GetTaskInstanceResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTaskInstanceResponse_StartedAt, v.StartedAt)
+		case schemas.GetTaskInstanceResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetTaskInstanceResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaskInstanceStatus(ev)
+			return nil
+		case schemas.GetTaskInstanceResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetTaskInstanceResponse_TaskId, v.TaskId)
+		case schemas.GetTaskInstanceResponse_TaskInstanceId:
+			v.TaskInstanceId = new(string)
+			return d.ReadString(schemas.GetTaskInstanceResponse_TaskInstanceId, v.TaskInstanceId)
+		case schemas.GetTaskInstanceResponse_WorkflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.GetTaskInstanceResponse_WorkflowArn, v.WorkflowArn)
+		case schemas.GetTaskInstanceResponse_WorkflowVersion:
+			v.WorkflowVersion = new(string)
+			return d.ReadString(schemas.GetTaskInstanceResponse_WorkflowVersion, v.WorkflowVersion)
+		case schemas.GetTaskInstanceResponse_Xcom:
+			return deserializeGenericMap(d, schemas.GetTaskInstanceResponse_Xcom, &v.Xcom)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTaskInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaskInstance, schemas.GetTaskInstanceRequest, schemas.GetTaskInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetTaskInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTaskInstance, schemas.GetTaskInstanceRequest, schemas.GetTaskInstanceResponse), output: &GetTaskInstanceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetTaskInstance{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTaskInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTaskInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTaskInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,22 +276,8 @@ func (c *Client) addOperationGetTaskInstanceMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTaskInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTaskInstance",
-	}
 }

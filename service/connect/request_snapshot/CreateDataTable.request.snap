@@ -1,0 +1,5 @@
+PUT /data-tables/__InstanceId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","Status":"PUBLISHED","Tags":{"key0":"__Value__"},"TimeZone":"__TimeZone__","ValueLockLevel":"NONE"}

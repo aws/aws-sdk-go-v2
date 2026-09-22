@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists assets for a license asset group.
@@ -48,6 +47,27 @@ type ListAssetsForLicenseAssetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetsForLicenseAssetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetsForLicenseAssetGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetsForLicenseAssetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetType != nil {
+		s.WriteString(schemas.ListAssetsForLicenseAssetGroupRequest_AssetType, *v.AssetType)
+	}
+	if v.LicenseAssetGroupArn != nil {
+		s.WriteString(schemas.ListAssetsForLicenseAssetGroupRequest_LicenseAssetGroupArn, *v.LicenseAssetGroupArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssetsForLicenseAssetGroupRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetsForLicenseAssetGroupRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAssetsForLicenseAssetGroupOutput struct {
 
 	// Assets.
@@ -62,77 +82,51 @@ type ListAssetsForLicenseAssetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssetsForLicenseAssetGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssetsForLicenseAssetGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssetsForLicenseAssetGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetList(s, schemas.ListAssetsForLicenseAssetGroupResponse_Assets, v.Assets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssetsForLicenseAssetGroupResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAssetsForLicenseAssetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssetsForLicenseAssetGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssetsForLicenseAssetGroupResponse_Assets:
+			return deserializeAssetList(d, schemas.ListAssetsForLicenseAssetGroupResponse_Assets, &v.Assets)
+		case schemas.ListAssetsForLicenseAssetGroupResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssetsForLicenseAssetGroupResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssetsForLicenseAssetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetsForLicenseAssetGroup, schemas.ListAssetsForLicenseAssetGroupRequest, schemas.ListAssetsForLicenseAssetGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssetsForLicenseAssetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssetsForLicenseAssetGroup, schemas.ListAssetsForLicenseAssetGroupRequest, schemas.ListAssetsForLicenseAssetGroupResponse), output: &ListAssetsForLicenseAssetGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAssetsForLicenseAssetGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssetsForLicenseAssetGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAssetsForLicenseAssetGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssetsForLicenseAssetGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +141,8 @@ func (c *Client) addOperationListAssetsForLicenseAssetGroupMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListAssetsForLicenseAssetGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAssetsForLicenseAssetGroup",
-	}
 }

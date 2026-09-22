@@ -4,10 +4,9 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a Lambda function definition, including its
@@ -35,6 +34,18 @@ type GetFunctionDefinitionInput struct {
 	FunctionDefinitionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFunctionDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionDefinitionId != nil {
+		s.WriteString(schemas.GetFunctionDefinitionRequest_FunctionDefinitionId, *v.FunctionDefinitionId)
+	}
 }
 
 type GetFunctionDefinitionOutput struct {
@@ -69,77 +80,87 @@ type GetFunctionDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFunctionDefinitionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetFunctionDefinitionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFunctionDefinitionResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.GetFunctionDefinitionResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.GetFunctionDefinitionResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.GetFunctionDefinitionResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetFunctionDefinitionResponse_Name, *v.Name)
+	}
+	serializeTags(s, schemas.GetFunctionDefinitionResponse_tags, v.Tags)
+}
+func (v *GetFunctionDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFunctionDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFunctionDefinitionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionResponse_Arn, v.Arn)
+		case schemas.GetFunctionDefinitionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetFunctionDefinitionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionResponse_Id, v.Id)
+		case schemas.GetFunctionDefinitionResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetFunctionDefinitionResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionResponse_LatestVersion, v.LatestVersion)
+		case schemas.GetFunctionDefinitionResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.GetFunctionDefinitionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFunctionDefinitionResponse_Name, v.Name)
+		case schemas.GetFunctionDefinitionResponse_tags:
+			return deserializeTags(d, schemas.GetFunctionDefinitionResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFunctionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionDefinition, schemas.GetFunctionDefinitionRequest, schemas.GetFunctionDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunctionDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionDefinition, schemas.GetFunctionDefinitionRequest, schemas.GetFunctionDefinitionResponse), output: &GetFunctionDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFunctionDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFunctionDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFunctionDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFunctionDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +175,8 @@ func (c *Client) addOperationGetFunctionDefinitionMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFunctionDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFunctionDefinition",
-	}
 }

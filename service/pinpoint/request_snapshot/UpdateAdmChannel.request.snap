@@ -1,0 +1,5 @@
+PUT /v1/apps/__ApplicationId__/channels/adm
+
+Content-Type: application/json
+
+{"ClientId":"__ClientId__","ClientSecret":"__ClientSecret__","Enabled":true}

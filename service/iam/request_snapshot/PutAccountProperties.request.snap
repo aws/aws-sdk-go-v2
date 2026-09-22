@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PutAccountProperties&Properties.entry.1.key=key0&Properties.entry.1.value=__Value__&Version=2010-05-08

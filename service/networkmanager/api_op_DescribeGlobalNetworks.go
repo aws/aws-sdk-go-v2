@@ -5,10 +5,10 @@ package networkmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes one or more global networks. By default, all global networks are
@@ -44,6 +44,22 @@ type DescribeGlobalNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalNetworksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalNetworksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlobalNetworkIdList(s, schemas.DescribeGlobalNetworksRequest_GlobalNetworkIds, v.GlobalNetworkIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeGlobalNetworksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGlobalNetworksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeGlobalNetworksOutput struct {
 
 	// Information about the global networks.
@@ -58,74 +74,48 @@ type DescribeGlobalNetworksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGlobalNetworksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGlobalNetworksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGlobalNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlobalNetworkList(s, schemas.DescribeGlobalNetworksResponse_GlobalNetworks, v.GlobalNetworks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeGlobalNetworksResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeGlobalNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGlobalNetworksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGlobalNetworksResponse_GlobalNetworks:
+			return deserializeGlobalNetworkList(d, schemas.DescribeGlobalNetworksResponse_GlobalNetworks, &v.GlobalNetworks)
+		case schemas.DescribeGlobalNetworksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeGlobalNetworksResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGlobalNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalNetworks, schemas.DescribeGlobalNetworksRequest, schemas.DescribeGlobalNetworksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGlobalNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGlobalNetworks, schemas.DescribeGlobalNetworksRequest, schemas.DescribeGlobalNetworksResponse), output: &DescribeGlobalNetworksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGlobalNetworks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeGlobalNetworks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGlobalNetworks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,12 +128,6 @@ func (c *Client) addOperationDescribeGlobalNetworksMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,11 +229,3 @@ type DescribeGlobalNetworksAPIClient interface {
 }
 
 var _ DescribeGlobalNetworksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeGlobalNetworks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeGlobalNetworks",
-	}
-}

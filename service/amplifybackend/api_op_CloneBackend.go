@@ -4,10 +4,9 @@ package amplifybackend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation clones an existing backend.
@@ -47,6 +46,24 @@ type CloneBackendInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloneBackendInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloneBackendRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloneBackendInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CloneBackendRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.CloneBackendRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.TargetEnvironmentName != nil {
+		s.WriteString(schemas.CloneBackendRequest_TargetEnvironmentName, *v.TargetEnvironmentName)
+	}
+}
+
 type CloneBackendOutput struct {
 
 	// The app ID.
@@ -73,77 +90,78 @@ type CloneBackendOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloneBackendOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloneBackendResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloneBackendOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CloneBackendResponse_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.CloneBackendResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.CloneBackendResponse_Error, *v.Error)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CloneBackendResponse_JobId, *v.JobId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.CloneBackendResponse_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.CloneBackendResponse_Status, *v.Status)
+	}
+}
+func (v *CloneBackendOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloneBackendResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloneBackendResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_AppId, v.AppId)
+		case schemas.CloneBackendResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.CloneBackendResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_Error, v.Error)
+		case schemas.CloneBackendResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_JobId, v.JobId)
+		case schemas.CloneBackendResponse_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_Operation, v.Operation)
+		case schemas.CloneBackendResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CloneBackendResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCloneBackendMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloneBackend, schemas.CloneBackendRequest, schemas.CloneBackendResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCloneBackend{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CloneBackend, schemas.CloneBackendRequest, schemas.CloneBackendResponse), output: &CloneBackendOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCloneBackend{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CloneBackend"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCloneBackendValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCloneBackend(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +176,8 @@ func (c *Client) addOperationCloneBackendMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCloneBackend(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CloneBackend",
-	}
 }

@@ -1,0 +1,3 @@
+GET /views/__InstanceId__?maxResults=1&nextToken=__NextToken__&type=CUSTOMER_MANAGED
+
+

@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -37,6 +36,18 @@ type StartDeleteMonitorDeploymentInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartDeleteMonitorDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeleteMonitorDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeleteMonitorDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.StartDeleteMonitorDeploymentRequest_Identifier, *v.Identifier)
+	}
 }
 
 // Placeholder documentation for StartDeleteMonitorDeploymentResponse
@@ -106,77 +117,143 @@ type StartDeleteMonitorDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDeleteMonitorDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDeleteMonitorDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDeleteMonitorDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartDeleteMonitorDeploymentResponse_CloudWatchAlarmTemplateGroupIds, v.CloudWatchAlarmTemplateGroupIds)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.StartDeleteMonitorDeploymentResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_Description, *v.Description)
+	}
+	if v.DiscoveryEntryPointArn != nil {
+		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_DiscoveryEntryPointArn, *v.DiscoveryEntryPointArn)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	serialize__listOf__stringMin7Max11PatternAws097(s, schemas.StartDeleteMonitorDeploymentResponse_EventBridgeRuleTemplateGroupIds, v.EventBridgeRuleTemplateGroupIds)
+	serializeFailedMediaResourceMap(s, schemas.StartDeleteMonitorDeploymentResponse_FailedMediaResourceMap, v.FailedMediaResourceMap)
+	if v.Id != nil {
+		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_Id, *v.Id)
+	}
+	if v.LastDiscoveredAt != nil {
+		s.WriteTime(schemas.StartDeleteMonitorDeploymentResponse_LastDiscoveredAt, *v.LastDiscoveredAt)
+	}
+	if v.LastSuccessfulMonitorDeployment != nil {
+		s.WriteStruct(schemas.StartDeleteMonitorDeploymentResponse_LastSuccessfulMonitorDeployment)
+		v.LastSuccessfulMonitorDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMediaResourceMap(s, schemas.StartDeleteMonitorDeploymentResponse_MediaResourceMap, v.MediaResourceMap)
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.StartDeleteMonitorDeploymentResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.MonitorChangesPendingDeployment != nil {
+		s.WriteBool(schemas.StartDeleteMonitorDeploymentResponse_MonitorChangesPendingDeployment, *v.MonitorChangesPendingDeployment)
+	}
+	if v.MonitorDeployment != nil {
+		s.WriteStruct(schemas.StartDeleteMonitorDeploymentResponse_MonitorDeployment)
+		v.MonitorDeployment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartDeleteMonitorDeploymentResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.StartDeleteMonitorDeploymentResponse_Tags, v.Tags)
+}
+func (v *StartDeleteMonitorDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDeleteMonitorDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDeleteMonitorDeploymentResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartDeleteMonitorDeploymentResponse_Arn, v.Arn)
+		case schemas.StartDeleteMonitorDeploymentResponse_CloudWatchAlarmTemplateGroupIds:
+			return deserialize__listOf__stringMin7Max11PatternAws097(d, schemas.StartDeleteMonitorDeploymentResponse_CloudWatchAlarmTemplateGroupIds, &v.CloudWatchAlarmTemplateGroupIds)
+		case schemas.StartDeleteMonitorDeploymentResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartDeleteMonitorDeploymentResponse_CreatedAt, v.CreatedAt)
+		case schemas.StartDeleteMonitorDeploymentResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StartDeleteMonitorDeploymentResponse_Description, v.Description)
+		case schemas.StartDeleteMonitorDeploymentResponse_DiscoveryEntryPointArn:
+			v.DiscoveryEntryPointArn = new(string)
+			return d.ReadString(schemas.StartDeleteMonitorDeploymentResponse_DiscoveryEntryPointArn, v.DiscoveryEntryPointArn)
+		case schemas.StartDeleteMonitorDeploymentResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.StartDeleteMonitorDeploymentResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.StartDeleteMonitorDeploymentResponse_EventBridgeRuleTemplateGroupIds:
+			return deserialize__listOf__stringMin7Max11PatternAws097(d, schemas.StartDeleteMonitorDeploymentResponse_EventBridgeRuleTemplateGroupIds, &v.EventBridgeRuleTemplateGroupIds)
+		case schemas.StartDeleteMonitorDeploymentResponse_FailedMediaResourceMap:
+			return deserializeFailedMediaResourceMap(d, schemas.StartDeleteMonitorDeploymentResponse_FailedMediaResourceMap, &v.FailedMediaResourceMap)
+		case schemas.StartDeleteMonitorDeploymentResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartDeleteMonitorDeploymentResponse_Id, v.Id)
+		case schemas.StartDeleteMonitorDeploymentResponse_LastDiscoveredAt:
+			v.LastDiscoveredAt = new(time.Time)
+			return d.ReadTime(schemas.StartDeleteMonitorDeploymentResponse_LastDiscoveredAt, v.LastDiscoveredAt)
+		case schemas.StartDeleteMonitorDeploymentResponse_LastSuccessfulMonitorDeployment:
+			v.LastSuccessfulMonitorDeployment = &types.SuccessfulMonitorDeployment{}
+			return v.LastSuccessfulMonitorDeployment.Deserialize(d)
+		case schemas.StartDeleteMonitorDeploymentResponse_MediaResourceMap:
+			return deserializeMediaResourceMap(d, schemas.StartDeleteMonitorDeploymentResponse_MediaResourceMap, &v.MediaResourceMap)
+		case schemas.StartDeleteMonitorDeploymentResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.StartDeleteMonitorDeploymentResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.StartDeleteMonitorDeploymentResponse_MonitorChangesPendingDeployment:
+			v.MonitorChangesPendingDeployment = new(bool)
+			return d.ReadBool(schemas.StartDeleteMonitorDeploymentResponse_MonitorChangesPendingDeployment, v.MonitorChangesPendingDeployment)
+		case schemas.StartDeleteMonitorDeploymentResponse_MonitorDeployment:
+			v.MonitorDeployment = &types.MonitorDeployment{}
+			return v.MonitorDeployment.Deserialize(d)
+		case schemas.StartDeleteMonitorDeploymentResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartDeleteMonitorDeploymentResponse_Name, v.Name)
+		case schemas.StartDeleteMonitorDeploymentResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartDeleteMonitorDeploymentResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SignalMapStatus(ev)
+			return nil
+		case schemas.StartDeleteMonitorDeploymentResponse_Tags:
+			return deserializeTagMap(d, schemas.StartDeleteMonitorDeploymentResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDeleteMonitorDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeleteMonitorDeployment, schemas.StartDeleteMonitorDeploymentRequest, schemas.StartDeleteMonitorDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDeleteMonitorDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDeleteMonitorDeployment, schemas.StartDeleteMonitorDeploymentRequest, schemas.StartDeleteMonitorDeploymentResponse), output: &StartDeleteMonitorDeploymentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDeleteMonitorDeployment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDeleteMonitorDeployment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartDeleteMonitorDeploymentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDeleteMonitorDeployment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,22 +268,8 @@ func (c *Client) addOperationStartDeleteMonitorDeploymentMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartDeleteMonitorDeployment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartDeleteMonitorDeployment",
-	}
 }

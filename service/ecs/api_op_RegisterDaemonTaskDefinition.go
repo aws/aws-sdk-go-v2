@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers a new daemon task definition from the supplied family and
@@ -64,9 +63,27 @@ type RegisterDaemonTaskDefinitionInput struct {
 	// container images from Amazon ECR or send container logs to CloudWatch.
 	ExecutionRoleArn *string
 
+	// The IPC namespace mode for the daemon. The valid values are none and shared .
+	// The default is none .
+	//
+	// If none is specified or no value is provided, the daemon runs with its own IPC
+	// namespace, isolated from other tasks. If shared is specified, the daemon joins
+	// the host IPC namespace, making it accessible to non-daemon tasks that use
+	// ipcMode: "host" or other daemons that use ipcMode: "shared" .
+	IpcMode types.DaemonIpcMode
+
 	// The amount of memory (in MiB) used by the daemon task. It can be expressed as
 	// an integer using MiB (for example, 1024 ).
 	Memory *string
+
+	// The PID namespace mode for the daemon. The valid values are none and shared .
+	// The default is none .
+	//
+	// If none is specified or no value is provided, the daemon runs with its own PID
+	// namespace, isolated from other tasks. If shared is specified, the daemon joins
+	// the host PID namespace, making it accessible to non-daemon tasks that use
+	// pidMode: "host" or other daemons that use pidMode: "shared" .
+	PidMode types.DaemonPidMode
 
 	// The metadata that you apply to the daemon task definition to help you
 	// categorize and organize them. Each tag consists of a key and an optional value.
@@ -108,6 +125,39 @@ type RegisterDaemonTaskDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDaemonTaskDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDaemonTaskDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDaemonTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDaemonContainerDefinitionList(s, schemas.RegisterDaemonTaskDefinitionRequest_containerDefinitions, v.ContainerDefinitions)
+	if v.Cpu != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_cpu, *v.Cpu)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Family != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_family, *v.Family)
+	}
+	if v.IpcMode != "" {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_ipcMode, string(v.IpcMode))
+	}
+	if v.Memory != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_memory, *v.Memory)
+	}
+	if v.PidMode != "" {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_pidMode, string(v.PidMode))
+	}
+	serializeTags(s, schemas.RegisterDaemonTaskDefinitionRequest_tags, v.Tags)
+	if v.TaskRoleArn != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionRequest_taskRoleArn, *v.TaskRoleArn)
+	}
+	serializeDaemonVolumeList(s, schemas.RegisterDaemonTaskDefinitionRequest_volumes, v.Volumes)
+}
+
 type RegisterDaemonTaskDefinitionOutput struct {
 
 	// The full Amazon Resource Name (ARN) of the registered daemon task definition.
@@ -119,77 +169,48 @@ type RegisterDaemonTaskDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterDaemonTaskDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterDaemonTaskDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterDaemonTaskDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DaemonTaskDefinitionArn != nil {
+		s.WriteString(schemas.RegisterDaemonTaskDefinitionResponse_daemonTaskDefinitionArn, *v.DaemonTaskDefinitionArn)
+	}
+}
+func (v *RegisterDaemonTaskDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterDaemonTaskDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterDaemonTaskDefinitionResponse_daemonTaskDefinitionArn:
+			v.DaemonTaskDefinitionArn = new(string)
+			return d.ReadString(schemas.RegisterDaemonTaskDefinitionResponse_daemonTaskDefinitionArn, v.DaemonTaskDefinitionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterDaemonTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDaemonTaskDefinition, schemas.RegisterDaemonTaskDefinitionRequest, schemas.RegisterDaemonTaskDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterDaemonTaskDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterDaemonTaskDefinition, schemas.RegisterDaemonTaskDefinitionRequest, schemas.RegisterDaemonTaskDefinitionResponse), output: &RegisterDaemonTaskDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterDaemonTaskDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterDaemonTaskDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterDaemonTaskDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterDaemonTaskDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +225,8 @@ func (c *Client) addOperationRegisterDaemonTaskDefinitionMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterDaemonTaskDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterDaemonTaskDefinition",
-	}
 }

@@ -4,11 +4,10 @@ package computeoptimizer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns idle resource recommendations. Compute Optimizer generates
@@ -66,6 +65,29 @@ type GetIdleRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdleRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdleRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdleRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetIdleRecommendationsRequest_accountIds, v.AccountIds)
+	serializeIdleRecommendationFilters(s, schemas.GetIdleRecommendationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetIdleRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetIdleRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrderBy != nil {
+		s.WriteStruct(schemas.GetIdleRecommendationsRequest_orderBy)
+		v.OrderBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceArns(s, schemas.GetIdleRecommendationsRequest_resourceArns, v.ResourceArns)
+}
+
 type GetIdleRecommendationsOutput struct {
 
 	// An array of objects that describe errors of the request.
@@ -83,77 +105,54 @@ type GetIdleRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdleRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdleRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdleRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdleRecommendationErrors(s, schemas.GetIdleRecommendationsResponse_errors, v.Errors)
+	serializeIdleRecommendations(s, schemas.GetIdleRecommendationsResponse_idleRecommendations, v.IdleRecommendations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetIdleRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetIdleRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdleRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdleRecommendationsResponse_errors:
+			return deserializeIdleRecommendationErrors(d, schemas.GetIdleRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetIdleRecommendationsResponse_idleRecommendations:
+			return deserializeIdleRecommendations(d, schemas.GetIdleRecommendationsResponse_idleRecommendations, &v.IdleRecommendations)
+		case schemas.GetIdleRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetIdleRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdleRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdleRecommendations, schemas.GetIdleRecommendationsRequest, schemas.GetIdleRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetIdleRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdleRecommendations, schemas.GetIdleRecommendationsRequest, schemas.GetIdleRecommendationsResponse), output: &GetIdleRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetIdleRecommendations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIdleRecommendations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdleRecommendations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +167,8 @@ func (c *Client) addOperationGetIdleRecommendationsMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIdleRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIdleRecommendations",
-	}
 }

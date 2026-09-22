@@ -15,6 +15,7 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	"github.com/aws/aws-sdk-go-v2/internal/timeouts"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -22,6 +23,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"io"
 	"net"
 	"net/http"
 	"sync/atomic"
@@ -256,9 +258,19 @@ func (c *Client) invokeOperation(
 		fn(&options)
 	}
 
+	setSafeEventStreamClientLogMode(&options, opID)
+
 	finalizeOperationRetryMaxAttempts(&options, *c)
 
 	finalizeClientEndpointResolverOptions(&options)
+
+	ctx = setLoggerContext(ctx, options, opID)
+
+	ctx = resolveServiceMetadata(ctx, options, opID)
+
+	if err := c.addCommonMiddlewares(stack, options, opID); err != nil {
+		return nil, metadata, err
+	}
 
 	for _, fn := range stackFns {
 		if err := fn(stack, options); err != nil {
@@ -325,6 +337,154 @@ func (c *Client) invokeOperation(
 	return result, metadata, err
 }
 
+func (c *Client) invokeEventStreamOperation(
+	ctx context.Context, opID string, params interface{}, optFns []func(*Options), stackFns ...func(*middleware.Stack, Options) error,
+) (
+	result interface{}, metadata middleware.Metadata, err error,
+) {
+	ctx = middleware.ClearStackValues(ctx)
+	ctx = middleware.WithServiceID(ctx, ServiceID)
+	ctx = middleware.WithOperationName(ctx, opID)
+
+	stack := middleware.NewStack(opID, smithyhttp.NewStackRequest)
+	options := c.options.Copy()
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	setSafeEventStreamClientLogMode(&options, opID)
+
+	finalizeOperationRetryMaxAttempts(&options, *c)
+
+	finalizeClientEndpointResolverOptions(&options)
+
+	ctx = setLoggerContext(ctx, options, opID)
+
+	ctx = resolveServiceMetadata(ctx, options, opID)
+
+	if err := c.addCommonMiddlewares(stack, options, opID); err != nil {
+		return nil, metadata, err
+	}
+
+	for _, fn := range stackFns {
+		if err := fn(stack, options); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	for _, fn := range options.APIOptions {
+		if err := fn(stack); err != nil {
+			return nil, metadata, err
+		}
+	}
+
+	ctx, err = withOperationMetrics(ctx, options.MeterProvider)
+	if err != nil {
+		return nil, metadata, err
+	}
+
+	tracer := operationTracer(options.TracerProvider)
+	spanName := fmt.Sprintf("%s.%s", ServiceID, opID)
+
+	ctx = tracing.WithOperationTracer(ctx, tracer)
+
+	ctx, span := tracer.StartSpan(ctx, spanName, func(o *tracing.SpanOptions) {
+		o.Kind = tracing.SpanKindClient
+		o.Properties.Set("rpc.system", "aws-api")
+		o.Properties.Set("rpc.method", opID)
+		o.Properties.Set("rpc.service", ServiceID)
+	})
+	endTimer := startMetricTimer(ctx, "client.call.duration")
+	defer endTimer()
+	defer span.End()
+
+	handler := smithyhttp.NewClientHandlerWithOptions(options.HTTPClient, func(o *smithyhttp.ClientHandler) {
+		o.Meter = options.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2")
+	})
+	decorated := middleware.DecorateHandler(handler, stack)
+	// create a channel that returns immediately as soon as the request to the server is made
+	results := make(chan PartialResult, 1)
+	ctx = context.WithValue(ctx, partialResultChan{}, results)
+	go func() {
+		_, _, asyncErr := decorated.Handle(ctx, params)
+		if asyncErr != nil {
+			span.SetProperty("exception.type", fmt.Sprintf("%T", asyncErr))
+			span.SetProperty("exception.message", asyncErr.Error())
+
+			var aerr smithy.APIError
+			if errors.As(asyncErr, &aerr) {
+				span.SetProperty("api.error_code", aerr.ErrorCode())
+				span.SetProperty("api.error_message", aerr.ErrorMessage())
+				span.SetProperty("api.error_fault", aerr.ErrorFault().String())
+			}
+
+			asyncErr = &smithy.OperationError{
+				ServiceID:     ServiceID,
+				OperationName: opID,
+				Err:           asyncErr,
+			}
+		}
+		span.SetProperty("error", asyncErr != nil)
+		if asyncErr == nil {
+			span.SetStatus(tracing.SpanStatusOK)
+		} else {
+			span.SetStatus(tracing.SpanStatusError)
+		}
+	}()
+	res := <-results
+	return res.Output, res.Metadata, res.Error
+}
+
+type partialResultChan struct {
+}
+
+type deserializeResult struct {
+	reader io.ReadCloser
+	err    error
+}
+
+type asyncEventStreamReader struct {
+	pipeReader *io.PipeReader
+	pipeWriter *io.PipeWriter
+}
+
+func newAsyncEventStreamReader(resultChan <-chan deserializeResult) *asyncEventStreamReader {
+	pipeReader, pipeWriter := io.Pipe()
+
+	reader := &asyncEventStreamReader{
+		pipeReader: pipeReader,
+		pipeWriter: pipeWriter,
+	}
+
+	// Start background copying
+	go func() {
+		for result := range resultChan {
+			if result.err != nil {
+				// consume the error, this can be retried
+				// and if we close the pipeline, it will prevent us
+				// from retrying
+				continue
+			}
+
+			// Copy response body to pipe
+			_, err := io.Copy(pipeWriter, result.reader)
+			pipeWriter.CloseWithError(err)
+		}
+	}()
+
+	return reader
+}
+
+// PartialResult represents a placeholder value to return
+// immediately when calling an event streaming operation. This contains no
+// meaningful result for the caller
+type PartialResult struct {
+	Output   any
+	Metadata middleware.Metadata
+	Error    error
+}
+
 type operationInputKey struct{}
 
 func setOperationInput(ctx context.Context, input interface{}) context.Context {
@@ -364,6 +524,43 @@ func addProtocolFinalizerMiddlewares(stack *middleware.Stack, options Options, o
 	}
 	return nil
 }
+
+func (c *Client) addCommonMiddlewares(stack *middleware.Stack, options Options, operation string) error {
+	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+		return err
+	}
+	if err := addProtocolFinalizerMiddlewares(stack, options, operation); err != nil {
+		return fmt.Errorf("add protocol finalizers: %v", err)
+	}
+	if err := addClientRequestID(stack); err != nil {
+		return err
+	}
+	if err := addRetry(stack, options, c); err != nil {
+		return err
+	}
+	if err := addRawResponseToMetadata(stack); err != nil {
+		return err
+	}
+	if err := addClientUserAgent(stack, options); err != nil {
+		return err
+	}
+	if err := addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
+	if err := addUserAgentRetryMode(stack, options); err != nil {
+		return err
+	}
+	if err := addRecursionDetection(stack); err != nil {
+		return err
+	}
+	if err := addInterceptBeforeRetryLoop(stack, options); err != nil {
+		return err
+	}
+	if err := addInterceptAttempt(stack, options); err != nil {
+		return err
+	}
+	return nil
+}
 func resolveAuthSchemeResolver(options *Options) {
 	if options.AuthSchemeResolver == nil {
 		options.AuthSchemeResolver = &defaultAuthSchemeResolver{}
@@ -384,30 +581,6 @@ func resolveAuthSchemes(options *Options) {
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
-type legacyEndpointContextSetter struct {
-	LegacyResolver EndpointResolver
-}
-
-func (*legacyEndpointContextSetter) ID() string {
-	return "legacyEndpointContextSetter"
-}
-
-func (m *legacyEndpointContextSetter) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.LegacyResolver != nil {
-		ctx = awsmiddleware.SetRequiresLegacyEndpoints(ctx, true)
-	}
-
-	return next.HandleInitialize(ctx, in)
-
-}
-func addlegacyEndpointContextSetter(stack *middleware.Stack, o Options) error {
-	return stack.Initialize.Add(&legacyEndpointContextSetter{
-		LegacyResolver: o.EndpointResolver,
-	}, middleware.Before)
-}
-
 func resolveDefaultLogger(o *Options) {
 	if o.Logger != nil {
 		return
@@ -415,8 +588,9 @@ func resolveDefaultLogger(o *Options) {
 	o.Logger = logging.Nop{}
 }
 
-func addSetLoggerMiddleware(stack *middleware.Stack, o Options) error {
-	return middleware.AddSetLoggerMiddleware(stack, o.Logger)
+func setLoggerContext(ctx context.Context, options Options, operation string) context.Context {
+	_ = operation
+	return middleware.SetLogger(ctx, options.Logger)
 }
 
 func setResolvedDefaultsMode(o *Options) {
@@ -437,16 +611,17 @@ func setResolvedDefaultsMode(o *Options) {
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	opts := Options{
-		Region:               cfg.Region,
-		DefaultsMode:         cfg.DefaultsMode,
-		RuntimeEnvironment:   cfg.RuntimeEnvironment,
-		HTTPClient:           cfg.HTTPClient,
-		Credentials:          cfg.Credentials,
-		APIOptions:           cfg.APIOptions,
-		Logger:               cfg.Logger,
-		ClientLogMode:        cfg.ClientLogMode,
-		AppID:                cfg.AppID,
-		AuthSchemePreference: cfg.AuthSchemePreference,
+		Region:                     cfg.Region,
+		DefaultsMode:               cfg.DefaultsMode,
+		RuntimeEnvironment:         cfg.RuntimeEnvironment,
+		HTTPClient:                 cfg.HTTPClient,
+		Credentials:                cfg.Credentials,
+		APIOptions:                 cfg.APIOptions,
+		Logger:                     cfg.Logger,
+		ClientLogMode:              cfg.ClientLogMode,
+		AppID:                      cfg.AppID,
+		DisableClockSkewCorrection: cfg.DisableClockSkewCorrection,
+		AuthSchemePreference:       cfg.AuthSchemePreference,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -492,6 +667,12 @@ func resolveHTTPClient(o *Options) {
 				transport.TLSHandshakeTimeout = tlsHandshakeTimeout
 			}
 		})
+	}
+
+	if _, ok := buildable.GetReadTimeout(); !ok {
+		if timeout, ok := timeouts.GetServiceReadTimeout(ServiceID); ok {
+			buildable = buildable.WithReadTimeout(timeout)
+		}
 	}
 
 	o.HTTPClient = buildable
@@ -635,40 +816,14 @@ func addClientRequestID(stack *middleware.Stack) error {
 	return stack.Build.Add(&awsmiddleware.ClientRequestID{}, middleware.After)
 }
 
-func addComputeContentLength(stack *middleware.Stack) error {
-	return stack.Build.Add(&smithyhttp.ComputeContentLength{}, middleware.After)
-}
-
 func addRawResponseToMetadata(stack *middleware.Stack) error {
 	return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
 }
 
-func addRecordResponseTiming(stack *middleware.Stack) error {
-	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
-}
-
-func addSpanRetryLoop(stack *middleware.Stack, options Options) error {
-	return stack.Finalize.Insert(&spanRetryLoop{options: options}, "Retry", middleware.Before)
-}
-
-type spanRetryLoop struct {
-	options Options
-}
-
-func (*spanRetryLoop) ID() string {
-	return "spanRetryLoop"
-}
-
-func (m *spanRetryLoop) HandleFinalize(
-	ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler,
-) (
-	middleware.FinalizeOutput, middleware.Metadata, error,
-) {
-	tracer := operationTracer(m.options.TracerProvider)
-	ctx, span := tracer.StartSpan(ctx, "RetryLoop")
-	defer span.End()
-
-	return next.HandleFinalize(ctx, in)
+func addRecordResponseTiming(stack *middleware.Stack, options Options) error {
+	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{
+		DisableClockSkewCorrection: options.DisableClockSkewCorrection,
+	}, middleware.After)
 }
 func addStreamingEventsPayload(stack *middleware.Stack) error {
 	return stack.Finalize.Add(&v4.StreamingEventsPayload{}, middleware.Before)
@@ -715,11 +870,9 @@ func addRetry(stack *middleware.Stack, o Options, c *Client) error {
 		m.LogAttempts = o.ClientLogMode.IsRetries()
 		m.OperationMeter = o.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2")
 		m.ClientSkew = c.timeOffset
+		m.DisableClockSkewCorrection = o.DisableClockSkewCorrection
 	})
 	if err := stack.Finalize.Insert(attempt, "ResolveAuthScheme", middleware.Before); err != nil {
-		return err
-	}
-	if err := stack.Finalize.Insert(&retry.MetricsHeader{}, attempt.ID(), middleware.After); err != nil {
 		return err
 	}
 	return nil
@@ -774,35 +927,21 @@ func addUserAgentRetryMode(stack *middleware.Stack, options Options) error {
 	return nil
 }
 
-type setCredentialSourceMiddleware struct {
-	ua      *awsmiddleware.RequestUserAgent
-	options Options
-}
-
-func (m setCredentialSourceMiddleware) ID() string { return "SetCredentialSourceMiddleware" }
-
-func (m setCredentialSourceMiddleware) HandleBuild(ctx context.Context, in middleware.BuildInput, next middleware.BuildHandler) (
-	out middleware.BuildOutput, metadata middleware.Metadata, err error,
-) {
-	asProviderSource, ok := m.options.Credentials.(aws.CredentialProviderSource)
-	if !ok {
-		return next.HandleBuild(ctx, in)
-	}
-	providerSources := asProviderSource.ProviderSources()
-	for _, source := range providerSources {
-		m.ua.AddCredentialsSource(source)
-	}
-	return next.HandleBuild(ctx, in)
-}
-
 func addCredentialSource(stack *middleware.Stack, options Options) error {
 	ua, err := getOrAddRequestUserAgent(stack)
 	if err != nil {
 		return err
 	}
 
-	mw := setCredentialSourceMiddleware{ua: ua, options: options}
-	return stack.Build.Insert(&mw, "UserAgent", middleware.Before)
+	asProviderSource, ok := options.Credentials.(aws.CredentialProviderSource)
+	if !ok {
+		return nil
+	}
+
+	for _, source := range asProviderSource.ProviderSources() {
+		ua.AddCredentialsSource(source)
+	}
+	return nil
 }
 
 func resolveTracerProvider(options *Options) {
@@ -815,6 +954,18 @@ func resolveMeterProvider(options *Options) {
 	if options.MeterProvider == nil {
 		options.MeterProvider = metrics.NopMeterProvider{}
 	}
+}
+
+func resolveServiceMetadata(ctx context.Context, options Options, operation string) context.Context {
+	ctx = awsmiddleware.SetServiceID(ctx, ServiceID)
+	if options.Region != "" {
+		ctx = awsmiddleware.SetRegion(ctx, options.Region)
+	}
+	ctx = awsmiddleware.SetOperationName(ctx, operation)
+	if options.EndpointResolver != nil {
+		ctx = awsmiddleware.SetRequiresLegacyEndpoints(ctx, true)
+	}
+	return ctx
 }
 
 func addRecursionDetection(stack *middleware.Stack) error {

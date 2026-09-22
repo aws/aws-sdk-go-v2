@@ -4,10 +4,9 @@ package ram
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes a managed permission from a resource share. Permission changes take
@@ -64,6 +63,24 @@ type DisassociateResourceSharePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResourceSharePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResourceSharePermissionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResourceSharePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateResourceSharePermissionRequest_clientToken, *v.ClientToken)
+	}
+	if v.PermissionArn != nil {
+		s.WriteString(schemas.DisassociateResourceSharePermissionRequest_permissionArn, *v.PermissionArn)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.DisassociateResourceSharePermissionRequest_resourceShareArn, *v.ResourceShareArn)
+	}
+}
+
 type DisassociateResourceSharePermissionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -82,77 +99,54 @@ type DisassociateResourceSharePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResourceSharePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResourceSharePermissionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResourceSharePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateResourceSharePermissionResponse_clientToken, *v.ClientToken)
+	}
+	if v.ReturnValue != nil {
+		s.WriteBool(schemas.DisassociateResourceSharePermissionResponse_returnValue, *v.ReturnValue)
+	}
+}
+func (v *DisassociateResourceSharePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateResourceSharePermissionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateResourceSharePermissionResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DisassociateResourceSharePermissionResponse_clientToken, v.ClientToken)
+		case schemas.DisassociateResourceSharePermissionResponse_returnValue:
+			v.ReturnValue = new(bool)
+			return d.ReadBool(schemas.DisassociateResourceSharePermissionResponse_returnValue, v.ReturnValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateResourceSharePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResourceSharePermission, schemas.DisassociateResourceSharePermissionRequest, schemas.DisassociateResourceSharePermissionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateResourceSharePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResourceSharePermission, schemas.DisassociateResourceSharePermissionRequest, schemas.DisassociateResourceSharePermissionResponse), output: &DisassociateResourceSharePermissionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateResourceSharePermission{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateResourceSharePermission"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociateResourceSharePermissionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateResourceSharePermission(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +161,8 @@ func (c *Client) addOperationDisassociateResourceSharePermissionMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociateResourceSharePermission(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateResourceSharePermission",
-	}
 }

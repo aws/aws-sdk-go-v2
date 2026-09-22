@@ -4,11 +4,10 @@ package appmesh
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appmesh/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes an existing virtual router.
@@ -49,6 +48,40 @@ type DescribeVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVirtualRouterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeshName != nil {
+		s.WriteString(schemas.DescribeVirtualRouterInput_meshName, *v.MeshName)
+	}
+	if v.MeshOwner != nil {
+		s.WriteString(schemas.DescribeVirtualRouterInput_meshOwner, *v.MeshOwner)
+	}
+	if v.VirtualRouterName != nil {
+		s.WriteString(schemas.DescribeVirtualRouterInput_virtualRouterName, *v.VirtualRouterName)
+	}
+}
+func (v *DescribeVirtualRouterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVirtualRouterInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVirtualRouterInput_meshName:
+			v.MeshName = new(string)
+			return d.ReadString(schemas.DescribeVirtualRouterInput_meshName, v.MeshName)
+		case schemas.DescribeVirtualRouterInput_meshOwner:
+			v.MeshOwner = new(string)
+			return d.ReadString(schemas.DescribeVirtualRouterInput_meshOwner, v.MeshOwner)
+		case schemas.DescribeVirtualRouterInput_virtualRouterName:
+			v.VirtualRouterName = new(string)
+			return d.ReadString(schemas.DescribeVirtualRouterInput_virtualRouterName, v.VirtualRouterName)
+		}
+		return nil
+	})
+}
+
 type DescribeVirtualRouterOutput struct {
 
 	// The full description of your virtual router.
@@ -62,77 +95,50 @@ type DescribeVirtualRouterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVirtualRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVirtualRouterOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVirtualRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualRouter != nil {
+		s.WriteStruct(schemas.DescribeVirtualRouterOutput_virtualRouter)
+		v.VirtualRouter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeVirtualRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVirtualRouterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVirtualRouterOutput_virtualRouter:
+			v.VirtualRouter = &types.VirtualRouterData{}
+			return v.VirtualRouter.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVirtualRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualRouter, schemas.DescribeVirtualRouterInput, schemas.DescribeVirtualRouterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVirtualRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVirtualRouter, schemas.DescribeVirtualRouterInput, schemas.DescribeVirtualRouterOutput), output: &DescribeVirtualRouterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVirtualRouter{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeVirtualRouter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeVirtualRouterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVirtualRouter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +153,8 @@ func (c *Client) addOperationDescribeVirtualRouterMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeVirtualRouter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeVirtualRouter",
-	}
 }

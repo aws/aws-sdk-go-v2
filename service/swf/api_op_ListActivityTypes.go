@@ -5,10 +5,10 @@ package swf
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about all activities registered in the specified domain
@@ -87,6 +87,33 @@ type ListActivityTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActivityTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActivityTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActivityTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.ListActivityTypesInput_domain, *v.Domain)
+	}
+	if v.MaximumPageSize != 0 {
+		s.WriteInt32(schemas.ListActivityTypesInput_maximumPageSize, v.MaximumPageSize)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListActivityTypesInput_name, *v.Name)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListActivityTypesInput_nextPageToken, *v.NextPageToken)
+	}
+	if v.RegistrationStatus != "" {
+		s.WriteString(schemas.ListActivityTypesInput_registrationStatus, string(v.RegistrationStatus))
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.ListActivityTypesInput_reverseOrder, v.ReverseOrder)
+	}
+}
+
 // Contains a paginated list of activity type information structures.
 type ListActivityTypesOutput struct {
 
@@ -109,77 +136,51 @@ type ListActivityTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActivityTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivityTypeInfos)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActivityTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ActivityTypeInfos_nextPageToken, *v.NextPageToken)
+	}
+	serializeActivityTypeInfoList(s, schemas.ActivityTypeInfos_typeInfos, v.TypeInfos)
+}
+func (v *ListActivityTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivityTypeInfos, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivityTypeInfos_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ActivityTypeInfos_nextPageToken, v.NextPageToken)
+		case schemas.ActivityTypeInfos_typeInfos:
+			return deserializeActivityTypeInfoList(d, schemas.ActivityTypeInfos_typeInfos, &v.TypeInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActivityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActivityTypes, schemas.ListActivityTypesInput, schemas.ActivityTypeInfos)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListActivityTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActivityTypes, schemas.ListActivityTypesInput, schemas.ActivityTypeInfos), output: &ListActivityTypesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListActivityTypes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListActivityTypes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListActivityTypesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListActivityTypes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +193,6 @@ func (c *Client) addOperationListActivityTypesMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -295,11 +290,3 @@ type ListActivityTypesAPIClient interface {
 }
 
 var _ ListActivityTypesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListActivityTypes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListActivityTypes",
-	}
-}

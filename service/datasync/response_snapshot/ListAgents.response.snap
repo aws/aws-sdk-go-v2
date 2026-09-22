@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.ListAgents
+
+{"Agents":[{"AgentArn":"__AgentArn__","Name":"__Name__","Platform":{"Version":"__Version__"},"Status":"ONLINE"},{"AgentArn":"__AgentArn__","Name":"__Name__","Platform":{"Version":"__Version__"},"Status":"ONLINE"}],"NextToken":"__NextToken__"}

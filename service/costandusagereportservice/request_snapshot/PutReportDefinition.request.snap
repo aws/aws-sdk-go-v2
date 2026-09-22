@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSOrigamiServiceGatewayService.PutReportDefinition
+
+{"ReportDefinition":{"AdditionalArtifacts":["REDSHIFT","REDSHIFT"],"AdditionalSchemaElements":["RESOURCES","RESOURCES"],"BillingViewArn":"__BillingViewArn__","Compression":"ZIP","Format":"textORcsv","RefreshClosedReports":true,"ReportName":"__ReportName__","ReportStatus":{"lastDelivery":"__LastDelivery__","lastStatus":"SUCCESS"},"ReportVersioning":"CREATE_NEW_REPORT","S3Bucket":"__S3Bucket__","S3Prefix":"__S3Prefix__","S3Region":"af-south-1","TimeUnit":"HOURLY"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

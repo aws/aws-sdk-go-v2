@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Creates a vehicle model (model manifest) that specifies signals (attributes,
@@ -60,6 +59,46 @@ type CreateModelManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateModelManifestRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateModelManifestRequest_name, *v.Name)
+	}
+	serializelistOfStrings(s, schemas.CreateModelManifestRequest_nodes, v.Nodes)
+	if v.SignalCatalogArn != nil {
+		s.WriteString(schemas.CreateModelManifestRequest_signalCatalogArn, *v.SignalCatalogArn)
+	}
+	serializeTagList(s, schemas.CreateModelManifestRequest_tags, v.Tags)
+}
+func (v *CreateModelManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelManifestRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateModelManifestRequest_description, v.Description)
+		case schemas.CreateModelManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateModelManifestRequest_name, v.Name)
+		case schemas.CreateModelManifestRequest_nodes:
+			return deserializelistOfStrings(d, schemas.CreateModelManifestRequest_nodes, &v.Nodes)
+		case schemas.CreateModelManifestRequest_signalCatalogArn:
+			v.SignalCatalogArn = new(string)
+			return d.ReadString(schemas.CreateModelManifestRequest_signalCatalogArn, v.SignalCatalogArn)
+		case schemas.CreateModelManifestRequest_tags:
+			return deserializeTagList(d, schemas.CreateModelManifestRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateModelManifestOutput struct {
 
 	//  The ARN of the created vehicle model.
@@ -78,77 +117,54 @@ type CreateModelManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateModelManifestResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateModelManifestResponse_name, *v.Name)
+	}
+}
+func (v *CreateModelManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateModelManifestResponse_arn, v.Arn)
+		case schemas.CreateModelManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateModelManifestResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelManifest, schemas.CreateModelManifestRequest, schemas.CreateModelManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateModelManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelManifest, schemas.CreateModelManifestRequest, schemas.CreateModelManifestResponse), output: &CreateModelManifestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateModelManifest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModelManifest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateModelManifestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelManifest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +179,8 @@ func (c *Client) addOperationCreateModelManifestMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateModelManifest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModelManifest",
-	}
 }

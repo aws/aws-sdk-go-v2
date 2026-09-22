@@ -4,11 +4,10 @@ package appintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates and persists a DataIntegrationAssociation resource.
@@ -50,6 +49,26 @@ type UpdateDataIntegrationAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataIntegrationAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataIntegrationAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataIntegrationAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataIntegrationAssociationIdentifier != nil {
+		s.WriteString(schemas.UpdateDataIntegrationAssociationRequest_DataIntegrationAssociationIdentifier, *v.DataIntegrationAssociationIdentifier)
+	}
+	if v.DataIntegrationIdentifier != nil {
+		s.WriteString(schemas.UpdateDataIntegrationAssociationRequest_DataIntegrationIdentifier, *v.DataIntegrationIdentifier)
+	}
+	if v.ExecutionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataIntegrationAssociationRequest_ExecutionConfiguration)
+		v.ExecutionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDataIntegrationAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,77 +76,42 @@ type UpdateDataIntegrationAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataIntegrationAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataIntegrationAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataIntegrationAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateDataIntegrationAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataIntegrationAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataIntegrationAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataIntegrationAssociation, schemas.UpdateDataIntegrationAssociationRequest, schemas.UpdateDataIntegrationAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataIntegrationAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataIntegrationAssociation, schemas.UpdateDataIntegrationAssociationRequest, schemas.UpdateDataIntegrationAssociationResponse), output: &UpdateDataIntegrationAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataIntegrationAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataIntegrationAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDataIntegrationAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataIntegrationAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +126,8 @@ func (c *Client) addOperationUpdateDataIntegrationAssociationMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDataIntegrationAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDataIntegrationAssociation",
-	}
 }

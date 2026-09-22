@@ -1,0 +1,7 @@
+POST /service/PartnerCentralRevenueMeasurement/operation/UntagResource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kresourceArno__ResourceArn__gtagKeysŸj__Member__j__Member__ÿÿ

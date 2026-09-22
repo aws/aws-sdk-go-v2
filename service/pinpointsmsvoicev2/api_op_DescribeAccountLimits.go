@@ -5,10 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the current End User Messaging SMS SMS Voice V2 resource quotas for
@@ -48,6 +48,21 @@ type DescribeAccountLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAccountLimitsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountLimitsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAccountLimitsOutput struct {
 
 	// An array of AccountLimit objects that show the current spend limits.
@@ -63,74 +78,48 @@ type DescribeAccountLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountLimitsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountLimitList(s, schemas.DescribeAccountLimitsResult_AccountLimits, v.AccountLimits)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAccountLimitsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAccountLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountLimitsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountLimitsResult_AccountLimits:
+			return deserializeAccountLimitList(d, schemas.DescribeAccountLimitsResult_AccountLimits, &v.AccountLimits)
+		case schemas.DescribeAccountLimitsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAccountLimitsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountLimits, schemas.DescribeAccountLimitsRequest, schemas.DescribeAccountLimitsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeAccountLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountLimits, schemas.DescribeAccountLimitsRequest, schemas.DescribeAccountLimitsResult), output: &DescribeAccountLimitsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeAccountLimits{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccountLimits"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountLimits(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +132,6 @@ func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +233,3 @@ type DescribeAccountLimitsAPIClient interface {
 }
 
 var _ DescribeAccountLimitsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeAccountLimits(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAccountLimits",
-	}
-}

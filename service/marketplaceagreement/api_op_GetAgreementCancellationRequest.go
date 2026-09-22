@@ -4,11 +4,10 @@ package marketplaceagreement
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -45,6 +44,21 @@ type GetAgreementCancellationRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgreementCancellationRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgreementCancellationRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgreementCancellationRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementCancellationRequestId != nil {
+		s.WriteString(schemas.GetAgreementCancellationRequestInput_agreementCancellationRequestId, *v.AgreementCancellationRequestId)
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.GetAgreementCancellationRequestInput_agreementId, *v.AgreementId)
+	}
+}
+
 type GetAgreementCancellationRequestOutput struct {
 
 	// The unique identifier of the cancellation request.
@@ -78,77 +92,98 @@ type GetAgreementCancellationRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgreementCancellationRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgreementCancellationRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgreementCancellationRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementCancellationRequestId != nil {
+		s.WriteString(schemas.GetAgreementCancellationRequestOutput_agreementCancellationRequestId, *v.AgreementCancellationRequestId)
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.GetAgreementCancellationRequestOutput_agreementId, *v.AgreementId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAgreementCancellationRequestOutput_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetAgreementCancellationRequestOutput_description, *v.Description)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.GetAgreementCancellationRequestOutput_reasonCode, string(v.ReasonCode))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAgreementCancellationRequestOutput_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetAgreementCancellationRequestOutput_statusMessage, *v.StatusMessage)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetAgreementCancellationRequestOutput_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetAgreementCancellationRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgreementCancellationRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgreementCancellationRequestOutput_agreementCancellationRequestId:
+			v.AgreementCancellationRequestId = new(string)
+			return d.ReadString(schemas.GetAgreementCancellationRequestOutput_agreementCancellationRequestId, v.AgreementCancellationRequestId)
+		case schemas.GetAgreementCancellationRequestOutput_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.GetAgreementCancellationRequestOutput_agreementId, v.AgreementId)
+		case schemas.GetAgreementCancellationRequestOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAgreementCancellationRequestOutput_createdAt, v.CreatedAt)
+		case schemas.GetAgreementCancellationRequestOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAgreementCancellationRequestOutput_description, v.Description)
+		case schemas.GetAgreementCancellationRequestOutput_reasonCode:
+			var ev string
+			if err := d.ReadString(schemas.GetAgreementCancellationRequestOutput_reasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = types.AgreementCancellationRequestReasonCode(ev)
+			return nil
+		case schemas.GetAgreementCancellationRequestOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAgreementCancellationRequestOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AgreementCancellationRequestStatus(ev)
+			return nil
+		case schemas.GetAgreementCancellationRequestOutput_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetAgreementCancellationRequestOutput_statusMessage, v.StatusMessage)
+		case schemas.GetAgreementCancellationRequestOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAgreementCancellationRequestOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgreementCancellationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgreementCancellationRequest, schemas.GetAgreementCancellationRequestInput, schemas.GetAgreementCancellationRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAgreementCancellationRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgreementCancellationRequest, schemas.GetAgreementCancellationRequestInput, schemas.GetAgreementCancellationRequestOutput), output: &GetAgreementCancellationRequestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAgreementCancellationRequest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAgreementCancellationRequest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAgreementCancellationRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgreementCancellationRequest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +198,8 @@ func (c *Client) addOperationGetAgreementCancellationRequestMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAgreementCancellationRequest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAgreementCancellationRequest",
-	}
 }

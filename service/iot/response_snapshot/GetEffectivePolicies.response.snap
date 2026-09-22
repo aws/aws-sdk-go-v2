@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"effectivePolicies":[{"policyArn":"__PolicyArn__","policyDocument":"__PolicyDocument__","policyName":"__PolicyName__"},{"policyArn":"__PolicyArn__","policyDocument":"__PolicyDocument__","policyName":"__PolicyName__"}]}

@@ -1,0 +1,5 @@
+POST /batchGetFindings
+
+Content-Type: application/json
+
+{"findingIdentifiers":[{"findingId":"__FindingId__","scanName":"__ScanName__"},{"findingId":"__FindingId__","scanName":"__ScanName__"}]}

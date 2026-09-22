@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListOpportunities
+
+{"Catalog":"__Catalog__","CreatedDate":{"AfterCreatedDate":"2000-01-01T00:00:00Z","BeforeCreatedDate":"2000-01-01T00:00:00Z"},"CustomerCompanyName":["__Member__","__Member__"],"Identifier":["__Member__","__Member__"],"LastModifiedDate":{"AfterLastModifiedDate":"2000-01-01T00:00:00Z","BeforeLastModifiedDate":"2000-01-01T00:00:00Z"},"LifeCycleReviewStatus":["Pending Submission","Pending Submission"],"LifeCycleStage":["Prospect","Prospect"],"MaxResults":1,"NextToken":"__NextToken__","Sort":{"SortBy":"LastModifiedDate","SortOrder":"ASCENDING"},"TargetCloseDate":{"AfterTargetCloseDate":"__AfterTargetCloseDate__","BeforeTargetCloseDate":"__BeforeTargetCloseDate__"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"clusters":[{"arn":"__Arn__","identifier":"__Identifier__"},{"arn":"__Arn__","identifier":"__Identifier__"}],"nextToken":"__NextToken__"}

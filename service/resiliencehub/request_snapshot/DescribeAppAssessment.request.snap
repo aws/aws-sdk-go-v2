@@ -1,0 +1,5 @@
+POST /describe-app-assessment
+
+Content-Type: application/json
+
+{"assessmentArn":"__AssessmentArn__"}

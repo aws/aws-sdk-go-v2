@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.CreateSecurityConfig
+
+{"clientToken":"__ClientToken__","description":"__Description__","iamFederationOptions":{"groupAttribute":"__GroupAttribute__","userAttribute":"__UserAttribute__"},"iamIdentityCenterOptions":{"groupAttribute":"GroupId","instanceArn":"__InstanceArn__","userAttribute":"UserId"},"name":"__Name__","samlOptions":{"groupAttribute":"__GroupAttribute__","metadata":"__Metadata__","openSearchServerlessEntityId":"__OpenSearchServerlessEntityId__","sessionTimeout":1,"userAttribute":"__UserAttribute__"},"type":"saml"}

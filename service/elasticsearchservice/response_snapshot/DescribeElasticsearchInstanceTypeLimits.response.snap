@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"LimitsByRole":{"key0":{"AdditionalLimits":[{"LimitName":"__LimitName__","LimitValues":["__Member__","__Member__"]},{"LimitName":"__LimitName__","LimitValues":["__Member__","__Member__"]}],"InstanceLimits":{"InstanceCountLimits":{"MaximumInstanceCount":1,"MinimumInstanceCount":1}},"StorageTypes":[{"StorageSubTypeName":"__StorageSubTypeName__","StorageTypeLimits":[{"LimitName":"__LimitName__","LimitValues":["__Member__","__Member__"]},{"LimitName":"__LimitName__","LimitValues":["__Member__","__Member__"]}],"StorageTypeName":"__StorageTypeName__"},{"StorageSubTypeName":"__StorageSubTypeName__","StorageTypeLimits":[{"LimitName":"__LimitName__","LimitValues":["__Member__","__Member__"]},{"LimitName":"__LimitName__","LimitValues":["__Member__","__Member__"]}],"StorageTypeName":"__StorageTypeName__"}]}}}

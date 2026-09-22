@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of image scan aggregations for your account. You can filter by
@@ -48,11 +48,28 @@ type ListImageScanFindingAggregationsInput struct {
 	// by specific criteria, such as tags, attributes, or IDs.
 	Filter *types.Filter
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListImageScanFindingAggregationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageScanFindingAggregationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageScanFindingAggregationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListImageScanFindingAggregationsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageScanFindingAggregationsRequest_nextToken, *v.NextToken)
+	}
 }
 
 type ListImageScanFindingAggregationsOutput struct {
@@ -92,74 +109,60 @@ type ListImageScanFindingAggregationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImageScanFindingAggregationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImageScanFindingAggregationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImageScanFindingAggregationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationType != nil {
+		s.WriteString(schemas.ListImageScanFindingAggregationsResponse_aggregationType, *v.AggregationType)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImageScanFindingAggregationsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListImageScanFindingAggregationsResponse_requestId, *v.RequestId)
+	}
+	serializeImageScanFindingAggregationsList(s, schemas.ListImageScanFindingAggregationsResponse_responses, v.Responses)
+}
+func (v *ListImageScanFindingAggregationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImageScanFindingAggregationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImageScanFindingAggregationsResponse_aggregationType:
+			v.AggregationType = new(string)
+			return d.ReadString(schemas.ListImageScanFindingAggregationsResponse_aggregationType, v.AggregationType)
+		case schemas.ListImageScanFindingAggregationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImageScanFindingAggregationsResponse_nextToken, v.NextToken)
+		case schemas.ListImageScanFindingAggregationsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListImageScanFindingAggregationsResponse_requestId, v.RequestId)
+		case schemas.ListImageScanFindingAggregationsResponse_responses:
+			return deserializeImageScanFindingAggregationsList(d, schemas.ListImageScanFindingAggregationsResponse_responses, &v.Responses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImageScanFindingAggregationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageScanFindingAggregations, schemas.ListImageScanFindingAggregationsRequest, schemas.ListImageScanFindingAggregationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImageScanFindingAggregations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImageScanFindingAggregations, schemas.ListImageScanFindingAggregationsRequest, schemas.ListImageScanFindingAggregationsResponse), output: &ListImageScanFindingAggregationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImageScanFindingAggregations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListImageScanFindingAggregations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImageScanFindingAggregations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +175,6 @@ func (c *Client) addOperationListImageScanFindingAggregationsMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +266,3 @@ type ListImageScanFindingAggregationsAPIClient interface {
 }
 
 var _ ListImageScanFindingAggregationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListImageScanFindingAggregations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListImageScanFindingAggregations",
-	}
-}

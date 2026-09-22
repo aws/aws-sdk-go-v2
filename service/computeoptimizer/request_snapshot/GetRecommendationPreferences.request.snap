@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerService/operation/GetRecommendationPreferences
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤jmaxResultslresourceTypekEc2Instanceescope¢dnamelOrganizationevaluei__Value__inextTokenm__NextToken__

@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes a personalization configuration.
@@ -38,6 +37,18 @@ type DescribeQPersonalizationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQPersonalizationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQPersonalizationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQPersonalizationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeQPersonalizationConfigurationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeQPersonalizationConfigurationOutput struct {
 
 	// A value that indicates whether personalization is enabled or not.
@@ -55,77 +66,63 @@ type DescribeQPersonalizationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQPersonalizationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQPersonalizationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQPersonalizationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PersonalizationMode != "" {
+		s.WriteString(schemas.DescribeQPersonalizationConfigurationResponse_PersonalizationMode, string(v.PersonalizationMode))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeQPersonalizationConfigurationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeQPersonalizationConfigurationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeQPersonalizationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQPersonalizationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQPersonalizationConfigurationResponse_PersonalizationMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQPersonalizationConfigurationResponse_PersonalizationMode, &ev); err != nil {
+				return err
+			}
+			v.PersonalizationMode = types.PersonalizationMode(ev)
+			return nil
+		case schemas.DescribeQPersonalizationConfigurationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeQPersonalizationConfigurationResponse_RequestId, v.RequestId)
+		case schemas.DescribeQPersonalizationConfigurationResponse_Status:
+			return d.ReadInt32(schemas.DescribeQPersonalizationConfigurationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQPersonalizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQPersonalizationConfiguration, schemas.DescribeQPersonalizationConfigurationRequest, schemas.DescribeQPersonalizationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQPersonalizationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQPersonalizationConfiguration, schemas.DescribeQPersonalizationConfigurationRequest, schemas.DescribeQPersonalizationConfigurationResponse), output: &DescribeQPersonalizationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQPersonalizationConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeQPersonalizationConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeQPersonalizationConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeQPersonalizationConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +137,8 @@ func (c *Client) addOperationDescribeQPersonalizationConfigurationMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeQPersonalizationConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeQPersonalizationConfiguration",
-	}
 }

@@ -155,6 +155,25 @@ type AdditionalStorageVolumeOutput struct {
 	// storage of the additional storage volume.
 	MaxAllocatedStorage *int32
 
+	// The percentage of the in-progress storage operation on the additional storage
+	// volume that has completed, from 0 to 100 . This field appears only while a
+	// storage operation is in progress. It isn't present when no storage operation is
+	// active.
+	StorageOperationPercentProgress *int32
+
+	// The status of an in-progress storage operation on the additional storage
+	// volume. This field appears only while a storage operation is in progress. It
+	// isn't present when no storage operation is active. Possible values:
+	//
+	//   - Initializing - The volume is initializing from a snapshot, such as during a
+	//   snapshot restore, point-in-time restore, read replica creation, or blue/green
+	//   deployment. Performance can be lower than provisioned until initialization
+	//   completes.
+	//
+	//   - Optimizing - The volume is optimizing following a storage scaling or
+	//   modification operation.
+	StorageOperationStatus *string
+
 	// The storage throughput value for the additional storage volume, in mebibytes
 	// per second (MiBps).
 	StorageThroughput *int32
@@ -1183,6 +1202,23 @@ type DBCluster struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about an Amazon Web Services Identity and Access
+// Management (IAM) role to associate with a DB cluster. You can specify this
+// structure in the AssociatedRoles parameter of CreateDBCluster, RestoreDBClusterFromS3, RestoreDBClusterFromSnapshot, and RestoreDBClusterToPointInTime.
+type DBClusterAssociatedRole struct {
+
+	// The Amazon Resource Name (ARN) of the IAM role to associate with the DB cluster.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The name of the feature associated with the IAM role. For information about
+	// supported feature names, see DBEngineVersion.
+	FeatureName *string
+
+	noSmithyDocumentSerde
+}
+
 // An automated backup of a DB cluster. It consists of system backups, transaction
 // logs, and the database cluster properties that existed at the time you deleted
 // the source cluster.
@@ -1712,8 +1748,12 @@ type DBEngineVersion struct {
 	// The description of the database engine.
 	DBEngineDescription *string
 
-	// A value that indicates the source media provider of the AMI based on the usage
-	// operation. Applicable for RDS Custom for SQL Server.
+	// The source of the installation media for this engine version. A value of
+	// Customer Provided indicates that the engine version was created from
+	// customer-supplied installation media using CreateCustomDBEngineVersion .
+	// Applicable to RDS Custom for SQL Server and to RDS for SQL Server engine
+	// versions ( sqlserver-ee and sqlserver-se with the bring-your-own-media license
+	// model, and sqlserver-dev-ee ).
 	DBEngineMediaType *string
 
 	// The ARN of the custom engine version.
@@ -1725,8 +1765,10 @@ type DBEngineVersion struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
 
-	// The database installation files (ISO and EXE) uploaded to Amazon S3 for your
-	// database engine version to import to Amazon RDS. Required for sqlserver-dev-ee .
+	// The database installation files (ISO and EXE) that were uploaded to Amazon S3
+	// and used to import the database engine version to Amazon RDS. Returned for RDS
+	// for SQL Server engine versions ( sqlserver-ee , sqlserver-se , and
+	// sqlserver-dev-ee ) created from customer-supplied installation media.
 	DatabaseInstallationFiles []string
 
 	// The name of the Amazon S3 bucket that contains your database installation files.
@@ -1750,8 +1792,9 @@ type DBEngineVersion struct {
 	// CloudWatch Logs.
 	ExportableLogTypes []string
 
-	// The reason that the custom engine version creation for sqlserver-dev-ee failed
-	// with an incompatible-installation-media status.
+	// The reason that the custom engine version creation failed with an
+	// incompatible-installation-media status. Applicable to RDS for SQL Server engine
+	// versions ( sqlserver-ee , sqlserver-se , and sqlserver-dev-ee ).
 	FailureReason *string
 
 	// The EC2 image
@@ -2317,6 +2360,24 @@ type DBInstance struct {
 	//   - sse-kms - The DB instance is encrypted using a customer managed KMS key or
 	//   Amazon Web Services managed KMS key.
 	StorageEncryptionType StorageEncryptionType
+
+	// The percentage of the in-progress storage operation on the DB instance that has
+	// completed, from 0 to 100 . This field appears only while a storage operation is
+	// in progress. It isn't present when no storage operation is active.
+	StorageOperationPercentProgress *int32
+
+	// The status of an in-progress storage operation on the DB instance. This field
+	// appears only while a storage operation is in progress. It isn't present when no
+	// storage operation is active. Possible values:
+	//
+	//   - Initializing - The volume is initializing from a snapshot, such as during a
+	//   snapshot restore, point-in-time restore, read replica creation, or blue/green
+	//   deployment. Performance can be lower than provisioned until initialization
+	//   completes.
+	//
+	//   - Optimizing - The volume is optimizing following a storage scaling or
+	//   modification operation.
+	StorageOperationStatus *string
 
 	// The storage throughput for the DB instance.
 	//
@@ -3198,6 +3259,13 @@ type DBSnapshot struct {
 
 	// Specifies the version of the database engine.
 	EngineVersion *string
+
+	// The full size of the DB snapshot, in bytes.
+	//
+	// This is not the incremental size of the snapshot. This is the full snapshot
+	// size and represents the size of all the blocks that were written to the source
+	// volume at the time the snapshot was created.
+	FullSnapshotSizeInBytes *int64
 
 	// Indicates whether mapping of Amazon Web Services Identity and Access Management
 	// (IAM) accounts to database accounts is enabled.
@@ -4813,6 +4881,7 @@ type PendingModifiedValues struct {
 	// The license model for the DB instance.
 	//
 	// Valid values: license-included | bring-your-own-license | general-public-license
+	// | bring-your-own-media
 	LicenseModel *string
 
 	// The master credentials for the DB instance.

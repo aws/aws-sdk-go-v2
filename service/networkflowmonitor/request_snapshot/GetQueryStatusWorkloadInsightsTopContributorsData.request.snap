@@ -1,0 +1,3 @@
+GET /workloadInsights/__ScopeId__/topContributorsDataQueries/__QueryId__/status
+
+

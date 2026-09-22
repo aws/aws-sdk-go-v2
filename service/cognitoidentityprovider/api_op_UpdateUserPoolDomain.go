@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A user pool domain hosts managed login, an authorization server and web server
@@ -98,7 +97,39 @@ type UpdateUserPoolDomainInput struct {
 	// [Managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 	ManagedLoginVersion *int32
 
+	// The routing configuration for the user pool domain. Specifies failover settings
+	// for multi-region deployments.
+	Routing *types.RoutingType
+
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateUserPoolDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomainConfig != nil {
+		s.WriteStruct(schemas.UpdateUserPoolDomainRequest_CustomDomainConfig)
+		v.CustomDomainConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.UpdateUserPoolDomainRequest_Domain, *v.Domain)
+	}
+	if v.ManagedLoginVersion != nil {
+		s.WriteInt32(schemas.UpdateUserPoolDomainRequest_ManagedLoginVersion, *v.ManagedLoginVersion)
+	}
+	if v.Routing != nil {
+		s.WriteStruct(schemas.UpdateUserPoolDomainRequest_Routing)
+		v.Routing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateUserPoolDomainRequest_UserPoolId, *v.UserPoolId)
+	}
 }
 
 // The UpdateUserPoolDomain response output.
@@ -119,83 +150,71 @@ type UpdateUserPoolDomainOutput struct {
 	// [Managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 	ManagedLoginVersion *int32
 
+	// The updated routing configuration for the user pool domain.
+	Routing *types.RoutingType
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPoolDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudFrontDomain != nil {
+		s.WriteString(schemas.UpdateUserPoolDomainResponse_CloudFrontDomain, *v.CloudFrontDomain)
+	}
+	if v.ManagedLoginVersion != nil {
+		s.WriteInt32(schemas.UpdateUserPoolDomainResponse_ManagedLoginVersion, *v.ManagedLoginVersion)
+	}
+	if v.Routing != nil {
+		s.WriteStruct(schemas.UpdateUserPoolDomainResponse_Routing)
+		v.Routing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateUserPoolDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserPoolDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateUserPoolDomainResponse_CloudFrontDomain:
+			v.CloudFrontDomain = new(string)
+			return d.ReadString(schemas.UpdateUserPoolDomainResponse_CloudFrontDomain, v.CloudFrontDomain)
+		case schemas.UpdateUserPoolDomainResponse_ManagedLoginVersion:
+			v.ManagedLoginVersion = new(int32)
+			return d.ReadInt32(schemas.UpdateUserPoolDomainResponse_ManagedLoginVersion, v.ManagedLoginVersion)
+		case schemas.UpdateUserPoolDomainResponse_Routing:
+			v.Routing = &types.RoutingType{}
+			return v.Routing.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPoolDomain, schemas.UpdateUserPoolDomainRequest, schemas.UpdateUserPoolDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserPoolDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPoolDomain, schemas.UpdateUserPoolDomainRequest, schemas.UpdateUserPoolDomainResponse), output: &UpdateUserPoolDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUserPoolDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateUserPoolDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateUserPoolDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserPoolDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,22 +229,8 @@ func (c *Client) addOperationUpdateUserPoolDomainMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateUserPoolDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateUserPoolDomain",
-	}
 }

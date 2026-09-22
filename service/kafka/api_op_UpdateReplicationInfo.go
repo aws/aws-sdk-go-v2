@@ -4,11 +4,10 @@ package kafka
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates replication info of a replicator.
@@ -65,6 +64,48 @@ type UpdateReplicationInfoInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReplicationInfoInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReplicationInfoRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReplicationInfoInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsumerGroupReplication != nil {
+		s.WriteStruct(schemas.UpdateReplicationInfoRequest_ConsumerGroupReplication)
+		v.ConsumerGroupReplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.LogDelivery != nil {
+		s.WriteStruct(schemas.UpdateReplicationInfoRequest_LogDelivery)
+		v.LogDelivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicatorArn != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_ReplicatorArn, *v.ReplicatorArn)
+	}
+	if v.SourceKafkaClusterArn != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_SourceKafkaClusterArn, *v.SourceKafkaClusterArn)
+	}
+	if v.SourceKafkaClusterId != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_SourceKafkaClusterId, *v.SourceKafkaClusterId)
+	}
+	if v.TargetKafkaClusterArn != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_TargetKafkaClusterArn, *v.TargetKafkaClusterArn)
+	}
+	if v.TargetKafkaClusterId != nil {
+		s.WriteString(schemas.UpdateReplicationInfoRequest_TargetKafkaClusterId, *v.TargetKafkaClusterId)
+	}
+	if v.TopicReplication != nil {
+		s.WriteStruct(schemas.UpdateReplicationInfoRequest_TopicReplication)
+		v.TopicReplication.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateReplicationInfoOutput struct {
 
 	// The Amazon Resource Name (ARN) of the replicator.
@@ -79,77 +120,58 @@ type UpdateReplicationInfoOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReplicationInfoOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReplicationInfoResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReplicationInfoOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicatorArn != nil {
+		s.WriteString(schemas.UpdateReplicationInfoResponse_ReplicatorArn, *v.ReplicatorArn)
+	}
+	if v.ReplicatorState != "" {
+		s.WriteString(schemas.UpdateReplicationInfoResponse_ReplicatorState, string(v.ReplicatorState))
+	}
+}
+func (v *UpdateReplicationInfoOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateReplicationInfoResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateReplicationInfoResponse_ReplicatorArn:
+			v.ReplicatorArn = new(string)
+			return d.ReadString(schemas.UpdateReplicationInfoResponse_ReplicatorArn, v.ReplicatorArn)
+		case schemas.UpdateReplicationInfoResponse_ReplicatorState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateReplicationInfoResponse_ReplicatorState, &ev); err != nil {
+				return err
+			}
+			v.ReplicatorState = types.ReplicatorState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateReplicationInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReplicationInfo, schemas.UpdateReplicationInfoRequest, schemas.UpdateReplicationInfoResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateReplicationInfo{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReplicationInfo, schemas.UpdateReplicationInfoRequest, schemas.UpdateReplicationInfoResponse), output: &UpdateReplicationInfoOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateReplicationInfo{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateReplicationInfo"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateReplicationInfoValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateReplicationInfo(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +186,8 @@ func (c *Client) addOperationUpdateReplicationInfoMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateReplicationInfo(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateReplicationInfo",
-	}
 }

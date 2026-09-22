@@ -1,0 +1,5 @@
+POST /delete-app-assessment
+
+Content-Type: application/json
+
+{"assessmentArn":"__AssessmentArn__","clientToken":"__ClientToken__"}

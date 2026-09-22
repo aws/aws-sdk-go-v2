@@ -1,0 +1,3 @@
+DELETE /datasets/__DatasetId__?datasetVersion=__DatasetVersion__
+
+

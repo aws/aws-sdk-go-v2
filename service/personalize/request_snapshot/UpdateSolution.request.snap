@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.UpdateSolution
+
+{"performAutoTraining":true,"performIncrementalUpdate":true,"solutionArn":"__SolutionArn__","solutionUpdateConfig":{"autoTrainingConfig":{"schedulingExpression":"__SchedulingExpression__"},"eventsConfig":{"eventParametersList":[{"eventType":"__EventType__","eventValueThreshold":1,"weight":1},{"eventType":"__EventType__","eventValueThreshold":1,"weight":1}]}}}

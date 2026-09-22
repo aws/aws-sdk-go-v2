@@ -4,11 +4,10 @@ package route53domains
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,18 @@ type GetOperationDetailInput struct {
 	OperationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetOperationDetailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOperationDetailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOperationDetailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.GetOperationDetailRequest_OperationId, *v.OperationId)
+	}
 }
 
 // The GetOperationDetail response includes the following elements.
@@ -93,77 +104,102 @@ type GetOperationDetailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOperationDetailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOperationDetailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOperationDetailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetOperationDetailResponse_DomainName, *v.DomainName)
+	}
+	if v.LastUpdatedDate != nil {
+		s.WriteTime(schemas.GetOperationDetailResponse_LastUpdatedDate, *v.LastUpdatedDate)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetOperationDetailResponse_Message, *v.Message)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.GetOperationDetailResponse_OperationId, *v.OperationId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetOperationDetailResponse_Status, string(v.Status))
+	}
+	if v.StatusFlag != "" {
+		s.WriteString(schemas.GetOperationDetailResponse_StatusFlag, string(v.StatusFlag))
+	}
+	if v.SubmittedDate != nil {
+		s.WriteTime(schemas.GetOperationDetailResponse_SubmittedDate, *v.SubmittedDate)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetOperationDetailResponse_Type, string(v.Type))
+	}
+}
+func (v *GetOperationDetailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOperationDetailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOperationDetailResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetOperationDetailResponse_DomainName, v.DomainName)
+		case schemas.GetOperationDetailResponse_LastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetOperationDetailResponse_LastUpdatedDate, v.LastUpdatedDate)
+		case schemas.GetOperationDetailResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetOperationDetailResponse_Message, v.Message)
+		case schemas.GetOperationDetailResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.GetOperationDetailResponse_OperationId, v.OperationId)
+		case schemas.GetOperationDetailResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetOperationDetailResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.OperationStatus(ev)
+			return nil
+		case schemas.GetOperationDetailResponse_StatusFlag:
+			var ev string
+			if err := d.ReadString(schemas.GetOperationDetailResponse_StatusFlag, &ev); err != nil {
+				return err
+			}
+			v.StatusFlag = types.StatusFlag(ev)
+			return nil
+		case schemas.GetOperationDetailResponse_SubmittedDate:
+			v.SubmittedDate = new(time.Time)
+			return d.ReadTime(schemas.GetOperationDetailResponse_SubmittedDate, v.SubmittedDate)
+		case schemas.GetOperationDetailResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.GetOperationDetailResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.OperationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOperationDetailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOperationDetail, schemas.GetOperationDetailRequest, schemas.GetOperationDetailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetOperationDetail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOperationDetail, schemas.GetOperationDetailRequest, schemas.GetOperationDetailResponse), output: &GetOperationDetailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetOperationDetail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOperationDetail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOperationDetailValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOperationDetail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +214,8 @@ func (c *Client) addOperationGetOperationDetailMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetOperationDetail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOperationDetail",
-	}
 }

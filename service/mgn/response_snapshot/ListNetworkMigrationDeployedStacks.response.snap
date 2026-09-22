@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"failedResources":[{"logicalID":"__LogicalID__","status":"CREATE_FAILED","statusReason":"__StatusReason__"},{"logicalID":"__LogicalID__","status":"CREATE_FAILED","statusReason":"__StatusReason__"}],"segmentID":"__SegmentID__","stackLogicalID":"__StackLogicalID__","stackPhysicalID":"__StackPhysicalID__","status":"CREATE_COMPLETE","targetAccount":"__TargetAccount__"},{"failedResources":[{"logicalID":"__LogicalID__","status":"CREATE_FAILED","statusReason":"__StatusReason__"},{"logicalID":"__LogicalID__","status":"CREATE_FAILED","statusReason":"__StatusReason__"}],"segmentID":"__SegmentID__","stackLogicalID":"__StackLogicalID__","stackPhysicalID":"__StackPhysicalID__","status":"CREATE_COMPLETE","targetAccount":"__TargetAccount__"}],"nextToken":"__NextToken__"}

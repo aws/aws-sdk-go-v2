@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerService/operation/GetEnrollmentStatusesForOrganization
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£gfilters‚¢fvalues‚j__Member__j__Member__dnamefStatus¢fvalues‚j__Member__j__Member__dnamefStatusinextTokenm__NextToken__jmaxResults

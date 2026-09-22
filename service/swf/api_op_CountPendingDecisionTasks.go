@@ -4,11 +4,10 @@ package swf
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the estimated number of decision tasks in the specified task list. The
@@ -65,6 +64,23 @@ type CountPendingDecisionTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CountPendingDecisionTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CountPendingDecisionTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountPendingDecisionTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.CountPendingDecisionTasksInput_domain, *v.Domain)
+	}
+	if v.TaskList != nil {
+		s.WriteStruct(schemas.CountPendingDecisionTasksInput_taskList)
+		v.TaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains the count of tasks in a task list.
 type CountPendingDecisionTasksOutput struct {
 
@@ -83,77 +99,50 @@ type CountPendingDecisionTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CountPendingDecisionTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PendingTaskCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountPendingDecisionTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.PendingTaskCount_count, v.Count)
+	if v.Truncated != false {
+		s.WriteBool(schemas.PendingTaskCount_truncated, v.Truncated)
+	}
+}
+func (v *CountPendingDecisionTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PendingTaskCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PendingTaskCount_count:
+			return d.ReadInt32(schemas.PendingTaskCount_count, &v.Count)
+		case schemas.PendingTaskCount_truncated:
+			return d.ReadBool(schemas.PendingTaskCount_truncated, &v.Truncated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCountPendingDecisionTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CountPendingDecisionTasks, schemas.CountPendingDecisionTasksInput, schemas.PendingTaskCount)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCountPendingDecisionTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CountPendingDecisionTasks, schemas.CountPendingDecisionTasksInput, schemas.PendingTaskCount), output: &CountPendingDecisionTasksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCountPendingDecisionTasks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CountPendingDecisionTasks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCountPendingDecisionTasksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCountPendingDecisionTasks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +157,8 @@ func (c *Client) addOperationCountPendingDecisionTasksMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCountPendingDecisionTasks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CountPendingDecisionTasks",
-	}
 }

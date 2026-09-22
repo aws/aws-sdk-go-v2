@@ -4,11 +4,8 @@ package autoscaling
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	We strongly recommend using a launch template when calling this operation to
@@ -271,9 +268,11 @@ type CreateAutoScalingGroupInput struct {
 	MaxInstanceLifetime *int32
 
 	// The mixed instances policy. For more information, see [Auto Scaling groups with multiple instance types and purchase options] in the Amazon EC2 Auto
-	// Scaling User Guide.
+	// Scaling User Guide. To learn how to prioritize multiple capacity types, see [Use Distribution Segments to target multiple capacity types]in
+	// the Amazon EC2 Auto Scaling User Guide.
 	//
 	// [Auto Scaling groups with multiple instance types and purchase options]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-mixed-instances-groups.html
+	// [Use Distribution Segments to target multiple capacity types]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/use-distribution-segments.html
 	MixedInstancesPolicy *types.MixedInstancesPolicy
 
 	// Indicates whether newly launched instances are protected from termination by
@@ -283,6 +282,13 @@ type CreateAutoScalingGroupInput struct {
 	//
 	// [Use instance scale-in protection]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-instance-protection.html
 	NewInstancesProtectedFromScaleIn *bool
+
+	// The entity that manages the Auto Scaling group. If you specify this parameter,
+	// Amazon EC2 Auto Scaling passes the operator identity to EC2 for instance
+	// launches and only allows the designated operator to make changes to the Auto
+	// Scaling group. All mutating API calls from non-operator callers are rejected
+	// with an AccessDenied exception.
+	Operator *types.Operator
 
 	// The name of the placement group into which to launch your instances. For more
 	// information, see [Placement groups]in the Amazon EC2 User Guide.
@@ -367,9 +373,6 @@ type CreateAutoScalingGroupOutput struct {
 }
 
 func (c *Client) addOperationCreateAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpCreateAutoScalingGroup{}, middleware.After)
 	if err != nil {
 		return err
@@ -378,65 +381,20 @@ func (c *Client) addOperationCreateAutoScalingGroupMiddlewares(stack *middleware
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAutoScalingGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAutoScalingGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutoScalingGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -451,22 +409,8 @@ func (c *Client) addOperationCreateAutoScalingGroupMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAutoScalingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAutoScalingGroup",
-	}
 }

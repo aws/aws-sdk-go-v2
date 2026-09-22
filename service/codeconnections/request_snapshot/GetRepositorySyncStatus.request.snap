@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeConnections_20231201.GetRepositorySyncStatus
+
+{"Branch":"__Branch__","RepositoryLinkId":"__RepositoryLinkId__","SyncType":"CFN_STACK_SYNC"}

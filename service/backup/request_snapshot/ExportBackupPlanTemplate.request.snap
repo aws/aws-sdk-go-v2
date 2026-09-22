@@ -1,0 +1,3 @@
+GET /backup/plans/__BackupPlanId__/toTemplate
+
+

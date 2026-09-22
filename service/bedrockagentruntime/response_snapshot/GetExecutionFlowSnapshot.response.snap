@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"customerEncryptionKeyArn":"__CustomerEncryptionKeyArn__","definition":"__Definition__","executionRoleArn":"__ExecutionRoleArn__","flowAliasIdentifier":"__FlowAliasIdentifier__","flowIdentifier":"__FlowIdentifier__","flowVersion":"__FlowVersion__"}

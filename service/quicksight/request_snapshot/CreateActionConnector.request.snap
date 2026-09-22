@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/action-connectors
+
+Content-Type: application/json
+
+{"ActionConnectorId":"__ActionConnectorId__","AuthenticationConfig":{"AuthenticationMetadata":{"AuthorizationCodeGrantMetadata":{"AuthorizationCodeGrantCredentialsDetails":{"AuthorizationCodeGrantDetails":{"AuthorizationEndpoint":"__AuthorizationEndpoint__","ClientId":"__ClientId__","ClientSecret":"__ClientSecret__","TokenEndpoint":"__TokenEndpoint__"}},"AuthorizationCodeGrantCredentialsSource":"PLAIN_CREDENTIALS","BaseEndpoint":"__BaseEndpoint__","RedirectUrl":"__RedirectUrl__"}},"AuthenticationType":"BASIC"},"Description":"__Description__","Name":"__Name__","Permissions":[{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"},{"Actions":["__Member__","__Member__"],"Principal":"__Principal__"}],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"GENERIC_HTTP","VpcConnectionArn":"__VpcConnectionArn__"}

@@ -70,6 +70,46 @@ func (m *validateOpArchiveFindings) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateCustomDetectionRuleAssociation struct {
+}
+
+func (*validateOpCreateCustomDetectionRuleAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomDetectionRuleAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomDetectionRuleAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomDetectionRuleAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateCustomDetectionRuleOrgConfiguration struct {
+}
+
+func (*validateOpCreateCustomDetectionRuleOrgConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCustomDetectionRuleOrgConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCustomDetectionRuleOrgConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCustomDetectionRuleOrgConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDetector struct {
 }
 
@@ -105,6 +145,26 @@ func (m *validateOpCreateFilter) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFilterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateInvestigation struct {
+}
+
+func (*validateOpCreateInvestigation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateInvestigation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateInvestigationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateInvestigationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +345,46 @@ func (m *validateOpDeclineInvitations) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeclineInvitationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomDetectionRuleAssociation struct {
+}
+
+func (*validateOpDeleteCustomDetectionRuleAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomDetectionRuleAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomDetectionRuleAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomDetectionRuleAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCustomDetectionRuleOrgConfiguration struct {
+}
+
+func (*validateOpDeleteCustomDetectionRuleOrgConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCustomDetectionRuleOrgConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCustomDetectionRuleOrgConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCustomDetectionRuleOrgConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -690,6 +790,66 @@ func (m *validateOpGetCoverageStatistics) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCustomDetectionRuleAssociation struct {
+}
+
+func (*validateOpGetCustomDetectionRuleAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomDetectionRuleAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomDetectionRuleAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomDetectionRuleAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCustomDetectionRule struct {
+}
+
+func (*validateOpGetCustomDetectionRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomDetectionRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomDetectionRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomDetectionRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCustomDetectionRuleOrgConfiguration struct {
+}
+
+func (*validateOpGetCustomDetectionRuleOrgConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCustomDetectionRuleOrgConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCustomDetectionRuleOrgConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCustomDetectionRuleOrgConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetDetector struct {
 }
 
@@ -765,6 +925,26 @@ func (m *validateOpGetFindingsStatistics) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetFindingsStatisticsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInvestigation struct {
+}
+
+func (*validateOpGetInvestigation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInvestigation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInvestigationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInvestigationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1050,6 +1230,26 @@ func (m *validateOpListCoverage) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListCustomDetectionRules struct {
+}
+
+func (*validateOpListCustomDetectionRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCustomDetectionRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCustomDetectionRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCustomDetectionRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListFilters struct {
 }
 
@@ -1085,6 +1285,26 @@ func (m *validateOpListFindings) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListInvestigations struct {
+}
+
+func (*validateOpListInvestigations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInvestigations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInvestigationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInvestigationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1350,6 +1570,46 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCustomDetectionRuleAssociation struct {
+}
+
+func (*validateOpUpdateCustomDetectionRuleAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomDetectionRuleAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomDetectionRuleAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomDetectionRuleAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCustomDetectionRuleOrgConfiguration struct {
+}
+
+func (*validateOpUpdateCustomDetectionRuleOrgConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCustomDetectionRuleOrgConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCustomDetectionRuleOrgConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCustomDetectionRuleOrgConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDetector struct {
 }
 
@@ -1602,12 +1862,24 @@ func addOpArchiveFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpArchiveFindings{}, middleware.After)
 }
 
+func addOpCreateCustomDetectionRuleAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomDetectionRuleAssociation{}, middleware.After)
+}
+
+func addOpCreateCustomDetectionRuleOrgConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCustomDetectionRuleOrgConfiguration{}, middleware.After)
+}
+
 func addOpCreateDetectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDetector{}, middleware.After)
 }
 
 func addOpCreateFilterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFilter{}, middleware.After)
+}
+
+func addOpCreateInvestigationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateInvestigation{}, middleware.After)
 }
 
 func addOpCreateIPSetValidationMiddleware(stack *middleware.Stack) error {
@@ -1644,6 +1916,14 @@ func addOpCreateTrustedEntitySetValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeclineInvitationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeclineInvitations{}, middleware.After)
+}
+
+func addOpDeleteCustomDetectionRuleAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomDetectionRuleAssociation{}, middleware.After)
+}
+
+func addOpDeleteCustomDetectionRuleOrgConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCustomDetectionRuleOrgConfiguration{}, middleware.After)
 }
 
 func addOpDeleteDetectorValidationMiddleware(stack *middleware.Stack) error {
@@ -1726,6 +2006,18 @@ func addOpGetCoverageStatisticsValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetCoverageStatistics{}, middleware.After)
 }
 
+func addOpGetCustomDetectionRuleAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomDetectionRuleAssociation{}, middleware.After)
+}
+
+func addOpGetCustomDetectionRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomDetectionRule{}, middleware.After)
+}
+
+func addOpGetCustomDetectionRuleOrgConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCustomDetectionRuleOrgConfiguration{}, middleware.After)
+}
+
 func addOpGetDetectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDetector{}, middleware.After)
 }
@@ -1740,6 +2032,10 @@ func addOpGetFindingsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetFindingsStatisticsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFindingsStatistics{}, middleware.After)
+}
+
+func addOpGetInvestigationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInvestigation{}, middleware.After)
 }
 
 func addOpGetIPSetValidationMiddleware(stack *middleware.Stack) error {
@@ -1798,12 +2094,20 @@ func addOpListCoverageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCoverage{}, middleware.After)
 }
 
+func addOpListCustomDetectionRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCustomDetectionRules{}, middleware.After)
+}
+
 func addOpListFiltersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFilters{}, middleware.After)
 }
 
 func addOpListFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListFindings{}, middleware.After)
+}
+
+func addOpListInvestigationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInvestigations{}, middleware.After)
 }
 
 func addOpListIPSetsValidationMiddleware(stack *middleware.Stack) error {
@@ -1856,6 +2160,14 @@ func addOpUnarchiveFindingsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateCustomDetectionRuleAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomDetectionRuleAssociation{}, middleware.After)
+}
+
+func addOpUpdateCustomDetectionRuleOrgConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCustomDetectionRuleOrgConfiguration{}, middleware.After)
 }
 
 func addOpUpdateDetectorValidationMiddleware(stack *middleware.Stack) error {
@@ -1941,6 +2253,21 @@ func validateAccountDetails(v []types.AccountDetail) error {
 	}
 }
 
+func validateContinuousScanDetails(v *types.ContinuousScanDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContinuousScanDetails"}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSourceConfigurations(v *types.DataSourceConfigurations) error {
 	if v == nil {
 		return nil
@@ -1954,6 +2281,41 @@ func validateDataSourceConfigurations(v *types.DataSourceConfigurations) error {
 	if v.Kubernetes != nil {
 		if err := validateKubernetesConfiguration(v.Kubernetes); err != nil {
 			invalidParams.AddNested("Kubernetes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDetectionRuleFilter(v *types.DetectionRuleFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetectionRuleFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDetectionRuleFilterList(v []types.DetectionRuleFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetectionRuleFilterList"}
+	for i := range v {
+		if err := validateDetectionRuleFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2107,6 +2469,11 @@ func validateRecoveryPoint(v *types.RecoveryPoint) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RecoveryPoint"}
 	if v.BackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.ContinuousScanDetails != nil {
+		if err := validateContinuousScanDetails(v.ContinuousScanDetails); err != nil {
+			invalidParams.AddNested("ContinuousScanDetails", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2289,6 +2656,42 @@ func validateOpArchiveFindingsInput(v *ArchiveFindingsInput) error {
 	}
 }
 
+func validateOpCreateCustomDetectionRuleAssociationInput(v *CreateCustomDetectionRuleAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomDetectionRuleAssociationInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCustomDetectionRuleOrgConfigurationInput(v *CreateCustomDetectionRuleOrgConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomDetectionRuleOrgConfigurationInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDetectorInput(v *CreateDetectorInput) error {
 	if v == nil {
 		return nil
@@ -2322,6 +2725,24 @@ func validateOpCreateFilterInput(v *CreateFilterInput) error {
 	}
 	if v.FindingCriteria == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingCriteria"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateInvestigationInput(v *CreateInvestigationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateInvestigationInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.TriggerPrompt == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerPrompt"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2521,6 +2942,42 @@ func validateOpDeclineInvitationsInput(v *DeclineInvitationsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeclineInvitationsInput"}
 	if v.AccountIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomDetectionRuleAssociationInput(v *DeleteCustomDetectionRuleAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomDetectionRuleAssociationInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCustomDetectionRuleOrgConfigurationInput(v *DeleteCustomDetectionRuleOrgConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCustomDetectionRuleOrgConfigurationInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2859,6 +3316,57 @@ func validateOpGetCoverageStatisticsInput(v *GetCoverageStatisticsInput) error {
 	}
 }
 
+func validateOpGetCustomDetectionRuleAssociationInput(v *GetCustomDetectionRuleAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomDetectionRuleAssociationInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCustomDetectionRuleInput(v *GetCustomDetectionRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomDetectionRuleInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCustomDetectionRuleOrgConfigurationInput(v *GetCustomDetectionRuleOrgConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCustomDetectionRuleOrgConfigurationInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetDetectorInput(v *GetDetectorInput) error {
 	if v == nil {
 		return nil
@@ -2917,6 +3425,24 @@ func validateOpGetFindingsStatisticsInput(v *GetFindingsStatisticsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetFindingsStatisticsInput"}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInvestigationInput(v *GetInvestigationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInvestigationInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if v.InvestigationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvestigationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3165,6 +3691,23 @@ func validateOpListCoverageInput(v *ListCoverageInput) error {
 	}
 }
 
+func validateOpListCustomDetectionRulesInput(v *ListCustomDetectionRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCustomDetectionRulesInput"}
+	if v.Filters != nil {
+		if err := validateDetectionRuleFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListFiltersInput(v *ListFiltersInput) error {
 	if v == nil {
 		return nil
@@ -3185,6 +3728,21 @@ func validateOpListFindingsInput(v *ListFindingsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListFindingsInput"}
+	if v.DetectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListInvestigationsInput(v *ListInvestigationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInvestigationsInput"}
 	if v.DetectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DetectorId"))
 	}
@@ -3402,6 +3960,45 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomDetectionRuleAssociationInput(v *UpdateCustomDetectionRuleAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomDetectionRuleAssociationInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.AssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssociationId"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCustomDetectionRuleOrgConfigurationInput(v *UpdateCustomDetectionRuleOrgConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomDetectionRuleOrgConfigurationInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

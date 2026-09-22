@@ -1,0 +1,5 @@
+POST /2026-02-05/searchListings
+
+Content-Type: application/json
+
+{"filters":[{"filterType":"MIN_AVERAGE_CUSTOMER_RATING","filterValues":["__Member__","__Member__"]},{"filterType":"MIN_AVERAGE_CUSTOMER_RATING","filterValues":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","searchText":"__SearchText__","sortBy":"RELEVANCE","sortOrder":"DESCENDING"}

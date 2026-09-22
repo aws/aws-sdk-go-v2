@@ -5,10 +5,10 @@ package odb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Exadata infrastructure.
@@ -101,6 +101,49 @@ type CreateCloudExadataInfrastructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudExadataInfrastructureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudExadataInfrastructureInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudExadataInfrastructureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureInput_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.AvailabilityZoneId != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureInput_availabilityZoneId, *v.AvailabilityZoneId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureInput_clientToken, *v.ClientToken)
+	}
+	if v.ComputeCount != nil {
+		s.WriteInt32(schemas.CreateCloudExadataInfrastructureInput_computeCount, *v.ComputeCount)
+	}
+	serializeCustomerContacts(s, schemas.CreateCloudExadataInfrastructureInput_customerContactsToSendToOCI, v.CustomerContactsToSendToOCI)
+	if v.DatabaseServerType != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureInput_databaseServerType, *v.DatabaseServerType)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureInput_displayName, *v.DisplayName)
+	}
+	if v.MaintenanceWindow != nil {
+		s.WriteStruct(schemas.CreateCloudExadataInfrastructureInput_maintenanceWindow)
+		v.MaintenanceWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Shape != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureInput_shape, *v.Shape)
+	}
+	if v.StorageCount != nil {
+		s.WriteInt32(schemas.CreateCloudExadataInfrastructureInput_storageCount, *v.StorageCount)
+	}
+	if v.StorageServerType != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureInput_storageServerType, *v.StorageServerType)
+	}
+	serializeRequestTagMap(s, schemas.CreateCloudExadataInfrastructureInput_tags, v.Tags)
+}
+
 type CreateCloudExadataInfrastructureOutput struct {
 
 	// The unique identifier of the Exadata infrastructure.
@@ -123,65 +166,64 @@ type CreateCloudExadataInfrastructureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudExadataInfrastructureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudExadataInfrastructureOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudExadataInfrastructureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureOutput_displayName, *v.DisplayName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.CreateCloudExadataInfrastructureOutput_statusReason, *v.StatusReason)
+	}
+}
+func (v *CreateCloudExadataInfrastructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCloudExadataInfrastructureOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId:
+			v.CloudExadataInfrastructureId = new(string)
+			return d.ReadString(schemas.CreateCloudExadataInfrastructureOutput_cloudExadataInfrastructureId, v.CloudExadataInfrastructureId)
+		case schemas.CreateCloudExadataInfrastructureOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateCloudExadataInfrastructureOutput_displayName, v.DisplayName)
+		case schemas.CreateCloudExadataInfrastructureOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateCloudExadataInfrastructureOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateCloudExadataInfrastructureOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CreateCloudExadataInfrastructureOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCloudExadataInfrastructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudExadataInfrastructure, schemas.CreateCloudExadataInfrastructureInput, schemas.CreateCloudExadataInfrastructureOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateCloudExadataInfrastructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudExadataInfrastructure, schemas.CreateCloudExadataInfrastructureInput, schemas.CreateCloudExadataInfrastructureOutput), output: &CreateCloudExadataInfrastructureOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateCloudExadataInfrastructure{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCloudExadataInfrastructure"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -191,12 +233,6 @@ func (c *Client) addOperationCreateCloudExadataInfrastructureMiddlewares(stack *
 		return err
 	}
 	if err = addOpCreateCloudExadataInfrastructureValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCloudExadataInfrastructure(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,12 +245,6 @@ func (c *Client) addOperationCreateCloudExadataInfrastructureMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,12 +284,4 @@ func (m *idempotencyToken_initializeOpCreateCloudExadataInfrastructure) HandleIn
 }
 func addIdempotencyToken_opCreateCloudExadataInfrastructureMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCloudExadataInfrastructure{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCloudExadataInfrastructure(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCloudExadataInfrastructure",
-	}
 }

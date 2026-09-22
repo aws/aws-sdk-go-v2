@@ -1,0 +1,3 @@
+GET /2013-01-01/suggest?format=sdk&pretty=true&q=__Query__&size=1&suggester=__Suggester__
+
+

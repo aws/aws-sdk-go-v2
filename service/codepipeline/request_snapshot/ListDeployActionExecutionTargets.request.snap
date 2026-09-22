@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.ListDeployActionExecutionTargets
+
+{"actionExecutionId":"__ActionExecutionId__","filters":[{"name":"TARGET_STATUS","values":["__Member__","__Member__"]},{"name":"TARGET_STATUS","values":["__Member__","__Member__"]}],"maxResults":1,"nextToken":"__NextToken__","pipelineName":"__PipelineName__"}

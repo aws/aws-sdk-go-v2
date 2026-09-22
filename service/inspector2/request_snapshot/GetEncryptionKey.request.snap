@@ -1,0 +1,3 @@
+GET /encryptionkey/get?resourceType=AWS_EC2_INSTANCE&scanType=NETWORK
+
+

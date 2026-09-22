@@ -5,10 +5,10 @@ package chimesdkmeetings
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Creates a new Amazon Chime SDK meeting in the specified media Region, with
@@ -108,6 +108,46 @@ type CreateMeetingWithAttendeesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMeetingWithAttendeesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMeetingWithAttendeesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMeetingWithAttendeesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateMeetingWithAttendeesRequestItemList(s, schemas.CreateMeetingWithAttendeesRequest_Attendees, v.Attendees)
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ExternalMeetingId != nil {
+		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_ExternalMeetingId, *v.ExternalMeetingId)
+	}
+	if v.MediaPlacementNetworkType != "" {
+		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_MediaPlacementNetworkType, string(v.MediaPlacementNetworkType))
+	}
+	if v.MediaRegion != nil {
+		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_MediaRegion, *v.MediaRegion)
+	}
+	if v.MeetingFeatures != nil {
+		s.WriteStruct(schemas.CreateMeetingWithAttendeesRequest_MeetingFeatures)
+		v.MeetingFeatures.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MeetingHostId != nil {
+		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_MeetingHostId, *v.MeetingHostId)
+	}
+	if v.NotificationsConfiguration != nil {
+		s.WriteStruct(schemas.CreateMeetingWithAttendeesRequest_NotificationsConfiguration)
+		v.NotificationsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrimaryMeetingId != nil {
+		s.WriteString(schemas.CreateMeetingWithAttendeesRequest_PrimaryMeetingId, *v.PrimaryMeetingId)
+	}
+	serializeTagList(s, schemas.CreateMeetingWithAttendeesRequest_Tags, v.Tags)
+	serializeTenantIdList(s, schemas.CreateMeetingWithAttendeesRequest_TenantIds, v.TenantIds)
+}
+
 type CreateMeetingWithAttendeesOutput struct {
 
 	// The attendee information, including attendees' IDs and join tokens.
@@ -126,65 +166,50 @@ type CreateMeetingWithAttendeesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMeetingWithAttendeesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMeetingWithAttendeesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMeetingWithAttendeesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttendeeList(s, schemas.CreateMeetingWithAttendeesResponse_Attendees, v.Attendees)
+	serializeBatchCreateAttendeeErrorList(s, schemas.CreateMeetingWithAttendeesResponse_Errors, v.Errors)
+	if v.Meeting != nil {
+		s.WriteStruct(schemas.CreateMeetingWithAttendeesResponse_Meeting)
+		v.Meeting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMeetingWithAttendeesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMeetingWithAttendeesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMeetingWithAttendeesResponse_Attendees:
+			return deserializeAttendeeList(d, schemas.CreateMeetingWithAttendeesResponse_Attendees, &v.Attendees)
+		case schemas.CreateMeetingWithAttendeesResponse_Errors:
+			return deserializeBatchCreateAttendeeErrorList(d, schemas.CreateMeetingWithAttendeesResponse_Errors, &v.Errors)
+		case schemas.CreateMeetingWithAttendeesResponse_Meeting:
+			v.Meeting = &types.Meeting{}
+			return v.Meeting.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMeetingWithAttendeesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMeetingWithAttendees, schemas.CreateMeetingWithAttendeesRequest, schemas.CreateMeetingWithAttendeesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMeetingWithAttendees{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMeetingWithAttendees, schemas.CreateMeetingWithAttendeesRequest, schemas.CreateMeetingWithAttendeesResponse), output: &CreateMeetingWithAttendeesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMeetingWithAttendees{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMeetingWithAttendees"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -194,12 +219,6 @@ func (c *Client) addOperationCreateMeetingWithAttendeesMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpCreateMeetingWithAttendeesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMeetingWithAttendees(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,12 +231,6 @@ func (c *Client) addOperationCreateMeetingWithAttendeesMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,12 +270,4 @@ func (m *idempotencyToken_initializeOpCreateMeetingWithAttendees) HandleInitiali
 }
 func addIdempotencyToken_opCreateMeetingWithAttendeesMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateMeetingWithAttendees{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateMeetingWithAttendees(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMeetingWithAttendees",
-	}
 }

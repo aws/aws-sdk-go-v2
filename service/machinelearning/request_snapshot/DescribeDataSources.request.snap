@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonML_20141212.DescribeDataSources
+
+{"EQ":"__EQ__","FilterVariable":"CreatedAt","GE":"__GE__","GT":"__GT__","LE":"__LE__","Limit":1,"LT":"__LT__","NE":"__NE__","NextToken":"__NextToken__","Prefix":"__Prefix__","SortOrder":"asc"}

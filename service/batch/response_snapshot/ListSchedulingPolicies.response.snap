@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","schedulingPolicies":[{"arn":"__Arn__"},{"arn":"__Arn__"}]}

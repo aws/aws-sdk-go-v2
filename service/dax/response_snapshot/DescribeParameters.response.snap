@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDAXV3.DescribeParameters
+
+{"NextToken":"__NextToken__","Parameters":[{"AllowedValues":"__AllowedValues__","ChangeType":"IMMEDIATE","DataType":"__DataType__","Description":"__Description__","IsModifiable":"TRUE","NodeTypeSpecificValues":[{"NodeType":"__NodeType__","Value":"__Value__"},{"NodeType":"__NodeType__","Value":"__Value__"}],"ParameterName":"__ParameterName__","ParameterType":"DEFAULT","ParameterValue":"__ParameterValue__","Source":"__Source__"},{"AllowedValues":"__AllowedValues__","ChangeType":"IMMEDIATE","DataType":"__DataType__","Description":"__Description__","IsModifiable":"TRUE","NodeTypeSpecificValues":[{"NodeType":"__NodeType__","Value":"__Value__"},{"NodeType":"__NodeType__","Value":"__Value__"}],"ParameterName":"__ParameterName__","ParameterType":"DEFAULT","ParameterValue":"__ParameterValue__","Source":"__Source__"}]}

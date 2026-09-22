@@ -5,10 +5,10 @@ package appflow
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers a new custom connector with your Amazon Web Services account. Before
@@ -64,6 +64,32 @@ type RegisterConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RegisterConnectorRequest_clientToken, *v.ClientToken)
+	}
+	if v.ConnectorLabel != nil {
+		s.WriteString(schemas.RegisterConnectorRequest_connectorLabel, *v.ConnectorLabel)
+	}
+	if v.ConnectorProvisioningConfig != nil {
+		s.WriteStruct(schemas.RegisterConnectorRequest_connectorProvisioningConfig)
+		v.ConnectorProvisioningConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectorProvisioningType != "" {
+		s.WriteString(schemas.RegisterConnectorRequest_connectorProvisioningType, string(v.ConnectorProvisioningType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RegisterConnectorRequest_description, *v.Description)
+	}
+}
+
 type RegisterConnectorOutput struct {
 
 	// The ARN of the connector being registered.
@@ -75,65 +101,42 @@ type RegisterConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.RegisterConnectorResponse_connectorArn, *v.ConnectorArn)
+	}
+}
+func (v *RegisterConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterConnectorResponse_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.RegisterConnectorResponse_connectorArn, v.ConnectorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterConnector, schemas.RegisterConnectorRequest, schemas.RegisterConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterConnector, schemas.RegisterConnectorRequest, schemas.RegisterConnectorResponse), output: &RegisterConnectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterConnector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterConnector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -143,12 +146,6 @@ func (c *Client) addOperationRegisterConnectorMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpRegisterConnectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterConnector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +158,6 @@ func (c *Client) addOperationRegisterConnectorMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -206,12 +197,4 @@ func (m *idempotencyToken_initializeOpRegisterConnector) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opRegisterConnectorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpRegisterConnector{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opRegisterConnector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterConnector",
-	}
 }

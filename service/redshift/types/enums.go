@@ -280,6 +280,7 @@ type LogDestinationType string
 const (
 	LogDestinationTypeS3         LogDestinationType = "s3"
 	LogDestinationTypeCloudwatch LogDestinationType = "cloudwatch"
+	LogDestinationTypeS3table    LogDestinationType = "s3table"
 )
 
 // Values returns all known values for LogDestinationType. Note that this can be
@@ -290,6 +291,7 @@ func (LogDestinationType) Values() []LogDestinationType {
 	return []LogDestinationType{
 		"s3",
 		"cloudwatch",
+		"s3table",
 	}
 }
 

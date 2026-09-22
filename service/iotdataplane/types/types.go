@@ -25,4 +25,23 @@ type RetainedMessageSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a subscription for an MQTT client, including the
+// topic filter and Quality of Service (QoS) level.
+type SubscriptionSummary struct {
+
+	// The Quality of Service (QoS) level for the subscription. Valid values are 0 (at
+	// most once) and 1 (at least once).
+	//
+	// This member is required.
+	Qos int32
+
+	// The topic filter pattern that the client is subscribed to. May include MQTT
+	// wildcards such as + (single-level) and # (multi-level).
+	//
+	// This member is required.
+	TopicFilter *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde

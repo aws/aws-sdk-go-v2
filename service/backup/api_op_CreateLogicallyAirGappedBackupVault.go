@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -74,6 +74,31 @@ type CreateLogicallyAirGappedBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLogicallyAirGappedBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLogicallyAirGappedBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLogicallyAirGappedBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
+	serializeTags(s, schemas.CreateLogicallyAirGappedBackupVaultInput_BackupVaultTags, v.BackupVaultTags)
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultInput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultInput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.MaxRetentionDays != nil {
+		s.WriteInt64(schemas.CreateLogicallyAirGappedBackupVaultInput_MaxRetentionDays, *v.MaxRetentionDays)
+	}
+	if v.MinRetentionDays != nil {
+		s.WriteInt64(schemas.CreateLogicallyAirGappedBackupVaultInput_MinRetentionDays, *v.MinRetentionDays)
+	}
+}
+
 type CreateLogicallyAirGappedBackupVaultOutput struct {
 
 	// The ARN (Amazon Resource Name) of the vault.
@@ -100,65 +125,64 @@ type CreateLogicallyAirGappedBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLogicallyAirGappedBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLogicallyAirGappedBackupVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLogicallyAirGappedBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.CreateLogicallyAirGappedBackupVaultOutput_CreationDate, *v.CreationDate)
+	}
+	if v.VaultState != "" {
+		s.WriteString(schemas.CreateLogicallyAirGappedBackupVaultOutput_VaultState, string(v.VaultState))
+	}
+}
+func (v *CreateLogicallyAirGappedBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLogicallyAirGappedBackupVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultName:
+			v.BackupVaultName = new(string)
+			return d.ReadString(schemas.CreateLogicallyAirGappedBackupVaultOutput_BackupVaultName, v.BackupVaultName)
+		case schemas.CreateLogicallyAirGappedBackupVaultOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.CreateLogicallyAirGappedBackupVaultOutput_CreationDate, v.CreationDate)
+		case schemas.CreateLogicallyAirGappedBackupVaultOutput_VaultState:
+			var ev string
+			if err := d.ReadString(schemas.CreateLogicallyAirGappedBackupVaultOutput_VaultState, &ev); err != nil {
+				return err
+			}
+			v.VaultState = types.VaultState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLogicallyAirGappedBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLogicallyAirGappedBackupVault, schemas.CreateLogicallyAirGappedBackupVaultInput, schemas.CreateLogicallyAirGappedBackupVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLogicallyAirGappedBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLogicallyAirGappedBackupVault, schemas.CreateLogicallyAirGappedBackupVaultInput, schemas.CreateLogicallyAirGappedBackupVaultOutput), output: &CreateLogicallyAirGappedBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLogicallyAirGappedBackupVault{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLogicallyAirGappedBackupVault"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -168,12 +192,6 @@ func (c *Client) addOperationCreateLogicallyAirGappedBackupVaultMiddlewares(stac
 		return err
 	}
 	if err = addOpCreateLogicallyAirGappedBackupVaultValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLogicallyAirGappedBackupVault(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +204,6 @@ func (c *Client) addOperationCreateLogicallyAirGappedBackupVaultMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -231,12 +243,4 @@ func (m *idempotencyToken_initializeOpCreateLogicallyAirGappedBackupVault) Handl
 }
 func addIdempotencyToken_opCreateLogicallyAirGappedBackupVaultMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateLogicallyAirGappedBackupVault{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateLogicallyAirGappedBackupVault(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLogicallyAirGappedBackupVault",
-	}
 }

@@ -1,0 +1,5 @@
+POST /flow-associations-batch/__InstanceId__
+
+Content-Type: application/json
+
+{"ResourceIds":["__Member__","__Member__"],"ResourceType":"WHATSAPP_MESSAGING_PHONE_NUMBER"}

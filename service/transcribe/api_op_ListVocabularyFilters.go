@@ -5,10 +5,10 @@ package transcribe
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of custom vocabulary filters that match the specified criteria.
@@ -53,6 +53,24 @@ type ListVocabularyFiltersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVocabularyFiltersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVocabularyFiltersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVocabularyFiltersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVocabularyFiltersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListVocabularyFiltersRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVocabularyFiltersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListVocabularyFiltersOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are
@@ -72,74 +90,48 @@ type ListVocabularyFiltersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVocabularyFiltersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVocabularyFiltersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVocabularyFiltersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVocabularyFiltersResponse_NextToken, *v.NextToken)
+	}
+	serializeVocabularyFilters(s, schemas.ListVocabularyFiltersResponse_VocabularyFilters, v.VocabularyFilters)
+}
+func (v *ListVocabularyFiltersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVocabularyFiltersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVocabularyFiltersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVocabularyFiltersResponse_NextToken, v.NextToken)
+		case schemas.ListVocabularyFiltersResponse_VocabularyFilters:
+			return deserializeVocabularyFilters(d, schemas.ListVocabularyFiltersResponse_VocabularyFilters, &v.VocabularyFilters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVocabularyFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVocabularyFilters, schemas.ListVocabularyFiltersRequest, schemas.ListVocabularyFiltersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVocabularyFilters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVocabularyFilters, schemas.ListVocabularyFiltersRequest, schemas.ListVocabularyFiltersResponse), output: &ListVocabularyFiltersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListVocabularyFilters{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVocabularyFilters"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVocabularyFilters(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +144,6 @@ func (c *Client) addOperationListVocabularyFiltersMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +248,3 @@ type ListVocabularyFiltersAPIClient interface {
 }
 
 var _ ListVocabularyFiltersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListVocabularyFilters(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListVocabularyFilters",
-	}
-}

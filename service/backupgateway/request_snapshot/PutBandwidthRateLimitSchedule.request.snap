@@ -1,0 +1,7 @@
+POST /service/BackupOnPremises_v20210101/operation/PutBandwidthRateLimitSchedule
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢jGatewayArnn__GatewayArn__xBandwidthRateLimitIntervals‚¦x"AverageUploadRateLimitInBitsPerSecnStartHourOfDaylEndHourOfDayqStartMinuteOfHouroEndMinuteOfHourjDaysOfWeek‚¦oEndMinuteOfHourjDaysOfWeek‚x"AverageUploadRateLimitInBitsPerSecnStartHourOfDaylEndHourOfDayqStartMinuteOfHour

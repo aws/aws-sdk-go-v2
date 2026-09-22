@@ -5,10 +5,10 @@ package computeoptimizer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the optimization findings for an account.
@@ -71,6 +71,22 @@ type GetRecommendationSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetRecommendationSummariesRequest_accountIds, v.AccountIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetRecommendationSummariesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecommendationSummariesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetRecommendationSummariesOutput struct {
 
 	// The token to use to advance to the next page of recommendation summaries.
@@ -88,77 +104,51 @@ type GetRecommendationSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRecommendationSummariesResponse_nextToken, *v.NextToken)
+	}
+	serializeRecommendationSummaries(s, schemas.GetRecommendationSummariesResponse_recommendationSummaries, v.RecommendationSummaries)
+}
+func (v *GetRecommendationSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommendationSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommendationSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetRecommendationSummariesResponse_nextToken, v.NextToken)
+		case schemas.GetRecommendationSummariesResponse_recommendationSummaries:
+			return deserializeRecommendationSummaries(d, schemas.GetRecommendationSummariesResponse_recommendationSummaries, &v.RecommendationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommendationSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendationSummaries, schemas.GetRecommendationSummariesRequest, schemas.GetRecommendationSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetRecommendationSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendationSummaries, schemas.GetRecommendationSummariesRequest, schemas.GetRecommendationSummariesResponse), output: &GetRecommendationSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetRecommendationSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRecommendationSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRecommendationSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +161,6 @@ func (c *Client) addOperationGetRecommendationSummariesMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -283,11 +267,3 @@ type GetRecommendationSummariesAPIClient interface {
 }
 
 var _ GetRecommendationSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetRecommendationSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRecommendationSummaries",
-	}
-}

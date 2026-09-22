@@ -1,0 +1,5 @@
+PATCH /prod/signal-maps/__Identifier__
+
+Content-Type: application/json
+
+{"cloudWatchAlarmTemplateGroupIdentifiers":["__Member__","__Member__"],"description":"__Description__","discoveryEntryPointArn":"__DiscoveryEntryPointArn__","eventBridgeRuleTemplateGroupIdentifiers":["__Member__","__Member__"],"forceRediscovery":true,"name":"__Name__"}

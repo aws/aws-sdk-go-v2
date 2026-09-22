@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Creates a new gateway. The request must include at least one network (up to
@@ -53,6 +52,20 @@ type CreateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfString(s, schemas.CreateGatewayRequest_EgressCidrBlocks, v.EgressCidrBlocks)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGatewayRequest_Name, *v.Name)
+	}
+	serialize__listOfGatewayNetwork(s, schemas.CreateGatewayRequest_Networks, v.Networks)
+}
+
 type CreateGatewayOutput struct {
 
 	//  The gateway that you created.
@@ -64,77 +77,50 @@ type CreateGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Gateway != nil {
+		s.WriteStruct(schemas.CreateGatewayResponse_Gateway)
+		v.Gateway.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGatewayResponse_Gateway:
+			v.Gateway = &types.Gateway{}
+			return v.Gateway.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayRequest, schemas.CreateGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayRequest, schemas.CreateGatewayResponse), output: &CreateGatewayOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateGateway{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +135,8 @@ func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGateway",
-	}
 }

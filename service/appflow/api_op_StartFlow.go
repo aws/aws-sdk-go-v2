@@ -5,10 +5,10 @@ package appflow
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Activates an existing flow. For on-demand flows, this operation runs the flow
@@ -60,6 +60,21 @@ type StartFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartFlowRequest_clientToken, *v.ClientToken)
+	}
+	if v.FlowName != nil {
+		s.WriteString(schemas.StartFlowRequest_flowName, *v.FlowName)
+	}
+}
+
 type StartFlowOutput struct {
 
 	//  Returns the internal execution ID of an on-demand flow when the flow is
@@ -78,65 +93,58 @@ type StartFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.StartFlowResponse_executionId, *v.ExecutionId)
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.StartFlowResponse_flowArn, *v.FlowArn)
+	}
+	if v.FlowStatus != "" {
+		s.WriteString(schemas.StartFlowResponse_flowStatus, string(v.FlowStatus))
+	}
+}
+func (v *StartFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFlowResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.StartFlowResponse_executionId, v.ExecutionId)
+		case schemas.StartFlowResponse_flowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.StartFlowResponse_flowArn, v.FlowArn)
+		case schemas.StartFlowResponse_flowStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartFlowResponse_flowStatus, &ev); err != nil {
+				return err
+			}
+			v.FlowStatus = types.FlowStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlow, schemas.StartFlowRequest, schemas.StartFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlow, schemas.StartFlowRequest, schemas.StartFlowResponse), output: &StartFlowOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartFlow{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartFlow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -146,12 +154,6 @@ func (c *Client) addOperationStartFlowMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpStartFlowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartFlow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +166,6 @@ func (c *Client) addOperationStartFlowMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -209,12 +205,4 @@ func (m *idempotencyToken_initializeOpStartFlow) HandleInitialize(ctx context.Co
 }
 func addIdempotencyToken_opStartFlowMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartFlow{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartFlow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartFlow",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWS242ServiceCatalogService.UpdateProvisionedProductProperties
+
+{"AcceptLanguage":"__AcceptLanguage__","IdempotencyToken":"__IdempotencyToken__","ProvisionedProductId":"__ProvisionedProductId__","ProvisionedProductProperties":{"key0":"__Value__"}}

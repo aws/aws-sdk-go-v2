@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonMWAAServerless.StartWorkflowRun
+
+{"RunId":"__RunId__","StartedAt":"2000-01-01T00:00:00Z","Status":"STARTING"}

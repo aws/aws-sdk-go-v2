@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.ListRepositorySyncDefinitions
+
+{"nextToken":"__NextToken__","syncDefinitions":[{"branch":"__Branch__","directory":"__Directory__","parent":"__Parent__","target":"__Target__"},{"branch":"__Branch__","directory":"__Directory__","parent":"__Parent__","target":"__Target__"}]}

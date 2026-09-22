@@ -5,10 +5,10 @@ package chimesdkmediapipelines
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a media concatenation pipeline.
@@ -49,6 +49,21 @@ type CreateMediaConcatenationPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMediaConcatenationPipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMediaConcatenationPipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMediaConcatenationPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateMediaConcatenationPipelineRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	serializeConcatenationSinkList(s, schemas.CreateMediaConcatenationPipelineRequest_Sinks, v.Sinks)
+	serializeConcatenationSourceList(s, schemas.CreateMediaConcatenationPipelineRequest_Sources, v.Sources)
+	serializeTagList(s, schemas.CreateMediaConcatenationPipelineRequest_Tags, v.Tags)
+}
+
 type CreateMediaConcatenationPipelineOutput struct {
 
 	// A media concatenation pipeline object, the ID, source type, MediaPipelineARN ,
@@ -61,65 +76,44 @@ type CreateMediaConcatenationPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMediaConcatenationPipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMediaConcatenationPipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMediaConcatenationPipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaConcatenationPipeline != nil {
+		s.WriteStruct(schemas.CreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline)
+		v.MediaConcatenationPipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMediaConcatenationPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMediaConcatenationPipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline:
+			v.MediaConcatenationPipeline = &types.MediaConcatenationPipeline{}
+			return v.MediaConcatenationPipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMediaConcatenationPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaConcatenationPipeline, schemas.CreateMediaConcatenationPipelineRequest, schemas.CreateMediaConcatenationPipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMediaConcatenationPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaConcatenationPipeline, schemas.CreateMediaConcatenationPipelineRequest, schemas.CreateMediaConcatenationPipelineResponse), output: &CreateMediaConcatenationPipelineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMediaConcatenationPipeline{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMediaConcatenationPipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -129,12 +123,6 @@ func (c *Client) addOperationCreateMediaConcatenationPipelineMiddlewares(stack *
 		return err
 	}
 	if err = addOpCreateMediaConcatenationPipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMediaConcatenationPipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +135,6 @@ func (c *Client) addOperationCreateMediaConcatenationPipelineMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -192,12 +174,4 @@ func (m *idempotencyToken_initializeOpCreateMediaConcatenationPipeline) HandleIn
 }
 func addIdempotencyToken_opCreateMediaConcatenationPipelineMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateMediaConcatenationPipeline{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateMediaConcatenationPipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMediaConcatenationPipeline",
-	}
 }

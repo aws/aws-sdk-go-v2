@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeSnapshots&DryRun=true&Filter.1.Name=__Name__&Filter.1.Value.1=__Member__&Filter.1.Value.2=__Member__&Filter.2.Name=__Name__&Filter.2.Value.1=__Member__&Filter.2.Value.2=__Member__&MaxResults=1&NextToken=__NextToken__&Owner.1=__Member__&Owner.2=__Member__&RestorableBy.1=__Member__&RestorableBy.2=__Member__&SnapshotId.1=__Member__&SnapshotId.2=__Member__&Version=2016-11-15

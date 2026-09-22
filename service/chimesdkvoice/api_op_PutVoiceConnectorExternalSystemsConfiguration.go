@@ -4,11 +4,10 @@ package chimesdkvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds an external systems configuration to a Voice Connector.
@@ -44,6 +43,20 @@ type PutVoiceConnectorExternalSystemsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorExternalSystemsConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVoiceConnectorExternalSystemsConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVoiceConnectorExternalSystemsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContactCenterSystemTypeList(s, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_ContactCenterSystemTypes, v.ContactCenterSystemTypes)
+	serializeSessionBorderControllerTypeList(s, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_SessionBorderControllerTypes, v.SessionBorderControllerTypes)
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.PutVoiceConnectorExternalSystemsConfigurationRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type PutVoiceConnectorExternalSystemsConfigurationOutput struct {
 
 	// An object that contains information about an external systems configuration for
@@ -56,77 +69,50 @@ type PutVoiceConnectorExternalSystemsConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutVoiceConnectorExternalSystemsConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutVoiceConnectorExternalSystemsConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutVoiceConnectorExternalSystemsConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalSystemsConfiguration != nil {
+		s.WriteStruct(schemas.PutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration)
+		v.ExternalSystemsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutVoiceConnectorExternalSystemsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutVoiceConnectorExternalSystemsConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutVoiceConnectorExternalSystemsConfigurationResponse_ExternalSystemsConfiguration:
+			v.ExternalSystemsConfiguration = &types.ExternalSystemsConfiguration{}
+			return v.ExternalSystemsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutVoiceConnectorExternalSystemsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorExternalSystemsConfiguration, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest, schemas.PutVoiceConnectorExternalSystemsConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutVoiceConnectorExternalSystemsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutVoiceConnectorExternalSystemsConfiguration, schemas.PutVoiceConnectorExternalSystemsConfigurationRequest, schemas.PutVoiceConnectorExternalSystemsConfigurationResponse), output: &PutVoiceConnectorExternalSystemsConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutVoiceConnectorExternalSystemsConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutVoiceConnectorExternalSystemsConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutVoiceConnectorExternalSystemsConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutVoiceConnectorExternalSystemsConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +127,8 @@ func (c *Client) addOperationPutVoiceConnectorExternalSystemsConfigurationMiddle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutVoiceConnectorExternalSystemsConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutVoiceConnectorExternalSystemsConfiguration",
-	}
 }

@@ -4,11 +4,10 @@ package billingconductor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a batch of resources to a percentage custom line item.
@@ -45,6 +44,39 @@ type BatchAssociateResourcesToCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateResourcesToCustomLineItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateResourcesToCustomLineItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateResourcesToCustomLineItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriodRange != nil {
+		s.WriteStruct(schemas.BatchAssociateResourcesToCustomLineItemInput_BillingPeriodRange)
+		v.BillingPeriodRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCustomLineItemBatchAssociationsList(s, schemas.BatchAssociateResourcesToCustomLineItemInput_ResourceArns, v.ResourceArns)
+	if v.TargetArn != nil {
+		s.WriteString(schemas.BatchAssociateResourcesToCustomLineItemInput_TargetArn, *v.TargetArn)
+	}
+}
+func (v *BatchAssociateResourcesToCustomLineItemInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateResourcesToCustomLineItemInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateResourcesToCustomLineItemInput_BillingPeriodRange:
+			v.BillingPeriodRange = &types.CustomLineItemBillingPeriodRange{}
+			return v.BillingPeriodRange.Deserialize(d)
+		case schemas.BatchAssociateResourcesToCustomLineItemInput_ResourceArns:
+			return deserializeCustomLineItemBatchAssociationsList(d, schemas.BatchAssociateResourcesToCustomLineItemInput_ResourceArns, &v.ResourceArns)
+		case schemas.BatchAssociateResourcesToCustomLineItemInput_TargetArn:
+			v.TargetArn = new(string)
+			return d.ReadString(schemas.BatchAssociateResourcesToCustomLineItemInput_TargetArn, v.TargetArn)
+		}
+		return nil
+	})
+}
+
 type BatchAssociateResourcesToCustomLineItemOutput struct {
 
 	//  A list of AssociateResourceResponseElement for each resource that failed
@@ -61,77 +93,48 @@ type BatchAssociateResourcesToCustomLineItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateResourcesToCustomLineItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateResourcesToCustomLineItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateResourcesToCustomLineItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociateResourcesResponseList(s, schemas.BatchAssociateResourcesToCustomLineItemOutput_FailedAssociatedResources, v.FailedAssociatedResources)
+	serializeAssociateResourcesResponseList(s, schemas.BatchAssociateResourcesToCustomLineItemOutput_SuccessfullyAssociatedResources, v.SuccessfullyAssociatedResources)
+}
+func (v *BatchAssociateResourcesToCustomLineItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateResourcesToCustomLineItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateResourcesToCustomLineItemOutput_FailedAssociatedResources:
+			return deserializeAssociateResourcesResponseList(d, schemas.BatchAssociateResourcesToCustomLineItemOutput_FailedAssociatedResources, &v.FailedAssociatedResources)
+		case schemas.BatchAssociateResourcesToCustomLineItemOutput_SuccessfullyAssociatedResources:
+			return deserializeAssociateResourcesResponseList(d, schemas.BatchAssociateResourcesToCustomLineItemOutput_SuccessfullyAssociatedResources, &v.SuccessfullyAssociatedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateResourcesToCustomLineItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateResourcesToCustomLineItem, schemas.BatchAssociateResourcesToCustomLineItemInput, schemas.BatchAssociateResourcesToCustomLineItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateResourcesToCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateResourcesToCustomLineItem, schemas.BatchAssociateResourcesToCustomLineItemInput, schemas.BatchAssociateResourcesToCustomLineItemOutput), output: &BatchAssociateResourcesToCustomLineItemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAssociateResourcesToCustomLineItem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAssociateResourcesToCustomLineItem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchAssociateResourcesToCustomLineItemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateResourcesToCustomLineItem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +149,8 @@ func (c *Client) addOperationBatchAssociateResourcesToCustomLineItemMiddlewares(
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchAssociateResourcesToCustomLineItem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchAssociateResourcesToCustomLineItem",
-	}
 }

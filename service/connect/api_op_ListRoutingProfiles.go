@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides summary information about the routing profiles for the specified
@@ -55,6 +55,24 @@ type ListRoutingProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListRoutingProfilesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoutingProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingProfilesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRoutingProfilesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -69,77 +87,51 @@ type ListRoutingProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoutingProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoutingProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoutingProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoutingProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeRoutingProfileSummaryList(s, schemas.ListRoutingProfilesResponse_RoutingProfileSummaryList, v.RoutingProfileSummaryList)
+}
+func (v *ListRoutingProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoutingProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoutingProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoutingProfilesResponse_NextToken, v.NextToken)
+		case schemas.ListRoutingProfilesResponse_RoutingProfileSummaryList:
+			return deserializeRoutingProfileSummaryList(d, schemas.ListRoutingProfilesResponse_RoutingProfileSummaryList, &v.RoutingProfileSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoutingProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingProfiles, schemas.ListRoutingProfilesRequest, schemas.ListRoutingProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoutingProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoutingProfiles, schemas.ListRoutingProfilesRequest, schemas.ListRoutingProfilesResponse), output: &ListRoutingProfilesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRoutingProfiles{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRoutingProfiles"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRoutingProfilesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRoutingProfiles(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +144,6 @@ func (c *Client) addOperationListRoutingProfilesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +246,3 @@ type ListRoutingProfilesAPIClient interface {
 }
 
 var _ ListRoutingProfilesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRoutingProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRoutingProfiles",
-	}
-}

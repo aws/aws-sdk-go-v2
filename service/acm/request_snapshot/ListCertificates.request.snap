@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CertificateManager.ListCertificates
+
+{"CertificateKeyPairOrigins":["AWS_MANAGED","AWS_MANAGED"],"CertificateStatuses":["PENDING_VALIDATION","PENDING_VALIDATION"],"Includes":{"exportOption":"ENABLED","extendedKeyUsage":["TLS_WEB_SERVER_AUTHENTICATION","TLS_WEB_SERVER_AUTHENTICATION"],"keyTypes":["RSA_1024","RSA_1024"],"keyUsage":["DIGITAL_SIGNATURE","DIGITAL_SIGNATURE"],"managedBy":"CLOUDFRONT"},"MaxItems":1,"NextToken":"__NextToken__","SortBy":"CREATED_AT","SortOrder":"ASCENDING"}

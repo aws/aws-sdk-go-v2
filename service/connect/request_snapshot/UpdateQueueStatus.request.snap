@@ -1,0 +1,5 @@
+POST /queues/__InstanceId__/__QueueId__/status
+
+Content-Type: application/json
+
+{"Status":"ENABLED"}

@@ -5,10 +5,10 @@ package memorydb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of subnet group descriptions. If a subnet group name is
@@ -48,6 +48,24 @@ type DescribeSubnetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubnetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSubnetGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSubnetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSubnetGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSubnetGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.DescribeSubnetGroupsRequest_SubnetGroupName, *v.SubnetGroupName)
+	}
+}
+
 type DescribeSubnetGroupsOutput struct {
 
 	// An optional argument to pass in case the total number of records exceeds the
@@ -67,74 +85,48 @@ type DescribeSubnetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubnetGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSubnetGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSubnetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSubnetGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeSubnetGroupList(s, schemas.DescribeSubnetGroupsResponse_SubnetGroups, v.SubnetGroups)
+}
+func (v *DescribeSubnetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSubnetGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSubnetGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSubnetGroupsResponse_NextToken, v.NextToken)
+		case schemas.DescribeSubnetGroupsResponse_SubnetGroups:
+			return deserializeSubnetGroupList(d, schemas.DescribeSubnetGroupsResponse_SubnetGroups, &v.SubnetGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSubnetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubnetGroups, schemas.DescribeSubnetGroupsRequest, schemas.DescribeSubnetGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSubnetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubnetGroups, schemas.DescribeSubnetGroupsRequest, schemas.DescribeSubnetGroupsResponse), output: &DescribeSubnetGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSubnetGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSubnetGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSubnetGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +139,6 @@ func (c *Client) addOperationDescribeSubnetGroupsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +242,3 @@ type DescribeSubnetGroupsAPIClient interface {
 }
 
 var _ DescribeSubnetGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeSubnetGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeSubnetGroups",
-	}
-}

@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/search/messageTemplates?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"searchExpression":{"filters":[{"includeNoExistence":true,"name":"__Name__","operator":"EQUALS","values":["__Member__","__Member__"]},{"includeNoExistence":true,"name":"__Name__","operator":"EQUALS","values":["__Member__","__Member__"]}],"orderOnField":{"name":"__Name__","order":"ASC"},"queries":[{"allowFuzziness":true,"name":"__Name__","operator":"CONTAINS","priority":"HIGH","values":["__Member__","__Member__"]},{"allowFuzziness":true,"name":"__Name__","operator":"CONTAINS","priority":"HIGH","values":["__Member__","__Member__"]}]}}

@@ -4,10 +4,9 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds an email address to the list of identities for your Amazon SES account in
@@ -58,6 +57,24 @@ type SendCustomVerificationEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCustomVerificationEmailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCustomVerificationEmailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCustomVerificationEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendCustomVerificationEmailRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.SendCustomVerificationEmailRequest_EmailAddress, *v.EmailAddress)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.SendCustomVerificationEmailRequest_TemplateName, *v.TemplateName)
+	}
+}
+
 // The following element is returned by the service.
 type SendCustomVerificationEmailOutput struct {
 
@@ -71,77 +88,48 @@ type SendCustomVerificationEmailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCustomVerificationEmailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCustomVerificationEmailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCustomVerificationEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendCustomVerificationEmailResponse_MessageId, *v.MessageId)
+	}
+}
+func (v *SendCustomVerificationEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendCustomVerificationEmailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendCustomVerificationEmailResponse_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendCustomVerificationEmailResponse_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendCustomVerificationEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCustomVerificationEmail, schemas.SendCustomVerificationEmailRequest, schemas.SendCustomVerificationEmailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendCustomVerificationEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCustomVerificationEmail, schemas.SendCustomVerificationEmailRequest, schemas.SendCustomVerificationEmailResponse), output: &SendCustomVerificationEmailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendCustomVerificationEmail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendCustomVerificationEmail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendCustomVerificationEmailValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendCustomVerificationEmail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +144,8 @@ func (c *Client) addOperationSendCustomVerificationEmailMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendCustomVerificationEmail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendCustomVerificationEmail",
-	}
 }

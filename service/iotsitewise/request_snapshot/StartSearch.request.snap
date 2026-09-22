@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceName__/searches
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","groupId":"__GroupId__","queryStatement":"__QueryStatement__","searchFilters":{"datasetIds":["__Member__","__Member__"],"timeIntervals":[{"endTime":{"offsetInNanos":1,"timeInSeconds":1},"startTime":{"offsetInNanos":1,"timeInSeconds":1}},{"endTime":{"offsetInNanos":1,"timeInSeconds":1},"startTime":{"offsetInNanos":1,"timeInSeconds":1}}],"timeSeriesIds":["__Member__","__Member__"]},"searchType":"DEEP"}

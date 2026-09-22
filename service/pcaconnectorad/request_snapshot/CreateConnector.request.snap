@@ -1,0 +1,5 @@
+POST /connectors
+
+Content-Type: application/json
+
+{"CertificateAuthorityArn":"__CertificateAuthorityArn__","ClientToken":"__ClientToken__","DirectoryId":"__DirectoryId__","Tags":{"key0":"__Value__"},"VpcInformation":{"IpAddressType":"IPV4","SecurityGroupIds":["__Member__","__Member__"]}}

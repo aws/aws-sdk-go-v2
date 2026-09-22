@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.LookupEvents
+
+{"EndTime":946684800,"EventCategory":"insight","LookupAttributes":[{"AttributeKey":"EventId","AttributeValue":"__AttributeValue__"},{"AttributeKey":"EventId","AttributeValue":"__AttributeValue__"}],"MaxResults":1,"NextToken":"__NextToken__","StartTime":946684800}

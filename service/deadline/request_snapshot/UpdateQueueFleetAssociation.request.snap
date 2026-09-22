@@ -1,0 +1,5 @@
+PATCH /2023-10-12/farms/__FarmId__/queue-fleet-associations/__QueueId__/__FleetId__
+
+Content-Type: application/json
+
+{"status":"ACTIVE"}

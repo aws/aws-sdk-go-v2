@@ -1,0 +1,5 @@
+POST /journal/agent-space/__AgentSpaceId__/journalRecords
+
+Content-Type: application/json
+
+{"executionId":"__ExecutionId__","limit":1,"nextToken":"__NextToken__","order":"ASC","recordType":"__RecordType__"}

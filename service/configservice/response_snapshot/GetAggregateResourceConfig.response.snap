@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.GetAggregateResourceConfig
+
+{"ConfigurationItem":{"accountId":"__AccountId__","arn":"__Arn__","availabilityZone":"__AvailabilityZone__","awsRegion":"__AwsRegion__","configuration":"__Configuration__","configurationItemCaptureTime":946684800,"configurationItemDeliveryTime":946684800,"configurationItemMD5Hash":"__ConfigurationItemMD5Hash__","configurationItemStatus":"OK","configurationStateId":"__ConfigurationStateId__","recordingFrequency":"CONTINUOUS","relatedEvents":["__Member__","__Member__"],"relationships":[{"relationshipName":"__RelationshipName__","resourceId":"__ResourceId__","resourceName":"__ResourceName__","resourceType":"AWS::EC2::CustomerGateway"},{"relationshipName":"__RelationshipName__","resourceId":"__ResourceId__","resourceName":"__ResourceName__","resourceType":"AWS::EC2::CustomerGateway"}],"resourceCreationTime":946684800,"resourceId":"__ResourceId__","resourceName":"__ResourceName__","resourceType":"AWS::EC2::CustomerGateway","supplementaryConfiguration":{"key0":"__Value__"},"tags":{"key0":"__Value__"},"version":"__Version__"}}

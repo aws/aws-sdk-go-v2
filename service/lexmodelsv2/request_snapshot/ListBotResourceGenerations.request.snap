@@ -1,0 +1,5 @@
+POST /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/generations
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","sortBy":{"attribute":"creationStartTime","order":"Ascending"}}

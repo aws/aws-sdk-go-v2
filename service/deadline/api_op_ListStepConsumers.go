@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +60,33 @@ type ListStepConsumersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStepConsumersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStepConsumersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStepConsumersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStepConsumersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_nextToken, *v.NextToken)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_queueId, *v.QueueId)
+	}
+	if v.StepId != nil {
+		s.WriteString(schemas.ListStepConsumersRequest_stepId, *v.StepId)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListStepConsumersOutput struct {
 
@@ -81,65 +109,45 @@ type ListStepConsumersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStepConsumersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStepConsumersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStepConsumersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStepConsumers(s, schemas.ListStepConsumersResponse_consumers, v.Consumers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStepConsumersResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListStepConsumersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStepConsumersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStepConsumersResponse_consumers:
+			return deserializeStepConsumers(d, schemas.ListStepConsumersResponse_consumers, &v.Consumers)
+		case schemas.ListStepConsumersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStepConsumersResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStepConsumersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStepConsumers, schemas.ListStepConsumersRequest, schemas.ListStepConsumersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStepConsumers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStepConsumers, schemas.ListStepConsumersRequest, schemas.ListStepConsumersResponse), output: &ListStepConsumersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStepConsumers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStepConsumers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -149,12 +157,6 @@ func (c *Client) addOperationListStepConsumersMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpListStepConsumersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStepConsumers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,12 +169,6 @@ func (c *Client) addOperationListStepConsumersMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -301,11 +297,3 @@ type ListStepConsumersAPIClient interface {
 }
 
 var _ ListStepConsumersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListStepConsumers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListStepConsumers",
-	}
-}

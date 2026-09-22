@@ -1,0 +1,5 @@
+POST /put-resource-permission-statement
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","consoleSourceVpce":"__ConsoleSourceVpce__","excludedPrincipal":"__ExcludedPrincipal__","requestedRegion":"__RequestedRegion__","signinSourceVpce":"__SigninSourceVpce__","sourceIp":"__SourceIp__","sourceVpc":"__SourceVpc__","vpcSourceIp":"__VpcSourceIp__"}

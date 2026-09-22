@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"softwareSet":{"arn":"__Arn__","id":"__Id__","releasedAt":946684800,"software":[{"name":"__Name__","version":"__Version__"},{"name":"__Name__","version":"__Version__"}],"supportedUntil":946684800,"validationStatus":"VALIDATED","version":"__Version__"}}

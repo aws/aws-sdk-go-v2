@@ -1,0 +1,3 @@
+GET /clusters/__Name__/updates?addonName=__AddonName__&capabilityName=__CapabilityName__&maxResults=1&nextToken=__NextToken__&nodegroupName=__NodegroupName__
+
+

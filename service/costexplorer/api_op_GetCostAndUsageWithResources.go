@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves cost and usage metrics with resources for your account. You can
@@ -119,6 +118,36 @@ type GetCostAndUsageWithResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostAndUsageWithResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageWithResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageWithResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetCostAndUsageWithResourcesRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetCostAndUsageWithResourcesRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetCostAndUsageWithResourcesRequest_Granularity, string(v.Granularity))
+	}
+	serializeGroupDefinitions(s, schemas.GetCostAndUsageWithResourcesRequest_GroupBy, v.GroupBy)
+	serializeMetricNames(s, schemas.GetCostAndUsageWithResourcesRequest_Metrics, v.Metrics)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageWithResourcesRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetCostAndUsageWithResourcesRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetCostAndUsageWithResourcesOutput struct {
 
 	// The attributes that apply to a specific dimension value. For example, if the
@@ -143,77 +172,57 @@ type GetCostAndUsageWithResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCostAndUsageWithResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCostAndUsageWithResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCostAndUsageWithResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionValuesWithAttributesList(s, schemas.GetCostAndUsageWithResourcesResponse_DimensionValueAttributes, v.DimensionValueAttributes)
+	serializeGroupDefinitions(s, schemas.GetCostAndUsageWithResourcesResponse_GroupDefinitions, v.GroupDefinitions)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCostAndUsageWithResourcesResponse_NextPageToken, *v.NextPageToken)
+	}
+	serializeResultsByTime(s, schemas.GetCostAndUsageWithResourcesResponse_ResultsByTime, v.ResultsByTime)
+}
+func (v *GetCostAndUsageWithResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCostAndUsageWithResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCostAndUsageWithResourcesResponse_DimensionValueAttributes:
+			return deserializeDimensionValuesWithAttributesList(d, schemas.GetCostAndUsageWithResourcesResponse_DimensionValueAttributes, &v.DimensionValueAttributes)
+		case schemas.GetCostAndUsageWithResourcesResponse_GroupDefinitions:
+			return deserializeGroupDefinitions(d, schemas.GetCostAndUsageWithResourcesResponse_GroupDefinitions, &v.GroupDefinitions)
+		case schemas.GetCostAndUsageWithResourcesResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCostAndUsageWithResourcesResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetCostAndUsageWithResourcesResponse_ResultsByTime:
+			return deserializeResultsByTime(d, schemas.GetCostAndUsageWithResourcesResponse_ResultsByTime, &v.ResultsByTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCostAndUsageWithResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsageWithResources, schemas.GetCostAndUsageWithResourcesRequest, schemas.GetCostAndUsageWithResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCostAndUsageWithResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCostAndUsageWithResources, schemas.GetCostAndUsageWithResourcesRequest, schemas.GetCostAndUsageWithResourcesResponse), output: &GetCostAndUsageWithResourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCostAndUsageWithResources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCostAndUsageWithResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCostAndUsageWithResourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCostAndUsageWithResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +237,8 @@ func (c *Client) addOperationGetCostAndUsageWithResourcesMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCostAndUsageWithResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCostAndUsageWithResources",
-	}
 }

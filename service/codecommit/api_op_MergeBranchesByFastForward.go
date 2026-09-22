@@ -4,10 +4,9 @@ package codecommit
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Merges two branches using the fast-forward merge strategy.
@@ -51,6 +50,27 @@ type MergeBranchesByFastForwardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeBranchesByFastForwardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeBranchesByFastForwardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeBranchesByFastForwardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationCommitSpecifier != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardInput_destinationCommitSpecifier, *v.DestinationCommitSpecifier)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardInput_repositoryName, *v.RepositoryName)
+	}
+	if v.SourceCommitSpecifier != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardInput_sourceCommitSpecifier, *v.SourceCommitSpecifier)
+	}
+	if v.TargetBranch != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardInput_targetBranch, *v.TargetBranch)
+	}
+}
+
 type MergeBranchesByFastForwardOutput struct {
 
 	// The commit ID of the merge in the destination or target branch.
@@ -65,77 +85,54 @@ type MergeBranchesByFastForwardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MergeBranchesByFastForwardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MergeBranchesByFastForwardOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MergeBranchesByFastForwardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitId != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardOutput_commitId, *v.CommitId)
+	}
+	if v.TreeId != nil {
+		s.WriteString(schemas.MergeBranchesByFastForwardOutput_treeId, *v.TreeId)
+	}
+}
+func (v *MergeBranchesByFastForwardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MergeBranchesByFastForwardOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MergeBranchesByFastForwardOutput_commitId:
+			v.CommitId = new(string)
+			return d.ReadString(schemas.MergeBranchesByFastForwardOutput_commitId, v.CommitId)
+		case schemas.MergeBranchesByFastForwardOutput_treeId:
+			v.TreeId = new(string)
+			return d.ReadString(schemas.MergeBranchesByFastForwardOutput_treeId, v.TreeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMergeBranchesByFastForwardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeBranchesByFastForward, schemas.MergeBranchesByFastForwardInput, schemas.MergeBranchesByFastForwardOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpMergeBranchesByFastForward{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MergeBranchesByFastForward, schemas.MergeBranchesByFastForwardInput, schemas.MergeBranchesByFastForwardOutput), output: &MergeBranchesByFastForwardOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpMergeBranchesByFastForward{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "MergeBranchesByFastForward"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpMergeBranchesByFastForwardValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMergeBranchesByFastForward(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +147,8 @@ func (c *Client) addOperationMergeBranchesByFastForwardMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opMergeBranchesByFastForward(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "MergeBranchesByFastForward",
-	}
 }

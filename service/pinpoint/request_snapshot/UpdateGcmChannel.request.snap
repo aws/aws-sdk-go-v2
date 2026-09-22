@@ -1,0 +1,5 @@
+PUT /v1/apps/__ApplicationId__/channels/gcm
+
+Content-Type: application/json
+
+{"ApiKey":"__ApiKey__","DefaultAuthenticationMethod":"__DefaultAuthenticationMethod__","Enabled":true,"ServiceJson":"__ServiceJson__"}

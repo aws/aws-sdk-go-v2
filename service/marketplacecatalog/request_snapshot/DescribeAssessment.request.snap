@@ -1,0 +1,5 @@
+POST /DescribeAssessment
+
+Content-Type: application/json
+
+{"AssessmentIdentifier":"__AssessmentIdentifier__","Catalog":"__Catalog__","MaxResults":1,"NextToken":"__NextToken__"}

@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/DescribeContainerGroupPortMappings
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥kComputeNameo__ComputeName__jInstanceIdn__InstanceId__mContainerNameq__ContainerName__gFleetIdk__FleetId__rContainerGroupTypekGAME_SERVER

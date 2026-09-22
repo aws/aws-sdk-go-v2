@@ -1,0 +1,3 @@
+GET /2013-01-01/search?cursor=__Cursor__&expr=__Expr__&facet=__Facet__&format=sdk&fq=__FilterQuery__&highlight=__Highlight__&partial=true&pretty=true&q=__Query__&q.options=__QueryOptions__&q.parser=simple&return=__Return__&size=1&sort=__Sort__&start=1&stats=__Stats__
+
+

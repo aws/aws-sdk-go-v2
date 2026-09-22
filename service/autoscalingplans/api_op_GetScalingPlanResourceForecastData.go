@@ -4,11 +4,10 @@ package autoscalingplans
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -98,6 +97,39 @@ type GetScalingPlanResourceForecastDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScalingPlanResourceForecastDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetScalingPlanResourceForecastDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetScalingPlanResourceForecastDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetScalingPlanResourceForecastDataRequest_EndTime, *v.EndTime)
+	}
+	if v.ForecastDataType != "" {
+		s.WriteString(schemas.GetScalingPlanResourceForecastDataRequest_ForecastDataType, string(v.ForecastDataType))
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetScalingPlanResourceForecastDataRequest_ResourceId, *v.ResourceId)
+	}
+	if v.ScalableDimension != "" {
+		s.WriteString(schemas.GetScalingPlanResourceForecastDataRequest_ScalableDimension, string(v.ScalableDimension))
+	}
+	if v.ScalingPlanName != nil {
+		s.WriteString(schemas.GetScalingPlanResourceForecastDataRequest_ScalingPlanName, *v.ScalingPlanName)
+	}
+	if v.ScalingPlanVersion != nil {
+		s.WriteInt64(schemas.GetScalingPlanResourceForecastDataRequest_ScalingPlanVersion, *v.ScalingPlanVersion)
+	}
+	if v.ServiceNamespace != "" {
+		s.WriteString(schemas.GetScalingPlanResourceForecastDataRequest_ServiceNamespace, string(v.ServiceNamespace))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetScalingPlanResourceForecastDataRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetScalingPlanResourceForecastDataOutput struct {
 
 	// The data points to return.
@@ -111,77 +143,45 @@ type GetScalingPlanResourceForecastDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScalingPlanResourceForecastDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetScalingPlanResourceForecastDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetScalingPlanResourceForecastDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatapoints(s, schemas.GetScalingPlanResourceForecastDataResponse_Datapoints, v.Datapoints)
+}
+func (v *GetScalingPlanResourceForecastDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetScalingPlanResourceForecastDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetScalingPlanResourceForecastDataResponse_Datapoints:
+			return deserializeDatapoints(d, schemas.GetScalingPlanResourceForecastDataResponse_Datapoints, &v.Datapoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetScalingPlanResourceForecastDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScalingPlanResourceForecastData, schemas.GetScalingPlanResourceForecastDataRequest, schemas.GetScalingPlanResourceForecastDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetScalingPlanResourceForecastData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScalingPlanResourceForecastData, schemas.GetScalingPlanResourceForecastDataRequest, schemas.GetScalingPlanResourceForecastDataResponse), output: &GetScalingPlanResourceForecastDataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetScalingPlanResourceForecastData{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetScalingPlanResourceForecastData"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetScalingPlanResourceForecastDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetScalingPlanResourceForecastData(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +196,8 @@ func (c *Client) addOperationGetScalingPlanResourceForecastDataMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetScalingPlanResourceForecastData(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetScalingPlanResourceForecastData",
-	}
 }

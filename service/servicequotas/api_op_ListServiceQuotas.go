@@ -5,10 +5,10 @@ package servicequotas
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the applied quota values for the specified Amazon Web Services service.
@@ -69,6 +69,30 @@ type ListServiceQuotasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceQuotasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceQuotasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceQuotasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceQuotasRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceQuotasRequest_NextToken, *v.NextToken)
+	}
+	if v.QuotaAppliedAtLevel != "" {
+		s.WriteString(schemas.ListServiceQuotasRequest_QuotaAppliedAtLevel, string(v.QuotaAppliedAtLevel))
+	}
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.ListServiceQuotasRequest_QuotaCode, *v.QuotaCode)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ListServiceQuotasRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type ListServiceQuotasOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -86,77 +110,51 @@ type ListServiceQuotasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceQuotasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceQuotasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceQuotasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceQuotasResponse_NextToken, *v.NextToken)
+	}
+	serializeServiceQuotaListDefinition(s, schemas.ListServiceQuotasResponse_Quotas, v.Quotas)
+}
+func (v *ListServiceQuotasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceQuotasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceQuotasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceQuotasResponse_NextToken, v.NextToken)
+		case schemas.ListServiceQuotasResponse_Quotas:
+			return deserializeServiceQuotaListDefinition(d, schemas.ListServiceQuotasResponse_Quotas, &v.Quotas)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceQuotasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceQuotas, schemas.ListServiceQuotasRequest, schemas.ListServiceQuotasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListServiceQuotas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceQuotas, schemas.ListServiceQuotasRequest, schemas.ListServiceQuotasResponse), output: &ListServiceQuotasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListServiceQuotas{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceQuotas"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListServiceQuotasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceQuotas(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +167,6 @@ func (c *Client) addOperationListServiceQuotasMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -284,11 +276,3 @@ type ListServiceQuotasAPIClient interface {
 }
 
 var _ ListServiceQuotasAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListServiceQuotas(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListServiceQuotas",
-	}
-}

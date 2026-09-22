@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.ListEventSubscriptions
+
+{"nextToken":"__NextToken__","subscriptions":[{"eventSubscriptions":[{"event":"ASSESSMENT_RUN_STARTED","subscribedAt":946684800},{"event":"ASSESSMENT_RUN_STARTED","subscribedAt":946684800}],"resourceArn":"__ResourceArn__","topicArn":"__TopicArn__"},{"eventSubscriptions":[{"event":"ASSESSMENT_RUN_STARTED","subscribedAt":946684800},{"event":"ASSESSMENT_RUN_STARTED","subscribedAt":946684800}],"resourceArn":"__ResourceArn__","topicArn":"__TopicArn__"}]}

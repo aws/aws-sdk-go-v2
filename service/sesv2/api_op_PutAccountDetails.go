@@ -4,11 +4,10 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update your Amazon SES account details.
@@ -68,6 +67,31 @@ type PutAccountDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalContactEmailAddresses(s, schemas.PutAccountDetailsRequest_AdditionalContactEmailAddresses, v.AdditionalContactEmailAddresses)
+	if v.ContactLanguage != "" {
+		s.WriteString(schemas.PutAccountDetailsRequest_ContactLanguage, string(v.ContactLanguage))
+	}
+	if v.MailType != "" {
+		s.WriteString(schemas.PutAccountDetailsRequest_MailType, string(v.MailType))
+	}
+	if v.ProductionAccessEnabled != nil {
+		s.WriteBool(schemas.PutAccountDetailsRequest_ProductionAccessEnabled, *v.ProductionAccessEnabled)
+	}
+	if v.UseCaseDescription != nil {
+		s.WriteString(schemas.PutAccountDetailsRequest_UseCaseDescription, *v.UseCaseDescription)
+	}
+	if v.WebsiteURL != nil {
+		s.WriteString(schemas.PutAccountDetailsRequest_WebsiteURL, *v.WebsiteURL)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutAccountDetailsOutput struct {
@@ -77,77 +101,42 @@ type PutAccountDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountDetails, schemas.PutAccountDetailsRequest, schemas.PutAccountDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountDetails, schemas.PutAccountDetailsRequest, schemas.PutAccountDetailsResponse), output: &PutAccountDetailsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountDetails{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAccountDetails"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutAccountDetailsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAccountDetails(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +151,8 @@ func (c *Client) addOperationPutAccountDetailsMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutAccountDetails(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutAccountDetails",
-	}
 }

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.ListPredictorBacktestExportJobs
+
+{"NextToken":"__NextToken__","PredictorBacktestExportJobs":[{"CreationTime":946684800,"Destination":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"LastModificationTime":946684800,"Message":"__Message__","PredictorBacktestExportJobArn":"__PredictorBacktestExportJobArn__","PredictorBacktestExportJobName":"__PredictorBacktestExportJobName__","Status":"__Status__"},{"CreationTime":946684800,"Destination":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"LastModificationTime":946684800,"Message":"__Message__","PredictorBacktestExportJobArn":"__PredictorBacktestExportJobArn__","PredictorBacktestExportJobName":"__PredictorBacktestExportJobName__","Status":"__Status__"}]}

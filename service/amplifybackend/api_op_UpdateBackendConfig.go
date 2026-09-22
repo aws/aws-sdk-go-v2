@@ -4,11 +4,10 @@ package amplifybackend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the AWS resources required to access the Amplify Admin UI.
@@ -41,6 +40,23 @@ type UpdateBackendConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendConfigRequest_AppId, *v.AppId)
+	}
+	if v.LoginAuthConfig != nil {
+		s.WriteStruct(schemas.UpdateBackendConfigRequest_LoginAuthConfig)
+		v.LoginAuthConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateBackendConfigOutput struct {
 
 	// The app ID.
@@ -62,77 +78,68 @@ type UpdateBackendConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBackendConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBackendConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBackendConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateBackendConfigResponse_AppId, *v.AppId)
+	}
+	if v.BackendManagerAppId != nil {
+		s.WriteString(schemas.UpdateBackendConfigResponse_BackendManagerAppId, *v.BackendManagerAppId)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.UpdateBackendConfigResponse_Error, *v.Error)
+	}
+	if v.LoginAuthConfig != nil {
+		s.WriteStruct(schemas.UpdateBackendConfigResponse_LoginAuthConfig)
+		v.LoginAuthConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBackendConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBackendConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBackendConfigResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UpdateBackendConfigResponse_AppId, v.AppId)
+		case schemas.UpdateBackendConfigResponse_BackendManagerAppId:
+			v.BackendManagerAppId = new(string)
+			return d.ReadString(schemas.UpdateBackendConfigResponse_BackendManagerAppId, v.BackendManagerAppId)
+		case schemas.UpdateBackendConfigResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.UpdateBackendConfigResponse_Error, v.Error)
+		case schemas.UpdateBackendConfigResponse_LoginAuthConfig:
+			v.LoginAuthConfig = &types.LoginAuthConfigReqObj{}
+			return v.LoginAuthConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBackendConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendConfig, schemas.UpdateBackendConfigRequest, schemas.UpdateBackendConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBackendConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBackendConfig, schemas.UpdateBackendConfigRequest, schemas.UpdateBackendConfigResponse), output: &UpdateBackendConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBackendConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBackendConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateBackendConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBackendConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +154,8 @@ func (c *Client) addOperationUpdateBackendConfigMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateBackendConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateBackendConfig",
-	}
 }

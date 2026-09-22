@@ -1,0 +1,9 @@
+PUT /?policy=
+
+Content-Md5: __ContentMD5__
+Content-Type: text/plain
+X-Amz-Confirm-Remove-Self-Bucket-Access: true
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+
+__Policy__

@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new distribution configuration. Distribution configurations define
@@ -30,8 +30,10 @@ func (c *Client) CreateDistributionConfiguration(ctx context.Context, params *Cr
 
 type CreateDistributionConfigurationInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -51,10 +53,38 @@ type CreateDistributionConfigurationInput struct {
 	// The description of the distribution configuration.
 	Description *string
 
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
+
 	// The tags of the distribution configuration.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateDistributionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDistributionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDistributionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationRequest_description, *v.Description)
+	}
+	serializeDistributionList(s, schemas.CreateDistributionConfigurationRequest_distributions, v.Distributions)
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateDistributionConfigurationRequest_dryRun, v.DryRun)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateDistributionConfigurationRequest_tags, v.Tags)
 }
 
 type CreateDistributionConfigurationOutput struct {
@@ -75,65 +105,54 @@ type CreateDistributionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDistributionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDistributionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDistributionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationResponse_clientToken, *v.ClientToken)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationResponse_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateDistributionConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateDistributionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDistributionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDistributionConfigurationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateDistributionConfigurationResponse_clientToken, v.ClientToken)
+		case schemas.CreateDistributionConfigurationResponse_distributionConfigurationArn:
+			v.DistributionConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateDistributionConfigurationResponse_distributionConfigurationArn, v.DistributionConfigurationArn)
+		case schemas.CreateDistributionConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateDistributionConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDistributionConfiguration, schemas.CreateDistributionConfigurationRequest, schemas.CreateDistributionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDistributionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDistributionConfiguration, schemas.CreateDistributionConfigurationRequest, schemas.CreateDistributionConfigurationResponse), output: &CreateDistributionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDistributionConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDistributionConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -143,12 +162,6 @@ func (c *Client) addOperationCreateDistributionConfigurationMiddlewares(stack *m
 		return err
 	}
 	if err = addOpCreateDistributionConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDistributionConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +174,6 @@ func (c *Client) addOperationCreateDistributionConfigurationMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -206,12 +213,4 @@ func (m *idempotencyToken_initializeOpCreateDistributionConfiguration) HandleIni
 }
 func addIdempotencyToken_opCreateDistributionConfigurationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDistributionConfiguration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDistributionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDistributionConfiguration",
-	}
 }

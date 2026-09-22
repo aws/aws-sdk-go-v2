@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type GetUsageProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetUsageProfileRequest_Name, *v.Name)
+	}
+}
+
 type GetUsageProfileOutput struct {
 
 	// A ProfileConfiguration object specifying the job and session values for the
@@ -62,77 +73,74 @@ type GetUsageProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetUsageProfileResponse_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedOn != nil {
+		s.WriteTime(schemas.GetUsageProfileResponse_CreatedOn, *v.CreatedOn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetUsageProfileResponse_Description, *v.Description)
+	}
+	if v.LastModifiedOn != nil {
+		s.WriteTime(schemas.GetUsageProfileResponse_LastModifiedOn, *v.LastModifiedOn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetUsageProfileResponse_Name, *v.Name)
+	}
+}
+func (v *GetUsageProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUsageProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUsageProfileResponse_Configuration:
+			v.Configuration = &types.ProfileConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.GetUsageProfileResponse_CreatedOn:
+			v.CreatedOn = new(time.Time)
+			return d.ReadTime(schemas.GetUsageProfileResponse_CreatedOn, v.CreatedOn)
+		case schemas.GetUsageProfileResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetUsageProfileResponse_Description, v.Description)
+		case schemas.GetUsageProfileResponse_LastModifiedOn:
+			v.LastModifiedOn = new(time.Time)
+			return d.ReadTime(schemas.GetUsageProfileResponse_LastModifiedOn, v.LastModifiedOn)
+		case schemas.GetUsageProfileResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetUsageProfileResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsageProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageProfile, schemas.GetUsageProfileRequest, schemas.GetUsageProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUsageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsageProfile, schemas.GetUsageProfileRequest, schemas.GetUsageProfileResponse), output: &GetUsageProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUsageProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUsageProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUsageProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsageProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +155,8 @@ func (c *Client) addOperationGetUsageProfileMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetUsageProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUsageProfile",
-	}
 }

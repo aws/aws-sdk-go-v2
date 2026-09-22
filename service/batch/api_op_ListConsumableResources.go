@@ -5,10 +5,10 @@ package batch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of Batch consumable resources.
@@ -63,6 +63,22 @@ type ListConsumableResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConsumableResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConsumableResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConsumableResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListConsumableResourcesFilterList(s, schemas.ListConsumableResourcesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConsumableResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConsumableResourcesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListConsumableResourcesOutput struct {
 
 	// A list of consumable resources that match the request.
@@ -82,74 +98,48 @@ type ListConsumableResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConsumableResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConsumableResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConsumableResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsumableResourceSummaryList(s, schemas.ListConsumableResourcesResponse_consumableResources, v.ConsumableResources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConsumableResourcesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConsumableResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConsumableResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConsumableResourcesResponse_consumableResources:
+			return deserializeConsumableResourceSummaryList(d, schemas.ListConsumableResourcesResponse_consumableResources, &v.ConsumableResources)
+		case schemas.ListConsumableResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConsumableResourcesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConsumableResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConsumableResources, schemas.ListConsumableResourcesRequest, schemas.ListConsumableResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConsumableResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConsumableResources, schemas.ListConsumableResourcesRequest, schemas.ListConsumableResourcesResponse), output: &ListConsumableResourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConsumableResources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConsumableResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConsumableResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +152,6 @@ func (c *Client) addOperationListConsumableResourcesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -277,11 +261,3 @@ type ListConsumableResourcesAPIClient interface {
 }
 
 var _ ListConsumableResourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListConsumableResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListConsumableResources",
-	}
-}

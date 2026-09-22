@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -104,9 +103,10 @@ type StartMatchBackfillInput struct {
 	Players []types.Player
 
 	// An identifier for the game session that is unique across all regions. The value
-	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
-	// When using FlexMatch as a standalone matchmaking solution, this parameter is not
-	// needed.
+	// is always a full ARN in the following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// . When using FlexMatch as a standalone
+	// matchmaking solution, this parameter is not needed.
 	GameSessionArn *string
 
 	// A unique identifier for a matchmaking ticket. If no ticket ID is specified
@@ -115,6 +115,25 @@ type StartMatchBackfillInput struct {
 	TicketId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartMatchBackfillInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMatchBackfillInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMatchBackfillInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationName != nil {
+		s.WriteString(schemas.StartMatchBackfillInput_ConfigurationName, *v.ConfigurationName)
+	}
+	if v.GameSessionArn != nil {
+		s.WriteString(schemas.StartMatchBackfillInput_GameSessionArn, *v.GameSessionArn)
+	}
+	serializePlayerList(s, schemas.StartMatchBackfillInput_Players, v.Players)
+	if v.TicketId != nil {
+		s.WriteString(schemas.StartMatchBackfillInput_TicketId, *v.TicketId)
+	}
 }
 
 type StartMatchBackfillOutput struct {
@@ -130,65 +149,44 @@ type StartMatchBackfillOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMatchBackfillOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMatchBackfillOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMatchBackfillOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MatchmakingTicket != nil {
+		s.WriteStruct(schemas.StartMatchBackfillOutput_MatchmakingTicket)
+		v.MatchmakingTicket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartMatchBackfillOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMatchBackfillOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMatchBackfillOutput_MatchmakingTicket:
+			v.MatchmakingTicket = &types.MatchmakingTicket{}
+			return v.MatchmakingTicket.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMatchBackfill, schemas.StartMatchBackfillInput, schemas.StartMatchBackfillOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartMatchBackfill{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMatchBackfill, schemas.StartMatchBackfillInput, schemas.StartMatchBackfillOutput), output: &StartMatchBackfillOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartMatchBackfill{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMatchBackfill"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -198,12 +196,6 @@ func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpStartMatchBackfillValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMatchBackfill(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -218,22 +210,8 @@ func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMatchBackfill(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMatchBackfill",
-	}
 }

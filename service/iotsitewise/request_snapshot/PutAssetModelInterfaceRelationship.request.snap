@@ -1,0 +1,5 @@
+PUT /asset-models/__AssetModelId__/interface/__InterfaceAssetModelId__/asset-model-interface-relationship
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","propertyMappingConfiguration":{"createMissingProperty":true,"matchByPropertyName":true,"overrides":[{"assetModelPropertyId":"__AssetModelPropertyId__","interfaceAssetModelPropertyId":"__InterfaceAssetModelPropertyId__"},{"assetModelPropertyId":"__AssetModelPropertyId__","interfaceAssetModelPropertyId":"__InterfaceAssetModelPropertyId__"}]}}

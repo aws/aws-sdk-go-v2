@@ -4,11 +4,10 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This example serializes enums as top level properties, in lists, sets, and maps.
@@ -43,6 +42,61 @@ type JsonEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonEnumsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonEnumsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonEnumsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FooEnum1 != "" {
+		s.WriteString(schemas.JsonEnumsInputOutput_fooEnum1, string(v.FooEnum1))
+	}
+	if v.FooEnum2 != "" {
+		s.WriteString(schemas.JsonEnumsInputOutput_fooEnum2, string(v.FooEnum2))
+	}
+	if v.FooEnum3 != "" {
+		s.WriteString(schemas.JsonEnumsInputOutput_fooEnum3, string(v.FooEnum3))
+	}
+	serializeFooEnumList(s, schemas.JsonEnumsInputOutput_fooEnumList, v.FooEnumList)
+	serializeFooEnumMap(s, schemas.JsonEnumsInputOutput_fooEnumMap, v.FooEnumMap)
+	serializeFooEnumSet(s, schemas.JsonEnumsInputOutput_fooEnumSet, v.FooEnumSet)
+}
+func (v *JsonEnumsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonEnumsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonEnumsInputOutput_fooEnum1:
+			var ev string
+			if err := d.ReadString(schemas.JsonEnumsInputOutput_fooEnum1, &ev); err != nil {
+				return err
+			}
+			v.FooEnum1 = types.FooEnum(ev)
+			return nil
+		case schemas.JsonEnumsInputOutput_fooEnum2:
+			var ev string
+			if err := d.ReadString(schemas.JsonEnumsInputOutput_fooEnum2, &ev); err != nil {
+				return err
+			}
+			v.FooEnum2 = types.FooEnum(ev)
+			return nil
+		case schemas.JsonEnumsInputOutput_fooEnum3:
+			var ev string
+			if err := d.ReadString(schemas.JsonEnumsInputOutput_fooEnum3, &ev); err != nil {
+				return err
+			}
+			v.FooEnum3 = types.FooEnum(ev)
+			return nil
+		case schemas.JsonEnumsInputOutput_fooEnumList:
+			return deserializeFooEnumList(d, schemas.JsonEnumsInputOutput_fooEnumList, &v.FooEnumList)
+		case schemas.JsonEnumsInputOutput_fooEnumMap:
+			return deserializeFooEnumMap(d, schemas.JsonEnumsInputOutput_fooEnumMap, &v.FooEnumMap)
+		case schemas.JsonEnumsInputOutput_fooEnumSet:
+			return deserializeFooEnumSet(d, schemas.JsonEnumsInputOutput_fooEnumSet, &v.FooEnumSet)
+		}
+		return nil
+	})
+}
+
 type JsonEnumsOutput struct {
 	FooEnum1 types.FooEnum
 
@@ -62,74 +116,78 @@ type JsonEnumsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonEnumsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonEnumsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FooEnum1 != "" {
+		s.WriteString(schemas.JsonEnumsInputOutput_fooEnum1, string(v.FooEnum1))
+	}
+	if v.FooEnum2 != "" {
+		s.WriteString(schemas.JsonEnumsInputOutput_fooEnum2, string(v.FooEnum2))
+	}
+	if v.FooEnum3 != "" {
+		s.WriteString(schemas.JsonEnumsInputOutput_fooEnum3, string(v.FooEnum3))
+	}
+	serializeFooEnumList(s, schemas.JsonEnumsInputOutput_fooEnumList, v.FooEnumList)
+	serializeFooEnumMap(s, schemas.JsonEnumsInputOutput_fooEnumMap, v.FooEnumMap)
+	serializeFooEnumSet(s, schemas.JsonEnumsInputOutput_fooEnumSet, v.FooEnumSet)
+}
+func (v *JsonEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonEnumsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonEnumsInputOutput_fooEnum1:
+			var ev string
+			if err := d.ReadString(schemas.JsonEnumsInputOutput_fooEnum1, &ev); err != nil {
+				return err
+			}
+			v.FooEnum1 = types.FooEnum(ev)
+			return nil
+		case schemas.JsonEnumsInputOutput_fooEnum2:
+			var ev string
+			if err := d.ReadString(schemas.JsonEnumsInputOutput_fooEnum2, &ev); err != nil {
+				return err
+			}
+			v.FooEnum2 = types.FooEnum(ev)
+			return nil
+		case schemas.JsonEnumsInputOutput_fooEnum3:
+			var ev string
+			if err := d.ReadString(schemas.JsonEnumsInputOutput_fooEnum3, &ev); err != nil {
+				return err
+			}
+			v.FooEnum3 = types.FooEnum(ev)
+			return nil
+		case schemas.JsonEnumsInputOutput_fooEnumList:
+			return deserializeFooEnumList(d, schemas.JsonEnumsInputOutput_fooEnumList, &v.FooEnumList)
+		case schemas.JsonEnumsInputOutput_fooEnumMap:
+			return deserializeFooEnumMap(d, schemas.JsonEnumsInputOutput_fooEnumMap, &v.FooEnumMap)
+		case schemas.JsonEnumsInputOutput_fooEnumSet:
+			return deserializeFooEnumSet(d, schemas.JsonEnumsInputOutput_fooEnumSet, &v.FooEnumSet)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJsonEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonEnums, schemas.JsonEnumsInputOutput, schemas.JsonEnumsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonEnums, schemas.JsonEnumsInputOutput, schemas.JsonEnumsInputOutput), output: &JsonEnumsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonEnums{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "JsonEnums"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJsonEnums(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +202,8 @@ func (c *Client) addOperationJsonEnumsMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opJsonEnums(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "JsonEnums",
-	}
 }

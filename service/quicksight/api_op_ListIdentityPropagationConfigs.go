@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all services and authorized targets that the Quick Sight IAM Identity
@@ -48,6 +47,24 @@ type ListIdentityPropagationConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityPropagationConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityPropagationConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityPropagationConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListIdentityPropagationConfigsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentityPropagationConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityPropagationConfigsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIdentityPropagationConfigsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -69,77 +86,62 @@ type ListIdentityPropagationConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentityPropagationConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentityPropagationConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentityPropagationConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentityPropagationConfigsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListIdentityPropagationConfigsResponse_RequestId, *v.RequestId)
+	}
+	serializeAuthorizedTargetsByServices(s, schemas.ListIdentityPropagationConfigsResponse_Services, v.Services)
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListIdentityPropagationConfigsResponse_Status, v.Status)
+	}
+}
+func (v *ListIdentityPropagationConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentityPropagationConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentityPropagationConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentityPropagationConfigsResponse_NextToken, v.NextToken)
+		case schemas.ListIdentityPropagationConfigsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListIdentityPropagationConfigsResponse_RequestId, v.RequestId)
+		case schemas.ListIdentityPropagationConfigsResponse_Services:
+			return deserializeAuthorizedTargetsByServices(d, schemas.ListIdentityPropagationConfigsResponse_Services, &v.Services)
+		case schemas.ListIdentityPropagationConfigsResponse_Status:
+			return d.ReadInt32(schemas.ListIdentityPropagationConfigsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentityPropagationConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityPropagationConfigs, schemas.ListIdentityPropagationConfigsRequest, schemas.ListIdentityPropagationConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdentityPropagationConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentityPropagationConfigs, schemas.ListIdentityPropagationConfigsRequest, schemas.ListIdentityPropagationConfigsResponse), output: &ListIdentityPropagationConfigsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdentityPropagationConfigs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIdentityPropagationConfigs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIdentityPropagationConfigsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIdentityPropagationConfigs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +156,8 @@ func (c *Client) addOperationListIdentityPropagationConfigsMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListIdentityPropagationConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIdentityPropagationConfigs",
-	}
 }

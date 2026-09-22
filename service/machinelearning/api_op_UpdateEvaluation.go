@@ -4,10 +4,9 @@ package machinelearning
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the EvaluationName of an Evaluation .
@@ -45,6 +44,21 @@ type UpdateEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEvaluationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.UpdateEvaluationInput_EvaluationId, *v.EvaluationId)
+	}
+	if v.EvaluationName != nil {
+		s.WriteString(schemas.UpdateEvaluationInput_EvaluationName, *v.EvaluationName)
+	}
+}
+
 // Represents the output of an UpdateEvaluation operation.
 //
 // You can see the updated content by using the GetEvaluation operation.
@@ -60,77 +74,48 @@ type UpdateEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEvaluationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.UpdateEvaluationOutput_EvaluationId, *v.EvaluationId)
+	}
+}
+func (v *UpdateEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEvaluationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEvaluationOutput_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.UpdateEvaluationOutput_EvaluationId, v.EvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEvaluation, schemas.UpdateEvaluationInput, schemas.UpdateEvaluationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEvaluation, schemas.UpdateEvaluationInput, schemas.UpdateEvaluationOutput), output: &UpdateEvaluationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEvaluation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEvaluation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateEvaluationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEvaluation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +130,8 @@ func (c *Client) addOperationUpdateEvaluationMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateEvaluation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEvaluation",
-	}
 }

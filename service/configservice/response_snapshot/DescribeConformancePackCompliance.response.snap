@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.DescribeConformancePackCompliance
+
+{"ConformancePackName":"__ConformancePackName__","ConformancePackRuleComplianceList":[{"ComplianceType":"COMPLIANT","ConfigRuleName":"__ConfigRuleName__","Controls":["__Member__","__Member__"]},{"ComplianceType":"COMPLIANT","ConfigRuleName":"__ConfigRuleName__","Controls":["__Member__","__Member__"]}],"NextToken":"__NextToken__"}

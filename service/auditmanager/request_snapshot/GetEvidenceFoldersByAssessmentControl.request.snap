@@ -1,0 +1,3 @@
+GET /assessments/__AssessmentId__/evidenceFolders-by-assessment-control/__ControlSetId__/__ControlId__?maxResults=1&nextToken=__NextToken__
+
+

@@ -1,0 +1,4 @@
+DELETE /api/v1/resources/__ResourceId__/permissions/__PrincipalId__?type=USER
+
+Authentication: __AuthenticationToken__
+

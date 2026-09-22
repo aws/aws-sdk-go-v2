@@ -1,0 +1,5 @@
+POST /v2/campaigns/__Id__/entry-limits
+
+Content-Type: application/json
+
+{"entryLimitsConfig":{"maxEntryCount":1,"minEntryInterval":"__MinEntryInterval__"}}

@@ -4,11 +4,10 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the current event configuration settings for the specified event data
@@ -43,6 +42,21 @@ type GetEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.GetEventConfigurationRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.TrailName != nil {
+		s.WriteString(schemas.GetEventConfigurationRequest_TrailName, *v.TrailName)
+	}
+}
+
 type GetEventConfigurationOutput struct {
 
 	// The list of aggregation configurations that are configured for the trail.
@@ -68,74 +82,67 @@ type GetEventConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationConfigurations(s, schemas.GetEventConfigurationResponse_AggregationConfigurations, v.AggregationConfigurations)
+	serializeContextKeySelectors(s, schemas.GetEventConfigurationResponse_ContextKeySelectors, v.ContextKeySelectors)
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.GetEventConfigurationResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	if v.MaxEventSize != "" {
+		s.WriteString(schemas.GetEventConfigurationResponse_MaxEventSize, string(v.MaxEventSize))
+	}
+	if v.TrailARN != nil {
+		s.WriteString(schemas.GetEventConfigurationResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *GetEventConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEventConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEventConfigurationResponse_AggregationConfigurations:
+			return deserializeAggregationConfigurations(d, schemas.GetEventConfigurationResponse_AggregationConfigurations, &v.AggregationConfigurations)
+		case schemas.GetEventConfigurationResponse_ContextKeySelectors:
+			return deserializeContextKeySelectors(d, schemas.GetEventConfigurationResponse_ContextKeySelectors, &v.ContextKeySelectors)
+		case schemas.GetEventConfigurationResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.GetEventConfigurationResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.GetEventConfigurationResponse_MaxEventSize:
+			var ev string
+			if err := d.ReadString(schemas.GetEventConfigurationResponse_MaxEventSize, &ev); err != nil {
+				return err
+			}
+			v.MaxEventSize = types.MaxEventSize(ev)
+			return nil
+		case schemas.GetEventConfigurationResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.GetEventConfigurationResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventConfiguration, schemas.GetEventConfigurationRequest, schemas.GetEventConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventConfiguration, schemas.GetEventConfigurationRequest, schemas.GetEventConfigurationResponse), output: &GetEventConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetEventConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEventConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +157,8 @@ func (c *Client) addOperationGetEventConfigurationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEventConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEventConfiguration",
-	}
 }

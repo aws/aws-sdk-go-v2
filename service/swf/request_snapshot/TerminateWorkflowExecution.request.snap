@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.TerminateWorkflowExecution
+
+{"childPolicy":"TERMINATE","details":"__Details__","domain":"__Domain__","reason":"__Reason__","runId":"__RunId__","workflowId":"__WorkflowId__"}

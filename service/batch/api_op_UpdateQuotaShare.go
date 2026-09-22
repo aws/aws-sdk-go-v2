@@ -4,11 +4,10 @@ package batch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a quota share.
@@ -53,6 +52,32 @@ type UpdateQuotaShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQuotaShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQuotaShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQuotaShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQuotaShareCapacityLimits(s, schemas.UpdateQuotaShareRequest_capacityLimits, v.CapacityLimits)
+	if v.PreemptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateQuotaShareRequest_preemptionConfiguration)
+		v.PreemptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuotaShareArn != nil {
+		s.WriteString(schemas.UpdateQuotaShareRequest_quotaShareArn, *v.QuotaShareArn)
+	}
+	if v.ResourceSharingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateQuotaShareRequest_resourceSharingConfiguration)
+		v.ResourceSharingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateQuotaShareRequest_state, string(v.State))
+	}
+}
+
 type UpdateQuotaShareOutput struct {
 
 	// The Amazon Resource Name (ARN) of the quota share.
@@ -67,77 +92,54 @@ type UpdateQuotaShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQuotaShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQuotaShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQuotaShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuotaShareArn != nil {
+		s.WriteString(schemas.UpdateQuotaShareResponse_quotaShareArn, *v.QuotaShareArn)
+	}
+	if v.QuotaShareName != nil {
+		s.WriteString(schemas.UpdateQuotaShareResponse_quotaShareName, *v.QuotaShareName)
+	}
+}
+func (v *UpdateQuotaShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQuotaShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQuotaShareResponse_quotaShareArn:
+			v.QuotaShareArn = new(string)
+			return d.ReadString(schemas.UpdateQuotaShareResponse_quotaShareArn, v.QuotaShareArn)
+		case schemas.UpdateQuotaShareResponse_quotaShareName:
+			v.QuotaShareName = new(string)
+			return d.ReadString(schemas.UpdateQuotaShareResponse_quotaShareName, v.QuotaShareName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQuotaShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuotaShare, schemas.UpdateQuotaShareRequest, schemas.UpdateQuotaShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQuotaShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuotaShare, schemas.UpdateQuotaShareRequest, schemas.UpdateQuotaShareResponse), output: &UpdateQuotaShareOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQuotaShare{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQuotaShare"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateQuotaShareValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateQuotaShare(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +154,8 @@ func (c *Client) addOperationUpdateQuotaShareMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateQuotaShare(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateQuotaShare",
-	}
 }

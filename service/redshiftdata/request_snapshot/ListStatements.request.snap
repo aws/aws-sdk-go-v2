@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RedshiftData.ListStatements
+
+{"ClusterIdentifier":"__ClusterIdentifier__","Database":"__Database__","MaxResults":1,"NextToken":"__NextToken__","RoleLevel":true,"StatementName":"__StatementName__","Status":"SUBMITTED","WorkgroupName":"__WorkgroupName__"}

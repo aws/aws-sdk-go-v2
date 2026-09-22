@@ -1,0 +1,5 @@
+PATCH /configurationPolicy/__Identifier__
+
+Content-Type: application/json
+
+{"ConfigurationPolicy":{"SecurityHub":{"EnabledStandardIdentifiers":["__Member__","__Member__"],"SecurityControlsConfiguration":{"DisabledSecurityControlIdentifiers":["__Member__","__Member__"],"EnabledSecurityControlIdentifiers":["__Member__","__Member__"],"SecurityControlCustomParameters":[{"Parameters":{"key0":{"Value":{"Integer":1},"ValueType":"DEFAULT"}},"SecurityControlId":"__SecurityControlId__"},{"Parameters":{"key0":{"Value":{"Integer":1},"ValueType":"DEFAULT"}},"SecurityControlId":"__SecurityControlId__"}]},"ServiceEnabled":true}},"Description":"__Description__","Name":"__Name__","UpdatedReason":"__UpdatedReason__"}

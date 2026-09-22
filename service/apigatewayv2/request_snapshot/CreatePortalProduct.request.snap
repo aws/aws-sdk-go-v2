@@ -1,0 +1,5 @@
+POST /v2/portalproducts
+
+Content-Type: application/json
+
+{"description":"__Description__","displayName":"__DisplayName__","tags":{"key0":"__Value__"}}

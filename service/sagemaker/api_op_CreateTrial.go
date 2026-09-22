@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an SageMaker trial. A trial is a set of steps called trial components
@@ -73,6 +72,30 @@ type CreateTrialInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrialInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrialRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrialInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateTrialRequest_DisplayName, *v.DisplayName)
+	}
+	if v.ExperimentName != nil {
+		s.WriteString(schemas.CreateTrialRequest_ExperimentName, *v.ExperimentName)
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.CreateTrialRequest_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateTrialRequest_Tags, v.Tags)
+	if v.TrialName != nil {
+		s.WriteString(schemas.CreateTrialRequest_TrialName, *v.TrialName)
+	}
+}
+
 type CreateTrialOutput struct {
 
 	// The Amazon Resource Name (ARN) of the trial.
@@ -84,77 +107,48 @@ type CreateTrialOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTrialOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTrialResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTrialOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrialArn != nil {
+		s.WriteString(schemas.CreateTrialResponse_TrialArn, *v.TrialArn)
+	}
+}
+func (v *CreateTrialOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTrialResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTrialResponse_TrialArn:
+			v.TrialArn = new(string)
+			return d.ReadString(schemas.CreateTrialResponse_TrialArn, v.TrialArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTrialMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrial, schemas.CreateTrialRequest, schemas.CreateTrialResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrial{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrial, schemas.CreateTrialRequest, schemas.CreateTrialResponse), output: &CreateTrialOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTrial{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTrial"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTrialValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrial(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +163,8 @@ func (c *Client) addOperationCreateTrialMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateTrial(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTrial",
-	}
 }

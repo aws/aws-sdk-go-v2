@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","versions":[{"applicationId":"__ApplicationId__","creationTime":"__CreationTime__","semanticVersion":"__SemanticVersion__","sourceCodeUrl":"__SourceCodeUrl__"},{"applicationId":"__ApplicationId__","creationTime":"__CreationTime__","semanticVersion":"__SemanticVersion__","sourceCodeUrl":"__SourceCodeUrl__"}]}

@@ -1,0 +1,5 @@
+POST /backend
+
+Content-Type: application/json
+
+{"appId":"__AppId__","appName":"__AppName__","backendEnvironmentName":"__BackendEnvironmentName__","resourceConfig":{},"resourceName":"__ResourceName__"}

@@ -1,0 +1,5 @@
+PUT /contact/screen-sharing
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ContactId":"__ContactId__","InstanceId":"__InstanceId__"}

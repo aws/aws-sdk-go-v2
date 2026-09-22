@@ -1,0 +1,5 @@
+POST /places/v0/indexes/__IndexName__/search/position?key=__Key__
+
+Content-Type: application/json
+
+{"Language":"__Language__","MaxResults":1,"Position":[1,1]}

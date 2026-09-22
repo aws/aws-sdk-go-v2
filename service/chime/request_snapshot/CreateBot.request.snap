@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/bots
+
+Content-Type: application/json
+
+{"DisplayName":"__DisplayName__","Domain":"__Domain__"}

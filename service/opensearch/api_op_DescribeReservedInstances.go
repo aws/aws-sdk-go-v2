@@ -5,10 +5,10 @@ package opensearch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the Amazon OpenSearch Service instances that you have reserved in a
@@ -49,6 +49,24 @@ type DescribeReservedInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeReservedInstancesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedInstancesRequest_NextToken, *v.NextToken)
+	}
+	if v.ReservedInstanceId != nil {
+		s.WriteString(schemas.DescribeReservedInstancesRequest_ReservedInstanceId, *v.ReservedInstanceId)
+	}
+}
+
 // Container for results from DescribeReservedInstances
 type DescribeReservedInstancesOutput struct {
 
@@ -66,74 +84,48 @@ type DescribeReservedInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedInstancesResponse_NextToken, *v.NextToken)
+	}
+	serializeReservedInstanceList(s, schemas.DescribeReservedInstancesResponse_ReservedInstances, v.ReservedInstances)
+}
+func (v *DescribeReservedInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReservedInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReservedInstancesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReservedInstancesResponse_NextToken, v.NextToken)
+		case schemas.DescribeReservedInstancesResponse_ReservedInstances:
+			return deserializeReservedInstanceList(d, schemas.DescribeReservedInstancesResponse_ReservedInstances, &v.ReservedInstances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedInstances, schemas.DescribeReservedInstancesRequest, schemas.DescribeReservedInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeReservedInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedInstances, schemas.DescribeReservedInstancesRequest, schemas.DescribeReservedInstancesResponse), output: &DescribeReservedInstancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeReservedInstances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeReservedInstances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedInstances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +138,6 @@ func (c *Client) addOperationDescribeReservedInstancesMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +237,3 @@ type DescribeReservedInstancesAPIClient interface {
 }
 
 var _ DescribeReservedInstancesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeReservedInstances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeReservedInstances",
-	}
-}

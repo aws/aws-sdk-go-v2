@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"VoiceConnectorRegions":["us-east-1","us-east-1"]}

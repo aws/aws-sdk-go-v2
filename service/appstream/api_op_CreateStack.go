@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a stack to start streaming applications to users. A stack consists of
@@ -103,6 +102,55 @@ type CreateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessEndpointList(s, schemas.CreateStackRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.AgentAccessConfig != nil {
+		s.WriteStruct(schemas.CreateStackRequest_AgentAccessConfig)
+		v.AgentAccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSettings != nil {
+		s.WriteStruct(schemas.CreateStackRequest_ApplicationSettings)
+		v.ApplicationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContentRedirection != nil {
+		s.WriteStruct(schemas.CreateStackRequest_ContentRedirection)
+		v.ContentRedirection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStackRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateStackRequest_DisplayName, *v.DisplayName)
+	}
+	serializeEmbedHostDomains(s, schemas.CreateStackRequest_EmbedHostDomains, v.EmbedHostDomains)
+	if v.FeedbackURL != nil {
+		s.WriteString(schemas.CreateStackRequest_FeedbackURL, *v.FeedbackURL)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateStackRequest_Name, *v.Name)
+	}
+	if v.RedirectURL != nil {
+		s.WriteString(schemas.CreateStackRequest_RedirectURL, *v.RedirectURL)
+	}
+	serializeStorageConnectorList(s, schemas.CreateStackRequest_StorageConnectors, v.StorageConnectors)
+	if v.StreamingExperienceSettings != nil {
+		s.WriteStruct(schemas.CreateStackRequest_StreamingExperienceSettings)
+		v.StreamingExperienceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateStackRequest_Tags, v.Tags)
+	serializeUserSettingList(s, schemas.CreateStackRequest_UserSettings, v.UserSettings)
+}
+
 type CreateStackOutput struct {
 
 	// Information about the stack.
@@ -114,77 +162,53 @@ type CreateStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Stack != nil {
+		s.WriteStruct(schemas.CreateStackResult_Stack)
+		v.Stack.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStackResult_Stack:
+			v.Stack = &types.Stack{}
+			return v.Stack.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStack, schemas.CreateStackRequest, schemas.CreateStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStack, schemas.CreateStackRequest, schemas.CreateStackResult), output: &CreateStackOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateStack{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStack"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateStackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStack(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +223,8 @@ func (c *Client) addOperationCreateStackMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateStack(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateStack",
-	}
 }

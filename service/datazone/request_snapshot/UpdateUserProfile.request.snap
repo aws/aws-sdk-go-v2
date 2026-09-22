@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/user-profiles/__UserIdentifier__
+
+Content-Type: application/json
+
+{"sessionName":"__SessionName__","status":"ASSIGNED","type":"IAM"}

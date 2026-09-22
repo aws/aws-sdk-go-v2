@@ -4,10 +4,9 @@ package sagemakeredge
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakeredge/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use to check if a device is registered with SageMaker Edge Manager.
@@ -41,6 +40,21 @@ type GetDeviceRegistrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeviceRegistrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceRegistrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceRegistrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.GetDeviceRegistrationRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.GetDeviceRegistrationRequest_DeviceName, *v.DeviceName)
+	}
+}
+
 type GetDeviceRegistrationOutput struct {
 
 	// The amount of time, in seconds, that the registration status is stored on the
@@ -56,77 +70,54 @@ type GetDeviceRegistrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeviceRegistrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceRegistrationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceRegistrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheTTL != nil {
+		s.WriteString(schemas.GetDeviceRegistrationResult_CacheTTL, *v.CacheTTL)
+	}
+	if v.DeviceRegistration != nil {
+		s.WriteString(schemas.GetDeviceRegistrationResult_DeviceRegistration, *v.DeviceRegistration)
+	}
+}
+func (v *GetDeviceRegistrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeviceRegistrationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeviceRegistrationResult_CacheTTL:
+			v.CacheTTL = new(string)
+			return d.ReadString(schemas.GetDeviceRegistrationResult_CacheTTL, v.CacheTTL)
+		case schemas.GetDeviceRegistrationResult_DeviceRegistration:
+			v.DeviceRegistration = new(string)
+			return d.ReadString(schemas.GetDeviceRegistrationResult_DeviceRegistration, v.DeviceRegistration)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeviceRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceRegistration, schemas.GetDeviceRegistrationRequest, schemas.GetDeviceRegistrationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceRegistration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceRegistration, schemas.GetDeviceRegistrationRequest, schemas.GetDeviceRegistrationResult), output: &GetDeviceRegistrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeviceRegistration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeviceRegistration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDeviceRegistrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeviceRegistration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +132,8 @@ func (c *Client) addOperationGetDeviceRegistrationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDeviceRegistration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDeviceRegistration",
-	}
 }

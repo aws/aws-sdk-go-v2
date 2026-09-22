@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/DescribeSoftwareAssociations
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£rAssociatedResourcev__AssociatedResource__jMaxResultsiNextTokenm__NextToken__

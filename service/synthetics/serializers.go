@@ -182,6 +182,13 @@ func awsRestjson1_serializeOpDocumentCreateCanaryInput(v *CreateCanaryInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.AddReplicaLocations != nil {
+		ok := object.Key("AddReplicaLocations")
+		if err := awsRestjson1_serializeDocumentAddReplicaLocations(v.AddReplicaLocations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ArtifactConfig != nil {
 		ok := object.Key("ArtifactConfig")
 		if err := awsRestjson1_serializeDocumentArtifactConfigInput(v.ArtifactConfig, ok); err != nil {
@@ -216,6 +223,11 @@ func awsRestjson1_serializeOpDocumentCreateCanaryInput(v *CreateCanaryInput, val
 	if v.FailureRetentionPeriodInDays != nil {
 		ok := object.Key("FailureRetentionPeriodInDays")
 		ok.Integer(*v.FailureRetentionPeriodInDays)
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
 	}
 
 	if v.Name != nil {
@@ -2060,6 +2072,13 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.AddReplicaLocations != nil {
+		ok := object.Key("AddReplicaLocations")
+		if err := awsRestjson1_serializeDocumentAddReplicaLocations(v.AddReplicaLocations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ArtifactConfig != nil {
 		ok := object.Key("ArtifactConfig")
 		if err := awsRestjson1_serializeDocumentArtifactConfigInput(v.ArtifactConfig, ok); err != nil {
@@ -2101,9 +2120,21 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 		ok.Integer(*v.FailureRetentionPeriodInDays)
 	}
 
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
 	if len(v.ProvisionedResourceCleanup) > 0 {
 		ok := object.Key("ProvisionedResourceCleanup")
 		ok.String(string(v.ProvisionedResourceCleanup))
+	}
+
+	if v.RemoveReplicaLocations != nil {
+		ok := object.Key("RemoveReplicaLocations")
+		if err := awsRestjson1_serializeDocumentRemoveReplicaLocations(v.RemoveReplicaLocations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RunConfig != nil {
@@ -2151,6 +2182,43 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddReplicaLocationInput(v *types.AddReplicaLocationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("VpcConfig")
+		if err := awsRestjson1_serializeDocumentVpcConfigInput(v.VpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddReplicaLocations(v []types.AddReplicaLocationInput, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAddReplicaLocationInput(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2410,6 +2478,17 @@ func awsRestjson1_serializeDocumentEnvironmentVariablesMap(v map[string]string, 
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRemoveReplicaLocations(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

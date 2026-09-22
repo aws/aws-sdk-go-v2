@@ -5,10 +5,10 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns table and schema statistics for one or more provisioned replications
@@ -51,6 +51,25 @@ type DescribeReplicationTableStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTableStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTableStatisticsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTableStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeReplicationTableStatisticsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTableStatisticsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReplicationTableStatisticsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.ReplicationConfigArn != nil {
+		s.WriteString(schemas.DescribeReplicationTableStatisticsMessage_ReplicationConfigArn, *v.ReplicationConfigArn)
+	}
+}
+
 type DescribeReplicationTableStatisticsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -71,77 +90,57 @@ type DescribeReplicationTableStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTableStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTableStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTableStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTableStatisticsResponse_Marker, *v.Marker)
+	}
+	if v.ReplicationConfigArn != nil {
+		s.WriteString(schemas.DescribeReplicationTableStatisticsResponse_ReplicationConfigArn, *v.ReplicationConfigArn)
+	}
+	serializeReplicationTableStatisticsList(s, schemas.DescribeReplicationTableStatisticsResponse_ReplicationTableStatistics, v.ReplicationTableStatistics)
+}
+func (v *DescribeReplicationTableStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationTableStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationTableStatisticsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeReplicationTableStatisticsResponse_Marker, v.Marker)
+		case schemas.DescribeReplicationTableStatisticsResponse_ReplicationConfigArn:
+			v.ReplicationConfigArn = new(string)
+			return d.ReadString(schemas.DescribeReplicationTableStatisticsResponse_ReplicationConfigArn, v.ReplicationConfigArn)
+		case schemas.DescribeReplicationTableStatisticsResponse_ReplicationTableStatistics:
+			return deserializeReplicationTableStatisticsList(d, schemas.DescribeReplicationTableStatisticsResponse_ReplicationTableStatistics, &v.ReplicationTableStatistics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationTableStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTableStatistics, schemas.DescribeReplicationTableStatisticsMessage, schemas.DescribeReplicationTableStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationTableStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTableStatistics, schemas.DescribeReplicationTableStatisticsMessage, schemas.DescribeReplicationTableStatisticsResponse), output: &DescribeReplicationTableStatisticsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplicationTableStatistics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeReplicationTableStatistics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeReplicationTableStatisticsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationTableStatistics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +153,6 @@ func (c *Client) addOperationDescribeReplicationTableStatisticsMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +258,3 @@ type DescribeReplicationTableStatisticsAPIClient interface {
 }
 
 var _ DescribeReplicationTableStatisticsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeReplicationTableStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeReplicationTableStatistics",
-	}
-}

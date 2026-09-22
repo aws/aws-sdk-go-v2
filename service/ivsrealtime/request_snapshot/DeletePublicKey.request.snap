@@ -1,0 +1,5 @@
+POST /DeletePublicKey
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

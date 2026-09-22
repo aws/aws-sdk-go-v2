@@ -5,10 +5,10 @@ package securityhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Grants permission to create a ticket in the chosen ITSM based on finding
@@ -51,6 +51,27 @@ type CreateTicketV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTicketV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTicketV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTicketV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTicketV2Request_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.CreateTicketV2Request_ConnectorId, *v.ConnectorId)
+	}
+	if v.FindingMetadataUid != nil {
+		s.WriteString(schemas.CreateTicketV2Request_FindingMetadataUid, *v.FindingMetadataUid)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.CreateTicketV2Request_Mode, string(v.Mode))
+	}
+}
+
 type CreateTicketV2Output struct {
 
 	// The ID for the ticketv2.
@@ -67,65 +88,48 @@ type CreateTicketV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTicketV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTicketV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTicketV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TicketId != nil {
+		s.WriteString(schemas.CreateTicketV2Response_TicketId, *v.TicketId)
+	}
+	if v.TicketSrcUrl != nil {
+		s.WriteString(schemas.CreateTicketV2Response_TicketSrcUrl, *v.TicketSrcUrl)
+	}
+}
+func (v *CreateTicketV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTicketV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTicketV2Response_TicketId:
+			v.TicketId = new(string)
+			return d.ReadString(schemas.CreateTicketV2Response_TicketId, v.TicketId)
+		case schemas.CreateTicketV2Response_TicketSrcUrl:
+			v.TicketSrcUrl = new(string)
+			return d.ReadString(schemas.CreateTicketV2Response_TicketSrcUrl, v.TicketSrcUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTicketV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTicketV2, schemas.CreateTicketV2Request, schemas.CreateTicketV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTicketV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTicketV2, schemas.CreateTicketV2Request, schemas.CreateTicketV2Response), output: &CreateTicketV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTicketV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTicketV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -135,12 +139,6 @@ func (c *Client) addOperationCreateTicketV2Middlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCreateTicketV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTicketV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +151,6 @@ func (c *Client) addOperationCreateTicketV2Middlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -198,12 +190,4 @@ func (m *idempotencyToken_initializeOpCreateTicketV2) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opCreateTicketV2Middleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateTicketV2{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateTicketV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTicketV2",
-	}
 }

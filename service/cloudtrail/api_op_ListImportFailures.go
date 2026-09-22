@@ -5,13 +5,19 @@ package cloudtrail
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Returns a list of failures for the specified import.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) ListImportFailures(ctx context.Context, params *ListImportFailuresInput, optFns ...func(*Options)) (*ListImportFailuresOutput, error) {
 	if params == nil {
 		params = &ListImportFailuresInput{}
@@ -43,6 +49,24 @@ type ListImportFailuresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportFailuresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportFailuresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportFailuresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportId != nil {
+		s.WriteString(schemas.ListImportFailuresRequest_ImportId, *v.ImportId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImportFailuresRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportFailuresRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListImportFailuresOutput struct {
 
 	//  Contains information about the import failures.
@@ -57,77 +81,51 @@ type ListImportFailuresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportFailuresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportFailuresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportFailuresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportFailureList(s, schemas.ListImportFailuresResponse_Failures, v.Failures)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportFailuresResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListImportFailuresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportFailuresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportFailuresResponse_Failures:
+			return deserializeImportFailureList(d, schemas.ListImportFailuresResponse_Failures, &v.Failures)
+		case schemas.ListImportFailuresResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportFailuresResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportFailuresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFailures, schemas.ListImportFailuresRequest, schemas.ListImportFailuresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListImportFailures{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportFailures, schemas.ListImportFailuresRequest, schemas.ListImportFailuresResponse), output: &ListImportFailuresOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListImportFailures{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListImportFailures"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListImportFailuresValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImportFailures(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +138,6 @@ func (c *Client) addOperationListImportFailuresMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +239,3 @@ type ListImportFailuresAPIClient interface {
 }
 
 var _ ListImportFailuresAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListImportFailures(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListImportFailures",
-	}
-}

@@ -5,13 +5,13 @@ package gamelift
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2, Container
+//	This API works with the following fleet types: EC2, Anywhere, Container
 //
 // Retrieves information on a fleet's remote locations, including life-cycle
 // status and any suspended fleet activity.
@@ -29,8 +29,7 @@ import (
 //
 // If successful, a LocationAttributes object is returned for each requested
 // location. If the fleet does not have a requested location, no information is
-// returned. This operation does not return the home Region. To get information on
-// a fleet's home Region, call DescribeFleetAttributes .
+// returned.
 //
 // # Learn more
 //
@@ -79,6 +78,25 @@ type DescribeFleetLocationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetLocationAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetLocationAttributesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetLocationAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesInput_FleetId, *v.FleetId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeFleetLocationAttributesInput_Limit, *v.Limit)
+	}
+	serializeLocationList(s, schemas.DescribeFleetLocationAttributesInput_Locations, v.Locations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesInput_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFleetLocationAttributesOutput struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
@@ -105,65 +123,57 @@ type DescribeFleetLocationAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFleetLocationAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFleetLocationAttributesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFleetLocationAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetArn != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesOutput_FleetId, *v.FleetId)
+	}
+	serializeLocationAttributesList(s, schemas.DescribeFleetLocationAttributesOutput_LocationAttributes, v.LocationAttributes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFleetLocationAttributesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFleetLocationAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFleetLocationAttributesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFleetLocationAttributesOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.DescribeFleetLocationAttributesOutput_FleetArn, v.FleetArn)
+		case schemas.DescribeFleetLocationAttributesOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.DescribeFleetLocationAttributesOutput_FleetId, v.FleetId)
+		case schemas.DescribeFleetLocationAttributesOutput_LocationAttributes:
+			return deserializeLocationAttributesList(d, schemas.DescribeFleetLocationAttributesOutput_LocationAttributes, &v.LocationAttributes)
+		case schemas.DescribeFleetLocationAttributesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFleetLocationAttributesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFleetLocationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetLocationAttributes, schemas.DescribeFleetLocationAttributesInput, schemas.DescribeFleetLocationAttributesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeFleetLocationAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFleetLocationAttributes, schemas.DescribeFleetLocationAttributesInput, schemas.DescribeFleetLocationAttributesOutput), output: &DescribeFleetLocationAttributesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeFleetLocationAttributes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFleetLocationAttributes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -173,12 +183,6 @@ func (c *Client) addOperationDescribeFleetLocationAttributesMiddlewares(stack *m
 		return err
 	}
 	if err = addOpDescribeFleetLocationAttributesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleetLocationAttributes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,12 +195,6 @@ func (c *Client) addOperationDescribeFleetLocationAttributesMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -301,11 +299,3 @@ type DescribeFleetLocationAttributesAPIClient interface {
 }
 
 var _ DescribeFleetLocationAttributesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeFleetLocationAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFleetLocationAttributes",
-	}
-}

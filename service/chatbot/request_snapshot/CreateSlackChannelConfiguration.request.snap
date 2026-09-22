@@ -1,0 +1,5 @@
+POST /create-slack-channel-configuration
+
+Content-Type: application/json
+
+{"ConfigurationName":"__ConfigurationName__","GuardrailPolicyArns":["__Member__","__Member__"],"IamRoleArn":"__IamRoleArn__","LoggingLevel":"__LoggingLevel__","SlackChannelId":"__SlackChannelId__","SlackChannelName":"__SlackChannelName__","SlackTeamId":"__SlackTeamId__","SnsTopicArns":["__Member__","__Member__"],"Tags":[{"TagKey":"__TagKey__","TagValue":"__TagValue__"},{"TagKey":"__TagKey__","TagValue":"__TagValue__"}],"UserAuthorizationRequired":true}

@@ -1,0 +1,5 @@
+PATCH /policy-engines/__PolicyEngineId__/policies/__PolicyId__
+
+Content-Type: application/json
+
+{"definition":{"cedar":{"statement":"__Statement__"}},"description":{"optionalValue":"__OptionalValue__"},"enforcementMode":"ACTIVE","validationMode":"FAIL_ON_ANY_FINDINGS"}

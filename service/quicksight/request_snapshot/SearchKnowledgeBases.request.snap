@@ -1,0 +1,5 @@
+POST /v1/accounts/__AwsAccountId__/search/knowledge-bases
+
+Content-Type: application/json
+
+{"Filters":[{"name":"KNOWLEDGE_BASE_ID","operator":"STRING_EQUALS","value":"__Value__"},{"name":"KNOWLEDGE_BASE_ID","operator":"STRING_EQUALS","value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__","SortBy":{"sortByField":"KNOWLEDGE_BASE_SIZE_BYTES","sortOrder":"ASC"}}

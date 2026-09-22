@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes specific nodes within a SageMaker HyperPod cluster.
@@ -67,6 +66,20 @@ type BatchDeleteClusterNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteClusterNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteClusterNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteClusterNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.BatchDeleteClusterNodesRequest_ClusterName, *v.ClusterName)
+	}
+	serializeClusterNodeIds(s, schemas.BatchDeleteClusterNodesRequest_NodeIds, v.NodeIds)
+	serializeClusterNodeLogicalIdList(s, schemas.BatchDeleteClusterNodesRequest_NodeLogicalIds, v.NodeLogicalIds)
+}
+
 type BatchDeleteClusterNodesOutput struct {
 
 	// A list of errors encountered when deleting the specified nodes.
@@ -88,77 +101,54 @@ type BatchDeleteClusterNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteClusterNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteClusterNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteClusterNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteClusterNodesErrorList(s, schemas.BatchDeleteClusterNodesResponse_Failed, v.Failed)
+	serializeBatchDeleteClusterNodeLogicalIdsErrorList(s, schemas.BatchDeleteClusterNodesResponse_FailedNodeLogicalIds, v.FailedNodeLogicalIds)
+	serializeClusterNodeIds(s, schemas.BatchDeleteClusterNodesResponse_Successful, v.Successful)
+	serializeClusterNodeLogicalIdList(s, schemas.BatchDeleteClusterNodesResponse_SuccessfulNodeLogicalIds, v.SuccessfulNodeLogicalIds)
+}
+func (v *BatchDeleteClusterNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteClusterNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteClusterNodesResponse_Failed:
+			return deserializeBatchDeleteClusterNodesErrorList(d, schemas.BatchDeleteClusterNodesResponse_Failed, &v.Failed)
+		case schemas.BatchDeleteClusterNodesResponse_FailedNodeLogicalIds:
+			return deserializeBatchDeleteClusterNodeLogicalIdsErrorList(d, schemas.BatchDeleteClusterNodesResponse_FailedNodeLogicalIds, &v.FailedNodeLogicalIds)
+		case schemas.BatchDeleteClusterNodesResponse_Successful:
+			return deserializeClusterNodeIds(d, schemas.BatchDeleteClusterNodesResponse_Successful, &v.Successful)
+		case schemas.BatchDeleteClusterNodesResponse_SuccessfulNodeLogicalIds:
+			return deserializeClusterNodeLogicalIdList(d, schemas.BatchDeleteClusterNodesResponse_SuccessfulNodeLogicalIds, &v.SuccessfulNodeLogicalIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteClusterNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteClusterNodes, schemas.BatchDeleteClusterNodesRequest, schemas.BatchDeleteClusterNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDeleteClusterNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteClusterNodes, schemas.BatchDeleteClusterNodesRequest, schemas.BatchDeleteClusterNodesResponse), output: &BatchDeleteClusterNodesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDeleteClusterNodes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteClusterNodes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDeleteClusterNodesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteClusterNodes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +163,8 @@ func (c *Client) addOperationBatchDeleteClusterNodesMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDeleteClusterNodes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDeleteClusterNodes",
-	}
 }

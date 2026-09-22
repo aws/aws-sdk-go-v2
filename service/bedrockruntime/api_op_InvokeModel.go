@@ -4,11 +4,10 @@ package bedrockruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Invokes the specified Amazon Bedrock model to run inference using the prompt
@@ -118,6 +117,9 @@ type InvokeModelInput struct {
 	// Model performance settings for the request.
 	PerformanceConfigLatency types.PerformanceConfigLatency
 
+	// Key-value pairs that you can use to filter invocation logs.
+	RequestMetadata *string
+
 	// Specifies the processing tier type used for serving the request.
 	ServiceTier types.ServiceTierType
 
@@ -126,6 +128,45 @@ type InvokeModelInput struct {
 	Trace types.Trace
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvokeModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accept != nil {
+		s.WriteString(schemas.InvokeModelRequest_accept, *v.Accept)
+	}
+	if v.Body != nil {
+		s.WriteBlob(schemas.InvokeModelRequest_body, v.Body)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeModelRequest_contentType, *v.ContentType)
+	}
+	if v.GuardrailIdentifier != nil {
+		s.WriteString(schemas.InvokeModelRequest_guardrailIdentifier, *v.GuardrailIdentifier)
+	}
+	if v.GuardrailVersion != nil {
+		s.WriteString(schemas.InvokeModelRequest_guardrailVersion, *v.GuardrailVersion)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.InvokeModelRequest_modelId, *v.ModelId)
+	}
+	if v.PerformanceConfigLatency != "" {
+		s.WriteString(schemas.InvokeModelRequest_performanceConfigLatency, string(v.PerformanceConfigLatency))
+	}
+	if v.RequestMetadata != nil {
+		s.WriteString(schemas.InvokeModelRequest_requestMetadata, *v.RequestMetadata)
+	}
+	if v.ServiceTier != "" {
+		s.WriteString(schemas.InvokeModelRequest_serviceTier, string(v.ServiceTier))
+	}
+	if v.Trace != "" {
+		s.WriteString(schemas.InvokeModelRequest_trace, string(v.Trace))
+	}
 }
 
 type InvokeModelOutput struct {
@@ -156,77 +197,73 @@ type InvokeModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.InvokeModelResponse_body, v.Body)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.InvokeModelResponse_contentType, *v.ContentType)
+	}
+	if v.PerformanceConfigLatency != "" {
+		s.WriteString(schemas.InvokeModelResponse_performanceConfigLatency, string(v.PerformanceConfigLatency))
+	}
+	if v.ServiceTier != "" {
+		s.WriteString(schemas.InvokeModelResponse_serviceTier, string(v.ServiceTier))
+	}
+}
+func (v *InvokeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeModelResponse_body:
+			return d.ReadBlob(schemas.InvokeModelResponse_body, &v.Body)
+		case schemas.InvokeModelResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InvokeModelResponse_contentType, v.ContentType)
+		case schemas.InvokeModelResponse_performanceConfigLatency:
+			var ev string
+			if err := d.ReadString(schemas.InvokeModelResponse_performanceConfigLatency, &ev); err != nil {
+				return err
+			}
+			v.PerformanceConfigLatency = types.PerformanceConfigLatency(ev)
+			return nil
+		case schemas.InvokeModelResponse_serviceTier:
+			var ev string
+			if err := d.ReadString(schemas.InvokeModelResponse_serviceTier, &ev); err != nil {
+				return err
+			}
+			v.ServiceTier = types.ServiceTierType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInvokeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeModel, schemas.InvokeModelRequest, schemas.InvokeModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeModel, schemas.InvokeModelRequest, schemas.InvokeModelResponse), output: &InvokeModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInvokeModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -241,22 +278,8 @@ func (c *Client) addOperationInvokeModelMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInvokeModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeModel",
-	}
 }

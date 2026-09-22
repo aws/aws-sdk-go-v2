@@ -84,6 +84,9 @@ func ExampleMyUnion_outputUsage() {
 	case *types.MyUnionMemberTimestampValue:
 		_ = v.Value // Value is time.Time
 
+	case *types.MyUnionMemberUnionValue:
+		_ = v.Value // Value is types.NestedUnion
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -99,10 +102,29 @@ var _ *string
 var _ *int32
 var _ *bool
 var _ *types.RenamedGreeting
+var _ types.NestedUnion
 var _ types.FooEnum
 var _ *types.GreetingStruct
 var _ *time.Time
 var _ []byte
+
+func ExampleNestedUnion_outputUsage() {
+	var union types.NestedUnion
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.NestedUnionMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExamplePayloadUnion_outputUsage() {
 	var union types.PayloadUnion

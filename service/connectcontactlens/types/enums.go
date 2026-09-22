@@ -2,6 +2,32 @@
 
 package types
 
+type ExtractedInformationFailureCode string
+
+// Enum values for ExtractedInformationFailureCode
+const (
+	ExtractedInformationFailureCodeQuotaExceeded                   ExtractedInformationFailureCode = "QUOTA_EXCEEDED"
+	ExtractedInformationFailureCodeInsufficientConversationContent ExtractedInformationFailureCode = "INSUFFICIENT_CONVERSATION_CONTENT"
+	ExtractedInformationFailureCodeFailedSafetyGuidelines          ExtractedInformationFailureCode = "FAILED_SAFETY_GUIDELINES"
+	ExtractedInformationFailureCodeInternalError                   ExtractedInformationFailureCode = "INTERNAL_ERROR"
+	ExtractedInformationFailureCodeMaxPackageFeatureOnly           ExtractedInformationFailureCode = "MAX_PACKAGE_FEATURE_ONLY"
+)
+
+// Values returns all known values for ExtractedInformationFailureCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExtractedInformationFailureCode) Values() []ExtractedInformationFailureCode {
+	return []ExtractedInformationFailureCode{
+		"QUOTA_EXCEEDED",
+		"INSUFFICIENT_CONVERSATION_CONTENT",
+		"FAILED_SAFETY_GUIDELINES",
+		"INTERNAL_ERROR",
+		"MAX_PACKAGE_FEATURE_ONLY",
+	}
+}
+
 type PostContactSummaryFailureCode string
 
 // Enum values for PostContactSummaryFailureCode

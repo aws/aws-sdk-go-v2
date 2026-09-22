@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/subscriptions/__Identifier__/revoke
+
+Content-Type: application/json
+
+{"retainPermissions":true}

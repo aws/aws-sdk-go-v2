@@ -1,0 +1,3 @@
+GET /medical-scribe-stream/domain/__DomainId__/subscription/__SubscriptionId__/session/__SessionId__
+
+

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Description":"__Description__","LastModified":"2000-01-01T00:00:00Z","SchemaArn":"__SchemaArn__","SchemaName":"__SchemaName__","SchemaVersion":"__SchemaVersion__","tags":{"key0":"__Value__"},"Type":"__Type__","VersionCreatedDate":"2000-01-01T00:00:00Z"}

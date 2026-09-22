@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/documentation/versions/__DocumentationVersion__
+
+Accept: application/json
+

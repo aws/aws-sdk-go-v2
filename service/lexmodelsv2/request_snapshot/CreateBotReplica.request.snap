@@ -1,0 +1,5 @@
+PUT /bots/__BotId__/replicas
+
+Content-Type: application/json
+
+{"replicaRegion":"__ReplicaRegion__"}

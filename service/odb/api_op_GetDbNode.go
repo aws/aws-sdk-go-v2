@@ -4,11 +4,10 @@ package odb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the specified DB node.
@@ -29,17 +28,38 @@ func (c *Client) GetDbNode(ctx context.Context, params *GetDbNodeInput, optFns .
 
 type GetDbNodeInput struct {
 
-	// The unique identifier of the VM cluster that contains the DB node.
-	//
-	// This member is required.
-	CloudVmClusterId *string
-
 	// The unique identifier of the DB node to retrieve information about.
 	//
 	// This member is required.
 	DbNodeId *string
 
+	// The unique identifier of the VM cluster that contains the DB node. You must
+	// specify either this parameter or exadbVmClusterId .
+	CloudVmClusterId *string
+
+	// The unique identifier of the Exascale VM cluster that contains the DB node. You
+	// must specify either this parameter or cloudVmClusterId .
+	ExadbVmClusterId *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *GetDbNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDbNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDbNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudVmClusterId != nil {
+		s.WriteString(schemas.GetDbNodeInput_cloudVmClusterId, *v.CloudVmClusterId)
+	}
+	if v.DbNodeId != nil {
+		s.WriteString(schemas.GetDbNodeInput_dbNodeId, *v.DbNodeId)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.GetDbNodeInput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
 }
 
 type GetDbNodeOutput struct {
@@ -53,77 +73,50 @@ type GetDbNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDbNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDbNodeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDbNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbNode != nil {
+		s.WriteStruct(schemas.GetDbNodeOutput_dbNode)
+		v.DbNode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetDbNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDbNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDbNodeOutput_dbNode:
+			v.DbNode = &types.DbNode{}
+			return v.DbNode.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDbNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbNode, schemas.GetDbNodeInput, schemas.GetDbNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDbNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbNode, schemas.GetDbNodeInput, schemas.GetDbNodeOutput), output: &GetDbNodeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDbNode{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDbNode"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDbNodeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDbNode(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +131,8 @@ func (c *Client) addOperationGetDbNodeMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDbNode(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDbNode",
-	}
 }

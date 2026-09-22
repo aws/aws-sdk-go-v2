@@ -4,19 +4,20 @@ package marketplacemetering
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Amazon Web Services Marketplace is introducing Concurrent Agreements, enabling
 // buyers to make multiple purchases per Amazon Web Services account. Starting June
 // 1, 2026, new SaaS products must use CustomerAWSAccountId (instead of
 // CustomerIdentifier ), LicenseArn (instead of ProductCode ) to support this
-// feature. Existing integrations will continue to work. Review the new integration
-// for Concurrent Agreements [here].
+// feature. BatchMeterUsage does not support CustomerIdentifier for new
+// integrations. Existing integrations continue to work. Review the new integration
+// for Concurrent Agreements [here]. For additional implementation details, see [BatchMeterUsage code example with LicenseArn] in the
+// Amazon Web Services Marketplace Seller Guide.
 //
 // To post metering records for customers, SaaS applications call BatchMeterUsage ,
 // which is used for metering SaaS flexible consumption pricing (FCP). Identical
@@ -25,7 +26,14 @@ import (
 // meter usage for multiple products, you must make multiple BatchMeterUsage calls.
 //
 // Usage records should be submitted in quick succession following a recorded
-// event. Usage records aren't accepted 6 hours or more after an event.
+// event. Usage records aren't accepted 24 hours or more after an event. At the end
+// of each billing cycle, a 6-hour grace period applies. We accept usage records
+// for the previous billing month until 06:00 UTC on the first day of the next
+// month. For example, you must submit March usage records before 06:00 UTC on
+// April 1. On April 1 at 05:00 UTC, you can still submit records for March 31
+// (within the 6-hour grace period). After 06:00 UTC on April 1, March records are
+// rejected regardless of the normal 24-hour submission window. After this grace
+// period, we return a TimestampOutOfBoundsException error.
 //
 // BatchMeterUsage can process up to 25 UsageRecords at a time, and each request
 // must be less than 1 MB in size. Optionally, you can have multiple usage
@@ -42,6 +50,7 @@ import (
 // Seller Guide.
 //
 // [here]: https://catalog.workshops.aws/mpseller/en-US/saas/integration-for-concurrent-agreements
+// [BatchMeterUsage code example with LicenseArn]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-licensearn-example
 // [BatchMeterUsage code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
 // [BatchMeterUsage Region support]: https://docs.aws.amazon.com/marketplace/latest/APIReference/metering-regions.html#batchmeterusage-region-support
 func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInput, optFns ...func(*Options)) (*BatchMeterUsageOutput, error) {
@@ -72,9 +81,32 @@ type BatchMeterUsageInput struct {
 	// Product code is used to uniquely identify a product in Amazon Web Services
 	// Marketplace. The product code should be the same as the one used during the
 	// publishing of a new product.
+	//
+	// ProductCode is required only for legacy integrations that use CustomerIdentifier
+	// . For new integrations using LicenseArn (Concurrent Agreements), do NOT include
+	// ProductCode at the request level. The LicenseArn in each UsageRecord identifies
+	// both the product and the specific agreement.
+	//
+	// Sending metering records with both ProductCode and LicenseArn for the same
+	// customer within the same hour will result in duplicate billing. If you are
+	// migrating from product-based metering to license-based metering, stop sending
+	// ProductCode before you start sending LicenseArn .
 	ProductCode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchMeterUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchMeterUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchMeterUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductCode != nil {
+		s.WriteString(schemas.BatchMeterUsageRequest_ProductCode, *v.ProductCode)
+	}
+	serializeUsageRecordList(s, schemas.BatchMeterUsageRequest_UsageRecords, v.UsageRecords)
 }
 
 // Contains the UsageRecords processed by BatchMeterUsage and any records that
@@ -97,77 +129,48 @@ type BatchMeterUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchMeterUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchMeterUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchMeterUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUsageRecordResultList(s, schemas.BatchMeterUsageResult_Results, v.Results)
+	serializeUsageRecordList(s, schemas.BatchMeterUsageResult_UnprocessedRecords, v.UnprocessedRecords)
+}
+func (v *BatchMeterUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchMeterUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchMeterUsageResult_Results:
+			return deserializeUsageRecordResultList(d, schemas.BatchMeterUsageResult_Results, &v.Results)
+		case schemas.BatchMeterUsageResult_UnprocessedRecords:
+			return deserializeUsageRecordList(d, schemas.BatchMeterUsageResult_UnprocessedRecords, &v.UnprocessedRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchMeterUsage, schemas.BatchMeterUsageRequest, schemas.BatchMeterUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchMeterUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchMeterUsage, schemas.BatchMeterUsageRequest, schemas.BatchMeterUsageResult), output: &BatchMeterUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchMeterUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchMeterUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchMeterUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchMeterUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +185,8 @@ func (c *Client) addOperationBatchMeterUsageMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchMeterUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchMeterUsage",
-	}
 }

@@ -1,0 +1,6 @@
+POST /amazonclouddirectory/2017-01-11/typedlink/incoming
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"ConsistencyLevel":"SERIALIZABLE","FilterAttributeRanges":[{"AttributeName":"__AttributeName__","Range":{"EndMode":"FIRST","EndValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"StartMode":"FIRST","StartValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"}}},{"AttributeName":"__AttributeName__","Range":{"EndMode":"FIRST","EndValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"},"StartMode":"FIRST","StartValue":{"StringValue":"__TypedAttributeValueMemberStringValue__"}}}],"FilterTypedLink":{"SchemaArn":"__SchemaArn__","TypedLinkName":"__TypedLinkName__"},"MaxResults":1,"NextToken":"__NextToken__","ObjectReference":{"Selector":"__Selector__"}}

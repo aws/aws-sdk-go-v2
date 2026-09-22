@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists received licenses.
@@ -54,6 +53,23 @@ type ListReceivedLicensesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceivedLicensesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceivedLicensesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceivedLicensesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListReceivedLicensesRequest_Filters, v.Filters)
+	serializeArnList(s, schemas.ListReceivedLicensesRequest_LicenseArns, v.LicenseArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReceivedLicensesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceivedLicensesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListReceivedLicensesOutput struct {
 
 	// Received license details.
@@ -68,74 +84,48 @@ type ListReceivedLicensesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReceivedLicensesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReceivedLicensesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReceivedLicensesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGrantedLicenseList(s, schemas.ListReceivedLicensesResponse_Licenses, v.Licenses)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReceivedLicensesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListReceivedLicensesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReceivedLicensesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReceivedLicensesResponse_Licenses:
+			return deserializeGrantedLicenseList(d, schemas.ListReceivedLicensesResponse_Licenses, &v.Licenses)
+		case schemas.ListReceivedLicensesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReceivedLicensesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReceivedLicensesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceivedLicenses, schemas.ListReceivedLicensesRequest, schemas.ListReceivedLicensesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReceivedLicenses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReceivedLicenses, schemas.ListReceivedLicensesRequest, schemas.ListReceivedLicensesResponse), output: &ListReceivedLicensesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReceivedLicenses{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReceivedLicenses"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReceivedLicenses(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +140,8 @@ func (c *Client) addOperationListReceivedLicensesMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListReceivedLicenses(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListReceivedLicenses",
-	}
 }

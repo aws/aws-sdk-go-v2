@@ -5,10 +5,8 @@ package support
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of cases that you specify by passing one or more case IDs. You
@@ -23,16 +21,32 @@ import (
 //   - One or more nextToken values, which specify where to paginate the returned
 //     records represented by the CaseDetails objects.
 //
-// Case data is available for 12 months after creation. If a case was created more
-// than 12 months ago, a request might return an error.
+// Case data is available for 24 months after creation. If a case was created more
+// than 24 months ago, a request might return an error.
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
-//     use the Amazon Web Services Support API.
+//   - You must have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan to use the
+//     Amazon Web Services Support API. If you're in an Amazon Web Services Region that
+//     doesn't offer one of these Amazon Web Services Support plans, or if you haven't
+//     transitioned to one of these plans, you can use the Amazon Web Services Support
+//     API with a Business, Enterprise On-Ramp, or Enterprise Support plan.
 //
 //   - If you call the Amazon Web Services Support API from an account that
-//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     doesn't have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan, the
 //     SubscriptionRequiredException error message appears. For information about
 //     changing your support plan, see [Amazon Web Services Support].
+//
+// Each Communication returned by this operation includes attachment information in two fields:
+//
+//   - attachmentSet : returns only attachments that are 5 MB or smaller.
+//     Attachments larger than 5 MB are not included in this field.
+//
+//   - attachments : returns all attachments regardless of size.
+//
+// Amazon Web Services recommends that you use the attachments field and download
+// each attachment with GetAttachmentDownloadLink, which supports attachments of any size. The attachmentSet
+// field and DescribeAttachmentreturn only attachments that are 5 MB or smaller.
 //
 // [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 // [CaseDetails]: https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html
@@ -54,11 +68,11 @@ func (c *Client) DescribeCases(ctx context.Context, params *DescribeCasesInput, 
 type DescribeCasesInput struct {
 
 	// The start date for a filtered date search on support case communications. Case
-	// communications are available for 12 months after creation.
+	// communications are available for 24 months after creation.
 	AfterTime *string
 
 	// The end date for a filtered date search on support case communications. Case
-	// communications are available for 12 months after creation.
+	// communications are available for 24 months after creation.
 	BeforeTime *string
 
 	// A list of ID numbers of the support cases you want returned. The maximum number
@@ -68,6 +82,12 @@ type DescribeCasesInput struct {
 	// The ID displayed for a case in the Amazon Web Services Support Center user
 	// interface.
 	DisplayId *string
+
+	// Specifies whether to validate the request without actually returning case data.
+	// When set to true , the request is validated but no cases are returned, and the
+	// operation returns a DryRunOperationException . When omitted or set to false ,
+	// the request runs normally.
+	DryRun *bool
 
 	// Specifies whether to include communications in the DescribeCases response. By
 	// default, communications are included.
@@ -79,8 +99,9 @@ type DescribeCasesInput struct {
 
 	// The language in which Amazon Web Services Support handles the case. Amazon Web
 	// Services Support currently supports Chinese (“zh”), English ("en"), Japanese
-	// ("ja") and Korean (“ko”). You must specify the ISO 639-1 code for the language
-	// parameter if you want support in that language.
+	// ("ja") , Chinese ("zh"), Spanish ("es"), Portuguese ("pt"), French ("fr"),
+	// Korean (“ko”), and Turkish ("tr"). You must specify the ISO 639-1 code for the
+	// language parameter if you want support in that language.
 	Language *string
 
 	// The maximum number of results to return before paginating.
@@ -111,9 +132,6 @@ type DescribeCasesOutput struct {
 }
 
 func (c *Client) addOperationDescribeCasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCases{}, middleware.After)
 	if err != nil {
 		return err
@@ -122,62 +140,17 @@ func (c *Client) addOperationDescribeCasesMiddlewares(stack *middleware.Stack, o
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCases"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCases(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +163,6 @@ func (c *Client) addOperationDescribeCasesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -295,11 +262,3 @@ type DescribeCasesAPIClient interface {
 }
 
 var _ DescribeCasesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeCases(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeCases",
-	}
-}

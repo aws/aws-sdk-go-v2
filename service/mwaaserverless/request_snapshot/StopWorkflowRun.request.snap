@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonMWAAServerless.StopWorkflowRun
+
+{"RunId":"__RunId__","WorkflowArn":"__WorkflowArn__"}

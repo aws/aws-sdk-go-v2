@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeMaintenanceWindowSchedule
+
+{"Filters":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","ResourceType":"INSTANCE","Targets":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"WindowId":"__WindowId__"}

@@ -4,11 +4,10 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a documentation part.
@@ -43,6 +42,21 @@ type GetDocumentationPartInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentationPartInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentationPartRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentationPartInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentationPartId != nil {
+		s.WriteString(schemas.GetDocumentationPartRequest_documentationPartId, *v.DocumentationPartId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetDocumentationPartRequest_restApiId, *v.RestApiId)
+	}
+}
+
 // A documentation part for a targeted API entity.
 type GetDocumentationPartOutput struct {
 
@@ -71,77 +85,62 @@ type GetDocumentationPartOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentationPartOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentationPart)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentationPartOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DocumentationPart_id, *v.Id)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.DocumentationPart_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Properties != nil {
+		s.WriteString(schemas.DocumentationPart_properties, *v.Properties)
+	}
+}
+func (v *GetDocumentationPartOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentationPart, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentationPart_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DocumentationPart_id, v.Id)
+		case schemas.DocumentationPart_location:
+			v.Location = &types.DocumentationPartLocation{}
+			return v.Location.Deserialize(d)
+		case schemas.DocumentationPart_properties:
+			v.Properties = new(string)
+			return d.ReadString(schemas.DocumentationPart_properties, v.Properties)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentationPart, schemas.GetDocumentationPartRequest, schemas.DocumentationPart)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocumentationPart{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentationPart, schemas.GetDocumentationPartRequest, schemas.DocumentationPart), output: &GetDocumentationPartOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDocumentationPart{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDocumentationPart"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDocumentationPartValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDocumentationPart(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +158,8 @@ func (c *Client) addOperationGetDocumentationPartMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDocumentationPart(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDocumentationPart",
-	}
 }

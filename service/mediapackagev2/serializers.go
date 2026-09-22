@@ -233,11 +233,23 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 		ok.String(string(v.InputType))
 	}
 
+	if v.MultiviewConfiguration != nil {
+		ok := object.Key("MultiviewConfiguration")
+		if err := awsRestjson1_serializeDocumentMultiviewConfiguration(v.MultiviewConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OutputHeaderConfiguration != nil {
 		ok := object.Key("OutputHeaderConfiguration")
 		if err := awsRestjson1_serializeDocumentOutputHeaderConfiguration(v.OutputHeaderConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.OutputLockingMode) > 0 {
+		ok := object.Key("OutputLockingMode")
+		ok.String(string(v.OutputLockingMode))
 	}
 
 	if v.Tags != nil {
@@ -662,6 +674,11 @@ func awsRestjson1_serializeOpDocumentCreateOriginEndpointInput(v *CreateOriginEn
 	if v.StartoverWindowSeconds != nil {
 		ok := object.Key("StartoverWindowSeconds")
 		ok.Integer(*v.StartoverWindowSeconds)
+	}
+
+	if len(v.StreamNameOutputMode) > 0 {
+		ok := object.Key("StreamNameOutputMode")
+		ok.String(string(v.StreamNameOutputMode))
 	}
 
 	if v.Tags != nil {
@@ -2670,6 +2687,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		}
 	}
 
+	if v.MultiviewConfiguration != nil {
+		ok := object.Key("MultiviewConfiguration")
+		if err := awsRestjson1_serializeDocumentMultiviewConfiguration(v.MultiviewConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OutputHeaderConfiguration != nil {
 		ok := object.Key("OutputHeaderConfiguration")
 		if err := awsRestjson1_serializeDocumentOutputHeaderConfiguration(v.OutputHeaderConfiguration, ok); err != nil {
@@ -2945,6 +2969,11 @@ func awsRestjson1_serializeOpDocumentUpdateOriginEndpointInput(v *UpdateOriginEn
 		ok.Integer(*v.StartoverWindowSeconds)
 	}
 
+	if len(v.StreamNameOutputMode) > 0 {
+		ok := object.Key("StreamNameOutputMode")
+		ok.String(string(v.StreamNameOutputMode))
+	}
+
 	if len(v.UriSeparator) > 0 {
 		ok := object.Key("UriSeparator")
 		ok.String(string(v.UriSeparator))
@@ -2986,6 +3015,11 @@ func awsRestjson1_serializeDocumentCdnIdentifierSecretArns(v []string, value smi
 func awsRestjson1_serializeDocumentCreateDashManifestConfiguration(v *types.CreateDashManifestConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AudioTimelinePattern) > 0 {
+		ok := object.Key("AudioTimelinePattern")
+		ok.String(string(v.AudioTimelinePattern))
+	}
 
 	if v.AvailabilityStartTimeConfiguration != nil {
 		ok := object.Key("AvailabilityStartTimeConfiguration")
@@ -3838,6 +3872,49 @@ func awsRestjson1_serializeDocumentInputSwitchConfiguration(v *types.InputSwitch
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMultiviewConfiguration(v *types.MultiviewConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailableLayouts != nil {
+		ok := object.Key("AvailableLayouts")
+		if err := awsRestjson1_serializeDocumentMultiviewLayoutList(v.AvailableLayouts, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AvailableSources != nil {
+		ok := object.Key("AvailableSources")
+		if err := awsRestjson1_serializeDocumentMultiviewSourceList(v.AvailableSources, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiviewLayoutList(v []types.MultiviewLayoutType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMultiviewSourceList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOutputHeaderConfiguration(v *types.OutputHeaderConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3952,6 +4029,11 @@ func awsRestjson1_serializeDocumentSegment(v *types.Segment, value smithyjson.Va
 	if v.IncludeIframeOnlyStreams != nil {
 		ok := object.Key("IncludeIframeOnlyStreams")
 		ok.Boolean(*v.IncludeIframeOnlyStreams)
+	}
+
+	if len(v.OutputTimestampMode) > 0 {
+		ok := object.Key("OutputTimestampMode")
+		ok.String(string(v.OutputTimestampMode))
 	}
 
 	if v.Scte != nil {

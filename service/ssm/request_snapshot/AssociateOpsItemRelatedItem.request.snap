@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.AssociateOpsItemRelatedItem
+
+{"AssociationType":"__AssociationType__","OpsItemId":"__OpsItemId__","ResourceType":"__ResourceType__","ResourceUri":"__ResourceUri__"}

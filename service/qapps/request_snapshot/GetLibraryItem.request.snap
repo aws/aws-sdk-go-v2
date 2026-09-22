@@ -1,0 +1,4 @@
+GET /catalog.getItem?appId=__AppId__&libraryItemId=__LibraryItemId__
+
+Instance-Id: __InstanceId__
+

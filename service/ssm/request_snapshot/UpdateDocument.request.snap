@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.UpdateDocument
+
+{"Attachments":[{"Key":"SourceUrl","Name":"__Name__","Values":["__Member__","__Member__"]},{"Key":"SourceUrl","Name":"__Name__","Values":["__Member__","__Member__"]}],"Content":"__Content__","DisplayName":"__DisplayName__","DocumentFormat":"YAML","DocumentVersion":"__DocumentVersion__","Name":"__Name__","TargetType":"__TargetType__","VersionName":"__VersionName__"}

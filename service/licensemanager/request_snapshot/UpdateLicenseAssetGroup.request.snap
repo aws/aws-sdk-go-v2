@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.UpdateLicenseAssetGroup
+
+{"AssociatedLicenseAssetRulesetARNs":["__Member__","__Member__"],"ClientToken":"__ClientToken__","Description":"__Description__","LicenseAssetGroupArn":"__LicenseAssetGroupArn__","LicenseAssetGroupConfigurations":[{"UsageDimension":"__UsageDimension__"},{"UsageDimension":"__UsageDimension__"}],"Name":"__Name__","Properties":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Status":"ACTIVE"}

@@ -1,0 +1,5 @@
+POST /v1/phone/number/validate
+
+Content-Type: application/json
+
+{"IsoCountryCode":"__IsoCountryCode__","PhoneNumber":"__PhoneNumber__"}

@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates the auth policy. The policy string in JSON must not contain
@@ -48,6 +47,34 @@ type PutAuthPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAuthPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAuthPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAuthPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.PutAuthPolicyRequest_policy, *v.Policy)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.PutAuthPolicyRequest_resourceIdentifier, *v.ResourceIdentifier)
+	}
+}
+func (v *PutAuthPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAuthPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAuthPolicyRequest_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.PutAuthPolicyRequest_policy, v.Policy)
+		case schemas.PutAuthPolicyRequest_resourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.PutAuthPolicyRequest_resourceIdentifier, v.ResourceIdentifier)
+		}
+		return nil
+	})
+}
+
 type PutAuthPolicyOutput struct {
 
 	// The auth policy. The policy string in JSON must not contain newlines or blank
@@ -70,77 +97,58 @@ type PutAuthPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAuthPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAuthPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAuthPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.PutAuthPolicyResponse_policy, *v.Policy)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.PutAuthPolicyResponse_state, string(v.State))
+	}
+}
+func (v *PutAuthPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAuthPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAuthPolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.PutAuthPolicyResponse_policy, v.Policy)
+		case schemas.PutAuthPolicyResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.PutAuthPolicyResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.AuthPolicyState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAuthPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAuthPolicy, schemas.PutAuthPolicyRequest, schemas.PutAuthPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAuthPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAuthPolicy, schemas.PutAuthPolicyRequest, schemas.PutAuthPolicyResponse), output: &PutAuthPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAuthPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAuthPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutAuthPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAuthPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +163,8 @@ func (c *Client) addOperationPutAuthPolicyMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutAuthPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutAuthPolicy",
-	}
 }

@@ -4,10 +4,9 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Exports a deployed version of a RestApi in a specified format.
@@ -62,6 +61,28 @@ type GetExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accepts != nil {
+		s.WriteString(schemas.GetExportRequest_accepts, *v.Accepts)
+	}
+	if v.ExportType != nil {
+		s.WriteString(schemas.GetExportRequest_exportType, *v.ExportType)
+	}
+	serializeMapOfStringToString(s, schemas.GetExportRequest_parameters, v.Parameters)
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetExportRequest_restApiId, *v.RestApiId)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.GetExportRequest_stageName, *v.StageName)
+	}
+}
+
 // The binary blob response to GetExport, which contains the generated SDK.
 type GetExportOutput struct {
 
@@ -81,77 +102,59 @@ type GetExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.ExportResponse_body, v.Body)
+	}
+	if v.ContentDisposition != nil {
+		s.WriteString(schemas.ExportResponse_contentDisposition, *v.ContentDisposition)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.ExportResponse_contentType, *v.ContentType)
+	}
+}
+func (v *GetExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportResponse_body:
+			return d.ReadBlob(schemas.ExportResponse_body, &v.Body)
+		case schemas.ExportResponse_contentDisposition:
+			v.ContentDisposition = new(string)
+			return d.ReadString(schemas.ExportResponse_contentDisposition, v.ContentDisposition)
+		case schemas.ExportResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.ExportResponse_contentType, v.ContentType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExport, schemas.GetExportRequest, schemas.ExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExport, schemas.GetExportRequest, schemas.ExportResponse), output: &GetExportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetExportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +172,8 @@ func (c *Client) addOperationGetExportMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetExport",
-	}
 }

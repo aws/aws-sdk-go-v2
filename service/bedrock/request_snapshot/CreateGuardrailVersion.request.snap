@@ -1,0 +1,5 @@
+POST /guardrails/__GuardrailIdentifier__
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","description":"__Description__"}

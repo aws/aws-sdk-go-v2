@@ -1,0 +1,5 @@
+POST /BatchGetRecord
+
+Content-Type: application/json
+
+{"ExpirationTimeResponse":"Enabled","Identifiers":[{"FeatureGroupName":"__FeatureGroupName__","FeatureNames":["__Member__","__Member__"],"RecordIdentifiersValueAsString":["__Member__","__Member__"]},{"FeatureGroupName":"__FeatureGroupName__","FeatureNames":["__Member__","__Member__"],"RecordIdentifiersValueAsString":["__Member__","__Member__"]}]}

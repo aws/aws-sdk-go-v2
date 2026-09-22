@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: KeyspacesService.UpdateKeyspace
+
+{"clientSideTimestamps":{"status":"ENABLED"},"keyspaceName":"__KeyspaceName__","replicationSpecification":{"regionList":["__Member__","__Member__"],"replicationStrategy":"SINGLE_REGION"}}

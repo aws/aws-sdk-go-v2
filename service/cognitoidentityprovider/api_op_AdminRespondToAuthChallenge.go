@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Some API operations in a user pool generate a challenge, like a prompt for an
@@ -330,6 +329,39 @@ type AdminRespondToAuthChallengeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminRespondToAuthChallengeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminRespondToAuthChallengeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminRespondToAuthChallengeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.AdminRespondToAuthChallengeRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChallengeName != "" {
+		s.WriteString(schemas.AdminRespondToAuthChallengeRequest_ChallengeName, string(v.ChallengeName))
+	}
+	serializeChallengeResponsesType(s, schemas.AdminRespondToAuthChallengeRequest_ChallengeResponses, v.ChallengeResponses)
+	if v.ClientId != nil {
+		s.WriteString(schemas.AdminRespondToAuthChallengeRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.AdminRespondToAuthChallengeRequest_ClientMetadata, v.ClientMetadata)
+	if v.ContextData != nil {
+		s.WriteStruct(schemas.AdminRespondToAuthChallengeRequest_ContextData)
+		v.ContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Session != nil {
+		s.WriteString(schemas.AdminRespondToAuthChallengeRequest_Session, *v.Session)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminRespondToAuthChallengeRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 // Responds to the authentication challenge, as an administrator.
 type AdminRespondToAuthChallengeOutput struct {
 
@@ -436,77 +468,69 @@ type AdminRespondToAuthChallengeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminRespondToAuthChallengeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminRespondToAuthChallengeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminRespondToAuthChallengeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationResult != nil {
+		s.WriteStruct(schemas.AdminRespondToAuthChallengeResponse_AuthenticationResult)
+		v.AuthenticationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChallengeName != "" {
+		s.WriteString(schemas.AdminRespondToAuthChallengeResponse_ChallengeName, string(v.ChallengeName))
+	}
+	serializeChallengeParametersType(s, schemas.AdminRespondToAuthChallengeResponse_ChallengeParameters, v.ChallengeParameters)
+	if v.Session != nil {
+		s.WriteString(schemas.AdminRespondToAuthChallengeResponse_Session, *v.Session)
+	}
+}
+func (v *AdminRespondToAuthChallengeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminRespondToAuthChallengeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminRespondToAuthChallengeResponse_AuthenticationResult:
+			v.AuthenticationResult = &types.AuthenticationResultType{}
+			return v.AuthenticationResult.Deserialize(d)
+		case schemas.AdminRespondToAuthChallengeResponse_ChallengeName:
+			var ev string
+			if err := d.ReadString(schemas.AdminRespondToAuthChallengeResponse_ChallengeName, &ev); err != nil {
+				return err
+			}
+			v.ChallengeName = types.ChallengeNameType(ev)
+			return nil
+		case schemas.AdminRespondToAuthChallengeResponse_ChallengeParameters:
+			return deserializeChallengeParametersType(d, schemas.AdminRespondToAuthChallengeResponse_ChallengeParameters, &v.ChallengeParameters)
+		case schemas.AdminRespondToAuthChallengeResponse_Session:
+			v.Session = new(string)
+			return d.ReadString(schemas.AdminRespondToAuthChallengeResponse_Session, v.Session)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminRespondToAuthChallengeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminRespondToAuthChallenge, schemas.AdminRespondToAuthChallengeRequest, schemas.AdminRespondToAuthChallengeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminRespondToAuthChallenge{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminRespondToAuthChallenge, schemas.AdminRespondToAuthChallengeRequest, schemas.AdminRespondToAuthChallengeResponse), output: &AdminRespondToAuthChallengeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminRespondToAuthChallenge{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AdminRespondToAuthChallenge"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAdminRespondToAuthChallengeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAdminRespondToAuthChallenge(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -521,22 +545,8 @@ func (c *Client) addOperationAdminRespondToAuthChallengeMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAdminRespondToAuthChallenge(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AdminRespondToAuthChallenge",
-	}
 }

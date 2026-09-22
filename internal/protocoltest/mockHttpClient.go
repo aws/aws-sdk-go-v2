@@ -1,7 +1,7 @@
 package protocoltest
 
 import (
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 )
@@ -15,7 +15,7 @@ func (*HTTPClient) Do(request *http.Request) (*http.Response, error) {
 	return &http.Response{
 		StatusCode: 200,
 		Header:     request.Header,
-		Body:       ioutil.NopCloser(strings.NewReader("")),
+		Body:       io.NopCloser(strings.NewReader("")),
 		Request:    request,
 	}, nil
 }

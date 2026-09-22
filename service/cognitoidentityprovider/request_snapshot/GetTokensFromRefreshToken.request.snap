@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.GetTokensFromRefreshToken
+
+{"ClientId":"__ClientId__","ClientMetadata":{"key0":"__Value__"},"ClientSecret":"__ClientSecret__","DeviceKey":"__DeviceKey__","RefreshToken":"__RefreshToken__"}

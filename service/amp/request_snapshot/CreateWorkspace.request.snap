@@ -1,0 +1,5 @@
+POST /workspaces
+
+Content-Type: application/json
+
+{"alias":"__Alias__","clientToken":"__ClientToken__","kmsKeyArn":"__KmsKeyArn__","tags":{"key0":"__Value__"}}

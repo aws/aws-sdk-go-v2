@@ -1,0 +1,4 @@
+GET /channels/__ChannelArn__?app-instance-user-arn=__AppInstanceUserArn__&scope=app-instance-user-membership
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

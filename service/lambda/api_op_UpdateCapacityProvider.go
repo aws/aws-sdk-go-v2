@@ -4,11 +4,10 @@ package lambda
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the configuration of an existing capacity provider.
@@ -37,7 +36,41 @@ type UpdateCapacityProviderInput struct {
 	// The updated scaling configuration for the capacity provider.
 	CapacityProviderScalingConfig *types.CapacityProviderScalingConfig
 
+	// Configuration for tag propagation to managed resources launched by the capacity
+	// provider.
+	PropagateTags *types.PropagateTags
+
+	// The updated telemetry configuration for the capacity provider.
+	TelemetryConfig *types.CapacityProviderTelemetryConfig
+
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateCapacityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCapacityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderName != nil {
+		s.WriteString(schemas.UpdateCapacityProviderRequest_CapacityProviderName, *v.CapacityProviderName)
+	}
+	if v.CapacityProviderScalingConfig != nil {
+		s.WriteStruct(schemas.UpdateCapacityProviderRequest_CapacityProviderScalingConfig)
+		v.CapacityProviderScalingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PropagateTags != nil {
+		s.WriteStruct(schemas.UpdateCapacityProviderRequest_PropagateTags)
+		v.PropagateTags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TelemetryConfig != nil {
+		s.WriteStruct(schemas.UpdateCapacityProviderRequest_TelemetryConfig)
+		v.TelemetryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type UpdateCapacityProviderOutput struct {
@@ -53,77 +86,50 @@ type UpdateCapacityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCapacityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCapacityProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCapacityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProvider != nil {
+		s.WriteStruct(schemas.UpdateCapacityProviderResponse_CapacityProvider)
+		v.CapacityProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCapacityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCapacityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCapacityProviderResponse_CapacityProvider:
+			v.CapacityProvider = &types.CapacityProvider{}
+			return v.CapacityProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCapacityProvider, schemas.UpdateCapacityProviderRequest, schemas.UpdateCapacityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCapacityProvider, schemas.UpdateCapacityProviderRequest, schemas.UpdateCapacityProviderResponse), output: &UpdateCapacityProviderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCapacityProvider{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCapacityProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateCapacityProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCapacityProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +144,8 @@ func (c *Client) addOperationUpdateCapacityProviderMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateCapacityProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCapacityProvider",
-	}
 }

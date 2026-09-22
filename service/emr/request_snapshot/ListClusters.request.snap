@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.ListClusters
+
+{"ClusterStates":["STARTING","STARTING"],"CreatedAfter":946684800,"CreatedBefore":946684800,"Marker":"__Marker__"}

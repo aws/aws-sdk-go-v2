@@ -586,6 +586,13 @@ func awsRestjson1_serializeDocumentControlFilter(v *types.ControlFilter, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.GovernedProviders != nil {
+		ok := object.Key("GovernedProviders")
+		if err := awsRestjson1_serializeDocumentGovernedProviderFilterList(v.GovernedProviders, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Implementations != nil {
 		ok := object.Key("Implementations")
 		if err := awsRestjson1_serializeDocumentImplementationFilter(v.Implementations, ok); err != nil {
@@ -645,6 +652,17 @@ func awsRestjson1_serializeDocumentDomainResourceFilterList(v []types.DomainReso
 		if err := awsRestjson1_serializeDocumentDomainResourceFilter(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGovernedProviderFilterList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

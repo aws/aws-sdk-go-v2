@@ -4,11 +4,10 @@ package kendra
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves relevant passages or text excerpts given an input query.
@@ -131,6 +130,39 @@ type RetrieveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeFilter != nil {
+		s.WriteStruct(schemas.RetrieveRequest_AttributeFilter)
+		v.AttributeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDocumentRelevanceOverrideConfigurationList(s, schemas.RetrieveRequest_DocumentRelevanceOverrideConfigurations, v.DocumentRelevanceOverrideConfigurations)
+	if v.IndexId != nil {
+		s.WriteString(schemas.RetrieveRequest_IndexId, *v.IndexId)
+	}
+	if v.PageNumber != nil {
+		s.WriteInt32(schemas.RetrieveRequest_PageNumber, *v.PageNumber)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.RetrieveRequest_PageSize, *v.PageSize)
+	}
+	if v.QueryText != nil {
+		s.WriteString(schemas.RetrieveRequest_QueryText, *v.QueryText)
+	}
+	serializeDocumentAttributeKeyList(s, schemas.RetrieveRequest_RequestedDocumentAttributes, v.RequestedDocumentAttributes)
+	if v.UserContext != nil {
+		s.WriteStruct(schemas.RetrieveRequest_UserContext)
+		v.UserContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RetrieveOutput struct {
 
 	// The identifier of query used for the search. You also use QueryId to identify
@@ -148,77 +180,51 @@ type RetrieveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.RetrieveResult_QueryId, *v.QueryId)
+	}
+	serializeRetrieveResultItemList(s, schemas.RetrieveResult_ResultItems, v.ResultItems)
+}
+func (v *RetrieveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveResult_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.RetrieveResult_QueryId, v.QueryId)
+		case schemas.RetrieveResult_ResultItems:
+			return deserializeRetrieveResultItemList(d, schemas.RetrieveResult_ResultItems, &v.ResultItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Retrieve, schemas.RetrieveRequest, schemas.RetrieveResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetrieve{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Retrieve, schemas.RetrieveRequest, schemas.RetrieveResult), output: &RetrieveOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRetrieve{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Retrieve"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRetrieveValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRetrieve(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -233,22 +239,8 @@ func (c *Client) addOperationRetrieveMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRetrieve(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Retrieve",
-	}
 }

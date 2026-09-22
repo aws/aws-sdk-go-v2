@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateEmailIdentityCertificate struct {
+}
+
+func (*validateOpAssociateEmailIdentityCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateEmailIdentityCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateEmailIdentityCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateEmailIdentityCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetMetricData struct {
 }
 
@@ -610,6 +630,26 @@ func (m *validateOpDeleteTenantResourceAssociation) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateEmailIdentityCertificate struct {
+}
+
+func (*validateOpDisassociateEmailIdentityCertificate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateEmailIdentityCertificate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateEmailIdentityCertificateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateEmailIdentityCertificateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetBlacklistReports struct {
 }
 
@@ -1090,6 +1130,26 @@ func (m *validateOpListDomainDeliverabilityCampaigns) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEmailIdentityCertificates struct {
+}
+
+func (*validateOpListEmailIdentityCertificates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEmailIdentityCertificates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEmailIdentityCertificatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEmailIdentityCertificatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListResourceTenants struct {
 }
 
@@ -1165,6 +1225,26 @@ func (m *validateOpPutAccountDetails) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutAccountDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutAccountPricingAttributes struct {
+}
+
+func (*validateOpPutAccountPricingAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountPricingAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountPricingAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountPricingAttributesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1550,6 +1630,26 @@ func (m *validateOpPutSuppressedDestination) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutTenantSuppressionAttributes struct {
+}
+
+func (*validateOpPutTenantSuppressionAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTenantSuppressionAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTenantSuppressionAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTenantSuppressionAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendBulkEmail struct {
 }
 
@@ -1685,6 +1785,26 @@ func (m *validateOpUpdateConfigurationSetEventDestination) HandleInitialize(ctx 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateConfigurationSetEventDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateConfigurationSet struct {
+}
+
+func (*validateOpUpdateConfigurationSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConfigurationSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConfigurationSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConfigurationSetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1830,6 +1950,10 @@ func (m *validateOpUpdateReputationEntityPolicy) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateEmailIdentityCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateEmailIdentityCertificate{}, middleware.After)
+}
+
 func addOpBatchGetMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetMetricData{}, middleware.After)
 }
@@ -1950,6 +2074,10 @@ func addOpDeleteTenantResourceAssociationValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDeleteTenantResourceAssociation{}, middleware.After)
 }
 
+func addOpDisassociateEmailIdentityCertificateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateEmailIdentityCertificate{}, middleware.After)
+}
+
 func addOpGetBlacklistReportsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBlacklistReports{}, middleware.After)
 }
@@ -2046,6 +2174,10 @@ func addOpListDomainDeliverabilityCampaignsValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpListDomainDeliverabilityCampaigns{}, middleware.After)
 }
 
+func addOpListEmailIdentityCertificatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEmailIdentityCertificates{}, middleware.After)
+}
+
 func addOpListResourceTenantsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListResourceTenants{}, middleware.After)
 }
@@ -2060,6 +2192,10 @@ func addOpListTenantResourcesValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutAccountDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutAccountDetails{}, middleware.After)
+}
+
+func addOpPutAccountPricingAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountPricingAttributes{}, middleware.After)
 }
 
 func addOpPutAccountSuppressionAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -2138,6 +2274,10 @@ func addOpPutSuppressedDestinationValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpPutSuppressedDestination{}, middleware.After)
 }
 
+func addOpPutTenantSuppressionAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTenantSuppressionAttributes{}, middleware.After)
+}
+
 func addOpSendBulkEmailValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendBulkEmail{}, middleware.After)
 }
@@ -2164,6 +2304,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConfigurationSetEventDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfigurationSetEventDestination{}, middleware.After)
+}
+
+func addOpUpdateConfigurationSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConfigurationSet{}, middleware.After)
 }
 
 func addOpUpdateContactValidationMiddleware(stack *middleware.Stack) error {
@@ -3125,6 +3269,24 @@ func validateVdmAttributes(v *types.VdmAttributes) error {
 	}
 }
 
+func validateOpAssociateEmailIdentityCertificateInput(v *AssociateEmailIdentityCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateEmailIdentityCertificateInput"}
+	if v.EmailIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailIdentity"))
+	}
+	if v.CertificateArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetMetricDataInput(v *BatchGetMetricDataInput) error {
 	if v == nil {
 		return nil
@@ -3732,6 +3894,21 @@ func validateOpDeleteTenantResourceAssociationInput(v *DeleteTenantResourceAssoc
 	}
 }
 
+func validateOpDisassociateEmailIdentityCertificateInput(v *DisassociateEmailIdentityCertificateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateEmailIdentityCertificateInput"}
+	if v.EmailIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailIdentity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetBlacklistReportsInput(v *GetBlacklistReportsInput) error {
 	if v == nil {
 		return nil
@@ -4110,6 +4287,21 @@ func validateOpListDomainDeliverabilityCampaignsInput(v *ListDomainDeliverabilit
 	}
 }
 
+func validateOpListEmailIdentityCertificatesInput(v *ListEmailIdentityCertificatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEmailIdentityCertificatesInput"}
+	if v.EmailIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailIdentity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListResourceTenantsInput(v *ListResourceTenantsInput) error {
 	if v == nil {
 		return nil
@@ -4165,6 +4357,21 @@ func validateOpPutAccountDetailsInput(v *PutAccountDetailsInput) error {
 	}
 	if v.WebsiteURL == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WebsiteURL"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountPricingAttributesInput(v *PutAccountPricingAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountPricingAttributesInput"}
+	if len(v.Plan) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Plan"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4481,6 +4688,21 @@ func validateOpPutSuppressedDestinationInput(v *PutSuppressedDestinationInput) e
 	}
 }
 
+func validateOpPutTenantSuppressionAttributesInput(v *PutTenantSuppressionAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTenantSuppressionAttributesInput"}
+	if v.TenantName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TenantName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSendBulkEmailInput(v *SendBulkEmailInput) error {
 	if v == nil {
 		return nil
@@ -4634,6 +4856,21 @@ func validateOpUpdateConfigurationSetEventDestinationInput(v *UpdateConfiguratio
 		if err := validateEventDestinationDefinition(v.EventDestination); err != nil {
 			invalidParams.AddNested("EventDestination", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConfigurationSetInput(v *UpdateConfigurationSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConfigurationSetInput"}
+	if v.ConfigurationSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationSetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

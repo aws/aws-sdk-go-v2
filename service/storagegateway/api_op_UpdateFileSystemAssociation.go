@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a file system association. This operation is only supported in the FSx
@@ -53,6 +52,32 @@ type UpdateFileSystemAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFileSystemAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileSystemAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileSystemAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.UpdateFileSystemAssociationInput_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.UpdateFileSystemAssociationInput_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileSystemAssociationARN != nil {
+		s.WriteString(schemas.UpdateFileSystemAssociationInput_FileSystemAssociationARN, *v.FileSystemAssociationARN)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.UpdateFileSystemAssociationInput_Password, *v.Password)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.UpdateFileSystemAssociationInput_UserName, *v.UserName)
+	}
+}
+
 type UpdateFileSystemAssociationOutput struct {
 
 	// The ARN of the updated file system association.
@@ -64,77 +89,48 @@ type UpdateFileSystemAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFileSystemAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFileSystemAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFileSystemAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemAssociationARN != nil {
+		s.WriteString(schemas.UpdateFileSystemAssociationOutput_FileSystemAssociationARN, *v.FileSystemAssociationARN)
+	}
+}
+func (v *UpdateFileSystemAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFileSystemAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFileSystemAssociationOutput_FileSystemAssociationARN:
+			v.FileSystemAssociationARN = new(string)
+			return d.ReadString(schemas.UpdateFileSystemAssociationOutput_FileSystemAssociationARN, v.FileSystemAssociationARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFileSystemAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFileSystemAssociation, schemas.UpdateFileSystemAssociationInput, schemas.UpdateFileSystemAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFileSystemAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFileSystemAssociation, schemas.UpdateFileSystemAssociationInput, schemas.UpdateFileSystemAssociationOutput), output: &UpdateFileSystemAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateFileSystemAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFileSystemAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFileSystemAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFileSystemAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +145,8 @@ func (c *Client) addOperationUpdateFileSystemAssociationMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateFileSystemAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFileSystemAssociation",
-	}
 }

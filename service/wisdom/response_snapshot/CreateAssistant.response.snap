@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assistant":{"assistantArn":"__AssistantArn__","assistantId":"__AssistantId__","description":"__Description__","integrationConfiguration":{"topicIntegrationArn":"__TopicIntegrationArn__"},"name":"__Name__","serverSideEncryptionConfiguration":{"kmsKeyId":"__KmsKeyId__"},"status":"CREATE_IN_PROGRESS","tags":{"key0":"__Value__"},"type":"AGENT"}}

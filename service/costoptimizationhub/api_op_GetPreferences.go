@@ -4,11 +4,10 @@ package costoptimizationhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a set of preferences for an account in order to add account-specific
@@ -34,6 +33,15 @@ type GetPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetPreferencesOutput struct {
 
 	// Retrieves the status of the "member account discount visibility" preference.
@@ -53,74 +61,67 @@ type GetPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberAccountDiscountVisibility != "" {
+		s.WriteString(schemas.GetPreferencesResponse_memberAccountDiscountVisibility, string(v.MemberAccountDiscountVisibility))
+	}
+	if v.PreferredCommitment != nil {
+		s.WriteStruct(schemas.GetPreferencesResponse_preferredCommitment)
+		v.PreferredCommitment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SavingsEstimationMode != "" {
+		s.WriteString(schemas.GetPreferencesResponse_savingsEstimationMode, string(v.SavingsEstimationMode))
+	}
+}
+func (v *GetPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPreferencesResponse_memberAccountDiscountVisibility:
+			var ev string
+			if err := d.ReadString(schemas.GetPreferencesResponse_memberAccountDiscountVisibility, &ev); err != nil {
+				return err
+			}
+			v.MemberAccountDiscountVisibility = types.MemberAccountDiscountVisibility(ev)
+			return nil
+		case schemas.GetPreferencesResponse_preferredCommitment:
+			v.PreferredCommitment = &types.PreferredCommitment{}
+			return v.PreferredCommitment.Deserialize(d)
+		case schemas.GetPreferencesResponse_savingsEstimationMode:
+			var ev string
+			if err := d.ReadString(schemas.GetPreferencesResponse_savingsEstimationMode, &ev); err != nil {
+				return err
+			}
+			v.SavingsEstimationMode = types.SavingsEstimationMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPreferences, schemas.GetPreferencesRequest, schemas.GetPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPreferences, schemas.GetPreferencesRequest, schemas.GetPreferencesResponse), output: &GetPreferencesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPreferences{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPreferences"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPreferences(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +136,8 @@ func (c *Client) addOperationGetPreferencesMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPreferences(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPreferences",
-	}
 }

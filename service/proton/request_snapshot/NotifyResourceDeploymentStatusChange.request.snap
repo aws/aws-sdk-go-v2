@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.NotifyResourceDeploymentStatusChange
+
+{"deploymentId":"__DeploymentId__","outputs":[{"key":"__Key__","valueString":"__ValueString__"},{"key":"__Key__","valueString":"__ValueString__"}],"resourceArn":"__ResourceArn__","status":"IN_PROGRESS","statusMessage":"__StatusMessage__"}

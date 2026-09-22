@@ -4,10 +4,9 @@ package memorydb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all available node types that you can scale to from your cluster's
@@ -42,6 +41,18 @@ type ListAllowedNodeTypeUpdatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAllowedNodeTypeUpdatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAllowedNodeTypeUpdatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAllowedNodeTypeUpdatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListAllowedNodeTypeUpdatesRequest_ClusterName, *v.ClusterName)
+	}
+}
+
 type ListAllowedNodeTypeUpdatesOutput struct {
 
 	// A list node types which you can use to scale down your cluster.
@@ -56,77 +67,48 @@ type ListAllowedNodeTypeUpdatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAllowedNodeTypeUpdatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAllowedNodeTypeUpdatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAllowedNodeTypeUpdatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNodeTypeList(s, schemas.ListAllowedNodeTypeUpdatesResponse_ScaleDownNodeTypes, v.ScaleDownNodeTypes)
+	serializeNodeTypeList(s, schemas.ListAllowedNodeTypeUpdatesResponse_ScaleUpNodeTypes, v.ScaleUpNodeTypes)
+}
+func (v *ListAllowedNodeTypeUpdatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAllowedNodeTypeUpdatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAllowedNodeTypeUpdatesResponse_ScaleDownNodeTypes:
+			return deserializeNodeTypeList(d, schemas.ListAllowedNodeTypeUpdatesResponse_ScaleDownNodeTypes, &v.ScaleDownNodeTypes)
+		case schemas.ListAllowedNodeTypeUpdatesResponse_ScaleUpNodeTypes:
+			return deserializeNodeTypeList(d, schemas.ListAllowedNodeTypeUpdatesResponse_ScaleUpNodeTypes, &v.ScaleUpNodeTypes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAllowedNodeTypeUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowedNodeTypeUpdates, schemas.ListAllowedNodeTypeUpdatesRequest, schemas.ListAllowedNodeTypeUpdatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAllowedNodeTypeUpdates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowedNodeTypeUpdates, schemas.ListAllowedNodeTypeUpdatesRequest, schemas.ListAllowedNodeTypeUpdatesResponse), output: &ListAllowedNodeTypeUpdatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAllowedNodeTypeUpdates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAllowedNodeTypeUpdates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAllowedNodeTypeUpdatesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAllowedNodeTypeUpdates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +123,8 @@ func (c *Client) addOperationListAllowedNodeTypeUpdatesMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListAllowedNodeTypeUpdates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAllowedNodeTypeUpdates",
-	}
 }

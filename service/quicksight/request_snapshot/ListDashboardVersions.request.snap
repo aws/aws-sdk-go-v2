@@ -1,0 +1,3 @@
+GET /accounts/__AwsAccountId__/dashboards/__DashboardId__/versions?max-results=1&next-token=__NextToken__
+
+

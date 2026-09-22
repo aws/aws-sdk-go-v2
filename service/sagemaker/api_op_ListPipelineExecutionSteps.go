@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of PipeLineExecutionStep objects.
@@ -46,6 +46,27 @@ type ListPipelineExecutionStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineExecutionStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineExecutionStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineExecutionStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPipelineExecutionStepsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineExecutionStepsRequest_NextToken, *v.NextToken)
+	}
+	if v.PipelineExecutionArn != nil {
+		s.WriteString(schemas.ListPipelineExecutionStepsRequest_PipelineExecutionArn, *v.PipelineExecutionArn)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListPipelineExecutionStepsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListPipelineExecutionStepsOutput struct {
 
 	// If the result of the previous ListPipelineExecutionSteps request was truncated,
@@ -65,74 +86,48 @@ type ListPipelineExecutionStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPipelineExecutionStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPipelineExecutionStepsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPipelineExecutionStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPipelineExecutionStepsResponse_NextToken, *v.NextToken)
+	}
+	serializePipelineExecutionStepList(s, schemas.ListPipelineExecutionStepsResponse_PipelineExecutionSteps, v.PipelineExecutionSteps)
+}
+func (v *ListPipelineExecutionStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPipelineExecutionStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPipelineExecutionStepsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPipelineExecutionStepsResponse_NextToken, v.NextToken)
+		case schemas.ListPipelineExecutionStepsResponse_PipelineExecutionSteps:
+			return deserializePipelineExecutionStepList(d, schemas.ListPipelineExecutionStepsResponse_PipelineExecutionSteps, &v.PipelineExecutionSteps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPipelineExecutionStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineExecutionSteps, schemas.ListPipelineExecutionStepsRequest, schemas.ListPipelineExecutionStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPipelineExecutionSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPipelineExecutionSteps, schemas.ListPipelineExecutionStepsRequest, schemas.ListPipelineExecutionStepsResponse), output: &ListPipelineExecutionStepsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPipelineExecutionSteps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPipelineExecutionSteps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPipelineExecutionSteps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +140,6 @@ func (c *Client) addOperationListPipelineExecutionStepsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +243,3 @@ type ListPipelineExecutionStepsAPIClient interface {
 }
 
 var _ ListPipelineExecutionStepsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPipelineExecutionSteps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPipelineExecutionSteps",
-	}
-}

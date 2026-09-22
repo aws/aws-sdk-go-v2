@@ -1,0 +1,5 @@
+PUT /v1/sms-voice/configuration-sets/__ConfigurationSetName__/event-destinations/__EventDestinationName__
+
+Content-Type: application/json
+
+{"EventDestination":{"CloudWatchLogsDestination":{"IamRoleArn":"__IamRoleArn__","LogGroupArn":"__LogGroupArn__"},"Enabled":true,"KinesisFirehoseDestination":{"DeliveryStreamArn":"__DeliveryStreamArn__","IamRoleArn":"__IamRoleArn__"},"MatchingEventTypes":["INITIATED_CALL","INITIATED_CALL"],"SnsDestination":{"TopicArn":"__TopicArn__"}}}

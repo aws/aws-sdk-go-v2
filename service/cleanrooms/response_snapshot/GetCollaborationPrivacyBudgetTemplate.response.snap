@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"collaborationPrivacyBudgetTemplate":{"arn":"__Arn__","autoRefresh":"CALENDAR_MONTH","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"creatorAccountId":"__CreatorAccountId__","id":"__Id__","parameters":{"differentialPrivacy":{"epsilon":1,"usersNoisePerQuery":1}},"privacyBudgetType":"DIFFERENTIAL_PRIVACY","updateTime":946684800}}

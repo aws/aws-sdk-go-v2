@@ -1,0 +1,3 @@
+GET /greengrass/definition/loggers?MaxResults=__MaxResults__&NextToken=__NextToken__
+
+

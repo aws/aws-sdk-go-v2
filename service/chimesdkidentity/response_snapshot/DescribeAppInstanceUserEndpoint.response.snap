@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceUserEndpoint":{"AllowMessages":"ALL","AppInstanceUserArn":"__AppInstanceUserArn__","CreatedTimestamp":946684800,"EndpointAttributes":{"DeviceToken":"__DeviceToken__","VoipDeviceToken":"__VoipDeviceToken__"},"EndpointId":"__EndpointId__","EndpointState":{"Status":"ACTIVE","StatusReason":"INVALID_DEVICE_TOKEN"},"LastUpdatedTimestamp":946684800,"Name":"__Name__","ResourceArn":"__ResourceArn__","Type":"APNS"}}

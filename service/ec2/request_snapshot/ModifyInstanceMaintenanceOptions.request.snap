@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyInstanceMaintenanceOptions&AutoRecovery=disabled&DryRun=true&InstanceId=__InstanceId__&RebootMigration=disabled&Version=2016-11-15

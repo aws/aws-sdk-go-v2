@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"endTime":"__EndTime__","imageBuildVersionArn":"__ImageBuildVersionArn__","message":"__Message__","parallelGroup":"__ParallelGroup__","requestId":"__RequestId__","startTime":"__StartTime__","status":"PENDING","totalStepCount":1,"totalStepsFailed":1,"totalStepsSkipped":1,"totalStepsSucceeded":1,"type":"BUILD","workflowBuildVersionArn":"__WorkflowBuildVersionArn__","workflowExecutionId":"__WorkflowExecutionId__"}

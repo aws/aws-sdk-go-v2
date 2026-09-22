@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceName__/searches/list
+
+Content-Type: application/json
+
+{"listSearchesFilters":{"groupIdFilter":["__Member__","__Member__"],"searchTypeFilter":["DEEP","DEEP"],"startedAfter":946684800,"startedBefore":946684800,"statusFilter":["QUEUED","QUEUED"]},"maxResults":1,"nextToken":"__NextToken__"}

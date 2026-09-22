@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.CreateDatasetGroup
+
+{"domain":"ECOMMERCE","kmsKeyArn":"__KmsKeyArn__","name":"__Name__","roleArn":"__RoleArn__","tags":[{"tagKey":"__TagKey__","tagValue":"__TagValue__"},{"tagKey":"__TagKey__","tagValue":"__TagValue__"}]}

@@ -1,0 +1,5 @@
+PUT /CancelImageCreation
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","imageBuildVersionArn":"__ImageBuildVersionArn__"}

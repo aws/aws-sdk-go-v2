@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.DescribePredictorBacktestExportJob
+
+{"CreationTime":946684800,"Destination":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"Format":"__Format__","LastModificationTime":946684800,"Message":"__Message__","PredictorArn":"__PredictorArn__","PredictorBacktestExportJobArn":"__PredictorBacktestExportJobArn__","PredictorBacktestExportJobName":"__PredictorBacktestExportJobName__","Status":"__Status__"}

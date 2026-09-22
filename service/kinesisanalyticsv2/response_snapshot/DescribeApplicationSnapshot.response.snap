@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.DescribeApplicationSnapshot
+
+{"SnapshotDetails":{"ApplicationEncryptionConfigurationDescription":{"KeyId":"__KeyId__","KeyType":"AWS_OWNED_KEY"},"ApplicationVersionId":1,"RuntimeEnvironment":"SQL-1_0","SnapshotCreationTimestamp":946684800,"SnapshotName":"__SnapshotName__","SnapshotStatus":"CREATING"}}

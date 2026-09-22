@@ -1,0 +1,5 @@
+PATCH /outposts/__OutpostId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","SupportedHardwareType":"RACK"}

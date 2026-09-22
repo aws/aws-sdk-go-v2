@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Arn":"__Arn__","CreatedAt":"2000-01-01T00:00:00Z","LastUpdatedAt":"2000-01-01T00:00:00Z","ReplicatingFrom":["__Member__","__Member__"],"ReplicatingTo":["__Member__","__Member__"],"State":"CREATING","Tags":{"key0":"__Value__"},"Type":"LOCAL"}

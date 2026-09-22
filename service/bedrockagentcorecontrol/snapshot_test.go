@@ -62,6 +62,30 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AddDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AddDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchPutGatewayRateLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutGatewayRateLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchPutGatewayRateLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAgentRuntime(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAgentRuntime(context.Background(), nil, func(o *Options) {
@@ -122,6 +146,18 @@ func TestCheckSnapshot_CreateBrowserProfile(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCodeInterpreter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCodeInterpreter(context.Background(), nil, func(o *Options) {
@@ -146,6 +182,42 @@ func TestCheckSnapshot_CreateConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateDatasetVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDatasetVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDatasetVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluator(context.Background(), nil, func(o *Options) {
@@ -163,6 +235,18 @@ func TestCheckSnapshot_CreateGateway(t *testing.T) {
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateGatewayRateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGatewayRateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGatewayRateLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -199,6 +283,18 @@ func TestCheckSnapshot_CreateHarness(t *testing.T) {
 	_, err := svc.CreateHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -398,6 +494,18 @@ func TestCheckSnapshot_DeleteBrowserProfile(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteCodeInterpreter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCodeInterpreter(context.Background(), nil, func(o *Options) {
@@ -422,6 +530,42 @@ func TestCheckSnapshot_DeleteConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEvaluator(context.Background(), nil, func(o *Options) {
@@ -439,6 +583,18 @@ func TestCheckSnapshot_DeleteGateway(t *testing.T) {
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteGatewayRateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGatewayRateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGatewayRateLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -475,6 +631,18 @@ func TestCheckSnapshot_DeleteHarness(t *testing.T) {
 	_, err := svc.DeleteHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -686,6 +854,18 @@ func TestCheckSnapshot_GetBrowserProfile(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCodeInterpreter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCodeInterpreter(context.Background(), nil, func(o *Options) {
@@ -722,6 +902,30 @@ func TestCheckSnapshot_GetConfigurationBundleVersion(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEvaluator(context.Background(), nil, func(o *Options) {
@@ -739,6 +943,18 @@ func TestCheckSnapshot_GetGateway(t *testing.T) {
 	_, err := svc.GetGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetGatewayRateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGatewayRateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGatewayRateLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -775,6 +991,18 @@ func TestCheckSnapshot_GetHarness(t *testing.T) {
 	_, err := svc.GetHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1022,6 +1250,18 @@ func TestCheckSnapshot_ListAgentRuntimeVersions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAgentRuntimeVersionsByCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentRuntimeVersionsByCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentRuntimeVersionsByCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListApiKeyCredentialProviders(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListApiKeyCredentialProviders(context.Background(), nil, func(o *Options) {
@@ -1051,6 +1291,18 @@ func TestCheckSnapshot_ListBrowsers(t *testing.T) {
 	_, err := svc.ListBrowsers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListBrowsers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCapacityProviders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCapacityProviders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCapacityProviders")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1094,11 +1346,71 @@ func TestCheckSnapshot_ListConfigurationBundleVersions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConsentPortals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConsentPortals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConsentPortals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDatasets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDatasetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDatasetVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEvaluators(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEvaluators(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEvaluators")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGatewayRateLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayRateLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGatewayRateLimits")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1142,11 +1454,35 @@ func TestCheckSnapshot_ListGatewayTargets(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListHarnessEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHarnessEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHarnessEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListHarnesses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListHarnesses(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListHarnesses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListHarnessVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHarnessVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListHarnessVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1478,11 +1814,59 @@ func TestCheckSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateConfigurationBundle(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateConfigurationBundle(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDatasetExamples")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1507,6 +1891,18 @@ func TestCheckSnapshot_UpdateGateway(t *testing.T) {
 	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateGatewayRateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGatewayRateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateGatewayRateLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1543,6 +1939,18 @@ func TestCheckSnapshot_UpdateHarness(t *testing.T) {
 	_, err := svc.UpdateHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1693,6 +2101,30 @@ func TestCheckSnapshot_UpdateWorkloadIdentity(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AddDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AddDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AddDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchPutGatewayRateLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutGatewayRateLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchPutGatewayRateLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAgentRuntime(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAgentRuntime(context.Background(), nil, func(o *Options) {
@@ -1753,6 +2185,18 @@ func TestUpdateSnapshot_CreateBrowserProfile(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCodeInterpreter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCodeInterpreter(context.Background(), nil, func(o *Options) {
@@ -1777,6 +2221,42 @@ func TestUpdateSnapshot_CreateConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateDatasetVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDatasetVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDatasetVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEvaluator(context.Background(), nil, func(o *Options) {
@@ -1794,6 +2274,18 @@ func TestUpdateSnapshot_CreateGateway(t *testing.T) {
 	_, err := svc.CreateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateGatewayRateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGatewayRateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGatewayRateLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1830,6 +2322,18 @@ func TestUpdateSnapshot_CreateHarness(t *testing.T) {
 	_, err := svc.CreateHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2029,6 +2533,18 @@ func TestUpdateSnapshot_DeleteBrowserProfile(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteCodeInterpreter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteCodeInterpreter(context.Background(), nil, func(o *Options) {
@@ -2053,6 +2569,42 @@ func TestUpdateSnapshot_DeleteConfigurationBundle(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEvaluator(context.Background(), nil, func(o *Options) {
@@ -2070,6 +2622,18 @@ func TestUpdateSnapshot_DeleteGateway(t *testing.T) {
 	_, err := svc.DeleteGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteGatewayRateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGatewayRateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGatewayRateLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2106,6 +2670,18 @@ func TestUpdateSnapshot_DeleteHarness(t *testing.T) {
 	_, err := svc.DeleteHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2317,6 +2893,18 @@ func TestUpdateSnapshot_GetBrowserProfile(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCodeInterpreter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCodeInterpreter(context.Background(), nil, func(o *Options) {
@@ -2353,6 +2941,30 @@ func TestUpdateSnapshot_GetConfigurationBundleVersion(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetEvaluator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEvaluator(context.Background(), nil, func(o *Options) {
@@ -2370,6 +2982,18 @@ func TestUpdateSnapshot_GetGateway(t *testing.T) {
 	_, err := svc.GetGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetGatewayRateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGatewayRateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGatewayRateLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2406,6 +3030,18 @@ func TestUpdateSnapshot_GetHarness(t *testing.T) {
 	_, err := svc.GetHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2653,6 +3289,18 @@ func TestUpdateSnapshot_ListAgentRuntimeVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAgentRuntimeVersionsByCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentRuntimeVersionsByCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentRuntimeVersionsByCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListApiKeyCredentialProviders(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListApiKeyCredentialProviders(context.Background(), nil, func(o *Options) {
@@ -2682,6 +3330,18 @@ func TestUpdateSnapshot_ListBrowsers(t *testing.T) {
 	_, err := svc.ListBrowsers(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListBrowsers")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCapacityProviders(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCapacityProviders(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCapacityProviders")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2725,11 +3385,71 @@ func TestUpdateSnapshot_ListConfigurationBundleVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConsentPortals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConsentPortals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConsentPortals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasetExamples")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDatasets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasets")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDatasetVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDatasetVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDatasetVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListEvaluators(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEvaluators(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEvaluators")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGatewayRateLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGatewayRateLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGatewayRateLimits")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2773,11 +3493,35 @@ func TestUpdateSnapshot_ListGatewayTargets(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListHarnessEndpoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHarnessEndpoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHarnessEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListHarnesses(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListHarnesses(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListHarnesses")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListHarnessVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListHarnessVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListHarnessVersions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3109,11 +3853,59 @@ func TestUpdateSnapshot_UpdateApiKeyCredentialProvider(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateCapacityProvider(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapacityProvider(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCapacityProvider")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateConfigurationBundle(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateConfigurationBundle(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateConfigurationBundle")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateConsentPortal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConsentPortal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConsentPortal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDataset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDataset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDataset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDatasetExamples(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDatasetExamples(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDatasetExamples")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3138,6 +3930,18 @@ func TestUpdateSnapshot_UpdateGateway(t *testing.T) {
 	_, err := svc.UpdateGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateGatewayRateLimit(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGatewayRateLimit(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateGatewayRateLimit")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3174,6 +3978,18 @@ func TestUpdateSnapshot_UpdateHarness(t *testing.T) {
 	_, err := svc.UpdateHarness(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateHarness")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateHarnessEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateHarnessEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateHarnessEndpoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

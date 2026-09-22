@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"applicationAggregatedStatus":{"healthStatus":"HEALTHY","lastUpdateDateTime":"__LastUpdateDateTime__","progressStatus":"NOT_STARTED","totalSourceServers":1},"applicationID":"__ApplicationID__","arn":"__Arn__","creationDateTime":"__CreationDateTime__","description":"__Description__","isArchived":true,"lastModifiedDateTime":"__LastModifiedDateTime__","name":"__Name__","tags":{"key0":"__Value__"},"waveID":"__WaveID__"},{"applicationAggregatedStatus":{"healthStatus":"HEALTHY","lastUpdateDateTime":"__LastUpdateDateTime__","progressStatus":"NOT_STARTED","totalSourceServers":1},"applicationID":"__ApplicationID__","arn":"__Arn__","creationDateTime":"__CreationDateTime__","description":"__Description__","isArchived":true,"lastModifiedDateTime":"__LastModifiedDateTime__","name":"__Name__","tags":{"key0":"__Value__"},"waveID":"__WaveID__"}],"nextToken":"__NextToken__"}

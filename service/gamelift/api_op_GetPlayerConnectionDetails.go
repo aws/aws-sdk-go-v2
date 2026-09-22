@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2 (server SDK 5.x or later),
@@ -55,7 +54,9 @@ type GetPlayerConnectionDetailsInput struct {
 
 	// An identifier for the game session that is unique across all regions for which
 	// to retrieve player connection details. The value is always a full ARN in the
-	// following format: arn:aws:gamelift:::gamesession// .
+	// following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// .
 	//
 	// This member is required.
 	GameSessionId *string
@@ -69,11 +70,26 @@ type GetPlayerConnectionDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlayerConnectionDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlayerConnectionDetailsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlayerConnectionDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.GetPlayerConnectionDetailsInput_GameSessionId, *v.GameSessionId)
+	}
+	serializePlayerIdList(s, schemas.GetPlayerConnectionDetailsInput_PlayerIds, v.PlayerIds)
+}
+
 type GetPlayerConnectionDetailsOutput struct {
 
 	// An identifier for the game session that is unique across all regions for which
 	// the player connection details were retrieved. The value is always a full ARN in
-	// the following format: arn:aws:gamelift:::gamesession// .
+	// the following format: For Home Region game session -
+	// arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// .
 	GameSessionId *string
 
 	// A collection of player connection detail objects, one for each requested player.
@@ -85,65 +101,45 @@ type GetPlayerConnectionDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlayerConnectionDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlayerConnectionDetailsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlayerConnectionDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.GetPlayerConnectionDetailsOutput_GameSessionId, *v.GameSessionId)
+	}
+	serializePlayerConnectionDetailList(s, schemas.GetPlayerConnectionDetailsOutput_PlayerConnectionDetails, v.PlayerConnectionDetails)
+}
+func (v *GetPlayerConnectionDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlayerConnectionDetailsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlayerConnectionDetailsOutput_GameSessionId:
+			v.GameSessionId = new(string)
+			return d.ReadString(schemas.GetPlayerConnectionDetailsOutput_GameSessionId, v.GameSessionId)
+		case schemas.GetPlayerConnectionDetailsOutput_PlayerConnectionDetails:
+			return deserializePlayerConnectionDetailList(d, schemas.GetPlayerConnectionDetailsOutput_PlayerConnectionDetails, &v.PlayerConnectionDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlayerConnectionDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlayerConnectionDetails, schemas.GetPlayerConnectionDetailsInput, schemas.GetPlayerConnectionDetailsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetPlayerConnectionDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlayerConnectionDetails, schemas.GetPlayerConnectionDetailsInput, schemas.GetPlayerConnectionDetailsOutput), output: &GetPlayerConnectionDetailsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetPlayerConnectionDetails{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlayerConnectionDetails"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -153,12 +149,6 @@ func (c *Client) addOperationGetPlayerConnectionDetailsMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpGetPlayerConnectionDetailsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlayerConnectionDetails(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +163,8 @@ func (c *Client) addOperationGetPlayerConnectionDetailsMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPlayerConnectionDetails(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPlayerConnectionDetails",
-	}
 }

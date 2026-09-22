@@ -1,0 +1,3 @@
+GET /?bucket-region=__BucketRegion__&continuation-token=__ContinuationToken__&max-buckets=1&prefix=__Prefix__&x-id=ListBuckets
+
+

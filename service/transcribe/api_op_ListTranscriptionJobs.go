@@ -5,10 +5,10 @@ package transcribe
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of transcription jobs that match the specified criteria. If no
@@ -57,6 +57,27 @@ type ListTranscriptionJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTranscriptionJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTranscriptionJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTranscriptionJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobNameContains != nil {
+		s.WriteString(schemas.ListTranscriptionJobsRequest_JobNameContains, *v.JobNameContains)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTranscriptionJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTranscriptionJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTranscriptionJobsRequest_Status, string(v.Status))
+	}
+}
+
 type ListTranscriptionJobsOutput struct {
 
 	// If NextToken is present in your response, it indicates that not all results are
@@ -79,74 +100,58 @@ type ListTranscriptionJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTranscriptionJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTranscriptionJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTranscriptionJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTranscriptionJobsResponse_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTranscriptionJobsResponse_Status, string(v.Status))
+	}
+	serializeTranscriptionJobSummaries(s, schemas.ListTranscriptionJobsResponse_TranscriptionJobSummaries, v.TranscriptionJobSummaries)
+}
+func (v *ListTranscriptionJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTranscriptionJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTranscriptionJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTranscriptionJobsResponse_NextToken, v.NextToken)
+		case schemas.ListTranscriptionJobsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListTranscriptionJobsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TranscriptionJobStatus(ev)
+			return nil
+		case schemas.ListTranscriptionJobsResponse_TranscriptionJobSummaries:
+			return deserializeTranscriptionJobSummaries(d, schemas.ListTranscriptionJobsResponse_TranscriptionJobSummaries, &v.TranscriptionJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTranscriptionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTranscriptionJobs, schemas.ListTranscriptionJobsRequest, schemas.ListTranscriptionJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTranscriptionJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTranscriptionJobs, schemas.ListTranscriptionJobsRequest, schemas.ListTranscriptionJobsResponse), output: &ListTranscriptionJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTranscriptionJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTranscriptionJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTranscriptionJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,12 +164,6 @@ func (c *Client) addOperationListTranscriptionJobsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +267,3 @@ type ListTranscriptionJobsAPIClient interface {
 }
 
 var _ ListTranscriptionJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTranscriptionJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTranscriptionJobs",
-	}
-}

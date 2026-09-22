@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonML_20141212.CreateBatchPrediction
+
+{"BatchPredictionDataSourceId":"__BatchPredictionDataSourceId__","BatchPredictionId":"__BatchPredictionId__","BatchPredictionName":"__BatchPredictionName__","MLModelId":"__MLModelId__","OutputUri":"__OutputUri__"}

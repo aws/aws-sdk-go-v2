@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/sync-jobs/__SyncSource__
+
+Content-Type: application/json
+
+{"syncRole":"__SyncRole__","tags":{"key0":"__Value__"}}

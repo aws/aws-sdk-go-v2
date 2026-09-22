@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListEngagementByAcceptingInvitationTasks
+
+{"Catalog":"__Catalog__","EngagementInvitationIdentifier":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","OpportunityIdentifier":["__Member__","__Member__"],"Sort":{"SortBy":"StartTime","SortOrder":"ASCENDING"},"TaskIdentifier":["__Member__","__Member__"],"TaskStatus":["IN_PROGRESS","IN_PROGRESS"]}

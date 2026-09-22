@@ -1,0 +1,5 @@
+PUT /meetings/__MeetingId__/attendees/__AttendeeId__/capabilities
+
+Content-Type: application/json
+
+{"Capabilities":{"Audio":"SendReceive","Content":"SendReceive","Video":"SendReceive"}}

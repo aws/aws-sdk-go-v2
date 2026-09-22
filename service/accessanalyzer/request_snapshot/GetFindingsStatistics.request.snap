@@ -1,0 +1,5 @@
+POST /analyzer/findings/statistics
+
+Content-Type: application/json
+
+{"analyzerArn":"__AnalyzerArn__"}

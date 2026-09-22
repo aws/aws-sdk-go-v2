@@ -4,14 +4,13 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Batch delete the specified advanced prompt optimization jobs.
+// Deletes one or more advanced prompt optimization jobs.
 func (c *Client) BatchDeleteAdvancedPromptOptimizationJob(ctx context.Context, params *BatchDeleteAdvancedPromptOptimizationJobInput, optFns ...func(*Options)) (*BatchDeleteAdvancedPromptOptimizationJobOutput, error) {
 	if params == nil {
 		params = &BatchDeleteAdvancedPromptOptimizationJobInput{}
@@ -30,7 +29,7 @@ func (c *Client) BatchDeleteAdvancedPromptOptimizationJob(ctx context.Context, p
 // Batch Delete Advanced Prompt Optimization Jobs Request
 type BatchDeleteAdvancedPromptOptimizationJobInput struct {
 
-	// List of advanced prompt optimization job identifiers to delete.
+	// A list of advanced prompt optimization job identifiers (ARNs or IDs) to delete.
 	//
 	// This member is required.
 	JobIdentifiers []string
@@ -38,15 +37,25 @@ type BatchDeleteAdvancedPromptOptimizationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteAdvancedPromptOptimizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAdvancedPromptOptimizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAdvancedPromptOptimizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedPromptOptimizationJobIdentifiers(s, schemas.BatchDeleteAdvancedPromptOptimizationJobRequest_jobIdentifiers, v.JobIdentifiers)
+}
+
 // Batch Delete Advanced Prompt Optimization Jobs Response
 type BatchDeleteAdvancedPromptOptimizationJobOutput struct {
 
-	// List of successfully deleted advanced prompt optimization jobs.
+	// A list of successfully deleted advanced prompt optimization jobs.
 	//
 	// This member is required.
 	AdvancedPromptOptimizationJobs []types.BatchDeleteAdvancedPromptOptimizationJobItem
 
-	// List of errors encountered during batch deletion.
+	// A list of errors encountered during batch deletion.
 	//
 	// This member is required.
 	Errors []types.BatchDeleteAdvancedPromptOptimizationJobError
@@ -57,77 +66,48 @@ type BatchDeleteAdvancedPromptOptimizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteAdvancedPromptOptimizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteAdvancedPromptOptimizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteAdvancedPromptOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDeleteAdvancedPromptOptimizationJobItems(s, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_advancedPromptOptimizationJobs, v.AdvancedPromptOptimizationJobs)
+	serializeBatchDeleteAdvancedPromptOptimizationJobErrors(s, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_errors, v.Errors)
+}
+func (v *BatchDeleteAdvancedPromptOptimizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_advancedPromptOptimizationJobs:
+			return deserializeBatchDeleteAdvancedPromptOptimizationJobItems(d, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_advancedPromptOptimizationJobs, &v.AdvancedPromptOptimizationJobs)
+		case schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_errors:
+			return deserializeBatchDeleteAdvancedPromptOptimizationJobErrors(d, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteAdvancedPromptOptimizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteAdvancedPromptOptimizationJob, schemas.BatchDeleteAdvancedPromptOptimizationJobRequest, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteAdvancedPromptOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteAdvancedPromptOptimizationJob, schemas.BatchDeleteAdvancedPromptOptimizationJobRequest, schemas.BatchDeleteAdvancedPromptOptimizationJobResponse), output: &BatchDeleteAdvancedPromptOptimizationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteAdvancedPromptOptimizationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteAdvancedPromptOptimizationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDeleteAdvancedPromptOptimizationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteAdvancedPromptOptimizationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +122,8 @@ func (c *Client) addOperationBatchDeleteAdvancedPromptOptimizationJobMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDeleteAdvancedPromptOptimizationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDeleteAdvancedPromptOptimizationJob",
-	}
 }

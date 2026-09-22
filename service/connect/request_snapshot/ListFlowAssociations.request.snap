@@ -1,0 +1,3 @@
+GET /flow-associations-summary/__InstanceId__?ResourceType=WHATSAPP_MESSAGING_PHONE_NUMBER&maxResults=1&nextToken=__NextToken__
+
+

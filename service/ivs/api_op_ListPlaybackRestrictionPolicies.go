@@ -5,10 +5,10 @@ package ivs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets summary information about playback restriction policies.
@@ -39,6 +39,21 @@ type ListPlaybackRestrictionPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackRestrictionPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackRestrictionPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackRestrictionPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlaybackRestrictionPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackRestrictionPoliciesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListPlaybackRestrictionPoliciesOutput struct {
 
 	// List of the matching policies.
@@ -56,74 +71,48 @@ type ListPlaybackRestrictionPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackRestrictionPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackRestrictionPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackRestrictionPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackRestrictionPoliciesResponse_nextToken, *v.NextToken)
+	}
+	serializePlaybackRestrictionPolicyList(s, schemas.ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies, v.PlaybackRestrictionPolicies)
+}
+func (v *ListPlaybackRestrictionPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaybackRestrictionPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaybackRestrictionPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaybackRestrictionPoliciesResponse_nextToken, v.NextToken)
+		case schemas.ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies:
+			return deserializePlaybackRestrictionPolicyList(d, schemas.ListPlaybackRestrictionPoliciesResponse_playbackRestrictionPolicies, &v.PlaybackRestrictionPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlaybackRestrictionPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackRestrictionPolicies, schemas.ListPlaybackRestrictionPoliciesRequest, schemas.ListPlaybackRestrictionPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlaybackRestrictionPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackRestrictionPolicies, schemas.ListPlaybackRestrictionPoliciesRequest, schemas.ListPlaybackRestrictionPoliciesResponse), output: &ListPlaybackRestrictionPoliciesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPlaybackRestrictionPolicies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPlaybackRestrictionPolicies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlaybackRestrictionPolicies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,12 +125,6 @@ func (c *Client) addOperationListPlaybackRestrictionPoliciesMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,11 +228,3 @@ type ListPlaybackRestrictionPoliciesAPIClient interface {
 }
 
 var _ ListPlaybackRestrictionPoliciesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPlaybackRestrictionPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPlaybackRestrictionPolicies",
-	}
-}

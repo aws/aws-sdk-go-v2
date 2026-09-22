@@ -4,10 +4,9 @@ package amplifybackend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes all backend environments from your Amplify project.
@@ -40,6 +39,21 @@ type RemoveAllBackendsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAllBackendsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAllBackendsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAllBackendsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.RemoveAllBackendsRequest_AppId, *v.AppId)
+	}
+	if v.CleanAmplifyApp != nil {
+		s.WriteBool(schemas.RemoveAllBackendsRequest_CleanAmplifyApp, *v.CleanAmplifyApp)
+	}
+}
+
 type RemoveAllBackendsOutput struct {
 
 	// The app ID.
@@ -63,77 +77,72 @@ type RemoveAllBackendsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAllBackendsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAllBackendsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAllBackendsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.RemoveAllBackendsResponse_AppId, *v.AppId)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.RemoveAllBackendsResponse_Error, *v.Error)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.RemoveAllBackendsResponse_JobId, *v.JobId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.RemoveAllBackendsResponse_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.RemoveAllBackendsResponse_Status, *v.Status)
+	}
+}
+func (v *RemoveAllBackendsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveAllBackendsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveAllBackendsResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.RemoveAllBackendsResponse_AppId, v.AppId)
+		case schemas.RemoveAllBackendsResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.RemoveAllBackendsResponse_Error, v.Error)
+		case schemas.RemoveAllBackendsResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.RemoveAllBackendsResponse_JobId, v.JobId)
+		case schemas.RemoveAllBackendsResponse_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.RemoveAllBackendsResponse_Operation, v.Operation)
+		case schemas.RemoveAllBackendsResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.RemoveAllBackendsResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveAllBackendsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAllBackends, schemas.RemoveAllBackendsRequest, schemas.RemoveAllBackendsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveAllBackends{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAllBackends, schemas.RemoveAllBackendsRequest, schemas.RemoveAllBackendsResponse), output: &RemoveAllBackendsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveAllBackends{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveAllBackends"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRemoveAllBackendsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveAllBackends(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +157,8 @@ func (c *Client) addOperationRemoveAllBackendsMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRemoveAllBackends(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RemoveAllBackends",
-	}
 }

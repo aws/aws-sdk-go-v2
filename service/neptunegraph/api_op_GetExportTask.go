@@ -5,12 +5,12 @@ package neptunegraph
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"strconv"
 	"time"
@@ -42,6 +42,17 @@ type GetExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskIdentifier != nil {
+		s.WriteString(schemas.GetExportTaskInput_taskIdentifier, *v.TaskIdentifier)
+	}
+}
 func (in *GetExportTaskInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -102,77 +113,124 @@ type GetExportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExportTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.GetExportTaskOutput_destination, *v.Destination)
+	}
+	if v.ExportFilter != nil {
+		s.WriteStruct(schemas.GetExportTaskOutput_exportFilter)
+		v.ExportFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportTaskDetails != nil {
+		s.WriteStruct(schemas.GetExportTaskOutput_exportTaskDetails)
+		v.ExportTaskDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetExportTaskOutput_format, string(v.Format))
+	}
+	if v.GraphId != nil {
+		s.WriteString(schemas.GetExportTaskOutput_graphId, *v.GraphId)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.GetExportTaskOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.ParquetType != "" {
+		s.WriteString(schemas.GetExportTaskOutput_parquetType, string(v.ParquetType))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetExportTaskOutput_roleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetExportTaskOutput_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetExportTaskOutput_statusReason, *v.StatusReason)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetExportTaskOutput_taskId, *v.TaskId)
+	}
+}
+func (v *GetExportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExportTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExportTaskOutput_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.GetExportTaskOutput_destination, v.Destination)
+		case schemas.GetExportTaskOutput_exportFilter:
+			v.ExportFilter = &types.ExportFilter{}
+			return v.ExportFilter.Deserialize(d)
+		case schemas.GetExportTaskOutput_exportTaskDetails:
+			v.ExportTaskDetails = &types.ExportTaskDetails{}
+			return v.ExportTaskDetails.Deserialize(d)
+		case schemas.GetExportTaskOutput_format:
+			var ev string
+			if err := d.ReadString(schemas.GetExportTaskOutput_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.ExportFormat(ev)
+			return nil
+		case schemas.GetExportTaskOutput_graphId:
+			v.GraphId = new(string)
+			return d.ReadString(schemas.GetExportTaskOutput_graphId, v.GraphId)
+		case schemas.GetExportTaskOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.GetExportTaskOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.GetExportTaskOutput_parquetType:
+			var ev string
+			if err := d.ReadString(schemas.GetExportTaskOutput_parquetType, &ev); err != nil {
+				return err
+			}
+			v.ParquetType = types.ParquetType(ev)
+			return nil
+		case schemas.GetExportTaskOutput_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetExportTaskOutput_roleArn, v.RoleArn)
+		case schemas.GetExportTaskOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetExportTaskOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ExportTaskStatus(ev)
+			return nil
+		case schemas.GetExportTaskOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetExportTaskOutput_statusReason, v.StatusReason)
+		case schemas.GetExportTaskOutput_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetExportTaskOutput_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExportTask, schemas.GetExportTaskInput, schemas.GetExportTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExportTask, schemas.GetExportTaskInput, schemas.GetExportTaskOutput), output: &GetExportTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetExportTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetExportTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetExportTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExportTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +243,6 @@ func (c *Client) addOperationGetExportTaskMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -607,11 +659,3 @@ type GetExportTaskAPIClient interface {
 }
 
 var _ GetExportTaskAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetExportTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetExportTask",
-	}
-}

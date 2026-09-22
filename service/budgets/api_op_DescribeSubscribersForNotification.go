@@ -5,10 +5,10 @@ package budgets
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the subscribers that are associated with a notification.
@@ -57,6 +57,32 @@ type DescribeSubscribersForNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubscribersForNotificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSubscribersForNotificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSubscribersForNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeSubscribersForNotificationRequest_AccountId, *v.AccountId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.DescribeSubscribersForNotificationRequest_BudgetName, *v.BudgetName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSubscribersForNotificationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSubscribersForNotificationRequest_NextToken, *v.NextToken)
+	}
+	if v.Notification != nil {
+		s.WriteStruct(schemas.DescribeSubscribersForNotificationRequest_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Response of DescribeSubscribersForNotification
 type DescribeSubscribersForNotificationOutput struct {
 
@@ -73,77 +99,51 @@ type DescribeSubscribersForNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubscribersForNotificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSubscribersForNotificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSubscribersForNotificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSubscribersForNotificationResponse_NextToken, *v.NextToken)
+	}
+	serializeSubscribers(s, schemas.DescribeSubscribersForNotificationResponse_Subscribers, v.Subscribers)
+}
+func (v *DescribeSubscribersForNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSubscribersForNotificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSubscribersForNotificationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSubscribersForNotificationResponse_NextToken, v.NextToken)
+		case schemas.DescribeSubscribersForNotificationResponse_Subscribers:
+			return deserializeSubscribers(d, schemas.DescribeSubscribersForNotificationResponse_Subscribers, &v.Subscribers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSubscribersForNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubscribersForNotification, schemas.DescribeSubscribersForNotificationRequest, schemas.DescribeSubscribersForNotificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSubscribersForNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubscribersForNotification, schemas.DescribeSubscribersForNotificationRequest, schemas.DescribeSubscribersForNotificationResponse), output: &DescribeSubscribersForNotificationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSubscribersForNotification{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSubscribersForNotification"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeSubscribersForNotificationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSubscribersForNotification(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +156,6 @@ func (c *Client) addOperationDescribeSubscribersForNotificationMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +260,3 @@ type DescribeSubscribersForNotificationAPIClient interface {
 }
 
 var _ DescribeSubscribersForNotificationAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeSubscribersForNotification(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeSubscribersForNotification",
-	}
-}

@@ -4,11 +4,10 @@ package codeconnections
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the host ARN and details such as status, provider type, endpoint, and,
@@ -38,6 +37,18 @@ type GetHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHostInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostArn != nil {
+		s.WriteString(schemas.GetHostInput_HostArn, *v.HostArn)
+	}
+}
+
 type GetHostOutput struct {
 
 	// The name of the requested host.
@@ -61,77 +72,78 @@ type GetHostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHostOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHostOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHostOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetHostOutput_Name, *v.Name)
+	}
+	if v.ProviderEndpoint != nil {
+		s.WriteString(schemas.GetHostOutput_ProviderEndpoint, *v.ProviderEndpoint)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.GetHostOutput_ProviderType, string(v.ProviderType))
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetHostOutput_Status, *v.Status)
+	}
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.GetHostOutput_VpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetHostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHostOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHostOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetHostOutput_Name, v.Name)
+		case schemas.GetHostOutput_ProviderEndpoint:
+			v.ProviderEndpoint = new(string)
+			return d.ReadString(schemas.GetHostOutput_ProviderEndpoint, v.ProviderEndpoint)
+		case schemas.GetHostOutput_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.GetHostOutput_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = types.ProviderType(ev)
+			return nil
+		case schemas.GetHostOutput_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetHostOutput_Status, v.Status)
+		case schemas.GetHostOutput_VpcConfiguration:
+			v.VpcConfiguration = &types.VpcConfiguration{}
+			return v.VpcConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHost, schemas.GetHostInput, schemas.GetHostOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHost, schemas.GetHostInput, schemas.GetHostOutput), output: &GetHostOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetHost{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetHost"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetHostValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetHost(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +158,8 @@ func (c *Client) addOperationGetHostMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetHost(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetHost",
-	}
 }

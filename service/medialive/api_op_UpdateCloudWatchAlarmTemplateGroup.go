@@ -4,10 +4,9 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,21 @@ type UpdateCloudWatchAlarmTemplateGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCloudWatchAlarmTemplateGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCloudWatchAlarmTemplateGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCloudWatchAlarmTemplateGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCloudWatchAlarmTemplateGroupRequest_Description, *v.Description)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateCloudWatchAlarmTemplateGroupRequest_Identifier, *v.Identifier)
+	}
+}
+
 // Placeholder documentation for UpdateCloudWatchAlarmTemplateGroupResponse
 type UpdateCloudWatchAlarmTemplateGroupOutput struct {
 
@@ -74,77 +88,81 @@ type UpdateCloudWatchAlarmTemplateGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCloudWatchAlarmTemplateGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCloudWatchAlarmTemplateGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCloudWatchAlarmTemplateGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Id, *v.Id)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Tags, v.Tags)
+}
+func (v *UpdateCloudWatchAlarmTemplateGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCloudWatchAlarmTemplateGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Arn, v.Arn)
+		case schemas.UpdateCloudWatchAlarmTemplateGroupResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Description, v.Description)
+		case schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Id, v.Id)
+		case schemas.UpdateCloudWatchAlarmTemplateGroupResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Name, v.Name)
+		case schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Tags:
+			return deserializeTagMap(d, schemas.UpdateCloudWatchAlarmTemplateGroupResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCloudWatchAlarmTemplateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCloudWatchAlarmTemplateGroup, schemas.UpdateCloudWatchAlarmTemplateGroupRequest, schemas.UpdateCloudWatchAlarmTemplateGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCloudWatchAlarmTemplateGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCloudWatchAlarmTemplateGroup, schemas.UpdateCloudWatchAlarmTemplateGroupRequest, schemas.UpdateCloudWatchAlarmTemplateGroupResponse), output: &UpdateCloudWatchAlarmTemplateGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCloudWatchAlarmTemplateGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCloudWatchAlarmTemplateGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateCloudWatchAlarmTemplateGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCloudWatchAlarmTemplateGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +177,8 @@ func (c *Client) addOperationUpdateCloudWatchAlarmTemplateGroupMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateCloudWatchAlarmTemplateGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCloudWatchAlarmTemplateGroup",
-	}
 }

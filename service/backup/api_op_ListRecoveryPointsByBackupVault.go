@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -110,6 +110,45 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsByBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsByBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsByBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultAccountId != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_BackupVaultAccountId, *v.BackupVaultAccountId)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.ByBackupPlanId != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_ByBackupPlanId, *v.ByBackupPlanId)
+	}
+	if v.ByCreatedAfter != nil {
+		s.WriteTime(schemas.ListRecoveryPointsByBackupVaultInput_ByCreatedAfter, *v.ByCreatedAfter)
+	}
+	if v.ByCreatedBefore != nil {
+		s.WriteTime(schemas.ListRecoveryPointsByBackupVaultInput_ByCreatedBefore, *v.ByCreatedBefore)
+	}
+	if v.ByParentRecoveryPointArn != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_ByParentRecoveryPointArn, *v.ByParentRecoveryPointArn)
+	}
+	if v.ByResourceArn != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_ByResourceArn, *v.ByResourceArn)
+	}
+	if v.ByResourceType != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_ByResourceType, *v.ByResourceType)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecoveryPointsByBackupVaultInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListRecoveryPointsByBackupVaultOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
@@ -128,77 +167,51 @@ type ListRecoveryPointsByBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecoveryPointsByBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecoveryPointsByBackupVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecoveryPointsByBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecoveryPointsByBackupVaultOutput_NextToken, *v.NextToken)
+	}
+	serializeRecoveryPointByBackupVaultList(s, schemas.ListRecoveryPointsByBackupVaultOutput_RecoveryPoints, v.RecoveryPoints)
+}
+func (v *ListRecoveryPointsByBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecoveryPointsByBackupVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecoveryPointsByBackupVaultOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecoveryPointsByBackupVaultOutput_NextToken, v.NextToken)
+		case schemas.ListRecoveryPointsByBackupVaultOutput_RecoveryPoints:
+			return deserializeRecoveryPointByBackupVaultList(d, schemas.ListRecoveryPointsByBackupVaultOutput_RecoveryPoints, &v.RecoveryPoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecoveryPointsByBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPointsByBackupVault, schemas.ListRecoveryPointsByBackupVaultInput, schemas.ListRecoveryPointsByBackupVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecoveryPointsByBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecoveryPointsByBackupVault, schemas.ListRecoveryPointsByBackupVaultInput, schemas.ListRecoveryPointsByBackupVaultOutput), output: &ListRecoveryPointsByBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecoveryPointsByBackupVault{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRecoveryPointsByBackupVault"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRecoveryPointsByBackupVaultValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecoveryPointsByBackupVault(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -211,12 +224,6 @@ func (c *Client) addOperationListRecoveryPointsByBackupVaultMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -320,11 +327,3 @@ type ListRecoveryPointsByBackupVaultAPIClient interface {
 }
 
 var _ ListRecoveryPointsByBackupVaultAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRecoveryPointsByBackupVault(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRecoveryPointsByBackupVault",
-	}
-}

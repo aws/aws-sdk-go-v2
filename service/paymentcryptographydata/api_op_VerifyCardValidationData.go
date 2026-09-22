@@ -4,11 +4,10 @@ package paymentcryptographydata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Verifies card-related validation data using algorithms such as Card
@@ -28,8 +27,8 @@ import (
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -42,6 +41,7 @@ import (
 // [Verify card data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/verify-card-data.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 func (c *Client) VerifyCardValidationData(ctx context.Context, params *VerifyCardValidationDataInput, optFns ...func(*Options)) (*VerifyCardValidationDataOutput, error) {
 	if params == nil {
 		params = &VerifyCardValidationDataInput{}
@@ -86,6 +86,25 @@ type VerifyCardValidationDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyCardValidationDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyCardValidationDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyCardValidationDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.VerifyCardValidationDataInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.PrimaryAccountNumber != nil {
+		s.WriteString(schemas.VerifyCardValidationDataInput_PrimaryAccountNumber, *v.PrimaryAccountNumber)
+	}
+	if v.ValidationData != nil {
+		s.WriteString(schemas.VerifyCardValidationDataInput_ValidationData, *v.ValidationData)
+	}
+	serializeCardVerificationAttributes(s, schemas.VerifyCardValidationDataInput_VerificationAttributes, v.VerificationAttributes)
+}
+
 type VerifyCardValidationDataOutput struct {
 
 	// The keyARN of the CVK encryption key that Amazon Web Services Payment
@@ -110,77 +129,54 @@ type VerifyCardValidationDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyCardValidationDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyCardValidationDataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyCardValidationDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyArn != nil {
+		s.WriteString(schemas.VerifyCardValidationDataOutput_KeyArn, *v.KeyArn)
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.VerifyCardValidationDataOutput_KeyCheckValue, *v.KeyCheckValue)
+	}
+}
+func (v *VerifyCardValidationDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyCardValidationDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyCardValidationDataOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.VerifyCardValidationDataOutput_KeyArn, v.KeyArn)
+		case schemas.VerifyCardValidationDataOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.VerifyCardValidationDataOutput_KeyCheckValue, v.KeyCheckValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyCardValidationData, schemas.VerifyCardValidationDataInput, schemas.VerifyCardValidationDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyCardValidationData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyCardValidationData, schemas.VerifyCardValidationDataInput, schemas.VerifyCardValidationDataOutput), output: &VerifyCardValidationDataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyCardValidationData{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "VerifyCardValidationData"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpVerifyCardValidationDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyCardValidationData(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,22 +191,8 @@ func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opVerifyCardValidationData(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "VerifyCardValidationData",
-	}
 }

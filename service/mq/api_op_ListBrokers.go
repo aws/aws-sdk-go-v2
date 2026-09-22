@@ -5,10 +5,10 @@ package mq
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of all brokers.
@@ -40,6 +40,21 @@ type ListBrokersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrokersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrokersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrokersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBrokersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrokersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListBrokersOutput struct {
 
 	// A list of information about all brokers.
@@ -55,74 +70,48 @@ type ListBrokersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBrokersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBrokersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBrokersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfBrokerSummary(s, schemas.ListBrokersResponse_BrokerSummaries, v.BrokerSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBrokersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBrokersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBrokersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBrokersResponse_BrokerSummaries:
+			return deserialize__listOfBrokerSummary(d, schemas.ListBrokersResponse_BrokerSummaries, &v.BrokerSummaries)
+		case schemas.ListBrokersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBrokersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBrokersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrokers, schemas.ListBrokersRequest, schemas.ListBrokersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBrokers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBrokers, schemas.ListBrokersRequest, schemas.ListBrokersResponse), output: &ListBrokersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBrokers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBrokers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBrokers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,12 +124,6 @@ func (c *Client) addOperationListBrokersMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -241,11 +224,3 @@ type ListBrokersAPIClient interface {
 }
 
 var _ ListBrokersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBrokers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBrokers",
-	}
-}

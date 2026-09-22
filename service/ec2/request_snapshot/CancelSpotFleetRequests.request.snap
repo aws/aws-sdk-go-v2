@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CancelSpotFleetRequests&DryRun=true&SpotFleetRequestId.1=__Member__&SpotFleetRequestId.2=__Member__&TerminateInstances=true&Version=2016-11-15

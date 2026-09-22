@@ -4,12 +4,13 @@ package partnercentralbenefits
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +43,21 @@ type GetBenefitApplicationInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBenefitApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBenefitApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBenefitApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetBenefitApplicationInput_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetBenefitApplicationInput_Identifier, *v.Identifier)
+	}
 }
 
 type GetBenefitApplicationOutput struct {
@@ -115,77 +131,154 @@ type GetBenefitApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBenefitApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBenefitApplicationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBenefitApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Arn, *v.Arn)
+	}
+	serializeArns(s, schemas.GetBenefitApplicationOutput_AssociatedResources, v.AssociatedResources)
+	if v.BenefitApplicationDetails != nil {
+		s.WriteDocument(schemas.GetBenefitApplicationOutput_BenefitApplicationDetails, &smithydocument.Opaque{Value: v.BenefitApplicationDetails})
+	}
+	if v.BenefitId != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_BenefitId, *v.BenefitId)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Catalog, *v.Catalog)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetBenefitApplicationOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Description, *v.Description)
+	}
+	serializeFileDetails(s, schemas.GetBenefitApplicationOutput_FileDetails, v.FileDetails)
+	serializeFulfillmentTypes(s, schemas.GetBenefitApplicationOutput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.Id != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Name, *v.Name)
+	}
+	serializeContacts(s, schemas.GetBenefitApplicationOutput_PartnerContacts, v.PartnerContacts)
+	serializePrograms(s, schemas.GetBenefitApplicationOutput_Programs, v.Programs)
+	if v.Revision != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Revision, *v.Revision)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Stage, *v.Stage)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBenefitApplicationOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_StatusReason, *v.StatusReason)
+	}
+	if v.StatusReasonCode != nil {
+		s.WriteString(schemas.GetBenefitApplicationOutput_StatusReasonCode, *v.StatusReasonCode)
+	}
+	serializeStatusReasonCodes(s, schemas.GetBenefitApplicationOutput_StatusReasonCodes, v.StatusReasonCodes)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetBenefitApplicationOutput_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetBenefitApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBenefitApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBenefitApplicationOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_Arn, v.Arn)
+		case schemas.GetBenefitApplicationOutput_AssociatedResources:
+			return deserializeArns(d, schemas.GetBenefitApplicationOutput_AssociatedResources, &v.AssociatedResources)
+		case schemas.GetBenefitApplicationOutput_BenefitApplicationDetails:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetBenefitApplicationOutput_BenefitApplicationDetails, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.BenefitApplicationDetails = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetBenefitApplicationOutput_BenefitId:
+			v.BenefitId = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_BenefitId, v.BenefitId)
+		case schemas.GetBenefitApplicationOutput_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_Catalog, v.Catalog)
+		case schemas.GetBenefitApplicationOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBenefitApplicationOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetBenefitApplicationOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_Description, v.Description)
+		case schemas.GetBenefitApplicationOutput_FileDetails:
+			return deserializeFileDetails(d, schemas.GetBenefitApplicationOutput_FileDetails, &v.FileDetails)
+		case schemas.GetBenefitApplicationOutput_FulfillmentTypes:
+			return deserializeFulfillmentTypes(d, schemas.GetBenefitApplicationOutput_FulfillmentTypes, &v.FulfillmentTypes)
+		case schemas.GetBenefitApplicationOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_Id, v.Id)
+		case schemas.GetBenefitApplicationOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_Name, v.Name)
+		case schemas.GetBenefitApplicationOutput_PartnerContacts:
+			return deserializeContacts(d, schemas.GetBenefitApplicationOutput_PartnerContacts, &v.PartnerContacts)
+		case schemas.GetBenefitApplicationOutput_Programs:
+			return deserializePrograms(d, schemas.GetBenefitApplicationOutput_Programs, &v.Programs)
+		case schemas.GetBenefitApplicationOutput_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_Revision, v.Revision)
+		case schemas.GetBenefitApplicationOutput_Stage:
+			v.Stage = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_Stage, v.Stage)
+		case schemas.GetBenefitApplicationOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetBenefitApplicationOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BenefitApplicationStatus(ev)
+			return nil
+		case schemas.GetBenefitApplicationOutput_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_StatusReason, v.StatusReason)
+		case schemas.GetBenefitApplicationOutput_StatusReasonCode:
+			v.StatusReasonCode = new(string)
+			return d.ReadString(schemas.GetBenefitApplicationOutput_StatusReasonCode, v.StatusReasonCode)
+		case schemas.GetBenefitApplicationOutput_StatusReasonCodes:
+			return deserializeStatusReasonCodes(d, schemas.GetBenefitApplicationOutput_StatusReasonCodes, &v.StatusReasonCodes)
+		case schemas.GetBenefitApplicationOutput_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBenefitApplicationOutput_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBenefitApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBenefitApplication, schemas.GetBenefitApplicationInput, schemas.GetBenefitApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetBenefitApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBenefitApplication, schemas.GetBenefitApplicationInput, schemas.GetBenefitApplicationOutput), output: &GetBenefitApplicationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetBenefitApplication{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBenefitApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBenefitApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBenefitApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,22 +293,8 @@ func (c *Client) addOperationGetBenefitApplicationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBenefitApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBenefitApplication",
-	}
 }

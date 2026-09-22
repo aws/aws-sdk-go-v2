@@ -1,0 +1,3 @@
+GET /support-permit-requests?maxResults=1&nextToken=__NextToken__&supportCaseDisplayId=__SupportCaseDisplayId__
+
+

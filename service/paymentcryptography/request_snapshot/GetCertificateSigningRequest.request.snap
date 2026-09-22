@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.GetCertificateSigningRequest
+
+{"CertificateSubject":{"City":"__City__","CommonName":"__CommonName__","Country":"__Country__","EmailAddress":"__EmailAddress__","Organization":"__Organization__","OrganizationUnit":"__OrganizationUnit__","StateOrProvince":"__StateOrProvince__"},"KeyIdentifier":"__KeyIdentifier__","SigningAlgorithm":"SHA224"}

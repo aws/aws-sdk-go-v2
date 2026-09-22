@@ -4,11 +4,10 @@ package paymentcryptographydata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates an issuer script mac for EMV payment cards that use offline PINs as
@@ -39,8 +38,8 @@ import (
 // involve PIN change. When assigning IAM permissions, it is important to
 // understand that EncryptDatausing EMV keys and GenerateMac perform similar functions to this command.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -49,6 +48,7 @@ import (
 // # GenerateMac
 //
 // [EMV 4.4 - Book 2 - Security and Key Management]: https://www.emvco.com/specifications/
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 func (c *Client) GenerateMacEmvPinChange(ctx context.Context, params *GenerateMacEmvPinChangeInput, optFns ...func(*Options)) (*GenerateMacEmvPinChangeOutput, error) {
 	if params == nil {
 		params = &GenerateMacEmvPinChangeInput{}
@@ -110,6 +110,34 @@ type GenerateMacEmvPinChangeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateMacEmvPinChangeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateMacEmvPinChangeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateMacEmvPinChangeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDerivationMethodAttributes(s, schemas.GenerateMacEmvPinChangeInput_DerivationMethodAttributes, v.DerivationMethodAttributes)
+	if v.MessageData != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeInput_MessageData, *v.MessageData)
+	}
+	if v.NewEncryptedPinBlock != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeInput_NewEncryptedPinBlock, *v.NewEncryptedPinBlock)
+	}
+	if v.NewPinPekIdentifier != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeInput_NewPinPekIdentifier, *v.NewPinPekIdentifier)
+	}
+	if v.PinBlockFormat != "" {
+		s.WriteString(schemas.GenerateMacEmvPinChangeInput_PinBlockFormat, string(v.PinBlockFormat))
+	}
+	if v.SecureMessagingConfidentialityKeyIdentifier != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeInput_SecureMessagingConfidentialityKeyIdentifier, *v.SecureMessagingConfidentialityKeyIdentifier)
+	}
+	if v.SecureMessagingIntegrityKeyIdentifier != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeInput_SecureMessagingIntegrityKeyIdentifier, *v.SecureMessagingIntegrityKeyIdentifier)
+	}
+}
+
 type GenerateMacEmvPinChangeOutput struct {
 
 	// Returns the incoming new encrpted PIN block.
@@ -163,77 +191,98 @@ type GenerateMacEmvPinChangeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateMacEmvPinChangeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateMacEmvPinChangeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateMacEmvPinChangeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptedPinBlock != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeOutput_EncryptedPinBlock, *v.EncryptedPinBlock)
+	}
+	if v.Mac != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeOutput_Mac, *v.Mac)
+	}
+	if v.NewPinPekArn != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeOutput_NewPinPekArn, *v.NewPinPekArn)
+	}
+	if v.NewPinPekKeyCheckValue != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeOutput_NewPinPekKeyCheckValue, *v.NewPinPekKeyCheckValue)
+	}
+	if v.SecureMessagingConfidentialityKeyArn != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyArn, *v.SecureMessagingConfidentialityKeyArn)
+	}
+	if v.SecureMessagingConfidentialityKeyCheckValue != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyCheckValue, *v.SecureMessagingConfidentialityKeyCheckValue)
+	}
+	if v.SecureMessagingIntegrityKeyArn != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyArn, *v.SecureMessagingIntegrityKeyArn)
+	}
+	if v.SecureMessagingIntegrityKeyCheckValue != nil {
+		s.WriteString(schemas.GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyCheckValue, *v.SecureMessagingIntegrityKeyCheckValue)
+	}
+	if v.VisaAmexDerivationOutputs != nil {
+		s.WriteStruct(schemas.GenerateMacEmvPinChangeOutput_VisaAmexDerivationOutputs)
+		v.VisaAmexDerivationOutputs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GenerateMacEmvPinChangeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateMacEmvPinChangeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateMacEmvPinChangeOutput_EncryptedPinBlock:
+			v.EncryptedPinBlock = new(string)
+			return d.ReadString(schemas.GenerateMacEmvPinChangeOutput_EncryptedPinBlock, v.EncryptedPinBlock)
+		case schemas.GenerateMacEmvPinChangeOutput_Mac:
+			v.Mac = new(string)
+			return d.ReadString(schemas.GenerateMacEmvPinChangeOutput_Mac, v.Mac)
+		case schemas.GenerateMacEmvPinChangeOutput_NewPinPekArn:
+			v.NewPinPekArn = new(string)
+			return d.ReadString(schemas.GenerateMacEmvPinChangeOutput_NewPinPekArn, v.NewPinPekArn)
+		case schemas.GenerateMacEmvPinChangeOutput_NewPinPekKeyCheckValue:
+			v.NewPinPekKeyCheckValue = new(string)
+			return d.ReadString(schemas.GenerateMacEmvPinChangeOutput_NewPinPekKeyCheckValue, v.NewPinPekKeyCheckValue)
+		case schemas.GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyArn:
+			v.SecureMessagingConfidentialityKeyArn = new(string)
+			return d.ReadString(schemas.GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyArn, v.SecureMessagingConfidentialityKeyArn)
+		case schemas.GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyCheckValue:
+			v.SecureMessagingConfidentialityKeyCheckValue = new(string)
+			return d.ReadString(schemas.GenerateMacEmvPinChangeOutput_SecureMessagingConfidentialityKeyCheckValue, v.SecureMessagingConfidentialityKeyCheckValue)
+		case schemas.GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyArn:
+			v.SecureMessagingIntegrityKeyArn = new(string)
+			return d.ReadString(schemas.GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyArn, v.SecureMessagingIntegrityKeyArn)
+		case schemas.GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyCheckValue:
+			v.SecureMessagingIntegrityKeyCheckValue = new(string)
+			return d.ReadString(schemas.GenerateMacEmvPinChangeOutput_SecureMessagingIntegrityKeyCheckValue, v.SecureMessagingIntegrityKeyCheckValue)
+		case schemas.GenerateMacEmvPinChangeOutput_VisaAmexDerivationOutputs:
+			v.VisaAmexDerivationOutputs = &types.VisaAmexDerivationOutputs{}
+			return v.VisaAmexDerivationOutputs.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateMacEmvPinChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMacEmvPinChange, schemas.GenerateMacEmvPinChangeInput, schemas.GenerateMacEmvPinChangeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateMacEmvPinChange{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMacEmvPinChange, schemas.GenerateMacEmvPinChangeInput, schemas.GenerateMacEmvPinChangeOutput), output: &GenerateMacEmvPinChangeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateMacEmvPinChange{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateMacEmvPinChange"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGenerateMacEmvPinChangeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateMacEmvPinChange(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -248,22 +297,8 @@ func (c *Client) addOperationGenerateMacEmvPinChangeMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGenerateMacEmvPinChange(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GenerateMacEmvPinChange",
-	}
 }

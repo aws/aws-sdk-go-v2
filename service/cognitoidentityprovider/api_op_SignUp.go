@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers a user with an app client and requests a user name, password, and
@@ -160,6 +159,40 @@ type SignUpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignUpInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignUpRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignUpInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyticsMetadata != nil {
+		s.WriteStruct(schemas.SignUpRequest_AnalyticsMetadata)
+		v.AnalyticsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.SignUpRequest_ClientId, *v.ClientId)
+	}
+	serializeClientMetadataType(s, schemas.SignUpRequest_ClientMetadata, v.ClientMetadata)
+	if v.Password != nil {
+		s.WriteString(schemas.SignUpRequest_Password, *v.Password)
+	}
+	if v.SecretHash != nil {
+		s.WriteString(schemas.SignUpRequest_SecretHash, *v.SecretHash)
+	}
+	serializeAttributeListType(s, schemas.SignUpRequest_UserAttributes, v.UserAttributes)
+	if v.UserContextData != nil {
+		s.WriteStruct(schemas.SignUpRequest_UserContextData)
+		v.UserContextData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.SignUpRequest_Username, *v.Username)
+	}
+	serializeAttributeListType(s, schemas.SignUpRequest_ValidationData, v.ValidationData)
+}
+
 // The response from the server for a registration request.
 type SignUpOutput struct {
 
@@ -193,74 +226,62 @@ type SignUpOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignUpOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignUpResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignUpOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeDeliveryDetails != nil {
+		s.WriteStruct(schemas.SignUpResponse_CodeDeliveryDetails)
+		v.CodeDeliveryDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Session != nil {
+		s.WriteString(schemas.SignUpResponse_Session, *v.Session)
+	}
+	s.WriteBool(schemas.SignUpResponse_UserConfirmed, v.UserConfirmed)
+	if v.UserSub != nil {
+		s.WriteString(schemas.SignUpResponse_UserSub, *v.UserSub)
+	}
+}
+func (v *SignUpOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignUpResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignUpResponse_CodeDeliveryDetails:
+			v.CodeDeliveryDetails = &types.CodeDeliveryDetailsType{}
+			return v.CodeDeliveryDetails.Deserialize(d)
+		case schemas.SignUpResponse_Session:
+			v.Session = new(string)
+			return d.ReadString(schemas.SignUpResponse_Session, v.Session)
+		case schemas.SignUpResponse_UserConfirmed:
+			return d.ReadBool(schemas.SignUpResponse_UserConfirmed, &v.UserConfirmed)
+		case schemas.SignUpResponse_UserSub:
+			v.UserSub = new(string)
+			return d.ReadString(schemas.SignUpResponse_UserSub, v.UserSub)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignUp, schemas.SignUpRequest, schemas.SignUpResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSignUp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignUp, schemas.SignUpRequest, schemas.SignUpResponse), output: &SignUpOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSignUp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SignUp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSignUpValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSignUp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -275,22 +296,8 @@ func (c *Client) addOperationSignUpMiddlewares(stack *middleware.Stack, options 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSignUp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SignUp",
-	}
 }

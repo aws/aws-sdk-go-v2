@@ -7,6 +7,75 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 )
 
+func ExampleSearchFilterClause_outputUsage() {
+	var union types.SearchFilterClause
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SearchFilterClauseMemberAndAllFilters:
+		_ = v.Value // Value is []types.SearchFilterClause
+
+	case *types.SearchFilterClauseMemberAttributeFilter:
+		_ = v.Value // Value is types.SearchAttributeFilter
+
+	case *types.SearchFilterClauseMemberMapFilter:
+		_ = v.Value // Value is types.SearchMapFilter
+
+	case *types.SearchFilterClauseMemberOrAnyFilters:
+		_ = v.Value // Value is []types.SearchFilterClause
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SearchAttributeFilter
+var _ *types.SearchMapFilter
+var _ []types.SearchFilterClause
+
+func ExampleSearchFilterValue_outputUsage() {
+	var union types.SearchFilterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SearchFilterValueMemberLongValue:
+		_ = v.Value // Value is int64
+
+	case *types.SearchFilterValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ int64
+
+func ExampleSearchMapFilterValue_outputUsage() {
+	var union types.SearchMapFilterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SearchMapFilterValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleTableOptimizerVpcConfiguration_outputUsage() {
 	var union types.TableOptimizerVpcConfiguration
 	// type switches can be used to check the union value

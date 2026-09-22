@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new version of the specified license.
@@ -85,10 +84,64 @@ type CreateLicenseVersionInput struct {
 	// Information about the license.
 	LicenseMetadata []types.Metadata
 
+	// Specifies whether to reset the license usage for the new license version. If
+	// you don't specify a value, the license usage is not reset.
+	ResetUsage bool
+
 	// Current version of the license.
 	SourceVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateLicenseVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConsumptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateLicenseVersionRequest_ConsumptionConfiguration)
+		v.ConsumptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEntitlementList(s, schemas.CreateLicenseVersionRequest_Entitlements, v.Entitlements)
+	if v.HomeRegion != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_HomeRegion, *v.HomeRegion)
+	}
+	if v.Issuer != nil {
+		s.WriteStruct(schemas.CreateLicenseVersionRequest_Issuer)
+		v.Issuer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_LicenseArn, *v.LicenseArn)
+	}
+	serializeMetadataList(s, schemas.CreateLicenseVersionRequest_LicenseMetadata, v.LicenseMetadata)
+	if v.LicenseName != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_LicenseName, *v.LicenseName)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_ProductName, *v.ProductName)
+	}
+	if v.ResetUsage != false {
+		s.WriteBool(schemas.CreateLicenseVersionRequest_ResetUsage, v.ResetUsage)
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.CreateLicenseVersionRequest_SourceVersion, *v.SourceVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateLicenseVersionRequest_Status, string(v.Status))
+	}
+	if v.Validity != nil {
+		s.WriteStruct(schemas.CreateLicenseVersionRequest_Validity)
+		v.Validity.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type CreateLicenseVersionOutput struct {
@@ -108,77 +161,64 @@ type CreateLicenseVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLicenseVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLicenseVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLicenseVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CreateLicenseVersionResponse_LicenseArn, *v.LicenseArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateLicenseVersionResponse_Status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateLicenseVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateLicenseVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLicenseVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLicenseVersionResponse_LicenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.CreateLicenseVersionResponse_LicenseArn, v.LicenseArn)
+		case schemas.CreateLicenseVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateLicenseVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LicenseStatus(ev)
+			return nil
+		case schemas.CreateLicenseVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateLicenseVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLicenseVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseVersion, schemas.CreateLicenseVersionRequest, schemas.CreateLicenseVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLicenseVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLicenseVersion, schemas.CreateLicenseVersionRequest, schemas.CreateLicenseVersionResponse), output: &CreateLicenseVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLicenseVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLicenseVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLicenseVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLicenseVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,22 +233,8 @@ func (c *Client) addOperationCreateLicenseVersionMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLicenseVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLicenseVersion",
-	}
 }

@@ -4,17 +4,16 @@ package qconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the content association.
 //
 // For more information about content associations--what they are and when they
-// are used--see [Integrate Amazon Q in Connect with step-by-step guides]in the Amazon Connect Administrator Guide.
+// are used--see [Integrate Amazon Q in Connect with step-by-step guides]in the Connect Customer Administrator Guide.
 //
 // [Integrate Amazon Q in Connect with step-by-step guides]: https://docs.aws.amazon.com/connect/latest/adminguide/integrate-q-with-guides.html
 func (c *Client) GetContentAssociation(ctx context.Context, params *GetContentAssociationInput, optFns ...func(*Options)) (*GetContentAssociationOutput, error) {
@@ -53,6 +52,24 @@ type GetContentAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentAssociationId != nil {
+		s.WriteString(schemas.GetContentAssociationRequest_contentAssociationId, *v.ContentAssociationId)
+	}
+	if v.ContentId != nil {
+		s.WriteString(schemas.GetContentAssociationRequest_contentId, *v.ContentId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetContentAssociationRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type GetContentAssociationOutput struct {
 
 	// The association between Amazon Q in Connect content and another resource.
@@ -64,77 +81,50 @@ type GetContentAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentAssociation != nil {
+		s.WriteStruct(schemas.GetContentAssociationResponse_contentAssociation)
+		v.ContentAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetContentAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContentAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContentAssociationResponse_contentAssociation:
+			v.ContentAssociation = &types.ContentAssociationData{}
+			return v.ContentAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContentAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContentAssociation, schemas.GetContentAssociationRequest, schemas.GetContentAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContentAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContentAssociation, schemas.GetContentAssociationRequest, schemas.GetContentAssociationResponse), output: &GetContentAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContentAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetContentAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetContentAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContentAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +139,8 @@ func (c *Client) addOperationGetContentAssociationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetContentAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetContentAssociation",
-	}
 }

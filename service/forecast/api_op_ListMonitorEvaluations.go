@@ -5,10 +5,10 @@ package forecast
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the monitoring evaluation results and predictor events
@@ -71,6 +71,25 @@ type ListMonitorEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitorEvaluationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitorEvaluationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitorEvaluationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListMonitorEvaluationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMonitorEvaluationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.ListMonitorEvaluationsRequest_MonitorArn, *v.MonitorArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitorEvaluationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMonitorEvaluationsOutput struct {
 
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve
@@ -93,77 +112,51 @@ type ListMonitorEvaluationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMonitorEvaluationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMonitorEvaluationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMonitorEvaluationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMonitorEvaluationsResponse_NextToken, *v.NextToken)
+	}
+	serializePredictorMonitorEvaluations(s, schemas.ListMonitorEvaluationsResponse_PredictorMonitorEvaluations, v.PredictorMonitorEvaluations)
+}
+func (v *ListMonitorEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMonitorEvaluationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMonitorEvaluationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMonitorEvaluationsResponse_NextToken, v.NextToken)
+		case schemas.ListMonitorEvaluationsResponse_PredictorMonitorEvaluations:
+			return deserializePredictorMonitorEvaluations(d, schemas.ListMonitorEvaluationsResponse_PredictorMonitorEvaluations, &v.PredictorMonitorEvaluations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMonitorEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitorEvaluations, schemas.ListMonitorEvaluationsRequest, schemas.ListMonitorEvaluationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMonitorEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMonitorEvaluations, schemas.ListMonitorEvaluationsRequest, schemas.ListMonitorEvaluationsResponse), output: &ListMonitorEvaluationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMonitorEvaluations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMonitorEvaluations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListMonitorEvaluationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMonitorEvaluations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,12 +169,6 @@ func (c *Client) addOperationListMonitorEvaluationsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -283,11 +270,3 @@ type ListMonitorEvaluationsAPIClient interface {
 }
 
 var _ ListMonitorEvaluationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMonitorEvaluations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMonitorEvaluations",
-	}
-}

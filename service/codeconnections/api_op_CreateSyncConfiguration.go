@@ -4,11 +4,10 @@ package codeconnections
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a sync configuration which allows Amazon Web Services to sync content
@@ -82,6 +81,42 @@ type CreateSyncConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSyncConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSyncConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSyncConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_Branch, *v.Branch)
+	}
+	if v.ConfigFile != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_ConfigFile, *v.ConfigFile)
+	}
+	if v.PublishDeploymentStatus != "" {
+		s.WriteString(schemas.CreateSyncConfigurationInput_PublishDeploymentStatus, string(v.PublishDeploymentStatus))
+	}
+	if v.PullRequestComment != "" {
+		s.WriteString(schemas.CreateSyncConfigurationInput_PullRequestComment, string(v.PullRequestComment))
+	}
+	if v.RepositoryLinkId != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_RepositoryLinkId, *v.RepositoryLinkId)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_ResourceName, *v.ResourceName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateSyncConfigurationInput_RoleArn, *v.RoleArn)
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.CreateSyncConfigurationInput_SyncType, string(v.SyncType))
+	}
+	if v.TriggerResourceUpdateOn != "" {
+		s.WriteString(schemas.CreateSyncConfigurationInput_TriggerResourceUpdateOn, string(v.TriggerResourceUpdateOn))
+	}
+}
+
 type CreateSyncConfigurationOutput struct {
 
 	// The created sync configuration for the connection. A sync configuration allows
@@ -97,77 +132,50 @@ type CreateSyncConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSyncConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSyncConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSyncConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SyncConfiguration != nil {
+		s.WriteStruct(schemas.CreateSyncConfigurationOutput_SyncConfiguration)
+		v.SyncConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSyncConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSyncConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSyncConfigurationOutput_SyncConfiguration:
+			v.SyncConfiguration = &types.SyncConfiguration{}
+			return v.SyncConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSyncConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncConfiguration, schemas.CreateSyncConfigurationInput, schemas.CreateSyncConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateSyncConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSyncConfiguration, schemas.CreateSyncConfigurationInput, schemas.CreateSyncConfigurationOutput), output: &CreateSyncConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateSyncConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSyncConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSyncConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSyncConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +190,8 @@ func (c *Client) addOperationCreateSyncConfigurationMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSyncConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSyncConfiguration",
-	}
 }

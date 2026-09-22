@@ -4,11 +4,10 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts the process of verifying an email identity. An identity is an email
@@ -90,6 +89,27 @@ type CreateEmailIdentityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEmailIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEmailIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEmailIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.CreateEmailIdentityRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.DkimSigningAttributes != nil {
+		s.WriteStruct(schemas.CreateEmailIdentityRequest_DkimSigningAttributes)
+		v.DkimSigningAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.CreateEmailIdentityRequest_EmailIdentity, *v.EmailIdentity)
+	}
+	serializeTagList(s, schemas.CreateEmailIdentityRequest_Tags, v.Tags)
+}
+
 // If the email identity is a domain, this object contains information about the
 // DKIM verification status for the domain.
 //
@@ -116,77 +136,65 @@ type CreateEmailIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEmailIdentityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEmailIdentityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEmailIdentityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DkimAttributes != nil {
+		s.WriteStruct(schemas.CreateEmailIdentityResponse_DkimAttributes)
+		v.DkimAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityType != "" {
+		s.WriteString(schemas.CreateEmailIdentityResponse_IdentityType, string(v.IdentityType))
+	}
+	if v.VerifiedForSendingStatus != false {
+		s.WriteBool(schemas.CreateEmailIdentityResponse_VerifiedForSendingStatus, v.VerifiedForSendingStatus)
+	}
+}
+func (v *CreateEmailIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEmailIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEmailIdentityResponse_DkimAttributes:
+			v.DkimAttributes = &types.DkimAttributes{}
+			return v.DkimAttributes.Deserialize(d)
+		case schemas.CreateEmailIdentityResponse_IdentityType:
+			var ev string
+			if err := d.ReadString(schemas.CreateEmailIdentityResponse_IdentityType, &ev); err != nil {
+				return err
+			}
+			v.IdentityType = types.IdentityType(ev)
+			return nil
+		case schemas.CreateEmailIdentityResponse_VerifiedForSendingStatus:
+			return d.ReadBool(schemas.CreateEmailIdentityResponse_VerifiedForSendingStatus, &v.VerifiedForSendingStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEmailIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEmailIdentity, schemas.CreateEmailIdentityRequest, schemas.CreateEmailIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEmailIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEmailIdentity, schemas.CreateEmailIdentityRequest, schemas.CreateEmailIdentityResponse), output: &CreateEmailIdentityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEmailIdentity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEmailIdentity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateEmailIdentityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEmailIdentity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,22 +209,8 @@ func (c *Client) addOperationCreateEmailIdentityMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateEmailIdentity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEmailIdentity",
-	}
 }

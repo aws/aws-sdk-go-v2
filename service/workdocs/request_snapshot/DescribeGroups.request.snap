@@ -1,0 +1,4 @@
+GET /api/v1/groups?limit=1&marker=__Marker__&organizationId=__OrganizationId__&searchQuery=__SearchQuery__
+
+Authentication: __AuthenticationToken__
+

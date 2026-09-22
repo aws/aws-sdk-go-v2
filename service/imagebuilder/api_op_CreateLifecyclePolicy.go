@@ -5,13 +5,13 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a lifecycle policy resource.
+// Creates a lifecycle policy resource.
 func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecyclePolicyInput, optFns ...func(*Options)) (*CreateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &CreateLifecyclePolicyInput{}
@@ -29,8 +29,10 @@ func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecy
 
 type CreateLifecyclePolicyInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -66,6 +68,11 @@ type CreateLifecyclePolicyInput struct {
 	// Optional description for the lifecycle policy.
 	Description *string
 
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
+
 	// Indicates whether the lifecycle policy resource is enabled.
 	Status types.LifecyclePolicyStatus
 
@@ -73,6 +80,43 @@ type CreateLifecyclePolicyInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateLifecyclePolicyRequest_dryRun, v.DryRun)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_name, *v.Name)
+	}
+	serializeLifecyclePolicyDetails(s, schemas.CreateLifecyclePolicyRequest_policyDetails, v.PolicyDetails)
+	if v.ResourceSelection != nil {
+		s.WriteStruct(schemas.CreateLifecyclePolicyRequest_resourceSelection)
+		v.ResourceSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_resourceType, string(v.ResourceType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateLifecyclePolicyRequest_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateLifecyclePolicyRequest_tags, v.Tags)
 }
 
 type CreateLifecyclePolicyOutput struct {
@@ -89,65 +133,48 @@ type CreateLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyResponse_clientToken, *v.ClientToken)
+	}
+	if v.LifecyclePolicyArn != nil {
+		s.WriteString(schemas.CreateLifecyclePolicyResponse_lifecyclePolicyArn, *v.LifecyclePolicyArn)
+	}
+}
+func (v *CreateLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLifecyclePolicyResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateLifecyclePolicyResponse_clientToken, v.ClientToken)
+		case schemas.CreateLifecyclePolicyResponse_lifecyclePolicyArn:
+			v.LifecyclePolicyArn = new(string)
+			return d.ReadString(schemas.CreateLifecyclePolicyResponse_lifecyclePolicyArn, v.LifecyclePolicyArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLifecyclePolicy, schemas.CreateLifecyclePolicyRequest, schemas.CreateLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLifecyclePolicy, schemas.CreateLifecyclePolicyRequest, schemas.CreateLifecyclePolicyResponse), output: &CreateLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLifecyclePolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLifecyclePolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -157,12 +184,6 @@ func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateLifecyclePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLifecyclePolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +196,6 @@ func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -220,12 +235,4 @@ func (m *idempotencyToken_initializeOpCreateLifecyclePolicy) HandleInitialize(ct
 }
 func addIdempotencyToken_opCreateLifecyclePolicyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateLifecyclePolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateLifecyclePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLifecyclePolicy",
-	}
 }

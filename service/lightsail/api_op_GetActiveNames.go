@@ -4,10 +4,9 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the names of all active (not deleted) resources.
@@ -38,6 +37,18 @@ type GetActiveNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetActiveNamesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetActiveNamesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetActiveNamesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetActiveNamesRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetActiveNamesOutput struct {
 
 	// The list of active names returned by the get active names request.
@@ -57,74 +68,48 @@ type GetActiveNamesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetActiveNamesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetActiveNamesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetActiveNamesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.GetActiveNamesResult_activeNames, v.ActiveNames)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetActiveNamesResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetActiveNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetActiveNamesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetActiveNamesResult_activeNames:
+			return deserializeStringList(d, schemas.GetActiveNamesResult_activeNames, &v.ActiveNames)
+		case schemas.GetActiveNamesResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetActiveNamesResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetActiveNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetActiveNames, schemas.GetActiveNamesRequest, schemas.GetActiveNamesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetActiveNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetActiveNames, schemas.GetActiveNamesRequest, schemas.GetActiveNamesResult), output: &GetActiveNamesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetActiveNames{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetActiveNames"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetActiveNames(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +124,8 @@ func (c *Client) addOperationGetActiveNamesMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetActiveNames(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetActiveNames",
-	}
 }

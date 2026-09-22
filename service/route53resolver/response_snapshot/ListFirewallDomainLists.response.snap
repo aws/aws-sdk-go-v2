@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.ListFirewallDomainLists
+
+{"FirewallDomainLists":[{"Arn":"__Arn__","Category":"__Category__","CreatorRequestId":"__CreatorRequestId__","Id":"__Id__","ManagedListType":"THREAT","ManagedOwnerName":"__ManagedOwnerName__","Name":"__Name__"},{"Arn":"__Arn__","Category":"__Category__","CreatorRequestId":"__CreatorRequestId__","Id":"__Id__","ManagedListType":"THREAT","ManagedOwnerName":"__ManagedOwnerName__","Name":"__Name__"}],"NextToken":"__NextToken__"}

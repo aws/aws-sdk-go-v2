@@ -4,11 +4,10 @@ package mturk
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The GetAssignment operation retrieves the details of the specified Assignment.
@@ -37,6 +36,18 @@ type GetAssignmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssignmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssignmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssignmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentId != nil {
+		s.WriteString(schemas.GetAssignmentRequest_AssignmentId, *v.AssignmentId)
+	}
+}
+
 type GetAssignmentOutput struct {
 
 	//  The assignment. The response includes one Assignment element.
@@ -51,77 +62,58 @@ type GetAssignmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssignmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssignmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssignmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Assignment != nil {
+		s.WriteStruct(schemas.GetAssignmentResponse_Assignment)
+		v.Assignment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HIT != nil {
+		s.WriteStruct(schemas.GetAssignmentResponse_HIT)
+		v.HIT.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAssignmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssignmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssignmentResponse_Assignment:
+			v.Assignment = &types.Assignment{}
+			return v.Assignment.Deserialize(d)
+		case schemas.GetAssignmentResponse_HIT:
+			v.HIT = &types.HIT{}
+			return v.HIT.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssignment, schemas.GetAssignmentRequest, schemas.GetAssignmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAssignment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssignment, schemas.GetAssignmentRequest, schemas.GetAssignmentResponse), output: &GetAssignmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAssignment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssignment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAssignmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssignment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +128,8 @@ func (c *Client) addOperationGetAssignmentMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAssignment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAssignment",
-	}
 }

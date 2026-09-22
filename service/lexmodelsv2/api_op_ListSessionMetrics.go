@@ -5,10 +5,10 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -114,6 +114,34 @@ type ListSessionMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyticsBinByList(s, schemas.ListSessionMetricsRequest_binBy, v.BinBy)
+	if v.BotId != nil {
+		s.WriteString(schemas.ListSessionMetricsRequest_botId, *v.BotId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ListSessionMetricsRequest_endDateTime, *v.EndDateTime)
+	}
+	serializeAnalyticsSessionFilters(s, schemas.ListSessionMetricsRequest_filters, v.Filters)
+	serializeAnalyticsSessionGroupByList(s, schemas.ListSessionMetricsRequest_groupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSessionMetricsRequest_maxResults, *v.MaxResults)
+	}
+	serializeAnalyticsSessionMetrics(s, schemas.ListSessionMetricsRequest_metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionMetricsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.ListSessionMetricsRequest_startDateTime, *v.StartDateTime)
+	}
+}
+
 type ListSessionMetricsOutput struct {
 
 	// The identifier for the bot for which you retrieved session metrics.
@@ -137,77 +165,57 @@ type ListSessionMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSessionMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSessionMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSessionMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListSessionMetricsResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSessionMetricsResponse_nextToken, *v.NextToken)
+	}
+	serializeAnalyticsSessionResults(s, schemas.ListSessionMetricsResponse_results, v.Results)
+}
+func (v *ListSessionMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSessionMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSessionMetricsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListSessionMetricsResponse_botId, v.BotId)
+		case schemas.ListSessionMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSessionMetricsResponse_nextToken, v.NextToken)
+		case schemas.ListSessionMetricsResponse_results:
+			return deserializeAnalyticsSessionResults(d, schemas.ListSessionMetricsResponse_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSessionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessionMetrics, schemas.ListSessionMetricsRequest, schemas.ListSessionMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSessionMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSessionMetrics, schemas.ListSessionMetricsRequest, schemas.ListSessionMetricsResponse), output: &ListSessionMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSessionMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSessionMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSessionMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSessionMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,12 +228,6 @@ func (c *Client) addOperationListSessionMetricsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -329,11 +331,3 @@ type ListSessionMetricsAPIClient interface {
 }
 
 var _ ListSessionMetricsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSessionMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSessionMetrics",
-	}
-}

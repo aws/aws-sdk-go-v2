@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateDevEndpoint
+
+{"Arguments":{"key0":"__Value__"},"EndpointName":"__EndpointName__","ExtraJarsS3Path":"__ExtraJarsS3Path__","ExtraPythonLibsS3Path":"__ExtraPythonLibsS3Path__","GlueVersion":"__GlueVersion__","NumberOfNodes":1,"NumberOfWorkers":1,"PublicKey":"__PublicKey__","PublicKeys":["__Member__","__Member__"],"RoleArn":"__RoleArn__","SecurityConfiguration":"__SecurityConfiguration__","SecurityGroupIds":["__Member__","__Member__"],"SubnetId":"__SubnetId__","Tags":{"key0":"__Value__"},"WorkerType":"Standard"}

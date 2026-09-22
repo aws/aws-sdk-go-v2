@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Activates or deactivates Amazon Inspector deep inspection for the provided
@@ -40,6 +39,16 @@ type BatchUpdateMemberEc2DeepInspectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateMemberEc2DeepInspectionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateMemberEc2DeepInspectionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateMemberEc2DeepInspectionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberAccountEc2DeepInspectionStatusList(s, schemas.BatchUpdateMemberEc2DeepInspectionStatusRequest_accountIds, v.AccountIds)
+}
+
 type BatchUpdateMemberEc2DeepInspectionStatusOutput struct {
 
 	// An array of objects that provide details for each of the accounts that Amazon
@@ -56,77 +65,48 @@ type BatchUpdateMemberEc2DeepInspectionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateMemberEc2DeepInspectionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateMemberEc2DeepInspectionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMemberAccountEc2DeepInspectionStatusStateList(s, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_accountIds, v.AccountIds)
+	serializeFailedMemberAccountEc2DeepInspectionStatusStateList(s, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_failedAccountIds, v.FailedAccountIds)
+}
+func (v *BatchUpdateMemberEc2DeepInspectionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_accountIds:
+			return deserializeMemberAccountEc2DeepInspectionStatusStateList(d, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_accountIds, &v.AccountIds)
+		case schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_failedAccountIds:
+			return deserializeFailedMemberAccountEc2DeepInspectionStatusStateList(d, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse_failedAccountIds, &v.FailedAccountIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateMemberEc2DeepInspectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateMemberEc2DeepInspectionStatus, schemas.BatchUpdateMemberEc2DeepInspectionStatusRequest, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateMemberEc2DeepInspectionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateMemberEc2DeepInspectionStatus, schemas.BatchUpdateMemberEc2DeepInspectionStatusRequest, schemas.BatchUpdateMemberEc2DeepInspectionStatusResponse), output: &BatchUpdateMemberEc2DeepInspectionStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateMemberEc2DeepInspectionStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateMemberEc2DeepInspectionStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUpdateMemberEc2DeepInspectionStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateMemberEc2DeepInspectionStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +121,8 @@ func (c *Client) addOperationBatchUpdateMemberEc2DeepInspectionStatusMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateMemberEc2DeepInspectionStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateMemberEc2DeepInspectionStatus",
-	}
 }

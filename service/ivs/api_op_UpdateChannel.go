@@ -4,11 +4,10 @@ package ivs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a channel's configuration. Live channels cannot be updated. You must
@@ -81,10 +80,114 @@ type UpdateChannelInput struct {
 	// exceed the allowable input resolution or bitrate, the stream probably will
 	// disconnect immediately. Default: STANDARD . For details, see [Channel Types].
 	//
-	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
+	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html
 	Type types.ChannelType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdConfigurationArn != nil {
+		s.WriteString(schemas.UpdateChannelRequest_adConfigurationArn, *v.AdConfigurationArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateChannelRequest_arn, *v.Arn)
+	}
+	if v.Authorized != false {
+		s.WriteBool(schemas.UpdateChannelRequest_authorized, v.Authorized)
+	}
+	if v.ContainerFormat != "" {
+		s.WriteString(schemas.UpdateChannelRequest_containerFormat, string(v.ContainerFormat))
+	}
+	if v.InsecureIngest != false {
+		s.WriteBool(schemas.UpdateChannelRequest_insecureIngest, v.InsecureIngest)
+	}
+	if v.LatencyMode != "" {
+		s.WriteString(schemas.UpdateChannelRequest_latencyMode, string(v.LatencyMode))
+	}
+	if v.MultitrackInputConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChannelRequest_multitrackInputConfiguration)
+		v.MultitrackInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateChannelRequest_name, *v.Name)
+	}
+	if v.PlaybackRestrictionPolicyArn != nil {
+		s.WriteString(schemas.UpdateChannelRequest_playbackRestrictionPolicyArn, *v.PlaybackRestrictionPolicyArn)
+	}
+	if v.Preset != "" {
+		s.WriteString(schemas.UpdateChannelRequest_preset, string(v.Preset))
+	}
+	if v.RecordingConfigurationArn != nil {
+		s.WriteString(schemas.UpdateChannelRequest_recordingConfigurationArn, *v.RecordingConfigurationArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateChannelRequest_type, string(v.Type))
+	}
+}
+func (v *UpdateChannelInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelRequest_adConfigurationArn:
+			v.AdConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateChannelRequest_adConfigurationArn, v.AdConfigurationArn)
+		case schemas.UpdateChannelRequest_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateChannelRequest_arn, v.Arn)
+		case schemas.UpdateChannelRequest_authorized:
+			return d.ReadBool(schemas.UpdateChannelRequest_authorized, &v.Authorized)
+		case schemas.UpdateChannelRequest_containerFormat:
+			var ev string
+			if err := d.ReadString(schemas.UpdateChannelRequest_containerFormat, &ev); err != nil {
+				return err
+			}
+			v.ContainerFormat = types.ContainerFormat(ev)
+			return nil
+		case schemas.UpdateChannelRequest_insecureIngest:
+			return d.ReadBool(schemas.UpdateChannelRequest_insecureIngest, &v.InsecureIngest)
+		case schemas.UpdateChannelRequest_latencyMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateChannelRequest_latencyMode, &ev); err != nil {
+				return err
+			}
+			v.LatencyMode = types.ChannelLatencyMode(ev)
+			return nil
+		case schemas.UpdateChannelRequest_multitrackInputConfiguration:
+			v.MultitrackInputConfiguration = &types.MultitrackInputConfiguration{}
+			return v.MultitrackInputConfiguration.Deserialize(d)
+		case schemas.UpdateChannelRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateChannelRequest_name, v.Name)
+		case schemas.UpdateChannelRequest_playbackRestrictionPolicyArn:
+			v.PlaybackRestrictionPolicyArn = new(string)
+			return d.ReadString(schemas.UpdateChannelRequest_playbackRestrictionPolicyArn, v.PlaybackRestrictionPolicyArn)
+		case schemas.UpdateChannelRequest_preset:
+			var ev string
+			if err := d.ReadString(schemas.UpdateChannelRequest_preset, &ev); err != nil {
+				return err
+			}
+			v.Preset = types.TranscodePreset(ev)
+			return nil
+		case schemas.UpdateChannelRequest_recordingConfigurationArn:
+			v.RecordingConfigurationArn = new(string)
+			return d.ReadString(schemas.UpdateChannelRequest_recordingConfigurationArn, v.RecordingConfigurationArn)
+		case schemas.UpdateChannelRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateChannelRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ChannelType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type UpdateChannelOutput struct {
@@ -98,77 +201,50 @@ type UpdateChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != nil {
+		s.WriteStruct(schemas.UpdateChannelResponse_channel)
+		v.Channel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelResponse_channel:
+			v.Channel = &types.Channel{}
+			return v.Channel.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannel, schemas.UpdateChannelRequest, schemas.UpdateChannelResponse), output: &UpdateChannelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +259,8 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateChannel",
-	}
 }

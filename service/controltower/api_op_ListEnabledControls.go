@@ -5,10 +5,10 @@ package controltower
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the controls enabled by Amazon Web Services Control Tower on the
@@ -37,8 +37,8 @@ type ListEnabledControlsInput struct {
 	// of control operations to view.
 	Filter *types.EnabledControlFilter
 
-	// A boolean value that determines whether to include enabled controls from child
-	// organizational units in the response.
+	// Specifies whether to include enabled controls from child organizational units
+	// and child accounts in the response.
 	IncludeChildren bool
 
 	// How many results to return per API call.
@@ -48,13 +48,44 @@ type ListEnabledControlsInput struct {
 	// parameters.
 	NextToken *string
 
-	// The ARN of the organizational unit. For information on how to find the
-	// targetIdentifier , see [the overview page].
+	// The ARN of the target. The value depends on the target type:
+	//
+	//   - Organizational unit (OU) – Specify the ARN of the OU.
+	//
+	//   - Account – Specify the ARN of the account.
+	//
+	// For information on how to find the targetIdentifier , see [the overview page].
 	//
 	// [the overview page]: https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html
 	TargetIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListEnabledControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledControlsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListEnabledControlsInput_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeChildren != false {
+		s.WriteBool(schemas.ListEnabledControlsInput_includeChildren, v.IncludeChildren)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnabledControlsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledControlsInput_nextToken, *v.NextToken)
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.ListEnabledControlsInput_targetIdentifier, *v.TargetIdentifier)
+	}
 }
 
 type ListEnabledControlsOutput struct {
@@ -75,74 +106,48 @@ type ListEnabledControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnabledControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnabledControlsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnabledControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnabledControls(s, schemas.ListEnabledControlsOutput_enabledControls, v.EnabledControls)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnabledControlsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnabledControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnabledControlsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnabledControlsOutput_enabledControls:
+			return deserializeEnabledControls(d, schemas.ListEnabledControlsOutput_enabledControls, &v.EnabledControls)
+		case schemas.ListEnabledControlsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnabledControlsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledControls, schemas.ListEnabledControlsInput, schemas.ListEnabledControlsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEnabledControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnabledControls, schemas.ListEnabledControlsInput, schemas.ListEnabledControlsOutput), output: &ListEnabledControlsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEnabledControls{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnabledControls"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnabledControls(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +160,6 @@ func (c *Client) addOperationListEnabledControlsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +261,3 @@ type ListEnabledControlsAPIClient interface {
 }
 
 var _ ListEnabledControlsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEnabledControls(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEnabledControls",
-	}
-}

@@ -219,3 +219,78 @@ func (SanitizationWarningReason) Values() []SanitizationWarningReason {
 		"INVALID_ATTRIBUTE_VALUE_REMOVED",
 	}
 }
+
+type SharedResourceErrorCode string
+
+// Enum values for SharedResourceErrorCode
+const (
+	SharedResourceErrorCodeQuotaExceeded                 SharedResourceErrorCode = "QUOTA_EXCEEDED"
+	SharedResourceErrorCodeShareNotFound                 SharedResourceErrorCode = "SHARE_NOT_FOUND"
+	SharedResourceErrorCodeInviteFailed                  SharedResourceErrorCode = "INVITE_FAILED"
+	SharedResourceErrorCodeSetupIncomplete               SharedResourceErrorCode = "SETUP_INCOMPLETE"
+	SharedResourceErrorCodeInternalError                 SharedResourceErrorCode = "INTERNAL_ERROR"
+	SharedResourceErrorCodeAzMismatch                    SharedResourceErrorCode = "AZ_MISMATCH"
+	SharedResourceErrorCodeResourceConfigurationNotFound SharedResourceErrorCode = "RESOURCE_CONFIGURATION_NOT_FOUND"
+)
+
+// Values returns all known values for SharedResourceErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SharedResourceErrorCode) Values() []SharedResourceErrorCode {
+	return []SharedResourceErrorCode{
+		"QUOTA_EXCEEDED",
+		"SHARE_NOT_FOUND",
+		"INVITE_FAILED",
+		"SETUP_INCOMPLETE",
+		"INTERNAL_ERROR",
+		"AZ_MISMATCH",
+		"RESOURCE_CONFIGURATION_NOT_FOUND",
+	}
+}
+
+type SharedResourceStatus string
+
+// Enum values for SharedResourceStatus
+const (
+	SharedResourceStatusAvailable          SharedResourceStatus = "AVAILABLE"
+	SharedResourceStatusSetupInProgress    SharedResourceStatus = "SETUP_IN_PROGRESS"
+	SharedResourceStatusDeletionInProgress SharedResourceStatus = "DELETION_IN_PROGRESS"
+	SharedResourceStatusPendingCreate      SharedResourceStatus = "PENDING_CREATE"
+	SharedResourceStatusPendingDelete      SharedResourceStatus = "PENDING_DELETE"
+	SharedResourceStatusError              SharedResourceStatus = "ERROR"
+)
+
+// Values returns all known values for SharedResourceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SharedResourceStatus) Values() []SharedResourceStatus {
+	return []SharedResourceStatus{
+		"AVAILABLE",
+		"SETUP_IN_PROGRESS",
+		"DELETION_IN_PROGRESS",
+		"PENDING_CREATE",
+		"PENDING_DELETE",
+		"ERROR",
+	}
+}
+
+type SharedResourceType string
+
+// Enum values for SharedResourceType
+const (
+	SharedResourceTypeResourceShare SharedResourceType = "RESOURCE_SHARE"
+	SharedResourceTypeResource      SharedResourceType = "RESOURCE"
+)
+
+// Values returns all known values for SharedResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SharedResourceType) Values() []SharedResourceType {
+	return []SharedResourceType{
+		"RESOURCE_SHARE",
+		"RESOURCE",
+	}
+}

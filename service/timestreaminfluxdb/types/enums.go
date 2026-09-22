@@ -2,6 +2,33 @@
 
 package types
 
+type AutomatedDbBackupType string
+
+// Enum values for AutomatedDbBackupType
+const (
+	AutomatedDbBackupTypeHourly         AutomatedDbBackupType = "HOURLY"
+	AutomatedDbBackupTypeDaily          AutomatedDbBackupType = "DAILY"
+	AutomatedDbBackupTypeWeekly         AutomatedDbBackupType = "WEEKLY"
+	AutomatedDbBackupTypeMonthly        AutomatedDbBackupType = "MONTHLY"
+	AutomatedDbBackupTypeCustomSchedule AutomatedDbBackupType = "CUSTOM_SCHEDULE"
+	AutomatedDbBackupTypeContinuous     AutomatedDbBackupType = "CONTINUOUS"
+)
+
+// Values returns all known values for AutomatedDbBackupType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomatedDbBackupType) Values() []AutomatedDbBackupType {
+	return []AutomatedDbBackupType{
+		"HOURLY",
+		"DAILY",
+		"WEEKLY",
+		"MONTHLY",
+		"CUSTOM_SCHEDULE",
+		"CONTINUOUS",
+	}
+}
+
 type ClusterDeploymentType string
 
 // Enum values for ClusterDeploymentType
@@ -34,6 +61,8 @@ const (
 	ClusterStatusRebooting            ClusterStatus = "REBOOTING"
 	ClusterStatusRebootFailed         ClusterStatus = "REBOOT_FAILED"
 	ClusterStatusPartiallyAvailable   ClusterStatus = "PARTIALLY_AVAILABLE"
+	ClusterStatusRestoring            ClusterStatus = "RESTORING"
+	ClusterStatusRestoreFailed        ClusterStatus = "RESTORE_FAILED"
 )
 
 // Values returns all known values for ClusterStatus. Note that this can be
@@ -53,6 +82,8 @@ func (ClusterStatus) Values() []ClusterStatus {
 		"REBOOTING",
 		"REBOOT_FAILED",
 		"PARTIALLY_AVAILABLE",
+		"RESTORING",
+		"RESTORE_FAILED",
 	}
 }
 
@@ -72,6 +103,60 @@ func (DataFusionRuntimeType) Values() []DataFusionRuntimeType {
 	return []DataFusionRuntimeType{
 		"multi-thread",
 		"multi-thread-alt",
+	}
+}
+
+type DbBackupStatus string
+
+// Enum values for DbBackupStatus
+const (
+	DbBackupStatusInProgress DbBackupStatus = "IN_PROGRESS"
+	DbBackupStatusCompleted  DbBackupStatus = "COMPLETED"
+	DbBackupStatusFailed     DbBackupStatus = "FAILED"
+	DbBackupStatusDeleting   DbBackupStatus = "DELETING"
+	DbBackupStatusDeleted    DbBackupStatus = "DELETED"
+)
+
+// Values returns all known values for DbBackupStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DbBackupStatus) Values() []DbBackupStatus {
+	return []DbBackupStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"FAILED",
+		"DELETING",
+		"DELETED",
+	}
+}
+
+type DbBackupType string
+
+// Enum values for DbBackupType
+const (
+	DbBackupTypeHourly         DbBackupType = "HOURLY"
+	DbBackupTypeDaily          DbBackupType = "DAILY"
+	DbBackupTypeWeekly         DbBackupType = "WEEKLY"
+	DbBackupTypeMonthly        DbBackupType = "MONTHLY"
+	DbBackupTypeCustomSchedule DbBackupType = "CUSTOM_SCHEDULE"
+	DbBackupTypeOnDemand       DbBackupType = "ON_DEMAND"
+	DbBackupTypeContinuous     DbBackupType = "CONTINUOUS"
+)
+
+// Values returns all known values for DbBackupType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DbBackupType) Values() []DbBackupType {
+	return []DbBackupType{
+		"HOURLY",
+		"DAILY",
+		"WEEKLY",
+		"MONTHLY",
+		"CUSTOM_SCHEDULE",
+		"ON_DEMAND",
+		"CONTINUOUS",
 	}
 }
 
@@ -299,6 +384,82 @@ func (NetworkType) Values() []NetworkType {
 	}
 }
 
+type ResourceDeploymentType string
+
+// Enum values for ResourceDeploymentType
+const (
+	ResourceDeploymentTypeSingleAz              ResourceDeploymentType = "SINGLE_AZ"
+	ResourceDeploymentTypeWithMultiazStandby    ResourceDeploymentType = "WITH_MULTIAZ_STANDBY"
+	ResourceDeploymentTypeMultiNodeReadReplicas ResourceDeploymentType = "MULTI_NODE_READ_REPLICAS"
+)
+
+// Values returns all known values for ResourceDeploymentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceDeploymentType) Values() []ResourceDeploymentType {
+	return []ResourceDeploymentType{
+		"SINGLE_AZ",
+		"WITH_MULTIAZ_STANDBY",
+		"MULTI_NODE_READ_REPLICAS",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeDbInstance ResourceType = "DB_INSTANCE"
+	ResourceTypeDbCluster  ResourceType = "DB_CLUSTER"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"DB_INSTANCE",
+		"DB_CLUSTER",
+	}
+}
+
+type RestoreMode string
+
+// Enum values for RestoreMode
+const (
+	RestoreModeNewResource     RestoreMode = "NEW_RESOURCE"
+	RestoreModeReplaceExisting RestoreMode = "REPLACE_EXISTING"
+)
+
+// Values returns all known values for RestoreMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RestoreMode) Values() []RestoreMode {
+	return []RestoreMode{
+		"NEW_RESOURCE",
+		"REPLACE_EXISTING",
+	}
+}
+
+type RestoreStatus string
+
+// Enum values for RestoreStatus
+const (
+	RestoreStatusRestoring RestoreStatus = "RESTORING"
+)
+
+// Values returns all known values for RestoreStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RestoreStatus) Values() []RestoreStatus {
+	return []RestoreStatus{
+		"RESTORING",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -315,6 +476,8 @@ const (
 	StatusMaintenance            Status = "MAINTENANCE"
 	StatusRebooting              Status = "REBOOTING"
 	StatusRebootFailed           Status = "REBOOT_FAILED"
+	StatusRestoring              Status = "RESTORING"
+	StatusRestoreFailed          Status = "RESTORE_FAILED"
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
@@ -335,6 +498,8 @@ func (Status) Values() []Status {
 		"MAINTENANCE",
 		"REBOOTING",
 		"REBOOT_FAILED",
+		"RESTORING",
+		"RESTORE_FAILED",
 	}
 }
 

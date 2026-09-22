@@ -4,11 +4,10 @@ package b2bi
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Takes sample input and output documents and uses Amazon Bedrock to generate a
@@ -66,6 +65,24 @@ type GenerateMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputFileContent != nil {
+		s.WriteString(schemas.GenerateMappingRequest_inputFileContent, *v.InputFileContent)
+	}
+	if v.MappingType != "" {
+		s.WriteString(schemas.GenerateMappingRequest_mappingType, string(v.MappingType))
+	}
+	if v.OutputFileContent != nil {
+		s.WriteString(schemas.GenerateMappingRequest_outputFileContent, *v.OutputFileContent)
+	}
+}
+
 type GenerateMappingOutput struct {
 
 	// Returns a mapping template based on your inputs.
@@ -82,77 +99,54 @@ type GenerateMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateMappingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MappingAccuracy != nil {
+		s.WriteFloat32(schemas.GenerateMappingResponse_mappingAccuracy, *v.MappingAccuracy)
+	}
+	if v.MappingTemplate != nil {
+		s.WriteString(schemas.GenerateMappingResponse_mappingTemplate, *v.MappingTemplate)
+	}
+}
+func (v *GenerateMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateMappingResponse_mappingAccuracy:
+			v.MappingAccuracy = new(float32)
+			return d.ReadFloat32(schemas.GenerateMappingResponse_mappingAccuracy, v.MappingAccuracy)
+		case schemas.GenerateMappingResponse_mappingTemplate:
+			v.MappingTemplate = new(string)
+			return d.ReadString(schemas.GenerateMappingResponse_mappingTemplate, v.MappingTemplate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMapping, schemas.GenerateMappingRequest, schemas.GenerateMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGenerateMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateMapping, schemas.GenerateMappingRequest, schemas.GenerateMappingResponse), output: &GenerateMappingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGenerateMapping{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateMapping"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGenerateMappingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateMapping(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +161,8 @@ func (c *Client) addOperationGenerateMappingMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGenerateMapping(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GenerateMapping",
-	}
 }

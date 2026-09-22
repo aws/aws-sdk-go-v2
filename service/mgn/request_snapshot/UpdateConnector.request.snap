@@ -1,0 +1,5 @@
+POST /UpdateConnector
+
+Content-Type: application/json
+
+{"connectorID":"__ConnectorID__","name":"__Name__","ssmCommandConfig":{"cloudWatchLogGroupName":"__CloudWatchLogGroupName__","cloudWatchOutputEnabled":true,"outputS3BucketName":"__OutputS3BucketName__","s3OutputEnabled":true}}

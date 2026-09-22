@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.UpdateUser
+
+{"City":"__City__","Company":"__Company__","Country":"__Country__","Department":"__Department__","DisplayName":"__DisplayName__","FirstName":"__FirstName__","HiddenFromGlobalAddressList":true,"IdentityProviderUserId":"__IdentityProviderUserId__","Initials":"__Initials__","JobTitle":"__JobTitle__","LastName":"__LastName__","Office":"__Office__","OrganizationId":"__OrganizationId__","Role":"USER","Street":"__Street__","Telephone":"__Telephone__","UserId":"__UserId__","ZipCode":"__ZipCode__"}

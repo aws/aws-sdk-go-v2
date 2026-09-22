@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.GetAdminScope
+
+{"AdminScope":{"AccountScope":{"Accounts":["__Member__","__Member__"],"AllAccountsEnabled":true,"ExcludeSpecifiedAccounts":true},"OrganizationalUnitScope":{"AllOrganizationalUnitsEnabled":true,"ExcludeSpecifiedOrganizationalUnits":true,"OrganizationalUnits":["__Member__","__Member__"]},"PolicyTypeScope":{"AllPolicyTypesEnabled":true,"PolicyTypes":["WAF","WAF"]},"RegionScope":{"AllRegionsEnabled":true,"Regions":["__Member__","__Member__"]}},"Status":"ONBOARDING"}

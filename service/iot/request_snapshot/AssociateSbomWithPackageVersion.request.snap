@@ -1,0 +1,5 @@
+PUT /packages/__PackageName__/versions/__VersionName__/sbom?clientToken=__ClientToken__
+
+Content-Type: application/json
+
+{"sbom":{"s3Location":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"}}}

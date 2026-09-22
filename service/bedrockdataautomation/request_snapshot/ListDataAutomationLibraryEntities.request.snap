@@ -1,0 +1,5 @@
+POST /data-automation-libraries/__LibraryArn__/entityType/VOCABULARY/entities/
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

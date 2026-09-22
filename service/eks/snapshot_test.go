@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_ActivateCertificateAuthority(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ActivateCertificateAuthority(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ActivateCertificateAuthority")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AssociateAccessPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateAccessPolicy(context.Background(), nil, func(o *Options) {
@@ -98,6 +110,18 @@ func TestCheckSnapshot_AssociateIdentityProviderConfig(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAccessEntry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAccessEntry(context.Background(), nil, func(o *Options) {
@@ -127,6 +151,18 @@ func TestCheckSnapshot_CreateCapability(t *testing.T) {
 	_, err := svc.CreateCapability(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateCertificateAuthority(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCertificateAuthority(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCertificateAuthority")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -223,6 +259,18 @@ func TestCheckSnapshot_DeleteCapability(t *testing.T) {
 	_, err := svc.DeleteCapability(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteCertificateAuthority(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCertificateAuthority(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCertificateAuthority")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -355,6 +403,18 @@ func TestCheckSnapshot_DescribeCapability(t *testing.T) {
 	_, err := svc.DescribeCapability(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCertificateAuthority(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCertificateAuthority(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCertificateAuthority")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -559,6 +619,18 @@ func TestCheckSnapshot_ListCapabilities(t *testing.T) {
 	_, err := svc.ListCapabilities(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListCapabilities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCertificateAuthorities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCertificateAuthorities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCertificateAuthorities")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -829,6 +901,18 @@ func TestCheckSnapshot_UpdatePodIdentityAssociation(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_ActivateCertificateAuthority(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ActivateCertificateAuthority(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ActivateCertificateAuthority")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AssociateAccessPolicy(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateAccessPolicy(context.Background(), nil, func(o *Options) {
@@ -865,6 +949,18 @@ func TestUpdateSnapshot_AssociateIdentityProviderConfig(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CancelUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelUpdate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAccessEntry(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAccessEntry(context.Background(), nil, func(o *Options) {
@@ -894,6 +990,18 @@ func TestUpdateSnapshot_CreateCapability(t *testing.T) {
 	_, err := svc.CreateCapability(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateCertificateAuthority(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCertificateAuthority(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCertificateAuthority")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -990,6 +1098,18 @@ func TestUpdateSnapshot_DeleteCapability(t *testing.T) {
 	_, err := svc.DeleteCapability(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCertificateAuthority(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCertificateAuthority(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCertificateAuthority")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1122,6 +1242,18 @@ func TestUpdateSnapshot_DescribeCapability(t *testing.T) {
 	_, err := svc.DescribeCapability(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCertificateAuthority(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCertificateAuthority(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCertificateAuthority")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1326,6 +1458,18 @@ func TestUpdateSnapshot_ListCapabilities(t *testing.T) {
 	_, err := svc.ListCapabilities(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListCapabilities")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCertificateAuthorities(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCertificateAuthorities(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCertificateAuthorities")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

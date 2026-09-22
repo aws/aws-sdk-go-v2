@@ -1,0 +1,5 @@
+POST /indices/search
+
+Content-Type: application/json
+
+{"indexName":"__IndexName__","maxResults":1,"nextToken":"__NextToken__","queryString":"__QueryString__","queryVersion":"__QueryVersion__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSOrganizationsV20161128.ListHandshakesForAccount
+
+{"Handshakes":[{"Action":"INVITE","Arn":"__Arn__","ExpirationTimestamp":946684800,"Id":"__Id__","Parties":[{"Id":"__Id__","Type":"ACCOUNT"},{"Id":"__Id__","Type":"ACCOUNT"}],"RequestedTimestamp":946684800,"Resources":[{"Resources":[{},{}],"Type":"ACCOUNT","Value":"__Value__"},{"Resources":[{},{}],"Type":"ACCOUNT","Value":"__Value__"}],"State":"REQUESTED"},{"Action":"INVITE","Arn":"__Arn__","ExpirationTimestamp":946684800,"Id":"__Id__","Parties":[{"Id":"__Id__","Type":"ACCOUNT"},{"Id":"__Id__","Type":"ACCOUNT"}],"RequestedTimestamp":946684800,"Resources":[{"Resources":[{},{}],"Type":"ACCOUNT","Value":"__Value__"},{"Resources":[{},{}],"Type":"ACCOUNT","Value":"__Value__"}],"State":"REQUESTED"}],"NextToken":"__NextToken__"}

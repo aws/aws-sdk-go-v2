@@ -1,0 +1,3 @@
+GET /detector/__DetectorId__/threatentityset?maxResults=1&nextToken=__NextToken__
+
+

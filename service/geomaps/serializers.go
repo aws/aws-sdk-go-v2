@@ -37,7 +37,7 @@ func (m *awsRestjson1_serializeOpGetGlyphs) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/glyphs/{FontStack}/{FontUnicodeRange}")
+	opPath, opQuery := httpbinding.SplitURI("/v2/glyphs/{FontStack}/{FontUnicodeRange}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
@@ -117,7 +117,7 @@ func (m *awsRestjson1_serializeOpGetSprites) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}")
+	opPath, opQuery := httpbinding.SplitURI("/v2/styles/{Style}/{ColorScheme}/{Variant}/sprites/{FileName}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
@@ -215,7 +215,7 @@ func (m *awsRestjson1_serializeOpGetStaticMap) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/static/{FileName}")
+	opPath, opQuery := httpbinding.SplitURI("/v2/static/{FileName}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
@@ -362,7 +362,7 @@ func (m *awsRestjson1_serializeOpGetStyleDescriptor) HandleSerialize(ctx context
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/styles/{Style}/descriptor")
+	opPath, opQuery := httpbinding.SplitURI("/v2/styles/{Style}/descriptor")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
@@ -410,6 +410,16 @@ func awsRestjson1_serializeOpHttpBindingsGetStyleDescriptorInput(v *GetStyleDesc
 
 	if v.Key != nil {
 		encoder.SetQuery("key").String(*v.Key)
+	}
+
+	if v.PoiCategories != nil {
+		for i := range v.PoiCategories {
+			encoder.AddQuery("poi-categories").String(string(v.PoiCategories[i]))
+		}
+	}
+
+	if len(v.PoiDensity) > 0 {
+		encoder.SetQuery("poi-density").String(string(v.PoiDensity))
 	}
 
 	if v.PoliticalView != nil {
@@ -467,7 +477,7 @@ func (m *awsRestjson1_serializeOpGetTile) HandleSerialize(ctx context.Context, i
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/tiles/{Tileset}/{Z}/{X}/{Y}")
+	opPath, opQuery := httpbinding.SplitURI("/v2/tiles/{Tileset}/{Z}/{X}/{Y}")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"

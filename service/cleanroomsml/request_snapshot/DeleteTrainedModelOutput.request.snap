@@ -1,0 +1,3 @@
+DELETE /memberships/__MembershipIdentifier__/trained-models/__TrainedModelArn__?versionIdentifier=__VersionIdentifier__
+
+

@@ -4,11 +4,10 @@ package fms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Firewall Manager protocols list.
@@ -40,6 +39,21 @@ type PutProtocolsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProtocolsListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProtocolsListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProtocolsListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtocolsList != nil {
+		s.WriteStruct(schemas.PutProtocolsListRequest_ProtocolsList)
+		v.ProtocolsList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.PutProtocolsListRequest_TagList, v.TagList)
+}
+
 type PutProtocolsListOutput struct {
 
 	// The details of the Firewall Manager protocols list.
@@ -54,77 +68,56 @@ type PutProtocolsListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutProtocolsListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutProtocolsListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutProtocolsListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtocolsList != nil {
+		s.WriteStruct(schemas.PutProtocolsListResponse_ProtocolsList)
+		v.ProtocolsList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProtocolsListArn != nil {
+		s.WriteString(schemas.PutProtocolsListResponse_ProtocolsListArn, *v.ProtocolsListArn)
+	}
+}
+func (v *PutProtocolsListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutProtocolsListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutProtocolsListResponse_ProtocolsList:
+			v.ProtocolsList = &types.ProtocolsListData{}
+			return v.ProtocolsList.Deserialize(d)
+		case schemas.PutProtocolsListResponse_ProtocolsListArn:
+			v.ProtocolsListArn = new(string)
+			return d.ReadString(schemas.PutProtocolsListResponse_ProtocolsListArn, v.ProtocolsListArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProtocolsList, schemas.PutProtocolsListRequest, schemas.PutProtocolsListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutProtocolsList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutProtocolsList, schemas.PutProtocolsListRequest, schemas.PutProtocolsListResponse), output: &PutProtocolsListOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutProtocolsList{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutProtocolsList"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutProtocolsListValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutProtocolsList(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +132,8 @@ func (c *Client) addOperationPutProtocolsListMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutProtocolsList(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutProtocolsList",
-	}
 }

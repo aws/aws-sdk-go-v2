@@ -1,0 +1,5 @@
+POST /DeleteLoggingConfiguration
+
+Content-Type: application/json
+
+{"identifier":"__Identifier__"}

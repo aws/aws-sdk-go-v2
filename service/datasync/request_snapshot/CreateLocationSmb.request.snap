@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.CreateLocationSmb
+
+{"AgentArns":["__Member__","__Member__"],"AuthenticationType":"NTLM","CmkSecretConfig":{"KmsKeyArn":"__KmsKeyArn__","SecretArn":"__SecretArn__"},"CustomSecretConfig":{"SecretAccessRoleArn":"__SecretAccessRoleArn__","SecretArn":"__SecretArn__"},"DnsIpAddresses":["__Member__","__Member__"],"Domain":"__Domain__","KerberosKeytab":"YmxvYg==","KerberosKrb5Conf":"YmxvYg==","KerberosPrincipal":"__KerberosPrincipal__","MountOptions":{"Version":"AUTOMATIC"},"Password":"__Password__","ServerHostname":"__ServerHostname__","Subdirectory":"__Subdirectory__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"User":"__User__"}

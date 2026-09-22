@@ -1,0 +1,5 @@
+PUT /kx/environments/__EnvironmentId__/clusters/__ClusterName__/configuration/code
+
+Content-Type: application/x-amz-json-1.1
+
+{"clientToken":"__ClientToken__","code":{"s3Bucket":"__S3Bucket__","s3Key":"__S3Key__","s3ObjectVersion":"__S3ObjectVersion__"},"commandLineArguments":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"deploymentConfiguration":{"deploymentStrategy":"NO_RESTART"},"initializationScript":"__InitializationScript__"}

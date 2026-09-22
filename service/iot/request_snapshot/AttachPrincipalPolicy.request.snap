@@ -1,0 +1,4 @@
+PUT /principal-policies/__PolicyName__
+
+X-Amzn-Iot-Principal: __Principal__
+

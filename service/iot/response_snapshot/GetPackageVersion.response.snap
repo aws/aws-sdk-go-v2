@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"artifact":{"s3Location":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"}},"attributes":{"key0":"__Value__"},"creationDate":946684800,"description":"__Description__","errorReason":"__ErrorReason__","lastModifiedDate":946684800,"packageName":"__PackageName__","packageVersionArn":"__PackageVersionArn__","recipe":"__Recipe__","sbom":{"s3Location":{"bucket":"__Bucket__","key":"__Key__","version":"__Version__"}},"sbomValidationStatus":"IN_PROGRESS","status":"DRAFT","versionName":"__VersionName__"}

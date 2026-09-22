@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AssociateApplicationStatusCheck&ApplicationStatusCheckId=__ApplicationStatusCheckId__&ClientToken=__ClientToken__&DryRun=true&InstanceId.1=__Member__&InstanceId.2=__Member__&TargetTagAssociation.1.Key=__Key__&TargetTagAssociation.1.Value=__Value__&TargetTagAssociation.2.Key=__Key__&TargetTagAssociation.2.Value=__Value__&Version=2016-11-15

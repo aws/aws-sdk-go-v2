@@ -4,11 +4,10 @@ package paymentcryptography
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Exports a key from Amazon Web Services Payment Cryptography.
@@ -235,6 +234,24 @@ type ExportKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportAttributes != nil {
+		s.WriteStruct(schemas.ExportKeyInput_ExportAttributes)
+		v.ExportAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExportKeyIdentifier != nil {
+		s.WriteString(schemas.ExportKeyInput_ExportKeyIdentifier, *v.ExportKeyIdentifier)
+	}
+	serializeExportKeyMaterial(s, schemas.ExportKeyInput_KeyMaterial, v.KeyMaterial)
+}
+
 type ExportKeyOutput struct {
 
 	// The key material under export as a TR-34 WrappedKeyBlock or a TR-31
@@ -247,77 +264,50 @@ type ExportKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WrappedKey != nil {
+		s.WriteStruct(schemas.ExportKeyOutput_WrappedKey)
+		v.WrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportKeyOutput_WrappedKey:
+			v.WrappedKey = &types.WrappedKey{}
+			return v.WrappedKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportKey, schemas.ExportKeyInput, schemas.ExportKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportKey, schemas.ExportKeyInput, schemas.ExportKeyOutput), output: &ExportKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpExportKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpExportKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExportKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -332,22 +322,8 @@ func (c *Client) addOperationExportKeyMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opExportKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExportKey",
-	}
 }

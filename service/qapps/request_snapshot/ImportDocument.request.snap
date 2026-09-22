@@ -1,0 +1,6 @@
+POST /apps.importDocument
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"appId":"__AppId__","cardId":"__CardId__","fileContentsBase64":"__FileContentsBase64__","fileName":"__FileName__","scope":"APPLICATION","sessionId":"__SessionId__"}

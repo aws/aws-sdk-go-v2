@@ -1,0 +1,5 @@
+PUT /prod/clusters/__ClusterId__/nodes/__NodeId__
+
+Content-Type: application/json
+
+{"name":"__Name__","role":"BACKUP","sdiSourceMappings":[{"cardNumber":1,"channelNumber":1,"sdiSource":"__SdiSource__"},{"cardNumber":1,"channelNumber":1,"sdiSource":"__SdiSource__"}]}

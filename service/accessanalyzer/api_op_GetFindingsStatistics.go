@@ -4,11 +4,10 @@ package accessanalyzer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,6 +40,18 @@ type GetFindingsStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.GetFindingsStatisticsRequest_analyzerArn, *v.AnalyzerArn)
+	}
+}
+
 type GetFindingsStatisticsOutput struct {
 
 	// A group of external access or unused access findings statistics.
@@ -57,77 +68,51 @@ type GetFindingsStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingsStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingsStatisticsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingsStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingsStatisticsList(s, schemas.GetFindingsStatisticsResponse_findingsStatistics, v.FindingsStatistics)
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetFindingsStatisticsResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+}
+func (v *GetFindingsStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingsStatisticsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingsStatisticsResponse_findingsStatistics:
+			return deserializeFindingsStatisticsList(d, schemas.GetFindingsStatisticsResponse_findingsStatistics, &v.FindingsStatistics)
+		case schemas.GetFindingsStatisticsResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFindingsStatisticsResponse_lastUpdatedAt, v.LastUpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingsStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsStatistics, schemas.GetFindingsStatisticsRequest, schemas.GetFindingsStatisticsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingsStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingsStatistics, schemas.GetFindingsStatisticsRequest, schemas.GetFindingsStatisticsResponse), output: &GetFindingsStatisticsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingsStatistics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFindingsStatistics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFindingsStatisticsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFindingsStatistics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +127,8 @@ func (c *Client) addOperationGetFindingsStatisticsMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFindingsStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFindingsStatistics",
-	}
 }

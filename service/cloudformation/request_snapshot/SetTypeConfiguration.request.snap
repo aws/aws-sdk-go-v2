@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetTypeConfiguration&Configuration=__Configuration__&ConfigurationAlias=__ConfigurationAlias__&Type=RESOURCE&TypeArn=__TypeArn__&TypeName=__TypeName__&Version=2010-05-15

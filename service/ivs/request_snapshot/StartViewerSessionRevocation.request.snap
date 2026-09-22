@@ -1,0 +1,5 @@
+POST /StartViewerSessionRevocation
+
+Content-Type: application/json
+
+{"channelArn":"__ChannelArn__","viewerId":"__ViewerId__","viewerSessionVersionsLessThanOrEqualTo":1}

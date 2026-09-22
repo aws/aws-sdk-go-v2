@@ -1,0 +1,7 @@
+POST /payments/getPaymentSession
+
+Content-Type: application/json
+X-Amzn-Bedrock-Agentcore-Payments-Agent-Name: __AgentName__
+X-Amzn-Bedrock-Agentcore-Payments-User-Id: __UserId__
+
+{"paymentManagerArn":"__PaymentManagerArn__","paymentSessionId":"__PaymentSessionId__"}

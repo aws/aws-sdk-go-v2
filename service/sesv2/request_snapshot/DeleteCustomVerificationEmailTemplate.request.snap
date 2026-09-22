@@ -1,0 +1,3 @@
+DELETE /v2/email/custom-verification-email-templates/__TemplateName__
+
+

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"HierarchyGroupArn":"__HierarchyGroupArn__","HierarchyGroupId":"__HierarchyGroupId__"}

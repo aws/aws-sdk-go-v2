@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -42,6 +43,27 @@ func (e *DefaultUndefinedFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DefaultUndefinedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DefaultUndefinedFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DefaultUndefinedFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DefaultUndefinedFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DefaultUndefinedFault_message, *v.Message)
+	}
+}
+func (v *DefaultUndefinedFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DefaultUndefinedFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DefaultUndefinedFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DefaultUndefinedFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned if the domain already exists. You may get this fault if you are
 // registering a domain that is either already registered or deprecated, or if you
@@ -70,6 +92,27 @@ func (e *DomainAlreadyExistsFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DomainAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DomainAlreadyExistsFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainAlreadyExistsFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainAlreadyExistsFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DomainAlreadyExistsFault_message, *v.Message)
+	}
+}
+func (v *DomainAlreadyExistsFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainAlreadyExistsFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainAlreadyExistsFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DomainAlreadyExistsFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned when the specified domain has been deprecated.
 type DomainDeprecatedFault struct {
@@ -96,6 +139,27 @@ func (e *DomainDeprecatedFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DomainDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DomainDeprecatedFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainDeprecatedFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainDeprecatedFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DomainDeprecatedFault_message, *v.Message)
+	}
+}
+func (v *DomainDeprecatedFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainDeprecatedFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainDeprecatedFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DomainDeprecatedFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned by any operation if a system imposed limitation has been reached. To
 // address this fault you should either clean up unused resources or increase the
@@ -124,6 +188,27 @@ func (e *LimitExceededFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededFault_message, *v.Message)
+	}
+}
+func (v *LimitExceededFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned when the caller doesn't have sufficient permissions to invoke the
 // action.
@@ -151,6 +236,27 @@ func (e *OperationNotPermittedFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *OperationNotPermittedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *OperationNotPermittedFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationNotPermittedFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationNotPermittedFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.OperationNotPermittedFault_message, *v.Message)
+	}
+}
+func (v *OperationNotPermittedFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationNotPermittedFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationNotPermittedFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.OperationNotPermittedFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You've exceeded the number of tags allowed for a domain.
 type TooManyTagsFault struct {
@@ -177,6 +283,27 @@ func (e *TooManyTagsFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsFault_message, *v.Message)
+	}
+}
+func (v *TooManyTagsFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned if the type already exists in the specified domain. You may get this
 // fault if you are registering a type that is either already registered or
@@ -205,6 +332,27 @@ func (e *TypeAlreadyExistsFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TypeAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TypeAlreadyExistsFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypeAlreadyExistsFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypeAlreadyExistsFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TypeAlreadyExistsFault_message, *v.Message)
+	}
+}
+func (v *TypeAlreadyExistsFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypeAlreadyExistsFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypeAlreadyExistsFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TypeAlreadyExistsFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned when the specified activity or workflow type was already deprecated.
 type TypeDeprecatedFault struct {
@@ -231,6 +379,27 @@ func (e *TypeDeprecatedFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TypeDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TypeDeprecatedFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypeDeprecatedFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypeDeprecatedFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TypeDeprecatedFault_message, *v.Message)
+	}
+}
+func (v *TypeDeprecatedFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypeDeprecatedFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypeDeprecatedFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TypeDeprecatedFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned when the resource type has not been deprecated.
 type TypeNotDeprecatedFault struct {
@@ -257,6 +426,27 @@ func (e *TypeNotDeprecatedFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TypeNotDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TypeNotDeprecatedFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TypeNotDeprecatedFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TypeNotDeprecatedFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TypeNotDeprecatedFault_message, *v.Message)
+	}
+}
+func (v *TypeNotDeprecatedFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TypeNotDeprecatedFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TypeNotDeprecatedFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TypeNotDeprecatedFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned when the named resource cannot be found with in the scope of this
 // operation (region or domain). This could happen if the named resource was never
@@ -285,6 +475,27 @@ func (e *UnknownResourceFault) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnknownResourceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnknownResourceFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnknownResourceFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnknownResourceFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnknownResourceFault_message, *v.Message)
+	}
+}
+func (v *UnknownResourceFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnknownResourceFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnknownResourceFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnknownResourceFault_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Returned by StartWorkflowExecution when an open execution with the same workflowId is already running
 // in the specified domain.
@@ -313,4 +524,25 @@ func (e *WorkflowExecutionAlreadyStartedFault) ErrorCode() string {
 }
 func (e *WorkflowExecutionAlreadyStartedFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *WorkflowExecutionAlreadyStartedFault) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionAlreadyStartedFault)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkflowExecutionAlreadyStartedFault) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.WorkflowExecutionAlreadyStartedFault_message, *v.Message)
+	}
+}
+func (v *WorkflowExecutionAlreadyStartedFault) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionAlreadyStartedFault, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionAlreadyStartedFault_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WorkflowExecutionAlreadyStartedFault_message, v.Message)
+		}
+		return nil
+	})
 }

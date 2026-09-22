@@ -4,11 +4,8 @@ package support
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the results for the Trusted Advisor check summaries for the check IDs
@@ -16,11 +13,16 @@ import (
 //
 // The response contains an array of TrustedAdvisorCheckSummary objects.
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
-//     use the Amazon Web Services Support API.
+//   - You must have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan to use the
+//     Amazon Web Services Support API. If you're in an Amazon Web Services Region that
+//     doesn't offer one of these Amazon Web Services Support plans, or if you haven't
+//     transitioned to one of these plans, you can use the Amazon Web Services Support
+//     API with a Business, Enterprise On-Ramp, or Enterprise Support plan.
 //
 //   - If you call the Amazon Web Services Support API from an account that
-//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     doesn't have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan, the
 //     SubscriptionRequiredException error message appears. For information about
 //     changing your support plan, see [Amazon Web Services Support].
 //
@@ -29,8 +31,22 @@ import (
 // and Europe (Ireland) endpoints don't support the Trusted Advisor operations. For
 // more information, see [About the Amazon Web Services Support API]in the Amazon Web Services Support User Guide.
 //
+// # Understanding the Trusted Advisor Resources processed value
+//
+// The Resources processed value, resourcesProcessed , usually shows both flagged
+// resources (those with warnings or errors) and resources in good standing (ok
+// status resources). However, some checks report flagged resources only. To
+// understand what a specific check reports, review the detailed check information
+// in the [Trusted Advisor check reference]. If you see a Green criterion listed in the Alert criteria, then the
+// check reports all resources. If there's no Green criterion listed in the Alert
+// criteria, then the check reports only flagged resources. For example, the [Amazon EC2 Reserved Instance optimization check (cX3c2R1chu)]
+// doesn't list a Green criterion in the Alert criteria. So, this check only
+// reports flagged resources.
+//
 // [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 // [About the Amazon Web Services Support API]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint
+// [Amazon EC2 Reserved Instance optimization check (cX3c2R1chu)]: https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html#amazon-ec2-reserved-instances-optimization
+// [Trusted Advisor check reference]: https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor-check-reference.html
 func (c *Client) DescribeTrustedAdvisorCheckSummaries(ctx context.Context, params *DescribeTrustedAdvisorCheckSummariesInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorCheckSummariesOutput, error) {
 	if params == nil {
 		params = &DescribeTrustedAdvisorCheckSummariesInput{}
@@ -71,9 +87,6 @@ type DescribeTrustedAdvisorCheckSummariesOutput struct {
 }
 
 func (c *Client) addOperationDescribeTrustedAdvisorCheckSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTrustedAdvisorCheckSummaries{}, middleware.After)
 	if err != nil {
 		return err
@@ -82,65 +95,20 @@ func (c *Client) addOperationDescribeTrustedAdvisorCheckSummariesMiddlewares(sta
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTrustedAdvisorCheckSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeTrustedAdvisorCheckSummariesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTrustedAdvisorCheckSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +123,8 @@ func (c *Client) addOperationDescribeTrustedAdvisorCheckSummariesMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeTrustedAdvisorCheckSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeTrustedAdvisorCheckSummaries",
-	}
 }

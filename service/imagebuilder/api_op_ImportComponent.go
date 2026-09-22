@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Imports a component and transforms its data into a component document.
@@ -29,8 +29,10 @@ func (c *Client) ImportComponent(ctx context.Context, params *ImportComponentInp
 
 type ImportComponentInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -58,10 +60,10 @@ type ImportComponentInput struct {
 	// The semantic version has four nodes: ../. You can assign values for the first
 	// three, and can filter on all of them.
 	//
-	// Filtering: With semantic versioning, you have the flexibility to use wildcards
-	// (x) to specify the most recent versions or nodes when selecting the base image
-	// or components for your recipe. When you use a wildcard in any node, all nodes to
-	// the right of the first wildcard must also be wildcards.
+	// Filtering: You can use wildcards (x) to specify the most recent versions or
+	// nodes when selecting the base image or components for your recipe. When you use
+	// a wildcard in any node, all nodes to the right of the first wildcard must also
+	// be wildcards.
 	//
 	// This member is required.
 	SemanticVersion *string
@@ -94,13 +96,56 @@ type ImportComponentInput struct {
 	// The tags of the component.
 	Tags map[string]string
 
-	// The uri of the component. Must be an Amazon S3 URL and the requester must have
-	// permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify
-	// component content up to your service quota. Either data or uri can be used to
-	// specify the data within the component.
+	// The uri of the component. Must be an Amazon S3 URL and you must have permission
+	// to access the Amazon S3 bucket. If you use Amazon S3, you can specify component
+	// content up to your service quota. Either data or uri can be used to specify the
+	// data within the component.
 	Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeDescription != nil {
+		s.WriteString(schemas.ImportComponentRequest_changeDescription, *v.ChangeDescription)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportComponentRequest_clientToken, *v.ClientToken)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.ImportComponentRequest_data, *v.Data)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ImportComponentRequest_description, *v.Description)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.ImportComponentRequest_format, string(v.Format))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ImportComponentRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportComponentRequest_name, *v.Name)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.ImportComponentRequest_platform, string(v.Platform))
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.ImportComponentRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.ImportComponentRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.ImportComponentRequest_type, string(v.Type))
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.ImportComponentRequest_uri, *v.Uri)
+	}
 }
 
 type ImportComponentOutput struct {
@@ -120,65 +165,54 @@ type ImportComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportComponentResponse_clientToken, *v.ClientToken)
+	}
+	if v.ComponentBuildVersionArn != nil {
+		s.WriteString(schemas.ImportComponentResponse_componentBuildVersionArn, *v.ComponentBuildVersionArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ImportComponentResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ImportComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportComponentResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.ImportComponentResponse_clientToken, v.ClientToken)
+		case schemas.ImportComponentResponse_componentBuildVersionArn:
+			v.ComponentBuildVersionArn = new(string)
+			return d.ReadString(schemas.ImportComponentResponse_componentBuildVersionArn, v.ComponentBuildVersionArn)
+		case schemas.ImportComponentResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ImportComponentResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportComponent, schemas.ImportComponentRequest, schemas.ImportComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportComponent, schemas.ImportComponentRequest, schemas.ImportComponentResponse), output: &ImportComponentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportComponent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportComponent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -188,12 +222,6 @@ func (c *Client) addOperationImportComponentMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpImportComponentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportComponent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,12 +234,6 @@ func (c *Client) addOperationImportComponentMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,12 +273,4 @@ func (m *idempotencyToken_initializeOpImportComponent) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opImportComponentMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpImportComponent{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opImportComponent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportComponent",
-	}
 }

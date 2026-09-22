@@ -74,7 +74,7 @@ func mockCreateFile(terr error) (*writer, func()) {
 	w := &writer{}
 
 	orig := createFile
-	createFile = func(name string) (io.WriteCloser, error) {
+	createFile = func(name string, mode os.FileMode) (io.WriteCloser, error) {
 		if terr != nil {
 			return nil, terr
 		}

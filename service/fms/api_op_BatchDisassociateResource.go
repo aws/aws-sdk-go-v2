@@ -4,11 +4,10 @@ package fms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates resources from a Firewall Manager resource set.
@@ -45,6 +44,19 @@ type BatchDisassociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentifierList(s, schemas.BatchDisassociateResourceRequest_Items, v.Items)
+	if v.ResourceSetIdentifier != nil {
+		s.WriteString(schemas.BatchDisassociateResourceRequest_ResourceSetIdentifier, *v.ResourceSetIdentifier)
+	}
+}
+
 type BatchDisassociateResourceOutput struct {
 
 	// The resources that failed to disassociate from the resource set.
@@ -64,77 +76,51 @@ type BatchDisassociateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDisassociateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDisassociateResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDisassociateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedItemList(s, schemas.BatchDisassociateResourceResponse_FailedItems, v.FailedItems)
+	if v.ResourceSetIdentifier != nil {
+		s.WriteString(schemas.BatchDisassociateResourceResponse_ResourceSetIdentifier, *v.ResourceSetIdentifier)
+	}
+}
+func (v *BatchDisassociateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDisassociateResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDisassociateResourceResponse_FailedItems:
+			return deserializeFailedItemList(d, schemas.BatchDisassociateResourceResponse_FailedItems, &v.FailedItems)
+		case schemas.BatchDisassociateResourceResponse_ResourceSetIdentifier:
+			v.ResourceSetIdentifier = new(string)
+			return d.ReadString(schemas.BatchDisassociateResourceResponse_ResourceSetIdentifier, v.ResourceSetIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDisassociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateResource, schemas.BatchDisassociateResourceRequest, schemas.BatchDisassociateResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchDisassociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDisassociateResource, schemas.BatchDisassociateResourceRequest, schemas.BatchDisassociateResourceResponse), output: &BatchDisassociateResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchDisassociateResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDisassociateResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDisassociateResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +135,8 @@ func (c *Client) addOperationBatchDisassociateResourceMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDisassociateResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDisassociateResource",
-	}
 }

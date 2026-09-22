@@ -1,0 +1,4 @@
+GET /prod/inputDevices/__InputDeviceId__/thumbnailData
+
+Accept: image/jpeg
+

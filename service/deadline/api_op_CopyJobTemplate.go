@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +54,29 @@ type CopyJobTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyJobTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyJobTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyJobTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.CopyJobTemplateRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.CopyJobTemplateRequest_jobId, *v.JobId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.CopyJobTemplateRequest_queueId, *v.QueueId)
+	}
+	if v.TargetS3Location != nil {
+		s.WriteStruct(schemas.CopyJobTemplateRequest_targetS3Location)
+		v.TargetS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CopyJobTemplateOutput struct {
 
 	// The format of the job template, either JSON or YAML .
@@ -66,65 +90,46 @@ type CopyJobTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyJobTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyJobTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyJobTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateType != "" {
+		s.WriteString(schemas.CopyJobTemplateResponse_templateType, string(v.TemplateType))
+	}
+}
+func (v *CopyJobTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyJobTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyJobTemplateResponse_templateType:
+			var ev string
+			if err := d.ReadString(schemas.CopyJobTemplateResponse_templateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = types.JobTemplateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyJobTemplate, schemas.CopyJobTemplateRequest, schemas.CopyJobTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyJobTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyJobTemplate, schemas.CopyJobTemplateRequest, schemas.CopyJobTemplateResponse), output: &CopyJobTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCopyJobTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyJobTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -134,12 +139,6 @@ func (c *Client) addOperationCopyJobTemplateMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpCopyJobTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyJobTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +151,6 @@ func (c *Client) addOperationCopyJobTemplateMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -191,12 +184,4 @@ func (m *endpointPrefix_opCopyJobTemplateMiddleware) HandleFinalize(ctx context.
 }
 func addEndpointPrefix_opCopyJobTemplateMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCopyJobTemplateMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCopyJobTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CopyJobTemplate",
-	}
 }

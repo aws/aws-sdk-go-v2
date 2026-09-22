@@ -4,11 +4,10 @@ package batch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Batch quota share. Each quota share operates as a virtual queue with
@@ -76,6 +75,36 @@ type CreateQuotaShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQuotaShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQuotaShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQuotaShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQuotaShareCapacityLimits(s, schemas.CreateQuotaShareRequest_capacityLimits, v.CapacityLimits)
+	if v.JobQueue != nil {
+		s.WriteString(schemas.CreateQuotaShareRequest_jobQueue, *v.JobQueue)
+	}
+	if v.PreemptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateQuotaShareRequest_preemptionConfiguration)
+		v.PreemptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuotaShareName != nil {
+		s.WriteString(schemas.CreateQuotaShareRequest_quotaShareName, *v.QuotaShareName)
+	}
+	if v.ResourceSharingConfiguration != nil {
+		s.WriteStruct(schemas.CreateQuotaShareRequest_resourceSharingConfiguration)
+		v.ResourceSharingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateQuotaShareRequest_state, string(v.State))
+	}
+	serializeTagrisTagsMap(s, schemas.CreateQuotaShareRequest_tags, v.Tags)
+}
+
 type CreateQuotaShareOutput struct {
 
 	// The Amazon Resource Name (ARN) of the quota share.
@@ -90,77 +119,54 @@ type CreateQuotaShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQuotaShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQuotaShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQuotaShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuotaShareArn != nil {
+		s.WriteString(schemas.CreateQuotaShareResponse_quotaShareArn, *v.QuotaShareArn)
+	}
+	if v.QuotaShareName != nil {
+		s.WriteString(schemas.CreateQuotaShareResponse_quotaShareName, *v.QuotaShareName)
+	}
+}
+func (v *CreateQuotaShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateQuotaShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateQuotaShareResponse_quotaShareArn:
+			v.QuotaShareArn = new(string)
+			return d.ReadString(schemas.CreateQuotaShareResponse_quotaShareArn, v.QuotaShareArn)
+		case schemas.CreateQuotaShareResponse_quotaShareName:
+			v.QuotaShareName = new(string)
+			return d.ReadString(schemas.CreateQuotaShareResponse_quotaShareName, v.QuotaShareName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateQuotaShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuotaShare, schemas.CreateQuotaShareRequest, schemas.CreateQuotaShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateQuotaShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuotaShare, schemas.CreateQuotaShareRequest, schemas.CreateQuotaShareResponse), output: &CreateQuotaShareOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateQuotaShare{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateQuotaShare"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateQuotaShareValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateQuotaShare(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +181,8 @@ func (c *Client) addOperationCreateQuotaShareMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateQuotaShare(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateQuotaShare",
-	}
 }

@@ -1,0 +1,5 @@
+POST /assets/__AssetId__/associate
+
+Content-Type: application/json
+
+{"childAssetId":"__ChildAssetId__","clientToken":"__ClientToken__","hierarchyId":"__HierarchyId__"}

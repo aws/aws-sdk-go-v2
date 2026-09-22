@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/data-sources/__Identifier__
+
+Content-Type: application/json
+
+{"assetFormsInput":[{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},{"content":"__Content__","formName":"__FormName__","typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}],"configuration":{"glueRunConfiguration":{"autoImportDataQualityResult":true,"catalogName":"__CatalogName__","dataAccessRole":"__DataAccessRole__","relationalFilterConfigurations":[{"databaseName":"__DatabaseName__","filterExpressions":[{"expression":"__Expression__","type":"INCLUDE"},{"expression":"__Expression__","type":"INCLUDE"}],"schemaName":"__SchemaName__"},{"databaseName":"__DatabaseName__","filterExpressions":[{"expression":"__Expression__","type":"INCLUDE"},{"expression":"__Expression__","type":"INCLUDE"}],"schemaName":"__SchemaName__"}]}},"description":"__Description__","enableSetting":"ENABLED","name":"__Name__","publishOnImport":true,"recommendation":{"enableBusinessNameGeneration":true},"retainPermissionsOnRevokeFailure":true,"schedule":{"schedule":"__Schedule__","timezone":"UTC"}}

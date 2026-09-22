@@ -74,6 +74,18 @@ func TestCheckSnapshot_AddArtifact(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchCreateSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchCreateSecurityRequirements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchDeleteCodeReviews(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteCodeReviews(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,30 @@ func TestCheckSnapshot_BatchDeletePentests(t *testing.T) {
 	_, err := svc.BatchDeletePentests(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchDeletePentests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchDeleteSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteSecurityRequirements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchDeleteThreatModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteThreatModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteThreatModels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -206,11 +242,83 @@ func TestCheckSnapshot_BatchGetPentests(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetSecurityRequirements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetTargetDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetTargetDomains(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchGetTargetDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetThreatModelJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetThreatModelJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetThreatModelJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetThreatModelJobTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetThreatModelJobTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetThreatModelJobTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetThreatModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetThreatModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetThreatModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetThreats(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetThreats(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetThreats")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchUpdateSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateSecurityRequirements")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -290,11 +398,59 @@ func TestCheckSnapshot_CreatePentest(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreatePrivateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePrivateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreatePrivateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateSecurityRequirementPack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSecurityRequirementPack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateSecurityRequirementPack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateTargetDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTargetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateTargetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateThreat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateThreat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateThreat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateThreatModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateThreatModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateThreatModel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,11 +518,47 @@ func TestCheckSnapshot_DeleteMembership(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeletePrivateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePrivateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeletePrivateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteSecurityRequirementPack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSecurityRequirementPack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSecurityRequirementPack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTargetDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTargetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTargetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribePrivateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePrivateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribePrivateConnection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -403,6 +595,30 @@ func TestCheckSnapshot_GetIntegration(t *testing.T) {
 	_, err := svc.GetIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetSecurityRequirementPack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSecurityRequirementPack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSecurityRequirementPack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ImportSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ImportSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ImportSecurityRequirements")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -590,6 +806,42 @@ func TestCheckSnapshot_ListPentests(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPrivateConnections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPrivateConnections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPrivateConnections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSecurityRequirementPacks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSecurityRequirementPacks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSecurityRequirementPacks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSecurityRequirements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -607,6 +859,54 @@ func TestCheckSnapshot_ListTargetDomains(t *testing.T) {
 	_, err := svc.ListTargetDomains(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTargetDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListThreatModelJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThreatModelJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListThreatModelJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListThreatModelJobTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThreatModelJobTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListThreatModelJobTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListThreatModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThreatModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListThreatModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListThreats(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThreats(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListThreats")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -650,6 +950,18 @@ func TestCheckSnapshot_StartPentestJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartThreatModelJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartThreatModelJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartThreatModelJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopCodeReviewJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopCodeReviewJob(context.Background(), nil, func(o *Options) {
@@ -667,6 +979,18 @@ func TestCheckSnapshot_StopPentestJob(t *testing.T) {
 	_, err := svc.StopPentestJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopPentestJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopThreatModelJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopThreatModelJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopThreatModelJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -770,11 +1094,59 @@ func TestCheckSnapshot_UpdatePentest(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdatePrivateConnectionCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePrivateConnectionCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdatePrivateConnectionCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateSecurityRequirementPack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSecurityRequirementPack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateSecurityRequirementPack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateTargetDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTargetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateTargetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateThreat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateThreat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateThreat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateThreatModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateThreatModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateThreatModel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -805,6 +1177,18 @@ func TestUpdateSnapshot_AddArtifact(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchCreateSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchCreateSecurityRequirements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchDeleteCodeReviews(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchDeleteCodeReviews(context.Background(), nil, func(o *Options) {
@@ -822,6 +1206,30 @@ func TestUpdateSnapshot_BatchDeletePentests(t *testing.T) {
 	_, err := svc.BatchDeletePentests(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchDeletePentests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDeleteSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteSecurityRequirements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDeleteThreatModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteThreatModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteThreatModels")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -937,11 +1345,83 @@ func TestUpdateSnapshot_BatchGetPentests(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchGetSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetSecurityRequirements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetTargetDomains(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetTargetDomains(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetTargetDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetThreatModelJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetThreatModelJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetThreatModelJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetThreatModelJobTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetThreatModelJobTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetThreatModelJobTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetThreatModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetThreatModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetThreatModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetThreats(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetThreats(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetThreats")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchUpdateSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateSecurityRequirements")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1021,11 +1501,59 @@ func TestUpdateSnapshot_CreatePentest(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreatePrivateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreatePrivateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreatePrivateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateSecurityRequirementPack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateSecurityRequirementPack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateSecurityRequirementPack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateTargetDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateTargetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateTargetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateThreat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateThreat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateThreat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateThreatModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateThreatModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateThreatModel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1093,11 +1621,47 @@ func TestUpdateSnapshot_DeleteMembership(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeletePrivateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeletePrivateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeletePrivateConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteSecurityRequirementPack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSecurityRequirementPack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSecurityRequirementPack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTargetDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTargetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTargetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribePrivateConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribePrivateConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribePrivateConnection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1134,6 +1698,30 @@ func TestUpdateSnapshot_GetIntegration(t *testing.T) {
 	_, err := svc.GetIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSecurityRequirementPack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSecurityRequirementPack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSecurityRequirementPack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ImportSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ImportSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ImportSecurityRequirements")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1321,6 +1909,42 @@ func TestUpdateSnapshot_ListPentests(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListPrivateConnections(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPrivateConnections(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPrivateConnections")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSecurityRequirementPacks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSecurityRequirementPacks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSecurityRequirementPacks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSecurityRequirements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSecurityRequirements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSecurityRequirements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
@@ -1338,6 +1962,54 @@ func TestUpdateSnapshot_ListTargetDomains(t *testing.T) {
 	_, err := svc.ListTargetDomains(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTargetDomains")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListThreatModelJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThreatModelJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListThreatModelJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListThreatModelJobTasks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThreatModelJobTasks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListThreatModelJobTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListThreatModels(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThreatModels(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListThreatModels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListThreats(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListThreats(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListThreats")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1381,6 +2053,18 @@ func TestUpdateSnapshot_StartPentestJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartThreatModelJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartThreatModelJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartThreatModelJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopCodeReviewJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopCodeReviewJob(context.Background(), nil, func(o *Options) {
@@ -1398,6 +2082,18 @@ func TestUpdateSnapshot_StopPentestJob(t *testing.T) {
 	_, err := svc.StopPentestJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopPentestJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopThreatModelJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopThreatModelJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopThreatModelJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1501,11 +2197,59 @@ func TestUpdateSnapshot_UpdatePentest(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdatePrivateConnectionCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdatePrivateConnectionCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdatePrivateConnectionCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateSecurityRequirementPack(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateSecurityRequirementPack(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateSecurityRequirementPack")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateTargetDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateTargetDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateTargetDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateThreat(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateThreat(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateThreat")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateThreatModel(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateThreatModel(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateThreatModel")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

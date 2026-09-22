@@ -220,6 +220,7 @@ const (
 	ContainerFleetLocationStatusActive     ContainerFleetLocationStatus = "ACTIVE"
 	ContainerFleetLocationStatusUpdating   ContainerFleetLocationStatus = "UPDATING"
 	ContainerFleetLocationStatusDeleting   ContainerFleetLocationStatus = "DELETING"
+	ContainerFleetLocationStatusExpired    ContainerFleetLocationStatus = "EXPIRED"
 )
 
 // Values returns all known values for ContainerFleetLocationStatus. Note that
@@ -236,6 +237,7 @@ func (ContainerFleetLocationStatus) Values() []ContainerFleetLocationStatus {
 		"ACTIVE",
 		"UPDATING",
 		"DELETING",
+		"EXPIRED",
 	}
 }
 
@@ -268,6 +270,7 @@ const (
 	ContainerFleetStatusActive     ContainerFleetStatus = "ACTIVE"
 	ContainerFleetStatusUpdating   ContainerFleetStatus = "UPDATING"
 	ContainerFleetStatusDeleting   ContainerFleetStatus = "DELETING"
+	ContainerFleetStatusExpired    ContainerFleetStatus = "EXPIRED"
 )
 
 // Values returns all known values for ContainerFleetStatus. Note that this can be
@@ -283,6 +286,7 @@ func (ContainerFleetStatus) Values() []ContainerFleetStatus {
 		"ACTIVE",
 		"UPDATING",
 		"DELETING",
+		"EXPIRED",
 	}
 }
 
@@ -942,6 +946,27 @@ const (
 	EC2InstanceTypeR7a24xlarge   EC2InstanceType = "r7a.24xlarge"
 	EC2InstanceTypeR7a32xlarge   EC2InstanceType = "r7a.32xlarge"
 	EC2InstanceTypeR7a48xlarge   EC2InstanceType = "r7a.48xlarge"
+	EC2InstanceTypeC8aMedium     EC2InstanceType = "c8a.medium"
+	EC2InstanceTypeC8aLarge      EC2InstanceType = "c8a.large"
+	EC2InstanceTypeC8aXlarge     EC2InstanceType = "c8a.xlarge"
+	EC2InstanceTypeC8a2xlarge    EC2InstanceType = "c8a.2xlarge"
+	EC2InstanceTypeC8iLarge      EC2InstanceType = "c8i.large"
+	EC2InstanceTypeC8iXlarge     EC2InstanceType = "c8i.xlarge"
+	EC2InstanceTypeC8i2xlarge    EC2InstanceType = "c8i.2xlarge"
+	EC2InstanceTypeC9gMedium     EC2InstanceType = "c9g.medium"
+	EC2InstanceTypeC9gLarge      EC2InstanceType = "c9g.large"
+	EC2InstanceTypeC9gXlarge     EC2InstanceType = "c9g.xlarge"
+	EC2InstanceTypeC9g2xlarge    EC2InstanceType = "c9g.2xlarge"
+	EC2InstanceTypeM8aMedium     EC2InstanceType = "m8a.medium"
+	EC2InstanceTypeM8aLarge      EC2InstanceType = "m8a.large"
+	EC2InstanceTypeM8aXlarge     EC2InstanceType = "m8a.xlarge"
+	EC2InstanceTypeM8a2xlarge    EC2InstanceType = "m8a.2xlarge"
+	EC2InstanceTypeM8iLarge      EC2InstanceType = "m8i.large"
+	EC2InstanceTypeM8iXlarge     EC2InstanceType = "m8i.xlarge"
+	EC2InstanceTypeM8i2xlarge    EC2InstanceType = "m8i.2xlarge"
+	EC2InstanceTypeM9gLarge      EC2InstanceType = "m9g.large"
+	EC2InstanceTypeM9gXlarge     EC2InstanceType = "m9g.xlarge"
+	EC2InstanceTypeM9g2xlarge    EC2InstanceType = "m9g.2xlarge"
 )
 
 // Values returns all known values for EC2InstanceType. Note that this can be
@@ -1455,6 +1480,27 @@ func (EC2InstanceType) Values() []EC2InstanceType {
 		"r7a.24xlarge",
 		"r7a.32xlarge",
 		"r7a.48xlarge",
+		"c8a.medium",
+		"c8a.large",
+		"c8a.xlarge",
+		"c8a.2xlarge",
+		"c8i.large",
+		"c8i.xlarge",
+		"c8i.2xlarge",
+		"c9g.medium",
+		"c9g.large",
+		"c9g.xlarge",
+		"c9g.2xlarge",
+		"m8a.medium",
+		"m8a.large",
+		"m8a.xlarge",
+		"m8a.2xlarge",
+		"m8i.large",
+		"m8i.xlarge",
+		"m8i.2xlarge",
+		"m9g.large",
+		"m9g.xlarge",
+		"m9g.2xlarge",
 	}
 }
 
@@ -1465,6 +1511,7 @@ const (
 	EventCodeGenericEvent                               EventCode = "GENERIC_EVENT"
 	EventCodeFleetCreated                               EventCode = "FLEET_CREATED"
 	EventCodeFleetDeleted                               EventCode = "FLEET_DELETED"
+	EventCodeFleetExpired                               EventCode = "FLEET_EXPIRED"
 	EventCodeFleetScalingEvent                          EventCode = "FLEET_SCALING_EVENT"
 	EventCodeFleetStateDownloading                      EventCode = "FLEET_STATE_DOWNLOADING"
 	EventCodeFleetStateValidating                       EventCode = "FLEET_STATE_VALIDATING"
@@ -1529,6 +1576,7 @@ func (EventCode) Values() []EventCode {
 		"GENERIC_EVENT",
 		"FLEET_CREATED",
 		"FLEET_DELETED",
+		"FLEET_EXPIRED",
 		"FLEET_SCALING_EVENT",
 		"FLEET_STATE_DOWNLOADING",
 		"FLEET_STATE_VALIDATING",
@@ -1635,6 +1683,7 @@ const (
 	FleetStatusError       FleetStatus = "ERROR"
 	FleetStatusTerminated  FleetStatus = "TERMINATED"
 	FleetStatusNotFound    FleetStatus = "NOT_FOUND"
+	FleetStatusExpired     FleetStatus = "EXPIRED"
 )
 
 // Values returns all known values for FleetStatus. Note that this can be expanded
@@ -1653,6 +1702,7 @@ func (FleetStatus) Values() []FleetStatus {
 		"ERROR",
 		"TERMINATED",
 		"NOT_FOUND",
+		"EXPIRED",
 	}
 }
 
@@ -2191,6 +2241,95 @@ func (IpProtocol) Values() []IpProtocol {
 	return []IpProtocol{
 		"TCP",
 		"UDP",
+	}
+}
+
+type LinuxCapability string
+
+// Enum values for LinuxCapability
+const (
+	LinuxCapabilityAuditControl   LinuxCapability = "AUDIT_CONTROL"
+	LinuxCapabilityAuditWrite     LinuxCapability = "AUDIT_WRITE"
+	LinuxCapabilityBlockSuspend   LinuxCapability = "BLOCK_SUSPEND"
+	LinuxCapabilityChown          LinuxCapability = "CHOWN"
+	LinuxCapabilityDacOverride    LinuxCapability = "DAC_OVERRIDE"
+	LinuxCapabilityDacReadSearch  LinuxCapability = "DAC_READ_SEARCH"
+	LinuxCapabilityFowner         LinuxCapability = "FOWNER"
+	LinuxCapabilityFsetid         LinuxCapability = "FSETID"
+	LinuxCapabilityIpcLock        LinuxCapability = "IPC_LOCK"
+	LinuxCapabilityIpcOwner       LinuxCapability = "IPC_OWNER"
+	LinuxCapabilityKill           LinuxCapability = "KILL"
+	LinuxCapabilityLease          LinuxCapability = "LEASE"
+	LinuxCapabilityLinuxImmutable LinuxCapability = "LINUX_IMMUTABLE"
+	LinuxCapabilityMacAdmin       LinuxCapability = "MAC_ADMIN"
+	LinuxCapabilityMacOverride    LinuxCapability = "MAC_OVERRIDE"
+	LinuxCapabilityMknod          LinuxCapability = "MKNOD"
+	LinuxCapabilityNetAdmin       LinuxCapability = "NET_ADMIN"
+	LinuxCapabilityNetBindService LinuxCapability = "NET_BIND_SERVICE"
+	LinuxCapabilityNetBroadcast   LinuxCapability = "NET_BROADCAST"
+	LinuxCapabilityNetRaw         LinuxCapability = "NET_RAW"
+	LinuxCapabilitySetfcap        LinuxCapability = "SETFCAP"
+	LinuxCapabilitySetgid         LinuxCapability = "SETGID"
+	LinuxCapabilitySetpcap        LinuxCapability = "SETPCAP"
+	LinuxCapabilitySetuid         LinuxCapability = "SETUID"
+	LinuxCapabilitySysAdmin       LinuxCapability = "SYS_ADMIN"
+	LinuxCapabilitySysBoot        LinuxCapability = "SYS_BOOT"
+	LinuxCapabilitySysChroot      LinuxCapability = "SYS_CHROOT"
+	LinuxCapabilitySysModule      LinuxCapability = "SYS_MODULE"
+	LinuxCapabilitySysNice        LinuxCapability = "SYS_NICE"
+	LinuxCapabilitySysPacct       LinuxCapability = "SYS_PACCT"
+	LinuxCapabilitySysPtrace      LinuxCapability = "SYS_PTRACE"
+	LinuxCapabilitySysRawio       LinuxCapability = "SYS_RAWIO"
+	LinuxCapabilitySysResource    LinuxCapability = "SYS_RESOURCE"
+	LinuxCapabilitySysTime        LinuxCapability = "SYS_TIME"
+	LinuxCapabilitySysTtyConfig   LinuxCapability = "SYS_TTY_CONFIG"
+	LinuxCapabilitySyslog         LinuxCapability = "SYSLOG"
+	LinuxCapabilityWakeAlarm      LinuxCapability = "WAKE_ALARM"
+)
+
+// Values returns all known values for LinuxCapability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LinuxCapability) Values() []LinuxCapability {
+	return []LinuxCapability{
+		"AUDIT_CONTROL",
+		"AUDIT_WRITE",
+		"BLOCK_SUSPEND",
+		"CHOWN",
+		"DAC_OVERRIDE",
+		"DAC_READ_SEARCH",
+		"FOWNER",
+		"FSETID",
+		"IPC_LOCK",
+		"IPC_OWNER",
+		"KILL",
+		"LEASE",
+		"LINUX_IMMUTABLE",
+		"MAC_ADMIN",
+		"MAC_OVERRIDE",
+		"MKNOD",
+		"NET_ADMIN",
+		"NET_BIND_SERVICE",
+		"NET_BROADCAST",
+		"NET_RAW",
+		"SETFCAP",
+		"SETGID",
+		"SETPCAP",
+		"SETUID",
+		"SYS_ADMIN",
+		"SYS_BOOT",
+		"SYS_CHROOT",
+		"SYS_MODULE",
+		"SYS_NICE",
+		"SYS_PACCT",
+		"SYS_PTRACE",
+		"SYS_RAWIO",
+		"SYS_RESOURCE",
+		"SYS_TIME",
+		"SYS_TTY_CONFIG",
+		"SYSLOG",
+		"WAKE_ALARM",
 	}
 }
 

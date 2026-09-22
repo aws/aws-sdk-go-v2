@@ -42,3 +42,47 @@ func ExampleParticipatingResourceID_outputUsage() {
 }
 
 var _ *string
+
+func ExampleRecoveryPlanExecutionStepConfiguration_outputUsage() {
+	var union types.RecoveryPlanExecutionStepConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecoveryPlanExecutionStepConfigurationMemberExecutionServerStepConfiguration:
+		_ = v.Value // Value is types.ExecutionServerStepConfiguration
+
+	case *types.RecoveryPlanExecutionStepConfigurationMemberWaitStepConfiguration:
+		_ = v.Value // Value is types.WaitStepConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.WaitStepConfiguration
+var _ *types.ExecutionServerStepConfiguration
+
+func ExampleRecoveryPlanStepConfiguration_outputUsage() {
+	var union types.RecoveryPlanStepConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecoveryPlanStepConfigurationMemberServerStepConfiguration:
+		_ = v.Value // Value is types.ServerStepConfiguration
+
+	case *types.RecoveryPlanStepConfigurationMemberWaitStepConfiguration:
+		_ = v.Value // Value is types.WaitStepConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.WaitStepConfiguration
+var _ *types.ServerStepConfiguration

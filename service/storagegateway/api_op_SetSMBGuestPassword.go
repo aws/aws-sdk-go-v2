@@ -4,10 +4,9 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the password for the guest user smbguest . The smbguest user is the user
@@ -45,6 +44,21 @@ type SetSMBGuestPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSMBGuestPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSMBGuestPasswordInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSMBGuestPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.SetSMBGuestPasswordInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.SetSMBGuestPasswordInput_Password, *v.Password)
+	}
+}
+
 type SetSMBGuestPasswordOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
@@ -57,77 +71,48 @@ type SetSMBGuestPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetSMBGuestPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetSMBGuestPasswordOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetSMBGuestPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.SetSMBGuestPasswordOutput_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *SetSMBGuestPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetSMBGuestPasswordOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetSMBGuestPasswordOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.SetSMBGuestPasswordOutput_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetSMBGuestPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSMBGuestPassword, schemas.SetSMBGuestPasswordInput, schemas.SetSMBGuestPasswordOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetSMBGuestPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetSMBGuestPassword, schemas.SetSMBGuestPasswordInput, schemas.SetSMBGuestPasswordOutput), output: &SetSMBGuestPasswordOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetSMBGuestPassword{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SetSMBGuestPassword"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSetSMBGuestPasswordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetSMBGuestPassword(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +127,8 @@ func (c *Client) addOperationSetSMBGuestPasswordMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSetSMBGuestPassword(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SetSMBGuestPassword",
-	}
 }

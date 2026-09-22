@@ -4,11 +4,10 @@ package resourceexplorer2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies some of the details of a view. You can change the filter string and
@@ -65,6 +64,39 @@ type UpdateViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateViewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.UpdateViewInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIncludedPropertyList(s, schemas.UpdateViewInput_IncludedProperties, v.IncludedProperties)
+	if v.ViewArn != nil {
+		s.WriteString(schemas.UpdateViewInput_ViewArn, *v.ViewArn)
+	}
+}
+func (v *UpdateViewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateViewInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateViewInput_Filters:
+			v.Filters = &types.SearchFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.UpdateViewInput_IncludedProperties:
+			return deserializeIncludedPropertyList(d, schemas.UpdateViewInput_IncludedProperties, &v.IncludedProperties)
+		case schemas.UpdateViewInput_ViewArn:
+			v.ViewArn = new(string)
+			return d.ReadString(schemas.UpdateViewInput_ViewArn, v.ViewArn)
+		}
+		return nil
+	})
+}
+
 type UpdateViewOutput struct {
 
 	// Details about the view that you changed with this operation.
@@ -76,77 +108,50 @@ type UpdateViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateViewOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.View != nil {
+		s.WriteStruct(schemas.UpdateViewOutput_View)
+		v.View.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateViewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateViewOutput_View:
+			v.View = &types.View{}
+			return v.View.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateView, schemas.UpdateViewInput, schemas.UpdateViewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateView, schemas.UpdateViewInput, schemas.UpdateViewOutput), output: &UpdateViewOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateView{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateView"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateViewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateView(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +166,8 @@ func (c *Client) addOperationUpdateViewMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateView(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateView",
-	}
 }

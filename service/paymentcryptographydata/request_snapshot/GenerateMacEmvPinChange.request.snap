@@ -1,0 +1,5 @@
+POST /macemvpinchange/generate
+
+Content-Type: application/json
+
+{"DerivationMethodAttributes":{"EmvCommon":{"ApplicationCryptogram":"__ApplicationCryptogram__","MajorKeyDerivationMode":"EMV_OPTION_A","Mode":"ECB","PanSequenceNumber":"__PanSequenceNumber__","PinBlockLengthPosition":"NONE","PinBlockPaddingType":"NO_PADDING","PrimaryAccountNumber":"__PrimaryAccountNumber__"}},"MessageData":"__MessageData__","NewEncryptedPinBlock":"__NewEncryptedPinBlock__","NewPinPekIdentifier":"__NewPinPekIdentifier__","PinBlockFormat":"ISO_FORMAT_0","SecureMessagingConfidentialityKeyIdentifier":"__SecureMessagingConfidentialityKeyIdentifier__","SecureMessagingIntegrityKeyIdentifier":"__SecureMessagingIntegrityKeyIdentifier__"}

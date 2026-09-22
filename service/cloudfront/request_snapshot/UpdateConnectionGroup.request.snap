@@ -1,0 +1,6 @@
+PUT /2020-05-31/connection-group/__Id__
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+
+<UpdateConnectionGroupRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><AnycastIpListId>__AnycastIpListId__</AnycastIpListId><Enabled>true</Enabled><Ipv6Enabled>true</Ipv6Enabled></UpdateConnectionGroupRequest>

@@ -276,6 +276,105 @@
                 "smithy.api#documentation": "Aac Vbr Quality"
             }
         },
+        "com.amazonaws.medialive#AbWatermarkerIdLength": {
+            "type": "enum",
+            "members": {
+                "ID_2048": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ID_2048"
+                    }
+                },
+                "ID_512": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ID_512"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Ab Watermarker Id Length"
+            }
+        },
+        "com.amazonaws.medialive#AbWatermarkingCustomProfile": {
+            "type": "structure",
+            "members": {
+                "EmbeddingFrequency": {
+                    "target": "com.amazonaws.medialive#__doubleMin250Max5000",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The frequency with which watermarks will be embedded, in milliseconds.",
+                        "smithy.api#jsonName": "embeddingFrequency",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SceneCut": {
+                    "target": "com.amazonaws.medialive#__doubleMinNegative1Max5",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The number of frames after scene-cut to embed the watermark.",
+                        "smithy.api#jsonName": "sceneCut",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetPsnr": {
+                    "target": "com.amazonaws.medialive#__doubleMin32Max46",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The target PSNR of the watermarked frame",
+                        "smithy.api#jsonName": "targetPsnr",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The vendor-specified custom profile options"
+            }
+        },
+        "com.amazonaws.medialive#AbWatermarkingProfile": {
+            "type": "enum",
+            "members": {
+                "CAMCORDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CAMCORDING"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                },
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT"
+                    }
+                },
+                "HQ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HQ"
+                    }
+                },
+                "MEZZANINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEZZANINE"
+                    }
+                },
+                "ROBUST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROBUST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Ab Watermarking Profile"
+            }
+        },
         "com.amazonaws.medialive#Ac3AttenuationControl": {
             "type": "enum",
             "members": {
@@ -1095,6 +1194,28 @@
                 "smithy.api#documentation": "Audio Dolby EDecode"
             }
         },
+        "com.amazonaws.medialive#AudioFeedInput": {
+            "type": "structure",
+            "members": {
+                "AudioSelectorName": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the audio selector in the channel that will be sent to the Elemental Inference feed input.",
+                        "smithy.api#jsonName": "audioSelectorName"
+                    }
+                },
+                "FeedInput": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the feed input on the Elemental Inference feed that will receive the audio from the specified audio selector.",
+                        "smithy.api#jsonName": "feedInput"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Maps an audio selector in the channel to a feed input on the associated Elemental Inference feed."
+            }
+        },
         "com.amazonaws.medialive#AudioHlsRenditionSelection": {
             "type": "structure",
             "members": {
@@ -1179,6 +1300,18 @@
                     "traits": {
                         "smithy.api#enumValue": "ITU_1770_2"
                     }
+                },
+                "ITU_1770_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_1770_3"
+                    }
+                },
+                "ITU_1770_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITU_1770_4"
+                    }
                 }
             },
             "traits": {
@@ -1199,13 +1332,33 @@
                 "smithy.api#documentation": "Audio Normalization Algorithm Control"
             }
         },
+        "com.amazonaws.medialive#AudioNormalizationPeakCalculation": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "TRUE_PEAK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRUE_PEAK"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Audio Normalization Peak Calculation"
+            }
+        },
         "com.amazonaws.medialive#AudioNormalizationSettings": {
             "type": "structure",
             "members": {
                 "Algorithm": {
                     "target": "com.amazonaws.medialive#AudioNormalizationAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "Audio normalization algorithm to use. itu17701 conforms to the CALM Act specification, itu17702 conforms to the EBU R-128 specification.",
+                        "smithy.api#documentation": "Choose one of the following audio normalization algorithms:\n\nITU-R BS.1770-1: Ungated loudness. A measurement of ungated average loudness for an entire piece of content,\nsuitable for measurement of short-form content under ATSC recommendation A/85. Supports up to 5.1 audio channels.\n\nITU-R BS.1770-2: Gated loudness. A measurement of gated average loudness compliant with the requirements of\nEBU-R128. Supports up to 5.1 audio channels.\n\nITU-R BS.1770-3: Modified peak. The same loudness measurement algorithm as 1770-2, with an updated true peak\nmeasurement.\n\nITU-R BS.1770-4: Higher channel count. Allows for more audio channels than the other algorithms, including\nconfigurations such as 7.1.",
                         "smithy.api#jsonName": "algorithm"
                     }
                 },
@@ -1221,6 +1374,20 @@
                     "traits": {
                         "smithy.api#documentation": "Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm.  The CALM Act recommends a target of -24 LKFS. The EBU R-128 specification recommends a target of -23 LKFS.",
                         "smithy.api#jsonName": "targetLkfs"
+                    }
+                },
+                "PeakCalculation": {
+                    "target": "com.amazonaws.medialive#AudioNormalizationPeakCalculation",
+                    "traits": {
+                        "smithy.api#documentation": "If set to TRUE_PEAK, calculate the TruePeak for each output's audio track loudness.",
+                        "smithy.api#jsonName": "peakCalculation"
+                    }
+                },
+                "PeakLimiterThreshold": {
+                    "target": "com.amazonaws.medialive#__doubleMinNegative8Max0",
+                    "traits": {
+                        "smithy.api#documentation": "Peak limiter threshold in decibels relative to true peak (dBTP) if TRUE_PEAK is enabled.\nIf TRUE_PEAK is not enabled a full scale (dbFS) value is used.\nThe peak inter-audio sample loudness in your output will be limited to the value that you specify,\nwithout affecting the overall target LKFS. Leave blank to use the default value 0.",
+                        "smithy.api#jsonName": "peakLimiterThreshold"
                     }
                 }
             },
@@ -1316,6 +1483,37 @@
                 "smithy.api#documentation": "Audio Only Hls Track Type"
             }
         },
+        "com.amazonaws.medialive#AudioPid": {
+            "type": "structure",
+            "members": {
+                "DolbyEDecode": {
+                    "target": "com.amazonaws.medialive#AudioDolbyEDecode",
+                    "traits": {
+                        "smithy.api#documentation": "Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337.\nWhen using the 'pids' array, if this field is not specified and Dolby E content is present,\nthe decoder will extract the specified program. To maintain legacy behavior (allPrograms),\nexplicitly set programSelection to \"allChannels\".",
+                        "smithy.api#jsonName": "dolbyEDecode"
+                    }
+                },
+                "Pid": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max8191",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "PID value from within a source.",
+                        "smithy.api#jsonName": "pid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PremixSettings": {
+                    "target": "com.amazonaws.medialive#AudioPreMixerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Optional audio pre-mixer settings for this PID.\nWhen specified, allows per-PID audio processing including channel remixing,\ngain adjustment, and loudness normalization before interleaving.",
+                        "smithy.api#jsonName": "premixSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Represents a single PID value for audio selection with optional pre-mixer settings"
+            }
+        },
         "com.amazonaws.medialive#AudioPidSelection": {
             "type": "structure",
             "members": {
@@ -1327,10 +1525,53 @@
                         "smithy.api#jsonName": "pid",
                         "smithy.api#required": {}
                     }
+                },
+                "Pids": {
+                    "target": "com.amazonaws.medialive#__listOfAudioPid",
+                    "traits": {
+                        "smithy.api#documentation": "Selects one or more unique PIDs from within a source.\nWhen using 'pids', you can specify per-PID audio pre-mixer settings.",
+                        "smithy.api#jsonName": "pids"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Audio Pid Selection"
+            }
+        },
+        "com.amazonaws.medialive#AudioPreMixerSettings": {
+            "type": "structure",
+            "members": {
+                "AudioNormalizationSettings": {
+                    "target": "com.amazonaws.medialive#AudioNormalizationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Audio normalization settings for loudness control.\nWhen specified, audio loudness will be normalized according to the chosen algorithm.",
+                        "smithy.api#jsonName": "audioNormalizationSettings"
+                    }
+                },
+                "Channels": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max16",
+                    "traits": {
+                        "smithy.api#documentation": "Number of audio channels.\nIf specified, the audio will be remixed to match this channel count.\nIgnored if remixSettings is specified.",
+                        "smithy.api#jsonName": "channels"
+                    }
+                },
+                "GainDb": {
+                    "target": "com.amazonaws.medialive#__doubleMinNegative60Max60",
+                    "traits": {
+                        "smithy.api#documentation": "Gain adjustment in dB to apply.\nRange: -60 to +60 dB",
+                        "smithy.api#jsonName": "gainDb"
+                    }
+                },
+                "RemixSettings": {
+                    "target": "com.amazonaws.medialive#RemixSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings that control how input audio channels are remixed.\nWhen specified, allows fine-grained control over channel mapping and gain levels.\nTakes precedence over the 'channels' setting.",
+                        "smithy.api#jsonName": "remixSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Audio pre-mixer settings for normalizing audio before interleaving.\nThese settings can be applied to individual PIDs or tracks before they are combined."
             }
         },
         "com.amazonaws.medialive#AudioSelector": {
@@ -1424,10 +1665,17 @@
                         "smithy.api#jsonName": "track",
                         "smithy.api#required": {}
                     }
+                },
+                "PremixSettings": {
+                    "target": "com.amazonaws.medialive#AudioPreMixerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Optional audio pre-mixer settings for this track.\nWhen specified, allows per-track audio processing including channel remixing,\ngain adjustment, and loudness normalization before interleaving.",
+                        "smithy.api#jsonName": "premixSettings"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Audio Track"
+                "smithy.api#documentation": "Represents a single audio track for selection with optional pre-mixer settings"
             }
         },
         "com.amazonaws.medialive#AudioTrackSelection": {
@@ -3574,10 +3822,36 @@
                     "traits": {
                         "smithy.api#jsonName": "teletextSourceSettings"
                     }
+                },
+                "SmartSubtitleSourceSettings": {
+                    "target": "com.amazonaws.medialive#SmartSubtitleSourceSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "smartSubtitleSourceSettings"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Caption Selector Settings"
+            }
+        },
+        "com.amazonaws.medialive#CaptionSynchronizationMode": {
+            "type": "enum",
+            "members": {
+                "NO_VIDEO_DELAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_VIDEO_DELAY"
+                    }
+                },
+                "VIDEO_ALIGNED_CAPTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_ALIGNED_CAPTIONS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Controls how MediaLive synchronizes Elemental Inference generated subtitles with video output.\n\nvideo_aligned_captions - MediaLive delays video to ensure captions are synchronized with\n     audio and video.\nno_video_delay - MediaLive does not delay video for caption alignment. Captions output\n     timing is adjusted to align with video as captions become available."
             }
         },
         "com.amazonaws.medialive#CdiInputResolution": {
@@ -4924,6 +5198,76 @@
                 "smithy.api#documentation": "Cmaf Id3 Behavior"
             }
         },
+        "com.amazonaws.medialive#CmafIngestAbWatermarkerIrdetoSettings": {
+            "type": "structure",
+            "members": {
+                "AdditionalDestinationsAlternateDestinations": {
+                    "target": "com.amazonaws.medialive#__listOfOutputLocationRef",
+                    "traits": {
+                        "smithy.api#documentation": "The \"B\" pipeline renditions for the additional destinations.",
+                        "smithy.api#jsonName": "additionalDestinationsAlternateDestinations"
+                    }
+                },
+                "AlternateDestination": {
+                    "target": "com.amazonaws.medialive#OutputLocationRef",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The \"B\" pipeline renditions for the main destination.",
+                        "smithy.api#jsonName": "alternateDestination",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomProfile": {
+                    "target": "com.amazonaws.medialive#AbWatermarkingCustomProfile",
+                    "traits": {
+                        "smithy.api#documentation": "The vendor-provided custom profile values.",
+                        "smithy.api#jsonName": "customProfile"
+                    }
+                },
+                "License": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Secrets Manager secret containing the license file.",
+                        "smithy.api#jsonName": "license"
+                    }
+                },
+                "OperatorId": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max511",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The vendor-provided Operator ID.",
+                        "smithy.api#jsonName": "operatorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolyPeriod": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max1000",
+                    "traits": {
+                        "smithy.api#documentation": "The number of segments per watermarking bit. The total duration of the watermarking bit\nshould be the LCM (least common multiple) of all segments sizes emitted by the downstream packager.",
+                        "smithy.api#jsonName": "polyPeriod"
+                    }
+                },
+                "Profile": {
+                    "target": "com.amazonaws.medialive#AbWatermarkingProfile",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The vendor-provided profile choice.",
+                        "smithy.api#jsonName": "profile",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatermarkIdLength": {
+                    "target": "com.amazonaws.medialive#AbWatermarkerIdLength",
+                    "traits": {
+                        "smithy.api#documentation": "The number of bits that compose the watermarking identifier to be embedded.",
+                        "smithy.api#jsonName": "watermarkIdLength"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A/B Watermarker settings for CMAF Ingest output groups."
+            }
+        },
         "com.amazonaws.medialive#CmafIngestCaptionLanguageMapping": {
             "type": "structure",
             "members": {
@@ -4972,7 +5316,7 @@
                 "Scte35Type": {
                     "target": "com.amazonaws.medialive#Scte35Type",
                     "traits": {
-                        "smithy.api#documentation": "Type of scte35 track to add. none or scte35WithoutSegmentation",
+                        "smithy.api#documentation": "SCTE-35 insertion type. Option \"none\" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option \"scte35WithoutIdr\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option \"scte35WithoutSegmentation\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame so that a downstream re-packager might split the segment there, but MediaLive itself will not introduce a new segment boundary there.",
                         "smithy.api#jsonName": "scte35Type"
                     }
                 },
@@ -5073,6 +5417,13 @@
                         "smithy.api#documentation": "Optional an array of additional destinational HTTP destinations for the OutputGroup outputs",
                         "smithy.api#jsonName": "additionalDestinations"
                     }
+                },
+                "WatermarkingSettings": {
+                    "target": "com.amazonaws.medialive#CmafIngestWatermarkingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the type of watermarking technology to use.",
+                        "smithy.api#jsonName": "watermarkingSettings"
+                    }
                 }
             },
             "traits": {
@@ -5112,6 +5463,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "Cmaf Ingest Segment Length Units"
+            }
+        },
+        "com.amazonaws.medialive#CmafIngestWatermarkingSettings": {
+            "type": "structure",
+            "members": {
+                "CmafIngestAbWatermarkerIrdetoSettings": {
+                    "target": "com.amazonaws.medialive#CmafIngestAbWatermarkerIrdetoSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "cmafIngestAbWatermarkerIrdetoSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A/B Watermarker settings for CMAF Ingest output groups."
             }
         },
         "com.amazonaws.medialive#CmafKLVBehavior": {
@@ -10098,7 +10463,7 @@
                         "minDelay": 5
                     },
                     "ChannelStopped": {
-                        "documentation": "Wait until a channel has is stopped",
+                        "documentation": "Wait until a channel is not running",
                         "acceptors": [
                             {
                                 "state": "success",
@@ -10124,6 +10489,32 @@
                                 "state": "retry",
                                 "matcher": {
                                     "errorType": "InternalServerErrorException"
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "State",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "State",
+                                        "expected": "DELETED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "NotFoundException"
                                 }
                             }
                         ],
@@ -10886,6 +11277,20 @@
                     "traits": {
                         "smithy.api#documentation": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
                         "smithy.api#jsonName": "feedArn"
+                    }
+                },
+                "AudioFeedInputs": {
+                    "target": "com.amazonaws.medialive#__listOfAudioFeedInput",
+                    "traits": {
+                        "smithy.api#documentation": "A list of audio feed inputs that map audio selectors in the channel to feed inputs on the associated Elemental Inference feed.",
+                        "smithy.api#jsonName": "audioFeedInputs"
+                    }
+                },
+                "EnrichmentMethods": {
+                    "target": "com.amazonaws.medialive#__listOfEnrichmentMethod",
+                    "traits": {
+                        "smithy.api#documentation": "The set of Contextual Metadata Enrichment methods enabled for this channel. Each method represents a specific way the channel uses the inference feed to augment its output with contextual metadata.",
+                        "smithy.api#jsonName": "enrichmentMethods"
                     }
                 }
             },
@@ -14654,6 +15059,21 @@
                 "smithy.api#documentation": "Ebu Tt DFill Line Gap Control"
             }
         },
+        "com.amazonaws.medialive#EmbeddedCaptionPositionSettings": {
+            "type": "structure",
+            "members": {
+                "YPositionLine": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max15",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the vertical position of the caption as a row counted from the top of the output. Row 1 is the topmost row. Acceptable values are 1 through 15.",
+                        "smithy.api#jsonName": "yPositionLine"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Embedded Caption Position Settings"
+            }
+        },
         "com.amazonaws.medialive#EmbeddedConvert608To708": {
             "type": "enum",
             "members": {
@@ -14676,9 +15096,44 @@
         },
         "com.amazonaws.medialive#EmbeddedDestinationSettings": {
             "type": "structure",
-            "members": {},
+            "members": {
+                "Position": {
+                    "target": "com.amazonaws.medialive#EmbeddedCaptionPositionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the position of the output captions. Applies only when styleControl is set to manual.",
+                        "smithy.api#jsonName": "position"
+                    }
+                },
+                "StyleControl": {
+                    "target": "com.amazonaws.medialive#EmbeddedDestinationStyleControl",
+                    "traits": {
+                        "smithy.api#documentation": "Controls the source of position and style information for the output captions.\n\n- \"passthrough\": Carry the caption position and style from the source captions. When the source captions are embedded, SCTE-20, or ancillary, the position and style are preserved exactly. When the source captions are another format, the position and any supported style are carried over.\n- \"manual\": Applies the specified styling and positioning. All other styling and positioning is given default values.",
+                        "smithy.api#jsonName": "styleControl"
+                    }
+                }
+            },
             "traits": {
                 "smithy.api#documentation": "Embedded Destination Settings"
+            }
+        },
+        "com.amazonaws.medialive#EmbeddedDestinationStyleControl": {
+            "type": "enum",
+            "members": {
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                },
+                "PASSTHROUGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSTHROUGH"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Controls the source of position and style information for embedded outputs.\n- \"passthrough\": Carry the caption position and style from the source captions. When the source captions are embedded, SCTE-20, or ancillary, the position and style are preserved exactly. When the source captions are another format, the position and any supported style are carried over.\n- \"manual\": Use the position specified in the destination's position field."
             }
         },
         "com.amazonaws.medialive#EmbeddedPlusScte20DestinationSettings": {
@@ -14853,6 +15308,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "Encoder Settings"
+            }
+        },
+        "com.amazonaws.medialive#EnrichmentMethod": {
+            "type": "enum",
+            "members": {
+                "SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A Contextual Metadata Enrichment method. Each value selects a strategy for enriching the channel's output with contextual metadata derived from the Elemental Inference feed. SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS enriches outbound SCTE-35 messages with query parameters that downstream systems can use to call the Elemental Inference GetMetadata API."
             }
         },
         "com.amazonaws.medialive#EpochLockingSettings": {
@@ -20009,6 +20478,20 @@
                     "traits": {
                         "smithy.api#documentation": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
                         "smithy.api#jsonName": "feedArn"
+                    }
+                },
+                "AudioFeedInputs": {
+                    "target": "com.amazonaws.medialive#__listOfAudioFeedInput",
+                    "traits": {
+                        "smithy.api#documentation": "A list of audio feed inputs that map audio selectors in the channel to feed inputs on the associated Elemental Inference feed.",
+                        "smithy.api#jsonName": "audioFeedInputs"
+                    }
+                },
+                "EnrichmentMethods": {
+                    "target": "com.amazonaws.medialive#__listOfEnrichmentMethod",
+                    "traits": {
+                        "smithy.api#documentation": "The set of Contextual Metadata Enrichment methods enabled for this channel. Each method represents a specific way the channel will use the inference feed to augment its output with contextual metadata. An empty array (or omitting the field) disables enrichment. Order is not significant; duplicate values are not permitted.",
+                        "smithy.api#jsonName": "enrichmentMethods"
                     }
                 }
             },
@@ -25182,6 +25665,12 @@
                     "traits": {
                         "smithy.api#enumValue": "PASSTHROUGH"
                     }
+                },
+                "SCTE_35_WITHOUT_IDR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE_35_WITHOUT_IDR"
+                    }
                 }
             },
             "traits": {
@@ -25524,7 +26013,7 @@
                 "Scte35Control": {
                     "target": "com.amazonaws.medialive#M2tsScte35Control",
                     "traits": {
-                        "smithy.api#documentation": "Optionally pass SCTE-35 signals from the input source to this output.",
+                        "smithy.api#documentation": "SCTE-35 control. Option \"none\" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option \"scte35WithoutIdr\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option \"passthrough\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame, and MediaLive itself will introduce a new segment boundary there.",
                         "smithy.api#jsonName": "scte35Control"
                     }
                 },
@@ -26573,6 +27062,194 @@
                 ],
                 "smithy.api#documentation": "API for AWS Elemental MediaLive",
                 "smithy.api#title": "AWS Elemental MediaLive",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medialive-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medialive-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medialive.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://medialive.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -27453,6 +28130,76 @@
                 "smithy.api#documentation": "Media Package Output Settings"
             }
         },
+        "com.amazonaws.medialive#MediaPackageV2AbWatermarkerIrdetoSettings": {
+            "type": "structure",
+            "members": {
+                "AdditionalDestinationsAlternateDestinations": {
+                    "target": "com.amazonaws.medialive#__listOfOutputLocationRef",
+                    "traits": {
+                        "smithy.api#documentation": "The \"B\" pipeline renditions for the additional destinations.",
+                        "smithy.api#jsonName": "additionalDestinationsAlternateDestinations"
+                    }
+                },
+                "AlternateDestination": {
+                    "target": "com.amazonaws.medialive#OutputLocationRef",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The \"B\" pipeline renditions for the main destination.",
+                        "smithy.api#jsonName": "alternateDestination",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomProfile": {
+                    "target": "com.amazonaws.medialive#AbWatermarkingCustomProfile",
+                    "traits": {
+                        "smithy.api#documentation": "The vendor-provided custom profile values.",
+                        "smithy.api#jsonName": "customProfile"
+                    }
+                },
+                "License": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Secrets Manager secret containing the license file.",
+                        "smithy.api#jsonName": "license"
+                    }
+                },
+                "OperatorId": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max511",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The vendor-provided Operator ID.",
+                        "smithy.api#jsonName": "operatorId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PolyPeriod": {
+                    "target": "com.amazonaws.medialive#__integerMin1Max1000",
+                    "traits": {
+                        "smithy.api#documentation": "The number of segments per watermarking bit. The total duration of the watermarking bit\nshould be the LCM (least common multiple) of all segments sizes emitted by the downstream packager.",
+                        "smithy.api#jsonName": "polyPeriod"
+                    }
+                },
+                "Profile": {
+                    "target": "com.amazonaws.medialive#AbWatermarkingProfile",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "The vendor-provided profile choice.",
+                        "smithy.api#jsonName": "profile",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WatermarkIdLength": {
+                    "target": "com.amazonaws.medialive#AbWatermarkerIdLength",
+                    "traits": {
+                        "smithy.api#documentation": "The number of bits that compose the watermarking identifier to be embedded.",
+                        "smithy.api#jsonName": "watermarkIdLength"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A/B Watermarker settings for MediaPackage V2 output groups."
+            }
+        },
         "com.amazonaws.medialive#MediaPackageV2DestinationSettings": {
             "type": "structure",
             "members": {
@@ -27482,6 +28229,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specifies whether MediaPackage should set this output as the default rendition in the HLS manifest. YES means this must be the default. NO means this should never be the default. OMIT means MediaPackage decides what to set on this rendition.\nWhen you consider all the renditions, follow these guidelines. You can set zero or one renditions to YES. You can set zero or more renditions to NO, but you can't set all renditions to NO. You can set zero, some, or all to OMIT.",
                         "smithy.api#jsonName": "hlsDefault"
+                    }
+                },
+                "OutputUsage": {
+                    "target": "com.amazonaws.medialive#__listOfOutputUsage",
+                    "traits": {
+                        "smithy.api#documentation": "List of usage tags declaring how this MediaPackage V2 output is used. Currently these are all multiview-related (multiviewPrimaryView, multiviewSecondaryView, multiviewEqualSizeView) and enable multiview validations and augmentations to help ensure proper multiview configuration and compatibility with MediaPackage. Leave empty (the default) if this output has no multiview role. If any video-carrying MediaPackage V2 output in an output group specifies a multiview value, every video-carrying MediaPackage V2 output in the group must also specify a multiview value; place standalone video outputs in a separate output group.",
+                        "smithy.api#jsonName": "outputUsage"
                     }
                 }
             },
@@ -27523,7 +28277,7 @@
                 "Scte35Type": {
                     "target": "com.amazonaws.medialive#Scte35Type",
                     "traits": {
-                        "smithy.api#documentation": "Type of scte35 track to add. none or scte35WithoutSegmentation",
+                        "smithy.api#documentation": "SCTE-35 insertion type. Option \"none\" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option \"scte35WithoutIdr\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option \"scte35WithoutSegmentation\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame so that a downstream re-packager might split the segment there, but MediaLive itself will not introduce a new segment boundary there.",
                         "smithy.api#jsonName": "scte35Type"
                     }
                 },
@@ -27568,10 +28322,31 @@
                         "smithy.api#documentation": "Optional an array of additional destinational HTTP destinations for the OutputGroup outputs",
                         "smithy.api#jsonName": "additionalDestinations"
                     }
+                },
+                "WatermarkingSettings": {
+                    "target": "com.amazonaws.medialive#MediaPackageV2WatermarkingSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the type of watermarking technology to use.",
+                        "smithy.api#jsonName": "watermarkingSettings"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Media Package V2 Group Settings"
+            }
+        },
+        "com.amazonaws.medialive#MediaPackageV2WatermarkingSettings": {
+            "type": "structure",
+            "members": {
+                "MediaPackageV2AbWatermarkerIrdetoSettings": {
+                    "target": "com.amazonaws.medialive#MediaPackageV2AbWatermarkerIrdetoSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "mediaPackageV2AbWatermarkerIrdetoSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A/B Watermarker settings for MediaPackage V2 output groups."
             }
         },
         "com.amazonaws.medialive#MediaResource": {
@@ -28719,7 +29494,7 @@
                 "Scte35Control": {
                     "target": "com.amazonaws.medialive#M2tsScte35Control",
                     "traits": {
-                        "smithy.api#documentation": "Optionally pass SCTE-35 signals from the input source to this output.",
+                        "smithy.api#documentation": "SCTE-35 control. Option \"none\" indicates that a SCTE-35 marker will not be inserted, nor will an IDR be inserted at the SCTE-35 cue point, nor will the segment be segmented. Option \"scte35WithoutIdr\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, but MediaLive will not insert an IDR on that frame nor will it introduce a new segment boundary there if it wasn't already going to be one (this option is required for use with downstream multiview bitstream stitching workflows). Option \"passthrough\" indicates that a SCTE-35 marker will be inserted to indicate the cue point, and an IDR will be inserted on that frame, and MediaLive itself will introduce a new segment boundary there.",
                         "smithy.api#jsonName": "scte35Control"
                     }
                 },
@@ -29543,6 +30318,39 @@
                 "smithy.api#documentation": "Nielsen Naes Ii Nw"
             }
         },
+        "com.amazonaws.medialive#NielsenNwOnly": {
+            "type": "structure",
+            "members": {
+                "CheckDigitString": {
+                    "target": "com.amazonaws.medialive#__stringMin2Max2",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Enter the check digit string for the watermark",
+                        "smithy.api#jsonName": "checkDigitString",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sid": {
+                    "target": "com.amazonaws.medialive#__doubleMin1Max65535",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Enter the Nielsen Source ID (SID) to include in the watermark",
+                        "smithy.api#jsonName": "sid",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Timezone": {
+                    "target": "com.amazonaws.medialive#NielsenWatermarkTimezones",
+                    "traits": {
+                        "smithy.api#documentation": "Choose the timezone for the time stamps in the watermark. If not provided,\nthe timestamps will be in Coordinated Universal Time (UTC)",
+                        "smithy.api#jsonName": "timezone"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Nielsen Nw Only"
+            }
+        },
         "com.amazonaws.medialive#NielsenPcmToId3TaggingState": {
             "type": "enum",
             "members": {
@@ -29693,6 +30501,13 @@
                     "traits": {
                         "smithy.api#documentation": "Complete these fields only if you want to insert watermarks of type Nielsen NAES II (N2) and Nielsen NAES VI (NW).",
                         "smithy.api#jsonName": "nielsenNaesIiNwSettings"
+                    }
+                },
+                "NielsenNwOnlySettings": {
+                    "target": "com.amazonaws.medialive#NielsenNwOnly",
+                    "traits": {
+                        "smithy.api#documentation": "Complete these fields only if you want to insert watermarks of type Nielsen NAES VI (NW) only,\nwithout inserting NAES II (N2) watermarks.",
+                        "smithy.api#jsonName": "nielsenNwOnlySettings"
                     }
                 }
             },
@@ -30145,6 +30960,13 @@
                         "smithy.api#documentation": "username for destination",
                         "smithy.api#jsonName": "username"
                     }
+                },
+                "VirtualSourceAddress": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the source IP address for outbound multicast packets.",
+                        "smithy.api#jsonName": "virtualSourceAddress"
+                    }
                 }
             },
             "traits": {
@@ -30369,6 +31191,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "Output Settings"
+            }
+        },
+        "com.amazonaws.medialive#OutputUsage": {
+            "type": "enum",
+            "members": {
+                "MULTIVIEW_EQUAL_SIZE_VIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_EQUAL_SIZE_VIEW"
+                    }
+                },
+                "MULTIVIEW_PRIMARY_VIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_PRIMARY_VIEW"
+                    }
+                },
+                "MULTIVIEW_SECONDARY_VIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTIVIEW_SECONDARY_VIEW"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Output Usage"
             }
         },
         "com.amazonaws.medialive#PassThroughSettings": {
@@ -32894,6 +33742,12 @@
                     "traits": {
                         "smithy.api#enumValue": "SCTE_35_WITHOUT_SEGMENTATION"
                     }
+                },
+                "SCTE_35_WITHOUT_IDR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCTE_35_WITHOUT_IDR"
+                    }
                 }
             },
             "traits": {
@@ -33380,6 +34234,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for SignalMapSummary"
+            }
+        },
+        "com.amazonaws.medialive#SmartSubtitleSourceSettings": {
+            "type": "structure",
+            "members": {
+                "CaptionSynchronizationMode": {
+                    "target": "com.amazonaws.medialive#CaptionSynchronizationMode",
+                    "traits": {
+                        "smithy.api#documentation": "Controls whether MediaLive delays video to synchronize captions with audio and video output.",
+                        "smithy.api#jsonName": "captionSynchronizationMode"
+                    }
+                },
+                "InferenceFeedOutput": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Elemental Inference feed output that supplies subtitle input into this caption selector.",
+                        "smithy.api#jsonName": "inferenceFeedOutput"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Smart Subtitle Source Settings"
             }
         },
         "com.amazonaws.medialive#SmoothGroupAudioOnlyTimecodeControl": {
@@ -36123,6 +36999,21 @@
                 "smithy.api#documentation": "Temporal Filter Strength"
             }
         },
+        "com.amazonaws.medialive#TextCaptionPositionSettings": {
+            "type": "structure",
+            "members": {
+                "YPositionPercentage": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max100",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the vertical position of the top edge of the caption relative to the top of the output as a percentage. A value of 0 places the caption at the top of the output and 100 at the bottom.",
+                        "smithy.api#jsonName": "yPositionPercentage"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Text Caption Position Settings"
+            }
+        },
         "com.amazonaws.medialive#Thumbnail": {
             "type": "structure",
             "members": {
@@ -36582,8 +37473,15 @@
                 "StyleControl": {
                     "target": "com.amazonaws.medialive#TtmlDestinationStyleControl",
                     "traits": {
-                        "smithy.api#documentation": "This field is not currently supported and will not affect the output styling. Leave the default value.",
+                        "smithy.api#documentation": "Controls the source of style and position information for the output captions.  PASSTHROUGH - Preserve the style and position from the source captions.  USE_CONFIGURED - Don't pass through the style. The output captions will use the default styling.  MANUAL - Applies the specified styling and positioning. All other styling and positioning is given default values.",
                         "smithy.api#jsonName": "styleControl"
+                    }
+                },
+                "Position": {
+                    "target": "com.amazonaws.medialive#TextCaptionPositionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the position of the output captions. Applies only when styleControl is set to manual.",
+                        "smithy.api#jsonName": "position"
                     }
                 }
             },
@@ -36604,6 +37502,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "USE_CONFIGURED"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
                     }
                 }
             },
@@ -39453,6 +40357,27 @@
                         "smithy.api#documentation": "Output video width, in pixels. Must be an even number. For most codecs, you can leave this field and height blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.",
                         "smithy.api#jsonName": "width"
                     }
+                },
+                "CropRectangle": {
+                    "target": "com.amazonaws.medialive#VideoPositionRectangle",
+                    "traits": {
+                        "smithy.api#documentation": "Region of the input video to crop before scaling. If not specified, the entire input\nframe is used.\n\nNote: Unlike {@link outputPositionRectangle}, the bounds of cropRectangle are validated\nat ingest time by the encoder/scaler rather than at the API level, because the input\nresolution is not known until the source is probed. Field-level constraints on (x, y,\nwidth, height) defined on {@link VideoPositionRectangle} still apply.",
+                        "smithy.api#jsonName": "cropRectangle"
+                    }
+                },
+                "OutputPositionRectangle": {
+                    "target": "com.amazonaws.medialive#VideoPositionRectangle",
+                    "traits": {
+                        "smithy.api#documentation": "Position of the encoded video within the output frame. The area outside the rectangle\nis filled with black. If not specified, the video fills the entire output frame.\nWhen used, both {@link width} and {@link height} of the VideoDescription must be\nexplicitly specified so that the rectangle can be validated against the output frame.",
+                        "smithy.api#jsonName": "outputPositionRectangle"
+                    }
+                },
+                "Border": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max100",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the number of pixels of black border that will be inserted around the edge\nof the encoded picture. Must be an even integer from 0 (no border, the default) up\nto 100. The width and height of the VideoDescription must each be greater than twice\nthis value. Cannot be used together with {@link outputPositionRectangle} -- both\ngovern the position of the encoded content within the output frame.",
+                        "smithy.api#jsonName": "border"
+                    }
                 }
             },
             "traits": {
@@ -39509,6 +40434,50 @@
             },
             "traits": {
                 "smithy.api#documentation": "Video Description Scaling Behavior"
+            }
+        },
+        "com.amazonaws.medialive#VideoPositionRectangle": {
+            "type": "structure",
+            "members": {
+                "Height": {
+                    "target": "com.amazonaws.medialive#__integerMin2Max8192",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Height in pixels. Must be an even number.",
+                        "smithy.api#jsonName": "height",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Width": {
+                    "target": "com.amazonaws.medialive#__integerMin2Max8192",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Width in pixels. Must be an even number.",
+                        "smithy.api#jsonName": "width",
+                        "smithy.api#required": {}
+                    }
+                },
+                "X": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max8190",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Left offset in pixels. Must be an even number.",
+                        "smithy.api#jsonName": "x",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Y": {
+                    "target": "com.amazonaws.medialive#__integerMin0Max8190",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Top offset in pixels. Must be an even number.",
+                        "smithy.api#jsonName": "y",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A rectangle defined by position (x, y) and dimensions (width, height) in pixels.\nUsed for output positioning and input cropping."
             }
         },
         "com.amazonaws.medialive#VideoSelector": {
@@ -39803,8 +40772,15 @@
                 "StyleControl": {
                     "target": "com.amazonaws.medialive#WebvttDestinationStyleControl",
                     "traits": {
-                        "smithy.api#documentation": "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information.",
+                        "smithy.api#documentation": "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED, TELETEXT, or SMART SUBTITLES.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information. MANUAL - Applies the specified styling and positioning. All other styling and positioning is given default values.",
                         "smithy.api#jsonName": "styleControl"
+                    }
+                },
+                "Position": {
+                    "target": "com.amazonaws.medialive#TextCaptionPositionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the position of the output captions. Applies only when styleControl is set to manual.",
+                        "smithy.api#jsonName": "position"
                     }
                 }
             },
@@ -39825,6 +40801,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PASSTHROUGH"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
                     }
                 }
             },
@@ -39880,10 +40862,40 @@
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin1Max65535"
             }
         },
+        "com.amazonaws.medialive#__doubleMin250Max5000": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMin250Max5000"
+            }
+        },
+        "com.amazonaws.medialive#__doubleMin32Max46": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMin32Max46"
+            }
+        },
+        "com.amazonaws.medialive#__doubleMinNegative1Max5": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMinNegative1Max5"
+            }
+        },
         "com.amazonaws.medialive#__doubleMinNegative59Max0": {
             "type": "double",
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __doubleMinNegative59Max0"
+            }
+        },
+        "com.amazonaws.medialive#__doubleMinNegative60Max60": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMinNegative60Max60"
+            }
+        },
+        "com.amazonaws.medialive#__doubleMinNegative8Max0": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMinNegative8Max0"
             }
         },
         "com.amazonaws.medialive#__integer": {
@@ -40030,6 +41042,12 @@
                 "smithy.api#documentation": "Placeholder documentation for __integerMin0Max8000000"
             }
         },
+        "com.amazonaws.medialive#__integerMin0Max8190": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin0Max8190"
+            }
+        },
         "com.amazonaws.medialive#__integerMin0Max8191": {
             "type": "integer",
             "traits": {
@@ -40096,10 +41114,22 @@
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max10"
             }
         },
+        "com.amazonaws.medialive#__integerMin1Max1000": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max1000"
+            }
+        },
         "com.amazonaws.medialive#__integerMin1Max1000000": {
             "type": "integer",
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max1000000"
+            }
+        },
+        "com.amazonaws.medialive#__integerMin1Max15": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max15"
             }
         },
         "com.amazonaws.medialive#__integerMin1Max16": {
@@ -40156,6 +41186,12 @@
                 "smithy.api#documentation": "Placeholder documentation for __integerMin1Max51"
             }
         },
+        "com.amazonaws.medialive#__integerMin1Max511": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin1Max511"
+            }
+        },
         "com.amazonaws.medialive#__integerMin1Max6": {
             "type": "integer",
             "traits": {
@@ -40196,6 +41232,12 @@
             "type": "integer",
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __integerMin25Max2000"
+            }
+        },
+        "com.amazonaws.medialive#__integerMin2Max8192": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __integerMin2Max8192"
             }
         },
         "com.amazonaws.medialive#__integerMin3": {
@@ -40313,6 +41355,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfAudioDescription"
+            }
+        },
+        "com.amazonaws.medialive#__listOfAudioFeedInput": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#AudioFeedInput"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfAudioFeedInput"
+            }
+        },
+        "com.amazonaws.medialive#__listOfAudioPid": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#AudioPid"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfAudioPid"
             }
         },
         "com.amazonaws.medialive#__listOfAudioSelector": {
@@ -40520,6 +41580,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfDescribeNodeSummary"
+            }
+        },
+        "com.amazonaws.medialive#__listOfEnrichmentMethod": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#EnrichmentMethod"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfEnrichmentMethod"
             }
         },
         "com.amazonaws.medialive#__listOfEventBridgeRuleTemplateGroupSummary": {
@@ -40970,6 +42039,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfOutputGroup"
+            }
+        },
+        "com.amazonaws.medialive#__listOfOutputLocationRef": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#OutputLocationRef"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfOutputLocationRef"
+            }
+        },
+        "com.amazonaws.medialive#__listOfOutputUsage": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#OutputUsage"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfOutputUsage"
             }
         },
         "com.amazonaws.medialive#__listOfPipelineDetail": {

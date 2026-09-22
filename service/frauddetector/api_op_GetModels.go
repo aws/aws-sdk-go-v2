@@ -5,10 +5,10 @@ package frauddetector
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets one or more models. Gets all models for the Amazon Web Services account if
@@ -54,6 +54,27 @@ type GetModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetModelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetModelsRequest_modelId, *v.ModelId)
+	}
+	if v.ModelType != "" {
+		s.WriteString(schemas.GetModelsRequest_modelType, string(v.ModelType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetModelsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetModelsOutput struct {
 
 	// The array of models.
@@ -68,74 +89,48 @@ type GetModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializemodelList(s, schemas.GetModelsResult_models, v.Models)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetModelsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *GetModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelsResult_models:
+			return deserializemodelList(d, schemas.GetModelsResult_models, &v.Models)
+		case schemas.GetModelsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetModelsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModels, schemas.GetModelsRequest, schemas.GetModelsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModels, schemas.GetModelsRequest, schemas.GetModelsResult), output: &GetModelsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetModels{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetModels"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetModels(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +143,6 @@ func (c *Client) addOperationGetModelsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +242,3 @@ type GetModelsAPIClient interface {
 }
 
 var _ GetModelsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetModels(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetModels",
-	}
-}

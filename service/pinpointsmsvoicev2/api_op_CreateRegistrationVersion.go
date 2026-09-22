@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a new version of the registration and increase the VersionNumber. The
@@ -36,6 +35,18 @@ type CreateRegistrationVersionInput struct {
 	RegistrationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateRegistrationVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistrationVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistrationVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.CreateRegistrationVersionRequest_RegistrationId, *v.RegistrationId)
+	}
 }
 
 type CreateRegistrationVersionOutput struct {
@@ -92,77 +103,78 @@ type CreateRegistrationVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistrationVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistrationVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistrationVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationArn != nil {
+		s.WriteString(schemas.CreateRegistrationVersionResult_RegistrationArn, *v.RegistrationArn)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.CreateRegistrationVersionResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.RegistrationVersionStatus != "" {
+		s.WriteString(schemas.CreateRegistrationVersionResult_RegistrationVersionStatus, string(v.RegistrationVersionStatus))
+	}
+	if v.RegistrationVersionStatusHistory != nil {
+		s.WriteStruct(schemas.CreateRegistrationVersionResult_RegistrationVersionStatusHistory)
+		v.RegistrationVersionStatusHistory.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.CreateRegistrationVersionResult_VersionNumber, *v.VersionNumber)
+	}
+}
+func (v *CreateRegistrationVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRegistrationVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRegistrationVersionResult_RegistrationArn:
+			v.RegistrationArn = new(string)
+			return d.ReadString(schemas.CreateRegistrationVersionResult_RegistrationArn, v.RegistrationArn)
+		case schemas.CreateRegistrationVersionResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.CreateRegistrationVersionResult_RegistrationId, v.RegistrationId)
+		case schemas.CreateRegistrationVersionResult_RegistrationVersionStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateRegistrationVersionResult_RegistrationVersionStatus, &ev); err != nil {
+				return err
+			}
+			v.RegistrationVersionStatus = types.RegistrationVersionStatus(ev)
+			return nil
+		case schemas.CreateRegistrationVersionResult_RegistrationVersionStatusHistory:
+			v.RegistrationVersionStatusHistory = &types.RegistrationVersionStatusHistory{}
+			return v.RegistrationVersionStatusHistory.Deserialize(d)
+		case schemas.CreateRegistrationVersionResult_VersionNumber:
+			v.VersionNumber = new(int64)
+			return d.ReadInt64(schemas.CreateRegistrationVersionResult_VersionNumber, v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRegistrationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistrationVersion, schemas.CreateRegistrationVersionRequest, schemas.CreateRegistrationVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRegistrationVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistrationVersion, schemas.CreateRegistrationVersionRequest, schemas.CreateRegistrationVersionResult), output: &CreateRegistrationVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRegistrationVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRegistrationVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRegistrationVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRegistrationVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +189,8 @@ func (c *Client) addOperationCreateRegistrationVersionMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRegistrationVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRegistrationVersion",
-	}
 }

@@ -5,10 +5,10 @@ package xray
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves all sampling rules.
@@ -35,6 +35,18 @@ type GetSamplingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSamplingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSamplingRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSamplingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSamplingRulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetSamplingRulesOutput struct {
 
 	// Pagination token.
@@ -49,74 +61,48 @@ type GetSamplingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSamplingRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSamplingRulesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSamplingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSamplingRulesResult_NextToken, *v.NextToken)
+	}
+	serializeSamplingRuleRecordList(s, schemas.GetSamplingRulesResult_SamplingRuleRecords, v.SamplingRuleRecords)
+}
+func (v *GetSamplingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSamplingRulesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSamplingRulesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSamplingRulesResult_NextToken, v.NextToken)
+		case schemas.GetSamplingRulesResult_SamplingRuleRecords:
+			return deserializeSamplingRuleRecordList(d, schemas.GetSamplingRulesResult_SamplingRuleRecords, &v.SamplingRuleRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSamplingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSamplingRules, schemas.GetSamplingRulesRequest, schemas.GetSamplingRulesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSamplingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSamplingRules, schemas.GetSamplingRulesRequest, schemas.GetSamplingRulesResult), output: &GetSamplingRulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSamplingRules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSamplingRules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSamplingRules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -129,12 +115,6 @@ func (c *Client) addOperationGetSamplingRulesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -223,11 +203,3 @@ type GetSamplingRulesAPIClient interface {
 }
 
 var _ GetSamplingRulesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetSamplingRules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSamplingRules",
-	}
-}

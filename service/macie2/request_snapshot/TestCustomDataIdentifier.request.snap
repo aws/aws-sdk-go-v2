@@ -1,0 +1,5 @@
+POST /custom-data-identifiers/test
+
+Content-Type: application/json
+
+{"ignoreWords":["__Member__","__Member__"],"keywords":["__Member__","__Member__"],"maximumMatchDistance":1,"regex":"__Regex__","sampleText":"__SampleText__"}

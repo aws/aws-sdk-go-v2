@@ -4,10 +4,9 @@ package restxml
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) HttpRequestWithGreedyLabelInPath(ctx context.Context, params *HttpRequestWithGreedyLabelInPathInput, optFns ...func(*Options)) (*HttpRequestWithGreedyLabelInPathOutput, error) {
@@ -36,6 +35,34 @@ type HttpRequestWithGreedyLabelInPathInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRequestWithGreedyLabelInPathInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRequestWithGreedyLabelInPathInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRequestWithGreedyLabelInPathInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Baz != nil {
+		s.WriteString(schemas.HttpRequestWithGreedyLabelInPathInput_baz, *v.Baz)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpRequestWithGreedyLabelInPathInput_foo, *v.Foo)
+	}
+}
+func (v *HttpRequestWithGreedyLabelInPathInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRequestWithGreedyLabelInPathInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRequestWithGreedyLabelInPathInput_baz:
+			v.Baz = new(string)
+			return d.ReadString(schemas.HttpRequestWithGreedyLabelInPathInput_baz, v.Baz)
+		case schemas.HttpRequestWithGreedyLabelInPathInput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.HttpRequestWithGreedyLabelInPathInput_foo, v.Foo)
+		}
+		return nil
+	})
+}
+
 type HttpRequestWithGreedyLabelInPathOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,77 +70,42 @@ type HttpRequestWithGreedyLabelInPathOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRequestWithGreedyLabelInPathOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRequestWithGreedyLabelInPathOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *HttpRequestWithGreedyLabelInPathOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpRequestWithGreedyLabelInPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpRequestWithGreedyLabelInPath, schemas.HttpRequestWithGreedyLabelInPathInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpRequestWithGreedyLabelInPath, schemas.HttpRequestWithGreedyLabelInPathInput, nil), output: &HttpRequestWithGreedyLabelInPathOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpRequestWithGreedyLabelInPath{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpRequestWithGreedyLabelInPath"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpHttpRequestWithGreedyLabelInPathValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -128,22 +120,8 @@ func (c *Client) addOperationHttpRequestWithGreedyLabelInPathMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opHttpRequestWithGreedyLabelInPath(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "HttpRequestWithGreedyLabelInPath",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.ListAgreementInvoiceLineItems
+
+{"afterIssuedTime":946684800,"agreementId":"__AgreementId__","beforeIssuedTime":946684800,"groupBy":"INVOICE_ID","invoiceBillingPeriod":{"month":1,"year":1},"invoiceId":"__InvoiceId__","invoiceType":"INVOICE","maxResults":1,"nextToken":"__NextToken__"}

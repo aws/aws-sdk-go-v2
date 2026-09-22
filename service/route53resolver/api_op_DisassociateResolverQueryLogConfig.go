@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates a VPC from a query logging configuration.
@@ -54,6 +53,21 @@ type DisassociateResolverQueryLogConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResolverQueryLogConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResolverQueryLogConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResolverQueryLogConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverQueryLogConfigId != nil {
+		s.WriteString(schemas.DisassociateResolverQueryLogConfigRequest_ResolverQueryLogConfigId, *v.ResolverQueryLogConfigId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DisassociateResolverQueryLogConfigRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type DisassociateResolverQueryLogConfigOutput struct {
 
 	// A complex type that contains settings for the association that you deleted
@@ -66,77 +80,50 @@ type DisassociateResolverQueryLogConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResolverQueryLogConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResolverQueryLogConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResolverQueryLogConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverQueryLogConfigAssociation != nil {
+		s.WriteStruct(schemas.DisassociateResolverQueryLogConfigResponse_ResolverQueryLogConfigAssociation)
+		v.ResolverQueryLogConfigAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateResolverQueryLogConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateResolverQueryLogConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateResolverQueryLogConfigResponse_ResolverQueryLogConfigAssociation:
+			v.ResolverQueryLogConfigAssociation = &types.ResolverQueryLogConfigAssociation{}
+			return v.ResolverQueryLogConfigAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResolverQueryLogConfig, schemas.DisassociateResolverQueryLogConfigRequest, schemas.DisassociateResolverQueryLogConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateResolverQueryLogConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResolverQueryLogConfig, schemas.DisassociateResolverQueryLogConfigRequest, schemas.DisassociateResolverQueryLogConfigResponse), output: &DisassociateResolverQueryLogConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateResolverQueryLogConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateResolverQueryLogConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociateResolverQueryLogConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateResolverQueryLogConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +138,8 @@ func (c *Client) addOperationDisassociateResolverQueryLogConfigMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociateResolverQueryLogConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateResolverQueryLogConfig",
-	}
 }

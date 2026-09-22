@@ -4,11 +4,10 @@ package opensearch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the names of all Amazon OpenSearch Service domains owned by the current
@@ -37,6 +36,18 @@ type ListDomainNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainNamesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainNamesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainNamesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineType != "" {
+		s.WriteString(schemas.ListDomainNamesRequest_EngineType, string(v.EngineType))
+	}
+}
+
 // The results of a ListDomainNames operation. Contains the names of all domains
 // owned by this account and their respective engine types.
 type ListDomainNamesOutput struct {
@@ -51,74 +62,42 @@ type ListDomainNamesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDomainNamesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDomainNamesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDomainNamesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainInfoList(s, schemas.ListDomainNamesResponse_DomainNames, v.DomainNames)
+}
+func (v *ListDomainNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDomainNamesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDomainNamesResponse_DomainNames:
+			return deserializeDomainInfoList(d, schemas.ListDomainNamesResponse_DomainNames, &v.DomainNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainNames, schemas.ListDomainNamesRequest, schemas.ListDomainNamesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDomainNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDomainNames, schemas.ListDomainNamesRequest, schemas.ListDomainNamesResponse), output: &ListDomainNamesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDomainNames{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDomainNames"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDomainNames(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -133,22 +112,8 @@ func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListDomainNames(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDomainNames",
-	}
 }

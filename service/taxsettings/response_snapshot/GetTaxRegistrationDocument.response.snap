@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"destinationFilePath":"__DestinationFilePath__","presignedS3Url":"__PresignedS3Url__"}

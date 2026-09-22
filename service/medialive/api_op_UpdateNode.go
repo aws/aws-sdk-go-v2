@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Change the settings for a Node.
@@ -54,6 +53,28 @@ type UpdateNodeInput struct {
 	SdiSourceMappings []types.SdiSourceMappingUpdateRequest
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.UpdateNodeRequest_ClusterId, *v.ClusterId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateNodeRequest_Name, *v.Name)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.UpdateNodeRequest_NodeId, *v.NodeId)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.UpdateNodeRequest_Role, string(v.Role))
+	}
+	serializeSdiSourceMappingsUpdateRequest(s, schemas.UpdateNodeRequest_SdiSourceMappings, v.SdiSourceMappings)
 }
 
 // Placeholder documentation for UpdateNodeResponse
@@ -103,77 +124,111 @@ type UpdateNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateNodeResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.UpdateNodeResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	if v.ClusterId != nil {
+		s.WriteString(schemas.UpdateNodeResponse_ClusterId, *v.ClusterId)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.UpdateNodeResponse_ConnectionState, string(v.ConnectionState))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateNodeResponse_Id, *v.Id)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.UpdateNodeResponse_InstanceArn, *v.InstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateNodeResponse_Name, *v.Name)
+	}
+	serialize__listOfNodeInterfaceMapping(s, schemas.UpdateNodeResponse_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.Role != "" {
+		s.WriteString(schemas.UpdateNodeResponse_Role, string(v.Role))
+	}
+	serializeSdiSourceMappings(s, schemas.UpdateNodeResponse_SdiSourceMappings, v.SdiSourceMappings)
+	if v.State != "" {
+		s.WriteString(schemas.UpdateNodeResponse_State, string(v.State))
+	}
+}
+func (v *UpdateNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNodeResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateNodeResponse_Arn, v.Arn)
+		case schemas.UpdateNodeResponse_ChannelPlacementGroups:
+			return deserialize__listOf__string(d, schemas.UpdateNodeResponse_ChannelPlacementGroups, &v.ChannelPlacementGroups)
+		case schemas.UpdateNodeResponse_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.UpdateNodeResponse_ClusterId, v.ClusterId)
+		case schemas.UpdateNodeResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateNodeResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.NodeConnectionState(ev)
+			return nil
+		case schemas.UpdateNodeResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateNodeResponse_Id, v.Id)
+		case schemas.UpdateNodeResponse_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.UpdateNodeResponse_InstanceArn, v.InstanceArn)
+		case schemas.UpdateNodeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateNodeResponse_Name, v.Name)
+		case schemas.UpdateNodeResponse_NodeInterfaceMappings:
+			return deserialize__listOfNodeInterfaceMapping(d, schemas.UpdateNodeResponse_NodeInterfaceMappings, &v.NodeInterfaceMappings)
+		case schemas.UpdateNodeResponse_Role:
+			var ev string
+			if err := d.ReadString(schemas.UpdateNodeResponse_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = types.NodeRole(ev)
+			return nil
+		case schemas.UpdateNodeResponse_SdiSourceMappings:
+			return deserializeSdiSourceMappings(d, schemas.UpdateNodeResponse_SdiSourceMappings, &v.SdiSourceMappings)
+		case schemas.UpdateNodeResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.UpdateNodeResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NodeState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNode, schemas.UpdateNodeRequest, schemas.UpdateNodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNode, schemas.UpdateNodeRequest, schemas.UpdateNodeResponse), output: &UpdateNodeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateNode{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateNode"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateNodeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNode(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +243,8 @@ func (c *Client) addOperationUpdateNodeMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateNode(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateNode",
-	}
 }

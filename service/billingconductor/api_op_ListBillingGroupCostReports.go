@@ -5,10 +5,10 @@ package billingconductor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A paginated call to retrieve a summary report of actual Amazon Web Services
@@ -47,6 +47,48 @@ type ListBillingGroupCostReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingGroupCostReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingGroupCostReportsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingGroupCostReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListBillingGroupCostReportsInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListBillingGroupCostReportsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBillingGroupCostReportsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillingGroupCostReportsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBillingGroupCostReportsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingGroupCostReportsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingGroupCostReportsInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListBillingGroupCostReportsInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListBillingGroupCostReportsInput_Filters:
+			v.Filters = &types.ListBillingGroupCostReportsFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListBillingGroupCostReportsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListBillingGroupCostReportsInput_MaxResults, v.MaxResults)
+		case schemas.ListBillingGroupCostReportsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillingGroupCostReportsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListBillingGroupCostReportsOutput struct {
 
 	// A list of BillingGroupCostReportElement retrieved.
@@ -61,74 +103,48 @@ type ListBillingGroupCostReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillingGroupCostReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillingGroupCostReportsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillingGroupCostReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillingGroupCostReportList(s, schemas.ListBillingGroupCostReportsOutput_BillingGroupCostReports, v.BillingGroupCostReports)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillingGroupCostReportsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBillingGroupCostReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillingGroupCostReportsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillingGroupCostReportsOutput_BillingGroupCostReports:
+			return deserializeBillingGroupCostReportList(d, schemas.ListBillingGroupCostReportsOutput_BillingGroupCostReports, &v.BillingGroupCostReports)
+		case schemas.ListBillingGroupCostReportsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillingGroupCostReportsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBillingGroupCostReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingGroupCostReports, schemas.ListBillingGroupCostReportsInput, schemas.ListBillingGroupCostReportsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBillingGroupCostReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillingGroupCostReports, schemas.ListBillingGroupCostReportsInput, schemas.ListBillingGroupCostReportsOutput), output: &ListBillingGroupCostReportsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBillingGroupCostReports{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBillingGroupCostReports"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBillingGroupCostReports(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +157,6 @@ func (c *Client) addOperationListBillingGroupCostReportsMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +260,3 @@ type ListBillingGroupCostReportsAPIClient interface {
 }
 
 var _ ListBillingGroupCostReportsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBillingGroupCostReports(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBillingGroupCostReports",
-	}
-}

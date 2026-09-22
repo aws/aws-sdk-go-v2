@@ -1,0 +1,5 @@
+POST /listConfigurations
+
+Content-Type: application/json
+
+{"ConfigurationDefinitionId":"__ConfigurationDefinitionId__","Filters":[{"Key":"__Key__","Values":["__Member__","__Member__"]},{"Key":"__Key__","Values":["__Member__","__Member__"]}],"ManagerArn":"__ManagerArn__","MaxItems":1,"StartingToken":"__StartingToken__"}

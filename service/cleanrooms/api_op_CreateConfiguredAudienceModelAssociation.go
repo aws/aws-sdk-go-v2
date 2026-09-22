@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides the details necessary to create a configured audience model
@@ -74,6 +73,31 @@ type CreateConfiguredAudienceModelAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfiguredAudienceModelAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfiguredAudienceModelAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfiguredAudienceModelAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredAudienceModelArn != nil {
+		s.WriteString(schemas.CreateConfiguredAudienceModelAssociationInput_configuredAudienceModelArn, *v.ConfiguredAudienceModelArn)
+	}
+	if v.ConfiguredAudienceModelAssociationName != nil {
+		s.WriteString(schemas.CreateConfiguredAudienceModelAssociationInput_configuredAudienceModelAssociationName, *v.ConfiguredAudienceModelAssociationName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConfiguredAudienceModelAssociationInput_description, *v.Description)
+	}
+	if v.ManageResourcePolicies != nil {
+		s.WriteBool(schemas.CreateConfiguredAudienceModelAssociationInput_manageResourcePolicies, *v.ManageResourcePolicies)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.CreateConfiguredAudienceModelAssociationInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	serializeTagMap(s, schemas.CreateConfiguredAudienceModelAssociationInput_tags, v.Tags)
+}
+
 type CreateConfiguredAudienceModelAssociationOutput struct {
 
 	// Information about the configured audience model association.
@@ -87,77 +111,50 @@ type CreateConfiguredAudienceModelAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfiguredAudienceModelAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfiguredAudienceModelAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfiguredAudienceModelAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredAudienceModelAssociation != nil {
+		s.WriteStruct(schemas.CreateConfiguredAudienceModelAssociationOutput_configuredAudienceModelAssociation)
+		v.ConfiguredAudienceModelAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConfiguredAudienceModelAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfiguredAudienceModelAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfiguredAudienceModelAssociationOutput_configuredAudienceModelAssociation:
+			v.ConfiguredAudienceModelAssociation = &types.ConfiguredAudienceModelAssociation{}
+			return v.ConfiguredAudienceModelAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfiguredAudienceModelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredAudienceModelAssociation, schemas.CreateConfiguredAudienceModelAssociationInput, schemas.CreateConfiguredAudienceModelAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfiguredAudienceModelAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredAudienceModelAssociation, schemas.CreateConfiguredAudienceModelAssociationInput, schemas.CreateConfiguredAudienceModelAssociationOutput), output: &CreateConfiguredAudienceModelAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfiguredAudienceModelAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConfiguredAudienceModelAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateConfiguredAudienceModelAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfiguredAudienceModelAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +169,8 @@ func (c *Client) addOperationCreateConfiguredAudienceModelAssociationMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateConfiguredAudienceModelAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateConfiguredAudienceModelAssociation",
-	}
 }

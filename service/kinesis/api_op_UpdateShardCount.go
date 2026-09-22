@@ -4,12 +4,11 @@ package kinesis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the shard count of the specified stream to the specified number of
@@ -112,6 +111,29 @@ type UpdateShardCountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateShardCountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateShardCountInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateShardCountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScalingType != "" {
+		s.WriteString(schemas.UpdateShardCountInput_ScalingType, string(v.ScalingType))
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UpdateShardCountInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.UpdateShardCountInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.UpdateShardCountInput_StreamName, *v.StreamName)
+	}
+	if v.TargetShardCount != nil {
+		s.WriteInt32(schemas.UpdateShardCountInput_TargetShardCount, *v.TargetShardCount)
+	}
+}
 func (in *UpdateShardCountInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -139,77 +161,69 @@ type UpdateShardCountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateShardCountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateShardCountOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateShardCountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentShardCount != nil {
+		s.WriteInt32(schemas.UpdateShardCountOutput_CurrentShardCount, *v.CurrentShardCount)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UpdateShardCountOutput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.UpdateShardCountOutput_StreamName, *v.StreamName)
+	}
+	if v.TargetShardCount != nil {
+		s.WriteInt32(schemas.UpdateShardCountOutput_TargetShardCount, *v.TargetShardCount)
+	}
+}
+func (v *UpdateShardCountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateShardCountOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateShardCountOutput_CurrentShardCount:
+			v.CurrentShardCount = new(int32)
+			return d.ReadInt32(schemas.UpdateShardCountOutput_CurrentShardCount, v.CurrentShardCount)
+		case schemas.UpdateShardCountOutput_StreamARN:
+			v.StreamARN = new(string)
+			return d.ReadString(schemas.UpdateShardCountOutput_StreamARN, v.StreamARN)
+		case schemas.UpdateShardCountOutput_StreamName:
+			v.StreamName = new(string)
+			return d.ReadString(schemas.UpdateShardCountOutput_StreamName, v.StreamName)
+		case schemas.UpdateShardCountOutput_TargetShardCount:
+			v.TargetShardCount = new(int32)
+			return d.ReadInt32(schemas.UpdateShardCountOutput_TargetShardCount, v.TargetShardCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateShardCountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateShardCount, schemas.UpdateShardCountInput, schemas.UpdateShardCountOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateShardCount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateShardCount, schemas.UpdateShardCountInput, schemas.UpdateShardCountOutput), output: &UpdateShardCountOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateShardCount{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateShardCount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateShardCountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateShardCount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,22 +238,8 @@ func (c *Client) addOperationUpdateShardCountMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateShardCount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateShardCount",
-	}
 }

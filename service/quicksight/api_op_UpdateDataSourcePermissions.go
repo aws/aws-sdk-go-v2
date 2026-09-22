@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the permissions to a data source.
@@ -49,6 +48,23 @@ type UpdateDataSourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSourcePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSourcePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSourcePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateDataSourcePermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.UpdateDataSourcePermissionsRequest_DataSourceId, *v.DataSourceId)
+	}
+	serializeResourcePermissionList(s, schemas.UpdateDataSourcePermissionsRequest_GrantPermissions, v.GrantPermissions)
+	serializeResourcePermissionList(s, schemas.UpdateDataSourcePermissionsRequest_RevokePermissions, v.RevokePermissions)
+}
+
 type UpdateDataSourcePermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the data source.
@@ -70,77 +86,65 @@ type UpdateDataSourcePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataSourcePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataSourcePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataSourcePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceArn != nil {
+		s.WriteString(schemas.UpdateDataSourcePermissionsResponse_DataSourceArn, *v.DataSourceArn)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.UpdateDataSourcePermissionsResponse_DataSourceId, *v.DataSourceId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDataSourcePermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateDataSourcePermissionsResponse_Status, v.Status)
+	}
+}
+func (v *UpdateDataSourcePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataSourcePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataSourcePermissionsResponse_DataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.UpdateDataSourcePermissionsResponse_DataSourceArn, v.DataSourceArn)
+		case schemas.UpdateDataSourcePermissionsResponse_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.UpdateDataSourcePermissionsResponse_DataSourceId, v.DataSourceId)
+		case schemas.UpdateDataSourcePermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDataSourcePermissionsResponse_RequestId, v.RequestId)
+		case schemas.UpdateDataSourcePermissionsResponse_Status:
+			return d.ReadInt32(schemas.UpdateDataSourcePermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataSourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSourcePermissions, schemas.UpdateDataSourcePermissionsRequest, schemas.UpdateDataSourcePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataSourcePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataSourcePermissions, schemas.UpdateDataSourcePermissionsRequest, schemas.UpdateDataSourcePermissionsResponse), output: &UpdateDataSourcePermissionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataSourcePermissions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataSourcePermissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDataSourcePermissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataSourcePermissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +159,8 @@ func (c *Client) addOperationUpdateDataSourcePermissionsMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDataSourcePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDataSourcePermissions",
-	}
 }

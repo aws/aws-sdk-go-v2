@@ -1,0 +1,5 @@
+POST /delete-app
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","clientToken":"__ClientToken__","forceDelete":true}

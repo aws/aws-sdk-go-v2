@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // RunJobFlow creates and starts running a new cluster (job flow). The cluster
@@ -237,6 +236,10 @@ type RunJobFlowInput struct {
 	// specify it for the service role when you launch your cluster.
 	ServiceRole *string
 
+	// Indicates whether Spark Connect sessions are enabled on the cluster. When set
+	// to true , you can start Spark Connect sessions using the StartSession operation.
+	SessionEnabled *bool
+
 	// Specifies the number of steps that can be executed concurrently. The default
 	// value is 1 . The maximum value is 256 .
 	StepConcurrencyLevel *int32
@@ -293,6 +296,114 @@ type RunJobFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunJobFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunJobFlowInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunJobFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalInfo != nil {
+		s.WriteString(schemas.RunJobFlowInput_AdditionalInfo, *v.AdditionalInfo)
+	}
+	if v.AmiVersion != nil {
+		s.WriteString(schemas.RunJobFlowInput_AmiVersion, *v.AmiVersion)
+	}
+	serializeApplicationList(s, schemas.RunJobFlowInput_Applications, v.Applications)
+	if v.AutoScalingRole != nil {
+		s.WriteString(schemas.RunJobFlowInput_AutoScalingRole, *v.AutoScalingRole)
+	}
+	if v.AutoTerminationPolicy != nil {
+		s.WriteStruct(schemas.RunJobFlowInput_AutoTerminationPolicy)
+		v.AutoTerminationPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeBootstrapActionConfigList(s, schemas.RunJobFlowInput_BootstrapActions, v.BootstrapActions)
+	serializeConfigurationList(s, schemas.RunJobFlowInput_Configurations, v.Configurations)
+	if v.CustomAmiId != nil {
+		s.WriteString(schemas.RunJobFlowInput_CustomAmiId, *v.CustomAmiId)
+	}
+	if v.EbsRootVolumeIops != nil {
+		s.WriteInt32(schemas.RunJobFlowInput_EbsRootVolumeIops, *v.EbsRootVolumeIops)
+	}
+	if v.EbsRootVolumeSize != nil {
+		s.WriteInt32(schemas.RunJobFlowInput_EbsRootVolumeSize, *v.EbsRootVolumeSize)
+	}
+	if v.EbsRootVolumeThroughput != nil {
+		s.WriteInt32(schemas.RunJobFlowInput_EbsRootVolumeThroughput, *v.EbsRootVolumeThroughput)
+	}
+	if v.ExtendedSupport != nil {
+		s.WriteBool(schemas.RunJobFlowInput_ExtendedSupport, *v.ExtendedSupport)
+	}
+	if v.Instances != nil {
+		s.WriteStruct(schemas.RunJobFlowInput_Instances)
+		v.Instances.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobFlowRole != nil {
+		s.WriteString(schemas.RunJobFlowInput_JobFlowRole, *v.JobFlowRole)
+	}
+	if v.KerberosAttributes != nil {
+		s.WriteStruct(schemas.RunJobFlowInput_KerberosAttributes)
+		v.KerberosAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogEncryptionKmsKeyId != nil {
+		s.WriteString(schemas.RunJobFlowInput_LogEncryptionKmsKeyId, *v.LogEncryptionKmsKeyId)
+	}
+	if v.LogUri != nil {
+		s.WriteString(schemas.RunJobFlowInput_LogUri, *v.LogUri)
+	}
+	if v.ManagedScalingPolicy != nil {
+		s.WriteStruct(schemas.RunJobFlowInput_ManagedScalingPolicy)
+		v.ManagedScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.RunJobFlowInput_MonitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RunJobFlowInput_Name, *v.Name)
+	}
+	serializeNewSupportedProductsList(s, schemas.RunJobFlowInput_NewSupportedProducts, v.NewSupportedProducts)
+	if v.OSReleaseLabel != nil {
+		s.WriteString(schemas.RunJobFlowInput_OSReleaseLabel, *v.OSReleaseLabel)
+	}
+	serializePlacementGroupConfigList(s, schemas.RunJobFlowInput_PlacementGroupConfigs, v.PlacementGroupConfigs)
+	if v.ReleaseLabel != nil {
+		s.WriteString(schemas.RunJobFlowInput_ReleaseLabel, *v.ReleaseLabel)
+	}
+	if v.RepoUpgradeOnBoot != "" {
+		s.WriteString(schemas.RunJobFlowInput_RepoUpgradeOnBoot, string(v.RepoUpgradeOnBoot))
+	}
+	if v.ScaleDownBehavior != "" {
+		s.WriteString(schemas.RunJobFlowInput_ScaleDownBehavior, string(v.ScaleDownBehavior))
+	}
+	if v.SecurityConfiguration != nil {
+		s.WriteString(schemas.RunJobFlowInput_SecurityConfiguration, *v.SecurityConfiguration)
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.RunJobFlowInput_ServiceRole, *v.ServiceRole)
+	}
+	if v.SessionEnabled != nil {
+		s.WriteBool(schemas.RunJobFlowInput_SessionEnabled, *v.SessionEnabled)
+	}
+	if v.StepConcurrencyLevel != nil {
+		s.WriteInt32(schemas.RunJobFlowInput_StepConcurrencyLevel, *v.StepConcurrencyLevel)
+	}
+	if v.StepExecutionRoleArn != nil {
+		s.WriteString(schemas.RunJobFlowInput_StepExecutionRoleArn, *v.StepExecutionRoleArn)
+	}
+	serializeStepConfigList(s, schemas.RunJobFlowInput_Steps, v.Steps)
+	serializeSupportedProductsList(s, schemas.RunJobFlowInput_SupportedProducts, v.SupportedProducts)
+	serializeTagList(s, schemas.RunJobFlowInput_Tags, v.Tags)
+	if v.VisibleToAllUsers != nil {
+		s.WriteBool(schemas.RunJobFlowInput_VisibleToAllUsers, *v.VisibleToAllUsers)
+	}
+}
+
 // The result of the RunJobFlow operation.
 type RunJobFlowOutput struct {
 
@@ -308,77 +419,54 @@ type RunJobFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunJobFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunJobFlowOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunJobFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.RunJobFlowOutput_ClusterArn, *v.ClusterArn)
+	}
+	if v.JobFlowId != nil {
+		s.WriteString(schemas.RunJobFlowOutput_JobFlowId, *v.JobFlowId)
+	}
+}
+func (v *RunJobFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunJobFlowOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunJobFlowOutput_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.RunJobFlowOutput_ClusterArn, v.ClusterArn)
+		case schemas.RunJobFlowOutput_JobFlowId:
+			v.JobFlowId = new(string)
+			return d.ReadString(schemas.RunJobFlowOutput_JobFlowId, v.JobFlowId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRunJobFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunJobFlow, schemas.RunJobFlowInput, schemas.RunJobFlowOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRunJobFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RunJobFlow, schemas.RunJobFlowInput, schemas.RunJobFlowOutput), output: &RunJobFlowOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRunJobFlow{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RunJobFlow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRunJobFlowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRunJobFlow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -393,22 +481,8 @@ func (c *Client) addOperationRunJobFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRunJobFlow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RunJobFlow",
-	}
 }

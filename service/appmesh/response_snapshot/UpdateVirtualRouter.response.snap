@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"meshName":"__MeshName__","metadata":{"arn":"__Arn__","createdAt":946684800,"lastUpdatedAt":946684800,"meshOwner":"__MeshOwner__","resourceOwner":"__ResourceOwner__","uid":"__Uid__","version":1},"spec":{"listeners":[{"portMapping":{"port":1,"protocol":"http"}},{"portMapping":{"port":1,"protocol":"http"}}]},"status":{"status":"ACTIVE"},"virtualRouterName":"__VirtualRouterName__"}

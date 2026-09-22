@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","customDomainName":"__CustomDomainName__","dnsEntry":{"domainName":"__DomainName__","hostedZoneId":"__HostedZoneId__"},"failureCode":"__FailureCode__","failureMessage":"__FailureMessage__","id":"__Id__","serviceArn":"__ServiceArn__","serviceId":"__ServiceId__","serviceName":"__ServiceName__","serviceNetworkArn":"__ServiceNetworkArn__","serviceNetworkId":"__ServiceNetworkId__","serviceNetworkName":"__ServiceNetworkName__","status":"CREATE_IN_PROGRESS"}

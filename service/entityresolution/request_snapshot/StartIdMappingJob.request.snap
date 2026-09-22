@@ -1,0 +1,5 @@
+POST /idmappingworkflows/__WorkflowName__/jobs
+
+Content-Type: application/json
+
+{"jobType":"BATCH","outputSourceConfig":[{"KMSArn":"__KMSArn__","outputS3Path":"__OutputS3Path__","roleArn":"__RoleArn__"},{"KMSArn":"__KMSArn__","outputS3Path":"__OutputS3Path__","roleArn":"__RoleArn__"}]}

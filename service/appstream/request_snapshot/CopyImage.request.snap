@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/CopyImage
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤oSourceImageNames__SourceImageName__tDestinationImageNamex__DestinationImageName__qDestinationRegionu__DestinationRegion__xDestinationImageDescriptionx__DestinationImageDescription__

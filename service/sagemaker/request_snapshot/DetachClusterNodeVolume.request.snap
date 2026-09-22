@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DetachClusterNodeVolume
+
+{"ClusterArn":"__ClusterArn__","NodeId":"__NodeId__","VolumeId":"__VolumeId__"}

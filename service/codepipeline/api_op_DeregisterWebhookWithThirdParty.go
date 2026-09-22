@@ -4,10 +4,9 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the connection between the webhook that was created by CodePipeline and
@@ -36,6 +35,18 @@ type DeregisterWebhookWithThirdPartyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterWebhookWithThirdPartyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterWebhookWithThirdPartyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterWebhookWithThirdPartyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WebhookName != nil {
+		s.WriteString(schemas.DeregisterWebhookWithThirdPartyInput_webhookName, *v.WebhookName)
+	}
+}
+
 type DeregisterWebhookWithThirdPartyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,74 +54,39 @@ type DeregisterWebhookWithThirdPartyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterWebhookWithThirdPartyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterWebhookWithThirdPartyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterWebhookWithThirdPartyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterWebhookWithThirdPartyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterWebhookWithThirdPartyOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterWebhookWithThirdPartyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterWebhookWithThirdParty, schemas.DeregisterWebhookWithThirdPartyInput, schemas.DeregisterWebhookWithThirdPartyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeregisterWebhookWithThirdParty{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterWebhookWithThirdParty, schemas.DeregisterWebhookWithThirdPartyInput, schemas.DeregisterWebhookWithThirdPartyOutput), output: &DeregisterWebhookWithThirdPartyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeregisterWebhookWithThirdParty{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeregisterWebhookWithThirdParty"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterWebhookWithThirdParty(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -125,22 +101,8 @@ func (c *Client) addOperationDeregisterWebhookWithThirdPartyMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeregisterWebhookWithThirdParty(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeregisterWebhookWithThirdParty",
-	}
 }

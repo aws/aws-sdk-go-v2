@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"creationDate":946684800,"defaultVersionId":1,"description":"__Description__","enabled":true,"lastModifiedDate":946684800,"preProvisioningHook":{"payloadVersion":"__PayloadVersion__","targetArn":"__TargetArn__"},"provisioningRoleArn":"__ProvisioningRoleArn__","templateArn":"__TemplateArn__","templateBody":"__TemplateBody__","templateName":"__TemplateName__","type":"FLEET_PROVISIONING"}

@@ -5,10 +5,10 @@ package costexplorer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the commitment purchase analyses for your account.
@@ -44,6 +44,25 @@ type ListCommitmentPurchaseAnalysesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommitmentPurchaseAnalysesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommitmentPurchaseAnalysesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommitmentPurchaseAnalysesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisIds(s, schemas.ListCommitmentPurchaseAnalysesRequest_AnalysisIds, v.AnalysisIds)
+	if v.AnalysisStatus != "" {
+		s.WriteString(schemas.ListCommitmentPurchaseAnalysesRequest_AnalysisStatus, string(v.AnalysisStatus))
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListCommitmentPurchaseAnalysesRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListCommitmentPurchaseAnalysesRequest_PageSize, v.PageSize)
+	}
+}
+
 type ListCommitmentPurchaseAnalysesOutput struct {
 
 	// The list of analyses.
@@ -58,74 +77,48 @@ type ListCommitmentPurchaseAnalysesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCommitmentPurchaseAnalysesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCommitmentPurchaseAnalysesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCommitmentPurchaseAnalysesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisSummaryList(s, schemas.ListCommitmentPurchaseAnalysesResponse_AnalysisSummaryList, v.AnalysisSummaryList)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.ListCommitmentPurchaseAnalysesResponse_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *ListCommitmentPurchaseAnalysesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCommitmentPurchaseAnalysesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCommitmentPurchaseAnalysesResponse_AnalysisSummaryList:
+			return deserializeAnalysisSummaryList(d, schemas.ListCommitmentPurchaseAnalysesResponse_AnalysisSummaryList, &v.AnalysisSummaryList)
+		case schemas.ListCommitmentPurchaseAnalysesResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListCommitmentPurchaseAnalysesResponse_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCommitmentPurchaseAnalysesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommitmentPurchaseAnalyses, schemas.ListCommitmentPurchaseAnalysesRequest, schemas.ListCommitmentPurchaseAnalysesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCommitmentPurchaseAnalyses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCommitmentPurchaseAnalyses, schemas.ListCommitmentPurchaseAnalysesRequest, schemas.ListCommitmentPurchaseAnalysesResponse), output: &ListCommitmentPurchaseAnalysesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCommitmentPurchaseAnalyses{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCommitmentPurchaseAnalyses"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCommitmentPurchaseAnalyses(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,12 +131,6 @@ func (c *Client) addOperationListCommitmentPurchaseAnalysesMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,11 +230,3 @@ type ListCommitmentPurchaseAnalysesAPIClient interface {
 }
 
 var _ ListCommitmentPurchaseAnalysesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCommitmentPurchaseAnalyses(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCommitmentPurchaseAnalyses",
-	}
-}

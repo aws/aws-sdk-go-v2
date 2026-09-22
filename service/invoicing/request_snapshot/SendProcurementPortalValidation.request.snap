@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.SendProcurementPortalValidation
+
+{"ClientToken":"__ClientToken__","ProcurementPortalPreferenceArn":"__ProcurementPortalPreferenceArn__"}

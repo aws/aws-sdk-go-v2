@@ -40,6 +40,8 @@ type TransferManagerLoggingClient struct {
 
 	GetObjectInvocations int
 
+	HeadObjectInputs []*s3.HeadObjectInput
+
 	RetrievedRanges []string
 	RetrievedParts  []int32
 	Versions        []string
@@ -57,9 +59,9 @@ type TransferManagerLoggingClient struct {
 	m sync.Mutex
 
 	PutObjectFn               func(*TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
-	UploadPartFn              func(*TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error)
+	UploadPartFn              func(context.Context, *TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error)
 	CreateMultipartUploadFn   func(*TransferManagerLoggingClient, *s3.CreateMultipartUploadInput) (*s3.CreateMultipartUploadOutput, error)
-	CompleteMultipartUploadFn func(*TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error)
+	CompleteMultipartUploadFn func(context.Context, *TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error)
 	AbortMultipartUploadFn    func(*TransferManagerLoggingClient, *s3.AbortMultipartUploadInput) (*s3.AbortMultipartUploadOutput, error)
 	GetObjectFn               func(*TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 }
@@ -148,7 +150,7 @@ func (c *TransferManagerLoggingClient) UploadPart(ctx context.Context, params *s
 	}
 
 	if c.UploadPartFn != nil {
-		return c.UploadPartFn(c, params)
+		return c.UploadPartFn(ctx, c, params)
 	}
 
 	return &s3.UploadPartOutput{
@@ -188,7 +190,7 @@ func (c *TransferManagerLoggingClient) CompleteMultipartUpload(ctx context.Conte
 	}
 
 	if c.CompleteMultipartUploadFn != nil {
-		return c.CompleteMultipartUploadFn(c, params)
+		return c.CompleteMultipartUploadFn(ctx, c, params)
 	}
 
 	return &s3.CompleteMultipartUploadOutput{
@@ -201,6 +203,10 @@ func (c *TransferManagerLoggingClient) CompleteMultipartUpload(ctx context.Conte
 func (c *TransferManagerLoggingClient) AbortMultipartUpload(ctx context.Context, params *s3.AbortMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.AbortMultipartUploadOutput, error) {
 	c.m.Lock()
 	defer c.m.Unlock()
+
+	if ctx.Err() != nil {
+		return nil, ctx.Err()
+	}
 
 	c.traceOperation("AbortMultipartUpload", params)
 	if err := c.simulateHTTPClientOption(optFns...); err != nil {
@@ -242,6 +248,8 @@ func (c *TransferManagerLoggingClient) GetObject(ctx context.Context, params *s3
 func (c *TransferManagerLoggingClient) HeadObject(ctx context.Context, params *s3.HeadObjectInput, optFns ...func(*s3.Options)) (*s3.HeadObjectOutput, error) {
 	c.m.Lock()
 	defer c.m.Unlock()
+
+	c.HeadObjectInputs = append(c.HeadObjectInputs, params)
 
 	return &s3.HeadObjectOutput{
 		PartsCount:        aws.Int32(c.PartsCount),
@@ -395,6 +403,30 @@ var ReaderPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.Get
 		Body:          io.NopCloser(bytes.NewReader(c.PartsData[index])),
 		ContentLength: aws.Int64(int64(len(c.PartsData[index]))),
 		PartsCount:    aws.Int32(c.PartsCount),
+	}, nil
+}
+
+// UnequalPartGetObjectFn mocks getobject behavior of s3 client to return
+// object parts of unequal sizes, as a multipart upload may produce. Unlike
+// ReaderPartGetObjectFn it also returns the Content-Range of each part,
+// which is what S3 includes in part-number GetObject responses.
+var UnequalPartGetObjectFn = func(c *TransferManagerLoggingClient, params *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+	index := aws.ToInt32(params.PartNumber) - 1
+	total := 0
+	for _, p := range c.PartsData {
+		total += len(p)
+	}
+	start := 0
+	for _, p := range c.PartsData[:index] {
+		start += len(p)
+	}
+	part := c.PartsData[index]
+	return &s3.GetObjectOutput{
+		Body:          io.NopCloser(bytes.NewReader(part)),
+		ContentLength: aws.Int64(int64(len(part))),
+		ContentRange:  aws.String(fmt.Sprintf("bytes %d-%d/%d", start, start+len(part)-1, total)),
+		PartsCount:    aws.Int32(c.PartsCount),
+		ETag:          aws.String(etag),
 	}, nil
 }
 

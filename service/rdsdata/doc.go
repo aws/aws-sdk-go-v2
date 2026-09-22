@@ -10,9 +10,9 @@
 //
 // Data API is available with the following types of Aurora databases:
 //
-//   - Aurora PostgreSQL - Serverless v2, provisioned, and Serverless v1
+//   - Aurora PostgreSQL - Serverless and provisioned
 //
-//   - Aurora MySQL - Serverless v2, provisioned, and Serverless v1
+//   - Aurora MySQL - Serverless and provisioned
 //
 // For more information about the Data API, see [Using RDS Data API] in the Amazon Aurora User Guide.
 //

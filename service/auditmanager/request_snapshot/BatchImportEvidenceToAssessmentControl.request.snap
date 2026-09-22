@@ -1,0 +1,5 @@
+POST /assessments/__AssessmentId__/controlSets/__ControlSetId__/controls/__ControlId__/evidence
+
+Content-Type: application/json
+
+{"manualEvidence":[{"evidenceFileName":"__EvidenceFileName__","s3ResourcePath":"__S3ResourcePath__","textResponse":"__TextResponse__"},{"evidenceFileName":"__EvidenceFileName__","s3ResourcePath":"__S3ResourcePath__","textResponse":"__TextResponse__"}]}

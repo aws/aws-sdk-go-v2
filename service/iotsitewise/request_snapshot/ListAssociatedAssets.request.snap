@@ -1,0 +1,3 @@
+GET /assets/__AssetId__/hierarchies?hierarchyId=__HierarchyId__&maxResults=1&nextToken=__NextToken__&traversalDirection=PARENT
+
+

@@ -1,0 +1,3 @@
+GET /access-policies?iamArn=__IamArn__&identityId=__IdentityId__&identityType=USER&maxResults=1&nextToken=__NextToken__&resourceId=__ResourceId__&resourceType=PORTAL
+
+

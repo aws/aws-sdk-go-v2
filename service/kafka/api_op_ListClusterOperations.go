@@ -5,10 +5,10 @@ package kafka
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of all the operations that have been performed on the specified
@@ -47,6 +47,24 @@ type ListClusterOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListClusterOperationsRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClusterOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterOperationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListClusterOperationsOutput struct {
 
 	// An array of cluster operation information objects.
@@ -63,77 +81,51 @@ type ListClusterOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClusterOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClusterOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClusterOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfClusterOperationInfo(s, schemas.ListClusterOperationsResponse_ClusterOperationInfoList, v.ClusterOperationInfoList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClusterOperationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClusterOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClusterOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClusterOperationsResponse_ClusterOperationInfoList:
+			return deserialize__listOfClusterOperationInfo(d, schemas.ListClusterOperationsResponse_ClusterOperationInfoList, &v.ClusterOperationInfoList)
+		case schemas.ListClusterOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClusterOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClusterOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterOperations, schemas.ListClusterOperationsRequest, schemas.ListClusterOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListClusterOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClusterOperations, schemas.ListClusterOperationsRequest, schemas.ListClusterOperationsResponse), output: &ListClusterOperationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListClusterOperations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListClusterOperations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListClusterOperationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClusterOperations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +138,6 @@ func (c *Client) addOperationListClusterOperationsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +240,3 @@ type ListClusterOperationsAPIClient interface {
 }
 
 var _ ListClusterOperationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListClusterOperations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListClusterOperations",
-	}
-}

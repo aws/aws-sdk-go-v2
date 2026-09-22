@@ -105,14 +105,37 @@ func (CEType) Values() []CEType {
 	}
 }
 
+type ContainerInsights string
+
+// Enum values for ContainerInsights
+const (
+	ContainerInsightsEnabled  ContainerInsights = "ENABLED"
+	ContainerInsightsEnhanced ContainerInsights = "ENHANCED"
+	ContainerInsightsDisabled ContainerInsights = "DISABLED"
+)
+
+// Values returns all known values for ContainerInsights. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerInsights) Values() []ContainerInsights {
+	return []ContainerInsights{
+		"ENABLED",
+		"ENHANCED",
+		"DISABLED",
+	}
+}
+
 type CRAllocationStrategy string
 
 // Enum values for CRAllocationStrategy
 const (
-	CRAllocationStrategyBestFit                    CRAllocationStrategy = "BEST_FIT"
-	CRAllocationStrategyBestFitProgressive         CRAllocationStrategy = "BEST_FIT_PROGRESSIVE"
-	CRAllocationStrategySpotCapacityOptimized      CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
-	CRAllocationStrategySpotPriceCapacityOptimized CRAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
+	CRAllocationStrategyBestFit                          CRAllocationStrategy = "BEST_FIT"
+	CRAllocationStrategyBestFitProgressive               CRAllocationStrategy = "BEST_FIT_PROGRESSIVE"
+	CRAllocationStrategyBestFitProgressiveOrdered        CRAllocationStrategy = "BEST_FIT_PROGRESSIVE_ORDERED"
+	CRAllocationStrategySpotCapacityOptimized            CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+	CRAllocationStrategySpotPriceCapacityOptimized       CRAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
+	CRAllocationStrategySpotCapacityOptimizedPrioritized CRAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED_PRIORITIZED"
 )
 
 // Values returns all known values for CRAllocationStrategy. Note that this can be
@@ -123,8 +146,10 @@ func (CRAllocationStrategy) Values() []CRAllocationStrategy {
 	return []CRAllocationStrategy{
 		"BEST_FIT",
 		"BEST_FIT_PROGRESSIVE",
+		"BEST_FIT_PROGRESSIVE_ORDERED",
 		"SPOT_CAPACITY_OPTIMIZED",
 		"SPOT_PRICE_CAPACITY_OPTIMIZED",
+		"SPOT_CAPACITY_OPTIMIZED_PRIORITIZED",
 	}
 }
 
@@ -132,10 +157,11 @@ type CRType string
 
 // Enum values for CRType
 const (
-	CRTypeEc2         CRType = "EC2"
-	CRTypeSpot        CRType = "SPOT"
-	CRTypeFargate     CRType = "FARGATE"
-	CRTypeFargateSpot CRType = "FARGATE_SPOT"
+	CRTypeEc2                 CRType = "EC2"
+	CRTypeSpot                CRType = "SPOT"
+	CRTypeFargate             CRType = "FARGATE"
+	CRTypeFargateSpot         CRType = "FARGATE_SPOT"
+	CRTypeEcsManagedInstances CRType = "ECS_MANAGED_INSTANCES"
 )
 
 // Values returns all known values for CRType. Note that this can be expanded in
@@ -148,6 +174,7 @@ func (CRType) Values() []CRType {
 		"SPOT",
 		"FARGATE",
 		"FARGATE_SPOT",
+		"ECS_MANAGED_INSTANCES",
 	}
 }
 
@@ -155,9 +182,11 @@ type CRUpdateAllocationStrategy string
 
 // Enum values for CRUpdateAllocationStrategy
 const (
-	CRUpdateAllocationStrategyBestFitProgressive         CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE"
-	CRUpdateAllocationStrategySpotCapacityOptimized      CRUpdateAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
-	CRUpdateAllocationStrategySpotPriceCapacityOptimized CRUpdateAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
+	CRUpdateAllocationStrategyBestFitProgressive               CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE"
+	CRUpdateAllocationStrategyBestFitProgressiveOrdered        CRUpdateAllocationStrategy = "BEST_FIT_PROGRESSIVE_ORDERED"
+	CRUpdateAllocationStrategySpotCapacityOptimized            CRUpdateAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED"
+	CRUpdateAllocationStrategySpotPriceCapacityOptimized       CRUpdateAllocationStrategy = "SPOT_PRICE_CAPACITY_OPTIMIZED"
+	CRUpdateAllocationStrategySpotCapacityOptimizedPrioritized CRUpdateAllocationStrategy = "SPOT_CAPACITY_OPTIMIZED_PRIORITIZED"
 )
 
 // Values returns all known values for CRUpdateAllocationStrategy. Note that this
@@ -167,8 +196,10 @@ const (
 func (CRUpdateAllocationStrategy) Values() []CRUpdateAllocationStrategy {
 	return []CRUpdateAllocationStrategy{
 		"BEST_FIT_PROGRESSIVE",
+		"BEST_FIT_PROGRESSIVE_ORDERED",
 		"SPOT_CAPACITY_OPTIMIZED",
 		"SPOT_PRICE_CAPACITY_OPTIMIZED",
+		"SPOT_CAPACITY_OPTIMIZED_PRIORITIZED",
 	}
 }
 
@@ -273,10 +304,11 @@ type JobQueueType string
 
 // Enum values for JobQueueType
 const (
-	JobQueueTypeEks               JobQueueType = "EKS"
-	JobQueueTypeEcs               JobQueueType = "ECS"
-	JobQueueTypeEcsFargate        JobQueueType = "ECS_FARGATE"
-	JobQueueTypeSagemakerTraining JobQueueType = "SAGEMAKER_TRAINING"
+	JobQueueTypeEks                 JobQueueType = "EKS"
+	JobQueueTypeEcs                 JobQueueType = "ECS"
+	JobQueueTypeEcsFargate          JobQueueType = "ECS_FARGATE"
+	JobQueueTypeSagemakerTraining   JobQueueType = "SAGEMAKER_TRAINING"
+	JobQueueTypeEcsManagedInstances JobQueueType = "ECS_MANAGED_INSTANCES"
 )
 
 // Values returns all known values for JobQueueType. Note that this can be
@@ -289,6 +321,7 @@ func (JobQueueType) Values() []JobQueueType {
 		"ECS",
 		"ECS_FARGATE",
 		"SAGEMAKER_TRAINING",
+		"ECS_MANAGED_INSTANCES",
 	}
 }
 
@@ -459,8 +492,9 @@ type PlatformCapability string
 
 // Enum values for PlatformCapability
 const (
-	PlatformCapabilityEc2     PlatformCapability = "EC2"
-	PlatformCapabilityFargate PlatformCapability = "FARGATE"
+	PlatformCapabilityEc2              PlatformCapability = "EC2"
+	PlatformCapabilityFargate          PlatformCapability = "FARGATE"
+	PlatformCapabilityManagedInstances PlatformCapability = "MANAGED_INSTANCES"
 )
 
 // Values returns all known values for PlatformCapability. Note that this can be
@@ -471,6 +505,7 @@ func (PlatformCapability) Values() []PlatformCapability {
 	return []PlatformCapability{
 		"EC2",
 		"FARGATE",
+		"MANAGED_INSTANCES",
 	}
 }
 

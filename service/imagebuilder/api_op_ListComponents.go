@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the list of components that can be filtered by name, or by using the
@@ -18,10 +18,10 @@ import (
 // The semantic version has four nodes: ../. You can assign values for the first
 // three, and can filter on all of them.
 //
-// Filtering: With semantic versioning, you have the flexibility to use wildcards
-// (x) to specify the most recent versions or nodes when selecting the base image
-// or components for your recipe. When you use a wildcard in any node, all nodes to
-// the right of the first wildcard must also be wildcards.
+// Filtering: You can use wildcards (x) to specify the most recent versions or
+// nodes when selecting the base image or components for your recipe. When you use
+// a wildcard in any node, all nodes to the right of the first wildcard must also
+// be wildcards.
 func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput, optFns ...func(*Options)) (*ListComponentsOutput, error) {
 	if params == nil {
 		params = &ListComponentsInput{}
@@ -57,10 +57,10 @@ type ListComponentsInput struct {
 	//   - version
 	Filters []types.Filter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -71,6 +71,28 @@ type ListComponentsInput struct {
 	Owner types.Ownership
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListComponentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByName != false {
+		s.WriteBool(schemas.ListComponentsRequest_byName, v.ByName)
+	}
+	serializeFilterList(s, schemas.ListComponentsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComponentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentsRequest_nextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.ListComponentsRequest_owner, string(v.Owner))
+	}
 }
 
 type ListComponentsOutput struct {
@@ -95,74 +117,54 @@ type ListComponentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComponentVersionList(s, schemas.ListComponentsResponse_componentVersionList, v.ComponentVersionList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListComponentsResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListComponentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComponentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComponentsResponse_componentVersionList:
+			return deserializeComponentVersionList(d, schemas.ListComponentsResponse_componentVersionList, &v.ComponentVersionList)
+		case schemas.ListComponentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComponentsResponse_nextToken, v.NextToken)
+		case schemas.ListComponentsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListComponentsResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponents, schemas.ListComponentsRequest, schemas.ListComponentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComponents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponents, schemas.ListComponentsRequest, schemas.ListComponentsResponse), output: &ListComponentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComponents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListComponents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListComponents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,12 +179,6 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -191,7 +187,7 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 
 // ListComponentsPaginatorOptions is the paginator options for ListComponents
 type ListComponentsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -281,11 +277,3 @@ type ListComponentsAPIClient interface {
 }
 
 var _ ListComponentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListComponents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListComponents",
-	}
-}

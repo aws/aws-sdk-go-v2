@@ -4,11 +4,10 @@ package bcmdataexports
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmdataexports/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the metadata for the specified table and table properties. This
@@ -45,6 +44,19 @@ type GetTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableRequest_TableName, *v.TableName)
+	}
+	serializeTableProperties(s, schemas.GetTableRequest_TableProperties, v.TableProperties)
+}
+
 type GetTableOutput struct {
 
 	// The table description.
@@ -68,77 +80,60 @@ type GetTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetTableResponse_Description, *v.Description)
+	}
+	serializeColumnList(s, schemas.GetTableResponse_Schema, v.Schema)
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableResponse_TableName, *v.TableName)
+	}
+	serializeTableProperties(s, schemas.GetTableResponse_TableProperties, v.TableProperties)
+}
+func (v *GetTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetTableResponse_Description, v.Description)
+		case schemas.GetTableResponse_Schema:
+			return deserializeColumnList(d, schemas.GetTableResponse_Schema, &v.Schema)
+		case schemas.GetTableResponse_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.GetTableResponse_TableName, v.TableName)
+		case schemas.GetTableResponse_TableProperties:
+			return deserializeTableProperties(d, schemas.GetTableResponse_TableProperties, &v.TableProperties)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTable, schemas.GetTableRequest, schemas.GetTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTable, schemas.GetTableRequest, schemas.GetTableResponse), output: &GetTableOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTable{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +148,8 @@ func (c *Client) addOperationGetTableMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTable",
-	}
 }

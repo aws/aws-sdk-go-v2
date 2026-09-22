@@ -136,6 +136,8 @@ const (
 	LanguageCodeAfZa  LanguageCode = "af-ZA"
 	LanguageCodeArAe  LanguageCode = "ar-AE"
 	LanguageCodeArSa  LanguageCode = "ar-SA"
+	LanguageCodeAmEt  LanguageCode = "am-ET"
+	LanguageCodeCyGb  LanguageCode = "cy-GB"
 	LanguageCodeDaDk  LanguageCode = "da-DK"
 	LanguageCodeDeCh  LanguageCode = "de-CH"
 	LanguageCodeDeDe  LanguageCode = "de-DE"
@@ -147,16 +149,24 @@ const (
 	LanguageCodeEnUs  LanguageCode = "en-US"
 	LanguageCodeEnWl  LanguageCode = "en-WL"
 	LanguageCodeEsEs  LanguageCode = "es-ES"
+	LanguageCodeEsMx  LanguageCode = "es-MX"
 	LanguageCodeEsUs  LanguageCode = "es-US"
+	LanguageCodeFaAf  LanguageCode = "fa-AF"
 	LanguageCodeFaIr  LanguageCode = "fa-IR"
 	LanguageCodeFrCa  LanguageCode = "fr-CA"
 	LanguageCodeFrFr  LanguageCode = "fr-FR"
+	LanguageCodeGaIe  LanguageCode = "ga-IE"
+	LanguageCodeGdGb  LanguageCode = "gd-GB"
 	LanguageCodeHeIl  LanguageCode = "he-IL"
 	LanguageCodeHiIn  LanguageCode = "hi-IN"
+	LanguageCodeHtHt  LanguageCode = "ht-HT"
 	LanguageCodeIdId  LanguageCode = "id-ID"
 	LanguageCodeItIt  LanguageCode = "it-IT"
 	LanguageCodeJaJp  LanguageCode = "ja-JP"
+	LanguageCodeJvId  LanguageCode = "jv-ID"
+	LanguageCodeKmKh  LanguageCode = "km-KH"
 	LanguageCodeKoKr  LanguageCode = "ko-KR"
+	LanguageCodeMyMm  LanguageCode = "my-MM"
 	LanguageCodeMsMy  LanguageCode = "ms-MY"
 	LanguageCodeNlNl  LanguageCode = "nl-NL"
 	LanguageCodePtBr  LanguageCode = "pt-BR"
@@ -213,6 +223,7 @@ const (
 	LanguageCodeMrIn  LanguageCode = "mr-IN"
 	LanguageCodeMtMt  LanguageCode = "mt-MT"
 	LanguageCodeNoNo  LanguageCode = "no-NO"
+	LanguageCodeNeNp  LanguageCode = "ne-NP"
 	LanguageCodeOrIn  LanguageCode = "or-IN"
 	LanguageCodePaIn  LanguageCode = "pa-IN"
 	LanguageCodePlPl  LanguageCode = "pl-PL"
@@ -223,6 +234,7 @@ const (
 	LanguageCodeSkSk  LanguageCode = "sk-SK"
 	LanguageCodeSlSi  LanguageCode = "sl-SI"
 	LanguageCodeSoSo  LanguageCode = "so-SO"
+	LanguageCodeSqAl  LanguageCode = "sq-AL"
 	LanguageCodeSrRs  LanguageCode = "sr-RS"
 	LanguageCodeSuId  LanguageCode = "su-ID"
 	LanguageCodeSwBi  LanguageCode = "sw-BI"
@@ -249,6 +261,8 @@ func (LanguageCode) Values() []LanguageCode {
 		"af-ZA",
 		"ar-AE",
 		"ar-SA",
+		"am-ET",
+		"cy-GB",
 		"da-DK",
 		"de-CH",
 		"de-DE",
@@ -260,16 +274,24 @@ func (LanguageCode) Values() []LanguageCode {
 		"en-US",
 		"en-WL",
 		"es-ES",
+		"es-MX",
 		"es-US",
+		"fa-AF",
 		"fa-IR",
 		"fr-CA",
 		"fr-FR",
+		"ga-IE",
+		"gd-GB",
 		"he-IL",
 		"hi-IN",
+		"ht-HT",
 		"id-ID",
 		"it-IT",
 		"ja-JP",
+		"jv-ID",
+		"km-KH",
 		"ko-KR",
+		"my-MM",
 		"ms-MY",
 		"nl-NL",
 		"pt-BR",
@@ -326,6 +348,7 @@ func (LanguageCode) Values() []LanguageCode {
 		"mr-IN",
 		"mt-MT",
 		"no-NO",
+		"ne-NP",
 		"or-IN",
 		"pa-IN",
 		"pl-PL",
@@ -336,6 +359,7 @@ func (LanguageCode) Values() []LanguageCode {
 		"sk-SK",
 		"sl-SI",
 		"so-SO",
+		"sq-AL",
 		"sr-RS",
 		"su-ID",
 		"sw-BI",
@@ -555,18 +579,36 @@ type PiiEntityType string
 
 // Enum values for PiiEntityType
 const (
-	PiiEntityTypeBankAccountNumber PiiEntityType = "BANK_ACCOUNT_NUMBER"
-	PiiEntityTypeBankRouting       PiiEntityType = "BANK_ROUTING"
-	PiiEntityTypeCreditDebitNumber PiiEntityType = "CREDIT_DEBIT_NUMBER"
-	PiiEntityTypeCreditDebitCvv    PiiEntityType = "CREDIT_DEBIT_CVV"
-	PiiEntityTypeCreditDebitExpiry PiiEntityType = "CREDIT_DEBIT_EXPIRY"
-	PiiEntityTypePin               PiiEntityType = "PIN"
-	PiiEntityTypeEmail             PiiEntityType = "EMAIL"
-	PiiEntityTypeAddress           PiiEntityType = "ADDRESS"
-	PiiEntityTypeName              PiiEntityType = "NAME"
-	PiiEntityTypePhone             PiiEntityType = "PHONE"
-	PiiEntityTypeSsn               PiiEntityType = "SSN"
-	PiiEntityTypeAll               PiiEntityType = "ALL"
+	PiiEntityTypeBankAccountNumber                   PiiEntityType = "BANK_ACCOUNT_NUMBER"
+	PiiEntityTypeBankRouting                         PiiEntityType = "BANK_ROUTING"
+	PiiEntityTypeCreditDebitNumber                   PiiEntityType = "CREDIT_DEBIT_NUMBER"
+	PiiEntityTypeCreditDebitCvv                      PiiEntityType = "CREDIT_DEBIT_CVV"
+	PiiEntityTypeCreditDebitExpiry                   PiiEntityType = "CREDIT_DEBIT_EXPIRY"
+	PiiEntityTypePin                                 PiiEntityType = "PIN"
+	PiiEntityTypeEmail                               PiiEntityType = "EMAIL"
+	PiiEntityTypeAddress                             PiiEntityType = "ADDRESS"
+	PiiEntityTypeName                                PiiEntityType = "NAME"
+	PiiEntityTypePhone                               PiiEntityType = "PHONE"
+	PiiEntityTypeSsn                                 PiiEntityType = "SSN"
+	PiiEntityTypeDateTime                            PiiEntityType = "DATE_TIME"
+	PiiEntityTypePassportNumber                      PiiEntityType = "PASSPORT_NUMBER"
+	PiiEntityTypeDriverId                            PiiEntityType = "DRIVER_ID"
+	PiiEntityTypeUrl                                 PiiEntityType = "URL"
+	PiiEntityTypeAge                                 PiiEntityType = "AGE"
+	PiiEntityTypeUsername                            PiiEntityType = "USERNAME"
+	PiiEntityTypePassword                            PiiEntityType = "PASSWORD"
+	PiiEntityTypeAwsAccessKey                        PiiEntityType = "AWS_ACCESS_KEY"
+	PiiEntityTypeAwsSecretKey                        PiiEntityType = "AWS_SECRET_KEY"
+	PiiEntityTypeIpAddress                           PiiEntityType = "IP_ADDRESS"
+	PiiEntityTypeMacAddress                          PiiEntityType = "MAC_ADDRESS"
+	PiiEntityTypeLicensePlate                        PiiEntityType = "LICENSE_PLATE"
+	PiiEntityTypeVehicleIdentificationNumber         PiiEntityType = "VEHICLE_IDENTIFICATION_NUMBER"
+	PiiEntityTypeUsIndividualTaxIdentificationNumber PiiEntityType = "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+	PiiEntityTypeCaHealthNumber                      PiiEntityType = "CA_HEALTH_NUMBER"
+	PiiEntityTypeCaSocialInsuranceNumber             PiiEntityType = "CA_SOCIAL_INSURANCE_NUMBER"
+	PiiEntityTypeInternationalBankAccountNumber      PiiEntityType = "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+	PiiEntityTypeSwiftCode                           PiiEntityType = "SWIFT_CODE"
+	PiiEntityTypeAll                                 PiiEntityType = "ALL"
 )
 
 // Values returns all known values for PiiEntityType. Note that this can be
@@ -586,6 +628,24 @@ func (PiiEntityType) Values() []PiiEntityType {
 		"NAME",
 		"PHONE",
 		"SSN",
+		"DATE_TIME",
+		"PASSPORT_NUMBER",
+		"DRIVER_ID",
+		"URL",
+		"AGE",
+		"USERNAME",
+		"PASSWORD",
+		"AWS_ACCESS_KEY",
+		"AWS_SECRET_KEY",
+		"IP_ADDRESS",
+		"MAC_ADDRESS",
+		"LICENSE_PLATE",
+		"VEHICLE_IDENTIFICATION_NUMBER",
+		"US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
+		"CA_HEALTH_NUMBER",
+		"CA_SOCIAL_INSURANCE_NUMBER",
+		"INTERNATIONAL_BANK_ACCOUNT_NUMBER",
+		"SWIFT_CODE",
 		"ALL",
 	}
 }

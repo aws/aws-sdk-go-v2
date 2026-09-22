@@ -5,10 +5,10 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Imports a model that has been trained successfully.
@@ -80,6 +80,42 @@ type ImportModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_DatasetName, *v.DatasetName)
+	}
+	if v.InferenceDataImportStrategy != "" {
+		s.WriteString(schemas.ImportModelVersionRequest_InferenceDataImportStrategy, string(v.InferenceDataImportStrategy))
+	}
+	if v.LabelsInputConfiguration != nil {
+		s.WriteStruct(schemas.ImportModelVersionRequest_LabelsInputConfiguration)
+		v.LabelsInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_ModelName, *v.ModelName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_RoleArn, *v.RoleArn)
+	}
+	if v.ServerSideKmsKeyId != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
+	}
+	if v.SourceModelVersionArn != nil {
+		s.WriteString(schemas.ImportModelVersionRequest_SourceModelVersionArn, *v.SourceModelVersionArn)
+	}
+	serializeTagList(s, schemas.ImportModelVersionRequest_Tags, v.Tags)
+}
+
 type ImportModelVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model being created.
@@ -103,65 +139,70 @@ type ImportModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportModelVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportModelVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportModelVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.ImportModelVersionResponse_ModelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.ImportModelVersionResponse_ModelName, *v.ModelName)
+	}
+	if v.ModelVersion != nil {
+		s.WriteInt64(schemas.ImportModelVersionResponse_ModelVersion, *v.ModelVersion)
+	}
+	if v.ModelVersionArn != nil {
+		s.WriteString(schemas.ImportModelVersionResponse_ModelVersionArn, *v.ModelVersionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ImportModelVersionResponse_Status, string(v.Status))
+	}
+}
+func (v *ImportModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportModelVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportModelVersionResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.ImportModelVersionResponse_ModelArn, v.ModelArn)
+		case schemas.ImportModelVersionResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.ImportModelVersionResponse_ModelName, v.ModelName)
+		case schemas.ImportModelVersionResponse_ModelVersion:
+			v.ModelVersion = new(int64)
+			return d.ReadInt64(schemas.ImportModelVersionResponse_ModelVersion, v.ModelVersion)
+		case schemas.ImportModelVersionResponse_ModelVersionArn:
+			v.ModelVersionArn = new(string)
+			return d.ReadString(schemas.ImportModelVersionResponse_ModelVersionArn, v.ModelVersionArn)
+		case schemas.ImportModelVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ImportModelVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportModelVersion, schemas.ImportModelVersionRequest, schemas.ImportModelVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpImportModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportModelVersion, schemas.ImportModelVersionRequest, schemas.ImportModelVersionResponse), output: &ImportModelVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpImportModelVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportModelVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -171,12 +212,6 @@ func (c *Client) addOperationImportModelVersionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpImportModelVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportModelVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,12 +224,6 @@ func (c *Client) addOperationImportModelVersionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -234,12 +263,4 @@ func (m *idempotencyToken_initializeOpImportModelVersion) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opImportModelVersionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpImportModelVersion{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opImportModelVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportModelVersion",
-	}
 }

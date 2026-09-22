@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -101,6 +101,51 @@ type ListScanJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScanJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScanJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScanJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByAccountId != nil {
+		s.WriteString(schemas.ListScanJobsInput_ByAccountId, *v.ByAccountId)
+	}
+	if v.ByBackupVaultName != nil {
+		s.WriteString(schemas.ListScanJobsInput_ByBackupVaultName, *v.ByBackupVaultName)
+	}
+	if v.ByCompleteAfter != nil {
+		s.WriteTime(schemas.ListScanJobsInput_ByCompleteAfter, *v.ByCompleteAfter)
+	}
+	if v.ByCompleteBefore != nil {
+		s.WriteTime(schemas.ListScanJobsInput_ByCompleteBefore, *v.ByCompleteBefore)
+	}
+	if v.ByMalwareScanner != "" {
+		s.WriteString(schemas.ListScanJobsInput_ByMalwareScanner, string(v.ByMalwareScanner))
+	}
+	if v.ByRecoveryPointArn != nil {
+		s.WriteString(schemas.ListScanJobsInput_ByRecoveryPointArn, *v.ByRecoveryPointArn)
+	}
+	if v.ByResourceArn != nil {
+		s.WriteString(schemas.ListScanJobsInput_ByResourceArn, *v.ByResourceArn)
+	}
+	if v.ByResourceType != "" {
+		s.WriteString(schemas.ListScanJobsInput_ByResourceType, string(v.ByResourceType))
+	}
+	if v.ByScanResultStatus != "" {
+		s.WriteString(schemas.ListScanJobsInput_ByScanResultStatus, string(v.ByScanResultStatus))
+	}
+	if v.ByState != "" {
+		s.WriteString(schemas.ListScanJobsInput_ByState, string(v.ByState))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListScanJobsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScanJobsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListScanJobsOutput struct {
 
 	// An array of structures containing metadata about your scan jobs returned in
@@ -121,74 +166,48 @@ type ListScanJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScanJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScanJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScanJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScanJobsOutput_NextToken, *v.NextToken)
+	}
+	serializeScanJobs(s, schemas.ListScanJobsOutput_ScanJobs, v.ScanJobs)
+}
+func (v *ListScanJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScanJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScanJobsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScanJobsOutput_NextToken, v.NextToken)
+		case schemas.ListScanJobsOutput_ScanJobs:
+			return deserializeScanJobs(d, schemas.ListScanJobsOutput_ScanJobs, &v.ScanJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListScanJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScanJobs, schemas.ListScanJobsInput, schemas.ListScanJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScanJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScanJobs, schemas.ListScanJobsInput, schemas.ListScanJobsOutput), output: &ListScanJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListScanJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListScanJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScanJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,12 +220,6 @@ func (c *Client) addOperationListScanJobsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -308,11 +321,3 @@ type ListScanJobsAPIClient interface {
 }
 
 var _ ListScanJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListScanJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListScanJobs",
-	}
-}

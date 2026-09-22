@@ -5,10 +5,10 @@ package fis
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a target account configuration for the experiment template. A target
@@ -59,6 +59,30 @@ type CreateTargetAccountConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTargetAccountConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTargetAccountConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTargetAccountConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.CreateTargetAccountConfigurationRequest_accountId, *v.AccountId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTargetAccountConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateTargetAccountConfigurationRequest_description, *v.Description)
+	}
+	if v.ExperimentTemplateId != nil {
+		s.WriteString(schemas.CreateTargetAccountConfigurationRequest_experimentTemplateId, *v.ExperimentTemplateId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateTargetAccountConfigurationRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type CreateTargetAccountConfigurationOutput struct {
 
 	// Information about the target account configuration.
@@ -70,65 +94,44 @@ type CreateTargetAccountConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTargetAccountConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTargetAccountConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTargetAccountConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetAccountConfiguration != nil {
+		s.WriteStruct(schemas.CreateTargetAccountConfigurationResponse_targetAccountConfiguration)
+		v.TargetAccountConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTargetAccountConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTargetAccountConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTargetAccountConfigurationResponse_targetAccountConfiguration:
+			v.TargetAccountConfiguration = &types.TargetAccountConfiguration{}
+			return v.TargetAccountConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTargetAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTargetAccountConfiguration, schemas.CreateTargetAccountConfigurationRequest, schemas.CreateTargetAccountConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTargetAccountConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTargetAccountConfiguration, schemas.CreateTargetAccountConfigurationRequest, schemas.CreateTargetAccountConfigurationResponse), output: &CreateTargetAccountConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTargetAccountConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTargetAccountConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -138,12 +141,6 @@ func (c *Client) addOperationCreateTargetAccountConfigurationMiddlewares(stack *
 		return err
 	}
 	if err = addOpCreateTargetAccountConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTargetAccountConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +153,6 @@ func (c *Client) addOperationCreateTargetAccountConfigurationMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -201,12 +192,4 @@ func (m *idempotencyToken_initializeOpCreateTargetAccountConfiguration) HandleIn
 }
 func addIdempotencyToken_opCreateTargetAccountConfigurationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateTargetAccountConfiguration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateTargetAccountConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTargetAccountConfiguration",
-	}
 }

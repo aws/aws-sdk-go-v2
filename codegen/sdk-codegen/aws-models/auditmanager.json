@@ -515,14 +515,14 @@
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> The number of evidence that falls under the compliance check category. This evidence is\n         collected from Config or Security Hub. </p>"
+                        "smithy.api#documentation": "<p> The number of evidence that falls under the compliance check category. This evidence is\n         collected from Config or Security Hub CSPM. </p>"
                     }
                 },
                 "evidenceByTypeComplianceCheckIssuesCount": {
                     "target": "com.amazonaws.auditmanager#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p> The total number of issues that were reported directly from Security Hub,\n            Config, or both. </p>"
+                        "smithy.api#documentation": "<p> The total number of issues that were reported directly from Security Hub CSPM,\n            Config, or both. </p>"
                     }
                 },
                 "evidenceByTypeUserActivityCount": {
@@ -1939,6 +1939,194 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Welcome to the Audit Manager API reference. This guide is for developers who\n         need detailed information about the Audit Manager API operations, data types, and\n         errors. </p>\n         <p>Audit Manager is a service that provides automated evidence collection so that you\n         can continually audit your Amazon Web Services usage. You can use it to assess the\n         effectiveness of your controls, manage risk, and simplify compliance.</p>\n         <p>Audit Manager provides prebuilt frameworks that structure and automate assessments\n         for a given compliance standard. Frameworks include a prebuilt collection of controls with\n         descriptions and testing procedures. These controls are grouped according to the\n         requirements of the specified compliance standard or regulation. You can also customize\n         frameworks and controls to support internal audits with specific requirements. </p>\n         <p>Use the following links to get started with the Audit Manager API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html\">Actions</a>: An\n               alphabetical list of all Audit Manager API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Audit Manager data\n               types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html\">Common\n                  parameters</a>: Parameters that all operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html\">Common errors</a>:\n               Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Audit Manager, we recommend that you review the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html\">\n            Audit Manager User Guide</a>.</p>",
                 "smithy.api#title": "AWS Audit Manager",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://auditmanager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://auditmanager-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://auditmanager.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://auditmanager.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -4739,7 +4927,7 @@
                 "complianceCheck": {
                     "target": "com.amazonaws.auditmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The evaluation status for automated evidence that falls under the compliance check\n         category.</p>\n         <ul>\n            <li>\n               <p>Audit Manager classes evidence as non-compliant if Security Hub reports a\n                  <i>Fail</i> result, or if Config reports a\n                  <i>Non-compliant</i> result.</p>\n            </li>\n            <li>\n               <p>Audit Manager classes evidence as compliant if Security Hub reports a\n                  <i>Pass</i> result, or if Config reports a\n                  <i>Compliant</i> result.</p>\n            </li>\n            <li>\n               <p>If a compliance check isn't available or applicable, then no compliance evaluation can be made\n               for that evidence. This is the case if the evidence uses Config or\n                  Security Hub as the underlying data source type, but those services aren't\n               enabled. This is also the case if the evidence uses an underlying data source type\n               that doesn't support compliance checks (such as manual evidence, Amazon Web Services\n               API calls, or CloudTrail). </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The evaluation status for automated evidence that falls under the compliance check\n         category.</p>\n         <ul>\n            <li>\n               <p>Audit Manager classes evidence as non-compliant if Security Hub CSPM reports a\n                  <i>Fail</i> result, or if Config reports a\n                  <i>Non-compliant</i> result.</p>\n            </li>\n            <li>\n               <p>Audit Manager classes evidence as compliant if Security Hub CSPM reports a\n                  <i>Pass</i> result, or if Config reports a\n                  <i>Compliant</i> result.</p>\n            </li>\n            <li>\n               <p>If a compliance check isn't available or applicable, then no compliance evaluation can be made\n               for that evidence. This is the case if the evidence uses Config or\n                  Security Hub CSPM as the underlying data source type, but those services aren't\n               enabled. This is also the case if the evidence uses an underlying data source type\n               that doesn't support compliance checks (such as manual evidence, Amazon Web Services\n               API calls, or CloudTrail). </p>\n            </li>\n         </ul>"
                     }
                 },
                 "awsOrganization": {
@@ -4908,19 +5096,19 @@
                 "noncompliantEvidenceCount": {
                     "target": "com.amazonaws.auditmanager#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as\n         non-compliant. This includes evidence that was collected from Security Hub with a\n            <i>Fail</i> ruling, or collected from Config with a\n            <i>Non-compliant</i> ruling. </p>"
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as\n         non-compliant. This includes evidence that was collected from Security Hub CSPM with a\n            <i>Fail</i> ruling, or collected from Config with a\n            <i>Non-compliant</i> ruling. </p>"
                     }
                 },
                 "compliantEvidenceCount": {
                     "target": "com.amazonaws.auditmanager#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as compliant.\n         This includes evidence that was collected from Security Hub with a\n            <i>Pass</i> ruling, or collected from Config with a\n            <i>Compliant</i> ruling. </p>"
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as compliant.\n         This includes evidence that was collected from Security Hub CSPM with a\n            <i>Pass</i> ruling, or collected from Config with a\n            <i>Compliant</i> ruling. </p>"
                     }
                 },
                 "inconclusiveEvidenceCount": {
                     "target": "com.amazonaws.auditmanager#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of evidence that a compliance check ruling isn't available for. Evidence is\n         inconclusive when the associated control uses Security Hub or Config as a data source but you didn't enable those services. This is also the case when a\n         control uses a data source that doesn’t support compliance checks (for example, manual\n         evidence, API calls, or CloudTrail). </p>\n         <note>\n            <p>If evidence has a compliance check status of <i>not applicable</i> in\n            the console, it's classified as <i>inconclusive</i> in\n               <code>EvidenceInsights</code> data.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The number of evidence that a compliance check ruling isn't available for. Evidence is\n         inconclusive when the associated control uses Security Hub CSPM or Config as a data source but you didn't enable those services. This is also the case when a\n         control uses a data source that doesn’t support compliance checks (for example, manual\n         evidence, API calls, or CloudTrail). </p>\n         <note>\n            <p>If evidence has a compliance check status of <i>not applicable</i> in\n            the console, it's classified as <i>inconclusive</i> in\n               <code>EvidenceInsights</code> data.</p>\n         </note>"
                     }
                 }
             },
@@ -6430,19 +6618,19 @@
                 "noncompliantEvidenceCount": {
                     "target": "com.amazonaws.auditmanager#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as\n         non-compliant on the <code>lastUpdated</code> date. This includes evidence that was\n         collected from Security Hub with a <i>Fail</i> ruling, or collected\n         from Config with a <i>Non-compliant</i> ruling. </p>"
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as\n         non-compliant on the <code>lastUpdated</code> date. This includes evidence that was\n         collected from Security Hub CSPM with a <i>Fail</i> ruling, or collected\n         from Config with a <i>Non-compliant</i> ruling. </p>"
                     }
                 },
                 "compliantEvidenceCount": {
                     "target": "com.amazonaws.auditmanager#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as compliant\n         on the <code>lastUpdated</code> date. This includes evidence that was collected from\n            Security Hub with a <i>Pass</i> ruling, or collected from\n            Config with a <i>Compliant</i> ruling. </p>"
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as compliant\n         on the <code>lastUpdated</code> date. This includes evidence that was collected from\n            Security Hub CSPM with a <i>Pass</i> ruling, or collected from\n            Config with a <i>Compliant</i> ruling. </p>"
                     }
                 },
                 "inconclusiveEvidenceCount": {
                     "target": "com.amazonaws.auditmanager#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of evidence without a compliance check ruling. Evidence is inconclusive when\n         the associated control uses Security Hub or Config as a data\n         source but you didn't enable those services. This is also the case when a control uses a\n         data source that doesn’t support compliance checks (for example: manual evidence, API\n         calls, or CloudTrail). </p>\n         <note>\n            <p>If evidence has a compliance check status of <i>not applicable</i>,\n            it's classed as <i>inconclusive</i> in <code>Insights</code> data.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The number of evidence without a compliance check ruling. Evidence is inconclusive when\n         the associated control uses Security Hub CSPM or Config as a data\n         source but you didn't enable those services. This is also the case when a control uses a\n         data source that doesn’t support compliance checks (for example: manual evidence, API\n         calls, or CloudTrail). </p>\n         <note>\n            <p>If evidence has a compliance check status of <i>not applicable</i>,\n            it's classed as <i>inconclusive</i> in <code>Insights</code> data.</p>\n         </note>"
                     }
                 },
                 "assessmentControlsCountByNoncompliantEvidence": {
@@ -6474,19 +6662,19 @@
                 "noncompliantEvidenceCount": {
                     "target": "com.amazonaws.auditmanager#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as\n         non-compliant. This includes evidence that was collected from Security Hub with a\n            <i>Fail</i> ruling, or collected from Config with a\n            <i>Non-compliant</i> ruling. </p>"
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as\n         non-compliant. This includes evidence that was collected from Security Hub CSPM with a\n            <i>Fail</i> ruling, or collected from Config with a\n            <i>Non-compliant</i> ruling. </p>"
                     }
                 },
                 "compliantEvidenceCount": {
                     "target": "com.amazonaws.auditmanager#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as compliant.\n         This includes evidence that was collected from Security Hub with a\n            <i>Pass</i> ruling, or collected from Config with a\n            <i>Compliant</i> ruling. </p>"
+                        "smithy.api#documentation": "<p>The number of compliance check evidence that Audit Manager classified as compliant.\n         This includes evidence that was collected from Security Hub CSPM with a\n            <i>Pass</i> ruling, or collected from Config with a\n            <i>Compliant</i> ruling. </p>"
                     }
                 },
                 "inconclusiveEvidenceCount": {
                     "target": "com.amazonaws.auditmanager#NullableInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of evidence without a compliance check ruling. Evidence is inconclusive if\n         the associated control uses Security Hub or Config as a data\n         source and you didn't enable those services. This is also the case if a control uses a data\n         source that doesn’t support compliance checks (for example, manual evidence, API calls, or\n            CloudTrail). </p>\n         <note>\n            <p>If evidence has a compliance check status of <i>not applicable</i>,\n            it's classified as <i>inconclusive</i> in\n               <code>InsightsByAssessment</code> data.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The amount of evidence without a compliance check ruling. Evidence is inconclusive if\n         the associated control uses Security Hub CSPM or Config as a data\n         source and you didn't enable those services. This is also the case if a control uses a data\n         source that doesn’t support compliance checks (for example, manual evidence, API calls, or\n            CloudTrail). </p>\n         <note>\n            <p>If evidence has a compliance check status of <i>not applicable</i>,\n            it's classified as <i>inconclusive</i> in\n               <code>InsightsByAssessment</code> data.</p>\n         </note>"
                     }
                 },
                 "assessmentControlsCountByNoncompliantEvidence": {
@@ -7924,7 +8112,7 @@
                 "complianceCheck": {
                     "target": "com.amazonaws.auditmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The evaluation status for a resource that was assessed when collecting compliance check\n         evidence. </p>\n         <ul>\n            <li>\n               <p>Audit Manager classes the resource as non-compliant if Security Hub reports a\n                  <i>Fail</i> result, or if Config reports a\n                  <i>Non-compliant</i> result.</p>\n            </li>\n            <li>\n               <p>Audit Manager classes the resource as compliant if Security Hub reports a\n                  <i>Pass</i> result, or if Config reports a\n                  <i>Compliant</i> result.</p>\n            </li>\n            <li>\n               <p>If a compliance check isn't available or applicable, then no compliance evaluation can be made\n               for that resource. This is the case if a resource assessment uses Config or Security Hub as the underlying data source type, but those services\n               aren't enabled. This is also the case if the resource assessment uses an underlying\n               data source type that doesn't support compliance checks (such as manual evidence,\n                  Amazon Web Services API calls, or CloudTrail). </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The evaluation status for a resource that was assessed when collecting compliance check\n         evidence. </p>\n         <ul>\n            <li>\n               <p>Audit Manager classes the resource as non-compliant if Security Hub CSPM reports a\n                  <i>Fail</i> result, or if Config reports a\n                  <i>Non-compliant</i> result.</p>\n            </li>\n            <li>\n               <p>Audit Manager classes the resource as compliant if Security Hub CSPM reports a\n                  <i>Pass</i> result, or if Config reports a\n                  <i>Compliant</i> result.</p>\n            </li>\n            <li>\n               <p>If a compliance check isn't available or applicable, then no compliance evaluation can be made\n               for that resource. This is the case if a resource assessment uses Config or Security Hub CSPM as the underlying data source type, but those services\n               aren't enabled. This is also the case if the resource assessment uses an underlying\n               data source type that doesn't support compliance checks (such as manual evidence,\n                  Amazon Web Services API calls, or CloudTrail). </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -8376,18 +8564,18 @@
                 "keywordInputType": {
                     "target": "com.amazonaws.auditmanager#KeywordInputType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The input method for the keyword. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SELECT_FROM_LIST</code> is used when mapping a data source for automated\n               evidence.</p>\n               <ul>\n                  <li>\n                     <p>When <code>keywordInputType</code> is <code>SELECT_FROM_LIST</code>, a\n                     keyword must be selected to collect automated evidence. For example, this\n                     keyword can be a CloudTrail event name, a rule name for Config, a Security Hub control, or the name of an Amazon Web Services API call.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>UPLOAD_FILE</code> and <code>INPUT_TEXT</code> are only used when mapping a\n               data source for manual evidence.</p>\n               <ul>\n                  <li>\n                     <p>When <code>keywordInputType</code> is <code>UPLOAD_FILE</code>, a file must\n                     be uploaded as manual evidence.</p>\n                  </li>\n                  <li>\n                     <p>When <code>keywordInputType</code> is <code>INPUT_TEXT</code>, text must be\n                     entered as manual evidence.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The input method for the keyword. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>SELECT_FROM_LIST</code> is used when mapping a data source for automated\n               evidence.</p>\n               <ul>\n                  <li>\n                     <p>When <code>keywordInputType</code> is <code>SELECT_FROM_LIST</code>, a\n                     keyword must be selected to collect automated evidence. For example, this\n                     keyword can be a CloudTrail event name, a rule name for Config, a Security Hub CSPM control, or the name of an Amazon Web Services API call.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>UPLOAD_FILE</code> and <code>INPUT_TEXT</code> are only used when mapping a\n               data source for manual evidence.</p>\n               <ul>\n                  <li>\n                     <p>When <code>keywordInputType</code> is <code>UPLOAD_FILE</code>, a file must\n                     be uploaded as manual evidence.</p>\n                  </li>\n                  <li>\n                     <p>When <code>keywordInputType</code> is <code>INPUT_TEXT</code>, text must be\n                     entered as manual evidence.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "keywordValue": {
                     "target": "com.amazonaws.auditmanager#KeywordValue",
                     "traits": {
-                        "smithy.api#documentation": "<p> The value of the keyword that's used when mapping a control data source. For example,\n         this can be a CloudTrail event name, a rule name for Config, a\n            Security Hub control, or the name of an Amazon Web Services API call. </p>\n         <p>If you’re mapping a data source to a rule in Config, the\n            <code>keywordValue</code> that you specify depends on the type of rule:</p>\n         <ul>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">managed rules</a>, you can use the rule identifier as the\n                  <code>keywordValue</code>. You can find the rule identifier from the <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html\">list of Config managed rules</a>. For some\n               rules, the rule identifier is different from the rule name. For example, the rule\n               name <code>restricted-ssh</code> has the following rule identifier:\n                  <code>INCOMING_SSH_DISABLED</code>. Make sure to use the rule identifier, not the\n               rule name. </p>\n               <p>Keyword example for managed rules:</p>\n               <ul>\n                  <li>\n                     <p>Managed rule name: <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html\">s3-bucket-acl-prohibited</a>\n                     </p>\n                     <p>\n                        <code>keywordValue</code>: <code>S3_BUCKET_ACL_PROHIBITED</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html\">custom rules</a>, you form the <code>keywordValue</code>\n               by adding the <code>Custom_</code> prefix to the rule name. This prefix distinguishes\n               the custom rule from a managed rule. </p>\n               <p>Keyword example for custom rules:</p>\n               <ul>\n                  <li>\n                     <p>Custom rule name: my-custom-config-rule</p>\n                     <p>\n                        <code>keywordValue</code>: <code>Custom_my-custom-config-rule</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html\">service-linked rules</a>, you form the\n                  <code>keywordValue</code> by adding the <code>Custom_</code> prefix to the rule\n               name. In addition, you remove the suffix ID that appears at the end of the rule name. </p>\n               <p>Keyword examples for service-linked rules:</p>\n               <ul>\n                  <li>\n                     <p>Service-linked rule name:\n                     CustomRuleForAccount-conformance-pack-szsm1uv0w</p>\n                     <p>\n                        <code>keywordValue</code>:\n                        <code>Custom_CustomRuleForAccount-conformance-pack</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Service-linked rule name:\n                     OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba</p>\n                     <p>\n                        <code>keywordValue</code>:\n                        <code>Custom_OrgConfigRule-s3-bucket-versioning-enabled</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <important>\n            <p>The <code>keywordValue</code> is case sensitive. If you enter a value incorrectly, Audit Manager might not recognize the data source mapping. As a result, you might not\n         successfully collect evidence from that data source as intended. </p>\n            <p>Keep in mind the following requirements, depending on the data source type that\n            you're using. </p>\n            <ol>\n               <li>\n                  <p>For Config: </p>\n                  <ul>\n                     <li>\n                        <p>For managed rules, make sure that the <code>keywordValue</code> is the rule identifier in\n                     <code>ALL_CAPS_WITH_UNDERSCORES</code>. For example,\n                     <code>CLOUDWATCH_LOG_GROUP_ENCRYPTED</code>. For accuracy, we recommend\n                     that you reference the list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html\">supported Config managed rules</a>.</p>\n                     </li>\n                     <li>\n                        <p>For custom rules, make sure that the <code>keywordValue</code> has the <code>Custom_</code>\n                     prefix followed by the custom rule name. The format of the custom rule name\n                     itself may vary. For accuracy, we recommend that you visit the <a href=\"https://console.aws.amazon.com/config/\">Config console</a> to\n                     verify your custom rule name.</p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>For Security Hub: The format varies for Security Hub control names.\n                  For accuracy, we recommend that you reference the list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html\">supported\n                     Security Hub controls</a>.</p>\n               </li>\n               <li>\n                  <p>For Amazon Web Services API calls: Make sure that the <code>keywordValue</code>\n                  is written as <code>serviceprefix_ActionName</code>. For example,\n                  <code>iam_ListGroups</code>. For accuracy, we recommend that you reference the\n                  list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html\">supported\n                     API calls</a>.</p>\n               </li>\n               <li>\n                  <p>For CloudTrail: Make sure that the <code>keywordValue</code> is written\n                  as <code>serviceprefix_ActionName</code>. For example,\n                  <code>cloudtrail_StartLogging</code>. For accuracy, we recommend that you\n                  review the Amazon Web Services service prefix and action names in the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html\">Service Authorization Reference</a>.</p>\n               </li>\n            </ol>\n         </important>"
+                        "smithy.api#documentation": "<p> The value of the keyword that's used when mapping a control data source. For example,\n         this can be a CloudTrail event name, a rule name for Config, a\n            Security Hub CSPM control, or the name of an Amazon Web Services API call. </p>\n         <p>If you’re mapping a data source to a rule in Config, the\n            <code>keywordValue</code> that you specify depends on the type of rule:</p>\n         <ul>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html\">managed rules</a>, you can use the rule identifier as the\n                  <code>keywordValue</code>. You can find the rule identifier from the <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html\">list of Config managed rules</a>. For some\n               rules, the rule identifier is different from the rule name. For example, the rule\n               name <code>restricted-ssh</code> has the following rule identifier:\n                  <code>INCOMING_SSH_DISABLED</code>. Make sure to use the rule identifier, not the\n               rule name. </p>\n               <p>Keyword example for managed rules:</p>\n               <ul>\n                  <li>\n                     <p>Managed rule name: <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html\">s3-bucket-acl-prohibited</a>\n                     </p>\n                     <p>\n                        <code>keywordValue</code>: <code>S3_BUCKET_ACL_PROHIBITED</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html\">custom rules</a>, you form the <code>keywordValue</code>\n               by adding the <code>Custom_</code> prefix to the rule name. This prefix distinguishes\n               the custom rule from a managed rule. </p>\n               <p>Keyword example for custom rules:</p>\n               <ul>\n                  <li>\n                     <p>Custom rule name: my-custom-config-rule</p>\n                     <p>\n                        <code>keywordValue</code>: <code>Custom_my-custom-config-rule</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html\">service-linked rules</a>, you form the\n                  <code>keywordValue</code> by adding the <code>Custom_</code> prefix to the rule\n               name. In addition, you remove the suffix ID that appears at the end of the rule name. </p>\n               <p>Keyword examples for service-linked rules:</p>\n               <ul>\n                  <li>\n                     <p>Service-linked rule name:\n                     CustomRuleForAccount-conformance-pack-szsm1uv0w</p>\n                     <p>\n                        <code>keywordValue</code>:\n                        <code>Custom_CustomRuleForAccount-conformance-pack</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Service-linked rule name:\n                     OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba</p>\n                     <p>\n                        <code>keywordValue</code>:\n                        <code>Custom_OrgConfigRule-s3-bucket-versioning-enabled</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <important>\n            <p>The <code>keywordValue</code> is case sensitive. If you enter a value incorrectly, Audit Manager might not recognize the data source mapping. As a result, you might not\n         successfully collect evidence from that data source as intended. </p>\n            <p>Keep in mind the following requirements, depending on the data source type that\n            you're using. </p>\n            <ol>\n               <li>\n                  <p>For Config: </p>\n                  <ul>\n                     <li>\n                        <p>For managed rules, make sure that the <code>keywordValue</code> is the rule identifier in\n                     <code>ALL_CAPS_WITH_UNDERSCORES</code>. For example,\n                     <code>CLOUDWATCH_LOG_GROUP_ENCRYPTED</code>. For accuracy, we recommend\n                     that you reference the list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html\">supported Config managed rules</a>.</p>\n                     </li>\n                     <li>\n                        <p>For custom rules, make sure that the <code>keywordValue</code> has the <code>Custom_</code>\n                     prefix followed by the custom rule name. The format of the custom rule name\n                     itself may vary. For accuracy, we recommend that you visit the <a href=\"https://console.aws.amazon.com/config/\">Config console</a> to\n                     verify your custom rule name.</p>\n                     </li>\n                  </ul>\n               </li>\n               <li>\n                  <p>For Security Hub CSPM: The format varies for Security Hub CSPM control names.\n                  For accuracy, we recommend that you reference the list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html\">supported\n                     Security Hub CSPM controls</a>.</p>\n               </li>\n               <li>\n                  <p>For Amazon Web Services API calls: Make sure that the <code>keywordValue</code>\n                  is written as <code>serviceprefix_ActionName</code>. For example,\n                  <code>iam_ListGroups</code>. For accuracy, we recommend that you reference the\n                  list of <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html\">supported\n                     API calls</a>.</p>\n               </li>\n               <li>\n                  <p>For CloudTrail: Make sure that the <code>keywordValue</code> is written\n                  as <code>serviceprefix_ActionName</code>. For example,\n                  <code>cloudtrail_StartLogging</code>. For accuracy, we recommend that you\n                  review the Amazon Web Services service prefix and action names in the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html\">Service Authorization Reference</a>.</p>\n               </li>\n            </ol>\n         </important>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A keyword that relates to the control data source.</p>\n         <p>For manual evidence, this keyword indicates if the manual evidence is a file or\n         text.</p>\n         <p>For automated evidence, this keyword identifies a specific CloudTrail event,\n            Config rule, Security Hub control, or Amazon Web Services API name. </p>\n         <p> To learn more about the supported keywords that you can use when mapping a control data\n         source, see the following pages in the <i>Audit Manager User\n            Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html\">Config rules supported by Audit Manager</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html\">Security Hub controls supported by Audit Manager</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html\">API calls\n                  supported by Audit Manager</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html\">CloudTrail event names supported by Audit Manager</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A keyword that relates to the control data source.</p>\n         <p>For manual evidence, this keyword indicates if the manual evidence is a file or\n         text.</p>\n         <p>For automated evidence, this keyword identifies a specific CloudTrail event,\n            Config rule, Security Hub CSPM control, or Amazon Web Services API name. </p>\n         <p> To learn more about the supported keywords that you can use when mapping a control data\n         source, see the following pages in the <i>Audit Manager User\n            Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html\">Config rules supported by Audit Manager</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html\">Security Hub CSPM controls supported by Audit Manager</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html\">API calls\n                  supported by Audit Manager</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html\">CloudTrail event names supported by Audit Manager</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.auditmanager#SourceName": {

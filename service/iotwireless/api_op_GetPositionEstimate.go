@@ -4,11 +4,8 @@ package iotwireless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -32,8 +29,7 @@ func (c *Client) GetPositionEstimate(ctx context.Context, params *GetPositionEst
 
 type GetPositionEstimateInput struct {
 
-	// Optional configuration to customize position estimates. If not provided,
-	// defaults are applied.
+	// Optional configuration for customizing position measurement data.
 	AdvancedConfiguration *types.AdvancedConfiguration
 
 	// Retrieves an estimated device position by resolving measurement data from
@@ -43,8 +39,15 @@ type GetPositionEstimateInput struct {
 
 	// Retrieves an estimated device position by resolving the global navigation
 	// satellite system (GNSS) scan data. The position is resolved using the GNSS
-	// solver powered by LoRa Cloud.
+	// solver powered by LoRa Cloud. This field is mutually exclusive with the
+	// GnssMultiFrame field.
 	Gnss *types.Gnss
+
+	// Retrieves an estimated device position by resolving multiple global navigation
+	// satellite system (GNSS) scan captures. The position is resolved using the
+	// multi-frame GNSS solver powered by LoRa Cloud. This field is mutually exclusive
+	// with the Gnss field.
+	GnssMultiFrame *types.GnssMultiFrame
 
 	// Retrieves an estimated device position by resolving the IP address information
 	// from the device. The position is resolved using MaxMind's IP-based solver.
@@ -81,9 +84,6 @@ type GetPositionEstimateOutput struct {
 }
 
 func (c *Client) addOperationGetPositionEstimateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPositionEstimate{}, middleware.After)
 	if err != nil {
 		return err
@@ -92,65 +92,20 @@ func (c *Client) addOperationGetPositionEstimateMiddlewares(stack *middleware.St
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPositionEstimate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPositionEstimateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPositionEstimate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +120,8 @@ func (c *Client) addOperationGetPositionEstimateMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPositionEstimate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPositionEstimate",
-	}
 }

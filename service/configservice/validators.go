@@ -170,6 +170,26 @@ func (m *validateOpDeleteConformancePack) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteConnector struct {
+}
+
+func (*validateOpDeleteConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDeliveryChannel struct {
 }
 
@@ -345,26 +365,6 @@ func (m *validateOpDeleteRetentionConfiguration) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRetentionConfigurationInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDeleteServiceLinkedConfigurationRecorder struct {
-}
-
-func (*validateOpDeleteServiceLinkedConfigurationRecorder) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteServiceLinkedConfigurationRecorder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteServiceLinkedConfigurationRecorderInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteServiceLinkedConfigurationRecorderInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +730,26 @@ func (m *validateOpGetConformancePackComplianceSummary) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetConnector struct {
+}
+
+func (*validateOpGetConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetOrganizationConfigRuleDetailedStatus struct {
 }
 
@@ -1030,6 +1050,26 @@ func (m *validateOpPutConformancePack) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutConnector struct {
+}
+
+func (*validateOpPutConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutDeliveryChannel struct {
 }
 
@@ -1250,6 +1290,26 @@ func (m *validateOpPutStoredQuery) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutThirdPartyServiceLinkedConfigurationRecorder struct {
+}
+
+func (*validateOpPutThirdPartyServiceLinkedConfigurationRecorder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutThirdPartyServiceLinkedConfigurationRecorder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutThirdPartyServiceLinkedConfigurationRecorderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutThirdPartyServiceLinkedConfigurationRecorderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSelectAggregateResourceConfig struct {
 }
 
@@ -1442,6 +1502,10 @@ func addOpDeleteConformancePackValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteConformancePack{}, middleware.After)
 }
 
+func addOpDeleteConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnector{}, middleware.After)
+}
+
 func addOpDeleteDeliveryChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDeliveryChannel{}, middleware.After)
 }
@@ -1476,10 +1540,6 @@ func addOpDeleteResourceConfigValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDeleteRetentionConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRetentionConfiguration{}, middleware.After)
-}
-
-func addOpDeleteServiceLinkedConfigurationRecorderValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteServiceLinkedConfigurationRecorder{}, middleware.After)
 }
 
 func addOpDeleteStoredQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -1554,6 +1614,10 @@ func addOpGetConformancePackComplianceSummaryValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpGetConformancePackComplianceSummary{}, middleware.After)
 }
 
+func addOpGetConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnector{}, middleware.After)
+}
+
 func addOpGetOrganizationConfigRuleDetailedStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOrganizationConfigRuleDetailedStatus{}, middleware.After)
 }
@@ -1614,6 +1678,10 @@ func addOpPutConformancePackValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpPutConformancePack{}, middleware.After)
 }
 
+func addOpPutConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutConnector{}, middleware.After)
+}
+
 func addOpPutDeliveryChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDeliveryChannel{}, middleware.After)
 }
@@ -1656,6 +1724,10 @@ func addOpPutServiceLinkedConfigurationRecorderValidationMiddleware(stack *middl
 
 func addOpPutStoredQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutStoredQuery{}, middleware.After)
+}
+
+func addOpPutThirdPartyServiceLinkedConfigurationRecorderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutThirdPartyServiceLinkedConfigurationRecorder{}, middleware.After)
 }
 
 func addOpSelectAggregateResourceConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1746,6 +1818,24 @@ func validateAggregateResourceIdentifier(v *types.AggregateResourceIdentifier) e
 	}
 }
 
+func validateAzureConnectorConfiguration(v *types.AzureConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureConnectorConfiguration"}
+	if v.TenantIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TenantIdentifier"))
+	}
+	if v.ClientIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConfigRule(v *types.ConfigRule) error {
 	if v == nil {
 		return nil
@@ -1773,6 +1863,11 @@ func validateConfigurationRecorder(v *types.ConfigurationRecorder) error {
 	if v.RecordingMode != nil {
 		if err := validateRecordingMode(v.RecordingMode); err != nil {
 			invalidParams.AddNested("RecordingMode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScopeConfiguration != nil {
+		if err := validateScopeConfiguration(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1823,6 +1918,23 @@ func validateConformancePackInputParameters(v []types.ConformancePackInputParame
 	for i := range v {
 		if err := validateConformancePackInputParameter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConnectorConfiguration(v *types.ConnectorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorConfiguration"}
+	if v.Azure != nil {
+		if err := validateAzureConnectorConfiguration(v.Azure); err != nil {
+			invalidParams.AddNested("Azure", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2207,6 +2319,21 @@ func validateResourceValue(v *types.ResourceValue) error {
 	}
 }
 
+func validateScopeConfiguration(v *types.ScopeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScopeConfiguration"}
+	if v.ScopeType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSource(v *types.Source) error {
 	if v == nil {
 		return nil
@@ -2409,6 +2536,21 @@ func validateOpDeleteConformancePackInput(v *DeleteConformancePackInput) error {
 	}
 }
 
+func validateOpDeleteConnectorInput(v *DeleteConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectorInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDeliveryChannelInput(v *DeleteDeliveryChannelInput) error {
 	if v == nil {
 		return nil
@@ -2545,21 +2687,6 @@ func validateOpDeleteRetentionConfigurationInput(v *DeleteRetentionConfiguration
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteRetentionConfigurationInput"}
 	if v.RetentionConfigurationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RetentionConfigurationName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteServiceLinkedConfigurationRecorderInput(v *DeleteServiceLinkedConfigurationRecorderInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteServiceLinkedConfigurationRecorderInput"}
-	if v.ServicePrincipal == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServicePrincipal"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2862,6 +2989,21 @@ func validateOpGetConformancePackComplianceSummaryInput(v *GetConformancePackCom
 	}
 }
 
+func validateOpGetConnectorInput(v *GetConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectorInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetOrganizationConfigRuleDetailedStatusInput(v *GetOrganizationConfigRuleDetailedStatusInput) error {
 	if v == nil {
 		return nil
@@ -3126,6 +3268,25 @@ func validateOpPutConformancePackInput(v *PutConformancePackInput) error {
 	}
 }
 
+func validateOpPutConnectorInput(v *PutConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutConnectorInput"}
+	if v.ConnectorConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorConfiguration"))
+	} else if v.ConnectorConfiguration != nil {
+		if err := validateConnectorConfiguration(v.ConnectorConfiguration); err != nil {
+			invalidParams.AddNested("ConnectorConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutDeliveryChannelInput(v *PutDeliveryChannelInput) error {
 	if v == nil {
 		return nil
@@ -3334,6 +3495,31 @@ func validateOpPutStoredQueryInput(v *PutStoredQueryInput) error {
 	} else if v.StoredQuery != nil {
 		if err := validateStoredQuery(v.StoredQuery); err != nil {
 			invalidParams.AddNested("StoredQuery", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutThirdPartyServiceLinkedConfigurationRecorderInput(v *PutThirdPartyServiceLinkedConfigurationRecorderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutThirdPartyServiceLinkedConfigurationRecorderInput"}
+	if v.ServicePrincipal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServicePrincipal"))
+	}
+	if v.ConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorArn"))
+	}
+	if v.ScopeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeConfiguration"))
+	} else if v.ScopeConfiguration != nil {
+		if err := validateScopeConfiguration(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

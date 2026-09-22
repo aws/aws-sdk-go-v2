@@ -5,10 +5,10 @@ package kendra
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of groups that are mapped to users before a given ordering or
@@ -62,6 +62,30 @@ type ListGroupsOlderThanOrderingIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsOlderThanOrderingIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsOlderThanOrderingIdRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsOlderThanOrderingIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.ListGroupsOlderThanOrderingIdRequest_DataSourceId, *v.DataSourceId)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListGroupsOlderThanOrderingIdRequest_IndexId, *v.IndexId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroupsOlderThanOrderingIdRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupsOlderThanOrderingIdRequest_NextToken, *v.NextToken)
+	}
+	if v.OrderingId != nil {
+		s.WriteInt64(schemas.ListGroupsOlderThanOrderingIdRequest_OrderingId, *v.OrderingId)
+	}
+}
+
 type ListGroupsOlderThanOrderingIdOutput struct {
 
 	//  Summary information for list of groups that are mapped to users before a given
@@ -79,77 +103,51 @@ type ListGroupsOlderThanOrderingIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsOlderThanOrderingIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsOlderThanOrderingIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsOlderThanOrderingIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfGroupSummaries(s, schemas.ListGroupsOlderThanOrderingIdResponse_GroupsSummaries, v.GroupsSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupsOlderThanOrderingIdResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGroupsOlderThanOrderingIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupsOlderThanOrderingIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupsOlderThanOrderingIdResponse_GroupsSummaries:
+			return deserializeListOfGroupSummaries(d, schemas.ListGroupsOlderThanOrderingIdResponse_GroupsSummaries, &v.GroupsSummaries)
+		case schemas.ListGroupsOlderThanOrderingIdResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupsOlderThanOrderingIdResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupsOlderThanOrderingIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupsOlderThanOrderingId, schemas.ListGroupsOlderThanOrderingIdRequest, schemas.ListGroupsOlderThanOrderingIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGroupsOlderThanOrderingId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupsOlderThanOrderingId, schemas.ListGroupsOlderThanOrderingIdRequest, schemas.ListGroupsOlderThanOrderingIdResponse), output: &ListGroupsOlderThanOrderingIdOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListGroupsOlderThanOrderingId{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGroupsOlderThanOrderingId"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListGroupsOlderThanOrderingIdValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroupsOlderThanOrderingId(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +160,6 @@ func (c *Client) addOperationListGroupsOlderThanOrderingIdMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +264,3 @@ type ListGroupsOlderThanOrderingIdAPIClient interface {
 }
 
 var _ ListGroupsOlderThanOrderingIdAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListGroupsOlderThanOrderingId(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListGroupsOlderThanOrderingId",
-	}
-}

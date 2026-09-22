@@ -1,0 +1,5 @@
+POST /ticketsv2
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","ConnectorId":"__ConnectorId__","FindingMetadataUid":"__FindingMetadataUid__","Mode":"DRYRUN"}

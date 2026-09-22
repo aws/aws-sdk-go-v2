@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provisions a transit virtual interface to be owned by the specified Amazon Web
@@ -57,6 +56,26 @@ type AllocateTransitVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AllocateTransitVirtualInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllocateTransitVirtualInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllocateTransitVirtualInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.AllocateTransitVirtualInterfaceRequest_connectionId, *v.ConnectionId)
+	}
+	if v.NewTransitVirtualInterfaceAllocation != nil {
+		s.WriteStruct(schemas.AllocateTransitVirtualInterfaceRequest_newTransitVirtualInterfaceAllocation)
+		v.NewTransitVirtualInterfaceAllocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.AllocateTransitVirtualInterfaceRequest_ownerAccount, *v.OwnerAccount)
+	}
+}
+
 type AllocateTransitVirtualInterfaceOutput struct {
 
 	// Information about the transit virtual interface.
@@ -68,77 +87,50 @@ type AllocateTransitVirtualInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AllocateTransitVirtualInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllocateTransitVirtualInterfaceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllocateTransitVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterface != nil {
+		s.WriteStruct(schemas.AllocateTransitVirtualInterfaceResult_virtualInterface)
+		v.VirtualInterface.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AllocateTransitVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AllocateTransitVirtualInterfaceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AllocateTransitVirtualInterfaceResult_virtualInterface:
+			v.VirtualInterface = &types.VirtualInterface{}
+			return v.VirtualInterface.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAllocateTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AllocateTransitVirtualInterface, schemas.AllocateTransitVirtualInterfaceRequest, schemas.AllocateTransitVirtualInterfaceResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAllocateTransitVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AllocateTransitVirtualInterface, schemas.AllocateTransitVirtualInterfaceRequest, schemas.AllocateTransitVirtualInterfaceResult), output: &AllocateTransitVirtualInterfaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAllocateTransitVirtualInterface{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AllocateTransitVirtualInterface"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAllocateTransitVirtualInterfaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAllocateTransitVirtualInterface(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +145,8 @@ func (c *Client) addOperationAllocateTransitVirtualInterfaceMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAllocateTransitVirtualInterface(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AllocateTransitVirtualInterface",
-	}
 }

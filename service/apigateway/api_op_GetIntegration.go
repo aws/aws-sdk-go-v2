@@ -4,11 +4,10 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the integration settings.
@@ -46,6 +45,24 @@ type GetIntegrationInput struct {
 	RestApiId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.GetIntegrationRequest_httpMethod, *v.HttpMethod)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetIntegrationRequest_resourceId, *v.ResourceId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetIntegrationRequest_restApiId, *v.RestApiId)
+	}
 }
 
 // Represents an HTTP , HTTP_PROXY , AWS , AWS_PROXY , or Mock integration.
@@ -182,77 +199,149 @@ type GetIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Integration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfString(s, schemas.Integration_cacheKeyParameters, v.CacheKeyParameters)
+	if v.CacheNamespace != nil {
+		s.WriteString(schemas.Integration_cacheNamespace, *v.CacheNamespace)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.Integration_connectionId, *v.ConnectionId)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.Integration_connectionType, string(v.ConnectionType))
+	}
+	if v.ContentHandling != "" {
+		s.WriteString(schemas.Integration_contentHandling, string(v.ContentHandling))
+	}
+	if v.Credentials != nil {
+		s.WriteString(schemas.Integration_credentials, *v.Credentials)
+	}
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.Integration_httpMethod, *v.HttpMethod)
+	}
+	serializeMapOfIntegrationResponse(s, schemas.Integration_integrationResponses, v.IntegrationResponses)
+	if v.IntegrationTarget != nil {
+		s.WriteString(schemas.Integration_integrationTarget, *v.IntegrationTarget)
+	}
+	if v.PassthroughBehavior != nil {
+		s.WriteString(schemas.Integration_passthroughBehavior, *v.PassthroughBehavior)
+	}
+	serializeMapOfStringToString(s, schemas.Integration_requestParameters, v.RequestParameters)
+	serializeMapOfStringToString(s, schemas.Integration_requestTemplates, v.RequestTemplates)
+	if v.ResponseTransferMode != "" {
+		s.WriteString(schemas.Integration_responseTransferMode, string(v.ResponseTransferMode))
+	}
+	if v.TimeoutInMillis != 0 {
+		s.WriteInt32(schemas.Integration_timeoutInMillis, v.TimeoutInMillis)
+	}
+	if v.TlsConfig != nil {
+		s.WriteStruct(schemas.Integration_tlsConfig)
+		v.TlsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Integration_type, string(v.Type))
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.Integration_uri, *v.Uri)
+	}
+}
+func (v *GetIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Integration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Integration_cacheKeyParameters:
+			return deserializeListOfString(d, schemas.Integration_cacheKeyParameters, &v.CacheKeyParameters)
+		case schemas.Integration_cacheNamespace:
+			v.CacheNamespace = new(string)
+			return d.ReadString(schemas.Integration_cacheNamespace, v.CacheNamespace)
+		case schemas.Integration_connectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.Integration_connectionId, v.ConnectionId)
+		case schemas.Integration_connectionType:
+			var ev string
+			if err := d.ReadString(schemas.Integration_connectionType, &ev); err != nil {
+				return err
+			}
+			v.ConnectionType = types.ConnectionType(ev)
+			return nil
+		case schemas.Integration_contentHandling:
+			var ev string
+			if err := d.ReadString(schemas.Integration_contentHandling, &ev); err != nil {
+				return err
+			}
+			v.ContentHandling = types.ContentHandlingStrategy(ev)
+			return nil
+		case schemas.Integration_credentials:
+			v.Credentials = new(string)
+			return d.ReadString(schemas.Integration_credentials, v.Credentials)
+		case schemas.Integration_httpMethod:
+			v.HttpMethod = new(string)
+			return d.ReadString(schemas.Integration_httpMethod, v.HttpMethod)
+		case schemas.Integration_integrationResponses:
+			return deserializeMapOfIntegrationResponse(d, schemas.Integration_integrationResponses, &v.IntegrationResponses)
+		case schemas.Integration_integrationTarget:
+			v.IntegrationTarget = new(string)
+			return d.ReadString(schemas.Integration_integrationTarget, v.IntegrationTarget)
+		case schemas.Integration_passthroughBehavior:
+			v.PassthroughBehavior = new(string)
+			return d.ReadString(schemas.Integration_passthroughBehavior, v.PassthroughBehavior)
+		case schemas.Integration_requestParameters:
+			return deserializeMapOfStringToString(d, schemas.Integration_requestParameters, &v.RequestParameters)
+		case schemas.Integration_requestTemplates:
+			return deserializeMapOfStringToString(d, schemas.Integration_requestTemplates, &v.RequestTemplates)
+		case schemas.Integration_responseTransferMode:
+			var ev string
+			if err := d.ReadString(schemas.Integration_responseTransferMode, &ev); err != nil {
+				return err
+			}
+			v.ResponseTransferMode = types.ResponseTransferMode(ev)
+			return nil
+		case schemas.Integration_timeoutInMillis:
+			return d.ReadInt32(schemas.Integration_timeoutInMillis, &v.TimeoutInMillis)
+		case schemas.Integration_tlsConfig:
+			v.TlsConfig = &types.TlsConfig{}
+			return v.TlsConfig.Deserialize(d)
+		case schemas.Integration_type:
+			var ev string
+			if err := d.ReadString(schemas.Integration_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IntegrationType(ev)
+			return nil
+		case schemas.Integration_uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.Integration_uri, v.Uri)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationRequest, schemas.Integration)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntegration, schemas.GetIntegrationRequest, schemas.Integration), output: &GetIntegrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntegration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIntegration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIntegrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIntegration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -270,22 +359,8 @@ func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIntegration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIntegration",
-	}
 }

@@ -1,0 +1,5 @@
+POST /sparql/statistics
+
+Content-Type: application/json
+
+{"mode":"disableAutoCompute"}

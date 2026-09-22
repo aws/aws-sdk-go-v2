@@ -1,0 +1,5 @@
+POST /subscription/UpdateServiceSettings
+
+Content-Type: application/json
+
+{"AllowUpdate":true,"LinuxSubscriptionsDiscovery":"Enabled","LinuxSubscriptionsDiscoverySettings":{"OrganizationIntegration":"Enabled","SourceRegions":["__Member__","__Member__"]}}

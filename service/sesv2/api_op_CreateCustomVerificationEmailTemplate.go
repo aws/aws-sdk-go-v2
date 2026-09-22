@@ -4,11 +4,10 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new custom verification email template.
@@ -80,6 +79,34 @@ type CreateCustomVerificationEmailTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomVerificationEmailTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomVerificationEmailTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomVerificationEmailTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureRedirectionURL != nil {
+		s.WriteString(schemas.CreateCustomVerificationEmailTemplateRequest_FailureRedirectionURL, *v.FailureRedirectionURL)
+	}
+	if v.FromEmailAddress != nil {
+		s.WriteString(schemas.CreateCustomVerificationEmailTemplateRequest_FromEmailAddress, *v.FromEmailAddress)
+	}
+	if v.SuccessRedirectionURL != nil {
+		s.WriteString(schemas.CreateCustomVerificationEmailTemplateRequest_SuccessRedirectionURL, *v.SuccessRedirectionURL)
+	}
+	serializeTagList(s, schemas.CreateCustomVerificationEmailTemplateRequest_Tags, v.Tags)
+	if v.TemplateContent != nil {
+		s.WriteString(schemas.CreateCustomVerificationEmailTemplateRequest_TemplateContent, *v.TemplateContent)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateCustomVerificationEmailTemplateRequest_TemplateName, *v.TemplateName)
+	}
+	if v.TemplateSubject != nil {
+		s.WriteString(schemas.CreateCustomVerificationEmailTemplateRequest_TemplateSubject, *v.TemplateSubject)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response with
 // an empty HTTP body.
 type CreateCustomVerificationEmailTemplateOutput struct {
@@ -89,77 +116,42 @@ type CreateCustomVerificationEmailTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomVerificationEmailTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomVerificationEmailTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomVerificationEmailTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateCustomVerificationEmailTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomVerificationEmailTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomVerificationEmailTemplate, schemas.CreateCustomVerificationEmailTemplateRequest, schemas.CreateCustomVerificationEmailTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomVerificationEmailTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomVerificationEmailTemplate, schemas.CreateCustomVerificationEmailTemplateRequest, schemas.CreateCustomVerificationEmailTemplateResponse), output: &CreateCustomVerificationEmailTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomVerificationEmailTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomVerificationEmailTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCustomVerificationEmailTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomVerificationEmailTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +166,8 @@ func (c *Client) addOperationCreateCustomVerificationEmailTemplateMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCustomVerificationEmailTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCustomVerificationEmailTemplate",
-	}
 }

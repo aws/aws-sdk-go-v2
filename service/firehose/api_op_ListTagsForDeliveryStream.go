@@ -4,11 +4,10 @@ package firehose
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/firehose/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the tags for the specified Firehose stream. This operation has a limit of
@@ -49,6 +48,24 @@ type ListTagsForDeliveryStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForDeliveryStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForDeliveryStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForDeliveryStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryStreamName != nil {
+		s.WriteString(schemas.ListTagsForDeliveryStreamInput_DeliveryStreamName, *v.DeliveryStreamName)
+	}
+	if v.ExclusiveStartTagKey != nil {
+		s.WriteString(schemas.ListTagsForDeliveryStreamInput_ExclusiveStartTagKey, *v.ExclusiveStartTagKey)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListTagsForDeliveryStreamInput_Limit, *v.Limit)
+	}
+}
+
 type ListTagsForDeliveryStreamOutput struct {
 
 	// If this is true in the response, more tags are available. To list the remaining
@@ -70,77 +87,51 @@ type ListTagsForDeliveryStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForDeliveryStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForDeliveryStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForDeliveryStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HasMoreTags != nil {
+		s.WriteBool(schemas.ListTagsForDeliveryStreamOutput_HasMoreTags, *v.HasMoreTags)
+	}
+	serializeListTagsForDeliveryStreamOutputTagList(s, schemas.ListTagsForDeliveryStreamOutput_Tags, v.Tags)
+}
+func (v *ListTagsForDeliveryStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForDeliveryStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForDeliveryStreamOutput_HasMoreTags:
+			v.HasMoreTags = new(bool)
+			return d.ReadBool(schemas.ListTagsForDeliveryStreamOutput_HasMoreTags, v.HasMoreTags)
+		case schemas.ListTagsForDeliveryStreamOutput_Tags:
+			return deserializeListTagsForDeliveryStreamOutputTagList(d, schemas.ListTagsForDeliveryStreamOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForDeliveryStream, schemas.ListTagsForDeliveryStreamInput, schemas.ListTagsForDeliveryStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTagsForDeliveryStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForDeliveryStream, schemas.ListTagsForDeliveryStreamInput, schemas.ListTagsForDeliveryStreamOutput), output: &ListTagsForDeliveryStreamOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTagsForDeliveryStream{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTagsForDeliveryStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTagsForDeliveryStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForDeliveryStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +146,8 @@ func (c *Client) addOperationListTagsForDeliveryStreamMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListTagsForDeliveryStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTagsForDeliveryStream",
-	}
 }

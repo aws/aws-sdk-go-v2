@@ -4,11 +4,10 @@ package outposts
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the site address of the specified site.
@@ -42,6 +41,21 @@ type GetSiteAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSiteAddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSiteAddressInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSiteAddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressType != "" {
+		s.WriteString(schemas.GetSiteAddressInput_AddressType, string(v.AddressType))
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.GetSiteAddressInput_SiteId, *v.SiteId)
+	}
+}
+
 type GetSiteAddressOutput struct {
 
 	//  Information about the address.
@@ -59,77 +73,66 @@ type GetSiteAddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSiteAddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSiteAddressOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSiteAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteStruct(schemas.GetSiteAddressOutput_Address)
+		v.Address.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AddressType != "" {
+		s.WriteString(schemas.GetSiteAddressOutput_AddressType, string(v.AddressType))
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.GetSiteAddressOutput_SiteId, *v.SiteId)
+	}
+}
+func (v *GetSiteAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSiteAddressOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSiteAddressOutput_Address:
+			v.Address = &types.Address{}
+			return v.Address.Deserialize(d)
+		case schemas.GetSiteAddressOutput_AddressType:
+			var ev string
+			if err := d.ReadString(schemas.GetSiteAddressOutput_AddressType, &ev); err != nil {
+				return err
+			}
+			v.AddressType = types.AddressType(ev)
+			return nil
+		case schemas.GetSiteAddressOutput_SiteId:
+			v.SiteId = new(string)
+			return d.ReadString(schemas.GetSiteAddressOutput_SiteId, v.SiteId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSiteAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSiteAddress, schemas.GetSiteAddressInput, schemas.GetSiteAddressOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSiteAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSiteAddress, schemas.GetSiteAddressInput, schemas.GetSiteAddressOutput), output: &GetSiteAddressOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSiteAddress{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSiteAddress"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSiteAddressValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSiteAddress(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +147,8 @@ func (c *Client) addOperationGetSiteAddressMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSiteAddress(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSiteAddress",
-	}
 }

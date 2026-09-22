@@ -1,0 +1,5 @@
+POST /updateRelatedItems
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","incidentRecordArn":"__IncidentRecordArn__","relatedItemsUpdate":{"itemToAdd":{"generatedId":"__GeneratedId__","identifier":{"type":"ANALYSIS","value":{"arn":"__ItemValueMemberArn__"}},"title":"__Title__"}}}

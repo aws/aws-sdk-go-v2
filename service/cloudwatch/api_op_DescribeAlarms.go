@@ -5,11 +5,11 @@ package cloudwatch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"strconv"
 	"time"
@@ -54,15 +54,19 @@ type DescribeAlarmsInput struct {
 	AlarmNames []string
 
 	// Use this parameter to specify whether you want the operation to return metric
-	// alarms or composite alarms. If you omit this parameter, only metric alarms are
-	// returned, even if composite alarms exist in the account.
+	// alarms, composite alarms, or log alarms. If you omit this parameter, only metric
+	// alarms are returned, even if composite alarms or log alarms exist in the
+	// account.
 	//
 	// For example, if you omit this parameter or specify MetricAlarms , the operation
-	// returns only a list of metric alarms. It does not return any composite alarms,
-	// even if composite alarms exist in the account.
+	// returns only a list of metric alarms. It does not return any composite alarms or
+	// log alarms, even if they exist in the account.
 	//
 	// If you specify CompositeAlarms , the operation returns only a list of composite
-	// alarms, and does not return any metric alarms.
+	// alarms, and does not return any metric alarms or log alarms.
+	//
+	// If you specify LogAlarms , the operation returns only a list of log alarms, and
+	// does not return any metric alarms or composite alarms.
 	AlarmTypes []types.AlarmType
 
 	// If you use this parameter and specify the name of a composite alarm, the
@@ -113,10 +117,45 @@ type DescribeAlarmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAlarmsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAlarmsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAlarmsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionPrefix != nil {
+		s.WriteString(schemas.DescribeAlarmsInput_ActionPrefix, *v.ActionPrefix)
+	}
+	if v.AlarmNamePrefix != nil {
+		s.WriteString(schemas.DescribeAlarmsInput_AlarmNamePrefix, *v.AlarmNamePrefix)
+	}
+	serializeAlarmNames(s, schemas.DescribeAlarmsInput_AlarmNames, v.AlarmNames)
+	serializeAlarmTypes(s, schemas.DescribeAlarmsInput_AlarmTypes, v.AlarmTypes)
+	if v.ChildrenOfAlarmName != nil {
+		s.WriteString(schemas.DescribeAlarmsInput_ChildrenOfAlarmName, *v.ChildrenOfAlarmName)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeAlarmsInput_MaxRecords, *v.MaxRecords)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAlarmsInput_NextToken, *v.NextToken)
+	}
+	if v.ParentsOfAlarmName != nil {
+		s.WriteString(schemas.DescribeAlarmsInput_ParentsOfAlarmName, *v.ParentsOfAlarmName)
+	}
+	if v.StateValue != "" {
+		s.WriteString(schemas.DescribeAlarmsInput_StateValue, string(v.StateValue))
+	}
+}
+
 type DescribeAlarmsOutput struct {
 
 	// The information about any composite alarms returned by the operation.
 	CompositeAlarms []types.CompositeAlarm
+
+	// The information about any log alarms returned by the operation.
+	LogAlarms []types.LogAlarm
 
 	// The information about any metric alarms returned by the operation.
 	MetricAlarms []types.MetricAlarm
@@ -130,77 +169,57 @@ type DescribeAlarmsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAlarmsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAlarmsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAlarmsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCompositeAlarms(s, schemas.DescribeAlarmsOutput_CompositeAlarms, v.CompositeAlarms)
+	serializeLogAlarms(s, schemas.DescribeAlarmsOutput_LogAlarms, v.LogAlarms)
+	serializeMetricAlarms(s, schemas.DescribeAlarmsOutput_MetricAlarms, v.MetricAlarms)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAlarmsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAlarmsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAlarmsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAlarmsOutput_CompositeAlarms:
+			return deserializeCompositeAlarms(d, schemas.DescribeAlarmsOutput_CompositeAlarms, &v.CompositeAlarms)
+		case schemas.DescribeAlarmsOutput_LogAlarms:
+			return deserializeLogAlarms(d, schemas.DescribeAlarmsOutput_LogAlarms, &v.LogAlarms)
+		case schemas.DescribeAlarmsOutput_MetricAlarms:
+			return deserializeMetricAlarms(d, schemas.DescribeAlarmsOutput_MetricAlarms, &v.MetricAlarms)
+		case schemas.DescribeAlarmsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAlarmsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAlarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlarms, schemas.DescribeAlarmsInput, schemas.DescribeAlarmsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeAlarms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlarms, schemas.DescribeAlarmsInput, schemas.DescribeAlarmsOutput), output: &DescribeAlarmsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeAlarms{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAlarms"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAlarms(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,12 +232,6 @@ func (c *Client) addOperationDescribeAlarmsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -588,6 +601,186 @@ func compositeAlarmExistsStateRetryable(ctx context.Context, input *DescribeAlar
 	return true, nil
 }
 
+// LogAlarmExistsWaiterOptions are waiter options for LogAlarmExistsWaiter
+type LogAlarmExistsWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
+	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// LogAlarmExistsWaiter will use default minimum delay of 5 seconds. Note that
+	// MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or
+	// set to zero, LogAlarmExistsWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeAlarmsInput, *DescribeAlarmsOutput, error) (bool, error)
+}
+
+// LogAlarmExistsWaiter defines the waiters for LogAlarmExists
+type LogAlarmExistsWaiter struct {
+	client DescribeAlarmsAPIClient
+
+	options LogAlarmExistsWaiterOptions
+}
+
+// NewLogAlarmExistsWaiter constructs a LogAlarmExistsWaiter.
+func NewLogAlarmExistsWaiter(client DescribeAlarmsAPIClient, optFns ...func(*LogAlarmExistsWaiterOptions)) *LogAlarmExistsWaiter {
+	options := LogAlarmExistsWaiterOptions{}
+	options.MinDelay = 5 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = logAlarmExistsStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &LogAlarmExistsWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for LogAlarmExists waiter. The maxWaitDur is the
+// maximum wait duration the waiter will wait. The maxWaitDur is required and must
+// be greater than zero.
+func (w *LogAlarmExistsWaiter) Wait(ctx context.Context, params *DescribeAlarmsInput, maxWaitDur time.Duration, optFns ...func(*LogAlarmExistsWaiterOptions)) error {
+	_, err := w.WaitForOutput(ctx, params, maxWaitDur, optFns...)
+	return err
+}
+
+// WaitForOutput calls the waiter function for LogAlarmExists waiter and returns
+// the output of the successful operation. The maxWaitDur is the maximum wait
+// duration the waiter will wait. The maxWaitDur is required and must be greater
+// than zero.
+func (w *LogAlarmExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeAlarmsInput, maxWaitDur time.Duration, optFns ...func(*LogAlarmExistsWaiterOptions)) (*DescribeAlarmsOutput, error) {
+	if maxWaitDur <= 0 {
+		return nil, fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return nil, fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeAlarms(ctx, params, func(o *Options) {
+			baseOpts := []func(*Options){
+				addIsWaiterUserAgent,
+			}
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range baseOpts {
+				opt(o)
+			}
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return nil, err
+		}
+		if !retryable {
+			return out, nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return nil, fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return nil, fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return nil, fmt.Errorf("exceeded max wait time for LogAlarmExists waiter")
+}
+
+func logAlarmExistsStateRetryable(ctx context.Context, input *DescribeAlarmsInput, output *DescribeAlarmsOutput, err error) (bool, error) {
+
+	if err == nil {
+		v1 := output.LogAlarms
+		v2 := len(v1)
+		v3 := 0
+		v4 := int64(v2) > int64(v3)
+		expectedValue := "true"
+		bv, err := strconv.ParseBool(expectedValue)
+		if err != nil {
+			return false, fmt.Errorf("error parsing boolean from string %w", err)
+		}
+		if v4 == bv {
+			return false, nil
+		}
+	}
+
+	if err != nil {
+		return false, err
+	}
+	return true, nil
+}
+
 // DescribeAlarmsPaginatorOptions is the paginator options for DescribeAlarms
 type DescribeAlarmsPaginatorOptions struct {
 	// The maximum number of alarm descriptions to retrieve.
@@ -680,11 +873,3 @@ type DescribeAlarmsAPIClient interface {
 }
 
 var _ DescribeAlarmsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeAlarms(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAlarms",
-	}
-}

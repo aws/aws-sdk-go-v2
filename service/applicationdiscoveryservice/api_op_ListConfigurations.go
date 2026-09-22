@@ -5,10 +5,10 @@ package applicationdiscoveryservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of configuration items as specified by the value passed to the
@@ -66,6 +66,26 @@ type ListConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationType != "" {
+		s.WriteString(schemas.ListConfigurationsRequest_configurationType, string(v.ConfigurationType))
+	}
+	serializeFilters(s, schemas.ListConfigurationsRequest_filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListConfigurationsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationsRequest_nextToken, *v.NextToken)
+	}
+	serializeOrderByList(s, schemas.ListConfigurationsRequest_orderBy, v.OrderBy)
+}
+
 type ListConfigurationsOutput struct {
 
 	// Returns configuration details, including the configuration ID, attribute names,
@@ -85,77 +105,51 @@ type ListConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurations(s, schemas.ListConfigurationsResponse_configurations, v.Configurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationsResponse_configurations:
+			return deserializeConfigurations(d, schemas.ListConfigurationsResponse_configurations, &v.Configurations)
+		case schemas.ListConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurations, schemas.ListConfigurationsRequest, schemas.ListConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurations, schemas.ListConfigurationsRequest, schemas.ListConfigurationsResponse), output: &ListConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListConfigurations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConfigurations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListConfigurationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigurations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +162,6 @@ func (c *Client) addOperationListConfigurationsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,11 +259,3 @@ type ListConfigurationsAPIClient interface {
 }
 
 var _ ListConfigurationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListConfigurations",
-	}
-}

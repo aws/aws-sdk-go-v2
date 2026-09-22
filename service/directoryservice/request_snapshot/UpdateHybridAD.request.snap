@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.UpdateHybridAD
+
+{"DirectoryId":"__DirectoryId__","HybridAdministratorAccountUpdate":{"SecretArn":"__SecretArn__"},"SelfManagedInstancesSettings":{"CustomerDnsIps":["__Member__","__Member__"],"InstanceIds":["__Member__","__Member__"]}}

@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateGlossaryTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateGlossaryTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateGlossaryTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchCreatePartition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchCreatePartition(context.Background(), nil, func(o *Options) {
@@ -170,11 +182,35 @@ func TestCheckSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetDataQualityRulesetEvaluationRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetDataQualityRulesetEvaluationRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetDataQualityRulesetEvaluationRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetDevEndpoints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetDevEndpoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchGetDevEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetIterableForms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetIterableForms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetIterableForms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -458,6 +494,30 @@ func TestCheckSnapshot_CreateDevEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateGlossary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGlossary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGlossary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateGlossaryTerm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGlossaryTerm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateGlossaryTerm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateGlueIdentityCenterConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
@@ -686,6 +746,42 @@ func TestCheckSnapshot_CreateWorkflow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAssetType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteBlueprint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBlueprint(context.Background(), nil, func(o *Options) {
@@ -835,6 +931,42 @@ func TestCheckSnapshot_DeleteDevEndpoint(t *testing.T) {
 	_, err := svc.DeleteDevEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDevEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteFormType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFormType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFormType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteGlossary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGlossary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGlossary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteGlossaryTerm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGlossaryTerm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteGlossaryTerm")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1142,6 +1274,42 @@ func TestCheckSnapshot_DescribeIntegrations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateGlossaryTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateGlossaryTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateGlossaryTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAssetType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssetType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetBlueprint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBlueprint(context.Background(), nil, func(o *Options) {
@@ -1370,6 +1538,18 @@ func TestCheckSnapshot_GetCustomEntityType(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDashboardUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDashboardUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDashboardUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetDatabase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDatabase(context.Background(), nil, func(o *Options) {
@@ -1399,6 +1579,18 @@ func TestCheckSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.GetDataCatalogEncryptionSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetDataCatalogEncryptionSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDataCatalogExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataCatalogExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDataCatalogExportConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1519,6 +1711,42 @@ func TestCheckSnapshot_GetEntityRecords(t *testing.T) {
 	_, err := svc.GetEntityRecords(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetEntityRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetFormType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFormType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFormType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetGlossary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlossary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGlossary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetGlossaryTerm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlossaryTerm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetGlossaryTerm")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1862,6 +2090,18 @@ func TestCheckSnapshot_GetSession(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSessionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSessionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetStatement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetStatement(context.Background(), nil, func(o *Options) {
@@ -2102,6 +2342,18 @@ func TestCheckSnapshot_ImportCatalogToGlue(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAssetTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAssetTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListBlueprints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListBlueprints(context.Background(), nil, func(o *Options) {
@@ -2270,11 +2522,71 @@ func TestCheckSnapshot_ListEntities(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFormTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFormTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFormTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGlossaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGlossaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGlossaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGlossaryTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGlossaryTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGlossaryTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListIntegrationResourceProperties(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListIntegrationResourceProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIntegrationTableProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntegrationTableProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIntegrationTableProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListIterableForms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIterableForms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListIterableForms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2438,6 +2750,42 @@ func TestCheckSnapshot_ModifyIntegration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAssetType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAssetType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutDataCatalogEncryptionSettings(context.Background(), nil, func(o *Options) {
@@ -2450,11 +2798,35 @@ func TestCheckSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDataCatalogExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutDataCatalogExportConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutDataQualityProfileAnnotation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutDataQualityProfileAnnotation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutDataQualityProfileAnnotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutFormType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutFormType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutFormType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2575,6 +2947,18 @@ func TestCheckSnapshot_RunStatement(t *testing.T) {
 	_, err := svc.RunStatement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RunStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SearchAssets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchAssets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SearchAssets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2906,6 +3290,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateBlueprint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateBlueprint(context.Background(), nil, func(o *Options) {
@@ -3043,6 +3439,30 @@ func TestCheckSnapshot_UpdateDevEndpoint(t *testing.T) {
 	_, err := svc.UpdateDevEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateDevEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateGlossary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGlossary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateGlossary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateGlossaryTerm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGlossaryTerm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateGlossaryTerm")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3241,6 +3661,18 @@ func TestCheckSnapshot_UpdateWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateGlossaryTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateGlossaryTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateGlossaryTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchCreatePartition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchCreatePartition(context.Background(), nil, func(o *Options) {
@@ -3349,11 +3781,35 @@ func TestUpdateSnapshot_BatchGetDataQualityResult(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchGetDataQualityRulesetEvaluationRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetDataQualityRulesetEvaluationRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetDataQualityRulesetEvaluationRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetDevEndpoints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetDevEndpoints(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetDevEndpoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetIterableForms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetIterableForms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetIterableForms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3637,6 +4093,30 @@ func TestUpdateSnapshot_CreateDevEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateGlossary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGlossary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGlossary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateGlossaryTerm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateGlossaryTerm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateGlossaryTerm")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateGlueIdentityCenterConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGlueIdentityCenterConfiguration(context.Background(), nil, func(o *Options) {
@@ -3865,6 +4345,42 @@ func TestUpdateSnapshot_CreateWorkflow(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAssetType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAssetType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteBlueprint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteBlueprint(context.Background(), nil, func(o *Options) {
@@ -4014,6 +4530,42 @@ func TestUpdateSnapshot_DeleteDevEndpoint(t *testing.T) {
 	_, err := svc.DeleteDevEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDevEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteFormType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFormType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFormType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteGlossary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGlossary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGlossary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteGlossaryTerm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteGlossaryTerm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteGlossaryTerm")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4321,6 +4873,42 @@ func TestUpdateSnapshot_DescribeIntegrations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateGlossaryTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateGlossaryTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateGlossaryTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAssetType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAssetType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetBlueprint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetBlueprint(context.Background(), nil, func(o *Options) {
@@ -4549,6 +5137,18 @@ func TestUpdateSnapshot_GetCustomEntityType(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetDashboardUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDashboardUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDashboardUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetDatabase(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetDatabase(context.Background(), nil, func(o *Options) {
@@ -4578,6 +5178,18 @@ func TestUpdateSnapshot_GetDataCatalogEncryptionSettings(t *testing.T) {
 	_, err := svc.GetDataCatalogEncryptionSettings(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetDataCatalogEncryptionSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDataCatalogExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDataCatalogExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDataCatalogExportConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4698,6 +5310,42 @@ func TestUpdateSnapshot_GetEntityRecords(t *testing.T) {
 	_, err := svc.GetEntityRecords(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetEntityRecords")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetFormType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFormType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFormType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetGlossary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlossary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGlossary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetGlossaryTerm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetGlossaryTerm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetGlossaryTerm")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5041,6 +5689,18 @@ func TestUpdateSnapshot_GetSession(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetSessionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSessionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetStatement(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetStatement(context.Background(), nil, func(o *Options) {
@@ -5281,6 +5941,18 @@ func TestUpdateSnapshot_ImportCatalogToGlue(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAssetTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAssetTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAssetTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListBlueprints(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListBlueprints(context.Background(), nil, func(o *Options) {
@@ -5449,11 +6121,71 @@ func TestUpdateSnapshot_ListEntities(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListFormTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFormTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFormTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGlossaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGlossaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGlossaries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGlossaryTerms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGlossaryTerms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGlossaryTerms")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListIntegrationResourceProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListIntegrationResourceProperties(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListIntegrationResourceProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIntegrationTableProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIntegrationTableProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIntegrationTableProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListIterableForms(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListIterableForms(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListIterableForms")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5617,6 +6349,42 @@ func TestUpdateSnapshot_ModifyIntegration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAssetType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAssetType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAssetType")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutDataCatalogEncryptionSettings(context.Background(), nil, func(o *Options) {
@@ -5629,11 +6397,35 @@ func TestUpdateSnapshot_PutDataCatalogEncryptionSettings(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutDataCatalogExportConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutDataCatalogExportConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutDataCatalogExportConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutDataQualityProfileAnnotation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutDataQualityProfileAnnotation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutDataQualityProfileAnnotation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutFormType(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutFormType(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutFormType")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5754,6 +6546,18 @@ func TestUpdateSnapshot_RunStatement(t *testing.T) {
 	_, err := svc.RunStatement(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RunStatement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SearchAssets(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SearchAssets(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SearchAssets")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6085,6 +6889,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_UpdateAsset(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAsset(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAsset")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_UpdateBlueprint(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateBlueprint(context.Background(), nil, func(o *Options) {
@@ -6222,6 +7038,30 @@ func TestUpdateSnapshot_UpdateDevEndpoint(t *testing.T) {
 	_, err := svc.UpdateDevEndpoint(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDevEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateGlossary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGlossary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateGlossary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateGlossaryTerm(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateGlossaryTerm(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateGlossaryTerm")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

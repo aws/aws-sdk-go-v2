@@ -5,10 +5,10 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Lists information about created campaigns.
@@ -57,6 +57,50 @@ type ListCampaignsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCampaignsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCampaignsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCampaignsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListResponseScope != "" {
+		s.WriteString(schemas.ListCampaignsRequest_listResponseScope, string(v.ListResponseScope))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCampaignsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCampaignsRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ListCampaignsRequest_status, *v.Status)
+	}
+}
+func (v *ListCampaignsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCampaignsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCampaignsRequest_listResponseScope:
+			var ev string
+			if err := d.ReadString(schemas.ListCampaignsRequest_listResponseScope, &ev); err != nil {
+				return err
+			}
+			v.ListResponseScope = types.ListResponseScope(ev)
+			return nil
+		case schemas.ListCampaignsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListCampaignsRequest_maxResults, v.MaxResults)
+		case schemas.ListCampaignsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCampaignsRequest_nextToken, v.NextToken)
+		case schemas.ListCampaignsRequest_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ListCampaignsRequest_status, v.Status)
+		}
+		return nil
+	})
+}
+
 type ListCampaignsOutput struct {
 
 	//  A summary of information about each campaign.
@@ -72,74 +116,48 @@ type ListCampaignsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCampaignsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCampaignsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCampaignsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializecampaignSummaries(s, schemas.ListCampaignsResponse_campaignSummaries, v.CampaignSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCampaignsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCampaignsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCampaignsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCampaignsResponse_campaignSummaries:
+			return deserializecampaignSummaries(d, schemas.ListCampaignsResponse_campaignSummaries, &v.CampaignSummaries)
+		case schemas.ListCampaignsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCampaignsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCampaignsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCampaigns, schemas.ListCampaignsRequest, schemas.ListCampaignsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListCampaigns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCampaigns, schemas.ListCampaignsRequest, schemas.ListCampaignsResponse), output: &ListCampaignsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListCampaigns{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCampaigns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCampaigns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +170,6 @@ func (c *Client) addOperationListCampaignsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,11 +269,3 @@ type ListCampaignsAPIClient interface {
 }
 
 var _ ListCampaignsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCampaigns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCampaigns",
-	}
-}

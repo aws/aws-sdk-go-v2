@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.CreateStateMachineAlias
+
+{"description":"__Description__","name":"__Name__","routingConfiguration":[{"stateMachineVersionArn":"__StateMachineVersionArn__","weight":1},{"stateMachineVersionArn":"__StateMachineVersionArn__","weight":1}]}

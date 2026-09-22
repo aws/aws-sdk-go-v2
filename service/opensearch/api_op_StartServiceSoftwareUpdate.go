@@ -4,11 +4,10 @@ package opensearch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Schedules a service software update for an Amazon OpenSearch Service domain.
@@ -63,6 +62,24 @@ type StartServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartServiceSoftwareUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartServiceSoftwareUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartServiceSoftwareUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredStartTime != nil {
+		s.WriteInt64(schemas.StartServiceSoftwareUpdateRequest_DesiredStartTime, *v.DesiredStartTime)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.StartServiceSoftwareUpdateRequest_DomainName, *v.DomainName)
+	}
+	if v.ScheduleAt != "" {
+		s.WriteString(schemas.StartServiceSoftwareUpdateRequest_ScheduleAt, string(v.ScheduleAt))
+	}
+}
+
 // Represents the output of a StartServiceSoftwareUpdate operation. Contains the
 // status of the update.
 type StartServiceSoftwareUpdateOutput struct {
@@ -76,77 +93,50 @@ type StartServiceSoftwareUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartServiceSoftwareUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartServiceSoftwareUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartServiceSoftwareUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceSoftwareOptions != nil {
+		s.WriteStruct(schemas.StartServiceSoftwareUpdateResponse_ServiceSoftwareOptions)
+		v.ServiceSoftwareOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartServiceSoftwareUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartServiceSoftwareUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartServiceSoftwareUpdateResponse_ServiceSoftwareOptions:
+			v.ServiceSoftwareOptions = &types.ServiceSoftwareOptions{}
+			return v.ServiceSoftwareOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartServiceSoftwareUpdate, schemas.StartServiceSoftwareUpdateRequest, schemas.StartServiceSoftwareUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartServiceSoftwareUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartServiceSoftwareUpdate, schemas.StartServiceSoftwareUpdateRequest, schemas.StartServiceSoftwareUpdateResponse), output: &StartServiceSoftwareUpdateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartServiceSoftwareUpdate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartServiceSoftwareUpdate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartServiceSoftwareUpdateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartServiceSoftwareUpdate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +151,8 @@ func (c *Client) addOperationStartServiceSoftwareUpdateMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartServiceSoftwareUpdate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartServiceSoftwareUpdate",
-	}
 }

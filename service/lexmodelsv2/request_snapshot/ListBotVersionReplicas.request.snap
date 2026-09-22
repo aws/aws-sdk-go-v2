@@ -1,0 +1,5 @@
+POST /bots/__BotId__/replicas/__ReplicaRegion__/botversions
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","sortBy":{"attribute":"BotVersion","order":"Ascending"}}

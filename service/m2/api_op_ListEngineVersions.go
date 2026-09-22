@@ -5,10 +5,10 @@ package m2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the available engine versions.
@@ -43,6 +43,44 @@ type ListEngineVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngineVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngineVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngineVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineType != "" {
+		s.WriteString(schemas.ListEngineVersionsRequest_engineType, string(v.EngineType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEngineVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngineVersionsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEngineVersionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngineVersionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngineVersionsRequest_engineType:
+			var ev string
+			if err := d.ReadString(schemas.ListEngineVersionsRequest_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.ListEngineVersionsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListEngineVersionsRequest_maxResults, v.MaxResults)
+		case schemas.ListEngineVersionsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngineVersionsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListEngineVersionsOutput struct {
 
 	// Returns the engine versions.
@@ -60,74 +98,48 @@ type ListEngineVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEngineVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEngineVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEngineVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEngineVersionsSummaryList(s, schemas.ListEngineVersionsResponse_engineVersions, v.EngineVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEngineVersionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEngineVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEngineVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEngineVersionsResponse_engineVersions:
+			return deserializeEngineVersionsSummaryList(d, schemas.ListEngineVersionsResponse_engineVersions, &v.EngineVersions)
+		case schemas.ListEngineVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEngineVersionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEngineVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngineVersions, schemas.ListEngineVersionsRequest, schemas.ListEngineVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEngineVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEngineVersions, schemas.ListEngineVersionsRequest, schemas.ListEngineVersionsResponse), output: &ListEngineVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEngineVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEngineVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEngineVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +152,6 @@ func (c *Client) addOperationListEngineVersionsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +253,3 @@ type ListEngineVersionsAPIClient interface {
 }
 
 var _ ListEngineVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEngineVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEngineVersions",
-	}
-}

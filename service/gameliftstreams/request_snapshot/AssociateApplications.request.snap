@@ -1,0 +1,5 @@
+POST /streamgroups/__Identifier__/associations
+
+Content-Type: application/json
+
+{"ApplicationIdentifiers":["__Member__","__Member__"]}

@@ -1,0 +1,4 @@
+402
+Content-Type: application/json
+
+{"__type":"ServiceQuotaExceededException","Message":"__Message__","QuotaCode":"__QuotaCode__","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__","ServiceCode":"__ServiceCode__"}

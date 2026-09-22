@@ -4,11 +4,10 @@ package wisdom
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wisdom/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves summary information about the content.
@@ -45,6 +44,34 @@ type GetContentSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentId != nil {
+		s.WriteString(schemas.GetContentSummaryRequest_contentId, *v.ContentId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetContentSummaryRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+func (v *GetContentSummaryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContentSummaryRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContentSummaryRequest_contentId:
+			v.ContentId = new(string)
+			return d.ReadString(schemas.GetContentSummaryRequest_contentId, v.ContentId)
+		case schemas.GetContentSummaryRequest_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.GetContentSummaryRequest_knowledgeBaseId, v.KnowledgeBaseId)
+		}
+		return nil
+	})
+}
+
 type GetContentSummaryOutput struct {
 
 	// The content summary.
@@ -56,77 +83,50 @@ type GetContentSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContentSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContentSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContentSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentSummary != nil {
+		s.WriteStruct(schemas.GetContentSummaryResponse_contentSummary)
+		v.ContentSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetContentSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContentSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContentSummaryResponse_contentSummary:
+			v.ContentSummary = &types.ContentSummary{}
+			return v.ContentSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContentSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContentSummary, schemas.GetContentSummaryRequest, schemas.GetContentSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContentSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContentSummary, schemas.GetContentSummaryRequest, schemas.GetContentSummaryResponse), output: &GetContentSummaryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContentSummary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetContentSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetContentSummaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContentSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +141,8 @@ func (c *Client) addOperationGetContentSummaryMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetContentSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetContentSummary",
-	}
 }

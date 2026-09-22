@@ -1,0 +1,3 @@
+GET /v2/list-system-events?endTime=2000-01-01T00%3A00%3A00Z&eventTypes=SYSTEM_CREATED&eventTypes=SYSTEM_CREATED&maxResults=1&nextToken=__NextToken__&startTime=2000-01-01T00%3A00%3A00Z&systemArn=__SystemArn__
+
+

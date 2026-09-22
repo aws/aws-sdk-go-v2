@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a stream for delivering one or more large files in chunks over MQTT. A
@@ -59,6 +58,26 @@ type CreateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStreamRequest_description, *v.Description)
+	}
+	serializeStreamFiles(s, schemas.CreateStreamRequest_files, v.Files)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateStreamRequest_roleArn, *v.RoleArn)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.CreateStreamRequest_streamId, *v.StreamId)
+	}
+	serializeTagList(s, schemas.CreateStreamRequest_tags, v.Tags)
+}
+
 type CreateStreamOutput struct {
 
 	// A description of the stream.
@@ -79,77 +98,66 @@ type CreateStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStreamResponse_description, *v.Description)
+	}
+	if v.StreamArn != nil {
+		s.WriteString(schemas.CreateStreamResponse_streamArn, *v.StreamArn)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.CreateStreamResponse_streamId, *v.StreamId)
+	}
+	if v.StreamVersion != nil {
+		s.WriteInt32(schemas.CreateStreamResponse_streamVersion, *v.StreamVersion)
+	}
+}
+func (v *CreateStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateStreamResponse_description, v.Description)
+		case schemas.CreateStreamResponse_streamArn:
+			v.StreamArn = new(string)
+			return d.ReadString(schemas.CreateStreamResponse_streamArn, v.StreamArn)
+		case schemas.CreateStreamResponse_streamId:
+			v.StreamId = new(string)
+			return d.ReadString(schemas.CreateStreamResponse_streamId, v.StreamId)
+		case schemas.CreateStreamResponse_streamVersion:
+			v.StreamVersion = new(int32)
+			return d.ReadInt32(schemas.CreateStreamResponse_streamVersion, v.StreamVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamRequest, schemas.CreateStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamRequest, schemas.CreateStreamResponse), output: &CreateStreamOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStream{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +172,8 @@ func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateStream",
-	}
 }

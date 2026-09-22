@@ -4,18 +4,17 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a set of hours of operations with another hours of operation. Refer
-// to Administrator Guide [here]for more information on inheriting overrides from parent
-// hours of operation(s).
+// Associates a set of hours of operations with another hours of operation. For
+// more information about inheriting overrides from parent hours of operation, see [Hours of operation overrides]
+// in the Administrator Guide.
 //
-// [here]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+// [Hours of operation overrides]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
 func (c *Client) AssociateHoursOfOperations(ctx context.Context, params *AssociateHoursOfOperationsInput, optFns ...func(*Options)) (*AssociateHoursOfOperationsOutput, error) {
 	if params == nil {
 		params = &AssociateHoursOfOperationsInput{}
@@ -55,6 +54,22 @@ type AssociateHoursOfOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateHoursOfOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateHoursOfOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateHoursOfOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.AssociateHoursOfOperationsRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateHoursOfOperationsRequest_InstanceId, *v.InstanceId)
+	}
+	serializeParentHoursOfOperationConfigList(s, schemas.AssociateHoursOfOperationsRequest_ParentHoursOfOperationConfigs, v.ParentHoursOfOperationConfigs)
+}
+
 type AssociateHoursOfOperationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,77 +77,42 @@ type AssociateHoursOfOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateHoursOfOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateHoursOfOperations, schemas.AssociateHoursOfOperationsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateHoursOfOperations, schemas.AssociateHoursOfOperationsRequest, nil), output: &AssociateHoursOfOperationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateHoursOfOperations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateHoursOfOperations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateHoursOfOperationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateHoursOfOperations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +127,8 @@ func (c *Client) addOperationAssociateHoursOfOperationsMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateHoursOfOperations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateHoursOfOperations",
-	}
 }

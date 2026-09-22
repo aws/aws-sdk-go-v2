@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the Amazon ECS container agent on a specified container instance.
@@ -64,6 +63,21 @@ type UpdateContainerAgentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContainerAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.UpdateContainerAgentRequest_cluster, *v.Cluster)
+	}
+	if v.ContainerInstance != nil {
+		s.WriteString(schemas.UpdateContainerAgentRequest_containerInstance, *v.ContainerInstance)
+	}
+}
+
 type UpdateContainerAgentOutput struct {
 
 	// The container instance that the container agent was updated for.
@@ -75,77 +89,50 @@ type UpdateContainerAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContainerAgentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerAgentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerAgentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerInstance != nil {
+		s.WriteStruct(schemas.UpdateContainerAgentResponse_containerInstance)
+		v.ContainerInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateContainerAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContainerAgentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContainerAgentResponse_containerInstance:
+			v.ContainerInstance = &types.ContainerInstance{}
+			return v.ContainerInstance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContainerAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerAgent, schemas.UpdateContainerAgentRequest, schemas.UpdateContainerAgentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateContainerAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerAgent, schemas.UpdateContainerAgentRequest, schemas.UpdateContainerAgentResponse), output: &UpdateContainerAgentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateContainerAgent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateContainerAgent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateContainerAgentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContainerAgent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +147,8 @@ func (c *Client) addOperationUpdateContainerAgentMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateContainerAgent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateContainerAgent",
-	}
 }

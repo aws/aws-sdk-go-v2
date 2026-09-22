@@ -1,0 +1,3 @@
+DELETE /deleteresourceshare?clientToken=__ClientToken__&resourceShareArn=__ResourceShareArn__
+
+

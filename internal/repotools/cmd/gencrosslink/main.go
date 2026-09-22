@@ -6,7 +6,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 	"strings"
@@ -88,7 +87,7 @@ type serviceTrait struct {
 }
 
 func loadModels(dir string) ([]smithyModel, error) {
-	files, err := ioutil.ReadDir(dir)
+	files, err := os.ReadDir(dir)
 	if err != nil {
 		return nil, fmt.Errorf("read models dir: %w", err)
 	}

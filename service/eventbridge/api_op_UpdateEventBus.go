@@ -4,11 +4,10 @@ package eventbridge
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified event bus.
@@ -88,6 +87,34 @@ type UpdateEventBusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventBusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventBusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventBusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.UpdateEventBusRequest_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEventBusRequest_Description, *v.Description)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.UpdateEventBusRequest_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateEventBusRequest_LogConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEventBusRequest_Name, *v.Name)
+	}
+}
+
 type UpdateEventBusOutput struct {
 
 	// The event bus Amazon Resource Name (ARN).
@@ -128,74 +155,79 @@ type UpdateEventBusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventBusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventBusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventBusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateEventBusResponse_Arn, *v.Arn)
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.UpdateEventBusResponse_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEventBusResponse_Description, *v.Description)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.UpdateEventBusResponse_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateEventBusResponse_LogConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEventBusResponse_Name, *v.Name)
+	}
+}
+func (v *UpdateEventBusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventBusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEventBusResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateEventBusResponse_Arn, v.Arn)
+		case schemas.UpdateEventBusResponse_DeadLetterConfig:
+			v.DeadLetterConfig = &types.DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.UpdateEventBusResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateEventBusResponse_Description, v.Description)
+		case schemas.UpdateEventBusResponse_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.UpdateEventBusResponse_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.UpdateEventBusResponse_LogConfig:
+			v.LogConfig = &types.LogConfig{}
+			return v.LogConfig.Deserialize(d)
+		case schemas.UpdateEventBusResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateEventBusResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventBus, schemas.UpdateEventBusRequest, schemas.UpdateEventBusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEventBus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventBus, schemas.UpdateEventBusRequest, schemas.UpdateEventBusResponse), output: &UpdateEventBusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEventBus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEventBus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEventBus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,22 +242,8 @@ func (c *Client) addOperationUpdateEventBusMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateEventBus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEventBus",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /amazonclouddirectory/2017-01-11/schema/create
+
+Content-Type: application/json
+
+{"Name":"__Name__"}

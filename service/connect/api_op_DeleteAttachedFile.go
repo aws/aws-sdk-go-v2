@@ -4,10 +4,9 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an attached file along with the underlying S3 Object.
@@ -31,12 +30,14 @@ func (c *Client) DeleteAttachedFile(ctx context.Context, params *DeleteAttachedF
 // Request to DeleteAttachedFile API
 type DeleteAttachedFileInput struct {
 
-	// The resource to which the attached file is (being) uploaded to. [Cases] are the only
-	// current supported resource.
+	// The resource to which the attached file is (being) uploaded to. The supported
+	// resources are [Cases], [Email], and [Task].
 	//
 	// This value must be a valid ARN.
 	//
-	// [Cases]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
+	// [Task]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-getting-started-tasks.html
+	// [Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
+	// [Cases]: https://docs.aws.amazon.com/connect/latest/adminguide/cases.html
 	//
 	// This member is required.
 	AssociatedResourceArn *string
@@ -54,6 +55,24 @@ type DeleteAttachedFileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttachedFileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttachedFileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttachedFileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceArn != nil {
+		s.WriteString(schemas.DeleteAttachedFileRequest_AssociatedResourceArn, *v.AssociatedResourceArn)
+	}
+	if v.FileId != nil {
+		s.WriteString(schemas.DeleteAttachedFileRequest_FileId, *v.FileId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DeleteAttachedFileRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 // Response from DeleteAttachedFile API
 type DeleteAttachedFileOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -62,77 +81,42 @@ type DeleteAttachedFileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAttachedFileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAttachedFileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAttachedFileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAttachedFileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAttachedFileResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAttachedFileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttachedFile, schemas.DeleteAttachedFileRequest, schemas.DeleteAttachedFileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAttachedFile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAttachedFile, schemas.DeleteAttachedFileRequest, schemas.DeleteAttachedFileResponse), output: &DeleteAttachedFileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAttachedFile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAttachedFile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteAttachedFileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAttachedFile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +131,8 @@ func (c *Client) addOperationDeleteAttachedFileMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteAttachedFile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteAttachedFile",
-	}
 }

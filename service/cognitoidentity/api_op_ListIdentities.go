@@ -4,11 +4,10 @@ package cognitoidentity
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the identities in an identity pool.
@@ -53,6 +52,27 @@ type ListIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentitiesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HideDisabled != false {
+		s.WriteBool(schemas.ListIdentitiesInput_HideDisabled, v.HideDisabled)
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.ListIdentitiesInput_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdentitiesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentitiesInput_NextToken, *v.NextToken)
+	}
+}
+
 // The response to a ListIdentities request.
 type ListIdentitiesOutput struct {
 
@@ -71,77 +91,57 @@ type ListIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdentitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentitiesList(s, schemas.ListIdentitiesResponse_Identities, v.Identities)
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.ListIdentitiesResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdentitiesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdentitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdentitiesResponse_Identities:
+			return deserializeIdentitiesList(d, schemas.ListIdentitiesResponse_Identities, &v.Identities)
+		case schemas.ListIdentitiesResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.ListIdentitiesResponse_IdentityPoolId, v.IdentityPoolId)
+		case schemas.ListIdentitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdentitiesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentities, schemas.ListIdentitiesInput, schemas.ListIdentitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdentities, schemas.ListIdentitiesInput, schemas.ListIdentitiesResponse), output: &ListIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListIdentities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIdentities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIdentitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIdentities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +156,8 @@ func (c *Client) addOperationListIdentitiesMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListIdentities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIdentities",
-	}
 }

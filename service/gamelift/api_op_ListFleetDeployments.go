@@ -5,10 +5,10 @@ package gamelift
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: Container
@@ -65,6 +65,24 @@ type ListFleetDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetDeploymentsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.ListFleetDeploymentsInput_FleetId, *v.FleetId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListFleetDeploymentsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetDeploymentsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListFleetDeploymentsOutput struct {
 
 	// The requested deployment information.
@@ -81,77 +99,51 @@ type ListFleetDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFleetDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFleetDeploymentsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFleetDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFleetDeployments(s, schemas.ListFleetDeploymentsOutput_FleetDeployments, v.FleetDeployments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFleetDeploymentsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFleetDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFleetDeploymentsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFleetDeploymentsOutput_FleetDeployments:
+			return deserializeFleetDeployments(d, schemas.ListFleetDeploymentsOutput_FleetDeployments, &v.FleetDeployments)
+		case schemas.ListFleetDeploymentsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFleetDeploymentsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFleetDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleetDeployments, schemas.ListFleetDeploymentsInput, schemas.ListFleetDeploymentsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListFleetDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFleetDeployments, schemas.ListFleetDeploymentsInput, schemas.ListFleetDeploymentsOutput), output: &ListFleetDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListFleetDeployments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFleetDeployments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFleetDeployments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +156,6 @@ func (c *Client) addOperationListFleetDeploymentsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +258,3 @@ type ListFleetDeploymentsAPIClient interface {
 }
 
 var _ ListFleetDeploymentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFleetDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFleetDeployments",
-	}
-}

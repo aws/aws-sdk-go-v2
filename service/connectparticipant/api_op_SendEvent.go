@@ -5,9 +5,9 @@ package connectparticipant
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The application/vnd.amazonaws.connect.event.connection.acknowledged ContentType
@@ -18,15 +18,15 @@ import (
 // active participants in the chat. Using the SendEvent API for message receipts
 // when a supervisor is barged-in will result in a conflict exception.
 //
-// For security recommendations, see [Amazon Connect Chat security best practices].
+// For security recommendations, see [Connect Customer Chat security best practices].
 //
 // ConnectionToken is used for invoking this API instead of ParticipantToken .
 //
 // The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
 //
 // [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns ...func(*Options)) (*SendEventOutput, error) {
 	if params == nil {
 		params = &SendEventInput{}
@@ -79,6 +79,27 @@ type SendEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendEventRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.SendEventRequest_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.SendEventRequest_Content, *v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.SendEventRequest_ContentType, *v.ContentType)
+	}
+}
+
 type SendEventOutput struct {
 
 	// The time when the event was sent.
@@ -96,65 +117,48 @@ type SendEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsoluteTime != nil {
+		s.WriteString(schemas.SendEventResponse_AbsoluteTime, *v.AbsoluteTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SendEventResponse_Id, *v.Id)
+	}
+}
+func (v *SendEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendEventResponse_AbsoluteTime:
+			v.AbsoluteTime = new(string)
+			return d.ReadString(schemas.SendEventResponse_AbsoluteTime, v.AbsoluteTime)
+		case schemas.SendEventResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SendEventResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendEvent, schemas.SendEventRequest, schemas.SendEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendEvent, schemas.SendEventRequest, schemas.SendEventResponse), output: &SendEventOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendEvent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -164,12 +168,6 @@ func (c *Client) addOperationSendEventMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpSendEventValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +180,6 @@ func (c *Client) addOperationSendEventMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -227,12 +219,4 @@ func (m *idempotencyToken_initializeOpSendEvent) HandleInitialize(ctx context.Co
 }
 func addIdempotencyToken_opSendEventMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpSendEvent{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opSendEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendEvent",
-	}
 }

@@ -574,7 +574,7 @@ func TestComputeInputPayloadChecksum(t *testing.T) {
 						r.URL, _ = url.Parse("http://example.aws")
 						r.ContentLength = 11
 						r = requestMust(r.SetStream(&errSeekReader{
-							Reader: strings.NewReader("hello world"),
+							ReadSeeker: strings.NewReader("hello world"),
 						}))
 						return r
 					}(),
@@ -1237,16 +1237,24 @@ func (r *mockReadSeeker) Seek(int64, int) (int64, error) {
 	return 0, nil
 }
 
+// errSeekReader seeks normally (delegating to the wrapped reader) until its body
+// has been read, then fails, to exercise a rewind failure while computing the
+// checksum.
 type errSeekReader struct {
-	io.Reader
+	io.ReadSeeker
+	read bool
+}
+
+func (r *errSeekReader) Read(p []byte) (int, error) {
+	r.read = true
+	return r.ReadSeeker.Read(p)
 }
 
 func (r *errSeekReader) Seek(offset int64, whence int) (int64, error) {
-	if whence == io.SeekCurrent {
-		return 0, nil
+	if r.read {
+		return 0, fmt.Errorf("seek failed")
 	}
-
-	return 0, fmt.Errorf("seek failed")
+	return r.ReadSeeker.Seek(offset, whence)
 }
 
 func requestMust(r *smithyhttp.Request, err error) *smithyhttp.Request {

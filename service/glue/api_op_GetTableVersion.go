@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a specified version of a table.
@@ -54,6 +53,32 @@ type GetTableVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.GetTableVersionRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetTableVersionRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.GetTableVersionRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.GetTableVersionRequest_TableName, *v.TableName)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetTableVersionRequest_VersionId, *v.VersionId)
+	}
+}
+
 type GetTableVersionOutput struct {
 
 	// The requested table version.
@@ -65,77 +90,50 @@ type GetTableVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTableVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTableVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTableVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableVersion != nil {
+		s.WriteStruct(schemas.GetTableVersionResponse_TableVersion)
+		v.TableVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTableVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTableVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTableVersionResponse_TableVersion:
+			v.TableVersion = &types.TableVersion{}
+			return v.TableVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableVersion, schemas.GetTableVersionRequest, schemas.GetTableVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTableVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTableVersion, schemas.GetTableVersionRequest, schemas.GetTableVersionResponse), output: &GetTableVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTableVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTableVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTableVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTableVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +148,8 @@ func (c *Client) addOperationGetTableVersionMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTableVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTableVersion",
-	}
 }

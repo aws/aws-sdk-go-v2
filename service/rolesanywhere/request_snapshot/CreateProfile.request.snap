@@ -1,0 +1,5 @@
+POST /profiles
+
+Content-Type: application/json
+
+{"acceptRoleSessionName":true,"durationSeconds":1,"enabled":true,"managedPolicyArns":["__Member__","__Member__"],"name":"__Name__","requireInstanceProperties":true,"roleArns":["__Member__","__Member__"],"sessionPolicy":"__SessionPolicy__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

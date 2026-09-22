@@ -5,10 +5,10 @@ package mturk
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	The ListAssignmentsForHIT operation retrieves completed assignments for a HIT.
@@ -66,6 +66,25 @@ type ListAssignmentsForHITInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssignmentsForHITInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssignmentsForHITRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssignmentsForHITInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssignmentStatusList(s, schemas.ListAssignmentsForHITRequest_AssignmentStatuses, v.AssignmentStatuses)
+	if v.HITId != nil {
+		s.WriteString(schemas.ListAssignmentsForHITRequest_HITId, *v.HITId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssignmentsForHITRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssignmentsForHITRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAssignmentsForHITOutput struct {
 
 	//  The collection of Assignment data structures returned by this call.
@@ -86,77 +105,57 @@ type ListAssignmentsForHITOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssignmentsForHITOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssignmentsForHITResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssignmentsForHITOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssignmentList(s, schemas.ListAssignmentsForHITResponse_Assignments, v.Assignments)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssignmentsForHITResponse_NextToken, *v.NextToken)
+	}
+	if v.NumResults != nil {
+		s.WriteInt32(schemas.ListAssignmentsForHITResponse_NumResults, *v.NumResults)
+	}
+}
+func (v *ListAssignmentsForHITOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssignmentsForHITResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssignmentsForHITResponse_Assignments:
+			return deserializeAssignmentList(d, schemas.ListAssignmentsForHITResponse_Assignments, &v.Assignments)
+		case schemas.ListAssignmentsForHITResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssignmentsForHITResponse_NextToken, v.NextToken)
+		case schemas.ListAssignmentsForHITResponse_NumResults:
+			v.NumResults = new(int32)
+			return d.ReadInt32(schemas.ListAssignmentsForHITResponse_NumResults, v.NumResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssignmentsForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssignmentsForHIT, schemas.ListAssignmentsForHITRequest, schemas.ListAssignmentsForHITResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAssignmentsForHIT{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssignmentsForHIT, schemas.ListAssignmentsForHITRequest, schemas.ListAssignmentsForHITResponse), output: &ListAssignmentsForHITOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAssignmentsForHIT{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssignmentsForHIT"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAssignmentsForHITValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssignmentsForHIT(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +168,6 @@ func (c *Client) addOperationListAssignmentsForHITMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -275,11 +268,3 @@ type ListAssignmentsForHITAPIClient interface {
 }
 
 var _ ListAssignmentsForHITAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAssignmentsForHIT(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAssignmentsForHIT",
-	}
-}

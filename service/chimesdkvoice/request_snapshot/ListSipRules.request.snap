@@ -1,0 +1,3 @@
+GET /sip-rules?max-results=1&next-token=__NextToken__&sip-media-application=__SipMediaApplicationId__
+
+

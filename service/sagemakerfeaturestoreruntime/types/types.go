@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -37,6 +39,46 @@ type BatchGetRecordError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRecordError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRecordError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRecordError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchGetRecordError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchGetRecordError_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.BatchGetRecordError_FeatureGroupName, *v.FeatureGroupName)
+	}
+	if v.RecordIdentifierValueAsString != nil {
+		s.WriteString(schemas.BatchGetRecordError_RecordIdentifierValueAsString, *v.RecordIdentifierValueAsString)
+	}
+}
+func (v *BatchGetRecordError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRecordError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRecordError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchGetRecordError_ErrorCode, v.ErrorCode)
+		case schemas.BatchGetRecordError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchGetRecordError_ErrorMessage, v.ErrorMessage)
+		case schemas.BatchGetRecordError_FeatureGroupName:
+			v.FeatureGroupName = new(string)
+			return d.ReadString(schemas.BatchGetRecordError_FeatureGroupName, v.FeatureGroupName)
+		case schemas.BatchGetRecordError_RecordIdentifierValueAsString:
+			v.RecordIdentifierValueAsString = new(string)
+			return d.ReadString(schemas.BatchGetRecordError_RecordIdentifierValueAsString, v.RecordIdentifierValueAsString)
+		}
+		return nil
+	})
+}
+
 // The identifier that identifies the batch of Records you are retrieving in a
 // batch.
 type BatchGetRecordIdentifier struct {
@@ -57,6 +99,34 @@ type BatchGetRecordIdentifier struct {
 	FeatureNames []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchGetRecordIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRecordIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRecordIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.BatchGetRecordIdentifier_FeatureGroupName, *v.FeatureGroupName)
+	}
+	serializeFeatureNames(s, schemas.BatchGetRecordIdentifier_FeatureNames, v.FeatureNames)
+	serializeRecordIdentifiers(s, schemas.BatchGetRecordIdentifier_RecordIdentifiersValueAsString, v.RecordIdentifiersValueAsString)
+}
+func (v *BatchGetRecordIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRecordIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRecordIdentifier_FeatureGroupName:
+			v.FeatureGroupName = new(string)
+			return d.ReadString(schemas.BatchGetRecordIdentifier_FeatureGroupName, v.FeatureGroupName)
+		case schemas.BatchGetRecordIdentifier_FeatureNames:
+			return deserializeFeatureNames(d, schemas.BatchGetRecordIdentifier_FeatureNames, &v.FeatureNames)
+		case schemas.BatchGetRecordIdentifier_RecordIdentifiersValueAsString:
+			return deserializeRecordIdentifiers(d, schemas.BatchGetRecordIdentifier_RecordIdentifiersValueAsString, &v.RecordIdentifiersValueAsString)
+		}
+		return nil
+	})
 }
 
 // The output of records that have been retrieved in a batch.
@@ -83,6 +153,162 @@ type BatchGetRecordResultDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRecordResultDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRecordResultDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRecordResultDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiresAt != nil {
+		s.WriteString(schemas.BatchGetRecordResultDetail_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.BatchGetRecordResultDetail_FeatureGroupName, *v.FeatureGroupName)
+	}
+	serializeRecord(s, schemas.BatchGetRecordResultDetail_Record, v.Record)
+	if v.RecordIdentifierValueAsString != nil {
+		s.WriteString(schemas.BatchGetRecordResultDetail_RecordIdentifierValueAsString, *v.RecordIdentifierValueAsString)
+	}
+}
+func (v *BatchGetRecordResultDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRecordResultDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRecordResultDetail_ExpiresAt:
+			v.ExpiresAt = new(string)
+			return d.ReadString(schemas.BatchGetRecordResultDetail_ExpiresAt, v.ExpiresAt)
+		case schemas.BatchGetRecordResultDetail_FeatureGroupName:
+			v.FeatureGroupName = new(string)
+			return d.ReadString(schemas.BatchGetRecordResultDetail_FeatureGroupName, v.FeatureGroupName)
+		case schemas.BatchGetRecordResultDetail_Record:
+			return deserializeRecord(d, schemas.BatchGetRecordResultDetail_Record, &v.Record)
+		case schemas.BatchGetRecordResultDetail_RecordIdentifierValueAsString:
+			v.RecordIdentifierValueAsString = new(string)
+			return d.ReadString(schemas.BatchGetRecordResultDetail_RecordIdentifierValueAsString, v.RecordIdentifierValueAsString)
+		}
+		return nil
+	})
+}
+
+// An entry to write as part of a BatchWriteRecord request.
+type BatchWriteRecordEntry struct {
+
+	// The name or Amazon Resource Name (ARN) of the FeatureGroup to write the record
+	// to.
+	//
+	// This member is required.
+	FeatureGroupName *string
+
+	// List of FeatureValues to be inserted. This will be a full over-write.
+	//
+	// This member is required.
+	Record []FeatureValue
+
+	// A list of stores to which you're adding the record. By default, Feature Store
+	// adds the record to all of the stores that you're using for the FeatureGroup .
+	TargetStores []TargetStore
+
+	// Time to live duration for this entry, where the record is hard deleted after
+	// the expiration time is reached; ExpiresAt = EventTime + TtlDuration . This
+	// overrides the request level TtlDuration .
+	TtlDuration *TtlDuration
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchWriteRecordEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteRecordEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteRecordEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureGroupName != nil {
+		s.WriteString(schemas.BatchWriteRecordEntry_FeatureGroupName, *v.FeatureGroupName)
+	}
+	serializeRecord(s, schemas.BatchWriteRecordEntry_Record, v.Record)
+	serializeTargetStores(s, schemas.BatchWriteRecordEntry_TargetStores, v.TargetStores)
+	if v.TtlDuration != nil {
+		s.WriteStruct(schemas.BatchWriteRecordEntry_TtlDuration)
+		v.TtlDuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchWriteRecordEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteRecordEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteRecordEntry_FeatureGroupName:
+			v.FeatureGroupName = new(string)
+			return d.ReadString(schemas.BatchWriteRecordEntry_FeatureGroupName, v.FeatureGroupName)
+		case schemas.BatchWriteRecordEntry_Record:
+			return deserializeRecord(d, schemas.BatchWriteRecordEntry_Record, &v.Record)
+		case schemas.BatchWriteRecordEntry_TargetStores:
+			return deserializeTargetStores(d, schemas.BatchWriteRecordEntry_TargetStores, &v.TargetStores)
+		case schemas.BatchWriteRecordEntry_TtlDuration:
+			v.TtlDuration = &TtlDuration{}
+			return v.TtlDuration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The error that has occurred when attempting to write a record in a batch.
+type BatchWriteRecordError struct {
+
+	// The entry that failed to be written.
+	//
+	// This member is required.
+	Entry *BatchWriteRecordEntry
+
+	// The error code for the failed record write.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message for the failed record write.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *BatchWriteRecordError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchWriteRecordError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchWriteRecordError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entry != nil {
+		s.WriteStruct(schemas.BatchWriteRecordError_Entry)
+		v.Entry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.BatchWriteRecordError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.BatchWriteRecordError_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *BatchWriteRecordError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteRecordError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteRecordError_Entry:
+			v.Entry = &BatchWriteRecordEntry{}
+			return v.Entry.Deserialize(d)
+		case schemas.BatchWriteRecordError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.BatchWriteRecordError_ErrorCode, v.ErrorCode)
+		case schemas.BatchWriteRecordError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.BatchWriteRecordError_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
 // The value associated with a feature.
 type FeatureValue struct {
 
@@ -105,6 +331,37 @@ type FeatureValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FeatureValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeatureValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeatureValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureName != nil {
+		s.WriteString(schemas.FeatureValue_FeatureName, *v.FeatureName)
+	}
+	if v.ValueAsString != nil {
+		s.WriteString(schemas.FeatureValue_ValueAsString, *v.ValueAsString)
+	}
+	serializeValueAsStringList(s, schemas.FeatureValue_ValueAsStringList, v.ValueAsStringList)
+}
+func (v *FeatureValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeatureValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeatureValue_FeatureName:
+			v.FeatureName = new(string)
+			return d.ReadString(schemas.FeatureValue_FeatureName, v.FeatureName)
+		case schemas.FeatureValue_ValueAsString:
+			v.ValueAsString = new(string)
+			return d.ReadString(schemas.FeatureValue_ValueAsString, v.ValueAsString)
+		case schemas.FeatureValue_ValueAsStringList:
+			return deserializeValueAsStringList(d, schemas.FeatureValue_ValueAsStringList, &v.ValueAsStringList)
+		}
+		return nil
+	})
+}
+
 // Time to live duration, where the record is hard deleted after the expiration
 // time is reached; ExpiresAt = EventTime + TtlDuration . For information on
 // HardDelete, see the [DeleteRecord]API in the Amazon SageMaker API Reference guide.
@@ -123,6 +380,38 @@ type TtlDuration struct {
 	Value *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TtlDuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TtlDuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TtlDuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Unit != "" {
+		s.WriteString(schemas.TtlDuration_Unit, string(v.Unit))
+	}
+	if v.Value != nil {
+		s.WriteInt32(schemas.TtlDuration_Value, *v.Value)
+	}
+}
+func (v *TtlDuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TtlDuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TtlDuration_Unit:
+			var ev string
+			if err := d.ReadString(schemas.TtlDuration_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = TtlDurationUnit(ev)
+			return nil
+		case schemas.TtlDuration_Value:
+			v.Value = new(int32)
+			return d.ReadInt32(schemas.TtlDuration_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

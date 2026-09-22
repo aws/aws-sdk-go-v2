@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the access policies associated with an access entry.
@@ -59,6 +59,27 @@ type ListAssociatedAccessPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedAccessPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedAccessPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedAccessPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesRequest_clusterName, *v.ClusterName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssociatedAccessPoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesRequest_nextToken, *v.NextToken)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesRequest_principalArn, *v.PrincipalArn)
+	}
+}
+
 type ListAssociatedAccessPoliciesOutput struct {
 
 	// The list of access policies associated with the access entry.
@@ -85,77 +106,63 @@ type ListAssociatedAccessPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssociatedAccessPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssociatedAccessPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssociatedAccessPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedAccessPoliciesList(s, schemas.ListAssociatedAccessPoliciesResponse_associatedAccessPolicies, v.AssociatedAccessPolicies)
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesResponse_clusterName, *v.ClusterName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesResponse_nextToken, *v.NextToken)
+	}
+	if v.PrincipalArn != nil {
+		s.WriteString(schemas.ListAssociatedAccessPoliciesResponse_principalArn, *v.PrincipalArn)
+	}
+}
+func (v *ListAssociatedAccessPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssociatedAccessPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssociatedAccessPoliciesResponse_associatedAccessPolicies:
+			return deserializeAssociatedAccessPoliciesList(d, schemas.ListAssociatedAccessPoliciesResponse_associatedAccessPolicies, &v.AssociatedAccessPolicies)
+		case schemas.ListAssociatedAccessPoliciesResponse_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ListAssociatedAccessPoliciesResponse_clusterName, v.ClusterName)
+		case schemas.ListAssociatedAccessPoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssociatedAccessPoliciesResponse_nextToken, v.NextToken)
+		case schemas.ListAssociatedAccessPoliciesResponse_principalArn:
+			v.PrincipalArn = new(string)
+			return d.ReadString(schemas.ListAssociatedAccessPoliciesResponse_principalArn, v.PrincipalArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssociatedAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedAccessPolicies, schemas.ListAssociatedAccessPoliciesRequest, schemas.ListAssociatedAccessPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssociatedAccessPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssociatedAccessPolicies, schemas.ListAssociatedAccessPoliciesRequest, schemas.ListAssociatedAccessPoliciesResponse), output: &ListAssociatedAccessPoliciesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssociatedAccessPolicies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssociatedAccessPolicies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAssociatedAccessPoliciesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssociatedAccessPolicies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +175,6 @@ func (c *Client) addOperationListAssociatedAccessPoliciesMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -282,11 +283,3 @@ type ListAssociatedAccessPoliciesAPIClient interface {
 }
 
 var _ ListAssociatedAccessPoliciesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAssociatedAccessPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAssociatedAccessPolicies",
-	}
-}

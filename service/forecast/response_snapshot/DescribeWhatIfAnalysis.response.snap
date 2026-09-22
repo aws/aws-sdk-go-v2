@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.DescribeWhatIfAnalysis
+
+{"CreationTime":946684800,"EstimatedTimeRemainingInMinutes":1,"ForecastArn":"__ForecastArn__","LastModificationTime":946684800,"Message":"__Message__","Status":"__Status__","TimeSeriesSelector":{"TimeSeriesIdentifiers":{"DataSource":{"S3Config":{"KMSKeyArn":"__KMSKeyArn__","Path":"__Path__","RoleArn":"__RoleArn__"}},"Format":"__Format__","Schema":{"Attributes":[{"AttributeName":"__AttributeName__","AttributeType":"string"},{"AttributeName":"__AttributeName__","AttributeType":"string"}]}}},"WhatIfAnalysisArn":"__WhatIfAnalysisArn__","WhatIfAnalysisName":"__WhatIfAnalysisName__"}

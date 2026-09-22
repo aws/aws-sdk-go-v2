@@ -4,11 +4,10 @@ package applicationsignals
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates the grouping configuration for this account. This operation
@@ -43,6 +42,16 @@ type PutGroupingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutGroupingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutGroupingConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutGroupingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupingAttributeDefinitions(s, schemas.PutGroupingConfigurationInput_GroupingAttributeDefinitions, v.GroupingAttributeDefinitions)
+}
+
 type PutGroupingConfigurationOutput struct {
 
 	// A structure containing the updated grouping configuration, including all
@@ -57,77 +66,50 @@ type PutGroupingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutGroupingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutGroupingConfigurationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutGroupingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupingConfiguration != nil {
+		s.WriteStruct(schemas.PutGroupingConfigurationOutput_GroupingConfiguration)
+		v.GroupingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutGroupingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutGroupingConfigurationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutGroupingConfigurationOutput_GroupingConfiguration:
+			v.GroupingConfiguration = &types.GroupingConfiguration{}
+			return v.GroupingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutGroupingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGroupingConfiguration, schemas.PutGroupingConfigurationInput, schemas.PutGroupingConfigurationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutGroupingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGroupingConfiguration, schemas.PutGroupingConfigurationInput, schemas.PutGroupingConfigurationOutput), output: &PutGroupingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutGroupingConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutGroupingConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutGroupingConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutGroupingConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +124,8 @@ func (c *Client) addOperationPutGroupingConfigurationMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutGroupingConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutGroupingConfiguration",
-	}
 }

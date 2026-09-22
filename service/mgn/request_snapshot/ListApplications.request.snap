@@ -1,0 +1,5 @@
+POST /ListApplications
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","filters":{"applicationIDs":["__Member__","__Member__"],"isArchived":true,"waveIDs":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -54,6 +54,27 @@ type ListSecurityProfileFlowModulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfileFlowModulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfileFlowModulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfileFlowModulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityProfileFlowModulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesRequest_NextToken, *v.NextToken)
+	}
+	if v.SecurityProfileId != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesRequest_SecurityProfileId, *v.SecurityProfileId)
+	}
+}
+
 type ListSecurityProfileFlowModulesOutput struct {
 
 	//  A list of Flow Modules an AI Agent can invoke as a tool.
@@ -75,77 +96,63 @@ type ListSecurityProfileFlowModulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfileFlowModulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfileFlowModulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfileFlowModulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedFlowModules(s, schemas.ListSecurityProfileFlowModulesResponse_AllowedFlowModules, v.AllowedFlowModules)
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListSecurityProfileFlowModulesResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfileFlowModulesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSecurityProfileFlowModulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityProfileFlowModulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityProfileFlowModulesResponse_AllowedFlowModules:
+			return deserializeAllowedFlowModules(d, schemas.ListSecurityProfileFlowModulesResponse_AllowedFlowModules, &v.AllowedFlowModules)
+		case schemas.ListSecurityProfileFlowModulesResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListSecurityProfileFlowModulesResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListSecurityProfileFlowModulesResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListSecurityProfileFlowModulesResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListSecurityProfileFlowModulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityProfileFlowModulesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityProfileFlowModulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfileFlowModules, schemas.ListSecurityProfileFlowModulesRequest, schemas.ListSecurityProfileFlowModulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityProfileFlowModules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfileFlowModules, schemas.ListSecurityProfileFlowModulesRequest, schemas.ListSecurityProfileFlowModulesResponse), output: &ListSecurityProfileFlowModulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityProfileFlowModules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSecurityProfileFlowModules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSecurityProfileFlowModulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSecurityProfileFlowModules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +165,6 @@ func (c *Client) addOperationListSecurityProfileFlowModulesMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +269,3 @@ type ListSecurityProfileFlowModulesAPIClient interface {
 }
 
 var _ ListSecurityProfileFlowModulesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSecurityProfileFlowModules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSecurityProfileFlowModules",
-	}
-}

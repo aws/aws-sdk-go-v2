@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.ChangeMessageVisibility
+X-Amzn-Query-Mode: true
+
+{"QueueUrl":"__QueueUrl__","ReceiptHandle":"__ReceiptHandle__","VisibilityTimeout":1}

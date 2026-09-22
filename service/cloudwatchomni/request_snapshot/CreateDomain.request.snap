@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/CreateDomain
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿kclientTokeno__ClientToken__xidentityProviderConfiguration¿xidentityCenterConfiguration¿xidentityCenterInstanceArnx__IdentityCenterInstanceArn__ÿÿqidentityProvidersŸcIAMcIAMÿdnameh__Name__dtags¿dkey0i__Value__ÿÿ

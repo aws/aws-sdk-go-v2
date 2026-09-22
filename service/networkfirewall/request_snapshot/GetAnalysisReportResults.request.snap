@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.GetAnalysisReportResults
+
+{"AnalysisReportId":"__AnalysisReportId__","FirewallArn":"__FirewallArn__","FirewallName":"__FirewallName__","MaxResults":1,"NextToken":"__NextToken__"}

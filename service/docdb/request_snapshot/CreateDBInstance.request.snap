@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateDBInstance&AutoMinorVersionUpgrade=true&AvailabilityZone=__AvailabilityZone__&CACertificateIdentifier=__CACertificateIdentifier__&CopyTagsToSnapshot=true&DBClusterIdentifier=__DBClusterIdentifier__&DBInstanceClass=__DBInstanceClass__&DBInstanceIdentifier=__DBInstanceIdentifier__&EnablePerformanceInsights=true&Engine=__Engine__&PerformanceInsightsKMSKeyId=__PerformanceInsightsKMSKeyId__&PreferredMaintenanceWindow=__PreferredMaintenanceWindow__&PromotionTier=1&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&Version=2014-10-31

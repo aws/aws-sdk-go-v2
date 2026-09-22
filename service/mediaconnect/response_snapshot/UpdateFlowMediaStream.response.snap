@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"flowArn":"__FlowArn__","mediaStream":{"attributes":{"fmtp":{"channelOrder":"__ChannelOrder__","colorimetry":"BT601","exactFramerate":"__ExactFramerate__","par":"__Par__","range":"NARROW","scanMode":"progressive","tcs":"SDR"},"lang":"__Lang__"},"clockRate":1,"description":"__Description__","fmt":1,"mediaStreamId":1,"mediaStreamName":"__MediaStreamName__","mediaStreamType":"video","videoFormat":"__VideoFormat__"}}

@@ -1,0 +1,5 @@
+POST /user
+
+Content-Type: application/x-amz-json-1.1
+
+{"apiAccess":"ENABLED","apiAccessPrincipalArn":"__ApiAccessPrincipalArn__","clientToken":"__ClientToken__","emailAddress":"__EmailAddress__","firstName":"__FirstName__","lastName":"__LastName__","type":"SUPER_USER"}

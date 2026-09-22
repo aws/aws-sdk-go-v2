@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SWBExternalService.UpdateApplication
+
+{"ApplicationArn":"__ApplicationArn__","Description":"__Description__","Name":"__Name__","PortalOptions":{"SignInOptions":{"ApplicationUrl":"__ApplicationUrl__","Origin":"IDENTITY_CENTER"}},"Status":"ENABLED"}

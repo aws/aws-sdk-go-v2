@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.ListTagsForResource
+
+{"Limit":1,"NextToken":"__NextToken__","ResourceId":"__ResourceId__"}

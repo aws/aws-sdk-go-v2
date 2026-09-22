@@ -5,10 +5,10 @@ package forecast
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of predictor backtest export jobs created using the CreatePredictorBacktestExportJob operation.
@@ -62,6 +62,22 @@ type ListPredictorBacktestExportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPredictorBacktestExportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPredictorBacktestExportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPredictorBacktestExportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListPredictorBacktestExportJobsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPredictorBacktestExportJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPredictorBacktestExportJobsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPredictorBacktestExportJobsOutput struct {
 
 	// Returns this token if the response is truncated. To retrieve the next set of
@@ -78,77 +94,51 @@ type ListPredictorBacktestExportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPredictorBacktestExportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPredictorBacktestExportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPredictorBacktestExportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPredictorBacktestExportJobsResponse_NextToken, *v.NextToken)
+	}
+	serializePredictorBacktestExportJobs(s, schemas.ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs, v.PredictorBacktestExportJobs)
+}
+func (v *ListPredictorBacktestExportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPredictorBacktestExportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPredictorBacktestExportJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPredictorBacktestExportJobsResponse_NextToken, v.NextToken)
+		case schemas.ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs:
+			return deserializePredictorBacktestExportJobs(d, schemas.ListPredictorBacktestExportJobsResponse_PredictorBacktestExportJobs, &v.PredictorBacktestExportJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPredictorBacktestExportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPredictorBacktestExportJobs, schemas.ListPredictorBacktestExportJobsRequest, schemas.ListPredictorBacktestExportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPredictorBacktestExportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPredictorBacktestExportJobs, schemas.ListPredictorBacktestExportJobsRequest, schemas.ListPredictorBacktestExportJobsResponse), output: &ListPredictorBacktestExportJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPredictorBacktestExportJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPredictorBacktestExportJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPredictorBacktestExportJobsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPredictorBacktestExportJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +151,6 @@ func (c *Client) addOperationListPredictorBacktestExportJobsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -270,11 +254,3 @@ type ListPredictorBacktestExportJobsAPIClient interface {
 }
 
 var _ ListPredictorBacktestExportJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPredictorBacktestExportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPredictorBacktestExportJobs",
-	}
-}

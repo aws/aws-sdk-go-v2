@@ -1,0 +1,5 @@
+POST /v2/update-system
+
+Content-Type: application/json
+
+{"description":"__Description__","sharingEnabled":true,"systemArn":"__SystemArn__"}

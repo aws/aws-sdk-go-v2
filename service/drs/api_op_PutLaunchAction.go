@@ -4,11 +4,10 @@ package drs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Puts a resource launch action.
@@ -85,6 +84,46 @@ type PutLaunchActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLaunchActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLaunchActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLaunchActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionCode != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_actionCode, *v.ActionCode)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_actionId, *v.ActionId)
+	}
+	if v.ActionVersion != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_actionVersion, *v.ActionVersion)
+	}
+	if v.Active != nil {
+		s.WriteBool(schemas.PutLaunchActionRequest_active, *v.Active)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.PutLaunchActionRequest_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_name, *v.Name)
+	}
+	if v.Optional != nil {
+		s.WriteBool(schemas.PutLaunchActionRequest_optional, *v.Optional)
+	}
+	if v.Order != nil {
+		s.WriteInt32(schemas.PutLaunchActionRequest_order, *v.Order)
+	}
+	serializeLaunchActionParameters(s, schemas.PutLaunchActionRequest_parameters, v.Parameters)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.PutLaunchActionRequest_resourceId, *v.ResourceId)
+	}
+}
+
 type PutLaunchActionOutput struct {
 
 	// Launch action code.
@@ -129,77 +168,119 @@ type PutLaunchActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLaunchActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLaunchActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLaunchActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionCode != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_actionCode, *v.ActionCode)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_actionId, *v.ActionId)
+	}
+	if v.ActionVersion != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_actionVersion, *v.ActionVersion)
+	}
+	if v.Active != nil {
+		s.WriteBool(schemas.PutLaunchActionResponse_active, *v.Active)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.PutLaunchActionResponse_category, string(v.Category))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_name, *v.Name)
+	}
+	if v.Optional != nil {
+		s.WriteBool(schemas.PutLaunchActionResponse_optional, *v.Optional)
+	}
+	if v.Order != nil {
+		s.WriteInt32(schemas.PutLaunchActionResponse_order, *v.Order)
+	}
+	serializeLaunchActionParameters(s, schemas.PutLaunchActionResponse_parameters, v.Parameters)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.PutLaunchActionResponse_resourceId, *v.ResourceId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PutLaunchActionResponse_type, string(v.Type))
+	}
+}
+func (v *PutLaunchActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLaunchActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutLaunchActionResponse_actionCode:
+			v.ActionCode = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_actionCode, v.ActionCode)
+		case schemas.PutLaunchActionResponse_actionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_actionId, v.ActionId)
+		case schemas.PutLaunchActionResponse_actionVersion:
+			v.ActionVersion = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_actionVersion, v.ActionVersion)
+		case schemas.PutLaunchActionResponse_active:
+			v.Active = new(bool)
+			return d.ReadBool(schemas.PutLaunchActionResponse_active, v.Active)
+		case schemas.PutLaunchActionResponse_category:
+			var ev string
+			if err := d.ReadString(schemas.PutLaunchActionResponse_category, &ev); err != nil {
+				return err
+			}
+			v.Category = types.LaunchActionCategory(ev)
+			return nil
+		case schemas.PutLaunchActionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_description, v.Description)
+		case schemas.PutLaunchActionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_name, v.Name)
+		case schemas.PutLaunchActionResponse_optional:
+			v.Optional = new(bool)
+			return d.ReadBool(schemas.PutLaunchActionResponse_optional, v.Optional)
+		case schemas.PutLaunchActionResponse_order:
+			v.Order = new(int32)
+			return d.ReadInt32(schemas.PutLaunchActionResponse_order, v.Order)
+		case schemas.PutLaunchActionResponse_parameters:
+			return deserializeLaunchActionParameters(d, schemas.PutLaunchActionResponse_parameters, &v.Parameters)
+		case schemas.PutLaunchActionResponse_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.PutLaunchActionResponse_resourceId, v.ResourceId)
+		case schemas.PutLaunchActionResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.PutLaunchActionResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.LaunchActionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLaunchActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLaunchAction, schemas.PutLaunchActionRequest, schemas.PutLaunchActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutLaunchAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLaunchAction, schemas.PutLaunchActionRequest, schemas.PutLaunchActionResponse), output: &PutLaunchActionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutLaunchAction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutLaunchAction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutLaunchActionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutLaunchAction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,22 +295,8 @@ func (c *Client) addOperationPutLaunchActionMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutLaunchAction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutLaunchAction",
-	}
 }

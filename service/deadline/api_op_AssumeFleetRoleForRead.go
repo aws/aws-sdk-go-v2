@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +44,21 @@ type AssumeFleetRoleForReadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeFleetRoleForReadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeFleetRoleForReadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeFleetRoleForReadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.AssumeFleetRoleForReadRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.AssumeFleetRoleForReadRequest_fleetId, *v.FleetId)
+	}
+}
+
 // Shared response body for AssumeRole operations where credentials are required.
 // AssumeQueueRoleForWorkerResponse is excluded because credentials is optional
 // there because Queue.roleArn is optional, so the mixin's @required trait would be
@@ -60,65 +76,44 @@ type AssumeFleetRoleForReadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeFleetRoleForReadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeFleetRoleForReadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeFleetRoleForReadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.AssumeFleetRoleForReadResponse_credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssumeFleetRoleForReadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssumeFleetRoleForReadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssumeFleetRoleForReadResponse_credentials:
+			v.Credentials = &types.AwsCredentials{}
+			return v.Credentials.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssumeFleetRoleForReadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeFleetRoleForRead, schemas.AssumeFleetRoleForReadRequest, schemas.AssumeFleetRoleForReadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssumeFleetRoleForRead{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeFleetRoleForRead, schemas.AssumeFleetRoleForReadRequest, schemas.AssumeFleetRoleForReadResponse), output: &AssumeFleetRoleForReadOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssumeFleetRoleForRead{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssumeFleetRoleForRead"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -128,12 +123,6 @@ func (c *Client) addOperationAssumeFleetRoleForReadMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpAssumeFleetRoleForReadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssumeFleetRoleForRead(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +135,6 @@ func (c *Client) addOperationAssumeFleetRoleForReadMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -185,12 +168,4 @@ func (m *endpointPrefix_opAssumeFleetRoleForReadMiddleware) HandleFinalize(ctx c
 }
 func addEndpointPrefix_opAssumeFleetRoleForReadMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opAssumeFleetRoleForReadMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opAssumeFleetRoleForRead(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssumeFleetRoleForRead",
-	}
 }

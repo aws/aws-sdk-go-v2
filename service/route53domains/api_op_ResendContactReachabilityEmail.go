@@ -4,10 +4,9 @@ package route53domains
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // For operations that require confirmation that the email address for the
@@ -38,6 +37,18 @@ type ResendContactReachabilityEmailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResendContactReachabilityEmailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResendContactReachabilityEmailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResendContactReachabilityEmailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ResendContactReachabilityEmailRequest_domainName, *v.DomainName)
+	}
+}
+
 type ResendContactReachabilityEmailOutput struct {
 
 	// The domain name for which you requested a confirmation email.
@@ -58,74 +69,57 @@ type ResendContactReachabilityEmailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResendContactReachabilityEmailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResendContactReachabilityEmailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResendContactReachabilityEmailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ResendContactReachabilityEmailResponse_domainName, *v.DomainName)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.ResendContactReachabilityEmailResponse_emailAddress, *v.EmailAddress)
+	}
+	if v.IsAlreadyVerified != nil {
+		s.WriteBool(schemas.ResendContactReachabilityEmailResponse_isAlreadyVerified, *v.IsAlreadyVerified)
+	}
+}
+func (v *ResendContactReachabilityEmailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResendContactReachabilityEmailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResendContactReachabilityEmailResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.ResendContactReachabilityEmailResponse_domainName, v.DomainName)
+		case schemas.ResendContactReachabilityEmailResponse_emailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.ResendContactReachabilityEmailResponse_emailAddress, v.EmailAddress)
+		case schemas.ResendContactReachabilityEmailResponse_isAlreadyVerified:
+			v.IsAlreadyVerified = new(bool)
+			return d.ReadBool(schemas.ResendContactReachabilityEmailResponse_isAlreadyVerified, v.IsAlreadyVerified)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationResendContactReachabilityEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResendContactReachabilityEmail, schemas.ResendContactReachabilityEmailRequest, schemas.ResendContactReachabilityEmailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResendContactReachabilityEmail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ResendContactReachabilityEmail, schemas.ResendContactReachabilityEmailRequest, schemas.ResendContactReachabilityEmailResponse), output: &ResendContactReachabilityEmailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpResendContactReachabilityEmail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ResendContactReachabilityEmail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResendContactReachabilityEmail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +134,8 @@ func (c *Client) addOperationResendContactReachabilityEmailMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opResendContactReachabilityEmail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ResendContactReachabilityEmail",
-	}
 }

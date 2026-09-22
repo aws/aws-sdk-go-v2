@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/query
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","overrideKnowledgeBaseSearchType":"HYBRID","queryCondition":[{"single":{"comparator":"EQUALS","field":"RESULT_TYPE","value":"__Value__"}},{"single":{"comparator":"EQUALS","field":"RESULT_TYPE","value":"__Value__"}}],"queryInputData":{"queryTextInputData":{"text":"__Text__"}},"queryText":"__QueryText__","sessionId":"__SessionId__"}

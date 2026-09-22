@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMDashboardsService.CreateScheduledReport
+
+{"clientToken":"__ClientToken__","resourceTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"scheduledReport":{"dashboardArn":"__DashboardArn__","description":"__Description__","name":"__Name__","scheduleConfig":{"scheduleExpression":"__ScheduleExpression__","scheduleExpressionTimeZone":"__ScheduleExpressionTimeZone__","schedulePeriod":{"endTime":946684800,"startTime":946684800},"state":"ENABLED"},"scheduledReportExecutionRoleArn":"__ScheduledReportExecutionRoleArn__","widgetDateRangeOverride":{"endTime":{"type":"ABSOLUTE","value":"__Value__"},"startTime":{"type":"ABSOLUTE","value":"__Value__"}},"widgetIds":["__Member__","__Member__"]}}

@@ -5,10 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -74,6 +74,12 @@ type RequestPhoneNumberInput struct {
 	// phone number is Enabled.
 	InternationalSendingEnabled *bool
 
+	// An optional selection preference used to request a specific phone number, such
+	// as a number that starts with, ends with, or contains a particular digit pattern.
+	// You can specify at most one preference. Number preferences apply only to TEN_DLC
+	// requests in the US .
+	NumberPreference []types.NumberPreferenceItem
+
 	// The name of the OptOutList to associate with the phone number. You can use the
 	// OptOutListName or OptOutListArn.
 	//
@@ -96,6 +102,45 @@ type RequestPhoneNumberInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestPhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestPhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestPhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.RequestPhoneNumberRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.RequestPhoneNumberRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.InternationalSendingEnabled != nil {
+		s.WriteBool(schemas.RequestPhoneNumberRequest_InternationalSendingEnabled, *v.InternationalSendingEnabled)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.RequestPhoneNumberRequest_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.RequestPhoneNumberRequest_MessageType, string(v.MessageType))
+	}
+	serializeNumberCapabilityList(s, schemas.RequestPhoneNumberRequest_NumberCapabilities, v.NumberCapabilities)
+	serializeNumberPreferenceList(s, schemas.RequestPhoneNumberRequest_NumberPreference, v.NumberPreference)
+	if v.NumberType != "" {
+		s.WriteString(schemas.RequestPhoneNumberRequest_NumberType, string(v.NumberType))
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.RequestPhoneNumberRequest_OptOutListName, *v.OptOutListName)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.RequestPhoneNumberRequest_PoolId, *v.PoolId)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.RequestPhoneNumberRequest_RegistrationId, *v.RegistrationId)
+	}
+	serializeTagList(s, schemas.RequestPhoneNumberRequest_Tags, v.Tags)
 }
 
 type RequestPhoneNumberOutput struct {
@@ -181,65 +226,158 @@ type RequestPhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestPhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestPhoneNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestPhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.RequestPhoneNumberResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DeletionProtectionEnabled != false {
+		s.WriteBool(schemas.RequestPhoneNumberResult_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
+	}
+	if v.InternationalSendingEnabled != false {
+		s.WriteBool(schemas.RequestPhoneNumberResult_InternationalSendingEnabled, v.InternationalSendingEnabled)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.RequestPhoneNumberResult_MessageType, string(v.MessageType))
+	}
+	if v.MonthlyLeasingPrice != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
+	}
+	serializeNumberCapabilityList(s, schemas.RequestPhoneNumberResult_NumberCapabilities, v.NumberCapabilities)
+	if v.NumberType != "" {
+		s.WriteString(schemas.RequestPhoneNumberResult_NumberType, string(v.NumberType))
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_OptOutListName, *v.OptOutListName)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.PhoneNumberArn != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_PhoneNumberArn, *v.PhoneNumberArn)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_PhoneNumberId, *v.PhoneNumberId)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_PoolId, *v.PoolId)
+	}
+	if v.RegistrationId != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_RegistrationId, *v.RegistrationId)
+	}
+	if v.SelfManagedOptOutsEnabled != false {
+		s.WriteBool(schemas.RequestPhoneNumberResult_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RequestPhoneNumberResult_Status, string(v.Status))
+	}
+	serializeTagList(s, schemas.RequestPhoneNumberResult_Tags, v.Tags)
+	if v.TwoWayChannelArn != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_TwoWayChannelArn, *v.TwoWayChannelArn)
+	}
+	if v.TwoWayChannelRole != nil {
+		s.WriteString(schemas.RequestPhoneNumberResult_TwoWayChannelRole, *v.TwoWayChannelRole)
+	}
+	if v.TwoWayEnabled != false {
+		s.WriteBool(schemas.RequestPhoneNumberResult_TwoWayEnabled, v.TwoWayEnabled)
+	}
+}
+func (v *RequestPhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestPhoneNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestPhoneNumberResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RequestPhoneNumberResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.RequestPhoneNumberResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.RequestPhoneNumberResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.RequestPhoneNumberResult_InternationalSendingEnabled:
+			return d.ReadBool(schemas.RequestPhoneNumberResult_InternationalSendingEnabled, &v.InternationalSendingEnabled)
+		case schemas.RequestPhoneNumberResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.RequestPhoneNumberResult_MessageType:
+			var ev string
+			if err := d.ReadString(schemas.RequestPhoneNumberResult_MessageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = types.MessageType(ev)
+			return nil
+		case schemas.RequestPhoneNumberResult_MonthlyLeasingPrice:
+			v.MonthlyLeasingPrice = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_MonthlyLeasingPrice, v.MonthlyLeasingPrice)
+		case schemas.RequestPhoneNumberResult_NumberCapabilities:
+			return deserializeNumberCapabilityList(d, schemas.RequestPhoneNumberResult_NumberCapabilities, &v.NumberCapabilities)
+		case schemas.RequestPhoneNumberResult_NumberType:
+			var ev string
+			if err := d.ReadString(schemas.RequestPhoneNumberResult_NumberType, &ev); err != nil {
+				return err
+			}
+			v.NumberType = types.RequestableNumberType(ev)
+			return nil
+		case schemas.RequestPhoneNumberResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_OptOutListName, v.OptOutListName)
+		case schemas.RequestPhoneNumberResult_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_PhoneNumber, v.PhoneNumber)
+		case schemas.RequestPhoneNumberResult_PhoneNumberArn:
+			v.PhoneNumberArn = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_PhoneNumberArn, v.PhoneNumberArn)
+		case schemas.RequestPhoneNumberResult_PhoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_PhoneNumberId, v.PhoneNumberId)
+		case schemas.RequestPhoneNumberResult_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_PoolId, v.PoolId)
+		case schemas.RequestPhoneNumberResult_RegistrationId:
+			v.RegistrationId = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_RegistrationId, v.RegistrationId)
+		case schemas.RequestPhoneNumberResult_SelfManagedOptOutsEnabled:
+			return d.ReadBool(schemas.RequestPhoneNumberResult_SelfManagedOptOutsEnabled, &v.SelfManagedOptOutsEnabled)
+		case schemas.RequestPhoneNumberResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.RequestPhoneNumberResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NumberStatus(ev)
+			return nil
+		case schemas.RequestPhoneNumberResult_Tags:
+			return deserializeTagList(d, schemas.RequestPhoneNumberResult_Tags, &v.Tags)
+		case schemas.RequestPhoneNumberResult_TwoWayChannelArn:
+			v.TwoWayChannelArn = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_TwoWayChannelArn, v.TwoWayChannelArn)
+		case schemas.RequestPhoneNumberResult_TwoWayChannelRole:
+			v.TwoWayChannelRole = new(string)
+			return d.ReadString(schemas.RequestPhoneNumberResult_TwoWayChannelRole, v.TwoWayChannelRole)
+		case schemas.RequestPhoneNumberResult_TwoWayEnabled:
+			return d.ReadBool(schemas.RequestPhoneNumberResult_TwoWayEnabled, &v.TwoWayEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestPhoneNumber, schemas.RequestPhoneNumberRequest, schemas.RequestPhoneNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRequestPhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestPhoneNumber, schemas.RequestPhoneNumberRequest, schemas.RequestPhoneNumberResult), output: &RequestPhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRequestPhoneNumber{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RequestPhoneNumber"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -249,12 +387,6 @@ func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpRequestPhoneNumberValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRequestPhoneNumber(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -267,12 +399,6 @@ func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -312,12 +438,4 @@ func (m *idempotencyToken_initializeOpRequestPhoneNumber) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opRequestPhoneNumberMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpRequestPhoneNumber{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opRequestPhoneNumber(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RequestPhoneNumber",
-	}
 }

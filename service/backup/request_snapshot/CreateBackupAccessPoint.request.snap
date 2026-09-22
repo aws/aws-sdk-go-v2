@@ -1,0 +1,5 @@
+PUT /backup-access-point/create
+
+Content-Type: application/json
+
+{"AccessPointMetadata":{"key0":"__Value__"},"AccessPointPolicy":"__AccessPointPolicy__","Name":"__Name__","RecoveryPointArn":"__RecoveryPointArn__","Tags":{"key0":"__Value__"}}

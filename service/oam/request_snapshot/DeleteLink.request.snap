@@ -1,0 +1,5 @@
+POST /DeleteLink
+
+Content-Type: application/json
+
+{"Identifier":"__Identifier__"}

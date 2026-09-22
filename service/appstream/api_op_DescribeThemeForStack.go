@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list that describes the theme for a specified stack. A theme is
@@ -39,6 +38,18 @@ type DescribeThemeForStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemeForStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemeForStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemeForStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StackName != nil {
+		s.WriteString(schemas.DescribeThemeForStackRequest_StackName, *v.StackName)
+	}
+}
+
 type DescribeThemeForStackOutput struct {
 
 	//  The theme object that contains the metadata of the custom branding.
@@ -50,77 +61,53 @@ type DescribeThemeForStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemeForStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemeForStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemeForStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Theme != nil {
+		s.WriteStruct(schemas.DescribeThemeForStackResult_Theme)
+		v.Theme.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeThemeForStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThemeForStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThemeForStackResult_Theme:
+			v.Theme = &types.Theme{}
+			return v.Theme.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThemeForStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThemeForStack, schemas.DescribeThemeForStackRequest, schemas.DescribeThemeForStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeThemeForStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThemeForStack, schemas.DescribeThemeForStackRequest, schemas.DescribeThemeForStackResult), output: &DescribeThemeForStackOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeThemeForStack{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeThemeForStack"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeThemeForStackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeThemeForStack(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +122,8 @@ func (c *Client) addOperationDescribeThemeForStackMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeThemeForStack(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeThemeForStack",
-	}
 }

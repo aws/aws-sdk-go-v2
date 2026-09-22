@@ -4,11 +4,10 @@ package apprunner
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociate a custom domain name from an App Runner service.
@@ -50,6 +49,21 @@ type DisassociateCustomDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCustomDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCustomDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCustomDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DisassociateCustomDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.DisassociateCustomDomainRequest_ServiceArn, *v.ServiceArn)
+	}
+}
+
 type DisassociateCustomDomainOutput struct {
 
 	// A description of the domain name that's being disassociated.
@@ -80,77 +94,65 @@ type DisassociateCustomDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateCustomDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateCustomDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateCustomDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomDomain != nil {
+		s.WriteStruct(schemas.DisassociateCustomDomainResponse_CustomDomain)
+		v.CustomDomain.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DNSTarget != nil {
+		s.WriteString(schemas.DisassociateCustomDomainResponse_DNSTarget, *v.DNSTarget)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.DisassociateCustomDomainResponse_ServiceArn, *v.ServiceArn)
+	}
+	serializeVpcDNSTargetList(s, schemas.DisassociateCustomDomainResponse_VpcDNSTargets, v.VpcDNSTargets)
+}
+func (v *DisassociateCustomDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateCustomDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateCustomDomainResponse_CustomDomain:
+			v.CustomDomain = &types.CustomDomain{}
+			return v.CustomDomain.Deserialize(d)
+		case schemas.DisassociateCustomDomainResponse_DNSTarget:
+			v.DNSTarget = new(string)
+			return d.ReadString(schemas.DisassociateCustomDomainResponse_DNSTarget, v.DNSTarget)
+		case schemas.DisassociateCustomDomainResponse_ServiceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.DisassociateCustomDomainResponse_ServiceArn, v.ServiceArn)
+		case schemas.DisassociateCustomDomainResponse_VpcDNSTargets:
+			return deserializeVpcDNSTargetList(d, schemas.DisassociateCustomDomainResponse_VpcDNSTargets, &v.VpcDNSTargets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateCustomDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCustomDomain, schemas.DisassociateCustomDomainRequest, schemas.DisassociateCustomDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateCustomDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateCustomDomain, schemas.DisassociateCustomDomainRequest, schemas.DisassociateCustomDomainResponse), output: &DisassociateCustomDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateCustomDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateCustomDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociateCustomDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateCustomDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +167,8 @@ func (c *Client) addOperationDisassociateCustomDomainMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociateCustomDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateCustomDomain",
-	}
 }

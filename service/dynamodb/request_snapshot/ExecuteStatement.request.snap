@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.ExecuteStatement
+
+{"ConsistentRead":true,"Limit":1,"NextToken":"__NextToken__","Parameters":[{"S":"__AttributeValueMemberS__"},{"S":"__AttributeValueMemberS__"}],"ReturnConsumedCapacity":"INDEXES","ReturnValuesOnConditionCheckFailure":"ALL_OLD","Statement":"__Statement__"}

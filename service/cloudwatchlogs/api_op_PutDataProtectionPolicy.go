@@ -4,10 +4,9 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a data protection policy for the specified log group. A data protection
@@ -103,6 +102,21 @@ type PutDataProtectionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDataProtectionPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDataProtectionPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDataProtectionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupIdentifier != nil {
+		s.WriteString(schemas.PutDataProtectionPolicyRequest_logGroupIdentifier, *v.LogGroupIdentifier)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.PutDataProtectionPolicyRequest_policyDocument, *v.PolicyDocument)
+	}
+}
+
 type PutDataProtectionPolicyOutput struct {
 
 	// The date and time that this policy was most recently updated.
@@ -120,77 +134,60 @@ type PutDataProtectionPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDataProtectionPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDataProtectionPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDataProtectionPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedTime != nil {
+		s.WriteInt64(schemas.PutDataProtectionPolicyResponse_lastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.LogGroupIdentifier != nil {
+		s.WriteString(schemas.PutDataProtectionPolicyResponse_logGroupIdentifier, *v.LogGroupIdentifier)
+	}
+	if v.PolicyDocument != nil {
+		s.WriteString(schemas.PutDataProtectionPolicyResponse_policyDocument, *v.PolicyDocument)
+	}
+}
+func (v *PutDataProtectionPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDataProtectionPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutDataProtectionPolicyResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(int64)
+			return d.ReadInt64(schemas.PutDataProtectionPolicyResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.PutDataProtectionPolicyResponse_logGroupIdentifier:
+			v.LogGroupIdentifier = new(string)
+			return d.ReadString(schemas.PutDataProtectionPolicyResponse_logGroupIdentifier, v.LogGroupIdentifier)
+		case schemas.PutDataProtectionPolicyResponse_policyDocument:
+			v.PolicyDocument = new(string)
+			return d.ReadString(schemas.PutDataProtectionPolicyResponse_policyDocument, v.PolicyDocument)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDataProtectionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDataProtectionPolicy, schemas.PutDataProtectionPolicyRequest, schemas.PutDataProtectionPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDataProtectionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDataProtectionPolicy, schemas.PutDataProtectionPolicyRequest, schemas.PutDataProtectionPolicyResponse), output: &PutDataProtectionPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutDataProtectionPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDataProtectionPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutDataProtectionPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutDataProtectionPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -205,22 +202,8 @@ func (c *Client) addOperationPutDataProtectionPolicyMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutDataProtectionPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutDataProtectionPolicy",
-	}
 }

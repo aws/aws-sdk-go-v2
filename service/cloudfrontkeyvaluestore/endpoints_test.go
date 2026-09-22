@@ -182,7 +182,7 @@ func TestEndpointCase8(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
@@ -234,7 +234,7 @@ func TestEndpointCase9(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
@@ -326,7 +326,7 @@ func TestEndpointCase12(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
@@ -378,7 +378,7 @@ func TestEndpointCase13(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")

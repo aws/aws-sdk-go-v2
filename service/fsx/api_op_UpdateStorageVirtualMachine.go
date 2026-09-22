@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an FSx for ONTAP storage virtual machine (SVM).
@@ -48,6 +48,29 @@ type UpdateStorageVirtualMachineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStorageVirtualMachineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStorageVirtualMachineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStorageVirtualMachineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateStorageVirtualMachineRequest_ActiveDirectoryConfiguration)
+		v.ActiveDirectoryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateStorageVirtualMachineRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.StorageVirtualMachineId != nil {
+		s.WriteString(schemas.UpdateStorageVirtualMachineRequest_StorageVirtualMachineId, *v.StorageVirtualMachineId)
+	}
+	if v.SvmAdminPassword != nil {
+		s.WriteString(schemas.UpdateStorageVirtualMachineRequest_SvmAdminPassword, *v.SvmAdminPassword)
+	}
+}
+
 type UpdateStorageVirtualMachineOutput struct {
 
 	// Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM)
@@ -60,65 +83,44 @@ type UpdateStorageVirtualMachineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStorageVirtualMachineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStorageVirtualMachineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStorageVirtualMachineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageVirtualMachine != nil {
+		s.WriteStruct(schemas.UpdateStorageVirtualMachineResponse_StorageVirtualMachine)
+		v.StorageVirtualMachine.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateStorageVirtualMachineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStorageVirtualMachineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStorageVirtualMachineResponse_StorageVirtualMachine:
+			v.StorageVirtualMachine = &types.StorageVirtualMachine{}
+			return v.StorageVirtualMachine.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStorageVirtualMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStorageVirtualMachine, schemas.UpdateStorageVirtualMachineRequest, schemas.UpdateStorageVirtualMachineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStorageVirtualMachine{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStorageVirtualMachine, schemas.UpdateStorageVirtualMachineRequest, schemas.UpdateStorageVirtualMachineResponse), output: &UpdateStorageVirtualMachineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateStorageVirtualMachine{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateStorageVirtualMachine"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -128,12 +130,6 @@ func (c *Client) addOperationUpdateStorageVirtualMachineMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpUpdateStorageVirtualMachineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStorageVirtualMachine(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +142,6 @@ func (c *Client) addOperationUpdateStorageVirtualMachineMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -191,12 +181,4 @@ func (m *idempotencyToken_initializeOpUpdateStorageVirtualMachine) HandleInitial
 }
 func addIdempotencyToken_opUpdateStorageVirtualMachineMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateStorageVirtualMachine{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateStorageVirtualMachine(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateStorageVirtualMachine",
-	}
 }

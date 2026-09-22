@@ -5,10 +5,10 @@ package kendra
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists specific permissions of users and groups with access to your Amazon
@@ -51,6 +51,27 @@ type ListEntityPersonasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntityPersonasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntityPersonasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntityPersonasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ListEntityPersonasRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListEntityPersonasRequest_IndexId, *v.IndexId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntityPersonasRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntityPersonasRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEntityPersonasOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token, which you can
@@ -66,77 +87,51 @@ type ListEntityPersonasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntityPersonasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntityPersonasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntityPersonasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntityPersonasResponse_NextToken, *v.NextToken)
+	}
+	serializePersonasSummaryList(s, schemas.ListEntityPersonasResponse_SummaryItems, v.SummaryItems)
+}
+func (v *ListEntityPersonasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntityPersonasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntityPersonasResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntityPersonasResponse_NextToken, v.NextToken)
+		case schemas.ListEntityPersonasResponse_SummaryItems:
+			return deserializePersonasSummaryList(d, schemas.ListEntityPersonasResponse_SummaryItems, &v.SummaryItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntityPersonasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityPersonas, schemas.ListEntityPersonasRequest, schemas.ListEntityPersonasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEntityPersonas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntityPersonas, schemas.ListEntityPersonasRequest, schemas.ListEntityPersonasResponse), output: &ListEntityPersonasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEntityPersonas{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEntityPersonas"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEntityPersonasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEntityPersonas(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +144,6 @@ func (c *Client) addOperationListEntityPersonasMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +245,3 @@ type ListEntityPersonasAPIClient interface {
 }
 
 var _ ListEntityPersonasAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEntityPersonas(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEntityPersonas",
-	}
-}

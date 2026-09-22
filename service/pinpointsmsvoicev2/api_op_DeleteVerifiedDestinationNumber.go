@@ -4,10 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -35,6 +34,18 @@ type DeleteVerifiedDestinationNumberInput struct {
 	VerifiedDestinationNumberId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteVerifiedDestinationNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVerifiedDestinationNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVerifiedDestinationNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VerifiedDestinationNumberId != nil {
+		s.WriteString(schemas.DeleteVerifiedDestinationNumberRequest_VerifiedDestinationNumberId, *v.VerifiedDestinationNumberId)
+	}
 }
 
 type DeleteVerifiedDestinationNumberOutput struct {
@@ -67,77 +78,66 @@ type DeleteVerifiedDestinationNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVerifiedDestinationNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVerifiedDestinationNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVerifiedDestinationNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteVerifiedDestinationNumberResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.DeleteVerifiedDestinationNumberResult_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.VerifiedDestinationNumberArn != nil {
+		s.WriteString(schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberArn, *v.VerifiedDestinationNumberArn)
+	}
+	if v.VerifiedDestinationNumberId != nil {
+		s.WriteString(schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberId, *v.VerifiedDestinationNumberId)
+	}
+}
+func (v *DeleteVerifiedDestinationNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVerifiedDestinationNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVerifiedDestinationNumberResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteVerifiedDestinationNumberResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteVerifiedDestinationNumberResult_DestinationPhoneNumber:
+			v.DestinationPhoneNumber = new(string)
+			return d.ReadString(schemas.DeleteVerifiedDestinationNumberResult_DestinationPhoneNumber, v.DestinationPhoneNumber)
+		case schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberArn:
+			v.VerifiedDestinationNumberArn = new(string)
+			return d.ReadString(schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberArn, v.VerifiedDestinationNumberArn)
+		case schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberId:
+			v.VerifiedDestinationNumberId = new(string)
+			return d.ReadString(schemas.DeleteVerifiedDestinationNumberResult_VerifiedDestinationNumberId, v.VerifiedDestinationNumberId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVerifiedDestinationNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVerifiedDestinationNumber, schemas.DeleteVerifiedDestinationNumberRequest, schemas.DeleteVerifiedDestinationNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteVerifiedDestinationNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVerifiedDestinationNumber, schemas.DeleteVerifiedDestinationNumberRequest, schemas.DeleteVerifiedDestinationNumberResult), output: &DeleteVerifiedDestinationNumberOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteVerifiedDestinationNumber{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteVerifiedDestinationNumber"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteVerifiedDestinationNumberValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVerifiedDestinationNumber(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +152,8 @@ func (c *Client) addOperationDeleteVerifiedDestinationNumberMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteVerifiedDestinationNumber(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteVerifiedDestinationNumber",
-	}
 }

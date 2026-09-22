@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.SubmitContainerStateChange
+
+{"cluster":"__Cluster__","containerName":"__ContainerName__","exitCode":1,"networkBindings":[{"bindIP":"__BindIP__","containerPort":1,"containerPortRange":"__ContainerPortRange__","hostPort":1,"hostPortRange":"__HostPortRange__","protocol":"tcp"},{"bindIP":"__BindIP__","containerPort":1,"containerPortRange":"__ContainerPortRange__","hostPort":1,"hostPortRange":"__HostPortRange__","protocol":"tcp"}],"reason":"__Reason__","runtimeId":"__RuntimeId__","status":"__Status__","task":"__Task__"}

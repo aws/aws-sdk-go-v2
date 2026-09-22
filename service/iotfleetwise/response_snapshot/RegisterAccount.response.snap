@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.RegisterAccount
+
+{"creationTime":946684800,"iamResources":{"roleArn":"__RoleArn__"},"lastModificationTime":946684800,"registerAccountStatus":"REGISTRATION_PENDING","timestreamResources":{"timestreamDatabaseName":"__TimestreamDatabaseName__","timestreamTableName":"__TimestreamTableName__"}}

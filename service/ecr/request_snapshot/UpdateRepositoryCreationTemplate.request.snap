@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.UpdateRepositoryCreationTemplate
+
+{"appliedFor":["REPLICATION","REPLICATION"],"customRoleArn":"__CustomRoleArn__","description":"__Description__","encryptionConfiguration":{"encryptionType":"AES256","kmsKey":"__KmsKey__"},"imageTagMutability":"MUTABLE","imageTagMutabilityExclusionFilters":[{"filter":"__Filter__","filterType":"WILDCARD"},{"filter":"__Filter__","filterType":"WILDCARD"}],"lifecyclePolicy":"__LifecyclePolicy__","prefix":"__Prefix__","repositoryPolicy":"__RepositoryPolicy__","resourceTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

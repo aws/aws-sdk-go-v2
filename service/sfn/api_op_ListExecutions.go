@@ -5,10 +5,10 @@ package sfn
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all executions of a state machine or a Map Run. You can list all
@@ -19,7 +19,9 @@ import (
 // You can also provide a state machine [alias] ARN or [version] ARN to list the executions
 // associated with a specific alias or version.
 //
-// Results are sorted by time, with the most recent execution first.
+// Results are sorted by time, with the most recent execution first. Running
+// executions are sorted by their startDate or redriveDate , and other executions
+// are sorted by their stopDate .
 //
 // If nextToken is returned, there are more results available. The value of
 // nextToken is a unique pagination token for each page. Make the call again using
@@ -30,7 +32,8 @@ import (
 // This operation is eventually consistent. The results are best effort and may
 // not reflect very recent updates and changes.
 //
-// This API action is not supported by EXPRESS state machines.
+// This API action is not supported by EXPRESS state machines. However, you may
+// list EXPRESS children started by a map run using the mapRunArn parameter.
 //
 // [redriven]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html
 // [alias]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
@@ -116,6 +119,33 @@ type ListExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MapRunArn != nil {
+		s.WriteString(schemas.ListExecutionsInput_mapRunArn, *v.MapRunArn)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListExecutionsInput_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExecutionsInput_nextToken, *v.NextToken)
+	}
+	if v.RedriveFilter != "" {
+		s.WriteString(schemas.ListExecutionsInput_redriveFilter, string(v.RedriveFilter))
+	}
+	if v.StateMachineArn != nil {
+		s.WriteString(schemas.ListExecutionsInput_stateMachineArn, *v.StateMachineArn)
+	}
+	if v.StatusFilter != "" {
+		s.WriteString(schemas.ListExecutionsInput_statusFilter, string(v.StatusFilter))
+	}
+}
+
 type ListExecutionsOutput struct {
 
 	// The list of matching executions.
@@ -136,74 +166,48 @@ type ListExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExecutionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExecutionList(s, schemas.ListExecutionsOutput_executions, v.Executions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExecutionsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExecutionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExecutionsOutput_executions:
+			return deserializeExecutionList(d, schemas.ListExecutionsOutput_executions, &v.Executions)
+		case schemas.ListExecutionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExecutionsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExecutions, schemas.ListExecutionsInput, schemas.ListExecutionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExecutions, schemas.ListExecutionsInput, schemas.ListExecutionsOutput), output: &ListExecutionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListExecutions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListExecutions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListExecutions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -216,12 +220,6 @@ func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -323,11 +321,3 @@ type ListExecutionsAPIClient interface {
 }
 
 var _ ListExecutionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListExecutions",
-	}
-}

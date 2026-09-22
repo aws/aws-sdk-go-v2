@@ -1,0 +1,6 @@
+POST /key-value-stores/__KvsARN__/keys
+
+Content-Type: application/json
+If-Match: __IfMatch__
+
+{"Deletes":[{"Key":"__Key__"},{"Key":"__Key__"}],"Puts":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

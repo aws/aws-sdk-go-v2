@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"assistantAssociationSummaries":[{"assistantArn":"__AssistantArn__","assistantAssociationArn":"__AssistantAssociationArn__","assistantAssociationId":"__AssistantAssociationId__","assistantId":"__AssistantId__","associationData":{"knowledgeBaseAssociation":{"knowledgeBaseArn":"__KnowledgeBaseArn__","knowledgeBaseId":"__KnowledgeBaseId__"}},"associationType":"KNOWLEDGE_BASE","tags":{"key0":"__Value__"}},{"assistantArn":"__AssistantArn__","assistantAssociationArn":"__AssistantAssociationArn__","assistantAssociationId":"__AssistantAssociationId__","assistantId":"__AssistantId__","associationData":{"knowledgeBaseAssociation":{"knowledgeBaseArn":"__KnowledgeBaseArn__","knowledgeBaseId":"__KnowledgeBaseId__"}},"associationType":"KNOWLEDGE_BASE","tags":{"key0":"__Value__"}}],"nextToken":"__NextToken__"}

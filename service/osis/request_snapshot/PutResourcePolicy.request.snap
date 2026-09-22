@@ -1,0 +1,5 @@
+PUT /2022-01-01/osis/resourcePolicy/__ResourceArn__
+
+Content-Type: application/json
+
+{"Policy":"__Policy__"}

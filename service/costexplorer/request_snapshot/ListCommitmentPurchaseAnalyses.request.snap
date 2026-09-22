@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.ListCommitmentPurchaseAnalyses
+
+{"AnalysisIds":["__Member__","__Member__"],"AnalysisStatus":"SUCCEEDED","NextPageToken":"__NextPageToken__","PageSize":1}

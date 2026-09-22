@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves an ID namespace association from a specific collaboration.
@@ -43,6 +42,21 @@ type GetCollaborationIdNamespaceAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationIdNamespaceAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationIdNamespaceAssociationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationIdNamespaceAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationIdNamespaceAssociationInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.IdNamespaceAssociationIdentifier != nil {
+		s.WriteString(schemas.GetCollaborationIdNamespaceAssociationInput_idNamespaceAssociationIdentifier, *v.IdNamespaceAssociationIdentifier)
+	}
+}
+
 type GetCollaborationIdNamespaceAssociationOutput struct {
 
 	// The ID namespace association that you requested.
@@ -56,77 +70,50 @@ type GetCollaborationIdNamespaceAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCollaborationIdNamespaceAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCollaborationIdNamespaceAssociationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCollaborationIdNamespaceAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdNamespaceAssociation != nil {
+		s.WriteStruct(schemas.GetCollaborationIdNamespaceAssociationOutput_collaborationIdNamespaceAssociation)
+		v.CollaborationIdNamespaceAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCollaborationIdNamespaceAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCollaborationIdNamespaceAssociationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCollaborationIdNamespaceAssociationOutput_collaborationIdNamespaceAssociation:
+			v.CollaborationIdNamespaceAssociation = &types.CollaborationIdNamespaceAssociation{}
+			return v.CollaborationIdNamespaceAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCollaborationIdNamespaceAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationIdNamespaceAssociation, schemas.GetCollaborationIdNamespaceAssociationInput, schemas.GetCollaborationIdNamespaceAssociationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCollaborationIdNamespaceAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCollaborationIdNamespaceAssociation, schemas.GetCollaborationIdNamespaceAssociationInput, schemas.GetCollaborationIdNamespaceAssociationOutput), output: &GetCollaborationIdNamespaceAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCollaborationIdNamespaceAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCollaborationIdNamespaceAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCollaborationIdNamespaceAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCollaborationIdNamespaceAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +128,8 @@ func (c *Client) addOperationGetCollaborationIdNamespaceAssociationMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCollaborationIdNamespaceAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCollaborationIdNamespaceAssociation",
-	}
 }

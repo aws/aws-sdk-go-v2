@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Assets":[{"AssetId":"__AssetId__","AssetLocation":{"RackElevation":1},"AssetType":"COMPUTE","ComputeAttributes":{"HostId":"__HostId__","InstanceFamilies":["__Member__","__Member__"],"InstanceTypeCapacities":[{"Count":1,"InstanceType":"__InstanceType__"},{"Count":1,"InstanceType":"__InstanceType__"}],"MaxVcpus":1,"State":"ACTIVE"},"RackId":"__RackId__"},{"AssetId":"__AssetId__","AssetLocation":{"RackElevation":1},"AssetType":"COMPUTE","ComputeAttributes":{"HostId":"__HostId__","InstanceFamilies":["__Member__","__Member__"],"InstanceTypeCapacities":[{"Count":1,"InstanceType":"__InstanceType__"},{"Count":1,"InstanceType":"__InstanceType__"}],"MaxVcpus":1,"State":"ACTIVE"},"RackId":"__RackId__"}],"NextToken":"__NextToken__"}

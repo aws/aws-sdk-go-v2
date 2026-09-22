@@ -5,10 +5,10 @@ package greengrassv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a paginated list of Greengrass core devices.
@@ -92,6 +92,30 @@ type ListCoreDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCoreDevicesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreDevicesRequest_nextToken, *v.NextToken)
+	}
+	if v.Runtime != nil {
+		s.WriteString(schemas.ListCoreDevicesRequest_runtime, *v.Runtime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListCoreDevicesRequest_status, string(v.Status))
+	}
+	if v.ThingGroupArn != nil {
+		s.WriteString(schemas.ListCoreDevicesRequest_thingGroupArn, *v.ThingGroupArn)
+	}
+}
+
 type ListCoreDevicesOutput struct {
 
 	// A list that summarizes each core device.
@@ -107,74 +131,48 @@ type ListCoreDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCoreDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCoreDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCoreDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCoreDevicesList(s, schemas.ListCoreDevicesResponse_coreDevices, v.CoreDevices)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCoreDevicesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCoreDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCoreDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCoreDevicesResponse_coreDevices:
+			return deserializeCoreDevicesList(d, schemas.ListCoreDevicesResponse_coreDevices, &v.CoreDevices)
+		case schemas.ListCoreDevicesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCoreDevicesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCoreDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreDevices, schemas.ListCoreDevicesRequest, schemas.ListCoreDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCoreDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCoreDevices, schemas.ListCoreDevicesRequest, schemas.ListCoreDevicesResponse), output: &ListCoreDevicesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCoreDevices{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCoreDevices"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCoreDevices(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,12 +185,6 @@ func (c *Client) addOperationListCoreDevicesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -293,11 +285,3 @@ type ListCoreDevicesAPIClient interface {
 }
 
 var _ ListCoreDevicesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCoreDevices(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCoreDevices",
-	}
-}

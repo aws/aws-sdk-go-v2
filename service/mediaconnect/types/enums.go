@@ -295,6 +295,25 @@ func (EntitlementStatus) Values() []EntitlementStatus {
 	}
 }
 
+type FabricLatencyMode string
+
+// Enum values for FabricLatencyMode
+const (
+	FabricLatencyModeBalanced   FabricLatencyMode = "BALANCED"
+	FabricLatencyModeLowLatency FabricLatencyMode = "LOW_LATENCY"
+)
+
+// Values returns all known values for FabricLatencyMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FabricLatencyMode) Values() []FabricLatencyMode {
+	return []FabricLatencyMode{
+		"BALANCED",
+		"LOW_LATENCY",
+	}
+}
+
 type FailoverInputSourcePriorityMode string
 
 // Enum values for FailoverInputSourcePriorityMode
@@ -613,6 +632,25 @@ func (MediaStreamType) Values() []MediaStreamType {
 	}
 }
 
+type NdiOutputTimecodeSource string
+
+// Enum values for NdiOutputTimecodeSource
+const (
+	NdiOutputTimecodeSourceEmbeddedTimecode NdiOutputTimecodeSource = "EMBEDDED_TIMECODE"
+	NdiOutputTimecodeSourceUtcSystemTime    NdiOutputTimecodeSource = "UTC_SYSTEM_TIME"
+)
+
+// Values returns all known values for NdiOutputTimecodeSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NdiOutputTimecodeSource) Values() []NdiOutputTimecodeSource {
+	return []NdiOutputTimecodeSource{
+		"EMBEDDED_TIMECODE",
+		"UTC_SYSTEM_TIME",
+	}
+}
+
 type NdiState string
 
 // Enum values for NdiState
@@ -784,6 +822,24 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Mbps_Outbound_Bandwidth",
+	}
+}
+
+type RouterContentQualityAnalysisType string
+
+// Enum values for RouterContentQualityAnalysisType
+const (
+	RouterContentQualityAnalysisTypeContentLevel RouterContentQualityAnalysisType = "CONTENT_LEVEL"
+)
+
+// Values returns all known values for RouterContentQualityAnalysisType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouterContentQualityAnalysisType) Values() []RouterContentQualityAnalysisType {
+	return []RouterContentQualityAnalysisType{
+		"CONTENT_LEVEL",
 	}
 }
 

@@ -5,10 +5,10 @@ package kendra
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a set of frequently ask questions (FAQs) using a specified FAQ file
@@ -95,6 +95,42 @@ type CreateFaqInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFaqInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFaqRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFaqInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateFaqRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFaqRequest_Description, *v.Description)
+	}
+	if v.FileFormat != "" {
+		s.WriteString(schemas.CreateFaqRequest_FileFormat, string(v.FileFormat))
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.CreateFaqRequest_IndexId, *v.IndexId)
+	}
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.CreateFaqRequest_LanguageCode, *v.LanguageCode)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFaqRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateFaqRequest_RoleArn, *v.RoleArn)
+	}
+	if v.S3Path != nil {
+		s.WriteStruct(schemas.CreateFaqRequest_S3Path)
+		v.S3Path.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateFaqRequest_Tags, v.Tags)
+}
+
 type CreateFaqOutput struct {
 
 	// The identifier of the FAQ.
@@ -106,65 +142,42 @@ type CreateFaqOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFaqOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFaqResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFaqOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateFaqResponse_Id, *v.Id)
+	}
+}
+func (v *CreateFaqOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFaqResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFaqResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateFaqResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFaqMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFaq, schemas.CreateFaqRequest, schemas.CreateFaqResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFaq{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFaq, schemas.CreateFaqRequest, schemas.CreateFaqResponse), output: &CreateFaqOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFaq{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFaq"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -174,12 +187,6 @@ func (c *Client) addOperationCreateFaqMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpCreateFaqValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFaq(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +199,6 @@ func (c *Client) addOperationCreateFaqMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -237,12 +238,4 @@ func (m *idempotencyToken_initializeOpCreateFaq) HandleInitialize(ctx context.Co
 }
 func addIdempotencyToken_opCreateFaqMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateFaq{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateFaq(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFaq",
-	}
 }

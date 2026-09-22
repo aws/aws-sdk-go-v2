@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.DescribeUsers
+
+{"NextToken":"__NextToken__","Users":[{"ACLNames":["__Member__","__Member__"],"ARN":"__ARN__","AccessString":"__AccessString__","Authentication":{"PasswordCount":1,"Type":"password"},"MinimumEngineVersion":"__MinimumEngineVersion__","Name":"__Name__","Status":"__Status__"},{"ACLNames":["__Member__","__Member__"],"ARN":"__ARN__","AccessString":"__AccessString__","Authentication":{"PasswordCount":1,"Type":"password"},"MinimumEngineVersion":"__MinimumEngineVersion__","Name":"__Name__","Status":"__Status__"}]}

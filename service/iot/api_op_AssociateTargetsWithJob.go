@@ -4,10 +4,9 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a group with a continuous job. The following criteria must be met:
@@ -70,6 +69,25 @@ type AssociateTargetsWithJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTargetsWithJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTargetsWithJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTargetsWithJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Comment != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobRequest_comment, *v.Comment)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobRequest_jobId, *v.JobId)
+	}
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobRequest_namespaceId, *v.NamespaceId)
+	}
+	serializeJobTargets(s, schemas.AssociateTargetsWithJobRequest_targets, v.Targets)
+}
+
 type AssociateTargetsWithJobOutput struct {
 
 	// A short text description of the job.
@@ -87,77 +105,60 @@ type AssociateTargetsWithJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateTargetsWithJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateTargetsWithJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateTargetsWithJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobResponse_description, *v.Description)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.AssociateTargetsWithJobResponse_jobId, *v.JobId)
+	}
+}
+func (v *AssociateTargetsWithJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateTargetsWithJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateTargetsWithJobResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.AssociateTargetsWithJobResponse_description, v.Description)
+		case schemas.AssociateTargetsWithJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.AssociateTargetsWithJobResponse_jobArn, v.JobArn)
+		case schemas.AssociateTargetsWithJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.AssociateTargetsWithJobResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateTargetsWithJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTargetsWithJob, schemas.AssociateTargetsWithJobRequest, schemas.AssociateTargetsWithJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateTargetsWithJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateTargetsWithJob, schemas.AssociateTargetsWithJobRequest, schemas.AssociateTargetsWithJobResponse), output: &AssociateTargetsWithJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateTargetsWithJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateTargetsWithJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateTargetsWithJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateTargetsWithJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +173,8 @@ func (c *Client) addOperationAssociateTargetsWithJobMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateTargetsWithJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateTargetsWithJob",
-	}
 }

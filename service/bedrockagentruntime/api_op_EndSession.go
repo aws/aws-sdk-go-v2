@@ -4,11 +4,10 @@ package bedrockagentruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Ends the session. After you end a session, you can still access its content but
@@ -42,6 +41,18 @@ type EndSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionIdentifier != nil {
+		s.WriteString(schemas.EndSessionRequest_sessionIdentifier, *v.SessionIdentifier)
+	}
+}
+
 type EndSessionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the session you ended.
@@ -65,77 +76,64 @@ type EndSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionArn != nil {
+		s.WriteString(schemas.EndSessionResponse_sessionArn, *v.SessionArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.EndSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.SessionStatus != "" {
+		s.WriteString(schemas.EndSessionResponse_sessionStatus, string(v.SessionStatus))
+	}
+}
+func (v *EndSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndSessionResponse_sessionArn:
+			v.SessionArn = new(string)
+			return d.ReadString(schemas.EndSessionResponse_sessionArn, v.SessionArn)
+		case schemas.EndSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.EndSessionResponse_sessionId, v.SessionId)
+		case schemas.EndSessionResponse_sessionStatus:
+			var ev string
+			if err := d.ReadString(schemas.EndSessionResponse_sessionStatus, &ev); err != nil {
+				return err
+			}
+			v.SessionStatus = types.SessionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEndSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndSession, schemas.EndSessionRequest, schemas.EndSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEndSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndSession, schemas.EndSessionRequest, schemas.EndSessionResponse), output: &EndSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEndSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EndSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpEndSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEndSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +148,8 @@ func (c *Client) addOperationEndSessionMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opEndSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EndSession",
-	}
 }

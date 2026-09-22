@@ -5,10 +5,10 @@ package transcribe
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of custom language models that match the specified criteria. If
@@ -57,6 +57,27 @@ type ListLanguageModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLanguageModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLanguageModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLanguageModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLanguageModelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListLanguageModelsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLanguageModelsRequest_NextToken, *v.NextToken)
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListLanguageModelsRequest_StatusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListLanguageModelsOutput struct {
 
 	// Provides information about the custom language models that match the criteria
@@ -76,74 +97,48 @@ type ListLanguageModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLanguageModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLanguageModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLanguageModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeModels(s, schemas.ListLanguageModelsResponse_Models, v.Models)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLanguageModelsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLanguageModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLanguageModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLanguageModelsResponse_Models:
+			return deserializeModels(d, schemas.ListLanguageModelsResponse_Models, &v.Models)
+		case schemas.ListLanguageModelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLanguageModelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLanguageModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLanguageModels, schemas.ListLanguageModelsRequest, schemas.ListLanguageModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLanguageModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLanguageModels, schemas.ListLanguageModelsRequest, schemas.ListLanguageModelsResponse), output: &ListLanguageModelsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLanguageModels{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLanguageModels"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLanguageModels(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +151,6 @@ func (c *Client) addOperationListLanguageModelsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +254,3 @@ type ListLanguageModelsAPIClient interface {
 }
 
 var _ ListLanguageModelsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLanguageModels(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLanguageModels",
-	}
-}

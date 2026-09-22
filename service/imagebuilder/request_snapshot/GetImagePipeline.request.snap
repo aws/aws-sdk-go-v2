@@ -1,0 +1,3 @@
+GET /GetImagePipeline?imagePipelineArn=__ImagePipelineArn__
+
+

@@ -4,11 +4,10 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This example serializes intEnums as top level properties, in lists, sets, and
@@ -44,6 +43,61 @@ type JsonIntEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonIntEnumsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonIntEnumsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonIntEnumsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegerEnum1 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_integerEnum1, int32(v.IntegerEnum1))
+	}
+	if v.IntegerEnum2 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_integerEnum2, int32(v.IntegerEnum2))
+	}
+	if v.IntegerEnum3 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_integerEnum3, int32(v.IntegerEnum3))
+	}
+	serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_integerEnumList, v.IntegerEnumList)
+	serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_integerEnumMap, v.IntegerEnumMap)
+	serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_integerEnumSet, v.IntegerEnumSet)
+}
+func (v *JsonIntEnumsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonIntEnumsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonIntEnumsInputOutput_integerEnum1:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_integerEnum1, &ev); err != nil {
+				return err
+			}
+			v.IntegerEnum1 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_integerEnum2:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_integerEnum2, &ev); err != nil {
+				return err
+			}
+			v.IntegerEnum2 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_integerEnum3:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_integerEnum3, &ev); err != nil {
+				return err
+			}
+			v.IntegerEnum3 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_integerEnumList:
+			return deserializeIntegerEnumList(d, schemas.JsonIntEnumsInputOutput_integerEnumList, &v.IntegerEnumList)
+		case schemas.JsonIntEnumsInputOutput_integerEnumMap:
+			return deserializeIntegerEnumMap(d, schemas.JsonIntEnumsInputOutput_integerEnumMap, &v.IntegerEnumMap)
+		case schemas.JsonIntEnumsInputOutput_integerEnumSet:
+			return deserializeIntegerEnumSet(d, schemas.JsonIntEnumsInputOutput_integerEnumSet, &v.IntegerEnumSet)
+		}
+		return nil
+	})
+}
+
 type JsonIntEnumsOutput struct {
 	IntegerEnum1 types.IntegerEnum
 
@@ -63,74 +117,78 @@ type JsonIntEnumsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonIntEnumsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonIntEnumsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonIntEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntegerEnum1 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_integerEnum1, int32(v.IntegerEnum1))
+	}
+	if v.IntegerEnum2 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_integerEnum2, int32(v.IntegerEnum2))
+	}
+	if v.IntegerEnum3 != 0 {
+		s.WriteInt32(schemas.JsonIntEnumsInputOutput_integerEnum3, int32(v.IntegerEnum3))
+	}
+	serializeIntegerEnumList(s, schemas.JsonIntEnumsInputOutput_integerEnumList, v.IntegerEnumList)
+	serializeIntegerEnumMap(s, schemas.JsonIntEnumsInputOutput_integerEnumMap, v.IntegerEnumMap)
+	serializeIntegerEnumSet(s, schemas.JsonIntEnumsInputOutput_integerEnumSet, v.IntegerEnumSet)
+}
+func (v *JsonIntEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonIntEnumsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonIntEnumsInputOutput_integerEnum1:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_integerEnum1, &ev); err != nil {
+				return err
+			}
+			v.IntegerEnum1 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_integerEnum2:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_integerEnum2, &ev); err != nil {
+				return err
+			}
+			v.IntegerEnum2 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_integerEnum3:
+			var ev int32
+			if err := d.ReadInt32(schemas.JsonIntEnumsInputOutput_integerEnum3, &ev); err != nil {
+				return err
+			}
+			v.IntegerEnum3 = types.IntegerEnum(ev)
+			return nil
+		case schemas.JsonIntEnumsInputOutput_integerEnumList:
+			return deserializeIntegerEnumList(d, schemas.JsonIntEnumsInputOutput_integerEnumList, &v.IntegerEnumList)
+		case schemas.JsonIntEnumsInputOutput_integerEnumMap:
+			return deserializeIntegerEnumMap(d, schemas.JsonIntEnumsInputOutput_integerEnumMap, &v.IntegerEnumMap)
+		case schemas.JsonIntEnumsInputOutput_integerEnumSet:
+			return deserializeIntegerEnumSet(d, schemas.JsonIntEnumsInputOutput_integerEnumSet, &v.IntegerEnumSet)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJsonIntEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonIntEnums, schemas.JsonIntEnumsInputOutput, schemas.JsonIntEnumsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonIntEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonIntEnums, schemas.JsonIntEnumsInputOutput, schemas.JsonIntEnumsInputOutput), output: &JsonIntEnumsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonIntEnums{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "JsonIntEnums"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJsonIntEnums(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +203,8 @@ func (c *Client) addOperationJsonIntEnumsMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opJsonIntEnums(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "JsonIntEnums",
-	}
 }

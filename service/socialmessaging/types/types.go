@@ -124,6 +124,11 @@ type LinkedWhatsAppBusinessAccount struct {
 	// This member is required.
 	WabaName *string
 
+	// The Meta Conversions API dataset ID associated with this WhatsApp Business
+	// Account. This value is a numeric string of 10 to 20 digits. This field is not
+	// present when no dataset has been created for this account.
+	DatasetId *string
+
 	// The onboarding status for the Marketing Messages API. This value is fetched
 	// from Meta and indicates whether the WhatsApp Business Account is onboarded for
 	// Meta's Marketing Messages API.
@@ -190,10 +195,170 @@ type LinkedWhatsAppBusinessAccountSummary struct {
 	// This member is required.
 	WabaName *string
 
+	// The Meta Conversions API dataset ID associated with this WhatsApp Business
+	// Account. This value is a numeric string of 10 to 20 digits. This field is not
+	// present when no dataset has been created for this account.
+	DatasetId *string
+
 	// The onboarding status for the Marketing Messages API. This value is fetched
 	// from Meta and indicates whether the WhatsApp Business Account is onboarded for
 	// Meta's Marketing Messages API.
 	MarketingMessagesOnboardingStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Meta application metadata associated with a WhatsApp Flow.
+type MetaFlowApplicationInfo struct {
+
+	// The unique identifier of the Meta application.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the Meta application.
+	//
+	// This member is required.
+	Name *string
+
+	// The URL link for the Meta application.
+	Link *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single asset file associated with a WhatsApp Flow, including a
+// presigned download URL.
+type MetaFlowAsset struct {
+
+	// The type of asset. Currently the only supported value is FLOW_JSON.
+	//
+	// This member is required.
+	AssetType *string
+
+	// A presigned URL from Meta for downloading the asset. The URL expires after a
+	// short period.
+	//
+	// This member is required.
+	DownloadUrl *string
+
+	// The filename of the asset (for example, flow.json).
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a single entity in the health status check for a WhatsApp Flow.
+type MetaFlowHealthEntity struct {
+
+	// The messaging availability status for this entity (for example, AVAILABLE,
+	// LIMITED, or BLOCKED).
+	//
+	// This member is required.
+	CanSendMessage *string
+
+	// The type of entity (for example, FLOW, WABA, BUSINESS, or APP).
+	//
+	// This member is required.
+	EntityType *string
+
+	// The unique identifier of the entity.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the overall health status and per-entity breakdown for a WhatsApp Flow.
+type MetaFlowHealthStatus struct {
+
+	// The overall messaging availability status (for example, AVAILABLE, LIMITED, or
+	// BLOCKED).
+	//
+	// This member is required.
+	CanSendMessage *string
+
+	// A list of health status entities with per-entity availability information.
+	Entities []MetaFlowHealthEntity
+
+	noSmithyDocumentSerde
+}
+
+// Contains the preview URL for testing a WhatsApp Flow and its expiration
+// timestamp.
+type MetaFlowPreviewInfo struct {
+
+	// The timestamp when the preview URL expires.
+	//
+	// This member is required.
+	ExpiresAt *string
+
+	// The web URL for previewing the Flow. Can be shared with stakeholders for review.
+	//
+	// This member is required.
+	PreviewUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a WhatsApp Flow, including its ID, name,
+// status, and categories.
+type MetaFlowSummary struct {
+
+	// The categories that classify the business purpose of the Flow.
+	//
+	// This member is required.
+	FlowCategories []MetaFlowCategory
+
+	// The unique identifier of the Flow assigned by Meta.
+	//
+	// This member is required.
+	FlowId *string
+
+	// The name of the Flow.
+	//
+	// This member is required.
+	FlowName *string
+
+	// The lifecycle status of the Flow (DRAFT, PUBLISHED, DEPRECATED, BLOCKED, or
+	// THROTTLED).
+	//
+	// This member is required.
+	FlowStatus *string
+
+	// A list of validation errors from Meta, if any.
+	//
+	// This member is required.
+	ValidationErrors []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains WhatsApp Business Account metadata associated with a Flow, as returned
+// by Meta.
+type MetaFlowWhatsAppBusinessAccountInfo struct {
+
+	// The WhatsApp Business Account ID from Meta.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the WhatsApp Business Account.
+	//
+	// This member is required.
+	Name *string
+
+	// The currency code for the WhatsApp Business Account (for example, USD).
+	Currency *string
+
+	// The message template namespace for the WhatsApp Business Account.
+	MessageTemplateNamespace *string
+
+	// The timezone ID for the WhatsApp Business Account.
+	TimezoneId *string
 
 	noSmithyDocumentSerde
 }
@@ -455,6 +620,139 @@ type WhatsAppBusinessAccountEventDestination struct {
 	noSmithyDocumentSerde
 }
 
+// The operating hours during which a business phone number accepts WhatsApp
+// calls, including the time zone, weekly schedule, and any holiday overrides.
+type WhatsAppCallHours struct {
+
+	// Specifies whether call hours are enforced. When disabled, the business accepts
+	// calls at any time.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The IANA time zone in which the operating hours are interpreted, such as
+	// America/New_York .
+	//
+	// This member is required.
+	Timezone *string
+
+	// The weekly schedule of hours during which the business accepts calls.
+	//
+	// This member is required.
+	WeeklyOperatingHours []WhatsAppWeeklyOperatingHoursEntry
+
+	// Date-specific overrides to the weekly operating hours, such as holidays.
+	HolidaySchedule []WhatsAppHolidayScheduleEntry
+
+	noSmithyDocumentSerde
+}
+
+// The current calling permission state for a business phone number and a specific
+// WhatsApp end user.
+type WhatsAppCallPermission struct {
+
+	// The permission status for the end user.
+	//
+	// This member is required.
+	Status *string
+
+	// The time when a temporary permission expires. This value is absent for
+	// permanent permissions and when there is no permission.
+	ExpirationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes a single calling action the business can take with an end user,
+// including whether the action is currently allowed and any limits that apply to
+// it. Returned as an item in the actions list from GetWhatsAppCallPermission .
+type WhatsAppCallPermissionAction struct {
+
+	// The name of the calling action.
+	//
+	// This member is required.
+	ActionName *string
+
+	// Specifies whether the business can currently perform the action.
+	//
+	// This member is required.
+	CanPerformAction *bool
+
+	// The time-bound limits that apply to the action.
+	//
+	// This member is required.
+	Limits []WhatsAppCallPermissionLimit
+
+	noSmithyDocumentSerde
+}
+
+// A time-bound restriction on a calling action, such as the number of calls
+// allowed within a time period.
+type WhatsAppCallPermissionLimit struct {
+
+	// The number of times the action has been used within the current time period.
+	//
+	// This member is required.
+	CurrentUsage *int32
+
+	// The maximum number of times the action is allowed within the time period.
+	//
+	// This member is required.
+	MaxAllowed *int32
+
+	// The time period over which the limit applies, as an ISO 8601 duration.
+	//
+	// This member is required.
+	TimePeriod *string
+
+	// The time when the limit resets. This value is present only when the current
+	// usage has reached the maximum allowed.
+	LimitExpirationTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The calling configuration for a WhatsApp business phone number.
+type WhatsAppCallSettings struct {
+
+	// Specifies whether calling is enabled for the phone number.
+	//
+	// This member is required.
+	CallEnabled *bool
+
+	// The hours during which the business accepts calls on the phone number.
+	CallHours *WhatsAppCallHours
+
+	// The visibility setting for the call icon shown to end users in WhatsApp.
+	CallIconVisibility *string
+
+	// The callback permission status for the phone number.
+	CallbackPermissionStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// A date-specific override to the weekly operating hours, such as a holiday.
+type WhatsAppHolidayScheduleEntry struct {
+
+	// The date that the override applies to, in ISO 8601 format ( YYYY-MM-DD ).
+	//
+	// This member is required.
+	Date *string
+
+	// The time of day when the business stops accepting calls on the override date.
+	//
+	// This member is required.
+	EndTime *WhatsAppTimeOfDay
+
+	// The time of day when the business begins accepting calls on the override date.
+	//
+	// This member is required.
+	StartTime *WhatsAppTimeOfDay
+
+	noSmithyDocumentSerde
+}
+
 // The details of your WhatsApp phone number.
 type WhatsAppPhoneNumberDetail struct {
 
@@ -599,6 +897,44 @@ type WhatsAppSignupCallbackResult struct {
 	// A LinkedWhatsAppBusinessAccountIdMetaData object map containing the details of
 	// any WhatsAppBusiness accounts that have incomplete setup.
 	LinkedAccountsWithIncompleteSetup map[string]LinkedWhatsAppBusinessAccountIdMetaData
+
+	noSmithyDocumentSerde
+}
+
+// A time of day, expressed as an hour and minute.
+type WhatsAppTimeOfDay struct {
+
+	// The hour of the day, from 0 to 23.
+	//
+	// This member is required.
+	Hours *int32
+
+	// The minute of the hour, from 0 to 59.
+	//
+	// This member is required.
+	Minutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// A single entry in a weekly calling schedule, defining the open and close times
+// for one day of the week.
+type WhatsAppWeeklyOperatingHoursEntry struct {
+
+	// The time of day when the business stops accepting calls.
+	//
+	// This member is required.
+	CloseTime *WhatsAppTimeOfDay
+
+	// The day of the week that the entry applies to.
+	//
+	// This member is required.
+	DayOfWeek WhatsAppDayOfWeek
+
+	// The time of day when the business begins accepting calls.
+	//
+	// This member is required.
+	OpenTime *WhatsAppTimeOfDay
 
 	noSmithyDocumentSerde
 }

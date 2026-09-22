@@ -296,11 +296,13 @@ type AutomatedReasoningPolicyBuildWorkflowType string
 
 // Enum values for AutomatedReasoningPolicyBuildWorkflowType
 const (
-	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent           AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
-	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy            AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
-	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy            AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
-	AutomatedReasoningPolicyBuildWorkflowTypeGenerateFidelityReport  AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_FIDELITY_REPORT"
-	AutomatedReasoningPolicyBuildWorkflowTypeGeneratePolicyScenarios AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_POLICY_SCENARIOS"
+	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent            AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
+	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy             AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy             AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeGenerateFidelityReport   AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_FIDELITY_REPORT"
+	AutomatedReasoningPolicyBuildWorkflowTypeGeneratePolicyScenarios  AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_POLICY_SCENARIOS"
+	AutomatedReasoningPolicyBuildWorkflowTypeResolvePolicyAmbiguities AutomatedReasoningPolicyBuildWorkflowType = "RESOLVE_POLICY_AMBIGUITIES"
+	AutomatedReasoningPolicyBuildWorkflowTypeIterativelyRefinePolicy  AutomatedReasoningPolicyBuildWorkflowType = "ITERATIVELY_REFINE_POLICY"
 )
 
 // Values returns all known values for AutomatedReasoningPolicyBuildWorkflowType.
@@ -315,6 +317,8 @@ func (AutomatedReasoningPolicyBuildWorkflowType) Values() []AutomatedReasoningPo
 		"IMPORT_POLICY",
 		"GENERATE_FIDELITY_REPORT",
 		"GENERATE_POLICY_SCENARIOS",
+		"RESOLVE_POLICY_AMBIGUITIES",
+		"ITERATIVELY_REFINE_POLICY",
 	}
 }
 
@@ -466,6 +470,31 @@ func (CustomModelDeploymentUpdateStatus) Values() []CustomModelDeploymentUpdateS
 		"Updating",
 		"UpdateCompleted",
 		"UpdateFailed",
+	}
+}
+
+type DataRetentionMode string
+
+// Enum values for DataRetentionMode
+const (
+	DataRetentionModeDefault           DataRetentionMode = "default"
+	DataRetentionModeNone              DataRetentionMode = "none"
+	DataRetentionModeAwsReview         DataRetentionMode = "aws_review"
+	DataRetentionModeProviderDataShare DataRetentionMode = "provider_data_share"
+	DataRetentionModeInherit           DataRetentionMode = "inherit"
+)
+
+// Values returns all known values for DataRetentionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataRetentionMode) Values() []DataRetentionMode {
+	return []DataRetentionMode{
+		"default",
+		"none",
+		"aws_review",
+		"provider_data_share",
+		"inherit",
 	}
 }
 

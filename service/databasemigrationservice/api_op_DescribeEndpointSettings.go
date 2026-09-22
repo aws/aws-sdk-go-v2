@@ -5,10 +5,10 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the possible endpoint settings available when you
@@ -48,6 +48,24 @@ type DescribeEndpointSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointSettingsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EngineName != nil {
+		s.WriteString(schemas.DescribeEndpointSettingsMessage_EngineName, *v.EngineName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeEndpointSettingsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeEndpointSettingsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeEndpointSettingsOutput struct {
 
 	// Descriptions of the endpoint settings available for your source or target
@@ -65,77 +83,51 @@ type DescribeEndpointSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEndpointSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEndpointSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEndpointSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEndpointSettingsList(s, schemas.DescribeEndpointSettingsResponse_EndpointSettings, v.EndpointSettings)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeEndpointSettingsResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeEndpointSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEndpointSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEndpointSettingsResponse_EndpointSettings:
+			return deserializeEndpointSettingsList(d, schemas.DescribeEndpointSettingsResponse_EndpointSettings, &v.EndpointSettings)
+		case schemas.DescribeEndpointSettingsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeEndpointSettingsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEndpointSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointSettings, schemas.DescribeEndpointSettingsMessage, schemas.DescribeEndpointSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEndpointSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEndpointSettings, schemas.DescribeEndpointSettingsMessage, schemas.DescribeEndpointSettingsResponse), output: &DescribeEndpointSettingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEndpointSettings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEndpointSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeEndpointSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEndpointSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +140,6 @@ func (c *Client) addOperationDescribeEndpointSettingsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +244,3 @@ type DescribeEndpointSettingsAPIClient interface {
 }
 
 var _ DescribeEndpointSettingsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeEndpointSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeEndpointSettings",
-	}
-}

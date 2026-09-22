@@ -1,0 +1,5 @@
+POST /BatchGetCodeReviewJobTasks
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","codeReviewJobTaskIds":["__Member__","__Member__"]}

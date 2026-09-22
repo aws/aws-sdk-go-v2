@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.GetStudioSessionMapping
+
+{"SessionMapping":{"CreationTime":946684800,"IdentityId":"__IdentityId__","IdentityName":"__IdentityName__","IdentityType":"USER","LastModifiedTime":946684800,"SessionPolicyArn":"__SessionPolicyArn__","StudioId":"__StudioId__"}}

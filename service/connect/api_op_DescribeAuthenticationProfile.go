@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API is in preview release for Connect Customer and is subject to change.
@@ -48,6 +47,21 @@ type DescribeAuthenticationProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuthenticationProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuthenticationProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuthenticationProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationProfileId != nil {
+		s.WriteString(schemas.DescribeAuthenticationProfileRequest_AuthenticationProfileId, *v.AuthenticationProfileId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeAuthenticationProfileRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeAuthenticationProfileOutput struct {
 
 	// The authentication profile object being described.
@@ -59,77 +73,50 @@ type DescribeAuthenticationProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuthenticationProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuthenticationProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuthenticationProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationProfile != nil {
+		s.WriteStruct(schemas.DescribeAuthenticationProfileResponse_AuthenticationProfile)
+		v.AuthenticationProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAuthenticationProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAuthenticationProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAuthenticationProfileResponse_AuthenticationProfile:
+			v.AuthenticationProfile = &types.AuthenticationProfile{}
+			return v.AuthenticationProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAuthenticationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuthenticationProfile, schemas.DescribeAuthenticationProfileRequest, schemas.DescribeAuthenticationProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAuthenticationProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuthenticationProfile, schemas.DescribeAuthenticationProfileRequest, schemas.DescribeAuthenticationProfileResponse), output: &DescribeAuthenticationProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAuthenticationProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAuthenticationProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAuthenticationProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAuthenticationProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +131,8 @@ func (c *Client) addOperationDescribeAuthenticationProfileMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAuthenticationProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAuthenticationProfile",
-	}
 }

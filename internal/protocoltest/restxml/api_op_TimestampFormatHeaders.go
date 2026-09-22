@@ -4,10 +4,9 @@ package restxml
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -45,6 +44,64 @@ type TimestampFormatHeadersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimestampFormatHeadersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestampFormatHeadersIO)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestampFormatHeadersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultFormat != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_defaultFormat, *v.DefaultFormat)
+	}
+	if v.MemberDateTime != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_memberDateTime, *v.MemberDateTime)
+	}
+	if v.MemberEpochSeconds != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_memberEpochSeconds, *v.MemberEpochSeconds)
+	}
+	if v.MemberHttpDate != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_memberHttpDate, *v.MemberHttpDate)
+	}
+	if v.TargetDateTime != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_targetDateTime, *v.TargetDateTime)
+	}
+	if v.TargetEpochSeconds != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_targetEpochSeconds, *v.TargetEpochSeconds)
+	}
+	if v.TargetHttpDate != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_targetHttpDate, *v.TargetHttpDate)
+	}
+}
+func (v *TimestampFormatHeadersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestampFormatHeadersIO, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestampFormatHeadersIO_defaultFormat:
+			v.DefaultFormat = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_defaultFormat, v.DefaultFormat)
+		case schemas.TimestampFormatHeadersIO_memberDateTime:
+			v.MemberDateTime = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_memberDateTime, v.MemberDateTime)
+		case schemas.TimestampFormatHeadersIO_memberEpochSeconds:
+			v.MemberEpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_memberEpochSeconds, v.MemberEpochSeconds)
+		case schemas.TimestampFormatHeadersIO_memberHttpDate:
+			v.MemberHttpDate = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_memberHttpDate, v.MemberHttpDate)
+		case schemas.TimestampFormatHeadersIO_targetDateTime:
+			v.TargetDateTime = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_targetDateTime, v.TargetDateTime)
+		case schemas.TimestampFormatHeadersIO_targetEpochSeconds:
+			v.TargetEpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_targetEpochSeconds, v.TargetEpochSeconds)
+		case schemas.TimestampFormatHeadersIO_targetHttpDate:
+			v.TargetHttpDate = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_targetHttpDate, v.TargetHttpDate)
+		}
+		return nil
+	})
+}
+
 type TimestampFormatHeadersOutput struct {
 	DefaultFormat *time.Time
 
@@ -66,74 +123,81 @@ type TimestampFormatHeadersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimestampFormatHeadersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestampFormatHeadersIO)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestampFormatHeadersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultFormat != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_defaultFormat, *v.DefaultFormat)
+	}
+	if v.MemberDateTime != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_memberDateTime, *v.MemberDateTime)
+	}
+	if v.MemberEpochSeconds != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_memberEpochSeconds, *v.MemberEpochSeconds)
+	}
+	if v.MemberHttpDate != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_memberHttpDate, *v.MemberHttpDate)
+	}
+	if v.TargetDateTime != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_targetDateTime, *v.TargetDateTime)
+	}
+	if v.TargetEpochSeconds != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_targetEpochSeconds, *v.TargetEpochSeconds)
+	}
+	if v.TargetHttpDate != nil {
+		s.WriteTime(schemas.TimestampFormatHeadersIO_targetHttpDate, *v.TargetHttpDate)
+	}
+}
+func (v *TimestampFormatHeadersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestampFormatHeadersIO, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestampFormatHeadersIO_defaultFormat:
+			v.DefaultFormat = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_defaultFormat, v.DefaultFormat)
+		case schemas.TimestampFormatHeadersIO_memberDateTime:
+			v.MemberDateTime = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_memberDateTime, v.MemberDateTime)
+		case schemas.TimestampFormatHeadersIO_memberEpochSeconds:
+			v.MemberEpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_memberEpochSeconds, v.MemberEpochSeconds)
+		case schemas.TimestampFormatHeadersIO_memberHttpDate:
+			v.MemberHttpDate = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_memberHttpDate, v.MemberHttpDate)
+		case schemas.TimestampFormatHeadersIO_targetDateTime:
+			v.TargetDateTime = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_targetDateTime, v.TargetDateTime)
+		case schemas.TimestampFormatHeadersIO_targetEpochSeconds:
+			v.TargetEpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_targetEpochSeconds, v.TargetEpochSeconds)
+		case schemas.TimestampFormatHeadersIO_targetHttpDate:
+			v.TargetHttpDate = new(time.Time)
+			return d.ReadTime(schemas.TimestampFormatHeadersIO_targetHttpDate, v.TargetHttpDate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTimestampFormatHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TimestampFormatHeaders, schemas.TimestampFormatHeadersIO, schemas.TimestampFormatHeadersIO)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpTimestampFormatHeaders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TimestampFormatHeaders, schemas.TimestampFormatHeadersIO, schemas.TimestampFormatHeadersIO), output: &TimestampFormatHeadersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpTimestampFormatHeaders{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TimestampFormatHeaders"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTimestampFormatHeaders(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +212,8 @@ func (c *Client) addOperationTimestampFormatHeadersMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTimestampFormatHeaders(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TimestampFormatHeaders",
-	}
 }

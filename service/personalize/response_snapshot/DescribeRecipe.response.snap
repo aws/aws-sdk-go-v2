@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.DescribeRecipe
+
+{"recipe":{"algorithmArn":"__AlgorithmArn__","creationDateTime":946684800,"description":"__Description__","featureTransformationArn":"__FeatureTransformationArn__","lastUpdatedDateTime":946684800,"name":"__Name__","recipeArn":"__RecipeArn__","recipeType":"__RecipeType__","status":"__Status__"}}

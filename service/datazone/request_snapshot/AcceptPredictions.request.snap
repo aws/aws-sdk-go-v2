@@ -1,0 +1,5 @@
+PUT /v2/domains/__DomainIdentifier__/assets/__Identifier__/accept-predictions?revision=__Revision__
+
+Content-Type: application/json
+
+{"acceptChoices":[{"editedValue":"__EditedValue__","predictionChoice":1,"predictionTarget":"__PredictionTarget__"},{"editedValue":"__EditedValue__","predictionChoice":1,"predictionTarget":"__PredictionTarget__"}],"acceptRule":{"rule":"ALL","threshold":1},"clientToken":"__ClientToken__"}

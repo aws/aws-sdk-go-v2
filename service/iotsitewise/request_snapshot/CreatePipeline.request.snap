@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceName__/pipelines
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","computations":[{"computeNodeName":"__ComputeNodeName__","dependsOn":["__Member__","__Member__"],"environmentVariables":{"key0":"__Value__"},"taskName":"__TaskName__"},{"computeNodeName":"__ComputeNodeName__","dependsOn":["__Member__","__Member__"],"environmentVariables":{"key0":"__Value__"},"taskName":"__TaskName__"}],"description":"__Description__","environmentVariables":{"key0":"__Value__"},"pipelineName":"__PipelineName__","tags":{"key0":"__Value__"}}

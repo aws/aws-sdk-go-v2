@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: B2BI.CreateProfile
+
+{"businessName":"__BusinessName__","clientToken":"__ClientToken__","email":"__Email__","logging":"ENABLED","name":"__Name__","phone":"__Phone__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

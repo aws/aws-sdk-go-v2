@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"contentHandlingStrategy":"CONVERT_TO_BINARY","integrationResponseId":"__IntegrationResponseId__","integrationResponseKey":"__IntegrationResponseKey__","responseParameters":{"key0":"__Value__"},"responseTemplates":{"key0":"__Value__"},"templateSelectionExpression":"__TemplateSelectionExpression__"},{"contentHandlingStrategy":"CONVERT_TO_BINARY","integrationResponseId":"__IntegrationResponseId__","integrationResponseKey":"__IntegrationResponseKey__","responseParameters":{"key0":"__Value__"},"responseTemplates":{"key0":"__Value__"},"templateSelectionExpression":"__TemplateSelectionExpression__"}],"nextToken":"__NextToken__"}

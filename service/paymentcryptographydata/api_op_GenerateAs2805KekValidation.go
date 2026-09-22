@@ -4,16 +4,14 @@ package paymentcryptographydata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Establishes node-to-node initialization between payment processing nodes such
-// as an acquirer, issuer or payment network using Australian Standard 2805
-// (AS2805).
+// Generates a KekValidationRequest or a KekValidationResponse for node-to-node
+// initialization between payment processing nodes using [Australian Standard 2805 (AS2805)].
 //
 // During node-to-node initialization, both communicating nodes must validate that
 // they possess the correct Key Encrypting Keys (KEKs) before proceeding with
@@ -23,22 +21,32 @@ import (
 // created or imported into Amazon Web Services Payment Cryptography using either
 // the [CreateKey]or [ImportKey] operations.
 //
-// The node initiating communication can use GenerateAS2805KekValidation to
-// generate a combined KEK validation request and KEK validation response to send
-// to the partnering node for validation. When invoked, the API internally
-// generates a random sending key encrypted under KEKs and provides a receiving key
-// encrypted under KEKr as response. The initiating node sends the response
-// returned by this API to its partner for validation.
+// To use GenerateAs2805KekValidation to generate a KEK validation request, set
+// KekValidationType to KekValidationRequest . This operation returns both
+// RandomKeySend (KRs) and RandomKeyReceive (KRr) as response values. The
+// partnering node receives the KRs, uses its KEKr to decrypt it, and generates a
+// KRr which is an inverted value of KRs. The node receiving the KRr validates it
+// against its own KRr generated during KEK validation request outside of Amazon
+// Web Services Payment Cryptography.
+//
+// You can also use this operation to generate a KEK validation response, by
+// setting KekValidationType to KekValidationResponse and providing the incoming
+// KRs. This operation then calculates a KRr. To learn more about more about
+// node-to-node initialization, see [Validation of KEK]in the Amazon Web Services Payment
+// Cryptography User Guide.
 //
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
+// [Validation of KEK]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/as2805.kekvalidation.html
 // [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
+// [Australian Standard 2805 (AS2805)]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/as2805.html
 // [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) GenerateAs2805KekValidation(ctx context.Context, params *GenerateAs2805KekValidationInput, optFns ...func(*Options)) (*GenerateAs2805KekValidationOutput, error) {
 	if params == nil {
@@ -57,8 +65,8 @@ func (c *Client) GenerateAs2805KekValidation(ctx context.Context, params *Genera
 
 type GenerateAs2805KekValidationInput struct {
 
-	// Parameter information for generating a random key for KEK validation to perform
-	// node-to-node initialization.
+	// Defines whether to generate a KEK validation request or KEK validation response
+	// for node-to-node initialization.
 	//
 	// This member is required.
 	KekValidationType types.As2805KekValidationType
@@ -76,6 +84,22 @@ type GenerateAs2805KekValidationInput struct {
 	RandomKeySendVariantMask types.RandomKeySendVariantMask
 
 	noSmithyDocumentSerde
+}
+
+func (v *GenerateAs2805KekValidationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateAs2805KekValidationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateAs2805KekValidationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAs2805KekValidationType(s, schemas.GenerateAs2805KekValidationInput_KekValidationType, v.KekValidationType)
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.GenerateAs2805KekValidationInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.RandomKeySendVariantMask != "" {
+		s.WriteString(schemas.GenerateAs2805KekValidationInput_RandomKeySendVariantMask, string(v.RandomKeySendVariantMask))
+	}
 }
 
 type GenerateAs2805KekValidationOutput struct {
@@ -109,77 +133,66 @@ type GenerateAs2805KekValidationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GenerateAs2805KekValidationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerateAs2805KekValidationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerateAs2805KekValidationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyArn != nil {
+		s.WriteString(schemas.GenerateAs2805KekValidationOutput_KeyArn, *v.KeyArn)
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.GenerateAs2805KekValidationOutput_KeyCheckValue, *v.KeyCheckValue)
+	}
+	if v.RandomKeyReceive != nil {
+		s.WriteString(schemas.GenerateAs2805KekValidationOutput_RandomKeyReceive, *v.RandomKeyReceive)
+	}
+	if v.RandomKeySend != nil {
+		s.WriteString(schemas.GenerateAs2805KekValidationOutput_RandomKeySend, *v.RandomKeySend)
+	}
+}
+func (v *GenerateAs2805KekValidationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerateAs2805KekValidationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerateAs2805KekValidationOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.GenerateAs2805KekValidationOutput_KeyArn, v.KeyArn)
+		case schemas.GenerateAs2805KekValidationOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.GenerateAs2805KekValidationOutput_KeyCheckValue, v.KeyCheckValue)
+		case schemas.GenerateAs2805KekValidationOutput_RandomKeyReceive:
+			v.RandomKeyReceive = new(string)
+			return d.ReadString(schemas.GenerateAs2805KekValidationOutput_RandomKeyReceive, v.RandomKeyReceive)
+		case schemas.GenerateAs2805KekValidationOutput_RandomKeySend:
+			v.RandomKeySend = new(string)
+			return d.ReadString(schemas.GenerateAs2805KekValidationOutput_RandomKeySend, v.RandomKeySend)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGenerateAs2805KekValidationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateAs2805KekValidation, schemas.GenerateAs2805KekValidationInput, schemas.GenerateAs2805KekValidationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateAs2805KekValidation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GenerateAs2805KekValidation, schemas.GenerateAs2805KekValidationInput, schemas.GenerateAs2805KekValidationOutput), output: &GenerateAs2805KekValidationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateAs2805KekValidation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateAs2805KekValidation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGenerateAs2805KekValidationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateAs2805KekValidation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +207,8 @@ func (c *Client) addOperationGenerateAs2805KekValidationMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGenerateAs2805KekValidation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GenerateAs2805KekValidation",
-	}
 }

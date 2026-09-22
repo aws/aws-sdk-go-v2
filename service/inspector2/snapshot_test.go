@@ -230,6 +230,18 @@ func TestCheckSnapshot_CreateCodeSecurityScanConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFilter(context.Background(), nil, func(o *Options) {
@@ -295,6 +307,18 @@ func TestCheckSnapshot_DeleteCodeSecurityScanConfiguration(t *testing.T) {
 	_, err := svc.DeleteCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteCodeSecurityScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -638,6 +662,30 @@ func TestCheckSnapshot_ListCodeSecurityScanConfigurations(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListConnectorScanConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectorScanConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListConnectorScanConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListCoverage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCoverage(context.Background(), nil, func(o *Options) {
@@ -902,6 +950,30 @@ func TestCheckSnapshot_UpdateConfiguration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateConnectorScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnectorScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConnectorScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateEc2DeepInspectionConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateEc2DeepInspectionConfiguration(context.Background(), nil, func(o *Options) {
@@ -1129,6 +1201,18 @@ func TestUpdateSnapshot_CreateCodeSecurityScanConfiguration(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFilter(context.Background(), nil, func(o *Options) {
@@ -1194,6 +1278,18 @@ func TestUpdateSnapshot_DeleteCodeSecurityScanConfiguration(t *testing.T) {
 	_, err := svc.DeleteCodeSecurityScanConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCodeSecurityScanConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1537,6 +1633,30 @@ func TestUpdateSnapshot_ListCodeSecurityScanConfigurations(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListConnectorScanConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListConnectorScanConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListConnectorScanConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListCoverage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListCoverage(context.Background(), nil, func(o *Options) {
@@ -1794,6 +1914,30 @@ func TestUpdateSnapshot_UpdateConfiguration(t *testing.T) {
 	_, err := svc.UpdateConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateConnectorScanConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConnectorScanConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConnectorScanConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

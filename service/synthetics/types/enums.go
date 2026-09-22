@@ -190,6 +190,25 @@ func (EncryptionMode) Values() []EncryptionMode {
 	}
 }
 
+type LocationType string
+
+// Enum values for LocationType
+const (
+	LocationTypePrimary LocationType = "Primary"
+	LocationTypeReplica LocationType = "Replica"
+)
+
+// Values returns all known values for LocationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LocationType) Values() []LocationType {
+	return []LocationType{
+		"Primary",
+		"Replica",
+	}
+}
+
 type ProvisionedResourceCleanupSetting string
 
 // Enum values for ProvisionedResourceCleanupSetting
@@ -207,6 +226,27 @@ func (ProvisionedResourceCleanupSetting) Values() []ProvisionedResourceCleanupSe
 	return []ProvisionedResourceCleanupSetting{
 		"AUTOMATIC",
 		"OFF",
+	}
+}
+
+type ReplicationState string
+
+// Enum values for ReplicationState
+const (
+	ReplicationStateInProgress   ReplicationState = "InProgress"
+	ReplicationStateInSync       ReplicationState = "InSync"
+	ReplicationStateInconsistent ReplicationState = "Inconsistent"
+)
+
+// Values returns all known values for ReplicationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationState) Values() []ReplicationState {
+	return []ReplicationState{
+		"InProgress",
+		"InSync",
+		"Inconsistent",
 	}
 }
 

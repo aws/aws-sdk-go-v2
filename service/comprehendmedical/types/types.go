@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -54,6 +56,91 @@ type Attribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Attribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Attribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Attribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.Attribute_BeginOffset, *v.BeginOffset)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.Attribute_Category, string(v.Category))
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.Attribute_EndOffset, *v.EndOffset)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.Attribute_Id, *v.Id)
+	}
+	if v.RelationshipScore != nil {
+		s.WriteFloat32(schemas.Attribute_RelationshipScore, *v.RelationshipScore)
+	}
+	if v.RelationshipType != "" {
+		s.WriteString(schemas.Attribute_RelationshipType, string(v.RelationshipType))
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.Attribute_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.Attribute_Text, *v.Text)
+	}
+	serializeTraitList(s, schemas.Attribute_Traits, v.Traits)
+	if v.Type != "" {
+		s.WriteString(schemas.Attribute_Type, string(v.Type))
+	}
+}
+func (v *Attribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Attribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Attribute_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.Attribute_BeginOffset, v.BeginOffset)
+		case schemas.Attribute_Category:
+			var ev string
+			if err := d.ReadString(schemas.Attribute_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = EntityType(ev)
+			return nil
+		case schemas.Attribute_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.Attribute_EndOffset, v.EndOffset)
+		case schemas.Attribute_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.Attribute_Id, v.Id)
+		case schemas.Attribute_RelationshipScore:
+			v.RelationshipScore = new(float32)
+			return d.ReadFloat32(schemas.Attribute_RelationshipScore, v.RelationshipScore)
+		case schemas.Attribute_RelationshipType:
+			var ev string
+			if err := d.ReadString(schemas.Attribute_RelationshipType, &ev); err != nil {
+				return err
+			}
+			v.RelationshipType = RelationshipType(ev)
+			return nil
+		case schemas.Attribute_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.Attribute_Score, v.Score)
+		case schemas.Attribute_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.Attribute_Text, v.Text)
+		case schemas.Attribute_Traits:
+			return deserializeTraitList(d, schemas.Attribute_Traits, &v.Traits)
+		case schemas.Attribute_Type:
+			var ev string
+			if err := d.ReadString(schemas.Attribute_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EntitySubType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The number of characters in the input text to be analyzed.
 type Characters struct {
 
@@ -62,6 +149,28 @@ type Characters struct {
 	OriginalTextCharacters *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Characters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Characters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Characters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OriginalTextCharacters != nil {
+		s.WriteInt32(schemas.Characters_OriginalTextCharacters, *v.OriginalTextCharacters)
+	}
+}
+func (v *Characters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Characters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Characters_OriginalTextCharacters:
+			v.OriginalTextCharacters = new(int32)
+			return d.ReadInt32(schemas.Characters_OriginalTextCharacters, v.OriginalTextCharacters)
+		}
+		return nil
+	})
 }
 
 // Provides information for filtering a list of detection jobs.
@@ -85,6 +194,50 @@ type ComprehendMedicalAsyncJobFilter struct {
 	SubmitTimeBefore *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ComprehendMedicalAsyncJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComprehendMedicalAsyncJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComprehendMedicalAsyncJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.ComprehendMedicalAsyncJobFilter_SubmitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.ComprehendMedicalAsyncJobFilter_SubmitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+func (v *ComprehendMedicalAsyncJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComprehendMedicalAsyncJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComprehendMedicalAsyncJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.ComprehendMedicalAsyncJobFilter_JobName, v.JobName)
+		case schemas.ComprehendMedicalAsyncJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.ComprehendMedicalAsyncJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.ComprehendMedicalAsyncJobFilter_SubmitTimeAfter:
+			v.SubmitTimeAfter = new(time.Time)
+			return d.ReadTime(schemas.ComprehendMedicalAsyncJobFilter_SubmitTimeAfter, v.SubmitTimeAfter)
+		case schemas.ComprehendMedicalAsyncJobFilter_SubmitTimeBefore:
+			v.SubmitTimeBefore = new(time.Time)
+			return d.ReadTime(schemas.ComprehendMedicalAsyncJobFilter_SubmitTimeBefore, v.SubmitTimeBefore)
+		}
+		return nil
+	})
 }
 
 // Provides information about a detection job.
@@ -144,6 +297,118 @@ type ComprehendMedicalAsyncJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComprehendMedicalAsyncJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComprehendMedicalAsyncJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComprehendMedicalAsyncJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ComprehendMedicalAsyncJobProperties_EndTime, *v.EndTime)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.ComprehendMedicalAsyncJobProperties_ExpirationTime, *v.ExpirationTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.ComprehendMedicalAsyncJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobProperties_KMSKey, *v.KMSKey)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobProperties_LanguageCode, string(v.LanguageCode))
+	}
+	if v.ManifestFilePath != nil {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobProperties_ManifestFilePath, *v.ManifestFilePath)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobProperties_Message, *v.Message)
+	}
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.ComprehendMedicalAsyncJobProperties_ModelVersion, *v.ModelVersion)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.ComprehendMedicalAsyncJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubmitTime != nil {
+		s.WriteTime(schemas.ComprehendMedicalAsyncJobProperties_SubmitTime, *v.SubmitTime)
+	}
+}
+func (v *ComprehendMedicalAsyncJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComprehendMedicalAsyncJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComprehendMedicalAsyncJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.ComprehendMedicalAsyncJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.ComprehendMedicalAsyncJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ComprehendMedicalAsyncJobProperties_EndTime, v.EndTime)
+		case schemas.ComprehendMedicalAsyncJobProperties_ExpirationTime:
+			v.ExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.ComprehendMedicalAsyncJobProperties_ExpirationTime, v.ExpirationTime)
+		case schemas.ComprehendMedicalAsyncJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.ComprehendMedicalAsyncJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ComprehendMedicalAsyncJobProperties_JobId, v.JobId)
+		case schemas.ComprehendMedicalAsyncJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.ComprehendMedicalAsyncJobProperties_JobName, v.JobName)
+		case schemas.ComprehendMedicalAsyncJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.ComprehendMedicalAsyncJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.ComprehendMedicalAsyncJobProperties_KMSKey:
+			v.KMSKey = new(string)
+			return d.ReadString(schemas.ComprehendMedicalAsyncJobProperties_KMSKey, v.KMSKey)
+		case schemas.ComprehendMedicalAsyncJobProperties_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.ComprehendMedicalAsyncJobProperties_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = LanguageCode(ev)
+			return nil
+		case schemas.ComprehendMedicalAsyncJobProperties_ManifestFilePath:
+			v.ManifestFilePath = new(string)
+			return d.ReadString(schemas.ComprehendMedicalAsyncJobProperties_ManifestFilePath, v.ManifestFilePath)
+		case schemas.ComprehendMedicalAsyncJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ComprehendMedicalAsyncJobProperties_Message, v.Message)
+		case schemas.ComprehendMedicalAsyncJobProperties_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.ComprehendMedicalAsyncJobProperties_ModelVersion, v.ModelVersion)
+		case schemas.ComprehendMedicalAsyncJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.ComprehendMedicalAsyncJobProperties_SubmitTime:
+			v.SubmitTime = new(time.Time)
+			return d.ReadTime(schemas.ComprehendMedicalAsyncJobProperties_SubmitTime, v.SubmitTime)
+		}
+		return nil
+	})
+}
+
 // Provides information about an extracted medical entity.
 type Entity struct {
 
@@ -179,6 +444,78 @@ type Entity struct {
 	Type EntitySubType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Entity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Entity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeList(s, schemas.Entity_Attributes, v.Attributes)
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.Entity_BeginOffset, *v.BeginOffset)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.Entity_Category, string(v.Category))
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.Entity_EndOffset, *v.EndOffset)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.Entity_Id, *v.Id)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.Entity_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.Entity_Text, *v.Text)
+	}
+	serializeTraitList(s, schemas.Entity_Traits, v.Traits)
+	if v.Type != "" {
+		s.WriteString(schemas.Entity_Type, string(v.Type))
+	}
+}
+func (v *Entity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Entity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Entity_Attributes:
+			return deserializeAttributeList(d, schemas.Entity_Attributes, &v.Attributes)
+		case schemas.Entity_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.Entity_BeginOffset, v.BeginOffset)
+		case schemas.Entity_Category:
+			var ev string
+			if err := d.ReadString(schemas.Entity_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = EntityType(ev)
+			return nil
+		case schemas.Entity_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.Entity_EndOffset, v.EndOffset)
+		case schemas.Entity_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.Entity_Id, v.Id)
+		case schemas.Entity_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.Entity_Score, v.Score)
+		case schemas.Entity_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.Entity_Text, v.Text)
+		case schemas.Entity_Traits:
+			return deserializeTraitList(d, schemas.Entity_Traits, &v.Traits)
+		case schemas.Entity_Type:
+			var ev string
+			if err := d.ReadString(schemas.Entity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EntitySubType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The detected attributes that relate to an entity. This includes an extracted
@@ -227,6 +564,91 @@ type ICD10CMAttribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ICD10CMAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ICD10CMAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ICD10CMAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.ICD10CMAttribute_BeginOffset, *v.BeginOffset)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.ICD10CMAttribute_Category, string(v.Category))
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.ICD10CMAttribute_EndOffset, *v.EndOffset)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.ICD10CMAttribute_Id, *v.Id)
+	}
+	if v.RelationshipScore != nil {
+		s.WriteFloat32(schemas.ICD10CMAttribute_RelationshipScore, *v.RelationshipScore)
+	}
+	if v.RelationshipType != "" {
+		s.WriteString(schemas.ICD10CMAttribute_RelationshipType, string(v.RelationshipType))
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.ICD10CMAttribute_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.ICD10CMAttribute_Text, *v.Text)
+	}
+	serializeICD10CMTraitList(s, schemas.ICD10CMAttribute_Traits, v.Traits)
+	if v.Type != "" {
+		s.WriteString(schemas.ICD10CMAttribute_Type, string(v.Type))
+	}
+}
+func (v *ICD10CMAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ICD10CMAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ICD10CMAttribute_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.ICD10CMAttribute_BeginOffset, v.BeginOffset)
+		case schemas.ICD10CMAttribute_Category:
+			var ev string
+			if err := d.ReadString(schemas.ICD10CMAttribute_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = ICD10CMEntityType(ev)
+			return nil
+		case schemas.ICD10CMAttribute_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.ICD10CMAttribute_EndOffset, v.EndOffset)
+		case schemas.ICD10CMAttribute_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.ICD10CMAttribute_Id, v.Id)
+		case schemas.ICD10CMAttribute_RelationshipScore:
+			v.RelationshipScore = new(float32)
+			return d.ReadFloat32(schemas.ICD10CMAttribute_RelationshipScore, v.RelationshipScore)
+		case schemas.ICD10CMAttribute_RelationshipType:
+			var ev string
+			if err := d.ReadString(schemas.ICD10CMAttribute_RelationshipType, &ev); err != nil {
+				return err
+			}
+			v.RelationshipType = ICD10CMRelationshipType(ev)
+			return nil
+		case schemas.ICD10CMAttribute_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.ICD10CMAttribute_Score, v.Score)
+		case schemas.ICD10CMAttribute_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.ICD10CMAttribute_Text, v.Text)
+		case schemas.ICD10CMAttribute_Traits:
+			return deserializeICD10CMTraitList(d, schemas.ICD10CMAttribute_Traits, &v.Traits)
+		case schemas.ICD10CMAttribute_Type:
+			var ev string
+			if err := d.ReadString(schemas.ICD10CMAttribute_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ICD10CMAttributeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The ICD-10-CM concepts that the entity could refer to, along with a score
 //
 // indicating the likelihood of the match.
@@ -244,6 +666,40 @@ type ICD10CMConcept struct {
 	Score *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ICD10CMConcept) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ICD10CMConcept)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ICD10CMConcept) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ICD10CMConcept_Code, *v.Code)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ICD10CMConcept_Description, *v.Description)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.ICD10CMConcept_Score, *v.Score)
+	}
+}
+func (v *ICD10CMConcept) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ICD10CMConcept, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ICD10CMConcept_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ICD10CMConcept_Code, v.Code)
+		case schemas.ICD10CMConcept_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ICD10CMConcept_Description, v.Description)
+		case schemas.ICD10CMConcept_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.ICD10CMConcept_Score, v.Score)
+		}
+		return nil
+	})
 }
 
 // The collection of medical entities extracted from the input text and their
@@ -296,6 +752,81 @@ type ICD10CMEntity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ICD10CMEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ICD10CMEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ICD10CMEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeICD10CMAttributeList(s, schemas.ICD10CMEntity_Attributes, v.Attributes)
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.ICD10CMEntity_BeginOffset, *v.BeginOffset)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.ICD10CMEntity_Category, string(v.Category))
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.ICD10CMEntity_EndOffset, *v.EndOffset)
+	}
+	serializeICD10CMConceptList(s, schemas.ICD10CMEntity_ICD10CMConcepts, v.ICD10CMConcepts)
+	if v.Id != nil {
+		s.WriteInt32(schemas.ICD10CMEntity_Id, *v.Id)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.ICD10CMEntity_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.ICD10CMEntity_Text, *v.Text)
+	}
+	serializeICD10CMTraitList(s, schemas.ICD10CMEntity_Traits, v.Traits)
+	if v.Type != "" {
+		s.WriteString(schemas.ICD10CMEntity_Type, string(v.Type))
+	}
+}
+func (v *ICD10CMEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ICD10CMEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ICD10CMEntity_Attributes:
+			return deserializeICD10CMAttributeList(d, schemas.ICD10CMEntity_Attributes, &v.Attributes)
+		case schemas.ICD10CMEntity_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.ICD10CMEntity_BeginOffset, v.BeginOffset)
+		case schemas.ICD10CMEntity_Category:
+			var ev string
+			if err := d.ReadString(schemas.ICD10CMEntity_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = ICD10CMEntityCategory(ev)
+			return nil
+		case schemas.ICD10CMEntity_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.ICD10CMEntity_EndOffset, v.EndOffset)
+		case schemas.ICD10CMEntity_ICD10CMConcepts:
+			return deserializeICD10CMConceptList(d, schemas.ICD10CMEntity_ICD10CMConcepts, &v.ICD10CMConcepts)
+		case schemas.ICD10CMEntity_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.ICD10CMEntity_Id, v.Id)
+		case schemas.ICD10CMEntity_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.ICD10CMEntity_Score, v.Score)
+		case schemas.ICD10CMEntity_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.ICD10CMEntity_Text, v.Text)
+		case schemas.ICD10CMEntity_Traits:
+			return deserializeICD10CMTraitList(d, schemas.ICD10CMEntity_Traits, &v.Traits)
+		case schemas.ICD10CMEntity_Type:
+			var ev string
+			if err := d.ReadString(schemas.ICD10CMEntity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ICD10CMEntityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contextual information for the entity. The traits recognized by InferICD10CM
 // are DIAGNOSIS , SIGN , SYMPTOM , and NEGATION .
 type ICD10CMTrait struct {
@@ -308,6 +839,38 @@ type ICD10CMTrait struct {
 	Score *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ICD10CMTrait) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ICD10CMTrait)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ICD10CMTrait) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ICD10CMTrait_Name, string(v.Name))
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.ICD10CMTrait_Score, *v.Score)
+	}
+}
+func (v *ICD10CMTrait) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ICD10CMTrait, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ICD10CMTrait_Name:
+			var ev string
+			if err := d.ReadString(schemas.ICD10CMTrait_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ICD10CMTraitName(ev)
+			return nil
+		case schemas.ICD10CMTrait_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.ICD10CMTrait_Score, v.Score)
+		}
+		return nil
+	})
 }
 
 // The input properties for an entities detection job. This includes the name of
@@ -324,6 +887,34 @@ type InputDataConfig struct {
 	S3Key *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.InputDataConfig_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3Key != nil {
+		s.WriteString(schemas.InputDataConfig_S3Key, *v.S3Key)
+	}
+}
+func (v *InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputDataConfig_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.InputDataConfig_S3Bucket, v.S3Bucket)
+		case schemas.InputDataConfig_S3Key:
+			v.S3Key = new(string)
+			return d.ReadString(schemas.InputDataConfig_S3Key, v.S3Key)
+		}
+		return nil
+	})
 }
 
 // The output properties for a detection job.
@@ -343,6 +934,34 @@ type OutputDataConfig struct {
 	S3Key *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.OutputDataConfig_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3Key != nil {
+		s.WriteString(schemas.OutputDataConfig_S3Key, *v.S3Key)
+	}
+}
+func (v *OutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputDataConfig_S3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.OutputDataConfig_S3Bucket, v.S3Bucket)
+		case schemas.OutputDataConfig_S3Key:
+			v.S3Key = new(string)
+			return d.ReadString(schemas.OutputDataConfig_S3Key, v.S3Key)
+		}
+		return nil
+	})
 }
 
 // The extracted attributes that relate to this entity. The attributes recognized
@@ -384,6 +1003,71 @@ type RxNormAttribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RxNormAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RxNormAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RxNormAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.RxNormAttribute_BeginOffset, *v.BeginOffset)
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.RxNormAttribute_EndOffset, *v.EndOffset)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.RxNormAttribute_Id, *v.Id)
+	}
+	if v.RelationshipScore != nil {
+		s.WriteFloat32(schemas.RxNormAttribute_RelationshipScore, *v.RelationshipScore)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.RxNormAttribute_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.RxNormAttribute_Text, *v.Text)
+	}
+	serializeRxNormTraitList(s, schemas.RxNormAttribute_Traits, v.Traits)
+	if v.Type != "" {
+		s.WriteString(schemas.RxNormAttribute_Type, string(v.Type))
+	}
+}
+func (v *RxNormAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RxNormAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RxNormAttribute_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.RxNormAttribute_BeginOffset, v.BeginOffset)
+		case schemas.RxNormAttribute_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.RxNormAttribute_EndOffset, v.EndOffset)
+		case schemas.RxNormAttribute_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.RxNormAttribute_Id, v.Id)
+		case schemas.RxNormAttribute_RelationshipScore:
+			v.RelationshipScore = new(float32)
+			return d.ReadFloat32(schemas.RxNormAttribute_RelationshipScore, v.RelationshipScore)
+		case schemas.RxNormAttribute_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.RxNormAttribute_Score, v.Score)
+		case schemas.RxNormAttribute_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.RxNormAttribute_Text, v.Text)
+		case schemas.RxNormAttribute_Traits:
+			return deserializeRxNormTraitList(d, schemas.RxNormAttribute_Traits, &v.Traits)
+		case schemas.RxNormAttribute_Type:
+			var ev string
+			if err := d.ReadString(schemas.RxNormAttribute_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RxNormAttributeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The RxNorm concept that the entity could refer to, along with a score
 // indicating the likelihood of the match.
 type RxNormConcept struct {
@@ -399,6 +1083,40 @@ type RxNormConcept struct {
 	Score *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RxNormConcept) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RxNormConcept)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RxNormConcept) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.RxNormConcept_Code, *v.Code)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RxNormConcept_Description, *v.Description)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.RxNormConcept_Score, *v.Score)
+	}
+}
+func (v *RxNormConcept) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RxNormConcept, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RxNormConcept_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.RxNormConcept_Code, v.Code)
+		case schemas.RxNormConcept_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RxNormConcept_Description, v.Description)
+		case schemas.RxNormConcept_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.RxNormConcept_Score, v.Score)
+		}
+		return nil
+	})
 }
 
 // The collection of medical entities extracted from the input text and their
@@ -449,6 +1167,81 @@ type RxNormEntity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RxNormEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RxNormEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RxNormEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRxNormAttributeList(s, schemas.RxNormEntity_Attributes, v.Attributes)
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.RxNormEntity_BeginOffset, *v.BeginOffset)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.RxNormEntity_Category, string(v.Category))
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.RxNormEntity_EndOffset, *v.EndOffset)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.RxNormEntity_Id, *v.Id)
+	}
+	serializeRxNormConceptList(s, schemas.RxNormEntity_RxNormConcepts, v.RxNormConcepts)
+	if v.Score != nil {
+		s.WriteFloat32(schemas.RxNormEntity_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.RxNormEntity_Text, *v.Text)
+	}
+	serializeRxNormTraitList(s, schemas.RxNormEntity_Traits, v.Traits)
+	if v.Type != "" {
+		s.WriteString(schemas.RxNormEntity_Type, string(v.Type))
+	}
+}
+func (v *RxNormEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RxNormEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RxNormEntity_Attributes:
+			return deserializeRxNormAttributeList(d, schemas.RxNormEntity_Attributes, &v.Attributes)
+		case schemas.RxNormEntity_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.RxNormEntity_BeginOffset, v.BeginOffset)
+		case schemas.RxNormEntity_Category:
+			var ev string
+			if err := d.ReadString(schemas.RxNormEntity_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = RxNormEntityCategory(ev)
+			return nil
+		case schemas.RxNormEntity_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.RxNormEntity_EndOffset, v.EndOffset)
+		case schemas.RxNormEntity_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.RxNormEntity_Id, v.Id)
+		case schemas.RxNormEntity_RxNormConcepts:
+			return deserializeRxNormConceptList(d, schemas.RxNormEntity_RxNormConcepts, &v.RxNormConcepts)
+		case schemas.RxNormEntity_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.RxNormEntity_Score, v.Score)
+		case schemas.RxNormEntity_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.RxNormEntity_Text, v.Text)
+		case schemas.RxNormEntity_Traits:
+			return deserializeRxNormTraitList(d, schemas.RxNormEntity_Traits, &v.Traits)
+		case schemas.RxNormEntity_Type:
+			var ev string
+			if err := d.ReadString(schemas.RxNormEntity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RxNormEntityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The contextual information for the entity. InferRxNorm recognizes the trait
 // NEGATION , which is any indication that the patient is not taking a medication.
 type RxNormTrait struct {
@@ -461,6 +1254,38 @@ type RxNormTrait struct {
 	Score *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *RxNormTrait) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RxNormTrait)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RxNormTrait) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.RxNormTrait_Name, string(v.Name))
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.RxNormTrait_Score, *v.Score)
+	}
+}
+func (v *RxNormTrait) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RxNormTrait, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RxNormTrait_Name:
+			var ev string
+			if err := d.ReadString(schemas.RxNormTrait_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = RxNormTraitName(ev)
+			return nil
+		case schemas.RxNormTrait_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.RxNormTrait_Score, v.Score)
+		}
+		return nil
+	})
 }
 
 //	The extracted attributes that relate to an entity. An extracted segment of the
@@ -516,6 +1341,94 @@ type SNOMEDCTAttribute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SNOMEDCTAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SNOMEDCTAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SNOMEDCTAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.SNOMEDCTAttribute_BeginOffset, *v.BeginOffset)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.SNOMEDCTAttribute_Category, string(v.Category))
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.SNOMEDCTAttribute_EndOffset, *v.EndOffset)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.SNOMEDCTAttribute_Id, *v.Id)
+	}
+	if v.RelationshipScore != nil {
+		s.WriteFloat32(schemas.SNOMEDCTAttribute_RelationshipScore, *v.RelationshipScore)
+	}
+	if v.RelationshipType != "" {
+		s.WriteString(schemas.SNOMEDCTAttribute_RelationshipType, string(v.RelationshipType))
+	}
+	serializeSNOMEDCTConceptList(s, schemas.SNOMEDCTAttribute_SNOMEDCTConcepts, v.SNOMEDCTConcepts)
+	if v.Score != nil {
+		s.WriteFloat32(schemas.SNOMEDCTAttribute_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.SNOMEDCTAttribute_Text, *v.Text)
+	}
+	serializeSNOMEDCTTraitList(s, schemas.SNOMEDCTAttribute_Traits, v.Traits)
+	if v.Type != "" {
+		s.WriteString(schemas.SNOMEDCTAttribute_Type, string(v.Type))
+	}
+}
+func (v *SNOMEDCTAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SNOMEDCTAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SNOMEDCTAttribute_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.SNOMEDCTAttribute_BeginOffset, v.BeginOffset)
+		case schemas.SNOMEDCTAttribute_Category:
+			var ev string
+			if err := d.ReadString(schemas.SNOMEDCTAttribute_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = SNOMEDCTEntityCategory(ev)
+			return nil
+		case schemas.SNOMEDCTAttribute_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.SNOMEDCTAttribute_EndOffset, v.EndOffset)
+		case schemas.SNOMEDCTAttribute_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.SNOMEDCTAttribute_Id, v.Id)
+		case schemas.SNOMEDCTAttribute_RelationshipScore:
+			v.RelationshipScore = new(float32)
+			return d.ReadFloat32(schemas.SNOMEDCTAttribute_RelationshipScore, v.RelationshipScore)
+		case schemas.SNOMEDCTAttribute_RelationshipType:
+			var ev string
+			if err := d.ReadString(schemas.SNOMEDCTAttribute_RelationshipType, &ev); err != nil {
+				return err
+			}
+			v.RelationshipType = SNOMEDCTRelationshipType(ev)
+			return nil
+		case schemas.SNOMEDCTAttribute_SNOMEDCTConcepts:
+			return deserializeSNOMEDCTConceptList(d, schemas.SNOMEDCTAttribute_SNOMEDCTConcepts, &v.SNOMEDCTConcepts)
+		case schemas.SNOMEDCTAttribute_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.SNOMEDCTAttribute_Score, v.Score)
+		case schemas.SNOMEDCTAttribute_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.SNOMEDCTAttribute_Text, v.Text)
+		case schemas.SNOMEDCTAttribute_Traits:
+			return deserializeSNOMEDCTTraitList(d, schemas.SNOMEDCTAttribute_Traits, &v.Traits)
+		case schemas.SNOMEDCTAttribute_Type:
+			var ev string
+			if err := d.ReadString(schemas.SNOMEDCTAttribute_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SNOMEDCTAttributeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 //	The SNOMED-CT concepts that the entity could refer to, along with a score
 //
 // indicating the likelihood of the match.
@@ -532,6 +1445,40 @@ type SNOMEDCTConcept struct {
 	Score *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SNOMEDCTConcept) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SNOMEDCTConcept)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SNOMEDCTConcept) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.SNOMEDCTConcept_Code, *v.Code)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.SNOMEDCTConcept_Description, *v.Description)
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.SNOMEDCTConcept_Score, *v.Score)
+	}
+}
+func (v *SNOMEDCTConcept) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SNOMEDCTConcept, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SNOMEDCTConcept_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.SNOMEDCTConcept_Code, v.Code)
+		case schemas.SNOMEDCTConcept_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SNOMEDCTConcept_Description, v.Description)
+		case schemas.SNOMEDCTConcept_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.SNOMEDCTConcept_Score, v.Score)
+		}
+		return nil
+	})
 }
 
 //	The information about the revision of the SNOMED-CT ontology in the response.
@@ -552,6 +1499,40 @@ type SNOMEDCTDetails struct {
 	VersionDate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SNOMEDCTDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SNOMEDCTDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SNOMEDCTDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Edition != nil {
+		s.WriteString(schemas.SNOMEDCTDetails_Edition, *v.Edition)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.SNOMEDCTDetails_Language, *v.Language)
+	}
+	if v.VersionDate != nil {
+		s.WriteString(schemas.SNOMEDCTDetails_VersionDate, *v.VersionDate)
+	}
+}
+func (v *SNOMEDCTDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SNOMEDCTDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SNOMEDCTDetails_Edition:
+			v.Edition = new(string)
+			return d.ReadString(schemas.SNOMEDCTDetails_Edition, v.Edition)
+		case schemas.SNOMEDCTDetails_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.SNOMEDCTDetails_Language, v.Language)
+		case schemas.SNOMEDCTDetails_VersionDate:
+			v.VersionDate = new(string)
+			return d.ReadString(schemas.SNOMEDCTDetails_VersionDate, v.VersionDate)
+		}
+		return nil
+	})
 }
 
 //	The collection of medical entities extracted from the input text and their
@@ -604,6 +1585,81 @@ type SNOMEDCTEntity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SNOMEDCTEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SNOMEDCTEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SNOMEDCTEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSNOMEDCTAttributeList(s, schemas.SNOMEDCTEntity_Attributes, v.Attributes)
+	if v.BeginOffset != nil {
+		s.WriteInt32(schemas.SNOMEDCTEntity_BeginOffset, *v.BeginOffset)
+	}
+	if v.Category != "" {
+		s.WriteString(schemas.SNOMEDCTEntity_Category, string(v.Category))
+	}
+	if v.EndOffset != nil {
+		s.WriteInt32(schemas.SNOMEDCTEntity_EndOffset, *v.EndOffset)
+	}
+	if v.Id != nil {
+		s.WriteInt32(schemas.SNOMEDCTEntity_Id, *v.Id)
+	}
+	serializeSNOMEDCTConceptList(s, schemas.SNOMEDCTEntity_SNOMEDCTConcepts, v.SNOMEDCTConcepts)
+	if v.Score != nil {
+		s.WriteFloat32(schemas.SNOMEDCTEntity_Score, *v.Score)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.SNOMEDCTEntity_Text, *v.Text)
+	}
+	serializeSNOMEDCTTraitList(s, schemas.SNOMEDCTEntity_Traits, v.Traits)
+	if v.Type != "" {
+		s.WriteString(schemas.SNOMEDCTEntity_Type, string(v.Type))
+	}
+}
+func (v *SNOMEDCTEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SNOMEDCTEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SNOMEDCTEntity_Attributes:
+			return deserializeSNOMEDCTAttributeList(d, schemas.SNOMEDCTEntity_Attributes, &v.Attributes)
+		case schemas.SNOMEDCTEntity_BeginOffset:
+			v.BeginOffset = new(int32)
+			return d.ReadInt32(schemas.SNOMEDCTEntity_BeginOffset, v.BeginOffset)
+		case schemas.SNOMEDCTEntity_Category:
+			var ev string
+			if err := d.ReadString(schemas.SNOMEDCTEntity_Category, &ev); err != nil {
+				return err
+			}
+			v.Category = SNOMEDCTEntityCategory(ev)
+			return nil
+		case schemas.SNOMEDCTEntity_EndOffset:
+			v.EndOffset = new(int32)
+			return d.ReadInt32(schemas.SNOMEDCTEntity_EndOffset, v.EndOffset)
+		case schemas.SNOMEDCTEntity_Id:
+			v.Id = new(int32)
+			return d.ReadInt32(schemas.SNOMEDCTEntity_Id, v.Id)
+		case schemas.SNOMEDCTEntity_SNOMEDCTConcepts:
+			return deserializeSNOMEDCTConceptList(d, schemas.SNOMEDCTEntity_SNOMEDCTConcepts, &v.SNOMEDCTConcepts)
+		case schemas.SNOMEDCTEntity_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.SNOMEDCTEntity_Score, v.Score)
+		case schemas.SNOMEDCTEntity_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.SNOMEDCTEntity_Text, v.Text)
+		case schemas.SNOMEDCTEntity_Traits:
+			return deserializeSNOMEDCTTraitList(d, schemas.SNOMEDCTEntity_Traits, &v.Traits)
+		case schemas.SNOMEDCTEntity_Type:
+			var ev string
+			if err := d.ReadString(schemas.SNOMEDCTEntity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SNOMEDCTEntityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contextual information for an entity.
 type SNOMEDCTTrait struct {
 
@@ -615,6 +1671,38 @@ type SNOMEDCTTrait struct {
 	Score *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SNOMEDCTTrait) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SNOMEDCTTrait)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SNOMEDCTTrait) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.SNOMEDCTTrait_Name, string(v.Name))
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.SNOMEDCTTrait_Score, *v.Score)
+	}
+}
+func (v *SNOMEDCTTrait) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SNOMEDCTTrait, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SNOMEDCTTrait_Name:
+			var ev string
+			if err := d.ReadString(schemas.SNOMEDCTTrait_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = SNOMEDCTTraitName(ev)
+			return nil
+		case schemas.SNOMEDCTTrait_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.SNOMEDCTTrait_Score, v.Score)
+		}
+		return nil
+	})
 }
 
 // Provides contextual information about the extracted entity.
@@ -630,6 +1718,38 @@ type Trait struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Trait) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Trait)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Trait) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.Trait_Name, string(v.Name))
+	}
+	if v.Score != nil {
+		s.WriteFloat32(schemas.Trait_Score, *v.Score)
+	}
+}
+func (v *Trait) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Trait, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Trait_Name:
+			var ev string
+			if err := d.ReadString(schemas.Trait_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = AttributeName(ev)
+			return nil
+		case schemas.Trait_Score:
+			v.Score = new(float32)
+			return d.ReadFloat32(schemas.Trait_Score, v.Score)
+		}
+		return nil
+	})
+}
+
 // An attribute that was extracted, but Amazon Comprehend Medical was unable to
 // relate to an entity.
 type UnmappedAttribute struct {
@@ -643,6 +1763,40 @@ type UnmappedAttribute struct {
 	Type EntityType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UnmappedAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnmappedAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnmappedAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attribute != nil {
+		s.WriteStruct(schemas.UnmappedAttribute_Attribute)
+		v.Attribute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UnmappedAttribute_Type, string(v.Type))
+	}
+}
+func (v *UnmappedAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnmappedAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnmappedAttribute_Attribute:
+			v.Attribute = &Attribute{}
+			return v.Attribute.Deserialize(d)
+		case schemas.UnmappedAttribute_Type:
+			var ev string
+			if err := d.ReadString(schemas.UnmappedAttribute_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EntityType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

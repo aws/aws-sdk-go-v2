@@ -4,11 +4,10 @@ package dataexchange
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dataexchange/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dataexchange/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetReceivedDataGrantInput struct {
 	DataGrantArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetReceivedDataGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReceivedDataGrantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReceivedDataGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataGrantArn != nil {
+		s.WriteString(schemas.GetReceivedDataGrantRequest_DataGrantArn, *v.DataGrantArn)
+	}
 }
 
 type GetReceivedDataGrantOutput struct {
@@ -103,77 +114,128 @@ type GetReceivedDataGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReceivedDataGrantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReceivedDataGrantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReceivedDataGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceState != "" {
+		s.WriteString(schemas.GetReceivedDataGrantResponse_AcceptanceState, string(v.AcceptanceState))
+	}
+	if v.AcceptedAt != nil {
+		s.WriteTime(schemas.GetReceivedDataGrantResponse_AcceptedAt, *v.AcceptedAt)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.GetReceivedDataGrantResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetReceivedDataGrantResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.GetReceivedDataGrantResponse_DataSetId, *v.DataSetId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetReceivedDataGrantResponse_Description, *v.Description)
+	}
+	if v.EndsAt != nil {
+		s.WriteTime(schemas.GetReceivedDataGrantResponse_EndsAt, *v.EndsAt)
+	}
+	if v.GrantDistributionScope != "" {
+		s.WriteString(schemas.GetReceivedDataGrantResponse_GrantDistributionScope, string(v.GrantDistributionScope))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetReceivedDataGrantResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetReceivedDataGrantResponse_Name, *v.Name)
+	}
+	if v.ReceiverPrincipal != nil {
+		s.WriteString(schemas.GetReceivedDataGrantResponse_ReceiverPrincipal, *v.ReceiverPrincipal)
+	}
+	if v.SenderPrincipal != nil {
+		s.WriteString(schemas.GetReceivedDataGrantResponse_SenderPrincipal, *v.SenderPrincipal)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetReceivedDataGrantResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetReceivedDataGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReceivedDataGrantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReceivedDataGrantResponse_AcceptanceState:
+			var ev string
+			if err := d.ReadString(schemas.GetReceivedDataGrantResponse_AcceptanceState, &ev); err != nil {
+				return err
+			}
+			v.AcceptanceState = types.DataGrantAcceptanceState(ev)
+			return nil
+		case schemas.GetReceivedDataGrantResponse_AcceptedAt:
+			v.AcceptedAt = new(time.Time)
+			return d.ReadTime(schemas.GetReceivedDataGrantResponse_AcceptedAt, v.AcceptedAt)
+		case schemas.GetReceivedDataGrantResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetReceivedDataGrantResponse_Arn, v.Arn)
+		case schemas.GetReceivedDataGrantResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetReceivedDataGrantResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetReceivedDataGrantResponse_DataSetId:
+			v.DataSetId = new(string)
+			return d.ReadString(schemas.GetReceivedDataGrantResponse_DataSetId, v.DataSetId)
+		case schemas.GetReceivedDataGrantResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetReceivedDataGrantResponse_Description, v.Description)
+		case schemas.GetReceivedDataGrantResponse_EndsAt:
+			v.EndsAt = new(time.Time)
+			return d.ReadTime(schemas.GetReceivedDataGrantResponse_EndsAt, v.EndsAt)
+		case schemas.GetReceivedDataGrantResponse_GrantDistributionScope:
+			var ev string
+			if err := d.ReadString(schemas.GetReceivedDataGrantResponse_GrantDistributionScope, &ev); err != nil {
+				return err
+			}
+			v.GrantDistributionScope = types.GrantDistributionScope(ev)
+			return nil
+		case schemas.GetReceivedDataGrantResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetReceivedDataGrantResponse_Id, v.Id)
+		case schemas.GetReceivedDataGrantResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetReceivedDataGrantResponse_Name, v.Name)
+		case schemas.GetReceivedDataGrantResponse_ReceiverPrincipal:
+			v.ReceiverPrincipal = new(string)
+			return d.ReadString(schemas.GetReceivedDataGrantResponse_ReceiverPrincipal, v.ReceiverPrincipal)
+		case schemas.GetReceivedDataGrantResponse_SenderPrincipal:
+			v.SenderPrincipal = new(string)
+			return d.ReadString(schemas.GetReceivedDataGrantResponse_SenderPrincipal, v.SenderPrincipal)
+		case schemas.GetReceivedDataGrantResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetReceivedDataGrantResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReceivedDataGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReceivedDataGrant, schemas.GetReceivedDataGrantRequest, schemas.GetReceivedDataGrantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReceivedDataGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReceivedDataGrant, schemas.GetReceivedDataGrantRequest, schemas.GetReceivedDataGrantResponse), output: &GetReceivedDataGrantOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReceivedDataGrant{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetReceivedDataGrant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetReceivedDataGrantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetReceivedDataGrant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +250,8 @@ func (c *Client) addOperationGetReceivedDataGrantMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetReceivedDataGrant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetReceivedDataGrant",
-	}
 }

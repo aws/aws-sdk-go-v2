@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/SearchPrincipals
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿hdomainIdl__DomainId__jmaxResultsinextTokenm__NextToken__ksearchQueryo__SearchQuery__ÿ

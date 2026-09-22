@@ -274,6 +274,9 @@ type CustomOutputConfiguration struct {
 	// List of Blueprint Item
 	Blueprints []BlueprintItem
 
+	// Custom Configuration of Document
+	Document *DocumentCustomOutputConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -577,6 +580,15 @@ type DocumentBoundingBox struct {
 	//
 	// This member is required.
 	State State
+
+	noSmithyDocumentSerde
+}
+
+// Custom Configuration of Document
+type DocumentCustomOutputConfiguration struct {
+
+	// List of Fallback Blueprint Items
+	FallbackBlueprints []BlueprintItem
 
 	noSmithyDocumentSerde
 }

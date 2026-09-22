@@ -5,10 +5,10 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the CA certificates registered for your Amazon Web Services account.
@@ -52,6 +52,27 @@ type ListCACertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCACertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCACertificatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCACertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AscendingOrder != false {
+		s.WriteBool(schemas.ListCACertificatesRequest_ascendingOrder, v.AscendingOrder)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListCACertificatesRequest_marker, *v.Marker)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListCACertificatesRequest_pageSize, *v.PageSize)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.ListCACertificatesRequest_templateName, *v.TemplateName)
+	}
+}
+
 // The output from the ListCACertificates operation.
 type ListCACertificatesOutput struct {
 
@@ -67,74 +88,48 @@ type ListCACertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCACertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCACertificatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCACertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCACertificates(s, schemas.ListCACertificatesResponse_certificates, v.Certificates)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListCACertificatesResponse_nextMarker, *v.NextMarker)
+	}
+}
+func (v *ListCACertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCACertificatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCACertificatesResponse_certificates:
+			return deserializeCACertificates(d, schemas.ListCACertificatesResponse_certificates, &v.Certificates)
+		case schemas.ListCACertificatesResponse_nextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListCACertificatesResponse_nextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCACertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCACertificates, schemas.ListCACertificatesRequest, schemas.ListCACertificatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCACertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCACertificates, schemas.ListCACertificatesRequest, schemas.ListCACertificatesResponse), output: &ListCACertificatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCACertificates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCACertificates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCACertificates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +142,6 @@ func (c *Client) addOperationListCACertificatesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +243,3 @@ type ListCACertificatesAPIClient interface {
 }
 
 var _ ListCACertificatesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCACertificates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCACertificates",
-	}
-}

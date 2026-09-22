@@ -4,14 +4,15 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specify the account suppression list preferences for a configuration set.
+// Specify the suppression list preferences for a configuration set. You can also
+// use this operation to specify a SuppressionScope to override the suppression
+// scope of the tenant or account for emails sent using this configuration set.
 func (c *Client) PutConfigurationSetSuppressionOptions(ctx context.Context, params *PutConfigurationSetSuppressionOptionsInput, optFns ...func(*Options)) (*PutConfigurationSetSuppressionOptionsOutput, error) {
 	if params == nil {
 		params = &PutConfigurationSetSuppressionOptionsInput{}
@@ -27,7 +28,7 @@ func (c *Client) PutConfigurationSetSuppressionOptions(ctx context.Context, para
 	return out, nil
 }
 
-// A request to change the account suppression list preferences for a specific
+// A request to change the suppression list preferences for a specific
 // configuration set.
 type PutConfigurationSetSuppressionOptionsInput struct {
 
@@ -38,21 +39,53 @@ type PutConfigurationSetSuppressionOptionsInput struct {
 	ConfigurationSetName *string
 
 	// A list that contains the reasons that email addresses are automatically added
-	// to the suppression list for your account. This list can contain any or all of
-	// the following:
+	// to the suppression list for your account or for a specific tenant. This list can
+	// contain any or all of the following:
 	//
 	//   - COMPLAINT – Amazon SES adds an email address to the suppression list for
-	//   your account when a message sent to that address results in a complaint.
+	//   your account or for a specific tenant when a message sent to that address
+	//   results in a complaint.
 	//
 	//   - BOUNCE – Amazon SES adds an email address to the suppression list for your
-	//   account when a message sent to that address results in a hard bounce.
+	//   account or for a specific tenant when a message sent to that address results in
+	//   a hard bounce.
 	SuppressedReasons []types.SuppressionListReason
+
+	// The suppression scope for the configuration set. This overrides the tenant or
+	// account suppression scope for emails sent using this configuration set. Can be
+	// one of the following:
+	//
+	//   - TENANT – Use the tenant's suppression list.
+	//
+	//   - ACCOUNT – Use the account-level suppression list.
+	SuppressionScope types.SuppressionListScope
 
 	// An object that contains information about the email address suppression
 	// preferences for the configuration set in the current Amazon Web Services Region.
 	ValidationOptions *types.SuppressionValidationOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *PutConfigurationSetSuppressionOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationSetSuppressionOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationSetSuppressionOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.PutConfigurationSetSuppressionOptionsRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeSuppressionListReasons(s, schemas.PutConfigurationSetSuppressionOptionsRequest_SuppressedReasons, v.SuppressedReasons)
+	if v.SuppressionScope != "" {
+		s.WriteString(schemas.PutConfigurationSetSuppressionOptionsRequest_SuppressionScope, string(v.SuppressionScope))
+	}
+	if v.ValidationOptions != nil {
+		s.WriteStruct(schemas.PutConfigurationSetSuppressionOptionsRequest_ValidationOptions)
+		v.ValidationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the
@@ -64,77 +97,42 @@ type PutConfigurationSetSuppressionOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutConfigurationSetSuppressionOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutConfigurationSetSuppressionOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutConfigurationSetSuppressionOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutConfigurationSetSuppressionOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutConfigurationSetSuppressionOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutConfigurationSetSuppressionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetSuppressionOptions, schemas.PutConfigurationSetSuppressionOptionsRequest, schemas.PutConfigurationSetSuppressionOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutConfigurationSetSuppressionOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutConfigurationSetSuppressionOptions, schemas.PutConfigurationSetSuppressionOptionsRequest, schemas.PutConfigurationSetSuppressionOptionsResponse), output: &PutConfigurationSetSuppressionOptionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutConfigurationSetSuppressionOptions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutConfigurationSetSuppressionOptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutConfigurationSetSuppressionOptionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutConfigurationSetSuppressionOptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +147,8 @@ func (c *Client) addOperationPutConfigurationSetSuppressionOptionsMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutConfigurationSetSuppressionOptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutConfigurationSetSuppressionOptions",
-	}
 }

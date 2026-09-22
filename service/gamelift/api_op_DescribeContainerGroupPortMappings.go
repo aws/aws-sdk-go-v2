@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: Container
@@ -33,11 +32,11 @@ import (
 //
 // # Results
 //
-// This operation returns the fleet ID, location, container group definition ARN,
-// container group type, compute name (for game server container groups), instance
-// ID, and a list of ContainerGroupPortMapping objects. Each object contains the
-// container name, runtime ID, and a list of port mappings that show how container
-// ports map to connection ports on the instance.
+// This operation returns the fleet ID, fleet ARN, location, container group
+// definition ARN, container group type, compute name (for game server container
+// groups), instance ID, and a list of ContainerGroupPortMapping objects. Each
+// object contains the container name, runtime ID, and a list of port mappings that
+// show how container ports map to connection ports on the instance.
 //
 // # Learn more
 //
@@ -113,6 +112,30 @@ type DescribeContainerGroupPortMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContainerGroupPortMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContainerGroupPortMappingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContainerGroupPortMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeName != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsInput_ComputeName, *v.ComputeName)
+	}
+	if v.ContainerGroupType != "" {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsInput_ContainerGroupType, string(v.ContainerGroupType))
+	}
+	if v.ContainerName != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsInput_ContainerName, *v.ContainerName)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsInput_FleetId, *v.FleetId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsInput_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeContainerGroupPortMappingsOutput struct {
 
 	// A unique identifier for the compute resource running the game server container
@@ -134,6 +157,14 @@ type DescribeContainerGroupPortMappingsOutput struct {
 	// GAME_SERVER or PER_INSTANCE .
 	ContainerGroupType types.ContainerGroupType
 
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift Servers fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 . In a
+	// GameLift fleet ARN, the resource ID matches the FleetId value.
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
+	FleetArn *string
+
 	// A unique identifier for the container fleet.
 	FleetId *string
 
@@ -152,65 +183,85 @@ type DescribeContainerGroupPortMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeContainerGroupPortMappingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeContainerGroupPortMappingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeContainerGroupPortMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeName != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsOutput_ComputeName, *v.ComputeName)
+	}
+	if v.ContainerGroupDefinitionArn != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupDefinitionArn, *v.ContainerGroupDefinitionArn)
+	}
+	serializeContainerGroupPortMappingList(s, schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupPortMappings, v.ContainerGroupPortMappings)
+	if v.ContainerGroupType != "" {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupType, string(v.ContainerGroupType))
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsOutput_FleetId, *v.FleetId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsOutput_InstanceId, *v.InstanceId)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeContainerGroupPortMappingsOutput_Location, *v.Location)
+	}
+}
+func (v *DescribeContainerGroupPortMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeContainerGroupPortMappingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeContainerGroupPortMappingsOutput_ComputeName:
+			v.ComputeName = new(string)
+			return d.ReadString(schemas.DescribeContainerGroupPortMappingsOutput_ComputeName, v.ComputeName)
+		case schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupDefinitionArn:
+			v.ContainerGroupDefinitionArn = new(string)
+			return d.ReadString(schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupDefinitionArn, v.ContainerGroupDefinitionArn)
+		case schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupPortMappings:
+			return deserializeContainerGroupPortMappingList(d, schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupPortMappings, &v.ContainerGroupPortMappings)
+		case schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeContainerGroupPortMappingsOutput_ContainerGroupType, &ev); err != nil {
+				return err
+			}
+			v.ContainerGroupType = types.ContainerGroupType(ev)
+			return nil
+		case schemas.DescribeContainerGroupPortMappingsOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.DescribeContainerGroupPortMappingsOutput_FleetArn, v.FleetArn)
+		case schemas.DescribeContainerGroupPortMappingsOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.DescribeContainerGroupPortMappingsOutput_FleetId, v.FleetId)
+		case schemas.DescribeContainerGroupPortMappingsOutput_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.DescribeContainerGroupPortMappingsOutput_InstanceId, v.InstanceId)
+		case schemas.DescribeContainerGroupPortMappingsOutput_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.DescribeContainerGroupPortMappingsOutput_Location, v.Location)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeContainerGroupPortMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContainerGroupPortMappings, schemas.DescribeContainerGroupPortMappingsInput, schemas.DescribeContainerGroupPortMappingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeContainerGroupPortMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeContainerGroupPortMappings, schemas.DescribeContainerGroupPortMappingsInput, schemas.DescribeContainerGroupPortMappingsOutput), output: &DescribeContainerGroupPortMappingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeContainerGroupPortMappings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeContainerGroupPortMappings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -220,12 +271,6 @@ func (c *Client) addOperationDescribeContainerGroupPortMappingsMiddlewares(stack
 		return err
 	}
 	if err = addOpDescribeContainerGroupPortMappingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeContainerGroupPortMappings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -240,22 +285,8 @@ func (c *Client) addOperationDescribeContainerGroupPortMappingsMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeContainerGroupPortMappings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeContainerGroupPortMappings",
-	}
 }

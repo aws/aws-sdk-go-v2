@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/key-registration
+
+Content-Type: application/json
+
+{"KeyRegistration":[{"DefaultKey":true,"KeyArn":"__KeyArn__"},{"DefaultKey":true,"KeyArn":"__KeyArn__"}]}

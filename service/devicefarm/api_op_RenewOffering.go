@@ -4,11 +4,10 @@ package devicefarm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Explicitly sets the quantity of devices to renew for an offering, starting from
@@ -46,6 +45,21 @@ type RenewOfferingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewOfferingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewOfferingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewOfferingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingId != nil {
+		s.WriteString(schemas.RenewOfferingRequest_offeringId, *v.OfferingId)
+	}
+	if v.Quantity != nil {
+		s.WriteInt32(schemas.RenewOfferingRequest_quantity, *v.Quantity)
+	}
+}
+
 // The result of a renewal offering.
 type RenewOfferingOutput struct {
 
@@ -58,77 +72,50 @@ type RenewOfferingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenewOfferingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewOfferingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewOfferingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferingTransaction != nil {
+		s.WriteStruct(schemas.RenewOfferingResult_offeringTransaction)
+		v.OfferingTransaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RenewOfferingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenewOfferingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenewOfferingResult_offeringTransaction:
+			v.OfferingTransaction = &types.OfferingTransaction{}
+			return v.OfferingTransaction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRenewOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenewOffering, schemas.RenewOfferingRequest, schemas.RenewOfferingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenewOffering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenewOffering, schemas.RenewOfferingRequest, schemas.RenewOfferingResult), output: &RenewOfferingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRenewOffering{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RenewOffering"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRenewOfferingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRenewOffering(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +130,8 @@ func (c *Client) addOperationRenewOfferingMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRenewOffering(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RenewOffering",
-	}
 }

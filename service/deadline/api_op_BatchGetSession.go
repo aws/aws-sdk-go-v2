@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +45,16 @@ type BatchGetSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetSessionIdentifiers(s, schemas.BatchGetSessionRequest_identifiers, v.Identifiers)
+}
+
 type BatchGetSessionOutput struct {
 
 	// A list of errors for sessions that could not be retrieved.
@@ -62,65 +73,42 @@ type BatchGetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetSessionErrors(s, schemas.BatchGetSessionResponse_errors, v.Errors)
+	serializeBatchGetSessionItems(s, schemas.BatchGetSessionResponse_sessions, v.Sessions)
+}
+func (v *BatchGetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSessionResponse_errors:
+			return deserializeBatchGetSessionErrors(d, schemas.BatchGetSessionResponse_errors, &v.Errors)
+		case schemas.BatchGetSessionResponse_sessions:
+			return deserializeBatchGetSessionItems(d, schemas.BatchGetSessionResponse_sessions, &v.Sessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSession, schemas.BatchGetSessionRequest, schemas.BatchGetSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSession, schemas.BatchGetSessionRequest, schemas.BatchGetSessionResponse), output: &BatchGetSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -130,12 +118,6 @@ func (c *Client) addOperationBatchGetSessionMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpBatchGetSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +130,6 @@ func (c *Client) addOperationBatchGetSessionMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -187,12 +163,4 @@ func (m *endpointPrefix_opBatchGetSessionMiddleware) HandleFinalize(ctx context.
 }
 func addEndpointPrefix_opBatchGetSessionMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opBatchGetSessionMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opBatchGetSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetSession",
-	}
 }

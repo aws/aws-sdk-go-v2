@@ -5,10 +5,10 @@ package evs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a connector for an Amazon EVS environment. You can update the Amazon
@@ -62,6 +62,30 @@ type UpdateEnvironmentConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplianceFqdn != nil {
+		s.WriteString(schemas.UpdateEnvironmentConnectorRequest_applianceFqdn, *v.ApplianceFqdn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateEnvironmentConnectorRequest_clientToken, *v.ClientToken)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.UpdateEnvironmentConnectorRequest_connectorId, *v.ConnectorId)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.UpdateEnvironmentConnectorRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.SecretIdentifier != nil {
+		s.WriteString(schemas.UpdateEnvironmentConnectorRequest_secretIdentifier, *v.SecretIdentifier)
+	}
+}
+
 type UpdateEnvironmentConnectorOutput struct {
 
 	// A description of the updated connector.
@@ -73,65 +97,44 @@ type UpdateEnvironmentConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connector != nil {
+		s.WriteStruct(schemas.UpdateEnvironmentConnectorResponse_connector)
+		v.Connector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateEnvironmentConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentConnectorResponse_connector:
+			v.Connector = &types.Connector{}
+			return v.Connector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentConnector, schemas.UpdateEnvironmentConnectorRequest, schemas.UpdateEnvironmentConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEnvironmentConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentConnector, schemas.UpdateEnvironmentConnectorRequest, schemas.UpdateEnvironmentConnectorResponse), output: &UpdateEnvironmentConnectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateEnvironmentConnector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEnvironmentConnector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -141,12 +144,6 @@ func (c *Client) addOperationUpdateEnvironmentConnectorMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpUpdateEnvironmentConnectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEnvironmentConnector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,12 +156,6 @@ func (c *Client) addOperationUpdateEnvironmentConnectorMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -204,12 +195,4 @@ func (m *idempotencyToken_initializeOpUpdateEnvironmentConnector) HandleInitiali
 }
 func addIdempotencyToken_opUpdateEnvironmentConnectorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateEnvironmentConnector{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateEnvironmentConnector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEnvironmentConnector",
-	}
 }

@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes IP addresses from an inbound or an outbound Resolver endpoint. If you
@@ -49,6 +48,23 @@ type DisassociateResolverEndpointIpAddressInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResolverEndpointIpAddressInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResolverEndpointIpAddressRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResolverEndpointIpAddressInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteStruct(schemas.DisassociateResolverEndpointIpAddressRequest_IpAddress)
+		v.IpAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.DisassociateResolverEndpointIpAddressRequest_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+}
+
 type DisassociateResolverEndpointIpAddressOutput struct {
 
 	// The response to an DisassociateResolverEndpointIpAddress request.
@@ -60,77 +76,50 @@ type DisassociateResolverEndpointIpAddressOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResolverEndpointIpAddressOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResolverEndpointIpAddressResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResolverEndpointIpAddressOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverEndpoint != nil {
+		s.WriteStruct(schemas.DisassociateResolverEndpointIpAddressResponse_ResolverEndpoint)
+		v.ResolverEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateResolverEndpointIpAddressOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateResolverEndpointIpAddressResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateResolverEndpointIpAddressResponse_ResolverEndpoint:
+			v.ResolverEndpoint = &types.ResolverEndpoint{}
+			return v.ResolverEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateResolverEndpointIpAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResolverEndpointIpAddress, schemas.DisassociateResolverEndpointIpAddressRequest, schemas.DisassociateResolverEndpointIpAddressResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateResolverEndpointIpAddress{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResolverEndpointIpAddress, schemas.DisassociateResolverEndpointIpAddressRequest, schemas.DisassociateResolverEndpointIpAddressResponse), output: &DisassociateResolverEndpointIpAddressOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateResolverEndpointIpAddress{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateResolverEndpointIpAddress"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociateResolverEndpointIpAddressValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateResolverEndpointIpAddress(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +134,8 @@ func (c *Client) addOperationDisassociateResolverEndpointIpAddressMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociateResolverEndpointIpAddress(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateResolverEndpointIpAddress",
-	}
 }

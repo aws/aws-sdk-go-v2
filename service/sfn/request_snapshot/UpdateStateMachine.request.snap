@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.UpdateStateMachine
+
+{"definition":"__Definition__","encryptionConfiguration":{"kmsDataKeyReusePeriodSeconds":1,"kmsKeyId":"__KmsKeyId__","type":"AWS_OWNED_KEY"},"loggingConfiguration":{"destinations":[{"cloudWatchLogsLogGroup":{"logGroupArn":"__LogGroupArn__"}},{"cloudWatchLogsLogGroup":{"logGroupArn":"__LogGroupArn__"}}],"includeExecutionData":true,"level":"ALL"},"publish":true,"roleArn":"__RoleArn__","stateMachineArn":"__StateMachineArn__","tracingConfiguration":{"enabled":true},"versionDescription":"__VersionDescription__"}

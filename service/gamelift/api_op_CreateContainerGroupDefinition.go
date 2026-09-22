@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: Container
@@ -68,11 +67,11 @@ import (
 //
 //   - ContainerGroupType ( GAME_SERVER )
 //
-//   - OperatingSystem (omit to use default value)
+//   - OperatingSystem
 //
-//   - TotalMemoryLimitMebibytes (omit to use default value)
+//   - TotalMemoryLimitMebibytes
 //
-//   - TotalVcpuLimit (omit to use default value)
+//   - TotalVcpuLimit
 //
 //   - At least one GameServerContainerDefinition
 //
@@ -82,7 +81,7 @@ import (
 //
 //   - PortConfiguration
 //
-//   - ServerSdkVersion (omit to use default value)
+//   - ServerSdkVersion
 //
 //   - Create a per-instance container group definition. Provide the following
 //     required parameter values:
@@ -91,11 +90,11 @@ import (
 //
 //   - ContainerGroupType ( PER_INSTANCE )
 //
-//   - OperatingSystem (omit to use default value)
+//   - OperatingSystem
 //
-//   - TotalMemoryLimitMebibytes (omit to use default value)
+//   - TotalMemoryLimitMebibytes
 //
-//   - TotalVcpuLimit (omit to use default value)
+//   - TotalVcpuLimit
 //
 //   - At least one SupportContainerDefinition
 //
@@ -202,6 +201,40 @@ type CreateContainerGroupDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerGroupDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerGroupDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerGroupDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerGroupType != "" {
+		s.WriteString(schemas.CreateContainerGroupDefinitionInput_ContainerGroupType, string(v.ContainerGroupType))
+	}
+	if v.GameServerContainerDefinition != nil {
+		s.WriteStruct(schemas.CreateContainerGroupDefinitionInput_GameServerContainerDefinition)
+		v.GameServerContainerDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateContainerGroupDefinitionInput_Name, *v.Name)
+	}
+	if v.OperatingSystem != "" {
+		s.WriteString(schemas.CreateContainerGroupDefinitionInput_OperatingSystem, string(v.OperatingSystem))
+	}
+	serializeSupportContainerDefinitionInputList(s, schemas.CreateContainerGroupDefinitionInput_SupportContainerDefinitions, v.SupportContainerDefinitions)
+	serializeTagList(s, schemas.CreateContainerGroupDefinitionInput_Tags, v.Tags)
+	if v.TotalMemoryLimitMebibytes != nil {
+		s.WriteInt32(schemas.CreateContainerGroupDefinitionInput_TotalMemoryLimitMebibytes, *v.TotalMemoryLimitMebibytes)
+	}
+	if v.TotalVcpuLimit != nil {
+		s.WriteFloat64(schemas.CreateContainerGroupDefinitionInput_TotalVcpuLimit, *v.TotalVcpuLimit)
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.CreateContainerGroupDefinitionInput_VersionDescription, *v.VersionDescription)
+	}
+}
+
 type CreateContainerGroupDefinitionOutput struct {
 
 	// The properties of the new container group definition resource. You can use this
@@ -214,65 +247,44 @@ type CreateContainerGroupDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContainerGroupDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContainerGroupDefinitionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContainerGroupDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerGroupDefinition != nil {
+		s.WriteStruct(schemas.CreateContainerGroupDefinitionOutput_ContainerGroupDefinition)
+		v.ContainerGroupDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateContainerGroupDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContainerGroupDefinitionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContainerGroupDefinitionOutput_ContainerGroupDefinition:
+			v.ContainerGroupDefinition = &types.ContainerGroupDefinition{}
+			return v.ContainerGroupDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContainerGroupDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerGroupDefinition, schemas.CreateContainerGroupDefinitionInput, schemas.CreateContainerGroupDefinitionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateContainerGroupDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContainerGroupDefinition, schemas.CreateContainerGroupDefinitionInput, schemas.CreateContainerGroupDefinitionOutput), output: &CreateContainerGroupDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateContainerGroupDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContainerGroupDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -282,12 +294,6 @@ func (c *Client) addOperationCreateContainerGroupDefinitionMiddlewares(stack *mi
 		return err
 	}
 	if err = addOpCreateContainerGroupDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContainerGroupDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -302,22 +308,8 @@ func (c *Client) addOperationCreateContainerGroupDefinitionMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateContainerGroupDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateContainerGroupDefinition",
-	}
 }

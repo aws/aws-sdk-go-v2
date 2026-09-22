@@ -291,7 +291,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                                     return memberShape.getMemberTrait(model, StreamingTrait.class).isPresent();
                                 })) {
                                     writer.addUseImports(SmithyGoDependency.SMITHY_MIDDLEWARE);
-                                    writer.addUseImports(AwsGoDependency.AWS_MIDDLEWARE);
 
                                     Symbol removeContentTypeHeader = SymbolUtils.createValueSymbolBuilder(
                                             "RemoveContentTypeHeader", AwsGoDependency.AWS_HTTP_TRANSPORT
@@ -393,10 +392,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                         if _, ok := stack.Finalize.Get(($1P)(nil).ID()); ok {
                             stack.Finalize.Remove(($1P)(nil).ID())
                         }""", AwsGoDependency.AWS_RETRY.struct("Attempt"));
-                    writer.write("""
-                        if _, ok := stack.Finalize.Get(($1P)(nil).ID()); ok {
-                            stack.Finalize.Remove(($1P)(nil).ID())
-                        }""", AwsGoDependency.AWS_RETRY.struct("MetricsHeader"));
                     writer.write("stack.Deserialize.Clear()");
                     writer.write("stack.Build.Remove(($P)(nil).ID())", requestInvocationID);
                     writer.write("stack.Build.Remove($S)", "UserAgent");

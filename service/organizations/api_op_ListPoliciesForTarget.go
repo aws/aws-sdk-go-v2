@@ -5,10 +5,10 @@ package organizations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the policies that are directly attached to the specified target root,
@@ -120,6 +120,27 @@ type ListPoliciesForTargetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesForTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesForTargetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesForTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != "" {
+		s.WriteString(schemas.ListPoliciesForTargetRequest_Filter, string(v.Filter))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPoliciesForTargetRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoliciesForTargetRequest_NextToken, *v.NextToken)
+	}
+	if v.TargetId != nil {
+		s.WriteString(schemas.ListPoliciesForTargetRequest_TargetId, *v.TargetId)
+	}
+}
+
 type ListPoliciesForTargetOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -137,77 +158,51 @@ type ListPoliciesForTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoliciesForTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoliciesForTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoliciesForTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoliciesForTargetResponse_NextToken, *v.NextToken)
+	}
+	serializePolicies(s, schemas.ListPoliciesForTargetResponse_Policies, v.Policies)
+}
+func (v *ListPoliciesForTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPoliciesForTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPoliciesForTargetResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPoliciesForTargetResponse_NextToken, v.NextToken)
+		case schemas.ListPoliciesForTargetResponse_Policies:
+			return deserializePolicies(d, schemas.ListPoliciesForTargetResponse_Policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPoliciesForTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoliciesForTarget, schemas.ListPoliciesForTargetRequest, schemas.ListPoliciesForTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPoliciesForTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoliciesForTarget, schemas.ListPoliciesForTargetRequest, schemas.ListPoliciesForTargetResponse), output: &ListPoliciesForTargetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPoliciesForTarget{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPoliciesForTarget"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPoliciesForTargetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPoliciesForTarget(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,12 +215,6 @@ func (c *Client) addOperationListPoliciesForTargetMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -329,11 +318,3 @@ type ListPoliciesForTargetAPIClient interface {
 }
 
 var _ ListPoliciesForTargetAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPoliciesForTarget(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPoliciesForTarget",
-	}
-}

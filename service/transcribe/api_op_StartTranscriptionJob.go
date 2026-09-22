@@ -4,11 +4,10 @@ package transcribe
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Transcribes the audio from a media file and applies any additional Request
@@ -333,6 +332,77 @@ type StartTranscriptionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTranscriptionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTranscriptionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTranscriptionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentRedaction != nil {
+		s.WriteStruct(schemas.StartTranscriptionJobRequest_ContentRedaction)
+		v.ContentRedaction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentifyLanguage != nil {
+		s.WriteBool(schemas.StartTranscriptionJobRequest_IdentifyLanguage, *v.IdentifyLanguage)
+	}
+	if v.IdentifyMultipleLanguages != nil {
+		s.WriteBool(schemas.StartTranscriptionJobRequest_IdentifyMultipleLanguages, *v.IdentifyMultipleLanguages)
+	}
+	if v.JobExecutionSettings != nil {
+		s.WriteStruct(schemas.StartTranscriptionJobRequest_JobExecutionSettings)
+		v.JobExecutionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeKMSEncryptionContextMap(s, schemas.StartTranscriptionJobRequest_KMSEncryptionContext, v.KMSEncryptionContext)
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartTranscriptionJobRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializeLanguageIdSettingsMap(s, schemas.StartTranscriptionJobRequest_LanguageIdSettings, v.LanguageIdSettings)
+	serializeLanguageOptions(s, schemas.StartTranscriptionJobRequest_LanguageOptions, v.LanguageOptions)
+	if v.Media != nil {
+		s.WriteStruct(schemas.StartTranscriptionJobRequest_Media)
+		v.Media.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MediaFormat != "" {
+		s.WriteString(schemas.StartTranscriptionJobRequest_MediaFormat, string(v.MediaFormat))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.StartTranscriptionJobRequest_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.ModelSettings != nil {
+		s.WriteStruct(schemas.StartTranscriptionJobRequest_ModelSettings)
+		v.ModelSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputBucketName != nil {
+		s.WriteString(schemas.StartTranscriptionJobRequest_OutputBucketName, *v.OutputBucketName)
+	}
+	if v.OutputEncryptionKMSKeyId != nil {
+		s.WriteString(schemas.StartTranscriptionJobRequest_OutputEncryptionKMSKeyId, *v.OutputEncryptionKMSKeyId)
+	}
+	if v.OutputKey != nil {
+		s.WriteString(schemas.StartTranscriptionJobRequest_OutputKey, *v.OutputKey)
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.StartTranscriptionJobRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Subtitles != nil {
+		s.WriteStruct(schemas.StartTranscriptionJobRequest_Subtitles)
+		v.Subtitles.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartTranscriptionJobRequest_Tags, v.Tags)
+	serializeToxicityDetection(s, schemas.StartTranscriptionJobRequest_ToxicityDetection, v.ToxicityDetection)
+	if v.TranscriptionJobName != nil {
+		s.WriteString(schemas.StartTranscriptionJobRequest_TranscriptionJobName, *v.TranscriptionJobName)
+	}
+}
+
 type StartTranscriptionJobOutput struct {
 
 	// Provides detailed information about the current transcription job, including
@@ -345,77 +415,50 @@ type StartTranscriptionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTranscriptionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTranscriptionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTranscriptionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TranscriptionJob != nil {
+		s.WriteStruct(schemas.StartTranscriptionJobResponse_TranscriptionJob)
+		v.TranscriptionJob.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartTranscriptionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTranscriptionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTranscriptionJobResponse_TranscriptionJob:
+			v.TranscriptionJob = &types.TranscriptionJob{}
+			return v.TranscriptionJob.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTranscriptionJob, schemas.StartTranscriptionJobRequest, schemas.StartTranscriptionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartTranscriptionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTranscriptionJob, schemas.StartTranscriptionJobRequest, schemas.StartTranscriptionJobResponse), output: &StartTranscriptionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartTranscriptionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartTranscriptionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartTranscriptionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartTranscriptionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -430,22 +473,8 @@ func (c *Client) addOperationStartTranscriptionJobMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartTranscriptionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartTranscriptionJob",
-	}
 }

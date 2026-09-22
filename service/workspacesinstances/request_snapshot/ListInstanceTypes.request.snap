@@ -1,0 +1,7 @@
+POST /service/EUCMIFrontendAPIService/operation/ListInstanceTypes
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+£jMaxResultsiNextTokenm__NextToken__xInstanceConfigurationFilter£kBillingModegMONTHLYlPlatformTypegWindowsgTenancyfSHARED

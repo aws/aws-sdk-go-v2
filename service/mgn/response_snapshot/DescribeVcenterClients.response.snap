@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"arn":"__Arn__","datacenterName":"__DatacenterName__","hostname":"__Hostname__","lastSeenDatetime":"__LastSeenDatetime__","sourceServerTags":{"key0":"__Value__"},"tags":{"key0":"__Value__"},"vcenterClientID":"__VcenterClientID__","vcenterUUID":"__VcenterUUID__"},{"arn":"__Arn__","datacenterName":"__DatacenterName__","hostname":"__Hostname__","lastSeenDatetime":"__LastSeenDatetime__","sourceServerTags":{"key0":"__Value__"},"tags":{"key0":"__Value__"},"vcenterClientID":"__VcenterClientID__","vcenterUUID":"__VcenterUUID__"}],"nextToken":"__NextToken__"}

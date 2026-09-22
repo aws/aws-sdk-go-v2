@@ -4,11 +4,10 @@ package internetmonitor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the current status of a query for the Amazon CloudWatch Internet
@@ -56,6 +55,21 @@ type GetQueryStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorName != nil {
+		s.WriteString(schemas.GetQueryStatusInput_MonitorName, *v.MonitorName)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetQueryStatusInput_QueryId, *v.QueryId)
+	}
+}
+
 type GetQueryStatusOutput struct {
 
 	// The current status for a query.
@@ -69,77 +83,52 @@ type GetQueryStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQueryStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQueryStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQueryStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.GetQueryStatusOutput_Status, string(v.Status))
+	}
+}
+func (v *GetQueryStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQueryStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQueryStatusOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetQueryStatusOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QueryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQueryStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryStatus, schemas.GetQueryStatusInput, schemas.GetQueryStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQueryStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQueryStatus, schemas.GetQueryStatusInput, schemas.GetQueryStatusOutput), output: &GetQueryStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQueryStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQueryStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetQueryStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetQueryStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +143,8 @@ func (c *Client) addOperationGetQueryStatusMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetQueryStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetQueryStatus",
-	}
 }

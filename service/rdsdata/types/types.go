@@ -19,7 +19,7 @@ type ArrayValue interface {
 	isArrayValue()
 }
 
-// An array of arrays.
+// An array of arrays. Can contain null values.
 type ArrayValueMemberArrayValues struct {
 	Value []ArrayValue
 
@@ -28,36 +28,36 @@ type ArrayValueMemberArrayValues struct {
 
 func (*ArrayValueMemberArrayValues) isArrayValue() {}
 
-// An array of Boolean values.
+// An array of Boolean values. Can contain null values.
 type ArrayValueMemberBooleanValues struct {
-	Value []bool
+	Value []*bool
 
 	noSmithyDocumentSerde
 }
 
 func (*ArrayValueMemberBooleanValues) isArrayValue() {}
 
-// An array of floating-point numbers.
+// An array of floating-point numbers. Can contain null values.
 type ArrayValueMemberDoubleValues struct {
-	Value []float64
+	Value []*float64
 
 	noSmithyDocumentSerde
 }
 
 func (*ArrayValueMemberDoubleValues) isArrayValue() {}
 
-// An array of integers.
+// An array of integers. Can contain null values.
 type ArrayValueMemberLongValues struct {
-	Value []int64
+	Value []*int64
 
 	noSmithyDocumentSerde
 }
 
 func (*ArrayValueMemberLongValues) isArrayValue() {}
 
-// An array of strings.
+// An array of strings. Can contain null values.
 type ArrayValueMemberStringValues struct {
-	Value []string
+	Value []*string
 
 	noSmithyDocumentSerde
 }

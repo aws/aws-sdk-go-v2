@@ -5,10 +5,10 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the replication instance types that can be created in
@@ -47,6 +47,21 @@ type DescribeOrderableReplicationInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrderableReplicationInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrderableReplicationInstancesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrderableReplicationInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeOrderableReplicationInstancesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeOrderableReplicationInstancesMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeOrderableReplicationInstancesOutput struct {
 
 	//  An optional pagination token provided by a previous request. If this parameter
@@ -63,74 +78,48 @@ type DescribeOrderableReplicationInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrderableReplicationInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrderableReplicationInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrderableReplicationInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeOrderableReplicationInstancesResponse_Marker, *v.Marker)
+	}
+	serializeOrderableReplicationInstanceList(s, schemas.DescribeOrderableReplicationInstancesResponse_OrderableReplicationInstances, v.OrderableReplicationInstances)
+}
+func (v *DescribeOrderableReplicationInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrderableReplicationInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrderableReplicationInstancesResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeOrderableReplicationInstancesResponse_Marker, v.Marker)
+		case schemas.DescribeOrderableReplicationInstancesResponse_OrderableReplicationInstances:
+			return deserializeOrderableReplicationInstanceList(d, schemas.DescribeOrderableReplicationInstancesResponse_OrderableReplicationInstances, &v.OrderableReplicationInstances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrderableReplicationInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrderableReplicationInstances, schemas.DescribeOrderableReplicationInstancesMessage, schemas.DescribeOrderableReplicationInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOrderableReplicationInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrderableReplicationInstances, schemas.DescribeOrderableReplicationInstancesMessage, schemas.DescribeOrderableReplicationInstancesResponse), output: &DescribeOrderableReplicationInstancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeOrderableReplicationInstances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOrderableReplicationInstances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrderableReplicationInstances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +132,6 @@ func (c *Client) addOperationDescribeOrderableReplicationInstancesMiddlewares(st
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +241,3 @@ type DescribeOrderableReplicationInstancesAPIClient interface {
 }
 
 var _ DescribeOrderableReplicationInstancesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeOrderableReplicationInstances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeOrderableReplicationInstances",
-	}
-}

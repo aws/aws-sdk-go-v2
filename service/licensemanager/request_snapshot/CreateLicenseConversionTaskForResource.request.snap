@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.CreateLicenseConversionTaskForResource
+
+{"DestinationLicenseContext":{"ProductCodes":[{"ProductCodeId":"__ProductCodeId__","ProductCodeType":"marketplace"},{"ProductCodeId":"__ProductCodeId__","ProductCodeType":"marketplace"}],"UsageOperation":"__UsageOperation__"},"ResourceArn":"__ResourceArn__","SourceLicenseContext":{"ProductCodes":[{"ProductCodeId":"__ProductCodeId__","ProductCodeType":"marketplace"},{"ProductCodeId":"__ProductCodeId__","ProductCodeType":"marketplace"}],"UsageOperation":"__UsageOperation__"}}

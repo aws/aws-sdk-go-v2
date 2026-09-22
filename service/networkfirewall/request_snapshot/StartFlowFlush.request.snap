@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.StartFlowFlush
+
+{"AvailabilityZone":"__AvailabilityZone__","FirewallArn":"__FirewallArn__","FlowFilters":[{"DestinationAddress":{"AddressDefinition":"__AddressDefinition__"},"DestinationPort":"__DestinationPort__","Protocols":["__Member__","__Member__"],"SourceAddress":{"AddressDefinition":"__AddressDefinition__"},"SourcePort":"__SourcePort__"},{"DestinationAddress":{"AddressDefinition":"__AddressDefinition__"},"DestinationPort":"__DestinationPort__","Protocols":["__Member__","__Member__"],"SourceAddress":{"AddressDefinition":"__AddressDefinition__"},"SourcePort":"__SourcePort__"}],"MinimumFlowAgeInSeconds":1,"VpcEndpointAssociationArn":"__VpcEndpointAssociationArn__","VpcEndpointId":"__VpcEndpointId__"}

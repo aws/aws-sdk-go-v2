@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.GetDeviceFleetReport
+
+{"AgentVersions":[{"AgentCount":1,"Version":"__Version__"},{"AgentCount":1,"Version":"__Version__"}],"Description":"__Description__","DeviceFleetArn":"__DeviceFleetArn__","DeviceFleetName":"__DeviceFleetName__","DeviceStats":{"ConnectedDeviceCount":1,"RegisteredDeviceCount":1},"ModelStats":[{"ActiveDeviceCount":1,"ConnectedDeviceCount":1,"ModelName":"__ModelName__","ModelVersion":"__ModelVersion__","OfflineDeviceCount":1,"SamplingDeviceCount":1},{"ActiveDeviceCount":1,"ConnectedDeviceCount":1,"ModelName":"__ModelName__","ModelVersion":"__ModelVersion__","OfflineDeviceCount":1,"SamplingDeviceCount":1}],"OutputConfig":{"KmsKeyId":"__KmsKeyId__","PresetDeploymentConfig":"__PresetDeploymentConfig__","PresetDeploymentType":"GreengrassV2Component","S3OutputLocation":"__S3OutputLocation__"},"ReportGenerated":946684800}

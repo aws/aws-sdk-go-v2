@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API is in preview release for Connect Customer and is subject to change.
@@ -55,6 +55,27 @@ type ListInstanceStorageConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceStorageConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceStorageConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceStorageConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListInstanceStorageConfigsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInstanceStorageConfigsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstanceStorageConfigsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ListInstanceStorageConfigsRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type ListInstanceStorageConfigsOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -69,77 +90,51 @@ type ListInstanceStorageConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceStorageConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceStorageConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceStorageConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstanceStorageConfigsResponse_NextToken, *v.NextToken)
+	}
+	serializeInstanceStorageConfigs(s, schemas.ListInstanceStorageConfigsResponse_StorageConfigs, v.StorageConfigs)
+}
+func (v *ListInstanceStorageConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstanceStorageConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstanceStorageConfigsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInstanceStorageConfigsResponse_NextToken, v.NextToken)
+		case schemas.ListInstanceStorageConfigsResponse_StorageConfigs:
+			return deserializeInstanceStorageConfigs(d, schemas.ListInstanceStorageConfigsResponse_StorageConfigs, &v.StorageConfigs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstanceStorageConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceStorageConfigs, schemas.ListInstanceStorageConfigsRequest, schemas.ListInstanceStorageConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInstanceStorageConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceStorageConfigs, schemas.ListInstanceStorageConfigsRequest, schemas.ListInstanceStorageConfigsResponse), output: &ListInstanceStorageConfigsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInstanceStorageConfigs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInstanceStorageConfigs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListInstanceStorageConfigsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInstanceStorageConfigs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +147,6 @@ func (c *Client) addOperationListInstanceStorageConfigsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +250,3 @@ type ListInstanceStorageConfigsAPIClient interface {
 }
 
 var _ ListInstanceStorageConfigsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListInstanceStorageConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListInstanceStorageConfigs",
-	}
-}

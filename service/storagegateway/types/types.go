@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -21,6 +23,31 @@ type AutomaticTapeCreationPolicyInfo struct {
 	GatewayARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomaticTapeCreationPolicyInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomaticTapeCreationPolicyInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomaticTapeCreationPolicyInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomaticTapeCreationRules(s, schemas.AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules, v.AutomaticTapeCreationRules)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.AutomaticTapeCreationPolicyInfo_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *AutomaticTapeCreationPolicyInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomaticTapeCreationPolicyInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules:
+			return deserializeAutomaticTapeCreationRules(d, schemas.AutomaticTapeCreationPolicyInfo_AutomaticTapeCreationRules, &v.AutomaticTapeCreationRules)
+		case schemas.AutomaticTapeCreationPolicyInfo_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.AutomaticTapeCreationPolicyInfo_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
 }
 
 // An automatic tape creation policy consists of automatic tape creation rules
@@ -68,6 +95,51 @@ type AutomaticTapeCreationRule struct {
 	Worm bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *AutomaticTapeCreationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutomaticTapeCreationRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutomaticTapeCreationRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MinimumNumTapes != nil {
+		s.WriteInt32(schemas.AutomaticTapeCreationRule_MinimumNumTapes, *v.MinimumNumTapes)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.AutomaticTapeCreationRule_PoolId, *v.PoolId)
+	}
+	if v.TapeBarcodePrefix != nil {
+		s.WriteString(schemas.AutomaticTapeCreationRule_TapeBarcodePrefix, *v.TapeBarcodePrefix)
+	}
+	if v.TapeSizeInBytes != nil {
+		s.WriteInt64(schemas.AutomaticTapeCreationRule_TapeSizeInBytes, *v.TapeSizeInBytes)
+	}
+	if v.Worm != false {
+		s.WriteBool(schemas.AutomaticTapeCreationRule_Worm, v.Worm)
+	}
+}
+func (v *AutomaticTapeCreationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutomaticTapeCreationRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutomaticTapeCreationRule_MinimumNumTapes:
+			v.MinimumNumTapes = new(int32)
+			return d.ReadInt32(schemas.AutomaticTapeCreationRule_MinimumNumTapes, v.MinimumNumTapes)
+		case schemas.AutomaticTapeCreationRule_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.AutomaticTapeCreationRule_PoolId, v.PoolId)
+		case schemas.AutomaticTapeCreationRule_TapeBarcodePrefix:
+			v.TapeBarcodePrefix = new(string)
+			return d.ReadString(schemas.AutomaticTapeCreationRule_TapeBarcodePrefix, v.TapeBarcodePrefix)
+		case schemas.AutomaticTapeCreationRule_TapeSizeInBytes:
+			v.TapeSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.AutomaticTapeCreationRule_TapeSizeInBytes, v.TapeSizeInBytes)
+		case schemas.AutomaticTapeCreationRule_Worm:
+			return d.ReadBool(schemas.AutomaticTapeCreationRule_Worm, &v.Worm)
+		}
+		return nil
+	})
 }
 
 // Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit
@@ -130,6 +202,61 @@ type BandwidthRateLimitInterval struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BandwidthRateLimitInterval) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BandwidthRateLimitInterval)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BandwidthRateLimitInterval) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AverageDownloadRateLimitInBitsPerSec != nil {
+		s.WriteInt64(schemas.BandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec, *v.AverageDownloadRateLimitInBitsPerSec)
+	}
+	if v.AverageUploadRateLimitInBitsPerSec != nil {
+		s.WriteInt64(schemas.BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec, *v.AverageUploadRateLimitInBitsPerSec)
+	}
+	serializeDaysOfWeek(s, schemas.BandwidthRateLimitInterval_DaysOfWeek, v.DaysOfWeek)
+	if v.EndHourOfDay != nil {
+		s.WriteInt32(schemas.BandwidthRateLimitInterval_EndHourOfDay, *v.EndHourOfDay)
+	}
+	if v.EndMinuteOfHour != nil {
+		s.WriteInt32(schemas.BandwidthRateLimitInterval_EndMinuteOfHour, *v.EndMinuteOfHour)
+	}
+	if v.StartHourOfDay != nil {
+		s.WriteInt32(schemas.BandwidthRateLimitInterval_StartHourOfDay, *v.StartHourOfDay)
+	}
+	if v.StartMinuteOfHour != nil {
+		s.WriteInt32(schemas.BandwidthRateLimitInterval_StartMinuteOfHour, *v.StartMinuteOfHour)
+	}
+}
+func (v *BandwidthRateLimitInterval) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BandwidthRateLimitInterval, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec:
+			v.AverageDownloadRateLimitInBitsPerSec = new(int64)
+			return d.ReadInt64(schemas.BandwidthRateLimitInterval_AverageDownloadRateLimitInBitsPerSec, v.AverageDownloadRateLimitInBitsPerSec)
+		case schemas.BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec:
+			v.AverageUploadRateLimitInBitsPerSec = new(int64)
+			return d.ReadInt64(schemas.BandwidthRateLimitInterval_AverageUploadRateLimitInBitsPerSec, v.AverageUploadRateLimitInBitsPerSec)
+		case schemas.BandwidthRateLimitInterval_DaysOfWeek:
+			return deserializeDaysOfWeek(d, schemas.BandwidthRateLimitInterval_DaysOfWeek, &v.DaysOfWeek)
+		case schemas.BandwidthRateLimitInterval_EndHourOfDay:
+			v.EndHourOfDay = new(int32)
+			return d.ReadInt32(schemas.BandwidthRateLimitInterval_EndHourOfDay, v.EndHourOfDay)
+		case schemas.BandwidthRateLimitInterval_EndMinuteOfHour:
+			v.EndMinuteOfHour = new(int32)
+			return d.ReadInt32(schemas.BandwidthRateLimitInterval_EndMinuteOfHour, v.EndMinuteOfHour)
+		case schemas.BandwidthRateLimitInterval_StartHourOfDay:
+			v.StartHourOfDay = new(int32)
+			return d.ReadInt32(schemas.BandwidthRateLimitInterval_StartHourOfDay, v.StartHourOfDay)
+		case schemas.BandwidthRateLimitInterval_StartMinuteOfHour:
+			v.StartMinuteOfHour = new(int32)
+			return d.ReadInt32(schemas.BandwidthRateLimitInterval_StartMinuteOfHour, v.StartMinuteOfHour)
+		}
+		return nil
+	})
+}
+
 // The refresh cache information for the file share or FSx file systems.
 type CacheAttributes struct {
 
@@ -142,6 +269,28 @@ type CacheAttributes struct {
 	CacheStaleTimeoutInSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CacheAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CacheAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CacheAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheStaleTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.CacheAttributes_CacheStaleTimeoutInSeconds, *v.CacheStaleTimeoutInSeconds)
+	}
+}
+func (v *CacheAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CacheAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CacheAttributes_CacheStaleTimeoutInSeconds:
+			v.CacheStaleTimeoutInSeconds = new(int32)
+			return d.ReadInt32(schemas.CacheAttributes_CacheStaleTimeoutInSeconds, v.CacheStaleTimeoutInSeconds)
+		}
+		return nil
+	})
 }
 
 // Describes an iSCSI cached volume.
@@ -221,6 +370,101 @@ type CachediSCSIVolume struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CachediSCSIVolume) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CachediSCSIVolume)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CachediSCSIVolume) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.CachediSCSIVolume_CreatedDate, *v.CreatedDate)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.CachediSCSIVolume_KMSKey, *v.KMSKey)
+	}
+	if v.SourceSnapshotId != nil {
+		s.WriteString(schemas.CachediSCSIVolume_SourceSnapshotId, *v.SourceSnapshotId)
+	}
+	if v.TargetName != nil {
+		s.WriteString(schemas.CachediSCSIVolume_TargetName, *v.TargetName)
+	}
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.CachediSCSIVolume_VolumeARN, *v.VolumeARN)
+	}
+	if v.VolumeAttachmentStatus != nil {
+		s.WriteString(schemas.CachediSCSIVolume_VolumeAttachmentStatus, *v.VolumeAttachmentStatus)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.CachediSCSIVolume_VolumeId, *v.VolumeId)
+	}
+	if v.VolumeProgress != nil {
+		s.WriteFloat64(schemas.CachediSCSIVolume_VolumeProgress, *v.VolumeProgress)
+	}
+	if v.VolumeSizeInBytes != 0 {
+		s.WriteInt64(schemas.CachediSCSIVolume_VolumeSizeInBytes, v.VolumeSizeInBytes)
+	}
+	if v.VolumeStatus != nil {
+		s.WriteString(schemas.CachediSCSIVolume_VolumeStatus, *v.VolumeStatus)
+	}
+	if v.VolumeType != nil {
+		s.WriteString(schemas.CachediSCSIVolume_VolumeType, *v.VolumeType)
+	}
+	if v.VolumeUsedInBytes != nil {
+		s.WriteInt64(schemas.CachediSCSIVolume_VolumeUsedInBytes, *v.VolumeUsedInBytes)
+	}
+	if v.VolumeiSCSIAttributes != nil {
+		s.WriteStruct(schemas.CachediSCSIVolume_VolumeiSCSIAttributes)
+		v.VolumeiSCSIAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CachediSCSIVolume) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CachediSCSIVolume, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CachediSCSIVolume_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.CachediSCSIVolume_CreatedDate, v.CreatedDate)
+		case schemas.CachediSCSIVolume_KMSKey:
+			v.KMSKey = new(string)
+			return d.ReadString(schemas.CachediSCSIVolume_KMSKey, v.KMSKey)
+		case schemas.CachediSCSIVolume_SourceSnapshotId:
+			v.SourceSnapshotId = new(string)
+			return d.ReadString(schemas.CachediSCSIVolume_SourceSnapshotId, v.SourceSnapshotId)
+		case schemas.CachediSCSIVolume_TargetName:
+			v.TargetName = new(string)
+			return d.ReadString(schemas.CachediSCSIVolume_TargetName, v.TargetName)
+		case schemas.CachediSCSIVolume_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.CachediSCSIVolume_VolumeARN, v.VolumeARN)
+		case schemas.CachediSCSIVolume_VolumeAttachmentStatus:
+			v.VolumeAttachmentStatus = new(string)
+			return d.ReadString(schemas.CachediSCSIVolume_VolumeAttachmentStatus, v.VolumeAttachmentStatus)
+		case schemas.CachediSCSIVolume_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.CachediSCSIVolume_VolumeId, v.VolumeId)
+		case schemas.CachediSCSIVolume_VolumeProgress:
+			v.VolumeProgress = new(float64)
+			return d.ReadFloat64(schemas.CachediSCSIVolume_VolumeProgress, v.VolumeProgress)
+		case schemas.CachediSCSIVolume_VolumeSizeInBytes:
+			return d.ReadInt64(schemas.CachediSCSIVolume_VolumeSizeInBytes, &v.VolumeSizeInBytes)
+		case schemas.CachediSCSIVolume_VolumeStatus:
+			v.VolumeStatus = new(string)
+			return d.ReadString(schemas.CachediSCSIVolume_VolumeStatus, v.VolumeStatus)
+		case schemas.CachediSCSIVolume_VolumeType:
+			v.VolumeType = new(string)
+			return d.ReadString(schemas.CachediSCSIVolume_VolumeType, v.VolumeType)
+		case schemas.CachediSCSIVolume_VolumeUsedInBytes:
+			v.VolumeUsedInBytes = new(int64)
+			return d.ReadInt64(schemas.CachediSCSIVolume_VolumeUsedInBytes, v.VolumeUsedInBytes)
+		case schemas.CachediSCSIVolume_VolumeiSCSIAttributes:
+			v.VolumeiSCSIAttributes = &VolumeiSCSIAttributes{}
+			return v.VolumeiSCSIAttributes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A list of filter parameters and associated values that determine which files
 // are included or excluded from a cache report created by a StartCacheReport
 // request. Multiple instances of the same filter parameter are combined with an OR
@@ -252,6 +496,35 @@ type CacheReportFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CacheReportFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CacheReportFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CacheReportFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.CacheReportFilter_Name, string(v.Name))
+	}
+	serializeCacheReportFilterValues(s, schemas.CacheReportFilter_Values, v.Values)
+}
+func (v *CacheReportFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CacheReportFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CacheReportFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.CacheReportFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = CacheReportFilterName(ev)
+			return nil
+		case schemas.CacheReportFilter_Values:
+			return deserializeCacheReportFilterValues(d, schemas.CacheReportFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Contains all informational fields associated with a cache report. Includes
@@ -301,6 +574,89 @@ type CacheReportInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CacheReportInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CacheReportInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CacheReportInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheReportARN != nil {
+		s.WriteString(schemas.CacheReportInfo_CacheReportARN, *v.CacheReportARN)
+	}
+	if v.CacheReportStatus != "" {
+		s.WriteString(schemas.CacheReportInfo_CacheReportStatus, string(v.CacheReportStatus))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.CacheReportInfo_EndTime, *v.EndTime)
+	}
+	serializeCacheReportFilterList(s, schemas.CacheReportInfo_ExclusionFilters, v.ExclusionFilters)
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.CacheReportInfo_FileShareARN, *v.FileShareARN)
+	}
+	serializeCacheReportFilterList(s, schemas.CacheReportInfo_InclusionFilters, v.InclusionFilters)
+	if v.LocationARN != nil {
+		s.WriteString(schemas.CacheReportInfo_LocationARN, *v.LocationARN)
+	}
+	if v.ReportCompletionPercent != nil {
+		s.WriteInt32(schemas.CacheReportInfo_ReportCompletionPercent, *v.ReportCompletionPercent)
+	}
+	if v.ReportName != nil {
+		s.WriteString(schemas.CacheReportInfo_ReportName, *v.ReportName)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.CacheReportInfo_Role, *v.Role)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.CacheReportInfo_StartTime, *v.StartTime)
+	}
+	serializeTags(s, schemas.CacheReportInfo_Tags, v.Tags)
+}
+func (v *CacheReportInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CacheReportInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CacheReportInfo_CacheReportARN:
+			v.CacheReportARN = new(string)
+			return d.ReadString(schemas.CacheReportInfo_CacheReportARN, v.CacheReportARN)
+		case schemas.CacheReportInfo_CacheReportStatus:
+			var ev string
+			if err := d.ReadString(schemas.CacheReportInfo_CacheReportStatus, &ev); err != nil {
+				return err
+			}
+			v.CacheReportStatus = CacheReportStatus(ev)
+			return nil
+		case schemas.CacheReportInfo_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.CacheReportInfo_EndTime, v.EndTime)
+		case schemas.CacheReportInfo_ExclusionFilters:
+			return deserializeCacheReportFilterList(d, schemas.CacheReportInfo_ExclusionFilters, &v.ExclusionFilters)
+		case schemas.CacheReportInfo_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.CacheReportInfo_FileShareARN, v.FileShareARN)
+		case schemas.CacheReportInfo_InclusionFilters:
+			return deserializeCacheReportFilterList(d, schemas.CacheReportInfo_InclusionFilters, &v.InclusionFilters)
+		case schemas.CacheReportInfo_LocationARN:
+			v.LocationARN = new(string)
+			return d.ReadString(schemas.CacheReportInfo_LocationARN, v.LocationARN)
+		case schemas.CacheReportInfo_ReportCompletionPercent:
+			v.ReportCompletionPercent = new(int32)
+			return d.ReadInt32(schemas.CacheReportInfo_ReportCompletionPercent, v.ReportCompletionPercent)
+		case schemas.CacheReportInfo_ReportName:
+			v.ReportName = new(string)
+			return d.ReadString(schemas.CacheReportInfo_ReportName, v.ReportName)
+		case schemas.CacheReportInfo_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.CacheReportInfo_Role, v.Role)
+		case schemas.CacheReportInfo_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.CacheReportInfo_StartTime, v.StartTime)
+		case schemas.CacheReportInfo_Tags:
+			return deserializeTags(d, schemas.CacheReportInfo_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Describes Challenge-Handshake Authentication Protocol (CHAP) information that
 // supports authentication between your gateway and iSCSI initiators.
 type ChapInfo struct {
@@ -325,6 +681,46 @@ type ChapInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChapInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChapInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChapInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitiatorName != nil {
+		s.WriteString(schemas.ChapInfo_InitiatorName, *v.InitiatorName)
+	}
+	if v.SecretToAuthenticateInitiator != nil {
+		s.WriteString(schemas.ChapInfo_SecretToAuthenticateInitiator, *v.SecretToAuthenticateInitiator)
+	}
+	if v.SecretToAuthenticateTarget != nil {
+		s.WriteString(schemas.ChapInfo_SecretToAuthenticateTarget, *v.SecretToAuthenticateTarget)
+	}
+	if v.TargetARN != nil {
+		s.WriteString(schemas.ChapInfo_TargetARN, *v.TargetARN)
+	}
+}
+func (v *ChapInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChapInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChapInfo_InitiatorName:
+			v.InitiatorName = new(string)
+			return d.ReadString(schemas.ChapInfo_InitiatorName, v.InitiatorName)
+		case schemas.ChapInfo_SecretToAuthenticateInitiator:
+			v.SecretToAuthenticateInitiator = new(string)
+			return d.ReadString(schemas.ChapInfo_SecretToAuthenticateInitiator, v.SecretToAuthenticateInitiator)
+		case schemas.ChapInfo_SecretToAuthenticateTarget:
+			v.SecretToAuthenticateTarget = new(string)
+			return d.ReadString(schemas.ChapInfo_SecretToAuthenticateTarget, v.SecretToAuthenticateTarget)
+		case schemas.ChapInfo_TargetARN:
+			v.TargetARN = new(string)
+			return d.ReadString(schemas.ChapInfo_TargetARN, v.TargetARN)
+		}
+		return nil
+	})
+}
+
 // Lists iSCSI information about a VTL device.
 type DeviceiSCSIAttributes struct {
 
@@ -342,6 +738,44 @@ type DeviceiSCSIAttributes struct {
 	TargetARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeviceiSCSIAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceiSCSIAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceiSCSIAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChapEnabled != false {
+		s.WriteBool(schemas.DeviceiSCSIAttributes_ChapEnabled, v.ChapEnabled)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.DeviceiSCSIAttributes_NetworkInterfaceId, *v.NetworkInterfaceId)
+	}
+	if v.NetworkInterfacePort != 0 {
+		s.WriteInt32(schemas.DeviceiSCSIAttributes_NetworkInterfacePort, v.NetworkInterfacePort)
+	}
+	if v.TargetARN != nil {
+		s.WriteString(schemas.DeviceiSCSIAttributes_TargetARN, *v.TargetARN)
+	}
+}
+func (v *DeviceiSCSIAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceiSCSIAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceiSCSIAttributes_ChapEnabled:
+			return d.ReadBool(schemas.DeviceiSCSIAttributes_ChapEnabled, &v.ChapEnabled)
+		case schemas.DeviceiSCSIAttributes_NetworkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.DeviceiSCSIAttributes_NetworkInterfaceId, v.NetworkInterfaceId)
+		case schemas.DeviceiSCSIAttributes_NetworkInterfacePort:
+			return d.ReadInt32(schemas.DeviceiSCSIAttributes_NetworkInterfacePort, &v.NetworkInterfacePort)
+		case schemas.DeviceiSCSIAttributes_TargetARN:
+			v.TargetARN = new(string)
+			return d.ReadString(schemas.DeviceiSCSIAttributes_TargetARN, v.TargetARN)
+		}
+		return nil
+	})
 }
 
 // Represents a gateway's local disk.
@@ -379,6 +813,66 @@ type Disk struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Disk) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Disk)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Disk) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiskAllocationResource != nil {
+		s.WriteString(schemas.Disk_DiskAllocationResource, *v.DiskAllocationResource)
+	}
+	if v.DiskAllocationType != nil {
+		s.WriteString(schemas.Disk_DiskAllocationType, *v.DiskAllocationType)
+	}
+	serializeDiskAttributeList(s, schemas.Disk_DiskAttributeList, v.DiskAttributeList)
+	if v.DiskId != nil {
+		s.WriteString(schemas.Disk_DiskId, *v.DiskId)
+	}
+	if v.DiskNode != nil {
+		s.WriteString(schemas.Disk_DiskNode, *v.DiskNode)
+	}
+	if v.DiskPath != nil {
+		s.WriteString(schemas.Disk_DiskPath, *v.DiskPath)
+	}
+	if v.DiskSizeInBytes != 0 {
+		s.WriteInt64(schemas.Disk_DiskSizeInBytes, v.DiskSizeInBytes)
+	}
+	if v.DiskStatus != nil {
+		s.WriteString(schemas.Disk_DiskStatus, *v.DiskStatus)
+	}
+}
+func (v *Disk) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Disk, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Disk_DiskAllocationResource:
+			v.DiskAllocationResource = new(string)
+			return d.ReadString(schemas.Disk_DiskAllocationResource, v.DiskAllocationResource)
+		case schemas.Disk_DiskAllocationType:
+			v.DiskAllocationType = new(string)
+			return d.ReadString(schemas.Disk_DiskAllocationType, v.DiskAllocationType)
+		case schemas.Disk_DiskAttributeList:
+			return deserializeDiskAttributeList(d, schemas.Disk_DiskAttributeList, &v.DiskAttributeList)
+		case schemas.Disk_DiskId:
+			v.DiskId = new(string)
+			return d.ReadString(schemas.Disk_DiskId, v.DiskId)
+		case schemas.Disk_DiskNode:
+			v.DiskNode = new(string)
+			return d.ReadString(schemas.Disk_DiskNode, v.DiskNode)
+		case schemas.Disk_DiskPath:
+			v.DiskPath = new(string)
+			return d.ReadString(schemas.Disk_DiskPath, v.DiskPath)
+		case schemas.Disk_DiskSizeInBytes:
+			return d.ReadInt64(schemas.Disk_DiskSizeInBytes, &v.DiskSizeInBytes)
+		case schemas.Disk_DiskStatus:
+			v.DiskStatus = new(string)
+			return d.ReadString(schemas.Disk_DiskStatus, v.DiskStatus)
+		}
+		return nil
+	})
+}
+
 // Specifies network configuration information for the gateway associated with the
 // Amazon FSx file system.
 type EndpointNetworkConfiguration struct {
@@ -391,6 +885,25 @@ type EndpointNetworkConfiguration struct {
 	IpAddresses []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EndpointNetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndpointNetworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointNetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpAddressList(s, schemas.EndpointNetworkConfiguration_IpAddresses, v.IpAddresses)
+}
+func (v *EndpointNetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndpointNetworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndpointNetworkConfiguration_IpAddresses:
+			return deserializeIpAddressList(d, schemas.EndpointNetworkConfiguration_IpAddresses, &v.IpAddresses)
+		}
+		return nil
+	})
 }
 
 // Describes a file share. Only supported S3 File Gateway.
@@ -415,6 +928,56 @@ type FileShareInfo struct {
 	GatewayARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileShareInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileShareInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileShareInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.FileShareInfo_FileShareARN, *v.FileShareARN)
+	}
+	if v.FileShareId != nil {
+		s.WriteString(schemas.FileShareInfo_FileShareId, *v.FileShareId)
+	}
+	if v.FileShareStatus != nil {
+		s.WriteString(schemas.FileShareInfo_FileShareStatus, *v.FileShareStatus)
+	}
+	if v.FileShareType != "" {
+		s.WriteString(schemas.FileShareInfo_FileShareType, string(v.FileShareType))
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.FileShareInfo_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *FileShareInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileShareInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileShareInfo_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.FileShareInfo_FileShareARN, v.FileShareARN)
+		case schemas.FileShareInfo_FileShareId:
+			v.FileShareId = new(string)
+			return d.ReadString(schemas.FileShareInfo_FileShareId, v.FileShareId)
+		case schemas.FileShareInfo_FileShareStatus:
+			v.FileShareStatus = new(string)
+			return d.ReadString(schemas.FileShareInfo_FileShareStatus, v.FileShareStatus)
+		case schemas.FileShareInfo_FileShareType:
+			var ev string
+			if err := d.ReadString(schemas.FileShareInfo_FileShareType, &ev); err != nil {
+				return err
+			}
+			v.FileShareType = FileShareType(ev)
+			return nil
+		case schemas.FileShareInfo_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.FileShareInfo_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
 }
 
 // Describes the object returned by DescribeFileSystemAssociations that describes
@@ -462,6 +1025,74 @@ type FileSystemAssociationInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileSystemAssociationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemAssociationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemAssociationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.FileSystemAssociationInfo_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.FileSystemAssociationInfo_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointNetworkConfiguration != nil {
+		s.WriteStruct(schemas.FileSystemAssociationInfo_EndpointNetworkConfiguration)
+		v.EndpointNetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileSystemAssociationARN != nil {
+		s.WriteString(schemas.FileSystemAssociationInfo_FileSystemAssociationARN, *v.FileSystemAssociationARN)
+	}
+	if v.FileSystemAssociationStatus != nil {
+		s.WriteString(schemas.FileSystemAssociationInfo_FileSystemAssociationStatus, *v.FileSystemAssociationStatus)
+	}
+	serializeFileSystemAssociationStatusDetails(s, schemas.FileSystemAssociationInfo_FileSystemAssociationStatusDetails, v.FileSystemAssociationStatusDetails)
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.FileSystemAssociationInfo_GatewayARN, *v.GatewayARN)
+	}
+	if v.LocationARN != nil {
+		s.WriteString(schemas.FileSystemAssociationInfo_LocationARN, *v.LocationARN)
+	}
+	serializeTags(s, schemas.FileSystemAssociationInfo_Tags, v.Tags)
+}
+func (v *FileSystemAssociationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemAssociationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemAssociationInfo_AuditDestinationARN:
+			v.AuditDestinationARN = new(string)
+			return d.ReadString(schemas.FileSystemAssociationInfo_AuditDestinationARN, v.AuditDestinationARN)
+		case schemas.FileSystemAssociationInfo_CacheAttributes:
+			v.CacheAttributes = &CacheAttributes{}
+			return v.CacheAttributes.Deserialize(d)
+		case schemas.FileSystemAssociationInfo_EndpointNetworkConfiguration:
+			v.EndpointNetworkConfiguration = &EndpointNetworkConfiguration{}
+			return v.EndpointNetworkConfiguration.Deserialize(d)
+		case schemas.FileSystemAssociationInfo_FileSystemAssociationARN:
+			v.FileSystemAssociationARN = new(string)
+			return d.ReadString(schemas.FileSystemAssociationInfo_FileSystemAssociationARN, v.FileSystemAssociationARN)
+		case schemas.FileSystemAssociationInfo_FileSystemAssociationStatus:
+			v.FileSystemAssociationStatus = new(string)
+			return d.ReadString(schemas.FileSystemAssociationInfo_FileSystemAssociationStatus, v.FileSystemAssociationStatus)
+		case schemas.FileSystemAssociationInfo_FileSystemAssociationStatusDetails:
+			return deserializeFileSystemAssociationStatusDetails(d, schemas.FileSystemAssociationInfo_FileSystemAssociationStatusDetails, &v.FileSystemAssociationStatusDetails)
+		case schemas.FileSystemAssociationInfo_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.FileSystemAssociationInfo_GatewayARN, v.GatewayARN)
+		case schemas.FileSystemAssociationInfo_LocationARN:
+			v.LocationARN = new(string)
+			return d.ReadString(schemas.FileSystemAssociationInfo_LocationARN, v.LocationARN)
+		case schemas.FileSystemAssociationInfo_Tags:
+			return deserializeTags(d, schemas.FileSystemAssociationInfo_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Detailed information on file system association status.
 type FileSystemAssociationStatusDetail struct {
 
@@ -469,6 +1100,28 @@ type FileSystemAssociationStatusDetail struct {
 	ErrorCode *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileSystemAssociationStatusDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemAssociationStatusDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemAssociationStatusDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.FileSystemAssociationStatusDetail_ErrorCode, *v.ErrorCode)
+	}
+}
+func (v *FileSystemAssociationStatusDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemAssociationStatusDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemAssociationStatusDetail_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.FileSystemAssociationStatusDetail_ErrorCode, v.ErrorCode)
+		}
+		return nil
+	})
 }
 
 // Gets the summary returned by ListFileSystemAssociation , which is a summary of a
@@ -490,6 +1143,46 @@ type FileSystemAssociationSummary struct {
 	GatewayARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileSystemAssociationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemAssociationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemAssociationARN != nil {
+		s.WriteString(schemas.FileSystemAssociationSummary_FileSystemAssociationARN, *v.FileSystemAssociationARN)
+	}
+	if v.FileSystemAssociationId != nil {
+		s.WriteString(schemas.FileSystemAssociationSummary_FileSystemAssociationId, *v.FileSystemAssociationId)
+	}
+	if v.FileSystemAssociationStatus != nil {
+		s.WriteString(schemas.FileSystemAssociationSummary_FileSystemAssociationStatus, *v.FileSystemAssociationStatus)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.FileSystemAssociationSummary_GatewayARN, *v.GatewayARN)
+	}
+}
+func (v *FileSystemAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemAssociationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemAssociationSummary_FileSystemAssociationARN:
+			v.FileSystemAssociationARN = new(string)
+			return d.ReadString(schemas.FileSystemAssociationSummary_FileSystemAssociationARN, v.FileSystemAssociationARN)
+		case schemas.FileSystemAssociationSummary_FileSystemAssociationId:
+			v.FileSystemAssociationId = new(string)
+			return d.ReadString(schemas.FileSystemAssociationSummary_FileSystemAssociationId, v.FileSystemAssociationId)
+		case schemas.FileSystemAssociationSummary_FileSystemAssociationStatus:
+			v.FileSystemAssociationStatus = new(string)
+			return d.ReadString(schemas.FileSystemAssociationSummary_FileSystemAssociationStatus, v.FileSystemAssociationStatus)
+		case schemas.FileSystemAssociationSummary_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.FileSystemAssociationSummary_GatewayARN, v.GatewayARN)
+		}
+		return nil
+	})
 }
 
 // Describes a gateway object.
@@ -547,6 +1240,92 @@ type GatewayInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GatewayInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeprecationDate != nil {
+		s.WriteString(schemas.GatewayInfo_DeprecationDate, *v.DeprecationDate)
+	}
+	if v.Ec2InstanceId != nil {
+		s.WriteString(schemas.GatewayInfo_Ec2InstanceId, *v.Ec2InstanceId)
+	}
+	if v.Ec2InstanceRegion != nil {
+		s.WriteString(schemas.GatewayInfo_Ec2InstanceRegion, *v.Ec2InstanceRegion)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.GatewayInfo_GatewayARN, *v.GatewayARN)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.GatewayInfo_GatewayId, *v.GatewayId)
+	}
+	if v.GatewayName != nil {
+		s.WriteString(schemas.GatewayInfo_GatewayName, *v.GatewayName)
+	}
+	if v.GatewayOperationalState != nil {
+		s.WriteString(schemas.GatewayInfo_GatewayOperationalState, *v.GatewayOperationalState)
+	}
+	if v.GatewayType != nil {
+		s.WriteString(schemas.GatewayInfo_GatewayType, *v.GatewayType)
+	}
+	if v.HostEnvironment != "" {
+		s.WriteString(schemas.GatewayInfo_HostEnvironment, string(v.HostEnvironment))
+	}
+	if v.HostEnvironmentId != nil {
+		s.WriteString(schemas.GatewayInfo_HostEnvironmentId, *v.HostEnvironmentId)
+	}
+	if v.SoftwareVersion != nil {
+		s.WriteString(schemas.GatewayInfo_SoftwareVersion, *v.SoftwareVersion)
+	}
+}
+func (v *GatewayInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayInfo_DeprecationDate:
+			v.DeprecationDate = new(string)
+			return d.ReadString(schemas.GatewayInfo_DeprecationDate, v.DeprecationDate)
+		case schemas.GatewayInfo_Ec2InstanceId:
+			v.Ec2InstanceId = new(string)
+			return d.ReadString(schemas.GatewayInfo_Ec2InstanceId, v.Ec2InstanceId)
+		case schemas.GatewayInfo_Ec2InstanceRegion:
+			v.Ec2InstanceRegion = new(string)
+			return d.ReadString(schemas.GatewayInfo_Ec2InstanceRegion, v.Ec2InstanceRegion)
+		case schemas.GatewayInfo_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.GatewayInfo_GatewayARN, v.GatewayARN)
+		case schemas.GatewayInfo_GatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.GatewayInfo_GatewayId, v.GatewayId)
+		case schemas.GatewayInfo_GatewayName:
+			v.GatewayName = new(string)
+			return d.ReadString(schemas.GatewayInfo_GatewayName, v.GatewayName)
+		case schemas.GatewayInfo_GatewayOperationalState:
+			v.GatewayOperationalState = new(string)
+			return d.ReadString(schemas.GatewayInfo_GatewayOperationalState, v.GatewayOperationalState)
+		case schemas.GatewayInfo_GatewayType:
+			v.GatewayType = new(string)
+			return d.ReadString(schemas.GatewayInfo_GatewayType, v.GatewayType)
+		case schemas.GatewayInfo_HostEnvironment:
+			var ev string
+			if err := d.ReadString(schemas.GatewayInfo_HostEnvironment, &ev); err != nil {
+				return err
+			}
+			v.HostEnvironment = HostEnvironment(ev)
+			return nil
+		case schemas.GatewayInfo_HostEnvironmentId:
+			v.HostEnvironmentId = new(string)
+			return d.ReadString(schemas.GatewayInfo_HostEnvironmentId, v.HostEnvironmentId)
+		case schemas.GatewayInfo_SoftwareVersion:
+			v.SoftwareVersion = new(string)
+			return d.ReadString(schemas.GatewayInfo_SoftwareVersion, v.SoftwareVersion)
+		}
+		return nil
+	})
+}
+
 // Describes a gateway's network interface.
 type NetworkInterface struct {
 
@@ -565,6 +1344,40 @@ type NetworkInterface struct {
 	MacAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkInterface) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkInterface) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.NetworkInterface_Ipv4Address, *v.Ipv4Address)
+	}
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.NetworkInterface_Ipv6Address, *v.Ipv6Address)
+	}
+	if v.MacAddress != nil {
+		s.WriteString(schemas.NetworkInterface_MacAddress, *v.MacAddress)
+	}
+}
+func (v *NetworkInterface) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkInterface_Ipv4Address:
+			v.Ipv4Address = new(string)
+			return d.ReadString(schemas.NetworkInterface_Ipv4Address, v.Ipv4Address)
+		case schemas.NetworkInterface_Ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.NetworkInterface_Ipv6Address, v.Ipv6Address)
+		case schemas.NetworkInterface_MacAddress:
+			v.MacAddress = new(string)
+			return d.ReadString(schemas.NetworkInterface_MacAddress, v.MacAddress)
+		}
+		return nil
+	})
 }
 
 // Describes Network File System (NFS) file share default values. Files and
@@ -592,6 +1405,46 @@ type NFSFileShareDefaults struct {
 	OwnerId *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *NFSFileShareDefaults) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NFSFileShareDefaults)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NFSFileShareDefaults) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryMode != nil {
+		s.WriteString(schemas.NFSFileShareDefaults_DirectoryMode, *v.DirectoryMode)
+	}
+	if v.FileMode != nil {
+		s.WriteString(schemas.NFSFileShareDefaults_FileMode, *v.FileMode)
+	}
+	if v.GroupId != nil {
+		s.WriteInt64(schemas.NFSFileShareDefaults_GroupId, *v.GroupId)
+	}
+	if v.OwnerId != nil {
+		s.WriteInt64(schemas.NFSFileShareDefaults_OwnerId, *v.OwnerId)
+	}
+}
+func (v *NFSFileShareDefaults) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NFSFileShareDefaults, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NFSFileShareDefaults_DirectoryMode:
+			v.DirectoryMode = new(string)
+			return d.ReadString(schemas.NFSFileShareDefaults_DirectoryMode, v.DirectoryMode)
+		case schemas.NFSFileShareDefaults_FileMode:
+			v.FileMode = new(string)
+			return d.ReadString(schemas.NFSFileShareDefaults_FileMode, v.FileMode)
+		case schemas.NFSFileShareDefaults_GroupId:
+			v.GroupId = new(int64)
+			return d.ReadInt64(schemas.NFSFileShareDefaults_GroupId, v.GroupId)
+		case schemas.NFSFileShareDefaults_OwnerId:
+			v.OwnerId = new(int64)
+			return d.ReadInt64(schemas.NFSFileShareDefaults_OwnerId, v.OwnerId)
+		}
+		return nil
+	})
 }
 
 // The Unix file permissions and ownership information assigned, by default, to
@@ -798,6 +1651,177 @@ type NFSFileShareInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NFSFileShareInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NFSFileShareInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NFSFileShareInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.NFSFileShareInfo_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.BucketRegion != nil {
+		s.WriteString(schemas.NFSFileShareInfo_BucketRegion, *v.BucketRegion)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.NFSFileShareInfo_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFileShareClientList(s, schemas.NFSFileShareInfo_ClientList, v.ClientList)
+	if v.DefaultStorageClass != nil {
+		s.WriteString(schemas.NFSFileShareInfo_DefaultStorageClass, *v.DefaultStorageClass)
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.NFSFileShareInfo_EncryptionType, string(v.EncryptionType))
+	}
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.NFSFileShareInfo_FileShareARN, *v.FileShareARN)
+	}
+	if v.FileShareId != nil {
+		s.WriteString(schemas.NFSFileShareInfo_FileShareId, *v.FileShareId)
+	}
+	if v.FileShareName != nil {
+		s.WriteString(schemas.NFSFileShareInfo_FileShareName, *v.FileShareName)
+	}
+	if v.FileShareStatus != nil {
+		s.WriteString(schemas.NFSFileShareInfo_FileShareStatus, *v.FileShareStatus)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.NFSFileShareInfo_GatewayARN, *v.GatewayARN)
+	}
+	if v.GuessMIMETypeEnabled != nil {
+		s.WriteBool(schemas.NFSFileShareInfo_GuessMIMETypeEnabled, *v.GuessMIMETypeEnabled)
+	}
+	if v.KMSEncrypted != false {
+		s.WriteBool(schemas.NFSFileShareInfo_KMSEncrypted, v.KMSEncrypted)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.NFSFileShareInfo_KMSKey, *v.KMSKey)
+	}
+	if v.LocationARN != nil {
+		s.WriteString(schemas.NFSFileShareInfo_LocationARN, *v.LocationARN)
+	}
+	if v.NFSFileShareDefaults != nil {
+		s.WriteStruct(schemas.NFSFileShareInfo_NFSFileShareDefaults)
+		v.NFSFileShareDefaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationPolicy != nil {
+		s.WriteString(schemas.NFSFileShareInfo_NotificationPolicy, *v.NotificationPolicy)
+	}
+	if v.ObjectACL != "" {
+		s.WriteString(schemas.NFSFileShareInfo_ObjectACL, string(v.ObjectACL))
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.NFSFileShareInfo_Path, *v.Path)
+	}
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.NFSFileShareInfo_ReadOnly, *v.ReadOnly)
+	}
+	if v.RequesterPays != nil {
+		s.WriteBool(schemas.NFSFileShareInfo_RequesterPays, *v.RequesterPays)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.NFSFileShareInfo_Role, *v.Role)
+	}
+	if v.Squash != nil {
+		s.WriteString(schemas.NFSFileShareInfo_Squash, *v.Squash)
+	}
+	serializeTags(s, schemas.NFSFileShareInfo_Tags, v.Tags)
+	if v.VPCEndpointDNSName != nil {
+		s.WriteString(schemas.NFSFileShareInfo_VPCEndpointDNSName, *v.VPCEndpointDNSName)
+	}
+}
+func (v *NFSFileShareInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NFSFileShareInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NFSFileShareInfo_AuditDestinationARN:
+			v.AuditDestinationARN = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_AuditDestinationARN, v.AuditDestinationARN)
+		case schemas.NFSFileShareInfo_BucketRegion:
+			v.BucketRegion = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_BucketRegion, v.BucketRegion)
+		case schemas.NFSFileShareInfo_CacheAttributes:
+			v.CacheAttributes = &CacheAttributes{}
+			return v.CacheAttributes.Deserialize(d)
+		case schemas.NFSFileShareInfo_ClientList:
+			return deserializeFileShareClientList(d, schemas.NFSFileShareInfo_ClientList, &v.ClientList)
+		case schemas.NFSFileShareInfo_DefaultStorageClass:
+			v.DefaultStorageClass = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_DefaultStorageClass, v.DefaultStorageClass)
+		case schemas.NFSFileShareInfo_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.NFSFileShareInfo_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = EncryptionType(ev)
+			return nil
+		case schemas.NFSFileShareInfo_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_FileShareARN, v.FileShareARN)
+		case schemas.NFSFileShareInfo_FileShareId:
+			v.FileShareId = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_FileShareId, v.FileShareId)
+		case schemas.NFSFileShareInfo_FileShareName:
+			v.FileShareName = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_FileShareName, v.FileShareName)
+		case schemas.NFSFileShareInfo_FileShareStatus:
+			v.FileShareStatus = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_FileShareStatus, v.FileShareStatus)
+		case schemas.NFSFileShareInfo_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_GatewayARN, v.GatewayARN)
+		case schemas.NFSFileShareInfo_GuessMIMETypeEnabled:
+			v.GuessMIMETypeEnabled = new(bool)
+			return d.ReadBool(schemas.NFSFileShareInfo_GuessMIMETypeEnabled, v.GuessMIMETypeEnabled)
+		case schemas.NFSFileShareInfo_KMSEncrypted:
+			return d.ReadBool(schemas.NFSFileShareInfo_KMSEncrypted, &v.KMSEncrypted)
+		case schemas.NFSFileShareInfo_KMSKey:
+			v.KMSKey = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_KMSKey, v.KMSKey)
+		case schemas.NFSFileShareInfo_LocationARN:
+			v.LocationARN = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_LocationARN, v.LocationARN)
+		case schemas.NFSFileShareInfo_NFSFileShareDefaults:
+			v.NFSFileShareDefaults = &NFSFileShareDefaults{}
+			return v.NFSFileShareDefaults.Deserialize(d)
+		case schemas.NFSFileShareInfo_NotificationPolicy:
+			v.NotificationPolicy = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_NotificationPolicy, v.NotificationPolicy)
+		case schemas.NFSFileShareInfo_ObjectACL:
+			var ev string
+			if err := d.ReadString(schemas.NFSFileShareInfo_ObjectACL, &ev); err != nil {
+				return err
+			}
+			v.ObjectACL = ObjectACL(ev)
+			return nil
+		case schemas.NFSFileShareInfo_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_Path, v.Path)
+		case schemas.NFSFileShareInfo_ReadOnly:
+			v.ReadOnly = new(bool)
+			return d.ReadBool(schemas.NFSFileShareInfo_ReadOnly, v.ReadOnly)
+		case schemas.NFSFileShareInfo_RequesterPays:
+			v.RequesterPays = new(bool)
+			return d.ReadBool(schemas.NFSFileShareInfo_RequesterPays, v.RequesterPays)
+		case schemas.NFSFileShareInfo_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_Role, v.Role)
+		case schemas.NFSFileShareInfo_Squash:
+			v.Squash = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_Squash, v.Squash)
+		case schemas.NFSFileShareInfo_Tags:
+			return deserializeTags(d, schemas.NFSFileShareInfo_Tags, &v.Tags)
+		case schemas.NFSFileShareInfo_VPCEndpointDNSName:
+			v.VPCEndpointDNSName = new(string)
+			return d.ReadString(schemas.NFSFileShareInfo_VPCEndpointDNSName, v.VPCEndpointDNSName)
+		}
+		return nil
+	})
+}
+
 // Describes a custom tape pool.
 type PoolInfo struct {
 
@@ -831,6 +1855,70 @@ type PoolInfo struct {
 	StorageClass TapeStorageClass
 
 	noSmithyDocumentSerde
+}
+
+func (v *PoolInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PoolInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PoolInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolARN != nil {
+		s.WriteString(schemas.PoolInfo_PoolARN, *v.PoolARN)
+	}
+	if v.PoolName != nil {
+		s.WriteString(schemas.PoolInfo_PoolName, *v.PoolName)
+	}
+	if v.PoolStatus != "" {
+		s.WriteString(schemas.PoolInfo_PoolStatus, string(v.PoolStatus))
+	}
+	if v.RetentionLockTimeInDays != nil {
+		s.WriteInt32(schemas.PoolInfo_RetentionLockTimeInDays, *v.RetentionLockTimeInDays)
+	}
+	if v.RetentionLockType != "" {
+		s.WriteString(schemas.PoolInfo_RetentionLockType, string(v.RetentionLockType))
+	}
+	if v.StorageClass != "" {
+		s.WriteString(schemas.PoolInfo_StorageClass, string(v.StorageClass))
+	}
+}
+func (v *PoolInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PoolInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PoolInfo_PoolARN:
+			v.PoolARN = new(string)
+			return d.ReadString(schemas.PoolInfo_PoolARN, v.PoolARN)
+		case schemas.PoolInfo_PoolName:
+			v.PoolName = new(string)
+			return d.ReadString(schemas.PoolInfo_PoolName, v.PoolName)
+		case schemas.PoolInfo_PoolStatus:
+			var ev string
+			if err := d.ReadString(schemas.PoolInfo_PoolStatus, &ev); err != nil {
+				return err
+			}
+			v.PoolStatus = PoolStatus(ev)
+			return nil
+		case schemas.PoolInfo_RetentionLockTimeInDays:
+			v.RetentionLockTimeInDays = new(int32)
+			return d.ReadInt32(schemas.PoolInfo_RetentionLockTimeInDays, v.RetentionLockTimeInDays)
+		case schemas.PoolInfo_RetentionLockType:
+			var ev string
+			if err := d.ReadString(schemas.PoolInfo_RetentionLockType, &ev); err != nil {
+				return err
+			}
+			v.RetentionLockType = RetentionLockType(ev)
+			return nil
+		case schemas.PoolInfo_StorageClass:
+			var ev string
+			if err := d.ReadString(schemas.PoolInfo_StorageClass, &ev); err != nil {
+				return err
+			}
+			v.StorageClass = TapeStorageClass(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Windows file permissions and ownership information assigned, by default, to
@@ -1065,6 +2153,203 @@ type SMBFileShareInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SMBFileShareInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMBFileShareInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMBFileShareInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessBasedEnumeration != nil {
+		s.WriteBool(schemas.SMBFileShareInfo_AccessBasedEnumeration, *v.AccessBasedEnumeration)
+	}
+	serializeUserList(s, schemas.SMBFileShareInfo_AdminUserList, v.AdminUserList)
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.SMBFileShareInfo_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.Authentication != nil {
+		s.WriteString(schemas.SMBFileShareInfo_Authentication, *v.Authentication)
+	}
+	if v.BucketRegion != nil {
+		s.WriteString(schemas.SMBFileShareInfo_BucketRegion, *v.BucketRegion)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.SMBFileShareInfo_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CaseSensitivity != "" {
+		s.WriteString(schemas.SMBFileShareInfo_CaseSensitivity, string(v.CaseSensitivity))
+	}
+	if v.DefaultStorageClass != nil {
+		s.WriteString(schemas.SMBFileShareInfo_DefaultStorageClass, *v.DefaultStorageClass)
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.SMBFileShareInfo_EncryptionType, string(v.EncryptionType))
+	}
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.SMBFileShareInfo_FileShareARN, *v.FileShareARN)
+	}
+	if v.FileShareId != nil {
+		s.WriteString(schemas.SMBFileShareInfo_FileShareId, *v.FileShareId)
+	}
+	if v.FileShareName != nil {
+		s.WriteString(schemas.SMBFileShareInfo_FileShareName, *v.FileShareName)
+	}
+	if v.FileShareStatus != nil {
+		s.WriteString(schemas.SMBFileShareInfo_FileShareStatus, *v.FileShareStatus)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.SMBFileShareInfo_GatewayARN, *v.GatewayARN)
+	}
+	if v.GuessMIMETypeEnabled != nil {
+		s.WriteBool(schemas.SMBFileShareInfo_GuessMIMETypeEnabled, *v.GuessMIMETypeEnabled)
+	}
+	serializeUserList(s, schemas.SMBFileShareInfo_InvalidUserList, v.InvalidUserList)
+	if v.KMSEncrypted != false {
+		s.WriteBool(schemas.SMBFileShareInfo_KMSEncrypted, v.KMSEncrypted)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.SMBFileShareInfo_KMSKey, *v.KMSKey)
+	}
+	if v.LocationARN != nil {
+		s.WriteString(schemas.SMBFileShareInfo_LocationARN, *v.LocationARN)
+	}
+	if v.NotificationPolicy != nil {
+		s.WriteString(schemas.SMBFileShareInfo_NotificationPolicy, *v.NotificationPolicy)
+	}
+	if v.ObjectACL != "" {
+		s.WriteString(schemas.SMBFileShareInfo_ObjectACL, string(v.ObjectACL))
+	}
+	if v.OplocksEnabled != nil {
+		s.WriteBool(schemas.SMBFileShareInfo_OplocksEnabled, *v.OplocksEnabled)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.SMBFileShareInfo_Path, *v.Path)
+	}
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.SMBFileShareInfo_ReadOnly, *v.ReadOnly)
+	}
+	if v.RequesterPays != nil {
+		s.WriteBool(schemas.SMBFileShareInfo_RequesterPays, *v.RequesterPays)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.SMBFileShareInfo_Role, *v.Role)
+	}
+	if v.SMBACLEnabled != nil {
+		s.WriteBool(schemas.SMBFileShareInfo_SMBACLEnabled, *v.SMBACLEnabled)
+	}
+	serializeTags(s, schemas.SMBFileShareInfo_Tags, v.Tags)
+	if v.VPCEndpointDNSName != nil {
+		s.WriteString(schemas.SMBFileShareInfo_VPCEndpointDNSName, *v.VPCEndpointDNSName)
+	}
+	serializeUserList(s, schemas.SMBFileShareInfo_ValidUserList, v.ValidUserList)
+}
+func (v *SMBFileShareInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMBFileShareInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMBFileShareInfo_AccessBasedEnumeration:
+			v.AccessBasedEnumeration = new(bool)
+			return d.ReadBool(schemas.SMBFileShareInfo_AccessBasedEnumeration, v.AccessBasedEnumeration)
+		case schemas.SMBFileShareInfo_AdminUserList:
+			return deserializeUserList(d, schemas.SMBFileShareInfo_AdminUserList, &v.AdminUserList)
+		case schemas.SMBFileShareInfo_AuditDestinationARN:
+			v.AuditDestinationARN = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_AuditDestinationARN, v.AuditDestinationARN)
+		case schemas.SMBFileShareInfo_Authentication:
+			v.Authentication = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_Authentication, v.Authentication)
+		case schemas.SMBFileShareInfo_BucketRegion:
+			v.BucketRegion = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_BucketRegion, v.BucketRegion)
+		case schemas.SMBFileShareInfo_CacheAttributes:
+			v.CacheAttributes = &CacheAttributes{}
+			return v.CacheAttributes.Deserialize(d)
+		case schemas.SMBFileShareInfo_CaseSensitivity:
+			var ev string
+			if err := d.ReadString(schemas.SMBFileShareInfo_CaseSensitivity, &ev); err != nil {
+				return err
+			}
+			v.CaseSensitivity = CaseSensitivity(ev)
+			return nil
+		case schemas.SMBFileShareInfo_DefaultStorageClass:
+			v.DefaultStorageClass = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_DefaultStorageClass, v.DefaultStorageClass)
+		case schemas.SMBFileShareInfo_EncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.SMBFileShareInfo_EncryptionType, &ev); err != nil {
+				return err
+			}
+			v.EncryptionType = EncryptionType(ev)
+			return nil
+		case schemas.SMBFileShareInfo_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_FileShareARN, v.FileShareARN)
+		case schemas.SMBFileShareInfo_FileShareId:
+			v.FileShareId = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_FileShareId, v.FileShareId)
+		case schemas.SMBFileShareInfo_FileShareName:
+			v.FileShareName = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_FileShareName, v.FileShareName)
+		case schemas.SMBFileShareInfo_FileShareStatus:
+			v.FileShareStatus = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_FileShareStatus, v.FileShareStatus)
+		case schemas.SMBFileShareInfo_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_GatewayARN, v.GatewayARN)
+		case schemas.SMBFileShareInfo_GuessMIMETypeEnabled:
+			v.GuessMIMETypeEnabled = new(bool)
+			return d.ReadBool(schemas.SMBFileShareInfo_GuessMIMETypeEnabled, v.GuessMIMETypeEnabled)
+		case schemas.SMBFileShareInfo_InvalidUserList:
+			return deserializeUserList(d, schemas.SMBFileShareInfo_InvalidUserList, &v.InvalidUserList)
+		case schemas.SMBFileShareInfo_KMSEncrypted:
+			return d.ReadBool(schemas.SMBFileShareInfo_KMSEncrypted, &v.KMSEncrypted)
+		case schemas.SMBFileShareInfo_KMSKey:
+			v.KMSKey = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_KMSKey, v.KMSKey)
+		case schemas.SMBFileShareInfo_LocationARN:
+			v.LocationARN = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_LocationARN, v.LocationARN)
+		case schemas.SMBFileShareInfo_NotificationPolicy:
+			v.NotificationPolicy = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_NotificationPolicy, v.NotificationPolicy)
+		case schemas.SMBFileShareInfo_ObjectACL:
+			var ev string
+			if err := d.ReadString(schemas.SMBFileShareInfo_ObjectACL, &ev); err != nil {
+				return err
+			}
+			v.ObjectACL = ObjectACL(ev)
+			return nil
+		case schemas.SMBFileShareInfo_OplocksEnabled:
+			v.OplocksEnabled = new(bool)
+			return d.ReadBool(schemas.SMBFileShareInfo_OplocksEnabled, v.OplocksEnabled)
+		case schemas.SMBFileShareInfo_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_Path, v.Path)
+		case schemas.SMBFileShareInfo_ReadOnly:
+			v.ReadOnly = new(bool)
+			return d.ReadBool(schemas.SMBFileShareInfo_ReadOnly, v.ReadOnly)
+		case schemas.SMBFileShareInfo_RequesterPays:
+			v.RequesterPays = new(bool)
+			return d.ReadBool(schemas.SMBFileShareInfo_RequesterPays, v.RequesterPays)
+		case schemas.SMBFileShareInfo_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_Role, v.Role)
+		case schemas.SMBFileShareInfo_SMBACLEnabled:
+			v.SMBACLEnabled = new(bool)
+			return d.ReadBool(schemas.SMBFileShareInfo_SMBACLEnabled, v.SMBACLEnabled)
+		case schemas.SMBFileShareInfo_Tags:
+			return deserializeTags(d, schemas.SMBFileShareInfo_Tags, &v.Tags)
+		case schemas.SMBFileShareInfo_VPCEndpointDNSName:
+			v.VPCEndpointDNSName = new(string)
+			return d.ReadString(schemas.SMBFileShareInfo_VPCEndpointDNSName, v.VPCEndpointDNSName)
+		case schemas.SMBFileShareInfo_ValidUserList:
+			return deserializeUserList(d, schemas.SMBFileShareInfo_ValidUserList, &v.ValidUserList)
+		}
+		return nil
+	})
+}
+
 // A list of Active Directory users and groups that have special permissions for
 // SMB file shares on the gateway.
 type SMBLocalGroups struct {
@@ -1078,6 +2363,25 @@ type SMBLocalGroups struct {
 	GatewayAdmins []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SMBLocalGroups) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SMBLocalGroups)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SMBLocalGroups) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserList(s, schemas.SMBLocalGroups_GatewayAdmins, v.GatewayAdmins)
+}
+func (v *SMBLocalGroups) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SMBLocalGroups, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SMBLocalGroups_GatewayAdmins:
+			return deserializeUserList(d, schemas.SMBLocalGroups_GatewayAdmins, &v.GatewayAdmins)
+		}
+		return nil
+	})
 }
 
 // A set of variables indicating the software update preferences for the gateway.
@@ -1097,6 +2401,32 @@ type SoftwareUpdatePreferences struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SoftwareUpdatePreferences) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SoftwareUpdatePreferences)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SoftwareUpdatePreferences) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutomaticUpdatePolicy != "" {
+		s.WriteString(schemas.SoftwareUpdatePreferences_AutomaticUpdatePolicy, string(v.AutomaticUpdatePolicy))
+	}
+}
+func (v *SoftwareUpdatePreferences) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SoftwareUpdatePreferences, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SoftwareUpdatePreferences_AutomaticUpdatePolicy:
+			var ev string
+			if err := d.ReadString(schemas.SoftwareUpdatePreferences_AutomaticUpdatePolicy, &ev); err != nil {
+				return err
+			}
+			v.AutomaticUpdatePolicy = AutomaticUpdatePolicy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides additional information about an error that was returned by the
 // service. See the errorCode and errorDetails members for more information about
 // the error.
@@ -1109,6 +2439,35 @@ type StorageGatewayError struct {
 	ErrorDetails map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StorageGatewayError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageGatewayError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageGatewayError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.StorageGatewayError_errorCode, string(v.ErrorCode))
+	}
+	serializeerrorDetails(s, schemas.StorageGatewayError_errorDetails, v.ErrorDetails)
+}
+func (v *StorageGatewayError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageGatewayError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageGatewayError_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.StorageGatewayError_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = ErrorCode(ev)
+			return nil
+		case schemas.StorageGatewayError_errorDetails:
+			return deserializeerrorDetails(d, schemas.StorageGatewayError_errorDetails, &v.ErrorDetails)
+		}
+		return nil
+	})
 }
 
 // Describes an iSCSI stored volume.
@@ -1191,6 +2550,112 @@ type StorediSCSIVolume struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StorediSCSIVolume) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorediSCSIVolume)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorediSCSIVolume) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.StorediSCSIVolume_CreatedDate, *v.CreatedDate)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.StorediSCSIVolume_KMSKey, *v.KMSKey)
+	}
+	if v.PreservedExistingData != false {
+		s.WriteBool(schemas.StorediSCSIVolume_PreservedExistingData, v.PreservedExistingData)
+	}
+	if v.SourceSnapshotId != nil {
+		s.WriteString(schemas.StorediSCSIVolume_SourceSnapshotId, *v.SourceSnapshotId)
+	}
+	if v.TargetName != nil {
+		s.WriteString(schemas.StorediSCSIVolume_TargetName, *v.TargetName)
+	}
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.StorediSCSIVolume_VolumeARN, *v.VolumeARN)
+	}
+	if v.VolumeAttachmentStatus != nil {
+		s.WriteString(schemas.StorediSCSIVolume_VolumeAttachmentStatus, *v.VolumeAttachmentStatus)
+	}
+	if v.VolumeDiskId != nil {
+		s.WriteString(schemas.StorediSCSIVolume_VolumeDiskId, *v.VolumeDiskId)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.StorediSCSIVolume_VolumeId, *v.VolumeId)
+	}
+	if v.VolumeProgress != nil {
+		s.WriteFloat64(schemas.StorediSCSIVolume_VolumeProgress, *v.VolumeProgress)
+	}
+	if v.VolumeSizeInBytes != 0 {
+		s.WriteInt64(schemas.StorediSCSIVolume_VolumeSizeInBytes, v.VolumeSizeInBytes)
+	}
+	if v.VolumeStatus != nil {
+		s.WriteString(schemas.StorediSCSIVolume_VolumeStatus, *v.VolumeStatus)
+	}
+	if v.VolumeType != nil {
+		s.WriteString(schemas.StorediSCSIVolume_VolumeType, *v.VolumeType)
+	}
+	if v.VolumeUsedInBytes != nil {
+		s.WriteInt64(schemas.StorediSCSIVolume_VolumeUsedInBytes, *v.VolumeUsedInBytes)
+	}
+	if v.VolumeiSCSIAttributes != nil {
+		s.WriteStruct(schemas.StorediSCSIVolume_VolumeiSCSIAttributes)
+		v.VolumeiSCSIAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StorediSCSIVolume) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorediSCSIVolume, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorediSCSIVolume_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.StorediSCSIVolume_CreatedDate, v.CreatedDate)
+		case schemas.StorediSCSIVolume_KMSKey:
+			v.KMSKey = new(string)
+			return d.ReadString(schemas.StorediSCSIVolume_KMSKey, v.KMSKey)
+		case schemas.StorediSCSIVolume_PreservedExistingData:
+			return d.ReadBool(schemas.StorediSCSIVolume_PreservedExistingData, &v.PreservedExistingData)
+		case schemas.StorediSCSIVolume_SourceSnapshotId:
+			v.SourceSnapshotId = new(string)
+			return d.ReadString(schemas.StorediSCSIVolume_SourceSnapshotId, v.SourceSnapshotId)
+		case schemas.StorediSCSIVolume_TargetName:
+			v.TargetName = new(string)
+			return d.ReadString(schemas.StorediSCSIVolume_TargetName, v.TargetName)
+		case schemas.StorediSCSIVolume_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.StorediSCSIVolume_VolumeARN, v.VolumeARN)
+		case schemas.StorediSCSIVolume_VolumeAttachmentStatus:
+			v.VolumeAttachmentStatus = new(string)
+			return d.ReadString(schemas.StorediSCSIVolume_VolumeAttachmentStatus, v.VolumeAttachmentStatus)
+		case schemas.StorediSCSIVolume_VolumeDiskId:
+			v.VolumeDiskId = new(string)
+			return d.ReadString(schemas.StorediSCSIVolume_VolumeDiskId, v.VolumeDiskId)
+		case schemas.StorediSCSIVolume_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.StorediSCSIVolume_VolumeId, v.VolumeId)
+		case schemas.StorediSCSIVolume_VolumeProgress:
+			v.VolumeProgress = new(float64)
+			return d.ReadFloat64(schemas.StorediSCSIVolume_VolumeProgress, v.VolumeProgress)
+		case schemas.StorediSCSIVolume_VolumeSizeInBytes:
+			return d.ReadInt64(schemas.StorediSCSIVolume_VolumeSizeInBytes, &v.VolumeSizeInBytes)
+		case schemas.StorediSCSIVolume_VolumeStatus:
+			v.VolumeStatus = new(string)
+			return d.ReadString(schemas.StorediSCSIVolume_VolumeStatus, v.VolumeStatus)
+		case schemas.StorediSCSIVolume_VolumeType:
+			v.VolumeType = new(string)
+			return d.ReadString(schemas.StorediSCSIVolume_VolumeType, v.VolumeType)
+		case schemas.StorediSCSIVolume_VolumeUsedInBytes:
+			v.VolumeUsedInBytes = new(int64)
+			return d.ReadInt64(schemas.StorediSCSIVolume_VolumeUsedInBytes, v.VolumeUsedInBytes)
+		case schemas.StorediSCSIVolume_VolumeiSCSIAttributes:
+			v.VolumeiSCSIAttributes = &VolumeiSCSIAttributes{}
+			return v.VolumeiSCSIAttributes.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A key-value pair that helps you manage, filter, and search for your resource.
 // Allowed characters: letters, white space, and numbers, representable in UTF-8,
 // and the following characters: + - = . _ : /.
@@ -1207,6 +2672,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes a virtual tape object.
@@ -1264,6 +2757,99 @@ type Tape struct {
 	Worm bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tape) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tape)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tape) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KMSKey != nil {
+		s.WriteString(schemas.Tape_KMSKey, *v.KMSKey)
+	}
+	if v.PoolEntryDate != nil {
+		s.WriteTime(schemas.Tape_PoolEntryDate, *v.PoolEntryDate)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.Tape_PoolId, *v.PoolId)
+	}
+	if v.Progress != nil {
+		s.WriteFloat64(schemas.Tape_Progress, *v.Progress)
+	}
+	if v.RetentionStartDate != nil {
+		s.WriteTime(schemas.Tape_RetentionStartDate, *v.RetentionStartDate)
+	}
+	if v.TapeARN != nil {
+		s.WriteString(schemas.Tape_TapeARN, *v.TapeARN)
+	}
+	if v.TapeBarcode != nil {
+		s.WriteString(schemas.Tape_TapeBarcode, *v.TapeBarcode)
+	}
+	if v.TapeCreatedDate != nil {
+		s.WriteTime(schemas.Tape_TapeCreatedDate, *v.TapeCreatedDate)
+	}
+	if v.TapeSizeInBytes != nil {
+		s.WriteInt64(schemas.Tape_TapeSizeInBytes, *v.TapeSizeInBytes)
+	}
+	if v.TapeStatus != nil {
+		s.WriteString(schemas.Tape_TapeStatus, *v.TapeStatus)
+	}
+	if v.TapeUsedInBytes != nil {
+		s.WriteInt64(schemas.Tape_TapeUsedInBytes, *v.TapeUsedInBytes)
+	}
+	if v.VTLDevice != nil {
+		s.WriteString(schemas.Tape_VTLDevice, *v.VTLDevice)
+	}
+	if v.Worm != false {
+		s.WriteBool(schemas.Tape_Worm, v.Worm)
+	}
+}
+func (v *Tape) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tape, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tape_KMSKey:
+			v.KMSKey = new(string)
+			return d.ReadString(schemas.Tape_KMSKey, v.KMSKey)
+		case schemas.Tape_PoolEntryDate:
+			v.PoolEntryDate = new(time.Time)
+			return d.ReadTime(schemas.Tape_PoolEntryDate, v.PoolEntryDate)
+		case schemas.Tape_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.Tape_PoolId, v.PoolId)
+		case schemas.Tape_Progress:
+			v.Progress = new(float64)
+			return d.ReadFloat64(schemas.Tape_Progress, v.Progress)
+		case schemas.Tape_RetentionStartDate:
+			v.RetentionStartDate = new(time.Time)
+			return d.ReadTime(schemas.Tape_RetentionStartDate, v.RetentionStartDate)
+		case schemas.Tape_TapeARN:
+			v.TapeARN = new(string)
+			return d.ReadString(schemas.Tape_TapeARN, v.TapeARN)
+		case schemas.Tape_TapeBarcode:
+			v.TapeBarcode = new(string)
+			return d.ReadString(schemas.Tape_TapeBarcode, v.TapeBarcode)
+		case schemas.Tape_TapeCreatedDate:
+			v.TapeCreatedDate = new(time.Time)
+			return d.ReadTime(schemas.Tape_TapeCreatedDate, v.TapeCreatedDate)
+		case schemas.Tape_TapeSizeInBytes:
+			v.TapeSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.Tape_TapeSizeInBytes, v.TapeSizeInBytes)
+		case schemas.Tape_TapeStatus:
+			v.TapeStatus = new(string)
+			return d.ReadString(schemas.Tape_TapeStatus, v.TapeStatus)
+		case schemas.Tape_TapeUsedInBytes:
+			v.TapeUsedInBytes = new(int64)
+			return d.ReadInt64(schemas.Tape_TapeUsedInBytes, v.TapeUsedInBytes)
+		case schemas.Tape_VTLDevice:
+			v.VTLDevice = new(string)
+			return d.ReadString(schemas.Tape_VTLDevice, v.VTLDevice)
+		case schemas.Tape_Worm:
+			return d.ReadBool(schemas.Tape_Worm, &v.Worm)
+		}
+		return nil
+	})
 }
 
 // Represents a virtual tape that is archived in the virtual tape shelf (VTS).
@@ -1327,6 +2913,99 @@ type TapeArchive struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TapeArchive) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TapeArchive)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TapeArchive) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CompletionTime != nil {
+		s.WriteTime(schemas.TapeArchive_CompletionTime, *v.CompletionTime)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.TapeArchive_KMSKey, *v.KMSKey)
+	}
+	if v.PoolEntryDate != nil {
+		s.WriteTime(schemas.TapeArchive_PoolEntryDate, *v.PoolEntryDate)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.TapeArchive_PoolId, *v.PoolId)
+	}
+	if v.RetentionStartDate != nil {
+		s.WriteTime(schemas.TapeArchive_RetentionStartDate, *v.RetentionStartDate)
+	}
+	if v.RetrievedTo != nil {
+		s.WriteString(schemas.TapeArchive_RetrievedTo, *v.RetrievedTo)
+	}
+	if v.TapeARN != nil {
+		s.WriteString(schemas.TapeArchive_TapeARN, *v.TapeARN)
+	}
+	if v.TapeBarcode != nil {
+		s.WriteString(schemas.TapeArchive_TapeBarcode, *v.TapeBarcode)
+	}
+	if v.TapeCreatedDate != nil {
+		s.WriteTime(schemas.TapeArchive_TapeCreatedDate, *v.TapeCreatedDate)
+	}
+	if v.TapeSizeInBytes != nil {
+		s.WriteInt64(schemas.TapeArchive_TapeSizeInBytes, *v.TapeSizeInBytes)
+	}
+	if v.TapeStatus != nil {
+		s.WriteString(schemas.TapeArchive_TapeStatus, *v.TapeStatus)
+	}
+	if v.TapeUsedInBytes != nil {
+		s.WriteInt64(schemas.TapeArchive_TapeUsedInBytes, *v.TapeUsedInBytes)
+	}
+	if v.Worm != false {
+		s.WriteBool(schemas.TapeArchive_Worm, v.Worm)
+	}
+}
+func (v *TapeArchive) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TapeArchive, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TapeArchive_CompletionTime:
+			v.CompletionTime = new(time.Time)
+			return d.ReadTime(schemas.TapeArchive_CompletionTime, v.CompletionTime)
+		case schemas.TapeArchive_KMSKey:
+			v.KMSKey = new(string)
+			return d.ReadString(schemas.TapeArchive_KMSKey, v.KMSKey)
+		case schemas.TapeArchive_PoolEntryDate:
+			v.PoolEntryDate = new(time.Time)
+			return d.ReadTime(schemas.TapeArchive_PoolEntryDate, v.PoolEntryDate)
+		case schemas.TapeArchive_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.TapeArchive_PoolId, v.PoolId)
+		case schemas.TapeArchive_RetentionStartDate:
+			v.RetentionStartDate = new(time.Time)
+			return d.ReadTime(schemas.TapeArchive_RetentionStartDate, v.RetentionStartDate)
+		case schemas.TapeArchive_RetrievedTo:
+			v.RetrievedTo = new(string)
+			return d.ReadString(schemas.TapeArchive_RetrievedTo, v.RetrievedTo)
+		case schemas.TapeArchive_TapeARN:
+			v.TapeARN = new(string)
+			return d.ReadString(schemas.TapeArchive_TapeARN, v.TapeARN)
+		case schemas.TapeArchive_TapeBarcode:
+			v.TapeBarcode = new(string)
+			return d.ReadString(schemas.TapeArchive_TapeBarcode, v.TapeBarcode)
+		case schemas.TapeArchive_TapeCreatedDate:
+			v.TapeCreatedDate = new(time.Time)
+			return d.ReadTime(schemas.TapeArchive_TapeCreatedDate, v.TapeCreatedDate)
+		case schemas.TapeArchive_TapeSizeInBytes:
+			v.TapeSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.TapeArchive_TapeSizeInBytes, v.TapeSizeInBytes)
+		case schemas.TapeArchive_TapeStatus:
+			v.TapeStatus = new(string)
+			return d.ReadString(schemas.TapeArchive_TapeStatus, v.TapeStatus)
+		case schemas.TapeArchive_TapeUsedInBytes:
+			v.TapeUsedInBytes = new(int64)
+			return d.ReadInt64(schemas.TapeArchive_TapeUsedInBytes, v.TapeUsedInBytes)
+		case schemas.TapeArchive_Worm:
+			return d.ReadBool(schemas.TapeArchive_Worm, &v.Worm)
+		}
+		return nil
+	})
+}
+
 // Describes a virtual tape.
 type TapeInfo struct {
 
@@ -1363,6 +3042,70 @@ type TapeInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TapeInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TapeInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TapeInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.TapeInfo_GatewayARN, *v.GatewayARN)
+	}
+	if v.PoolEntryDate != nil {
+		s.WriteTime(schemas.TapeInfo_PoolEntryDate, *v.PoolEntryDate)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.TapeInfo_PoolId, *v.PoolId)
+	}
+	if v.RetentionStartDate != nil {
+		s.WriteTime(schemas.TapeInfo_RetentionStartDate, *v.RetentionStartDate)
+	}
+	if v.TapeARN != nil {
+		s.WriteString(schemas.TapeInfo_TapeARN, *v.TapeARN)
+	}
+	if v.TapeBarcode != nil {
+		s.WriteString(schemas.TapeInfo_TapeBarcode, *v.TapeBarcode)
+	}
+	if v.TapeSizeInBytes != nil {
+		s.WriteInt64(schemas.TapeInfo_TapeSizeInBytes, *v.TapeSizeInBytes)
+	}
+	if v.TapeStatus != nil {
+		s.WriteString(schemas.TapeInfo_TapeStatus, *v.TapeStatus)
+	}
+}
+func (v *TapeInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TapeInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TapeInfo_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.TapeInfo_GatewayARN, v.GatewayARN)
+		case schemas.TapeInfo_PoolEntryDate:
+			v.PoolEntryDate = new(time.Time)
+			return d.ReadTime(schemas.TapeInfo_PoolEntryDate, v.PoolEntryDate)
+		case schemas.TapeInfo_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.TapeInfo_PoolId, v.PoolId)
+		case schemas.TapeInfo_RetentionStartDate:
+			v.RetentionStartDate = new(time.Time)
+			return d.ReadTime(schemas.TapeInfo_RetentionStartDate, v.RetentionStartDate)
+		case schemas.TapeInfo_TapeARN:
+			v.TapeARN = new(string)
+			return d.ReadString(schemas.TapeInfo_TapeARN, v.TapeARN)
+		case schemas.TapeInfo_TapeBarcode:
+			v.TapeBarcode = new(string)
+			return d.ReadString(schemas.TapeInfo_TapeBarcode, v.TapeBarcode)
+		case schemas.TapeInfo_TapeSizeInBytes:
+			v.TapeSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.TapeInfo_TapeSizeInBytes, v.TapeSizeInBytes)
+		case schemas.TapeInfo_TapeStatus:
+			v.TapeStatus = new(string)
+			return d.ReadString(schemas.TapeInfo_TapeStatus, v.TapeStatus)
+		}
+		return nil
+	})
+}
+
 // Describes a recovery point.
 type TapeRecoveryPointInfo struct {
 
@@ -1383,6 +3126,46 @@ type TapeRecoveryPointInfo struct {
 	TapeStatus *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TapeRecoveryPointInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TapeRecoveryPointInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TapeRecoveryPointInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TapeARN != nil {
+		s.WriteString(schemas.TapeRecoveryPointInfo_TapeARN, *v.TapeARN)
+	}
+	if v.TapeRecoveryPointTime != nil {
+		s.WriteTime(schemas.TapeRecoveryPointInfo_TapeRecoveryPointTime, *v.TapeRecoveryPointTime)
+	}
+	if v.TapeSizeInBytes != nil {
+		s.WriteInt64(schemas.TapeRecoveryPointInfo_TapeSizeInBytes, *v.TapeSizeInBytes)
+	}
+	if v.TapeStatus != nil {
+		s.WriteString(schemas.TapeRecoveryPointInfo_TapeStatus, *v.TapeStatus)
+	}
+}
+func (v *TapeRecoveryPointInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TapeRecoveryPointInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TapeRecoveryPointInfo_TapeARN:
+			v.TapeARN = new(string)
+			return d.ReadString(schemas.TapeRecoveryPointInfo_TapeARN, v.TapeARN)
+		case schemas.TapeRecoveryPointInfo_TapeRecoveryPointTime:
+			v.TapeRecoveryPointTime = new(time.Time)
+			return d.ReadTime(schemas.TapeRecoveryPointInfo_TapeRecoveryPointTime, v.TapeRecoveryPointTime)
+		case schemas.TapeRecoveryPointInfo_TapeSizeInBytes:
+			v.TapeSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.TapeRecoveryPointInfo_TapeSizeInBytes, v.TapeSizeInBytes)
+		case schemas.TapeRecoveryPointInfo_TapeStatus:
+			v.TapeStatus = new(string)
+			return d.ReadString(schemas.TapeRecoveryPointInfo_TapeStatus, v.TapeStatus)
+		}
+		return nil
+	})
 }
 
 // Describes a storage volume object.
@@ -1431,6 +3214,63 @@ type VolumeInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VolumeInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VolumeInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VolumeInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.VolumeInfo_GatewayARN, *v.GatewayARN)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.VolumeInfo_GatewayId, *v.GatewayId)
+	}
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.VolumeInfo_VolumeARN, *v.VolumeARN)
+	}
+	if v.VolumeAttachmentStatus != nil {
+		s.WriteString(schemas.VolumeInfo_VolumeAttachmentStatus, *v.VolumeAttachmentStatus)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.VolumeInfo_VolumeId, *v.VolumeId)
+	}
+	if v.VolumeSizeInBytes != 0 {
+		s.WriteInt64(schemas.VolumeInfo_VolumeSizeInBytes, v.VolumeSizeInBytes)
+	}
+	if v.VolumeType != nil {
+		s.WriteString(schemas.VolumeInfo_VolumeType, *v.VolumeType)
+	}
+}
+func (v *VolumeInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VolumeInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VolumeInfo_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.VolumeInfo_GatewayARN, v.GatewayARN)
+		case schemas.VolumeInfo_GatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.VolumeInfo_GatewayId, v.GatewayId)
+		case schemas.VolumeInfo_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.VolumeInfo_VolumeARN, v.VolumeARN)
+		case schemas.VolumeInfo_VolumeAttachmentStatus:
+			v.VolumeAttachmentStatus = new(string)
+			return d.ReadString(schemas.VolumeInfo_VolumeAttachmentStatus, v.VolumeAttachmentStatus)
+		case schemas.VolumeInfo_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.VolumeInfo_VolumeId, v.VolumeId)
+		case schemas.VolumeInfo_VolumeSizeInBytes:
+			return d.ReadInt64(schemas.VolumeInfo_VolumeSizeInBytes, &v.VolumeSizeInBytes)
+		case schemas.VolumeInfo_VolumeType:
+			v.VolumeType = new(string)
+			return d.ReadString(schemas.VolumeInfo_VolumeType, v.VolumeType)
+		}
+		return nil
+	})
+}
+
 // Lists iSCSI information about a volume.
 type VolumeiSCSIAttributes struct {
 
@@ -1450,6 +3290,50 @@ type VolumeiSCSIAttributes struct {
 	TargetARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VolumeiSCSIAttributes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VolumeiSCSIAttributes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VolumeiSCSIAttributes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChapEnabled != false {
+		s.WriteBool(schemas.VolumeiSCSIAttributes_ChapEnabled, v.ChapEnabled)
+	}
+	if v.LunNumber != nil {
+		s.WriteInt32(schemas.VolumeiSCSIAttributes_LunNumber, *v.LunNumber)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.VolumeiSCSIAttributes_NetworkInterfaceId, *v.NetworkInterfaceId)
+	}
+	if v.NetworkInterfacePort != 0 {
+		s.WriteInt32(schemas.VolumeiSCSIAttributes_NetworkInterfacePort, v.NetworkInterfacePort)
+	}
+	if v.TargetARN != nil {
+		s.WriteString(schemas.VolumeiSCSIAttributes_TargetARN, *v.TargetARN)
+	}
+}
+func (v *VolumeiSCSIAttributes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VolumeiSCSIAttributes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VolumeiSCSIAttributes_ChapEnabled:
+			return d.ReadBool(schemas.VolumeiSCSIAttributes_ChapEnabled, &v.ChapEnabled)
+		case schemas.VolumeiSCSIAttributes_LunNumber:
+			v.LunNumber = new(int32)
+			return d.ReadInt32(schemas.VolumeiSCSIAttributes_LunNumber, v.LunNumber)
+		case schemas.VolumeiSCSIAttributes_NetworkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.VolumeiSCSIAttributes_NetworkInterfaceId, v.NetworkInterfaceId)
+		case schemas.VolumeiSCSIAttributes_NetworkInterfacePort:
+			return d.ReadInt32(schemas.VolumeiSCSIAttributes_NetworkInterfacePort, &v.NetworkInterfacePort)
+		case schemas.VolumeiSCSIAttributes_TargetARN:
+			v.TargetARN = new(string)
+			return d.ReadString(schemas.VolumeiSCSIAttributes_TargetARN, v.TargetARN)
+		}
+		return nil
+	})
 }
 
 // Describes a storage volume recovery point object.
@@ -1473,6 +3357,44 @@ type VolumeRecoveryPointInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VolumeRecoveryPointInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VolumeRecoveryPointInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VolumeRecoveryPointInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.VolumeRecoveryPointInfo_VolumeARN, *v.VolumeARN)
+	}
+	if v.VolumeRecoveryPointTime != nil {
+		s.WriteString(schemas.VolumeRecoveryPointInfo_VolumeRecoveryPointTime, *v.VolumeRecoveryPointTime)
+	}
+	if v.VolumeSizeInBytes != 0 {
+		s.WriteInt64(schemas.VolumeRecoveryPointInfo_VolumeSizeInBytes, v.VolumeSizeInBytes)
+	}
+	if v.VolumeUsageInBytes != 0 {
+		s.WriteInt64(schemas.VolumeRecoveryPointInfo_VolumeUsageInBytes, v.VolumeUsageInBytes)
+	}
+}
+func (v *VolumeRecoveryPointInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VolumeRecoveryPointInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VolumeRecoveryPointInfo_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.VolumeRecoveryPointInfo_VolumeARN, v.VolumeARN)
+		case schemas.VolumeRecoveryPointInfo_VolumeRecoveryPointTime:
+			v.VolumeRecoveryPointTime = new(string)
+			return d.ReadString(schemas.VolumeRecoveryPointInfo_VolumeRecoveryPointTime, v.VolumeRecoveryPointTime)
+		case schemas.VolumeRecoveryPointInfo_VolumeSizeInBytes:
+			return d.ReadInt64(schemas.VolumeRecoveryPointInfo_VolumeSizeInBytes, &v.VolumeSizeInBytes)
+		case schemas.VolumeRecoveryPointInfo_VolumeUsageInBytes:
+			return d.ReadInt64(schemas.VolumeRecoveryPointInfo_VolumeUsageInBytes, &v.VolumeUsageInBytes)
+		}
+		return nil
+	})
+}
+
 // Represents a device object associated with a tape gateway.
 type VTLDevice struct {
 
@@ -1493,6 +3415,54 @@ type VTLDevice struct {
 	VTLDeviceVendor *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VTLDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VTLDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VTLDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceiSCSIAttributes != nil {
+		s.WriteStruct(schemas.VTLDevice_DeviceiSCSIAttributes)
+		v.DeviceiSCSIAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VTLDeviceARN != nil {
+		s.WriteString(schemas.VTLDevice_VTLDeviceARN, *v.VTLDeviceARN)
+	}
+	if v.VTLDeviceProductIdentifier != nil {
+		s.WriteString(schemas.VTLDevice_VTLDeviceProductIdentifier, *v.VTLDeviceProductIdentifier)
+	}
+	if v.VTLDeviceType != nil {
+		s.WriteString(schemas.VTLDevice_VTLDeviceType, *v.VTLDeviceType)
+	}
+	if v.VTLDeviceVendor != nil {
+		s.WriteString(schemas.VTLDevice_VTLDeviceVendor, *v.VTLDeviceVendor)
+	}
+}
+func (v *VTLDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VTLDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VTLDevice_DeviceiSCSIAttributes:
+			v.DeviceiSCSIAttributes = &DeviceiSCSIAttributes{}
+			return v.DeviceiSCSIAttributes.Deserialize(d)
+		case schemas.VTLDevice_VTLDeviceARN:
+			v.VTLDeviceARN = new(string)
+			return d.ReadString(schemas.VTLDevice_VTLDeviceARN, v.VTLDeviceARN)
+		case schemas.VTLDevice_VTLDeviceProductIdentifier:
+			v.VTLDeviceProductIdentifier = new(string)
+			return d.ReadString(schemas.VTLDevice_VTLDeviceProductIdentifier, v.VTLDeviceProductIdentifier)
+		case schemas.VTLDevice_VTLDeviceType:
+			v.VTLDeviceType = new(string)
+			return d.ReadString(schemas.VTLDevice_VTLDeviceType, v.VTLDeviceType)
+		case schemas.VTLDevice_VTLDeviceVendor:
+			v.VTLDeviceVendor = new(string)
+			return d.ReadString(schemas.VTLDevice_VTLDeviceVendor, v.VTLDeviceVendor)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

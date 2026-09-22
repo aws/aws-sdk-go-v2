@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new, empty Amazon FSx file system. You can create the following
@@ -241,6 +241,59 @@ type CreateFileSystemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FileSystemType != "" {
+		s.WriteString(schemas.CreateFileSystemRequest_FileSystemType, string(v.FileSystemType))
+	}
+	if v.FileSystemTypeVersion != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_FileSystemTypeVersion, *v.FileSystemTypeVersion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateFileSystemRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LustreConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemRequest_LustreConfiguration)
+		v.LustreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateFileSystemRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSecurityGroupIds(s, schemas.CreateFileSystemRequest_SecurityGroupIds, v.SecurityGroupIds)
+	if v.StorageCapacity != nil {
+		s.WriteInt32(schemas.CreateFileSystemRequest_StorageCapacity, *v.StorageCapacity)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.CreateFileSystemRequest_StorageType, string(v.StorageType))
+	}
+	serializeSubnetIds(s, schemas.CreateFileSystemRequest_SubnetIds, v.SubnetIds)
+	serializeTags(s, schemas.CreateFileSystemRequest_Tags, v.Tags)
+	if v.WindowsConfiguration != nil {
+		s.WriteStruct(schemas.CreateFileSystemRequest_WindowsConfiguration)
+		v.WindowsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The response object returned after the file system is created.
 type CreateFileSystemOutput struct {
 
@@ -253,65 +306,44 @@ type CreateFileSystemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFileSystemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFileSystemResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFileSystemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystem != nil {
+		s.WriteStruct(schemas.CreateFileSystemResponse_FileSystem)
+		v.FileSystem.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFileSystemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFileSystemResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFileSystemResponse_FileSystem:
+			v.FileSystem = &types.FileSystem{}
+			return v.FileSystem.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileSystem, schemas.CreateFileSystemRequest, schemas.CreateFileSystemResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFileSystem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFileSystem, schemas.CreateFileSystemRequest, schemas.CreateFileSystemResponse), output: &CreateFileSystemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFileSystem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFileSystem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -321,12 +353,6 @@ func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreateFileSystemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFileSystem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -339,12 +365,6 @@ func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -384,12 +404,4 @@ func (m *idempotencyToken_initializeOpCreateFileSystem) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreateFileSystemMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateFileSystem{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateFileSystem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFileSystem",
-	}
 }

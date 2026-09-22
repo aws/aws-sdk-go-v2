@@ -5,10 +5,10 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Lists resource snapshot jobs owned by the customer. This operation supports
@@ -58,6 +58,35 @@ type ListResourceSnapshotJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceSnapshotJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceSnapshotJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceSnapshotJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListResourceSnapshotJobsRequest_Catalog, *v.Catalog)
+	}
+	if v.EngagementIdentifier != nil {
+		s.WriteString(schemas.ListResourceSnapshotJobsRequest_EngagementIdentifier, *v.EngagementIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceSnapshotJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceSnapshotJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListResourceSnapshotJobsRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListResourceSnapshotJobsRequest_Status, string(v.Status))
+	}
+}
+
 type ListResourceSnapshotJobsOutput struct {
 
 	//  An array of resource snapshot job summary objects.
@@ -75,77 +104,51 @@ type ListResourceSnapshotJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceSnapshotJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceSnapshotJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceSnapshotJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceSnapshotJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeResourceSnapshotJobSummaryList(s, schemas.ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries, v.ResourceSnapshotJobSummaries)
+}
+func (v *ListResourceSnapshotJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceSnapshotJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceSnapshotJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceSnapshotJobsResponse_NextToken, v.NextToken)
+		case schemas.ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries:
+			return deserializeResourceSnapshotJobSummaryList(d, schemas.ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries, &v.ResourceSnapshotJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceSnapshotJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceSnapshotJobs, schemas.ListResourceSnapshotJobsRequest, schemas.ListResourceSnapshotJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListResourceSnapshotJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceSnapshotJobs, schemas.ListResourceSnapshotJobsRequest, schemas.ListResourceSnapshotJobsResponse), output: &ListResourceSnapshotJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListResourceSnapshotJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResourceSnapshotJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListResourceSnapshotJobsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourceSnapshotJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +161,6 @@ func (c *Client) addOperationListResourceSnapshotJobsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +264,3 @@ type ListResourceSnapshotJobsAPIClient interface {
 }
 
 var _ ListResourceSnapshotJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResourceSnapshotJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResourceSnapshotJobs",
-	}
-}

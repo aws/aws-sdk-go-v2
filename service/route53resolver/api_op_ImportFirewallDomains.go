@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Imports domain names from a file into a domain list, for use in a DNS firewall
@@ -65,6 +64,24 @@ type ImportFirewallDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportFirewallDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportFirewallDomainsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportFirewallDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainFileUrl != nil {
+		s.WriteString(schemas.ImportFirewallDomainsRequest_DomainFileUrl, *v.DomainFileUrl)
+	}
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.ImportFirewallDomainsRequest_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.Operation != "" {
+		s.WriteString(schemas.ImportFirewallDomainsRequest_Operation, string(v.Operation))
+	}
+}
+
 type ImportFirewallDomainsOutput struct {
 
 	// The Id of the firewall domain list that DNS Firewall just updated.
@@ -85,77 +102,70 @@ type ImportFirewallDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportFirewallDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportFirewallDomainsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportFirewallDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ImportFirewallDomainsResponse_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportFirewallDomainsResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ImportFirewallDomainsResponse_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ImportFirewallDomainsResponse_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ImportFirewallDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportFirewallDomainsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportFirewallDomainsResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ImportFirewallDomainsResponse_Id, v.Id)
+		case schemas.ImportFirewallDomainsResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImportFirewallDomainsResponse_Name, v.Name)
+		case schemas.ImportFirewallDomainsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ImportFirewallDomainsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FirewallDomainListStatus(ev)
+			return nil
+		case schemas.ImportFirewallDomainsResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ImportFirewallDomainsResponse_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportFirewallDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportFirewallDomains, schemas.ImportFirewallDomainsRequest, schemas.ImportFirewallDomainsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportFirewallDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportFirewallDomains, schemas.ImportFirewallDomainsRequest, schemas.ImportFirewallDomainsResponse), output: &ImportFirewallDomainsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportFirewallDomains{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportFirewallDomains"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpImportFirewallDomainsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportFirewallDomains(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +180,8 @@ func (c *Client) addOperationImportFirewallDomainsMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opImportFirewallDomains(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportFirewallDomains",
-	}
 }

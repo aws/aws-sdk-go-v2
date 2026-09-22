@@ -4,11 +4,10 @@ package pinpointemail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieve the results of a predictive inbox placement test.
@@ -36,6 +35,18 @@ type GetDeliverabilityTestReportInput struct {
 	ReportId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDeliverabilityTestReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeliverabilityTestReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeliverabilityTestReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetDeliverabilityTestReportRequest_ReportId, *v.ReportId)
+	}
 }
 
 // The results of the predictive inbox placement test.
@@ -73,77 +84,70 @@ type GetDeliverabilityTestReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeliverabilityTestReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeliverabilityTestReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeliverabilityTestReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliverabilityTestReport != nil {
+		s.WriteStruct(schemas.GetDeliverabilityTestReportResponse_DeliverabilityTestReport)
+		v.DeliverabilityTestReport.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIspPlacements(s, schemas.GetDeliverabilityTestReportResponse_IspPlacements, v.IspPlacements)
+	if v.Message != nil {
+		s.WriteString(schemas.GetDeliverabilityTestReportResponse_Message, *v.Message)
+	}
+	if v.OverallPlacement != nil {
+		s.WriteStruct(schemas.GetDeliverabilityTestReportResponse_OverallPlacement)
+		v.OverallPlacement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.GetDeliverabilityTestReportResponse_Tags, v.Tags)
+}
+func (v *GetDeliverabilityTestReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeliverabilityTestReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeliverabilityTestReportResponse_DeliverabilityTestReport:
+			v.DeliverabilityTestReport = &types.DeliverabilityTestReport{}
+			return v.DeliverabilityTestReport.Deserialize(d)
+		case schemas.GetDeliverabilityTestReportResponse_IspPlacements:
+			return deserializeIspPlacements(d, schemas.GetDeliverabilityTestReportResponse_IspPlacements, &v.IspPlacements)
+		case schemas.GetDeliverabilityTestReportResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetDeliverabilityTestReportResponse_Message, v.Message)
+		case schemas.GetDeliverabilityTestReportResponse_OverallPlacement:
+			v.OverallPlacement = &types.PlacementStatistics{}
+			return v.OverallPlacement.Deserialize(d)
+		case schemas.GetDeliverabilityTestReportResponse_Tags:
+			return deserializeTagList(d, schemas.GetDeliverabilityTestReportResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeliverabilityTestReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeliverabilityTestReport, schemas.GetDeliverabilityTestReportRequest, schemas.GetDeliverabilityTestReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeliverabilityTestReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeliverabilityTestReport, schemas.GetDeliverabilityTestReportRequest, schemas.GetDeliverabilityTestReportResponse), output: &GetDeliverabilityTestReportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeliverabilityTestReport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeliverabilityTestReport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDeliverabilityTestReportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeliverabilityTestReport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +162,8 @@ func (c *Client) addOperationGetDeliverabilityTestReportMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDeliverabilityTestReport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDeliverabilityTestReport",
-	}
 }

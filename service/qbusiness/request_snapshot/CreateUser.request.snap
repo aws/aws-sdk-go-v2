@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/users
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","userAliases":[{"dataSourceId":"__DataSourceId__","indexId":"__IndexId__","userId":"__UserId__"},{"dataSourceId":"__DataSourceId__","indexId":"__IndexId__","userId":"__UserId__"}],"userId":"__UserId__"}

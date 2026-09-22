@@ -4,11 +4,10 @@ package appintegrations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the event integration.
@@ -35,6 +34,18 @@ type GetEventIntegrationInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEventIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetEventIntegrationRequest_Name, *v.Name)
+	}
 }
 
 type GetEventIntegrationOutput struct {
@@ -64,77 +75,77 @@ type GetEventIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEventIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEventIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEventIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetEventIntegrationResponse_Description, *v.Description)
+	}
+	if v.EventBridgeBus != nil {
+		s.WriteString(schemas.GetEventIntegrationResponse_EventBridgeBus, *v.EventBridgeBus)
+	}
+	if v.EventFilter != nil {
+		s.WriteStruct(schemas.GetEventIntegrationResponse_EventFilter)
+		v.EventFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventIntegrationArn != nil {
+		s.WriteString(schemas.GetEventIntegrationResponse_EventIntegrationArn, *v.EventIntegrationArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetEventIntegrationResponse_Name, *v.Name)
+	}
+	serializeTagMap(s, schemas.GetEventIntegrationResponse_Tags, v.Tags)
+}
+func (v *GetEventIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEventIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEventIntegrationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetEventIntegrationResponse_Description, v.Description)
+		case schemas.GetEventIntegrationResponse_EventBridgeBus:
+			v.EventBridgeBus = new(string)
+			return d.ReadString(schemas.GetEventIntegrationResponse_EventBridgeBus, v.EventBridgeBus)
+		case schemas.GetEventIntegrationResponse_EventFilter:
+			v.EventFilter = &types.EventFilter{}
+			return v.EventFilter.Deserialize(d)
+		case schemas.GetEventIntegrationResponse_EventIntegrationArn:
+			v.EventIntegrationArn = new(string)
+			return d.ReadString(schemas.GetEventIntegrationResponse_EventIntegrationArn, v.EventIntegrationArn)
+		case schemas.GetEventIntegrationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetEventIntegrationResponse_Name, v.Name)
+		case schemas.GetEventIntegrationResponse_Tags:
+			return deserializeTagMap(d, schemas.GetEventIntegrationResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEventIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventIntegration, schemas.GetEventIntegrationRequest, schemas.GetEventIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEventIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEventIntegration, schemas.GetEventIntegrationRequest, schemas.GetEventIntegrationResponse), output: &GetEventIntegrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEventIntegration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEventIntegration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEventIntegrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventIntegration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +160,8 @@ func (c *Client) addOperationGetEventIntegrationMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEventIntegration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEventIntegration",
-	}
 }

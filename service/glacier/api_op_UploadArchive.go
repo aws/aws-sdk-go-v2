@@ -4,11 +4,10 @@ package glacier
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
@@ -94,6 +93,34 @@ type UploadArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadArchiveInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UploadArchiveInput_accountId, *v.AccountId)
+	}
+	if v.ArchiveDescription != nil {
+		s.WriteString(schemas.UploadArchiveInput_archiveDescription, *v.ArchiveDescription)
+	}
+	if v.Checksum != nil {
+		s.WriteString(schemas.UploadArchiveInput_checksum, *v.Checksum)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.UploadArchiveInput_vaultName, *v.VaultName)
+	}
+}
+func (v *UploadArchiveInput) GetPayloadStream() io.Reader { return v.Body }
+
+var _ smithy.StreamingInput = (*UploadArchiveInput)(nil)
+
+func (v *UploadArchiveInput) SetPayloadStream(r io.ReadCloser) { v.Body = r }
+
+var _ smithy.StreamingOutput = (*UploadArchiveInput)(nil)
+
 // Contains the Amazon Glacier response to your request.
 //
 // For information about the underlying REST API, see [Upload Archive]. For conceptual
@@ -118,77 +145,60 @@ type UploadArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ArchiveCreationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.ArchiveCreationOutput_archiveId, *v.ArchiveId)
+	}
+	if v.Checksum != nil {
+		s.WriteString(schemas.ArchiveCreationOutput_checksum, *v.Checksum)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.ArchiveCreationOutput_location, *v.Location)
+	}
+}
+func (v *UploadArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ArchiveCreationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ArchiveCreationOutput_archiveId:
+			v.ArchiveId = new(string)
+			return d.ReadString(schemas.ArchiveCreationOutput_archiveId, v.ArchiveId)
+		case schemas.ArchiveCreationOutput_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.ArchiveCreationOutput_checksum, v.Checksum)
+		case schemas.ArchiveCreationOutput_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.ArchiveCreationOutput_location, v.Location)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUploadArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadArchive, schemas.UploadArchiveInput, schemas.ArchiveCreationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUploadArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadArchive, schemas.UploadArchiveInput, schemas.ArchiveCreationOutput), output: &UploadArchiveOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUploadArchive{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UploadArchive"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUploadArchiveValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUploadArchive(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,22 +222,8 @@ func (c *Client) addOperationUploadArchiveMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUploadArchive(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UploadArchive",
-	}
 }

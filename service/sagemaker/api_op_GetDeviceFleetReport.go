@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetDeviceFleetReportInput struct {
 	DeviceFleetName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDeviceFleetReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceFleetReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceFleetReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.GetDeviceFleetReportRequest_DeviceFleetName, *v.DeviceFleetName)
+	}
 }
 
 type GetDeviceFleetReportOutput struct {
@@ -74,77 +85,88 @@ type GetDeviceFleetReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeviceFleetReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceFleetReportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceFleetReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentVersions(s, schemas.GetDeviceFleetReportResponse_AgentVersions, v.AgentVersions)
+	if v.Description != nil {
+		s.WriteString(schemas.GetDeviceFleetReportResponse_Description, *v.Description)
+	}
+	if v.DeviceFleetArn != nil {
+		s.WriteString(schemas.GetDeviceFleetReportResponse_DeviceFleetArn, *v.DeviceFleetArn)
+	}
+	if v.DeviceFleetName != nil {
+		s.WriteString(schemas.GetDeviceFleetReportResponse_DeviceFleetName, *v.DeviceFleetName)
+	}
+	if v.DeviceStats != nil {
+		s.WriteStruct(schemas.GetDeviceFleetReportResponse_DeviceStats)
+		v.DeviceStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEdgeModelStats(s, schemas.GetDeviceFleetReportResponse_ModelStats, v.ModelStats)
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.GetDeviceFleetReportResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReportGenerated != nil {
+		s.WriteTime(schemas.GetDeviceFleetReportResponse_ReportGenerated, *v.ReportGenerated)
+	}
+}
+func (v *GetDeviceFleetReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeviceFleetReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeviceFleetReportResponse_AgentVersions:
+			return deserializeAgentVersions(d, schemas.GetDeviceFleetReportResponse_AgentVersions, &v.AgentVersions)
+		case schemas.GetDeviceFleetReportResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDeviceFleetReportResponse_Description, v.Description)
+		case schemas.GetDeviceFleetReportResponse_DeviceFleetArn:
+			v.DeviceFleetArn = new(string)
+			return d.ReadString(schemas.GetDeviceFleetReportResponse_DeviceFleetArn, v.DeviceFleetArn)
+		case schemas.GetDeviceFleetReportResponse_DeviceFleetName:
+			v.DeviceFleetName = new(string)
+			return d.ReadString(schemas.GetDeviceFleetReportResponse_DeviceFleetName, v.DeviceFleetName)
+		case schemas.GetDeviceFleetReportResponse_DeviceStats:
+			v.DeviceStats = &types.DeviceStats{}
+			return v.DeviceStats.Deserialize(d)
+		case schemas.GetDeviceFleetReportResponse_ModelStats:
+			return deserializeEdgeModelStats(d, schemas.GetDeviceFleetReportResponse_ModelStats, &v.ModelStats)
+		case schemas.GetDeviceFleetReportResponse_OutputConfig:
+			v.OutputConfig = &types.EdgeOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.GetDeviceFleetReportResponse_ReportGenerated:
+			v.ReportGenerated = new(time.Time)
+			return d.ReadTime(schemas.GetDeviceFleetReportResponse_ReportGenerated, v.ReportGenerated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeviceFleetReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceFleetReport, schemas.GetDeviceFleetReportRequest, schemas.GetDeviceFleetReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDeviceFleetReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceFleetReport, schemas.GetDeviceFleetReportRequest, schemas.GetDeviceFleetReportResponse), output: &GetDeviceFleetReportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDeviceFleetReport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeviceFleetReport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDeviceFleetReportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeviceFleetReport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +181,8 @@ func (c *Client) addOperationGetDeviceFleetReportMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDeviceFleetReport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDeviceFleetReport",
-	}
 }

@@ -4,11 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the specified endpoint.
@@ -244,6 +243,155 @@ type ModifyEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyEndpointMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_CertificateArn, *v.CertificateArn)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_DatabaseName, *v.DatabaseName)
+	}
+	if v.DmsTransferSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_DmsTransferSettings)
+		v.DmsTransferSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DocDbSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_DocDbSettings)
+		v.DocDbSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DynamoDbSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_DynamoDbSettings)
+		v.DynamoDbSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ElasticsearchSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_ElasticsearchSettings)
+		v.ElasticsearchSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_EndpointArn, *v.EndpointArn)
+	}
+	if v.EndpointIdentifier != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_EndpointIdentifier, *v.EndpointIdentifier)
+	}
+	if v.EndpointType != "" {
+		s.WriteString(schemas.ModifyEndpointMessage_EndpointType, string(v.EndpointType))
+	}
+	if v.EngineName != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_EngineName, *v.EngineName)
+	}
+	if v.ExactSettings != nil {
+		s.WriteBool(schemas.ModifyEndpointMessage_ExactSettings, *v.ExactSettings)
+	}
+	if v.ExternalTableDefinition != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_ExternalTableDefinition, *v.ExternalTableDefinition)
+	}
+	if v.ExtraConnectionAttributes != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_ExtraConnectionAttributes, *v.ExtraConnectionAttributes)
+	}
+	if v.GcpMySQLSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_GcpMySQLSettings)
+		v.GcpMySQLSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IBMDb2Settings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_IBMDb2Settings)
+		v.IBMDb2Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KafkaSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_KafkaSettings)
+		v.KafkaSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_KinesisSettings)
+		v.KinesisSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MicrosoftSQLServerSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_MicrosoftSQLServerSettings)
+		v.MicrosoftSQLServerSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MongoDbSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_MongoDbSettings)
+		v.MongoDbSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MySQLSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_MySQLSettings)
+		v.MySQLSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NeptuneSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_NeptuneSettings)
+		v.NeptuneSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OracleSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_OracleSettings)
+		v.OracleSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_Password, *v.Password)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.ModifyEndpointMessage_Port, *v.Port)
+	}
+	if v.PostgreSQLSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_PostgreSQLSettings)
+		v.PostgreSQLSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedisSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_RedisSettings)
+		v.RedisSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RedshiftSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_RedshiftSettings)
+		v.RedshiftSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Settings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_S3Settings)
+		v.S3Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServerName != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_ServerName, *v.ServerName)
+	}
+	if v.ServiceAccessRoleArn != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_ServiceAccessRoleArn, *v.ServiceAccessRoleArn)
+	}
+	if v.SslMode != "" {
+		s.WriteString(schemas.ModifyEndpointMessage_SslMode, string(v.SslMode))
+	}
+	if v.SybaseSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_SybaseSettings)
+		v.SybaseSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimestreamSettings != nil {
+		s.WriteStruct(schemas.ModifyEndpointMessage_TimestreamSettings)
+		v.TimestreamSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ModifyEndpointMessage_Username, *v.Username)
+	}
+}
+
 type ModifyEndpointOutput struct {
 
 	// The modified endpoint.
@@ -255,77 +403,50 @@ type ModifyEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.ModifyEndpointResponse_Endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ModifyEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyEndpointResponse_Endpoint:
+			v.Endpoint = &types.Endpoint{}
+			return v.Endpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyEndpoint, schemas.ModifyEndpointMessage, schemas.ModifyEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpModifyEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyEndpoint, schemas.ModifyEndpointMessage, schemas.ModifyEndpointResponse), output: &ModifyEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpModifyEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -340,22 +461,8 @@ func (c *Client) addOperationModifyEndpointMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyEndpoint",
-	}
 }

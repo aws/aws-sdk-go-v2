@@ -4,10 +4,9 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Grants permission to complete the authorization based on input parameters.
@@ -43,6 +42,21 @@ type RegisterConnectorV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterConnectorV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterConnectorV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterConnectorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthCode != nil {
+		s.WriteString(schemas.RegisterConnectorV2Request_AuthCode, *v.AuthCode)
+	}
+	if v.AuthState != nil {
+		s.WriteString(schemas.RegisterConnectorV2Request_AuthState, *v.AuthState)
+	}
+}
+
 type RegisterConnectorV2Output struct {
 
 	// The UUID of the connectorV2 to identify connectorV2 resource.
@@ -59,77 +73,54 @@ type RegisterConnectorV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterConnectorV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterConnectorV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterConnectorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.RegisterConnectorV2Response_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.RegisterConnectorV2Response_ConnectorId, *v.ConnectorId)
+	}
+}
+func (v *RegisterConnectorV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterConnectorV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterConnectorV2Response_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.RegisterConnectorV2Response_ConnectorArn, v.ConnectorArn)
+		case schemas.RegisterConnectorV2Response_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.RegisterConnectorV2Response_ConnectorId, v.ConnectorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterConnectorV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterConnectorV2, schemas.RegisterConnectorV2Request, schemas.RegisterConnectorV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterConnectorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterConnectorV2, schemas.RegisterConnectorV2Request, schemas.RegisterConnectorV2Response), output: &RegisterConnectorV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterConnectorV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterConnectorV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterConnectorV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterConnectorV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +135,8 @@ func (c *Client) addOperationRegisterConnectorV2Middlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterConnectorV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterConnectorV2",
-	}
 }

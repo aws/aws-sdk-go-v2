@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows you to send a request that sends a voice message. This operation uses [Amazon Polly]
@@ -92,6 +91,49 @@ type SendVoiceMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendVoiceMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendVoiceMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendVoiceMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeContextMap(s, schemas.SendVoiceMessageRequest_Context, v.Context)
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.SendVoiceMessageRequest_DryRun, v.DryRun)
+	}
+	if v.MaxPricePerMinute != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_MaxPricePerMinute, *v.MaxPricePerMinute)
+	}
+	if v.MessageBody != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_MessageBody, *v.MessageBody)
+	}
+	if v.MessageBodyTextType != "" {
+		s.WriteString(schemas.SendVoiceMessageRequest_MessageBodyTextType, string(v.MessageBodyTextType))
+	}
+	if v.MessageFeedbackEnabled != nil {
+		s.WriteBool(schemas.SendVoiceMessageRequest_MessageFeedbackEnabled, *v.MessageFeedbackEnabled)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.SendVoiceMessageRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.SendVoiceMessageRequest_TimeToLive, *v.TimeToLive)
+	}
+	if v.VoiceId != "" {
+		s.WriteString(schemas.SendVoiceMessageRequest_VoiceId, string(v.VoiceId))
+	}
+}
+
 type SendVoiceMessageOutput struct {
 
 	// The unique identifier for the message.
@@ -103,77 +145,48 @@ type SendVoiceMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendVoiceMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendVoiceMessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendVoiceMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendVoiceMessageResult_MessageId, *v.MessageId)
+	}
+}
+func (v *SendVoiceMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendVoiceMessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendVoiceMessageResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendVoiceMessageResult_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendVoiceMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendVoiceMessage, schemas.SendVoiceMessageRequest, schemas.SendVoiceMessageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendVoiceMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendVoiceMessage, schemas.SendVoiceMessageRequest, schemas.SendVoiceMessageResult), output: &SendVoiceMessageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendVoiceMessage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendVoiceMessage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendVoiceMessageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendVoiceMessage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +201,8 @@ func (c *Client) addOperationSendVoiceMessageMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendVoiceMessage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendVoiceMessage",
-	}
 }

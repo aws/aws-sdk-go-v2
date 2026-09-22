@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the associations between code repositories and Amazon Inspector code
@@ -50,6 +49,24 @@ type ListCodeSecurityScanConfigurationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeSecurityScanConfigurationAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeSecurityScanConfigurationAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeSecurityScanConfigurationAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCodeSecurityScanConfigurationAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeSecurityScanConfigurationAssociationsRequest_nextToken, *v.NextToken)
+	}
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.ListCodeSecurityScanConfigurationAssociationsRequest_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+}
+
 type ListCodeSecurityScanConfigurationAssociationsOutput struct {
 
 	// A list of associations between code repositories and scan configurations.
@@ -67,77 +84,51 @@ type ListCodeSecurityScanConfigurationAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCodeSecurityScanConfigurationAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCodeSecurityScanConfigurationAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCodeSecurityScanConfigurationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeSecurityScanConfigurationAssociationSummaries(s, schemas.ListCodeSecurityScanConfigurationAssociationsResponse_associations, v.Associations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCodeSecurityScanConfigurationAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCodeSecurityScanConfigurationAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCodeSecurityScanConfigurationAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCodeSecurityScanConfigurationAssociationsResponse_associations:
+			return deserializeCodeSecurityScanConfigurationAssociationSummaries(d, schemas.ListCodeSecurityScanConfigurationAssociationsResponse_associations, &v.Associations)
+		case schemas.ListCodeSecurityScanConfigurationAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCodeSecurityScanConfigurationAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCodeSecurityScanConfigurationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeSecurityScanConfigurationAssociations, schemas.ListCodeSecurityScanConfigurationAssociationsRequest, schemas.ListCodeSecurityScanConfigurationAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCodeSecurityScanConfigurationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCodeSecurityScanConfigurationAssociations, schemas.ListCodeSecurityScanConfigurationAssociationsRequest, schemas.ListCodeSecurityScanConfigurationAssociationsResponse), output: &ListCodeSecurityScanConfigurationAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCodeSecurityScanConfigurationAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCodeSecurityScanConfigurationAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCodeSecurityScanConfigurationAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCodeSecurityScanConfigurationAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +143,8 @@ func (c *Client) addOperationListCodeSecurityScanConfigurationAssociationsMiddle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListCodeSecurityScanConfigurationAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCodeSecurityScanConfigurationAssociations",
-	}
 }

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,35 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error_ != nil {
+		s.WriteStruct(schemas.InternalServerError_error)
+		v.Error_.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerError_message, *v.Message)
+	}
+}
+func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerError_error:
+			v.Error_ = &StorageGatewayError{}
+			return v.Error_.Deserialize(d)
+		case schemas.InternalServerError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerError_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An exception occurred because an invalid gateway request was issued to the
 // service. For more information, see the error and message fields.
@@ -64,6 +94,35 @@ func (e *InvalidGatewayRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGatewayRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidGatewayRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidGatewayRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidGatewayRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error_ != nil {
+		s.WriteStruct(schemas.InvalidGatewayRequestException_error)
+		v.Error_.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidGatewayRequestException_message, *v.Message)
+	}
+}
+func (v *InvalidGatewayRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidGatewayRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidGatewayRequestException_error:
+			v.Error_ = &StorageGatewayError{}
+			return v.Error_.Deserialize(d)
+		case schemas.InvalidGatewayRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidGatewayRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An internal server error has occurred because the service is unavailable. For
 // more information, see the error and message fields.
@@ -93,3 +152,32 @@ func (e *ServiceUnavailableError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error_ != nil {
+		s.WriteStruct(schemas.ServiceUnavailableError_error)
+		v.Error_.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableError_message, *v.Message)
+	}
+}
+func (v *ServiceUnavailableError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableError_error:
+			v.Error_ = &StorageGatewayError{}
+			return v.Error_.Deserialize(d)
+		case schemas.ServiceUnavailableError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableError_message, v.Message)
+		}
+		return nil
+	})
+}

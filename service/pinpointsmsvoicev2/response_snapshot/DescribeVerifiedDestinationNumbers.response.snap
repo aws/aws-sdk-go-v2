@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeVerifiedDestinationNumbers
+
+{"NextToken":"__NextToken__","VerifiedDestinationNumbers":[{"CreatedTimestamp":946684800,"DestinationPhoneNumber":"__DestinationPhoneNumber__","RcsAgentId":"__RcsAgentId__","Status":"PENDING","VerifiedDestinationNumberArn":"__VerifiedDestinationNumberArn__","VerifiedDestinationNumberId":"__VerifiedDestinationNumberId__"},{"CreatedTimestamp":946684800,"DestinationPhoneNumber":"__DestinationPhoneNumber__","RcsAgentId":"__RcsAgentId__","Status":"PENDING","VerifiedDestinationNumberArn":"__VerifiedDestinationNumberArn__","VerifiedDestinationNumberId":"__VerifiedDestinationNumberId__"}]}

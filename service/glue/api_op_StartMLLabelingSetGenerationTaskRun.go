@@ -4,10 +4,9 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts the active learning workflow for your machine learning transform to
@@ -59,6 +58,21 @@ type StartMLLabelingSetGenerationTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLLabelingSetGenerationTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLLabelingSetGenerationTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLLabelingSetGenerationTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputS3Path != nil {
+		s.WriteString(schemas.StartMLLabelingSetGenerationTaskRunRequest_OutputS3Path, *v.OutputS3Path)
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.StartMLLabelingSetGenerationTaskRunRequest_TransformId, *v.TransformId)
+	}
+}
+
 type StartMLLabelingSetGenerationTaskRunOutput struct {
 
 	// The unique run identifier that is associated with this task run.
@@ -70,77 +84,48 @@ type StartMLLabelingSetGenerationTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLLabelingSetGenerationTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLLabelingSetGenerationTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLLabelingSetGenerationTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskRunId != nil {
+		s.WriteString(schemas.StartMLLabelingSetGenerationTaskRunResponse_TaskRunId, *v.TaskRunId)
+	}
+}
+func (v *StartMLLabelingSetGenerationTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMLLabelingSetGenerationTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMLLabelingSetGenerationTaskRunResponse_TaskRunId:
+			v.TaskRunId = new(string)
+			return d.ReadString(schemas.StartMLLabelingSetGenerationTaskRunResponse_TaskRunId, v.TaskRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMLLabelingSetGenerationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLLabelingSetGenerationTaskRun, schemas.StartMLLabelingSetGenerationTaskRunRequest, schemas.StartMLLabelingSetGenerationTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMLLabelingSetGenerationTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLLabelingSetGenerationTaskRun, schemas.StartMLLabelingSetGenerationTaskRunRequest, schemas.StartMLLabelingSetGenerationTaskRunResponse), output: &StartMLLabelingSetGenerationTaskRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMLLabelingSetGenerationTaskRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMLLabelingSetGenerationTaskRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMLLabelingSetGenerationTaskRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMLLabelingSetGenerationTaskRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +140,8 @@ func (c *Client) addOperationStartMLLabelingSetGenerationTaskRunMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMLLabelingSetGenerationTaskRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMLLabelingSetGenerationTaskRun",
-	}
 }

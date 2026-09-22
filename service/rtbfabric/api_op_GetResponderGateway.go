@@ -6,11 +6,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -81,6 +79,16 @@ type GetResponderGatewayOutput struct {
 	// The count of active links for the responder gateway.
 	ActiveLinksCount *int32
 
+	// The client routing policy of the gateway. This policy controls which
+	// Availability Zones RTB Fabric uses to reach the gateway for the requester
+	// gateways that send traffic to it. RTB Fabric omits this member if the gateway
+	// has never had a client routing policy. An omitted value means that the gateway
+	// uses AVAILABILITY_ZONE_AFFINITY . For more information, see [Configuring Availability Zone affinity] in the Amazon Web
+	// Services RTB Fabric User Guide.
+	//
+	// [Configuring Availability Zone affinity]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
+	ClientRoutingPolicy types.ClientRoutingPolicy
+
 	// The timestamp of when the responder gateway was created.
 	CreatedAt *time.Time
 
@@ -95,11 +103,6 @@ type GetResponderGatewayOutput struct {
 
 	// The type of gateway. Valid values are EXTERNAL or INTERNAL .
 	GatewayType types.GatewayType
-
-	// Deprecated. Use 'linksRequestedCount' instead.
-	//
-	// Deprecated: Use linksRequestedCount instead
-	InboundLinksCount *int32
 
 	// The count of requested links waiting for the responder gateway to accept or
 	// reject.
@@ -131,9 +134,6 @@ type GetResponderGatewayOutput struct {
 }
 
 func (c *Client) addOperationGetResponderGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResponderGateway{}, middleware.After)
 	if err != nil {
 		return err
@@ -142,65 +142,20 @@ func (c *Client) addOperationGetResponderGatewayMiddlewares(stack *middleware.St
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResponderGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResponderGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResponderGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,12 +168,6 @@ func (c *Client) addOperationGetResponderGatewayMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -625,11 +574,3 @@ type GetResponderGatewayAPIClient interface {
 }
 
 var _ GetResponderGatewayAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetResponderGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResponderGateway",
-	}
-}

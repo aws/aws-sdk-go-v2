@@ -5,10 +5,10 @@ package appfabric
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of app bundles.
@@ -46,6 +46,21 @@ type ListAppBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppBundlesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppBundlesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppBundlesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppBundlesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppBundlesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAppBundlesOutput struct {
 
 	// Contains a list of app bundle summaries.
@@ -66,74 +81,48 @@ type ListAppBundlesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppBundlesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppBundlesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppBundleSummaryList(s, schemas.ListAppBundlesResponse_appBundleSummaryList, v.AppBundleSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppBundlesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppBundlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppBundlesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppBundlesResponse_appBundleSummaryList:
+			return deserializeAppBundleSummaryList(d, schemas.ListAppBundlesResponse_appBundleSummaryList, &v.AppBundleSummaryList)
+		case schemas.ListAppBundlesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppBundlesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppBundles, schemas.ListAppBundlesRequest, schemas.ListAppBundlesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppBundles, schemas.ListAppBundlesRequest, schemas.ListAppBundlesResponse), output: &ListAppBundlesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppBundles{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppBundles"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAppBundles(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +135,6 @@ func (c *Client) addOperationListAppBundlesMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +239,3 @@ type ListAppBundlesAPIClient interface {
 }
 
 var _ ListAppBundlesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAppBundles(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAppBundles",
-	}
-}

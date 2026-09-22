@@ -4,11 +4,10 @@ package cloudcontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels the specified resource operation request. For more information, see [Canceling resource operation requests] in
@@ -44,6 +43,28 @@ type CancelResourceRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelResourceRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelResourceRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelResourceRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestToken != nil {
+		s.WriteString(schemas.CancelResourceRequestInput_RequestToken, *v.RequestToken)
+	}
+}
+func (v *CancelResourceRequestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelResourceRequestInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelResourceRequestInput_RequestToken:
+			v.RequestToken = new(string)
+			return d.ReadString(schemas.CancelResourceRequestInput_RequestToken, v.RequestToken)
+		}
+		return nil
+	})
+}
+
 type CancelResourceRequestOutput struct {
 
 	// Represents the current status of a resource operation request. For more
@@ -58,77 +79,50 @@ type CancelResourceRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelResourceRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelResourceRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelResourceRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProgressEvent != nil {
+		s.WriteStruct(schemas.CancelResourceRequestOutput_ProgressEvent)
+		v.ProgressEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelResourceRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelResourceRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelResourceRequestOutput_ProgressEvent:
+			v.ProgressEvent = &types.ProgressEvent{}
+			return v.ProgressEvent.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelResourceRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelResourceRequest, schemas.CancelResourceRequestInput, schemas.CancelResourceRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelResourceRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelResourceRequest, schemas.CancelResourceRequestInput, schemas.CancelResourceRequestOutput), output: &CancelResourceRequestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelResourceRequest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelResourceRequest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelResourceRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelResourceRequest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +137,8 @@ func (c *Client) addOperationCancelResourceRequestMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelResourceRequest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelResourceRequest",
-	}
 }

@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Quick Sight account, or subscribes to Amazon Quick Sight Q.
@@ -208,6 +207,60 @@ type CreateAccountSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccountSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccountSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccountSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountName != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_AccountName, *v.AccountName)
+	}
+	if v.ActiveDirectoryName != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_ActiveDirectoryName, *v.ActiveDirectoryName)
+	}
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AdminGroup, v.AdminGroup)
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AdminProGroup, v.AdminProGroup)
+	if v.AuthenticationMethod != "" {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_AuthenticationMethod, string(v.AuthenticationMethod))
+	}
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AuthorGroup, v.AuthorGroup)
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_AuthorProGroup, v.AuthorProGroup)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ContactNumber != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_ContactNumber, *v.ContactNumber)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Edition != "" {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_Edition, string(v.Edition))
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_EmailAddress, *v.EmailAddress)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_FirstName, *v.FirstName)
+	}
+	if v.IAMIdentityCenterInstanceArn != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_IAMIdentityCenterInstanceArn, *v.IAMIdentityCenterInstanceArn)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_LastName, *v.LastName)
+	}
+	if v.NotificationEmail != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_NotificationEmail, *v.NotificationEmail)
+	}
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_ReaderGroup, v.ReaderGroup)
+	serializeGroupsList(s, schemas.CreateAccountSubscriptionRequest_ReaderProGroup, v.ReaderProGroup)
+	if v.Realm != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionRequest_Realm, *v.Realm)
+	}
+}
+
 type CreateAccountSubscriptionOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -226,77 +279,61 @@ type CreateAccountSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccountSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccountSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccountSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateAccountSubscriptionResponse_RequestId, *v.RequestId)
+	}
+	if v.SignupResponse != nil {
+		s.WriteStruct(schemas.CreateAccountSubscriptionResponse_SignupResponse)
+		v.SignupResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateAccountSubscriptionResponse_Status, v.Status)
+	}
+}
+func (v *CreateAccountSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccountSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccountSubscriptionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateAccountSubscriptionResponse_RequestId, v.RequestId)
+		case schemas.CreateAccountSubscriptionResponse_SignupResponse:
+			v.SignupResponse = &types.SignupResponse{}
+			return v.SignupResponse.Deserialize(d)
+		case schemas.CreateAccountSubscriptionResponse_Status:
+			return d.ReadInt32(schemas.CreateAccountSubscriptionResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccountSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccountSubscription, schemas.CreateAccountSubscriptionRequest, schemas.CreateAccountSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccountSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccountSubscription, schemas.CreateAccountSubscriptionRequest, schemas.CreateAccountSubscriptionResponse), output: &CreateAccountSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccountSubscription{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAccountSubscription"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAccountSubscriptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccountSubscription(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -311,22 +348,8 @@ func (c *Client) addOperationCreateAccountSubscriptionMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAccountSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAccountSubscription",
-	}
 }

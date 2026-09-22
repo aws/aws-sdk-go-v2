@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops a running multiplex. If the multiplex isn't running, this action has no
@@ -37,6 +36,18 @@ type StopMultiplexInput struct {
 	MultiplexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StopMultiplexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMultiplexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMultiplexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiplexId != nil {
+		s.WriteString(schemas.StopMultiplexRequest_MultiplexId, *v.MultiplexId)
+	}
 }
 
 // Placeholder documentation for StopMultiplexResponse
@@ -78,77 +89,99 @@ type StopMultiplexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopMultiplexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopMultiplexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopMultiplexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StopMultiplexResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.StopMultiplexResponse_AvailabilityZones, v.AvailabilityZones)
+	serialize__listOfMultiplexOutputDestination(s, schemas.StopMultiplexResponse_Destinations, v.Destinations)
+	if v.Id != nil {
+		s.WriteString(schemas.StopMultiplexResponse_Id, *v.Id)
+	}
+	if v.MultiplexSettings != nil {
+		s.WriteStruct(schemas.StopMultiplexResponse_MultiplexSettings)
+		v.MultiplexSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StopMultiplexResponse_Name, *v.Name)
+	}
+	if v.PipelinesRunningCount != nil {
+		s.WriteInt32(schemas.StopMultiplexResponse_PipelinesRunningCount, *v.PipelinesRunningCount)
+	}
+	if v.ProgramCount != nil {
+		s.WriteInt32(schemas.StopMultiplexResponse_ProgramCount, *v.ProgramCount)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StopMultiplexResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.StopMultiplexResponse_Tags, v.Tags)
+}
+func (v *StopMultiplexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopMultiplexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopMultiplexResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StopMultiplexResponse_Arn, v.Arn)
+		case schemas.StopMultiplexResponse_AvailabilityZones:
+			return deserialize__listOf__string(d, schemas.StopMultiplexResponse_AvailabilityZones, &v.AvailabilityZones)
+		case schemas.StopMultiplexResponse_Destinations:
+			return deserialize__listOfMultiplexOutputDestination(d, schemas.StopMultiplexResponse_Destinations, &v.Destinations)
+		case schemas.StopMultiplexResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StopMultiplexResponse_Id, v.Id)
+		case schemas.StopMultiplexResponse_MultiplexSettings:
+			v.MultiplexSettings = &types.MultiplexSettings{}
+			return v.MultiplexSettings.Deserialize(d)
+		case schemas.StopMultiplexResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StopMultiplexResponse_Name, v.Name)
+		case schemas.StopMultiplexResponse_PipelinesRunningCount:
+			v.PipelinesRunningCount = new(int32)
+			return d.ReadInt32(schemas.StopMultiplexResponse_PipelinesRunningCount, v.PipelinesRunningCount)
+		case schemas.StopMultiplexResponse_ProgramCount:
+			v.ProgramCount = new(int32)
+			return d.ReadInt32(schemas.StopMultiplexResponse_ProgramCount, v.ProgramCount)
+		case schemas.StopMultiplexResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StopMultiplexResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.MultiplexState(ev)
+			return nil
+		case schemas.StopMultiplexResponse_Tags:
+			return deserializeTags(d, schemas.StopMultiplexResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMultiplex, schemas.StopMultiplexRequest, schemas.StopMultiplexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopMultiplex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopMultiplex, schemas.StopMultiplexRequest, schemas.StopMultiplexResponse), output: &StopMultiplexOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopMultiplex{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopMultiplex"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopMultiplexValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopMultiplex(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +196,8 @@ func (c *Client) addOperationStopMultiplexMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopMultiplex(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopMultiplex",
-	}
 }

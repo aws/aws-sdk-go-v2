@@ -4,11 +4,10 @@ package glacier
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation lists all the tags attached to a vault. The operation returns an
@@ -50,6 +49,21 @@ type ListTagsForVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListTagsForVaultInput_accountId, *v.AccountId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.ListTagsForVaultInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type ListTagsForVaultOutput struct {
 
@@ -62,77 +76,45 @@ type ListTagsForVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagsForVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagsForVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagsForVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagMap(s, schemas.ListTagsForVaultOutput_Tags, v.Tags)
+}
+func (v *ListTagsForVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagsForVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagsForVaultOutput_Tags:
+			return deserializeTagMap(d, schemas.ListTagsForVaultOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTagsForVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForVault, schemas.ListTagsForVaultInput, schemas.ListTagsForVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTagsForVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTagsForVault, schemas.ListTagsForVaultInput, schemas.ListTagsForVaultOutput), output: &ListTagsForVaultOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTagsForVault{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTagsForVault"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTagsForVaultValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForVault(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +138,8 @@ func (c *Client) addOperationListTagsForVaultMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListTagsForVault(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTagsForVault",
-	}
 }

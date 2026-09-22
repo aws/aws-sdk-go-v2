@@ -4,11 +4,10 @@ package proton
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update template sync configuration parameters, except for the templateName and
@@ -66,6 +65,66 @@ type UpdateTemplateSyncConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateSyncConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateSyncConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateSyncConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Branch != nil {
+		s.WriteString(schemas.UpdateTemplateSyncConfigInput_branch, *v.Branch)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.UpdateTemplateSyncConfigInput_repositoryName, *v.RepositoryName)
+	}
+	if v.RepositoryProvider != "" {
+		s.WriteString(schemas.UpdateTemplateSyncConfigInput_repositoryProvider, string(v.RepositoryProvider))
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateTemplateSyncConfigInput_subdirectory, *v.Subdirectory)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.UpdateTemplateSyncConfigInput_templateName, *v.TemplateName)
+	}
+	if v.TemplateType != "" {
+		s.WriteString(schemas.UpdateTemplateSyncConfigInput_templateType, string(v.TemplateType))
+	}
+}
+func (v *UpdateTemplateSyncConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTemplateSyncConfigInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTemplateSyncConfigInput_branch:
+			v.Branch = new(string)
+			return d.ReadString(schemas.UpdateTemplateSyncConfigInput_branch, v.Branch)
+		case schemas.UpdateTemplateSyncConfigInput_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.UpdateTemplateSyncConfigInput_repositoryName, v.RepositoryName)
+		case schemas.UpdateTemplateSyncConfigInput_repositoryProvider:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTemplateSyncConfigInput_repositoryProvider, &ev); err != nil {
+				return err
+			}
+			v.RepositoryProvider = types.RepositoryProvider(ev)
+			return nil
+		case schemas.UpdateTemplateSyncConfigInput_subdirectory:
+			v.Subdirectory = new(string)
+			return d.ReadString(schemas.UpdateTemplateSyncConfigInput_subdirectory, v.Subdirectory)
+		case schemas.UpdateTemplateSyncConfigInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.UpdateTemplateSyncConfigInput_templateName, v.TemplateName)
+		case schemas.UpdateTemplateSyncConfigInput_templateType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTemplateSyncConfigInput_templateType, &ev); err != nil {
+				return err
+			}
+			v.TemplateType = types.TemplateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateTemplateSyncConfigOutput struct {
 
 	// The template sync configuration detail data that's returned by Proton.
@@ -77,77 +136,50 @@ type UpdateTemplateSyncConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateSyncConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateSyncConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateSyncConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateSyncConfig != nil {
+		s.WriteStruct(schemas.UpdateTemplateSyncConfigOutput_templateSyncConfig)
+		v.TemplateSyncConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTemplateSyncConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTemplateSyncConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTemplateSyncConfigOutput_templateSyncConfig:
+			v.TemplateSyncConfig = &types.TemplateSyncConfig{}
+			return v.TemplateSyncConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTemplateSyncConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplateSyncConfig, schemas.UpdateTemplateSyncConfigInput, schemas.UpdateTemplateSyncConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTemplateSyncConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplateSyncConfig, schemas.UpdateTemplateSyncConfigInput, schemas.UpdateTemplateSyncConfigOutput), output: &UpdateTemplateSyncConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateTemplateSyncConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTemplateSyncConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTemplateSyncConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTemplateSyncConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +194,8 @@ func (c *Client) addOperationUpdateTemplateSyncConfigMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateTemplateSyncConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTemplateSyncConfig",
-	}
 }

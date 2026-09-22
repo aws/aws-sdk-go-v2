@@ -30,6 +30,26 @@ func (m *validateOpCancelJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelJobs struct {
+}
+
+func (*validateOpCancelJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateComputeEnvironment struct {
 }
 
@@ -570,6 +590,26 @@ func (m *validateOpTerminateJob) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTerminateJobs struct {
+}
+
+func (*validateOpTerminateJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTerminateJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TerminateJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTerminateJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTerminateServiceJob struct {
 }
 
@@ -585,6 +625,26 @@ func (m *validateOpTerminateServiceJob) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTerminateServiceJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTerminateServiceJobs struct {
+}
+
+func (*validateOpTerminateServiceJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTerminateServiceJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TerminateServiceJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTerminateServiceJobsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -754,6 +814,10 @@ func addOpCancelJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJob{}, middleware.After)
 }
 
+func addOpCancelJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelJobs{}, middleware.After)
+}
+
 func addOpCreateComputeEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateComputeEnvironment{}, middleware.After)
 }
@@ -862,8 +926,16 @@ func addOpTerminateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateJob{}, middleware.After)
 }
 
+func addOpTerminateJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTerminateJobs{}, middleware.After)
+}
+
 func addOpTerminateServiceJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateServiceJob{}, middleware.After)
+}
+
+func addOpTerminateServiceJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTerminateServiceJobs{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -944,12 +1016,14 @@ func validateComputeResource(v *types.ComputeResource) error {
 	if v.MaxvCpus == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxvCpus"))
 	}
-	if v.Subnets == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
-	}
 	if v.Ec2Configuration != nil {
 		if err := validateEc2ConfigurationList(v.Ec2Configuration); err != nil {
 			invalidParams.AddNested("Ec2Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManagedInstancesProvider != nil {
+		if err := validateManagedInstancesProvider(v.ManagedInstancesProvider); err != nil {
+			invalidParams.AddNested("ManagedInstancesProvider", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -967,6 +1041,11 @@ func validateComputeResourceUpdate(v *types.ComputeResourceUpdate) error {
 	if v.Ec2Configuration != nil {
 		if err := validateEc2ConfigurationList(v.Ec2Configuration); err != nil {
 			invalidParams.AddNested("Ec2Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ManagedInstancesProvider != nil {
+		if err := validateUpdateManagedInstancesProviderConfiguration(v.ManagedInstancesProvider); err != nil {
+			invalidParams.AddNested("ManagedInstancesProvider", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1581,6 +1660,45 @@ func validateImagePullSecrets(v []types.ImagePullSecret) error {
 	}
 }
 
+func validateInstanceLaunchTemplate(v *types.InstanceLaunchTemplate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceLaunchTemplate"}
+	if v.Ec2InstanceProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ec2InstanceProfileArn"))
+	}
+	if v.NetworkConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkConfiguration"))
+	} else if v.NetworkConfiguration != nil {
+		if err := validateManagedInstancesNetworkConfiguration(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInstanceLaunchTemplateUpdate(v *types.InstanceLaunchTemplateUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InstanceLaunchTemplateUpdate"}
+	if v.NetworkConfiguration != nil {
+		if err := validateManagedInstancesNetworkConfiguration(v.NetworkConfiguration); err != nil {
+			invalidParams.AddNested("NetworkConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateJobStateTimeLimitAction(v *types.JobStateTimeLimitAction) error {
 	if v == nil {
 		return nil
@@ -1723,6 +1841,46 @@ func validateLogConfiguration(v *types.LogConfiguration) error {
 	if v.SecretOptions != nil {
 		if err := validateSecretList(v.SecretOptions); err != nil {
 			invalidParams.AddNested("SecretOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedInstancesNetworkConfiguration(v *types.ManagedInstancesNetworkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedInstancesNetworkConfiguration"}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if v.SecurityGroups == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroups"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateManagedInstancesProvider(v *types.ManagedInstancesProvider) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ManagedInstancesProvider"}
+	if v.InfrastructureRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureRoleArn"))
+	}
+	if v.InstanceLaunchTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceLaunchTemplate"))
+	} else if v.InstanceLaunchTemplate != nil {
+		if err := validateInstanceLaunchTemplate(v.InstanceLaunchTemplate); err != nil {
+			invalidParams.AddNested("InstanceLaunchTemplate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2304,6 +2462,23 @@ func validateUlimits(v []types.Ulimit) error {
 	}
 }
 
+func validateUpdateManagedInstancesProviderConfiguration(v *types.UpdateManagedInstancesProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateManagedInstancesProviderConfiguration"}
+	if v.InstanceLaunchTemplate != nil {
+		if err := validateInstanceLaunchTemplateUpdate(v.InstanceLaunchTemplate); err != nil {
+			invalidParams.AddNested("InstanceLaunchTemplate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVolume(v *types.Volume) error {
 	if v == nil {
 		return nil
@@ -2350,6 +2525,24 @@ func validateOpCancelJobInput(v *CancelJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CancelJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelJobsInput(v *CancelJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelJobsInput"}
+	if v.Jobs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Jobs"))
 	}
 	if v.Reason == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
@@ -2916,6 +3109,24 @@ func validateOpTerminateJobInput(v *TerminateJobInput) error {
 	}
 }
 
+func validateOpTerminateJobsInput(v *TerminateJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerminateJobsInput"}
+	if v.Jobs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Jobs"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTerminateServiceJobInput(v *TerminateServiceJobInput) error {
 	if v == nil {
 		return nil
@@ -2923,6 +3134,24 @@ func validateOpTerminateServiceJobInput(v *TerminateServiceJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateServiceJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.Reason == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Reason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTerminateServiceJobsInput(v *TerminateServiceJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerminateServiceJobsInput"}
+	if v.Jobs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Jobs"))
 	}
 	if v.Reason == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Reason"))

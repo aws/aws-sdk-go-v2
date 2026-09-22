@@ -1,0 +1,5 @@
+POST /v1/package-group?domain=__Domain__&domain-owner=__DomainOwner__
+
+Content-Type: application/json
+
+{"contactInfo":"__ContactInfo__","description":"__Description__","packageGroup":"__PackageGroup__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

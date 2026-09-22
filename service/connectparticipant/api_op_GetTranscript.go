@@ -5,17 +5,17 @@ package connectparticipant
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a transcript of the session, including details about any attachments.
 // For information about accessing past chat contact transcripts for a persistent
 // chat, see [Enable persistent chat].
 //
-// For security recommendations, see [Amazon Connect Chat security best practices].
+// For security recommendations, see [Connect Customer Chat security best practices].
 //
 // If you have a process that consumes events in the transcript of an chat that
 // has ended, note that chat transcripts contain the following event content types
@@ -38,8 +38,8 @@ import (
 // The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
 //
 // [Enable persistent chat]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) GetTranscript(ctx context.Context, params *GetTranscriptInput, optFns ...func(*Options)) (*GetTranscriptOutput, error) {
 	if params == nil {
 		params = &GetTranscriptInput{}
@@ -85,6 +85,38 @@ type GetTranscriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTranscriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTranscriptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTranscriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.GetTranscriptRequest_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.GetTranscriptRequest_ContactId, *v.ContactId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTranscriptRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTranscriptRequest_NextToken, *v.NextToken)
+	}
+	if v.ScanDirection != "" {
+		s.WriteString(schemas.GetTranscriptRequest_ScanDirection, string(v.ScanDirection))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.GetTranscriptRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StartPosition != nil {
+		s.WriteStruct(schemas.GetTranscriptRequest_StartPosition)
+		v.StartPosition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetTranscriptOutput struct {
 
 	// The initial contact ID for the contact.
@@ -103,77 +135,57 @@ type GetTranscriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTranscriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTranscriptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTranscriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitialContactId != nil {
+		s.WriteString(schemas.GetTranscriptResponse_InitialContactId, *v.InitialContactId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTranscriptResponse_NextToken, *v.NextToken)
+	}
+	serializeTranscript(s, schemas.GetTranscriptResponse_Transcript, v.Transcript)
+}
+func (v *GetTranscriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTranscriptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTranscriptResponse_InitialContactId:
+			v.InitialContactId = new(string)
+			return d.ReadString(schemas.GetTranscriptResponse_InitialContactId, v.InitialContactId)
+		case schemas.GetTranscriptResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTranscriptResponse_NextToken, v.NextToken)
+		case schemas.GetTranscriptResponse_Transcript:
+			return deserializeTranscript(d, schemas.GetTranscriptResponse_Transcript, &v.Transcript)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTranscriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTranscript, schemas.GetTranscriptRequest, schemas.GetTranscriptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTranscript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTranscript, schemas.GetTranscriptRequest, schemas.GetTranscriptResponse), output: &GetTranscriptOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTranscript{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTranscript"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTranscriptValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTranscript(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +198,6 @@ func (c *Client) addOperationGetTranscriptMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -291,11 +297,3 @@ type GetTranscriptAPIClient interface {
 }
 
 var _ GetTranscriptAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetTranscript(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTranscript",
-	}
-}

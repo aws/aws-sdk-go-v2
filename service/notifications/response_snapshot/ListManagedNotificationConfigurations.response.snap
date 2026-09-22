@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"managedNotificationConfigurations":[{"arn":"__Arn__","description":"__Description__","name":"__Name__"},{"arn":"__Arn__","description":"__Description__","name":"__Name__"}],"nextToken":"__NextToken__"}

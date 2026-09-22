@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeInferenceComponentInput struct {
 	InferenceComponentName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeInferenceComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInferenceComponentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInferenceComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceComponentName != nil {
+		s.WriteString(schemas.DescribeInferenceComponentInput_InferenceComponentName, *v.InferenceComponentName)
+	}
 }
 
 type DescribeInferenceComponentOutput struct {
@@ -103,77 +114,127 @@ type DescribeInferenceComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInferenceComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInferenceComponentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInferenceComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeInferenceComponentOutput_CreationTime, *v.CreationTime)
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.DescribeInferenceComponentOutput_EndpointArn, *v.EndpointArn)
+	}
+	if v.EndpointName != nil {
+		s.WriteString(schemas.DescribeInferenceComponentOutput_EndpointName, *v.EndpointName)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeInferenceComponentOutput_FailureReason, *v.FailureReason)
+	}
+	if v.InferenceComponentArn != nil {
+		s.WriteString(schemas.DescribeInferenceComponentOutput_InferenceComponentArn, *v.InferenceComponentArn)
+	}
+	if v.InferenceComponentName != nil {
+		s.WriteString(schemas.DescribeInferenceComponentOutput_InferenceComponentName, *v.InferenceComponentName)
+	}
+	if v.InferenceComponentStatus != "" {
+		s.WriteString(schemas.DescribeInferenceComponentOutput_InferenceComponentStatus, string(v.InferenceComponentStatus))
+	}
+	if v.LastDeploymentConfig != nil {
+		s.WriteStruct(schemas.DescribeInferenceComponentOutput_LastDeploymentConfig)
+		v.LastDeploymentConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeInferenceComponentOutput_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.RuntimeConfig != nil {
+		s.WriteStruct(schemas.DescribeInferenceComponentOutput_RuntimeConfig)
+		v.RuntimeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Specification != nil {
+		s.WriteStruct(schemas.DescribeInferenceComponentOutput_Specification)
+		v.Specification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInferenceComponentSpecificationSummaryList(s, schemas.DescribeInferenceComponentOutput_Specifications, v.Specifications)
+	if v.VariantName != nil {
+		s.WriteString(schemas.DescribeInferenceComponentOutput_VariantName, *v.VariantName)
+	}
+}
+func (v *DescribeInferenceComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInferenceComponentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInferenceComponentOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeInferenceComponentOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeInferenceComponentOutput_EndpointArn:
+			v.EndpointArn = new(string)
+			return d.ReadString(schemas.DescribeInferenceComponentOutput_EndpointArn, v.EndpointArn)
+		case schemas.DescribeInferenceComponentOutput_EndpointName:
+			v.EndpointName = new(string)
+			return d.ReadString(schemas.DescribeInferenceComponentOutput_EndpointName, v.EndpointName)
+		case schemas.DescribeInferenceComponentOutput_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeInferenceComponentOutput_FailureReason, v.FailureReason)
+		case schemas.DescribeInferenceComponentOutput_InferenceComponentArn:
+			v.InferenceComponentArn = new(string)
+			return d.ReadString(schemas.DescribeInferenceComponentOutput_InferenceComponentArn, v.InferenceComponentArn)
+		case schemas.DescribeInferenceComponentOutput_InferenceComponentName:
+			v.InferenceComponentName = new(string)
+			return d.ReadString(schemas.DescribeInferenceComponentOutput_InferenceComponentName, v.InferenceComponentName)
+		case schemas.DescribeInferenceComponentOutput_InferenceComponentStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInferenceComponentOutput_InferenceComponentStatus, &ev); err != nil {
+				return err
+			}
+			v.InferenceComponentStatus = types.InferenceComponentStatus(ev)
+			return nil
+		case schemas.DescribeInferenceComponentOutput_LastDeploymentConfig:
+			v.LastDeploymentConfig = &types.InferenceComponentDeploymentConfig{}
+			return v.LastDeploymentConfig.Deserialize(d)
+		case schemas.DescribeInferenceComponentOutput_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeInferenceComponentOutput_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeInferenceComponentOutput_RuntimeConfig:
+			v.RuntimeConfig = &types.InferenceComponentRuntimeConfigSummary{}
+			return v.RuntimeConfig.Deserialize(d)
+		case schemas.DescribeInferenceComponentOutput_Specification:
+			v.Specification = &types.InferenceComponentSpecificationSummary{}
+			return v.Specification.Deserialize(d)
+		case schemas.DescribeInferenceComponentOutput_Specifications:
+			return deserializeInferenceComponentSpecificationSummaryList(d, schemas.DescribeInferenceComponentOutput_Specifications, &v.Specifications)
+		case schemas.DescribeInferenceComponentOutput_VariantName:
+			v.VariantName = new(string)
+			return d.ReadString(schemas.DescribeInferenceComponentOutput_VariantName, v.VariantName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInferenceComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInferenceComponent, schemas.DescribeInferenceComponentInput, schemas.DescribeInferenceComponentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeInferenceComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInferenceComponent, schemas.DescribeInferenceComponentInput, schemas.DescribeInferenceComponentOutput), output: &DescribeInferenceComponentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeInferenceComponent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInferenceComponent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeInferenceComponentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInferenceComponent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +249,8 @@ func (c *Client) addOperationDescribeInferenceComponentMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeInferenceComponent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeInferenceComponent",
-	}
 }

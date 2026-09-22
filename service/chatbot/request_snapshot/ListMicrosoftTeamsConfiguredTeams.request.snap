@@ -1,0 +1,5 @@
+POST /list-ms-teams-configured-teams
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__"}

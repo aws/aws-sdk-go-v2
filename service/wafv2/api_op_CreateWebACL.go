@@ -4,11 +4,10 @@ package wafv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a WebACL per the specifications provided.
@@ -22,8 +21,8 @@ import (
 // ACL with one or more Amazon Web Services resources to protect. The resource
 // types include Amazon CloudFront distribution, Amazon API Gateway REST API,
 // Application Load Balancer, AppSync GraphQL API, Amazon Cognito user pool, App
-// Runner service, Amplify application, and Amazon Web Services Verified Access
-// instance.
+// Runner service, Amplify application, Amazon Web Services Verified Access
+// instance, and Amazon Bedrock AgentCore Gateway.
 func (c *Client) CreateWebACL(ctx context.Context, params *CreateWebACLInput, optFns ...func(*Options)) (*CreateWebACLOutput, error) {
 	if params == nil {
 		params = &CreateWebACLInput{}
@@ -132,6 +131,10 @@ type CreateWebACLInput struct {
 	// A description of the web ACL that helps with identification.
 	Description *string
 
+	// The monetization configuration for the web ACL. Provide this when any rule in
+	// the web ACL uses the Monetize action.
+	MonetizationConfig *types.MonetizationConfig
+
 	// Specifies the type of DDoS protection to apply to web request data for a web
 	// ACL. For most scenarios, it is recommended to use the default protection level,
 	// ACTIVE_UNDER_DDOS . If a web ACL is associated with multiple Application Load
@@ -164,6 +167,73 @@ type CreateWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssociationConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_AssociationConfig)
+		v.AssociationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CaptchaConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_CaptchaConfig)
+		v.CaptchaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChallengeConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_ChallengeConfig)
+		v.ChallengeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCustomResponseBodies(s, schemas.CreateWebACLRequest_CustomResponseBodies, v.CustomResponseBodies)
+	if v.DataProtectionConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_DataProtectionConfig)
+		v.DataProtectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultAction != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_DefaultAction)
+		v.DefaultAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWebACLRequest_Description, *v.Description)
+	}
+	if v.MonetizationConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_MonetizationConfig)
+		v.MonetizationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWebACLRequest_Name, *v.Name)
+	}
+	if v.OnSourceDDoSProtectionConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_OnSourceDDoSProtectionConfig)
+		v.OnSourceDDoSProtectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRules(s, schemas.CreateWebACLRequest_Rules, v.Rules)
+	if v.Scope != "" {
+		s.WriteString(schemas.CreateWebACLRequest_Scope, string(v.Scope))
+	}
+	serializeTagList(s, schemas.CreateWebACLRequest_Tags, v.Tags)
+	serializeTokenDomains(s, schemas.CreateWebACLRequest_TokenDomains, v.TokenDomains)
+	if v.VisibilityConfig != nil {
+		s.WriteStruct(schemas.CreateWebACLRequest_VisibilityConfig)
+		v.VisibilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateWebACLOutput struct {
 
 	// High-level information about a WebACL, returned by operations like create and list.
@@ -177,77 +247,50 @@ type CreateWebACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWebACLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWebACLResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWebACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Summary != nil {
+		s.WriteStruct(schemas.CreateWebACLResponse_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWebACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWebACLResponse_Summary:
+			v.Summary = &types.WebACLSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebACL, schemas.CreateWebACLRequest, schemas.CreateWebACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWebACL, schemas.CreateWebACLRequest, schemas.CreateWebACLResponse), output: &CreateWebACLOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateWebACL{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWebACL"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateWebACLValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWebACL(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -262,22 +305,8 @@ func (c *Client) addOperationCreateWebACLMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateWebACL(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWebACL",
-	}
 }

@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2
@@ -42,6 +41,22 @@ import (
 //
 // The authorization remains valid for 24 hours unless it is canceled. You must
 // create or delete the peering connection while the authorization is valid.
+//
+// Amazon GameLift Servers uses the caller's credentials to update peer-VPC
+// resources. The IAM user that calls this operation must have the following Amazon
+// EC2 permissions enabled:
+//
+//   - ec2:AcceptVpcPeeringConnection
+//
+//   - ec2:AuthorizeSecurityGroupEgress
+//
+//   - ec2:AuthorizeSecurityGroupIngress
+//
+//   - ec2:CreateRoute
+//
+//   - ec2:DescribeRouteTables
+//
+//   - ec2:DescribeSecurityGroups
 //
 // # Related actions
 //
@@ -88,6 +103,21 @@ type CreateVpcPeeringAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcPeeringAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcPeeringAuthorizationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcPeeringAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameLiftAwsAccountId != nil {
+		s.WriteString(schemas.CreateVpcPeeringAuthorizationInput_GameLiftAwsAccountId, *v.GameLiftAwsAccountId)
+	}
+	if v.PeerVpcId != nil {
+		s.WriteString(schemas.CreateVpcPeeringAuthorizationInput_PeerVpcId, *v.PeerVpcId)
+	}
+}
+
 type CreateVpcPeeringAuthorizationOutput struct {
 
 	// Details on the requested VPC peering authorization, including expiration.
@@ -99,65 +129,44 @@ type CreateVpcPeeringAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcPeeringAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcPeeringAuthorizationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcPeeringAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcPeeringAuthorization != nil {
+		s.WriteStruct(schemas.CreateVpcPeeringAuthorizationOutput_VpcPeeringAuthorization)
+		v.VpcPeeringAuthorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVpcPeeringAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcPeeringAuthorizationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcPeeringAuthorizationOutput_VpcPeeringAuthorization:
+			v.VpcPeeringAuthorization = &types.VpcPeeringAuthorization{}
+			return v.VpcPeeringAuthorization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcPeeringAuthorization, schemas.CreateVpcPeeringAuthorizationInput, schemas.CreateVpcPeeringAuthorizationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateVpcPeeringAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcPeeringAuthorization, schemas.CreateVpcPeeringAuthorizationInput, schemas.CreateVpcPeeringAuthorizationOutput), output: &CreateVpcPeeringAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateVpcPeeringAuthorization{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVpcPeeringAuthorization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -167,12 +176,6 @@ func (c *Client) addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *mid
 		return err
 	}
 	if err = addOpCreateVpcPeeringAuthorizationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVpcPeeringAuthorization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +190,8 @@ func (c *Client) addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateVpcPeeringAuthorization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVpcPeeringAuthorization",
-	}
 }

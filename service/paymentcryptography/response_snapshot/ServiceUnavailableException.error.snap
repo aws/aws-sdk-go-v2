@@ -1,0 +1,5 @@
+503
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.AssociateMpaTeam
+
+{"__type":"ServiceUnavailableException","Message":"__Message__"}

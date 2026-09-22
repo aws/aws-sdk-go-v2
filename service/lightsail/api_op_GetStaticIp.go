@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about an Amazon Lightsail static IP.
@@ -37,6 +36,18 @@ type GetStaticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStaticIpInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStaticIpRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStaticIpInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StaticIpName != nil {
+		s.WriteString(schemas.GetStaticIpRequest_staticIpName, *v.StaticIpName)
+	}
+}
+
 type GetStaticIpOutput struct {
 
 	// An array of key-value pairs containing information about the requested static
@@ -49,77 +60,50 @@ type GetStaticIpOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStaticIpOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStaticIpResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStaticIpOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StaticIp != nil {
+		s.WriteStruct(schemas.GetStaticIpResult_staticIp)
+		v.StaticIp.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetStaticIpOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStaticIpResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStaticIpResult_staticIp:
+			v.StaticIp = &types.StaticIp{}
+			return v.StaticIp.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStaticIp, schemas.GetStaticIpRequest, schemas.GetStaticIpResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStaticIp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStaticIp, schemas.GetStaticIpRequest, schemas.GetStaticIpResult), output: &GetStaticIpOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetStaticIp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStaticIp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetStaticIpValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetStaticIp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +118,8 @@ func (c *Client) addOperationGetStaticIpMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetStaticIp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetStaticIp",
-	}
 }

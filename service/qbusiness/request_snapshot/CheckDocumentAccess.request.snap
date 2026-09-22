@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/index/__IndexId__/users/__UserId__/documents/__DocumentId__/check-document-access?dataSourceId=__DataSourceId__
+
+

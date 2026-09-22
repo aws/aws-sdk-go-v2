@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,21 @@ type DescribePartnerAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePartnerAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePartnerAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePartnerAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribePartnerAppRequest_Arn, *v.Arn)
+	}
+	if v.IncludeAvailableUpgrade != nil {
+		s.WriteBool(schemas.DescribePartnerAppRequest_IncludeAvailableUpgrade, *v.IncludeAvailableUpgrade)
+	}
+}
+
 type DescribePartnerAppOutput struct {
 
 	// Configuration settings for the SageMaker Partner AI App.
@@ -51,6 +65,13 @@ type DescribePartnerAppOutput struct {
 	Arn *string
 
 	// The authorization type that users use to access the SageMaker Partner AI App.
+	// Valid values:
+	//
+	//   - IAM : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM identity.
+	//
+	//   - IDC : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM Identity Center identity.
 	AuthType types.PartnerAppAuthType
 
 	// A map of available minor version upgrades for the SageMaker Partner AI App. The
@@ -83,6 +104,12 @@ type DescribePartnerAppOutput struct {
 
 	// The ARN of the IAM role associated with the SageMaker Partner AI App.
 	ExecutionRoleArn *string
+
+	// Contains the Amazon Web Services IAM Identity Center configuration for the
+	// SageMaker Partner AI App, including the Identity Center instance and the
+	// Identity Center application that SageMaker creates for the app. The service
+	// returns this field for apps that use IDC authorization.
+	IdcConfig *types.IdcConfigOutput
 
 	// The Amazon Web Services KMS customer managed key used to encrypt the data at
 	// rest associated with SageMaker Partner AI Apps.
@@ -136,77 +163,184 @@ type DescribePartnerAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePartnerAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePartnerAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePartnerAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_Arn, *v.Arn)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.DescribePartnerAppResponse_AuthType, string(v.AuthType))
+	}
+	if v.AvailableUpgrade != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_AvailableUpgrade)
+		v.AvailableUpgrade.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BaseUrl != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_BaseUrl, *v.BaseUrl)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribePartnerAppResponse_CreationTime, *v.CreationTime)
+	}
+	if v.CurrentVersionEolDate != nil {
+		s.WriteTime(schemas.DescribePartnerAppResponse_CurrentVersionEolDate, *v.CurrentVersionEolDate)
+	}
+	if v.EnableAutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.DescribePartnerAppResponse_EnableAutoMinorVersionUpgrade, *v.EnableAutoMinorVersionUpgrade)
+	}
+	if v.EnableIamSessionBasedIdentity != nil {
+		s.WriteBool(schemas.DescribePartnerAppResponse_EnableIamSessionBasedIdentity, *v.EnableIamSessionBasedIdentity)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.IdcConfig != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_IdcConfig)
+		v.IdcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribePartnerAppResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.MaintenanceConfig != nil {
+		s.WriteStruct(schemas.DescribePartnerAppResponse_MaintenanceConfig)
+		v.MaintenanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribePartnerAppResponse_Status, string(v.Status))
+	}
+	if v.Tier != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_Tier, *v.Tier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribePartnerAppResponse_Type, string(v.Type))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DescribePartnerAppResponse_Version, *v.Version)
+	}
+}
+func (v *DescribePartnerAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePartnerAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePartnerAppResponse_ApplicationConfig:
+			v.ApplicationConfig = &types.PartnerAppConfig{}
+			return v.ApplicationConfig.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_Arn, v.Arn)
+		case schemas.DescribePartnerAppResponse_AuthType:
+			var ev string
+			if err := d.ReadString(schemas.DescribePartnerAppResponse_AuthType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = types.PartnerAppAuthType(ev)
+			return nil
+		case schemas.DescribePartnerAppResponse_AvailableUpgrade:
+			v.AvailableUpgrade = &types.AvailableUpgrade{}
+			return v.AvailableUpgrade.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_BaseUrl:
+			v.BaseUrl = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_BaseUrl, v.BaseUrl)
+		case schemas.DescribePartnerAppResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePartnerAppResponse_CreationTime, v.CreationTime)
+		case schemas.DescribePartnerAppResponse_CurrentVersionEolDate:
+			v.CurrentVersionEolDate = new(time.Time)
+			return d.ReadTime(schemas.DescribePartnerAppResponse_CurrentVersionEolDate, v.CurrentVersionEolDate)
+		case schemas.DescribePartnerAppResponse_EnableAutoMinorVersionUpgrade:
+			v.EnableAutoMinorVersionUpgrade = new(bool)
+			return d.ReadBool(schemas.DescribePartnerAppResponse_EnableAutoMinorVersionUpgrade, v.EnableAutoMinorVersionUpgrade)
+		case schemas.DescribePartnerAppResponse_EnableIamSessionBasedIdentity:
+			v.EnableIamSessionBasedIdentity = new(bool)
+			return d.ReadBool(schemas.DescribePartnerAppResponse_EnableIamSessionBasedIdentity, v.EnableIamSessionBasedIdentity)
+		case schemas.DescribePartnerAppResponse_Error:
+			v.Error = &types.ErrorInfo{}
+			return v.Error.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.DescribePartnerAppResponse_IdcConfig:
+			v.IdcConfig = &types.IdcConfigOutput{}
+			return v.IdcConfig.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.DescribePartnerAppResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePartnerAppResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribePartnerAppResponse_MaintenanceConfig:
+			v.MaintenanceConfig = &types.PartnerAppMaintenanceConfig{}
+			return v.MaintenanceConfig.Deserialize(d)
+		case schemas.DescribePartnerAppResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_Name, v.Name)
+		case schemas.DescribePartnerAppResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribePartnerAppResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PartnerAppStatus(ev)
+			return nil
+		case schemas.DescribePartnerAppResponse_Tier:
+			v.Tier = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_Tier, v.Tier)
+		case schemas.DescribePartnerAppResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.DescribePartnerAppResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PartnerAppType(ev)
+			return nil
+		case schemas.DescribePartnerAppResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DescribePartnerAppResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePartnerAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartnerApp, schemas.DescribePartnerAppRequest, schemas.DescribePartnerAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePartnerApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartnerApp, schemas.DescribePartnerAppRequest, schemas.DescribePartnerAppResponse), output: &DescribePartnerAppOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePartnerApp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePartnerApp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePartnerAppValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePartnerApp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,22 +355,8 @@ func (c *Client) addOperationDescribePartnerAppMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribePartnerApp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePartnerApp",
-	}
 }

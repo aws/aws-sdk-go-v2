@@ -4,11 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -99,6 +98,25 @@ type PutRemediationExceptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRemediationExceptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRemediationExceptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRemediationExceptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigRuleName != nil {
+		s.WriteString(schemas.PutRemediationExceptionsRequest_ConfigRuleName, *v.ConfigRuleName)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteTime(schemas.PutRemediationExceptionsRequest_ExpirationTime, *v.ExpirationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PutRemediationExceptionsRequest_Message, *v.Message)
+	}
+	serializeRemediationExceptionResourceKeys(s, schemas.PutRemediationExceptionsRequest_ResourceKeys, v.ResourceKeys)
+}
+
 type PutRemediationExceptionsOutput struct {
 
 	// Returns a list of failed remediation exceptions batch objects. Each object in
@@ -111,77 +129,45 @@ type PutRemediationExceptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRemediationExceptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRemediationExceptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRemediationExceptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedRemediationExceptionBatches(s, schemas.PutRemediationExceptionsResponse_FailedBatches, v.FailedBatches)
+}
+func (v *PutRemediationExceptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRemediationExceptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRemediationExceptionsResponse_FailedBatches:
+			return deserializeFailedRemediationExceptionBatches(d, schemas.PutRemediationExceptionsResponse_FailedBatches, &v.FailedBatches)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRemediationExceptions, schemas.PutRemediationExceptionsRequest, schemas.PutRemediationExceptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutRemediationExceptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRemediationExceptions, schemas.PutRemediationExceptionsRequest, schemas.PutRemediationExceptionsResponse), output: &PutRemediationExceptionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutRemediationExceptions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutRemediationExceptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutRemediationExceptionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRemediationExceptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +182,8 @@ func (c *Client) addOperationPutRemediationExceptionsMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutRemediationExceptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutRemediationExceptions",
-	}
 }

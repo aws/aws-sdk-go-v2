@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/form-types
+
+Content-Type: application/json
+
+{"description":"__Description__","model":{"smithy":"__ModelMemberSmithy__"},"name":"__Name__","owningProjectIdentifier":"__OwningProjectIdentifier__","status":"ENABLED"}

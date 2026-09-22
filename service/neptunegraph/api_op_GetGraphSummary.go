@@ -5,7 +5,7 @@ package neptunegraph
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -44,6 +44,20 @@ type GetGraphSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphSummaryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.GetGraphSummaryInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.GetGraphSummaryInput_mode, string(v.Mode))
+	}
+}
 func (in *GetGraphSummaryInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("DataPlane")
@@ -67,65 +81,56 @@ type GetGraphSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGraphSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGraphSummaryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGraphSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphSummary != nil {
+		s.WriteStruct(schemas.GetGraphSummaryOutput_graphSummary)
+		v.GraphSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastStatisticsComputationTime != nil {
+		s.WriteTime(schemas.GetGraphSummaryOutput_lastStatisticsComputationTime, *v.LastStatisticsComputationTime)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetGraphSummaryOutput_version, *v.Version)
+	}
+}
+func (v *GetGraphSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGraphSummaryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGraphSummaryOutput_graphSummary:
+			v.GraphSummary = &types.GraphDataSummary{}
+			return v.GraphSummary.Deserialize(d)
+		case schemas.GetGraphSummaryOutput_lastStatisticsComputationTime:
+			v.LastStatisticsComputationTime = new(time.Time)
+			return d.ReadTime(schemas.GetGraphSummaryOutput_lastStatisticsComputationTime, v.LastStatisticsComputationTime)
+		case schemas.GetGraphSummaryOutput_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetGraphSummaryOutput_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGraphSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphSummary, schemas.GetGraphSummaryInput, schemas.GetGraphSummaryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGraphSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGraphSummary, schemas.GetGraphSummaryInput, schemas.GetGraphSummaryOutput), output: &GetGraphSummaryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGraphSummary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGraphSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -135,12 +140,6 @@ func (c *Client) addOperationGetGraphSummaryMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpGetGraphSummaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGraphSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +152,6 @@ func (c *Client) addOperationGetGraphSummaryMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -207,12 +200,4 @@ func (m *endpointPrefix_opGetGraphSummaryMiddleware) HandleFinalize(ctx context.
 }
 func addEndpointPrefix_opGetGraphSummaryMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetGraphSummaryMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetGraphSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetGraphSummary",
-	}
 }

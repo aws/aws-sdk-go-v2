@@ -4,11 +4,10 @@ package ram
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes one version of a customer managed permission. The version you specify
@@ -74,6 +73,24 @@ type DeletePermissionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePermissionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePermissionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePermissionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeletePermissionVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.PermissionArn != nil {
+		s.WriteString(schemas.DeletePermissionVersionRequest_permissionArn, *v.PermissionArn)
+	}
+	if v.PermissionVersion != nil {
+		s.WriteInt32(schemas.DeletePermissionVersionRequest_permissionVersion, *v.PermissionVersion)
+	}
+}
+
 type DeletePermissionVersionOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -95,77 +112,64 @@ type DeletePermissionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePermissionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePermissionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePermissionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeletePermissionVersionResponse_clientToken, *v.ClientToken)
+	}
+	if v.PermissionStatus != "" {
+		s.WriteString(schemas.DeletePermissionVersionResponse_permissionStatus, string(v.PermissionStatus))
+	}
+	if v.ReturnValue != nil {
+		s.WriteBool(schemas.DeletePermissionVersionResponse_returnValue, *v.ReturnValue)
+	}
+}
+func (v *DeletePermissionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePermissionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePermissionVersionResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeletePermissionVersionResponse_clientToken, v.ClientToken)
+		case schemas.DeletePermissionVersionResponse_permissionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeletePermissionVersionResponse_permissionStatus, &ev); err != nil {
+				return err
+			}
+			v.PermissionStatus = types.PermissionStatus(ev)
+			return nil
+		case schemas.DeletePermissionVersionResponse_returnValue:
+			v.ReturnValue = new(bool)
+			return d.ReadBool(schemas.DeletePermissionVersionResponse_returnValue, v.ReturnValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePermissionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePermissionVersion, schemas.DeletePermissionVersionRequest, schemas.DeletePermissionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePermissionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePermissionVersion, schemas.DeletePermissionVersionRequest, schemas.DeletePermissionVersionResponse), output: &DeletePermissionVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePermissionVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePermissionVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeletePermissionVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePermissionVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +184,8 @@ func (c *Client) addOperationDeletePermissionVersionMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeletePermissionVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeletePermissionVersion",
-	}
 }

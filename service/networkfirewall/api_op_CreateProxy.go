@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Network Firewall Proxy
@@ -72,6 +71,34 @@ type CreateProxyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProxyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProxyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListenerPropertiesRequest(s, schemas.CreateProxyRequest_ListenerProperties, v.ListenerProperties)
+	if v.NatGatewayId != nil {
+		s.WriteString(schemas.CreateProxyRequest_NatGatewayId, *v.NatGatewayId)
+	}
+	if v.ProxyConfigurationArn != nil {
+		s.WriteString(schemas.CreateProxyRequest_ProxyConfigurationArn, *v.ProxyConfigurationArn)
+	}
+	if v.ProxyConfigurationName != nil {
+		s.WriteString(schemas.CreateProxyRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
+	}
+	if v.ProxyName != nil {
+		s.WriteString(schemas.CreateProxyRequest_ProxyName, *v.ProxyName)
+	}
+	serializeTagList(s, schemas.CreateProxyRequest_Tags, v.Tags)
+	if v.TlsInterceptProperties != nil {
+		s.WriteStruct(schemas.CreateProxyRequest_TlsInterceptProperties)
+		v.TlsInterceptProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateProxyOutput struct {
 
 	// Proxy attached to a NAT gateway.
@@ -95,77 +122,56 @@ type CreateProxyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProxyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProxyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Proxy != nil {
+		s.WriteStruct(schemas.CreateProxyResponse_Proxy)
+		v.Proxy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.CreateProxyResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *CreateProxyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProxyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProxyResponse_Proxy:
+			v.Proxy = &types.Proxy{}
+			return v.Proxy.Deserialize(d)
+		case schemas.CreateProxyResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.CreateProxyResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxy, schemas.CreateProxyRequest, schemas.CreateProxyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateProxy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxy, schemas.CreateProxyRequest, schemas.CreateProxyResponse), output: &CreateProxyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateProxy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProxy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateProxyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProxy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +186,8 @@ func (c *Client) addOperationCreateProxyMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateProxy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProxy",
-	}
 }

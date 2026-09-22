@@ -1,0 +1,5 @@
+POST /memories/__MemoryId__/extractionJobs
+
+Content-Type: application/json
+
+{"filter":{"actorId":"__ActorId__","sessionId":"__SessionId__","status":"FAILED","strategyId":"__StrategyId__"},"maxResults":1,"nextToken":"__NextToken__"}

@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a summary of the metadata for an analysis.
@@ -44,6 +43,21 @@ type DescribeAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.DescribeAnalysisRequest_AnalysisId, *v.AnalysisId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeAnalysisRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeAnalysisOutput struct {
 
 	// A metadata structure that contains summary information for the analysis that
@@ -62,77 +76,61 @@ type DescribeAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Analysis != nil {
+		s.WriteStruct(schemas.DescribeAnalysisResponse_Analysis)
+		v.Analysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeAnalysisResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeAnalysisResponse_Status, v.Status)
+	}
+}
+func (v *DescribeAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAnalysisResponse_Analysis:
+			v.Analysis = &types.Analysis{}
+			return v.Analysis.Deserialize(d)
+		case schemas.DescribeAnalysisResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeAnalysisResponse_RequestId, v.RequestId)
+		case schemas.DescribeAnalysisResponse_Status:
+			return d.ReadInt32(schemas.DescribeAnalysisResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnalysis, schemas.DescribeAnalysisRequest, schemas.DescribeAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAnalysis, schemas.DescribeAnalysisRequest, schemas.DescribeAnalysisResponse), output: &DescribeAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +145,8 @@ func (c *Client) addOperationDescribeAnalysisMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAnalysis",
-	}
 }

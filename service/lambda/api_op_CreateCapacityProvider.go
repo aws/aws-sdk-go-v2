@@ -4,11 +4,10 @@ package lambda
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a capacity provider that manages compute resources for Lambda functions
@@ -58,10 +57,64 @@ type CreateCapacityProviderInput struct {
 	// provider.
 	KmsKeyArn *string
 
+	// The tag propagation configuration for the capacity provider. Specifies tags to
+	// apply to managed resources at launch.
+	PropagateTags *types.PropagateTags
+
 	// A list of tags to associate with the capacity provider.
 	Tags map[string]string
 
+	// The telemetry configuration for the capacity provider. Specifies logging
+	// settings for managed resources.
+	TelemetryConfig *types.CapacityProviderTelemetryConfig
+
 	noSmithyDocumentSerde
+}
+
+func (v *CreateCapacityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCapacityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderName != nil {
+		s.WriteString(schemas.CreateCapacityProviderRequest_CapacityProviderName, *v.CapacityProviderName)
+	}
+	if v.CapacityProviderScalingConfig != nil {
+		s.WriteStruct(schemas.CreateCapacityProviderRequest_CapacityProviderScalingConfig)
+		v.CapacityProviderScalingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceRequirements != nil {
+		s.WriteStruct(schemas.CreateCapacityProviderRequest_InstanceRequirements)
+		v.InstanceRequirements.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateCapacityProviderRequest_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.PermissionsConfig != nil {
+		s.WriteStruct(schemas.CreateCapacityProviderRequest_PermissionsConfig)
+		v.PermissionsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PropagateTags != nil {
+		s.WriteStruct(schemas.CreateCapacityProviderRequest_PropagateTags)
+		v.PropagateTags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateCapacityProviderRequest_Tags, v.Tags)
+	if v.TelemetryConfig != nil {
+		s.WriteStruct(schemas.CreateCapacityProviderRequest_TelemetryConfig)
+		v.TelemetryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateCapacityProviderRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type CreateCapacityProviderOutput struct {
@@ -77,77 +130,50 @@ type CreateCapacityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCapacityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCapacityProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCapacityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProvider != nil {
+		s.WriteStruct(schemas.CreateCapacityProviderResponse_CapacityProvider)
+		v.CapacityProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCapacityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCapacityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCapacityProviderResponse_CapacityProvider:
+			v.CapacityProvider = &types.CapacityProvider{}
+			return v.CapacityProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCapacityProvider, schemas.CreateCapacityProviderRequest, schemas.CreateCapacityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCapacityProvider, schemas.CreateCapacityProviderRequest, schemas.CreateCapacityProviderResponse), output: &CreateCapacityProviderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCapacityProvider{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCapacityProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCapacityProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCapacityProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +188,8 @@ func (c *Client) addOperationCreateCapacityProviderMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCapacityProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCapacityProvider",
-	}
 }

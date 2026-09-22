@@ -2923,6 +2923,12 @@
                         "smithy.api#documentation": "<p>The identifier of the identity store that is connected to the instance of IAM Identity Center.</p>"
                     }
                 },
+                "IdentityStoreArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceIdentityStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the identity store that is connected to the instance of IAM Identity Center.</p>"
+                    }
+                },
                 "OwnerAccountId": {
                     "target": "com.amazonaws.ssoadmin#AccountId",
                     "traits": {
@@ -2953,10 +2959,28 @@
                         "smithy.api#documentation": "<p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance fails to create or update, this field contains information about the cause, which may include issues with KMS key configuration, permission problems with the specified KMS key, or service-related errors. </p>"
                     }
                 },
+                "PrimaryRegion": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.ssoadmin#RegionMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>"
+                    }
+                },
                 "EncryptionConfigurationDetails": {
                     "target": "com.amazonaws.ssoadmin#EncryptionConfigurationDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the encryption configuration for your IAM Identity Center instance, including the encryption status, KMS key type, and KMS key ARN.</p>"
+                    }
+                },
+                "PermissionSetsEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether permission sets are enabled for this Identity Center instance.</p>"
                     }
                 }
             },
@@ -4139,6 +4163,16 @@
                 "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
+        "com.amazonaws.ssoadmin#InstanceIdentityStoreArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 62,
+                    "max": 93
+                },
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,5}){0,3}:identitystore::\\d{12}:identitystore/(d-[0-9a-f]{10}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$"
+            }
+        },
         "com.amazonaws.ssoadmin#InstanceList": {
             "type": "list",
             "member": {
@@ -4164,6 +4198,12 @@
                     "target": "com.amazonaws.ssoadmin#Id",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the identity store that is connected to the Identity Center instance.</p>"
+                    }
+                },
+                "IdentityStoreArn": {
+                    "target": "com.amazonaws.ssoadmin#InstanceIdentityStoreArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the identity store that is connected to the Identity Center instance.</p>"
                     }
                 },
                 "OwnerAccountId": {
@@ -4194,6 +4234,18 @@
                     "target": "com.amazonaws.ssoadmin#Reason",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides additional context about the current status of the IAM Identity Center instance. This field is particularly useful when an instance is in a non-ACTIVE state, such as CREATE_FAILED. When an instance creation fails, this field contains information about the cause, which may include issues with KMS key configuration or insufficient permissions. </p>"
+                    }
+                },
+                "PrimaryRegion": {
+                    "target": "com.amazonaws.ssoadmin#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary Region where the IAM Identity Center instance was originally enabled. The primary Region cannot be removed.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.ssoadmin#RegionMetadataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Regions enabled in the IAM Identity Center instance, including Regions with ACTIVE, ADDING, or REMOVING status.</p>"
                     }
                 }
             },
@@ -7618,6 +7670,218 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>IAM Identity Center is the Amazon Web Services solution for connecting your workforce users to Amazon Web Services managed applications and other Amazon Web Services resources. You can connect your existing identity provider and synchronize users and groups from your directory, or create and manage your users directly in IAM Identity Center. You can then use IAM Identity Center for either or both of the following:</p> <ul> <li> <p>User access to applications</p> </li> <li> <p>User access to Amazon Web Services accounts</p> </li> </ul> <p>This guide provides information about single sign-on operations that you can use for access to applications and Amazon Web Services accounts. For information about IAM Identity Center features, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">IAM Identity Center User Guide</a>.</p> <note> <p>IAM Identity Center uses the <code>sso</code> and <code>identitystore</code> API namespaces.</p> </note> <p>Many API operations for IAM Identity Center rely on identifiers for users and groups, known as principals. For more information about how to work with principals and principal IDs in IAM Identity Center, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/welcome.html\">Identity Store API Reference</a>.</p> <note> <p>Amazon Web Services provides SDKs that consist of libraries and sample code for various programming languages and platforms (Java, Ruby, .Net, iOS, Android, and more). The SDKs provide a convenient way to create programmatic access to IAM Identity Center and other Amazon Web Services services. For more information about the Amazon Web Services SDKs, including how to download and install them, see <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services</a>.</p> </note>",
                 "smithy.api#title": "AWS Single Sign-On Admin",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://sso-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://sso.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://sso-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://sso.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://sso.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 14,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -9164,7 +9428,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.</p> <p>In a single <code>UpdateInstance</code> request, you can perform only one of the following operations:</p> <ul> <li> <p>Update the encryption configuration of the instance by specifying <code>EncryptionConfiguration</code>.</p> </li> <li> <p>Enable permission sets for the instance by specifying <code>PermissionSetsEnabled</code>.</p> </li> </ul> <p>A request that specifies both <code>EncryptionConfiguration</code> and <code>PermissionSetsEnabled</code> returns a <code>ValidationException</code>. To perform both operations, call <code>UpdateInstance</code> separately for each. The two calls can be made in parallel.</p>"
             }
         },
         "com.amazonaws.ssoadmin#UpdateInstanceAccessControlAttributeConfiguration": {
@@ -9248,6 +9512,12 @@
                     "target": "com.amazonaws.ssoadmin#EncryptionConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys or Amazon Web Services owned KMS keys for encrypting your instance data.</p>"
+                    }
+                },
+                "PermissionSetsEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables permission sets for this Identity Center instance. The only accepted value is <code>true </code>. After permission sets are enabled, they cannot be disabled.</p> <note> <p>You can't set <code>EncryptionConfiguration</code> and <code>PermissionSetsEnabled</code> in the same request. To configure both, make two separate <code>UpdateInstance</code> calls. These calls can be made in parallel.</p> </note>"
                     }
                 }
             },

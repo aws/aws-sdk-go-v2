@@ -1,0 +1,3 @@
+GET /v2/apis/__ApiId__/stages?maxResults=__MaxResults__&nextToken=__NextToken__
+
+

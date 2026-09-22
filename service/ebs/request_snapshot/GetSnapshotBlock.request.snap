@@ -1,0 +1,3 @@
+GET /snapshots/__SnapshotId__/blocks/1?blockToken=__BlockToken__
+
+

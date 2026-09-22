@@ -5,10 +5,10 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List of answers for a particular workload and lens.
@@ -75,6 +75,36 @@ type ListAnswersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnswersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnswersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnswersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListAnswersInput_LensAlias, *v.LensAlias)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnswersInput_MaxResults, *v.MaxResults)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.ListAnswersInput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnswersInput_NextToken, *v.NextToken)
+	}
+	if v.PillarId != nil {
+		s.WriteString(schemas.ListAnswersInput_PillarId, *v.PillarId)
+	}
+	if v.QuestionPriority != "" {
+		s.WriteString(schemas.ListAnswersInput_QuestionPriority, string(v.QuestionPriority))
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListAnswersInput_WorkloadId, *v.WorkloadId)
+	}
+}
+
 // Output of a list answers call.
 type ListAnswersOutput struct {
 
@@ -117,77 +147,75 @@ type ListAnswersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnswersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnswersOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnswersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnswerSummaries(s, schemas.ListAnswersOutput_AnswerSummaries, v.AnswerSummaries)
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ListAnswersOutput_LensAlias, *v.LensAlias)
+	}
+	if v.LensArn != nil {
+		s.WriteString(schemas.ListAnswersOutput_LensArn, *v.LensArn)
+	}
+	if v.MilestoneNumber != nil {
+		s.WriteInt32(schemas.ListAnswersOutput_MilestoneNumber, *v.MilestoneNumber)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnswersOutput_NextToken, *v.NextToken)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.ListAnswersOutput_WorkloadId, *v.WorkloadId)
+	}
+}
+func (v *ListAnswersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnswersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnswersOutput_AnswerSummaries:
+			return deserializeAnswerSummaries(d, schemas.ListAnswersOutput_AnswerSummaries, &v.AnswerSummaries)
+		case schemas.ListAnswersOutput_LensAlias:
+			v.LensAlias = new(string)
+			return d.ReadString(schemas.ListAnswersOutput_LensAlias, v.LensAlias)
+		case schemas.ListAnswersOutput_LensArn:
+			v.LensArn = new(string)
+			return d.ReadString(schemas.ListAnswersOutput_LensArn, v.LensArn)
+		case schemas.ListAnswersOutput_MilestoneNumber:
+			v.MilestoneNumber = new(int32)
+			return d.ReadInt32(schemas.ListAnswersOutput_MilestoneNumber, v.MilestoneNumber)
+		case schemas.ListAnswersOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnswersOutput_NextToken, v.NextToken)
+		case schemas.ListAnswersOutput_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.ListAnswersOutput_WorkloadId, v.WorkloadId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnswersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnswers, schemas.ListAnswersInput, schemas.ListAnswersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAnswers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnswers, schemas.ListAnswersInput, schemas.ListAnswersOutput), output: &ListAnswersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAnswers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAnswers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAnswersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnswers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,12 +228,6 @@ func (c *Client) addOperationListAnswersMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -305,11 +327,3 @@ type ListAnswersAPIClient interface {
 }
 
 var _ ListAnswersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAnswers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAnswers",
-	}
-}

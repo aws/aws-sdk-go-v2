@@ -1,0 +1,5 @@
+POST /deleteTarget
+
+Content-Type: application/json
+
+{"ForceUnsubscribeAll":true,"TargetAddress":"__TargetAddress__"}

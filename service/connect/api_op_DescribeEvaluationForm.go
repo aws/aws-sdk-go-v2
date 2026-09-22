@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes an evaluation form in the specified Connect Customer instance. If the
@@ -50,6 +49,24 @@ type DescribeEvaluationFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEvaluationFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEvaluationFormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEvaluationFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.DescribeEvaluationFormRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	if v.EvaluationFormVersion != nil {
+		s.WriteInt32(schemas.DescribeEvaluationFormRequest_EvaluationFormVersion, *v.EvaluationFormVersion)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeEvaluationFormRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type DescribeEvaluationFormOutput struct {
 
 	// Information about the evaluation form.
@@ -63,77 +80,50 @@ type DescribeEvaluationFormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEvaluationFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEvaluationFormResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEvaluationFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationForm != nil {
+		s.WriteStruct(schemas.DescribeEvaluationFormResponse_EvaluationForm)
+		v.EvaluationForm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEvaluationFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEvaluationFormResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEvaluationFormResponse_EvaluationForm:
+			v.EvaluationForm = &types.EvaluationForm{}
+			return v.EvaluationForm.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEvaluationFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvaluationForm, schemas.DescribeEvaluationFormRequest, schemas.DescribeEvaluationFormResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeEvaluationForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEvaluationForm, schemas.DescribeEvaluationFormRequest, schemas.DescribeEvaluationFormResponse), output: &DescribeEvaluationFormOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeEvaluationForm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEvaluationForm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeEvaluationFormValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEvaluationForm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +138,8 @@ func (c *Client) addOperationDescribeEvaluationFormMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeEvaluationForm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeEvaluationForm",
-	}
 }

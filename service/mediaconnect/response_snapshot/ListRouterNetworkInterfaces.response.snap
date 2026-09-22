@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","routerNetworkInterfaces":[{"arn":"__Arn__","associatedInputCount":1,"associatedOutputCount":1,"createdAt":"2000-01-01T00:00:00Z","id":"__Id__","name":"__Name__","networkInterfaceType":"PUBLIC","regionName":"__RegionName__","state":"CREATING","updatedAt":"2000-01-01T00:00:00Z"},{"arn":"__Arn__","associatedInputCount":1,"associatedOutputCount":1,"createdAt":"2000-01-01T00:00:00Z","id":"__Id__","name":"__Name__","networkInterfaceType":"PUBLIC","regionName":"__RegionName__","state":"CREATING","updatedAt":"2000-01-01T00:00:00Z"}]}

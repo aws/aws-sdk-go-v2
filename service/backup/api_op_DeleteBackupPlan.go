@@ -4,10 +4,9 @@ package backup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,18 @@ type DeleteBackupPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackupPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBackupPlanInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBackupPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.DeleteBackupPlanInput_BackupPlanId, *v.BackupPlanId)
+	}
+}
+
 type DeleteBackupPlanOutput struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
@@ -65,77 +76,66 @@ type DeleteBackupPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackupPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBackupPlanOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBackupPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupPlanArn != nil {
+		s.WriteString(schemas.DeleteBackupPlanOutput_BackupPlanArn, *v.BackupPlanArn)
+	}
+	if v.BackupPlanId != nil {
+		s.WriteString(schemas.DeleteBackupPlanOutput_BackupPlanId, *v.BackupPlanId)
+	}
+	if v.DeletionDate != nil {
+		s.WriteTime(schemas.DeleteBackupPlanOutput_DeletionDate, *v.DeletionDate)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.DeleteBackupPlanOutput_VersionId, *v.VersionId)
+	}
+}
+func (v *DeleteBackupPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBackupPlanOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBackupPlanOutput_BackupPlanArn:
+			v.BackupPlanArn = new(string)
+			return d.ReadString(schemas.DeleteBackupPlanOutput_BackupPlanArn, v.BackupPlanArn)
+		case schemas.DeleteBackupPlanOutput_BackupPlanId:
+			v.BackupPlanId = new(string)
+			return d.ReadString(schemas.DeleteBackupPlanOutput_BackupPlanId, v.BackupPlanId)
+		case schemas.DeleteBackupPlanOutput_DeletionDate:
+			v.DeletionDate = new(time.Time)
+			return d.ReadTime(schemas.DeleteBackupPlanOutput_DeletionDate, v.DeletionDate)
+		case schemas.DeleteBackupPlanOutput_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.DeleteBackupPlanOutput_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackupPlan, schemas.DeleteBackupPlanInput, schemas.DeleteBackupPlanOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBackupPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackupPlan, schemas.DeleteBackupPlanInput, schemas.DeleteBackupPlanOutput), output: &DeleteBackupPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBackupPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBackupPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteBackupPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBackupPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +150,8 @@ func (c *Client) addOperationDeleteBackupPlanMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteBackupPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteBackupPlan",
-	}
 }

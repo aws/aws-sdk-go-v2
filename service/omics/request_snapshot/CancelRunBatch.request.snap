@@ -1,0 +1,5 @@
+POST /runBatch/cancel
+
+Content-Type: application/json
+
+{"batchId":"__BatchId__"}

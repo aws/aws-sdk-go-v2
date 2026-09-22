@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"apiId":"__ApiId__","apiMappingId":"__ApiMappingId__","apiMappingKey":"__ApiMappingKey__","stage":"__Stage__"}

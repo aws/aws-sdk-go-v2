@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -49,6 +48,24 @@ type GetTestCaseExecutionSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestCaseExecutionSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestCaseExecutionSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestCaseExecutionSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetTestCaseExecutionSummaryRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TestCaseExecutionId != nil {
+		s.WriteString(schemas.GetTestCaseExecutionSummaryRequest_TestCaseExecutionId, *v.TestCaseExecutionId)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.GetTestCaseExecutionSummaryRequest_TestCaseId, *v.TestCaseId)
+	}
+}
+
 type GetTestCaseExecutionSummaryOutput struct {
 
 	// The timestamp when the test case execution ended.
@@ -69,77 +86,72 @@ type GetTestCaseExecutionSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestCaseExecutionSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestCaseExecutionSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestCaseExecutionSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetTestCaseExecutionSummaryResponse_EndTime, *v.EndTime)
+	}
+	if v.ObservationSummary != nil {
+		s.WriteStruct(schemas.GetTestCaseExecutionSummaryResponse_ObservationSummary)
+		v.ObservationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetTestCaseExecutionSummaryResponse_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTestCaseExecutionSummaryResponse_Status, string(v.Status))
+	}
+}
+func (v *GetTestCaseExecutionSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTestCaseExecutionSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTestCaseExecutionSummaryResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetTestCaseExecutionSummaryResponse_EndTime, v.EndTime)
+		case schemas.GetTestCaseExecutionSummaryResponse_ObservationSummary:
+			v.ObservationSummary = &types.ObservationSummary{}
+			return v.ObservationSummary.Deserialize(d)
+		case schemas.GetTestCaseExecutionSummaryResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetTestCaseExecutionSummaryResponse_StartTime, v.StartTime)
+		case schemas.GetTestCaseExecutionSummaryResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetTestCaseExecutionSummaryResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TestCaseExecutionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTestCaseExecutionSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestCaseExecutionSummary, schemas.GetTestCaseExecutionSummaryRequest, schemas.GetTestCaseExecutionSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTestCaseExecutionSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestCaseExecutionSummary, schemas.GetTestCaseExecutionSummaryRequest, schemas.GetTestCaseExecutionSummaryResponse), output: &GetTestCaseExecutionSummaryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTestCaseExecutionSummary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTestCaseExecutionSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTestCaseExecutionSummaryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTestCaseExecutionSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +166,8 @@ func (c *Client) addOperationGetTestCaseExecutionSummaryMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTestCaseExecutionSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTestCaseExecutionSummary",
-	}
 }

@@ -4,11 +4,10 @@ package organizations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This action is available if all of the following are true:
@@ -60,11 +59,16 @@ import (
 // minutes before you can successfully access the account. To check the status of
 // the request, do one of the following:
 //
-//   - Use the OperationId response element from this operation to provide as a
-//     parameter to the DescribeCreateAccountStatusoperation.
+//   - Use the Id response element from this operation to provide as a parameter to
+//     the DescribeCreateAccountStatusoperation.
 //
 //   - Check the CloudTrail log for the CreateAccountResult event. For information
 //     on using CloudTrail with Organizations, see [Logging and monitoring in Organizations]in the Organizations User Guide.
+//
+// Additionally, the AccountJoinedOrganization event is logged in CloudTrail and
+// is available only in the management account's event history only for the linked
+// commercial account. This event includes joinedMethod:Created and joinedTime
+// fields to provide context on how and when the account joined the organization.
 //
 // When you call the CreateGovCloudAccount action, you create two accounts: a
 // standalone account in the Amazon Web Services GovCloud (US) Region and an
@@ -246,6 +250,28 @@ type CreateGovCloudAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGovCloudAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGovCloudAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGovCloudAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountName != nil {
+		s.WriteString(schemas.CreateGovCloudAccountRequest_AccountName, *v.AccountName)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.CreateGovCloudAccountRequest_Email, *v.Email)
+	}
+	if v.IamUserAccessToBilling != "" {
+		s.WriteString(schemas.CreateGovCloudAccountRequest_IamUserAccessToBilling, string(v.IamUserAccessToBilling))
+	}
+	if v.RoleName != nil {
+		s.WriteString(schemas.CreateGovCloudAccountRequest_RoleName, *v.RoleName)
+	}
+	serializeTags(s, schemas.CreateGovCloudAccountRequest_Tags, v.Tags)
+}
+
 type CreateGovCloudAccountOutput struct {
 
 	// Contains the status about a CreateAccount or CreateGovCloudAccount request to create an Amazon Web Services
@@ -258,77 +284,50 @@ type CreateGovCloudAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGovCloudAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGovCloudAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGovCloudAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateAccountStatus != nil {
+		s.WriteStruct(schemas.CreateGovCloudAccountResponse_CreateAccountStatus)
+		v.CreateAccountStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGovCloudAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGovCloudAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGovCloudAccountResponse_CreateAccountStatus:
+			v.CreateAccountStatus = &types.CreateAccountStatus{}
+			return v.CreateAccountStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGovCloudAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGovCloudAccount, schemas.CreateGovCloudAccountRequest, schemas.CreateGovCloudAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGovCloudAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGovCloudAccount, schemas.CreateGovCloudAccountRequest, schemas.CreateGovCloudAccountResponse), output: &CreateGovCloudAccountOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGovCloudAccount{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGovCloudAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateGovCloudAccountValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGovCloudAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -343,22 +342,8 @@ func (c *Client) addOperationCreateGovCloudAccountMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGovCloudAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGovCloudAccount",
-	}
 }

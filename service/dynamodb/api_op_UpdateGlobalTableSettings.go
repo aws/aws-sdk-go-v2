@@ -5,11 +5,11 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates settings for a global table.
@@ -78,6 +78,30 @@ type UpdateGlobalTableSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlobalTableSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlobalTableSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlobalTableSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalTableBillingMode != "" {
+		s.WriteString(schemas.UpdateGlobalTableSettingsInput_GlobalTableBillingMode, string(v.GlobalTableBillingMode))
+	}
+	serializeGlobalTableGlobalSecondaryIndexSettingsUpdateList(s, schemas.UpdateGlobalTableSettingsInput_GlobalTableGlobalSecondaryIndexSettingsUpdate, v.GlobalTableGlobalSecondaryIndexSettingsUpdate)
+	if v.GlobalTableName != nil {
+		s.WriteString(schemas.UpdateGlobalTableSettingsInput_GlobalTableName, *v.GlobalTableName)
+	}
+	if v.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate != nil {
+		s.WriteStruct(schemas.UpdateGlobalTableSettingsInput_GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate)
+		v.GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GlobalTableProvisionedWriteCapacityUnits != nil {
+		s.WriteInt64(schemas.UpdateGlobalTableSettingsInput_GlobalTableProvisionedWriteCapacityUnits, *v.GlobalTableProvisionedWriteCapacityUnits)
+	}
+	serializeReplicaSettingsUpdateList(s, schemas.UpdateGlobalTableSettingsInput_ReplicaSettingsUpdate, v.ReplicaSettingsUpdate)
+}
 func (in *UpdateGlobalTableSettingsInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.GlobalTableName
@@ -98,68 +122,48 @@ type UpdateGlobalTableSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGlobalTableSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGlobalTableSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGlobalTableSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalTableName != nil {
+		s.WriteString(schemas.UpdateGlobalTableSettingsOutput_GlobalTableName, *v.GlobalTableName)
+	}
+	serializeReplicaSettingsDescriptionList(s, schemas.UpdateGlobalTableSettingsOutput_ReplicaSettings, v.ReplicaSettings)
+}
+func (v *UpdateGlobalTableSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGlobalTableSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGlobalTableSettingsOutput_GlobalTableName:
+			v.GlobalTableName = new(string)
+			return d.ReadString(schemas.UpdateGlobalTableSettingsOutput_GlobalTableName, v.GlobalTableName)
+		case schemas.UpdateGlobalTableSettingsOutput_ReplicaSettings:
+			return deserializeReplicaSettingsDescriptionList(d, schemas.UpdateGlobalTableSettingsOutput_ReplicaSettings, &v.ReplicaSettings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGlobalTableSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlobalTableSettings, schemas.UpdateGlobalTableSettingsInput, schemas.UpdateGlobalTableSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateGlobalTableSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGlobalTableSettings, schemas.UpdateGlobalTableSettingsInput, schemas.UpdateGlobalTableSettingsOutput), output: &UpdateGlobalTableSettingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateGlobalTableSettings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGlobalTableSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateGlobalTableSettingsDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -169,12 +173,6 @@ func (c *Client) addOperationUpdateGlobalTableSettingsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpUpdateGlobalTableSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGlobalTableSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +191,6 @@ func (c *Client) addOperationUpdateGlobalTableSettingsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,12 +240,4 @@ func (c *Client) fetchOpUpdateGlobalTableSettingsDiscoverEndpoint(ctx context.Co
 
 	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	return internalEndpointDiscovery.WeightedAddress{}, nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGlobalTableSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGlobalTableSettings",
-	}
 }

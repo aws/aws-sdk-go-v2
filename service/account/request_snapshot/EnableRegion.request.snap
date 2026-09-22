@@ -1,0 +1,5 @@
+POST /enableRegion
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","RegionName":"__RegionName__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSMPCommerceService_v20200301.CreateAgreementRequest
+
+{"agreementProposalIdentifier":"__AgreementProposalIdentifier__","clientToken":"__ClientToken__","intent":"NEW","requestedTerms":[{"configuration":{"configurableUpfrontPricingTermConfiguration":{"dimensions":[{"dimensionKey":"__DimensionKey__","dimensionValue":1},{"dimensionKey":"__DimensionKey__","dimensionValue":1}],"selectorValue":"__SelectorValue__"}},"id":"__Id__"},{"configuration":{"configurableUpfrontPricingTermConfiguration":{"dimensions":[{"dimensionKey":"__DimensionKey__","dimensionValue":1},{"dimensionKey":"__DimensionKey__","dimensionValue":1}],"selectorValue":"__SelectorValue__"}},"id":"__Id__"}],"sourceAgreementIdentifier":"__SourceAgreementIdentifier__","taxConfiguration":{"taxEstimation":"DISABLED"}}

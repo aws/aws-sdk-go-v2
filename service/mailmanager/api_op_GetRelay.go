@@ -4,11 +4,10 @@ package mailmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetRelayInput struct {
 	RelayId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRelayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelayId != nil {
+		s.WriteString(schemas.GetRelayRequest_RelayId, *v.RelayId)
+	}
 }
 
 type GetRelayOutput struct {
@@ -73,77 +84,90 @@ type GetRelayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRelayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRelayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRelayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRelayAuthentication(s, schemas.GetRelayResponse_Authentication, v.Authentication)
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.GetRelayResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.LastModifiedTimestamp != nil {
+		s.WriteTime(schemas.GetRelayResponse_LastModifiedTimestamp, *v.LastModifiedTimestamp)
+	}
+	if v.RelayArn != nil {
+		s.WriteString(schemas.GetRelayResponse_RelayArn, *v.RelayArn)
+	}
+	if v.RelayId != nil {
+		s.WriteString(schemas.GetRelayResponse_RelayId, *v.RelayId)
+	}
+	if v.RelayName != nil {
+		s.WriteString(schemas.GetRelayResponse_RelayName, *v.RelayName)
+	}
+	if v.ServerName != nil {
+		s.WriteString(schemas.GetRelayResponse_ServerName, *v.ServerName)
+	}
+	if v.ServerPort != nil {
+		s.WriteInt32(schemas.GetRelayResponse_ServerPort, *v.ServerPort)
+	}
+}
+func (v *GetRelayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRelayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRelayResponse_Authentication:
+			return deserializeRelayAuthentication(d, schemas.GetRelayResponse_Authentication, &v.Authentication)
+		case schemas.GetRelayResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetRelayResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetRelayResponse_LastModifiedTimestamp:
+			v.LastModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetRelayResponse_LastModifiedTimestamp, v.LastModifiedTimestamp)
+		case schemas.GetRelayResponse_RelayArn:
+			v.RelayArn = new(string)
+			return d.ReadString(schemas.GetRelayResponse_RelayArn, v.RelayArn)
+		case schemas.GetRelayResponse_RelayId:
+			v.RelayId = new(string)
+			return d.ReadString(schemas.GetRelayResponse_RelayId, v.RelayId)
+		case schemas.GetRelayResponse_RelayName:
+			v.RelayName = new(string)
+			return d.ReadString(schemas.GetRelayResponse_RelayName, v.RelayName)
+		case schemas.GetRelayResponse_ServerName:
+			v.ServerName = new(string)
+			return d.ReadString(schemas.GetRelayResponse_ServerName, v.ServerName)
+		case schemas.GetRelayResponse_ServerPort:
+			v.ServerPort = new(int32)
+			return d.ReadInt32(schemas.GetRelayResponse_ServerPort, v.ServerPort)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRelayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelay, schemas.GetRelayRequest, schemas.GetRelayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetRelay{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRelay, schemas.GetRelayRequest, schemas.GetRelayResponse), output: &GetRelayOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetRelay{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRelay"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRelayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRelay(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +182,8 @@ func (c *Client) addOperationGetRelayMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRelay(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRelay",
-	}
 }

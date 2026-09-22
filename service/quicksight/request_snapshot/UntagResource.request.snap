@@ -1,0 +1,3 @@
+DELETE /resources/__ResourceArn__/tags?keys=__Member__&keys=__Member__
+
+

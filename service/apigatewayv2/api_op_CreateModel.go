@@ -4,10 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Model for an API.
@@ -54,6 +53,30 @@ type CreateModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.CreateModelRequest_ApiId, *v.ApiId)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.CreateModelRequest_ContentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateModelRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateModelRequest_Name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.CreateModelRequest_Schema, *v.Schema)
+	}
+}
+
 type CreateModelOutput struct {
 
 	// The content-type for the model, for example, "application/json".
@@ -78,77 +101,72 @@ type CreateModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.CreateModelResponse_ContentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateModelResponse_Description, *v.Description)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.CreateModelResponse_ModelId, *v.ModelId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateModelResponse_Name, *v.Name)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.CreateModelResponse_Schema, *v.Schema)
+	}
+}
+func (v *CreateModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.CreateModelResponse_ContentType, v.ContentType)
+		case schemas.CreateModelResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateModelResponse_Description, v.Description)
+		case schemas.CreateModelResponse_ModelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.CreateModelResponse_ModelId, v.ModelId)
+		case schemas.CreateModelResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateModelResponse_Name, v.Name)
+		case schemas.CreateModelResponse_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.CreateModelResponse_Schema, v.Schema)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModel, schemas.CreateModelRequest, schemas.CreateModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModel, schemas.CreateModelRequest, schemas.CreateModelResponse), output: &CreateModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +181,8 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModel",
-	}
 }

@@ -4,11 +4,10 @@ package devicefarm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a project.
@@ -59,6 +58,30 @@ type CreateProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultJobTimeoutMinutes != nil {
+		s.WriteInt32(schemas.CreateProjectRequest_defaultJobTimeoutMinutes, *v.DefaultJobTimeoutMinutes)
+	}
+	serializeEnvironmentVariables(s, schemas.CreateProjectRequest_environmentVariables, v.EnvironmentVariables)
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateProjectRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProjectRequest_name, *v.Name)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateProjectRequest_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Represents the result of a create project request.
 type CreateProjectOutput struct {
 
@@ -71,77 +94,50 @@ type CreateProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProjectResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Project != nil {
+		s.WriteStruct(schemas.CreateProjectResult_project)
+		v.Project.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProjectResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProjectResult_project:
+			v.Project = &types.Project{}
+			return v.Project.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectRequest, schemas.CreateProjectResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProject, schemas.CreateProjectRequest, schemas.CreateProjectResult), output: &CreateProjectOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateProject{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProject"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateProjectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProject(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +152,8 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateProject(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProject",
-	}
 }

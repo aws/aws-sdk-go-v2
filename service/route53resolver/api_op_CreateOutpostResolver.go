@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Route 53 Resolver on an Outpost.
@@ -65,6 +64,31 @@ type CreateOutpostResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutpostResolverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutpostResolverRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutpostResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateOutpostResolverRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.CreateOutpostResolverRequest_InstanceCount, *v.InstanceCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOutpostResolverRequest_Name, *v.Name)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.CreateOutpostResolverRequest_OutpostArn, *v.OutpostArn)
+	}
+	if v.PreferredInstanceType != nil {
+		s.WriteString(schemas.CreateOutpostResolverRequest_PreferredInstanceType, *v.PreferredInstanceType)
+	}
+	serializeTagList(s, schemas.CreateOutpostResolverRequest_Tags, v.Tags)
+}
+
 type CreateOutpostResolverOutput struct {
 
 	// Information about the CreateOutpostResolver request, including the status of
@@ -77,77 +101,50 @@ type CreateOutpostResolverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutpostResolverOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutpostResolverResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutpostResolverOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostResolver != nil {
+		s.WriteStruct(schemas.CreateOutpostResolverResponse_OutpostResolver)
+		v.OutpostResolver.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOutpostResolverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOutpostResolverResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOutpostResolverResponse_OutpostResolver:
+			v.OutpostResolver = &types.OutpostResolver{}
+			return v.OutpostResolver.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOutpostResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutpostResolver, schemas.CreateOutpostResolverRequest, schemas.CreateOutpostResolverResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOutpostResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutpostResolver, schemas.CreateOutpostResolverRequest, schemas.CreateOutpostResolverResponse), output: &CreateOutpostResolverOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOutpostResolver{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOutpostResolver"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateOutpostResolverValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOutpostResolver(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +159,8 @@ func (c *Client) addOperationCreateOutpostResolverMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateOutpostResolver(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOutpostResolver",
-	}
 }

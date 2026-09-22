@@ -1,0 +1,5 @@
+POST /start-tag-sync-task
+
+Content-Type: application/json
+
+{"Group":"__Group__","ResourceQuery":{"Query":"__Query__","Type":"TAG_FILTERS_1_0"},"RoleArn":"__RoleArn__","TagKey":"__TagKey__","TagValue":"__TagValue__"}

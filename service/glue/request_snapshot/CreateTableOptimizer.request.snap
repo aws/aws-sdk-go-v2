@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateTableOptimizer
+
+{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","TableName":"__TableName__","TableOptimizerConfiguration":{"compactionConfiguration":{"icebergConfiguration":{"deleteFileThreshold":1,"minInputFiles":1,"strategy":"binpack"}},"enabled":true,"orphanFileDeletionConfiguration":{"icebergConfiguration":{"location":"__Location__","orphanFileRetentionPeriodInDays":1,"runRateInHours":1}},"retentionConfiguration":{"icebergConfiguration":{"cleanExpiredFiles":true,"numberOfSnapshotsToRetain":1,"runRateInHours":1,"snapshotRetentionPeriodInDays":1}},"roleArn":"__RoleArn__","vpcConfiguration":{"glueConnectionName":"__TableOptimizerVpcConfigurationMemberGlueConnectionName__"}},"Type":"compaction"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.ListPublicKeys
+
+{"NextToken":"__NextToken__","PublicKeyList":[{"Fingerprint":"__Fingerprint__","ValidityEndTime":946684800,"ValidityStartTime":946684800,"Value":"YmxvYg=="},{"Fingerprint":"__Fingerprint__","ValidityEndTime":946684800,"ValidityStartTime":946684800,"Value":"YmxvYg=="}]}

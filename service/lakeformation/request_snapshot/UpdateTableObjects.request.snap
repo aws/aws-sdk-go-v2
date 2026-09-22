@@ -1,0 +1,5 @@
+POST /UpdateTableObjects
+
+Content-Type: application/json
+
+{"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","TableName":"__TableName__","TransactionId":"__TransactionId__","WriteOperations":[{"AddObject":{"ETag":"__ETag__","PartitionValues":["__Member__","__Member__"],"Size":1,"Uri":"__Uri__"},"DeleteObject":{"ETag":"__ETag__","PartitionValues":["__Member__","__Member__"],"Uri":"__Uri__"}},{"AddObject":{"ETag":"__ETag__","PartitionValues":["__Member__","__Member__"],"Size":1,"Uri":"__Uri__"},"DeleteObject":{"ETag":"__ETag__","PartitionValues":["__Member__","__Member__"],"Uri":"__Uri__"}}]}

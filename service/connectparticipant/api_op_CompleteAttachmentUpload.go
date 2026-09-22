@@ -5,23 +5,23 @@ package connectparticipant
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Allows you to confirm that the attachment has been uploaded using the
 // pre-signed URL provided in StartAttachmentUpload API. A conflict exception is
 // thrown when an attachment with that identifier is already being uploaded.
 //
-// For security recommendations, see [Amazon Connect Chat security best practices].
+// For security recommendations, see [Connect Customer Chat security best practices].
 //
 // ConnectionToken is used for invoking this API instead of ParticipantToken .
 //
 // The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
 //
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) CompleteAttachmentUpload(ctx context.Context, params *CompleteAttachmentUploadInput, optFns ...func(*Options)) (*CompleteAttachmentUploadOutput, error) {
 	if params == nil {
 		params = &CompleteAttachmentUploadInput{}
@@ -61,6 +61,22 @@ type CompleteAttachmentUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteAttachmentUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteAttachmentUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteAttachmentUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachmentIdList(s, schemas.CompleteAttachmentUploadRequest_AttachmentIds, v.AttachmentIds)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CompleteAttachmentUploadRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.CompleteAttachmentUploadRequest_ConnectionToken, *v.ConnectionToken)
+	}
+}
+
 type CompleteAttachmentUploadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,65 +84,36 @@ type CompleteAttachmentUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CompleteAttachmentUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompleteAttachmentUploadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompleteAttachmentUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CompleteAttachmentUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompleteAttachmentUploadResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCompleteAttachmentUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteAttachmentUpload, schemas.CompleteAttachmentUploadRequest, schemas.CompleteAttachmentUploadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCompleteAttachmentUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CompleteAttachmentUpload, schemas.CompleteAttachmentUploadRequest, schemas.CompleteAttachmentUploadResponse), output: &CompleteAttachmentUploadOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCompleteAttachmentUpload{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CompleteAttachmentUpload"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -136,12 +123,6 @@ func (c *Client) addOperationCompleteAttachmentUploadMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpCompleteAttachmentUploadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteAttachmentUpload(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +135,6 @@ func (c *Client) addOperationCompleteAttachmentUploadMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -199,12 +174,4 @@ func (m *idempotencyToken_initializeOpCompleteAttachmentUpload) HandleInitialize
 }
 func addIdempotencyToken_opCompleteAttachmentUploadMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCompleteAttachmentUpload{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCompleteAttachmentUpload(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CompleteAttachmentUpload",
-	}
 }

@@ -6,4 +6,90 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Request payload part structure.
+type RequestPayloadPart struct {
+
+	// The payload bytes.
+	Bytes []byte
+
+	// Completion state header. Can be one of these possible values: "PARTIAL",
+	// "COMPLETE".
+	CompletionState *string
+
+	// Data type header. Can be one of these possible values: "UTF8", "BINARY".
+	DataType *string
+
+	// Padding string for alignment.
+	P *string
+
+	noSmithyDocumentSerde
+}
+
+// Request stream event union.
+//
+// The following types satisfy this interface:
+//
+//	RequestStreamEventMemberPayloadPart
+type RequestStreamEvent interface {
+	isRequestStreamEvent()
+}
+
+// Payload part event.
+type RequestStreamEventMemberPayloadPart struct {
+	Value RequestPayloadPart
+
+	noSmithyDocumentSerde
+}
+
+func (*RequestStreamEventMemberPayloadPart) isRequestStreamEvent() {}
+
+// Response payload part structure.
+type ResponsePayloadPart struct {
+
+	// The payload bytes.
+	Bytes []byte
+
+	// Completion state header. Can be one of these possible values: "PARTIAL",
+	// "COMPLETE".
+	CompletionState *string
+
+	// Data type header. Can be one of these possible values: "UTF8", "BINARY".
+	DataType *string
+
+	// Padding string for alignment.
+	P *string
+
+	noSmithyDocumentSerde
+}
+
+// Response stream event union.
+//
+// The following types satisfy this interface:
+//
+//	ResponseStreamEventMemberPayloadPart
+type ResponseStreamEvent interface {
+	isResponseStreamEvent()
+}
+
+// Payload part event.
+type ResponseStreamEventMemberPayloadPart struct {
+	Value ResponsePayloadPart
+
+	noSmithyDocumentSerde
+}
+
+func (*ResponseStreamEventMemberPayloadPart) isResponseStreamEvent() {}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isRequestStreamEvent()  {}
+func (*UnknownUnionMember) isResponseStreamEvent() {}

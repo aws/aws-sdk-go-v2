@@ -1,0 +1,5 @@
+POST /control/create-slack-channel-configuration
+
+Content-Type: application/json
+
+{"channelId":"__ChannelId__","channelName":"__ChannelName__","channelRoleArn":"__ChannelRoleArn__","notifyOnAddCorrespondenceToCase":true,"notifyOnCaseSeverity":"none","notifyOnCreateOrReopenCase":true,"notifyOnResolveCase":true,"teamId":"__TeamId__"}

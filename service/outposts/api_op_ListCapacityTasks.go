@@ -5,10 +5,10 @@ package outposts
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the capacity tasks for your Amazon Web Services account.
@@ -49,6 +49,25 @@ type ListCapacityTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityTasksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityTaskStatusList(s, schemas.ListCapacityTasksInput_CapacityTaskStatusFilter, v.CapacityTaskStatusFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCapacityTasksInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapacityTasksInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostIdentifierFilter != nil {
+		s.WriteString(schemas.ListCapacityTasksInput_OutpostIdentifierFilter, *v.OutpostIdentifierFilter)
+	}
+}
+
 type ListCapacityTasksOutput struct {
 
 	// Lists all the capacity tasks.
@@ -63,74 +82,48 @@ type ListCapacityTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapacityTasksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapacityTasksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapacityTasksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityTaskList(s, schemas.ListCapacityTasksOutput_CapacityTasks, v.CapacityTasks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapacityTasksOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCapacityTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCapacityTasksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCapacityTasksOutput_CapacityTasks:
+			return deserializeCapacityTaskList(d, schemas.ListCapacityTasksOutput_CapacityTasks, &v.CapacityTasks)
+		case schemas.ListCapacityTasksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCapacityTasksOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCapacityTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityTasks, schemas.ListCapacityTasksInput, schemas.ListCapacityTasksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCapacityTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapacityTasks, schemas.ListCapacityTasksInput, schemas.ListCapacityTasksOutput), output: &ListCapacityTasksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCapacityTasks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCapacityTasks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCapacityTasks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +136,6 @@ func (c *Client) addOperationListCapacityTasksMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +236,3 @@ type ListCapacityTasksAPIClient interface {
 }
 
 var _ ListCapacityTasksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCapacityTasks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCapacityTasks",
-	}
-}

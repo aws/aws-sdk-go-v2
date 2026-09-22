@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches quick connects in an Connect Customer instance, with optional
@@ -54,6 +54,34 @@ type SearchQuickConnectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchQuickConnectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchQuickConnectsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchQuickConnectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchQuickConnectsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchQuickConnectsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchQuickConnectsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchQuickConnectsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchQuickConnectsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchQuickConnectsOutput struct {
 
 	// The total number of quick connects which matched your search query.
@@ -71,77 +99,57 @@ type SearchQuickConnectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchQuickConnectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchQuickConnectsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchQuickConnectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchQuickConnectsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchQuickConnectsResponse_NextToken, *v.NextToken)
+	}
+	serializeQuickConnectSearchSummaryList(s, schemas.SearchQuickConnectsResponse_QuickConnects, v.QuickConnects)
+}
+func (v *SearchQuickConnectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchQuickConnectsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchQuickConnectsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchQuickConnectsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchQuickConnectsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchQuickConnectsResponse_NextToken, v.NextToken)
+		case schemas.SearchQuickConnectsResponse_QuickConnects:
+			return deserializeQuickConnectSearchSummaryList(d, schemas.SearchQuickConnectsResponse_QuickConnects, &v.QuickConnects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchQuickConnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchQuickConnects, schemas.SearchQuickConnectsRequest, schemas.SearchQuickConnectsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchQuickConnects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchQuickConnects, schemas.SearchQuickConnectsRequest, schemas.SearchQuickConnectsResponse), output: &SearchQuickConnectsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchQuickConnects{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchQuickConnects"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchQuickConnectsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchQuickConnects(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +162,6 @@ func (c *Client) addOperationSearchQuickConnectsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +263,3 @@ type SearchQuickConnectsAPIClient interface {
 }
 
 var _ SearchQuickConnectsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchQuickConnects(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchQuickConnects",
-	}
-}

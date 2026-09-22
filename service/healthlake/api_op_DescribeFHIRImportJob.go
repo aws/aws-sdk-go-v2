@@ -5,11 +5,11 @@ package healthlake
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/healthlake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -45,6 +45,21 @@ type DescribeFHIRImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFHIRImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFHIRImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFHIRImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatastoreId != nil {
+		s.WriteString(schemas.DescribeFHIRImportJobRequest_DatastoreId, *v.DatastoreId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeFHIRImportJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeFHIRImportJobOutput struct {
 
 	// The import job properties.
@@ -58,77 +73,50 @@ type DescribeFHIRImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFHIRImportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFHIRImportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFHIRImportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImportJobProperties != nil {
+		s.WriteStruct(schemas.DescribeFHIRImportJobResponse_ImportJobProperties)
+		v.ImportJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFHIRImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFHIRImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFHIRImportJobResponse_ImportJobProperties:
+			v.ImportJobProperties = &types.ImportJobProperties{}
+			return v.ImportJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFHIRImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFHIRImportJob, schemas.DescribeFHIRImportJobRequest, schemas.DescribeFHIRImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFHIRImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFHIRImportJob, schemas.DescribeFHIRImportJobRequest, schemas.DescribeFHIRImportJobResponse), output: &DescribeFHIRImportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFHIRImportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFHIRImportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFHIRImportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFHIRImportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +129,6 @@ func (c *Client) addOperationDescribeFHIRImportJobMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -374,11 +356,3 @@ type DescribeFHIRImportJobAPIClient interface {
 }
 
 var _ DescribeFHIRImportJobAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeFHIRImportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFHIRImportJob",
-	}
-}

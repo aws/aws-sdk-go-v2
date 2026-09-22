@@ -1,6 +1,9 @@
 package transfermanager
 
 import (
+	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 )
 
@@ -17,11 +20,39 @@ type Options struct {
 	// The threshold bytes to decide when the file should be multi-uploaded
 	MultipartUploadThreshold int64
 
+	// FailTimeout is the timeout for transfer failure handling when a transfer fails.
+	// A fresh context with this timeout is used so failure followup (AbortMPU for upload or possible progress listener work)
+	// succeed even when the original context is canceled.
+	// Defaults to 0 (uses the original context) for fail case not caused by ctx cancellation.
+	FailTimeout time.Duration
+
+	// The max parts count for a multi part upload, which must not exceed "Maximum number of parts per upload" defined by S3
+	// https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html
+	MaxUploadParts int64
+
 	// Option to disable checksum validation for download
 	DisableChecksumValidation bool
 
 	// Checksum algorithm to use for upload
 	ChecksumAlgorithm types.ChecksumAlgorithm
+
+	// RequestChecksumCalculation determines when request checksums are calculated
+	// for uploads. This setting takes precedence over the RequestChecksumCalculation
+	// configured on the underlying S3 client.
+	//
+	// There are two possible values:
+	//
+	//  1. RequestChecksumCalculationWhenSupported (default): a checksum is
+	//     calculated for every upload request, defaulting to CRC32 when the caller
+	//     does not specify a ChecksumAlgorithm.
+	//
+	//  2. RequestChecksumCalculationWhenRequired: a checksum is only calculated
+	//     when the caller specifies a ChecksumAlgorithm (on the input or these
+	//     options) or the operation otherwise requires it.
+	//
+	// Note: S3 Express One Zone (directory) buckets always require CRC32 checksums,
+	// which are applied regardless of this setting.
+	RequestChecksumCalculation aws.RequestChecksumCalculation
 
 	// The number of goroutines to spin up in parallel per call to transfer single object parts or directory objects.
 	// If this is set to zero, the DefaultUploadConcurrency value will be used.
@@ -68,10 +99,24 @@ func resolvePartSizeBytes(o *Options) {
 	}
 }
 
-func resolveChecksumAlgorithm(o *Options) {
-	if o.ChecksumAlgorithm == "" {
-		o.ChecksumAlgorithm = types.ChecksumAlgorithmCrc32
+func resolveRequestChecksumCalculation(o *Options) {
+	if o.RequestChecksumCalculation == aws.RequestChecksumCalculationUnset {
+		o.RequestChecksumCalculation = aws.RequestChecksumCalculationWhenSupported
 	}
+}
+
+func (o Options) checksumAlgorithm() types.ChecksumAlgorithm {
+	if o.ChecksumAlgorithm != "" {
+		return o.ChecksumAlgorithm
+	}
+
+	if o.RequestChecksumCalculation != aws.RequestChecksumCalculationWhenRequired {
+		return types.ChecksumAlgorithmCrc32
+	}
+
+	// Empty: the RequestChecksumCalculation client option applied to each S3 call
+	// suppresses the client's own default checksum.
+	return ""
 }
 
 func resolveMultipartUploadThreshold(o *Options) {
@@ -95,6 +140,12 @@ func resolvePartBodyMaxRetries(o *Options) {
 func resolveGetBufferSize(o *Options) {
 	if o.GetObjectBufferSize == 0 {
 		o.GetObjectBufferSize = defaultGetBufferSize
+	}
+}
+
+func resolveMaxUploadParts(o *Options) {
+	if o.MaxUploadParts == 0 {
+		o.MaxUploadParts = defaultMaxUploadParts
 	}
 }
 

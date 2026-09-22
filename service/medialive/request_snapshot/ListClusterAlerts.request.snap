@@ -1,0 +1,3 @@
+GET /prod/clusters/__ClusterId__/alerts?maxResults=1&nextToken=__NextToken__&stateFilter=__StateFilter__
+
+

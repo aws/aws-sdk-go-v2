@@ -1,0 +1,5 @@
+POST /annotationStore/__Name__/versions/delete?force=true
+
+Content-Type: application/json
+
+{"versions":["__Member__","__Member__"]}

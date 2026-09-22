@@ -1,0 +1,3 @@
+GET /app-instance-bots?app-instance-arn=__AppInstanceArn__&max-results=1&next-token=__NextToken__
+
+

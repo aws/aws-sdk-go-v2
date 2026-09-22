@@ -4,11 +4,8 @@ package geoplaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Autocomplete completes potential places and addresses as the user types, based
@@ -17,11 +14,13 @@ import (
 // partial queries with valid address completion. Also, the API supports the
 // filtering of results based on geographic location, country, or specific place
 // types, and can be tailored using optional parameters like language and political
-// views.
+// views. Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+// customers.
 //
 // For more information, see [Autocomplete] in the Amazon Location Service Developer Guide.
 //
 // [Autocomplete]: https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html
+// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 func (c *Client) Autocomplete(ctx context.Context, params *AutocompleteInput, optFns ...func(*Options)) (*AutocompleteOutput, error) {
 	if params == nil {
 		params = &AutocompleteInput{}
@@ -75,7 +74,7 @@ type AutocompleteInput struct {
 	// is no data for the result in the requested language, data will be returned in
 	// the default language for the entry.
 	//
-	// [BCP 47]: https://en.wikipedia.org/wiki/IETF_language_tag
+	// [BCP 47]: https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
 	Language *string
 
 	// An optional limit for the number of results returned in a single call.
@@ -123,7 +122,9 @@ type AutocompleteInput struct {
 	// code spans multiple localities and this value is empty, partial district or
 	// locality information may be returned under a single postal code result entry. If
 	// it's populated with the value EnumerateSpannedLocalities , all cities in that
-	// postal code are returned.
+	// postal code are returned. If it's populated with the value
+	// EnumerateSpannedDistricts , all combinations of the postal code with the
+	// corresponding district and city names are returned.
 	PostalCodeMode types.PostalCodeMode
 
 	noSmithyDocumentSerde
@@ -150,9 +151,6 @@ type AutocompleteOutput struct {
 }
 
 func (c *Client) addOperationAutocompleteMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpAutocomplete{}, middleware.After)
 	if err != nil {
 		return err
@@ -161,65 +159,20 @@ func (c *Client) addOperationAutocompleteMiddlewares(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Autocomplete"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAutocompleteValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAutocomplete(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -234,22 +187,8 @@ func (c *Client) addOperationAutocompleteMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAutocomplete(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Autocomplete",
-	}
 }

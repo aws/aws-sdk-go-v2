@@ -4,10 +4,9 @@ package transcribestreaming
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
+	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -105,6 +104,27 @@ type StartMedicalScribeStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMedicalScribeStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMedicalScribeStreamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMedicalScribeStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartMedicalScribeStreamRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MediaEncoding != "" {
+		s.WriteString(schemas.StartMedicalScribeStreamRequest_MediaEncoding, string(v.MediaEncoding))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.StartMedicalScribeStreamRequest_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartMedicalScribeStreamRequest_SessionId, *v.SessionId)
+	}
+}
+
 type StartMedicalScribeStreamOutput struct {
 
 	// The Language Code that you specified in your request. Same as provided in the
@@ -136,42 +156,79 @@ type StartMedicalScribeStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMedicalScribeStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMedicalScribeStreamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMedicalScribeStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartMedicalScribeStreamResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MediaEncoding != "" {
+		s.WriteString(schemas.StartMedicalScribeStreamResponse_MediaEncoding, string(v.MediaEncoding))
+	}
+	if v.MediaSampleRateHertz != nil {
+		s.WriteInt32(schemas.StartMedicalScribeStreamResponse_MediaSampleRateHertz, *v.MediaSampleRateHertz)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartMedicalScribeStreamResponse_RequestId, *v.RequestId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.StartMedicalScribeStreamResponse_SessionId, *v.SessionId)
+	}
+}
+func (v *StartMedicalScribeStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMedicalScribeStreamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMedicalScribeStreamResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalScribeStreamResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.MedicalScribeLanguageCode(ev)
+			return nil
+		case schemas.StartMedicalScribeStreamResponse_MediaEncoding:
+			var ev string
+			if err := d.ReadString(schemas.StartMedicalScribeStreamResponse_MediaEncoding, &ev); err != nil {
+				return err
+			}
+			v.MediaEncoding = types.MedicalScribeMediaEncoding(ev)
+			return nil
+		case schemas.StartMedicalScribeStreamResponse_MediaSampleRateHertz:
+			v.MediaSampleRateHertz = new(int32)
+			return d.ReadInt32(schemas.StartMedicalScribeStreamResponse_MediaSampleRateHertz, v.MediaSampleRateHertz)
+		case schemas.StartMedicalScribeStreamResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeStreamResponse_RequestId, v.RequestId)
+		case schemas.StartMedicalScribeStreamResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.StartMedicalScribeStreamResponse_SessionId, v.SessionId)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *StartMedicalScribeStreamOutput) GetStream() *StartMedicalScribeStreamEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationStartMedicalScribeStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMedicalScribeStream, schemas.StartMedicalScribeStreamRequest, schemas.StartMedicalScribeStreamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartMedicalScribeStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMedicalScribeStream, schemas.StartMedicalScribeStreamRequest, schemas.StartMedicalScribeStreamResponse), output: &StartMedicalScribeStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartMedicalScribeStream{}, middleware.After)
-	if err != nil {
+	if err := smithyhttp.AddInitializeStreamWriter(stack); err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMedicalScribeStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamStartMedicalScribeStream{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
+		return err
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addEventStreamStartMedicalScribeStreamMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddRequireMinimumProtocol(stack, 2, 0); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -181,40 +238,13 @@ func (c *Client) addOperationStartMedicalScribeStreamMiddlewares(stack *middlewa
 	if err = addContentSHA256Header(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = eventstreamapi.AddInitializeStreamWriter(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMedicalScribeStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMedicalScribeStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,24 +259,10 @@ func (c *Client) addOperationStartMedicalScribeStreamMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMedicalScribeStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMedicalScribeStream",
-	}
 }
 
 // StartMedicalScribeStreamEventStream provides the event stream handling for the StartMedicalScribeStream operation.

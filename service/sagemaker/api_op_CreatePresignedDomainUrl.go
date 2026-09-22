@@ -4,10 +4,9 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a URL for a specified UserProfile in a Domain. When accessed in a web
@@ -96,6 +95,33 @@ type CreatePresignedDomainUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedDomainUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedDomainUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedDomainUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlRequest_DomainId, *v.DomainId)
+	}
+	if v.ExpiresInSeconds != nil {
+		s.WriteInt32(schemas.CreatePresignedDomainUrlRequest_ExpiresInSeconds, *v.ExpiresInSeconds)
+	}
+	if v.LandingUri != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlRequest_LandingUri, *v.LandingUri)
+	}
+	if v.SessionExpirationDurationInSeconds != nil {
+		s.WriteInt32(schemas.CreatePresignedDomainUrlRequest_SessionExpirationDurationInSeconds, *v.SessionExpirationDurationInSeconds)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlRequest_SpaceName, *v.SpaceName)
+	}
+	if v.UserProfileName != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlRequest_UserProfileName, *v.UserProfileName)
+	}
+}
+
 type CreatePresignedDomainUrlOutput struct {
 
 	// The presigned URL.
@@ -107,77 +133,48 @@ type CreatePresignedDomainUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePresignedDomainUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePresignedDomainUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePresignedDomainUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorizedUrl != nil {
+		s.WriteString(schemas.CreatePresignedDomainUrlResponse_AuthorizedUrl, *v.AuthorizedUrl)
+	}
+}
+func (v *CreatePresignedDomainUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePresignedDomainUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePresignedDomainUrlResponse_AuthorizedUrl:
+			v.AuthorizedUrl = new(string)
+			return d.ReadString(schemas.CreatePresignedDomainUrlResponse_AuthorizedUrl, v.AuthorizedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePresignedDomainUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedDomainUrl, schemas.CreatePresignedDomainUrlRequest, schemas.CreatePresignedDomainUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePresignedDomainUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePresignedDomainUrl, schemas.CreatePresignedDomainUrlRequest, schemas.CreatePresignedDomainUrlResponse), output: &CreatePresignedDomainUrlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePresignedDomainUrl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePresignedDomainUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePresignedDomainUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePresignedDomainUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,22 +189,8 @@ func (c *Client) addOperationCreatePresignedDomainUrlMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePresignedDomainUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePresignedDomainUrl",
-	}
 }

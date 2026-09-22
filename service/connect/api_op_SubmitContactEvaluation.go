@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Submits a contact evaluation in the specified Connect Customer instance.
@@ -61,6 +60,24 @@ type SubmitContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitContactEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitContactEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitContactEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationAnswersInputMap(s, schemas.SubmitContactEvaluationRequest_Answers, v.Answers)
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.SubmitContactEvaluationRequest_EvaluationId, *v.EvaluationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SubmitContactEvaluationRequest_InstanceId, *v.InstanceId)
+	}
+	serializeEvaluationNotesMap(s, schemas.SubmitContactEvaluationRequest_Notes, v.Notes)
+	serializeEvaluatorUserUnion(s, schemas.SubmitContactEvaluationRequest_SubmittedBy, v.SubmittedBy)
+}
+
 type SubmitContactEvaluationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the contact evaluation resource.
@@ -79,77 +96,54 @@ type SubmitContactEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitContactEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitContactEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitContactEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationArn != nil {
+		s.WriteString(schemas.SubmitContactEvaluationResponse_EvaluationArn, *v.EvaluationArn)
+	}
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.SubmitContactEvaluationResponse_EvaluationId, *v.EvaluationId)
+	}
+}
+func (v *SubmitContactEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitContactEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitContactEvaluationResponse_EvaluationArn:
+			v.EvaluationArn = new(string)
+			return d.ReadString(schemas.SubmitContactEvaluationResponse_EvaluationArn, v.EvaluationArn)
+		case schemas.SubmitContactEvaluationResponse_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.SubmitContactEvaluationResponse_EvaluationId, v.EvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitContactEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitContactEvaluation, schemas.SubmitContactEvaluationRequest, schemas.SubmitContactEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubmitContactEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitContactEvaluation, schemas.SubmitContactEvaluationRequest, schemas.SubmitContactEvaluationResponse), output: &SubmitContactEvaluationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSubmitContactEvaluation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SubmitContactEvaluation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSubmitContactEvaluationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitContactEvaluation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +158,8 @@ func (c *Client) addOperationSubmitContactEvaluationMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSubmitContactEvaluation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SubmitContactEvaluation",
-	}
 }

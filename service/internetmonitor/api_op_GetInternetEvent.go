@@ -4,11 +4,10 @@ package internetmonitor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,6 +42,18 @@ type GetInternetEventInput struct {
 	EventId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetInternetEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInternetEventInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInternetEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.GetInternetEventInput_EventId, *v.EventId)
+	}
 }
 
 type GetInternetEventOutput struct {
@@ -88,77 +99,94 @@ type GetInternetEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInternetEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInternetEventOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInternetEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientLocation != nil {
+		s.WriteStruct(schemas.GetInternetEventOutput_ClientLocation)
+		v.ClientLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetInternetEventOutput_EndedAt, *v.EndedAt)
+	}
+	if v.EventArn != nil {
+		s.WriteString(schemas.GetInternetEventOutput_EventArn, *v.EventArn)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.GetInternetEventOutput_EventId, *v.EventId)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.GetInternetEventOutput_EventStatus, string(v.EventStatus))
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.GetInternetEventOutput_EventType, string(v.EventType))
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetInternetEventOutput_StartedAt, *v.StartedAt)
+	}
+}
+func (v *GetInternetEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInternetEventOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInternetEventOutput_ClientLocation:
+			v.ClientLocation = &types.ClientLocation{}
+			return v.ClientLocation.Deserialize(d)
+		case schemas.GetInternetEventOutput_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetInternetEventOutput_EndedAt, v.EndedAt)
+		case schemas.GetInternetEventOutput_EventArn:
+			v.EventArn = new(string)
+			return d.ReadString(schemas.GetInternetEventOutput_EventArn, v.EventArn)
+		case schemas.GetInternetEventOutput_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.GetInternetEventOutput_EventId, v.EventId)
+		case schemas.GetInternetEventOutput_EventStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetInternetEventOutput_EventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = types.InternetEventStatus(ev)
+			return nil
+		case schemas.GetInternetEventOutput_EventType:
+			var ev string
+			if err := d.ReadString(schemas.GetInternetEventOutput_EventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = types.InternetEventType(ev)
+			return nil
+		case schemas.GetInternetEventOutput_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetInternetEventOutput_StartedAt, v.StartedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInternetEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInternetEvent, schemas.GetInternetEventInput, schemas.GetInternetEventOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInternetEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInternetEvent, schemas.GetInternetEventInput, schemas.GetInternetEventOutput), output: &GetInternetEventOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInternetEvent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInternetEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetInternetEventValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInternetEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +201,8 @@ func (c *Client) addOperationGetInternetEventMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetInternetEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetInternetEvent",
-	}
 }

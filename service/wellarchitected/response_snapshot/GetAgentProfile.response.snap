@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"aggregationConfiguration":[{"accessRoleArn":"__AccessRoleArn__","accountId":"__AccountId__","regions":["__Member__","__Member__"]},{"accessRoleArn":"__AccessRoleArn__","accountId":"__AccountId__","regions":["__Member__","__Member__"]}],"arn":"__Arn__","businessOverview":"__BusinessOverview__","createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","deletionProtection":true,"description":"__Description__","displayName":"__DisplayName__","eligibleForArchitectureGeneration":true,"eligibleForScheduledGeneration":true,"executionRoleArn":"__ExecutionRoleArn__","fieldErrors":{"key0":"__Value__"},"lastModifiedAt":"2000-01-01T00:00:00Z","lastModifiedBy":"__LastModifiedBy__","name":"__Name__","pillars":["COST_OPTIMIZATION","COST_OPTIMIZATION"],"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

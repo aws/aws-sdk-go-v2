@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon SageMaker Model Card.
@@ -70,6 +69,30 @@ type CreateModelCardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.CreateModelCardRequest_Content, *v.Content)
+	}
+	if v.ModelCardName != nil {
+		s.WriteString(schemas.CreateModelCardRequest_ModelCardName, *v.ModelCardName)
+	}
+	if v.ModelCardStatus != "" {
+		s.WriteString(schemas.CreateModelCardRequest_ModelCardStatus, string(v.ModelCardStatus))
+	}
+	if v.SecurityConfig != nil {
+		s.WriteStruct(schemas.CreateModelCardRequest_SecurityConfig)
+		v.SecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateModelCardRequest_Tags, v.Tags)
+}
+
 type CreateModelCardOutput struct {
 
 	// The Amazon Resource Name (ARN) of the successfully created model card.
@@ -83,77 +106,48 @@ type CreateModelCardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelCardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelCardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelCardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelCardArn != nil {
+		s.WriteString(schemas.CreateModelCardResponse_ModelCardArn, *v.ModelCardArn)
+	}
+}
+func (v *CreateModelCardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelCardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelCardResponse_ModelCardArn:
+			v.ModelCardArn = new(string)
+			return d.ReadString(schemas.CreateModelCardResponse_ModelCardArn, v.ModelCardArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelCardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCard, schemas.CreateModelCardRequest, schemas.CreateModelCardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateModelCard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelCard, schemas.CreateModelCardRequest, schemas.CreateModelCardResponse), output: &CreateModelCardOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateModelCard{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModelCard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateModelCardValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelCard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +162,8 @@ func (c *Client) addOperationCreateModelCardMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateModelCard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModelCard",
-	}
 }

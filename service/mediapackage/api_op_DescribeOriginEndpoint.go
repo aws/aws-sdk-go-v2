@@ -4,11 +4,10 @@ package mediapackage
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackage/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets details about an existing OriginEndpoint.
@@ -35,6 +34,18 @@ type DescribeOriginEndpointInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeOriginEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOriginEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOriginEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeOriginEndpointRequest_Id, *v.Id)
+	}
 }
 
 type DescribeOriginEndpointOutput struct {
@@ -103,77 +114,152 @@ type DescribeOriginEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOriginEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOriginEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOriginEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeOriginEndpointResponse_Arn, *v.Arn)
+	}
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.DescribeOriginEndpointResponse_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChannelId != nil {
+		s.WriteString(schemas.DescribeOriginEndpointResponse_ChannelId, *v.ChannelId)
+	}
+	if v.CmafPackage != nil {
+		s.WriteStruct(schemas.DescribeOriginEndpointResponse_CmafPackage)
+		v.CmafPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.DescribeOriginEndpointResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DashPackage != nil {
+		s.WriteStruct(schemas.DescribeOriginEndpointResponse_DashPackage)
+		v.DashPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeOriginEndpointResponse_Description, *v.Description)
+	}
+	if v.HlsPackage != nil {
+		s.WriteStruct(schemas.DescribeOriginEndpointResponse_HlsPackage)
+		v.HlsPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeOriginEndpointResponse_Id, *v.Id)
+	}
+	if v.ManifestName != nil {
+		s.WriteString(schemas.DescribeOriginEndpointResponse_ManifestName, *v.ManifestName)
+	}
+	if v.MssPackage != nil {
+		s.WriteStruct(schemas.DescribeOriginEndpointResponse_MssPackage)
+		v.MssPackage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Origination != "" {
+		s.WriteString(schemas.DescribeOriginEndpointResponse_Origination, string(v.Origination))
+	}
+	if v.StartoverWindowSeconds != nil {
+		s.WriteInt32(schemas.DescribeOriginEndpointResponse_StartoverWindowSeconds, *v.StartoverWindowSeconds)
+	}
+	serializeTags(s, schemas.DescribeOriginEndpointResponse_Tags, v.Tags)
+	if v.TimeDelaySeconds != nil {
+		s.WriteInt32(schemas.DescribeOriginEndpointResponse_TimeDelaySeconds, *v.TimeDelaySeconds)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.DescribeOriginEndpointResponse_Url, *v.Url)
+	}
+	serialize__listOf__string(s, schemas.DescribeOriginEndpointResponse_Whitelist, v.Whitelist)
+}
+func (v *DescribeOriginEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOriginEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOriginEndpointResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeOriginEndpointResponse_Arn, v.Arn)
+		case schemas.DescribeOriginEndpointResponse_Authorization:
+			v.Authorization = &types.Authorization{}
+			return v.Authorization.Deserialize(d)
+		case schemas.DescribeOriginEndpointResponse_ChannelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.DescribeOriginEndpointResponse_ChannelId, v.ChannelId)
+		case schemas.DescribeOriginEndpointResponse_CmafPackage:
+			v.CmafPackage = &types.CmafPackage{}
+			return v.CmafPackage.Deserialize(d)
+		case schemas.DescribeOriginEndpointResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.DescribeOriginEndpointResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeOriginEndpointResponse_DashPackage:
+			v.DashPackage = &types.DashPackage{}
+			return v.DashPackage.Deserialize(d)
+		case schemas.DescribeOriginEndpointResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeOriginEndpointResponse_Description, v.Description)
+		case schemas.DescribeOriginEndpointResponse_HlsPackage:
+			v.HlsPackage = &types.HlsPackage{}
+			return v.HlsPackage.Deserialize(d)
+		case schemas.DescribeOriginEndpointResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeOriginEndpointResponse_Id, v.Id)
+		case schemas.DescribeOriginEndpointResponse_ManifestName:
+			v.ManifestName = new(string)
+			return d.ReadString(schemas.DescribeOriginEndpointResponse_ManifestName, v.ManifestName)
+		case schemas.DescribeOriginEndpointResponse_MssPackage:
+			v.MssPackage = &types.MssPackage{}
+			return v.MssPackage.Deserialize(d)
+		case schemas.DescribeOriginEndpointResponse_Origination:
+			var ev string
+			if err := d.ReadString(schemas.DescribeOriginEndpointResponse_Origination, &ev); err != nil {
+				return err
+			}
+			v.Origination = types.Origination(ev)
+			return nil
+		case schemas.DescribeOriginEndpointResponse_StartoverWindowSeconds:
+			v.StartoverWindowSeconds = new(int32)
+			return d.ReadInt32(schemas.DescribeOriginEndpointResponse_StartoverWindowSeconds, v.StartoverWindowSeconds)
+		case schemas.DescribeOriginEndpointResponse_Tags:
+			return deserializeTags(d, schemas.DescribeOriginEndpointResponse_Tags, &v.Tags)
+		case schemas.DescribeOriginEndpointResponse_TimeDelaySeconds:
+			v.TimeDelaySeconds = new(int32)
+			return d.ReadInt32(schemas.DescribeOriginEndpointResponse_TimeDelaySeconds, v.TimeDelaySeconds)
+		case schemas.DescribeOriginEndpointResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.DescribeOriginEndpointResponse_Url, v.Url)
+		case schemas.DescribeOriginEndpointResponse_Whitelist:
+			return deserialize__listOf__string(d, schemas.DescribeOriginEndpointResponse_Whitelist, &v.Whitelist)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOriginEndpoint, schemas.DescribeOriginEndpointRequest, schemas.DescribeOriginEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeOriginEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOriginEndpoint, schemas.DescribeOriginEndpointRequest, schemas.DescribeOriginEndpointResponse), output: &DescribeOriginEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeOriginEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOriginEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeOriginEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOriginEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +274,8 @@ func (c *Client) addOperationDescribeOriginEndpointMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeOriginEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeOriginEndpoint",
-	}
 }

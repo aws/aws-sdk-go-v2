@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Termination":{"CallingRegions":["__Member__","__Member__"],"CidrAllowedList":["__Member__","__Member__"],"CpsLimit":1,"DefaultPhoneNumber":"__DefaultPhoneNumber__","Disabled":true}}

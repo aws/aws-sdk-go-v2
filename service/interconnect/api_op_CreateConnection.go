@@ -5,10 +5,10 @@ package interconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/interconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/interconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates the process to create a Connection across the specified Environment.
@@ -73,6 +73,30 @@ type CreateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachPoint(s, schemas.CreateConnectionRequest_attachPoint, v.AttachPoint)
+	if v.Bandwidth != nil {
+		s.WriteString(schemas.CreateConnectionRequest_bandwidth, *v.Bandwidth)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConnectionRequest_description, *v.Description)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateConnectionRequest_environmentId, *v.EnvironmentId)
+	}
+	serializeRemoteAccountIdentifier(s, schemas.CreateConnectionRequest_remoteAccount, v.RemoteAccount)
+	serializeTagMap(s, schemas.CreateConnectionRequest_tags, v.Tags)
+}
+
 type CreateConnectionOutput struct {
 
 	// The resulting Connection.
@@ -84,65 +108,44 @@ type CreateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connection != nil {
+		s.WriteStruct(schemas.CreateConnectionResponse_connection)
+		v.Connection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectionResponse_connection:
+			v.Connection = &types.Connection{}
+			return v.Connection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionRequest, schemas.CreateConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnection, schemas.CreateConnectionRequest, schemas.CreateConnectionResponse), output: &CreateConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -157,12 +160,6 @@ func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack
 	if err = addOpCreateConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -173,12 +170,6 @@ func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -218,12 +209,4 @@ func (m *idempotencyToken_initializeOpCreateConnection) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreateConnectionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateConnection{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateConnection",
-	}
 }

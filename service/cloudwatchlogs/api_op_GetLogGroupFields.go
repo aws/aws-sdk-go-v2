@@ -4,11 +4,10 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the fields that are included in log events in the specified
@@ -75,6 +74,24 @@ type GetLogGroupFieldsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLogGroupFieldsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLogGroupFieldsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLogGroupFieldsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogGroupIdentifier != nil {
+		s.WriteString(schemas.GetLogGroupFieldsRequest_logGroupIdentifier, *v.LogGroupIdentifier)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.GetLogGroupFieldsRequest_logGroupName, *v.LogGroupName)
+	}
+	if v.Time != nil {
+		s.WriteInt64(schemas.GetLogGroupFieldsRequest_time, *v.Time)
+	}
+}
+
 type GetLogGroupFieldsOutput struct {
 
 	// The array of fields found in the query. Each object in the array contains the
@@ -88,74 +105,42 @@ type GetLogGroupFieldsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLogGroupFieldsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLogGroupFieldsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLogGroupFieldsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogGroupFieldList(s, schemas.GetLogGroupFieldsResponse_logGroupFields, v.LogGroupFields)
+}
+func (v *GetLogGroupFieldsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLogGroupFieldsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLogGroupFieldsResponse_logGroupFields:
+			return deserializeLogGroupFieldList(d, schemas.GetLogGroupFieldsResponse_logGroupFields, &v.LogGroupFields)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLogGroupFieldsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLogGroupFields, schemas.GetLogGroupFieldsRequest, schemas.GetLogGroupFieldsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLogGroupFields{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLogGroupFields, schemas.GetLogGroupFieldsRequest, schemas.GetLogGroupFieldsResponse), output: &GetLogGroupFieldsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLogGroupFields{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLogGroupFields"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLogGroupFields(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +155,8 @@ func (c *Client) addOperationGetLogGroupFieldsMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLogGroupFields(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLogGroupFields",
-	}
 }

@@ -5,10 +5,10 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -51,6 +51,27 @@ type CancelProfileUpdateTaskInput struct {
 	ClientToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelProfileUpdateTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelProfileUpdateTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelProfileUpdateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelProfileUpdateTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelProfileUpdateTaskRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CancelProfileUpdateTaskRequest_Identifier, *v.Identifier)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.CancelProfileUpdateTaskRequest_TaskId, *v.TaskId)
+	}
 }
 
 type CancelProfileUpdateTaskOutput struct {
@@ -102,65 +123,93 @@ type CancelProfileUpdateTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelProfileUpdateTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelProfileUpdateTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelProfileUpdateTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CancelProfileUpdateTaskResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelProfileUpdateTaskResponse_Catalog, *v.Catalog)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.CancelProfileUpdateTaskResponse_EndedAt, *v.EndedAt)
+	}
+	serializeErrorDetailList(s, schemas.CancelProfileUpdateTaskResponse_ErrorDetailList, v.ErrorDetailList)
+	if v.Id != nil {
+		s.WriteString(schemas.CancelProfileUpdateTaskResponse_Id, *v.Id)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.CancelProfileUpdateTaskResponse_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CancelProfileUpdateTaskResponse_Status, string(v.Status))
+	}
+	if v.TaskDetails != nil {
+		s.WriteStruct(schemas.CancelProfileUpdateTaskResponse_TaskDetails)
+		v.TaskDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.CancelProfileUpdateTaskResponse_TaskId, *v.TaskId)
+	}
+}
+func (v *CancelProfileUpdateTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelProfileUpdateTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelProfileUpdateTaskResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CancelProfileUpdateTaskResponse_Arn, v.Arn)
+		case schemas.CancelProfileUpdateTaskResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.CancelProfileUpdateTaskResponse_Catalog, v.Catalog)
+		case schemas.CancelProfileUpdateTaskResponse_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelProfileUpdateTaskResponse_EndedAt, v.EndedAt)
+		case schemas.CancelProfileUpdateTaskResponse_ErrorDetailList:
+			return deserializeErrorDetailList(d, schemas.CancelProfileUpdateTaskResponse_ErrorDetailList, &v.ErrorDetailList)
+		case schemas.CancelProfileUpdateTaskResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CancelProfileUpdateTaskResponse_Id, v.Id)
+		case schemas.CancelProfileUpdateTaskResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelProfileUpdateTaskResponse_StartedAt, v.StartedAt)
+		case schemas.CancelProfileUpdateTaskResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CancelProfileUpdateTaskResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProfileTaskStatus(ev)
+			return nil
+		case schemas.CancelProfileUpdateTaskResponse_TaskDetails:
+			v.TaskDetails = &types.TaskDetails{}
+			return v.TaskDetails.Deserialize(d)
+		case schemas.CancelProfileUpdateTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CancelProfileUpdateTaskResponse_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelProfileUpdateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelProfileUpdateTask, schemas.CancelProfileUpdateTaskRequest, schemas.CancelProfileUpdateTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelProfileUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelProfileUpdateTask, schemas.CancelProfileUpdateTaskRequest, schemas.CancelProfileUpdateTaskResponse), output: &CancelProfileUpdateTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelProfileUpdateTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelProfileUpdateTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -170,12 +219,6 @@ func (c *Client) addOperationCancelProfileUpdateTaskMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpCancelProfileUpdateTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelProfileUpdateTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +231,6 @@ func (c *Client) addOperationCancelProfileUpdateTaskMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -233,12 +270,4 @@ func (m *idempotencyToken_initializeOpCancelProfileUpdateTask) HandleInitialize(
 }
 func addIdempotencyToken_opCancelProfileUpdateTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCancelProfileUpdateTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCancelProfileUpdateTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelProfileUpdateTask",
-	}
 }

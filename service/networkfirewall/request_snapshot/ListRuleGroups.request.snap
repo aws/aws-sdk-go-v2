@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.ListRuleGroups
+
+{"ManagedType":"AWS_MANAGED_THREAT_SIGNATURES","MaxResults":1,"NextToken":"__NextToken__","Scope":"MANAGED","SubscriptionStatus":"NOT_SUBSCRIBED","Type":"STATELESS"}

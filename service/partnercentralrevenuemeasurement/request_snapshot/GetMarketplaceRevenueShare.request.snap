@@ -1,0 +1,7 @@
+POST /service/PartnerCentralRevenueMeasurement/operation/GetMarketplaceRevenueShare
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿gCatalogcAWSiProductIdm__ProductId__hRevisionÿ

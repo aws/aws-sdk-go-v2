@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PutWarmPool&AutoScalingGroupName=__AutoScalingGroupName__&InstanceReusePolicy.ReuseOnScaleIn=true&MaxGroupPreparedCapacity=1&MinSize=1&PoolState=Stopped&Version=2011-01-01

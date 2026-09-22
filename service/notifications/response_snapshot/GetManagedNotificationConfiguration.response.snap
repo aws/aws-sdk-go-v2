@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","category":"__Category__","description":"__Description__","name":"__Name__","subCategory":"__SubCategory__"}

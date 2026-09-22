@@ -4,10 +4,9 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The API mapping.
@@ -53,6 +52,30 @@ type UpdateApiMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApiMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApiMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_ApiId, *v.ApiId)
+	}
+	if v.ApiMappingId != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_ApiMappingId, *v.ApiMappingId)
+	}
+	if v.ApiMappingKey != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_ApiMappingKey, *v.ApiMappingKey)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_DomainName, *v.DomainName)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.UpdateApiMappingRequest_Stage, *v.Stage)
+	}
+}
+
 type UpdateApiMappingOutput struct {
 
 	// The API identifier.
@@ -73,77 +96,66 @@ type UpdateApiMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApiMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApiMappingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApiMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.UpdateApiMappingResponse_ApiId, *v.ApiId)
+	}
+	if v.ApiMappingId != nil {
+		s.WriteString(schemas.UpdateApiMappingResponse_ApiMappingId, *v.ApiMappingId)
+	}
+	if v.ApiMappingKey != nil {
+		s.WriteString(schemas.UpdateApiMappingResponse_ApiMappingKey, *v.ApiMappingKey)
+	}
+	if v.Stage != nil {
+		s.WriteString(schemas.UpdateApiMappingResponse_Stage, *v.Stage)
+	}
+}
+func (v *UpdateApiMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApiMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApiMappingResponse_ApiId:
+			v.ApiId = new(string)
+			return d.ReadString(schemas.UpdateApiMappingResponse_ApiId, v.ApiId)
+		case schemas.UpdateApiMappingResponse_ApiMappingId:
+			v.ApiMappingId = new(string)
+			return d.ReadString(schemas.UpdateApiMappingResponse_ApiMappingId, v.ApiMappingId)
+		case schemas.UpdateApiMappingResponse_ApiMappingKey:
+			v.ApiMappingKey = new(string)
+			return d.ReadString(schemas.UpdateApiMappingResponse_ApiMappingKey, v.ApiMappingKey)
+		case schemas.UpdateApiMappingResponse_Stage:
+			v.Stage = new(string)
+			return d.ReadString(schemas.UpdateApiMappingResponse_Stage, v.Stage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApiMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiMapping, schemas.UpdateApiMappingRequest, schemas.UpdateApiMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApiMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApiMapping, schemas.UpdateApiMappingRequest, schemas.UpdateApiMappingResponse), output: &UpdateApiMappingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApiMapping{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApiMapping"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateApiMappingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApiMapping(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +170,8 @@ func (c *Client) addOperationUpdateApiMappingMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateApiMapping(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateApiMapping",
-	}
 }

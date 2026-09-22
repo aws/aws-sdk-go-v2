@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Count":{"Complete":true,"TotalResources":1},"NextToken":"__NextToken__","Resources":[{"Arn":"__Arn__","CfnResourceType":"__CfnResourceType__","LastReportedAt":"2000-01-01T00:00:00Z","OwningAccountId":"__OwningAccountId__","Properties":[{"Data":"__Document__","LastReportedAt":"2000-01-01T00:00:00Z","Name":"__Name__"},{"Data":"__Document__","LastReportedAt":"2000-01-01T00:00:00Z","Name":"__Name__"}],"Region":"__Region__","ResourceType":"__ResourceType__","Service":"__Service__"},{"Arn":"__Arn__","CfnResourceType":"__CfnResourceType__","LastReportedAt":"2000-01-01T00:00:00Z","OwningAccountId":"__OwningAccountId__","Properties":[{"Data":"__Document__","LastReportedAt":"2000-01-01T00:00:00Z","Name":"__Name__"},{"Data":"__Document__","LastReportedAt":"2000-01-01T00:00:00Z","Name":"__Name__"}],"Region":"__Region__","ResourceType":"__ResourceType__","Service":"__Service__"}],"ViewArn":"__ViewArn__"}

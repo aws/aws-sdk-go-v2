@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.GetWorkflowExecutionHistory
+
+{"domain":"__Domain__","execution":{"runId":"__RunId__","workflowId":"__WorkflowId__"},"maximumPageSize":1,"nextPageToken":"__NextPageToken__","reverseOrder":true}

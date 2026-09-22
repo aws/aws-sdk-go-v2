@@ -5,9 +5,9 @@ package frauddetector
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets all the elements in the specified list.
@@ -42,6 +42,24 @@ type GetListElementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetListElementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetListElementsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetListElementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetListElementsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetListElementsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetListElementsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetListElementsOutput struct {
 
 	//  The list elements.
@@ -56,77 +74,51 @@ type GetListElementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetListElementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetListElementsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetListElementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeElementsList(s, schemas.GetListElementsResult_elements, v.Elements)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetListElementsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *GetListElementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetListElementsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetListElementsResult_elements:
+			return deserializeElementsList(d, schemas.GetListElementsResult_elements, &v.Elements)
+		case schemas.GetListElementsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetListElementsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetListElementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListElements, schemas.GetListElementsRequest, schemas.GetListElementsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetListElements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetListElements, schemas.GetListElementsRequest, schemas.GetListElementsResult), output: &GetListElementsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetListElements{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetListElements"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetListElementsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetListElements(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,12 +131,6 @@ func (c *Client) addOperationGetListElementsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,11 +231,3 @@ type GetListElementsAPIClient interface {
 }
 
 var _ GetListElementsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetListElements(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetListElements",
-	}
-}

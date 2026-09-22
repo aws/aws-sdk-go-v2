@@ -1,0 +1,5 @@
+POST /listWorkloadDeploymentPatterns
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","workloadName":"__WorkloadName__"}

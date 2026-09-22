@@ -5,10 +5,10 @@ package amp
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // When you call PutAnomalyDetector , the operation creates a new anomaly detector
@@ -68,6 +68,30 @@ type PutAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAnomalyDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAnomalyDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.PutAnomalyDetectorRequest_anomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutAnomalyDetectorRequest_clientToken, *v.ClientToken)
+	}
+	serializeAnomalyDetectorConfiguration(s, schemas.PutAnomalyDetectorRequest_configuration, v.Configuration)
+	if v.EvaluationIntervalInSeconds != nil {
+		s.WriteInt32(schemas.PutAnomalyDetectorRequest_evaluationIntervalInSeconds, *v.EvaluationIntervalInSeconds)
+	}
+	serializePrometheusMetricLabelMap(s, schemas.PutAnomalyDetectorRequest_labels, v.Labels)
+	serializeAnomalyDetectorMissingDataAction(s, schemas.PutAnomalyDetectorRequest_missingDataAction, v.MissingDataAction)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.PutAnomalyDetectorRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type PutAnomalyDetectorOutput struct {
 
 	// The unique identifier of the updated anomaly detector.
@@ -94,65 +118,59 @@ type PutAnomalyDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAnomalyDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAnomalyDetectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.PutAnomalyDetectorResponse_anomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.PutAnomalyDetectorResponse_arn, *v.Arn)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.PutAnomalyDetectorResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.PutAnomalyDetectorResponse_tags, v.Tags)
+}
+func (v *PutAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAnomalyDetectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAnomalyDetectorResponse_anomalyDetectorId:
+			v.AnomalyDetectorId = new(string)
+			return d.ReadString(schemas.PutAnomalyDetectorResponse_anomalyDetectorId, v.AnomalyDetectorId)
+		case schemas.PutAnomalyDetectorResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PutAnomalyDetectorResponse_arn, v.Arn)
+		case schemas.PutAnomalyDetectorResponse_status:
+			v.Status = &types.AnomalyDetectorStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.PutAnomalyDetectorResponse_tags:
+			return deserializeTagMap(d, schemas.PutAnomalyDetectorResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAnomalyDetector, schemas.PutAnomalyDetectorRequest, schemas.PutAnomalyDetectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAnomalyDetector, schemas.PutAnomalyDetectorRequest, schemas.PutAnomalyDetectorResponse), output: &PutAnomalyDetectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAnomalyDetector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAnomalyDetector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -162,12 +180,6 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpPutAnomalyDetectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAnomalyDetector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +192,6 @@ func (c *Client) addOperationPutAnomalyDetectorMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -225,12 +231,4 @@ func (m *idempotencyToken_initializeOpPutAnomalyDetector) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opPutAnomalyDetectorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpPutAnomalyDetector{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opPutAnomalyDetector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutAnomalyDetector",
-	}
 }

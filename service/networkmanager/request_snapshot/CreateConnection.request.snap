@@ -1,0 +1,5 @@
+POST /global-networks/__GlobalNetworkId__/connections
+
+Content-Type: application/json
+
+{"ConnectedDeviceId":"__ConnectedDeviceId__","ConnectedLinkId":"__ConnectedLinkId__","Description":"__Description__","DeviceId":"__DeviceId__","LinkId":"__LinkId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a custom permissions profile.
@@ -43,10 +42,43 @@ type CreateCustomPermissionsInput struct {
 	// A set of actions to include in the custom permissions profile.
 	Capabilities *types.Capabilities
 
+	// The governance configuration for the custom permissions profile. When
+	// governance controls are defined for a category, any capabilities in that
+	// category not explicitly set to ALLOW in Capabilities are denied. Even newly
+	// added capabilities in the category are implicitly disabled when Amazon Quick
+	// releases them.
+	Governance *types.Governance
+
 	// The tags to associate with the custom permissions profile.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateCustomPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateCustomPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Capabilities != nil {
+		s.WriteStruct(schemas.CreateCustomPermissionsRequest_Capabilities)
+		v.Capabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomPermissionsName != nil {
+		s.WriteString(schemas.CreateCustomPermissionsRequest_CustomPermissionsName, *v.CustomPermissionsName)
+	}
+	if v.Governance != nil {
+		s.WriteStruct(schemas.CreateCustomPermissionsRequest_Governance)
+		v.Governance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateCustomPermissionsRequest_Tags, v.Tags)
 }
 
 type CreateCustomPermissionsOutput struct {
@@ -66,77 +98,59 @@ type CreateCustomPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateCustomPermissionsResponse_Arn, *v.Arn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateCustomPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateCustomPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *CreateCustomPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomPermissionsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateCustomPermissionsResponse_Arn, v.Arn)
+		case schemas.CreateCustomPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateCustomPermissionsResponse_RequestId, v.RequestId)
+		case schemas.CreateCustomPermissionsResponse_Status:
+			return d.ReadInt32(schemas.CreateCustomPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomPermissions, schemas.CreateCustomPermissionsRequest, schemas.CreateCustomPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomPermissions, schemas.CreateCustomPermissionsRequest, schemas.CreateCustomPermissionsResponse), output: &CreateCustomPermissionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomPermissions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomPermissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCustomPermissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomPermissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +165,8 @@ func (c *Client) addOperationCreateCustomPermissionsMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCustomPermissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCustomPermissions",
-	}
 }

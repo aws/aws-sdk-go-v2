@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"InvalidConfigurationException","message":"__Message__"}

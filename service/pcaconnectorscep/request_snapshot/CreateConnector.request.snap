@@ -1,0 +1,5 @@
+POST /connectors
+
+Content-Type: application/json
+
+{"CertificateAuthorityArn":"__CertificateAuthorityArn__","ClientToken":"__ClientToken__","MobileDeviceManagement":{"Intune":{"AzureApplicationId":"__AzureApplicationId__","Domain":"__Domain__"}},"Tags":{"key0":"__Value__"},"VpcEndpointId":"__VpcEndpointId__"}

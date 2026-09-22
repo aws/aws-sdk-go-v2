@@ -1,0 +1,5 @@
+PATCH /fleet-metric/__MetricName__
+
+Content-Type: application/json
+
+{"aggregationField":"__AggregationField__","aggregationType":{"name":"Statistics","values":["__Member__","__Member__"]},"description":"__Description__","expectedVersion":1,"indexName":"__IndexName__","period":1,"queryString":"__QueryString__","queryVersion":"__QueryVersion__","unit":"Seconds"}

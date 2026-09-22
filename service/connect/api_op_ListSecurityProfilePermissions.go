@@ -5,9 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -59,6 +59,27 @@ type ListSecurityProfilePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfilePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfilePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfilePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSecurityProfilePermissionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsRequest_NextToken, *v.NextToken)
+	}
+	if v.SecurityProfileId != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsRequest_SecurityProfileId, *v.SecurityProfileId)
+	}
+}
+
 type ListSecurityProfilePermissionsOutput struct {
 
 	// The Amazon Web Services Region where this resource was last modified.
@@ -82,77 +103,63 @@ type ListSecurityProfilePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSecurityProfilePermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSecurityProfilePermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSecurityProfilePermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsResponse_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.ListSecurityProfilePermissionsResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSecurityProfilePermissionsResponse_NextToken, *v.NextToken)
+	}
+	serializePermissionsList(s, schemas.ListSecurityProfilePermissionsResponse_Permissions, v.Permissions)
+}
+func (v *ListSecurityProfilePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSecurityProfilePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSecurityProfilePermissionsResponse_LastModifiedRegion:
+			v.LastModifiedRegion = new(string)
+			return d.ReadString(schemas.ListSecurityProfilePermissionsResponse_LastModifiedRegion, v.LastModifiedRegion)
+		case schemas.ListSecurityProfilePermissionsResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.ListSecurityProfilePermissionsResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.ListSecurityProfilePermissionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSecurityProfilePermissionsResponse_NextToken, v.NextToken)
+		case schemas.ListSecurityProfilePermissionsResponse_Permissions:
+			return deserializePermissionsList(d, schemas.ListSecurityProfilePermissionsResponse_Permissions, &v.Permissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSecurityProfilePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfilePermissions, schemas.ListSecurityProfilePermissionsRequest, schemas.ListSecurityProfilePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSecurityProfilePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSecurityProfilePermissions, schemas.ListSecurityProfilePermissionsRequest, schemas.ListSecurityProfilePermissionsResponse), output: &ListSecurityProfilePermissionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSecurityProfilePermissions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSecurityProfilePermissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSecurityProfilePermissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSecurityProfilePermissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +172,6 @@ func (c *Client) addOperationListSecurityProfilePermissionsMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +275,3 @@ type ListSecurityProfilePermissionsAPIClient interface {
 }
 
 var _ ListSecurityProfilePermissionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSecurityProfilePermissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSecurityProfilePermissions",
-	}
-}

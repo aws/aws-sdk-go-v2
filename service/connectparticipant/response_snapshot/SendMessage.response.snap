@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AbsoluteTime":"__AbsoluteTime__","Id":"__Id__","MessageMetadata":{"MessageProcessingStatus":"PROCESSING"}}

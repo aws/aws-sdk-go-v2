@@ -1808,7 +1808,7 @@ func (*OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly) isOpenIdConnect
 //	OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly
 //
 // [OpenIdConnectConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html
-// [ListIdentitySources]: http://amazonaws.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
 type OpenIdConnectTokenSelectionItem interface {
 	isOpenIdConnectTokenSelectionItem()
 }

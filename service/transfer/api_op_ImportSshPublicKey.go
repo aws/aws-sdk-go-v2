@@ -4,10 +4,9 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a Secure Shell (SSH) public key to a Transfer Family user identified by a
@@ -53,6 +52,24 @@ type ImportSshPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSshPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSshPublicKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSshPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.ImportSshPublicKeyRequest_ServerId, *v.ServerId)
+	}
+	if v.SshPublicKeyBody != nil {
+		s.WriteString(schemas.ImportSshPublicKeyRequest_SshPublicKeyBody, *v.SshPublicKeyBody)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ImportSshPublicKeyRequest_UserName, *v.UserName)
+	}
+}
+
 // Identifies the user, the server they belong to, and the identifier of the SSH
 // public key associated with that user. A user can have more than one key on each
 // server that they are associated with.
@@ -79,77 +96,60 @@ type ImportSshPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportSshPublicKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportSshPublicKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportSshPublicKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.ImportSshPublicKeyResponse_ServerId, *v.ServerId)
+	}
+	if v.SshPublicKeyId != nil {
+		s.WriteString(schemas.ImportSshPublicKeyResponse_SshPublicKeyId, *v.SshPublicKeyId)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.ImportSshPublicKeyResponse_UserName, *v.UserName)
+	}
+}
+func (v *ImportSshPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportSshPublicKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportSshPublicKeyResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.ImportSshPublicKeyResponse_ServerId, v.ServerId)
+		case schemas.ImportSshPublicKeyResponse_SshPublicKeyId:
+			v.SshPublicKeyId = new(string)
+			return d.ReadString(schemas.ImportSshPublicKeyResponse_SshPublicKeyId, v.SshPublicKeyId)
+		case schemas.ImportSshPublicKeyResponse_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.ImportSshPublicKeyResponse_UserName, v.UserName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportSshPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSshPublicKey, schemas.ImportSshPublicKeyRequest, schemas.ImportSshPublicKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportSshPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportSshPublicKey, schemas.ImportSshPublicKeyRequest, schemas.ImportSshPublicKeyResponse), output: &ImportSshPublicKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportSshPublicKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportSshPublicKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpImportSshPublicKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportSshPublicKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +164,8 @@ func (c *Client) addOperationImportSshPublicKeyMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opImportSshPublicKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportSshPublicKey",
-	}
 }

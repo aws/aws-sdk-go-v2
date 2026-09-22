@@ -1,0 +1,3 @@
+DELETE /service-linked-analyzer/__AnalyzerName__?clientToken=__ClientToken__
+
+

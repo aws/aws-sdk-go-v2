@@ -1,0 +1,5 @@
+POST /start-recommendation-report-generation
+
+Content-Type: application/json
+
+{"groupIdFilter":[{"name":"ExternalId","value":"__Value__"},{"name":"ExternalId","value":"__Value__"}],"outputFormat":"Excel"}

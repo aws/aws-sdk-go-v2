@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","channels":["__Member__","__Member__"],"clusterId":"__ClusterId__","id":"__Id__","name":"__Name__","nodes":["__Member__","__Member__"],"state":"UNASSIGNED"}

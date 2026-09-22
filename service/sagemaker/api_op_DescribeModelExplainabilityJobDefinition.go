@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -37,6 +36,18 @@ type DescribeModelExplainabilityJobDefinitionInput struct {
 	JobDefinitionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeModelExplainabilityJobDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelExplainabilityJobDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelExplainabilityJobDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.DescribeModelExplainabilityJobDefinitionRequest_JobDefinitionName, *v.JobDefinitionName)
+	}
 }
 
 type DescribeModelExplainabilityJobDefinitionOutput struct {
@@ -100,77 +111,122 @@ type DescribeModelExplainabilityJobDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelExplainabilityJobDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelExplainabilityJobDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelExplainabilityJobDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeModelExplainabilityJobDefinitionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.JobDefinitionArn != nil {
+		s.WriteString(schemas.DescribeModelExplainabilityJobDefinitionResponse_JobDefinitionArn, *v.JobDefinitionArn)
+	}
+	if v.JobDefinitionName != nil {
+		s.WriteString(schemas.DescribeModelExplainabilityJobDefinitionResponse_JobDefinitionName, *v.JobDefinitionName)
+	}
+	if v.JobResources != nil {
+		s.WriteStruct(schemas.DescribeModelExplainabilityJobDefinitionResponse_JobResources)
+		v.JobResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelExplainabilityAppSpecification != nil {
+		s.WriteStruct(schemas.DescribeModelExplainabilityJobDefinitionResponse_ModelExplainabilityAppSpecification)
+		v.ModelExplainabilityAppSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelExplainabilityBaselineConfig != nil {
+		s.WriteStruct(schemas.DescribeModelExplainabilityJobDefinitionResponse_ModelExplainabilityBaselineConfig)
+		v.ModelExplainabilityBaselineConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelExplainabilityJobInput != nil {
+		s.WriteStruct(schemas.DescribeModelExplainabilityJobDefinitionResponse_ModelExplainabilityJobInput)
+		v.ModelExplainabilityJobInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelExplainabilityJobOutputConfig != nil {
+		s.WriteStruct(schemas.DescribeModelExplainabilityJobDefinitionResponse_ModelExplainabilityJobOutputConfig)
+		v.ModelExplainabilityJobOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.DescribeModelExplainabilityJobDefinitionResponse_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeModelExplainabilityJobDefinitionResponse_RoleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.DescribeModelExplainabilityJobDefinitionResponse_StoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeModelExplainabilityJobDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeModelExplainabilityJobDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelExplainabilityJobDefinitionResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_JobDefinitionArn:
+			v.JobDefinitionArn = new(string)
+			return d.ReadString(schemas.DescribeModelExplainabilityJobDefinitionResponse_JobDefinitionArn, v.JobDefinitionArn)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_JobDefinitionName:
+			v.JobDefinitionName = new(string)
+			return d.ReadString(schemas.DescribeModelExplainabilityJobDefinitionResponse_JobDefinitionName, v.JobDefinitionName)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_JobResources:
+			v.JobResources = &types.MonitoringResources{}
+			return v.JobResources.Deserialize(d)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_ModelExplainabilityAppSpecification:
+			v.ModelExplainabilityAppSpecification = &types.ModelExplainabilityAppSpecification{}
+			return v.ModelExplainabilityAppSpecification.Deserialize(d)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_ModelExplainabilityBaselineConfig:
+			v.ModelExplainabilityBaselineConfig = &types.ModelExplainabilityBaselineConfig{}
+			return v.ModelExplainabilityBaselineConfig.Deserialize(d)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_ModelExplainabilityJobInput:
+			v.ModelExplainabilityJobInput = &types.ModelExplainabilityJobInput{}
+			return v.ModelExplainabilityJobInput.Deserialize(d)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_ModelExplainabilityJobOutputConfig:
+			v.ModelExplainabilityJobOutputConfig = &types.MonitoringOutputConfig{}
+			return v.ModelExplainabilityJobOutputConfig.Deserialize(d)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_NetworkConfig:
+			v.NetworkConfig = &types.MonitoringNetworkConfig{}
+			return v.NetworkConfig.Deserialize(d)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeModelExplainabilityJobDefinitionResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeModelExplainabilityJobDefinitionResponse_StoppingCondition:
+			v.StoppingCondition = &types.MonitoringStoppingCondition{}
+			return v.StoppingCondition.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeModelExplainabilityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelExplainabilityJobDefinition, schemas.DescribeModelExplainabilityJobDefinitionRequest, schemas.DescribeModelExplainabilityJobDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeModelExplainabilityJobDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelExplainabilityJobDefinition, schemas.DescribeModelExplainabilityJobDefinitionRequest, schemas.DescribeModelExplainabilityJobDefinitionResponse), output: &DescribeModelExplainabilityJobDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeModelExplainabilityJobDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeModelExplainabilityJobDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeModelExplainabilityJobDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeModelExplainabilityJobDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +241,8 @@ func (c *Client) addOperationDescribeModelExplainabilityJobDefinitionMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeModelExplainabilityJobDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeModelExplainabilityJobDefinition",
-	}
 }

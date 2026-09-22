@@ -1,0 +1,3 @@
+GET /2013-04-01/healthcheck?marker=__Marker__&maxitems=1
+
+

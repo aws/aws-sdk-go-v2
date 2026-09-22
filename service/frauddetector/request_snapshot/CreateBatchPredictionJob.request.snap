@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.CreateBatchPredictionJob
+
+{"detectorName":"__DetectorName__","detectorVersion":"__DetectorVersion__","eventTypeName":"__EventTypeName__","iamRoleArn":"__IamRoleArn__","inputPath":"__InputPath__","jobId":"__JobId__","outputPath":"__OutputPath__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

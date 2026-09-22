@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","profiles":[{"arn":"__Arn__","platformDisplayName":"__PlatformDisplayName__","platformId":"__PlatformId__","profileName":"__ProfileName__","profileVersion":"__ProfileVersion__","profileVersionArn":"__ProfileVersionArn__","signatureValidityPeriod":{"type":"DAYS","value":1},"signingMaterial":{"certificateArn":"__CertificateArn__"},"signingParameters":{"key0":"__Value__"},"status":"Active","tags":{"key0":"__Value__"}},{"arn":"__Arn__","platformDisplayName":"__PlatformDisplayName__","platformId":"__PlatformId__","profileName":"__ProfileName__","profileVersion":"__ProfileVersion__","profileVersionArn":"__ProfileVersionArn__","signatureValidityPeriod":{"type":"DAYS","value":1},"signingMaterial":{"certificateArn":"__CertificateArn__"},"signingParameters":{"key0":"__Value__"},"status":"Active","tags":{"key0":"__Value__"}}]}

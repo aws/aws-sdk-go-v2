@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +45,24 @@ type ListLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.ListLimitsRequest_farmId, *v.FarmId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLimitsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLimitsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // Shared pagination field for List operation outputs (nextToken).
 type ListLimitsOutput struct {
 
@@ -66,65 +85,45 @@ type ListLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLimitsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLimitSummaries(s, schemas.ListLimitsResponse_limits, v.Limits)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLimitsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLimitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLimitsResponse_limits:
+			return deserializeLimitSummaries(d, schemas.ListLimitsResponse_limits, &v.Limits)
+		case schemas.ListLimitsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLimitsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLimits, schemas.ListLimitsRequest, schemas.ListLimitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLimits, schemas.ListLimitsRequest, schemas.ListLimitsResponse), output: &ListLimitsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLimits{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLimits"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -134,12 +133,6 @@ func (c *Client) addOperationListLimitsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpListLimitsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLimits(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +145,6 @@ func (c *Client) addOperationListLimitsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -284,11 +271,3 @@ type ListLimitsAPIClient interface {
 }
 
 var _ ListLimitsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLimits(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLimits",
-	}
-}

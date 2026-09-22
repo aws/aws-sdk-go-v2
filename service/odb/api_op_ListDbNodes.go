@@ -5,10 +5,10 @@ package odb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the DB nodes for the specified VM cluster.
@@ -29,10 +29,13 @@ func (c *Client) ListDbNodes(ctx context.Context, params *ListDbNodesInput, optF
 
 type ListDbNodesInput struct {
 
-	// The unique identifier of the VM cluster.
-	//
-	// This member is required.
+	// The unique identifier of the VM cluster. You must specify either this parameter
+	// or exadbVmClusterId .
 	CloudVmClusterId *string
+
+	// The unique identifier of the Exascale VM cluster. You must specify either this
+	// parameter or cloudVmClusterId .
+	ExadbVmClusterId *string
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output.
@@ -45,6 +48,27 @@ type ListDbNodesInput struct {
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListDbNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbNodesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudVmClusterId != nil {
+		s.WriteString(schemas.ListDbNodesInput_cloudVmClusterId, *v.CloudVmClusterId)
+	}
+	if v.ExadbVmClusterId != nil {
+		s.WriteString(schemas.ListDbNodesInput_exadbVmClusterId, *v.ExadbVmClusterId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDbNodesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbNodesInput_nextToken, *v.NextToken)
+	}
 }
 
 type ListDbNodesOutput struct {
@@ -64,77 +88,48 @@ type ListDbNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDbNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDbNodesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDbNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDbNodeList(s, schemas.ListDbNodesOutput_dbNodes, v.DbNodes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDbNodesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDbNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDbNodesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDbNodesOutput_dbNodes:
+			return deserializeDbNodeList(d, schemas.ListDbNodesOutput_dbNodes, &v.DbNodes)
+		case schemas.ListDbNodesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDbNodesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDbNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbNodes, schemas.ListDbNodesInput, schemas.ListDbNodesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDbNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDbNodes, schemas.ListDbNodesInput, schemas.ListDbNodesOutput), output: &ListDbNodesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDbNodes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDbNodes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListDbNodesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDbNodes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +142,6 @@ func (c *Client) addOperationListDbNodesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,11 +244,3 @@ type ListDbNodesAPIClient interface {
 }
 
 var _ ListDbNodesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDbNodes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDbNodes",
-	}
-}

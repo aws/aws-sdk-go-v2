@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.StartClusterHealthCheck
+
+{"ClusterName":"__ClusterName__","DeepHealthCheckConfigurations":[{"DeepHealthChecks":["InstanceStress","InstanceStress"],"InstanceGroupName":"__InstanceGroupName__","InstanceIds":["__Member__","__Member__"]},{"DeepHealthChecks":["InstanceStress","InstanceStress"],"InstanceGroupName":"__InstanceGroupName__","InstanceIds":["__Member__","__Member__"]}]}

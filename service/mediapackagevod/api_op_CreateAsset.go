@@ -4,11 +4,10 @@ package mediapackagevod
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new MediaPackage VOD Asset resource.
@@ -59,6 +58,31 @@ type CreateAssetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAssetRequest_Id, *v.Id)
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.CreateAssetRequest_PackagingGroupId, *v.PackagingGroupId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateAssetRequest_ResourceId, *v.ResourceId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.CreateAssetRequest_SourceArn, *v.SourceArn)
+	}
+	if v.SourceRoleArn != nil {
+		s.WriteString(schemas.CreateAssetRequest_SourceRoleArn, *v.SourceRoleArn)
+	}
+	serializeTags(s, schemas.CreateAssetRequest_Tags, v.Tags)
+}
+
 type CreateAssetOutput struct {
 
 	// The ARN of the Asset.
@@ -94,77 +118,90 @@ type CreateAssetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateAssetResponse_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.CreateAssetResponse_CreatedAt, *v.CreatedAt)
+	}
+	serialize__listOfEgressEndpoint(s, schemas.CreateAssetResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAssetResponse_Id, *v.Id)
+	}
+	if v.PackagingGroupId != nil {
+		s.WriteString(schemas.CreateAssetResponse_PackagingGroupId, *v.PackagingGroupId)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.CreateAssetResponse_ResourceId, *v.ResourceId)
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.CreateAssetResponse_SourceArn, *v.SourceArn)
+	}
+	if v.SourceRoleArn != nil {
+		s.WriteString(schemas.CreateAssetResponse_SourceRoleArn, *v.SourceRoleArn)
+	}
+	serializeTags(s, schemas.CreateAssetResponse_Tags, v.Tags)
+}
+func (v *CreateAssetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssetResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_Arn, v.Arn)
+		case schemas.CreateAssetResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateAssetResponse_EgressEndpoints:
+			return deserialize__listOfEgressEndpoint(d, schemas.CreateAssetResponse_EgressEndpoints, &v.EgressEndpoints)
+		case schemas.CreateAssetResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_Id, v.Id)
+		case schemas.CreateAssetResponse_PackagingGroupId:
+			v.PackagingGroupId = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_PackagingGroupId, v.PackagingGroupId)
+		case schemas.CreateAssetResponse_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_ResourceId, v.ResourceId)
+		case schemas.CreateAssetResponse_SourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_SourceArn, v.SourceArn)
+		case schemas.CreateAssetResponse_SourceRoleArn:
+			v.SourceRoleArn = new(string)
+			return d.ReadString(schemas.CreateAssetResponse_SourceRoleArn, v.SourceRoleArn)
+		case schemas.CreateAssetResponse_Tags:
+			return deserializeTags(d, schemas.CreateAssetResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAsset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAsset, schemas.CreateAssetRequest, schemas.CreateAssetResponse), output: &CreateAssetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAsset{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAsset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAssetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAsset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +216,8 @@ func (c *Client) addOperationCreateAssetMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAsset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAsset",
-	}
 }

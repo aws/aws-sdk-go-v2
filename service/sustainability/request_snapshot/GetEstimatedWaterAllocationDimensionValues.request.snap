@@ -1,0 +1,5 @@
+POST /v1/estimated-water-allocation-dimension-values
+
+Content-Type: application/json
+
+{"Dimensions":["USAGE_ACCOUNT_ID","USAGE_ACCOUNT_ID"],"MaxResults":1,"NextToken":"__NextToken__","TimePeriod":{"End":"2000-01-01T00:00:00Z","Start":"2000-01-01T00:00:00Z"}}

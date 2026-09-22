@@ -1,0 +1,6 @@
+PATCH /api/v1/users/__UserId__
+
+Authentication: __AuthenticationToken__
+Content-Type: application/json
+
+{"GivenName":"__GivenName__","GrantPoweruserPrivileges":"TRUE","Locale":"en","StorageRule":{"StorageAllocatedInBytes":1,"StorageType":"UNLIMITED"},"Surname":"__Surname__","TimeZoneId":"__TimeZoneId__","Type":"USER"}

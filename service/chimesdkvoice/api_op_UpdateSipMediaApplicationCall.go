@@ -4,11 +4,10 @@ package chimesdkvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Invokes the AWS Lambda function associated with the SIP media application and
@@ -50,6 +49,22 @@ type UpdateSipMediaApplicationCallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSipMediaApplicationCallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSipMediaApplicationCallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSipMediaApplicationCallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSMAUpdateCallArgumentsMap(s, schemas.UpdateSipMediaApplicationCallRequest_Arguments, v.Arguments)
+	if v.SipMediaApplicationId != nil {
+		s.WriteString(schemas.UpdateSipMediaApplicationCallRequest_SipMediaApplicationId, *v.SipMediaApplicationId)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.UpdateSipMediaApplicationCallRequest_TransactionId, *v.TransactionId)
+	}
+}
+
 type UpdateSipMediaApplicationCallOutput struct {
 
 	// A Call instance for a SIP media application.
@@ -61,77 +76,50 @@ type UpdateSipMediaApplicationCallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSipMediaApplicationCallOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSipMediaApplicationCallResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSipMediaApplicationCallOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SipMediaApplicationCall != nil {
+		s.WriteStruct(schemas.UpdateSipMediaApplicationCallResponse_SipMediaApplicationCall)
+		v.SipMediaApplicationCall.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSipMediaApplicationCallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSipMediaApplicationCallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSipMediaApplicationCallResponse_SipMediaApplicationCall:
+			v.SipMediaApplicationCall = &types.SipMediaApplicationCall{}
+			return v.SipMediaApplicationCall.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSipMediaApplicationCallMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSipMediaApplicationCall, schemas.UpdateSipMediaApplicationCallRequest, schemas.UpdateSipMediaApplicationCallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSipMediaApplicationCall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSipMediaApplicationCall, schemas.UpdateSipMediaApplicationCallRequest, schemas.UpdateSipMediaApplicationCallResponse), output: &UpdateSipMediaApplicationCallOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSipMediaApplicationCall{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSipMediaApplicationCall"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSipMediaApplicationCallValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSipMediaApplicationCall(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +134,8 @@ func (c *Client) addOperationUpdateSipMediaApplicationCallMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSipMediaApplicationCall(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSipMediaApplicationCall",
-	}
 }

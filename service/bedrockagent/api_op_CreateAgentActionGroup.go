@@ -5,10 +5,10 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an action group for an agent. An action group represents the actions
@@ -136,6 +136,40 @@ type CreateAgentActionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentActionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentActionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentActionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionGroupExecutor(s, schemas.CreateAgentActionGroupRequest_actionGroupExecutor, v.ActionGroupExecutor)
+	if v.ActionGroupName != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_actionGroupName, *v.ActionGroupName)
+	}
+	if v.ActionGroupState != "" {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_actionGroupState, string(v.ActionGroupState))
+	}
+	if v.AgentId != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_agentId, *v.AgentId)
+	}
+	if v.AgentVersion != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_agentVersion, *v.AgentVersion)
+	}
+	serializeAPISchema(s, schemas.CreateAgentActionGroupRequest_apiSchema, v.ApiSchema)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_description, *v.Description)
+	}
+	serializeFunctionSchema(s, schemas.CreateAgentActionGroupRequest_functionSchema, v.FunctionSchema)
+	if v.ParentActionGroupSignature != "" {
+		s.WriteString(schemas.CreateAgentActionGroupRequest_parentActionGroupSignature, string(v.ParentActionGroupSignature))
+	}
+	serializeActionGroupSignatureParams(s, schemas.CreateAgentActionGroupRequest_parentActionGroupSignatureParams, v.ParentActionGroupSignatureParams)
+}
+
 type CreateAgentActionGroupOutput struct {
 
 	// Contains details about the action group that was created.
@@ -149,65 +183,44 @@ type CreateAgentActionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentActionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentActionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentActionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentActionGroup != nil {
+		s.WriteStruct(schemas.CreateAgentActionGroupResponse_agentActionGroup)
+		v.AgentActionGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAgentActionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentActionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentActionGroupResponse_agentActionGroup:
+			v.AgentActionGroup = &types.AgentActionGroup{}
+			return v.AgentActionGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentActionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentActionGroup, schemas.CreateAgentActionGroupRequest, schemas.CreateAgentActionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentActionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentActionGroup, schemas.CreateAgentActionGroupRequest, schemas.CreateAgentActionGroupResponse), output: &CreateAgentActionGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentActionGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAgentActionGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -217,12 +230,6 @@ func (c *Client) addOperationCreateAgentActionGroupMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpCreateAgentActionGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAgentActionGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -235,12 +242,6 @@ func (c *Client) addOperationCreateAgentActionGroupMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -280,12 +281,4 @@ func (m *idempotencyToken_initializeOpCreateAgentActionGroup) HandleInitialize(c
 }
 func addIdempotencyToken_opCreateAgentActionGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAgentActionGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAgentActionGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAgentActionGroup",
-	}
 }

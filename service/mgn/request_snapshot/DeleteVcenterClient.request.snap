@@ -1,0 +1,5 @@
+POST /DeleteVcenterClient
+
+Content-Type: application/json
+
+{"vcenterClientID":"__VcenterClientID__"}

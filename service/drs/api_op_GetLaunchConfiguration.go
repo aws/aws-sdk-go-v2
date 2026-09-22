@@ -4,11 +4,10 @@ package drs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a LaunchConfiguration, filtered by Source Server IDs.
@@ -35,6 +34,28 @@ type GetLaunchConfigurationInput struct {
 	SourceServerID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLaunchConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLaunchConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLaunchConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.GetLaunchConfigurationRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *GetLaunchConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLaunchConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLaunchConfigurationRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.GetLaunchConfigurationRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
 }
 
 type GetLaunchConfigurationOutput struct {
@@ -65,6 +86,9 @@ type GetLaunchConfigurationOutput struct {
 	// Whether we want to activate post-launch actions for the Source Server.
 	PostLaunchEnabled *bool
 
+	// Recovery mode.
+	RecoveryMode types.RecoveryMode
+
 	// The ID of the Source Server for this launch configuration.
 	SourceServerID *string
 
@@ -78,77 +102,124 @@ type GetLaunchConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLaunchConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LaunchConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLaunchConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyPrivateIp != nil {
+		s.WriteBool(schemas.LaunchConfiguration_copyPrivateIp, *v.CopyPrivateIp)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.LaunchConfiguration_copyTags, *v.CopyTags)
+	}
+	if v.Ec2LaunchTemplateID != nil {
+		s.WriteString(schemas.LaunchConfiguration_ec2LaunchTemplateID, *v.Ec2LaunchTemplateID)
+	}
+	if v.LaunchDisposition != "" {
+		s.WriteString(schemas.LaunchConfiguration_launchDisposition, string(v.LaunchDisposition))
+	}
+	if v.LaunchIntoInstanceProperties != nil {
+		s.WriteStruct(schemas.LaunchConfiguration_launchIntoInstanceProperties)
+		v.LaunchIntoInstanceProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Licensing != nil {
+		s.WriteStruct(schemas.LaunchConfiguration_licensing)
+		v.Licensing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LaunchConfiguration_name, *v.Name)
+	}
+	if v.PostLaunchEnabled != nil {
+		s.WriteBool(schemas.LaunchConfiguration_postLaunchEnabled, *v.PostLaunchEnabled)
+	}
+	if v.RecoveryMode != "" {
+		s.WriteString(schemas.LaunchConfiguration_recoveryMode, string(v.RecoveryMode))
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.LaunchConfiguration_sourceServerID, *v.SourceServerID)
+	}
+	if v.TargetInstanceTypeRightSizingMethod != "" {
+		s.WriteString(schemas.LaunchConfiguration_targetInstanceTypeRightSizingMethod, string(v.TargetInstanceTypeRightSizingMethod))
+	}
+}
+func (v *GetLaunchConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LaunchConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LaunchConfiguration_copyPrivateIp:
+			v.CopyPrivateIp = new(bool)
+			return d.ReadBool(schemas.LaunchConfiguration_copyPrivateIp, v.CopyPrivateIp)
+		case schemas.LaunchConfiguration_copyTags:
+			v.CopyTags = new(bool)
+			return d.ReadBool(schemas.LaunchConfiguration_copyTags, v.CopyTags)
+		case schemas.LaunchConfiguration_ec2LaunchTemplateID:
+			v.Ec2LaunchTemplateID = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_ec2LaunchTemplateID, v.Ec2LaunchTemplateID)
+		case schemas.LaunchConfiguration_launchDisposition:
+			var ev string
+			if err := d.ReadString(schemas.LaunchConfiguration_launchDisposition, &ev); err != nil {
+				return err
+			}
+			v.LaunchDisposition = types.LaunchDisposition(ev)
+			return nil
+		case schemas.LaunchConfiguration_launchIntoInstanceProperties:
+			v.LaunchIntoInstanceProperties = &types.LaunchIntoInstanceProperties{}
+			return v.LaunchIntoInstanceProperties.Deserialize(d)
+		case schemas.LaunchConfiguration_licensing:
+			v.Licensing = &types.Licensing{}
+			return v.Licensing.Deserialize(d)
+		case schemas.LaunchConfiguration_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_name, v.Name)
+		case schemas.LaunchConfiguration_postLaunchEnabled:
+			v.PostLaunchEnabled = new(bool)
+			return d.ReadBool(schemas.LaunchConfiguration_postLaunchEnabled, v.PostLaunchEnabled)
+		case schemas.LaunchConfiguration_recoveryMode:
+			var ev string
+			if err := d.ReadString(schemas.LaunchConfiguration_recoveryMode, &ev); err != nil {
+				return err
+			}
+			v.RecoveryMode = types.RecoveryMode(ev)
+			return nil
+		case schemas.LaunchConfiguration_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.LaunchConfiguration_sourceServerID, v.SourceServerID)
+		case schemas.LaunchConfiguration_targetInstanceTypeRightSizingMethod:
+			var ev string
+			if err := d.ReadString(schemas.LaunchConfiguration_targetInstanceTypeRightSizingMethod, &ev); err != nil {
+				return err
+			}
+			v.TargetInstanceTypeRightSizingMethod = types.TargetInstanceTypeRightSizingMethod(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLaunchConfiguration, schemas.GetLaunchConfigurationRequest, schemas.LaunchConfiguration)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLaunchConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLaunchConfiguration, schemas.GetLaunchConfigurationRequest, schemas.LaunchConfiguration), output: &GetLaunchConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLaunchConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLaunchConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLaunchConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLaunchConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +234,8 @@ func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLaunchConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLaunchConfiguration",
-	}
 }

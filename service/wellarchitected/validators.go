@@ -50,6 +50,66 @@ func (m *validateOpAssociateProfiles) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAgentContext struct {
+}
+
+func (*validateOpCreateAgentContext) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAgentContext) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAgentContextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAgentContextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAgentGoal struct {
+}
+
+func (*validateOpCreateAgentGoal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAgentGoal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAgentGoalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAgentGoalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAgentProfile struct {
+}
+
+func (*validateOpCreateAgentProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAgentProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAgentProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAgentProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLensShare struct {
 }
 
@@ -225,6 +285,66 @@ func (m *validateOpCreateWorkloadShare) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateWorkloadShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAgentContext struct {
+}
+
+func (*validateOpDeleteAgentContext) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAgentContext) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAgentContextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAgentContextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAgentGoal struct {
+}
+
+func (*validateOpDeleteAgentGoal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAgentGoal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAgentGoalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAgentGoalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAgentProfile struct {
+}
+
+func (*validateOpDeleteAgentProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAgentProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAgentProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAgentProfileInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -445,6 +565,106 @@ func (m *validateOpExportLens) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpExportLensInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentContext struct {
+}
+
+func (*validateOpGetAgentContext) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentContext) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentContextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentContextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentGoal struct {
+}
+
+func (*validateOpGetAgentGoal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentGoal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentGoalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentGoalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentProfile struct {
+}
+
+func (*validateOpGetAgentProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentRecommendationGeneration struct {
+}
+
+func (*validateOpGetAgentRecommendationGeneration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentRecommendationGeneration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentRecommendationGenerationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentRecommendationGenerationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAgentRecommendation struct {
+}
+
+func (*validateOpGetAgentRecommendation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAgentRecommendation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAgentRecommendationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAgentRecommendationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -710,6 +930,106 @@ func (m *validateOpImportLens) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAgentContexts struct {
+}
+
+func (*validateOpListAgentContexts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAgentContexts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAgentContextsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAgentContextsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAgentGoals struct {
+}
+
+func (*validateOpListAgentGoals) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAgentGoals) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAgentGoalsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAgentGoalsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAgentRecommendationGenerations struct {
+}
+
+func (*validateOpListAgentRecommendationGenerations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAgentRecommendationGenerations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAgentRecommendationGenerationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAgentRecommendationGenerationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAgentRecommendationItems struct {
+}
+
+func (*validateOpListAgentRecommendationItems) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAgentRecommendationItems) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAgentRecommendationItemsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAgentRecommendationItemsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAgentRecommendations struct {
+}
+
+func (*validateOpListAgentRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAgentRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAgentRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAgentRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAnswers struct {
 }
 
@@ -950,6 +1270,46 @@ func (m *validateOpListWorkloadShares) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAgentRecommendationFeedback struct {
+}
+
+func (*validateOpPutAgentRecommendationFeedback) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAgentRecommendationFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAgentRecommendationFeedbackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAgentRecommendationFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartAgentRecommendationGeneration struct {
+}
+
+func (*validateOpStartAgentRecommendationGeneration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAgentRecommendationGeneration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAgentRecommendationGenerationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAgentRecommendationGenerationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -985,6 +1345,86 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAgentContext struct {
+}
+
+func (*validateOpUpdateAgentContext) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentContext) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentContextInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentContextInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAgentGoal struct {
+}
+
+func (*validateOpUpdateAgentGoal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentGoal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentGoalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentGoalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAgentProfile struct {
+}
+
+func (*validateOpUpdateAgentProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAgentRecommendationStatus struct {
+}
+
+func (*validateOpUpdateAgentRecommendationStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentRecommendationStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentRecommendationStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentRecommendationStatusInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1258,6 +1698,18 @@ func addOpAssociateProfilesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateProfiles{}, middleware.After)
 }
 
+func addOpCreateAgentContextValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAgentContext{}, middleware.After)
+}
+
+func addOpCreateAgentGoalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAgentGoal{}, middleware.After)
+}
+
+func addOpCreateAgentProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAgentProfile{}, middleware.After)
+}
+
 func addOpCreateLensShareValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLensShare{}, middleware.After)
 }
@@ -1292,6 +1744,18 @@ func addOpCreateWorkloadValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateWorkloadShareValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkloadShare{}, middleware.After)
+}
+
+func addOpDeleteAgentContextValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAgentContext{}, middleware.After)
+}
+
+func addOpDeleteAgentGoalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAgentGoal{}, middleware.After)
+}
+
+func addOpDeleteAgentProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAgentProfile{}, middleware.After)
 }
 
 func addOpDeleteLensValidationMiddleware(stack *middleware.Stack) error {
@@ -1336,6 +1800,26 @@ func addOpDisassociateProfilesValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpExportLensValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportLens{}, middleware.After)
+}
+
+func addOpGetAgentContextValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentContext{}, middleware.After)
+}
+
+func addOpGetAgentGoalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentGoal{}, middleware.After)
+}
+
+func addOpGetAgentProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentProfile{}, middleware.After)
+}
+
+func addOpGetAgentRecommendationGenerationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentRecommendationGeneration{}, middleware.After)
+}
+
+func addOpGetAgentRecommendationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAgentRecommendation{}, middleware.After)
 }
 
 func addOpGetAnswerValidationMiddleware(stack *middleware.Stack) error {
@@ -1390,6 +1874,26 @@ func addOpImportLensValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportLens{}, middleware.After)
 }
 
+func addOpListAgentContextsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAgentContexts{}, middleware.After)
+}
+
+func addOpListAgentGoalsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAgentGoals{}, middleware.After)
+}
+
+func addOpListAgentRecommendationGenerationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAgentRecommendationGenerations{}, middleware.After)
+}
+
+func addOpListAgentRecommendationItemsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAgentRecommendationItems{}, middleware.After)
+}
+
+func addOpListAgentRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAgentRecommendations{}, middleware.After)
+}
+
 func addOpListAnswersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAnswers{}, middleware.After)
 }
@@ -1438,12 +1942,36 @@ func addOpListWorkloadSharesValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpListWorkloadShares{}, middleware.After)
 }
 
+func addOpPutAgentRecommendationFeedbackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAgentRecommendationFeedback{}, middleware.After)
+}
+
+func addOpStartAgentRecommendationGenerationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAgentRecommendationGeneration{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAgentContextValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentContext{}, middleware.After)
+}
+
+func addOpUpdateAgentGoalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentGoal{}, middleware.After)
+}
+
+func addOpUpdateAgentProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentProfile{}, middleware.After)
+}
+
+func addOpUpdateAgentRecommendationStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentRecommendationStatus{}, middleware.After)
 }
 
 func addOpUpdateAnswerValidationMiddleware(stack *middleware.Stack) error {
@@ -1498,6 +2026,44 @@ func addOpUpgradeReviewTemplateLensReviewValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpUpgradeReviewTemplateLensReview{}, middleware.After)
 }
 
+func validateAggregationConfiguration(v *types.AggregationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationConfiguration"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Regions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
+	}
+	if v.AccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregationConfigurations(v []types.AggregationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationConfigurations"}
+	for i := range v {
+		if err := validateAggregationConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateChoiceUpdate(v *types.ChoiceUpdate) error {
 	if v == nil {
 		return nil
@@ -1522,6 +2088,148 @@ func validateChoiceUpdates(v map[string]types.ChoiceUpdate) error {
 		value := v[key]
 		if err := validateChoiceUpdate(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextContent(v *types.ContextContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextContent"}
+	if v.ResourceTags != nil {
+		if err := validateContextResourceTagList(v.ResourceTags); err != nil {
+			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextResourceTag(v *types.ContextResourceTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextResourceTag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContextResourceTagList(v []types.ContextResourceTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContextResourceTagList"}
+	for i := range v {
+		if err := validateContextResourceTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePillarItem(v *types.PillarItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PillarItem"}
+	if len(v.Pillar) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Pillar"))
+	}
+	if v.Ids == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ids"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePillarItems(v []types.PillarItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PillarItems"}
+	for i := range v {
+		if err := validatePillarItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScope(v *types.Scope) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Scope"}
+	if v.Pillars == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pillars"))
+	}
+	if v.Items != nil {
+		if err := validatePillarItems(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTags(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1559,6 +2267,88 @@ func validateOpAssociateProfilesInput(v *AssociateProfilesInput) error {
 	}
 	if v.ProfileArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAgentContextInput(v *CreateAgentContextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentContextInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if len(v.ContextType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContextType"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateContextContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAgentGoalInput(v *CreateAgentGoalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentGoalInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Pillars == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pillars"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAgentProfileInput(v *CreateAgentProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentProfileInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Pillars == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pillars"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.AggregationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregationConfiguration"))
+	} else if v.AggregationConfiguration != nil {
+		if err := validateAggregationConfigurations(v.AggregationConfiguration); err != nil {
+			invalidParams.AddNested("AggregationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1771,6 +2561,57 @@ func validateOpCreateWorkloadShareInput(v *CreateWorkloadShareInput) error {
 	}
 }
 
+func validateOpDeleteAgentContextInput(v *DeleteAgentContextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentContextInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAgentGoalInput(v *DeleteAgentGoalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentGoalInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAgentProfileInput(v *DeleteAgentProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentProfileInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteLensInput(v *DeleteLensInput) error {
 	if v == nil {
 		return nil
@@ -1973,6 +2814,90 @@ func validateOpExportLensInput(v *ExportLensInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ExportLensInput"}
 	if v.LensAlias == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LensAlias"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentContextInput(v *GetAgentContextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentContextInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentGoalInput(v *GetAgentGoalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentGoalInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentProfileInput(v *GetAgentProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentProfileInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentRecommendationGenerationInput(v *GetAgentRecommendationGenerationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentRecommendationGenerationInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.GenerationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GenerationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAgentRecommendationInput(v *GetAgentRecommendationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAgentRecommendationInput"}
+	if v.RecommendationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2203,6 +3128,81 @@ func validateOpImportLensInput(v *ImportLensInput) error {
 	}
 }
 
+func validateOpListAgentContextsInput(v *ListAgentContextsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAgentContextsInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAgentGoalsInput(v *ListAgentGoalsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAgentGoalsInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAgentRecommendationGenerationsInput(v *ListAgentRecommendationGenerationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAgentRecommendationGenerationsInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAgentRecommendationItemsInput(v *ListAgentRecommendationItemsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAgentRecommendationItemsInput"}
+	if v.RecommendationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAgentRecommendationsInput(v *ListAgentRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAgentRecommendationsInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAnswersInput(v *ListAnswersInput) error {
 	if v == nil {
 		return nil
@@ -2416,6 +3416,49 @@ func validateOpListWorkloadSharesInput(v *ListWorkloadSharesInput) error {
 	}
 }
 
+func validateOpPutAgentRecommendationFeedbackInput(v *PutAgentRecommendationFeedbackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAgentRecommendationFeedbackInput"}
+	if v.RecommendationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationArn"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAgentRecommendationGenerationInput(v *StartAgentRecommendationGenerationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAgentRecommendationGenerationInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Types == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Types"))
+	}
+	if v.Scope == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	} else if v.Scope != nil {
+		if err := validateScope(v.Scope); err != nil {
+			invalidParams.AddNested("Scope", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -2444,6 +3487,85 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentContextInput(v *UpdateAgentContextInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentContextInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Content != nil {
+		if err := validateContextContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentGoalInput(v *UpdateAgentGoalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentGoalInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentProfileInput(v *UpdateAgentProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentProfileInput"}
+	if v.ProfileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileArn"))
+	}
+	if v.AggregationConfiguration != nil {
+		if err := validateAggregationConfigurations(v.AggregationConfiguration); err != nil {
+			invalidParams.AddNested("AggregationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentRecommendationStatusInput(v *UpdateAgentRecommendationStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentRecommendationStatusInput"}
+	if v.RecommendationArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommendationArn"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

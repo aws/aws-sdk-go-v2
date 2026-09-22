@@ -1,0 +1,5 @@
+POST /audit/scheduledaudits/__ScheduledAuditName__
+
+Content-Type: application/json
+
+{"dayOfMonth":"__DayOfMonth__","dayOfWeek":"SUN","frequency":"DAILY","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"targetCheckNames":["__Member__","__Member__"]}

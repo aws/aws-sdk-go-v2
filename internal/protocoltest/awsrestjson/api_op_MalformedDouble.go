@@ -4,10 +4,9 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) MalformedDouble(ctx context.Context, params *MalformedDoubleInput, optFns ...func(*Options)) (*MalformedDoubleOutput, error) {
@@ -39,6 +38,46 @@ type MalformedDoubleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedDoubleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedDoubleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedDoubleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DoubleInBody != nil {
+		s.WriteFloat64(schemas.MalformedDoubleInput_doubleInBody, *v.DoubleInBody)
+	}
+	if v.DoubleInHeader != nil {
+		s.WriteFloat64(schemas.MalformedDoubleInput_doubleInHeader, *v.DoubleInHeader)
+	}
+	if v.DoubleInPath != nil {
+		s.WriteFloat64(schemas.MalformedDoubleInput_doubleInPath, *v.DoubleInPath)
+	}
+	if v.DoubleInQuery != nil {
+		s.WriteFloat64(schemas.MalformedDoubleInput_doubleInQuery, *v.DoubleInQuery)
+	}
+}
+func (v *MalformedDoubleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedDoubleInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedDoubleInput_doubleInBody:
+			v.DoubleInBody = new(float64)
+			return d.ReadFloat64(schemas.MalformedDoubleInput_doubleInBody, v.DoubleInBody)
+		case schemas.MalformedDoubleInput_doubleInHeader:
+			v.DoubleInHeader = new(float64)
+			return d.ReadFloat64(schemas.MalformedDoubleInput_doubleInHeader, v.DoubleInHeader)
+		case schemas.MalformedDoubleInput_doubleInPath:
+			v.DoubleInPath = new(float64)
+			return d.ReadFloat64(schemas.MalformedDoubleInput_doubleInPath, v.DoubleInPath)
+		case schemas.MalformedDoubleInput_doubleInQuery:
+			v.DoubleInQuery = new(float64)
+			return d.ReadFloat64(schemas.MalformedDoubleInput_doubleInQuery, v.DoubleInQuery)
+		}
+		return nil
+	})
+}
+
 type MalformedDoubleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,77 +85,42 @@ type MalformedDoubleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedDoubleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedDoubleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedDoubleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedDoubleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedDouble, schemas.MalformedDoubleInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedDouble{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedDouble, schemas.MalformedDoubleInput, nil), output: &MalformedDoubleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedDouble{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedDouble"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpMalformedDoubleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedDouble(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,22 +135,8 @@ func (c *Client) addOperationMalformedDoubleMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opMalformedDouble(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "MalformedDouble",
-	}
 }

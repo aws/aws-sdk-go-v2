@@ -4,11 +4,8 @@ package securityagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -50,11 +47,19 @@ type UpdateCodeReviewInput struct {
 	// The updated CloudWatch Logs configuration for the code review.
 	LogConfig *types.CloudWatchLog
 
+	// The updated maximum number of billable task hours allowed for jobs started from
+	// this code review.
+	MaxTaskHours *float64
+
 	// The updated IAM service role for the code review.
 	ServiceRole *string
 
 	// The updated title of the code review.
 	Title *string
+
+	// The updated validation mode for the code review. Valid values are SIMULATED and
+	// DISABLED.
+	ValidationMode types.ValidationMode
 
 	noSmithyDocumentSerde
 }
@@ -82,6 +87,10 @@ type UpdateCodeReviewOutput struct {
 	// The CloudWatch Logs configuration for the code review.
 	LogConfig *types.CloudWatchLog
 
+	// The maximum number of billable task hours configured for jobs started from this
+	// code review. Null if no budget cap is set.
+	MaxTaskHours *float64
+
 	// The IAM service role used for the code review.
 	ServiceRole *string
 
@@ -91,6 +100,9 @@ type UpdateCodeReviewOutput struct {
 	// The date and time the code review was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The validation mode for the code review.
+	ValidationMode types.ValidationMode
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -98,9 +110,6 @@ type UpdateCodeReviewOutput struct {
 }
 
 func (c *Client) addOperationUpdateCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCodeReview{}, middleware.After)
 	if err != nil {
 		return err
@@ -109,65 +118,20 @@ func (c *Client) addOperationUpdateCodeReviewMiddlewares(stack *middleware.Stack
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCodeReview"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateCodeReviewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCodeReview(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,22 +146,8 @@ func (c *Client) addOperationUpdateCodeReviewMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateCodeReview(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCodeReview",
-	}
 }

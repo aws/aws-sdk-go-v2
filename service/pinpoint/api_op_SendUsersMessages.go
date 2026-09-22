@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and sends a message to a list of users.
@@ -44,6 +43,23 @@ type SendUsersMessagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendUsersMessagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendUsersMessagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendUsersMessagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.SendUsersMessagesRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.SendUsersMessageRequest != nil {
+		s.WriteStruct(schemas.SendUsersMessagesRequest_SendUsersMessageRequest)
+		v.SendUsersMessageRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SendUsersMessagesOutput struct {
 
 	// Provides information about which users and endpoints a message was sent to.
@@ -57,77 +73,50 @@ type SendUsersMessagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendUsersMessagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendUsersMessagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendUsersMessagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SendUsersMessageResponse != nil {
+		s.WriteStruct(schemas.SendUsersMessagesResponse_SendUsersMessageResponse)
+		v.SendUsersMessageResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SendUsersMessagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendUsersMessagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendUsersMessagesResponse_SendUsersMessageResponse:
+			v.SendUsersMessageResponse = &types.SendUsersMessageResponse{}
+			return v.SendUsersMessageResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendUsersMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendUsersMessages, schemas.SendUsersMessagesRequest, schemas.SendUsersMessagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendUsersMessages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendUsersMessages, schemas.SendUsersMessagesRequest, schemas.SendUsersMessagesResponse), output: &SendUsersMessagesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendUsersMessages{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendUsersMessages"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendUsersMessagesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendUsersMessages(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +131,8 @@ func (c *Client) addOperationSendUsersMessagesMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendUsersMessages(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendUsersMessages",
-	}
 }

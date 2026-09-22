@@ -1,0 +1,5 @@
+PUT /domains/__DomainName__/segment-definitions/__SegmentDefinitionName__/subscriptions
+
+Content-Type: application/json
+
+{"ScheduleConfiguration":{"Interval":1,"Unit":"HOURLY"}}

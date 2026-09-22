@@ -1,0 +1,5 @@
+PUT /feedback
+
+Content-Type: application/json
+
+{"CodeReviewArn":"__CodeReviewArn__","Reactions":["ThumbsUp","ThumbsUp"],"RecommendationId":"__RecommendationId__"}

@@ -4,10 +4,9 @@ package partnercentralbenefits
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the association between an AWS resource and a benefit application.
@@ -49,6 +48,24 @@ type DisassociateBenefitApplicationResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateBenefitApplicationResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateBenefitApplicationResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateBenefitApplicationResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BenefitApplicationIdentifier != nil {
+		s.WriteString(schemas.DisassociateBenefitApplicationResourceInput_BenefitApplicationIdentifier, *v.BenefitApplicationIdentifier)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.DisassociateBenefitApplicationResourceInput_Catalog, *v.Catalog)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DisassociateBenefitApplicationResourceInput_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type DisassociateBenefitApplicationResourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the benefit application after the resource
@@ -69,77 +86,60 @@ type DisassociateBenefitApplicationResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateBenefitApplicationResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateBenefitApplicationResourceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateBenefitApplicationResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociateBenefitApplicationResourceOutput_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DisassociateBenefitApplicationResourceOutput_Id, *v.Id)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.DisassociateBenefitApplicationResourceOutput_Revision, *v.Revision)
+	}
+}
+func (v *DisassociateBenefitApplicationResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateBenefitApplicationResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateBenefitApplicationResourceOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociateBenefitApplicationResourceOutput_Arn, v.Arn)
+		case schemas.DisassociateBenefitApplicationResourceOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DisassociateBenefitApplicationResourceOutput_Id, v.Id)
+		case schemas.DisassociateBenefitApplicationResourceOutput_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.DisassociateBenefitApplicationResourceOutput_Revision, v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateBenefitApplicationResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateBenefitApplicationResource, schemas.DisassociateBenefitApplicationResourceInput, schemas.DisassociateBenefitApplicationResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateBenefitApplicationResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateBenefitApplicationResource, schemas.DisassociateBenefitApplicationResourceInput, schemas.DisassociateBenefitApplicationResourceOutput), output: &DisassociateBenefitApplicationResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateBenefitApplicationResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateBenefitApplicationResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociateBenefitApplicationResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateBenefitApplicationResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +154,8 @@ func (c *Client) addOperationDisassociateBenefitApplicationResourceMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociateBenefitApplicationResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateBenefitApplicationResource",
-	}
 }

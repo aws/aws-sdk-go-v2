@@ -4,11 +4,10 @@ package opensearch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new cross-cluster search connection from a source Amazon OpenSearch
@@ -57,6 +56,36 @@ type CreateOutboundConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutboundConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutboundConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutboundConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionAlias != nil {
+		s.WriteString(schemas.CreateOutboundConnectionRequest_ConnectionAlias, *v.ConnectionAlias)
+	}
+	if v.ConnectionMode != "" {
+		s.WriteString(schemas.CreateOutboundConnectionRequest_ConnectionMode, string(v.ConnectionMode))
+	}
+	if v.ConnectionProperties != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionRequest_ConnectionProperties)
+		v.ConnectionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocalDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionRequest_LocalDomainInfo)
+		v.LocalDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoteDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionRequest_RemoteDomainInfo)
+		v.RemoteDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The result of a CreateOutboundConnection request. Contains details about the
 // newly created cross-cluster connection.
 type CreateOutboundConnectionOutput struct {
@@ -89,77 +118,96 @@ type CreateOutboundConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutboundConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutboundConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutboundConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionAlias != nil {
+		s.WriteString(schemas.CreateOutboundConnectionResponse_ConnectionAlias, *v.ConnectionAlias)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.CreateOutboundConnectionResponse_ConnectionId, *v.ConnectionId)
+	}
+	if v.ConnectionMode != "" {
+		s.WriteString(schemas.CreateOutboundConnectionResponse_ConnectionMode, string(v.ConnectionMode))
+	}
+	if v.ConnectionProperties != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionResponse_ConnectionProperties)
+		v.ConnectionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectionStatus != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionResponse_ConnectionStatus)
+		v.ConnectionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LocalDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionResponse_LocalDomainInfo)
+		v.LocalDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoteDomainInfo != nil {
+		s.WriteStruct(schemas.CreateOutboundConnectionResponse_RemoteDomainInfo)
+		v.RemoteDomainInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOutboundConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOutboundConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOutboundConnectionResponse_ConnectionAlias:
+			v.ConnectionAlias = new(string)
+			return d.ReadString(schemas.CreateOutboundConnectionResponse_ConnectionAlias, v.ConnectionAlias)
+		case schemas.CreateOutboundConnectionResponse_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.CreateOutboundConnectionResponse_ConnectionId, v.ConnectionId)
+		case schemas.CreateOutboundConnectionResponse_ConnectionMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateOutboundConnectionResponse_ConnectionMode, &ev); err != nil {
+				return err
+			}
+			v.ConnectionMode = types.ConnectionMode(ev)
+			return nil
+		case schemas.CreateOutboundConnectionResponse_ConnectionProperties:
+			v.ConnectionProperties = &types.ConnectionProperties{}
+			return v.ConnectionProperties.Deserialize(d)
+		case schemas.CreateOutboundConnectionResponse_ConnectionStatus:
+			v.ConnectionStatus = &types.OutboundConnectionStatus{}
+			return v.ConnectionStatus.Deserialize(d)
+		case schemas.CreateOutboundConnectionResponse_LocalDomainInfo:
+			v.LocalDomainInfo = &types.DomainInformationContainer{}
+			return v.LocalDomainInfo.Deserialize(d)
+		case schemas.CreateOutboundConnectionResponse_RemoteDomainInfo:
+			v.RemoteDomainInfo = &types.DomainInformationContainer{}
+			return v.RemoteDomainInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOutboundConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutboundConnection, schemas.CreateOutboundConnectionRequest, schemas.CreateOutboundConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOutboundConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOutboundConnection, schemas.CreateOutboundConnectionRequest, schemas.CreateOutboundConnectionResponse), output: &CreateOutboundConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOutboundConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOutboundConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateOutboundConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOutboundConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +222,8 @@ func (c *Client) addOperationCreateOutboundConnectionMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateOutboundConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOutboundConnection",
-	}
 }

@@ -1,0 +1,3 @@
+GET /2013-04-01/geolocations?maxitems=1&startcontinentcode=__StartContinentCode__&startcountrycode=__StartCountryCode__&startsubdivisioncode=__StartSubdivisionCode__
+
+

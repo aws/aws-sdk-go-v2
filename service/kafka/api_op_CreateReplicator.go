@@ -4,11 +4,10 @@ package kafka
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the replicator.
@@ -64,6 +63,32 @@ type CreateReplicatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateReplicatorRequest_Description, *v.Description)
+	}
+	serialize__listOfKafkaCluster(s, schemas.CreateReplicatorRequest_KafkaClusters, v.KafkaClusters)
+	if v.LogDelivery != nil {
+		s.WriteStruct(schemas.CreateReplicatorRequest_LogDelivery)
+		v.LogDelivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfReplicationInfo(s, schemas.CreateReplicatorRequest_ReplicationInfoList, v.ReplicationInfoList)
+	if v.ReplicatorName != nil {
+		s.WriteString(schemas.CreateReplicatorRequest_ReplicatorName, *v.ReplicatorName)
+	}
+	if v.ServiceExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateReplicatorRequest_ServiceExecutionRoleArn, *v.ServiceExecutionRoleArn)
+	}
+	serialize__mapOf__string(s, schemas.CreateReplicatorRequest_Tags, v.Tags)
+}
+
 type CreateReplicatorOutput struct {
 
 	// The Amazon Resource Name (ARN) of the replicator.
@@ -81,77 +106,64 @@ type CreateReplicatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateReplicatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateReplicatorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateReplicatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicatorArn != nil {
+		s.WriteString(schemas.CreateReplicatorResponse_ReplicatorArn, *v.ReplicatorArn)
+	}
+	if v.ReplicatorName != nil {
+		s.WriteString(schemas.CreateReplicatorResponse_ReplicatorName, *v.ReplicatorName)
+	}
+	if v.ReplicatorState != "" {
+		s.WriteString(schemas.CreateReplicatorResponse_ReplicatorState, string(v.ReplicatorState))
+	}
+}
+func (v *CreateReplicatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateReplicatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateReplicatorResponse_ReplicatorArn:
+			v.ReplicatorArn = new(string)
+			return d.ReadString(schemas.CreateReplicatorResponse_ReplicatorArn, v.ReplicatorArn)
+		case schemas.CreateReplicatorResponse_ReplicatorName:
+			v.ReplicatorName = new(string)
+			return d.ReadString(schemas.CreateReplicatorResponse_ReplicatorName, v.ReplicatorName)
+		case schemas.CreateReplicatorResponse_ReplicatorState:
+			var ev string
+			if err := d.ReadString(schemas.CreateReplicatorResponse_ReplicatorState, &ev); err != nil {
+				return err
+			}
+			v.ReplicatorState = types.ReplicatorState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateReplicatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicator, schemas.CreateReplicatorRequest, schemas.CreateReplicatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateReplicator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateReplicator, schemas.CreateReplicatorRequest, schemas.CreateReplicatorResponse), output: &CreateReplicatorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateReplicator{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateReplicator"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateReplicatorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReplicator(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +178,8 @@ func (c *Client) addOperationCreateReplicatorMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateReplicator(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateReplicator",
-	}
 }

@@ -5,10 +5,10 @@ package computeoptimizer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns Lambda function recommendations.
@@ -74,6 +74,24 @@ type GetLambdaFunctionRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLambdaFunctionRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLambdaFunctionRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLambdaFunctionRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetLambdaFunctionRecommendationsRequest_accountIds, v.AccountIds)
+	serializeLambdaFunctionRecommendationFilters(s, schemas.GetLambdaFunctionRecommendationsRequest_filters, v.Filters)
+	serializeFunctionArns(s, schemas.GetLambdaFunctionRecommendationsRequest_functionArns, v.FunctionArns)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetLambdaFunctionRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLambdaFunctionRecommendationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetLambdaFunctionRecommendationsOutput struct {
 
 	// An array of objects that describe function recommendations.
@@ -91,77 +109,51 @@ type GetLambdaFunctionRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLambdaFunctionRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLambdaFunctionRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLambdaFunctionRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLambdaFunctionRecommendations(s, schemas.GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations, v.LambdaFunctionRecommendations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetLambdaFunctionRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *GetLambdaFunctionRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLambdaFunctionRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations:
+			return deserializeLambdaFunctionRecommendations(d, schemas.GetLambdaFunctionRecommendationsResponse_lambdaFunctionRecommendations, &v.LambdaFunctionRecommendations)
+		case schemas.GetLambdaFunctionRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetLambdaFunctionRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLambdaFunctionRecommendations, schemas.GetLambdaFunctionRecommendationsRequest, schemas.GetLambdaFunctionRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetLambdaFunctionRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLambdaFunctionRecommendations, schemas.GetLambdaFunctionRecommendationsRequest, schemas.GetLambdaFunctionRecommendationsResponse), output: &GetLambdaFunctionRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetLambdaFunctionRecommendations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLambdaFunctionRecommendations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLambdaFunctionRecommendations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +166,6 @@ func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -286,11 +272,3 @@ type GetLambdaFunctionRecommendationsAPIClient interface {
 }
 
 var _ GetLambdaFunctionRecommendationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetLambdaFunctionRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLambdaFunctionRecommendations",
-	}
-}

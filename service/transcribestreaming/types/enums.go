@@ -346,9 +346,12 @@ type MediaEncoding string
 
 // Enum values for MediaEncoding
 const (
-	MediaEncodingPcm     MediaEncoding = "pcm"
-	MediaEncodingOggOpus MediaEncoding = "ogg-opus"
-	MediaEncodingFlac    MediaEncoding = "flac"
+	MediaEncodingPcm      MediaEncoding = "pcm"
+	MediaEncodingOggOpus  MediaEncoding = "ogg-opus"
+	MediaEncodingFlac     MediaEncoding = "flac"
+	MediaEncodingG711Alaw MediaEncoding = "g711-alaw"
+	MediaEncodingG711Ulaw MediaEncoding = "g711-ulaw"
+	MediaEncodingG729     MediaEncoding = "g729"
 )
 
 // Values returns all known values for MediaEncoding. Note that this can be
@@ -360,6 +363,9 @@ func (MediaEncoding) Values() []MediaEncoding {
 		"pcm",
 		"ogg-opus",
 		"flac",
+		"g711-alaw",
+		"g711-ulaw",
+		"g729",
 	}
 }
 
@@ -659,6 +665,25 @@ func (Specialty) Values() []Specialty {
 		"ONCOLOGY",
 		"RADIOLOGY",
 		"UROLOGY",
+	}
+}
+
+type TranscriptFormat string
+
+// Enum values for TranscriptFormat
+const (
+	TranscriptFormatSpoken  TranscriptFormat = "spoken"
+	TranscriptFormatWritten TranscriptFormat = "written"
+)
+
+// Values returns all known values for TranscriptFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TranscriptFormat) Values() []TranscriptFormat {
+	return []TranscriptFormat{
+		"spoken",
+		"written",
 	}
 }
 

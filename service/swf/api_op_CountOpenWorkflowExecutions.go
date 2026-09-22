@@ -4,11 +4,10 @@ package swf
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the number of open workflow executions within the given domain that
@@ -93,6 +92,38 @@ type CountOpenWorkflowExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CountOpenWorkflowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CountOpenWorkflowExecutionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountOpenWorkflowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.CountOpenWorkflowExecutionsInput_domain, *v.Domain)
+	}
+	if v.ExecutionFilter != nil {
+		s.WriteStruct(schemas.CountOpenWorkflowExecutionsInput_executionFilter)
+		v.ExecutionFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTimeFilter != nil {
+		s.WriteStruct(schemas.CountOpenWorkflowExecutionsInput_startTimeFilter)
+		v.StartTimeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TagFilter != nil {
+		s.WriteStruct(schemas.CountOpenWorkflowExecutionsInput_tagFilter)
+		v.TagFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeFilter != nil {
+		s.WriteStruct(schemas.CountOpenWorkflowExecutionsInput_typeFilter)
+		v.TypeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains the count of workflow executions returned from CountOpenWorkflowExecutions or CountClosedWorkflowExecutions
 type CountOpenWorkflowExecutionsOutput struct {
 
@@ -111,77 +142,50 @@ type CountOpenWorkflowExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CountOpenWorkflowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowExecutionCount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CountOpenWorkflowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.WorkflowExecutionCount_count, v.Count)
+	if v.Truncated != false {
+		s.WriteBool(schemas.WorkflowExecutionCount_truncated, v.Truncated)
+	}
+}
+func (v *CountOpenWorkflowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowExecutionCount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowExecutionCount_count:
+			return d.ReadInt32(schemas.WorkflowExecutionCount_count, &v.Count)
+		case schemas.WorkflowExecutionCount_truncated:
+			return d.ReadBool(schemas.WorkflowExecutionCount_truncated, &v.Truncated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCountOpenWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CountOpenWorkflowExecutions, schemas.CountOpenWorkflowExecutionsInput, schemas.WorkflowExecutionCount)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCountOpenWorkflowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CountOpenWorkflowExecutions, schemas.CountOpenWorkflowExecutionsInput, schemas.WorkflowExecutionCount), output: &CountOpenWorkflowExecutionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCountOpenWorkflowExecutions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CountOpenWorkflowExecutions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCountOpenWorkflowExecutionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCountOpenWorkflowExecutions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +200,8 @@ func (c *Client) addOperationCountOpenWorkflowExecutionsMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCountOpenWorkflowExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CountOpenWorkflowExecutions",
-	}
 }

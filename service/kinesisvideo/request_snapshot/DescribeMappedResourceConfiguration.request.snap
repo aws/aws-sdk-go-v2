@@ -1,0 +1,5 @@
+POST /describeMappedResourceConfiguration
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

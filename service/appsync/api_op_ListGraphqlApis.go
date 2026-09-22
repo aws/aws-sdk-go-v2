@@ -5,10 +5,10 @@ package appsync
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists your GraphQL APIs.
@@ -46,6 +46,27 @@ type ListGraphqlApisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphqlApisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphqlApisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphqlApisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiType != "" {
+		s.WriteString(schemas.ListGraphqlApisRequest_apiType, string(v.ApiType))
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListGraphqlApisRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphqlApisRequest_nextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.ListGraphqlApisRequest_owner, string(v.Owner))
+	}
+}
+
 type ListGraphqlApisOutput struct {
 
 	// The GraphqlApi objects.
@@ -61,74 +82,48 @@ type ListGraphqlApisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphqlApisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphqlApisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphqlApisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGraphqlApis(s, schemas.ListGraphqlApisResponse_graphqlApis, v.GraphqlApis)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphqlApisResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListGraphqlApisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGraphqlApisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGraphqlApisResponse_graphqlApis:
+			return deserializeGraphqlApis(d, schemas.ListGraphqlApisResponse_graphqlApis, &v.GraphqlApis)
+		case schemas.ListGraphqlApisResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGraphqlApisResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGraphqlApisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphqlApis, schemas.ListGraphqlApisRequest, schemas.ListGraphqlApisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGraphqlApis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphqlApis, schemas.ListGraphqlApisRequest, schemas.ListGraphqlApisResponse), output: &ListGraphqlApisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGraphqlApis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGraphqlApis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGraphqlApis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +136,6 @@ func (c *Client) addOperationListGraphqlApisMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,11 +232,3 @@ type ListGraphqlApisAPIClient interface {
 }
 
 var _ ListGraphqlApisAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListGraphqlApis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListGraphqlApis",
-	}
-}

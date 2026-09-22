@@ -1,0 +1,5 @@
+POST /testsets/__TestSetId__/testexecutions
+
+Content-Type: application/json
+
+{"apiMode":"Streaming","target":{"botAliasTarget":{"botAliasId":"__BotAliasId__","botId":"__BotId__","localeId":"__LocaleId__"}},"testExecutionModality":"Text"}

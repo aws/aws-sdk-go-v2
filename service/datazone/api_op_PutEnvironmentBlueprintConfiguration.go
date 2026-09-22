@@ -4,11 +4,8 @@ package datazone
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -46,6 +43,10 @@ type PutEnvironmentBlueprintConfigurationInput struct {
 	// This member is required.
 	EnvironmentBlueprintIdentifier *string
 
+	// Specifies whether user-provided resource configurations are allowed for the
+	// environment blueprint.
+	AllowUserProvidedConfigurations *bool
+
 	// The environment role permissions boundary.
 	EnvironmentRolePermissionBoundary *string
 
@@ -64,6 +65,9 @@ type PutEnvironmentBlueprintConfigurationInput struct {
 	// The regional parameters in the environment blueprint.
 	RegionalParameters map[string]map[string]string
 
+	// The resource configurations of the environment blueprint.
+	ResourceConfigurations []types.PutResourceConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -78,6 +82,10 @@ type PutEnvironmentBlueprintConfigurationOutput struct {
 	//
 	// This member is required.
 	EnvironmentBlueprintId *string
+
+	// Specifies whether user-provided resource configurations are allowed for the
+	// environment blueprint.
+	AllowUserProvidedConfigurations *bool
 
 	// The timestamp of when the environment blueprint was created.
 	CreatedAt *time.Time
@@ -100,6 +108,9 @@ type PutEnvironmentBlueprintConfigurationOutput struct {
 	// The regional parameters in the environment blueprint.
 	RegionalParameters map[string]map[string]string
 
+	// The resource configurations of the environment blueprint.
+	ResourceConfigurations []types.ResourceConfiguration
+
 	// The timestamp of when the environment blueprint was updated.
 	UpdatedAt *time.Time
 
@@ -110,9 +121,6 @@ type PutEnvironmentBlueprintConfigurationOutput struct {
 }
 
 func (c *Client) addOperationPutEnvironmentBlueprintConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEnvironmentBlueprintConfiguration{}, middleware.After)
 	if err != nil {
 		return err
@@ -121,65 +129,20 @@ func (c *Client) addOperationPutEnvironmentBlueprintConfigurationMiddlewares(sta
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutEnvironmentBlueprintConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutEnvironmentBlueprintConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutEnvironmentBlueprintConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +157,8 @@ func (c *Client) addOperationPutEnvironmentBlueprintConfigurationMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutEnvironmentBlueprintConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutEnvironmentBlueprintConfiguration",
-	}
 }

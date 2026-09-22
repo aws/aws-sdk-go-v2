@@ -5,10 +5,10 @@ package pi
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieve metrics of the specified types that can be queried for a specified DB
@@ -70,6 +70,28 @@ type ListAvailableResourceMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableResourceMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableResourceMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableResourceMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.ListAvailableResourceMetricsRequest_Identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAvailableResourceMetricsRequest_MaxResults, *v.MaxResults)
+	}
+	serializeMetricTypeList(s, schemas.ListAvailableResourceMetricsRequest_MetricTypes, v.MetricTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableResourceMetricsRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.ListAvailableResourceMetricsRequest_ServiceType, string(v.ServiceType))
+	}
+}
+
 type ListAvailableResourceMetricsOutput struct {
 
 	// An array of metrics available to query. Each array element contains the full
@@ -87,77 +109,51 @@ type ListAvailableResourceMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableResourceMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableResourceMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableResourceMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResponseResourceMetricList(s, schemas.ListAvailableResourceMetricsResponse_Metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableResourceMetricsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAvailableResourceMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableResourceMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableResourceMetricsResponse_Metrics:
+			return deserializeResponseResourceMetricList(d, schemas.ListAvailableResourceMetricsResponse_Metrics, &v.Metrics)
+		case schemas.ListAvailableResourceMetricsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAvailableResourceMetricsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableResourceMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableResourceMetrics, schemas.ListAvailableResourceMetricsRequest, schemas.ListAvailableResourceMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableResourceMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableResourceMetrics, schemas.ListAvailableResourceMetricsRequest, schemas.ListAvailableResourceMetricsResponse), output: &ListAvailableResourceMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableResourceMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAvailableResourceMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAvailableResourceMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAvailableResourceMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +166,6 @@ func (c *Client) addOperationListAvailableResourceMetricsMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -280,11 +270,3 @@ type ListAvailableResourceMetricsAPIClient interface {
 }
 
 var _ ListAvailableResourceMetricsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAvailableResourceMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAvailableResourceMetrics",
-	}
-}

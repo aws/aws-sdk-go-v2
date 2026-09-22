@@ -4,11 +4,10 @@ package fms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associate resources to a Firewall Manager resource set.
@@ -44,6 +43,19 @@ type BatchAssociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentifierList(s, schemas.BatchAssociateResourceRequest_Items, v.Items)
+	if v.ResourceSetIdentifier != nil {
+		s.WriteString(schemas.BatchAssociateResourceRequest_ResourceSetIdentifier, *v.ResourceSetIdentifier)
+	}
+}
+
 type BatchAssociateResourceOutput struct {
 
 	// The resources that failed to associate to the resource set.
@@ -63,77 +75,51 @@ type BatchAssociateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedItemList(s, schemas.BatchAssociateResourceResponse_FailedItems, v.FailedItems)
+	if v.ResourceSetIdentifier != nil {
+		s.WriteString(schemas.BatchAssociateResourceResponse_ResourceSetIdentifier, *v.ResourceSetIdentifier)
+	}
+}
+func (v *BatchAssociateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateResourceResponse_FailedItems:
+			return deserializeFailedItemList(d, schemas.BatchAssociateResourceResponse_FailedItems, &v.FailedItems)
+		case schemas.BatchAssociateResourceResponse_ResourceSetIdentifier:
+			v.ResourceSetIdentifier = new(string)
+			return d.ReadString(schemas.BatchAssociateResourceResponse_ResourceSetIdentifier, v.ResourceSetIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateResource, schemas.BatchAssociateResourceRequest, schemas.BatchAssociateResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchAssociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateResource, schemas.BatchAssociateResourceRequest, schemas.BatchAssociateResourceResponse), output: &BatchAssociateResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchAssociateResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAssociateResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchAssociateResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +134,8 @@ func (c *Client) addOperationBatchAssociateResourceMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchAssociateResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchAssociateResource",
-	}
 }

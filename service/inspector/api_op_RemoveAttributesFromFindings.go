@@ -4,11 +4,10 @@ package inspector
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes entire attributes (key and value pairs) from the findings that are
@@ -44,6 +43,17 @@ type RemoveAttributesFromFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAttributesFromFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAttributesFromFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAttributesFromFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserAttributeKeyList(s, schemas.RemoveAttributesFromFindingsRequest_attributeKeys, v.AttributeKeys)
+	serializeAddRemoveAttributesFindingArnList(s, schemas.RemoveAttributesFromFindingsRequest_findingArns, v.FindingArns)
+}
+
 type RemoveAttributesFromFindingsOutput struct {
 
 	// Attributes details that cannot be described. An error code is provided for each
@@ -58,77 +68,45 @@ type RemoveAttributesFromFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveAttributesFromFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveAttributesFromFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveAttributesFromFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedItems(s, schemas.RemoveAttributesFromFindingsResponse_failedItems, v.FailedItems)
+}
+func (v *RemoveAttributesFromFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveAttributesFromFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveAttributesFromFindingsResponse_failedItems:
+			return deserializeFailedItems(d, schemas.RemoveAttributesFromFindingsResponse_failedItems, &v.FailedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveAttributesFromFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAttributesFromFindings, schemas.RemoveAttributesFromFindingsRequest, schemas.RemoveAttributesFromFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveAttributesFromFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveAttributesFromFindings, schemas.RemoveAttributesFromFindingsRequest, schemas.RemoveAttributesFromFindingsResponse), output: &RemoveAttributesFromFindingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveAttributesFromFindings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveAttributesFromFindings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRemoveAttributesFromFindingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveAttributesFromFindings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +121,8 @@ func (c *Client) addOperationRemoveAttributesFromFindingsMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRemoveAttributesFromFindings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RemoveAttributesFromFindings",
-	}
 }

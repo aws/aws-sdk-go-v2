@@ -1,0 +1,5 @@
+POST /updateNotificationConfiguration
+
+Content-Type: application/json
+
+{"NotificationConfiguration":{"DestinationConfig":{"Uri":"__Uri__"},"Status":"ENABLED"},"StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

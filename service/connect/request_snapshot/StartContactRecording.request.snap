@@ -1,0 +1,5 @@
+POST /contact/start-recording
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__","InitialContactId":"__InitialContactId__","InstanceId":"__InstanceId__","VoiceRecordingConfiguration":{"IvrRecordingTrack":"ALL","VoiceRecordingTrack":"FROM_AGENT"}}

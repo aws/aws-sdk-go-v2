@@ -1,0 +1,5 @@
+PUT /ephemeris/__EphemerisId__
+
+Content-Type: application/json
+
+{"enabled":true,"name":"__Name__","priority":1}

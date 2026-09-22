@@ -4,11 +4,10 @@ package servicecatalogappregistry
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Associates a resource with an application. The resource can be specified by
@@ -78,6 +77,25 @@ type AssociateResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Application != nil {
+		s.WriteString(schemas.AssociateResourceRequest_application, *v.Application)
+	}
+	serializeOptions(s, schemas.AssociateResourceRequest_options, v.Options)
+	if v.Resource != nil {
+		s.WriteString(schemas.AssociateResourceRequest_resource, *v.Resource)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.AssociateResourceRequest_resourceType, string(v.ResourceType))
+	}
+}
+
 type AssociateResourceOutput struct {
 
 	// The Amazon resource name (ARN) of the application that was augmented with
@@ -96,77 +114,57 @@ type AssociateResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.AssociateResourceResponse_applicationArn, *v.ApplicationArn)
+	}
+	serializeOptions(s, schemas.AssociateResourceResponse_options, v.Options)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AssociateResourceResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *AssociateResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResourceResponse_applicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.AssociateResourceResponse_applicationArn, v.ApplicationArn)
+		case schemas.AssociateResourceResponse_options:
+			return deserializeOptions(d, schemas.AssociateResourceResponse_options, &v.Options)
+		case schemas.AssociateResourceResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.AssociateResourceResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResource, schemas.AssociateResourceRequest, schemas.AssociateResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResource, schemas.AssociateResourceRequest, schemas.AssociateResourceResponse), output: &AssociateResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +179,8 @@ func (c *Client) addOperationAssociateResourceMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateResource",
-	}
 }

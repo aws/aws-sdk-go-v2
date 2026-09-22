@@ -5,10 +5,10 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all action connectors in the specified Amazon Web Services account.
@@ -47,6 +47,24 @@ type ListActionConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActionConnectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActionConnectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActionConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListActionConnectorsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListActionConnectorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActionConnectorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListActionConnectorsOutput struct {
 
 	// A list of action connector summaries containing basic information about each
@@ -71,77 +89,62 @@ type ListActionConnectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListActionConnectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListActionConnectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListActionConnectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionConnectorSummaryList(s, schemas.ListActionConnectorsResponse_ActionConnectorSummaries, v.ActionConnectorSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListActionConnectorsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListActionConnectorsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListActionConnectorsResponse_Status, v.Status)
+	}
+}
+func (v *ListActionConnectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListActionConnectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListActionConnectorsResponse_ActionConnectorSummaries:
+			return deserializeActionConnectorSummaryList(d, schemas.ListActionConnectorsResponse_ActionConnectorSummaries, &v.ActionConnectorSummaries)
+		case schemas.ListActionConnectorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListActionConnectorsResponse_NextToken, v.NextToken)
+		case schemas.ListActionConnectorsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListActionConnectorsResponse_RequestId, v.RequestId)
+		case schemas.ListActionConnectorsResponse_Status:
+			return d.ReadInt32(schemas.ListActionConnectorsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListActionConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActionConnectors, schemas.ListActionConnectorsRequest, schemas.ListActionConnectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListActionConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListActionConnectors, schemas.ListActionConnectorsRequest, schemas.ListActionConnectorsResponse), output: &ListActionConnectorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListActionConnectors{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListActionConnectors"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListActionConnectorsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListActionConnectors(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +157,6 @@ func (c *Client) addOperationListActionConnectorsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +259,3 @@ type ListActionConnectorsAPIClient interface {
 }
 
 var _ ListActionConnectorsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListActionConnectors(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListActionConnectors",
-	}
-}

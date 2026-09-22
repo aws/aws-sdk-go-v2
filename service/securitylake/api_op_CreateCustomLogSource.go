@@ -4,11 +4,10 @@ package securitylake
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a third-party custom source in Amazon Security Lake, from the Amazon Web
@@ -65,6 +64,27 @@ type CreateCustomLogSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomLogSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomLogSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomLogSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateCustomLogSourceRequest_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOcsfEventClassList(s, schemas.CreateCustomLogSourceRequest_eventClasses, v.EventClasses)
+	if v.SourceName != nil {
+		s.WriteString(schemas.CreateCustomLogSourceRequest_sourceName, *v.SourceName)
+	}
+	if v.SourceVersion != nil {
+		s.WriteString(schemas.CreateCustomLogSourceRequest_sourceVersion, *v.SourceVersion)
+	}
+}
+
 type CreateCustomLogSourceOutput struct {
 
 	// The third-party custom source that was created.
@@ -76,77 +96,50 @@ type CreateCustomLogSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomLogSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomLogSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomLogSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Source != nil {
+		s.WriteStruct(schemas.CreateCustomLogSourceResponse_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCustomLogSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomLogSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomLogSourceResponse_source:
+			v.Source = &types.CustomLogSourceResource{}
+			return v.Source.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomLogSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomLogSource, schemas.CreateCustomLogSourceRequest, schemas.CreateCustomLogSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomLogSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomLogSource, schemas.CreateCustomLogSourceRequest, schemas.CreateCustomLogSourceResponse), output: &CreateCustomLogSourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomLogSource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomLogSource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCustomLogSourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomLogSource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +154,8 @@ func (c *Client) addOperationCreateCustomLogSourceMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCustomLogSource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCustomLogSource",
-	}
 }

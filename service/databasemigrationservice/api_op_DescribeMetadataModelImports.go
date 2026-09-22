@@ -5,16 +5,23 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
 
-// Returns a paginated list of metadata model imports.
+// Returns a paginated list of metadata model import requests for a migration
+// project, initiated by [StartMetadataModelImport].
+//
+// Required permissions: dms:DescribeMetadataModelImports . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [StartMetadataModelImport]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DescribeMetadataModelImports(ctx context.Context, params *DescribeMetadataModelImportsInput, optFns ...func(*Options)) (*DescribeMetadataModelImportsOutput, error) {
 	if params == nil {
 		params = &DescribeMetadataModelImportsInput{}
@@ -37,8 +44,14 @@ type DescribeMetadataModelImportsInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Filters applied to the metadata model imports described in the form of
-	// key-value pairs.
+	// The filters to apply to the metadata model import requests.
+	//
+	// The following filter names are supported:
+	//
+	//   - request-id – The request identifier.
+	//
+	//   - status – The request status. Valid values: RECEIVED , IN_PROGRESS , SUCCESS
+	//   , FAILED .
 	Filters []types.Filter
 
 	// Specifies the unique pagination token that makes it possible to display the
@@ -51,10 +64,31 @@ type DescribeMetadataModelImportsInput struct {
 	// arguments unchanged.
 	Marker *string
 
-	// A paginated list of metadata model imports.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, DMS includes a pagination token in the
+	// response so that you can retrieve the remaining results.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMetadataModelImportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelImportsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelImportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeMetadataModelImportsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMetadataModelImportsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeMetadataModelImportsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DescribeMetadataModelImportsMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
 }
 
 type DescribeMetadataModelImportsOutput struct {
@@ -69,7 +103,9 @@ type DescribeMetadataModelImportsOutput struct {
 	// arguments unchanged.
 	Marker *string
 
-	// A paginated list of metadata model imports.
+	// A paginated list of metadata model import requests.
+	//
+	// DMS never populates the ExportSqlDetails field for this operation.
 	Requests []types.SchemaConversionRequest
 
 	// Metadata pertaining to the operation's result.
@@ -78,77 +114,51 @@ type DescribeMetadataModelImportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMetadataModelImportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMetadataModelImportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMetadataModelImportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeMetadataModelImportsResponse_Marker, *v.Marker)
+	}
+	serializeSchemaConversionRequestList(s, schemas.DescribeMetadataModelImportsResponse_Requests, v.Requests)
+}
+func (v *DescribeMetadataModelImportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMetadataModelImportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMetadataModelImportsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeMetadataModelImportsResponse_Marker, v.Marker)
+		case schemas.DescribeMetadataModelImportsResponse_Requests:
+			return deserializeSchemaConversionRequestList(d, schemas.DescribeMetadataModelImportsResponse_Requests, &v.Requests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMetadataModelImportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModelImports, schemas.DescribeMetadataModelImportsMessage, schemas.DescribeMetadataModelImportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeMetadataModelImports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMetadataModelImports, schemas.DescribeMetadataModelImportsMessage, schemas.DescribeMetadataModelImportsResponse), output: &DescribeMetadataModelImportsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeMetadataModelImports{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeMetadataModelImports"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeMetadataModelImportsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMetadataModelImports(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +171,6 @@ func (c *Client) addOperationDescribeMetadataModelImportsMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -391,7 +395,9 @@ func metadataModelImportedStateRetryable(ctx context.Context, input *DescribeMet
 // DescribeMetadataModelImportsPaginatorOptions is the paginator options for
 // DescribeMetadataModelImports
 type DescribeMetadataModelImportsPaginatorOptions struct {
-	// A paginated list of metadata model imports.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, DMS includes a pagination token in the
+	// response so that you can retrieve the remaining results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -483,11 +489,3 @@ type DescribeMetadataModelImportsAPIClient interface {
 }
 
 var _ DescribeMetadataModelImportsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeMetadataModelImports(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeMetadataModelImports",
-	}
-}

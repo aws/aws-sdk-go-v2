@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.CreatePool
+
+{"ClientToken":"__ClientToken__","DeletionProtectionEnabled":true,"IsoCountryCode":"__IsoCountryCode__","MessageType":"TRANSACTIONAL","OriginationIdentity":"__OriginationIdentity__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

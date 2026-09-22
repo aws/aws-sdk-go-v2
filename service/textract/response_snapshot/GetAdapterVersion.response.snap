@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Textract.GetAdapterVersion
+
+{"AdapterId":"__AdapterId__","AdapterVersion":"__AdapterVersion__","CreationTime":946684800,"DatasetConfig":{"ManifestS3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"EvaluationMetrics":[{"AdapterVersion":{"F1Score":1,"Precision":1,"Recall":1},"Baseline":{"F1Score":1,"Precision":1,"Recall":1},"FeatureType":"TABLES"},{"AdapterVersion":{"F1Score":1,"Precision":1,"Recall":1},"Baseline":{"F1Score":1,"Precision":1,"Recall":1},"FeatureType":"TABLES"}],"FeatureTypes":["TABLES","TABLES"],"KMSKeyId":"__KMSKeyId__","OutputConfig":{"S3Bucket":"__S3Bucket__","S3Prefix":"__S3Prefix__"},"Status":"ACTIVE","StatusMessage":"__StatusMessage__","Tags":{"key0":"__Value__"}}

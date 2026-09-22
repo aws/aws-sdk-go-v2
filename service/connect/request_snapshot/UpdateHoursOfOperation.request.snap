@@ -1,0 +1,5 @@
+POST /hours-of-operations/__InstanceId__/__HoursOfOperationId__
+
+Content-Type: application/json
+
+{"Config":[{"Day":"SUNDAY","EndTime":{"Hours":1,"Minutes":1},"StartTime":{"Hours":1,"Minutes":1}},{"Day":"SUNDAY","EndTime":{"Hours":1,"Minutes":1},"StartTime":{"Hours":1,"Minutes":1}}],"Description":"__Description__","Name":"__Name__","TimeZone":"__TimeZone__"}

@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a snapshot schedule configured for a gateway volume. This operation is
@@ -80,6 +79,28 @@ type UpdateSnapshotScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSnapshotScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSnapshotScheduleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSnapshotScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSnapshotScheduleInput_Description, *v.Description)
+	}
+	if v.RecurrenceInHours != nil {
+		s.WriteInt32(schemas.UpdateSnapshotScheduleInput_RecurrenceInHours, *v.RecurrenceInHours)
+	}
+	if v.StartAt != nil {
+		s.WriteInt32(schemas.UpdateSnapshotScheduleInput_StartAt, *v.StartAt)
+	}
+	serializeTags(s, schemas.UpdateSnapshotScheduleInput_Tags, v.Tags)
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.UpdateSnapshotScheduleInput_VolumeARN, *v.VolumeARN)
+	}
+}
+
 // A JSON object containing the Amazon Resource Name (ARN) of the updated storage
 // volume.
 type UpdateSnapshotScheduleOutput struct {
@@ -94,77 +115,48 @@ type UpdateSnapshotScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSnapshotScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSnapshotScheduleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSnapshotScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.UpdateSnapshotScheduleOutput_VolumeARN, *v.VolumeARN)
+	}
+}
+func (v *UpdateSnapshotScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSnapshotScheduleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSnapshotScheduleOutput_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.UpdateSnapshotScheduleOutput_VolumeARN, v.VolumeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSnapshotSchedule, schemas.UpdateSnapshotScheduleInput, schemas.UpdateSnapshotScheduleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSnapshotSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSnapshotSchedule, schemas.UpdateSnapshotScheduleInput, schemas.UpdateSnapshotScheduleOutput), output: &UpdateSnapshotScheduleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSnapshotSchedule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSnapshotSchedule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSnapshotScheduleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSnapshotSchedule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +171,8 @@ func (c *Client) addOperationUpdateSnapshotScheduleMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSnapshotSchedule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSnapshotSchedule",
-	}
 }

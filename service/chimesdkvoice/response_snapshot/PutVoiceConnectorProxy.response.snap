@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Proxy":{"DefaultSessionExpiryMinutes":1,"Disabled":true,"FallBackPhoneNumber":"__FallBackPhoneNumber__","PhoneNumberCountries":["__Member__","__Member__"]}}

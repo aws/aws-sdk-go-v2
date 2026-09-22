@@ -1,0 +1,5 @@
+POST /access-policies
+
+Content-Type: application/json
+
+{"accessPolicyIdentity":{"group":{"id":"__Id__"},"iamRole":{"arn":"__Arn__"},"iamUser":{"arn":"__Arn__"},"user":{"id":"__Id__"}},"accessPolicyPermission":"ADMINISTRATOR","accessPolicyResource":{"portal":{"id":"__Id__"},"project":{"id":"__Id__"}},"clientToken":"__ClientToken__","tags":{"key0":"__Value__"}}

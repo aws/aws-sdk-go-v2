@@ -4,11 +4,10 @@ package eventbridge
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeArchiveInput struct {
 	ArchiveName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeArchiveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveName != nil {
+		s.WriteString(schemas.DescribeArchiveRequest_ArchiveName, *v.ArchiveName)
+	}
 }
 
 type DescribeArchiveOutput struct {
@@ -87,77 +98,116 @@ type DescribeArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeArchiveResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveArn != nil {
+		s.WriteString(schemas.DescribeArchiveResponse_ArchiveArn, *v.ArchiveArn)
+	}
+	if v.ArchiveName != nil {
+		s.WriteString(schemas.DescribeArchiveResponse_ArchiveName, *v.ArchiveName)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeArchiveResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeArchiveResponse_Description, *v.Description)
+	}
+	if v.EventCount != 0 {
+		s.WriteInt64(schemas.DescribeArchiveResponse_EventCount, v.EventCount)
+	}
+	if v.EventPattern != nil {
+		s.WriteString(schemas.DescribeArchiveResponse_EventPattern, *v.EventPattern)
+	}
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.DescribeArchiveResponse_EventSourceArn, *v.EventSourceArn)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.DescribeArchiveResponse_KmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.RetentionDays != nil {
+		s.WriteInt32(schemas.DescribeArchiveResponse_RetentionDays, *v.RetentionDays)
+	}
+	if v.SizeBytes != 0 {
+		s.WriteInt64(schemas.DescribeArchiveResponse_SizeBytes, v.SizeBytes)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeArchiveResponse_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.DescribeArchiveResponse_StateReason, *v.StateReason)
+	}
+}
+func (v *DescribeArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeArchiveResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeArchiveResponse_ArchiveArn:
+			v.ArchiveArn = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_ArchiveArn, v.ArchiveArn)
+		case schemas.DescribeArchiveResponse_ArchiveName:
+			v.ArchiveName = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_ArchiveName, v.ArchiveName)
+		case schemas.DescribeArchiveResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeArchiveResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeArchiveResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_Description, v.Description)
+		case schemas.DescribeArchiveResponse_EventCount:
+			return d.ReadInt64(schemas.DescribeArchiveResponse_EventCount, &v.EventCount)
+		case schemas.DescribeArchiveResponse_EventPattern:
+			v.EventPattern = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_EventPattern, v.EventPattern)
+		case schemas.DescribeArchiveResponse_EventSourceArn:
+			v.EventSourceArn = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_EventSourceArn, v.EventSourceArn)
+		case schemas.DescribeArchiveResponse_KmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_KmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.DescribeArchiveResponse_RetentionDays:
+			v.RetentionDays = new(int32)
+			return d.ReadInt32(schemas.DescribeArchiveResponse_RetentionDays, v.RetentionDays)
+		case schemas.DescribeArchiveResponse_SizeBytes:
+			return d.ReadInt64(schemas.DescribeArchiveResponse_SizeBytes, &v.SizeBytes)
+		case schemas.DescribeArchiveResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeArchiveResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ArchiveState(ev)
+			return nil
+		case schemas.DescribeArchiveResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeArchive, schemas.DescribeArchiveRequest, schemas.DescribeArchiveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeArchive, schemas.DescribeArchiveRequest, schemas.DescribeArchiveResponse), output: &DescribeArchiveOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeArchive{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeArchive"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeArchiveValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeArchive(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +222,8 @@ func (c *Client) addOperationDescribeArchiveMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeArchive(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeArchive",
-	}
 }

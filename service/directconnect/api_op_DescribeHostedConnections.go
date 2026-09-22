@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the hosted connections that have been provisioned on the specified
@@ -49,6 +48,24 @@ type DescribeHostedConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHostedConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHostedConnectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHostedConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.DescribeHostedConnectionsRequest_connectionId, *v.ConnectionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeHostedConnectionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeHostedConnectionsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeHostedConnectionsOutput struct {
 
 	// The connections.
@@ -64,77 +81,51 @@ type DescribeHostedConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHostedConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connections)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHostedConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionList(s, schemas.Connections_connections, v.Connections)
+	if v.NextToken != nil {
+		s.WriteString(schemas.Connections_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeHostedConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connections, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connections_connections:
+			return deserializeConnectionList(d, schemas.Connections_connections, &v.Connections)
+		case schemas.Connections_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.Connections_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHostedConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHostedConnections, schemas.DescribeHostedConnectionsRequest, schemas.Connections)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHostedConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHostedConnections, schemas.DescribeHostedConnectionsRequest, schemas.Connections), output: &DescribeHostedConnectionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHostedConnections{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeHostedConnections"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeHostedConnectionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHostedConnections(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +140,8 @@ func (c *Client) addOperationDescribeHostedConnectionsMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeHostedConnections(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeHostedConnections",
-	}
 }

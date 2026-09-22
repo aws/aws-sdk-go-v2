@@ -4,11 +4,10 @@ package workmail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a new access control rule for the specified organization. The rule allows
@@ -81,6 +80,35 @@ type PutAccessControlRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccessControlRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccessControlRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccessControlRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionsList(s, schemas.PutAccessControlRuleRequest_Actions, v.Actions)
+	if v.Description != nil {
+		s.WriteString(schemas.PutAccessControlRuleRequest_Description, *v.Description)
+	}
+	if v.Effect != "" {
+		s.WriteString(schemas.PutAccessControlRuleRequest_Effect, string(v.Effect))
+	}
+	serializeImpersonationRoleIdList(s, schemas.PutAccessControlRuleRequest_ImpersonationRoleIds, v.ImpersonationRoleIds)
+	serializeIpRangeList(s, schemas.PutAccessControlRuleRequest_IpRanges, v.IpRanges)
+	if v.Name != nil {
+		s.WriteString(schemas.PutAccessControlRuleRequest_Name, *v.Name)
+	}
+	serializeActionsList(s, schemas.PutAccessControlRuleRequest_NotActions, v.NotActions)
+	serializeImpersonationRoleIdList(s, schemas.PutAccessControlRuleRequest_NotImpersonationRoleIds, v.NotImpersonationRoleIds)
+	serializeIpRangeList(s, schemas.PutAccessControlRuleRequest_NotIpRanges, v.NotIpRanges)
+	serializeUserIdList(s, schemas.PutAccessControlRuleRequest_NotUserIds, v.NotUserIds)
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.PutAccessControlRuleRequest_OrganizationId, *v.OrganizationId)
+	}
+	serializeUserIdList(s, schemas.PutAccessControlRuleRequest_UserIds, v.UserIds)
+}
+
 type PutAccessControlRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -88,77 +116,42 @@ type PutAccessControlRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccessControlRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccessControlRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccessControlRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccessControlRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccessControlRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccessControlRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccessControlRule, schemas.PutAccessControlRuleRequest, schemas.PutAccessControlRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAccessControlRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccessControlRule, schemas.PutAccessControlRuleRequest, schemas.PutAccessControlRuleResponse), output: &PutAccessControlRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAccessControlRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAccessControlRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutAccessControlRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAccessControlRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +166,8 @@ func (c *Client) addOperationPutAccessControlRuleMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutAccessControlRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutAccessControlRule",
-	}
 }

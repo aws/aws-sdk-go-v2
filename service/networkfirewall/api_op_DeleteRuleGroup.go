@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified RuleGroup.
@@ -50,6 +49,24 @@ type DeleteRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleGroupArn != nil {
+		s.WriteString(schemas.DeleteRuleGroupRequest_RuleGroupArn, *v.RuleGroupArn)
+	}
+	if v.RuleGroupName != nil {
+		s.WriteString(schemas.DeleteRuleGroupRequest_RuleGroupName, *v.RuleGroupName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DeleteRuleGroupRequest_Type, string(v.Type))
+	}
+}
+
 type DeleteRuleGroupOutput struct {
 
 	// The high-level properties of a rule group. This, along with the RuleGroup, define the
@@ -64,74 +81,47 @@ type DeleteRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleGroupResponse != nil {
+		s.WriteStruct(schemas.DeleteRuleGroupResponse_RuleGroupResponse)
+		v.RuleGroupResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRuleGroupResponse_RuleGroupResponse:
+			v.RuleGroupResponse = &types.RuleGroupResponse{}
+			return v.RuleGroupResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRuleGroup, schemas.DeleteRuleGroupRequest, schemas.DeleteRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRuleGroup, schemas.DeleteRuleGroupRequest, schemas.DeleteRuleGroupResponse), output: &DeleteRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRuleGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRuleGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRuleGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +136,8 @@ func (c *Client) addOperationDeleteRuleGroupMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteRuleGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteRuleGroup",
-	}
 }

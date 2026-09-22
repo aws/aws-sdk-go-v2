@@ -4,11 +4,10 @@ package qconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing Amazon Q in Connect quick response.
@@ -40,7 +39,7 @@ type UpdateQuickResponseInput struct {
 	// This member is required.
 	QuickResponseId *string
 
-	// The Amazon Connect contact channels this quick response applies to. The
+	// The Connect Customer contact channels this quick response applies to. The
 	// supported contact channel types include Chat .
 	Channels []string
 
@@ -89,6 +88,55 @@ type UpdateQuickResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQuickResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQuickResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQuickResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannels(s, schemas.UpdateQuickResponseRequest_channels, v.Channels)
+	serializeQuickResponseDataProvider(s, schemas.UpdateQuickResponseRequest_content, v.Content)
+	if v.ContentType != nil {
+		s.WriteString(schemas.UpdateQuickResponseRequest_contentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateQuickResponseRequest_description, *v.Description)
+	}
+	if v.GroupingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateQuickResponseRequest_groupingConfiguration)
+		v.GroupingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsActive != nil {
+		s.WriteBool(schemas.UpdateQuickResponseRequest_isActive, *v.IsActive)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.UpdateQuickResponseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.UpdateQuickResponseRequest_language, *v.Language)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateQuickResponseRequest_name, *v.Name)
+	}
+	if v.QuickResponseId != nil {
+		s.WriteString(schemas.UpdateQuickResponseRequest_quickResponseId, *v.QuickResponseId)
+	}
+	if v.RemoveDescription != nil {
+		s.WriteBool(schemas.UpdateQuickResponseRequest_removeDescription, *v.RemoveDescription)
+	}
+	if v.RemoveGroupingConfiguration != nil {
+		s.WriteBool(schemas.UpdateQuickResponseRequest_removeGroupingConfiguration, *v.RemoveGroupingConfiguration)
+	}
+	if v.RemoveShortcutKey != nil {
+		s.WriteBool(schemas.UpdateQuickResponseRequest_removeShortcutKey, *v.RemoveShortcutKey)
+	}
+	if v.ShortcutKey != nil {
+		s.WriteString(schemas.UpdateQuickResponseRequest_shortcutKey, *v.ShortcutKey)
+	}
+}
+
 type UpdateQuickResponseOutput struct {
 
 	// The quick response.
@@ -100,77 +148,50 @@ type UpdateQuickResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQuickResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQuickResponseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQuickResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuickResponse != nil {
+		s.WriteStruct(schemas.UpdateQuickResponseResponse_quickResponse)
+		v.QuickResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateQuickResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQuickResponseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQuickResponseResponse_quickResponse:
+			v.QuickResponse = &types.QuickResponseData{}
+			return v.QuickResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQuickResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuickResponse, schemas.UpdateQuickResponseRequest, schemas.UpdateQuickResponseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQuickResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQuickResponse, schemas.UpdateQuickResponseRequest, schemas.UpdateQuickResponseResponse), output: &UpdateQuickResponseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQuickResponse{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQuickResponse"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateQuickResponseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateQuickResponse(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +206,8 @@ func (c *Client) addOperationUpdateQuickResponseMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateQuickResponse(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateQuickResponse",
-	}
 }

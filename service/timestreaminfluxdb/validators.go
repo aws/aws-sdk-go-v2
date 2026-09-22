@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateDbBackup struct {
+}
+
+func (*validateOpCreateDbBackup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDbBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDbBackupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDbBackupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDbCluster struct {
 }
 
@@ -70,6 +90,26 @@ func (m *validateOpCreateDbParameterGroup) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDbBackup struct {
+}
+
+func (*validateOpDeleteDbBackup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDbBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDbBackupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDbBackupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDbCluster struct {
 }
 
@@ -105,6 +145,26 @@ func (m *validateOpDeleteDbInstance) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDbInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDbBackup struct {
+}
+
+func (*validateOpGetDbBackup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDbBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDbBackupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDbBackupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +310,26 @@ func (m *validateOpRebootDbInstance) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRestoreFromDbBackup struct {
+}
+
+func (*validateOpRestoreFromDbBackup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreFromDbBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreFromDbBackupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreFromDbBackupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -330,6 +410,10 @@ func (m *validateOpUpdateDbInstance) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateDbBackupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDbBackup{}, middleware.After)
+}
+
 func addOpCreateDbClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDbCluster{}, middleware.After)
 }
@@ -342,12 +426,20 @@ func addOpCreateDbParameterGroupValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateDbParameterGroup{}, middleware.After)
 }
 
+func addOpDeleteDbBackupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDbBackup{}, middleware.After)
+}
+
 func addOpDeleteDbClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDbCluster{}, middleware.After)
 }
 
 func addOpDeleteDbInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDbInstance{}, middleware.After)
+}
+
+func addOpGetDbBackupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDbBackup{}, middleware.After)
 }
 
 func addOpGetDbClusterValidationMiddleware(stack *middleware.Stack) error {
@@ -378,6 +470,10 @@ func addOpRebootDbInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRebootDbInstance{}, middleware.After)
 }
 
+func addOpRestoreFromDbBackupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreFromDbBackup{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -392,6 +488,44 @@ func addOpUpdateDbClusterValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDbInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDbInstance{}, middleware.After)
+}
+
+func validateDbBackupConfiguration(v *types.DbBackupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DbBackupConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.RetentionDays == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RetentionDays"))
+	}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDbBackupConfigurationInputList(v []types.DbBackupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DbBackupConfigurationInputList"}
+	for i := range v {
+		if err := validateDbBackupConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateDuration(v *types.Duration) error {
@@ -716,6 +850,24 @@ func validateS3Configuration(v *types.S3Configuration) error {
 	}
 }
 
+func validateOpCreateDbBackupInput(v *CreateDbBackupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDbBackupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DbResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDbClusterInput(v *CreateDbClusterInput) error {
 	if v == nil {
 		return nil
@@ -741,6 +893,11 @@ func validateOpCreateDbClusterInput(v *CreateDbClusterInput) error {
 	if v.MaintenanceSchedule != nil {
 		if err := validateMaintenanceSchedule(v.MaintenanceSchedule); err != nil {
 			invalidParams.AddNested("MaintenanceSchedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DbBackupConfigurations != nil {
+		if err := validateDbBackupConfigurationInputList(v.DbBackupConfigurations); err != nil {
+			invalidParams.AddNested("DbBackupConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -783,6 +940,11 @@ func validateOpCreateDbInstanceInput(v *CreateDbInstanceInput) error {
 			invalidParams.AddNested("MaintenanceSchedule", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DbBackupConfigurations != nil {
+		if err := validateDbBackupConfigurationInputList(v.DbBackupConfigurations); err != nil {
+			invalidParams.AddNested("DbBackupConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -802,6 +964,21 @@ func validateOpCreateDbParameterGroupInput(v *CreateDbParameterGroupInput) error
 		if err := validateParameters(v.Parameters); err != nil {
 			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDbBackupInput(v *DeleteDbBackupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDbBackupInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -830,6 +1007,21 @@ func validateOpDeleteDbInstanceInput(v *DeleteDbInstanceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDbInstanceInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDbBackupInput(v *GetDbBackupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDbBackupInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
@@ -945,6 +1137,39 @@ func validateOpRebootDbInstanceInput(v *RebootDbInstanceInput) error {
 	}
 }
 
+func validateOpRestoreFromDbBackupInput(v *RestoreFromDbBackupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreFromDbBackupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DbBackupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DbBackupId"))
+	}
+	if v.LogDeliveryConfiguration != nil {
+		if err := validateLogDeliveryConfiguration(v.LogDeliveryConfiguration); err != nil {
+			invalidParams.AddNested("LogDeliveryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MaintenanceSchedule != nil {
+		if err := validateMaintenanceSchedule(v.MaintenanceSchedule); err != nil {
+			invalidParams.AddNested("MaintenanceSchedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DbBackupConfigurations != nil {
+		if err := validateDbBackupConfigurationInputList(v.DbBackupConfigurations); err != nil {
+			invalidParams.AddNested("DbBackupConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -999,6 +1224,11 @@ func validateOpUpdateDbClusterInput(v *UpdateDbClusterInput) error {
 			invalidParams.AddNested("MaintenanceSchedule", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DbBackupConfigurations != nil {
+		if err := validateDbBackupConfigurationInputList(v.DbBackupConfigurations); err != nil {
+			invalidParams.AddNested("DbBackupConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1022,6 +1252,11 @@ func validateOpUpdateDbInstanceInput(v *UpdateDbInstanceInput) error {
 	if v.MaintenanceSchedule != nil {
 		if err := validateMaintenanceSchedule(v.MaintenanceSchedule); err != nil {
 			invalidParams.AddNested("MaintenanceSchedule", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DbBackupConfigurations != nil {
+		if err := validateDbBackupConfigurationInputList(v.DbBackupConfigurations); err != nil {
+			invalidParams.AddNested("DbBackupConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

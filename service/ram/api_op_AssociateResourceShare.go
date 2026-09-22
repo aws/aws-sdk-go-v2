@@ -4,11 +4,10 @@ package ram
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds the specified list of principals, resources, and source constraints to a
@@ -101,6 +100,24 @@ type AssociateResourceShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateResourceShareRequest_clientToken, *v.ClientToken)
+	}
+	serializePrincipalArnOrIdList(s, schemas.AssociateResourceShareRequest_principals, v.Principals)
+	serializeResourceArnList(s, schemas.AssociateResourceShareRequest_resourceArns, v.ResourceArns)
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.AssociateResourceShareRequest_resourceShareArn, *v.ResourceShareArn)
+	}
+	serializeSourceArnOrAccountList(s, schemas.AssociateResourceShareRequest_sources, v.Sources)
+}
+
 type AssociateResourceShareOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -118,77 +135,51 @@ type AssociateResourceShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateResourceShareResponse_clientToken, *v.ClientToken)
+	}
+	serializeResourceShareAssociationList(s, schemas.AssociateResourceShareResponse_resourceShareAssociations, v.ResourceShareAssociations)
+}
+func (v *AssociateResourceShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResourceShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResourceShareResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.AssociateResourceShareResponse_clientToken, v.ClientToken)
+		case schemas.AssociateResourceShareResponse_resourceShareAssociations:
+			return deserializeResourceShareAssociationList(d, schemas.AssociateResourceShareResponse_resourceShareAssociations, &v.ResourceShareAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResourceShare, schemas.AssociateResourceShareRequest, schemas.AssociateResourceShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateResourceShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResourceShare, schemas.AssociateResourceShareRequest, schemas.AssociateResourceShareResponse), output: &AssociateResourceShareOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateResourceShare{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateResourceShare"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateResourceShareValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateResourceShare(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,22 +194,8 @@ func (c *Client) addOperationAssociateResourceShareMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateResourceShare(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateResourceShare",
-	}
 }

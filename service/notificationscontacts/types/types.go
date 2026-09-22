@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/notificationscontacts/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -44,6 +46,62 @@ type EmailContact struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EmailContact) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmailContact)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmailContact) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.EmailContact_address, *v.Address)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.EmailContact_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.EmailContact_creationTime, *v.CreationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.EmailContact_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EmailContact_status, string(v.Status))
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.EmailContact_updateTime, *v.UpdateTime)
+	}
+}
+func (v *EmailContact) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmailContact, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EmailContact_address:
+			v.Address = new(string)
+			return d.ReadString(schemas.EmailContact_address, v.Address)
+		case schemas.EmailContact_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EmailContact_arn, v.Arn)
+		case schemas.EmailContact_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.EmailContact_creationTime, v.CreationTime)
+		case schemas.EmailContact_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EmailContact_name, v.Name)
+		case schemas.EmailContact_status:
+			var ev string
+			if err := d.ReadString(schemas.EmailContact_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EmailContactStatus(ev)
+			return nil
+		case schemas.EmailContact_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.EmailContact_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
+
 // Stores information about a field passed inside a request that resulted in an
 // exception.
 type ValidationExceptionField struct {
@@ -59,6 +117,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

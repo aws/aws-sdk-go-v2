@@ -1,0 +1,5 @@
+PATCH /v2/apis/__ApiId__/deployments/__DeploymentId__
+
+Content-Type: application/json
+
+{"description":"__Description__"}

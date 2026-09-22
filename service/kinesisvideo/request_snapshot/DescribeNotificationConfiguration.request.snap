@@ -1,0 +1,5 @@
+POST /describeNotificationConfiguration
+
+Content-Type: application/json
+
+{"StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

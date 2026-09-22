@@ -1,0 +1,5 @@
+POST /list-ms-teams-user-identities
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__","MaxResults":1,"NextToken":"__NextToken__"}

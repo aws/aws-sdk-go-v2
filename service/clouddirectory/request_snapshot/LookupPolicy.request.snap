@@ -1,0 +1,6 @@
+POST /amazonclouddirectory/2017-01-11/policy/lookup
+
+Content-Type: application/json
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"MaxResults":1,"NextToken":"__NextToken__","ObjectReference":{"Selector":"__Selector__"}}

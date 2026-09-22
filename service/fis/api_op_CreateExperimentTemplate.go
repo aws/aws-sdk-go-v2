@@ -5,10 +5,10 @@ package fis
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an experiment template.
@@ -92,6 +92,43 @@ type CreateExperimentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExperimentTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCreateExperimentTemplateActionInputMap(s, schemas.CreateExperimentTemplateRequest_actions, v.Actions)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateExperimentTemplateRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateExperimentTemplateRequest_description, *v.Description)
+	}
+	if v.ExperimentOptions != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateRequest_experimentOptions)
+		v.ExperimentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentReportConfiguration != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateRequest_experimentReportConfiguration)
+		v.ExperimentReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateRequest_logConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateExperimentTemplateRequest_roleArn, *v.RoleArn)
+	}
+	serializeCreateExperimentTemplateStopConditionInputList(s, schemas.CreateExperimentTemplateRequest_stopConditions, v.StopConditions)
+	serializeTagMap(s, schemas.CreateExperimentTemplateRequest_tags, v.Tags)
+	serializeCreateExperimentTemplateTargetInputMap(s, schemas.CreateExperimentTemplateRequest_targets, v.Targets)
+}
+
 type CreateExperimentTemplateOutput struct {
 
 	// Information about the experiment template.
@@ -103,65 +140,44 @@ type CreateExperimentTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExperimentTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperimentTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperimentTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentTemplate != nil {
+		s.WriteStruct(schemas.CreateExperimentTemplateResponse_experimentTemplate)
+		v.ExperimentTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateExperimentTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExperimentTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExperimentTemplateResponse_experimentTemplate:
+			v.ExperimentTemplate = &types.ExperimentTemplate{}
+			return v.ExperimentTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExperimentTemplate, schemas.CreateExperimentTemplateRequest, schemas.CreateExperimentTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateExperimentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExperimentTemplate, schemas.CreateExperimentTemplateRequest, schemas.CreateExperimentTemplateResponse), output: &CreateExperimentTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateExperimentTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateExperimentTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -171,12 +187,6 @@ func (c *Client) addOperationCreateExperimentTemplateMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpCreateExperimentTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExperimentTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,12 +199,6 @@ func (c *Client) addOperationCreateExperimentTemplateMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -234,12 +238,4 @@ func (m *idempotencyToken_initializeOpCreateExperimentTemplate) HandleInitialize
 }
 func addIdempotencyToken_opCreateExperimentTemplateMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateExperimentTemplate{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateExperimentTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateExperimentTemplate",
-	}
 }

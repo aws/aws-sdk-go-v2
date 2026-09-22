@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a dashboard in an Amazon Web Services account.
@@ -101,7 +100,9 @@ type UpdateDashboardInput struct {
 	//
 	// Use the DataSetReferences entity within SourceTemplate to list the replacement
 	// datasets for the placeholders listed in the original. The schema in each dataset
-	// must match its placeholder.
+	// must match its placeholder. Use the TopicReferences entity to list the
+	// replacement topics for the topic placeholders listed in the original. The schema
+	// in each topic must match its placeholder.
 	//
 	// [CreateTemplate]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_CreateTemplate.html
 	SourceEntity *types.DashboardSourceEntity
@@ -120,6 +121,55 @@ type UpdateDashboardInput struct {
 	VersionDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_DashboardId, *v.DashboardId)
+	}
+	if v.DashboardPublishOptions != nil {
+		s.WriteStruct(schemas.UpdateDashboardRequest_DashboardPublishOptions)
+		v.DashboardPublishOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.UpdateDashboardRequest_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_Name, *v.Name)
+	}
+	if v.Parameters != nil {
+		s.WriteStruct(schemas.UpdateDashboardRequest_Parameters)
+		v.Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceEntity != nil {
+		s.WriteStruct(schemas.UpdateDashboardRequest_SourceEntity)
+		v.SourceEntity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThemeArn != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_ThemeArn, *v.ThemeArn)
+	}
+	if v.ValidationStrategy != nil {
+		s.WriteStruct(schemas.UpdateDashboardRequest_ValidationStrategy)
+		v.ValidationStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_VersionDescription, *v.VersionDescription)
+	}
 }
 
 type UpdateDashboardOutput struct {
@@ -148,77 +198,81 @@ type UpdateDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateDashboardResponse_Arn, *v.Arn)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.UpdateDashboardResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.UpdateDashboardResponse_DashboardId, *v.DashboardId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateDashboardResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateDashboardResponse_Status, v.Status)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.UpdateDashboardResponse_VersionArn, *v.VersionArn)
+	}
+}
+func (v *UpdateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDashboardResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateDashboardResponse_Arn, v.Arn)
+		case schemas.UpdateDashboardResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDashboardResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.UpdateDashboardResponse_DashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.UpdateDashboardResponse_DashboardId, v.DashboardId)
+		case schemas.UpdateDashboardResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateDashboardResponse_RequestId, v.RequestId)
+		case schemas.UpdateDashboardResponse_Status:
+			return d.ReadInt32(schemas.UpdateDashboardResponse_Status, &v.Status)
+		case schemas.UpdateDashboardResponse_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.UpdateDashboardResponse_VersionArn, v.VersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboard, schemas.UpdateDashboardRequest, schemas.UpdateDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboard, schemas.UpdateDashboardRequest, schemas.UpdateDashboardResponse), output: &UpdateDashboardOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDashboard{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDashboard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDashboardValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDashboard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -233,22 +287,8 @@ func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDashboard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDashboard",
-	}
 }

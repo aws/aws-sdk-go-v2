@@ -1,0 +1,3 @@
+GET /automated-reasoning-policies/__PolicyArn__/build-workflows/__BuildWorkflowId__/result-assets?assetId=__AssetId__&assetType=BUILD_LOG
+
+

@@ -4,11 +4,10 @@ package chimesdkmediapipelines
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets an existing media pipeline.
@@ -37,6 +36,18 @@ type GetMediaPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaPipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaPipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaPipelineId != nil {
+		s.WriteString(schemas.GetMediaPipelineRequest_MediaPipelineId, *v.MediaPipelineId)
+	}
+}
+
 type GetMediaPipelineOutput struct {
 
 	// The media pipeline object.
@@ -48,77 +59,50 @@ type GetMediaPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaPipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaPipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaPipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MediaPipeline != nil {
+		s.WriteStruct(schemas.GetMediaPipelineResponse_MediaPipeline)
+		v.MediaPipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMediaPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMediaPipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMediaPipelineResponse_MediaPipeline:
+			v.MediaPipeline = &types.MediaPipeline{}
+			return v.MediaPipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMediaPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaPipeline, schemas.GetMediaPipelineRequest, schemas.GetMediaPipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMediaPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaPipeline, schemas.GetMediaPipelineRequest, schemas.GetMediaPipelineResponse), output: &GetMediaPipelineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMediaPipeline{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMediaPipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMediaPipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMediaPipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -133,22 +117,8 @@ func (c *Client) addOperationGetMediaPipelineMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMediaPipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMediaPipeline",
-	}
 }

@@ -5,14 +5,14 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an image pipeline. Image pipelines enable you to automate the creation
-// and distribution of images. You must specify exactly one recipe for your image,
+// Updates an image pipeline. Use image pipelines to automate the creation and
+// distribution of images. You must specify exactly one recipe for your image,
 // using either a containerRecipeArn or an imageRecipeArn .
 //
 // UpdateImagePipeline does not support selective updates for the pipeline. You
@@ -35,8 +35,10 @@ func (c *Client) UpdateImagePipeline(ctx context.Context, params *UpdateImagePip
 
 type UpdateImagePipelineInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -65,17 +67,17 @@ type UpdateImagePipelineInput struct {
 	// updated.
 	DistributionConfigurationArn *string
 
-	// Collects additional information about the image being created, including the
-	// operating system (OS) version and package list. This information is used to
-	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
+	// Specifies whether to collect additional information about the image being
+	// created, including the operating system (OS) version and package list. Defaults
+	// to true .
 	EnhancedImageMetadataEnabled *bool
 
 	// The name or Amazon Resource Name (ARN) for the IAM role you create that grants
 	// Image Builder access to perform workflow actions.
 	ExecutionRole *string
 
-	// The Amazon Resource Name (ARN) of the image recipe that will be used to
-	// configure images updated by this image pipeline.
+	// The Amazon Resource Name (ARN) of the image recipe that configures images
+	// updated by this image pipeline.
 	ImageRecipeArn *string
 
 	// Contains settings for vulnerability scans.
@@ -103,6 +105,67 @@ type UpdateImagePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImagePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImagePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImagePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateImagePipelineRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.UpdateImagePipelineRequest_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateImagePipelineRequest_description, *v.Description)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.UpdateImagePipelineRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.EnhancedImageMetadataEnabled != nil {
+		s.WriteBool(schemas.UpdateImagePipelineRequest_enhancedImageMetadataEnabled, *v.EnhancedImageMetadataEnabled)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.UpdateImagePipelineRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.ImagePipelineArn != nil {
+		s.WriteString(schemas.UpdateImagePipelineRequest_imagePipelineArn, *v.ImagePipelineArn)
+	}
+	if v.ImageRecipeArn != nil {
+		s.WriteString(schemas.UpdateImagePipelineRequest_imageRecipeArn, *v.ImageRecipeArn)
+	}
+	if v.ImageScanningConfiguration != nil {
+		s.WriteStruct(schemas.UpdateImagePipelineRequest_imageScanningConfiguration)
+		v.ImageScanningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.UpdateImagePipelineRequest_imageTags, v.ImageTags)
+	if v.ImageTestsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateImagePipelineRequest_imageTestsConfiguration)
+		v.ImageTestsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.UpdateImagePipelineRequest_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateImagePipelineRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteStruct(schemas.UpdateImagePipelineRequest_schedule)
+		v.Schedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateImagePipelineRequest_status, string(v.Status))
+	}
+	serializeWorkflowConfigurationList(s, schemas.UpdateImagePipelineRequest_workflows, v.Workflows)
+}
+
 type UpdateImagePipelineOutput struct {
 
 	// The client token that uniquely identifies the request.
@@ -121,65 +184,54 @@ type UpdateImagePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateImagePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateImagePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateImagePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateImagePipelineResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImagePipelineArn != nil {
+		s.WriteString(schemas.UpdateImagePipelineResponse_imagePipelineArn, *v.ImagePipelineArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateImagePipelineResponse_requestId, *v.RequestId)
+	}
+}
+func (v *UpdateImagePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateImagePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateImagePipelineResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateImagePipelineResponse_clientToken, v.ClientToken)
+		case schemas.UpdateImagePipelineResponse_imagePipelineArn:
+			v.ImagePipelineArn = new(string)
+			return d.ReadString(schemas.UpdateImagePipelineResponse_imagePipelineArn, v.ImagePipelineArn)
+		case schemas.UpdateImagePipelineResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateImagePipelineResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateImagePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImagePipeline, schemas.UpdateImagePipelineRequest, schemas.UpdateImagePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateImagePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateImagePipeline, schemas.UpdateImagePipelineRequest, schemas.UpdateImagePipelineResponse), output: &UpdateImagePipelineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateImagePipeline{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateImagePipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -189,12 +241,6 @@ func (c *Client) addOperationUpdateImagePipelineMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpUpdateImagePipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateImagePipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,12 +253,6 @@ func (c *Client) addOperationUpdateImagePipelineMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,12 +292,4 @@ func (m *idempotencyToken_initializeOpUpdateImagePipeline) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opUpdateImagePipelineMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateImagePipeline{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateImagePipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateImagePipeline",
-	}
 }

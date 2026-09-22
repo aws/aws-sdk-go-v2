@@ -1,0 +1,5 @@
+PATCH /networks/__NetworkId__/settings
+
+Content-Type: application/json
+
+{"settings":{"consentPopup":{"closeButtonLabel":"__CloseButtonLabel__","content":"__Content__","enabled":true,"header":"__Header__"},"dataRetention":true,"enableClientMetrics":true,"enableTrustedDataFormat":true,"readReceiptConfig":{"status":"DISABLED"}}}

@@ -32,7 +32,7 @@
 //
 //   - Submits the metering record for a set of customers. BatchMeterUsage API
 //     calls are captured by CloudTrail. You can use CloudTrail to verify that the
-//     software as a subscription (SaaS) metering records that you sent are accurate by
+//     software as a service (SaaS) metering records that you sent are accurate by
 //     searching for records with the eventName of BatchMeterUsage . You can also use
 //     CloudTrail to audit records over time. For more information, see the [CloudTrail User Guide].
 //
@@ -58,7 +58,7 @@
 //
 // # Entitlement and metering for paid container products
 //
-// RegisteredUsage
+// RegisterUsage
 //
 //   - Provides software entitlement and metering. Paid container software
 //     products sold through Amazon Web Services Marketplace must integrate with the

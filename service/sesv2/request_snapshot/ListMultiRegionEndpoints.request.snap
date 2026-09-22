@@ -1,0 +1,3 @@
+GET /v2/email/multi-region-endpoints?NextToken=__NextToken__&PageSize=1
+
+

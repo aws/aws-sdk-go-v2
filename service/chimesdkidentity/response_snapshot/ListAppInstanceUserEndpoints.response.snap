@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceUserEndpoints":[{"AllowMessages":"ALL","AppInstanceUserArn":"__AppInstanceUserArn__","EndpointId":"__EndpointId__","EndpointState":{"Status":"ACTIVE","StatusReason":"INVALID_DEVICE_TOKEN"},"Name":"__Name__","Type":"APNS"},{"AllowMessages":"ALL","AppInstanceUserArn":"__AppInstanceUserArn__","EndpointId":"__EndpointId__","EndpointState":{"Status":"ACTIVE","StatusReason":"INVALID_DEVICE_TOKEN"},"Name":"__Name__","Type":"APNS"}],"NextToken":"__NextToken__"}

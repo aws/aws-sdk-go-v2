@@ -4,11 +4,10 @@ package personalize
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an Amazon Personalize solution to use a different automatic training
@@ -77,6 +76,29 @@ type UpdateSolutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSolutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSolutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSolutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PerformAutoTraining != nil {
+		s.WriteBool(schemas.UpdateSolutionRequest_performAutoTraining, *v.PerformAutoTraining)
+	}
+	if v.PerformIncrementalUpdate != nil {
+		s.WriteBool(schemas.UpdateSolutionRequest_performIncrementalUpdate, *v.PerformIncrementalUpdate)
+	}
+	if v.SolutionArn != nil {
+		s.WriteString(schemas.UpdateSolutionRequest_solutionArn, *v.SolutionArn)
+	}
+	if v.SolutionUpdateConfig != nil {
+		s.WriteStruct(schemas.UpdateSolutionRequest_solutionUpdateConfig)
+		v.SolutionUpdateConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSolutionOutput struct {
 
 	// The same solution Amazon Resource Name (ARN) as given in the request.
@@ -88,77 +110,48 @@ type UpdateSolutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSolutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSolutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSolutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionArn != nil {
+		s.WriteString(schemas.UpdateSolutionResponse_solutionArn, *v.SolutionArn)
+	}
+}
+func (v *UpdateSolutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSolutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSolutionResponse_solutionArn:
+			v.SolutionArn = new(string)
+			return d.ReadString(schemas.UpdateSolutionResponse_solutionArn, v.SolutionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSolutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSolution, schemas.UpdateSolutionRequest, schemas.UpdateSolutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSolution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSolution, schemas.UpdateSolutionRequest, schemas.UpdateSolutionResponse), output: &UpdateSolutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSolution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSolution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSolutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSolution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +166,8 @@ func (c *Client) addOperationUpdateSolutionMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSolution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSolution",
-	}
 }

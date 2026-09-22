@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.UpdateMaintenanceWindow
+
+{"AllowUnassociatedTargets":true,"Cutoff":1,"Description":"__Description__","Duration":1,"Enabled":true,"EndDate":"__EndDate__","Name":"__Name__","Replace":true,"Schedule":"__Schedule__","ScheduleOffset":1,"ScheduleTimezone":"__ScheduleTimezone__","StartDate":"__StartDate__","WindowId":"__WindowId__"}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateTenantDatabase&CharacterSetName=__CharacterSetName__&DBInstanceIdentifier=__DBInstanceIdentifier__&ManageMasterUserPassword=true&MasterUserPassword=__MasterUserPassword__&MasterUserSecretKmsKeyId=__MasterUserSecretKmsKeyId__&MasterUsername=__MasterUsername__&NcharCharacterSetName=__NcharCharacterSetName__&Tags.Tag.1.Key=__Key__&Tags.Tag.1.Value=__Value__&Tags.Tag.2.Key=__Key__&Tags.Tag.2.Value=__Value__&TenantDBName=__TenantDBName__&Version=2014-10-31

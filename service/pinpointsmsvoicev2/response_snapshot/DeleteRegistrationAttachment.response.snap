@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DeleteRegistrationAttachment
+
+{"AttachmentStatus":"UPLOAD_IN_PROGRESS","AttachmentUploadErrorReason":"INTERNAL_ERROR","CreatedTimestamp":946684800,"RegistrationAttachmentArn":"__RegistrationAttachmentArn__","RegistrationAttachmentId":"__RegistrationAttachmentId__"}

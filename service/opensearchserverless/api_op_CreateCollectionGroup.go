@@ -5,10 +5,10 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a collection group within OpenSearch Serverless. Collection groups let
@@ -56,11 +56,45 @@ type CreateCollectionGroupInput struct {
 	// A description of the collection group.
 	Description *string
 
+	// The generation of Amazon OpenSearch Serverless for the collection group. Valid
+	// values are CLASSIC and NEXTGEN .
+	Generation types.ServerlessGeneration
+
 	// An arbitrary set of tags (key–value pairs) to associate with the OpenSearch
 	// Serverless collection group.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateCollectionGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollectionGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollectionGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityLimits != nil {
+		s.WriteStruct(schemas.CreateCollectionGroupRequest_capacityLimits)
+		v.CapacityLimits.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCollectionGroupRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCollectionGroupRequest_description, *v.Description)
+	}
+	if v.Generation != "" {
+		s.WriteString(schemas.CreateCollectionGroupRequest_generation, string(v.Generation))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCollectionGroupRequest_name, *v.Name)
+	}
+	if v.StandbyReplicas != "" {
+		s.WriteString(schemas.CreateCollectionGroupRequest_standbyReplicas, string(v.StandbyReplicas))
+	}
+	serializeTags(s, schemas.CreateCollectionGroupRequest_tags, v.Tags)
 }
 
 type CreateCollectionGroupOutput struct {
@@ -74,65 +108,44 @@ type CreateCollectionGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCollectionGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCollectionGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCollectionGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateCollectionGroupDetail != nil {
+		s.WriteStruct(schemas.CreateCollectionGroupResponse_createCollectionGroupDetail)
+		v.CreateCollectionGroupDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateCollectionGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCollectionGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCollectionGroupResponse_createCollectionGroupDetail:
+			v.CreateCollectionGroupDetail = &types.CreateCollectionGroupDetail{}
+			return v.CreateCollectionGroupDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCollectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollectionGroup, schemas.CreateCollectionGroupRequest, schemas.CreateCollectionGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateCollectionGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCollectionGroup, schemas.CreateCollectionGroupRequest, schemas.CreateCollectionGroupResponse), output: &CreateCollectionGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateCollectionGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCollectionGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -142,12 +155,6 @@ func (c *Client) addOperationCreateCollectionGroupMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateCollectionGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCollectionGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +167,6 @@ func (c *Client) addOperationCreateCollectionGroupMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -205,12 +206,4 @@ func (m *idempotencyToken_initializeOpCreateCollectionGroup) HandleInitialize(ct
 }
 func addIdempotencyToken_opCreateCollectionGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCollectionGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCollectionGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCollectionGroup",
-	}
 }

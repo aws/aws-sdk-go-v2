@@ -4,11 +4,8 @@ package gameliftstreams
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -210,7 +207,7 @@ type UpdateStreamGroupOutput struct {
 	//   scene complexity which require maximum resources. Runs applications on Microsoft
 	//   Windows Server 2022 Base and supports DirectX 12. Compatible with Unreal Engine
 	//   versions up through 5.6, 32 and 64-bit applications, and anti-cheat technology.
-	//   Uses NVIDIA L4 Tensor Core GPU.
+	//   Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -221,8 +218,8 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen6n_pro (NVIDIA, pro) Supports applications with extremely high 3D scene
-	//   complexity which require maximum resources. Uses dedicated NVIDIA L4 Tensor Core
-	//   GPU.
+	//   complexity which require maximum resources. Powered by NVIDIA L4 Tensor Core
+	//   GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -235,7 +232,7 @@ type UpdateStreamGroupOutput struct {
 	//   - gen6n_ultra_win2022 (NVIDIA, ultra) Supports applications with high 3D scene
 	//   complexity. Runs applications on Microsoft Windows Server 2022 Base and supports
 	//   DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32 and 64-bit
-	//   applications, and anti-cheat technology. Uses NVIDIA L4 Tensor Core GPU.
+	//   applications, and anti-cheat technology. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -246,7 +243,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen6n_ultra (NVIDIA, ultra) Supports applications with high 3D scene
-	//   complexity. Uses dedicated NVIDIA L4 Tensor Core GPU.
+	//   complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -257,7 +254,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen6n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -268,7 +265,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen6n_medium (NVIDIA, medium) Supports applications with moderate 3D scene
-	//   complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//   complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -279,7 +276,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports up to 4 concurrent stream sessions
 	//
 	//   - gen6n_small (NVIDIA, small) Supports applications with lightweight 3D scene
-	//   complexity and low CPU usage. Uses NVIDIA L4 Tensor Core GPU.
+	//   complexity and low CPU usage. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -290,7 +287,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports up to 12 concurrent stream sessions
 	//
 	//   - gen6n_medium_win2022 (NVIDIA, medium) Supports applications with low 3D
-	//   scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -301,7 +298,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen6n_small_win2022 (NVIDIA, small) Supports applications with low 3D scene
-	//   complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//   complexity. Powered by NVIDIA L4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -311,11 +308,37 @@ type UpdateStreamGroupOutput struct {
 	//
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
+	//   - gen6e_pro_win2022 (NVIDIA, pro) Supports applications with extremely high 3D
+	//   scene complexity which require maximum resources. Runs applications on Microsoft
+	//   Windows Server 2022 Base and supports DirectX 12. Compatible with Unreal Engine
+	//   versions up through 5.6, 32 and 64-bit applications, and anti-cheat technology.
+	//   Powered by NVIDIA L40S Tensor Core GPUs.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 16 vCPUs, 128 GB RAM, 48 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6e_pro (NVIDIA, pro) Supports applications with extremely high 3D scene
+	//   complexity which require maximum resources. Powered by NVIDIA L40S Tensor Core
+	//   GPUs.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 16 vCPUs, 128 GB RAM, 48 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
 	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32
-	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA A10G Tensor Core
-	//   GPU.
+	//   and 64-bit applications, and anti-cheat technology. Powered by NVIDIA A10G
+	//   Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -326,7 +349,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen5n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA A10G Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA A10G Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -337,7 +360,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen5n_ultra (NVIDIA, ultra) Supports applications with extremely high 3D
-	//   scene complexity. Uses dedicated NVIDIA A10G Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA A10G Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -350,8 +373,8 @@ type UpdateStreamGroupOutput struct {
 	//   - gen4n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
 	//   supports DirectX 12. Compatible with Unreal Engine versions up through 5.6, 32
-	//   and 64-bit applications, and anti-cheat technology. Uses NVIDIA T4 Tensor Core
-	//   GPU.
+	//   and 64-bit applications, and anti-cheat technology. Powered by NVIDIA T4 Tensor
+	//   Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -362,7 +385,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen4n_high (NVIDIA, high) Supports applications with moderate to high 3D
-	//   scene complexity. Uses NVIDIA T4 Tensor Core GPU.
+	//   scene complexity. Powered by NVIDIA T4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -373,7 +396,7 @@ type UpdateStreamGroupOutput struct {
 	//   - Tenancy: Supports up to 2 concurrent stream sessions
 	//
 	//   - gen4n_ultra (NVIDIA, ultra) Supports applications with high 3D scene
-	//   complexity. Uses dedicated NVIDIA T4 Tensor Core GPU.
+	//   complexity. Powered by NVIDIA T4 Tensor Core GPUs.
 	//
 	//   - Reference resolution: 1080p
 	//
@@ -391,9 +414,6 @@ type UpdateStreamGroupOutput struct {
 }
 
 func (c *Client) addOperationUpdateStreamGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStreamGroup{}, middleware.After)
 	if err != nil {
 		return err
@@ -402,65 +422,20 @@ func (c *Client) addOperationUpdateStreamGroupMiddlewares(stack *middleware.Stac
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateStreamGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateStreamGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStreamGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -475,22 +450,8 @@ func (c *Client) addOperationUpdateStreamGroupMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateStreamGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateStreamGroup",
-	}
 }

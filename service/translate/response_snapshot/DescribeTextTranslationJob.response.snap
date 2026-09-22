@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSShineFrontendService_20170701.DescribeTextTranslationJob
+
+{"TextTranslationJobProperties":{"DataAccessRoleArn":"__DataAccessRoleArn__","EndTime":946684800,"InputDataConfig":{"ContentType":"__ContentType__","S3Uri":"__S3Uri__"},"JobDetails":{"DocumentsWithErrorsCount":1,"InputDocumentsCount":1,"TranslatedDocumentsCount":1},"JobId":"__JobId__","JobName":"__JobName__","JobStatus":"SUBMITTED","Message":"__Message__","OutputDataConfig":{"EncryptionKey":{"Id":"__Id__","Type":"KMS"},"S3Uri":"__S3Uri__"},"ParallelDataNames":["__Member__","__Member__"],"Settings":{"Brevity":"ON","Formality":"FORMAL","Profanity":"MASK"},"SourceLanguageCode":"__SourceLanguageCode__","SubmittedTime":946684800,"TargetLanguageCodes":["__Member__","__Member__"],"TerminologyNames":["__Member__","__Member__"]}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationId":"__ApplicationId__","batchJobIdentifier":{"fileBatchJobIdentifier":{"fileName":"__FileName__","folderPath":"__FolderPath__"}},"endTime":946684800,"executionId":"__ExecutionId__","jobId":"__JobId__","jobName":"__JobName__","jobStepRestartMarker":{"fromProcStep":"__FromProcStep__","fromStep":"__FromStep__","skip":true,"stepCheckpoint":1,"toProcStep":"__ToProcStep__","toStep":"__ToStep__"},"jobType":"VSE","jobUser":"__JobUser__","returnCode":"__ReturnCode__","startTime":946684800,"status":"Submitting","statusReason":"__StatusReason__"}

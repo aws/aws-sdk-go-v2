@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDAXV3.CreateSubnetGroup
+
+{"SubnetGroup":{"Description":"__Description__","SubnetGroupName":"__SubnetGroupName__","Subnets":[{"SubnetAvailabilityZone":"__SubnetAvailabilityZone__","SubnetIdentifier":"__SubnetIdentifier__","SupportedNetworkTypes":["ipv4","ipv4"]},{"SubnetAvailabilityZone":"__SubnetAvailabilityZone__","SubnetIdentifier":"__SubnetIdentifier__","SupportedNetworkTypes":["ipv4","ipv4"]}],"SupportedNetworkTypes":["ipv4","ipv4"],"VpcId":"__VpcId__"}}

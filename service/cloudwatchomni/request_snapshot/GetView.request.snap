@@ -1,0 +1,7 @@
+POST /service/CloudWatchOmniFrontend/operation/GetView
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿dnameh__Name__ÿ

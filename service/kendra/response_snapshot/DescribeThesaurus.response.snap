@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.DescribeThesaurus
+
+{"CreatedAt":946684800,"Description":"__Description__","ErrorMessage":"__ErrorMessage__","FileSizeBytes":1,"Id":"__Id__","IndexId":"__IndexId__","Name":"__Name__","RoleArn":"__RoleArn__","SourceS3Path":{"Bucket":"__Bucket__","Key":"__Key__"},"Status":"CREATING","SynonymRuleCount":1,"TermCount":1,"UpdatedAt":946684800}

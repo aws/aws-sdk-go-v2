@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.ConnectDirectory
+
+{"ConnectSettings":{"CustomerDnsIps":["__Member__","__Member__"],"CustomerDnsIpsV6":["__Member__","__Member__"],"CustomerUserName":"__CustomerUserName__","SubnetIds":["__Member__","__Member__"],"VpcId":"__VpcId__"},"Description":"__Description__","Name":"__Name__","NetworkType":"Dual-stack","Password":"__Password__","ShortName":"__ShortName__","Size":"Small","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

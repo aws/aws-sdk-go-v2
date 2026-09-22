@@ -4,11 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Provides details about a batch of security controls for the current Amazon Web
@@ -41,6 +40,16 @@ type BatchGetSecurityControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSecurityControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSecurityControlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSecurityControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.BatchGetSecurityControlsRequest_SecurityControlIds, v.SecurityControlIds)
+}
+
 type BatchGetSecurityControlsOutput struct {
 
 	//  An array that returns the identifier, Amazon Resource Name (ARN), and other
@@ -60,77 +69,48 @@ type BatchGetSecurityControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetSecurityControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetSecurityControlsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetSecurityControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityControls(s, schemas.BatchGetSecurityControlsResponse_SecurityControls, v.SecurityControls)
+	serializeUnprocessedSecurityControls(s, schemas.BatchGetSecurityControlsResponse_UnprocessedIds, v.UnprocessedIds)
+}
+func (v *BatchGetSecurityControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetSecurityControlsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetSecurityControlsResponse_SecurityControls:
+			return deserializeSecurityControls(d, schemas.BatchGetSecurityControlsResponse_SecurityControls, &v.SecurityControls)
+		case schemas.BatchGetSecurityControlsResponse_UnprocessedIds:
+			return deserializeUnprocessedSecurityControls(d, schemas.BatchGetSecurityControlsResponse_UnprocessedIds, &v.UnprocessedIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetSecurityControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSecurityControls, schemas.BatchGetSecurityControlsRequest, schemas.BatchGetSecurityControlsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetSecurityControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetSecurityControls, schemas.BatchGetSecurityControlsRequest, schemas.BatchGetSecurityControlsResponse), output: &BatchGetSecurityControlsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetSecurityControls{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetSecurityControls"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetSecurityControlsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetSecurityControls(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +125,8 @@ func (c *Client) addOperationBatchGetSecurityControlsMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetSecurityControls(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetSecurityControls",
-	}
 }

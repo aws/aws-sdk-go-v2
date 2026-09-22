@@ -4,11 +4,10 @@ package xray
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the encryption configuration for X-Ray data.
@@ -53,6 +52,21 @@ type PutEncryptionConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEncryptionConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEncryptionConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEncryptionConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.PutEncryptionConfigRequest_KeyId, *v.KeyId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PutEncryptionConfigRequest_Type, string(v.Type))
+	}
+}
+
 type PutEncryptionConfigOutput struct {
 
 	// The new encryption configuration.
@@ -64,77 +78,50 @@ type PutEncryptionConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEncryptionConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEncryptionConfigResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEncryptionConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionConfig != nil {
+		s.WriteStruct(schemas.PutEncryptionConfigResult_EncryptionConfig)
+		v.EncryptionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutEncryptionConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEncryptionConfigResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEncryptionConfigResult_EncryptionConfig:
+			v.EncryptionConfig = &types.EncryptionConfig{}
+			return v.EncryptionConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEncryptionConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEncryptionConfig, schemas.PutEncryptionConfigRequest, schemas.PutEncryptionConfigResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEncryptionConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEncryptionConfig, schemas.PutEncryptionConfigRequest, schemas.PutEncryptionConfigResult), output: &PutEncryptionConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEncryptionConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutEncryptionConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutEncryptionConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutEncryptionConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +136,8 @@ func (c *Client) addOperationPutEncryptionConfigMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutEncryptionConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutEncryptionConfig",
-	}
 }

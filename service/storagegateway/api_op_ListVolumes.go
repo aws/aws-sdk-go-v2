@@ -5,10 +5,10 @@ package storagegateway
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the iSCSI stored volumes of a gateway. Results are sorted by volume ARN.
@@ -60,6 +60,24 @@ type ListVolumesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVolumesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVolumesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVolumesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ListVolumesInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListVolumesInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListVolumesInput_Marker, *v.Marker)
+	}
+}
+
 // A JSON object containing the following fields:
 //
 // # ListVolumesOutput$Marker
@@ -86,74 +104,54 @@ type ListVolumesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVolumesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVolumesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVolumesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.ListVolumesOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListVolumesOutput_Marker, *v.Marker)
+	}
+	serializeVolumeInfos(s, schemas.ListVolumesOutput_VolumeInfos, v.VolumeInfos)
+}
+func (v *ListVolumesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVolumesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVolumesOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.ListVolumesOutput_GatewayARN, v.GatewayARN)
+		case schemas.ListVolumesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListVolumesOutput_Marker, v.Marker)
+		case schemas.ListVolumesOutput_VolumeInfos:
+			return deserializeVolumeInfos(d, schemas.ListVolumesOutput_VolumeInfos, &v.VolumeInfos)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVolumes, schemas.ListVolumesInput, schemas.ListVolumesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListVolumes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVolumes, schemas.ListVolumesInput, schemas.ListVolumesOutput), output: &ListVolumesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListVolumes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVolumes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVolumes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,12 +164,6 @@ func (c *Client) addOperationListVolumesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +264,3 @@ type ListVolumesAPIClient interface {
 }
 
 var _ ListVolumesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListVolumes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListVolumes",
-	}
-}

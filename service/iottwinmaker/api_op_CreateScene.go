@@ -5,7 +5,8 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -59,6 +60,55 @@ type CreateSceneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSceneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSceneRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSceneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSceneCapabilities(s, schemas.CreateSceneRequest_capabilities, v.Capabilities)
+	if v.ContentLocation != nil {
+		s.WriteString(schemas.CreateSceneRequest_contentLocation, *v.ContentLocation)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSceneRequest_description, *v.Description)
+	}
+	if v.SceneId != nil {
+		s.WriteString(schemas.CreateSceneRequest_sceneId, *v.SceneId)
+	}
+	serializeSceneMetadataMap(s, schemas.CreateSceneRequest_sceneMetadata, v.SceneMetadata)
+	serializeTagMap(s, schemas.CreateSceneRequest_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateSceneRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateSceneInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSceneRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSceneRequest_capabilities:
+			return deserializeSceneCapabilities(d, schemas.CreateSceneRequest_capabilities, &v.Capabilities)
+		case schemas.CreateSceneRequest_contentLocation:
+			v.ContentLocation = new(string)
+			return d.ReadString(schemas.CreateSceneRequest_contentLocation, v.ContentLocation)
+		case schemas.CreateSceneRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSceneRequest_description, v.Description)
+		case schemas.CreateSceneRequest_sceneId:
+			v.SceneId = new(string)
+			return d.ReadString(schemas.CreateSceneRequest_sceneId, v.SceneId)
+		case schemas.CreateSceneRequest_sceneMetadata:
+			return deserializeSceneMetadataMap(d, schemas.CreateSceneRequest_sceneMetadata, &v.SceneMetadata)
+		case schemas.CreateSceneRequest_tags:
+			return deserializeTagMap(d, schemas.CreateSceneRequest_tags, &v.Tags)
+		case schemas.CreateSceneRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateSceneRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type CreateSceneOutput struct {
 
 	// The ARN of the scene.
@@ -77,65 +127,48 @@ type CreateSceneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSceneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSceneResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSceneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateSceneResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateSceneResponse_creationDateTime, *v.CreationDateTime)
+	}
+}
+func (v *CreateSceneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSceneResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSceneResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateSceneResponse_arn, v.Arn)
+		case schemas.CreateSceneResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateSceneResponse_creationDateTime, v.CreationDateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSceneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScene, schemas.CreateSceneRequest, schemas.CreateSceneResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateScene{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScene, schemas.CreateSceneRequest, schemas.CreateSceneResponse), output: &CreateSceneOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateScene{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateScene"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -145,12 +178,6 @@ func (c *Client) addOperationCreateSceneMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateSceneValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScene(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +190,6 @@ func (c *Client) addOperationCreateSceneMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -202,12 +223,4 @@ func (m *endpointPrefix_opCreateSceneMiddleware) HandleFinalize(ctx context.Cont
 }
 func addEndpointPrefix_opCreateSceneMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCreateSceneMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCreateScene(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateScene",
-	}
 }

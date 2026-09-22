@@ -1,0 +1,5 @@
+POST /2023-10-12/batch-get-worker
+
+Content-Type: application/json
+
+{"identifiers":[{"farmId":"__FarmId__","fleetId":"__FleetId__","workerId":"__WorkerId__"},{"farmId":"__FarmId__","fleetId":"__FleetId__","workerId":"__WorkerId__"}]}

@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about one or more Amazon Lightsail SSL/TLS certificates.
@@ -64,6 +63,25 @@ type GetCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateName != nil {
+		s.WriteString(schemas.GetCertificatesRequest_certificateName, *v.CertificateName)
+	}
+	serializeCertificateStatusList(s, schemas.GetCertificatesRequest_certificateStatuses, v.CertificateStatuses)
+	if v.IncludeCertificateDetails != false {
+		s.WriteBool(schemas.GetCertificatesRequest_includeCertificateDetails, v.IncludeCertificateDetails)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.GetCertificatesRequest_pageToken, *v.PageToken)
+	}
+}
+
 type GetCertificatesOutput struct {
 
 	// An object that describes certificates.
@@ -81,74 +99,48 @@ type GetCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCertificatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCertificatesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCertificatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateSummaryList(s, schemas.GetCertificatesResult_certificates, v.Certificates)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetCertificatesResult_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCertificatesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCertificatesResult_certificates:
+			return deserializeCertificateSummaryList(d, schemas.GetCertificatesResult_certificates, &v.Certificates)
+		case schemas.GetCertificatesResult_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetCertificatesResult_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificates, schemas.GetCertificatesRequest, schemas.GetCertificatesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCertificates, schemas.GetCertificatesRequest, schemas.GetCertificatesResult), output: &GetCertificatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCertificates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCertificates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCertificates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +155,8 @@ func (c *Client) addOperationGetCertificatesMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCertificates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCertificates",
-	}
 }

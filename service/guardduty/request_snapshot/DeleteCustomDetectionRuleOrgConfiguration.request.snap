@@ -1,0 +1,3 @@
+DELETE /custom-detection-rule/org-configuration/__RuleId__?mode=LIVE
+
+

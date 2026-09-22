@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.UpdateArchive
+
+{"ArchiveName":"__ArchiveName__","Description":"__Description__","EventPattern":"__EventPattern__","KmsKeyIdentifier":"__KmsKeyIdentifier__","RetentionDays":1}

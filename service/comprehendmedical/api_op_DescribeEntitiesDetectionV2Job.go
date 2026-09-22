@@ -4,11 +4,10 @@ package comprehendmedical
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the properties associated with a medical entities detection job. Use this
@@ -39,6 +38,18 @@ type DescribeEntitiesDetectionV2JobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntitiesDetectionV2JobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntitiesDetectionV2JobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntitiesDetectionV2JobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeEntitiesDetectionV2JobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeEntitiesDetectionV2JobOutput struct {
 
 	// An object that contains the properties associated with a detection job.
@@ -50,65 +61,44 @@ type DescribeEntitiesDetectionV2JobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntitiesDetectionV2JobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntitiesDetectionV2JobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntitiesDetectionV2JobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComprehendMedicalAsyncJobProperties != nil {
+		s.WriteStruct(schemas.DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties)
+		v.ComprehendMedicalAsyncJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeEntitiesDetectionV2JobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEntitiesDetectionV2JobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties:
+			v.ComprehendMedicalAsyncJobProperties = &types.ComprehendMedicalAsyncJobProperties{}
+			return v.ComprehendMedicalAsyncJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntitiesDetectionV2Job, schemas.DescribeEntitiesDetectionV2JobRequest, schemas.DescribeEntitiesDetectionV2JobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeEntitiesDetectionV2Job{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntitiesDetectionV2Job, schemas.DescribeEntitiesDetectionV2JobRequest, schemas.DescribeEntitiesDetectionV2JobResponse), output: &DescribeEntitiesDetectionV2JobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeEntitiesDetectionV2Job{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEntitiesDetectionV2Job"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -118,12 +108,6 @@ func (c *Client) addOperationDescribeEntitiesDetectionV2JobMiddlewares(stack *mi
 		return err
 	}
 	if err = addOpDescribeEntitiesDetectionV2JobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEntitiesDetectionV2Job(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +122,8 @@ func (c *Client) addOperationDescribeEntitiesDetectionV2JobMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeEntitiesDetectionV2Job(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeEntitiesDetectionV2Job",
-	}
 }

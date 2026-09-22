@@ -4,11 +4,10 @@ package globalaccelerator
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Releases the specified address range that you provisioned to use with your
@@ -53,6 +52,18 @@ type DeprovisionByoipCidrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprovisionByoipCidrInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprovisionByoipCidrRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprovisionByoipCidrInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidr != nil {
+		s.WriteString(schemas.DeprovisionByoipCidrRequest_Cidr, *v.Cidr)
+	}
+}
+
 type DeprovisionByoipCidrOutput struct {
 
 	// Information about the address range.
@@ -64,77 +75,50 @@ type DeprovisionByoipCidrOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeprovisionByoipCidrOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeprovisionByoipCidrResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeprovisionByoipCidrOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByoipCidr != nil {
+		s.WriteStruct(schemas.DeprovisionByoipCidrResponse_ByoipCidr)
+		v.ByoipCidr.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeprovisionByoipCidrOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeprovisionByoipCidrResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeprovisionByoipCidrResponse_ByoipCidr:
+			v.ByoipCidr = &types.ByoipCidr{}
+			return v.ByoipCidr.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeprovisionByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprovisionByoipCidr, schemas.DeprovisionByoipCidrRequest, schemas.DeprovisionByoipCidrResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeprovisionByoipCidr{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeprovisionByoipCidr, schemas.DeprovisionByoipCidrRequest, schemas.DeprovisionByoipCidrResponse), output: &DeprovisionByoipCidrOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeprovisionByoipCidr{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeprovisionByoipCidr"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeprovisionByoipCidrValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeprovisionByoipCidr(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +133,8 @@ func (c *Client) addOperationDeprovisionByoipCidrMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeprovisionByoipCidr(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeprovisionByoipCidr",
-	}
 }

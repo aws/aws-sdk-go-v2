@@ -1,0 +1,5 @@
+POST /v2LoggingOptions
+
+Content-Type: application/json
+
+{"defaultLogLevel":"DEBUG","disableAllLogs":true,"eventConfigurations":[{"eventType":"__EventType__","logDestination":"__LogDestination__","logLevel":"DEBUG"},{"eventType":"__EventType__","logDestination":"__LogDestination__","logLevel":"DEBUG"}],"roleArn":"__RoleArn__"}

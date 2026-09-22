@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"meshes":[{"arn":"__Arn__","createdAt":946684800,"lastUpdatedAt":946684800,"meshName":"__MeshName__","meshOwner":"__MeshOwner__","resourceOwner":"__ResourceOwner__","version":1},{"arn":"__Arn__","createdAt":946684800,"lastUpdatedAt":946684800,"meshName":"__MeshName__","meshOwner":"__MeshOwner__","resourceOwner":"__ResourceOwner__","version":1}],"nextToken":"__NextToken__"}

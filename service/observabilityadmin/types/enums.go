@@ -50,6 +50,27 @@ func (CentralizationFailureReason) Values() []CentralizationFailureReason {
 	}
 }
 
+type ContextGraphStatus string
+
+// Enum values for ContextGraphStatus
+const (
+	ContextGraphStatusHealthy      ContextGraphStatus = "Healthy"
+	ContextGraphStatusUnhealthy    ContextGraphStatus = "Unhealthy"
+	ContextGraphStatusProvisioning ContextGraphStatus = "Provisioning"
+)
+
+// Values returns all known values for ContextGraphStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContextGraphStatus) Values() []ContextGraphStatus {
+	return []ContextGraphStatus{
+		"Healthy",
+		"Unhealthy",
+		"Provisioning",
+	}
+}
+
 type DestinationType string
 
 // Enum values for DestinationType
@@ -103,6 +124,30 @@ func (EncryptionConflictResolutionStrategy) Values() []EncryptionConflictResolut
 	return []EncryptionConflictResolutionStrategy{
 		"ALLOW",
 		"SKIP",
+	}
+}
+
+type EncryptionScope string
+
+// Enum values for EncryptionScope
+const (
+	// Only destination log groups whose source log group is encrypted with a customer
+	// managed KMS key use the configured KmsKeyArn . This is the default behavior.
+	EncryptionScopeEncryptedSourceOnly EncryptionScope = "ENCRYPTED_SOURCE_ONLY"
+	// Every new destination log group created by this rule uses the configured
+	// KmsKeyArn , regardless of whether the source log group is encrypted with a
+	// customer managed key or Amazon Web Services owned encryption.
+	EncryptionScopeNewDestinationLogGroups EncryptionScope = "NEW_DESTINATION_LOG_GROUPS"
+)
+
+// Values returns all known values for EncryptionScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionScope) Values() []EncryptionScope {
+	return []EncryptionScope{
+		"ENCRYPTED_SOURCE_ONLY",
+		"NEW_DESTINATION_LOG_GROUPS",
 	}
 }
 
@@ -191,6 +236,10 @@ const (
 	LogTypeSecurityFinding LogType = "SECURITY_FINDING_LOGS"
 	LogTypeAccess          LogType = "ACCESS_LOGS"
 	LogTypeConnection      LogType = "CONNECTION_LOGS"
+	LogTypeS3ServerAccess  LogType = "S3_SERVER_ACCESS_LOGS"
+	LogTypeAlbAccess       LogType = "ALB_ACCESS_LOGS"
+	LogTypeAlbConnection   LogType = "ALB_CONNECTION_LOGS"
+	LogTypeAlbHealthCheck  LogType = "ALB_HEALTH_CHECK_LOGS"
 )
 
 // Values returns all known values for LogType. Note that this can be expanded in
@@ -204,6 +253,10 @@ func (LogType) Values() []LogType {
 		"SECURITY_FINDING_LOGS",
 		"ACCESS_LOGS",
 		"CONNECTION_LOGS",
+		"S3_SERVER_ACCESS_LOGS",
+		"ALB_ACCESS_LOGS",
+		"ALB_CONNECTION_LOGS",
+		"ALB_HEALTH_CHECK_LOGS",
 	}
 }
 
@@ -291,6 +344,8 @@ const (
 	ResourceTypeAwsSecurityHubHubv2                 ResourceType = "AWS::SecurityHub::HubV2"
 	ResourceTypeAwsOtelEnrichment                   ResourceType = "AWS::CloudWatch::OTelEnrichment"
 	ResourceTypeAwsMskCluster                       ResourceType = "AWS::MSK::Cluster"
+	ResourceTypeAwsS3Bucket                         ResourceType = "AWS::S3::Bucket"
+	ResourceTypeAwsBedrockKnowledgebase             ResourceType = "AWS::Bedrock::KnowledgeBase"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -318,6 +373,8 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::SecurityHub::HubV2",
 		"AWS::CloudWatch::OTelEnrichment",
 		"AWS::MSK::Cluster",
+		"AWS::S3::Bucket",
+		"AWS::Bedrock::KnowledgeBase",
 	}
 }
 
@@ -339,6 +396,27 @@ func (RuleHealth) Values() []RuleHealth {
 		"Healthy",
 		"Unhealthy",
 		"Provisioning",
+	}
+}
+
+type SignalType string
+
+// Enum values for SignalType
+const (
+	// Log signal type. The pipeline processes log records.
+	SignalTypeLog SignalType = "LOG"
+	// Metric signal type. The pipeline processes metric records.
+	SignalTypeMetric SignalType = "METRIC"
+)
+
+// Values returns all known values for SignalType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SignalType) Values() []SignalType {
+	return []SignalType{
+		"LOG",
+		"METRIC",
 	}
 }
 
@@ -387,6 +465,66 @@ func (Status) Values() []Status {
 		"STOPPING",
 		"FAILED_STOP",
 		"STOPPED",
+	}
+}
+
+type TagConflictResolutionStrategy string
+
+// Enum values for TagConflictResolutionStrategy
+const (
+	TagConflictResolutionStrategyInSync     TagConflictResolutionStrategy = "IN_SYNC"
+	TagConflictResolutionStrategyAddOnly    TagConflictResolutionStrategy = "ADD_ONLY"
+	TagConflictResolutionStrategyUpdateSync TagConflictResolutionStrategy = "UPDATE_SYNC"
+)
+
+// Values returns all known values for TagConflictResolutionStrategy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagConflictResolutionStrategy) Values() []TagConflictResolutionStrategy {
+	return []TagConflictResolutionStrategy{
+		"IN_SYNC",
+		"ADD_ONLY",
+		"UPDATE_SYNC",
+	}
+}
+
+type TagPropagationFailureReason string
+
+// Enum values for TagPropagationFailureReason
+const (
+	TagPropagationFailureReasonRoleNotAssumable     TagPropagationFailureReason = "RoleNotAssumable"
+	TagPropagationFailureReasonRoleLacksPermissions TagPropagationFailureReason = "RoleLacksPermissions"
+)
+
+// Values returns all known values for TagPropagationFailureReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagPropagationFailureReason) Values() []TagPropagationFailureReason {
+	return []TagPropagationFailureReason{
+		"RoleNotAssumable",
+		"RoleLacksPermissions",
+	}
+}
+
+type TagPropagationStatus string
+
+// Enum values for TagPropagationStatus
+const (
+	TagPropagationStatusHealthy   TagPropagationStatus = "Healthy"
+	TagPropagationStatusUnhealthy TagPropagationStatus = "Unhealthy"
+)
+
+// Values returns all known values for TagPropagationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TagPropagationStatus) Values() []TagPropagationStatus {
+	return []TagPropagationStatus{
+		"Healthy",
+		"Unhealthy",
 	}
 }
 

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.CreateRelationship
+
+{"associatedAccountId":"__AssociatedAccountId__","associationType":"DOWNSTREAM_SELLER","catalog":"__Catalog__","clientToken":"__ClientToken__","displayName":"__DisplayName__","programManagementAccountIdentifier":"__ProgramManagementAccountIdentifier__","requestedSupportPlan":{"resoldEnterprise":{"chargeAccountId":"__ChargeAccountId__","coverage":"ENTIRE_ORGANIZATION","tamLocation":"__TamLocation__"}},"resaleAccountModel":"DISTRIBUTOR","sector":"COMMERCIAL","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

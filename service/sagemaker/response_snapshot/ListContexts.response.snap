@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListContexts
+
+{"ContextSummaries":[{"ContextArn":"__ContextArn__","ContextName":"__ContextName__","ContextType":"__ContextType__","CreationTime":946684800,"LastModifiedTime":946684800,"Source":{"SourceId":"__SourceId__","SourceType":"__SourceType__","SourceUri":"__SourceUri__"}},{"ContextArn":"__ContextArn__","ContextName":"__ContextName__","ContextType":"__ContextType__","CreationTime":946684800,"LastModifiedTime":946684800,"Source":{"SourceId":"__SourceId__","SourceType":"__SourceType__","SourceUri":"__SourceUri__"}}],"NextToken":"__NextToken__"}

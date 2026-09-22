@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.ListGiMinorVersions
+
+{"availabilityZone":"__AvailabilityZone__","availabilityZoneId":"__AvailabilityZoneId__","giVersion":"__GiVersion__","maxResults":1,"nextToken":"__NextToken__","shapeFamily":"__ShapeFamily__"}

@@ -4,10 +4,9 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Moves or renames a file or directory on the remote SFTP server.
@@ -47,6 +46,24 @@ type StartRemoteMoveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemoteMoveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemoteMoveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemoteMoveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.StartRemoteMoveRequest_ConnectorId, *v.ConnectorId)
+	}
+	if v.SourcePath != nil {
+		s.WriteString(schemas.StartRemoteMoveRequest_SourcePath, *v.SourcePath)
+	}
+	if v.TargetPath != nil {
+		s.WriteString(schemas.StartRemoteMoveRequest_TargetPath, *v.TargetPath)
+	}
+}
+
 type StartRemoteMoveOutput struct {
 
 	// Returns a unique identifier for the move/rename operation.
@@ -60,77 +77,48 @@ type StartRemoteMoveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRemoteMoveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRemoteMoveResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRemoteMoveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MoveId != nil {
+		s.WriteString(schemas.StartRemoteMoveResponse_MoveId, *v.MoveId)
+	}
+}
+func (v *StartRemoteMoveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRemoteMoveResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRemoteMoveResponse_MoveId:
+			v.MoveId = new(string)
+			return d.ReadString(schemas.StartRemoteMoveResponse_MoveId, v.MoveId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRemoteMoveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemoteMove, schemas.StartRemoteMoveRequest, schemas.StartRemoteMoveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartRemoteMove{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRemoteMove, schemas.StartRemoteMoveRequest, schemas.StartRemoteMoveResponse), output: &StartRemoteMoveOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartRemoteMove{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartRemoteMove"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartRemoteMoveValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartRemoteMove(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +133,8 @@ func (c *Client) addOperationStartRemoteMoveMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartRemoteMove(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartRemoteMove",
-	}
 }

@@ -4,11 +4,10 @@ package backup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -76,6 +75,9 @@ type StartScanJobInput struct {
 	// This member is required.
 	ScannerRoleArn *string
 
+	// The point in time the scan job will scan up to for a continuous backup.
+	ContinuousScanEndTime *time.Time
+
 	// A customer-chosen string that you can use to distinguish between otherwise
 	// identical calls to StartScanJob . Retrying a successful request with the same
 	// idempotency token results in a success message with no action taken.
@@ -86,6 +88,42 @@ type StartScanJobInput struct {
 	ScanBaseRecoveryPointArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartScanJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartScanJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartScanJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.StartScanJobInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.ContinuousScanEndTime != nil {
+		s.WriteTime(schemas.StartScanJobInput_ContinuousScanEndTime, *v.ContinuousScanEndTime)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.StartScanJobInput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.StartScanJobInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.StartScanJobInput_MalwareScanner, string(v.MalwareScanner))
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.StartScanJobInput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.ScanBaseRecoveryPointArn != nil {
+		s.WriteString(schemas.StartScanJobInput_ScanBaseRecoveryPointArn, *v.ScanBaseRecoveryPointArn)
+	}
+	if v.ScanMode != "" {
+		s.WriteString(schemas.StartScanJobInput_ScanMode, string(v.ScanMode))
+	}
+	if v.ScannerRoleArn != nil {
+		s.WriteString(schemas.StartScanJobInput_ScannerRoleArn, *v.ScannerRoleArn)
+	}
 }
 
 type StartScanJobOutput struct {
@@ -109,77 +147,54 @@ type StartScanJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartScanJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartScanJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartScanJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.StartScanJobOutput_CreationDate, *v.CreationDate)
+	}
+	if v.ScanJobId != nil {
+		s.WriteString(schemas.StartScanJobOutput_ScanJobId, *v.ScanJobId)
+	}
+}
+func (v *StartScanJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartScanJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartScanJobOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.StartScanJobOutput_CreationDate, v.CreationDate)
+		case schemas.StartScanJobOutput_ScanJobId:
+			v.ScanJobId = new(string)
+			return d.ReadString(schemas.StartScanJobOutput_ScanJobId, v.ScanJobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartScanJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartScanJob, schemas.StartScanJobInput, schemas.StartScanJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartScanJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartScanJob, schemas.StartScanJobInput, schemas.StartScanJobOutput), output: &StartScanJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartScanJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartScanJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartScanJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartScanJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +209,8 @@ func (c *Client) addOperationStartScanJobMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartScanJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartScanJob",
-	}
 }

@@ -5,10 +5,10 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the input sources of the Resilience Hub application. For more
@@ -56,6 +56,46 @@ type ListAppInputSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInputSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppInputSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppInputSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.ListAppInputSourcesRequest_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.ListAppInputSourcesRequest_appVersion, *v.AppVersion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppInputSourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppInputSourcesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppInputSourcesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppInputSourcesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppInputSourcesRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.ListAppInputSourcesRequest_appArn, v.AppArn)
+		case schemas.ListAppInputSourcesRequest_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.ListAppInputSourcesRequest_appVersion, v.AppVersion)
+		case schemas.ListAppInputSourcesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAppInputSourcesRequest_maxResults, v.MaxResults)
+		case schemas.ListAppInputSourcesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppInputSourcesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAppInputSourcesOutput struct {
 
 	// The list of Resilience Hub application input sources.
@@ -72,77 +112,51 @@ type ListAppInputSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInputSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppInputSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppInputSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppInputSourceList(s, schemas.ListAppInputSourcesResponse_appInputSources, v.AppInputSources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppInputSourcesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAppInputSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppInputSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppInputSourcesResponse_appInputSources:
+			return deserializeAppInputSourceList(d, schemas.ListAppInputSourcesResponse_appInputSources, &v.AppInputSources)
+		case schemas.ListAppInputSourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppInputSourcesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppInputSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInputSources, schemas.ListAppInputSourcesRequest, schemas.ListAppInputSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppInputSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInputSources, schemas.ListAppInputSourcesRequest, schemas.ListAppInputSourcesResponse), output: &ListAppInputSourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppInputSources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppInputSources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAppInputSourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAppInputSources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +169,6 @@ func (c *Client) addOperationListAppInputSourcesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +270,3 @@ type ListAppInputSourcesAPIClient interface {
 }
 
 var _ ListAppInputSourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAppInputSources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAppInputSources",
-	}
-}

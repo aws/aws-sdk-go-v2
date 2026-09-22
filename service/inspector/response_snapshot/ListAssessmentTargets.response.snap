@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.ListAssessmentTargets
+
+{"assessmentTargetArns":["__Member__","__Member__"],"nextToken":"__NextToken__"}

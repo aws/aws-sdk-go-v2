@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get details about a Network.
@@ -36,6 +35,18 @@ type DescribeNetworkInput struct {
 	NetworkId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.DescribeNetworkRequest_NetworkId, *v.NetworkId)
+	}
 }
 
 // Placeholder documentation for DescribeNetworkResponse
@@ -75,77 +86,79 @@ type DescribeNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeNetworkResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.DescribeNetworkResponse_AssociatedClusterIds, v.AssociatedClusterIds)
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeNetworkResponse_Id, *v.Id)
+	}
+	serialize__listOfIpPool(s, schemas.DescribeNetworkResponse_IpPools, v.IpPools)
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeNetworkResponse_Name, *v.Name)
+	}
+	serialize__listOfRoute(s, schemas.DescribeNetworkResponse_Routes, v.Routes)
+	if v.State != "" {
+		s.WriteString(schemas.DescribeNetworkResponse_State, string(v.State))
+	}
+}
+func (v *DescribeNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNetworkResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeNetworkResponse_Arn, v.Arn)
+		case schemas.DescribeNetworkResponse_AssociatedClusterIds:
+			return deserialize__listOf__string(d, schemas.DescribeNetworkResponse_AssociatedClusterIds, &v.AssociatedClusterIds)
+		case schemas.DescribeNetworkResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeNetworkResponse_Id, v.Id)
+		case schemas.DescribeNetworkResponse_IpPools:
+			return deserialize__listOfIpPool(d, schemas.DescribeNetworkResponse_IpPools, &v.IpPools)
+		case schemas.DescribeNetworkResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeNetworkResponse_Name, v.Name)
+		case schemas.DescribeNetworkResponse_Routes:
+			return deserialize__listOfRoute(d, schemas.DescribeNetworkResponse_Routes, &v.Routes)
+		case schemas.DescribeNetworkResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeNetworkResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NetworkState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNetwork, schemas.DescribeNetworkRequest, schemas.DescribeNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNetwork, schemas.DescribeNetworkRequest, schemas.DescribeNetworkResponse), output: &DescribeNetworkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeNetwork{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeNetwork"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeNetworkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeNetwork(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +173,8 @@ func (c *Client) addOperationDescribeNetworkMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeNetwork(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeNetwork",
-	}
 }

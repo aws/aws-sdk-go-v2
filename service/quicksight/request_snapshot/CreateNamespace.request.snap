@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__
+
+Content-Type: application/json
+
+{"IdentityStore":"QUICKSIGHT","Namespace":"__Namespace__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

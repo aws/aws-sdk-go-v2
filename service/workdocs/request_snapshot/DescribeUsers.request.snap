@@ -1,0 +1,4 @@
+GET /api/v1/users?fields=__Fields__&include=ALL&limit=1&marker=__Marker__&order=ASCENDING&organizationId=__OrganizationId__&query=__Query__&sort=USER_NAME&userIds=__UserIds__
+
+Authentication: __AuthenticationToken__
+

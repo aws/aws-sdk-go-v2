@@ -4,11 +4,10 @@ package b2bi
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Maps the input file according to the provided template file. The API call
@@ -57,6 +56,24 @@ type TestMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileFormat != "" {
+		s.WriteString(schemas.TestMappingRequest_fileFormat, string(v.FileFormat))
+	}
+	if v.InputFileContent != nil {
+		s.WriteString(schemas.TestMappingRequest_inputFileContent, *v.InputFileContent)
+	}
+	if v.MappingTemplate != nil {
+		s.WriteString(schemas.TestMappingRequest_mappingTemplate, *v.MappingTemplate)
+	}
+}
+
 type TestMappingOutput struct {
 
 	// Returns a string for the mapping that can be used to identify the mapping.
@@ -71,77 +88,48 @@ type TestMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestMappingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestMappingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestMappingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MappedFileContent != nil {
+		s.WriteString(schemas.TestMappingResponse_mappedFileContent, *v.MappedFileContent)
+	}
+}
+func (v *TestMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestMappingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestMappingResponse_mappedFileContent:
+			v.MappedFileContent = new(string)
+			return d.ReadString(schemas.TestMappingResponse_mappedFileContent, v.MappedFileContent)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestMapping, schemas.TestMappingRequest, schemas.TestMappingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpTestMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestMapping, schemas.TestMappingRequest, schemas.TestMappingResponse), output: &TestMappingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpTestMapping{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestMapping"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTestMappingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestMapping(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +144,8 @@ func (c *Client) addOperationTestMappingMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTestMapping(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TestMapping",
-	}
 }

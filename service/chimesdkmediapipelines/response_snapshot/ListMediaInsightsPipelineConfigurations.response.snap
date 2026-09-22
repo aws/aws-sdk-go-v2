@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MediaInsightsPipelineConfigurations":[{"MediaInsightsPipelineConfigurationArn":"__MediaInsightsPipelineConfigurationArn__","MediaInsightsPipelineConfigurationId":"__MediaInsightsPipelineConfigurationId__","MediaInsightsPipelineConfigurationName":"__MediaInsightsPipelineConfigurationName__"},{"MediaInsightsPipelineConfigurationArn":"__MediaInsightsPipelineConfigurationArn__","MediaInsightsPipelineConfigurationId":"__MediaInsightsPipelineConfigurationId__","MediaInsightsPipelineConfigurationName":"__MediaInsightsPipelineConfigurationName__"}],"NextToken":"__NextToken__"}

@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Continues or rolls back an Amazon ECS service deployment that is paused at a
@@ -22,6 +21,10 @@ import (
 // To find the hookId of the paused hook, call [DescribeServiceDeployments] and inspect the
 // lifecycleHookDetails field.
 //
+// For more information, see [Continuing Amazon ECS service deployments] in the Amazon Elastic Container Service Developer
+// Guide.
+//
+// [Continuing Amazon ECS service deployments]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/continue-service-deployment.html
 // [DescribeServiceDeployments]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServiceDeployments.html
 func (c *Client) ContinueServiceDeployment(ctx context.Context, params *ContinueServiceDeploymentInput, optFns ...func(*Options)) (*ContinueServiceDeploymentOutput, error) {
 	if params == nil {
@@ -65,6 +68,24 @@ type ContinueServiceDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinueServiceDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinueServiceDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueServiceDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ContinueServiceDeploymentRequest_action, string(v.Action))
+	}
+	if v.HookId != nil {
+		s.WriteString(schemas.ContinueServiceDeploymentRequest_hookId, *v.HookId)
+	}
+	if v.ServiceDeploymentArn != nil {
+		s.WriteString(schemas.ContinueServiceDeploymentRequest_serviceDeploymentArn, *v.ServiceDeploymentArn)
+	}
+}
+
 type ContinueServiceDeploymentOutput struct {
 
 	// The ARN of the service deployment that was continued or rolled back.
@@ -76,77 +97,48 @@ type ContinueServiceDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinueServiceDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinueServiceDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinueServiceDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceDeploymentArn != nil {
+		s.WriteString(schemas.ContinueServiceDeploymentResponse_serviceDeploymentArn, *v.ServiceDeploymentArn)
+	}
+}
+func (v *ContinueServiceDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContinueServiceDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContinueServiceDeploymentResponse_serviceDeploymentArn:
+			v.ServiceDeploymentArn = new(string)
+			return d.ReadString(schemas.ContinueServiceDeploymentResponse_serviceDeploymentArn, v.ServiceDeploymentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationContinueServiceDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContinueServiceDeployment, schemas.ContinueServiceDeploymentRequest, schemas.ContinueServiceDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpContinueServiceDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContinueServiceDeployment, schemas.ContinueServiceDeploymentRequest, schemas.ContinueServiceDeploymentResponse), output: &ContinueServiceDeploymentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpContinueServiceDeployment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ContinueServiceDeployment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpContinueServiceDeploymentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opContinueServiceDeployment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +153,8 @@ func (c *Client) addOperationContinueServiceDeploymentMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opContinueServiceDeployment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ContinueServiceDeployment",
-	}
 }

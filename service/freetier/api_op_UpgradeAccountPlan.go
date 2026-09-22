@@ -4,11 +4,10 @@ package freetier
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/freetier/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/freetier/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The account plan type for the Amazon Web Services account.
@@ -38,6 +37,18 @@ type UpgradeAccountPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeAccountPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeAccountPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeAccountPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountPlanType != "" {
+		s.WriteString(schemas.UpgradeAccountPlanRequest_accountPlanType, string(v.AccountPlanType))
+	}
+}
+
 type UpgradeAccountPlanOutput struct {
 
 	//  A unique identifier that identifies the account.
@@ -61,77 +72,68 @@ type UpgradeAccountPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpgradeAccountPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpgradeAccountPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpgradeAccountPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpgradeAccountPlanResponse_accountId, *v.AccountId)
+	}
+	if v.AccountPlanStatus != "" {
+		s.WriteString(schemas.UpgradeAccountPlanResponse_accountPlanStatus, string(v.AccountPlanStatus))
+	}
+	if v.AccountPlanType != "" {
+		s.WriteString(schemas.UpgradeAccountPlanResponse_accountPlanType, string(v.AccountPlanType))
+	}
+}
+func (v *UpgradeAccountPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpgradeAccountPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpgradeAccountPlanResponse_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.UpgradeAccountPlanResponse_accountId, v.AccountId)
+		case schemas.UpgradeAccountPlanResponse_accountPlanStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpgradeAccountPlanResponse_accountPlanStatus, &ev); err != nil {
+				return err
+			}
+			v.AccountPlanStatus = types.AccountPlanStatus(ev)
+			return nil
+		case schemas.UpgradeAccountPlanResponse_accountPlanType:
+			var ev string
+			if err := d.ReadString(schemas.UpgradeAccountPlanResponse_accountPlanType, &ev); err != nil {
+				return err
+			}
+			v.AccountPlanType = types.AccountPlanType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpgradeAccountPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeAccountPlan, schemas.UpgradeAccountPlanRequest, schemas.UpgradeAccountPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpgradeAccountPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpgradeAccountPlan, schemas.UpgradeAccountPlanRequest, schemas.UpgradeAccountPlanResponse), output: &UpgradeAccountPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpgradeAccountPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpgradeAccountPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpgradeAccountPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpgradeAccountPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +148,8 @@ func (c *Client) addOperationUpgradeAccountPlanMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpgradeAccountPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpgradeAccountPlan",
-	}
 }

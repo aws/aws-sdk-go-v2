@@ -1,0 +1,5 @@
+POST /organization/health
+
+Content-Type: application/json
+
+{"AccountIds":["__Member__","__Member__"],"OrganizationalUnitIds":["__Member__","__Member__"]}

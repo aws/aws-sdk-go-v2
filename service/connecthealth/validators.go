@@ -514,6 +514,21 @@ func validateMedicalScribeAudioEvent(v *types.MedicalScribeAudioEvent) error {
 	}
 }
 
+func validateMedicalScribeBinaryAudioEvent(v *types.MedicalScribeBinaryAudioEvent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MedicalScribeBinaryAudioEvent"}
+	if v.AudioChunk == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AudioChunk"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMedicalScribeChannelDefinition(v *types.MedicalScribeChannelDefinition) error {
 	if v == nil {
 		return nil
@@ -582,6 +597,11 @@ func validateMedicalScribeInputStream(v types.MedicalScribeInputStream) error {
 	case *types.MedicalScribeInputStreamMemberAudioEvent:
 		if err := validateMedicalScribeAudioEvent(&uv.Value); err != nil {
 			invalidParams.AddNested("[audioEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.MedicalScribeInputStreamMemberBinaryAudioEvent:
+		if err := validateMedicalScribeBinaryAudioEvent(&uv.Value); err != nil {
+			invalidParams.AddNested("[binaryAudioEvent]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.MedicalScribeInputStreamMemberConfigurationEvent:

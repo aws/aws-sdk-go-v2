@@ -5,10 +5,10 @@ package applicationinsights
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the log patterns in the specific log LogPatternSet .
@@ -50,6 +50,30 @@ type ListLogPatternsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogPatternsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogPatternsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogPatternsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListLogPatternsRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLogPatternsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogPatternsRequest_NextToken, *v.NextToken)
+	}
+	if v.PatternSetName != nil {
+		s.WriteString(schemas.ListLogPatternsRequest_PatternSetName, *v.PatternSetName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.ListLogPatternsRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+
 type ListLogPatternsOutput struct {
 
 	// The Amazon Web Services account ID for the resource group owner.
@@ -71,77 +95,66 @@ type ListLogPatternsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLogPatternsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLogPatternsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLogPatternsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListLogPatternsResponse_AccountId, *v.AccountId)
+	}
+	serializeLogPatternList(s, schemas.ListLogPatternsResponse_LogPatterns, v.LogPatterns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLogPatternsResponse_NextToken, *v.NextToken)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.ListLogPatternsResponse_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+func (v *ListLogPatternsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLogPatternsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLogPatternsResponse_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ListLogPatternsResponse_AccountId, v.AccountId)
+		case schemas.ListLogPatternsResponse_LogPatterns:
+			return deserializeLogPatternList(d, schemas.ListLogPatternsResponse_LogPatterns, &v.LogPatterns)
+		case schemas.ListLogPatternsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLogPatternsResponse_NextToken, v.NextToken)
+		case schemas.ListLogPatternsResponse_ResourceGroupName:
+			v.ResourceGroupName = new(string)
+			return d.ReadString(schemas.ListLogPatternsResponse_ResourceGroupName, v.ResourceGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLogPatternsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogPatterns, schemas.ListLogPatternsRequest, schemas.ListLogPatternsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLogPatterns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLogPatterns, schemas.ListLogPatternsRequest, schemas.ListLogPatternsResponse), output: &ListLogPatternsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLogPatterns{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLogPatterns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListLogPatternsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLogPatterns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +167,6 @@ func (c *Client) addOperationListLogPatternsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +268,3 @@ type ListLogPatternsAPIClient interface {
 }
 
 var _ ListLogPatternsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLogPatterns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLogPatterns",
-	}
-}

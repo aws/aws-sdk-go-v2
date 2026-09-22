@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/DescribeEntitlements
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤dNameh__Name__iStackNamem__StackName__iNextTokenm__NextToken__jMaxResults

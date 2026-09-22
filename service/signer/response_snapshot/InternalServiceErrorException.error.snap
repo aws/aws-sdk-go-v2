@@ -1,0 +1,4 @@
+500
+Content-Type: application/json
+
+{"__type":"InternalServiceErrorException","code":"InternalServiceErrorException","message":"__Message__"}

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/querycompatiblerpcv2protocol/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -31,6 +32,27 @@ func (e *CustomCodeError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CustomCodeError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CustomCodeError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomCodeError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomCodeError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CustomCodeError_message, *v.Message)
+	}
+}
+func (v *CustomCodeError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomCodeError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomCodeError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CustomCodeError_message, v.Message)
+		}
+		return nil
+	})
+}
 
 type NoCustomCodeError struct {
 	Message *string
@@ -56,3 +78,24 @@ func (e *NoCustomCodeError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoCustomCodeError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoCustomCodeError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoCustomCodeError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoCustomCodeError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NoCustomCodeError_message, *v.Message)
+	}
+}
+func (v *NoCustomCodeError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoCustomCodeError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoCustomCodeError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoCustomCodeError_message, v.Message)
+		}
+		return nil
+	})
+}

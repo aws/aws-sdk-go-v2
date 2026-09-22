@@ -5,10 +5,10 @@ package textract
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -53,6 +53,30 @@ type ListAdapterVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdapterVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdapterVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdapterVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdapterId != nil {
+		s.WriteString(schemas.ListAdapterVersionsRequest_AdapterId, *v.AdapterId)
+	}
+	if v.AfterCreationTime != nil {
+		s.WriteTime(schemas.ListAdapterVersionsRequest_AfterCreationTime, *v.AfterCreationTime)
+	}
+	if v.BeforeCreationTime != nil {
+		s.WriteTime(schemas.ListAdapterVersionsRequest_BeforeCreationTime, *v.BeforeCreationTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdapterVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdapterVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAdapterVersionsOutput struct {
 
 	// Adapter versions that match the filtering criteria specified when calling
@@ -68,74 +92,48 @@ type ListAdapterVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdapterVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdapterVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdapterVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdapterVersionList(s, schemas.ListAdapterVersionsResponse_AdapterVersions, v.AdapterVersions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdapterVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAdapterVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdapterVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdapterVersionsResponse_AdapterVersions:
+			return deserializeAdapterVersionList(d, schemas.ListAdapterVersionsResponse_AdapterVersions, &v.AdapterVersions)
+		case schemas.ListAdapterVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdapterVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdapterVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdapterVersions, schemas.ListAdapterVersionsRequest, schemas.ListAdapterVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAdapterVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdapterVersions, schemas.ListAdapterVersionsRequest, schemas.ListAdapterVersionsResponse), output: &ListAdapterVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAdapterVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAdapterVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAdapterVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +146,6 @@ func (c *Client) addOperationListAdapterVersionsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,11 +247,3 @@ type ListAdapterVersionsAPIClient interface {
 }
 
 var _ ListAdapterVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAdapterVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAdapterVersions",
-	}
-}

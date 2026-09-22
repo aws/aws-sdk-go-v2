@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -32,6 +34,48 @@ type HomeRegionControl struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HomeRegionControl) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HomeRegionControl)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HomeRegionControl) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlId != nil {
+		s.WriteString(schemas.HomeRegionControl_ControlId, *v.ControlId)
+	}
+	if v.HomeRegion != nil {
+		s.WriteString(schemas.HomeRegionControl_HomeRegion, *v.HomeRegion)
+	}
+	if v.RequestedTime != nil {
+		s.WriteTime(schemas.HomeRegionControl_RequestedTime, *v.RequestedTime)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.HomeRegionControl_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HomeRegionControl) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HomeRegionControl, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HomeRegionControl_ControlId:
+			v.ControlId = new(string)
+			return d.ReadString(schemas.HomeRegionControl_ControlId, v.ControlId)
+		case schemas.HomeRegionControl_HomeRegion:
+			v.HomeRegion = new(string)
+			return d.ReadString(schemas.HomeRegionControl_HomeRegion, v.HomeRegion)
+		case schemas.HomeRegionControl_RequestedTime:
+			v.RequestedTime = new(time.Time)
+			return d.ReadTime(schemas.HomeRegionControl_RequestedTime, v.RequestedTime)
+		case schemas.HomeRegionControl_Target:
+			v.Target = &Target{}
+			return v.Target.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The target parameter specifies the identifier to which the home region is
 // applied, which is always an ACCOUNT . It applies the home region to the current
 // ACCOUNT .
@@ -47,6 +91,38 @@ type Target struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Target) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Target)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Target) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.Target_Id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Target_Type, string(v.Type))
+	}
+}
+func (v *Target) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Target, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Target_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Target_Id, v.Id)
+		case schemas.Target_Type:
+			var ev string
+			if err := d.ReadString(schemas.Target_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = TargetType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

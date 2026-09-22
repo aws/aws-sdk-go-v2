@@ -1,0 +1,3 @@
+DELETE /virtualclusters/__VirtualClusterId__/jobruns/__Id__
+
+

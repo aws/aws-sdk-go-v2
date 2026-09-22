@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an IoT OTA update on a target group of things or groups.
@@ -96,6 +95,52 @@ type CreateOTAUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOTAUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOTAUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOTAUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalParameterMap(s, schemas.CreateOTAUpdateRequest_additionalParameters, v.AdditionalParameters)
+	if v.AwsJobAbortConfig != nil {
+		s.WriteStruct(schemas.CreateOTAUpdateRequest_awsJobAbortConfig)
+		v.AwsJobAbortConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsJobExecutionsRolloutConfig != nil {
+		s.WriteStruct(schemas.CreateOTAUpdateRequest_awsJobExecutionsRolloutConfig)
+		v.AwsJobExecutionsRolloutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsJobPresignedUrlConfig != nil {
+		s.WriteStruct(schemas.CreateOTAUpdateRequest_awsJobPresignedUrlConfig)
+		v.AwsJobPresignedUrlConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsJobTimeoutConfig != nil {
+		s.WriteStruct(schemas.CreateOTAUpdateRequest_awsJobTimeoutConfig)
+		v.AwsJobTimeoutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateOTAUpdateRequest_description, *v.Description)
+	}
+	serializeOTAUpdateFiles(s, schemas.CreateOTAUpdateRequest_files, v.Files)
+	if v.OtaUpdateId != nil {
+		s.WriteString(schemas.CreateOTAUpdateRequest_otaUpdateId, *v.OtaUpdateId)
+	}
+	serializeProtocols(s, schemas.CreateOTAUpdateRequest_protocols, v.Protocols)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateOTAUpdateRequest_roleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateOTAUpdateRequest_tags, v.Tags)
+	if v.TargetSelection != "" {
+		s.WriteString(schemas.CreateOTAUpdateRequest_targetSelection, string(v.TargetSelection))
+	}
+	serializeTargets(s, schemas.CreateOTAUpdateRequest_targets, v.Targets)
+}
+
 type CreateOTAUpdateOutput struct {
 
 	// The IoT job ARN associated with the OTA update.
@@ -119,77 +164,76 @@ type CreateOTAUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOTAUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOTAUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOTAUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsIotJobArn != nil {
+		s.WriteString(schemas.CreateOTAUpdateResponse_awsIotJobArn, *v.AwsIotJobArn)
+	}
+	if v.AwsIotJobId != nil {
+		s.WriteString(schemas.CreateOTAUpdateResponse_awsIotJobId, *v.AwsIotJobId)
+	}
+	if v.OtaUpdateArn != nil {
+		s.WriteString(schemas.CreateOTAUpdateResponse_otaUpdateArn, *v.OtaUpdateArn)
+	}
+	if v.OtaUpdateId != nil {
+		s.WriteString(schemas.CreateOTAUpdateResponse_otaUpdateId, *v.OtaUpdateId)
+	}
+	if v.OtaUpdateStatus != "" {
+		s.WriteString(schemas.CreateOTAUpdateResponse_otaUpdateStatus, string(v.OtaUpdateStatus))
+	}
+}
+func (v *CreateOTAUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOTAUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOTAUpdateResponse_awsIotJobArn:
+			v.AwsIotJobArn = new(string)
+			return d.ReadString(schemas.CreateOTAUpdateResponse_awsIotJobArn, v.AwsIotJobArn)
+		case schemas.CreateOTAUpdateResponse_awsIotJobId:
+			v.AwsIotJobId = new(string)
+			return d.ReadString(schemas.CreateOTAUpdateResponse_awsIotJobId, v.AwsIotJobId)
+		case schemas.CreateOTAUpdateResponse_otaUpdateArn:
+			v.OtaUpdateArn = new(string)
+			return d.ReadString(schemas.CreateOTAUpdateResponse_otaUpdateArn, v.OtaUpdateArn)
+		case schemas.CreateOTAUpdateResponse_otaUpdateId:
+			v.OtaUpdateId = new(string)
+			return d.ReadString(schemas.CreateOTAUpdateResponse_otaUpdateId, v.OtaUpdateId)
+		case schemas.CreateOTAUpdateResponse_otaUpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateOTAUpdateResponse_otaUpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.OtaUpdateStatus = types.OTAUpdateStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOTAUpdate, schemas.CreateOTAUpdateRequest, schemas.CreateOTAUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOTAUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOTAUpdate, schemas.CreateOTAUpdateRequest, schemas.CreateOTAUpdateResponse), output: &CreateOTAUpdateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOTAUpdate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOTAUpdate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateOTAUpdateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOTAUpdate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +248,8 @@ func (c *Client) addOperationCreateOTAUpdateMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateOTAUpdate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOTAUpdate",
-	}
 }

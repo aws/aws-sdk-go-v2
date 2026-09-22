@@ -1,0 +1,5 @@
+POST /v1/email/outbound-emails
+
+Content-Type: application/json
+
+{"ConfigurationSetName":"__ConfigurationSetName__","Content":{"Raw":{"Data":"YmxvYg=="},"Simple":{"Body":{"Html":{"Charset":"__Charset__","Data":"__Data__"},"Text":{"Charset":"__Charset__","Data":"__Data__"}},"Subject":{"Charset":"__Charset__","Data":"__Data__"}},"Template":{"TemplateArn":"__TemplateArn__","TemplateData":"__TemplateData__"}},"Destination":{"BccAddresses":["__Member__","__Member__"],"CcAddresses":["__Member__","__Member__"],"ToAddresses":["__Member__","__Member__"]},"EmailTags":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"FeedbackForwardingEmailAddress":"__FeedbackForwardingEmailAddress__","FromEmailAddress":"__FromEmailAddress__","ReplyToAddresses":["__Member__","__Member__"]}

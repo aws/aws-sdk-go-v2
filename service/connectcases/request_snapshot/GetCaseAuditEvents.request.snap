@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/cases/__CaseId__/audit-history
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

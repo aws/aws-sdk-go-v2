@@ -5,10 +5,10 @@ package lambda
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of function versions that are configured to use a specific
@@ -45,6 +45,24 @@ type ListFunctionVersionsByCapacityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionVersionsByCapacityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionVersionsByCapacityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionVersionsByCapacityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderName != nil {
+		s.WriteString(schemas.ListFunctionVersionsByCapacityProviderRequest_CapacityProviderName, *v.CapacityProviderName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListFunctionVersionsByCapacityProviderRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListFunctionVersionsByCapacityProviderRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type ListFunctionVersionsByCapacityProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the capacity provider.
@@ -66,77 +84,57 @@ type ListFunctionVersionsByCapacityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionVersionsByCapacityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionVersionsByCapacityProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionVersionsByCapacityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderArn != nil {
+		s.WriteString(schemas.ListFunctionVersionsByCapacityProviderResponse_CapacityProviderArn, *v.CapacityProviderArn)
+	}
+	serializeFunctionVersionsByCapacityProviderList(s, schemas.ListFunctionVersionsByCapacityProviderResponse_FunctionVersions, v.FunctionVersions)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListFunctionVersionsByCapacityProviderResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListFunctionVersionsByCapacityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFunctionVersionsByCapacityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFunctionVersionsByCapacityProviderResponse_CapacityProviderArn:
+			v.CapacityProviderArn = new(string)
+			return d.ReadString(schemas.ListFunctionVersionsByCapacityProviderResponse_CapacityProviderArn, v.CapacityProviderArn)
+		case schemas.ListFunctionVersionsByCapacityProviderResponse_FunctionVersions:
+			return deserializeFunctionVersionsByCapacityProviderList(d, schemas.ListFunctionVersionsByCapacityProviderResponse_FunctionVersions, &v.FunctionVersions)
+		case schemas.ListFunctionVersionsByCapacityProviderResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListFunctionVersionsByCapacityProviderResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFunctionVersionsByCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionVersionsByCapacityProvider, schemas.ListFunctionVersionsByCapacityProviderRequest, schemas.ListFunctionVersionsByCapacityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFunctionVersionsByCapacityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionVersionsByCapacityProvider, schemas.ListFunctionVersionsByCapacityProviderRequest, schemas.ListFunctionVersionsByCapacityProviderResponse), output: &ListFunctionVersionsByCapacityProviderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFunctionVersionsByCapacityProvider{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFunctionVersionsByCapacityProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFunctionVersionsByCapacityProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFunctionVersionsByCapacityProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +147,6 @@ func (c *Client) addOperationListFunctionVersionsByCapacityProviderMiddlewares(s
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +250,3 @@ type ListFunctionVersionsByCapacityProviderAPIClient interface {
 }
 
 var _ ListFunctionVersionsByCapacityProviderAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFunctionVersionsByCapacityProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFunctionVersionsByCapacityProvider",
-	}
-}

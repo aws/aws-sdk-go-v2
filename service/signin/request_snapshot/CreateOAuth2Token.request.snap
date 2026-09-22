@@ -1,0 +1,5 @@
+POST /v1/token
+
+Content-Type: application/json
+
+{"clientId":"__ClientId__","code":"__Code__","codeVerifier":"__CodeVerifier__","grantType":"__GrantType__","redirectUri":"__RedirectUri__","refreshToken":"__RefreshToken__"}

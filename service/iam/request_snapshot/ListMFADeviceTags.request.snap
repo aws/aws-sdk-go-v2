@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ListMFADeviceTags&Marker=__Marker__&MaxItems=1&SerialNumber=__SerialNumber__&Version=2010-05-08

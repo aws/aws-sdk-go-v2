@@ -23,6 +23,8 @@ import (
 //	AdditionalServiceDetailsMemberMcpserversigv4
 //	AdditionalServiceDetailsMemberMcpserversplunk
 //	AdditionalServiceDetailsMemberPagerduty
+//	AdditionalServiceDetailsMemberRemoteagent
+//	AdditionalServiceDetailsMemberRemoteagentsigv4
 //	AdditionalServiceDetailsMemberServicenow
 //	AdditionalServiceDetailsMemberSlack
 type AdditionalServiceDetails interface {
@@ -128,6 +130,24 @@ type AdditionalServiceDetailsMemberPagerduty struct {
 
 func (*AdditionalServiceDetailsMemberPagerduty) isAdditionalServiceDetails() {}
 
+// Remote A2A agent-specific service details (token-based auth).
+type AdditionalServiceDetailsMemberRemoteagent struct {
+	Value RegisteredRemoteAgentDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*AdditionalServiceDetailsMemberRemoteagent) isAdditionalServiceDetails() {}
+
+// Remote A2A agent-specific service details (SigV4 auth).
+type AdditionalServiceDetailsMemberRemoteagentsigv4 struct {
+	Value RegisteredRemoteAgentSigV4Details
+
+	noSmithyDocumentSerde
+}
+
+func (*AdditionalServiceDetailsMemberRemoteagentsigv4) isAdditionalServiceDetails() {}
+
 // ServiceNow-specific service details.
 type AdditionalServiceDetailsMemberServicenow struct {
 	Value RegisteredServiceNowDetails
@@ -199,6 +219,316 @@ type AgentSpace struct {
 	// responses.
 	Locale *string
 
+	// The preferences configured on the agent space. Preferences that are not set
+	// take their default values.
+	Preferences map[string]bool
+
+	noSmithyDocumentSerde
+}
+
+// An approval decision supplied when resuming a paused agent execution. When an
+// agent execution pauses to request approval for an elevated action, SendMessage
+// streams an approval request carrying interrupt identifiers. This structure
+// carries the decision back to the service — which paused tool invocation is being
+// resumed, the opaque interrupt identifier that resumes it, the identifier of the
+// approval request being resolved, optional display text of the control the user
+// chose, and the action taken (APPROVED or REJECTED) — so the service can resume
+// the paused execution. All members are optional on the wire; service-side
+// validation is applied against the populated subset.
+type ApprovalAction struct {
+
+	// The action taken on the approval request — APPROVED or REJECTED.
+	Action ApprovalActionType
+
+	// Identifier of the approval request being resolved.
+	ApprovalId *string
+
+	// Optional display text of the UI control the user chose (for example, "Approve
+	// Exact", "Approve Broader", or "Reject"), provided as auxiliary decision context.
+	ButtonText *string
+
+	// An opaque resume identifier issued by the service when an agent execution
+	// pauses for approval. Provide it when resuming so the service can resume the
+	// correct paused execution.
+	InterruptId *string
+
+	// Identifier of the specific paused tool invocation that requested approval.
+	// Correlates the approval decision back to the paused invocation.
+	ToolUseId *string
+
+	noSmithyDocumentSerde
+}
+
+// Tool-invocation pattern primitive used to express both an agent-requested
+// approval and a finalized approval. The primitive is uniform across AWS and
+// third-party tools: a tool identifier plus a map of argument pins that narrow
+// which invocations the pattern matches.
+type ApprovalPattern struct {
+
+	// Argument constraints that narrow which tool invocations the pattern matches.
+	// For AWS tools, the map must include `operation` (the IAM action, e.g.
+	// `ec2:AuthorizeSecurityGroupIngress`) and `resource_arn` (the resource ARN or ARN
+	// glob); additional narrowing arguments go in further pin keys. The same `{tool,
+	// argumentPins}` shape is used uniformly for AWS and third-party tools, with
+	// tool-specific keys for third-party tools. Requests whose argument pins are
+	// collectively too large are rejected with a ValidationException.
+	//
+	// This member is required.
+	ArgumentPins map[string]string
+
+	// Identifier of the tool the pattern applies to (e.g. `use_aws` for AWS actions,
+	// or a third-party tool name).
+	//
+	// This member is required.
+	Tool *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an asset in an agent space, including its identifier, type,
+// metadata, version, and timestamps.
+type Asset struct {
+
+	// The unique identifier for this asset
+	//
+	// This member is required.
+	AssetId *string
+
+	// The type of this asset
+	//
+	// This member is required.
+	AssetType *string
+
+	// Timestamp when this asset was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The metadata for this asset
+	//
+	// This member is required.
+	Metadata document.Interface
+
+	// Timestamp when this asset was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The version number of this asset
+	//
+	// This member is required.
+	Version *int32
+
+	noSmithyDocumentSerde
+}
+
+// Content for an asset: a single file, a zip bundle, or a source URL to import
+// from
+//
+// The following types satisfy this interface:
+//
+//	AssetContentMemberFile
+//	AssetContentMemberSourceUrl
+//	AssetContentMemberZip
+type AssetContent interface {
+	isAssetContent()
+}
+
+// A single file with path and content
+type AssetContentMemberFile struct {
+	Value AssetFileContent
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetContentMemberFile) isAssetContent() {}
+
+// A source URL to import asset content from
+type AssetContentMemberSourceUrl struct {
+	Value AssetSourceUrlContent
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetContentMemberSourceUrl) isAssetContent() {}
+
+// A zip file containing multiple files
+type AssetContentMemberZip struct {
+	Value AssetZipContent
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetContentMemberZip) isAssetContent() {}
+
+// Represents a single file within an asset, including its path, content, version,
+// and timestamps.
+type AssetFile struct {
+
+	// The content of this file
+	//
+	// This member is required.
+	Content AssetFileBody
+
+	// Timestamp when this file was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The path of this file within the asset
+	//
+	// This member is required.
+	Path *string
+
+	// Timestamp when this file was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The asset version this file belongs to
+	//
+	// This member is required.
+	Version *int32
+
+	// The metadata for this file
+	Metadata document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Content of an individual asset file
+//
+// The following types satisfy this interface:
+//
+//	AssetFileBodyMemberBytes
+//	AssetFileBodyMemberText
+type AssetFileBody interface {
+	isAssetFileBody()
+}
+
+// Binary file content
+type AssetFileBodyMemberBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetFileBodyMemberBytes) isAssetFileBody() {}
+
+// Text file content
+type AssetFileBodyMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*AssetFileBodyMemberText) isAssetFileBody() {}
+
+// A single file with path and content
+type AssetFileContent struct {
+
+	// The file content
+	//
+	// This member is required.
+	Body AssetFileBody
+
+	// The path of the file within the asset
+	//
+	// This member is required.
+	Path *string
+
+	// Optional metadata for this file
+	Metadata document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a file within an asset, including its path, version, and timestamps.
+type AssetFileSummary struct {
+
+	// Timestamp when this file was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The path of this file within the asset
+	//
+	// This member is required.
+	Path *string
+
+	// Timestamp when this file was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The asset version this file belongs to
+	//
+	// This member is required.
+	Version *int32
+
+	// The metadata for this file
+	Metadata document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Content for an asset sourced from an external URL.
+type AssetSourceUrlContent struct {
+
+	// The source URL to import asset content from.
+	//
+	// This member is required.
+	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of an asset type, including its identifier and description.
+type AssetTypeSummary struct {
+
+	// The asset type identifier
+	//
+	// This member is required.
+	AssetType *string
+
+	// A description of the asset type
+	//
+	// This member is required.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for a single version of an asset, including the version number and
+// timestamps.
+type AssetVersionMetadata struct {
+
+	// Timestamp when this asset version was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Timestamp when this asset version was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The version number of this asset
+	//
+	// This member is required.
+	Version *int32
+
+	noSmithyDocumentSerde
+}
+
+// A zip file containing asset files
+type AssetZipContent struct {
+
+	// The zip file bytes
+	//
+	// This member is required.
+	ZipFile []byte
+
 	noSmithyDocumentSerde
 }
 
@@ -264,6 +594,9 @@ type Association struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// Enabled capabilities for this association.
+	Capabilities map[string]CapabilityConfiguration
+
 	// Validation status
 	Status ValidationStatus
 
@@ -288,6 +621,17 @@ type AWSConfiguration struct {
 	//
 	// This member is required.
 	AssumableRoleArn *string
+
+	// Optional IAM role ARN to be assumed by AIDevOps for elevated directed actions
+	// on behalf of the customer. Used for mutating operations gated by
+	// elevatedActionsEnabled on the AgentSpace. When not provided, only non-elevated
+	// directed actions are available for this AWS account.
+	AgentElevatedRoleArn *string
+
+	// Validation status of the agentElevatedRoleArn. Updated asynchronously after the
+	// customer registers an elevated role. Possible values: PENDING_CONFIRMATION
+	// (validation in progress), VALID (role validated), INVALID (validation failed).
+	AgentElevatedRoleArnStatus ValidationStatus
 
 	noSmithyDocumentSerde
 }
@@ -320,6 +664,20 @@ type AzureDevOpsConfiguration struct {
 	//
 	// This member is required.
 	ProjectName *string
+
+	noSmithyDocumentSerde
+}
+
+// Capability configuration for the AWS DevOps Agent.
+type CapabilityConfiguration struct {
+
+	// Whether the capability is enabled.
+	Enabled *bool
+
+	// Optional trigger filter groups. Evaluated only when enabled=true; retained
+	// while the capability is disabled, so re-enabling restores the prior trigger
+	// behavior.
+	TriggerFilterGroups []TriggerFilterGroup
 
 	noSmithyDocumentSerde
 }
@@ -566,6 +924,14 @@ type GitHubConfiguration struct {
 	// GitHub instance identifier (e.g., github.com or github.enterprise.com)
 	InstanceIdentifier *string
 
+	// Optional role ARN that AIDevOps assumes at runtime for automatic verification
+	// testing and VPC connectivity on this association.
+	//
+	// Deprecated: Superseded by the ReleaseManagement association. Configure the
+	// runtime role on the ReleaseManagement association and reference it via
+	// releaseManagementAssociationId.
+	RuntimeRoleArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -585,6 +951,14 @@ type GitLabConfiguration struct {
 	// GitLab instance identifier (e.g., gitlab.com or
 	// e2e.gamma.dev.us-east-1.gitlab.falco.ai.aws.dev)
 	InstanceIdentifier *string
+
+	// Optional role ARN that AIDevOps assumes at runtime for automatic verification
+	// testing and VPC connectivity on this association.
+	//
+	// Deprecated: Superseded by the ReleaseManagement association. Configure the
+	// runtime role on the ReleaseManagement association and reference it via
+	// releaseManagementAssociationId.
+	RuntimeRoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -983,11 +1357,19 @@ type MCPServerConfiguration struct {
 	// This member is required.
 	Tools []string
 
+	// List of MCP tools with their access categorization. When provided, the tool
+	// names must match those in the tools member.
+	ToolDetails []MCPToolDetail
+
 	noSmithyDocumentSerde
 }
 
 // Mixin for webhook update support.
 type MCPServerDatadogConfiguration struct {
+
+	// The subset of elevated-access tools enabled for this integration.
+	EnabledElevatedTools []MCPToolDetail
+
 	noSmithyDocumentSerde
 }
 
@@ -1023,6 +1405,9 @@ type MCPServerGrafanaConfiguration struct {
 	//
 	// This member is required.
 	Endpoint *string
+
+	// The subset of elevated-access tools enabled for this integration.
+	EnabledElevatedTools []MCPToolDetail
 
 	// The Grafana organization ID that can be used.
 	OrganizationId *string
@@ -1134,11 +1519,6 @@ type MCPServerSigV4AuthorizationConfig struct {
 	// This member is required.
 	Region *string
 
-	// IAM role ARN to assume for SigV4 signing.
-	//
-	// This member is required.
-	RoleArn *string
-
 	// AWS service name for SigV4 signing.
 	//
 	// This member is required.
@@ -1146,6 +1526,15 @@ type MCPServerSigV4AuthorizationConfig struct {
 
 	// Custom headers for the SigV4 MCP server.
 	CustomHeaders map[string]string
+
+	// IAM role ARN to assume for SigV4 signing. Optional — when omitted, credentials
+	// are resolved at runtime via a monitor account association.
+	McpRoleArn *string
+
+	// Deprecated — use mcpRoleArn instead. IAM role ARN to assume for SigV4 signing.
+	//
+	// Deprecated: Use mcpRoleArn instead.
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1157,6 +1546,10 @@ type MCPServerSigV4Configuration struct {
 	//
 	// This member is required.
 	Tools []string
+
+	// List of MCP tools with their access categorization. When provided, the tool
+	// names must match those in the tools member.
+	ToolDetails []MCPToolDetail
 
 	noSmithyDocumentSerde
 }
@@ -1187,6 +1580,20 @@ type MCPServerSigV4ServiceDetails struct {
 
 // Mixin for webhook update support.
 type MCPServerSplunkConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+// An MCP tool together with its access categorization.
+type MCPToolDetail struct {
+
+	// The name of the MCP tool.
+	//
+	// This member is required.
+	Name *string
+
+	// The access categorization of the MCP tool.
+	ToolClassification ToolClassification
+
 	noSmithyDocumentSerde
 }
 
@@ -1360,6 +1767,18 @@ type PagerDutyOAuthClientCredentialsConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A regex-based match condition. Passes when the value matches any pattern.
+type PatternFilter struct {
+
+	// Anchored full-match regex patterns. The condition passes when the value matches
+	// at least one pattern.
+	//
+	// This member is required.
+	Patterns []string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a pending message in an agent execution.
 type PendingMessage struct {
 
@@ -1425,6 +1844,12 @@ type PrivateConnectionSummary struct {
 	// The expiry time of the certificate associated with the Private Connection. Only
 	// present when a certificate is associated.
 	CertificateExpiryTime *time.Time
+
+	// DNS resolution mode for the Private Connection's resource gateway.
+	DnsResolution ResourceConfigDnsResolution
+
+	// Message describing the reason for a failed Private Connection, if applicable.
+	FailureMessage *string
 
 	// IP address or DNS name of the target resource. Only present for service-managed
 	// Private Connections.
@@ -1732,6 +2157,8 @@ type RegisteredMCPServerSigV4Details struct {
 	// IAM role ARN to assume for SigV4 signing.
 	//
 	// This member is required.
+	//
+	// Deprecated: Use mcpRoleArn instead.
 	RoleArn *string
 
 	// AWS service name for SigV4 signing.
@@ -1744,6 +2171,9 @@ type RegisteredMCPServerSigV4Details struct {
 
 	// Optional description for the MCP server.
 	Description *string
+
+	// AWS IAM role ARN.
+	McpRoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1778,8 +2208,72 @@ type RegisteredPagerDutyDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Details specific to a registered token-based remote A2A agent.
+type RegisteredRemoteAgentDetails struct {
+
+	// The authorization method used by the remote agent.
+	//
+	// This member is required.
+	AuthorizationMethod RemoteAgentAuthorizationMethod
+
+	// HTTPS endpoint URL for a remote A2A agent.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// Name identifier for a remote A2A agent.
+	//
+	// This member is required.
+	Name *string
+
+	// If the remote agent uses API key authentication, the header name.
+	ApiKeyHeader *string
+
+	// Description field
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Details specific to a registered SigV4-authenticated remote A2A agent.
+type RegisteredRemoteAgentSigV4Details struct {
+
+	// HTTPS endpoint URL for a remote A2A agent.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// Name identifier for a remote A2A agent.
+	//
+	// This member is required.
+	Name *string
+
+	// AWS region identifier or wildcard (*) for SigV4a multi-region signing.
+	//
+	// This member is required.
+	Region *string
+
+	// The AWS service name for SigV4 signing.
+	//
+	// This member is required.
+	Service *string
+
+	// Description field
+	Description *string
+
+	// AWS IAM role ARN.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a registered service with its configuration and accessible resources.
 type RegisteredService struct {
+
+	// The timestamp when the service was registered.
+	//
+	// This member is required.
+	CreatedAt *time.Time
 
 	// The unique identifier of a service.
 	//
@@ -1790,6 +2284,11 @@ type RegisteredService struct {
 	//
 	// This member is required.
 	ServiceType Service
+
+	// The timestamp when the service was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
 
 	// List of accessible resources for this service.
 	AccessibleResources []document.Interface
@@ -1831,6 +2330,205 @@ type RegisteredSlackServiceDetails struct {
 	//
 	// This member is required.
 	TeamName *string
+
+	noSmithyDocumentSerde
+}
+
+// API key configuration for remote A2A agent.
+type RemoteAgentAPIKeyConfig struct {
+
+	// HTTP header name to send the API key in requests to the service.
+	//
+	// This member is required.
+	ApiKeyHeader *string
+
+	// User friendly API key name specified by end user.
+	//
+	// This member is required.
+	ApiKeyName *string
+
+	// API key value for authenticating with the service.
+	//
+	// This member is required.
+	ApiKeyValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Authorization configuration for remote A2A agents with token-based auth (API
+// key, OAuth, bearer token).
+//
+// The following types satisfy this interface:
+//
+//	RemoteAgentAuthorizationConfigMemberApiKey
+//	RemoteAgentAuthorizationConfigMemberBearerToken
+//	RemoteAgentAuthorizationConfigMemberOAuthClientCredentials
+type RemoteAgentAuthorizationConfig interface {
+	isRemoteAgentAuthorizationConfig()
+}
+
+// Remote agent configuration with API key authentication.
+type RemoteAgentAuthorizationConfigMemberApiKey struct {
+	Value RemoteAgentAPIKeyConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*RemoteAgentAuthorizationConfigMemberApiKey) isRemoteAgentAuthorizationConfig() {}
+
+// Remote agent configuration with Bearer token (RFC 6750).
+type RemoteAgentAuthorizationConfigMemberBearerToken struct {
+	Value RemoteAgentBearerTokenConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*RemoteAgentAuthorizationConfigMemberBearerToken) isRemoteAgentAuthorizationConfig() {}
+
+// Remote agent configuration with OAuth client credentials.
+type RemoteAgentAuthorizationConfigMemberOAuthClientCredentials struct {
+	Value RemoteAgentOAuthClientCredentialsConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*RemoteAgentAuthorizationConfigMemberOAuthClientCredentials) isRemoteAgentAuthorizationConfig() {
+}
+
+// Bearer token configuration for remote A2A agent (RFC 6750).
+type RemoteAgentBearerTokenConfig struct {
+
+	// User friendly bearer token name specified by end user.
+	//
+	// This member is required.
+	TokenName *string
+
+	// Bearer token value in alphanumeric for authenticating with the service.
+	//
+	// This member is required.
+	TokenValue *string
+
+	// HTTP header name to send the bearer token in requests to the service. Defaults
+	// to 'Authorization' per RFC 6750.
+	AuthorizationHeader *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for token-based remote A2A agent integration.
+type RemoteAgentConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+// OAuth client credentials configuration for remote A2A agent.
+type RemoteAgentOAuthClientCredentialsConfig struct {
+
+	// OAuth client ID for authenticating with the service.
+	//
+	// This member is required.
+	ClientId *string
+
+	// OAuth client secret for authenticating with the service.
+	//
+	// This member is required.
+	ClientSecret *string
+
+	// OAuth token exchange URL.
+	//
+	// This member is required.
+	ExchangeUrl *string
+
+	// User friendly OAuth client name specified by end user.
+	ClientName *string
+
+	// OAuth token exchange parameters for authenticating with the service.
+	ExchangeParameters map[string]string
+
+	// OAuth scopes for authentication.
+	Scopes []string
+
+	noSmithyDocumentSerde
+}
+
+// Complete service details for token-based remote A2A agent integration.
+type RemoteAgentServiceDetails struct {
+
+	// Remote agent authorization configuration.
+	//
+	// This member is required.
+	AuthorizationConfig RemoteAgentAuthorizationConfig
+
+	// HTTPS endpoint URL for a remote A2A agent.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// Name identifier for a remote A2A agent.
+	//
+	// This member is required.
+	Name *string
+
+	// Description field
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// SigV4 authorization configuration for remote A2A agent.
+type RemoteAgentSigV4AuthorizationConfig struct {
+
+	// AWS region identifier or wildcard (*) for SigV4a multi-region signing.
+	//
+	// This member is required.
+	Region *string
+
+	// The AWS service name for SigV4 signing.
+	//
+	// This member is required.
+	Service *string
+
+	// AWS IAM role ARN.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for SigV4-authenticated remote A2A agent integration.
+type RemoteAgentSigV4Configuration struct {
+	noSmithyDocumentSerde
+}
+
+// Complete service details for SigV4-authenticated remote A2A agent integration.
+type RemoteAgentSigV4ServiceDetails struct {
+
+	// Remote agent SigV4 authorization configuration.
+	//
+	// This member is required.
+	AuthorizationConfig *RemoteAgentSigV4AuthorizationConfig
+
+	// HTTPS endpoint URL for a remote A2A agent.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// Name identifier for a remote A2A agent.
+	//
+	// This member is required.
+	Name *string
+
+	// Description field
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Schedule-based condition that fires the Trigger
+type ScheduleCondition struct {
+
+	// The schedule expression
+	//
+	// This member is required.
+	Expression *string
 
 	noSmithyDocumentSerde
 }
@@ -1937,13 +2635,27 @@ type SendMessageContentBlockStopEvent struct {
 // Context object for additional message metadata
 type SendMessageContext struct {
 
+	// An approval decision supplied when resuming a paused agent execution. When an
+	// agent execution pauses to request approval for an elevated action, SendMessage
+	// streams an approval request carrying interrupt identifiers. To resume the paused
+	// execution, call SendMessage again with `userActionResponse` set to
+	// `"APPROVAL_ACTION"` and this member populated with those identifiers and the
+	// decision (APPROVED or REJECTED). Optional; omit it for messages that are not
+	// resuming an approval.
+	ApprovalAction *ApprovalAction
+
 	// The current page or view the user is on
 	CurrentPage *string
 
 	// The ID of the last message in the conversation
 	LastMessage *string
 
-	// Response to a UI prompt (not a text conversation message)
+	// Response to a UI prompt (not a text conversation message). Set this to the
+	// sentinel value `"APPROVAL_ACTION"` when the request is resuming a paused
+	// execution after an approval decision; in that case the structured decision is
+	// provided on the sibling `approvalAction` member. Preserved as a String for
+	// backward compatibility: clients that predate the typed approval field may still
+	// encode UI-prompt responses as JSON in this field.
 	UserActionResponse *string
 
 	noSmithyDocumentSerde
@@ -2179,6 +2891,8 @@ type SendMessageUsageInfo struct {
 //	ServiceConfigurationMemberMcpserversigv4
 //	ServiceConfigurationMemberMcpserversplunk
 //	ServiceConfigurationMemberPagerduty
+//	ServiceConfigurationMemberRemoteagent
+//	ServiceConfigurationMemberRemoteagentsigv4
 //	ServiceConfigurationMemberServicenow
 //	ServiceConfigurationMemberSlack
 //	ServiceConfigurationMemberSourceAws
@@ -2312,6 +3026,24 @@ type ServiceConfigurationMemberPagerduty struct {
 
 func (*ServiceConfigurationMemberPagerduty) isServiceConfiguration() {}
 
+// Remote A2A agent integration configuration (token-based auth).
+type ServiceConfigurationMemberRemoteagent struct {
+	Value RemoteAgentConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConfigurationMemberRemoteagent) isServiceConfiguration() {}
+
+// Remote A2A agent integration configuration (SigV4 auth).
+type ServiceConfigurationMemberRemoteagentsigv4 struct {
+	Value RemoteAgentSigV4Configuration
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceConfigurationMemberRemoteagentsigv4) isServiceConfiguration() {}
+
 // ServiceNow instance integration configuration.
 type ServiceConfigurationMemberServicenow struct {
 	Value ServiceNowConfiguration
@@ -2354,6 +3086,8 @@ func (*ServiceConfigurationMemberSourceAws) isServiceConfiguration() {}
 //	ServiceDetailsMemberMcpserversigv4
 //	ServiceDetailsMemberMcpserversplunk
 //	ServiceDetailsMemberPagerduty
+//	ServiceDetailsMemberRemoteagent
+//	ServiceDetailsMemberRemoteagentsigv4
 //	ServiceDetailsMemberServicenow
 type ServiceDetails interface {
 	isServiceDetails()
@@ -2459,6 +3193,24 @@ type ServiceDetailsMemberPagerduty struct {
 
 func (*ServiceDetailsMemberPagerduty) isServiceDetails() {}
 
+// Remote A2A agent service details (token-based auth).
+type ServiceDetailsMemberRemoteagent struct {
+	Value RemoteAgentServiceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceDetailsMemberRemoteagent) isServiceDetails() {}
+
+// Remote A2A agent service details (SigV4 auth).
+type ServiceDetailsMemberRemoteagentsigv4 struct {
+	Value RemoteAgentSigV4ServiceDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ServiceDetailsMemberRemoteagentsigv4) isServiceDetails() {}
+
 // ServiceNow-specific service details.
 type ServiceDetailsMemberServicenow struct {
 	Value ServiceNowServiceDetails
@@ -2488,6 +3240,9 @@ type ServiceManagedInput struct {
 
 	// Certificate for the Private Connection.
 	Certificate *string
+
+	// DNS resolution mode for the resource gateway. Defaults to PUBLIC when not set.
+	DnsResolution ResourceConfigDnsResolution
 
 	// IP address type of the service-managed Resource Gateway.
 	IpAddressType IpAddressType
@@ -2573,6 +3328,24 @@ type ServiceNowServiceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for bidirectional Slack communication.
+type SlackBidirectionalConfiguration struct {
+
+	// IAM role ARN that AWS DevOps Agent assumes to exchange messages with your Slack
+	// workspace on behalf of this association.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Whether bidirectional communication is enabled for this association. When you
+	// set this value to true, you can mention the agent in a configured Slack channel
+	// and it responds in that channel. When you omit this value or set it to false,
+	// the agent ignores mentions and only sends notifications.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Represents a Slack channel with its ID and optional name.
 type SlackChannel struct {
 
@@ -2605,6 +3378,10 @@ type SlackConfiguration struct {
 	// This member is required.
 	WorkspaceName *string
 
+	// Optional bidirectional communication configuration. Supply this configuration
+	// and set enabled to true so you can interact with the agent directly from Slack.
+	Bidirectional *SlackBidirectionalConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -2622,8 +3399,9 @@ type SlackTransmissionTarget struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for AWS source account integration. Note: passRole check on
-// 'assumableRoleArn' is not supported.
+// Configuration for AWS source account integration. Setting the role ARNs on this
+// configuration requires the caller to have at least the iam:PassRole permission
+// (see assumableRoleArn).
 type SourceAwsConfiguration struct {
 
 	// AWS Account Id corresponding to provided resources.
@@ -2636,10 +3414,28 @@ type SourceAwsConfiguration struct {
 	// This member is required.
 	AccountType SourceAccountType
 
-	// Role ARN to be assumed by AIDevOps to operate on behalf of customer.
+	// Role ARN to be assumed by AIDevOps to operate on behalf of customer. To set
+	// this role ARN on AssociateService or UpdateAssociation, the caller must have at
+	// least the iam:PassRole permission on arn:aws:iam::<account-id>:role/* in the
+	// caller's own account, with the condition iam:PassedToService set to
+	// aidevops.amazonaws.com. A broader iam:PassRole grant also satisfies this
+	// requirement.
 	//
 	// This member is required.
 	AssumableRoleArn *string
+
+	// Optional IAM role ARN to be assumed by AIDevOps for elevated directed actions
+	// on behalf of the customer. Used for mutating operations gated by
+	// elevatedActionsEnabled on the AgentSpace. When not provided, only non-elevated
+	// directed actions are available for this AWS account. Setting this role is
+	// subject to the same minimum iam:PassRole requirement described on
+	// assumableRoleArn.
+	AgentElevatedRoleArn *string
+
+	// Validation status of the agentElevatedRoleArn. Updated asynchronously after the
+	// customer registers an elevated role. Possible values: PENDING_CONFIRMATION
+	// (validation in progress), VALID (role validated), INVALID (validation failed).
+	AgentElevatedRoleArnStatus ValidationStatus
 
 	// External ID for additional security when assuming the role. Used to prevent the
 	// confused deputy problem.
@@ -2748,10 +3544,88 @@ type TaskFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A Trigger fires on a schedule and invokes an agent
+type Trigger struct {
+
+	// The action this Trigger performs when it fires
+	//
+	// This member is required.
+	Action document.Interface
+
+	// The agent space this Trigger belongs to
+	//
+	// This member is required.
+	AgentSpaceId *string
+
+	// The condition that fires this Trigger
+	//
+	// This member is required.
+	Condition TriggerCondition
+
+	// Timestamp when this Trigger was created
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The status of this Trigger
+	//
+	// This member is required.
+	Status *string
+
+	// The unique identifier for this Trigger
+	//
+	// This member is required.
+	TriggerId *string
+
+	// How this Trigger fires
+	//
+	// This member is required.
+	Type *string
+
+	// Timestamp when this Trigger was last updated
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Defines the firing condition for a Trigger
+//
+// The following types satisfy this interface:
+//
+//	TriggerConditionMemberSchedule
+type TriggerCondition interface {
+	isTriggerCondition()
+}
+
+// Time-based firing condition
+type TriggerConditionMemberSchedule struct {
+	Value ScheduleCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*TriggerConditionMemberSchedule) isTriggerCondition() {}
+
+// A group of trigger conditions. The group matches when ALL present conditions
+// pass. A group cannot be empty: at least one condition must be present.
+type TriggerFilterGroup struct {
+
+	// Passes when the webhook event is one of the listed events.
+	Events []TriggerEvent
+
+	// Passes when the change request target branch matches. Applicable to
+	// RELEASE_READINESS_REVIEW only.
+	TargetBranches *PatternFilter
+
+	noSmithyDocumentSerde
+}
+
 // Represents a usage metric with its configured limit and current usage value.
 type UsageMetric struct {
 
-	// Configured limit for this metric.
+	// Configured limit for this metric. A value of -1 indicates no limit is enforced.
 	//
 	// This member is required.
 	Limit *int32
@@ -2857,6 +3731,8 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isAdditionalServiceDetails()             {}
 func (*UnknownUnionMember) isAdditionalServiceRegistrationStep()    {}
+func (*UnknownUnionMember) isAssetContent()                         {}
+func (*UnknownUnionMember) isAssetFileBody()                        {}
 func (*UnknownUnionMember) isAssistantMessageBlock()                {}
 func (*UnknownUnionMember) isDatadogAuthorizationConfig()           {}
 func (*UnknownUnionMember) isDynatraceServiceAuthorizationConfig()  {}
@@ -2865,9 +3741,11 @@ func (*UnknownUnionMember) isMessage()                              {}
 func (*UnknownUnionMember) isNewRelicServiceAuthorizationConfig()   {}
 func (*UnknownUnionMember) isPagerDutyAuthorizationConfig()         {}
 func (*UnknownUnionMember) isPrivateConnectionMode()                {}
+func (*UnknownUnionMember) isRemoteAgentAuthorizationConfig()       {}
 func (*UnknownUnionMember) isSendMessageContentBlockDelta()         {}
 func (*UnknownUnionMember) isSendMessageEvents()                    {}
 func (*UnknownUnionMember) isServiceConfiguration()                 {}
 func (*UnknownUnionMember) isServiceDetails()                       {}
 func (*UnknownUnionMember) isServiceNowServiceAuthorizationConfig() {}
+func (*UnknownUnionMember) isTriggerCondition()                     {}
 func (*UnknownUnionMember) isUserMessageBlock()                     {}

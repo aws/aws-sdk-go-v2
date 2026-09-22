@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/default-qbusiness-application?namespace=__Namespace__
+
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__"}

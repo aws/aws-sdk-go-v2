@@ -1,0 +1,5 @@
+POST /v1/deleteconsumableresource
+
+Content-Type: application/json
+
+{"consumableResource":"__ConsumableResource__"}

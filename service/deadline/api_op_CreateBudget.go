@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -83,6 +84,34 @@ type CreateBudgetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBudgetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBudgetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBudgetActionsToAdd(s, schemas.CreateBudgetRequest_actions, v.Actions)
+	if v.ApproximateDollarLimit != nil {
+		s.WriteFloat32(schemas.CreateBudgetRequest_approximateDollarLimit, *v.ApproximateDollarLimit)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBudgetRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBudgetRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateBudgetRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.CreateBudgetRequest_farmId, *v.FarmId)
+	}
+	serializeBudgetSchedule(s, schemas.CreateBudgetRequest_schedule, v.Schedule)
+	serializeTags(s, schemas.CreateBudgetRequest_tags, v.Tags)
+	serializeUsageTrackingResource(s, schemas.CreateBudgetRequest_usageTrackingResource, v.UsageTrackingResource)
+}
+
 // Mixin that adds an optional ARN field to response structures. Apply to
 // SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateBudgetOutput struct {
@@ -98,65 +127,42 @@ type CreateBudgetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBudgetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBudgetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBudgetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BudgetId != nil {
+		s.WriteString(schemas.CreateBudgetResponse_budgetId, *v.BudgetId)
+	}
+}
+func (v *CreateBudgetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBudgetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBudgetResponse_budgetId:
+			v.BudgetId = new(string)
+			return d.ReadString(schemas.CreateBudgetResponse_budgetId, v.BudgetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBudget, schemas.CreateBudgetRequest, schemas.CreateBudgetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBudget, schemas.CreateBudgetRequest, schemas.CreateBudgetResponse), output: &CreateBudgetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBudget{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBudget"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -171,12 +177,6 @@ func (c *Client) addOperationCreateBudgetMiddlewares(stack *middleware.Stack, op
 	if err = addOpCreateBudgetValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBudget(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -187,12 +187,6 @@ func (c *Client) addOperationCreateBudgetMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,12 +253,4 @@ func (m *idempotencyToken_initializeOpCreateBudget) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opCreateBudgetMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateBudget{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateBudget(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBudget",
-	}
 }

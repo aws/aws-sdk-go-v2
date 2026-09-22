@@ -4,11 +4,10 @@ package ssmsap
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the component of an application registered with AWS Systems Manager for
@@ -43,6 +42,34 @@ type GetComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetComponentInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.ComponentId != nil {
+		s.WriteString(schemas.GetComponentInput_ComponentId, *v.ComponentId)
+	}
+}
+func (v *GetComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentInput_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetComponentInput_ApplicationId, v.ApplicationId)
+		case schemas.GetComponentInput_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.GetComponentInput_ComponentId, v.ComponentId)
+		}
+		return nil
+	})
+}
+
 type GetComponentOutput struct {
 
 	// The component of an application registered with AWS Systems Manager for SAP.
@@ -57,77 +84,53 @@ type GetComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Component != nil {
+		s.WriteStruct(schemas.GetComponentOutput_Component)
+		v.Component.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.GetComponentOutput_Tags, v.Tags)
+}
+func (v *GetComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentOutput_Component:
+			v.Component = &types.Component{}
+			return v.Component.Deserialize(d)
+		case schemas.GetComponentOutput_Tags:
+			return deserializeTagMap(d, schemas.GetComponentOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentInput, schemas.GetComponentOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponent, schemas.GetComponentInput, schemas.GetComponentOutput), output: &GetComponentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetComponent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComponent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetComponentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComponent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +145,8 @@ func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetComponent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetComponent",
-	}
 }

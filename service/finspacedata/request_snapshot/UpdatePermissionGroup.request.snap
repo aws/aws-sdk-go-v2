@@ -1,0 +1,5 @@
+PUT /permission-group/__PermissionGroupId__
+
+Content-Type: application/x-amz-json-1.1
+
+{"applicationPermissions":["CreateDataset","CreateDataset"],"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__"}

@@ -5,14 +5,14 @@ package qconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a session. A session is a contextual container used for generating
-// recommendations. Amazon Connect creates a new Amazon Q in Connect session for
+// recommendations. Connect Customer creates a new Amazon Q in Connect session for
 // each contact on which Amazon Q in Connect is enabled.
 func (c *Client) CreateSession(ctx context.Context, params *CreateSessionInput, optFns ...func(*Options)) (*CreateSessionOutput, error) {
 	if params == nil {
@@ -53,8 +53,8 @@ type CreateSessionInput struct {
 	// [Making retries safe with idempotent APIs]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the email contact in Amazon Connect. Used to
-	// retrieve email content and establish session context for AI-powered email
+	// The Amazon Resource Name (ARN) of the email contact in Connect Customer. Used
+	// to retrieve email content and establish session context for AI-powered email
 	// assistance.
 	ContactArn *string
 
@@ -76,6 +76,70 @@ type CreateSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAIAgentConfigurationMap(s, schemas.CreateSessionRequest_aiAgentConfiguration, v.AiAgentConfiguration)
+	if v.AssistantId != nil {
+		s.WriteString(schemas.CreateSessionRequest_assistantId, *v.AssistantId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSessionRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContactArn != nil {
+		s.WriteString(schemas.CreateSessionRequest_contactArn, *v.ContactArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateSessionRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSessionRequest_name, *v.Name)
+	}
+	serializeOrchestratorConfigurationList(s, schemas.CreateSessionRequest_orchestratorConfigurationList, v.OrchestratorConfigurationList)
+	if v.RemoveOrchestratorConfigurationList != nil {
+		s.WriteBool(schemas.CreateSessionRequest_removeOrchestratorConfigurationList, *v.RemoveOrchestratorConfigurationList)
+	}
+	serializeTagFilter(s, schemas.CreateSessionRequest_tagFilter, v.TagFilter)
+	serializeTags(s, schemas.CreateSessionRequest_tags, v.Tags)
+}
+func (v *CreateSessionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSessionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSessionRequest_aiAgentConfiguration:
+			return deserializeAIAgentConfigurationMap(d, schemas.CreateSessionRequest_aiAgentConfiguration, &v.AiAgentConfiguration)
+		case schemas.CreateSessionRequest_assistantId:
+			v.AssistantId = new(string)
+			return d.ReadString(schemas.CreateSessionRequest_assistantId, v.AssistantId)
+		case schemas.CreateSessionRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateSessionRequest_clientToken, v.ClientToken)
+		case schemas.CreateSessionRequest_contactArn:
+			v.ContactArn = new(string)
+			return d.ReadString(schemas.CreateSessionRequest_contactArn, v.ContactArn)
+		case schemas.CreateSessionRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateSessionRequest_description, v.Description)
+		case schemas.CreateSessionRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSessionRequest_name, v.Name)
+		case schemas.CreateSessionRequest_orchestratorConfigurationList:
+			return deserializeOrchestratorConfigurationList(d, schemas.CreateSessionRequest_orchestratorConfigurationList, &v.OrchestratorConfigurationList)
+		case schemas.CreateSessionRequest_removeOrchestratorConfigurationList:
+			v.RemoveOrchestratorConfigurationList = new(bool)
+			return d.ReadBool(schemas.CreateSessionRequest_removeOrchestratorConfigurationList, v.RemoveOrchestratorConfigurationList)
+		case schemas.CreateSessionRequest_tagFilter:
+			return deserializeTagFilter(d, schemas.CreateSessionRequest_tagFilter, &v.TagFilter)
+		case schemas.CreateSessionRequest_tags:
+			return deserializeTags(d, schemas.CreateSessionRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateSessionOutput struct {
 
 	// The session.
@@ -87,65 +151,44 @@ type CreateSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Session != nil {
+		s.WriteStruct(schemas.CreateSessionResponse_session)
+		v.Session.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSessionResponse_session:
+			v.Session = &types.SessionData{}
+			return v.Session.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSession, schemas.CreateSessionRequest, schemas.CreateSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSession, schemas.CreateSessionRequest, schemas.CreateSessionResponse), output: &CreateSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -155,12 +198,6 @@ func (c *Client) addOperationCreateSessionMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +210,6 @@ func (c *Client) addOperationCreateSessionMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -218,12 +249,4 @@ func (m *idempotencyToken_initializeOpCreateSession) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateSessionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSession{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSession",
-	}
 }

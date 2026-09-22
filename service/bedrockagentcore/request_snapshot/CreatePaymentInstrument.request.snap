@@ -1,0 +1,7 @@
+POST /payments/createPaymentInstrument
+
+Content-Type: application/json
+X-Amzn-Bedrock-Agentcore-Payments-Agent-Name: __AgentName__
+X-Amzn-Bedrock-Agentcore-Payments-User-Id: __UserId__
+
+{"clientToken":"__ClientToken__","paymentConnectorId":"__PaymentConnectorId__","paymentInstrumentDetails":{"embeddedCryptoWallet":{"linkedAccounts":[{"email":{"emailAddress":"__EmailAddress__"}},{"email":{"emailAddress":"__EmailAddress__"}}],"network":"ETHEREUM","redirectUrl":"__RedirectUrl__","walletAddress":"__WalletAddress__"}},"paymentInstrumentType":"EMBEDDED_CRYPTO_WALLET","paymentManagerArn":"__PaymentManagerArn__"}

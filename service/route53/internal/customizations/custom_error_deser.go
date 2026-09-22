@@ -6,7 +6,6 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"strings"
 
 	"github.com/aws/smithy-go"
@@ -61,12 +60,20 @@ func (m *processResponse) HandleDeserialize(
 		return out, metadata, nil
 	}
 
-	// rewind response body
-	response.Body = ioutil.NopCloser(io.MultiReader(&readBuff, response.Body))
+	// rewind response body, forwarding the original body's Closer so closing it
+	// still closes the underlying transport body (io.NopCloser would drop it).
+	originalBody := response.Body
+	response.Body = &replayReadCloser{
+		Reader: io.MultiReader(&readBuff, originalBody),
+		Closer: originalBody,
+	}
 
 	// if start tag is "InvalidChangeBatch", the error response needs custom unmarshaling.
 	if strings.EqualFold(t.Name.Local, "InvalidChangeBatch") {
-		return out, metadata, route53CustomErrorDeser(&metadata, response)
+		// The caller won't close the response body when we return an error, so close it here.
+		err = route53CustomErrorDeser(&metadata, response)
+		smithyhttp.CloseResponseBody(ctx, response, false, err)
+		return out, metadata, err
 	}
 
 	return out, metadata, err
@@ -91,4 +98,10 @@ func route53CustomErrorDeser(metadata *middleware.Metadata, response *smithyhttp
 		Message:  ptr.String("ChangeBatch errors occurred"),
 		Messages: err.Messages,
 	}
+}
+
+// replayReadCloser pairs a Reader with an independent Closer.
+type replayReadCloser struct {
+	io.Reader
+	io.Closer
 }

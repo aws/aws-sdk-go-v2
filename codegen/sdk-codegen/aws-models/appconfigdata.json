@@ -29,6 +29,218 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>AppConfig Data provides the data plane APIs your application uses to retrieve\n         configuration data. Here's how it works:</p>\n         <p>Your application retrieves configuration data by first establishing a configuration\n         session using the AppConfig Data <a>StartConfigurationSession</a> API action.\n         Your session's client then makes periodic calls to <a>GetLatestConfiguration</a>\n         to check for and retrieve the latest data available.</p>\n         <p>When calling <code>StartConfigurationSession</code>, your code sends the following\n         information:</p>\n         <ul>\n            <li>\n               <p>Identifiers (ID or name) of an AppConfig application, environment, and\n               configuration profile that the session tracks.</p>\n            </li>\n            <li>\n               <p>(Optional) The minimum amount of time the session's client must wait between calls\n               to <code>GetLatestConfiguration</code>.</p>\n            </li>\n         </ul>\n         <p>In response, AppConfig provides an <code>InitialConfigurationToken</code> to be given to\n         the session's client and used the first time it calls <code>GetLatestConfiguration</code>\n         for that session.</p>\n         <important>\n            <p>This token should only be used once in your first call to\n               <code>GetLatestConfiguration</code>. You <i>must</i> use the new token\n            in the <code>GetLatestConfiguration</code> response\n               (<code>NextPollConfigurationToken</code>) in each subsequent call to\n               <code>GetLatestConfiguration</code>.</p>\n         </important>\n         <p>When calling <code>GetLatestConfiguration</code>, your client code sends the most recent\n            <code>ConfigurationToken</code> value it has and receives in response:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NextPollConfigurationToken</code>: the <code>ConfigurationToken</code> value\n               to use on the next call to <code>GetLatestConfiguration</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NextPollIntervalInSeconds</code>: the duration the client should wait before\n               making its next call to <code>GetLatestConfiguration</code>. This duration may vary\n               over the course of the session, so it should be used instead of the value sent on the\n                  <code>StartConfigurationSession</code> call.</p>\n            </li>\n            <li>\n               <p>The configuration: the latest data intended for the session. This may be empty if\n               the client already has the latest version of the configuration.</p>\n            </li>\n         </ul>\n         <important>\n            <p>The <code>InitialConfigurationToken</code> and\n            <code>NextPollConfigurationToken</code> should only be used once. To support long poll\n            use cases, the tokens are valid for up to 24 hours. If a\n            <code>GetLatestConfiguration</code> call uses an expired token, the system returns\n            <code>BadRequestException</code>.</p>\n         </important>\n         <p>For more information and to view example CLI commands that show how to retrieve a\n         configuration using the AppConfig Data <code>StartConfigurationSession</code> and\n            <code>GetLatestConfiguration</code> API actions, see <a href=\"http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration\">Retrieving the\n            configuration</a> in the <i>AppConfig User Guide</i>.</p>",
                 "smithy.api#title": "AWS AppConfig Data",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://appconfigdata-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://appconfigdata.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://appconfigdata-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://appconfigdata.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://appconfigdata.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 14,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

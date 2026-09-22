@@ -4,11 +4,8 @@ package sns
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Publishes up to 10 messages to the specified topic in a single batch. This is a
@@ -24,9 +21,14 @@ import (
 // unsuccessful actions, you should check for batch errors even when the call
 // returns an HTTP status code of 200.
 //
-// The maximum allowed individual message size and the maximum total payload size
-// (the sum of the individual lengths of all of the batched messages) are both 256
-// KB (262,144 bytes).
+// By default, the maximum allowed individual message size and the maximum total
+// payload size (the sum of the individual lengths of all of the batched messages)
+// are both 256 KiB (262,144 bytes). To publish larger batches, set the topic's
+// MaximumMessageSize attribute, which supports values up to 1 MiB (1,048,576
+// bytes). The combined size of all messages in the batch, including each message's
+// body and attributes, must not exceed the topic's MaximumMessageSize .
+//
+// For more information, see [Large message payloads] in the Amazon SNS Developer Guide.
 //
 // The PublishBatch API can send up to 10 messages at a time. If you attempt to
 // send more than 10 messages in one request, you will encounter a
@@ -47,6 +49,8 @@ import (
 //
 // When a messageId is returned, the batch message is saved, and Amazon SNS
 // immediately delivers the message to subscribers.
+//
+// [Large message payloads]: https://docs.aws.amazon.com/sns/latest/dg/large-message-payloads.html
 func (c *Client) PublishBatch(ctx context.Context, params *PublishBatchInput, optFns ...func(*Options)) (*PublishBatchOutput, error) {
 	if params == nil {
 		params = &PublishBatchInput{}
@@ -92,9 +96,6 @@ type PublishBatchOutput struct {
 }
 
 func (c *Client) addOperationPublishBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpPublishBatch{}, middleware.After)
 	if err != nil {
 		return err
@@ -103,65 +104,20 @@ func (c *Client) addOperationPublishBatchMiddlewares(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PublishBatch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPublishBatchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPublishBatch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +132,8 @@ func (c *Client) addOperationPublishBatchMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPublishBatch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PublishBatch",
-	}
 }

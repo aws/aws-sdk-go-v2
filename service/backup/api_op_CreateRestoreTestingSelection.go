@@ -4,11 +4,10 @@ package backup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -80,6 +79,26 @@ type CreateRestoreTestingSelectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRestoreTestingSelectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRestoreTestingSelectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRestoreTestingSelectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateRestoreTestingSelectionInput_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.CreateRestoreTestingSelectionInput_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+	if v.RestoreTestingSelection != nil {
+		s.WriteStruct(schemas.CreateRestoreTestingSelectionInput_RestoreTestingSelection)
+		v.RestoreTestingSelection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateRestoreTestingSelectionOutput struct {
 
 	// The time that the resource testing selection was created.
@@ -115,77 +134,66 @@ type CreateRestoreTestingSelectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRestoreTestingSelectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRestoreTestingSelectionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRestoreTestingSelectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateRestoreTestingSelectionOutput_CreationTime, *v.CreationTime)
+	}
+	if v.RestoreTestingPlanArn != nil {
+		s.WriteString(schemas.CreateRestoreTestingSelectionOutput_RestoreTestingPlanArn, *v.RestoreTestingPlanArn)
+	}
+	if v.RestoreTestingPlanName != nil {
+		s.WriteString(schemas.CreateRestoreTestingSelectionOutput_RestoreTestingPlanName, *v.RestoreTestingPlanName)
+	}
+	if v.RestoreTestingSelectionName != nil {
+		s.WriteString(schemas.CreateRestoreTestingSelectionOutput_RestoreTestingSelectionName, *v.RestoreTestingSelectionName)
+	}
+}
+func (v *CreateRestoreTestingSelectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRestoreTestingSelectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRestoreTestingSelectionOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateRestoreTestingSelectionOutput_CreationTime, v.CreationTime)
+		case schemas.CreateRestoreTestingSelectionOutput_RestoreTestingPlanArn:
+			v.RestoreTestingPlanArn = new(string)
+			return d.ReadString(schemas.CreateRestoreTestingSelectionOutput_RestoreTestingPlanArn, v.RestoreTestingPlanArn)
+		case schemas.CreateRestoreTestingSelectionOutput_RestoreTestingPlanName:
+			v.RestoreTestingPlanName = new(string)
+			return d.ReadString(schemas.CreateRestoreTestingSelectionOutput_RestoreTestingPlanName, v.RestoreTestingPlanName)
+		case schemas.CreateRestoreTestingSelectionOutput_RestoreTestingSelectionName:
+			v.RestoreTestingSelectionName = new(string)
+			return d.ReadString(schemas.CreateRestoreTestingSelectionOutput_RestoreTestingSelectionName, v.RestoreTestingSelectionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRestoreTestingSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRestoreTestingSelection, schemas.CreateRestoreTestingSelectionInput, schemas.CreateRestoreTestingSelectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRestoreTestingSelection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRestoreTestingSelection, schemas.CreateRestoreTestingSelectionInput, schemas.CreateRestoreTestingSelectionOutput), output: &CreateRestoreTestingSelectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRestoreTestingSelection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRestoreTestingSelection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRestoreTestingSelectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRestoreTestingSelection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -200,22 +208,8 @@ func (c *Client) addOperationCreateRestoreTestingSelectionMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRestoreTestingSelection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRestoreTestingSelection",
-	}
 }

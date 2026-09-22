@@ -5,9 +5,9 @@ package apigateway
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the usage data of a usage plan in a specified time interval.
@@ -58,6 +58,33 @@ type GetUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.GetUsageRequest_endDate, *v.EndDate)
+	}
+	if v.KeyId != nil {
+		s.WriteString(schemas.GetUsageRequest_keyId, *v.KeyId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetUsageRequest_limit, *v.Limit)
+	}
+	if v.Position != nil {
+		s.WriteString(schemas.GetUsageRequest_position, *v.Position)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.GetUsageRequest_startDate, *v.StartDate)
+	}
+	if v.UsagePlanId != nil {
+		s.WriteString(schemas.GetUsageRequest_usagePlanId, *v.UsagePlanId)
+	}
+}
+
 // Represents the usage data of a usage plan.
 type GetUsageOutput struct {
 
@@ -86,77 +113,69 @@ type GetUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Usage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDate != nil {
+		s.WriteString(schemas.Usage_endDate, *v.EndDate)
+	}
+	serializeMapOfKeyUsages(s, schemas.Usage_items, v.Items)
+	if v.Position != nil {
+		s.WriteString(schemas.Usage_position, *v.Position)
+	}
+	if v.StartDate != nil {
+		s.WriteString(schemas.Usage_startDate, *v.StartDate)
+	}
+	if v.UsagePlanId != nil {
+		s.WriteString(schemas.Usage_usagePlanId, *v.UsagePlanId)
+	}
+}
+func (v *GetUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Usage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Usage_endDate:
+			v.EndDate = new(string)
+			return d.ReadString(schemas.Usage_endDate, v.EndDate)
+		case schemas.Usage_items:
+			return deserializeMapOfKeyUsages(d, schemas.Usage_items, &v.Items)
+		case schemas.Usage_position:
+			v.Position = new(string)
+			return d.ReadString(schemas.Usage_position, v.Position)
+		case schemas.Usage_startDate:
+			v.StartDate = new(string)
+			return d.ReadString(schemas.Usage_startDate, v.StartDate)
+		case schemas.Usage_usagePlanId:
+			v.UsagePlanId = new(string)
+			return d.ReadString(schemas.Usage_usagePlanId, v.UsagePlanId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsage, schemas.GetUsageRequest, schemas.Usage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUsage, schemas.GetUsageRequest, schemas.Usage), output: &GetUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +191,6 @@ func (c *Client) addOperationGetUsageMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +291,3 @@ type GetUsageAPIClient interface {
 }
 
 var _ GetUsageAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUsage",
-	}
-}

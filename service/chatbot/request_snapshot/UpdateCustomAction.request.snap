@@ -1,0 +1,5 @@
+POST /update-custom-action
+
+Content-Type: application/json
+
+{"AliasName":"__AliasName__","Attachments":[{"ButtonText":"__ButtonText__","Criteria":[{"Operator":"HAS_VALUE","Value":"__Value__","VariableName":"__VariableName__"},{"Operator":"HAS_VALUE","Value":"__Value__","VariableName":"__VariableName__"}],"NotificationType":"__NotificationType__","Variables":{"key0":"__Value__"}},{"ButtonText":"__ButtonText__","Criteria":[{"Operator":"HAS_VALUE","Value":"__Value__","VariableName":"__VariableName__"},{"Operator":"HAS_VALUE","Value":"__Value__","VariableName":"__VariableName__"}],"NotificationType":"__NotificationType__","Variables":{"key0":"__Value__"}}],"CustomActionArn":"__CustomActionArn__","Definition":{"CommandText":"__CommandText__"}}

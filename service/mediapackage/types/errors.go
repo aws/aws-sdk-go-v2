@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackage/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ForbiddenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForbiddenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForbiddenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ForbiddenException_Message, *v.Message)
+	}
+}
+func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForbiddenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForbiddenException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An unexpected error occurred.
 type InternalServerErrorException struct {
@@ -58,6 +80,27 @@ func (e *InternalServerErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerErrorException_Message, *v.Message)
+	}
+}
+func (v *InternalServerErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerErrorException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested resource does not exist.
 type NotFoundException struct {
@@ -84,6 +127,27 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_Message, *v.Message)
+	}
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An unexpected error occurred.
 type ServiceUnavailableException struct {
@@ -110,6 +174,27 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableException_Message, *v.Message)
+	}
+}
+func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The client has exceeded their resource or throttling limits.
 type TooManyRequestsException struct {
@@ -136,6 +221,27 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyRequestsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyRequestsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyRequestsException_Message, *v.Message)
+	}
+}
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The parameters sent in the request are not valid.
 type UnprocessableEntityException struct {
@@ -162,3 +268,24 @@ func (e *UnprocessableEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnprocessableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnprocessableEntityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnprocessableEntityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnprocessableEntityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnprocessableEntityException_Message, *v.Message)
+	}
+}
+func (v *UnprocessableEntityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessableEntityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessableEntityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnprocessableEntityException_Message, v.Message)
+		}
+		return nil
+	})
+}

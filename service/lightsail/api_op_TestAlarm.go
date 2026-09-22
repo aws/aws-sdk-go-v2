@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Tests an alarm by displaying a banner on the Amazon Lightsail console. If a
@@ -61,6 +60,21 @@ type TestAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestAlarmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmName != nil {
+		s.WriteString(schemas.TestAlarmRequest_alarmName, *v.AlarmName)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.TestAlarmRequest_state, string(v.State))
+	}
+}
+
 type TestAlarmOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -74,77 +88,45 @@ type TestAlarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestAlarmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestAlarmResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestAlarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.TestAlarmResult_operations, v.Operations)
+}
+func (v *TestAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestAlarmResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestAlarmResult_operations:
+			return deserializeOperationList(d, schemas.TestAlarmResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestAlarm, schemas.TestAlarmRequest, schemas.TestAlarmResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestAlarm, schemas.TestAlarmRequest, schemas.TestAlarmResult), output: &TestAlarmOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTestAlarm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestAlarm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTestAlarmValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestAlarm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +141,8 @@ func (c *Client) addOperationTestAlarmMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTestAlarm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TestAlarm",
-	}
 }

@@ -4,11 +4,10 @@ package opensearch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,6 +43,21 @@ type GetDomainMaintenanceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainMaintenanceStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainMaintenanceStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainMaintenanceStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDomainMaintenanceStatusRequest_DomainName, *v.DomainName)
+	}
+	if v.MaintenanceId != nil {
+		s.WriteString(schemas.GetDomainMaintenanceStatusRequest_MaintenanceId, *v.MaintenanceId)
+	}
+}
+
 // The result of a GetDomainMaintenanceStatus request that information about the
 // requested action.
 type GetDomainMaintenanceStatusOutput struct {
@@ -72,77 +86,86 @@ type GetDomainMaintenanceStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainMaintenanceStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainMaintenanceStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainMaintenanceStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GetDomainMaintenanceStatusResponse_Action, string(v.Action))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetDomainMaintenanceStatusResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.GetDomainMaintenanceStatusResponse_NodeId, *v.NodeId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDomainMaintenanceStatusResponse_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.GetDomainMaintenanceStatusResponse_StatusMessage, *v.StatusMessage)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetDomainMaintenanceStatusResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetDomainMaintenanceStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainMaintenanceStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainMaintenanceStatusResponse_Action:
+			var ev string
+			if err := d.ReadString(schemas.GetDomainMaintenanceStatusResponse_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.MaintenanceType(ev)
+			return nil
+		case schemas.GetDomainMaintenanceStatusResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDomainMaintenanceStatusResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetDomainMaintenanceStatusResponse_NodeId:
+			v.NodeId = new(string)
+			return d.ReadString(schemas.GetDomainMaintenanceStatusResponse_NodeId, v.NodeId)
+		case schemas.GetDomainMaintenanceStatusResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDomainMaintenanceStatusResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MaintenanceStatus(ev)
+			return nil
+		case schemas.GetDomainMaintenanceStatusResponse_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetDomainMaintenanceStatusResponse_StatusMessage, v.StatusMessage)
+		case schemas.GetDomainMaintenanceStatusResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDomainMaintenanceStatusResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainMaintenanceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainMaintenanceStatus, schemas.GetDomainMaintenanceStatusRequest, schemas.GetDomainMaintenanceStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainMaintenanceStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainMaintenanceStatus, schemas.GetDomainMaintenanceStatusRequest, schemas.GetDomainMaintenanceStatusResponse), output: &GetDomainMaintenanceStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainMaintenanceStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDomainMaintenanceStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDomainMaintenanceStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainMaintenanceStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +180,8 @@ func (c *Client) addOperationGetDomainMaintenanceStatusMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDomainMaintenanceStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDomainMaintenanceStatus",
-	}
 }

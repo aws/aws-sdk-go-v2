@@ -1,0 +1,5 @@
+PATCH /app/__AppId__/environment/__EnvironmentName__/themes/__Id__?clientToken=__ClientToken__
+
+Content-Type: application/json
+
+{"id":"__Id__","name":"__Name__","overrides":[{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}},{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}}],"values":[{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}},{"key":"__Key__","value":{"children":[{},{}],"value":"__Value__"}}]}

@@ -1,3 +1,151 @@
+# v1.75.0 (2026-09-18)
+
+* **Feature**: Adds support for specifying Notebook type
+
+# v1.74.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.73.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.72.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
+# v1.71.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.71.0 (2026-08-27)
+
+* **Feature**: Add cascadeDelete to DeleteDomain. When specified, DataZone recursively deletes all projects, environments, subscriptions, and their underlying AWS resources before removing the domain. Deletion progress is reported via deleteProgress and resource failures via failureReasons on GetDomain.
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.70.0 (2026-08-26)
+
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.69.3 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.69.2 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.69.1 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.69.0 (2026-08-11)
+
+* **Feature**: GetSubscriptionGrant now returns materialized asset scope name for mapping Lake Formation data cell filters or Redshift views to subscription grants.
+
+# v1.68.2 (2026-08-10)
+
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.68.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.68.0 (2026-07-31.2)
+
+* **Feature**: Adding support for enhanced Git experience in Sagemaker Unified Studio.
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
+# v1.67.2 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.67.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.67.0 (2026-07-23)
+
+* **Feature**: Adds support for notebook sync with S3 ipynb files
+
+# v1.66.0 (2026-07-21)
+
+* **Feature**: Add an option to clients to disable clock skew
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.65.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.65.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.64.1 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.0 (2026-06-30)
+
+* **Feature**: Amazon DataZone now supports SNOWFLAKE as a connection type in the CreateConnection API, enabling metadata and lineage retrieval from Snowflake databases. Specify snowflakeProperties with connection details, a Secrets Manager secret, an Athena spill bucket, and an identity mapping for Snowflake.
+
+# v1.63.1 (2026-06-29)
+
+* No change notes available for this release.
+
+# v1.63.0 (2026-06-15)
+
+* **Feature**: Adds support for deleting lineage events in Amazon DataZone.
+
+# v1.62.7 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.6 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
+# v1.62.5 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.4 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.3 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.2 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.62.0 (2026-05-26)
+
+* **Feature**: Added resourceConfigurations and allowUserProvidedConfigurations fields to environment blueprint configuration APIs, enabling customers who migrated from V1 to V2 domains to update resource configurations (such as lineage schedules) programmatically via the SDK.
+
+# v1.61.0 (2026-05-22)
+
+* **Feature**: Add support for VPC connection
+
 # v1.60.0 (2026-05-14)
 
 * **Feature**: Adds support for SageMaker Unified Studio notebook operations, including notebook import and export

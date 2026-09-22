@@ -4,11 +4,8 @@ package redshift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +35,16 @@ type DisableLoggingInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
+	// The log destination type. An enum with possible values of s3 , cloudwatch , and
+	// s3table . When set to s3table , stops system table publishing. When omitted, the
+	// operation disables audit logging.
+	LogDestinationType types.LogDestinationType
+
+	// The collection of log types to stop exporting. When LogDestinationType is
+	// s3table , the values are the names of the system tables to stop publishing.
+	// Omitting this parameter or passing all stops publishing all system tables.
+	LogExports []string
+
 	noSmithyDocumentSerde
 }
 
@@ -56,11 +63,14 @@ type DisableLoggingOutput struct {
 	// The last time that logs were delivered.
 	LastSuccessfulDeliveryTime *time.Time
 
-	// The log destination type. An enum with possible values of s3 and cloudwatch .
+	// The log destination type. An enum with possible values of s3 , cloudwatch , and
+	// s3table .
 	LogDestinationType types.LogDestinationType
 
-	// The collection of exported log types. Possible values are connectionlog ,
-	// useractivitylog , and userlog .
+	// The collection of exported log types. When LogDestinationType is s3 or
+	// cloudwatch , possible values are connectionlog , useractivitylog , and userlog .
+	// When LogDestinationType is s3table , the values are the names of the system
+	// tables being published.
 	LogExports []string
 
 	// true if logging is on, false if logging is off.
@@ -69,6 +79,10 @@ type DisableLoggingOutput struct {
 	// The prefix applied to the log file names.
 	S3KeyPrefix *string
 
+	// The status of system table publishing to S3 Tables. This field is populated
+	// only when system table publishing is active.
+	S3Tables *types.S3TablePublishStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -76,9 +90,6 @@ type DisableLoggingOutput struct {
 }
 
 func (c *Client) addOperationDisableLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpDisableLogging{}, middleware.After)
 	if err != nil {
 		return err
@@ -87,65 +98,20 @@ func (c *Client) addOperationDisableLoggingMiddlewares(stack *middleware.Stack, 
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableLogging"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisableLoggingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableLogging(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +126,8 @@ func (c *Client) addOperationDisableLoggingMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisableLogging(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisableLogging",
-	}
 }

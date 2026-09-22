@@ -86,6 +86,42 @@ func TestCheckSnapshot_AssociateProfiles(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAgentContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAgentContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAgentGoal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentGoal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAgentProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateLensShare(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLensShare(context.Background(), nil, func(o *Options) {
@@ -187,6 +223,42 @@ func TestCheckSnapshot_CreateWorkloadShare(t *testing.T) {
 	_, err := svc.CreateWorkloadShare(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateWorkloadShare")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAgentContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAgentContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAgentGoal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentGoal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAgentProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAgentProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -319,6 +391,66 @@ func TestCheckSnapshot_ExportLens(t *testing.T) {
 	_, err := svc.ExportLens(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ExportLens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentGoal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentGoal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentRecommendation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentRecommendationGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAgentRecommendationGeneration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -499,6 +631,78 @@ func TestCheckSnapshot_ImportLens(t *testing.T) {
 	_, err := svc.ImportLens(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ImportLens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAgentContexts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentContexts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentContexts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAgentGoals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentGoals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentGoals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAgentProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAgentRecommendationGenerations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentRecommendationGenerations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentRecommendationGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAgentRecommendationItems(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentRecommendationItems(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentRecommendationItems")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAgentRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAgentRecommendations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -734,6 +938,30 @@ func TestCheckSnapshot_ListWorkloadShares(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAgentRecommendationFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAgentRecommendationFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartAgentRecommendationGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAgentRecommendationGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAgentRecommendationGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -751,6 +979,54 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAgentContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAgentContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAgentGoal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentGoal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAgentProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateAgentRecommendationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentRecommendationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateAgentRecommendationStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -949,6 +1225,42 @@ func TestUpdateSnapshot_AssociateProfiles(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAgentContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAgentContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAgentGoal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentGoal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAgentProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAgentProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateLensShare(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateLensShare(context.Background(), nil, func(o *Options) {
@@ -1050,6 +1362,42 @@ func TestUpdateSnapshot_CreateWorkloadShare(t *testing.T) {
 	_, err := svc.CreateWorkloadShare(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateWorkloadShare")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAgentContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAgentContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAgentGoal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentGoal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAgentProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAgentProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAgentProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1182,6 +1530,66 @@ func TestUpdateSnapshot_ExportLens(t *testing.T) {
 	_, err := svc.ExportLens(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ExportLens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentGoal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentGoal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentRecommendation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentRecommendation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentRecommendation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAgentRecommendationGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAgentRecommendationGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAgentRecommendationGeneration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1362,6 +1770,78 @@ func TestUpdateSnapshot_ImportLens(t *testing.T) {
 	_, err := svc.ImportLens(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ImportLens")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAgentContexts(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentContexts(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentContexts")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAgentGoals(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentGoals(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentGoals")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAgentProfiles(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentProfiles(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentProfiles")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAgentRecommendationGenerations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentRecommendationGenerations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentRecommendationGenerations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAgentRecommendationItems(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentRecommendationItems(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentRecommendationItems")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAgentRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAgentRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAgentRecommendations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1597,6 +2077,30 @@ func TestUpdateSnapshot_ListWorkloadShares(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutAgentRecommendationFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAgentRecommendationFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAgentRecommendationFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAgentRecommendationGeneration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAgentRecommendationGeneration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAgentRecommendationGeneration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -1614,6 +2118,54 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAgentContext(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentContext(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAgentContext")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAgentGoal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentGoal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAgentGoal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAgentProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAgentProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateAgentRecommendationStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateAgentRecommendationStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateAgentRecommendationStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

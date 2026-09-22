@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a BGP peer on the specified virtual interface.
@@ -61,6 +60,23 @@ type CreateBGPPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBGPPeerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBGPPeerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBGPPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NewBGPPeer != nil {
+		s.WriteStruct(schemas.CreateBGPPeerRequest_newBGPPeer)
+		v.NewBGPPeer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.CreateBGPPeerRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+}
+
 type CreateBGPPeerOutput struct {
 
 	// The virtual interface.
@@ -72,74 +88,47 @@ type CreateBGPPeerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBGPPeerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBGPPeerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBGPPeerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterface != nil {
+		s.WriteStruct(schemas.CreateBGPPeerResponse_virtualInterface)
+		v.VirtualInterface.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateBGPPeerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBGPPeerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBGPPeerResponse_virtualInterface:
+			v.VirtualInterface = &types.VirtualInterface{}
+			return v.VirtualInterface.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBGPPeer, schemas.CreateBGPPeerRequest, schemas.CreateBGPPeerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBGPPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBGPPeer, schemas.CreateBGPPeerRequest, schemas.CreateBGPPeerResponse), output: &CreateBGPPeerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBGPPeer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBGPPeer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBGPPeer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +143,8 @@ func (c *Client) addOperationCreateBGPPeerMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateBGPPeer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBGPPeer",
-	}
 }

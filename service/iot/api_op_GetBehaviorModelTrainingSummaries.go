@@ -5,15 +5,20 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Returns a Device Defender's ML Detect Security Profile training model's
+// The IoT Device Defender detect feature will no longer be available to new
+// customers starting August 31, 2026. If you would like to use the detect feature,
+// sign up prior to August 31, 2026. To learn about alternatives to IoT Device
+// Defender detect, see IoT Device Defender detect feature availability change in
+// the IoT Device Defender Developer Guide. There is no change to IoT Device
+// Defender audit availability.
 //
-// status.
+// Returns a Device Defender's ML Detect Security Profile training model's status.
 //
 // Requires permission to access the [GetBehaviorModelTrainingSummaries] action.
 //
@@ -47,6 +52,24 @@ type GetBehaviorModelTrainingSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBehaviorModelTrainingSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBehaviorModelTrainingSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBehaviorModelTrainingSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetBehaviorModelTrainingSummariesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBehaviorModelTrainingSummariesRequest_nextToken, *v.NextToken)
+	}
+	if v.SecurityProfileName != nil {
+		s.WriteString(schemas.GetBehaviorModelTrainingSummariesRequest_securityProfileName, *v.SecurityProfileName)
+	}
+}
+
 type GetBehaviorModelTrainingSummariesOutput struct {
 
 	//  A token that can be used to retrieve the next set of results, or null if there
@@ -63,74 +86,48 @@ type GetBehaviorModelTrainingSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBehaviorModelTrainingSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBehaviorModelTrainingSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBehaviorModelTrainingSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetBehaviorModelTrainingSummariesResponse_nextToken, *v.NextToken)
+	}
+	serializeBehaviorModelTrainingSummaries(s, schemas.GetBehaviorModelTrainingSummariesResponse_summaries, v.Summaries)
+}
+func (v *GetBehaviorModelTrainingSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBehaviorModelTrainingSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBehaviorModelTrainingSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetBehaviorModelTrainingSummariesResponse_nextToken, v.NextToken)
+		case schemas.GetBehaviorModelTrainingSummariesResponse_summaries:
+			return deserializeBehaviorModelTrainingSummaries(d, schemas.GetBehaviorModelTrainingSummariesResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBehaviorModelTrainingSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBehaviorModelTrainingSummaries, schemas.GetBehaviorModelTrainingSummariesRequest, schemas.GetBehaviorModelTrainingSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBehaviorModelTrainingSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBehaviorModelTrainingSummaries, schemas.GetBehaviorModelTrainingSummariesRequest, schemas.GetBehaviorModelTrainingSummariesResponse), output: &GetBehaviorModelTrainingSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBehaviorModelTrainingSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBehaviorModelTrainingSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBehaviorModelTrainingSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +140,6 @@ func (c *Client) addOperationGetBehaviorModelTrainingSummariesMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +243,3 @@ type GetBehaviorModelTrainingSummariesAPIClient interface {
 }
 
 var _ GetBehaviorModelTrainingSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetBehaviorModelTrainingSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBehaviorModelTrainingSummaries",
-	}
-}

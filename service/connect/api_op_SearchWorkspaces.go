@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches workspaces based on name, description, visibility, or tags.
@@ -53,6 +53,34 @@ type SearchWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchWorkspacesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchWorkspacesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchWorkspacesRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchWorkspacesRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchWorkspacesRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchWorkspacesOutput struct {
 
 	// The approximate total number of workspaces that match the search criteria.
@@ -70,77 +98,57 @@ type SearchWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchWorkspacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchWorkspacesResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchWorkspacesResponse_NextToken, *v.NextToken)
+	}
+	serializeWorkspaceSearchSummaryList(s, schemas.SearchWorkspacesResponse_Workspaces, v.Workspaces)
+}
+func (v *SearchWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchWorkspacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchWorkspacesResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchWorkspacesResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchWorkspacesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchWorkspacesResponse_NextToken, v.NextToken)
+		case schemas.SearchWorkspacesResponse_Workspaces:
+			return deserializeWorkspaceSearchSummaryList(d, schemas.SearchWorkspacesResponse_Workspaces, &v.Workspaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchWorkspaces, schemas.SearchWorkspacesRequest, schemas.SearchWorkspacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchWorkspaces, schemas.SearchWorkspacesRequest, schemas.SearchWorkspacesResponse), output: &SearchWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchWorkspaces{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchWorkspaces"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchWorkspacesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchWorkspaces(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +161,6 @@ func (c *Client) addOperationSearchWorkspacesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +261,3 @@ type SearchWorkspacesAPIClient interface {
 }
 
 var _ SearchWorkspacesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchWorkspaces(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchWorkspaces",
-	}
-}

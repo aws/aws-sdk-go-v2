@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateEnvironment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateExperimentDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExperimentDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateExperimentDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateExtension(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateExtension(context.Background(), nil, func(o *Options) {
@@ -187,6 +199,18 @@ func TestCheckSnapshot_DeleteEnvironment(t *testing.T) {
 	_, err := svc.DeleteEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteExperimentDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExperimentDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteExperimentDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -314,6 +338,30 @@ func TestCheckSnapshot_GetEnvironment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetExperimentDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExperimentDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetExperimentDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetExperimentRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExperimentRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetExperimentRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetExtension(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetExtension(context.Background(), nil, func(o *Options) {
@@ -410,6 +458,42 @@ func TestCheckSnapshot_ListEnvironments(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListExperimentDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExperimentDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExperimentDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListExperimentRunEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExperimentRunEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExperimentRunEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListExperimentRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExperimentRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListExperimentRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListExtensionAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListExtensionAssociations(context.Background(), nil, func(o *Options) {
@@ -470,11 +554,35 @@ func TestCheckSnapshot_StartDeployment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartExperimentRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartExperimentRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartExperimentRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopDeployment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopDeployment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StopDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopExperimentRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopExperimentRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopExperimentRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -566,6 +674,30 @@ func TestCheckSnapshot_UpdateEnvironment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateExperimentDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExperimentDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateExperimentDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateExperimentRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExperimentRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateExperimentRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateExtension(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateExtension(context.Background(), nil, func(o *Options) {
@@ -642,6 +774,18 @@ func TestUpdateSnapshot_CreateEnvironment(t *testing.T) {
 	_, err := svc.CreateEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateExperimentDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateExperimentDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateExperimentDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -726,6 +870,18 @@ func TestUpdateSnapshot_DeleteEnvironment(t *testing.T) {
 	_, err := svc.DeleteEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteExperimentDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteExperimentDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteExperimentDefinition")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -853,6 +1009,30 @@ func TestUpdateSnapshot_GetEnvironment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetExperimentDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExperimentDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetExperimentDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetExperimentRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetExperimentRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetExperimentRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetExtension(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetExtension(context.Background(), nil, func(o *Options) {
@@ -949,6 +1129,42 @@ func TestUpdateSnapshot_ListEnvironments(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListExperimentDefinitions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExperimentDefinitions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExperimentDefinitions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListExperimentRunEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExperimentRunEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExperimentRunEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListExperimentRuns(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListExperimentRuns(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListExperimentRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListExtensionAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListExtensionAssociations(context.Background(), nil, func(o *Options) {
@@ -1009,11 +1225,35 @@ func TestUpdateSnapshot_StartDeployment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartExperimentRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartExperimentRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartExperimentRun")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopDeployment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopDeployment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopDeployment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopExperimentRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopExperimentRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopExperimentRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1098,6 +1338,30 @@ func TestUpdateSnapshot_UpdateEnvironment(t *testing.T) {
 	_, err := svc.UpdateEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateExperimentDefinition(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExperimentDefinition(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateExperimentDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateExperimentRun(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateExperimentRun(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateExperimentRun")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

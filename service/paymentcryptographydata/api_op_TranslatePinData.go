@@ -4,11 +4,10 @@ package paymentcryptographydata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Translates encrypted PIN block from and to ISO 9564 formats 0,1,3,4. For more
@@ -54,8 +53,8 @@ import (
 // translation for PIN block built using legacy PAN length. That is, PAN is the
 // right most 12 digits excluding the check digits.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -68,6 +67,7 @@ import (
 // [Translate PIN data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/translate-pin-data.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 func (c *Client) TranslatePinData(ctx context.Context, params *TranslatePinDataInput, optFns ...func(*Options)) (*TranslatePinDataOutput, error) {
 	if params == nil {
 		params = &TranslatePinDataInput{}
@@ -143,6 +143,51 @@ type TranslatePinDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranslatePinDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslatePinDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslatePinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptedPinBlock != nil {
+		s.WriteString(schemas.TranslatePinDataInput_EncryptedPinBlock, *v.EncryptedPinBlock)
+	}
+	if v.IncomingAs2805Attributes != nil {
+		s.WriteStruct(schemas.TranslatePinDataInput_IncomingAs2805Attributes)
+		v.IncomingAs2805Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncomingDukptAttributes != nil {
+		s.WriteStruct(schemas.TranslatePinDataInput_IncomingDukptAttributes)
+		v.IncomingDukptAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncomingKeyIdentifier != nil {
+		s.WriteString(schemas.TranslatePinDataInput_IncomingKeyIdentifier, *v.IncomingKeyIdentifier)
+	}
+	serializeTranslationIsoFormats(s, schemas.TranslatePinDataInput_IncomingTranslationAttributes, v.IncomingTranslationAttributes)
+	if v.IncomingWrappedKey != nil {
+		s.WriteStruct(schemas.TranslatePinDataInput_IncomingWrappedKey)
+		v.IncomingWrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutgoingDukptAttributes != nil {
+		s.WriteStruct(schemas.TranslatePinDataInput_OutgoingDukptAttributes)
+		v.OutgoingDukptAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutgoingKeyIdentifier != nil {
+		s.WriteString(schemas.TranslatePinDataInput_OutgoingKeyIdentifier, *v.OutgoingKeyIdentifier)
+	}
+	serializeTranslationIsoFormats(s, schemas.TranslatePinDataInput_OutgoingTranslationAttributes, v.OutgoingTranslationAttributes)
+	if v.OutgoingWrappedKey != nil {
+		s.WriteStruct(schemas.TranslatePinDataInput_OutgoingWrappedKey)
+		v.OutgoingWrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type TranslatePinDataOutput struct {
 
 	// The keyARN of the encryption key that Amazon Web Services Payment Cryptography
@@ -172,77 +217,60 @@ type TranslatePinDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranslatePinDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslatePinDataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslatePinDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyArn != nil {
+		s.WriteString(schemas.TranslatePinDataOutput_KeyArn, *v.KeyArn)
+	}
+	if v.KeyCheckValue != nil {
+		s.WriteString(schemas.TranslatePinDataOutput_KeyCheckValue, *v.KeyCheckValue)
+	}
+	if v.PinBlock != nil {
+		s.WriteString(schemas.TranslatePinDataOutput_PinBlock, *v.PinBlock)
+	}
+}
+func (v *TranslatePinDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranslatePinDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranslatePinDataOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.TranslatePinDataOutput_KeyArn, v.KeyArn)
+		case schemas.TranslatePinDataOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.TranslatePinDataOutput_KeyCheckValue, v.KeyCheckValue)
+		case schemas.TranslatePinDataOutput_PinBlock:
+			v.PinBlock = new(string)
+			return d.ReadString(schemas.TranslatePinDataOutput_PinBlock, v.PinBlock)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTranslatePinDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslatePinData, schemas.TranslatePinDataInput, schemas.TranslatePinDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTranslatePinData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslatePinData, schemas.TranslatePinDataInput, schemas.TranslatePinDataOutput), output: &TranslatePinDataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTranslatePinData{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TranslatePinData"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTranslatePinDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTranslatePinData(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -257,22 +285,8 @@ func (c *Client) addOperationTranslatePinDataMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTranslatePinData(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TranslatePinData",
-	}
 }

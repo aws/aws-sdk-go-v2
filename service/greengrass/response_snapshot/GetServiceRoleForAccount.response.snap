@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AssociatedAt":"__AssociatedAt__","RoleArn":"__RoleArn__"}

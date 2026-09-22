@@ -4,11 +4,10 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates a logical delivery destination. A delivery destination is an
@@ -110,6 +109,30 @@ type PutDeliveryDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeliveryDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDeliveryDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDeliveryDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryDestinationConfiguration != nil {
+		s.WriteStruct(schemas.PutDeliveryDestinationRequest_deliveryDestinationConfiguration)
+		v.DeliveryDestinationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeliveryDestinationType != "" {
+		s.WriteString(schemas.PutDeliveryDestinationRequest_deliveryDestinationType, string(v.DeliveryDestinationType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutDeliveryDestinationRequest_name, *v.Name)
+	}
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.PutDeliveryDestinationRequest_outputFormat, string(v.OutputFormat))
+	}
+	serializeTags(s, schemas.PutDeliveryDestinationRequest_tags, v.Tags)
+}
+
 type PutDeliveryDestinationOutput struct {
 
 	// A structure containing information about the delivery destination that you just
@@ -122,77 +145,50 @@ type PutDeliveryDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeliveryDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDeliveryDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDeliveryDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliveryDestination != nil {
+		s.WriteStruct(schemas.PutDeliveryDestinationResponse_deliveryDestination)
+		v.DeliveryDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutDeliveryDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDeliveryDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutDeliveryDestinationResponse_deliveryDestination:
+			v.DeliveryDestination = &types.DeliveryDestination{}
+			return v.DeliveryDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDeliveryDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeliveryDestination, schemas.PutDeliveryDestinationRequest, schemas.PutDeliveryDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDeliveryDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeliveryDestination, schemas.PutDeliveryDestinationRequest, schemas.PutDeliveryDestinationResponse), output: &PutDeliveryDestinationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutDeliveryDestination{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDeliveryDestination"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutDeliveryDestinationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutDeliveryDestination(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -207,22 +203,8 @@ func (c *Client) addOperationPutDeliveryDestinationMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutDeliveryDestination(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutDeliveryDestination",
-	}
 }

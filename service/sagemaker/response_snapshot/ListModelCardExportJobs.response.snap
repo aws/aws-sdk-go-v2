@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListModelCardExportJobs
+
+{"ModelCardExportJobSummaries":[{"CreatedAt":946684800,"LastModifiedAt":946684800,"ModelCardExportJobArn":"__ModelCardExportJobArn__","ModelCardExportJobName":"__ModelCardExportJobName__","ModelCardName":"__ModelCardName__","ModelCardVersion":1,"Status":"InProgress"},{"CreatedAt":946684800,"LastModifiedAt":946684800,"ModelCardExportJobArn":"__ModelCardExportJobArn__","ModelCardExportJobName":"__ModelCardExportJobName__","ModelCardName":"__ModelCardName__","ModelCardVersion":1,"Status":"InProgress"}],"NextToken":"__NextToken__"}

@@ -4,11 +4,10 @@ package taxsettings
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/taxsettings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/taxsettings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds the tax exemption for a single account or all accounts listed in a
@@ -53,6 +52,29 @@ type PutTaxExemptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxExemptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxExemptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxExemptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.PutTaxExemptionRequest_accountIds, v.AccountIds)
+	if v.Authority != nil {
+		s.WriteStruct(schemas.PutTaxExemptionRequest_authority)
+		v.Authority.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExemptionCertificate != nil {
+		s.WriteStruct(schemas.PutTaxExemptionRequest_exemptionCertificate)
+		v.ExemptionCertificate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExemptionType != nil {
+		s.WriteString(schemas.PutTaxExemptionRequest_exemptionType, *v.ExemptionType)
+	}
+}
+
 type PutTaxExemptionOutput struct {
 
 	// The customer support case ID.
@@ -64,77 +86,48 @@ type PutTaxExemptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTaxExemptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTaxExemptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTaxExemptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaseId != nil {
+		s.WriteString(schemas.PutTaxExemptionResponse_caseId, *v.CaseId)
+	}
+}
+func (v *PutTaxExemptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTaxExemptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutTaxExemptionResponse_caseId:
+			v.CaseId = new(string)
+			return d.ReadString(schemas.PutTaxExemptionResponse_caseId, v.CaseId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTaxExemptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxExemption, schemas.PutTaxExemptionRequest, schemas.PutTaxExemptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutTaxExemption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTaxExemption, schemas.PutTaxExemptionRequest, schemas.PutTaxExemptionResponse), output: &PutTaxExemptionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutTaxExemption{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutTaxExemption"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutTaxExemptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutTaxExemption(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +142,8 @@ func (c *Client) addOperationPutTaxExemptionMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutTaxExemption(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutTaxExemption",
-	}
 }

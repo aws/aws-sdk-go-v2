@@ -4,11 +4,10 @@ package lambda
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modify the version-specific settings of a Lambda function.
@@ -76,8 +75,12 @@ type UpdateFunctionConfigurationInput struct {
 	// A description of the function.
 	Description *string
 
-	// Configuration settings for durable functions. Allows updating execution timeout
-	// and retention period for functions with durability enabled.
+	// Configuration settings for [durable functions], including execution timeout, retention period for
+	// execution history, and an optional ARN of the Key Management Service (KMS)
+	// customer managed key that is used to encrypt your durable execution's payload
+	// data, including input, output, and error payloads.
+	//
+	// [durable functions]: https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html
 	DurableConfig *types.DurableConfig
 
 	// Environment variables that are accessible from function code during execution.
@@ -176,8 +179,11 @@ type UpdateFunctionConfigurationInput struct {
 	SnapStart *types.SnapStart
 
 	// The amount of time (in seconds) that Lambda allows a function to run before
-	// stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
-	// For more information, see [Lambda execution environment].
+	// stopping it. The default is 3 seconds, and the maximum allowed value is 900
+	// seconds. For functions using Lambda Managed Instances, asynchronous invocations
+	// and event source mapping invocations (except Amazon MQ and Amazon DocumentDB)
+	// support a maximum allowed value of 5,400 seconds (90 minutes). For more
+	// information, see [Lambda execution environment].
 	//
 	// [Lambda execution environment]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-context.html
 	Timeout *int32
@@ -196,6 +202,94 @@ type UpdateFunctionConfigurationInput struct {
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateFunctionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFunctionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFunctionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityProviderConfig != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_CapacityProviderConfig)
+		v.CapacityProviderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFunctionConfigurationRequest_Description, *v.Description)
+	}
+	if v.DurableConfig != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_DurableConfig)
+		v.DurableConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Environment != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_Environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EphemeralStorage != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_EphemeralStorage)
+		v.EphemeralStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFileSystemConfigList(s, schemas.UpdateFunctionConfigurationRequest_FileSystemConfigs, v.FileSystemConfigs)
+	if v.FunctionName != nil {
+		s.WriteString(schemas.UpdateFunctionConfigurationRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Handler != nil {
+		s.WriteString(schemas.UpdateFunctionConfigurationRequest_Handler, *v.Handler)
+	}
+	if v.ImageConfig != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_ImageConfig)
+		v.ImageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KMSKeyArn != nil {
+		s.WriteString(schemas.UpdateFunctionConfigurationRequest_KMSKeyArn, *v.KMSKeyArn)
+	}
+	serializeLayerList(s, schemas.UpdateFunctionConfigurationRequest_Layers, v.Layers)
+	if v.LoggingConfig != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_LoggingConfig)
+		v.LoggingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemorySize != nil {
+		s.WriteInt32(schemas.UpdateFunctionConfigurationRequest_MemorySize, *v.MemorySize)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.UpdateFunctionConfigurationRequest_RevisionId, *v.RevisionId)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.UpdateFunctionConfigurationRequest_Role, *v.Role)
+	}
+	if v.Runtime != "" {
+		s.WriteString(schemas.UpdateFunctionConfigurationRequest_Runtime, string(v.Runtime))
+	}
+	if v.SnapStart != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_SnapStart)
+		v.SnapStart.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.UpdateFunctionConfigurationRequest_Timeout, *v.Timeout)
+	}
+	if v.TracingConfig != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_TracingConfig)
+		v.TracingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.UpdateFunctionConfigurationRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 // Details about a function's configuration.
@@ -240,9 +334,9 @@ type UpdateFunctionConfigurationOutput struct {
 	// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 	EphemeralStorage *types.EphemeralStorage
 
-	// Connection settings for an [Amazon EFS file system] or an [Amazon S3 Files file system].
+	// Connection settings for an [Amazon EFS file system] or an [Amazon S3 file system].
 	//
-	// [Amazon S3 Files file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
+	// [Amazon S3 file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 	// [Amazon EFS file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 	FileSystemConfigs []types.FileSystemConfig
 
@@ -388,77 +482,320 @@ type UpdateFunctionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFunctionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFunctionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArchitecturesList(s, schemas.FunctionConfiguration_Architectures, v.Architectures)
+	if v.CapacityProviderConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_CapacityProviderConfig)
+		v.CapacityProviderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeSha256 != nil {
+		s.WriteString(schemas.FunctionConfiguration_CodeSha256, *v.CodeSha256)
+	}
+	if v.CodeSize != 0 {
+		s.WriteInt64(schemas.FunctionConfiguration_CodeSize, v.CodeSize)
+	}
+	if v.ConfigSha256 != nil {
+		s.WriteString(schemas.FunctionConfiguration_ConfigSha256, *v.ConfigSha256)
+	}
+	if v.DeadLetterConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_DeadLetterConfig)
+		v.DeadLetterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.FunctionConfiguration_Description, *v.Description)
+	}
+	if v.DurableConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_DurableConfig)
+		v.DurableConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Environment != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_Environment)
+		v.Environment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EphemeralStorage != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_EphemeralStorage)
+		v.EphemeralStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFileSystemConfigList(s, schemas.FunctionConfiguration_FileSystemConfigs, v.FileSystemConfigs)
+	if v.FunctionArn != nil {
+		s.WriteString(schemas.FunctionConfiguration_FunctionArn, *v.FunctionArn)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.FunctionConfiguration_FunctionName, *v.FunctionName)
+	}
+	if v.Handler != nil {
+		s.WriteString(schemas.FunctionConfiguration_Handler, *v.Handler)
+	}
+	if v.ImageConfigResponse != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_ImageConfigResponse)
+		v.ImageConfigResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KMSKeyArn != nil {
+		s.WriteString(schemas.FunctionConfiguration_KMSKeyArn, *v.KMSKeyArn)
+	}
+	if v.LastModified != nil {
+		s.WriteString(schemas.FunctionConfiguration_LastModified, *v.LastModified)
+	}
+	if v.LastUpdateStatus != "" {
+		s.WriteString(schemas.FunctionConfiguration_LastUpdateStatus, string(v.LastUpdateStatus))
+	}
+	if v.LastUpdateStatusReason != nil {
+		s.WriteString(schemas.FunctionConfiguration_LastUpdateStatusReason, *v.LastUpdateStatusReason)
+	}
+	if v.LastUpdateStatusReasonCode != "" {
+		s.WriteString(schemas.FunctionConfiguration_LastUpdateStatusReasonCode, string(v.LastUpdateStatusReasonCode))
+	}
+	serializeLayersReferenceList(s, schemas.FunctionConfiguration_Layers, v.Layers)
+	if v.LoggingConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_LoggingConfig)
+		v.LoggingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MasterArn != nil {
+		s.WriteString(schemas.FunctionConfiguration_MasterArn, *v.MasterArn)
+	}
+	if v.MemorySize != nil {
+		s.WriteInt32(schemas.FunctionConfiguration_MemorySize, *v.MemorySize)
+	}
+	if v.PackageType != "" {
+		s.WriteString(schemas.FunctionConfiguration_PackageType, string(v.PackageType))
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.FunctionConfiguration_RevisionId, *v.RevisionId)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.FunctionConfiguration_Role, *v.Role)
+	}
+	if v.Runtime != "" {
+		s.WriteString(schemas.FunctionConfiguration_Runtime, string(v.Runtime))
+	}
+	if v.RuntimeVersionConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_RuntimeVersionConfig)
+		v.RuntimeVersionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningJobArn != nil {
+		s.WriteString(schemas.FunctionConfiguration_SigningJobArn, *v.SigningJobArn)
+	}
+	if v.SigningProfileVersionArn != nil {
+		s.WriteString(schemas.FunctionConfiguration_SigningProfileVersionArn, *v.SigningProfileVersionArn)
+	}
+	if v.SnapStart != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_SnapStart)
+		v.SnapStart.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.FunctionConfiguration_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.FunctionConfiguration_StateReason, *v.StateReason)
+	}
+	if v.StateReasonCode != "" {
+		s.WriteString(schemas.FunctionConfiguration_StateReasonCode, string(v.StateReasonCode))
+	}
+	if v.TenancyConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_TenancyConfig)
+		v.TenancyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.FunctionConfiguration_Timeout, *v.Timeout)
+	}
+	if v.TracingConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_TracingConfig)
+		v.TracingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.FunctionConfiguration_Version, *v.Version)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.FunctionConfiguration_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFunctionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FunctionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FunctionConfiguration_Architectures:
+			return deserializeArchitecturesList(d, schemas.FunctionConfiguration_Architectures, &v.Architectures)
+		case schemas.FunctionConfiguration_CapacityProviderConfig:
+			v.CapacityProviderConfig = &types.CapacityProviderConfig{}
+			return v.CapacityProviderConfig.Deserialize(d)
+		case schemas.FunctionConfiguration_CodeSha256:
+			v.CodeSha256 = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_CodeSha256, v.CodeSha256)
+		case schemas.FunctionConfiguration_CodeSize:
+			return d.ReadInt64(schemas.FunctionConfiguration_CodeSize, &v.CodeSize)
+		case schemas.FunctionConfiguration_ConfigSha256:
+			v.ConfigSha256 = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_ConfigSha256, v.ConfigSha256)
+		case schemas.FunctionConfiguration_DeadLetterConfig:
+			v.DeadLetterConfig = &types.DeadLetterConfig{}
+			return v.DeadLetterConfig.Deserialize(d)
+		case schemas.FunctionConfiguration_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_Description, v.Description)
+		case schemas.FunctionConfiguration_DurableConfig:
+			v.DurableConfig = &types.DurableConfig{}
+			return v.DurableConfig.Deserialize(d)
+		case schemas.FunctionConfiguration_Environment:
+			v.Environment = &types.EnvironmentResponse{}
+			return v.Environment.Deserialize(d)
+		case schemas.FunctionConfiguration_EphemeralStorage:
+			v.EphemeralStorage = &types.EphemeralStorage{}
+			return v.EphemeralStorage.Deserialize(d)
+		case schemas.FunctionConfiguration_FileSystemConfigs:
+			return deserializeFileSystemConfigList(d, schemas.FunctionConfiguration_FileSystemConfigs, &v.FileSystemConfigs)
+		case schemas.FunctionConfiguration_FunctionArn:
+			v.FunctionArn = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_FunctionArn, v.FunctionArn)
+		case schemas.FunctionConfiguration_FunctionName:
+			v.FunctionName = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_FunctionName, v.FunctionName)
+		case schemas.FunctionConfiguration_Handler:
+			v.Handler = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_Handler, v.Handler)
+		case schemas.FunctionConfiguration_ImageConfigResponse:
+			v.ImageConfigResponse = &types.ImageConfigResponse{}
+			return v.ImageConfigResponse.Deserialize(d)
+		case schemas.FunctionConfiguration_KMSKeyArn:
+			v.KMSKeyArn = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_KMSKeyArn, v.KMSKeyArn)
+		case schemas.FunctionConfiguration_LastModified:
+			v.LastModified = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_LastModified, v.LastModified)
+		case schemas.FunctionConfiguration_LastUpdateStatus:
+			var ev string
+			if err := d.ReadString(schemas.FunctionConfiguration_LastUpdateStatus, &ev); err != nil {
+				return err
+			}
+			v.LastUpdateStatus = types.LastUpdateStatus(ev)
+			return nil
+		case schemas.FunctionConfiguration_LastUpdateStatusReason:
+			v.LastUpdateStatusReason = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_LastUpdateStatusReason, v.LastUpdateStatusReason)
+		case schemas.FunctionConfiguration_LastUpdateStatusReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.FunctionConfiguration_LastUpdateStatusReasonCode, &ev); err != nil {
+				return err
+			}
+			v.LastUpdateStatusReasonCode = types.LastUpdateStatusReasonCode(ev)
+			return nil
+		case schemas.FunctionConfiguration_Layers:
+			return deserializeLayersReferenceList(d, schemas.FunctionConfiguration_Layers, &v.Layers)
+		case schemas.FunctionConfiguration_LoggingConfig:
+			v.LoggingConfig = &types.LoggingConfig{}
+			return v.LoggingConfig.Deserialize(d)
+		case schemas.FunctionConfiguration_MasterArn:
+			v.MasterArn = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_MasterArn, v.MasterArn)
+		case schemas.FunctionConfiguration_MemorySize:
+			v.MemorySize = new(int32)
+			return d.ReadInt32(schemas.FunctionConfiguration_MemorySize, v.MemorySize)
+		case schemas.FunctionConfiguration_PackageType:
+			var ev string
+			if err := d.ReadString(schemas.FunctionConfiguration_PackageType, &ev); err != nil {
+				return err
+			}
+			v.PackageType = types.PackageType(ev)
+			return nil
+		case schemas.FunctionConfiguration_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_RevisionId, v.RevisionId)
+		case schemas.FunctionConfiguration_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_Role, v.Role)
+		case schemas.FunctionConfiguration_Runtime:
+			var ev string
+			if err := d.ReadString(schemas.FunctionConfiguration_Runtime, &ev); err != nil {
+				return err
+			}
+			v.Runtime = types.Runtime(ev)
+			return nil
+		case schemas.FunctionConfiguration_RuntimeVersionConfig:
+			v.RuntimeVersionConfig = &types.RuntimeVersionConfig{}
+			return v.RuntimeVersionConfig.Deserialize(d)
+		case schemas.FunctionConfiguration_SigningJobArn:
+			v.SigningJobArn = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_SigningJobArn, v.SigningJobArn)
+		case schemas.FunctionConfiguration_SigningProfileVersionArn:
+			v.SigningProfileVersionArn = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_SigningProfileVersionArn, v.SigningProfileVersionArn)
+		case schemas.FunctionConfiguration_SnapStart:
+			v.SnapStart = &types.SnapStartResponse{}
+			return v.SnapStart.Deserialize(d)
+		case schemas.FunctionConfiguration_State:
+			var ev string
+			if err := d.ReadString(schemas.FunctionConfiguration_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.State(ev)
+			return nil
+		case schemas.FunctionConfiguration_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_StateReason, v.StateReason)
+		case schemas.FunctionConfiguration_StateReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.FunctionConfiguration_StateReasonCode, &ev); err != nil {
+				return err
+			}
+			v.StateReasonCode = types.StateReasonCode(ev)
+			return nil
+		case schemas.FunctionConfiguration_TenancyConfig:
+			v.TenancyConfig = &types.TenancyConfig{}
+			return v.TenancyConfig.Deserialize(d)
+		case schemas.FunctionConfiguration_Timeout:
+			v.Timeout = new(int32)
+			return d.ReadInt32(schemas.FunctionConfiguration_Timeout, v.Timeout)
+		case schemas.FunctionConfiguration_TracingConfig:
+			v.TracingConfig = &types.TracingConfigResponse{}
+			return v.TracingConfig.Deserialize(d)
+		case schemas.FunctionConfiguration_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.FunctionConfiguration_Version, v.Version)
+		case schemas.FunctionConfiguration_VpcConfig:
+			v.VpcConfig = &types.VpcConfigResponse{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFunctionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFunctionConfiguration, schemas.UpdateFunctionConfigurationRequest, schemas.FunctionConfiguration)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFunctionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFunctionConfiguration, schemas.UpdateFunctionConfigurationRequest, schemas.FunctionConfiguration), output: &UpdateFunctionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFunctionConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFunctionConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFunctionConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFunctionConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -473,22 +810,8 @@ func (c *Client) addOperationUpdateFunctionConfigurationMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateFunctionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFunctionConfiguration",
-	}
 }

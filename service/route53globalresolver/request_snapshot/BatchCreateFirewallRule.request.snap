@@ -1,0 +1,5 @@
+POST /firewall-rules/batch-create
+
+Content-Type: application/json
+
+{"firewallRules":[{"action":"ALLOW","blockOverrideDnsType":"CNAME","blockOverrideDomain":"__BlockOverrideDomain__","blockOverrideTtl":1,"blockResponse":"NODATA","clientToken":"__ClientToken__","confidenceThreshold":"LOW","description":"__Description__","dnsAdvancedProtection":"DGA","dnsViewId":"__DnsViewId__","firewallDomainListId":"__FirewallDomainListId__","name":"__Name__","priority":1,"qType":"__QType__"},{"action":"ALLOW","blockOverrideDnsType":"CNAME","blockOverrideDomain":"__BlockOverrideDomain__","blockOverrideTtl":1,"blockResponse":"NODATA","clientToken":"__ClientToken__","confidenceThreshold":"LOW","description":"__Description__","dnsAdvancedProtection":"DGA","dnsViewId":"__DnsViewId__","firewallDomainListId":"__FirewallDomainListId__","name":"__Name__","priority":1,"qType":"__QType__"}]}

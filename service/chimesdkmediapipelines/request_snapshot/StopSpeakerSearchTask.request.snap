@@ -1,0 +1,3 @@
+POST /media-insights-pipelines/__Identifier__/speaker-search-tasks/__SpeakerSearchTaskId__?operation=stop
+
+

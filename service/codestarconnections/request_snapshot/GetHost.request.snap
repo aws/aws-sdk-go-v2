@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeStar_connections_20191201.GetHost
+
+{"HostArn":"__HostArn__"}

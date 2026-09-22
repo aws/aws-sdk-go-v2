@@ -1,0 +1,6 @@
+POST /channels/__ChannelArn__/bans
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"MemberArn":"__MemberArn__"}

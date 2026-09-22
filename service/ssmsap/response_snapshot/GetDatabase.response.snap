@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Database":{"ApplicationId":"__ApplicationId__","Arn":"__Arn__","ComponentId":"__ComponentId__","ConnectedComponentArns":["__Member__","__Member__"],"Credentials":[{"CredentialType":"ADMIN","DatabaseName":"__DatabaseName__","SecretId":"__SecretId__"},{"CredentialType":"ADMIN","DatabaseName":"__DatabaseName__","SecretId":"__SecretId__"}],"DatabaseId":"__DatabaseId__","DatabaseName":"__DatabaseName__","DatabaseType":"SYSTEM","LastUpdated":946684800,"PrimaryHost":"__PrimaryHost__","SQLPort":1,"Status":"RUNNING"},"Tags":{"key0":"__Value__"}}

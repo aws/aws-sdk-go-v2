@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes reviewed answers for Q Topic.
@@ -47,6 +46,22 @@ type BatchDeleteTopicReviewedAnswerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteTopicReviewedAnswerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteTopicReviewedAnswerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteTopicReviewedAnswerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnswerIds(s, schemas.BatchDeleteTopicReviewedAnswerRequest_AnswerIds, v.AnswerIds)
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.BatchDeleteTopicReviewedAnswerRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.BatchDeleteTopicReviewedAnswerRequest_TopicId, *v.TopicId)
+	}
+}
+
 type BatchDeleteTopicReviewedAnswerOutput struct {
 
 	// The definition of Answers that are invalid and not deleted.
@@ -74,77 +89,71 @@ type BatchDeleteTopicReviewedAnswerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteTopicReviewedAnswerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteTopicReviewedAnswerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteTopicReviewedAnswerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInvalidTopicReviewedAnswers(s, schemas.BatchDeleteTopicReviewedAnswerResponse_InvalidAnswers, v.InvalidAnswers)
+	if v.RequestId != nil {
+		s.WriteString(schemas.BatchDeleteTopicReviewedAnswerResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.BatchDeleteTopicReviewedAnswerResponse_Status, v.Status)
+	}
+	serializeSucceededTopicReviewedAnswers(s, schemas.BatchDeleteTopicReviewedAnswerResponse_SucceededAnswers, v.SucceededAnswers)
+	if v.TopicArn != nil {
+		s.WriteString(schemas.BatchDeleteTopicReviewedAnswerResponse_TopicArn, *v.TopicArn)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.BatchDeleteTopicReviewedAnswerResponse_TopicId, *v.TopicId)
+	}
+}
+func (v *BatchDeleteTopicReviewedAnswerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteTopicReviewedAnswerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteTopicReviewedAnswerResponse_InvalidAnswers:
+			return deserializeInvalidTopicReviewedAnswers(d, schemas.BatchDeleteTopicReviewedAnswerResponse_InvalidAnswers, &v.InvalidAnswers)
+		case schemas.BatchDeleteTopicReviewedAnswerResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.BatchDeleteTopicReviewedAnswerResponse_RequestId, v.RequestId)
+		case schemas.BatchDeleteTopicReviewedAnswerResponse_Status:
+			return d.ReadInt32(schemas.BatchDeleteTopicReviewedAnswerResponse_Status, &v.Status)
+		case schemas.BatchDeleteTopicReviewedAnswerResponse_SucceededAnswers:
+			return deserializeSucceededTopicReviewedAnswers(d, schemas.BatchDeleteTopicReviewedAnswerResponse_SucceededAnswers, &v.SucceededAnswers)
+		case schemas.BatchDeleteTopicReviewedAnswerResponse_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.BatchDeleteTopicReviewedAnswerResponse_TopicArn, v.TopicArn)
+		case schemas.BatchDeleteTopicReviewedAnswerResponse_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.BatchDeleteTopicReviewedAnswerResponse_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteTopicReviewedAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteTopicReviewedAnswer, schemas.BatchDeleteTopicReviewedAnswerRequest, schemas.BatchDeleteTopicReviewedAnswerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteTopicReviewedAnswer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteTopicReviewedAnswer, schemas.BatchDeleteTopicReviewedAnswerRequest, schemas.BatchDeleteTopicReviewedAnswerResponse), output: &BatchDeleteTopicReviewedAnswerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteTopicReviewedAnswer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteTopicReviewedAnswer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchDeleteTopicReviewedAnswerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteTopicReviewedAnswer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +168,8 @@ func (c *Client) addOperationBatchDeleteTopicReviewedAnswerMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchDeleteTopicReviewedAnswer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchDeleteTopicReviewedAnswer",
-	}
 }

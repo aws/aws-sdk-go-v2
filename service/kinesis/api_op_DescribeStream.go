@@ -6,12 +6,12 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -88,6 +88,29 @@ type DescribeStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExclusiveStartShardId != nil {
+		s.WriteString(schemas.DescribeStreamInput_ExclusiveStartShardId, *v.ExclusiveStartShardId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeStreamInput_Limit, *v.Limit)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.DescribeStreamInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.DescribeStreamInput_StreamId, *v.StreamId)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.DescribeStreamInput_StreamName, *v.StreamName)
+	}
+}
 func (in *DescribeStreamInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.StreamARN = in.StreamARN
@@ -111,74 +134,50 @@ type DescribeStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamDescription != nil {
+		s.WriteStruct(schemas.DescribeStreamOutput_StreamDescription)
+		v.StreamDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeStreamOutput_StreamDescription:
+			v.StreamDescription = &types.StreamDescription{}
+			return v.StreamDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStream, schemas.DescribeStreamInput, schemas.DescribeStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeStream, schemas.DescribeStreamInput, schemas.DescribeStreamOutput), output: &DescribeStreamOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeStream{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,12 +190,6 @@ func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -563,11 +556,3 @@ type DescribeStreamAPIClient interface {
 }
 
 var _ DescribeStreamAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeStream",
-	}
-}

@@ -4,11 +4,10 @@ package swf
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the specified workflow type. This includes
@@ -69,6 +68,23 @@ type DescribeWorkflowTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkflowTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkflowTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkflowTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeWorkflowTypeInput_domain, *v.Domain)
+	}
+	if v.WorkflowType != nil {
+		s.WriteStruct(schemas.DescribeWorkflowTypeInput_workflowType)
+		v.WorkflowType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Contains details about a workflow type.
 type DescribeWorkflowTypeOutput struct {
 
@@ -98,77 +114,58 @@ type DescribeWorkflowTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkflowTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkflowTypeDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkflowTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.WorkflowTypeDetail_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeInfo != nil {
+		s.WriteStruct(schemas.WorkflowTypeDetail_typeInfo)
+		v.TypeInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeWorkflowTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkflowTypeDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkflowTypeDetail_configuration:
+			v.Configuration = &types.WorkflowTypeConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.WorkflowTypeDetail_typeInfo:
+			v.TypeInfo = &types.WorkflowTypeInfo{}
+			return v.TypeInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkflowType, schemas.DescribeWorkflowTypeInput, schemas.WorkflowTypeDetail)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeWorkflowType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkflowType, schemas.DescribeWorkflowTypeInput, schemas.WorkflowTypeDetail), output: &DescribeWorkflowTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeWorkflowType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkflowType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeWorkflowTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkflowType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +180,8 @@ func (c *Client) addOperationDescribeWorkflowTypeMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeWorkflowType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkflowType",
-	}
 }

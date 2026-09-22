@@ -4,10 +4,9 @@ package securitylake
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the protocol and endpoint that were provided when subscribing to
@@ -31,6 +30,15 @@ type GetDataLakeExceptionSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeExceptionSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeExceptionSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeExceptionSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetDataLakeExceptionSubscriptionOutput struct {
 
 	// The expiration period and time-to-live (TTL). It is the duration of time until
@@ -49,74 +57,57 @@ type GetDataLakeExceptionSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakeExceptionSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakeExceptionSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakeExceptionSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExceptionTimeToLive != nil {
+		s.WriteInt64(schemas.GetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive, *v.ExceptionTimeToLive)
+	}
+	if v.NotificationEndpoint != nil {
+		s.WriteString(schemas.GetDataLakeExceptionSubscriptionResponse_notificationEndpoint, *v.NotificationEndpoint)
+	}
+	if v.SubscriptionProtocol != nil {
+		s.WriteString(schemas.GetDataLakeExceptionSubscriptionResponse_subscriptionProtocol, *v.SubscriptionProtocol)
+	}
+}
+func (v *GetDataLakeExceptionSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataLakeExceptionSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive:
+			v.ExceptionTimeToLive = new(int64)
+			return d.ReadInt64(schemas.GetDataLakeExceptionSubscriptionResponse_exceptionTimeToLive, v.ExceptionTimeToLive)
+		case schemas.GetDataLakeExceptionSubscriptionResponse_notificationEndpoint:
+			v.NotificationEndpoint = new(string)
+			return d.ReadString(schemas.GetDataLakeExceptionSubscriptionResponse_notificationEndpoint, v.NotificationEndpoint)
+		case schemas.GetDataLakeExceptionSubscriptionResponse_subscriptionProtocol:
+			v.SubscriptionProtocol = new(string)
+			return d.ReadString(schemas.GetDataLakeExceptionSubscriptionResponse_subscriptionProtocol, v.SubscriptionProtocol)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataLakeExceptionSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeExceptionSubscription, schemas.GetDataLakeExceptionSubscriptionRequest, schemas.GetDataLakeExceptionSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataLakeExceptionSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakeExceptionSubscription, schemas.GetDataLakeExceptionSubscriptionRequest, schemas.GetDataLakeExceptionSubscriptionResponse), output: &GetDataLakeExceptionSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataLakeExceptionSubscription{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataLakeExceptionSubscription"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataLakeExceptionSubscription(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,22 +122,8 @@ func (c *Client) addOperationGetDataLakeExceptionSubscriptionMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDataLakeExceptionSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDataLakeExceptionSubscription",
-	}
 }

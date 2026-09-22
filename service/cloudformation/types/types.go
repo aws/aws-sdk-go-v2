@@ -303,6 +303,29 @@ type ChangeSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The deployment configuration for a stack operation, including the deployment
+// mode.
+type DeploymentConfig struct {
+
+	// Specifies whether to disable rollback of the stack if the stack operation fails.
+	//
+	// Default: false
+	DisableRollback *bool
+
+	// Specifies the deployment mode for the stack operation. Possible values are:
+	//
+	//   - STANDARD - Use the standard deployment behavior, ensuring resources are
+	//   ready to serve traffic before completing the operation. This is the default. You
+	//   do not need to specify this value explicitly.
+	//
+	//   - EXPRESS - Complete the stack operation when resource configuration is
+	//   applied, without waiting for resources to become ready to serve traffic.
+	//   Resources continue becoming ready in the background.
+	Mode DeploymentConfigMode
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the Organizations accounts where you want to create, update, or
 // delete stack instances. You can target either your entire organization or
 // specific accounts using organizational units (OUs) and account filter options.
@@ -1116,13 +1139,16 @@ type ResourceDriftIgnoredAttribute struct {
 	// Path of the resource attribute for which drift was ignored.
 	Path *string
 
-	// Reason why drift was ignored for the attribute, can have 2 possible values:
+	// Reason why drift was ignored for the attribute, can have 3 possible values:
 	//
-	//   - WRITE_ONLY_PROPERTY - Property is not included in read response for the
+	//   - WRITE_ONLY_PROPERTY – Property is not included in read response for the
 	//   resource’s live state.
 	//
-	//   - MANAGED_BY_AWS - Property is managed by an Amazon Web Services service and
+	//   - MANAGED_BY_AWS – Property is managed by an Amazon Web Services service and
 	//   is expected to be dynamically modified.
+	//
+	//   - SENSITIVE_PROPERTY – Property has a sensitive value, such as an Amazon Web
+	//   Services Secrets Manager value.
 	Reason DriftIgnoredReason
 
 	noSmithyDocumentSerde
@@ -1515,6 +1541,10 @@ type Stack struct {
 
 	// The time the stack was deleted.
 	DeletionTime *time.Time
+
+	// The deployment configuration for the stack, including the deployment mode used
+	// for stack operations.
+	DeploymentConfig *DeploymentConfig
 
 	// A user-defined description associated with the stack.
 	Description *string

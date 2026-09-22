@@ -5,10 +5,10 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Information about the thing registration tasks.
@@ -49,6 +49,27 @@ type ListThingRegistrationTaskReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingRegistrationTaskReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingRegistrationTaskReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingRegistrationTaskReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThingRegistrationTaskReportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsRequest_nextToken, *v.NextToken)
+	}
+	if v.ReportType != "" {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsRequest_reportType, string(v.ReportType))
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsRequest_taskId, *v.TaskId)
+	}
+}
+
 type ListThingRegistrationTaskReportsOutput struct {
 
 	// The token to use to get the next set of results, or null if there are no
@@ -67,77 +88,61 @@ type ListThingRegistrationTaskReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingRegistrationTaskReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingRegistrationTaskReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingRegistrationTaskReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsResponse_nextToken, *v.NextToken)
+	}
+	if v.ReportType != "" {
+		s.WriteString(schemas.ListThingRegistrationTaskReportsResponse_reportType, string(v.ReportType))
+	}
+	serializeS3FileUrlList(s, schemas.ListThingRegistrationTaskReportsResponse_resourceLinks, v.ResourceLinks)
+}
+func (v *ListThingRegistrationTaskReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThingRegistrationTaskReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThingRegistrationTaskReportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThingRegistrationTaskReportsResponse_nextToken, v.NextToken)
+		case schemas.ListThingRegistrationTaskReportsResponse_reportType:
+			var ev string
+			if err := d.ReadString(schemas.ListThingRegistrationTaskReportsResponse_reportType, &ev); err != nil {
+				return err
+			}
+			v.ReportType = types.ReportType(ev)
+			return nil
+		case schemas.ListThingRegistrationTaskReportsResponse_resourceLinks:
+			return deserializeS3FileUrlList(d, schemas.ListThingRegistrationTaskReportsResponse_resourceLinks, &v.ResourceLinks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThingRegistrationTaskReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingRegistrationTaskReports, schemas.ListThingRegistrationTaskReportsRequest, schemas.ListThingRegistrationTaskReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThingRegistrationTaskReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThingRegistrationTaskReports, schemas.ListThingRegistrationTaskReportsRequest, schemas.ListThingRegistrationTaskReportsResponse), output: &ListThingRegistrationTaskReportsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThingRegistrationTaskReports{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListThingRegistrationTaskReports"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListThingRegistrationTaskReportsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListThingRegistrationTaskReports(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +155,6 @@ func (c *Client) addOperationListThingRegistrationTaskReportsMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +258,3 @@ type ListThingRegistrationTaskReportsAPIClient interface {
 }
 
 var _ ListThingRegistrationTaskReportsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListThingRegistrationTaskReports(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListThingRegistrationTaskReports",
-	}
-}

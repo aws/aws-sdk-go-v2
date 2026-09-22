@@ -5,10 +5,10 @@ package lambda
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of configurations for asynchronous invocation for a function.
@@ -57,6 +57,24 @@ type ListFunctionEventInvokeConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionEventInvokeConfigsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionEventInvokeConfigsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionEventInvokeConfigsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.ListFunctionEventInvokeConfigsRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListFunctionEventInvokeConfigsRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != nil {
+		s.WriteInt32(schemas.ListFunctionEventInvokeConfigsRequest_MaxItems, *v.MaxItems)
+	}
+}
+
 type ListFunctionEventInvokeConfigsOutput struct {
 
 	// A list of configurations.
@@ -71,77 +89,51 @@ type ListFunctionEventInvokeConfigsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFunctionEventInvokeConfigsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFunctionEventInvokeConfigsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFunctionEventInvokeConfigsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFunctionEventInvokeConfigList(s, schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs, v.FunctionEventInvokeConfigs)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListFunctionEventInvokeConfigsResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListFunctionEventInvokeConfigsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFunctionEventInvokeConfigsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs:
+			return deserializeFunctionEventInvokeConfigList(d, schemas.ListFunctionEventInvokeConfigsResponse_FunctionEventInvokeConfigs, &v.FunctionEventInvokeConfigs)
+		case schemas.ListFunctionEventInvokeConfigsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListFunctionEventInvokeConfigsResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFunctionEventInvokeConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionEventInvokeConfigs, schemas.ListFunctionEventInvokeConfigsRequest, schemas.ListFunctionEventInvokeConfigsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFunctionEventInvokeConfigs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFunctionEventInvokeConfigs, schemas.ListFunctionEventInvokeConfigsRequest, schemas.ListFunctionEventInvokeConfigsResponse), output: &ListFunctionEventInvokeConfigsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFunctionEventInvokeConfigs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFunctionEventInvokeConfigs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFunctionEventInvokeConfigsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFunctionEventInvokeConfigs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +146,6 @@ func (c *Client) addOperationListFunctionEventInvokeConfigsMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +249,3 @@ type ListFunctionEventInvokeConfigsAPIClient interface {
 }
 
 var _ ListFunctionEventInvokeConfigsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFunctionEventInvokeConfigs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFunctionEventInvokeConfigs",
-	}
-}

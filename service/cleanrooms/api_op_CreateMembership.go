@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a membership for a specific collaboration identifier and joins the
@@ -90,6 +89,81 @@ type CreateMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMembershipInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.CreateMembershipInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.DefaultJobResultConfiguration != nil {
+		s.WriteStruct(schemas.CreateMembershipInput_defaultJobResultConfiguration)
+		v.DefaultJobResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultResultConfiguration != nil {
+		s.WriteStruct(schemas.CreateMembershipInput_defaultResultConfiguration)
+		v.DefaultResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsMetricsEnabled != nil {
+		s.WriteBool(schemas.CreateMembershipInput_isMetricsEnabled, *v.IsMetricsEnabled)
+	}
+	if v.JobLogStatus != "" {
+		s.WriteString(schemas.CreateMembershipInput_jobLogStatus, string(v.JobLogStatus))
+	}
+	if v.PaymentConfiguration != nil {
+		s.WriteStruct(schemas.CreateMembershipInput_paymentConfiguration)
+		v.PaymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryLogStatus != "" {
+		s.WriteString(schemas.CreateMembershipInput_queryLogStatus, string(v.QueryLogStatus))
+	}
+	serializeTagMap(s, schemas.CreateMembershipInput_tags, v.Tags)
+}
+func (v *CreateMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMembershipInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMembershipInput_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.CreateMembershipInput_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.CreateMembershipInput_defaultJobResultConfiguration:
+			v.DefaultJobResultConfiguration = &types.MembershipProtectedJobResultConfiguration{}
+			return v.DefaultJobResultConfiguration.Deserialize(d)
+		case schemas.CreateMembershipInput_defaultResultConfiguration:
+			v.DefaultResultConfiguration = &types.MembershipProtectedQueryResultConfiguration{}
+			return v.DefaultResultConfiguration.Deserialize(d)
+		case schemas.CreateMembershipInput_isMetricsEnabled:
+			v.IsMetricsEnabled = new(bool)
+			return d.ReadBool(schemas.CreateMembershipInput_isMetricsEnabled, v.IsMetricsEnabled)
+		case schemas.CreateMembershipInput_jobLogStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateMembershipInput_jobLogStatus, &ev); err != nil {
+				return err
+			}
+			v.JobLogStatus = types.MembershipJobLogStatus(ev)
+			return nil
+		case schemas.CreateMembershipInput_paymentConfiguration:
+			v.PaymentConfiguration = &types.MembershipPaymentConfiguration{}
+			return v.PaymentConfiguration.Deserialize(d)
+		case schemas.CreateMembershipInput_queryLogStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateMembershipInput_queryLogStatus, &ev); err != nil {
+				return err
+			}
+			v.QueryLogStatus = types.MembershipQueryLogStatus(ev)
+			return nil
+		case schemas.CreateMembershipInput_tags:
+			return deserializeTagMap(d, schemas.CreateMembershipInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateMembershipOutput struct {
 
 	// The membership that was created.
@@ -103,77 +177,50 @@ type CreateMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMembershipOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Membership != nil {
+		s.WriteStruct(schemas.CreateMembershipOutput_membership)
+		v.Membership.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMembershipOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMembershipOutput_membership:
+			v.Membership = &types.Membership{}
+			return v.Membership.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMembership, schemas.CreateMembershipInput, schemas.CreateMembershipOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMembership, schemas.CreateMembershipInput, schemas.CreateMembershipOutput), output: &CreateMembershipOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMembership{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMembership"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateMembershipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMembership(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +235,8 @@ func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateMembership(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMembership",
-	}
 }

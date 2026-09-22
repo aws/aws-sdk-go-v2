@@ -1,0 +1,5 @@
+PUT /2015-02-01/file-systems/__FileSystemId__/protection
+
+Content-Type: application/json
+
+{"ReplicationOverwriteProtection":"ENABLED"}

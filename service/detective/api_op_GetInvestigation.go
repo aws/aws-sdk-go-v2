@@ -4,11 +4,10 @@ package detective
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -46,6 +45,21 @@ type GetInvestigationInput struct {
 	InvestigationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetInvestigationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvestigationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvestigationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.GetInvestigationRequest_GraphArn, *v.GraphArn)
+	}
+	if v.InvestigationId != nil {
+		s.WriteString(schemas.GetInvestigationRequest_InvestigationId, *v.InvestigationId)
+	}
 }
 
 type GetInvestigationOutput struct {
@@ -93,77 +107,118 @@ type GetInvestigationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvestigationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvestigationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvestigationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.GetInvestigationResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.EntityArn != nil {
+		s.WriteString(schemas.GetInvestigationResponse_EntityArn, *v.EntityArn)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.GetInvestigationResponse_EntityType, string(v.EntityType))
+	}
+	if v.GraphArn != nil {
+		s.WriteString(schemas.GetInvestigationResponse_GraphArn, *v.GraphArn)
+	}
+	if v.InvestigationId != nil {
+		s.WriteString(schemas.GetInvestigationResponse_InvestigationId, *v.InvestigationId)
+	}
+	if v.ScopeEndTime != nil {
+		s.WriteTime(schemas.GetInvestigationResponse_ScopeEndTime, *v.ScopeEndTime)
+	}
+	if v.ScopeStartTime != nil {
+		s.WriteTime(schemas.GetInvestigationResponse_ScopeStartTime, *v.ScopeStartTime)
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.GetInvestigationResponse_Severity, string(v.Severity))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GetInvestigationResponse_State, string(v.State))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetInvestigationResponse_Status, string(v.Status))
+	}
+}
+func (v *GetInvestigationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInvestigationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInvestigationResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetInvestigationResponse_CreatedTime, v.CreatedTime)
+		case schemas.GetInvestigationResponse_EntityArn:
+			v.EntityArn = new(string)
+			return d.ReadString(schemas.GetInvestigationResponse_EntityArn, v.EntityArn)
+		case schemas.GetInvestigationResponse_EntityType:
+			var ev string
+			if err := d.ReadString(schemas.GetInvestigationResponse_EntityType, &ev); err != nil {
+				return err
+			}
+			v.EntityType = types.EntityType(ev)
+			return nil
+		case schemas.GetInvestigationResponse_GraphArn:
+			v.GraphArn = new(string)
+			return d.ReadString(schemas.GetInvestigationResponse_GraphArn, v.GraphArn)
+		case schemas.GetInvestigationResponse_InvestigationId:
+			v.InvestigationId = new(string)
+			return d.ReadString(schemas.GetInvestigationResponse_InvestigationId, v.InvestigationId)
+		case schemas.GetInvestigationResponse_ScopeEndTime:
+			v.ScopeEndTime = new(time.Time)
+			return d.ReadTime(schemas.GetInvestigationResponse_ScopeEndTime, v.ScopeEndTime)
+		case schemas.GetInvestigationResponse_ScopeStartTime:
+			v.ScopeStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetInvestigationResponse_ScopeStartTime, v.ScopeStartTime)
+		case schemas.GetInvestigationResponse_Severity:
+			var ev string
+			if err := d.ReadString(schemas.GetInvestigationResponse_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = types.Severity(ev)
+			return nil
+		case schemas.GetInvestigationResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.GetInvestigationResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.State(ev)
+			return nil
+		case schemas.GetInvestigationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetInvestigationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInvestigationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvestigation, schemas.GetInvestigationRequest, schemas.GetInvestigationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInvestigation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvestigation, schemas.GetInvestigationRequest, schemas.GetInvestigationResponse), output: &GetInvestigationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInvestigation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInvestigation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetInvestigationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInvestigation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +233,8 @@ func (c *Client) addOperationGetInvestigationMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetInvestigation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetInvestigation",
-	}
 }

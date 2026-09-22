@@ -5,22 +5,22 @@ package connectparticipant
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends a message.
 //
-// For security recommendations, see [Amazon Connect Chat security best practices].
+// For security recommendations, see [Connect Customer Chat security best practices].
 //
 // ConnectionToken is used for invoking this API instead of ParticipantToken .
 //
 // The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
 //
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optFns ...func(*Options)) (*SendMessageOutput, error) {
 	if params == nil {
 		params = &SendMessageInput{}
@@ -83,6 +83,27 @@ type SendMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendMessageRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.SendMessageRequest_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.SendMessageRequest_Content, *v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.SendMessageRequest_ContentType, *v.ContentType)
+	}
+}
+
 type SendMessageOutput struct {
 
 	// The time when the message was sent.
@@ -103,65 +124,56 @@ type SendMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendMessageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbsoluteTime != nil {
+		s.WriteString(schemas.SendMessageResponse_AbsoluteTime, *v.AbsoluteTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SendMessageResponse_Id, *v.Id)
+	}
+	if v.MessageMetadata != nil {
+		s.WriteStruct(schemas.SendMessageResponse_MessageMetadata)
+		v.MessageMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SendMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendMessageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendMessageResponse_AbsoluteTime:
+			v.AbsoluteTime = new(string)
+			return d.ReadString(schemas.SendMessageResponse_AbsoluteTime, v.AbsoluteTime)
+		case schemas.SendMessageResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SendMessageResponse_Id, v.Id)
+		case schemas.SendMessageResponse_MessageMetadata:
+			v.MessageMetadata = &types.MessageProcessingMetadata{}
+			return v.MessageMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendMessage, schemas.SendMessageRequest, schemas.SendMessageResponse), output: &SendMessageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendMessage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendMessage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -171,12 +183,6 @@ func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpSendMessageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendMessage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,12 +195,6 @@ func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -234,12 +234,4 @@ func (m *idempotencyToken_initializeOpSendMessage) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opSendMessageMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpSendMessage{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opSendMessage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendMessage",
-	}
 }

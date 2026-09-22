@@ -5,10 +5,10 @@ package kafka
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of all the MSK clusters in the current Region.
@@ -48,6 +48,27 @@ type ListClustersV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClustersV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClustersV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClustersV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterNameFilter != nil {
+		s.WriteString(schemas.ListClustersV2Request_ClusterNameFilter, *v.ClusterNameFilter)
+	}
+	if v.ClusterTypeFilter != nil {
+		s.WriteString(schemas.ListClustersV2Request_ClusterTypeFilter, *v.ClusterTypeFilter)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListClustersV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClustersV2Request_NextToken, *v.NextToken)
+	}
+}
+
 type ListClustersV2Output struct {
 
 	// Information on each of the MSK clusters in the response.
@@ -64,74 +85,48 @@ type ListClustersV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListClustersV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListClustersV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListClustersV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfCluster(s, schemas.ListClustersV2Response_ClusterInfoList, v.ClusterInfoList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListClustersV2Response_NextToken, *v.NextToken)
+	}
+}
+func (v *ListClustersV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListClustersV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListClustersV2Response_ClusterInfoList:
+			return deserialize__listOfCluster(d, schemas.ListClustersV2Response_ClusterInfoList, &v.ClusterInfoList)
+		case schemas.ListClustersV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListClustersV2Response_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListClustersV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClustersV2, schemas.ListClustersV2Request, schemas.ListClustersV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListClustersV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListClustersV2, schemas.ListClustersV2Request, schemas.ListClustersV2Response), output: &ListClustersV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListClustersV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListClustersV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClustersV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +139,6 @@ func (c *Client) addOperationListClustersV2Middlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +240,3 @@ type ListClustersV2APIClient interface {
 }
 
 var _ ListClustersV2APIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListClustersV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListClustersV2",
-	}
-}

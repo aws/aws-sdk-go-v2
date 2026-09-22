@@ -4,11 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetConnectorV2Input struct {
 	ConnectorId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConnectorV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectorV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectorV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.GetConnectorV2Request_ConnectorId, *v.ConnectorId)
+	}
 }
 
 type GetConnectorV2Output struct {
@@ -76,6 +87,13 @@ type GetConnectorV2Output struct {
 	// The description of the connectorV2.
 	Description *string
 
+	// The enablement status of the connector.
+	EnablementStatus types.EnablementStatus
+
+	// The reason for the current enablement status. Provides additional context when
+	// the connector is in a failed state.
+	EnablementStatusReason *string
+
 	// The Amazon Resource Name (ARN) of KMS key used for the connectorV2.
 	KmsKeyArn *string
 
@@ -85,77 +103,111 @@ type GetConnectorV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConnectorV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConnectorV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConnectorV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.GetConnectorV2Response_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.GetConnectorV2Response_ConnectorId, *v.ConnectorId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetConnectorV2Response_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetConnectorV2Response_Description, *v.Description)
+	}
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.GetConnectorV2Response_EnablementStatus, string(v.EnablementStatus))
+	}
+	if v.EnablementStatusReason != nil {
+		s.WriteString(schemas.GetConnectorV2Response_EnablementStatusReason, *v.EnablementStatusReason)
+	}
+	if v.Health != nil {
+		s.WriteStruct(schemas.GetConnectorV2Response_Health)
+		v.Health.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetConnectorV2Response_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetConnectorV2Response_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetConnectorV2Response_Name, *v.Name)
+	}
+	serializeProviderDetail(s, schemas.GetConnectorV2Response_ProviderDetail, v.ProviderDetail)
+}
+func (v *GetConnectorV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConnectorV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConnectorV2Response_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.GetConnectorV2Response_ConnectorArn, v.ConnectorArn)
+		case schemas.GetConnectorV2Response_ConnectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.GetConnectorV2Response_ConnectorId, v.ConnectorId)
+		case schemas.GetConnectorV2Response_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConnectorV2Response_CreatedAt, v.CreatedAt)
+		case schemas.GetConnectorV2Response_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetConnectorV2Response_Description, v.Description)
+		case schemas.GetConnectorV2Response_EnablementStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetConnectorV2Response_EnablementStatus, &ev); err != nil {
+				return err
+			}
+			v.EnablementStatus = types.EnablementStatus(ev)
+			return nil
+		case schemas.GetConnectorV2Response_EnablementStatusReason:
+			v.EnablementStatusReason = new(string)
+			return d.ReadString(schemas.GetConnectorV2Response_EnablementStatusReason, v.EnablementStatusReason)
+		case schemas.GetConnectorV2Response_Health:
+			v.Health = &types.HealthCheck{}
+			return v.Health.Deserialize(d)
+		case schemas.GetConnectorV2Response_KmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetConnectorV2Response_KmsKeyArn, v.KmsKeyArn)
+		case schemas.GetConnectorV2Response_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetConnectorV2Response_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetConnectorV2Response_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConnectorV2Response_Name, v.Name)
+		case schemas.GetConnectorV2Response_ProviderDetail:
+			return deserializeProviderDetail(d, schemas.GetConnectorV2Response_ProviderDetail, &v.ProviderDetail)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConnectorV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectorV2, schemas.GetConnectorV2Request, schemas.GetConnectorV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConnectorV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConnectorV2, schemas.GetConnectorV2Request, schemas.GetConnectorV2Response), output: &GetConnectorV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConnectorV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConnectorV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetConnectorV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConnectorV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +222,8 @@ func (c *Client) addOperationGetConnectorV2Middlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetConnectorV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetConnectorV2",
-	}
 }

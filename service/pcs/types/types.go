@@ -359,6 +359,12 @@ type ComputeNodeGroup struct {
 	// The list of errors that occurred during compute node group provisioning.
 	ErrorInfo []ErrorInfo
 
+	// The lifecycle actions to run on compute nodes in the compute node group. Use
+	// lifecycle actions to run custom scripts at defined stages of a compute node's
+	// lifecycle, such as when a compute node finishes bootstrapping or becomes ready
+	// to accept jobs.
+	NodeLifecycleActions *NodeLifecycleActions
+
 	// Specifies how EC2 instances are purchased on your behalf. PCS supports
 	// On-Demand Instances, Spot Instances, Interruptible Capacity Reservations,
 	// On-Demand Capacity Reservations, and Amazon EC2 Capacity Blocks for ML. For more
@@ -397,6 +403,20 @@ type ComputeNodeGroupConfiguration struct {
 // Additional options related to the Slurm scheduler.
 type ComputeNodeGroupSlurmConfiguration struct {
 
+	// The additional Slurm gres.conf records for the compute node group. Each item is
+	// a map of gres.conf attribute names to values that describes one gres.conf
+	// record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the
+	// NodeName= prefix and merges these records with the GPU record it derives from
+	// the instance type.
+	GresCustomSettings []map[string]string
+
+	// The time (in seconds) before an idle node is scaled down. If not specified, the
+	// cluster-level setting applies. This overrides the cluster-level
+	// scaleDownIdleTimeInSeconds setting. A value of -1 removes the override and
+	// applies the cluster-level setting to this compute node group. Requires Slurm
+	// version 25.11 or later.
+	ScaleDownIdleTimeInSeconds *int32
+
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
 
@@ -405,6 +425,20 @@ type ComputeNodeGroupSlurmConfiguration struct {
 
 // Additional options related to the Slurm scheduler.
 type ComputeNodeGroupSlurmConfigurationRequest struct {
+
+	// The additional Slurm gres.conf records for the compute node group. Each item is
+	// a map of gres.conf attribute names to values that describes one gres.conf
+	// record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the
+	// NodeName= prefix and merges these records with the GPU record it derives from
+	// the instance type.
+	GresCustomSettings []map[string]string
+
+	// The time (in seconds) before an idle node is scaled down. If not specified, the
+	// cluster-level setting applies. This overrides the cluster-level
+	// scaleDownIdleTimeInSeconds setting. A value of -1 removes the override and
+	// applies the cluster-level setting to this compute node group. Requires Slurm
+	// version 25.11 or later.
+	ScaleDownIdleTimeInSeconds *int32
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
@@ -640,6 +674,107 @@ type NetworkingRequest struct {
 	noSmithyDocumentSerde
 }
 
+// The lifecycle actions configured on a compute node group. Lifecycle actions
+// define scripts that PCS runs on compute nodes at specific stages of their
+// lifecycle.
+type NodeLifecycleActions struct {
+
+	// The lifecycle stages where you configure scripts to run.
+	//
+	// This member is required.
+	Stages *NodeLifecycleStages
+
+	// The caching policy for node lifecycle scripts. The default value is CACHE_ONCE .
+	// Valid values:
+	//
+	//   - CACHE_ONCE – Downloads each script once and reuses it on subsequent boots.
+	//
+	//   - REFRESH_ON_REBOOT – Downloads each script on every boot.
+	ScriptCachingPolicy ScriptCachingPolicy
+
+	noSmithyDocumentSerde
+}
+
+// The lifecycle actions to configure on a compute node group when you create it.
+// Lifecycle actions define scripts that PCS runs on compute nodes at specific
+// stages of their lifecycle.
+type NodeLifecycleActionsRequest struct {
+
+	// The lifecycle stages where you configure scripts to run.
+	//
+	// This member is required.
+	Stages *NodeLifecycleStages
+
+	// The caching policy for node lifecycle scripts. The default value is CACHE_ONCE .
+	// Valid values:
+	//
+	//   - CACHE_ONCE – Downloads each script once and reuses it on subsequent boots.
+	//
+	//   - REFRESH_ON_REBOOT – Downloads each script on every boot.
+	ScriptCachingPolicy ScriptCachingPolicy
+
+	noSmithyDocumentSerde
+}
+
+// A script to run during a compute node lifecycle stage.
+type NodeLifecycleScript struct {
+
+	// A unique name for the script. The name can be up to 64 characters long. Valid
+	// characters are letters, numbers, spaces, underscores ( _ ), and hyphens ( - ).
+	// The first character must be a letter or a number.
+	//
+	// This member is required.
+	Name *string
+
+	// The source location and integrity information for the script.
+	//
+	// This member is required.
+	ScriptSource *ScriptSource
+
+	// The command-line arguments to pass to the script. You can specify up to 20
+	// arguments, and each argument can be up to 256 characters long.
+	Arguments []string
+
+	// The policy that determines when the script runs. The default value is
+	// FIRST_BOOT_ONLY . Valid values:
+	//
+	//   - FIRST_BOOT_ONLY – Runs the script only the first time the compute node boots.
+	//
+	//   - EVERY_BOOT – Runs the script every time the compute node boots, including
+	//   reboots.
+	ExecutionPolicy ExecutionPolicy
+
+	// The behavior when the script fails. The default value is TERMINATE . Valid
+	// values:
+	//
+	//   - TERMINATE – Terminates the compute node.
+	//
+	//   - STOP_SEQUENCE – Stops running subsequent scripts in the sequence but doesn't
+	//   terminate the compute node.
+	//
+	//   - CONTINUE – Ignores the error and continues running the next script.
+	OnError OnError
+
+	noSmithyDocumentSerde
+}
+
+// The stages of a compute node's lifecycle where you can configure scripts to run.
+type NodeLifecycleStages struct {
+
+	// The scripts to run after PCS finishes setting up the compute node and before
+	// the Slurm daemon ( slurmd ) starts. Use this stage for tasks that must complete
+	// before the node accepts jobs, such as mounting shared storage, configuring
+	// networking, or installing software packages.
+	NodeBootstrapped []NodeLifecycleScript
+
+	// The scripts to run after the Slurm daemon ( slurmd ) starts and the compute node
+	// registers with the Slurm controller. Use this stage for tasks that require Slurm
+	// to be running, such as running Slurm commands.
+	NodeReady []NodeLifecycleScript
+
+	noSmithyDocumentSerde
+}
+
 // A queue resource.
 type Queue struct {
 
@@ -815,12 +950,13 @@ type Scheduler struct {
 	Type SchedulerType
 
 	// The version of the specified scheduling software that PCS uses to manage
-	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
-	// Guide.
+	// cluster scaling and job scheduling. You can update this version using the
+	// UpdateCluster API action. For more information, see [Updating the scheduler version on a cluster] and [Slurm versions in PCS] in the PCS User Guide.
 	//
-	// Valid Values: 23.11 | 24.05 | 24.11 | 25.05 | 25.11
+	// Valid Values: 23.11 | 24.05 | 24.11 | 25.05 | 25.11 | 26.05
 	//
 	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
+	// [Updating the scheduler version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
 	//
 	// This member is required.
 	Version *string
@@ -840,12 +976,34 @@ type SchedulerRequest struct {
 	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
 	// Guide.
 	//
-	// Valid Values: 24.11 | 25.05 | 25.11
+	// Valid Values: 24.11 | 25.05 | 25.11 | 26.05
 	//
 	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// The source location and integrity information for a node lifecycle script.
+type ScriptSource struct {
+
+	// The location of the script. Specify either an Amazon S3 URI in the format
+	// s3://bucket-name/key or an HTTPS URL.
+	//
+	// This member is required.
+	ScriptLocation *string
+
+	// The SHA-256 checksum of the script content, as a 64-character hexadecimal
+	// string. This value is optional. When specified, PCS uses this value to verify
+	// the integrity of the downloaded script.
+	Checksum *string
+
+	// The Amazon S3 version ID of the script. Use this value to pin the script to a
+	// specific version in a versioned Amazon S3 bucket. This value is only valid when
+	// scriptLocation is an Amazon S3 URI.
+	S3VersionId *string
 
 	noSmithyDocumentSerde
 }
@@ -1010,8 +1168,43 @@ type UpdateClusterSlurmConfigurationRequest struct {
 // Additional options related to the Slurm scheduler.
 type UpdateComputeNodeGroupSlurmConfigurationRequest struct {
 
+	// The additional Slurm gres.conf records for the compute node group. Each item is
+	// a map of gres.conf attribute names to values that describes one gres.conf
+	// record, such as a GPU topology, MIG, MPS, or custom GRES entry. PCS adds the
+	// NodeName= prefix and merges these records with the GPU record it derives from
+	// the instance type.
+	GresCustomSettings []map[string]string
+
+	// The time (in seconds) before an idle node is scaled down. If not specified, the
+	// cluster-level setting applies. This overrides the cluster-level
+	// scaleDownIdleTimeInSeconds setting. A value of -1 removes the override and
+	// applies the cluster-level setting to this compute node group. Requires Slurm
+	// version 25.11 or later.
+	ScaleDownIdleTimeInSeconds *int32
+
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
+
+	noSmithyDocumentSerde
+}
+
+// The lifecycle actions to configure on a compute node group when you update it.
+// Lifecycle actions define scripts that PCS runs on compute nodes at specific
+// stages of their lifecycle.
+type UpdateNodeLifecycleActionsRequest struct {
+
+	// The lifecycle stages where you configure scripts to run.
+	//
+	// This member is required.
+	Stages *NodeLifecycleStages
+
+	// The caching policy for node lifecycle scripts. The default value is CACHE_ONCE .
+	// Valid values:
+	//
+	//   - CACHE_ONCE – Downloads each script once and reuses it on subsequent boots.
+	//
+	//   - REFRESH_ON_REBOOT – Downloads each script on every boot.
+	ScriptCachingPolicy ScriptCachingPolicy
 
 	noSmithyDocumentSerde
 }
@@ -1021,6 +1214,24 @@ type UpdateQueueSlurmConfigurationRequest struct {
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
+
+	noSmithyDocumentSerde
+}
+
+// The scheduler configuration for updating a cluster. Use this to specify the
+// scheduler version to update to.
+type UpdateSchedulerRequest struct {
+
+	// The scheduler version to update the cluster to. You can only update to a newer
+	// version. For more information about supported versions and update paths, see [Updating the scheduler version on a cluster]in
+	// the PCS User Guide.
+	//
+	// Valid Values: 24.05 | 24.11 | 25.05 | 25.11 | 26.05
+	//
+	// [Updating the scheduler version on a cluster]: https://docs.aws.amazon.com/pcs/latest/userguide/working-with_clusters_version_update.html
+	//
+	// This member is required.
+	Version *string
 
 	noSmithyDocumentSerde
 }

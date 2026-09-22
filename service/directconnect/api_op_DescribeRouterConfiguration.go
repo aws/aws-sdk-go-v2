@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Details about the router.
@@ -42,6 +41,21 @@ type DescribeRouterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRouterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRouterConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRouterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterTypeIdentifier != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationRequest_routerTypeIdentifier, *v.RouterTypeIdentifier)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+}
+
 type DescribeRouterConfigurationOutput struct {
 
 	// The customer router configuration.
@@ -62,77 +76,68 @@ type DescribeRouterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRouterConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRouterConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRouterConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerRouterConfig != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationResponse_customerRouterConfig, *v.CustomerRouterConfig)
+	}
+	if v.Router != nil {
+		s.WriteStruct(schemas.DescribeRouterConfigurationResponse_router)
+		v.Router.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationResponse_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.DescribeRouterConfigurationResponse_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+}
+func (v *DescribeRouterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRouterConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRouterConfigurationResponse_customerRouterConfig:
+			v.CustomerRouterConfig = new(string)
+			return d.ReadString(schemas.DescribeRouterConfigurationResponse_customerRouterConfig, v.CustomerRouterConfig)
+		case schemas.DescribeRouterConfigurationResponse_router:
+			v.Router = &types.RouterType{}
+			return v.Router.Deserialize(d)
+		case schemas.DescribeRouterConfigurationResponse_virtualInterfaceId:
+			v.VirtualInterfaceId = new(string)
+			return d.ReadString(schemas.DescribeRouterConfigurationResponse_virtualInterfaceId, v.VirtualInterfaceId)
+		case schemas.DescribeRouterConfigurationResponse_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.DescribeRouterConfigurationResponse_virtualInterfaceName, v.VirtualInterfaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRouterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRouterConfiguration, schemas.DescribeRouterConfigurationRequest, schemas.DescribeRouterConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeRouterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRouterConfiguration, schemas.DescribeRouterConfigurationRequest, schemas.DescribeRouterConfigurationResponse), output: &DescribeRouterConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeRouterConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRouterConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRouterConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRouterConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +152,8 @@ func (c *Client) addOperationDescribeRouterConfigurationMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeRouterConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRouterConfiguration",
-	}
 }

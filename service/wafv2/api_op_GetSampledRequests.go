@@ -4,11 +4,10 @@ package wafv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets detailed information about a specified number of requests--a sample--that
@@ -86,6 +85,32 @@ type GetSampledRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSampledRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSampledRequestsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSampledRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxItems != nil {
+		s.WriteInt64(schemas.GetSampledRequestsRequest_MaxItems, *v.MaxItems)
+	}
+	if v.RuleMetricName != nil {
+		s.WriteString(schemas.GetSampledRequestsRequest_RuleMetricName, *v.RuleMetricName)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetSampledRequestsRequest_Scope, string(v.Scope))
+	}
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.GetSampledRequestsRequest_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebAclArn != nil {
+		s.WriteString(schemas.GetSampledRequestsRequest_WebAclArn, *v.WebAclArn)
+	}
+}
+
 type GetSampledRequestsOutput struct {
 
 	// The total number of requests from which GetSampledRequests got a sample of
@@ -111,77 +136,58 @@ type GetSampledRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSampledRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSampledRequestsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSampledRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PopulationSize != 0 {
+		s.WriteInt64(schemas.GetSampledRequestsResponse_PopulationSize, v.PopulationSize)
+	}
+	serializeSampledHTTPRequests(s, schemas.GetSampledRequestsResponse_SampledRequests, v.SampledRequests)
+	if v.TimeWindow != nil {
+		s.WriteStruct(schemas.GetSampledRequestsResponse_TimeWindow)
+		v.TimeWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSampledRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSampledRequestsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSampledRequestsResponse_PopulationSize:
+			return d.ReadInt64(schemas.GetSampledRequestsResponse_PopulationSize, &v.PopulationSize)
+		case schemas.GetSampledRequestsResponse_SampledRequests:
+			return deserializeSampledHTTPRequests(d, schemas.GetSampledRequestsResponse_SampledRequests, &v.SampledRequests)
+		case schemas.GetSampledRequestsResponse_TimeWindow:
+			v.TimeWindow = &types.TimeWindow{}
+			return v.TimeWindow.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSampledRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSampledRequests, schemas.GetSampledRequestsRequest, schemas.GetSampledRequestsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSampledRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSampledRequests, schemas.GetSampledRequestsRequest, schemas.GetSampledRequestsResponse), output: &GetSampledRequestsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSampledRequests{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSampledRequests"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSampledRequestsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSampledRequests(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +202,8 @@ func (c *Client) addOperationGetSampledRequestsMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSampledRequests(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSampledRequests",
-	}
 }

@@ -4,10 +4,9 @@ package query
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -32,6 +31,22 @@ type XmlTimestampsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlTimestampsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlTimestampsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *XmlTimestampsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type XmlTimestampsOutput struct {
 	DateTime *time.Time
 
@@ -53,74 +68,81 @@ type XmlTimestampsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlTimestampsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlTimestampsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlTimestampsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateTime != nil {
+		s.WriteTime(schemas.XmlTimestampsOutput_dateTime, *v.DateTime)
+	}
+	if v.DateTimeOnTarget != nil {
+		s.WriteTime(schemas.XmlTimestampsOutput_dateTimeOnTarget, *v.DateTimeOnTarget)
+	}
+	if v.EpochSeconds != nil {
+		s.WriteTime(schemas.XmlTimestampsOutput_epochSeconds, *v.EpochSeconds)
+	}
+	if v.EpochSecondsOnTarget != nil {
+		s.WriteTime(schemas.XmlTimestampsOutput_epochSecondsOnTarget, *v.EpochSecondsOnTarget)
+	}
+	if v.HttpDate != nil {
+		s.WriteTime(schemas.XmlTimestampsOutput_httpDate, *v.HttpDate)
+	}
+	if v.HttpDateOnTarget != nil {
+		s.WriteTime(schemas.XmlTimestampsOutput_httpDateOnTarget, *v.HttpDateOnTarget)
+	}
+	if v.Normal != nil {
+		s.WriteTime(schemas.XmlTimestampsOutput_normal, *v.Normal)
+	}
+}
+func (v *XmlTimestampsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlTimestampsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlTimestampsOutput_dateTime:
+			v.DateTime = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsOutput_dateTime, v.DateTime)
+		case schemas.XmlTimestampsOutput_dateTimeOnTarget:
+			v.DateTimeOnTarget = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsOutput_dateTimeOnTarget, v.DateTimeOnTarget)
+		case schemas.XmlTimestampsOutput_epochSeconds:
+			v.EpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsOutput_epochSeconds, v.EpochSeconds)
+		case schemas.XmlTimestampsOutput_epochSecondsOnTarget:
+			v.EpochSecondsOnTarget = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsOutput_epochSecondsOnTarget, v.EpochSecondsOnTarget)
+		case schemas.XmlTimestampsOutput_httpDate:
+			v.HttpDate = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsOutput_httpDate, v.HttpDate)
+		case schemas.XmlTimestampsOutput_httpDateOnTarget:
+			v.HttpDateOnTarget = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsOutput_httpDateOnTarget, v.HttpDateOnTarget)
+		case schemas.XmlTimestampsOutput_normal:
+			v.Normal = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsOutput_normal, v.Normal)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlTimestamps, nil, schemas.XmlTimestampsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpXmlTimestamps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlTimestamps, nil, schemas.XmlTimestampsOutput), output: &XmlTimestampsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpXmlTimestamps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlTimestamps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opXmlTimestamps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +157,8 @@ func (c *Client) addOperationXmlTimestampsMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opXmlTimestamps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "XmlTimestamps",
-	}
 }

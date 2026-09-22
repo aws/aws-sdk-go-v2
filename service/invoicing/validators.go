@@ -190,6 +190,26 @@ func (m *validateOpListInvoiceSummaries) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListProcurementPortalSuppliers struct {
+}
+
+func (*validateOpListProcurementPortalSuppliers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListProcurementPortalSuppliers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListProcurementPortalSuppliersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListProcurementPortalSuppliersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpPutProcurementPortalPreference) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutProcurementPortalPreferenceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendProcurementPortalValidation struct {
+}
+
+func (*validateOpSendProcurementPortalValidation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendProcurementPortalValidation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendProcurementPortalValidationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendProcurementPortalValidationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +350,26 @@ func (m *validateOpUpdateProcurementPortalPreferenceStatus) HandleInitialize(ctx
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpVerifyProcurementPortalValidation struct {
+}
+
+func (*validateOpVerifyProcurementPortalValidation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpVerifyProcurementPortalValidation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*VerifyProcurementPortalValidationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpVerifyProcurementPortalValidationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpBatchGetInvoiceProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetInvoiceProfile{}, middleware.After)
 }
@@ -346,12 +406,20 @@ func addOpListInvoiceSummariesValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpListInvoiceSummaries{}, middleware.After)
 }
 
+func addOpListProcurementPortalSuppliersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListProcurementPortalSuppliers{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpPutProcurementPortalPreferenceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutProcurementPortalPreference{}, middleware.After)
+}
+
+func addOpSendProcurementPortalValidationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendProcurementPortalValidation{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -368,6 +436,10 @@ func addOpUpdateInvoiceUnitValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateProcurementPortalPreferenceStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProcurementPortalPreferenceStatus{}, middleware.After)
+}
+
+func addOpVerifyProcurementPortalValidationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpVerifyProcurementPortalValidation{}, middleware.After)
 }
 
 func validateBillingPeriod(v *types.BillingPeriod) error {
@@ -723,6 +795,21 @@ func validateOpListInvoiceSummariesInput(v *ListInvoiceSummariesInput) error {
 	}
 }
 
+func validateOpListProcurementPortalSuppliersInput(v *ListProcurementPortalSuppliersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListProcurementPortalSuppliersInput"}
+	if v.PortalIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PortalIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -764,6 +851,21 @@ func validateOpPutProcurementPortalPreferenceInput(v *PutProcurementPortalPrefer
 	}
 	if v.Contacts == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Contacts"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendProcurementPortalValidationInput(v *SendProcurementPortalValidationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendProcurementPortalValidationInput"}
+	if v.ProcurementPortalPreferenceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProcurementPortalPreferenceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -834,6 +936,24 @@ func validateOpUpdateProcurementPortalPreferenceStatusInput(v *UpdateProcurement
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProcurementPortalPreferenceStatusInput"}
 	if v.ProcurementPortalPreferenceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProcurementPortalPreferenceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpVerifyProcurementPortalValidationInput(v *VerifyProcurementPortalValidationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifyProcurementPortalValidationInput"}
+	if v.ProcurementPortalPreferenceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProcurementPortalPreferenceArn"))
+	}
+	if v.Code == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Code"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

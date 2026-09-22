@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +42,21 @@ type GetBudgetInput struct {
 	FarmId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBudgetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBudgetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBudgetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BudgetId != nil {
+		s.WriteString(schemas.GetBudgetRequest_budgetId, *v.BudgetId)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetBudgetRequest_farmId, *v.FarmId)
+	}
 }
 
 // Mixin that adds an optional ARN field to response structures. Apply to
@@ -128,65 +144,117 @@ type GetBudgetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBudgetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBudgetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBudgetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResponseBudgetActionList(s, schemas.GetBudgetResponse_actions, v.Actions)
+	if v.ApproximateDollarLimit != nil {
+		s.WriteFloat32(schemas.GetBudgetResponse_approximateDollarLimit, *v.ApproximateDollarLimit)
+	}
+	if v.BudgetId != nil {
+		s.WriteString(schemas.GetBudgetResponse_budgetId, *v.BudgetId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetBudgetResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetBudgetResponse_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetBudgetResponse_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetBudgetResponse_displayName, *v.DisplayName)
+	}
+	if v.QueueStoppedAt != nil {
+		s.WriteTime(schemas.GetBudgetResponse_queueStoppedAt, *v.QueueStoppedAt)
+	}
+	serializeBudgetSchedule(s, schemas.GetBudgetResponse_schedule, v.Schedule)
+	if v.Status != "" {
+		s.WriteString(schemas.GetBudgetResponse_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetBudgetResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetBudgetResponse_updatedBy, *v.UpdatedBy)
+	}
+	serializeUsageTrackingResource(s, schemas.GetBudgetResponse_usageTrackingResource, v.UsageTrackingResource)
+	if v.Usages != nil {
+		s.WriteStruct(schemas.GetBudgetResponse_usages)
+		v.Usages.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetBudgetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBudgetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBudgetResponse_actions:
+			return deserializeResponseBudgetActionList(d, schemas.GetBudgetResponse_actions, &v.Actions)
+		case schemas.GetBudgetResponse_approximateDollarLimit:
+			v.ApproximateDollarLimit = new(float32)
+			return d.ReadFloat32(schemas.GetBudgetResponse_approximateDollarLimit, v.ApproximateDollarLimit)
+		case schemas.GetBudgetResponse_budgetId:
+			v.BudgetId = new(string)
+			return d.ReadString(schemas.GetBudgetResponse_budgetId, v.BudgetId)
+		case schemas.GetBudgetResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBudgetResponse_createdAt, v.CreatedAt)
+		case schemas.GetBudgetResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetBudgetResponse_createdBy, v.CreatedBy)
+		case schemas.GetBudgetResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBudgetResponse_description, v.Description)
+		case schemas.GetBudgetResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetBudgetResponse_displayName, v.DisplayName)
+		case schemas.GetBudgetResponse_queueStoppedAt:
+			v.QueueStoppedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBudgetResponse_queueStoppedAt, v.QueueStoppedAt)
+		case schemas.GetBudgetResponse_schedule:
+			return deserializeBudgetSchedule(d, schemas.GetBudgetResponse_schedule, &v.Schedule)
+		case schemas.GetBudgetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBudgetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BudgetStatus(ev)
+			return nil
+		case schemas.GetBudgetResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBudgetResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetBudgetResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetBudgetResponse_updatedBy, v.UpdatedBy)
+		case schemas.GetBudgetResponse_usageTrackingResource:
+			return deserializeUsageTrackingResource(d, schemas.GetBudgetResponse_usageTrackingResource, &v.UsageTrackingResource)
+		case schemas.GetBudgetResponse_usages:
+			v.Usages = &types.ConsumedUsages{}
+			return v.Usages.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBudget, schemas.GetBudgetRequest, schemas.GetBudgetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBudget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBudget, schemas.GetBudgetRequest, schemas.GetBudgetResponse), output: &GetBudgetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBudget{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBudget"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -196,12 +264,6 @@ func (c *Client) addOperationGetBudgetMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpGetBudgetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBudget(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,12 +276,6 @@ func (c *Client) addOperationGetBudgetMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,12 +309,4 @@ func (m *endpointPrefix_opGetBudgetMiddleware) HandleFinalize(ctx context.Contex
 }
 func addEndpointPrefix_opGetBudgetMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetBudgetMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetBudget(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBudget",
-	}
 }

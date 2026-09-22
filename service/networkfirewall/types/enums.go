@@ -50,6 +50,48 @@ func (ConfigurationSyncState) Values() []ConfigurationSyncState {
 	}
 }
 
+type ContainerAssociationStatus string
+
+// Enum values for ContainerAssociationStatus
+const (
+	ContainerAssociationStatusActive   ContainerAssociationStatus = "ACTIVE"
+	ContainerAssociationStatusCreating ContainerAssociationStatus = "CREATING"
+	ContainerAssociationStatusDeleting ContainerAssociationStatus = "DELETING"
+	ContainerAssociationStatusUpdating ContainerAssociationStatus = "UPDATING"
+)
+
+// Values returns all known values for ContainerAssociationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerAssociationStatus) Values() []ContainerAssociationStatus {
+	return []ContainerAssociationStatus{
+		"ACTIVE",
+		"CREATING",
+		"DELETING",
+		"UPDATING",
+	}
+}
+
+type ContainerMonitoringType string
+
+// Enum values for ContainerMonitoringType
+const (
+	ContainerMonitoringTypeEcs ContainerMonitoringType = "ECS"
+	ContainerMonitoringTypeEks ContainerMonitoringType = "EKS"
+)
+
+// Values returns all known values for ContainerMonitoringType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ContainerMonitoringType) Values() []ContainerMonitoringType {
+	return []ContainerMonitoringType{
+		"ECS",
+		"EKS",
+	}
+}
+
 type EnabledAnalysisType string
 
 // Enum values for EnabledAnalysisType
@@ -95,6 +137,7 @@ const (
 	FirewallStatusValueProvisioning FirewallStatusValue = "PROVISIONING"
 	FirewallStatusValueDeleting     FirewallStatusValue = "DELETING"
 	FirewallStatusValueReady        FirewallStatusValue = "READY"
+	FirewallStatusValueFailed       FirewallStatusValue = "FAILED"
 )
 
 // Values returns all known values for FirewallStatusValue. Note that this can be
@@ -106,6 +149,7 @@ func (FirewallStatusValue) Values() []FirewallStatusValue {
 		"PROVISIONING",
 		"DELETING",
 		"READY",
+		"FAILED",
 	}
 }
 
@@ -272,6 +316,31 @@ func (LogType) Values() []LogType {
 		"ALERT",
 		"FLOW",
 		"TLS",
+	}
+}
+
+type NatGatewayAttachmentStatus string
+
+// Enum values for NatGatewayAttachmentStatus
+const (
+	NatGatewayAttachmentStatusCreating NatGatewayAttachmentStatus = "CREATING"
+	NatGatewayAttachmentStatusReady    NatGatewayAttachmentStatus = "READY"
+	NatGatewayAttachmentStatusUpdating NatGatewayAttachmentStatus = "UPDATING"
+	NatGatewayAttachmentStatusFailed   NatGatewayAttachmentStatus = "FAILED"
+	NatGatewayAttachmentStatusDeleting NatGatewayAttachmentStatus = "DELETING"
+)
+
+// Values returns all known values for NatGatewayAttachmentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NatGatewayAttachmentStatus) Values() []NatGatewayAttachmentStatus {
+	return []NatGatewayAttachmentStatus{
+		"CREATING",
+		"READY",
+		"UPDATING",
+		"FAILED",
+		"DELETING",
 	}
 }
 

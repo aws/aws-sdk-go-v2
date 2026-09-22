@@ -1,0 +1,5 @@
+POST /v2/domainnames/__DomainName__/apimappings
+
+Content-Type: application/json
+
+{"apiId":"__ApiId__","apiMappingKey":"__ApiMappingKey__","stage":"__Stage__"}

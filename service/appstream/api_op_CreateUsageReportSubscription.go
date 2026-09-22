@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a usage report subscription. Usage reports are generated daily.
@@ -29,6 +28,15 @@ func (c *Client) CreateUsageReportSubscription(ctx context.Context, params *Crea
 
 type CreateUsageReportSubscriptionInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *CreateUsageReportSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUsageReportSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsageReportSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type CreateUsageReportSubscriptionOutput struct {
@@ -53,74 +61,58 @@ type CreateUsageReportSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUsageReportSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUsageReportSubscriptionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUsageReportSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.CreateUsageReportSubscriptionResult_S3BucketName, *v.S3BucketName)
+	}
+	if v.Schedule != "" {
+		s.WriteString(schemas.CreateUsageReportSubscriptionResult_Schedule, string(v.Schedule))
+	}
+}
+func (v *CreateUsageReportSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUsageReportSubscriptionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUsageReportSubscriptionResult_S3BucketName:
+			v.S3BucketName = new(string)
+			return d.ReadString(schemas.CreateUsageReportSubscriptionResult_S3BucketName, v.S3BucketName)
+		case schemas.CreateUsageReportSubscriptionResult_Schedule:
+			var ev string
+			if err := d.ReadString(schemas.CreateUsageReportSubscriptionResult_Schedule, &ev); err != nil {
+				return err
+			}
+			v.Schedule = types.UsageReportSchedule(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUsageReportSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsageReportSubscription, schemas.CreateUsageReportSubscriptionRequest, schemas.CreateUsageReportSubscriptionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUsageReportSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUsageReportSubscription, schemas.CreateUsageReportSubscriptionRequest, schemas.CreateUsageReportSubscriptionResult), output: &CreateUsageReportSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUsageReportSubscription{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUsageReportSubscription"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUsageReportSubscription(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +127,8 @@ func (c *Client) addOperationCreateUsageReportSubscriptionMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateUsageReportSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateUsageReportSubscription",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.UpdateTaskProtection
+
+{"cluster":"__Cluster__","expiresInMinutes":1,"protectionEnabled":true,"tasks":["__Member__","__Member__"]}

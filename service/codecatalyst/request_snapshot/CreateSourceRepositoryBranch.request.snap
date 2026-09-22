@@ -1,0 +1,5 @@
+PUT /v1/spaces/__SpaceName__/projects/__ProjectName__/sourceRepositories/__SourceRepositoryName__/branches/__Name__
+
+Content-Type: application/json
+
+{"headCommitId":"__HeadCommitId__"}

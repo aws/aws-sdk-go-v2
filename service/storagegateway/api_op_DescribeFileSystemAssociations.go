@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the file system association information. This operation is only supported
@@ -39,6 +38,16 @@ type DescribeFileSystemAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileSystemAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileSystemAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileSystemAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileSystemAssociationARNList(s, schemas.DescribeFileSystemAssociationsInput_FileSystemAssociationARNList, v.FileSystemAssociationARNList)
+}
+
 type DescribeFileSystemAssociationsOutput struct {
 
 	// An array containing the FileSystemAssociationInfo data type of each file system
@@ -51,77 +60,45 @@ type DescribeFileSystemAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileSystemAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileSystemAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileSystemAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileSystemAssociationInfoList(s, schemas.DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList, v.FileSystemAssociationInfoList)
+}
+func (v *DescribeFileSystemAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFileSystemAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList:
+			return deserializeFileSystemAssociationInfoList(d, schemas.DescribeFileSystemAssociationsOutput_FileSystemAssociationInfoList, &v.FileSystemAssociationInfoList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFileSystemAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileSystemAssociations, schemas.DescribeFileSystemAssociationsInput, schemas.DescribeFileSystemAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFileSystemAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileSystemAssociations, schemas.DescribeFileSystemAssociationsInput, schemas.DescribeFileSystemAssociationsOutput), output: &DescribeFileSystemAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFileSystemAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFileSystemAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFileSystemAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFileSystemAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +113,8 @@ func (c *Client) addOperationDescribeFileSystemAssociationsMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeFileSystemAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFileSystemAssociations",
-	}
 }

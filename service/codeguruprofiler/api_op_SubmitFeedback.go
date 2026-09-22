@@ -4,11 +4,10 @@ package codeguruprofiler
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends feedback to CodeGuru Profiler about whether the anomaly detected by the
@@ -55,6 +54,50 @@ type SubmitFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyInstanceId != nil {
+		s.WriteString(schemas.SubmitFeedbackRequest_anomalyInstanceId, *v.AnomalyInstanceId)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.SubmitFeedbackRequest_comment, *v.Comment)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.SubmitFeedbackRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SubmitFeedbackRequest_type, string(v.Type))
+	}
+}
+func (v *SubmitFeedbackInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitFeedbackRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitFeedbackRequest_anomalyInstanceId:
+			v.AnomalyInstanceId = new(string)
+			return d.ReadString(schemas.SubmitFeedbackRequest_anomalyInstanceId, v.AnomalyInstanceId)
+		case schemas.SubmitFeedbackRequest_comment:
+			v.Comment = new(string)
+			return d.ReadString(schemas.SubmitFeedbackRequest_comment, v.Comment)
+		case schemas.SubmitFeedbackRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.SubmitFeedbackRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.SubmitFeedbackRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.SubmitFeedbackRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.FeedbackType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The structure representing the SubmitFeedbackResponse.
 type SubmitFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -63,77 +106,42 @@ type SubmitFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SubmitFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitFeedback, schemas.SubmitFeedbackRequest, schemas.SubmitFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubmitFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitFeedback, schemas.SubmitFeedbackRequest, schemas.SubmitFeedbackResponse), output: &SubmitFeedbackOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSubmitFeedback{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SubmitFeedback"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSubmitFeedbackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitFeedback(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +156,8 @@ func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSubmitFeedback(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SubmitFeedback",
-	}
 }

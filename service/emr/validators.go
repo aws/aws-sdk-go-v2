@@ -470,6 +470,46 @@ func (m *validateOpGetPersistentAppUIPresignedURL) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSessionEndpoint struct {
+}
+
+func (*validateOpGetSessionEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSessionEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSessionEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSessionEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSession struct {
+}
+
+func (*validateOpGetSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetStudioSessionMapping struct {
 }
 
@@ -565,6 +605,26 @@ func (m *validateOpListInstances) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListInstancesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSessions struct {
+}
+
+func (*validateOpListSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSessionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,6 +1010,26 @@ func (m *validateOpStartNotebookExecution) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartSession struct {
+}
+
+func (*validateOpStartSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopNotebookExecution struct {
 }
 
@@ -985,6 +1065,26 @@ func (m *validateOpTerminateJobFlows) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTerminateJobFlowsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTerminateSession struct {
+}
+
+func (*validateOpTerminateSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTerminateSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TerminateSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTerminateSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1122,6 +1222,14 @@ func addOpGetPersistentAppUIPresignedURLValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpGetPersistentAppUIPresignedURL{}, middleware.After)
 }
 
+func addOpGetSessionEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSessionEndpoint{}, middleware.After)
+}
+
+func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSession{}, middleware.After)
+}
+
 func addOpGetStudioSessionMappingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStudioSessionMapping{}, middleware.After)
 }
@@ -1140,6 +1248,10 @@ func addOpListInstanceGroupsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListInstancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInstances{}, middleware.After)
+}
+
+func addOpListSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSessions{}, middleware.After)
 }
 
 func addOpListStepsValidationMiddleware(stack *middleware.Stack) error {
@@ -1218,12 +1330,20 @@ func addOpStartNotebookExecutionValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpStartNotebookExecution{}, middleware.After)
 }
 
+func addOpStartSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSession{}, middleware.After)
+}
+
 func addOpStopNotebookExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopNotebookExecution{}, middleware.After)
 }
 
 func addOpTerminateJobFlowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateJobFlows{}, middleware.After)
+}
+
+func addOpTerminateSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTerminateSession{}, middleware.After)
 }
 
 func addOpUpdateStudioValidationMiddleware(stack *middleware.Stack) error {
@@ -2431,6 +2551,42 @@ func validateOpGetPersistentAppUIPresignedURLInput(v *GetPersistentAppUIPresigne
 	}
 }
 
+func validateOpGetSessionEndpointInput(v *GetSessionEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSessionEndpointInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSessionInput(v *GetSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSessionInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetStudioSessionMappingInput(v *GetStudioSessionMappingInput) error {
 	if v == nil {
 		return nil
@@ -2499,6 +2655,21 @@ func validateOpListInstancesInput(v *ListInstancesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListInstancesInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSessionsInput(v *ListSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSessionsInput"}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
 	}
@@ -2886,6 +3057,21 @@ func validateOpStartNotebookExecutionInput(v *StartNotebookExecutionInput) error
 	}
 }
 
+func validateOpStartSessionInput(v *StartSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSessionInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopNotebookExecutionInput(v *StopNotebookExecutionInput) error {
 	if v == nil {
 		return nil
@@ -2908,6 +3094,24 @@ func validateOpTerminateJobFlowsInput(v *TerminateJobFlowsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateJobFlowsInput"}
 	if v.JobFlowIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobFlowIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTerminateSessionInput(v *TerminateSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerminateSessionInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

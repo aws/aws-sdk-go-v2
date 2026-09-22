@@ -23,8 +23,10 @@ const megabyte = 1024 * 1024
 func TestDownloadObject(t *testing.T) {
 	cases := map[string]struct {
 		data                 []byte
+		partsData            [][]byte
 		errReaders           []s3testing.TestErrReader
 		getObjectFn          func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+		rng                  string
 		optFn                func(*Options)
 		expectInvocations    int
 		expectRanges         []string
@@ -87,6 +89,50 @@ func TestDownloadObject(t *testing.T) {
 				l.expectByteTransfers(t,
 					10*megabyte, 20*megabyte)
 			},
+		},
+		"single range download with specified range input": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			},
+			rng:               "bytes=2-8388609",
+			expectInvocations: 1,
+			expectRanges:      []string{"bytes=2-8388609"},
+			expectETags:       []string{""},
+			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
+				l.expectComplete(t, in, out)
+				l.expectStartTotalBytes(t, 8388608)
+				l.expectByteTransfers(t,
+					8*megabyte)
+			},
+		},
+		"multiple range download with specified range input": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+				o.Concurrency = 1
+			},
+			rng:               "bytes=2-16777218",
+			expectInvocations: 3,
+			expectRanges:      []string{"bytes=2-8388609", "bytes=8388610-16777217", "bytes=16777218-16777218"},
+			expectETags:       []string{"", etag, etag},
+			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
+				l.expectComplete(t, in, out)
+				l.expectStartTotalBytes(t, 16777217)
+				l.expectByteTransfers(t,
+					8*megabyte, 16*megabyte, 16*megabyte+1)
+			},
+		},
+		"range download with invalid range input": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			},
+			rng:       "bytes=-2-8388609",
+			expectErr: "invalid range format",
 		},
 		"range download with s3 error": {
 			data:        buf20MB,
@@ -257,6 +303,58 @@ func TestDownloadObject(t *testing.T) {
 				l.expectByteTransfers(t, 2*megabyte, 4*megabyte, 6*megabyte)
 			},
 		},
+		"parts download with unequal part sizes": {
+			// A multipart upload can produce parts of unequal sizes; the
+			// queue-time offsets assumed part 1's size for every part and
+			// corrupted the assembled object (#3526).
+			partsData: [][]byte{
+				bytes.Repeat([]byte{'A'}, 2*megabyte),
+				bytes.Repeat([]byte{'B'}, megabyte),
+				bytes.Repeat([]byte{'C'}, 3*megabyte),
+			},
+			getObjectFn: s3testing.UnequalPartGetObjectFn,
+			optFn: func(o *Options) {
+				o.Concurrency = 1
+			},
+			partsCount:        3,
+			expectInvocations: 3,
+			expectParts:       []int32{1, 2, 3},
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				expect := bytes.Join([][]byte{
+					bytes.Repeat([]byte{'A'}, 2*megabyte),
+					bytes.Repeat([]byte{'B'}, megabyte),
+					bytes.Repeat([]byte{'C'}, 3*megabyte),
+				}, nil)
+				if e, a := len(expect), len(w.Bytes()); e != a {
+					t.Fatalf("expect %d bytes, got %d", e, a)
+				}
+				if e, a := expect, w.Bytes(); !bytes.Equal(e, a) {
+					t.Fatalf("expect downloaded object to equal the assembled parts")
+				}
+			},
+		},
+		"parts download with unequal part sizes and concurrency": {
+			partsData: [][]byte{
+				bytes.Repeat([]byte{'A'}, 2*megabyte),
+				bytes.Repeat([]byte{'B'}, megabyte),
+				bytes.Repeat([]byte{'C'}, 3*megabyte),
+			},
+			getObjectFn: s3testing.UnequalPartGetObjectFn,
+			// default concurrency (5) exercises the multi-goroutine path
+			optFn:             func(o *Options) {},
+			partsCount:        3,
+			expectInvocations: 3,
+			dataValidationFn: func(t *testing.T, w *types.WriteAtBuffer) {
+				expect := bytes.Join([][]byte{
+					bytes.Repeat([]byte{'A'}, 2*megabyte),
+					bytes.Repeat([]byte{'B'}, megabyte),
+					bytes.Repeat([]byte{'C'}, 3*megabyte),
+				}, nil)
+				if e, a := expect, w.Bytes(); !bytes.Equal(e, a) {
+					t.Fatalf("expect downloaded object to equal the assembled parts")
+				}
+			},
+		},
 		"parts download in order with composite checksum type": {
 			data:        buf2MB,
 			getObjectFn: s3testing.CompositePartGetObjectFn,
@@ -400,6 +498,7 @@ func TestDownloadObject(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			s3Client, invocations, parts, ranges, versions, etags := s3testing.NewDownloadClient()
 			s3Client.Data = c.data
+			s3Client.PartsData = c.partsData
 			s3Client.GetObjectFn = c.getObjectFn
 			s3Client.ErrReaders = c.errReaders
 			s3Client.PartsCount = c.partsCount
@@ -412,6 +511,7 @@ func TestDownloadObject(t *testing.T) {
 				Key:       aws.String("key"),
 				WriterAt:  w,
 				VersionID: nzstring(c.versionID),
+				Range:     aws.String(c.rng),
 			}
 
 			listener := &mockListener{}

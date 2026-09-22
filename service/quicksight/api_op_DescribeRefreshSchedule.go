@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a summary of a refresh schedule.
@@ -47,6 +46,24 @@ type DescribeRefreshScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRefreshScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRefreshScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRefreshScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeRefreshScheduleRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.DescribeRefreshScheduleRequest_DataSetId, *v.DataSetId)
+	}
+	if v.ScheduleId != nil {
+		s.WriteString(schemas.DescribeRefreshScheduleRequest_ScheduleId, *v.ScheduleId)
+	}
+}
+
 type DescribeRefreshScheduleOutput struct {
 
 	// The Amazon Resource Name (ARN) for the refresh schedule.
@@ -67,77 +84,67 @@ type DescribeRefreshScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRefreshScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRefreshScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRefreshScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeRefreshScheduleResponse_Arn, *v.Arn)
+	}
+	if v.RefreshSchedule != nil {
+		s.WriteStruct(schemas.DescribeRefreshScheduleResponse_RefreshSchedule)
+		v.RefreshSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeRefreshScheduleResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeRefreshScheduleResponse_Status, v.Status)
+	}
+}
+func (v *DescribeRefreshScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRefreshScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRefreshScheduleResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeRefreshScheduleResponse_Arn, v.Arn)
+		case schemas.DescribeRefreshScheduleResponse_RefreshSchedule:
+			v.RefreshSchedule = &types.RefreshSchedule{}
+			return v.RefreshSchedule.Deserialize(d)
+		case schemas.DescribeRefreshScheduleResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeRefreshScheduleResponse_RequestId, v.RequestId)
+		case schemas.DescribeRefreshScheduleResponse_Status:
+			return d.ReadInt32(schemas.DescribeRefreshScheduleResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRefreshScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRefreshSchedule, schemas.DescribeRefreshScheduleRequest, schemas.DescribeRefreshScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRefreshSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRefreshSchedule, schemas.DescribeRefreshScheduleRequest, schemas.DescribeRefreshScheduleResponse), output: &DescribeRefreshScheduleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRefreshSchedule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRefreshSchedule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRefreshScheduleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRefreshSchedule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +159,8 @@ func (c *Client) addOperationDescribeRefreshScheduleMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeRefreshSchedule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRefreshSchedule",
-	}
 }

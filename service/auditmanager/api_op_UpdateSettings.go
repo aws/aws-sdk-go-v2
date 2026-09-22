@@ -4,11 +4,10 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates Audit Manager settings for the current account.
@@ -65,6 +64,40 @@ type UpdateSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultAssessmentReportsDestination != nil {
+		s.WriteStruct(schemas.UpdateSettingsRequest_defaultAssessmentReportsDestination)
+		v.DefaultAssessmentReportsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultExportDestination != nil {
+		s.WriteStruct(schemas.UpdateSettingsRequest_defaultExportDestination)
+		v.DefaultExportDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRoles(s, schemas.UpdateSettingsRequest_defaultProcessOwners, v.DefaultProcessOwners)
+	if v.DeregistrationPolicy != nil {
+		s.WriteStruct(schemas.UpdateSettingsRequest_deregistrationPolicy)
+		v.DeregistrationPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvidenceFinderEnabled != nil {
+		s.WriteBool(schemas.UpdateSettingsRequest_evidenceFinderEnabled, *v.EvidenceFinderEnabled)
+	}
+	if v.KmsKey != nil {
+		s.WriteString(schemas.UpdateSettingsRequest_kmsKey, *v.KmsKey)
+	}
+	if v.SnsTopic != nil {
+		s.WriteString(schemas.UpdateSettingsRequest_snsTopic, *v.SnsTopic)
+	}
+}
+
 type UpdateSettingsOutput struct {
 
 	//  The current list of settings.
@@ -76,77 +109,50 @@ type UpdateSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Settings != nil {
+		s.WriteStruct(schemas.UpdateSettingsResponse_settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSettingsResponse_settings:
+			v.Settings = &types.Settings{}
+			return v.Settings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSettings, schemas.UpdateSettingsRequest, schemas.UpdateSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSettings, schemas.UpdateSettingsRequest, schemas.UpdateSettingsResponse), output: &UpdateSettingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSettings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +167,8 @@ func (c *Client) addOperationUpdateSettingsMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSettings",
-	}
 }

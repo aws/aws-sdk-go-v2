@@ -4,11 +4,10 @@ package datapipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves metadata about one or more pipelines. The information retrieved
@@ -69,6 +68,16 @@ type DescribePipelinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePipelinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelinesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeidList(s, schemas.DescribePipelinesInput_pipelineIds, v.PipelineIds)
+}
+
 // Contains the output of DescribePipelines.
 type DescribePipelinesOutput struct {
 
@@ -83,77 +92,45 @@ type DescribePipelinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePipelinesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePipelinesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePipelinesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePipelineDescriptionList(s, schemas.DescribePipelinesOutput_pipelineDescriptionList, v.PipelineDescriptionList)
+}
+func (v *DescribePipelinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePipelinesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePipelinesOutput_pipelineDescriptionList:
+			return deserializePipelineDescriptionList(d, schemas.DescribePipelinesOutput_pipelineDescriptionList, &v.PipelineDescriptionList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipelines, schemas.DescribePipelinesInput, schemas.DescribePipelinesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePipelines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePipelines, schemas.DescribePipelinesInput, schemas.DescribePipelinesOutput), output: &DescribePipelinesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePipelines{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePipelines"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePipelinesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePipelines(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +145,8 @@ func (c *Client) addOperationDescribePipelinesMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribePipelines(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePipelines",
-	}
 }

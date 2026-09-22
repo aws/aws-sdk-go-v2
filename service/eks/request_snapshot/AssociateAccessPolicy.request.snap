@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/access-entries/__PrincipalArn__/access-policies
+
+Content-Type: application/json
+
+{"accessScope":{"namespaces":["__Member__","__Member__"],"type":"cluster"},"policyArn":"__PolicyArn__"}

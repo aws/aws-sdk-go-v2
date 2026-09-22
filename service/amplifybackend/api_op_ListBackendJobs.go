@@ -4,11 +4,10 @@ package amplifybackend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the jobs for the backend of an Amplify app.
@@ -60,6 +59,36 @@ type ListBackendJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackendJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackendJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackendJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_JobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackendJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ListBackendJobsRequest_Status, *v.Status)
+	}
+}
+
 type ListBackendJobsOutput struct {
 
 	// An array of jobs and their properties.
@@ -74,77 +103,51 @@ type ListBackendJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackendJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackendJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackendJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfBackendJobRespObj(s, schemas.ListBackendJobsResponse_Jobs, v.Jobs)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackendJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackendJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackendJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackendJobsResponse_Jobs:
+			return deserializeListOfBackendJobRespObj(d, schemas.ListBackendJobsResponse_Jobs, &v.Jobs)
+		case schemas.ListBackendJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackendJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackendJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackendJobs, schemas.ListBackendJobsRequest, schemas.ListBackendJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackendJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackendJobs, schemas.ListBackendJobsRequest, schemas.ListBackendJobsResponse), output: &ListBackendJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackendJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBackendJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListBackendJobsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBackendJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +162,8 @@ func (c *Client) addOperationListBackendJobsMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListBackendJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBackendJobs",
-	}
 }

@@ -5,10 +5,10 @@ package chimesdkidentity
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers an endpoint under an Amazon Chime AppInstanceUser . The endpoint
@@ -77,6 +77,38 @@ type RegisterAppInstanceUserEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAppInstanceUserEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterAppInstanceUserEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAppInstanceUserEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowMessages != "" {
+		s.WriteString(schemas.RegisterAppInstanceUserEndpointRequest_AllowMessages, string(v.AllowMessages))
+	}
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.RegisterAppInstanceUserEndpointRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.RegisterAppInstanceUserEndpointRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.EndpointAttributes != nil {
+		s.WriteStruct(schemas.RegisterAppInstanceUserEndpointRequest_EndpointAttributes)
+		v.EndpointAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RegisterAppInstanceUserEndpointRequest_Name, *v.Name)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.RegisterAppInstanceUserEndpointRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RegisterAppInstanceUserEndpointRequest_Type, string(v.Type))
+	}
+}
+
 type RegisterAppInstanceUserEndpointOutput struct {
 
 	// The ARN of the AppInstanceUser .
@@ -91,65 +123,48 @@ type RegisterAppInstanceUserEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterAppInstanceUserEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterAppInstanceUserEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterAppInstanceUserEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.RegisterAppInstanceUserEndpointResponse_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.RegisterAppInstanceUserEndpointResponse_EndpointId, *v.EndpointId)
+	}
+}
+func (v *RegisterAppInstanceUserEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterAppInstanceUserEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterAppInstanceUserEndpointResponse_AppInstanceUserArn:
+			v.AppInstanceUserArn = new(string)
+			return d.ReadString(schemas.RegisterAppInstanceUserEndpointResponse_AppInstanceUserArn, v.AppInstanceUserArn)
+		case schemas.RegisterAppInstanceUserEndpointResponse_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.RegisterAppInstanceUserEndpointResponse_EndpointId, v.EndpointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterAppInstanceUserEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAppInstanceUserEndpoint, schemas.RegisterAppInstanceUserEndpointRequest, schemas.RegisterAppInstanceUserEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterAppInstanceUserEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterAppInstanceUserEndpoint, schemas.RegisterAppInstanceUserEndpointRequest, schemas.RegisterAppInstanceUserEndpointResponse), output: &RegisterAppInstanceUserEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterAppInstanceUserEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterAppInstanceUserEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -159,12 +174,6 @@ func (c *Client) addOperationRegisterAppInstanceUserEndpointMiddlewares(stack *m
 		return err
 	}
 	if err = addOpRegisterAppInstanceUserEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterAppInstanceUserEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,12 +186,6 @@ func (c *Client) addOperationRegisterAppInstanceUserEndpointMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -222,12 +225,4 @@ func (m *idempotencyToken_initializeOpRegisterAppInstanceUserEndpoint) HandleIni
 }
 func addIdempotencyToken_opRegisterAppInstanceUserEndpointMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpRegisterAppInstanceUserEndpoint{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opRegisterAppInstanceUserEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterAppInstanceUserEndpoint",
-	}
 }

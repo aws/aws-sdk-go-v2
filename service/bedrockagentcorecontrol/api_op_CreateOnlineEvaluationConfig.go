@@ -5,10 +5,8 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -58,12 +56,6 @@ type CreateOnlineEvaluationConfigInput struct {
 	// This member is required.
 	EvaluationExecutionRoleArn *string
 
-	//  The list of evaluators to apply during online evaluation. Can include both
-	// built-in evaluators and custom evaluators created with CreateEvaluator .
-	//
-	// This member is required.
-	Evaluators []types.EvaluatorReference
-
 	//  The name of the online evaluation configuration. Must be unique within your
 	// account.
 	//
@@ -84,9 +76,23 @@ type CreateOnlineEvaluationConfigInput struct {
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
+	// Configuration for periodic batch evaluation clustering of insight results.
+	ClusteringConfig *types.ClusteringConfig
+
 	//  The description of the online evaluation configuration that explains its
 	// monitoring purpose and scope.
 	Description *string
+
+	//  The list of evaluators to apply during online evaluation. Can include both
+	// built-in evaluators and custom evaluators created with CreateEvaluator .
+	Evaluators []types.EvaluatorReference
+
+	// The list of insight types to run against agent sessions.
+	Insights []types.Insight
+
+	//  The configuration that specifies where evaluation results should be written
+	// for monitoring and analysis.
+	OutputConfig *types.OutputConfig
 
 	// A map of tag keys and values to assign to an AgentCore Online Evaluation
 	// Config. Tags enable you to categorize your resources in different ways, for
@@ -139,9 +145,6 @@ type CreateOnlineEvaluationConfigOutput struct {
 }
 
 func (c *Client) addOperationCreateOnlineEvaluationConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOnlineEvaluationConfig{}, middleware.After)
 	if err != nil {
 		return err
@@ -150,53 +153,14 @@ func (c *Client) addOperationCreateOnlineEvaluationConfigMiddlewares(stack *midd
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOnlineEvaluationConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -206,12 +170,6 @@ func (c *Client) addOperationCreateOnlineEvaluationConfigMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpCreateOnlineEvaluationConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOnlineEvaluationConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,12 +182,6 @@ func (c *Client) addOperationCreateOnlineEvaluationConfigMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,12 +221,4 @@ func (m *idempotencyToken_initializeOpCreateOnlineEvaluationConfig) HandleInitia
 }
 func addIdempotencyToken_opCreateOnlineEvaluationConfigMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateOnlineEvaluationConfig{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateOnlineEvaluationConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOnlineEvaluationConfig",
-	}
 }

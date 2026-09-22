@@ -207,6 +207,7 @@ const (
 	PurchaseOptionBadgeTypePrivatePricing   PurchaseOptionBadgeType = "PRIVATE_PRICING"
 	PurchaseOptionBadgeTypeFutureDated      PurchaseOptionBadgeType = "FUTURE_DATED"
 	PurchaseOptionBadgeTypeReplacementOffer PurchaseOptionBadgeType = "REPLACEMENT_OFFER"
+	PurchaseOptionBadgeTypeAutoRenew        PurchaseOptionBadgeType = "AUTO_RENEW"
 )
 
 // Values returns all known values for PurchaseOptionBadgeType. Note that this can
@@ -218,6 +219,7 @@ func (PurchaseOptionBadgeType) Values() []PurchaseOptionBadgeType {
 		"PRIVATE_PRICING",
 		"FUTURE_DATED",
 		"REPLACEMENT_OFFER",
+		"AUTO_RENEW",
 	}
 }
 
@@ -514,6 +516,7 @@ const (
 	TermTypeSupportTerm                    TermType = "SupportTerm"
 	TermTypeValidityTerm                   TermType = "ValidityTerm"
 	TermTypeVariablePaymentTerm            TermType = "VariablePaymentTerm"
+	TermTypeNetPaymentTerm                 TermType = "NetPaymentTerm"
 )
 
 // Values returns all known values for TermType. Note that this can be expanded in
@@ -534,6 +537,7 @@ func (TermType) Values() []TermType {
 		"SupportTerm",
 		"ValidityTerm",
 		"VariablePaymentTerm",
+		"NetPaymentTerm",
 	}
 }
 

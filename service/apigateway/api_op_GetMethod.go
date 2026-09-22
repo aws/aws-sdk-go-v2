@@ -4,11 +4,10 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describe an existing Method resource.
@@ -46,6 +45,24 @@ type GetMethodInput struct {
 	RestApiId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMethodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMethodRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.GetMethodRequest_httpMethod, *v.HttpMethod)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetMethodRequest_resourceId, *v.ResourceId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetMethodRequest_restApiId, *v.RestApiId)
+	}
 }
 
 //	Represents a client-facing interface by which the client calls the API to
@@ -124,77 +141,98 @@ type GetMethodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMethodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Method)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKeyRequired != nil {
+		s.WriteBool(schemas.Method_apiKeyRequired, *v.ApiKeyRequired)
+	}
+	serializeListOfString(s, schemas.Method_authorizationScopes, v.AuthorizationScopes)
+	if v.AuthorizationType != nil {
+		s.WriteString(schemas.Method_authorizationType, *v.AuthorizationType)
+	}
+	if v.AuthorizerId != nil {
+		s.WriteString(schemas.Method_authorizerId, *v.AuthorizerId)
+	}
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.Method_httpMethod, *v.HttpMethod)
+	}
+	if v.MethodIntegration != nil {
+		s.WriteStruct(schemas.Method_methodIntegration)
+		v.MethodIntegration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMapOfMethodResponse(s, schemas.Method_methodResponses, v.MethodResponses)
+	if v.OperationName != nil {
+		s.WriteString(schemas.Method_operationName, *v.OperationName)
+	}
+	serializeMapOfStringToString(s, schemas.Method_requestModels, v.RequestModels)
+	serializeMapOfStringToBoolean(s, schemas.Method_requestParameters, v.RequestParameters)
+	if v.RequestValidatorId != nil {
+		s.WriteString(schemas.Method_requestValidatorId, *v.RequestValidatorId)
+	}
+}
+func (v *GetMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Method, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Method_apiKeyRequired:
+			v.ApiKeyRequired = new(bool)
+			return d.ReadBool(schemas.Method_apiKeyRequired, v.ApiKeyRequired)
+		case schemas.Method_authorizationScopes:
+			return deserializeListOfString(d, schemas.Method_authorizationScopes, &v.AuthorizationScopes)
+		case schemas.Method_authorizationType:
+			v.AuthorizationType = new(string)
+			return d.ReadString(schemas.Method_authorizationType, v.AuthorizationType)
+		case schemas.Method_authorizerId:
+			v.AuthorizerId = new(string)
+			return d.ReadString(schemas.Method_authorizerId, v.AuthorizerId)
+		case schemas.Method_httpMethod:
+			v.HttpMethod = new(string)
+			return d.ReadString(schemas.Method_httpMethod, v.HttpMethod)
+		case schemas.Method_methodIntegration:
+			v.MethodIntegration = &types.Integration{}
+			return v.MethodIntegration.Deserialize(d)
+		case schemas.Method_methodResponses:
+			return deserializeMapOfMethodResponse(d, schemas.Method_methodResponses, &v.MethodResponses)
+		case schemas.Method_operationName:
+			v.OperationName = new(string)
+			return d.ReadString(schemas.Method_operationName, v.OperationName)
+		case schemas.Method_requestModels:
+			return deserializeMapOfStringToString(d, schemas.Method_requestModels, &v.RequestModels)
+		case schemas.Method_requestParameters:
+			return deserializeMapOfStringToBoolean(d, schemas.Method_requestParameters, &v.RequestParameters)
+		case schemas.Method_requestValidatorId:
+			v.RequestValidatorId = new(string)
+			return d.ReadString(schemas.Method_requestValidatorId, v.RequestValidatorId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMethod, schemas.GetMethodRequest, schemas.Method)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMethod, schemas.GetMethodRequest, schemas.Method), output: &GetMethodOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMethod{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMethod"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMethodValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMethod(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,22 +250,8 @@ func (c *Client) addOperationGetMethodMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMethod(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMethod",
-	}
 }

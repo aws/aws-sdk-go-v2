@@ -5,10 +5,10 @@ package networkfirewall
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the metadata for the proxy rule groups that you have defined.
@@ -47,6 +47,21 @@ type ListProxyRuleGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxyRuleGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProxyRuleGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProxyRuleGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProxyRuleGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProxyRuleGroupsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListProxyRuleGroupsOutput struct {
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -67,74 +82,48 @@ type ListProxyRuleGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxyRuleGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProxyRuleGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProxyRuleGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProxyRuleGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeProxyRuleGroups(s, schemas.ListProxyRuleGroupsResponse_ProxyRuleGroups, v.ProxyRuleGroups)
+}
+func (v *ListProxyRuleGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProxyRuleGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProxyRuleGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProxyRuleGroupsResponse_NextToken, v.NextToken)
+		case schemas.ListProxyRuleGroupsResponse_ProxyRuleGroups:
+			return deserializeProxyRuleGroups(d, schemas.ListProxyRuleGroupsResponse_ProxyRuleGroups, &v.ProxyRuleGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProxyRuleGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxyRuleGroups, schemas.ListProxyRuleGroupsRequest, schemas.ListProxyRuleGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListProxyRuleGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxyRuleGroups, schemas.ListProxyRuleGroupsRequest, schemas.ListProxyRuleGroupsResponse), output: &ListProxyRuleGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListProxyRuleGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProxyRuleGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProxyRuleGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +136,6 @@ func (c *Client) addOperationListProxyRuleGroupsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,11 +240,3 @@ type ListProxyRuleGroupsAPIClient interface {
 }
 
 var _ ListProxyRuleGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListProxyRuleGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProxyRuleGroups",
-	}
-}

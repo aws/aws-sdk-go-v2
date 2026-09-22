@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/identity-resolution-jobs/auto-merging-preview
+
+Content-Type: application/json
+
+{"ConflictResolution":{"ConflictResolvingModel":"RECENCY","SourceName":"__SourceName__"},"Consolidation":{"MatchingAttributesList":[["__Member__","__Member__"],["__Member__","__Member__"]]},"MinAllowedConfidenceScoreForMerging":1}

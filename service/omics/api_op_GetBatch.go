@@ -5,7 +5,6 @@ package omics
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -75,7 +74,8 @@ type GetBatchOutput struct {
 	// PENDING (ready to submit runs), SUBMITTING (submitting runs), INPROGRESS (runs
 	// executing), STOPPING (cancellation in progress), PROCESSED (all runs
 	// completed), CANCELLED (batch cancelled), FAILED (batch failed), RUNS_DELETING
-	// (deleting runs), RUNS_DELETED (runs deleted).
+	// (deleting runs), RUNS_DELETE_FAILED (run deletion failed for some or all runs),
+	// RUNS_DELETED (runs deleted).
 	Status types.BatchStatus
 
 	// A summary of run submission outcomes. See SubmissionSummary .
@@ -84,7 +84,7 @@ type GetBatchOutput struct {
 	// The timestamp when all run submissions completed.
 	SubmittedTime *time.Time
 
-	// AWS tags associated with the run batch.
+	// Amazon Web Services tags associated with the run batch.
 	Tags map[string]string
 
 	// The total number of runs in the batch.
@@ -100,9 +100,6 @@ type GetBatchOutput struct {
 }
 
 func (c *Client) addOperationGetBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBatch{}, middleware.After)
 	if err != nil {
 		return err
@@ -111,53 +108,14 @@ func (c *Client) addOperationGetBatchMiddlewares(stack *middleware.Stack, option
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBatch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -167,12 +125,6 @@ func (c *Client) addOperationGetBatchMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addOpGetBatchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBatch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +137,6 @@ func (c *Client) addOperationGetBatchMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -224,12 +170,4 @@ func (m *endpointPrefix_opGetBatchMiddleware) HandleFinalize(ctx context.Context
 }
 func addEndpointPrefix_opGetBatchMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetBatchMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetBatch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBatch",
-	}
 }

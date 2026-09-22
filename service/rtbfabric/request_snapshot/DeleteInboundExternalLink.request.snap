@@ -1,0 +1,3 @@
+DELETE /responder-gateway/__GatewayId__/inbound-external-link/__LinkId__
+
+

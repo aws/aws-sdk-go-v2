@@ -4,11 +4,10 @@ package paymentcryptography
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Web Services Payment Cryptography key, a logical
@@ -113,7 +112,8 @@ type CreateKeyInput struct {
 	// zero, with the key to be checked and retaining the 3 highest order bytes of the
 	// encrypted result. For AES keys, the KCV is computed using a CMAC algorithm where
 	// the input data is 16 bytes of zero and retaining the 3 highest order bytes of
-	// the encrypted result.
+	// the encrypted result. For HMAC keys, the KCV is computed using the hash selected
+	// at key creation on a zero-length message, taking the leftmost 3 bytes.
 	KeyCheckValueAlgorithm types.KeyCheckValueAlgorithm
 
 	// A list of Amazon Web Services Regions for key replication operations.
@@ -145,6 +145,34 @@ type CreateKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeriveKeyUsage != "" {
+		s.WriteString(schemas.CreateKeyInput_DeriveKeyUsage, string(v.DeriveKeyUsage))
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CreateKeyInput_Enabled, *v.Enabled)
+	}
+	if v.Exportable != nil {
+		s.WriteBool(schemas.CreateKeyInput_Exportable, *v.Exportable)
+	}
+	if v.KeyAttributes != nil {
+		s.WriteStruct(schemas.CreateKeyInput_KeyAttributes)
+		v.KeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyCheckValueAlgorithm != "" {
+		s.WriteString(schemas.CreateKeyInput_KeyCheckValueAlgorithm, string(v.KeyCheckValueAlgorithm))
+	}
+	serializeRegions(s, schemas.CreateKeyInput_ReplicationRegions, v.ReplicationRegions)
+	serializeTags(s, schemas.CreateKeyInput_Tags, v.Tags)
+}
+
 type CreateKeyOutput struct {
 
 	// The key material that contains all the key attributes.
@@ -158,77 +186,50 @@ type CreateKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteStruct(schemas.CreateKeyOutput_Key)
+		v.Key.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKeyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKeyOutput_Key:
+			v.Key = &types.Key{}
+			return v.Key.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKey, schemas.CreateKeyInput, schemas.CreateKeyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKey, schemas.CreateKeyInput, schemas.CreateKeyOutput), output: &CreateKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -243,22 +244,8 @@ func (c *Client) addOperationCreateKeyMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateKey",
-	}
 }

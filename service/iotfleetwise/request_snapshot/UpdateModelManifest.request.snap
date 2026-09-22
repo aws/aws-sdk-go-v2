@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.UpdateModelManifest
+
+{"description":"__Description__","name":"__Name__","nodesToAdd":["__Member__","__Member__"],"nodesToRemove":["__Member__","__Member__"],"status":"ACTIVE"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.CancelSteps
+
+{"ClusterId":"__ClusterId__","StepCancellationOption":"SEND_INTERRUPT","StepIds":["__Member__","__Member__"]}

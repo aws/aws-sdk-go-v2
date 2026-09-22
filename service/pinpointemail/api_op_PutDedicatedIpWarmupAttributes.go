@@ -4,10 +4,9 @@ package pinpointemail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) PutDedicatedIpWarmupAttributes(ctx context.Context, params *PutDedicatedIpWarmupAttributesInput, optFns ...func(*Options)) (*PutDedicatedIpWarmupAttributesOutput, error) {
@@ -43,6 +42,21 @@ type PutDedicatedIpWarmupAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDedicatedIpWarmupAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDedicatedIpWarmupAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDedicatedIpWarmupAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ip != nil {
+		s.WriteString(schemas.PutDedicatedIpWarmupAttributesRequest_Ip, *v.Ip)
+	}
+	if v.WarmupPercentage != nil {
+		s.WriteInt32(schemas.PutDedicatedIpWarmupAttributesRequest_WarmupPercentage, *v.WarmupPercentage)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type PutDedicatedIpWarmupAttributesOutput struct {
@@ -52,77 +66,42 @@ type PutDedicatedIpWarmupAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDedicatedIpWarmupAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDedicatedIpWarmupAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDedicatedIpWarmupAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutDedicatedIpWarmupAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDedicatedIpWarmupAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDedicatedIpWarmupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDedicatedIpWarmupAttributes, schemas.PutDedicatedIpWarmupAttributesRequest, schemas.PutDedicatedIpWarmupAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutDedicatedIpWarmupAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDedicatedIpWarmupAttributes, schemas.PutDedicatedIpWarmupAttributesRequest, schemas.PutDedicatedIpWarmupAttributesResponse), output: &PutDedicatedIpWarmupAttributesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutDedicatedIpWarmupAttributes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDedicatedIpWarmupAttributes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutDedicatedIpWarmupAttributesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutDedicatedIpWarmupAttributes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +116,8 @@ func (c *Client) addOperationPutDedicatedIpWarmupAttributesMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutDedicatedIpWarmupAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutDedicatedIpWarmupAttributes",
-	}
 }

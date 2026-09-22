@@ -1,0 +1,5 @@
+POST /domains/__DomainId__/cases-search
+
+Content-Type: application/json
+
+{"fields":[{"id":"__Id__"},{"id":"__Id__"}],"filter":{"field":{"equalTo":{"id":"__Id__","value":{"stringValue":"__FieldValueUnionMemberStringValue__"}}}},"maxResults":1,"nextToken":"__NextToken__","searchTerm":"__SearchTerm__","sorts":[{"fieldId":"__FieldId__","sortOrder":"Asc"},{"fieldId":"__FieldId__","sortOrder":"Asc"}]}

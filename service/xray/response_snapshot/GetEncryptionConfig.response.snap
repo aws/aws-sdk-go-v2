@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EncryptionConfig":{"KeyId":"__KeyId__","Status":"UPDATING","Type":"NONE"}}

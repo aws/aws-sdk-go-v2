@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.GetAnomalyMonitors
+
+{"MaxResults":1,"MonitorArnList":["__Member__","__Member__"],"NextPageToken":"__NextPageToken__"}

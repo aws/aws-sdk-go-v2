@@ -1,0 +1,5 @@
+PUT /signing-jobs/__JobId__/revoke
+
+Content-Type: application/json
+
+{"jobOwner":"__JobOwner__","reason":"__Reason__"}

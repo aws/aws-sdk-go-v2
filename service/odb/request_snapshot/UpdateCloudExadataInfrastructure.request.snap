@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.UpdateCloudExadataInfrastructure
+
+{"cloudExadataInfrastructureId":"__CloudExadataInfrastructureId__","maintenanceWindow":{"customActionTimeoutInMins":1,"daysOfWeek":[{"name":"MONDAY"},{"name":"MONDAY"}],"hoursOfDay":[1,1],"isCustomActionTimeoutEnabled":true,"leadTimeInWeeks":1,"months":[{"name":"JANUARY"},{"name":"JANUARY"}],"patchingMode":"ROLLING","preference":"NO_PREFERENCE","skipRu":true,"weeksOfMonth":[1,1]}}

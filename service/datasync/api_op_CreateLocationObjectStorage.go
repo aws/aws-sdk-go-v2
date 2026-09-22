@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a transfer location for an object storage system. DataSync can use this
@@ -148,6 +147,51 @@ type CreateLocationObjectStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationObjectStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationObjectStorageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationObjectStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKey != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_AccessKey, *v.AccessKey)
+	}
+	serializeAgentArnList(s, schemas.CreateLocationObjectStorageRequest_AgentArns, v.AgentArns)
+	if v.BucketName != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_BucketName, *v.BucketName)
+	}
+	if v.CmkSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationObjectStorageRequest_CmkSecretConfig)
+		v.CmkSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomSecretConfig != nil {
+		s.WriteStruct(schemas.CreateLocationObjectStorageRequest_CustomSecretConfig)
+		v.CustomSecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretKey != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_SecretKey, *v.SecretKey)
+	}
+	if v.ServerCertificate != nil {
+		s.WriteBlob(schemas.CreateLocationObjectStorageRequest_ServerCertificate, v.ServerCertificate)
+	}
+	if v.ServerHostname != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_ServerHostname, *v.ServerHostname)
+	}
+	if v.ServerPort != nil {
+		s.WriteInt32(schemas.CreateLocationObjectStorageRequest_ServerPort, *v.ServerPort)
+	}
+	if v.ServerProtocol != "" {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_ServerProtocol, string(v.ServerProtocol))
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationObjectStorageRequest_Tags, v.Tags)
+}
+
 // CreateLocationObjectStorageResponse
 type CreateLocationObjectStorageOutput struct {
 
@@ -160,77 +204,48 @@ type CreateLocationObjectStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationObjectStorageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationObjectStorageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationObjectStorageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationObjectStorageResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationObjectStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationObjectStorageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationObjectStorageResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationObjectStorageResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationObjectStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationObjectStorage, schemas.CreateLocationObjectStorageRequest, schemas.CreateLocationObjectStorageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationObjectStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationObjectStorage, schemas.CreateLocationObjectStorageRequest, schemas.CreateLocationObjectStorageResponse), output: &CreateLocationObjectStorageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationObjectStorage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLocationObjectStorage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLocationObjectStorageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationObjectStorage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -245,22 +260,8 @@ func (c *Client) addOperationCreateLocationObjectStorageMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLocationObjectStorage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLocationObjectStorage",
-	}
 }

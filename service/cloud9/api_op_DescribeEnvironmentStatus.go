@@ -4,11 +4,10 @@ package cloud9
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloud9/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets status information for an Cloud9 development environment.
@@ -40,6 +39,18 @@ type DescribeEnvironmentStatusInput struct {
 	EnvironmentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeEnvironmentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DescribeEnvironmentStatusRequest_environmentId, *v.EnvironmentId)
+	}
 }
 
 type DescribeEnvironmentStatusOutput struct {
@@ -74,77 +85,58 @@ type DescribeEnvironmentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEnvironmentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEnvironmentStatusResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEnvironmentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeEnvironmentStatusResult_message, *v.Message)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeEnvironmentStatusResult_status, string(v.Status))
+	}
+}
+func (v *DescribeEnvironmentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEnvironmentStatusResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEnvironmentStatusResult_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeEnvironmentStatusResult_message, v.Message)
+		case schemas.DescribeEnvironmentStatusResult_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeEnvironmentStatusResult_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EnvironmentStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEnvironmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentStatus, schemas.DescribeEnvironmentStatusRequest, schemas.DescribeEnvironmentStatusResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEnvironmentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEnvironmentStatus, schemas.DescribeEnvironmentStatusRequest, schemas.DescribeEnvironmentStatusResult), output: &DescribeEnvironmentStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEnvironmentStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEnvironmentStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeEnvironmentStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEnvironmentStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +151,8 @@ func (c *Client) addOperationDescribeEnvironmentStatusMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeEnvironmentStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeEnvironmentStatus",
-	}
 }

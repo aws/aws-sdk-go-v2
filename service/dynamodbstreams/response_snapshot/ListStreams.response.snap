@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDBStreams_20120810.ListStreams
+
+{"LastEvaluatedStreamArn":"__LastEvaluatedStreamArn__","Streams":[{"StreamArn":"__StreamArn__","StreamLabel":"__StreamLabel__","TableName":"__TableName__"},{"StreamArn":"__StreamArn__","StreamLabel":"__StreamLabel__","TableName":"__TableName__"}]}

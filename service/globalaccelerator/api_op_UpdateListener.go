@@ -4,11 +4,10 @@ package globalaccelerator
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update a listener.
@@ -65,6 +64,25 @@ type UpdateListenerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateListenerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateListenerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateListenerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientAffinity != "" {
+		s.WriteString(schemas.UpdateListenerRequest_ClientAffinity, string(v.ClientAffinity))
+	}
+	if v.ListenerArn != nil {
+		s.WriteString(schemas.UpdateListenerRequest_ListenerArn, *v.ListenerArn)
+	}
+	serializePortRanges(s, schemas.UpdateListenerRequest_PortRanges, v.PortRanges)
+	if v.Protocol != "" {
+		s.WriteString(schemas.UpdateListenerRequest_Protocol, string(v.Protocol))
+	}
+}
+
 type UpdateListenerOutput struct {
 
 	// Information for the updated listener.
@@ -76,77 +94,50 @@ type UpdateListenerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateListenerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateListenerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateListenerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Listener != nil {
+		s.WriteStruct(schemas.UpdateListenerResponse_Listener)
+		v.Listener.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateListenerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateListenerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateListenerResponse_Listener:
+			v.Listener = &types.Listener{}
+			return v.Listener.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateListener, schemas.UpdateListenerRequest, schemas.UpdateListenerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateListener{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateListener, schemas.UpdateListenerRequest, schemas.UpdateListenerResponse), output: &UpdateListenerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateListener{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateListener"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateListenerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateListener(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +152,8 @@ func (c *Client) addOperationUpdateListenerMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateListener(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateListener",
-	}
 }

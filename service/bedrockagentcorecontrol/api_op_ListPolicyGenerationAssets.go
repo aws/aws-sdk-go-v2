@@ -5,14 +5,12 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of generated policy assets from a policy generation request
-// within the AgentCore Policy system. This operation returns the actual Cedar
+// within the AgentCore Policy system. This operation returns the actual Dogwood
 // policies and related artifacts produced by the AI-powered policy generation
 // process, allowing users to review and select from multiple generated policy
 // options.
@@ -74,7 +72,7 @@ type ListPolicyGenerationAssetsOutput struct {
 	// [ListPolicyGenerationAssets]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_ListPolicyGenerationAssets.html
 	NextToken *string
 
-	// An array of generated policy assets including Cedar policies and related
+	// An array of generated policy assets including Dogwood policies and related
 	// artifacts from the AI-powered policy generation process. Each asset represents a
 	// different policy option or variation generated from the original natural
 	// language input.
@@ -87,9 +85,6 @@ type ListPolicyGenerationAssetsOutput struct {
 }
 
 func (c *Client) addOperationListPolicyGenerationAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPolicyGenerationAssets{}, middleware.After)
 	if err != nil {
 		return err
@@ -98,65 +93,20 @@ func (c *Client) addOperationListPolicyGenerationAssetsMiddlewares(stack *middle
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPolicyGenerationAssets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPolicyGenerationAssetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPolicyGenerationAssets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +119,6 @@ func (c *Client) addOperationListPolicyGenerationAssetsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +225,3 @@ type ListPolicyGenerationAssetsAPIClient interface {
 }
 
 var _ ListPolicyGenerationAssetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPolicyGenerationAssets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPolicyGenerationAssets",
-	}
-}

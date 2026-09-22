@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"topicRuleDestination":{"arn":"__Arn__","createdAt":946684800,"httpUrlProperties":{"confirmationUrl":"__ConfirmationUrl__"},"influxDBProperties":{"endpoint":"__Endpoint__","influxDBVersion":"V2","secretId":"__SecretId__","secretKey":"__SecretKey__","secretType":"SecretString"},"lastUpdatedAt":946684800,"status":"ENABLED","statusReason":"__StatusReason__","vpcProperties":{"roleArn":"__RoleArn__","securityGroups":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}}}

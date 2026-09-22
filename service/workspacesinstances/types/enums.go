@@ -315,6 +315,25 @@ func (MarketTypeEnum) Values() []MarketTypeEnum {
 	}
 }
 
+type NestedVirtualizationEnum string
+
+// Enum values for NestedVirtualizationEnum
+const (
+	NestedVirtualizationEnumEnabled  NestedVirtualizationEnum = "enabled"
+	NestedVirtualizationEnumDisabled NestedVirtualizationEnum = "disabled"
+)
+
+// Values returns all known values for NestedVirtualizationEnum. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NestedVirtualizationEnum) Values() []NestedVirtualizationEnum {
+	return []NestedVirtualizationEnum{
+		"enabled",
+		"disabled",
+	}
+}
+
 type PlatformTypeEnum string
 
 // Enum values for PlatformTypeEnum

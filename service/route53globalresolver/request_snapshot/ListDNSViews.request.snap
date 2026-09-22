@@ -1,0 +1,3 @@
+GET /dns-views/resolver/__GlobalResolverId__?max_results=1&next_token=__NextToken__
+
+

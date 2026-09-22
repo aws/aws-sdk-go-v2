@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Logs_20140328.DescribeAccountPolicies
+
+{"accountIdentifiers":["__Member__","__Member__"],"nextToken":"__NextToken__","policyName":"__PolicyName__","policyType":"DATA_PROTECTION_POLICY"}

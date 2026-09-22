@@ -1,0 +1,5 @@
+POST /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/botrecommendations/__BotRecommendationId__/associatedtranscripts
+
+Content-Type: application/json
+
+{"filters":[{"name":"IntentId","values":["__Member__","__Member__"]},{"name":"IntentId","values":["__Member__","__Member__"]}],"maxResults":1,"nextIndex":1,"searchOrder":"Ascending"}

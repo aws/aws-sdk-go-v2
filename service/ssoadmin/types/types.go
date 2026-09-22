@@ -497,6 +497,9 @@ type InstanceMetadata struct {
 	// The date and time that the Identity Center instance was created.
 	CreatedDate *time.Time
 
+	// The ARN of the identity store that is connected to the Identity Center instance.
+	IdentityStoreArn *string
+
 	// The identifier of the identity store that is connected to the Identity Center
 	// instance.
 	IdentityStoreId *string
@@ -512,6 +515,14 @@ type InstanceMetadata struct {
 	// The Amazon Web Services account ID number of the owner of the Identity Center
 	// instance.
 	OwnerAccountId *string
+
+	// The primary Region where the IAM Identity Center instance was originally
+	// enabled. The primary Region cannot be removed.
+	PrimaryRegion *string
+
+	// The list of Regions enabled in the IAM Identity Center instance, including
+	// Regions with ACTIVE, ADDING, or REMOVING status.
+	Regions []RegionMetadata
 
 	// The current status of this Identity Center instance.
 	Status InstanceStatus

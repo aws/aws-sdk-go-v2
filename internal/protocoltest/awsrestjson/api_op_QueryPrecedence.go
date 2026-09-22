@@ -4,10 +4,9 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) QueryPrecedence(ctx context.Context, params *QueryPrecedenceInput, optFns ...func(*Options)) (*QueryPrecedenceOutput, error) {
@@ -33,6 +32,31 @@ type QueryPrecedenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryPrecedenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryPrecedenceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryPrecedenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.QueryPrecedenceInput_baz, v.Baz)
+	if v.Foo != nil {
+		s.WriteString(schemas.QueryPrecedenceInput_foo, *v.Foo)
+	}
+}
+func (v *QueryPrecedenceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryPrecedenceInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryPrecedenceInput_baz:
+			return deserializeStringMap(d, schemas.QueryPrecedenceInput_baz, &v.Baz)
+		case schemas.QueryPrecedenceInput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.QueryPrecedenceInput_foo, v.Foo)
+		}
+		return nil
+	})
+}
+
 type QueryPrecedenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,74 +64,39 @@ type QueryPrecedenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryPrecedenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryPrecedenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *QueryPrecedenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryPrecedenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryPrecedence, schemas.QueryPrecedenceInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryPrecedence{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryPrecedence, schemas.QueryPrecedenceInput, nil), output: &QueryPrecedenceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpQueryPrecedence{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryPrecedence"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryPrecedence(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -122,22 +111,8 @@ func (c *Client) addOperationQueryPrecedenceMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opQueryPrecedence(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "QueryPrecedence",
-	}
 }

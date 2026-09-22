@@ -5,13 +5,13 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Import a Windows operating system image from a verified Microsoft ISO disk
+// Imports a Windows operating system image from a verified Microsoft ISO disk
 // file. The following disk images are supported:
 //
 //   - Windows 11 Enterprise
@@ -32,8 +32,10 @@ func (c *Client) ImportDiskImage(ctx context.Context, params *ImportDiskImageInp
 
 type ImportDiskImageInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -82,7 +84,7 @@ type ImportDiskImageInput struct {
 	// Microsoft ISO file.
 	ExecutionRole *string
 
-	// Define logging configuration for the image build process.
+	// The logging configuration for the image build process.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
 	// Configures Secure Boot and UEFI settings for the imported image.
@@ -95,6 +97,58 @@ type ImportDiskImageInput struct {
 	WindowsConfiguration *types.WindowsConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportDiskImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDiskImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDiskImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportDiskImageRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ImportDiskImageRequest_description, *v.Description)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.ImportDiskImageRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.ImportDiskImageRequest_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.ImportDiskImageRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportDiskImageRequest_name, *v.Name)
+	}
+	if v.OsVersion != nil {
+		s.WriteString(schemas.ImportDiskImageRequest_osVersion, *v.OsVersion)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.ImportDiskImageRequest_platform, *v.Platform)
+	}
+	if v.RegisterImageOptions != nil {
+		s.WriteStruct(schemas.ImportDiskImageRequest_registerImageOptions)
+		v.RegisterImageOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.ImportDiskImageRequest_semanticVersion, *v.SemanticVersion)
+	}
+	serializeTagMap(s, schemas.ImportDiskImageRequest_tags, v.Tags)
+	if v.Uri != nil {
+		s.WriteString(schemas.ImportDiskImageRequest_uri, *v.Uri)
+	}
+	if v.WindowsConfiguration != nil {
+		s.WriteStruct(schemas.ImportDiskImageRequest_windowsConfiguration)
+		v.WindowsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type ImportDiskImageOutput struct {
@@ -112,65 +166,48 @@ type ImportDiskImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDiskImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDiskImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDiskImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportDiskImageResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.ImportDiskImageResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+}
+func (v *ImportDiskImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportDiskImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportDiskImageResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.ImportDiskImageResponse_clientToken, v.ClientToken)
+		case schemas.ImportDiskImageResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.ImportDiskImageResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportDiskImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDiskImage, schemas.ImportDiskImageRequest, schemas.ImportDiskImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportDiskImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDiskImage, schemas.ImportDiskImageRequest, schemas.ImportDiskImageResponse), output: &ImportDiskImageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportDiskImage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportDiskImage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -180,12 +217,6 @@ func (c *Client) addOperationImportDiskImageMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpImportDiskImageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportDiskImage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,12 +229,6 @@ func (c *Client) addOperationImportDiskImageMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,12 +268,4 @@ func (m *idempotencyToken_initializeOpImportDiskImage) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opImportDiskImageMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpImportDiskImage{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opImportDiskImage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportDiskImage",
-	}
 }

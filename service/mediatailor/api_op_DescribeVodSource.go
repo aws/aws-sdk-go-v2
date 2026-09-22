@@ -4,11 +4,10 @@ package mediatailor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,34 @@ type DescribeVodSourceInput struct {
 	VodSourceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeVodSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVodSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVodSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.DescribeVodSourceRequest_SourceLocationName, *v.SourceLocationName)
+	}
+	if v.VodSourceName != nil {
+		s.WriteString(schemas.DescribeVodSourceRequest_VodSourceName, *v.VodSourceName)
+	}
+}
+func (v *DescribeVodSourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVodSourceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVodSourceRequest_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.DescribeVodSourceRequest_SourceLocationName, v.SourceLocationName)
+		case schemas.DescribeVodSourceRequest_VodSourceName:
+			v.VodSourceName = new(string)
+			return d.ReadString(schemas.DescribeVodSourceRequest_VodSourceName, v.VodSourceName)
+		}
+		return nil
+	})
 }
 
 type DescribeVodSourceOutput struct {
@@ -80,77 +107,81 @@ type DescribeVodSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVodSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVodSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVodSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdBreakOpportunities(s, schemas.DescribeVodSourceResponse_AdBreakOpportunities, v.AdBreakOpportunities)
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeVodSourceResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeVodSourceResponse_CreationTime, *v.CreationTime)
+	}
+	serializeHttpPackageConfigurations(s, schemas.DescribeVodSourceResponse_HttpPackageConfigurations, v.HttpPackageConfigurations)
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeVodSourceResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.DescribeVodSourceResponse_SourceLocationName, *v.SourceLocationName)
+	}
+	serialize__mapOf__string(s, schemas.DescribeVodSourceResponse_Tags, v.Tags)
+	if v.VodSourceName != nil {
+		s.WriteString(schemas.DescribeVodSourceResponse_VodSourceName, *v.VodSourceName)
+	}
+}
+func (v *DescribeVodSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVodSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVodSourceResponse_AdBreakOpportunities:
+			return deserializeAdBreakOpportunities(d, schemas.DescribeVodSourceResponse_AdBreakOpportunities, &v.AdBreakOpportunities)
+		case schemas.DescribeVodSourceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeVodSourceResponse_Arn, v.Arn)
+		case schemas.DescribeVodSourceResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeVodSourceResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeVodSourceResponse_HttpPackageConfigurations:
+			return deserializeHttpPackageConfigurations(d, schemas.DescribeVodSourceResponse_HttpPackageConfigurations, &v.HttpPackageConfigurations)
+		case schemas.DescribeVodSourceResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeVodSourceResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeVodSourceResponse_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.DescribeVodSourceResponse_SourceLocationName, v.SourceLocationName)
+		case schemas.DescribeVodSourceResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.DescribeVodSourceResponse_Tags, &v.Tags)
+		case schemas.DescribeVodSourceResponse_VodSourceName:
+			v.VodSourceName = new(string)
+			return d.ReadString(schemas.DescribeVodSourceResponse_VodSourceName, v.VodSourceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVodSource, schemas.DescribeVodSourceRequest, schemas.DescribeVodSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeVodSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVodSource, schemas.DescribeVodSourceRequest, schemas.DescribeVodSourceResponse), output: &DescribeVodSourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeVodSource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeVodSource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeVodSourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVodSource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +196,8 @@ func (c *Client) addOperationDescribeVodSourceMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeVodSource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeVodSource",
-	}
 }

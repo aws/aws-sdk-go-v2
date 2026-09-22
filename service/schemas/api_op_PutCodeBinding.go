@@ -4,11 +4,10 @@ package schemas
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -51,6 +50,27 @@ type PutCodeBindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCodeBindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCodeBindingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCodeBindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Language != nil {
+		s.WriteString(schemas.PutCodeBindingRequest_Language, *v.Language)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.PutCodeBindingRequest_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.PutCodeBindingRequest_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.PutCodeBindingRequest_SchemaVersion, *v.SchemaVersion)
+	}
+}
+
 type PutCodeBindingOutput struct {
 
 	// The time and date that the code binding was created.
@@ -71,77 +91,70 @@ type PutCodeBindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCodeBindingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCodeBindingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCodeBindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.PutCodeBindingResponse_CreationDate, *v.CreationDate)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.PutCodeBindingResponse_LastModified, *v.LastModified)
+	}
+	if v.SchemaVersion != nil {
+		s.WriteString(schemas.PutCodeBindingResponse_SchemaVersion, *v.SchemaVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PutCodeBindingResponse_Status, string(v.Status))
+	}
+}
+func (v *PutCodeBindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutCodeBindingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutCodeBindingResponse_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.PutCodeBindingResponse_CreationDate, v.CreationDate)
+		case schemas.PutCodeBindingResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.PutCodeBindingResponse_LastModified, v.LastModified)
+		case schemas.PutCodeBindingResponse_SchemaVersion:
+			v.SchemaVersion = new(string)
+			return d.ReadString(schemas.PutCodeBindingResponse_SchemaVersion, v.SchemaVersion)
+		case schemas.PutCodeBindingResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.PutCodeBindingResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CodeGenerationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutCodeBindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCodeBinding, schemas.PutCodeBindingRequest, schemas.PutCodeBindingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutCodeBinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCodeBinding, schemas.PutCodeBindingRequest, schemas.PutCodeBindingResponse), output: &PutCodeBindingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutCodeBinding{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutCodeBinding"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutCodeBindingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutCodeBinding(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +169,8 @@ func (c *Client) addOperationPutCodeBindingMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutCodeBinding(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutCodeBinding",
-	}
 }

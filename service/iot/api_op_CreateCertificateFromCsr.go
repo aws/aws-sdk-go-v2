@@ -4,10 +4,9 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an X.509 certificate using the specified certificate signing request.
@@ -85,6 +84,21 @@ type CreateCertificateFromCsrInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateFromCsrInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateFromCsrRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateFromCsrInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateSigningRequest != nil {
+		s.WriteString(schemas.CreateCertificateFromCsrRequest_certificateSigningRequest, *v.CertificateSigningRequest)
+	}
+	if v.SetAsActive != false {
+		s.WriteBool(schemas.CreateCertificateFromCsrRequest_setAsActive, v.SetAsActive)
+	}
+}
+
 // The output from the CreateCertificateFromCsr operation.
 type CreateCertificateFromCsrOutput struct {
 
@@ -105,77 +119,60 @@ type CreateCertificateFromCsrOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCertificateFromCsrOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCertificateFromCsrResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCertificateFromCsrOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CreateCertificateFromCsrResponse_certificateArn, *v.CertificateArn)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.CreateCertificateFromCsrResponse_certificateId, *v.CertificateId)
+	}
+	if v.CertificatePem != nil {
+		s.WriteString(schemas.CreateCertificateFromCsrResponse_certificatePem, *v.CertificatePem)
+	}
+}
+func (v *CreateCertificateFromCsrOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCertificateFromCsrResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCertificateFromCsrResponse_certificateArn:
+			v.CertificateArn = new(string)
+			return d.ReadString(schemas.CreateCertificateFromCsrResponse_certificateArn, v.CertificateArn)
+		case schemas.CreateCertificateFromCsrResponse_certificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.CreateCertificateFromCsrResponse_certificateId, v.CertificateId)
+		case schemas.CreateCertificateFromCsrResponse_certificatePem:
+			v.CertificatePem = new(string)
+			return d.ReadString(schemas.CreateCertificateFromCsrResponse_certificatePem, v.CertificatePem)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCertificateFromCsrMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateFromCsr, schemas.CreateCertificateFromCsrRequest, schemas.CreateCertificateFromCsrResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCertificateFromCsr{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCertificateFromCsr, schemas.CreateCertificateFromCsrRequest, schemas.CreateCertificateFromCsrResponse), output: &CreateCertificateFromCsrOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCertificateFromCsr{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCertificateFromCsr"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCertificateFromCsrValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCertificateFromCsr(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +187,8 @@ func (c *Client) addOperationCreateCertificateFromCsrMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCertificateFromCsr(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCertificateFromCsr",
-	}
 }

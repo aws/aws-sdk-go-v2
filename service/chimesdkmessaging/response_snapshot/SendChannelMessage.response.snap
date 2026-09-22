@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChannelArn":"__ChannelArn__","MessageId":"__MessageId__","Status":{"Detail":"__Detail__","Value":"SENT"},"SubChannelId":"__SubChannelId__"}

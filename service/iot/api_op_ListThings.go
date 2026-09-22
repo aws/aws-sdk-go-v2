@@ -5,10 +5,10 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists your things. Use the attributeName and attributeValue parameters to
@@ -69,6 +69,33 @@ type ListThingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.ListThingsRequest_attributeName, *v.AttributeName)
+	}
+	if v.AttributeValue != nil {
+		s.WriteString(schemas.ListThingsRequest_attributeValue, *v.AttributeValue)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThingsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingsRequest_nextToken, *v.NextToken)
+	}
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.ListThingsRequest_thingTypeName, *v.ThingTypeName)
+	}
+	if v.UsePrefixAttributeValue != false {
+		s.WriteBool(schemas.ListThingsRequest_usePrefixAttributeValue, v.UsePrefixAttributeValue)
+	}
+}
+
 // The output from the ListThings operation.
 type ListThingsOutput struct {
 
@@ -85,74 +112,48 @@ type ListThingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThingsResponse_nextToken, *v.NextToken)
+	}
+	serializeThingAttributeList(s, schemas.ListThingsResponse_things, v.Things)
+}
+func (v *ListThingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThingsResponse_nextToken, v.NextToken)
+		case schemas.ListThingsResponse_things:
+			return deserializeThingAttributeList(d, schemas.ListThingsResponse_things, &v.Things)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThings, schemas.ListThingsRequest, schemas.ListThingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThings, schemas.ListThingsRequest, schemas.ListThingsResponse), output: &ListThingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListThings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListThings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +166,6 @@ func (c *Client) addOperationListThingsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -270,11 +265,3 @@ type ListThingsAPIClient interface {
 }
 
 var _ ListThingsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListThings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListThings",
-	}
-}

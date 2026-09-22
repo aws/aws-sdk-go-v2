@@ -1,0 +1,3 @@
+GET /phone-numbers-summary/__InstanceId__?maxResults=1&nextToken=__NextToken__&phoneNumberCountryCodes=AF&phoneNumberCountryCodes=AF&phoneNumberTypes=TOLL_FREE&phoneNumberTypes=TOLL_FREE
+
+

@@ -1,0 +1,5 @@
+POST /StartTelemetryEvaluationForOrganization
+
+Content-Type: application/json
+
+{"AllRegions":true,"Regions":["__Member__","__Member__"]}

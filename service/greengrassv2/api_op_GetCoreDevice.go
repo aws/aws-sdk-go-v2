@@ -4,11 +4,10 @@ package greengrassv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -58,6 +57,18 @@ type GetCoreDeviceInput struct {
 	CoreDeviceThingName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCoreDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreDeviceThingName != nil {
+		s.WriteString(schemas.GetCoreDeviceRequest_coreDeviceThingName, *v.CoreDeviceThingName)
+	}
 }
 
 type GetCoreDeviceOutput struct {
@@ -111,77 +122,91 @@ type GetCoreDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoreDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Architecture != nil {
+		s.WriteString(schemas.GetCoreDeviceResponse_architecture, *v.Architecture)
+	}
+	if v.CoreDeviceThingName != nil {
+		s.WriteString(schemas.GetCoreDeviceResponse_coreDeviceThingName, *v.CoreDeviceThingName)
+	}
+	if v.CoreVersion != nil {
+		s.WriteString(schemas.GetCoreDeviceResponse_coreVersion, *v.CoreVersion)
+	}
+	if v.LastStatusUpdateTimestamp != nil {
+		s.WriteTime(schemas.GetCoreDeviceResponse_lastStatusUpdateTimestamp, *v.LastStatusUpdateTimestamp)
+	}
+	if v.Platform != nil {
+		s.WriteString(schemas.GetCoreDeviceResponse_platform, *v.Platform)
+	}
+	if v.Runtime != nil {
+		s.WriteString(schemas.GetCoreDeviceResponse_runtime, *v.Runtime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetCoreDeviceResponse_status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetCoreDeviceResponse_tags, v.Tags)
+}
+func (v *GetCoreDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCoreDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCoreDeviceResponse_architecture:
+			v.Architecture = new(string)
+			return d.ReadString(schemas.GetCoreDeviceResponse_architecture, v.Architecture)
+		case schemas.GetCoreDeviceResponse_coreDeviceThingName:
+			v.CoreDeviceThingName = new(string)
+			return d.ReadString(schemas.GetCoreDeviceResponse_coreDeviceThingName, v.CoreDeviceThingName)
+		case schemas.GetCoreDeviceResponse_coreVersion:
+			v.CoreVersion = new(string)
+			return d.ReadString(schemas.GetCoreDeviceResponse_coreVersion, v.CoreVersion)
+		case schemas.GetCoreDeviceResponse_lastStatusUpdateTimestamp:
+			v.LastStatusUpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetCoreDeviceResponse_lastStatusUpdateTimestamp, v.LastStatusUpdateTimestamp)
+		case schemas.GetCoreDeviceResponse_platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.GetCoreDeviceResponse_platform, v.Platform)
+		case schemas.GetCoreDeviceResponse_runtime:
+			v.Runtime = new(string)
+			return d.ReadString(schemas.GetCoreDeviceResponse_runtime, v.Runtime)
+		case schemas.GetCoreDeviceResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCoreDeviceResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CoreDeviceStatus(ev)
+			return nil
+		case schemas.GetCoreDeviceResponse_tags:
+			return deserializeTagMap(d, schemas.GetCoreDeviceResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreDevice, schemas.GetCoreDeviceRequest, schemas.GetCoreDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoreDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreDevice, schemas.GetCoreDeviceRequest, schemas.GetCoreDeviceResponse), output: &GetCoreDeviceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCoreDevice{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCoreDevice"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCoreDeviceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCoreDevice(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +221,8 @@ func (c *Client) addOperationGetCoreDeviceMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCoreDevice(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCoreDevice",
-	}
 }

@@ -4,10 +4,9 @@ package drs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a new Source Network resource for a provided VPC ID.
@@ -49,6 +48,25 @@ type CreateSourceNetworkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSourceNetworkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSourceNetworkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSourceNetworkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OriginAccountID != nil {
+		s.WriteString(schemas.CreateSourceNetworkRequest_originAccountID, *v.OriginAccountID)
+	}
+	if v.OriginRegion != nil {
+		s.WriteString(schemas.CreateSourceNetworkRequest_originRegion, *v.OriginRegion)
+	}
+	serializeTagsMap(s, schemas.CreateSourceNetworkRequest_tags, v.Tags)
+	if v.VpcID != nil {
+		s.WriteString(schemas.CreateSourceNetworkRequest_vpcID, *v.VpcID)
+	}
+}
+
 type CreateSourceNetworkOutput struct {
 
 	// ID of the created Source Network.
@@ -60,77 +78,48 @@ type CreateSourceNetworkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSourceNetworkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSourceNetworkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSourceNetworkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceNetworkID != nil {
+		s.WriteString(schemas.CreateSourceNetworkResponse_sourceNetworkID, *v.SourceNetworkID)
+	}
+}
+func (v *CreateSourceNetworkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSourceNetworkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSourceNetworkResponse_sourceNetworkID:
+			v.SourceNetworkID = new(string)
+			return d.ReadString(schemas.CreateSourceNetworkResponse_sourceNetworkID, v.SourceNetworkID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSourceNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSourceNetwork, schemas.CreateSourceNetworkRequest, schemas.CreateSourceNetworkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSourceNetwork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSourceNetwork, schemas.CreateSourceNetworkRequest, schemas.CreateSourceNetworkResponse), output: &CreateSourceNetworkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSourceNetwork{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSourceNetwork"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSourceNetworkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSourceNetwork(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +134,8 @@ func (c *Client) addOperationCreateSourceNetworkMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSourceNetwork(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSourceNetwork",
-	}
 }

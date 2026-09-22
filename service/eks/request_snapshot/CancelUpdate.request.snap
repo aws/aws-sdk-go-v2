@@ -1,0 +1,5 @@
+POST /clusters/__Name__/updates/__UpdateId__/cancel-update
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"PhoneNumberCountries":[{"CountryCode":"__CountryCode__","SupportedPhoneNumberTypes":["Local","Local"]},{"CountryCode":"__CountryCode__","SupportedPhoneNumberTypes":["Local","Local"]}]}

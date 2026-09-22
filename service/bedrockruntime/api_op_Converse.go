@@ -4,12 +4,13 @@ package bedrockruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/bedrockruntime/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends messages to the specified Amazon Bedrock model. Converse provides a
@@ -175,6 +176,56 @@ type ConverseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConverseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConverseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConverseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalModelRequestFields != nil {
+		s.WriteDocument(schemas.ConverseRequest_additionalModelRequestFields, &smithydocument.Opaque{Value: v.AdditionalModelRequestFields})
+	}
+	serializeAdditionalModelResponseFieldPaths(s, schemas.ConverseRequest_additionalModelResponseFieldPaths, v.AdditionalModelResponseFieldPaths)
+	if v.GuardrailConfig != nil {
+		s.WriteStruct(schemas.ConverseRequest_guardrailConfig)
+		v.GuardrailConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferenceConfig != nil {
+		s.WriteStruct(schemas.ConverseRequest_inferenceConfig)
+		v.InferenceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMessages(s, schemas.ConverseRequest_messages, v.Messages)
+	if v.ModelId != nil {
+		s.WriteString(schemas.ConverseRequest_modelId, *v.ModelId)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.ConverseRequest_outputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PerformanceConfig != nil {
+		s.WriteStruct(schemas.ConverseRequest_performanceConfig)
+		v.PerformanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePromptVariableMap(s, schemas.ConverseRequest_promptVariables, v.PromptVariables)
+	serializeRequestMetadata(s, schemas.ConverseRequest_requestMetadata, v.RequestMetadata)
+	if v.ServiceTier != nil {
+		s.WriteStruct(schemas.ConverseRequest_serviceTier)
+		v.ServiceTier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSystemContentBlocks(s, schemas.ConverseRequest_system, v.System)
+	if v.ToolConfig != nil {
+		s.WriteStruct(schemas.ConverseRequest_toolConfig)
+		v.ToolConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ConverseOutput struct {
 
 	// Metrics for the call to Converse .
@@ -216,77 +267,107 @@ type ConverseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConverseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConverseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConverseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalModelResponseFields != nil {
+		s.WriteDocument(schemas.ConverseResponse_additionalModelResponseFields, &smithydocument.Opaque{Value: v.AdditionalModelResponseFields})
+	}
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.ConverseResponse_metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeConverseOutput(s, schemas.ConverseResponse_output, v.Output)
+	if v.PerformanceConfig != nil {
+		s.WriteStruct(schemas.ConverseResponse_performanceConfig)
+		v.PerformanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceTier != nil {
+		s.WriteStruct(schemas.ConverseResponse_serviceTier)
+		v.ServiceTier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StopReason != "" {
+		s.WriteString(schemas.ConverseResponse_stopReason, string(v.StopReason))
+	}
+	if v.Trace != nil {
+		s.WriteStruct(schemas.ConverseResponse_trace)
+		v.Trace.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Usage != nil {
+		s.WriteStruct(schemas.ConverseResponse_usage)
+		v.Usage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConverseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConverseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConverseResponse_additionalModelResponseFields:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ConverseResponse_additionalModelResponseFields, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.AdditionalModelResponseFields = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.ConverseResponse_metrics:
+			v.Metrics = &types.ConverseMetrics{}
+			return v.Metrics.Deserialize(d)
+		case schemas.ConverseResponse_output:
+			return deserializeConverseOutput(d, schemas.ConverseResponse_output, &v.Output)
+		case schemas.ConverseResponse_performanceConfig:
+			v.PerformanceConfig = &types.PerformanceConfiguration{}
+			return v.PerformanceConfig.Deserialize(d)
+		case schemas.ConverseResponse_serviceTier:
+			v.ServiceTier = &types.ServiceTier{}
+			return v.ServiceTier.Deserialize(d)
+		case schemas.ConverseResponse_stopReason:
+			var ev string
+			if err := d.ReadString(schemas.ConverseResponse_stopReason, &ev); err != nil {
+				return err
+			}
+			v.StopReason = types.StopReason(ev)
+			return nil
+		case schemas.ConverseResponse_trace:
+			v.Trace = &types.ConverseTrace{}
+			return v.Trace.Deserialize(d)
+		case schemas.ConverseResponse_usage:
+			v.Usage = &types.TokenUsage{}
+			return v.Usage.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConverseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Converse, schemas.ConverseRequest, schemas.ConverseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpConverse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Converse, schemas.ConverseRequest, schemas.ConverseResponse), output: &ConverseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpConverse{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Converse"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpConverseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConverse(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -301,22 +382,8 @@ func (c *Client) addOperationConverseMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConverse(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Converse",
-	}
 }

@@ -5,10 +5,10 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the nodes within a network.
@@ -54,6 +54,30 @@ type ListNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNodesInput_MaxResults, *v.MaxResults)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.ListNodesInput_MemberId, *v.MemberId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.ListNodesInput_NetworkId, *v.NetworkId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesInput_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListNodesInput_Status, string(v.Status))
+	}
+}
+
 type ListNodesOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -69,77 +93,51 @@ type ListNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodesOutput_NextToken, *v.NextToken)
+	}
+	serializeNodeSummaryList(s, schemas.ListNodesOutput_Nodes, v.Nodes)
+}
+func (v *ListNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNodesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNodesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNodesOutput_NextToken, v.NextToken)
+		case schemas.ListNodesOutput_Nodes:
+			return deserializeNodeSummaryList(d, schemas.ListNodesOutput_Nodes, &v.Nodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodes, schemas.ListNodesInput, schemas.ListNodesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodes, schemas.ListNodesInput, schemas.ListNodesOutput), output: &ListNodesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNodes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNodes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListNodesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNodes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +150,6 @@ func (c *Client) addOperationListNodesMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,11 +249,3 @@ type ListNodesAPIClient interface {
 }
 
 var _ ListNodesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListNodes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListNodes",
-	}
-}

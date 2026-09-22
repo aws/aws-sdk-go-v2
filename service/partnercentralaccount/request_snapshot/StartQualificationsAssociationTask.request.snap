@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.StartQualificationsAssociationTask
+
+{"Catalog":"__Catalog__","ClientToken":"__ClientToken__","Identifier":"__Identifier__","PrimaryPartner":{"AccountId":"__AccountId__","ProfileId":"__ProfileId__"}}

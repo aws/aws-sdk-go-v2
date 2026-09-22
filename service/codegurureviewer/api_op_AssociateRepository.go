@@ -5,10 +5,10 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use to associate an Amazon Web Services CodeCommit repository or a repository
@@ -84,6 +84,29 @@ type AssociateRepositoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateRepositoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.AssociateRepositoryRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.KMSKeyDetails != nil {
+		s.WriteStruct(schemas.AssociateRepositoryRequest_KMSKeyDetails)
+		v.KMSKeyDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Repository != nil {
+		s.WriteStruct(schemas.AssociateRepositoryRequest_Repository)
+		v.Repository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.AssociateRepositoryRequest_Tags, v.Tags)
+}
+
 type AssociateRepositoryOutput struct {
 
 	// Information about the repository association.
@@ -106,65 +129,47 @@ type AssociateRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateRepositoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateRepositoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateRepositoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryAssociation != nil {
+		s.WriteStruct(schemas.AssociateRepositoryResponse_RepositoryAssociation)
+		v.RepositoryAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.AssociateRepositoryResponse_Tags, v.Tags)
+}
+func (v *AssociateRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateRepositoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateRepositoryResponse_RepositoryAssociation:
+			v.RepositoryAssociation = &types.RepositoryAssociation{}
+			return v.RepositoryAssociation.Deserialize(d)
+		case schemas.AssociateRepositoryResponse_Tags:
+			return deserializeTagMap(d, schemas.AssociateRepositoryResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateRepository, schemas.AssociateRepositoryRequest, schemas.AssociateRepositoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateRepository, schemas.AssociateRepositoryRequest, schemas.AssociateRepositoryResponse), output: &AssociateRepositoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateRepository{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateRepository"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -174,12 +179,6 @@ func (c *Client) addOperationAssociateRepositoryMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpAssociateRepositoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateRepository(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +191,6 @@ func (c *Client) addOperationAssociateRepositoryMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -237,12 +230,4 @@ func (m *idempotencyToken_initializeOpAssociateRepository) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opAssociateRepositoryMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateRepository{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAssociateRepository(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateRepository",
-	}
 }

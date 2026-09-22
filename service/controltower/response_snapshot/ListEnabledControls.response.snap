@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"enabledControls":[{"arn":"__Arn__","controlIdentifier":"__ControlIdentifier__","driftStatusSummary":{"driftStatus":"DRIFTED","types":{"inheritance":{"status":"DRIFTED"},"resource":{"status":"DRIFTED"}}},"parentIdentifier":"__ParentIdentifier__","statusSummary":{"lastOperationIdentifier":"__LastOperationIdentifier__","status":"SUCCEEDED"},"targetIdentifier":"__TargetIdentifier__"},{"arn":"__Arn__","controlIdentifier":"__ControlIdentifier__","driftStatusSummary":{"driftStatus":"DRIFTED","types":{"inheritance":{"status":"DRIFTED"},"resource":{"status":"DRIFTED"}}},"parentIdentifier":"__ParentIdentifier__","statusSummary":{"lastOperationIdentifier":"__LastOperationIdentifier__","status":"SUCCEEDED"},"targetIdentifier":"__TargetIdentifier__"}],"nextToken":"__NextToken__"}

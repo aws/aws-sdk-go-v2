@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts deletion of channel. The associated outputs are also deleted.
@@ -36,6 +35,18 @@ type DeleteChannelInput struct {
 	ChannelId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.DeleteChannelRequest_ChannelId, *v.ChannelId)
+	}
 }
 
 // Placeholder documentation for DeleteChannelResponse
@@ -119,77 +130,192 @@ type DeleteChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteChannelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteChannelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteChannelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnywhereSettings != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_AnywhereSettings)
+		v.AnywhereSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteChannelResponse_Arn, *v.Arn)
+	}
+	if v.CdiInputSpecification != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_CdiInputSpecification)
+		v.CdiInputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChannelClass != "" {
+		s.WriteString(schemas.DeleteChannelResponse_ChannelClass, string(v.ChannelClass))
+	}
+	if v.ChannelEngineVersion != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_ChannelEngineVersion)
+		v.ChannelEngineVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__string(s, schemas.DeleteChannelResponse_ChannelSecurityGroups, v.ChannelSecurityGroups)
+	serialize__listOfOutputDestination(s, schemas.DeleteChannelResponse_Destinations, v.Destinations)
+	serialize__listOfChannelEgressEndpoint(s, schemas.DeleteChannelResponse_EgressEndpoints, v.EgressEndpoints)
+	if v.EncoderSettings != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_EncoderSettings)
+		v.EncoderSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteChannelResponse_Id, *v.Id)
+	}
+	if v.InferenceSettings != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_InferenceSettings)
+		v.InferenceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputAttachment(s, schemas.DeleteChannelResponse_InputAttachments, v.InputAttachments)
+	if v.InputSpecification != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_InputSpecification)
+		v.InputSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LinkedChannelSettings != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_LinkedChannelSettings)
+		v.LinkedChannelSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.DeleteChannelResponse_LogLevel, string(v.LogLevel))
+	}
+	if v.Maintenance != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_Maintenance)
+		v.Maintenance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteChannelResponse_Name, *v.Name)
+	}
+	serialize__listOfPipelineDetail(s, schemas.DeleteChannelResponse_PipelineDetails, v.PipelineDetails)
+	if v.PipelinesRunningCount != nil {
+		s.WriteInt32(schemas.DeleteChannelResponse_PipelinesRunningCount, *v.PipelinesRunningCount)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DeleteChannelResponse_RoleArn, *v.RoleArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DeleteChannelResponse_State, string(v.State))
+	}
+	serializeTags(s, schemas.DeleteChannelResponse_Tags, v.Tags)
+	if v.Vpc != nil {
+		s.WriteStruct(schemas.DeleteChannelResponse_Vpc)
+		v.Vpc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteChannelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteChannelResponse_AnywhereSettings:
+			v.AnywhereSettings = &types.DescribeAnywhereSettings{}
+			return v.AnywhereSettings.Deserialize(d)
+		case schemas.DeleteChannelResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteChannelResponse_Arn, v.Arn)
+		case schemas.DeleteChannelResponse_CdiInputSpecification:
+			v.CdiInputSpecification = &types.CdiInputSpecification{}
+			return v.CdiInputSpecification.Deserialize(d)
+		case schemas.DeleteChannelResponse_ChannelClass:
+			var ev string
+			if err := d.ReadString(schemas.DeleteChannelResponse_ChannelClass, &ev); err != nil {
+				return err
+			}
+			v.ChannelClass = types.ChannelClass(ev)
+			return nil
+		case schemas.DeleteChannelResponse_ChannelEngineVersion:
+			v.ChannelEngineVersion = &types.ChannelEngineVersionResponse{}
+			return v.ChannelEngineVersion.Deserialize(d)
+		case schemas.DeleteChannelResponse_ChannelSecurityGroups:
+			return deserialize__listOf__string(d, schemas.DeleteChannelResponse_ChannelSecurityGroups, &v.ChannelSecurityGroups)
+		case schemas.DeleteChannelResponse_Destinations:
+			return deserialize__listOfOutputDestination(d, schemas.DeleteChannelResponse_Destinations, &v.Destinations)
+		case schemas.DeleteChannelResponse_EgressEndpoints:
+			return deserialize__listOfChannelEgressEndpoint(d, schemas.DeleteChannelResponse_EgressEndpoints, &v.EgressEndpoints)
+		case schemas.DeleteChannelResponse_EncoderSettings:
+			v.EncoderSettings = &types.EncoderSettings{}
+			return v.EncoderSettings.Deserialize(d)
+		case schemas.DeleteChannelResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteChannelResponse_Id, v.Id)
+		case schemas.DeleteChannelResponse_InferenceSettings:
+			v.InferenceSettings = &types.DescribeInferenceSettings{}
+			return v.InferenceSettings.Deserialize(d)
+		case schemas.DeleteChannelResponse_InputAttachments:
+			return deserialize__listOfInputAttachment(d, schemas.DeleteChannelResponse_InputAttachments, &v.InputAttachments)
+		case schemas.DeleteChannelResponse_InputSpecification:
+			v.InputSpecification = &types.InputSpecification{}
+			return v.InputSpecification.Deserialize(d)
+		case schemas.DeleteChannelResponse_LinkedChannelSettings:
+			v.LinkedChannelSettings = &types.DescribeLinkedChannelSettings{}
+			return v.LinkedChannelSettings.Deserialize(d)
+		case schemas.DeleteChannelResponse_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.DeleteChannelResponse_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = types.LogLevel(ev)
+			return nil
+		case schemas.DeleteChannelResponse_Maintenance:
+			v.Maintenance = &types.MaintenanceStatus{}
+			return v.Maintenance.Deserialize(d)
+		case schemas.DeleteChannelResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteChannelResponse_Name, v.Name)
+		case schemas.DeleteChannelResponse_PipelineDetails:
+			return deserialize__listOfPipelineDetail(d, schemas.DeleteChannelResponse_PipelineDetails, &v.PipelineDetails)
+		case schemas.DeleteChannelResponse_PipelinesRunningCount:
+			v.PipelinesRunningCount = new(int32)
+			return d.ReadInt32(schemas.DeleteChannelResponse_PipelinesRunningCount, v.PipelinesRunningCount)
+		case schemas.DeleteChannelResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DeleteChannelResponse_RoleArn, v.RoleArn)
+		case schemas.DeleteChannelResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DeleteChannelResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ChannelState(ev)
+			return nil
+		case schemas.DeleteChannelResponse_Tags:
+			return deserializeTags(d, schemas.DeleteChannelResponse_Tags, &v.Tags)
+		case schemas.DeleteChannelResponse_Vpc:
+			v.Vpc = &types.VpcOutputSettingsDescription{}
+			return v.Vpc.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelRequest, schemas.DeleteChannelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteChannel, schemas.DeleteChannelRequest, schemas.DeleteChannelResponse), output: &DeleteChannelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteChannel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +330,8 @@ func (c *Client) addOperationDeleteChannelMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteChannel",
-	}
 }

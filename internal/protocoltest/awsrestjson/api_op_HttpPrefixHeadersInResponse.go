@@ -4,10 +4,9 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Clients that perform this test extract all headers from the response.
@@ -30,6 +29,15 @@ type HttpPrefixHeadersInResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPrefixHeadersInResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPrefixHeadersInResponseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPrefixHeadersInResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type HttpPrefixHeadersInResponseOutput struct {
 
 	// Map keys will be normalized to lower-case.
@@ -41,74 +49,42 @@ type HttpPrefixHeadersInResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPrefixHeadersInResponseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPrefixHeadersInResponseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPrefixHeadersInResponseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.HttpPrefixHeadersInResponseOutput_prefixHeaders, v.PrefixHeaders)
+}
+func (v *HttpPrefixHeadersInResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPrefixHeadersInResponseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPrefixHeadersInResponseOutput_prefixHeaders:
+			return deserializeStringMap(d, schemas.HttpPrefixHeadersInResponseOutput_prefixHeaders, &v.PrefixHeaders)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpPrefixHeadersInResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPrefixHeadersInResponse, schemas.HttpPrefixHeadersInResponseInput, schemas.HttpPrefixHeadersInResponseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpPrefixHeadersInResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPrefixHeadersInResponse, schemas.HttpPrefixHeadersInResponseInput, schemas.HttpPrefixHeadersInResponseOutput), output: &HttpPrefixHeadersInResponseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPrefixHeadersInResponse{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpPrefixHeadersInResponse"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPrefixHeadersInResponse(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -123,22 +99,8 @@ func (c *Client) addOperationHttpPrefixHeadersInResponseMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opHttpPrefixHeadersInResponse(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "HttpPrefixHeadersInResponse",
-	}
 }

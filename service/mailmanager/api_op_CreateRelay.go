@@ -5,10 +5,10 @@ package mailmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a relay resource which can be used in rules to relay incoming emails to
@@ -62,6 +62,29 @@ type CreateRelayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRelayAuthentication(s, schemas.CreateRelayRequest_Authentication, v.Authentication)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRelayRequest_ClientToken, *v.ClientToken)
+	}
+	if v.RelayName != nil {
+		s.WriteString(schemas.CreateRelayRequest_RelayName, *v.RelayName)
+	}
+	if v.ServerName != nil {
+		s.WriteString(schemas.CreateRelayRequest_ServerName, *v.ServerName)
+	}
+	if v.ServerPort != nil {
+		s.WriteInt32(schemas.CreateRelayRequest_ServerPort, *v.ServerPort)
+	}
+	serializeTagList(s, schemas.CreateRelayRequest_Tags, v.Tags)
+}
+
 type CreateRelayOutput struct {
 
 	// A unique identifier of the created relay resource.
@@ -75,65 +98,45 @@ type CreateRelayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RelayId != nil {
+		s.WriteString(schemas.CreateRelayResponse_RelayId, *v.RelayId)
+	}
+}
+func (v *CreateRelayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRelayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRelayResponse_RelayId:
+			v.RelayId = new(string)
+			return d.ReadString(schemas.CreateRelayResponse_RelayId, v.RelayId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRelayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelay, schemas.CreateRelayRequest, schemas.CreateRelayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRelay{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelay, schemas.CreateRelayRequest, schemas.CreateRelayResponse), output: &CreateRelayOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRelay{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRelay"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -143,12 +146,6 @@ func (c *Client) addOperationCreateRelayMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateRelayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRelay(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +158,6 @@ func (c *Client) addOperationCreateRelayMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -206,12 +197,4 @@ func (m *idempotencyToken_initializeOpCreateRelay) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateRelayMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateRelay{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateRelay(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRelay",
-	}
 }

@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the data objects for the specified firewall policy.
@@ -43,6 +42,21 @@ type DescribeFirewallPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFirewallPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFirewallPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFirewallPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallPolicyArn != nil {
+		s.WriteString(schemas.DescribeFirewallPolicyRequest_FirewallPolicyArn, *v.FirewallPolicyArn)
+	}
+	if v.FirewallPolicyName != nil {
+		s.WriteString(schemas.DescribeFirewallPolicyRequest_FirewallPolicyName, *v.FirewallPolicyName)
+	}
+}
+
 type DescribeFirewallPolicyOutput struct {
 
 	// The high-level properties of a firewall policy. This, along with the FirewallPolicy, define
@@ -74,74 +88,61 @@ type DescribeFirewallPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFirewallPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFirewallPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFirewallPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallPolicy != nil {
+		s.WriteStruct(schemas.DescribeFirewallPolicyResponse_FirewallPolicy)
+		v.FirewallPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallPolicyResponse != nil {
+		s.WriteStruct(schemas.DescribeFirewallPolicyResponse_FirewallPolicyResponse)
+		v.FirewallPolicyResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.DescribeFirewallPolicyResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *DescribeFirewallPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFirewallPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFirewallPolicyResponse_FirewallPolicy:
+			v.FirewallPolicy = &types.FirewallPolicy{}
+			return v.FirewallPolicy.Deserialize(d)
+		case schemas.DescribeFirewallPolicyResponse_FirewallPolicyResponse:
+			v.FirewallPolicyResponse = &types.FirewallPolicyResponse{}
+			return v.FirewallPolicyResponse.Deserialize(d)
+		case schemas.DescribeFirewallPolicyResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.DescribeFirewallPolicyResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFirewallPolicy, schemas.DescribeFirewallPolicyRequest, schemas.DescribeFirewallPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFirewallPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFirewallPolicy, schemas.DescribeFirewallPolicyRequest, schemas.DescribeFirewallPolicyResponse), output: &DescribeFirewallPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFirewallPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFirewallPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFirewallPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +157,8 @@ func (c *Client) addOperationDescribeFirewallPolicyMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeFirewallPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFirewallPolicy",
-	}
 }

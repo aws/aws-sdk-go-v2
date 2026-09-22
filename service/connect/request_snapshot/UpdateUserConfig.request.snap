@@ -1,0 +1,5 @@
+POST /users/__InstanceId__/__UserId__/config
+
+Content-Type: application/json
+
+{"AfterContactWorkConfigs":[{"AfterContactWorkConfig":{"AfterContactWorkTimeLimit":1},"AgentFirstCallbackAfterContactWorkConfig":{"AfterContactWorkTimeLimit":1},"Channel":"VOICE"},{"AfterContactWorkConfig":{"AfterContactWorkTimeLimit":1},"AgentFirstCallbackAfterContactWorkConfig":{"AfterContactWorkTimeLimit":1},"Channel":"VOICE"}],"AutoAcceptConfigs":[{"AgentFirstCallbackAutoAccept":true,"AutoAccept":true,"Channel":"VOICE"},{"AgentFirstCallbackAutoAccept":true,"AutoAccept":true,"Channel":"VOICE"}],"PersistentConnectionConfigs":[{"Channel":"VOICE","PersistentConnection":true},{"Channel":"VOICE","PersistentConnection":true}],"PhoneNumberConfigs":[{"Channel":"VOICE","PhoneNumber":"__PhoneNumber__","PhoneType":"SOFT_PHONE"},{"Channel":"VOICE","PhoneNumber":"__PhoneNumber__","PhoneType":"SOFT_PHONE"}],"VoiceEnhancementConfigs":[{"Channel":"VOICE","VoiceEnhancementMode":"VOICE_ISOLATION"},{"Channel":"VOICE","VoiceEnhancementMode":"VOICE_ISOLATION"}]}

@@ -1,3 +1,141 @@
+# v1.21.6 (2026-09-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.5 (2026-09-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.4 (2026-09-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.3 (2026-09-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.2 (2026-08-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.0 (2026-08-27)
+
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.64 (2026-08-26)
+
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.63 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.62 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.61 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.60 (2026-08-10)
+
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.59 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.58 (2026-08-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.57 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
+# v1.20.56 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.55 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.54 (2026-07-24)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.53 (2026-07-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.52 (2026-07-13)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.51 (2026-07-06)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.50 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.49 (2026-06-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.48 (2026-06-09)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.47 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.46 (2026-06-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.45 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.44 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.43 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.42 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.41 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.40 (2026-05-22)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.39 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

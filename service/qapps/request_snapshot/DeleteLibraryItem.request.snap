@@ -1,0 +1,6 @@
+POST /catalog.deleteItem
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"libraryItemId":"__LibraryItemId__"}

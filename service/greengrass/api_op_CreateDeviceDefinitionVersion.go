@@ -4,11 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a version of a device definition that has already been defined.
@@ -43,6 +42,22 @@ type CreateDeviceDefinitionVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceDefinitionVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceDefinitionVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceDefinitionVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmznClientToken != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionRequest_AmznClientToken, *v.AmznClientToken)
+	}
+	if v.DeviceDefinitionId != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionRequest_DeviceDefinitionId, *v.DeviceDefinitionId)
+	}
+	serialize__listOfDevice(s, schemas.CreateDeviceDefinitionVersionRequest_Devices, v.Devices)
+}
+
 type CreateDeviceDefinitionVersionOutput struct {
 
 	// The ARN of the version.
@@ -63,77 +78,66 @@ type CreateDeviceDefinitionVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceDefinitionVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceDefinitionVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceDefinitionVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateDeviceDefinitionVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateDeviceDefinitionVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeviceDefinitionVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeviceDefinitionVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDeviceDefinitionVersionResponse_Arn, v.Arn)
+		case schemas.CreateDeviceDefinitionVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.CreateDeviceDefinitionVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.CreateDeviceDefinitionVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDeviceDefinitionVersionResponse_Id, v.Id)
+		case schemas.CreateDeviceDefinitionVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateDeviceDefinitionVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeviceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeviceDefinitionVersion, schemas.CreateDeviceDefinitionVersionRequest, schemas.CreateDeviceDefinitionVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeviceDefinitionVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeviceDefinitionVersion, schemas.CreateDeviceDefinitionVersionRequest, schemas.CreateDeviceDefinitionVersionResponse), output: &CreateDeviceDefinitionVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeviceDefinitionVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDeviceDefinitionVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDeviceDefinitionVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeviceDefinitionVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +152,8 @@ func (c *Client) addOperationCreateDeviceDefinitionVersionMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDeviceDefinitionVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDeviceDefinitionVersion",
-	}
 }

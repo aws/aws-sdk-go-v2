@@ -1,0 +1,5 @@
+POST /get-landingzone-operation
+
+Content-Type: application/json
+
+{"operationIdentifier":"__OperationIdentifier__"}

@@ -4,11 +4,10 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Associates a list of evidence to an assessment report in an Audit Manager
@@ -49,6 +48,22 @@ type BatchAssociateAssessmentReportEvidenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateAssessmentReportEvidenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateAssessmentReportEvidenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateAssessmentReportEvidenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.BatchAssociateAssessmentReportEvidenceRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.EvidenceFolderId != nil {
+		s.WriteString(schemas.BatchAssociateAssessmentReportEvidenceRequest_evidenceFolderId, *v.EvidenceFolderId)
+	}
+	serializeEvidenceIds(s, schemas.BatchAssociateAssessmentReportEvidenceRequest_evidenceIds, v.EvidenceIds)
+}
+
 type BatchAssociateAssessmentReportEvidenceOutput struct {
 
 	//  A list of errors that the BatchAssociateAssessmentReportEvidence API returned.
@@ -63,77 +78,48 @@ type BatchAssociateAssessmentReportEvidenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateAssessmentReportEvidenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateAssessmentReportEvidenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateAssessmentReportEvidenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssessmentReportEvidenceErrors(s, schemas.BatchAssociateAssessmentReportEvidenceResponse_errors, v.Errors)
+	serializeEvidenceIds(s, schemas.BatchAssociateAssessmentReportEvidenceResponse_evidenceIds, v.EvidenceIds)
+}
+func (v *BatchAssociateAssessmentReportEvidenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateAssessmentReportEvidenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateAssessmentReportEvidenceResponse_errors:
+			return deserializeAssessmentReportEvidenceErrors(d, schemas.BatchAssociateAssessmentReportEvidenceResponse_errors, &v.Errors)
+		case schemas.BatchAssociateAssessmentReportEvidenceResponse_evidenceIds:
+			return deserializeEvidenceIds(d, schemas.BatchAssociateAssessmentReportEvidenceResponse_evidenceIds, &v.EvidenceIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateAssessmentReportEvidenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateAssessmentReportEvidence, schemas.BatchAssociateAssessmentReportEvidenceRequest, schemas.BatchAssociateAssessmentReportEvidenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateAssessmentReportEvidence{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateAssessmentReportEvidence, schemas.BatchAssociateAssessmentReportEvidenceRequest, schemas.BatchAssociateAssessmentReportEvidenceResponse), output: &BatchAssociateAssessmentReportEvidenceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAssociateAssessmentReportEvidence{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAssociateAssessmentReportEvidence"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchAssociateAssessmentReportEvidenceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateAssessmentReportEvidence(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +134,8 @@ func (c *Client) addOperationBatchAssociateAssessmentReportEvidenceMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchAssociateAssessmentReportEvidence(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchAssociateAssessmentReportEvidence",
-	}
 }

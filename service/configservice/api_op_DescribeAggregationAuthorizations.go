@@ -5,10 +5,10 @@ package configservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of authorizations granted to various aggregator accounts and
@@ -41,6 +41,21 @@ type DescribeAggregationAuthorizationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregationAuthorizationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregationAuthorizationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregationAuthorizationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeAggregationAuthorizationsRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregationAuthorizationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeAggregationAuthorizationsOutput struct {
 
 	// Returns a list of authorizations granted to various aggregator accounts and
@@ -57,74 +72,48 @@ type DescribeAggregationAuthorizationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAggregationAuthorizationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAggregationAuthorizationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAggregationAuthorizationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAggregationAuthorizationList(s, schemas.DescribeAggregationAuthorizationsResponse_AggregationAuthorizations, v.AggregationAuthorizations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAggregationAuthorizationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAggregationAuthorizationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAggregationAuthorizationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAggregationAuthorizationsResponse_AggregationAuthorizations:
+			return deserializeAggregationAuthorizationList(d, schemas.DescribeAggregationAuthorizationsResponse_AggregationAuthorizations, &v.AggregationAuthorizations)
+		case schemas.DescribeAggregationAuthorizationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAggregationAuthorizationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAggregationAuthorizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregationAuthorizations, schemas.DescribeAggregationAuthorizationsRequest, schemas.DescribeAggregationAuthorizationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAggregationAuthorizations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAggregationAuthorizations, schemas.DescribeAggregationAuthorizationsRequest, schemas.DescribeAggregationAuthorizationsResponse), output: &DescribeAggregationAuthorizationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAggregationAuthorizations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAggregationAuthorizations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAggregationAuthorizations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,12 +126,6 @@ func (c *Client) addOperationDescribeAggregationAuthorizationsMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,11 +226,3 @@ type DescribeAggregationAuthorizationsAPIClient interface {
 }
 
 var _ DescribeAggregationAuthorizationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeAggregationAuthorizations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAggregationAuthorizations",
-	}
-}

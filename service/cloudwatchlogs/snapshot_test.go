@@ -434,6 +434,18 @@ func TestCheckSnapshot_DeleteSubscriptionFilter(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteSyslogConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSyslogConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteSyslogConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTransformer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTransformer(context.Background(), nil, func(o *Options) {
@@ -902,6 +914,18 @@ func TestCheckSnapshot_GetScheduledQueryHistory(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetStorageTierPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStorageTierPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetStorageTierPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetTransformer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransformer(context.Background(), nil, func(o *Options) {
@@ -1003,6 +1027,18 @@ func TestCheckSnapshot_ListSourcesForS3TableIntegration(t *testing.T) {
 	_, err := svc.ListSourcesForS3TableIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListSourcesForS3TableIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSyslogConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSyslogConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSyslogConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1226,11 +1262,35 @@ func TestCheckSnapshot_PutRetentionPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutStorageTierPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutStorageTierPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutStorageTierPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_PutSubscriptionFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutSubscriptionFilter(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutSubscriptionFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutSyslogConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutSyslogConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutSyslogConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1789,6 +1849,18 @@ func TestUpdateSnapshot_DeleteSubscriptionFilter(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteSyslogConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteSyslogConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteSyslogConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTransformer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTransformer(context.Background(), nil, func(o *Options) {
@@ -2257,6 +2329,18 @@ func TestUpdateSnapshot_GetScheduledQueryHistory(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetStorageTierPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetStorageTierPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetStorageTierPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetTransformer(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetTransformer(context.Background(), nil, func(o *Options) {
@@ -2358,6 +2442,18 @@ func TestUpdateSnapshot_ListSourcesForS3TableIntegration(t *testing.T) {
 	_, err := svc.ListSourcesForS3TableIntegration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListSourcesForS3TableIntegration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSyslogConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSyslogConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSyslogConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2581,11 +2677,35 @@ func TestUpdateSnapshot_PutRetentionPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutStorageTierPolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutStorageTierPolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutStorageTierPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_PutSubscriptionFilter(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.PutSubscriptionFilter(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutSubscriptionFilter")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutSyslogConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutSyslogConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutSyslogConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

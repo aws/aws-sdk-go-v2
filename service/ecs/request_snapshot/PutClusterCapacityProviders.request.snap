@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerServiceV20141113.PutClusterCapacityProviders
+
+{"capacityProviders":["__Member__","__Member__"],"cluster":"__Cluster__","defaultCapacityProviderStrategy":[{"base":1,"capacityProvider":"__CapacityProvider__","weight":1},{"base":1,"capacityProvider":"__CapacityProvider__","weight":1}]}

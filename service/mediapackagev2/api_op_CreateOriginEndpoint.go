@@ -5,10 +5,8 @@ package mediapackagev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -96,6 +94,15 @@ type CreateOriginEndpointInput struct {
 	// content that falls within the window. The maximum startover window is 1,209,600
 	// seconds (14 days).
 	StartoverWindowSeconds *int32
+
+	// The output mode for stream names in egress manifests. This setting is valid
+	// only when the associated channel's InputType is HLS . You can't change the
+	// stream name output mode after you create the endpoint.
+	//
+	// INDEX uses numeric indices for stream names (for example, 1, 2, 3).
+	// PASSTHROUGH_NAME uses the stream names from the input manifest. If you don't
+	// specify a value, the default is INDEX .
+	StreamNameOutputMode types.StreamNameOutputMode
 
 	// A comma-separated list of tag key:value pairs that you define. For example:
 	//
@@ -188,6 +195,9 @@ type CreateOriginEndpointOutput struct {
 	// content that falls within the window.
 	StartoverWindowSeconds *int32
 
+	// The output mode for stream names in egress manifests for this origin endpoint.
+	StreamNameOutputMode types.StreamNameOutputMode
+
 	// The comma-separated list of tag key:value pairs assigned to the origin endpoint.
 	Tags map[string]string
 
@@ -201,9 +211,6 @@ type CreateOriginEndpointOutput struct {
 }
 
 func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOriginEndpoint{}, middleware.After)
 	if err != nil {
 		return err
@@ -212,53 +219,14 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOriginEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -268,12 +236,6 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpCreateOriginEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOriginEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -286,12 +248,6 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -331,12 +287,4 @@ func (m *idempotencyToken_initializeOpCreateOriginEndpoint) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateOriginEndpointMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateOriginEndpoint{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateOriginEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOriginEndpoint",
-	}
 }

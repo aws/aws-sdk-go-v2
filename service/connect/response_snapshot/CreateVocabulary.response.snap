@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"State":"CREATION_IN_PROGRESS","VocabularyArn":"__VocabularyArn__","VocabularyId":"__VocabularyId__"}

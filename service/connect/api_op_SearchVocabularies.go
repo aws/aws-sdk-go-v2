@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches for vocabularies within a specific Connect Customer instance using
@@ -60,6 +60,33 @@ type SearchVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchVocabulariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchVocabulariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchVocabulariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchVocabulariesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.SearchVocabulariesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchVocabulariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameStartsWith != nil {
+		s.WriteString(schemas.SearchVocabulariesRequest_NameStartsWith, *v.NameStartsWith)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchVocabulariesRequest_NextToken, *v.NextToken)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.SearchVocabulariesRequest_State, string(v.State))
+	}
+}
+
 type SearchVocabulariesOutput struct {
 
 	// If there are additional results, this is the token for the next set of results.
@@ -74,77 +101,51 @@ type SearchVocabulariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchVocabulariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchVocabulariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchVocabulariesResponse_NextToken, *v.NextToken)
+	}
+	serializeVocabularySummaryList(s, schemas.SearchVocabulariesResponse_VocabularySummaryList, v.VocabularySummaryList)
+}
+func (v *SearchVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchVocabulariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchVocabulariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchVocabulariesResponse_NextToken, v.NextToken)
+		case schemas.SearchVocabulariesResponse_VocabularySummaryList:
+			return deserializeVocabularySummaryList(d, schemas.SearchVocabulariesResponse_VocabularySummaryList, &v.VocabularySummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchVocabularies, schemas.SearchVocabulariesRequest, schemas.SearchVocabulariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchVocabularies, schemas.SearchVocabulariesRequest, schemas.SearchVocabulariesResponse), output: &SearchVocabulariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchVocabularies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchVocabularies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchVocabulariesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchVocabularies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +158,6 @@ func (c *Client) addOperationSearchVocabulariesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -264,11 +259,3 @@ type SearchVocabulariesAPIClient interface {
 }
 
 var _ SearchVocabulariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchVocabularies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchVocabularies",
-	}
-}

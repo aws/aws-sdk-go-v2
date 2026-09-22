@@ -1,0 +1,5 @@
+POST /api/v1/organizations/__OrganizationId__/subscriptions
+
+Content-Type: application/json
+
+{"Endpoint":"__Endpoint__","Protocol":"HTTPS","SubscriptionType":"ALL"}

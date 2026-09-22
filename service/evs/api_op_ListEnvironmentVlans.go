@@ -5,10 +5,10 @@ package evs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists environment VLANs that are associated with the specified environment.
@@ -48,6 +48,24 @@ type ListEnvironmentVlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentVlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentVlansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentVlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ListEnvironmentVlansRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnvironmentVlansRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentVlansRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnvironmentVlansOutput struct {
 
 	// A list of VLANs that are associated with the specified environment.
@@ -63,77 +81,51 @@ type ListEnvironmentVlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentVlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentVlansResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentVlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeVlanList(s, schemas.ListEnvironmentVlansResponse_environmentVlans, v.EnvironmentVlans)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentVlansResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnvironmentVlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentVlansResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentVlansResponse_environmentVlans:
+			return deserializeVlanList(d, schemas.ListEnvironmentVlansResponse_environmentVlans, &v.EnvironmentVlans)
+		case schemas.ListEnvironmentVlansResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentVlansResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentVlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentVlans, schemas.ListEnvironmentVlansRequest, schemas.ListEnvironmentVlansResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnvironmentVlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentVlans, schemas.ListEnvironmentVlansRequest, schemas.ListEnvironmentVlansResponse), output: &ListEnvironmentVlansOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnvironmentVlans{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironmentVlans"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEnvironmentVlansValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnvironmentVlans(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +138,6 @@ func (c *Client) addOperationListEnvironmentVlansMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +240,3 @@ type ListEnvironmentVlansAPIClient interface {
 }
 
 var _ ListEnvironmentVlansAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEnvironmentVlans(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEnvironmentVlans",
-	}
-}

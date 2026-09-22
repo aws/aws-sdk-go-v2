@@ -1,0 +1,5 @@
+POST /ListDiscoveredEndpoints
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","maxResults":1,"nextToken":"__NextToken__","pentestJobId":"__PentestJobId__","prefix":"__Prefix__"}

@@ -4,11 +4,10 @@ package personalize
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the given feature transformation.
@@ -37,6 +36,18 @@ type DescribeFeatureTransformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeatureTransformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeatureTransformationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeatureTransformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureTransformationArn != nil {
+		s.WriteString(schemas.DescribeFeatureTransformationRequest_featureTransformationArn, *v.FeatureTransformationArn)
+	}
+}
+
 type DescribeFeatureTransformationOutput struct {
 
 	// A listing of the FeatureTransformation properties.
@@ -48,77 +59,50 @@ type DescribeFeatureTransformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeatureTransformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeatureTransformationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeatureTransformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureTransformation != nil {
+		s.WriteStruct(schemas.DescribeFeatureTransformationResponse_featureTransformation)
+		v.FeatureTransformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFeatureTransformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFeatureTransformationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFeatureTransformationResponse_featureTransformation:
+			v.FeatureTransformation = &types.FeatureTransformation{}
+			return v.FeatureTransformation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFeatureTransformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeatureTransformation, schemas.DescribeFeatureTransformationRequest, schemas.DescribeFeatureTransformationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFeatureTransformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeatureTransformation, schemas.DescribeFeatureTransformationRequest, schemas.DescribeFeatureTransformationResponse), output: &DescribeFeatureTransformationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFeatureTransformation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFeatureTransformation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFeatureTransformationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFeatureTransformation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -133,22 +117,8 @@ func (c *Client) addOperationDescribeFeatureTransformationMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeFeatureTransformation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFeatureTransformation",
-	}
 }

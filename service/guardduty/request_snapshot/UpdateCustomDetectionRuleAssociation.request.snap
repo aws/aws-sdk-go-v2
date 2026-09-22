@@ -1,0 +1,5 @@
+PUT /custom-detection-rule/rule/__RuleId__/association/__AssociationId__
+
+Content-Type: application/json
+
+{"mode":"LIVE"}

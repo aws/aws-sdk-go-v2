@@ -1,0 +1,5 @@
+POST /members/disassociate
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__"}

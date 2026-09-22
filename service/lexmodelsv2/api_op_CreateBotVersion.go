@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -54,6 +53,22 @@ type CreateBotVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateBotVersionRequest_botId, *v.BotId)
+	}
+	serializeBotVersionLocaleSpecification(s, schemas.CreateBotVersionRequest_botVersionLocaleSpecification, v.BotVersionLocaleSpecification)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBotVersionRequest_description, *v.Description)
+	}
+}
+
 type CreateBotVersionOutput struct {
 
 	// The bot identifier specified in the request.
@@ -82,77 +97,79 @@ type CreateBotVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBotVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBotVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBotVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.CreateBotVersionResponse_botId, *v.BotId)
+	}
+	if v.BotStatus != "" {
+		s.WriteString(schemas.CreateBotVersionResponse_botStatus, string(v.BotStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.CreateBotVersionResponse_botVersion, *v.BotVersion)
+	}
+	serializeBotVersionLocaleSpecification(s, schemas.CreateBotVersionResponse_botVersionLocaleSpecification, v.BotVersionLocaleSpecification)
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateBotVersionResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBotVersionResponse_description, *v.Description)
+	}
+}
+func (v *CreateBotVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBotVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBotVersionResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.CreateBotVersionResponse_botId, v.BotId)
+		case schemas.CreateBotVersionResponse_botStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateBotVersionResponse_botStatus, &ev); err != nil {
+				return err
+			}
+			v.BotStatus = types.BotStatus(ev)
+			return nil
+		case schemas.CreateBotVersionResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.CreateBotVersionResponse_botVersion, v.BotVersion)
+		case schemas.CreateBotVersionResponse_botVersionLocaleSpecification:
+			return deserializeBotVersionLocaleSpecification(d, schemas.CreateBotVersionResponse_botVersionLocaleSpecification, &v.BotVersionLocaleSpecification)
+		case schemas.CreateBotVersionResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateBotVersionResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateBotVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateBotVersionResponse_description, v.Description)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBotVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotVersion, schemas.CreateBotVersionRequest, schemas.CreateBotVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBotVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBotVersion, schemas.CreateBotVersionRequest, schemas.CreateBotVersionResponse), output: &CreateBotVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBotVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBotVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateBotVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBotVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +184,8 @@ func (c *Client) addOperationCreateBotVersionMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateBotVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBotVersion",
-	}
 }

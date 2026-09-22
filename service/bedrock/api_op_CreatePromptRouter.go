@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a prompt router that manages the routing of requests between multiple
@@ -68,6 +68,36 @@ type CreatePromptRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePromptRouterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePromptRouterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePromptRouterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreatePromptRouterRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePromptRouterRequest_description, *v.Description)
+	}
+	if v.FallbackModel != nil {
+		s.WriteStruct(schemas.CreatePromptRouterRequest_fallbackModel)
+		v.FallbackModel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePromptRouterTargetModels(s, schemas.CreatePromptRouterRequest_models, v.Models)
+	if v.PromptRouterName != nil {
+		s.WriteString(schemas.CreatePromptRouterRequest_promptRouterName, *v.PromptRouterName)
+	}
+	if v.RoutingCriteria != nil {
+		s.WriteStruct(schemas.CreatePromptRouterRequest_routingCriteria)
+		v.RoutingCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreatePromptRouterRequest_tags, v.Tags)
+}
+
 type CreatePromptRouterOutput struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the prompt router.
@@ -79,65 +109,42 @@ type CreatePromptRouterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePromptRouterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePromptRouterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePromptRouterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PromptRouterArn != nil {
+		s.WriteString(schemas.CreatePromptRouterResponse_promptRouterArn, *v.PromptRouterArn)
+	}
+}
+func (v *CreatePromptRouterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePromptRouterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePromptRouterResponse_promptRouterArn:
+			v.PromptRouterArn = new(string)
+			return d.ReadString(schemas.CreatePromptRouterResponse_promptRouterArn, v.PromptRouterArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePromptRouterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePromptRouter, schemas.CreatePromptRouterRequest, schemas.CreatePromptRouterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePromptRouter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePromptRouter, schemas.CreatePromptRouterRequest, schemas.CreatePromptRouterResponse), output: &CreatePromptRouterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePromptRouter{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePromptRouter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -147,12 +154,6 @@ func (c *Client) addOperationCreatePromptRouterMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreatePromptRouterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePromptRouter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +166,6 @@ func (c *Client) addOperationCreatePromptRouterMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -210,12 +205,4 @@ func (m *idempotencyToken_initializeOpCreatePromptRouter) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreatePromptRouterMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePromptRouter{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePromptRouter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePromptRouter",
-	}
 }

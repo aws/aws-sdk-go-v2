@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified BGP peer on the specified virtual interface with the
@@ -36,22 +35,34 @@ type DeleteBGPPeerInput struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for the BGP peer to be deleted from a Direct Connect virtual
 	// interface. The valid range is from 1 to 4294967294 for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -69,6 +80,30 @@ type DeleteBGPPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBGPPeerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBGPPeerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBGPPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.DeleteBGPPeerRequest_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.DeleteBGPPeerRequest_asnLong, *v.AsnLong)
+	}
+	if v.BgpPeerId != nil {
+		s.WriteString(schemas.DeleteBGPPeerRequest_bgpPeerId, *v.BgpPeerId)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.DeleteBGPPeerRequest_customerAddress, *v.CustomerAddress)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.DeleteBGPPeerRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+}
+
 type DeleteBGPPeerOutput struct {
 
 	// The virtual interface.
@@ -80,74 +115,47 @@ type DeleteBGPPeerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBGPPeerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBGPPeerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBGPPeerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterface != nil {
+		s.WriteStruct(schemas.DeleteBGPPeerResponse_virtualInterface)
+		v.VirtualInterface.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteBGPPeerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBGPPeerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBGPPeerResponse_virtualInterface:
+			v.VirtualInterface = &types.VirtualInterface{}
+			return v.VirtualInterface.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBGPPeer, schemas.DeleteBGPPeerRequest, schemas.DeleteBGPPeerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBGPPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBGPPeer, schemas.DeleteBGPPeerRequest, schemas.DeleteBGPPeerResponse), output: &DeleteBGPPeerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBGPPeer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBGPPeer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBGPPeer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +170,8 @@ func (c *Client) addOperationDeleteBGPPeerMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteBGPPeer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteBGPPeer",
-	}
 }

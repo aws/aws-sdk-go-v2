@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"status":{"statusCode":"ACTIVE","statusReason":"__StatusReason__"}}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"errorData":{"accountID":"__AccountID__","applicationID":"__ApplicationID__","ec2LaunchTemplateID":"__Ec2LaunchTemplateID__","rawError":"__RawError__","rowNumber":1,"sourceServerID":"__SourceServerID__","waveID":"__WaveID__"},"errorDateTime":"__ErrorDateTime__","errorType":"VALIDATION_ERROR"},{"errorData":{"accountID":"__AccountID__","applicationID":"__ApplicationID__","ec2LaunchTemplateID":"__Ec2LaunchTemplateID__","rawError":"__RawError__","rowNumber":1,"sourceServerID":"__SourceServerID__","waveID":"__WaveID__"},"errorDateTime":"__ErrorDateTime__","errorType":"VALIDATION_ERROR"}],"nextToken":"__NextToken__"}

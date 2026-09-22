@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeDeploy_20141006.CreateDeploymentConfig
+
+{"computePlatform":"Server","deploymentConfigName":"__DeploymentConfigName__","minimumHealthyHosts":{"type":"HOST_COUNT","value":1},"trafficRoutingConfig":{"timeBasedCanary":{"canaryInterval":1,"canaryPercentage":1},"timeBasedLinear":{"linearInterval":1,"linearPercentage":1},"type":"TimeBasedCanary"},"zonalConfig":{"firstZoneMonitorDurationInSeconds":1,"minimumHealthyHostsPerZone":{"type":"HOST_COUNT","value":1},"monitorDurationInSeconds":1}}

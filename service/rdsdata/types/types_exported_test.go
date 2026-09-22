@@ -15,16 +15,16 @@ func ExampleArrayValue_outputUsage() {
 		_ = v.Value // Value is []types.ArrayValue
 
 	case *types.ArrayValueMemberBooleanValues:
-		_ = v.Value // Value is []bool
+		_ = v.Value // Value is []*bool
 
 	case *types.ArrayValueMemberDoubleValues:
-		_ = v.Value // Value is []float64
+		_ = v.Value // Value is []*float64
 
 	case *types.ArrayValueMemberLongValues:
-		_ = v.Value // Value is []int64
+		_ = v.Value // Value is []*int64
 
 	case *types.ArrayValueMemberStringValues:
-		_ = v.Value // Value is []string
+		_ = v.Value // Value is []*string
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -35,11 +35,11 @@ func ExampleArrayValue_outputUsage() {
 	}
 }
 
-var _ []int64
-var _ []float64
-var _ []string
+var _ []*int64
+var _ []*float64
+var _ []*string
 var _ []types.ArrayValue
-var _ []bool
+var _ []*bool
 
 func ExampleField_outputUsage() {
 	var union types.Field

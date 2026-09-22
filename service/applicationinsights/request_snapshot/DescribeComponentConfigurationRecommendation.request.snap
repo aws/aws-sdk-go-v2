@@ -1,0 +1,7 @@
+POST /service/EC2WindowsBarleyService/operation/DescribeComponentConfigurationRecommendation
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥rRecommendationTypejINFRA_ONLYqResourceGroupNameu__ResourceGroupName__mComponentNameq__ComponentName__dTierfCUSTOMlWorkloadNamep__WorkloadName__

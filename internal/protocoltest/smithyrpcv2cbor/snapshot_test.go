@@ -194,6 +194,18 @@ func TestCheckSnapshot_RpcV2CborSparseMaps(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RpcV2CborUnions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RpcV2CborUnions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RpcV2CborUnions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SimpleScalarProperties(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SimpleScalarProperties(context.Background(), nil, func(o *Options) {
@@ -342,6 +354,18 @@ func TestUpdateSnapshot_RpcV2CborSparseMaps(t *testing.T) {
 	_, err := svc.RpcV2CborSparseMaps(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RpcV2CborSparseMaps")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RpcV2CborUnions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RpcV2CborUnions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RpcV2CborUnions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

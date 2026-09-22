@@ -1,0 +1,5 @@
+POST /global-networks/__GlobalNetworkId__/network-routes
+
+Content-Type: application/json
+
+{"DestinationFilters":{"key0":["__Member__","__Member__"]},"ExactCidrMatches":["__Member__","__Member__"],"LongestPrefixMatches":["__Member__","__Member__"],"PrefixListIds":["__Member__","__Member__"],"RouteTableIdentifier":{"CoreNetworkNetworkFunctionGroup":{"CoreNetworkId":"__CoreNetworkId__","EdgeLocation":"__EdgeLocation__","NetworkFunctionGroupName":"__NetworkFunctionGroupName__"},"CoreNetworkSegmentEdge":{"CoreNetworkId":"__CoreNetworkId__","EdgeLocation":"__EdgeLocation__","SegmentName":"__SegmentName__"},"TransitGatewayRouteTableArn":"__TransitGatewayRouteTableArn__"},"States":["ACTIVE","ACTIVE"],"SubnetOfMatches":["__Member__","__Member__"],"SupernetOfMatches":["__Member__","__Member__"],"Types":["PROPAGATED","PROPAGATED"]}

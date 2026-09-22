@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a custom SSH key pair that you can use with an Amazon Lightsail
@@ -52,6 +51,19 @@ type CreateKeyPairInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyPairInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyPairRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyPairInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyPairName != nil {
+		s.WriteString(schemas.CreateKeyPairRequest_keyPairName, *v.KeyPairName)
+	}
+	serializeTagList(s, schemas.CreateKeyPairRequest_tags, v.Tags)
+}
+
 type CreateKeyPairOutput struct {
 
 	// An array of key-value pairs containing information about the new key pair you
@@ -75,77 +87,70 @@ type CreateKeyPairOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyPairOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyPairResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyPairOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyPair != nil {
+		s.WriteStruct(schemas.CreateKeyPairResult_keyPair)
+		v.KeyPair.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Operation != nil {
+		s.WriteStruct(schemas.CreateKeyPairResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateKeyBase64 != nil {
+		s.WriteString(schemas.CreateKeyPairResult_privateKeyBase64, *v.PrivateKeyBase64)
+	}
+	if v.PublicKeyBase64 != nil {
+		s.WriteString(schemas.CreateKeyPairResult_publicKeyBase64, *v.PublicKeyBase64)
+	}
+}
+func (v *CreateKeyPairOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKeyPairResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKeyPairResult_keyPair:
+			v.KeyPair = &types.KeyPair{}
+			return v.KeyPair.Deserialize(d)
+		case schemas.CreateKeyPairResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		case schemas.CreateKeyPairResult_privateKeyBase64:
+			v.PrivateKeyBase64 = new(string)
+			return d.ReadString(schemas.CreateKeyPairResult_privateKeyBase64, v.PrivateKeyBase64)
+		case schemas.CreateKeyPairResult_publicKeyBase64:
+			v.PublicKeyBase64 = new(string)
+			return d.ReadString(schemas.CreateKeyPairResult_publicKeyBase64, v.PublicKeyBase64)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKeyPair, schemas.CreateKeyPairRequest, schemas.CreateKeyPairResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateKeyPair{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKeyPair, schemas.CreateKeyPairRequest, schemas.CreateKeyPairResult), output: &CreateKeyPairOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateKeyPair{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKeyPair"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateKeyPairValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKeyPair(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +165,8 @@ func (c *Client) addOperationCreateKeyPairMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateKeyPair(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateKeyPair",
-	}
 }

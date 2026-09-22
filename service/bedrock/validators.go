@@ -1330,6 +1330,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountDataRetention struct {
+}
+
+func (*validateOpPutAccountDataRetention) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountDataRetention) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountDataRetentionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountDataRetentionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutEnforcedGuardrailConfiguration struct {
 }
 
@@ -1992,6 +2012,10 @@ func addOpListFoundationModelAgreementOffersValidationMiddleware(stack *middlewa
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutAccountDataRetentionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountDataRetention{}, middleware.After)
 }
 
 func addOpPutEnforcedGuardrailConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2766,6 +2790,42 @@ func validateAutomatedReasoningPolicyIngestContentAnnotation(v *types.AutomatedR
 	}
 }
 
+func validateAutomatedReasoningPolicyIterativeRefinementContent(v *types.AutomatedReasoningPolicyIterativeRefinementContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyIterativeRefinementContent"}
+	if v.Documents == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Documents"))
+	} else if v.Documents != nil {
+		if err := validateAutomatedReasoningPolicyIterativeRefinementDocumentList(v.Documents); err != nil {
+			invalidParams.AddNested("Documents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyIterativeRefinementDocumentList(v []types.AutomatedReasoningPolicyBuildWorkflowDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyIterativeRefinementDocumentList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyBuildWorkflowDocument(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutomatedReasoningPolicyTypeValueAnnotation(v types.AutomatedReasoningPolicyTypeValueAnnotation) error {
 	if v == nil {
 		return nil
@@ -2926,6 +2986,11 @@ func validateAutomatedReasoningPolicyWorkflowTypeContent(v types.AutomatedReason
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent:
 		if err := validateAutomatedReasoningPolicyGenerateFidelityReportContent(uv.Value); err != nil {
 			invalidParams.AddNested("[generateFidelityReportContent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent:
+		if err := validateAutomatedReasoningPolicyIterativeRefinementContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[iterativeRefinementContent]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets:
@@ -3107,6 +3172,25 @@ func validateCustomMetricEvaluatorModelConfig(v *types.CustomMetricEvaluatorMode
 		if err := validateCustomMetricBedrockEvaluatorModels(v.BedrockEvaluatorModels); err != nil {
 			invalidParams.AddNested("BedrockEvaluatorModels", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomModelDataSource(v types.CustomModelDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomModelDataSource"}
+	switch uv := v.(type) {
+	case *types.CustomModelDataSourceMemberModelPackageArnDataSource:
+		if err := validateModelPackageArnDataSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[modelPackageArnDataSource]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4477,6 +4561,21 @@ func validateModelInvocationJobS3OutputDataConfig(v *types.ModelInvocationJobS3O
 	}
 }
 
+func validateModelPackageArnDataSource(v *types.ModelPackageArnDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelPackageArnDataSource"}
+	if v.ModelPackageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOrchestrationConfiguration(v *types.OrchestrationConfiguration) error {
 	if v == nil {
 		return nil
@@ -5288,11 +5387,14 @@ func validateOpCreateCustomModelInput(v *CreateCustomModelInput) error {
 	if v.ModelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
-	if v.ModelSourceConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelSourceConfig"))
-	} else if v.ModelSourceConfig != nil {
+	if v.ModelSourceConfig != nil {
 		if err := validateModelDataSource(v.ModelSourceConfig); err != nil {
 			invalidParams.AddNested("ModelSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomModelDataSource != nil {
+		if err := validateCustomModelDataSource(v.CustomModelDataSource); err != nil {
+			invalidParams.AddNested("CustomModelDataSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ModelTags != nil {
@@ -6445,6 +6547,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountDataRetentionInput(v *PutAccountDataRetentionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountDataRetentionInput"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

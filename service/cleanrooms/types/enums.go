@@ -88,6 +88,23 @@ func (AggregateFunctionName) Values() []AggregateFunctionName {
 	}
 }
 
+type AggregationThresholdType string
+
+// Enum values for AggregationThresholdType
+const (
+	AggregationThresholdTypeCountDistinct AggregationThresholdType = "COUNT_DISTINCT"
+)
+
+// Values returns all known values for AggregationThresholdType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AggregationThresholdType) Values() []AggregationThresholdType {
+	return []AggregationThresholdType{
+		"COUNT_DISTINCT",
+	}
+}
+
 type AggregationType string
 
 // Enum values for AggregationType
@@ -102,6 +119,26 @@ const (
 func (AggregationType) Values() []AggregationType {
 	return []AggregationType{
 		"COUNT_DISTINCT",
+	}
+}
+
+type AllowedAggregateExpressionType string
+
+// Enum values for AllowedAggregateExpressionType
+const (
+	AllowedAggregateExpressionTypeColumnsOnly   AllowedAggregateExpressionType = "COLUMNS_ONLY"
+	AllowedAggregateExpressionTypeAnyExpression AllowedAggregateExpressionType = "ANY_EXPRESSION"
+)
+
+// Values returns all known values for AllowedAggregateExpressionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AllowedAggregateExpressionType) Values() []AllowedAggregateExpressionType {
+	return []AllowedAggregateExpressionType{
+		"COLUMNS_ONLY",
+		"ANY_EXPRESSION",
 	}
 }
 
@@ -121,6 +158,27 @@ func (AnalysisFormat) Values() []AnalysisFormat {
 	return []AnalysisFormat{
 		"SQL",
 		"PYSPARK_1_0",
+	}
+}
+
+type AnalysisLogExportStatus string
+
+// Enum values for AnalysisLogExportStatus
+const (
+	AnalysisLogExportStatusInProgress AnalysisLogExportStatus = "IN_PROGRESS"
+	AnalysisLogExportStatusSuccess    AnalysisLogExportStatus = "SUCCESS"
+	AnalysisLogExportStatusFailed     AnalysisLogExportStatus = "FAILED"
+)
+
+// Values returns all known values for AnalysisLogExportStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisLogExportStatus) Values() []AnalysisLogExportStatus {
+	return []AnalysisLogExportStatus{
+		"IN_PROGRESS",
+		"SUCCESS",
+		"FAILED",
 	}
 }
 
@@ -271,9 +329,11 @@ type AutoApprovedChangeType string
 
 // Enum values for AutoApprovedChangeType
 const (
-	AutoApprovedChangeTypeAddMember                   AutoApprovedChangeType = "ADD_MEMBER"
-	AutoApprovedChangeTypeGrantReceiveResultsAbility  AutoApprovedChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
-	AutoApprovedChangeTypeRevokeReceiveResultsAbility AutoApprovedChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
+	AutoApprovedChangeTypeAddMember                           AutoApprovedChangeType = "ADD_MEMBER"
+	AutoApprovedChangeTypeGrantReceiveResultsAbility          AutoApprovedChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
+	AutoApprovedChangeTypeRevokeReceiveResultsAbility         AutoApprovedChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
+	AutoApprovedChangeTypeGrantExportQueryAnalysisLogAbility  AutoApprovedChangeType = "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
+	AutoApprovedChangeTypeRevokeExportQueryAnalysisLogAbility AutoApprovedChangeType = "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
 )
 
 // Values returns all known values for AutoApprovedChangeType. Note that this can
@@ -285,6 +345,8 @@ func (AutoApprovedChangeType) Values() []AutoApprovedChangeType {
 		"ADD_MEMBER",
 		"GRANT_RECEIVE_RESULTS_ABILITY",
 		"REVOKE_RECEIVE_RESULTS_ABILITY",
+		"GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY",
+		"REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY",
 	}
 }
 
@@ -304,6 +366,46 @@ func (AutoRefreshMode) Values() []AutoRefreshMode {
 	return []AutoRefreshMode{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type BaseTableDependencyType string
+
+// Enum values for BaseTableDependencyType
+const (
+	BaseTableDependencyTypeTable             BaseTableDependencyType = "TABLE"
+	BaseTableDependencyTypeIntermediateTable BaseTableDependencyType = "INTERMEDIATE_TABLE"
+	BaseTableDependencyTypeIdMappingTable    BaseTableDependencyType = "ID_MAPPING_TABLE"
+)
+
+// Values returns all known values for BaseTableDependencyType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BaseTableDependencyType) Values() []BaseTableDependencyType {
+	return []BaseTableDependencyType{
+		"TABLE",
+		"INTERMEDIATE_TABLE",
+		"ID_MAPPING_TABLE",
+	}
+}
+
+type BaseTableParentType string
+
+// Enum values for BaseTableParentType
+const (
+	BaseTableParentTypeDirect   BaseTableParentType = "DIRECT"
+	BaseTableParentTypeIndirect BaseTableParentType = "INDIRECT"
+)
+
+// Values returns all known values for BaseTableParentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BaseTableParentType) Values() []BaseTableParentType {
+	return []BaseTableParentType{
+		"DIRECT",
+		"INDIRECT",
 	}
 }
 
@@ -378,10 +480,18 @@ type ChangeType string
 
 // Enum values for ChangeType
 const (
-	ChangeTypeAddMember                   ChangeType = "ADD_MEMBER"
-	ChangeTypeGrantReceiveResultsAbility  ChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
-	ChangeTypeRevokeReceiveResultsAbility ChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
-	ChangeTypeEditAutoApprovedChangeTypes ChangeType = "EDIT_AUTO_APPROVED_CHANGE_TYPES"
+	ChangeTypeAddMember                           ChangeType = "ADD_MEMBER"
+	ChangeTypeGrantReceiveResultsAbility          ChangeType = "GRANT_RECEIVE_RESULTS_ABILITY"
+	ChangeTypeRevokeReceiveResultsAbility         ChangeType = "REVOKE_RECEIVE_RESULTS_ABILITY"
+	ChangeTypeEditAutoApprovedChangeTypes         ChangeType = "EDIT_AUTO_APPROVED_CHANGE_TYPES"
+	ChangeTypeAddPayerCandidate                   ChangeType = "ADD_PAYER_CANDIDATE"
+	ChangeTypeRemovePayerCandidate                ChangeType = "REMOVE_PAYER_CANDIDATE"
+	ChangeTypeGrantCanReceiveModelOutput          ChangeType = "GRANT_CAN_RECEIVE_MODEL_OUTPUT"
+	ChangeTypeGrantCanReceiveInferenceOutput      ChangeType = "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT"
+	ChangeTypeRevokeCanReceiveModelOutput         ChangeType = "REVOKE_CAN_RECEIVE_MODEL_OUTPUT"
+	ChangeTypeRevokeCanReceiveInferenceOutput     ChangeType = "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
+	ChangeTypeGrantExportQueryAnalysisLogAbility  ChangeType = "GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
+	ChangeTypeRevokeExportQueryAnalysisLogAbility ChangeType = "REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY"
 )
 
 // Values returns all known values for ChangeType. Note that this can be expanded
@@ -394,6 +504,31 @@ func (ChangeType) Values() []ChangeType {
 		"GRANT_RECEIVE_RESULTS_ABILITY",
 		"REVOKE_RECEIVE_RESULTS_ABILITY",
 		"EDIT_AUTO_APPROVED_CHANGE_TYPES",
+		"ADD_PAYER_CANDIDATE",
+		"REMOVE_PAYER_CANDIDATE",
+		"GRANT_CAN_RECEIVE_MODEL_OUTPUT",
+		"GRANT_CAN_RECEIVE_INFERENCE_OUTPUT",
+		"REVOKE_CAN_RECEIVE_MODEL_OUTPUT",
+		"REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT",
+		"GRANT_EXPORT_QUERY_ANALYSIS_LOG_ABILITY",
+		"REVOKE_EXPORT_QUERY_ANALYSIS_LOG_ABILITY",
+	}
+}
+
+type ChildResourceType string
+
+// Enum values for ChildResourceType
+const (
+	ChildResourceTypeIntermediateTable ChildResourceType = "INTERMEDIATE_TABLE"
+)
+
+// Values returns all known values for ChildResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChildResourceType) Values() []ChildResourceType {
+	return []ChildResourceType{
+		"INTERMEDIATE_TABLE",
 	}
 }
 
@@ -681,6 +816,77 @@ func (IdNamespaceType) Values() []IdNamespaceType {
 	}
 }
 
+type IntermediateTableAnalysisRuleType string
+
+// Enum values for IntermediateTableAnalysisRuleType
+const (
+	IntermediateTableAnalysisRuleTypeCustom IntermediateTableAnalysisRuleType = "CUSTOM"
+)
+
+// Values returns all known values for IntermediateTableAnalysisRuleType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntermediateTableAnalysisRuleType) Values() []IntermediateTableAnalysisRuleType {
+	return []IntermediateTableAnalysisRuleType{
+		"CUSTOM",
+	}
+}
+
+type IntermediateTableStatus string
+
+// Enum values for IntermediateTableStatus
+const (
+	IntermediateTableStatusCreated                  IntermediateTableStatus = "CREATED"
+	IntermediateTableStatusPopulateStarted          IntermediateTableStatus = "POPULATE_STARTED"
+	IntermediateTableStatusPopulateSuccess          IntermediateTableStatus = "POPULATE_SUCCESS"
+	IntermediateTableStatusPopulateFailed           IntermediateTableStatus = "POPULATE_FAILED"
+	IntermediateTableStatusDisallowedByDataProvider IntermediateTableStatus = "DISALLOWED_BY_DATA_PROVIDER"
+	IntermediateTableStatusBaseTableRemoved         IntermediateTableStatus = "BASE_TABLE_REMOVED"
+	IntermediateTableStatusRetentionPeriodExpired   IntermediateTableStatus = "RETENTION_PERIOD_EXPIRED"
+)
+
+// Values returns all known values for IntermediateTableStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntermediateTableStatus) Values() []IntermediateTableStatus {
+	return []IntermediateTableStatus{
+		"CREATED",
+		"POPULATE_STARTED",
+		"POPULATE_SUCCESS",
+		"POPULATE_FAILED",
+		"DISALLOWED_BY_DATA_PROVIDER",
+		"BASE_TABLE_REMOVED",
+		"RETENTION_PERIOD_EXPIRED",
+	}
+}
+
+type IntermediateTableVersionStatus string
+
+// Enum values for IntermediateTableVersionStatus
+const (
+	IntermediateTableVersionStatusPopulateStarted        IntermediateTableVersionStatus = "POPULATE_STARTED"
+	IntermediateTableVersionStatusPopulateSuccess        IntermediateTableVersionStatus = "POPULATE_SUCCESS"
+	IntermediateTableVersionStatusPopulateFailed         IntermediateTableVersionStatus = "POPULATE_FAILED"
+	IntermediateTableVersionStatusRetentionPeriodExpired IntermediateTableVersionStatus = "RETENTION_PERIOD_EXPIRED"
+)
+
+// Values returns all known values for IntermediateTableVersionStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IntermediateTableVersionStatus) Values() []IntermediateTableVersionStatus {
+	return []IntermediateTableVersionStatus{
+		"POPULATE_STARTED",
+		"POPULATE_SUCCESS",
+		"POPULATE_FAILED",
+		"RETENTION_PERIOD_EXPIRED",
+	}
+}
+
 type JobType string
 
 // Enum values for JobType
@@ -738,13 +944,31 @@ func (JoinRequiredOption) Values() []JoinRequiredOption {
 	}
 }
 
+type LogExportAnalysisType string
+
+// Enum values for LogExportAnalysisType
+const (
+	LogExportAnalysisTypeProtectedQuery LogExportAnalysisType = "PROTECTED_QUERY"
+)
+
+// Values returns all known values for LogExportAnalysisType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogExportAnalysisType) Values() []LogExportAnalysisType {
+	return []LogExportAnalysisType{
+		"PROTECTED_QUERY",
+	}
+}
+
 type MemberAbility string
 
 // Enum values for MemberAbility
 const (
-	MemberAbilityCanQuery          MemberAbility = "CAN_QUERY"
-	MemberAbilityCanReceiveResults MemberAbility = "CAN_RECEIVE_RESULTS"
-	MemberAbilityCanRunJob         MemberAbility = "CAN_RUN_JOB"
+	MemberAbilityCanQuery                  MemberAbility = "CAN_QUERY"
+	MemberAbilityCanReceiveResults         MemberAbility = "CAN_RECEIVE_RESULTS"
+	MemberAbilityCanRunJob                 MemberAbility = "CAN_RUN_JOB"
+	MemberAbilityCanExportQueryAnalysisLog MemberAbility = "CAN_EXPORT_QUERY_ANALYSIS_LOG"
 )
 
 // Values returns all known values for MemberAbility. Note that this can be
@@ -756,6 +980,7 @@ func (MemberAbility) Values() []MemberAbility {
 		"CAN_QUERY",
 		"CAN_RECEIVE_RESULTS",
 		"CAN_RUN_JOB",
+		"CAN_EXPORT_QUERY_ANALYSIS_LOG",
 	}
 }
 
@@ -909,6 +1134,24 @@ func (ParameterType) Values() []ParameterType {
 		"TIMESTAMP_LTZ",
 		"TIMESTAMP_NTZ",
 		"TINYINT",
+	}
+}
+
+type PopulateIntermediateTableAnalysisType string
+
+// Enum values for PopulateIntermediateTableAnalysisType
+const (
+	PopulateIntermediateTableAnalysisTypeQuery PopulateIntermediateTableAnalysisType = "QUERY"
+)
+
+// Values returns all known values for PopulateIntermediateTableAnalysisType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PopulateIntermediateTableAnalysisType) Values() []PopulateIntermediateTableAnalysisType {
+	return []PopulateIntermediateTableAnalysisType{
+		"QUERY",
 	}
 }
 
@@ -1078,6 +1321,35 @@ func (ProtectedQueryType) Values() []ProtectedQueryType {
 	}
 }
 
+type ResourceStatus string
+
+// Enum values for ResourceStatus
+const (
+	ResourceStatusCreated                  ResourceStatus = "CREATED"
+	ResourceStatusPopulateStarted          ResourceStatus = "POPULATE_STARTED"
+	ResourceStatusPopulateSuccess          ResourceStatus = "POPULATE_SUCCESS"
+	ResourceStatusPopulateFailed           ResourceStatus = "POPULATE_FAILED"
+	ResourceStatusDisallowedByDataProvider ResourceStatus = "DISALLOWED_BY_DATA_PROVIDER"
+	ResourceStatusBaseTableRemoved         ResourceStatus = "BASE_TABLE_REMOVED"
+	ResourceStatusRetentionPeriodExpired   ResourceStatus = "RETENTION_PERIOD_EXPIRED"
+)
+
+// Values returns all known values for ResourceStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceStatus) Values() []ResourceStatus {
+	return []ResourceStatus{
+		"CREATED",
+		"POPULATE_STARTED",
+		"POPULATE_SUCCESS",
+		"POPULATE_FAILED",
+		"DISALLOWED_BY_DATA_PROVIDER",
+		"BASE_TABLE_REMOVED",
+		"RETENTION_PERIOD_EXPIRED",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -1223,17 +1495,23 @@ type SchemaStatusReasonCode string
 
 // Enum values for SchemaStatusReasonCode
 const (
-	SchemaStatusReasonCodeAnalysisRuleMissing                    SchemaStatusReasonCode = "ANALYSIS_RULE_MISSING"
-	SchemaStatusReasonCodeAnalysisTemplatesNotConfigured         SchemaStatusReasonCode = "ANALYSIS_TEMPLATES_NOT_CONFIGURED"
-	SchemaStatusReasonCodeAnalysisProvidersNotConfigured         SchemaStatusReasonCode = "ANALYSIS_PROVIDERS_NOT_CONFIGURED"
-	SchemaStatusReasonCodeDifferentialPrivacyPolicyNotConfigured SchemaStatusReasonCode = "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
-	SchemaStatusReasonCodeIdMappingTableNotPopulated             SchemaStatusReasonCode = "ID_MAPPING_TABLE_NOT_POPULATED"
-	SchemaStatusReasonCodeCollaborationAnalysisRuleNotConfigured SchemaStatusReasonCode = "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED"
-	SchemaStatusReasonCodeAdditionalAnalysesNotConfigured        SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_CONFIGURED"
-	SchemaStatusReasonCodeResultReceiversNotConfigured           SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_CONFIGURED"
-	SchemaStatusReasonCodeAdditionalAnalysesNotAllowed           SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_ALLOWED"
-	SchemaStatusReasonCodeResultReceiversNotAllowed              SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_ALLOWED"
-	SchemaStatusReasonCodeAnalysisRuleTypesNotCompatible         SchemaStatusReasonCode = "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"
+	SchemaStatusReasonCodeAnalysisRuleMissing                           SchemaStatusReasonCode = "ANALYSIS_RULE_MISSING"
+	SchemaStatusReasonCodeAnalysisTemplatesNotConfigured                SchemaStatusReasonCode = "ANALYSIS_TEMPLATES_NOT_CONFIGURED"
+	SchemaStatusReasonCodeAnalysisProvidersNotConfigured                SchemaStatusReasonCode = "ANALYSIS_PROVIDERS_NOT_CONFIGURED"
+	SchemaStatusReasonCodeDifferentialPrivacyPolicyNotConfigured        SchemaStatusReasonCode = "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
+	SchemaStatusReasonCodeIdMappingTableNotPopulated                    SchemaStatusReasonCode = "ID_MAPPING_TABLE_NOT_POPULATED"
+	SchemaStatusReasonCodeCollaborationAnalysisRuleNotConfigured        SchemaStatusReasonCode = "COLLABORATION_ANALYSIS_RULE_NOT_CONFIGURED"
+	SchemaStatusReasonCodeAdditionalAnalysesNotConfigured               SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_CONFIGURED"
+	SchemaStatusReasonCodeResultReceiversNotConfigured                  SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_CONFIGURED"
+	SchemaStatusReasonCodeAdditionalAnalysesNotAllowed                  SchemaStatusReasonCode = "ADDITIONAL_ANALYSES_NOT_ALLOWED"
+	SchemaStatusReasonCodeResultReceiversNotAllowed                     SchemaStatusReasonCode = "RESULT_RECEIVERS_NOT_ALLOWED"
+	SchemaStatusReasonCodeAnalysisRuleTypesNotCompatible                SchemaStatusReasonCode = "ANALYSIS_RULE_TYPES_NOT_COMPATIBLE"
+	SchemaStatusReasonCodeIntermediateTableNotPopulated                 SchemaStatusReasonCode = "INTERMEDIATE_TABLE_NOT_POPULATED"
+	SchemaStatusReasonCodeIntermediateTableAnalysisRuleMissing          SchemaStatusReasonCode = "INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING"
+	SchemaStatusReasonCodeIntermediateTableBaseTableRemoved             SchemaStatusReasonCode = "INTERMEDIATE_TABLE_BASE_TABLE_REMOVED"
+	SchemaStatusReasonCodeIntermediateTableInheritedConstraintsViolated SchemaStatusReasonCode = "INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED"
+	SchemaStatusReasonCodeIntermediateTableDisallowedByDataProvider     SchemaStatusReasonCode = "INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER"
+	SchemaStatusReasonCodeIntermediateTableRetentionPeriodExpired       SchemaStatusReasonCode = "INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED"
 )
 
 // Values returns all known values for SchemaStatusReasonCode. Note that this can
@@ -1253,6 +1531,12 @@ func (SchemaStatusReasonCode) Values() []SchemaStatusReasonCode {
 		"ADDITIONAL_ANALYSES_NOT_ALLOWED",
 		"RESULT_RECEIVERS_NOT_ALLOWED",
 		"ANALYSIS_RULE_TYPES_NOT_COMPATIBLE",
+		"INTERMEDIATE_TABLE_NOT_POPULATED",
+		"INTERMEDIATE_TABLE_ANALYSIS_RULE_MISSING",
+		"INTERMEDIATE_TABLE_BASE_TABLE_REMOVED",
+		"INTERMEDIATE_TABLE_INHERITED_CONSTRAINTS_VIOLATED",
+		"INTERMEDIATE_TABLE_DISALLOWED_BY_DATA_PROVIDER",
+		"INTERMEDIATE_TABLE_RETENTION_PERIOD_EXPIRED",
 	}
 }
 
@@ -1260,8 +1544,9 @@ type SchemaType string
 
 // Enum values for SchemaType
 const (
-	SchemaTypeTable          SchemaType = "TABLE"
-	SchemaTypeIdMappingTable SchemaType = "ID_MAPPING_TABLE"
+	SchemaTypeTable             SchemaType = "TABLE"
+	SchemaTypeIdMappingTable    SchemaType = "ID_MAPPING_TABLE"
+	SchemaTypeIntermediateTable SchemaType = "INTERMEDIATE_TABLE"
 )
 
 // Values returns all known values for SchemaType. Note that this can be expanded
@@ -1272,6 +1557,7 @@ func (SchemaType) Values() []SchemaType {
 	return []SchemaType{
 		"TABLE",
 		"ID_MAPPING_TABLE",
+		"INTERMEDIATE_TABLE",
 	}
 }
 
@@ -1457,6 +1743,7 @@ type WorkerComputeType string
 const (
 	WorkerComputeTypeCr1x WorkerComputeType = "CR.1X"
 	WorkerComputeTypeCr4x WorkerComputeType = "CR.4X"
+	WorkerComputeTypeCr8x WorkerComputeType = "CR.8X"
 )
 
 // Values returns all known values for WorkerComputeType. Note that this can be
@@ -1467,5 +1754,6 @@ func (WorkerComputeType) Values() []WorkerComputeType {
 	return []WorkerComputeType{
 		"CR.1X",
 		"CR.4X",
+		"CR.8X",
 	}
 }

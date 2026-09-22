@@ -4,10 +4,9 @@ package ssmquicksetup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmquicksetup/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a Quick Setup configuration definition.
@@ -53,6 +52,31 @@ type UpdateConfigurationDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_Id, *v.Id)
+	}
+	if v.LocalDeploymentAdministrationRoleArn != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn, *v.LocalDeploymentAdministrationRoleArn)
+	}
+	if v.LocalDeploymentExecutionRoleName != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_LocalDeploymentExecutionRoleName, *v.LocalDeploymentExecutionRoleName)
+	}
+	if v.ManagerArn != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_ManagerArn, *v.ManagerArn)
+	}
+	serializeConfigurationParametersMap(s, schemas.UpdateConfigurationDefinitionInput_Parameters, v.Parameters)
+	if v.TypeVersion != nil {
+		s.WriteString(schemas.UpdateConfigurationDefinitionInput_TypeVersion, *v.TypeVersion)
+	}
+}
+
 type UpdateConfigurationDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -60,77 +84,42 @@ type UpdateConfigurationDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationDefinition, schemas.UpdateConfigurationDefinitionInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfigurationDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationDefinition, schemas.UpdateConfigurationDefinitionInput, nil), output: &UpdateConfigurationDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfigurationDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConfigurationDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateConfigurationDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConfigurationDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +134,8 @@ func (c *Client) addOperationUpdateConfigurationDefinitionMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateConfigurationDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateConfigurationDefinition",
-	}
 }

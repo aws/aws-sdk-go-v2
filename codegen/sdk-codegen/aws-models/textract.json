@@ -407,7 +407,7 @@
                 "HumanLoopConfig": {
                     "target": "com.amazonaws.textract#HumanLoopConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the configuration for the human in the loop workflow for analyzing\n         documents.</p>"
+                        "smithy.api#documentation": "<p>Sets the configuration for the human in the loop workflow for analyzing\n         documents.</p>\n         <note>\n            <p>Amazon Textract uses Amazon Augmented AI (A2I) to run the human review\n            workflows that you specify in <code>HumanLoopConfig</code>. A2I entered\n            maintenance mode in July 2026 and no longer accepts new customers. If your account is not an\n            existing A2I customer, requests fail with an\n            <code>InvalidParameterException</code>. For more information, see <a href=\"https://aws.amazon.com/about-aws/whats-new/2026/06/aws-service-availability/\">AWS\n            service availability</a>. If you're an existing A2I customer but receive\n            this error, contact AWS Support and request assistance from the A2I team.</p>\n         </note>"
                     }
                 },
                 "QueriesConfig": {
@@ -668,7 +668,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Amazon Textract isn't able to read the document. For more information on the document\n         limits in Amazon Textract, see <a>limits</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Textract isn't able to read the document. For more information on the document\n         limits in Amazon Textract, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/limits.html\">Hard limits</a>.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1963,7 +1963,7 @@
                 "RotationAngle": {
                     "target": "com.amazonaws.textract#Angle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides a numerical value corresponding to the rotation of the text.</p>"
+                        "smithy.api#documentation": "<p>Provides a numerical value corresponding to the rotation of the WORD block. \n         Possible values are 0, 90, 180, and 270.</p>"
                     }
                 }
             },
@@ -2824,7 +2824,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sets up the human review workflow the document will be sent to if one of the conditions\n         is met. You can also set certain attributes of the image before review. </p>"
+                "smithy.api#documentation": "<p>Sets up the human review workflow the document will be sent to if one of the conditions\n         is met. You can also set certain attributes of the image before review. </p>\n         <note>\n            <p>Amazon Textract uses Amazon Augmented AI (A2I) to run the human review\n            workflows that you specify in <code>HumanLoopConfig</code>. A2I entered\n            maintenance mode in July 2026 and no longer accepts new customers. If your account is not an\n            existing A2I customer, requests fail with an\n            <code>InvalidParameterException</code>. For more information, see <a href=\"https://aws.amazon.com/about-aws/whats-new/2026/06/aws-service-availability/\">AWS\n            service availability</a>. If you're an existing A2I customer but receive\n            this error, contact AWS Support and request assistance from the A2I team.</p>\n         </note>"
             }
         },
         "com.amazonaws.textract#HumanLoopDataAttributes": {
@@ -4783,6 +4783,194 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<p>Amazon Textract detects and analyzes text in documents and converts it\n         into machine-readable text. This is the API reference documentation for\n         Amazon Textract.</p>",
                 "smithy.api#title": "Amazon Textract",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://textract-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://textract-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://textract.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://textract.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

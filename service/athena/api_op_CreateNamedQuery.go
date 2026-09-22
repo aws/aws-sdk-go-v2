@@ -5,9 +5,9 @@ package athena
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a named query in the specified workgroup. Requires that you have access
@@ -64,6 +64,33 @@ type CreateNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamedQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNamedQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNamedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_Database, *v.Database)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_Name, *v.Name)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_QueryString, *v.QueryString)
+	}
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.CreateNamedQueryInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type CreateNamedQueryOutput struct {
 
 	// The unique ID of the query.
@@ -75,65 +102,42 @@ type CreateNamedQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamedQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNamedQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNamedQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamedQueryId != nil {
+		s.WriteString(schemas.CreateNamedQueryOutput_NamedQueryId, *v.NamedQueryId)
+	}
+}
+func (v *CreateNamedQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNamedQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNamedQueryOutput_NamedQueryId:
+			v.NamedQueryId = new(string)
+			return d.ReadString(schemas.CreateNamedQueryOutput_NamedQueryId, v.NamedQueryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamedQuery, schemas.CreateNamedQueryInput, schemas.CreateNamedQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNamedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamedQuery, schemas.CreateNamedQueryInput, schemas.CreateNamedQueryOutput), output: &CreateNamedQueryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateNamedQuery{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNamedQuery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -143,12 +147,6 @@ func (c *Client) addOperationCreateNamedQueryMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCreateNamedQueryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNamedQuery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +159,6 @@ func (c *Client) addOperationCreateNamedQueryMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -206,12 +198,4 @@ func (m *idempotencyToken_initializeOpCreateNamedQuery) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCreateNamedQueryMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateNamedQuery{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateNamedQuery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateNamedQuery",
-	}
 }

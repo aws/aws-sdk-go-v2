@@ -5,10 +5,10 @@ package qconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists information about import jobs.
@@ -45,6 +45,24 @@ type ListImportJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.ListImportJobsRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListImportJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportJobsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListImportJobsOutput struct {
 
 	// Summary information about the import jobs.
@@ -62,77 +80,51 @@ type ListImportJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListImportJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListImportJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListImportJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeImportJobList(s, schemas.ListImportJobsResponse_importJobSummaries, v.ImportJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListImportJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListImportJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListImportJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListImportJobsResponse_importJobSummaries:
+			return deserializeImportJobList(d, schemas.ListImportJobsResponse_importJobSummaries, &v.ImportJobSummaries)
+		case schemas.ListImportJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListImportJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListImportJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportJobs, schemas.ListImportJobsRequest, schemas.ListImportJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListImportJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListImportJobs, schemas.ListImportJobsRequest, schemas.ListImportJobsResponse), output: &ListImportJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListImportJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListImportJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListImportJobsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImportJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +137,6 @@ func (c *Client) addOperationListImportJobsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +237,3 @@ type ListImportJobsAPIClient interface {
 }
 
 var _ ListImportJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListImportJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListImportJobs",
-	}
-}

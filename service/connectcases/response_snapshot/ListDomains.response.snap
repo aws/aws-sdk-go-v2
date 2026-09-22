@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"domains":[{"domainArn":"__DomainArn__","domainId":"__DomainId__","name":"__Name__"},{"domainArn":"__DomainArn__","domainId":"__DomainId__","name":"__Name__"}],"nextToken":"__NextToken__"}

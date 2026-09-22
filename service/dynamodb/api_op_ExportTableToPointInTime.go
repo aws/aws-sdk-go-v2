@@ -5,10 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -100,6 +100,49 @@ type ExportTableToPointInTimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportTableToPointInTimeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportTableToPointInTimeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportTableToPointInTimeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ExportTableToPointInTimeInput_ClientToken, *v.ClientToken)
+	}
+	if v.ExportFormat != "" {
+		s.WriteString(schemas.ExportTableToPointInTimeInput_ExportFormat, string(v.ExportFormat))
+	}
+	if v.ExportTime != nil {
+		s.WriteTime(schemas.ExportTableToPointInTimeInput_ExportTime, *v.ExportTime)
+	}
+	if v.ExportType != "" {
+		s.WriteString(schemas.ExportTableToPointInTimeInput_ExportType, string(v.ExportType))
+	}
+	if v.IncrementalExportSpecification != nil {
+		s.WriteStruct(schemas.ExportTableToPointInTimeInput_IncrementalExportSpecification)
+		v.IncrementalExportSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.ExportTableToPointInTimeInput_S3Bucket, *v.S3Bucket)
+	}
+	if v.S3BucketOwner != nil {
+		s.WriteString(schemas.ExportTableToPointInTimeInput_S3BucketOwner, *v.S3BucketOwner)
+	}
+	if v.S3Prefix != nil {
+		s.WriteString(schemas.ExportTableToPointInTimeInput_S3Prefix, *v.S3Prefix)
+	}
+	if v.S3SseAlgorithm != "" {
+		s.WriteString(schemas.ExportTableToPointInTimeInput_S3SseAlgorithm, string(v.S3SseAlgorithm))
+	}
+	if v.S3SseKmsKeyId != nil {
+		s.WriteString(schemas.ExportTableToPointInTimeInput_S3SseKmsKeyId, *v.S3SseKmsKeyId)
+	}
+	if v.TableArn != nil {
+		s.WriteString(schemas.ExportTableToPointInTimeInput_TableArn, *v.TableArn)
+	}
+}
 func (in *ExportTableToPointInTimeInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableArn
@@ -117,65 +160,44 @@ type ExportTableToPointInTimeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportTableToPointInTimeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportTableToPointInTimeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportTableToPointInTimeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportDescription != nil {
+		s.WriteStruct(schemas.ExportTableToPointInTimeOutput_ExportDescription)
+		v.ExportDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExportTableToPointInTimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportTableToPointInTimeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportTableToPointInTimeOutput_ExportDescription:
+			v.ExportDescription = &types.ExportDescription{}
+			return v.ExportDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportTableToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportTableToPointInTime, schemas.ExportTableToPointInTimeInput, schemas.ExportTableToPointInTimeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportTableToPointInTime{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportTableToPointInTime, schemas.ExportTableToPointInTimeInput, schemas.ExportTableToPointInTimeOutput), output: &ExportTableToPointInTimeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpExportTableToPointInTime{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportTableToPointInTime"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -188,12 +210,6 @@ func (c *Client) addOperationExportTableToPointInTimeMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpExportTableToPointInTimeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExportTableToPointInTime(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,12 +228,6 @@ func (c *Client) addOperationExportTableToPointInTimeMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,12 +267,4 @@ func (m *idempotencyToken_initializeOpExportTableToPointInTime) HandleInitialize
 }
 func addIdempotencyToken_opExportTableToPointInTimeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpExportTableToPointInTime{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opExportTableToPointInTime(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExportTableToPointInTime",
-	}
 }

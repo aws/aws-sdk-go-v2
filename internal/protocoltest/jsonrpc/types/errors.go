@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,35 @@ func (e *ComplexError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ComplexError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComplexError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComplexError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.ComplexError_Nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopLevel != nil {
+		s.WriteString(schemas.ComplexError_TopLevel, *v.TopLevel)
+	}
+}
+func (v *ComplexError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComplexError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComplexError_Nested:
+			v.Nested = &ComplexNestedErrorData{}
+			return v.Nested.Deserialize(d)
+		case schemas.ComplexError_TopLevel:
+			v.TopLevel = new(string)
+			return d.ReadString(schemas.ComplexError_TopLevel, v.TopLevel)
+		}
+		return nil
+	})
+}
 
 type ErrorWithMembers struct {
 	Message *string
@@ -67,6 +97,59 @@ func (e *ErrorWithMembers) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ErrorWithMembers) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ErrorWithMembers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorWithMembers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorWithMembers) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.ErrorWithMembers_Code, *v.Code)
+	}
+	if v.ComplexData != nil {
+		s.WriteStruct(schemas.ErrorWithMembers_ComplexData)
+		v.ComplexData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntegerField != nil {
+		s.WriteInt32(schemas.ErrorWithMembers_IntegerField, *v.IntegerField)
+	}
+	serializeListOfStrings(s, schemas.ErrorWithMembers_ListField, v.ListField)
+	serializeMapOfStrings(s, schemas.ErrorWithMembers_MapField, v.MapField)
+	if v.Message != nil {
+		s.WriteString(schemas.ErrorWithMembers_Message, *v.Message)
+	}
+	if v.StringField != nil {
+		s.WriteString(schemas.ErrorWithMembers_StringField, *v.StringField)
+	}
+}
+func (v *ErrorWithMembers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorWithMembers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorWithMembers_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ErrorWithMembers_Code, v.Code)
+		case schemas.ErrorWithMembers_ComplexData:
+			v.ComplexData = &KitchenSink{}
+			return v.ComplexData.Deserialize(d)
+		case schemas.ErrorWithMembers_IntegerField:
+			v.IntegerField = new(int32)
+			return d.ReadInt32(schemas.ErrorWithMembers_IntegerField, v.IntegerField)
+		case schemas.ErrorWithMembers_ListField:
+			return deserializeListOfStrings(d, schemas.ErrorWithMembers_ListField, &v.ListField)
+		case schemas.ErrorWithMembers_MapField:
+			return deserializeMapOfStrings(d, schemas.ErrorWithMembers_MapField, &v.MapField)
+		case schemas.ErrorWithMembers_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ErrorWithMembers_Message, v.Message)
+		case schemas.ErrorWithMembers_StringField:
+			v.StringField = new(string)
+			return d.ReadString(schemas.ErrorWithMembers_StringField, v.StringField)
+		}
+		return nil
+	})
+}
 
 type ErrorWithoutMembers struct {
 	Message *string
@@ -92,6 +175,21 @@ func (e *ErrorWithoutMembers) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ErrorWithoutMembers) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ErrorWithoutMembers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorWithoutMembers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorWithoutMembers) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ErrorWithoutMembers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorWithoutMembers, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 
 // This error has test cases that test some of the dark corners of Amazon service
 // framework history. It should only be implemented by clients.
@@ -119,6 +217,21 @@ func (e *FooError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FooError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *FooError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FooError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FooError) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *FooError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FooError, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 
 // This error is thrown when an invalid greeting value is provided.
 type InvalidGreeting struct {
@@ -145,3 +258,24 @@ func (e *InvalidGreeting) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidGreeting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidGreeting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidGreeting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidGreeting_Message, *v.Message)
+	}
+}
+func (v *InvalidGreeting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidGreeting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidGreeting_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidGreeting_Message, v.Message)
+		}
+		return nil
+	})
+}

@@ -1,0 +1,3 @@
+GET /finding/__Id__?analyzerArn=__AnalyzerArn__
+
+

@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates values for attributes in a data table. The value may be a default or it
@@ -57,6 +56,22 @@ type BatchCreateDataTableValueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateDataTableValueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateDataTableValueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateDataTableValueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.BatchCreateDataTableValueRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchCreateDataTableValueRequest_InstanceId, *v.InstanceId)
+	}
+	serializeDataTableValueList(s, schemas.BatchCreateDataTableValueRequest_Values, v.Values)
+}
+
 type BatchCreateDataTableValueOutput struct {
 
 	// A list of values that failed to be created with error messages explaining the
@@ -76,77 +91,48 @@ type BatchCreateDataTableValueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateDataTableValueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateDataTableValueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateDataTableValueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchCreateDataTableValueFailureResultList(s, schemas.BatchCreateDataTableValueResponse_Failed, v.Failed)
+	serializeBatchCreateDataTableValueSuccessResultList(s, schemas.BatchCreateDataTableValueResponse_Successful, v.Successful)
+}
+func (v *BatchCreateDataTableValueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateDataTableValueResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateDataTableValueResponse_Failed:
+			return deserializeBatchCreateDataTableValueFailureResultList(d, schemas.BatchCreateDataTableValueResponse_Failed, &v.Failed)
+		case schemas.BatchCreateDataTableValueResponse_Successful:
+			return deserializeBatchCreateDataTableValueSuccessResultList(d, schemas.BatchCreateDataTableValueResponse_Successful, &v.Successful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateDataTableValueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateDataTableValue, schemas.BatchCreateDataTableValueRequest, schemas.BatchCreateDataTableValueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchCreateDataTableValue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateDataTableValue, schemas.BatchCreateDataTableValueRequest, schemas.BatchCreateDataTableValueResponse), output: &BatchCreateDataTableValueOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchCreateDataTableValue{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateDataTableValue"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchCreateDataTableValueValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreateDataTableValue(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +147,8 @@ func (c *Client) addOperationBatchCreateDataTableValueMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchCreateDataTableValue(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchCreateDataTableValue",
-	}
 }

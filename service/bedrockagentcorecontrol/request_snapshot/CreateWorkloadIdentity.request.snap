@@ -1,0 +1,5 @@
+POST /identities/CreateWorkloadIdentity
+
+Content-Type: application/json
+
+{"allowedResourceOauth2ReturnUrls":["__Member__","__Member__"],"name":"__Name__","tags":{"key0":"__Value__"}}

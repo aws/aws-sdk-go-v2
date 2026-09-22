@@ -4,11 +4,10 @@ package transcribe
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides information about the specified Call Analytics category.
@@ -40,6 +39,18 @@ type GetCallAnalyticsCategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCallAnalyticsCategoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCallAnalyticsCategoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCallAnalyticsCategoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoryName != nil {
+		s.WriteString(schemas.GetCallAnalyticsCategoryRequest_CategoryName, *v.CategoryName)
+	}
+}
+
 type GetCallAnalyticsCategoryOutput struct {
 
 	// Provides you with the properties of the Call Analytics category you specified
@@ -52,77 +63,50 @@ type GetCallAnalyticsCategoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCallAnalyticsCategoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCallAnalyticsCategoryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCallAnalyticsCategoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoryProperties != nil {
+		s.WriteStruct(schemas.GetCallAnalyticsCategoryResponse_CategoryProperties)
+		v.CategoryProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCallAnalyticsCategoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCallAnalyticsCategoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCallAnalyticsCategoryResponse_CategoryProperties:
+			v.CategoryProperties = &types.CategoryProperties{}
+			return v.CategoryProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCallAnalyticsCategoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCallAnalyticsCategory, schemas.GetCallAnalyticsCategoryRequest, schemas.GetCallAnalyticsCategoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetCallAnalyticsCategory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCallAnalyticsCategory, schemas.GetCallAnalyticsCategoryRequest, schemas.GetCallAnalyticsCategoryResponse), output: &GetCallAnalyticsCategoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetCallAnalyticsCategory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCallAnalyticsCategory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCallAnalyticsCategoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCallAnalyticsCategory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +121,8 @@ func (c *Client) addOperationGetCallAnalyticsCategoryMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCallAnalyticsCategory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCallAnalyticsCategory",
-	}
 }

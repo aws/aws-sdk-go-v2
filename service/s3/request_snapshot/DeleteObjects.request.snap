@@ -1,0 +1,10 @@
+POST /?delete=
+
+Content-Type: application/xml
+X-Amz-Bypass-Governance-Retention: true
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Mfa: __MFA__
+X-Amz-Request-Payer: requester
+X-Amz-Sdk-Checksum-Algorithm: CRC32
+
+<Delete xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Object><ETag>__ETag__</ETag><Key>__Key__</Key><LastModifiedTime>Sat, 01 Jan 2000 00:00:00 GMT</LastModifiedTime><Size>1</Size><VersionId>__VersionId__</VersionId></Object><Object><ETag>__ETag__</ETag><Key>__Key__</Key><LastModifiedTime>Sat, 01 Jan 2000 00:00:00 GMT</LastModifiedTime><Size>1</Size><VersionId>__VersionId__</VersionId></Object><Quiet>true</Quiet></Delete>

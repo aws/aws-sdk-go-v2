@@ -1899,7 +1899,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a Cedar policy and save it in the specified policy store"
                 },
-                "smithy.api#documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p> <note> <p>Although <a href=\"https://docs.cedarpolicy.com/schema/schema.html#namespace\">Cedar supports multiple namespaces</a>, Verified Permissions currently supports only one namespace per policy store.</p> </note> <note> <p>Verified Permissions is <i> <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>",
+                "smithy.api#documentation": "<p>Creates a policy store. A policy store is a container for policy resources.</p> <note> <p>As of May 2026, Verified Permissions has aligned with Cedar and now supports multiple namespaces.</p> </note> <note> <p>Verified Permissions is <i> <a href=\"https://wikipedia.org/wiki/Eventual_consistency\">eventually consistent</a> </i>. It can take a few seconds for a new or changed element to propagate through the service and be visible in the results of other Verified Permissions operations.</p> </note>",
                 "smithy.api#examples": [
                     {
                         "title": "To create policy store",
@@ -2477,13 +2477,22 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete an alias for a policy store"
                 },
-                "smithy.api#documentation": "<p>Deletes the specified policy store alias.</p> <p>This operation is idempotent. If you specify a policy store alias that does not exist, the request response will still return a successful HTTP 200 status code.</p> <p>When a policy store alias is deleted, it enters the <code>PendingDeletion</code> state. When a policy store alias is in the <code>PendingDeletion</code> state, new policy store aliases cannot be created with the same name. If the policy store alias is used in an API that has a <code>policyStoreId</code> field, the operation will fail with a <code>ResourceNotFound</code> exception.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified policy store alias.</p> <p>This operation is idempotent. If you specify a policy store alias that does not exist, the request response will still return a successful HTTP 200 status code.</p> <p>By default, when a policy store alias is deleted, it enters the <code>PendingDeletion</code> state. When a policy store alias is in the <code>PendingDeletion</code> state, new policy store aliases cannot be created with the same name. If the policy store alias is used in an API that has a <code>policyStoreId</code> field, the operation will fail with a <code>ResourceNotFound</code> exception.</p> <p>To immediately delete a policy store alias and bypass the <code>PendingDeletion</code> state, set the <code>deletionMode</code> parameter to <code>HardDelete</code>.</p> <important> <p>Verified Permissions is eventually consistent. If you hard delete a policy store alias and then immediately recreate it to be associated with a different policy store, requests that reference this alias may continue to be evaluated against the previously associated policy store for a short period of time.</p> </important>",
                 "smithy.api#examples": [
                     {
-                        "title": "DeletePolicyStoreAlias",
-                        "documentation": "The following example deletes the policy store alias with name example-policy-store.",
+                        "title": "Soft delete a policy store alias",
+                        "documentation": "The following example soft deletes the policy store alias with name example-policy-store. The alias enters the PendingDeletion state.",
                         "input": {
                             "aliasName": "policy-store-alias/example-policy-store"
+                        },
+                        "output": {}
+                    },
+                    {
+                        "title": "Hard delete a policy store alias",
+                        "documentation": "The following example hard deletes the policy store alias with name example-policy-store. The alias is immediately deleted, bypassing the PendingDeletion state.",
+                        "input": {
+                            "aliasName": "policy-store-alias/example-policy-store",
+                            "deletionMode": "HardDelete"
                         },
                         "output": {}
                     }
@@ -2502,6 +2511,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the name of the policy store alias that you want to delete.</p> <note> <p>The alias name must always be prefixed with <code>policy-store-alias/</code>.</p> </note>",
                         "smithy.api#required": {}
+                    }
+                },
+                "deletionMode": {
+                    "target": "com.amazonaws.verifiedpermissions#DeletionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the deletion mode for the policy store alias. The valid values are:</p> <ul> <li> <p> <b>SoftDelete</b> – The policy store alias enters the <code>PendingDeletion</code> state. This is the default behavior when no <code>deletionMode</code> is specified.</p> </li> <li> <p> <b>HardDelete</b> – The policy store alias is immediately deleted, bypassing the <code>PendingDeletion</code> state.</p> </li> </ul>"
                     }
                 }
             },
@@ -2600,6 +2615,26 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.verifiedpermissions#DeletionMode": {
+            "type": "enum",
+            "members": {
+                "SOFT_DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SoftDelete"
+                    }
+                },
+                "HARD_DELETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HardDelete"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The deletion mode for a resource. The valid values are:</p> <ul> <li> <p> <b>SoftDelete</b> – The resource enters the <code>PendingDeletion</code> state. This is the default behavior.</p> </li> <li> <p> <b>HardDelete</b> – The resource is immediately deleted, bypassing the <code>PendingDeletion</code> state.</p> </li> </ul>"
             }
         },
         "com.amazonaws.verifiedpermissions#DeletionProtection": {
@@ -4044,7 +4079,7 @@
                             },
                             "action": {
                                 "actionType": "Action",
-                                "actionId": "view"
+                                "actionId": "updatePhoto"
                             },
                             "resource": {
                                 "entityType": "Photo",
@@ -5496,7 +5531,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.</p> <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html\">OpenIdConnectConfigurationItem</a> structure, which is a parameter of <a href=\"http://amazonaws.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>"
+                "smithy.api#documentation": "<p>The token type that you want to process from your OIDC identity provider. Your policy store can process either identity (ID) or access tokens from a given OIDC identity source.</p> <p>This data type is part of a <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html\">OpenIdConnectConfigurationItem</a> structure, which is a parameter of <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html\">ListIdentitySources</a>.</p>"
             }
         },
         "com.amazonaws.verifiedpermissions#OpenIdIssuer": {
@@ -7771,6 +7806,194 @@
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#documentation": "<p>Amazon Verified Permissions is a permissions management service from Amazon Web Services. You can use Verified Permissions to manage permissions for your application, and authorize user access based on those permissions. Using Verified Permissions, application developers can grant access based on information about the users, resources, and requested actions. You can also evaluate additional information like group membership, attributes of the resources, and session context, such as time of request and IP addresses. Verified Permissions manages these permissions by letting you create and store authorization policies for your applications, such as consumer-facing web sites and enterprise business systems.</p> <p>Verified Permissions uses Cedar as the policy language to express your permission requirements. Cedar supports both role-based access control (RBAC) and attribute-based access control (ABAC) authorization models.</p> <p>For more information about configuring, administering, and using Amazon Verified Permissions in your applications, see the <a href=\"https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/\">Amazon Verified Permissions User Guide</a>.</p> <p>For more information about the Cedar policy language, see the <a href=\"https://docs.cedarpolicy.com/\">Cedar Policy Language Guide</a>.</p> <important> <p>When you write Cedar policies that reference principals, resources and actions, you can define the unique identifiers used for each of those elements. We strongly recommend that you follow these best practices:</p> <ul> <li> <p> <b>Use values like universally unique identifiers (UUIDs) for all principal and resource identifiers.</b> </p> <p>For example, if user <code>jane</code> leaves the company, and you later let someone else use the name <code>jane</code>, then that new user automatically gets access to everything granted by policies that still reference <code>User::\"jane\"</code>. Cedar can’t distinguish between the new user and the old. This applies to both principal and resource identifiers. Always use identifiers that are guaranteed unique and never reused to ensure that you don’t unintentionally grant access because of the presence of an old identifier in a policy.</p> <p>Where you use a UUID for an entity, we recommend that you follow it with the // comment specifier and the ‘friendly’ name of your entity. This helps to make your policies easier to understand. For example: principal == User::\"a1b2c3d4-e5f6-a1b2-c3d4-EXAMPLE11111\", // alice</p> </li> <li> <p> <b>Do not include personally identifying, confidential, or sensitive information as part of the unique identifier for your principals or resources.</b> These identifiers are included in log entries shared in CloudTrail trails.</p> </li> </ul> </important> <p>Several operations return structures that appear similar, but have different purposes. As new functionality is added to the product, the structure used in a parameter of one operation might need to change in a way that wouldn't make sense for the same parameter in a different operation. To help you understand the purpose of each, the following naming convention is used for the structures:</p> <ul> <li> <p>Parameter type structures that end in <code>Detail</code> are used in <code>Get</code> operations.</p> </li> <li> <p>Parameter type structures that end in <code>Item</code> are used in <code>List</code> operations.</p> </li> <li> <p>Parameter type structures that use neither suffix are used in the mutating (create and update) operations.</p> </li> </ul>",
                 "smithy.api#title": "Amazon Verified Permissions",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://verifiedpermissions-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://verifiedpermissions-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://verifiedpermissions.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://verifiedpermissions.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

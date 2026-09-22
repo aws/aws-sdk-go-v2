@@ -1,0 +1,5 @@
+POST /delete-resiliency-policy
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","policyArn":"__PolicyArn__"}

@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2 (FleetIQ)
@@ -91,6 +90,29 @@ type ClaimGameServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClaimGameServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClaimGameServerInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClaimGameServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterOption != nil {
+		s.WriteStruct(schemas.ClaimGameServerInput_FilterOption)
+		v.FilterOption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GameServerData != nil {
+		s.WriteString(schemas.ClaimGameServerInput_GameServerData, *v.GameServerData)
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.ClaimGameServerInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerId != nil {
+		s.WriteString(schemas.ClaimGameServerInput_GameServerId, *v.GameServerId)
+	}
+}
+
 type ClaimGameServerOutput struct {
 
 	// Object that describes the newly claimed game server.
@@ -102,65 +124,44 @@ type ClaimGameServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClaimGameServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClaimGameServerOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClaimGameServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServer != nil {
+		s.WriteStruct(schemas.ClaimGameServerOutput_GameServer)
+		v.GameServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClaimGameServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClaimGameServerOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClaimGameServerOutput_GameServer:
+			v.GameServer = &types.GameServer{}
+			return v.GameServer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationClaimGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClaimGameServer, schemas.ClaimGameServerInput, schemas.ClaimGameServerOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpClaimGameServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClaimGameServer, schemas.ClaimGameServerInput, schemas.ClaimGameServerOutput), output: &ClaimGameServerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpClaimGameServer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ClaimGameServer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -170,12 +171,6 @@ func (c *Client) addOperationClaimGameServerMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpClaimGameServerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opClaimGameServer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +185,8 @@ func (c *Client) addOperationClaimGameServerMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opClaimGameServer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ClaimGameServer",
-	}
 }

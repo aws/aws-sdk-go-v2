@@ -5,10 +5,10 @@ package wellarchitected
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Paginated list of workloads.
@@ -43,6 +43,24 @@ type ListWorkloadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkloadsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadsInput_NextToken, *v.NextToken)
+	}
+	if v.WorkloadNamePrefix != nil {
+		s.WriteString(schemas.ListWorkloadsInput_WorkloadNamePrefix, *v.WorkloadNamePrefix)
+	}
+}
+
 // Output of a list workloads call.
 type ListWorkloadsOutput struct {
 
@@ -58,74 +76,48 @@ type ListWorkloadsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadsOutput_NextToken, *v.NextToken)
+	}
+	serializeWorkloadSummaries(s, schemas.ListWorkloadsOutput_WorkloadSummaries, v.WorkloadSummaries)
+}
+func (v *ListWorkloadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkloadsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkloadsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkloadsOutput_NextToken, v.NextToken)
+		case schemas.ListWorkloadsOutput_WorkloadSummaries:
+			return deserializeWorkloadSummaries(d, schemas.ListWorkloadsOutput_WorkloadSummaries, &v.WorkloadSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkloadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloads, schemas.ListWorkloadsInput, schemas.ListWorkloadsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkloads{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloads, schemas.ListWorkloadsInput, schemas.ListWorkloadsOutput), output: &ListWorkloadsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkloads{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkloads"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkloads(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,12 +130,6 @@ func (c *Client) addOperationListWorkloadsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,11 +229,3 @@ type ListWorkloadsAPIClient interface {
 }
 
 var _ ListWorkloadsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListWorkloads(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListWorkloads",
-	}
-}

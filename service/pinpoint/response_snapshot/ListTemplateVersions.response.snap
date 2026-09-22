@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Item":[{"CreationDate":"__CreationDate__","DefaultSubstitutions":"__DefaultSubstitutions__","LastModifiedDate":"__LastModifiedDate__","TemplateDescription":"__TemplateDescription__","TemplateName":"__TemplateName__","TemplateType":"__TemplateType__","Version":"__Version__"},{"CreationDate":"__CreationDate__","DefaultSubstitutions":"__DefaultSubstitutions__","LastModifiedDate":"__LastModifiedDate__","TemplateDescription":"__TemplateDescription__","TemplateName":"__TemplateName__","TemplateType":"__TemplateType__","Version":"__Version__"}],"Message":"__Message__","NextToken":"__NextToken__","RequestID":"__RequestID__"}

@@ -1,0 +1,6 @@
+PATCH /2023-10-12/farms/__FarmId__/queues/__QueueId__/environments/__QueueEnvironmentId__
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"priority":1,"template":"__Template__","templateType":"JSON"}

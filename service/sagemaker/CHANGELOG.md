@@ -1,3 +1,200 @@
+# v1.279.0 (2026-09-21)
+
+* **Feature**: Add support for r6i, m8i, c8i, r8i instance types in Training and Processing
+
+# v1.278.0 (2026-09-18)
+
+* **Feature**: Adds support for the hub content resource in SageMaker Search.
+
+# v1.277.0 (2026-09-10)
+
+* **Feature**: This release adds the ability for customers to attach customer owned Elastic Network Interfaces (ENIs) to HyperPod cluster nodes.
+
+# v1.276.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.275.0 (2026-09-08)
+
+* **Feature**: Add support for InstancePreferences list for multiple instance type input support on SageMaker Training and Processing
+
+# v1.274.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.273.0 (2026-09-02)
+
+* **Feature**: Amazon SageMaker Feature Store now supports the Standard V2 online store type, which enables feature-level writes to feature groups. You can select Standard V2 when creating a feature group, and update the storage type of an existing feature group via UpdateFeatureGroup.
+
+# v1.272.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
+# v1.271.0 (2026-08-31)
+
+* **Feature**: Amazon SageMaker Batch Transform now supports G6e instances, powered by NVIDIA L40S Tensor Core GPUs. G6e instances are the most cost-efficient GPU instances for deploying generative AI models and the highest-performance GPU instances for spatial computing workloads.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.270.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.270.0 (2026-08-27)
+
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.269.0 (2026-08-26)
+
+* **Feature**: Amazon SageMaker AI now supports ml.g7 instances for model optimization. You can now run model optimization jobs on ml.g7 instances, in supported AWS Regions.
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.268.1 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.268.0 (2026-08-20)
+
+* **Feature**: Added IAM Identity Center (IdC) support to CreatePartnerApp and UpdatePartnerApp APIs. Added Customer Managed Key (CMK) support to CreateMlflowApp and DescribeMlflowApp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.267.0 (2026-08-14)
+
+* **Feature**: Release support for g7.2xlarge, g7.4xlarge, g7.8xlarge, g7.12xlarge, g7.24xlarge, and g7.48xlarge instance types for SageMaker HyperPod
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.266.0 (2026-08-10)
+
+* **Feature**: Added PREFIX AWARE routing strategy and PrefixAwareRoutingConfig to CreateEndpointConfig. Configure PrefixLength and ConcurrencyThreshold to route requests that share the same prompt prefix to the same instance.
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.265.0 (2026-08-07)
+
+* **Feature**: Amazon SageMaker adds maintenance lifecycle statuses for Notebook Instances
+
+# v1.264.0 (2026-08-06)
+
+* **Feature**: Releases new Model Customization SequenceLength parameter for Training and g7 instance types for Training and Processing.
+
+# v1.263.2 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.263.1 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
+# v1.263.0 (2026-07-30)
+
+* **Feature**: Adds support for g7 family instance types for SageMaker Studio JupyterLab and CodeEditor apps for IAD (us-east-1), PDX (us-west-2), CMH (us-east-2).
+
+# v1.262.2 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.262.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.262.0 (2026-07-27)
+
+* **Feature**: This release adds LoRA adapters, training plans, and new instance types to SageMaker inference optimization. CreateAIRecommendationJob accepts optional AdapterSource and CreateOptimizationJob accepts optional TrainingPlanArns and the ml.g7e and ml.p6-b200 families.
+
+# v1.261.0 (2026-07-23)
+
+* **Feature**: Release support for c6a, m6a, m6g, m7g, m8g instance types for SageMaker HyperPod
+
+# v1.260.0 (2026-07-21)
+
+* **Feature**: Add an option to clients to disable clock skew
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.259.0 (2026-07-16)
+
+* **Feature**: Release support for g7 instance type for SageMaker inference endpoints.
+
+# v1.258.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.258.0 (2026-07-10)
+
+* **Feature**: Release support for g4d, c6g, c7g, c8g instance types for SageMaker HyperPod
+
+# v1.257.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.256.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.256.1 (2026-06-29)
+
+* No change notes available for this release.
+
+# v1.256.0 (2026-06-18)
+
+* **Feature**: Adds support for automatic AMI patching on HyperPod clusters. Customers can configure patching strategies to automatically apply security patch with zero job termination. Customers can also specify an AMI version at instance group level and update cluster software to a certain AMI version.
+
+# v1.255.0 (2026-06-16)
+
+* **Feature**: Add EnableDetailedObservability to Endpoint MetricsConfig. Publishes GPU, host, and framework-native inference metrics to CloudWatch with per-inference-component, availability-zone, and instance dimensions. Adds Inference Component provisioning lifecycle and multi-AZ placement metrics.
+
+# v1.254.0 (2026-06-10)
+
+* **Feature**: Add support for G6e instances (ml.g6e.xlarge through ml.g6e.48xlarge) on Amazon SageMaker Notebook Instances.
+
+# v1.253.1 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.253.0 (2026-06-05)
+
+* **Feature**: This release adds support for MLflow experiment tracking in SageMaker inference optimization. CreateAIRecommendationJob and CreateAIBenchmarkJob now accept an optional OutputConfig.MlflowConfig (MLflow App ARN, experiment, run name) to stream benchmark metrics and artifacts to your own MLflow App.
+
+# v1.252.0 (2026-06-04)
+
+* **Feature**: Adds the IncludedData parameter to DescribeModelCard and DescribeModelPackage. Set it to MetadataOnly to retrieve a model card without decrypt permission on the customer managed AWS KMS key (default AllData returns full content). Adds support for the MTRL Job resource in SageMaker Search.
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.251.1 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.251.0 (2026-06-02)
+
+* **Feature**: Amazon SageMaker Job is a new service to help you manage various workloads related to model fine tuning, evaluation etc. Two job categories are supported today, AgentRFT for multi-turn agentic reinforcement fine tuning, and AgentRFTEvaluation for evaluating base model or trained model from AgentRFT.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.250.2 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.250.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.250.0 (2026-05-27)
+
+* **Feature**: Adds shared environment support for Restricted Instance Groups (RIGs) on SageMaker HyperPod, enabling cross-RIG workload scheduling and FSx sharing. This unlocks shared CPU-GPU environments needed for cost-efficient RL training (e.g., Nova Forge). Adds p6 instance support for recommendation jobs
+
+# v1.249.0 (2026-05-21)
+
+* **Feature**: Add support for disabling home EFS file system creation on SageMaker domains.
+
 # v1.248.0 (2026-05-19)
 
 * **Feature**: Add support for ml.p5.4xlarge and ml.p5en.48xlarge instances on SageMaker Notebook Instances Platform.

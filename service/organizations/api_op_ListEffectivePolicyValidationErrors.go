@@ -5,10 +5,10 @@ package organizations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -95,6 +95,27 @@ type ListEffectivePolicyValidationErrorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEffectivePolicyValidationErrorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEffectivePolicyValidationErrorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEffectivePolicyValidationErrorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEffectivePolicyValidationErrorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsRequest_NextToken, *v.NextToken)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsRequest_PolicyType, string(v.PolicyType))
+	}
+}
+
 type ListEffectivePolicyValidationErrorsOutput struct {
 
 	// The ID of the specified account.
@@ -161,77 +182,79 @@ type ListEffectivePolicyValidationErrorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEffectivePolicyValidationErrorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEffectivePolicyValidationErrorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEffectivePolicyValidationErrorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsResponse_AccountId, *v.AccountId)
+	}
+	serializeEffectivePolicyValidationErrors(s, schemas.ListEffectivePolicyValidationErrorsResponse_EffectivePolicyValidationErrors, v.EffectivePolicyValidationErrors)
+	if v.EvaluationTimestamp != nil {
+		s.WriteTime(schemas.ListEffectivePolicyValidationErrorsResponse_EvaluationTimestamp, *v.EvaluationTimestamp)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsResponse_NextToken, *v.NextToken)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsResponse_Path, *v.Path)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.ListEffectivePolicyValidationErrorsResponse_PolicyType, string(v.PolicyType))
+	}
+}
+func (v *ListEffectivePolicyValidationErrorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEffectivePolicyValidationErrorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEffectivePolicyValidationErrorsResponse_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ListEffectivePolicyValidationErrorsResponse_AccountId, v.AccountId)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_EffectivePolicyValidationErrors:
+			return deserializeEffectivePolicyValidationErrors(d, schemas.ListEffectivePolicyValidationErrorsResponse_EffectivePolicyValidationErrors, &v.EffectivePolicyValidationErrors)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_EvaluationTimestamp:
+			v.EvaluationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ListEffectivePolicyValidationErrorsResponse_EvaluationTimestamp, v.EvaluationTimestamp)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEffectivePolicyValidationErrorsResponse_NextToken, v.NextToken)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ListEffectivePolicyValidationErrorsResponse_Path, v.Path)
+		case schemas.ListEffectivePolicyValidationErrorsResponse_PolicyType:
+			var ev string
+			if err := d.ReadString(schemas.ListEffectivePolicyValidationErrorsResponse_PolicyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = types.EffectivePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEffectivePolicyValidationErrorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEffectivePolicyValidationErrors, schemas.ListEffectivePolicyValidationErrorsRequest, schemas.ListEffectivePolicyValidationErrorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEffectivePolicyValidationErrors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEffectivePolicyValidationErrors, schemas.ListEffectivePolicyValidationErrorsRequest, schemas.ListEffectivePolicyValidationErrorsResponse), output: &ListEffectivePolicyValidationErrorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEffectivePolicyValidationErrors{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEffectivePolicyValidationErrors"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEffectivePolicyValidationErrorsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEffectivePolicyValidationErrors(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -244,12 +267,6 @@ func (c *Client) addOperationListEffectivePolicyValidationErrorsMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -355,11 +372,3 @@ type ListEffectivePolicyValidationErrorsAPIClient interface {
 }
 
 var _ ListEffectivePolicyValidationErrorsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEffectivePolicyValidationErrors(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEffectivePolicyValidationErrors",
-	}
-}

@@ -1,0 +1,5 @@
+PUT /v1/compliance-inquiry/putFeedback
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","comment":"__Comment__","complianceInquiryId":"__ComplianceInquiryId__","queryIdentifier":1,"rating":"THUMBS_UP","reasonCodes":["OTHER","OTHER"],"responseRevisionId":1}

@@ -5,10 +5,10 @@ package schemas
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the registries.
@@ -46,6 +46,27 @@ type ListRegistriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegistriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegistriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegistriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListRegistriesRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegistriesRequest_NextToken, *v.NextToken)
+	}
+	if v.RegistryNamePrefix != nil {
+		s.WriteString(schemas.ListRegistriesRequest_RegistryNamePrefix, *v.RegistryNamePrefix)
+	}
+	if v.Scope != nil {
+		s.WriteString(schemas.ListRegistriesRequest_Scope, *v.Scope)
+	}
+}
+
 type ListRegistriesOutput struct {
 
 	// The token that specifies the next page of results to return. To request the
@@ -62,74 +83,48 @@ type ListRegistriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegistriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegistriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegistriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegistriesResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfRegistrySummary(s, schemas.ListRegistriesResponse_Registries, v.Registries)
+}
+func (v *ListRegistriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRegistriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRegistriesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRegistriesResponse_NextToken, v.NextToken)
+		case schemas.ListRegistriesResponse_Registries:
+			return deserialize__listOfRegistrySummary(d, schemas.ListRegistriesResponse_Registries, &v.Registries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRegistriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistries, schemas.ListRegistriesRequest, schemas.ListRegistriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRegistries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegistries, schemas.ListRegistriesRequest, schemas.ListRegistriesResponse), output: &ListRegistriesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRegistries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRegistries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRegistries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +137,6 @@ func (c *Client) addOperationListRegistriesMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +236,3 @@ type ListRegistriesAPIClient interface {
 }
 
 var _ ListRegistriesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRegistries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRegistries",
-	}
-}

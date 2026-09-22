@@ -5,10 +5,10 @@ package batch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Submits a service job to a specified job queue to run on SageMaker AI. A
@@ -97,6 +97,55 @@ type SubmitServiceJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitServiceJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitServiceJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitServiceJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SubmitServiceJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.SubmitServiceJobRequest_jobName, *v.JobName)
+	}
+	if v.JobQueue != nil {
+		s.WriteString(schemas.SubmitServiceJobRequest_jobQueue, *v.JobQueue)
+	}
+	if v.PreemptionConfiguration != nil {
+		s.WriteStruct(schemas.SubmitServiceJobRequest_preemptionConfiguration)
+		v.PreemptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QuotaShareName != nil {
+		s.WriteString(schemas.SubmitServiceJobRequest_quotaShareName, *v.QuotaShareName)
+	}
+	if v.RetryStrategy != nil {
+		s.WriteStruct(schemas.SubmitServiceJobRequest_retryStrategy)
+		v.RetryStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchedulingPriority != nil {
+		s.WriteInt32(schemas.SubmitServiceJobRequest_schedulingPriority, *v.SchedulingPriority)
+	}
+	if v.ServiceJobType != "" {
+		s.WriteString(schemas.SubmitServiceJobRequest_serviceJobType, string(v.ServiceJobType))
+	}
+	if v.ServiceRequestPayload != nil {
+		s.WriteString(schemas.SubmitServiceJobRequest_serviceRequestPayload, *v.ServiceRequestPayload)
+	}
+	if v.ShareIdentifier != nil {
+		s.WriteString(schemas.SubmitServiceJobRequest_shareIdentifier, *v.ShareIdentifier)
+	}
+	serializeTagrisTagsMap(s, schemas.SubmitServiceJobRequest_tags, v.Tags)
+	if v.TimeoutConfig != nil {
+		s.WriteStruct(schemas.SubmitServiceJobRequest_timeoutConfig)
+		v.TimeoutConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SubmitServiceJobOutput struct {
 
 	// The unique identifier for the service job.
@@ -118,65 +167,54 @@ type SubmitServiceJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubmitServiceJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmitServiceJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmitServiceJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.SubmitServiceJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.SubmitServiceJobResponse_jobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.SubmitServiceJobResponse_jobName, *v.JobName)
+	}
+}
+func (v *SubmitServiceJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmitServiceJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmitServiceJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.SubmitServiceJobResponse_jobArn, v.JobArn)
+		case schemas.SubmitServiceJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.SubmitServiceJobResponse_jobId, v.JobId)
+		case schemas.SubmitServiceJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.SubmitServiceJobResponse_jobName, v.JobName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSubmitServiceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitServiceJob, schemas.SubmitServiceJobRequest, schemas.SubmitServiceJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSubmitServiceJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SubmitServiceJob, schemas.SubmitServiceJobRequest, schemas.SubmitServiceJobResponse), output: &SubmitServiceJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSubmitServiceJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SubmitServiceJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -186,12 +224,6 @@ func (c *Client) addOperationSubmitServiceJobMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpSubmitServiceJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitServiceJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,12 +236,6 @@ func (c *Client) addOperationSubmitServiceJobMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,12 +275,4 @@ func (m *idempotencyToken_initializeOpSubmitServiceJob) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opSubmitServiceJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpSubmitServiceJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opSubmitServiceJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SubmitServiceJob",
-	}
 }

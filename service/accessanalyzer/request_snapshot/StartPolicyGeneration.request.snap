@@ -1,0 +1,5 @@
+PUT /policy/generation
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","cloudTrailDetails":{"accessRole":"__AccessRole__","endTime":"2000-01-01T00:00:00Z","startTime":"2000-01-01T00:00:00Z","trails":[{"allRegions":true,"cloudTrailArn":"__CloudTrailArn__","regions":["__Member__","__Member__"]},{"allRegions":true,"cloudTrailArn":"__CloudTrailArn__","regions":["__Member__","__Member__"]}]},"policyGenerationDetails":{"principalArn":"__PrincipalArn__"}}

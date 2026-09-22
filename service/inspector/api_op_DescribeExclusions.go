@@ -4,11 +4,10 @@ package inspector
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the exclusions that are specified by the exclusions' ARNs.
@@ -41,6 +40,19 @@ type DescribeExclusionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExclusionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExclusionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExclusionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchDescribeExclusionsArnList(s, schemas.DescribeExclusionsRequest_exclusionArns, v.ExclusionArns)
+	if v.Locale != "" {
+		s.WriteString(schemas.DescribeExclusionsRequest_locale, string(v.Locale))
+	}
+}
+
 type DescribeExclusionsOutput struct {
 
 	// Information about the exclusions.
@@ -60,77 +72,48 @@ type DescribeExclusionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeExclusionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeExclusionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeExclusionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExclusionMap(s, schemas.DescribeExclusionsResponse_exclusions, v.Exclusions)
+	serializeFailedItems(s, schemas.DescribeExclusionsResponse_failedItems, v.FailedItems)
+}
+func (v *DescribeExclusionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeExclusionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeExclusionsResponse_exclusions:
+			return deserializeExclusionMap(d, schemas.DescribeExclusionsResponse_exclusions, &v.Exclusions)
+		case schemas.DescribeExclusionsResponse_failedItems:
+			return deserializeFailedItems(d, schemas.DescribeExclusionsResponse_failedItems, &v.FailedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeExclusionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExclusions, schemas.DescribeExclusionsRequest, schemas.DescribeExclusionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeExclusions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeExclusions, schemas.DescribeExclusionsRequest, schemas.DescribeExclusionsResponse), output: &DescribeExclusionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeExclusions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeExclusions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeExclusionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeExclusions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +128,8 @@ func (c *Client) addOperationDescribeExclusionsMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeExclusions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeExclusions",
-	}
 }

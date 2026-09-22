@@ -1,0 +1,5 @@
+POST /network-migration/StartNetworkMigrationMapping
+
+Content-Type: application/json
+
+{"networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","securityGroupMappingStrategy":"MAP"}

@@ -5,7 +5,6 @@ package omics
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/omics/document"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
@@ -81,6 +80,9 @@ type GetRunOutput struct {
 	// The run's digest.
 	Digest *string
 
+	// The engine-specific settings for the workflow run.
+	EngineSettings document.Interface
+
 	// The actual Nextflow engine version that Amazon Web Services HealthOmics used
 	// for the run. The other workflow definition languages don't provide a value for
 	// this field.
@@ -131,6 +133,15 @@ type GetRunOutput struct {
 
 	// The destination for workflow outputs.
 	RunOutputUri *string
+
+	// Optional configuration for enabling scratch ephemeral storage mounted at /tmp.
+	// If absent, this will default to SHARED. This configuration is applicable only
+	// for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.
+	ScratchStorageMode types.ScratchStorageMode
+
+	// Inline policy json for scoping down permissions via a session policy on the IAM
+	// role.
+	SessionPolicy *string
 
 	// When the run started.
 	StartTime *time.Time
@@ -185,9 +196,6 @@ type GetRunOutput struct {
 }
 
 func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRun{}, middleware.After)
 	if err != nil {
 		return err
@@ -196,53 +204,14 @@ func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options 
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -252,12 +221,6 @@ func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	if err = addOpGetRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -270,12 +233,6 @@ func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -755,11 +712,3 @@ type GetRunAPIClient interface {
 }
 
 var _ GetRunAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRun",
-	}
-}

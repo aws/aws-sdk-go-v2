@@ -1,0 +1,5 @@
+POST /v2/delete-test-sources
+
+Content-Type: application/json
+
+{"serviceArn":"__ServiceArn__","testId":"__TestId__","testSources":[{"successCriteriaAlarm":{"alarmArn":"__AlarmArn__"}},{"successCriteriaAlarm":{"alarmArn":"__AlarmArn__"}}]}

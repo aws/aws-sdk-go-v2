@@ -4,11 +4,10 @@ package signer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information on a specific signing platform.
@@ -35,6 +34,18 @@ type GetSigningPlatformInput struct {
 	PlatformId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSigningPlatformInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSigningPlatformRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSigningPlatformInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PlatformId != nil {
+		s.WriteString(schemas.GetSigningPlatformRequest_platformId, *v.PlatformId)
+	}
 }
 
 type GetSigningPlatformOutput struct {
@@ -74,77 +85,102 @@ type GetSigningPlatformOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSigningPlatformOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSigningPlatformResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSigningPlatformOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Category != "" {
+		s.WriteString(schemas.GetSigningPlatformResponse_category, string(v.Category))
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetSigningPlatformResponse_displayName, *v.DisplayName)
+	}
+	if v.MaxSizeInMB != 0 {
+		s.WriteInt32(schemas.GetSigningPlatformResponse_maxSizeInMB, v.MaxSizeInMB)
+	}
+	if v.Partner != nil {
+		s.WriteString(schemas.GetSigningPlatformResponse_partner, *v.Partner)
+	}
+	if v.PlatformId != nil {
+		s.WriteString(schemas.GetSigningPlatformResponse_platformId, *v.PlatformId)
+	}
+	if v.RevocationSupported != false {
+		s.WriteBool(schemas.GetSigningPlatformResponse_revocationSupported, v.RevocationSupported)
+	}
+	if v.SigningConfiguration != nil {
+		s.WriteStruct(schemas.GetSigningPlatformResponse_signingConfiguration)
+		v.SigningConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningImageFormat != nil {
+		s.WriteStruct(schemas.GetSigningPlatformResponse_signingImageFormat)
+		v.SigningImageFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.GetSigningPlatformResponse_target, *v.Target)
+	}
+}
+func (v *GetSigningPlatformOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSigningPlatformResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSigningPlatformResponse_category:
+			var ev string
+			if err := d.ReadString(schemas.GetSigningPlatformResponse_category, &ev); err != nil {
+				return err
+			}
+			v.Category = types.Category(ev)
+			return nil
+		case schemas.GetSigningPlatformResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetSigningPlatformResponse_displayName, v.DisplayName)
+		case schemas.GetSigningPlatformResponse_maxSizeInMB:
+			return d.ReadInt32(schemas.GetSigningPlatformResponse_maxSizeInMB, &v.MaxSizeInMB)
+		case schemas.GetSigningPlatformResponse_partner:
+			v.Partner = new(string)
+			return d.ReadString(schemas.GetSigningPlatformResponse_partner, v.Partner)
+		case schemas.GetSigningPlatformResponse_platformId:
+			v.PlatformId = new(string)
+			return d.ReadString(schemas.GetSigningPlatformResponse_platformId, v.PlatformId)
+		case schemas.GetSigningPlatformResponse_revocationSupported:
+			return d.ReadBool(schemas.GetSigningPlatformResponse_revocationSupported, &v.RevocationSupported)
+		case schemas.GetSigningPlatformResponse_signingConfiguration:
+			v.SigningConfiguration = &types.SigningConfiguration{}
+			return v.SigningConfiguration.Deserialize(d)
+		case schemas.GetSigningPlatformResponse_signingImageFormat:
+			v.SigningImageFormat = &types.SigningImageFormat{}
+			return v.SigningImageFormat.Deserialize(d)
+		case schemas.GetSigningPlatformResponse_target:
+			v.Target = new(string)
+			return d.ReadString(schemas.GetSigningPlatformResponse_target, v.Target)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSigningPlatformMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSigningPlatform, schemas.GetSigningPlatformRequest, schemas.GetSigningPlatformResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSigningPlatform{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSigningPlatform, schemas.GetSigningPlatformRequest, schemas.GetSigningPlatformResponse), output: &GetSigningPlatformOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSigningPlatform{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSigningPlatform"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSigningPlatformValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSigningPlatform(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +195,8 @@ func (c *Client) addOperationGetSigningPlatformMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSigningPlatform(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSigningPlatform",
-	}
 }

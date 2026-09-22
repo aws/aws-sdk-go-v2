@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"construct":{"constructID":"__ConstructID__","constructType":"__ConstructType__","createdAt":946684800,"description":"__Description__","excluded":true,"logicalID":"__LogicalID__","name":"__Name__","properties":{"key0":"__Value__"},"updatedAt":946684800}}

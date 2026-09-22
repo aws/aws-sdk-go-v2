@@ -5,15 +5,17 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of resources successfully backed up by Backup, including the
-// time the resource was saved, an Amazon Resource Name (ARN) of the resource, and
-// a resource type.
+// Returns an array of resources with recovery points created by Backup
+// (regardless of the recovery point's [status]), including the time the resource was
+// saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
+//
+// [status]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_DescribeRecoveryPoint.html#Backup-DescribeRecoveryPoint-response-Status
 func (c *Client) ListProtectedResources(ctx context.Context, params *ListProtectedResourcesInput, optFns ...func(*Options)) (*ListProtectedResourcesOutput, error) {
 	if params == nil {
 		params = &ListProtectedResourcesInput{}
@@ -43,6 +45,21 @@ type ListProtectedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtectedResourcesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedResourcesInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListProtectedResourcesOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
@@ -62,74 +79,48 @@ type ListProtectedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedResourcesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedResourcesOutput_NextToken, *v.NextToken)
+	}
+	serializeProtectedResourcesList(s, schemas.ListProtectedResourcesOutput_Results, v.Results)
+}
+func (v *ListProtectedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectedResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectedResourcesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectedResourcesOutput_NextToken, v.NextToken)
+		case schemas.ListProtectedResourcesOutput_Results:
+			return deserializeProtectedResourcesList(d, schemas.ListProtectedResourcesOutput_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtectedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedResources, schemas.ListProtectedResourcesInput, schemas.ListProtectedResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProtectedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedResources, schemas.ListProtectedResourcesInput, schemas.ListProtectedResourcesOutput), output: &ListProtectedResourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProtectedResources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProtectedResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProtectedResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +133,6 @@ func (c *Client) addOperationListProtectedResourcesMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +234,3 @@ type ListProtectedResourcesAPIClient interface {
 }
 
 var _ ListProtectedResourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListProtectedResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProtectedResources",
-	}
-}

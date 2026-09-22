@@ -1,0 +1,5 @@
+POST /datasets/__DatasetId__/data-segments/batch-delete
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","deleteDataSegmentEntries":[{"endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__"},{"endTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"startTimestamp":{"offsetInNanos":1,"timeInSeconds":1},"timeSeriesId":"__TimeSeriesId__"}],"workspaceName":"__WorkspaceName__"}

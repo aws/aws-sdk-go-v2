@@ -5,10 +5,10 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an archive rule for the specified analyzer. Archive rules automatically
@@ -57,6 +57,43 @@ type CreateArchiveRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateArchiveRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateArchiveRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateArchiveRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerName != nil {
+		s.WriteString(schemas.CreateArchiveRuleRequest_analyzerName, *v.AnalyzerName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateArchiveRuleRequest_clientToken, *v.ClientToken)
+	}
+	serializeFilterCriteriaMap(s, schemas.CreateArchiveRuleRequest_filter, v.Filter)
+	if v.RuleName != nil {
+		s.WriteString(schemas.CreateArchiveRuleRequest_ruleName, *v.RuleName)
+	}
+}
+func (v *CreateArchiveRuleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateArchiveRuleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateArchiveRuleRequest_analyzerName:
+			v.AnalyzerName = new(string)
+			return d.ReadString(schemas.CreateArchiveRuleRequest_analyzerName, v.AnalyzerName)
+		case schemas.CreateArchiveRuleRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateArchiveRuleRequest_clientToken, v.ClientToken)
+		case schemas.CreateArchiveRuleRequest_filter:
+			return deserializeFilterCriteriaMap(d, schemas.CreateArchiveRuleRequest_filter, &v.Filter)
+		case schemas.CreateArchiveRuleRequest_ruleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.CreateArchiveRuleRequest_ruleName, v.RuleName)
+		}
+		return nil
+	})
+}
+
 type CreateArchiveRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,65 +101,36 @@ type CreateArchiveRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateArchiveRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateArchiveRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateArchiveRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateArchiveRule, schemas.CreateArchiveRuleRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateArchiveRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateArchiveRule, schemas.CreateArchiveRuleRequest, nil), output: &CreateArchiveRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateArchiveRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateArchiveRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -132,12 +140,6 @@ func (c *Client) addOperationCreateArchiveRuleMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateArchiveRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateArchiveRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +152,6 @@ func (c *Client) addOperationCreateArchiveRuleMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -195,12 +191,4 @@ func (m *idempotencyToken_initializeOpCreateArchiveRule) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateArchiveRuleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateArchiveRule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateArchiveRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateArchiveRule",
-	}
 }

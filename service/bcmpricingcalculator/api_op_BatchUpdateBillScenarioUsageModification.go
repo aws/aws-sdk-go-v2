@@ -4,11 +4,10 @@ package bcmpricingcalculator
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Update a newly added or existing usage lines. You can update the usage
@@ -50,6 +49,19 @@ type BatchUpdateBillScenarioUsageModificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateBillScenarioUsageModificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateBillScenarioUsageModificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateBillScenarioUsageModificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillScenarioId != nil {
+		s.WriteString(schemas.BatchUpdateBillScenarioUsageModificationRequest_billScenarioId, *v.BillScenarioId)
+	}
+	serializeBatchUpdateBillScenarioUsageModificationEntries(s, schemas.BatchUpdateBillScenarioUsageModificationRequest_usageModifications, v.UsageModifications)
+}
+
 type BatchUpdateBillScenarioUsageModificationOutput struct {
 
 	//  Returns the list of error reasons and usage line item IDs that could not be
@@ -66,77 +78,48 @@ type BatchUpdateBillScenarioUsageModificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateBillScenarioUsageModificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateBillScenarioUsageModificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateBillScenarioUsageModificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchUpdateBillScenarioUsageModificationErrors(s, schemas.BatchUpdateBillScenarioUsageModificationResponse_errors, v.Errors)
+	serializeBillScenarioUsageModificationItems(s, schemas.BatchUpdateBillScenarioUsageModificationResponse_items, v.Items)
+}
+func (v *BatchUpdateBillScenarioUsageModificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateBillScenarioUsageModificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateBillScenarioUsageModificationResponse_errors:
+			return deserializeBatchUpdateBillScenarioUsageModificationErrors(d, schemas.BatchUpdateBillScenarioUsageModificationResponse_errors, &v.Errors)
+		case schemas.BatchUpdateBillScenarioUsageModificationResponse_items:
+			return deserializeBillScenarioUsageModificationItems(d, schemas.BatchUpdateBillScenarioUsageModificationResponse_items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateBillScenarioUsageModificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateBillScenarioUsageModification, schemas.BatchUpdateBillScenarioUsageModificationRequest, schemas.BatchUpdateBillScenarioUsageModificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchUpdateBillScenarioUsageModification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateBillScenarioUsageModification, schemas.BatchUpdateBillScenarioUsageModificationRequest, schemas.BatchUpdateBillScenarioUsageModificationResponse), output: &BatchUpdateBillScenarioUsageModificationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchUpdateBillScenarioUsageModification{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateBillScenarioUsageModification"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUpdateBillScenarioUsageModificationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateBillScenarioUsageModification(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +134,8 @@ func (c *Client) addOperationBatchUpdateBillScenarioUsageModificationMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateBillScenarioUsageModification(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateBillScenarioUsageModification",
-	}
 }

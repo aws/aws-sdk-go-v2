@@ -1,0 +1,5 @@
+POST /identities/GetConsentPortal
+
+Content-Type: application/json
+
+{"consentPortalIdentifier":"__ConsentPortalIdentifier__"}

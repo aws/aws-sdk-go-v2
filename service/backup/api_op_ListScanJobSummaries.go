@@ -5,14 +5,14 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This is a request for a summary of scan jobs created or running within the most
-// recent 30 days.
+// recent 14 days.
 func (c *Client) ListScanJobSummaries(ctx context.Context, params *ListScanJobSummariesInput, optFns ...func(*Options)) (*ListScanJobSummariesOutput, error) {
 	if params == nil {
 		params = &ListScanJobSummariesInput{}
@@ -84,6 +84,39 @@ type ListScanJobSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScanJobSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScanJobSummariesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScanJobSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListScanJobSummariesInput_AccountId, *v.AccountId)
+	}
+	if v.AggregationPeriod != "" {
+		s.WriteString(schemas.ListScanJobSummariesInput_AggregationPeriod, string(v.AggregationPeriod))
+	}
+	if v.MalwareScanner != "" {
+		s.WriteString(schemas.ListScanJobSummariesInput_MalwareScanner, string(v.MalwareScanner))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListScanJobSummariesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScanJobSummariesInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListScanJobSummariesInput_ResourceType, *v.ResourceType)
+	}
+	if v.ScanResultStatus != "" {
+		s.WriteString(schemas.ListScanJobSummariesInput_ScanResultStatus, string(v.ScanResultStatus))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListScanJobSummariesInput_State, string(v.State))
+	}
+}
+
 type ListScanJobSummariesOutput struct {
 
 	// The period for the returned results.
@@ -112,74 +145,54 @@ type ListScanJobSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScanJobSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScanJobSummariesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScanJobSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationPeriod != nil {
+		s.WriteString(schemas.ListScanJobSummariesOutput_AggregationPeriod, *v.AggregationPeriod)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScanJobSummariesOutput_NextToken, *v.NextToken)
+	}
+	serializeScanJobSummaryList(s, schemas.ListScanJobSummariesOutput_ScanJobSummaries, v.ScanJobSummaries)
+}
+func (v *ListScanJobSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScanJobSummariesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScanJobSummariesOutput_AggregationPeriod:
+			v.AggregationPeriod = new(string)
+			return d.ReadString(schemas.ListScanJobSummariesOutput_AggregationPeriod, v.AggregationPeriod)
+		case schemas.ListScanJobSummariesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScanJobSummariesOutput_NextToken, v.NextToken)
+		case schemas.ListScanJobSummariesOutput_ScanJobSummaries:
+			return deserializeScanJobSummaryList(d, schemas.ListScanJobSummariesOutput_ScanJobSummaries, &v.ScanJobSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListScanJobSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScanJobSummaries, schemas.ListScanJobSummariesInput, schemas.ListScanJobSummariesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScanJobSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScanJobSummaries, schemas.ListScanJobSummariesInput, schemas.ListScanJobSummariesOutput), output: &ListScanJobSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListScanJobSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListScanJobSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScanJobSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +205,6 @@ func (c *Client) addOperationListScanJobSummariesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -301,11 +308,3 @@ type ListScanJobSummariesAPIClient interface {
 }
 
 var _ ListScanJobSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListScanJobSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListScanJobSummaries",
-	}
-}

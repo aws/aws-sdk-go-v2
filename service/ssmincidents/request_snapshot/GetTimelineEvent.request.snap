@@ -1,0 +1,3 @@
+GET /getTimelineEvent?eventId=__EventId__&incidentRecordArn=__IncidentRecordArn__
+
+

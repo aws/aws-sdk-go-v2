@@ -30,6 +30,26 @@ func (m *validateOpBatchGetRecord) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchWriteRecord struct {
+}
+
+func (*validateOpBatchWriteRecord) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchWriteRecord) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchWriteRecordInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchWriteRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRecord struct {
 }
 
@@ -70,6 +90,26 @@ func (m *validateOpGetRecord) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRecords struct {
+}
+
+func (*validateOpListRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutRecord struct {
 }
 
@@ -90,8 +130,32 @@ func (m *validateOpPutRecord) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRecord struct {
+}
+
+func (*validateOpUpdateRecord) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRecord) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRecordInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpBatchGetRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetRecord{}, middleware.After)
+}
+
+func addOpBatchWriteRecordValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchWriteRecord{}, middleware.After)
 }
 
 func addOpDeleteRecordValidationMiddleware(stack *middleware.Stack) error {
@@ -102,8 +166,16 @@ func addOpGetRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRecord{}, middleware.After)
 }
 
+func addOpListRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRecords{}, middleware.After)
+}
+
 func addOpPutRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutRecord{}, middleware.After)
+}
+
+func addOpUpdateRecordValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRecord{}, middleware.After)
 }
 
 func validateBatchGetRecordIdentifier(v *types.BatchGetRecordIdentifier) error {
@@ -132,6 +204,50 @@ func validateBatchGetRecordIdentifiers(v []types.BatchGetRecordIdentifier) error
 	for i := range v {
 		if err := validateBatchGetRecordIdentifier(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchWriteRecordEntries(v []types.BatchWriteRecordEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchWriteRecordEntries"}
+	for i := range v {
+		if err := validateBatchWriteRecordEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchWriteRecordEntry(v *types.BatchWriteRecordEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchWriteRecordEntry"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if v.Record == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Record"))
+	} else if v.Record != nil {
+		if err := validateRecord(v.Record); err != nil {
+			invalidParams.AddNested("Record", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TtlDuration != nil {
+		if err := validateTtlDuration(v.TtlDuration); err != nil {
+			invalidParams.AddNested("TtlDuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -210,6 +326,30 @@ func validateOpBatchGetRecordInput(v *BatchGetRecordInput) error {
 	}
 }
 
+func validateOpBatchWriteRecordInput(v *BatchWriteRecordInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchWriteRecordInput"}
+	if v.Entries == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entries"))
+	} else if v.Entries != nil {
+		if err := validateBatchWriteRecordEntries(v.Entries); err != nil {
+			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TtlDuration != nil {
+		if err := validateTtlDuration(v.TtlDuration); err != nil {
+			invalidParams.AddNested("TtlDuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRecordInput(v *DeleteRecordInput) error {
 	if v == nil {
 		return nil
@@ -249,6 +389,21 @@ func validateOpGetRecordInput(v *GetRecordInput) error {
 	}
 }
 
+func validateOpListRecordsInput(v *ListRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRecordsInput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutRecordInput(v *PutRecordInput) error {
 	if v == nil {
 		return nil
@@ -262,6 +417,36 @@ func validateOpPutRecordInput(v *PutRecordInput) error {
 	} else if v.Record != nil {
 		if err := validateRecord(v.Record); err != nil {
 			invalidParams.AddNested("Record", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TtlDuration != nil {
+		if err := validateTtlDuration(v.TtlDuration); err != nil {
+			invalidParams.AddNested("TtlDuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRecordInput(v *UpdateRecordInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRecordInput"}
+	if v.FeatureGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureGroupName"))
+	}
+	if v.RecordIdentifierValueAsString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecordIdentifierValueAsString"))
+	}
+	if v.Features == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Features"))
+	} else if v.Features != nil {
+		if err := validateRecord(v.Features); err != nil {
+			invalidParams.AddNested("Features", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.TtlDuration != nil {

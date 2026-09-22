@@ -1,0 +1,5 @@
+PATCH /reset-notifications-settings
+
+Content-Type: application/json
+
+{"notificationSettingKeys":[{"channel":"ALL","event":"CA_CERTIFICATE_EXPIRY"},{"channel":"ALL","event":"CA_CERTIFICATE_EXPIRY"}],"trustAnchorId":"__TrustAnchorId__"}

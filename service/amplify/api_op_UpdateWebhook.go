@@ -4,11 +4,10 @@ package amplify
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplify/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a webhook.
@@ -44,6 +43,24 @@ type UpdateWebhookInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebhookInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebhookRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebhookInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.UpdateWebhookRequest_branchName, *v.BranchName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWebhookRequest_description, *v.Description)
+	}
+	if v.WebhookId != nil {
+		s.WriteString(schemas.UpdateWebhookRequest_webhookId, *v.WebhookId)
+	}
+}
+
 // The result structure for the update webhook request.
 type UpdateWebhookOutput struct {
 
@@ -58,77 +75,50 @@ type UpdateWebhookOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWebhookOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWebhookResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWebhookOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Webhook != nil {
+		s.WriteStruct(schemas.UpdateWebhookResult_webhook)
+		v.Webhook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWebhookOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWebhookResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWebhookResult_webhook:
+			v.Webhook = &types.Webhook{}
+			return v.Webhook.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebhook, schemas.UpdateWebhookRequest, schemas.UpdateWebhookResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWebhook{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWebhook, schemas.UpdateWebhookRequest, schemas.UpdateWebhookResult), output: &UpdateWebhookOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWebhook{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWebhook"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateWebhookValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWebhook(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +133,8 @@ func (c *Client) addOperationUpdateWebhookMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateWebhook(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWebhook",
-	}
 }

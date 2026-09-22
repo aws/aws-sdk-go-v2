@@ -1,0 +1,5 @@
+POST /workloads/__WorkloadId__/updateIntegration
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","IntegratingService":"JIRA"}

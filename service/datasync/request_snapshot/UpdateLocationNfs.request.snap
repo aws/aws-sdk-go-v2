@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.UpdateLocationNfs
+
+{"LocationArn":"__LocationArn__","MountOptions":{"Version":"AUTOMATIC"},"OnPremConfig":{"AgentArns":["__Member__","__Member__"]},"ServerHostname":"__ServerHostname__","Subdirectory":"__Subdirectory__"}

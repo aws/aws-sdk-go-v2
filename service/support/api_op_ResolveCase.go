@@ -4,20 +4,22 @@ package support
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Resolves a support case. This operation takes a caseId and returns the initial
 // and final state of the case.
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
-//     use the Amazon Web Services Support API.
+//   - You must have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan to use the
+//     Amazon Web Services Support API. If you're in an Amazon Web Services Region that
+//     doesn't offer one of these Amazon Web Services Support plans, or if you haven't
+//     transitioned to one of these plans, you can use the Amazon Web Services Support
+//     API with a Business, Enterprise On-Ramp, or Enterprise Support plan.
 //
 //   - If you call the Amazon Web Services Support API from an account that
-//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     doesn't have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan, the
 //     SubscriptionRequiredException error message appears. For information about
 //     changing your support plan, see [Amazon Web Services Support].
 //
@@ -41,8 +43,14 @@ type ResolveCaseInput struct {
 
 	// The support case ID requested or returned in the call. The case ID is an
 	// alphanumeric string formatted as shown in this example:
-	// case-12345678910-2013-c4c1d2bf33c5cf47
+	// case-12345678910-exen-2025-c4c1d2bf33c5cf47
 	CaseId *string
+
+	// Specifies whether to validate the request without actually resolving the case.
+	// When set to true , the request is validated but the case isn't resolved, and the
+	// operation returns a DryRunOperationException . When omitted or set to false ,
+	// the request runs normally.
+	DryRun *bool
 
 	noSmithyDocumentSerde
 }
@@ -63,9 +71,6 @@ type ResolveCaseOutput struct {
 }
 
 func (c *Client) addOperationResolveCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpResolveCase{}, middleware.After)
 	if err != nil {
 		return err
@@ -74,62 +79,17 @@ func (c *Client) addOperationResolveCaseMiddlewares(stack *middleware.Stack, opt
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ResolveCase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResolveCase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +104,8 @@ func (c *Client) addOperationResolveCaseMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opResolveCase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ResolveCase",
-	}
 }

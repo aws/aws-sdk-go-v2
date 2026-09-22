@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"RegionName":"__RegionName__","RegionOptStatus":"ENABLED"}

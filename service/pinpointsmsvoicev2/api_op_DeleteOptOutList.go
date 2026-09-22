@@ -4,10 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -45,6 +44,18 @@ type DeleteOptOutListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOptOutListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOptOutListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOptOutListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.DeleteOptOutListRequest_OptOutListName, *v.OptOutListName)
+	}
+}
+
 type DeleteOptOutListOutput struct {
 
 	// The time when the OptOutList was created, in [UNIX epoch time] format.
@@ -64,77 +75,60 @@ type DeleteOptOutListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOptOutListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOptOutListResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOptOutListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteOptOutListResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.OptOutListArn != nil {
+		s.WriteString(schemas.DeleteOptOutListResult_OptOutListArn, *v.OptOutListArn)
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.DeleteOptOutListResult_OptOutListName, *v.OptOutListName)
+	}
+}
+func (v *DeleteOptOutListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOptOutListResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteOptOutListResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteOptOutListResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteOptOutListResult_OptOutListArn:
+			v.OptOutListArn = new(string)
+			return d.ReadString(schemas.DeleteOptOutListResult_OptOutListArn, v.OptOutListArn)
+		case schemas.DeleteOptOutListResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.DeleteOptOutListResult_OptOutListName, v.OptOutListName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOptOutListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOptOutList, schemas.DeleteOptOutListRequest, schemas.DeleteOptOutListResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteOptOutList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOptOutList, schemas.DeleteOptOutListRequest, schemas.DeleteOptOutListResult), output: &DeleteOptOutListOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteOptOutList{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOptOutList"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteOptOutListValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOptOutList(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +143,8 @@ func (c *Client) addOperationDeleteOptOutListMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteOptOutList(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteOptOutList",
-	}
 }

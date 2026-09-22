@@ -4,11 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the status of a deployment.
@@ -42,6 +41,21 @@ type GetDeploymentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.GetDeploymentStatusRequest_DeploymentId, *v.DeploymentId)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetDeploymentStatusRequest_GroupId, *v.GroupId)
+	}
+}
+
 type GetDeploymentStatusOutput struct {
 
 	// The status of the deployment: ''InProgress'', ''Building'', ''Success'', or
@@ -67,77 +81,73 @@ type GetDeploymentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentStatus != nil {
+		s.WriteString(schemas.GetDeploymentStatusResponse_DeploymentStatus, *v.DeploymentStatus)
+	}
+	if v.DeploymentType != "" {
+		s.WriteString(schemas.GetDeploymentStatusResponse_DeploymentType, string(v.DeploymentType))
+	}
+	serializeErrorDetails(s, schemas.GetDeploymentStatusResponse_ErrorDetails, v.ErrorDetails)
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GetDeploymentStatusResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteString(schemas.GetDeploymentStatusResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetDeploymentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeploymentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeploymentStatusResponse_DeploymentStatus:
+			v.DeploymentStatus = new(string)
+			return d.ReadString(schemas.GetDeploymentStatusResponse_DeploymentStatus, v.DeploymentStatus)
+		case schemas.GetDeploymentStatusResponse_DeploymentType:
+			var ev string
+			if err := d.ReadString(schemas.GetDeploymentStatusResponse_DeploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.DeploymentType(ev)
+			return nil
+		case schemas.GetDeploymentStatusResponse_ErrorDetails:
+			return deserializeErrorDetails(d, schemas.GetDeploymentStatusResponse_ErrorDetails, &v.ErrorDetails)
+		case schemas.GetDeploymentStatusResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GetDeploymentStatusResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.GetDeploymentStatusResponse_UpdatedAt:
+			v.UpdatedAt = new(string)
+			return d.ReadString(schemas.GetDeploymentStatusResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeploymentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeploymentStatus, schemas.GetDeploymentStatusRequest, schemas.GetDeploymentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeploymentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeploymentStatus, schemas.GetDeploymentStatusRequest, schemas.GetDeploymentStatusResponse), output: &GetDeploymentStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeploymentStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeploymentStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDeploymentStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeploymentStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +162,8 @@ func (c *Client) addOperationGetDeploymentStatusMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDeploymentStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDeploymentStatus",
-	}
 }

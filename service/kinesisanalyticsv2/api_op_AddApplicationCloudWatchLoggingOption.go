@@ -4,11 +4,10 @@ package kinesisanalyticsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds an Amazon CloudWatch log stream to monitor application configuration
@@ -56,6 +55,29 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationCloudWatchLoggingOptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationCloudWatchLoggingOptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationCloudWatchLoggingOptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.AddApplicationCloudWatchLoggingOptionRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.CloudWatchLoggingOption != nil {
+		s.WriteStruct(schemas.AddApplicationCloudWatchLoggingOptionRequest_CloudWatchLoggingOption)
+		v.CloudWatchLoggingOption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConditionalToken != nil {
+		s.WriteString(schemas.AddApplicationCloudWatchLoggingOptionRequest_ConditionalToken, *v.ConditionalToken)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.AddApplicationCloudWatchLoggingOptionRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+}
+
 type AddApplicationCloudWatchLoggingOptionOutput struct {
 
 	// The application's ARN.
@@ -79,77 +101,63 @@ type AddApplicationCloudWatchLoggingOptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddApplicationCloudWatchLoggingOptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddApplicationCloudWatchLoggingOptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddApplicationCloudWatchLoggingOptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+	serializeCloudWatchLoggingOptionDescriptions(s, schemas.AddApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	if v.OperationId != nil {
+		s.WriteString(schemas.AddApplicationCloudWatchLoggingOptionResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *AddApplicationCloudWatchLoggingOptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddApplicationCloudWatchLoggingOptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationARN, v.ApplicationARN)
+		case schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.AddApplicationCloudWatchLoggingOptionResponse_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.AddApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions:
+			return deserializeCloudWatchLoggingOptionDescriptions(d, schemas.AddApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions, &v.CloudWatchLoggingOptionDescriptions)
+		case schemas.AddApplicationCloudWatchLoggingOptionResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.AddApplicationCloudWatchLoggingOptionResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationCloudWatchLoggingOption, schemas.AddApplicationCloudWatchLoggingOptionRequest, schemas.AddApplicationCloudWatchLoggingOptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddApplicationCloudWatchLoggingOption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddApplicationCloudWatchLoggingOption, schemas.AddApplicationCloudWatchLoggingOptionRequest, schemas.AddApplicationCloudWatchLoggingOptionResponse), output: &AddApplicationCloudWatchLoggingOptionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddApplicationCloudWatchLoggingOption{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddApplicationCloudWatchLoggingOption"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAddApplicationCloudWatchLoggingOptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddApplicationCloudWatchLoggingOption(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +172,8 @@ func (c *Client) addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAddApplicationCloudWatchLoggingOption(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AddApplicationCloudWatchLoggingOption",
-	}
 }

@@ -4,11 +4,8 @@ package rds
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Aurora DB cluster from MySQL data stored in an Amazon S3
@@ -26,6 +23,10 @@ import (
 //
 // This operation only applies to Aurora DB clusters. The source DB engine must be
 // MySQL.
+//
+// You can use the AssociatedRoles parameter to associate one or more Amazon Web
+// Services Identity and Access Management (IAM) roles with the Aurora DB cluster
+// when you restore it from Amazon S3.
 //
 // [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
 // [Migrating Data from MySQL by Using an Amazon S3 Bucket]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html#AuroraMySQL.Migrating.ExtMySQL.S3
@@ -111,6 +112,13 @@ type RestoreDBClusterFromS3Input struct {
 	//
 	// This member is required.
 	SourceEngineVersion *string
+
+	// A list of Amazon Web Services Identity and Access Management (IAM) roles to
+	// associate with the DB cluster when it's restored from Amazon S3. Each role
+	// grants the DB cluster permission to access other Amazon Web Services on your
+	// behalf. For each role, specify a role ARN and, optionally, the feature name
+	// (such as s3Import , s3Export , or Lambda ).
+	AssociatedRoles []types.DBClusterAssociatedRole
 
 	// A list of Availability Zones (AZs) where instances in the restored DB cluster
 	// can be created.
@@ -215,7 +223,7 @@ type RestoreDBClusterFromS3Input struct {
 	// [IAM Database Authentication]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html
 	EnableIAMDatabaseAuthentication *bool
 
-	// The life cycle type for this DB cluster.
+	// The lifecycle type for this DB cluster.
 	//
 	// By default, this value is set to open-source-rds-extended-support , which
 	// enrolls your DB cluster into Amazon RDS Extended Support. At the end of standard
@@ -459,9 +467,6 @@ type RestoreDBClusterFromS3Output struct {
 }
 
 func (c *Client) addOperationRestoreDBClusterFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBClusterFromS3{}, middleware.After)
 	if err != nil {
 		return err
@@ -470,65 +475,20 @@ func (c *Client) addOperationRestoreDBClusterFromS3Middlewares(stack *middleware
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreDBClusterFromS3"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRestoreDBClusterFromS3ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreDBClusterFromS3(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -543,22 +503,8 @@ func (c *Client) addOperationRestoreDBClusterFromS3Middlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRestoreDBClusterFromS3(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RestoreDBClusterFromS3",
-	}
 }

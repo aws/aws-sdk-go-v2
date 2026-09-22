@@ -1,0 +1,3 @@
+GET /notification-configurations?channelArn=__ChannelArn__&eventRuleSource=__EventRuleSource__&maxResults=1&nextToken=__NextToken__&status=ACTIVE&subtype=ACCOUNT
+
+

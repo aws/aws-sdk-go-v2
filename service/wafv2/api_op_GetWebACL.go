@@ -4,11 +4,10 @@ package wafv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the specified WebACL.
@@ -55,6 +54,27 @@ type GetWebACLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWebACLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWebACLRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWebACLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.GetWebACLRequest_ARN, *v.ARN)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetWebACLRequest_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetWebACLRequest_Name, *v.Name)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.GetWebACLRequest_Scope, string(v.Scope))
+	}
+}
+
 type GetWebACLOutput struct {
 
 	// The URL to use in SDK integrations with Amazon Web Services managed rule
@@ -87,74 +107,59 @@ type GetWebACLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWebACLOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWebACLResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWebACLOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationIntegrationURL != nil {
+		s.WriteString(schemas.GetWebACLResponse_ApplicationIntegrationURL, *v.ApplicationIntegrationURL)
+	}
+	if v.LockToken != nil {
+		s.WriteString(schemas.GetWebACLResponse_LockToken, *v.LockToken)
+	}
+	if v.WebACL != nil {
+		s.WriteStruct(schemas.GetWebACLResponse_WebACL)
+		v.WebACL.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetWebACLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWebACLResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWebACLResponse_ApplicationIntegrationURL:
+			v.ApplicationIntegrationURL = new(string)
+			return d.ReadString(schemas.GetWebACLResponse_ApplicationIntegrationURL, v.ApplicationIntegrationURL)
+		case schemas.GetWebACLResponse_LockToken:
+			v.LockToken = new(string)
+			return d.ReadString(schemas.GetWebACLResponse_LockToken, v.LockToken)
+		case schemas.GetWebACLResponse_WebACL:
+			v.WebACL = &types.WebACL{}
+			return v.WebACL.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebACL, schemas.GetWebACLRequest, schemas.GetWebACLResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetWebACL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWebACL, schemas.GetWebACLRequest, schemas.GetWebACLResponse), output: &GetWebACLOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetWebACL{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWebACL"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWebACL(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +174,8 @@ func (c *Client) addOperationGetWebACLMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetWebACL(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWebACL",
-	}
 }

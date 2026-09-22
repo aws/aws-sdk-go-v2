@@ -1,0 +1,5 @@
+POST /v1/GetSubscription
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

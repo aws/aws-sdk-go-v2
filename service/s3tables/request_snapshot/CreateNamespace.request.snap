@@ -1,0 +1,5 @@
+PUT /namespaces/__TableBucketARN__
+
+Content-Type: application/json
+
+{"namespace":["__Member__","__Member__"]}

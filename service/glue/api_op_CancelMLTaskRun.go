@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels (stops) a task run. Machine learning task runs are asynchronous tasks
@@ -45,6 +44,21 @@ type CancelMLTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMLTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMLTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMLTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskRunId != nil {
+		s.WriteString(schemas.CancelMLTaskRunRequest_TaskRunId, *v.TaskRunId)
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.CancelMLTaskRunRequest_TransformId, *v.TransformId)
+	}
+}
+
 type CancelMLTaskRunOutput struct {
 
 	// The status for this run.
@@ -62,77 +76,64 @@ type CancelMLTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMLTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMLTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMLTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.CancelMLTaskRunResponse_Status, string(v.Status))
+	}
+	if v.TaskRunId != nil {
+		s.WriteString(schemas.CancelMLTaskRunResponse_TaskRunId, *v.TaskRunId)
+	}
+	if v.TransformId != nil {
+		s.WriteString(schemas.CancelMLTaskRunResponse_TransformId, *v.TransformId)
+	}
+}
+func (v *CancelMLTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMLTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelMLTaskRunResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CancelMLTaskRunResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TaskStatusType(ev)
+			return nil
+		case schemas.CancelMLTaskRunResponse_TaskRunId:
+			v.TaskRunId = new(string)
+			return d.ReadString(schemas.CancelMLTaskRunResponse_TaskRunId, v.TaskRunId)
+		case schemas.CancelMLTaskRunResponse_TransformId:
+			v.TransformId = new(string)
+			return d.ReadString(schemas.CancelMLTaskRunResponse_TransformId, v.TransformId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMLTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMLTaskRun, schemas.CancelMLTaskRunRequest, schemas.CancelMLTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelMLTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMLTaskRun, schemas.CancelMLTaskRunRequest, schemas.CancelMLTaskRunResponse), output: &CancelMLTaskRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelMLTaskRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelMLTaskRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelMLTaskRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelMLTaskRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +148,8 @@ func (c *Client) addOperationCancelMLTaskRunMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelMLTaskRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelMLTaskRun",
-	}
 }

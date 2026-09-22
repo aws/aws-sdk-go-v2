@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyInstanceConnectEndpoint&DryRun=true&InstanceConnectEndpointId=__InstanceConnectEndpointId__&IpAddressType=ipv4&PreserveClientIp=true&SecurityGroupId.1=__Member__&SecurityGroupId.2=__Member__&Version=2016-11-15

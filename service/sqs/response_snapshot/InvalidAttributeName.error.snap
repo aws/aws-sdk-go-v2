@@ -1,0 +1,6 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.CreateQueue
+X-Amzn-Query-Mode: true
+
+{"__type":"InvalidAttributeName","message":"__Message__"}

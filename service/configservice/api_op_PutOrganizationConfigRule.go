@@ -4,11 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds or updates an Config rule for your entire organization to evaluate if your
@@ -115,7 +114,40 @@ type PutOrganizationConfigRuleInput struct {
 	// periodic.
 	OrganizationManagedRuleMetadata *types.OrganizationManagedRuleMetadata
 
+	// The tags for the organization Config rule. Each tag consists of a key and an
+	// optional value, both of which you define.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
+}
+
+func (v *PutOrganizationConfigRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutOrganizationConfigRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutOrganizationConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExcludedAccounts(s, schemas.PutOrganizationConfigRuleRequest_ExcludedAccounts, v.ExcludedAccounts)
+	if v.OrganizationConfigRuleName != nil {
+		s.WriteString(schemas.PutOrganizationConfigRuleRequest_OrganizationConfigRuleName, *v.OrganizationConfigRuleName)
+	}
+	if v.OrganizationCustomPolicyRuleMetadata != nil {
+		s.WriteStruct(schemas.PutOrganizationConfigRuleRequest_OrganizationCustomPolicyRuleMetadata)
+		v.OrganizationCustomPolicyRuleMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationCustomRuleMetadata != nil {
+		s.WriteStruct(schemas.PutOrganizationConfigRuleRequest_OrganizationCustomRuleMetadata)
+		v.OrganizationCustomRuleMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationManagedRuleMetadata != nil {
+		s.WriteStruct(schemas.PutOrganizationConfigRuleRequest_OrganizationManagedRuleMetadata)
+		v.OrganizationManagedRuleMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsList(s, schemas.PutOrganizationConfigRuleRequest_Tags, v.Tags)
 }
 
 type PutOrganizationConfigRuleOutput struct {
@@ -129,77 +161,48 @@ type PutOrganizationConfigRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutOrganizationConfigRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutOrganizationConfigRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutOrganizationConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OrganizationConfigRuleArn != nil {
+		s.WriteString(schemas.PutOrganizationConfigRuleResponse_OrganizationConfigRuleArn, *v.OrganizationConfigRuleArn)
+	}
+}
+func (v *PutOrganizationConfigRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutOrganizationConfigRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutOrganizationConfigRuleResponse_OrganizationConfigRuleArn:
+			v.OrganizationConfigRuleArn = new(string)
+			return d.ReadString(schemas.PutOrganizationConfigRuleResponse_OrganizationConfigRuleArn, v.OrganizationConfigRuleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutOrganizationConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOrganizationConfigRule, schemas.PutOrganizationConfigRuleRequest, schemas.PutOrganizationConfigRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutOrganizationConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOrganizationConfigRule, schemas.PutOrganizationConfigRuleRequest, schemas.PutOrganizationConfigRuleResponse), output: &PutOrganizationConfigRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutOrganizationConfigRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutOrganizationConfigRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutOrganizationConfigRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutOrganizationConfigRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,22 +217,8 @@ func (c *Client) addOperationPutOrganizationConfigRuleMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutOrganizationConfigRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutOrganizationConfigRule",
-	}
 }

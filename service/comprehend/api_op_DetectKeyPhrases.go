@@ -4,11 +4,10 @@ package comprehend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Detects the key noun phrases found in the text.
@@ -45,6 +44,21 @@ type DetectKeyPhrasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectKeyPhrasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectKeyPhrasesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectKeyPhrasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.DetectKeyPhrasesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.DetectKeyPhrasesRequest_Text, *v.Text)
+	}
+}
+
 type DetectKeyPhrasesOutput struct {
 
 	// A collection of key phrases that Amazon Comprehend identified in the input
@@ -59,77 +73,45 @@ type DetectKeyPhrasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectKeyPhrasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectKeyPhrasesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectKeyPhrasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfKeyPhrases(s, schemas.DetectKeyPhrasesResponse_KeyPhrases, v.KeyPhrases)
+}
+func (v *DetectKeyPhrasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectKeyPhrasesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectKeyPhrasesResponse_KeyPhrases:
+			return deserializeListOfKeyPhrases(d, schemas.DetectKeyPhrasesResponse_KeyPhrases, &v.KeyPhrases)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectKeyPhrasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectKeyPhrases, schemas.DetectKeyPhrasesRequest, schemas.DetectKeyPhrasesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDetectKeyPhrases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectKeyPhrases, schemas.DetectKeyPhrasesRequest, schemas.DetectKeyPhrasesResponse), output: &DetectKeyPhrasesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDetectKeyPhrases{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DetectKeyPhrases"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDetectKeyPhrasesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectKeyPhrases(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +126,8 @@ func (c *Client) addOperationDetectKeyPhrasesMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDetectKeyPhrases(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DetectKeyPhrases",
-	}
 }

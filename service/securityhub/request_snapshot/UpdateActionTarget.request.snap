@@ -1,0 +1,5 @@
+PATCH /actionTargets/__ActionTargetArn__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__"}

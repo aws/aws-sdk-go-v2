@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"streamKey":{"arn":"__Arn__","channelArn":"__ChannelArn__","tags":{"key0":"__Value__"},"value":"__Value__"}}

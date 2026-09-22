@@ -1,0 +1,5 @@
+POST /queries/execution
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","queryStatement":"__QueryStatement__","workspaceId":"__WorkspaceId__"}

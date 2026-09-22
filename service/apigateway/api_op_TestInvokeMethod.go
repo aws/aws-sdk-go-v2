@@ -4,10 +4,9 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Simulate the invocation of a Method in your RestApi with headers, parameters,
@@ -71,6 +70,36 @@ type TestInvokeMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestInvokeMethodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestInvokeMethodRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestInvokeMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_body, *v.Body)
+	}
+	if v.ClientCertificateId != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_clientCertificateId, *v.ClientCertificateId)
+	}
+	serializeMapOfStringToString(s, schemas.TestInvokeMethodRequest_headers, v.Headers)
+	if v.HttpMethod != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_httpMethod, *v.HttpMethod)
+	}
+	serializeMapOfStringToList(s, schemas.TestInvokeMethodRequest_multiValueHeaders, v.MultiValueHeaders)
+	if v.PathWithQueryString != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_pathWithQueryString, *v.PathWithQueryString)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_resourceId, *v.ResourceId)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.TestInvokeMethodRequest_restApiId, *v.RestApiId)
+	}
+	serializeMapOfStringToString(s, schemas.TestInvokeMethodRequest_stageVariables, v.StageVariables)
+}
+
 // Represents the response of the test invoke request in the HTTP method.
 type TestInvokeMethodOutput struct {
 
@@ -98,77 +127,70 @@ type TestInvokeMethodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestInvokeMethodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestInvokeMethodResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestInvokeMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.TestInvokeMethodResponse_body, *v.Body)
+	}
+	serializeMapOfStringToString(s, schemas.TestInvokeMethodResponse_headers, v.Headers)
+	if v.Latency != 0 {
+		s.WriteInt64(schemas.TestInvokeMethodResponse_latency, v.Latency)
+	}
+	if v.Log != nil {
+		s.WriteString(schemas.TestInvokeMethodResponse_log, *v.Log)
+	}
+	serializeMapOfStringToList(s, schemas.TestInvokeMethodResponse_multiValueHeaders, v.MultiValueHeaders)
+	if v.Status != 0 {
+		s.WriteInt32(schemas.TestInvokeMethodResponse_status, v.Status)
+	}
+}
+func (v *TestInvokeMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestInvokeMethodResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestInvokeMethodResponse_body:
+			v.Body = new(string)
+			return d.ReadString(schemas.TestInvokeMethodResponse_body, v.Body)
+		case schemas.TestInvokeMethodResponse_headers:
+			return deserializeMapOfStringToString(d, schemas.TestInvokeMethodResponse_headers, &v.Headers)
+		case schemas.TestInvokeMethodResponse_latency:
+			return d.ReadInt64(schemas.TestInvokeMethodResponse_latency, &v.Latency)
+		case schemas.TestInvokeMethodResponse_log:
+			v.Log = new(string)
+			return d.ReadString(schemas.TestInvokeMethodResponse_log, v.Log)
+		case schemas.TestInvokeMethodResponse_multiValueHeaders:
+			return deserializeMapOfStringToList(d, schemas.TestInvokeMethodResponse_multiValueHeaders, &v.MultiValueHeaders)
+		case schemas.TestInvokeMethodResponse_status:
+			return d.ReadInt32(schemas.TestInvokeMethodResponse_status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestInvokeMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestInvokeMethod, schemas.TestInvokeMethodRequest, schemas.TestInvokeMethodResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestInvokeMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestInvokeMethod, schemas.TestInvokeMethodRequest, schemas.TestInvokeMethodResponse), output: &TestInvokeMethodOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestInvokeMethod{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestInvokeMethod"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTestInvokeMethodValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestInvokeMethod(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +208,8 @@ func (c *Client) addOperationTestInvokeMethodMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTestInvokeMethod(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TestInvokeMethod",
-	}
 }

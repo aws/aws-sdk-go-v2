@@ -1,0 +1,5 @@
+404
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.CreateAccess
+
+{"__type":"ResourceNotFoundException","Message":"__Message__","Resource":"__Resource__","ResourceType":"__ResourceType__"}

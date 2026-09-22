@@ -4,11 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -17,6 +14,15 @@ import (
 // the policy's identity. The updated policy is validated against the Cedar schema
 // before being applied. This is an asynchronous operation. Use the GetPolicy
 // operation to poll the status field to track completion.
+//
+// If the updated policy is a temporal policy, the policy engine invalidates all
+// active temporal sessions. If the update adds or removes temporal operators, the
+// policy engine also invalidates active temporal sessions. For more information
+// about temporal policy sessions, see [session-based temporal policies]. The policy engine returns an HTTP 409
+// ConflictException to in-flight sessions. To resume, you must start a new session
+// with a new session ID.
+//
+// [session-based temporal policies]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/policy-session-based-temporal.html
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyInput{}
@@ -46,14 +52,20 @@ type UpdatePolicyInput struct {
 	// This member is required.
 	PolicyId *string
 
-	// The new Cedar policy statement that defines the access control rules. This
-	// replaces the existing policy definition with new logic while maintaining the
-	// policy's identity.
+	// The new Cedar or Dogwood policy statement that defines the access control
+	// rules. This replaces the existing policy definition with new logic while
+	// maintaining the policy's identity.
 	Definition types.PolicyDefinition
 
 	// The new human-readable description for the policy. This optional field allows
 	// updating the policy's documentation while keeping the same policy logic.
 	Description *types.UpdatedDescription
+
+	// The enforcement mode for the policy. Run this policy in LOG_ONLY mode to
+	// collect data on how it affects your application. Once you are satisfied with the
+	// data gathered, switch the policy to ACTIVE . If you omit this field, the
+	// policy's existing enforcement mode is unchanged.
+	EnforcementMode types.EnforcementMode
 
 	// The validation mode for the policy update. Determines how Cedar analyzer
 	// validation results are handled during policy updates. FAIL_ON_ANY_FINDINGS runs
@@ -74,7 +86,7 @@ type UpdatePolicyOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The updated Cedar policy statement.
+	// The updated Cedar or Dogwood policy statement.
 	//
 	// This member is required.
 	Definition types.PolicyDefinition
@@ -117,6 +129,9 @@ type UpdatePolicyOutput struct {
 	// The updated description of the policy.
 	Description *string
 
+	// The current enforcement mode of the updated policy.
+	EnforcementMode types.EnforcementMode
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -124,9 +139,6 @@ type UpdatePolicyOutput struct {
 }
 
 func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePolicy{}, middleware.After)
 	if err != nil {
 		return err
@@ -135,65 +147,20 @@ func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,22 +175,8 @@ func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePolicy",
-	}
 }

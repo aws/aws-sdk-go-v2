@@ -1,0 +1,5 @@
+POST /applications
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","idcInstanceArn":"__IdcInstanceArn__","name":"__Name__","tags":{"key0":"__Value__"},"workspaceName":"__WorkspaceName__"}

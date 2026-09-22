@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.DescribeEventTracker
+
+{"eventTracker":{"accountId":"__AccountId__","creationDateTime":946684800,"datasetGroupArn":"__DatasetGroupArn__","eventTrackerArn":"__EventTrackerArn__","lastUpdatedDateTime":946684800,"name":"__Name__","status":"__Status__","trackingId":"__TrackingId__"}}

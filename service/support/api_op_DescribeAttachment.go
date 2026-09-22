@@ -4,11 +4,8 @@ package support
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the attachment that has the specified ID. Attachments can include
@@ -17,13 +14,26 @@ import (
 // or case communication. Attachment IDs are returned in the AttachmentDetailsobjects that are
 // returned by the DescribeCommunicationsoperation.
 //
-//   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
-//     use the Amazon Web Services Support API.
+//   - You must have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan to use the
+//     Amazon Web Services Support API. If you're in an Amazon Web Services Region that
+//     doesn't offer one of these Amazon Web Services Support plans, or if you haven't
+//     transitioned to one of these plans, you can use the Amazon Web Services Support
+//     API with a Business, Enterprise On-Ramp, or Enterprise Support plan.
 //
 //   - If you call the Amazon Web Services Support API from an account that
-//     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+//     doesn't have an Amazon Web Services Business Support+, Amazon Web Services
+//     Enterprise Support, or Amazon Web Services Unified Operations plan, the
 //     SubscriptionRequiredException error message appears. For information about
 //     changing your support plan, see [Amazon Web Services Support].
+//
+// DescribeAttachment can't return attachments larger than 5 MB. If the specified
+// attachmentId refers to an attachment larger than 5 MB, the request fails with
+// InvalidParameterValueException .
+//
+// To download an attachment of any size, including attachments larger than 5 MB,
+// use GetAttachmentDownloadLink. GetAttachmentDownloadLink returns an Amazon S3 presigned URL that you can
+// use to download the attachment directly.
 //
 // [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 func (c *Client) DescribeAttachment(ctx context.Context, params *DescribeAttachmentInput, optFns ...func(*Options)) (*DescribeAttachmentOutput, error) {
@@ -46,8 +56,17 @@ type DescribeAttachmentInput struct {
 	// The ID of the attachment to return. Attachment IDs are returned by the DescribeCommunications
 	// operation.
 	//
+	// If the specified attachment is larger than 5 MB, this operation returns
+	// InvalidParameterValueException . To download attachments larger than 5 MB, use GetAttachmentDownloadLink.
+	//
 	// This member is required.
 	AttachmentId *string
+
+	// Specifies whether to validate the request without actually retrieving the
+	// attachment. When set to true , the request is validated but no attachment
+	// content is returned, and the operation returns a DryRunOperationException . When
+	// omitted or set to false , the request runs normally.
+	DryRun *bool
 
 	noSmithyDocumentSerde
 }
@@ -69,9 +88,6 @@ type DescribeAttachmentOutput struct {
 }
 
 func (c *Client) addOperationDescribeAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAttachment{}, middleware.After)
 	if err != nil {
 		return err
@@ -80,65 +96,20 @@ func (c *Client) addOperationDescribeAttachmentMiddlewares(stack *middleware.Sta
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAttachment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAttachmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAttachment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +124,8 @@ func (c *Client) addOperationDescribeAttachmentMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAttachment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAttachment",
-	}
 }

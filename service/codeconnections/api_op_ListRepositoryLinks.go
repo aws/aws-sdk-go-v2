@@ -5,10 +5,10 @@ package codeconnections
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeconnections/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeconnections/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the repository links created for connections in your account.
@@ -39,6 +39,21 @@ type ListRepositoryLinksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositoryLinksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositoryLinksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositoryLinksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListRepositoryLinksInput_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositoryLinksInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListRepositoryLinksOutput struct {
 
 	// Lists the repository links called by the list repository links operation.
@@ -56,74 +71,48 @@ type ListRepositoryLinksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositoryLinksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositoryLinksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositoryLinksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositoryLinksOutput_NextToken, *v.NextToken)
+	}
+	serializeRepositoryLinkList(s, schemas.ListRepositoryLinksOutput_RepositoryLinks, v.RepositoryLinks)
+}
+func (v *ListRepositoryLinksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRepositoryLinksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRepositoryLinksOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRepositoryLinksOutput_NextToken, v.NextToken)
+		case schemas.ListRepositoryLinksOutput_RepositoryLinks:
+			return deserializeRepositoryLinkList(d, schemas.ListRepositoryLinksOutput_RepositoryLinks, &v.RepositoryLinks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRepositoryLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositoryLinks, schemas.ListRepositoryLinksInput, schemas.ListRepositoryLinksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRepositoryLinks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositoryLinks, schemas.ListRepositoryLinksInput, schemas.ListRepositoryLinksOutput), output: &ListRepositoryLinksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRepositoryLinks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRepositoryLinks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRepositoryLinks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,12 +125,6 @@ func (c *Client) addOperationListRepositoryLinksMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -239,11 +222,3 @@ type ListRepositoryLinksAPIClient interface {
 }
 
 var _ ListRepositoryLinksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRepositoryLinks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRepositoryLinks",
-	}
-}

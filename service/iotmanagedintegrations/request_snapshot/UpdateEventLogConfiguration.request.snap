@@ -1,0 +1,5 @@
+PATCH /event-log-configurations/__Id__
+
+Content-Type: application/json
+
+{"EventLogLevel":"DEBUG"}

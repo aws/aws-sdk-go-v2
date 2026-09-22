@@ -5,9 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API is in preview release for Connect Customer and is subject to change.
@@ -53,6 +53,24 @@ type AssociateSecurityKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSecurityKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSecurityKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSecurityKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateSecurityKeyRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.AssociateSecurityKeyRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.AssociateSecurityKeyRequest_Key, *v.Key)
+	}
+}
+
 type AssociateSecurityKeyOutput struct {
 
 	// The existing association identifier that uniquely identifies the resource type
@@ -65,65 +83,42 @@ type AssociateSecurityKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSecurityKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSecurityKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSecurityKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.AssociateSecurityKeyResponse_AssociationId, *v.AssociationId)
+	}
+}
+func (v *AssociateSecurityKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSecurityKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSecurityKeyResponse_AssociationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.AssociateSecurityKeyResponse_AssociationId, v.AssociationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSecurityKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSecurityKey, schemas.AssociateSecurityKeyRequest, schemas.AssociateSecurityKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSecurityKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSecurityKey, schemas.AssociateSecurityKeyRequest, schemas.AssociateSecurityKeyResponse), output: &AssociateSecurityKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSecurityKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateSecurityKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -133,12 +128,6 @@ func (c *Client) addOperationAssociateSecurityKeyMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpAssociateSecurityKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateSecurityKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +140,6 @@ func (c *Client) addOperationAssociateSecurityKeyMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -196,12 +179,4 @@ func (m *idempotencyToken_initializeOpAssociateSecurityKey) HandleInitialize(ctx
 }
 func addIdempotencyToken_opAssociateSecurityKeyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateSecurityKey{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAssociateSecurityKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateSecurityKey",
-	}
 }

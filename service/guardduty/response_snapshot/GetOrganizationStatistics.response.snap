@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"organizationDetails":{"organizationStatistics":{"activeAccountsCount":1,"countByFeature":[{"additionalConfiguration":[{"enabledAccountsCount":1,"name":"EKS_ADDON_MANAGEMENT"},{"enabledAccountsCount":1,"name":"EKS_ADDON_MANAGEMENT"}],"enabledAccountsCount":1,"name":"S3_DATA_EVENTS"},{"additionalConfiguration":[{"enabledAccountsCount":1,"name":"EKS_ADDON_MANAGEMENT"},{"enabledAccountsCount":1,"name":"EKS_ADDON_MANAGEMENT"}],"enabledAccountsCount":1,"name":"S3_DATA_EVENTS"}],"enabledAccountsCount":1,"memberAccountsCount":1,"totalAccountsCount":1},"updatedAt":946684800}}

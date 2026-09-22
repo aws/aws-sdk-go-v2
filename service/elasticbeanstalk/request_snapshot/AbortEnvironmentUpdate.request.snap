@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AbortEnvironmentUpdate&EnvironmentId=__EnvironmentId__&EnvironmentName=__EnvironmentName__&Version=2010-12-01

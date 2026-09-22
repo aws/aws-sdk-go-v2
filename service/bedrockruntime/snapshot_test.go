@@ -122,6 +122,18 @@ func TestCheckSnapshot_GetAsyncInvoke(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InvokeGuardrailChecks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeGuardrailChecks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InvokeGuardrailChecks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_InvokeModel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.InvokeModel(context.Background(), nil, func(o *Options) {
@@ -234,6 +246,18 @@ func TestUpdateSnapshot_GetAsyncInvoke(t *testing.T) {
 	_, err := svc.GetAsyncInvoke(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetAsyncInvoke")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_InvokeGuardrailChecks(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InvokeGuardrailChecks(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InvokeGuardrailChecks")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -5,10 +5,10 @@ package gamelift
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -69,6 +69,25 @@ type DescribeMatchmakingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMatchmakingConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMatchmakingConfigurationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMatchmakingConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeMatchmakingConfigurationsInput_Limit, *v.Limit)
+	}
+	serializeMatchmakingConfigurationNameList(s, schemas.DescribeMatchmakingConfigurationsInput_Names, v.Names)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMatchmakingConfigurationsInput_NextToken, *v.NextToken)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.DescribeMatchmakingConfigurationsInput_RuleSetName, *v.RuleSetName)
+	}
+}
+
 type DescribeMatchmakingConfigurationsOutput struct {
 
 	// A collection of requested matchmaking configurations.
@@ -85,77 +104,51 @@ type DescribeMatchmakingConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMatchmakingConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMatchmakingConfigurationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMatchmakingConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMatchmakingConfigurationList(s, schemas.DescribeMatchmakingConfigurationsOutput_Configurations, v.Configurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeMatchmakingConfigurationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeMatchmakingConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMatchmakingConfigurationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMatchmakingConfigurationsOutput_Configurations:
+			return deserializeMatchmakingConfigurationList(d, schemas.DescribeMatchmakingConfigurationsOutput_Configurations, &v.Configurations)
+		case schemas.DescribeMatchmakingConfigurationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeMatchmakingConfigurationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMatchmakingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMatchmakingConfigurations, schemas.DescribeMatchmakingConfigurationsInput, schemas.DescribeMatchmakingConfigurationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeMatchmakingConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMatchmakingConfigurations, schemas.DescribeMatchmakingConfigurationsInput, schemas.DescribeMatchmakingConfigurationsOutput), output: &DescribeMatchmakingConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeMatchmakingConfigurations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeMatchmakingConfigurations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMatchmakingConfigurations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +161,6 @@ func (c *Client) addOperationDescribeMatchmakingConfigurationsMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +265,3 @@ type DescribeMatchmakingConfigurationsAPIClient interface {
 }
 
 var _ DescribeMatchmakingConfigurationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeMatchmakingConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeMatchmakingConfigurations",
-	}
-}

@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a cached volume on a specified cached volume gateway. This operation is
@@ -120,6 +119,41 @@ type CreateCachediSCSIVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCachediSCSIVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCachediSCSIVolumeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCachediSCSIVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCachediSCSIVolumeInput_ClientToken, *v.ClientToken)
+	}
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.CreateCachediSCSIVolumeInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.KMSEncrypted != nil {
+		s.WriteBool(schemas.CreateCachediSCSIVolumeInput_KMSEncrypted, *v.KMSEncrypted)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.CreateCachediSCSIVolumeInput_KMSKey, *v.KMSKey)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.CreateCachediSCSIVolumeInput_NetworkInterfaceId, *v.NetworkInterfaceId)
+	}
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.CreateCachediSCSIVolumeInput_SnapshotId, *v.SnapshotId)
+	}
+	if v.SourceVolumeARN != nil {
+		s.WriteString(schemas.CreateCachediSCSIVolumeInput_SourceVolumeARN, *v.SourceVolumeARN)
+	}
+	serializeTags(s, schemas.CreateCachediSCSIVolumeInput_Tags, v.Tags)
+	if v.TargetName != nil {
+		s.WriteString(schemas.CreateCachediSCSIVolumeInput_TargetName, *v.TargetName)
+	}
+	s.WriteInt64(schemas.CreateCachediSCSIVolumeInput_VolumeSizeInBytes, v.VolumeSizeInBytes)
+}
+
 type CreateCachediSCSIVolumeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI
@@ -135,77 +169,54 @@ type CreateCachediSCSIVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCachediSCSIVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCachediSCSIVolumeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCachediSCSIVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetARN != nil {
+		s.WriteString(schemas.CreateCachediSCSIVolumeOutput_TargetARN, *v.TargetARN)
+	}
+	if v.VolumeARN != nil {
+		s.WriteString(schemas.CreateCachediSCSIVolumeOutput_VolumeARN, *v.VolumeARN)
+	}
+}
+func (v *CreateCachediSCSIVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCachediSCSIVolumeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCachediSCSIVolumeOutput_TargetARN:
+			v.TargetARN = new(string)
+			return d.ReadString(schemas.CreateCachediSCSIVolumeOutput_TargetARN, v.TargetARN)
+		case schemas.CreateCachediSCSIVolumeOutput_VolumeARN:
+			v.VolumeARN = new(string)
+			return d.ReadString(schemas.CreateCachediSCSIVolumeOutput_VolumeARN, v.VolumeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCachediSCSIVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCachediSCSIVolume, schemas.CreateCachediSCSIVolumeInput, schemas.CreateCachediSCSIVolumeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateCachediSCSIVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCachediSCSIVolume, schemas.CreateCachediSCSIVolumeInput, schemas.CreateCachediSCSIVolumeOutput), output: &CreateCachediSCSIVolumeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateCachediSCSIVolume{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCachediSCSIVolume"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCachediSCSIVolumeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCachediSCSIVolume(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -220,22 +231,8 @@ func (c *Client) addOperationCreateCachediSCSIVolumeMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCachediSCSIVolume(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCachediSCSIVolume",
-	}
 }

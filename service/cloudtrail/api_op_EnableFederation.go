@@ -4,15 +4,17 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Enables Lake query federation on the specified event data store. Federating an
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
 //
+// Enables Lake query federation on the specified event data store. Federating an
 // event data store lets you view the metadata associated with the event data store
 // in the Glue [Data Catalog]and run SQL queries against your event data using Amazon Athena.
 // The table metadata stored in the Glue Data Catalog lets the Athena query engine
@@ -28,6 +30,7 @@ import (
 // For more information about Lake query federation, see [Federate an event data store].
 //
 // [Federate an event data store]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [Lake Formation]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation-lake-formation.html
 // [Data Catalog]: https://docs.aws.amazon.com/glue/latest/dg/components-overview.html#data-catalog-intro
 func (c *Client) EnableFederation(ctx context.Context, params *EnableFederationInput, optFns ...func(*Options)) (*EnableFederationOutput, error) {
@@ -66,6 +69,21 @@ type EnableFederationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableFederationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableFederationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableFederationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.EnableFederationRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.FederationRoleArn != nil {
+		s.WriteString(schemas.EnableFederationRequest_FederationRoleArn, *v.FederationRoleArn)
+	}
+}
+
 type EnableFederationOutput struct {
 
 	//  The ARN of the event data store for which you enabled Lake query federation.
@@ -83,77 +101,64 @@ type EnableFederationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableFederationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableFederationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableFederationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.EnableFederationResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	if v.FederationRoleArn != nil {
+		s.WriteString(schemas.EnableFederationResponse_FederationRoleArn, *v.FederationRoleArn)
+	}
+	if v.FederationStatus != "" {
+		s.WriteString(schemas.EnableFederationResponse_FederationStatus, string(v.FederationStatus))
+	}
+}
+func (v *EnableFederationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableFederationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableFederationResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.EnableFederationResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.EnableFederationResponse_FederationRoleArn:
+			v.FederationRoleArn = new(string)
+			return d.ReadString(schemas.EnableFederationResponse_FederationRoleArn, v.FederationRoleArn)
+		case schemas.EnableFederationResponse_FederationStatus:
+			var ev string
+			if err := d.ReadString(schemas.EnableFederationResponse_FederationStatus, &ev); err != nil {
+				return err
+			}
+			v.FederationStatus = types.FederationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableFederationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableFederation, schemas.EnableFederationRequest, schemas.EnableFederationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpEnableFederation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableFederation, schemas.EnableFederationRequest, schemas.EnableFederationResponse), output: &EnableFederationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpEnableFederation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableFederation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpEnableFederationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableFederation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +173,8 @@ func (c *Client) addOperationEnableFederationMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opEnableFederation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EnableFederation",
-	}
 }

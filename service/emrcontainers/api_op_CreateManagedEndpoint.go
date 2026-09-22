@@ -5,10 +5,10 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a managed endpoint. A managed endpoint is a gateway that connects
@@ -72,10 +72,52 @@ type CreateManagedEndpointInput struct {
 	// configurations.
 	ConfigurationOverrides *types.ConfigurationOverrides
 
+	// The number of idle minutes before the managed endpoint session times out.
+	SessionIdleTimeoutInMinutes int32
+
 	// The tags of the managed endpoint.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateManagedEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateManagedEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateManagedEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateArn != nil {
+		s.WriteString(schemas.CreateManagedEndpointRequest_certificateArn, *v.CertificateArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateManagedEndpointRequest_clientToken, *v.ClientToken)
+	}
+	if v.ConfigurationOverrides != nil {
+		s.WriteStruct(schemas.CreateManagedEndpointRequest_configurationOverrides)
+		v.ConfigurationOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateManagedEndpointRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateManagedEndpointRequest_name, *v.Name)
+	}
+	if v.ReleaseLabel != nil {
+		s.WriteString(schemas.CreateManagedEndpointRequest_releaseLabel, *v.ReleaseLabel)
+	}
+	if v.SessionIdleTimeoutInMinutes != 0 {
+		s.WriteInt32(schemas.CreateManagedEndpointRequest_sessionIdleTimeoutInMinutes, v.SessionIdleTimeoutInMinutes)
+	}
+	serializeTagMap(s, schemas.CreateManagedEndpointRequest_tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.CreateManagedEndpointRequest_type, *v.Type)
+	}
+	if v.VirtualClusterId != nil {
+		s.WriteString(schemas.CreateManagedEndpointRequest_virtualClusterId, *v.VirtualClusterId)
+	}
 }
 
 type CreateManagedEndpointOutput struct {
@@ -98,65 +140,60 @@ type CreateManagedEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateManagedEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateManagedEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateManagedEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateManagedEndpointResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateManagedEndpointResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateManagedEndpointResponse_name, *v.Name)
+	}
+	if v.VirtualClusterId != nil {
+		s.WriteString(schemas.CreateManagedEndpointResponse_virtualClusterId, *v.VirtualClusterId)
+	}
+}
+func (v *CreateManagedEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateManagedEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateManagedEndpointResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateManagedEndpointResponse_arn, v.Arn)
+		case schemas.CreateManagedEndpointResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateManagedEndpointResponse_id, v.Id)
+		case schemas.CreateManagedEndpointResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateManagedEndpointResponse_name, v.Name)
+		case schemas.CreateManagedEndpointResponse_virtualClusterId:
+			v.VirtualClusterId = new(string)
+			return d.ReadString(schemas.CreateManagedEndpointResponse_virtualClusterId, v.VirtualClusterId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateManagedEndpoint, schemas.CreateManagedEndpointRequest, schemas.CreateManagedEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateManagedEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateManagedEndpoint, schemas.CreateManagedEndpointRequest, schemas.CreateManagedEndpointResponse), output: &CreateManagedEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateManagedEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateManagedEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -166,12 +203,6 @@ func (c *Client) addOperationCreateManagedEndpointMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateManagedEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateManagedEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,12 +215,6 @@ func (c *Client) addOperationCreateManagedEndpointMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -229,12 +254,4 @@ func (m *idempotencyToken_initializeOpCreateManagedEndpoint) HandleInitialize(ct
 }
 func addIdempotencyToken_opCreateManagedEndpointMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateManagedEndpoint{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateManagedEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateManagedEndpoint",
-	}
 }

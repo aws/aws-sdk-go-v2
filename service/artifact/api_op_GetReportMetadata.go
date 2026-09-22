@@ -4,11 +4,10 @@ package artifact
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/artifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/artifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the metadata for a single report.
@@ -40,6 +39,21 @@ type GetReportMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReportMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReportMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReportMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetReportMetadataRequest_reportId, *v.ReportId)
+	}
+	if v.ReportVersion != nil {
+		s.WriteInt64(schemas.GetReportMetadataRequest_reportVersion, *v.ReportVersion)
+	}
+}
+
 type GetReportMetadataOutput struct {
 
 	// Report resource detail.
@@ -51,77 +65,50 @@ type GetReportMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReportMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReportMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReportMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportDetails != nil {
+		s.WriteStruct(schemas.GetReportMetadataResponse_reportDetails)
+		v.ReportDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetReportMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReportMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReportMetadataResponse_reportDetails:
+			v.ReportDetails = &types.ReportDetail{}
+			return v.ReportDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReportMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReportMetadata, schemas.GetReportMetadataRequest, schemas.GetReportMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReportMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReportMetadata, schemas.GetReportMetadataRequest, schemas.GetReportMetadataResponse), output: &GetReportMetadataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReportMetadata{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetReportMetadata"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetReportMetadataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetReportMetadata(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +123,8 @@ func (c *Client) addOperationGetReportMetadataMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetReportMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetReportMetadata",
-	}
 }

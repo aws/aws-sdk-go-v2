@@ -5,9 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the names of all crawler resources in this Amazon Web Services
@@ -46,6 +46,22 @@ type ListCrawlersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCrawlersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCrawlersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCrawlersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCrawlersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCrawlersRequest_NextToken, *v.NextToken)
+	}
+	serializeTagsMap(s, schemas.ListCrawlersRequest_Tags, v.Tags)
+}
+
 type ListCrawlersOutput struct {
 
 	// The names of all crawlers in the account, or the crawlers with the specified
@@ -62,74 +78,48 @@ type ListCrawlersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCrawlersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCrawlersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCrawlersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCrawlerNameList(s, schemas.ListCrawlersResponse_CrawlerNames, v.CrawlerNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCrawlersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCrawlersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCrawlersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCrawlersResponse_CrawlerNames:
+			return deserializeCrawlerNameList(d, schemas.ListCrawlersResponse_CrawlerNames, &v.CrawlerNames)
+		case schemas.ListCrawlersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCrawlersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCrawlersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrawlers, schemas.ListCrawlersRequest, schemas.ListCrawlersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCrawlers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCrawlers, schemas.ListCrawlersRequest, schemas.ListCrawlersResponse), output: &ListCrawlersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCrawlers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCrawlers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCrawlers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +132,6 @@ func (c *Client) addOperationListCrawlersMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +231,3 @@ type ListCrawlersAPIClient interface {
 }
 
 var _ ListCrawlersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCrawlers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCrawlers",
-	}
-}

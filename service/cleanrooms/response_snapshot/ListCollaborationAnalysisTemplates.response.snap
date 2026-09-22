@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"collaborationAnalysisTemplateSummaries":[{"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"creatorAccountId":"__CreatorAccountId__","description":"__Description__","id":"__Id__","isSyntheticData":true,"name":"__Name__","updateTime":946684800},{"arn":"__Arn__","collaborationArn":"__CollaborationArn__","collaborationId":"__CollaborationId__","createTime":946684800,"creatorAccountId":"__CreatorAccountId__","description":"__Description__","id":"__Id__","isSyntheticData":true,"name":"__Name__","updateTime":946684800}],"nextToken":"__NextToken__"}

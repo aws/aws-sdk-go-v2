@@ -1,0 +1,3 @@
+GET /2015-02-01/mount-targets?AccessPointId=__AccessPointId__&FileSystemId=__FileSystemId__&Marker=__Marker__&MaxItems=1&MountTargetId=__MountTargetId__
+
+

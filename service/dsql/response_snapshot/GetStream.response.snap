@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","clusterIdentifier":"__ClusterIdentifier__","creationTime":946684800,"format":"JSON","ordering":"UNORDERED","status":"CREATING","statusReason":{"error":"KINESIS_THROUGHPUT_EXCEEDED","updatedAt":946684800},"streamIdentifier":"__StreamIdentifier__","tags":{"key0":"__Value__"},"targetDefinition":{"kinesis":{"roleArn":"__RoleArn__","streamArn":"__StreamArn__"}}}

@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/documentation/parts?limit=1&locationStatus=DOCUMENTED&name=__NameQuery__&path=__Path__&position=__Position__&type=API
+
+Accept: application/json
+

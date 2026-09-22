@@ -1,0 +1,3 @@
+GET /v1/brokers/__BrokerId__/shared-resources?maxResults=1&nextToken=__NextToken__
+
+

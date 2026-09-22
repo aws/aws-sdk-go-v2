@@ -1,0 +1,10 @@
+POST /2015-03-31/functions/__FunctionName__/invocations?Qualifier=__Qualifier__
+
+Content-Type: application/octet-stream
+X-Amz-Client-Context: __ClientContext__
+X-Amz-Durable-Execution-Name: __DurableExecutionName__
+X-Amz-Invocation-Type: Event
+X-Amz-Log-Type: None
+X-Amz-Tenant-Id: __TenantId__
+
+blob

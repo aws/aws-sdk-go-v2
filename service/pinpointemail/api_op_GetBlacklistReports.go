@@ -4,11 +4,10 @@ package pinpointemail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieve a list of the blacklists that your dedicated IP addresses appear on.
@@ -41,6 +40,16 @@ type GetBlacklistReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlacklistReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlacklistReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlacklistReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlacklistItemNames(s, schemas.GetBlacklistReportsRequest_BlacklistItemNames, v.BlacklistItemNames)
+}
+
 // An object that contains information about blacklist events.
 type GetBlacklistReportsOutput struct {
 
@@ -56,77 +65,45 @@ type GetBlacklistReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBlacklistReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBlacklistReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBlacklistReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlacklistReport(s, schemas.GetBlacklistReportsResponse_BlacklistReport, v.BlacklistReport)
+}
+func (v *GetBlacklistReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBlacklistReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBlacklistReportsResponse_BlacklistReport:
+			return deserializeBlacklistReport(d, schemas.GetBlacklistReportsResponse_BlacklistReport, &v.BlacklistReport)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBlacklistReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlacklistReports, schemas.GetBlacklistReportsRequest, schemas.GetBlacklistReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBlacklistReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBlacklistReports, schemas.GetBlacklistReportsRequest, schemas.GetBlacklistReportsResponse), output: &GetBlacklistReportsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBlacklistReports{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBlacklistReports"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBlacklistReportsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBlacklistReports(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +118,8 @@ func (c *Client) addOperationGetBlacklistReportsMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBlacklistReports(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBlacklistReports",
-	}
 }

@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a fleet. A fleet consists of streaming instances that your users access
@@ -303,6 +302,93 @@ type CreateFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeCapacity != nil {
+		s.WriteStruct(schemas.CreateFleetRequest_ComputeCapacity)
+		v.ComputeCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFleetRequest_Description, *v.Description)
+	}
+	if v.DisableIMDSV1 != nil {
+		s.WriteBool(schemas.CreateFleetRequest_DisableIMDSV1, *v.DisableIMDSV1)
+	}
+	if v.DisconnectTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.CreateFleetRequest_DisconnectTimeoutInSeconds, *v.DisconnectTimeoutInSeconds)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateFleetRequest_DisplayName, *v.DisplayName)
+	}
+	if v.DomainJoinInfo != nil {
+		s.WriteStruct(schemas.CreateFleetRequest_DomainJoinInfo)
+		v.DomainJoinInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableDefaultInternetAccess != nil {
+		s.WriteBool(schemas.CreateFleetRequest_EnableDefaultInternetAccess, *v.EnableDefaultInternetAccess)
+	}
+	if v.FleetType != "" {
+		s.WriteString(schemas.CreateFleetRequest_FleetType, string(v.FleetType))
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.CreateFleetRequest_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IdleDisconnectTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.CreateFleetRequest_IdleDisconnectTimeoutInSeconds, *v.IdleDisconnectTimeoutInSeconds)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.CreateFleetRequest_ImageArn, *v.ImageArn)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.CreateFleetRequest_ImageName, *v.ImageName)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.CreateFleetRequest_InstanceType, *v.InstanceType)
+	}
+	if v.MaxConcurrentSessions != nil {
+		s.WriteInt32(schemas.CreateFleetRequest_MaxConcurrentSessions, *v.MaxConcurrentSessions)
+	}
+	if v.MaxSessionsPerInstance != nil {
+		s.WriteInt32(schemas.CreateFleetRequest_MaxSessionsPerInstance, *v.MaxSessionsPerInstance)
+	}
+	if v.MaxUserDurationInSeconds != nil {
+		s.WriteInt32(schemas.CreateFleetRequest_MaxUserDurationInSeconds, *v.MaxUserDurationInSeconds)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFleetRequest_Name, *v.Name)
+	}
+	if v.Platform != "" {
+		s.WriteString(schemas.CreateFleetRequest_Platform, string(v.Platform))
+	}
+	if v.RootVolumeConfig != nil {
+		s.WriteStruct(schemas.CreateFleetRequest_RootVolumeConfig)
+		v.RootVolumeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionScriptS3Location != nil {
+		s.WriteStruct(schemas.CreateFleetRequest_SessionScriptS3Location)
+		v.SessionScriptS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StreamView != "" {
+		s.WriteString(schemas.CreateFleetRequest_StreamView, string(v.StreamView))
+	}
+	serializeTags(s, schemas.CreateFleetRequest_Tags, v.Tags)
+	serializeUsbDeviceFilterStrings(s, schemas.CreateFleetRequest_UsbDeviceFilterStrings, v.UsbDeviceFilterStrings)
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateFleetRequest_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateFleetOutput struct {
 
 	// Information about the fleet.
@@ -314,77 +400,53 @@ type CreateFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFleetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fleet != nil {
+		s.WriteStruct(schemas.CreateFleetResult_Fleet)
+		v.Fleet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFleetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFleetResult_Fleet:
+			v.Fleet = &types.Fleet{}
+			return v.Fleet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleet, schemas.CreateFleetRequest, schemas.CreateFleetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFleet, schemas.CreateFleetRequest, schemas.CreateFleetResult), output: &CreateFleetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFleet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFleet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFleetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFleet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -399,22 +461,8 @@ func (c *Client) addOperationCreateFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateFleet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFleet",
-	}
 }

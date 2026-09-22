@@ -1,0 +1,4 @@
+200
+Content-Type: application/x-www-form-urlencoded
+
+Action=Healthcheck&Version=1999-12-31&ok=__Ok__

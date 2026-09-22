@@ -875,7 +875,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a grant to a KMS key. </p>\n         <p>A <i>grant</i> is a policy instrument that allows Amazon Web Services principals to use\n      KMS keys in cryptographic operations. It also can allow them to view a KMS key (<a>DescribeKey</a>) and create and manage grants. When authorizing access to a KMS key,\n      grants are considered along with key policies and IAM policies. Grants are often used for\n      temporary permissions because you can create one, use its permissions, and delete it without\n      changing your key policies or IAM policies. </p>\n         <p>For detailed information about grants, including grant terminology, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html\">Grants in KMS</a> in the\n        <i>\n               <i>Key Management Service Developer Guide</i>\n            </i>. For examples of creating grants in several\n      programming languages, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html\">Use CreateGrant with an Amazon Web Services SDK or CLI</a>. </p>\n         <p>The <code>CreateGrant</code> operation returns a <code>GrantToken</code> and a\n        <code>GrantId</code>.</p>\n         <ul>\n            <li>\n               <p>When you create, retire, or revoke a grant, there might be a brief delay, usually less than five minutes, until the grant is available throughout KMS. This state is known as <i>eventual consistency</i>. Once the grant has achieved eventual consistency, the grantee\n          principal can use the permissions in the grant without identifying the grant. </p>\n               <p>However, to use the permissions in the grant immediately, use the\n            <code>GrantToken</code> that <code>CreateGrant</code> returns. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html\">Using a grant\n            token</a> in the <i>\n                     <i>Key Management Service Developer Guide</i>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>The <code>CreateGrant</code> operation also returns a <code>GrantId</code>. You can\n          use the <code>GrantId</code> and a key identifier to identify the grant in the <a>RetireGrant</a> and <a>RevokeGrant</a> operations. To find the grant\n          ID, use the <a>ListGrants</a> or <a>ListRetirableGrants</a>\n          operations.</p>\n            </li>\n         </ul>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation on a KMS key in a different Amazon Web Services account, specify the key\n  ARN in the value of the <code>KeyId</code> parameter. </p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:CreateGrant</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRetirableGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RetireGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RevokeGrant</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Adds a grant to a KMS key. </p>\n         <p>A <i>grant</i> is a policy instrument that allows Amazon Web Services principals to use\n      KMS keys in cryptographic operations. It also can allow them to view a KMS key (<a>DescribeKey</a>) and create and manage grants. When authorizing access to a KMS key,\n      grants are considered along with key policies and IAM policies. Grants are often used for\n      temporary permissions because you can create one, use its permissions, and delete it without\n      changing your key policies or IAM policies. </p>\n         <p>You can create a grant for an Amazon Web Services principal (IAM user, IAM role, or Amazon Web Services account) by\n      specifying the <code>GranteePrincipal</code> parameter. You can also create a grant for an\n      Amazon Web Services service principal by specifying the <code>GranteeServicePrincipal</code>\n      parameter.</p>\n         <p>For detailed information about grants, including grant terminology, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html\">Grants in KMS</a> in the\n        <i>\n               <i>Key Management Service Developer Guide</i>\n            </i>. For examples of creating grants in several\n      programming languages, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html\">Use CreateGrant with an Amazon Web Services SDK or CLI</a>. </p>\n         <p>The <code>CreateGrant</code> operation returns a <code>GrantToken</code> and a\n        <code>GrantId</code>.</p>\n         <ul>\n            <li>\n               <p>When you create, retire, or revoke a grant, there might be a brief delay, usually less than five minutes, until the grant is available throughout KMS. This state is known as <i>eventual consistency</i>. Once the grant has achieved eventual consistency, the grantee\n          principal can use the permissions in the grant without identifying the grant. </p>\n               <p>However, to use the permissions in the grant immediately, use the\n            <code>GrantToken</code> that <code>CreateGrant</code> returns. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html\">Using a grant\n            token</a> in the <i>\n                     <i>Key Management Service Developer Guide</i>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>The <code>CreateGrant</code> operation also returns a <code>GrantId</code>. You can\n          use the <code>GrantId</code> and a key identifier to identify the grant in the <a>RetireGrant</a> and <a>RevokeGrant</a> operations. To find the grant\n          ID, use the <a>ListGrants</a> or <a>ListRetirableGrants</a>\n          operations.</p>\n            </li>\n         </ul>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation on a KMS key in a different Amazon Web Services account, specify the key\n  ARN in the value of the <code>KeyId</code> parameter. </p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:CreateGrant</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRetirableGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RetireGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RevokeGrant</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To create a grant",
@@ -891,6 +891,28 @@
                         "output": {
                             "GrantToken": "AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW__MSrqnre1HIN0Grt00ViSSuUjhqOC8OT3YAAADfMIHcBgkqhkiG9w0BBwaggc4wgcsCAQAwgcUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmqLyBTAegIn9XlK5AgEQgIGXZQjkBcl1dykDdqZBUQ6L1OfUivQy7JVYO2-ZJP7m6f1g8GzV47HX5phdtONAP7K_HQIflcgpkoCqd_fUnE114mSmiagWkbQ5sqAVV3ov-VeqgrvMe5ZFEWLMSluvBAqdjHEdMIkHMlhlj4ENZbzBfo9Wxk8b8SnwP4kc4gGivedzFXo-dwN8fxjjq_ZZ9JFOj2ijIbj5FyogDCN0drOfi8RORSEuCEmPvjFRMFAwcmwFkN2NPp89amA",
                             "GrantId": "0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60"
+                        }
+                    },
+                    {
+                        "title": "To create a grant for a service principal",
+                        "documentation": "The following example creates a grant that allows the specified AWS service principal to encrypt and decrypt data with the specified KMS key. The grant includes a SourceArn constraint that restricts the grant permissions to requests associated with the specified DynamoDB table.",
+                        "input": {
+                            "KeyId": "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+                            "GranteeServicePrincipal": "service-name.amazonaws.com",
+                            "RetiringServicePrincipal": "service-name.amazonaws.com",
+                            "Operations": [
+                                "Encrypt",
+                                "Decrypt",
+                                "GenerateDataKey",
+                                "DescribeKey"
+                            ],
+                            "Constraints": {
+                                "SourceArn": "arn:aws:dynamodb:us-east-2:444455556666:table/ExampleTable"
+                            }
+                        },
+                        "output": {
+                            "GrantToken": "AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW...",
+                            "GrantId": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"
                         }
                     }
                 ]
@@ -909,14 +931,13 @@
                 "GranteePrincipal": {
                     "target": "com.amazonaws.kms#PrincipalIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity that gets the permissions specified in the grant.</p>\n         <p>To specify the grantee principal, use the Amazon Resource Name (ARN) of an Amazon Web Services\n      principal. Valid principals include Amazon Web Services accounts, IAM users, IAM roles,\n      federated users, and assumed role users. For help with the ARN syntax for a principal, see\n        <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM ARNs</a> in the <i>\n               <i>Identity and Access Management User Guide</i>\n            </i>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The identity that gets the permissions specified in the grant.</p>\n         <p>To specify the grantee principal, use the Amazon Resource Name (ARN) of an Amazon Web Services\n      principal. Valid principals include Amazon Web Services accounts, IAM users, IAM roles,\n      federated users, and assumed role users. For help with the ARN syntax for a principal, see\n        <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM ARNs</a> in the <i>\n               <i>Identity and Access Management User Guide</i>\n            </i>.</p>\n         <p>You must specify either <code>GranteePrincipal</code> or\n        <code>GranteeServicePrincipal</code>, but not both.</p>"
                     }
                 },
                 "RetiringPrincipal": {
                     "target": "com.amazonaws.kms#PrincipalIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principal that has permission to use the <a>RetireGrant</a> operation to\n      retire the grant. </p>\n         <p>To specify the principal, use the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an\n      Amazon Web Services principal. Valid principals include Amazon Web Services accounts, IAM users, IAM roles,\n      federated users, and assumed role users. For help with the ARN syntax for a principal, see\n        <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM ARNs</a> in the <i>\n               <i>Identity and Access Management User Guide</i>\n            </i>.</p>\n         <p>The grant determines the retiring principal. Other principals might have permission to\n      retire the grant or revoke the grant. For details, see <a>RevokeGrant</a> and\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grant-delete.html\">Retiring and revoking\n        grants</a> in the <i>Key Management Service Developer Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The principal that has permission to use the <a>RetireGrant</a> operation to\n      retire the grant. </p>\n         <p>To specify the principal, use the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an\n      Amazon Web Services principal. Valid principals include Amazon Web Services accounts, IAM users, IAM roles,\n      federated users, and assumed role users. For help with the ARN syntax for a principal, see\n        <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM ARNs</a> in the <i>\n               <i>Identity and Access Management User Guide</i>\n            </i>.</p>\n         <p>The grant determines the retiring principal. Other principals might have permission to\n      retire the grant or revoke the grant. For details, see <a>RevokeGrant</a> and\n        <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grant-delete.html\">Retiring and revoking\n        grants</a> in the <i>Key Management Service Developer Guide</i>. </p>\n         <p>You can specify either <code>RetiringPrincipal</code> or\n        <code>RetiringServicePrincipal</code>, but not both.</p>"
                     }
                 },
                 "Operations": {
@@ -929,7 +950,7 @@
                 "Constraints": {
                     "target": "com.amazonaws.kms#GrantConstraints",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a grant constraint.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>KMS supports the <code>EncryptionContextEquals</code> and\n        <code>EncryptionContextSubset</code> grant constraints, which allow the permissions in the\n      grant only when the encryption context in the request matches\n        (<code>EncryptionContextEquals</code>) or includes (<code>EncryptionContextSubset</code>)\n      the encryption context specified in the constraint. </p>\n         <p>The encryption context grant constraints are supported only on <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations\">grant operations</a> that include\n      an <code>EncryptionContext</code> parameter, such as cryptographic operations on symmetric\n      encryption KMS keys. Grants with grant constraints can include the <a>DescribeKey</a> and <a>RetireGrant</a> operations, but the constraint doesn't apply to these\n      operations. If a grant with a grant constraint includes the <code>CreateGrant</code>\n      operation, the constraint requires that any grants created with the <code>CreateGrant</code>\n      permission have an equally strict or stricter encryption context constraint.</p>\n         <p>You cannot use an encryption context grant constraint for cryptographic operations with\n      asymmetric KMS keys or HMAC KMS keys. Operations with these keys don't support an encryption\n      context.</p>\n         <p>Each constraint value can include up to 8 encryption context pairs. The encryption context\n      value in each constraint cannot exceed 384 characters. For information about grant\n      constraints, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints\">Using grant\n        constraints</a> in the <i>Key Management Service Developer Guide</i>. For more information about encryption context,\n      see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption\n        context</a> in the <i>\n               <i>Key Management Service Developer Guide</i>\n            </i>. </p>"
+                        "smithy.api#documentation": "<p>Specifies a grant constraint.</p>\n         <important>\n            <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>\n         </important>\n         <p>KMS supports the following grant constraints.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EncryptionContextEquals</code> and <code>EncryptionContextSubset</code> — These\n          encryption context grant constraints allow the permissions in the grant only when the\n          encryption context in the request matches (<code>EncryptionContextEquals</code>) or\n          includes (<code>EncryptionContextSubset</code>) the encryption context specified in the\n          constraint.</p>\n               <p>Encryption context grant constraints are supported only on <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations\">grant operations</a> that\n          include an <code>EncryptionContext</code> parameter, such as cryptographic operations on\n          symmetric encryption KMS keys. You cannot use an encryption context grant constraint for\n          cryptographic operations with asymmetric KMS keys or HMAC KMS keys. Operations with these\n          keys don't support an encryption context. Grants with encryption context grant constraints\n          can include the <a>DescribeKey</a> and <a>RetireGrant</a> operations,\n          but the constraint doesn't apply to these operations. If a grant with an encryption context\n          grant constraint includes the <code>CreateGrant</code> operation, the constraint requires\n          that any grants created with the <code>CreateGrant</code> permission have an equally strict\n          or stricter encryption context constraint. </p>\n               <p>Each constraint value can include up to 8 encryption context pairs. The encryption\n          context value in each constraint cannot exceed 384 characters. For more information about\n          encryption context, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context\">Encryption context</a> in the <i>\n                     <i>Key Management Service Developer Guide</i>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SourceArn</code> — This grant constraint allows the permissions in the grant only when the\n        request is made on behalf of a specific Amazon Web Services resource, identified by its <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a>. This is effectively\n        the same as having the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a> global condition key in the grant. The SourceArn constraint is supported on grants\n        for all types of KMS keys and can also be applied to the <a>DescribeKey</a> operation when\n        specified in the request. However, it does not apply to <a>RetireGrant</a> operation.</p>\n            </li>\n         </ul>\n         <p>For information about grant constraints, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints\">Using grant\n        constraints</a> in the <i>Key Management Service Developer Guide</i>. </p>"
                     }
                 },
                 "GrantTokens": {
@@ -948,6 +969,18 @@
                     "target": "com.amazonaws.kms#NullableBooleanType",
                     "traits": {
                         "smithy.api#documentation": "<p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>\n         <p>To learn more about how to use this parameter, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html\">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>"
+                    }
+                },
+                "GranteeServicePrincipal": {
+                    "target": "com.amazonaws.kms#ServicePrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service\n        principal</a> that gets the permissions specified in the grant. </p>\n         <p>When you specify a <code>GranteeServicePrincipal</code>, you must also specify a\n      <code>SourceArn</code> grant constraint. In addition, you must specify either a\n      <code>RetiringPrincipal</code> or a <code>RetiringServicePrincipal</code>.\n    </p>\n         <p>You must specify either <code>GranteePrincipal</code> or\n        <code>GranteeServicePrincipal</code>, but not both.</p>"
+                    }
+                },
+                "RetiringServicePrincipal": {
+                    "target": "com.amazonaws.kms#ServicePrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service\n        principal</a> that has permission to use the <a>RetireGrant</a>\n      operation to retire the grant.</p>\n         <p>You can specify either <code>RetiringPrincipal</code> or\n        <code>RetiringServicePrincipal</code>, but not both.</p>"
                     }
                 }
             },
@@ -4160,6 +4193,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kms#GrantConstraintSourceArnType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:aws[a-z0-9-]*:[a-z0-9-]+:[a-z0-9-]*:[0-9]{12}:.+$"
+            }
+        },
         "com.amazonaws.kms#GrantConstraints": {
             "type": "structure",
             "members": {
@@ -4174,10 +4217,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of key-value pairs that must match the encryption context in the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations\">cryptographic operation</a>\n      request. The grant allows the operation only when the encryption context in the request is the\n      same as the encryption context specified in this constraint.</p>"
                     }
+                },
+                "SourceArn": {
+                    "target": "com.amazonaws.kms#GrantConstraintSourceArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n    Amazon Resource Name (ARN)</a> of an Amazon Web Services resource on behalf of which the request is made.\n    This is effectively the same as having the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a> global condition key in the grant. The SourceArn constraint ensures\n    that the principal can use the KMS key only when the request is made on behalf of the specified resource.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this structure to allow <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations\">cryptographic operations</a> in the grant only when the operation request\n      includes the specified <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html\">encryption context</a>. </p>\n         <p>KMS applies the grant constraints only to cryptographic operations that support an\n      encryption context, that is, all cryptographic operations with a symmetric KMS key. Grant\n      constraints are not applied to operations that do not support an encryption context, such as\n      cryptographic operations with asymmetric KMS keys and management operations, such as <a>DescribeKey</a> or <a>RetireGrant</a>.</p>\n         <important>\n            <p>In a cryptographic operation, the encryption context in the decryption operation must be\n        an exact, case-sensitive match for the keys and values in the encryption context of the\n        encryption operation. Only the order of the pairs can vary.</p>\n            <p>However, in a grant constraint, the key in each key-value pair is not case sensitive,\n        but the value is case sensitive.</p>\n            <p>To avoid confusion, do not use multiple encryption context pairs that differ only by\n        case. To require a fully case-sensitive encryption context, use the\n          <code>kms:EncryptionContext:</code> and <code>kms:EncryptionContextKeys</code> conditions\n        in an IAM or key policy. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-encryption-context\">kms:EncryptionContext:context-key</a> in the\n        <i>\n                  <i>Key Management Service Developer Guide</i>\n               </i>.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Use this structure to allow <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations\">cryptographic operations</a> in the grant only when the operation request\n      meets the specified constraints.</p>\n         <p>KMS supports the following grant constraints:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EncryptionContextEquals</code> and <code>EncryptionContextSubset</code> —\n          These encryption context constraints apply only to cryptographic operations that support\n          an encryption context, that is, all cryptographic operations with a symmetric KMS key.\n          Encryption context grant constraints are not applied to operations that do not support an\n          encryption context, such as cryptographic operations with asymmetric KMS keys and\n          management operations, such as <a>DescribeKey</a> or <a>RetireGrant</a>.</p>\n               <important>\n                  <p>In a cryptographic operation, the encryption context in the decryption operation must be\n              an exact, case-sensitive match for the keys and values in the encryption context of the\n              encryption operation. Only the order of the pairs can vary.</p>\n                  <p>However, in a grant constraint, the key in each key-value pair is not case sensitive,\n              but the value is case sensitive.</p>\n                  <p>To avoid confusion, do not use multiple encryption context pairs that differ only by\n              case. To require a fully case-sensitive encryption context, use the\n                <code>kms:EncryptionContext:</code> and <code>kms:EncryptionContextKeys</code> conditions\n              in an IAM or key policy. For details, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/conditions-kms.html#conditions-kms-encryption-context\">kms:EncryptionContext:context-key</a> in the\n              <i>\n                        <i>Key Management Service Developer Guide</i>\n                     </i>.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <code>SourceArn</code> — This grant constraint allows the permissions in the grant only when the\n        request is made on behalf of a specific Amazon Web Services resource, identified by its <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a>. This is effectively\n        the same as having the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a> global condition key in the grant. The SourceArn constraint is supported on grants\n        for all types of KMS keys and can also be applied to the <a>DescribeKey</a> operation when\n        specified in the request. However, it does not apply to <a>RetireGrant</a> operation.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.kms#GrantIdType": {
@@ -4225,7 +4274,7 @@
                 "GranteePrincipal": {
                     "target": "com.amazonaws.kms#PrincipalIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity that gets the permissions in the grant.</p>\n         <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the\n        user or role designated as the grantee principal in the grant. However, when the grantee\n        principal in the grant is an Amazon Web Services service, the <code>GranteePrincipal</code> field contains\n        the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service\n          principal</a>, which might represent several different grantee principals.</p>"
+                        "smithy.api#documentation": "<p>The identity that gets the permissions in the grant.</p>\n         <p>When a grant is created with the <code>GranteePrincipal</code> field, the <code>ListGrants</code>\n        response usually contains the user or role designated as the grantee principal in the grant. However, if the grantee principal\n        is an Amazon Web Services service, the <code>GranteePrincipal</code> field contains an Amazon Web Services <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service principal</a>, which\n        might correspond to several different grantee principals, such as an IAM user, IAM role, or Amazon Web Services account.</p>"
                     }
                 },
                 "RetiringPrincipal": {
@@ -4249,7 +4298,19 @@
                 "Constraints": {
                     "target": "com.amazonaws.kms#GrantConstraints",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that must be present in the encryption context of certain\n      subsequent operations that the grant allows.</p>"
+                        "smithy.api#documentation": "<p>The constraints on the grant, such as encryption context pairs or a SourceArn,\n     that restrict the subsequent operations the grant allows.</p>"
+                    }
+                },
+                "GranteeServicePrincipal": {
+                    "target": "com.amazonaws.kms#ServicePrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service\n        principal</a> that gets the permissions in the grant.</p>"
+                    }
+                },
+                "RetiringServicePrincipal": {
+                    "target": "com.amazonaws.kms#ServicePrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service\n        principal</a> that can retire the grant.</p>"
                     }
                 }
             },
@@ -5659,7 +5720,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of all grants for the specified KMS key. </p>\n         <p>You must specify the KMS key in all requests. You can filter the grant list by grant ID or\n      grantee principal.</p>\n         <p>For detailed information about grants, including grant terminology, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html\">Grants in KMS</a> in the\n        <i>\n               <i>Key Management Service Developer Guide</i>\n            </i>. For examples of creating grants in several\n      programming languages, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html\">Use CreateGrant with an Amazon Web Services SDK or CLI</a>. </p>\n         <note>\n            <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the\n        user or role designated as the grantee principal in the grant. However, when the grantee\n        principal in the grant is an Amazon Web Services service, the <code>GranteePrincipal</code> field contains\n        the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service\n          principal</a>, which might represent several different grantee principals.</p>\n         </note>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation on a KMS key in a different Amazon Web Services account, specify the key\n  ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListGrants</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRetirableGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RetireGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RevokeGrant</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Gets a list of all grants for the specified KMS key. </p>\n         <p>You must specify the KMS key in all requests. You can filter the grant list by grant ID,\n      grantee principal, or grantee service principal.</p>\n         <p>For detailed information about grants, including grant terminology, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html\">Grants in KMS</a> in the\n        <i>\n               <i>Key Management Service Developer Guide</i>\n            </i>. For examples of creating grants in several\n      programming languages, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html\">Use CreateGrant with an Amazon Web Services SDK or CLI</a>. </p>\n         <note>\n            <p>When a grant is created with the <code>GranteePrincipal</code> field, the <code>ListGrants</code>\n        response usually contains the user or role designated as the grantee principal in the grant. However, if the grantee principal\n        is an Amazon Web Services service, the <code>GranteePrincipal</code> field contains an Amazon Web Services <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service principal</a>, which\n        might correspond to several different grantee principals, such as an IAM user, IAM role, or Amazon Web Services account.</p>\n            <p>When a grant is created with the <code>GranteeServicePrincipal</code> field, the <code>ListGrants</code>\n\t      response always includes a <code>GranteeServicePrincipal</code> that indicates the grantee is actually\n        an Amazon Web Services <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services\">service principal</a>.</p>\n         </note>\n         <p>\n            <b>Cross-account use</b>: Yes. To perform this operation on a KMS key in a different Amazon Web Services account, specify the key\n  ARN in the value of the <code>KeyId</code> parameter.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListGrants</a> (key policy)</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListRetirableGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RetireGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RevokeGrant</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "NextMarker",
@@ -5699,7 +5760,13 @@
                 "GranteePrincipal": {
                     "target": "com.amazonaws.kms#PrincipalIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns only grants where the specified principal is the grantee principal for the\n      grant.</p>"
+                        "smithy.api#documentation": "<p>Returns only grants where the specified principal is the grantee principal for the\n      grant.</p>\n         <p>You can specify either <code>GranteePrincipal</code> or\n        <code>GranteeServicePrincipal</code>, but not both.</p>"
+                    }
+                },
+                "GranteeServicePrincipal": {
+                    "target": "com.amazonaws.kms#ServicePrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only grants where the specified Amazon Web Services service principal is the grantee service\n      principal for the grant. This filter is only usable by callers in a service principal.</p>\n         <p>You can specify either <code>GranteePrincipal</code> or\n        <code>GranteeServicePrincipal</code>, but not both.</p>"
                     }
                 }
             },
@@ -6186,7 +6253,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about all grants in the Amazon Web Services account and Region that have the\n      specified retiring principal. </p>\n         <p>You can specify any principal in your Amazon Web Services account. The grants that are returned include\n      grants for KMS keys in your Amazon Web Services account and other Amazon Web Services accounts. You might use this\n      operation to determine which grants you may retire. To retire a grant, use the <a>RetireGrant</a> operation.</p>\n         <p>For detailed information about grants, including grant terminology, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html\">Grants in KMS</a> in the\n        <i>\n               <i>Key Management Service Developer Guide</i>\n            </i>. For examples of creating grants in several\n      programming languages, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html\">Use CreateGrant with an Amazon Web Services SDK or CLI</a>. </p>\n         <p>\n            <b>Cross-account use</b>: You must specify a principal in your\n      Amazon Web Services account. This operation returns a list of grants where the retiring principal specified\n      in the <code>ListRetirableGrants</code> request is the same retiring principal on the grant.\n      This can include grants on KMS keys owned by other Amazon Web Services accounts, but you do not need\n        <code>kms:ListRetirableGrants</code> permission (or any other additional permission) in any\n      Amazon Web Services account other than your own.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListRetirableGrants</a> (IAM policy) in your\n      Amazon Web Services account.</p>\n         <note>\n            <p>KMS authorizes <code>ListRetirableGrants</code> requests by evaluating the caller\n        account's kms:ListRetirableGrants permissions. The authorized resource in\n          <code>ListRetirableGrants</code> calls is the retiring principal specified in the request.\n        KMS does not evaluate the caller's permissions to verify their access to any KMS keys or\n        grants that might be returned by the <code>ListRetirableGrants</code> call.</p>\n         </note>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RetireGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RevokeGrant</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Returns information about all grants in the Amazon Web Services account and Region that have the\n      specified retiring principal or retiring service principal. </p>\n         <p>You can specify any principal in your Amazon Web Services account. The grants that are returned include\n      grants for KMS keys in your Amazon Web Services account and other Amazon Web Services accounts. You might use this\n      operation to determine which grants you may retire. To retire a grant, use the <a>RetireGrant</a> operation.</p>\n         <p>For detailed information about grants, including grant terminology, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/grants.html\">Grants in KMS</a> in the\n        <i>\n               <i>Key Management Service Developer Guide</i>\n            </i>. For examples of creating grants in several\n      programming languages, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html\">Use CreateGrant with an Amazon Web Services SDK or CLI</a>. </p>\n         <p>\n            <b>Cross-account use</b>: You must specify a principal in your\n      Amazon Web Services account. This operation returns a list of grants where the retiring principal specified\n      in the <code>ListRetirableGrants</code> request is the same retiring principal on the grant.\n      This can include grants on KMS keys owned by other Amazon Web Services accounts, but you do not need\n        <code>kms:ListRetirableGrants</code> permission (or any other additional permission) in any\n      Amazon Web Services account other than your own.</p>\n         <p>\n            <b>Required permissions</b>: <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ListRetirableGrants</a> (IAM policy) in your\n      Amazon Web Services account.</p>\n         <note>\n            <p>When listing retirable grants by <code>RetiringPrincipal</code>, KMS authorizes\n        <code>ListRetirableGrants</code> requests by evaluating the caller\n        account's kms:ListRetirableGrants permissions. The authorized resource in\n        <code>ListRetirableGrants</code> calls is the retiring principal specified in the request.\n        KMS does not evaluate the caller's permissions to verify their access to any KMS keys or\n        grants that might be returned by the <code>ListRetirableGrants</code> call.</p>\n            <p>The <code>RetiringServicePrincipal</code> filter is only usable by callers in a\n        service principal.</p>\n         </note>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>CreateGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>ListGrants</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RetireGrant</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>RevokeGrant</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "NextMarker",
@@ -6213,8 +6280,13 @@
                 "RetiringPrincipal": {
                     "target": "com.amazonaws.kms#PrincipalIdType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retiring principal for which to list grants. Enter a principal in your\n      Amazon Web Services account.</p>\n         <p>To specify the retiring principal, use the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an\n      Amazon Web Services principal. Valid principals include Amazon Web Services accounts, IAM users, IAM roles,\n      federated users, and assumed role users. For help with the ARN syntax for a principal, see\n        <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM ARNs</a> in the <i>\n               <i>Identity and Access Management User Guide</i>\n            </i>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The retiring principal for which to list grants. Enter a principal in your\n      Amazon Web Services account.</p>\n         <p>To specify the retiring principal, use the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Name (ARN)</a> of an\n      Amazon Web Services principal. Valid principals include Amazon Web Services accounts, IAM users, IAM roles,\n      federated users, and assumed role users. For help with the ARN syntax for a principal, see\n        <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns\">IAM ARNs</a> in the <i>\n               <i>Identity and Access Management User Guide</i>\n            </i>.</p>\n         <p>You must specify either <code>RetiringPrincipal</code> or\n        <code>RetiringServicePrincipal</code>, but not both.</p>"
+                    }
+                },
+                "RetiringServicePrincipal": {
+                    "target": "com.amazonaws.kms#ServicePrincipalType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retiring service principal for which to list grants. This filter is only usable by\n      callers in a service principal.</p>\n         <p>You must specify either <code>RetiringPrincipal</code> or\n        <code>RetiringServicePrincipal</code>, but not both.</p>"
                     }
                 }
             },
@@ -6626,7 +6698,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Decrypts ciphertext and then reencrypts it entirely within KMS. You can use this\n      operation to change the KMS key under which data is encrypted, such as when you <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys-manually.html\">manually rotate</a> a\n      KMS key or change the KMS key that protects a ciphertext. You can also use it to reencrypt\n      ciphertext under the same KMS key, such as to change the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html\">encryption context</a> of a ciphertext.</p>\n         <p>The <code>ReEncrypt</code> operation can decrypt ciphertext that was encrypted by using a\n      KMS key in an KMS operation, such as <a>Encrypt</a> or <a>GenerateDataKey</a>. It can also decrypt ciphertext that was encrypted by using the\n      public key of an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS key</a> outside of KMS. However, it cannot decrypt ciphertext produced\n      by other libraries, such as the <a href=\"https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/\">Amazon Web Services\n        Encryption SDK</a> or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html\">Amazon S3 client-side encryption</a>.\n      These libraries return a ciphertext format that is incompatible with KMS.</p>\n         <p>When you use the <code>ReEncrypt</code> operation, you need to provide information for the\n      decrypt operation and the subsequent encrypt operation.</p>\n         <ul>\n            <li>\n               <p>If your ciphertext was encrypted under an asymmetric KMS key, you must use the\n            <code>SourceKeyId</code> parameter to identify the KMS key that encrypted the\n          ciphertext. You must also supply the encryption algorithm that was used. This information\n          is required to decrypt the data.</p>\n            </li>\n            <li>\n               <p>If your ciphertext was encrypted under a symmetric encryption KMS key, the\n            <code>SourceKeyId</code> parameter is optional. KMS can get this information from\n          metadata that it adds to the symmetric ciphertext blob. This feature adds durability to\n          your implementation by ensuring that authorized users can decrypt ciphertext decades after\n          it was encrypted, even if they've lost track of the key ID. However, specifying the source\n          KMS key is always recommended as a best practice. When you use the\n            <code>SourceKeyId</code> parameter to specify a KMS key, KMS uses only the KMS key you\n          specify. If the ciphertext was encrypted under a different KMS key, the\n            <code>ReEncrypt</code> operation fails. This practice ensures that you use the KMS key\n          that you intend.</p>\n            </li>\n            <li>\n               <p>To reencrypt the data, you must use the <code>DestinationKeyId</code> parameter to\n          specify the KMS key that re-encrypts the data after it is decrypted. If the destination\n          KMS key is an asymmetric KMS key, you must also provide the encryption algorithm. The\n          algorithm that you choose must be compatible with the KMS key.</p>\n               <important>\n                  <p>When you use an asymmetric KMS key to encrypt or reencrypt data, be sure to record the KMS key and encryption algorithm that you choose. You will be required to provide the same KMS key and encryption algorithm when you decrypt the data. If the KMS key and algorithm do not match the values used to encrypt the data, the decrypt operation fails.</p>\n                  <p>You are not required to supply the key ID and encryption algorithm when you decrypt with symmetric encryption KMS keys because KMS stores this information in the ciphertext blob. KMS cannot store metadata in ciphertext generated with asymmetric keys. The standard format for asymmetric key ciphertext does not include configurable fields.</p>\n               </important>\n            </li>\n         </ul>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>\n            <b>Cross-account use</b>: Yes. The source KMS key and\n      destination KMS key can be in different Amazon Web Services accounts. Either or both KMS keys can be in a\n      different account than the caller. To specify a KMS key in a different account, use the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>\n      or <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-alias-ARN\">alias ARN</a>. A short <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">key ID</a>\n      is also acceptable for the source key when decrypting symmetric ciphertexts, though\n      using a full key ARN is recommended to be more explicit about the intended KMS key.</p>\n         <p>\n            <b>Required permissions</b>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ReEncryptFrom</a>\n          permission on the source KMS key (key policy)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ReEncryptTo</a>\n          permission on the destination KMS key (key policy)</p>\n            </li>\n         </ul>\n         <p>To permit reencryption from or to a KMS key, include the <code>\"kms:ReEncrypt*\"</code>\n      permission in your <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">key policy</a>. This permission is\n      automatically included in the key policy when you use the console to create a KMS key. But you\n      must include it manually when you create a KMS key programmatically or when you use the <a>PutKeyPolicy</a> operation to set a key policy.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Decrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
+                "smithy.api#documentation": "<p>Decrypts ciphertext and then reencrypts it entirely within KMS. You can use this\n      operation to change the KMS key under which data is encrypted, such as when you <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys-manually.html\">manually rotate</a> a\n      KMS key or change the KMS key that protects a ciphertext. You can also use it to reencrypt\n      ciphertext under the same KMS key, such as to change the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html\">encryption context</a> of a ciphertext.</p>\n         <p>The <code>ReEncrypt</code> operation can decrypt ciphertext that was encrypted by using a\n      KMS key in an KMS operation, such as <a>Encrypt</a> or <a>GenerateDataKey</a>. It can also decrypt ciphertext that was encrypted by using the\n      public key of an <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">asymmetric KMS key</a> outside of KMS. However, it cannot decrypt ciphertext produced\n      by other libraries, such as the <a href=\"https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/\">Amazon Web Services\n        Encryption SDK</a> or <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html\">Amazon S3 client-side encryption</a>.\n      These libraries return a ciphertext format that is incompatible with KMS.</p>\n         <p>When you use the <code>ReEncrypt</code> operation, you need to provide information for the\n      decrypt operation and the subsequent encrypt operation.</p>\n         <ul>\n            <li>\n               <p>If your ciphertext was encrypted under an asymmetric KMS key, you must use the\n            <code>SourceKeyId</code> parameter to identify the KMS key that encrypted the\n          ciphertext. You must also supply the encryption algorithm that was used. This information\n          is required to decrypt the data.</p>\n            </li>\n            <li>\n               <p>If your ciphertext was encrypted under a symmetric encryption KMS key, the\n            <code>SourceKeyId</code> parameter is optional. KMS can get this information from\n          metadata that it adds to the symmetric ciphertext blob. This feature adds durability to\n          your implementation by ensuring that authorized users can decrypt ciphertext decades after\n          it was encrypted, even if they've lost track of the key ID. However, specifying the source\n          KMS key is always recommended as a best practice. When you use the\n            <code>SourceKeyId</code> parameter to specify a KMS key, KMS uses only the KMS key you\n          specify. If the ciphertext was encrypted under a different KMS key, the\n            <code>ReEncrypt</code> operation fails. This practice ensures that you use the KMS key\n          that you intend.</p>\n            </li>\n            <li>\n               <p>To reencrypt the data, you must use the <code>DestinationKeyId</code> parameter to\n          specify the KMS key that re-encrypts the data after it is decrypted. If the destination\n          KMS key is an asymmetric KMS key, you must also provide the encryption algorithm. The\n          algorithm that you choose must be compatible with the KMS key.</p>\n               <important>\n                  <p>When you use an asymmetric KMS key to encrypt or reencrypt data, be sure to record the KMS key and encryption algorithm that you choose. You will be required to provide the same KMS key and encryption algorithm when you decrypt the data. If the KMS key and algorithm do not match the values used to encrypt the data, the decrypt operation fails.</p>\n                  <p>You are not required to supply the key ID and encryption algorithm when you decrypt with symmetric encryption KMS keys because KMS stores this information in the ciphertext blob. KMS cannot store metadata in ciphertext generated with asymmetric keys. The standard format for asymmetric key ciphertext does not include configurable fields.</p>\n               </important>\n            </li>\n         </ul>\n         <p>The KMS key that you use for this operation must be in a compatible key state. For\ndetails, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html\">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <note>\n            <p>When using grants with <code>SourceArn</code> constraints for\n          <code>ReEncrypt</code> operations, the grants on both the source KMS key (for\n          <code>ReEncryptFrom</code>) and the destination KMS key (for <code>ReEncryptTo</code>)\n        must specify the same <code>SourceArn</code> value. </p>\n         </note>\n         <p>\n            <b>Cross-account use</b>: Yes. The source KMS key and\n      destination KMS key can be in different Amazon Web Services accounts. Either or both KMS keys can be in a\n      different account than the caller. To specify a KMS key in a different account, use the <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN\">key ARN</a>\n      or <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-alias-ARN\">alias ARN</a>. A short <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id\">key ID</a>\n      is also acceptable for the source key when decrypting symmetric ciphertexts, though\n      using a full key ARN is recommended to be more explicit about the intended KMS key.</p>\n         <p>\n            <b>Required permissions</b>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ReEncryptFrom</a>\n          permission on the source KMS key (key policy)</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html\">kms:ReEncryptTo</a>\n          permission on the destination KMS key (key policy)</p>\n            </li>\n         </ul>\n         <p>To permit reencryption from or to a KMS key, include the <code>\"kms:ReEncrypt*\"</code>\n      permission in your <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">key policy</a>. This permission is\n      automatically included in the key policy when you use the console to create a KMS key. But you\n      must include it manually when you create a KMS key programmatically or when you use the <a>PutKeyPolicy</a> operation to set a key policy.</p>\n         <p>\n            <b>Related operations:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>Decrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>Encrypt</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKey</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>GenerateDataKeyPair</a>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. \n  For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency\">KMS eventual consistency</a>.</p>",
                 "smithy.api#examples": [
                     {
                         "title": "To reencrypt data",
@@ -7369,6 +7441,16 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kms#ServicePrincipalType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9\\-]+)\\.([A-Za-z0-9\\-]+)(\\.[A-Za-z0-9\\-]+)+$"
+            }
+        },
         "com.amazonaws.kms#Sign": {
             "type": "operation",
             "input": {
@@ -7925,6 +8007,194 @@
                 "smithy.api#title": "AWS Key Management Service",
                 "smithy.api#xmlNamespace": {
                     "uri": "https://trent.amazonaws.com/doc/2014-11-01/"
+                },
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://kms-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://kms-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://kms.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://kms.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
                 },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",

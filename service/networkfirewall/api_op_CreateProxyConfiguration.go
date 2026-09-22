@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Network Firewall ProxyConfiguration
@@ -69,6 +68,29 @@ type CreateProxyConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProxyConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProxyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultRulePhaseActions != nil {
+		s.WriteStruct(schemas.CreateProxyConfigurationRequest_DefaultRulePhaseActions)
+		v.DefaultRulePhaseActions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateProxyConfigurationRequest_Description, *v.Description)
+	}
+	if v.ProxyConfigurationName != nil {
+		s.WriteString(schemas.CreateProxyConfigurationRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
+	}
+	serializeResourceArnList(s, schemas.CreateProxyConfigurationRequest_RuleGroupArns, v.RuleGroupArns)
+	serializeResourceNameList(s, schemas.CreateProxyConfigurationRequest_RuleGroupNames, v.RuleGroupNames)
+	serializeTagList(s, schemas.CreateProxyConfigurationRequest_Tags, v.Tags)
+}
+
 type CreateProxyConfigurationOutput struct {
 
 	// The properties that define the proxy configuration.
@@ -92,77 +114,56 @@ type CreateProxyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProxyConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProxyConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProxyConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyConfiguration != nil {
+		s.WriteStruct(schemas.CreateProxyConfigurationResponse_ProxyConfiguration)
+		v.ProxyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.CreateProxyConfigurationResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *CreateProxyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProxyConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProxyConfigurationResponse_ProxyConfiguration:
+			v.ProxyConfiguration = &types.ProxyConfiguration{}
+			return v.ProxyConfiguration.Deserialize(d)
+		case schemas.CreateProxyConfigurationResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.CreateProxyConfigurationResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProxyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxyConfiguration, schemas.CreateProxyConfigurationRequest, schemas.CreateProxyConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateProxyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProxyConfiguration, schemas.CreateProxyConfigurationRequest, schemas.CreateProxyConfigurationResponse), output: &CreateProxyConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateProxyConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProxyConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateProxyConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProxyConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +178,8 @@ func (c *Client) addOperationCreateProxyConfigurationMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateProxyConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProxyConfiguration",
-	}
 }

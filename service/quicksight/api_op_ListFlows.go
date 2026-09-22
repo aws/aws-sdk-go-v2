@@ -5,10 +5,10 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists flows in an Amazon Web Services account.
@@ -45,6 +45,24 @@ type ListFlowsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListFlowsInput_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlowsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListFlowsOutput struct {
 
 	// A structure that contains all of the flows in your Amazon Web Services account.
@@ -66,77 +84,62 @@ type ListFlowsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowSummaryList(s, schemas.ListFlowsOutput_FlowSummaryList, v.FlowSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowsOutput_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListFlowsOutput_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListFlowsOutput_Status, v.Status)
+	}
+}
+func (v *ListFlowsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlowsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlowsOutput_FlowSummaryList:
+			return deserializeFlowSummaryList(d, schemas.ListFlowsOutput_FlowSummaryList, &v.FlowSummaryList)
+		case schemas.ListFlowsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlowsOutput_NextToken, v.NextToken)
+		case schemas.ListFlowsOutput_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListFlowsOutput_RequestId, v.RequestId)
+		case schemas.ListFlowsOutput_Status:
+			return d.ReadInt32(schemas.ListFlowsOutput_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlows, schemas.ListFlowsInput, schemas.ListFlowsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFlows{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlows, schemas.ListFlowsInput, schemas.ListFlowsOutput), output: &ListFlowsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFlows{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFlows"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFlowsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFlows(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +152,6 @@ func (c *Client) addOperationListFlowsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +251,3 @@ type ListFlowsAPIClient interface {
 }
 
 var _ ListFlowsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFlows(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFlows",
-	}
-}

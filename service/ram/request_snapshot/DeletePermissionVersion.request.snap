@@ -1,0 +1,3 @@
+DELETE /deletepermissionversion?clientToken=__ClientToken__&permissionArn=__PermissionArn__&permissionVersion=1
+
+

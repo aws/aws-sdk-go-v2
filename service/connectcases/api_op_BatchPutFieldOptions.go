@@ -4,11 +4,10 @@ package connectcases
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and updates a set of field options for a single select field in a Cases
@@ -48,6 +47,37 @@ type BatchPutFieldOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutFieldOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutFieldOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutFieldOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.BatchPutFieldOptionsRequest_domainId, *v.DomainId)
+	}
+	if v.FieldId != nil {
+		s.WriteString(schemas.BatchPutFieldOptionsRequest_fieldId, *v.FieldId)
+	}
+	serializeFieldOptionsList(s, schemas.BatchPutFieldOptionsRequest_options, v.Options)
+}
+func (v *BatchPutFieldOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutFieldOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutFieldOptionsRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.BatchPutFieldOptionsRequest_domainId, v.DomainId)
+		case schemas.BatchPutFieldOptionsRequest_fieldId:
+			v.FieldId = new(string)
+			return d.ReadString(schemas.BatchPutFieldOptionsRequest_fieldId, v.FieldId)
+		case schemas.BatchPutFieldOptionsRequest_options:
+			return deserializeFieldOptionsList(d, schemas.BatchPutFieldOptionsRequest_options, &v.Options)
+		}
+		return nil
+	})
+}
+
 type BatchPutFieldOptionsOutput struct {
 
 	// A list of field errors.
@@ -59,77 +89,45 @@ type BatchPutFieldOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutFieldOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutFieldOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutFieldOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFieldOptionErrorList(s, schemas.BatchPutFieldOptionsResponse_errors, v.Errors)
+}
+func (v *BatchPutFieldOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutFieldOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutFieldOptionsResponse_errors:
+			return deserializeFieldOptionErrorList(d, schemas.BatchPutFieldOptionsResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutFieldOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutFieldOptions, schemas.BatchPutFieldOptionsRequest, schemas.BatchPutFieldOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchPutFieldOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutFieldOptions, schemas.BatchPutFieldOptionsRequest, schemas.BatchPutFieldOptionsResponse), output: &BatchPutFieldOptionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchPutFieldOptions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchPutFieldOptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchPutFieldOptionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchPutFieldOptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +142,8 @@ func (c *Client) addOperationBatchPutFieldOptionsMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchPutFieldOptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchPutFieldOptions",
-	}
 }

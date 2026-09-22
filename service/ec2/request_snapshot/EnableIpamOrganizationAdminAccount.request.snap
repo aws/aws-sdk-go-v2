@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=EnableIpamOrganizationAdminAccount&DelegatedAdminAccountId=__DelegatedAdminAccountId__&DryRun=true&Version=2016-11-15

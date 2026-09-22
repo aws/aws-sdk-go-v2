@@ -4,11 +4,10 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the metadata, structure, stages, and actions of a pipeline. Can be used
@@ -45,6 +44,21 @@ type GetPipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPipelineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetPipelineInput_name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteInt32(schemas.GetPipelineInput_version, *v.Version)
+	}
+}
+
 // Represents the output of a GetPipeline action.
 type GetPipelineOutput struct {
 
@@ -61,77 +75,58 @@ type GetPipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPipelineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.GetPipelineOutput_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Pipeline != nil {
+		s.WriteStruct(schemas.GetPipelineOutput_pipeline)
+		v.Pipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPipelineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPipelineOutput_metadata:
+			v.Metadata = &types.PipelineMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.GetPipelineOutput_pipeline:
+			v.Pipeline = &types.PipelineDeclaration{}
+			return v.Pipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipeline, schemas.GetPipelineInput, schemas.GetPipelineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPipeline, schemas.GetPipelineInput, schemas.GetPipelineOutput), output: &GetPipelineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPipeline{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +141,8 @@ func (c *Client) addOperationGetPipelineMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPipeline",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.TestState
+
+{"context":"__Context__","definition":"__Definition__","input":"__Input__","inspectionLevel":"INFO","mock":{"errorOutput":{"cause":"__Cause__","error":"__Error__"},"fieldValidationMode":"STRICT","result":"__Result__"},"revealSecrets":true,"roleArn":"__RoleArn__","stateConfiguration":{"errorCausedByState":"__ErrorCausedByState__","mapItemReaderData":"__MapItemReaderData__","mapIterationFailureCount":1,"retrierRetryCount":1},"stateName":"__StateName__","variables":"__Variables__"}

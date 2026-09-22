@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Results":{"key0":{"EndpointItemResponse":{"Message":"__Message__","StatusCode":1},"EventsItemResponse":{"key0":{"Message":"__Message__","StatusCode":1}}}}}

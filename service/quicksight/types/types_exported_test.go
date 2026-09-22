@@ -81,6 +81,28 @@ func ExampleClientCredentialsDetails_outputUsage() {
 
 var _ *types.ClientCredentialsGrantDetails
 
+func ExampleCustomPromptInput_outputUsage() {
+	var union types.CustomPromptInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomPromptInputMemberExistingPrompt:
+		_ = v.Value // Value is types.CustomPromptProfile
+
+	case *types.CustomPromptInputMemberNewPrompt:
+		_ = v.Value // Value is types.CustomPromptInputParameters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomPromptProfile
+var _ *types.CustomPromptInputParameters
+
 func ExampleDataSourceParameters_outputUsage() {
 	var union types.DataSourceParameters
 	// type switches can be used to check the union value
@@ -118,6 +140,12 @@ func ExampleDataSourceParameters_outputUsage() {
 	case *types.DataSourceParametersMemberExasolParameters:
 		_ = v.Value // Value is types.ExasolParameters
 
+	case *types.DataSourceParametersMemberFMKBParameters:
+		_ = v.Value // Value is types.FMKBParameters
+
+	case *types.DataSourceParametersMemberGoogleDriveParameters:
+		_ = v.Value // Value is types.GoogleDriveParameters
+
 	case *types.DataSourceParametersMemberImpalaParameters:
 		_ = v.Value // Value is types.ImpalaParameters
 
@@ -129,6 +157,9 @@ func ExampleDataSourceParameters_outputUsage() {
 
 	case *types.DataSourceParametersMemberMySqlParameters:
 		_ = v.Value // Value is types.MySqlParameters
+
+	case *types.DataSourceParametersMemberOneDriveParameters:
+		_ = v.Value // Value is types.OneDriveParameters
 
 	case *types.DataSourceParametersMemberOracleParameters:
 		_ = v.Value // Value is types.OracleParameters
@@ -159,6 +190,9 @@ func ExampleDataSourceParameters_outputUsage() {
 
 	case *types.DataSourceParametersMemberServiceNowParameters:
 		_ = v.Value // Value is types.ServiceNowParameters
+
+	case *types.DataSourceParametersMemberSharePointParameters:
+		_ = v.Value // Value is types.SharePointParameters
 
 	case *types.DataSourceParametersMemberSnowflakeParameters:
 		_ = v.Value // Value is types.SnowflakeParameters
@@ -196,6 +230,8 @@ func ExampleDataSourceParameters_outputUsage() {
 var _ *types.RedshiftParameters
 var _ *types.DatabricksParameters
 var _ *types.S3KnowledgeBaseParameters
+var _ *types.OneDriveParameters
+var _ *types.GoogleDriveParameters
 var _ *types.JiraParameters
 var _ *types.S3TablesParameters
 var _ *types.ImpalaParameters
@@ -209,6 +245,7 @@ var _ *types.WebCrawlerParameters
 var _ *types.PrestoParameters
 var _ *types.AuroraParameters
 var _ *types.S3Parameters
+var _ *types.SharePointParameters
 var _ *types.TwitterParameters
 var _ *types.AwsIotAnalyticsParameters
 var _ *types.AmazonElasticsearchParameters
@@ -218,6 +255,7 @@ var _ *types.AmazonOpenSearchParameters
 var _ *types.TrinoParameters
 var _ *types.OracleParameters
 var _ *types.TeradataParameters
+var _ *types.FMKBParameters
 var _ *types.ExasolParameters
 var _ *types.SqlServerParameters
 var _ *types.PostgreSqlParameters
@@ -277,6 +315,9 @@ func ExamplePhysicalTable_outputUsage() {
 	case *types.PhysicalTableMemberCustomSql:
 		_ = v.Value // Value is types.CustomSql
 
+	case *types.PhysicalTableMemberFileSource:
+		_ = v.Value // Value is types.FileSource
+
 	case *types.PhysicalTableMemberRelationalTable:
 		_ = v.Value // Value is types.RelationalTable
 
@@ -295,10 +336,29 @@ func ExamplePhysicalTable_outputUsage() {
 	}
 }
 
+var _ *types.FileSource
 var _ *types.S3Source
 var _ *types.CustomSql
 var _ *types.RelationalTable
 var _ *types.SaaSTable
+
+func ExampleProviderConfig_outputUsage() {
+	var union types.ProviderConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ProviderConfigMemberMicrosoftPurview:
+		_ = v.Value // Value is types.MicrosoftPurviewProviderConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MicrosoftPurviewProviderConfig
 
 func ExampleReadAuthenticationMetadata_outputUsage() {
 	var union types.ReadAuthenticationMetadata
@@ -374,6 +434,24 @@ func ExampleReadClientCredentialsDetails_outputUsage() {
 
 var _ *types.ReadClientCredentialsGrantDetails
 
+func ExampleSpaceQuickSightResourceDetails_outputUsage() {
+	var union types.SpaceQuickSightResourceDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SpaceQuickSightResourceDetailsMemberResourceArn:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleTransformOperation_outputUsage() {
 	var union types.TransformOperation
 	// type switches can be used to check the union value
@@ -444,3 +522,25 @@ func ExampleUserIdentifier_outputUsage() {
 
 var _ *string
 var _ *string
+
+func ExampleUserIndexCapacityFilter_outputUsage() {
+	var union types.UserIndexCapacityFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UserIndexCapacityFilterMemberTotalCapacityBytes:
+		_ = v.Value // Value is types.CapacityBytesRangeFilter
+
+	case *types.UserIndexCapacityFilterMemberUserNameOrEmail:
+		_ = v.Value // Value is types.UserNameOrEmailFilter
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.UserNameOrEmailFilter
+var _ *types.CapacityBytesRangeFilter

@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the bundles that can be applied to your Amazon Lightsail content
@@ -35,6 +34,15 @@ type GetDistributionBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDistributionBundlesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDistributionBundlesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDistributionBundlesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetDistributionBundlesOutput struct {
 
 	// An object that describes a distribution bundle.
@@ -46,74 +54,42 @@ type GetDistributionBundlesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDistributionBundlesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDistributionBundlesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDistributionBundlesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDistributionBundleList(s, schemas.GetDistributionBundlesResult_bundles, v.Bundles)
+}
+func (v *GetDistributionBundlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDistributionBundlesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDistributionBundlesResult_bundles:
+			return deserializeDistributionBundleList(d, schemas.GetDistributionBundlesResult_bundles, &v.Bundles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDistributionBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDistributionBundles, schemas.GetDistributionBundlesRequest, schemas.GetDistributionBundlesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDistributionBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDistributionBundles, schemas.GetDistributionBundlesRequest, schemas.GetDistributionBundlesResult), output: &GetDistributionBundlesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDistributionBundles{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDistributionBundles"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDistributionBundles(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -128,22 +104,8 @@ func (c *Client) addOperationGetDistributionBundlesMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDistributionBundles(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDistributionBundles",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.ListModelManifests
+
+{"listResponseScope":"METADATA_ONLY","maxResults":1,"nextToken":"__NextToken__","signalCatalogArn":"__SignalCatalogArn__"}

@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a signal catalog.
@@ -49,6 +48,43 @@ type UpdateSignalCatalogInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSignalCatalogInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSignalCatalogRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSignalCatalogInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSignalCatalogRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSignalCatalogRequest_name, *v.Name)
+	}
+	serializeNodes(s, schemas.UpdateSignalCatalogRequest_nodesToAdd, v.NodesToAdd)
+	serializeNodePaths(s, schemas.UpdateSignalCatalogRequest_nodesToRemove, v.NodesToRemove)
+	serializeNodes(s, schemas.UpdateSignalCatalogRequest_nodesToUpdate, v.NodesToUpdate)
+}
+func (v *UpdateSignalCatalogInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSignalCatalogRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSignalCatalogRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateSignalCatalogRequest_description, v.Description)
+		case schemas.UpdateSignalCatalogRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateSignalCatalogRequest_name, v.Name)
+		case schemas.UpdateSignalCatalogRequest_nodesToAdd:
+			return deserializeNodes(d, schemas.UpdateSignalCatalogRequest_nodesToAdd, &v.NodesToAdd)
+		case schemas.UpdateSignalCatalogRequest_nodesToRemove:
+			return deserializeNodePaths(d, schemas.UpdateSignalCatalogRequest_nodesToRemove, &v.NodesToRemove)
+		case schemas.UpdateSignalCatalogRequest_nodesToUpdate:
+			return deserializeNodes(d, schemas.UpdateSignalCatalogRequest_nodesToUpdate, &v.NodesToUpdate)
+		}
+		return nil
+	})
+}
+
 type UpdateSignalCatalogOutput struct {
 
 	//  The ARN of the updated signal catalog.
@@ -67,77 +103,54 @@ type UpdateSignalCatalogOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSignalCatalogOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSignalCatalogResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSignalCatalogOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateSignalCatalogResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSignalCatalogResponse_name, *v.Name)
+	}
+}
+func (v *UpdateSignalCatalogOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSignalCatalogResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSignalCatalogResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateSignalCatalogResponse_arn, v.Arn)
+		case schemas.UpdateSignalCatalogResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateSignalCatalogResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSignalCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSignalCatalog, schemas.UpdateSignalCatalogRequest, schemas.UpdateSignalCatalogResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateSignalCatalog{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSignalCatalog, schemas.UpdateSignalCatalogRequest, schemas.UpdateSignalCatalogResponse), output: &UpdateSignalCatalogOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateSignalCatalog{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSignalCatalog"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSignalCatalogValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSignalCatalog(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +165,8 @@ func (c *Client) addOperationUpdateSignalCatalogMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSignalCatalog(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSignalCatalog",
-	}
 }

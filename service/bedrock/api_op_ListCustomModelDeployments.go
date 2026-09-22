@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -80,6 +80,42 @@ type ListCustomModelDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomModelDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomModelDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomModelDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAfter != nil {
+		s.WriteTime(schemas.ListCustomModelDeploymentsRequest_createdAfter, *v.CreatedAfter)
+	}
+	if v.CreatedBefore != nil {
+		s.WriteTime(schemas.ListCustomModelDeploymentsRequest_createdBefore, *v.CreatedBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomModelDeploymentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelArnEquals != nil {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_modelArnEquals, *v.ModelArnEquals)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListCustomModelDeploymentsRequest_statusEquals, string(v.StatusEquals))
+	}
+}
+
 type ListCustomModelDeploymentsOutput struct {
 
 	// A list of custom model deployment summaries.
@@ -95,74 +131,48 @@ type ListCustomModelDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomModelDeploymentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomModelDeploymentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomModelDeploymentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomModelDeploymentSummaryList(s, schemas.ListCustomModelDeploymentsResponse_modelDeploymentSummaries, v.ModelDeploymentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomModelDeploymentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomModelDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomModelDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomModelDeploymentsResponse_modelDeploymentSummaries:
+			return deserializeCustomModelDeploymentSummaryList(d, schemas.ListCustomModelDeploymentsResponse_modelDeploymentSummaries, &v.ModelDeploymentSummaries)
+		case schemas.ListCustomModelDeploymentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomModelDeploymentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomModelDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomModelDeployments, schemas.ListCustomModelDeploymentsRequest, schemas.ListCustomModelDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomModelDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomModelDeployments, schemas.ListCustomModelDeploymentsRequest, schemas.ListCustomModelDeploymentsResponse), output: &ListCustomModelDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomModelDeployments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCustomModelDeployments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomModelDeployments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +185,6 @@ func (c *Client) addOperationListCustomModelDeploymentsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -284,11 +288,3 @@ type ListCustomModelDeploymentsAPIClient interface {
 }
 
 var _ ListCustomModelDeploymentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCustomModelDeployments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCustomModelDeployments",
-	}
-}

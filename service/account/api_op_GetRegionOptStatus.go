@@ -4,11 +4,10 @@ package account
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/account/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/account/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the opt-in status of a particular Region.
@@ -61,6 +60,21 @@ type GetRegionOptStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegionOptStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegionOptStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegionOptStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetRegionOptStatusRequest_AccountId, *v.AccountId)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.GetRegionOptStatusRequest_RegionName, *v.RegionName)
+	}
+}
+
 type GetRegionOptStatusOutput struct {
 
 	// The Region code that was passed in.
@@ -76,77 +90,58 @@ type GetRegionOptStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRegionOptStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRegionOptStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRegionOptStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionName != nil {
+		s.WriteString(schemas.GetRegionOptStatusResponse_RegionName, *v.RegionName)
+	}
+	if v.RegionOptStatus != "" {
+		s.WriteString(schemas.GetRegionOptStatusResponse_RegionOptStatus, string(v.RegionOptStatus))
+	}
+}
+func (v *GetRegionOptStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRegionOptStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRegionOptStatusResponse_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.GetRegionOptStatusResponse_RegionName, v.RegionName)
+		case schemas.GetRegionOptStatusResponse_RegionOptStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetRegionOptStatusResponse_RegionOptStatus, &ev); err != nil {
+				return err
+			}
+			v.RegionOptStatus = types.RegionOptStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRegionOptStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegionOptStatus, schemas.GetRegionOptStatusRequest, schemas.GetRegionOptStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRegionOptStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRegionOptStatus, schemas.GetRegionOptStatusRequest, schemas.GetRegionOptStatusResponse), output: &GetRegionOptStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRegionOptStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRegionOptStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRegionOptStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRegionOptStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +156,8 @@ func (c *Client) addOperationGetRegionOptStatusMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRegionOptStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRegionOptStatus",
-	}
 }

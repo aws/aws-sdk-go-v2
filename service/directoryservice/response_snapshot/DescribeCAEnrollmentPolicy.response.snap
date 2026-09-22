@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.DescribeCAEnrollmentPolicy
+
+{"CaEnrollmentPolicyStatus":"InProgress","CaEnrollmentPolicyStatusReason":"__CaEnrollmentPolicyStatusReason__","DirectoryId":"__DirectoryId__","LastUpdatedDateTime":946684800,"PcaConnectorArn":"__PcaConnectorArn__"}

@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/environment-profiles?awsAccountId=__AwsAccountId__&awsAccountRegion=__AwsAccountRegion__&environmentBlueprintIdentifier=__EnvironmentBlueprintIdentifier__&maxResults=1&name=__Name__&nextToken=__NextToken__&projectIdentifier=__ProjectIdentifier__
+
+

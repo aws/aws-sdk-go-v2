@@ -4,11 +4,8 @@ package rds
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies settings for a DB instance. You can change one or more database
@@ -479,6 +476,24 @@ type ModifyDBInstanceInput struct {
 	//   --db-parameter-group-name and a new option group with --option-group-name .
 	Engine *string
 
+	// The lifecycle type for this DB instance.
+	//
+	// This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon
+	// Aurora DB instances, the engine lifecycle support is managed by the DB cluster.
+	//
+	// You can use this setting to enroll your DB instance into Amazon RDS Extended
+	// Support or to opt out. With RDS Extended Support, you can run the selected major
+	// engine version on your DB instance past the end of standard support for that
+	// engine version. For more information, see [Amazon RDS Extended Support with Amazon RDS]in the Amazon RDS User Guide.
+	//
+	// Valid Values: open-source-rds-extended-support |
+	// open-source-rds-extended-support-disabled
+	//
+	// This setting doesn't apply to RDS Custom DB instances.
+	//
+	// [Amazon RDS Extended Support with Amazon RDS]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html
+	EngineLifecycleSupport *string
+
 	// The version number of the database engine to upgrade to. Changing this
 	// parameter results in an outage and the change is applied during the next
 	// maintenance window unless the ApplyImmediately parameter is enabled for this
@@ -555,7 +570,7 @@ type ModifyDBInstanceInput struct {
 	//
 	//   - RDS for MariaDB - general-public-license
 	//
-	//   - RDS for Microsoft SQL Server - license-included
+	//   - RDS for Microsoft SQL Server - license-included | bring-your-own-media
 	//
 	//   - RDS for MySQL - general-public-license
 	//
@@ -923,10 +938,10 @@ type ModifyDBInstanceInput struct {
 	//
 	// This parameter is only supported for Db2 DB instances and Oracle DB instances.
 	//
-	// Db2 Standby DB replicas are included in Db2 Advanced Edition (AE) and Db2
-	// Standard Edition (SE). The main use case for standby replicas is cross-Region
-	// disaster recovery. Because it doesn't accept user connections, a standby replica
-	// can't serve a read-only workload.
+	// Db2 Standby DB replicas are included in Db2 Advanced Edition (AE), Db2
+	// Community Edition (CE), and Db2 Standard Edition (SE). The main use case for
+	// standby replicas is cross-Region disaster recovery. Because it doesn't accept
+	// user connections, a standby replica can't serve a read-only workload.
 	//
 	// You can create a combination of standby and read-only DB replicas for the same
 	// primary DB instance. For more information, see [Working with replicas for Amazon RDS for Db2]in the Amazon RDS User Guide.
@@ -1070,9 +1085,6 @@ type ModifyDBInstanceOutput struct {
 }
 
 func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBInstance{}, middleware.After)
 	if err != nil {
 		return err
@@ -1081,65 +1093,20 @@ func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyDBInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpModifyDBInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDBInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -1154,22 +1121,8 @@ func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opModifyDBInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ModifyDBInstance",
-	}
 }

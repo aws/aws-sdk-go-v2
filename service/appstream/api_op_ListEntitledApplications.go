@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of entitled applications.
@@ -49,6 +48,27 @@ type ListEntitledApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitledApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitledApplicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitledApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntitlementName != nil {
+		s.WriteString(schemas.ListEntitledApplicationsRequest_EntitlementName, *v.EntitlementName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntitledApplicationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitledApplicationsRequest_NextToken, *v.NextToken)
+	}
+	if v.StackName != nil {
+		s.WriteString(schemas.ListEntitledApplicationsRequest_StackName, *v.StackName)
+	}
+}
+
 type ListEntitledApplicationsOutput struct {
 
 	// The entitled applications.
@@ -64,77 +84,54 @@ type ListEntitledApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitledApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitledApplicationsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitledApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntitledApplicationList(s, schemas.ListEntitledApplicationsResult_EntitledApplications, v.EntitledApplications)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitledApplicationsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEntitledApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntitledApplicationsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntitledApplicationsResult_EntitledApplications:
+			return deserializeEntitledApplicationList(d, schemas.ListEntitledApplicationsResult_EntitledApplications, &v.EntitledApplications)
+		case schemas.ListEntitledApplicationsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntitledApplicationsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntitledApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitledApplications, schemas.ListEntitledApplicationsRequest, schemas.ListEntitledApplicationsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEntitledApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitledApplications, schemas.ListEntitledApplicationsRequest, schemas.ListEntitledApplicationsResult), output: &ListEntitledApplicationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEntitledApplications{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEntitledApplications"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEntitledApplicationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEntitledApplications(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +146,8 @@ func (c *Client) addOperationListEntitledApplicationsMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListEntitledApplications(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEntitledApplications",
-	}
 }

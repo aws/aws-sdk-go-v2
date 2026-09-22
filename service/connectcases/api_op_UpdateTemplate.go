@@ -4,11 +4,10 @@ package connectcases
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the attributes of an existing template. The template attributes that
@@ -87,6 +86,73 @@ type UpdateTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_description, *v.Description)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_domainId, *v.DomainId)
+	}
+	if v.LayoutConfiguration != nil {
+		s.WriteStruct(schemas.UpdateTemplateRequest_layoutConfiguration)
+		v.LayoutConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_name, *v.Name)
+	}
+	serializeRequiredFieldList(s, schemas.UpdateTemplateRequest_requiredFields, v.RequiredFields)
+	serializeTemplateCaseRuleList(s, schemas.UpdateTemplateRequest_rules, v.Rules)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateTemplateRequest_status, string(v.Status))
+	}
+	serializeTagPropagationConfigurationList(s, schemas.UpdateTemplateRequest_tagPropagationConfigurations, v.TagPropagationConfigurations)
+	if v.TemplateId != nil {
+		s.WriteString(schemas.UpdateTemplateRequest_templateId, *v.TemplateId)
+	}
+}
+func (v *UpdateTemplateInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTemplateRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTemplateRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateTemplateRequest_description, v.Description)
+		case schemas.UpdateTemplateRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateTemplateRequest_domainId, v.DomainId)
+		case schemas.UpdateTemplateRequest_layoutConfiguration:
+			v.LayoutConfiguration = &types.LayoutConfiguration{}
+			return v.LayoutConfiguration.Deserialize(d)
+		case schemas.UpdateTemplateRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateTemplateRequest_name, v.Name)
+		case schemas.UpdateTemplateRequest_requiredFields:
+			return deserializeRequiredFieldList(d, schemas.UpdateTemplateRequest_requiredFields, &v.RequiredFields)
+		case schemas.UpdateTemplateRequest_rules:
+			return deserializeTemplateCaseRuleList(d, schemas.UpdateTemplateRequest_rules, &v.Rules)
+		case schemas.UpdateTemplateRequest_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateTemplateRequest_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TemplateStatus(ev)
+			return nil
+		case schemas.UpdateTemplateRequest_tagPropagationConfigurations:
+			return deserializeTagPropagationConfigurationList(d, schemas.UpdateTemplateRequest_tagPropagationConfigurations, &v.TagPropagationConfigurations)
+		case schemas.UpdateTemplateRequest_templateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.UpdateTemplateRequest_templateId, v.TemplateId)
+		}
+		return nil
+	})
+}
+
 type UpdateTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -94,77 +160,42 @@ type UpdateTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplate, schemas.UpdateTemplateRequest, schemas.UpdateTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTemplate, schemas.UpdateTemplateRequest, schemas.UpdateTemplateResponse), output: &UpdateTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +210,8 @@ func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTemplate",
-	}
 }

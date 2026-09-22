@@ -5,10 +5,10 @@ package managedblockchain
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new accessor for use with Amazon Managed Blockchain service that
@@ -82,6 +82,25 @@ type CreateAccessorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessorInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessorType != "" {
+		s.WriteString(schemas.CreateAccessorInput_AccessorType, string(v.AccessorType))
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAccessorInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateAccessorInput_NetworkType, string(v.NetworkType))
+	}
+	serializeInputTagMap(s, schemas.CreateAccessorInput_Tags, v.Tags)
+}
+
 type CreateAccessorOutput struct {
 
 	// The unique identifier of the accessor.
@@ -101,65 +120,58 @@ type CreateAccessorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessorOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessorId != nil {
+		s.WriteString(schemas.CreateAccessorOutput_AccessorId, *v.AccessorId)
+	}
+	if v.BillingToken != nil {
+		s.WriteString(schemas.CreateAccessorOutput_BillingToken, *v.BillingToken)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.CreateAccessorOutput_NetworkType, string(v.NetworkType))
+	}
+}
+func (v *CreateAccessorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessorOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessorOutput_AccessorId:
+			v.AccessorId = new(string)
+			return d.ReadString(schemas.CreateAccessorOutput_AccessorId, v.AccessorId)
+		case schemas.CreateAccessorOutput_BillingToken:
+			v.BillingToken = new(string)
+			return d.ReadString(schemas.CreateAccessorOutput_BillingToken, v.BillingToken)
+		case schemas.CreateAccessorOutput_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.CreateAccessorOutput_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = types.AccessorNetworkType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessor, schemas.CreateAccessorInput, schemas.CreateAccessorOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessor, schemas.CreateAccessorInput, schemas.CreateAccessorOutput), output: &CreateAccessorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessor{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAccessor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -169,12 +181,6 @@ func (c *Client) addOperationCreateAccessorMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpCreateAccessorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccessor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,12 +193,6 @@ func (c *Client) addOperationCreateAccessorMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -232,12 +232,4 @@ func (m *idempotencyToken_initializeOpCreateAccessor) HandleInitialize(ctx conte
 }
 func addIdempotencyToken_opCreateAccessorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAccessor{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAccessor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAccessor",
-	}
 }

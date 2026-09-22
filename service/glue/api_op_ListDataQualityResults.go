@@ -5,10 +5,10 @@ package glue
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns all data quality execution results for your account.
@@ -41,6 +41,26 @@ type ListDataQualityResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListDataQualityResultsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataQualityResultsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityResultsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDataQualityResultsOutput struct {
 
 	// A list of DataQualityResultDescription objects.
@@ -57,77 +77,51 @@ type ListDataQualityResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataQualityResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataQualityResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataQualityResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataQualityResultsResponse_NextToken, *v.NextToken)
+	}
+	serializeDataQualityResultDescriptionList(s, schemas.ListDataQualityResultsResponse_Results, v.Results)
+}
+func (v *ListDataQualityResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataQualityResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataQualityResultsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataQualityResultsResponse_NextToken, v.NextToken)
+		case schemas.ListDataQualityResultsResponse_Results:
+			return deserializeDataQualityResultDescriptionList(d, schemas.ListDataQualityResultsResponse_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataQualityResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityResults, schemas.ListDataQualityResultsRequest, schemas.ListDataQualityResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataQualityResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataQualityResults, schemas.ListDataQualityResultsRequest, schemas.ListDataQualityResultsResponse), output: &ListDataQualityResultsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataQualityResults{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataQualityResults"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataQualityResultsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataQualityResults(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +134,6 @@ func (c *Client) addOperationListDataQualityResultsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +235,3 @@ type ListDataQualityResultsAPIClient interface {
 }
 
 var _ ListDataQualityResultsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataQualityResults(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataQualityResults",
-	}
-}

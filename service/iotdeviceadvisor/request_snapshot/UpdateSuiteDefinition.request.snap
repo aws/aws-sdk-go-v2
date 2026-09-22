@@ -1,0 +1,5 @@
+PATCH /suiteDefinitions/__SuiteDefinitionId__
+
+Content-Type: application/json
+
+{"suiteDefinitionConfiguration":{"devicePermissionRoleArn":"__DevicePermissionRoleArn__","devices":[{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"},{"certificateArn":"__CertificateArn__","deviceRoleArn":"__DeviceRoleArn__","thingArn":"__ThingArn__"}],"intendedForQualification":true,"isLongDurationTest":true,"protocol":"MqttV3_1_1","rootGroup":"__RootGroup__","suiteDefinitionName":"__SuiteDefinitionName__"}}

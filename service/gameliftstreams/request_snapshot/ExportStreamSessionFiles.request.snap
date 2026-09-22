@@ -1,0 +1,5 @@
+PUT /streamgroups/__Identifier__/streamsessions/__StreamSessionIdentifier__/exportfiles
+
+Content-Type: application/json
+
+{"OutputUri":"__OutputUri__"}

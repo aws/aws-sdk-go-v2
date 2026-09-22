@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botLocaleSummaries":[{"botLocaleStatus":"Creating","description":"__Description__","lastBuildSubmittedDateTime":946684800,"lastUpdatedDateTime":946684800,"localeId":"__LocaleId__","localeName":"__LocaleName__"},{"botLocaleStatus":"Creating","description":"__Description__","lastBuildSubmittedDateTime":946684800,"lastUpdatedDateTime":946684800,"localeId":"__LocaleId__","localeName":"__LocaleName__"}],"botVersion":"__BotVersion__","nextToken":"__NextToken__"}

@@ -4,17 +4,35 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a database migration assessment report by assessing the migration
-// complexity for your source database. A database migration assessment report
-// summarizes all of the schema conversion tasks. It also details the action items
-// for database objects that can't be converted to the database engine of your
-// target database instance.
+// Queues an assessment of the selected source metadata models (database objects
+// such as tables, views, and procedures) to evaluate conversion complexity to the
+// target database format. If other requests created by Start* operations are
+// already in the migration project's queue, the assessment begins after they
+// complete.
+//
+// The assessment request loads metadata models that are not yet in the metadata
+// tree, but does not reload metadata models that are already present. If your
+// source database has changed since the metadata was loaded, refresh the affected
+// metadata models with [StartMetadataModelImport]before calling this operation.
+//
+// To check the status of the assessment request, call [DescribeMetadataModelAssessments] using the returned
+// RequestIdentifier as a filter.
+//
+// To export the conversion assessment report after the request completes
+// successfully, call [ExportMetadataModelAssessment].
+//
+// Required permissions: dms:StartMetadataModelAssessment . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [StartMetadataModelImport]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html
+// [ExportMetadataModelAssessment]: https://docs.aws.amazon.com/dms/latest/APIReference/API_ExportMetadataModelAssessment.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
+// [DescribeMetadataModelAssessments]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelAssessments.html
 func (c *Client) StartMetadataModelAssessment(ctx context.Context, params *StartMetadataModelAssessmentInput, optFns ...func(*Options)) (*StartMetadataModelAssessmentOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelAssessmentInput{}
@@ -37,7 +55,17 @@ type StartMetadataModelAssessmentInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// A value that specifies the database objects to assess.
+	// A JSON string that identifies the metadata models to assess. For the selection
+	// rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts only source selection rules, where server-name in the object locator
+	//   matches the source data provider.
+	//
+	//   - Supports explicit , include , and exclude rule actions.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
@@ -45,9 +73,24 @@ type StartMetadataModelAssessmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelAssessmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelAssessmentMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelAssessmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelAssessmentMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelAssessmentMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelAssessmentOutput struct {
 
-	// The identifier for the assessment operation.
+	// The identifier for the assessment request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.
@@ -56,77 +99,48 @@ type StartMetadataModelAssessmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelAssessmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelAssessmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelAssessmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelAssessmentResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelAssessmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelAssessmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelAssessmentResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelAssessmentResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelAssessment, schemas.StartMetadataModelAssessmentMessage, schemas.StartMetadataModelAssessmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelAssessment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelAssessment, schemas.StartMetadataModelAssessmentMessage, schemas.StartMetadataModelAssessmentResponse), output: &StartMetadataModelAssessmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelAssessment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMetadataModelAssessment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMetadataModelAssessmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMetadataModelAssessment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +155,8 @@ func (c *Client) addOperationStartMetadataModelAssessmentMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMetadataModelAssessment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMetadataModelAssessment",
-	}
 }

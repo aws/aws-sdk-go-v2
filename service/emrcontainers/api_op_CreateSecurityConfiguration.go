@@ -5,10 +5,10 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a security configuration. Security configurations in Amazon EMR on EKS
@@ -57,6 +57,32 @@ type CreateSecurityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContainerProvider != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigurationRequest_containerProvider)
+		v.ContainerProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationRequest_name, *v.Name)
+	}
+	if v.SecurityConfigurationData != nil {
+		s.WriteStruct(schemas.CreateSecurityConfigurationRequest_securityConfigurationData)
+		v.SecurityConfigurationData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateSecurityConfigurationRequest_tags, v.Tags)
+}
+
 type CreateSecurityConfigurationOutput struct {
 
 	// The ARN (Amazon Resource Name) of the security configuration.
@@ -74,65 +100,54 @@ type CreateSecurityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSecurityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSecurityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSecurityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationResponse_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSecurityConfigurationResponse_name, *v.Name)
+	}
+}
+func (v *CreateSecurityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSecurityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSecurityConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigurationResponse_arn, v.Arn)
+		case schemas.CreateSecurityConfigurationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigurationResponse_id, v.Id)
+		case schemas.CreateSecurityConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateSecurityConfigurationResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfiguration, schemas.CreateSecurityConfigurationRequest, schemas.CreateSecurityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSecurityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSecurityConfiguration, schemas.CreateSecurityConfigurationRequest, schemas.CreateSecurityConfigurationResponse), output: &CreateSecurityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSecurityConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSecurityConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -142,12 +157,6 @@ func (c *Client) addOperationCreateSecurityConfigurationMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpCreateSecurityConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSecurityConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,12 +169,6 @@ func (c *Client) addOperationCreateSecurityConfigurationMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -205,12 +208,4 @@ func (m *idempotencyToken_initializeOpCreateSecurityConfiguration) HandleInitial
 }
 func addIdempotencyToken_opCreateSecurityConfigurationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSecurityConfiguration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSecurityConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSecurityConfiguration",
-	}
 }

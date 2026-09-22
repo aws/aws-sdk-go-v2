@@ -5,10 +5,10 @@ package costoptimizationhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a concise representation of savings estimates for resources. Also
@@ -55,6 +55,30 @@ type ListRecommendationSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListRecommendationSummariesRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GroupBy != nil {
+		s.WriteString(schemas.ListRecommendationSummariesRequest_groupBy, *v.GroupBy)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendationSummariesRequest_maxResults, *v.MaxResults)
+	}
+	serializeSummaryMetricsList(s, schemas.ListRecommendationSummariesRequest_metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationSummariesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListRecommendationSummariesOutput struct {
 
 	// The currency code used for the recommendation.
@@ -82,77 +106,77 @@ type ListRecommendationSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.ListRecommendationSummariesResponse_currencyCode, *v.CurrencyCode)
+	}
+	if v.EstimatedTotalDedupedSavings != nil {
+		s.WriteFloat64(schemas.ListRecommendationSummariesResponse_estimatedTotalDedupedSavings, *v.EstimatedTotalDedupedSavings)
+	}
+	if v.GroupBy != nil {
+		s.WriteString(schemas.ListRecommendationSummariesResponse_groupBy, *v.GroupBy)
+	}
+	serializeRecommendationSummariesList(s, schemas.ListRecommendationSummariesResponse_items, v.Items)
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.ListRecommendationSummariesResponse_metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationSummariesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRecommendationSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationSummariesResponse_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.ListRecommendationSummariesResponse_currencyCode, v.CurrencyCode)
+		case schemas.ListRecommendationSummariesResponse_estimatedTotalDedupedSavings:
+			v.EstimatedTotalDedupedSavings = new(float64)
+			return d.ReadFloat64(schemas.ListRecommendationSummariesResponse_estimatedTotalDedupedSavings, v.EstimatedTotalDedupedSavings)
+		case schemas.ListRecommendationSummariesResponse_groupBy:
+			v.GroupBy = new(string)
+			return d.ReadString(schemas.ListRecommendationSummariesResponse_groupBy, v.GroupBy)
+		case schemas.ListRecommendationSummariesResponse_items:
+			return deserializeRecommendationSummariesList(d, schemas.ListRecommendationSummariesResponse_items, &v.Items)
+		case schemas.ListRecommendationSummariesResponse_metrics:
+			v.Metrics = &types.SummaryMetricsResult{}
+			return v.Metrics.Deserialize(d)
+		case schemas.ListRecommendationSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationSummariesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationSummaries, schemas.ListRecommendationSummariesRequest, schemas.ListRecommendationSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRecommendationSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationSummaries, schemas.ListRecommendationSummariesRequest, schemas.ListRecommendationSummariesResponse), output: &ListRecommendationSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRecommendationSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRecommendationSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRecommendationSummariesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecommendationSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +189,6 @@ func (c *Client) addOperationListRecommendationSummariesMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +292,3 @@ type ListRecommendationSummariesAPIClient interface {
 }
 
 var _ ListRecommendationSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRecommendationSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRecommendationSummaries",
-	}
-}

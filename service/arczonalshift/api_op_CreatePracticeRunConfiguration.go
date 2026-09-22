@@ -4,11 +4,10 @@ package arczonalshift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A practice run configuration for zonal autoshift is required when you enable
@@ -132,6 +131,23 @@ type CreatePracticeRunConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePracticeRunConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePracticeRunConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePracticeRunConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedWindows(s, schemas.CreatePracticeRunConfigurationRequest_allowedWindows, v.AllowedWindows)
+	serializeBlockedDates(s, schemas.CreatePracticeRunConfigurationRequest_blockedDates, v.BlockedDates)
+	serializeBlockedWindows(s, schemas.CreatePracticeRunConfigurationRequest_blockedWindows, v.BlockedWindows)
+	serializeBlockingAlarms(s, schemas.CreatePracticeRunConfigurationRequest_blockingAlarms, v.BlockingAlarms)
+	serializeOutcomeAlarms(s, schemas.CreatePracticeRunConfigurationRequest_outcomeAlarms, v.OutcomeAlarms)
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.CreatePracticeRunConfigurationRequest_resourceIdentifier, *v.ResourceIdentifier)
+	}
+}
+
 type CreatePracticeRunConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the resource that you configured the practice
@@ -170,77 +186,72 @@ type CreatePracticeRunConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePracticeRunConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePracticeRunConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePracticeRunConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePracticeRunConfigurationResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePracticeRunConfigurationResponse_name, *v.Name)
+	}
+	if v.PracticeRunConfiguration != nil {
+		s.WriteStruct(schemas.CreatePracticeRunConfigurationResponse_practiceRunConfiguration)
+		v.PracticeRunConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ZonalAutoshiftStatus != "" {
+		s.WriteString(schemas.CreatePracticeRunConfigurationResponse_zonalAutoshiftStatus, string(v.ZonalAutoshiftStatus))
+	}
+}
+func (v *CreatePracticeRunConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePracticeRunConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePracticeRunConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreatePracticeRunConfigurationResponse_arn, v.Arn)
+		case schemas.CreatePracticeRunConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreatePracticeRunConfigurationResponse_name, v.Name)
+		case schemas.CreatePracticeRunConfigurationResponse_practiceRunConfiguration:
+			v.PracticeRunConfiguration = &types.PracticeRunConfiguration{}
+			return v.PracticeRunConfiguration.Deserialize(d)
+		case schemas.CreatePracticeRunConfigurationResponse_zonalAutoshiftStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreatePracticeRunConfigurationResponse_zonalAutoshiftStatus, &ev); err != nil {
+				return err
+			}
+			v.ZonalAutoshiftStatus = types.ZonalAutoshiftStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePracticeRunConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePracticeRunConfiguration, schemas.CreatePracticeRunConfigurationRequest, schemas.CreatePracticeRunConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePracticeRunConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePracticeRunConfiguration, schemas.CreatePracticeRunConfigurationRequest, schemas.CreatePracticeRunConfigurationResponse), output: &CreatePracticeRunConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePracticeRunConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePracticeRunConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePracticeRunConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePracticeRunConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -255,22 +266,8 @@ func (c *Client) addOperationCreatePracticeRunConfigurationMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePracticeRunConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePracticeRunConfiguration",
-	}
 }

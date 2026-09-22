@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListMonitoringAlerts
+
+{"MonitoringAlertSummaries":[{"Actions":{"ModelDashboardIndicator":{"Enabled":true}},"AlertStatus":"InAlert","CreationTime":946684800,"DatapointsToAlert":1,"EvaluationPeriod":1,"LastModifiedTime":946684800,"MonitoringAlertName":"__MonitoringAlertName__"},{"Actions":{"ModelDashboardIndicator":{"Enabled":true}},"AlertStatus":"InAlert","CreationTime":946684800,"DatapointsToAlert":1,"EvaluationPeriod":1,"LastModifiedTime":946684800,"MonitoringAlertName":"__MonitoringAlertName__"}],"NextToken":"__NextToken__"}

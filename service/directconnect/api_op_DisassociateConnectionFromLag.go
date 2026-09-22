@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -53,6 +52,21 @@ type DisassociateConnectionFromLagInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConnectionFromLagInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateConnectionFromLagRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConnectionFromLagInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.DisassociateConnectionFromLagRequest_connectionId, *v.ConnectionId)
+	}
+	if v.LagId != nil {
+		s.WriteString(schemas.DisassociateConnectionFromLagRequest_lagId, *v.LagId)
+	}
+}
+
 // Information about an Direct Connect connection.
 type DisassociateConnectionFromLagOutput struct {
 
@@ -70,6 +84,9 @@ type DisassociateConnectionFromLagOutput struct {
 
 	// The bandwidth of the connection.
 	Bandwidth *string
+
+	// The billing mode of the connection.
+	BillingMode types.BillingMode
 
 	// The ID of the connection.
 	ConnectionId *string
@@ -146,8 +163,32 @@ type DisassociateConnectionFromLagOutput struct {
 	// Connection Key Name, or Encryption Down .
 	PortEncryptionStatus *string
 
+	// The total number of inbound IPv4 route prefixes you can allocate across the
+	// virtual interfaces on the connection. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolSizeIpv4 *int32
+
+	// The total number of inbound IPv6 route prefixes you can allocate across the
+	// virtual interfaces on the connection. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolSizeIpv6 *int32
+
+	// The number of inbound IPv4 route prefixes in the connection prefix pool not yet
+	// allocated to a virtual interface. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolUnallocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes in the connection prefix pool not yet
+	// allocated to a virtual interface. Not applicable to hosted connections or
+	// interconnects.
+	PrefixPoolUnallocatedCountIpv6 *int32
+
 	// The name of the service provider associated with the connection.
 	ProviderName *string
+
+	// The rate limiter status for the connection, including how many rate limiters
+	// are in use and the maximum allowed.
+	RateLimiterStatus *types.RateLimiterStatus
 
 	// The Amazon Web Services Region where the connection is located.
 	Region *string
@@ -164,77 +205,223 @@ type DisassociateConnectionFromLagOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateConnectionFromLagOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateConnectionFromLagOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsDevice != nil {
+		s.WriteString(schemas.Connection_awsDevice, *v.AwsDevice)
+	}
+	if v.AwsDeviceV2 != nil {
+		s.WriteString(schemas.Connection_awsDeviceV2, *v.AwsDeviceV2)
+	}
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.Connection_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	if v.Bandwidth != nil {
+		s.WriteString(schemas.Connection_bandwidth, *v.Bandwidth)
+	}
+	if v.BillingMode != "" {
+		s.WriteString(schemas.Connection_billingMode, string(v.BillingMode))
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.Connection_connectionId, *v.ConnectionId)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.Connection_connectionName, *v.ConnectionName)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.Connection_connectionState, string(v.ConnectionState))
+	}
+	if v.EncryptionMode != nil {
+		s.WriteString(schemas.Connection_encryptionMode, *v.EncryptionMode)
+	}
+	if v.HasLogicalRedundancy != "" {
+		s.WriteString(schemas.Connection_hasLogicalRedundancy, string(v.HasLogicalRedundancy))
+	}
+	if v.JumboFrameCapable != nil {
+		s.WriteBool(schemas.Connection_jumboFrameCapable, *v.JumboFrameCapable)
+	}
+	if v.LagId != nil {
+		s.WriteString(schemas.Connection_lagId, *v.LagId)
+	}
+	if v.LoaIssueTime != nil {
+		s.WriteTime(schemas.Connection_loaIssueTime, *v.LoaIssueTime)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.Connection_location, *v.Location)
+	}
+	if v.MacSecCapable != nil {
+		s.WriteBool(schemas.Connection_macSecCapable, *v.MacSecCapable)
+	}
+	serializeMacSecKeyList(s, schemas.Connection_macSecKeys, v.MacSecKeys)
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.Connection_ownerAccount, *v.OwnerAccount)
+	}
+	if v.PartnerInterconnectMacSecCapable != nil {
+		s.WriteBool(schemas.Connection_partnerInterconnectMacSecCapable, *v.PartnerInterconnectMacSecCapable)
+	}
+	if v.PartnerName != nil {
+		s.WriteString(schemas.Connection_partnerName, *v.PartnerName)
+	}
+	if v.PortEncryptionStatus != nil {
+		s.WriteString(schemas.Connection_portEncryptionStatus, *v.PortEncryptionStatus)
+	}
+	if v.PrefixPoolSizeIpv4 != nil {
+		s.WriteInt32(schemas.Connection_prefixPoolSizeIpv4, *v.PrefixPoolSizeIpv4)
+	}
+	if v.PrefixPoolSizeIpv6 != nil {
+		s.WriteInt32(schemas.Connection_prefixPoolSizeIpv6, *v.PrefixPoolSizeIpv6)
+	}
+	if v.PrefixPoolUnallocatedCountIpv4 != nil {
+		s.WriteInt32(schemas.Connection_prefixPoolUnallocatedCountIpv4, *v.PrefixPoolUnallocatedCountIpv4)
+	}
+	if v.PrefixPoolUnallocatedCountIpv6 != nil {
+		s.WriteInt32(schemas.Connection_prefixPoolUnallocatedCountIpv6, *v.PrefixPoolUnallocatedCountIpv6)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.Connection_providerName, *v.ProviderName)
+	}
+	if v.RateLimiterStatus != nil {
+		s.WriteStruct(schemas.Connection_rateLimiterStatus)
+		v.RateLimiterStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Connection_region, *v.Region)
+	}
+	serializeTagList(s, schemas.Connection_tags, v.Tags)
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.Connection_vlan, v.Vlan)
+	}
+}
+func (v *DisassociateConnectionFromLagOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connection_awsDevice:
+			v.AwsDevice = new(string)
+			return d.ReadString(schemas.Connection_awsDevice, v.AwsDevice)
+		case schemas.Connection_awsDeviceV2:
+			v.AwsDeviceV2 = new(string)
+			return d.ReadString(schemas.Connection_awsDeviceV2, v.AwsDeviceV2)
+		case schemas.Connection_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.Connection_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.Connection_bandwidth:
+			v.Bandwidth = new(string)
+			return d.ReadString(schemas.Connection_bandwidth, v.Bandwidth)
+		case schemas.Connection_billingMode:
+			var ev string
+			if err := d.ReadString(schemas.Connection_billingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = types.BillingMode(ev)
+			return nil
+		case schemas.Connection_connectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.Connection_connectionId, v.ConnectionId)
+		case schemas.Connection_connectionName:
+			v.ConnectionName = new(string)
+			return d.ReadString(schemas.Connection_connectionName, v.ConnectionName)
+		case schemas.Connection_connectionState:
+			var ev string
+			if err := d.ReadString(schemas.Connection_connectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.ConnectionState(ev)
+			return nil
+		case schemas.Connection_encryptionMode:
+			v.EncryptionMode = new(string)
+			return d.ReadString(schemas.Connection_encryptionMode, v.EncryptionMode)
+		case schemas.Connection_hasLogicalRedundancy:
+			var ev string
+			if err := d.ReadString(schemas.Connection_hasLogicalRedundancy, &ev); err != nil {
+				return err
+			}
+			v.HasLogicalRedundancy = types.HasLogicalRedundancy(ev)
+			return nil
+		case schemas.Connection_jumboFrameCapable:
+			v.JumboFrameCapable = new(bool)
+			return d.ReadBool(schemas.Connection_jumboFrameCapable, v.JumboFrameCapable)
+		case schemas.Connection_lagId:
+			v.LagId = new(string)
+			return d.ReadString(schemas.Connection_lagId, v.LagId)
+		case schemas.Connection_loaIssueTime:
+			v.LoaIssueTime = new(time.Time)
+			return d.ReadTime(schemas.Connection_loaIssueTime, v.LoaIssueTime)
+		case schemas.Connection_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.Connection_location, v.Location)
+		case schemas.Connection_macSecCapable:
+			v.MacSecCapable = new(bool)
+			return d.ReadBool(schemas.Connection_macSecCapable, v.MacSecCapable)
+		case schemas.Connection_macSecKeys:
+			return deserializeMacSecKeyList(d, schemas.Connection_macSecKeys, &v.MacSecKeys)
+		case schemas.Connection_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.Connection_ownerAccount, v.OwnerAccount)
+		case schemas.Connection_partnerInterconnectMacSecCapable:
+			v.PartnerInterconnectMacSecCapable = new(bool)
+			return d.ReadBool(schemas.Connection_partnerInterconnectMacSecCapable, v.PartnerInterconnectMacSecCapable)
+		case schemas.Connection_partnerName:
+			v.PartnerName = new(string)
+			return d.ReadString(schemas.Connection_partnerName, v.PartnerName)
+		case schemas.Connection_portEncryptionStatus:
+			v.PortEncryptionStatus = new(string)
+			return d.ReadString(schemas.Connection_portEncryptionStatus, v.PortEncryptionStatus)
+		case schemas.Connection_prefixPoolSizeIpv4:
+			v.PrefixPoolSizeIpv4 = new(int32)
+			return d.ReadInt32(schemas.Connection_prefixPoolSizeIpv4, v.PrefixPoolSizeIpv4)
+		case schemas.Connection_prefixPoolSizeIpv6:
+			v.PrefixPoolSizeIpv6 = new(int32)
+			return d.ReadInt32(schemas.Connection_prefixPoolSizeIpv6, v.PrefixPoolSizeIpv6)
+		case schemas.Connection_prefixPoolUnallocatedCountIpv4:
+			v.PrefixPoolUnallocatedCountIpv4 = new(int32)
+			return d.ReadInt32(schemas.Connection_prefixPoolUnallocatedCountIpv4, v.PrefixPoolUnallocatedCountIpv4)
+		case schemas.Connection_prefixPoolUnallocatedCountIpv6:
+			v.PrefixPoolUnallocatedCountIpv6 = new(int32)
+			return d.ReadInt32(schemas.Connection_prefixPoolUnallocatedCountIpv6, v.PrefixPoolUnallocatedCountIpv6)
+		case schemas.Connection_providerName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.Connection_providerName, v.ProviderName)
+		case schemas.Connection_rateLimiterStatus:
+			v.RateLimiterStatus = &types.RateLimiterStatus{}
+			return v.RateLimiterStatus.Deserialize(d)
+		case schemas.Connection_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Connection_region, v.Region)
+		case schemas.Connection_tags:
+			return deserializeTagList(d, schemas.Connection_tags, &v.Tags)
+		case schemas.Connection_vlan:
+			return d.ReadInt32(schemas.Connection_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateConnectionFromLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConnectionFromLag, schemas.DisassociateConnectionFromLagRequest, schemas.Connection)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateConnectionFromLag{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateConnectionFromLag, schemas.DisassociateConnectionFromLagRequest, schemas.Connection), output: &DisassociateConnectionFromLagOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateConnectionFromLag{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateConnectionFromLag"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociateConnectionFromLagValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateConnectionFromLag(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -249,22 +436,8 @@ func (c *Client) addOperationDisassociateConnectionFromLagMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociateConnectionFromLag(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateConnectionFromLag",
-	}
 }

@@ -4,14 +4,13 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of Amazon Connect client add-ins that have been created.
+// Retrieves a list of Connect Customer client add-ins that have been created.
 func (c *Client) DescribeConnectClientAddIns(ctx context.Context, params *DescribeConnectClientAddInsInput, optFns ...func(*Options)) (*DescribeConnectClientAddInsOutput, error) {
 	if params == nil {
 		params = &DescribeConnectClientAddInsInput{}
@@ -44,6 +43,24 @@ type DescribeConnectClientAddInsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectClientAddInsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectClientAddInsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectClientAddInsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeConnectClientAddInsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectClientAddInsRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeConnectClientAddInsRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type DescribeConnectClientAddInsOutput struct {
 
 	// Information about client add-ins.
@@ -59,77 +76,51 @@ type DescribeConnectClientAddInsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectClientAddInsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectClientAddInsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectClientAddInsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectClientAddInList(s, schemas.DescribeConnectClientAddInsResult_AddIns, v.AddIns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeConnectClientAddInsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConnectClientAddInsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectClientAddInsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectClientAddInsResult_AddIns:
+			return deserializeConnectClientAddInList(d, schemas.DescribeConnectClientAddInsResult_AddIns, &v.AddIns)
+		case schemas.DescribeConnectClientAddInsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeConnectClientAddInsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectClientAddInsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectClientAddIns, schemas.DescribeConnectClientAddInsRequest, schemas.DescribeConnectClientAddInsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnectClientAddIns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectClientAddIns, schemas.DescribeConnectClientAddInsRequest, schemas.DescribeConnectClientAddInsResult), output: &DescribeConnectClientAddInsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConnectClientAddIns{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnectClientAddIns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeConnectClientAddInsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConnectClientAddIns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +135,8 @@ func (c *Client) addOperationDescribeConnectClientAddInsMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeConnectClientAddIns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConnectClientAddIns",
-	}
 }

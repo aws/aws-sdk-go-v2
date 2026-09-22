@@ -6,11 +6,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -58,6 +58,18 @@ type GetAlarmMuteRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAlarmMuteRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAlarmMuteRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAlarmMuteRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmMuteRuleName != nil {
+		s.WriteString(schemas.GetAlarmMuteRuleInput_AlarmMuteRuleName, *v.AlarmMuteRuleName)
+	}
+}
+
 type GetAlarmMuteRuleOutput struct {
 
 	// The Amazon Resource Name (ARN) of the alarm mute rule.
@@ -99,65 +111,104 @@ type GetAlarmMuteRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAlarmMuteRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAlarmMuteRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAlarmMuteRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmMuteRuleArn != nil {
+		s.WriteString(schemas.GetAlarmMuteRuleOutput_AlarmMuteRuleArn, *v.AlarmMuteRuleArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetAlarmMuteRuleOutput_Description, *v.Description)
+	}
+	if v.ExpireDate != nil {
+		s.WriteTime(schemas.GetAlarmMuteRuleOutput_ExpireDate, *v.ExpireDate)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetAlarmMuteRuleOutput_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.MuteTargets != nil {
+		s.WriteStruct(schemas.GetAlarmMuteRuleOutput_MuteTargets)
+		v.MuteTargets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MuteType != nil {
+		s.WriteString(schemas.GetAlarmMuteRuleOutput_MuteType, *v.MuteType)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAlarmMuteRuleOutput_Name, *v.Name)
+	}
+	if v.Rule != nil {
+		s.WriteStruct(schemas.GetAlarmMuteRuleOutput_Rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartDate != nil {
+		s.WriteTime(schemas.GetAlarmMuteRuleOutput_StartDate, *v.StartDate)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetAlarmMuteRuleOutput_Status, string(v.Status))
+	}
+}
+func (v *GetAlarmMuteRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAlarmMuteRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAlarmMuteRuleOutput_AlarmMuteRuleArn:
+			v.AlarmMuteRuleArn = new(string)
+			return d.ReadString(schemas.GetAlarmMuteRuleOutput_AlarmMuteRuleArn, v.AlarmMuteRuleArn)
+		case schemas.GetAlarmMuteRuleOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAlarmMuteRuleOutput_Description, v.Description)
+		case schemas.GetAlarmMuteRuleOutput_ExpireDate:
+			v.ExpireDate = new(time.Time)
+			return d.ReadTime(schemas.GetAlarmMuteRuleOutput_ExpireDate, v.ExpireDate)
+		case schemas.GetAlarmMuteRuleOutput_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetAlarmMuteRuleOutput_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetAlarmMuteRuleOutput_MuteTargets:
+			v.MuteTargets = &types.MuteTargets{}
+			return v.MuteTargets.Deserialize(d)
+		case schemas.GetAlarmMuteRuleOutput_MuteType:
+			v.MuteType = new(string)
+			return d.ReadString(schemas.GetAlarmMuteRuleOutput_MuteType, v.MuteType)
+		case schemas.GetAlarmMuteRuleOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAlarmMuteRuleOutput_Name, v.Name)
+		case schemas.GetAlarmMuteRuleOutput_Rule:
+			v.Rule = &types.Rule{}
+			return v.Rule.Deserialize(d)
+		case schemas.GetAlarmMuteRuleOutput_StartDate:
+			v.StartDate = new(time.Time)
+			return d.ReadTime(schemas.GetAlarmMuteRuleOutput_StartDate, v.StartDate)
+		case schemas.GetAlarmMuteRuleOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetAlarmMuteRuleOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AlarmMuteRuleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAlarmMuteRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAlarmMuteRule, schemas.GetAlarmMuteRuleInput, schemas.GetAlarmMuteRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetAlarmMuteRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAlarmMuteRule, schemas.GetAlarmMuteRuleInput, schemas.GetAlarmMuteRuleOutput), output: &GetAlarmMuteRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetAlarmMuteRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAlarmMuteRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -167,12 +218,6 @@ func (c *Client) addOperationGetAlarmMuteRuleMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpGetAlarmMuteRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAlarmMuteRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +230,6 @@ func (c *Client) addOperationGetAlarmMuteRuleMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -384,11 +423,3 @@ type GetAlarmMuteRuleAPIClient interface {
 }
 
 var _ GetAlarmMuteRuleAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetAlarmMuteRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAlarmMuteRule",
-	}
-}

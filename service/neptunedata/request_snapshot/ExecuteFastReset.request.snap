@@ -1,0 +1,5 @@
+POST /system
+
+Content-Type: application/json
+
+{"action":"initiateDatabaseReset","token":"__Token__"}

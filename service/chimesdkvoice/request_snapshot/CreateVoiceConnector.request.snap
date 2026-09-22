@@ -1,0 +1,5 @@
+POST /voice-connectors
+
+Content-Type: application/json
+
+{"AwsRegion":"us-east-1","IntegrationType":"CONNECT_CALL_TRANSFER_CONNECTOR","Name":"__Name__","NetworkType":"IPV4_ONLY","RequireEncryption":true,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

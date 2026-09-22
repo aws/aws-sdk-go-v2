@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Checks out the specified license for offline use.
@@ -63,6 +62,29 @@ type CheckoutBorrowLicenseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckoutBorrowLicenseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckoutBorrowLicenseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckoutBorrowLicenseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetadataList(s, schemas.CheckoutBorrowLicenseRequest_CheckoutMetadata, v.CheckoutMetadata)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CheckoutBorrowLicenseRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DigitalSignatureMethod != "" {
+		s.WriteString(schemas.CheckoutBorrowLicenseRequest_DigitalSignatureMethod, string(v.DigitalSignatureMethod))
+	}
+	serializeEntitlementDataList(s, schemas.CheckoutBorrowLicenseRequest_Entitlements, v.Entitlements)
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CheckoutBorrowLicenseRequest_LicenseArn, *v.LicenseArn)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.CheckoutBorrowLicenseRequest_NodeId, *v.NodeId)
+	}
+}
+
 type CheckoutBorrowLicenseOutput struct {
 
 	// Information about constraints.
@@ -95,77 +117,84 @@ type CheckoutBorrowLicenseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckoutBorrowLicenseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckoutBorrowLicenseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckoutBorrowLicenseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetadataList(s, schemas.CheckoutBorrowLicenseResponse_CheckoutMetadata, v.CheckoutMetadata)
+	serializeEntitlementDataList(s, schemas.CheckoutBorrowLicenseResponse_EntitlementsAllowed, v.EntitlementsAllowed)
+	if v.Expiration != nil {
+		s.WriteString(schemas.CheckoutBorrowLicenseResponse_Expiration, *v.Expiration)
+	}
+	if v.IssuedAt != nil {
+		s.WriteString(schemas.CheckoutBorrowLicenseResponse_IssuedAt, *v.IssuedAt)
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.CheckoutBorrowLicenseResponse_LicenseArn, *v.LicenseArn)
+	}
+	if v.LicenseConsumptionToken != nil {
+		s.WriteString(schemas.CheckoutBorrowLicenseResponse_LicenseConsumptionToken, *v.LicenseConsumptionToken)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.CheckoutBorrowLicenseResponse_NodeId, *v.NodeId)
+	}
+	if v.SignedToken != nil {
+		s.WriteString(schemas.CheckoutBorrowLicenseResponse_SignedToken, *v.SignedToken)
+	}
+}
+func (v *CheckoutBorrowLicenseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckoutBorrowLicenseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckoutBorrowLicenseResponse_CheckoutMetadata:
+			return deserializeMetadataList(d, schemas.CheckoutBorrowLicenseResponse_CheckoutMetadata, &v.CheckoutMetadata)
+		case schemas.CheckoutBorrowLicenseResponse_EntitlementsAllowed:
+			return deserializeEntitlementDataList(d, schemas.CheckoutBorrowLicenseResponse_EntitlementsAllowed, &v.EntitlementsAllowed)
+		case schemas.CheckoutBorrowLicenseResponse_Expiration:
+			v.Expiration = new(string)
+			return d.ReadString(schemas.CheckoutBorrowLicenseResponse_Expiration, v.Expiration)
+		case schemas.CheckoutBorrowLicenseResponse_IssuedAt:
+			v.IssuedAt = new(string)
+			return d.ReadString(schemas.CheckoutBorrowLicenseResponse_IssuedAt, v.IssuedAt)
+		case schemas.CheckoutBorrowLicenseResponse_LicenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.CheckoutBorrowLicenseResponse_LicenseArn, v.LicenseArn)
+		case schemas.CheckoutBorrowLicenseResponse_LicenseConsumptionToken:
+			v.LicenseConsumptionToken = new(string)
+			return d.ReadString(schemas.CheckoutBorrowLicenseResponse_LicenseConsumptionToken, v.LicenseConsumptionToken)
+		case schemas.CheckoutBorrowLicenseResponse_NodeId:
+			v.NodeId = new(string)
+			return d.ReadString(schemas.CheckoutBorrowLicenseResponse_NodeId, v.NodeId)
+		case schemas.CheckoutBorrowLicenseResponse_SignedToken:
+			v.SignedToken = new(string)
+			return d.ReadString(schemas.CheckoutBorrowLicenseResponse_SignedToken, v.SignedToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckoutBorrowLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckoutBorrowLicense, schemas.CheckoutBorrowLicenseRequest, schemas.CheckoutBorrowLicenseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCheckoutBorrowLicense{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckoutBorrowLicense, schemas.CheckoutBorrowLicenseRequest, schemas.CheckoutBorrowLicenseResponse), output: &CheckoutBorrowLicenseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCheckoutBorrowLicense{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CheckoutBorrowLicense"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCheckoutBorrowLicenseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCheckoutBorrowLicense(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +209,8 @@ func (c *Client) addOperationCheckoutBorrowLicenseMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCheckoutBorrowLicense(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CheckoutBorrowLicense",
-	}
 }

@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.CreateDecoderManifest
+
+{"__type":"DecoderManifestValidationException","invalidNetworkInterfaces":[{"interfaceId":"__InterfaceId__","reason":"DUPLICATE_NETWORK_INTERFACE"},{"interfaceId":"__InterfaceId__","reason":"DUPLICATE_NETWORK_INTERFACE"}],"invalidSignals":[{"hint":"__Hint__","name":"__Name__","reason":"DUPLICATE_SIGNAL"},{"hint":"__Hint__","name":"__Name__","reason":"DUPLICATE_SIGNAL"}],"message":"__Message__"}

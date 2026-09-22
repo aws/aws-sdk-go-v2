@@ -1,0 +1,5 @@
+POST /v1/describeschedulingpolicies
+
+Content-Type: application/json
+
+{"arns":["__Member__","__Member__"]}

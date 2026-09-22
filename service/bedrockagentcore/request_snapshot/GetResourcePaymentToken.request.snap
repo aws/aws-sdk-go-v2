@@ -1,0 +1,5 @@
+POST /identities/payment/token
+
+Content-Type: application/json
+
+{"paymentTokenRequest":{"coinbaseCdpTokenRequest":{"includeWalletAuthToken":true,"requestBody":"__RequestBody__","requestHost":"__RequestHost__","requestMethod":"GET","requestPath":"__RequestPath__"}},"resourceCredentialProviderName":"__ResourceCredentialProviderName__","workloadIdentityToken":"__WorkloadIdentityToken__"}

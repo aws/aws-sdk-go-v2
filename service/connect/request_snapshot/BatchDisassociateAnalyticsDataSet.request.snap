@@ -1,0 +1,5 @@
+POST /analytics-data/instance/__InstanceId__/associations
+
+Content-Type: application/json
+
+{"DataSetIds":["__Member__","__Member__"],"TargetAccountId":"__TargetAccountId__"}

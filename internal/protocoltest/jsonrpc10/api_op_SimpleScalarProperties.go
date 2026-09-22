@@ -4,10 +4,9 @@ package jsonrpc10
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScalarPropertiesInput, optFns ...func(*Options)) (*SimpleScalarPropertiesOutput, error) {
@@ -33,6 +32,21 @@ type SimpleScalarPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleScalarPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleScalarPropertiesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DoubleValue != nil {
+		s.WriteFloat64(schemas.SimpleScalarPropertiesInput_doubleValue, *v.DoubleValue)
+	}
+	if v.FloatValue != nil {
+		s.WriteFloat32(schemas.SimpleScalarPropertiesInput_floatValue, *v.FloatValue)
+	}
+}
+
 type SimpleScalarPropertiesOutput struct {
 	DoubleValue *float64
 
@@ -44,74 +58,51 @@ type SimpleScalarPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleScalarPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleScalarPropertiesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DoubleValue != nil {
+		s.WriteFloat64(schemas.SimpleScalarPropertiesOutput_doubleValue, *v.DoubleValue)
+	}
+	if v.FloatValue != nil {
+		s.WriteFloat32(schemas.SimpleScalarPropertiesOutput_floatValue, *v.FloatValue)
+	}
+}
+func (v *SimpleScalarPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleScalarPropertiesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleScalarPropertiesOutput_doubleValue:
+			v.DoubleValue = new(float64)
+			return d.ReadFloat64(schemas.SimpleScalarPropertiesOutput_doubleValue, v.DoubleValue)
+		case schemas.SimpleScalarPropertiesOutput_floatValue:
+			v.FloatValue = new(float32)
+			return d.ReadFloat32(schemas.SimpleScalarPropertiesOutput_floatValue, v.FloatValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSimpleScalarPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleScalarProperties, schemas.SimpleScalarPropertiesInput, schemas.SimpleScalarPropertiesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSimpleScalarProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleScalarProperties, schemas.SimpleScalarPropertiesInput, schemas.SimpleScalarPropertiesOutput), output: &SimpleScalarPropertiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSimpleScalarProperties{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SimpleScalarProperties"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarProperties(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -126,22 +117,8 @@ func (c *Client) addOperationSimpleScalarPropertiesMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSimpleScalarProperties(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SimpleScalarProperties",
-	}
 }

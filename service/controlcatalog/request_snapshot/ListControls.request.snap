@@ -1,0 +1,5 @@
+POST /list-controls?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"Filter":{"GovernedProviders":["__Member__","__Member__"],"Implementations":{"Identifiers":["__Member__","__Member__"],"Types":["__Member__","__Member__"]}}}

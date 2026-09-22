@@ -4,10 +4,9 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Rolls back a stage execution.
@@ -46,6 +45,24 @@ type RollbackStageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackStageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackStageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackStageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineName != nil {
+		s.WriteString(schemas.RollbackStageInput_pipelineName, *v.PipelineName)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.RollbackStageInput_stageName, *v.StageName)
+	}
+	if v.TargetPipelineExecutionId != nil {
+		s.WriteString(schemas.RollbackStageInput_targetPipelineExecutionId, *v.TargetPipelineExecutionId)
+	}
+}
+
 type RollbackStageOutput struct {
 
 	// The execution ID of the pipeline execution for the stage that has been rolled
@@ -60,77 +77,48 @@ type RollbackStageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RollbackStageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RollbackStageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RollbackStageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.RollbackStageOutput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+}
+func (v *RollbackStageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RollbackStageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RollbackStageOutput_pipelineExecutionId:
+			v.PipelineExecutionId = new(string)
+			return d.ReadString(schemas.RollbackStageOutput_pipelineExecutionId, v.PipelineExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRollbackStageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackStage, schemas.RollbackStageInput, schemas.RollbackStageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRollbackStage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RollbackStage, schemas.RollbackStageInput, schemas.RollbackStageOutput), output: &RollbackStageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRollbackStage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RollbackStage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRollbackStageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRollbackStage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +133,8 @@ func (c *Client) addOperationRollbackStageMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRollbackStage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RollbackStage",
-	}
 }

@@ -4,11 +4,10 @@ package backup
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeRestoreJobInput struct {
 	RestoreJobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeRestoreJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRestoreJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRestoreJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoreJobId != nil {
+		s.WriteString(schemas.DescribeRestoreJobInput_RestoreJobId, *v.RestoreJobId)
+	}
 }
 
 type DescribeRestoreJobOutput struct {
@@ -134,77 +145,193 @@ type DescribeRestoreJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRestoreJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRestoreJobOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRestoreJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_AccountId, *v.AccountId)
+	}
+	if v.BackupSizeInBytes != nil {
+		s.WriteInt64(schemas.DescribeRestoreJobOutput_BackupSizeInBytes, *v.BackupSizeInBytes)
+	}
+	if v.BackupVaultArn != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_BackupVaultArn, *v.BackupVaultArn)
+	}
+	if v.CompletionDate != nil {
+		s.WriteTime(schemas.DescribeRestoreJobOutput_CompletionDate, *v.CompletionDate)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeRestoreJobOutput_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedResourceArn != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_CreatedResourceArn, *v.CreatedResourceArn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeRestoreJobOutput_CreationDate, *v.CreationDate)
+	}
+	if v.DeletionStatus != "" {
+		s.WriteString(schemas.DescribeRestoreJobOutput_DeletionStatus, string(v.DeletionStatus))
+	}
+	if v.DeletionStatusMessage != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_DeletionStatusMessage, *v.DeletionStatusMessage)
+	}
+	if v.ExpectedCompletionTimeMinutes != nil {
+		s.WriteInt64(schemas.DescribeRestoreJobOutput_ExpectedCompletionTimeMinutes, *v.ExpectedCompletionTimeMinutes)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.IsParent != false {
+		s.WriteBool(schemas.DescribeRestoreJobOutput_IsParent, v.IsParent)
+	}
+	if v.ParentJobId != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_ParentJobId, *v.ParentJobId)
+	}
+	if v.PercentDone != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_PercentDone, *v.PercentDone)
+	}
+	if v.RecoveryPointArn != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_RecoveryPointArn, *v.RecoveryPointArn)
+	}
+	if v.RecoveryPointCreationDate != nil {
+		s.WriteTime(schemas.DescribeRestoreJobOutput_RecoveryPointCreationDate, *v.RecoveryPointCreationDate)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_ResourceType, *v.ResourceType)
+	}
+	if v.RestoreJobId != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_RestoreJobId, *v.RestoreJobId)
+	}
+	if v.SourceResourceArn != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_SourceResourceArn, *v.SourceResourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeRestoreJobOutput_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_StatusMessage, *v.StatusMessage)
+	}
+	if v.ValidationStatus != "" {
+		s.WriteString(schemas.DescribeRestoreJobOutput_ValidationStatus, string(v.ValidationStatus))
+	}
+	if v.ValidationStatusMessage != nil {
+		s.WriteString(schemas.DescribeRestoreJobOutput_ValidationStatusMessage, *v.ValidationStatusMessage)
+	}
+}
+func (v *DescribeRestoreJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRestoreJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRestoreJobOutput_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_AccountId, v.AccountId)
+		case schemas.DescribeRestoreJobOutput_BackupSizeInBytes:
+			v.BackupSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.DescribeRestoreJobOutput_BackupSizeInBytes, v.BackupSizeInBytes)
+		case schemas.DescribeRestoreJobOutput_BackupVaultArn:
+			v.BackupVaultArn = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_BackupVaultArn, v.BackupVaultArn)
+		case schemas.DescribeRestoreJobOutput_CompletionDate:
+			v.CompletionDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRestoreJobOutput_CompletionDate, v.CompletionDate)
+		case schemas.DescribeRestoreJobOutput_CreatedBy:
+			v.CreatedBy = &types.RestoreJobCreator{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeRestoreJobOutput_CreatedResourceArn:
+			v.CreatedResourceArn = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_CreatedResourceArn, v.CreatedResourceArn)
+		case schemas.DescribeRestoreJobOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRestoreJobOutput_CreationDate, v.CreationDate)
+		case schemas.DescribeRestoreJobOutput_DeletionStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRestoreJobOutput_DeletionStatus, &ev); err != nil {
+				return err
+			}
+			v.DeletionStatus = types.RestoreDeletionStatus(ev)
+			return nil
+		case schemas.DescribeRestoreJobOutput_DeletionStatusMessage:
+			v.DeletionStatusMessage = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_DeletionStatusMessage, v.DeletionStatusMessage)
+		case schemas.DescribeRestoreJobOutput_ExpectedCompletionTimeMinutes:
+			v.ExpectedCompletionTimeMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeRestoreJobOutput_ExpectedCompletionTimeMinutes, v.ExpectedCompletionTimeMinutes)
+		case schemas.DescribeRestoreJobOutput_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_IamRoleArn, v.IamRoleArn)
+		case schemas.DescribeRestoreJobOutput_IsParent:
+			return d.ReadBool(schemas.DescribeRestoreJobOutput_IsParent, &v.IsParent)
+		case schemas.DescribeRestoreJobOutput_ParentJobId:
+			v.ParentJobId = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_ParentJobId, v.ParentJobId)
+		case schemas.DescribeRestoreJobOutput_PercentDone:
+			v.PercentDone = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_PercentDone, v.PercentDone)
+		case schemas.DescribeRestoreJobOutput_RecoveryPointArn:
+			v.RecoveryPointArn = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_RecoveryPointArn, v.RecoveryPointArn)
+		case schemas.DescribeRestoreJobOutput_RecoveryPointCreationDate:
+			v.RecoveryPointCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeRestoreJobOutput_RecoveryPointCreationDate, v.RecoveryPointCreationDate)
+		case schemas.DescribeRestoreJobOutput_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_ResourceType, v.ResourceType)
+		case schemas.DescribeRestoreJobOutput_RestoreJobId:
+			v.RestoreJobId = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_RestoreJobId, v.RestoreJobId)
+		case schemas.DescribeRestoreJobOutput_SourceResourceArn:
+			v.SourceResourceArn = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_SourceResourceArn, v.SourceResourceArn)
+		case schemas.DescribeRestoreJobOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRestoreJobOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RestoreJobStatus(ev)
+			return nil
+		case schemas.DescribeRestoreJobOutput_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_StatusMessage, v.StatusMessage)
+		case schemas.DescribeRestoreJobOutput_ValidationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRestoreJobOutput_ValidationStatus, &ev); err != nil {
+				return err
+			}
+			v.ValidationStatus = types.RestoreValidationStatus(ev)
+			return nil
+		case schemas.DescribeRestoreJobOutput_ValidationStatusMessage:
+			v.ValidationStatusMessage = new(string)
+			return d.ReadString(schemas.DescribeRestoreJobOutput_ValidationStatusMessage, v.ValidationStatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRestoreJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRestoreJob, schemas.DescribeRestoreJobInput, schemas.DescribeRestoreJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRestoreJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRestoreJob, schemas.DescribeRestoreJobInput, schemas.DescribeRestoreJobOutput), output: &DescribeRestoreJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRestoreJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRestoreJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRestoreJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRestoreJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -219,22 +346,8 @@ func (c *Client) addOperationDescribeRestoreJobMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeRestoreJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRestoreJob",
-	}
 }

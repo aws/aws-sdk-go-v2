@@ -4,11 +4,10 @@ package translate
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides information about a parallel data resource.
@@ -35,6 +34,18 @@ type GetParallelDataInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetParallelDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParallelDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParallelDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetParallelDataRequest_Name, *v.Name)
+	}
 }
 
 type GetParallelDataOutput struct {
@@ -76,77 +87,74 @@ type GetParallelDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParallelDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParallelDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParallelDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuxiliaryDataLocation != nil {
+		s.WriteStruct(schemas.GetParallelDataResponse_AuxiliaryDataLocation)
+		v.AuxiliaryDataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataLocation != nil {
+		s.WriteStruct(schemas.GetParallelDataResponse_DataLocation)
+		v.DataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestUpdateAttemptAuxiliaryDataLocation != nil {
+		s.WriteStruct(schemas.GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation)
+		v.LatestUpdateAttemptAuxiliaryDataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParallelDataProperties != nil {
+		s.WriteStruct(schemas.GetParallelDataResponse_ParallelDataProperties)
+		v.ParallelDataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetParallelDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParallelDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParallelDataResponse_AuxiliaryDataLocation:
+			v.AuxiliaryDataLocation = &types.ParallelDataDataLocation{}
+			return v.AuxiliaryDataLocation.Deserialize(d)
+		case schemas.GetParallelDataResponse_DataLocation:
+			v.DataLocation = &types.ParallelDataDataLocation{}
+			return v.DataLocation.Deserialize(d)
+		case schemas.GetParallelDataResponse_LatestUpdateAttemptAuxiliaryDataLocation:
+			v.LatestUpdateAttemptAuxiliaryDataLocation = &types.ParallelDataDataLocation{}
+			return v.LatestUpdateAttemptAuxiliaryDataLocation.Deserialize(d)
+		case schemas.GetParallelDataResponse_ParallelDataProperties:
+			v.ParallelDataProperties = &types.ParallelDataProperties{}
+			return v.ParallelDataProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParallelData, schemas.GetParallelDataRequest, schemas.GetParallelDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetParallelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParallelData, schemas.GetParallelDataRequest, schemas.GetParallelDataResponse), output: &GetParallelDataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetParallelData{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetParallelData"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetParallelDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetParallelData(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +169,8 @@ func (c *Client) addOperationGetParallelDataMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetParallelData(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetParallelData",
-	}
 }

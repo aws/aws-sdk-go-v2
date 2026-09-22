@@ -5,10 +5,10 @@ package computeoptimizerautomation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Initiates a one-time, on-demand automation for the specified recommended
@@ -48,6 +48,21 @@ type StartAutomationEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutomationEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutomationEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutomationEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartAutomationEventRequest_clientToken, *v.ClientToken)
+	}
+	if v.RecommendedActionId != nil {
+		s.WriteString(schemas.StartAutomationEventRequest_recommendedActionId, *v.RecommendedActionId)
+	}
+}
+
 type StartAutomationEventOutput struct {
 
 	// The ID of the automation event.
@@ -65,65 +80,58 @@ type StartAutomationEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAutomationEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAutomationEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAutomationEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.StartAutomationEventResponse_eventId, *v.EventId)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.StartAutomationEventResponse_eventStatus, string(v.EventStatus))
+	}
+	if v.RecommendedActionId != nil {
+		s.WriteString(schemas.StartAutomationEventResponse_recommendedActionId, *v.RecommendedActionId)
+	}
+}
+func (v *StartAutomationEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAutomationEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAutomationEventResponse_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.StartAutomationEventResponse_eventId, v.EventId)
+		case schemas.StartAutomationEventResponse_eventStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartAutomationEventResponse_eventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = types.EventStatus(ev)
+			return nil
+		case schemas.StartAutomationEventResponse_recommendedActionId:
+			v.RecommendedActionId = new(string)
+			return d.ReadString(schemas.StartAutomationEventResponse_recommendedActionId, v.RecommendedActionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAutomationEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomationEvent, schemas.StartAutomationEventRequest, schemas.StartAutomationEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartAutomationEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAutomationEvent, schemas.StartAutomationEventRequest, schemas.StartAutomationEventResponse), output: &StartAutomationEventOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartAutomationEvent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartAutomationEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -138,12 +146,6 @@ func (c *Client) addOperationStartAutomationEventMiddlewares(stack *middleware.S
 	if err = addOpStartAutomationEventValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartAutomationEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,12 +156,6 @@ func (c *Client) addOperationStartAutomationEventMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -199,12 +195,4 @@ func (m *idempotencyToken_initializeOpStartAutomationEvent) HandleInitialize(ctx
 }
 func addIdempotencyToken_opStartAutomationEventMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartAutomationEvent{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartAutomationEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartAutomationEvent",
-	}
 }

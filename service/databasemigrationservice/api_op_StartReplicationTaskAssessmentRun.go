@@ -4,11 +4,10 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a new premigration assessment run for one or more individual assessments
@@ -113,6 +112,39 @@ type StartReplicationTaskAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplicationTaskAssessmentRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplicationTaskAssessmentRunMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplicationTaskAssessmentRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentRunName != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_AssessmentRunName, *v.AssessmentRunName)
+	}
+	serializeExcludeTestList(s, schemas.StartReplicationTaskAssessmentRunMessage_Exclude, v.Exclude)
+	serializeIncludeTestList(s, schemas.StartReplicationTaskAssessmentRunMessage_IncludeOnly, v.IncludeOnly)
+	if v.ReplicationTaskArn != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ReplicationTaskArn, *v.ReplicationTaskArn)
+	}
+	if v.ResultEncryptionMode != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ResultEncryptionMode, *v.ResultEncryptionMode)
+	}
+	if v.ResultKmsKeyArn != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ResultKmsKeyArn, *v.ResultKmsKeyArn)
+	}
+	if v.ResultLocationBucket != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ResultLocationBucket, *v.ResultLocationBucket)
+	}
+	if v.ResultLocationFolder != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ResultLocationFolder, *v.ResultLocationFolder)
+	}
+	if v.ServiceAccessRoleArn != nil {
+		s.WriteString(schemas.StartReplicationTaskAssessmentRunMessage_ServiceAccessRoleArn, *v.ServiceAccessRoleArn)
+	}
+	serializeTagList(s, schemas.StartReplicationTaskAssessmentRunMessage_Tags, v.Tags)
+}
+
 type StartReplicationTaskAssessmentRunOutput struct {
 
 	// The premigration assessment run that was started.
@@ -124,77 +156,50 @@ type StartReplicationTaskAssessmentRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplicationTaskAssessmentRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplicationTaskAssessmentRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplicationTaskAssessmentRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationTaskAssessmentRun != nil {
+		s.WriteStruct(schemas.StartReplicationTaskAssessmentRunResponse_ReplicationTaskAssessmentRun)
+		v.ReplicationTaskAssessmentRun.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartReplicationTaskAssessmentRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReplicationTaskAssessmentRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReplicationTaskAssessmentRunResponse_ReplicationTaskAssessmentRun:
+			v.ReplicationTaskAssessmentRun = &types.ReplicationTaskAssessmentRun{}
+			return v.ReplicationTaskAssessmentRun.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReplicationTaskAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplicationTaskAssessmentRun, schemas.StartReplicationTaskAssessmentRunMessage, schemas.StartReplicationTaskAssessmentRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartReplicationTaskAssessmentRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplicationTaskAssessmentRun, schemas.StartReplicationTaskAssessmentRunMessage, schemas.StartReplicationTaskAssessmentRunResponse), output: &StartReplicationTaskAssessmentRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartReplicationTaskAssessmentRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartReplicationTaskAssessmentRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartReplicationTaskAssessmentRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartReplicationTaskAssessmentRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,22 +214,8 @@ func (c *Client) addOperationStartReplicationTaskAssessmentRunMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartReplicationTaskAssessmentRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartReplicationTaskAssessmentRun",
-	}
 }

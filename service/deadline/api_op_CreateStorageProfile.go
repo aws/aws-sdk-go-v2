@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +59,28 @@ type CreateStorageProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorageProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorageProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorageProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateStorageProfileRequest_clientToken, *v.ClientToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateStorageProfileRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.CreateStorageProfileRequest_farmId, *v.FarmId)
+	}
+	serializeFileSystemLocationsList(s, schemas.CreateStorageProfileRequest_fileSystemLocations, v.FileSystemLocations)
+	if v.OsFamily != "" {
+		s.WriteString(schemas.CreateStorageProfileRequest_osFamily, string(v.OsFamily))
+	}
+}
+
 type CreateStorageProfileOutput struct {
 
 	// The storage profile ID.
@@ -71,65 +94,42 @@ type CreateStorageProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStorageProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStorageProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStorageProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageProfileId != nil {
+		s.WriteString(schemas.CreateStorageProfileResponse_storageProfileId, *v.StorageProfileId)
+	}
+}
+func (v *CreateStorageProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStorageProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStorageProfileResponse_storageProfileId:
+			v.StorageProfileId = new(string)
+			return d.ReadString(schemas.CreateStorageProfileResponse_storageProfileId, v.StorageProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStorageProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorageProfile, schemas.CreateStorageProfileRequest, schemas.CreateStorageProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStorageProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStorageProfile, schemas.CreateStorageProfileRequest, schemas.CreateStorageProfileResponse), output: &CreateStorageProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStorageProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStorageProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -144,12 +144,6 @@ func (c *Client) addOperationCreateStorageProfileMiddlewares(stack *middleware.S
 	if err = addOpCreateStorageProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStorageProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -160,12 +154,6 @@ func (c *Client) addOperationCreateStorageProfileMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -232,12 +220,4 @@ func (m *idempotencyToken_initializeOpCreateStorageProfile) HandleInitialize(ctx
 }
 func addIdempotencyToken_opCreateStorageProfileMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateStorageProfile{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateStorageProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateStorageProfile",
-	}
 }

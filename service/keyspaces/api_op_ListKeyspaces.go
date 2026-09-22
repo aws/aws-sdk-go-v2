@@ -5,10 +5,10 @@ package keyspaces
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The ListKeyspaces operation returns a list of keyspaces.
@@ -42,6 +42,34 @@ type ListKeyspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeyspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeyspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeyspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListKeyspacesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeyspacesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListKeyspacesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeyspacesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeyspacesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListKeyspacesRequest_maxResults, v.MaxResults)
+		case schemas.ListKeyspacesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeyspacesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListKeyspacesOutput struct {
 
 	// A list of keyspaces.
@@ -59,74 +87,48 @@ type ListKeyspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeyspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeyspacesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeyspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeKeyspaceSummaryList(s, schemas.ListKeyspacesResponse_keyspaces, v.Keyspaces)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKeyspacesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListKeyspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeyspacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeyspacesResponse_keyspaces:
+			return deserializeKeyspaceSummaryList(d, schemas.ListKeyspacesResponse_keyspaces, &v.Keyspaces)
+		case schemas.ListKeyspacesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKeyspacesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKeyspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeyspaces, schemas.ListKeyspacesRequest, schemas.ListKeyspacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListKeyspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeyspaces, schemas.ListKeyspacesRequest, schemas.ListKeyspacesResponse), output: &ListKeyspacesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListKeyspaces{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListKeyspaces"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKeyspaces(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,12 +141,6 @@ func (c *Client) addOperationListKeyspacesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +243,3 @@ type ListKeyspacesAPIClient interface {
 }
 
 var _ ListKeyspacesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListKeyspaces(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListKeyspaces",
-	}
-}

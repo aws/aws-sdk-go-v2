@@ -565,6 +565,67 @@ func (m *awsAwsjson11_serializeOpListSchemas) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListSessions struct {
+}
+
+func (*awsAwsjson11_serializeOpListSessions) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListSessions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSessionsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("RedshiftData.ListSessions")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListSessionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListStatements struct {
 }
 
@@ -751,6 +812,11 @@ func awsAwsjson11_serializeOpDocumentBatchExecuteStatementInput(v *BatchExecuteS
 		ok.String(*v.DbUser)
 	}
 
+	if len(v.ExecutionMode) > 0 {
+		ok := object.Key("ExecutionMode")
+		ok.String(string(v.ExecutionMode))
+	}
+
 	if v.Parameters != nil {
 		ok := object.Key("Parameters")
 		if err := awsAwsjson11_serializeDocumentSqlParametersList(v.Parameters, ok); err != nil {
@@ -790,6 +856,11 @@ func awsAwsjson11_serializeOpDocumentBatchExecuteStatementInput(v *BatchExecuteS
 		ok.String(*v.StatementName)
 	}
 
+	if v.WaitTimeSeconds != nil {
+		ok := object.Key("WaitTimeSeconds")
+		ok.Integer(*v.WaitTimeSeconds)
+	}
+
 	if v.WithEvent != nil {
 		ok := object.Key("WithEvent")
 		ok.Boolean(*v.WithEvent)
@@ -822,6 +893,11 @@ func awsAwsjson11_serializeOpDocumentDescribeStatementInput(v *DescribeStatement
 	if v.Id != nil {
 		ok := object.Key("Id")
 		ok.String(*v.Id)
+	}
+
+	if v.WaitTimeSeconds != nil {
+		ok := object.Key("WaitTimeSeconds")
+		ok.Integer(*v.WaitTimeSeconds)
 	}
 
 	return nil
@@ -945,6 +1021,11 @@ func awsAwsjson11_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementIn
 		ok.String(*v.StatementName)
 	}
 
+	if v.WaitTimeSeconds != nil {
+		ok := object.Key("WaitTimeSeconds")
+		ok.Integer(*v.WaitTimeSeconds)
+	}
+
 	if v.WithEvent != nil {
 		ok := object.Key("WithEvent")
 		ok.Boolean(*v.WithEvent)
@@ -972,6 +1053,11 @@ func awsAwsjson11_serializeOpDocumentGetStatementResultInput(v *GetStatementResu
 		ok.String(*v.NextToken)
 	}
 
+	if v.WaitTimeSeconds != nil {
+		ok := object.Key("WaitTimeSeconds")
+		ok.Integer(*v.WaitTimeSeconds)
+	}
+
 	return nil
 }
 
@@ -987,6 +1073,11 @@ func awsAwsjson11_serializeOpDocumentGetStatementResultV2Input(v *GetStatementRe
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.WaitTimeSeconds != nil {
+		ok := object.Key("WaitTimeSeconds")
+		ok.Integer(*v.WaitTimeSeconds)
 	}
 
 	return nil
@@ -1076,6 +1167,53 @@ func awsAwsjson11_serializeOpDocumentListSchemasInput(v *ListSchemasInput, value
 	if v.SecretArn != nil {
 		ok := object.Key("SecretArn")
 		ok.String(*v.SecretArn)
+	}
+
+	if v.WorkgroupName != nil {
+		ok := object.Key("WorkgroupName")
+		ok.String(*v.WorkgroupName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListSessionsInput(v *ListSessionsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterIdentifier != nil {
+		ok := object.Key("ClusterIdentifier")
+		ok.String(*v.ClusterIdentifier)
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("MaxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.RoleLevel != nil {
+		ok := object.Key("RoleLevel")
+		ok.Boolean(*v.RoleLevel)
+	}
+
+	if v.SessionId != nil {
+		ok := object.Key("SessionId")
+		ok.String(*v.SessionId)
+	}
+
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
 	}
 
 	if v.WorkgroupName != nil {

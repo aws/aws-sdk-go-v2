@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/rebalancing
+
+Content-Type: application/json
+
+{"currentVersion":"__CurrentVersion__","rebalancing":{"status":"PAUSED"}}

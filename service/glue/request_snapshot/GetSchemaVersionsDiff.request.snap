@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetSchemaVersionsDiff
+
+{"FirstSchemaVersionNumber":{"LatestVersion":true,"VersionNumber":1},"SchemaDiffType":"SYNTAX_DIFF","SchemaId":{"RegistryName":"__RegistryName__","SchemaArn":"__SchemaArn__","SchemaName":"__SchemaName__"},"SecondSchemaVersionNumber":{"LatestVersion":true,"VersionNumber":1}}

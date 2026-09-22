@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.PutProjectPolicy
+
+{"PolicyDocument":"__PolicyDocument__","PolicyName":"__PolicyName__","PolicyRevisionId":"__PolicyRevisionId__","ProjectArn":"__ProjectArn__"}

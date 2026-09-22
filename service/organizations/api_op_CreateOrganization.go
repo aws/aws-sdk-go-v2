@@ -4,11 +4,10 @@ package organizations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Web Services organization. The account whose user is calling
@@ -25,6 +24,11 @@ import (
 // organization supporting only the consolidated billing features by setting the
 // FeatureSet parameter to CONSOLIDATED_BILLING , no policy types are enabled by
 // default and you can't use organization policies.
+//
+// The AccountJoinedOrganization event is logged in CloudTrail and is available
+// only in the management account's event history. This event includes
+// joinedMethod:INVITED and joinedTime fields to provide context on how and when
+// the account joined the organization.
 //
 // [management account]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
 func (c *Client) CreateOrganization(ctx context.Context, params *CreateOrganizationInput, optFns ...func(*Options)) (*CreateOrganizationOutput, error) {
@@ -66,6 +70,18 @@ type CreateOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeatureSet != "" {
+		s.WriteString(schemas.CreateOrganizationRequest_FeatureSet, string(v.FeatureSet))
+	}
+}
+
 type CreateOrganizationOutput struct {
 
 	// A structure that contains details about the newly created organization.
@@ -77,74 +93,47 @@ type CreateOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Organization != nil {
+		s.WriteStruct(schemas.CreateOrganizationResponse_Organization)
+		v.Organization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOrganizationResponse_Organization:
+			v.Organization = &types.Organization{}
+			return v.Organization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganization, schemas.CreateOrganizationRequest, schemas.CreateOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrganization, schemas.CreateOrganizationRequest, schemas.CreateOrganizationResponse), output: &CreateOrganizationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateOrganization{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOrganization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOrganization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +148,8 @@ func (c *Client) addOperationCreateOrganizationMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOrganization",
-	}
 }

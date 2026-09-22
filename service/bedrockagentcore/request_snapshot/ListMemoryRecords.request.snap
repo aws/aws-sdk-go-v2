@@ -1,0 +1,5 @@
+POST /memories/__MemoryId__/memoryRecords
+
+Content-Type: application/json
+
+{"maxResults":1,"memoryStrategyId":"__MemoryStrategyId__","metadataFilters":[{"left":{"metadataKey":"__MemoryRecordLeftExpressionMemberMetadataKey__"},"operator":"EQUALS_TO","right":{"metadataValue":{"stringValue":"__MemoryRecordMetadataValueMemberStringValue__"}}},{"left":{"metadataKey":"__MemoryRecordLeftExpressionMemberMetadataKey__"},"operator":"EQUALS_TO","right":{"metadataValue":{"stringValue":"__MemoryRecordMetadataValueMemberStringValue__"}}}],"namespace":"__Namespace__","namespacePath":"__NamespacePath__","nextToken":"__NextToken__"}

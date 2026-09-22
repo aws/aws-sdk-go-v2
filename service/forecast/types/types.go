@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -39,6 +41,44 @@ type Action struct {
 	Value *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Action) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Action)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Action) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.Action_AttributeName, *v.AttributeName)
+	}
+	if v.Operation != "" {
+		s.WriteString(schemas.Action_Operation, string(v.Operation))
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.Action_Value, *v.Value)
+	}
+}
+func (v *Action) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Action, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Action_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.Action_AttributeName, v.AttributeName)
+		case schemas.Action_Operation:
+			var ev string
+			if err := d.ReadString(schemas.Action_Operation, &ev); err != nil {
+				return err
+			}
+			v.Operation = Operation(ev)
+			return nil
+		case schemas.Action_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.Action_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes an additional dataset. This object is part of the DataConfig object. Forecast
@@ -215,6 +255,31 @@ type AdditionalDataset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdditionalDataset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdditionalDataset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdditionalDataset) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguration(s, schemas.AdditionalDataset_Configuration, v.Configuration)
+	if v.Name != nil {
+		s.WriteString(schemas.AdditionalDataset_Name, *v.Name)
+	}
+}
+func (v *AdditionalDataset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdditionalDataset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdditionalDataset_Configuration:
+			return deserializeConfiguration(d, schemas.AdditionalDataset_Configuration, &v.Configuration)
+		case schemas.AdditionalDataset_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AdditionalDataset_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Provides information about the method used to transform attributes.
 //
 // The following is an example using the RETAIL domain:
@@ -272,6 +337,31 @@ type AttributeConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttributeConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.AttributeConfig_AttributeName, *v.AttributeName)
+	}
+	serializeTransformations(s, schemas.AttributeConfig_Transformations, v.Transformations)
+}
+func (v *AttributeConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeConfig_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.AttributeConfig_AttributeName, v.AttributeName)
+		case schemas.AttributeConfig_Transformations:
+			return deserializeTransformations(d, schemas.AttributeConfig_Transformations, &v.Transformations)
+		}
+		return nil
+	})
+}
+
 // Metrics you can use as a baseline for comparison purposes. Use these metrics
 // when you interpret monitoring results for an auto predictor.
 type Baseline struct {
@@ -286,6 +376,30 @@ type Baseline struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Baseline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Baseline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Baseline) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PredictorBaseline != nil {
+		s.WriteStruct(schemas.Baseline_PredictorBaseline)
+		v.PredictorBaseline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Baseline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Baseline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Baseline_PredictorBaseline:
+			v.PredictorBaseline = &PredictorBaseline{}
+			return v.PredictorBaseline.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An individual metric that you can use for comparison as you evaluate your
 // monitoring results.
 type BaselineMetric struct {
@@ -297,6 +411,34 @@ type BaselineMetric struct {
 	Value *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *BaselineMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaselineMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaselineMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.BaselineMetric_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.BaselineMetric_Value, *v.Value)
+	}
+}
+func (v *BaselineMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaselineMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaselineMetric_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BaselineMetric_Name, v.Name)
+		case schemas.BaselineMetric_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.BaselineMetric_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Specifies a categorical hyperparameter and it's range of tunable values. This
@@ -314,6 +456,31 @@ type CategoricalParameterRange struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CategoricalParameterRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoricalParameterRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoricalParameterRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CategoricalParameterRange_Name, *v.Name)
+	}
+	serializeValues(s, schemas.CategoricalParameterRange_Values, v.Values)
+}
+func (v *CategoricalParameterRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoricalParameterRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoricalParameterRange_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CategoricalParameterRange_Name, v.Name)
+		case schemas.CategoricalParameterRange_Values:
+			return deserializeValues(d, schemas.CategoricalParameterRange_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Specifies a continuous hyperparameter and it's range of tunable values. This
@@ -364,6 +531,50 @@ type ContinuousParameterRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContinuousParameterRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContinuousParameterRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContinuousParameterRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxValue != nil {
+		s.WriteFloat64(schemas.ContinuousParameterRange_MaxValue, *v.MaxValue)
+	}
+	if v.MinValue != nil {
+		s.WriteFloat64(schemas.ContinuousParameterRange_MinValue, *v.MinValue)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ContinuousParameterRange_Name, *v.Name)
+	}
+	if v.ScalingType != "" {
+		s.WriteString(schemas.ContinuousParameterRange_ScalingType, string(v.ScalingType))
+	}
+}
+func (v *ContinuousParameterRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContinuousParameterRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ContinuousParameterRange_MaxValue:
+			v.MaxValue = new(float64)
+			return d.ReadFloat64(schemas.ContinuousParameterRange_MaxValue, v.MaxValue)
+		case schemas.ContinuousParameterRange_MinValue:
+			v.MinValue = new(float64)
+			return d.ReadFloat64(schemas.ContinuousParameterRange_MinValue, v.MinValue)
+		case schemas.ContinuousParameterRange_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ContinuousParameterRange_Name, v.Name)
+		case schemas.ContinuousParameterRange_ScalingType:
+			var ev string
+			if err := d.ReadString(schemas.ContinuousParameterRange_ScalingType, &ev); err != nil {
+				return err
+			}
+			v.ScalingType = ScalingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The data configuration for your dataset group and any additional datasets.
 type DataConfig struct {
 
@@ -381,6 +592,34 @@ type DataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalDatasets(s, schemas.DataConfig_AdditionalDatasets, v.AdditionalDatasets)
+	serializeAttributeConfigs(s, schemas.DataConfig_AttributeConfigs, v.AttributeConfigs)
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.DataConfig_DatasetGroupArn, *v.DatasetGroupArn)
+	}
+}
+func (v *DataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataConfig_AdditionalDatasets:
+			return deserializeAdditionalDatasets(d, schemas.DataConfig_AdditionalDatasets, &v.AdditionalDatasets)
+		case schemas.DataConfig_AttributeConfigs:
+			return deserializeAttributeConfigs(d, schemas.DataConfig_AttributeConfigs, &v.AttributeConfigs)
+		case schemas.DataConfig_DatasetGroupArn:
+			v.DatasetGroupArn = new(string)
+			return d.ReadString(schemas.DataConfig_DatasetGroupArn, v.DatasetGroupArn)
+		}
+		return nil
+	})
+}
+
 // The destination for an export job. Provide an S3 path, an Identity and Access
 // Management (IAM) role that allows Amazon Forecast to access the location, and an
 // Key Management Service (KMS) key (optional).
@@ -393,6 +632,30 @@ type DataDestination struct {
 	S3Config *S3Config
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Config != nil {
+		s.WriteStruct(schemas.DataDestination_S3Config)
+		v.S3Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataDestination_S3Config:
+			v.S3Config = &S3Config{}
+			return v.S3Config.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the dataset group properties used in the [ListDatasetGroups] operation. To
@@ -420,6 +683,46 @@ type DatasetGroupSummary struct {
 	LastModificationTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasetGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DatasetGroupSummary_CreationTime, *v.CreationTime)
+	}
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.DatasetGroupSummary_DatasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.DatasetGroupName != nil {
+		s.WriteString(schemas.DatasetGroupSummary_DatasetGroupName, *v.DatasetGroupName)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DatasetGroupSummary_LastModificationTime, *v.LastModificationTime)
+	}
+}
+func (v *DatasetGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetGroupSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DatasetGroupSummary_CreationTime, v.CreationTime)
+		case schemas.DatasetGroupSummary_DatasetGroupArn:
+			v.DatasetGroupArn = new(string)
+			return d.ReadString(schemas.DatasetGroupSummary_DatasetGroupArn, v.DatasetGroupArn)
+		case schemas.DatasetGroupSummary_DatasetGroupName:
+			v.DatasetGroupName = new(string)
+			return d.ReadString(schemas.DatasetGroupSummary_DatasetGroupName, v.DatasetGroupName)
+		case schemas.DatasetGroupSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DatasetGroupSummary_LastModificationTime, v.LastModificationTime)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the dataset import job properties used in the [ListDatasetImportJobs] operation.
@@ -480,6 +783,76 @@ type DatasetImportJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetImportJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetImportJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetImportJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DatasetImportJobSummary_CreationTime, *v.CreationTime)
+	}
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.DatasetImportJobSummary_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetImportJobArn != nil {
+		s.WriteString(schemas.DatasetImportJobSummary_DatasetImportJobArn, *v.DatasetImportJobArn)
+	}
+	if v.DatasetImportJobName != nil {
+		s.WriteString(schemas.DatasetImportJobSummary_DatasetImportJobName, *v.DatasetImportJobName)
+	}
+	if v.ImportMode != "" {
+		s.WriteString(schemas.DatasetImportJobSummary_ImportMode, string(v.ImportMode))
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DatasetImportJobSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DatasetImportJobSummary_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DatasetImportJobSummary_Status, *v.Status)
+	}
+}
+func (v *DatasetImportJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetImportJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetImportJobSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DatasetImportJobSummary_CreationTime, v.CreationTime)
+		case schemas.DatasetImportJobSummary_DataSource:
+			v.DataSource = &DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.DatasetImportJobSummary_DatasetImportJobArn:
+			v.DatasetImportJobArn = new(string)
+			return d.ReadString(schemas.DatasetImportJobSummary_DatasetImportJobArn, v.DatasetImportJobArn)
+		case schemas.DatasetImportJobSummary_DatasetImportJobName:
+			v.DatasetImportJobName = new(string)
+			return d.ReadString(schemas.DatasetImportJobSummary_DatasetImportJobName, v.DatasetImportJobName)
+		case schemas.DatasetImportJobSummary_ImportMode:
+			var ev string
+			if err := d.ReadString(schemas.DatasetImportJobSummary_ImportMode, &ev); err != nil {
+				return err
+			}
+			v.ImportMode = ImportMode(ev)
+			return nil
+		case schemas.DatasetImportJobSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DatasetImportJobSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.DatasetImportJobSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DatasetImportJobSummary_Message, v.Message)
+		case schemas.DatasetImportJobSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DatasetImportJobSummary_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Provides a summary of the dataset properties used in the [ListDatasets] operation. To get the
 // complete set of properties, call the [DescribeDataset]operation, and provide the DatasetArn .
 //
@@ -513,6 +886,66 @@ type DatasetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatasetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DatasetSummary_CreationTime, *v.CreationTime)
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DatasetSummary_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DatasetSummary_DatasetName, *v.DatasetName)
+	}
+	if v.DatasetType != "" {
+		s.WriteString(schemas.DatasetSummary_DatasetType, string(v.DatasetType))
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.DatasetSummary_Domain, string(v.Domain))
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DatasetSummary_LastModificationTime, *v.LastModificationTime)
+	}
+}
+func (v *DatasetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DatasetSummary_CreationTime, v.CreationTime)
+		case schemas.DatasetSummary_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DatasetSummary_DatasetArn, v.DatasetArn)
+		case schemas.DatasetSummary_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.DatasetSummary_DatasetName, v.DatasetName)
+		case schemas.DatasetSummary_DatasetType:
+			var ev string
+			if err := d.ReadString(schemas.DatasetSummary_DatasetType, &ev); err != nil {
+				return err
+			}
+			v.DatasetType = DatasetType(ev)
+			return nil
+		case schemas.DatasetSummary_Domain:
+			var ev string
+			if err := d.ReadString(schemas.DatasetSummary_Domain, &ev); err != nil {
+				return err
+			}
+			v.Domain = Domain(ev)
+			return nil
+		case schemas.DatasetSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DatasetSummary_LastModificationTime, v.LastModificationTime)
+		}
+		return nil
+	})
+}
+
 // The source of your data, an Identity and Access Management (IAM) role that
 // allows Amazon Forecast to access the data and, optionally, an Key Management
 // Service (KMS) key.
@@ -525,6 +958,30 @@ type DataSource struct {
 	S3Config *S3Config
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Config != nil {
+		s.WriteStruct(schemas.DataSource_S3Config)
+		v.S3Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataSource_S3Config:
+			v.S3Config = &S3Config{}
+			return v.S3Config.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An Key Management Service (KMS) key and an Identity and Access Management (IAM)
@@ -546,6 +1003,34 @@ type EncryptionConfig struct {
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EncryptionConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KMSKeyArn != nil {
+		s.WriteString(schemas.EncryptionConfig_KMSKeyArn, *v.KMSKeyArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.EncryptionConfig_RoleArn, *v.RoleArn)
+	}
+}
+func (v *EncryptionConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfig_KMSKeyArn:
+			v.KMSKeyArn = new(string)
+			return d.ReadString(schemas.EncryptionConfig_KMSKeyArn, v.KMSKeyArn)
+		case schemas.EncryptionConfig_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.EncryptionConfig_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
 }
 
 //	Provides detailed error metrics to evaluate the performance of a predictor.
@@ -571,6 +1056,52 @@ type ErrorMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ErrorMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastType != nil {
+		s.WriteString(schemas.ErrorMetric_ForecastType, *v.ForecastType)
+	}
+	if v.MAPE != nil {
+		s.WriteFloat64(schemas.ErrorMetric_MAPE, *v.MAPE)
+	}
+	if v.MASE != nil {
+		s.WriteFloat64(schemas.ErrorMetric_MASE, *v.MASE)
+	}
+	if v.RMSE != nil {
+		s.WriteFloat64(schemas.ErrorMetric_RMSE, *v.RMSE)
+	}
+	if v.WAPE != nil {
+		s.WriteFloat64(schemas.ErrorMetric_WAPE, *v.WAPE)
+	}
+}
+func (v *ErrorMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorMetric_ForecastType:
+			v.ForecastType = new(string)
+			return d.ReadString(schemas.ErrorMetric_ForecastType, v.ForecastType)
+		case schemas.ErrorMetric_MAPE:
+			v.MAPE = new(float64)
+			return d.ReadFloat64(schemas.ErrorMetric_MAPE, v.MAPE)
+		case schemas.ErrorMetric_MASE:
+			v.MASE = new(float64)
+			return d.ReadFloat64(schemas.ErrorMetric_MASE, v.MASE)
+		case schemas.ErrorMetric_RMSE:
+			v.RMSE = new(float64)
+			return d.ReadFloat64(schemas.ErrorMetric_RMSE, v.RMSE)
+		case schemas.ErrorMetric_WAPE:
+			v.WAPE = new(float64)
+			return d.ReadFloat64(schemas.ErrorMetric_WAPE, v.WAPE)
+		}
+		return nil
+	})
+}
+
 // Parameters that define how to split a dataset into training data and testing
 // data, and the number of iterations to perform. These parameters are specified in
 // the predefined algorithms but you can override them in the CreatePredictorrequest.
@@ -594,6 +1125,34 @@ type EvaluationParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluationParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackTestWindowOffset != nil {
+		s.WriteInt32(schemas.EvaluationParameters_BackTestWindowOffset, *v.BackTestWindowOffset)
+	}
+	if v.NumberOfBacktestWindows != nil {
+		s.WriteInt32(schemas.EvaluationParameters_NumberOfBacktestWindows, *v.NumberOfBacktestWindows)
+	}
+}
+func (v *EvaluationParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationParameters_BackTestWindowOffset:
+			v.BackTestWindowOffset = new(int32)
+			return d.ReadInt32(schemas.EvaluationParameters_BackTestWindowOffset, v.BackTestWindowOffset)
+		case schemas.EvaluationParameters_NumberOfBacktestWindows:
+			v.NumberOfBacktestWindows = new(int32)
+			return d.ReadInt32(schemas.EvaluationParameters_NumberOfBacktestWindows, v.NumberOfBacktestWindows)
+		}
+		return nil
+	})
+}
+
 // The results of evaluating an algorithm. Returned as part of the GetAccuracyMetrics response.
 type EvaluationResult struct {
 
@@ -606,6 +1165,31 @@ type EvaluationResult struct {
 	TestWindows []WindowSummary
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmArn != nil {
+		s.WriteString(schemas.EvaluationResult_AlgorithmArn, *v.AlgorithmArn)
+	}
+	serializeTestWindows(s, schemas.EvaluationResult_TestWindows, v.TestWindows)
+}
+func (v *EvaluationResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationResult_AlgorithmArn:
+			v.AlgorithmArn = new(string)
+			return d.ReadString(schemas.EvaluationResult_AlgorithmArn, v.AlgorithmArn)
+		case schemas.EvaluationResult_TestWindows:
+			return deserializeTestWindows(d, schemas.EvaluationResult_TestWindows, &v.TestWindows)
+		}
+		return nil
+	})
 }
 
 // The ExplainabilityConfig data type defines the number of time series and time
@@ -641,6 +1225,42 @@ type ExplainabilityConfig struct {
 	TimeSeriesGranularity TimeSeriesGranularity
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExplainabilityConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExplainabilityConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExplainabilityConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimePointGranularity != "" {
+		s.WriteString(schemas.ExplainabilityConfig_TimePointGranularity, string(v.TimePointGranularity))
+	}
+	if v.TimeSeriesGranularity != "" {
+		s.WriteString(schemas.ExplainabilityConfig_TimeSeriesGranularity, string(v.TimeSeriesGranularity))
+	}
+}
+func (v *ExplainabilityConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExplainabilityConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExplainabilityConfig_TimePointGranularity:
+			var ev string
+			if err := d.ReadString(schemas.ExplainabilityConfig_TimePointGranularity, &ev); err != nil {
+				return err
+			}
+			v.TimePointGranularity = TimePointGranularity(ev)
+			return nil
+		case schemas.ExplainabilityConfig_TimeSeriesGranularity:
+			var ev string
+			if err := d.ReadString(schemas.ExplainabilityConfig_TimeSeriesGranularity, &ev); err != nil {
+				return err
+			}
+			v.TimeSeriesGranularity = TimeSeriesGranularity(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the Explainability export properties used in the ListExplainabilityExports
@@ -694,6 +1314,66 @@ type ExplainabilityExportSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExplainabilityExportSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExplainabilityExportSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExplainabilityExportSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ExplainabilityExportSummary_CreationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.ExplainabilityExportSummary_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExplainabilityExportArn != nil {
+		s.WriteString(schemas.ExplainabilityExportSummary_ExplainabilityExportArn, *v.ExplainabilityExportArn)
+	}
+	if v.ExplainabilityExportName != nil {
+		s.WriteString(schemas.ExplainabilityExportSummary_ExplainabilityExportName, *v.ExplainabilityExportName)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.ExplainabilityExportSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ExplainabilityExportSummary_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ExplainabilityExportSummary_Status, *v.Status)
+	}
+}
+func (v *ExplainabilityExportSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExplainabilityExportSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExplainabilityExportSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ExplainabilityExportSummary_CreationTime, v.CreationTime)
+		case schemas.ExplainabilityExportSummary_Destination:
+			v.Destination = &DataDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.ExplainabilityExportSummary_ExplainabilityExportArn:
+			v.ExplainabilityExportArn = new(string)
+			return d.ReadString(schemas.ExplainabilityExportSummary_ExplainabilityExportArn, v.ExplainabilityExportArn)
+		case schemas.ExplainabilityExportSummary_ExplainabilityExportName:
+			v.ExplainabilityExportName = new(string)
+			return d.ReadString(schemas.ExplainabilityExportSummary_ExplainabilityExportName, v.ExplainabilityExportName)
+		case schemas.ExplainabilityExportSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.ExplainabilityExportSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.ExplainabilityExportSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ExplainabilityExportSummary_Message, v.Message)
+		case schemas.ExplainabilityExportSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ExplainabilityExportSummary_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Provides information about the Explainability resource.
 type ExplainabilityInfo struct {
 
@@ -712,6 +1392,34 @@ type ExplainabilityInfo struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExplainabilityInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExplainabilityInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExplainabilityInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplainabilityArn != nil {
+		s.WriteString(schemas.ExplainabilityInfo_ExplainabilityArn, *v.ExplainabilityArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ExplainabilityInfo_Status, *v.Status)
+	}
+}
+func (v *ExplainabilityInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExplainabilityInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExplainabilityInfo_ExplainabilityArn:
+			v.ExplainabilityArn = new(string)
+			return d.ReadString(schemas.ExplainabilityInfo_ExplainabilityArn, v.ExplainabilityArn)
+		case schemas.ExplainabilityInfo_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ExplainabilityInfo_Status, v.Status)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the Explainability properties used in the ListExplainabilities operation. To
@@ -768,6 +1476,72 @@ type ExplainabilitySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExplainabilitySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExplainabilitySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExplainabilitySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ExplainabilitySummary_CreationTime, *v.CreationTime)
+	}
+	if v.ExplainabilityArn != nil {
+		s.WriteString(schemas.ExplainabilitySummary_ExplainabilityArn, *v.ExplainabilityArn)
+	}
+	if v.ExplainabilityConfig != nil {
+		s.WriteStruct(schemas.ExplainabilitySummary_ExplainabilityConfig)
+		v.ExplainabilityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExplainabilityName != nil {
+		s.WriteString(schemas.ExplainabilitySummary_ExplainabilityName, *v.ExplainabilityName)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.ExplainabilitySummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ExplainabilitySummary_Message, *v.Message)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ExplainabilitySummary_ResourceArn, *v.ResourceArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ExplainabilitySummary_Status, *v.Status)
+	}
+}
+func (v *ExplainabilitySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExplainabilitySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExplainabilitySummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ExplainabilitySummary_CreationTime, v.CreationTime)
+		case schemas.ExplainabilitySummary_ExplainabilityArn:
+			v.ExplainabilityArn = new(string)
+			return d.ReadString(schemas.ExplainabilitySummary_ExplainabilityArn, v.ExplainabilityArn)
+		case schemas.ExplainabilitySummary_ExplainabilityConfig:
+			v.ExplainabilityConfig = &ExplainabilityConfig{}
+			return v.ExplainabilityConfig.Deserialize(d)
+		case schemas.ExplainabilitySummary_ExplainabilityName:
+			v.ExplainabilityName = new(string)
+			return d.ReadString(schemas.ExplainabilitySummary_ExplainabilityName, v.ExplainabilityName)
+		case schemas.ExplainabilitySummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.ExplainabilitySummary_LastModificationTime, v.LastModificationTime)
+		case schemas.ExplainabilitySummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ExplainabilitySummary_Message, v.Message)
+		case schemas.ExplainabilitySummary_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ExplainabilitySummary_ResourceArn, v.ResourceArn)
+		case schemas.ExplainabilitySummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ExplainabilitySummary_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // This object belongs to the CreatePredictor operation. If you created your predictor with CreateAutoPredictor, see AttributeConfig
 // .
 //
@@ -805,6 +1579,31 @@ type Featurization struct {
 	FeaturizationPipeline []FeaturizationMethod
 
 	noSmithyDocumentSerde
+}
+
+func (v *Featurization) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Featurization)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Featurization) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.Featurization_AttributeName, *v.AttributeName)
+	}
+	serializeFeaturizationPipeline(s, schemas.Featurization_FeaturizationPipeline, v.FeaturizationPipeline)
+}
+func (v *Featurization) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Featurization, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Featurization_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.Featurization_AttributeName, v.AttributeName)
+		case schemas.Featurization_FeaturizationPipeline:
+			return deserializeFeaturizationPipeline(d, schemas.Featurization_FeaturizationPipeline, &v.FeaturizationPipeline)
+		}
+		return nil
+	})
 }
 
 // This object belongs to the CreatePredictor operation. If you created your predictor with CreateAutoPredictor, see AttributeConfig
@@ -879,6 +1678,34 @@ type FeaturizationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FeaturizationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeaturizationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeaturizationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeaturizations(s, schemas.FeaturizationConfig_Featurizations, v.Featurizations)
+	serializeForecastDimensions(s, schemas.FeaturizationConfig_ForecastDimensions, v.ForecastDimensions)
+	if v.ForecastFrequency != nil {
+		s.WriteString(schemas.FeaturizationConfig_ForecastFrequency, *v.ForecastFrequency)
+	}
+}
+func (v *FeaturizationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeaturizationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeaturizationConfig_Featurizations:
+			return deserializeFeaturizations(d, schemas.FeaturizationConfig_Featurizations, &v.Featurizations)
+		case schemas.FeaturizationConfig_ForecastDimensions:
+			return deserializeForecastDimensions(d, schemas.FeaturizationConfig_ForecastDimensions, &v.ForecastDimensions)
+		case schemas.FeaturizationConfig_ForecastFrequency:
+			v.ForecastFrequency = new(string)
+			return d.ReadString(schemas.FeaturizationConfig_ForecastFrequency, v.ForecastFrequency)
+		}
+		return nil
+	})
+}
+
 // Provides information about the method that featurizes (transforms) a dataset
 // field. The method is part of the FeaturizationPipeline of the Featurization object.
 //
@@ -933,6 +1760,35 @@ type FeaturizationMethod struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FeaturizationMethod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeaturizationMethod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeaturizationMethod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FeaturizationMethodName != "" {
+		s.WriteString(schemas.FeaturizationMethod_FeaturizationMethodName, string(v.FeaturizationMethodName))
+	}
+	serializeFeaturizationMethodParameters(s, schemas.FeaturizationMethod_FeaturizationMethodParameters, v.FeaturizationMethodParameters)
+}
+func (v *FeaturizationMethod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeaturizationMethod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeaturizationMethod_FeaturizationMethodName:
+			var ev string
+			if err := d.ReadString(schemas.FeaturizationMethod_FeaturizationMethodName, &ev); err != nil {
+				return err
+			}
+			v.FeaturizationMethodName = FeaturizationMethodName(ev)
+			return nil
+		case schemas.FeaturizationMethod_FeaturizationMethodParameters:
+			return deserializeFeaturizationMethodParameters(d, schemas.FeaturizationMethod_FeaturizationMethodParameters, &v.FeaturizationMethodParameters)
+		}
+		return nil
+	})
+}
+
 // Describes a filter for choosing a subset of objects. Each filter consists of a
 // condition and a match statement. The condition is either IS or IS_NOT , which
 // specifies whether to include or exclude the objects that match the statement,
@@ -956,6 +1812,44 @@ type Filter struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != "" {
+		s.WriteString(schemas.Filter_Condition, string(v.Condition))
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.Filter_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Filter_Value, *v.Value)
+	}
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Condition:
+			var ev string
+			if err := d.ReadString(schemas.Filter_Condition, &ev); err != nil {
+				return err
+			}
+			v.Condition = FilterConditionString(ev)
+			return nil
+		case schemas.Filter_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Filter_Key, v.Key)
+		case schemas.Filter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Filter_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the forecast export job properties used in the ListForecastExportJobs
@@ -1008,6 +1902,66 @@ type ForecastExportJobSummary struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ForecastExportJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForecastExportJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForecastExportJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ForecastExportJobSummary_CreationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.ForecastExportJobSummary_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ForecastExportJobArn != nil {
+		s.WriteString(schemas.ForecastExportJobSummary_ForecastExportJobArn, *v.ForecastExportJobArn)
+	}
+	if v.ForecastExportJobName != nil {
+		s.WriteString(schemas.ForecastExportJobSummary_ForecastExportJobName, *v.ForecastExportJobName)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.ForecastExportJobSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ForecastExportJobSummary_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ForecastExportJobSummary_Status, *v.Status)
+	}
+}
+func (v *ForecastExportJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForecastExportJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForecastExportJobSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ForecastExportJobSummary_CreationTime, v.CreationTime)
+		case schemas.ForecastExportJobSummary_Destination:
+			v.Destination = &DataDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.ForecastExportJobSummary_ForecastExportJobArn:
+			v.ForecastExportJobArn = new(string)
+			return d.ReadString(schemas.ForecastExportJobSummary_ForecastExportJobArn, v.ForecastExportJobArn)
+		case schemas.ForecastExportJobSummary_ForecastExportJobName:
+			v.ForecastExportJobName = new(string)
+			return d.ReadString(schemas.ForecastExportJobSummary_ForecastExportJobName, v.ForecastExportJobName)
+		case schemas.ForecastExportJobSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.ForecastExportJobSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.ForecastExportJobSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForecastExportJobSummary_Message, v.Message)
+		case schemas.ForecastExportJobSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ForecastExportJobSummary_Status, v.Status)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the forecast properties used in the ListForecasts operation. To get
@@ -1068,6 +2022,76 @@ type ForecastSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ForecastSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForecastSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForecastSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedUsingAutoPredictor != nil {
+		s.WriteBool(schemas.ForecastSummary_CreatedUsingAutoPredictor, *v.CreatedUsingAutoPredictor)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ForecastSummary_CreationTime, *v.CreationTime)
+	}
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.ForecastSummary_DatasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.ForecastSummary_ForecastArn, *v.ForecastArn)
+	}
+	if v.ForecastName != nil {
+		s.WriteString(schemas.ForecastSummary_ForecastName, *v.ForecastName)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.ForecastSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ForecastSummary_Message, *v.Message)
+	}
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.ForecastSummary_PredictorArn, *v.PredictorArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ForecastSummary_Status, *v.Status)
+	}
+}
+func (v *ForecastSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForecastSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForecastSummary_CreatedUsingAutoPredictor:
+			v.CreatedUsingAutoPredictor = new(bool)
+			return d.ReadBool(schemas.ForecastSummary_CreatedUsingAutoPredictor, v.CreatedUsingAutoPredictor)
+		case schemas.ForecastSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ForecastSummary_CreationTime, v.CreationTime)
+		case schemas.ForecastSummary_DatasetGroupArn:
+			v.DatasetGroupArn = new(string)
+			return d.ReadString(schemas.ForecastSummary_DatasetGroupArn, v.DatasetGroupArn)
+		case schemas.ForecastSummary_ForecastArn:
+			v.ForecastArn = new(string)
+			return d.ReadString(schemas.ForecastSummary_ForecastArn, v.ForecastArn)
+		case schemas.ForecastSummary_ForecastName:
+			v.ForecastName = new(string)
+			return d.ReadString(schemas.ForecastSummary_ForecastName, v.ForecastName)
+		case schemas.ForecastSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.ForecastSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.ForecastSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForecastSummary_Message, v.Message)
+		case schemas.ForecastSummary_PredictorArn:
+			v.PredictorArn = new(string)
+			return d.ReadString(schemas.ForecastSummary_PredictorArn, v.PredictorArn)
+		case schemas.ForecastSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ForecastSummary_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Configuration information for a hyperparameter tuning job. You specify this
 // object in the CreatePredictorrequest.
 //
@@ -1089,6 +2113,30 @@ type HyperParameterTuningJobConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HyperParameterTuningJobConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HyperParameterTuningJobConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HyperParameterTuningJobConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterRanges != nil {
+		s.WriteStruct(schemas.HyperParameterTuningJobConfig_ParameterRanges)
+		v.ParameterRanges.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HyperParameterTuningJobConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HyperParameterTuningJobConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HyperParameterTuningJobConfig_ParameterRanges:
+			v.ParameterRanges = &ParameterRanges{}
+			return v.ParameterRanges.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This object belongs to the CreatePredictor operation. If you created your predictor with CreateAutoPredictor, see DataConfig
 // .
 //
@@ -1106,6 +2154,31 @@ type InputDataConfig struct {
 	SupplementaryFeatures []SupplementaryFeature
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.InputDataConfig_DatasetGroupArn, *v.DatasetGroupArn)
+	}
+	serializeSupplementaryFeatures(s, schemas.InputDataConfig_SupplementaryFeatures, v.SupplementaryFeatures)
+}
+func (v *InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputDataConfig_DatasetGroupArn:
+			v.DatasetGroupArn = new(string)
+			return d.ReadString(schemas.InputDataConfig_DatasetGroupArn, v.DatasetGroupArn)
+		case schemas.InputDataConfig_SupplementaryFeatures:
+			return deserializeSupplementaryFeatures(d, schemas.InputDataConfig_SupplementaryFeatures, &v.SupplementaryFeatures)
+		}
+		return nil
+	})
 }
 
 // Specifies an integer hyperparameter and it's range of tunable values. This
@@ -1155,6 +2228,50 @@ type IntegerParameterRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IntegerParameterRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IntegerParameterRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IntegerParameterRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxValue != nil {
+		s.WriteInt32(schemas.IntegerParameterRange_MaxValue, *v.MaxValue)
+	}
+	if v.MinValue != nil {
+		s.WriteInt32(schemas.IntegerParameterRange_MinValue, *v.MinValue)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.IntegerParameterRange_Name, *v.Name)
+	}
+	if v.ScalingType != "" {
+		s.WriteString(schemas.IntegerParameterRange_ScalingType, string(v.ScalingType))
+	}
+}
+func (v *IntegerParameterRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IntegerParameterRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IntegerParameterRange_MaxValue:
+			v.MaxValue = new(int32)
+			return d.ReadInt32(schemas.IntegerParameterRange_MaxValue, v.MaxValue)
+		case schemas.IntegerParameterRange_MinValue:
+			v.MinValue = new(int32)
+			return d.ReadInt32(schemas.IntegerParameterRange_MinValue, v.MinValue)
+		case schemas.IntegerParameterRange_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.IntegerParameterRange_Name, v.Name)
+		case schemas.IntegerParameterRange_ScalingType:
+			var ev string
+			if err := d.ReadString(schemas.IntegerParameterRange_ScalingType, &ev); err != nil {
+				return err
+			}
+			v.ScalingType = ScalingType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An individual metric Forecast calculated when monitoring predictor usage. You
 // can compare the value for this metric to the metric's value in the Baselineto see how
 // your predictor's performance is changing.
@@ -1171,6 +2288,34 @@ type MetricResult struct {
 	MetricValue *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricName != nil {
+		s.WriteString(schemas.MetricResult_MetricName, *v.MetricName)
+	}
+	if v.MetricValue != nil {
+		s.WriteFloat64(schemas.MetricResult_MetricValue, *v.MetricValue)
+	}
+}
+func (v *MetricResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricResult_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.MetricResult_MetricName, v.MetricName)
+		case schemas.MetricResult_MetricValue:
+			v.MetricValue = new(float64)
+			return d.ReadFloat64(schemas.MetricResult_MetricValue, v.MetricValue)
+		}
+		return nil
+	})
 }
 
 // Provides metrics that are used to evaluate the performance of a predictor. This
@@ -1199,6 +2344,40 @@ type Metrics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Metrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Metrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Metrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AverageWeightedQuantileLoss != nil {
+		s.WriteFloat64(schemas.Metrics_AverageWeightedQuantileLoss, *v.AverageWeightedQuantileLoss)
+	}
+	serializeErrorMetrics(s, schemas.Metrics_ErrorMetrics, v.ErrorMetrics)
+	if v.RMSE != nil {
+		s.WriteFloat64(schemas.Metrics_RMSE, *v.RMSE)
+	}
+	serializeWeightedQuantileLosses(s, schemas.Metrics_WeightedQuantileLosses, v.WeightedQuantileLosses)
+}
+func (v *Metrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Metrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Metrics_AverageWeightedQuantileLoss:
+			v.AverageWeightedQuantileLoss = new(float64)
+			return d.ReadFloat64(schemas.Metrics_AverageWeightedQuantileLoss, v.AverageWeightedQuantileLoss)
+		case schemas.Metrics_ErrorMetrics:
+			return deserializeErrorMetrics(d, schemas.Metrics_ErrorMetrics, &v.ErrorMetrics)
+		case schemas.Metrics_RMSE:
+			v.RMSE = new(float64)
+			return d.ReadFloat64(schemas.Metrics_RMSE, v.RMSE)
+		case schemas.Metrics_WeightedQuantileLosses:
+			return deserializeWeightedQuantileLosses(d, schemas.Metrics_WeightedQuantileLosses, &v.WeightedQuantileLosses)
+		}
+		return nil
+	})
+}
+
 // The configuration details for the predictor monitor.
 type MonitorConfig struct {
 
@@ -1208,6 +2387,28 @@ type MonitorConfig struct {
 	MonitorName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MonitorConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitorConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitorConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorName != nil {
+		s.WriteString(schemas.MonitorConfig_MonitorName, *v.MonitorName)
+	}
+}
+func (v *MonitorConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitorConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitorConfig_MonitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.MonitorConfig_MonitorName, v.MonitorName)
+		}
+		return nil
+	})
 }
 
 // The source of the data the monitor used during the evaluation.
@@ -1225,6 +2426,40 @@ type MonitorDataSource struct {
 	PredictorArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MonitorDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitorDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitorDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetImportJobArn != nil {
+		s.WriteString(schemas.MonitorDataSource_DatasetImportJobArn, *v.DatasetImportJobArn)
+	}
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.MonitorDataSource_ForecastArn, *v.ForecastArn)
+	}
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.MonitorDataSource_PredictorArn, *v.PredictorArn)
+	}
+}
+func (v *MonitorDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitorDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitorDataSource_DatasetImportJobArn:
+			v.DatasetImportJobArn = new(string)
+			return d.ReadString(schemas.MonitorDataSource_DatasetImportJobArn, v.DatasetImportJobArn)
+		case schemas.MonitorDataSource_ForecastArn:
+			v.ForecastArn = new(string)
+			return d.ReadString(schemas.MonitorDataSource_ForecastArn, v.ForecastArn)
+		case schemas.MonitorDataSource_PredictorArn:
+			v.PredictorArn = new(string)
+			return d.ReadString(schemas.MonitorDataSource_PredictorArn, v.PredictorArn)
+		}
+		return nil
+	})
 }
 
 // Provides information about the monitor resource.
@@ -1247,6 +2482,34 @@ type MonitorInfo struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MonitorInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitorInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitorInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.MonitorInfo_MonitorArn, *v.MonitorArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.MonitorInfo_Status, *v.Status)
+	}
+}
+func (v *MonitorInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitorInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitorInfo_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.MonitorInfo_MonitorArn, v.MonitorArn)
+		case schemas.MonitorInfo_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.MonitorInfo_Status, v.Status)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the monitor properties used in the ListMonitors operation. To get a
@@ -1294,6 +2557,58 @@ type MonitorSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonitorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.MonitorSummary_CreationTime, *v.CreationTime)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.MonitorSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.MonitorSummary_MonitorArn, *v.MonitorArn)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.MonitorSummary_MonitorName, *v.MonitorName)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.MonitorSummary_ResourceArn, *v.ResourceArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.MonitorSummary_Status, *v.Status)
+	}
+}
+func (v *MonitorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitorSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.MonitorSummary_CreationTime, v.CreationTime)
+		case schemas.MonitorSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.MonitorSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.MonitorSummary_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.MonitorSummary_MonitorArn, v.MonitorArn)
+		case schemas.MonitorSummary_MonitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.MonitorSummary_MonitorName, v.MonitorName)
+		case schemas.MonitorSummary_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.MonitorSummary_ResourceArn, v.ResourceArn)
+		case schemas.MonitorSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.MonitorSummary_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Specifies the categorical, continuous, and integer hyperparameters, and their
 // ranges of tunable values. The range of tunable values determines which values
 // that a hyperparameter tuning job can choose for the specified hyperparameter.
@@ -1310,6 +2625,31 @@ type ParameterRanges struct {
 	IntegerParameterRanges []IntegerParameterRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParameterRanges) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterRanges)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterRanges) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCategoricalParameterRanges(s, schemas.ParameterRanges_CategoricalParameterRanges, v.CategoricalParameterRanges)
+	serializeContinuousParameterRanges(s, schemas.ParameterRanges_ContinuousParameterRanges, v.ContinuousParameterRanges)
+	serializeIntegerParameterRanges(s, schemas.ParameterRanges_IntegerParameterRanges, v.IntegerParameterRanges)
+}
+func (v *ParameterRanges) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterRanges, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterRanges_CategoricalParameterRanges:
+			return deserializeCategoricalParameterRanges(d, schemas.ParameterRanges_CategoricalParameterRanges, &v.CategoricalParameterRanges)
+		case schemas.ParameterRanges_ContinuousParameterRanges:
+			return deserializeContinuousParameterRanges(d, schemas.ParameterRanges_ContinuousParameterRanges, &v.ContinuousParameterRanges)
+		case schemas.ParameterRanges_IntegerParameterRanges:
+			return deserializeIntegerParameterRanges(d, schemas.ParameterRanges_IntegerParameterRanges, &v.IntegerParameterRanges)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the predictor backtest export job properties used in the ListPredictorBacktestExportJobs
@@ -1362,6 +2702,66 @@ type PredictorBacktestExportJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictorBacktestExportJobSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictorBacktestExportJobSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictorBacktestExportJobSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.PredictorBacktestExportJobSummary_CreationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.PredictorBacktestExportJobSummary_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.PredictorBacktestExportJobSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PredictorBacktestExportJobSummary_Message, *v.Message)
+	}
+	if v.PredictorBacktestExportJobArn != nil {
+		s.WriteString(schemas.PredictorBacktestExportJobSummary_PredictorBacktestExportJobArn, *v.PredictorBacktestExportJobArn)
+	}
+	if v.PredictorBacktestExportJobName != nil {
+		s.WriteString(schemas.PredictorBacktestExportJobSummary_PredictorBacktestExportJobName, *v.PredictorBacktestExportJobName)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.PredictorBacktestExportJobSummary_Status, *v.Status)
+	}
+}
+func (v *PredictorBacktestExportJobSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictorBacktestExportJobSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictorBacktestExportJobSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.PredictorBacktestExportJobSummary_CreationTime, v.CreationTime)
+		case schemas.PredictorBacktestExportJobSummary_Destination:
+			v.Destination = &DataDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.PredictorBacktestExportJobSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.PredictorBacktestExportJobSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.PredictorBacktestExportJobSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PredictorBacktestExportJobSummary_Message, v.Message)
+		case schemas.PredictorBacktestExportJobSummary_PredictorBacktestExportJobArn:
+			v.PredictorBacktestExportJobArn = new(string)
+			return d.ReadString(schemas.PredictorBacktestExportJobSummary_PredictorBacktestExportJobArn, v.PredictorBacktestExportJobArn)
+		case schemas.PredictorBacktestExportJobSummary_PredictorBacktestExportJobName:
+			v.PredictorBacktestExportJobName = new(string)
+			return d.ReadString(schemas.PredictorBacktestExportJobSummary_PredictorBacktestExportJobName, v.PredictorBacktestExportJobName)
+		case schemas.PredictorBacktestExportJobSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.PredictorBacktestExportJobSummary_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Metrics you can use as a baseline for comparison purposes. Use these metrics
 // when you interpret monitoring results for an auto predictor.
 type PredictorBaseline struct {
@@ -1373,6 +2773,25 @@ type PredictorBaseline struct {
 	BaselineMetrics []BaselineMetric
 
 	noSmithyDocumentSerde
+}
+
+func (v *PredictorBaseline) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictorBaseline)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictorBaseline) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBaselineMetrics(s, schemas.PredictorBaseline_BaselineMetrics, v.BaselineMetrics)
+}
+func (v *PredictorBaseline) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictorBaseline, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictorBaseline_BaselineMetrics:
+			return deserializeBaselineMetrics(d, schemas.PredictorBaseline_BaselineMetrics, &v.BaselineMetrics)
+		}
+		return nil
+	})
 }
 
 // Provides details about a predictor event, such as a retraining.
@@ -1390,6 +2809,34 @@ type PredictorEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictorEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictorEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictorEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Datetime != nil {
+		s.WriteTime(schemas.PredictorEvent_Datetime, *v.Datetime)
+	}
+	if v.Detail != nil {
+		s.WriteString(schemas.PredictorEvent_Detail, *v.Detail)
+	}
+}
+func (v *PredictorEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictorEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictorEvent_Datetime:
+			v.Datetime = new(time.Time)
+			return d.ReadTime(schemas.PredictorEvent_Datetime, v.Datetime)
+		case schemas.PredictorEvent_Detail:
+			v.Detail = new(string)
+			return d.ReadString(schemas.PredictorEvent_Detail, v.Detail)
+		}
+		return nil
+	})
+}
+
 // The algorithm used to perform a backtest and the status of those tests.
 type PredictorExecution struct {
 
@@ -1404,6 +2851,31 @@ type PredictorExecution struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictorExecution) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictorExecution)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictorExecution) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmArn != nil {
+		s.WriteString(schemas.PredictorExecution_AlgorithmArn, *v.AlgorithmArn)
+	}
+	serializeTestWindowDetails(s, schemas.PredictorExecution_TestWindows, v.TestWindows)
+}
+func (v *PredictorExecution) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictorExecution, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictorExecution_AlgorithmArn:
+			v.AlgorithmArn = new(string)
+			return d.ReadString(schemas.PredictorExecution_AlgorithmArn, v.AlgorithmArn)
+		case schemas.PredictorExecution_TestWindows:
+			return deserializeTestWindowDetails(d, schemas.PredictorExecution_TestWindows, &v.TestWindows)
+		}
+		return nil
+	})
+}
+
 // Contains details on the backtests performed to evaluate the accuracy of the
 // predictor. The tests are returned in descending order of accuracy, with the most
 // accurate backtest appearing first. You specify the number of backtests to
@@ -1416,6 +2888,25 @@ type PredictorExecutionDetails struct {
 	PredictorExecutions []PredictorExecution
 
 	noSmithyDocumentSerde
+}
+
+func (v *PredictorExecutionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictorExecutionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictorExecutionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePredictorExecutions(s, schemas.PredictorExecutionDetails_PredictorExecutions, v.PredictorExecutions)
+}
+func (v *PredictorExecutionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictorExecutionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictorExecutionDetails_PredictorExecutions:
+			return deserializePredictorExecutions(d, schemas.PredictorExecutionDetails_PredictorExecutions, &v.PredictorExecutions)
+		}
+		return nil
+	})
 }
 
 // Describes the results of a monitor evaluation.
@@ -1460,6 +2951,89 @@ type PredictorMonitorEvaluation struct {
 	WindowStartDatetime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *PredictorMonitorEvaluation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictorMonitorEvaluation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictorMonitorEvaluation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationState != nil {
+		s.WriteString(schemas.PredictorMonitorEvaluation_EvaluationState, *v.EvaluationState)
+	}
+	if v.EvaluationTime != nil {
+		s.WriteTime(schemas.PredictorMonitorEvaluation_EvaluationTime, *v.EvaluationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PredictorMonitorEvaluation_Message, *v.Message)
+	}
+	serializeMetricResults(s, schemas.PredictorMonitorEvaluation_MetricResults, v.MetricResults)
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.PredictorMonitorEvaluation_MonitorArn, *v.MonitorArn)
+	}
+	if v.MonitorDataSource != nil {
+		s.WriteStruct(schemas.PredictorMonitorEvaluation_MonitorDataSource)
+		v.MonitorDataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NumItemsEvaluated != nil {
+		s.WriteInt64(schemas.PredictorMonitorEvaluation_NumItemsEvaluated, *v.NumItemsEvaluated)
+	}
+	if v.PredictorEvent != nil {
+		s.WriteStruct(schemas.PredictorMonitorEvaluation_PredictorEvent)
+		v.PredictorEvent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PredictorMonitorEvaluation_ResourceArn, *v.ResourceArn)
+	}
+	if v.WindowEndDatetime != nil {
+		s.WriteTime(schemas.PredictorMonitorEvaluation_WindowEndDatetime, *v.WindowEndDatetime)
+	}
+	if v.WindowStartDatetime != nil {
+		s.WriteTime(schemas.PredictorMonitorEvaluation_WindowStartDatetime, *v.WindowStartDatetime)
+	}
+}
+func (v *PredictorMonitorEvaluation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictorMonitorEvaluation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictorMonitorEvaluation_EvaluationState:
+			v.EvaluationState = new(string)
+			return d.ReadString(schemas.PredictorMonitorEvaluation_EvaluationState, v.EvaluationState)
+		case schemas.PredictorMonitorEvaluation_EvaluationTime:
+			v.EvaluationTime = new(time.Time)
+			return d.ReadTime(schemas.PredictorMonitorEvaluation_EvaluationTime, v.EvaluationTime)
+		case schemas.PredictorMonitorEvaluation_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PredictorMonitorEvaluation_Message, v.Message)
+		case schemas.PredictorMonitorEvaluation_MetricResults:
+			return deserializeMetricResults(d, schemas.PredictorMonitorEvaluation_MetricResults, &v.MetricResults)
+		case schemas.PredictorMonitorEvaluation_MonitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.PredictorMonitorEvaluation_MonitorArn, v.MonitorArn)
+		case schemas.PredictorMonitorEvaluation_MonitorDataSource:
+			v.MonitorDataSource = &MonitorDataSource{}
+			return v.MonitorDataSource.Deserialize(d)
+		case schemas.PredictorMonitorEvaluation_NumItemsEvaluated:
+			v.NumItemsEvaluated = new(int64)
+			return d.ReadInt64(schemas.PredictorMonitorEvaluation_NumItemsEvaluated, v.NumItemsEvaluated)
+		case schemas.PredictorMonitorEvaluation_PredictorEvent:
+			v.PredictorEvent = &PredictorEvent{}
+			return v.PredictorEvent.Deserialize(d)
+		case schemas.PredictorMonitorEvaluation_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.PredictorMonitorEvaluation_ResourceArn, v.ResourceArn)
+		case schemas.PredictorMonitorEvaluation_WindowEndDatetime:
+			v.WindowEndDatetime = new(time.Time)
+			return d.ReadTime(schemas.PredictorMonitorEvaluation_WindowEndDatetime, v.WindowEndDatetime)
+		case schemas.PredictorMonitorEvaluation_WindowStartDatetime:
+			v.WindowStartDatetime = new(time.Time)
+			return d.ReadTime(schemas.PredictorMonitorEvaluation_WindowStartDatetime, v.WindowStartDatetime)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the predictor properties that are used in the ListPredictors operation.
@@ -1521,6 +3095,78 @@ type PredictorSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.PredictorSummary_CreationTime, *v.CreationTime)
+	}
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.PredictorSummary_DatasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.IsAutoPredictor != nil {
+		s.WriteBool(schemas.PredictorSummary_IsAutoPredictor, *v.IsAutoPredictor)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.PredictorSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PredictorSummary_Message, *v.Message)
+	}
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.PredictorSummary_PredictorArn, *v.PredictorArn)
+	}
+	if v.PredictorName != nil {
+		s.WriteString(schemas.PredictorSummary_PredictorName, *v.PredictorName)
+	}
+	if v.ReferencePredictorSummary != nil {
+		s.WriteStruct(schemas.PredictorSummary_ReferencePredictorSummary)
+		v.ReferencePredictorSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.PredictorSummary_Status, *v.Status)
+	}
+}
+func (v *PredictorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictorSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.PredictorSummary_CreationTime, v.CreationTime)
+		case schemas.PredictorSummary_DatasetGroupArn:
+			v.DatasetGroupArn = new(string)
+			return d.ReadString(schemas.PredictorSummary_DatasetGroupArn, v.DatasetGroupArn)
+		case schemas.PredictorSummary_IsAutoPredictor:
+			v.IsAutoPredictor = new(bool)
+			return d.ReadBool(schemas.PredictorSummary_IsAutoPredictor, v.IsAutoPredictor)
+		case schemas.PredictorSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.PredictorSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.PredictorSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PredictorSummary_Message, v.Message)
+		case schemas.PredictorSummary_PredictorArn:
+			v.PredictorArn = new(string)
+			return d.ReadString(schemas.PredictorSummary_PredictorArn, v.PredictorArn)
+		case schemas.PredictorSummary_PredictorName:
+			v.PredictorName = new(string)
+			return d.ReadString(schemas.PredictorSummary_PredictorName, v.PredictorName)
+		case schemas.PredictorSummary_ReferencePredictorSummary:
+			v.ReferencePredictorSummary = &ReferencePredictorSummary{}
+			return v.ReferencePredictorSummary.Deserialize(d)
+		case schemas.PredictorSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.PredictorSummary_Status, v.Status)
+		}
+		return nil
+	})
+}
+
 // Provides a summary of the reference predictor used when retraining or upgrading
 // a predictor.
 type ReferencePredictorSummary struct {
@@ -1532,6 +3178,38 @@ type ReferencePredictorSummary struct {
 	State State
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReferencePredictorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferencePredictorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReferencePredictorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ReferencePredictorSummary_Arn, *v.Arn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ReferencePredictorSummary_State, string(v.State))
+	}
+}
+func (v *ReferencePredictorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReferencePredictorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReferencePredictorSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ReferencePredictorSummary_Arn, v.Arn)
+		case schemas.ReferencePredictorSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.ReferencePredictorSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = State(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
@@ -1563,6 +3241,40 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Config) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Config)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Config) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KMSKeyArn != nil {
+		s.WriteString(schemas.S3Config_KMSKeyArn, *v.KMSKeyArn)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.S3Config_Path, *v.Path)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.S3Config_RoleArn, *v.RoleArn)
+	}
+}
+func (v *S3Config) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Config, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Config_KMSKeyArn:
+			v.KMSKeyArn = new(string)
+			return d.ReadString(schemas.S3Config_KMSKeyArn, v.KMSKeyArn)
+		case schemas.S3Config_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.S3Config_Path, v.Path)
+		case schemas.S3Config_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.S3Config_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 // Defines the fields of a dataset.
 type Schema struct {
 
@@ -1570,6 +3282,25 @@ type Schema struct {
 	Attributes []SchemaAttribute
 
 	noSmithyDocumentSerde
+}
+
+func (v *Schema) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Schema)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Schema) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSchemaAttributes(s, schemas.Schema_Attributes, v.Attributes)
+}
+func (v *Schema) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Schema, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Schema_Attributes:
+			return deserializeSchemaAttributes(d, schemas.Schema_Attributes, &v.Attributes)
+		}
+		return nil
+	})
 }
 
 // An attribute of a schema, which defines a dataset field. A schema attribute is
@@ -1590,6 +3321,38 @@ type SchemaAttribute struct {
 	AttributeType AttributeType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SchemaAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.SchemaAttribute_AttributeName, *v.AttributeName)
+	}
+	if v.AttributeType != "" {
+		s.WriteString(schemas.SchemaAttribute_AttributeType, string(v.AttributeType))
+	}
+}
+func (v *SchemaAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaAttribute_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.SchemaAttribute_AttributeName, v.AttributeName)
+		case schemas.SchemaAttribute_AttributeType:
+			var ev string
+			if err := d.ReadString(schemas.SchemaAttribute_AttributeType, &ev); err != nil {
+				return err
+			}
+			v.AttributeType = AttributeType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides statistics for each data field imported into to an Amazon Forecast
@@ -1643,6 +3406,94 @@ type Statistics struct {
 	Stddev *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Statistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Statistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Statistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Avg != nil {
+		s.WriteFloat64(schemas.Statistics_Avg, *v.Avg)
+	}
+	if v.Count != nil {
+		s.WriteInt32(schemas.Statistics_Count, *v.Count)
+	}
+	if v.CountDistinct != nil {
+		s.WriteInt32(schemas.Statistics_CountDistinct, *v.CountDistinct)
+	}
+	if v.CountDistinctLong != nil {
+		s.WriteInt64(schemas.Statistics_CountDistinctLong, *v.CountDistinctLong)
+	}
+	if v.CountLong != nil {
+		s.WriteInt64(schemas.Statistics_CountLong, *v.CountLong)
+	}
+	if v.CountNan != nil {
+		s.WriteInt32(schemas.Statistics_CountNan, *v.CountNan)
+	}
+	if v.CountNanLong != nil {
+		s.WriteInt64(schemas.Statistics_CountNanLong, *v.CountNanLong)
+	}
+	if v.CountNull != nil {
+		s.WriteInt32(schemas.Statistics_CountNull, *v.CountNull)
+	}
+	if v.CountNullLong != nil {
+		s.WriteInt64(schemas.Statistics_CountNullLong, *v.CountNullLong)
+	}
+	if v.Max != nil {
+		s.WriteString(schemas.Statistics_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteString(schemas.Statistics_Min, *v.Min)
+	}
+	if v.Stddev != nil {
+		s.WriteFloat64(schemas.Statistics_Stddev, *v.Stddev)
+	}
+}
+func (v *Statistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Statistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Statistics_Avg:
+			v.Avg = new(float64)
+			return d.ReadFloat64(schemas.Statistics_Avg, v.Avg)
+		case schemas.Statistics_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.Statistics_Count, v.Count)
+		case schemas.Statistics_CountDistinct:
+			v.CountDistinct = new(int32)
+			return d.ReadInt32(schemas.Statistics_CountDistinct, v.CountDistinct)
+		case schemas.Statistics_CountDistinctLong:
+			v.CountDistinctLong = new(int64)
+			return d.ReadInt64(schemas.Statistics_CountDistinctLong, v.CountDistinctLong)
+		case schemas.Statistics_CountLong:
+			v.CountLong = new(int64)
+			return d.ReadInt64(schemas.Statistics_CountLong, v.CountLong)
+		case schemas.Statistics_CountNan:
+			v.CountNan = new(int32)
+			return d.ReadInt32(schemas.Statistics_CountNan, v.CountNan)
+		case schemas.Statistics_CountNanLong:
+			v.CountNanLong = new(int64)
+			return d.ReadInt64(schemas.Statistics_CountNanLong, v.CountNanLong)
+		case schemas.Statistics_CountNull:
+			v.CountNull = new(int32)
+			return d.ReadInt32(schemas.Statistics_CountNull, v.CountNull)
+		case schemas.Statistics_CountNullLong:
+			v.CountNullLong = new(int64)
+			return d.ReadInt64(schemas.Statistics_CountNullLong, v.CountNullLong)
+		case schemas.Statistics_Max:
+			v.Max = new(string)
+			return d.ReadString(schemas.Statistics_Max, v.Max)
+		case schemas.Statistics_Min:
+			v.Min = new(string)
+			return d.ReadString(schemas.Statistics_Min, v.Min)
+		case schemas.Statistics_Stddev:
+			v.Stddev = new(float64)
+			return d.ReadFloat64(schemas.Statistics_Stddev, v.Stddev)
+		}
+		return nil
+	})
 }
 
 // This object belongs to the CreatePredictor operation. If you created your predictor with CreateAutoPredictor, see AdditionalDataset
@@ -1823,6 +3674,34 @@ type SupplementaryFeature struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupplementaryFeature) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupplementaryFeature)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupplementaryFeature) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SupplementaryFeature_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.SupplementaryFeature_Value, *v.Value)
+	}
+}
+func (v *SupplementaryFeature) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupplementaryFeature, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupplementaryFeature_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SupplementaryFeature_Name, v.Name)
+		case schemas.SupplementaryFeature_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SupplementaryFeature_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The optional metadata that you apply to a resource to help you categorize and
 // organize them. Each tag consists of a key and an optional value, both of which
 // you define.
@@ -1868,6 +3747,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The status, start time, and end time of a backtest, as well as a failure reason
 // if applicable.
 type TestWindowSummary struct {
@@ -1891,6 +3798,46 @@ type TestWindowSummary struct {
 	TestWindowStart *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TestWindowSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestWindowSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestWindowSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TestWindowSummary_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.TestWindowSummary_Status, *v.Status)
+	}
+	if v.TestWindowEnd != nil {
+		s.WriteTime(schemas.TestWindowSummary_TestWindowEnd, *v.TestWindowEnd)
+	}
+	if v.TestWindowStart != nil {
+		s.WriteTime(schemas.TestWindowSummary_TestWindowStart, *v.TestWindowStart)
+	}
+}
+func (v *TestWindowSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestWindowSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestWindowSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TestWindowSummary_Message, v.Message)
+		case schemas.TestWindowSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.TestWindowSummary_Status, v.Status)
+		case schemas.TestWindowSummary_TestWindowEnd:
+			v.TestWindowEnd = new(time.Time)
+			return d.ReadTime(schemas.TestWindowSummary_TestWindowEnd, v.TestWindowEnd)
+		case schemas.TestWindowSummary_TestWindowStart:
+			v.TestWindowStart = new(time.Time)
+			return d.ReadTime(schemas.TestWindowSummary_TestWindowStart, v.TestWindowStart)
+		}
+		return nil
+	})
 }
 
 // The time boundary Forecast uses to align and aggregate your data to match your
@@ -1922,6 +3869,54 @@ type TimeAlignmentBoundary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimeAlignmentBoundary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeAlignmentBoundary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeAlignmentBoundary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DayOfMonth != nil {
+		s.WriteInt32(schemas.TimeAlignmentBoundary_DayOfMonth, *v.DayOfMonth)
+	}
+	if v.DayOfWeek != "" {
+		s.WriteString(schemas.TimeAlignmentBoundary_DayOfWeek, string(v.DayOfWeek))
+	}
+	if v.Hour != nil {
+		s.WriteInt32(schemas.TimeAlignmentBoundary_Hour, *v.Hour)
+	}
+	if v.Month != "" {
+		s.WriteString(schemas.TimeAlignmentBoundary_Month, string(v.Month))
+	}
+}
+func (v *TimeAlignmentBoundary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeAlignmentBoundary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeAlignmentBoundary_DayOfMonth:
+			v.DayOfMonth = new(int32)
+			return d.ReadInt32(schemas.TimeAlignmentBoundary_DayOfMonth, v.DayOfMonth)
+		case schemas.TimeAlignmentBoundary_DayOfWeek:
+			var ev string
+			if err := d.ReadString(schemas.TimeAlignmentBoundary_DayOfWeek, &ev); err != nil {
+				return err
+			}
+			v.DayOfWeek = DayOfWeek(ev)
+			return nil
+		case schemas.TimeAlignmentBoundary_Hour:
+			v.Hour = new(int32)
+			return d.ReadInt32(schemas.TimeAlignmentBoundary_Hour, v.Hour)
+		case schemas.TimeAlignmentBoundary_Month:
+			var ev string
+			if err := d.ReadString(schemas.TimeAlignmentBoundary_Month, &ev); err != nil {
+				return err
+			}
+			v.Month = Month(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Creates a subset of items within an attribute that are modified. For example,
 // you can use this operation to create a subset of items that cost $5 or less. To
 // do this, you specify "AttributeName": "price" , "AttributeValue": "5" , and
@@ -1948,6 +3943,44 @@ type TimeSeriesCondition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimeSeriesCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeSeriesCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeSeriesCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeName != nil {
+		s.WriteString(schemas.TimeSeriesCondition_AttributeName, *v.AttributeName)
+	}
+	if v.AttributeValue != nil {
+		s.WriteString(schemas.TimeSeriesCondition_AttributeValue, *v.AttributeValue)
+	}
+	if v.Condition != "" {
+		s.WriteString(schemas.TimeSeriesCondition_Condition, string(v.Condition))
+	}
+}
+func (v *TimeSeriesCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeSeriesCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeSeriesCondition_AttributeName:
+			v.AttributeName = new(string)
+			return d.ReadString(schemas.TimeSeriesCondition_AttributeName, v.AttributeName)
+		case schemas.TimeSeriesCondition_AttributeValue:
+			v.AttributeValue = new(string)
+			return d.ReadString(schemas.TimeSeriesCondition_AttributeValue, v.AttributeValue)
+		case schemas.TimeSeriesCondition_Condition:
+			var ev string
+			if err := d.ReadString(schemas.TimeSeriesCondition_Condition, &ev); err != nil {
+				return err
+			}
+			v.Condition = Condition(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details about the import file that contains the time series for which you want
 // to create forecasts.
 type TimeSeriesIdentifiers struct {
@@ -1964,6 +3997,44 @@ type TimeSeriesIdentifiers struct {
 	Schema *Schema
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeSeriesIdentifiers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeSeriesIdentifiers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeSeriesIdentifiers) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.TimeSeriesIdentifiers_DataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.TimeSeriesIdentifiers_Format, *v.Format)
+	}
+	if v.Schema != nil {
+		s.WriteStruct(schemas.TimeSeriesIdentifiers_Schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TimeSeriesIdentifiers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeSeriesIdentifiers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeSeriesIdentifiers_DataSource:
+			v.DataSource = &DataSource{}
+			return v.DataSource.Deserialize(d)
+		case schemas.TimeSeriesIdentifiers_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.TimeSeriesIdentifiers_Format, v.Format)
+		case schemas.TimeSeriesIdentifiers_Schema:
+			v.Schema = &Schema{}
+			return v.Schema.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A replacement dataset is a modified version of the baseline related time series
@@ -1997,6 +4068,50 @@ type TimeSeriesReplacementsDataSource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimeSeriesReplacementsDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeSeriesReplacementsDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeSeriesReplacementsDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != nil {
+		s.WriteString(schemas.TimeSeriesReplacementsDataSource_Format, *v.Format)
+	}
+	if v.S3Config != nil {
+		s.WriteStruct(schemas.TimeSeriesReplacementsDataSource_S3Config)
+		v.S3Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteStruct(schemas.TimeSeriesReplacementsDataSource_Schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimestampFormat != nil {
+		s.WriteString(schemas.TimeSeriesReplacementsDataSource_TimestampFormat, *v.TimestampFormat)
+	}
+}
+func (v *TimeSeriesReplacementsDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeSeriesReplacementsDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeSeriesReplacementsDataSource_Format:
+			v.Format = new(string)
+			return d.ReadString(schemas.TimeSeriesReplacementsDataSource_Format, v.Format)
+		case schemas.TimeSeriesReplacementsDataSource_S3Config:
+			v.S3Config = &S3Config{}
+			return v.S3Config.Deserialize(d)
+		case schemas.TimeSeriesReplacementsDataSource_Schema:
+			v.Schema = &Schema{}
+			return v.Schema.Deserialize(d)
+		case schemas.TimeSeriesReplacementsDataSource_TimestampFormat:
+			v.TimestampFormat = new(string)
+			return d.ReadString(schemas.TimeSeriesReplacementsDataSource_TimestampFormat, v.TimestampFormat)
+		}
+		return nil
+	})
+}
+
 // Defines the set of time series that are used to create the forecasts in a
 // TimeSeriesIdentifiers object.
 //
@@ -2014,6 +4129,30 @@ type TimeSeriesSelector struct {
 	TimeSeriesIdentifiers *TimeSeriesIdentifiers
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeSeriesSelector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeSeriesSelector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeSeriesSelector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimeSeriesIdentifiers != nil {
+		s.WriteStruct(schemas.TimeSeriesSelector_TimeSeriesIdentifiers)
+		v.TimeSeriesIdentifiers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TimeSeriesSelector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeSeriesSelector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeSeriesSelector_TimeSeriesIdentifiers:
+			v.TimeSeriesIdentifiers = &TimeSeriesIdentifiers{}
+			return v.TimeSeriesIdentifiers.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A transformation function is a pair of operations that select and modify the
@@ -2035,6 +4174,33 @@ type TimeSeriesTransformation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimeSeriesTransformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeSeriesTransformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeSeriesTransformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.TimeSeriesTransformation_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTimeSeriesConditions(s, schemas.TimeSeriesTransformation_TimeSeriesConditions, v.TimeSeriesConditions)
+}
+func (v *TimeSeriesTransformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeSeriesTransformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeSeriesTransformation_Action:
+			v.Action = &Action{}
+			return v.Action.Deserialize(d)
+		case schemas.TimeSeriesTransformation_TimeSeriesConditions:
+			return deserializeTimeSeriesConditions(d, schemas.TimeSeriesTransformation_TimeSeriesConditions, &v.TimeSeriesConditions)
+		}
+		return nil
+	})
+}
+
 // The weighted loss value for a quantile. This object is part of the Metrics object.
 type WeightedQuantileLoss struct {
 
@@ -2048,6 +4214,34 @@ type WeightedQuantileLoss struct {
 	Quantile *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *WeightedQuantileLoss) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WeightedQuantileLoss)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WeightedQuantileLoss) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LossValue != nil {
+		s.WriteFloat64(schemas.WeightedQuantileLoss_LossValue, *v.LossValue)
+	}
+	if v.Quantile != nil {
+		s.WriteFloat64(schemas.WeightedQuantileLoss_Quantile, *v.Quantile)
+	}
+}
+func (v *WeightedQuantileLoss) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WeightedQuantileLoss, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WeightedQuantileLoss_LossValue:
+			v.LossValue = new(float64)
+			return d.ReadFloat64(schemas.WeightedQuantileLoss_LossValue, v.LossValue)
+		case schemas.WeightedQuantileLoss_Quantile:
+			v.Quantile = new(float64)
+			return d.ReadFloat64(schemas.WeightedQuantileLoss_Quantile, v.Quantile)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the what-if analysis properties used in the ListWhatIfAnalyses operation.
@@ -2100,6 +4294,64 @@ type WhatIfAnalysisSummary struct {
 	WhatIfAnalysisName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WhatIfAnalysisSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatIfAnalysisSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatIfAnalysisSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.WhatIfAnalysisSummary_CreationTime, *v.CreationTime)
+	}
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.WhatIfAnalysisSummary_ForecastArn, *v.ForecastArn)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.WhatIfAnalysisSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.WhatIfAnalysisSummary_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.WhatIfAnalysisSummary_Status, *v.Status)
+	}
+	if v.WhatIfAnalysisArn != nil {
+		s.WriteString(schemas.WhatIfAnalysisSummary_WhatIfAnalysisArn, *v.WhatIfAnalysisArn)
+	}
+	if v.WhatIfAnalysisName != nil {
+		s.WriteString(schemas.WhatIfAnalysisSummary_WhatIfAnalysisName, *v.WhatIfAnalysisName)
+	}
+}
+func (v *WhatIfAnalysisSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatIfAnalysisSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatIfAnalysisSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.WhatIfAnalysisSummary_CreationTime, v.CreationTime)
+		case schemas.WhatIfAnalysisSummary_ForecastArn:
+			v.ForecastArn = new(string)
+			return d.ReadString(schemas.WhatIfAnalysisSummary_ForecastArn, v.ForecastArn)
+		case schemas.WhatIfAnalysisSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.WhatIfAnalysisSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.WhatIfAnalysisSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WhatIfAnalysisSummary_Message, v.Message)
+		case schemas.WhatIfAnalysisSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.WhatIfAnalysisSummary_Status, v.Status)
+		case schemas.WhatIfAnalysisSummary_WhatIfAnalysisArn:
+			v.WhatIfAnalysisArn = new(string)
+			return d.ReadString(schemas.WhatIfAnalysisSummary_WhatIfAnalysisArn, v.WhatIfAnalysisArn)
+		case schemas.WhatIfAnalysisSummary_WhatIfAnalysisName:
+			v.WhatIfAnalysisName = new(string)
+			return d.ReadString(schemas.WhatIfAnalysisSummary_WhatIfAnalysisName, v.WhatIfAnalysisName)
+		}
+		return nil
+	})
 }
 
 // Provides a summary of the what-if forecast export properties used in the ListWhatIfForecastExports
@@ -2158,6 +4410,69 @@ type WhatIfForecastExportSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WhatIfForecastExportSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatIfForecastExportSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatIfForecastExportSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.WhatIfForecastExportSummary_CreationTime, *v.CreationTime)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.WhatIfForecastExportSummary_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.WhatIfForecastExportSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.WhatIfForecastExportSummary_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.WhatIfForecastExportSummary_Status, *v.Status)
+	}
+	serializeWhatIfForecastArnListForExport(s, schemas.WhatIfForecastExportSummary_WhatIfForecastArns, v.WhatIfForecastArns)
+	if v.WhatIfForecastExportArn != nil {
+		s.WriteString(schemas.WhatIfForecastExportSummary_WhatIfForecastExportArn, *v.WhatIfForecastExportArn)
+	}
+	if v.WhatIfForecastExportName != nil {
+		s.WriteString(schemas.WhatIfForecastExportSummary_WhatIfForecastExportName, *v.WhatIfForecastExportName)
+	}
+}
+func (v *WhatIfForecastExportSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatIfForecastExportSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatIfForecastExportSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.WhatIfForecastExportSummary_CreationTime, v.CreationTime)
+		case schemas.WhatIfForecastExportSummary_Destination:
+			v.Destination = &DataDestination{}
+			return v.Destination.Deserialize(d)
+		case schemas.WhatIfForecastExportSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.WhatIfForecastExportSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.WhatIfForecastExportSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WhatIfForecastExportSummary_Message, v.Message)
+		case schemas.WhatIfForecastExportSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.WhatIfForecastExportSummary_Status, v.Status)
+		case schemas.WhatIfForecastExportSummary_WhatIfForecastArns:
+			return deserializeWhatIfForecastArnListForExport(d, schemas.WhatIfForecastExportSummary_WhatIfForecastArns, &v.WhatIfForecastArns)
+		case schemas.WhatIfForecastExportSummary_WhatIfForecastExportArn:
+			v.WhatIfForecastExportArn = new(string)
+			return d.ReadString(schemas.WhatIfForecastExportSummary_WhatIfForecastExportArn, v.WhatIfForecastExportArn)
+		case schemas.WhatIfForecastExportSummary_WhatIfForecastExportName:
+			v.WhatIfForecastExportName = new(string)
+			return d.ReadString(schemas.WhatIfForecastExportSummary_WhatIfForecastExportName, v.WhatIfForecastExportName)
+		}
+		return nil
+	})
+}
+
 // Provides a summary of the what-if forecast properties used in the ListWhatIfForecasts operation.
 // To get the complete set of properties, call the DescribeWhatIfForecastoperation, and provide the
 // WhatIfForecastArn that is listed in the summary.
@@ -2210,6 +4525,64 @@ type WhatIfForecastSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WhatIfForecastSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WhatIfForecastSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WhatIfForecastSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.WhatIfForecastSummary_CreationTime, *v.CreationTime)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.WhatIfForecastSummary_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.WhatIfForecastSummary_Message, *v.Message)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.WhatIfForecastSummary_Status, *v.Status)
+	}
+	if v.WhatIfAnalysisArn != nil {
+		s.WriteString(schemas.WhatIfForecastSummary_WhatIfAnalysisArn, *v.WhatIfAnalysisArn)
+	}
+	if v.WhatIfForecastArn != nil {
+		s.WriteString(schemas.WhatIfForecastSummary_WhatIfForecastArn, *v.WhatIfForecastArn)
+	}
+	if v.WhatIfForecastName != nil {
+		s.WriteString(schemas.WhatIfForecastSummary_WhatIfForecastName, *v.WhatIfForecastName)
+	}
+}
+func (v *WhatIfForecastSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WhatIfForecastSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WhatIfForecastSummary_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.WhatIfForecastSummary_CreationTime, v.CreationTime)
+		case schemas.WhatIfForecastSummary_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.WhatIfForecastSummary_LastModificationTime, v.LastModificationTime)
+		case schemas.WhatIfForecastSummary_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.WhatIfForecastSummary_Message, v.Message)
+		case schemas.WhatIfForecastSummary_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.WhatIfForecastSummary_Status, v.Status)
+		case schemas.WhatIfForecastSummary_WhatIfAnalysisArn:
+			v.WhatIfAnalysisArn = new(string)
+			return d.ReadString(schemas.WhatIfForecastSummary_WhatIfAnalysisArn, v.WhatIfAnalysisArn)
+		case schemas.WhatIfForecastSummary_WhatIfForecastArn:
+			v.WhatIfForecastArn = new(string)
+			return d.ReadString(schemas.WhatIfForecastSummary_WhatIfForecastArn, v.WhatIfForecastArn)
+		case schemas.WhatIfForecastSummary_WhatIfForecastName:
+			v.WhatIfForecastName = new(string)
+			return d.ReadString(schemas.WhatIfForecastSummary_WhatIfForecastName, v.WhatIfForecastName)
+		}
+		return nil
+	})
+}
+
 // The metrics for a time range within the evaluation portion of a dataset. This
 // object is part of the EvaluationResultobject.
 //
@@ -2237,6 +4610,58 @@ type WindowSummary struct {
 	TestWindowStart *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *WindowSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WindowSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WindowSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationType != "" {
+		s.WriteString(schemas.WindowSummary_EvaluationType, string(v.EvaluationType))
+	}
+	if v.ItemCount != nil {
+		s.WriteInt32(schemas.WindowSummary_ItemCount, *v.ItemCount)
+	}
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.WindowSummary_Metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestWindowEnd != nil {
+		s.WriteTime(schemas.WindowSummary_TestWindowEnd, *v.TestWindowEnd)
+	}
+	if v.TestWindowStart != nil {
+		s.WriteTime(schemas.WindowSummary_TestWindowStart, *v.TestWindowStart)
+	}
+}
+func (v *WindowSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WindowSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WindowSummary_EvaluationType:
+			var ev string
+			if err := d.ReadString(schemas.WindowSummary_EvaluationType, &ev); err != nil {
+				return err
+			}
+			v.EvaluationType = EvaluationType(ev)
+			return nil
+		case schemas.WindowSummary_ItemCount:
+			v.ItemCount = new(int32)
+			return d.ReadInt32(schemas.WindowSummary_ItemCount, v.ItemCount)
+		case schemas.WindowSummary_Metrics:
+			v.Metrics = &Metrics{}
+			return v.Metrics.Deserialize(d)
+		case schemas.WindowSummary_TestWindowEnd:
+			v.TestWindowEnd = new(time.Time)
+			return d.ReadTime(schemas.WindowSummary_TestWindowEnd, v.TestWindowEnd)
+		case schemas.WindowSummary_TestWindowStart:
+			v.TestWindowStart = new(time.Time)
+			return d.ReadTime(schemas.WindowSummary_TestWindowStart, v.TestWindowStart)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

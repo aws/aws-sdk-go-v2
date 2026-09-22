@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.RestoreAutonomousDatabase
+
+{"autonomousDatabaseId":"__AutonomousDatabaseId__","timestamp":"2000-01-01T00:00:00Z"}

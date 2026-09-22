@@ -1,0 +1,3 @@
+GET /v2/apis/__ApiId__/deployments?maxResults=__MaxResults__&nextToken=__NextToken__
+
+

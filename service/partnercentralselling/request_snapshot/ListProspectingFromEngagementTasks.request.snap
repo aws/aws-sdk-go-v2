@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSPartnerCentralSelling.ListProspectingFromEngagementTasks
+
+{"Catalog":"__Catalog__","MaxResults":1,"NextToken":"__NextToken__","Sort":{"SortBy":"StartTime","SortOrder":"ASCENDING"},"StartAfter":"2000-01-01T00:00:00Z","StartBefore":"2000-01-01T00:00:00Z","TaskIdentifier":["__Member__","__Member__"],"TaskName":["__Member__","__Member__"]}

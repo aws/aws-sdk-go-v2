@@ -1,0 +1,5 @@
+POST /apps/__AppId__/branches
+
+Content-Type: application/json
+
+{"backend":{"stackArn":"__StackArn__"},"backendEnvironmentArn":"__BackendEnvironmentArn__","basicAuthCredentials":"__BasicAuthCredentials__","branchName":"__BranchName__","buildSpec":"__BuildSpec__","computeRoleArn":"__ComputeRoleArn__","description":"__Description__","displayName":"__DisplayName__","enableAutoBuild":true,"enableBasicAuth":true,"enableNotification":true,"enablePerformanceMode":true,"enablePullRequestPreview":true,"enableSkewProtection":true,"environmentVariables":{"key0":"__Value__"},"framework":"__Framework__","pullRequestEnvironmentName":"__PullRequestEnvironmentName__","stage":"PRODUCTION","tags":{"key0":"__Value__"},"ttl":"__Ttl__"}

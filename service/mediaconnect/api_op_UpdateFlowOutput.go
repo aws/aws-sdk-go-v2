@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing flow output.
@@ -72,6 +71,17 @@ type UpdateFlowOutputInput struct {
 	// receiver’s minimum latency.
 	MinLatency *int32
 
+	// Controls how MediaConnect generates timecodes for NDI output frames. If you
+	// don't specify this field, MediaConnect leaves the value unchanged.
+	//
+	//   - EMBEDDED_TIMECODE - Preserves timecodes from the input transport stream. The
+	//   timecodes must be embedded in the video stream as SEI timing messages. If no
+	//   embedded timecode is detected, MediaConnect uses the UTC system time instead.
+	//
+	//   - UTC_SYSTEM_TIME - Generates timecodes based on the system clock time when
+	//   each frame is sent.
+	NdiOutputTimecodeSource types.NdiOutputTimecodeSource
+
 	//  A suffix for the name of the NDI® sender that the flow creates. If a custom
 	// name isn't specified, MediaConnect uses the output name.
 	NdiProgramName *string
@@ -124,6 +134,86 @@ type UpdateFlowOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowOutputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfString(s, schemas.UpdateFlowOutputRequest_CidrAllowList, v.CidrAllowList)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateFlowOutputRequest_Description, *v.Description)
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.UpdateFlowOutputRequest_Destination, *v.Destination)
+	}
+	if v.Encryption != nil {
+		s.WriteStruct(schemas.UpdateFlowOutputRequest_Encryption)
+		v.Encryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowOutputRequest_FlowArn, *v.FlowArn)
+	}
+	if v.MaxLatency != nil {
+		s.WriteInt32(schemas.UpdateFlowOutputRequest_MaxLatency, *v.MaxLatency)
+	}
+	serialize__listOfMediaStreamOutputConfigurationRequest(s, schemas.UpdateFlowOutputRequest_MediaStreamOutputConfigurations, v.MediaStreamOutputConfigurations)
+	if v.MinLatency != nil {
+		s.WriteInt32(schemas.UpdateFlowOutputRequest_MinLatency, *v.MinLatency)
+	}
+	if v.NdiOutputTimecodeSource != "" {
+		s.WriteString(schemas.UpdateFlowOutputRequest_NdiOutputTimecodeSource, string(v.NdiOutputTimecodeSource))
+	}
+	if v.NdiProgramName != nil {
+		s.WriteString(schemas.UpdateFlowOutputRequest_NdiProgramName, *v.NdiProgramName)
+	}
+	if v.NdiSpeedHqQuality != nil {
+		s.WriteInt32(schemas.UpdateFlowOutputRequest_NdiSpeedHqQuality, *v.NdiSpeedHqQuality)
+	}
+	if v.OutputArn != nil {
+		s.WriteString(schemas.UpdateFlowOutputRequest_OutputArn, *v.OutputArn)
+	}
+	if v.OutputStatus != "" {
+		s.WriteString(schemas.UpdateFlowOutputRequest_OutputStatus, string(v.OutputStatus))
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.UpdateFlowOutputRequest_Port, *v.Port)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.UpdateFlowOutputRequest_Protocol, string(v.Protocol))
+	}
+	if v.RemoteId != nil {
+		s.WriteString(schemas.UpdateFlowOutputRequest_RemoteId, *v.RemoteId)
+	}
+	if v.RouterIntegrationState != "" {
+		s.WriteString(schemas.UpdateFlowOutputRequest_RouterIntegrationState, string(v.RouterIntegrationState))
+	}
+	if v.RouterIntegrationTransitEncryption != nil {
+		s.WriteStruct(schemas.UpdateFlowOutputRequest_RouterIntegrationTransitEncryption)
+		v.RouterIntegrationTransitEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SenderControlPort != nil {
+		s.WriteInt32(schemas.UpdateFlowOutputRequest_SenderControlPort, *v.SenderControlPort)
+	}
+	if v.SenderIpAddress != nil {
+		s.WriteString(schemas.UpdateFlowOutputRequest_SenderIpAddress, *v.SenderIpAddress)
+	}
+	if v.SmoothingLatency != nil {
+		s.WriteInt32(schemas.UpdateFlowOutputRequest_SmoothingLatency, *v.SmoothingLatency)
+	}
+	if v.StreamId != nil {
+		s.WriteString(schemas.UpdateFlowOutputRequest_StreamId, *v.StreamId)
+	}
+	if v.VpcInterfaceAttachment != nil {
+		s.WriteStruct(schemas.UpdateFlowOutputRequest_VpcInterfaceAttachment)
+		v.VpcInterfaceAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateFlowOutputOutput struct {
 
 	//  The ARN of the flow that is associated with the updated output.
@@ -138,77 +228,56 @@ type UpdateFlowOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFlowOutputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFlowOutputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFlowOutputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlowArn != nil {
+		s.WriteString(schemas.UpdateFlowOutputResponse_FlowArn, *v.FlowArn)
+	}
+	if v.Output != nil {
+		s.WriteStruct(schemas.UpdateFlowOutputResponse_Output)
+		v.Output.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFlowOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFlowOutputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFlowOutputResponse_FlowArn:
+			v.FlowArn = new(string)
+			return d.ReadString(schemas.UpdateFlowOutputResponse_FlowArn, v.FlowArn)
+		case schemas.UpdateFlowOutputResponse_Output:
+			v.Output = &types.Output{}
+			return v.Output.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFlowOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowOutput, schemas.UpdateFlowOutputRequest, schemas.UpdateFlowOutputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFlowOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFlowOutput, schemas.UpdateFlowOutputRequest, schemas.UpdateFlowOutputResponse), output: &UpdateFlowOutputOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFlowOutput{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFlowOutput"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFlowOutputValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFlowOutput(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -223,22 +292,8 @@ func (c *Client) addOperationUpdateFlowOutputMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateFlowOutput(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFlowOutput",
-	}
 }

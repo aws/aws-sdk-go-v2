@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyTrafficMirrorFilterNetworkServices&AddNetworkService.1=amazon-dns&AddNetworkService.2=amazon-dns&DryRun=true&RemoveNetworkService.1=amazon-dns&RemoveNetworkService.2=amazon-dns&TrafficMirrorFilterId=__TrafficMirrorFilterId__&Version=2016-11-15

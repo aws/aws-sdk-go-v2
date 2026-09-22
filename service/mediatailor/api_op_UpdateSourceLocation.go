@@ -4,11 +4,10 @@ package mediatailor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -56,6 +55,55 @@ type UpdateSourceLocationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSourceLocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSourceLocationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSourceLocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSourceLocationRequest_AccessConfiguration)
+		v.AccessConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultSegmentDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration)
+		v.DefaultSegmentDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSourceLocationRequest_HttpConfiguration)
+		v.HttpConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfSegmentDeliveryConfiguration(s, schemas.UpdateSourceLocationRequest_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.UpdateSourceLocationRequest_SourceLocationName, *v.SourceLocationName)
+	}
+}
+func (v *UpdateSourceLocationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSourceLocationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSourceLocationRequest_AccessConfiguration:
+			v.AccessConfiguration = &types.AccessConfiguration{}
+			return v.AccessConfiguration.Deserialize(d)
+		case schemas.UpdateSourceLocationRequest_DefaultSegmentDeliveryConfiguration:
+			v.DefaultSegmentDeliveryConfiguration = &types.DefaultSegmentDeliveryConfiguration{}
+			return v.DefaultSegmentDeliveryConfiguration.Deserialize(d)
+		case schemas.UpdateSourceLocationRequest_HttpConfiguration:
+			v.HttpConfiguration = &types.HttpConfiguration{}
+			return v.HttpConfiguration.Deserialize(d)
+		case schemas.UpdateSourceLocationRequest_SegmentDeliveryConfigurations:
+			return deserialize__listOfSegmentDeliveryConfiguration(d, schemas.UpdateSourceLocationRequest_SegmentDeliveryConfigurations, &v.SegmentDeliveryConfigurations)
+		case schemas.UpdateSourceLocationRequest_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.UpdateSourceLocationRequest_SourceLocationName, v.SourceLocationName)
+		}
+		return nil
+	})
+}
+
 type UpdateSourceLocationOutput struct {
 
 	// Access configuration parameters. Configures the type of authentication used to
@@ -99,77 +147,96 @@ type UpdateSourceLocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSourceLocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSourceLocationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSourceLocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSourceLocationResponse_AccessConfiguration)
+		v.AccessConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateSourceLocationResponse_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.UpdateSourceLocationResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DefaultSegmentDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration)
+		v.DefaultSegmentDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HttpConfiguration != nil {
+		s.WriteStruct(schemas.UpdateSourceLocationResponse_HttpConfiguration)
+		v.HttpConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.UpdateSourceLocationResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	serialize__listOfSegmentDeliveryConfiguration(s, schemas.UpdateSourceLocationResponse_SegmentDeliveryConfigurations, v.SegmentDeliveryConfigurations)
+	if v.SourceLocationName != nil {
+		s.WriteString(schemas.UpdateSourceLocationResponse_SourceLocationName, *v.SourceLocationName)
+	}
+	serialize__mapOf__string(s, schemas.UpdateSourceLocationResponse_Tags, v.Tags)
+}
+func (v *UpdateSourceLocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSourceLocationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSourceLocationResponse_AccessConfiguration:
+			v.AccessConfiguration = &types.AccessConfiguration{}
+			return v.AccessConfiguration.Deserialize(d)
+		case schemas.UpdateSourceLocationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateSourceLocationResponse_Arn, v.Arn)
+		case schemas.UpdateSourceLocationResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSourceLocationResponse_CreationTime, v.CreationTime)
+		case schemas.UpdateSourceLocationResponse_DefaultSegmentDeliveryConfiguration:
+			v.DefaultSegmentDeliveryConfiguration = &types.DefaultSegmentDeliveryConfiguration{}
+			return v.DefaultSegmentDeliveryConfiguration.Deserialize(d)
+		case schemas.UpdateSourceLocationResponse_HttpConfiguration:
+			v.HttpConfiguration = &types.HttpConfiguration{}
+			return v.HttpConfiguration.Deserialize(d)
+		case schemas.UpdateSourceLocationResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateSourceLocationResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.UpdateSourceLocationResponse_SegmentDeliveryConfigurations:
+			return deserialize__listOfSegmentDeliveryConfiguration(d, schemas.UpdateSourceLocationResponse_SegmentDeliveryConfigurations, &v.SegmentDeliveryConfigurations)
+		case schemas.UpdateSourceLocationResponse_SourceLocationName:
+			v.SourceLocationName = new(string)
+			return d.ReadString(schemas.UpdateSourceLocationResponse_SourceLocationName, v.SourceLocationName)
+		case schemas.UpdateSourceLocationResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.UpdateSourceLocationResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSourceLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSourceLocation, schemas.UpdateSourceLocationRequest, schemas.UpdateSourceLocationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSourceLocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSourceLocation, schemas.UpdateSourceLocationRequest, schemas.UpdateSourceLocationResponse), output: &UpdateSourceLocationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSourceLocation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSourceLocation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSourceLocationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSourceLocation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,22 +251,8 @@ func (c *Client) addOperationUpdateSourceLocationMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSourceLocation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSourceLocation",
-	}
 }

@@ -4,11 +4,10 @@ package pi
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieve the metadata for different features. For example, the metadata might
@@ -46,6 +45,21 @@ type GetResourceMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetResourceMetadataRequest_Identifier, *v.Identifier)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.GetResourceMetadataRequest_ServiceType, string(v.ServiceType))
+	}
+}
+
 type GetResourceMetadataOutput struct {
 
 	// The metadata for different features. For example, the metadata might indicate
@@ -66,77 +80,51 @@ type GetResourceMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeatureMetadataMap(s, schemas.GetResourceMetadataResponse_Features, v.Features)
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetResourceMetadataResponse_Identifier, *v.Identifier)
+	}
+}
+func (v *GetResourceMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceMetadataResponse_Features:
+			return deserializeFeatureMetadataMap(d, schemas.GetResourceMetadataResponse_Features, &v.Features)
+		case schemas.GetResourceMetadataResponse_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.GetResourceMetadataResponse_Identifier, v.Identifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceMetadata, schemas.GetResourceMetadataRequest, schemas.GetResourceMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourceMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceMetadata, schemas.GetResourceMetadataRequest, schemas.GetResourceMetadataResponse), output: &GetResourceMetadataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResourceMetadata{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceMetadata"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResourceMetadataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceMetadata(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +139,8 @@ func (c *Client) addOperationGetResourceMetadataMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetResourceMetadata(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResourceMetadata",
-	}
 }

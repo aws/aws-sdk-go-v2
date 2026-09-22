@@ -5,10 +5,10 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,6 +47,24 @@ type CancelConnectionInvitationInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CancelConnectionInvitationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelConnectionInvitationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelConnectionInvitationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelConnectionInvitationRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelConnectionInvitationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CancelConnectionInvitationRequest_Identifier, *v.Identifier)
+	}
 }
 
 type CancelConnectionInvitationOutput struct {
@@ -123,65 +141,132 @@ type CancelConnectionInvitationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelConnectionInvitationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelConnectionInvitationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelConnectionInvitationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_Catalog, *v.Catalog)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_ConnectionId, *v.ConnectionId)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_ConnectionType, string(v.ConnectionType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CancelConnectionInvitationResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.CancelConnectionInvitationResponse_ExpiresAt, *v.ExpiresAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_Id, *v.Id)
+	}
+	if v.InvitationMessage != nil {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_InvitationMessage, *v.InvitationMessage)
+	}
+	if v.InviterEmail != nil {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_InviterEmail, *v.InviterEmail)
+	}
+	if v.InviterName != nil {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_InviterName, *v.InviterName)
+	}
+	if v.OtherParticipantIdentifier != nil {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_OtherParticipantIdentifier, *v.OtherParticipantIdentifier)
+	}
+	if v.ParticipantType != "" {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_ParticipantType, string(v.ParticipantType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CancelConnectionInvitationResponse_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CancelConnectionInvitationResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CancelConnectionInvitationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelConnectionInvitationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelConnectionInvitationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CancelConnectionInvitationResponse_Arn, v.Arn)
+		case schemas.CancelConnectionInvitationResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.CancelConnectionInvitationResponse_Catalog, v.Catalog)
+		case schemas.CancelConnectionInvitationResponse_ConnectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.CancelConnectionInvitationResponse_ConnectionId, v.ConnectionId)
+		case schemas.CancelConnectionInvitationResponse_ConnectionType:
+			var ev string
+			if err := d.ReadString(schemas.CancelConnectionInvitationResponse_ConnectionType, &ev); err != nil {
+				return err
+			}
+			v.ConnectionType = types.ConnectionType(ev)
+			return nil
+		case schemas.CancelConnectionInvitationResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelConnectionInvitationResponse_CreatedAt, v.CreatedAt)
+		case schemas.CancelConnectionInvitationResponse_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.CancelConnectionInvitationResponse_ExpiresAt, v.ExpiresAt)
+		case schemas.CancelConnectionInvitationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CancelConnectionInvitationResponse_Id, v.Id)
+		case schemas.CancelConnectionInvitationResponse_InvitationMessage:
+			v.InvitationMessage = new(string)
+			return d.ReadString(schemas.CancelConnectionInvitationResponse_InvitationMessage, v.InvitationMessage)
+		case schemas.CancelConnectionInvitationResponse_InviterEmail:
+			v.InviterEmail = new(string)
+			return d.ReadString(schemas.CancelConnectionInvitationResponse_InviterEmail, v.InviterEmail)
+		case schemas.CancelConnectionInvitationResponse_InviterName:
+			v.InviterName = new(string)
+			return d.ReadString(schemas.CancelConnectionInvitationResponse_InviterName, v.InviterName)
+		case schemas.CancelConnectionInvitationResponse_OtherParticipantIdentifier:
+			v.OtherParticipantIdentifier = new(string)
+			return d.ReadString(schemas.CancelConnectionInvitationResponse_OtherParticipantIdentifier, v.OtherParticipantIdentifier)
+		case schemas.CancelConnectionInvitationResponse_ParticipantType:
+			var ev string
+			if err := d.ReadString(schemas.CancelConnectionInvitationResponse_ParticipantType, &ev); err != nil {
+				return err
+			}
+			v.ParticipantType = types.ParticipantType(ev)
+			return nil
+		case schemas.CancelConnectionInvitationResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CancelConnectionInvitationResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InvitationStatus(ev)
+			return nil
+		case schemas.CancelConnectionInvitationResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelConnectionInvitationResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelConnectionInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelConnectionInvitation, schemas.CancelConnectionInvitationRequest, schemas.CancelConnectionInvitationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelConnectionInvitation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelConnectionInvitation, schemas.CancelConnectionInvitationRequest, schemas.CancelConnectionInvitationResponse), output: &CancelConnectionInvitationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelConnectionInvitation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelConnectionInvitation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -191,12 +276,6 @@ func (c *Client) addOperationCancelConnectionInvitationMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpCancelConnectionInvitationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelConnectionInvitation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,12 +288,6 @@ func (c *Client) addOperationCancelConnectionInvitationMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,12 +327,4 @@ func (m *idempotencyToken_initializeOpCancelConnectionInvitation) HandleInitiali
 }
 func addIdempotencyToken_opCancelConnectionInvitationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCancelConnectionInvitation{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCancelConnectionInvitation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelConnectionInvitation",
-	}
 }

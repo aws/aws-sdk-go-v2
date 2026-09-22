@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/profiles/__ProfileId__/recommendations
+
+Content-Type: application/json
+
+{"CandidateIds":["__Member__","__Member__"],"Context":{"key0":"__Value__"},"DiversityConfig":{"Enabled":true,"Values":{"key0":1}},"MaxResults":1,"MetadataConfig":{"MetadataColumns":["__Member__","__Member__"]},"RecommenderFilters":[{"Name":"__Name__","Values":{"key0":"__Value__"}},{"Name":"__Name__","Values":{"key0":"__Value__"}}],"RecommenderName":"__RecommenderName__","RecommenderPromotionalFilters":[{"Name":"__Name__","PercentPromotedItems":1,"PromotionName":"__PromotionName__","Values":{"key0":"__Value__"}},{"Name":"__Name__","PercentPromotedItems":1,"PromotionName":"__PromotionName__","Values":{"key0":"__Value__"}}]}

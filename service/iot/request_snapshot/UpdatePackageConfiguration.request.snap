@@ -1,0 +1,5 @@
+PATCH /package-configuration?clientToken=__ClientToken__
+
+Content-Type: application/json
+
+{"versionUpdateByJobsConfig":{"enabled":true,"roleArn":"__RoleArn__"}}

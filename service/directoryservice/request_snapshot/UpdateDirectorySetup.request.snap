@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.UpdateDirectorySetup
+
+{"CreateSnapshotBeforeUpdate":true,"DirectoryId":"__DirectoryId__","DirectorySizeUpdateSettings":{"DirectorySize":"Small"},"NetworkUpdateSettings":{"CustomerDnsIpsV6":["__Member__","__Member__"],"NetworkType":"Dual-stack"},"OSUpdateSettings":{"OSVersion":"SERVER_2012"},"UpdateType":"OS"}

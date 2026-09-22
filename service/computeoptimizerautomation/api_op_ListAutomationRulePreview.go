@@ -5,10 +5,10 @@ package computeoptimizerautomation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a preview of the recommended actions that match your Automation rule's
@@ -62,6 +62,35 @@ type ListAutomationRulePreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationRulePreviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationRulePreviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationRulePreviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Criteria != nil {
+		s.WriteStruct(schemas.ListAutomationRulePreviewRequest_criteria)
+		v.Criteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomationRulePreviewRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationRulePreviewRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationScope != nil {
+		s.WriteStruct(schemas.ListAutomationRulePreviewRequest_organizationScope)
+		v.OrganizationScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecommendedActionTypeList(s, schemas.ListAutomationRulePreviewRequest_recommendedActionTypes, v.RecommendedActionTypes)
+	if v.RuleType != "" {
+		s.WriteString(schemas.ListAutomationRulePreviewRequest_ruleType, string(v.RuleType))
+	}
+}
+
 type ListAutomationRulePreviewOutput struct {
 
 	// A token used for pagination. If present, indicates there are more results
@@ -77,65 +106,45 @@ type ListAutomationRulePreviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationRulePreviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationRulePreviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationRulePreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationRulePreviewResponse_nextToken, *v.NextToken)
+	}
+	serializePreviewResults(s, schemas.ListAutomationRulePreviewResponse_previewResults, v.PreviewResults)
+}
+func (v *ListAutomationRulePreviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomationRulePreviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomationRulePreviewResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomationRulePreviewResponse_nextToken, v.NextToken)
+		case schemas.ListAutomationRulePreviewResponse_previewResults:
+			return deserializePreviewResults(d, schemas.ListAutomationRulePreviewResponse_previewResults, &v.PreviewResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomationRulePreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationRulePreview, schemas.ListAutomationRulePreviewRequest, schemas.ListAutomationRulePreviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAutomationRulePreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationRulePreview, schemas.ListAutomationRulePreviewRequest, schemas.ListAutomationRulePreviewResponse), output: &ListAutomationRulePreviewOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAutomationRulePreview{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutomationRulePreview"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -145,12 +154,6 @@ func (c *Client) addOperationListAutomationRulePreviewMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpListAutomationRulePreviewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAutomationRulePreview(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +166,6 @@ func (c *Client) addOperationListAutomationRulePreviewMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +269,3 @@ type ListAutomationRulePreviewAPIClient interface {
 }
 
 var _ ListAutomationRulePreviewAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAutomationRulePreview(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAutomationRulePreview",
-	}
-}

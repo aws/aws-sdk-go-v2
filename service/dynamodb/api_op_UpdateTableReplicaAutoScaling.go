@@ -4,11 +4,10 @@ package dynamodb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates auto scaling settings on your global tables at once.
@@ -50,6 +49,24 @@ type UpdateTableReplicaAutoScalingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableReplicaAutoScalingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableReplicaAutoScalingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableReplicaAutoScalingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGlobalSecondaryIndexAutoScalingUpdateList(s, schemas.UpdateTableReplicaAutoScalingInput_GlobalSecondaryIndexUpdates, v.GlobalSecondaryIndexUpdates)
+	if v.ProvisionedWriteCapacityAutoScalingUpdate != nil {
+		s.WriteStruct(schemas.UpdateTableReplicaAutoScalingInput_ProvisionedWriteCapacityAutoScalingUpdate)
+		v.ProvisionedWriteCapacityAutoScalingUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeReplicaAutoScalingUpdateList(s, schemas.UpdateTableReplicaAutoScalingInput_ReplicaUpdates, v.ReplicaUpdates)
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateTableReplicaAutoScalingInput_TableName, *v.TableName)
+	}
+}
 func (in *UpdateTableReplicaAutoScalingInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableName
@@ -67,65 +84,44 @@ type UpdateTableReplicaAutoScalingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableReplicaAutoScalingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableReplicaAutoScalingOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableReplicaAutoScalingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableAutoScalingDescription != nil {
+		s.WriteStruct(schemas.UpdateTableReplicaAutoScalingOutput_TableAutoScalingDescription)
+		v.TableAutoScalingDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateTableReplicaAutoScalingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTableReplicaAutoScalingOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTableReplicaAutoScalingOutput_TableAutoScalingDescription:
+			v.TableAutoScalingDescription = &types.TableAutoScalingDescription{}
+			return v.TableAutoScalingDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTableReplicaAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableReplicaAutoScaling, schemas.UpdateTableReplicaAutoScalingInput, schemas.UpdateTableReplicaAutoScalingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTableReplicaAutoScaling{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTableReplicaAutoScaling, schemas.UpdateTableReplicaAutoScalingInput, schemas.UpdateTableReplicaAutoScalingOutput), output: &UpdateTableReplicaAutoScalingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateTableReplicaAutoScaling{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTableReplicaAutoScaling"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -135,12 +131,6 @@ func (c *Client) addOperationUpdateTableReplicaAutoScalingMiddlewares(stack *mid
 		return err
 	}
 	if err = addOpUpdateTableReplicaAutoScalingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTableReplicaAutoScaling(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +151,8 @@ func (c *Client) addOperationUpdateTableReplicaAutoScalingMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateTableReplicaAutoScaling(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTableReplicaAutoScaling",
-	}
 }

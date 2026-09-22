@@ -5,10 +5,10 @@ package memorydb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about reserved nodes for this account, or about a specified
@@ -67,6 +67,36 @@ type DescribeReservedNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedNodesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedNodesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedNodesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteString(schemas.DescribeReservedNodesRequest_Duration, *v.Duration)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeReservedNodesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedNodesRequest_NextToken, *v.NextToken)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.DescribeReservedNodesRequest_NodeType, *v.NodeType)
+	}
+	if v.OfferingType != nil {
+		s.WriteString(schemas.DescribeReservedNodesRequest_OfferingType, *v.OfferingType)
+	}
+	if v.ReservationId != nil {
+		s.WriteString(schemas.DescribeReservedNodesRequest_ReservationId, *v.ReservationId)
+	}
+	if v.ReservedNodesOfferingId != nil {
+		s.WriteString(schemas.DescribeReservedNodesRequest_ReservedNodesOfferingId, *v.ReservedNodesOfferingId)
+	}
+}
+
 type DescribeReservedNodesOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -85,74 +115,48 @@ type DescribeReservedNodesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedNodesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedNodesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedNodesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedNodesResponse_NextToken, *v.NextToken)
+	}
+	serializeReservedNodeList(s, schemas.DescribeReservedNodesResponse_ReservedNodes, v.ReservedNodes)
+}
+func (v *DescribeReservedNodesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReservedNodesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReservedNodesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReservedNodesResponse_NextToken, v.NextToken)
+		case schemas.DescribeReservedNodesResponse_ReservedNodes:
+			return deserializeReservedNodeList(d, schemas.DescribeReservedNodesResponse_ReservedNodes, &v.ReservedNodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedNodes, schemas.DescribeReservedNodesRequest, schemas.DescribeReservedNodesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReservedNodes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedNodes, schemas.DescribeReservedNodesRequest, schemas.DescribeReservedNodesResponse), output: &DescribeReservedNodesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReservedNodes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeReservedNodes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedNodes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +169,6 @@ func (c *Client) addOperationDescribeReservedNodesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +272,3 @@ type DescribeReservedNodesAPIClient interface {
 }
 
 var _ DescribeReservedNodesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeReservedNodes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeReservedNodes",
-	}
-}

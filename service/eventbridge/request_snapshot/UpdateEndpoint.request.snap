@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.UpdateEndpoint
+
+{"Description":"__Description__","EventBuses":[{"EventBusArn":"__EventBusArn__"},{"EventBusArn":"__EventBusArn__"}],"Name":"__Name__","ReplicationConfig":{"State":"ENABLED"},"RoleArn":"__RoleArn__","RoutingConfig":{"FailoverConfig":{"Primary":{"HealthCheck":"__HealthCheck__"},"Secondary":{"Route":"__Route__"}}}}

@@ -1,0 +1,5 @@
+POST /associateresourceshare
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","principals":["__Member__","__Member__"],"resourceArns":["__Member__","__Member__"],"resourceShareArn":"__ResourceShareArn__","sources":["__Member__","__Member__"]}

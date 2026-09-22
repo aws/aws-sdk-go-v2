@@ -1,0 +1,3 @@
+GET /collaborations?maxResults=1&memberStatus=INVITED&nextToken=__NextToken__
+
+

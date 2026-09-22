@@ -4,11 +4,10 @@ package eks
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes an identity provider configuration.
@@ -42,6 +41,23 @@ type DescribeIdentityProviderConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityProviderConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityProviderConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityProviderConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeIdentityProviderConfigRequest_clusterName, *v.ClusterName)
+	}
+	if v.IdentityProviderConfig != nil {
+		s.WriteStruct(schemas.DescribeIdentityProviderConfigRequest_identityProviderConfig)
+		v.IdentityProviderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DescribeIdentityProviderConfigOutput struct {
 
 	// The object that represents an OpenID Connect (OIDC) identity provider
@@ -54,77 +70,50 @@ type DescribeIdentityProviderConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIdentityProviderConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIdentityProviderConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIdentityProviderConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProviderConfig != nil {
+		s.WriteStruct(schemas.DescribeIdentityProviderConfigResponse_identityProviderConfig)
+		v.IdentityProviderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeIdentityProviderConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIdentityProviderConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIdentityProviderConfigResponse_identityProviderConfig:
+			v.IdentityProviderConfig = &types.IdentityProviderConfigResponse{}
+			return v.IdentityProviderConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityProviderConfig, schemas.DescribeIdentityProviderConfigRequest, schemas.DescribeIdentityProviderConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIdentityProviderConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIdentityProviderConfig, schemas.DescribeIdentityProviderConfigRequest, schemas.DescribeIdentityProviderConfigResponse), output: &DescribeIdentityProviderConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeIdentityProviderConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeIdentityProviderConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeIdentityProviderConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeIdentityProviderConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +128,8 @@ func (c *Client) addOperationDescribeIdentityProviderConfigMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeIdentityProviderConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeIdentityProviderConfig",
-	}
 }

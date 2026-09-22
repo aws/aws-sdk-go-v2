@@ -1,0 +1,3 @@
+DELETE /v1/package-group?domain=__Domain__&domain-owner=__DomainOwner__&package-group=__PackageGroup__
+
+

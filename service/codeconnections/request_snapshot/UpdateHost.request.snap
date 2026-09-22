@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeConnections_20231201.UpdateHost
+
+{"HostArn":"__HostArn__","ProviderEndpoint":"__ProviderEndpoint__","VpcConfiguration":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"TlsCertificate":"__TlsCertificate__","VpcId":"__VpcId__"}}

@@ -1,0 +1,5 @@
+PUT /bots/__BotName__/aliases/__Name__
+
+Content-Type: application/json
+
+{"botVersion":"__BotVersion__","checksum":"__Checksum__","conversationLogs":{"iamRoleArn":"__IamRoleArn__","logSettings":[{"destination":"CLOUDWATCH_LOGS","kmsKeyArn":"__KmsKeyArn__","logType":"AUDIO","resourceArn":"__ResourceArn__"},{"destination":"CLOUDWATCH_LOGS","kmsKeyArn":"__KmsKeyArn__","logType":"AUDIO","resourceArn":"__ResourceArn__"}]},"description":"__Description__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

@@ -1,0 +1,3 @@
+GET /v1/clusters/__ClusterArn__/topics/__TopicName__/partitions?maxResults=1&nextToken=__NextToken__
+
+

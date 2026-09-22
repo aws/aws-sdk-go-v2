@@ -5,7 +5,8 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,6 +48,46 @@ type UpdateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_description, *v.Description)
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_role, *v.Role)
+	}
+	if v.S3Location != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_s3Location, *v.S3Location)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.UpdateWorkspaceRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *UpdateWorkspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceRequest_description, v.Description)
+		case schemas.UpdateWorkspaceRequest_role:
+			v.Role = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceRequest_role, v.Role)
+		case schemas.UpdateWorkspaceRequest_s3Location:
+			v.S3Location = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceRequest_s3Location, v.S3Location)
+		case schemas.UpdateWorkspaceRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.UpdateWorkspaceRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type UpdateWorkspaceOutput struct {
 
 	// The date and time of the current update.
@@ -60,65 +101,42 @@ type UpdateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdateDateTime != nil {
+		s.WriteTime(schemas.UpdateWorkspaceResponse_updateDateTime, *v.UpdateDateTime)
+	}
+}
+func (v *UpdateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspaceResponse_updateDateTime:
+			v.UpdateDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateWorkspaceResponse_updateDateTime, v.UpdateDateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspace, schemas.UpdateWorkspaceRequest, schemas.UpdateWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspace, schemas.UpdateWorkspaceRequest, schemas.UpdateWorkspaceResponse), output: &UpdateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkspace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -128,12 +146,6 @@ func (c *Client) addOperationUpdateWorkspaceMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpUpdateWorkspaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +158,6 @@ func (c *Client) addOperationUpdateWorkspaceMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -185,12 +191,4 @@ func (m *endpointPrefix_opUpdateWorkspaceMiddleware) HandleFinalize(ctx context.
 }
 func addEndpointPrefix_opUpdateWorkspaceMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opUpdateWorkspaceMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opUpdateWorkspace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWorkspace",
-	}
 }

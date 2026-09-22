@@ -4,10 +4,10 @@ package odb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
+	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initializes the ODB service for the first time in an account.
@@ -28,11 +28,30 @@ func (c *Client) InitializeService(ctx context.Context, params *InitializeServic
 
 type InitializeServiceInput struct {
 
+	// Specifies whether to enable or disable the OCI service-account role for Amazon
+	// Web Services Secrets Manager integration with Autonomous Database.
+	AutonomousDatabaseOciAwsSecretsManagerIntegration types.Access
+
 	// The Oracle Cloud Infrastructure (OCI) identity domain configuration for service
 	// initialization.
 	OciIdentityDomain *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *InitializeServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitializeServiceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitializeServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDatabaseOciAwsSecretsManagerIntegration != "" {
+		s.WriteString(schemas.InitializeServiceInput_autonomousDatabaseOciAwsSecretsManagerIntegration, string(v.AutonomousDatabaseOciAwsSecretsManagerIntegration))
+	}
+	if v.OciIdentityDomain != nil {
+		s.WriteBool(schemas.InitializeServiceInput_ociIdentityDomain, *v.OciIdentityDomain)
+	}
 }
 
 type InitializeServiceOutput struct {
@@ -42,74 +61,39 @@ type InitializeServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitializeServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitializeServiceOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitializeServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *InitializeServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitializeServiceOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInitializeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitializeService, schemas.InitializeServiceInput, schemas.InitializeServiceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpInitializeService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InitializeService, schemas.InitializeServiceInput, schemas.InitializeServiceOutput), output: &InitializeServiceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpInitializeService{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InitializeService"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInitializeService(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -124,22 +108,8 @@ func (c *Client) addOperationInitializeServiceMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInitializeService(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InitializeService",
-	}
 }

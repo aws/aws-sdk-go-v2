@@ -1,0 +1,3 @@
+GET /authorization-details/__AuthorizationId__?nextToken=__NextToken__
+
+

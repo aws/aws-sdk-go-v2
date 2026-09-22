@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"entitySummaries":[{"arn":"__Arn__","creationDateTime":946684800,"description":"__Description__","entityId":"__EntityId__","entityName":"__EntityName__","hasChildEntities":true,"parentEntityId":"__ParentEntityId__","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"updateDateTime":946684800},{"arn":"__Arn__","creationDateTime":946684800,"description":"__Description__","entityId":"__EntityId__","entityName":"__EntityName__","hasChildEntities":true,"parentEntityId":"__ParentEntityId__","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"updateDateTime":946684800}],"nextToken":"__NextToken__"}

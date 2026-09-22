@@ -15,6 +15,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
+	"github.com/aws/smithy-go/endpoints/private/bdd"
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -230,6 +231,8 @@ func bindRegion(region string) (*string, error) {
 	return aws.String(endpoints.MapFIPSRegion(region)), nil
 }
 
+var _ = rulesfn.StringSlice(nil)
+
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
@@ -283,21 +286,199 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 	return p
 }
 
-type stringSlice []string
+const bddRoot int32 = 2
 
-func (s stringSlice) Get(i int) *string {
-	if i < 0 || i >= len(s) {
-		return nil
+var bddNodes = [45]int32{
+	-1, 1, -1, 0, 100000012, 3, 1, 4, 100000011, 2, 5, 100000010, 3, 6, 100000009, 4, 7, 100000008, 5, 8, 100000007, 6, 100000007, 9, 7, 10, 100000006, 8, 11, 100000005, 9, 12, 14, 10, 13, 14, 11, 14, 100000004, 12, 15, 100000003, 13, 100000001, 100000002}
+
+type conditionContext struct {
+	parsedArn       *awsrulesfn.ARN
+	arnType         *string
+	partitionResult *awsrulesfn.PartitionConfig
+	url             *rulesfn.URL
+}
+
+func evalCondition(idx int, params *EndpointParameters, c *conditionContext) bool {
+	switch idx {
+	case 0:
+		return *params.UseFIPS == true
+	case 1:
+		return params.KvsARN != nil
+	case 2:
+		if v := awsrulesfn.ParseARN(*params.KvsARN); v != nil {
+			c.parsedArn = v
+			return true
+		}
+		return false
+	case 3:
+		return c.parsedArn.Service == "cloudfront"
+	case 4:
+		return c.parsedArn.Region == ""
+	case 5:
+		if v := c.parsedArn.ResourceId.Get(0); v != nil {
+			c.arnType = v
+			return true
+		}
+		return false
+	case 6:
+		return *c.arnType == ""
+	case 7:
+		return *c.arnType == "key-value-store"
+	case 8:
+		return c.parsedArn.Partition == "aws"
+	case 9:
+		return params.Region != nil
+	case 10:
+		if v := awsrulesfn.GetPartition(*params.Region); v != nil {
+			c.partitionResult = v
+			return true
+		}
+		return false
+	case 11:
+		return c.parsedArn.Partition == c.partitionResult.Name
+	case 12:
+		return params.Endpoint != nil
+	case 13:
+		if v := rulesfn.ParseURL(*params.Endpoint); v != nil {
+			c.url = v
+			return true
+		}
+		return false
 	}
+	return false
+}
 
-	v := s[i]
-	return &v
+func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (smithyendpoints.Endpoint, error) {
+	switch idx {
+	case 0:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint resolution failed: no matching rule")
+	case 1:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString(c.url.Scheme)
+			out.WriteString("://")
+			out.WriteString(c.parsedArn.AccountId)
+			out.WriteString(".")
+			out.WriteString(c.url.Authority)
+			out.WriteString(c.url.Path)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+			Properties: func() smithy.Properties {
+				var out smithy.Properties
+				smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+					{
+						SchemeID: "sigv4a",
+						SignerProperties: func() smithy.Properties {
+							var sp smithy.Properties
+							smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
+							smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
+
+							smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+							return sp
+						}(),
+					},
+				})
+				return out
+			}(),
+		}, nil
+	case 2:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Provided endpoint is not a valid URL")
+	case 3:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(c.parsedArn.AccountId)
+			out.WriteString(".cloudfront-kvs.global.api.aws")
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+			Properties: func() smithy.Properties {
+				var out smithy.Properties
+				smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+					{
+						SchemeID: "sigv4a",
+						SignerProperties: func() smithy.Properties {
+							var sp smithy.Properties
+							smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
+							smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
+
+							smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
+							return sp
+						}(),
+					},
+				})
+				return out
+			}(),
+		}, nil
+	case 4:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("Client was configured for partition `")
+			out.WriteString(c.partitionResult.Name)
+			out.WriteString("` but Kvs ARN has `")
+			out.WriteString(c.parsedArn.Partition)
+			out.WriteString("`")
+			return out.String()
+		}())
+	case 5:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("CloudFront-KeyValueStore is not supported in partition `")
+			out.WriteString(c.parsedArn.Partition)
+			out.WriteString("`")
+			return out.String()
+		}())
+	case 6:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("ARN resource type is invalid. Expected `key-value-store`, found: `")
+			out.WriteString(*c.arnType)
+			out.WriteString("`")
+			return out.String()
+		}())
+	case 7:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "No resource type found in the KVS ARN. Resource type must be `key-value-store`.")
+	case 8:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("Provided ARN must be a global resource ARN. Found: `")
+			out.WriteString(c.parsedArn.Region)
+			out.WriteString("`")
+			return out.String()
+		}())
+	case 9:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", func() string {
+			var out strings.Builder
+			out.WriteString("Provided ARN is not a valid CloudFront Service ARN. Found: `")
+			out.WriteString(c.parsedArn.Service)
+			out.WriteString("`")
+			return out.String()
+		}())
+	case 10:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "KVS ARN must be a valid ARN")
+	case 11:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "KVS ARN must be provided to use this service")
+	case 12:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.")
+	}
+	return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, invalid result index: %d", idx)
 }
 
 // EndpointResolverV2 provides the interface for resolving service endpoints.
 type EndpointResolverV2 interface {
-	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
-	// returning the endpoint if found. Otherwise an error is returned.
 	ResolveEndpoint(ctx context.Context, params EndpointParameters) (
 		smithyendpoints.Endpoint, error,
 	)
@@ -321,246 +502,12 @@ func (r *resolver) ResolveEndpoint(
 	if err = params.ValidateRequired(); err != nil {
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
 	}
-	_UseFIPS := *params.UseFIPS
-	_ = _UseFIPS
 
-	if _UseFIPS == false {
-		if exprVal := params.KvsARN; exprVal != nil {
-			_KvsARN := *exprVal
-			_ = _KvsARN
-			if exprVal := awsrulesfn.ParseARN(_KvsARN); exprVal != nil {
-				_parsedArn := *exprVal
-				_ = _parsedArn
-				if _parsedArn.Service == "cloudfront" {
-					if _parsedArn.Region == "" {
-						if exprVal := _parsedArn.ResourceId.Get(0); exprVal != nil {
-							_arnType := *exprVal
-							_ = _arnType
-							if !(_arnType == "") {
-								if _arnType == "key-value-store" {
-									if _parsedArn.Partition == "aws" {
-										if exprVal := params.Region; exprVal != nil {
-											_Region := *exprVal
-											_ = _Region
-											if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
-												_partitionResult := *exprVal
-												_ = _partitionResult
-												if _partitionResult.Name == _parsedArn.Partition {
-													if exprVal := params.Endpoint; exprVal != nil {
-														_Endpoint := *exprVal
-														_ = _Endpoint
-														if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
-															_url := *exprVal
-															_ = _url
-															uriString := func() string {
-																var out strings.Builder
-																out.WriteString(_url.Scheme)
-																out.WriteString("://")
-																out.WriteString(_parsedArn.AccountId)
-																out.WriteString(".")
-																out.WriteString(_url.Authority)
-																out.WriteString(_url.Path)
-																return out.String()
-															}()
-
-															uri, err := url.Parse(uriString)
-															if err != nil {
-																return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-															}
-
-															return smithyendpoints.Endpoint{
-																URI:     *uri,
-																Headers: http.Header{},
-																Properties: func() smithy.Properties {
-																	var out smithy.Properties
-																	smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-																		{
-																			SchemeID: "aws.auth#sigv4a",
-																			SignerProperties: func() smithy.Properties {
-																				var sp smithy.Properties
-																				smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
-																				smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
-
-																				smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
-																				return sp
-																			}(),
-																		},
-																	})
-																	return out
-																}(),
-															}, nil
-														}
-														return endpoint, fmt.Errorf("endpoint rule error, %s", "Provided endpoint is not a valid URL")
-													}
-													uriString := func() string {
-														var out strings.Builder
-														out.WriteString("https://")
-														out.WriteString(_parsedArn.AccountId)
-														out.WriteString(".cloudfront-kvs.global.api.aws")
-														return out.String()
-													}()
-
-													uri, err := url.Parse(uriString)
-													if err != nil {
-														return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-													}
-
-													return smithyendpoints.Endpoint{
-														URI:     *uri,
-														Headers: http.Header{},
-														Properties: func() smithy.Properties {
-															var out smithy.Properties
-															smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-																{
-																	SchemeID: "aws.auth#sigv4a",
-																	SignerProperties: func() smithy.Properties {
-																		var sp smithy.Properties
-																		smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
-																		smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
-
-																		smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
-																		return sp
-																	}(),
-																},
-															})
-															return out
-														}(),
-													}, nil
-												}
-												return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
-													var out strings.Builder
-													out.WriteString("Client was configured for partition `")
-													out.WriteString(_partitionResult.Name)
-													out.WriteString("` but Kvs ARN has `")
-													out.WriteString(_parsedArn.Partition)
-													out.WriteString("`")
-													return out.String()
-												}())
-											}
-											return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
-										}
-										if exprVal := params.Endpoint; exprVal != nil {
-											_Endpoint := *exprVal
-											_ = _Endpoint
-											if exprVal := rulesfn.ParseURL(_Endpoint); exprVal != nil {
-												_url := *exprVal
-												_ = _url
-												uriString := func() string {
-													var out strings.Builder
-													out.WriteString(_url.Scheme)
-													out.WriteString("://")
-													out.WriteString(_parsedArn.AccountId)
-													out.WriteString(".")
-													out.WriteString(_url.Authority)
-													out.WriteString(_url.Path)
-													return out.String()
-												}()
-
-												uri, err := url.Parse(uriString)
-												if err != nil {
-													return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-												}
-
-												return smithyendpoints.Endpoint{
-													URI:     *uri,
-													Headers: http.Header{},
-													Properties: func() smithy.Properties {
-														var out smithy.Properties
-														smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-															{
-																SchemeID: "aws.auth#sigv4a",
-																SignerProperties: func() smithy.Properties {
-																	var sp smithy.Properties
-																	smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
-																	smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
-
-																	smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
-																	return sp
-																}(),
-															},
-														})
-														return out
-													}(),
-												}, nil
-											}
-											return endpoint, fmt.Errorf("endpoint rule error, %s", "Provided endpoint is not a valid URL")
-										}
-										uriString := func() string {
-											var out strings.Builder
-											out.WriteString("https://")
-											out.WriteString(_parsedArn.AccountId)
-											out.WriteString(".cloudfront-kvs.global.api.aws")
-											return out.String()
-										}()
-
-										uri, err := url.Parse(uriString)
-										if err != nil {
-											return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-										}
-
-										return smithyendpoints.Endpoint{
-											URI:     *uri,
-											Headers: http.Header{},
-											Properties: func() smithy.Properties {
-												var out smithy.Properties
-												smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
-													{
-														SchemeID: "aws.auth#sigv4a",
-														SignerProperties: func() smithy.Properties {
-															var sp smithy.Properties
-															smithyhttp.SetSigV4SigningName(&sp, "cloudfront-keyvaluestore")
-															smithyhttp.SetSigV4ASigningName(&sp, "cloudfront-keyvaluestore")
-
-															smithyhttp.SetSigV4ASigningRegions(&sp, []string{"*"})
-															return sp
-														}(),
-													},
-												})
-												return out
-											}(),
-										}, nil
-									}
-									return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
-										var out strings.Builder
-										out.WriteString("CloudFront-KeyValueStore is not supported in partition `")
-										out.WriteString(_parsedArn.Partition)
-										out.WriteString("`")
-										return out.String()
-									}())
-								}
-								return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
-									var out strings.Builder
-									out.WriteString("ARN resource type is invalid. Expected `key-value-store`, found: `")
-									out.WriteString(_arnType)
-									out.WriteString("`")
-									return out.String()
-								}())
-							}
-							return endpoint, fmt.Errorf("endpoint rule error, %s", "No resource type found in the KVS ARN. Resource type must be `key-value-store`.")
-						}
-						return endpoint, fmt.Errorf("endpoint rule error, %s", "No resource type found in the KVS ARN. Resource type must be `key-value-store`.")
-					}
-					return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
-						var out strings.Builder
-						out.WriteString("Provided ARN must be a global resource ARN. Found: `")
-						out.WriteString(_parsedArn.Region)
-						out.WriteString("`")
-						return out.String()
-					}())
-				}
-				return endpoint, fmt.Errorf("endpoint rule error, %s", func() string {
-					var out strings.Builder
-					out.WriteString("Provided ARN is not a valid CloudFront Service ARN. Found: `")
-					out.WriteString(_parsedArn.Service)
-					out.WriteString("`")
-					return out.String()
-				}())
-			}
-			return endpoint, fmt.Errorf("endpoint rule error, %s", "KVS ARN must be a valid ARN")
-		}
-		return endpoint, fmt.Errorf("endpoint rule error, %s", "KVS ARN must be provided to use this service")
-	}
-	return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS is not supported with CloudFront-KeyValueStore.")
+	c := &conditionContext{}
+	ref := bdd.Evaluate(bddNodes[:], bddRoot, func(idx int) bool {
+		return evalCondition(idx, &params, c)
+	})
+	return resolveResult(ref, &params, c)
 }
 
 type endpointParamsBinder interface {

@@ -1,0 +1,3 @@
+PUT /bots/__BotId__/botanalyzer/__BotAnalyzerRequestId__/stop
+
+

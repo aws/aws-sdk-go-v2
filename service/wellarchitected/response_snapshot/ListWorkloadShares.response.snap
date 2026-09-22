@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","WorkloadId":"__WorkloadId__","WorkloadShareSummaries":[{"PermissionType":"READONLY","ShareId":"__ShareId__","SharedWith":"__SharedWith__","Status":"ACCEPTED","StatusMessage":"__StatusMessage__"},{"PermissionType":"READONLY","ShareId":"__ShareId__","SharedWith":"__SharedWith__","Status":"ACCEPTED","StatusMessage":"__StatusMessage__"}]}

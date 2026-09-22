@@ -1,0 +1,5 @@
+POST /users/__InstanceId__/__UserId__/hierarchy
+
+Content-Type: application/json
+
+{"HierarchyGroupId":"__HierarchyGroupId__"}

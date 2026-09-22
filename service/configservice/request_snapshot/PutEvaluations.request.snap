@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutEvaluations
+
+{"Evaluations":[{"Annotation":"__Annotation__","ComplianceResourceId":"__ComplianceResourceId__","ComplianceResourceType":"__ComplianceResourceType__","ComplianceType":"COMPLIANT","OrderingTimestamp":946684800},{"Annotation":"__Annotation__","ComplianceResourceId":"__ComplianceResourceId__","ComplianceResourceType":"__ComplianceResourceType__","ComplianceType":"COMPLIANT","OrderingTimestamp":946684800}],"ResultToken":"__ResultToken__","TestMode":true}

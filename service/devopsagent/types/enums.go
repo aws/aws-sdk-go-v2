@@ -2,6 +2,79 @@
 
 package types
 
+type AgentSpacePreferenceKey string
+
+// Enum values for AgentSpacePreferenceKey
+const (
+	AgentSpacePreferenceKeyElevatedActionsEnabled AgentSpacePreferenceKey = "elevatedActionsEnabled"
+)
+
+// Values returns all known values for AgentSpacePreferenceKey. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentSpacePreferenceKey) Values() []AgentSpacePreferenceKey {
+	return []AgentSpacePreferenceKey{
+		"elevatedActionsEnabled",
+	}
+}
+
+type ApprovalActionType string
+
+// Enum values for ApprovalActionType
+const (
+	// The agent's tool invocation is approved; finalPattern and ttlSeconds carry the
+	// finalized scope and lifetime.
+	ApprovalActionTypeApproved ApprovalActionType = "APPROVED"
+	// The agent's tool invocation is rejected; reason optionally carries a free-text
+	// rationale.
+	ApprovalActionTypeRejected ApprovalActionType = "REJECTED"
+)
+
+// Values returns all known values for ApprovalActionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApprovalActionType) Values() []ApprovalActionType {
+	return []ApprovalActionType{
+		"APPROVED",
+		"REJECTED",
+	}
+}
+
+type ApprovalStatus string
+
+// Enum values for ApprovalStatus
+const (
+	// The approval request is awaiting a decision.
+	ApprovalStatusPending ApprovalStatus = "PENDING"
+	// The action was APPROVED; the approval request is live and may be redeemed via a
+	// credential mint until it is revoked or fully redeemed.
+	ApprovalStatusApproved ApprovalStatus = "APPROVED"
+	// The action was REJECTED; no further redemption is possible.
+	ApprovalStatusRejected ApprovalStatus = "REJECTED"
+	// The approval was administratively invalidated; no further redemption is
+	// possible.
+	ApprovalStatusRevoked ApprovalStatus = "REVOKED"
+	// The approval was consumed by a credential mint at least once. Non-single-use
+	// approvals stay re-redeemable until expiry; single-use approvals are terminal.
+	ApprovalStatusRedeemed ApprovalStatus = "REDEEMED"
+)
+
+// Values returns all known values for ApprovalStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApprovalStatus) Values() []ApprovalStatus {
+	return []ApprovalStatus{
+		"PENDING",
+		"APPROVED",
+		"REJECTED",
+		"REVOKED",
+		"REDEEMED",
+	}
+}
+
 type AuthFlow string
 
 // Enum values for AuthFlow
@@ -23,6 +96,27 @@ func (AuthFlow) Values() []AuthFlow {
 		"iam",
 		"idc",
 		"idp",
+	}
+}
+
+type CapabilityType string
+
+// Enum values for CapabilityType
+const (
+	// Release readiness review auto-trigger capability.
+	CapabilityTypeReleaseReadinessReview CapabilityType = "RELEASE_READINESS_REVIEW"
+	// Release readiness review automated testing capability.
+	CapabilityTypeReleaseReadinessReviewAutomatedTesting CapabilityType = "RELEASE_READINESS_REVIEW_AUTOMATED_TESTING"
+)
+
+// Values returns all known values for CapabilityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityType) Values() []CapabilityType {
+	return []CapabilityType{
+		"RELEASE_READINESS_REVIEW",
+		"RELEASE_READINESS_REVIEW_AUTOMATED_TESTING",
 	}
 }
 
@@ -58,6 +152,7 @@ const (
 	ExecutionStatusCanceled ExecutionStatus = "CANCELED"
 	// Unlike in the case of user-initiated Cancelation, a customer won't be billed
 	ExecutionStatusTimedOut ExecutionStatus = "TIMED_OUT"
+	ExecutionStatusWaiting  ExecutionStatus = "WAITING"
 )
 
 // Values returns all known values for ExecutionStatus. Note that this can be
@@ -71,6 +166,7 @@ func (ExecutionStatus) Values() []ExecutionStatus {
 		"STOPPED",
 		"CANCELED",
 		"TIMED_OUT",
+		"WAITING",
 	}
 }
 
@@ -235,6 +331,7 @@ const (
 	NewRelicRegionUs NewRelicRegion = "US"
 	// EU region
 	NewRelicRegionEu NewRelicRegion = "EU"
+	NewRelicRegionJp NewRelicRegion = "JP"
 )
 
 // Values returns all known values for NewRelicRegion. Note that this can be
@@ -245,6 +342,7 @@ func (NewRelicRegion) Values() []NewRelicRegion {
 	return []NewRelicRegion{
 		"US",
 		"EU",
+		"JP",
 	}
 }
 
@@ -292,6 +390,10 @@ const (
 	PostRegisterServiceSupportedServiceAzureIdentity PostRegisterServiceSupportedService = "azureidentity"
 	// SigV4-authenticated MCP server.
 	PostRegisterServiceSupportedServiceMcpServerSigv4 PostRegisterServiceSupportedService = "mcpserversigv4"
+	// Remote A2A agent with token-based authentication (API key or OAuth).
+	PostRegisterServiceSupportedServiceRemoteAgent PostRegisterServiceSupportedService = "remoteagent"
+	// Remote A2A agent with SigV4 authentication.
+	PostRegisterServiceSupportedServiceRemoteAgentSigv4 PostRegisterServiceSupportedService = "remoteagentsigv4"
 )
 
 // Values returns all known values for PostRegisterServiceSupportedService. Note
@@ -313,6 +415,8 @@ func (PostRegisterServiceSupportedService) Values() []PostRegisterServiceSupport
 		"mcpserversplunk",
 		"azureidentity",
 		"mcpserversigv4",
+		"remoteagent",
+		"remoteagentsigv4",
 	}
 }
 
@@ -447,6 +551,53 @@ func (RecommendationStatus) Values() []RecommendationStatus {
 	}
 }
 
+type RemoteAgentAuthorizationMethod string
+
+// Enum values for RemoteAgentAuthorizationMethod
+const (
+	// OAuth 2.0 client credentials flow.
+	RemoteAgentAuthorizationMethodOauthClientCredentials RemoteAgentAuthorizationMethod = "oauth-client-credentials"
+	// API key-based authentication.
+	RemoteAgentAuthorizationMethodApiKey RemoteAgentAuthorizationMethod = "api-key"
+	// Bearer token authentication (RFC 6750).
+	RemoteAgentAuthorizationMethodBearerToken RemoteAgentAuthorizationMethod = "bearer-token"
+)
+
+// Values returns all known values for RemoteAgentAuthorizationMethod. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RemoteAgentAuthorizationMethod) Values() []RemoteAgentAuthorizationMethod {
+	return []RemoteAgentAuthorizationMethod{
+		"oauth-client-credentials",
+		"api-key",
+		"bearer-token",
+	}
+}
+
+type ResourceConfigDnsResolution string
+
+// Enum values for ResourceConfigDnsResolution
+const (
+	// Use public DNS resolution for resources behind this resource gateway.
+	ResourceConfigDnsResolutionPublic ResourceConfigDnsResolution = "PUBLIC"
+	// Enable private DNS resolution within VPC for resources behind this resource
+	// gateway.
+	ResourceConfigDnsResolutionInVpc ResourceConfigDnsResolution = "IN_VPC"
+)
+
+// Values returns all known values for ResourceConfigDnsResolution. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceConfigDnsResolution) Values() []ResourceConfigDnsResolution {
+	return []ResourceConfigDnsResolution{
+		"PUBLIC",
+		"IN_VPC",
+	}
+}
+
 type SchedulerState string
 
 // Enum values for SchedulerState
@@ -495,6 +646,10 @@ const (
 	ServiceAzureIdentity Service = "azureidentity"
 	// SigV4-authenticated MCP server.
 	ServiceMcpServerSigv4 Service = "mcpserversigv4"
+	// Remote A2A agent with token-based authentication (API key or OAuth).
+	ServiceRemoteAgent Service = "remoteagent"
+	// Remote A2A agent with SigV4 authentication.
+	ServiceRemoteAgentSigv4 Service = "remoteagentsigv4"
 )
 
 // Values returns all known values for Service. Note that this can be expanded in
@@ -519,6 +674,8 @@ func (Service) Values() []Service {
 		"mcpserversplunk",
 		"azureidentity",
 		"mcpserversigv4",
+		"remoteagent",
+		"remoteagentsigv4",
 	}
 }
 
@@ -603,6 +760,9 @@ const (
 	TaskStatusTimedOut TaskStatus = "TIMED_OUT"
 	// Task has been canceled
 	TaskStatusCanceled TaskStatus = "CANCELED"
+	// Task has been skipped by triage
+	TaskStatusSkipped TaskStatus = "SKIPPED"
+	TaskStatusWaiting TaskStatus = "WAITING"
 )
 
 // Values returns all known values for TaskStatus. Note that this can be expanded
@@ -620,6 +780,8 @@ func (TaskStatus) Values() []TaskStatus {
 		"FAILED",
 		"TIMED_OUT",
 		"CANCELED",
+		"SKIPPED",
+		"WAITING",
 	}
 }
 
@@ -631,6 +793,10 @@ const (
 	TaskTypeInvestigation TaskType = "INVESTIGATION"
 	// Task for evaluating options or solutions (not in use)
 	TaskTypeEvaluation TaskType = "EVALUATION"
+	// Task for reviewing changes for production readiness
+	TaskTypeReleaseReadinessReview TaskType = "RELEASE_READINESS_REVIEW"
+	// Task for automated release testing
+	TaskTypeReleaseTesting TaskType = "RELEASE_TESTING"
 )
 
 // Values returns all known values for TaskType. Note that this can be expanded in
@@ -641,6 +807,51 @@ func (TaskType) Values() []TaskType {
 	return []TaskType{
 		"INVESTIGATION",
 		"EVALUATION",
+		"RELEASE_READINESS_REVIEW",
+		"RELEASE_TESTING",
+	}
+}
+
+type ToolClassification string
+
+// Enum values for ToolClassification
+const (
+	ToolClassificationReadOnly    ToolClassification = "READ_ONLY"
+	ToolClassificationMutative    ToolClassification = "MUTATIVE"
+	ToolClassificationDestructive ToolClassification = "DESTRUCTIVE"
+)
+
+// Values returns all known values for ToolClassification. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ToolClassification) Values() []ToolClassification {
+	return []ToolClassification{
+		"READ_ONLY",
+		"MUTATIVE",
+		"DESTRUCTIVE",
+	}
+}
+
+type TriggerEvent string
+
+// Enum values for TriggerEvent
+const (
+	// A change request is created, updated, or marked ready for review while in a
+	// non-draft state.
+	TriggerEventPullRequestReadyForReview TriggerEvent = "PULL_REQUEST_READY_FOR_REVIEW"
+	// A change request is created or updated while in draft state.
+	TriggerEventPullRequestDraft TriggerEvent = "PULL_REQUEST_DRAFT"
+)
+
+// Values returns all known values for TriggerEvent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerEvent) Values() []TriggerEvent {
+	return []TriggerEvent{
+		"PULL_REQUEST_READY_FOR_REVIEW",
+		"PULL_REQUEST_DRAFT",
 	}
 }
 

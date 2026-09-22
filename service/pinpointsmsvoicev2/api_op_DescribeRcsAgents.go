@@ -5,10 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the specified RCS agents or all RCS agents associated with your
@@ -57,6 +57,26 @@ type DescribeRcsAgentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRcsAgentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRcsAgentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRcsAgentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRcsAgentFilterList(s, schemas.DescribeRcsAgentsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRcsAgentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRcsAgentsRequest_NextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.DescribeRcsAgentsRequest_Owner, string(v.Owner))
+	}
+	serializeRcsAgentIdList(s, schemas.DescribeRcsAgentsRequest_RcsAgentIds, v.RcsAgentIds)
+}
+
 type DescribeRcsAgentsOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -73,77 +93,51 @@ type DescribeRcsAgentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRcsAgentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRcsAgentsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRcsAgentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRcsAgentsResult_NextToken, *v.NextToken)
+	}
+	serializeRcsAgentInformationList(s, schemas.DescribeRcsAgentsResult_RcsAgents, v.RcsAgents)
+}
+func (v *DescribeRcsAgentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRcsAgentsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRcsAgentsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRcsAgentsResult_NextToken, v.NextToken)
+		case schemas.DescribeRcsAgentsResult_RcsAgents:
+			return deserializeRcsAgentInformationList(d, schemas.DescribeRcsAgentsResult_RcsAgents, &v.RcsAgents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRcsAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRcsAgents, schemas.DescribeRcsAgentsRequest, schemas.DescribeRcsAgentsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRcsAgents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRcsAgents, schemas.DescribeRcsAgentsRequest, schemas.DescribeRcsAgentsResult), output: &DescribeRcsAgentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRcsAgents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRcsAgents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRcsAgentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRcsAgents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +150,6 @@ func (c *Client) addOperationDescribeRcsAgentsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +250,3 @@ type DescribeRcsAgentsAPIClient interface {
 }
 
 var _ DescribeRcsAgentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeRcsAgents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRcsAgents",
-	}
-}

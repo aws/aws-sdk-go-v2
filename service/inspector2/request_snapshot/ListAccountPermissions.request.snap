@@ -1,0 +1,5 @@
+POST /accountpermissions/list
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","service":"EC2"}

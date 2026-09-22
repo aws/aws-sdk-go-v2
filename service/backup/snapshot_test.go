@@ -86,6 +86,18 @@ func TestCheckSnapshot_CancelLegalHold(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateBackupAccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBackupAccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateBackupAccessPoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateBackupPlan(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBackupPlan(context.Background(), nil, func(o *Options) {
@@ -211,6 +223,18 @@ func TestCheckSnapshot_CreateTieringConfiguration(t *testing.T) {
 	_, err := svc.CreateTieringConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateTieringConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteBackupAccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBackupAccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteBackupAccessPoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -355,6 +379,18 @@ func TestCheckSnapshot_DeleteTieringConfiguration(t *testing.T) {
 	_, err := svc.DeleteTieringConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTieringConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeBackupAccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBackupAccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeBackupAccessPoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -638,6 +674,18 @@ func TestCheckSnapshot_GetLegalHold(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPITRMalwareScanResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPITRMalwareScanResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPITRMalwareScanResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRecoveryPointIndexDetails(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRecoveryPointIndexDetails(context.Background(), nil, func(o *Options) {
@@ -727,6 +775,42 @@ func TestCheckSnapshot_GetTieringConfiguration(t *testing.T) {
 	_, err := svc.GetTieringConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetTieringConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListBackupAccessPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBackupAccessPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBackupAccessPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListBackupAccessPointsByRecoveryPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBackupAccessPointsByRecoveryPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBackupAccessPointsByRecoveryPoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListBackupAccessPointsByResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBackupAccessPointsByResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListBackupAccessPointsByResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1381,6 +1465,18 @@ func TestUpdateSnapshot_CancelLegalHold(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateBackupAccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateBackupAccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateBackupAccessPoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateBackupPlan(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateBackupPlan(context.Background(), nil, func(o *Options) {
@@ -1506,6 +1602,18 @@ func TestUpdateSnapshot_CreateTieringConfiguration(t *testing.T) {
 	_, err := svc.CreateTieringConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateTieringConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteBackupAccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteBackupAccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteBackupAccessPoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1650,6 +1758,18 @@ func TestUpdateSnapshot_DeleteTieringConfiguration(t *testing.T) {
 	_, err := svc.DeleteTieringConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTieringConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeBackupAccessPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeBackupAccessPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeBackupAccessPoint")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1933,6 +2053,18 @@ func TestUpdateSnapshot_GetLegalHold(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetPITRMalwareScanResults(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPITRMalwareScanResults(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPITRMalwareScanResults")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetRecoveryPointIndexDetails(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRecoveryPointIndexDetails(context.Background(), nil, func(o *Options) {
@@ -2022,6 +2154,42 @@ func TestUpdateSnapshot_GetTieringConfiguration(t *testing.T) {
 	_, err := svc.GetTieringConfiguration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTieringConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBackupAccessPoints(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBackupAccessPoints(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBackupAccessPoints")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBackupAccessPointsByRecoveryPoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBackupAccessPointsByRecoveryPoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBackupAccessPointsByRecoveryPoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListBackupAccessPointsByResource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListBackupAccessPointsByResource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListBackupAccessPointsByResource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

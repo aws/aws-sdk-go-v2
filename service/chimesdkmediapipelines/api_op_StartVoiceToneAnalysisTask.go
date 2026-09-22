@@ -5,10 +5,10 @@ package chimesdkmediapipelines
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a voice tone analysis task. For more information about voice tone
@@ -59,6 +59,29 @@ type StartVoiceToneAnalysisTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartVoiceToneAnalysisTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartVoiceToneAnalysisTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartVoiceToneAnalysisTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartVoiceToneAnalysisTaskRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.StartVoiceToneAnalysisTaskRequest_Identifier, *v.Identifier)
+	}
+	if v.KinesisVideoStreamSourceTaskConfiguration != nil {
+		s.WriteStruct(schemas.StartVoiceToneAnalysisTaskRequest_KinesisVideoStreamSourceTaskConfiguration)
+		v.KinesisVideoStreamSourceTaskConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.StartVoiceToneAnalysisTaskRequest_LanguageCode, string(v.LanguageCode))
+	}
+}
+
 type StartVoiceToneAnalysisTaskOutput struct {
 
 	// The details of the voice tone analysis task.
@@ -70,65 +93,44 @@ type StartVoiceToneAnalysisTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartVoiceToneAnalysisTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartVoiceToneAnalysisTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartVoiceToneAnalysisTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceToneAnalysisTask != nil {
+		s.WriteStruct(schemas.StartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask)
+		v.VoiceToneAnalysisTask.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartVoiceToneAnalysisTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartVoiceToneAnalysisTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask:
+			v.VoiceToneAnalysisTask = &types.VoiceToneAnalysisTask{}
+			return v.VoiceToneAnalysisTask.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartVoiceToneAnalysisTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVoiceToneAnalysisTask, schemas.StartVoiceToneAnalysisTaskRequest, schemas.StartVoiceToneAnalysisTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartVoiceToneAnalysisTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVoiceToneAnalysisTask, schemas.StartVoiceToneAnalysisTaskRequest, schemas.StartVoiceToneAnalysisTaskResponse), output: &StartVoiceToneAnalysisTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartVoiceToneAnalysisTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartVoiceToneAnalysisTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -138,12 +140,6 @@ func (c *Client) addOperationStartVoiceToneAnalysisTaskMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpStartVoiceToneAnalysisTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartVoiceToneAnalysisTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +152,6 @@ func (c *Client) addOperationStartVoiceToneAnalysisTaskMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -201,12 +191,4 @@ func (m *idempotencyToken_initializeOpStartVoiceToneAnalysisTask) HandleInitiali
 }
 func addIdempotencyToken_opStartVoiceToneAnalysisTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartVoiceToneAnalysisTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartVoiceToneAnalysisTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartVoiceToneAnalysisTask",
-	}
 }

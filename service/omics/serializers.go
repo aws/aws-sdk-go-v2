@@ -8449,6 +8449,13 @@ func awsRestjson1_serializeOpDocumentStartRunInput(v *StartRunInput, value smith
 		ok.String(*v.ConfigurationName)
 	}
 
+	if v.EngineSettings != nil {
+		ok := object.Key("engineSettings")
+		if err := awsRestjson1_serializeDocumentEngineSettings(v.EngineSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("logLevel")
 		ok.String(string(v.LogLevel))
@@ -8504,6 +8511,16 @@ func awsRestjson1_serializeOpDocumentStartRunInput(v *StartRunInput, value smith
 	if v.RunId != nil {
 		ok := object.Key("runId")
 		ok.String(*v.RunId)
+	}
+
+	if len(v.ScratchStorageMode) > 0 {
+		ok := object.Key("scratchStorageMode")
+		ok.String(string(v.ScratchStorageMode))
+	}
+
+	if v.SessionPolicy != nil {
+		ok := object.Key("sessionPolicy")
+		ok.String(*v.SessionPolicy)
 	}
 
 	if v.StorageCapacity != nil {
@@ -10061,6 +10078,13 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 		ok.String(*v.ConfigurationName)
 	}
 
+	if v.EngineSettings != nil {
+		ok := object.Key("engineSettings")
+		if err := awsRestjson1_serializeDocumentEngineSettings(v.EngineSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.LogLevel) > 0 {
 		ok := object.Key("logLevel")
 		ok.String(string(v.LogLevel))
@@ -10118,6 +10142,16 @@ func awsRestjson1_serializeDocumentDefaultRunSetting(v *types.DefaultRunSetting,
 		if err := awsRestjson1_serializeDocumentTagMap(v.RunTags, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.ScratchStorageMode) > 0 {
+		ok := object.Key("scratchStorageMode")
+		ok.String(string(v.ScratchStorageMode))
+	}
+
+	if v.SessionPolicy != nil {
+		ok := object.Key("sessionPolicy")
+		ok.String(*v.SessionPolicy)
 	}
 
 	if v.StorageCapacity != nil {
@@ -10181,6 +10215,21 @@ func awsRestjson1_serializeDocumentDefinitionRepository(v *types.DefinitionRepos
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEngineSettings(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }
 
@@ -10393,6 +10442,13 @@ func awsRestjson1_serializeDocumentImportReferenceFilter(v *types.ImportReferenc
 func awsRestjson1_serializeDocumentInlineSetting(v *types.InlineSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EngineSettings != nil {
+		ok := object.Key("engineSettings")
+		if err := awsRestjson1_serializeDocumentEngineSettings(v.EngineSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Name != nil {
 		ok := object.Key("name")

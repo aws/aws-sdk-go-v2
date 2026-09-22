@@ -1,3 +1,206 @@
+# v1.69.0 (2026-09-21)
+
+* **Feature**: Amazon Bedrock AgentCore Harness now supports lifecycle hooks for invocations and tool calls, with Lambda, SNS, and EventBridge targets. This release also adds apiBase for custom OpenAI-compatible endpoints
+
+# v1.68.0 (2026-09-16)
+
+* **Feature**: Adds support for a new DELETE FAILED status for Bedrock AgentCore Runtimes and Bedrock AgentCore Runtime Endpoints.
+
+# v1.67.0 (2026-09-15)
+
+* **Feature**: Amazon Bedrock AgentCore Runtime now supports specifying the platform version of an agent runtime through the new platformVersion field on CreateAgentRuntime, UpdateAgentRuntime, and GetAgentRuntime.
+
+# v1.66.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.65.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.0 (2026-09-03)
+
+* **Feature**: AgentCore Identity adds Consent Portal APIs to manage portals that let end users grant OAuth authorization for agents to access resources. AgentCore Evaluation adds trace source selection by log group prefix, custom or source log group result destinations, and metrics namespace customization.
+
+# v1.63.0 (2026-09-01)
+
+* **Feature**: Online evaluation configurations now support up to 25 evaluators. CloudWatch Logs data sources for online evaluation now support up to 10 log groups.
+
+# v1.62.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
+# v1.61.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.0 (2026-08-27)
+
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.60.0 (2026-08-26)
+
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.59.1 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.59.0 (2026-08-21)
+
+* **Feature**: Update Dataset schema to THIRDPARTYEVALUATIONV1
+
+# v1.58.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.58.0 (2026-08-19)
+
+* **Feature**: AgentCore Memory now supports Flexible Namespaces
+
+# v1.57.0 (2026-08-17)
+
+* **Feature**: Adds implementations of third-party evaluators, both managed-as-a-service and as templates within custom evaluators.
+
+# v1.56.0 (2026-08-14)
+
+* **Feature**: Adds AgentCore Payments support for CMK, Marketplace Subscriptions and QuickCreate
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.1 (2026-08-10)
+
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.55.0 (2026-08-06)
+
+* **Feature**: Add support for Gateway rate limits and Runtime instances in Amazon Bedrock AgentCore. Customers can now configure rate limits scoped to control request rates, token consumption rates, and active connection rates. Customers can now create capacity providers to launch runtimes on their EC2 instances.
+
+# v1.54.0 (2026-08-05)
+
+* **Feature**: Adding support for fine-grained access control for AgentCore Memory through managed AgentCore Gateway HTTP Connectors.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.1 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
+# v1.53.0 (2026-07-30)
+
+* **Feature**: Adds support for configuring models through the OpenResponses API for custom evaluators. CreateEvaluator and UpdateEvaluator now accept an OpenResponses model configuration for LLM-as-a-Judge evaluations.
+
+# v1.52.1 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.52.0 (2026-07-28)
+
+* **Feature**: AgentCore Identity now supports Private Key JWT client authentication for OAuth 2.0 credential providers. Agents can authenticate to identity provider token endpoints with a JWT client assertion signed by a customer-managed AWS KMS asymmetric key, eliminating the need for client secrets.
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.0 (2026-07-23)
+
+* **Feature**: Adds support for the Bring Your Own Storage(BYOS) feature in AgentCore Browser and Code Interpreter. Enables mounting S3Files and EFS File Systems via Access points.
+
+# v1.50.0 (2026-07-21)
+
+* **Feature**: Add an option to clients to disable clock skew
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.0 (2026-07-20)
+
+* **Feature**: This release adds support for specifying a connector version on Gateway targets to pin the connector's tool schema. It also introduces web-search connector version 1.2.0, which adds agent-side domain filtering, published date range filtering, and admin-side domain allowlisting.
+
+# v1.48.0 (2026-07-15)
+
+* **Feature**: Fix HarnessEndpointArn pattern to match the actual service-emitted ARN format ('harness-endpoint' instead of 'endpoint'). Add additionalParams to Gemini model configuration for passing provider-specific parameters through to the model unchanged.
+
+# v1.47.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.47.0 (2026-07-08)
+
+* **Feature**: AgentCore Gateway now supports mapping allowed scopes to separate advertised scopes on the inbound authorizer.
+
+# v1.46.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.45.2 (2026-07-01)
+
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.45.1 (2026-06-29)
+
+* No change notes available for this release.
+
+# v1.45.0 (2026-06-17)
+
+* **Feature**: AgentCore Gateway now supports inference targets to LLM providers (direct config or built-in connectors), HTTP passthrough targets with session stickiness, runtime target API schemas, AWS WAF web ACL association with configurable fail-open or fail-close modes, and interceptor payload filtering.
+
+# v1.44.0 (2026-06-12)
+
+* **Feature**: Added tagging and CMK support for optimizations and an insights feature to identify failure patterns, extract user intents, and summarize execution behavior
+
+# v1.43.0 (2026-06-11)
+
+* **Feature**: Supports deterministic metadata for AgentCore Memory
+
+# v1.42.6 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.5 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
+# v1.42.4 (2026-06-04.2)
+
+* **Bug Fix**: Fixed a schema-serde bug where required, default-value input members weren't serialized.
+
+# v1.42.3 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.2 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.1 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.0 (2026-05-29)
+
+* **Feature**: Reference your own AWS Secrets Manager secrets when configuring credential providers, giving you control over encryption, rotation, and access policies instead of using service-managed secrets.
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.0 (2026-05-28)
+
+* **Feature**: Added Harness support for LiteLLM model configuration for third-party model providers. Added S3 and Git skill source types. Added Responses API format for OpenAI and Bedrock models. Added runtimeUserId parameter to InvokeHarness for end-user identification.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.0 (2026-05-26)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
+# v1.39.0 (2026-05-21)
+
+* **Feature**: Adds dataset management APIs for creating, versioning, and managing evaluation datasets.
+
 # v1.38.0 (2026-05-13)
 
 * **Feature**: Adds support for read-only summary APIs for Policy Engine, Policy, and Policy Generation resources, enabling metadata retrieval without KMS decryption for AWS Config integration.

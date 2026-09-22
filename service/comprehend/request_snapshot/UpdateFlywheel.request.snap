@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.UpdateFlywheel
+
+{"ActiveModelArn":"__ActiveModelArn__","DataAccessRoleArn":"__DataAccessRoleArn__","DataSecurityConfig":{"ModelKmsKeyId":"__ModelKmsKeyId__","VolumeKmsKeyId":"__VolumeKmsKeyId__","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}},"FlywheelArn":"__FlywheelArn__"}

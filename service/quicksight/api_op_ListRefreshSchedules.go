@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the refresh schedules of a dataset. Each dataset can have up to 5
@@ -43,6 +42,21 @@ type ListRefreshSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRefreshSchedulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRefreshSchedulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRefreshSchedulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListRefreshSchedulesRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DataSetId != nil {
+		s.WriteString(schemas.ListRefreshSchedulesRequest_DataSetId, *v.DataSetId)
+	}
+}
+
 type ListRefreshSchedulesOutput struct {
 
 	// The list of refresh schedules for the dataset.
@@ -60,77 +74,56 @@ type ListRefreshSchedulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRefreshSchedulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRefreshSchedulesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRefreshSchedulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRefreshSchedules(s, schemas.ListRefreshSchedulesResponse_RefreshSchedules, v.RefreshSchedules)
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListRefreshSchedulesResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListRefreshSchedulesResponse_Status, v.Status)
+	}
+}
+func (v *ListRefreshSchedulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRefreshSchedulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRefreshSchedulesResponse_RefreshSchedules:
+			return deserializeRefreshSchedules(d, schemas.ListRefreshSchedulesResponse_RefreshSchedules, &v.RefreshSchedules)
+		case schemas.ListRefreshSchedulesResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListRefreshSchedulesResponse_RequestId, v.RequestId)
+		case schemas.ListRefreshSchedulesResponse_Status:
+			return d.ReadInt32(schemas.ListRefreshSchedulesResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRefreshSchedulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRefreshSchedules, schemas.ListRefreshSchedulesRequest, schemas.ListRefreshSchedulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRefreshSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRefreshSchedules, schemas.ListRefreshSchedulesRequest, schemas.ListRefreshSchedulesResponse), output: &ListRefreshSchedulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRefreshSchedules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRefreshSchedules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRefreshSchedulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRefreshSchedules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +138,8 @@ func (c *Client) addOperationListRefreshSchedulesMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListRefreshSchedules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRefreshSchedules",
-	}
 }

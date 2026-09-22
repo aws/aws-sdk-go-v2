@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=EnableAwsNetworkPerformanceMetricSubscription&Destination=__Destination__&DryRun=true&Metric=aggregate-latency&Source=__Source__&Statistic=p50&Version=2016-11-15

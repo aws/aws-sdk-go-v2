@@ -30,6 +30,26 @@ func (m *validateOpAssociateFeed) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDictionary struct {
+}
+
+func (*validateOpCreateDictionary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDictionary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDictionaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDictionaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateFeed struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpCreateFeed) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFeedInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDictionary struct {
+}
+
+func (*validateOpDeleteDictionary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDictionary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDictionaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDictionaryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -70,6 +110,26 @@ func (m *validateOpDeleteFeed) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFeedPolicy struct {
+}
+
+func (*validateOpDeleteFeedPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFeedPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFeedPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFeedPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateFeed struct {
 }
 
@@ -85,6 +145,46 @@ func (m *validateOpDisassociateFeed) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateFeedInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExportDictionaryEntries struct {
+}
+
+func (*validateOpExportDictionaryEntries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportDictionaryEntries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportDictionaryEntriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportDictionaryEntriesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDictionary struct {
+}
+
+func (*validateOpGetDictionary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDictionary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDictionaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDictionaryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -110,6 +210,46 @@ func (m *validateOpGetFeed) HandleInitialize(ctx context.Context, in middleware.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetFeedPolicy struct {
+}
+
+func (*validateOpGetFeedPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFeedPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFeedPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFeedPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFixture struct {
+}
+
+func (*validateOpGetFixture) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFixture) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFixtureInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFixtureInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -125,6 +265,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutFeedPolicy struct {
+}
+
+func (*validateOpPutFeedPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutFeedPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutFeedPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutFeedPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchFixtures struct {
+}
+
+func (*validateOpSearchFixtures) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchFixtures) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchFixturesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchFixturesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +350,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDictionary struct {
+}
+
+func (*validateOpUpdateDictionary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDictionary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDictionaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDictionaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFeed struct {
 }
 
@@ -194,24 +394,60 @@ func addOpAssociateFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFeed{}, middleware.After)
 }
 
+func addOpCreateDictionaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDictionary{}, middleware.After)
+}
+
 func addOpCreateFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFeed{}, middleware.After)
+}
+
+func addOpDeleteDictionaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDictionary{}, middleware.After)
 }
 
 func addOpDeleteFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFeed{}, middleware.After)
 }
 
+func addOpDeleteFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFeedPolicy{}, middleware.After)
+}
+
 func addOpDisassociateFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateFeed{}, middleware.After)
+}
+
+func addOpExportDictionaryEntriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportDictionaryEntries{}, middleware.After)
+}
+
+func addOpGetDictionaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDictionary{}, middleware.After)
 }
 
 func addOpGetFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFeed{}, middleware.After)
 }
 
+func addOpGetFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFeedPolicy{}, middleware.After)
+}
+
+func addOpGetFixtureValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFixture{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutFeedPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutFeedPolicy{}, middleware.After)
+}
+
+func addOpSearchFixturesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchFixtures{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -222,8 +458,47 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateDictionaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDictionary{}, middleware.After)
+}
+
 func addOpUpdateFeedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFeed{}, middleware.After)
+}
+
+func validateAspectRatio(v *types.AspectRatio) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AspectRatio"}
+	if v.Width == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Width"))
+	}
+	if v.Height == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Height"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClippingConfig(v *types.ClippingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClippingConfig"}
+	if v.DataSourceConfiguration != nil {
+		if err := validateDataSourceConfiguration(v.DataSourceConfiguration); err != nil {
+			invalidParams.AddNested("DataSourceConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateCreateOutput(v *types.CreateOutput) error {
@@ -236,6 +511,10 @@ func validateCreateOutput(v *types.CreateOutput) error {
 	}
 	if v.OutputConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
@@ -264,6 +543,157 @@ func validateCreateOutputList(v []types.CreateOutput) error {
 	}
 }
 
+func validateCroppingConfig(v *types.CroppingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CroppingConfig"}
+	if v.TemplateGroups != nil {
+		if err := validateTemplateGroupList(v.TemplateGroups); err != nil {
+			invalidParams.AddNested("TemplateGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSourceConfiguration(v *types.DataSourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceConfiguration"}
+	if v.FixtureId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FixtureId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutputConfig(v types.OutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutputConfig"}
+	switch uv := v.(type) {
+	case *types.OutputConfigMemberClipping:
+		if err := validateClippingConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[clipping]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.OutputConfigMemberCropping:
+		if err := validateCroppingConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[cropping]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.OutputConfigMemberSubtitling:
+		if err := validateSubtitlingConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[subtitling]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchFilter(v *types.SearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSearchFilterList(v []types.SearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFilterList"}
+	for i := range v {
+		if err := validateSearchFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubtitlingConfig(v *types.SubtitlingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubtitlingConfig"}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if v.AspectRatio != nil {
+		if err := validateAspectRatio(v.AspectRatio); err != nil {
+			invalidParams.AddNested("AspectRatio", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTemplateGroup(v *types.TemplateGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TemplateGroup"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TemplateUris == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateUris"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTemplateGroupList(v []types.TemplateGroup) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TemplateGroupList"}
+	for i := range v {
+		if err := validateTemplateGroup(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateOutput(v *types.UpdateOutput) error {
 	if v == nil {
 		return nil
@@ -274,6 +704,10 @@ func validateUpdateOutput(v *types.UpdateOutput) error {
 	}
 	if v.OutputConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
@@ -327,6 +761,24 @@ func validateOpAssociateFeedInput(v *AssociateFeedInput) error {
 	}
 }
 
+func validateOpCreateDictionaryInput(v *CreateDictionaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDictionaryInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Language) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Language"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFeedInput(v *CreateFeedInput) error {
 	if v == nil {
 		return nil
@@ -349,11 +801,41 @@ func validateOpCreateFeedInput(v *CreateFeedInput) error {
 	}
 }
 
+func validateOpDeleteDictionaryInput(v *DeleteDictionaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDictionaryInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteFeedInput(v *DeleteFeedInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFeedInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFeedPolicyInput(v *DeleteFeedPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFeedPolicyInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
@@ -382,6 +864,36 @@ func validateOpDisassociateFeedInput(v *DisassociateFeedInput) error {
 	}
 }
 
+func validateOpExportDictionaryEntriesInput(v *ExportDictionaryEntriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportDictionaryEntriesInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDictionaryInput(v *GetDictionaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDictionaryInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetFeedInput(v *GetFeedInput) error {
 	if v == nil {
 		return nil
@@ -397,6 +909,36 @@ func validateOpGetFeedInput(v *GetFeedInput) error {
 	}
 }
 
+func validateOpGetFeedPolicyInput(v *GetFeedPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFeedPolicyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFixtureInput(v *GetFixtureInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFixtureInput"}
+	if v.FixtureId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FixtureId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -404,6 +946,47 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutFeedPolicyInput(v *PutFeedPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutFeedPolicyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchFixturesInput(v *SearchFixturesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchFixturesInput"}
+	if len(v.Sport) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Sport"))
+	}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.Filters != nil {
+		if err := validateSearchFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -440,6 +1023,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDictionaryInput(v *UpdateDictionaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDictionaryInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

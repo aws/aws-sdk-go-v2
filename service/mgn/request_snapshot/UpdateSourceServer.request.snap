@@ -1,0 +1,5 @@
+POST /UpdateSourceServer
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","connectorAction":{"connectorArn":"__ConnectorArn__","credentialsSecretArn":"__CredentialsSecretArn__"},"fqdnForActionFramework":"__FqdnForActionFramework__","platform":"__Platform__","sourceServerID":"__SourceServerID__","userProvidedID":"__UserProvidedID__"}

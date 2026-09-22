@@ -5,10 +5,8 @@ package mediapackagev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -62,9 +60,9 @@ type CreateChannelInput struct {
 	// only when InputType is CMAF .
 	InputSwitchConfiguration *types.InputSwitchConfiguration
 
-	// The input type will be an immutable field which will be used to define whether
-	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
-	// to HLS to preserve current behavior.
+	// The input type is an immutable field. It defines whether the channel allows
+	// CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels
+	// receive no ingest of their own. If unprovided, the value defaults to HLS.
 	//
 	// The allowed values are:
 	//
@@ -73,12 +71,36 @@ type CreateChannelInput struct {
 	//
 	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
 	//   with optional DASH manifests).
+	//
+	//   - MULTIVIEW – Server-side multiview. The channel receives no ingest of its
+	//   own. Instead, it composites video from the source channels in its
+	//   MultiviewConfiguration into a single tiled output stream.
 	InputType types.InputType
+
+	// The multiview configuration for the channel. This setting is required when
+	// InputType is MULTIVIEW , and can't be set for any other input type.
+	MultiviewConfiguration *types.MultiviewConfiguration
 
 	// The settings for what common media server data (CMSD) headers AWS Elemental
 	// MediaPackage includes in responses to the CDN. This setting is valid only when
 	// InputType is CMAF .
 	OutputHeaderConfiguration *types.OutputHeaderConfiguration
+
+	// The output locking mode for the channel. This setting is only valid when
+	// InputType is CMAF . This value is immutable after channel creation. If you don't
+	// specify a value, the default is EPOCH_LOCKED .
+	//
+	// The allowed values are:
+	//
+	//   - EPOCH_LOCKED - The channel uses epoch-locked behavior with deterministic
+	//   sequence numbering and fixed segment boundaries aligned to epoch time. This mode
+	//   supports cross-region synchronization and failover.
+	//
+	//   - NON_EPOCH_LOCKED - The channel uses non-epoch-locked behavior with
+	//   duration-based segment combining and monotonically increasing sequence numbers
+	//   starting from 0. This mode does not support cross-region synchronization or
+	//   failover.
+	OutputLockingMode types.OutputLockingMode
 
 	// A comma-separated list of tag key:value pairs that you define. For example:
 	//
@@ -120,6 +142,12 @@ type CreateChannelOutput struct {
 	// This member is required.
 	ModifiedAt *time.Time
 
+	// The multiview channels, in the same channel group, that list this channel as an
+	// available source. This is a read-only field. You can't delete a channel while
+	// any multiview channel still lists it as a source. Use this field to find the
+	// multiview channels that you need to update first.
+	AttachedMultiviewChannels []string
+
 	// The description for your channel.
 	Description *string
 
@@ -135,9 +163,9 @@ type CreateChannelOutput struct {
 	// only when InputType is CMAF .
 	InputSwitchConfiguration *types.InputSwitchConfiguration
 
-	// The input type will be an immutable field which will be used to define whether
-	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
-	// to HLS to preserve current behavior.
+	// The input type is an immutable field. It defines whether the channel allows
+	// CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels
+	// receive no ingest of their own. If unprovided, the value defaults to HLS.
 	//
 	// The allowed values are:
 	//
@@ -146,12 +174,32 @@ type CreateChannelOutput struct {
 	//
 	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
 	//   with optional DASH manifests).
+	//
+	//   - MULTIVIEW – Server-side multiview. The channel receives no ingest of its
+	//   own. Instead, it composites video from the source channels in its
+	//   MultiviewConfiguration into a single tiled output stream.
 	InputType types.InputType
+
+	// The multiview configuration for the channel. This is present only when InputType
+	// is MULTIVIEW .
+	MultiviewConfiguration *types.MultiviewConfiguration
 
 	// The settings for what common media server data (CMSD) headers AWS Elemental
 	// MediaPackage includes in responses to the CDN. This setting is valid only when
 	// InputType is CMAF .
 	OutputHeaderConfiguration *types.OutputHeaderConfiguration
+
+	// The output locking mode configured for the channel.
+	//
+	// The allowed values are:
+	//
+	//   - EPOCH_LOCKED - The channel uses epoch-locked behavior with deterministic
+	//   sequence numbering and fixed segment boundaries aligned to epoch time.
+	//
+	//   - NON_EPOCH_LOCKED - The channel uses non-epoch-locked behavior with
+	//   duration-based segment combining and monotonically increasing sequence numbers
+	//   starting from 0.
+	OutputLockingMode types.OutputLockingMode
 
 	// The comma-separated list of tag key:value pairs assigned to the channel.
 	Tags map[string]string
@@ -163,9 +211,6 @@ type CreateChannelOutput struct {
 }
 
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannel{}, middleware.After)
 	if err != nil {
 		return err
@@ -174,53 +219,14 @@ func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, o
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChannel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -230,12 +236,6 @@ func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpCreateChannelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChannel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -248,12 +248,6 @@ func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -293,12 +287,4 @@ func (m *idempotencyToken_initializeOpCreateChannel) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateChannelMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateChannel{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateChannel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateChannel",
-	}
 }

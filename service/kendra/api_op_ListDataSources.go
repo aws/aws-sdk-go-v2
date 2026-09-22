@@ -5,10 +5,10 @@ package kendra
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the data source connectors that you have created.
@@ -45,6 +45,24 @@ type ListDataSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListDataSourcesRequest_IndexId, *v.IndexId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataSourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSourcesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDataSourcesOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use
@@ -60,77 +78,51 @@ type ListDataSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataSourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataSourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataSourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataSourcesResponse_NextToken, *v.NextToken)
+	}
+	serializeDataSourceSummaryList(s, schemas.ListDataSourcesResponse_SummaryItems, v.SummaryItems)
+}
+func (v *ListDataSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataSourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataSourcesResponse_NextToken, v.NextToken)
+		case schemas.ListDataSourcesResponse_SummaryItems:
+			return deserializeDataSourceSummaryList(d, schemas.ListDataSourcesResponse_SummaryItems, &v.SummaryItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDataSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataSources, schemas.ListDataSourcesRequest, schemas.ListDataSourcesResponse), output: &ListDataSourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDataSources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataSources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataSourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataSources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +135,6 @@ func (c *Client) addOperationListDataSourcesMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +235,3 @@ type ListDataSourcesAPIClient interface {
 }
 
 var _ ListDataSourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataSources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataSources",
-	}
-}

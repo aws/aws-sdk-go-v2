@@ -1,0 +1,3 @@
+GET /cluster-versions?clusterType=__ClusterType__&clusterVersions=__Member__&clusterVersions=__Member__&defaultOnly=true&includeAll=true&maxResults=1&nextToken=__NextToken__&status=unsupported&versionStatus=UNSUPPORTED
+
+

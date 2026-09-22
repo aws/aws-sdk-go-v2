@@ -130,6 +130,26 @@ func (m *validateOpAllocateTransitVirtualInterface) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateConnectionsToResiliencyGroup struct {
+}
+
+func (*validateOpAssociateConnectionsToResiliencyGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateConnectionsToResiliencyGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateConnectionsToResiliencyGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateConnectionsToResiliencyGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateConnectionWithLag struct {
 }
 
@@ -450,6 +470,26 @@ func (m *validateOpCreatePublicVirtualInterface) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateResiliencyGroup struct {
+}
+
+func (*validateOpCreateResiliencyGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateResiliencyGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateResiliencyGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateResiliencyGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTransitVirtualInterface struct {
 }
 
@@ -565,6 +605,26 @@ func (m *validateOpDeleteLag) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLagInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteResiliencyGroup struct {
+}
+
+func (*validateOpDeleteResiliencyGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResiliencyGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResiliencyGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResiliencyGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +810,26 @@ func (m *validateOpDisassociateConnectionFromLag) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateConnectionsFromResiliencyGroup struct {
+}
+
+func (*validateOpDisassociateConnectionsFromResiliencyGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateConnectionsFromResiliencyGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateConnectionsFromResiliencyGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateConnectionsFromResiliencyGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateMacSecKey struct {
 }
 
@@ -765,6 +845,46 @@ func (m *validateOpDisassociateMacSecKey) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateMacSecKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResiliencyGroup struct {
+}
+
+func (*validateOpGetResiliencyGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResiliencyGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResiliencyGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResiliencyGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListResiliencyGroupAssociations struct {
+}
+
+func (*validateOpListResiliencyGroupAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResiliencyGroupAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResiliencyGroupAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResiliencyGroupAssociationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -870,6 +990,26 @@ func (m *validateOpUpdateConnection) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnectionsBillingMode struct {
+}
+
+func (*validateOpUpdateConnectionsBillingMode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnectionsBillingMode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectionsBillingModeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectionsBillingModeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDirectConnectGateway struct {
 }
 
@@ -905,6 +1045,26 @@ func (m *validateOpUpdateLag) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateLagInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateResiliencyGroup struct {
+}
+
+func (*validateOpUpdateResiliencyGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResiliencyGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResiliencyGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResiliencyGroupInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -952,6 +1112,10 @@ func addOpAllocatePublicVirtualInterfaceValidationMiddleware(stack *middleware.S
 
 func addOpAllocateTransitVirtualInterfaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAllocateTransitVirtualInterface{}, middleware.After)
+}
+
+func addOpAssociateConnectionsToResiliencyGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateConnectionsToResiliencyGroup{}, middleware.After)
 }
 
 func addOpAssociateConnectionWithLagValidationMiddleware(stack *middleware.Stack) error {
@@ -1018,6 +1182,10 @@ func addOpCreatePublicVirtualInterfaceValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpCreatePublicVirtualInterface{}, middleware.After)
 }
 
+func addOpCreateResiliencyGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateResiliencyGroup{}, middleware.After)
+}
+
 func addOpCreateTransitVirtualInterfaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTransitVirtualInterface{}, middleware.After)
 }
@@ -1040,6 +1208,10 @@ func addOpDeleteInterconnectValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteLagValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLag{}, middleware.After)
+}
+
+func addOpDeleteResiliencyGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResiliencyGroup{}, middleware.After)
 }
 
 func addOpDeleteVirtualInterfaceValidationMiddleware(stack *middleware.Stack) error {
@@ -1078,8 +1250,20 @@ func addOpDisassociateConnectionFromLagValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDisassociateConnectionFromLag{}, middleware.After)
 }
 
+func addOpDisassociateConnectionsFromResiliencyGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateConnectionsFromResiliencyGroup{}, middleware.After)
+}
+
 func addOpDisassociateMacSecKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateMacSecKey{}, middleware.After)
+}
+
+func addOpGetResiliencyGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResiliencyGroup{}, middleware.After)
+}
+
+func addOpListResiliencyGroupAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResiliencyGroupAssociations{}, middleware.After)
 }
 
 func addOpStartBgpFailoverTestValidationMiddleware(stack *middleware.Stack) error {
@@ -1102,12 +1286,20 @@ func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConnection{}, middleware.After)
 }
 
+func addOpUpdateConnectionsBillingModeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnectionsBillingMode{}, middleware.After)
+}
+
 func addOpUpdateDirectConnectGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDirectConnectGateway{}, middleware.After)
 }
 
 func addOpUpdateLagValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLag{}, middleware.After)
+}
+
+func addOpUpdateResiliencyGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResiliencyGroup{}, middleware.After)
 }
 
 func addOpUpdateVirtualInterfaceAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -1401,6 +1593,24 @@ func validateOpAllocateTransitVirtualInterfaceInput(v *AllocateTransitVirtualInt
 		if err := validateNewTransitVirtualInterfaceAllocation(v.NewTransitVirtualInterfaceAllocation); err != nil {
 			invalidParams.AddNested("NewTransitVirtualInterfaceAllocation", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateConnectionsToResiliencyGroupInput(v *AssociateConnectionsToResiliencyGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateConnectionsToResiliencyGroupInput"}
+	if v.ConnectionIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionIdentifiers"))
+	}
+	if v.ResiliencyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResiliencyGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1724,6 +1934,29 @@ func validateOpCreatePublicVirtualInterfaceInput(v *CreatePublicVirtualInterface
 	}
 }
 
+func validateOpCreateResiliencyGroupInput(v *CreateResiliencyGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateResiliencyGroupInput"}
+	if v.ResiliencyGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResiliencyGroupName"))
+	}
+	if len(v.IntendedResiliencyModel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("IntendedResiliencyModel"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTransitVirtualInterfaceInput(v *CreateTransitVirtualInterfaceInput) error {
 	if v == nil {
 		return nil
@@ -1813,6 +2046,21 @@ func validateOpDeleteLagInput(v *DeleteLagInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteLagInput"}
 	if v.LagId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LagId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResiliencyGroupInput(v *DeleteResiliencyGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResiliencyGroupInput"}
+	if v.ResiliencyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResiliencyGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1959,6 +2207,24 @@ func validateOpDisassociateConnectionFromLagInput(v *DisassociateConnectionFromL
 	}
 }
 
+func validateOpDisassociateConnectionsFromResiliencyGroupInput(v *DisassociateConnectionsFromResiliencyGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateConnectionsFromResiliencyGroupInput"}
+	if v.ConnectionIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionIdentifiers"))
+	}
+	if v.ResiliencyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResiliencyGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateMacSecKeyInput(v *DisassociateMacSecKeyInput) error {
 	if v == nil {
 		return nil
@@ -1969,6 +2235,36 @@ func validateOpDisassociateMacSecKeyInput(v *DisassociateMacSecKeyInput) error {
 	}
 	if v.SecretARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SecretARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResiliencyGroupInput(v *GetResiliencyGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResiliencyGroupInput"}
+	if v.ResiliencyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResiliencyGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResiliencyGroupAssociationsInput(v *ListResiliencyGroupAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResiliencyGroupAssociationsInput"}
+	if v.ResiliencyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResiliencyGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2062,6 +2358,24 @@ func validateOpUpdateConnectionInput(v *UpdateConnectionInput) error {
 	}
 }
 
+func validateOpUpdateConnectionsBillingModeInput(v *UpdateConnectionsBillingModeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectionsBillingModeInput"}
+	if v.ConnectionIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionIds"))
+	}
+	if len(v.BillingMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("BillingMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateDirectConnectGatewayInput(v *UpdateDirectConnectGatewayInput) error {
 	if v == nil {
 		return nil
@@ -2087,6 +2401,24 @@ func validateOpUpdateLagInput(v *UpdateLagInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLagInput"}
 	if v.LagId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LagId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResiliencyGroupInput(v *UpdateResiliencyGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResiliencyGroupInput"}
+	if v.ResiliencyGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResiliencyGroupId"))
+	}
+	if v.ResiliencyGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResiliencyGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,5 @@
+POST /metadata/v0/jobs/cancel-job
+
+Content-Type: application/json
+
+{"JobId":"__JobId__"}

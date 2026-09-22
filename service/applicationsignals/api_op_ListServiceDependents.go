@@ -5,10 +5,10 @@ package applicationsignals
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -83,6 +83,28 @@ type ListServiceDependentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceDependentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceDependentsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceDependentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListServiceDependentsInput_EndTime, *v.EndTime)
+	}
+	serializeAttributes(s, schemas.ListServiceDependentsInput_KeyAttributes, v.KeyAttributes)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceDependentsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceDependentsInput_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListServiceDependentsInput_StartTime, *v.StartTime)
+	}
+}
+
 type ListServiceDependentsOutput struct {
 
 	// The end of the time period that the returned information applies to. When used
@@ -121,77 +143,63 @@ type ListServiceDependentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceDependentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceDependentsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceDependentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListServiceDependentsOutput_EndTime, *v.EndTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceDependentsOutput_NextToken, *v.NextToken)
+	}
+	serializeServiceDependents(s, schemas.ListServiceDependentsOutput_ServiceDependents, v.ServiceDependents)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListServiceDependentsOutput_StartTime, *v.StartTime)
+	}
+}
+func (v *ListServiceDependentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceDependentsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceDependentsOutput_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ListServiceDependentsOutput_EndTime, v.EndTime)
+		case schemas.ListServiceDependentsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceDependentsOutput_NextToken, v.NextToken)
+		case schemas.ListServiceDependentsOutput_ServiceDependents:
+			return deserializeServiceDependents(d, schemas.ListServiceDependentsOutput_ServiceDependents, &v.ServiceDependents)
+		case schemas.ListServiceDependentsOutput_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListServiceDependentsOutput_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceDependentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceDependents, schemas.ListServiceDependentsInput, schemas.ListServiceDependentsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceDependents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceDependents, schemas.ListServiceDependentsInput, schemas.ListServiceDependentsOutput), output: &ListServiceDependentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceDependents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceDependents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListServiceDependentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceDependents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,12 +212,6 @@ func (c *Client) addOperationListServiceDependentsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -312,11 +314,3 @@ type ListServiceDependentsAPIClient interface {
 }
 
 var _ ListServiceDependentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListServiceDependents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListServiceDependents",
-	}
-}

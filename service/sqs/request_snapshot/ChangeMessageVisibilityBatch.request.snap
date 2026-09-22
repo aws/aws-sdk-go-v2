@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.ChangeMessageVisibilityBatch
+X-Amzn-Query-Mode: true
+
+{"Entries":[{"Id":"__Id__","ReceiptHandle":"__ReceiptHandle__","VisibilityTimeout":1},{"Id":"__Id__","ReceiptHandle":"__ReceiptHandle__","VisibilityTimeout":1}],"QueueUrl":"__QueueUrl__"}

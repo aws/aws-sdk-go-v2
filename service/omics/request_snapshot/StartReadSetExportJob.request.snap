@@ -1,0 +1,5 @@
+POST /sequencestore/__SequenceStoreId__/exportjob
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","destination":"__Destination__","roleArn":"__RoleArn__","sources":[{"readSetId":"__ReadSetId__"},{"readSetId":"__ReadSetId__"}]}

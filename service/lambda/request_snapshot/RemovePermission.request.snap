@@ -1,0 +1,3 @@
+DELETE /2015-03-31/functions/__FunctionName__/policy/__StatementId__?Qualifier=__Qualifier__&RevisionId=__RevisionId__
+
+

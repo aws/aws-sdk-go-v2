@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.ListCollections
+
+{"collectionSummaries":[{"arn":"__Arn__","collectionGroupName":"__CollectionGroupName__","id":"__Id__","kmsKeyArn":"__KmsKeyArn__","name":"__Name__","status":"CREATING"},{"arn":"__Arn__","collectionGroupName":"__CollectionGroupName__","id":"__Id__","kmsKeyArn":"__KmsKeyArn__","name":"__Name__","status":"CREATING"}],"nextToken":"__NextToken__"}

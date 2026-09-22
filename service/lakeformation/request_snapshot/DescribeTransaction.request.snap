@@ -1,0 +1,5 @@
+POST /DescribeTransaction
+
+Content-Type: application/json
+
+{"TransactionId":"__TransactionId__"}

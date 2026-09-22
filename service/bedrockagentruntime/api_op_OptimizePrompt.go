@@ -4,9 +4,9 @@ package bedrockagentruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -47,6 +47,19 @@ type OptimizePromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OptimizePromptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptimizePromptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OptimizePromptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInputPrompt(s, schemas.OptimizePromptRequest_input, v.Input)
+	if v.TargetModelId != nil {
+		s.WriteString(schemas.OptimizePromptRequest_targetModelId, *v.TargetModelId)
+	}
+}
+
 type OptimizePromptOutput struct {
 	eventStream *OptimizePromptEventStream
 
@@ -56,79 +69,51 @@ type OptimizePromptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OptimizePromptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OptimizePromptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OptimizePromptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *OptimizePromptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OptimizePromptResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *OptimizePromptOutput) GetStream() *OptimizePromptEventStream {
 	return o.eventStream
 }
 
 func (c *Client) addOperationOptimizePromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptimizePrompt, schemas.OptimizePromptRequest, schemas.OptimizePromptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpOptimizePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OptimizePrompt, schemas.OptimizePromptRequest, schemas.OptimizePromptResponse), output: &OptimizePromptOutput{}}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpOptimizePrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamOptimizePrompt{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "OptimizePrompt"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addEventStreamOptimizePromptMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpOptimizePromptValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOptimizePrompt(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,24 +128,10 @@ func (c *Client) addOperationOptimizePromptMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opOptimizePrompt(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "OptimizePrompt",
-	}
 }
 
 // OptimizePromptEventStream provides the event stream handling for the OptimizePrompt operation.

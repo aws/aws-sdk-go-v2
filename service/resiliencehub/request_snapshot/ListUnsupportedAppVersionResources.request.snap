@@ -1,0 +1,5 @@
+POST /list-unsupported-app-version-resources
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","appVersion":"__AppVersion__","maxResults":1,"nextToken":"__NextToken__","resolutionId":"__ResolutionId__"}

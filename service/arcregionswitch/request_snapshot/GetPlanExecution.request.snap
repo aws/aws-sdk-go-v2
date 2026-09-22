@@ -1,0 +1,7 @@
+POST /service/ArcRegionSwitch/operation/GetPlanExecution
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤kexecutionIdo__ExecutionId__jmaxResultsinextTokenm__NextToken__gplanArnk__PlanArn__

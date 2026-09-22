@@ -5,10 +5,10 @@ package mediaconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new router input in AWS Elemental MediaConnect.
@@ -65,6 +65,9 @@ type CreateRouterInputInput struct {
 	// A unique identifier for the request to ensure idempotency.
 	ClientToken *string
 
+	// The content quality analysis configuration for the router input.
+	ContentQualityAnalysisConfiguration types.RouterContentQualityAnalysisConfiguration
+
 	// The maintenance configuration settings for the router input, including
 	// preferred maintenance windows and schedules.
 	MaintenanceConfiguration types.MaintenanceConfiguration
@@ -82,6 +85,45 @@ type CreateRouterInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouterInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateRouterInputRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRouterInputRequest_ClientToken, *v.ClientToken)
+	}
+	serializeRouterInputConfiguration(s, schemas.CreateRouterInputRequest_Configuration, v.Configuration)
+	serializeRouterContentQualityAnalysisConfiguration(s, schemas.CreateRouterInputRequest_ContentQualityAnalysisConfiguration, v.ContentQualityAnalysisConfiguration)
+	serializeMaintenanceConfiguration(s, schemas.CreateRouterInputRequest_MaintenanceConfiguration, v.MaintenanceConfiguration)
+	if v.MaximumBitrate != nil {
+		s.WriteInt64(schemas.CreateRouterInputRequest_MaximumBitrate, *v.MaximumBitrate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRouterInputRequest_Name, *v.Name)
+	}
+	if v.RegionName != nil {
+		s.WriteString(schemas.CreateRouterInputRequest_RegionName, *v.RegionName)
+	}
+	if v.RoutingScope != "" {
+		s.WriteString(schemas.CreateRouterInputRequest_RoutingScope, string(v.RoutingScope))
+	}
+	serialize__mapOfString(s, schemas.CreateRouterInputRequest_Tags, v.Tags)
+	if v.Tier != "" {
+		s.WriteString(schemas.CreateRouterInputRequest_Tier, string(v.Tier))
+	}
+	if v.TransitEncryption != nil {
+		s.WriteStruct(schemas.CreateRouterInputRequest_TransitEncryption)
+		v.TransitEncryption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateRouterInputOutput struct {
 
 	// The newly-created router input.
@@ -95,65 +137,44 @@ type CreateRouterInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRouterInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRouterInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRouterInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterInput != nil {
+		s.WriteStruct(schemas.CreateRouterInputResponse_RouterInput)
+		v.RouterInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateRouterInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRouterInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRouterInputResponse_RouterInput:
+			v.RouterInput = &types.RouterInput{}
+			return v.RouterInput.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRouterInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterInput, schemas.CreateRouterInputRequest, schemas.CreateRouterInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRouterInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRouterInput, schemas.CreateRouterInputRequest, schemas.CreateRouterInputResponse), output: &CreateRouterInputOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRouterInput{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRouterInput"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -163,12 +184,6 @@ func (c *Client) addOperationCreateRouterInputMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateRouterInputValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRouterInput(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,12 +196,6 @@ func (c *Client) addOperationCreateRouterInputMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -226,12 +235,4 @@ func (m *idempotencyToken_initializeOpCreateRouterInput) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateRouterInputMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateRouterInput{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateRouterInput(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRouterInput",
-	}
 }

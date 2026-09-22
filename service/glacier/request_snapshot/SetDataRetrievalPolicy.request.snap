@@ -1,0 +1,6 @@
+PUT /__AccountId__/policies/data-retrieval
+
+Content-Type: application/json
+X-Amz-Glacier-Version: 2012-06-01
+
+{"Policy":{"Rules":[{"BytesPerHour":1,"Strategy":"__Strategy__"},{"BytesPerHour":1,"Strategy":"__Strategy__"}]}}

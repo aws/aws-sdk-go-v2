@@ -62,6 +62,18 @@ func testSnapshot(stack *middleware.Stack, operation string) error {
 	}
 	return snapshotOK{}
 }
+func TestCheckSnapshot_AssociateEmailIdentityCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateEmailIdentityCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateEmailIdentityCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetMetricData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetMetricData(context.Background(), nil, func(o *Options) {
@@ -415,6 +427,18 @@ func TestCheckSnapshot_DeleteTenantResourceAssociation(t *testing.T) {
 	_, err := svc.DeleteTenantResourceAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteTenantResourceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateEmailIdentityCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateEmailIdentityCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateEmailIdentityCertificate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -818,6 +842,18 @@ func TestCheckSnapshot_ListEmailIdentities(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListEmailIdentityCertificates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEmailIdentityCertificates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEmailIdentityCertificates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEmailTemplates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEmailTemplates(context.Background(), nil, func(o *Options) {
@@ -967,6 +1003,18 @@ func TestCheckSnapshot_PutAccountDetails(t *testing.T) {
 	_, err := svc.PutAccountDetails(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutAccountDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAccountPricingAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountPricingAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountPricingAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1214,6 +1262,18 @@ func TestCheckSnapshot_PutSuppressedDestination(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutTenantSuppressionAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTenantSuppressionAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTenantSuppressionAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SendBulkEmail(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendBulkEmail(context.Background(), nil, func(o *Options) {
@@ -1279,6 +1339,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateConfigurationSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConfigurationSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateConfigurationSet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1381,6 +1453,18 @@ func TestCheckSnapshot_UpdateReputationEntityPolicy(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+func TestUpdateSnapshot_AssociateEmailIdentityCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateEmailIdentityCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateEmailIdentityCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetMetricData(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetMetricData(context.Background(), nil, func(o *Options) {
@@ -1734,6 +1818,18 @@ func TestUpdateSnapshot_DeleteTenantResourceAssociation(t *testing.T) {
 	_, err := svc.DeleteTenantResourceAssociation(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteTenantResourceAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateEmailIdentityCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateEmailIdentityCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateEmailIdentityCertificate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2137,6 +2233,18 @@ func TestUpdateSnapshot_ListEmailIdentities(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListEmailIdentityCertificates(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEmailIdentityCertificates(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEmailIdentityCertificates")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListEmailTemplates(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEmailTemplates(context.Background(), nil, func(o *Options) {
@@ -2286,6 +2394,18 @@ func TestUpdateSnapshot_PutAccountDetails(t *testing.T) {
 	_, err := svc.PutAccountDetails(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutAccountDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountPricingAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountPricingAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountPricingAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2533,6 +2653,18 @@ func TestUpdateSnapshot_PutSuppressedDestination(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_PutTenantSuppressionAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTenantSuppressionAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTenantSuppressionAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_SendBulkEmail(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendBulkEmail(context.Background(), nil, func(o *Options) {
@@ -2598,6 +2730,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateConfigurationSet(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateConfigurationSet(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateConfigurationSet")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

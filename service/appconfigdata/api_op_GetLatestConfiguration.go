@@ -4,10 +4,9 @@ package appconfigdata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appconfigdata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the latest deployed configuration. This API may return empty
@@ -58,6 +57,28 @@ type GetLatestConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLatestConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLatestConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLatestConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationToken != nil {
+		s.WriteString(schemas.GetLatestConfigurationRequest_ConfigurationToken, *v.ConfigurationToken)
+	}
+}
+func (v *GetLatestConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLatestConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLatestConfigurationRequest_ConfigurationToken:
+			v.ConfigurationToken = new(string)
+			return d.ReadString(schemas.GetLatestConfigurationRequest_ConfigurationToken, v.ConfigurationToken)
+		}
+		return nil
+	})
+}
+
 type GetLatestConfigurationOutput struct {
 
 	// The data of the configuration. This may be empty if the client already has the
@@ -92,77 +113,70 @@ type GetLatestConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLatestConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLatestConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLatestConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteBlob(schemas.GetLatestConfigurationResponse_Configuration, v.Configuration)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetLatestConfigurationResponse_ContentType, *v.ContentType)
+	}
+	if v.NextPollConfigurationToken != nil {
+		s.WriteString(schemas.GetLatestConfigurationResponse_NextPollConfigurationToken, *v.NextPollConfigurationToken)
+	}
+	if v.NextPollIntervalInSeconds != 0 {
+		s.WriteInt32(schemas.GetLatestConfigurationResponse_NextPollIntervalInSeconds, v.NextPollIntervalInSeconds)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.GetLatestConfigurationResponse_VersionLabel, *v.VersionLabel)
+	}
+}
+func (v *GetLatestConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLatestConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLatestConfigurationResponse_Configuration:
+			return d.ReadBlob(schemas.GetLatestConfigurationResponse_Configuration, &v.Configuration)
+		case schemas.GetLatestConfigurationResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetLatestConfigurationResponse_ContentType, v.ContentType)
+		case schemas.GetLatestConfigurationResponse_NextPollConfigurationToken:
+			v.NextPollConfigurationToken = new(string)
+			return d.ReadString(schemas.GetLatestConfigurationResponse_NextPollConfigurationToken, v.NextPollConfigurationToken)
+		case schemas.GetLatestConfigurationResponse_NextPollIntervalInSeconds:
+			return d.ReadInt32(schemas.GetLatestConfigurationResponse_NextPollIntervalInSeconds, &v.NextPollIntervalInSeconds)
+		case schemas.GetLatestConfigurationResponse_VersionLabel:
+			v.VersionLabel = new(string)
+			return d.ReadString(schemas.GetLatestConfigurationResponse_VersionLabel, v.VersionLabel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLatestConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLatestConfiguration, schemas.GetLatestConfigurationRequest, schemas.GetLatestConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLatestConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLatestConfiguration, schemas.GetLatestConfigurationRequest, schemas.GetLatestConfigurationResponse), output: &GetLatestConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLatestConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLatestConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLatestConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLatestConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +191,8 @@ func (c *Client) addOperationGetLatestConfigurationMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLatestConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLatestConfiguration",
-	}
 }

@@ -1,0 +1,3 @@
+DELETE /workspaces/__WorkspaceId__/entities/__EntityId__?isRecursive=true
+
+

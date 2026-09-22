@@ -4,18 +4,15 @@ package entityresolution
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing matching workflow. The workflow must already exist for this
 // operation to succeed.
 //
-// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
-// processing is not supported.
+// For workflows where resolutionType is PROVIDER , incremental processing is not
+// supported.
 func (c *Client) UpdateMatchingWorkflow(ctx context.Context, params *UpdateMatchingWorkflowInput, optFns ...func(*Options)) (*UpdateMatchingWorkflowOutput, error) {
 	if params == nil {
 		params = &UpdateMatchingWorkflowInput{}
@@ -67,8 +64,8 @@ type UpdateMatchingWorkflowInput struct {
 	// Optional. An object that defines the incremental run type. This object contains
 	// only the incrementalRunType field, which appears as "Automatic" in the console.
 	//
-	// For workflows where resolutionType is ML_MATCHING or PROVIDER , incremental
-	// processing is not supported.
+	// For workflows where resolutionType is PROVIDER , incremental processing is not
+	// supported.
 	IncrementalRunConfig *types.IncrementalRunConfig
 
 	noSmithyDocumentSerde
@@ -118,9 +115,6 @@ type UpdateMatchingWorkflowOutput struct {
 }
 
 func (c *Client) addOperationUpdateMatchingWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMatchingWorkflow{}, middleware.After)
 	if err != nil {
 		return err
@@ -129,65 +123,20 @@ func (c *Client) addOperationUpdateMatchingWorkflowMiddlewares(stack *middleware
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMatchingWorkflow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateMatchingWorkflowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMatchingWorkflow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -202,22 +151,8 @@ func (c *Client) addOperationUpdateMatchingWorkflowMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateMatchingWorkflow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMatchingWorkflow",
-	}
 }

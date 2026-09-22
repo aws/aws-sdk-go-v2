@@ -170,6 +170,18 @@ func TestCheckSnapshot_GetPrimaryEmail(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetPrimaryEmailUpdateStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPrimaryEmailUpdateStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetPrimaryEmailUpdateStatus")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRegionOptStatus(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRegionOptStatus(context.Background(), nil, func(o *Options) {
@@ -342,6 +354,18 @@ func TestUpdateSnapshot_GetPrimaryEmail(t *testing.T) {
 	_, err := svc.GetPrimaryEmail(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPrimaryEmail")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetPrimaryEmailUpdateStatus(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetPrimaryEmailUpdateStatus(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetPrimaryEmailUpdateStatus")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

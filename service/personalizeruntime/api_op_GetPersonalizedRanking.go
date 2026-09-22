@@ -4,11 +4,10 @@ package personalizeruntime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Re-ranks a list of recommended items for the given user. The first item in the
@@ -94,6 +93,28 @@ type GetPersonalizedRankingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersonalizedRankingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersonalizedRankingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersonalizedRankingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignArn != nil {
+		s.WriteString(schemas.GetPersonalizedRankingRequest_campaignArn, *v.CampaignArn)
+	}
+	serializeContext(s, schemas.GetPersonalizedRankingRequest_context, v.Context)
+	if v.FilterArn != nil {
+		s.WriteString(schemas.GetPersonalizedRankingRequest_filterArn, *v.FilterArn)
+	}
+	serializeFilterValues(s, schemas.GetPersonalizedRankingRequest_filterValues, v.FilterValues)
+	serializeInputList(s, schemas.GetPersonalizedRankingRequest_inputList, v.InputList)
+	serializeMetadataColumns(s, schemas.GetPersonalizedRankingRequest_metadataColumns, v.MetadataColumns)
+	if v.UserId != nil {
+		s.WriteString(schemas.GetPersonalizedRankingRequest_userId, *v.UserId)
+	}
+}
+
 type GetPersonalizedRankingOutput struct {
 
 	// A list of items in order of most likely interest to the user. The maximum is
@@ -109,77 +130,51 @@ type GetPersonalizedRankingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersonalizedRankingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersonalizedRankingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersonalizedRankingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeItemList(s, schemas.GetPersonalizedRankingResponse_personalizedRanking, v.PersonalizedRanking)
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.GetPersonalizedRankingResponse_recommendationId, *v.RecommendationId)
+	}
+}
+func (v *GetPersonalizedRankingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPersonalizedRankingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPersonalizedRankingResponse_personalizedRanking:
+			return deserializeItemList(d, schemas.GetPersonalizedRankingResponse_personalizedRanking, &v.PersonalizedRanking)
+		case schemas.GetPersonalizedRankingResponse_recommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.GetPersonalizedRankingResponse_recommendationId, v.RecommendationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPersonalizedRankingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersonalizedRanking, schemas.GetPersonalizedRankingRequest, schemas.GetPersonalizedRankingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPersonalizedRanking{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersonalizedRanking, schemas.GetPersonalizedRankingRequest, schemas.GetPersonalizedRankingResponse), output: &GetPersonalizedRankingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPersonalizedRanking{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPersonalizedRanking"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetPersonalizedRankingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPersonalizedRanking(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +189,8 @@ func (c *Client) addOperationGetPersonalizedRankingMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPersonalizedRanking(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPersonalizedRanking",
-	}
 }

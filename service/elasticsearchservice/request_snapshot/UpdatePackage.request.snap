@@ -1,0 +1,5 @@
+POST /2015-01-01/packages/update
+
+Content-Type: application/json
+
+{"CommitMessage":"__CommitMessage__","PackageDescription":"__PackageDescription__","PackageID":"__PackageID__","PackageSource":{"S3BucketName":"__S3BucketName__","S3Key":"__S3Key__"}}

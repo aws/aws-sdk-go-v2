@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/ListAssociatedFleets
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢iStackNamem__StackName__iNextTokenm__NextToken__

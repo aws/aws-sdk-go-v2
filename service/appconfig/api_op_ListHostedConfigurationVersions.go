@@ -5,10 +5,10 @@ package appconfig
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists configurations stored in the AppConfig hosted configuration store by
@@ -58,6 +58,30 @@ type ListHostedConfigurationVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostedConfigurationVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHostedConfigurationVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHostedConfigurationVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListHostedConfigurationVersionsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationProfileId != nil {
+		s.WriteString(schemas.ListHostedConfigurationVersionsRequest_ConfigurationProfileId, *v.ConfigurationProfileId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHostedConfigurationVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHostedConfigurationVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.ListHostedConfigurationVersionsRequest_VersionLabel, *v.VersionLabel)
+	}
+}
+
 type ListHostedConfigurationVersionsOutput struct {
 
 	// The elements from this collection.
@@ -73,77 +97,51 @@ type ListHostedConfigurationVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostedConfigurationVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HostedConfigurationVersions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHostedConfigurationVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHostedConfigurationVersionSummaryList(s, schemas.HostedConfigurationVersions_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.HostedConfigurationVersions_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHostedConfigurationVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HostedConfigurationVersions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HostedConfigurationVersions_Items:
+			return deserializeHostedConfigurationVersionSummaryList(d, schemas.HostedConfigurationVersions_Items, &v.Items)
+		case schemas.HostedConfigurationVersions_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.HostedConfigurationVersions_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHostedConfigurationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHostedConfigurationVersions, schemas.ListHostedConfigurationVersionsRequest, schemas.HostedConfigurationVersions)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHostedConfigurationVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHostedConfigurationVersions, schemas.ListHostedConfigurationVersionsRequest, schemas.HostedConfigurationVersions), output: &ListHostedConfigurationVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHostedConfigurationVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHostedConfigurationVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListHostedConfigurationVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHostedConfigurationVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +154,6 @@ func (c *Client) addOperationListHostedConfigurationVersionsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +260,3 @@ type ListHostedConfigurationVersionsAPIClient interface {
 }
 
 var _ ListHostedConfigurationVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListHostedConfigurationVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListHostedConfigurationVersions",
-	}
-}

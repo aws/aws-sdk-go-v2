@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.DescribeLabel
+
+{"LabelGroupName":"__LabelGroupName__","LabelId":"__LabelId__"}

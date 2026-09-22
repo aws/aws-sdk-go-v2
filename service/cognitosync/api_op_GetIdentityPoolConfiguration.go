@@ -4,11 +4,10 @@ package cognitosync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitosync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the configuration settings of an identity pool.
@@ -63,6 +62,18 @@ type GetIdentityPoolConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityPoolConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityPoolConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityPoolConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetIdentityPoolConfigurationRequest_IdentityPoolId, *v.IdentityPoolId)
+	}
+}
+
 // The output for the GetIdentityPoolConfiguration operation.
 type GetIdentityPoolConfigurationOutput struct {
 
@@ -82,77 +93,64 @@ type GetIdentityPoolConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIdentityPoolConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIdentityPoolConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIdentityPoolConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CognitoStreams != nil {
+		s.WriteStruct(schemas.GetIdentityPoolConfigurationResponse_CognitoStreams)
+		v.CognitoStreams.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityPoolId != nil {
+		s.WriteString(schemas.GetIdentityPoolConfigurationResponse_IdentityPoolId, *v.IdentityPoolId)
+	}
+	if v.PushSync != nil {
+		s.WriteStruct(schemas.GetIdentityPoolConfigurationResponse_PushSync)
+		v.PushSync.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIdentityPoolConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIdentityPoolConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIdentityPoolConfigurationResponse_CognitoStreams:
+			v.CognitoStreams = &types.CognitoStreams{}
+			return v.CognitoStreams.Deserialize(d)
+		case schemas.GetIdentityPoolConfigurationResponse_IdentityPoolId:
+			v.IdentityPoolId = new(string)
+			return d.ReadString(schemas.GetIdentityPoolConfigurationResponse_IdentityPoolId, v.IdentityPoolId)
+		case schemas.GetIdentityPoolConfigurationResponse_PushSync:
+			v.PushSync = &types.PushSync{}
+			return v.PushSync.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIdentityPoolConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityPoolConfiguration, schemas.GetIdentityPoolConfigurationRequest, schemas.GetIdentityPoolConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIdentityPoolConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIdentityPoolConfiguration, schemas.GetIdentityPoolConfigurationRequest, schemas.GetIdentityPoolConfigurationResponse), output: &GetIdentityPoolConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIdentityPoolConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIdentityPoolConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIdentityPoolConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityPoolConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +165,8 @@ func (c *Client) addOperationGetIdentityPoolConfigurationMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIdentityPoolConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIdentityPoolConfiguration",
-	}
 }

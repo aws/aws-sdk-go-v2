@@ -5,10 +5,10 @@ package codedeploy
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codedeploy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	The newer BatchGetDeploymentTargets should be used instead because it works
@@ -70,6 +70,23 @@ type ListDeploymentInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentInstancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.ListDeploymentInstancesInput_deploymentId, *v.DeploymentId)
+	}
+	serializeInstanceStatusList(s, schemas.ListDeploymentInstancesInput_instanceStatusFilter, v.InstanceStatusFilter)
+	serializeInstanceTypeList(s, schemas.ListDeploymentInstancesInput_instanceTypeFilter, v.InstanceTypeFilter)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentInstancesInput_nextToken, *v.NextToken)
+	}
+}
+
 // Represents the output of a ListDeploymentInstances operation.
 type ListDeploymentInstancesOutput struct {
 
@@ -87,77 +104,51 @@ type ListDeploymentInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentInstancesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstancesList(s, schemas.ListDeploymentInstancesOutput_instancesList, v.InstancesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentInstancesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDeploymentInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeploymentInstancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeploymentInstancesOutput_instancesList:
+			return deserializeInstancesList(d, schemas.ListDeploymentInstancesOutput_instancesList, &v.InstancesList)
+		case schemas.ListDeploymentInstancesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeploymentInstancesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeploymentInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentInstances, schemas.ListDeploymentInstancesInput, schemas.ListDeploymentInstancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDeploymentInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeploymentInstances, schemas.ListDeploymentInstancesInput, schemas.ListDeploymentInstancesOutput), output: &ListDeploymentInstancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDeploymentInstances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDeploymentInstances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDeploymentInstancesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDeploymentInstances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +161,6 @@ func (c *Client) addOperationListDeploymentInstancesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +251,3 @@ type ListDeploymentInstancesAPIClient interface {
 }
 
 var _ ListDeploymentInstancesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDeploymentInstances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDeploymentInstances",
-	}
-}

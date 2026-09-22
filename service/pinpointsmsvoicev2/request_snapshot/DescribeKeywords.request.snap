@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DescribeKeywords
+
+{"Filters":[{"Name":"keyword-action","Values":["__Member__","__Member__"]},{"Name":"keyword-action","Values":["__Member__","__Member__"]}],"Keywords":["__Member__","__Member__"],"MaxResults":1,"NextToken":"__NextToken__","OriginationIdentity":"__OriginationIdentity__"}

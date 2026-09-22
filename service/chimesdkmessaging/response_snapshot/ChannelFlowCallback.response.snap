@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CallbackId":"__CallbackId__","ChannelArn":"__ChannelArn__"}

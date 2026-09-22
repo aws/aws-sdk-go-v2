@@ -50,6 +50,7 @@ type AlarmType string
 const (
 	AlarmTypeCompositeAlarm AlarmType = "CompositeAlarm"
 	AlarmTypeMetricAlarm    AlarmType = "MetricAlarm"
+	AlarmTypeLogAlarm       AlarmType = "LogAlarm"
 )
 
 // Values returns all known values for AlarmType. Note that this can be expanded
@@ -60,6 +61,7 @@ func (AlarmType) Values() []AlarmType {
 	return []AlarmType{
 		"CompositeAlarm",
 		"MetricAlarm",
+		"LogAlarm",
 	}
 }
 

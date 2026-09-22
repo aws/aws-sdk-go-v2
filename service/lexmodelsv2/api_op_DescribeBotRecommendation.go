@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -60,6 +59,27 @@ type DescribeBotRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBotRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBotRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBotRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeBotRecommendationRequest_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.DescribeBotRecommendationRequest_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DescribeBotRecommendationRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DescribeBotRecommendationRequest_localeId, *v.LocaleId)
+	}
+}
+
 type DescribeBotRecommendationOutput struct {
 
 	// The identifier of the bot associated with the bot recommendation.
@@ -107,77 +127,115 @@ type DescribeBotRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBotRecommendationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBotRecommendationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBotRecommendationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DescribeBotRecommendationResponse_botId, *v.BotId)
+	}
+	if v.BotRecommendationId != nil {
+		s.WriteString(schemas.DescribeBotRecommendationResponse_botRecommendationId, *v.BotRecommendationId)
+	}
+	if v.BotRecommendationResults != nil {
+		s.WriteStruct(schemas.DescribeBotRecommendationResponse_botRecommendationResults)
+		v.BotRecommendationResults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BotRecommendationStatus != "" {
+		s.WriteString(schemas.DescribeBotRecommendationResponse_botRecommendationStatus, string(v.BotRecommendationStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DescribeBotRecommendationResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.DescribeBotRecommendationResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.EncryptionSetting != nil {
+		s.WriteStruct(schemas.DescribeBotRecommendationResponse_encryptionSetting)
+		v.EncryptionSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFailureReasons(s, schemas.DescribeBotRecommendationResponse_failureReasons, v.FailureReasons)
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DescribeBotRecommendationResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DescribeBotRecommendationResponse_localeId, *v.LocaleId)
+	}
+	if v.TranscriptSourceSetting != nil {
+		s.WriteStruct(schemas.DescribeBotRecommendationResponse_transcriptSourceSetting)
+		v.TranscriptSourceSetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeBotRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBotRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBotRecommendationResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DescribeBotRecommendationResponse_botId, v.BotId)
+		case schemas.DescribeBotRecommendationResponse_botRecommendationId:
+			v.BotRecommendationId = new(string)
+			return d.ReadString(schemas.DescribeBotRecommendationResponse_botRecommendationId, v.BotRecommendationId)
+		case schemas.DescribeBotRecommendationResponse_botRecommendationResults:
+			v.BotRecommendationResults = &types.BotRecommendationResults{}
+			return v.BotRecommendationResults.Deserialize(d)
+		case schemas.DescribeBotRecommendationResponse_botRecommendationStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeBotRecommendationResponse_botRecommendationStatus, &ev); err != nil {
+				return err
+			}
+			v.BotRecommendationStatus = types.BotRecommendationStatus(ev)
+			return nil
+		case schemas.DescribeBotRecommendationResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.DescribeBotRecommendationResponse_botVersion, v.BotVersion)
+		case schemas.DescribeBotRecommendationResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeBotRecommendationResponse_creationDateTime, v.CreationDateTime)
+		case schemas.DescribeBotRecommendationResponse_encryptionSetting:
+			v.EncryptionSetting = &types.EncryptionSetting{}
+			return v.EncryptionSetting.Deserialize(d)
+		case schemas.DescribeBotRecommendationResponse_failureReasons:
+			return deserializeFailureReasons(d, schemas.DescribeBotRecommendationResponse_failureReasons, &v.FailureReasons)
+		case schemas.DescribeBotRecommendationResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeBotRecommendationResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.DescribeBotRecommendationResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.DescribeBotRecommendationResponse_localeId, v.LocaleId)
+		case schemas.DescribeBotRecommendationResponse_transcriptSourceSetting:
+			v.TranscriptSourceSetting = &types.TranscriptSourceSetting{}
+			return v.TranscriptSourceSetting.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBotRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBotRecommendation, schemas.DescribeBotRecommendationRequest, schemas.DescribeBotRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBotRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBotRecommendation, schemas.DescribeBotRecommendationRequest, schemas.DescribeBotRecommendationResponse), output: &DescribeBotRecommendationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBotRecommendation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBotRecommendation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeBotRecommendationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBotRecommendation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,22 +250,8 @@ func (c *Client) addOperationDescribeBotRecommendationMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeBotRecommendation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeBotRecommendation",
-	}
 }

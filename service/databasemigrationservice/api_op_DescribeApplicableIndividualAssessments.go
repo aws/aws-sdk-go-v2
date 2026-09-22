@@ -5,10 +5,10 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of individual assessments that you can specify for a new
@@ -86,6 +86,39 @@ type DescribeApplicableIndividualAssessmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicableIndividualAssessmentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicableIndividualAssessmentsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicableIndividualAssessmentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeApplicableIndividualAssessmentsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeApplicableIndividualAssessmentsMessage_MaxRecords, *v.MaxRecords)
+	}
+	if v.MigrationType != "" {
+		s.WriteString(schemas.DescribeApplicableIndividualAssessmentsMessage_MigrationType, string(v.MigrationType))
+	}
+	if v.ReplicationConfigArn != nil {
+		s.WriteString(schemas.DescribeApplicableIndividualAssessmentsMessage_ReplicationConfigArn, *v.ReplicationConfigArn)
+	}
+	if v.ReplicationInstanceArn != nil {
+		s.WriteString(schemas.DescribeApplicableIndividualAssessmentsMessage_ReplicationInstanceArn, *v.ReplicationInstanceArn)
+	}
+	if v.ReplicationTaskArn != nil {
+		s.WriteString(schemas.DescribeApplicableIndividualAssessmentsMessage_ReplicationTaskArn, *v.ReplicationTaskArn)
+	}
+	if v.SourceEngineName != nil {
+		s.WriteString(schemas.DescribeApplicableIndividualAssessmentsMessage_SourceEngineName, *v.SourceEngineName)
+	}
+	if v.TargetEngineName != nil {
+		s.WriteString(schemas.DescribeApplicableIndividualAssessmentsMessage_TargetEngineName, *v.TargetEngineName)
+	}
+}
+
 type DescribeApplicableIndividualAssessmentsOutput struct {
 
 	// List of names for the individual assessments supported by the premigration
@@ -109,74 +142,48 @@ type DescribeApplicableIndividualAssessmentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicableIndividualAssessmentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicableIndividualAssessmentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicableIndividualAssessmentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIndividualAssessmentNameList(s, schemas.DescribeApplicableIndividualAssessmentsResponse_IndividualAssessmentNames, v.IndividualAssessmentNames)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeApplicableIndividualAssessmentsResponse_Marker, *v.Marker)
+	}
+}
+func (v *DescribeApplicableIndividualAssessmentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicableIndividualAssessmentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicableIndividualAssessmentsResponse_IndividualAssessmentNames:
+			return deserializeIndividualAssessmentNameList(d, schemas.DescribeApplicableIndividualAssessmentsResponse_IndividualAssessmentNames, &v.IndividualAssessmentNames)
+		case schemas.DescribeApplicableIndividualAssessmentsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeApplicableIndividualAssessmentsResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicableIndividualAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicableIndividualAssessments, schemas.DescribeApplicableIndividualAssessmentsMessage, schemas.DescribeApplicableIndividualAssessmentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicableIndividualAssessments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicableIndividualAssessments, schemas.DescribeApplicableIndividualAssessmentsMessage, schemas.DescribeApplicableIndividualAssessmentsResponse), output: &DescribeApplicableIndividualAssessmentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplicableIndividualAssessments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeApplicableIndividualAssessments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeApplicableIndividualAssessments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,12 +196,6 @@ func (c *Client) addOperationDescribeApplicableIndividualAssessmentsMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -300,11 +301,3 @@ type DescribeApplicableIndividualAssessmentsAPIClient interface {
 }
 
 var _ DescribeApplicableIndividualAssessmentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeApplicableIndividualAssessments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeApplicableIndividualAssessments",
-	}
-}

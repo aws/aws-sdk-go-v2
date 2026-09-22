@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates the logging option.
@@ -37,6 +36,30 @@ type PutLoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLoggingOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLoggingOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLoggingOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogDelivery != nil {
+		s.WriteStruct(schemas.PutLoggingOptionsRequest_cloudWatchLogDelivery)
+		v.CloudWatchLogDelivery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutLoggingOptionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLoggingOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutLoggingOptionsRequest_cloudWatchLogDelivery:
+			v.CloudWatchLogDelivery = &types.CloudWatchLogDeliveryOptions{}
+			return v.CloudWatchLogDelivery.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type PutLoggingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -44,77 +67,42 @@ type PutLoggingOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutLoggingOptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutLoggingOptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutLoggingOptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutLoggingOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutLoggingOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutLoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLoggingOptions, schemas.PutLoggingOptionsRequest, schemas.PutLoggingOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutLoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutLoggingOptions, schemas.PutLoggingOptionsRequest, schemas.PutLoggingOptionsResponse), output: &PutLoggingOptionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutLoggingOptions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutLoggingOptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutLoggingOptionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutLoggingOptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -129,22 +117,8 @@ func (c *Client) addOperationPutLoggingOptionsMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutLoggingOptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutLoggingOptions",
-	}
 }

@@ -5,10 +5,8 @@ package ec2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a crash-consistent, point-in-time copy of an existing Amazon EBS volume
@@ -50,6 +48,13 @@ type CopyVolumesInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
+	// Indicates whether to encrypt the volume copy. If the source volume is
+	// encrypted, the service always encrypts the copy regardless of this value. Set to
+	// true to encrypt a copy of an unencrypted source volume during the copy
+	// operation. If you set Encrypted to true but do not specify KmsKeyId , the
+	// service uses the default KMS key for EBS encryption in your account.
+	Encrypted *bool
+
 	// The number of I/O operations per second (IOPS) to provision for the volume
 	// copy. Required for io1 and io2 volumes. Optional for gp3 volumes. Omit for all
 	// other volume types. Full provisioned IOPS performance can be achieved only once
@@ -67,6 +72,14 @@ type CopyVolumesInput struct {
 	//
 	// [Instances built on the Nitro System]: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html
 	Iops *int32
+
+	// The identifier of the KMS key to use for encryption of the volume copy. Specify
+	// a symmetric encryption KMS key. You can specify a KMS key using the key ID, key
+	// ARN, alias name, or alias ARN. If you set Encrypted to true but do not specify
+	// this parameter, the service uses the default KMS key for EBS encryption in your
+	// account. For cross-account volume copies, this must be a KMS key in the calling
+	// account.
+	KmsKeyId *string
 
 	// Indicates whether to enable Amazon EBS Multi-Attach for the volume copy. If you
 	// enable Multi-Attach, you can attach the volume to up to 16 Nitro instances in
@@ -124,9 +137,6 @@ type CopyVolumesOutput struct {
 }
 
 func (c *Client) addOperationCopyVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsEc2query_serializeOpCopyVolumes{}, middleware.After)
 	if err != nil {
 		return err
@@ -135,53 +145,14 @@ func (c *Client) addOperationCopyVolumesMiddlewares(stack *middleware.Stack, opt
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyVolumes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -191,12 +162,6 @@ func (c *Client) addOperationCopyVolumesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCopyVolumesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyVolumes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,12 +174,6 @@ func (c *Client) addOperationCopyVolumesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,12 +213,4 @@ func (m *idempotencyToken_initializeOpCopyVolumes) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCopyVolumesMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCopyVolumes{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCopyVolumes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CopyVolumes",
-	}
 }

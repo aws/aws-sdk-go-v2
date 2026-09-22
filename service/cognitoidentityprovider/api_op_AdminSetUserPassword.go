@@ -4,10 +4,9 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the specified user's password in a user pool. This operation
@@ -99,6 +98,27 @@ type AdminSetUserPasswordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminSetUserPasswordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminSetUserPasswordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminSetUserPasswordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Password != nil {
+		s.WriteString(schemas.AdminSetUserPasswordRequest_Password, *v.Password)
+	}
+	if v.Permanent != false {
+		s.WriteBool(schemas.AdminSetUserPasswordRequest_Permanent, v.Permanent)
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminSetUserPasswordRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminSetUserPasswordRequest_Username, *v.Username)
+	}
+}
+
 type AdminSetUserPasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -106,77 +126,42 @@ type AdminSetUserPasswordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminSetUserPasswordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminSetUserPasswordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminSetUserPasswordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AdminSetUserPasswordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminSetUserPasswordResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminSetUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminSetUserPassword, schemas.AdminSetUserPasswordRequest, schemas.AdminSetUserPasswordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminSetUserPassword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminSetUserPassword, schemas.AdminSetUserPasswordRequest, schemas.AdminSetUserPasswordResponse), output: &AdminSetUserPasswordOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminSetUserPassword{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AdminSetUserPassword"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAdminSetUserPasswordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAdminSetUserPassword(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,22 +176,8 @@ func (c *Client) addOperationAdminSetUserPasswordMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAdminSetUserPassword(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AdminSetUserPassword",
-	}
 }

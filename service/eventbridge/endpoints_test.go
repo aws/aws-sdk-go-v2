@@ -1692,7 +1692,7 @@ func TestEndpointCase46(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "events")
@@ -1830,7 +1830,7 @@ func TestEndpointCase51(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "events")
@@ -1885,7 +1885,7 @@ func TestEndpointCase52(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4a",
+					SchemeID: "sigv4a",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "events")

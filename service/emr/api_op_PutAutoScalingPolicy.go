@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates an automatic scaling policy for a core instance group or
@@ -52,6 +51,26 @@ type PutAutoScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAutoScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAutoScalingPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAutoScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingPolicy != nil {
+		s.WriteStruct(schemas.PutAutoScalingPolicyInput_AutoScalingPolicy)
+		v.AutoScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyInput_ClusterId, *v.ClusterId)
+	}
+	if v.InstanceGroupId != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyInput_InstanceGroupId, *v.InstanceGroupId)
+	}
+}
+
 type PutAutoScalingPolicyOutput struct {
 
 	// The automatic scaling policy definition.
@@ -73,77 +92,68 @@ type PutAutoScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAutoScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAutoScalingPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAutoScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingPolicy != nil {
+		s.WriteStruct(schemas.PutAutoScalingPolicyOutput_AutoScalingPolicy)
+		v.AutoScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyOutput_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyOutput_ClusterId, *v.ClusterId)
+	}
+	if v.InstanceGroupId != nil {
+		s.WriteString(schemas.PutAutoScalingPolicyOutput_InstanceGroupId, *v.InstanceGroupId)
+	}
+}
+func (v *PutAutoScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAutoScalingPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAutoScalingPolicyOutput_AutoScalingPolicy:
+			v.AutoScalingPolicy = &types.AutoScalingPolicyDescription{}
+			return v.AutoScalingPolicy.Deserialize(d)
+		case schemas.PutAutoScalingPolicyOutput_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.PutAutoScalingPolicyOutput_ClusterArn, v.ClusterArn)
+		case schemas.PutAutoScalingPolicyOutput_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.PutAutoScalingPolicyOutput_ClusterId, v.ClusterId)
+		case schemas.PutAutoScalingPolicyOutput_InstanceGroupId:
+			v.InstanceGroupId = new(string)
+			return d.ReadString(schemas.PutAutoScalingPolicyOutput_InstanceGroupId, v.InstanceGroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAutoScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAutoScalingPolicy, schemas.PutAutoScalingPolicyInput, schemas.PutAutoScalingPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAutoScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAutoScalingPolicy, schemas.PutAutoScalingPolicyInput, schemas.PutAutoScalingPolicyOutput), output: &PutAutoScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAutoScalingPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAutoScalingPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutAutoScalingPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAutoScalingPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +168,8 @@ func (c *Client) addOperationPutAutoScalingPolicyMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutAutoScalingPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutAutoScalingPolicy",
-	}
 }

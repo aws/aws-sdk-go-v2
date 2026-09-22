@@ -1,0 +1,5 @@
+POST /profileresourceassociation
+
+Content-Type: application/json
+
+{"Name":"__Name__","ProfileId":"__ProfileId__","ResourceArn":"__ResourceArn__","ResourceProperties":"__ResourceProperties__"}

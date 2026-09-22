@@ -1,0 +1,5 @@
+POST /v1/membership/__MembershipId__/batch-member-details
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"]}

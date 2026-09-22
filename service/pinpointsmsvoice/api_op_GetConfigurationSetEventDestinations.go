@@ -4,11 +4,10 @@ package pinpointsmsvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Obtain information about an event destination, including the types of events it
@@ -39,6 +38,18 @@ type GetConfigurationSetEventDestinationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationSetEventDestinationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationSetEventDestinationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationSetEventDestinationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.GetConfigurationSetEventDestinationsRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+}
+
 // An object that contains information about an event destination.
 type GetConfigurationSetEventDestinationsOutput struct {
 
@@ -52,77 +63,45 @@ type GetConfigurationSetEventDestinationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigurationSetEventDestinationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigurationSetEventDestinationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigurationSetEventDestinationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventDestinations(s, schemas.GetConfigurationSetEventDestinationsResponse_EventDestinations, v.EventDestinations)
+}
+func (v *GetConfigurationSetEventDestinationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigurationSetEventDestinationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigurationSetEventDestinationsResponse_EventDestinations:
+			return deserializeEventDestinations(d, schemas.GetConfigurationSetEventDestinationsResponse_EventDestinations, &v.EventDestinations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigurationSetEventDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationSetEventDestinations, schemas.GetConfigurationSetEventDestinationsRequest, schemas.GetConfigurationSetEventDestinationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfigurationSetEventDestinations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfigurationSetEventDestinations, schemas.GetConfigurationSetEventDestinationsRequest, schemas.GetConfigurationSetEventDestinationsResponse), output: &GetConfigurationSetEventDestinationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfigurationSetEventDestinations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConfigurationSetEventDestinations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetConfigurationSetEventDestinationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConfigurationSetEventDestinations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +116,8 @@ func (c *Client) addOperationGetConfigurationSetEventDestinationsMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetConfigurationSetEventDestinations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetConfigurationSetEventDestinations",
-	}
 }

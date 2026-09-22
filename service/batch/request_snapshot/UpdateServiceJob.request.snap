@@ -1,0 +1,5 @@
+POST /v1/updateservicejob
+
+Content-Type: application/json
+
+{"jobId":"__JobId__","schedulingPriority":1}

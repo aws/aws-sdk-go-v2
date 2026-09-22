@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a lifecycle configuration that you can associate with a notebook
@@ -77,6 +76,21 @@ type CreateNotebookInstanceLifecycleConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotebookInstanceLifecycleConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotebookInstanceLifecycleConfigInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotebookInstanceLifecycleConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceLifecycleConfigName != nil {
+		s.WriteString(schemas.CreateNotebookInstanceLifecycleConfigInput_NotebookInstanceLifecycleConfigName, *v.NotebookInstanceLifecycleConfigName)
+	}
+	serializeNotebookInstanceLifecycleConfigList(s, schemas.CreateNotebookInstanceLifecycleConfigInput_OnCreate, v.OnCreate)
+	serializeNotebookInstanceLifecycleConfigList(s, schemas.CreateNotebookInstanceLifecycleConfigInput_OnStart, v.OnStart)
+	serializeTagList(s, schemas.CreateNotebookInstanceLifecycleConfigInput_Tags, v.Tags)
+}
+
 type CreateNotebookInstanceLifecycleConfigOutput struct {
 
 	// The Amazon Resource Name (ARN) of the lifecycle configuration.
@@ -88,77 +102,48 @@ type CreateNotebookInstanceLifecycleConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotebookInstanceLifecycleConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotebookInstanceLifecycleConfigOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotebookInstanceLifecycleConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotebookInstanceLifecycleConfigArn != nil {
+		s.WriteString(schemas.CreateNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigArn, *v.NotebookInstanceLifecycleConfigArn)
+	}
+}
+func (v *CreateNotebookInstanceLifecycleConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNotebookInstanceLifecycleConfigOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigArn:
+			v.NotebookInstanceLifecycleConfigArn = new(string)
+			return d.ReadString(schemas.CreateNotebookInstanceLifecycleConfigOutput_NotebookInstanceLifecycleConfigArn, v.NotebookInstanceLifecycleConfigArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebookInstanceLifecycleConfig, schemas.CreateNotebookInstanceLifecycleConfigInput, schemas.CreateNotebookInstanceLifecycleConfigOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNotebookInstanceLifecycleConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotebookInstanceLifecycleConfig, schemas.CreateNotebookInstanceLifecycleConfigInput, schemas.CreateNotebookInstanceLifecycleConfigOutput), output: &CreateNotebookInstanceLifecycleConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateNotebookInstanceLifecycleConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNotebookInstanceLifecycleConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateNotebookInstanceLifecycleConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNotebookInstanceLifecycleConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +158,8 @@ func (c *Client) addOperationCreateNotebookInstanceLifecycleConfigMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateNotebookInstanceLifecycleConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateNotebookInstanceLifecycleConfig",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /copy-jobs
+
+Content-Type: application/json
+
+{"DestinationBackupVaultArn":"__DestinationBackupVaultArn__","IamRoleArn":"__IamRoleArn__","IdempotencyToken":"__IdempotencyToken__","Lifecycle":{"DeleteAfterDays":1,"DeleteAfterEvent":"DELETE_AFTER_COPY","MoveToColdStorageAfterDays":1,"OptInToArchiveForSupportedResources":true},"RecoveryPointArn":"__RecoveryPointArn__","SourceBackupVaultName":"__SourceBackupVaultName__"}

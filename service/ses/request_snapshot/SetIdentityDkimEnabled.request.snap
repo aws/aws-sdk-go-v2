@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=SetIdentityDkimEnabled&DkimEnabled=true&Identity=__Identity__&Version=2010-12-01

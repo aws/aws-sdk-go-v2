@@ -4,10 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -48,6 +47,21 @@ type PutOptedOutNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutOptedOutNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutOptedOutNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutOptedOutNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.PutOptedOutNumberRequest_OptOutListName, *v.OptOutListName)
+	}
+	if v.OptedOutNumber != nil {
+		s.WriteString(schemas.PutOptedOutNumberRequest_OptedOutNumber, *v.OptedOutNumber)
+	}
+}
+
 type PutOptedOutNumberOutput struct {
 
 	// This is true if it was the end user who requested their phone number be
@@ -74,77 +88,71 @@ type PutOptedOutNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutOptedOutNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutOptedOutNumberResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutOptedOutNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndUserOptedOut != false {
+		s.WriteBool(schemas.PutOptedOutNumberResult_EndUserOptedOut, v.EndUserOptedOut)
+	}
+	if v.OptOutListArn != nil {
+		s.WriteString(schemas.PutOptedOutNumberResult_OptOutListArn, *v.OptOutListArn)
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.PutOptedOutNumberResult_OptOutListName, *v.OptOutListName)
+	}
+	if v.OptedOutNumber != nil {
+		s.WriteString(schemas.PutOptedOutNumberResult_OptedOutNumber, *v.OptedOutNumber)
+	}
+	if v.OptedOutTimestamp != nil {
+		s.WriteTime(schemas.PutOptedOutNumberResult_OptedOutTimestamp, *v.OptedOutTimestamp)
+	}
+}
+func (v *PutOptedOutNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutOptedOutNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutOptedOutNumberResult_EndUserOptedOut:
+			return d.ReadBool(schemas.PutOptedOutNumberResult_EndUserOptedOut, &v.EndUserOptedOut)
+		case schemas.PutOptedOutNumberResult_OptOutListArn:
+			v.OptOutListArn = new(string)
+			return d.ReadString(schemas.PutOptedOutNumberResult_OptOutListArn, v.OptOutListArn)
+		case schemas.PutOptedOutNumberResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.PutOptedOutNumberResult_OptOutListName, v.OptOutListName)
+		case schemas.PutOptedOutNumberResult_OptedOutNumber:
+			v.OptedOutNumber = new(string)
+			return d.ReadString(schemas.PutOptedOutNumberResult_OptedOutNumber, v.OptedOutNumber)
+		case schemas.PutOptedOutNumberResult_OptedOutTimestamp:
+			v.OptedOutTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PutOptedOutNumberResult_OptedOutTimestamp, v.OptedOutTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutOptedOutNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOptedOutNumber, schemas.PutOptedOutNumberRequest, schemas.PutOptedOutNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutOptedOutNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOptedOutNumber, schemas.PutOptedOutNumberRequest, schemas.PutOptedOutNumberResult), output: &PutOptedOutNumberOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutOptedOutNumber{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutOptedOutNumber"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutOptedOutNumberValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutOptedOutNumber(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +167,8 @@ func (c *Client) addOperationPutOptedOutNumberMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutOptedOutNumber(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutOptedOutNumber",
-	}
 }

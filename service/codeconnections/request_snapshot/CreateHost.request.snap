@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeConnections_20231201.CreateHost
+
+{"Name":"__Name__","ProviderEndpoint":"__ProviderEndpoint__","ProviderType":"Bitbucket","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcConfiguration":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"TlsCertificate":"__TlsCertificate__","VpcId":"__VpcId__"}}

@@ -4,10 +4,9 @@ package grafana
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/grafana/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the current configuration string for the given workspace.
@@ -36,6 +35,28 @@ type DescribeWorkspaceConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DescribeWorkspaceConfigurationRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DescribeWorkspaceConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceConfigurationRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceConfigurationRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DescribeWorkspaceConfigurationOutput struct {
 
 	// The configuration string for the workspace that you requested. For more
@@ -57,77 +78,54 @@ type DescribeWorkspaceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkspaceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkspaceConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkspaceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteString(schemas.DescribeWorkspaceConfigurationResponse_configuration, *v.Configuration)
+	}
+	if v.GrafanaVersion != nil {
+		s.WriteString(schemas.DescribeWorkspaceConfigurationResponse_grafanaVersion, *v.GrafanaVersion)
+	}
+}
+func (v *DescribeWorkspaceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkspaceConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkspaceConfigurationResponse_configuration:
+			v.Configuration = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceConfigurationResponse_configuration, v.Configuration)
+		case schemas.DescribeWorkspaceConfigurationResponse_grafanaVersion:
+			v.GrafanaVersion = new(string)
+			return d.ReadString(schemas.DescribeWorkspaceConfigurationResponse_grafanaVersion, v.GrafanaVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkspaceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceConfiguration, schemas.DescribeWorkspaceConfigurationRequest, schemas.DescribeWorkspaceConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkspaceConfiguration, schemas.DescribeWorkspaceConfigurationRequest, schemas.DescribeWorkspaceConfigurationResponse), output: &DescribeWorkspaceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeWorkspaceConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkspaceConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeWorkspaceConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkspaceConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +140,8 @@ func (c *Client) addOperationDescribeWorkspaceConfigurationMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeWorkspaceConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkspaceConfiguration",
-	}
 }

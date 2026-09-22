@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a routing rule.
@@ -45,6 +44,24 @@ type GetRoutingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoutingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoutingRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoutingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetRoutingRuleRequest_DomainName, *v.DomainName)
+	}
+	if v.DomainNameId != nil {
+		s.WriteString(schemas.GetRoutingRuleRequest_DomainNameId, *v.DomainNameId)
+	}
+	if v.RoutingRuleId != nil {
+		s.WriteString(schemas.GetRoutingRuleRequest_RoutingRuleId, *v.RoutingRuleId)
+	}
+}
+
 type GetRoutingRuleOutput struct {
 
 	// The resulting action based on matching a routing rules condition. Only
@@ -70,77 +87,66 @@ type GetRoutingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRoutingRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRoutingRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRoutingRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfRoutingRuleAction(s, schemas.GetRoutingRuleResponse_Actions, v.Actions)
+	serialize__listOfRoutingRuleCondition(s, schemas.GetRoutingRuleResponse_Conditions, v.Conditions)
+	if v.Priority != nil {
+		s.WriteInt32(schemas.GetRoutingRuleResponse_Priority, *v.Priority)
+	}
+	if v.RoutingRuleArn != nil {
+		s.WriteString(schemas.GetRoutingRuleResponse_RoutingRuleArn, *v.RoutingRuleArn)
+	}
+	if v.RoutingRuleId != nil {
+		s.WriteString(schemas.GetRoutingRuleResponse_RoutingRuleId, *v.RoutingRuleId)
+	}
+}
+func (v *GetRoutingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRoutingRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRoutingRuleResponse_Actions:
+			return deserialize__listOfRoutingRuleAction(d, schemas.GetRoutingRuleResponse_Actions, &v.Actions)
+		case schemas.GetRoutingRuleResponse_Conditions:
+			return deserialize__listOfRoutingRuleCondition(d, schemas.GetRoutingRuleResponse_Conditions, &v.Conditions)
+		case schemas.GetRoutingRuleResponse_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.GetRoutingRuleResponse_Priority, v.Priority)
+		case schemas.GetRoutingRuleResponse_RoutingRuleArn:
+			v.RoutingRuleArn = new(string)
+			return d.ReadString(schemas.GetRoutingRuleResponse_RoutingRuleArn, v.RoutingRuleArn)
+		case schemas.GetRoutingRuleResponse_RoutingRuleId:
+			v.RoutingRuleId = new(string)
+			return d.ReadString(schemas.GetRoutingRuleResponse_RoutingRuleId, v.RoutingRuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRoutingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoutingRule, schemas.GetRoutingRuleRequest, schemas.GetRoutingRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRoutingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRoutingRule, schemas.GetRoutingRuleRequest, schemas.GetRoutingRuleResponse), output: &GetRoutingRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRoutingRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRoutingRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRoutingRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRoutingRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +161,8 @@ func (c *Client) addOperationGetRoutingRuleMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRoutingRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRoutingRule",
-	}
 }

@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a provisioning template.
@@ -83,6 +82,39 @@ type CreateProvisioningTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisioningTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisioningTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisioningTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateRequest_description, *v.Description)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CreateProvisioningTemplateRequest_enabled, *v.Enabled)
+	}
+	if v.PreProvisioningHook != nil {
+		s.WriteStruct(schemas.CreateProvisioningTemplateRequest_preProvisioningHook)
+		v.PreProvisioningHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProvisioningRoleArn != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateRequest_provisioningRoleArn, *v.ProvisioningRoleArn)
+	}
+	serializeTagList(s, schemas.CreateProvisioningTemplateRequest_tags, v.Tags)
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateRequest_templateBody, *v.TemplateBody)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateRequest_templateName, *v.TemplateName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateProvisioningTemplateRequest_type, string(v.Type))
+	}
+}
+
 type CreateProvisioningTemplateOutput struct {
 
 	// The default version of the provisioning template.
@@ -100,77 +132,60 @@ type CreateProvisioningTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisioningTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisioningTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisioningTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultVersionId != nil {
+		s.WriteInt32(schemas.CreateProvisioningTemplateResponse_defaultVersionId, *v.DefaultVersionId)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateResponse_templateArn, *v.TemplateArn)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.CreateProvisioningTemplateResponse_templateName, *v.TemplateName)
+	}
+}
+func (v *CreateProvisioningTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProvisioningTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProvisioningTemplateResponse_defaultVersionId:
+			v.DefaultVersionId = new(int32)
+			return d.ReadInt32(schemas.CreateProvisioningTemplateResponse_defaultVersionId, v.DefaultVersionId)
+		case schemas.CreateProvisioningTemplateResponse_templateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.CreateProvisioningTemplateResponse_templateArn, v.TemplateArn)
+		case schemas.CreateProvisioningTemplateResponse_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.CreateProvisioningTemplateResponse_templateName, v.TemplateName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningTemplate, schemas.CreateProvisioningTemplateRequest, schemas.CreateProvisioningTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProvisioningTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisioningTemplate, schemas.CreateProvisioningTemplateRequest, schemas.CreateProvisioningTemplateResponse), output: &CreateProvisioningTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProvisioningTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProvisioningTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateProvisioningTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProvisioningTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +200,8 @@ func (c *Client) addOperationCreateProvisioningTemplateMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateProvisioningTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProvisioningTemplate",
-	}
 }

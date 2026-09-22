@@ -1,0 +1,3 @@
+GET /packaging_configurations?maxResults=1&nextToken=__NextToken__&packagingGroupId=__PackagingGroupId__
+
+

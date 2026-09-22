@@ -1,0 +1,4 @@
+GET /runtimes/__AgentRuntimeArn__/invocations/.well-known/agent-card.json?qualifier=__Qualifier__
+
+X-Amzn-Bedrock-Agentcore-Runtime-Session-Id: __RuntimeSessionId__
+

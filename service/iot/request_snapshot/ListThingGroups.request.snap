@@ -1,0 +1,3 @@
+GET /thing-groups?maxResults=1&namePrefixFilter=__NamePrefixFilter__&nextToken=__NextToken__&parentGroup=__ParentGroup__&recursive=true
+
+

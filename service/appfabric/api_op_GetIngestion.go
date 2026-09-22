@@ -4,11 +4,10 @@ package appfabric
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about an ingestion.
@@ -44,6 +43,21 @@ type GetIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIngestionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIngestionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIngestionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.GetIngestionRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+	if v.IngestionIdentifier != nil {
+		s.WriteString(schemas.GetIngestionRequest_ingestionIdentifier, *v.IngestionIdentifier)
+	}
+}
+
 type GetIngestionOutput struct {
 
 	// Contains information about an ingestion.
@@ -57,77 +71,50 @@ type GetIngestionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIngestionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIngestionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIngestionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ingestion != nil {
+		s.WriteStruct(schemas.GetIngestionResponse_ingestion)
+		v.Ingestion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetIngestionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIngestionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIngestionResponse_ingestion:
+			v.Ingestion = &types.Ingestion{}
+			return v.Ingestion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngestion, schemas.GetIngestionRequest, schemas.GetIngestionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIngestion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngestion, schemas.GetIngestionRequest, schemas.GetIngestionResponse), output: &GetIngestionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIngestion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIngestion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetIngestionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIngestion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +129,8 @@ func (c *Client) addOperationGetIngestionMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetIngestion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetIngestion",
-	}
 }

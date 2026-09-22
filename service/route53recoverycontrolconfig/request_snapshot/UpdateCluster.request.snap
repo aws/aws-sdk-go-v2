@@ -1,0 +1,5 @@
+PUT /cluster
+
+Content-Type: application/json
+
+{"ClusterArn":"__ClusterArn__","NetworkType":"IPV4"}

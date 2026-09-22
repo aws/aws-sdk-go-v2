@@ -1,0 +1,5 @@
+PUT /signing-profiles/__ProfileName__
+
+Content-Type: application/json
+
+{"overrides":{"signingConfiguration":{"encryptionAlgorithm":"RSA","hashAlgorithm":"SHA1"},"signingImageFormat":"JSON"},"platformId":"__PlatformId__","signatureValidityPeriod":{"type":"DAYS","value":1},"signingMaterial":{"certificateArn":"__CertificateArn__"},"signingParameters":{"key0":"__Value__"},"tags":{"key0":"__Value__"}}

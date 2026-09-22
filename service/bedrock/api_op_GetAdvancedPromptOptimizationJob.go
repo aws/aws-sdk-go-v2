@@ -4,15 +4,14 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Retrieves the details and status of an advanced prompt optimization job.
+// Gets information about an advanced prompt optimization job.
 func (c *Client) GetAdvancedPromptOptimizationJob(ctx context.Context, params *GetAdvancedPromptOptimizationJobInput, optFns ...func(*Options)) (*GetAdvancedPromptOptimizationJobOutput, error) {
 	if params == nil {
 		params = &GetAdvancedPromptOptimizationJobInput{}
@@ -31,7 +30,7 @@ func (c *Client) GetAdvancedPromptOptimizationJob(ctx context.Context, params *G
 // Get Advanced Prompt Optimization Job Request
 type GetAdvancedPromptOptimizationJobInput struct {
 
-	// ARN or ID of the advanced prompt optimization job.
+	// The ARN or ID of the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobIdentifier *string
@@ -39,54 +38,66 @@ type GetAdvancedPromptOptimizationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdvancedPromptOptimizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdvancedPromptOptimizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdvancedPromptOptimizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobIdentifier != nil {
+		s.WriteString(schemas.GetAdvancedPromptOptimizationJobRequest_jobIdentifier, *v.JobIdentifier)
+	}
+}
+
 // Get Advanced Prompt Optimization Job Response
 type GetAdvancedPromptOptimizationJobOutput struct {
 
-	// Creation time of the advanced prompt optimization job.
+	// The time at which the advanced prompt optimization job was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// Input data configuration for the advanced prompt optimization job.
+	// The input data configuration for the optimization job.
 	//
 	// This member is required.
 	InputConfig *types.AdvancedPromptOptimizationInputConfig
 
-	// ARN of the advanced prompt optimization job.
+	// The Amazon Resource Name (ARN) of the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobArn *string
 
-	// Name of the advanced prompt optimization job.
+	// The name of the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobName *string
 
-	// Status of the advanced prompt optimization job.
+	// The status of the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobStatus types.AdvancedPromptOptimizationJobStatus
 
-	// Model configurations for advanced prompt optimization.
+	// The model configurations used in the optimization job.
 	//
 	// This member is required.
 	ModelConfigurations []types.ModelConfiguration
 
-	// Output data configuration for the advanced prompt optimization job.
+	// The output data configuration for the optimization job.
 	//
 	// This member is required.
 	OutputConfig *types.AdvancedPromptOptimizationOutputConfig
 
-	// KMS key ARN used for encrypting output data.
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the output data.
 	EncryptionKeyArn *string
 
-	// Failure message if the advanced prompt optimization job failed.
+	// If the job failed, a message describing the reason for the failure.
 	FailureMessage *string
 
-	// Description of the advanced prompt optimization job.
+	// The description of the advanced prompt optimization job.
 	JobDescription *string
 
-	// Last modified time of the advanced prompt optimization job.
+	// The time at which the advanced prompt optimization job was last modified.
 	LastModifiedTime *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -95,77 +106,113 @@ type GetAdvancedPromptOptimizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdvancedPromptOptimizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdvancedPromptOptimizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdvancedPromptOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetAdvancedPromptOptimizationJobResponse_creationTime, *v.CreationTime)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.GetAdvancedPromptOptimizationJobResponse_encryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetAdvancedPromptOptimizationJobResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.InputConfig != nil {
+		s.WriteStruct(schemas.GetAdvancedPromptOptimizationJobResponse_inputConfig)
+		v.InputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetAdvancedPromptOptimizationJobResponse_jobArn, *v.JobArn)
+	}
+	if v.JobDescription != nil {
+		s.WriteString(schemas.GetAdvancedPromptOptimizationJobResponse_jobDescription, *v.JobDescription)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetAdvancedPromptOptimizationJobResponse_jobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.GetAdvancedPromptOptimizationJobResponse_jobStatus, string(v.JobStatus))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetAdvancedPromptOptimizationJobResponse_lastModifiedTime, *v.LastModifiedTime)
+	}
+	serializeModelConfigurations(s, schemas.GetAdvancedPromptOptimizationJobResponse_modelConfigurations, v.ModelConfigurations)
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.GetAdvancedPromptOptimizationJobResponse_outputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAdvancedPromptOptimizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAdvancedPromptOptimizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAdvancedPromptOptimizationJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetAdvancedPromptOptimizationJobResponse_creationTime, v.CreationTime)
+		case schemas.GetAdvancedPromptOptimizationJobResponse_encryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.GetAdvancedPromptOptimizationJobResponse_encryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.GetAdvancedPromptOptimizationJobResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetAdvancedPromptOptimizationJobResponse_failureMessage, v.FailureMessage)
+		case schemas.GetAdvancedPromptOptimizationJobResponse_inputConfig:
+			v.InputConfig = &types.AdvancedPromptOptimizationInputConfig{}
+			return v.InputConfig.Deserialize(d)
+		case schemas.GetAdvancedPromptOptimizationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetAdvancedPromptOptimizationJobResponse_jobArn, v.JobArn)
+		case schemas.GetAdvancedPromptOptimizationJobResponse_jobDescription:
+			v.JobDescription = new(string)
+			return d.ReadString(schemas.GetAdvancedPromptOptimizationJobResponse_jobDescription, v.JobDescription)
+		case schemas.GetAdvancedPromptOptimizationJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetAdvancedPromptOptimizationJobResponse_jobName, v.JobName)
+		case schemas.GetAdvancedPromptOptimizationJobResponse_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAdvancedPromptOptimizationJobResponse_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.AdvancedPromptOptimizationJobStatus(ev)
+			return nil
+		case schemas.GetAdvancedPromptOptimizationJobResponse_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetAdvancedPromptOptimizationJobResponse_lastModifiedTime, v.LastModifiedTime)
+		case schemas.GetAdvancedPromptOptimizationJobResponse_modelConfigurations:
+			return deserializeModelConfigurations(d, schemas.GetAdvancedPromptOptimizationJobResponse_modelConfigurations, &v.ModelConfigurations)
+		case schemas.GetAdvancedPromptOptimizationJobResponse_outputConfig:
+			v.OutputConfig = &types.AdvancedPromptOptimizationOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAdvancedPromptOptimizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdvancedPromptOptimizationJob, schemas.GetAdvancedPromptOptimizationJobRequest, schemas.GetAdvancedPromptOptimizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAdvancedPromptOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdvancedPromptOptimizationJob, schemas.GetAdvancedPromptOptimizationJobRequest, schemas.GetAdvancedPromptOptimizationJobResponse), output: &GetAdvancedPromptOptimizationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAdvancedPromptOptimizationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAdvancedPromptOptimizationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAdvancedPromptOptimizationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAdvancedPromptOptimizationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +227,8 @@ func (c *Client) addOperationGetAdvancedPromptOptimizationJobMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAdvancedPromptOptimizationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAdvancedPromptOptimizationJob",
-	}
 }

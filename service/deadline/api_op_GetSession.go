@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -51,6 +52,27 @@ type GetSessionInput struct {
 	SessionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.GetSessionRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetSessionRequest_jobId, *v.JobId)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.GetSessionRequest_queueId, *v.QueueId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionRequest_sessionId, *v.SessionId)
+	}
 }
 
 // Session lifecycle/status fields, ordered after IDs in session shapes.
@@ -110,65 +132,122 @@ type GetSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.GetSessionResponse_endedAt, *v.EndedAt)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetSessionResponse_fleetId, *v.FleetId)
+	}
+	if v.HostProperties != nil {
+		s.WriteStruct(schemas.GetSessionResponse_hostProperties)
+		v.HostProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LifecycleStatus != "" {
+		s.WriteString(schemas.GetSessionResponse_lifecycleStatus, string(v.LifecycleStatus))
+	}
+	if v.Log != nil {
+		s.WriteStruct(schemas.GetSessionResponse_log)
+		v.Log.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetSessionResponse_sessionId, *v.SessionId)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.GetSessionResponse_startedAt, *v.StartedAt)
+	}
+	if v.TargetLifecycleStatus != "" {
+		s.WriteString(schemas.GetSessionResponse_targetLifecycleStatus, string(v.TargetLifecycleStatus))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetSessionResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetSessionResponse_updatedBy, *v.UpdatedBy)
+	}
+	if v.WorkerId != nil {
+		s.WriteString(schemas.GetSessionResponse_workerId, *v.WorkerId)
+	}
+	if v.WorkerLog != nil {
+		s.WriteStruct(schemas.GetSessionResponse_workerLog)
+		v.WorkerLog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSessionResponse_endedAt, v.EndedAt)
+		case schemas.GetSessionResponse_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GetSessionResponse_fleetId, v.FleetId)
+		case schemas.GetSessionResponse_hostProperties:
+			v.HostProperties = &types.HostPropertiesResponse{}
+			return v.HostProperties.Deserialize(d)
+		case schemas.GetSessionResponse_lifecycleStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionResponse_lifecycleStatus, &ev); err != nil {
+				return err
+			}
+			v.LifecycleStatus = types.SessionLifecycleStatus(ev)
+			return nil
+		case schemas.GetSessionResponse_log:
+			v.Log = &types.LogConfiguration{}
+			return v.Log.Deserialize(d)
+		case schemas.GetSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetSessionResponse_sessionId, v.SessionId)
+		case schemas.GetSessionResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSessionResponse_startedAt, v.StartedAt)
+		case schemas.GetSessionResponse_targetLifecycleStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSessionResponse_targetLifecycleStatus, &ev); err != nil {
+				return err
+			}
+			v.TargetLifecycleStatus = types.SessionLifecycleTargetStatus(ev)
+			return nil
+		case schemas.GetSessionResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSessionResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetSessionResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetSessionResponse_updatedBy, v.UpdatedBy)
+		case schemas.GetSessionResponse_workerId:
+			v.WorkerId = new(string)
+			return d.ReadString(schemas.GetSessionResponse_workerId, v.WorkerId)
+		case schemas.GetSessionResponse_workerLog:
+			v.WorkerLog = &types.LogConfiguration{}
+			return v.WorkerLog.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSession, schemas.GetSessionRequest, schemas.GetSessionResponse), output: &GetSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -178,12 +257,6 @@ func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpGetSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,12 +269,6 @@ func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -235,12 +302,4 @@ func (m *endpointPrefix_opGetSessionMiddleware) HandleFinalize(ctx context.Conte
 }
 func addEndpointPrefix_opGetSessionMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetSessionMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSession",
-	}
 }

@@ -5,10 +5,10 @@ package workmail
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new mobile device access rule for the specified WorkMail organization.
@@ -79,6 +79,38 @@ type CreateMobileDeviceAccessRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMobileDeviceAccessRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMobileDeviceAccessRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMobileDeviceAccessRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMobileDeviceAccessRuleRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMobileDeviceAccessRuleRequest_Description, *v.Description)
+	}
+	serializeDeviceModelList(s, schemas.CreateMobileDeviceAccessRuleRequest_DeviceModels, v.DeviceModels)
+	serializeDeviceOperatingSystemList(s, schemas.CreateMobileDeviceAccessRuleRequest_DeviceOperatingSystems, v.DeviceOperatingSystems)
+	serializeDeviceTypeList(s, schemas.CreateMobileDeviceAccessRuleRequest_DeviceTypes, v.DeviceTypes)
+	serializeDeviceUserAgentList(s, schemas.CreateMobileDeviceAccessRuleRequest_DeviceUserAgents, v.DeviceUserAgents)
+	if v.Effect != "" {
+		s.WriteString(schemas.CreateMobileDeviceAccessRuleRequest_Effect, string(v.Effect))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMobileDeviceAccessRuleRequest_Name, *v.Name)
+	}
+	serializeDeviceModelList(s, schemas.CreateMobileDeviceAccessRuleRequest_NotDeviceModels, v.NotDeviceModels)
+	serializeDeviceOperatingSystemList(s, schemas.CreateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems, v.NotDeviceOperatingSystems)
+	serializeDeviceTypeList(s, schemas.CreateMobileDeviceAccessRuleRequest_NotDeviceTypes, v.NotDeviceTypes)
+	serializeDeviceUserAgentList(s, schemas.CreateMobileDeviceAccessRuleRequest_NotDeviceUserAgents, v.NotDeviceUserAgents)
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.CreateMobileDeviceAccessRuleRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type CreateMobileDeviceAccessRuleOutput struct {
 
 	// The identifier for the newly created mobile device access rule.
@@ -90,65 +122,42 @@ type CreateMobileDeviceAccessRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMobileDeviceAccessRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMobileDeviceAccessRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMobileDeviceAccessRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MobileDeviceAccessRuleId != nil {
+		s.WriteString(schemas.CreateMobileDeviceAccessRuleResponse_MobileDeviceAccessRuleId, *v.MobileDeviceAccessRuleId)
+	}
+}
+func (v *CreateMobileDeviceAccessRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMobileDeviceAccessRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMobileDeviceAccessRuleResponse_MobileDeviceAccessRuleId:
+			v.MobileDeviceAccessRuleId = new(string)
+			return d.ReadString(schemas.CreateMobileDeviceAccessRuleResponse_MobileDeviceAccessRuleId, v.MobileDeviceAccessRuleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMobileDeviceAccessRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMobileDeviceAccessRule, schemas.CreateMobileDeviceAccessRuleRequest, schemas.CreateMobileDeviceAccessRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMobileDeviceAccessRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMobileDeviceAccessRule, schemas.CreateMobileDeviceAccessRuleRequest, schemas.CreateMobileDeviceAccessRuleResponse), output: &CreateMobileDeviceAccessRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMobileDeviceAccessRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMobileDeviceAccessRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -158,12 +167,6 @@ func (c *Client) addOperationCreateMobileDeviceAccessRuleMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpCreateMobileDeviceAccessRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMobileDeviceAccessRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,12 +179,6 @@ func (c *Client) addOperationCreateMobileDeviceAccessRuleMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -221,12 +218,4 @@ func (m *idempotencyToken_initializeOpCreateMobileDeviceAccessRule) HandleInitia
 }
 func addIdempotencyToken_opCreateMobileDeviceAccessRuleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateMobileDeviceAccessRule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateMobileDeviceAccessRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMobileDeviceAccessRule",
-	}
 }

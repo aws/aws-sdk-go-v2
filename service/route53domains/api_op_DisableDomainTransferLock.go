@@ -4,10 +4,9 @@ package route53domains
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation removes the transfer lock on the domain (specifically the
@@ -42,6 +41,18 @@ type DisableDomainTransferLockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDomainTransferLockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDomainTransferLockRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDomainTransferLockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DisableDomainTransferLockRequest_DomainName, *v.DomainName)
+	}
+}
+
 // The DisableDomainTransferLock response includes the following element.
 type DisableDomainTransferLockOutput struct {
 
@@ -57,77 +68,48 @@ type DisableDomainTransferLockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableDomainTransferLockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisableDomainTransferLockResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableDomainTransferLockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.DisableDomainTransferLockResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *DisableDomainTransferLockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisableDomainTransferLockResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisableDomainTransferLockResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.DisableDomainTransferLockResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableDomainTransferLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDomainTransferLock, schemas.DisableDomainTransferLockRequest, schemas.DisableDomainTransferLockResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisableDomainTransferLock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableDomainTransferLock, schemas.DisableDomainTransferLockRequest, schemas.DisableDomainTransferLockResponse), output: &DisableDomainTransferLockOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisableDomainTransferLock{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableDomainTransferLock"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisableDomainTransferLockValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableDomainTransferLock(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +124,8 @@ func (c *Client) addOperationDisableDomainTransferLockMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisableDomainTransferLock(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisableDomainTransferLock",
-	}
 }

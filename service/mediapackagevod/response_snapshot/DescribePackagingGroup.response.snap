@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"approximateAssetCount":1,"arn":"__Arn__","authorization":{"cdnIdentifierSecret":"__CdnIdentifierSecret__","secretsRoleArn":"__SecretsRoleArn__"},"createdAt":"__CreatedAt__","domainName":"__DomainName__","egressAccessLogs":{"logGroupName":"__LogGroupName__"},"id":"__Id__","tags":{"key0":"__Value__"}}

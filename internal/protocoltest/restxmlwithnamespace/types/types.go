@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -10,6 +12,28 @@ type NestedWithNamespace struct {
 	AttrField *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NestedWithNamespace) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NestedWithNamespace)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NestedWithNamespace) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttrField != nil {
+		s.WriteString(schemas.NestedWithNamespace_attrField, *v.AttrField)
+	}
+}
+func (v *NestedWithNamespace) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NestedWithNamespace, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NestedWithNamespace_attrField:
+			v.AttrField = new(string)
+			return d.ReadString(schemas.NestedWithNamespace_attrField, v.AttrField)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

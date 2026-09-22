@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.PutConnector
+
+{"ConnectorConfiguration":{"azure":{"clientIdentifier":"__ClientIdentifier__","tenantIdentifier":"__TenantIdentifier__"}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

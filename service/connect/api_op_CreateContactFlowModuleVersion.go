@@ -4,10 +4,9 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an immutable snapshot of a contact flow module, preserving its content
@@ -52,6 +51,27 @@ type CreateContactFlowModuleVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactFlowModuleVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContactFlowModuleVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContactFlowModuleVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowModuleId != nil {
+		s.WriteString(schemas.CreateContactFlowModuleVersionRequest_ContactFlowModuleId, *v.ContactFlowModuleId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateContactFlowModuleVersionRequest_Description, *v.Description)
+	}
+	if v.FlowModuleContentSha256 != nil {
+		s.WriteString(schemas.CreateContactFlowModuleVersionRequest_FlowModuleContentSha256, *v.FlowModuleContentSha256)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateContactFlowModuleVersionRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type CreateContactFlowModuleVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the flow module.
@@ -66,77 +86,54 @@ type CreateContactFlowModuleVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactFlowModuleVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContactFlowModuleVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContactFlowModuleVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowModuleArn != nil {
+		s.WriteString(schemas.CreateContactFlowModuleVersionResponse_ContactFlowModuleArn, *v.ContactFlowModuleArn)
+	}
+	if v.Version != nil {
+		s.WriteInt64(schemas.CreateContactFlowModuleVersionResponse_Version, *v.Version)
+	}
+}
+func (v *CreateContactFlowModuleVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContactFlowModuleVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContactFlowModuleVersionResponse_ContactFlowModuleArn:
+			v.ContactFlowModuleArn = new(string)
+			return d.ReadString(schemas.CreateContactFlowModuleVersionResponse_ContactFlowModuleArn, v.ContactFlowModuleArn)
+		case schemas.CreateContactFlowModuleVersionResponse_Version:
+			v.Version = new(int64)
+			return d.ReadInt64(schemas.CreateContactFlowModuleVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContactFlowModuleVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactFlowModuleVersion, schemas.CreateContactFlowModuleVersionRequest, schemas.CreateContactFlowModuleVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContactFlowModuleVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactFlowModuleVersion, schemas.CreateContactFlowModuleVersionRequest, schemas.CreateContactFlowModuleVersionResponse), output: &CreateContactFlowModuleVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateContactFlowModuleVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContactFlowModuleVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateContactFlowModuleVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContactFlowModuleVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +148,8 @@ func (c *Client) addOperationCreateContactFlowModuleVersionMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateContactFlowModuleVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateContactFlowModuleVersion",
-	}
 }

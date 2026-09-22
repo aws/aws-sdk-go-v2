@@ -1,0 +1,3 @@
+DELETE /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/intents/__IntentId__/slots/__SlotId__
+
+

@@ -4,15 +4,17 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Retrieves the live connectivity status per device.
+// Retrieves the live connectivity status per device. If a device has never
+// connected to IoT Core or was disconnected for more than 1 hour before fleet
+// indexing's thingConnectivityIndexingMode was enabled, the response will have
+// the connected field set to false with no additional session details.
 func (c *Client) GetThingConnectivityData(ctx context.Context, params *GetThingConnectivityDataInput, optFns ...func(*Options)) (*GetThingConnectivityDataOutput, error) {
 	if params == nil {
 		params = &GetThingConnectivityDataInput{}
@@ -35,22 +37,77 @@ type GetThingConnectivityDataInput struct {
 	// This member is required.
 	ThingName *string
 
+	// Specifies if socket information (sourcePort, targetPort, sourceIp, targetIp,
+	// vpcEndpointId) should be included in the GetThingConnectivityData response. Set
+	// to true to include socket information. Set to false to omit socket information.
+	// By default, this is set to false .
+	IncludeSocketInformation *bool
+
 	noSmithyDocumentSerde
+}
+
+func (v *GetThingConnectivityDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThingConnectivityDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThingConnectivityDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeSocketInformation != nil {
+		s.WriteBool(schemas.GetThingConnectivityDataRequest_includeSocketInformation, *v.IncludeSocketInformation)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.GetThingConnectivityDataRequest_thingName, *v.ThingName)
+	}
 }
 
 type GetThingConnectivityDataOutput struct {
 
+	// Indicates whether the client is using a clean session. Returns true for clean
+	// sessions.
+	CleanSession *bool
+
+	// The unique identifier of the MQTT client.
+	ClientId *string
+
 	// A Boolean that indicates the connectivity status.
 	Connected *bool
 
-	// The reason why the client is disconnecting.
+	// The reason that the client is disconnected.
 	DisconnectReason types.DisconnectReasonValue
+
+	// The keep-alive interval in seconds that the client specified when establishing
+	// the connection.
+	KeepAliveDuration *int32
+
+	// The session expiry interval in seconds for the MQTT client connection. This
+	// value indicates how long the session will remain active after the client
+	// disconnects.
+	SessionExpiry *int64
+
+	// The IP address of the client that initiated the connection.
+	SourceIp *string
+
+	// The client's source port.
+	SourcePort *int32
+
+	// The IP address of the Amazon Web Services IoT Core endpoint that the client
+	// connected to.
+	TargetIp *string
+
+	// The port number of the Amazon Web Services IoT Core endpoint that the client
+	// connected to.
+	TargetPort *int32
 
 	// The name of your IoT thing.
 	ThingName *string
 
-	// The timestamp of when the event occurred.
+	// The timestamp of when the device connected or disconnected.
 	Timestamp *time.Time
+
+	// The ID of the VPC endpoint. Present for clients connected to Amazon Web
+	// Services IoT Core via a VPC endpoint.
+	VpcEndpointId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,77 +115,124 @@ type GetThingConnectivityDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetThingConnectivityDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThingConnectivityDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThingConnectivityDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CleanSession != nil {
+		s.WriteBool(schemas.GetThingConnectivityDataResponse_cleanSession, *v.CleanSession)
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.GetThingConnectivityDataResponse_clientId, *v.ClientId)
+	}
+	if v.Connected != nil {
+		s.WriteBool(schemas.GetThingConnectivityDataResponse_connected, *v.Connected)
+	}
+	if v.DisconnectReason != "" {
+		s.WriteString(schemas.GetThingConnectivityDataResponse_disconnectReason, string(v.DisconnectReason))
+	}
+	if v.KeepAliveDuration != nil {
+		s.WriteInt32(schemas.GetThingConnectivityDataResponse_keepAliveDuration, *v.KeepAliveDuration)
+	}
+	if v.SessionExpiry != nil {
+		s.WriteInt64(schemas.GetThingConnectivityDataResponse_sessionExpiry, *v.SessionExpiry)
+	}
+	if v.SourceIp != nil {
+		s.WriteString(schemas.GetThingConnectivityDataResponse_sourceIp, *v.SourceIp)
+	}
+	if v.SourcePort != nil {
+		s.WriteInt32(schemas.GetThingConnectivityDataResponse_sourcePort, *v.SourcePort)
+	}
+	if v.TargetIp != nil {
+		s.WriteString(schemas.GetThingConnectivityDataResponse_targetIp, *v.TargetIp)
+	}
+	if v.TargetPort != nil {
+		s.WriteInt32(schemas.GetThingConnectivityDataResponse_targetPort, *v.TargetPort)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.GetThingConnectivityDataResponse_thingName, *v.ThingName)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.GetThingConnectivityDataResponse_timestamp, *v.Timestamp)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.GetThingConnectivityDataResponse_vpcEndpointId, *v.VpcEndpointId)
+	}
+}
+func (v *GetThingConnectivityDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetThingConnectivityDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetThingConnectivityDataResponse_cleanSession:
+			v.CleanSession = new(bool)
+			return d.ReadBool(schemas.GetThingConnectivityDataResponse_cleanSession, v.CleanSession)
+		case schemas.GetThingConnectivityDataResponse_clientId:
+			v.ClientId = new(string)
+			return d.ReadString(schemas.GetThingConnectivityDataResponse_clientId, v.ClientId)
+		case schemas.GetThingConnectivityDataResponse_connected:
+			v.Connected = new(bool)
+			return d.ReadBool(schemas.GetThingConnectivityDataResponse_connected, v.Connected)
+		case schemas.GetThingConnectivityDataResponse_disconnectReason:
+			var ev string
+			if err := d.ReadString(schemas.GetThingConnectivityDataResponse_disconnectReason, &ev); err != nil {
+				return err
+			}
+			v.DisconnectReason = types.DisconnectReasonValue(ev)
+			return nil
+		case schemas.GetThingConnectivityDataResponse_keepAliveDuration:
+			v.KeepAliveDuration = new(int32)
+			return d.ReadInt32(schemas.GetThingConnectivityDataResponse_keepAliveDuration, v.KeepAliveDuration)
+		case schemas.GetThingConnectivityDataResponse_sessionExpiry:
+			v.SessionExpiry = new(int64)
+			return d.ReadInt64(schemas.GetThingConnectivityDataResponse_sessionExpiry, v.SessionExpiry)
+		case schemas.GetThingConnectivityDataResponse_sourceIp:
+			v.SourceIp = new(string)
+			return d.ReadString(schemas.GetThingConnectivityDataResponse_sourceIp, v.SourceIp)
+		case schemas.GetThingConnectivityDataResponse_sourcePort:
+			v.SourcePort = new(int32)
+			return d.ReadInt32(schemas.GetThingConnectivityDataResponse_sourcePort, v.SourcePort)
+		case schemas.GetThingConnectivityDataResponse_targetIp:
+			v.TargetIp = new(string)
+			return d.ReadString(schemas.GetThingConnectivityDataResponse_targetIp, v.TargetIp)
+		case schemas.GetThingConnectivityDataResponse_targetPort:
+			v.TargetPort = new(int32)
+			return d.ReadInt32(schemas.GetThingConnectivityDataResponse_targetPort, v.TargetPort)
+		case schemas.GetThingConnectivityDataResponse_thingName:
+			v.ThingName = new(string)
+			return d.ReadString(schemas.GetThingConnectivityDataResponse_thingName, v.ThingName)
+		case schemas.GetThingConnectivityDataResponse_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.GetThingConnectivityDataResponse_timestamp, v.Timestamp)
+		case schemas.GetThingConnectivityDataResponse_vpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.GetThingConnectivityDataResponse_vpcEndpointId, v.VpcEndpointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetThingConnectivityDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThingConnectivityData, schemas.GetThingConnectivityDataRequest, schemas.GetThingConnectivityDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetThingConnectivityData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThingConnectivityData, schemas.GetThingConnectivityDataRequest, schemas.GetThingConnectivityDataResponse), output: &GetThingConnectivityDataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetThingConnectivityData{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetThingConnectivityData"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetThingConnectivityDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetThingConnectivityData(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +247,8 @@ func (c *Client) addOperationGetThingConnectivityDataMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetThingConnectivityData(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetThingConnectivityData",
-	}
 }

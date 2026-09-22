@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the hours of operations with the effective override applied.
@@ -52,6 +51,27 @@ type GetEffectiveHoursOfOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEffectiveHoursOfOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEffectiveHoursOfOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEffectiveHoursOfOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromDate != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsRequest_FromDate, *v.FromDate)
+	}
+	if v.HoursOfOperationId != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsRequest_HoursOfOperationId, *v.HoursOfOperationId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ToDate != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsRequest_ToDate, *v.ToDate)
+	}
+}
+
 type GetEffectiveHoursOfOperationsOutput struct {
 
 	// Information about the effective hours of operations.
@@ -63,7 +83,7 @@ type GetEffectiveHoursOfOperationsOutput struct {
 	// For more information about how override types are applied, see [Build your list of overrides] in the
 	// Administrator Guide.
 	//
-	// [Build your list of overrides]: https://docs.aws.amazon.com/https:/docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
+	// [Build your list of overrides]: https://docs.aws.amazon.com/connect/latest/adminguide/hours-of-operation-overrides.html
 	EffectiveOverrideHoursList []types.EffectiveOverrideHours
 
 	// The time zone for the hours of operation.
@@ -75,77 +95,54 @@ type GetEffectiveHoursOfOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEffectiveHoursOfOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEffectiveHoursOfOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEffectiveHoursOfOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEffectiveHoursOfOperationList(s, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveHoursOfOperationList, v.EffectiveHoursOfOperationList)
+	serializeEffectiveOverrideHoursList(s, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveOverrideHoursList, v.EffectiveOverrideHoursList)
+	if v.TimeZone != nil {
+		s.WriteString(schemas.GetEffectiveHoursOfOperationsResponse_TimeZone, *v.TimeZone)
+	}
+}
+func (v *GetEffectiveHoursOfOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEffectiveHoursOfOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEffectiveHoursOfOperationsResponse_EffectiveHoursOfOperationList:
+			return deserializeEffectiveHoursOfOperationList(d, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveHoursOfOperationList, &v.EffectiveHoursOfOperationList)
+		case schemas.GetEffectiveHoursOfOperationsResponse_EffectiveOverrideHoursList:
+			return deserializeEffectiveOverrideHoursList(d, schemas.GetEffectiveHoursOfOperationsResponse_EffectiveOverrideHoursList, &v.EffectiveOverrideHoursList)
+		case schemas.GetEffectiveHoursOfOperationsResponse_TimeZone:
+			v.TimeZone = new(string)
+			return d.ReadString(schemas.GetEffectiveHoursOfOperationsResponse_TimeZone, v.TimeZone)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEffectiveHoursOfOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEffectiveHoursOfOperations, schemas.GetEffectiveHoursOfOperationsRequest, schemas.GetEffectiveHoursOfOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEffectiveHoursOfOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEffectiveHoursOfOperations, schemas.GetEffectiveHoursOfOperationsRequest, schemas.GetEffectiveHoursOfOperationsResponse), output: &GetEffectiveHoursOfOperationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEffectiveHoursOfOperations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEffectiveHoursOfOperations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEffectiveHoursOfOperationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEffectiveHoursOfOperations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +157,8 @@ func (c *Client) addOperationGetEffectiveHoursOfOperationsMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEffectiveHoursOfOperations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEffectiveHoursOfOperations",
-	}
 }

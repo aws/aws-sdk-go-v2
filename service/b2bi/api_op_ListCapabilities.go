@@ -5,10 +5,10 @@ package b2bi
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the capabilities associated with your Amazon Web Services account for
@@ -42,6 +42,21 @@ type ListCapabilitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapabilitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapabilitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapabilitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCapabilitiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapabilitiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListCapabilitiesOutput struct {
 
 	// Returns one or more capabilities associated with this partnership.
@@ -60,74 +75,48 @@ type ListCapabilitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCapabilitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCapabilitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCapabilitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapabilityList(s, schemas.ListCapabilitiesResponse_capabilities, v.Capabilities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCapabilitiesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCapabilitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCapabilitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCapabilitiesResponse_capabilities:
+			return deserializeCapabilityList(d, schemas.ListCapabilitiesResponse_capabilities, &v.Capabilities)
+		case schemas.ListCapabilitiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCapabilitiesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCapabilitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapabilities, schemas.ListCapabilitiesRequest, schemas.ListCapabilitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListCapabilities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCapabilities, schemas.ListCapabilitiesRequest, schemas.ListCapabilitiesResponse), output: &ListCapabilitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListCapabilities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCapabilities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCapabilities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +129,6 @@ func (c *Client) addOperationListCapabilitiesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,11 +229,3 @@ type ListCapabilitiesAPIClient interface {
 }
 
 var _ ListCapabilitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCapabilities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCapabilities",
-	}
-}

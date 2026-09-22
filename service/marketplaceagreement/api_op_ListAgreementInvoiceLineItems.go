@@ -5,10 +5,10 @@ package marketplaceagreement
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -70,6 +70,44 @@ type ListAgreementInvoiceLineItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgreementInvoiceLineItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgreementInvoiceLineItemsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgreementInvoiceLineItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterIssuedTime != nil {
+		s.WriteTime(schemas.ListAgreementInvoiceLineItemsInput_afterIssuedTime, *v.AfterIssuedTime)
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.ListAgreementInvoiceLineItemsInput_agreementId, *v.AgreementId)
+	}
+	if v.BeforeIssuedTime != nil {
+		s.WriteTime(schemas.ListAgreementInvoiceLineItemsInput_beforeIssuedTime, *v.BeforeIssuedTime)
+	}
+	if v.GroupBy != "" {
+		s.WriteString(schemas.ListAgreementInvoiceLineItemsInput_groupBy, string(v.GroupBy))
+	}
+	if v.InvoiceBillingPeriod != nil {
+		s.WriteStruct(schemas.ListAgreementInvoiceLineItemsInput_invoiceBillingPeriod)
+		v.InvoiceBillingPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvoiceId != nil {
+		s.WriteString(schemas.ListAgreementInvoiceLineItemsInput_invoiceId, *v.InvoiceId)
+	}
+	if v.InvoiceType != "" {
+		s.WriteString(schemas.ListAgreementInvoiceLineItemsInput_invoiceType, string(v.InvoiceType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgreementInvoiceLineItemsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgreementInvoiceLineItemsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListAgreementInvoiceLineItemsOutput struct {
 
 	// A list of grouped billing data objects.
@@ -84,77 +122,51 @@ type ListAgreementInvoiceLineItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgreementInvoiceLineItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgreementInvoiceLineItemsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgreementInvoiceLineItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgreementInvoiceLineItemGroupSummaries(s, schemas.ListAgreementInvoiceLineItemsOutput_agreementInvoiceLineItemGroupSummaries, v.AgreementInvoiceLineItemGroupSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgreementInvoiceLineItemsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAgreementInvoiceLineItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgreementInvoiceLineItemsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgreementInvoiceLineItemsOutput_agreementInvoiceLineItemGroupSummaries:
+			return deserializeAgreementInvoiceLineItemGroupSummaries(d, schemas.ListAgreementInvoiceLineItemsOutput_agreementInvoiceLineItemGroupSummaries, &v.AgreementInvoiceLineItemGroupSummaries)
+		case schemas.ListAgreementInvoiceLineItemsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgreementInvoiceLineItemsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgreementInvoiceLineItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgreementInvoiceLineItems, schemas.ListAgreementInvoiceLineItemsInput, schemas.ListAgreementInvoiceLineItemsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAgreementInvoiceLineItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgreementInvoiceLineItems, schemas.ListAgreementInvoiceLineItemsInput, schemas.ListAgreementInvoiceLineItemsOutput), output: &ListAgreementInvoiceLineItemsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAgreementInvoiceLineItems{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAgreementInvoiceLineItems"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAgreementInvoiceLineItemsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAgreementInvoiceLineItems(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,12 +179,6 @@ func (c *Client) addOperationListAgreementInvoiceLineItemsMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -276,11 +282,3 @@ type ListAgreementInvoiceLineItemsAPIClient interface {
 }
 
 var _ ListAgreementInvoiceLineItemsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAgreementInvoiceLineItems(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAgreementInvoiceLineItems",
-	}
-}

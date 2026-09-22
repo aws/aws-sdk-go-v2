@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Carrier":"__Carrier__","City":"__City__","CleansedPhoneNumberE164":"__CleansedPhoneNumberE164__","CleansedPhoneNumberNational":"__CleansedPhoneNumberNational__","Country":"__Country__","CountryCodeIso2":"__CountryCodeIso2__","CountryCodeNumeric":"__CountryCodeNumeric__","County":"__County__","OriginalCountryCodeIso2":"__OriginalCountryCodeIso2__","OriginalPhoneNumber":"__OriginalPhoneNumber__","PhoneType":"__PhoneType__","PhoneTypeCode":1,"Timezone":"__Timezone__","ZipCode":"__ZipCode__"}

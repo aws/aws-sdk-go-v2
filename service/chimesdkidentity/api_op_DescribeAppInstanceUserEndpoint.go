@@ -4,11 +4,10 @@ package chimesdkidentity
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the full details of an AppInstanceUserEndpoint .
@@ -42,6 +41,21 @@ type DescribeAppInstanceUserEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppInstanceUserEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppInstanceUserEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppInstanceUserEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.DescribeAppInstanceUserEndpointRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.DescribeAppInstanceUserEndpointRequest_EndpointId, *v.EndpointId)
+	}
+}
+
 type DescribeAppInstanceUserEndpointOutput struct {
 
 	// The full details of an AppInstanceUserEndpoint : the AppInstanceUserArn , ID,
@@ -55,77 +69,50 @@ type DescribeAppInstanceUserEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAppInstanceUserEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAppInstanceUserEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAppInstanceUserEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserEndpoint != nil {
+		s.WriteStruct(schemas.DescribeAppInstanceUserEndpointResponse_AppInstanceUserEndpoint)
+		v.AppInstanceUserEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAppInstanceUserEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAppInstanceUserEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAppInstanceUserEndpointResponse_AppInstanceUserEndpoint:
+			v.AppInstanceUserEndpoint = &types.AppInstanceUserEndpoint{}
+			return v.AppInstanceUserEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAppInstanceUserEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstanceUserEndpoint, schemas.DescribeAppInstanceUserEndpointRequest, schemas.DescribeAppInstanceUserEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAppInstanceUserEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAppInstanceUserEndpoint, schemas.DescribeAppInstanceUserEndpointRequest, schemas.DescribeAppInstanceUserEndpointResponse), output: &DescribeAppInstanceUserEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAppInstanceUserEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAppInstanceUserEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAppInstanceUserEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAppInstanceUserEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +127,8 @@ func (c *Client) addOperationDescribeAppInstanceUserEndpointMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAppInstanceUserEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAppInstanceUserEndpoint",
-	}
 }

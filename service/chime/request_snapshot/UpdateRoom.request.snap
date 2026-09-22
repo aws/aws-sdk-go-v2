@@ -1,0 +1,5 @@
+POST /accounts/__AccountId__/rooms/__RoomId__
+
+Content-Type: application/json
+
+{"Name":"__Name__"}

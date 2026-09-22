@@ -1,0 +1,3 @@
+GET /profileSummaries?MaxResults=1&NextToken=__NextToken__&ProfileNamePrefix=__ProfileNamePrefix__&ProfileOwnerType=SELF
+
+

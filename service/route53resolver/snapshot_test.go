@@ -110,6 +110,42 @@ func TestCheckSnapshot_AssociateResolverRule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchCreateFirewallRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateFirewallRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchCreateFirewallRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchDeleteFirewallRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteFirewallRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchDeleteFirewallRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchUpdateFirewallRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateFirewallRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateFirewallRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateFirewallDomainList(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFirewallDomainList(context.Background(), nil, func(o *Options) {
@@ -590,6 +626,18 @@ func TestCheckSnapshot_ListFirewallRules(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListFirewallRuleTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFirewallRuleTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFirewallRuleTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListOutpostResolvers(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListOutpostResolvers(context.Background(), nil, func(o *Options) {
@@ -918,6 +966,42 @@ func TestUpdateSnapshot_AssociateResolverRule(t *testing.T) {
 	_, err := svc.AssociateResolverRule(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateResolverRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchCreateFirewallRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchCreateFirewallRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchCreateFirewallRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchDeleteFirewallRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchDeleteFirewallRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchDeleteFirewallRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchUpdateFirewallRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateFirewallRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateFirewallRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1398,6 +1482,18 @@ func TestUpdateSnapshot_ListFirewallRules(t *testing.T) {
 	_, err := svc.ListFirewallRules(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListFirewallRules")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFirewallRuleTypes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFirewallRuleTypes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFirewallRuleTypes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

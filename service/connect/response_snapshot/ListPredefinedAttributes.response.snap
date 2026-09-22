@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","PredefinedAttributeSummaryList":[{"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__"},{"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__"}]}

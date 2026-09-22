@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates the specified users with the specified stacks. Users in a user pool
@@ -39,6 +38,16 @@ type BatchAssociateUserStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateUserStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateUserStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateUserStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserStackAssociationList(s, schemas.BatchAssociateUserStackRequest_UserStackAssociations, v.UserStackAssociations)
+}
+
 type BatchAssociateUserStackOutput struct {
 
 	// The list of UserStackAssociationError objects.
@@ -50,77 +59,48 @@ type BatchAssociateUserStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateUserStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateUserStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateUserStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUserStackAssociationErrorList(s, schemas.BatchAssociateUserStackResult_errors, v.Errors)
+}
+func (v *BatchAssociateUserStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateUserStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateUserStackResult_errors:
+			return deserializeUserStackAssociationErrorList(d, schemas.BatchAssociateUserStackResult_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateUserStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateUserStack, schemas.BatchAssociateUserStackRequest, schemas.BatchAssociateUserStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchAssociateUserStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateUserStack, schemas.BatchAssociateUserStackRequest, schemas.BatchAssociateUserStackResult), output: &BatchAssociateUserStackOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchAssociateUserStack{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAssociateUserStack"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchAssociateUserStackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateUserStack(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +115,8 @@ func (c *Client) addOperationBatchAssociateUserStackMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchAssociateUserStack(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchAssociateUserStack",
-	}
 }

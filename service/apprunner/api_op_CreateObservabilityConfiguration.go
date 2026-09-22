@@ -4,11 +4,10 @@ package apprunner
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create an App Runner observability configuration resource. App Runner requires
@@ -71,6 +70,24 @@ type CreateObservabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateObservabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateObservabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateObservabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfigurationName != nil {
+		s.WriteString(schemas.CreateObservabilityConfigurationRequest_ObservabilityConfigurationName, *v.ObservabilityConfigurationName)
+	}
+	serializeTagList(s, schemas.CreateObservabilityConfigurationRequest_Tags, v.Tags)
+	if v.TraceConfiguration != nil {
+		s.WriteStruct(schemas.CreateObservabilityConfigurationRequest_TraceConfiguration)
+		v.TraceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateObservabilityConfigurationOutput struct {
 
 	// A description of the App Runner observability configuration that's created by
@@ -85,77 +102,50 @@ type CreateObservabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateObservabilityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateObservabilityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateObservabilityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfiguration != nil {
+		s.WriteStruct(schemas.CreateObservabilityConfigurationResponse_ObservabilityConfiguration)
+		v.ObservabilityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateObservabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateObservabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateObservabilityConfigurationResponse_ObservabilityConfiguration:
+			v.ObservabilityConfiguration = &types.ObservabilityConfiguration{}
+			return v.ObservabilityConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateObservabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateObservabilityConfiguration, schemas.CreateObservabilityConfigurationRequest, schemas.CreateObservabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateObservabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateObservabilityConfiguration, schemas.CreateObservabilityConfigurationRequest, schemas.CreateObservabilityConfigurationResponse), output: &CreateObservabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateObservabilityConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateObservabilityConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateObservabilityConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateObservabilityConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +160,8 @@ func (c *Client) addOperationCreateObservabilityConfigurationMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateObservabilityConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateObservabilityConfiguration",
-	}
 }

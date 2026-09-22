@@ -5,10 +5,10 @@ package costoptimizationhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of recommendations.
@@ -48,6 +48,34 @@ type ListRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListRecommendationsRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IncludeAllRecommendations != false {
+		s.WriteBool(schemas.ListRecommendationsRequest_includeAllRecommendations, v.IncludeAllRecommendations)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrderBy != nil {
+		s.WriteStruct(schemas.ListRecommendationsRequest_orderBy)
+		v.OrderBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListRecommendationsOutput struct {
 
 	// List of all savings recommendations.
@@ -62,74 +90,48 @@ type ListRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecommendationList(s, schemas.ListRecommendationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationsResponse_items:
+			return deserializeRecommendationList(d, schemas.ListRecommendationsResponse_items, &v.Items)
+		case schemas.ListRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendations, schemas.ListRecommendationsRequest, schemas.ListRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendations, schemas.ListRecommendationsRequest, schemas.ListRecommendationsResponse), output: &ListRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRecommendations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRecommendations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecommendations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +144,6 @@ func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +245,3 @@ type ListRecommendationsAPIClient interface {
 }
 
 var _ ListRecommendationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRecommendations",
-	}
-}

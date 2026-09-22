@@ -4,11 +4,10 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrass/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a group version.
@@ -46,6 +45,21 @@ type GetGroupVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetGroupVersionRequest_GroupId, *v.GroupId)
+	}
+	if v.GroupVersionId != nil {
+		s.WriteString(schemas.GetGroupVersionRequest_GroupVersionId, *v.GroupVersionId)
+	}
+}
+
 type GetGroupVersionOutput struct {
 
 	// The ARN of the group version.
@@ -69,77 +83,74 @@ type GetGroupVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetGroupVersionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetGroupVersionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.GetGroupVersionResponse_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetGroupVersionResponse_Id, *v.Id)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.GetGroupVersionResponse_Version, *v.Version)
+	}
+}
+func (v *GetGroupVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupVersionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetGroupVersionResponse_Arn, v.Arn)
+		case schemas.GetGroupVersionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetGroupVersionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetGroupVersionResponse_Definition:
+			v.Definition = &types.GroupVersion{}
+			return v.Definition.Deserialize(d)
+		case schemas.GetGroupVersionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetGroupVersionResponse_Id, v.Id)
+		case schemas.GetGroupVersionResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetGroupVersionResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupVersion, schemas.GetGroupVersionRequest, schemas.GetGroupVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetGroupVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupVersion, schemas.GetGroupVersionRequest, schemas.GetGroupVersionResponse), output: &GetGroupVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetGroupVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGroupVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetGroupVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGroupVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +165,8 @@ func (c *Client) addOperationGetGroupVersionMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetGroupVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetGroupVersion",
-	}
 }

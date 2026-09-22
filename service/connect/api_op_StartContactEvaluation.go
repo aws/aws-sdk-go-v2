@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an empty evaluation in the specified Connect Customer instance, using
@@ -16,9 +16,6 @@ import (
 // version used for the contact evaluation corresponds to the currently activated
 // version. If no version is activated for the evaluation form, the contact
 // evaluation cannot be started.
-//
-// Evaluations created through the public API do not contain answer values
-// suggested from automation.
 func (c *Client) StartContactEvaluation(ctx context.Context, params *StartContactEvaluationInput, optFns ...func(*Options)) (*StartContactEvaluationOutput, error) {
 	if params == nil {
 		params = &StartContactEvaluationInput{}
@@ -71,6 +68,33 @@ type StartContactEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEvaluationConfiguration != nil {
+		s.WriteStruct(schemas.StartContactEvaluationRequest_AutoEvaluationConfiguration)
+		v.AutoEvaluationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartContactEvaluationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartContactEvaluationRequest_ContactId, *v.ContactId)
+	}
+	if v.EvaluationFormId != nil {
+		s.WriteString(schemas.StartContactEvaluationRequest_EvaluationFormId, *v.EvaluationFormId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartContactEvaluationRequest_InstanceId, *v.InstanceId)
+	}
+	serializeTagMap(s, schemas.StartContactEvaluationRequest_Tags, v.Tags)
+}
+
 type StartContactEvaluationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the contact evaluation resource.
@@ -89,65 +113,48 @@ type StartContactEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationArn != nil {
+		s.WriteString(schemas.StartContactEvaluationResponse_EvaluationArn, *v.EvaluationArn)
+	}
+	if v.EvaluationId != nil {
+		s.WriteString(schemas.StartContactEvaluationResponse_EvaluationId, *v.EvaluationId)
+	}
+}
+func (v *StartContactEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContactEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContactEvaluationResponse_EvaluationArn:
+			v.EvaluationArn = new(string)
+			return d.ReadString(schemas.StartContactEvaluationResponse_EvaluationArn, v.EvaluationArn)
+		case schemas.StartContactEvaluationResponse_EvaluationId:
+			v.EvaluationId = new(string)
+			return d.ReadString(schemas.StartContactEvaluationResponse_EvaluationId, v.EvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContactEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactEvaluation, schemas.StartContactEvaluationRequest, schemas.StartContactEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartContactEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactEvaluation, schemas.StartContactEvaluationRequest, schemas.StartContactEvaluationResponse), output: &StartContactEvaluationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartContactEvaluation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartContactEvaluation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -157,12 +164,6 @@ func (c *Client) addOperationStartContactEvaluationMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpStartContactEvaluationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartContactEvaluation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +176,6 @@ func (c *Client) addOperationStartContactEvaluationMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -220,12 +215,4 @@ func (m *idempotencyToken_initializeOpStartContactEvaluation) HandleInitialize(c
 }
 func addIdempotencyToken_opStartContactEvaluationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartContactEvaluation{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartContactEvaluation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartContactEvaluation",
-	}
 }

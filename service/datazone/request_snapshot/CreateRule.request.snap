@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/rules
+
+Content-Type: application/json
+
+{"action":"CREATE_LISTING_CHANGE_SET","clientToken":"__ClientToken__","description":"__Description__","detail":{"metadataFormEnforcementDetail":{"requiredMetadataForms":[{"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"},{"typeIdentifier":"__TypeIdentifier__","typeRevision":"__TypeRevision__"}]}},"name":"__Name__","scope":{"assetType":{"selectionMode":"ALL","specificAssetTypes":["__Member__","__Member__"]},"dataProduct":true,"project":{"selectionMode":"ALL","specificProjects":["__Member__","__Member__"]}},"target":{"domainUnitTarget":{"domainUnitId":"__DomainUnitId__","includeChildDomainUnits":true}}}

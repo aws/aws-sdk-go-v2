@@ -390,6 +390,26 @@ func (m *validateOpCreateConfigurationPolicy) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateConnector struct {
+}
+
+func (*validateOpCreateConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateConnectorV2 struct {
 }
 
@@ -590,6 +610,26 @@ func (m *validateOpDeleteConfigurationPolicy) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteConnector struct {
+}
+
+func (*validateOpDeleteConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteConnectorV2 struct {
 }
 
@@ -750,6 +790,26 @@ func (m *validateOpDisableOrganizationAdminAccount) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableSecurityHubFeatureV2 struct {
+}
+
+func (*validateOpDisableSecurityHubFeatureV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableSecurityHubFeatureV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableSecurityHubFeatureV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableSecurityHubFeatureV2Input(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateMembers struct {
 }
 
@@ -805,6 +865,26 @@ func (m *validateOpEnableOrganizationAdminAccount) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpEnableOrganizationAdminAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableSecurityHubFeatureV2 struct {
+}
+
+func (*validateOpEnableSecurityHubFeatureV2) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableSecurityHubFeatureV2) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableSecurityHubFeatureV2Input)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableSecurityHubFeatureV2Input(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -905,6 +985,26 @@ func (m *validateOpGetConfigurationPolicy) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetConfigurationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConnector struct {
+}
+
+func (*validateOpGetConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1370,6 +1470,26 @@ func (m *validateOpUpdateConfigurationPolicy) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnector struct {
+}
+
+func (*validateOpUpdateConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateConnectorV2 struct {
 }
 
@@ -1586,6 +1706,10 @@ func addOpCreateConfigurationPolicyValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCreateConfigurationPolicy{}, middleware.After)
 }
 
+func addOpCreateConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConnector{}, middleware.After)
+}
+
 func addOpCreateConnectorV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConnectorV2{}, middleware.After)
 }
@@ -1626,6 +1750,10 @@ func addOpDeleteConfigurationPolicyValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDeleteConfigurationPolicy{}, middleware.After)
 }
 
+func addOpDeleteConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConnector{}, middleware.After)
+}
+
 func addOpDeleteConnectorV2ValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConnectorV2{}, middleware.After)
 }
@@ -1658,6 +1786,10 @@ func addOpDisableOrganizationAdminAccountValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDisableOrganizationAdminAccount{}, middleware.After)
 }
 
+func addOpDisableSecurityHubFeatureV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableSecurityHubFeatureV2{}, middleware.After)
+}
+
 func addOpDisassociateMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateMembers{}, middleware.After)
 }
@@ -1668,6 +1800,10 @@ func addOpEnableImportFindingsForProductValidationMiddleware(stack *middleware.S
 
 func addOpEnableOrganizationAdminAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableOrganizationAdminAccount{}, middleware.After)
+}
+
+func addOpEnableSecurityHubFeatureV2ValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableSecurityHubFeatureV2{}, middleware.After)
 }
 
 func addOpGenerateRecommendedPolicyV2ValidationMiddleware(stack *middleware.Stack) error {
@@ -1688,6 +1824,10 @@ func addOpGetConfigurationPolicyAssociationValidationMiddleware(stack *middlewar
 
 func addOpGetConfigurationPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConfigurationPolicy{}, middleware.After)
+}
+
+func addOpGetConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnector{}, middleware.After)
 }
 
 func addOpGetConnectorV2ValidationMiddleware(stack *middleware.Stack) error {
@@ -1780,6 +1920,10 @@ func addOpUpdateAutomationRuleV2ValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateConfigurationPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfigurationPolicy{}, middleware.After)
+}
+
+func addOpUpdateConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnector{}, middleware.After)
 }
 
 func addOpUpdateConnectorV2ValidationMiddleware(stack *middleware.Stack) error {
@@ -2046,6 +2190,68 @@ func validateAwsSecurityFindingIdentifierList(v []types.AwsSecurityFindingIdenti
 	}
 }
 
+func validateAzureProviderConfiguration(v *types.AzureProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureProviderConfiguration"}
+	if v.AWSConfigConnectorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AWSConfigConnectorArn"))
+	}
+	if v.ScopeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeConfiguration"))
+	} else if v.ScopeConfiguration != nil {
+		if err := validateAzureScopeConfiguration(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AzureRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AzureRegions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureScopeConfiguration(v *types.AzureScopeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureScopeConfiguration"}
+	if len(v.ScopeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAzureUpdateConfiguration(v *types.AzureUpdateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AzureUpdateConfiguration"}
+	if v.ScopeConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScopeConfiguration"))
+	} else if v.ScopeConfiguration != nil {
+		if err := validateAzureScopeConfiguration(v.ScopeConfiguration); err != nil {
+			invalidParams.AddNested("ScopeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AzureRegions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AzureRegions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBatchImportFindingsRequestFindingList(v []types.AwsSecurityFinding) error {
 	if v == nil {
 		return nil
@@ -2072,6 +2278,44 @@ func validateCompliance(v *types.Compliance) error {
 		if err := validateStatusReasonsList(v.StatusReasons); err != nil {
 			invalidParams.AddNested("StatusReasons", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCspmProviderConfiguration(v types.CspmProviderConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CspmProviderConfiguration"}
+	switch uv := v.(type) {
+	case *types.CspmProviderConfigurationMemberAzure:
+		if err := validateAzureProviderConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCspmProviderUpdateConfiguration(v types.CspmProviderUpdateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CspmProviderUpdateConfiguration"}
+	switch uv := v.(type) {
+	case *types.CspmProviderUpdateConfigurationMemberAzure:
+		if err := validateAzureUpdateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2311,9 +2555,33 @@ func validateProviderConfiguration(v types.ProviderConfiguration) error {
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ProviderConfiguration"}
 	switch uv := v.(type) {
+	case *types.ProviderConfigurationMemberAzure:
+		if err := validateAzureProviderConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ProviderConfigurationMemberServiceNow:
 		if err := validateServiceNowProviderConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[ServiceNow]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProviderUpdateConfiguration(v types.ProviderUpdateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProviderUpdateConfiguration"}
+	switch uv := v.(type) {
+	case *types.ProviderUpdateConfigurationMemberAzure:
+		if err := validateAzureUpdateConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[Azure]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -3110,6 +3378,28 @@ func validateOpCreateConfigurationPolicyInput(v *CreateConfigurationPolicyInput)
 	}
 }
 
+func validateOpCreateConnectorInput(v *CreateConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConnectorInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Provider == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	} else if v.Provider != nil {
+		if err := validateCspmProviderConfiguration(v.Provider); err != nil {
+			invalidParams.AddNested("Provider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateConnectorV2Input(v *CreateConnectorV2Input) error {
 	if v == nil {
 		return nil
@@ -3280,6 +3570,21 @@ func validateOpDeleteConfigurationPolicyInput(v *DeleteConfigurationPolicyInput)
 	}
 }
 
+func validateOpDeleteConnectorInput(v *DeleteConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConnectorInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteConnectorV2Input(v *DeleteConnectorV2Input) error {
 	if v == nil {
 		return nil
@@ -3400,6 +3705,21 @@ func validateOpDisableOrganizationAdminAccountInput(v *DisableOrganizationAdminA
 	}
 }
 
+func validateOpDisableSecurityHubFeatureV2Input(v *DisableSecurityHubFeatureV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableSecurityHubFeatureV2Input"}
+	if len(v.FeatureName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateMembersInput(v *DisassociateMembersInput) error {
 	if v == nil {
 		return nil
@@ -3437,6 +3757,21 @@ func validateOpEnableOrganizationAdminAccountInput(v *EnableOrganizationAdminAcc
 	invalidParams := smithy.InvalidParamsError{Context: "EnableOrganizationAdminAccountInput"}
 	if v.AdminAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AdminAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableSecurityHubFeatureV2Input(v *EnableSecurityHubFeatureV2Input) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableSecurityHubFeatureV2Input"}
+	if len(v.FeatureName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FeatureName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3512,6 +3847,21 @@ func validateOpGetConfigurationPolicyInput(v *GetConfigurationPolicyInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationPolicyInput"}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConnectorInput(v *GetConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectorInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3908,6 +4258,26 @@ func validateOpUpdateConfigurationPolicyInput(v *UpdateConfigurationPolicyInput)
 	}
 }
 
+func validateOpUpdateConnectorInput(v *UpdateConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorInput"}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if v.Provider != nil {
+		if err := validateCspmProviderUpdateConfiguration(v.Provider); err != nil {
+			invalidParams.AddNested("Provider", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateConnectorV2Input(v *UpdateConnectorV2Input) error {
 	if v == nil {
 		return nil
@@ -3915,6 +4285,11 @@ func validateOpUpdateConnectorV2Input(v *UpdateConnectorV2Input) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorV2Input"}
 	if v.ConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if v.Provider != nil {
+		if err := validateProviderUpdateConfiguration(v.Provider); err != nil {
+			invalidParams.AddNested("Provider", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

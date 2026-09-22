@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -77,6 +76,28 @@ type ListIntentPathsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentPathsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentPathsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentPathsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListIntentPathsRequest_botId, *v.BotId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ListIntentPathsRequest_endDateTime, *v.EndDateTime)
+	}
+	serializeAnalyticsPathFilters(s, schemas.ListIntentPathsRequest_filters, v.Filters)
+	if v.IntentPath != nil {
+		s.WriteString(schemas.ListIntentPathsRequest_intentPath, *v.IntentPath)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.ListIntentPathsRequest_startDateTime, *v.StartDateTime)
+	}
+}
+
 type ListIntentPathsOutput struct {
 
 	// A list of objects, each of which contains information about a node in the
@@ -89,77 +110,45 @@ type ListIntentPathsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntentPathsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntentPathsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntentPathsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyticsIntentNodeSummaries(s, schemas.ListIntentPathsResponse_nodeSummaries, v.NodeSummaries)
+}
+func (v *ListIntentPathsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntentPathsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntentPathsResponse_nodeSummaries:
+			return deserializeAnalyticsIntentNodeSummaries(d, schemas.ListIntentPathsResponse_nodeSummaries, &v.NodeSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntentPathsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentPaths, schemas.ListIntentPathsRequest, schemas.ListIntentPathsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntentPaths{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntentPaths, schemas.ListIntentPathsRequest, schemas.ListIntentPathsResponse), output: &ListIntentPathsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntentPaths{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIntentPaths"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIntentPathsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIntentPaths(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +163,8 @@ func (c *Client) addOperationListIntentPathsMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListIntentPaths(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIntentPaths",
-	}
 }

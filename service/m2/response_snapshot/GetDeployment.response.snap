@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"applicationId":"__ApplicationId__","applicationVersion":1,"creationTime":946684800,"deploymentId":"__DeploymentId__","environmentId":"__EnvironmentId__","status":"Deploying","statusReason":"__StatusReason__"}

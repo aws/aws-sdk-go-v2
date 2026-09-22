@@ -1,0 +1,5 @@
+429
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.CreateAgreement
+
+{"__type":"ThrottlingException","RetryAfterSeconds":"__RetryAfterSeconds__"}

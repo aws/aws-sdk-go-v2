@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Invoicing.ListInvoiceUnits
+
+{"AsOf":946684800,"Filters":{"Accounts":["__Member__","__Member__"],"BillSourceAccounts":["__Member__","__Member__"],"InvoiceReceivers":["__Member__","__Member__"],"Names":["__Member__","__Member__"]},"MaxResults":1,"NextToken":"__NextToken__"}

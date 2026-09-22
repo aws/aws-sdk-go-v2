@@ -5,9 +5,9 @@ package sesv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List all of the configuration sets associated with your account in the current
@@ -50,6 +50,21 @@ type ListConfigurationSetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationSetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationSetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationSetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationSetsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListConfigurationSetsRequest_PageSize, *v.PageSize)
+	}
+}
+
 // A list of configuration sets in your Amazon SES account in the current Amazon
 // Web Services Region.
 type ListConfigurationSetsOutput struct {
@@ -69,74 +84,48 @@ type ListConfigurationSetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationSetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationSetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationSetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationSetNameList(s, schemas.ListConfigurationSetsResponse_ConfigurationSets, v.ConfigurationSets)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationSetsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigurationSetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationSetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationSetsResponse_ConfigurationSets:
+			return deserializeConfigurationSetNameList(d, schemas.ListConfigurationSetsResponse_ConfigurationSets, &v.ConfigurationSets)
+		case schemas.ListConfigurationSetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationSetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationSets, schemas.ListConfigurationSetsRequest, schemas.ListConfigurationSetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigurationSets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationSets, schemas.ListConfigurationSetsRequest, schemas.ListConfigurationSetsResponse), output: &ListConfigurationSetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigurationSets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConfigurationSets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigurationSets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +138,6 @@ func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +242,3 @@ type ListConfigurationSetsAPIClient interface {
 }
 
 var _ ListConfigurationSetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListConfigurationSets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListConfigurationSets",
-	}
-}

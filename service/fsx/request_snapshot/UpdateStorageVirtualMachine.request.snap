@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.UpdateStorageVirtualMachine
+
+{"ActiveDirectoryConfiguration":{"NetBiosName":"__NetBiosName__","SelfManagedActiveDirectoryConfiguration":{"DnsIps":["__Member__","__Member__"],"DomainJoinServiceAccountSecret":"__DomainJoinServiceAccountSecret__","DomainName":"__DomainName__","FileSystemAdministratorsGroup":"__FileSystemAdministratorsGroup__","OrganizationalUnitDistinguishedName":"__OrganizationalUnitDistinguishedName__","Password":"__Password__","UserName":"__UserName__"}},"ClientRequestToken":"__ClientRequestToken__","StorageVirtualMachineId":"__StorageVirtualMachineId__","SvmAdminPassword":"__SvmAdminPassword__"}

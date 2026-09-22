@@ -5,10 +5,10 @@ package networkfirewall
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of all flow operations ran in a specific firewall. You can
@@ -75,6 +75,36 @@ type ListFlowOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FlowOperationType != "" {
+		s.WriteString(schemas.ListFlowOperationsRequest_FlowOperationType, string(v.FlowOperationType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFlowOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_NextToken, *v.NextToken)
+	}
+	if v.VpcEndpointAssociationArn != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_VpcEndpointAssociationArn, *v.VpcEndpointAssociationArn)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.ListFlowOperationsRequest_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+
 type ListFlowOperationsOutput struct {
 
 	// Flow operations let you manage the flows tracked in the flow table, also known
@@ -98,77 +128,51 @@ type ListFlowOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFlowOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFlowOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFlowOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlowOperations(s, schemas.ListFlowOperationsResponse_FlowOperations, v.FlowOperations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFlowOperationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFlowOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFlowOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFlowOperationsResponse_FlowOperations:
+			return deserializeFlowOperations(d, schemas.ListFlowOperationsResponse_FlowOperations, &v.FlowOperations)
+		case schemas.ListFlowOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFlowOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFlowOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowOperations, schemas.ListFlowOperationsRequest, schemas.ListFlowOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListFlowOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFlowOperations, schemas.ListFlowOperationsRequest, schemas.ListFlowOperationsResponse), output: &ListFlowOperationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListFlowOperations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFlowOperations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFlowOperationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFlowOperations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,12 +185,6 @@ func (c *Client) addOperationListFlowOperationsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -291,11 +289,3 @@ type ListFlowOperationsAPIClient interface {
 }
 
 var _ ListFlowOperationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFlowOperations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFlowOperations",
-	}
-}

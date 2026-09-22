@@ -4,10 +4,9 @@ package machinelearning
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates predictions for a group of observations. The observations to process
@@ -76,6 +75,30 @@ type CreateBatchPredictionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchPredictionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchPredictionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchPredictionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionDataSourceId != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_BatchPredictionDataSourceId, *v.BatchPredictionDataSourceId)
+	}
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_BatchPredictionId, *v.BatchPredictionId)
+	}
+	if v.BatchPredictionName != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_BatchPredictionName, *v.BatchPredictionName)
+	}
+	if v.MLModelId != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_MLModelId, *v.MLModelId)
+	}
+	if v.OutputUri != nil {
+		s.WriteString(schemas.CreateBatchPredictionInput_OutputUri, *v.OutputUri)
+	}
+}
+
 //	Represents the output of a CreateBatchPrediction operation, and is an
 //
 // acknowledgement that Amazon ML received the request.
@@ -95,77 +118,48 @@ type CreateBatchPredictionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBatchPredictionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBatchPredictionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBatchPredictionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatchPredictionId != nil {
+		s.WriteString(schemas.CreateBatchPredictionOutput_BatchPredictionId, *v.BatchPredictionId)
+	}
+}
+func (v *CreateBatchPredictionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBatchPredictionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBatchPredictionOutput_BatchPredictionId:
+			v.BatchPredictionId = new(string)
+			return d.ReadString(schemas.CreateBatchPredictionOutput_BatchPredictionId, v.BatchPredictionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchPrediction, schemas.CreateBatchPredictionInput, schemas.CreateBatchPredictionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateBatchPrediction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBatchPrediction, schemas.CreateBatchPredictionInput, schemas.CreateBatchPredictionOutput), output: &CreateBatchPredictionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateBatchPrediction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBatchPrediction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateBatchPredictionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBatchPrediction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +174,8 @@ func (c *Client) addOperationCreateBatchPredictionMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateBatchPrediction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBatchPrediction",
-	}
 }

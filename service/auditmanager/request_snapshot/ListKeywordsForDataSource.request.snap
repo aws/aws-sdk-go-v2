@@ -1,0 +1,3 @@
+GET /dataSourceKeywords?maxResults=1&nextToken=__NextToken__&source=AWS_Cloudtrail
+
+

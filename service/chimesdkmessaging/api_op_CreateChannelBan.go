@@ -4,11 +4,10 @@ package chimesdkmessaging
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Permanently bans a member from a channel. Moderators can't add banned members
@@ -56,6 +55,24 @@ type CreateChannelBanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelBanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelBanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelBanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.CreateChannelBanRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.CreateChannelBanRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.MemberArn != nil {
+		s.WriteString(schemas.CreateChannelBanRequest_MemberArn, *v.MemberArn)
+	}
+}
+
 type CreateChannelBanOutput struct {
 
 	// The ARN of the response to the ban request.
@@ -70,77 +87,56 @@ type CreateChannelBanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelBanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelBanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelBanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.CreateChannelBanResponse_ChannelArn, *v.ChannelArn)
+	}
+	if v.Member != nil {
+		s.WriteStruct(schemas.CreateChannelBanResponse_Member)
+		v.Member.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateChannelBanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelBanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelBanResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.CreateChannelBanResponse_ChannelArn, v.ChannelArn)
+		case schemas.CreateChannelBanResponse_Member:
+			v.Member = &types.Identity{}
+			return v.Member.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelBan, schemas.CreateChannelBanRequest, schemas.CreateChannelBanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannelBan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelBan, schemas.CreateChannelBanRequest, schemas.CreateChannelBanResponse), output: &CreateChannelBanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannelBan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChannelBan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateChannelBanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChannelBan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +151,8 @@ func (c *Client) addOperationCreateChannelBanMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateChannelBan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateChannelBan",
-	}
 }

@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates all of the SageMaker Partner AI Apps in an account.
@@ -42,6 +42,18 @@ type UpdatePartnerAppInput struct {
 	// Configuration settings for the SageMaker Partner AI App.
 	ApplicationConfig *types.PartnerAppConfig
 
+	// The authorization type that users use to access the SageMaker Partner AI App.
+	// Use this parameter to migrate an existing SageMaker Partner AI App from IAM
+	// authorization to IDC authorization. Valid values:
+	//
+	//   - IAM : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM identity.
+	//
+	//   - IDC : Users access the SageMaker Partner AI App with their Amazon Web
+	//   Services IAM Identity Center identity. Specify the Identity Center instance to
+	//   use in IdcConfig .
+	AuthType types.PartnerAppAuthType
+
 	// A unique token that guarantees that the call to this API is idempotent.
 	ClientToken *string
 
@@ -54,6 +66,11 @@ type UpdatePartnerAppInput struct {
 	// session name or the authenticated IAM user as the identity of the SageMaker
 	// Partner AI App user.
 	EnableIamSessionBasedIdentity *bool
+
+	// Specifies the Amazon Web Services IAM Identity Center configuration for the
+	// SageMaker Partner AI App. Specify this parameter when AuthType is IDC . Apps
+	// that use IAM authorization don't use this parameter.
+	IdcConfig *types.IdcConfigInput
 
 	// Maintenance configuration settings for the SageMaker Partner AI App.
 	MaintenanceConfig *types.PartnerAppMaintenanceConfig
@@ -69,6 +86,52 @@ type UpdatePartnerAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePartnerAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePartnerAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePartnerAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppVersion != nil {
+		s.WriteString(schemas.UpdatePartnerAppRequest_AppVersion, *v.AppVersion)
+	}
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.UpdatePartnerAppRequest_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePartnerAppRequest_Arn, *v.Arn)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.UpdatePartnerAppRequest_AuthType, string(v.AuthType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdatePartnerAppRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EnableAutoMinorVersionUpgrade != nil {
+		s.WriteBool(schemas.UpdatePartnerAppRequest_EnableAutoMinorVersionUpgrade, *v.EnableAutoMinorVersionUpgrade)
+	}
+	if v.EnableIamSessionBasedIdentity != nil {
+		s.WriteBool(schemas.UpdatePartnerAppRequest_EnableIamSessionBasedIdentity, *v.EnableIamSessionBasedIdentity)
+	}
+	if v.IdcConfig != nil {
+		s.WriteStruct(schemas.UpdatePartnerAppRequest_IdcConfig)
+		v.IdcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceConfig != nil {
+		s.WriteStruct(schemas.UpdatePartnerAppRequest_MaintenanceConfig)
+		v.MaintenanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.UpdatePartnerAppRequest_Tags, v.Tags)
+	if v.Tier != nil {
+		s.WriteString(schemas.UpdatePartnerAppRequest_Tier, *v.Tier)
+	}
+}
+
 type UpdatePartnerAppOutput struct {
 
 	// The ARN of the SageMaker Partner AI App that was updated.
@@ -80,65 +143,42 @@ type UpdatePartnerAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePartnerAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePartnerAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePartnerAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdatePartnerAppResponse_Arn, *v.Arn)
+	}
+}
+func (v *UpdatePartnerAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePartnerAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePartnerAppResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePartnerAppResponse_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePartnerAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnerApp, schemas.UpdatePartnerAppRequest, schemas.UpdatePartnerAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdatePartnerApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePartnerApp, schemas.UpdatePartnerAppRequest, schemas.UpdatePartnerAppResponse), output: &UpdatePartnerAppOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdatePartnerApp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePartnerApp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -148,12 +188,6 @@ func (c *Client) addOperationUpdatePartnerAppMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpUpdatePartnerAppValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePartnerApp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,12 +200,6 @@ func (c *Client) addOperationUpdatePartnerAppMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -211,12 +239,4 @@ func (m *idempotencyToken_initializeOpUpdatePartnerApp) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opUpdatePartnerAppMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdatePartnerApp{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdatePartnerApp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePartnerApp",
-	}
 }

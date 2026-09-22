@@ -1,0 +1,4 @@
+GET /v20180820/accessgrantsinstance/resourcepolicy
+
+X-Amz-Account-Id: AccountId-value
+

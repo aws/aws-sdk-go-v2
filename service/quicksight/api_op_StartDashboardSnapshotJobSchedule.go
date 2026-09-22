@@ -4,10 +4,9 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an asynchronous job that runs an existing dashboard schedule and sends
@@ -58,6 +57,24 @@ type StartDashboardSnapshotJobScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDashboardSnapshotJobScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDashboardSnapshotJobScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDashboardSnapshotJobScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobScheduleRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobScheduleRequest_DashboardId, *v.DashboardId)
+	}
+	if v.ScheduleId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobScheduleRequest_ScheduleId, *v.ScheduleId)
+	}
+}
+
 type StartDashboardSnapshotJobScheduleOutput struct {
 
 	//  The Amazon Web Services request ID for this operation.
@@ -72,77 +89,53 @@ type StartDashboardSnapshotJobScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDashboardSnapshotJobScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDashboardSnapshotJobScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDashboardSnapshotJobScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.StartDashboardSnapshotJobScheduleResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.StartDashboardSnapshotJobScheduleResponse_Status, v.Status)
+	}
+}
+func (v *StartDashboardSnapshotJobScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDashboardSnapshotJobScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDashboardSnapshotJobScheduleResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.StartDashboardSnapshotJobScheduleResponse_RequestId, v.RequestId)
+		case schemas.StartDashboardSnapshotJobScheduleResponse_Status:
+			return d.ReadInt32(schemas.StartDashboardSnapshotJobScheduleResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDashboardSnapshotJobScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDashboardSnapshotJobSchedule, schemas.StartDashboardSnapshotJobScheduleRequest, schemas.StartDashboardSnapshotJobScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartDashboardSnapshotJobSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDashboardSnapshotJobSchedule, schemas.StartDashboardSnapshotJobScheduleRequest, schemas.StartDashboardSnapshotJobScheduleResponse), output: &StartDashboardSnapshotJobScheduleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartDashboardSnapshotJobSchedule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDashboardSnapshotJobSchedule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartDashboardSnapshotJobScheduleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDashboardSnapshotJobSchedule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +150,8 @@ func (c *Client) addOperationStartDashboardSnapshotJobScheduleMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartDashboardSnapshotJobSchedule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartDashboardSnapshotJobSchedule",
-	}
 }

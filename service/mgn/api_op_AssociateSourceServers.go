@@ -4,10 +4,9 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associate source servers to application.
@@ -44,6 +43,37 @@ type AssociateSourceServersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceServersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceServersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceServersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.AssociateSourceServersRequest_accountID, *v.AccountID)
+	}
+	if v.ApplicationID != nil {
+		s.WriteString(schemas.AssociateSourceServersRequest_applicationID, *v.ApplicationID)
+	}
+	serializeAssociateSourceServersRequestSourceServerIDs(s, schemas.AssociateSourceServersRequest_sourceServerIDs, v.SourceServerIDs)
+}
+func (v *AssociateSourceServersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSourceServersRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSourceServersRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.AssociateSourceServersRequest_accountID, v.AccountID)
+		case schemas.AssociateSourceServersRequest_applicationID:
+			v.ApplicationID = new(string)
+			return d.ReadString(schemas.AssociateSourceServersRequest_applicationID, v.ApplicationID)
+		case schemas.AssociateSourceServersRequest_sourceServerIDs:
+			return deserializeAssociateSourceServersRequestSourceServerIDs(d, schemas.AssociateSourceServersRequest_sourceServerIDs, &v.SourceServerIDs)
+		}
+		return nil
+	})
+}
+
 type AssociateSourceServersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,77 +81,42 @@ type AssociateSourceServersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceServersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceServersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceServersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AssociateSourceServersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSourceServersResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSourceServersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceServers, schemas.AssociateSourceServersRequest, schemas.AssociateSourceServersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateSourceServers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceServers, schemas.AssociateSourceServersRequest, schemas.AssociateSourceServersResponse), output: &AssociateSourceServersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateSourceServers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateSourceServers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateSourceServersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateSourceServers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +131,8 @@ func (c *Client) addOperationAssociateSourceServersMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateSourceServers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateSourceServers",
-	}
 }

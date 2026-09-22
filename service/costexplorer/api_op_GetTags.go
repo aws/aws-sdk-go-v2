@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Queries for available tag keys and tag values for a specified period. You can
@@ -167,6 +166,41 @@ type GetTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingViewArn != nil {
+		s.WriteString(schemas.GetTagsRequest_BillingViewArn, *v.BillingViewArn)
+	}
+	if v.Filter != nil {
+		s.WriteStruct(schemas.GetTagsRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTagsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetTagsRequest_NextPageToken, *v.NextPageToken)
+	}
+	if v.SearchString != nil {
+		s.WriteString(schemas.GetTagsRequest_SearchString, *v.SearchString)
+	}
+	serializeSortDefinitions(s, schemas.GetTagsRequest_SortBy, v.SortBy)
+	if v.TagKey != nil {
+		s.WriteString(schemas.GetTagsRequest_TagKey, *v.TagKey)
+	}
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.GetTagsRequest_TimePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetTagsOutput struct {
 
 	// The number of query results that Amazon Web Services returns at a time.
@@ -195,77 +229,63 @@ type GetTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetTagsResponse_NextPageToken, *v.NextPageToken)
+	}
+	if v.ReturnSize != nil {
+		s.WriteInt32(schemas.GetTagsResponse_ReturnSize, *v.ReturnSize)
+	}
+	serializeTagList(s, schemas.GetTagsResponse_Tags, v.Tags)
+	if v.TotalSize != nil {
+		s.WriteInt32(schemas.GetTagsResponse_TotalSize, *v.TotalSize)
+	}
+}
+func (v *GetTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTagsResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetTagsResponse_NextPageToken, v.NextPageToken)
+		case schemas.GetTagsResponse_ReturnSize:
+			v.ReturnSize = new(int32)
+			return d.ReadInt32(schemas.GetTagsResponse_ReturnSize, v.ReturnSize)
+		case schemas.GetTagsResponse_Tags:
+			return deserializeTagList(d, schemas.GetTagsResponse_Tags, &v.Tags)
+		case schemas.GetTagsResponse_TotalSize:
+			v.TotalSize = new(int32)
+			return d.ReadInt32(schemas.GetTagsResponse_TotalSize, v.TotalSize)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTags, schemas.GetTagsRequest, schemas.GetTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTags, schemas.GetTagsRequest, schemas.GetTagsResponse), output: &GetTagsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTags{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTags"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTagsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTags(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -280,22 +300,8 @@ func (c *Client) addOperationGetTagsMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTags(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTags",
-	}
 }

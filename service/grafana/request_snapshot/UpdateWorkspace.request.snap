@@ -1,0 +1,5 @@
+PUT /workspaces/__WorkspaceId__
+
+Content-Type: application/json
+
+{"accountAccessType":"CURRENT_ACCOUNT","ipAddressType":"IPv4","networkAccessControl":{"prefixListIds":["__Member__","__Member__"],"vpceIds":["__Member__","__Member__"]},"organizationRoleName":"__OrganizationRoleName__","permissionType":"CUSTOMER_MANAGED","removeNetworkAccessConfiguration":true,"removeVpcConfiguration":true,"stackSetName":"__StackSetName__","vpcConfiguration":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"]},"workspaceDataSources":["AMAZON_OPENSEARCH_SERVICE","AMAZON_OPENSEARCH_SERVICE"],"workspaceDescription":"__WorkspaceDescription__","workspaceName":"__WorkspaceName__","workspaceNotificationDestinations":["SNS","SNS"],"workspaceOrganizationalUnits":["__Member__","__Member__"],"workspaceRoleArn":"__WorkspaceRoleArn__"}

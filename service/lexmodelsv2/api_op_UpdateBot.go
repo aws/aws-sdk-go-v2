@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -84,6 +83,44 @@ type UpdateBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateBotRequest_botId, *v.BotId)
+	}
+	serializeBotMembers(s, schemas.UpdateBotRequest_botMembers, v.BotMembers)
+	if v.BotName != nil {
+		s.WriteString(schemas.UpdateBotRequest_botName, *v.BotName)
+	}
+	if v.BotType != "" {
+		s.WriteString(schemas.UpdateBotRequest_botType, string(v.BotType))
+	}
+	if v.DataPrivacy != nil {
+		s.WriteStruct(schemas.UpdateBotRequest_dataPrivacy)
+		v.DataPrivacy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBotRequest_description, *v.Description)
+	}
+	if v.ErrorLogSettings != nil {
+		s.WriteStruct(schemas.UpdateBotRequest_errorLogSettings)
+		v.ErrorLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdleSessionTTLInSeconds != nil {
+		s.WriteInt32(schemas.UpdateBotRequest_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateBotRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type UpdateBotOutput struct {
 
 	// The unique identifier of the bot that was updated.
@@ -130,77 +167,123 @@ type UpdateBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.UpdateBotResponse_botId, *v.BotId)
+	}
+	serializeBotMembers(s, schemas.UpdateBotResponse_botMembers, v.BotMembers)
+	if v.BotName != nil {
+		s.WriteString(schemas.UpdateBotResponse_botName, *v.BotName)
+	}
+	if v.BotStatus != "" {
+		s.WriteString(schemas.UpdateBotResponse_botStatus, string(v.BotStatus))
+	}
+	if v.BotType != "" {
+		s.WriteString(schemas.UpdateBotResponse_botType, string(v.BotType))
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.UpdateBotResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.DataPrivacy != nil {
+		s.WriteStruct(schemas.UpdateBotResponse_dataPrivacy)
+		v.DataPrivacy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBotResponse_description, *v.Description)
+	}
+	if v.ErrorLogSettings != nil {
+		s.WriteStruct(schemas.UpdateBotResponse_errorLogSettings)
+		v.ErrorLogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdleSessionTTLInSeconds != nil {
+		s.WriteInt32(schemas.UpdateBotResponse_idleSessionTTLInSeconds, *v.IdleSessionTTLInSeconds)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.UpdateBotResponse_lastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateBotResponse_roleArn, *v.RoleArn)
+	}
+}
+func (v *UpdateBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBotResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.UpdateBotResponse_botId, v.BotId)
+		case schemas.UpdateBotResponse_botMembers:
+			return deserializeBotMembers(d, schemas.UpdateBotResponse_botMembers, &v.BotMembers)
+		case schemas.UpdateBotResponse_botName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.UpdateBotResponse_botName, v.BotName)
+		case schemas.UpdateBotResponse_botStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBotResponse_botStatus, &ev); err != nil {
+				return err
+			}
+			v.BotStatus = types.BotStatus(ev)
+			return nil
+		case schemas.UpdateBotResponse_botType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateBotResponse_botType, &ev); err != nil {
+				return err
+			}
+			v.BotType = types.BotType(ev)
+			return nil
+		case schemas.UpdateBotResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateBotResponse_creationDateTime, v.CreationDateTime)
+		case schemas.UpdateBotResponse_dataPrivacy:
+			v.DataPrivacy = &types.DataPrivacy{}
+			return v.DataPrivacy.Deserialize(d)
+		case schemas.UpdateBotResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateBotResponse_description, v.Description)
+		case schemas.UpdateBotResponse_errorLogSettings:
+			v.ErrorLogSettings = &types.ErrorLogSettings{}
+			return v.ErrorLogSettings.Deserialize(d)
+		case schemas.UpdateBotResponse_idleSessionTTLInSeconds:
+			v.IdleSessionTTLInSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateBotResponse_idleSessionTTLInSeconds, v.IdleSessionTTLInSeconds)
+		case schemas.UpdateBotResponse_lastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateBotResponse_lastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.UpdateBotResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.UpdateBotResponse_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBot, schemas.UpdateBotRequest, schemas.UpdateBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBot, schemas.UpdateBotRequest, schemas.UpdateBotResponse), output: &UpdateBotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateBot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateBotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,22 +298,8 @@ func (c *Client) addOperationUpdateBotMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateBot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateBot",
-	}
 }

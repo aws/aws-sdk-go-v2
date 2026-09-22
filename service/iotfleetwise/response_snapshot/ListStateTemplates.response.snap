@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.ListStateTemplates
+
+{"nextToken":"__NextToken__","summaries":[{"arn":"__Arn__","creationTime":946684800,"description":"__Description__","id":"__Id__","lastModificationTime":946684800,"name":"__Name__","signalCatalogArn":"__SignalCatalogArn__"},{"arn":"__Arn__","creationTime":946684800,"description":"__Description__","id":"__Id__","lastModificationTime":946684800,"name":"__Name__","signalCatalogArn":"__SignalCatalogArn__"}]}

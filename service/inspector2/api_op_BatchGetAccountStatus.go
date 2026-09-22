@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the Amazon Inspector status of multiple Amazon Web Services accounts
@@ -37,6 +36,25 @@ type BatchGetAccountStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetAccountStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetAccountStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetAccountStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdSet(s, schemas.BatchGetAccountStatusRequest_accountIds, v.AccountIds)
+}
+func (v *BatchGetAccountStatusInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetAccountStatusRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetAccountStatusRequest_accountIds:
+			return deserializeAccountIdSet(d, schemas.BatchGetAccountStatusRequest_accountIds, &v.AccountIds)
+		}
+		return nil
+	})
+}
+
 type BatchGetAccountStatusOutput struct {
 
 	// An array of objects that provide details on the status of Amazon Inspector for
@@ -55,74 +73,45 @@ type BatchGetAccountStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetAccountStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetAccountStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetAccountStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountStateList(s, schemas.BatchGetAccountStatusResponse_accounts, v.Accounts)
+	serializeFailedAccountList(s, schemas.BatchGetAccountStatusResponse_failedAccounts, v.FailedAccounts)
+}
+func (v *BatchGetAccountStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetAccountStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetAccountStatusResponse_accounts:
+			return deserializeAccountStateList(d, schemas.BatchGetAccountStatusResponse_accounts, &v.Accounts)
+		case schemas.BatchGetAccountStatusResponse_failedAccounts:
+			return deserializeFailedAccountList(d, schemas.BatchGetAccountStatusResponse_failedAccounts, &v.FailedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAccountStatus, schemas.BatchGetAccountStatusRequest, schemas.BatchGetAccountStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetAccountStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetAccountStatus, schemas.BatchGetAccountStatusRequest, schemas.BatchGetAccountStatusResponse), output: &BatchGetAccountStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetAccountStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetAccountStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetAccountStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +126,8 @@ func (c *Client) addOperationBatchGetAccountStatusMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetAccountStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetAccountStatus",
-	}
 }

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateGlobalReplicationGroup&GlobalReplicationGroupDescription=__GlobalReplicationGroupDescription__&GlobalReplicationGroupIdSuffix=__GlobalReplicationGroupIdSuffix__&PrimaryReplicationGroupId=__PrimaryReplicationGroupId__&Version=2015-02-02

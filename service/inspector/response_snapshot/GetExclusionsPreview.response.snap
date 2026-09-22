@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.GetExclusionsPreview
+
+{"exclusionPreviews":[{"attributes":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"description":"__Description__","recommendation":"__Recommendation__","scopes":[{"key":"INSTANCE_ID","value":"__Value__"},{"key":"INSTANCE_ID","value":"__Value__"}],"title":"__Title__"},{"attributes":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"description":"__Description__","recommendation":"__Recommendation__","scopes":[{"key":"INSTANCE_ID","value":"__Value__"},{"key":"INSTANCE_ID","value":"__Value__"}],"title":"__Title__"}],"nextToken":"__NextToken__","previewStatus":"WORK_IN_PROGRESS"}

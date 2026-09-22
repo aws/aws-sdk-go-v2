@@ -1,0 +1,3 @@
+GET /behavior-model-training/summaries?maxResults=1&nextToken=__NextToken__&securityProfileName=__SecurityProfileName__
+
+

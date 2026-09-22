@@ -1,0 +1,5 @@
+POST /app-instance-users
+
+Content-Type: application/json
+
+{"AppInstanceArn":"__AppInstanceArn__","AppInstanceUserId":"__AppInstanceUserId__","ClientRequestToken":"__ClientRequestToken__","ExpirationSettings":{"ExpirationCriterion":"CREATED_TIMESTAMP","ExpirationDays":1},"Metadata":"__Metadata__","Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

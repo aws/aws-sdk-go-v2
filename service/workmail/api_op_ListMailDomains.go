@@ -5,10 +5,10 @@ package workmail
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the mail domains in a given WorkMail organization.
@@ -44,6 +44,24 @@ type ListMailDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMailDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMailDomainsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMailDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMailDomainsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMailDomainsRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListMailDomainsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListMailDomainsOutput struct {
 
 	// The list of mail domain summaries, specifying domains that exist in the
@@ -61,77 +79,51 @@ type ListMailDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMailDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMailDomainsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMailDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMailDomains(s, schemas.ListMailDomainsResponse_MailDomains, v.MailDomains)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMailDomainsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMailDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMailDomainsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMailDomainsResponse_MailDomains:
+			return deserializeMailDomains(d, schemas.ListMailDomainsResponse_MailDomains, &v.MailDomains)
+		case schemas.ListMailDomainsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMailDomainsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMailDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMailDomains, schemas.ListMailDomainsRequest, schemas.ListMailDomainsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMailDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMailDomains, schemas.ListMailDomainsRequest, schemas.ListMailDomainsResponse), output: &ListMailDomainsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMailDomains{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMailDomains"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListMailDomainsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMailDomains(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +136,6 @@ func (c *Client) addOperationListMailDomainsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +236,3 @@ type ListMailDomainsAPIClient interface {
 }
 
 var _ ListMailDomainsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMailDomains(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMailDomains",
-	}
-}

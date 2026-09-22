@@ -5,10 +5,10 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -67,6 +67,41 @@ type ListAuditFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAuditFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAuditFindingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAuditFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckName != nil {
+		s.WriteString(schemas.ListAuditFindingsRequest_checkName, *v.CheckName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListAuditFindingsRequest_endTime, *v.EndTime)
+	}
+	if v.ListSuppressedFindings != false {
+		s.WriteBool(schemas.ListAuditFindingsRequest_listSuppressedFindings, v.ListSuppressedFindings)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAuditFindingsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAuditFindingsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteStruct(schemas.ListAuditFindingsRequest_resourceIdentifier)
+		v.ResourceIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListAuditFindingsRequest_startTime, *v.StartTime)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ListAuditFindingsRequest_taskId, *v.TaskId)
+	}
+}
+
 type ListAuditFindingsOutput struct {
 
 	// The findings (results) of the audit.
@@ -82,74 +117,48 @@ type ListAuditFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAuditFindingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAuditFindingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAuditFindingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditFindings(s, schemas.ListAuditFindingsResponse_findings, v.Findings)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAuditFindingsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAuditFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAuditFindingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAuditFindingsResponse_findings:
+			return deserializeAuditFindings(d, schemas.ListAuditFindingsResponse_findings, &v.Findings)
+		case schemas.ListAuditFindingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAuditFindingsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAuditFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAuditFindings, schemas.ListAuditFindingsRequest, schemas.ListAuditFindingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAuditFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAuditFindings, schemas.ListAuditFindingsRequest, schemas.ListAuditFindingsResponse), output: &ListAuditFindingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAuditFindings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAuditFindings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAuditFindings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +171,6 @@ func (c *Client) addOperationListAuditFindingsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +271,3 @@ type ListAuditFindingsAPIClient interface {
 }
 
 var _ ListAuditFindingsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAuditFindings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAuditFindings",
-	}
-}

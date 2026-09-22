@@ -1,0 +1,7 @@
+POST /service/EC2WindowsBarleyService/operation/DescribeProblemObservations
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢iProblemIdm__ProblemId__iAccountIdm__AccountId__

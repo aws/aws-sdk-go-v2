@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","createdBy":"__CreatedBy__","id":"__Id__","privateDnsEnabled":true,"status":"CREATE_IN_PROGRESS"}

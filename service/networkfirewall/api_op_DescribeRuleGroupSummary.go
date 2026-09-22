@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns detailed information for a stateful rule group.
@@ -59,6 +58,24 @@ type DescribeRuleGroupSummaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRuleGroupSummaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRuleGroupSummaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRuleGroupSummaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleGroupArn != nil {
+		s.WriteString(schemas.DescribeRuleGroupSummaryRequest_RuleGroupArn, *v.RuleGroupArn)
+	}
+	if v.RuleGroupName != nil {
+		s.WriteString(schemas.DescribeRuleGroupSummaryRequest_RuleGroupName, *v.RuleGroupName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeRuleGroupSummaryRequest_Type, string(v.Type))
+	}
+}
+
 type DescribeRuleGroupSummaryOutput struct {
 
 	// The descriptive name of the rule group. You can't change the name of a rule
@@ -88,74 +105,59 @@ type DescribeRuleGroupSummaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRuleGroupSummaryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRuleGroupSummaryResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRuleGroupSummaryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeRuleGroupSummaryResponse_Description, *v.Description)
+	}
+	if v.RuleGroupName != nil {
+		s.WriteString(schemas.DescribeRuleGroupSummaryResponse_RuleGroupName, *v.RuleGroupName)
+	}
+	if v.Summary != nil {
+		s.WriteStruct(schemas.DescribeRuleGroupSummaryResponse_Summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeRuleGroupSummaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRuleGroupSummaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRuleGroupSummaryResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeRuleGroupSummaryResponse_Description, v.Description)
+		case schemas.DescribeRuleGroupSummaryResponse_RuleGroupName:
+			v.RuleGroupName = new(string)
+			return d.ReadString(schemas.DescribeRuleGroupSummaryResponse_RuleGroupName, v.RuleGroupName)
+		case schemas.DescribeRuleGroupSummaryResponse_Summary:
+			v.Summary = &types.Summary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRuleGroupSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleGroupSummary, schemas.DescribeRuleGroupSummaryRequest, schemas.DescribeRuleGroupSummaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeRuleGroupSummary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRuleGroupSummary, schemas.DescribeRuleGroupSummaryRequest, schemas.DescribeRuleGroupSummaryResponse), output: &DescribeRuleGroupSummaryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeRuleGroupSummary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRuleGroupSummary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRuleGroupSummary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +172,8 @@ func (c *Client) addOperationDescribeRuleGroupSummaryMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeRuleGroupSummary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRuleGroupSummary",
-	}
 }

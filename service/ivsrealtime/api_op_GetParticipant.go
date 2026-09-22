@@ -4,11 +4,10 @@ package ivsrealtime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the specified participant token.
@@ -47,6 +46,24 @@ type GetParticipantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParticipantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParticipantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParticipantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.GetParticipantRequest_participantId, *v.ParticipantId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetParticipantRequest_sessionId, *v.SessionId)
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.GetParticipantRequest_stageArn, *v.StageArn)
+	}
+}
+
 type GetParticipantOutput struct {
 
 	// The participant that is returned.
@@ -58,77 +75,50 @@ type GetParticipantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetParticipantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetParticipantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetParticipantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Participant != nil {
+		s.WriteStruct(schemas.GetParticipantResponse_participant)
+		v.Participant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetParticipantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetParticipantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetParticipantResponse_participant:
+			v.Participant = &types.Participant{}
+			return v.Participant.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetParticipantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParticipant, schemas.GetParticipantRequest, schemas.GetParticipantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetParticipant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetParticipant, schemas.GetParticipantRequest, schemas.GetParticipantResponse), output: &GetParticipantOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetParticipant{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetParticipant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetParticipantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetParticipant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +133,8 @@ func (c *Client) addOperationGetParticipantMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetParticipant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetParticipant",
-	}
 }

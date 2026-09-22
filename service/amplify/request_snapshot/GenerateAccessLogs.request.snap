@@ -1,0 +1,5 @@
+POST /apps/__AppId__/accesslogs
+
+Content-Type: application/json
+
+{"domainName":"__DomainName__","endTime":946684800,"startTime":946684800}

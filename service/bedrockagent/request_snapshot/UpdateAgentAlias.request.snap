@@ -1,0 +1,5 @@
+PUT /agents/__AgentId__/agentaliases/__AgentAliasId__/
+
+Content-Type: application/json
+
+{"agentAliasName":"__AgentAliasName__","aliasInvocationState":"ACCEPT_INVOCATIONS","description":"__Description__","routingConfiguration":[{"agentVersion":"__AgentVersion__","provisionedThroughput":"__ProvisionedThroughput__"},{"agentVersion":"__AgentVersion__","provisionedThroughput":"__ProvisionedThroughput__"}]}

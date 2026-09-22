@@ -4,11 +4,10 @@ package amplifyuibuilder
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns an existing form for an Amplify app.
@@ -47,6 +46,40 @@ type GetFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetFormRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.GetFormRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFormRequest_id, *v.Id)
+	}
+}
+func (v *GetFormInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFormRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFormRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.GetFormRequest_appId, v.AppId)
+		case schemas.GetFormRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.GetFormRequest_environmentName, v.EnvironmentName)
+		case schemas.GetFormRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFormRequest_id, v.Id)
+		}
+		return nil
+	})
+}
+
 type GetFormOutput struct {
 
 	// Represents the configuration settings for the form.
@@ -58,77 +91,50 @@ type GetFormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFormResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Form != nil {
+		s.WriteStruct(schemas.GetFormResponse_form)
+		v.Form.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFormResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFormResponse_form:
+			v.Form = &types.Form{}
+			return v.Form.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetForm, schemas.GetFormRequest, schemas.GetFormResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetForm, schemas.GetFormRequest, schemas.GetFormResponse), output: &GetFormOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetForm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetForm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFormValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetForm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +149,8 @@ func (c *Client) addOperationGetFormMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetForm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetForm",
-	}
 }

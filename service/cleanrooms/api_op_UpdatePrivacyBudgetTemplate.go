@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the privacy budget template for the specified collaboration.
@@ -52,6 +51,25 @@ type UpdatePrivacyBudgetTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePrivacyBudgetTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePrivacyBudgetTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePrivacyBudgetTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdatePrivacyBudgetTemplateInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	serializePrivacyBudgetTemplateUpdateParameters(s, schemas.UpdatePrivacyBudgetTemplateInput_parameters, v.Parameters)
+	if v.PrivacyBudgetTemplateIdentifier != nil {
+		s.WriteString(schemas.UpdatePrivacyBudgetTemplateInput_privacyBudgetTemplateIdentifier, *v.PrivacyBudgetTemplateIdentifier)
+	}
+	if v.PrivacyBudgetType != "" {
+		s.WriteString(schemas.UpdatePrivacyBudgetTemplateInput_privacyBudgetType, string(v.PrivacyBudgetType))
+	}
+}
+
 type UpdatePrivacyBudgetTemplateOutput struct {
 
 	// Summary of the privacy budget template.
@@ -65,77 +83,50 @@ type UpdatePrivacyBudgetTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePrivacyBudgetTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePrivacyBudgetTemplateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePrivacyBudgetTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PrivacyBudgetTemplate != nil {
+		s.WriteStruct(schemas.UpdatePrivacyBudgetTemplateOutput_privacyBudgetTemplate)
+		v.PrivacyBudgetTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdatePrivacyBudgetTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePrivacyBudgetTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePrivacyBudgetTemplateOutput_privacyBudgetTemplate:
+			v.PrivacyBudgetTemplate = &types.PrivacyBudgetTemplate{}
+			return v.PrivacyBudgetTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePrivacyBudgetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivacyBudgetTemplate, schemas.UpdatePrivacyBudgetTemplateInput, schemas.UpdatePrivacyBudgetTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePrivacyBudgetTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePrivacyBudgetTemplate, schemas.UpdatePrivacyBudgetTemplateInput, schemas.UpdatePrivacyBudgetTemplateOutput), output: &UpdatePrivacyBudgetTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePrivacyBudgetTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePrivacyBudgetTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdatePrivacyBudgetTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePrivacyBudgetTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +141,8 @@ func (c *Client) addOperationUpdatePrivacyBudgetTemplateMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdatePrivacyBudgetTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePrivacyBudgetTemplate",
-	}
 }

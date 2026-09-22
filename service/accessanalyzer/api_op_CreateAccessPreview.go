@@ -5,10 +5,10 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an access preview that allows you to preview IAM Access Analyzer
@@ -52,6 +52,37 @@ type CreateAccessPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessPreviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessPreviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessPreviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerArn != nil {
+		s.WriteString(schemas.CreateAccessPreviewRequest_analyzerArn, *v.AnalyzerArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAccessPreviewRequest_clientToken, *v.ClientToken)
+	}
+	serializeConfigurationsMap(s, schemas.CreateAccessPreviewRequest_configurations, v.Configurations)
+}
+func (v *CreateAccessPreviewInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessPreviewRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessPreviewRequest_analyzerArn:
+			v.AnalyzerArn = new(string)
+			return d.ReadString(schemas.CreateAccessPreviewRequest_analyzerArn, v.AnalyzerArn)
+		case schemas.CreateAccessPreviewRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateAccessPreviewRequest_clientToken, v.ClientToken)
+		case schemas.CreateAccessPreviewRequest_configurations:
+			return deserializeConfigurationsMap(d, schemas.CreateAccessPreviewRequest_configurations, &v.Configurations)
+		}
+		return nil
+	})
+}
+
 type CreateAccessPreviewOutput struct {
 
 	// The unique ID for the access preview.
@@ -65,65 +96,42 @@ type CreateAccessPreviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAccessPreviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAccessPreviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAccessPreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateAccessPreviewResponse_id, *v.Id)
+	}
+}
+func (v *CreateAccessPreviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAccessPreviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAccessPreviewResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateAccessPreviewResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAccessPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPreview, schemas.CreateAccessPreviewRequest, schemas.CreateAccessPreviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAccessPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccessPreview, schemas.CreateAccessPreviewRequest, schemas.CreateAccessPreviewResponse), output: &CreateAccessPreviewOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAccessPreview{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAccessPreview"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -133,12 +141,6 @@ func (c *Client) addOperationCreateAccessPreviewMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateAccessPreviewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccessPreview(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +153,6 @@ func (c *Client) addOperationCreateAccessPreviewMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -196,12 +192,4 @@ func (m *idempotencyToken_initializeOpCreateAccessPreview) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateAccessPreviewMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAccessPreview{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAccessPreview(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAccessPreview",
-	}
 }

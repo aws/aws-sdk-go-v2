@@ -1,0 +1,5 @@
+POST /indices/statistics
+
+Content-Type: application/json
+
+{"aggregationField":"__AggregationField__","indexName":"__IndexName__","queryString":"__QueryString__","queryVersion":"__QueryVersion__"}

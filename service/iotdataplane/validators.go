@@ -49,6 +49,26 @@ func (m *validateOpDeleteThingShadow) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetConnection struct {
+}
+
+func (*validateOpGetConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetRetainedMessage struct {
 }
 
@@ -109,6 +129,26 @@ func (m *validateOpListNamedShadowsForThing) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSubscriptions struct {
+}
+
+func (*validateOpListSubscriptions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSubscriptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSubscriptionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSubscriptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPublish struct {
 }
 
@@ -124,6 +164,26 @@ func (m *validateOpPublish) HandleInitialize(ctx context.Context, in middleware.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPublishInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendDirectMessage struct {
+}
+
+func (*validateOpSendDirectMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendDirectMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendDirectMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendDirectMessageInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -157,6 +217,10 @@ func addOpDeleteThingShadowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteThingShadow{}, middleware.After)
 }
 
+func addOpGetConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConnection{}, middleware.After)
+}
+
 func addOpGetRetainedMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRetainedMessage{}, middleware.After)
 }
@@ -169,8 +233,16 @@ func addOpListNamedShadowsForThingValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpListNamedShadowsForThing{}, middleware.After)
 }
 
+func addOpListSubscriptionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSubscriptions{}, middleware.After)
+}
+
 func addOpPublishValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPublish{}, middleware.After)
+}
+
+func addOpSendDirectMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendDirectMessage{}, middleware.After)
 }
 
 func addOpUpdateThingShadowValidationMiddleware(stack *middleware.Stack) error {
@@ -199,6 +271,21 @@ func validateOpDeleteThingShadowInput(v *DeleteThingShadowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteThingShadowInput"}
 	if v.ThingName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConnectionInput(v *GetConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConnectionInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -252,11 +339,44 @@ func validateOpListNamedShadowsForThingInput(v *ListNamedShadowsForThingInput) e
 	}
 }
 
+func validateOpListSubscriptionsInput(v *ListSubscriptionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSubscriptionsInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPublishInput(v *PublishInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PublishInput"}
+	if v.Topic == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Topic"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendDirectMessageInput(v *SendDirectMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendDirectMessageInput"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
 	if v.Topic == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Topic"))
 	}

@@ -4,14 +4,13 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a Amazon Connect client add-in. Use this action to update the name and
-// endpoint URL of a Amazon Connect client add-in.
+// Updates a Connect Customer client add-in. Use this action to update the name
+// and endpoint URL of a Connect Customer client add-in.
 func (c *Client) UpdateConnectClientAddIn(ctx context.Context, params *UpdateConnectClientAddInInput, optFns ...func(*Options)) (*UpdateConnectClientAddInOutput, error) {
 	if params == nil {
 		params = &UpdateConnectClientAddInInput{}
@@ -42,10 +41,31 @@ type UpdateConnectClientAddInInput struct {
 	// The name of the client add-in.
 	Name *string
 
-	// The endpoint URL of the Amazon Connect client add-in.
+	// The endpoint URL of the Connect Customer client add-in.
 	URL *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateConnectClientAddInInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectClientAddInRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectClientAddInInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddInId != nil {
+		s.WriteString(schemas.UpdateConnectClientAddInRequest_AddInId, *v.AddInId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateConnectClientAddInRequest_Name, *v.Name)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.UpdateConnectClientAddInRequest_ResourceId, *v.ResourceId)
+	}
+	if v.URL != nil {
+		s.WriteString(schemas.UpdateConnectClientAddInRequest_URL, *v.URL)
+	}
 }
 
 type UpdateConnectClientAddInOutput struct {
@@ -55,77 +75,42 @@ type UpdateConnectClientAddInOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectClientAddInOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectClientAddInResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectClientAddInOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConnectClientAddInOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectClientAddInResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectClientAddInMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectClientAddIn, schemas.UpdateConnectClientAddInRequest, schemas.UpdateConnectClientAddInResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConnectClientAddIn{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnectClientAddIn, schemas.UpdateConnectClientAddInRequest, schemas.UpdateConnectClientAddInResult), output: &UpdateConnectClientAddInOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateConnectClientAddIn{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConnectClientAddIn"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateConnectClientAddInValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConnectClientAddIn(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +125,8 @@ func (c *Client) addOperationUpdateConnectClientAddInMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateConnectClientAddIn(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateConnectClientAddIn",
-	}
 }

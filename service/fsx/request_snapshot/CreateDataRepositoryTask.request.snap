@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.CreateDataRepositoryTask
+
+{"CapacityToRelease":1,"ClientRequestToken":"__ClientRequestToken__","FileSystemId":"__FileSystemId__","Paths":["__Member__","__Member__"],"ReleaseConfiguration":{"DurationSinceLastAccess":{"Unit":"DAYS","Value":1}},"Report":{"Enabled":true,"Format":"REPORT_CSV_20191124","Path":"__Path__","Scope":"FAILED_FILES_ONLY"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"EXPORT_TO_REPOSITORY"}

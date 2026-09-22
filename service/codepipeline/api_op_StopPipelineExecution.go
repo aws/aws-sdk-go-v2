@@ -4,10 +4,9 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops the specified pipeline execution. You choose to either stop the pipeline
@@ -56,6 +55,27 @@ type StopPipelineExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopPipelineExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopPipelineExecutionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopPipelineExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Abandon != false {
+		s.WriteBool(schemas.StopPipelineExecutionInput_abandon, v.Abandon)
+	}
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.StopPipelineExecutionInput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+	if v.PipelineName != nil {
+		s.WriteString(schemas.StopPipelineExecutionInput_pipelineName, *v.PipelineName)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.StopPipelineExecutionInput_reason, *v.Reason)
+	}
+}
+
 type StopPipelineExecutionOutput struct {
 
 	// The unique system-generated ID of the pipeline execution that was stopped.
@@ -67,77 +87,48 @@ type StopPipelineExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopPipelineExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopPipelineExecutionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopPipelineExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PipelineExecutionId != nil {
+		s.WriteString(schemas.StopPipelineExecutionOutput_pipelineExecutionId, *v.PipelineExecutionId)
+	}
+}
+func (v *StopPipelineExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopPipelineExecutionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopPipelineExecutionOutput_pipelineExecutionId:
+			v.PipelineExecutionId = new(string)
+			return d.ReadString(schemas.StopPipelineExecutionOutput_pipelineExecutionId, v.PipelineExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopPipelineExecution, schemas.StopPipelineExecutionInput, schemas.StopPipelineExecutionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopPipelineExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopPipelineExecution, schemas.StopPipelineExecutionInput, schemas.StopPipelineExecutionOutput), output: &StopPipelineExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopPipelineExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopPipelineExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopPipelineExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopPipelineExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +143,8 @@ func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopPipelineExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopPipelineExecution",
-	}
 }

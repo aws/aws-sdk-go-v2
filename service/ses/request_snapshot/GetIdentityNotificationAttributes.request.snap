@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetIdentityNotificationAttributes&Identities.member.1=__Member__&Identities.member.2=__Member__&Version=2010-12-01

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"status":"CREATING","subnetIds":["__Member__","__Member__"],"vpcEndpointId":"__VpcEndpointId__","vpcId":"__VpcId__"}

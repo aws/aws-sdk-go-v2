@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=AssociateSubnetCidrBlock&Ipv6CidrBlock=__Ipv6CidrBlock__&Ipv6IpamPoolId=__Ipv6IpamPoolId__&Ipv6NetmaskLength=1&SubnetId=__SubnetId__&Version=2016-11-15

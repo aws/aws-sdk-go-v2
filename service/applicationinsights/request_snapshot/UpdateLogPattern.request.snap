@@ -1,0 +1,7 @@
+POST /service/EC2WindowsBarleyService/operation/UpdateLogPattern
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥qResourceGroupNameu__ResourceGroupName__nPatternSetNamer__PatternSetName__kPatternNameo__PatternName__gPatternk__Pattern__dRank

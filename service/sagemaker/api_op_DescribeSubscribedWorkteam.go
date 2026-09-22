@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about a work team provided by a vendor. It returns details
@@ -38,6 +37,18 @@ type DescribeSubscribedWorkteamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubscribedWorkteamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSubscribedWorkteamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSubscribedWorkteamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkteamArn != nil {
+		s.WriteString(schemas.DescribeSubscribedWorkteamRequest_WorkteamArn, *v.WorkteamArn)
+	}
+}
+
 type DescribeSubscribedWorkteamOutput struct {
 
 	// A Workteam instance that contains information about the work team.
@@ -51,77 +62,50 @@ type DescribeSubscribedWorkteamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSubscribedWorkteamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSubscribedWorkteamResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSubscribedWorkteamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscribedWorkteam != nil {
+		s.WriteStruct(schemas.DescribeSubscribedWorkteamResponse_SubscribedWorkteam)
+		v.SubscribedWorkteam.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeSubscribedWorkteamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSubscribedWorkteamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSubscribedWorkteamResponse_SubscribedWorkteam:
+			v.SubscribedWorkteam = &types.SubscribedWorkteam{}
+			return v.SubscribedWorkteam.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSubscribedWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubscribedWorkteam, schemas.DescribeSubscribedWorkteamRequest, schemas.DescribeSubscribedWorkteamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSubscribedWorkteam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSubscribedWorkteam, schemas.DescribeSubscribedWorkteamRequest, schemas.DescribeSubscribedWorkteamResponse), output: &DescribeSubscribedWorkteamOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSubscribedWorkteam{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSubscribedWorkteam"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeSubscribedWorkteamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSubscribedWorkteam(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +120,8 @@ func (c *Client) addOperationDescribeSubscribedWorkteamMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeSubscribedWorkteam(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeSubscribedWorkteam",
-	}
 }

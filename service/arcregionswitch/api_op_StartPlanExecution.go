@@ -5,10 +5,10 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts the execution of a Region switch plan. You can execute a plan in either
@@ -50,6 +50,15 @@ type StartPlanExecutionInput struct {
 	// This member is required.
 	TargetRegion *string
 
+	// A unique, case-sensitive identifier to ensure that the operation completes no
+	// more than one time. If this token matches a previous request, the service
+	// ignores the request and returns the result of the original successful request.
+	// If you don't provide a client token, the service automatically generates one.
+	// For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+	ClientToken *string
+
 	// An optional comment explaining why the plan execution is being started.
 	Comment *string
 
@@ -67,6 +76,39 @@ type StartPlanExecutionInput struct {
 	RecoveryExecutionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartPlanExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPlanExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPlanExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.StartPlanExecutionRequest_action, string(v.Action))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_comment, *v.Comment)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_latestVersion, *v.LatestVersion)
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.StartPlanExecutionRequest_mode, string(v.Mode))
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_planArn, *v.PlanArn)
+	}
+	if v.RecoveryExecutionId != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_recoveryExecutionId, *v.RecoveryExecutionId)
+	}
+	if v.TargetRegion != nil {
+		s.WriteString(schemas.StartPlanExecutionRequest_targetRegion, *v.TargetRegion)
+	}
 }
 
 type StartPlanExecutionOutput struct {
@@ -92,65 +134,66 @@ type StartPlanExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPlanExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPlanExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPlanExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivateRegion != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_activateRegion, *v.ActivateRegion)
+	}
+	if v.DeactivateRegion != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_deactivateRegion, *v.DeactivateRegion)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_executionId, *v.ExecutionId)
+	}
+	if v.Plan != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_plan, *v.Plan)
+	}
+	if v.PlanVersion != nil {
+		s.WriteString(schemas.StartPlanExecutionResponse_planVersion, *v.PlanVersion)
+	}
+}
+func (v *StartPlanExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPlanExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPlanExecutionResponse_activateRegion:
+			v.ActivateRegion = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_activateRegion, v.ActivateRegion)
+		case schemas.StartPlanExecutionResponse_deactivateRegion:
+			v.DeactivateRegion = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_deactivateRegion, v.DeactivateRegion)
+		case schemas.StartPlanExecutionResponse_executionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_executionId, v.ExecutionId)
+		case schemas.StartPlanExecutionResponse_plan:
+			v.Plan = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_plan, v.Plan)
+		case schemas.StartPlanExecutionResponse_planVersion:
+			v.PlanVersion = new(string)
+			return d.ReadString(schemas.StartPlanExecutionResponse_planVersion, v.PlanVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPlanExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPlanExecution, schemas.StartPlanExecutionRequest, schemas.StartPlanExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartPlanExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPlanExecution, schemas.StartPlanExecutionRequest, schemas.StartPlanExecutionResponse), output: &StartPlanExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartPlanExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartPlanExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -159,13 +202,10 @@ func (c *Client) addOperationStartPlanExecutionMiddlewares(stack *middleware.Sta
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opStartPlanExecutionMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpStartPlanExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartPlanExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +220,41 @@ func (c *Client) addOperationStartPlanExecutionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
 }
 
-func newServiceMetadataMiddleware_opStartPlanExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartPlanExecution",
+type idempotencyToken_initializeOpStartPlanExecution struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpStartPlanExecution) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpStartPlanExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
 	}
+
+	input, ok := in.Parameters.(*StartPlanExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartPlanExecutionInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opStartPlanExecutionMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpStartPlanExecution{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }

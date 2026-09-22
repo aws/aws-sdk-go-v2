@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/UpdateGameServerGroup
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥sGameServerGroupNamew__GameServerGroupName__gRoleArnk__RoleArn__sInstanceDefinitions‚¢lInstanceTypehc4.largepWeightedCapacityt__WeightedCapacity__¢lInstanceTypehc4.largepWeightedCapacityt__WeightedCapacity__xGameServerProtectionPolicymNO_PROTECTIONqBalancingStrategyiSPOT_ONLY

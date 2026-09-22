@@ -1,0 +1,3 @@
+DELETE /instance/__InstanceId__/lambda-function?clientToken=__ClientToken__&functionArn=__FunctionArn__
+
+

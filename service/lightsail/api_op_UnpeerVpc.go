@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Unpeers the Lightsail VPC from the user's default VPC.
@@ -31,6 +30,15 @@ type UnpeerVpcInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnpeerVpcInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnpeerVpcRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnpeerVpcInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type UnpeerVpcOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -44,74 +52,47 @@ type UnpeerVpcOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnpeerVpcOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnpeerVpcResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnpeerVpcOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.UnpeerVpcResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UnpeerVpcOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnpeerVpcResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnpeerVpcResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnpeerVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnpeerVpc, schemas.UnpeerVpcRequest, schemas.UnpeerVpcResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUnpeerVpc{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnpeerVpc, schemas.UnpeerVpcRequest, schemas.UnpeerVpcResult), output: &UnpeerVpcOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUnpeerVpc{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UnpeerVpc"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUnpeerVpc(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -126,22 +107,8 @@ func (c *Client) addOperationUnpeerVpcMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUnpeerVpc(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UnpeerVpc",
-	}
 }

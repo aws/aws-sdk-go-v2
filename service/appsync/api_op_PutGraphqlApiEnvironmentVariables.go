@@ -4,10 +4,9 @@ package appsync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a list of environmental variables in an API by its ID value.
@@ -98,6 +97,19 @@ type PutGraphqlApiEnvironmentVariablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutGraphqlApiEnvironmentVariablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutGraphqlApiEnvironmentVariablesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutGraphqlApiEnvironmentVariablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.PutGraphqlApiEnvironmentVariablesRequest_apiId, *v.ApiId)
+	}
+	serializeEnvironmentVariableMap(s, schemas.PutGraphqlApiEnvironmentVariablesRequest_environmentVariables, v.EnvironmentVariables)
+}
+
 type PutGraphqlApiEnvironmentVariablesOutput struct {
 
 	// The payload containing each environmental variable in the "key" : "value"
@@ -110,77 +122,45 @@ type PutGraphqlApiEnvironmentVariablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutGraphqlApiEnvironmentVariablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutGraphqlApiEnvironmentVariablesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutGraphqlApiEnvironmentVariablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentVariableMap(s, schemas.PutGraphqlApiEnvironmentVariablesResponse_environmentVariables, v.EnvironmentVariables)
+}
+func (v *PutGraphqlApiEnvironmentVariablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutGraphqlApiEnvironmentVariablesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutGraphqlApiEnvironmentVariablesResponse_environmentVariables:
+			return deserializeEnvironmentVariableMap(d, schemas.PutGraphqlApiEnvironmentVariablesResponse_environmentVariables, &v.EnvironmentVariables)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutGraphqlApiEnvironmentVariablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGraphqlApiEnvironmentVariables, schemas.PutGraphqlApiEnvironmentVariablesRequest, schemas.PutGraphqlApiEnvironmentVariablesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutGraphqlApiEnvironmentVariables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutGraphqlApiEnvironmentVariables, schemas.PutGraphqlApiEnvironmentVariablesRequest, schemas.PutGraphqlApiEnvironmentVariablesResponse), output: &PutGraphqlApiEnvironmentVariablesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutGraphqlApiEnvironmentVariables{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutGraphqlApiEnvironmentVariables"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutGraphqlApiEnvironmentVariablesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutGraphqlApiEnvironmentVariables(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,22 +175,8 @@ func (c *Client) addOperationPutGraphqlApiEnvironmentVariablesMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutGraphqlApiEnvironmentVariables(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutGraphqlApiEnvironmentVariables",
-	}
 }

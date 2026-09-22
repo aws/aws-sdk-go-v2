@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyInstanceCapacityReservationAttributes&CapacityReservationSpecification.CapacityReservationPreference=capacity-reservations-only&CapacityReservationSpecification.CapacityReservationTarget.CapacityReservationId=__CapacityReservationId__&CapacityReservationSpecification.CapacityReservationTarget.CapacityReservationResourceGroupArn=__CapacityReservationResourceGroupArn__&DryRun=true&InstanceId=__InstanceId__&Version=2016-11-15

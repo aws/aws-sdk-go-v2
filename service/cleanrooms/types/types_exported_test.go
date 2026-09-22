@@ -285,6 +285,60 @@ var _ *types.ConsolidatedPolicyCustom
 var _ *types.ConsolidatedPolicyList
 var _ *types.ConsolidatedPolicyAggregation
 
+func ExampleIntermediateTableAnalysisRulePolicy_outputUsage() {
+	var union types.IntermediateTableAnalysisRulePolicy
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IntermediateTableAnalysisRulePolicyMemberV1:
+		_ = v.Value // Value is types.IntermediateTableAnalysisRulePolicyV1
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.IntermediateTableAnalysisRulePolicyV1
+
+func ExampleIntermediateTableAnalysisRulePolicyV1_outputUsage() {
+	var union types.IntermediateTableAnalysisRulePolicyV1
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IntermediateTableAnalysisRulePolicyV1MemberCustom:
+		_ = v.Value // Value is types.IntermediateTableAnalysisRuleCustom
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.IntermediateTableAnalysisRuleCustom
+
+func ExampleIntermediateTableComputeConfiguration_outputUsage() {
+	var union types.IntermediateTableComputeConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IntermediateTableComputeConfigurationMemberQueryComputeConfiguration:
+		_ = v.Value // Value is types.WorkerComputeConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.WorkerComputeConfiguration
+
 func ExampleMembershipProtectedJobOutputConfiguration_outputUsage() {
 	var union types.MembershipProtectedJobOutputConfiguration
 	// type switches can be used to check the union value
@@ -320,6 +374,24 @@ func ExampleMembershipProtectedQueryOutputConfiguration_outputUsage() {
 }
 
 var _ *types.ProtectedQueryS3OutputConfiguration
+
+func ExamplePopulationAnalysisConfiguration_outputUsage() {
+	var union types.PopulationAnalysisConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PopulationAnalysisConfigurationMemberSqlParameters:
+		_ = v.Value // Value is types.PopulationAnalysisSqlParameters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PopulationAnalysisSqlParameters
 
 func ExamplePreviewPrivacyImpactParametersInput_outputUsage() {
 	var union types.PreviewPrivacyImpactParametersInput
@@ -598,6 +670,9 @@ func ExampleProtectedQueryOutputConfiguration_outputUsage() {
 	case *types.ProtectedQueryOutputConfigurationMemberDistribute:
 		_ = v.Value // Value is types.ProtectedQueryDistributeOutputConfiguration
 
+	case *types.ProtectedQueryOutputConfigurationMemberIntermediateTable:
+		_ = v.Value // Value is types.IntermediateTableOutputConfiguration
+
 	case *types.ProtectedQueryOutputConfigurationMemberMember:
 		_ = v.Value // Value is types.ProtectedQueryMemberOutputConfiguration
 
@@ -615,6 +690,7 @@ func ExampleProtectedQueryOutputConfiguration_outputUsage() {
 
 var _ *types.ProtectedQueryMemberOutputConfiguration
 var _ *types.ProtectedQueryDistributeOutputConfiguration
+var _ *types.IntermediateTableOutputConfiguration
 var _ *types.ProtectedQueryS3OutputConfiguration
 
 func ExampleQueryConstraint_outputUsage() {
@@ -639,8 +715,14 @@ func ExampleSchemaTypeProperties_outputUsage() {
 	var union types.SchemaTypeProperties
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.SchemaTypePropertiesMemberConfiguredTableAssociation:
+		_ = v.Value // Value is types.ConfiguredTableAssociationSchemaTypeProperties
+
 	case *types.SchemaTypePropertiesMemberIdMappingTable:
 		_ = v.Value // Value is types.IdMappingTableSchemaTypeProperties
+
+	case *types.SchemaTypePropertiesMemberIntermediateTable:
+		_ = v.Value // Value is types.IntermediateTableSchemaTypeProperties
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -651,7 +733,9 @@ func ExampleSchemaTypeProperties_outputUsage() {
 	}
 }
 
+var _ *types.IntermediateTableSchemaTypeProperties
 var _ *types.IdMappingTableSchemaTypeProperties
+var _ *types.ConfiguredTableAssociationSchemaTypeProperties
 
 func ExampleSnowflakeTableSchema_outputUsage() {
 	var union types.SnowflakeTableSchema

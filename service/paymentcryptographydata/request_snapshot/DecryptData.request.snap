@@ -1,0 +1,5 @@
+POST /keys/__KeyIdentifier__/decrypt
+
+Content-Type: application/json
+
+{"CipherText":"__CipherText__","DecryptionAttributes":{"Symmetric":{"InitializationVector":"__InitializationVector__","Mode":"ECB","PaddingType":"PKCS1"}},"WrappedKey":{"KeyCheckValueAlgorithm":"CMAC","WrappedKeyMaterial":{"Tr31KeyBlock":"__WrappedKeyMaterialMemberTr31KeyBlock__"}}}

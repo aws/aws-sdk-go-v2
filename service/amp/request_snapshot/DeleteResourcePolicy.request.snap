@@ -1,0 +1,3 @@
+DELETE /workspaces/__WorkspaceId__/policy?clientToken=__ClientToken__&revisionId=__RevisionId__
+
+

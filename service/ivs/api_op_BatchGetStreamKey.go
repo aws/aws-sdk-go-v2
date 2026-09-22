@@ -4,11 +4,10 @@ package ivs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Performs GetStreamKey on multiple ARNs simultaneously.
@@ -35,6 +34,25 @@ type BatchGetStreamKeyInput struct {
 	Arns []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchGetStreamKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetStreamKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetStreamKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStreamKeyArnList(s, schemas.BatchGetStreamKeyRequest_arns, v.Arns)
+}
+func (v *BatchGetStreamKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetStreamKeyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetStreamKeyRequest_arns:
+			return deserializeStreamKeyArnList(d, schemas.BatchGetStreamKeyRequest_arns, &v.Arns)
+		}
+		return nil
+	})
 }
 
 type BatchGetStreamKeyOutput struct {
@@ -86,77 +104,90 @@ type BatchGetStreamKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetStreamKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetStreamKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetStreamKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	serializeBatchErrors(s, schemas.BatchGetStreamKeyResponse_errors, v.Errors)
+	serializeStreamKeys(s, schemas.BatchGetStreamKeyResponse_streamKeys, v.StreamKeys)
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.BatchGetStreamKeyResponse_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *BatchGetStreamKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetStreamKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetStreamKeyResponse_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.BatchGetStreamKeyResponse_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.BatchGetStreamKeyResponse_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_cacheControl, v.CacheControl)
+		case schemas.BatchGetStreamKeyResponse_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.BatchGetStreamKeyResponse_errors:
+			return deserializeBatchErrors(d, schemas.BatchGetStreamKeyResponse_errors, &v.Errors)
+		case schemas.BatchGetStreamKeyResponse_streamKeys:
+			return deserializeStreamKeys(d, schemas.BatchGetStreamKeyResponse_streamKeys, &v.StreamKeys)
+		case schemas.BatchGetStreamKeyResponse_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.BatchGetStreamKeyResponse_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.BatchGetStreamKeyResponse_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.BatchGetStreamKeyResponse_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetStreamKey, schemas.BatchGetStreamKeyRequest, schemas.BatchGetStreamKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetStreamKey, schemas.BatchGetStreamKeyRequest, schemas.BatchGetStreamKeyResponse), output: &BatchGetStreamKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetStreamKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetStreamKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetStreamKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetStreamKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +202,8 @@ func (c *Client) addOperationBatchGetStreamKeyMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetStreamKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetStreamKey",
-	}
 }

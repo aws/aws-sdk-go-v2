@@ -1,0 +1,6 @@
+PATCH /2023-10-12/batch-update-task
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"tasks":[{"farmId":"__FarmId__","jobId":"__JobId__","queueId":"__QueueId__","stepId":"__StepId__","targetRunStatus":"READY","taskId":"__TaskId__"},{"farmId":"__FarmId__","jobId":"__JobId__","queueId":"__QueueId__","stepId":"__StepId__","targetRunStatus":"READY","taskId":"__TaskId__"}]}

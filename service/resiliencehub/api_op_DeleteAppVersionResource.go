@@ -5,10 +5,10 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a resource from the Resilience Hub application.
@@ -71,6 +71,66 @@ type DeleteAppVersionResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppVersionResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppVersionResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppVersionResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_appArn, *v.AppArn)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_awsAccountId, *v.AwsAccountId)
+	}
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_awsRegion, *v.AwsRegion)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_clientToken, *v.ClientToken)
+	}
+	if v.LogicalResourceId != nil {
+		s.WriteStruct(schemas.DeleteAppVersionResourceRequest_logicalResourceId)
+		v.LogicalResourceId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PhysicalResourceId != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_physicalResourceId, *v.PhysicalResourceId)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceRequest_resourceName, *v.ResourceName)
+	}
+}
+func (v *DeleteAppVersionResourceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppVersionResourceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppVersionResourceRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_appArn, v.AppArn)
+		case schemas.DeleteAppVersionResourceRequest_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_awsAccountId, v.AwsAccountId)
+		case schemas.DeleteAppVersionResourceRequest_awsRegion:
+			v.AwsRegion = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_awsRegion, v.AwsRegion)
+		case schemas.DeleteAppVersionResourceRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_clientToken, v.ClientToken)
+		case schemas.DeleteAppVersionResourceRequest_logicalResourceId:
+			v.LogicalResourceId = &types.LogicalResourceId{}
+			return v.LogicalResourceId.Deserialize(d)
+		case schemas.DeleteAppVersionResourceRequest_physicalResourceId:
+			v.PhysicalResourceId = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_physicalResourceId, v.PhysicalResourceId)
+		case schemas.DeleteAppVersionResourceRequest_resourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceRequest_resourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
+
 type DeleteAppVersionResourceOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -99,65 +159,56 @@ type DeleteAppVersionResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppVersionResourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppVersionResourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppVersionResourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceResponse_appArn, *v.AppArn)
+	}
+	if v.AppVersion != nil {
+		s.WriteString(schemas.DeleteAppVersionResourceResponse_appVersion, *v.AppVersion)
+	}
+	if v.PhysicalResource != nil {
+		s.WriteStruct(schemas.DeleteAppVersionResourceResponse_physicalResource)
+		v.PhysicalResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAppVersionResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppVersionResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppVersionResourceResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceResponse_appArn, v.AppArn)
+		case schemas.DeleteAppVersionResourceResponse_appVersion:
+			v.AppVersion = new(string)
+			return d.ReadString(schemas.DeleteAppVersionResourceResponse_appVersion, v.AppVersion)
+		case schemas.DeleteAppVersionResourceResponse_physicalResource:
+			v.PhysicalResource = &types.PhysicalResource{}
+			return v.PhysicalResource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppVersionResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppVersionResource, schemas.DeleteAppVersionResourceRequest, schemas.DeleteAppVersionResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAppVersionResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppVersionResource, schemas.DeleteAppVersionResourceRequest, schemas.DeleteAppVersionResourceResponse), output: &DeleteAppVersionResourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAppVersionResource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAppVersionResource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -167,12 +218,6 @@ func (c *Client) addOperationDeleteAppVersionResourceMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpDeleteAppVersionResourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAppVersionResource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +230,6 @@ func (c *Client) addOperationDeleteAppVersionResourceMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -230,12 +269,4 @@ func (m *idempotencyToken_initializeOpDeleteAppVersionResource) HandleInitialize
 }
 func addIdempotencyToken_opDeleteAppVersionResourceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteAppVersionResource{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteAppVersionResource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteAppVersionResource",
-	}
 }

@@ -4,11 +4,10 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -19,6 +18,11 @@ import (
 // sets, and templates, along with reputation metrics and sending status. This
 // helps isolate and manage email sending for different customers or business units
 // within your Amazon SES API v2 account.
+//
+// You can optionally specify SuppressionAttributes to configure tenant-level
+// suppression at creation time. When tenant-level suppression is enabled, Amazon
+// SES maintains a separate suppression list for the tenant instead of using the
+// account-level suppression list.
 func (c *Client) CreateTenant(ctx context.Context, params *CreateTenantInput, optFns ...func(*Options)) (*CreateTenantOutput, error) {
 	if params == nil {
 		params = &CreateTenantInput{}
@@ -49,11 +53,33 @@ type CreateTenantInput struct {
 	// This member is required.
 	TenantName *string
 
+	// An object that contains information about the suppression list preferences for
+	// the tenant. Use this to configure tenant-level suppression at creation time.
+	SuppressionAttributes *types.TenantSuppressionAttributes
+
 	// An array of objects that define the tags (keys and values) to associate with
 	// the tenant
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateTenantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTenantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTenantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SuppressionAttributes != nil {
+		s.WriteStruct(schemas.CreateTenantRequest_SuppressionAttributes)
+		v.SuppressionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateTenantRequest_Tags, v.Tags)
+	if v.TenantName != nil {
+		s.WriteString(schemas.CreateTenantRequest_TenantName, *v.TenantName)
+	}
 }
 
 // Information about a newly created tenant.
@@ -64,6 +90,9 @@ type CreateTenantOutput struct {
 
 	// The status of email sending capability for the tenant.
 	SendingStatus types.SendingStatus
+
+	// An object that contains the suppression list preferences for a tenant.
+	SuppressionAttributes *types.TenantSuppressionAttributes
 
 	// An array of objects that define the tags (keys and values) associated with the
 	// tenant.
@@ -84,77 +113,87 @@ type CreateTenantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTenantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTenantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTenantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CreateTenantResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.SendingStatus != "" {
+		s.WriteString(schemas.CreateTenantResponse_SendingStatus, string(v.SendingStatus))
+	}
+	if v.SuppressionAttributes != nil {
+		s.WriteStruct(schemas.CreateTenantResponse_SuppressionAttributes)
+		v.SuppressionAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateTenantResponse_Tags, v.Tags)
+	if v.TenantArn != nil {
+		s.WriteString(schemas.CreateTenantResponse_TenantArn, *v.TenantArn)
+	}
+	if v.TenantId != nil {
+		s.WriteString(schemas.CreateTenantResponse_TenantId, *v.TenantId)
+	}
+	if v.TenantName != nil {
+		s.WriteString(schemas.CreateTenantResponse_TenantName, *v.TenantName)
+	}
+}
+func (v *CreateTenantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTenantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTenantResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateTenantResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateTenantResponse_SendingStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateTenantResponse_SendingStatus, &ev); err != nil {
+				return err
+			}
+			v.SendingStatus = types.SendingStatus(ev)
+			return nil
+		case schemas.CreateTenantResponse_SuppressionAttributes:
+			v.SuppressionAttributes = &types.TenantSuppressionAttributes{}
+			return v.SuppressionAttributes.Deserialize(d)
+		case schemas.CreateTenantResponse_Tags:
+			return deserializeTagList(d, schemas.CreateTenantResponse_Tags, &v.Tags)
+		case schemas.CreateTenantResponse_TenantArn:
+			v.TenantArn = new(string)
+			return d.ReadString(schemas.CreateTenantResponse_TenantArn, v.TenantArn)
+		case schemas.CreateTenantResponse_TenantId:
+			v.TenantId = new(string)
+			return d.ReadString(schemas.CreateTenantResponse_TenantId, v.TenantId)
+		case schemas.CreateTenantResponse_TenantName:
+			v.TenantName = new(string)
+			return d.ReadString(schemas.CreateTenantResponse_TenantName, v.TenantName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTenantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTenant, schemas.CreateTenantRequest, schemas.CreateTenantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTenant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTenant, schemas.CreateTenantRequest, schemas.CreateTenantResponse), output: &CreateTenantOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTenant{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTenant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTenantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTenant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +208,8 @@ func (c *Client) addOperationCreateTenantMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateTenant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTenant",
-	}
 }

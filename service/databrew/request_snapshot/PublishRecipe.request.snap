@@ -1,0 +1,5 @@
+POST /recipes/__Name__/publishRecipe
+
+Content-Type: application/json
+
+{"Description":"__Description__"}

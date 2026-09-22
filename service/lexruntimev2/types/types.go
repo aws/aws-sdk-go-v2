@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/lexruntimev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -40,6 +42,39 @@ type ActiveContext struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActiveContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveContext) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActiveContextParametersMap(s, schemas.ActiveContext_contextAttributes, v.ContextAttributes)
+	if v.Name != nil {
+		s.WriteString(schemas.ActiveContext_name, *v.Name)
+	}
+	if v.TimeToLive != nil {
+		s.WriteStruct(schemas.ActiveContext_timeToLive)
+		v.TimeToLive.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ActiveContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveContext_contextAttributes:
+			return deserializeActiveContextParametersMap(d, schemas.ActiveContext_contextAttributes, &v.ContextAttributes)
+		case schemas.ActiveContext_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ActiveContext_name, v.Name)
+		case schemas.ActiveContext_timeToLive:
+			v.TimeToLive = &ActiveContextTimeToLive{}
+			return v.TimeToLive.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The time that a context is active. You can specify the time to live in seconds
 // or in conversation turns.
 type ActiveContextTimeToLive struct {
@@ -57,6 +92,34 @@ type ActiveContextTimeToLive struct {
 	TurnsToLive *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActiveContextTimeToLive) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveContextTimeToLive)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveContextTimeToLive) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimeToLiveInSeconds != nil {
+		s.WriteInt32(schemas.ActiveContextTimeToLive_timeToLiveInSeconds, *v.TimeToLiveInSeconds)
+	}
+	if v.TurnsToLive != nil {
+		s.WriteInt32(schemas.ActiveContextTimeToLive_turnsToLive, *v.TurnsToLive)
+	}
+}
+func (v *ActiveContextTimeToLive) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveContextTimeToLive, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveContextTimeToLive_timeToLiveInSeconds:
+			v.TimeToLiveInSeconds = new(int32)
+			return d.ReadInt32(schemas.ActiveContextTimeToLive_timeToLiveInSeconds, v.TimeToLiveInSeconds)
+		case schemas.ActiveContextTimeToLive_turnsToLive:
+			v.TurnsToLive = new(int32)
+			return d.ReadInt32(schemas.ActiveContextTimeToLive_turnsToLive, v.TurnsToLive)
+		}
+		return nil
+	})
 }
 
 // Represents a chunk of audio sent from the client application to Amazon Lex V2.
@@ -89,6 +152,44 @@ type AudioInputEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AudioInputEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioInputEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioInputEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioChunk != nil {
+		s.WriteBlob(schemas.AudioInputEvent_audioChunk, v.AudioChunk)
+	}
+	if v.ClientTimestampMillis != 0 {
+		s.WriteInt64(schemas.AudioInputEvent_clientTimestampMillis, v.ClientTimestampMillis)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.AudioInputEvent_contentType, *v.ContentType)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.AudioInputEvent_eventId, *v.EventId)
+	}
+}
+func (v *AudioInputEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioInputEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioInputEvent_audioChunk:
+			return d.ReadBlob(schemas.AudioInputEvent_audioChunk, &v.AudioChunk)
+		case schemas.AudioInputEvent_clientTimestampMillis:
+			return d.ReadInt64(schemas.AudioInputEvent_clientTimestampMillis, &v.ClientTimestampMillis)
+		case schemas.AudioInputEvent_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.AudioInputEvent_contentType, v.ContentType)
+		case schemas.AudioInputEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.AudioInputEvent_eventId, v.EventId)
+		}
+		return nil
+	})
+}
+
 // An event sent from Amazon Lex V2 to your client application containing audio to
 // play to the user.
 type AudioResponseEvent struct {
@@ -108,6 +209,39 @@ type AudioResponseEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AudioResponseEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AudioResponseEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AudioResponseEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudioChunk != nil {
+		s.WriteBlob(schemas.AudioResponseEvent_audioChunk, v.AudioChunk)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.AudioResponseEvent_contentType, *v.ContentType)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.AudioResponseEvent_eventId, *v.EventId)
+	}
+}
+func (v *AudioResponseEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AudioResponseEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AudioResponseEvent_audioChunk:
+			return d.ReadBlob(schemas.AudioResponseEvent_audioChunk, &v.AudioChunk)
+		case schemas.AudioResponseEvent_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.AudioResponseEvent_contentType, v.ContentType)
+		case schemas.AudioResponseEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.AudioResponseEvent_eventId, v.EventId)
+		}
+		return nil
+	})
+}
+
 // A button that appears on a response card show to the user.
 type Button struct {
 
@@ -124,6 +258,34 @@ type Button struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Button) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Button)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Button) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.Button_text, *v.Text)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Button_value, *v.Value)
+	}
+}
+func (v *Button) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Button, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Button_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.Button_text, v.Text)
+		case schemas.Button_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Button_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Provides a score that indicates the confidence that Amazon Lex V2 has that an
 // intent is the one that satisfies the user's intent.
 type ConfidenceScore struct {
@@ -134,6 +296,27 @@ type ConfidenceScore struct {
 	Score float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfidenceScore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfidenceScore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfidenceScore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Score != 0 {
+		s.WriteFloat64(schemas.ConfidenceScore_score, v.Score)
+	}
+}
+func (v *ConfidenceScore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfidenceScore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfidenceScore_score:
+			return d.ReadFloat64(schemas.ConfidenceScore_score, &v.Score)
+		}
+		return nil
+	})
 }
 
 // The initial event sent from the application to Amazon Lex V2 to configure the
@@ -210,6 +393,58 @@ type ConfigurationEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientTimestampMillis != 0 {
+		s.WriteInt64(schemas.ConfigurationEvent_clientTimestampMillis, v.ClientTimestampMillis)
+	}
+	if v.DisablePlayback != false {
+		s.WriteBool(schemas.ConfigurationEvent_disablePlayback, v.DisablePlayback)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.ConfigurationEvent_eventId, *v.EventId)
+	}
+	serializeStringMap(s, schemas.ConfigurationEvent_requestAttributes, v.RequestAttributes)
+	if v.ResponseContentType != nil {
+		s.WriteString(schemas.ConfigurationEvent_responseContentType, *v.ResponseContentType)
+	}
+	if v.SessionState != nil {
+		s.WriteStruct(schemas.ConfigurationEvent_sessionState)
+		v.SessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMessages(s, schemas.ConfigurationEvent_welcomeMessages, v.WelcomeMessages)
+}
+func (v *ConfigurationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationEvent_clientTimestampMillis:
+			return d.ReadInt64(schemas.ConfigurationEvent_clientTimestampMillis, &v.ClientTimestampMillis)
+		case schemas.ConfigurationEvent_disablePlayback:
+			return d.ReadBool(schemas.ConfigurationEvent_disablePlayback, &v.DisablePlayback)
+		case schemas.ConfigurationEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.ConfigurationEvent_eventId, v.EventId)
+		case schemas.ConfigurationEvent_requestAttributes:
+			return deserializeStringMap(d, schemas.ConfigurationEvent_requestAttributes, &v.RequestAttributes)
+		case schemas.ConfigurationEvent_responseContentType:
+			v.ResponseContentType = new(string)
+			return d.ReadString(schemas.ConfigurationEvent_responseContentType, v.ResponseContentType)
+		case schemas.ConfigurationEvent_sessionState:
+			v.SessionState = &SessionState{}
+			return v.SessionState.Deserialize(d)
+		case schemas.ConfigurationEvent_welcomeMessages:
+			return deserializeMessages(d, schemas.ConfigurationEvent_welcomeMessages, &v.WelcomeMessages)
+		}
+		return nil
+	})
+}
+
 // The next action that Amazon Lex V2 should take.
 type DialogAction struct {
 
@@ -253,6 +488,56 @@ type DialogAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DialogAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DialogAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DialogAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SlotElicitationStyle != "" {
+		s.WriteString(schemas.DialogAction_slotElicitationStyle, string(v.SlotElicitationStyle))
+	}
+	if v.SlotToElicit != nil {
+		s.WriteString(schemas.DialogAction_slotToElicit, *v.SlotToElicit)
+	}
+	if v.SubSlotToElicit != nil {
+		s.WriteStruct(schemas.DialogAction_subSlotToElicit)
+		v.SubSlotToElicit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DialogAction_type, string(v.Type))
+	}
+}
+func (v *DialogAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DialogAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DialogAction_slotElicitationStyle:
+			var ev string
+			if err := d.ReadString(schemas.DialogAction_slotElicitationStyle, &ev); err != nil {
+				return err
+			}
+			v.SlotElicitationStyle = StyleType(ev)
+			return nil
+		case schemas.DialogAction_slotToElicit:
+			v.SlotToElicit = new(string)
+			return d.ReadString(schemas.DialogAction_slotToElicit, v.SlotToElicit)
+		case schemas.DialogAction_subSlotToElicit:
+			v.SubSlotToElicit = &ElicitSubSlot{}
+			return v.SubSlotToElicit.Deserialize(d)
+		case schemas.DialogAction_type:
+			var ev string
+			if err := d.ReadString(schemas.DialogAction_type, &ev); err != nil {
+				return err
+			}
+			v.Type = DialogActionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A notification from the client that it is disconnecting from Amazon Lex V2.
 // Sending a DisconnectionEvent event is optional, but can help identify a
 // conversation in logs.
@@ -267,6 +552,33 @@ type DisconnectionEvent struct {
 	EventId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DisconnectionEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisconnectionEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisconnectionEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientTimestampMillis != 0 {
+		s.WriteInt64(schemas.DisconnectionEvent_clientTimestampMillis, v.ClientTimestampMillis)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.DisconnectionEvent_eventId, *v.EventId)
+	}
+}
+func (v *DisconnectionEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisconnectionEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisconnectionEvent_clientTimestampMillis:
+			return d.ReadInt64(schemas.DisconnectionEvent_clientTimestampMillis, &v.ClientTimestampMillis)
+		case schemas.DisconnectionEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.DisconnectionEvent_eventId, v.EventId)
+		}
+		return nil
+	})
 }
 
 // A DTMF character sent from the client application. DTMF characters are
@@ -291,6 +603,39 @@ type DTMFInputEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DTMFInputEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DTMFInputEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DTMFInputEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientTimestampMillis != 0 {
+		s.WriteInt64(schemas.DTMFInputEvent_clientTimestampMillis, v.ClientTimestampMillis)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.DTMFInputEvent_eventId, *v.EventId)
+	}
+	if v.InputCharacter != nil {
+		s.WriteString(schemas.DTMFInputEvent_inputCharacter, *v.InputCharacter)
+	}
+}
+func (v *DTMFInputEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DTMFInputEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DTMFInputEvent_clientTimestampMillis:
+			return d.ReadInt64(schemas.DTMFInputEvent_clientTimestampMillis, &v.ClientTimestampMillis)
+		case schemas.DTMFInputEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.DTMFInputEvent_eventId, v.EventId)
+		case schemas.DTMFInputEvent_inputCharacter:
+			v.InputCharacter = new(string)
+			return d.ReadString(schemas.DTMFInputEvent_inputCharacter, v.InputCharacter)
+		}
+		return nil
+	})
+}
+
 // The specific constituent sub slot of the composite slot to elicit in dialog
 // action.
 type ElicitSubSlot struct {
@@ -306,6 +651,36 @@ type ElicitSubSlot struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ElicitSubSlot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ElicitSubSlot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ElicitSubSlot) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ElicitSubSlot_name, *v.Name)
+	}
+	if v.SubSlotToElicit != nil {
+		s.WriteStruct(schemas.ElicitSubSlot_subSlotToElicit)
+		v.SubSlotToElicit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ElicitSubSlot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ElicitSubSlot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ElicitSubSlot_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ElicitSubSlot_name, v.Name)
+		case schemas.ElicitSubSlot_subSlotToElicit:
+			v.SubSlotToElicit = &ElicitSubSlot{}
+			return v.SubSlotToElicit.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Event that Amazon Lex V2 sends to indicate that the stream is still open
 // between the client application and Amazon Lex V2
 type HeartbeatEvent struct {
@@ -316,6 +691,28 @@ type HeartbeatEvent struct {
 	EventId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HeartbeatEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HeartbeatEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HeartbeatEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.HeartbeatEvent_eventId, *v.EventId)
+	}
+}
+func (v *HeartbeatEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HeartbeatEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HeartbeatEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.HeartbeatEvent_eventId, v.EventId)
+		}
+		return nil
+	})
 }
 
 // A card that is shown to the user by a messaging platform. You define the
@@ -346,6 +743,43 @@ type ImageResponseCard struct {
 	Subtitle *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImageResponseCard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageResponseCard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageResponseCard) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeButtonsList(s, schemas.ImageResponseCard_buttons, v.Buttons)
+	if v.ImageUrl != nil {
+		s.WriteString(schemas.ImageResponseCard_imageUrl, *v.ImageUrl)
+	}
+	if v.Subtitle != nil {
+		s.WriteString(schemas.ImageResponseCard_subtitle, *v.Subtitle)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ImageResponseCard_title, *v.Title)
+	}
+}
+func (v *ImageResponseCard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageResponseCard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageResponseCard_buttons:
+			return deserializeButtonsList(d, schemas.ImageResponseCard_buttons, &v.Buttons)
+		case schemas.ImageResponseCard_imageUrl:
+			v.ImageUrl = new(string)
+			return d.ReadString(schemas.ImageResponseCard_imageUrl, v.ImageUrl)
+		case schemas.ImageResponseCard_subtitle:
+			v.Subtitle = new(string)
+			return d.ReadString(schemas.ImageResponseCard_subtitle, v.Subtitle)
+		case schemas.ImageResponseCard_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ImageResponseCard_title, v.Title)
+		}
+		return nil
+	})
 }
 
 // The current intent that Amazon Lex V2 is attempting to fulfill.
@@ -386,6 +820,51 @@ type Intent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Intent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Intent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Intent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfirmationState != "" {
+		s.WriteString(schemas.Intent_confirmationState, string(v.ConfirmationState))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Intent_name, *v.Name)
+	}
+	serializeSlots(s, schemas.Intent_slots, v.Slots)
+	if v.State != "" {
+		s.WriteString(schemas.Intent_state, string(v.State))
+	}
+}
+func (v *Intent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Intent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Intent_confirmationState:
+			var ev string
+			if err := d.ReadString(schemas.Intent_confirmationState, &ev); err != nil {
+				return err
+			}
+			v.ConfirmationState = ConfirmationState(ev)
+			return nil
+		case schemas.Intent_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Intent_name, v.Name)
+		case schemas.Intent_slots:
+			return deserializeSlots(d, schemas.Intent_slots, &v.Slots)
+		case schemas.Intent_state:
+			var ev string
+			if err := d.ReadString(schemas.Intent_state, &ev); err != nil {
+				return err
+			}
+			v.State = IntentState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains the current state of the conversation between the client application
 // and Amazon Lex V2.
 type IntentResultEvent struct {
@@ -422,6 +901,66 @@ type IntentResultEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IntentResultEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IntentResultEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IntentResultEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.IntentResultEvent_eventId, *v.EventId)
+	}
+	if v.InputMode != "" {
+		s.WriteString(schemas.IntentResultEvent_inputMode, string(v.InputMode))
+	}
+	serializeInterpretations(s, schemas.IntentResultEvent_interpretations, v.Interpretations)
+	if v.RecognizedBotMember != nil {
+		s.WriteStruct(schemas.IntentResultEvent_recognizedBotMember)
+		v.RecognizedBotMember.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringMap(s, schemas.IntentResultEvent_requestAttributes, v.RequestAttributes)
+	if v.SessionId != nil {
+		s.WriteString(schemas.IntentResultEvent_sessionId, *v.SessionId)
+	}
+	if v.SessionState != nil {
+		s.WriteStruct(schemas.IntentResultEvent_sessionState)
+		v.SessionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IntentResultEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IntentResultEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IntentResultEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.IntentResultEvent_eventId, v.EventId)
+		case schemas.IntentResultEvent_inputMode:
+			var ev string
+			if err := d.ReadString(schemas.IntentResultEvent_inputMode, &ev); err != nil {
+				return err
+			}
+			v.InputMode = InputMode(ev)
+			return nil
+		case schemas.IntentResultEvent_interpretations:
+			return deserializeInterpretations(d, schemas.IntentResultEvent_interpretations, &v.Interpretations)
+		case schemas.IntentResultEvent_recognizedBotMember:
+			v.RecognizedBotMember = &RecognizedBotMember{}
+			return v.RecognizedBotMember.Deserialize(d)
+		case schemas.IntentResultEvent_requestAttributes:
+			return deserializeStringMap(d, schemas.IntentResultEvent_requestAttributes, &v.RequestAttributes)
+		case schemas.IntentResultEvent_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.IntentResultEvent_sessionId, v.SessionId)
+		case schemas.IntentResultEvent_sessionState:
+			v.SessionState = &SessionState{}
+			return v.SessionState.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An object containing information about an intent that Amazon Lex V2 determined
 // might satisfy the user's utterance. The intents are ordered by the confidence
 // score.
@@ -449,6 +988,56 @@ type Interpretation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Interpretation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Interpretation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Interpretation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Intent != nil {
+		s.WriteStruct(schemas.Interpretation_intent)
+		v.Intent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InterpretationSource != "" {
+		s.WriteString(schemas.Interpretation_interpretationSource, string(v.InterpretationSource))
+	}
+	if v.NluConfidence != nil {
+		s.WriteStruct(schemas.Interpretation_nluConfidence)
+		v.NluConfidence.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SentimentResponse != nil {
+		s.WriteStruct(schemas.Interpretation_sentimentResponse)
+		v.SentimentResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Interpretation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Interpretation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Interpretation_intent:
+			v.Intent = &Intent{}
+			return v.Intent.Deserialize(d)
+		case schemas.Interpretation_interpretationSource:
+			var ev string
+			if err := d.ReadString(schemas.Interpretation_interpretationSource, &ev); err != nil {
+				return err
+			}
+			v.InterpretationSource = InterpretationSource(ev)
+			return nil
+		case schemas.Interpretation_nluConfidence:
+			v.NluConfidence = &ConfidenceScore{}
+			return v.NluConfidence.Deserialize(d)
+		case schemas.Interpretation_sentimentResponse:
+			v.SentimentResponse = &SentimentResponse{}
+			return v.SentimentResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Container for text that is returned to the customer..
 type Message struct {
 
@@ -470,6 +1059,46 @@ type Message struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Message) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Message)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Message) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.Message_content, *v.Content)
+	}
+	if v.ContentType != "" {
+		s.WriteString(schemas.Message_contentType, string(v.ContentType))
+	}
+	if v.ImageResponseCard != nil {
+		s.WriteStruct(schemas.Message_imageResponseCard)
+		v.ImageResponseCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Message) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Message, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Message_content:
+			v.Content = new(string)
+			return d.ReadString(schemas.Message_content, v.Content)
+		case schemas.Message_contentType:
+			var ev string
+			if err := d.ReadString(schemas.Message_contentType, &ev); err != nil {
+				return err
+			}
+			v.ContentType = MessageContentType(ev)
+			return nil
+		case schemas.Message_imageResponseCard:
+			v.ImageResponseCard = &ImageResponseCard{}
+			return v.ImageResponseCard.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Event sent from the client application to Amazon Lex V2 to indicate that
 // playback of audio is complete and that Amazon Lex V2 should start processing the
 // user's input.
@@ -484,6 +1113,33 @@ type PlaybackCompletionEvent struct {
 	EventId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PlaybackCompletionEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlaybackCompletionEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlaybackCompletionEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientTimestampMillis != 0 {
+		s.WriteInt64(schemas.PlaybackCompletionEvent_clientTimestampMillis, v.ClientTimestampMillis)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.PlaybackCompletionEvent_eventId, *v.EventId)
+	}
+}
+func (v *PlaybackCompletionEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlaybackCompletionEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlaybackCompletionEvent_clientTimestampMillis:
+			return d.ReadInt64(schemas.PlaybackCompletionEvent_clientTimestampMillis, &v.ClientTimestampMillis)
+		case schemas.PlaybackCompletionEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.PlaybackCompletionEvent_eventId, v.EventId)
+		}
+		return nil
+	})
 }
 
 // Event sent from Amazon Lex V2 to indicate to the client application should stop
@@ -509,6 +1165,44 @@ type PlaybackInterruptionEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlaybackInterruptionEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlaybackInterruptionEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlaybackInterruptionEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CausedByEventId != nil {
+		s.WriteString(schemas.PlaybackInterruptionEvent_causedByEventId, *v.CausedByEventId)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.PlaybackInterruptionEvent_eventId, *v.EventId)
+	}
+	if v.EventReason != "" {
+		s.WriteString(schemas.PlaybackInterruptionEvent_eventReason, string(v.EventReason))
+	}
+}
+func (v *PlaybackInterruptionEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlaybackInterruptionEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlaybackInterruptionEvent_causedByEventId:
+			v.CausedByEventId = new(string)
+			return d.ReadString(schemas.PlaybackInterruptionEvent_causedByEventId, v.CausedByEventId)
+		case schemas.PlaybackInterruptionEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.PlaybackInterruptionEvent_eventId, v.EventId)
+		case schemas.PlaybackInterruptionEvent_eventReason:
+			var ev string
+			if err := d.ReadString(schemas.PlaybackInterruptionEvent_eventReason, &ev); err != nil {
+				return err
+			}
+			v.EventReason = PlaybackInterruptionReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The bot member that processes the request.
 type RecognizedBotMember struct {
 
@@ -521,6 +1215,34 @@ type RecognizedBotMember struct {
 	BotName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecognizedBotMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecognizedBotMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecognizedBotMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.RecognizedBotMember_botId, *v.BotId)
+	}
+	if v.BotName != nil {
+		s.WriteString(schemas.RecognizedBotMember_botName, *v.BotName)
+	}
+}
+func (v *RecognizedBotMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecognizedBotMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecognizedBotMember_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.RecognizedBotMember_botId, v.BotId)
+		case schemas.RecognizedBotMember_botName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.RecognizedBotMember_botName, v.BotName)
+		}
+		return nil
+	})
 }
 
 // Provides an array of phrases that should be given preference when resolving
@@ -539,6 +1261,28 @@ type RuntimeHintDetails struct {
 	SubSlotHints map[string]RuntimeHintDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *RuntimeHintDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeHintDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeHintDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRuntimeHintValuesList(s, schemas.RuntimeHintDetails_runtimeHintValues, v.RuntimeHintValues)
+	serializeSlotHintsSlotMap(s, schemas.RuntimeHintDetails_subSlotHints, v.SubSlotHints)
+}
+func (v *RuntimeHintDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeHintDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeHintDetails_runtimeHintValues:
+			return deserializeRuntimeHintValuesList(d, schemas.RuntimeHintDetails_runtimeHintValues, &v.RuntimeHintValues)
+		case schemas.RuntimeHintDetails_subSlotHints:
+			return deserializeSlotHintsSlotMap(d, schemas.RuntimeHintDetails_subSlotHints, &v.SubSlotHints)
+		}
+		return nil
+	})
 }
 
 // You can provide Amazon Lex V2 with hints to the phrases that a customer is
@@ -568,6 +1312,25 @@ type RuntimeHints struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuntimeHints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeHints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeHints) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSlotHintsIntentMap(s, schemas.RuntimeHints_slotHints, v.SlotHints)
+}
+func (v *RuntimeHints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeHints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeHints_slotHints:
+			return deserializeSlotHintsIntentMap(d, schemas.RuntimeHints_slotHints, &v.SlotHints)
+		}
+		return nil
+	})
+}
+
 // Provides the phrase that Amazon Lex V2 should look for in the user's input to
 // the bot.
 type RuntimeHintValue struct {
@@ -578,6 +1341,28 @@ type RuntimeHintValue struct {
 	Phrase *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RuntimeHintValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuntimeHintValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuntimeHintValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Phrase != nil {
+		s.WriteString(schemas.RuntimeHintValue_phrase, *v.Phrase)
+	}
+}
+func (v *RuntimeHintValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuntimeHintValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuntimeHintValue_phrase:
+			v.Phrase = new(string)
+			return d.ReadString(schemas.RuntimeHintValue_phrase, v.Phrase)
+		}
+		return nil
+	})
 }
 
 // Provides information about the sentiment expressed in a user's response in a
@@ -597,6 +1382,40 @@ type SentimentResponse struct {
 	SentimentScore *SentimentScore
 
 	noSmithyDocumentSerde
+}
+
+func (v *SentimentResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SentimentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SentimentResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sentiment != "" {
+		s.WriteString(schemas.SentimentResponse_sentiment, string(v.Sentiment))
+	}
+	if v.SentimentScore != nil {
+		s.WriteStruct(schemas.SentimentResponse_sentimentScore)
+		v.SentimentScore.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SentimentResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SentimentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SentimentResponse_sentiment:
+			var ev string
+			if err := d.ReadString(schemas.SentimentResponse_sentiment, &ev); err != nil {
+				return err
+			}
+			v.Sentiment = SentimentType(ev)
+			return nil
+		case schemas.SentimentResponse_sentimentScore:
+			v.SentimentScore = &SentimentScore{}
+			return v.SentimentScore.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The individual sentiment responses for the utterance.
@@ -619,6 +1438,42 @@ type SentimentScore struct {
 	Positive float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SentimentScore) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SentimentScore)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SentimentScore) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mixed != 0 {
+		s.WriteFloat64(schemas.SentimentScore_mixed, v.Mixed)
+	}
+	if v.Negative != 0 {
+		s.WriteFloat64(schemas.SentimentScore_negative, v.Negative)
+	}
+	if v.Neutral != 0 {
+		s.WriteFloat64(schemas.SentimentScore_neutral, v.Neutral)
+	}
+	if v.Positive != 0 {
+		s.WriteFloat64(schemas.SentimentScore_positive, v.Positive)
+	}
+}
+func (v *SentimentScore) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SentimentScore, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SentimentScore_mixed:
+			return d.ReadFloat64(schemas.SentimentScore_mixed, &v.Mixed)
+		case schemas.SentimentScore_negative:
+			return d.ReadFloat64(schemas.SentimentScore_negative, &v.Negative)
+		case schemas.SentimentScore_neutral:
+			return d.ReadFloat64(schemas.SentimentScore_neutral, &v.Neutral)
+		case schemas.SentimentScore_positive:
+			return d.ReadFloat64(schemas.SentimentScore_positive, &v.Positive)
+		}
+		return nil
+	})
 }
 
 // The state of the user's session with Amazon Lex V2.
@@ -650,6 +1505,58 @@ type SessionState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SessionState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionState) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActiveContextsList(s, schemas.SessionState_activeContexts, v.ActiveContexts)
+	if v.DialogAction != nil {
+		s.WriteStruct(schemas.SessionState_dialogAction)
+		v.DialogAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Intent != nil {
+		s.WriteStruct(schemas.SessionState_intent)
+		v.Intent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OriginatingRequestId != nil {
+		s.WriteString(schemas.SessionState_originatingRequestId, *v.OriginatingRequestId)
+	}
+	if v.RuntimeHints != nil {
+		s.WriteStruct(schemas.SessionState_runtimeHints)
+		v.RuntimeHints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringMap(s, schemas.SessionState_sessionAttributes, v.SessionAttributes)
+}
+func (v *SessionState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionState_activeContexts:
+			return deserializeActiveContextsList(d, schemas.SessionState_activeContexts, &v.ActiveContexts)
+		case schemas.SessionState_dialogAction:
+			v.DialogAction = &DialogAction{}
+			return v.DialogAction.Deserialize(d)
+		case schemas.SessionState_intent:
+			v.Intent = &Intent{}
+			return v.Intent.Deserialize(d)
+		case schemas.SessionState_originatingRequestId:
+			v.OriginatingRequestId = new(string)
+			return d.ReadString(schemas.SessionState_originatingRequestId, v.OriginatingRequestId)
+		case schemas.SessionState_runtimeHints:
+			v.RuntimeHints = &RuntimeHints{}
+			return v.RuntimeHints.Deserialize(d)
+		case schemas.SessionState_sessionAttributes:
+			return deserializeStringMap(d, schemas.SessionState_sessionAttributes, &v.SessionAttributes)
+		}
+		return nil
+	})
+}
+
 // A value that Amazon Lex V2 uses to fulfill an intent.
 type Slot struct {
 
@@ -670,6 +1577,46 @@ type Slot struct {
 	Values []Slot
 
 	noSmithyDocumentSerde
+}
+
+func (v *Slot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Slot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Slot) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Shape != "" {
+		s.WriteString(schemas.Slot_shape, string(v.Shape))
+	}
+	serializeSlots(s, schemas.Slot_subSlots, v.SubSlots)
+	if v.Value != nil {
+		s.WriteStruct(schemas.Slot_value)
+		v.Value.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeValues(s, schemas.Slot_values, v.Values)
+}
+func (v *Slot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Slot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Slot_shape:
+			var ev string
+			if err := d.ReadString(schemas.Slot_shape, &ev); err != nil {
+				return err
+			}
+			v.Shape = Shape(ev)
+			return nil
+		case schemas.Slot_subSlots:
+			return deserializeSlots(d, schemas.Slot_subSlots, &v.SubSlots)
+		case schemas.Slot_value:
+			v.Value = &Value{}
+			return v.Value.Deserialize(d)
+		case schemas.Slot_values:
+			return deserializeValues(d, schemas.Slot_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Represents a stream of events between your application and Amazon Lex V2.
@@ -697,6 +1644,14 @@ type StartConversationRequestEventStreamMemberAudioInputEvent struct {
 
 func (*StartConversationRequestEventStreamMemberAudioInputEvent) isStartConversationRequestEventStream() {
 }
+func (v *StartConversationRequestEventStreamMemberAudioInputEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationRequestEventStream_AudioInputEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationRequestEventStreamMemberAudioInputEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Configuration information sent from your client application to Amazon Lex V2
 type StartConversationRequestEventStreamMemberConfigurationEvent struct {
@@ -706,6 +1661,14 @@ type StartConversationRequestEventStreamMemberConfigurationEvent struct {
 }
 
 func (*StartConversationRequestEventStreamMemberConfigurationEvent) isStartConversationRequestEventStream() {
+}
+func (v *StartConversationRequestEventStreamMemberConfigurationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationRequestEventStream_ConfigurationEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationRequestEventStreamMemberConfigurationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Event sent from the client application to indicate to Amazon Lex V2 that the
@@ -717,6 +1680,14 @@ type StartConversationRequestEventStreamMemberDisconnectionEvent struct {
 }
 
 func (*StartConversationRequestEventStreamMemberDisconnectionEvent) isStartConversationRequestEventStream() {
+}
+func (v *StartConversationRequestEventStreamMemberDisconnectionEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationRequestEventStream_DisconnectionEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationRequestEventStreamMemberDisconnectionEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // DTMF information sent to Amazon Lex V2 by your application. Amazon Lex V2
@@ -737,6 +1708,14 @@ type StartConversationRequestEventStreamMemberDTMFInputEvent struct {
 
 func (*StartConversationRequestEventStreamMemberDTMFInputEvent) isStartConversationRequestEventStream() {
 }
+func (v *StartConversationRequestEventStreamMemberDTMFInputEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationRequestEventStream_DTMFInputEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationRequestEventStreamMemberDTMFInputEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Event sent from the client application to Amazon Lex V2 to indicate that it has
 // finished playing audio and that Amazon Lex V2 should start listening for user
@@ -749,6 +1728,14 @@ type StartConversationRequestEventStreamMemberPlaybackCompletionEvent struct {
 
 func (*StartConversationRequestEventStreamMemberPlaybackCompletionEvent) isStartConversationRequestEventStream() {
 }
+func (v *StartConversationRequestEventStreamMemberPlaybackCompletionEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationRequestEventStream_PlaybackCompletionEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationRequestEventStreamMemberPlaybackCompletionEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Text sent from your client application to Amazon Lex V2. Each TextInputEvent is
 // processed individually.
@@ -759,6 +1746,14 @@ type StartConversationRequestEventStreamMemberTextInputEvent struct {
 }
 
 func (*StartConversationRequestEventStreamMemberTextInputEvent) isStartConversationRequestEventStream() {
+}
+func (v *StartConversationRequestEventStreamMemberTextInputEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationRequestEventStream_TextInputEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationRequestEventStreamMemberTextInputEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Represents a stream of events between Amazon Lex V2 and your application.
@@ -785,6 +1780,14 @@ type StartConversationResponseEventStreamMemberAudioResponseEvent struct {
 
 func (*StartConversationResponseEventStreamMemberAudioResponseEvent) isStartConversationResponseEventStream() {
 }
+func (v *StartConversationResponseEventStreamMemberAudioResponseEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationResponseEventStream_AudioResponseEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationResponseEventStreamMemberAudioResponseEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Event that Amazon Lex V2 sends to indicate that the stream is still open
 // between the client application and Amazon Lex V2
@@ -796,6 +1799,14 @@ type StartConversationResponseEventStreamMemberHeartbeatEvent struct {
 
 func (*StartConversationResponseEventStreamMemberHeartbeatEvent) isStartConversationResponseEventStream() {
 }
+func (v *StartConversationResponseEventStreamMemberHeartbeatEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationResponseEventStream_HeartbeatEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationResponseEventStreamMemberHeartbeatEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Event sent from Amazon Lex V2 to the client application containing the current
 // state of the conversation between the user and Amazon Lex V2.
@@ -806,6 +1817,14 @@ type StartConversationResponseEventStreamMemberIntentResultEvent struct {
 }
 
 func (*StartConversationResponseEventStreamMemberIntentResultEvent) isStartConversationResponseEventStream() {
+}
+func (v *StartConversationResponseEventStreamMemberIntentResultEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationResponseEventStream_IntentResultEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationResponseEventStreamMemberIntentResultEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Event sent from Amazon Lex V2 to indicate to the client application should stop
@@ -822,6 +1841,14 @@ type StartConversationResponseEventStreamMemberPlaybackInterruptionEvent struct 
 
 func (*StartConversationResponseEventStreamMemberPlaybackInterruptionEvent) isStartConversationResponseEventStream() {
 }
+func (v *StartConversationResponseEventStreamMemberPlaybackInterruptionEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationResponseEventStream_PlaybackInterruptionEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationResponseEventStreamMemberPlaybackInterruptionEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The event sent from Amazon Lex V2 to your application with text to present to
 // the user.
@@ -833,6 +1860,14 @@ type StartConversationResponseEventStreamMemberTextResponseEvent struct {
 
 func (*StartConversationResponseEventStreamMemberTextResponseEvent) isStartConversationResponseEventStream() {
 }
+func (v *StartConversationResponseEventStreamMemberTextResponseEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationResponseEventStream_TextResponseEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationResponseEventStreamMemberTextResponseEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Event sent from Amazon Lex V2 to your client application that contains a
 // transcript of voice audio.
@@ -843,6 +1878,14 @@ type StartConversationResponseEventStreamMemberTranscriptEvent struct {
 }
 
 func (*StartConversationResponseEventStreamMemberTranscriptEvent) isStartConversationResponseEventStream() {
+}
+func (v *StartConversationResponseEventStreamMemberTranscriptEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartConversationResponseEventStream_TranscriptEvent)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *StartConversationResponseEventStreamMemberTranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The event sent from your client application to Amazon Lex V2 with text input
@@ -865,6 +1908,39 @@ type TextInputEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextInputEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextInputEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextInputEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientTimestampMillis != 0 {
+		s.WriteInt64(schemas.TextInputEvent_clientTimestampMillis, v.ClientTimestampMillis)
+	}
+	if v.EventId != nil {
+		s.WriteString(schemas.TextInputEvent_eventId, *v.EventId)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.TextInputEvent_text, *v.Text)
+	}
+}
+func (v *TextInputEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextInputEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextInputEvent_clientTimestampMillis:
+			return d.ReadInt64(schemas.TextInputEvent_clientTimestampMillis, &v.ClientTimestampMillis)
+		case schemas.TextInputEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.TextInputEvent_eventId, v.EventId)
+		case schemas.TextInputEvent_text:
+			v.Text = new(string)
+			return d.ReadString(schemas.TextInputEvent_text, v.Text)
+		}
+		return nil
+	})
+}
+
 // The event sent from Amazon Lex V2 to your application with text to present to
 // the user.
 type TextResponseEvent struct {
@@ -882,6 +1958,31 @@ type TextResponseEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextResponseEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextResponseEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextResponseEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.TextResponseEvent_eventId, *v.EventId)
+	}
+	serializeMessages(s, schemas.TextResponseEvent_messages, v.Messages)
+}
+func (v *TextResponseEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextResponseEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextResponseEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.TextResponseEvent_eventId, v.EventId)
+		case schemas.TextResponseEvent_messages:
+			return deserializeMessages(d, schemas.TextResponseEvent_messages, &v.Messages)
+		}
+		return nil
+	})
+}
+
 // Event sent from Amazon Lex V2 to your client application that contains a
 // transcript of voice audio.
 type TranscriptEvent struct {
@@ -895,6 +1996,34 @@ type TranscriptEvent struct {
 	Transcript *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TranscriptEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranscriptEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranscriptEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.TranscriptEvent_eventId, *v.EventId)
+	}
+	if v.Transcript != nil {
+		s.WriteString(schemas.TranscriptEvent_transcript, *v.Transcript)
+	}
+}
+func (v *TranscriptEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranscriptEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranscriptEvent_eventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.TranscriptEvent_eventId, v.EventId)
+		case schemas.TranscriptEvent_transcript:
+			v.Transcript = new(string)
+			return d.ReadString(schemas.TranscriptEvent_transcript, v.Transcript)
+		}
+		return nil
+	})
 }
 
 // Information about the value provided for a slot and Amazon Lex V2's
@@ -918,6 +2047,37 @@ type Value struct {
 	ResolvedValues []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Value) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Value)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Value) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InterpretedValue != nil {
+		s.WriteString(schemas.Value_interpretedValue, *v.InterpretedValue)
+	}
+	if v.OriginalValue != nil {
+		s.WriteString(schemas.Value_originalValue, *v.OriginalValue)
+	}
+	serializeStringList(s, schemas.Value_resolvedValues, v.ResolvedValues)
+}
+func (v *Value) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Value, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Value_interpretedValue:
+			v.InterpretedValue = new(string)
+			return d.ReadString(schemas.Value_interpretedValue, v.InterpretedValue)
+		case schemas.Value_originalValue:
+			v.OriginalValue = new(string)
+			return d.ReadString(schemas.Value_originalValue, v.OriginalValue)
+		case schemas.Value_resolvedValues:
+			return deserializeStringList(d, schemas.Value_resolvedValues, &v.ResolvedValues)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

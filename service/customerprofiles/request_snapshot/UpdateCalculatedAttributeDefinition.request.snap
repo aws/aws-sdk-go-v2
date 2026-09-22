@@ -1,0 +1,5 @@
+PUT /domains/__DomainName__/calculated-attributes/__CalculatedAttributeName__
+
+Content-Type: application/json
+
+{"Conditions":{"ObjectCount":1,"Range":{"TimestampFormat":"__TimestampFormat__","TimestampSource":"__TimestampSource__","Unit":"DAYS","Value":1,"ValueRange":{"End":1,"Start":1}},"Threshold":{"Operator":"EQUAL_TO","Value":"__Value__"}},"Description":"__Description__","DisplayName":"__DisplayName__"}

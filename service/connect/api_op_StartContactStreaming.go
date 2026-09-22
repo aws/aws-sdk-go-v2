@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Initiates real-time message streaming for a new chat contact.
@@ -74,6 +74,29 @@ type StartContactStreamingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactStreamingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactStreamingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactStreamingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChatStreamingConfiguration != nil {
+		s.WriteStruct(schemas.StartContactStreamingRequest_ChatStreamingConfiguration)
+		v.ChatStreamingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartContactStreamingRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartContactStreamingRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartContactStreamingRequest_InstanceId, *v.InstanceId)
+	}
+}
+
 type StartContactStreamingOutput struct {
 
 	// The identifier of the streaming configuration enabled.
@@ -87,65 +110,42 @@ type StartContactStreamingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContactStreamingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContactStreamingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContactStreamingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamingId != nil {
+		s.WriteString(schemas.StartContactStreamingResponse_StreamingId, *v.StreamingId)
+	}
+}
+func (v *StartContactStreamingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContactStreamingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContactStreamingResponse_StreamingId:
+			v.StreamingId = new(string)
+			return d.ReadString(schemas.StartContactStreamingResponse_StreamingId, v.StreamingId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContactStreamingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactStreaming, schemas.StartContactStreamingRequest, schemas.StartContactStreamingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartContactStreaming{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContactStreaming, schemas.StartContactStreamingRequest, schemas.StartContactStreamingResponse), output: &StartContactStreamingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartContactStreaming{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartContactStreaming"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -155,12 +155,6 @@ func (c *Client) addOperationStartContactStreamingMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpStartContactStreamingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartContactStreaming(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +167,6 @@ func (c *Client) addOperationStartContactStreamingMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -218,12 +206,4 @@ func (m *idempotencyToken_initializeOpStartContactStreaming) HandleInitialize(ct
 }
 func addIdempotencyToken_opStartContactStreamingMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartContactStreaming{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartContactStreaming(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartContactStreaming",
-	}
 }

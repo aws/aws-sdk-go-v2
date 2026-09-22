@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes an existing dashboard QA configuration.
@@ -38,6 +37,18 @@ type DescribeDashboardsQAConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardsQAConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardsQAConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardsQAConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDashboardsQAConfigurationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+}
+
 type DescribeDashboardsQAConfigurationOutput struct {
 
 	// The status of dashboards QA configuration that you want described.
@@ -55,77 +66,63 @@ type DescribeDashboardsQAConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardsQAConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardsQAConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardsQAConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardsQAStatus != "" {
+		s.WriteString(schemas.DescribeDashboardsQAConfigurationResponse_DashboardsQAStatus, string(v.DashboardsQAStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDashboardsQAConfigurationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDashboardsQAConfigurationResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDashboardsQAConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDashboardsQAConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDashboardsQAConfigurationResponse_DashboardsQAStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDashboardsQAConfigurationResponse_DashboardsQAStatus, &ev); err != nil {
+				return err
+			}
+			v.DashboardsQAStatus = types.DashboardsQAStatus(ev)
+			return nil
+		case schemas.DescribeDashboardsQAConfigurationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDashboardsQAConfigurationResponse_RequestId, v.RequestId)
+		case schemas.DescribeDashboardsQAConfigurationResponse_Status:
+			return d.ReadInt32(schemas.DescribeDashboardsQAConfigurationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDashboardsQAConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardsQAConfiguration, schemas.DescribeDashboardsQAConfigurationRequest, schemas.DescribeDashboardsQAConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboardsQAConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardsQAConfiguration, schemas.DescribeDashboardsQAConfigurationRequest, schemas.DescribeDashboardsQAConfigurationResponse), output: &DescribeDashboardsQAConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDashboardsQAConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDashboardsQAConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDashboardsQAConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDashboardsQAConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +137,8 @@ func (c *Client) addOperationDescribeDashboardsQAConfigurationMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDashboardsQAConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDashboardsQAConfiguration",
-	}
 }

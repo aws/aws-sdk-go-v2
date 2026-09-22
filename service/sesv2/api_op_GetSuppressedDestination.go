@@ -4,15 +4,16 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a specific email address that's on the suppression
-// list for your account.
+// list for your account or for a specific tenant. To target a tenant's suppression
+// list, specify the TenantName parameter. If you omit TenantName , the operation
+// targets the account-level suppression list.
 func (c *Client) GetSuppressedDestination(ctx context.Context, params *GetSuppressedDestinationInput, optFns ...func(*Options)) (*GetSuppressedDestinationOutput, error) {
 	if params == nil {
 		params = &GetSuppressedDestinationInput{}
@@ -29,15 +30,35 @@ func (c *Client) GetSuppressedDestination(ctx context.Context, params *GetSuppre
 }
 
 // A request to retrieve information about an email address that's on the
-// suppression list for your account.
+// suppression list for your account or for a specific tenant.
 type GetSuppressedDestinationInput struct {
 
-	// The email address that's on the account suppression list.
+	// The email address that's on the suppression list for your account or for the
+	// specified tenant.
 	//
 	// This member is required.
 	EmailAddress *string
 
+	// The name of the tenant whose suppression list you want to query. If you omit
+	// this parameter, the operation targets the account-level suppression list.
+	TenantName *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *GetSuppressedDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSuppressedDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSuppressedDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.GetSuppressedDestinationRequest_EmailAddress, *v.EmailAddress)
+	}
+	if v.TenantName != nil {
+		s.WriteString(schemas.GetSuppressedDestinationRequest_TenantName, *v.TenantName)
+	}
 }
 
 // Information about the suppressed email address.
@@ -54,77 +75,50 @@ type GetSuppressedDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSuppressedDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSuppressedDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSuppressedDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SuppressedDestination != nil {
+		s.WriteStruct(schemas.GetSuppressedDestinationResponse_SuppressedDestination)
+		v.SuppressedDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSuppressedDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSuppressedDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSuppressedDestinationResponse_SuppressedDestination:
+			v.SuppressedDestination = &types.SuppressedDestination{}
+			return v.SuppressedDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSuppressedDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuppressedDestination, schemas.GetSuppressedDestinationRequest, schemas.GetSuppressedDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSuppressedDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuppressedDestination, schemas.GetSuppressedDestinationRequest, schemas.GetSuppressedDestinationResponse), output: &GetSuppressedDestinationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSuppressedDestination{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSuppressedDestination"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSuppressedDestinationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSuppressedDestination(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +133,8 @@ func (c *Client) addOperationGetSuppressedDestinationMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSuppressedDestination(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSuppressedDestination",
-	}
 }

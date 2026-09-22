@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Places an inbound in-app, web, or video call to a contact, and then initiates
@@ -51,7 +51,7 @@ type StartWebRTCContactInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The customer's details.
+	// The details of the participant, including their display name.
 	//
 	// This member is required.
 	ParticipantDetails *types.ParticipantDetails
@@ -92,7 +92,49 @@ type StartWebRTCContactInput struct {
 	// related to the contact starting.
 	RelatedContactId *string
 
+	// A map of system-defined attributes for the WebRTC contact segment. Use the
+	// connect:Subtype attribute to specify the channel subtype, such as connect:WebRTC
+	// .
+	SegmentAttributes map[string]types.SegmentAttributeValue
+
 	noSmithyDocumentSerde
+}
+
+func (v *StartWebRTCContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWebRTCContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWebRTCContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedCapabilities != nil {
+		s.WriteStruct(schemas.StartWebRTCContactRequest_AllowedCapabilities)
+		v.AllowedCapabilities.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.StartWebRTCContactRequest_Attributes, v.Attributes)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_Description, *v.Description)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ParticipantDetails != nil {
+		s.WriteStruct(schemas.StartWebRTCContactRequest_ParticipantDetails)
+		v.ParticipantDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeContactReferences(s, schemas.StartWebRTCContactRequest_References, v.References)
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartWebRTCContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	serializeSegmentAttributes(s, schemas.StartWebRTCContactRequest_SegmentAttributes, v.SegmentAttributes)
 }
 
 type StartWebRTCContactOutput struct {
@@ -120,65 +162,62 @@ type StartWebRTCContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWebRTCContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWebRTCContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWebRTCContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionData != nil {
+		s.WriteStruct(schemas.StartWebRTCContactResponse_ConnectionData)
+		v.ConnectionData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartWebRTCContactResponse_ContactId, *v.ContactId)
+	}
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.StartWebRTCContactResponse_ParticipantId, *v.ParticipantId)
+	}
+	if v.ParticipantToken != nil {
+		s.WriteString(schemas.StartWebRTCContactResponse_ParticipantToken, *v.ParticipantToken)
+	}
+}
+func (v *StartWebRTCContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartWebRTCContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartWebRTCContactResponse_ConnectionData:
+			v.ConnectionData = &types.ConnectionData{}
+			return v.ConnectionData.Deserialize(d)
+		case schemas.StartWebRTCContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartWebRTCContactResponse_ContactId, v.ContactId)
+		case schemas.StartWebRTCContactResponse_ParticipantId:
+			v.ParticipantId = new(string)
+			return d.ReadString(schemas.StartWebRTCContactResponse_ParticipantId, v.ParticipantId)
+		case schemas.StartWebRTCContactResponse_ParticipantToken:
+			v.ParticipantToken = new(string)
+			return d.ReadString(schemas.StartWebRTCContactResponse_ParticipantToken, v.ParticipantToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWebRTCContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWebRTCContact, schemas.StartWebRTCContactRequest, schemas.StartWebRTCContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartWebRTCContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWebRTCContact, schemas.StartWebRTCContactRequest, schemas.StartWebRTCContactResponse), output: &StartWebRTCContactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartWebRTCContact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartWebRTCContact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -188,12 +227,6 @@ func (c *Client) addOperationStartWebRTCContactMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpStartWebRTCContactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartWebRTCContact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,12 +239,6 @@ func (c *Client) addOperationStartWebRTCContactMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,12 +278,4 @@ func (m *idempotencyToken_initializeOpStartWebRTCContact) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opStartWebRTCContactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartWebRTCContact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartWebRTCContact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartWebRTCContact",
-	}
 }

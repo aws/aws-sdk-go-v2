@@ -4,10 +4,9 @@ package ec2query
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,40 @@ type QueryTimestampsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryTimestampsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryTimestampsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryTimestampsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EpochMember != nil {
+		s.WriteTime(schemas.QueryTimestampsInput_epochMember, *v.EpochMember)
+	}
+	if v.EpochTarget != nil {
+		s.WriteTime(schemas.QueryTimestampsInput_epochTarget, *v.EpochTarget)
+	}
+	if v.NormalFormat != nil {
+		s.WriteTime(schemas.QueryTimestampsInput_normalFormat, *v.NormalFormat)
+	}
+}
+func (v *QueryTimestampsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryTimestampsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryTimestampsInput_epochMember:
+			v.EpochMember = new(time.Time)
+			return d.ReadTime(schemas.QueryTimestampsInput_epochMember, v.EpochMember)
+		case schemas.QueryTimestampsInput_epochTarget:
+			v.EpochTarget = new(time.Time)
+			return d.ReadTime(schemas.QueryTimestampsInput_epochTarget, v.EpochTarget)
+		case schemas.QueryTimestampsInput_normalFormat:
+			v.NormalFormat = new(time.Time)
+			return d.ReadTime(schemas.QueryTimestampsInput_normalFormat, v.NormalFormat)
+		}
+		return nil
+	})
+}
+
 type QueryTimestampsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,74 +82,39 @@ type QueryTimestampsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryTimestampsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryTimestampsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *QueryTimestampsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryTimestamps, schemas.QueryTimestampsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsEc2query_serializeOpQueryTimestamps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryTimestamps, schemas.QueryTimestampsInput, nil), output: &QueryTimestampsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpQueryTimestamps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryTimestamps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryTimestamps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,22 +129,8 @@ func (c *Client) addOperationQueryTimestampsMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opQueryTimestamps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "QueryTimestamps",
-	}
 }

@@ -4,10 +4,8 @@ package verifiedpermissions
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified policy store alias.
@@ -15,11 +13,19 @@ import (
 // This operation is idempotent. If you specify a policy store alias that does not
 // exist, the request response will still return a successful HTTP 200 status code.
 //
-// When a policy store alias is deleted, it enters the PendingDeletion state. When
-// a policy store alias is in the PendingDeletion state, new policy store aliases
-// cannot be created with the same name. If the policy store alias is used in an
-// API that has a policyStoreId field, the operation will fail with a
+// By default, when a policy store alias is deleted, it enters the PendingDeletion
+// state. When a policy store alias is in the PendingDeletion state, new policy
+// store aliases cannot be created with the same name. If the policy store alias is
+// used in an API that has a policyStoreId field, the operation will fail with a
 // ResourceNotFound exception.
+//
+// To immediately delete a policy store alias and bypass the PendingDeletion
+// state, set the deletionMode parameter to HardDelete .
+//
+// Verified Permissions is eventually consistent. If you hard delete a policy
+// store alias and then immediately recreate it to be associated with a different
+// policy store, requests that reference this alias may continue to be evaluated
+// against the previously associated policy store for a short period of time.
 func (c *Client) DeletePolicyStoreAlias(ctx context.Context, params *DeletePolicyStoreAliasInput, optFns ...func(*Options)) (*DeletePolicyStoreAliasOutput, error) {
 	if params == nil {
 		params = &DeletePolicyStoreAliasInput{}
@@ -44,6 +50,15 @@ type DeletePolicyStoreAliasInput struct {
 	// This member is required.
 	AliasName *string
 
+	// Specifies the deletion mode for the policy store alias. The valid values are:
+	//
+	//   - SoftDelete – The policy store alias enters the PendingDeletion state. This
+	//   is the default behavior when no deletionMode is specified.
+	//
+	//   - HardDelete – The policy store alias is immediately deleted, bypassing the
+	//   PendingDeletion state.
+	DeletionMode types.DeletionMode
+
 	noSmithyDocumentSerde
 }
 
@@ -55,9 +70,6 @@ type DeletePolicyStoreAliasOutput struct {
 }
 
 func (c *Client) addOperationDeletePolicyStoreAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeletePolicyStoreAlias{}, middleware.After)
 	if err != nil {
 		return err
@@ -66,65 +78,20 @@ func (c *Client) addOperationDeletePolicyStoreAliasMiddlewares(stack *middleware
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePolicyStoreAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeletePolicyStoreAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePolicyStoreAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +106,8 @@ func (c *Client) addOperationDeletePolicyStoreAliasMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeletePolicyStoreAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeletePolicyStoreAlias",
-	}
 }

@@ -4,19 +4,19 @@ package devicefarm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A session is an instance of a browser created through a RemoteWebDriver with
-// the URL from CreateTestGridUrlResult$url. You can use the following to look up sessions:
+// the URL from CreateTestGridUrlResult . You can use the following to look up
+// sessions:
 //
-//   - The session ARN (GetTestGridSessionRequest$sessionArn ).
+//   - The session ARN.
 //
-//   - The project ARN and a session ID (GetTestGridSessionRequest$projectArn and GetTestGridSessionRequest$sessionId).
+//   - The project ARN and a session ID.
 func (c *Client) GetTestGridSession(ctx context.Context, params *GetTestGridSessionInput, optFns ...func(*Options)) (*GetTestGridSessionOutput, error) {
 	if params == nil {
 		params = &GetTestGridSessionInput{}
@@ -46,6 +46,24 @@ type GetTestGridSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestGridSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestGridSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestGridSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.GetTestGridSessionRequest_projectArn, *v.ProjectArn)
+	}
+	if v.SessionArn != nil {
+		s.WriteString(schemas.GetTestGridSessionRequest_sessionArn, *v.SessionArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetTestGridSessionRequest_sessionId, *v.SessionId)
+	}
+}
+
 type GetTestGridSessionOutput struct {
 
 	// The TestGridSession that was requested.
@@ -57,74 +75,47 @@ type GetTestGridSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestGridSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestGridSessionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestGridSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestGridSession != nil {
+		s.WriteStruct(schemas.GetTestGridSessionResult_testGridSession)
+		v.TestGridSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTestGridSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTestGridSessionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTestGridSessionResult_testGridSession:
+			v.TestGridSession = &types.TestGridSession{}
+			return v.TestGridSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTestGridSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestGridSession, schemas.GetTestGridSessionRequest, schemas.GetTestGridSessionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTestGridSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestGridSession, schemas.GetTestGridSessionRequest, schemas.GetTestGridSessionResult), output: &GetTestGridSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTestGridSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTestGridSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTestGridSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +130,8 @@ func (c *Client) addOperationGetTestGridSessionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTestGridSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTestGridSession",
-	}
 }

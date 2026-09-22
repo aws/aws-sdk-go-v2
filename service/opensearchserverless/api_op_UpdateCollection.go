@@ -5,10 +5,10 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an OpenSearch Serverless collection.
@@ -37,6 +37,10 @@ type UpdateCollectionInput struct {
 	// Unique, case-sensitive identifier to ensure idempotency of the request.
 	ClientToken *string
 
+	// Indicates whether to enable or disable deletion protection for the collection.
+	// When set to ENABLED , the collection cannot be deleted.
+	DeletionProtection types.DeletionProtection
+
 	// A description of the collection.
 	Description *string
 
@@ -44,6 +48,58 @@ type UpdateCollectionInput struct {
 	VectorOptions *types.VectorOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateCollectionRequest_clientToken, *v.ClientToken)
+	}
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.UpdateCollectionRequest_deletionProtection, string(v.DeletionProtection))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateCollectionRequest_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateCollectionRequest_id, *v.Id)
+	}
+	if v.VectorOptions != nil {
+		s.WriteStruct(schemas.UpdateCollectionRequest_vectorOptions)
+		v.VectorOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollectionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollectionRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateCollectionRequest_clientToken, v.ClientToken)
+		case schemas.UpdateCollectionRequest_deletionProtection:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCollectionRequest_deletionProtection, &ev); err != nil {
+				return err
+			}
+			v.DeletionProtection = types.DeletionProtection(ev)
+			return nil
+		case schemas.UpdateCollectionRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateCollectionRequest_description, v.Description)
+		case schemas.UpdateCollectionRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateCollectionRequest_id, v.Id)
+		case schemas.UpdateCollectionRequest_vectorOptions:
+			v.VectorOptions = &types.VectorOptions{}
+			return v.VectorOptions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type UpdateCollectionOutput struct {
@@ -57,65 +113,44 @@ type UpdateCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UpdateCollectionDetail != nil {
+		s.WriteStruct(schemas.UpdateCollectionResponse_updateCollectionDetail)
+		v.UpdateCollectionDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollectionResponse_updateCollectionDetail:
+			v.UpdateCollectionDetail = &types.UpdateCollectionDetail{}
+			return v.UpdateCollectionDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollection, schemas.UpdateCollectionRequest, schemas.UpdateCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollection, schemas.UpdateCollectionRequest, schemas.UpdateCollectionResponse), output: &UpdateCollectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateCollection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCollection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -125,12 +160,6 @@ func (c *Client) addOperationUpdateCollectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpUpdateCollectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCollection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +172,6 @@ func (c *Client) addOperationUpdateCollectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -188,12 +211,4 @@ func (m *idempotencyToken_initializeOpUpdateCollection) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opUpdateCollectionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateCollection{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateCollection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCollection",
-	}
 }

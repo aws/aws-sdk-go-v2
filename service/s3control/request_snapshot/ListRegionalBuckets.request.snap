@@ -1,0 +1,5 @@
+GET /v20180820/bucket?maxResults=1&nextToken=__NextToken__
+
+X-Amz-Account-Id: AccountId-value
+X-Amz-Outpost-Id: __OutpostId__
+

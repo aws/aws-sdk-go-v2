@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.SubmitFeedback
+
+{"ClickFeedbackItems":[{"ClickTime":946684800,"ResultId":"__ResultId__"},{"ClickTime":946684800,"ResultId":"__ResultId__"}],"IndexId":"__IndexId__","QueryId":"__QueryId__","RelevanceFeedbackItems":[{"RelevanceValue":"RELEVANT","ResultId":"__ResultId__"},{"RelevanceValue":"RELEVANT","ResultId":"__ResultId__"}]}

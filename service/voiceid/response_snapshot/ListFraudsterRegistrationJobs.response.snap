@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VoiceID.ListFraudsterRegistrationJobs
+
+{"JobSummaries":[{"CreatedAt":946684800,"DomainId":"__DomainId__","EndedAt":946684800,"FailureDetails":{"Message":"__Message__","StatusCode":1},"JobId":"__JobId__","JobName":"__JobName__","JobProgress":{"PercentComplete":1},"JobStatus":"SUBMITTED"},{"CreatedAt":946684800,"DomainId":"__DomainId__","EndedAt":946684800,"FailureDetails":{"Message":"__Message__","StatusCode":1},"JobId":"__JobId__","JobName":"__JobName__","JobProgress":{"PercentComplete":1},"JobStatus":"SUBMITTED"}],"NextToken":"__NextToken__"}

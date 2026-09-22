@@ -1,0 +1,5 @@
+POST /v1/whatsapp/flow/publish
+
+Content-Type: application/json
+
+{"flowId":"__FlowId__","id":"__Id__"}

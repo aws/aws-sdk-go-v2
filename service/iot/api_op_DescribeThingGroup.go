@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describe a thing group.
@@ -39,6 +38,18 @@ type DescribeThingGroupInput struct {
 	ThingGroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeThingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.DescribeThingGroupRequest_thingGroupName, *v.ThingGroupName)
+	}
 }
 
 type DescribeThingGroupOutput struct {
@@ -79,77 +90,109 @@ type DescribeThingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexName != nil {
+		s.WriteString(schemas.DescribeThingGroupResponse_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.DescribeThingGroupResponse_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.DescribeThingGroupResponse_queryVersion, *v.QueryVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeThingGroupResponse_status, string(v.Status))
+	}
+	if v.ThingGroupArn != nil {
+		s.WriteString(schemas.DescribeThingGroupResponse_thingGroupArn, *v.ThingGroupArn)
+	}
+	if v.ThingGroupId != nil {
+		s.WriteString(schemas.DescribeThingGroupResponse_thingGroupId, *v.ThingGroupId)
+	}
+	if v.ThingGroupMetadata != nil {
+		s.WriteStruct(schemas.DescribeThingGroupResponse_thingGroupMetadata)
+		v.ThingGroupMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThingGroupName != nil {
+		s.WriteString(schemas.DescribeThingGroupResponse_thingGroupName, *v.ThingGroupName)
+	}
+	if v.ThingGroupProperties != nil {
+		s.WriteStruct(schemas.DescribeThingGroupResponse_thingGroupProperties)
+		v.ThingGroupProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != 0 {
+		s.WriteInt64(schemas.DescribeThingGroupResponse_version, v.Version)
+	}
+}
+func (v *DescribeThingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThingGroupResponse_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.DescribeThingGroupResponse_indexName, v.IndexName)
+		case schemas.DescribeThingGroupResponse_queryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.DescribeThingGroupResponse_queryString, v.QueryString)
+		case schemas.DescribeThingGroupResponse_queryVersion:
+			v.QueryVersion = new(string)
+			return d.ReadString(schemas.DescribeThingGroupResponse_queryVersion, v.QueryVersion)
+		case schemas.DescribeThingGroupResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeThingGroupResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DynamicGroupStatus(ev)
+			return nil
+		case schemas.DescribeThingGroupResponse_thingGroupArn:
+			v.ThingGroupArn = new(string)
+			return d.ReadString(schemas.DescribeThingGroupResponse_thingGroupArn, v.ThingGroupArn)
+		case schemas.DescribeThingGroupResponse_thingGroupId:
+			v.ThingGroupId = new(string)
+			return d.ReadString(schemas.DescribeThingGroupResponse_thingGroupId, v.ThingGroupId)
+		case schemas.DescribeThingGroupResponse_thingGroupMetadata:
+			v.ThingGroupMetadata = &types.ThingGroupMetadata{}
+			return v.ThingGroupMetadata.Deserialize(d)
+		case schemas.DescribeThingGroupResponse_thingGroupName:
+			v.ThingGroupName = new(string)
+			return d.ReadString(schemas.DescribeThingGroupResponse_thingGroupName, v.ThingGroupName)
+		case schemas.DescribeThingGroupResponse_thingGroupProperties:
+			v.ThingGroupProperties = &types.ThingGroupProperties{}
+			return v.ThingGroupProperties.Deserialize(d)
+		case schemas.DescribeThingGroupResponse_version:
+			return d.ReadInt64(schemas.DescribeThingGroupResponse_version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThingGroup, schemas.DescribeThingGroupRequest, schemas.DescribeThingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeThingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThingGroup, schemas.DescribeThingGroupRequest, schemas.DescribeThingGroupResponse), output: &DescribeThingGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeThingGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeThingGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeThingGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeThingGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +207,8 @@ func (c *Client) addOperationDescribeThingGroupMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeThingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeThingGroup",
-	}
 }

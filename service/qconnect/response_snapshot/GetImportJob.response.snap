@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"importJob":{"createdTime":946684800,"externalSourceConfiguration":{"configuration":{"connectConfiguration":{"instanceId":"__InstanceId__"}},"source":"AMAZON_CONNECT"},"failedRecordReport":"__FailedRecordReport__","importJobId":"__ImportJobId__","importJobType":"QUICK_RESPONSES","knowledgeBaseArn":"__KnowledgeBaseArn__","knowledgeBaseId":"__KnowledgeBaseId__","lastModifiedTime":946684800,"metadata":{"key0":"__Value__"},"status":"START_IN_PROGRESS","uploadId":"__UploadId__","url":"__Url__","urlExpiry":946684800}}

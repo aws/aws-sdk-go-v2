@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *AnalysisNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AnalysisNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AnalysisNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnalysisNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnalysisNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AnalysisNotFoundException_Message, *v.Message)
+	}
+}
+func (v *AnalysisNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnalysisNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnalysisNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AnalysisNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	A request to backfill is already in progress. Once the previous request is
 //
@@ -60,6 +82,27 @@ func (e *BackfillLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BackfillLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BackfillLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackfillLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackfillLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BackfillLimitExceededException_Message, *v.Message)
+	}
+}
+func (v *BackfillLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackfillLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackfillLimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BackfillLimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested report expired. Update the date interval and try again.
 type BillExpirationException struct {
@@ -86,6 +129,27 @@ func (e *BillExpirationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BillExpirationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BillExpirationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillExpirationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillExpirationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BillExpirationException_Message, *v.Message)
+	}
+}
+func (v *BillExpirationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillExpirationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillExpirationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BillExpirationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	The billing view status must be HEALTHY to perform this action. Try again when
 //
@@ -114,6 +178,27 @@ func (e *BillingViewHealthStatusException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BillingViewHealthStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BillingViewHealthStatusException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewHealthStatusException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewHealthStatusException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BillingViewHealthStatusException_Message, *v.Message)
+	}
+}
+func (v *BillingViewHealthStatusException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewHealthStatusException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewHealthStatusException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BillingViewHealthStatusException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested data is unavailable.
 type DataUnavailableException struct {
@@ -140,6 +225,27 @@ func (e *DataUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DataUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DataUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DataUnavailableException_Message, *v.Message)
+	}
+}
+func (v *DataUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataUnavailableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DataUnavailableException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A request to generate a recommendation or analysis is already in progress.
 type GenerationExistsException struct {
@@ -166,6 +272,27 @@ func (e *GenerationExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *GenerationExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *GenerationExistsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GenerationExistsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GenerationExistsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.GenerationExistsException_Message, *v.Message)
+	}
+}
+func (v *GenerationExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GenerationExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GenerationExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GenerationExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The pagination token is invalid. Try again without a pagination token.
 type InvalidNextTokenException struct {
@@ -192,6 +319,27 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNextTokenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNextTokenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNextTokenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidNextTokenException_Message, *v.Message)
+	}
+}
+func (v *InvalidNextTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNextTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNextTokenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNextTokenException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You made too many calls in a short period of time. Try again later.
 type LimitExceededException struct {
@@ -218,6 +366,27 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_Message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Your request parameters changed between pages. Try again with the old
 // parameters or without a pagination token.
@@ -245,6 +414,27 @@ func (e *RequestChangedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestChangedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RequestChangedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestChangedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestChangedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RequestChangedException_Message, *v.Message)
+	}
+}
+func (v *RequestChangedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestChangedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestChangedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RequestChangedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified ARN in the request doesn't exist.
 type ResourceNotFoundException struct {
@@ -273,6 +463,33 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.ResourceNotFoundException_ResourceName, *v.ResourceName)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		case schemas.ResourceNotFoundException_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_ResourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
 
 //	You've reached the limit on the number of resources you can create, or
 //
@@ -301,6 +518,27 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Can occur if you specify a number of tags for a resource greater than the
 // maximum 50 user tags per resource.
@@ -330,6 +568,33 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsException_Message, *v.Message)
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.TooManyTagsException_ResourceName, *v.ResourceName)
+	}
+}
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_Message, v.Message)
+		case schemas.TooManyTagsException_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.TooManyTagsException_ResourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
 
 // The cost anomaly monitor does not exist for the account.
 type UnknownMonitorException struct {
@@ -356,6 +621,27 @@ func (e *UnknownMonitorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnknownMonitorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnknownMonitorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnknownMonitorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnknownMonitorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnknownMonitorException_Message, *v.Message)
+	}
+}
+func (v *UnknownMonitorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnknownMonitorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnknownMonitorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnknownMonitorException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The cost anomaly subscription does not exist for the account.
 type UnknownSubscriptionException struct {
@@ -382,6 +668,27 @@ func (e *UnknownSubscriptionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnknownSubscriptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnknownSubscriptionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnknownSubscriptionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnknownSubscriptionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnknownSubscriptionException_Message, *v.Message)
+	}
+}
+func (v *UnknownSubscriptionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnknownSubscriptionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnknownSubscriptionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnknownSubscriptionException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Cost Explorer was unable to identify the usage unit. Provide
 // UsageType/UsageTypeGroup filter selections that contain matching units, for
@@ -410,3 +717,24 @@ func (e *UnresolvableUsageUnitException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnresolvableUsageUnitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnresolvableUsageUnitException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnresolvableUsageUnitException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnresolvableUsageUnitException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnresolvableUsageUnitException_Message, *v.Message)
+	}
+}
+func (v *UnresolvableUsageUnitException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnresolvableUsageUnitException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnresolvableUsageUnitException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnresolvableUsageUnitException_Message, v.Message)
+		}
+		return nil
+	})
+}

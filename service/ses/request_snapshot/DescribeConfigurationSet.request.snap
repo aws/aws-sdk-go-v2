@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeConfigurationSet&ConfigurationSetAttributeNames.member.1=eventDestinations&ConfigurationSetAttributeNames.member.2=eventDestinations&ConfigurationSetName=__ConfigurationSetName__&Version=2010-12-01

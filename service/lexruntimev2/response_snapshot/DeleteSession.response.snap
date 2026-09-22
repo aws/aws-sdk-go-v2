@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botAliasId":"__BotAliasId__","botId":"__BotId__","localeId":"__LocaleId__","sessionId":"__SessionId__"}

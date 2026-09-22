@@ -1,0 +1,3 @@
+DELETE /DeleteImagePipeline?imagePipelineArn=__ImagePipelineArn__
+
+

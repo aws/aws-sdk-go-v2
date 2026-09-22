@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteLaunchTemplate&DryRun=true&LaunchTemplateId=__LaunchTemplateId__&LaunchTemplateName=__LaunchTemplateName__&Version=2016-11-15

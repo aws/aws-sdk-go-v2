@@ -4,12 +4,11 @@ package neptunegraph
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a private graph endpoint.
@@ -43,6 +42,20 @@ type DeletePrivateGraphEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrivateGraphEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrivateGraphEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrivateGraphEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphIdentifier != nil {
+		s.WriteString(schemas.DeletePrivateGraphEndpointInput_graphIdentifier, *v.GraphIdentifier)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DeletePrivateGraphEndpointInput_vpcId, *v.VpcId)
+	}
+}
 func (in *DeletePrivateGraphEndpointInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -74,77 +87,67 @@ type DeletePrivateGraphEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrivateGraphEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrivateGraphEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrivateGraphEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.DeletePrivateGraphEndpointOutput_status, string(v.Status))
+	}
+	serializeSubnetIds(s, schemas.DeletePrivateGraphEndpointOutput_subnetIds, v.SubnetIds)
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.DeletePrivateGraphEndpointOutput_vpcEndpointId, *v.VpcEndpointId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.DeletePrivateGraphEndpointOutput_vpcId, *v.VpcId)
+	}
+}
+func (v *DeletePrivateGraphEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePrivateGraphEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePrivateGraphEndpointOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeletePrivateGraphEndpointOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrivateGraphEndpointStatus(ev)
+			return nil
+		case schemas.DeletePrivateGraphEndpointOutput_subnetIds:
+			return deserializeSubnetIds(d, schemas.DeletePrivateGraphEndpointOutput_subnetIds, &v.SubnetIds)
+		case schemas.DeletePrivateGraphEndpointOutput_vpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.DeletePrivateGraphEndpointOutput_vpcEndpointId, v.VpcEndpointId)
+		case schemas.DeletePrivateGraphEndpointOutput_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.DeletePrivateGraphEndpointOutput_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePrivateGraphEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrivateGraphEndpoint, schemas.DeletePrivateGraphEndpointInput, schemas.DeletePrivateGraphEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePrivateGraphEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrivateGraphEndpoint, schemas.DeletePrivateGraphEndpointInput, schemas.DeletePrivateGraphEndpointOutput), output: &DeletePrivateGraphEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePrivateGraphEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePrivateGraphEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeletePrivateGraphEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePrivateGraphEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +162,8 @@ func (c *Client) addOperationDeletePrivateGraphEndpointMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeletePrivateGraphEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeletePrivateGraphEndpoint",
-	}
 }

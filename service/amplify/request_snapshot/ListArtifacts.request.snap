@@ -1,0 +1,3 @@
+GET /apps/__AppId__/branches/__BranchName__/jobs/__JobId__/artifacts?maxResults=1&nextToken=__NextToken__
+
+

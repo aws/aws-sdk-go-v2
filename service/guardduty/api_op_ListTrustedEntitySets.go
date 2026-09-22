@@ -5,9 +5,9 @@ package guardduty
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the trusted entity sets associated with the specified GuardDuty detector
@@ -54,6 +54,24 @@ type ListTrustedEntitySetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrustedEntitySetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrustedEntitySetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrustedEntitySetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.ListTrustedEntitySetsRequest_DetectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTrustedEntitySetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrustedEntitySetsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListTrustedEntitySetsOutput struct {
 
 	// The IDs of the trusted entity set resources.
@@ -71,77 +89,51 @@ type ListTrustedEntitySetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrustedEntitySetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrustedEntitySetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrustedEntitySetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrustedEntitySetsResponse_NextToken, *v.NextToken)
+	}
+	serializeTrustedEntitySetIds(s, schemas.ListTrustedEntitySetsResponse_TrustedEntitySetIds, v.TrustedEntitySetIds)
+}
+func (v *ListTrustedEntitySetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrustedEntitySetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrustedEntitySetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrustedEntitySetsResponse_NextToken, v.NextToken)
+		case schemas.ListTrustedEntitySetsResponse_TrustedEntitySetIds:
+			return deserializeTrustedEntitySetIds(d, schemas.ListTrustedEntitySetsResponse_TrustedEntitySetIds, &v.TrustedEntitySetIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrustedEntitySetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrustedEntitySets, schemas.ListTrustedEntitySetsRequest, schemas.ListTrustedEntitySetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTrustedEntitySets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrustedEntitySets, schemas.ListTrustedEntitySetsRequest, schemas.ListTrustedEntitySetsResponse), output: &ListTrustedEntitySetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTrustedEntitySets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrustedEntitySets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTrustedEntitySetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrustedEntitySets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +146,6 @@ func (c *Client) addOperationListTrustedEntitySetsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +248,3 @@ type ListTrustedEntitySetsAPIClient interface {
 }
 
 var _ ListTrustedEntitySetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTrustedEntitySets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTrustedEntitySets",
-	}
-}

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ReplaceImageInstanceTypeSpecification&DryRun=true&ImageId=__ImageId__&InstanceTypeSpecification.SupportedInstanceType.1=__Member__&InstanceTypeSpecification.SupportedInstanceType.2=__Member__&InstanceTypeSpecification.UnsupportedInstanceType.1=__Member__&InstanceTypeSpecification.UnsupportedInstanceType.2=__Member__&Version=2016-11-15

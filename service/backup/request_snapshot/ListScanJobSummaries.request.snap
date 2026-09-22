@@ -1,0 +1,3 @@
+GET /audit/scan-job-summaries?AccountId=__AccountId__&AggregationPeriod=ONE_DAY&MalwareScanner=GUARDDUTY&MaxResults=1&NextToken=__NextToken__&ResourceType=__ResourceType__&ScanResultStatus=NO_THREATS_FOUND&State=CREATED
+
+

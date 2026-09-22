@@ -1,0 +1,5 @@
+POST /campaigns/__Id__/outbound-call-config
+
+Content-Type: application/json
+
+{"answerMachineDetectionConfig":{"awaitAnswerMachinePrompt":true,"enableAnswerMachineDetection":true},"connectContactFlowId":"__ConnectContactFlowId__","connectSourcePhoneNumber":"__ConnectSourcePhoneNumber__"}

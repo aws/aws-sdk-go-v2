@@ -5,16 +5,16 @@ package qconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API will be discontinued starting June 1, 2024. To receive generative
 // responses after March 1, 2024, you will need to create a new Assistant in the
-// Amazon Connect console and integrate the Amazon Q in Connect JavaScript library
-// (amazon-q-connectjs) into your applications.
+// Connect Customer console and integrate the Amazon Q in Connect JavaScript
+// library (amazon-q-connectjs) into your applications.
 //
 // Performs a manual search against the specified assistant. To retrieve
 // recommendations for an assistant, use [GetRecommendations].
@@ -76,6 +76,68 @@ type QueryAssistantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryAssistantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryAssistantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryAssistantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantId != nil {
+		s.WriteString(schemas.QueryAssistantRequest_assistantId, *v.AssistantId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.QueryAssistantRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.QueryAssistantRequest_nextToken, *v.NextToken)
+	}
+	if v.OverrideKnowledgeBaseSearchType != "" {
+		s.WriteString(schemas.QueryAssistantRequest_overrideKnowledgeBaseSearchType, string(v.OverrideKnowledgeBaseSearchType))
+	}
+	serializeQueryConditionExpression(s, schemas.QueryAssistantRequest_queryCondition, v.QueryCondition)
+	serializeQueryInputData(s, schemas.QueryAssistantRequest_queryInputData, v.QueryInputData)
+	if v.QueryText != nil {
+		s.WriteString(schemas.QueryAssistantRequest_queryText, *v.QueryText)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.QueryAssistantRequest_sessionId, *v.SessionId)
+	}
+}
+func (v *QueryAssistantInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryAssistantRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryAssistantRequest_assistantId:
+			v.AssistantId = new(string)
+			return d.ReadString(schemas.QueryAssistantRequest_assistantId, v.AssistantId)
+		case schemas.QueryAssistantRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.QueryAssistantRequest_maxResults, v.MaxResults)
+		case schemas.QueryAssistantRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.QueryAssistantRequest_nextToken, v.NextToken)
+		case schemas.QueryAssistantRequest_overrideKnowledgeBaseSearchType:
+			var ev string
+			if err := d.ReadString(schemas.QueryAssistantRequest_overrideKnowledgeBaseSearchType, &ev); err != nil {
+				return err
+			}
+			v.OverrideKnowledgeBaseSearchType = types.KnowledgeBaseSearchType(ev)
+			return nil
+		case schemas.QueryAssistantRequest_queryCondition:
+			return deserializeQueryConditionExpression(d, schemas.QueryAssistantRequest_queryCondition, &v.QueryCondition)
+		case schemas.QueryAssistantRequest_queryInputData:
+			return deserializeQueryInputData(d, schemas.QueryAssistantRequest_queryInputData, &v.QueryInputData)
+		case schemas.QueryAssistantRequest_queryText:
+			v.QueryText = new(string)
+			return d.ReadString(schemas.QueryAssistantRequest_queryText, v.QueryText)
+		case schemas.QueryAssistantRequest_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.QueryAssistantRequest_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
+
 type QueryAssistantOutput struct {
 
 	// The results of the query.
@@ -92,77 +154,51 @@ type QueryAssistantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryAssistantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryAssistantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryAssistantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.QueryAssistantResponse_nextToken, *v.NextToken)
+	}
+	serializeQueryResultsList(s, schemas.QueryAssistantResponse_results, v.Results)
+}
+func (v *QueryAssistantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryAssistantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryAssistantResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.QueryAssistantResponse_nextToken, v.NextToken)
+		case schemas.QueryAssistantResponse_results:
+			return deserializeQueryResultsList(d, schemas.QueryAssistantResponse_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryAssistantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryAssistant, schemas.QueryAssistantRequest, schemas.QueryAssistantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryAssistant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryAssistant, schemas.QueryAssistantRequest, schemas.QueryAssistantResponse), output: &QueryAssistantOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpQueryAssistant{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryAssistant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpQueryAssistantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryAssistant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,12 +211,6 @@ func (c *Client) addOperationQueryAssistantMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +311,3 @@ type QueryAssistantAPIClient interface {
 }
 
 var _ QueryAssistantAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opQueryAssistant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "QueryAssistant",
-	}
-}

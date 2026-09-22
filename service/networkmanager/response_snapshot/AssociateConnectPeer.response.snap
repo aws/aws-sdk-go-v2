@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ConnectPeerAssociation":{"ConnectPeerId":"__ConnectPeerId__","DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkId":"__LinkId__","State":"PENDING"}}

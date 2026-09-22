@@ -1,0 +1,5 @@
+PATCH /v2/portals/__PortalId__
+
+Content-Type: application/json
+
+{"authorization":{"cognitoConfig":{"appClientId":"__AppClientId__","userPoolArn":"__UserPoolArn__","userPoolDomain":"__UserPoolDomain__"},"none":{}},"endpointConfiguration":{"acmManaged":{"certificateArn":"__CertificateArn__","domainName":"__DomainName__"},"none":{}},"includedPortalProductArns":["__Member__","__Member__"],"logoUri":"__LogoUri__","portalContent":{"description":"__Description__","displayName":"__DisplayName__","theme":{"customColors":{"accentColor":"__AccentColor__","backgroundColor":"__BackgroundColor__","errorValidationColor":"__ErrorValidationColor__","headerColor":"__HeaderColor__","navigationColor":"__NavigationColor__","textColor":"__TextColor__"},"logoLastUploaded":"2000-01-01T00:00:00Z"}},"rumAppMonitorName":"__RumAppMonitorName__"}

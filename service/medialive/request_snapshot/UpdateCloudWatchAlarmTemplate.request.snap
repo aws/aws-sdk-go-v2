@@ -1,0 +1,5 @@
+PATCH /prod/cloudwatch-alarm-templates/__Identifier__
+
+Content-Type: application/json
+
+{"comparisonOperator":"GreaterThanOrEqualToThreshold","datapointsToAlarm":1,"description":"__Description__","evaluationPeriods":1,"groupIdentifier":"__GroupIdentifier__","metricName":"__MetricName__","name":"__Name__","period":1,"statistic":"SampleCount","targetResourceType":"CLOUDFRONT_DISTRIBUTION","threshold":1,"treatMissingData":"notBreaching"}

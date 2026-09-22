@@ -5,10 +5,10 @@ package marketplaceagreement
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Obtains details about the entitlements of an agreement.
@@ -43,6 +43,24 @@ type GetAgreementEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgreementEntitlementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgreementEntitlementsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgreementEntitlementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.GetAgreementEntitlementsInput_agreementId, *v.AgreementId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAgreementEntitlementsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAgreementEntitlementsInput_nextToken, *v.NextToken)
+	}
+}
+
 type GetAgreementEntitlementsOutput struct {
 
 	// A list of agreement entitlements which are part of the latest agreement.
@@ -57,77 +75,51 @@ type GetAgreementEntitlementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgreementEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgreementEntitlementsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgreementEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgreementEntitlementList(s, schemas.GetAgreementEntitlementsOutput_agreementEntitlements, v.AgreementEntitlements)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAgreementEntitlementsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *GetAgreementEntitlementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgreementEntitlementsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgreementEntitlementsOutput_agreementEntitlements:
+			return deserializeAgreementEntitlementList(d, schemas.GetAgreementEntitlementsOutput_agreementEntitlements, &v.AgreementEntitlements)
+		case schemas.GetAgreementEntitlementsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAgreementEntitlementsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgreementEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgreementEntitlements, schemas.GetAgreementEntitlementsInput, schemas.GetAgreementEntitlementsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAgreementEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgreementEntitlements, schemas.GetAgreementEntitlementsInput, schemas.GetAgreementEntitlementsOutput), output: &GetAgreementEntitlementsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAgreementEntitlements{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAgreementEntitlements"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAgreementEntitlementsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgreementEntitlements(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +132,6 @@ func (c *Client) addOperationGetAgreementEntitlementsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +234,3 @@ type GetAgreementEntitlementsAPIClient interface {
 }
 
 var _ GetAgreementEntitlementsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetAgreementEntitlements(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAgreementEntitlements",
-	}
-}

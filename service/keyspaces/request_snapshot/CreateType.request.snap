@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: KeyspacesService.CreateType
+
+{"fieldDefinitions":[{"name":"__Name__","type":"__Type__"},{"name":"__Name__","type":"__Type__"}],"keyspaceName":"__KeyspaceName__","typeName":"__TypeName__"}

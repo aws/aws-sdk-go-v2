@@ -5,10 +5,10 @@ package transcribe
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of Medical Scribe jobs that match the specified criteria. If no
@@ -57,6 +57,27 @@ type ListMedicalScribeJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMedicalScribeJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMedicalScribeJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMedicalScribeJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobNameContains != nil {
+		s.WriteString(schemas.ListMedicalScribeJobsRequest_JobNameContains, *v.JobNameContains)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMedicalScribeJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMedicalScribeJobsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMedicalScribeJobsRequest_Status, string(v.Status))
+	}
+}
+
 type ListMedicalScribeJobsOutput struct {
 
 	// Provides a summary of information about each result.
@@ -79,74 +100,58 @@ type ListMedicalScribeJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMedicalScribeJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMedicalScribeJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMedicalScribeJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMedicalScribeJobSummaries(s, schemas.ListMedicalScribeJobsResponse_MedicalScribeJobSummaries, v.MedicalScribeJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMedicalScribeJobsResponse_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListMedicalScribeJobsResponse_Status, string(v.Status))
+	}
+}
+func (v *ListMedicalScribeJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMedicalScribeJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMedicalScribeJobsResponse_MedicalScribeJobSummaries:
+			return deserializeMedicalScribeJobSummaries(d, schemas.ListMedicalScribeJobsResponse_MedicalScribeJobSummaries, &v.MedicalScribeJobSummaries)
+		case schemas.ListMedicalScribeJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMedicalScribeJobsResponse_NextToken, v.NextToken)
+		case schemas.ListMedicalScribeJobsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListMedicalScribeJobsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.MedicalScribeJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMedicalScribeJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMedicalScribeJobs, schemas.ListMedicalScribeJobsRequest, schemas.ListMedicalScribeJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMedicalScribeJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMedicalScribeJobs, schemas.ListMedicalScribeJobsRequest, schemas.ListMedicalScribeJobsResponse), output: &ListMedicalScribeJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMedicalScribeJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMedicalScribeJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMedicalScribeJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,12 +164,6 @@ func (c *Client) addOperationListMedicalScribeJobsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +267,3 @@ type ListMedicalScribeJobsAPIClient interface {
 }
 
 var _ ListMedicalScribeJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMedicalScribeJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMedicalScribeJobs",
-	}
-}

@@ -5,10 +5,8 @@ package gameliftstreams
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -202,6 +200,13 @@ type StartStreamSessionInput struct {
 	// A human-readable label for the stream session. You can update this value later.
 	Description *string
 
+	// The configuration for the stream session's virtual monitor, including the
+	// resolution settings.
+	//
+	// If not specified, Amazon GameLift Streams uses the default resolution of 1920 ×
+	// 1080.
+	DisplayConfiguration *types.DisplayConfiguration
+
 	//  A list of locations, in order of priority, where you want Amazon GameLift
 	// Streams to start a stream from. For example, us-east-1 . Amazon GameLift Streams
 	// selects the location with the next available capacity to start a single stream
@@ -217,6 +222,14 @@ type StartStreamSessionInput struct {
 	// Configuration settings for sharing the stream session's performance stats with
 	// the client
 	PerformanceStatsConfiguration *types.PerformanceStatsConfiguration
+
+	// The ARN of an AWS Identity and Access Management (IAM) role that Amazon
+	// GameLift Streams assumes on your behalf during the stream session. The role
+	// grants Amazon GameLift Streams permission to obtain temporary credentials for
+	// your application. The role's trust policy must allow the
+	// gameliftstreams.amazonaws.com service principal to assume it. The role name must
+	// start with GameLiftStreams- .
+	RoleArn *string
 
 	// The maximum duration of a session. Amazon GameLift Streams will automatically
 	// terminate a session after this amount of time has elapsed, regardless of any
@@ -288,6 +301,9 @@ type StartStreamSessionOutput struct {
 	// time.
 	Description *string
 
+	// The configuration for the stream session's virtual monitor.
+	DisplayConfiguration *types.DisplayConfiguration
+
 	// Provides details about the stream session's exported files.
 	ExportFilesMetadata *types.ExportFilesMetadata
 
@@ -313,6 +329,11 @@ type StartStreamSessionOutput struct {
 
 	// The data transfer protocol in use with the stream session.
 	Protocol types.Protocol
+
+	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
+	// GameLift Streams assumes on behalf of your application during the stream
+	// session.
+	RoleArn *string
 
 	// The maximum duration of a session. Amazon GameLift Streams will automatically
 	// terminate a session after this amount of time has elapsed, regardless of any
@@ -420,9 +441,6 @@ type StartStreamSessionOutput struct {
 }
 
 func (c *Client) addOperationStartStreamSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartStreamSession{}, middleware.After)
 	if err != nil {
 		return err
@@ -431,53 +449,14 @@ func (c *Client) addOperationStartStreamSessionMiddlewares(stack *middleware.Sta
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartStreamSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -487,12 +466,6 @@ func (c *Client) addOperationStartStreamSessionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpStartStreamSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartStreamSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -505,12 +478,6 @@ func (c *Client) addOperationStartStreamSessionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -550,12 +517,4 @@ func (m *idempotencyToken_initializeOpStartStreamSession) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opStartStreamSessionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartStreamSession{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartStreamSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartStreamSession",
-	}
 }

@@ -4,11 +4,10 @@ package kms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Replicates a multi-Region key into the specified Region. This operation creates
@@ -254,6 +253,31 @@ type ReplicateKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicateKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicateKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicateKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BypassPolicyLockoutSafetyCheck != false {
+		s.WriteBool(schemas.ReplicateKeyRequest_BypassPolicyLockoutSafetyCheck, v.BypassPolicyLockoutSafetyCheck)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ReplicateKeyRequest_Description, *v.Description)
+	}
+	if v.KeyId != nil {
+		s.WriteString(schemas.ReplicateKeyRequest_KeyId, *v.KeyId)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.ReplicateKeyRequest_Policy, *v.Policy)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.ReplicateKeyRequest_ReplicaRegion, *v.ReplicaRegion)
+	}
+	serializeTagList(s, schemas.ReplicateKeyRequest_Tags, v.Tags)
+}
+
 type ReplicateKeyOutput struct {
 
 	// Displays details about the new replica key, including its Amazon Resource Name ([key ARN]
@@ -278,77 +302,59 @@ type ReplicateKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplicateKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplicateKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplicateKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicaKeyMetadata != nil {
+		s.WriteStruct(schemas.ReplicateKeyResponse_ReplicaKeyMetadata)
+		v.ReplicaKeyMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplicaPolicy != nil {
+		s.WriteString(schemas.ReplicateKeyResponse_ReplicaPolicy, *v.ReplicaPolicy)
+	}
+	serializeTagList(s, schemas.ReplicateKeyResponse_ReplicaTags, v.ReplicaTags)
+}
+func (v *ReplicateKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplicateKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplicateKeyResponse_ReplicaKeyMetadata:
+			v.ReplicaKeyMetadata = &types.KeyMetadata{}
+			return v.ReplicaKeyMetadata.Deserialize(d)
+		case schemas.ReplicateKeyResponse_ReplicaPolicy:
+			v.ReplicaPolicy = new(string)
+			return d.ReadString(schemas.ReplicateKeyResponse_ReplicaPolicy, v.ReplicaPolicy)
+		case schemas.ReplicateKeyResponse_ReplicaTags:
+			return deserializeTagList(d, schemas.ReplicateKeyResponse_ReplicaTags, &v.ReplicaTags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReplicateKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplicateKey, schemas.ReplicateKeyRequest, schemas.ReplicateKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReplicateKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReplicateKey, schemas.ReplicateKeyRequest, schemas.ReplicateKeyResponse), output: &ReplicateKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpReplicateKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ReplicateKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpReplicateKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReplicateKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -363,22 +369,8 @@ func (c *Client) addOperationReplicateKeyMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opReplicateKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ReplicateKey",
-	}
 }

@@ -1,0 +1,5 @@
+POST /graph/members
+
+Content-Type: application/json
+
+{"Accounts":[{"AccountId":"__AccountId__","EmailAddress":"__EmailAddress__"},{"AccountId":"__AccountId__","EmailAddress":"__EmailAddress__"}],"DisableEmailNotification":true,"GraphArn":"__GraphArn__","Message":"__Message__"}

@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new trigger.
@@ -84,6 +83,45 @@ type CreateTriggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTriggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTriggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTriggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeActionList(s, schemas.CreateTriggerRequest_Actions, v.Actions)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateTriggerRequest_Description, *v.Description)
+	}
+	if v.EventBatchingCondition != nil {
+		s.WriteStruct(schemas.CreateTriggerRequest_EventBatchingCondition)
+		v.EventBatchingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTriggerRequest_Name, *v.Name)
+	}
+	if v.Predicate != nil {
+		s.WriteStruct(schemas.CreateTriggerRequest_Predicate)
+		v.Predicate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schedule != nil {
+		s.WriteString(schemas.CreateTriggerRequest_Schedule, *v.Schedule)
+	}
+	if v.StartOnCreation != false {
+		s.WriteBool(schemas.CreateTriggerRequest_StartOnCreation, v.StartOnCreation)
+	}
+	serializeTagsMap(s, schemas.CreateTriggerRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateTriggerRequest_Type, string(v.Type))
+	}
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.CreateTriggerRequest_WorkflowName, *v.WorkflowName)
+	}
+}
+
 type CreateTriggerOutput struct {
 
 	// The name of the trigger.
@@ -95,77 +133,48 @@ type CreateTriggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTriggerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTriggerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTriggerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTriggerResponse_Name, *v.Name)
+	}
+}
+func (v *CreateTriggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTriggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTriggerResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateTriggerResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrigger, schemas.CreateTriggerRequest, schemas.CreateTriggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateTrigger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTrigger, schemas.CreateTriggerRequest, schemas.CreateTriggerResponse), output: &CreateTriggerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateTrigger{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTrigger"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTriggerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrigger(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +189,8 @@ func (c *Client) addOperationCreateTriggerMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateTrigger(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTrigger",
-	}
 }

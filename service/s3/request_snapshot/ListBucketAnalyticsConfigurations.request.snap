@@ -1,0 +1,4 @@
+GET /?analytics=&continuation-token=__ContinuationToken__&x-id=ListBucketAnalyticsConfigurations
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

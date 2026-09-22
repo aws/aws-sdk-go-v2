@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/deployments
+
+Content-Type: application/json
+
+{"applicationVersion":1,"clientToken":"__ClientToken__","environmentId":"__EnvironmentId__"}

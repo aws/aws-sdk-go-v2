@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Comprehend_20171127.StartEntitiesDetectionJob
+
+{"ClientRequestToken":"__ClientRequestToken__","DataAccessRoleArn":"__DataAccessRoleArn__","EntityRecognizerArn":"__EntityRecognizerArn__","FlywheelArn":"__FlywheelArn__","InputDataConfig":{"DocumentReaderConfig":{"DocumentReadAction":"TEXTRACT_DETECT_DOCUMENT_TEXT","DocumentReadMode":"SERVICE_DEFAULT","FeatureTypes":["TABLES","TABLES"]},"InputFormat":"ONE_DOC_PER_FILE","S3Uri":"__S3Uri__"},"JobName":"__JobName__","LanguageCode":"en","OutputDataConfig":{"KmsKeyId":"__KmsKeyId__","S3Uri":"__S3Uri__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeKmsKeyId":"__VolumeKmsKeyId__","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}}

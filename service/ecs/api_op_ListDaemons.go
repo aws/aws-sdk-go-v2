@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of daemons. You can filter the results by cluster or capacity
@@ -34,8 +33,8 @@ type ListDaemonsInput struct {
 	// by. Only daemons associated with the specified capacity providers are returned.
 	CapacityProviderArns []string
 
-	// The Amazon Resource Name (ARN) of the cluster to filter daemons by. If not
-	// specified, daemons from all clusters are returned.
+	// The Amazon Resource Name (ARN) of the cluster to filter daemons by. If you do
+	// not specify a cluster, the default cluster is assumed.
 	ClusterArn *string
 
 	// The maximum number of daemon results that ListDaemons returned in paginated
@@ -59,6 +58,25 @@ type ListDaemonsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDaemonsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDaemonsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDaemonsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListDaemonsRequest_capacityProviderArns, v.CapacityProviderArns)
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListDaemonsRequest_clusterArn, *v.ClusterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDaemonsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDaemonsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDaemonsOutput struct {
 
 	// The list of daemon summaries.
@@ -75,74 +93,48 @@ type ListDaemonsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDaemonsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDaemonsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDaemonsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDaemonSummariesList(s, schemas.ListDaemonsResponse_daemonSummariesList, v.DaemonSummariesList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDaemonsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDaemonsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDaemonsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDaemonsResponse_daemonSummariesList:
+			return deserializeDaemonSummariesList(d, schemas.ListDaemonsResponse_daemonSummariesList, &v.DaemonSummariesList)
+		case schemas.ListDaemonsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDaemonsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDaemonsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDaemons, schemas.ListDaemonsRequest, schemas.ListDaemonsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDaemons{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDaemons, schemas.ListDaemonsRequest, schemas.ListDaemonsResponse), output: &ListDaemonsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDaemons{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDaemons"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDaemons(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +149,8 @@ func (c *Client) addOperationListDaemonsMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListDaemons(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDaemons",
-	}
 }

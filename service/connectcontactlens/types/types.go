@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/connectcontactlens/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -23,6 +25,28 @@ type Categories struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Categories) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Categories)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Categories) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMatchedCategories(s, schemas.Categories_MatchedCategories, v.MatchedCategories)
+	serializeMatchedDetails(s, schemas.Categories_MatchedDetails, v.MatchedDetails)
+}
+func (v *Categories) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Categories, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Categories_MatchedCategories:
+			return deserializeMatchedCategories(d, schemas.Categories_MatchedCategories, &v.MatchedCategories)
+		case schemas.Categories_MatchedDetails:
+			return deserializeMatchedDetails(d, schemas.Categories_MatchedDetails, &v.MatchedDetails)
+		}
+		return nil
+	})
+}
+
 // Provides information about the category rule that was matched.
 type CategoryDetails struct {
 
@@ -32,6 +56,25 @@ type CategoryDetails struct {
 	PointsOfInterest []PointOfInterest
 
 	noSmithyDocumentSerde
+}
+
+func (v *CategoryDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoryDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoryDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePointsOfInterest(s, schemas.CategoryDetails_PointsOfInterest, v.PointsOfInterest)
+}
+func (v *CategoryDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoryDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoryDetails_PointsOfInterest:
+			return deserializePointsOfInterest(d, schemas.CategoryDetails_PointsOfInterest, &v.PointsOfInterest)
+		}
+		return nil
+	})
 }
 
 // For characters that were detected as issues, where they occur in the transcript.
@@ -50,6 +93,166 @@ type CharacterOffsets struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CharacterOffsets) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CharacterOffsets)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CharacterOffsets) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffsetChar != nil {
+		s.WriteInt32(schemas.CharacterOffsets_BeginOffsetChar, *v.BeginOffsetChar)
+	}
+	if v.EndOffsetChar != nil {
+		s.WriteInt32(schemas.CharacterOffsets_EndOffsetChar, *v.EndOffsetChar)
+	}
+}
+func (v *CharacterOffsets) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CharacterOffsets, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CharacterOffsets_BeginOffsetChar:
+			v.BeginOffsetChar = new(int32)
+			return d.ReadInt32(schemas.CharacterOffsets_BeginOffsetChar, v.BeginOffsetChar)
+		case schemas.CharacterOffsets_EndOffsetChar:
+			v.EndOffsetChar = new(int32)
+			return d.ReadInt32(schemas.CharacterOffsets_EndOffsetChar, v.EndOffsetChar)
+		}
+		return nil
+	})
+}
+
+// Segment containing information extracted from the conversation. Each segment
+// represents the results for a single extraction definition.
+type ExtractedInformation struct {
+
+	// The identifier of the extraction definition that produced this result.
+	//
+	// This member is required.
+	ExtractionDefinitionId *string
+
+	// The name of the extraction definition that produced this result.
+	//
+	// This member is required.
+	ExtractionDefinitionName *string
+
+	// The list of values extracted from the conversation for this extraction
+	// definition. This field is empty when a FailureCode is present.
+	ExtractedValues []ExtractedInformationValue
+
+	// The display label of the extraction definition that produced this result.
+	ExtractionDefinitionDisplayLabel *string
+
+	// If the information failed to be extracted, one of the following failure codes
+	// occurs:
+	//
+	//   - QUOTA_EXCEEDED : The number of concurrent analytics jobs reached your
+	//   service quota.
+	//
+	//   - INSUFFICIENT_CONVERSATION_CONTENT : Information extraction requires a
+	//   conversation with at least one turn from each participant.
+	//
+	//   - FAILED_SAFETY_GUIDELINES : The extracted information cannot be provided
+	//   because it failed to meet system safety guidelines.
+	//
+	//   - INTERNAL_ERROR : Internal system error.
+	//
+	//   - MAX_PACKAGE_FEATURE_ONLY : Information extraction is only available in
+	//   Amazon Connect Customer instances.
+	FailureCode ExtractedInformationFailureCode
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtractedInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtractedInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtractedInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExtractedInformationValues(s, schemas.ExtractedInformation_ExtractedValues, v.ExtractedValues)
+	if v.ExtractionDefinitionDisplayLabel != nil {
+		s.WriteString(schemas.ExtractedInformation_ExtractionDefinitionDisplayLabel, *v.ExtractionDefinitionDisplayLabel)
+	}
+	if v.ExtractionDefinitionId != nil {
+		s.WriteString(schemas.ExtractedInformation_ExtractionDefinitionId, *v.ExtractionDefinitionId)
+	}
+	if v.ExtractionDefinitionName != nil {
+		s.WriteString(schemas.ExtractedInformation_ExtractionDefinitionName, *v.ExtractionDefinitionName)
+	}
+	if v.FailureCode != "" {
+		s.WriteString(schemas.ExtractedInformation_FailureCode, string(v.FailureCode))
+	}
+}
+func (v *ExtractedInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtractedInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtractedInformation_ExtractedValues:
+			return deserializeExtractedInformationValues(d, schemas.ExtractedInformation_ExtractedValues, &v.ExtractedValues)
+		case schemas.ExtractedInformation_ExtractionDefinitionDisplayLabel:
+			v.ExtractionDefinitionDisplayLabel = new(string)
+			return d.ReadString(schemas.ExtractedInformation_ExtractionDefinitionDisplayLabel, v.ExtractionDefinitionDisplayLabel)
+		case schemas.ExtractedInformation_ExtractionDefinitionId:
+			v.ExtractionDefinitionId = new(string)
+			return d.ReadString(schemas.ExtractedInformation_ExtractionDefinitionId, v.ExtractionDefinitionId)
+		case schemas.ExtractedInformation_ExtractionDefinitionName:
+			v.ExtractionDefinitionName = new(string)
+			return d.ReadString(schemas.ExtractedInformation_ExtractionDefinitionName, v.ExtractionDefinitionName)
+		case schemas.ExtractedInformation_FailureCode:
+			var ev string
+			if err := d.ReadString(schemas.ExtractedInformation_FailureCode, &ev); err != nil {
+				return err
+			}
+			v.FailureCode = ExtractedInformationFailureCode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// An individual value extracted from the conversation, including its content and
+// the locations where it was found.
+type ExtractedInformationValue struct {
+
+	// The text content of the extracted value.
+	//
+	// This member is required.
+	Content *string
+
+	// The sections in the conversation that indicate where the extracted value was
+	// found.
+	//
+	// This member is required.
+	PointsOfInterest []PointOfInterest
+
+	noSmithyDocumentSerde
+}
+
+func (v *ExtractedInformationValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtractedInformationValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtractedInformationValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.ExtractedInformationValue_Content, *v.Content)
+	}
+	serializePointsOfInterest(s, schemas.ExtractedInformationValue_PointsOfInterest, v.PointsOfInterest)
+}
+func (v *ExtractedInformationValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtractedInformationValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtractedInformationValue_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.ExtractedInformationValue_Content, v.Content)
+		case schemas.ExtractedInformationValue_PointsOfInterest:
+			return deserializePointsOfInterest(d, schemas.ExtractedInformationValue_PointsOfInterest, &v.PointsOfInterest)
+		}
+		return nil
+	})
+}
+
 // Potential issues that are detected based on an artificial intelligence analysis
 // of each turn in the conversation.
 type IssueDetected struct {
@@ -62,20 +265,72 @@ type IssueDetected struct {
 	noSmithyDocumentSerde
 }
 
-// The section of the contact audio where that category rule was detected.
+func (v *IssueDetected) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IssueDetected)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IssueDetected) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CharacterOffsets != nil {
+		s.WriteStruct(schemas.IssueDetected_CharacterOffsets)
+		v.CharacterOffsets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IssueDetected) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IssueDetected, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IssueDetected_CharacterOffsets:
+			v.CharacterOffsets = &CharacterOffsets{}
+			return v.CharacterOffsets.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// The section of the contact audio where a match was detected.
 type PointOfInterest struct {
 
-	// The beginning offset in milliseconds where the category rule was detected.
+	// The beginning offset (in milliseconds) where the match was detected.
 	//
 	// This member is required.
 	BeginOffsetMillis *int32
 
-	// The ending offset in milliseconds where the category rule was detected.
+	// The ending offset (in milliseconds) where the match was detected.
 	//
 	// This member is required.
 	EndOffsetMillis *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *PointOfInterest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PointOfInterest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PointOfInterest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffsetMillis != nil {
+		s.WriteInt32(schemas.PointOfInterest_BeginOffsetMillis, *v.BeginOffsetMillis)
+	}
+	if v.EndOffsetMillis != nil {
+		s.WriteInt32(schemas.PointOfInterest_EndOffsetMillis, *v.EndOffsetMillis)
+	}
+}
+func (v *PointOfInterest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PointOfInterest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PointOfInterest_BeginOffsetMillis:
+			v.BeginOffsetMillis = new(int32)
+			return d.ReadInt32(schemas.PointOfInterest_BeginOffsetMillis, v.BeginOffsetMillis)
+		case schemas.PointOfInterest_EndOffsetMillis:
+			v.EndOffsetMillis = new(int32)
+			return d.ReadInt32(schemas.PointOfInterest_EndOffsetMillis, v.EndOffsetMillis)
+		}
+		return nil
+	})
 }
 
 // Information about the post-contact summary.
@@ -112,11 +367,56 @@ type PostContactSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PostContactSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PostContactSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PostContactSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.PostContactSummary_Content, *v.Content)
+	}
+	if v.FailureCode != "" {
+		s.WriteString(schemas.PostContactSummary_FailureCode, string(v.FailureCode))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PostContactSummary_Status, string(v.Status))
+	}
+}
+func (v *PostContactSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PostContactSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PostContactSummary_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.PostContactSummary_Content, v.Content)
+		case schemas.PostContactSummary_FailureCode:
+			var ev string
+			if err := d.ReadString(schemas.PostContactSummary_FailureCode, &ev); err != nil {
+				return err
+			}
+			v.FailureCode = PostContactSummaryFailureCode(ev)
+			return nil
+		case schemas.PostContactSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.PostContactSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = PostContactSummaryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An analyzed segment for a real-time analysis session.
 type RealtimeContactAnalysisSegment struct {
 
 	// The matched category rules.
 	Categories *Categories
+
+	// The extracted information from the conversation.
+	ExtractedInformation *ExtractedInformation
 
 	// Information about the post-contact summary.
 	PostContactSummary *PostContactSummary
@@ -125,6 +425,54 @@ type RealtimeContactAnalysisSegment struct {
 	Transcript *Transcript
 
 	noSmithyDocumentSerde
+}
+
+func (v *RealtimeContactAnalysisSegment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RealtimeContactAnalysisSegment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RealtimeContactAnalysisSegment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Categories != nil {
+		s.WriteStruct(schemas.RealtimeContactAnalysisSegment_Categories)
+		v.Categories.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExtractedInformation != nil {
+		s.WriteStruct(schemas.RealtimeContactAnalysisSegment_ExtractedInformation)
+		v.ExtractedInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PostContactSummary != nil {
+		s.WriteStruct(schemas.RealtimeContactAnalysisSegment_PostContactSummary)
+		v.PostContactSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Transcript != nil {
+		s.WriteStruct(schemas.RealtimeContactAnalysisSegment_Transcript)
+		v.Transcript.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RealtimeContactAnalysisSegment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RealtimeContactAnalysisSegment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RealtimeContactAnalysisSegment_Categories:
+			v.Categories = &Categories{}
+			return v.Categories.Deserialize(d)
+		case schemas.RealtimeContactAnalysisSegment_ExtractedInformation:
+			v.ExtractedInformation = &ExtractedInformation{}
+			return v.ExtractedInformation.Deserialize(d)
+		case schemas.RealtimeContactAnalysisSegment_PostContactSummary:
+			v.PostContactSummary = &PostContactSummary{}
+			return v.PostContactSummary.Deserialize(d)
+		case schemas.RealtimeContactAnalysisSegment_Transcript:
+			v.Transcript = &Transcript{}
+			return v.Transcript.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A list of messages in the session.
@@ -167,6 +515,71 @@ type Transcript struct {
 	Sentiment SentimentValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *Transcript) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Transcript)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Transcript) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginOffsetMillis != nil {
+		s.WriteInt32(schemas.Transcript_BeginOffsetMillis, *v.BeginOffsetMillis)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.Transcript_Content, *v.Content)
+	}
+	if v.EndOffsetMillis != nil {
+		s.WriteInt32(schemas.Transcript_EndOffsetMillis, *v.EndOffsetMillis)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Transcript_Id, *v.Id)
+	}
+	serializeIssuesDetected(s, schemas.Transcript_IssuesDetected, v.IssuesDetected)
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.Transcript_ParticipantId, *v.ParticipantId)
+	}
+	if v.ParticipantRole != nil {
+		s.WriteString(schemas.Transcript_ParticipantRole, *v.ParticipantRole)
+	}
+	if v.Sentiment != "" {
+		s.WriteString(schemas.Transcript_Sentiment, string(v.Sentiment))
+	}
+}
+func (v *Transcript) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Transcript, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Transcript_BeginOffsetMillis:
+			v.BeginOffsetMillis = new(int32)
+			return d.ReadInt32(schemas.Transcript_BeginOffsetMillis, v.BeginOffsetMillis)
+		case schemas.Transcript_Content:
+			v.Content = new(string)
+			return d.ReadString(schemas.Transcript_Content, v.Content)
+		case schemas.Transcript_EndOffsetMillis:
+			v.EndOffsetMillis = new(int32)
+			return d.ReadInt32(schemas.Transcript_EndOffsetMillis, v.EndOffsetMillis)
+		case schemas.Transcript_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Transcript_Id, v.Id)
+		case schemas.Transcript_IssuesDetected:
+			return deserializeIssuesDetected(d, schemas.Transcript_IssuesDetected, &v.IssuesDetected)
+		case schemas.Transcript_ParticipantId:
+			v.ParticipantId = new(string)
+			return d.ReadString(schemas.Transcript_ParticipantId, v.ParticipantId)
+		case schemas.Transcript_ParticipantRole:
+			v.ParticipantRole = new(string)
+			return d.ReadString(schemas.Transcript_ParticipantRole, v.ParticipantRole)
+		case schemas.Transcript_Sentiment:
+			var ev string
+			if err := d.ReadString(schemas.Transcript_Sentiment, &ev); err != nil {
+				return err
+			}
+			v.Sentiment = SentimentValue(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

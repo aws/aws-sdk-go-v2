@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.GetExascaleDbStorageVault
+
+{"exascaleDbStorageVault":{"additionalFlashCacheInPercent":1,"attachedShapeAttributes":["SMART_STORAGE","SMART_STORAGE"],"autoscaleLimitInGBs":1,"availabilityZone":"__AvailabilityZone__","availabilityZoneId":"__AvailabilityZoneId__","createdAt":"2000-01-01T00:00:00Z","description":"__Description__","displayName":"__DisplayName__","exascaleDbStorageVaultArn":"__ExascaleDbStorageVaultArn__","exascaleDbStorageVaultId":"__ExascaleDbStorageVaultId__","highCapacityDatabaseStorage":{"availableSizeInGBs":1,"totalSizeInGBs":1},"isAutoscaleEnabled":true,"ociResourceAnchorName":"__OciResourceAnchorName__","ociUrl":"__OciUrl__","ocid":"__Ocid__","percentProgress":1,"status":"AVAILABLE","statusReason":"__StatusReason__","timeZone":"__TimeZone__","vmClusterArns":["__Member__","__Member__"],"vmClusterCount":1,"vmClusterIds":["__Member__","__Member__"]}}

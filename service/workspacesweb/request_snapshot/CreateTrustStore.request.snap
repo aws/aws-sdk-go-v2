@@ -1,0 +1,5 @@
+POST /trustStores
+
+Content-Type: application/json
+
+{"certificateList":["YmxvYg==","YmxvYg=="],"clientToken":"__ClientToken__","tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

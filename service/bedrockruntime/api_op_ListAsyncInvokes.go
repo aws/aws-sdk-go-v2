@@ -5,10 +5,10 @@ package bedrockruntime
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -55,6 +55,36 @@ type ListAsyncInvokesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAsyncInvokesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAsyncInvokesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAsyncInvokesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAsyncInvokesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAsyncInvokesRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAsyncInvokesRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAsyncInvokesRequest_sortOrder, string(v.SortOrder))
+	}
+	if v.StatusEquals != "" {
+		s.WriteString(schemas.ListAsyncInvokesRequest_statusEquals, string(v.StatusEquals))
+	}
+	if v.SubmitTimeAfter != nil {
+		s.WriteTime(schemas.ListAsyncInvokesRequest_submitTimeAfter, *v.SubmitTimeAfter)
+	}
+	if v.SubmitTimeBefore != nil {
+		s.WriteTime(schemas.ListAsyncInvokesRequest_submitTimeBefore, *v.SubmitTimeBefore)
+	}
+}
+
 type ListAsyncInvokesOutput struct {
 
 	// A list of invocation summaries.
@@ -70,74 +100,48 @@ type ListAsyncInvokesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAsyncInvokesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAsyncInvokesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAsyncInvokesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAsyncInvokeSummaries(s, schemas.ListAsyncInvokesResponse_asyncInvokeSummaries, v.AsyncInvokeSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAsyncInvokesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAsyncInvokesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAsyncInvokesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAsyncInvokesResponse_asyncInvokeSummaries:
+			return deserializeAsyncInvokeSummaries(d, schemas.ListAsyncInvokesResponse_asyncInvokeSummaries, &v.AsyncInvokeSummaries)
+		case schemas.ListAsyncInvokesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAsyncInvokesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAsyncInvokesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAsyncInvokes, schemas.ListAsyncInvokesRequest, schemas.ListAsyncInvokesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAsyncInvokes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAsyncInvokes, schemas.ListAsyncInvokesRequest, schemas.ListAsyncInvokesResponse), output: &ListAsyncInvokesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAsyncInvokes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAsyncInvokes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAsyncInvokes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +154,6 @@ func (c *Client) addOperationListAsyncInvokesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +254,3 @@ type ListAsyncInvokesAPIClient interface {
 }
 
 var _ ListAsyncInvokesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAsyncInvokes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAsyncInvokes",
-	}
-}

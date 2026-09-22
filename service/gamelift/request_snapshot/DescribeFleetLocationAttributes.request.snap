@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/DescribeFleetLocationAttributes
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤eLimitiNextTokenm__NextToken__gFleetIdk__FleetId__iLocations‚j__Member__j__Member__

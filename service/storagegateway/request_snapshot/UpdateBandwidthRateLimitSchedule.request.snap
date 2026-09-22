@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.UpdateBandwidthRateLimitSchedule
+
+{"BandwidthRateLimitIntervals":[{"AverageDownloadRateLimitInBitsPerSec":1,"AverageUploadRateLimitInBitsPerSec":1,"DaysOfWeek":[1,1],"EndHourOfDay":1,"EndMinuteOfHour":1,"StartHourOfDay":1,"StartMinuteOfHour":1},{"AverageDownloadRateLimitInBitsPerSec":1,"AverageUploadRateLimitInBitsPerSec":1,"DaysOfWeek":[1,1],"EndHourOfDay":1,"EndMinuteOfHour":1,"StartHourOfDay":1,"StartMinuteOfHour":1}],"GatewayARN":"__GatewayARN__"}

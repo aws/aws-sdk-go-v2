@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DescribeModelPackageGroup
+
+{"CreatedBy":{"DomainId":"__DomainId__","IamIdentity":{"Arn":"__Arn__","PrincipalId":"__PrincipalId__","SourceIdentity":"__SourceIdentity__"},"UserProfileArn":"__UserProfileArn__","UserProfileName":"__UserProfileName__"},"CreationTime":946684800,"ManagedConfiguration":{"ManagedStorageType":"Restricted"},"ModelPackageGroupArn":"__ModelPackageGroupArn__","ModelPackageGroupDescription":"__ModelPackageGroupDescription__","ModelPackageGroupName":"__ModelPackageGroupName__","ModelPackageGroupStatus":"Pending"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.GetAggregateConfigRuleComplianceSummary
+
+{"ConfigurationAggregatorName":"__ConfigurationAggregatorName__","Filters":{"AccountId":"__AccountId__","AwsRegion":"__AwsRegion__"},"GroupByKey":"ACCOUNT_ID","Limit":1,"NextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attributeGroup":{"arn":"__Arn__","createdBy":"__CreatedBy__","creationTime":"2000-01-01T00:00:00Z","description":"__Description__","id":"__Id__","lastUpdateTime":"2000-01-01T00:00:00Z","name":"__Name__"}}

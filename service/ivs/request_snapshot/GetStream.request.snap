@@ -1,0 +1,5 @@
+POST /GetStream
+
+Content-Type: application/json
+
+{"channelArn":"__ChannelArn__"}

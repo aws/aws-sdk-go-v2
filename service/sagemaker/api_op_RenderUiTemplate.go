@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Renders the UI template so that you can preview the worker's experience.
@@ -54,6 +53,31 @@ type RenderUiTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenderUiTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenderUiTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenderUiTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanTaskUiArn != nil {
+		s.WriteString(schemas.RenderUiTemplateRequest_HumanTaskUiArn, *v.HumanTaskUiArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.RenderUiTemplateRequest_RoleArn, *v.RoleArn)
+	}
+	if v.Task != nil {
+		s.WriteStruct(schemas.RenderUiTemplateRequest_Task)
+		v.Task.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UiTemplate != nil {
+		s.WriteStruct(schemas.RenderUiTemplateRequest_UiTemplate)
+		v.UiTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type RenderUiTemplateOutput struct {
 
 	// A list of one or more RenderingError objects if any were encountered while
@@ -73,77 +97,51 @@ type RenderUiTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RenderUiTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenderUiTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenderUiTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRenderingErrorList(s, schemas.RenderUiTemplateResponse_Errors, v.Errors)
+	if v.RenderedContent != nil {
+		s.WriteString(schemas.RenderUiTemplateResponse_RenderedContent, *v.RenderedContent)
+	}
+}
+func (v *RenderUiTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenderUiTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenderUiTemplateResponse_Errors:
+			return deserializeRenderingErrorList(d, schemas.RenderUiTemplateResponse_Errors, &v.Errors)
+		case schemas.RenderUiTemplateResponse_RenderedContent:
+			v.RenderedContent = new(string)
+			return d.ReadString(schemas.RenderUiTemplateResponse_RenderedContent, v.RenderedContent)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRenderUiTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenderUiTemplate, schemas.RenderUiTemplateRequest, schemas.RenderUiTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRenderUiTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RenderUiTemplate, schemas.RenderUiTemplateRequest, schemas.RenderUiTemplateResponse), output: &RenderUiTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRenderUiTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RenderUiTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRenderUiTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRenderUiTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +156,8 @@ func (c *Client) addOperationRenderUiTemplateMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRenderUiTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RenderUiTemplate",
-	}
 }

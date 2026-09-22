@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"endTime":"2000-01-01T00:00:00Z","endTimes":[{"value":"2000-01-01T00:00:00Z"},{"value":"2000-01-01T00:00:00Z"}],"frameMetricData":[{"frameMetric":{"frameName":"__FrameName__","threadStates":["__Member__","__Member__"],"type":"AggregatedRelativeTotalTime"},"values":[1,1]},{"frameMetric":{"frameName":"__FrameName__","threadStates":["__Member__","__Member__"],"type":"AggregatedRelativeTotalTime"},"values":[1,1]}],"resolution":"PT5M","startTime":"2000-01-01T00:00:00Z","unprocessedEndTimes":{"key0":[{"value":"2000-01-01T00:00:00Z"},{"value":"2000-01-01T00:00:00Z"}]}}

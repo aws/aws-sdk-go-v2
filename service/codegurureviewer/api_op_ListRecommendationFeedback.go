@@ -5,10 +5,10 @@ package codegurureviewer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of [RecommendationFeedbackSummary] objects that contain customer recommendation feedback for
@@ -64,6 +64,26 @@ type ListRecommendationFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReviewArn != nil {
+		s.WriteString(schemas.ListRecommendationFeedbackRequest_CodeReviewArn, *v.CodeReviewArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRecommendationFeedbackRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationFeedbackRequest_NextToken, *v.NextToken)
+	}
+	serializeRecommendationIds(s, schemas.ListRecommendationFeedbackRequest_RecommendationIds, v.RecommendationIds)
+	serializeUserIds(s, schemas.ListRecommendationFeedbackRequest_UserIds, v.UserIds)
+}
+
 type ListRecommendationFeedbackOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -81,77 +101,51 @@ type ListRecommendationFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecommendationFeedbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecommendationFeedbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecommendationFeedbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRecommendationFeedbackResponse_NextToken, *v.NextToken)
+	}
+	serializeRecommendationFeedbackSummaries(s, schemas.ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries, v.RecommendationFeedbackSummaries)
+}
+func (v *ListRecommendationFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecommendationFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecommendationFeedbackResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRecommendationFeedbackResponse_NextToken, v.NextToken)
+		case schemas.ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries:
+			return deserializeRecommendationFeedbackSummaries(d, schemas.ListRecommendationFeedbackResponse_RecommendationFeedbackSummaries, &v.RecommendationFeedbackSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecommendationFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationFeedback, schemas.ListRecommendationFeedbackRequest, schemas.ListRecommendationFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRecommendationFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecommendationFeedback, schemas.ListRecommendationFeedbackRequest, schemas.ListRecommendationFeedbackResponse), output: &ListRecommendationFeedbackOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRecommendationFeedback{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRecommendationFeedback"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRecommendationFeedbackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecommendationFeedback(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +158,6 @@ func (c *Client) addOperationListRecommendationFeedbackMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -273,11 +261,3 @@ type ListRecommendationFeedbackAPIClient interface {
 }
 
 var _ ListRecommendationFeedbackAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRecommendationFeedback(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRecommendationFeedback",
-	}
-}

@@ -1,0 +1,5 @@
+POST /DeleteIndex
+
+Content-Type: application/json
+
+{"indexArn":"__IndexArn__","indexName":"__IndexName__","vectorBucketName":"__VectorBucketName__"}

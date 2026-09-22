@@ -1,0 +1,3 @@
+POST /accounts/__AccountId__/rooms/__RoomId__/messages/__MessageId__?operation=redact
+
+

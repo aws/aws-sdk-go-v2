@@ -5,10 +5,10 @@ package connectcases
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches for related items across all cases within a domain. This is a global
@@ -88,6 +88,26 @@ type SearchAllRelatedItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAllRelatedItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAllRelatedItemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAllRelatedItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.SearchAllRelatedItemsRequest_domainId, *v.DomainId)
+	}
+	serializeRelatedItemFilterList(s, schemas.SearchAllRelatedItemsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchAllRelatedItemsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAllRelatedItemsRequest_nextToken, *v.NextToken)
+	}
+	serializeSearchAllRelatedItemsSortList(s, schemas.SearchAllRelatedItemsRequest_sorts, v.Sorts)
+}
+
 type SearchAllRelatedItemsOutput struct {
 
 	// A list of items related to a case.
@@ -105,77 +125,51 @@ type SearchAllRelatedItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAllRelatedItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAllRelatedItemsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAllRelatedItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAllRelatedItemsResponse_nextToken, *v.NextToken)
+	}
+	serializeSearchAllRelatedItemsResponseItemList(s, schemas.SearchAllRelatedItemsResponse_relatedItems, v.RelatedItems)
+}
+func (v *SearchAllRelatedItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchAllRelatedItemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchAllRelatedItemsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchAllRelatedItemsResponse_nextToken, v.NextToken)
+		case schemas.SearchAllRelatedItemsResponse_relatedItems:
+			return deserializeSearchAllRelatedItemsResponseItemList(d, schemas.SearchAllRelatedItemsResponse_relatedItems, &v.RelatedItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchAllRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAllRelatedItems, schemas.SearchAllRelatedItemsRequest, schemas.SearchAllRelatedItemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchAllRelatedItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAllRelatedItems, schemas.SearchAllRelatedItemsRequest, schemas.SearchAllRelatedItemsResponse), output: &SearchAllRelatedItemsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchAllRelatedItems{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchAllRelatedItems"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchAllRelatedItemsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchAllRelatedItems(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +182,6 @@ func (c *Client) addOperationSearchAllRelatedItemsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -295,11 +283,3 @@ type SearchAllRelatedItemsAPIClient interface {
 }
 
 var _ SearchAllRelatedItemsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchAllRelatedItems(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchAllRelatedItems",
-	}
-}

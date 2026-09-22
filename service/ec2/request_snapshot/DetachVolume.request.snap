@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DetachVolume&Device=__Device__&DryRun=true&Force=true&InstanceId=__InstanceId__&Version=2016-11-15&VolumeId=__VolumeId__

@@ -4,11 +4,10 @@ package athena
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Requests the cancellation of a calculation. A StopCalculationExecution call on
@@ -44,6 +43,18 @@ type StopCalculationExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCalculationExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCalculationExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCalculationExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculationExecutionId != nil {
+		s.WriteString(schemas.StopCalculationExecutionRequest_CalculationExecutionId, *v.CalculationExecutionId)
+	}
+}
+
 type StopCalculationExecutionOutput struct {
 
 	// CREATING - The calculation is in the process of being created.
@@ -71,77 +82,52 @@ type StopCalculationExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopCalculationExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopCalculationExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopCalculationExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.StopCalculationExecutionResponse_State, string(v.State))
+	}
+}
+func (v *StopCalculationExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopCalculationExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopCalculationExecutionResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StopCalculationExecutionResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.CalculationExecutionState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopCalculationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCalculationExecution, schemas.StopCalculationExecutionRequest, schemas.StopCalculationExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopCalculationExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopCalculationExecution, schemas.StopCalculationExecutionRequest, schemas.StopCalculationExecutionResponse), output: &StopCalculationExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopCalculationExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopCalculationExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopCalculationExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopCalculationExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +142,8 @@ func (c *Client) addOperationStopCalculationExecutionMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopCalculationExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopCalculationExecution",
-	}
 }

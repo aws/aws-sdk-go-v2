@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing collaboration change request. This operation allows
@@ -61,6 +60,24 @@ type UpdateCollaborationChangeRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollaborationChangeRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollaborationChangeRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollaborationChangeRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateCollaborationChangeRequestInput_action, string(v.Action))
+	}
+	if v.ChangeRequestIdentifier != nil {
+		s.WriteString(schemas.UpdateCollaborationChangeRequestInput_changeRequestIdentifier, *v.ChangeRequestIdentifier)
+	}
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.UpdateCollaborationChangeRequestInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+}
+
 type UpdateCollaborationChangeRequestOutput struct {
 
 	// Represents a request to modify a collaboration. Change requests enable
@@ -75,77 +92,50 @@ type UpdateCollaborationChangeRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCollaborationChangeRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCollaborationChangeRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCollaborationChangeRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollaborationChangeRequest != nil {
+		s.WriteStruct(schemas.UpdateCollaborationChangeRequestOutput_collaborationChangeRequest)
+		v.CollaborationChangeRequest.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateCollaborationChangeRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCollaborationChangeRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCollaborationChangeRequestOutput_collaborationChangeRequest:
+			v.CollaborationChangeRequest = &types.CollaborationChangeRequest{}
+			return v.CollaborationChangeRequest.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCollaborationChangeRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollaborationChangeRequest, schemas.UpdateCollaborationChangeRequestInput, schemas.UpdateCollaborationChangeRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCollaborationChangeRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCollaborationChangeRequest, schemas.UpdateCollaborationChangeRequestInput, schemas.UpdateCollaborationChangeRequestOutput), output: &UpdateCollaborationChangeRequestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCollaborationChangeRequest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCollaborationChangeRequest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateCollaborationChangeRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCollaborationChangeRequest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +150,8 @@ func (c *Client) addOperationUpdateCollaborationChangeRequestMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateCollaborationChangeRequest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateCollaborationChangeRequest",
-	}
 }

@@ -4,11 +4,10 @@ package eks
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type DescribeInsightsRefreshInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInsightsRefreshInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInsightsRefreshRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInsightsRefreshInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeInsightsRefreshRequest_clusterName, *v.ClusterName)
+	}
+}
+
 type DescribeInsightsRefreshOutput struct {
 
 	// The date and time when the insights refresh operation ended.
@@ -58,77 +69,70 @@ type DescribeInsightsRefreshOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInsightsRefreshOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInsightsRefreshResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInsightsRefreshOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.DescribeInsightsRefreshResponse_endedAt, *v.EndedAt)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeInsightsRefreshResponse_message, *v.Message)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.DescribeInsightsRefreshResponse_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeInsightsRefreshResponse_status, string(v.Status))
+	}
+}
+func (v *DescribeInsightsRefreshOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInsightsRefreshResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInsightsRefreshResponse_endedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeInsightsRefreshResponse_endedAt, v.EndedAt)
+		case schemas.DescribeInsightsRefreshResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeInsightsRefreshResponse_message, v.Message)
+		case schemas.DescribeInsightsRefreshResponse_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeInsightsRefreshResponse_startedAt, v.StartedAt)
+		case schemas.DescribeInsightsRefreshResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeInsightsRefreshResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InsightsRefreshStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInsightsRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInsightsRefresh, schemas.DescribeInsightsRefreshRequest, schemas.DescribeInsightsRefreshResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInsightsRefresh{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInsightsRefresh, schemas.DescribeInsightsRefreshRequest, schemas.DescribeInsightsRefreshResponse), output: &DescribeInsightsRefreshOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInsightsRefresh{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInsightsRefresh"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeInsightsRefreshValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInsightsRefresh(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +147,8 @@ func (c *Client) addOperationDescribeInsightsRefreshMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeInsightsRefresh(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeInsightsRefresh",
-	}
 }

@@ -1,0 +1,3 @@
+GET /interface/__InterfaceAssetModelId__/asset-models?maxResults=1&nextToken=__NextToken__
+
+

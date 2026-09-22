@@ -5,10 +5,10 @@ package organizations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the accounts in an organization that have invalid effective policies.
@@ -91,6 +91,24 @@ type ListAccountsWithInvalidEffectivePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountsWithInvalidEffectivePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountsWithInvalidEffectivePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountsWithInvalidEffectivePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccountsWithInvalidEffectivePolicyRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountsWithInvalidEffectivePolicyRequest_NextToken, *v.NextToken)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.ListAccountsWithInvalidEffectivePolicyRequest_PolicyType, string(v.PolicyType))
+	}
+}
+
 type ListAccountsWithInvalidEffectivePolicyOutput struct {
 
 	// The accounts in the organization which have an invalid effective policy for the
@@ -146,77 +164,61 @@ type ListAccountsWithInvalidEffectivePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountsWithInvalidEffectivePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountsWithInvalidEffectivePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountsWithInvalidEffectivePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccounts(s, schemas.ListAccountsWithInvalidEffectivePolicyResponse_Accounts, v.Accounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountsWithInvalidEffectivePolicyResponse_NextToken, *v.NextToken)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.ListAccountsWithInvalidEffectivePolicyResponse_PolicyType, string(v.PolicyType))
+	}
+}
+func (v *ListAccountsWithInvalidEffectivePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountsWithInvalidEffectivePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountsWithInvalidEffectivePolicyResponse_Accounts:
+			return deserializeAccounts(d, schemas.ListAccountsWithInvalidEffectivePolicyResponse_Accounts, &v.Accounts)
+		case schemas.ListAccountsWithInvalidEffectivePolicyResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountsWithInvalidEffectivePolicyResponse_NextToken, v.NextToken)
+		case schemas.ListAccountsWithInvalidEffectivePolicyResponse_PolicyType:
+			var ev string
+			if err := d.ReadString(schemas.ListAccountsWithInvalidEffectivePolicyResponse_PolicyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = types.EffectivePolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountsWithInvalidEffectivePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountsWithInvalidEffectivePolicy, schemas.ListAccountsWithInvalidEffectivePolicyRequest, schemas.ListAccountsWithInvalidEffectivePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountsWithInvalidEffectivePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountsWithInvalidEffectivePolicy, schemas.ListAccountsWithInvalidEffectivePolicyRequest, schemas.ListAccountsWithInvalidEffectivePolicyResponse), output: &ListAccountsWithInvalidEffectivePolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccountsWithInvalidEffectivePolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccountsWithInvalidEffectivePolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAccountsWithInvalidEffectivePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccountsWithInvalidEffectivePolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,12 +231,6 @@ func (c *Client) addOperationListAccountsWithInvalidEffectivePolicyMiddlewares(s
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -340,11 +336,3 @@ type ListAccountsWithInvalidEffectivePolicyAPIClient interface {
 }
 
 var _ ListAccountsWithInvalidEffectivePolicyAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAccountsWithInvalidEffectivePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAccountsWithInvalidEffectivePolicy",
-	}
-}

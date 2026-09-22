@@ -5,10 +5,10 @@ package networkfirewall
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of all traffic analysis reports generated within the last 30
@@ -57,6 +57,27 @@ type ListAnalysisReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.ListAnalysisReportsRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.ListAnalysisReportsRequest_FirewallName, *v.FirewallName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAnalysisReportsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisReportsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAnalysisReportsOutput struct {
 
 	// The id and ReportTime associated with a requested analysis report. Does not
@@ -76,74 +97,48 @@ type ListAnalysisReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAnalysisReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAnalysisReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAnalysisReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisReports(s, schemas.ListAnalysisReportsResponse_AnalysisReports, v.AnalysisReports)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAnalysisReportsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAnalysisReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAnalysisReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAnalysisReportsResponse_AnalysisReports:
+			return deserializeAnalysisReports(d, schemas.ListAnalysisReportsResponse_AnalysisReports, &v.AnalysisReports)
+		case schemas.ListAnalysisReportsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAnalysisReportsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAnalysisReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisReports, schemas.ListAnalysisReportsRequest, schemas.ListAnalysisReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAnalysisReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAnalysisReports, schemas.ListAnalysisReportsRequest, schemas.ListAnalysisReportsResponse), output: &ListAnalysisReportsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAnalysisReports{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAnalysisReports"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnalysisReports(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +151,6 @@ func (c *Client) addOperationListAnalysisReportsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +255,3 @@ type ListAnalysisReportsAPIClient interface {
 }
 
 var _ ListAnalysisReportsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAnalysisReports(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAnalysisReports",
-	}
-}

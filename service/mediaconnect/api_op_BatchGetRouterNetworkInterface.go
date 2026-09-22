@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about multiple router network interfaces in AWS Elemental
@@ -39,6 +38,16 @@ type BatchGetRouterNetworkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRouterNetworkInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRouterNetworkInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRouterNetworkInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouterNetworkInterfaceArnList(s, schemas.BatchGetRouterNetworkInterfaceRequest_Arns, v.Arns)
+}
+
 type BatchGetRouterNetworkInterfaceOutput struct {
 
 	// An array of errors that occurred when retrieving the requested router network
@@ -58,77 +67,48 @@ type BatchGetRouterNetworkInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetRouterNetworkInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetRouterNetworkInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetRouterNetworkInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetRouterNetworkInterfaceErrorList(s, schemas.BatchGetRouterNetworkInterfaceResponse_Errors, v.Errors)
+	serializeRouterNetworkInterfaceList(s, schemas.BatchGetRouterNetworkInterfaceResponse_RouterNetworkInterfaces, v.RouterNetworkInterfaces)
+}
+func (v *BatchGetRouterNetworkInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetRouterNetworkInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetRouterNetworkInterfaceResponse_Errors:
+			return deserializeBatchGetRouterNetworkInterfaceErrorList(d, schemas.BatchGetRouterNetworkInterfaceResponse_Errors, &v.Errors)
+		case schemas.BatchGetRouterNetworkInterfaceResponse_RouterNetworkInterfaces:
+			return deserializeRouterNetworkInterfaceList(d, schemas.BatchGetRouterNetworkInterfaceResponse_RouterNetworkInterfaces, &v.RouterNetworkInterfaces)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetRouterNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRouterNetworkInterface, schemas.BatchGetRouterNetworkInterfaceRequest, schemas.BatchGetRouterNetworkInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetRouterNetworkInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetRouterNetworkInterface, schemas.BatchGetRouterNetworkInterfaceRequest, schemas.BatchGetRouterNetworkInterfaceResponse), output: &BatchGetRouterNetworkInterfaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetRouterNetworkInterface{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetRouterNetworkInterface"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetRouterNetworkInterfaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetRouterNetworkInterface(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +123,8 @@ func (c *Client) addOperationBatchGetRouterNetworkInterfaceMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetRouterNetworkInterface(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetRouterNetworkInterface",
-	}
 }

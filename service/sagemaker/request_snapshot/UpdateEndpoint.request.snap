@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateEndpoint
+
+{"DeploymentConfig":{"AutoRollbackConfiguration":{"Alarms":[{"AlarmName":"__AlarmName__"},{"AlarmName":"__AlarmName__"}]},"BlueGreenUpdatePolicy":{"MaximumExecutionTimeoutInSeconds":1,"TerminationWaitInSeconds":1,"TrafficRoutingConfiguration":{"CanarySize":{"Type":"INSTANCE_COUNT","Value":1},"LinearStepSize":{"Type":"INSTANCE_COUNT","Value":1},"Type":"ALL_AT_ONCE","WaitIntervalInSeconds":1}},"RollingUpdatePolicy":{"MaximumBatchSize":{"Type":"INSTANCE_COUNT","Value":1},"MaximumExecutionTimeoutInSeconds":1,"RollbackMaximumBatchSize":{"Type":"INSTANCE_COUNT","Value":1},"WaitIntervalInSeconds":1}},"EndpointConfigName":"__EndpointConfigName__","EndpointName":"__EndpointName__","ExcludeRetainedVariantProperties":[{"VariantPropertyType":"DesiredInstanceCount"},{"VariantPropertyType":"DesiredInstanceCount"}],"RetainAllVariantProperties":true,"RetainDeploymentConfig":true}

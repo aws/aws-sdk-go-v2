@@ -4,10 +4,9 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Displays the details of the dashboard that you specify.
@@ -40,6 +39,18 @@ type GetDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDashboardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardName != nil {
+		s.WriteString(schemas.GetDashboardInput_DashboardName, *v.DashboardName)
+	}
+}
+
 type GetDashboardOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.
@@ -49,7 +60,7 @@ type GetDashboardOutput struct {
 	// included and their location on the dashboard. For more information about the
 	// DashboardBody syntax, see [Dashboard Body Structure and Syntax].
 	//
-	// [Dashboard Body Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Dashboard-Body-Structure.html
+	// [Dashboard Body Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Dashboard-Body-Structure.html
 	DashboardBody *string
 
 	// The name of the dashboard.
@@ -61,65 +72,54 @@ type GetDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDashboardOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.GetDashboardOutput_DashboardArn, *v.DashboardArn)
+	}
+	if v.DashboardBody != nil {
+		s.WriteString(schemas.GetDashboardOutput_DashboardBody, *v.DashboardBody)
+	}
+	if v.DashboardName != nil {
+		s.WriteString(schemas.GetDashboardOutput_DashboardName, *v.DashboardName)
+	}
+}
+func (v *GetDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDashboardOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDashboardOutput_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.GetDashboardOutput_DashboardArn, v.DashboardArn)
+		case schemas.GetDashboardOutput_DashboardBody:
+			v.DashboardBody = new(string)
+			return d.ReadString(schemas.GetDashboardOutput_DashboardBody, v.DashboardBody)
+		case schemas.GetDashboardOutput_DashboardName:
+			v.DashboardName = new(string)
+			return d.ReadString(schemas.GetDashboardOutput_DashboardName, v.DashboardName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboard, schemas.GetDashboardInput, schemas.GetDashboardOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDashboard, schemas.GetDashboardInput, schemas.GetDashboardOutput), output: &GetDashboardOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetDashboard{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDashboard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -129,12 +129,6 @@ func (c *Client) addOperationGetDashboardMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpGetDashboardValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDashboard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +143,8 @@ func (c *Client) addOperationGetDashboardMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDashboard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDashboard",
-	}
 }

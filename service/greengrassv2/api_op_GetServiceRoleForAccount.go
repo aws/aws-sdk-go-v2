@@ -4,10 +4,9 @@ package greengrassv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the service role associated with IoT Greengrass for your Amazon Web
@@ -36,6 +35,15 @@ type GetServiceRoleForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceRoleForAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceRoleForAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceRoleForAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetServiceRoleForAccountOutput struct {
 
 	// The time when the service role was associated with IoT Greengrass for your
@@ -52,74 +60,51 @@ type GetServiceRoleForAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceRoleForAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceRoleForAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceRoleForAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedAt != nil {
+		s.WriteString(schemas.GetServiceRoleForAccountResponse_associatedAt, *v.AssociatedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetServiceRoleForAccountResponse_roleArn, *v.RoleArn)
+	}
+}
+func (v *GetServiceRoleForAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceRoleForAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceRoleForAccountResponse_associatedAt:
+			v.AssociatedAt = new(string)
+			return d.ReadString(schemas.GetServiceRoleForAccountResponse_associatedAt, v.AssociatedAt)
+		case schemas.GetServiceRoleForAccountResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetServiceRoleForAccountResponse_roleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceRoleForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceRoleForAccount, schemas.GetServiceRoleForAccountRequest, schemas.GetServiceRoleForAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceRoleForAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceRoleForAccount, schemas.GetServiceRoleForAccountRequest, schemas.GetServiceRoleForAccountResponse), output: &GetServiceRoleForAccountOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceRoleForAccount{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServiceRoleForAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServiceRoleForAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +119,8 @@ func (c *Client) addOperationGetServiceRoleForAccountMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetServiceRoleForAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetServiceRoleForAccount",
-	}
 }

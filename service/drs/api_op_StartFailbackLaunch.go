@@ -4,11 +4,10 @@ package drs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a Job for launching the machine that is being failed back to from the
@@ -42,6 +41,28 @@ type StartFailbackLaunchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFailbackLaunchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFailbackLaunchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFailbackLaunchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStartFailbackRequestRecoveryInstanceIDs(s, schemas.StartFailbackLaunchRequest_recoveryInstanceIDs, v.RecoveryInstanceIDs)
+	serializeTagsMap(s, schemas.StartFailbackLaunchRequest_tags, v.Tags)
+}
+func (v *StartFailbackLaunchInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFailbackLaunchRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFailbackLaunchRequest_recoveryInstanceIDs:
+			return deserializeStartFailbackRequestRecoveryInstanceIDs(d, schemas.StartFailbackLaunchRequest_recoveryInstanceIDs, &v.RecoveryInstanceIDs)
+		case schemas.StartFailbackLaunchRequest_tags:
+			return deserializeTagsMap(d, schemas.StartFailbackLaunchRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type StartFailbackLaunchOutput struct {
 
 	// The failback launch Job.
@@ -53,77 +74,50 @@ type StartFailbackLaunchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFailbackLaunchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFailbackLaunchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFailbackLaunchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.StartFailbackLaunchResponse_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartFailbackLaunchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFailbackLaunchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFailbackLaunchResponse_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFailbackLaunchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFailbackLaunch, schemas.StartFailbackLaunchRequest, schemas.StartFailbackLaunchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartFailbackLaunch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFailbackLaunch, schemas.StartFailbackLaunchRequest, schemas.StartFailbackLaunchResponse), output: &StartFailbackLaunchOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartFailbackLaunch{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartFailbackLaunch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartFailbackLaunchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartFailbackLaunch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +132,8 @@ func (c *Client) addOperationStartFailbackLaunchMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartFailbackLaunch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartFailbackLaunch",
-	}
 }

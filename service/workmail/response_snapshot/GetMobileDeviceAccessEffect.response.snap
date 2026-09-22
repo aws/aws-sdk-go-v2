@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.GetMobileDeviceAccessEffect
+
+{"Effect":"ALLOW","MatchedRules":[{"MobileDeviceAccessRuleId":"__MobileDeviceAccessRuleId__","Name":"__Name__"},{"MobileDeviceAccessRuleId":"__MobileDeviceAccessRuleId__","Name":"__Name__"}]}

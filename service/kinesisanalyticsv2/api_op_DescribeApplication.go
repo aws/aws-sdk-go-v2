@@ -4,11 +4,10 @@ package kinesisanalyticsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about a specific Managed Service for Apache Flink
@@ -45,6 +44,21 @@ type DescribeApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DescribeApplicationRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.IncludeAdditionalDetails != nil {
+		s.WriteBool(schemas.DescribeApplicationRequest_IncludeAdditionalDetails, *v.IncludeAdditionalDetails)
+	}
+}
+
 type DescribeApplicationOutput struct {
 
 	// Provides a description of the application, such as the application's Amazon
@@ -59,77 +73,50 @@ type DescribeApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationDetail != nil {
+		s.WriteStruct(schemas.DescribeApplicationResponse_ApplicationDetail)
+		v.ApplicationDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationResponse_ApplicationDetail:
+			v.ApplicationDetail = &types.ApplicationDetail{}
+			return v.ApplicationDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplication, schemas.DescribeApplicationRequest, schemas.DescribeApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplication, schemas.DescribeApplicationRequest, schemas.DescribeApplicationResponse), output: &DescribeApplicationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplication{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +131,8 @@ func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeApplication",
-	}
 }

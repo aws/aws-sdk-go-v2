@@ -5,10 +5,10 @@ package bcmpricingcalculator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the commitment modifications associated with a bill scenario.
@@ -44,6 +44,24 @@ type ListBillScenarioCommitmentModificationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillScenarioCommitmentModificationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillScenarioCommitmentModificationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillScenarioCommitmentModificationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillScenarioId != nil {
+		s.WriteString(schemas.ListBillScenarioCommitmentModificationsRequest_billScenarioId, *v.BillScenarioId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBillScenarioCommitmentModificationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillScenarioCommitmentModificationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListBillScenarioCommitmentModificationsOutput struct {
 
 	//  The list of commitment modifications associated with the bill scenario.
@@ -58,77 +76,51 @@ type ListBillScenarioCommitmentModificationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBillScenarioCommitmentModificationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBillScenarioCommitmentModificationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBillScenarioCommitmentModificationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBillScenarioCommitmentModificationItems(s, schemas.ListBillScenarioCommitmentModificationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBillScenarioCommitmentModificationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBillScenarioCommitmentModificationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBillScenarioCommitmentModificationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBillScenarioCommitmentModificationsResponse_items:
+			return deserializeBillScenarioCommitmentModificationItems(d, schemas.ListBillScenarioCommitmentModificationsResponse_items, &v.Items)
+		case schemas.ListBillScenarioCommitmentModificationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBillScenarioCommitmentModificationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBillScenarioCommitmentModificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillScenarioCommitmentModifications, schemas.ListBillScenarioCommitmentModificationsRequest, schemas.ListBillScenarioCommitmentModificationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListBillScenarioCommitmentModifications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBillScenarioCommitmentModifications, schemas.ListBillScenarioCommitmentModificationsRequest, schemas.ListBillScenarioCommitmentModificationsResponse), output: &ListBillScenarioCommitmentModificationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListBillScenarioCommitmentModifications{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBillScenarioCommitmentModifications"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListBillScenarioCommitmentModificationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBillScenarioCommitmentModifications(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +133,6 @@ func (c *Client) addOperationListBillScenarioCommitmentModificationsMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +236,3 @@ type ListBillScenarioCommitmentModificationsAPIClient interface {
 }
 
 var _ ListBillScenarioCommitmentModificationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBillScenarioCommitmentModifications(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBillScenarioCommitmentModifications",
-	}
-}

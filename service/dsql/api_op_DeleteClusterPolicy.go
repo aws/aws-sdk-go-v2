@@ -5,9 +5,9 @@ package dsql
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the resource-based policy attached to a cluster. This removes all
@@ -45,6 +45,24 @@ type DeleteClusterPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteClusterPolicyInput_clientToken, *v.ClientToken)
+	}
+	if v.ExpectedPolicyVersion != nil {
+		s.WriteString(schemas.DeleteClusterPolicyInput_expectedPolicyVersion, *v.ExpectedPolicyVersion)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DeleteClusterPolicyInput_identifier, *v.Identifier)
+	}
+}
+
 type DeleteClusterPolicyOutput struct {
 
 	// The version of the policy that was deleted.
@@ -58,65 +76,42 @@ type DeleteClusterPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteClusterPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteClusterPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteClusterPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.DeleteClusterPolicyOutput_policyVersion, *v.PolicyVersion)
+	}
+}
+func (v *DeleteClusterPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteClusterPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteClusterPolicyOutput_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.DeleteClusterPolicyOutput_policyVersion, v.PolicyVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteClusterPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterPolicy, schemas.DeleteClusterPolicyInput, schemas.DeleteClusterPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteClusterPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteClusterPolicy, schemas.DeleteClusterPolicyInput, schemas.DeleteClusterPolicyOutput), output: &DeleteClusterPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteClusterPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteClusterPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -126,12 +121,6 @@ func (c *Client) addOperationDeleteClusterPolicyMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpDeleteClusterPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteClusterPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +133,6 @@ func (c *Client) addOperationDeleteClusterPolicyMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -189,12 +172,4 @@ func (m *idempotencyToken_initializeOpDeleteClusterPolicy) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opDeleteClusterPolicyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteClusterPolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteClusterPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteClusterPolicy",
-	}
 }

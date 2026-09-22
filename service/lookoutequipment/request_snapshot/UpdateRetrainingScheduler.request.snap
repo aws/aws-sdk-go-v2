@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.UpdateRetrainingScheduler
+
+{"LookbackWindow":"__LookbackWindow__","ModelName":"__ModelName__","PromoteMode":"MANAGED","RetrainingFrequency":"__RetrainingFrequency__","RetrainingStartDate":946684800}

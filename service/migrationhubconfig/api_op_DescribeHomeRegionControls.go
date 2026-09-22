@@ -5,10 +5,10 @@ package migrationhubconfig
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API permits filtering on the ControlId and HomeRegion fields.
@@ -51,6 +51,32 @@ type DescribeHomeRegionControlsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHomeRegionControlsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHomeRegionControlsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHomeRegionControlsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlId != nil {
+		s.WriteString(schemas.DescribeHomeRegionControlsRequest_ControlId, *v.ControlId)
+	}
+	if v.HomeRegion != nil {
+		s.WriteString(schemas.DescribeHomeRegionControlsRequest_HomeRegion, *v.HomeRegion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeHomeRegionControlsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeHomeRegionControlsRequest_NextToken, *v.NextToken)
+	}
+	if v.Target != nil {
+		s.WriteStruct(schemas.DescribeHomeRegionControlsRequest_Target)
+		v.Target.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DescribeHomeRegionControlsOutput struct {
 
 	// An array that contains your HomeRegionControl objects.
@@ -67,77 +93,51 @@ type DescribeHomeRegionControlsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHomeRegionControlsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHomeRegionControlsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHomeRegionControlsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHomeRegionControls(s, schemas.DescribeHomeRegionControlsResult_HomeRegionControls, v.HomeRegionControls)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeHomeRegionControlsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeHomeRegionControlsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHomeRegionControlsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHomeRegionControlsResult_HomeRegionControls:
+			return deserializeHomeRegionControls(d, schemas.DescribeHomeRegionControlsResult_HomeRegionControls, &v.HomeRegionControls)
+		case schemas.DescribeHomeRegionControlsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeHomeRegionControlsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHomeRegionControlsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHomeRegionControls, schemas.DescribeHomeRegionControlsRequest, schemas.DescribeHomeRegionControlsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHomeRegionControls{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHomeRegionControls, schemas.DescribeHomeRegionControlsRequest, schemas.DescribeHomeRegionControlsResult), output: &DescribeHomeRegionControlsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHomeRegionControls{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeHomeRegionControls"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeHomeRegionControlsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHomeRegionControls(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +150,6 @@ func (c *Client) addOperationDescribeHomeRegionControlsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +253,3 @@ type DescribeHomeRegionControlsAPIClient interface {
 }
 
 var _ DescribeHomeRegionControlsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeHomeRegionControls(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeHomeRegionControls",
-	}
-}

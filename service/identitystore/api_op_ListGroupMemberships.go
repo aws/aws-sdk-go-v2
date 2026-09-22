@@ -5,10 +5,10 @@ package identitystore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // For the specified group in the specified identity store, returns the list of
@@ -59,6 +59,46 @@ type ListGroupMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupMembershipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupMembershipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.ListGroupMembershipsRequest_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.ListGroupMembershipsRequest_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroupMembershipsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupMembershipsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGroupMembershipsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupMembershipsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupMembershipsRequest_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.ListGroupMembershipsRequest_GroupId, v.GroupId)
+		case schemas.ListGroupMembershipsRequest_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.ListGroupMembershipsRequest_IdentityStoreId, v.IdentityStoreId)
+		case schemas.ListGroupMembershipsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListGroupMembershipsRequest_MaxResults, v.MaxResults)
+		case schemas.ListGroupMembershipsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupMembershipsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListGroupMembershipsOutput struct {
 
 	// A list of GroupMembership objects in the group.
@@ -79,77 +119,51 @@ type ListGroupMembershipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupMembershipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupMembershipsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupMemberships(s, schemas.ListGroupMembershipsResponse_GroupMemberships, v.GroupMemberships)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupMembershipsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGroupMembershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupMembershipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupMembershipsResponse_GroupMemberships:
+			return deserializeGroupMemberships(d, schemas.ListGroupMembershipsResponse_GroupMemberships, &v.GroupMemberships)
+		case schemas.ListGroupMembershipsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupMembershipsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupMemberships, schemas.ListGroupMembershipsRequest, schemas.ListGroupMembershipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListGroupMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroupMemberships, schemas.ListGroupMembershipsRequest, schemas.ListGroupMembershipsResponse), output: &ListGroupMembershipsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListGroupMemberships{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGroupMemberships"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListGroupMembershipsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroupMemberships(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +176,6 @@ func (c *Client) addOperationListGroupMembershipsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -270,11 +278,3 @@ type ListGroupMembershipsAPIClient interface {
 }
 
 var _ ListGroupMembershipsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListGroupMemberships(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListGroupMemberships",
-	}
-}

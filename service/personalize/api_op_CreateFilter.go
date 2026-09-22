@@ -4,11 +4,10 @@ package personalize
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a recommendation filter. For more information, see [Filtering recommendations and user segments].
@@ -58,6 +57,25 @@ type CreateFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFilterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFilterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFilterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.CreateFilterRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.CreateFilterRequest_filterExpression, *v.FilterExpression)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFilterRequest_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateFilterRequest_tags, v.Tags)
+}
+
 type CreateFilterOutput struct {
 
 	// The ARN of the new filter.
@@ -69,77 +87,48 @@ type CreateFilterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFilterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFilterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFilterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterArn != nil {
+		s.WriteString(schemas.CreateFilterResponse_filterArn, *v.FilterArn)
+	}
+}
+func (v *CreateFilterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFilterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFilterResponse_filterArn:
+			v.FilterArn = new(string)
+			return d.ReadString(schemas.CreateFilterResponse_filterArn, v.FilterArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFilter, schemas.CreateFilterRequest, schemas.CreateFilterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFilter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFilter, schemas.CreateFilterRequest, schemas.CreateFilterResponse), output: &CreateFilterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFilter{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFilter"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFilterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFilter(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +143,8 @@ func (c *Client) addOperationCreateFilterMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateFilter(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFilter",
-	}
 }

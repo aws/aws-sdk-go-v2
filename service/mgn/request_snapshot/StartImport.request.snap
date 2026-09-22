@@ -1,0 +1,5 @@
+POST /StartImport
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","s3BucketSource":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__"},"tags":{"key0":"__Value__"}}

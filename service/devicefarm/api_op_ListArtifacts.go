@@ -5,10 +5,10 @@ package devicefarm
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about artifacts.
@@ -55,6 +55,24 @@ type ListArtifactsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArtifactsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListArtifactsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListArtifactsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListArtifactsRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListArtifactsRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListArtifactsRequest_type, string(v.Type))
+	}
+}
+
 // Represents the result of a list artifacts operation.
 type ListArtifactsOutput struct {
 
@@ -72,77 +90,51 @@ type ListArtifactsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListArtifactsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListArtifactsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListArtifactsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArtifacts(s, schemas.ListArtifactsResult_artifacts, v.Artifacts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListArtifactsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListArtifactsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListArtifactsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListArtifactsResult_artifacts:
+			return deserializeArtifacts(d, schemas.ListArtifactsResult_artifacts, &v.Artifacts)
+		case schemas.ListArtifactsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListArtifactsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArtifacts, schemas.ListArtifactsRequest, schemas.ListArtifactsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListArtifacts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListArtifacts, schemas.ListArtifactsRequest, schemas.ListArtifactsResult), output: &ListArtifactsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListArtifacts{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListArtifacts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListArtifactsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListArtifacts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +147,6 @@ func (c *Client) addOperationListArtifactsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +234,3 @@ type ListArtifactsAPIClient interface {
 }
 
 var _ ListArtifactsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListArtifacts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListArtifacts",
-	}
-}

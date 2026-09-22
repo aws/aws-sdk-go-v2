@@ -1,0 +1,4 @@
+DELETE /restapis/__RestApiId__/stages/__StageName__/cache/authorizers
+
+Accept: application/json
+

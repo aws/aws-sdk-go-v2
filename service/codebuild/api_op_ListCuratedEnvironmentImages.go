@@ -4,11 +4,10 @@ package codebuild
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about Docker images that are managed by CodeBuild.
@@ -31,6 +30,15 @@ type ListCuratedEnvironmentImagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCuratedEnvironmentImagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCuratedEnvironmentImagesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCuratedEnvironmentImagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type ListCuratedEnvironmentImagesOutput struct {
 
 	// Information about supported platforms for Docker images that are managed by
@@ -43,74 +51,42 @@ type ListCuratedEnvironmentImagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCuratedEnvironmentImagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCuratedEnvironmentImagesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCuratedEnvironmentImagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnvironmentPlatforms(s, schemas.ListCuratedEnvironmentImagesOutput_platforms, v.Platforms)
+}
+func (v *ListCuratedEnvironmentImagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCuratedEnvironmentImagesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCuratedEnvironmentImagesOutput_platforms:
+			return deserializeEnvironmentPlatforms(d, schemas.ListCuratedEnvironmentImagesOutput_platforms, &v.Platforms)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCuratedEnvironmentImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCuratedEnvironmentImages, schemas.ListCuratedEnvironmentImagesInput, schemas.ListCuratedEnvironmentImagesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCuratedEnvironmentImages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCuratedEnvironmentImages, schemas.ListCuratedEnvironmentImagesInput, schemas.ListCuratedEnvironmentImagesOutput), output: &ListCuratedEnvironmentImagesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCuratedEnvironmentImages{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCuratedEnvironmentImages"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCuratedEnvironmentImages(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -125,22 +101,8 @@ func (c *Client) addOperationListCuratedEnvironmentImagesMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListCuratedEnvironmentImages(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCuratedEnvironmentImages",
-	}
 }

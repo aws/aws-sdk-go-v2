@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.GetExclusionsPreview
+
+{"assessmentTemplateArn":"__AssessmentTemplateArn__","locale":"EN_US","maxResults":1,"nextToken":"__NextToken__","previewToken":"__PreviewToken__"}

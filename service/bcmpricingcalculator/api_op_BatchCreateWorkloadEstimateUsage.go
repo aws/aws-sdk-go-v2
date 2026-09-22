@@ -5,10 +5,10 @@ package bcmpricingcalculator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Create Amazon Web Services service usage that you want to model in a Workload
@@ -54,6 +54,22 @@ type BatchCreateWorkloadEstimateUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateWorkloadEstimateUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageRequest_clientToken, *v.ClientToken)
+	}
+	serializeBatchCreateWorkloadEstimateUsageEntries(s, schemas.BatchCreateWorkloadEstimateUsageRequest_usage, v.Usage)
+	if v.WorkloadEstimateId != nil {
+		s.WriteString(schemas.BatchCreateWorkloadEstimateUsageRequest_workloadEstimateId, *v.WorkloadEstimateId)
+	}
+}
+
 type BatchCreateWorkloadEstimateUsageOutput struct {
 
 	//  Returns the list of errors reason and the usage item keys that cannot be
@@ -70,65 +86,42 @@ type BatchCreateWorkloadEstimateUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateWorkloadEstimateUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateWorkloadEstimateUsageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateWorkloadEstimateUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchCreateWorkloadEstimateUsageErrors(s, schemas.BatchCreateWorkloadEstimateUsageResponse_errors, v.Errors)
+	serializeBatchCreateWorkloadEstimateUsageItems(s, schemas.BatchCreateWorkloadEstimateUsageResponse_items, v.Items)
+}
+func (v *BatchCreateWorkloadEstimateUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateWorkloadEstimateUsageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateWorkloadEstimateUsageResponse_errors:
+			return deserializeBatchCreateWorkloadEstimateUsageErrors(d, schemas.BatchCreateWorkloadEstimateUsageResponse_errors, &v.Errors)
+		case schemas.BatchCreateWorkloadEstimateUsageResponse_items:
+			return deserializeBatchCreateWorkloadEstimateUsageItems(d, schemas.BatchCreateWorkloadEstimateUsageResponse_items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateWorkloadEstimateUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateWorkloadEstimateUsage, schemas.BatchCreateWorkloadEstimateUsageRequest, schemas.BatchCreateWorkloadEstimateUsageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchCreateWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateWorkloadEstimateUsage, schemas.BatchCreateWorkloadEstimateUsageRequest, schemas.BatchCreateWorkloadEstimateUsageResponse), output: &BatchCreateWorkloadEstimateUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchCreateWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateWorkloadEstimateUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -138,12 +131,6 @@ func (c *Client) addOperationBatchCreateWorkloadEstimateUsageMiddlewares(stack *
 		return err
 	}
 	if err = addOpBatchCreateWorkloadEstimateUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreateWorkloadEstimateUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +143,6 @@ func (c *Client) addOperationBatchCreateWorkloadEstimateUsageMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -201,12 +182,4 @@ func (m *idempotencyToken_initializeOpBatchCreateWorkloadEstimateUsage) HandleIn
 }
 func addIdempotencyToken_opBatchCreateWorkloadEstimateUsageMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpBatchCreateWorkloadEstimateUsage{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opBatchCreateWorkloadEstimateUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchCreateWorkloadEstimateUsage",
-	}
 }

@@ -4,11 +4,10 @@ package elasticsearchservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns domain configuration information about the specified Elasticsearch
@@ -40,6 +39,16 @@ type DescribeElasticsearchDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchDomainsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDomainNameList(s, schemas.DescribeElasticsearchDomainsRequest_DomainNames, v.DomainNames)
+}
+
 // The result of a DescribeElasticsearchDomains request. Contains the status of
 // the specified domains or all domains owned by the account.
 type DescribeElasticsearchDomainsOutput struct {
@@ -55,77 +64,45 @@ type DescribeElasticsearchDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeElasticsearchDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeElasticsearchDomainsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeElasticsearchDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeElasticsearchDomainStatusList(s, schemas.DescribeElasticsearchDomainsResponse_DomainStatusList, v.DomainStatusList)
+}
+func (v *DescribeElasticsearchDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeElasticsearchDomainsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeElasticsearchDomainsResponse_DomainStatusList:
+			return deserializeElasticsearchDomainStatusList(d, schemas.DescribeElasticsearchDomainsResponse_DomainStatusList, &v.DomainStatusList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeElasticsearchDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchDomains, schemas.DescribeElasticsearchDomainsRequest, schemas.DescribeElasticsearchDomainsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeElasticsearchDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeElasticsearchDomains, schemas.DescribeElasticsearchDomainsRequest, schemas.DescribeElasticsearchDomainsResponse), output: &DescribeElasticsearchDomainsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeElasticsearchDomains{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeElasticsearchDomains"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeElasticsearchDomainsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeElasticsearchDomains(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +117,8 @@ func (c *Client) addOperationDescribeElasticsearchDomainsMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeElasticsearchDomains(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeElasticsearchDomains",
-	}
 }

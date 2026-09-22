@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an analysis rule for a configured table association.
@@ -49,6 +48,24 @@ type DeleteConfiguredTableAssociationAnalysisRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredTableAssociationAnalysisRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredTableAssociationAnalysisRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredTableAssociationAnalysisRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisRuleType != "" {
+		s.WriteString(schemas.DeleteConfiguredTableAssociationAnalysisRuleInput_analysisRuleType, string(v.AnalysisRuleType))
+	}
+	if v.ConfiguredTableAssociationIdentifier != nil {
+		s.WriteString(schemas.DeleteConfiguredTableAssociationAnalysisRuleInput_configuredTableAssociationIdentifier, *v.ConfiguredTableAssociationIdentifier)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteConfiguredTableAssociationAnalysisRuleInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type DeleteConfiguredTableAssociationAnalysisRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,77 +73,42 @@ type DeleteConfiguredTableAssociationAnalysisRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfiguredTableAssociationAnalysisRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfiguredTableAssociationAnalysisRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfiguredTableAssociationAnalysisRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteConfiguredTableAssociationAnalysisRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfiguredTableAssociationAnalysisRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfiguredTableAssociationAnalysisRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredTableAssociationAnalysisRule, schemas.DeleteConfiguredTableAssociationAnalysisRuleInput, schemas.DeleteConfiguredTableAssociationAnalysisRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConfiguredTableAssociationAnalysisRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfiguredTableAssociationAnalysisRule, schemas.DeleteConfiguredTableAssociationAnalysisRuleInput, schemas.DeleteConfiguredTableAssociationAnalysisRuleOutput), output: &DeleteConfiguredTableAssociationAnalysisRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConfiguredTableAssociationAnalysisRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteConfiguredTableAssociationAnalysisRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteConfiguredTableAssociationAnalysisRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConfiguredTableAssociationAnalysisRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +123,8 @@ func (c *Client) addOperationDeleteConfiguredTableAssociationAnalysisRuleMiddlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteConfiguredTableAssociationAnalysisRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteConfiguredTableAssociationAnalysisRule",
-	}
 }

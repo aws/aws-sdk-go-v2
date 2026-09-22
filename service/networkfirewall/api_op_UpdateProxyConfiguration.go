@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the properties of the specified proxy configuration.
@@ -63,6 +62,29 @@ type UpdateProxyConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProxyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProxyConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProxyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultRulePhaseActions != nil {
+		s.WriteStruct(schemas.UpdateProxyConfigurationRequest_DefaultRulePhaseActions)
+		v.DefaultRulePhaseActions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProxyConfigurationArn != nil {
+		s.WriteString(schemas.UpdateProxyConfigurationRequest_ProxyConfigurationArn, *v.ProxyConfigurationArn)
+	}
+	if v.ProxyConfigurationName != nil {
+		s.WriteString(schemas.UpdateProxyConfigurationRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateProxyConfigurationRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateProxyConfigurationOutput struct {
 
 	// The updated proxy configuration resource that reflects the updates from the
@@ -87,77 +109,56 @@ type UpdateProxyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProxyConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProxyConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProxyConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyConfiguration != nil {
+		s.WriteStruct(schemas.UpdateProxyConfigurationResponse_ProxyConfiguration)
+		v.ProxyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateProxyConfigurationResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *UpdateProxyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProxyConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProxyConfigurationResponse_ProxyConfiguration:
+			v.ProxyConfiguration = &types.ProxyConfiguration{}
+			return v.ProxyConfiguration.Deserialize(d)
+		case schemas.UpdateProxyConfigurationResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateProxyConfigurationResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProxyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyConfiguration, schemas.UpdateProxyConfigurationRequest, schemas.UpdateProxyConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProxyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyConfiguration, schemas.UpdateProxyConfigurationRequest, schemas.UpdateProxyConfigurationResponse), output: &UpdateProxyConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProxyConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProxyConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateProxyConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProxyConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +173,8 @@ func (c *Client) addOperationUpdateProxyConfigurationMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateProxyConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateProxyConfiguration",
-	}
 }

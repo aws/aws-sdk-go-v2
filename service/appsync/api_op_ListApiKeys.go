@@ -5,10 +5,10 @@ package appsync
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the API keys for a given API.
@@ -49,6 +49,24 @@ type ListApiKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApiKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApiKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApiKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.ListApiKeysRequest_apiId, *v.ApiId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListApiKeysRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApiKeysRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListApiKeysOutput struct {
 
 	// The ApiKey objects.
@@ -64,77 +82,51 @@ type ListApiKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApiKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApiKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApiKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApiKeys(s, schemas.ListApiKeysResponse_apiKeys, v.ApiKeys)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApiKeysResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListApiKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApiKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApiKeysResponse_apiKeys:
+			return deserializeApiKeys(d, schemas.ListApiKeysResponse_apiKeys, &v.ApiKeys)
+		case schemas.ListApiKeysResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApiKeysResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApiKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApiKeys, schemas.ListApiKeysRequest, schemas.ListApiKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApiKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApiKeys, schemas.ListApiKeysRequest, schemas.ListApiKeysResponse), output: &ListApiKeysOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApiKeys{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApiKeys"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListApiKeysValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApiKeys(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +139,6 @@ func (c *Client) addOperationListApiKeysMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +234,3 @@ type ListApiKeysAPIClient interface {
 }
 
 var _ ListApiKeysAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListApiKeys(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListApiKeys",
-	}
-}

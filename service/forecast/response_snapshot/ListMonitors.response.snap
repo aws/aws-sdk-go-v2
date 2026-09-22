@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonForecast.ListMonitors
+
+{"Monitors":[{"CreationTime":946684800,"LastModificationTime":946684800,"MonitorArn":"__MonitorArn__","MonitorName":"__MonitorName__","ResourceArn":"__ResourceArn__","Status":"__Status__"},{"CreationTime":946684800,"LastModificationTime":946684800,"MonitorArn":"__MonitorArn__","MonitorName":"__MonitorName__","ResourceArn":"__ResourceArn__","Status":"__Status__"}],"NextToken":"__NextToken__"}

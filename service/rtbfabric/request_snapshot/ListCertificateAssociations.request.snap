@@ -1,0 +1,3 @@
+GET /responder-gateway/__GatewayId__/certificates?maxResults=1&nextToken=__NextToken__
+
+

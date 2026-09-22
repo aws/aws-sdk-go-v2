@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetDifferences
+
+{"NextToken":"__NextToken__","differences":[{"afterBlob":{"blobId":"__BlobId__","mode":"__Mode__","path":"__Path__"},"beforeBlob":{"blobId":"__BlobId__","mode":"__Mode__","path":"__Path__"},"changeType":"A"},{"afterBlob":{"blobId":"__BlobId__","mode":"__Mode__","path":"__Path__"},"beforeBlob":{"blobId":"__BlobId__","mode":"__Mode__","path":"__Path__"},"changeType":"A"}]}

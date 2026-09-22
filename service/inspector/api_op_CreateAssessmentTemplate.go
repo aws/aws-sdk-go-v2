@@ -4,11 +4,10 @@ package inspector
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an assessment template for the assessment target that is specified by
@@ -68,6 +67,26 @@ type CreateAssessmentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssessmentTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentTargetArn != nil {
+		s.WriteString(schemas.CreateAssessmentTemplateRequest_assessmentTargetArn, *v.AssessmentTargetArn)
+	}
+	if v.AssessmentTemplateName != nil {
+		s.WriteString(schemas.CreateAssessmentTemplateRequest_assessmentTemplateName, *v.AssessmentTemplateName)
+	}
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.CreateAssessmentTemplateRequest_durationInSeconds, *v.DurationInSeconds)
+	}
+	serializeAssessmentTemplateRulesPackageArnList(s, schemas.CreateAssessmentTemplateRequest_rulesPackageArns, v.RulesPackageArns)
+	serializeUserAttributeList(s, schemas.CreateAssessmentTemplateRequest_userAttributesForFindings, v.UserAttributesForFindings)
+}
+
 type CreateAssessmentTemplateOutput struct {
 
 	// The ARN that specifies the assessment template that is created.
@@ -81,77 +100,48 @@ type CreateAssessmentTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssessmentTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssessmentTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssessmentTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentTemplateArn != nil {
+		s.WriteString(schemas.CreateAssessmentTemplateResponse_assessmentTemplateArn, *v.AssessmentTemplateArn)
+	}
+}
+func (v *CreateAssessmentTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssessmentTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssessmentTemplateResponse_assessmentTemplateArn:
+			v.AssessmentTemplateArn = new(string)
+			return d.ReadString(schemas.CreateAssessmentTemplateResponse_assessmentTemplateArn, v.AssessmentTemplateArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssessmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssessmentTemplate, schemas.CreateAssessmentTemplateRequest, schemas.CreateAssessmentTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAssessmentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssessmentTemplate, schemas.CreateAssessmentTemplateRequest, schemas.CreateAssessmentTemplateResponse), output: &CreateAssessmentTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAssessmentTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAssessmentTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAssessmentTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssessmentTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +156,8 @@ func (c *Client) addOperationCreateAssessmentTemplateMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAssessmentTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAssessmentTemplate",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.DetectModerationLabels
+
+{"HumanLoopConfig":{"DataAttributes":{"ContentClassifiers":["FreeOfPersonallyIdentifiableInformation","FreeOfPersonallyIdentifiableInformation"]},"FlowDefinitionArn":"__FlowDefinitionArn__","HumanLoopName":"__HumanLoopName__"},"Image":{"Bytes":"YmxvYg==","S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}},"MinConfidence":1,"ProjectVersion":"__ProjectVersion__"}

@@ -5,10 +5,10 @@ package proton
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List repository sync definitions with detail data.
@@ -54,6 +54,54 @@ type ListRepositorySyncDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositorySyncDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositorySyncDefinitionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositorySyncDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositorySyncDefinitionsInput_nextToken, *v.NextToken)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.ListRepositorySyncDefinitionsInput_repositoryName, *v.RepositoryName)
+	}
+	if v.RepositoryProvider != "" {
+		s.WriteString(schemas.ListRepositorySyncDefinitionsInput_repositoryProvider, string(v.RepositoryProvider))
+	}
+	if v.SyncType != "" {
+		s.WriteString(schemas.ListRepositorySyncDefinitionsInput_syncType, string(v.SyncType))
+	}
+}
+func (v *ListRepositorySyncDefinitionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRepositorySyncDefinitionsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRepositorySyncDefinitionsInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRepositorySyncDefinitionsInput_nextToken, v.NextToken)
+		case schemas.ListRepositorySyncDefinitionsInput_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.ListRepositorySyncDefinitionsInput_repositoryName, v.RepositoryName)
+		case schemas.ListRepositorySyncDefinitionsInput_repositoryProvider:
+			var ev string
+			if err := d.ReadString(schemas.ListRepositorySyncDefinitionsInput_repositoryProvider, &ev); err != nil {
+				return err
+			}
+			v.RepositoryProvider = types.RepositoryProvider(ev)
+			return nil
+		case schemas.ListRepositorySyncDefinitionsInput_syncType:
+			var ev string
+			if err := d.ReadString(schemas.ListRepositorySyncDefinitionsInput_syncType, &ev); err != nil {
+				return err
+			}
+			v.SyncType = types.SyncType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListRepositorySyncDefinitionsOutput struct {
 
 	// An array of repository sync definitions.
@@ -72,77 +120,51 @@ type ListRepositorySyncDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRepositorySyncDefinitionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRepositorySyncDefinitionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRepositorySyncDefinitionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRepositorySyncDefinitionsOutput_nextToken, *v.NextToken)
+	}
+	serializeRepositorySyncDefinitionList(s, schemas.ListRepositorySyncDefinitionsOutput_syncDefinitions, v.SyncDefinitions)
+}
+func (v *ListRepositorySyncDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRepositorySyncDefinitionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRepositorySyncDefinitionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRepositorySyncDefinitionsOutput_nextToken, v.NextToken)
+		case schemas.ListRepositorySyncDefinitionsOutput_syncDefinitions:
+			return deserializeRepositorySyncDefinitionList(d, schemas.ListRepositorySyncDefinitionsOutput_syncDefinitions, &v.SyncDefinitions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRepositorySyncDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositorySyncDefinitions, schemas.ListRepositorySyncDefinitionsInput, schemas.ListRepositorySyncDefinitionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRepositorySyncDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRepositorySyncDefinitions, schemas.ListRepositorySyncDefinitionsInput, schemas.ListRepositorySyncDefinitionsOutput), output: &ListRepositorySyncDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRepositorySyncDefinitions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRepositorySyncDefinitions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRepositorySyncDefinitionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRepositorySyncDefinitions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +177,6 @@ func (c *Client) addOperationListRepositorySyncDefinitionsMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +268,3 @@ type ListRepositorySyncDefinitionsAPIClient interface {
 }
 
 var _ ListRepositorySyncDefinitionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRepositorySyncDefinitions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRepositorySyncDefinitions",
-	}
-}

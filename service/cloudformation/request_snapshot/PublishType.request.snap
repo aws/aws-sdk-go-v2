@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PublishType&Arn=__Arn__&PublicVersionNumber=__PublicVersionNumber__&Type=RESOURCE&TypeName=__TypeName__&Version=2010-05-15

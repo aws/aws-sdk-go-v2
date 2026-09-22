@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ImportVolume&AvailabilityZone=__AvailabilityZone__&AvailabilityZoneId=__AvailabilityZoneId__&Description=__Description__&DryRun=true&Image.Bytes=1&Image.Format=VMDK&Image.ImportManifestUrl=__ImportManifestUrl__&Version=2016-11-15&Volume.Size=1

@@ -326,6 +326,16 @@
                 "target": "com.amazonaws.route53globalresolver#AccessTokenItem"
             }
         },
+        "com.amazonaws.route53globalresolver#AccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
         "com.amazonaws.route53globalresolver#AssociateHostedZone": {
             "type": "operation",
             "input": {
@@ -4041,6 +4051,9 @@
                     "target": "com.amazonaws.route53globalresolver#DisassociateHostedZone"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ListSharedDNSViews"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#ListTagsForResource"
                 },
                 {
@@ -4112,6 +4125,110 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Amazon Route 53 Global Resolver is a global, internet-accessible DNS resolver that enables customers to resolve and forward traffic for both public and private domains while ensuring security and authenticity of queries over the internet. Route 53 Global Resolver supports DNS-over-port 53 (Do53), DNS-over-TLS (DoT), and DNS-over-HTTPS (DoH) protocols through global anycast IP addresses.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#title": "Amazon Route 53 Global Resolver",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://route53globalresolver-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://route53globalresolver.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 6,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -7517,10 +7634,10 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to list hosted zone associations"
                 },
-                "smithy.api#documentation": "<p>Lists all hosted zone associations for a Route 53 Global Resolver resource with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
+                "smithy.api#documentation": "<p>Lists hosted zone associations with pagination support. Specify a DNS view through the <code>resourceArn</code> parameter to list the hosted zone associations for that DNS view, or omit it to list all hosted zone associations in your Amazon Web Services account.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/hosted-zone-associations/resource-arn/{resourceArn+}",
+                    "uri": "/hosted-zone-associations",
                     "code": 200
                 },
                 "smithy.api#paginated": {
@@ -7552,9 +7669,8 @@
                 "resourceArn": {
                     "target": "com.amazonaws.route53globalresolver#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the DNS view.</p>",
-                        "smithy.api#httpLabel": {},
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DNS view to list hosted zone associations for. This parameter is optional; if you omit it, all hosted zone associations in your Amazon Web Services account are returned.</p>",
+                        "smithy.api#httpQuery": "resourceArn"
                     }
                 }
             },
@@ -7668,6 +7784,91 @@
                     "target": "com.amazonaws.route53globalresolver#ManagedFirewallDomainLists",
                     "traits": {
                         "smithy.api#documentation": "<p>List of the Managed Domain Lists.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#ListSharedDNSViews": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53globalresolver#ListSharedDNSViewsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.route53globalresolver#ListSharedDNSViewsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53globalresolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#controlPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list shared dns views"
+                },
+                "smithy.api#documentation": "<p>Lists the DNS views that have been shared with your Amazon Web Services account through Amazon Web Services Resource Access Manager (Amazon Web Services RAM), with pagination support.</p> <important> <p>Route 53 Global Resolver is a global service that supports resolvers in multiple Amazon Web Services Regions but you must specify the US East (Ohio) Region to create, update, or otherwise work with Route 53 Global Resolver resources. That is, for example, specify <code>--region us-east-2</code> on Amazon Web Services CLI commands.</p> </important>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/shared-dns-views",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "dnsViews"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#ListSharedDNSViewsInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to retrieve in a single call.</p>",
+                        "smithy.api#httpQuery": "max_results"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token used for large sets of results that can't be returned in a single response.</p>",
+                        "smithy.api#httpQuery": "next_token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53globalresolver#ListSharedDNSViewsOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token used for large sets of results that can't be returned in a single response. Provide this token in the next call to get the results not returned in this call.</p>"
+                    }
+                },
+                "dnsViews": {
+                    "target": "com.amazonaws.route53globalresolver#SharedDNSViews",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of information about the DNS views shared with your Amazon Web Services account, including the Amazon Web Services account that owns each DNS view.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8015,6 +8216,110 @@
                 "smithy.api#documentation": "<p>The request would exceed one or more service quotas. Check your current usage and quotas, then try again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.route53globalresolver#SharedDNSViewSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the DNS view.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DNS view.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.route53globalresolver#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique string that identifies the request and ensures idempotency.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dnssecValidation": {
+                    "target": "com.amazonaws.route53globalresolver#DnsSecValidationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether DNSSEC validation is enabled for the DNS view.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ednsClientSubnet": {
+                    "target": "com.amazonaws.route53globalresolver#EdnsClientSubnetType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether EDNS Client Subnet injection is enabled for the DNS view.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "firewallRulesFailOpen": {
+                    "target": "com.amazonaws.route53globalresolver#FirewallRulesFailOpenType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether firewall rules fail open when they cannot be evaluated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DNS view.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the DNS view.</p>"
+                    }
+                },
+                "globalResolverId": {
+                    "target": "com.amazonaws.route53globalresolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the global resolver that the DNS view is associated with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the DNS view was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.route53globalresolver#ISO8601TimeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the DNS view was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.route53globalresolver#ProfileResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the DNS view.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ownerAccountId": {
+                    "target": "com.amazonaws.route53globalresolver#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the DNS view and shared it with your Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about a DNS view that has been shared with your Amazon Web Services account through Amazon Web Services RAM.</p>"
+            }
+        },
+        "com.amazonaws.route53globalresolver#SharedDNSViews": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53globalresolver#SharedDNSViewSummary"
             }
         },
         "com.amazonaws.route53globalresolver#Sni": {

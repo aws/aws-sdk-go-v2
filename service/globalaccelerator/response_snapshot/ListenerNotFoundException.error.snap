@@ -1,0 +1,5 @@
+404
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: GlobalAccelerator_V20180706.CreateCustomRoutingEndpointGroup
+
+{"__type":"ListenerNotFoundException","Message":"__Message__"}

@@ -4,11 +4,10 @@ package dlm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dlm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified lifecycle policy.
@@ -103,6 +102,50 @@ type UpdateLifecyclePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLifecyclePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLifecyclePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLifecyclePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.UpdateLifecyclePolicyRequest_CopyTags, *v.CopyTags)
+	}
+	if v.CreateInterval != nil {
+		s.WriteInt32(schemas.UpdateLifecyclePolicyRequest_CreateInterval, *v.CreateInterval)
+	}
+	serializeCrossRegionCopyTargetList(s, schemas.UpdateLifecyclePolicyRequest_CrossRegionCopyTargets, v.CrossRegionCopyTargets)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_Description, *v.Description)
+	}
+	if v.Exclusions != nil {
+		s.WriteStruct(schemas.UpdateLifecyclePolicyRequest_Exclusions)
+		v.Exclusions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.ExtendDeletion != nil {
+		s.WriteBool(schemas.UpdateLifecyclePolicyRequest_ExtendDeletion, *v.ExtendDeletion)
+	}
+	if v.PolicyDetails != nil {
+		s.WriteStruct(schemas.UpdateLifecyclePolicyRequest_PolicyDetails)
+		v.PolicyDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_PolicyId, *v.PolicyId)
+	}
+	if v.RetainInterval != nil {
+		s.WriteInt32(schemas.UpdateLifecyclePolicyRequest_RetainInterval, *v.RetainInterval)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateLifecyclePolicyRequest_State, string(v.State))
+	}
+}
+
 type UpdateLifecyclePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -110,77 +153,42 @@ type UpdateLifecyclePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLifecyclePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLifecyclePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLifecyclePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLifecyclePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLifecyclePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLifecyclePolicy, schemas.UpdateLifecyclePolicyRequest, schemas.UpdateLifecyclePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateLifecyclePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLifecyclePolicy, schemas.UpdateLifecyclePolicyRequest, schemas.UpdateLifecyclePolicyResponse), output: &UpdateLifecyclePolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateLifecyclePolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLifecyclePolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateLifecyclePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLifecyclePolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,22 +203,8 @@ func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateLifecyclePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateLifecyclePolicy",
-	}
 }

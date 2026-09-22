@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyTrafficMirrorFilterRule&Description=__Description__&DestinationCidrBlock=__DestinationCidrBlock__&DestinationPortRange.FromPort=1&DestinationPortRange.ToPort=1&DryRun=true&Protocol=1&RemoveField.1=destination-port-range&RemoveField.2=destination-port-range&RuleAction=accept&RuleNumber=1&SourceCidrBlock=__SourceCidrBlock__&SourcePortRange.FromPort=1&SourcePortRange.ToPort=1&TrafficDirection=ingress&TrafficMirrorFilterRuleId=__TrafficMirrorFilterRuleId__&Version=2016-11-15

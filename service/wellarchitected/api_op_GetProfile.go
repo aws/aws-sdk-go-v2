@@ -4,11 +4,10 @@ package wellarchitected
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get profile information.
@@ -40,6 +39,21 @@ type GetProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.GetProfileInput_ProfileArn, *v.ProfileArn)
+	}
+	if v.ProfileVersion != nil {
+		s.WriteString(schemas.GetProfileInput_ProfileVersion, *v.ProfileVersion)
+	}
+}
+
 type GetProfileOutput struct {
 
 	// The profile.
@@ -51,77 +65,50 @@ type GetProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProfileOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Profile != nil {
+		s.WriteStruct(schemas.GetProfileOutput_Profile)
+		v.Profile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProfileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProfileOutput_Profile:
+			v.Profile = &types.Profile{}
+			return v.Profile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfile, schemas.GetProfileInput, schemas.GetProfileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProfile, schemas.GetProfileInput, schemas.GetProfileOutput), output: &GetProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +123,8 @@ func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetProfile",
-	}
 }

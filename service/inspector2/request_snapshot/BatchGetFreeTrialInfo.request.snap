@@ -1,0 +1,5 @@
+POST /freetrialinfo/batchget
+
+Content-Type: application/json
+
+{"accountIds":["__Member__","__Member__"]}

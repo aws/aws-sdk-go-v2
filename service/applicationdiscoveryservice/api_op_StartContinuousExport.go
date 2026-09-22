@@ -4,11 +4,10 @@ package applicationdiscoveryservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -30,6 +29,15 @@ func (c *Client) StartContinuousExport(ctx context.Context, params *StartContinu
 
 type StartContinuousExportInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *StartContinuousExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContinuousExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContinuousExportInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type StartContinuousExportOutput struct {
@@ -58,74 +66,70 @@ type StartContinuousExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContinuousExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContinuousExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContinuousExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != "" {
+		s.WriteString(schemas.StartContinuousExportResponse_dataSource, string(v.DataSource))
+	}
+	if v.ExportId != nil {
+		s.WriteString(schemas.StartContinuousExportResponse_exportId, *v.ExportId)
+	}
+	if v.S3Bucket != nil {
+		s.WriteString(schemas.StartContinuousExportResponse_s3Bucket, *v.S3Bucket)
+	}
+	serializeSchemaStorageConfig(s, schemas.StartContinuousExportResponse_schemaStorageConfig, v.SchemaStorageConfig)
+	if v.StartTime != nil {
+		s.WriteTime(schemas.StartContinuousExportResponse_startTime, *v.StartTime)
+	}
+}
+func (v *StartContinuousExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContinuousExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContinuousExportResponse_dataSource:
+			var ev string
+			if err := d.ReadString(schemas.StartContinuousExportResponse_dataSource, &ev); err != nil {
+				return err
+			}
+			v.DataSource = types.DataSource(ev)
+			return nil
+		case schemas.StartContinuousExportResponse_exportId:
+			v.ExportId = new(string)
+			return d.ReadString(schemas.StartContinuousExportResponse_exportId, v.ExportId)
+		case schemas.StartContinuousExportResponse_s3Bucket:
+			v.S3Bucket = new(string)
+			return d.ReadString(schemas.StartContinuousExportResponse_s3Bucket, v.S3Bucket)
+		case schemas.StartContinuousExportResponse_schemaStorageConfig:
+			return deserializeSchemaStorageConfig(d, schemas.StartContinuousExportResponse_schemaStorageConfig, &v.SchemaStorageConfig)
+		case schemas.StartContinuousExportResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.StartContinuousExportResponse_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContinuousExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContinuousExport, schemas.StartContinuousExportRequest, schemas.StartContinuousExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartContinuousExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContinuousExport, schemas.StartContinuousExportRequest, schemas.StartContinuousExportResponse), output: &StartContinuousExportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartContinuousExport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartContinuousExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartContinuousExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +144,8 @@ func (c *Client) addOperationStartContinuousExportMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartContinuousExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartContinuousExport",
-	}
 }

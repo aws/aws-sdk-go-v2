@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"goal":{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","description":"__Description__","id":"__Id__","lastModifiedAt":"2000-01-01T00:00:00Z","lastModifiedBy":"__LastModifiedBy__","pillars":["COST_OPTIMIZATION","COST_OPTIMIZATION"],"profileArn":"__ProfileArn__","title":"__Title__"}}

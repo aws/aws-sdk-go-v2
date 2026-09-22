@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Q topic.
@@ -58,6 +57,33 @@ type CreateTopicInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateTopicRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.CustomInstructions != nil {
+		s.WriteStruct(schemas.CreateTopicRequest_CustomInstructions)
+		v.CustomInstructions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFolderArnList(s, schemas.CreateTopicRequest_FolderArns, v.FolderArns)
+	serializeTagList(s, schemas.CreateTopicRequest_Tags, v.Tags)
+	if v.Topic != nil {
+		s.WriteStruct(schemas.CreateTopicRequest_Topic)
+		v.Topic.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.CreateTopicRequest_TopicId, *v.TopicId)
+	}
+}
+
 type CreateTopicOutput struct {
 
 	// The Amazon Resource Name (ARN) of the topic.
@@ -82,77 +108,71 @@ type CreateTopicOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTopicOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTopicResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTopicOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateTopicResponse_Arn, *v.Arn)
+	}
+	if v.RefreshArn != nil {
+		s.WriteString(schemas.CreateTopicResponse_RefreshArn, *v.RefreshArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateTopicResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateTopicResponse_Status, v.Status)
+	}
+	if v.TopicId != nil {
+		s.WriteString(schemas.CreateTopicResponse_TopicId, *v.TopicId)
+	}
+}
+func (v *CreateTopicOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTopicResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTopicResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateTopicResponse_Arn, v.Arn)
+		case schemas.CreateTopicResponse_RefreshArn:
+			v.RefreshArn = new(string)
+			return d.ReadString(schemas.CreateTopicResponse_RefreshArn, v.RefreshArn)
+		case schemas.CreateTopicResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateTopicResponse_RequestId, v.RequestId)
+		case schemas.CreateTopicResponse_Status:
+			return d.ReadInt32(schemas.CreateTopicResponse_Status, &v.Status)
+		case schemas.CreateTopicResponse_TopicId:
+			v.TopicId = new(string)
+			return d.ReadString(schemas.CreateTopicResponse_TopicId, v.TopicId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopic, schemas.CreateTopicRequest, schemas.CreateTopicResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTopic{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTopic, schemas.CreateTopicRequest, schemas.CreateTopicResponse), output: &CreateTopicOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTopic{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTopic"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTopicValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTopic(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +187,8 @@ func (c *Client) addOperationCreateTopicMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateTopic(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTopic",
-	}
 }

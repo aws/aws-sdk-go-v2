@@ -1,0 +1,3 @@
+GET /command-executions/__ExecutionId__?includeResult=true&targetArn=__TargetArn__
+
+

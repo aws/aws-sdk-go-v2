@@ -5,10 +5,10 @@ package opensearch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all instance types and available features for a given OpenSearch or
@@ -57,6 +57,33 @@ type ListInstanceTypeDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceTypeDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceTypeDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceTypeDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsRequest_DomainName, *v.DomainName)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsRequest_InstanceType, *v.InstanceType)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListInstanceTypeDetailsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsRequest_NextToken, *v.NextToken)
+	}
+	if v.RetrieveAZs != nil {
+		s.WriteBool(schemas.ListInstanceTypeDetailsRequest_RetrieveAZs, *v.RetrieveAZs)
+	}
+}
+
 type ListInstanceTypeDetailsOutput struct {
 
 	// Lists all supported instance types and features for the given OpenSearch or
@@ -74,77 +101,51 @@ type ListInstanceTypeDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceTypeDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceTypeDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceTypeDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceTypeDetailsList(s, schemas.ListInstanceTypeDetailsResponse_InstanceTypeDetails, v.InstanceTypeDetails)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstanceTypeDetailsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInstanceTypeDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstanceTypeDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstanceTypeDetailsResponse_InstanceTypeDetails:
+			return deserializeInstanceTypeDetailsList(d, schemas.ListInstanceTypeDetailsResponse_InstanceTypeDetails, &v.InstanceTypeDetails)
+		case schemas.ListInstanceTypeDetailsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInstanceTypeDetailsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstanceTypeDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceTypeDetails, schemas.ListInstanceTypeDetailsRequest, schemas.ListInstanceTypeDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInstanceTypeDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceTypeDetails, schemas.ListInstanceTypeDetailsRequest, schemas.ListInstanceTypeDetailsResponse), output: &ListInstanceTypeDetailsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInstanceTypeDetails{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInstanceTypeDetails"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListInstanceTypeDetailsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInstanceTypeDetails(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +158,6 @@ func (c *Client) addOperationListInstanceTypeDetailsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +257,3 @@ type ListInstanceTypeDetailsAPIClient interface {
 }
 
 var _ ListInstanceTypeDetailsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListInstanceTypeDetails(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListInstanceTypeDetails",
-	}
-}

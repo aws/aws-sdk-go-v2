@@ -5,11 +5,11 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The BatchGetItem operation returns the attributes of one or more items from one
@@ -174,6 +174,18 @@ type BatchGetItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchGetRequestMap(s, schemas.BatchGetItemInput_RequestItems, v.RequestItems)
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.BatchGetItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+}
 func (in *BatchGetItemInput) bindEndpointParams(p *EndpointParameters) {
 	func() {
 		v1 := in.RequestItems
@@ -231,68 +243,48 @@ type BatchGetItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsumedCapacityMultiple(s, schemas.BatchGetItemOutput_ConsumedCapacity, v.ConsumedCapacity)
+	serializeBatchGetResponseMap(s, schemas.BatchGetItemOutput_Responses, v.Responses)
+	serializeBatchGetRequestMap(s, schemas.BatchGetItemOutput_UnprocessedKeys, v.UnprocessedKeys)
+}
+func (v *BatchGetItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetItemOutput_ConsumedCapacity:
+			return deserializeConsumedCapacityMultiple(d, schemas.BatchGetItemOutput_ConsumedCapacity, &v.ConsumedCapacity)
+		case schemas.BatchGetItemOutput_Responses:
+			return deserializeBatchGetResponseMap(d, schemas.BatchGetItemOutput_Responses, &v.Responses)
+		case schemas.BatchGetItemOutput_UnprocessedKeys:
+			return deserializeBatchGetRequestMap(d, schemas.BatchGetItemOutput_UnprocessedKeys, &v.UnprocessedKeys)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetItem, schemas.BatchGetItemInput, schemas.BatchGetItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchGetItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetItem, schemas.BatchGetItemInput, schemas.BatchGetItemOutput), output: &BatchGetItemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchGetItem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetItem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetItemDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -302,12 +294,6 @@ func (c *Client) addOperationBatchGetItemMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpBatchGetItemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetItem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -326,12 +312,6 @@ func (c *Client) addOperationBatchGetItemMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -381,12 +361,4 @@ func (c *Client) fetchOpBatchGetItemDiscoverEndpoint(ctx context.Context, region
 
 	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	return internalEndpointDiscovery.WeightedAddress{}, nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetItem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetItem",
-	}
 }

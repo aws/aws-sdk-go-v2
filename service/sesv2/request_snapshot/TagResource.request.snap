@@ -1,0 +1,5 @@
+POST /v2/email/tags
+
+Content-Type: application/json
+
+{"ResourceArn":"__ResourceArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

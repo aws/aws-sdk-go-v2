@@ -1,0 +1,3 @@
+GET /prompts/?maxResults=1&nextToken=__NextToken__&promptIdentifier=__PromptIdentifier__
+
+

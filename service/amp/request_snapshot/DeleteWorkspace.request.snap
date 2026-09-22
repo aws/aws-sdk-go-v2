@@ -1,0 +1,3 @@
+DELETE /workspaces/__WorkspaceId__?clientToken=__ClientToken__
+
+

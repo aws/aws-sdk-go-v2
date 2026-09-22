@@ -219,6 +219,33 @@ func (e *DescribeAttachmentLimitExceeded) ErrorCode() string {
 }
 func (e *DescribeAttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request was valid, but the operation wasn't performed because dryRun was
+// set to true .
+type DryRunOperationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DryRunOperationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DryRunOperationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DryRunOperationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "DryRunOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *DryRunOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An internal server error occurred.
 type InternalServerError struct {
 	Message *string
@@ -253,6 +280,8 @@ type ThrottlingException struct {
 
 	ErrorCodeOverride *string
 
+	ThrottlingReasons []ThrottlingReason
+
 	noSmithyDocumentSerde
 }
 
@@ -272,3 +301,29 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified uploadId couldn't be located.
+type UploadIdNotFound struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UploadIdNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UploadIdNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UploadIdNotFound) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UploadIdNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UploadIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreatedAt":946684800,"ErrorMessage":"__ErrorMessage__","GroupArn":"__GroupArn__","GroupName":"__GroupName__","ResourceQuery":{"Query":"__Query__","Type":"TAG_FILTERS_1_0"},"RoleArn":"__RoleArn__","Status":"ACTIVE","TagKey":"__TagKey__","TagValue":"__TagValue__","TaskArn":"__TaskArn__"}

@@ -4,11 +4,10 @@ package qconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets and Amazon Q in Connect AI Prompt.
@@ -43,6 +42,21 @@ type GetAIPromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAIPromptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAIPromptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAIPromptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiPromptId != nil {
+		s.WriteString(schemas.GetAIPromptRequest_aiPromptId, *v.AiPromptId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.GetAIPromptRequest_assistantId, *v.AssistantId)
+	}
+}
+
 type GetAIPromptOutput struct {
 
 	// The data of the AI Prompt.
@@ -58,77 +72,56 @@ type GetAIPromptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAIPromptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAIPromptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAIPromptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiPrompt != nil {
+		s.WriteStruct(schemas.GetAIPromptResponse_aiPrompt)
+		v.AiPrompt.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.GetAIPromptResponse_versionNumber, *v.VersionNumber)
+	}
+}
+func (v *GetAIPromptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAIPromptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAIPromptResponse_aiPrompt:
+			v.AiPrompt = &types.AIPromptData{}
+			return v.AiPrompt.Deserialize(d)
+		case schemas.GetAIPromptResponse_versionNumber:
+			v.VersionNumber = new(int64)
+			return d.ReadInt64(schemas.GetAIPromptResponse_versionNumber, v.VersionNumber)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAIPromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAIPrompt, schemas.GetAIPromptRequest, schemas.GetAIPromptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAIPrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAIPrompt, schemas.GetAIPromptRequest, schemas.GetAIPromptResponse), output: &GetAIPromptOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAIPrompt{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAIPrompt"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAIPromptValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAIPrompt(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +136,8 @@ func (c *Client) addOperationGetAIPromptMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAIPrompt(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAIPrompt",
-	}
 }

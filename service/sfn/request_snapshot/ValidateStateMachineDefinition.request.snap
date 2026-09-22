@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.ValidateStateMachineDefinition
+
+{"definition":"__Definition__","maxResults":1,"severity":"ERROR","type":"STANDARD"}

@@ -1,0 +1,5 @@
+POST /v1/cases/__CaseId__/get-presigned-url
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","contentLength":1,"fileName":"__FileName__"}

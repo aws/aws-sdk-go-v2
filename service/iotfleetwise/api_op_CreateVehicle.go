@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Creates a vehicle, which is an instance of a vehicle model (model manifest).
@@ -79,6 +78,59 @@ type CreateVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVehicleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVehicleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationBehavior != "" {
+		s.WriteString(schemas.CreateVehicleRequest_associationBehavior, string(v.AssociationBehavior))
+	}
+	serializeattributesMap(s, schemas.CreateVehicleRequest_attributes, v.Attributes)
+	if v.DecoderManifestArn != nil {
+		s.WriteString(schemas.CreateVehicleRequest_decoderManifestArn, *v.DecoderManifestArn)
+	}
+	if v.ModelManifestArn != nil {
+		s.WriteString(schemas.CreateVehicleRequest_modelManifestArn, *v.ModelManifestArn)
+	}
+	serializeStateTemplateAssociations(s, schemas.CreateVehicleRequest_stateTemplates, v.StateTemplates)
+	serializeTagList(s, schemas.CreateVehicleRequest_tags, v.Tags)
+	if v.VehicleName != nil {
+		s.WriteString(schemas.CreateVehicleRequest_vehicleName, *v.VehicleName)
+	}
+}
+func (v *CreateVehicleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVehicleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVehicleRequest_associationBehavior:
+			var ev string
+			if err := d.ReadString(schemas.CreateVehicleRequest_associationBehavior, &ev); err != nil {
+				return err
+			}
+			v.AssociationBehavior = types.VehicleAssociationBehavior(ev)
+			return nil
+		case schemas.CreateVehicleRequest_attributes:
+			return deserializeattributesMap(d, schemas.CreateVehicleRequest_attributes, &v.Attributes)
+		case schemas.CreateVehicleRequest_decoderManifestArn:
+			v.DecoderManifestArn = new(string)
+			return d.ReadString(schemas.CreateVehicleRequest_decoderManifestArn, v.DecoderManifestArn)
+		case schemas.CreateVehicleRequest_modelManifestArn:
+			v.ModelManifestArn = new(string)
+			return d.ReadString(schemas.CreateVehicleRequest_modelManifestArn, v.ModelManifestArn)
+		case schemas.CreateVehicleRequest_stateTemplates:
+			return deserializeStateTemplateAssociations(d, schemas.CreateVehicleRequest_stateTemplates, &v.StateTemplates)
+		case schemas.CreateVehicleRequest_tags:
+			return deserializeTagList(d, schemas.CreateVehicleRequest_tags, &v.Tags)
+		case schemas.CreateVehicleRequest_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.CreateVehicleRequest_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
+}
+
 type CreateVehicleOutput struct {
 
 	//  The ARN of the created vehicle.
@@ -96,77 +148,60 @@ type CreateVehicleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVehicleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVehicleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateVehicleResponse_arn, *v.Arn)
+	}
+	if v.ThingArn != nil {
+		s.WriteString(schemas.CreateVehicleResponse_thingArn, *v.ThingArn)
+	}
+	if v.VehicleName != nil {
+		s.WriteString(schemas.CreateVehicleResponse_vehicleName, *v.VehicleName)
+	}
+}
+func (v *CreateVehicleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVehicleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVehicleResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateVehicleResponse_arn, v.Arn)
+		case schemas.CreateVehicleResponse_thingArn:
+			v.ThingArn = new(string)
+			return d.ReadString(schemas.CreateVehicleResponse_thingArn, v.ThingArn)
+		case schemas.CreateVehicleResponse_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.CreateVehicleResponse_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVehicleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVehicle, schemas.CreateVehicleRequest, schemas.CreateVehicleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVehicle, schemas.CreateVehicleRequest, schemas.CreateVehicleResponse), output: &CreateVehicleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateVehicle{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVehicle"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateVehicleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVehicle(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +216,8 @@ func (c *Client) addOperationCreateVehicleMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateVehicle(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVehicle",
-	}
 }

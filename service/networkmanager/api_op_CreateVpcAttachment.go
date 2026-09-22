@@ -5,10 +5,10 @@ package networkmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a VPC attachment on an edge location of a core network.
@@ -60,6 +60,34 @@ type CreateVpcAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVpcAttachmentRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CreateVpcAttachmentRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.Options != nil {
+		s.WriteStruct(schemas.CreateVpcAttachmentRequest_Options)
+		v.Options.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.CreateVpcAttachmentRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+	serializeSubnetArnList(s, schemas.CreateVpcAttachmentRequest_SubnetArns, v.SubnetArns)
+	serializeTagList(s, schemas.CreateVpcAttachmentRequest_Tags, v.Tags)
+	if v.VpcArn != nil {
+		s.WriteString(schemas.CreateVpcAttachmentRequest_VpcArn, *v.VpcArn)
+	}
+}
+
 type CreateVpcAttachmentOutput struct {
 
 	// Provides details about the VPC attachment.
@@ -71,65 +99,44 @@ type CreateVpcAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcAttachment != nil {
+		s.WriteStruct(schemas.CreateVpcAttachmentResponse_VpcAttachment)
+		v.VpcAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVpcAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcAttachmentResponse_VpcAttachment:
+			v.VpcAttachment = &types.VpcAttachment{}
+			return v.VpcAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVpcAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcAttachment, schemas.CreateVpcAttachmentRequest, schemas.CreateVpcAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVpcAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcAttachment, schemas.CreateVpcAttachmentRequest, schemas.CreateVpcAttachmentResponse), output: &CreateVpcAttachmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVpcAttachment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVpcAttachment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -139,12 +146,6 @@ func (c *Client) addOperationCreateVpcAttachmentMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateVpcAttachmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVpcAttachment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +158,6 @@ func (c *Client) addOperationCreateVpcAttachmentMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -202,12 +197,4 @@ func (m *idempotencyToken_initializeOpCreateVpcAttachment) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateVpcAttachmentMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateVpcAttachment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateVpcAttachment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVpcAttachment",
-	}
 }

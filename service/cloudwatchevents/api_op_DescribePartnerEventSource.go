@@ -4,10 +4,9 @@ package cloudwatchevents
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // An SaaS partner can use this operation to list details about a partner event
@@ -41,6 +40,18 @@ type DescribePartnerEventSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePartnerEventSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePartnerEventSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePartnerEventSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribePartnerEventSourceRequest_Name, *v.Name)
+	}
+}
+
 type DescribePartnerEventSourceOutput struct {
 
 	// The ARN of the event source.
@@ -55,77 +66,54 @@ type DescribePartnerEventSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePartnerEventSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePartnerEventSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePartnerEventSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribePartnerEventSourceResponse_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribePartnerEventSourceResponse_Name, *v.Name)
+	}
+}
+func (v *DescribePartnerEventSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePartnerEventSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePartnerEventSourceResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribePartnerEventSourceResponse_Arn, v.Arn)
+		case schemas.DescribePartnerEventSourceResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribePartnerEventSourceResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartnerEventSource, schemas.DescribePartnerEventSourceRequest, schemas.DescribePartnerEventSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribePartnerEventSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePartnerEventSource, schemas.DescribePartnerEventSourceRequest, schemas.DescribePartnerEventSourceResponse), output: &DescribePartnerEventSourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribePartnerEventSource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePartnerEventSource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribePartnerEventSourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePartnerEventSource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +128,8 @@ func (c *Client) addOperationDescribePartnerEventSourceMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribePartnerEventSource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribePartnerEventSource",
-	}
 }

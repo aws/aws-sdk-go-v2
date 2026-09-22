@@ -1,0 +1,4 @@
+DELETE /?analytics=&id=__Id__
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

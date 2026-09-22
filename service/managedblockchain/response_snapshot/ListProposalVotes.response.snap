@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","ProposalVotes":[{"MemberId":"__MemberId__","MemberName":"__MemberName__","Vote":"YES"},{"MemberId":"__MemberId__","MemberName":"__MemberName__","Vote":"YES"}]}

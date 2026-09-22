@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about all the activities for a campaign.
@@ -51,6 +50,27 @@ type GetCampaignActivitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCampaignActivitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCampaignActivitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCampaignActivitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetCampaignActivitiesRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.CampaignId != nil {
+		s.WriteString(schemas.GetCampaignActivitiesRequest_CampaignId, *v.CampaignId)
+	}
+	if v.PageSize != nil {
+		s.WriteString(schemas.GetCampaignActivitiesRequest_PageSize, *v.PageSize)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.GetCampaignActivitiesRequest_Token, *v.Token)
+	}
+}
+
 type GetCampaignActivitiesOutput struct {
 
 	// Provides information about the activities that were performed by a campaign.
@@ -64,77 +84,50 @@ type GetCampaignActivitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCampaignActivitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCampaignActivitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCampaignActivitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivitiesResponse != nil {
+		s.WriteStruct(schemas.GetCampaignActivitiesResponse_ActivitiesResponse)
+		v.ActivitiesResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCampaignActivitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCampaignActivitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCampaignActivitiesResponse_ActivitiesResponse:
+			v.ActivitiesResponse = &types.ActivitiesResponse{}
+			return v.ActivitiesResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCampaignActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignActivities, schemas.GetCampaignActivitiesRequest, schemas.GetCampaignActivitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCampaignActivities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCampaignActivities, schemas.GetCampaignActivitiesRequest, schemas.GetCampaignActivitiesResponse), output: &GetCampaignActivitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCampaignActivities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCampaignActivities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCampaignActivitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCampaignActivities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +142,8 @@ func (c *Client) addOperationGetCampaignActivitiesMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCampaignActivities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCampaignActivities",
-	}
 }

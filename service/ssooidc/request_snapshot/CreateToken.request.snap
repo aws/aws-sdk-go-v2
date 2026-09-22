@@ -1,0 +1,5 @@
+POST /token
+
+Content-Type: application/json
+
+{"clientId":"__ClientId__","clientSecret":"__ClientSecret__","code":"__Code__","codeVerifier":"__CodeVerifier__","deviceCode":"__DeviceCode__","grantType":"__GrantType__","redirectUri":"__RedirectUri__","refreshToken":"__RefreshToken__","scope":["__Member__","__Member__"]}

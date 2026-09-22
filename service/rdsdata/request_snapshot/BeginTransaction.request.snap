@@ -1,0 +1,5 @@
+POST /BeginTransaction
+
+Content-Type: application/json
+
+{"database":"__Database__","resourceArn":"__ResourceArn__","schema":"__Schema__","secretArn":"__SecretArn__"}

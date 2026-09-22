@@ -1,0 +1,3 @@
+DELETE /memories/__MemoryId__/delete?clientToken=__ClientToken__
+
+

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","capabilities":["__Member__","__Member__"],"contentLocation":"__ContentLocation__","creationDateTime":946684800,"description":"__Description__","error":{"code":"MATTERPORT_ERROR","message":"__Message__"},"generatedSceneMetadata":{"key0":"__Value__"},"sceneId":"__SceneId__","sceneMetadata":{"key0":"__Value__"},"updateDateTime":946684800,"workspaceId":"__WorkspaceId__"}

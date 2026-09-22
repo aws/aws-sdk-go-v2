@@ -9,6 +9,7 @@ const (
 	ApplicationTypeStandard  ApplicationType = "STANDARD"
 	ApplicationTypeService   ApplicationType = "SERVICE"
 	ApplicationTypeMcpServer ApplicationType = "MCP_SERVER"
+	ApplicationTypeA2aServer ApplicationType = "A2A_SERVER"
 )
 
 // Values returns all known values for ApplicationType. Note that this can be
@@ -20,6 +21,24 @@ func (ApplicationType) Values() []ApplicationType {
 		"STANDARD",
 		"SERVICE",
 		"MCP_SERVER",
+		"A2A_SERVER",
+	}
+}
+
+type AuthType string
+
+// Enum values for AuthType
+const (
+	AuthTypeApiKey AuthType = "API_KEY"
+)
+
+// Values returns all known values for AuthType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AuthType) Values() []AuthType {
+	return []AuthType{
+		"API_KEY",
 	}
 }
 

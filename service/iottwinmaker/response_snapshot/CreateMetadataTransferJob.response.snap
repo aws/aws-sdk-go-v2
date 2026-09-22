@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","creationDateTime":946684800,"metadataTransferJobId":"__MetadataTransferJobId__","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"queuedPosition":1,"state":"VALIDATING"}}

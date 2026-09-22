@@ -4,11 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -97,6 +94,21 @@ type GetEvaluatorOutput struct {
 	//  The description of the evaluator.
 	Description *string
 
+	//  The kind of evaluator resource. Valid values:
+	//
+	//   - Builtin – An Amazon Web Services-managed global evaluator.
+	//
+	//   - ThirdParty – An Amazon Web Services-managed global evaluator from a
+	//   third-party provider.
+	//
+	//   - Custom – A customer-created evaluator.
+	//
+	//   - CustomCode – A customer-created code-based evaluator.
+	//
+	//   - CustomDerived – A customer-created evaluator derived from an existing base
+	//   evaluator.
+	EvaluatorType types.EvaluatorType
+
 	//  The Amazon Resource Name (ARN) of the customer managed KMS key used to encrypt
 	// the evaluator's sensitive data. This field is only present for evaluators
 	// encrypted with a customer managed key.
@@ -106,6 +118,10 @@ type GetEvaluatorOutput struct {
 	// active online evaluation configurations.
 	LockedForModification *bool
 
+	//  The source of the evaluator's logic: Amazon Web Services, a third-party
+	// library, or you.
+	Provider types.Provider
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -113,9 +129,6 @@ type GetEvaluatorOutput struct {
 }
 
 func (c *Client) addOperationGetEvaluatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvaluator{}, middleware.After)
 	if err != nil {
 		return err
@@ -124,65 +137,20 @@ func (c *Client) addOperationGetEvaluatorMiddlewares(stack *middleware.Stack, op
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEvaluator"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEvaluatorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEvaluator(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +165,8 @@ func (c *Client) addOperationGetEvaluatorMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEvaluator(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEvaluator",
-	}
 }

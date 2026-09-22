@@ -1,0 +1,3 @@
+GET /sol/nsd/v1/ns_descriptors?max_results=1&nextpage_opaque_marker=__NextToken__
+
+

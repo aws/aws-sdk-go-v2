@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,28 @@ type GetModelManifestInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetModelManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetModelManifestRequest_name, *v.Name)
+	}
+}
+func (v *GetModelManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetModelManifestRequest_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type GetModelManifestOutput struct {
@@ -77,77 +98,88 @@ type GetModelManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetModelManifestResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetModelManifestResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetModelManifestResponse_description, *v.Description)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetModelManifestResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetModelManifestResponse_name, *v.Name)
+	}
+	if v.SignalCatalogArn != nil {
+		s.WriteString(schemas.GetModelManifestResponse_signalCatalogArn, *v.SignalCatalogArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetModelManifestResponse_status, string(v.Status))
+	}
+}
+func (v *GetModelManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetModelManifestResponse_arn, v.Arn)
+		case schemas.GetModelManifestResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelManifestResponse_creationTime, v.CreationTime)
+		case schemas.GetModelManifestResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetModelManifestResponse_description, v.Description)
+		case schemas.GetModelManifestResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelManifestResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.GetModelManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetModelManifestResponse_name, v.Name)
+		case schemas.GetModelManifestResponse_signalCatalogArn:
+			v.SignalCatalogArn = new(string)
+			return d.ReadString(schemas.GetModelManifestResponse_signalCatalogArn, v.SignalCatalogArn)
+		case schemas.GetModelManifestResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetModelManifestResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ManifestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelManifest, schemas.GetModelManifestRequest, schemas.GetModelManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetModelManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelManifest, schemas.GetModelManifestRequest, schemas.GetModelManifestResponse), output: &GetModelManifestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetModelManifest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetModelManifest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetModelManifestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetModelManifest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +194,8 @@ func (c *Client) addOperationGetModelManifestMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetModelManifest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetModelManifest",
-	}
 }

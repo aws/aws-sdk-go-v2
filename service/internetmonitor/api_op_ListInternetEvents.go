@@ -5,10 +5,10 @@ package internetmonitor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -65,6 +65,33 @@ type ListInternetEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInternetEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInternetEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInternetEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListInternetEventsInput_EndTime, *v.EndTime)
+	}
+	if v.EventStatus != nil {
+		s.WriteString(schemas.ListInternetEventsInput_EventStatus, *v.EventStatus)
+	}
+	if v.EventType != nil {
+		s.WriteString(schemas.ListInternetEventsInput_EventType, *v.EventType)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInternetEventsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInternetEventsInput_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListInternetEventsInput_StartTime, *v.StartTime)
+	}
+}
+
 type ListInternetEventsOutput struct {
 
 	// A set of internet events returned for the list operation.
@@ -82,74 +109,48 @@ type ListInternetEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInternetEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInternetEventsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInternetEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInternetEventsList(s, schemas.ListInternetEventsOutput_InternetEvents, v.InternetEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInternetEventsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInternetEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInternetEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInternetEventsOutput_InternetEvents:
+			return deserializeInternetEventsList(d, schemas.ListInternetEventsOutput_InternetEvents, &v.InternetEvents)
+		case schemas.ListInternetEventsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInternetEventsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInternetEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInternetEvents, schemas.ListInternetEventsInput, schemas.ListInternetEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListInternetEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInternetEvents, schemas.ListInternetEventsInput, schemas.ListInternetEventsOutput), output: &ListInternetEventsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListInternetEvents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInternetEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInternetEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +163,6 @@ func (c *Client) addOperationListInternetEventsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +264,3 @@ type ListInternetEventsAPIClient interface {
 }
 
 var _ ListInternetEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListInternetEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListInternetEvents",
-	}
-}

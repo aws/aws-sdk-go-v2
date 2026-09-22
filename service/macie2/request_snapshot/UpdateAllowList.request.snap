@@ -1,0 +1,5 @@
+PUT /allow-lists/__Id__
+
+Content-Type: application/json
+
+{"criteria":{"regex":"__Regex__","s3WordsList":{"bucketName":"__BucketName__","objectKey":"__ObjectKey__"}},"description":"__Description__","name":"__Name__"}

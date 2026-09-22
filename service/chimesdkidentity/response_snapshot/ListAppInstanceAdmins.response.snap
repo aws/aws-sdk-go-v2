@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceAdmins":[{"Admin":{"Arn":"__Arn__","Name":"__Name__"}},{"Admin":{"Arn":"__Arn__","Name":"__Name__"}}],"AppInstanceArn":"__AppInstanceArn__","NextToken":"__NextToken__"}

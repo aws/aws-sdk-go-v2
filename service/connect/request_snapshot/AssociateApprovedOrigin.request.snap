@@ -1,0 +1,5 @@
+PUT /instance/__InstanceId__/approved-origin
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Origin":"__Origin__"}

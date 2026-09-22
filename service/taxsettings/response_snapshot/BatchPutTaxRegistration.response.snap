@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"errors":[{"accountId":"__AccountId__","code":"__Code__","message":"__Message__"},{"accountId":"__AccountId__","code":"__Code__","message":"__Message__"}],"status":"Verified"}

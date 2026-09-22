@@ -4,10 +4,9 @@ package kafka
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A list of brokers that a client application can use to bootstrap. This list
@@ -39,6 +38,18 @@ type GetBootstrapBrokersInput struct {
 	ClusterArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBootstrapBrokersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBootstrapBrokersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBootstrapBrokersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.GetBootstrapBrokersRequest_ClusterArn, *v.ClusterArn)
+	}
 }
 
 type GetBootstrapBrokersOutput struct {
@@ -100,77 +111,126 @@ type GetBootstrapBrokersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBootstrapBrokersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBootstrapBrokersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBootstrapBrokersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BootstrapBrokerString != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerString, *v.BootstrapBrokerString)
+	}
+	if v.BootstrapBrokerStringIpv6 != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringIpv6, *v.BootstrapBrokerStringIpv6)
+	}
+	if v.BootstrapBrokerStringPublicSaslIam != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam, *v.BootstrapBrokerStringPublicSaslIam)
+	}
+	if v.BootstrapBrokerStringPublicSaslScram != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram, *v.BootstrapBrokerStringPublicSaslScram)
+	}
+	if v.BootstrapBrokerStringPublicTls != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls, *v.BootstrapBrokerStringPublicTls)
+	}
+	if v.BootstrapBrokerStringSaslIam != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam, *v.BootstrapBrokerStringSaslIam)
+	}
+	if v.BootstrapBrokerStringSaslIamIpv6 != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6, *v.BootstrapBrokerStringSaslIamIpv6)
+	}
+	if v.BootstrapBrokerStringSaslScram != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram, *v.BootstrapBrokerStringSaslScram)
+	}
+	if v.BootstrapBrokerStringSaslScramIpv6 != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6, *v.BootstrapBrokerStringSaslScramIpv6)
+	}
+	if v.BootstrapBrokerStringTls != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringTls, *v.BootstrapBrokerStringTls)
+	}
+	if v.BootstrapBrokerStringTlsIpv6 != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6, *v.BootstrapBrokerStringTlsIpv6)
+	}
+	if v.BootstrapBrokerStringVpcConnectivitySaslIam != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam, *v.BootstrapBrokerStringVpcConnectivitySaslIam)
+	}
+	if v.BootstrapBrokerStringVpcConnectivitySaslScram != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram, *v.BootstrapBrokerStringVpcConnectivitySaslScram)
+	}
+	if v.BootstrapBrokerStringVpcConnectivityTls != nil {
+		s.WriteString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls, *v.BootstrapBrokerStringVpcConnectivityTls)
+	}
+}
+func (v *GetBootstrapBrokersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBootstrapBrokersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerString:
+			v.BootstrapBrokerString = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerString, v.BootstrapBrokerString)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringIpv6:
+			v.BootstrapBrokerStringIpv6 = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringIpv6, v.BootstrapBrokerStringIpv6)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam:
+			v.BootstrapBrokerStringPublicSaslIam = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslIam, v.BootstrapBrokerStringPublicSaslIam)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram:
+			v.BootstrapBrokerStringPublicSaslScram = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringPublicSaslScram, v.BootstrapBrokerStringPublicSaslScram)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls:
+			v.BootstrapBrokerStringPublicTls = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringPublicTls, v.BootstrapBrokerStringPublicTls)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam:
+			v.BootstrapBrokerStringSaslIam = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIam, v.BootstrapBrokerStringSaslIam)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6:
+			v.BootstrapBrokerStringSaslIamIpv6 = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslIamIpv6, v.BootstrapBrokerStringSaslIamIpv6)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram:
+			v.BootstrapBrokerStringSaslScram = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScram, v.BootstrapBrokerStringSaslScram)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6:
+			v.BootstrapBrokerStringSaslScramIpv6 = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringSaslScramIpv6, v.BootstrapBrokerStringSaslScramIpv6)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringTls:
+			v.BootstrapBrokerStringTls = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringTls, v.BootstrapBrokerStringTls)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6:
+			v.BootstrapBrokerStringTlsIpv6 = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringTlsIpv6, v.BootstrapBrokerStringTlsIpv6)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam:
+			v.BootstrapBrokerStringVpcConnectivitySaslIam = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslIam, v.BootstrapBrokerStringVpcConnectivitySaslIam)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram:
+			v.BootstrapBrokerStringVpcConnectivitySaslScram = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivitySaslScram, v.BootstrapBrokerStringVpcConnectivitySaslScram)
+		case schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls:
+			v.BootstrapBrokerStringVpcConnectivityTls = new(string)
+			return d.ReadString(schemas.GetBootstrapBrokersResponse_BootstrapBrokerStringVpcConnectivityTls, v.BootstrapBrokerStringVpcConnectivityTls)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBootstrapBrokersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBootstrapBrokers, schemas.GetBootstrapBrokersRequest, schemas.GetBootstrapBrokersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBootstrapBrokers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBootstrapBrokers, schemas.GetBootstrapBrokersRequest, schemas.GetBootstrapBrokersResponse), output: &GetBootstrapBrokersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBootstrapBrokers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBootstrapBrokers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBootstrapBrokersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBootstrapBrokers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +245,8 @@ func (c *Client) addOperationGetBootstrapBrokersMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBootstrapBrokers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBootstrapBrokers",
-	}
 }

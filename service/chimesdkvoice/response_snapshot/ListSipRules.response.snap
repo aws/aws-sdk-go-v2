@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","SipRules":[{"CreatedTimestamp":"2000-01-01T00:00:00Z","Disabled":true,"Name":"__Name__","SipRuleId":"__SipRuleId__","TargetApplications":[{"AwsRegion":"__AwsRegion__","Priority":1,"SipMediaApplicationId":"__SipMediaApplicationId__"},{"AwsRegion":"__AwsRegion__","Priority":1,"SipMediaApplicationId":"__SipMediaApplicationId__"}],"TriggerType":"ToPhoneNumber","TriggerValue":"__TriggerValue__","UpdatedTimestamp":"2000-01-01T00:00:00Z"},{"CreatedTimestamp":"2000-01-01T00:00:00Z","Disabled":true,"Name":"__Name__","SipRuleId":"__SipRuleId__","TargetApplications":[{"AwsRegion":"__AwsRegion__","Priority":1,"SipMediaApplicationId":"__SipMediaApplicationId__"},{"AwsRegion":"__AwsRegion__","Priority":1,"SipMediaApplicationId":"__SipMediaApplicationId__"}],"TriggerType":"ToPhoneNumber","TriggerValue":"__TriggerValue__","UpdatedTimestamp":"2000-01-01T00:00:00Z"}]}

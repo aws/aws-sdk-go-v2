@@ -5,10 +5,10 @@ package emrcontainers
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -65,10 +65,43 @@ type GetManagedEndpointSessionCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedEndpointSessionCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedEndpointSessionCredentialsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedEndpointSessionCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_clientToken, *v.ClientToken)
+	}
+	if v.CredentialType != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_credentialType, *v.CredentialType)
+	}
+	if v.DurationInSeconds != nil {
+		s.WriteInt32(schemas.GetManagedEndpointSessionCredentialsRequest_durationInSeconds, *v.DurationInSeconds)
+	}
+	if v.EndpointIdentifier != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_endpointIdentifier, *v.EndpointIdentifier)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.LogContext != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_logContext, *v.LogContext)
+	}
+	if v.VirtualClusterIdentifier != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsRequest_virtualClusterIdentifier, *v.VirtualClusterIdentifier)
+	}
+}
+
 type GetManagedEndpointSessionCredentialsOutput struct {
 
 	// The structure containing the session credentials.
 	Credentials types.Credentials
+
+	// The session credentials that the operation returns.
+	EndpointCredentials types.Credentials
 
 	// The date and time when the session token will expire.
 	ExpiresAt *time.Time
@@ -82,65 +115,54 @@ type GetManagedEndpointSessionCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetManagedEndpointSessionCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetManagedEndpointSessionCredentialsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetManagedEndpointSessionCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCredentials(s, schemas.GetManagedEndpointSessionCredentialsResponse_credentials, v.Credentials)
+	serializeCredentials(s, schemas.GetManagedEndpointSessionCredentialsResponse_endpointCredentials, v.EndpointCredentials)
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.GetManagedEndpointSessionCredentialsResponse_expiresAt, *v.ExpiresAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetManagedEndpointSessionCredentialsResponse_id, *v.Id)
+	}
+}
+func (v *GetManagedEndpointSessionCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetManagedEndpointSessionCredentialsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetManagedEndpointSessionCredentialsResponse_credentials:
+			return deserializeCredentials(d, schemas.GetManagedEndpointSessionCredentialsResponse_credentials, &v.Credentials)
+		case schemas.GetManagedEndpointSessionCredentialsResponse_endpointCredentials:
+			return deserializeCredentials(d, schemas.GetManagedEndpointSessionCredentialsResponse_endpointCredentials, &v.EndpointCredentials)
+		case schemas.GetManagedEndpointSessionCredentialsResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.GetManagedEndpointSessionCredentialsResponse_expiresAt, v.ExpiresAt)
+		case schemas.GetManagedEndpointSessionCredentialsResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetManagedEndpointSessionCredentialsResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetManagedEndpointSessionCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedEndpointSessionCredentials, schemas.GetManagedEndpointSessionCredentialsRequest, schemas.GetManagedEndpointSessionCredentialsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetManagedEndpointSessionCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetManagedEndpointSessionCredentials, schemas.GetManagedEndpointSessionCredentialsRequest, schemas.GetManagedEndpointSessionCredentialsResponse), output: &GetManagedEndpointSessionCredentialsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetManagedEndpointSessionCredentials{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetManagedEndpointSessionCredentials"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -150,12 +172,6 @@ func (c *Client) addOperationGetManagedEndpointSessionCredentialsMiddlewares(sta
 		return err
 	}
 	if err = addOpGetManagedEndpointSessionCredentialsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetManagedEndpointSessionCredentials(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +184,6 @@ func (c *Client) addOperationGetManagedEndpointSessionCredentialsMiddlewares(sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -213,12 +223,4 @@ func (m *idempotencyToken_initializeOpGetManagedEndpointSessionCredentials) Hand
 }
 func addIdempotencyToken_opGetManagedEndpointSessionCredentialsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpGetManagedEndpointSessionCredentials{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opGetManagedEndpointSessionCredentials(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetManagedEndpointSessionCredentials",
-	}
 }

@@ -1,0 +1,7 @@
+POST /service/PartnerCentralRevenueMeasurement/operation/GetRevenueAttributionAllocationsTask
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¿gCatalogcAWSxRevenueAttributionIdentifierx __RevenueAttributionIdentifier__ÿ

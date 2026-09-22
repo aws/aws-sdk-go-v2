@@ -4,11 +4,10 @@ package eks
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an Amazon EKS add-on.
@@ -53,6 +52,24 @@ type DeleteAddonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAddonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAddonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAddonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.DeleteAddonRequest_addonName, *v.AddonName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DeleteAddonRequest_clusterName, *v.ClusterName)
+	}
+	if v.Preserve != false {
+		s.WriteBool(schemas.DeleteAddonRequest_preserve, v.Preserve)
+	}
+}
+
 type DeleteAddonOutput struct {
 
 	// An Amazon EKS add-on. For more information, see [Amazon EKS add-ons] in the Amazon EKS User Guide.
@@ -66,77 +83,50 @@ type DeleteAddonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAddonOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAddonResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAddonOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Addon != nil {
+		s.WriteStruct(schemas.DeleteAddonResponse_addon)
+		v.Addon.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteAddonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAddonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAddonResponse_addon:
+			v.Addon = &types.Addon{}
+			return v.Addon.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAddon, schemas.DeleteAddonRequest, schemas.DeleteAddonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAddon, schemas.DeleteAddonRequest, schemas.DeleteAddonResponse), output: &DeleteAddonOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAddon{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAddon"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteAddonValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAddon(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +141,8 @@ func (c *Client) addOperationDeleteAddonMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteAddon(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteAddon",
-	}
 }

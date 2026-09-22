@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.CreateCachediSCSIVolume
+
+{"ClientToken":"__ClientToken__","GatewayARN":"__GatewayARN__","KMSEncrypted":true,"KMSKey":"__KMSKey__","NetworkInterfaceId":"__NetworkInterfaceId__","SnapshotId":"__SnapshotId__","SourceVolumeARN":"__SourceVolumeARN__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TargetName":"__TargetName__","VolumeSizeInBytes":1}

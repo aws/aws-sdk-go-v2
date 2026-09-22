@@ -1,0 +1,3 @@
+GET /v1/tags/list?resourceArn=__ResourceArn__
+
+

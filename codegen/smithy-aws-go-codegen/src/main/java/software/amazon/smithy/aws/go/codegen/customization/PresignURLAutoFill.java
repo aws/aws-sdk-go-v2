@@ -45,7 +45,6 @@ import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
-import software.amazon.smithy.model.shapes.StringShape;
 import software.amazon.smithy.model.shapes.StructureShape;
 import software.amazon.smithy.model.traits.DocumentationTrait;
 import software.amazon.smithy.utils.IoUtils;
@@ -175,8 +174,7 @@ public class PresignURLAutoFill implements GoIntegration {
         }
         Model.Builder builder = model.toBuilder();
 
-        Shape customString = StringShape.builder().id("sdk.customizations.presignURL#String").build();
-        builder.addShape(customString);
+        ShapeId preludeString = ShapeId.from("smithy.api#String");
 
         Set<ShapeId> operationIds = SERVICE_TO_OPERATION_MAP.get(serviceId);
         for (ShapeId operationId : operationIds) {
@@ -188,7 +186,7 @@ public class PresignURLAutoFill implements GoIntegration {
                 // In the case of EC2 the SourceRegion member is expected to be serialized.
                 LOGGER.warning("SourceRegion member is present in model and does not require backfill");
             } else {
-                inputBuilder.addMember("SourceRegion", customString.getId(), (memberBuilder) -> {
+                inputBuilder.addMember("SourceRegion", preludeString, (memberBuilder) -> {
                     memberBuilder
                             .addTrait(new DocumentationTrait(
                                     "The AWS region the resource is in. The presigned URL will be created with this region, " +
@@ -198,7 +196,7 @@ public class PresignURLAutoFill implements GoIntegration {
             }
 
             // Even if the input already contains DestinationRegion replace it with a unexported member.
-            inputBuilder.addMember("DestinationRegion", customString.getId(), (memberBuilder) -> {
+            inputBuilder.addMember("DestinationRegion", preludeString, (memberBuilder) -> {
                 memberBuilder
                         .addTrait(new DocumentationTrait(
                                 "Used by the SDK's PresignURL autofill customization to specify the region " +

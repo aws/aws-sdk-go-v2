@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a flow to start a new chat for the customer. Response of this API
@@ -163,6 +163,57 @@ type StartChatContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChatContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChatContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChatContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.StartChatContactRequest_Attributes, v.Attributes)
+	if v.ChatDurationInMinutes != nil {
+		s.WriteInt32(schemas.StartChatContactRequest_ChatDurationInMinutes, *v.ChatDurationInMinutes)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartChatContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartChatContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.CustomerId != nil {
+		s.WriteString(schemas.StartChatContactRequest_CustomerId, *v.CustomerId)
+	}
+	serializeDisconnectOnCustomerExit(s, schemas.StartChatContactRequest_DisconnectOnCustomerExit, v.DisconnectOnCustomerExit)
+	if v.InitialMessage != nil {
+		s.WriteStruct(schemas.StartChatContactRequest_InitialMessage)
+		v.InitialMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartChatContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.ParticipantConfiguration != nil {
+		s.WriteStruct(schemas.StartChatContactRequest_ParticipantConfiguration)
+		v.ParticipantConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParticipantDetails != nil {
+		s.WriteStruct(schemas.StartChatContactRequest_ParticipantDetails)
+		v.ParticipantDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PersistentChat != nil {
+		s.WriteStruct(schemas.StartChatContactRequest_PersistentChat)
+		v.PersistentChat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartChatContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	serializeSegmentAttributes(s, schemas.StartChatContactRequest_SegmentAttributes, v.SegmentAttributes)
+	serializeSupportedMessagingContentTypes(s, schemas.StartChatContactRequest_SupportedMessagingContentTypes, v.SupportedMessagingContentTypes)
+}
+
 type StartChatContactOutput struct {
 
 	// The identifier of this contact within the Connect Customer instance.
@@ -188,65 +239,60 @@ type StartChatContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartChatContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartChatContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartChatContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartChatContactResponse_ContactId, *v.ContactId)
+	}
+	if v.ContinuedFromContactId != nil {
+		s.WriteString(schemas.StartChatContactResponse_ContinuedFromContactId, *v.ContinuedFromContactId)
+	}
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.StartChatContactResponse_ParticipantId, *v.ParticipantId)
+	}
+	if v.ParticipantToken != nil {
+		s.WriteString(schemas.StartChatContactResponse_ParticipantToken, *v.ParticipantToken)
+	}
+}
+func (v *StartChatContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartChatContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartChatContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartChatContactResponse_ContactId, v.ContactId)
+		case schemas.StartChatContactResponse_ContinuedFromContactId:
+			v.ContinuedFromContactId = new(string)
+			return d.ReadString(schemas.StartChatContactResponse_ContinuedFromContactId, v.ContinuedFromContactId)
+		case schemas.StartChatContactResponse_ParticipantId:
+			v.ParticipantId = new(string)
+			return d.ReadString(schemas.StartChatContactResponse_ParticipantId, v.ParticipantId)
+		case schemas.StartChatContactResponse_ParticipantToken:
+			v.ParticipantToken = new(string)
+			return d.ReadString(schemas.StartChatContactResponse_ParticipantToken, v.ParticipantToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartChatContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChatContact, schemas.StartChatContactRequest, schemas.StartChatContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartChatContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartChatContact, schemas.StartChatContactRequest, schemas.StartChatContactResponse), output: &StartChatContactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartChatContact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartChatContact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -256,12 +302,6 @@ func (c *Client) addOperationStartChatContactMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpStartChatContactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartChatContact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -274,12 +314,6 @@ func (c *Client) addOperationStartChatContactMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -319,12 +353,4 @@ func (m *idempotencyToken_initializeOpStartChatContact) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opStartChatContactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartChatContact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartChatContact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartChatContact",
-	}
 }

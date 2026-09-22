@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AnyScaleFrontendService.DescribeScheduledActions
+
+{"MaxResults":1,"NextToken":"__NextToken__","ResourceId":"__ResourceId__","ScalableDimension":"ecs:service:DesiredCount","ScheduledActionNames":["__Member__","__Member__"],"ServiceNamespace":"ecs"}

@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the license configuration operations that failed.
@@ -43,6 +42,24 @@ type ListFailuresForLicenseConfigurationOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFailuresForLicenseConfigurationOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFailuresForLicenseConfigurationOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFailuresForLicenseConfigurationOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseConfigurationArn != nil {
+		s.WriteString(schemas.ListFailuresForLicenseConfigurationOperationsRequest_LicenseConfigurationArn, *v.LicenseConfigurationArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFailuresForLicenseConfigurationOperationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFailuresForLicenseConfigurationOperationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFailuresForLicenseConfigurationOperationsOutput struct {
 
 	// License configuration operations that failed.
@@ -57,77 +74,51 @@ type ListFailuresForLicenseConfigurationOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFailuresForLicenseConfigurationOperationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFailuresForLicenseConfigurationOperationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFailuresForLicenseConfigurationOperationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLicenseOperationFailureList(s, schemas.ListFailuresForLicenseConfigurationOperationsResponse_LicenseOperationFailureList, v.LicenseOperationFailureList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFailuresForLicenseConfigurationOperationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFailuresForLicenseConfigurationOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFailuresForLicenseConfigurationOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFailuresForLicenseConfigurationOperationsResponse_LicenseOperationFailureList:
+			return deserializeLicenseOperationFailureList(d, schemas.ListFailuresForLicenseConfigurationOperationsResponse_LicenseOperationFailureList, &v.LicenseOperationFailureList)
+		case schemas.ListFailuresForLicenseConfigurationOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFailuresForLicenseConfigurationOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFailuresForLicenseConfigurationOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailuresForLicenseConfigurationOperations, schemas.ListFailuresForLicenseConfigurationOperationsRequest, schemas.ListFailuresForLicenseConfigurationOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFailuresForLicenseConfigurationOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFailuresForLicenseConfigurationOperations, schemas.ListFailuresForLicenseConfigurationOperationsRequest, schemas.ListFailuresForLicenseConfigurationOperationsResponse), output: &ListFailuresForLicenseConfigurationOperationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFailuresForLicenseConfigurationOperations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFailuresForLicenseConfigurationOperations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFailuresForLicenseConfigurationOperationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFailuresForLicenseConfigurationOperations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +133,8 @@ func (c *Client) addOperationListFailuresForLicenseConfigurationOperationsMiddle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListFailuresForLicenseConfigurationOperations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFailuresForLicenseConfigurationOperations",
-	}
 }

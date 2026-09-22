@@ -4,11 +4,10 @@ package personalize
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Creates a job that exports data from your dataset to an Amazon S3 bucket. To
@@ -83,6 +82,33 @@ type CreateDatasetExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_datasetArn, *v.DatasetArn)
+	}
+	if v.IngestionMode != "" {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_ingestionMode, string(v.IngestionMode))
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_jobName, *v.JobName)
+	}
+	if v.JobOutput != nil {
+		s.WriteStruct(schemas.CreateDatasetExportJobRequest_jobOutput)
+		v.JobOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDatasetExportJobRequest_roleArn, *v.RoleArn)
+	}
+	serializeTags(s, schemas.CreateDatasetExportJobRequest_tags, v.Tags)
+}
+
 type CreateDatasetExportJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset export job.
@@ -94,77 +120,48 @@ type CreateDatasetExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDatasetExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDatasetExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDatasetExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetExportJobArn != nil {
+		s.WriteString(schemas.CreateDatasetExportJobResponse_datasetExportJobArn, *v.DatasetExportJobArn)
+	}
+}
+func (v *CreateDatasetExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDatasetExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDatasetExportJobResponse_datasetExportJobArn:
+			v.DatasetExportJobArn = new(string)
+			return d.ReadString(schemas.CreateDatasetExportJobResponse_datasetExportJobArn, v.DatasetExportJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDatasetExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetExportJob, schemas.CreateDatasetExportJobRequest, schemas.CreateDatasetExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDatasetExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDatasetExportJob, schemas.CreateDatasetExportJobRequest, schemas.CreateDatasetExportJobResponse), output: &CreateDatasetExportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDatasetExportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDatasetExportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDatasetExportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDatasetExportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +176,8 @@ func (c *Client) addOperationCreateDatasetExportJobMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDatasetExportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDatasetExportJob",
-	}
 }

@@ -4,11 +4,10 @@ package bedrockagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about a knowledge base.
@@ -37,6 +36,18 @@ type GetKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKnowledgeBaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKnowledgeBaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKnowledgeBaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.GetKnowledgeBaseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+
 type GetKnowledgeBaseOutput struct {
 
 	// Contains details about the knowledge base.
@@ -50,77 +61,50 @@ type GetKnowledgeBaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKnowledgeBaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKnowledgeBaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKnowledgeBaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KnowledgeBase != nil {
+		s.WriteStruct(schemas.GetKnowledgeBaseResponse_knowledgeBase)
+		v.KnowledgeBase.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetKnowledgeBaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetKnowledgeBaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetKnowledgeBaseResponse_knowledgeBase:
+			v.KnowledgeBase = &types.KnowledgeBase{}
+			return v.KnowledgeBase.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetKnowledgeBaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKnowledgeBase, schemas.GetKnowledgeBaseRequest, schemas.GetKnowledgeBaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKnowledgeBase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKnowledgeBase, schemas.GetKnowledgeBaseRequest, schemas.GetKnowledgeBaseResponse), output: &GetKnowledgeBaseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKnowledgeBase{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKnowledgeBase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetKnowledgeBaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKnowledgeBase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +119,8 @@ func (c *Client) addOperationGetKnowledgeBaseMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetKnowledgeBase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetKnowledgeBase",
-	}
 }

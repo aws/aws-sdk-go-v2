@@ -5,16 +5,22 @@ package evs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a connector for an Amazon EVS environment. A connector establishes a
-// connection to a VCF appliance, such as vCenter, using a fully qualified domain
-// name and an Amazon Web Services Secrets Manager secret that stores the appliance
-// credentials.
+// Creates a connector for an Amazon EVS environment. A connector allows the
+// Amazon EVS control plane to interface with VCF appliances using a fully
+// qualified domain name.
+//
+// You can create only one connector of each type per environment. For
+// environments where Amazon EVS installs VCF, the SDDC_MANAGER connector is
+// created automatically.
+//
+// Amazon EVS requires an active connector to SDDC Manager or VCF Operations
+// Manager to monitor environment health and license compliance.
 func (c *Client) CreateEnvironmentConnector(ctx context.Context, params *CreateEnvironmentConnectorInput, optFns ...func(*Options)) (*CreateEnvironmentConnectorOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentConnectorInput{}
@@ -44,15 +50,25 @@ type CreateEnvironmentConnectorInput struct {
 	EnvironmentId *string
 
 	// The ARN or name of the Amazon Web Services Secrets Manager secret that stores
-	// the credentials for the VCF appliance.
+	// the credentials for the VCF appliance. SDDC_MANAGER requires an apiKey field;
+	// OPERATIONS_MANAGER and VCENTER require username and password fields.
 	//
 	// Do not use credentials with Administrator privileges. We recommend using a
-	// service account with the minimum required permissions.
+	// service account with read-only permissions.
 	//
 	// This member is required.
 	SecretIdentifier *string
 
 	// The type of connector to create.
+	//
+	//   - OPERATIONS_MANAGER : Connector to an Operations Manager appliance. Required
+	//   for VCF 9x environments.
+	//
+	//   - SDDC_MANAGER : Connector to an SDDC Manager appliance. Required for VCF 5.x
+	//   environments.
+	//
+	//   - VCENTER : Connector to a vCenter Server appliance. Required for features
+	//   that depend on vCenter, such as Windows Server license-included.
 	//
 	// This member is required.
 	Type types.ConnectorType
@@ -68,6 +84,30 @@ type CreateEnvironmentConnectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplianceFqdn != nil {
+		s.WriteString(schemas.CreateEnvironmentConnectorRequest_applianceFqdn, *v.ApplianceFqdn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEnvironmentConnectorRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateEnvironmentConnectorRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.SecretIdentifier != nil {
+		s.WriteString(schemas.CreateEnvironmentConnectorRequest_secretIdentifier, *v.SecretIdentifier)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateEnvironmentConnectorRequest_type, string(v.Type))
+	}
+}
+
 type CreateEnvironmentConnectorOutput struct {
 
 	// A description of the created connector.
@@ -79,65 +119,44 @@ type CreateEnvironmentConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentConnectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentConnectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentConnectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Connector != nil {
+		s.WriteStruct(schemas.CreateEnvironmentConnectorResponse_connector)
+		v.Connector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateEnvironmentConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentConnectorResponse_connector:
+			v.Connector = &types.Connector{}
+			return v.Connector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentConnector, schemas.CreateEnvironmentConnectorRequest, schemas.CreateEnvironmentConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEnvironmentConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentConnector, schemas.CreateEnvironmentConnectorRequest, schemas.CreateEnvironmentConnectorResponse), output: &CreateEnvironmentConnectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEnvironmentConnector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEnvironmentConnector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -147,12 +166,6 @@ func (c *Client) addOperationCreateEnvironmentConnectorMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpCreateEnvironmentConnectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEnvironmentConnector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +178,6 @@ func (c *Client) addOperationCreateEnvironmentConnectorMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -210,12 +217,4 @@ func (m *idempotencyToken_initializeOpCreateEnvironmentConnector) HandleInitiali
 }
 func addIdempotencyToken_opCreateEnvironmentConnectorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateEnvironmentConnector{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateEnvironmentConnector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEnvironmentConnector",
-	}
 }

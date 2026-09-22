@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of container recipes.
@@ -40,10 +40,10 @@ type ListContainerRecipesInput struct {
 	//   - platform
 	Filters []types.Filter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -53,6 +53,25 @@ type ListContainerRecipesInput struct {
 	Owner types.Ownership
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListContainerRecipesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerRecipesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerRecipesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListContainerRecipesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContainerRecipesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerRecipesRequest_nextToken, *v.NextToken)
+	}
+	if v.Owner != "" {
+		s.WriteString(schemas.ListContainerRecipesRequest_owner, string(v.Owner))
+	}
 }
 
 type ListContainerRecipesOutput struct {
@@ -74,74 +93,54 @@ type ListContainerRecipesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerRecipesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerRecipesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerRecipesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerRecipeSummaryList(s, schemas.ListContainerRecipesResponse_containerRecipeSummaryList, v.ContainerRecipeSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerRecipesResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListContainerRecipesResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListContainerRecipesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContainerRecipesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContainerRecipesResponse_containerRecipeSummaryList:
+			return deserializeContainerRecipeSummaryList(d, schemas.ListContainerRecipesResponse_containerRecipeSummaryList, &v.ContainerRecipeSummaryList)
+		case schemas.ListContainerRecipesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContainerRecipesResponse_nextToken, v.NextToken)
+		case schemas.ListContainerRecipesResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListContainerRecipesResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContainerRecipesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerRecipes, schemas.ListContainerRecipesRequest, schemas.ListContainerRecipesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContainerRecipes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerRecipes, schemas.ListContainerRecipesRequest, schemas.ListContainerRecipesResponse), output: &ListContainerRecipesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContainerRecipes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContainerRecipes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContainerRecipes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +155,6 @@ func (c *Client) addOperationListContainerRecipesMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -171,7 +164,7 @@ func (c *Client) addOperationListContainerRecipesMiddlewares(stack *middleware.S
 // ListContainerRecipesPaginatorOptions is the paginator options for
 // ListContainerRecipes
 type ListContainerRecipesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -261,11 +254,3 @@ type ListContainerRecipesAPIClient interface {
 }
 
 var _ ListContainerRecipesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListContainerRecipes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListContainerRecipes",
-	}
-}

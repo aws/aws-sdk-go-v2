@@ -5,10 +5,10 @@ package amp
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Prometheus workspace. A workspace is a logical space dedicated to the
@@ -56,6 +56,43 @@ type CreateWorkspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_alias, *v.Alias)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_clientToken, *v.ClientToken)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateWorkspaceRequest_kmsKeyArn, *v.KmsKeyArn)
+	}
+	serializeTagMap(s, schemas.CreateWorkspaceRequest_tags, v.Tags)
+}
+func (v *CreateWorkspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceRequest_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_alias, v.Alias)
+		case schemas.CreateWorkspaceRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_clientToken, v.ClientToken)
+		case schemas.CreateWorkspaceRequest_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.CreateWorkspaceRequest_kmsKeyArn, v.KmsKeyArn)
+		case schemas.CreateWorkspaceRequest_tags:
+			return deserializeTagMap(d, schemas.CreateWorkspaceRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Represents the output of a CreateWorkspace operation.
 type CreateWorkspaceOutput struct {
 
@@ -88,77 +125,71 @@ type CreateWorkspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateWorkspaceResponse_arn, *v.Arn)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.CreateWorkspaceResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CreateWorkspaceResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateWorkspaceResponse_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateWorkspaceResponse_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateWorkspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateWorkspaceResponse_arn, v.Arn)
+		case schemas.CreateWorkspaceResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.CreateWorkspaceResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.CreateWorkspaceResponse_status:
+			v.Status = &types.WorkspaceStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.CreateWorkspaceResponse_tags:
+			return deserializeTagMap(d, schemas.CreateWorkspaceResponse_tags, &v.Tags)
+		case schemas.CreateWorkspaceResponse_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceResponse_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspace, schemas.CreateWorkspaceRequest, schemas.CreateWorkspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWorkspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspace, schemas.CreateWorkspaceRequest, schemas.CreateWorkspaceResponse), output: &CreateWorkspaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWorkspace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkspace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addIdempotencyToken_opCreateWorkspaceMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkspace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +202,6 @@ func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -216,12 +241,4 @@ func (m *idempotencyToken_initializeOpCreateWorkspace) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opCreateWorkspaceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateWorkspace{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateWorkspace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateWorkspace",
-	}
 }

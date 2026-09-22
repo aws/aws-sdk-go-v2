@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteIpamInternetRegistryAssociation&DryRun=true&IpamInternetRegistryAssociationId=__IpamInternetRegistryAssociationId__&Version=2016-11-15

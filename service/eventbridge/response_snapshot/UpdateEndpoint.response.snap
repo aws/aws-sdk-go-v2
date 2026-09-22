@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.UpdateEndpoint
+
+{"Arn":"__Arn__","EndpointId":"__EndpointId__","EndpointUrl":"__EndpointUrl__","EventBuses":[{"EventBusArn":"__EventBusArn__"},{"EventBusArn":"__EventBusArn__"}],"Name":"__Name__","ReplicationConfig":{"State":"ENABLED"},"RoleArn":"__RoleArn__","RoutingConfig":{"FailoverConfig":{"Primary":{"HealthCheck":"__HealthCheck__"},"Secondary":{"Route":"__Route__"}}},"State":"ACTIVE"}

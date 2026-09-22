@@ -1,0 +1,4 @@
+DELETE /2023-10-12/farms/__FarmId__/fleets/__FleetId__
+
+X-Amz-Client-Token: __ClientToken__
+

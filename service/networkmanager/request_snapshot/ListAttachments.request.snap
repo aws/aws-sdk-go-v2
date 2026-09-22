@@ -1,0 +1,3 @@
+GET /attachments?attachmentType=CONNECT&coreNetworkId=__CoreNetworkId__&edgeLocation=__EdgeLocation__&maxResults=1&nextToken=__NextToken__&state=REJECTED
+
+

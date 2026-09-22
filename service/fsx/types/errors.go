@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,33 @@ func (e *AccessPointAlreadyOwnedByYou) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessPointAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessPointAlreadyOwnedByYou) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessPointAlreadyOwnedByYou)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessPointAlreadyOwnedByYou) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode_ != nil {
+		s.WriteString(schemas.AccessPointAlreadyOwnedByYou_ErrorCode, *v.ErrorCode_)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AccessPointAlreadyOwnedByYou_Message, *v.Message)
+	}
+}
+func (v *AccessPointAlreadyOwnedByYou) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessPointAlreadyOwnedByYou, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessPointAlreadyOwnedByYou_ErrorCode:
+			v.ErrorCode_ = new(string)
+			return d.ReadString(schemas.AccessPointAlreadyOwnedByYou_ErrorCode, v.ErrorCode_)
+		case schemas.AccessPointAlreadyOwnedByYou_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessPointAlreadyOwnedByYou_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An Active Directory error.
 type ActiveDirectoryError struct {
@@ -64,6 +92,43 @@ func (e *ActiveDirectoryError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ActiveDirectoryError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ActiveDirectoryError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveDirectoryError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveDirectoryError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveDirectoryId != nil {
+		s.WriteString(schemas.ActiveDirectoryError_ActiveDirectoryId, *v.ActiveDirectoryId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ActiveDirectoryError_Message, *v.Message)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ActiveDirectoryError_Type, string(v.Type))
+	}
+}
+func (v *ActiveDirectoryError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveDirectoryError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveDirectoryError_ActiveDirectoryId:
+			v.ActiveDirectoryId = new(string)
+			return d.ReadString(schemas.ActiveDirectoryError_ActiveDirectoryId, v.ActiveDirectoryId)
+		case schemas.ActiveDirectoryError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ActiveDirectoryError_Message, v.Message)
+		case schemas.ActiveDirectoryError_Type:
+			var ev string
+			if err := d.ReadString(schemas.ActiveDirectoryError_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ActiveDirectoryErrorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // You can't delete a backup while it's being copied.
 type BackupBeingCopied struct {
@@ -92,6 +157,33 @@ func (e *BackupBeingCopied) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BackupBeingCopied) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BackupBeingCopied) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupBeingCopied)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupBeingCopied) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.BackupBeingCopied_BackupId, *v.BackupId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BackupBeingCopied_Message, *v.Message)
+	}
+}
+func (v *BackupBeingCopied) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupBeingCopied, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupBeingCopied_BackupId:
+			v.BackupId = new(string)
+			return d.ReadString(schemas.BackupBeingCopied_BackupId, v.BackupId)
+		case schemas.BackupBeingCopied_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BackupBeingCopied_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Another backup is already under way. Wait for completion before initiating
 // additional backups of this file system.
@@ -119,6 +211,27 @@ func (e *BackupInProgress) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BackupInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BackupInProgress) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupInProgress)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupInProgress) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BackupInProgress_Message, *v.Message)
+	}
+}
+func (v *BackupInProgress) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupInProgress, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupInProgress_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BackupInProgress_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // No Amazon FSx backups were found based upon the supplied parameters.
 type BackupNotFound struct {
@@ -145,6 +258,27 @@ func (e *BackupNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BackupNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BackupNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BackupNotFound_Message, *v.Message)
+	}
+}
+func (v *BackupNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BackupNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You can't delete a backup while it's being used to restore a file system.
 type BackupRestoring struct {
@@ -173,6 +307,33 @@ func (e *BackupRestoring) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BackupRestoring) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BackupRestoring) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackupRestoring)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackupRestoring) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileSystemId != nil {
+		s.WriteString(schemas.BackupRestoring_FileSystemId, *v.FileSystemId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BackupRestoring_Message, *v.Message)
+	}
+}
+func (v *BackupRestoring) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackupRestoring, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackupRestoring_FileSystemId:
+			v.FileSystemId = new(string)
+			return d.ReadString(schemas.BackupRestoring_FileSystemId, v.FileSystemId)
+		case schemas.BackupRestoring_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BackupRestoring_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A generic error indicating a failure with a client request.
 type BadRequest struct {
@@ -199,6 +360,27 @@ func (e *BadRequest) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequest_Message, *v.Message)
+	}
+}
+func (v *BadRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequest_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequest_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // No data repository associations were found based upon the supplied parameters.
 type DataRepositoryAssociationNotFound struct {
@@ -225,6 +407,27 @@ func (e *DataRepositoryAssociationNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DataRepositoryAssociationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DataRepositoryAssociationNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryAssociationNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryAssociationNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DataRepositoryAssociationNotFound_Message, *v.Message)
+	}
+}
+func (v *DataRepositoryAssociationNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryAssociationNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryAssociationNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DataRepositoryAssociationNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The data repository task could not be canceled because the task has already
 // ended.
@@ -252,6 +455,27 @@ func (e *DataRepositoryTaskEnded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DataRepositoryTaskEnded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DataRepositoryTaskEnded) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryTaskEnded)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryTaskEnded) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DataRepositoryTaskEnded_Message, *v.Message)
+	}
+}
+func (v *DataRepositoryTaskEnded) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryTaskEnded, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryTaskEnded_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DataRepositoryTaskEnded_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An existing data repository task is currently executing on the file system.
 // Wait until the existing task has completed, then create the new task.
@@ -279,6 +503,27 @@ func (e *DataRepositoryTaskExecuting) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DataRepositoryTaskExecuting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DataRepositoryTaskExecuting) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryTaskExecuting)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryTaskExecuting) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DataRepositoryTaskExecuting_Message, *v.Message)
+	}
+}
+func (v *DataRepositoryTaskExecuting) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryTaskExecuting, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryTaskExecuting_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DataRepositoryTaskExecuting_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The data repository task or tasks you specified could not be found.
 type DataRepositoryTaskNotFound struct {
@@ -305,6 +550,27 @@ func (e *DataRepositoryTaskNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DataRepositoryTaskNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DataRepositoryTaskNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataRepositoryTaskNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataRepositoryTaskNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DataRepositoryTaskNotFound_Message, *v.Message)
+	}
+}
+func (v *DataRepositoryTaskNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataRepositoryTaskNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataRepositoryTaskNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DataRepositoryTaskNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // No caches were found based upon supplied parameters.
 type FileCacheNotFound struct {
@@ -331,6 +597,27 @@ func (e *FileCacheNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FileCacheNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FileCacheNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileCacheNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileCacheNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FileCacheNotFound_Message, *v.Message)
+	}
+}
+func (v *FileCacheNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileCacheNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileCacheNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FileCacheNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // No Amazon FSx file systems were found based upon supplied parameters.
 type FileSystemNotFound struct {
@@ -357,6 +644,27 @@ func (e *FileSystemNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FileSystemNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FileSystemNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileSystemNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileSystemNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.FileSystemNotFound_Message, *v.Message)
+	}
+}
+func (v *FileSystemNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileSystemNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileSystemNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FileSystemNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The error returned when a second request is received with the same client
 // request token but different parameters settings. A client request token should
@@ -387,6 +695,33 @@ func (e *IncompatibleParameterError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IncompatibleParameterError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *IncompatibleParameterError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IncompatibleParameterError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IncompatibleParameterError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.IncompatibleParameterError_Message, *v.Message)
+	}
+	if v.Parameter != nil {
+		s.WriteString(schemas.IncompatibleParameterError_Parameter, *v.Parameter)
+	}
+}
+func (v *IncompatibleParameterError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IncompatibleParameterError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IncompatibleParameterError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IncompatibleParameterError_Message, v.Message)
+		case schemas.IncompatibleParameterError_Parameter:
+			v.Parameter = new(string)
+			return d.ReadString(schemas.IncompatibleParameterError_Parameter, v.Parameter)
+		}
+		return nil
+	})
+}
 
 // Amazon FSx doesn't support Multi-AZ Windows File Server copy backup in the
 // destination Region, so the copied backup can't be restored.
@@ -414,6 +749,27 @@ func (e *IncompatibleRegionForMultiAZ) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IncompatibleRegionForMultiAZ) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *IncompatibleRegionForMultiAZ) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IncompatibleRegionForMultiAZ)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IncompatibleRegionForMultiAZ) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.IncompatibleRegionForMultiAZ_Message, *v.Message)
+	}
+}
+func (v *IncompatibleRegionForMultiAZ) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IncompatibleRegionForMultiAZ, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IncompatibleRegionForMultiAZ_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IncompatibleRegionForMultiAZ_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A generic error indicating a server-side failure.
 type InternalServerError struct {
@@ -440,6 +796,27 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerError_Message, *v.Message)
+	}
+}
+func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerError_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The access point specified doesn't exist.
 type InvalidAccessPoint struct {
@@ -468,6 +845,33 @@ func (e *InvalidAccessPoint) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidAccessPoint) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidAccessPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidAccessPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidAccessPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode_ != nil {
+		s.WriteString(schemas.InvalidAccessPoint_ErrorCode, *v.ErrorCode_)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidAccessPoint_Message, *v.Message)
+	}
+}
+func (v *InvalidAccessPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidAccessPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidAccessPoint_ErrorCode:
+			v.ErrorCode_ = new(string)
+			return d.ReadString(schemas.InvalidAccessPoint_ErrorCode, v.ErrorCode_)
+		case schemas.InvalidAccessPoint_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidAccessPoint_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have filtered the response to a data repository type that is not supported.
 type InvalidDataRepositoryType struct {
@@ -494,6 +898,27 @@ func (e *InvalidDataRepositoryType) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidDataRepositoryType) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidDataRepositoryType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidDataRepositoryType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidDataRepositoryType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidDataRepositoryType_Message, *v.Message)
+	}
+}
+func (v *InvalidDataRepositoryType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidDataRepositoryType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidDataRepositoryType_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidDataRepositoryType_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Key Management Service (KMS) key of the destination backup is not valid.
 type InvalidDestinationKmsKey struct {
@@ -520,6 +945,27 @@ func (e *InvalidDestinationKmsKey) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidDestinationKmsKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidDestinationKmsKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidDestinationKmsKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidDestinationKmsKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidDestinationKmsKey_Message, *v.Message)
+	}
+}
+func (v *InvalidDestinationKmsKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidDestinationKmsKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidDestinationKmsKey_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidDestinationKmsKey_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The path provided for data repository export isn't valid.
 type InvalidExportPath struct {
@@ -546,6 +992,27 @@ func (e *InvalidExportPath) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidExportPath) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidExportPath) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidExportPath)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidExportPath) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidExportPath_Message, *v.Message)
+	}
+}
+func (v *InvalidExportPath) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidExportPath, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidExportPath_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidExportPath_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The path provided for data repository import isn't valid.
 type InvalidImportPath struct {
@@ -572,6 +1039,27 @@ func (e *InvalidImportPath) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidImportPath) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidImportPath) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidImportPath)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidImportPath) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidImportPath_Message, *v.Message)
+	}
+}
+func (v *InvalidImportPath) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidImportPath, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidImportPath_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidImportPath_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One or more network settings specified in the request are invalid.
 type InvalidNetworkSettings struct {
@@ -602,6 +1090,45 @@ func (e *InvalidNetworkSettings) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNetworkSettings) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNetworkSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNetworkSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNetworkSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvalidRouteTableId != nil {
+		s.WriteString(schemas.InvalidNetworkSettings_InvalidRouteTableId, *v.InvalidRouteTableId)
+	}
+	if v.InvalidSecurityGroupId != nil {
+		s.WriteString(schemas.InvalidNetworkSettings_InvalidSecurityGroupId, *v.InvalidSecurityGroupId)
+	}
+	if v.InvalidSubnetId != nil {
+		s.WriteString(schemas.InvalidNetworkSettings_InvalidSubnetId, *v.InvalidSubnetId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidNetworkSettings_Message, *v.Message)
+	}
+}
+func (v *InvalidNetworkSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNetworkSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNetworkSettings_InvalidRouteTableId:
+			v.InvalidRouteTableId = new(string)
+			return d.ReadString(schemas.InvalidNetworkSettings_InvalidRouteTableId, v.InvalidRouteTableId)
+		case schemas.InvalidNetworkSettings_InvalidSecurityGroupId:
+			v.InvalidSecurityGroupId = new(string)
+			return d.ReadString(schemas.InvalidNetworkSettings_InvalidSecurityGroupId, v.InvalidSecurityGroupId)
+		case schemas.InvalidNetworkSettings_InvalidSubnetId:
+			v.InvalidSubnetId = new(string)
+			return d.ReadString(schemas.InvalidNetworkSettings_InvalidSubnetId, v.InvalidSubnetId)
+		case schemas.InvalidNetworkSettings_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNetworkSettings_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An invalid value for PerUnitStorageThroughput was provided. Please create your
 // file system again, using a valid value.
@@ -629,6 +1156,27 @@ func (e *InvalidPerUnitStorageThroughput) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidPerUnitStorageThroughput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidPerUnitStorageThroughput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidPerUnitStorageThroughput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidPerUnitStorageThroughput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidPerUnitStorageThroughput_Message, *v.Message)
+	}
+}
+func (v *InvalidPerUnitStorageThroughput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidPerUnitStorageThroughput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidPerUnitStorageThroughput_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidPerUnitStorageThroughput_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Region provided for SourceRegion is not valid or is in a different Amazon
 // Web Services partition.
@@ -656,6 +1204,27 @@ func (e *InvalidRegion) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRegion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRegion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRegion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRegion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRegion_Message, *v.Message)
+	}
+}
+func (v *InvalidRegion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRegion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRegion_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRegion_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The action or operation requested is invalid. Verify that the action is typed
 // correctly.
@@ -685,6 +1254,33 @@ func (e *InvalidRequest) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode_ != nil {
+		s.WriteString(schemas.InvalidRequest_ErrorCode, *v.ErrorCode_)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequest_Message, *v.Message)
+	}
+}
+func (v *InvalidRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequest_ErrorCode:
+			v.ErrorCode_ = new(string)
+			return d.ReadString(schemas.InvalidRequest_ErrorCode, v.ErrorCode_)
+		case schemas.InvalidRequest_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequest_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Key Management Service (KMS) key of the source backup is not valid.
 type InvalidSourceKmsKey struct {
@@ -711,6 +1307,27 @@ func (e *InvalidSourceKmsKey) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSourceKmsKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidSourceKmsKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidSourceKmsKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidSourceKmsKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidSourceKmsKey_Message, *v.Message)
+	}
+}
+func (v *InvalidSourceKmsKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSourceKmsKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSourceKmsKey_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSourceKmsKey_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A cache configuration is required for this operation.
 type MissingFileCacheConfiguration struct {
@@ -737,6 +1354,27 @@ func (e *MissingFileCacheConfiguration) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MissingFileCacheConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MissingFileCacheConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissingFileCacheConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MissingFileCacheConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MissingFileCacheConfiguration_Message, *v.Message)
+	}
+}
+func (v *MissingFileCacheConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissingFileCacheConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissingFileCacheConfiguration_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MissingFileCacheConfiguration_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A file system configuration is required for this operation.
 type MissingFileSystemConfiguration struct {
@@ -763,6 +1401,27 @@ func (e *MissingFileSystemConfiguration) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MissingFileSystemConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MissingFileSystemConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissingFileSystemConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MissingFileSystemConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MissingFileSystemConfiguration_Message, *v.Message)
+	}
+}
+func (v *MissingFileSystemConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissingFileSystemConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissingFileSystemConfiguration_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MissingFileSystemConfiguration_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A volume configuration is required for this operation.
 type MissingVolumeConfiguration struct {
@@ -789,6 +1448,27 @@ func (e *MissingVolumeConfiguration) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MissingVolumeConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MissingVolumeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MissingVolumeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MissingVolumeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MissingVolumeConfiguration_Message, *v.Message)
+	}
+}
+func (v *MissingVolumeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MissingVolumeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MissingVolumeConfiguration_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MissingVolumeConfiguration_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource specified for the tagging operation is not a resource type owned
 // by Amazon FSx. Use the API of the relevant service to perform the operation.
@@ -818,6 +1498,33 @@ func (e *NotServiceResourceError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotServiceResourceError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotServiceResourceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotServiceResourceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotServiceResourceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotServiceResourceError_Message, *v.Message)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.NotServiceResourceError_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *NotServiceResourceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotServiceResourceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotServiceResourceError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotServiceResourceError_Message, v.Message)
+		case schemas.NotServiceResourceError_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.NotServiceResourceError_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
+}
 
 // The resource specified does not support tagging.
 type ResourceDoesNotSupportTagging struct {
@@ -846,6 +1553,33 @@ func (e *ResourceDoesNotSupportTagging) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceDoesNotSupportTagging) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceDoesNotSupportTagging) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDoesNotSupportTagging)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceDoesNotSupportTagging) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceDoesNotSupportTagging_Message, *v.Message)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ResourceDoesNotSupportTagging_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *ResourceDoesNotSupportTagging) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceDoesNotSupportTagging, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceDoesNotSupportTagging_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceDoesNotSupportTagging_Message, v.Message)
+		case schemas.ResourceDoesNotSupportTagging_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.ResourceDoesNotSupportTagging_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
+}
 
 // The resource specified by the Amazon Resource Name (ARN) can't be found.
 type ResourceNotFound struct {
@@ -874,6 +1608,33 @@ func (e *ResourceNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFound_Message, *v.Message)
+	}
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.ResourceNotFound_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *ResourceNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFound_Message, v.Message)
+		case schemas.ResourceNotFound_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.ResourceNotFound_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
+}
 
 // The access point specified was not found.
 type S3AccessPointAttachmentNotFound struct {
@@ -900,6 +1661,27 @@ func (e *S3AccessPointAttachmentNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *S3AccessPointAttachmentNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *S3AccessPointAttachmentNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3AccessPointAttachmentNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3AccessPointAttachmentNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.S3AccessPointAttachmentNotFound_Message, *v.Message)
+	}
+}
+func (v *S3AccessPointAttachmentNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3AccessPointAttachmentNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3AccessPointAttachmentNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.S3AccessPointAttachmentNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An error indicating that a particular service limit was exceeded. You can
 // increase some service limits by contacting Amazon Web Services Support.
@@ -929,6 +1711,37 @@ func (e *ServiceLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceLimitExceeded) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceLimitExceeded)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceLimitExceeded) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != "" {
+		s.WriteString(schemas.ServiceLimitExceeded_Limit, string(v.Limit))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceLimitExceeded_Message, *v.Message)
+	}
+}
+func (v *ServiceLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceLimitExceeded, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceLimitExceeded_Limit:
+			var ev string
+			if err := d.ReadString(schemas.ServiceLimitExceeded_Limit, &ev); err != nil {
+				return err
+			}
+			v.Limit = ServiceLimit(ev)
+			return nil
+		case schemas.ServiceLimitExceeded_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceLimitExceeded_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // No Amazon FSx snapshots were found based on the supplied parameters.
 type SnapshotNotFound struct {
@@ -955,6 +1768,27 @@ func (e *SnapshotNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SnapshotNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SnapshotNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SnapshotNotFound_Message, *v.Message)
+	}
+}
+func (v *SnapshotNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SnapshotNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was rejected because the lifecycle status of the source backup
 // isn't AVAILABLE .
@@ -984,6 +1818,33 @@ func (e *SourceBackupUnavailable) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SourceBackupUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SourceBackupUnavailable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceBackupUnavailable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceBackupUnavailable) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupId != nil {
+		s.WriteString(schemas.SourceBackupUnavailable_BackupId, *v.BackupId)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.SourceBackupUnavailable_Message, *v.Message)
+	}
+}
+func (v *SourceBackupUnavailable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceBackupUnavailable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceBackupUnavailable_BackupId:
+			v.BackupId = new(string)
+			return d.ReadString(schemas.SourceBackupUnavailable_BackupId, v.BackupId)
+		case schemas.SourceBackupUnavailable_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SourceBackupUnavailable_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // No FSx for ONTAP SVMs were found based upon the supplied parameters.
 type StorageVirtualMachineNotFound struct {
@@ -1010,6 +1871,27 @@ func (e *StorageVirtualMachineNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StorageVirtualMachineNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *StorageVirtualMachineNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageVirtualMachineNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageVirtualMachineNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.StorageVirtualMachineNotFound_Message, *v.Message)
+	}
+}
+func (v *StorageVirtualMachineNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageVirtualMachineNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageVirtualMachineNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StorageVirtualMachineNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have reached the maximum number of S3 access points attachments allowed for
 // your account in this Amazon Web Services Region, or for the file system. For
@@ -1043,6 +1925,33 @@ func (e *TooManyAccessPoints) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyAccessPoints) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyAccessPoints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyAccessPoints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyAccessPoints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode_ != nil {
+		s.WriteString(schemas.TooManyAccessPoints_ErrorCode, *v.ErrorCode_)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyAccessPoints_Message, *v.Message)
+	}
+}
+func (v *TooManyAccessPoints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyAccessPoints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyAccessPoints_ErrorCode:
+			v.ErrorCode_ = new(string)
+			return d.ReadString(schemas.TooManyAccessPoints_ErrorCode, v.ErrorCode_)
+		case schemas.TooManyAccessPoints_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyAccessPoints_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested operation is not supported for this resource or API.
 type UnsupportedOperation struct {
@@ -1069,6 +1978,27 @@ func (e *UnsupportedOperation) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedOperation_Message, *v.Message)
+	}
+}
+func (v *UnsupportedOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedOperation_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedOperation_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // No Amazon FSx volumes were found based upon the supplied parameters.
 type VolumeNotFound struct {
@@ -1095,3 +2025,24 @@ func (e *VolumeNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *VolumeNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *VolumeNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VolumeNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VolumeNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.VolumeNotFound_Message, *v.Message)
+	}
+}
+func (v *VolumeNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VolumeNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VolumeNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.VolumeNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}

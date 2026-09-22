@@ -5,10 +5,10 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create an accelerator. An accelerator includes one or more listeners that
@@ -93,6 +93,29 @@ type CreateAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAcceleratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAcceleratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAcceleratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.CreateAcceleratorRequest_Enabled, *v.Enabled)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateAcceleratorRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateAcceleratorRequest_IpAddressType, string(v.IpAddressType))
+	}
+	serializeIpAddresses(s, schemas.CreateAcceleratorRequest_IpAddresses, v.IpAddresses)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAcceleratorRequest_Name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateAcceleratorRequest_Tags, v.Tags)
+}
+
 type CreateAcceleratorOutput struct {
 
 	// The accelerator that is created by specifying a listener and the supported IP
@@ -105,65 +128,44 @@ type CreateAcceleratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAcceleratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAcceleratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAcceleratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accelerator != nil {
+		s.WriteStruct(schemas.CreateAcceleratorResponse_Accelerator)
+		v.Accelerator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAcceleratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAcceleratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAcceleratorResponse_Accelerator:
+			v.Accelerator = &types.Accelerator{}
+			return v.Accelerator.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccelerator, schemas.CreateAcceleratorRequest, schemas.CreateAcceleratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAccelerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAccelerator, schemas.CreateAcceleratorRequest, schemas.CreateAcceleratorResponse), output: &CreateAcceleratorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAccelerator{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAccelerator"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -173,12 +175,6 @@ func (c *Client) addOperationCreateAcceleratorMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateAcceleratorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccelerator(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,12 +187,6 @@ func (c *Client) addOperationCreateAcceleratorMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -236,12 +226,4 @@ func (m *idempotencyToken_initializeOpCreateAccelerator) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateAcceleratorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAccelerator{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAccelerator(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAccelerator",
-	}
 }

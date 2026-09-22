@@ -1,0 +1,3 @@
+DELETE /table-replication?tableArn=__TableArn__&versionToken=__VersionToken__
+
+

@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeregisterTransitGatewayMulticastGroupSources&DryRun=true&GroupIpAddress=__GroupIpAddress__&NetworkInterfaceIds.1=__Member__&NetworkInterfaceIds.2=__Member__&TransitGatewayMulticastDomainId=__TransitGatewayMulticastDomainId__&Version=2016-11-15

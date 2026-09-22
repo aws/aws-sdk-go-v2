@@ -1,0 +1,5 @@
+POST /opencypher/explain
+
+Content-Type: application/json
+
+{"explain":"static","query":"__OpenCypherQuery__","parameters":"__Parameters__"}

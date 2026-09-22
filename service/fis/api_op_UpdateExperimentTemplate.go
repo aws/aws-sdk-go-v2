@@ -4,11 +4,10 @@ package fis
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fis/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified experiment template.
@@ -62,6 +61,42 @@ type UpdateExperimentTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUpdateExperimentTemplateActionInputMap(s, schemas.UpdateExperimentTemplateRequest_actions, v.Actions)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateRequest_description, *v.Description)
+	}
+	if v.ExperimentOptions != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateRequest_experimentOptions)
+		v.ExperimentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExperimentReportConfiguration != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateRequest_experimentReportConfiguration)
+		v.ExperimentReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateRequest_id, *v.Id)
+	}
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateRequest_logConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateExperimentTemplateRequest_roleArn, *v.RoleArn)
+	}
+	serializeUpdateExperimentTemplateStopConditionInputList(s, schemas.UpdateExperimentTemplateRequest_stopConditions, v.StopConditions)
+	serializeUpdateExperimentTemplateTargetInputMap(s, schemas.UpdateExperimentTemplateRequest_targets, v.Targets)
+}
+
 type UpdateExperimentTemplateOutput struct {
 
 	// Information about the experiment template.
@@ -73,77 +108,50 @@ type UpdateExperimentTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExperimentTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExperimentTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExperimentTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExperimentTemplate != nil {
+		s.WriteStruct(schemas.UpdateExperimentTemplateResponse_experimentTemplate)
+		v.ExperimentTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateExperimentTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExperimentTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExperimentTemplateResponse_experimentTemplate:
+			v.ExperimentTemplate = &types.ExperimentTemplate{}
+			return v.ExperimentTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperimentTemplate, schemas.UpdateExperimentTemplateRequest, schemas.UpdateExperimentTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateExperimentTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExperimentTemplate, schemas.UpdateExperimentTemplateRequest, schemas.UpdateExperimentTemplateResponse), output: &UpdateExperimentTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateExperimentTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateExperimentTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateExperimentTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateExperimentTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +166,8 @@ func (c *Client) addOperationUpdateExperimentTemplateMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateExperimentTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateExperimentTemplate",
-	}
 }

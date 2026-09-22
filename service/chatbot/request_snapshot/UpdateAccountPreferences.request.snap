@@ -1,0 +1,5 @@
+POST /update-account-preferences
+
+Content-Type: application/json
+
+{"TrainingDataCollectionEnabled":true,"UserAuthorizationRequired":true}

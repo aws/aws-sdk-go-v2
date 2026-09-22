@@ -1,0 +1,5 @@
+PATCH /memberships/__MembershipIdentifier__
+
+Content-Type: application/json
+
+{"defaultJobResultConfiguration":{"outputConfiguration":{"s3":{"bucket":"__Bucket__","keyPrefix":"__KeyPrefix__"}},"roleArn":"__RoleArn__"},"defaultResultConfiguration":{"outputConfiguration":{"s3":{"bucket":"__Bucket__","keyPrefix":"__KeyPrefix__","resultFormat":"CSV","singleFileOutput":true}},"roleArn":"__RoleArn__"},"jobLogStatus":"ENABLED","membershipPaymentConfiguration":{"jobCompute":{"isResponsible":true},"machineLearning":{"modelInference":{"isResponsible":true},"modelTraining":{"isResponsible":true},"syntheticDataGeneration":{"isResponsible":true}},"queryCompute":{"isResponsible":true}},"queryLogStatus":"ENABLED"}

@@ -98,6 +98,18 @@ func TestCheckSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachClusterNodeNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AttachClusterNodeNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AttachClusterNodeVolume(context.Background(), nil, func(o *Options) {
@@ -607,6 +619,18 @@ func TestCheckSnapshot_CreateInferenceRecommendationsJob(t *testing.T) {
 	_, err := svc.CreateInferenceRecommendationsJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateInferenceRecommendationsJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1430,6 +1454,18 @@ func TestCheckSnapshot_DeleteInferenceExperiment(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteMlflowApp(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMlflowApp(context.Background(), nil, func(o *Options) {
@@ -2227,6 +2263,30 @@ func TestCheckSnapshot_DescribeInferenceRecommendationsJob(t *testing.T) {
 	_, err := svc.DescribeInferenceRecommendationsJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeInferenceRecommendationsJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeJobSchemaVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeJobSchemaVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeJobSchemaVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3302,6 +3362,30 @@ func TestCheckSnapshot_ListInferenceRecommendationsJobSteps(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListJobSchemaVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobSchemaVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListJobSchemaVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListLabelingJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLabelingJobs(context.Background(), nil, func(o *Options) {
@@ -4166,6 +4250,18 @@ func TestCheckSnapshot_StopInferenceRecommendationsJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StopJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopLabelingJob(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopLabelingJob(context.Background(), nil, func(o *Options) {
@@ -4849,6 +4945,18 @@ func TestUpdateSnapshot_AssociateTrialComponent(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AttachClusterNodeNetworkInterface(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachClusterNodeNetworkInterface(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AttachClusterNodeNetworkInterface")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_AttachClusterNodeVolume(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AttachClusterNodeVolume(context.Background(), nil, func(o *Options) {
@@ -5358,6 +5466,18 @@ func TestUpdateSnapshot_CreateInferenceRecommendationsJob(t *testing.T) {
 	_, err := svc.CreateInferenceRecommendationsJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateInferenceRecommendationsJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6181,6 +6301,18 @@ func TestUpdateSnapshot_DeleteInferenceExperiment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteMlflowApp(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteMlflowApp(context.Background(), nil, func(o *Options) {
@@ -6978,6 +7110,30 @@ func TestUpdateSnapshot_DescribeInferenceRecommendationsJob(t *testing.T) {
 	_, err := svc.DescribeInferenceRecommendationsJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeInferenceRecommendationsJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeJobSchemaVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeJobSchemaVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeJobSchemaVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8053,6 +8209,30 @@ func TestUpdateSnapshot_ListInferenceRecommendationsJobSteps(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListJobSchemaVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobSchemaVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListJobSchemaVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListLabelingJobs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListLabelingJobs(context.Background(), nil, func(o *Options) {
@@ -8910,6 +9090,18 @@ func TestUpdateSnapshot_StopInferenceRecommendationsJob(t *testing.T) {
 	_, err := svc.StopInferenceRecommendationsJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StopInferenceRecommendationsJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

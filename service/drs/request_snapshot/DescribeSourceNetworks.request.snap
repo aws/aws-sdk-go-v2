@@ -1,0 +1,5 @@
+POST /DescribeSourceNetworks
+
+Content-Type: application/json
+
+{"filters":{"originAccountID":"__OriginAccountID__","originRegion":"__OriginRegion__","sourceNetworkIDs":["__Member__","__Member__"]},"maxResults":1,"nextToken":"__NextToken__"}

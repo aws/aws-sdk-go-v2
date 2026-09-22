@@ -1,0 +1,7 @@
+POST /service/GameLift/operation/ListGameServerGroups
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢eLimitiNextTokenm__NextToken__

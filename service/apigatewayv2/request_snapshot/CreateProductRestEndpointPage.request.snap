@@ -1,0 +1,5 @@
+POST /v2/portalproducts/__PortalProductId__/productrestendpointpages
+
+Content-Type: application/json
+
+{"displayContent":{"none":{},"overrides":{"body":"__Body__","endpoint":"__Endpoint__","operationName":"__OperationName__"}},"restEndpointIdentifier":{"identifierParts":{"method":"__Method__","path":"__Path__","restApiId":"__RestApiId__","stage":"__Stage__"}},"tryItState":"ENABLED"}

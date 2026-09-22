@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","TrafficDistributionGroupSummaryList":[{"Arn":"__Arn__","Id":"__Id__","InstanceArn":"__InstanceArn__","IsDefault":true,"Name":"__Name__","Status":"CREATION_IN_PROGRESS"},{"Arn":"__Arn__","Id":"__Id__","InstanceArn":"__InstanceArn__","IsDefault":true,"Name":"__Name__","Status":"CREATION_IN_PROGRESS"}]}

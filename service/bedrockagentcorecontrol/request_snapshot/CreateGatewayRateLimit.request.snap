@@ -1,0 +1,5 @@
+POST /gateways/__GatewayIdentifier__/rate-limits
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","dimensionKeys":["__Member__","__Member__"],"entries":[{"connections":[{"period":"second","rate":1},{"period":"second","rate":1}],"dimensions":{"key0":"__Value__"},"requests":[{"period":"second","rate":1},{"period":"second","rate":1}],"tokens":[{"period":"second","rate":1},{"period":"second","rate":1}]},{"connections":[{"period":"second","rate":1},{"period":"second","rate":1}],"dimensions":{"key0":"__Value__"},"requests":[{"period":"second","rate":1},{"period":"second","rate":1}],"tokens":[{"period":"second","rate":1},{"period":"second","rate":1}]}],"rateLimitId":"__RateLimitId__"}

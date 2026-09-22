@@ -1,0 +1,4 @@
+GET /?analytics=&id=__Id__&x-id=GetBucketAnalyticsConfiguration
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+

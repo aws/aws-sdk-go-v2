@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetCommentReactions
+
+{"nextToken":"__NextToken__","reactionsForComment":[{"reaction":{"emoji":"__Emoji__","shortCode":"__ShortCode__","unicode":"__Unicode__"},"reactionUsers":["__Member__","__Member__"],"reactionsFromDeletedUsersCount":1},{"reaction":{"emoji":"__Emoji__","shortCode":"__ShortCode__","unicode":"__Unicode__"},"reactionUsers":["__Member__","__Member__"],"reactionsFromDeletedUsersCount":1}]}

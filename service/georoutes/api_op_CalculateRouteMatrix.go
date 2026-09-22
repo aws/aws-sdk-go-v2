@@ -4,11 +4,8 @@ package georoutes
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/georoutes/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Use CalculateRouteMatrix to compute results for all pairs of Origins to
@@ -37,26 +34,62 @@ func (c *Client) CalculateRouteMatrix(ctx context.Context, params *CalculateRout
 
 type CalculateRouteMatrixInput struct {
 
-	// List of destinations for the route.
+	// List of destinations for the route in World Geodetic System (WGS 84) format:
+	// [longitude, latitude].
 	//
 	// Route calculations are billed for each origin and destination pair. If you use
 	// a large matrix of origins and destinations, your costs will increase
 	// accordingly. For more information, see [Routes pricing]in the Amazon Location Service Developer
 	// Guide.
 	//
+	// The maximum number of destinations depends on the routing boundary
+	// configuration:
+	//
+	//   - With RoutingBoundary.Geometry set: maximum 500 destinations
+	//
+	//   - With RoutingBoundary.Unbounded set to true : maximum 100 destinations
+	//
+	//   - For [GrabMaps]customers in ap-southeast-1 and ap-southeast-5 : maximum 350 destinations
+	//
+	// The total matrix size (origins × destinations) must not exceed:
+	//
+	//   - With RoutingBoundary.Geometry : 160,000
+	//
+	//   - With RoutingBoundary.Unbounded : 100
+	//
+	//   - For [GrabMaps]customers in ap-southeast-1 and ap-southeast-5 : 122,500
+	//
 	// [Routes pricing]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Destinations []types.RouteMatrixDestination
 
-	// The position for the origin in World Geodetic System (WGS 84) format:
+	// List of origins for the route in World Geodetic System (WGS 84) format:
 	// [longitude, latitude].
 	//
 	// Route calculations are billed for each origin and destination pair. Using a
 	// large amount of Origins in a request can lead you to incur unexpected charges.
 	// For more information, see [Routes pricing]in the Amazon Location Service Developer Guide.
 	//
+	// The maximum number of origins depends on the routing boundary configuration:
+	//
+	//   - With RoutingBoundary.Geometry set: maximum 500 origins
+	//
+	//   - With RoutingBoundary.Unbounded set to true : maximum 15 origins
+	//
+	//   - For [GrabMaps]customers in ap-southeast-1 and ap-southeast-5 : maximum 350 origins
+	//
+	// The total matrix size (origins × destinations) must not exceed:
+	//
+	//   - With RoutingBoundary.Geometry : 160,000
+	//
+	//   - With RoutingBoundary.Unbounded : 100
+	//
+	//   - For [GrabMaps]customers in ap-southeast-1 and ap-southeast-5 : 122,500
+	//
 	// [Routes pricing]: https://docs.aws.amazon.com/location/latest/developerguide/routes-pricing.html
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Origins []types.RouteMatrixOrigin
@@ -109,8 +142,8 @@ type CalculateRouteMatrixInput struct {
 	//
 	// Default value: Unbounded set to true
 	//
-	// When request routing boundary was set as AutoCircle, the response routing
-	// boundary will return Circle derived from the AutoCircle settings.
+	// When AutoCircle is set in the request, the response routing boundary will
+	// return Circle derived from the AutoCircle settings.
 	//
 	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	RoutingBoundary *types.RouteMatrixBoundary
@@ -163,8 +196,8 @@ type CalculateRouteMatrixOutput struct {
 	// Boundary within which the matrix is to be calculated. All data, origins and
 	// destinations outside the boundary are considered invalid.
 	//
-	// When request routing boundary was set as AutoCircle, the response routing
-	// boundary will return Circle derived from the AutoCircle settings.
+	// When AutoCircle is set in the request, the response routing boundary will
+	// return Circle derived from the AutoCircle settings.
 	//
 	// This member is required.
 	RoutingBoundary *types.RouteMatrixBoundary
@@ -176,9 +209,6 @@ type CalculateRouteMatrixOutput struct {
 }
 
 func (c *Client) addOperationCalculateRouteMatrixMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCalculateRouteMatrix{}, middleware.After)
 	if err != nil {
 		return err
@@ -187,65 +217,20 @@ func (c *Client) addOperationCalculateRouteMatrixMiddlewares(stack *middleware.S
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CalculateRouteMatrix"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCalculateRouteMatrixValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCalculateRouteMatrix(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -260,22 +245,8 @@ func (c *Client) addOperationCalculateRouteMatrixMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCalculateRouteMatrix(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CalculateRouteMatrix",
-	}
 }

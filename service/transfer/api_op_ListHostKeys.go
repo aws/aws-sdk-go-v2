@@ -4,11 +4,10 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of host keys for the server that's specified by the ServerId
@@ -46,6 +45,24 @@ type ListHostKeysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostKeysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHostKeysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHostKeysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHostKeysRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHostKeysRequest_NextToken, *v.NextToken)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.ListHostKeysRequest_ServerId, *v.ServerId)
+	}
+}
+
 type ListHostKeysOutput struct {
 
 	// Returns an array, where each item contains the details of a host key.
@@ -68,77 +85,57 @@ type ListHostKeysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostKeysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHostKeysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHostKeysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListedHostKeys(s, schemas.ListHostKeysResponse_HostKeys, v.HostKeys)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHostKeysResponse_NextToken, *v.NextToken)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.ListHostKeysResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *ListHostKeysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHostKeysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHostKeysResponse_HostKeys:
+			return deserializeListedHostKeys(d, schemas.ListHostKeysResponse_HostKeys, &v.HostKeys)
+		case schemas.ListHostKeysResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHostKeysResponse_NextToken, v.NextToken)
+		case schemas.ListHostKeysResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.ListHostKeysResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHostKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHostKeys, schemas.ListHostKeysRequest, schemas.ListHostKeysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHostKeys{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHostKeys, schemas.ListHostKeysRequest, schemas.ListHostKeysResponse), output: &ListHostKeysOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHostKeys{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHostKeys"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListHostKeysValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHostKeys(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +150,8 @@ func (c *Client) addOperationListHostKeysMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListHostKeys(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListHostKeys",
-	}
 }

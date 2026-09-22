@@ -4,10 +4,9 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves all of the fields and values of a single log event. All fields are
@@ -51,6 +50,21 @@ type GetLogRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLogRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLogRecordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLogRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogRecordPointer != nil {
+		s.WriteString(schemas.GetLogRecordRequest_logRecordPointer, *v.LogRecordPointer)
+	}
+	if v.Unmask != false {
+		s.WriteBool(schemas.GetLogRecordRequest_unmask, v.Unmask)
+	}
+}
+
 type GetLogRecordOutput struct {
 
 	// The requested log event, as a JSON string.
@@ -62,77 +76,45 @@ type GetLogRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLogRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLogRecordResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLogRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogRecord(s, schemas.GetLogRecordResponse_logRecord, v.LogRecord)
+}
+func (v *GetLogRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLogRecordResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLogRecordResponse_logRecord:
+			return deserializeLogRecord(d, schemas.GetLogRecordResponse_logRecord, &v.LogRecord)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLogRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLogRecord, schemas.GetLogRecordRequest, schemas.GetLogRecordResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetLogRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLogRecord, schemas.GetLogRecordRequest, schemas.GetLogRecordResponse), output: &GetLogRecordOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetLogRecord{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLogRecord"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLogRecordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLogRecord(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +129,8 @@ func (c *Client) addOperationGetLogRecordMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLogRecord(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLogRecord",
-	}
 }

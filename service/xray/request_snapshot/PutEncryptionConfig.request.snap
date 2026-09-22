@@ -1,0 +1,5 @@
+POST /PutEncryptionConfig
+
+Content-Type: application/json
+
+{"KeyId":"__KeyId__","Type":"NONE"}

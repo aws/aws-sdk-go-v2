@@ -5,10 +5,10 @@ package auditmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the latest analytics data for controls within a specific control domain
@@ -56,6 +56,24 @@ type ListControlInsightsByControlDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlInsightsByControlDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlInsightsByControlDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlInsightsByControlDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlDomainId != nil {
+		s.WriteString(schemas.ListControlInsightsByControlDomainRequest_controlDomainId, *v.ControlDomainId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListControlInsightsByControlDomainRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlInsightsByControlDomainRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListControlInsightsByControlDomainOutput struct {
 
 	// The control analytics data that the ListControlInsightsByControlDomain API
@@ -71,77 +89,51 @@ type ListControlInsightsByControlDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListControlInsightsByControlDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListControlInsightsByControlDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListControlInsightsByControlDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlInsightsMetadata(s, schemas.ListControlInsightsByControlDomainResponse_controlInsightsMetadata, v.ControlInsightsMetadata)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListControlInsightsByControlDomainResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListControlInsightsByControlDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListControlInsightsByControlDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListControlInsightsByControlDomainResponse_controlInsightsMetadata:
+			return deserializeControlInsightsMetadata(d, schemas.ListControlInsightsByControlDomainResponse_controlInsightsMetadata, &v.ControlInsightsMetadata)
+		case schemas.ListControlInsightsByControlDomainResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListControlInsightsByControlDomainResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListControlInsightsByControlDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlInsightsByControlDomain, schemas.ListControlInsightsByControlDomainRequest, schemas.ListControlInsightsByControlDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListControlInsightsByControlDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListControlInsightsByControlDomain, schemas.ListControlInsightsByControlDomainRequest, schemas.ListControlInsightsByControlDomainResponse), output: &ListControlInsightsByControlDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListControlInsightsByControlDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListControlInsightsByControlDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListControlInsightsByControlDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListControlInsightsByControlDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +146,6 @@ func (c *Client) addOperationListControlInsightsByControlDomainMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +249,3 @@ type ListControlInsightsByControlDomainAPIClient interface {
 }
 
 var _ ListControlInsightsByControlDomainAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListControlInsightsByControlDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListControlInsightsByControlDomain",
-	}
-}

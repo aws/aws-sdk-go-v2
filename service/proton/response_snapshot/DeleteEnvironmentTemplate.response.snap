@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.DeleteEnvironmentTemplate
+
+{"environmentTemplate":{"arn":"__Arn__","createdAt":946684800,"description":"__Description__","displayName":"__DisplayName__","encryptionKey":"__EncryptionKey__","lastModifiedAt":946684800,"name":"__Name__","provisioning":"CUSTOMER_MANAGED","recommendedVersion":"__RecommendedVersion__"}}

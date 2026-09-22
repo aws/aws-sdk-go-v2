@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Condition that matches based on the specific WAF action taken on the request.
@@ -95,6 +96,9 @@ type CentralizationRuleDestination struct {
 	// Log specific configuration for centralization destination log groups.
 	DestinationLogsConfiguration *DestinationLogsConfiguration
 
+	// Metric specific configuration for centralization destination metrics.
+	DestinationMetricsConfiguration *DestinationMetricsConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -110,14 +114,28 @@ type CentralizationRuleSource struct {
 	// specified using organization id, accounts or organizational unit ids.
 	Scope *string
 
+	// Configuration that enables centralization of the context graph for the selected
+	// sources. Including this configuration in a rule's source opts the rule into
+	// centralizing the context graph for the selected sources.
+	SourceContextGraphConfiguration *SourceContextGraphConfiguration
+
 	// Log specific configuration for centralization source log groups.
 	SourceLogsConfiguration *SourceLogsConfiguration
+
+	// Metric specific configuration for centralization source metrics.
+	SourceMetricsConfiguration *SourceMetricsConfiguration
 
 	noSmithyDocumentSerde
 }
 
 // A summary of a centralization rule's key properties and status.
 type CentralizationRuleSummary struct {
+
+	// The status of context graph centralization for this rule. Returns Provisioning
+	// while the context graph is being set up, Healthy once it is active, or Unhealthy
+	// if provisioning failed. This status is independent of the overall RuleHealth
+	// for log delivery.
+	ContextGraphStatus ContextGraphStatus
 
 	// The Amazon Web Services region where the organization centralization rule was
 	// created.
@@ -150,6 +168,16 @@ type CentralizationRuleSummary struct {
 
 	// The name of the organization centralization rule.
 	RuleName *string
+
+	// The reason tag propagation is unhealthy for this rule. Only present when
+	// TagPropagationStatus is Unhealthy .
+	TagPropagationFailureReason TagPropagationFailureReason
+
+	// The health status of tag propagation for this rule. This status is independent
+	// of the overall RuleHealth for log delivery. Returns Healthy when the most
+	// recent tag-propagation attempt succeeded, or Unhealthy when the most recent
+	// attempt failed.
+	TagPropagationStatus TagPropagationStatus
 
 	noSmithyDocumentSerde
 }
@@ -201,6 +229,29 @@ type ConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about a dataset integration, including its ARN,
+// associated IAM role, and creation and update timestamps, as returned by
+// ListDatasetIntegrations .
+type DatasetIntegrationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the dataset integration.
+	//
+	// This member is required.
+	Arn *string
+
+	// The timestamp when the dataset integration was created.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the dataset
+	// integration.
+	RoleArn *string
+
+	// The timestamp when the dataset integration was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Information about a data source associated with the telemetry pipeline. For
 // CloudWatch Logs sources, this includes both a name and type extracted from the
 // log event metadata. For third-party sources (such as S3), this includes only a
@@ -236,6 +287,20 @@ type DestinationLogsConfiguration struct {
 
 	// The encryption configuration for centralization destination log groups.
 	LogsEncryptionConfiguration *LogsEncryptionConfiguration
+
+	// Specifies the tag propagation configuration for this centralization rule. When
+	// present, LogGroupNameConfiguration must use a LogGroupNamePattern that contains
+	// ${source.logGroup} , ${source.accountId} , and ${source.region} .
+	TagPropagationConfiguration *TagPropagationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for centralization destination metrics, including backup settings.
+type DestinationMetricsConfiguration struct {
+
+	// Configuration defining the backup region for the metrics backup destination.
+	BackupConfiguration *MetricsBackupConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -335,11 +400,12 @@ type LabelNameCondition struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration parameters for Amazon Bedrock AgentCore logging, including logType
-// settings.
+// The configuration parameters for log delivery, including logType settings.
+// Applies to resource types that support configurable log delivery, such as Amazon
+// Bedrock Knowledge Bases and Elastic Load Balancing Application Load Balancers.
 type LogDeliveryParameters struct {
 
-	// The type of log that the source is sending.
+	// The types of logs to collect from the resource.
 	LogTypes []LogType
 
 	noSmithyDocumentSerde
@@ -411,9 +477,11 @@ type LogsBackupConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for encrypting centralized log groups. This configuration is only
-// applied to destination log groups for which the corresponding source log groups
-// are encrypted using Customer Managed KMS Keys.
+// Configuration for encrypting centralized destination log groups. By default,
+// this configuration applies only to destination log groups whose corresponding
+// source log groups are encrypted using customer managed KMS keys. To encrypt all
+// destination log groups created by the rule, set EncryptionScope to
+// NEW_DESTINATION_LOG_GROUPS .
 type LogsEncryptionConfiguration struct {
 
 	// Configuration that determines the encryption strategy of the destination log
@@ -429,9 +497,37 @@ type LogsEncryptionConfiguration struct {
 	// centralization into the destination log group.
 	EncryptionConflictResolutionStrategy EncryptionConflictResolutionStrategy
 
+	// Determines which newly created destination log groups are encrypted with the
+	// configured KmsKeyArn when EncryptionStrategy is CUSTOMER_MANAGED .
+	//
+	// If you set this to ENCRYPTED_SOURCE_ONLY (the default), only destination log
+	// groups whose source log group is encrypted with a customer managed KMS key use
+	// the configured KmsKeyArn . Destination log groups derived from Amazon Web
+	// Services owned encrypted source log groups remain Amazon Web Services owned
+	// encrypted.
+	//
+	// If you set this to NEW_DESTINATION_LOG_GROUPS , every new destination log group
+	// created by this rule uses the configured KmsKeyArn , regardless of the source
+	// log group's encryption posture.
+	//
+	// This field is not valid when EncryptionStrategy is AWS_OWNED .
+	EncryptionScope EncryptionScope
+
 	// KMS Key ARN belonging to the primary destination account and region, to encrypt
 	// newly created central log groups in the primary destination.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for backing up centralized metrics data to a secondary region.
+type MetricsBackupConfiguration struct {
+
+	// Metrics specific backup destination region within the primary destination
+	// account to which metrics data should be centralized.
+	//
+	// This member is required.
+	Region *string
 
 	noSmithyDocumentSerde
 }
@@ -535,6 +631,13 @@ type Source struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration that enables centralization of the context graph for the selected
+// sources. Including this configuration in a rule's source opts the rule into
+// centralizing the context graph for the selected sources.
+type SourceContextGraphConfiguration struct {
+	noSmithyDocumentSerde
+}
+
 // Configuration for selecting and handling source log groups for centralization.
 type SourceLogsConfiguration struct {
 
@@ -556,6 +659,46 @@ type SourceLogsConfiguration struct {
 	// The selection criteria that specifies which source log groups to centralize.
 	// The selection criteria uses the same format as OAM link filters.
 	LogGroupSelectionCriteria *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for selecting source metrics for centralization.
+type SourceMetricsConfiguration struct {
+
+	// The filter expression that selects which source metrics to centralize.
+	// Currently, only * (all metrics) is supported. Other values return a validation
+	// error.
+	MetricsSelectionCriteria *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies configuration for propagating resource tags from source log groups to
+// centralized destination log groups. The service uses a customer-managed IAM role
+// in the destination account to add, update, and remove tags on destination log
+// groups.
+type TagPropagationConfiguration struct {
+
+	// The ARN of a customer-managed IAM role in the destination account. The service
+	// assumes this role to propagate tags to destination log groups. You must have
+	// iam:PassRole permission on this role.
+	//
+	// This member is required.
+	DestinationRoleArn *string
+
+	// The strategy for resolving conflicts when a tag key exists on both the source
+	// and destination log groups. If not specified, defaults to UPDATE_SYNC .
+	//
+	//   - ADD_ONLY – Only adds new tags from the source without modifying existing
+	//   destination tags.
+	//
+	//   - UPDATE_SYNC – Adds new tags and updates existing tags from the source. Does
+	//   not remove destination tags that are absent from the source.
+	//
+	//   - IN_SYNC – Keeps destination tags fully synchronized with source tags,
+	//   including removing destination tags that do not exist on the source.
+	TagConflictResolutionStrategy TagConflictResolutionStrategy
 
 	noSmithyDocumentSerde
 }
@@ -617,8 +760,13 @@ type TelemetryDestinationConfiguration struct {
 	// resource type.
 	ELBLoadBalancerLoggingParameters *ELBLoadBalancerLoggingParameters
 
-	// Configuration parameters specific to Amazon Bedrock AgentCore logging when
-	// Amazon Bedrock AgentCore is the resource type.
+	//  The Amazon Resource Name (ARN) of the customer-managed Amazon Web Services KMS
+	// key used to encrypt the log groups created during telemetry rule remediation.
+	KmsKeyArn *string
+
+	// The configuration parameters for log delivery when the resource type supports
+	// configurable log types, such as Amazon Bedrock Knowledge Bases or Elastic Load
+	// Balancing Application Load Balancers.
 	LogDeliveryParameters *LogDeliveryParameters
 
 	//  Configuration parameters specific to MSK monitoring when MSK is the resource
@@ -781,8 +929,9 @@ type TelemetryRule struct {
 	// AllRegions .
 	Regions []string
 
-	//  The type of Amazon Web Services resource to configure telemetry for (e.g.,
-	// "AWS::EC2::VPC", "AWS::EKS::Cluster", "AWS::WAFv2::WebACL").
+	//  The type of Amazon Web Services resource to configure telemetry for (for
+	// example, AWS::EC2::VPC , AWS::EKS::Cluster ,
+	// AWS::ElasticLoadBalancingV2::LoadBalancer , or AWS::Bedrock::KnowledgeBase ).
 	ResourceType ResourceType
 
 	//  The organizational scope to which the rule applies, specified using accounts

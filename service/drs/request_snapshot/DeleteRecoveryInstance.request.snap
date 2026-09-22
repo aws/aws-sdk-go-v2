@@ -1,0 +1,5 @@
+POST /DeleteRecoveryInstance
+
+Content-Type: application/json
+
+{"recoveryInstanceID":"__RecoveryInstanceID__"}

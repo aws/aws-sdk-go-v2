@@ -4,11 +4,10 @@ package m2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the status of a data set import task initiated with the CreateDataSetExportTask operation.
@@ -42,6 +41,21 @@ type GetDataSetExportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSetExportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSetExportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSetExportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDataSetExportTaskRequest_applicationId, *v.ApplicationId)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetDataSetExportTaskRequest_taskId, *v.TaskId)
+	}
+}
+
 type GetDataSetExportTaskOutput struct {
 
 	// The status of the task.
@@ -69,77 +83,78 @@ type GetDataSetExportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataSetExportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataSetExportTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataSetExportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.GetDataSetExportTaskResponse_kmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetDataSetExportTaskResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetDataSetExportTaskResponse_statusReason, *v.StatusReason)
+	}
+	if v.Summary != nil {
+		s.WriteStruct(schemas.GetDataSetExportTaskResponse_summary)
+		v.Summary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.GetDataSetExportTaskResponse_taskId, *v.TaskId)
+	}
+}
+func (v *GetDataSetExportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataSetExportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataSetExportTaskResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetDataSetExportTaskResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetDataSetExportTaskResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDataSetExportTaskResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataSetTaskLifecycle(ev)
+			return nil
+		case schemas.GetDataSetExportTaskResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetDataSetExportTaskResponse_statusReason, v.StatusReason)
+		case schemas.GetDataSetExportTaskResponse_summary:
+			v.Summary = &types.DataSetExportSummary{}
+			return v.Summary.Deserialize(d)
+		case schemas.GetDataSetExportTaskResponse_taskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.GetDataSetExportTaskResponse_taskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataSetExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSetExportTask, schemas.GetDataSetExportTaskRequest, schemas.GetDataSetExportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataSetExportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataSetExportTask, schemas.GetDataSetExportTaskRequest, schemas.GetDataSetExportTaskResponse), output: &GetDataSetExportTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataSetExportTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataSetExportTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDataSetExportTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataSetExportTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +169,8 @@ func (c *Client) addOperationGetDataSetExportTaskMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDataSetExportTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDataSetExportTask",
-	}
 }

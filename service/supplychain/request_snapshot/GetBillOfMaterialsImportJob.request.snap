@@ -1,0 +1,3 @@
+GET /api/configuration/instances/__InstanceId__/bill-of-materials-import-jobs/__JobId__
+
+

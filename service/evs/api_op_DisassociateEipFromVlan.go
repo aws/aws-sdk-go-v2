@@ -5,10 +5,10 @@ package evs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates an Elastic IP address from a public HCX VLAN. This operation is
@@ -57,6 +57,27 @@ type DisassociateEipFromVlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEipFromVlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateEipFromVlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEipFromVlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DisassociateEipFromVlanRequest_associationId, *v.AssociationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateEipFromVlanRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DisassociateEipFromVlanRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.VlanName != nil {
+		s.WriteString(schemas.DisassociateEipFromVlanRequest_vlanName, *v.VlanName)
+	}
+}
+
 type DisassociateEipFromVlanOutput struct {
 
 	// The VLANs that Amazon EVS creates during environment creation.
@@ -68,65 +89,44 @@ type DisassociateEipFromVlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateEipFromVlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateEipFromVlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateEipFromVlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Vlan != nil {
+		s.WriteStruct(schemas.DisassociateEipFromVlanResponse_vlan)
+		v.Vlan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateEipFromVlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateEipFromVlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateEipFromVlanResponse_vlan:
+			v.Vlan = &types.Vlan{}
+			return v.Vlan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateEipFromVlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEipFromVlan, schemas.DisassociateEipFromVlanRequest, schemas.DisassociateEipFromVlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateEipFromVlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateEipFromVlan, schemas.DisassociateEipFromVlanRequest, schemas.DisassociateEipFromVlanResponse), output: &DisassociateEipFromVlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateEipFromVlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateEipFromVlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -136,12 +136,6 @@ func (c *Client) addOperationDisassociateEipFromVlanMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpDisassociateEipFromVlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateEipFromVlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +148,6 @@ func (c *Client) addOperationDisassociateEipFromVlanMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -199,12 +187,4 @@ func (m *idempotencyToken_initializeOpDisassociateEipFromVlan) HandleInitialize(
 }
 func addIdempotencyToken_opDisassociateEipFromVlanMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDisassociateEipFromVlan{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDisassociateEipFromVlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateEipFromVlan",
-	}
 }

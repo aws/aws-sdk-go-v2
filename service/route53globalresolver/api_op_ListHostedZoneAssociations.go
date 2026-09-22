@@ -5,14 +5,14 @@ package route53globalresolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all hosted zone associations for a Route 53 Global Resolver resource with
-// pagination support.
+// Lists hosted zone associations with pagination support. Specify a DNS view
+// through the resourceArn parameter to list the hosted zone associations for that
+// DNS view, or omit it to list all hosted zone associations in your Amazon Web
+// Services account.
 //
 // Route 53 Global Resolver is a global service that supports resolvers in
 // multiple Amazon Web Services Regions but you must specify the US East (Ohio)
@@ -36,17 +36,17 @@ func (c *Client) ListHostedZoneAssociations(ctx context.Context, params *ListHos
 
 type ListHostedZoneAssociationsInput struct {
 
-	// Amazon Resource Name (ARN) of the DNS view.
-	//
-	// This member is required.
-	ResourceArn *string
-
 	// The maximum number of results to retrieve in a single call.
 	MaxResults *int32
 
 	// A pagination token used for large sets of results that can't be returned in a
 	// single response.
 	NextToken *string
+
+	// The Amazon Resource Name (ARN) of the DNS view to list hosted zone associations
+	// for. This parameter is optional; if you omit it, all hosted zone associations in
+	// your Amazon Web Services account are returned.
+	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
@@ -70,9 +70,6 @@ type ListHostedZoneAssociationsOutput struct {
 }
 
 func (c *Client) addOperationListHostedZoneAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHostedZoneAssociations{}, middleware.After)
 	if err != nil {
 		return err
@@ -81,65 +78,17 @@ func (c *Client) addOperationListHostedZoneAssociationsMiddlewares(stack *middle
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHostedZoneAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListHostedZoneAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHostedZoneAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +101,6 @@ func (c *Client) addOperationListHostedZoneAssociationsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +204,3 @@ type ListHostedZoneAssociationsAPIClient interface {
 }
 
 var _ ListHostedZoneAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListHostedZoneAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListHostedZoneAssociations",
-	}
-}

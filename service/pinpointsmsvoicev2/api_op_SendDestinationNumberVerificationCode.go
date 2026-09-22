@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Before you can send test messages to a verified destination phone number you
@@ -71,6 +70,32 @@ type SendDestinationNumberVerificationCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDestinationNumberVerificationCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendDestinationNumberVerificationCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDestinationNumberVerificationCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendDestinationNumberVerificationCodeRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeContextMap(s, schemas.SendDestinationNumberVerificationCodeRequest_Context, v.Context)
+	serializeDestinationCountryParameters(s, schemas.SendDestinationNumberVerificationCodeRequest_DestinationCountryParameters, v.DestinationCountryParameters)
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.SendDestinationNumberVerificationCodeRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.SendDestinationNumberVerificationCodeRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.VerificationChannel != "" {
+		s.WriteString(schemas.SendDestinationNumberVerificationCodeRequest_VerificationChannel, string(v.VerificationChannel))
+	}
+	if v.VerifiedDestinationNumberId != nil {
+		s.WriteString(schemas.SendDestinationNumberVerificationCodeRequest_VerifiedDestinationNumberId, *v.VerifiedDestinationNumberId)
+	}
+}
+
 type SendDestinationNumberVerificationCodeOutput struct {
 
 	// The unique identifier for the message.
@@ -84,77 +109,48 @@ type SendDestinationNumberVerificationCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendDestinationNumberVerificationCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendDestinationNumberVerificationCodeResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendDestinationNumberVerificationCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendDestinationNumberVerificationCodeResult_MessageId, *v.MessageId)
+	}
+}
+func (v *SendDestinationNumberVerificationCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendDestinationNumberVerificationCodeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendDestinationNumberVerificationCodeResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendDestinationNumberVerificationCodeResult_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendDestinationNumberVerificationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDestinationNumberVerificationCode, schemas.SendDestinationNumberVerificationCodeRequest, schemas.SendDestinationNumberVerificationCodeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendDestinationNumberVerificationCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendDestinationNumberVerificationCode, schemas.SendDestinationNumberVerificationCodeRequest, schemas.SendDestinationNumberVerificationCodeResult), output: &SendDestinationNumberVerificationCodeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendDestinationNumberVerificationCode{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendDestinationNumberVerificationCode"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendDestinationNumberVerificationCodeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendDestinationNumberVerificationCode(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +165,8 @@ func (c *Client) addOperationSendDestinationNumberVerificationCodeMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendDestinationNumberVerificationCode(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendDestinationNumberVerificationCode",
-	}
 }

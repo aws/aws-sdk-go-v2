@@ -5,10 +5,10 @@ package amp
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an anomaly detector within a workspace using the Random Cut Forest
@@ -68,6 +68,31 @@ type CreateAnomalyDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalyDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalyDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalyDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorRequest_alias, *v.Alias)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorRequest_clientToken, *v.ClientToken)
+	}
+	serializeAnomalyDetectorConfiguration(s, schemas.CreateAnomalyDetectorRequest_configuration, v.Configuration)
+	if v.EvaluationIntervalInSeconds != nil {
+		s.WriteInt32(schemas.CreateAnomalyDetectorRequest_evaluationIntervalInSeconds, *v.EvaluationIntervalInSeconds)
+	}
+	serializePrometheusMetricLabelMap(s, schemas.CreateAnomalyDetectorRequest_labels, v.Labels)
+	serializeAnomalyDetectorMissingDataAction(s, schemas.CreateAnomalyDetectorRequest_missingDataAction, v.MissingDataAction)
+	serializeTagMap(s, schemas.CreateAnomalyDetectorRequest_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type CreateAnomalyDetectorOutput struct {
 
 	// The unique identifier of the created anomaly detector.
@@ -94,65 +119,59 @@ type CreateAnomalyDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnomalyDetectorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnomalyDetectorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnomalyDetectorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnomalyDetectorId != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorResponse_anomalyDetectorId, *v.AnomalyDetectorId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateAnomalyDetectorResponse_arn, *v.Arn)
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.CreateAnomalyDetectorResponse_status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateAnomalyDetectorResponse_tags, v.Tags)
+}
+func (v *CreateAnomalyDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAnomalyDetectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAnomalyDetectorResponse_anomalyDetectorId:
+			v.AnomalyDetectorId = new(string)
+			return d.ReadString(schemas.CreateAnomalyDetectorResponse_anomalyDetectorId, v.AnomalyDetectorId)
+		case schemas.CreateAnomalyDetectorResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateAnomalyDetectorResponse_arn, v.Arn)
+		case schemas.CreateAnomalyDetectorResponse_status:
+			v.Status = &types.AnomalyDetectorStatus{}
+			return v.Status.Deserialize(d)
+		case schemas.CreateAnomalyDetectorResponse_tags:
+			return deserializeTagMap(d, schemas.CreateAnomalyDetectorResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalyDetector, schemas.CreateAnomalyDetectorRequest, schemas.CreateAnomalyDetectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAnomalyDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnomalyDetector, schemas.CreateAnomalyDetectorRequest, schemas.CreateAnomalyDetectorResponse), output: &CreateAnomalyDetectorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAnomalyDetector{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAnomalyDetector"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -162,12 +181,6 @@ func (c *Client) addOperationCreateAnomalyDetectorMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateAnomalyDetectorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAnomalyDetector(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +193,6 @@ func (c *Client) addOperationCreateAnomalyDetectorMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -225,12 +232,4 @@ func (m *idempotencyToken_initializeOpCreateAnomalyDetector) HandleInitialize(ct
 }
 func addIdempotencyToken_opCreateAnomalyDetectorMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAnomalyDetector{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAnomalyDetector(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAnomalyDetector",
-	}
 }

@@ -5,10 +5,10 @@ package xray
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -62,6 +62,34 @@ type GetInsightSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetInsightSummariesRequest_EndTime, *v.EndTime)
+	}
+	if v.GroupARN != nil {
+		s.WriteString(schemas.GetInsightSummariesRequest_GroupARN, *v.GroupARN)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GetInsightSummariesRequest_GroupName, *v.GroupName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetInsightSummariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInsightSummariesRequest_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetInsightSummariesRequest_StartTime, *v.StartTime)
+	}
+	serializeInsightStateList(s, schemas.GetInsightSummariesRequest_States, v.States)
+}
+
 type GetInsightSummariesOutput struct {
 
 	// The summary of each insight within the group matching the provided filters. The
@@ -79,77 +107,51 @@ type GetInsightSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInsightSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInsightSummariesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInsightSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInsightSummaryList(s, schemas.GetInsightSummariesResult_InsightSummaries, v.InsightSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetInsightSummariesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *GetInsightSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInsightSummariesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInsightSummariesResult_InsightSummaries:
+			return deserializeInsightSummaryList(d, schemas.GetInsightSummariesResult_InsightSummaries, &v.InsightSummaries)
+		case schemas.GetInsightSummariesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetInsightSummariesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInsightSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightSummaries, schemas.GetInsightSummariesRequest, schemas.GetInsightSummariesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInsightSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInsightSummaries, schemas.GetInsightSummariesRequest, schemas.GetInsightSummariesResult), output: &GetInsightSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInsightSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInsightSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetInsightSummariesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInsightSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +164,6 @@ func (c *Client) addOperationGetInsightSummariesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +265,3 @@ type GetInsightSummariesAPIClient interface {
 }
 
 var _ GetInsightSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetInsightSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetInsightSummaries",
-	}
-}

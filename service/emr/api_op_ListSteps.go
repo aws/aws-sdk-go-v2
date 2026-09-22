@@ -5,10 +5,10 @@ package emr
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of steps for the cluster in reverse order unless you specify
@@ -56,6 +56,23 @@ type ListStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStepsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ListStepsInput_ClusterId, *v.ClusterId)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStepsInput_Marker, *v.Marker)
+	}
+	serializeXmlStringList(s, schemas.ListStepsInput_StepIds, v.StepIds)
+	serializeStepStateList(s, schemas.ListStepsInput_StepStates, v.StepStates)
+}
+
 // This output contains the list of steps returned in reverse order. This means
 // that the last step is the first element in the list.
 type ListStepsOutput struct {
@@ -75,77 +92,51 @@ type ListStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStepsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.ListStepsOutput_Marker, *v.Marker)
+	}
+	serializeStepSummaryList(s, schemas.ListStepsOutput_Steps, v.Steps)
+}
+func (v *ListStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStepsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStepsOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.ListStepsOutput_Marker, v.Marker)
+		case schemas.ListStepsOutput_Steps:
+			return deserializeStepSummaryList(d, schemas.ListStepsOutput_Steps, &v.Steps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSteps, schemas.ListStepsInput, schemas.ListStepsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSteps, schemas.ListStepsInput, schemas.ListStepsOutput), output: &ListStepsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSteps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSteps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListStepsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSteps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +149,6 @@ func (c *Client) addOperationListStepsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +236,3 @@ type ListStepsAPIClient interface {
 }
 
 var _ ListStepsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSteps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSteps",
-	}
-}

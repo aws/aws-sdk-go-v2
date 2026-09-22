@@ -4,11 +4,10 @@ package invoicing
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,21 @@ type GetInvoiceUnitInput struct {
 	AsOf *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetInvoiceUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvoiceUnitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvoiceUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsOf != nil {
+		s.WriteTime(schemas.GetInvoiceUnitRequest_AsOf, *v.AsOf)
+	}
+	if v.InvoiceUnitArn != nil {
+		s.WriteString(schemas.GetInvoiceUnitRequest_InvoiceUnitArn, *v.InvoiceUnitArn)
+	}
 }
 
 type GetInvoiceUnitOutput struct {
@@ -78,77 +92,86 @@ type GetInvoiceUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvoiceUnitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvoiceUnitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvoiceUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetInvoiceUnitResponse_Description, *v.Description)
+	}
+	if v.InvoiceReceiver != nil {
+		s.WriteString(schemas.GetInvoiceUnitResponse_InvoiceReceiver, *v.InvoiceReceiver)
+	}
+	if v.InvoiceUnitArn != nil {
+		s.WriteString(schemas.GetInvoiceUnitResponse_InvoiceUnitArn, *v.InvoiceUnitArn)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetInvoiceUnitResponse_LastModified, *v.LastModified)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetInvoiceUnitResponse_Name, *v.Name)
+	}
+	if v.Rule != nil {
+		s.WriteStruct(schemas.GetInvoiceUnitResponse_Rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaxInheritanceDisabled != nil {
+		s.WriteBool(schemas.GetInvoiceUnitResponse_TaxInheritanceDisabled, *v.TaxInheritanceDisabled)
+	}
+}
+func (v *GetInvoiceUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInvoiceUnitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInvoiceUnitResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetInvoiceUnitResponse_Description, v.Description)
+		case schemas.GetInvoiceUnitResponse_InvoiceReceiver:
+			v.InvoiceReceiver = new(string)
+			return d.ReadString(schemas.GetInvoiceUnitResponse_InvoiceReceiver, v.InvoiceReceiver)
+		case schemas.GetInvoiceUnitResponse_InvoiceUnitArn:
+			v.InvoiceUnitArn = new(string)
+			return d.ReadString(schemas.GetInvoiceUnitResponse_InvoiceUnitArn, v.InvoiceUnitArn)
+		case schemas.GetInvoiceUnitResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetInvoiceUnitResponse_LastModified, v.LastModified)
+		case schemas.GetInvoiceUnitResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetInvoiceUnitResponse_Name, v.Name)
+		case schemas.GetInvoiceUnitResponse_Rule:
+			v.Rule = &types.InvoiceUnitRule{}
+			return v.Rule.Deserialize(d)
+		case schemas.GetInvoiceUnitResponse_TaxInheritanceDisabled:
+			v.TaxInheritanceDisabled = new(bool)
+			return d.ReadBool(schemas.GetInvoiceUnitResponse_TaxInheritanceDisabled, v.TaxInheritanceDisabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInvoiceUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvoiceUnit, schemas.GetInvoiceUnitRequest, schemas.GetInvoiceUnitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetInvoiceUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvoiceUnit, schemas.GetInvoiceUnitRequest, schemas.GetInvoiceUnitResponse), output: &GetInvoiceUnitOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetInvoiceUnit{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInvoiceUnit"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetInvoiceUnitValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInvoiceUnit(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +186,8 @@ func (c *Client) addOperationGetInvoiceUnitMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetInvoiceUnit(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetInvoiceUnit",
-	}
 }

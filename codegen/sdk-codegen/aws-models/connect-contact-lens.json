@@ -68,6 +68,194 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Contact_Lens.html\">Contact Lens actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Contact_Lens.html\">Contact Lens data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Amazon Connect Contact Lens enables you to analyze conversations between customer and agents, by using\n            speech transcription, natural language processing, and intelligent search capabilities.\n            It performs sentiment analysis, detects issues, and enables you to automatically\n            categorize contacts.</p>\n         <p>Amazon Connect Contact Lens provides both real-time and post-call analytics of customer-agent\n            conversations. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/analyze-conversations.html\">Analyze conversations\n                using speech analytics</a> in the <i>Amazon Connect Administrator\n            Guide</i>. </p>",
                 "smithy.api#title": "Amazon Connect Contact Lens",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://contact-lens-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://contact-lens-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://contact-lens.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://contact-lens.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -837,6 +1025,151 @@
                 "smithy.api#pattern": "\\S"
             }
         },
+        "com.amazonaws.connectcontactlens#ExtractedInformation": {
+            "type": "structure",
+            "members": {
+                "ExtractionDefinitionId": {
+                    "target": "com.amazonaws.connectcontactlens#ExtractionDefinitionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The identifier of the extraction definition that produced this result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionName": {
+                    "target": "com.amazonaws.connectcontactlens#ExtractionDefinitionName",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The name of the extraction definition that produced this result.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExtractionDefinitionDisplayLabel": {
+                    "target": "com.amazonaws.connectcontactlens#ExtractionDefinitionDisplayLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display label of the extraction definition that produced this result.</p>"
+                    }
+                },
+                "ExtractedValues": {
+                    "target": "com.amazonaws.connectcontactlens#ExtractedInformationValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of values extracted from the conversation for this extraction definition.\n            This field is empty when a <code>FailureCode</code> is present.</p>"
+                    }
+                },
+                "FailureCode": {
+                    "target": "com.amazonaws.connectcontactlens#ExtractedInformationFailureCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the information failed to be extracted, one of the following failure codes\n            occurs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached\n                    your service quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: Information extraction requires a\n                    conversation with at least one turn from each participant.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_SAFETY_GUIDELINES</code>: The extracted information cannot be\n                    provided because it failed to meet system safety guidelines.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code>: Internal system error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MAX_PACKAGE_FEATURE_ONLY</code>: Information extraction is only available\n                    in Amazon Connect Customer instances.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Segment containing information extracted from the conversation. Each segment\n            represents the results for a single extraction definition.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#ExtractedInformationContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#ExtractedInformationFailureCode": {
+            "type": "enum",
+            "members": {
+                "QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUOTA_EXCEEDED"
+                    }
+                },
+                "INSUFFICIENT_CONVERSATION_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_CONVERSATION_CONTENT"
+                    }
+                },
+                "FAILED_SAFETY_GUIDELINES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_SAFETY_GUIDELINES"
+                    }
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_ERROR"
+                    }
+                },
+                "MAX_PACKAGE_FEATURE_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX_PACKAGE_FEATURE_ONLY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#ExtractedInformationValue": {
+            "type": "structure",
+            "members": {
+                "Content": {
+                    "target": "com.amazonaws.connectcontactlens#ExtractedInformationContent",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The text content of the extracted value.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PointsOfInterest": {
+                    "target": "com.amazonaws.connectcontactlens#PointsOfInterest",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The sections in the conversation that indicate where the extracted value was\n            found.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An individual value extracted from the conversation, including its content and the\n            locations where it was found.</p>"
+            }
+        },
+        "com.amazonaws.connectcontactlens#ExtractedInformationValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectcontactlens#ExtractedInformationValue"
+            }
+        },
+        "com.amazonaws.connectcontactlens#ExtractionDefinitionDisplayLabel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.connectcontactlens#ExtractionDefinitionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.connectcontactlens#ExtractionDefinitionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
         "com.amazonaws.connectcontactlens#InstanceId": {
             "type": "string",
             "traits": {
@@ -927,7 +1260,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of analysis segments for a real-time analysis session.</p>",
+                "smithy.api#documentation": "<p>Provides a list of analysis segments for a real-time analysis session for\n            voice.</p>\n         <note>\n            <p>Voice data is retained for 24 hours. You must invoke this API during that\n                time.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/realtime-contact-analysis/analysis-segments",
@@ -1082,7 +1415,7 @@
                     "target": "com.amazonaws.connectcontactlens#OffsetMillis",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The beginning offset in milliseconds where the category rule was detected.</p>",
+                        "smithy.api#documentation": "<p>The beginning offset (in milliseconds) where the match was detected.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1090,13 +1423,13 @@
                     "target": "com.amazonaws.connectcontactlens#OffsetMillis",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ending offset in milliseconds where the category rule was detected.</p>",
+                        "smithy.api#documentation": "<p>The ending offset (in milliseconds) where the match was detected.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The section of the contact audio where that category rule was detected.</p>"
+                "smithy.api#documentation": "<p>The section of the contact audio where a match was detected.</p>"
             }
         },
         "com.amazonaws.connectcontactlens#PointsOfInterest": {
@@ -1131,7 +1464,7 @@
                 "FailureCode": {
                     "target": "com.amazonaws.connectcontactlens#PostContactSummaryFailureCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the summary failed to be generated, one of the following failure codes\n            occurs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached\n                    your service quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: The conversation needs to have\n                    at least one turn from both the participants in order to generate the\n                    summary.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_SAFETY_GUIDELINES</code>: The generated summary cannot be\n                    provided because it failed to meet system safety guidelines.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_ANALYSIS_CONFIGURATION</code>: This code occurs when, for\n                    example, you're using a \n                    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens\">language</a> \n                     that isn't supported by generative AI-powered post-contact summaries.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code>: Internal system error.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>If the summary failed to be generated, one of the following failure codes\n            occurs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUOTA_EXCEEDED</code>: The number of concurrent analytics jobs reached\n                    your service quota.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INSUFFICIENT_CONVERSATION_CONTENT</code>: The conversation needs to have\n                    at least one turn from both the participants in order to generate the\n                    summary.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_SAFETY_GUIDELINES</code>: The generated summary cannot be\n                    provided because it failed to meet system safety guidelines.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INVALID_ANALYSIS_CONFIGURATION</code>: This code occurs when, for\n                    example, you're using a <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/supported-languages.html#supported-languages-contact-lens\">language</a> that isn't supported by generative AI-powered post-contact\n                    summaries. </p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code>: Internal system error.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1219,6 +1552,12 @@
                     "target": "com.amazonaws.connectcontactlens#PostContactSummary",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the post-contact summary.</p>"
+                    }
+                },
+                "ExtractedInformation": {
+                    "target": "com.amazonaws.connectcontactlens#ExtractedInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The extracted information from the conversation.</p>"
                     }
                 }
             },

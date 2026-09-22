@@ -1,0 +1,5 @@
+POST /properties/batch/aggregates
+
+Content-Type: application/json
+
+{"entries":[{"aggregateTypes":["AVERAGE","AVERAGE"],"assetId":"__AssetId__","endDate":946684800,"entryId":"__EntryId__","propertyAlias":"__PropertyAlias__","propertyId":"__PropertyId__","qualities":["GOOD","GOOD"],"resolution":"__Resolution__","startDate":946684800,"timeOrdering":"ASCENDING"},{"aggregateTypes":["AVERAGE","AVERAGE"],"assetId":"__AssetId__","endDate":946684800,"entryId":"__EntryId__","propertyAlias":"__PropertyAlias__","propertyId":"__PropertyId__","qualities":["GOOD","GOOD"],"resolution":"__Resolution__","startDate":946684800,"timeOrdering":"ASCENDING"}],"maxResults":1,"nextToken":"__NextToken__"}

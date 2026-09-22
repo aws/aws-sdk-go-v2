@@ -4,11 +4,10 @@ package comprehendmedical
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // InferRxNorm detects medications as entities listed in a patient record and
@@ -40,6 +39,18 @@ type InferRxNormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InferRxNormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferRxNormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferRxNormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.InferRxNormRequest_Text, *v.Text)
+	}
+}
+
 type InferRxNormOutput struct {
 
 	// The medication entities detected in the text linked to RxNorm concepts. If the
@@ -64,65 +75,51 @@ type InferRxNormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InferRxNormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferRxNormResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferRxNormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRxNormEntityList(s, schemas.InferRxNormResponse_Entities, v.Entities)
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.InferRxNormResponse_ModelVersion, *v.ModelVersion)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.InferRxNormResponse_PaginationToken, *v.PaginationToken)
+	}
+}
+func (v *InferRxNormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InferRxNormResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InferRxNormResponse_Entities:
+			return deserializeRxNormEntityList(d, schemas.InferRxNormResponse_Entities, &v.Entities)
+		case schemas.InferRxNormResponse_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.InferRxNormResponse_ModelVersion, v.ModelVersion)
+		case schemas.InferRxNormResponse_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.InferRxNormResponse_PaginationToken, v.PaginationToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInferRxNormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InferRxNorm, schemas.InferRxNormRequest, schemas.InferRxNormResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpInferRxNorm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InferRxNorm, schemas.InferRxNormRequest, schemas.InferRxNormResponse), output: &InferRxNormOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpInferRxNorm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InferRxNorm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -132,12 +129,6 @@ func (c *Client) addOperationInferRxNormMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpInferRxNormValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInferRxNorm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +143,8 @@ func (c *Client) addOperationInferRxNormMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInferRxNorm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InferRxNorm",
-	}
 }

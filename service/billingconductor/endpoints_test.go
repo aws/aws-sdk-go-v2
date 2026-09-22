@@ -41,7 +41,7 @@ func TestEndpointCase0(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "billingconductor")
@@ -205,7 +205,7 @@ func TestEndpointCase4(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "billingconductor")

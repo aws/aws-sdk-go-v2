@@ -4,11 +4,10 @@ package apprunner
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create an App Runner automatic scaling configuration resource. App Runner
@@ -107,6 +106,28 @@ type CreateAutoScalingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoScalingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoScalingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoScalingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfigurationName != nil {
+		s.WriteString(schemas.CreateAutoScalingConfigurationRequest_AutoScalingConfigurationName, *v.AutoScalingConfigurationName)
+	}
+	if v.MaxConcurrency != nil {
+		s.WriteInt32(schemas.CreateAutoScalingConfigurationRequest_MaxConcurrency, *v.MaxConcurrency)
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.CreateAutoScalingConfigurationRequest_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.CreateAutoScalingConfigurationRequest_MinSize, *v.MinSize)
+	}
+	serializeTagList(s, schemas.CreateAutoScalingConfigurationRequest_Tags, v.Tags)
+}
+
 type CreateAutoScalingConfigurationOutput struct {
 
 	// A description of the App Runner auto scaling configuration that's created by
@@ -121,77 +142,50 @@ type CreateAutoScalingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutoScalingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutoScalingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutoScalingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfiguration != nil {
+		s.WriteStruct(schemas.CreateAutoScalingConfigurationResponse_AutoScalingConfiguration)
+		v.AutoScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateAutoScalingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutoScalingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutoScalingConfigurationResponse_AutoScalingConfiguration:
+			v.AutoScalingConfiguration = &types.AutoScalingConfiguration{}
+			return v.AutoScalingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutoScalingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoScalingConfiguration, schemas.CreateAutoScalingConfigurationRequest, schemas.CreateAutoScalingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateAutoScalingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutoScalingConfiguration, schemas.CreateAutoScalingConfigurationRequest, schemas.CreateAutoScalingConfigurationResponse), output: &CreateAutoScalingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateAutoScalingConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAutoScalingConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAutoScalingConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutoScalingConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,22 +200,8 @@ func (c *Client) addOperationCreateAutoScalingConfigurationMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAutoScalingConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAutoScalingConfiguration",
-	}
 }

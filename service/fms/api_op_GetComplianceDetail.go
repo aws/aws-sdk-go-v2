@@ -4,11 +4,10 @@ package fms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns detailed compliance information about the specified member account.
@@ -49,6 +48,21 @@ type GetComplianceDetailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberAccount != nil {
+		s.WriteString(schemas.GetComplianceDetailRequest_MemberAccount, *v.MemberAccount)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetComplianceDetailRequest_PolicyId, *v.PolicyId)
+	}
+}
+
 type GetComplianceDetailOutput struct {
 
 	// Information about the resources and the policy that you specified in the
@@ -61,77 +75,50 @@ type GetComplianceDetailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyComplianceDetail != nil {
+		s.WriteStruct(schemas.GetComplianceDetailResponse_PolicyComplianceDetail)
+		v.PolicyComplianceDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetComplianceDetailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceDetailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceDetailResponse_PolicyComplianceDetail:
+			v.PolicyComplianceDetail = &types.PolicyComplianceDetail{}
+			return v.PolicyComplianceDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceDetailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetail, schemas.GetComplianceDetailRequest, schemas.GetComplianceDetailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetail, schemas.GetComplianceDetailRequest, schemas.GetComplianceDetailResponse), output: &GetComplianceDetailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceDetail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComplianceDetail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetComplianceDetailValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComplianceDetail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +133,8 @@ func (c *Client) addOperationGetComplianceDetailMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetComplianceDetail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetComplianceDetail",
-	}
 }

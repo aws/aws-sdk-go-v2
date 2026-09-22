@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an evaluation job.
@@ -91,6 +91,41 @@ type CreateEvaluationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEvaluationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEvaluationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEvaluationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationType != "" {
+		s.WriteString(schemas.CreateEvaluationJobRequest_applicationType, string(v.ApplicationType))
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CustomerEncryptionKeyId != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_customerEncryptionKeyId, *v.CustomerEncryptionKeyId)
+	}
+	serializeEvaluationConfig(s, schemas.CreateEvaluationJobRequest_evaluationConfig, v.EvaluationConfig)
+	serializeEvaluationInferenceConfig(s, schemas.CreateEvaluationJobRequest_inferenceConfig, v.InferenceConfig)
+	if v.JobDescription != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_jobDescription, *v.JobDescription)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_jobName, *v.JobName)
+	}
+	serializeTagList(s, schemas.CreateEvaluationJobRequest_jobTags, v.JobTags)
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.CreateEvaluationJobRequest_outputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateEvaluationJobRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type CreateEvaluationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the evaluation job.
@@ -104,65 +139,42 @@ type CreateEvaluationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEvaluationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEvaluationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEvaluationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateEvaluationJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateEvaluationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEvaluationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEvaluationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateEvaluationJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEvaluationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvaluationJob, schemas.CreateEvaluationJobRequest, schemas.CreateEvaluationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEvaluationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEvaluationJob, schemas.CreateEvaluationJobRequest, schemas.CreateEvaluationJobResponse), output: &CreateEvaluationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEvaluationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEvaluationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -172,12 +184,6 @@ func (c *Client) addOperationCreateEvaluationJobMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateEvaluationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEvaluationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,12 +196,6 @@ func (c *Client) addOperationCreateEvaluationJobMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -235,12 +235,4 @@ func (m *idempotencyToken_initializeOpCreateEvaluationJob) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opCreateEvaluationJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateEvaluationJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateEvaluationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateEvaluationJob",
-	}
 }

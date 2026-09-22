@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.DescribeLocationEfs
+
+{"AccessPointArn":"__AccessPointArn__","CreationTime":946684800,"Ec2Config":{"SecurityGroupArns":["__Member__","__Member__"],"SubnetArn":"__SubnetArn__"},"FileSystemAccessRoleArn":"__FileSystemAccessRoleArn__","InTransitEncryption":"NONE","LocationArn":"__LocationArn__","LocationUri":"__LocationUri__"}

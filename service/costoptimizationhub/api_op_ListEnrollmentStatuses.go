@@ -5,10 +5,10 @@ package costoptimizationhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the enrollment status for an account. It can also return the list of
@@ -45,6 +45,27 @@ type ListEnrollmentStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnrollmentStatusesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnrollmentStatusesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnrollmentStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListEnrollmentStatusesRequest_accountId, *v.AccountId)
+	}
+	if v.IncludeOrganizationInfo != false {
+		s.WriteBool(schemas.ListEnrollmentStatusesRequest_includeOrganizationInfo, v.IncludeOrganizationInfo)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnrollmentStatusesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnrollmentStatusesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnrollmentStatusesOutput struct {
 
 	// The enrollment status of all member accounts in the organization if the account
@@ -64,74 +85,54 @@ type ListEnrollmentStatusesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnrollmentStatusesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnrollmentStatusesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnrollmentStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeMemberAccounts != nil {
+		s.WriteBool(schemas.ListEnrollmentStatusesResponse_includeMemberAccounts, *v.IncludeMemberAccounts)
+	}
+	serializeAccountEnrollmentStatuses(s, schemas.ListEnrollmentStatusesResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnrollmentStatusesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListEnrollmentStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnrollmentStatusesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnrollmentStatusesResponse_includeMemberAccounts:
+			v.IncludeMemberAccounts = new(bool)
+			return d.ReadBool(schemas.ListEnrollmentStatusesResponse_includeMemberAccounts, v.IncludeMemberAccounts)
+		case schemas.ListEnrollmentStatusesResponse_items:
+			return deserializeAccountEnrollmentStatuses(d, schemas.ListEnrollmentStatusesResponse_items, &v.Items)
+		case schemas.ListEnrollmentStatusesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnrollmentStatusesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnrollmentStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnrollmentStatuses, schemas.ListEnrollmentStatusesRequest, schemas.ListEnrollmentStatusesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnrollmentStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnrollmentStatuses, schemas.ListEnrollmentStatusesRequest, schemas.ListEnrollmentStatusesResponse), output: &ListEnrollmentStatusesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnrollmentStatuses{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnrollmentStatuses"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEnrollmentStatuses(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +145,6 @@ func (c *Client) addOperationListEnrollmentStatusesMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +246,3 @@ type ListEnrollmentStatusesAPIClient interface {
 }
 
 var _ ListEnrollmentStatusesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEnrollmentStatuses(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEnrollmentStatuses",
-	}
-}

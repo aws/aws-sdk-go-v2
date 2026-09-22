@@ -5,9 +5,9 @@ package computeoptimizerautomation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates one or more member accounts with your organization's management
@@ -52,6 +52,19 @@ type AssociateAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.AssociateAccountsRequest_accountIds, v.AccountIds)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateAccountsRequest_clientToken, *v.ClientToken)
+	}
+}
+
 type AssociateAccountsOutput struct {
 
 	//  The IDs of the member accounts that were successfully associated.
@@ -66,65 +79,42 @@ type AssociateAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAccountsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAccountsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAccountsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.AssociateAccountsResponse_accountIds, v.AccountIds)
+	serializeStringList(s, schemas.AssociateAccountsResponse_errors, v.Errors)
+}
+func (v *AssociateAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateAccountsResponse_accountIds:
+			return deserializeAccountIdList(d, schemas.AssociateAccountsResponse_accountIds, &v.AccountIds)
+		case schemas.AssociateAccountsResponse_errors:
+			return deserializeStringList(d, schemas.AssociateAccountsResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAccounts, schemas.AssociateAccountsRequest, schemas.AssociateAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAssociateAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAccounts, schemas.AssociateAccountsRequest, schemas.AssociateAccountsResponse), output: &AssociateAccountsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAssociateAccounts{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateAccounts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -139,12 +129,6 @@ func (c *Client) addOperationAssociateAccountsMiddlewares(stack *middleware.Stac
 	if err = addOpAssociateAccountsValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateAccounts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,12 +139,6 @@ func (c *Client) addOperationAssociateAccountsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -200,12 +178,4 @@ func (m *idempotencyToken_initializeOpAssociateAccounts) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opAssociateAccountsMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateAccounts{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAssociateAccounts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateAccounts",
-	}
 }

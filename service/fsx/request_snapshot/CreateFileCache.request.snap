@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.CreateFileCache
+
+{"ClientRequestToken":"__ClientRequestToken__","CopyTagsToDataRepositoryAssociations":true,"DataRepositoryAssociations":[{"DataRepositoryPath":"__DataRepositoryPath__","DataRepositorySubdirectories":["__Member__","__Member__"],"FileCachePath":"__FileCachePath__","NFS":{"DnsIps":["__Member__","__Member__"],"Version":"NFS3"}},{"DataRepositoryPath":"__DataRepositoryPath__","DataRepositorySubdirectories":["__Member__","__Member__"],"FileCachePath":"__FileCachePath__","NFS":{"DnsIps":["__Member__","__Member__"],"Version":"NFS3"}}],"FileCacheType":"LUSTRE","FileCacheTypeVersion":"__FileCacheTypeVersion__","KmsKeyId":"__KmsKeyId__","LustreConfiguration":{"DeploymentType":"CACHE_1","MetadataConfiguration":{"StorageCapacity":1},"PerUnitStorageThroughput":1,"WeeklyMaintenanceStartTime":"__WeeklyMaintenanceStartTime__"},"SecurityGroupIds":["__Member__","__Member__"],"StorageCapacity":1,"SubnetIds":["__Member__","__Member__"],"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

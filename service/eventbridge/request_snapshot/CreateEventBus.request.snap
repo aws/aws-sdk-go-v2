@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.CreateEventBus
+
+{"DeadLetterConfig":{"Arn":"__Arn__"},"Description":"__Description__","EventSourceName":"__EventSourceName__","KmsKeyIdentifier":"__KmsKeyIdentifier__","LogConfig":{"IncludeDetail":"NONE","Level":"OFF"},"Name":"__Name__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

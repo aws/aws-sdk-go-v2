@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","creationTime":"2000-01-01T00:00:00Z","eventPattern":"__EventPattern__","eventType":"__EventType__","managedRules":["__Member__","__Member__"],"notificationConfigurationArn":"__NotificationConfigurationArn__","regions":["__Member__","__Member__"],"source":"__Source__","statusSummaryByRegion":{"key0":{"reason":"__Reason__","status":"ACTIVE"}}}

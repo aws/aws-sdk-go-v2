@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -38,6 +40,35 @@ type AccountScope struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountScope) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.AccountScope_Accounts, v.Accounts)
+	if v.AllAccountsEnabled != false {
+		s.WriteBool(schemas.AccountScope_AllAccountsEnabled, v.AllAccountsEnabled)
+	}
+	if v.ExcludeSpecifiedAccounts != false {
+		s.WriteBool(schemas.AccountScope_ExcludeSpecifiedAccounts, v.ExcludeSpecifiedAccounts)
+	}
+}
+func (v *AccountScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountScope_Accounts:
+			return deserializeAccountIdList(d, schemas.AccountScope_Accounts, &v.Accounts)
+		case schemas.AccountScope_AllAccountsEnabled:
+			return d.ReadBool(schemas.AccountScope_AllAccountsEnabled, &v.AllAccountsEnabled)
+		case schemas.AccountScope_ExcludeSpecifiedAccounts:
+			return d.ReadBool(schemas.AccountScope_ExcludeSpecifiedAccounts, &v.ExcludeSpecifiedAccounts)
+		}
+		return nil
+	})
+}
+
 // Describes a remediation action target.
 type ActionTarget struct {
 
@@ -48,6 +79,34 @@ type ActionTarget struct {
 	ResourceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActionTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActionTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActionTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ActionTarget_Description, *v.Description)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ActionTarget_ResourceId, *v.ResourceId)
+	}
+}
+func (v *ActionTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActionTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActionTarget_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ActionTarget_Description, v.Description)
+		case schemas.ActionTarget_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ActionTarget_ResourceId, v.ResourceId)
+		}
+		return nil
+	})
 }
 
 // Contains high level information about the Firewall Manager administrator
@@ -88,6 +147,43 @@ type AdminAccountSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminAccountSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminAccountSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminAccountSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminAccount != nil {
+		s.WriteString(schemas.AdminAccountSummary_AdminAccount, *v.AdminAccount)
+	}
+	if v.DefaultAdmin != false {
+		s.WriteBool(schemas.AdminAccountSummary_DefaultAdmin, v.DefaultAdmin)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AdminAccountSummary_Status, string(v.Status))
+	}
+}
+func (v *AdminAccountSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminAccountSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminAccountSummary_AdminAccount:
+			v.AdminAccount = new(string)
+			return d.ReadString(schemas.AdminAccountSummary_AdminAccount, v.AdminAccount)
+		case schemas.AdminAccountSummary_DefaultAdmin:
+			return d.ReadBool(schemas.AdminAccountSummary_DefaultAdmin, &v.DefaultAdmin)
+		case schemas.AdminAccountSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.AdminAccountSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OrganizationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Defines the resources that the Firewall Manager administrator can manage. For
 // more information about administrative scope, see [Managing Firewall Manager administrators]in the Firewall Manager
 // Developer Guide.
@@ -117,6 +213,54 @@ type AdminScope struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountScope != nil {
+		s.WriteStruct(schemas.AdminScope_AccountScope)
+		v.AccountScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationalUnitScope != nil {
+		s.WriteStruct(schemas.AdminScope_OrganizationalUnitScope)
+		v.OrganizationalUnitScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyTypeScope != nil {
+		s.WriteStruct(schemas.AdminScope_PolicyTypeScope)
+		v.PolicyTypeScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegionScope != nil {
+		s.WriteStruct(schemas.AdminScope_RegionScope)
+		v.RegionScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdminScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminScope_AccountScope:
+			v.AccountScope = &AccountScope{}
+			return v.AccountScope.Deserialize(d)
+		case schemas.AdminScope_OrganizationalUnitScope:
+			v.OrganizationalUnitScope = &OrganizationalUnitScope{}
+			return v.OrganizationalUnitScope.Deserialize(d)
+		case schemas.AdminScope_PolicyTypeScope:
+			v.PolicyTypeScope = &PolicyTypeScope{}
+			return v.PolicyTypeScope.Deserialize(d)
+		case schemas.AdminScope_RegionScope:
+			v.RegionScope = &RegionScope{}
+			return v.RegionScope.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An individual Firewall Manager application.
 type App struct {
 
@@ -139,6 +283,40 @@ type App struct {
 	Protocol *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *App) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.App)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *App) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppName != nil {
+		s.WriteString(schemas.App_AppName, *v.AppName)
+	}
+	if v.Port != nil {
+		s.WriteInt64(schemas.App_Port, *v.Port)
+	}
+	if v.Protocol != nil {
+		s.WriteString(schemas.App_Protocol, *v.Protocol)
+	}
+}
+func (v *App) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.App, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.App_AppName:
+			v.AppName = new(string)
+			return d.ReadString(schemas.App_AppName, v.AppName)
+		case schemas.App_Port:
+			v.Port = new(int64)
+			return d.ReadInt64(schemas.App_Port, v.Port)
+		case schemas.App_Protocol:
+			v.Protocol = new(string)
+			return d.ReadString(schemas.App_Protocol, v.Protocol)
+		}
+		return nil
+	})
 }
 
 // An Firewall Manager applications list.
@@ -174,6 +352,58 @@ type AppsListData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AppsListData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AppsListData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AppsListData) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppsList(s, schemas.AppsListData_AppsList, v.AppsList)
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.AppsListData_CreateTime, *v.CreateTime)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.AppsListData_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.ListId != nil {
+		s.WriteString(schemas.AppsListData_ListId, *v.ListId)
+	}
+	if v.ListName != nil {
+		s.WriteString(schemas.AppsListData_ListName, *v.ListName)
+	}
+	if v.ListUpdateToken != nil {
+		s.WriteString(schemas.AppsListData_ListUpdateToken, *v.ListUpdateToken)
+	}
+	serializePreviousAppsList(s, schemas.AppsListData_PreviousAppsList, v.PreviousAppsList)
+}
+func (v *AppsListData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AppsListData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AppsListData_AppsList:
+			return deserializeAppsList(d, schemas.AppsListData_AppsList, &v.AppsList)
+		case schemas.AppsListData_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.AppsListData_CreateTime, v.CreateTime)
+		case schemas.AppsListData_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.AppsListData_LastUpdateTime, v.LastUpdateTime)
+		case schemas.AppsListData_ListId:
+			v.ListId = new(string)
+			return d.ReadString(schemas.AppsListData_ListId, v.ListId)
+		case schemas.AppsListData_ListName:
+			v.ListName = new(string)
+			return d.ReadString(schemas.AppsListData_ListName, v.ListName)
+		case schemas.AppsListData_ListUpdateToken:
+			v.ListUpdateToken = new(string)
+			return d.ReadString(schemas.AppsListData_ListUpdateToken, v.ListUpdateToken)
+		case schemas.AppsListData_PreviousAppsList:
+			return deserializePreviousAppsList(d, schemas.AppsListData_PreviousAppsList, &v.PreviousAppsList)
+		}
+		return nil
+	})
+}
+
 // Details of the Firewall Manager applications list.
 type AppsListDataSummary struct {
 
@@ -192,6 +422,43 @@ type AppsListDataSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AppsListDataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AppsListDataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AppsListDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppsList(s, schemas.AppsListDataSummary_AppsList, v.AppsList)
+	if v.ListArn != nil {
+		s.WriteString(schemas.AppsListDataSummary_ListArn, *v.ListArn)
+	}
+	if v.ListId != nil {
+		s.WriteString(schemas.AppsListDataSummary_ListId, *v.ListId)
+	}
+	if v.ListName != nil {
+		s.WriteString(schemas.AppsListDataSummary_ListName, *v.ListName)
+	}
+}
+func (v *AppsListDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AppsListDataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AppsListDataSummary_AppsList:
+			return deserializeAppsList(d, schemas.AppsListDataSummary_AppsList, &v.AppsList)
+		case schemas.AppsListDataSummary_ListArn:
+			v.ListArn = new(string)
+			return d.ReadString(schemas.AppsListDataSummary_ListArn, v.ListArn)
+		case schemas.AppsListDataSummary_ListId:
+			v.ListId = new(string)
+			return d.ReadString(schemas.AppsListDataSummary_ListId, v.ListId)
+		case schemas.AppsListDataSummary_ListName:
+			v.ListName = new(string)
+			return d.ReadString(schemas.AppsListDataSummary_ListName, v.ListName)
+		}
+		return nil
+	})
+}
+
 // Violation detail for an EC2 instance resource.
 type AwsEc2InstanceViolation struct {
 
@@ -202,6 +469,31 @@ type AwsEc2InstanceViolation struct {
 	ViolationTarget *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsEc2InstanceViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsEc2InstanceViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsEc2InstanceViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsEc2NetworkInterfaceViolations(s, schemas.AwsEc2InstanceViolation_AwsEc2NetworkInterfaceViolations, v.AwsEc2NetworkInterfaceViolations)
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.AwsEc2InstanceViolation_ViolationTarget, *v.ViolationTarget)
+	}
+}
+func (v *AwsEc2InstanceViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsEc2InstanceViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsEc2InstanceViolation_AwsEc2NetworkInterfaceViolations:
+			return deserializeAwsEc2NetworkInterfaceViolations(d, schemas.AwsEc2InstanceViolation_AwsEc2NetworkInterfaceViolations, &v.AwsEc2NetworkInterfaceViolations)
+		case schemas.AwsEc2InstanceViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.AwsEc2InstanceViolation_ViolationTarget, v.ViolationTarget)
+		}
+		return nil
+	})
 }
 
 // Violation detail for network interfaces associated with an EC2 instance.
@@ -215,6 +507,31 @@ type AwsEc2NetworkInterfaceViolation struct {
 	ViolationTarget *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsEc2NetworkInterfaceViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsEc2NetworkInterfaceViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsEc2NetworkInterfaceViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceIdList(s, schemas.AwsEc2NetworkInterfaceViolation_ViolatingSecurityGroups, v.ViolatingSecurityGroups)
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.AwsEc2NetworkInterfaceViolation_ViolationTarget, *v.ViolationTarget)
+	}
+}
+func (v *AwsEc2NetworkInterfaceViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsEc2NetworkInterfaceViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsEc2NetworkInterfaceViolation_ViolatingSecurityGroups:
+			return deserializeResourceIdList(d, schemas.AwsEc2NetworkInterfaceViolation_ViolatingSecurityGroups, &v.ViolatingSecurityGroups)
+		case schemas.AwsEc2NetworkInterfaceViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.AwsEc2NetworkInterfaceViolation_ViolationTarget, v.ViolationTarget)
+		}
+		return nil
+	})
 }
 
 // Violation detail for the rule violation in a security group when compared to
@@ -235,6 +552,40 @@ type AwsVPCSecurityGroupViolation struct {
 	ViolationTargetDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsVPCSecurityGroupViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsVPCSecurityGroupViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsVPCSecurityGroupViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePartialMatches(s, schemas.AwsVPCSecurityGroupViolation_PartialMatches, v.PartialMatches)
+	serializeSecurityGroupRemediationActions(s, schemas.AwsVPCSecurityGroupViolation_PossibleSecurityGroupRemediationActions, v.PossibleSecurityGroupRemediationActions)
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.AwsVPCSecurityGroupViolation_ViolationTarget, *v.ViolationTarget)
+	}
+	if v.ViolationTargetDescription != nil {
+		s.WriteString(schemas.AwsVPCSecurityGroupViolation_ViolationTargetDescription, *v.ViolationTargetDescription)
+	}
+}
+func (v *AwsVPCSecurityGroupViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsVPCSecurityGroupViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsVPCSecurityGroupViolation_PartialMatches:
+			return deserializePartialMatches(d, schemas.AwsVPCSecurityGroupViolation_PartialMatches, &v.PartialMatches)
+		case schemas.AwsVPCSecurityGroupViolation_PossibleSecurityGroupRemediationActions:
+			return deserializeSecurityGroupRemediationActions(d, schemas.AwsVPCSecurityGroupViolation_PossibleSecurityGroupRemediationActions, &v.PossibleSecurityGroupRemediationActions)
+		case schemas.AwsVPCSecurityGroupViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.AwsVPCSecurityGroupViolation_ViolationTarget, v.ViolationTarget)
+		case schemas.AwsVPCSecurityGroupViolation_ViolationTargetDescription:
+			v.ViolationTargetDescription = new(string)
+			return d.ReadString(schemas.AwsVPCSecurityGroupViolation_ViolationTargetDescription, v.ViolationTargetDescription)
+		}
+		return nil
+	})
 }
 
 // Details of the resource that is not protected by the policy.
@@ -259,6 +610,47 @@ type ComplianceViolator struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComplianceViolator) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComplianceViolator)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComplianceViolator) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceViolatorMetadata(s, schemas.ComplianceViolator_Metadata, v.Metadata)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ComplianceViolator_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ComplianceViolator_ResourceType, *v.ResourceType)
+	}
+	if v.ViolationReason != "" {
+		s.WriteString(schemas.ComplianceViolator_ViolationReason, string(v.ViolationReason))
+	}
+}
+func (v *ComplianceViolator) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComplianceViolator, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComplianceViolator_Metadata:
+			return deserializeComplianceViolatorMetadata(d, schemas.ComplianceViolator_Metadata, &v.Metadata)
+		case schemas.ComplianceViolator_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ComplianceViolator_ResourceId, v.ResourceId)
+		case schemas.ComplianceViolator_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ComplianceViolator_ResourceType, v.ResourceType)
+		case schemas.ComplianceViolator_ViolationReason:
+			var ev string
+			if err := d.ReadString(schemas.ComplianceViolator_ViolationReason, &ev); err != nil {
+				return err
+			}
+			v.ViolationReason = ViolationReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the CreateNetworkAcl action in Amazon EC2. This is a
 // remediation option in RemediationAction .
 type CreateNetworkAclAction struct {
@@ -275,6 +667,41 @@ type CreateNetworkAclAction struct {
 	Vpc *ActionTarget
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateNetworkAclAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkAclAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkAclAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateNetworkAclAction_Description, *v.Description)
+	}
+	if v.FMSCanRemediate != false {
+		s.WriteBool(schemas.CreateNetworkAclAction_FMSCanRemediate, v.FMSCanRemediate)
+	}
+	if v.Vpc != nil {
+		s.WriteStruct(schemas.CreateNetworkAclAction_Vpc)
+		v.Vpc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateNetworkAclAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNetworkAclAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNetworkAclAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateNetworkAclAction_Description, v.Description)
+		case schemas.CreateNetworkAclAction_FMSCanRemediate:
+			return d.ReadBool(schemas.CreateNetworkAclAction_FMSCanRemediate, &v.FMSCanRemediate)
+		case schemas.CreateNetworkAclAction_Vpc:
+			v.Vpc = &ActionTarget{}
+			return v.Vpc.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about the CreateNetworkAclEntries action in Amazon EC2. This is a
@@ -298,6 +725,44 @@ type CreateNetworkAclEntriesAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNetworkAclEntriesAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNetworkAclEntriesAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNetworkAclEntriesAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateNetworkAclEntriesAction_Description, *v.Description)
+	}
+	if v.FMSCanRemediate != false {
+		s.WriteBool(schemas.CreateNetworkAclEntriesAction_FMSCanRemediate, v.FMSCanRemediate)
+	}
+	serializeEntriesDescription(s, schemas.CreateNetworkAclEntriesAction_NetworkAclEntriesToBeCreated, v.NetworkAclEntriesToBeCreated)
+	if v.NetworkAclId != nil {
+		s.WriteStruct(schemas.CreateNetworkAclEntriesAction_NetworkAclId)
+		v.NetworkAclId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateNetworkAclEntriesAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNetworkAclEntriesAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNetworkAclEntriesAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateNetworkAclEntriesAction_Description, v.Description)
+		case schemas.CreateNetworkAclEntriesAction_FMSCanRemediate:
+			return d.ReadBool(schemas.CreateNetworkAclEntriesAction_FMSCanRemediate, &v.FMSCanRemediate)
+		case schemas.CreateNetworkAclEntriesAction_NetworkAclEntriesToBeCreated:
+			return deserializeEntriesDescription(d, schemas.CreateNetworkAclEntriesAction_NetworkAclEntriesToBeCreated, &v.NetworkAclEntriesToBeCreated)
+		case schemas.CreateNetworkAclEntriesAction_NetworkAclId:
+			v.NetworkAclId = &ActionTarget{}
+			return v.NetworkAclId.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about the DeleteNetworkAclEntries action in Amazon EC2. This is a
 // remediation option in RemediationAction .
 type DeleteNetworkAclEntriesAction struct {
@@ -319,6 +784,44 @@ type DeleteNetworkAclEntriesAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteNetworkAclEntriesAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteNetworkAclEntriesAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteNetworkAclEntriesAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.DeleteNetworkAclEntriesAction_Description, *v.Description)
+	}
+	if v.FMSCanRemediate != false {
+		s.WriteBool(schemas.DeleteNetworkAclEntriesAction_FMSCanRemediate, v.FMSCanRemediate)
+	}
+	serializeEntriesDescription(s, schemas.DeleteNetworkAclEntriesAction_NetworkAclEntriesToBeDeleted, v.NetworkAclEntriesToBeDeleted)
+	if v.NetworkAclId != nil {
+		s.WriteStruct(schemas.DeleteNetworkAclEntriesAction_NetworkAclId)
+		v.NetworkAclId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteNetworkAclEntriesAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteNetworkAclEntriesAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteNetworkAclEntriesAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DeleteNetworkAclEntriesAction_Description, v.Description)
+		case schemas.DeleteNetworkAclEntriesAction_FMSCanRemediate:
+			return d.ReadBool(schemas.DeleteNetworkAclEntriesAction_FMSCanRemediate, &v.FMSCanRemediate)
+		case schemas.DeleteNetworkAclEntriesAction_NetworkAclEntriesToBeDeleted:
+			return deserializeEntriesDescription(d, schemas.DeleteNetworkAclEntriesAction_NetworkAclEntriesToBeDeleted, &v.NetworkAclEntriesToBeDeleted)
+		case schemas.DeleteNetworkAclEntriesAction_NetworkAclId:
+			v.NetworkAclId = &ActionTarget{}
+			return v.NetworkAclId.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A resource in the organization that's available to be associated with a
 // Firewall Manager resource set.
 type DiscoveredResource struct {
@@ -338,6 +841,46 @@ type DiscoveredResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DiscoveredResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DiscoveredResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DiscoveredResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DiscoveredResource_AccountId, *v.AccountId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DiscoveredResource_Name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.DiscoveredResource_Type, *v.Type)
+	}
+	if v.URI != nil {
+		s.WriteString(schemas.DiscoveredResource_URI, *v.URI)
+	}
+}
+func (v *DiscoveredResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DiscoveredResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DiscoveredResource_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.DiscoveredResource_AccountId, v.AccountId)
+		case schemas.DiscoveredResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DiscoveredResource_Name, v.Name)
+		case schemas.DiscoveredResource_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.DiscoveredResource_Type, v.Type)
+		case schemas.DiscoveredResource_URI:
+			v.URI = new(string)
+			return d.ReadString(schemas.DiscoveredResource_URI, v.URI)
+		}
+		return nil
+	})
+}
+
 // A DNS Firewall rule group that Firewall Manager tried to associate with a VPC
 // is already associated with the VPC and can't be associated again.
 type DnsDuplicateRuleGroupViolation struct {
@@ -349,6 +892,34 @@ type DnsDuplicateRuleGroupViolation struct {
 	ViolationTargetDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DnsDuplicateRuleGroupViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsDuplicateRuleGroupViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsDuplicateRuleGroupViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.DnsDuplicateRuleGroupViolation_ViolationTarget, *v.ViolationTarget)
+	}
+	if v.ViolationTargetDescription != nil {
+		s.WriteString(schemas.DnsDuplicateRuleGroupViolation_ViolationTargetDescription, *v.ViolationTargetDescription)
+	}
+}
+func (v *DnsDuplicateRuleGroupViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsDuplicateRuleGroupViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsDuplicateRuleGroupViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.DnsDuplicateRuleGroupViolation_ViolationTarget, v.ViolationTarget)
+		case schemas.DnsDuplicateRuleGroupViolation_ViolationTargetDescription:
+			v.ViolationTargetDescription = new(string)
+			return d.ReadString(schemas.DnsDuplicateRuleGroupViolation_ViolationTargetDescription, v.ViolationTargetDescription)
+		}
+		return nil
+	})
 }
 
 // The VPC that Firewall Manager was applying a DNS Fireall policy to reached the
@@ -366,6 +937,39 @@ type DnsRuleGroupLimitExceededViolation struct {
 	ViolationTargetDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DnsRuleGroupLimitExceededViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsRuleGroupLimitExceededViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsRuleGroupLimitExceededViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NumberOfRuleGroupsAlreadyAssociated != 0 {
+		s.WriteInt32(schemas.DnsRuleGroupLimitExceededViolation_NumberOfRuleGroupsAlreadyAssociated, v.NumberOfRuleGroupsAlreadyAssociated)
+	}
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.DnsRuleGroupLimitExceededViolation_ViolationTarget, *v.ViolationTarget)
+	}
+	if v.ViolationTargetDescription != nil {
+		s.WriteString(schemas.DnsRuleGroupLimitExceededViolation_ViolationTargetDescription, *v.ViolationTargetDescription)
+	}
+}
+func (v *DnsRuleGroupLimitExceededViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsRuleGroupLimitExceededViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsRuleGroupLimitExceededViolation_NumberOfRuleGroupsAlreadyAssociated:
+			return d.ReadInt32(schemas.DnsRuleGroupLimitExceededViolation_NumberOfRuleGroupsAlreadyAssociated, &v.NumberOfRuleGroupsAlreadyAssociated)
+		case schemas.DnsRuleGroupLimitExceededViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.DnsRuleGroupLimitExceededViolation_ViolationTarget, v.ViolationTarget)
+		case schemas.DnsRuleGroupLimitExceededViolation_ViolationTargetDescription:
+			v.ViolationTargetDescription = new(string)
+			return d.ReadString(schemas.DnsRuleGroupLimitExceededViolation_ViolationTargetDescription, v.ViolationTargetDescription)
+		}
+		return nil
+	})
 }
 
 // A rule group that Firewall Manager tried to associate with a VPC has the same
@@ -395,6 +999,48 @@ type DnsRuleGroupPriorityConflictViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DnsRuleGroupPriorityConflictViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DnsRuleGroupPriorityConflictViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DnsRuleGroupPriorityConflictViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConflictingPolicyId != nil {
+		s.WriteString(schemas.DnsRuleGroupPriorityConflictViolation_ConflictingPolicyId, *v.ConflictingPolicyId)
+	}
+	if v.ConflictingPriority != 0 {
+		s.WriteInt32(schemas.DnsRuleGroupPriorityConflictViolation_ConflictingPriority, v.ConflictingPriority)
+	}
+	serializeDnsRuleGroupPriorities(s, schemas.DnsRuleGroupPriorityConflictViolation_UnavailablePriorities, v.UnavailablePriorities)
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.DnsRuleGroupPriorityConflictViolation_ViolationTarget, *v.ViolationTarget)
+	}
+	if v.ViolationTargetDescription != nil {
+		s.WriteString(schemas.DnsRuleGroupPriorityConflictViolation_ViolationTargetDescription, *v.ViolationTargetDescription)
+	}
+}
+func (v *DnsRuleGroupPriorityConflictViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DnsRuleGroupPriorityConflictViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DnsRuleGroupPriorityConflictViolation_ConflictingPolicyId:
+			v.ConflictingPolicyId = new(string)
+			return d.ReadString(schemas.DnsRuleGroupPriorityConflictViolation_ConflictingPolicyId, v.ConflictingPolicyId)
+		case schemas.DnsRuleGroupPriorityConflictViolation_ConflictingPriority:
+			return d.ReadInt32(schemas.DnsRuleGroupPriorityConflictViolation_ConflictingPriority, &v.ConflictingPriority)
+		case schemas.DnsRuleGroupPriorityConflictViolation_UnavailablePriorities:
+			return deserializeDnsRuleGroupPriorities(d, schemas.DnsRuleGroupPriorityConflictViolation_UnavailablePriorities, &v.UnavailablePriorities)
+		case schemas.DnsRuleGroupPriorityConflictViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.DnsRuleGroupPriorityConflictViolation_ViolationTarget, v.ViolationTarget)
+		case schemas.DnsRuleGroupPriorityConflictViolation_ViolationTargetDescription:
+			v.ViolationTargetDescription = new(string)
+			return d.ReadString(schemas.DnsRuleGroupPriorityConflictViolation_ViolationTargetDescription, v.ViolationTargetDescription)
+		}
+		return nil
+	})
+}
+
 // The action of associating an EC2 resource, such as a subnet or internet
 // gateway, with a route table.
 type EC2AssociateRouteTableAction struct {
@@ -419,6 +1065,52 @@ type EC2AssociateRouteTableAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EC2AssociateRouteTableAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2AssociateRouteTableAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2AssociateRouteTableAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.EC2AssociateRouteTableAction_Description, *v.Description)
+	}
+	if v.GatewayId != nil {
+		s.WriteStruct(schemas.EC2AssociateRouteTableAction_GatewayId)
+		v.GatewayId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RouteTableId != nil {
+		s.WriteStruct(schemas.EC2AssociateRouteTableAction_RouteTableId)
+		v.RouteTableId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubnetId != nil {
+		s.WriteStruct(schemas.EC2AssociateRouteTableAction_SubnetId)
+		v.SubnetId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EC2AssociateRouteTableAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2AssociateRouteTableAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2AssociateRouteTableAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.EC2AssociateRouteTableAction_Description, v.Description)
+		case schemas.EC2AssociateRouteTableAction_GatewayId:
+			v.GatewayId = &ActionTarget{}
+			return v.GatewayId.Deserialize(d)
+		case schemas.EC2AssociateRouteTableAction_RouteTableId:
+			v.RouteTableId = &ActionTarget{}
+			return v.RouteTableId.Deserialize(d)
+		case schemas.EC2AssociateRouteTableAction_SubnetId:
+			v.SubnetId = &ActionTarget{}
+			return v.SubnetId.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An action that copies the EC2 route table for use in remediation.
 type EC2CopyRouteTableAction struct {
 
@@ -439,6 +1131,44 @@ type EC2CopyRouteTableAction struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EC2CopyRouteTableAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2CopyRouteTableAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2CopyRouteTableAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.EC2CopyRouteTableAction_Description, *v.Description)
+	}
+	if v.RouteTableId != nil {
+		s.WriteStruct(schemas.EC2CopyRouteTableAction_RouteTableId)
+		v.RouteTableId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcId != nil {
+		s.WriteStruct(schemas.EC2CopyRouteTableAction_VpcId)
+		v.VpcId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EC2CopyRouteTableAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2CopyRouteTableAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2CopyRouteTableAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.EC2CopyRouteTableAction_Description, v.Description)
+		case schemas.EC2CopyRouteTableAction_RouteTableId:
+			v.RouteTableId = &ActionTarget{}
+			return v.RouteTableId.Deserialize(d)
+		case schemas.EC2CopyRouteTableAction_VpcId:
+			v.VpcId = &ActionTarget{}
+			return v.VpcId.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about the CreateRoute action in Amazon EC2.
@@ -472,6 +1202,70 @@ type EC2CreateRouteAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EC2CreateRouteAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2CreateRouteAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2CreateRouteAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.EC2CreateRouteAction_Description, *v.Description)
+	}
+	if v.DestinationCidrBlock != nil {
+		s.WriteString(schemas.EC2CreateRouteAction_DestinationCidrBlock, *v.DestinationCidrBlock)
+	}
+	if v.DestinationIpv6CidrBlock != nil {
+		s.WriteString(schemas.EC2CreateRouteAction_DestinationIpv6CidrBlock, *v.DestinationIpv6CidrBlock)
+	}
+	if v.DestinationPrefixListId != nil {
+		s.WriteString(schemas.EC2CreateRouteAction_DestinationPrefixListId, *v.DestinationPrefixListId)
+	}
+	if v.GatewayId != nil {
+		s.WriteStruct(schemas.EC2CreateRouteAction_GatewayId)
+		v.GatewayId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RouteTableId != nil {
+		s.WriteStruct(schemas.EC2CreateRouteAction_RouteTableId)
+		v.RouteTableId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteStruct(schemas.EC2CreateRouteAction_VpcEndpointId)
+		v.VpcEndpointId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EC2CreateRouteAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2CreateRouteAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2CreateRouteAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.EC2CreateRouteAction_Description, v.Description)
+		case schemas.EC2CreateRouteAction_DestinationCidrBlock:
+			v.DestinationCidrBlock = new(string)
+			return d.ReadString(schemas.EC2CreateRouteAction_DestinationCidrBlock, v.DestinationCidrBlock)
+		case schemas.EC2CreateRouteAction_DestinationIpv6CidrBlock:
+			v.DestinationIpv6CidrBlock = new(string)
+			return d.ReadString(schemas.EC2CreateRouteAction_DestinationIpv6CidrBlock, v.DestinationIpv6CidrBlock)
+		case schemas.EC2CreateRouteAction_DestinationPrefixListId:
+			v.DestinationPrefixListId = new(string)
+			return d.ReadString(schemas.EC2CreateRouteAction_DestinationPrefixListId, v.DestinationPrefixListId)
+		case schemas.EC2CreateRouteAction_GatewayId:
+			v.GatewayId = &ActionTarget{}
+			return v.GatewayId.Deserialize(d)
+		case schemas.EC2CreateRouteAction_RouteTableId:
+			v.RouteTableId = &ActionTarget{}
+			return v.RouteTableId.Deserialize(d)
+		case schemas.EC2CreateRouteAction_VpcEndpointId:
+			v.VpcEndpointId = &ActionTarget{}
+			return v.VpcEndpointId.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about the CreateRouteTable action in Amazon EC2.
 type EC2CreateRouteTableAction struct {
 
@@ -484,6 +1278,36 @@ type EC2CreateRouteTableAction struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EC2CreateRouteTableAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2CreateRouteTableAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2CreateRouteTableAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.EC2CreateRouteTableAction_Description, *v.Description)
+	}
+	if v.VpcId != nil {
+		s.WriteStruct(schemas.EC2CreateRouteTableAction_VpcId)
+		v.VpcId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EC2CreateRouteTableAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2CreateRouteTableAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2CreateRouteTableAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.EC2CreateRouteTableAction_Description, v.Description)
+		case schemas.EC2CreateRouteTableAction_VpcId:
+			v.VpcId = &ActionTarget{}
+			return v.VpcId.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about the DeleteRoute action in Amazon EC2.
@@ -509,6 +1333,54 @@ type EC2DeleteRouteAction struct {
 	DestinationPrefixListId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EC2DeleteRouteAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2DeleteRouteAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2DeleteRouteAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.EC2DeleteRouteAction_Description, *v.Description)
+	}
+	if v.DestinationCidrBlock != nil {
+		s.WriteString(schemas.EC2DeleteRouteAction_DestinationCidrBlock, *v.DestinationCidrBlock)
+	}
+	if v.DestinationIpv6CidrBlock != nil {
+		s.WriteString(schemas.EC2DeleteRouteAction_DestinationIpv6CidrBlock, *v.DestinationIpv6CidrBlock)
+	}
+	if v.DestinationPrefixListId != nil {
+		s.WriteString(schemas.EC2DeleteRouteAction_DestinationPrefixListId, *v.DestinationPrefixListId)
+	}
+	if v.RouteTableId != nil {
+		s.WriteStruct(schemas.EC2DeleteRouteAction_RouteTableId)
+		v.RouteTableId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EC2DeleteRouteAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2DeleteRouteAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2DeleteRouteAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.EC2DeleteRouteAction_Description, v.Description)
+		case schemas.EC2DeleteRouteAction_DestinationCidrBlock:
+			v.DestinationCidrBlock = new(string)
+			return d.ReadString(schemas.EC2DeleteRouteAction_DestinationCidrBlock, v.DestinationCidrBlock)
+		case schemas.EC2DeleteRouteAction_DestinationIpv6CidrBlock:
+			v.DestinationIpv6CidrBlock = new(string)
+			return d.ReadString(schemas.EC2DeleteRouteAction_DestinationIpv6CidrBlock, v.DestinationIpv6CidrBlock)
+		case schemas.EC2DeleteRouteAction_DestinationPrefixListId:
+			v.DestinationPrefixListId = new(string)
+			return d.ReadString(schemas.EC2DeleteRouteAction_DestinationPrefixListId, v.DestinationPrefixListId)
+		case schemas.EC2DeleteRouteAction_RouteTableId:
+			v.RouteTableId = &ActionTarget{}
+			return v.RouteTableId.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about the ReplaceRoute action in Amazon EC2.
@@ -541,6 +1413,62 @@ type EC2ReplaceRouteAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EC2ReplaceRouteAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2ReplaceRouteAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2ReplaceRouteAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.EC2ReplaceRouteAction_Description, *v.Description)
+	}
+	if v.DestinationCidrBlock != nil {
+		s.WriteString(schemas.EC2ReplaceRouteAction_DestinationCidrBlock, *v.DestinationCidrBlock)
+	}
+	if v.DestinationIpv6CidrBlock != nil {
+		s.WriteString(schemas.EC2ReplaceRouteAction_DestinationIpv6CidrBlock, *v.DestinationIpv6CidrBlock)
+	}
+	if v.DestinationPrefixListId != nil {
+		s.WriteString(schemas.EC2ReplaceRouteAction_DestinationPrefixListId, *v.DestinationPrefixListId)
+	}
+	if v.GatewayId != nil {
+		s.WriteStruct(schemas.EC2ReplaceRouteAction_GatewayId)
+		v.GatewayId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RouteTableId != nil {
+		s.WriteStruct(schemas.EC2ReplaceRouteAction_RouteTableId)
+		v.RouteTableId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EC2ReplaceRouteAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2ReplaceRouteAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2ReplaceRouteAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.EC2ReplaceRouteAction_Description, v.Description)
+		case schemas.EC2ReplaceRouteAction_DestinationCidrBlock:
+			v.DestinationCidrBlock = new(string)
+			return d.ReadString(schemas.EC2ReplaceRouteAction_DestinationCidrBlock, v.DestinationCidrBlock)
+		case schemas.EC2ReplaceRouteAction_DestinationIpv6CidrBlock:
+			v.DestinationIpv6CidrBlock = new(string)
+			return d.ReadString(schemas.EC2ReplaceRouteAction_DestinationIpv6CidrBlock, v.DestinationIpv6CidrBlock)
+		case schemas.EC2ReplaceRouteAction_DestinationPrefixListId:
+			v.DestinationPrefixListId = new(string)
+			return d.ReadString(schemas.EC2ReplaceRouteAction_DestinationPrefixListId, v.DestinationPrefixListId)
+		case schemas.EC2ReplaceRouteAction_GatewayId:
+			v.GatewayId = &ActionTarget{}
+			return v.GatewayId.Deserialize(d)
+		case schemas.EC2ReplaceRouteAction_RouteTableId:
+			v.RouteTableId = &ActionTarget{}
+			return v.RouteTableId.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about the ReplaceRouteTableAssociation action in Amazon EC2.
 type EC2ReplaceRouteTableAssociationAction struct {
 
@@ -558,6 +1486,44 @@ type EC2ReplaceRouteTableAssociationAction struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EC2ReplaceRouteTableAssociationAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2ReplaceRouteTableAssociationAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2ReplaceRouteTableAssociationAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteStruct(schemas.EC2ReplaceRouteTableAssociationAction_AssociationId)
+		v.AssociationId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.EC2ReplaceRouteTableAssociationAction_Description, *v.Description)
+	}
+	if v.RouteTableId != nil {
+		s.WriteStruct(schemas.EC2ReplaceRouteTableAssociationAction_RouteTableId)
+		v.RouteTableId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EC2ReplaceRouteTableAssociationAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2ReplaceRouteTableAssociationAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2ReplaceRouteTableAssociationAction_AssociationId:
+			v.AssociationId = &ActionTarget{}
+			return v.AssociationId.Deserialize(d)
+		case schemas.EC2ReplaceRouteTableAssociationAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.EC2ReplaceRouteTableAssociationAction_Description, v.Description)
+		case schemas.EC2ReplaceRouteTableAssociationAction_RouteTableId:
+			v.RouteTableId = &ActionTarget{}
+			return v.RouteTableId.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes a single rule in a network ACL.
@@ -592,6 +1558,45 @@ type EntryDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntryDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntryDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntryDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntryDetail != nil {
+		s.WriteStruct(schemas.EntryDescription_EntryDetail)
+		v.EntryDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EntryRuleNumber != 0 {
+		s.WriteInt32(schemas.EntryDescription_EntryRuleNumber, v.EntryRuleNumber)
+	}
+	if v.EntryType != "" {
+		s.WriteString(schemas.EntryDescription_EntryType, string(v.EntryType))
+	}
+}
+func (v *EntryDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntryDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntryDescription_EntryDetail:
+			v.EntryDetail = &NetworkAclEntry{}
+			return v.EntryDetail.Deserialize(d)
+		case schemas.EntryDescription_EntryRuleNumber:
+			return d.ReadInt32(schemas.EntryDescription_EntryRuleNumber, &v.EntryRuleNumber)
+		case schemas.EntryDescription_EntryType:
+			var ev string
+			if err := d.ReadString(schemas.EntryDescription_EntryType, &ev); err != nil {
+				return err
+			}
+			v.EntryType = EntryType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Detailed information about an entry violation in a network ACL. The violation
 // is against the network ACL specification inside the Firewall Manager network ACL
 // policy. This data object is part of InvalidNetworkAclEntriesViolation .
@@ -622,6 +1627,56 @@ type EntryViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EntryViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntryViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntryViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualEvaluationOrder != nil {
+		s.WriteString(schemas.EntryViolation_ActualEvaluationOrder, *v.ActualEvaluationOrder)
+	}
+	serializeEntriesWithConflicts(s, schemas.EntryViolation_EntriesWithConflicts, v.EntriesWithConflicts)
+	if v.EntryAtExpectedEvaluationOrder != nil {
+		s.WriteStruct(schemas.EntryViolation_EntryAtExpectedEvaluationOrder)
+		v.EntryAtExpectedEvaluationOrder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEntryViolationReasons(s, schemas.EntryViolation_EntryViolationReasons, v.EntryViolationReasons)
+	if v.ExpectedEntry != nil {
+		s.WriteStruct(schemas.EntryViolation_ExpectedEntry)
+		v.ExpectedEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpectedEvaluationOrder != nil {
+		s.WriteString(schemas.EntryViolation_ExpectedEvaluationOrder, *v.ExpectedEvaluationOrder)
+	}
+}
+func (v *EntryViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntryViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntryViolation_ActualEvaluationOrder:
+			v.ActualEvaluationOrder = new(string)
+			return d.ReadString(schemas.EntryViolation_ActualEvaluationOrder, v.ActualEvaluationOrder)
+		case schemas.EntryViolation_EntriesWithConflicts:
+			return deserializeEntriesWithConflicts(d, schemas.EntryViolation_EntriesWithConflicts, &v.EntriesWithConflicts)
+		case schemas.EntryViolation_EntryAtExpectedEvaluationOrder:
+			v.EntryAtExpectedEvaluationOrder = &EntryDescription{}
+			return v.EntryAtExpectedEvaluationOrder.Deserialize(d)
+		case schemas.EntryViolation_EntryViolationReasons:
+			return deserializeEntryViolationReasons(d, schemas.EntryViolation_EntryViolationReasons, &v.EntryViolationReasons)
+		case schemas.EntryViolation_ExpectedEntry:
+			v.ExpectedEntry = &EntryDescription{}
+			return v.ExpectedEntry.Deserialize(d)
+		case schemas.EntryViolation_ExpectedEvaluationOrder:
+			v.ExpectedEvaluationOrder = new(string)
+			return d.ReadString(schemas.EntryViolation_ExpectedEvaluationOrder, v.ExpectedEvaluationOrder)
+		}
+		return nil
+	})
+}
+
 // Describes the compliance status for the account. An account is considered
 // noncompliant if it includes resources that are not protected by the specified
 // policy or that don't comply with the policy.
@@ -643,6 +1698,42 @@ type EvaluationResult struct {
 	ViolatorCount int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *EvaluationResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluationResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComplianceStatus != "" {
+		s.WriteString(schemas.EvaluationResult_ComplianceStatus, string(v.ComplianceStatus))
+	}
+	if v.EvaluationLimitExceeded != false {
+		s.WriteBool(schemas.EvaluationResult_EvaluationLimitExceeded, v.EvaluationLimitExceeded)
+	}
+	if v.ViolatorCount != 0 {
+		s.WriteInt64(schemas.EvaluationResult_ViolatorCount, v.ViolatorCount)
+	}
+}
+func (v *EvaluationResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluationResult_ComplianceStatus:
+			var ev string
+			if err := d.ReadString(schemas.EvaluationResult_ComplianceStatus, &ev); err != nil {
+				return err
+			}
+			v.ComplianceStatus = PolicyComplianceStatusType(ev)
+			return nil
+		case schemas.EvaluationResult_EvaluationLimitExceeded:
+			return d.ReadBool(schemas.EvaluationResult_EvaluationLimitExceeded, &v.EvaluationLimitExceeded)
+		case schemas.EvaluationResult_ViolatorCount:
+			return d.ReadInt64(schemas.EvaluationResult_ViolatorCount, &v.ViolatorCount)
+		}
+		return nil
+	})
 }
 
 // Information about the expected route in the route table.
@@ -669,6 +1760,52 @@ type ExpectedRoute struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExpectedRoute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpectedRoute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpectedRoute) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLengthBoundedStringList(s, schemas.ExpectedRoute_AllowedTargets, v.AllowedTargets)
+	serializeResourceIdList(s, schemas.ExpectedRoute_ContributingSubnets, v.ContributingSubnets)
+	if v.IpV4Cidr != nil {
+		s.WriteString(schemas.ExpectedRoute_IpV4Cidr, *v.IpV4Cidr)
+	}
+	if v.IpV6Cidr != nil {
+		s.WriteString(schemas.ExpectedRoute_IpV6Cidr, *v.IpV6Cidr)
+	}
+	if v.PrefixListId != nil {
+		s.WriteString(schemas.ExpectedRoute_PrefixListId, *v.PrefixListId)
+	}
+	if v.RouteTableId != nil {
+		s.WriteString(schemas.ExpectedRoute_RouteTableId, *v.RouteTableId)
+	}
+}
+func (v *ExpectedRoute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpectedRoute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpectedRoute_AllowedTargets:
+			return deserializeLengthBoundedStringList(d, schemas.ExpectedRoute_AllowedTargets, &v.AllowedTargets)
+		case schemas.ExpectedRoute_ContributingSubnets:
+			return deserializeResourceIdList(d, schemas.ExpectedRoute_ContributingSubnets, &v.ContributingSubnets)
+		case schemas.ExpectedRoute_IpV4Cidr:
+			v.IpV4Cidr = new(string)
+			return d.ReadString(schemas.ExpectedRoute_IpV4Cidr, v.IpV4Cidr)
+		case schemas.ExpectedRoute_IpV6Cidr:
+			v.IpV6Cidr = new(string)
+			return d.ReadString(schemas.ExpectedRoute_IpV6Cidr, v.IpV6Cidr)
+		case schemas.ExpectedRoute_PrefixListId:
+			v.PrefixListId = new(string)
+			return d.ReadString(schemas.ExpectedRoute_PrefixListId, v.PrefixListId)
+		case schemas.ExpectedRoute_RouteTableId:
+			v.RouteTableId = new(string)
+			return d.ReadString(schemas.ExpectedRoute_RouteTableId, v.RouteTableId)
+		}
+		return nil
+	})
+}
+
 // Details of a resource that failed when trying to update it's association to a
 // resource set.
 type FailedItem struct {
@@ -680,6 +1817,38 @@ type FailedItem struct {
 	URI *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailedItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != "" {
+		s.WriteString(schemas.FailedItem_Reason, string(v.Reason))
+	}
+	if v.URI != nil {
+		s.WriteString(schemas.FailedItem_URI, *v.URI)
+	}
+}
+func (v *FailedItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedItem_Reason:
+			var ev string
+			if err := d.ReadString(schemas.FailedItem_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = FailedItemReason(ev)
+			return nil
+		case schemas.FailedItem_URI:
+			v.URI = new(string)
+			return d.ReadString(schemas.FailedItem_URI, v.URI)
+		}
+		return nil
+	})
 }
 
 // Contains details about the firewall subnet that violates the policy scope.
@@ -703,6 +1872,52 @@ type FirewallSubnetIsOutOfScopeViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallSubnetIsOutOfScopeViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallSubnetIsOutOfScopeViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallSubnetIsOutOfScopeViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallSubnetId != nil {
+		s.WriteString(schemas.FirewallSubnetIsOutOfScopeViolation_FirewallSubnetId, *v.FirewallSubnetId)
+	}
+	if v.SubnetAvailabilityZone != nil {
+		s.WriteString(schemas.FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZone, *v.SubnetAvailabilityZone)
+	}
+	if v.SubnetAvailabilityZoneId != nil {
+		s.WriteString(schemas.FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZoneId, *v.SubnetAvailabilityZoneId)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.FirewallSubnetIsOutOfScopeViolation_VpcEndpointId, *v.VpcEndpointId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.FirewallSubnetIsOutOfScopeViolation_VpcId, *v.VpcId)
+	}
+}
+func (v *FirewallSubnetIsOutOfScopeViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallSubnetIsOutOfScopeViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallSubnetIsOutOfScopeViolation_FirewallSubnetId:
+			v.FirewallSubnetId = new(string)
+			return d.ReadString(schemas.FirewallSubnetIsOutOfScopeViolation_FirewallSubnetId, v.FirewallSubnetId)
+		case schemas.FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZone:
+			v.SubnetAvailabilityZone = new(string)
+			return d.ReadString(schemas.FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZone, v.SubnetAvailabilityZone)
+		case schemas.FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZoneId:
+			v.SubnetAvailabilityZoneId = new(string)
+			return d.ReadString(schemas.FirewallSubnetIsOutOfScopeViolation_SubnetAvailabilityZoneId, v.SubnetAvailabilityZoneId)
+		case schemas.FirewallSubnetIsOutOfScopeViolation_VpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.FirewallSubnetIsOutOfScopeViolation_VpcEndpointId, v.VpcEndpointId)
+		case schemas.FirewallSubnetIsOutOfScopeViolation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.FirewallSubnetIsOutOfScopeViolation_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // The violation details for a firewall subnet's VPC endpoint that's deleted or
 // missing.
 type FirewallSubnetMissingVPCEndpointViolation struct {
@@ -722,6 +1937,46 @@ type FirewallSubnetMissingVPCEndpointViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FirewallSubnetMissingVPCEndpointViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FirewallSubnetMissingVPCEndpointViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FirewallSubnetMissingVPCEndpointViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallSubnetId != nil {
+		s.WriteString(schemas.FirewallSubnetMissingVPCEndpointViolation_FirewallSubnetId, *v.FirewallSubnetId)
+	}
+	if v.SubnetAvailabilityZone != nil {
+		s.WriteString(schemas.FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZone, *v.SubnetAvailabilityZone)
+	}
+	if v.SubnetAvailabilityZoneId != nil {
+		s.WriteString(schemas.FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZoneId, *v.SubnetAvailabilityZoneId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.FirewallSubnetMissingVPCEndpointViolation_VpcId, *v.VpcId)
+	}
+}
+func (v *FirewallSubnetMissingVPCEndpointViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FirewallSubnetMissingVPCEndpointViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FirewallSubnetMissingVPCEndpointViolation_FirewallSubnetId:
+			v.FirewallSubnetId = new(string)
+			return d.ReadString(schemas.FirewallSubnetMissingVPCEndpointViolation_FirewallSubnetId, v.FirewallSubnetId)
+		case schemas.FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZone:
+			v.SubnetAvailabilityZone = new(string)
+			return d.ReadString(schemas.FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZone, v.SubnetAvailabilityZone)
+		case schemas.FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZoneId:
+			v.SubnetAvailabilityZoneId = new(string)
+			return d.ReadString(schemas.FirewallSubnetMissingVPCEndpointViolation_SubnetAvailabilityZoneId, v.SubnetAvailabilityZoneId)
+		case schemas.FirewallSubnetMissingVPCEndpointViolation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.FirewallSubnetMissingVPCEndpointViolation_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Contains information about the actions that you can take to remediate scope
 // violations caused by your policy's FirewallCreationConfig .
 // FirewallCreationConfig is an optional configuration that you can use to choose
@@ -738,6 +1993,34 @@ type FMSPolicyUpdateFirewallCreationConfigAction struct {
 	FirewallCreationConfig *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FMSPolicyUpdateFirewallCreationConfigAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FMSPolicyUpdateFirewallCreationConfigAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FMSPolicyUpdateFirewallCreationConfigAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.FMSPolicyUpdateFirewallCreationConfigAction_Description, *v.Description)
+	}
+	if v.FirewallCreationConfig != nil {
+		s.WriteString(schemas.FMSPolicyUpdateFirewallCreationConfigAction_FirewallCreationConfig, *v.FirewallCreationConfig)
+	}
+}
+func (v *FMSPolicyUpdateFirewallCreationConfigAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FMSPolicyUpdateFirewallCreationConfigAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FMSPolicyUpdateFirewallCreationConfigAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.FMSPolicyUpdateFirewallCreationConfigAction_Description, v.Description)
+		case schemas.FMSPolicyUpdateFirewallCreationConfigAction_FirewallCreationConfig:
+			v.FirewallCreationConfig = new(string)
+			return d.ReadString(schemas.FMSPolicyUpdateFirewallCreationConfigAction_FirewallCreationConfig, v.FirewallCreationConfig)
+		}
+		return nil
+	})
 }
 
 // Violation detail for the entries in a network ACL resource.
@@ -761,6 +2044,49 @@ type InvalidNetworkAclEntriesViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvalidNetworkAclEntriesViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidNetworkAclEntriesViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidNetworkAclEntriesViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentAssociatedNetworkAcl != nil {
+		s.WriteString(schemas.InvalidNetworkAclEntriesViolation_CurrentAssociatedNetworkAcl, *v.CurrentAssociatedNetworkAcl)
+	}
+	serializeEntryViolations(s, schemas.InvalidNetworkAclEntriesViolation_EntryViolations, v.EntryViolations)
+	if v.Subnet != nil {
+		s.WriteString(schemas.InvalidNetworkAclEntriesViolation_Subnet, *v.Subnet)
+	}
+	if v.SubnetAvailabilityZone != nil {
+		s.WriteString(schemas.InvalidNetworkAclEntriesViolation_SubnetAvailabilityZone, *v.SubnetAvailabilityZone)
+	}
+	if v.Vpc != nil {
+		s.WriteString(schemas.InvalidNetworkAclEntriesViolation_Vpc, *v.Vpc)
+	}
+}
+func (v *InvalidNetworkAclEntriesViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNetworkAclEntriesViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNetworkAclEntriesViolation_CurrentAssociatedNetworkAcl:
+			v.CurrentAssociatedNetworkAcl = new(string)
+			return d.ReadString(schemas.InvalidNetworkAclEntriesViolation_CurrentAssociatedNetworkAcl, v.CurrentAssociatedNetworkAcl)
+		case schemas.InvalidNetworkAclEntriesViolation_EntryViolations:
+			return deserializeEntryViolations(d, schemas.InvalidNetworkAclEntriesViolation_EntryViolations, &v.EntryViolations)
+		case schemas.InvalidNetworkAclEntriesViolation_Subnet:
+			v.Subnet = new(string)
+			return d.ReadString(schemas.InvalidNetworkAclEntriesViolation_Subnet, v.Subnet)
+		case schemas.InvalidNetworkAclEntriesViolation_SubnetAvailabilityZone:
+			v.SubnetAvailabilityZone = new(string)
+			return d.ReadString(schemas.InvalidNetworkAclEntriesViolation_SubnetAvailabilityZone, v.SubnetAvailabilityZone)
+		case schemas.InvalidNetworkAclEntriesViolation_Vpc:
+			v.Vpc = new(string)
+			return d.ReadString(schemas.InvalidNetworkAclEntriesViolation_Vpc, v.Vpc)
+		}
+		return nil
+	})
+}
+
 // Defines a Firewall Manager network ACL policy. This is used in the PolicyOption
 // of a SecurityServicePolicyData for a Policy , when the SecurityServicePolicyData
 // type is set to NETWORK_ACL_COMMON .
@@ -777,6 +2103,30 @@ type NetworkAclCommonPolicy struct {
 	NetworkAclEntrySet *NetworkAclEntrySet
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkAclCommonPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkAclCommonPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkAclCommonPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkAclEntrySet != nil {
+		s.WriteStruct(schemas.NetworkAclCommonPolicy_NetworkAclEntrySet)
+		v.NetworkAclEntrySet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NetworkAclCommonPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkAclCommonPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkAclCommonPolicy_NetworkAclEntrySet:
+			v.NetworkAclEntrySet = &NetworkAclEntrySet{}
+			return v.NetworkAclEntrySet.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes a rule in a network ACL.
@@ -825,6 +2175,72 @@ type NetworkAclEntry struct {
 	PortRange *NetworkAclPortRange
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkAclEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkAclEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkAclEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CidrBlock != nil {
+		s.WriteString(schemas.NetworkAclEntry_CidrBlock, *v.CidrBlock)
+	}
+	if v.Egress != nil {
+		s.WriteBool(schemas.NetworkAclEntry_Egress, *v.Egress)
+	}
+	if v.IcmpTypeCode != nil {
+		s.WriteStruct(schemas.NetworkAclEntry_IcmpTypeCode)
+		v.IcmpTypeCode.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Ipv6CidrBlock != nil {
+		s.WriteString(schemas.NetworkAclEntry_Ipv6CidrBlock, *v.Ipv6CidrBlock)
+	}
+	if v.PortRange != nil {
+		s.WriteStruct(schemas.NetworkAclEntry_PortRange)
+		v.PortRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Protocol != nil {
+		s.WriteString(schemas.NetworkAclEntry_Protocol, *v.Protocol)
+	}
+	if v.RuleAction != "" {
+		s.WriteString(schemas.NetworkAclEntry_RuleAction, string(v.RuleAction))
+	}
+}
+func (v *NetworkAclEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkAclEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkAclEntry_CidrBlock:
+			v.CidrBlock = new(string)
+			return d.ReadString(schemas.NetworkAclEntry_CidrBlock, v.CidrBlock)
+		case schemas.NetworkAclEntry_Egress:
+			v.Egress = new(bool)
+			return d.ReadBool(schemas.NetworkAclEntry_Egress, v.Egress)
+		case schemas.NetworkAclEntry_IcmpTypeCode:
+			v.IcmpTypeCode = &NetworkAclIcmpTypeCode{}
+			return v.IcmpTypeCode.Deserialize(d)
+		case schemas.NetworkAclEntry_Ipv6CidrBlock:
+			v.Ipv6CidrBlock = new(string)
+			return d.ReadString(schemas.NetworkAclEntry_Ipv6CidrBlock, v.Ipv6CidrBlock)
+		case schemas.NetworkAclEntry_PortRange:
+			v.PortRange = &NetworkAclPortRange{}
+			return v.PortRange.Deserialize(d)
+		case schemas.NetworkAclEntry_Protocol:
+			v.Protocol = new(string)
+			return d.ReadString(schemas.NetworkAclEntry_Protocol, v.Protocol)
+		case schemas.NetworkAclEntry_RuleAction:
+			var ev string
+			if err := d.ReadString(schemas.NetworkAclEntry_RuleAction, &ev); err != nil {
+				return err
+			}
+			v.RuleAction = NetworkAclRuleAction(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The configuration of the first and last rules for the network ACL policy, and
@@ -880,6 +2296,40 @@ type NetworkAclEntrySet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkAclEntrySet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkAclEntrySet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkAclEntrySet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkAclEntries(s, schemas.NetworkAclEntrySet_FirstEntries, v.FirstEntries)
+	if v.ForceRemediateForFirstEntries != nil {
+		s.WriteBool(schemas.NetworkAclEntrySet_ForceRemediateForFirstEntries, *v.ForceRemediateForFirstEntries)
+	}
+	if v.ForceRemediateForLastEntries != nil {
+		s.WriteBool(schemas.NetworkAclEntrySet_ForceRemediateForLastEntries, *v.ForceRemediateForLastEntries)
+	}
+	serializeNetworkAclEntries(s, schemas.NetworkAclEntrySet_LastEntries, v.LastEntries)
+}
+func (v *NetworkAclEntrySet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkAclEntrySet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkAclEntrySet_FirstEntries:
+			return deserializeNetworkAclEntries(d, schemas.NetworkAclEntrySet_FirstEntries, &v.FirstEntries)
+		case schemas.NetworkAclEntrySet_ForceRemediateForFirstEntries:
+			v.ForceRemediateForFirstEntries = new(bool)
+			return d.ReadBool(schemas.NetworkAclEntrySet_ForceRemediateForFirstEntries, v.ForceRemediateForFirstEntries)
+		case schemas.NetworkAclEntrySet_ForceRemediateForLastEntries:
+			v.ForceRemediateForLastEntries = new(bool)
+			return d.ReadBool(schemas.NetworkAclEntrySet_ForceRemediateForLastEntries, v.ForceRemediateForLastEntries)
+		case schemas.NetworkAclEntrySet_LastEntries:
+			return deserializeNetworkAclEntries(d, schemas.NetworkAclEntrySet_LastEntries, &v.LastEntries)
+		}
+		return nil
+	})
+}
+
 // ICMP protocol: The ICMP type and code.
 type NetworkAclIcmpTypeCode struct {
 
@@ -892,6 +2342,34 @@ type NetworkAclIcmpTypeCode struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkAclIcmpTypeCode) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkAclIcmpTypeCode)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkAclIcmpTypeCode) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteInt32(schemas.NetworkAclIcmpTypeCode_Code, *v.Code)
+	}
+	if v.Type != nil {
+		s.WriteInt32(schemas.NetworkAclIcmpTypeCode_Type, *v.Type)
+	}
+}
+func (v *NetworkAclIcmpTypeCode) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkAclIcmpTypeCode, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkAclIcmpTypeCode_Code:
+			v.Code = new(int32)
+			return d.ReadInt32(schemas.NetworkAclIcmpTypeCode_Code, v.Code)
+		case schemas.NetworkAclIcmpTypeCode_Type:
+			v.Type = new(int32)
+			return d.ReadInt32(schemas.NetworkAclIcmpTypeCode_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // TCP or UDP protocols: The range of ports the rule applies to.
 type NetworkAclPortRange struct {
 
@@ -902,6 +2380,34 @@ type NetworkAclPortRange struct {
 	To *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkAclPortRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkAclPortRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkAclPortRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.From != nil {
+		s.WriteInt32(schemas.NetworkAclPortRange_From, *v.From)
+	}
+	if v.To != nil {
+		s.WriteInt32(schemas.NetworkAclPortRange_To, *v.To)
+	}
+}
+func (v *NetworkAclPortRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkAclPortRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkAclPortRange_From:
+			v.From = new(int32)
+			return d.ReadInt32(schemas.NetworkAclPortRange_From, v.From)
+		case schemas.NetworkAclPortRange_To:
+			v.To = new(int32)
+			return d.ReadInt32(schemas.NetworkAclPortRange_To, v.To)
+		}
+		return nil
+	})
 }
 
 // Violation detail for an internet gateway route with an inactive state in the
@@ -921,6 +2427,43 @@ type NetworkFirewallBlackHoleRouteDetectedViolation struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFirewallBlackHoleRouteDetectedViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallBlackHoleRouteDetectedViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallBlackHoleRouteDetectedViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouteTableId != nil {
+		s.WriteString(schemas.NetworkFirewallBlackHoleRouteDetectedViolation_RouteTableId, *v.RouteTableId)
+	}
+	serializeRoutes(s, schemas.NetworkFirewallBlackHoleRouteDetectedViolation_ViolatingRoutes, v.ViolatingRoutes)
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.NetworkFirewallBlackHoleRouteDetectedViolation_ViolationTarget, *v.ViolationTarget)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.NetworkFirewallBlackHoleRouteDetectedViolation_VpcId, *v.VpcId)
+	}
+}
+func (v *NetworkFirewallBlackHoleRouteDetectedViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallBlackHoleRouteDetectedViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallBlackHoleRouteDetectedViolation_RouteTableId:
+			v.RouteTableId = new(string)
+			return d.ReadString(schemas.NetworkFirewallBlackHoleRouteDetectedViolation_RouteTableId, v.RouteTableId)
+		case schemas.NetworkFirewallBlackHoleRouteDetectedViolation_ViolatingRoutes:
+			return deserializeRoutes(d, schemas.NetworkFirewallBlackHoleRouteDetectedViolation_ViolatingRoutes, &v.ViolatingRoutes)
+		case schemas.NetworkFirewallBlackHoleRouteDetectedViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.NetworkFirewallBlackHoleRouteDetectedViolation_ViolationTarget, v.ViolationTarget)
+		case schemas.NetworkFirewallBlackHoleRouteDetectedViolation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.NetworkFirewallBlackHoleRouteDetectedViolation_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // Violation detail for the subnet for which internet traffic that hasn't been
@@ -973,6 +2516,96 @@ type NetworkFirewallInternetTrafficNotInspectedViolation struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFirewallInternetTrafficNotInspectedViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallInternetTrafficNotInspectedViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallInternetTrafficNotInspectedViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRoutes(s, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ActualFirewallSubnetRoutes, v.ActualFirewallSubnetRoutes)
+	serializeRoutes(s, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ActualInternetGatewayRoutes, v.ActualInternetGatewayRoutes)
+	if v.CurrentFirewallSubnetRouteTable != nil {
+		s.WriteString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_CurrentFirewallSubnetRouteTable, *v.CurrentFirewallSubnetRouteTable)
+	}
+	if v.CurrentInternetGatewayRouteTable != nil {
+		s.WriteString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_CurrentInternetGatewayRouteTable, *v.CurrentInternetGatewayRouteTable)
+	}
+	if v.ExpectedFirewallEndpoint != nil {
+		s.WriteString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallEndpoint, *v.ExpectedFirewallEndpoint)
+	}
+	serializeExpectedRoutes(s, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallSubnetRoutes, v.ExpectedFirewallSubnetRoutes)
+	serializeExpectedRoutes(s, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedInternetGatewayRoutes, v.ExpectedInternetGatewayRoutes)
+	if v.FirewallSubnetId != nil {
+		s.WriteString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_FirewallSubnetId, *v.FirewallSubnetId)
+	}
+	if v.InternetGatewayId != nil {
+		s.WriteString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_InternetGatewayId, *v.InternetGatewayId)
+	}
+	if v.IsRouteTableUsedInDifferentAZ != false {
+		s.WriteBool(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_IsRouteTableUsedInDifferentAZ, v.IsRouteTableUsedInDifferentAZ)
+	}
+	if v.RouteTableId != nil {
+		s.WriteString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_RouteTableId, *v.RouteTableId)
+	}
+	if v.SubnetAvailabilityZone != nil {
+		s.WriteString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_SubnetAvailabilityZone, *v.SubnetAvailabilityZone)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_SubnetId, *v.SubnetId)
+	}
+	serializeRoutes(s, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ViolatingRoutes, v.ViolatingRoutes)
+	if v.VpcId != nil {
+		s.WriteString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_VpcId, *v.VpcId)
+	}
+}
+func (v *NetworkFirewallInternetTrafficNotInspectedViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallInternetTrafficNotInspectedViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ActualFirewallSubnetRoutes:
+			return deserializeRoutes(d, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ActualFirewallSubnetRoutes, &v.ActualFirewallSubnetRoutes)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ActualInternetGatewayRoutes:
+			return deserializeRoutes(d, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ActualInternetGatewayRoutes, &v.ActualInternetGatewayRoutes)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_CurrentFirewallSubnetRouteTable:
+			v.CurrentFirewallSubnetRouteTable = new(string)
+			return d.ReadString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_CurrentFirewallSubnetRouteTable, v.CurrentFirewallSubnetRouteTable)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_CurrentInternetGatewayRouteTable:
+			v.CurrentInternetGatewayRouteTable = new(string)
+			return d.ReadString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_CurrentInternetGatewayRouteTable, v.CurrentInternetGatewayRouteTable)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallEndpoint:
+			v.ExpectedFirewallEndpoint = new(string)
+			return d.ReadString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallEndpoint, v.ExpectedFirewallEndpoint)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallSubnetRoutes:
+			return deserializeExpectedRoutes(d, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedFirewallSubnetRoutes, &v.ExpectedFirewallSubnetRoutes)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedInternetGatewayRoutes:
+			return deserializeExpectedRoutes(d, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ExpectedInternetGatewayRoutes, &v.ExpectedInternetGatewayRoutes)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_FirewallSubnetId:
+			v.FirewallSubnetId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_FirewallSubnetId, v.FirewallSubnetId)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_InternetGatewayId:
+			v.InternetGatewayId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_InternetGatewayId, v.InternetGatewayId)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_IsRouteTableUsedInDifferentAZ:
+			return d.ReadBool(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_IsRouteTableUsedInDifferentAZ, &v.IsRouteTableUsedInDifferentAZ)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_RouteTableId:
+			v.RouteTableId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_RouteTableId, v.RouteTableId)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_SubnetAvailabilityZone:
+			v.SubnetAvailabilityZone = new(string)
+			return d.ReadString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_SubnetAvailabilityZone, v.SubnetAvailabilityZone)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_SubnetId, v.SubnetId)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ViolatingRoutes:
+			return deserializeRoutes(d, schemas.NetworkFirewallInternetTrafficNotInspectedViolation_ViolatingRoutes, &v.ViolatingRoutes)
+		case schemas.NetworkFirewallInternetTrafficNotInspectedViolation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInternetTrafficNotInspectedViolation_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // Violation detail for the improperly configured subnet route. It's possible
@@ -1031,6 +2664,104 @@ type NetworkFirewallInvalidRouteConfigurationViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkFirewallInvalidRouteConfigurationViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallInvalidRouteConfigurationViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallInvalidRouteConfigurationViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActualFirewallEndpoint != nil {
+		s.WriteString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallEndpoint, *v.ActualFirewallEndpoint)
+	}
+	if v.ActualFirewallSubnetId != nil {
+		s.WriteString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetId, *v.ActualFirewallSubnetId)
+	}
+	serializeRoutes(s, schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetRoutes, v.ActualFirewallSubnetRoutes)
+	serializeRoutes(s, schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualInternetGatewayRoutes, v.ActualInternetGatewayRoutes)
+	serializeResourceIdList(s, schemas.NetworkFirewallInvalidRouteConfigurationViolation_AffectedSubnets, v.AffectedSubnets)
+	if v.CurrentFirewallSubnetRouteTable != nil {
+		s.WriteString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_CurrentFirewallSubnetRouteTable, *v.CurrentFirewallSubnetRouteTable)
+	}
+	if v.CurrentInternetGatewayRouteTable != nil {
+		s.WriteString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_CurrentInternetGatewayRouteTable, *v.CurrentInternetGatewayRouteTable)
+	}
+	if v.ExpectedFirewallEndpoint != nil {
+		s.WriteString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallEndpoint, *v.ExpectedFirewallEndpoint)
+	}
+	if v.ExpectedFirewallSubnetId != nil {
+		s.WriteString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetId, *v.ExpectedFirewallSubnetId)
+	}
+	serializeExpectedRoutes(s, schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetRoutes, v.ExpectedFirewallSubnetRoutes)
+	serializeExpectedRoutes(s, schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedInternetGatewayRoutes, v.ExpectedInternetGatewayRoutes)
+	if v.InternetGatewayId != nil {
+		s.WriteString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_InternetGatewayId, *v.InternetGatewayId)
+	}
+	if v.IsRouteTableUsedInDifferentAZ != false {
+		s.WriteBool(schemas.NetworkFirewallInvalidRouteConfigurationViolation_IsRouteTableUsedInDifferentAZ, v.IsRouteTableUsedInDifferentAZ)
+	}
+	if v.RouteTableId != nil {
+		s.WriteString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_RouteTableId, *v.RouteTableId)
+	}
+	if v.ViolatingRoute != nil {
+		s.WriteStruct(schemas.NetworkFirewallInvalidRouteConfigurationViolation_ViolatingRoute)
+		v.ViolatingRoute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_VpcId, *v.VpcId)
+	}
+}
+func (v *NetworkFirewallInvalidRouteConfigurationViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallInvalidRouteConfigurationViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallEndpoint:
+			v.ActualFirewallEndpoint = new(string)
+			return d.ReadString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallEndpoint, v.ActualFirewallEndpoint)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetId:
+			v.ActualFirewallSubnetId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetId, v.ActualFirewallSubnetId)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetRoutes:
+			return deserializeRoutes(d, schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualFirewallSubnetRoutes, &v.ActualFirewallSubnetRoutes)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualInternetGatewayRoutes:
+			return deserializeRoutes(d, schemas.NetworkFirewallInvalidRouteConfigurationViolation_ActualInternetGatewayRoutes, &v.ActualInternetGatewayRoutes)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_AffectedSubnets:
+			return deserializeResourceIdList(d, schemas.NetworkFirewallInvalidRouteConfigurationViolation_AffectedSubnets, &v.AffectedSubnets)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_CurrentFirewallSubnetRouteTable:
+			v.CurrentFirewallSubnetRouteTable = new(string)
+			return d.ReadString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_CurrentFirewallSubnetRouteTable, v.CurrentFirewallSubnetRouteTable)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_CurrentInternetGatewayRouteTable:
+			v.CurrentInternetGatewayRouteTable = new(string)
+			return d.ReadString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_CurrentInternetGatewayRouteTable, v.CurrentInternetGatewayRouteTable)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallEndpoint:
+			v.ExpectedFirewallEndpoint = new(string)
+			return d.ReadString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallEndpoint, v.ExpectedFirewallEndpoint)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetId:
+			v.ExpectedFirewallSubnetId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetId, v.ExpectedFirewallSubnetId)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetRoutes:
+			return deserializeExpectedRoutes(d, schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedFirewallSubnetRoutes, &v.ExpectedFirewallSubnetRoutes)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedInternetGatewayRoutes:
+			return deserializeExpectedRoutes(d, schemas.NetworkFirewallInvalidRouteConfigurationViolation_ExpectedInternetGatewayRoutes, &v.ExpectedInternetGatewayRoutes)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_InternetGatewayId:
+			v.InternetGatewayId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_InternetGatewayId, v.InternetGatewayId)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_IsRouteTableUsedInDifferentAZ:
+			return d.ReadBool(schemas.NetworkFirewallInvalidRouteConfigurationViolation_IsRouteTableUsedInDifferentAZ, &v.IsRouteTableUsedInDifferentAZ)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_RouteTableId:
+			v.RouteTableId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_RouteTableId, v.RouteTableId)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_ViolatingRoute:
+			v.ViolatingRoute = &Route{}
+			return v.ViolatingRoute.Deserialize(d)
+		case schemas.NetworkFirewallInvalidRouteConfigurationViolation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.NetworkFirewallInvalidRouteConfigurationViolation_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Violation detail for an expected route missing in Network Firewall.
 type NetworkFirewallMissingExpectedRoutesViolation struct {
 
@@ -1044,6 +2775,37 @@ type NetworkFirewallMissingExpectedRoutesViolation struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFirewallMissingExpectedRoutesViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallMissingExpectedRoutesViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallMissingExpectedRoutesViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExpectedRoutes(s, schemas.NetworkFirewallMissingExpectedRoutesViolation_ExpectedRoutes, v.ExpectedRoutes)
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.NetworkFirewallMissingExpectedRoutesViolation_ViolationTarget, *v.ViolationTarget)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.NetworkFirewallMissingExpectedRoutesViolation_VpcId, *v.VpcId)
+	}
+}
+func (v *NetworkFirewallMissingExpectedRoutesViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallMissingExpectedRoutesViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallMissingExpectedRoutesViolation_ExpectedRoutes:
+			return deserializeExpectedRoutes(d, schemas.NetworkFirewallMissingExpectedRoutesViolation_ExpectedRoutes, &v.ExpectedRoutes)
+		case schemas.NetworkFirewallMissingExpectedRoutesViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingExpectedRoutesViolation_ViolationTarget, v.ViolationTarget)
+		case schemas.NetworkFirewallMissingExpectedRoutesViolation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingExpectedRoutesViolation_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // Violation detail for Network Firewall for a subnet that's not associated to the
@@ -1069,6 +2831,52 @@ type NetworkFirewallMissingExpectedRTViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkFirewallMissingExpectedRTViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallMissingExpectedRTViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallMissingExpectedRTViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.NetworkFirewallMissingExpectedRTViolation_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.CurrentRouteTable != nil {
+		s.WriteString(schemas.NetworkFirewallMissingExpectedRTViolation_CurrentRouteTable, *v.CurrentRouteTable)
+	}
+	if v.ExpectedRouteTable != nil {
+		s.WriteString(schemas.NetworkFirewallMissingExpectedRTViolation_ExpectedRouteTable, *v.ExpectedRouteTable)
+	}
+	if v.VPC != nil {
+		s.WriteString(schemas.NetworkFirewallMissingExpectedRTViolation_VPC, *v.VPC)
+	}
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.NetworkFirewallMissingExpectedRTViolation_ViolationTarget, *v.ViolationTarget)
+	}
+}
+func (v *NetworkFirewallMissingExpectedRTViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallMissingExpectedRTViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallMissingExpectedRTViolation_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingExpectedRTViolation_AvailabilityZone, v.AvailabilityZone)
+		case schemas.NetworkFirewallMissingExpectedRTViolation_CurrentRouteTable:
+			v.CurrentRouteTable = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingExpectedRTViolation_CurrentRouteTable, v.CurrentRouteTable)
+		case schemas.NetworkFirewallMissingExpectedRTViolation_ExpectedRouteTable:
+			v.ExpectedRouteTable = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingExpectedRTViolation_ExpectedRouteTable, v.ExpectedRouteTable)
+		case schemas.NetworkFirewallMissingExpectedRTViolation_VPC:
+			v.VPC = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingExpectedRTViolation_VPC, v.VPC)
+		case schemas.NetworkFirewallMissingExpectedRTViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingExpectedRTViolation_ViolationTarget, v.ViolationTarget)
+		}
+		return nil
+	})
+}
+
 // Violation detail for Network Firewall for a subnet that doesn't have a Firewall
 // Manager managed firewall in its VPC.
 type NetworkFirewallMissingFirewallViolation struct {
@@ -1086,6 +2894,46 @@ type NetworkFirewallMissingFirewallViolation struct {
 	ViolationTarget *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFirewallMissingFirewallViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallMissingFirewallViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallMissingFirewallViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.NetworkFirewallMissingFirewallViolation_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.TargetViolationReason != nil {
+		s.WriteString(schemas.NetworkFirewallMissingFirewallViolation_TargetViolationReason, *v.TargetViolationReason)
+	}
+	if v.VPC != nil {
+		s.WriteString(schemas.NetworkFirewallMissingFirewallViolation_VPC, *v.VPC)
+	}
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.NetworkFirewallMissingFirewallViolation_ViolationTarget, *v.ViolationTarget)
+	}
+}
+func (v *NetworkFirewallMissingFirewallViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallMissingFirewallViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallMissingFirewallViolation_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingFirewallViolation_AvailabilityZone, v.AvailabilityZone)
+		case schemas.NetworkFirewallMissingFirewallViolation_TargetViolationReason:
+			v.TargetViolationReason = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingFirewallViolation_TargetViolationReason, v.TargetViolationReason)
+		case schemas.NetworkFirewallMissingFirewallViolation_VPC:
+			v.VPC = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingFirewallViolation_VPC, v.VPC)
+		case schemas.NetworkFirewallMissingFirewallViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingFirewallViolation_ViolationTarget, v.ViolationTarget)
+		}
+		return nil
+	})
 }
 
 // Violation detail for Network Firewall for an Availability Zone that's missing
@@ -1107,6 +2955,46 @@ type NetworkFirewallMissingSubnetViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkFirewallMissingSubnetViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallMissingSubnetViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallMissingSubnetViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.NetworkFirewallMissingSubnetViolation_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.TargetViolationReason != nil {
+		s.WriteString(schemas.NetworkFirewallMissingSubnetViolation_TargetViolationReason, *v.TargetViolationReason)
+	}
+	if v.VPC != nil {
+		s.WriteString(schemas.NetworkFirewallMissingSubnetViolation_VPC, *v.VPC)
+	}
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.NetworkFirewallMissingSubnetViolation_ViolationTarget, *v.ViolationTarget)
+	}
+}
+func (v *NetworkFirewallMissingSubnetViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallMissingSubnetViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallMissingSubnetViolation_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingSubnetViolation_AvailabilityZone, v.AvailabilityZone)
+		case schemas.NetworkFirewallMissingSubnetViolation_TargetViolationReason:
+			v.TargetViolationReason = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingSubnetViolation_TargetViolationReason, v.TargetViolationReason)
+		case schemas.NetworkFirewallMissingSubnetViolation_VPC:
+			v.VPC = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingSubnetViolation_VPC, v.VPC)
+		case schemas.NetworkFirewallMissingSubnetViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.NetworkFirewallMissingSubnetViolation_ViolationTarget, v.ViolationTarget)
+		}
+		return nil
+	})
+}
+
 // Configures the firewall policy deployment model of Network Firewall. For
 // information about Network Firewall deployment models, see [Network Firewall example architectures with routing]in the Network
 // Firewall Developer Guide.
@@ -1121,6 +3009,32 @@ type NetworkFirewallPolicy struct {
 	FirewallDeploymentModel FirewallDeploymentModel
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFirewallPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDeploymentModel != "" {
+		s.WriteString(schemas.NetworkFirewallPolicy_FirewallDeploymentModel, string(v.FirewallDeploymentModel))
+	}
+}
+func (v *NetworkFirewallPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallPolicy_FirewallDeploymentModel:
+			var ev string
+			if err := d.ReadString(schemas.NetworkFirewallPolicy_FirewallDeploymentModel, &ev); err != nil {
+				return err
+			}
+			v.FirewallDeploymentModel = FirewallDeploymentModel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The definition of the Network Firewall firewall policy.
@@ -1168,6 +3082,48 @@ type NetworkFirewallPolicyDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkFirewallPolicyDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallPolicyDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallPolicyDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkFirewallActionList(s, schemas.NetworkFirewallPolicyDescription_StatefulDefaultActions, v.StatefulDefaultActions)
+	if v.StatefulEngineOptions != nil {
+		s.WriteStruct(schemas.NetworkFirewallPolicyDescription_StatefulEngineOptions)
+		v.StatefulEngineOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStatefulRuleGroupList(s, schemas.NetworkFirewallPolicyDescription_StatefulRuleGroups, v.StatefulRuleGroups)
+	serializeNetworkFirewallActionList(s, schemas.NetworkFirewallPolicyDescription_StatelessCustomActions, v.StatelessCustomActions)
+	serializeNetworkFirewallActionList(s, schemas.NetworkFirewallPolicyDescription_StatelessDefaultActions, v.StatelessDefaultActions)
+	serializeNetworkFirewallActionList(s, schemas.NetworkFirewallPolicyDescription_StatelessFragmentDefaultActions, v.StatelessFragmentDefaultActions)
+	serializeStatelessRuleGroupList(s, schemas.NetworkFirewallPolicyDescription_StatelessRuleGroups, v.StatelessRuleGroups)
+}
+func (v *NetworkFirewallPolicyDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallPolicyDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallPolicyDescription_StatefulDefaultActions:
+			return deserializeNetworkFirewallActionList(d, schemas.NetworkFirewallPolicyDescription_StatefulDefaultActions, &v.StatefulDefaultActions)
+		case schemas.NetworkFirewallPolicyDescription_StatefulEngineOptions:
+			v.StatefulEngineOptions = &StatefulEngineOptions{}
+			return v.StatefulEngineOptions.Deserialize(d)
+		case schemas.NetworkFirewallPolicyDescription_StatefulRuleGroups:
+			return deserializeStatefulRuleGroupList(d, schemas.NetworkFirewallPolicyDescription_StatefulRuleGroups, &v.StatefulRuleGroups)
+		case schemas.NetworkFirewallPolicyDescription_StatelessCustomActions:
+			return deserializeNetworkFirewallActionList(d, schemas.NetworkFirewallPolicyDescription_StatelessCustomActions, &v.StatelessCustomActions)
+		case schemas.NetworkFirewallPolicyDescription_StatelessDefaultActions:
+			return deserializeNetworkFirewallActionList(d, schemas.NetworkFirewallPolicyDescription_StatelessDefaultActions, &v.StatelessDefaultActions)
+		case schemas.NetworkFirewallPolicyDescription_StatelessFragmentDefaultActions:
+			return deserializeNetworkFirewallActionList(d, schemas.NetworkFirewallPolicyDescription_StatelessFragmentDefaultActions, &v.StatelessFragmentDefaultActions)
+		case schemas.NetworkFirewallPolicyDescription_StatelessRuleGroups:
+			return deserializeStatelessRuleGroupList(d, schemas.NetworkFirewallPolicyDescription_StatelessRuleGroups, &v.StatelessRuleGroups)
+		}
+		return nil
+	})
+}
+
 // Violation detail for Network Firewall for a firewall policy that has a
 // different NetworkFirewallPolicyDescriptionthan is required by the Firewall Manager policy.
 type NetworkFirewallPolicyModifiedViolation struct {
@@ -1185,6 +3141,44 @@ type NetworkFirewallPolicyModifiedViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkFirewallPolicyModifiedViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallPolicyModifiedViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallPolicyModifiedViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentPolicyDescription != nil {
+		s.WriteStruct(schemas.NetworkFirewallPolicyModifiedViolation_CurrentPolicyDescription)
+		v.CurrentPolicyDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpectedPolicyDescription != nil {
+		s.WriteStruct(schemas.NetworkFirewallPolicyModifiedViolation_ExpectedPolicyDescription)
+		v.ExpectedPolicyDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.NetworkFirewallPolicyModifiedViolation_ViolationTarget, *v.ViolationTarget)
+	}
+}
+func (v *NetworkFirewallPolicyModifiedViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallPolicyModifiedViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallPolicyModifiedViolation_CurrentPolicyDescription:
+			v.CurrentPolicyDescription = &NetworkFirewallPolicyDescription{}
+			return v.CurrentPolicyDescription.Deserialize(d)
+		case schemas.NetworkFirewallPolicyModifiedViolation_ExpectedPolicyDescription:
+			v.ExpectedPolicyDescription = &NetworkFirewallPolicyDescription{}
+			return v.ExpectedPolicyDescription.Deserialize(d)
+		case schemas.NetworkFirewallPolicyModifiedViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.NetworkFirewallPolicyModifiedViolation_ViolationTarget, v.ViolationTarget)
+		}
+		return nil
+	})
+}
+
 // The setting that allows the policy owner to change the behavior of the rule
 // group within a policy.
 type NetworkFirewallStatefulRuleGroupOverride struct {
@@ -1194,6 +3188,32 @@ type NetworkFirewallStatefulRuleGroupOverride struct {
 	Action NetworkFirewallOverrideAction
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFirewallStatefulRuleGroupOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallStatefulRuleGroupOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallStatefulRuleGroupOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.NetworkFirewallStatefulRuleGroupOverride_Action, string(v.Action))
+	}
+}
+func (v *NetworkFirewallStatefulRuleGroupOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallStatefulRuleGroupOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallStatefulRuleGroupOverride_Action:
+			var ev string
+			if err := d.ReadString(schemas.NetworkFirewallStatefulRuleGroupOverride_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = NetworkFirewallOverrideAction(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Violation detail for an unexpected route that's present in a route table.
@@ -1217,6 +3237,49 @@ type NetworkFirewallUnexpectedFirewallRoutesViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NetworkFirewallUnexpectedFirewallRoutesViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallUnexpectedFirewallRoutesViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallUnexpectedFirewallRoutesViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallEndpoint != nil {
+		s.WriteString(schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallEndpoint, *v.FirewallEndpoint)
+	}
+	if v.FirewallSubnetId != nil {
+		s.WriteString(schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallSubnetId, *v.FirewallSubnetId)
+	}
+	if v.RouteTableId != nil {
+		s.WriteString(schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_RouteTableId, *v.RouteTableId)
+	}
+	serializeRoutes(s, schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_ViolatingRoutes, v.ViolatingRoutes)
+	if v.VpcId != nil {
+		s.WriteString(schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_VpcId, *v.VpcId)
+	}
+}
+func (v *NetworkFirewallUnexpectedFirewallRoutesViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallUnexpectedFirewallRoutesViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallEndpoint:
+			v.FirewallEndpoint = new(string)
+			return d.ReadString(schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallEndpoint, v.FirewallEndpoint)
+		case schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallSubnetId:
+			v.FirewallSubnetId = new(string)
+			return d.ReadString(schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_FirewallSubnetId, v.FirewallSubnetId)
+		case schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_RouteTableId:
+			v.RouteTableId = new(string)
+			return d.ReadString(schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_RouteTableId, v.RouteTableId)
+		case schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_ViolatingRoutes:
+			return deserializeRoutes(d, schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_ViolatingRoutes, &v.ViolatingRoutes)
+		case schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.NetworkFirewallUnexpectedFirewallRoutesViolation_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Violation detail for an unexpected gateway route that’s present in a route
 // table.
 type NetworkFirewallUnexpectedGatewayRoutesViolation struct {
@@ -1234,6 +3297,43 @@ type NetworkFirewallUnexpectedGatewayRoutesViolation struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkFirewallUnexpectedGatewayRoutesViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkFirewallUnexpectedGatewayRoutesViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkFirewallUnexpectedGatewayRoutesViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_GatewayId, *v.GatewayId)
+	}
+	if v.RouteTableId != nil {
+		s.WriteString(schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_RouteTableId, *v.RouteTableId)
+	}
+	serializeRoutes(s, schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_ViolatingRoutes, v.ViolatingRoutes)
+	if v.VpcId != nil {
+		s.WriteString(schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_VpcId, *v.VpcId)
+	}
+}
+func (v *NetworkFirewallUnexpectedGatewayRoutesViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkFirewallUnexpectedGatewayRoutesViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_GatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_GatewayId, v.GatewayId)
+		case schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_RouteTableId:
+			v.RouteTableId = new(string)
+			return d.ReadString(schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_RouteTableId, v.RouteTableId)
+		case schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_ViolatingRoutes:
+			return deserializeRoutes(d, schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_ViolatingRoutes, &v.ViolatingRoutes)
+		case schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.NetworkFirewallUnexpectedGatewayRoutesViolation_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // Defines the Organizations organizational units (OUs) that the specified
@@ -1274,6 +3374,35 @@ type OrganizationalUnitScope struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OrganizationalUnitScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationalUnitScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationalUnitScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllOrganizationalUnitsEnabled != false {
+		s.WriteBool(schemas.OrganizationalUnitScope_AllOrganizationalUnitsEnabled, v.AllOrganizationalUnitsEnabled)
+	}
+	if v.ExcludeSpecifiedOrganizationalUnits != false {
+		s.WriteBool(schemas.OrganizationalUnitScope_ExcludeSpecifiedOrganizationalUnits, v.ExcludeSpecifiedOrganizationalUnits)
+	}
+	serializeOrganizationalUnitIdList(s, schemas.OrganizationalUnitScope_OrganizationalUnits, v.OrganizationalUnits)
+}
+func (v *OrganizationalUnitScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationalUnitScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationalUnitScope_AllOrganizationalUnitsEnabled:
+			return d.ReadBool(schemas.OrganizationalUnitScope_AllOrganizationalUnitsEnabled, &v.AllOrganizationalUnitsEnabled)
+		case schemas.OrganizationalUnitScope_ExcludeSpecifiedOrganizationalUnits:
+			return d.ReadBool(schemas.OrganizationalUnitScope_ExcludeSpecifiedOrganizationalUnits, &v.ExcludeSpecifiedOrganizationalUnits)
+		case schemas.OrganizationalUnitScope_OrganizationalUnits:
+			return deserializeOrganizationalUnitIdList(d, schemas.OrganizationalUnitScope_OrganizationalUnits, &v.OrganizationalUnits)
+		}
+		return nil
+	})
+}
+
 // The reference rule that partially matches the ViolationTarget rule and
 // violation reason.
 type PartialMatch struct {
@@ -1286,6 +3415,31 @@ type PartialMatch struct {
 	TargetViolationReasons []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartialMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartialMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartialMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reference != nil {
+		s.WriteString(schemas.PartialMatch_Reference, *v.Reference)
+	}
+	serializeTargetViolationReasons(s, schemas.PartialMatch_TargetViolationReasons, v.TargetViolationReasons)
+}
+func (v *PartialMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartialMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartialMatch_Reference:
+			v.Reference = new(string)
+			return d.ReadString(schemas.PartialMatch_Reference, v.Reference)
+		case schemas.PartialMatch_TargetViolationReasons:
+			return deserializeTargetViolationReasons(d, schemas.PartialMatch_TargetViolationReasons, &v.TargetViolationReasons)
+		}
+		return nil
+	})
 }
 
 // An Firewall Manager policy.
@@ -1447,6 +3601,106 @@ type Policy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Policy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Policy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Policy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteUnusedFMManagedResources != false {
+		s.WriteBool(schemas.Policy_DeleteUnusedFMManagedResources, v.DeleteUnusedFMManagedResources)
+	}
+	serializeCustomerPolicyScopeMap(s, schemas.Policy_ExcludeMap, v.ExcludeMap)
+	s.WriteBool(schemas.Policy_ExcludeResourceTags, v.ExcludeResourceTags)
+	serializeCustomerPolicyScopeMap(s, schemas.Policy_IncludeMap, v.IncludeMap)
+	if v.PolicyDescription != nil {
+		s.WriteString(schemas.Policy_PolicyDescription, *v.PolicyDescription)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.Policy_PolicyId, *v.PolicyId)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.Policy_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyStatus != "" {
+		s.WriteString(schemas.Policy_PolicyStatus, string(v.PolicyStatus))
+	}
+	if v.PolicyUpdateToken != nil {
+		s.WriteString(schemas.Policy_PolicyUpdateToken, *v.PolicyUpdateToken)
+	}
+	s.WriteBool(schemas.Policy_RemediationEnabled, v.RemediationEnabled)
+	serializeResourceSetIds(s, schemas.Policy_ResourceSetIds, v.ResourceSetIds)
+	if v.ResourceTagLogicalOperator != "" {
+		s.WriteString(schemas.Policy_ResourceTagLogicalOperator, string(v.ResourceTagLogicalOperator))
+	}
+	serializeResourceTags(s, schemas.Policy_ResourceTags, v.ResourceTags)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.Policy_ResourceType, *v.ResourceType)
+	}
+	serializeResourceTypeList(s, schemas.Policy_ResourceTypeList, v.ResourceTypeList)
+	if v.SecurityServicePolicyData != nil {
+		s.WriteStruct(schemas.Policy_SecurityServicePolicyData)
+		v.SecurityServicePolicyData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Policy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Policy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Policy_DeleteUnusedFMManagedResources:
+			return d.ReadBool(schemas.Policy_DeleteUnusedFMManagedResources, &v.DeleteUnusedFMManagedResources)
+		case schemas.Policy_ExcludeMap:
+			return deserializeCustomerPolicyScopeMap(d, schemas.Policy_ExcludeMap, &v.ExcludeMap)
+		case schemas.Policy_ExcludeResourceTags:
+			return d.ReadBool(schemas.Policy_ExcludeResourceTags, &v.ExcludeResourceTags)
+		case schemas.Policy_IncludeMap:
+			return deserializeCustomerPolicyScopeMap(d, schemas.Policy_IncludeMap, &v.IncludeMap)
+		case schemas.Policy_PolicyDescription:
+			v.PolicyDescription = new(string)
+			return d.ReadString(schemas.Policy_PolicyDescription, v.PolicyDescription)
+		case schemas.Policy_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.Policy_PolicyId, v.PolicyId)
+		case schemas.Policy_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.Policy_PolicyName, v.PolicyName)
+		case schemas.Policy_PolicyStatus:
+			var ev string
+			if err := d.ReadString(schemas.Policy_PolicyStatus, &ev); err != nil {
+				return err
+			}
+			v.PolicyStatus = CustomerPolicyStatus(ev)
+			return nil
+		case schemas.Policy_PolicyUpdateToken:
+			v.PolicyUpdateToken = new(string)
+			return d.ReadString(schemas.Policy_PolicyUpdateToken, v.PolicyUpdateToken)
+		case schemas.Policy_RemediationEnabled:
+			return d.ReadBool(schemas.Policy_RemediationEnabled, &v.RemediationEnabled)
+		case schemas.Policy_ResourceSetIds:
+			return deserializeResourceSetIds(d, schemas.Policy_ResourceSetIds, &v.ResourceSetIds)
+		case schemas.Policy_ResourceTagLogicalOperator:
+			var ev string
+			if err := d.ReadString(schemas.Policy_ResourceTagLogicalOperator, &ev); err != nil {
+				return err
+			}
+			v.ResourceTagLogicalOperator = ResourceTagLogicalOperator(ev)
+			return nil
+		case schemas.Policy_ResourceTags:
+			return deserializeResourceTags(d, schemas.Policy_ResourceTags, &v.ResourceTags)
+		case schemas.Policy_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.Policy_ResourceType, v.ResourceType)
+		case schemas.Policy_ResourceTypeList:
+			return deserializeResourceTypeList(d, schemas.Policy_ResourceTypeList, &v.ResourceTypeList)
+		case schemas.Policy_SecurityServicePolicyData:
+			v.SecurityServicePolicyData = &SecurityServicePolicyData{}
+			return v.SecurityServicePolicyData.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the noncompliant resources in a member account for a specific
 // Firewall Manager policy. A maximum of 100 entries are displayed. If more than
 // 100 resources are noncompliant, EvaluationLimitExceeded is set to True .
@@ -1480,6 +3734,57 @@ type PolicyComplianceDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicyComplianceDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyComplianceDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyComplianceDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationLimitExceeded != false {
+		s.WriteBool(schemas.PolicyComplianceDetail_EvaluationLimitExceeded, v.EvaluationLimitExceeded)
+	}
+	if v.ExpiredAt != nil {
+		s.WriteTime(schemas.PolicyComplianceDetail_ExpiredAt, *v.ExpiredAt)
+	}
+	serializeIssueInfoMap(s, schemas.PolicyComplianceDetail_IssueInfoMap, v.IssueInfoMap)
+	if v.MemberAccount != nil {
+		s.WriteString(schemas.PolicyComplianceDetail_MemberAccount, *v.MemberAccount)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.PolicyComplianceDetail_PolicyId, *v.PolicyId)
+	}
+	if v.PolicyOwner != nil {
+		s.WriteString(schemas.PolicyComplianceDetail_PolicyOwner, *v.PolicyOwner)
+	}
+	serializeComplianceViolators(s, schemas.PolicyComplianceDetail_Violators, v.Violators)
+}
+func (v *PolicyComplianceDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyComplianceDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyComplianceDetail_EvaluationLimitExceeded:
+			return d.ReadBool(schemas.PolicyComplianceDetail_EvaluationLimitExceeded, &v.EvaluationLimitExceeded)
+		case schemas.PolicyComplianceDetail_ExpiredAt:
+			v.ExpiredAt = new(time.Time)
+			return d.ReadTime(schemas.PolicyComplianceDetail_ExpiredAt, v.ExpiredAt)
+		case schemas.PolicyComplianceDetail_IssueInfoMap:
+			return deserializeIssueInfoMap(d, schemas.PolicyComplianceDetail_IssueInfoMap, &v.IssueInfoMap)
+		case schemas.PolicyComplianceDetail_MemberAccount:
+			v.MemberAccount = new(string)
+			return d.ReadString(schemas.PolicyComplianceDetail_MemberAccount, v.MemberAccount)
+		case schemas.PolicyComplianceDetail_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.PolicyComplianceDetail_PolicyId, v.PolicyId)
+		case schemas.PolicyComplianceDetail_PolicyOwner:
+			v.PolicyOwner = new(string)
+			return d.ReadString(schemas.PolicyComplianceDetail_PolicyOwner, v.PolicyOwner)
+		case schemas.PolicyComplianceDetail_Violators:
+			return deserializeComplianceViolators(d, schemas.PolicyComplianceDetail_Violators, &v.Violators)
+		}
+		return nil
+	})
+}
+
 // Indicates whether the account is compliant with the specified policy. An
 // account is considered noncompliant if it includes resources that are not
 // protected by the policy, for WAF and Shield Advanced policies, or that are
@@ -1511,6 +3816,58 @@ type PolicyComplianceStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicyComplianceStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyComplianceStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyComplianceStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationResults(s, schemas.PolicyComplianceStatus_EvaluationResults, v.EvaluationResults)
+	serializeIssueInfoMap(s, schemas.PolicyComplianceStatus_IssueInfoMap, v.IssueInfoMap)
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.PolicyComplianceStatus_LastUpdated, *v.LastUpdated)
+	}
+	if v.MemberAccount != nil {
+		s.WriteString(schemas.PolicyComplianceStatus_MemberAccount, *v.MemberAccount)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.PolicyComplianceStatus_PolicyId, *v.PolicyId)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.PolicyComplianceStatus_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyOwner != nil {
+		s.WriteString(schemas.PolicyComplianceStatus_PolicyOwner, *v.PolicyOwner)
+	}
+}
+func (v *PolicyComplianceStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyComplianceStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyComplianceStatus_EvaluationResults:
+			return deserializeEvaluationResults(d, schemas.PolicyComplianceStatus_EvaluationResults, &v.EvaluationResults)
+		case schemas.PolicyComplianceStatus_IssueInfoMap:
+			return deserializeIssueInfoMap(d, schemas.PolicyComplianceStatus_IssueInfoMap, &v.IssueInfoMap)
+		case schemas.PolicyComplianceStatus_LastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.PolicyComplianceStatus_LastUpdated, v.LastUpdated)
+		case schemas.PolicyComplianceStatus_MemberAccount:
+			v.MemberAccount = new(string)
+			return d.ReadString(schemas.PolicyComplianceStatus_MemberAccount, v.MemberAccount)
+		case schemas.PolicyComplianceStatus_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.PolicyComplianceStatus_PolicyId, v.PolicyId)
+		case schemas.PolicyComplianceStatus_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.PolicyComplianceStatus_PolicyName, v.PolicyName)
+		case schemas.PolicyComplianceStatus_PolicyOwner:
+			v.PolicyOwner = new(string)
+			return d.ReadString(schemas.PolicyComplianceStatus_PolicyOwner, v.PolicyOwner)
+		}
+		return nil
+	})
+}
+
 // Contains the settings to configure a network ACL policy, a Network Firewall
 // firewall policy deployment model, or a third-party firewall policy.
 type PolicyOption struct {
@@ -1525,6 +3882,46 @@ type PolicyOption struct {
 	ThirdPartyFirewallPolicy *ThirdPartyFirewallPolicy
 
 	noSmithyDocumentSerde
+}
+
+func (v *PolicyOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkAclCommonPolicy != nil {
+		s.WriteStruct(schemas.PolicyOption_NetworkAclCommonPolicy)
+		v.NetworkAclCommonPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallPolicy != nil {
+		s.WriteStruct(schemas.PolicyOption_NetworkFirewallPolicy)
+		v.NetworkFirewallPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThirdPartyFirewallPolicy != nil {
+		s.WriteStruct(schemas.PolicyOption_ThirdPartyFirewallPolicy)
+		v.ThirdPartyFirewallPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PolicyOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyOption_NetworkAclCommonPolicy:
+			v.NetworkAclCommonPolicy = &NetworkAclCommonPolicy{}
+			return v.NetworkAclCommonPolicy.Deserialize(d)
+		case schemas.PolicyOption_NetworkFirewallPolicy:
+			v.NetworkFirewallPolicy = &NetworkFirewallPolicy{}
+			return v.NetworkFirewallPolicy.Deserialize(d)
+		case schemas.PolicyOption_ThirdPartyFirewallPolicy:
+			v.ThirdPartyFirewallPolicy = &ThirdPartyFirewallPolicy{}
+			return v.ThirdPartyFirewallPolicy.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Details of the Firewall Manager policy.
@@ -1578,6 +3975,76 @@ type PolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PolicySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeleteUnusedFMManagedResources != false {
+		s.WriteBool(schemas.PolicySummary_DeleteUnusedFMManagedResources, v.DeleteUnusedFMManagedResources)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.PolicySummary_PolicyArn, *v.PolicyArn)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.PolicySummary_PolicyId, *v.PolicyId)
+	}
+	if v.PolicyName != nil {
+		s.WriteString(schemas.PolicySummary_PolicyName, *v.PolicyName)
+	}
+	if v.PolicyStatus != "" {
+		s.WriteString(schemas.PolicySummary_PolicyStatus, string(v.PolicyStatus))
+	}
+	if v.RemediationEnabled != false {
+		s.WriteBool(schemas.PolicySummary_RemediationEnabled, v.RemediationEnabled)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.PolicySummary_ResourceType, *v.ResourceType)
+	}
+	if v.SecurityServiceType != "" {
+		s.WriteString(schemas.PolicySummary_SecurityServiceType, string(v.SecurityServiceType))
+	}
+}
+func (v *PolicySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicySummary_DeleteUnusedFMManagedResources:
+			return d.ReadBool(schemas.PolicySummary_DeleteUnusedFMManagedResources, &v.DeleteUnusedFMManagedResources)
+		case schemas.PolicySummary_PolicyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.PolicySummary_PolicyArn, v.PolicyArn)
+		case schemas.PolicySummary_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.PolicySummary_PolicyId, v.PolicyId)
+		case schemas.PolicySummary_PolicyName:
+			v.PolicyName = new(string)
+			return d.ReadString(schemas.PolicySummary_PolicyName, v.PolicyName)
+		case schemas.PolicySummary_PolicyStatus:
+			var ev string
+			if err := d.ReadString(schemas.PolicySummary_PolicyStatus, &ev); err != nil {
+				return err
+			}
+			v.PolicyStatus = CustomerPolicyStatus(ev)
+			return nil
+		case schemas.PolicySummary_RemediationEnabled:
+			return d.ReadBool(schemas.PolicySummary_RemediationEnabled, &v.RemediationEnabled)
+		case schemas.PolicySummary_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.PolicySummary_ResourceType, v.ResourceType)
+		case schemas.PolicySummary_SecurityServiceType:
+			var ev string
+			if err := d.ReadString(schemas.PolicySummary_SecurityServiceType, &ev); err != nil {
+				return err
+			}
+			v.SecurityServiceType = SecurityServiceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Defines the policy types that the specified Firewall Manager administrator can
 // manage.
 type PolicyTypeScope struct {
@@ -1592,6 +4059,30 @@ type PolicyTypeScope struct {
 	PolicyTypes []SecurityServiceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PolicyTypeScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyTypeScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyTypeScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllPolicyTypesEnabled != false {
+		s.WriteBool(schemas.PolicyTypeScope_AllPolicyTypesEnabled, v.AllPolicyTypesEnabled)
+	}
+	serializeSecurityServiceTypeList(s, schemas.PolicyTypeScope_PolicyTypes, v.PolicyTypes)
+}
+func (v *PolicyTypeScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyTypeScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyTypeScope_AllPolicyTypesEnabled:
+			return d.ReadBool(schemas.PolicyTypeScope_AllPolicyTypesEnabled, &v.AllPolicyTypesEnabled)
+		case schemas.PolicyTypeScope_PolicyTypes:
+			return deserializeSecurityServiceTypeList(d, schemas.PolicyTypeScope_PolicyTypes, &v.PolicyTypes)
+		}
+		return nil
+	})
 }
 
 // A list of remediation actions.
@@ -1611,6 +4102,36 @@ type PossibleRemediationAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PossibleRemediationAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PossibleRemediationAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PossibleRemediationAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.PossibleRemediationAction_Description, *v.Description)
+	}
+	if v.IsDefaultAction != false {
+		s.WriteBool(schemas.PossibleRemediationAction_IsDefaultAction, v.IsDefaultAction)
+	}
+	serializeOrderedRemediationActions(s, schemas.PossibleRemediationAction_OrderedRemediationActions, v.OrderedRemediationActions)
+}
+func (v *PossibleRemediationAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PossibleRemediationAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PossibleRemediationAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PossibleRemediationAction_Description, v.Description)
+		case schemas.PossibleRemediationAction_IsDefaultAction:
+			return d.ReadBool(schemas.PossibleRemediationAction_IsDefaultAction, &v.IsDefaultAction)
+		case schemas.PossibleRemediationAction_OrderedRemediationActions:
+			return deserializeOrderedRemediationActions(d, schemas.PossibleRemediationAction_OrderedRemediationActions, &v.OrderedRemediationActions)
+		}
+		return nil
+	})
+}
+
 // A list of possible remediation action lists. Each individual possible
 // remediation action is a list of individual remediation actions.
 type PossibleRemediationActions struct {
@@ -1622,6 +4143,31 @@ type PossibleRemediationActions struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PossibleRemediationActions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PossibleRemediationActions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PossibleRemediationActions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePossibleRemediationActionList(s, schemas.PossibleRemediationActions_Actions, v.Actions)
+	if v.Description != nil {
+		s.WriteString(schemas.PossibleRemediationActions_Description, *v.Description)
+	}
+}
+func (v *PossibleRemediationActions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PossibleRemediationActions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PossibleRemediationActions_Actions:
+			return deserializePossibleRemediationActionList(d, schemas.PossibleRemediationActions_Actions, &v.Actions)
+		case schemas.PossibleRemediationActions_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PossibleRemediationActions_Description, v.Description)
+		}
+		return nil
+	})
 }
 
 // An Firewall Manager protocols list.
@@ -1657,6 +4203,58 @@ type ProtocolsListData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProtocolsListData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtocolsListData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtocolsListData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ProtocolsListData_CreateTime, *v.CreateTime)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.ProtocolsListData_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.ListId != nil {
+		s.WriteString(schemas.ProtocolsListData_ListId, *v.ListId)
+	}
+	if v.ListName != nil {
+		s.WriteString(schemas.ProtocolsListData_ListName, *v.ListName)
+	}
+	if v.ListUpdateToken != nil {
+		s.WriteString(schemas.ProtocolsListData_ListUpdateToken, *v.ListUpdateToken)
+	}
+	serializePreviousProtocolsList(s, schemas.ProtocolsListData_PreviousProtocolsList, v.PreviousProtocolsList)
+	serializeProtocolsList(s, schemas.ProtocolsListData_ProtocolsList, v.ProtocolsList)
+}
+func (v *ProtocolsListData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtocolsListData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtocolsListData_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ProtocolsListData_CreateTime, v.CreateTime)
+		case schemas.ProtocolsListData_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ProtocolsListData_LastUpdateTime, v.LastUpdateTime)
+		case schemas.ProtocolsListData_ListId:
+			v.ListId = new(string)
+			return d.ReadString(schemas.ProtocolsListData_ListId, v.ListId)
+		case schemas.ProtocolsListData_ListName:
+			v.ListName = new(string)
+			return d.ReadString(schemas.ProtocolsListData_ListName, v.ListName)
+		case schemas.ProtocolsListData_ListUpdateToken:
+			v.ListUpdateToken = new(string)
+			return d.ReadString(schemas.ProtocolsListData_ListUpdateToken, v.ListUpdateToken)
+		case schemas.ProtocolsListData_PreviousProtocolsList:
+			return deserializePreviousProtocolsList(d, schemas.ProtocolsListData_PreviousProtocolsList, &v.PreviousProtocolsList)
+		case schemas.ProtocolsListData_ProtocolsList:
+			return deserializeProtocolsList(d, schemas.ProtocolsListData_ProtocolsList, &v.ProtocolsList)
+		}
+		return nil
+	})
+}
+
 // Details of the Firewall Manager protocols list.
 type ProtocolsListDataSummary struct {
 
@@ -1675,6 +4273,43 @@ type ProtocolsListDataSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProtocolsListDataSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProtocolsListDataSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProtocolsListDataSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListArn != nil {
+		s.WriteString(schemas.ProtocolsListDataSummary_ListArn, *v.ListArn)
+	}
+	if v.ListId != nil {
+		s.WriteString(schemas.ProtocolsListDataSummary_ListId, *v.ListId)
+	}
+	if v.ListName != nil {
+		s.WriteString(schemas.ProtocolsListDataSummary_ListName, *v.ListName)
+	}
+	serializeProtocolsList(s, schemas.ProtocolsListDataSummary_ProtocolsList, v.ProtocolsList)
+}
+func (v *ProtocolsListDataSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProtocolsListDataSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProtocolsListDataSummary_ListArn:
+			v.ListArn = new(string)
+			return d.ReadString(schemas.ProtocolsListDataSummary_ListArn, v.ListArn)
+		case schemas.ProtocolsListDataSummary_ListId:
+			v.ListId = new(string)
+			return d.ReadString(schemas.ProtocolsListDataSummary_ListId, v.ListId)
+		case schemas.ProtocolsListDataSummary_ListName:
+			v.ListName = new(string)
+			return d.ReadString(schemas.ProtocolsListDataSummary_ListName, v.ListName)
+		case schemas.ProtocolsListDataSummary_ProtocolsList:
+			return deserializeProtocolsList(d, schemas.ProtocolsListDataSummary_ProtocolsList, &v.ProtocolsList)
+		}
+		return nil
+	})
+}
+
 // Defines the Amazon Web Services Regions that the specified Firewall Manager
 // administrator can manage.
 type RegionScope struct {
@@ -1688,6 +4323,30 @@ type RegionScope struct {
 	Regions []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RegionScope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegionScope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegionScope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllRegionsEnabled != false {
+		s.WriteBool(schemas.RegionScope_AllRegionsEnabled, v.AllRegionsEnabled)
+	}
+	serializeAWSRegionList(s, schemas.RegionScope_Regions, v.Regions)
+}
+func (v *RegionScope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegionScope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegionScope_AllRegionsEnabled:
+			return d.ReadBool(schemas.RegionScope_AllRegionsEnabled, &v.AllRegionsEnabled)
+		case schemas.RegionScope_Regions:
+			return deserializeAWSRegionList(d, schemas.RegionScope_Regions, &v.Regions)
+		}
+		return nil
+	})
 }
 
 // Information about an individual action you can take to remediate a violation.
@@ -1735,6 +4394,124 @@ type RemediationAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemediationAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateNetworkAclAction != nil {
+		s.WriteStruct(schemas.RemediationAction_CreateNetworkAclAction)
+		v.CreateNetworkAclAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreateNetworkAclEntriesAction != nil {
+		s.WriteStruct(schemas.RemediationAction_CreateNetworkAclEntriesAction)
+		v.CreateNetworkAclEntriesAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeleteNetworkAclEntriesAction != nil {
+		s.WriteStruct(schemas.RemediationAction_DeleteNetworkAclEntriesAction)
+		v.DeleteNetworkAclEntriesAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RemediationAction_Description, *v.Description)
+	}
+	if v.EC2AssociateRouteTableAction != nil {
+		s.WriteStruct(schemas.RemediationAction_EC2AssociateRouteTableAction)
+		v.EC2AssociateRouteTableAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EC2CopyRouteTableAction != nil {
+		s.WriteStruct(schemas.RemediationAction_EC2CopyRouteTableAction)
+		v.EC2CopyRouteTableAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EC2CreateRouteAction != nil {
+		s.WriteStruct(schemas.RemediationAction_EC2CreateRouteAction)
+		v.EC2CreateRouteAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EC2CreateRouteTableAction != nil {
+		s.WriteStruct(schemas.RemediationAction_EC2CreateRouteTableAction)
+		v.EC2CreateRouteTableAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EC2DeleteRouteAction != nil {
+		s.WriteStruct(schemas.RemediationAction_EC2DeleteRouteAction)
+		v.EC2DeleteRouteAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EC2ReplaceRouteAction != nil {
+		s.WriteStruct(schemas.RemediationAction_EC2ReplaceRouteAction)
+		v.EC2ReplaceRouteAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EC2ReplaceRouteTableAssociationAction != nil {
+		s.WriteStruct(schemas.RemediationAction_EC2ReplaceRouteTableAssociationAction)
+		v.EC2ReplaceRouteTableAssociationAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FMSPolicyUpdateFirewallCreationConfigAction != nil {
+		s.WriteStruct(schemas.RemediationAction_FMSPolicyUpdateFirewallCreationConfigAction)
+		v.FMSPolicyUpdateFirewallCreationConfigAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ReplaceNetworkAclAssociationAction != nil {
+		s.WriteStruct(schemas.RemediationAction_ReplaceNetworkAclAssociationAction)
+		v.ReplaceNetworkAclAssociationAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RemediationAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationAction_CreateNetworkAclAction:
+			v.CreateNetworkAclAction = &CreateNetworkAclAction{}
+			return v.CreateNetworkAclAction.Deserialize(d)
+		case schemas.RemediationAction_CreateNetworkAclEntriesAction:
+			v.CreateNetworkAclEntriesAction = &CreateNetworkAclEntriesAction{}
+			return v.CreateNetworkAclEntriesAction.Deserialize(d)
+		case schemas.RemediationAction_DeleteNetworkAclEntriesAction:
+			v.DeleteNetworkAclEntriesAction = &DeleteNetworkAclEntriesAction{}
+			return v.DeleteNetworkAclEntriesAction.Deserialize(d)
+		case schemas.RemediationAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RemediationAction_Description, v.Description)
+		case schemas.RemediationAction_EC2AssociateRouteTableAction:
+			v.EC2AssociateRouteTableAction = &EC2AssociateRouteTableAction{}
+			return v.EC2AssociateRouteTableAction.Deserialize(d)
+		case schemas.RemediationAction_EC2CopyRouteTableAction:
+			v.EC2CopyRouteTableAction = &EC2CopyRouteTableAction{}
+			return v.EC2CopyRouteTableAction.Deserialize(d)
+		case schemas.RemediationAction_EC2CreateRouteAction:
+			v.EC2CreateRouteAction = &EC2CreateRouteAction{}
+			return v.EC2CreateRouteAction.Deserialize(d)
+		case schemas.RemediationAction_EC2CreateRouteTableAction:
+			v.EC2CreateRouteTableAction = &EC2CreateRouteTableAction{}
+			return v.EC2CreateRouteTableAction.Deserialize(d)
+		case schemas.RemediationAction_EC2DeleteRouteAction:
+			v.EC2DeleteRouteAction = &EC2DeleteRouteAction{}
+			return v.EC2DeleteRouteAction.Deserialize(d)
+		case schemas.RemediationAction_EC2ReplaceRouteAction:
+			v.EC2ReplaceRouteAction = &EC2ReplaceRouteAction{}
+			return v.EC2ReplaceRouteAction.Deserialize(d)
+		case schemas.RemediationAction_EC2ReplaceRouteTableAssociationAction:
+			v.EC2ReplaceRouteTableAssociationAction = &EC2ReplaceRouteTableAssociationAction{}
+			return v.EC2ReplaceRouteTableAssociationAction.Deserialize(d)
+		case schemas.RemediationAction_FMSPolicyUpdateFirewallCreationConfigAction:
+			v.FMSPolicyUpdateFirewallCreationConfigAction = &FMSPolicyUpdateFirewallCreationConfigAction{}
+			return v.FMSPolicyUpdateFirewallCreationConfigAction.Deserialize(d)
+		case schemas.RemediationAction_ReplaceNetworkAclAssociationAction:
+			v.ReplaceNetworkAclAssociationAction = &ReplaceNetworkAclAssociationAction{}
+			return v.ReplaceNetworkAclAssociationAction.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // An ordered list of actions you can take to remediate a violation.
 type RemediationActionWithOrder struct {
 
@@ -1745,6 +4522,35 @@ type RemediationActionWithOrder struct {
 	RemediationAction *RemediationAction
 
 	noSmithyDocumentSerde
+}
+
+func (v *RemediationActionWithOrder) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemediationActionWithOrder)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemediationActionWithOrder) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Order != 0 {
+		s.WriteInt32(schemas.RemediationActionWithOrder_Order, v.Order)
+	}
+	if v.RemediationAction != nil {
+		s.WriteStruct(schemas.RemediationActionWithOrder_RemediationAction)
+		v.RemediationAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RemediationActionWithOrder) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemediationActionWithOrder, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemediationActionWithOrder_Order:
+			return d.ReadInt32(schemas.RemediationActionWithOrder_Order, &v.Order)
+		case schemas.RemediationActionWithOrder_RemediationAction:
+			v.RemediationAction = &RemediationAction{}
+			return v.RemediationAction.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about the ReplaceNetworkAclAssociation action in Amazon EC2. This
@@ -1768,6 +4574,49 @@ type ReplaceNetworkAclAssociationAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReplaceNetworkAclAssociationAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReplaceNetworkAclAssociationAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReplaceNetworkAclAssociationAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteStruct(schemas.ReplaceNetworkAclAssociationAction_AssociationId)
+		v.AssociationId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ReplaceNetworkAclAssociationAction_Description, *v.Description)
+	}
+	if v.FMSCanRemediate != false {
+		s.WriteBool(schemas.ReplaceNetworkAclAssociationAction_FMSCanRemediate, v.FMSCanRemediate)
+	}
+	if v.NetworkAclId != nil {
+		s.WriteStruct(schemas.ReplaceNetworkAclAssociationAction_NetworkAclId)
+		v.NetworkAclId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ReplaceNetworkAclAssociationAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReplaceNetworkAclAssociationAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReplaceNetworkAclAssociationAction_AssociationId:
+			v.AssociationId = &ActionTarget{}
+			return v.AssociationId.Deserialize(d)
+		case schemas.ReplaceNetworkAclAssociationAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ReplaceNetworkAclAssociationAction_Description, v.Description)
+		case schemas.ReplaceNetworkAclAssociationAction_FMSCanRemediate:
+			return d.ReadBool(schemas.ReplaceNetworkAclAssociationAction_FMSCanRemediate, &v.FMSCanRemediate)
+		case schemas.ReplaceNetworkAclAssociationAction_NetworkAclId:
+			v.NetworkAclId = &ActionTarget{}
+			return v.NetworkAclId.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details of a resource that is associated to an Firewall Manager resource set.
 type Resource struct {
 
@@ -1780,6 +4629,34 @@ type Resource struct {
 	AccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Resource_AccountId, *v.AccountId)
+	}
+	if v.URI != nil {
+		s.WriteString(schemas.Resource_URI, *v.URI)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Resource_AccountId, v.AccountId)
+		case schemas.Resource_URI:
+			v.URI = new(string)
+			return d.ReadString(schemas.Resource_URI, v.URI)
+		}
+		return nil
+	})
 }
 
 // A set of resources to include in a policy.
@@ -1839,6 +4716,65 @@ type ResourceSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ResourceSet_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ResourceSet_Id, *v.Id)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.ResourceSet_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceSet_Name, *v.Name)
+	}
+	if v.ResourceSetStatus != "" {
+		s.WriteString(schemas.ResourceSet_ResourceSetStatus, string(v.ResourceSetStatus))
+	}
+	serializeResourceTypeList(s, schemas.ResourceSet_ResourceTypeList, v.ResourceTypeList)
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.ResourceSet_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *ResourceSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSet_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ResourceSet_Description, v.Description)
+		case schemas.ResourceSet_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResourceSet_Id, v.Id)
+		case schemas.ResourceSet_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceSet_LastUpdateTime, v.LastUpdateTime)
+		case schemas.ResourceSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceSet_Name, v.Name)
+		case schemas.ResourceSet_ResourceSetStatus:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSet_ResourceSetStatus, &ev); err != nil {
+				return err
+			}
+			v.ResourceSetStatus = ResourceSetStatus(ev)
+			return nil
+		case schemas.ResourceSet_ResourceTypeList:
+			return deserializeResourceTypeList(d, schemas.ResourceSet_ResourceTypeList, &v.ResourceTypeList)
+		case schemas.ResourceSet_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.ResourceSet_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
+
 // Summarizes the resource sets used in a policy.
 type ResourceSetSummary struct {
 
@@ -1869,6 +4805,56 @@ type ResourceSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ResourceSetSummary_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ResourceSetSummary_Id, *v.Id)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.ResourceSetSummary_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceSetSummary_Name, *v.Name)
+	}
+	if v.ResourceSetStatus != "" {
+		s.WriteString(schemas.ResourceSetSummary_ResourceSetStatus, string(v.ResourceSetStatus))
+	}
+}
+func (v *ResourceSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSetSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ResourceSetSummary_Description, v.Description)
+		case schemas.ResourceSetSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResourceSetSummary_Id, v.Id)
+		case schemas.ResourceSetSummary_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ResourceSetSummary_LastUpdateTime, v.LastUpdateTime)
+		case schemas.ResourceSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceSetSummary_Name, v.Name)
+		case schemas.ResourceSetSummary_ResourceSetStatus:
+			var ev string
+			if err := d.ReadString(schemas.ResourceSetSummary_ResourceSetStatus, &ev); err != nil {
+				return err
+			}
+			v.ResourceSetStatus = ResourceSetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The resource tags that Firewall Manager uses to determine if a particular
 // resource should be included or excluded from the Firewall Manager policy. Tags
 // enable you to categorize your Amazon Web Services resources in different ways,
@@ -1897,6 +4883,34 @@ type ResourceTag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ResourceTag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceTag_Value, *v.Value)
+	}
+}
+func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResourceTag_Key, v.Key)
+		case schemas.ResourceTag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceTag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Violation detail based on resource type.
@@ -2004,6 +5018,230 @@ type ResourceViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsEc2InstanceViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_AwsEc2InstanceViolation)
+		v.AwsEc2InstanceViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsEc2NetworkInterfaceViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_AwsEc2NetworkInterfaceViolation)
+		v.AwsEc2NetworkInterfaceViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsVPCSecurityGroupViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_AwsVPCSecurityGroupViolation)
+		v.AwsVPCSecurityGroupViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DnsDuplicateRuleGroupViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_DnsDuplicateRuleGroupViolation)
+		v.DnsDuplicateRuleGroupViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DnsRuleGroupLimitExceededViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_DnsRuleGroupLimitExceededViolation)
+		v.DnsRuleGroupLimitExceededViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DnsRuleGroupPriorityConflictViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_DnsRuleGroupPriorityConflictViolation)
+		v.DnsRuleGroupPriorityConflictViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallSubnetIsOutOfScopeViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_FirewallSubnetIsOutOfScopeViolation)
+		v.FirewallSubnetIsOutOfScopeViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallSubnetMissingVPCEndpointViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_FirewallSubnetMissingVPCEndpointViolation)
+		v.FirewallSubnetMissingVPCEndpointViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvalidNetworkAclEntriesViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_InvalidNetworkAclEntriesViolation)
+		v.InvalidNetworkAclEntriesViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallBlackHoleRouteDetectedViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallBlackHoleRouteDetectedViolation)
+		v.NetworkFirewallBlackHoleRouteDetectedViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallInternetTrafficNotInspectedViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallInternetTrafficNotInspectedViolation)
+		v.NetworkFirewallInternetTrafficNotInspectedViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallInvalidRouteConfigurationViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallInvalidRouteConfigurationViolation)
+		v.NetworkFirewallInvalidRouteConfigurationViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallMissingExpectedRTViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallMissingExpectedRTViolation)
+		v.NetworkFirewallMissingExpectedRTViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallMissingExpectedRoutesViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallMissingExpectedRoutesViolation)
+		v.NetworkFirewallMissingExpectedRoutesViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallMissingFirewallViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallMissingFirewallViolation)
+		v.NetworkFirewallMissingFirewallViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallMissingSubnetViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallMissingSubnetViolation)
+		v.NetworkFirewallMissingSubnetViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallPolicyModifiedViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallPolicyModifiedViolation)
+		v.NetworkFirewallPolicyModifiedViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallUnexpectedFirewallRoutesViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallUnexpectedFirewallRoutesViolation)
+		v.NetworkFirewallUnexpectedFirewallRoutesViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkFirewallUnexpectedGatewayRoutesViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_NetworkFirewallUnexpectedGatewayRoutesViolation)
+		v.NetworkFirewallUnexpectedGatewayRoutesViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PossibleRemediationActions != nil {
+		s.WriteStruct(schemas.ResourceViolation_PossibleRemediationActions)
+		v.PossibleRemediationActions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RouteHasOutOfScopeEndpointViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_RouteHasOutOfScopeEndpointViolation)
+		v.RouteHasOutOfScopeEndpointViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThirdPartyFirewallMissingExpectedRouteTableViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_ThirdPartyFirewallMissingExpectedRouteTableViolation)
+		v.ThirdPartyFirewallMissingExpectedRouteTableViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThirdPartyFirewallMissingFirewallViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_ThirdPartyFirewallMissingFirewallViolation)
+		v.ThirdPartyFirewallMissingFirewallViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ThirdPartyFirewallMissingSubnetViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_ThirdPartyFirewallMissingSubnetViolation)
+		v.ThirdPartyFirewallMissingSubnetViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebACLHasIncompatibleConfigurationViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_WebACLHasIncompatibleConfigurationViolation)
+		v.WebACLHasIncompatibleConfigurationViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebACLHasOutOfScopeResourcesViolation != nil {
+		s.WriteStruct(schemas.ResourceViolation_WebACLHasOutOfScopeResourcesViolation)
+		v.WebACLHasOutOfScopeResourcesViolation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ResourceViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceViolation_AwsEc2InstanceViolation:
+			v.AwsEc2InstanceViolation = &AwsEc2InstanceViolation{}
+			return v.AwsEc2InstanceViolation.Deserialize(d)
+		case schemas.ResourceViolation_AwsEc2NetworkInterfaceViolation:
+			v.AwsEc2NetworkInterfaceViolation = &AwsEc2NetworkInterfaceViolation{}
+			return v.AwsEc2NetworkInterfaceViolation.Deserialize(d)
+		case schemas.ResourceViolation_AwsVPCSecurityGroupViolation:
+			v.AwsVPCSecurityGroupViolation = &AwsVPCSecurityGroupViolation{}
+			return v.AwsVPCSecurityGroupViolation.Deserialize(d)
+		case schemas.ResourceViolation_DnsDuplicateRuleGroupViolation:
+			v.DnsDuplicateRuleGroupViolation = &DnsDuplicateRuleGroupViolation{}
+			return v.DnsDuplicateRuleGroupViolation.Deserialize(d)
+		case schemas.ResourceViolation_DnsRuleGroupLimitExceededViolation:
+			v.DnsRuleGroupLimitExceededViolation = &DnsRuleGroupLimitExceededViolation{}
+			return v.DnsRuleGroupLimitExceededViolation.Deserialize(d)
+		case schemas.ResourceViolation_DnsRuleGroupPriorityConflictViolation:
+			v.DnsRuleGroupPriorityConflictViolation = &DnsRuleGroupPriorityConflictViolation{}
+			return v.DnsRuleGroupPriorityConflictViolation.Deserialize(d)
+		case schemas.ResourceViolation_FirewallSubnetIsOutOfScopeViolation:
+			v.FirewallSubnetIsOutOfScopeViolation = &FirewallSubnetIsOutOfScopeViolation{}
+			return v.FirewallSubnetIsOutOfScopeViolation.Deserialize(d)
+		case schemas.ResourceViolation_FirewallSubnetMissingVPCEndpointViolation:
+			v.FirewallSubnetMissingVPCEndpointViolation = &FirewallSubnetMissingVPCEndpointViolation{}
+			return v.FirewallSubnetMissingVPCEndpointViolation.Deserialize(d)
+		case schemas.ResourceViolation_InvalidNetworkAclEntriesViolation:
+			v.InvalidNetworkAclEntriesViolation = &InvalidNetworkAclEntriesViolation{}
+			return v.InvalidNetworkAclEntriesViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallBlackHoleRouteDetectedViolation:
+			v.NetworkFirewallBlackHoleRouteDetectedViolation = &NetworkFirewallBlackHoleRouteDetectedViolation{}
+			return v.NetworkFirewallBlackHoleRouteDetectedViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallInternetTrafficNotInspectedViolation:
+			v.NetworkFirewallInternetTrafficNotInspectedViolation = &NetworkFirewallInternetTrafficNotInspectedViolation{}
+			return v.NetworkFirewallInternetTrafficNotInspectedViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallInvalidRouteConfigurationViolation:
+			v.NetworkFirewallInvalidRouteConfigurationViolation = &NetworkFirewallInvalidRouteConfigurationViolation{}
+			return v.NetworkFirewallInvalidRouteConfigurationViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallMissingExpectedRTViolation:
+			v.NetworkFirewallMissingExpectedRTViolation = &NetworkFirewallMissingExpectedRTViolation{}
+			return v.NetworkFirewallMissingExpectedRTViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallMissingExpectedRoutesViolation:
+			v.NetworkFirewallMissingExpectedRoutesViolation = &NetworkFirewallMissingExpectedRoutesViolation{}
+			return v.NetworkFirewallMissingExpectedRoutesViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallMissingFirewallViolation:
+			v.NetworkFirewallMissingFirewallViolation = &NetworkFirewallMissingFirewallViolation{}
+			return v.NetworkFirewallMissingFirewallViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallMissingSubnetViolation:
+			v.NetworkFirewallMissingSubnetViolation = &NetworkFirewallMissingSubnetViolation{}
+			return v.NetworkFirewallMissingSubnetViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallPolicyModifiedViolation:
+			v.NetworkFirewallPolicyModifiedViolation = &NetworkFirewallPolicyModifiedViolation{}
+			return v.NetworkFirewallPolicyModifiedViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallUnexpectedFirewallRoutesViolation:
+			v.NetworkFirewallUnexpectedFirewallRoutesViolation = &NetworkFirewallUnexpectedFirewallRoutesViolation{}
+			return v.NetworkFirewallUnexpectedFirewallRoutesViolation.Deserialize(d)
+		case schemas.ResourceViolation_NetworkFirewallUnexpectedGatewayRoutesViolation:
+			v.NetworkFirewallUnexpectedGatewayRoutesViolation = &NetworkFirewallUnexpectedGatewayRoutesViolation{}
+			return v.NetworkFirewallUnexpectedGatewayRoutesViolation.Deserialize(d)
+		case schemas.ResourceViolation_PossibleRemediationActions:
+			v.PossibleRemediationActions = &PossibleRemediationActions{}
+			return v.PossibleRemediationActions.Deserialize(d)
+		case schemas.ResourceViolation_RouteHasOutOfScopeEndpointViolation:
+			v.RouteHasOutOfScopeEndpointViolation = &RouteHasOutOfScopeEndpointViolation{}
+			return v.RouteHasOutOfScopeEndpointViolation.Deserialize(d)
+		case schemas.ResourceViolation_ThirdPartyFirewallMissingExpectedRouteTableViolation:
+			v.ThirdPartyFirewallMissingExpectedRouteTableViolation = &ThirdPartyFirewallMissingExpectedRouteTableViolation{}
+			return v.ThirdPartyFirewallMissingExpectedRouteTableViolation.Deserialize(d)
+		case schemas.ResourceViolation_ThirdPartyFirewallMissingFirewallViolation:
+			v.ThirdPartyFirewallMissingFirewallViolation = &ThirdPartyFirewallMissingFirewallViolation{}
+			return v.ThirdPartyFirewallMissingFirewallViolation.Deserialize(d)
+		case schemas.ResourceViolation_ThirdPartyFirewallMissingSubnetViolation:
+			v.ThirdPartyFirewallMissingSubnetViolation = &ThirdPartyFirewallMissingSubnetViolation{}
+			return v.ThirdPartyFirewallMissingSubnetViolation.Deserialize(d)
+		case schemas.ResourceViolation_WebACLHasIncompatibleConfigurationViolation:
+			v.WebACLHasIncompatibleConfigurationViolation = &WebACLHasIncompatibleConfigurationViolation{}
+			return v.WebACLHasIncompatibleConfigurationViolation.Deserialize(d)
+		case schemas.ResourceViolation_WebACLHasOutOfScopeResourcesViolation:
+			v.WebACLHasOutOfScopeResourcesViolation = &WebACLHasOutOfScopeResourcesViolation{}
+			return v.WebACLHasOutOfScopeResourcesViolation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a route in a route table.
 type Route struct {
 
@@ -2020,6 +5258,54 @@ type Route struct {
 	TargetType TargetType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Route) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Route)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Route) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.Route_Destination, *v.Destination)
+	}
+	if v.DestinationType != "" {
+		s.WriteString(schemas.Route_DestinationType, string(v.DestinationType))
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.Route_Target, *v.Target)
+	}
+	if v.TargetType != "" {
+		s.WriteString(schemas.Route_TargetType, string(v.TargetType))
+	}
+}
+func (v *Route) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Route, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Route_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.Route_Destination, v.Destination)
+		case schemas.Route_DestinationType:
+			var ev string
+			if err := d.ReadString(schemas.Route_DestinationType, &ev); err != nil {
+				return err
+			}
+			v.DestinationType = DestinationType(ev)
+			return nil
+		case schemas.Route_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.Route_Target, v.Target)
+		case schemas.Route_TargetType:
+			var ev string
+			if err := d.ReadString(schemas.Route_TargetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = TargetType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains details about the route endpoint that violates the policy scope.
@@ -2064,6 +5350,85 @@ type RouteHasOutOfScopeEndpointViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RouteHasOutOfScopeEndpointViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteHasOutOfScopeEndpointViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteHasOutOfScopeEndpointViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentFirewallSubnetRouteTable != nil {
+		s.WriteString(schemas.RouteHasOutOfScopeEndpointViolation_CurrentFirewallSubnetRouteTable, *v.CurrentFirewallSubnetRouteTable)
+	}
+	if v.CurrentInternetGatewayRouteTable != nil {
+		s.WriteString(schemas.RouteHasOutOfScopeEndpointViolation_CurrentInternetGatewayRouteTable, *v.CurrentInternetGatewayRouteTable)
+	}
+	if v.FirewallSubnetId != nil {
+		s.WriteString(schemas.RouteHasOutOfScopeEndpointViolation_FirewallSubnetId, *v.FirewallSubnetId)
+	}
+	serializeRoutes(s, schemas.RouteHasOutOfScopeEndpointViolation_FirewallSubnetRoutes, v.FirewallSubnetRoutes)
+	if v.InternetGatewayId != nil {
+		s.WriteString(schemas.RouteHasOutOfScopeEndpointViolation_InternetGatewayId, *v.InternetGatewayId)
+	}
+	serializeRoutes(s, schemas.RouteHasOutOfScopeEndpointViolation_InternetGatewayRoutes, v.InternetGatewayRoutes)
+	if v.RouteTableId != nil {
+		s.WriteString(schemas.RouteHasOutOfScopeEndpointViolation_RouteTableId, *v.RouteTableId)
+	}
+	if v.SubnetAvailabilityZone != nil {
+		s.WriteString(schemas.RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZone, *v.SubnetAvailabilityZone)
+	}
+	if v.SubnetAvailabilityZoneId != nil {
+		s.WriteString(schemas.RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZoneId, *v.SubnetAvailabilityZoneId)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.RouteHasOutOfScopeEndpointViolation_SubnetId, *v.SubnetId)
+	}
+	serializeRoutes(s, schemas.RouteHasOutOfScopeEndpointViolation_ViolatingRoutes, v.ViolatingRoutes)
+	if v.VpcId != nil {
+		s.WriteString(schemas.RouteHasOutOfScopeEndpointViolation_VpcId, *v.VpcId)
+	}
+}
+func (v *RouteHasOutOfScopeEndpointViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteHasOutOfScopeEndpointViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteHasOutOfScopeEndpointViolation_CurrentFirewallSubnetRouteTable:
+			v.CurrentFirewallSubnetRouteTable = new(string)
+			return d.ReadString(schemas.RouteHasOutOfScopeEndpointViolation_CurrentFirewallSubnetRouteTable, v.CurrentFirewallSubnetRouteTable)
+		case schemas.RouteHasOutOfScopeEndpointViolation_CurrentInternetGatewayRouteTable:
+			v.CurrentInternetGatewayRouteTable = new(string)
+			return d.ReadString(schemas.RouteHasOutOfScopeEndpointViolation_CurrentInternetGatewayRouteTable, v.CurrentInternetGatewayRouteTable)
+		case schemas.RouteHasOutOfScopeEndpointViolation_FirewallSubnetId:
+			v.FirewallSubnetId = new(string)
+			return d.ReadString(schemas.RouteHasOutOfScopeEndpointViolation_FirewallSubnetId, v.FirewallSubnetId)
+		case schemas.RouteHasOutOfScopeEndpointViolation_FirewallSubnetRoutes:
+			return deserializeRoutes(d, schemas.RouteHasOutOfScopeEndpointViolation_FirewallSubnetRoutes, &v.FirewallSubnetRoutes)
+		case schemas.RouteHasOutOfScopeEndpointViolation_InternetGatewayId:
+			v.InternetGatewayId = new(string)
+			return d.ReadString(schemas.RouteHasOutOfScopeEndpointViolation_InternetGatewayId, v.InternetGatewayId)
+		case schemas.RouteHasOutOfScopeEndpointViolation_InternetGatewayRoutes:
+			return deserializeRoutes(d, schemas.RouteHasOutOfScopeEndpointViolation_InternetGatewayRoutes, &v.InternetGatewayRoutes)
+		case schemas.RouteHasOutOfScopeEndpointViolation_RouteTableId:
+			v.RouteTableId = new(string)
+			return d.ReadString(schemas.RouteHasOutOfScopeEndpointViolation_RouteTableId, v.RouteTableId)
+		case schemas.RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZone:
+			v.SubnetAvailabilityZone = new(string)
+			return d.ReadString(schemas.RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZone, v.SubnetAvailabilityZone)
+		case schemas.RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZoneId:
+			v.SubnetAvailabilityZoneId = new(string)
+			return d.ReadString(schemas.RouteHasOutOfScopeEndpointViolation_SubnetAvailabilityZoneId, v.SubnetAvailabilityZoneId)
+		case schemas.RouteHasOutOfScopeEndpointViolation_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.RouteHasOutOfScopeEndpointViolation_SubnetId, v.SubnetId)
+		case schemas.RouteHasOutOfScopeEndpointViolation_ViolatingRoutes:
+			return deserializeRoutes(d, schemas.RouteHasOutOfScopeEndpointViolation_ViolatingRoutes, &v.ViolatingRoutes)
+		case schemas.RouteHasOutOfScopeEndpointViolation_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.RouteHasOutOfScopeEndpointViolation_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Remediation option for the rule specified in the ViolationTarget .
 type SecurityGroupRemediationAction struct {
 
@@ -2081,6 +5446,51 @@ type SecurityGroupRemediationAction struct {
 	RemediationResult *SecurityGroupRuleDescription
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityGroupRemediationAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityGroupRemediationAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityGroupRemediationAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.SecurityGroupRemediationAction_Description, *v.Description)
+	}
+	if v.IsDefaultAction != false {
+		s.WriteBool(schemas.SecurityGroupRemediationAction_IsDefaultAction, v.IsDefaultAction)
+	}
+	if v.RemediationActionType != "" {
+		s.WriteString(schemas.SecurityGroupRemediationAction_RemediationActionType, string(v.RemediationActionType))
+	}
+	if v.RemediationResult != nil {
+		s.WriteStruct(schemas.SecurityGroupRemediationAction_RemediationResult)
+		v.RemediationResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SecurityGroupRemediationAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityGroupRemediationAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityGroupRemediationAction_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SecurityGroupRemediationAction_Description, v.Description)
+		case schemas.SecurityGroupRemediationAction_IsDefaultAction:
+			return d.ReadBool(schemas.SecurityGroupRemediationAction_IsDefaultAction, &v.IsDefaultAction)
+		case schemas.SecurityGroupRemediationAction_RemediationActionType:
+			var ev string
+			if err := d.ReadString(schemas.SecurityGroupRemediationAction_RemediationActionType, &ev); err != nil {
+				return err
+			}
+			v.RemediationActionType = RemediationActionType(ev)
+			return nil
+		case schemas.SecurityGroupRemediationAction_RemediationResult:
+			v.RemediationResult = &SecurityGroupRuleDescription{}
+			return v.RemediationResult.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes a set of permissions for a security group rule.
@@ -2107,6 +5517,58 @@ type SecurityGroupRuleDescription struct {
 	ToPort *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityGroupRuleDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityGroupRuleDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityGroupRuleDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromPort != nil {
+		s.WriteInt64(schemas.SecurityGroupRuleDescription_FromPort, *v.FromPort)
+	}
+	if v.IPV4Range != nil {
+		s.WriteString(schemas.SecurityGroupRuleDescription_IPV4Range, *v.IPV4Range)
+	}
+	if v.IPV6Range != nil {
+		s.WriteString(schemas.SecurityGroupRuleDescription_IPV6Range, *v.IPV6Range)
+	}
+	if v.PrefixListId != nil {
+		s.WriteString(schemas.SecurityGroupRuleDescription_PrefixListId, *v.PrefixListId)
+	}
+	if v.Protocol != nil {
+		s.WriteString(schemas.SecurityGroupRuleDescription_Protocol, *v.Protocol)
+	}
+	if v.ToPort != nil {
+		s.WriteInt64(schemas.SecurityGroupRuleDescription_ToPort, *v.ToPort)
+	}
+}
+func (v *SecurityGroupRuleDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityGroupRuleDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityGroupRuleDescription_FromPort:
+			v.FromPort = new(int64)
+			return d.ReadInt64(schemas.SecurityGroupRuleDescription_FromPort, v.FromPort)
+		case schemas.SecurityGroupRuleDescription_IPV4Range:
+			v.IPV4Range = new(string)
+			return d.ReadString(schemas.SecurityGroupRuleDescription_IPV4Range, v.IPV4Range)
+		case schemas.SecurityGroupRuleDescription_IPV6Range:
+			v.IPV6Range = new(string)
+			return d.ReadString(schemas.SecurityGroupRuleDescription_IPV6Range, v.IPV6Range)
+		case schemas.SecurityGroupRuleDescription_PrefixListId:
+			v.PrefixListId = new(string)
+			return d.ReadString(schemas.SecurityGroupRuleDescription_PrefixListId, v.PrefixListId)
+		case schemas.SecurityGroupRuleDescription_Protocol:
+			v.Protocol = new(string)
+			return d.ReadString(schemas.SecurityGroupRuleDescription_Protocol, v.Protocol)
+		case schemas.SecurityGroupRuleDescription_ToPort:
+			v.ToPort = new(int64)
+			return d.ReadInt64(schemas.SecurityGroupRuleDescription_ToPort, v.ToPort)
+		}
+		return nil
+	})
 }
 
 // Details about the security service that is being used to protect the resources.
@@ -2395,6 +5857,46 @@ type SecurityServicePolicyData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SecurityServicePolicyData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityServicePolicyData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityServicePolicyData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ManagedServiceData != nil {
+		s.WriteString(schemas.SecurityServicePolicyData_ManagedServiceData, *v.ManagedServiceData)
+	}
+	if v.PolicyOption != nil {
+		s.WriteStruct(schemas.SecurityServicePolicyData_PolicyOption)
+		v.PolicyOption.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SecurityServicePolicyData_Type, string(v.Type))
+	}
+}
+func (v *SecurityServicePolicyData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityServicePolicyData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityServicePolicyData_ManagedServiceData:
+			v.ManagedServiceData = new(string)
+			return d.ReadString(schemas.SecurityServicePolicyData_ManagedServiceData, v.ManagedServiceData)
+		case schemas.SecurityServicePolicyData_PolicyOption:
+			v.PolicyOption = &PolicyOption{}
+			return v.PolicyOption.Deserialize(d)
+		case schemas.SecurityServicePolicyData_Type:
+			var ev string
+			if err := d.ReadString(schemas.SecurityServicePolicyData_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SecurityServiceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configuration settings for the handling of the stateful rule groups in a
 // Network Firewall firewall policy.
 type StatefulEngineOptions struct {
@@ -2443,6 +5945,42 @@ type StatefulEngineOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StatefulEngineOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatefulEngineOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatefulEngineOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleOrder != "" {
+		s.WriteString(schemas.StatefulEngineOptions_RuleOrder, string(v.RuleOrder))
+	}
+	if v.StreamExceptionPolicy != "" {
+		s.WriteString(schemas.StatefulEngineOptions_StreamExceptionPolicy, string(v.StreamExceptionPolicy))
+	}
+}
+func (v *StatefulEngineOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatefulEngineOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatefulEngineOptions_RuleOrder:
+			var ev string
+			if err := d.ReadString(schemas.StatefulEngineOptions_RuleOrder, &ev); err != nil {
+				return err
+			}
+			v.RuleOrder = RuleOrder(ev)
+			return nil
+		case schemas.StatefulEngineOptions_StreamExceptionPolicy:
+			var ev string
+			if err := d.ReadString(schemas.StatefulEngineOptions_StreamExceptionPolicy, &ev); err != nil {
+				return err
+			}
+			v.StreamExceptionPolicy = StreamExceptionPolicy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Network Firewall stateful rule group, used in a NetworkFirewallPolicyDescription.
 type StatefulRuleGroup struct {
 
@@ -2473,6 +6011,48 @@ type StatefulRuleGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StatefulRuleGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatefulRuleGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatefulRuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Override != nil {
+		s.WriteStruct(schemas.StatefulRuleGroup_Override)
+		v.Override.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.StatefulRuleGroup_Priority, *v.Priority)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.StatefulRuleGroup_ResourceId, *v.ResourceId)
+	}
+	if v.RuleGroupName != nil {
+		s.WriteString(schemas.StatefulRuleGroup_RuleGroupName, *v.RuleGroupName)
+	}
+}
+func (v *StatefulRuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatefulRuleGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatefulRuleGroup_Override:
+			v.Override = &NetworkFirewallStatefulRuleGroupOverride{}
+			return v.Override.Deserialize(d)
+		case schemas.StatefulRuleGroup_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.StatefulRuleGroup_Priority, v.Priority)
+		case schemas.StatefulRuleGroup_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.StatefulRuleGroup_ResourceId, v.ResourceId)
+		case schemas.StatefulRuleGroup_RuleGroupName:
+			v.RuleGroupName = new(string)
+			return d.ReadString(schemas.StatefulRuleGroup_RuleGroupName, v.RuleGroupName)
+		}
+		return nil
+	})
+}
+
 // Network Firewall stateless rule group, used in a NetworkFirewallPolicyDescription.
 type StatelessRuleGroup struct {
 
@@ -2487,6 +6067,40 @@ type StatelessRuleGroup struct {
 	RuleGroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StatelessRuleGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatelessRuleGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatelessRuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Priority != nil {
+		s.WriteInt32(schemas.StatelessRuleGroup_Priority, *v.Priority)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.StatelessRuleGroup_ResourceId, *v.ResourceId)
+	}
+	if v.RuleGroupName != nil {
+		s.WriteString(schemas.StatelessRuleGroup_RuleGroupName, *v.RuleGroupName)
+	}
+}
+func (v *StatelessRuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatelessRuleGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatelessRuleGroup_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.StatelessRuleGroup_Priority, v.Priority)
+		case schemas.StatelessRuleGroup_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.StatelessRuleGroup_ResourceId, v.ResourceId)
+		case schemas.StatelessRuleGroup_RuleGroupName:
+			v.RuleGroupName = new(string)
+			return d.ReadString(schemas.StatelessRuleGroup_RuleGroupName, v.RuleGroupName)
+		}
+		return nil
+	})
 }
 
 // A collection of key:value pairs associated with an Amazon Web Services
@@ -2513,6 +6127,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Configures the third-party firewall's firewall policy.
 type ThirdPartyFirewallFirewallPolicy struct {
 
@@ -2523,6 +6165,34 @@ type ThirdPartyFirewallFirewallPolicy struct {
 	FirewallPolicyName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ThirdPartyFirewallFirewallPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThirdPartyFirewallFirewallPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThirdPartyFirewallFirewallPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallPolicyId != nil {
+		s.WriteString(schemas.ThirdPartyFirewallFirewallPolicy_FirewallPolicyId, *v.FirewallPolicyId)
+	}
+	if v.FirewallPolicyName != nil {
+		s.WriteString(schemas.ThirdPartyFirewallFirewallPolicy_FirewallPolicyName, *v.FirewallPolicyName)
+	}
+}
+func (v *ThirdPartyFirewallFirewallPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThirdPartyFirewallFirewallPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThirdPartyFirewallFirewallPolicy_FirewallPolicyId:
+			v.FirewallPolicyId = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallFirewallPolicy_FirewallPolicyId, v.FirewallPolicyId)
+		case schemas.ThirdPartyFirewallFirewallPolicy_FirewallPolicyName:
+			v.FirewallPolicyName = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallFirewallPolicy_FirewallPolicyName, v.FirewallPolicyName)
+		}
+		return nil
+	})
 }
 
 // The violation details for a third-party firewall that's not associated with an
@@ -2549,6 +6219,52 @@ type ThirdPartyFirewallMissingExpectedRouteTableViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ThirdPartyFirewallMissingExpectedRouteTableViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThirdPartyFirewallMissingExpectedRouteTableViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.CurrentRouteTable != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_CurrentRouteTable, *v.CurrentRouteTable)
+	}
+	if v.ExpectedRouteTable != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_ExpectedRouteTable, *v.ExpectedRouteTable)
+	}
+	if v.VPC != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_VPC, *v.VPC)
+	}
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_ViolationTarget, *v.ViolationTarget)
+	}
+}
+func (v *ThirdPartyFirewallMissingExpectedRouteTableViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_AvailabilityZone, v.AvailabilityZone)
+		case schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_CurrentRouteTable:
+			v.CurrentRouteTable = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_CurrentRouteTable, v.CurrentRouteTable)
+		case schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_ExpectedRouteTable:
+			v.ExpectedRouteTable = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_ExpectedRouteTable, v.ExpectedRouteTable)
+		case schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_VPC:
+			v.VPC = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_VPC, v.VPC)
+		case schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingExpectedRouteTableViolation_ViolationTarget, v.ViolationTarget)
+		}
+		return nil
+	})
+}
+
 // The violation details about a third-party firewall's subnet that doesn't have a
 // Firewall Manager managed firewall in its VPC.
 type ThirdPartyFirewallMissingFirewallViolation struct {
@@ -2566,6 +6282,46 @@ type ThirdPartyFirewallMissingFirewallViolation struct {
 	ViolationTarget *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ThirdPartyFirewallMissingFirewallViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThirdPartyFirewallMissingFirewallViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThirdPartyFirewallMissingFirewallViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingFirewallViolation_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.TargetViolationReason != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingFirewallViolation_TargetViolationReason, *v.TargetViolationReason)
+	}
+	if v.VPC != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingFirewallViolation_VPC, *v.VPC)
+	}
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingFirewallViolation_ViolationTarget, *v.ViolationTarget)
+	}
+}
+func (v *ThirdPartyFirewallMissingFirewallViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThirdPartyFirewallMissingFirewallViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThirdPartyFirewallMissingFirewallViolation_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingFirewallViolation_AvailabilityZone, v.AvailabilityZone)
+		case schemas.ThirdPartyFirewallMissingFirewallViolation_TargetViolationReason:
+			v.TargetViolationReason = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingFirewallViolation_TargetViolationReason, v.TargetViolationReason)
+		case schemas.ThirdPartyFirewallMissingFirewallViolation_VPC:
+			v.VPC = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingFirewallViolation_VPC, v.VPC)
+		case schemas.ThirdPartyFirewallMissingFirewallViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingFirewallViolation_ViolationTarget, v.ViolationTarget)
+		}
+		return nil
+	})
 }
 
 // The violation details for a third-party firewall for an Availability Zone
@@ -2588,6 +6344,46 @@ type ThirdPartyFirewallMissingSubnetViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ThirdPartyFirewallMissingSubnetViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThirdPartyFirewallMissingSubnetViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThirdPartyFirewallMissingSubnetViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingSubnetViolation_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.TargetViolationReason != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingSubnetViolation_TargetViolationReason, *v.TargetViolationReason)
+	}
+	if v.VPC != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingSubnetViolation_VPC, *v.VPC)
+	}
+	if v.ViolationTarget != nil {
+		s.WriteString(schemas.ThirdPartyFirewallMissingSubnetViolation_ViolationTarget, *v.ViolationTarget)
+	}
+}
+func (v *ThirdPartyFirewallMissingSubnetViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThirdPartyFirewallMissingSubnetViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThirdPartyFirewallMissingSubnetViolation_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingSubnetViolation_AvailabilityZone, v.AvailabilityZone)
+		case schemas.ThirdPartyFirewallMissingSubnetViolation_TargetViolationReason:
+			v.TargetViolationReason = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingSubnetViolation_TargetViolationReason, v.TargetViolationReason)
+		case schemas.ThirdPartyFirewallMissingSubnetViolation_VPC:
+			v.VPC = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingSubnetViolation_VPC, v.VPC)
+		case schemas.ThirdPartyFirewallMissingSubnetViolation_ViolationTarget:
+			v.ViolationTarget = new(string)
+			return d.ReadString(schemas.ThirdPartyFirewallMissingSubnetViolation_ViolationTarget, v.ViolationTarget)
+		}
+		return nil
+	})
+}
+
 // Configures the deployment model for the third-party firewall.
 type ThirdPartyFirewallPolicy struct {
 
@@ -2595,6 +6391,32 @@ type ThirdPartyFirewallPolicy struct {
 	FirewallDeploymentModel FirewallDeploymentModel
 
 	noSmithyDocumentSerde
+}
+
+func (v *ThirdPartyFirewallPolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThirdPartyFirewallPolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThirdPartyFirewallPolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDeploymentModel != "" {
+		s.WriteString(schemas.ThirdPartyFirewallPolicy_FirewallDeploymentModel, string(v.FirewallDeploymentModel))
+	}
+}
+func (v *ThirdPartyFirewallPolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThirdPartyFirewallPolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThirdPartyFirewallPolicy_FirewallDeploymentModel:
+			var ev string
+			if err := d.ReadString(schemas.ThirdPartyFirewallPolicy_FirewallDeploymentModel, &ev); err != nil {
+				return err
+			}
+			v.FirewallDeploymentModel = FirewallDeploymentModel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Violations for a resource based on the specified Firewall Manager policy and
@@ -2636,6 +6458,58 @@ type ViolationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ViolationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ViolationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ViolationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemberAccount != nil {
+		s.WriteString(schemas.ViolationDetail_MemberAccount, *v.MemberAccount)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.ViolationDetail_PolicyId, *v.PolicyId)
+	}
+	if v.ResourceDescription != nil {
+		s.WriteString(schemas.ViolationDetail_ResourceDescription, *v.ResourceDescription)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.ViolationDetail_ResourceId, *v.ResourceId)
+	}
+	serializeTagList(s, schemas.ViolationDetail_ResourceTags, v.ResourceTags)
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ViolationDetail_ResourceType, *v.ResourceType)
+	}
+	serializeResourceViolations(s, schemas.ViolationDetail_ResourceViolations, v.ResourceViolations)
+}
+func (v *ViolationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ViolationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ViolationDetail_MemberAccount:
+			v.MemberAccount = new(string)
+			return d.ReadString(schemas.ViolationDetail_MemberAccount, v.MemberAccount)
+		case schemas.ViolationDetail_PolicyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.ViolationDetail_PolicyId, v.PolicyId)
+		case schemas.ViolationDetail_ResourceDescription:
+			v.ResourceDescription = new(string)
+			return d.ReadString(schemas.ViolationDetail_ResourceDescription, v.ResourceDescription)
+		case schemas.ViolationDetail_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.ViolationDetail_ResourceId, v.ResourceId)
+		case schemas.ViolationDetail_ResourceTags:
+			return deserializeTagList(d, schemas.ViolationDetail_ResourceTags, &v.ResourceTags)
+		case schemas.ViolationDetail_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ViolationDetail_ResourceType, v.ResourceType)
+		case schemas.ViolationDetail_ResourceViolations:
+			return deserializeResourceViolations(d, schemas.ViolationDetail_ResourceViolations, &v.ResourceViolations)
+		}
+		return nil
+	})
+}
+
 // The violation details for a web ACL whose configuration is incompatible with
 // the Firewall Manager policy.
 type WebACLHasIncompatibleConfigurationViolation struct {
@@ -2650,6 +6524,34 @@ type WebACLHasIncompatibleConfigurationViolation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WebACLHasIncompatibleConfigurationViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebACLHasIncompatibleConfigurationViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebACLHasIncompatibleConfigurationViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.WebACLHasIncompatibleConfigurationViolation_Description, *v.Description)
+	}
+	if v.WebACLArn != nil {
+		s.WriteString(schemas.WebACLHasIncompatibleConfigurationViolation_WebACLArn, *v.WebACLArn)
+	}
+}
+func (v *WebACLHasIncompatibleConfigurationViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebACLHasIncompatibleConfigurationViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebACLHasIncompatibleConfigurationViolation_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WebACLHasIncompatibleConfigurationViolation_Description, v.Description)
+		case schemas.WebACLHasIncompatibleConfigurationViolation_WebACLArn:
+			v.WebACLArn = new(string)
+			return d.ReadString(schemas.WebACLHasIncompatibleConfigurationViolation_WebACLArn, v.WebACLArn)
+		}
+		return nil
+	})
+}
+
 // The violation details for a web ACL that's associated with at least one
 // resource that's out of scope of the Firewall Manager policy.
 type WebACLHasOutOfScopeResourcesViolation struct {
@@ -2662,6 +6564,31 @@ type WebACLHasOutOfScopeResourcesViolation struct {
 	WebACLArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WebACLHasOutOfScopeResourcesViolation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebACLHasOutOfScopeResourcesViolation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebACLHasOutOfScopeResourcesViolation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceArnList(s, schemas.WebACLHasOutOfScopeResourcesViolation_OutOfScopeResourceList, v.OutOfScopeResourceList)
+	if v.WebACLArn != nil {
+		s.WriteString(schemas.WebACLHasOutOfScopeResourcesViolation_WebACLArn, *v.WebACLArn)
+	}
+}
+func (v *WebACLHasOutOfScopeResourcesViolation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebACLHasOutOfScopeResourcesViolation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebACLHasOutOfScopeResourcesViolation_OutOfScopeResourceList:
+			return deserializeResourceArnList(d, schemas.WebACLHasOutOfScopeResourcesViolation_OutOfScopeResourceList, &v.OutOfScopeResourceList)
+		case schemas.WebACLHasOutOfScopeResourcesViolation_WebACLArn:
+			v.WebACLArn = new(string)
+			return d.ReadString(schemas.WebACLHasOutOfScopeResourcesViolation_WebACLArn, v.WebACLArn)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -1,0 +1,5 @@
+POST /graph/datasources/update
+
+Content-Type: application/json
+
+{"DatasourcePackages":["DETECTIVE_CORE","DETECTIVE_CORE"],"GraphArn":"__GraphArn__"}

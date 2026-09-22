@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListEdgePackagingJobs
+
+{"EdgePackagingJobSummaries":[{"CompilationJobName":"__CompilationJobName__","CreationTime":946684800,"EdgePackagingJobArn":"__EdgePackagingJobArn__","EdgePackagingJobName":"__EdgePackagingJobName__","EdgePackagingJobStatus":"STARTING","LastModifiedTime":946684800,"ModelName":"__ModelName__","ModelVersion":"__ModelVersion__"},{"CompilationJobName":"__CompilationJobName__","CreationTime":946684800,"EdgePackagingJobArn":"__EdgePackagingJobArn__","EdgePackagingJobName":"__EdgePackagingJobName__","EdgePackagingJobStatus":"STARTING","LastModifiedTime":946684800,"ModelName":"__ModelName__","ModelVersion":"__ModelVersion__"}],"NextToken":"__NextToken__"}

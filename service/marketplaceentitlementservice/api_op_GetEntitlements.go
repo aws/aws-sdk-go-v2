@@ -5,10 +5,10 @@ package marketplaceentitlementservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // GetEntitlements retrieves entitlement values for a given product. The results
@@ -66,6 +66,25 @@ type GetEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEntitlementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEntitlementsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEntitlementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetEntitlementFilters(s, schemas.GetEntitlementsRequest_Filter, v.Filter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetEntitlementsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEntitlementsRequest_NextToken, *v.NextToken)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.GetEntitlementsRequest_ProductCode, *v.ProductCode)
+	}
+}
+
 // The GetEntitlementsRequest contains results from the GetEntitlements operation.
 type GetEntitlementsOutput struct {
 
@@ -85,65 +104,45 @@ type GetEntitlementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEntitlementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEntitlementsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEntitlementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntitlementList(s, schemas.GetEntitlementsResult_Entitlements, v.Entitlements)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEntitlementsResult_NextToken, *v.NextToken)
+	}
+}
+func (v *GetEntitlementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEntitlementsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEntitlementsResult_Entitlements:
+			return deserializeEntitlementList(d, schemas.GetEntitlementsResult_Entitlements, &v.Entitlements)
+		case schemas.GetEntitlementsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEntitlementsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEntitlements, schemas.GetEntitlementsRequest, schemas.GetEntitlementsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEntitlements, schemas.GetEntitlementsRequest, schemas.GetEntitlementsResult), output: &GetEntitlementsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEntitlements{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEntitlements"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -153,12 +152,6 @@ func (c *Client) addOperationGetEntitlementsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpGetEntitlementsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEntitlements(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +164,6 @@ func (c *Client) addOperationGetEntitlementsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +265,3 @@ type GetEntitlementsAPIClient interface {
 }
 
 var _ GetEntitlementsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetEntitlements(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEntitlements",
-	}
-}

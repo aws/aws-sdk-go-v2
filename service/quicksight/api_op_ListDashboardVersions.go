@@ -5,10 +5,10 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the versions of the dashboards in the Amazon Quick Sight subscription.
@@ -49,6 +49,27 @@ type ListDashboardVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListDashboardVersionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.ListDashboardVersionsRequest_DashboardId, *v.DashboardId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDashboardVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDashboardVersionsOutput struct {
 
 	// A structure that contains information about each version of the dashboard.
@@ -69,77 +90,62 @@ type ListDashboardVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDashboardVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDashboardVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDashboardVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDashboardVersionSummaryList(s, schemas.ListDashboardVersionsResponse_DashboardVersionSummaryList, v.DashboardVersionSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDashboardVersionsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListDashboardVersionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListDashboardVersionsResponse_Status, v.Status)
+	}
+}
+func (v *ListDashboardVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDashboardVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDashboardVersionsResponse_DashboardVersionSummaryList:
+			return deserializeDashboardVersionSummaryList(d, schemas.ListDashboardVersionsResponse_DashboardVersionSummaryList, &v.DashboardVersionSummaryList)
+		case schemas.ListDashboardVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDashboardVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListDashboardVersionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListDashboardVersionsResponse_RequestId, v.RequestId)
+		case schemas.ListDashboardVersionsResponse_Status:
+			return d.ReadInt32(schemas.ListDashboardVersionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDashboardVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboardVersions, schemas.ListDashboardVersionsRequest, schemas.ListDashboardVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDashboardVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDashboardVersions, schemas.ListDashboardVersionsRequest, schemas.ListDashboardVersionsResponse), output: &ListDashboardVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDashboardVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDashboardVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDashboardVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDashboardVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +158,6 @@ func (c *Client) addOperationListDashboardVersionsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +259,3 @@ type ListDashboardVersionsAPIClient interface {
 }
 
 var _ ListDashboardVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDashboardVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDashboardVersions",
-	}
-}

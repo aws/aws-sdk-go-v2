@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/connectivity
+
+Content-Type: application/json
+
+{"connectivityInfo":{"networkType":"IPV4","publicAccess":{"type":"__Type__"},"vpcConnectivity":{"clientAuthentication":{"sasl":{"iam":{"enabled":true},"scram":{"enabled":true}},"tls":{"enabled":true}}}},"currentVersion":"__CurrentVersion__","zookeeperAccess":{"enabled":true}}

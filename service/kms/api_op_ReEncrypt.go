@@ -4,11 +4,10 @@ package kms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Decrypts ciphertext and then reencrypts it entirely within KMS. You can use
@@ -64,6 +63,10 @@ import (
 //
 // The KMS key that you use for this operation must be in a compatible key state.
 // For details, see [Key states of KMS keys]in the Key Management Service Developer Guide.
+//
+// When using grants with SourceArn constraints for ReEncrypt operations, the
+// grants on both the source KMS key (for ReEncryptFrom ) and the destination KMS
+// key (for ReEncryptTo ) must specify the same SourceArn value.
 //
 // Cross-account use: Yes. The source KMS key and destination KMS key can be in
 // different Amazon Web Services accounts. Either or both KMS keys can be in a
@@ -285,6 +288,37 @@ type ReEncryptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReEncryptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReEncryptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReEncryptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CiphertextBlob != nil {
+		s.WriteBlob(schemas.ReEncryptRequest_CiphertextBlob, v.CiphertextBlob)
+	}
+	if v.DestinationEncryptionAlgorithm != "" {
+		s.WriteString(schemas.ReEncryptRequest_DestinationEncryptionAlgorithm, string(v.DestinationEncryptionAlgorithm))
+	}
+	serializeEncryptionContextType(s, schemas.ReEncryptRequest_DestinationEncryptionContext, v.DestinationEncryptionContext)
+	if v.DestinationKeyId != nil {
+		s.WriteString(schemas.ReEncryptRequest_DestinationKeyId, *v.DestinationKeyId)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.ReEncryptRequest_DryRun, *v.DryRun)
+	}
+	serializeDryRunModifierList(s, schemas.ReEncryptRequest_DryRunModifiers, v.DryRunModifiers)
+	serializeGrantTokenList(s, schemas.ReEncryptRequest_GrantTokens, v.GrantTokens)
+	if v.SourceEncryptionAlgorithm != "" {
+		s.WriteString(schemas.ReEncryptRequest_SourceEncryptionAlgorithm, string(v.SourceEncryptionAlgorithm))
+	}
+	serializeEncryptionContextType(s, schemas.ReEncryptRequest_SourceEncryptionContext, v.SourceEncryptionContext)
+	if v.SourceKeyId != nil {
+		s.WriteString(schemas.ReEncryptRequest_SourceKeyId, *v.SourceKeyId)
+	}
+}
+
 type ReEncryptOutput struct {
 
 	// The reencrypted data. When you use the HTTP API or the Amazon Web Services CLI,
@@ -321,77 +355,91 @@ type ReEncryptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReEncryptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReEncryptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReEncryptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CiphertextBlob != nil {
+		s.WriteBlob(schemas.ReEncryptResponse_CiphertextBlob, v.CiphertextBlob)
+	}
+	if v.DestinationEncryptionAlgorithm != "" {
+		s.WriteString(schemas.ReEncryptResponse_DestinationEncryptionAlgorithm, string(v.DestinationEncryptionAlgorithm))
+	}
+	if v.DestinationKeyMaterialId != nil {
+		s.WriteString(schemas.ReEncryptResponse_DestinationKeyMaterialId, *v.DestinationKeyMaterialId)
+	}
+	if v.KeyId != nil {
+		s.WriteString(schemas.ReEncryptResponse_KeyId, *v.KeyId)
+	}
+	if v.SourceEncryptionAlgorithm != "" {
+		s.WriteString(schemas.ReEncryptResponse_SourceEncryptionAlgorithm, string(v.SourceEncryptionAlgorithm))
+	}
+	if v.SourceKeyId != nil {
+		s.WriteString(schemas.ReEncryptResponse_SourceKeyId, *v.SourceKeyId)
+	}
+	if v.SourceKeyMaterialId != nil {
+		s.WriteString(schemas.ReEncryptResponse_SourceKeyMaterialId, *v.SourceKeyMaterialId)
+	}
+}
+func (v *ReEncryptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReEncryptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReEncryptResponse_CiphertextBlob:
+			return d.ReadBlob(schemas.ReEncryptResponse_CiphertextBlob, &v.CiphertextBlob)
+		case schemas.ReEncryptResponse_DestinationEncryptionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.ReEncryptResponse_DestinationEncryptionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.DestinationEncryptionAlgorithm = types.EncryptionAlgorithmSpec(ev)
+			return nil
+		case schemas.ReEncryptResponse_DestinationKeyMaterialId:
+			v.DestinationKeyMaterialId = new(string)
+			return d.ReadString(schemas.ReEncryptResponse_DestinationKeyMaterialId, v.DestinationKeyMaterialId)
+		case schemas.ReEncryptResponse_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.ReEncryptResponse_KeyId, v.KeyId)
+		case schemas.ReEncryptResponse_SourceEncryptionAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.ReEncryptResponse_SourceEncryptionAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.SourceEncryptionAlgorithm = types.EncryptionAlgorithmSpec(ev)
+			return nil
+		case schemas.ReEncryptResponse_SourceKeyId:
+			v.SourceKeyId = new(string)
+			return d.ReadString(schemas.ReEncryptResponse_SourceKeyId, v.SourceKeyId)
+		case schemas.ReEncryptResponse_SourceKeyMaterialId:
+			v.SourceKeyMaterialId = new(string)
+			return d.ReadString(schemas.ReEncryptResponse_SourceKeyMaterialId, v.SourceKeyMaterialId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReEncryptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReEncrypt, schemas.ReEncryptRequest, schemas.ReEncryptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReEncrypt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReEncrypt, schemas.ReEncryptRequest, schemas.ReEncryptResponse), output: &ReEncryptOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpReEncrypt{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ReEncrypt"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpReEncryptValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReEncrypt(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -406,22 +454,8 @@ func (c *Client) addOperationReEncryptMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opReEncrypt(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ReEncrypt",
-	}
 }

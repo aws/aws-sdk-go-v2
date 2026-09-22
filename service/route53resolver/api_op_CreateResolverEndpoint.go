@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Resolver endpoint. There are two types of Resolver endpoints, inbound
@@ -183,6 +182,49 @@ type CreateResolverEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResolverEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResolverEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResolverEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateResolverEndpointRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Direction != "" {
+		s.WriteString(schemas.CreateResolverEndpointRequest_Direction, string(v.Direction))
+	}
+	if v.Dns64Enabled != nil {
+		s.WriteBool(schemas.CreateResolverEndpointRequest_Dns64Enabled, *v.Dns64Enabled)
+	}
+	serializeIpAddressesRequest(s, schemas.CreateResolverEndpointRequest_IpAddresses, v.IpAddresses)
+	if v.Ipv6InternetAccessEnabled != nil {
+		s.WriteBool(schemas.CreateResolverEndpointRequest_Ipv6InternetAccessEnabled, *v.Ipv6InternetAccessEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateResolverEndpointRequest_Name, *v.Name)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.CreateResolverEndpointRequest_OutpostArn, *v.OutpostArn)
+	}
+	if v.PreferredInstanceType != nil {
+		s.WriteString(schemas.CreateResolverEndpointRequest_PreferredInstanceType, *v.PreferredInstanceType)
+	}
+	serializeProtocolList(s, schemas.CreateResolverEndpointRequest_Protocols, v.Protocols)
+	if v.ResolverEndpointType != "" {
+		s.WriteString(schemas.CreateResolverEndpointRequest_ResolverEndpointType, string(v.ResolverEndpointType))
+	}
+	if v.RniEnhancedMetricsEnabled != nil {
+		s.WriteBool(schemas.CreateResolverEndpointRequest_RniEnhancedMetricsEnabled, *v.RniEnhancedMetricsEnabled)
+	}
+	serializeSecurityGroupIds(s, schemas.CreateResolverEndpointRequest_SecurityGroupIds, v.SecurityGroupIds)
+	serializeTagList(s, schemas.CreateResolverEndpointRequest_Tags, v.Tags)
+	if v.TargetNameServerMetricsEnabled != nil {
+		s.WriteBool(schemas.CreateResolverEndpointRequest_TargetNameServerMetricsEnabled, *v.TargetNameServerMetricsEnabled)
+	}
+}
+
 type CreateResolverEndpointOutput struct {
 
 	// Information about the CreateResolverEndpoint request, including the status of
@@ -195,77 +237,50 @@ type CreateResolverEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResolverEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResolverEndpointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResolverEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResolverEndpoint != nil {
+		s.WriteStruct(schemas.CreateResolverEndpointResponse_ResolverEndpoint)
+		v.ResolverEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateResolverEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResolverEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResolverEndpointResponse_ResolverEndpoint:
+			v.ResolverEndpoint = &types.ResolverEndpoint{}
+			return v.ResolverEndpoint.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResolverEndpoint, schemas.CreateResolverEndpointRequest, schemas.CreateResolverEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateResolverEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResolverEndpoint, schemas.CreateResolverEndpointRequest, schemas.CreateResolverEndpointResponse), output: &CreateResolverEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateResolverEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateResolverEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateResolverEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResolverEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -280,22 +295,8 @@ func (c *Client) addOperationCreateResolverEndpointMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateResolverEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateResolverEndpoint",
-	}
 }

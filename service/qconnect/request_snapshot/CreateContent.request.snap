@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/contents
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","metadata":{"key0":"__Value__"},"name":"__Name__","overrideLinkOutUri":"__OverrideLinkOutUri__","tags":{"key0":"__Value__"},"title":"__Title__","uploadId":"__UploadId__"}

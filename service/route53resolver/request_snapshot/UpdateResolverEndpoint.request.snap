@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Resolver.UpdateResolverEndpoint
+
+{"Dns64Enabled":true,"Ipv6InternetAccessEnabled":true,"Name":"__Name__","Protocols":["DoH","DoH"],"ResolverEndpointId":"__ResolverEndpointId__","ResolverEndpointType":"IPV6","RniEnhancedMetricsEnabled":true,"TargetNameServerMetricsEnabled":true,"UpdateIpAddresses":[{"IpId":"__IpId__","Ipv6":"__Ipv6__"},{"IpId":"__IpId__","Ipv6":"__Ipv6__"}]}

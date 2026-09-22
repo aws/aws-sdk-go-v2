@@ -4,11 +4,10 @@ package eventbridge
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists your replays. You can either list all the replays or you can provide a
@@ -56,6 +55,30 @@ type ListReplaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplaysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.ListReplaysRequest_EventSourceArn, *v.EventSourceArn)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListReplaysRequest_Limit, *v.Limit)
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListReplaysRequest_NamePrefix, *v.NamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplaysRequest_NextToken, *v.NextToken)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListReplaysRequest_State, string(v.State))
+	}
+}
+
 type ListReplaysOutput struct {
 
 	// A token indicating there are more results available. If there are no more
@@ -77,74 +100,48 @@ type ListReplaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplaysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplaysResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplaysResponse_NextToken, *v.NextToken)
+	}
+	serializeReplayList(s, schemas.ListReplaysResponse_Replays, v.Replays)
+}
+func (v *ListReplaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReplaysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReplaysResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReplaysResponse_NextToken, v.NextToken)
+		case schemas.ListReplaysResponse_Replays:
+			return deserializeReplayList(d, schemas.ListReplaysResponse_Replays, &v.Replays)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReplaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplays, schemas.ListReplaysRequest, schemas.ListReplaysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListReplays{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplays, schemas.ListReplaysRequest, schemas.ListReplaysResponse), output: &ListReplaysOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListReplays{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReplays"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReplays(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +156,8 @@ func (c *Client) addOperationListReplaysMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListReplays(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListReplays",
-	}
 }

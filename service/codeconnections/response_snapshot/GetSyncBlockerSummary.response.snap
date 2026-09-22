@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CodeConnections_20231201.GetSyncBlockerSummary
+
+{"SyncBlockerSummary":{"LatestBlockers":[{"Contexts":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"CreatedAt":946684800,"CreatedReason":"__CreatedReason__","Id":"__Id__","ResolvedAt":946684800,"ResolvedReason":"__ResolvedReason__","Status":"ACTIVE","Type":"AUTOMATED"},{"Contexts":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"CreatedAt":946684800,"CreatedReason":"__CreatedReason__","Id":"__Id__","ResolvedAt":946684800,"ResolvedReason":"__ResolvedReason__","Status":"ACTIVE","Type":"AUTOMATED"}],"ParentResourceName":"__ParentResourceName__","ResourceName":"__ResourceName__"}}

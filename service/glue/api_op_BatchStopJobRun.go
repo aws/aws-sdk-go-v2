@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops one or more job runs for a specified job definition.
@@ -42,6 +41,19 @@ type BatchStopJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStopJobRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStopJobRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStopJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.BatchStopJobRunRequest_JobName, *v.JobName)
+	}
+	serializeBatchStopJobRunJobRunIdList(s, schemas.BatchStopJobRunRequest_JobRunIds, v.JobRunIds)
+}
+
 type BatchStopJobRunOutput struct {
 
 	// A list of the errors that were encountered in trying to stop JobRuns , including
@@ -57,77 +69,48 @@ type BatchStopJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStopJobRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStopJobRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStopJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchStopJobRunErrorList(s, schemas.BatchStopJobRunResponse_Errors, v.Errors)
+	serializeBatchStopJobRunSuccessfulSubmissionList(s, schemas.BatchStopJobRunResponse_SuccessfulSubmissions, v.SuccessfulSubmissions)
+}
+func (v *BatchStopJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchStopJobRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchStopJobRunResponse_Errors:
+			return deserializeBatchStopJobRunErrorList(d, schemas.BatchStopJobRunResponse_Errors, &v.Errors)
+		case schemas.BatchStopJobRunResponse_SuccessfulSubmissions:
+			return deserializeBatchStopJobRunSuccessfulSubmissionList(d, schemas.BatchStopJobRunResponse_SuccessfulSubmissions, &v.SuccessfulSubmissions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchStopJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStopJobRun, schemas.BatchStopJobRunRequest, schemas.BatchStopJobRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchStopJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStopJobRun, schemas.BatchStopJobRunRequest, schemas.BatchStopJobRunResponse), output: &BatchStopJobRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchStopJobRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchStopJobRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchStopJobRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchStopJobRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +125,8 @@ func (c *Client) addOperationBatchStopJobRunMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchStopJobRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchStopJobRun",
-	}
 }

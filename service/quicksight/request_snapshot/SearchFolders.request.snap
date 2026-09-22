@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/search/folders
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"PARENT_FOLDER_ARN","Operator":"StringEquals","Value":"__Value__"},{"Name":"PARENT_FOLDER_ARN","Operator":"StringEquals","Value":"__Value__"}],"MaxResults":1,"NextToken":"__NextToken__"}

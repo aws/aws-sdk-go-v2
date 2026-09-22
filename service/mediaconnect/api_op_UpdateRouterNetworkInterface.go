@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the configuration of an existing router network interface in AWS
@@ -46,6 +45,22 @@ type UpdateRouterNetworkInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouterNetworkInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouterNetworkInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouterNetworkInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRouterNetworkInterfaceRequest_Arn, *v.Arn)
+	}
+	serializeRouterNetworkInterfaceConfiguration(s, schemas.UpdateRouterNetworkInterfaceRequest_Configuration, v.Configuration)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRouterNetworkInterfaceRequest_Name, *v.Name)
+	}
+}
+
 type UpdateRouterNetworkInterfaceOutput struct {
 
 	// The updated router network interface.
@@ -59,77 +74,50 @@ type UpdateRouterNetworkInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRouterNetworkInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRouterNetworkInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRouterNetworkInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouterNetworkInterface != nil {
+		s.WriteStruct(schemas.UpdateRouterNetworkInterfaceResponse_RouterNetworkInterface)
+		v.RouterNetworkInterface.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateRouterNetworkInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRouterNetworkInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRouterNetworkInterfaceResponse_RouterNetworkInterface:
+			v.RouterNetworkInterface = &types.RouterNetworkInterface{}
+			return v.RouterNetworkInterface.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRouterNetworkInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouterNetworkInterface, schemas.UpdateRouterNetworkInterfaceRequest, schemas.UpdateRouterNetworkInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRouterNetworkInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRouterNetworkInterface, schemas.UpdateRouterNetworkInterfaceRequest, schemas.UpdateRouterNetworkInterfaceResponse), output: &UpdateRouterNetworkInterfaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRouterNetworkInterface{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRouterNetworkInterface"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRouterNetworkInterfaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRouterNetworkInterface(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +132,8 @@ func (c *Client) addOperationUpdateRouterNetworkInterfaceMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRouterNetworkInterface(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRouterNetworkInterface",
-	}
 }

@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeModelCardExportJobInput struct {
 	ModelCardExportJobArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeModelCardExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelCardExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelCardExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelCardExportJobArn != nil {
+		s.WriteString(schemas.DescribeModelCardExportJobRequest_ModelCardExportJobArn, *v.ModelCardExportJobArn)
+	}
 }
 
 type DescribeModelCardExportJobOutput struct {
@@ -101,77 +112,110 @@ type DescribeModelCardExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelCardExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelCardExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelCardExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeModelCardExportJobResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.ExportArtifacts != nil {
+		s.WriteStruct(schemas.DescribeModelCardExportJobResponse_ExportArtifacts)
+		v.ExportArtifacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeModelCardExportJobResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LastModifiedAt != nil {
+		s.WriteTime(schemas.DescribeModelCardExportJobResponse_LastModifiedAt, *v.LastModifiedAt)
+	}
+	if v.ModelCardExportJobArn != nil {
+		s.WriteString(schemas.DescribeModelCardExportJobResponse_ModelCardExportJobArn, *v.ModelCardExportJobArn)
+	}
+	if v.ModelCardExportJobName != nil {
+		s.WriteString(schemas.DescribeModelCardExportJobResponse_ModelCardExportJobName, *v.ModelCardExportJobName)
+	}
+	if v.ModelCardName != nil {
+		s.WriteString(schemas.DescribeModelCardExportJobResponse_ModelCardName, *v.ModelCardName)
+	}
+	if v.ModelCardVersion != nil {
+		s.WriteInt32(schemas.DescribeModelCardExportJobResponse_ModelCardVersion, *v.ModelCardVersion)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.DescribeModelCardExportJobResponse_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeModelCardExportJobResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeModelCardExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeModelCardExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeModelCardExportJobResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelCardExportJobResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeModelCardExportJobResponse_ExportArtifacts:
+			v.ExportArtifacts = &types.ModelCardExportArtifacts{}
+			return v.ExportArtifacts.Deserialize(d)
+		case schemas.DescribeModelCardExportJobResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeModelCardExportJobResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeModelCardExportJobResponse_LastModifiedAt:
+			v.LastModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelCardExportJobResponse_LastModifiedAt, v.LastModifiedAt)
+		case schemas.DescribeModelCardExportJobResponse_ModelCardExportJobArn:
+			v.ModelCardExportJobArn = new(string)
+			return d.ReadString(schemas.DescribeModelCardExportJobResponse_ModelCardExportJobArn, v.ModelCardExportJobArn)
+		case schemas.DescribeModelCardExportJobResponse_ModelCardExportJobName:
+			v.ModelCardExportJobName = new(string)
+			return d.ReadString(schemas.DescribeModelCardExportJobResponse_ModelCardExportJobName, v.ModelCardExportJobName)
+		case schemas.DescribeModelCardExportJobResponse_ModelCardName:
+			v.ModelCardName = new(string)
+			return d.ReadString(schemas.DescribeModelCardExportJobResponse_ModelCardName, v.ModelCardName)
+		case schemas.DescribeModelCardExportJobResponse_ModelCardVersion:
+			v.ModelCardVersion = new(int32)
+			return d.ReadInt32(schemas.DescribeModelCardExportJobResponse_ModelCardVersion, v.ModelCardVersion)
+		case schemas.DescribeModelCardExportJobResponse_OutputConfig:
+			v.OutputConfig = &types.ModelCardExportOutputConfig{}
+			return v.OutputConfig.Deserialize(d)
+		case schemas.DescribeModelCardExportJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelCardExportJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelCardExportJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeModelCardExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelCardExportJob, schemas.DescribeModelCardExportJobRequest, schemas.DescribeModelCardExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeModelCardExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelCardExportJob, schemas.DescribeModelCardExportJobRequest, schemas.DescribeModelCardExportJobResponse), output: &DescribeModelCardExportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeModelCardExportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeModelCardExportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeModelCardExportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeModelCardExportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +230,8 @@ func (c *Client) addOperationDescribeModelCardExportJobMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeModelCardExportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeModelCardExportJob",
-	}
 }

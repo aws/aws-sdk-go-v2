@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botVersion":"__BotVersion__","creationDateTime":946684800,"generationId":"__GenerationId__","generationInputPrompt":"__GenerationInputPrompt__","generationStatus":"Failed","localeId":"__LocaleId__"}

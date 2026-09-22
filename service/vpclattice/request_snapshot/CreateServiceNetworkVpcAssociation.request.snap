@@ -1,0 +1,5 @@
+POST /servicenetworkvpcassociations
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","dnsOptions":{"privateDnsPreference":"VERIFIED_DOMAINS_ONLY","privateDnsSpecifiedDomains":["__Member__","__Member__"]},"privateDnsEnabled":true,"securityGroupIds":["__Member__","__Member__"],"serviceNetworkIdentifier":"__ServiceNetworkIdentifier__","tags":{"key0":"__Value__"},"vpcIdentifier":"__VpcIdentifier__"}

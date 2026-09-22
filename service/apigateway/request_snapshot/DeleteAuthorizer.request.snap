@@ -1,0 +1,4 @@
+DELETE /restapis/__RestApiId__/authorizers/__AuthorizerId__
+
+Accept: application/json
+

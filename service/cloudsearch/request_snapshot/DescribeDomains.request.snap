@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeDomains&DomainNames.member.1=__Member__&DomainNames.member.2=__Member__&Version=2013-01-01

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.CountPendingDecisionTasks
+
+{"domain":"__Domain__","taskList":{"name":"__Name__"}}

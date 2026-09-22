@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.CreateIpGroup
+
+{"GroupDesc":"__GroupDesc__","GroupName":"__GroupName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UserRules":[{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"},{"ipRule":"__IpRule__","ruleDesc":"__RuleDesc__"}]}

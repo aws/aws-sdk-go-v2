@@ -1,0 +1,5 @@
+POST /admin/disable
+
+Content-Type: application/json
+
+{"adminAccountId":"__AdminAccountId__"}

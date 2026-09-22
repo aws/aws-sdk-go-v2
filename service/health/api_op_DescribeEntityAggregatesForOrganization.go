@@ -4,11 +4,10 @@ package health
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of entity aggregates for your Organizations that are affected by
@@ -44,6 +43,17 @@ type DescribeEntityAggregatesForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityAggregatesForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityAggregatesForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityAggregatesForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOrganizationAccountIdsList(s, schemas.DescribeEntityAggregatesForOrganizationRequest_awsAccountIds, v.AwsAccountIds)
+	serializeOrganizationEventArnsList(s, schemas.DescribeEntityAggregatesForOrganizationRequest_eventArns, v.EventArns)
+}
+
 type DescribeEntityAggregatesForOrganizationOutput struct {
 
 	// The list of entity aggregates for each of the specified accounts that are
@@ -56,77 +66,45 @@ type DescribeEntityAggregatesForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeEntityAggregatesForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeEntityAggregatesForOrganizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeEntityAggregatesForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOrganizationEntityAggregatesList(s, schemas.DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates, v.OrganizationEntityAggregates)
+}
+func (v *DescribeEntityAggregatesForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeEntityAggregatesForOrganizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates:
+			return deserializeOrganizationEntityAggregatesList(d, schemas.DescribeEntityAggregatesForOrganizationResponse_organizationEntityAggregates, &v.OrganizationEntityAggregates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeEntityAggregatesForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntityAggregatesForOrganization, schemas.DescribeEntityAggregatesForOrganizationRequest, schemas.DescribeEntityAggregatesForOrganizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEntityAggregatesForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeEntityAggregatesForOrganization, schemas.DescribeEntityAggregatesForOrganizationRequest, schemas.DescribeEntityAggregatesForOrganizationResponse), output: &DescribeEntityAggregatesForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEntityAggregatesForOrganization{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeEntityAggregatesForOrganization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeEntityAggregatesForOrganizationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEntityAggregatesForOrganization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +119,8 @@ func (c *Client) addOperationDescribeEntityAggregatesForOrganizationMiddlewares(
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeEntityAggregatesForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeEntityAggregatesForOrganization",
-	}
 }

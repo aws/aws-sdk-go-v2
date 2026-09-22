@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Kinesis_20131202.ListShards
+
+{"ExclusiveStartShardId":"__ExclusiveStartShardId__","MaxResults":1,"NextToken":"__NextToken__","ShardFilter":{"ShardId":"__ShardId__","Timestamp":946684800,"Type":"AFTER_SHARD_ID"},"StreamARN":"__StreamARN__","StreamCreationTimestamp":946684800,"StreamId":"__StreamId__","StreamName":"__StreamName__"}

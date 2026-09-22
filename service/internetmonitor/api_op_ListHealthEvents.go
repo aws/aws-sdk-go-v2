@@ -5,10 +5,10 @@ package internetmonitor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -68,6 +68,68 @@ type ListHealthEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHealthEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHealthEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHealthEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListHealthEventsInput_EndTime, *v.EndTime)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.ListHealthEventsInput_EventStatus, string(v.EventStatus))
+	}
+	if v.LinkedAccountId != nil {
+		s.WriteString(schemas.ListHealthEventsInput_LinkedAccountId, *v.LinkedAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHealthEventsInput_MaxResults, *v.MaxResults)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.ListHealthEventsInput_MonitorName, *v.MonitorName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHealthEventsInput_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListHealthEventsInput_StartTime, *v.StartTime)
+	}
+}
+func (v *ListHealthEventsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHealthEventsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHealthEventsInput_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ListHealthEventsInput_EndTime, v.EndTime)
+		case schemas.ListHealthEventsInput_EventStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListHealthEventsInput_EventStatus, &ev); err != nil {
+				return err
+			}
+			v.EventStatus = types.HealthEventStatus(ev)
+			return nil
+		case schemas.ListHealthEventsInput_LinkedAccountId:
+			v.LinkedAccountId = new(string)
+			return d.ReadString(schemas.ListHealthEventsInput_LinkedAccountId, v.LinkedAccountId)
+		case schemas.ListHealthEventsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListHealthEventsInput_MaxResults, v.MaxResults)
+		case schemas.ListHealthEventsInput_MonitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.ListHealthEventsInput_MonitorName, v.MonitorName)
+		case schemas.ListHealthEventsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHealthEventsInput_NextToken, v.NextToken)
+		case schemas.ListHealthEventsInput_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListHealthEventsInput_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 type ListHealthEventsOutput struct {
 
 	// A list of health events.
@@ -85,77 +147,51 @@ type ListHealthEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHealthEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHealthEventsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHealthEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHealthEventList(s, schemas.ListHealthEventsOutput_HealthEvents, v.HealthEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHealthEventsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHealthEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHealthEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHealthEventsOutput_HealthEvents:
+			return deserializeHealthEventList(d, schemas.ListHealthEventsOutput_HealthEvents, &v.HealthEvents)
+		case schemas.ListHealthEventsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHealthEventsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHealthEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHealthEvents, schemas.ListHealthEventsInput, schemas.ListHealthEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHealthEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHealthEvents, schemas.ListHealthEventsInput, schemas.ListHealthEventsOutput), output: &ListHealthEventsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHealthEvents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHealthEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListHealthEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHealthEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +204,6 @@ func (c *Client) addOperationListHealthEventsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +304,3 @@ type ListHealthEventsAPIClient interface {
 }
 
 var _ ListHealthEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListHealthEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListHealthEvents",
-	}
-}

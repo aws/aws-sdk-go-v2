@@ -4,11 +4,10 @@ package kendra
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about an access control configuration that you created for
@@ -46,6 +45,21 @@ type DescribeAccessControlConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccessControlConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccessControlConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccessControlConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeAccessControlConfigurationRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeAccessControlConfigurationRequest_IndexId, *v.IndexId)
+	}
+}
+
 type DescribeAccessControlConfigurationOutput struct {
 
 	// The name for the access control configuration.
@@ -77,77 +91,66 @@ type DescribeAccessControlConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccessControlConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccessControlConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccessControlConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePrincipalList(s, schemas.DescribeAccessControlConfigurationResponse_AccessControlList, v.AccessControlList)
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeAccessControlConfigurationResponse_Description, *v.Description)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DescribeAccessControlConfigurationResponse_ErrorMessage, *v.ErrorMessage)
+	}
+	serializeHierarchicalPrincipalList(s, schemas.DescribeAccessControlConfigurationResponse_HierarchicalAccessControlList, v.HierarchicalAccessControlList)
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeAccessControlConfigurationResponse_Name, *v.Name)
+	}
+}
+func (v *DescribeAccessControlConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccessControlConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccessControlConfigurationResponse_AccessControlList:
+			return deserializePrincipalList(d, schemas.DescribeAccessControlConfigurationResponse_AccessControlList, &v.AccessControlList)
+		case schemas.DescribeAccessControlConfigurationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeAccessControlConfigurationResponse_Description, v.Description)
+		case schemas.DescribeAccessControlConfigurationResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeAccessControlConfigurationResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeAccessControlConfigurationResponse_HierarchicalAccessControlList:
+			return deserializeHierarchicalPrincipalList(d, schemas.DescribeAccessControlConfigurationResponse_HierarchicalAccessControlList, &v.HierarchicalAccessControlList)
+		case schemas.DescribeAccessControlConfigurationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeAccessControlConfigurationResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccessControlConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccessControlConfiguration, schemas.DescribeAccessControlConfigurationRequest, schemas.DescribeAccessControlConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAccessControlConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccessControlConfiguration, schemas.DescribeAccessControlConfigurationRequest, schemas.DescribeAccessControlConfigurationResponse), output: &DescribeAccessControlConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAccessControlConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccessControlConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAccessControlConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccessControlConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +165,8 @@ func (c *Client) addOperationDescribeAccessControlConfigurationMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAccessControlConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAccessControlConfiguration",
-	}
 }

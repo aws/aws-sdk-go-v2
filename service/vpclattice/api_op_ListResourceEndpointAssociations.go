@@ -5,10 +5,10 @@ package vpclattice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the associations for the specified VPC endpoint.
@@ -52,6 +52,33 @@ type ListResourceEndpointAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceEndpointAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceEndpointAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceEndpointAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceEndpointAssociationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceConfigurationIdentifier != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_resourceConfigurationIdentifier, *v.ResourceConfigurationIdentifier)
+	}
+	if v.ResourceEndpointAssociationIdentifier != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_resourceEndpointAssociationIdentifier, *v.ResourceEndpointAssociationIdentifier)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_vpcEndpointId, *v.VpcEndpointId)
+	}
+	if v.VpcEndpointOwner != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsRequest_vpcEndpointOwner, *v.VpcEndpointOwner)
+	}
+}
+
 type ListResourceEndpointAssociationsOutput struct {
 
 	// Information about the VPC endpoint associations.
@@ -69,77 +96,51 @@ type ListResourceEndpointAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceEndpointAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceEndpointAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceEndpointAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceEndpointAssociationList(s, schemas.ListResourceEndpointAssociationsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceEndpointAssociationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListResourceEndpointAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceEndpointAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceEndpointAssociationsResponse_items:
+			return deserializeResourceEndpointAssociationList(d, schemas.ListResourceEndpointAssociationsResponse_items, &v.Items)
+		case schemas.ListResourceEndpointAssociationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceEndpointAssociationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceEndpointAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceEndpointAssociations, schemas.ListResourceEndpointAssociationsRequest, schemas.ListResourceEndpointAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceEndpointAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceEndpointAssociations, schemas.ListResourceEndpointAssociationsRequest, schemas.ListResourceEndpointAssociationsResponse), output: &ListResourceEndpointAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourceEndpointAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResourceEndpointAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListResourceEndpointAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourceEndpointAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +153,6 @@ func (c *Client) addOperationListResourceEndpointAssociationsMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +256,3 @@ type ListResourceEndpointAssociationsAPIClient interface {
 }
 
 var _ ListResourceEndpointAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResourceEndpointAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResourceEndpointAssociations",
-	}
-}

@@ -246,6 +246,8 @@ const (
 	EBSMetricNameVolumeWriteOpsPerSecond   EBSMetricName = "VolumeWriteOpsPerSecond"
 	EBSMetricNameVolumeReadBytesPerSecond  EBSMetricName = "VolumeReadBytesPerSecond"
 	EBSMetricNameVolumeWriteBytesPerSecond EBSMetricName = "VolumeWriteBytesPerSecond"
+	EBSMetricNameVolumeIopsExceeded        EBSMetricName = "VolumeIOPSExceeded"
+	EBSMetricNameVolumeThroughputExceeded  EBSMetricName = "VolumeThroughputExceeded"
 )
 
 // Values returns all known values for EBSMetricName. Note that this can be
@@ -258,6 +260,8 @@ func (EBSMetricName) Values() []EBSMetricName {
 		"VolumeWriteOpsPerSecond",
 		"VolumeReadBytesPerSecond",
 		"VolumeWriteBytesPerSecond",
+		"VolumeIOPSExceeded",
+		"VolumeThroughputExceeded",
 	}
 }
 
@@ -659,6 +663,7 @@ const (
 	ExportableECSServiceFieldRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage    ExportableECSServiceField = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
 	ExportableECSServiceFieldRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts ExportableECSServiceField = "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
 	ExportableECSServiceFieldRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts    ExportableECSServiceField = "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
+	ExportableECSServiceFieldEffectiveRecommendationPreferencesLookbackPeriod                   ExportableECSServiceField = "EffectiveRecommendationPreferencesLookBackPeriod"
 )
 
 // Values returns all known values for ExportableECSServiceField. Note that this
@@ -695,6 +700,7 @@ func (ExportableECSServiceField) Values() []ExportableECSServiceField {
 		"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
 		"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
 		"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+		"EffectiveRecommendationPreferencesLookBackPeriod",
 	}
 }
 
@@ -722,6 +728,22 @@ const (
 	ExportableIdleFieldUtilizationMetricsActiveConnectionCountMaximum    ExportableIdleField = "UtilizationMetricsActiveConnectionCountMaximum"
 	ExportableIdleFieldUtilizationMetricsPacketsInFromSourceMaximum      ExportableIdleField = "UtilizationMetricsPacketsInFromSourceMaximum"
 	ExportableIdleFieldUtilizationMetricsPacketsInFromDestinationMaximum ExportableIdleField = "UtilizationMetricsPacketsInFromDestinationMaximum"
+	ExportableIdleFieldUtilizationMetricsConsumedReadCapacityUnitsSum    ExportableIdleField = "UtilizationMetricsConsumedReadCapacityUnitsSum"
+	ExportableIdleFieldUtilizationMetricsConsumedWriteCapacityUnitsSum   ExportableIdleField = "UtilizationMetricsConsumedWriteCapacityUnitsSum"
+	ExportableIdleFieldUtilizationMetricsNewConnectionsSum               ExportableIdleField = "UtilizationMetricsNewConnectionsSum"
+	ExportableIdleFieldUtilizationMetricsEngineCpuUtilizationMaximum     ExportableIdleField = "UtilizationMetricsEngineCPUUtilizationMaximum"
+	ExportableIdleFieldUtilizationMetricsCacheHitsSum                    ExportableIdleField = "UtilizationMetricsCacheHitsSum"
+	ExportableIdleFieldUtilizationMetricsCacheMissesSum                  ExportableIdleField = "UtilizationMetricsCacheMissesSum"
+	ExportableIdleFieldUtilizationMetricsKeyspaceHitsSum                 ExportableIdleField = "UtilizationMetricsKeyspaceHitsSum"
+	ExportableIdleFieldUtilizationMetricsKeyspaceMissesSum               ExportableIdleField = "UtilizationMetricsKeyspaceMissesSum"
+	ExportableIdleFieldUtilizationMetricsIsIdleMinimum                   ExportableIdleField = "UtilizationMetricsIsIdleMinimum"
+	ExportableIdleFieldUtilizationMetricsUserConnectedSum                ExportableIdleField = "UtilizationMetricsUserConnectedSum"
+	ExportableIdleFieldUtilizationMetricsInvocationsSum                  ExportableIdleField = "UtilizationMetricsInvocationsSum"
+	ExportableIdleFieldUtilizationMetricsGetTypeCmdsSum                  ExportableIdleField = "UtilizationMetricsGetTypeCmdsSum"
+	ExportableIdleFieldUtilizationMetricsSetTypeCmdsSum                  ExportableIdleField = "UtilizationMetricsSetTypeCmdsSum"
+	ExportableIdleFieldUtilizationMetricsElastiCacheProcessingUnitsSum   ExportableIdleField = "UtilizationMetricsElastiCacheProcessingUnitsSum"
+	ExportableIdleFieldUtilizationMetricsCurrConnectionsSum              ExportableIdleField = "UtilizationMetricsCurrConnectionsSum"
+	ExportableIdleFieldUtilizationMetricsDatabaseConnectionsSum          ExportableIdleField = "UtilizationMetricsDatabaseConnectionsSum"
 	ExportableIdleFieldFinding                                           ExportableIdleField = "Finding"
 	ExportableIdleFieldFindingDescription                                ExportableIdleField = "FindingDescription"
 	ExportableIdleFieldTags                                              ExportableIdleField = "Tags"
@@ -753,6 +775,22 @@ func (ExportableIdleField) Values() []ExportableIdleField {
 		"UtilizationMetricsActiveConnectionCountMaximum",
 		"UtilizationMetricsPacketsInFromSourceMaximum",
 		"UtilizationMetricsPacketsInFromDestinationMaximum",
+		"UtilizationMetricsConsumedReadCapacityUnitsSum",
+		"UtilizationMetricsConsumedWriteCapacityUnitsSum",
+		"UtilizationMetricsNewConnectionsSum",
+		"UtilizationMetricsEngineCPUUtilizationMaximum",
+		"UtilizationMetricsCacheHitsSum",
+		"UtilizationMetricsCacheMissesSum",
+		"UtilizationMetricsKeyspaceHitsSum",
+		"UtilizationMetricsKeyspaceMissesSum",
+		"UtilizationMetricsIsIdleMinimum",
+		"UtilizationMetricsUserConnectedSum",
+		"UtilizationMetricsInvocationsSum",
+		"UtilizationMetricsGetTypeCmdsSum",
+		"UtilizationMetricsSetTypeCmdsSum",
+		"UtilizationMetricsElastiCacheProcessingUnitsSum",
+		"UtilizationMetricsCurrConnectionsSum",
+		"UtilizationMetricsDatabaseConnectionsSum",
 		"Finding",
 		"FindingDescription",
 		"Tags",
@@ -1241,6 +1279,8 @@ const (
 	ExportableVolumeFieldUtilizationMetricsVolumeWriteOpsPerSecondMaximum                   ExportableVolumeField = "UtilizationMetricsVolumeWriteOpsPerSecondMaximum"
 	ExportableVolumeFieldUtilizationMetricsVolumeReadBytesPerSecondMaximum                  ExportableVolumeField = "UtilizationMetricsVolumeReadBytesPerSecondMaximum"
 	ExportableVolumeFieldUtilizationMetricsVolumeWriteBytesPerSecondMaximum                 ExportableVolumeField = "UtilizationMetricsVolumeWriteBytesPerSecondMaximum"
+	ExportableVolumeFieldUtilizationMetricsVolumeIopsExceededMaximum                        ExportableVolumeField = "UtilizationMetricsVolumeIOPSExceededMaximum"
+	ExportableVolumeFieldUtilizationMetricsVolumeThroughputExceededMaximum                  ExportableVolumeField = "UtilizationMetricsVolumeThroughputExceededMaximum"
 	ExportableVolumeFieldLookbackPeriodInDays                                               ExportableVolumeField = "LookbackPeriodInDays"
 	ExportableVolumeFieldCurrentConfigurationVolumeType                                     ExportableVolumeField = "CurrentConfigurationVolumeType"
 	ExportableVolumeFieldCurrentConfigurationVolumeBaselineIops                             ExportableVolumeField = "CurrentConfigurationVolumeBaselineIOPS"
@@ -1269,6 +1309,7 @@ const (
 	ExportableVolumeFieldRecommendationOptionsSavingsOpportunityAfterDiscountsPercentage    ExportableVolumeField = "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage"
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts"
 	ExportableVolumeFieldRecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts    ExportableVolumeField = "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
+	ExportableVolumeFieldEffectiveRecommendationPreferencesLookbackPeriod                   ExportableVolumeField = "EffectiveRecommendationPreferencesLookBackPeriod"
 )
 
 // Values returns all known values for ExportableVolumeField. Note that this can
@@ -1284,6 +1325,8 @@ func (ExportableVolumeField) Values() []ExportableVolumeField {
 		"UtilizationMetricsVolumeWriteOpsPerSecondMaximum",
 		"UtilizationMetricsVolumeReadBytesPerSecondMaximum",
 		"UtilizationMetricsVolumeWriteBytesPerSecondMaximum",
+		"UtilizationMetricsVolumeIOPSExceededMaximum",
+		"UtilizationMetricsVolumeThroughputExceededMaximum",
 		"LookbackPeriodInDays",
 		"CurrentConfigurationVolumeType",
 		"CurrentConfigurationVolumeBaselineIOPS",
@@ -1312,6 +1355,7 @@ func (ExportableVolumeField) Values() []ExportableVolumeField {
 		"RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage",
 		"RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts",
 		"RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts",
+		"EffectiveRecommendationPreferencesLookBackPeriod",
 	}
 }
 
@@ -1499,18 +1543,34 @@ type IdleMetricName string
 
 // Enum values for IdleMetricName
 const (
-	IdleMetricNameCpu                      IdleMetricName = "CPU"
-	IdleMetricNameMemory                   IdleMetricName = "Memory"
-	IdleMetricNameNetworkOutBytesPerSecond IdleMetricName = "NetworkOutBytesPerSecond"
-	IdleMetricNameNetworkInBytesPerSecond  IdleMetricName = "NetworkInBytesPerSecond"
-	IdleMetricNameDatabaseConnections      IdleMetricName = "DatabaseConnections"
-	IdleMetricNameEbsVolumeReadIops        IdleMetricName = "EBSVolumeReadIOPS"
-	IdleMetricNameEbsVolumeWriteIops       IdleMetricName = "EBSVolumeWriteIOPS"
-	IdleMetricNameVolumeReadOpsPerSecond   IdleMetricName = "VolumeReadOpsPerSecond"
-	IdleMetricNameVolumeWriteOpsPerSecond  IdleMetricName = "VolumeWriteOpsPerSecond"
-	IdleMetricNameActiveConnectionCount    IdleMetricName = "ActiveConnectionCount"
-	IdleMetricNamePacketsInFromSource      IdleMetricName = "PacketsInFromSource"
-	IdleMetricNamePacketsInFromDestination IdleMetricName = "PacketsInFromDestination"
+	IdleMetricNameCpu                            IdleMetricName = "CPU"
+	IdleMetricNameMemory                         IdleMetricName = "Memory"
+	IdleMetricNameNetworkOutBytesPerSecond       IdleMetricName = "NetworkOutBytesPerSecond"
+	IdleMetricNameNetworkInBytesPerSecond        IdleMetricName = "NetworkInBytesPerSecond"
+	IdleMetricNameDatabaseConnections            IdleMetricName = "DatabaseConnections"
+	IdleMetricNameEbsVolumeReadIops              IdleMetricName = "EBSVolumeReadIOPS"
+	IdleMetricNameEbsVolumeWriteIops             IdleMetricName = "EBSVolumeWriteIOPS"
+	IdleMetricNameVolumeReadOpsPerSecond         IdleMetricName = "VolumeReadOpsPerSecond"
+	IdleMetricNameVolumeWriteOpsPerSecond        IdleMetricName = "VolumeWriteOpsPerSecond"
+	IdleMetricNameActiveConnectionCount          IdleMetricName = "ActiveConnectionCount"
+	IdleMetricNamePacketsInFromSource            IdleMetricName = "PacketsInFromSource"
+	IdleMetricNamePacketsInFromDestination       IdleMetricName = "PacketsInFromDestination"
+	IdleMetricNameConsumedReadCapacityUnits      IdleMetricName = "ConsumedReadCapacityUnits"
+	IdleMetricNameConsumedWriteCapacityUnits     IdleMetricName = "ConsumedWriteCapacityUnits"
+	IdleMetricNameConsumedChangeDataCaptureUnits IdleMetricName = "ConsumedChangeDataCaptureUnits"
+	IdleMetricNameNewConnections                 IdleMetricName = "NewConnections"
+	IdleMetricNameEngineCpuUtilization           IdleMetricName = "EngineCPUUtilization"
+	IdleMetricNameCacheHits                      IdleMetricName = "CacheHits"
+	IdleMetricNameCacheMisses                    IdleMetricName = "CacheMisses"
+	IdleMetricNameKeyspaceHits                   IdleMetricName = "KeyspaceHits"
+	IdleMetricNameKeyspaceMisses                 IdleMetricName = "KeyspaceMisses"
+	IdleMetricNameIsIdle                         IdleMetricName = "IsIdle"
+	IdleMetricNameUserConnected                  IdleMetricName = "UserConnected"
+	IdleMetricNameInvocations                    IdleMetricName = "Invocations"
+	IdleMetricNameGetTypeCmds                    IdleMetricName = "GetTypeCmds"
+	IdleMetricNameSetTypeCmds                    IdleMetricName = "SetTypeCmds"
+	IdleMetricNameElastiCacheProcessingUnits     IdleMetricName = "ElastiCacheProcessingUnits"
+	IdleMetricNameCurrConnections                IdleMetricName = "CurrConnections"
 )
 
 // Values returns all known values for IdleMetricName. Note that this can be
@@ -1531,6 +1591,22 @@ func (IdleMetricName) Values() []IdleMetricName {
 		"ActiveConnectionCount",
 		"PacketsInFromSource",
 		"PacketsInFromDestination",
+		"ConsumedReadCapacityUnits",
+		"ConsumedWriteCapacityUnits",
+		"ConsumedChangeDataCaptureUnits",
+		"NewConnections",
+		"EngineCPUUtilization",
+		"CacheHits",
+		"CacheMisses",
+		"KeyspaceHits",
+		"KeyspaceMisses",
+		"IsIdle",
+		"UserConnected",
+		"Invocations",
+		"GetTypeCmds",
+		"SetTypeCmds",
+		"ElastiCacheProcessingUnits",
+		"CurrConnections",
 	}
 }
 
@@ -1558,12 +1634,18 @@ type IdleRecommendationResourceType string
 
 // Enum values for IdleRecommendationResourceType
 const (
-	IdleRecommendationResourceTypeEc2Instance      IdleRecommendationResourceType = "EC2Instance"
-	IdleRecommendationResourceTypeAutoScalingGroup IdleRecommendationResourceType = "AutoScalingGroup"
-	IdleRecommendationResourceTypeEbsVolume        IdleRecommendationResourceType = "EBSVolume"
-	IdleRecommendationResourceTypeEcsService       IdleRecommendationResourceType = "ECSService"
-	IdleRecommendationResourceTypeRdsDbInstance    IdleRecommendationResourceType = "RDSDBInstance"
-	IdleRecommendationResourceTypeNatGateway       IdleRecommendationResourceType = "NatGateway"
+	IdleRecommendationResourceTypeEc2Instance        IdleRecommendationResourceType = "EC2Instance"
+	IdleRecommendationResourceTypeAutoScalingGroup   IdleRecommendationResourceType = "AutoScalingGroup"
+	IdleRecommendationResourceTypeEbsVolume          IdleRecommendationResourceType = "EBSVolume"
+	IdleRecommendationResourceTypeEcsService         IdleRecommendationResourceType = "ECSService"
+	IdleRecommendationResourceTypeRdsDbInstance      IdleRecommendationResourceType = "RDSDBInstance"
+	IdleRecommendationResourceTypeNatGateway         IdleRecommendationResourceType = "NatGateway"
+	IdleRecommendationResourceTypeDynamoDbTable      IdleRecommendationResourceType = "DynamoDBTable"
+	IdleRecommendationResourceTypeElastiCacheCluster IdleRecommendationResourceType = "ElastiCacheCluster"
+	IdleRecommendationResourceTypeMemoryDbCluster    IdleRecommendationResourceType = "MemoryDBCluster"
+	IdleRecommendationResourceTypeDocumentDbCluster  IdleRecommendationResourceType = "DocumentDBCluster"
+	IdleRecommendationResourceTypeWorkspaces         IdleRecommendationResourceType = "WorkSpaces"
+	IdleRecommendationResourceTypeSageMakerEndpoint  IdleRecommendationResourceType = "SageMakerEndpoint"
 )
 
 // Values returns all known values for IdleRecommendationResourceType. Note that
@@ -1579,6 +1661,12 @@ func (IdleRecommendationResourceType) Values() []IdleRecommendationResourceType 
 		"ECSService",
 		"RDSDBInstance",
 		"NatGateway",
+		"DynamoDBTable",
+		"ElastiCacheCluster",
+		"MemoryDBCluster",
+		"DocumentDBCluster",
+		"WorkSpaces",
+		"SageMakerEndpoint",
 	}
 }
 
@@ -2616,6 +2704,12 @@ const (
 	RecommendationSourceTypeRdsDbInstanceStorage   RecommendationSourceType = "RdsDBInstanceStorage"
 	RecommendationSourceTypeAuroraDbClusterStorage RecommendationSourceType = "AuroraDBClusterStorage"
 	RecommendationSourceTypeNatGateway             RecommendationSourceType = "NatGateway"
+	RecommendationSourceTypeDynamoDbTable          RecommendationSourceType = "DynamoDBTable"
+	RecommendationSourceTypeElastiCacheCluster     RecommendationSourceType = "ElastiCacheCluster"
+	RecommendationSourceTypeMemoryDbCluster        RecommendationSourceType = "MemoryDBCluster"
+	RecommendationSourceTypeDocumentDbCluster      RecommendationSourceType = "DocumentDBCluster"
+	RecommendationSourceTypeWorkspaces             RecommendationSourceType = "WorkSpaces"
+	RecommendationSourceTypeSageMakerEndpoint      RecommendationSourceType = "SageMakerEndpoint"
 )
 
 // Values returns all known values for RecommendationSourceType. Note that this
@@ -2634,6 +2728,12 @@ func (RecommendationSourceType) Values() []RecommendationSourceType {
 		"RdsDBInstanceStorage",
 		"AuroraDBClusterStorage",
 		"NatGateway",
+		"DynamoDBTable",
+		"ElastiCacheCluster",
+		"MemoryDBCluster",
+		"DocumentDBCluster",
+		"WorkSpaces",
+		"SageMakerEndpoint",
 	}
 }
 

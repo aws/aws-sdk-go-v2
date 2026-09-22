@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an existing keyword from an origination phone number or pool.
@@ -55,6 +54,21 @@ type DeleteKeywordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKeywordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKeywordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKeywordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Keyword != nil {
+		s.WriteString(schemas.DeleteKeywordRequest_Keyword, *v.Keyword)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.DeleteKeywordRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+}
+
 type DeleteKeywordOutput struct {
 
 	// The keyword that was deleted.
@@ -78,77 +92,76 @@ type DeleteKeywordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteKeywordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteKeywordResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteKeywordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Keyword != nil {
+		s.WriteString(schemas.DeleteKeywordResult_Keyword, *v.Keyword)
+	}
+	if v.KeywordAction != "" {
+		s.WriteString(schemas.DeleteKeywordResult_KeywordAction, string(v.KeywordAction))
+	}
+	if v.KeywordMessage != nil {
+		s.WriteString(schemas.DeleteKeywordResult_KeywordMessage, *v.KeywordMessage)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.DeleteKeywordResult_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.OriginationIdentityArn != nil {
+		s.WriteString(schemas.DeleteKeywordResult_OriginationIdentityArn, *v.OriginationIdentityArn)
+	}
+}
+func (v *DeleteKeywordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteKeywordResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteKeywordResult_Keyword:
+			v.Keyword = new(string)
+			return d.ReadString(schemas.DeleteKeywordResult_Keyword, v.Keyword)
+		case schemas.DeleteKeywordResult_KeywordAction:
+			var ev string
+			if err := d.ReadString(schemas.DeleteKeywordResult_KeywordAction, &ev); err != nil {
+				return err
+			}
+			v.KeywordAction = types.KeywordAction(ev)
+			return nil
+		case schemas.DeleteKeywordResult_KeywordMessage:
+			v.KeywordMessage = new(string)
+			return d.ReadString(schemas.DeleteKeywordResult_KeywordMessage, v.KeywordMessage)
+		case schemas.DeleteKeywordResult_OriginationIdentity:
+			v.OriginationIdentity = new(string)
+			return d.ReadString(schemas.DeleteKeywordResult_OriginationIdentity, v.OriginationIdentity)
+		case schemas.DeleteKeywordResult_OriginationIdentityArn:
+			v.OriginationIdentityArn = new(string)
+			return d.ReadString(schemas.DeleteKeywordResult_OriginationIdentityArn, v.OriginationIdentityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteKeywordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKeyword, schemas.DeleteKeywordRequest, schemas.DeleteKeywordResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteKeyword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteKeyword, schemas.DeleteKeywordRequest, schemas.DeleteKeywordResult), output: &DeleteKeywordOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteKeyword{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteKeyword"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteKeywordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKeyword(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +176,8 @@ func (c *Client) addOperationDeleteKeywordMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteKeyword(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteKeyword",
-	}
 }

@@ -4,14 +4,13 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: Anywhere, Container
+//	This API works with the following fleet types: Anywhere
 //
 // Registers a compute resource in an Amazon GameLift Servers Anywhere fleet.
 //
@@ -95,6 +94,33 @@ type RegisterComputeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterComputeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterComputeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterComputeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificatePath != nil {
+		s.WriteString(schemas.RegisterComputeInput_CertificatePath, *v.CertificatePath)
+	}
+	if v.ComputeName != nil {
+		s.WriteString(schemas.RegisterComputeInput_ComputeName, *v.ComputeName)
+	}
+	if v.DnsName != nil {
+		s.WriteString(schemas.RegisterComputeInput_DnsName, *v.DnsName)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.RegisterComputeInput_FleetId, *v.FleetId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.RegisterComputeInput_IpAddress, *v.IpAddress)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.RegisterComputeInput_Location, *v.Location)
+	}
+}
+
 type RegisterComputeOutput struct {
 
 	// The details of the compute resource you registered.
@@ -106,65 +132,44 @@ type RegisterComputeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterComputeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterComputeOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterComputeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compute != nil {
+		s.WriteStruct(schemas.RegisterComputeOutput_Compute)
+		v.Compute.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterComputeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterComputeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterComputeOutput_Compute:
+			v.Compute = &types.Compute{}
+			return v.Compute.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterComputeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCompute, schemas.RegisterComputeInput, schemas.RegisterComputeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRegisterCompute{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterCompute, schemas.RegisterComputeInput, schemas.RegisterComputeOutput), output: &RegisterComputeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRegisterCompute{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterCompute"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -174,12 +179,6 @@ func (c *Client) addOperationRegisterComputeMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpRegisterComputeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterCompute(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,22 +193,8 @@ func (c *Client) addOperationRegisterComputeMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterCompute(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterCompute",
-	}
 }

@@ -5,15 +5,15 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
 // Create a new registration attachment to use for uploading a file or a URL to a
-// file. The maximum file size is 500KB and valid file extensions are PDF, JPEG and
+// file. The maximum file size is 5MB and valid file extensions are PDF, JPEG and
 // PNG. For example, many sender ID registrations require a signed “letter of
 // authorization” (LOA) to be submitted.
 //
@@ -36,7 +36,7 @@ func (c *Client) CreateRegistrationAttachment(ctx context.Context, params *Creat
 
 type CreateRegistrationAttachmentInput struct {
 
-	// The registration file to upload. The maximum file size is 500KB and valid file
+	// The registration file to upload. The maximum file size is 5MB and valid file
 	// extensions are PDF, JPEG and PNG.
 	AttachmentBody []byte
 
@@ -54,6 +54,25 @@ type CreateRegistrationAttachmentInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateRegistrationAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistrationAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistrationAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentBody != nil {
+		s.WriteBlob(schemas.CreateRegistrationAttachmentRequest_AttachmentBody, v.AttachmentBody)
+	}
+	if v.AttachmentUrl != nil {
+		s.WriteString(schemas.CreateRegistrationAttachmentRequest_AttachmentUrl, *v.AttachmentUrl)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRegistrationAttachmentRequest_ClientToken, *v.ClientToken)
+	}
+	serializeTagList(s, schemas.CreateRegistrationAttachmentRequest_Tags, v.Tags)
 }
 
 type CreateRegistrationAttachmentOutput struct {
@@ -98,65 +117,67 @@ type CreateRegistrationAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRegistrationAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRegistrationAttachmentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRegistrationAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentStatus != "" {
+		s.WriteString(schemas.CreateRegistrationAttachmentResult_AttachmentStatus, string(v.AttachmentStatus))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CreateRegistrationAttachmentResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.RegistrationAttachmentArn != nil {
+		s.WriteString(schemas.CreateRegistrationAttachmentResult_RegistrationAttachmentArn, *v.RegistrationAttachmentArn)
+	}
+	if v.RegistrationAttachmentId != nil {
+		s.WriteString(schemas.CreateRegistrationAttachmentResult_RegistrationAttachmentId, *v.RegistrationAttachmentId)
+	}
+	serializeTagList(s, schemas.CreateRegistrationAttachmentResult_Tags, v.Tags)
+}
+func (v *CreateRegistrationAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRegistrationAttachmentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRegistrationAttachmentResult_AttachmentStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateRegistrationAttachmentResult_AttachmentStatus, &ev); err != nil {
+				return err
+			}
+			v.AttachmentStatus = types.AttachmentStatus(ev)
+			return nil
+		case schemas.CreateRegistrationAttachmentResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateRegistrationAttachmentResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateRegistrationAttachmentResult_RegistrationAttachmentArn:
+			v.RegistrationAttachmentArn = new(string)
+			return d.ReadString(schemas.CreateRegistrationAttachmentResult_RegistrationAttachmentArn, v.RegistrationAttachmentArn)
+		case schemas.CreateRegistrationAttachmentResult_RegistrationAttachmentId:
+			v.RegistrationAttachmentId = new(string)
+			return d.ReadString(schemas.CreateRegistrationAttachmentResult_RegistrationAttachmentId, v.RegistrationAttachmentId)
+		case schemas.CreateRegistrationAttachmentResult_Tags:
+			return deserializeTagList(d, schemas.CreateRegistrationAttachmentResult_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRegistrationAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistrationAttachment, schemas.CreateRegistrationAttachmentRequest, schemas.CreateRegistrationAttachmentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRegistrationAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRegistrationAttachment, schemas.CreateRegistrationAttachmentRequest, schemas.CreateRegistrationAttachmentResult), output: &CreateRegistrationAttachmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRegistrationAttachment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRegistrationAttachment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -166,12 +187,6 @@ func (c *Client) addOperationCreateRegistrationAttachmentMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpCreateRegistrationAttachmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRegistrationAttachment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,12 +199,6 @@ func (c *Client) addOperationCreateRegistrationAttachmentMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -229,12 +238,4 @@ func (m *idempotencyToken_initializeOpCreateRegistrationAttachment) HandleInitia
 }
 func addIdempotencyToken_opCreateRegistrationAttachmentMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateRegistrationAttachment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateRegistrationAttachment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRegistrationAttachment",
-	}
 }

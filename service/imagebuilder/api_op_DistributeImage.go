@@ -5,14 +5,15 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// DistributeImage distributes existing AMIs to additional regions and accounts
-// without rebuilding the image.
+// Distributes an existing AMI to target Regions and accounts without running the
+// full image build process. This operation only runs the distribution phase on an
+// image that has already been built.
 func (c *Client) DistributeImage(ctx context.Context, params *DistributeImageInput, optFns ...func(*Options)) (*DistributeImageOutput, error) {
 	if params == nil {
 		params = &DistributeImageInput{}
@@ -30,25 +31,33 @@ func (c *Client) DistributeImage(ctx context.Context, params *DistributeImageInp
 
 type DistributeImageInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the distribution configuration to use.
+	// The Amazon Resource Name (ARN) of the distribution configuration. The
+	// configuration defines target Regions, accounts, and AMI settings. The
+	// distribution configuration must be in the same Region as this operation.
 	//
 	// This member is required.
 	DistributionConfigurationArn *string
 
-	// The IAM role to use for the distribution.
+	// The name or Amazon Resource Name (ARN) of the IAM role that Image Builder
+	// assumes to distribute the image.
 	//
 	// This member is required.
 	ExecutionRole *string
 
-	// The source image Amazon Resource Name (ARN) to distribute.
+	// The source image to distribute. Specify an AMI identifier, SSM parameter path,
+	// or Image Builder image Amazon Resource Name (ARN). When you specify an Image
+	// Builder image Amazon Resource Name (ARN), the image must be in the AVAILABLE
+	// state.
 	//
 	// This member is required.
 	SourceImage *string
@@ -60,6 +69,33 @@ type DistributeImageInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DistributeImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistributeImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistributeImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DistributeImageRequest_clientToken, *v.ClientToken)
+	}
+	if v.DistributionConfigurationArn != nil {
+		s.WriteString(schemas.DistributeImageRequest_distributionConfigurationArn, *v.DistributionConfigurationArn)
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.DistributeImageRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.DistributeImageRequest_loggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceImage != nil {
+		s.WriteString(schemas.DistributeImageRequest_sourceImage, *v.SourceImage)
+	}
+	serializeTagMap(s, schemas.DistributeImageRequest_tags, v.Tags)
 }
 
 type DistributeImageOutput struct {
@@ -76,65 +112,48 @@ type DistributeImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DistributeImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DistributeImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DistributeImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DistributeImageResponse_clientToken, *v.ClientToken)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.DistributeImageResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+}
+func (v *DistributeImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DistributeImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DistributeImageResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DistributeImageResponse_clientToken, v.ClientToken)
+		case schemas.DistributeImageResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.DistributeImageResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDistributeImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DistributeImage, schemas.DistributeImageRequest, schemas.DistributeImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDistributeImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DistributeImage, schemas.DistributeImageRequest, schemas.DistributeImageResponse), output: &DistributeImageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDistributeImage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DistributeImage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -144,12 +163,6 @@ func (c *Client) addOperationDistributeImageMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpDistributeImageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDistributeImage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +175,6 @@ func (c *Client) addOperationDistributeImageMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -207,12 +214,4 @@ func (m *idempotencyToken_initializeOpDistributeImage) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opDistributeImageMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDistributeImage{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDistributeImage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DistributeImage",
-	}
 }

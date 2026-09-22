@@ -5,10 +5,10 @@ package pi
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -121,6 +121,40 @@ type GetResourceMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetResourceMetricsRequest_EndTime, *v.EndTime)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetResourceMetricsRequest_Identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetResourceMetricsRequest_MaxResults, *v.MaxResults)
+	}
+	serializeMetricQueryList(s, schemas.GetResourceMetricsRequest_MetricQueries, v.MetricQueries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourceMetricsRequest_NextToken, *v.NextToken)
+	}
+	if v.PeriodAlignment != "" {
+		s.WriteString(schemas.GetResourceMetricsRequest_PeriodAlignment, string(v.PeriodAlignment))
+	}
+	if v.PeriodInSeconds != nil {
+		s.WriteInt32(schemas.GetResourceMetricsRequest_PeriodInSeconds, *v.PeriodInSeconds)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.GetResourceMetricsRequest_ServiceType, string(v.ServiceType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetResourceMetricsRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetResourceMetricsOutput struct {
 
 	// The end time for the returned metrics, after alignment to a granular boundary
@@ -154,77 +188,69 @@ type GetResourceMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlignedEndTime != nil {
+		s.WriteTime(schemas.GetResourceMetricsResponse_AlignedEndTime, *v.AlignedEndTime)
+	}
+	if v.AlignedStartTime != nil {
+		s.WriteTime(schemas.GetResourceMetricsResponse_AlignedStartTime, *v.AlignedStartTime)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetResourceMetricsResponse_Identifier, *v.Identifier)
+	}
+	serializeMetricKeyDataPointsList(s, schemas.GetResourceMetricsResponse_MetricList, v.MetricList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourceMetricsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetResourceMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceMetricsResponse_AlignedEndTime:
+			v.AlignedEndTime = new(time.Time)
+			return d.ReadTime(schemas.GetResourceMetricsResponse_AlignedEndTime, v.AlignedEndTime)
+		case schemas.GetResourceMetricsResponse_AlignedStartTime:
+			v.AlignedStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetResourceMetricsResponse_AlignedStartTime, v.AlignedStartTime)
+		case schemas.GetResourceMetricsResponse_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.GetResourceMetricsResponse_Identifier, v.Identifier)
+		case schemas.GetResourceMetricsResponse_MetricList:
+			return deserializeMetricKeyDataPointsList(d, schemas.GetResourceMetricsResponse_MetricList, &v.MetricList)
+		case schemas.GetResourceMetricsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourceMetricsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceMetrics, schemas.GetResourceMetricsRequest, schemas.GetResourceMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetResourceMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceMetrics, schemas.GetResourceMetricsRequest, schemas.GetResourceMetricsResponse), output: &GetResourceMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetResourceMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResourceMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -237,12 +263,6 @@ func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -344,11 +364,3 @@ type GetResourceMetricsAPIClient interface {
 }
 
 var _ GetResourceMetricsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetResourceMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResourceMetrics",
-	}
-}

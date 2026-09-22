@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -69,6 +68,45 @@ type ListHubContentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHubContentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHubContentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHubContentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListHubContentsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListHubContentsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.ListHubContentsRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.ListHubContentsRequest_HubName, *v.HubName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHubContentsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MaxSchemaVersion != nil {
+		s.WriteString(schemas.ListHubContentsRequest_MaxSchemaVersion, *v.MaxSchemaVersion)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListHubContentsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHubContentsRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListHubContentsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListHubContentsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListHubContentsOutput struct {
 
 	// The summaries of the listed hub content.
@@ -86,77 +124,51 @@ type ListHubContentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHubContentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHubContentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHubContentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHubContentInfoList(s, schemas.ListHubContentsResponse_HubContentSummaries, v.HubContentSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHubContentsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHubContentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHubContentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHubContentsResponse_HubContentSummaries:
+			return deserializeHubContentInfoList(d, schemas.ListHubContentsResponse_HubContentSummaries, &v.HubContentSummaries)
+		case schemas.ListHubContentsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHubContentsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHubContentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHubContents, schemas.ListHubContentsRequest, schemas.ListHubContentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHubContents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHubContents, schemas.ListHubContentsRequest, schemas.ListHubContentsResponse), output: &ListHubContentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHubContents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHubContents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListHubContentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHubContents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +183,8 @@ func (c *Client) addOperationListHubContentsMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListHubContents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListHubContents",
-	}
 }

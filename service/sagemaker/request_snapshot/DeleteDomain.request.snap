@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.DeleteDomain
+
+{"DomainId":"__DomainId__","RetentionPolicy":{"HomeEfsFileSystem":"Retain"}}

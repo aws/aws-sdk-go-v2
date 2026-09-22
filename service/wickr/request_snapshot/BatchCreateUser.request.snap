@@ -1,0 +1,6 @@
+POST /networks/__NetworkId__/users
+
+Content-Type: application/json
+X-Client-Token: __ClientToken__
+
+{"users":[{"codeValidation":true,"firstName":"__FirstName__","inviteCode":"__InviteCode__","inviteCodeTtl":1,"lastName":"__LastName__","securityGroupIds":["__Member__","__Member__"],"username":"__Username__"},{"codeValidation":true,"firstName":"__FirstName__","inviteCode":"__InviteCode__","inviteCodeTtl":1,"lastName":"__LastName__","securityGroupIds":["__Member__","__Member__"],"username":"__Username__"}]}

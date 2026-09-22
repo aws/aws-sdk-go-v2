@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BlockingResourceTypes":["EC2_INSTANCE","EC2_INSTANCE"],"Status":"SKIPPED"}

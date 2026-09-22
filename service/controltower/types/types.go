@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/controltower/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/controltower/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -36,6 +39,66 @@ type BaselineOperation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BaselineOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaselineOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaselineOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.BaselineOperation_endTime, *v.EndTime)
+	}
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.BaselineOperation_operationIdentifier, *v.OperationIdentifier)
+	}
+	if v.OperationType != "" {
+		s.WriteString(schemas.BaselineOperation_operationType, string(v.OperationType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.BaselineOperation_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.BaselineOperation_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.BaselineOperation_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *BaselineOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaselineOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaselineOperation_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.BaselineOperation_endTime, v.EndTime)
+		case schemas.BaselineOperation_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.BaselineOperation_operationIdentifier, v.OperationIdentifier)
+		case schemas.BaselineOperation_operationType:
+			var ev string
+			if err := d.ReadString(schemas.BaselineOperation_operationType, &ev); err != nil {
+				return err
+			}
+			v.OperationType = BaselineOperationType(ev)
+			return nil
+		case schemas.BaselineOperation_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.BaselineOperation_startTime, v.StartTime)
+		case schemas.BaselineOperation_status:
+			var ev string
+			if err := d.ReadString(schemas.BaselineOperation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = BaselineOperationStatus(ev)
+			return nil
+		case schemas.BaselineOperation_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.BaselineOperation_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Returns a summary of information about a Baseline object.
 type BaselineSummary struct {
 
@@ -53,6 +116,40 @@ type BaselineSummary struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BaselineSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BaselineSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BaselineSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.BaselineSummary_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.BaselineSummary_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BaselineSummary_name, *v.Name)
+	}
+}
+func (v *BaselineSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BaselineSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BaselineSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.BaselineSummary_arn, v.Arn)
+		case schemas.BaselineSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.BaselineSummary_description, v.Description)
+		case schemas.BaselineSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BaselineSummary_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // An operation performed by the control.
@@ -89,6 +186,84 @@ type ControlOperation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ControlOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlIdentifier != nil {
+		s.WriteString(schemas.ControlOperation_controlIdentifier, *v.ControlIdentifier)
+	}
+	if v.EnabledControlIdentifier != nil {
+		s.WriteString(schemas.ControlOperation_enabledControlIdentifier, *v.EnabledControlIdentifier)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ControlOperation_endTime, *v.EndTime)
+	}
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.ControlOperation_operationIdentifier, *v.OperationIdentifier)
+	}
+	if v.OperationType != "" {
+		s.WriteString(schemas.ControlOperation_operationType, string(v.OperationType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ControlOperation_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ControlOperation_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ControlOperation_statusMessage, *v.StatusMessage)
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.ControlOperation_targetIdentifier, *v.TargetIdentifier)
+	}
+}
+func (v *ControlOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlOperation_controlIdentifier:
+			v.ControlIdentifier = new(string)
+			return d.ReadString(schemas.ControlOperation_controlIdentifier, v.ControlIdentifier)
+		case schemas.ControlOperation_enabledControlIdentifier:
+			v.EnabledControlIdentifier = new(string)
+			return d.ReadString(schemas.ControlOperation_enabledControlIdentifier, v.EnabledControlIdentifier)
+		case schemas.ControlOperation_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ControlOperation_endTime, v.EndTime)
+		case schemas.ControlOperation_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.ControlOperation_operationIdentifier, v.OperationIdentifier)
+		case schemas.ControlOperation_operationType:
+			var ev string
+			if err := d.ReadString(schemas.ControlOperation_operationType, &ev); err != nil {
+				return err
+			}
+			v.OperationType = ControlOperationType(ev)
+			return nil
+		case schemas.ControlOperation_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ControlOperation_startTime, v.StartTime)
+		case schemas.ControlOperation_status:
+			var ev string
+			if err := d.ReadString(schemas.ControlOperation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ControlOperationStatus(ev)
+			return nil
+		case schemas.ControlOperation_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ControlOperation_statusMessage, v.StatusMessage)
+		case schemas.ControlOperation_targetIdentifier:
+			v.TargetIdentifier = new(string)
+			return d.ReadString(schemas.ControlOperation_targetIdentifier, v.TargetIdentifier)
+		}
+		return nil
+	})
+}
+
 // A filter object that lets you call ListControlOperations with a specific filter.
 type ControlOperationFilter struct {
 
@@ -108,6 +283,37 @@ type ControlOperationFilter struct {
 	TargetIdentifiers []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ControlOperationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlOperationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlOperationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlIdentifiers(s, schemas.ControlOperationFilter_controlIdentifiers, v.ControlIdentifiers)
+	serializeControlOperationTypes(s, schemas.ControlOperationFilter_controlOperationTypes, v.ControlOperationTypes)
+	serializeEnabledControlIdentifiers(s, schemas.ControlOperationFilter_enabledControlIdentifiers, v.EnabledControlIdentifiers)
+	serializeControlOperationStatuses(s, schemas.ControlOperationFilter_statuses, v.Statuses)
+	serializeTargetIdentifiers(s, schemas.ControlOperationFilter_targetIdentifiers, v.TargetIdentifiers)
+}
+func (v *ControlOperationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlOperationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlOperationFilter_controlIdentifiers:
+			return deserializeControlIdentifiers(d, schemas.ControlOperationFilter_controlIdentifiers, &v.ControlIdentifiers)
+		case schemas.ControlOperationFilter_controlOperationTypes:
+			return deserializeControlOperationTypes(d, schemas.ControlOperationFilter_controlOperationTypes, &v.ControlOperationTypes)
+		case schemas.ControlOperationFilter_enabledControlIdentifiers:
+			return deserializeEnabledControlIdentifiers(d, schemas.ControlOperationFilter_enabledControlIdentifiers, &v.EnabledControlIdentifiers)
+		case schemas.ControlOperationFilter_statuses:
+			return deserializeControlOperationStatuses(d, schemas.ControlOperationFilter_statuses, &v.Statuses)
+		case schemas.ControlOperationFilter_targetIdentifiers:
+			return deserializeTargetIdentifiers(d, schemas.ControlOperationFilter_targetIdentifiers, &v.TargetIdentifiers)
+		}
+		return nil
+	})
 }
 
 // A summary of information about the specified control operation.
@@ -143,6 +349,84 @@ type ControlOperationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ControlOperationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ControlOperationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ControlOperationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlIdentifier != nil {
+		s.WriteString(schemas.ControlOperationSummary_controlIdentifier, *v.ControlIdentifier)
+	}
+	if v.EnabledControlIdentifier != nil {
+		s.WriteString(schemas.ControlOperationSummary_enabledControlIdentifier, *v.EnabledControlIdentifier)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ControlOperationSummary_endTime, *v.EndTime)
+	}
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.ControlOperationSummary_operationIdentifier, *v.OperationIdentifier)
+	}
+	if v.OperationType != "" {
+		s.WriteString(schemas.ControlOperationSummary_operationType, string(v.OperationType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ControlOperationSummary_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ControlOperationSummary_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ControlOperationSummary_statusMessage, *v.StatusMessage)
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.ControlOperationSummary_targetIdentifier, *v.TargetIdentifier)
+	}
+}
+func (v *ControlOperationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ControlOperationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ControlOperationSummary_controlIdentifier:
+			v.ControlIdentifier = new(string)
+			return d.ReadString(schemas.ControlOperationSummary_controlIdentifier, v.ControlIdentifier)
+		case schemas.ControlOperationSummary_enabledControlIdentifier:
+			v.EnabledControlIdentifier = new(string)
+			return d.ReadString(schemas.ControlOperationSummary_enabledControlIdentifier, v.EnabledControlIdentifier)
+		case schemas.ControlOperationSummary_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ControlOperationSummary_endTime, v.EndTime)
+		case schemas.ControlOperationSummary_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.ControlOperationSummary_operationIdentifier, v.OperationIdentifier)
+		case schemas.ControlOperationSummary_operationType:
+			var ev string
+			if err := d.ReadString(schemas.ControlOperationSummary_operationType, &ev); err != nil {
+				return err
+			}
+			v.OperationType = ControlOperationType(ev)
+			return nil
+		case schemas.ControlOperationSummary_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ControlOperationSummary_startTime, v.StartTime)
+		case schemas.ControlOperationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ControlOperationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ControlOperationStatus(ev)
+			return nil
+		case schemas.ControlOperationSummary_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ControlOperationSummary_statusMessage, v.StatusMessage)
+		case schemas.ControlOperationSummary_targetIdentifier:
+			v.TargetIdentifier = new(string)
+			return d.ReadString(schemas.ControlOperationSummary_targetIdentifier, v.TargetIdentifier)
+		}
+		return nil
+	})
+}
+
 // The drift summary of the enabled control.
 //
 // Amazon Web Services Control Tower expects the enabled control configuration to
@@ -173,6 +457,40 @@ type DriftStatusSummary struct {
 	Types *EnabledControlDriftTypes
 
 	noSmithyDocumentSerde
+}
+
+func (v *DriftStatusSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DriftStatusSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DriftStatusSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DriftStatus != "" {
+		s.WriteString(schemas.DriftStatusSummary_driftStatus, string(v.DriftStatus))
+	}
+	if v.Types != nil {
+		s.WriteStruct(schemas.DriftStatusSummary_types)
+		v.Types.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DriftStatusSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DriftStatusSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DriftStatusSummary_driftStatus:
+			var ev string
+			if err := d.ReadString(schemas.DriftStatusSummary_driftStatus, &ev); err != nil {
+				return err
+			}
+			v.DriftStatus = DriftStatus(ev)
+			return nil
+		case schemas.DriftStatusSummary_types:
+			v.Types = &EnabledControlDriftTypes{}
+			return v.Types.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Details of the EnabledBaseline resource.
@@ -215,6 +533,71 @@ type EnabledBaselineDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledBaselineDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledBaselineDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledBaselineDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EnabledBaselineDetails_arn, *v.Arn)
+	}
+	if v.BaselineIdentifier != nil {
+		s.WriteString(schemas.EnabledBaselineDetails_baselineIdentifier, *v.BaselineIdentifier)
+	}
+	if v.BaselineVersion != nil {
+		s.WriteString(schemas.EnabledBaselineDetails_baselineVersion, *v.BaselineVersion)
+	}
+	if v.DriftStatusSummary != nil {
+		s.WriteStruct(schemas.EnabledBaselineDetails_driftStatusSummary)
+		v.DriftStatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEnabledBaselineParameterSummaries(s, schemas.EnabledBaselineDetails_parameters, v.Parameters)
+	if v.ParentIdentifier != nil {
+		s.WriteString(schemas.EnabledBaselineDetails_parentIdentifier, *v.ParentIdentifier)
+	}
+	if v.StatusSummary != nil {
+		s.WriteStruct(schemas.EnabledBaselineDetails_statusSummary)
+		v.StatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.EnabledBaselineDetails_targetIdentifier, *v.TargetIdentifier)
+	}
+}
+func (v *EnabledBaselineDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledBaselineDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledBaselineDetails_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EnabledBaselineDetails_arn, v.Arn)
+		case schemas.EnabledBaselineDetails_baselineIdentifier:
+			v.BaselineIdentifier = new(string)
+			return d.ReadString(schemas.EnabledBaselineDetails_baselineIdentifier, v.BaselineIdentifier)
+		case schemas.EnabledBaselineDetails_baselineVersion:
+			v.BaselineVersion = new(string)
+			return d.ReadString(schemas.EnabledBaselineDetails_baselineVersion, v.BaselineVersion)
+		case schemas.EnabledBaselineDetails_driftStatusSummary:
+			v.DriftStatusSummary = &EnabledBaselineDriftStatusSummary{}
+			return v.DriftStatusSummary.Deserialize(d)
+		case schemas.EnabledBaselineDetails_parameters:
+			return deserializeEnabledBaselineParameterSummaries(d, schemas.EnabledBaselineDetails_parameters, &v.Parameters)
+		case schemas.EnabledBaselineDetails_parentIdentifier:
+			v.ParentIdentifier = new(string)
+			return d.ReadString(schemas.EnabledBaselineDetails_parentIdentifier, v.ParentIdentifier)
+		case schemas.EnabledBaselineDetails_statusSummary:
+			v.StatusSummary = &EnablementStatusSummary{}
+			return v.StatusSummary.Deserialize(d)
+		case schemas.EnabledBaselineDetails_targetIdentifier:
+			v.TargetIdentifier = new(string)
+			return d.ReadString(schemas.EnabledBaselineDetails_targetIdentifier, v.TargetIdentifier)
+		}
+		return nil
+	})
+}
+
 // The drift summary of the enabled baseline. Amazon Web Services Control Tower
 // reports inheritance drift when an enabled baseline configuration of a member
 // account is different than the configuration that applies to the OU. Amazon Web
@@ -232,6 +615,30 @@ type EnabledBaselineDriftStatusSummary struct {
 	Types *EnabledBaselineDriftTypes
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnabledBaselineDriftStatusSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledBaselineDriftStatusSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledBaselineDriftStatusSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Types != nil {
+		s.WriteStruct(schemas.EnabledBaselineDriftStatusSummary_types)
+		v.Types.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnabledBaselineDriftStatusSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledBaselineDriftStatusSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledBaselineDriftStatusSummary_types:
+			v.Types = &EnabledBaselineDriftTypes{}
+			return v.Types.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The types of drift that can be detected for an enabled baseline.
@@ -265,6 +672,30 @@ type EnabledBaselineDriftTypes struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledBaselineDriftTypes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledBaselineDriftTypes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledBaselineDriftTypes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Inheritance != nil {
+		s.WriteStruct(schemas.EnabledBaselineDriftTypes_inheritance)
+		v.Inheritance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnabledBaselineDriftTypes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledBaselineDriftTypes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledBaselineDriftTypes_inheritance:
+			v.Inheritance = &EnabledBaselineInheritanceDrift{}
+			return v.Inheritance.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A filter applied on the ListEnabledBaseline operation. Allowed filters are
 // baselineIdentifiers and targetIdentifiers . The filter can be applied for
 // either, or both.
@@ -289,6 +720,37 @@ type EnabledBaselineFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledBaselineFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledBaselineFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledBaselineFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEnabledBaselineBaselineIdentifiers(s, schemas.EnabledBaselineFilter_baselineIdentifiers, v.BaselineIdentifiers)
+	serializeEnabledBaselineDriftStatuses(s, schemas.EnabledBaselineFilter_inheritanceDriftStatuses, v.InheritanceDriftStatuses)
+	serializeEnabledBaselineParentIdentifiers(s, schemas.EnabledBaselineFilter_parentIdentifiers, v.ParentIdentifiers)
+	serializeEnabledBaselineEnablementStatuses(s, schemas.EnabledBaselineFilter_statuses, v.Statuses)
+	serializeEnabledBaselineTargetIdentifiers(s, schemas.EnabledBaselineFilter_targetIdentifiers, v.TargetIdentifiers)
+}
+func (v *EnabledBaselineFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledBaselineFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledBaselineFilter_baselineIdentifiers:
+			return deserializeEnabledBaselineBaselineIdentifiers(d, schemas.EnabledBaselineFilter_baselineIdentifiers, &v.BaselineIdentifiers)
+		case schemas.EnabledBaselineFilter_inheritanceDriftStatuses:
+			return deserializeEnabledBaselineDriftStatuses(d, schemas.EnabledBaselineFilter_inheritanceDriftStatuses, &v.InheritanceDriftStatuses)
+		case schemas.EnabledBaselineFilter_parentIdentifiers:
+			return deserializeEnabledBaselineParentIdentifiers(d, schemas.EnabledBaselineFilter_parentIdentifiers, &v.ParentIdentifiers)
+		case schemas.EnabledBaselineFilter_statuses:
+			return deserializeEnabledBaselineEnablementStatuses(d, schemas.EnabledBaselineFilter_statuses, &v.Statuses)
+		case schemas.EnabledBaselineFilter_targetIdentifiers:
+			return deserializeEnabledBaselineTargetIdentifiers(d, schemas.EnabledBaselineFilter_targetIdentifiers, &v.TargetIdentifiers)
+		}
+		return nil
+	})
+}
+
 // The inheritance drift summary for the enabled baseline. Inheritance drift
 // occurs when any accounts in the target OU do not match the baseline
 // configuration defined on that OU.
@@ -298,6 +760,32 @@ type EnabledBaselineInheritanceDrift struct {
 	Status EnabledBaselineDriftStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnabledBaselineInheritanceDrift) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledBaselineInheritanceDrift)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledBaselineInheritanceDrift) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.EnabledBaselineInheritanceDrift_status, string(v.Status))
+	}
+}
+func (v *EnabledBaselineInheritanceDrift) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledBaselineInheritanceDrift, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledBaselineInheritanceDrift_status:
+			var ev string
+			if err := d.ReadString(schemas.EnabledBaselineInheritanceDrift_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EnabledBaselineDriftStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A key-value parameter to an EnabledBaseline resource.
@@ -316,6 +804,40 @@ type EnabledBaselineParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledBaselineParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledBaselineParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledBaselineParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.EnabledBaselineParameter_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteDocument(schemas.EnabledBaselineParameter_value, &smithydocument.Opaque{Value: v.Value})
+	}
+}
+func (v *EnabledBaselineParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledBaselineParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledBaselineParameter_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.EnabledBaselineParameter_key, v.Key)
+		case schemas.EnabledBaselineParameter_value:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.EnabledBaselineParameter_value, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 // Summary of an applied parameter to an EnabledBaseline resource.
 type EnabledBaselineParameterSummary struct {
 
@@ -330,6 +852,40 @@ type EnabledBaselineParameterSummary struct {
 	Value document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnabledBaselineParameterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledBaselineParameterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledBaselineParameterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.EnabledBaselineParameterSummary_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteDocument(schemas.EnabledBaselineParameterSummary_value, &smithydocument.Opaque{Value: v.Value})
+	}
+}
+func (v *EnabledBaselineParameterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledBaselineParameterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledBaselineParameterSummary_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.EnabledBaselineParameterSummary_key, v.Key)
+		case schemas.EnabledBaselineParameterSummary_value:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.EnabledBaselineParameterSummary_value, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
 }
 
 // Returns a summary of information about an EnabledBaseline object.
@@ -366,6 +922,68 @@ type EnabledBaselineSummary struct {
 	ParentIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnabledBaselineSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledBaselineSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledBaselineSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EnabledBaselineSummary_arn, *v.Arn)
+	}
+	if v.BaselineIdentifier != nil {
+		s.WriteString(schemas.EnabledBaselineSummary_baselineIdentifier, *v.BaselineIdentifier)
+	}
+	if v.BaselineVersion != nil {
+		s.WriteString(schemas.EnabledBaselineSummary_baselineVersion, *v.BaselineVersion)
+	}
+	if v.DriftStatusSummary != nil {
+		s.WriteStruct(schemas.EnabledBaselineSummary_driftStatusSummary)
+		v.DriftStatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentIdentifier != nil {
+		s.WriteString(schemas.EnabledBaselineSummary_parentIdentifier, *v.ParentIdentifier)
+	}
+	if v.StatusSummary != nil {
+		s.WriteStruct(schemas.EnabledBaselineSummary_statusSummary)
+		v.StatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.EnabledBaselineSummary_targetIdentifier, *v.TargetIdentifier)
+	}
+}
+func (v *EnabledBaselineSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledBaselineSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledBaselineSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EnabledBaselineSummary_arn, v.Arn)
+		case schemas.EnabledBaselineSummary_baselineIdentifier:
+			v.BaselineIdentifier = new(string)
+			return d.ReadString(schemas.EnabledBaselineSummary_baselineIdentifier, v.BaselineIdentifier)
+		case schemas.EnabledBaselineSummary_baselineVersion:
+			v.BaselineVersion = new(string)
+			return d.ReadString(schemas.EnabledBaselineSummary_baselineVersion, v.BaselineVersion)
+		case schemas.EnabledBaselineSummary_driftStatusSummary:
+			v.DriftStatusSummary = &EnabledBaselineDriftStatusSummary{}
+			return v.DriftStatusSummary.Deserialize(d)
+		case schemas.EnabledBaselineSummary_parentIdentifier:
+			v.ParentIdentifier = new(string)
+			return d.ReadString(schemas.EnabledBaselineSummary_parentIdentifier, v.ParentIdentifier)
+		case schemas.EnabledBaselineSummary_statusSummary:
+			v.StatusSummary = &EnablementStatusSummary{}
+			return v.StatusSummary.Deserialize(d)
+		case schemas.EnabledBaselineSummary_targetIdentifier:
+			v.TargetIdentifier = new(string)
+			return d.ReadString(schemas.EnabledBaselineSummary_targetIdentifier, v.TargetIdentifier)
+		}
+		return nil
+	})
 }
 
 // Information about the enabled control.
@@ -405,6 +1023,68 @@ type EnabledControlDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledControlDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledControlDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledControlDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EnabledControlDetails_arn, *v.Arn)
+	}
+	if v.ControlIdentifier != nil {
+		s.WriteString(schemas.EnabledControlDetails_controlIdentifier, *v.ControlIdentifier)
+	}
+	if v.DriftStatusSummary != nil {
+		s.WriteStruct(schemas.EnabledControlDetails_driftStatusSummary)
+		v.DriftStatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEnabledControlParameterSummaries(s, schemas.EnabledControlDetails_parameters, v.Parameters)
+	if v.ParentIdentifier != nil {
+		s.WriteString(schemas.EnabledControlDetails_parentIdentifier, *v.ParentIdentifier)
+	}
+	if v.StatusSummary != nil {
+		s.WriteStruct(schemas.EnabledControlDetails_statusSummary)
+		v.StatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.EnabledControlDetails_targetIdentifier, *v.TargetIdentifier)
+	}
+	serializeTargetRegions(s, schemas.EnabledControlDetails_targetRegions, v.TargetRegions)
+}
+func (v *EnabledControlDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledControlDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledControlDetails_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EnabledControlDetails_arn, v.Arn)
+		case schemas.EnabledControlDetails_controlIdentifier:
+			v.ControlIdentifier = new(string)
+			return d.ReadString(schemas.EnabledControlDetails_controlIdentifier, v.ControlIdentifier)
+		case schemas.EnabledControlDetails_driftStatusSummary:
+			v.DriftStatusSummary = &DriftStatusSummary{}
+			return v.DriftStatusSummary.Deserialize(d)
+		case schemas.EnabledControlDetails_parameters:
+			return deserializeEnabledControlParameterSummaries(d, schemas.EnabledControlDetails_parameters, &v.Parameters)
+		case schemas.EnabledControlDetails_parentIdentifier:
+			v.ParentIdentifier = new(string)
+			return d.ReadString(schemas.EnabledControlDetails_parentIdentifier, v.ParentIdentifier)
+		case schemas.EnabledControlDetails_statusSummary:
+			v.StatusSummary = &EnablementStatusSummary{}
+			return v.StatusSummary.Deserialize(d)
+		case schemas.EnabledControlDetails_targetIdentifier:
+			v.TargetIdentifier = new(string)
+			return d.ReadString(schemas.EnabledControlDetails_targetIdentifier, v.TargetIdentifier)
+		case schemas.EnabledControlDetails_targetRegions:
+			return deserializeTargetRegions(d, schemas.EnabledControlDetails_targetRegions, &v.TargetRegions)
+		}
+		return nil
+	})
+}
+
 // Defines the various categories of drift that can occur for an enabled control
 // resource.
 type EnabledControlDriftTypes struct {
@@ -418,6 +1098,38 @@ type EnabledControlDriftTypes struct {
 	Resource *EnabledControlResourceDrift
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnabledControlDriftTypes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledControlDriftTypes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledControlDriftTypes) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Inheritance != nil {
+		s.WriteStruct(schemas.EnabledControlDriftTypes_inheritance)
+		v.Inheritance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.EnabledControlDriftTypes_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnabledControlDriftTypes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledControlDriftTypes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledControlDriftTypes_inheritance:
+			v.Inheritance = &EnabledControlInheritanceDrift{}
+			return v.Inheritance.Deserialize(d)
+		case schemas.EnabledControlDriftTypes_resource:
+			v.Resource = &EnabledControlResourceDrift{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A structure that returns a set of control identifiers, the control status for
@@ -448,6 +1160,40 @@ type EnabledControlFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledControlFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledControlFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledControlFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeControlIdentifiers(s, schemas.EnabledControlFilter_controlIdentifiers, v.ControlIdentifiers)
+	serializeDriftStatuses(s, schemas.EnabledControlFilter_driftStatuses, v.DriftStatuses)
+	serializeDriftStatuses(s, schemas.EnabledControlFilter_inheritanceDriftStatuses, v.InheritanceDriftStatuses)
+	serializeParentIdentifiers(s, schemas.EnabledControlFilter_parentIdentifiers, v.ParentIdentifiers)
+	serializeDriftStatuses(s, schemas.EnabledControlFilter_resourceDriftStatuses, v.ResourceDriftStatuses)
+	serializeEnablementStatuses(s, schemas.EnabledControlFilter_statuses, v.Statuses)
+}
+func (v *EnabledControlFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledControlFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledControlFilter_controlIdentifiers:
+			return deserializeControlIdentifiers(d, schemas.EnabledControlFilter_controlIdentifiers, &v.ControlIdentifiers)
+		case schemas.EnabledControlFilter_driftStatuses:
+			return deserializeDriftStatuses(d, schemas.EnabledControlFilter_driftStatuses, &v.DriftStatuses)
+		case schemas.EnabledControlFilter_inheritanceDriftStatuses:
+			return deserializeDriftStatuses(d, schemas.EnabledControlFilter_inheritanceDriftStatuses, &v.InheritanceDriftStatuses)
+		case schemas.EnabledControlFilter_parentIdentifiers:
+			return deserializeParentIdentifiers(d, schemas.EnabledControlFilter_parentIdentifiers, &v.ParentIdentifiers)
+		case schemas.EnabledControlFilter_resourceDriftStatuses:
+			return deserializeDriftStatuses(d, schemas.EnabledControlFilter_resourceDriftStatuses, &v.ResourceDriftStatuses)
+		case schemas.EnabledControlFilter_statuses:
+			return deserializeEnablementStatuses(d, schemas.EnabledControlFilter_statuses, &v.Statuses)
+		}
+		return nil
+	})
+}
+
 // Represents drift information related to control inheritance between
 // organizational units.
 type EnabledControlInheritanceDrift struct {
@@ -457,6 +1203,32 @@ type EnabledControlInheritanceDrift struct {
 	Status DriftStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnabledControlInheritanceDrift) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledControlInheritanceDrift)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledControlInheritanceDrift) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.EnabledControlInheritanceDrift_status, string(v.Status))
+	}
+}
+func (v *EnabledControlInheritanceDrift) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledControlInheritanceDrift, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledControlInheritanceDrift_status:
+			var ev string
+			if err := d.ReadString(schemas.EnabledControlInheritanceDrift_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DriftStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A key/value pair, where Key is of type String and Value is of type Document .
@@ -475,6 +1247,40 @@ type EnabledControlParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledControlParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledControlParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledControlParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.EnabledControlParameter_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteDocument(schemas.EnabledControlParameter_value, &smithydocument.Opaque{Value: v.Value})
+	}
+}
+func (v *EnabledControlParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledControlParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledControlParameter_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.EnabledControlParameter_key, v.Key)
+		case schemas.EnabledControlParameter_value:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.EnabledControlParameter_value, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 // Returns a summary of information about the parameters of an enabled control.
 type EnabledControlParameterSummary struct {
 
@@ -491,6 +1297,40 @@ type EnabledControlParameterSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledControlParameterSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledControlParameterSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledControlParameterSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.EnabledControlParameterSummary_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteDocument(schemas.EnabledControlParameterSummary_value, &smithydocument.Opaque{Value: v.Value})
+	}
+}
+func (v *EnabledControlParameterSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledControlParameterSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledControlParameterSummary_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.EnabledControlParameterSummary_key, v.Key)
+		case schemas.EnabledControlParameterSummary_value:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.EnabledControlParameterSummary_value, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents drift information related to the underlying Amazon Web Services
 // resources managed by the control.
 type EnabledControlResourceDrift struct {
@@ -500,6 +1340,32 @@ type EnabledControlResourceDrift struct {
 	Status DriftStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnabledControlResourceDrift) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledControlResourceDrift)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledControlResourceDrift) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.EnabledControlResourceDrift_status, string(v.Status))
+	}
+}
+func (v *EnabledControlResourceDrift) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledControlResourceDrift, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledControlResourceDrift_status:
+			var ev string
+			if err := d.ReadString(schemas.EnabledControlResourceDrift_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DriftStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Returns a summary of information about an enabled control.
@@ -527,6 +1393,62 @@ type EnabledControlSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnabledControlSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnabledControlSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnabledControlSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EnabledControlSummary_arn, *v.Arn)
+	}
+	if v.ControlIdentifier != nil {
+		s.WriteString(schemas.EnabledControlSummary_controlIdentifier, *v.ControlIdentifier)
+	}
+	if v.DriftStatusSummary != nil {
+		s.WriteStruct(schemas.EnabledControlSummary_driftStatusSummary)
+		v.DriftStatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentIdentifier != nil {
+		s.WriteString(schemas.EnabledControlSummary_parentIdentifier, *v.ParentIdentifier)
+	}
+	if v.StatusSummary != nil {
+		s.WriteStruct(schemas.EnabledControlSummary_statusSummary)
+		v.StatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.EnabledControlSummary_targetIdentifier, *v.TargetIdentifier)
+	}
+}
+func (v *EnabledControlSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnabledControlSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnabledControlSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EnabledControlSummary_arn, v.Arn)
+		case schemas.EnabledControlSummary_controlIdentifier:
+			v.ControlIdentifier = new(string)
+			return d.ReadString(schemas.EnabledControlSummary_controlIdentifier, v.ControlIdentifier)
+		case schemas.EnabledControlSummary_driftStatusSummary:
+			v.DriftStatusSummary = &DriftStatusSummary{}
+			return v.DriftStatusSummary.Deserialize(d)
+		case schemas.EnabledControlSummary_parentIdentifier:
+			v.ParentIdentifier = new(string)
+			return d.ReadString(schemas.EnabledControlSummary_parentIdentifier, v.ParentIdentifier)
+		case schemas.EnabledControlSummary_statusSummary:
+			v.StatusSummary = &EnablementStatusSummary{}
+			return v.StatusSummary.Deserialize(d)
+		case schemas.EnabledControlSummary_targetIdentifier:
+			v.TargetIdentifier = new(string)
+			return d.ReadString(schemas.EnabledControlSummary_targetIdentifier, v.TargetIdentifier)
+		}
+		return nil
+	})
+}
+
 // The deployment summary of an EnabledControl or EnabledBaseline resource.
 type EnablementStatusSummary struct {
 
@@ -548,6 +1470,38 @@ type EnablementStatusSummary struct {
 	Status EnablementStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnablementStatusSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnablementStatusSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnablementStatusSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastOperationIdentifier != nil {
+		s.WriteString(schemas.EnablementStatusSummary_lastOperationIdentifier, *v.LastOperationIdentifier)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EnablementStatusSummary_status, string(v.Status))
+	}
+}
+func (v *EnablementStatusSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnablementStatusSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnablementStatusSummary_lastOperationIdentifier:
+			v.LastOperationIdentifier = new(string)
+			return d.ReadString(schemas.EnablementStatusSummary_lastOperationIdentifier, v.LastOperationIdentifier)
+		case schemas.EnablementStatusSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.EnablementStatusSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EnablementStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about the landing zone.
@@ -583,6 +1537,73 @@ type LandingZoneDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LandingZoneDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LandingZoneDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LandingZoneDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.LandingZoneDetail_arn, *v.Arn)
+	}
+	if v.DriftStatus != nil {
+		s.WriteStruct(schemas.LandingZoneDetail_driftStatus)
+		v.DriftStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestAvailableVersion != nil {
+		s.WriteString(schemas.LandingZoneDetail_latestAvailableVersion, *v.LatestAvailableVersion)
+	}
+	if v.Manifest != nil {
+		s.WriteDocument(schemas.LandingZoneDetail_manifest, &smithydocument.Opaque{Value: v.Manifest})
+	}
+	serializeRemediationTypes(s, schemas.LandingZoneDetail_remediationTypes, v.RemediationTypes)
+	if v.Status != "" {
+		s.WriteString(schemas.LandingZoneDetail_status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.LandingZoneDetail_version, *v.Version)
+	}
+}
+func (v *LandingZoneDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LandingZoneDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LandingZoneDetail_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.LandingZoneDetail_arn, v.Arn)
+		case schemas.LandingZoneDetail_driftStatus:
+			v.DriftStatus = &LandingZoneDriftStatusSummary{}
+			return v.DriftStatus.Deserialize(d)
+		case schemas.LandingZoneDetail_latestAvailableVersion:
+			v.LatestAvailableVersion = new(string)
+			return d.ReadString(schemas.LandingZoneDetail_latestAvailableVersion, v.LatestAvailableVersion)
+		case schemas.LandingZoneDetail_manifest:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.LandingZoneDetail_manifest, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Manifest = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.LandingZoneDetail_remediationTypes:
+			return deserializeRemediationTypes(d, schemas.LandingZoneDetail_remediationTypes, &v.RemediationTypes)
+		case schemas.LandingZoneDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.LandingZoneDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = LandingZoneStatus(ev)
+			return nil
+		case schemas.LandingZoneDetail_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.LandingZoneDetail_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // The drift status summary of the landing zone.
 //
 // If the landing zone differs from the expected configuration, it is defined to
@@ -601,6 +1622,32 @@ type LandingZoneDriftStatusSummary struct {
 	Status LandingZoneDriftStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *LandingZoneDriftStatusSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LandingZoneDriftStatusSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LandingZoneDriftStatusSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.LandingZoneDriftStatusSummary_status, string(v.Status))
+	}
+}
+func (v *LandingZoneDriftStatusSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LandingZoneDriftStatusSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LandingZoneDriftStatusSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.LandingZoneDriftStatusSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = LandingZoneDriftStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about a landing zone operation.
@@ -644,6 +1691,66 @@ type LandingZoneOperationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LandingZoneOperationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LandingZoneOperationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LandingZoneOperationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.LandingZoneOperationDetail_endTime, *v.EndTime)
+	}
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.LandingZoneOperationDetail_operationIdentifier, *v.OperationIdentifier)
+	}
+	if v.OperationType != "" {
+		s.WriteString(schemas.LandingZoneOperationDetail_operationType, string(v.OperationType))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.LandingZoneOperationDetail_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LandingZoneOperationDetail_status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.LandingZoneOperationDetail_statusMessage, *v.StatusMessage)
+	}
+}
+func (v *LandingZoneOperationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LandingZoneOperationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LandingZoneOperationDetail_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.LandingZoneOperationDetail_endTime, v.EndTime)
+		case schemas.LandingZoneOperationDetail_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.LandingZoneOperationDetail_operationIdentifier, v.OperationIdentifier)
+		case schemas.LandingZoneOperationDetail_operationType:
+			var ev string
+			if err := d.ReadString(schemas.LandingZoneOperationDetail_operationType, &ev); err != nil {
+				return err
+			}
+			v.OperationType = LandingZoneOperationType(ev)
+			return nil
+		case schemas.LandingZoneOperationDetail_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.LandingZoneOperationDetail_startTime, v.StartTime)
+		case schemas.LandingZoneOperationDetail_status:
+			var ev string
+			if err := d.ReadString(schemas.LandingZoneOperationDetail_status, &ev); err != nil {
+				return err
+			}
+			v.Status = LandingZoneOperationStatus(ev)
+			return nil
+		case schemas.LandingZoneOperationDetail_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.LandingZoneOperationDetail_statusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // A filter object that lets you call ListLandingZoneOperations with a specific
 // filter.
 type LandingZoneOperationFilter struct {
@@ -655,6 +1762,28 @@ type LandingZoneOperationFilter struct {
 	Types []LandingZoneOperationType
 
 	noSmithyDocumentSerde
+}
+
+func (v *LandingZoneOperationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LandingZoneOperationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LandingZoneOperationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLandingZoneOperationStatuses(s, schemas.LandingZoneOperationFilter_statuses, v.Statuses)
+	serializeLandingZoneOperationTypes(s, schemas.LandingZoneOperationFilter_types, v.Types)
+}
+func (v *LandingZoneOperationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LandingZoneOperationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LandingZoneOperationFilter_statuses:
+			return deserializeLandingZoneOperationStatuses(d, schemas.LandingZoneOperationFilter_statuses, &v.Statuses)
+		case schemas.LandingZoneOperationFilter_types:
+			return deserializeLandingZoneOperationTypes(d, schemas.LandingZoneOperationFilter_types, &v.Types)
+		}
+		return nil
+	})
 }
 
 // Returns a summary of information about a landing zone operation.
@@ -672,6 +1801,48 @@ type LandingZoneOperationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LandingZoneOperationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LandingZoneOperationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LandingZoneOperationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.LandingZoneOperationSummary_operationIdentifier, *v.OperationIdentifier)
+	}
+	if v.OperationType != "" {
+		s.WriteString(schemas.LandingZoneOperationSummary_operationType, string(v.OperationType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LandingZoneOperationSummary_status, string(v.Status))
+	}
+}
+func (v *LandingZoneOperationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LandingZoneOperationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LandingZoneOperationSummary_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.LandingZoneOperationSummary_operationIdentifier, v.OperationIdentifier)
+		case schemas.LandingZoneOperationSummary_operationType:
+			var ev string
+			if err := d.ReadString(schemas.LandingZoneOperationSummary_operationType, &ev); err != nil {
+				return err
+			}
+			v.OperationType = LandingZoneOperationType(ev)
+			return nil
+		case schemas.LandingZoneOperationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.LandingZoneOperationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = LandingZoneOperationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Returns a summary of information about a landing zone.
 type LandingZoneSummary struct {
 
@@ -679,6 +1850,28 @@ type LandingZoneSummary struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LandingZoneSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LandingZoneSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LandingZoneSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.LandingZoneSummary_arn, *v.Arn)
+	}
+}
+func (v *LandingZoneSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LandingZoneSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LandingZoneSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.LandingZoneSummary_arn, v.Arn)
+		}
+		return nil
+	})
 }
 
 // An Amazon Web Services Region in which Amazon Web Services Control Tower
@@ -695,6 +1888,28 @@ type Region struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Region) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Region)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Region) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Region_name, *v.Name)
+	}
+}
+func (v *Region) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Region, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Region_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Region_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -1,0 +1,5 @@
+PATCH /positions/__ResourceIdentifier__?resourceType=WirelessDevice
+
+Content-Type: application/json
+
+{"Position":[1,1]}

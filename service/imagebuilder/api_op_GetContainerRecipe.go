@@ -4,11 +4,10 @@ package imagebuilder
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a container recipe.
@@ -37,6 +36,18 @@ type GetContainerRecipeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerRecipeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerRecipeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerRecipeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerRecipeArn != nil {
+		s.WriteString(schemas.GetContainerRecipeRequest_containerRecipeArn, *v.ContainerRecipeArn)
+	}
+}
+
 type GetContainerRecipeOutput struct {
 
 	// The container recipe object that is returned.
@@ -54,77 +65,64 @@ type GetContainerRecipeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContainerRecipeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContainerRecipeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContainerRecipeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerRecipe != nil {
+		s.WriteStruct(schemas.GetContainerRecipeResponse_containerRecipe)
+		v.ContainerRecipe.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LatestVersionReferences != nil {
+		s.WriteStruct(schemas.GetContainerRecipeResponse_latestVersionReferences)
+		v.LatestVersionReferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetContainerRecipeResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetContainerRecipeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContainerRecipeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContainerRecipeResponse_containerRecipe:
+			v.ContainerRecipe = &types.ContainerRecipe{}
+			return v.ContainerRecipe.Deserialize(d)
+		case schemas.GetContainerRecipeResponse_latestVersionReferences:
+			v.LatestVersionReferences = &types.LatestVersionReferences{}
+			return v.LatestVersionReferences.Deserialize(d)
+		case schemas.GetContainerRecipeResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetContainerRecipeResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerRecipe, schemas.GetContainerRecipeRequest, schemas.GetContainerRecipeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContainerRecipe{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContainerRecipe, schemas.GetContainerRecipeRequest, schemas.GetContainerRecipeResponse), output: &GetContainerRecipeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContainerRecipe{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetContainerRecipe"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetContainerRecipeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContainerRecipe(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +137,8 @@ func (c *Client) addOperationGetContainerRecipeMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetContainerRecipe(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetContainerRecipe",
-	}
 }

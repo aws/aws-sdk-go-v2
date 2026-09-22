@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -37,6 +36,18 @@ type DescribeClusterInput struct {
 	ClusterName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeClusterRequest_ClusterName, *v.ClusterName)
+	}
 }
 
 type DescribeClusterOutput struct {
@@ -85,6 +96,10 @@ type DescribeClusterOutput struct {
 	// created in the SageMaker HyperPod cluster.
 	RestrictedInstanceGroups []types.ClusterRestrictedInstanceGroupDetails
 
+	// The configuration for the restricted instance groups (RIG) in the SageMaker
+	// HyperPod cluster.
+	RestrictedInstanceGroupsConfig *types.ClusterRestrictedInstanceGroupsConfigOutput
+
 	// The current configuration for managed tier checkpointing on the HyperPod
 	// cluster. For example, this shows whether the feature is enabled and the
 	// percentage of cluster memory allocated for checkpoint storage.
@@ -103,77 +118,148 @@ type DescribeClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScaling != nil {
+		s.WriteStruct(schemas.DescribeClusterResponse_AutoScaling)
+		v.AutoScaling.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.DescribeClusterResponse_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.DescribeClusterResponse_ClusterName, *v.ClusterName)
+	}
+	if v.ClusterRole != nil {
+		s.WriteString(schemas.DescribeClusterResponse_ClusterRole, *v.ClusterRole)
+	}
+	if v.ClusterStatus != "" {
+		s.WriteString(schemas.DescribeClusterResponse_ClusterStatus, string(v.ClusterStatus))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeClusterResponse_CreationTime, *v.CreationTime)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.DescribeClusterResponse_FailureMessage, *v.FailureMessage)
+	}
+	serializeClusterInstanceGroupDetailsList(s, schemas.DescribeClusterResponse_InstanceGroups, v.InstanceGroups)
+	if v.NodeProvisioningMode != "" {
+		s.WriteString(schemas.DescribeClusterResponse_NodeProvisioningMode, string(v.NodeProvisioningMode))
+	}
+	if v.NodeRecovery != "" {
+		s.WriteString(schemas.DescribeClusterResponse_NodeRecovery, string(v.NodeRecovery))
+	}
+	if v.Orchestrator != nil {
+		s.WriteStruct(schemas.DescribeClusterResponse_Orchestrator)
+		v.Orchestrator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeClusterRestrictedInstanceGroupDetailsList(s, schemas.DescribeClusterResponse_RestrictedInstanceGroups, v.RestrictedInstanceGroups)
+	if v.RestrictedInstanceGroupsConfig != nil {
+		s.WriteStruct(schemas.DescribeClusterResponse_RestrictedInstanceGroupsConfig)
+		v.RestrictedInstanceGroupsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TieredStorageConfig != nil {
+		s.WriteStruct(schemas.DescribeClusterResponse_TieredStorageConfig)
+		v.TieredStorageConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DescribeClusterResponse_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClusterResponse_AutoScaling:
+			v.AutoScaling = &types.ClusterAutoScalingConfigOutput{}
+			return v.AutoScaling.Deserialize(d)
+		case schemas.DescribeClusterResponse_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.DescribeClusterResponse_ClusterArn, v.ClusterArn)
+		case schemas.DescribeClusterResponse_ClusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.DescribeClusterResponse_ClusterName, v.ClusterName)
+		case schemas.DescribeClusterResponse_ClusterRole:
+			v.ClusterRole = new(string)
+			return d.ReadString(schemas.DescribeClusterResponse_ClusterRole, v.ClusterRole)
+		case schemas.DescribeClusterResponse_ClusterStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeClusterResponse_ClusterStatus, &ev); err != nil {
+				return err
+			}
+			v.ClusterStatus = types.ClusterStatus(ev)
+			return nil
+		case schemas.DescribeClusterResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeClusterResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeClusterResponse_FailureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.DescribeClusterResponse_FailureMessage, v.FailureMessage)
+		case schemas.DescribeClusterResponse_InstanceGroups:
+			return deserializeClusterInstanceGroupDetailsList(d, schemas.DescribeClusterResponse_InstanceGroups, &v.InstanceGroups)
+		case schemas.DescribeClusterResponse_NodeProvisioningMode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeClusterResponse_NodeProvisioningMode, &ev); err != nil {
+				return err
+			}
+			v.NodeProvisioningMode = types.ClusterNodeProvisioningMode(ev)
+			return nil
+		case schemas.DescribeClusterResponse_NodeRecovery:
+			var ev string
+			if err := d.ReadString(schemas.DescribeClusterResponse_NodeRecovery, &ev); err != nil {
+				return err
+			}
+			v.NodeRecovery = types.ClusterNodeRecovery(ev)
+			return nil
+		case schemas.DescribeClusterResponse_Orchestrator:
+			v.Orchestrator = &types.ClusterOrchestrator{}
+			return v.Orchestrator.Deserialize(d)
+		case schemas.DescribeClusterResponse_RestrictedInstanceGroups:
+			return deserializeClusterRestrictedInstanceGroupDetailsList(d, schemas.DescribeClusterResponse_RestrictedInstanceGroups, &v.RestrictedInstanceGroups)
+		case schemas.DescribeClusterResponse_RestrictedInstanceGroupsConfig:
+			v.RestrictedInstanceGroupsConfig = &types.ClusterRestrictedInstanceGroupsConfigOutput{}
+			return v.RestrictedInstanceGroupsConfig.Deserialize(d)
+		case schemas.DescribeClusterResponse_TieredStorageConfig:
+			v.TieredStorageConfig = &types.ClusterTieredStorageConfig{}
+			return v.TieredStorageConfig.Deserialize(d)
+		case schemas.DescribeClusterResponse_VpcConfig:
+			v.VpcConfig = &types.VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCluster, schemas.DescribeClusterRequest, schemas.DescribeClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCluster, schemas.DescribeClusterRequest, schemas.DescribeClusterResponse), output: &DescribeClusterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCluster{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,22 +274,8 @@ func (c *Client) addOperationDescribeClusterMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeCluster",
-	}
 }

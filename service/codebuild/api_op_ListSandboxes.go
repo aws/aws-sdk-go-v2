@@ -5,10 +5,10 @@ package codebuild
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of sandboxes.
@@ -42,6 +42,24 @@ type ListSandboxesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSandboxesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSandboxesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSandboxesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSandboxesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSandboxesInput_nextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListSandboxesInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListSandboxesOutput struct {
 
 	// Information about the requested sandbox IDs.
@@ -56,74 +74,48 @@ type ListSandboxesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSandboxesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSandboxesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSandboxesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSandboxIds(s, schemas.ListSandboxesOutput_ids, v.Ids)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSandboxesOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSandboxesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSandboxesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSandboxesOutput_ids:
+			return deserializeSandboxIds(d, schemas.ListSandboxesOutput_ids, &v.Ids)
+		case schemas.ListSandboxesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSandboxesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSandboxesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSandboxes, schemas.ListSandboxesInput, schemas.ListSandboxesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListSandboxes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSandboxes, schemas.ListSandboxesInput, schemas.ListSandboxesOutput), output: &ListSandboxesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListSandboxes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSandboxes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSandboxes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,12 +128,6 @@ func (c *Client) addOperationListSandboxesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -241,11 +227,3 @@ type ListSandboxesAPIClient interface {
 }
 
 var _ ListSandboxesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSandboxes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSandboxes",
-	}
-}

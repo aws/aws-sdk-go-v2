@@ -5,10 +5,10 @@ package voiceid
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the speaker enrollment jobs in the domain with the specified JobStatus
@@ -53,6 +53,50 @@ type ListSpeakerEnrollmentJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpeakerEnrollmentJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSpeakerEnrollmentJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSpeakerEnrollmentJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.ListSpeakerEnrollmentJobsRequest_DomainId, *v.DomainId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.ListSpeakerEnrollmentJobsRequest_JobStatus, string(v.JobStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSpeakerEnrollmentJobsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSpeakerEnrollmentJobsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSpeakerEnrollmentJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSpeakerEnrollmentJobsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSpeakerEnrollmentJobsRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.ListSpeakerEnrollmentJobsRequest_DomainId, v.DomainId)
+		case schemas.ListSpeakerEnrollmentJobsRequest_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.ListSpeakerEnrollmentJobsRequest_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.SpeakerEnrollmentJobStatus(ev)
+			return nil
+		case schemas.ListSpeakerEnrollmentJobsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSpeakerEnrollmentJobsRequest_MaxResults, v.MaxResults)
+		case schemas.ListSpeakerEnrollmentJobsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSpeakerEnrollmentJobsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListSpeakerEnrollmentJobsOutput struct {
 
 	// A list containing details about each specified speaker enrollment job.
@@ -70,77 +114,51 @@ type ListSpeakerEnrollmentJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSpeakerEnrollmentJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSpeakerEnrollmentJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSpeakerEnrollmentJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSpeakerEnrollmentJobSummaries(s, schemas.ListSpeakerEnrollmentJobsResponse_JobSummaries, v.JobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSpeakerEnrollmentJobsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListSpeakerEnrollmentJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSpeakerEnrollmentJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSpeakerEnrollmentJobsResponse_JobSummaries:
+			return deserializeSpeakerEnrollmentJobSummaries(d, schemas.ListSpeakerEnrollmentJobsResponse_JobSummaries, &v.JobSummaries)
+		case schemas.ListSpeakerEnrollmentJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSpeakerEnrollmentJobsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSpeakerEnrollmentJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpeakerEnrollmentJobs, schemas.ListSpeakerEnrollmentJobsRequest, schemas.ListSpeakerEnrollmentJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSpeakerEnrollmentJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSpeakerEnrollmentJobs, schemas.ListSpeakerEnrollmentJobsRequest, schemas.ListSpeakerEnrollmentJobsResponse), output: &ListSpeakerEnrollmentJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSpeakerEnrollmentJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSpeakerEnrollmentJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSpeakerEnrollmentJobsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSpeakerEnrollmentJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +171,6 @@ func (c *Client) addOperationListSpeakerEnrollmentJobsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +275,3 @@ type ListSpeakerEnrollmentJobsAPIClient interface {
 }
 
 var _ ListSpeakerEnrollmentJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSpeakerEnrollmentJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSpeakerEnrollmentJobs",
-	}
-}

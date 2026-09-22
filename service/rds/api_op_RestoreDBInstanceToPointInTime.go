@@ -4,11 +4,8 @@ package rds
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -338,6 +335,8 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	//
 	//   - db2-ae
 	//
+	//   - db2-ce
+	//
 	//   - db2-se
 	//
 	//   - mariadb
@@ -369,7 +368,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	//   - Must be compatible with the engine of the source.
 	Engine *string
 
-	// The life cycle type for this DB instance.
+	// The lifecycle type for this DB instance.
 	//
 	// By default, this value is set to open-source-rds-extended-support , which
 	// enrolls your DB instance into Amazon RDS Extended Support. At the end of
@@ -384,7 +383,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// version. For more information, see [Amazon RDS Extended Support with Amazon RDS]in the Amazon RDS User Guide.
 	//
 	// This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon
-	// Aurora DB instances, the life cycle type is managed by the DB cluster.
+	// Aurora DB instances, the engine lifecycle support is managed by the DB cluster.
 	//
 	// Valid Values: open-source-rds-extended-support |
 	// open-source-rds-extended-support-disabled
@@ -420,7 +419,7 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	//
 	//   - RDS for MariaDB - general-public-license
 	//
-	//   - RDS for Microsoft SQL Server - license-included
+	//   - RDS for Microsoft SQL Server - license-included | bring-your-own-media
 	//
 	//   - RDS for MySQL - general-public-license
 	//
@@ -680,9 +679,6 @@ type RestoreDBInstanceToPointInTimeOutput struct {
 }
 
 func (c *Client) addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBInstanceToPointInTime{}, middleware.After)
 	if err != nil {
 		return err
@@ -691,65 +687,20 @@ func (c *Client) addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *mi
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreDBInstanceToPointInTime"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRestoreDBInstanceToPointInTimeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreDBInstanceToPointInTime(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -764,22 +715,8 @@ func (c *Client) addOperationRestoreDBInstanceToPointInTimeMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRestoreDBInstanceToPointInTime(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RestoreDBInstanceToPointInTime",
-	}
 }

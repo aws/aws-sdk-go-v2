@@ -4,10 +4,9 @@ package amplifybackend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates a one-time challenge code to authenticate a user into your Amplify
@@ -37,6 +36,18 @@ type CreateTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateTokenRequest_AppId, *v.AppId)
+	}
+}
+
 type CreateTokenOutput struct {
 
 	// The app ID.
@@ -57,77 +68,66 @@ type CreateTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.CreateTokenResponse_AppId, *v.AppId)
+	}
+	if v.ChallengeCode != nil {
+		s.WriteString(schemas.CreateTokenResponse_ChallengeCode, *v.ChallengeCode)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.CreateTokenResponse_SessionId, *v.SessionId)
+	}
+	if v.Ttl != nil {
+		s.WriteString(schemas.CreateTokenResponse_Ttl, *v.Ttl)
+	}
+}
+func (v *CreateTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTokenResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_AppId, v.AppId)
+		case schemas.CreateTokenResponse_ChallengeCode:
+			v.ChallengeCode = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_ChallengeCode, v.ChallengeCode)
+		case schemas.CreateTokenResponse_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_SessionId, v.SessionId)
+		case schemas.CreateTokenResponse_Ttl:
+			v.Ttl = new(string)
+			return d.ReadString(schemas.CreateTokenResponse_Ttl, v.Ttl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateToken, schemas.CreateTokenRequest, schemas.CreateTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateToken, schemas.CreateTokenRequest, schemas.CreateTokenResponse), output: &CreateTokenOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateToken{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateToken"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTokenValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateToken(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +142,8 @@ func (c *Client) addOperationCreateTokenMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateToken(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateToken",
-	}
 }

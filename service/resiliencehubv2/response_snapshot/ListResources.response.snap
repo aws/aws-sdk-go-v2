@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","serviceFunctionId":"__ServiceFunctionId__","serviceResources":[{"inputSource":{"identifier":"__Identifier__","type":"CFN_STACK"},"resource":{"awsAccountId":"__AwsAccountId__","awsRegion":"__AwsRegion__","identifier":"__Identifier__","resourceType":"__ResourceType__"},"resourceIdentifier":"__ResourceIdentifier__"},{"inputSource":{"identifier":"__Identifier__","type":"CFN_STACK"},"resource":{"awsAccountId":"__AwsAccountId__","awsRegion":"__AwsRegion__","identifier":"__Identifier__","resourceType":"__ResourceType__"},"resourceIdentifier":"__ResourceIdentifier__"}]}

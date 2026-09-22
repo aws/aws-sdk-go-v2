@@ -1,0 +1,5 @@
+POST /list-metrics
+
+Content-Type: application/json
+
+{"conditions":[{"field":"__Field__","operator":"Equals","value":"__Value__"},{"field":"__Field__","operator":"Equals","value":"__Value__"}],"dataSource":"__DataSource__","fields":[{"aggregation":"Min","name":"__Name__"},{"aggregation":"Min","name":"__Name__"}],"maxResults":1,"nextToken":"__NextToken__","sorts":[{"ascending":true,"field":"__Field__"},{"ascending":true,"field":"__Field__"}]}

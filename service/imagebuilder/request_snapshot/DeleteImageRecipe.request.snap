@@ -1,0 +1,3 @@
+DELETE /DeleteImageRecipe?imageRecipeArn=__ImageRecipeArn__
+
+

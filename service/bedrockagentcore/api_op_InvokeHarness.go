@@ -5,7 +5,6 @@ package bedrockagentcore
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
@@ -54,6 +53,10 @@ type InvokeHarnessInput struct {
 	// overrides the harness default.
 	AllowedTools []string
 
+	// W3C Baggage header for user-defined context propagation. Format:
+	// key1=value1,key2=value2
+	Baggage *string
+
 	// The maximum number of iterations the agent loop can execute. If specified,
 	// overrides the harness default.
 	MaxIterations *int32
@@ -65,6 +68,13 @@ type InvokeHarnessInput struct {
 	// The model configuration to use for this invocation. If specified, overrides the
 	// harness default.
 	Model types.HarnessModelConfiguration
+
+	// The endpoint name to invoke. If omitted, the DEFAULT endpoint is used.
+	Qualifier *string
+
+	// An identifier for the end user making the request. This value is passed through
+	// to the runtime container.
+	RuntimeUserId *string
 
 	// The skills available to the agent for this invocation. If specified, overrides
 	// the harness default.
@@ -81,6 +91,16 @@ type InvokeHarnessInput struct {
 	// The tools available to the agent for this invocation. If specified, overrides
 	// the harness default.
 	Tools []types.HarnessTool
+
+	// Trace ID for maintaining observability through the operation.
+	TraceId *string
+
+	// W3C trace context parent header containing version, trace ID, parent span ID,
+	// and trace flags.
+	TraceParent *string
+
+	// W3C trace context state header for vendor-specific trace information.
+	TraceState *string
 
 	noSmithyDocumentSerde
 }
@@ -112,9 +132,6 @@ func (o *InvokeHarnessOutput) GetInitialReply() <-chan InvokeHarnessInitialReply
 }
 
 func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeHarness{}, middleware.After)
 	if err != nil {
 		return err
@@ -123,26 +140,11 @@ func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, o
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeHarness"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamInvokeHarnessMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addEventStreamBuild_opInvokeHarnessMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
@@ -151,37 +153,13 @@ func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInvokeHarnessValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeHarness(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -194,12 +172,6 @@ func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,14 +218,6 @@ func (m *eventStreamBuild_opInvokeHarnessMiddleware) HandleBuild(ctx context.Con
 }
 func addEventStreamBuild_opInvokeHarnessMiddleware(stack *middleware.Stack) error {
 	return stack.Build.Add(&eventStreamBuild_opInvokeHarnessMiddleware{}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opInvokeHarness(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InvokeHarness",
-	}
 }
 
 // InvokeHarnessEventStream provides the event stream handling for the InvokeHarness operation.

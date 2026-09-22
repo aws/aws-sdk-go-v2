@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Evaluates values at the time of the request and returns them. It considers the
@@ -66,6 +66,31 @@ type EvaluateDataTableValuesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateDataTableValuesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateDataTableValuesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateDataTableValuesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataTableId != nil {
+		s.WriteString(schemas.EvaluateDataTableValuesRequest_DataTableId, *v.DataTableId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.EvaluateDataTableValuesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.EvaluateDataTableValuesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.EvaluateDataTableValuesRequest_NextToken, *v.NextToken)
+	}
+	if v.TimeZone != nil {
+		s.WriteString(schemas.EvaluateDataTableValuesRequest_TimeZone, *v.TimeZone)
+	}
+	serializeDataTableValueEvaluationSetList(s, schemas.EvaluateDataTableValuesRequest_Values, v.Values)
+}
+
 type EvaluateDataTableValuesOutput struct {
 
 	// A list of evaluated values with their computed results, error information, and
@@ -84,77 +109,51 @@ type EvaluateDataTableValuesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateDataTableValuesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateDataTableValuesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateDataTableValuesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.EvaluateDataTableValuesResponse_NextToken, *v.NextToken)
+	}
+	serializeDataTableEvaluatedValueList(s, schemas.EvaluateDataTableValuesResponse_Values, v.Values)
+}
+func (v *EvaluateDataTableValuesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluateDataTableValuesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluateDataTableValuesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.EvaluateDataTableValuesResponse_NextToken, v.NextToken)
+		case schemas.EvaluateDataTableValuesResponse_Values:
+			return deserializeDataTableEvaluatedValueList(d, schemas.EvaluateDataTableValuesResponse_Values, &v.Values)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEvaluateDataTableValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateDataTableValues, schemas.EvaluateDataTableValuesRequest, schemas.EvaluateDataTableValuesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEvaluateDataTableValues{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateDataTableValues, schemas.EvaluateDataTableValuesRequest, schemas.EvaluateDataTableValuesResponse), output: &EvaluateDataTableValuesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEvaluateDataTableValues{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EvaluateDataTableValues"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpEvaluateDataTableValuesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEvaluateDataTableValues(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,12 +166,6 @@ func (c *Client) addOperationEvaluateDataTableValuesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -275,11 +268,3 @@ type EvaluateDataTableValuesAPIClient interface {
 }
 
 var _ EvaluateDataTableValuesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opEvaluateDataTableValues(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EvaluateDataTableValues",
-	}
-}

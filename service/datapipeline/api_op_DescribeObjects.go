@@ -5,10 +5,10 @@ package datapipeline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the object definitions for a set of objects associated with the pipeline.
@@ -77,6 +77,25 @@ type DescribeObjectsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeObjectsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeObjectsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeObjectsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluateExpressions != false {
+		s.WriteBool(schemas.DescribeObjectsInput_evaluateExpressions, v.EvaluateExpressions)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeObjectsInput_marker, *v.Marker)
+	}
+	serializeidList(s, schemas.DescribeObjectsInput_objectIds, v.ObjectIds)
+	if v.PipelineId != nil {
+		s.WriteString(schemas.DescribeObjectsInput_pipelineId, *v.PipelineId)
+	}
+}
+
 // Contains the output of DescribeObjects.
 type DescribeObjectsOutput struct {
 
@@ -99,77 +118,56 @@ type DescribeObjectsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeObjectsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeObjectsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeObjectsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HasMoreResults != false {
+		s.WriteBool(schemas.DescribeObjectsOutput_hasMoreResults, v.HasMoreResults)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeObjectsOutput_marker, *v.Marker)
+	}
+	serializePipelineObjectList(s, schemas.DescribeObjectsOutput_pipelineObjects, v.PipelineObjects)
+}
+func (v *DescribeObjectsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeObjectsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeObjectsOutput_hasMoreResults:
+			return d.ReadBool(schemas.DescribeObjectsOutput_hasMoreResults, &v.HasMoreResults)
+		case schemas.DescribeObjectsOutput_marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeObjectsOutput_marker, v.Marker)
+		case schemas.DescribeObjectsOutput_pipelineObjects:
+			return deserializePipelineObjectList(d, schemas.DescribeObjectsOutput_pipelineObjects, &v.PipelineObjects)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeObjects, schemas.DescribeObjectsInput, schemas.DescribeObjectsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeObjects{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeObjects, schemas.DescribeObjectsInput, schemas.DescribeObjectsOutput), output: &DescribeObjectsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeObjects{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeObjects"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeObjectsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeObjects(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,12 +180,6 @@ func (c *Client) addOperationDescribeObjectsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -276,11 +268,3 @@ type DescribeObjectsAPIClient interface {
 }
 
 var _ DescribeObjectsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeObjects(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeObjects",
-	}
-}

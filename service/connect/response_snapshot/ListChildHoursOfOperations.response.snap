@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ChildHoursOfOperationsSummaryList":[{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__"},{"Arn":"__Arn__","Id":"__Id__","Name":"__Name__"}],"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"NextToken":"__NextToken__"}

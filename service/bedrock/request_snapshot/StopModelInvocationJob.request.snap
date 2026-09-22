@@ -1,0 +1,3 @@
+POST /model-invocation-job/__JobIdentifier__/stop
+
+

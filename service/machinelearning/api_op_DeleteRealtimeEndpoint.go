@@ -4,11 +4,10 @@ package machinelearning
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a real time endpoint of an MLModel .
@@ -37,6 +36,18 @@ type DeleteRealtimeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRealtimeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRealtimeEndpointInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRealtimeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.DeleteRealtimeEndpointInput_MLModelId, *v.MLModelId)
+	}
+}
+
 // Represents the output of an DeleteRealtimeEndpoint operation.
 //
 // The result contains the MLModelId and the endpoint information for the MLModel .
@@ -55,77 +66,56 @@ type DeleteRealtimeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRealtimeEndpointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRealtimeEndpointOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRealtimeEndpointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.DeleteRealtimeEndpointOutput_MLModelId, *v.MLModelId)
+	}
+	if v.RealtimeEndpointInfo != nil {
+		s.WriteStruct(schemas.DeleteRealtimeEndpointOutput_RealtimeEndpointInfo)
+		v.RealtimeEndpointInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteRealtimeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRealtimeEndpointOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRealtimeEndpointOutput_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.DeleteRealtimeEndpointOutput_MLModelId, v.MLModelId)
+		case schemas.DeleteRealtimeEndpointOutput_RealtimeEndpointInfo:
+			v.RealtimeEndpointInfo = &types.RealtimeEndpointInfo{}
+			return v.RealtimeEndpointInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRealtimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRealtimeEndpoint, schemas.DeleteRealtimeEndpointInput, schemas.DeleteRealtimeEndpointOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRealtimeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRealtimeEndpoint, schemas.DeleteRealtimeEndpointInput, schemas.DeleteRealtimeEndpointOutput), output: &DeleteRealtimeEndpointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRealtimeEndpoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRealtimeEndpoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteRealtimeEndpointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRealtimeEndpoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +130,8 @@ func (c *Client) addOperationDeleteRealtimeEndpointMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteRealtimeEndpoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteRealtimeEndpoint",
-	}
 }

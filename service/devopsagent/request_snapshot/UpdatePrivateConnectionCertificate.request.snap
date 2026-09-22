@@ -1,0 +1,5 @@
+POST /v1/private-connections/__Name__/certificate
+
+Content-Type: application/json
+
+{"certificate":"__Certificate__"}

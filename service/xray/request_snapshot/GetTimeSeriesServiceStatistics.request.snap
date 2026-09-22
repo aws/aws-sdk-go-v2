@@ -1,0 +1,5 @@
+POST /TimeSeriesServiceStatistics
+
+Content-Type: application/json
+
+{"EndTime":946684800,"EntitySelectorExpression":"__EntitySelectorExpression__","ForecastStatistics":true,"GroupARN":"__GroupARN__","GroupName":"__GroupName__","NextToken":"__NextToken__","Period":1,"StartTime":946684800}

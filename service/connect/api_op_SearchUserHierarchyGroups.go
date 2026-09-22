@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches UserHierarchyGroups in an Connect Customer instance, with optional
@@ -56,6 +56,34 @@ type SearchUserHierarchyGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchUserHierarchyGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchUserHierarchyGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchUserHierarchyGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchUserHierarchyGroupsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchUserHierarchyGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchUserHierarchyGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchUserHierarchyGroupsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchUserHierarchyGroupsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchUserHierarchyGroupsOutput struct {
 
 	// The total number of userHierarchyGroups which matched your search query.
@@ -73,77 +101,57 @@ type SearchUserHierarchyGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchUserHierarchyGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchUserHierarchyGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchUserHierarchyGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchUserHierarchyGroupsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchUserHierarchyGroupsResponse_NextToken, *v.NextToken)
+	}
+	serializeUserHierarchyGroupList(s, schemas.SearchUserHierarchyGroupsResponse_UserHierarchyGroups, v.UserHierarchyGroups)
+}
+func (v *SearchUserHierarchyGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchUserHierarchyGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchUserHierarchyGroupsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchUserHierarchyGroupsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchUserHierarchyGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchUserHierarchyGroupsResponse_NextToken, v.NextToken)
+		case schemas.SearchUserHierarchyGroupsResponse_UserHierarchyGroups:
+			return deserializeUserHierarchyGroupList(d, schemas.SearchUserHierarchyGroupsResponse_UserHierarchyGroups, &v.UserHierarchyGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchUserHierarchyGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUserHierarchyGroups, schemas.SearchUserHierarchyGroupsRequest, schemas.SearchUserHierarchyGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchUserHierarchyGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchUserHierarchyGroups, schemas.SearchUserHierarchyGroupsRequest, schemas.SearchUserHierarchyGroupsResponse), output: &SearchUserHierarchyGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchUserHierarchyGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchUserHierarchyGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchUserHierarchyGroupsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchUserHierarchyGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +164,6 @@ func (c *Client) addOperationSearchUserHierarchyGroupsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -264,11 +266,3 @@ type SearchUserHierarchyGroupsAPIClient interface {
 }
 
 var _ SearchUserHierarchyGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchUserHierarchyGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchUserHierarchyGroups",
-	}
-}

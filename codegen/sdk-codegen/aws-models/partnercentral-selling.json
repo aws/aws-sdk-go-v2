@@ -47,6 +47,9 @@
                     "target": "com.amazonaws.partnercentralselling#OpportunityFromEngagementTask"
                 },
                 {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingFromEngagementTask"
+                },
+                {
                     "target": "com.amazonaws.partnercentralselling#ResourceSnapshot"
                 },
                 {
@@ -102,8 +105,112 @@
                     "FederatedUser"
                 ],
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<fullname>AWS Partner Central API for Selling</fullname> <p> <b>AWS Partner Central API for Selling Reference Guide</b> </p> <p>This Amazon Web Services (AWS) Partner Central API reference is designed to help <a href=\"http://aws.amazon.com/partners/programs/\">AWS Partners</a> integrate Customer Relationship Management (CRM) systems with AWS Partner Central. Partners can automate interactions with AWS Partner Central, which helps to ensure effective engagements in joint business activities.</p> <p>The API provides standard AWS API functionality. Access it by either using API <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html\">Actions</a> or by using an AWS SDK that's tailored to your programming language or platform. For more information, see <a href=\"http://aws.amazon.com/getting-started\">Getting Started with AWS</a> and <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on AWS</a>.</p> <p class=\"title\"> <b>Features offered by AWS Partner Central API</b> </p> <ol> <li> <p> <b>Opportunity management:</b> Manages coselling opportunities through API actions such as <code>CreateOpportunity</code>, <code>UpdateOpportunity</code>, <code>ListOpportunities</code>, <code>GetOpportunity</code>, and <code>AssignOpportunity</code>.</p> </li> <li> <p> <b>AWS referral management:</b> Manages referrals shared by AWS using actions such as <code>ListEngagementInvitations</code>, <code>GetEngagementInvitation</code>, <code>StartEngagementByAcceptingInvitation</code>, and <code>RejectEngagementInvitation</code>.</p> </li> <li> <p> <b>Entity association:</b> Associates related entities such as <i>AWS Products</i>, <i>Partner Solutions</i>, and <i>AWS Marketplace Private Offers</i> with opportunities using the actions <code>AssociateOpportunity</code>, and <code>DisassociateOpportunity</code>.</p> </li> <li> <p> <b>View AWS opportunity details:</b> Retrieves real-time summaries of AWS opportunities using the <code>GetAWSOpportunitySummary</code> action.</p> </li> <li> <p> <b>List solutions:</b> Provides list APIs for listing partner offers using <code>ListSolutions</code>.</p> </li> <li> <p> <b>Event subscription:</b> Subscribe to real-time opportunity updates through AWS EventBridge by using actions such as <i>Opportunity Created</i>, <i>Opportunity Updated</i>, <i>Engagement Invitation Accepted</i>, <i>Engagement Invitation Rejected</i>, and <i>Engagement Invitation Created</i>.</p> </li> </ol>",
+                "smithy.api#documentation": "<fullname>Partner Central</fullname> <p>This Amazon Web Services (AWS) Partner Central API reference is designed to help <a href=\"http://aws.amazon.com/partners/programs/\">AWS Partners</a> integrate Customer Relationship Management (CRM) systems with AWS Partner Central. Partners can automate interactions with AWS Partner Central, which helps to ensure effective engagements in joint business activities.</p> <p>The API provides standard AWS API functionality. Access it by either using API <a href=\"https://docs.aws.amazon.com/partner-central/latest/selling-api/API_Operations.html\">Actions</a> or by using an AWS SDK that's tailored to your programming language or platform. For more information, see <a href=\"http://aws.amazon.com/getting-started\">Getting Started with AWS</a> and <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on AWS</a>.</p> <p class=\"title\"> <b>Features offered by AWS Partner Central API</b> </p> <ol> <li> <p> <b>Opportunity management:</b> Manages coselling opportunities through API actions such as <code>CreateOpportunity</code>, <code>UpdateOpportunity</code>, <code>ListOpportunities</code>, <code>GetOpportunity</code>, and <code>AssignOpportunity</code>.</p> </li> <li> <p> <b>AWS referral management:</b> Manages referrals shared by AWS using actions such as <code>ListEngagementInvitations</code>, <code>GetEngagementInvitation</code>, <code>StartEngagementByAcceptingInvitation</code>, and <code>RejectEngagementInvitation</code>.</p> </li> <li> <p> <b>Entity association:</b> Associates related entities such as <i>AWS Products</i>, <i>Partner Solutions</i>, and <i>AWS Marketplace Private Offers</i> with opportunities using the actions <code>AssociateOpportunity</code>, and <code>DisassociateOpportunity</code>.</p> </li> <li> <p> <b>View AWS opportunity details:</b> Retrieves real-time summaries of AWS opportunities using the <code>GetAWSOpportunitySummary</code> action.</p> </li> <li> <p> <b>List solutions:</b> Provides list APIs for listing partner offers using <code>ListSolutions</code>.</p> </li> <li> <p> <b>Event subscription:</b> Subscribe to real-time opportunity updates through AWS EventBridge by using actions such as <i>Opportunity Created</i>, <i>Opportunity Updated</i>, <i>Engagement Invitation Accepted</i>, <i>Engagement Invitation Rejected</i>, and <i>Engagement Invitation Created</i>.</p> </li> </ol>",
                 "smithy.api#title": "Partner Central Selling API",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://partnercentral-selling-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://partnercentral-selling.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 6,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAYAAAADAAAAAQAAAAQF9eEFAAAAAgAAAAUF9eEFAAAAAwX14QMF9eEEAAAAAwX14QEF9eEC"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1229,10 +1336,60 @@
                 "target": "com.amazonaws.partnercentralselling#AwsMarketplaceOfferSetIdentifier"
             }
         },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceProductArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceProductIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#AwsMarketplaceProductArn"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArn"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifiers": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifier"
+            }
+        },
         "com.amazonaws.partnercentralselling#AwsMaturity": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,20}$"
+                "smithy.api#length": {
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.partnercentralselling#AwsMemberBusinessTitle": {
@@ -1273,6 +1430,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ISVSM"
                     }
+                },
+                "SIGNATORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Signatory"
+                    }
                 }
             }
         },
@@ -1309,6 +1472,18 @@
                     "target": "com.amazonaws.partnercentralselling#AwsProductsSpendInsightsBySource",
                     "traits": {
                         "smithy.api#documentation": "<p>Source-separated spend insights that provide independent analysis for AWS recommendations and partner estimates.</p>"
+                    }
+                },
+                "OpportunityQuality": {
+                    "target": "com.amazonaws.partnercentralselling#OpportunityQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Opportunity quality assessment. Null if not yet scored.</p>"
+                    }
+                },
+                "Recommendations": {
+                    "target": "com.amazonaws.partnercentralselling#RecommendationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of recommendations from various agent-driven sources.</p>"
                     }
                 }
             },
@@ -1391,6 +1566,18 @@
                     "target": "com.amazonaws.partnercentralselling#SolutionIdentifiers",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the partner solutions related to the opportunity. These solutions represent the partner's offerings that are being positioned as part of the overall AWS opportunity.</p>"
+                    }
+                },
+                "AwsMarketplaceSolutions": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Marketplace solution ARNs associated with this opportunity.</p>"
+                    }
+                },
+                "AwsMarketplaceProducts": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceProductIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Marketplace product ARNs associated with this opportunity.</p>"
                     }
                 }
             },
@@ -1600,6 +1787,18 @@
                 },
                 "Project": {
                     "target": "com.amazonaws.partnercentralselling#AwsOpportunityProject"
+                },
+                "CosellMotion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Engagement classification for this opportunity. Read-only. Null before scoring. Known values: <code>AWS Field-engaged</code>, <code>Agent-engaged</code>, <code>Partner-led</code>.</p>"
+                    }
+                },
+                "SoftwareRevenue": {
+                    "target": "com.amazonaws.partnercentralselling#AwsSoftwareRevenue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Seller-provided PARC deal terms: commitment value, discount, and contract dates.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1811,6 +2010,35 @@
                 "smithy.api#documentation": "<p>Source-separated spend insights that provide independent analysis for AWS recommendations and partner estimates.</p>"
             }
         },
+        "com.amazonaws.partnercentralselling#AwsSoftwareRevenue": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.partnercentralselling#MonetaryValue"
+                },
+                "Discount": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Discount percentage offered on the software revenue. Percent convention: 15.00 means 15%.</p>"
+                    }
+                },
+                "EffectiveDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contract effective (start) date in YYYY-MM-DD format.</p>"
+                    }
+                },
+                "ExpirationDate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contract expiration (end) date in YYYY-MM-DD format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Seller-provided PARC deal terms for the opportunity, including commitment value, discount percentage, and contract dates.</p>"
+            }
+        },
         "com.amazonaws.partnercentralselling#AwsSubmission": {
             "type": "structure",
             "members": {
@@ -1869,6 +2097,7 @@
         "com.amazonaws.partnercentralselling#CatalogIdentifier": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "Value space is validated at runtime against an allowlist, so the model keeps only a coarse character-class pattern.",
                 "smithy.api#pattern": "^[a-zA-Z]+$"
             }
         },
@@ -4040,15 +4269,13 @@
                 "Title": {
                     "target": "com.amazonaws.partnercentralselling#EngagementTitle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the title of the <code>Engagement</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies the title of the <code>Engagement</code>.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.partnercentralselling#EngagementDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides a description of the <code>Engagement</code>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Provides a description of the <code>Engagement</code>.</p>"
                     }
                 },
                 "Contexts": {
@@ -5560,7 +5787,9 @@
         "com.amazonaws.partnercentralselling#CustomerAction": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#length": {
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.partnercentralselling#CustomerContactsList": {
@@ -5812,6 +6041,12 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.partnercentralselling#EligibleProgramsList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
         "com.amazonaws.partnercentralselling#Email": {
             "type": "string",
             "traits": {
@@ -5943,6 +6178,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains detailed information about a lead when the context type is \"Lead\". This field is present only when the Type in EngagementContextDetails is set to \"Lead\".</p>"
                     }
+                },
+                "ProspectingResult": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains prospecting result data with enriched insights. The system generates these insights when a partner runs an autonomous prospecting job on leads. This field appears only when the context type is \"ProspectingResult\".</p>"
+                    }
                 }
             },
             "traits": {
@@ -5962,6 +6203,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Lead"
+                    }
+                },
+                "PROSPECTING_RESULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ProspectingResult"
                     }
                 }
             }
@@ -6107,6 +6354,18 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^eng-[0-9a-z]{14}$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#EngagementIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#EngagementIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.partnercentralselling#EngagementIdentifiers": {
@@ -6385,6 +6644,53 @@
                 }
             }
         },
+        "com.amazonaws.partnercentralselling#EngagementProspectingResult": {
+            "type": "structure",
+            "members": {
+                "EngagementIdentifier": {
+                    "target": "com.amazonaws.partnercentralselling#EngagementIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the engagement that was processed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EngagementContextId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the prospecting context created for this engagement. This field is only populated when the engagement was processed successfully (status is <code>COMPLETED</code>). Use this identifier to reference the prospecting context in subsequent operations.</p>",
+                        "smithy.api#pattern": "^ctx-[0-9a-z]{14}$"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The processing status of this specific engagement. Possible values are <code>PENDING</code>, <code>IN_PROGRESS</code>, <code>COMPLETED</code>, and <code>FAILED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReasonCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated code indicating the reason this engagement failed to process. This field is only populated when <code>Status</code> is <code>FAILED</code>.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable description of the failure for this engagement, including suggested recovery steps. This field is only populated when <code>Status</code> is <code>FAILED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the result of processing a single engagement within a prospecting task. Each engagement is processed independently, so individual engagements can succeed or fail regardless of other engagements in the same task.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#EngagementProspectingResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#EngagementProspectingResult"
+            }
+        },
         "com.amazonaws.partnercentralselling#EngagementResourceAssociationSummary": {
             "type": "structure",
             "members": {
@@ -6450,6 +6756,14 @@
                     "traits": {
                         "smithy.api#enumValue": "Low"
                     }
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#EngagementScoreLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
                 }
             }
         },
@@ -6557,13 +6871,35 @@
         "com.amazonaws.partnercentralselling#EngagementTitle": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,40}$"
+                "smithy.api#pattern": "^(?s).{0,40}$"
             }
         },
         "com.amazonaws.partnercentralselling#EngagementUseCase": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#EnrichmentContext": {
+            "type": "structure",
+            "members": {
+                "ProspectingResultAws": {
+                    "target": "com.amazonaws.partnercentralselling#InvitationProspectingResultAws",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer account data and propensity insights for the prospected account. It includes geographic, industry, and segment classifications, along with engagement and solution scoring.</p>"
+                    }
+                },
+                "LeadInsights": {
+                    "target": "com.amazonaws.partnercentralselling#LeadInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI-generated lead readiness score for this lead. Use this score to assess lead quality and prioritize engagement efforts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains enrichment data for engagement invitations. You can view propensity scores, program eligibility, and lead readiness insights directly in the invitation, before you take action on the invitation.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#EstimationUrl": {
@@ -6629,14 +6965,14 @@
                 "Frequency": {
                     "target": "com.amazonaws.partnercentralselling#PaymentFrequency",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how frequently the customer is expected to spend the projected amount. Only the value <code>Monthly</code> is allowed for the <code>Frequency</code> field, representing recurring monthly spend.</p>",
+                        "smithy.api#documentation": "<p>Indicates how frequently the customer is expected to spend the projected amount. Use <code>Monthly</code> for recurring monthly spend (required for <code>TargetCompany: \"AWS\"</code> entries). Use <code>None</code> for one-time deal value entries (required for <code>TargetCompany: \"Self\"</code> entries when providing Total Contract Value).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetCompany": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the partner company that is expected to generate revenue from the opportunity. This field helps track the partner’s involvement in the opportunity. This field only accepts the value <code>AWS</code>. If any other value is provided, the system will automatically set it to <code>AWS</code>.</p>",
+                        "smithy.api#documentation": "<p>Specifies the entity associated with this spend entry. Use <code>AWS</code> for the system’s AWS Monthly Recurring Revenue (MRR) estimate. Use <code>Self</code> for the partner’s own deal value entry when providing Total Contract Value (TCV) for automatic MRR conversion. When <code>ExpectedContractDuration</code> is present on the Project, only <code>AWS</code> and <code>Self</code> are accepted. When <code>ExpectedContractDuration</code> is not present, only <code>AWS</code> is accepted and any other value will be automatically set to <code>AWS</code>.</p>",
                         "smithy.api#pattern": "^(?s).{1,80}$",
                         "smithy.api#required": {}
                     }
@@ -6819,6 +7155,18 @@
                     "target": "com.amazonaws.partnercentralselling#AwsOpportunityProject",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides details about the project associated with the AWS Opportunity, including the customer’s business problem, expected outcomes, and project scope. This information is crucial for understanding the broader context of the opportunity.</p>"
+                    }
+                },
+                "CosellMotion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Engagement classification for this opportunity. Read-only. Null before scoring. Known values: <code>AWS Field-engaged</code>, <code>Agent-engaged</code>, <code>Partner-led</code>.</p>"
+                    }
+                },
+                "SoftwareRevenue": {
+                    "target": "com.amazonaws.partnercentralselling#AwsSoftwareRevenue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Seller-provided PARC deal terms: commitment value, discount, and contract dates.</p>"
                     }
                 },
                 "Catalog": {
@@ -7043,6 +7391,12 @@
                     "target": "com.amazonaws.partnercentralselling#EngagementMemberSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of active members currently part of the Engagement. This array contains a maximum of 10 members, each represented by an object with the following properties.</p> <ul> <li> <p>CompanyName: The name of the member's company.</p> </li> <li> <p>WebsiteUrl: The website URL of the member's company.</p> </li> </ul>"
+                    }
+                },
+                "EnrichmentContext": {
+                    "target": "com.amazonaws.partnercentralselling#EnrichmentContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The enrichment data for the engagement associated with this invitation. You can view propensity scores, program eligibility, and lead readiness assessments before taking action on the invitation.</p>"
                     }
                 }
             },
@@ -7310,6 +7664,120 @@
                 }
             },
             "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#GetProspectingFromEngagementTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.partnercentralselling#GetProspectingFromEngagementTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.partnercentralselling#GetProspectingFromEngagementTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.partnercentralselling#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "partnercentral:Catalog"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to get detailed results for a prospecting task in AWS Partner Central"
+                },
+                "smithy.api#documentation": "<p>Retrieves the details and current status of a prospecting task previously started with <code>StartProspectingFromEngagementTask</code> to enable polling for completion and access to per-engagement processing results.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetProspectingFromEngagementTask",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#GetProspectingFromEngagementTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Catalog": {
+                    "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the catalog associated with the task. Specify <code>AWS</code> for production environments and <code>Sandbox</code> for testing and development purposes. The value must match the catalog used when the task was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskIdentifier": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the prospecting task to retrieve. This value is returned in the <code>TaskId</code> field of the <code>StartProspectingFromEngagementTask</code> response.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the request structure for retrieving the status and results of a prospecting task.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#GetProspectingFromEngagementTaskResponse": {
+            "type": "structure",
+            "members": {
+                "TaskId": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskArn": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskName": {
+                    "target": "com.amazonaws.partnercentralselling#TaskName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the task that you provided when you created it.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the task was initiated. The format follows ISO 8601 date-time notation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the task finished processing. This field is absent if the task is still in progress. The format follows ISO 8601 date-time notation.</p>"
+                    }
+                },
+                "Engagements": {
+                    "target": "com.amazonaws.partnercentralselling#EngagementProspectingResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>EngagementProspectingResult</code> entries for each engagement in the task. Each entry contains the processing status. For successfully completed engagements, includes the prospecting context identifier. For failed engagements, includes an error code and message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the response structure containing the full details of a prospecting task, including per-engagement processing results. Includes the <code>Status</code> field of each <code>EngagementProspectingResult</code> entry to determine individual outcomes.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -7917,6 +8385,26 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.partnercentralselling#InvitationProspectingResultAws": {
+            "type": "structure",
+            "members": {
+                "Customer": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingResultCustomer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prospected customer account details, including geographic classification, industry segmentation, company size, and program eligibility.</p>"
+                    }
+                },
+                "Insights": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AI-generated insights from the prospecting analysis, including marketplace engagement scoring, solution fit assessments, and solution categorization.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A subset of prospecting result data visible to invitation receivers. It includes customer account details and AI-generated insights.</p>"
+            }
+        },
         "com.amazonaws.partnercentralselling#InvitationStatus": {
             "type": "enum",
             "members": {
@@ -8020,18 +8508,68 @@
                 "smithy.api#documentation": "<p>Defines a filter to retrieve opportunities based on the last modified date. This filter is useful for tracking changes or updates to opportunities over time.</p>"
             }
         },
+        "com.amazonaws.partnercentralselling#LeadAddress": {
+            "type": "structure",
+            "members": {
+                "City": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The city of the lead customer's address.</p>",
+                        "smithy.api#length": {
+                            "max": 255
+                        }
+                    }
+                },
+                "PostalCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The postal code of the lead customer's address.</p>",
+                        "smithy.api#length": {
+                            "max": 20
+                        }
+                    }
+                },
+                "StateOrRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state or region of the lead customer's address.</p>",
+                        "smithy.api#length": {
+                            "max": 255
+                        }
+                    }
+                },
+                "CountryCode": {
+                    "target": "com.amazonaws.partnercentralselling#LeadCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country code of the lead customer's address.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The address information for a lead customer, including city, state or region, postal code, and country code.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadBusinessProblem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.partnercentralselling#LeadContact": {
             "type": "structure",
             "members": {
                 "BusinessTitle": {
-                    "target": "com.amazonaws.partnercentralselling#JobTitle",
+                    "target": "com.amazonaws.partnercentralselling#LeadJobTitle",
                     "traits": {
                         "smithy.api#documentation": "<p>The lead contact's business title or job role associated with the engagement.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Email": {
-                    "target": "com.amazonaws.partnercentralselling#Email",
+                    "target": "com.amazonaws.partnercentralselling#LeadEmail",
                     "traits": {
                         "smithy.api#documentation": "<p>The lead contact's email address associated with the engagement.</p>",
                         "smithy.api#required": {}
@@ -8052,7 +8590,7 @@
                     }
                 },
                 "Phone": {
-                    "target": "com.amazonaws.partnercentralselling#PhoneNumber",
+                    "target": "com.amazonaws.partnercentralselling#LeadPhoneNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The lead contact's phone number associated with the engagement.</p>"
                     }
@@ -8065,6 +8603,12 @@
         "com.amazonaws.partnercentralselling#LeadContext": {
             "type": "structure",
             "members": {
+                "Insights": {
+                    "target": "com.amazonaws.partnercentralselling#LeadInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Insights that AI generates and associates with the lead. These insights provide automated analysis such as lead readiness scoring to help partners assess the lead quality.</p>"
+                    }
+                },
                 "QualificationStatus": {
                     "target": "com.amazonaws.partnercentralselling#LeadQualificationStatus",
                     "traits": {
@@ -8091,11 +8635,20 @@
                 "smithy.api#documentation": "<p>Provides comprehensive details about a lead associated with an engagement. This structure contains information about lead qualification status, customer details, and interaction history to facilitate lead management and tracking within the engagement.</p>"
             }
         },
+        "com.amazonaws.partnercentralselling#LeadCountryCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 10
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.partnercentralselling#LeadCustomer": {
             "type": "structure",
             "members": {
                 "Industry": {
-                    "target": "com.amazonaws.partnercentralselling#Industry",
+                    "target": "com.amazonaws.partnercentralselling#LeadIndustry",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the industry sector to which the lead customer's company belongs. This categorization helps in understanding the customer's business context and tailoring appropriate solutions.</p>"
                     }
@@ -8108,15 +8661,15 @@
                     }
                 },
                 "WebsiteUrl": {
-                    "target": "com.amazonaws.partnercentralselling#CompanyWebsiteUrl",
+                    "target": "com.amazonaws.partnercentralselling#LeadWebsiteUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The website URL of the lead customer's company. This provides additional context about the customer organization and helps verify company legitimacy and size.</p>"
                     }
                 },
                 "Address": {
-                    "target": "com.amazonaws.partnercentralselling#AddressSummary",
+                    "target": "com.amazonaws.partnercentralselling#LeadAddress",
                     "traits": {
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The address information for the lead customer.</p>"
                     }
                 },
                 "AwsMaturity": {
@@ -8126,7 +8679,7 @@
                     }
                 },
                 "MarketSegment": {
-                    "target": "com.amazonaws.partnercentralselling#MarketSegment",
+                    "target": "com.amazonaws.partnercentralselling#LeadMarketSegment",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the market segment classification of the lead customer, such as enterprise, mid-market, or small business. This segmentation helps in targeting appropriate solutions and engagement strategies.</p>"
                     }
@@ -8136,28 +8689,63 @@
                 "smithy.api#documentation": "<p>Contains detailed information about the customer associated with the lead, including company details, industry classification, and AWS maturity level. This information helps qualify and categorize the lead for appropriate engagement strategies.</p>"
             }
         },
+        "com.amazonaws.partnercentralselling#LeadEmail": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadIndustry": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadInsights": {
+            "type": "structure",
+            "members": {
+                "LeadReadinessScore": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A score that indicates the lead's readiness for engagement. Valid values are <code>Low</code>, <code>Medium</code>, and <code>High</code>. Use this score to prioritize leads based on their likelihood of conversion.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains insights that AI generates for a lead. These insights provide automated analysis to help partners evaluate the lead quality and prioritize engagement efforts.</p>"
+            }
+        },
         "com.amazonaws.partnercentralselling#LeadInteraction": {
             "type": "structure",
             "members": {
                 "SourceType": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of source that generated the lead interaction, such as \"Event\", \"Website\", \"Referral\", or \"Campaign\". This categorization helps track lead generation effectiveness across different channels.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Specifies the type of source that generated the lead interaction, such as \"Event\", \"Website\", \"Referral\", or \"Campaign\". This categorization helps track lead generation effectiveness across different channels.</p>"
                     }
                 },
                 "SourceId": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the specific source that generated the lead interaction. This ID provides traceability back to the original lead generation activity.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The unique identifier of the specific source that generated the lead interaction. This ID provides traceability back to the original lead generation activity.</p>"
                     }
                 },
                 "SourceName": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The descriptive name of the source that generated the lead interaction, providing a human-readable identifier for the lead generation channel or activity.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The descriptive name of the source that generated the lead interaction, providing a human-readable identifier for the lead generation channel or activity.</p>"
                     }
                 },
                 "Usecase": {
@@ -8175,12 +8763,13 @@
                 "CustomerAction": {
                     "target": "com.amazonaws.partnercentralselling#CustomerAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the action taken by the customer during or as a result of the interaction, such as requesting information, scheduling a meeting, or expressing interest in a solution.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Describes the action taken by the customer during or as a result of the interaction, such as requesting information, scheduling a meeting, or expressing interest in a solution.</p>"
                     }
                 },
                 "BusinessProblem": {
-                    "target": "com.amazonaws.partnercentralselling#EngagementCustomerBusinessProblem",
+                    "target": "com.amazonaws.partnercentralselling#LeadBusinessProblem",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes the business problem or challenge that the customer discussed during the interaction. This information helps qualify the lead and identify appropriate solutions.</p>"
                     }
@@ -8213,7 +8802,7 @@
             "type": "structure",
             "members": {
                 "Industry": {
-                    "target": "com.amazonaws.partnercentralselling#Industry",
+                    "target": "com.amazonaws.partnercentralselling#LeadIndustry",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the industry sector of the customer company associated with the lead invitation. This categorization helps partners understand the customer's business context and assess solution fit.</p>"
                     }
@@ -8226,16 +8815,17 @@
                     }
                 },
                 "WebsiteUrl": {
-                    "target": "com.amazonaws.partnercentralselling#CompanyWebsiteUrl",
+                    "target": "com.amazonaws.partnercentralselling#LeadWebsiteUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The website URL of the customer company. This provides additional context about the customer organization and helps partners verify company details and assess business size and legitimacy.</p>"
                     }
                 },
                 "CountryCode": {
-                    "target": "com.amazonaws.partnercentralselling#CountryCode",
+                    "target": "com.amazonaws.partnercentralselling#LeadCountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The country code indicating the geographic location of the customer company. This information helps partners understand regional requirements and assess their ability to serve the customer effectively.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The country code indicating the geographic location of the customer company. This information helps partners understand regional requirements and assess their ability to serve the customer effectively.</p>"
                     }
                 },
                 "AwsMaturity": {
@@ -8245,7 +8835,7 @@
                     }
                 },
                 "MarketSegment": {
-                    "target": "com.amazonaws.partnercentralselling#MarketSegment",
+                    "target": "com.amazonaws.partnercentralselling#LeadMarketSegment",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the market segment classification of the customer, such as enterprise, mid-market, or small business. This segmentation helps partners determine the appropriate solution complexity and engagement strategy.</p>"
                     }
@@ -8261,22 +8851,25 @@
                 "SourceType": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of source that generated the lead interaction, such as \"Event\", \"Website\", or \"Campaign\". This helps partners understand the lead generation channel and assess lead quality based on the source type.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>Specifies the type of source that generated the lead interaction, such as \"Event\", \"Website\", or \"Campaign\". This helps partners understand the lead generation channel and assess lead quality based on the source type.</p>"
                     }
                 },
                 "SourceId": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the specific source that generated the lead interaction. This provides traceability to the original lead generation activity for reference and follow-up purposes.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The unique identifier of the specific source that generated the lead interaction. This provides traceability to the original lead generation activity for reference and follow-up purposes.</p>"
                     }
                 },
                 "SourceName": {
                     "target": "com.amazonaws.partnercentralselling#LeadSourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The descriptive name of the source that generated the lead interaction. This human-readable identifier helps partners understand the specific lead generation channel or campaign that created the opportunity.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": "",
+                        "smithy.api#documentation": "<p>The descriptive name of the source that generated the lead interaction. This human-readable identifier helps partners understand the specific lead generation channel or campaign that created the opportunity.</p>"
                     }
                 },
                 "Usecase": {
@@ -8319,6 +8912,33 @@
                 "smithy.api#documentation": "<p>Represents the data payload of an engagement invitation for a lead opportunity. This contains detailed information about the customer and interaction history that partners use to evaluate whether to accept the lead engagement invitation.</p>"
             }
         },
+        "com.amazonaws.partnercentralselling#LeadJobTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadMarketSegment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadPhoneNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.partnercentralselling#LeadQualificationStatus": {
             "type": "string",
             "traits": {
@@ -8329,19 +8949,28 @@
         "com.amazonaws.partnercentralselling#LeadSourceId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#pattern": "^(?s).{0,255}$"
             }
         },
         "com.amazonaws.partnercentralselling#LeadSourceName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#pattern": "^(?s).{0,255}$"
             }
         },
         "com.amazonaws.partnercentralselling#LeadSourceType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(?s).{1,255}$"
+                "smithy.api#pattern": "^(?s).{0,255}$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#LeadWebsiteUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.partnercentralselling#LifeCycle": {
@@ -9753,6 +10382,131 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.partnercentralselling#ListProspectingFromEngagementTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.partnercentralselling#ListProspectingFromEngagementTasksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.partnercentralselling#ListProspectingFromEngagementTasksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.partnercentralselling#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "partnercentral:Catalog"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list prospecting from engagement tasks in AWS Partner Central"
+                },
+                "smithy.api#documentation": "<p>Lists all prospecting tasks initiated by the caller's account. Supports optional filters by task identifier, task name, or start time range. Results can be sorted using configurable options. The response is paginated. Use the <code>NextToken</code> value from each response to retrieve subsequent pages.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListProspectingFromEngagementTasks",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "TaskSummaries"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#ListProspectingFromEngagementTasksRequest": {
+            "type": "structure",
+            "members": {
+                "Catalog": {
+                    "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the catalog to list tasks from. Specify <code>AWS</code> for production environments and <code>Sandbox</code> for testing and development purposes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.partnercentralselling#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single page. If additional results exist, the response includes a <code>NextToken</code> value for retrieving the next page. If omitted, the API uses a service-defined default page size.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token from a previous call to this API. Include this value to retrieve the next page of results. If omitted, the first page is returned.</p>"
+                    }
+                },
+                "TaskIdentifier": {
+                    "target": "com.amazonaws.partnercentralselling#TaskIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results to include only the tasks with the specified identifiers. Provide up to 10 task IDs to narrow the list to specific tasks. If omitted, tasks are not filtered by identifier.</p>"
+                    }
+                },
+                "TaskName": {
+                    "target": "com.amazonaws.partnercentralselling#TaskNameList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results to include only tasks with the specified names. Provide up to 10 task names to narrow the list. If omitted, tasks are not filtered by name.</p>"
+                    }
+                },
+                "StartAfter": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters tasks to include only those that started after the specified timestamp. Use this with <code>StartBefore</code> to define a start-time range for your query. The format follows ISO 8601 date-time notation.</p>"
+                    }
+                },
+                "StartBefore": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters tasks to include only those that started before the specified timestamp. Use this with <code>StartAfter</code> to define a start-time range for your query. The format follows ISO 8601 date-time notation.</p>"
+                    }
+                },
+                "Sort": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingFromEngagementTaskSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the field and order used to sort the returned tasks. If omitted, tasks are returned in the default sort order.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the request structure for listing prospecting tasks. All filter parameters are optional. Results are paginated — uses <code>NextToken</code> from the response to retrieve subsequent pages.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#ListProspectingFromEngagementTasksResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token used to retrieve the next page of results. If this field is present, pass its value as <code>NextToken</code> in the next call. If absent or empty, there are no further pages.</p>",
+                        "smithy.api#pattern": "^(?s).{1,2048}$"
+                    }
+                },
+                "TaskSummaries": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Prospecting task summaries matching the specified filters. Each summary includes the task identifier, name, status counters, and timing information. If no tasks match the filter criteria, the list is empty.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the response structure containing a paginated list of prospecting task summaries matching the request filters. Indicates through <code>NextToken</code> when additional results are available.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.partnercentralselling#ListResourceSnapshotJobs": {
             "type": "operation",
             "input": {
@@ -10103,6 +10857,15 @@
                             "max": 10
                         }
                     }
+                },
+                "AwsMarketplaceSolutionArn": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters results by AWS Marketplace solution ARN. You can provide up to 10 ARNs.</p>",
+                        "smithy.api#length": {
+                            "max": 10
+                        }
+                    }
                 }
             },
             "traits": {
@@ -10232,41 +10995,6 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "StartTime"
-                    }
-                }
-            }
-        },
-        "com.amazonaws.partnercentralselling#MarketSegment": {
-            "type": "enum",
-            "members": {
-                "ENTERPRISE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Enterprise"
-                    }
-                },
-                "LARGE": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Large"
-                    }
-                },
-                "MEDIUM": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Medium"
-                    }
-                },
-                "SMALL": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Small"
-                    }
-                },
-                "MICRO": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "Micro"
                     }
                 }
             }
@@ -10614,6 +11342,30 @@
                         "smithy.api#enumValue": "Partner Referral"
                     }
                 }
+            }
+        },
+        "com.amazonaws.partnercentralselling#OpportunityQuality": {
+            "type": "structure",
+            "members": {
+                "Score": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Deal quality score based on opportunity content completeness and sales methodology criteria. Values range from 0 to 100.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 100
+                        }
+                    }
+                },
+                "Trend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Direction of score change since last scoring iteration. Known values: <code>Improving</code>, <code>Declining</code>, <code>No Change</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Opportunity quality score and trend.</p>"
             }
         },
         "com.amazonaws.partnercentralselling#OpportunitySort": {
@@ -11188,6 +11940,434 @@
                 "smithy.api#documentation": "<p> Provides the project view of an opportunity resource shared through a snapshot. </p>"
             }
         },
+        "com.amazonaws.partnercentralselling#ProspectingAccountName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingCompanySize": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingFromEngagementTask": {
+            "type": "resource",
+            "identifiers": {
+                "Catalog": {
+                    "target": "com.amazonaws.partnercentralselling#CatalogIdentifier"
+                },
+                "TaskIdentifier": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.partnercentralselling#StartProspectingFromEngagementTask"
+            },
+            "read": {
+                "target": "com.amazonaws.partnercentralselling#GetProspectingFromEngagementTask"
+            },
+            "list": {
+                "target": "com.amazonaws.partnercentralselling#ListProspectingFromEngagementTasks"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "catalog/{Catalog}/prospecting-from-engagement-task/{TaskIdentifier}",
+                    "noAccount": true
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "prospecting-from-engagement-task",
+                    "relativeDocumentation": "working-with-prospecting.html"
+                },
+                "smithy.api#documentation": "Represents a task that runs prospecting from engagement in AWS Partner Central"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingFromEngagementTaskSort": {
+            "type": "structure",
+            "members": {
+                "SortOrder": {
+                    "target": "com.amazonaws.partnercentralselling#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The direction in which to sort the results. Use <code>ASCENDING</code> to return the smallest or earliest values first, or <code>DESCENDING</code> to return the largest or most recent values first.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingFromEngagementTaskSortName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field by which to sort the returned tasks. Valid values: <code>StartTime</code> (task creation timestamp), <code>TaskName</code> (alphabetically by task name), and <code>FailedEngagementCount</code> (number of failed engagements).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the sort configuration for <code>ListProspectingFromEngagementTasks</code>. Contains the field to sort by and the sort direction.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingFromEngagementTaskSortName": {
+            "type": "enum",
+            "members": {
+                "StartTime": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StartTime"
+                    }
+                },
+                "TaskName": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TaskName"
+                    }
+                },
+                "FailedEngagementCount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FailedEngagementCount"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The fields available for sorting results from <code>ListProspectingFromEngagementTasks</code>. Valid values are <code>StartTime</code>, <code>TaskName</code>, and <code>FailedEngagementCount</code>.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingGeo": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingInsights": {
+            "type": "structure",
+            "members": {
+                "MarketplaceEngagementScore": {
+                    "target": "com.amazonaws.partnercentralselling#EngagementScoreLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A score that indicates the prospected customer's level of engagement with AWS Marketplace. Valid values are <code>High</code>, <code>Medium</code>, and <code>Low</code>.</p>"
+                    }
+                },
+                "SolutionScore": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A score that indicates how well the partner's solution fits the prospected customer's needs.</p>"
+                    }
+                },
+                "SolutionCategory": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The primary solution category classification for the prospected customer. This indicates the type of solution that best addresses their needs.</p>"
+                    }
+                },
+                "SolutionSubCategory": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The solution sub-category classification for the prospected customer. This provides more granular categorization of the recommended solution type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains insights that AI generates from the prospecting analysis. These insights include marketplace engagement scoring, solution fit assessments, and solution categorization for the prospected customer.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingPublicProfileSummary": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5000
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingResult": {
+            "type": "structure",
+            "members": {
+                "Aws": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingResultAws",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Prospecting data and insights that AWS provides during the prospecting job. This includes customer details, task information, and scoring that AI generates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the results of an autonomous prospecting job. This includes data and insights that AWS provides about a prospected customer account.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingResultAws": {
+            "type": "structure",
+            "members": {
+                "Customer": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingResultCustomer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details about the prospected customer account, including geographic, industry, and segment classifications.</p>"
+                    }
+                },
+                "Insights": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Insights that AI generates from the prospecting analysis. These insights include engagement scores and solution fit assessments for the prospected customer.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the prospecting result context was created. The format is ISO 8601 (UTC).</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the prospecting task completed processing. The format is ISO 8601 (UTC).</p>"
+                    }
+                },
+                "TaskId": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the prospecting task that generates this result.</p>"
+                    }
+                },
+                "TaskArn": {
+                    "target": "com.amazonaws.partnercentralselling#TaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the prospecting task. Use this ARN to track and manage the task within AWS.</p>"
+                    }
+                },
+                "TaskName": {
+                    "target": "com.amazonaws.partnercentralselling#TaskName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that the user provides for the prospecting task that generates this result.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the prospecting data that AWS sources. This includes task execution details, customer account information, and insights that AI generates from the prospecting analysis.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingResultCustomer": {
+            "type": "structure",
+            "members": {
+                "AccountName": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingAccountName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prospected customer account.</p>"
+                    }
+                },
+                "Geo": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingGeo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geographic region classification of the prospected customer account.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific region of the prospected customer account.</p>"
+                    }
+                },
+                "SubRegion": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingSubRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subregion classification of the prospected customer account.</p>"
+                    }
+                },
+                "Country": {
+                    "target": "com.amazonaws.partnercentralselling#CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The country code of the prospected customer account.</p>"
+                    }
+                },
+                "Industry": {
+                    "target": "com.amazonaws.partnercentralselling#Industry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The industry classification of the prospected customer account.</p>"
+                    }
+                },
+                "SubIndustry": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingSubIndustry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sub-industry classification of the prospected customer account. This provides more granular categorization within the primary industry.</p>"
+                    }
+                },
+                "Segment": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingSegment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The market segment classification of the prospected customer account.</p>"
+                    }
+                },
+                "CompanySize": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingCompanySize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The company size classification of the prospected customer account.</p>"
+                    }
+                },
+                "EligiblePrograms": {
+                    "target": "com.amazonaws.partnercentralselling#EligibleProgramsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of AWS Greenfield programs that the prospected customer is eligible for. Use this list to identify relevant go-to-market opportunities.</p>"
+                    }
+                },
+                "PublicProfileSummary": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingPublicProfileSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of publicly available information about the prospected customer. The system uses this summary to generate customer insights and inform engagement strategies.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about the prospected customer account, including company identifiers, geographic classification, industry segmentation, and program eligibility.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingSegment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingSubIndustry": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingSubRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingTaskArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:partnercentral-selling:.*:.*:catalog/.*/prospecting-from-engagement-task/task-[0-9a-z]{14}$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^task-[0-9a-z]{14}$"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingTaskStatus": {
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current execution state of a prospecting task. A task transitions from <code>PENDING</code> to <code>IN_PROGRESS</code> when processing begins, and then to either <code>COMPLETED</code> or <code>FAILED</code> when processing ends.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingTaskSummary": {
+            "type": "structure",
+            "members": {
+                "TaskId": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the task. Use this value with <code>GetProspectingFromEngagementTask</code> to retrieve full task details.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskArn": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskName": {
+                    "target": "com.amazonaws.partnercentralselling#TaskName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The descriptive name of the task provided when it was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the task was initiated. The format follows ISO 8601 date-time notation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the task finished processing. This field is absent if the task is still in progress. The format follows ISO 8601 date-time notation.</p>"
+                    }
+                },
+                "TotalEngagementCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of engagements included in the task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CompletedEngagementCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of engagements that have been successfully converted into prospecting leads.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailedEngagementCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of engagements that failed to be converted. Retrieve the full task details using <code>GetProspectingFromEngagementTask</code> for per-engagement error information.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a single prospecting task, returned by <code>ListProspectingFromEngagementTasks</code>. Contains key metrics and status information without the full per-engagement detail available from <code>GetProspectingFromEngagementTask</code>.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#ProspectingTaskSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#ProspectingTaskSummary"
+            }
+        },
         "com.amazonaws.partnercentralselling#PutSellingSystemSettings": {
             "type": "operation",
             "input": {
@@ -11487,6 +12667,59 @@
                 "target": "com.amazonaws.partnercentralselling#ReceiverResponsibility"
             }
         },
+        "com.amazonaws.partnercentralselling#Recommendation": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommendation source type. Known values: <code>OpportunityQuality</code>, <code>SolutionRecommendation</code>, <code>SpecialistRecommendation</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Details": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Human-readable recommendation text from this source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.partnercentralselling#RecommendationAttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source-specific metadata as key-value pairs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A recommendation from an agent-driven source.</p>"
+            }
+        },
+        "com.amazonaws.partnercentralselling#RecommendationAttributeMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#RecommendationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#Recommendation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.partnercentralselling#RejectEngagementInvitation": {
             "type": "operation",
             "input": {
@@ -11590,6 +12823,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enables the association of specific Amazon Web Services products with the <code>Opportunity</code>. Partners can indicate the relevant Amazon Web Services products for the <code>Opportunity</code>'s solution and align with the customer's needs. Returns multiple values separated by commas. For example, <code>\"AWSProducts\" : [\"AmazonRedshift\", \"AWSAppFabric\", \"AWSCleanRooms\"]</code>.</p> <p>Use the file with the list of Amazon Web Services products hosted on GitHub: <a href=\"https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json\"> Amazon Web Services products</a>.</p>"
                     }
+                },
+                "AwsMarketplaceSolutions": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the AWS Marketplace solutions to associate with the <code>Opportunity</code>. Each value is an Amazon Resource Name (ARN) that identifies a solution listing in AWS Marketplace.</p>"
+                    }
+                },
+                "AwsMarketplaceProducts": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceProductIdentifiers",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the AWS Marketplace products to associate with the <code>Opportunity</code>. Each value is an Amazon Resource Name (ARN) that identifies a product listing in AWS Marketplace.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11621,6 +12866,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AwsMarketplaceOfferSets"
+                    }
+                },
+                "AWS_MARKETPLACE_SOLUTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AwsMarketplaceSolutions"
+                    }
+                },
+                "AWS_MARKETPLACE_PRODUCTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AwsMarketplaceProducts"
                     }
                 }
             }
@@ -12221,6 +13478,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the solution creation date. This is useful to track and audit.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AwsMarketplaceSolutionArn": {
+                    "target": "com.amazonaws.partnercentralselling#AwsMarketplaceSolutionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Marketplace solution associated with this partner solution.</p>"
                     }
                 }
             },
@@ -12911,6 +14174,149 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.partnercentralselling#StartProspectingFromEngagementTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.partnercentralselling#StartProspectingFromEngagementTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.partnercentralselling#StartProspectingFromEngagementTaskResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.partnercentralselling#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.partnercentralselling#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "partnercentral:Catalog"
+                ],
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to start prospecting from engagement tasks in AWS Partner Central"
+                },
+                "smithy.api#documentation": "<p>Starts a task to convert one or more engagement contexts into new prospecting leads. The task runs asynchronously. To poll for status, use <code>GetProspectingFromEngagementTask</code>, or use <code>ListProspectingFromEngagementTasks</code> to monitor multiple tasks.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/StartProspectingFromEngagementTask",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#StartProspectingFromEngagementTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Catalog": {
+                    "target": "com.amazonaws.partnercentralselling#CatalogIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the catalog in which the task is initiated. Specify <code>AWS</code> for production environments and <code>Sandbox</code> for testing and development purposes.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Identifiers": {
+                    "target": "com.amazonaws.partnercentralselling#EngagementIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of engagement identifiers to include in this prospecting task. Each identifier must correspond to an existing engagement in the specified catalog. Maximum of 100 identifiers per task.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskName": {
+                    "target": "com.amazonaws.partnercentralselling#TaskName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive name for the task. This name helps identify the task in list and get operations. The name must contain 1 to 128 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.partnercentralselling#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier provided by the client to ensure idempotency. Making the same request with the same <code>ClientToken</code> returns the same response without creating a duplicate task.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the request structure for starting a prospecting task. Includes up to 100 engagement identifiers and a task name. Uses <code>ClientToken</code> to ensure idempotency.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.partnercentralselling#StartProspectingFromEngagementTaskResponse": {
+            "type": "structure",
+            "members": {
+                "Identifiers": {
+                    "target": "com.amazonaws.partnercentralselling#EngagementIdentifierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of engagement identifiers that were accepted into the task queue for processing. This list matches the identifiers provided in the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskName": {
+                    "target": "com.amazonaws.partnercentralselling#TaskName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The task name from the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message providing additional context about the task's current state. When the task fails, this field contains a detailed description of the failure and suggested recovery steps. This field is only populated for tasks in a failed state.</p>"
+                    }
+                },
+                "ReasonCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An enumerated code identifying the reason for task failure. This field is only populated when the task has failed. Use the corresponding <code>Message</code> field for a human-readable description of the failure.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.partnercentralselling#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp indicating when the task was initiated. The format follows ISO 8601 date-time notation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskId": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to this task. Use this identifier with <code>GetProspectingFromEngagementTask</code> to retrieve task details and check status.</p>"
+                    }
+                },
+                "TaskArn": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task. The ARN uniquely identifies the task across AWS and can be used for resource-level IAM policies.</p>"
+                    }
+                },
+                "TaskStatus": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingTaskStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the task. Possible values: <code>PENDING</code> (waiting to run), <code>IN_PROGRESS</code> (actively processing), <code>COMPLETED</code> (successfully processed), and <code>FAILED</code> (unrecoverable error).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the response structure returned when a prospecting task is successfully submitted. Contains the task identifier, ARN, and initial status. Uses <code>TaskId</code> with <code>GetProspectingFromEngagementTask</code> to poll for completion.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.partnercentralselling#StartResourceSnapshotJob": {
             "type": "operation",
             "input": {
@@ -13299,6 +14705,18 @@
                 "smithy.api#pattern": "task-[0-9a-z]{13}$"
             }
         },
+        "com.amazonaws.partnercentralselling#TaskIdentifierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#ProspectingTaskIdentifier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.partnercentralselling#TaskIdentifiers": {
             "type": "list",
             "member": {
@@ -13307,6 +14725,27 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#TaskName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.partnercentralselling#TaskNameList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.partnercentralselling#TaskName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
                     "max": 10
                 }
             }
@@ -13491,6 +14930,12 @@
                 },
                 "CustomerProject": {
                     "target": "com.amazonaws.partnercentralselling#CustomerProjectsContext"
+                },
+                "ProspectingResult": {
+                    "target": "com.amazonaws.partnercentralselling#ProspectingResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains updated prospecting result data when the context type is \"ProspectingResult\". This field includes enriched data and insights that the system generates when a partner runs an autonomous prospecting job on leads.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13604,6 +15049,12 @@
                     "target": "com.amazonaws.partnercentralselling#LeadInteraction",
                     "traits": {
                         "smithy.api#documentation": "<p>Updated interaction details for the lead context.</p>"
+                    }
+                },
+                "Insights": {
+                    "target": "com.amazonaws.partnercentralselling#LeadInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Insights that AI generates and associates with the lead. These insights provide automated analysis to help partners assess the lead quality and readiness.</p>"
                     }
                 }
             },

@@ -1,0 +1,5 @@
+POST /CreateIntegration
+
+Content-Type: application/json
+
+{"input":{"github":{"code":"__Code__","installationId":"__InstallationId__","organizationName":"__OrganizationName__","state":"__State__","targetUrl":"__TargetUrl__"}},"integrationDisplayName":"__IntegrationDisplayName__","kmsKeyId":"__KmsKeyId__","privateConnectionName":"__PrivateConnectionName__","provider":"GITHUB","tags":{"key0":"__Value__"}}

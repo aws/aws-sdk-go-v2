@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/GetAddonSubscription
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡sAddonSubscriptionIdw__AddonSubscriptionId__

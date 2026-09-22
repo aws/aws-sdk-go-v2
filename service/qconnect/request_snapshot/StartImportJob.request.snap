@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/importJobs
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","externalSourceConfiguration":{"configuration":{"connectConfiguration":{"instanceId":"__InstanceId__"}},"source":"AMAZON_CONNECT"},"importJobType":"QUICK_RESPONSES","metadata":{"key0":"__Value__"},"uploadId":"__UploadId__"}

@@ -4,11 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates a composite alarm. When you create a composite alarm, you
@@ -261,6 +260,40 @@ type PutCompositeAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCompositeAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutCompositeAlarmInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCompositeAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionsEnabled != nil {
+		s.WriteBool(schemas.PutCompositeAlarmInput_ActionsEnabled, *v.ActionsEnabled)
+	}
+	if v.ActionsSuppressor != nil {
+		s.WriteString(schemas.PutCompositeAlarmInput_ActionsSuppressor, *v.ActionsSuppressor)
+	}
+	if v.ActionsSuppressorExtensionPeriod != nil {
+		s.WriteInt32(schemas.PutCompositeAlarmInput_ActionsSuppressorExtensionPeriod, *v.ActionsSuppressorExtensionPeriod)
+	}
+	if v.ActionsSuppressorWaitPeriod != nil {
+		s.WriteInt32(schemas.PutCompositeAlarmInput_ActionsSuppressorWaitPeriod, *v.ActionsSuppressorWaitPeriod)
+	}
+	serializeResourceList(s, schemas.PutCompositeAlarmInput_AlarmActions, v.AlarmActions)
+	if v.AlarmDescription != nil {
+		s.WriteString(schemas.PutCompositeAlarmInput_AlarmDescription, *v.AlarmDescription)
+	}
+	if v.AlarmName != nil {
+		s.WriteString(schemas.PutCompositeAlarmInput_AlarmName, *v.AlarmName)
+	}
+	if v.AlarmRule != nil {
+		s.WriteString(schemas.PutCompositeAlarmInput_AlarmRule, *v.AlarmRule)
+	}
+	serializeResourceList(s, schemas.PutCompositeAlarmInput_InsufficientDataActions, v.InsufficientDataActions)
+	serializeResourceList(s, schemas.PutCompositeAlarmInput_OKActions, v.OKActions)
+	serializeTagList(s, schemas.PutCompositeAlarmInput_Tags, v.Tags)
+}
+
 type PutCompositeAlarmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -268,65 +301,36 @@ type PutCompositeAlarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutCompositeAlarmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutCompositeAlarmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutCompositeAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutCompositeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCompositeAlarm, schemas.PutCompositeAlarmInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutCompositeAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutCompositeAlarm, schemas.PutCompositeAlarmInput, nil), output: &PutCompositeAlarmOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutCompositeAlarm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutCompositeAlarm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -336,12 +340,6 @@ func (c *Client) addOperationPutCompositeAlarmMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpPutCompositeAlarmValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutCompositeAlarm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -356,22 +354,8 @@ func (c *Client) addOperationPutCompositeAlarmMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutCompositeAlarm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutCompositeAlarm",
-	}
 }

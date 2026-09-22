@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/application/__ApplicationId__/capability/register
+
+Content-Type: application/json
+
+{"capabilityConfig":{"aiConfig":{}},"capabilityName":"__CapabilityName__"}

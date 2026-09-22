@@ -1,0 +1,5 @@
+PUT /thing-groups/updateThingGroupsForThing
+
+Content-Type: application/json
+
+{"overrideDynamicGroups":true,"thingGroupsToAdd":["__Member__","__Member__"],"thingGroupsToRemove":["__Member__","__Member__"],"thingName":"__ThingName__"}

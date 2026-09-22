@@ -4,10 +4,9 @@ package amplifybackend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about a specific job.
@@ -46,6 +45,24 @@ type GetBackendJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendJobRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendJobRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetBackendJobRequest_JobId, *v.JobId)
+	}
+}
+
 type GetBackendJobOutput struct {
 
 	// The app ID.
@@ -78,77 +95,90 @@ type GetBackendJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBackendJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBackendJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBackendJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetBackendJobResponse_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.GetBackendJobResponse_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.CreateTime != nil {
+		s.WriteString(schemas.GetBackendJobResponse_CreateTime, *v.CreateTime)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.GetBackendJobResponse_Error, *v.Error)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetBackendJobResponse_JobId, *v.JobId)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.GetBackendJobResponse_Operation, *v.Operation)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.GetBackendJobResponse_Status, *v.Status)
+	}
+	if v.UpdateTime != nil {
+		s.WriteString(schemas.GetBackendJobResponse_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *GetBackendJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBackendJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBackendJobResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_AppId, v.AppId)
+		case schemas.GetBackendJobResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.GetBackendJobResponse_CreateTime:
+			v.CreateTime = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_CreateTime, v.CreateTime)
+		case schemas.GetBackendJobResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_Error, v.Error)
+		case schemas.GetBackendJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_JobId, v.JobId)
+		case schemas.GetBackendJobResponse_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_Operation, v.Operation)
+		case schemas.GetBackendJobResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_Status, v.Status)
+		case schemas.GetBackendJobResponse_UpdateTime:
+			v.UpdateTime = new(string)
+			return d.ReadString(schemas.GetBackendJobResponse_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBackendJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackendJob, schemas.GetBackendJobRequest, schemas.GetBackendJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBackendJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBackendJob, schemas.GetBackendJobRequest, schemas.GetBackendJobResponse), output: &GetBackendJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBackendJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBackendJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBackendJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBackendJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +193,8 @@ func (c *Client) addOperationGetBackendJobMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBackendJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBackendJob",
-	}
 }

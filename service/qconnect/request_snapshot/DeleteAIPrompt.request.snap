@@ -1,0 +1,3 @@
+DELETE /assistants/__AssistantId__/aiprompts/__AiPromptId__
+
+

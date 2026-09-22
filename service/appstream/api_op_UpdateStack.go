@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified fields for the specified stack.
@@ -94,6 +93,58 @@ type UpdateStackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessEndpointList(s, schemas.UpdateStackRequest_AccessEndpoints, v.AccessEndpoints)
+	if v.AgentAccessConfig != nil {
+		s.WriteStruct(schemas.UpdateStackRequest_AgentAccessConfig)
+		v.AgentAccessConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSettings != nil {
+		s.WriteStruct(schemas.UpdateStackRequest_ApplicationSettings)
+		v.ApplicationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStackAttributes(s, schemas.UpdateStackRequest_AttributesToDelete, v.AttributesToDelete)
+	if v.ContentRedirection != nil {
+		s.WriteStruct(schemas.UpdateStackRequest_ContentRedirection)
+		v.ContentRedirection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeleteStorageConnectors != nil {
+		s.WriteBool(schemas.UpdateStackRequest_DeleteStorageConnectors, *v.DeleteStorageConnectors)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateStackRequest_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateStackRequest_DisplayName, *v.DisplayName)
+	}
+	serializeEmbedHostDomains(s, schemas.UpdateStackRequest_EmbedHostDomains, v.EmbedHostDomains)
+	if v.FeedbackURL != nil {
+		s.WriteString(schemas.UpdateStackRequest_FeedbackURL, *v.FeedbackURL)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateStackRequest_Name, *v.Name)
+	}
+	if v.RedirectURL != nil {
+		s.WriteString(schemas.UpdateStackRequest_RedirectURL, *v.RedirectURL)
+	}
+	serializeStorageConnectorList(s, schemas.UpdateStackRequest_StorageConnectors, v.StorageConnectors)
+	if v.StreamingExperienceSettings != nil {
+		s.WriteStruct(schemas.UpdateStackRequest_StreamingExperienceSettings)
+		v.StreamingExperienceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUserSettingList(s, schemas.UpdateStackRequest_UserSettings, v.UserSettings)
+}
+
 type UpdateStackOutput struct {
 
 	// Information about the stack.
@@ -105,77 +156,53 @@ type UpdateStackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStackResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Stack != nil {
+		s.WriteStruct(schemas.UpdateStackResult_Stack)
+		v.Stack.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateStackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStackResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateStackResult_Stack:
+			v.Stack = &types.Stack{}
+			return v.Stack.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStack, schemas.UpdateStackRequest, schemas.UpdateStackResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateStack{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStack, schemas.UpdateStackRequest, schemas.UpdateStackResult), output: &UpdateStackOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateStack{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateStack"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateStackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStack(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +217,8 @@ func (c *Client) addOperationUpdateStackMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateStack(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateStack",
-	}
 }

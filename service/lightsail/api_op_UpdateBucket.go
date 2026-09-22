@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing Amazon Lightsail bucket.
@@ -73,6 +72,37 @@ type UpdateBucketInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBucketInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBucketRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBucketInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLogConfig != nil {
+		s.WriteStruct(schemas.UpdateBucketRequest_accessLogConfig)
+		v.AccessLogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AccessRules != nil {
+		s.WriteStruct(schemas.UpdateBucketRequest_accessRules)
+		v.AccessRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BucketName != nil {
+		s.WriteString(schemas.UpdateBucketRequest_bucketName, *v.BucketName)
+	}
+	if v.Cors != nil {
+		s.WriteStruct(schemas.UpdateBucketRequest_cors)
+		v.Cors.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePartnerIdList(s, schemas.UpdateBucketRequest_readonlyAccessAccounts, v.ReadonlyAccessAccounts)
+	if v.Versioning != nil {
+		s.WriteString(schemas.UpdateBucketRequest_versioning, *v.Versioning)
+	}
+}
+
 type UpdateBucketOutput struct {
 
 	// An object that describes the bucket that is updated.
@@ -89,77 +119,53 @@ type UpdateBucketOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBucketOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBucketResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBucketOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteStruct(schemas.UpdateBucketResult_bucket)
+		v.Bucket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOperationList(s, schemas.UpdateBucketResult_operations, v.Operations)
+}
+func (v *UpdateBucketOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBucketResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBucketResult_bucket:
+			v.Bucket = &types.Bucket{}
+			return v.Bucket.Deserialize(d)
+		case schemas.UpdateBucketResult_operations:
+			return deserializeOperationList(d, schemas.UpdateBucketResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBucket, schemas.UpdateBucketRequest, schemas.UpdateBucketResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBucket{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBucket, schemas.UpdateBucketRequest, schemas.UpdateBucketResult), output: &UpdateBucketOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateBucket{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBucket"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateBucketValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBucket(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +180,8 @@ func (c *Client) addOperationUpdateBucketMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateBucket(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateBucket",
-	}
 }

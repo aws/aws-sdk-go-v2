@@ -124,6 +124,25 @@ func (DnsThreatProtection) Values() []DnsThreatProtection {
 	}
 }
 
+type DomainListType string
+
+// Enum values for DomainListType
+const (
+	DomainListTypeThreat  DomainListType = "THREAT"
+	DomainListTypeContent DomainListType = "CONTENT"
+)
+
+// Values returns all known values for DomainListType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DomainListType) Values() []DomainListType {
+	return []DomainListType{
+		"THREAT",
+		"CONTENT",
+	}
+}
+
 type FirewallDomainImportOperation string
 
 // Enum values for FirewallDomainImportOperation
@@ -277,19 +296,20 @@ type IpAddressStatus string
 
 // Enum values for IpAddressStatus
 const (
-	IpAddressStatusCreating               IpAddressStatus = "CREATING"
-	IpAddressStatusFailedCreation         IpAddressStatus = "FAILED_CREATION"
-	IpAddressStatusAttaching              IpAddressStatus = "ATTACHING"
-	IpAddressStatusAttached               IpAddressStatus = "ATTACHED"
-	IpAddressStatusRemapDetaching         IpAddressStatus = "REMAP_DETACHING"
-	IpAddressStatusRemapAttaching         IpAddressStatus = "REMAP_ATTACHING"
-	IpAddressStatusDetaching              IpAddressStatus = "DETACHING"
-	IpAddressStatusFailedResourceGone     IpAddressStatus = "FAILED_RESOURCE_GONE"
-	IpAddressStatusDeleting               IpAddressStatus = "DELETING"
-	IpAddressStatusDeleteFailedFasExpired IpAddressStatus = "DELETE_FAILED_FAS_EXPIRED"
-	IpAddressStatusUpdating               IpAddressStatus = "UPDATING"
-	IpAddressStatusUpdateFailed           IpAddressStatus = "UPDATE_FAILED"
-	IpAddressStatusIsolated               IpAddressStatus = "ISOLATED"
+	IpAddressStatusCreating                                       IpAddressStatus = "CREATING"
+	IpAddressStatusFailedCreation                                 IpAddressStatus = "FAILED_CREATION"
+	IpAddressStatusFailedCreationInsufficientEC2CapacityInOutpost IpAddressStatus = "FAILED_CREATION_INSUFFICIENT_EC2_CAPACITY_IN_OUTPOST"
+	IpAddressStatusAttaching                                      IpAddressStatus = "ATTACHING"
+	IpAddressStatusAttached                                       IpAddressStatus = "ATTACHED"
+	IpAddressStatusRemapDetaching                                 IpAddressStatus = "REMAP_DETACHING"
+	IpAddressStatusRemapAttaching                                 IpAddressStatus = "REMAP_ATTACHING"
+	IpAddressStatusDetaching                                      IpAddressStatus = "DETACHING"
+	IpAddressStatusFailedResourceGone                             IpAddressStatus = "FAILED_RESOURCE_GONE"
+	IpAddressStatusDeleting                                       IpAddressStatus = "DELETING"
+	IpAddressStatusDeleteFailedFasExpired                         IpAddressStatus = "DELETE_FAILED_FAS_EXPIRED"
+	IpAddressStatusUpdating                                       IpAddressStatus = "UPDATING"
+	IpAddressStatusUpdateFailed                                   IpAddressStatus = "UPDATE_FAILED"
+	IpAddressStatusIsolated                                       IpAddressStatus = "ISOLATED"
 )
 
 // Values returns all known values for IpAddressStatus. Note that this can be
@@ -300,6 +320,7 @@ func (IpAddressStatus) Values() []IpAddressStatus {
 	return []IpAddressStatus{
 		"CREATING",
 		"FAILED_CREATION",
+		"FAILED_CREATION_INSUFFICIENT_EC2_CAPACITY_IN_OUTPOST",
 		"ATTACHING",
 		"ATTACHED",
 		"REMAP_DETACHING",

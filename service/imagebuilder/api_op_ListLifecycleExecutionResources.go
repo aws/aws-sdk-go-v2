@@ -5,13 +5,13 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List resources that the runtime instance of the image lifecycle identified for
+// Lists resources that the runtime instance of the image lifecycle identified for
 // lifecycle actions.
 func (c *Client) ListLifecycleExecutionResources(ctx context.Context, params *ListLifecycleExecutionResourcesInput, optFns ...func(*Options)) (*ListLifecycleExecutionResourcesOutput, error) {
 	if params == nil {
@@ -30,16 +30,15 @@ func (c *Client) ListLifecycleExecutionResources(ctx context.Context, params *Li
 
 type ListLifecycleExecutionResourcesInput struct {
 
-	// Use the unique identifier for a runtime instance of the lifecycle policy to get
-	// runtime details.
+	// The unique identifier for a runtime instance of the lifecycle policy.
 	//
 	// This member is required.
 	LifecycleExecutionId *string
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
@@ -53,6 +52,27 @@ type ListLifecycleExecutionResourcesInput struct {
 	ParentResourceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListLifecycleExecutionResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecycleExecutionResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecycleExecutionResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesRequest_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLifecycleExecutionResourcesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesRequest_nextToken, *v.NextToken)
+	}
+	if v.ParentResourceId != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesRequest_parentResourceId, *v.ParentResourceId)
+	}
 }
 
 type ListLifecycleExecutionResourcesOutput struct {
@@ -77,77 +97,65 @@ type ListLifecycleExecutionResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecycleExecutionResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecycleExecutionResourcesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecycleExecutionResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+	if v.LifecycleExecutionState != nil {
+		s.WriteStruct(schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionState)
+		v.LifecycleExecutionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecycleExecutionResourcesResponse_nextToken, *v.NextToken)
+	}
+	serializeLifecycleExecutionResourceList(s, schemas.ListLifecycleExecutionResourcesResponse_resources, v.Resources)
+}
+func (v *ListLifecycleExecutionResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLifecycleExecutionResourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionId:
+			v.LifecycleExecutionId = new(string)
+			return d.ReadString(schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionId, v.LifecycleExecutionId)
+		case schemas.ListLifecycleExecutionResourcesResponse_lifecycleExecutionState:
+			v.LifecycleExecutionState = &types.LifecycleExecutionState{}
+			return v.LifecycleExecutionState.Deserialize(d)
+		case schemas.ListLifecycleExecutionResourcesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLifecycleExecutionResourcesResponse_nextToken, v.NextToken)
+		case schemas.ListLifecycleExecutionResourcesResponse_resources:
+			return deserializeLifecycleExecutionResourceList(d, schemas.ListLifecycleExecutionResourcesResponse_resources, &v.Resources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLifecycleExecutionResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecycleExecutionResources, schemas.ListLifecycleExecutionResourcesRequest, schemas.ListLifecycleExecutionResourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLifecycleExecutionResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecycleExecutionResources, schemas.ListLifecycleExecutionResourcesRequest, schemas.ListLifecycleExecutionResourcesResponse), output: &ListLifecycleExecutionResourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLifecycleExecutionResources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLifecycleExecutionResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListLifecycleExecutionResourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLifecycleExecutionResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +170,6 @@ func (c *Client) addOperationListLifecycleExecutionResourcesMiddlewares(stack *m
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -177,7 +179,7 @@ func (c *Client) addOperationListLifecycleExecutionResourcesMiddlewares(stack *m
 // ListLifecycleExecutionResourcesPaginatorOptions is the paginator options for
 // ListLifecycleExecutionResources
 type ListLifecycleExecutionResourcesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -269,11 +271,3 @@ type ListLifecycleExecutionResourcesAPIClient interface {
 }
 
 var _ ListLifecycleExecutionResourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLifecycleExecutionResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLifecycleExecutionResources",
-	}
-}

@@ -4,11 +4,10 @@ package fms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Firewall Manager applications list.
@@ -40,6 +39,21 @@ type PutAppsListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAppsListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAppsListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAppsListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppsList != nil {
+		s.WriteStruct(schemas.PutAppsListRequest_AppsList)
+		v.AppsList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.PutAppsListRequest_TagList, v.TagList)
+}
+
 type PutAppsListOutput struct {
 
 	// The details of the Firewall Manager applications list.
@@ -54,77 +68,56 @@ type PutAppsListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAppsListOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAppsListResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAppsListOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppsList != nil {
+		s.WriteStruct(schemas.PutAppsListResponse_AppsList)
+		v.AppsList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AppsListArn != nil {
+		s.WriteString(schemas.PutAppsListResponse_AppsListArn, *v.AppsListArn)
+	}
+}
+func (v *PutAppsListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAppsListResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAppsListResponse_AppsList:
+			v.AppsList = &types.AppsListData{}
+			return v.AppsList.Deserialize(d)
+		case schemas.PutAppsListResponse_AppsListArn:
+			v.AppsListArn = new(string)
+			return d.ReadString(schemas.PutAppsListResponse_AppsListArn, v.AppsListArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAppsListMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAppsList, schemas.PutAppsListRequest, schemas.PutAppsListResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutAppsList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAppsList, schemas.PutAppsListRequest, schemas.PutAppsListResponse), output: &PutAppsListOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutAppsList{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAppsList"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutAppsListValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAppsList(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +132,8 @@ func (c *Client) addOperationPutAppsListMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutAppsList(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutAppsList",
-	}
 }

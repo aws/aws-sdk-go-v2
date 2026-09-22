@@ -4,11 +4,10 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,18 @@ type GetModelCopyJobInput struct {
 	JobArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetModelCopyJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelCopyJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelCopyJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetModelCopyJobRequest_jobArn, *v.JobArn)
+	}
 }
 
 type GetModelCopyJobOutput struct {
@@ -96,77 +107,109 @@ type GetModelCopyJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetModelCopyJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetModelCopyJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetModelCopyJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetModelCopyJobResponse_creationTime, *v.CreationTime)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetModelCopyJobResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetModelCopyJobResponse_jobArn, *v.JobArn)
+	}
+	if v.SourceAccountId != nil {
+		s.WriteString(schemas.GetModelCopyJobResponse_sourceAccountId, *v.SourceAccountId)
+	}
+	if v.SourceModelArn != nil {
+		s.WriteString(schemas.GetModelCopyJobResponse_sourceModelArn, *v.SourceModelArn)
+	}
+	if v.SourceModelName != nil {
+		s.WriteString(schemas.GetModelCopyJobResponse_sourceModelName, *v.SourceModelName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetModelCopyJobResponse_status, string(v.Status))
+	}
+	if v.TargetModelArn != nil {
+		s.WriteString(schemas.GetModelCopyJobResponse_targetModelArn, *v.TargetModelArn)
+	}
+	if v.TargetModelKmsKeyArn != nil {
+		s.WriteString(schemas.GetModelCopyJobResponse_targetModelKmsKeyArn, *v.TargetModelKmsKeyArn)
+	}
+	if v.TargetModelName != nil {
+		s.WriteString(schemas.GetModelCopyJobResponse_targetModelName, *v.TargetModelName)
+	}
+	serializeTagList(s, schemas.GetModelCopyJobResponse_targetModelTags, v.TargetModelTags)
+}
+func (v *GetModelCopyJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetModelCopyJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetModelCopyJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetModelCopyJobResponse_creationTime, v.CreationTime)
+		case schemas.GetModelCopyJobResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetModelCopyJobResponse_failureMessage, v.FailureMessage)
+		case schemas.GetModelCopyJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetModelCopyJobResponse_jobArn, v.JobArn)
+		case schemas.GetModelCopyJobResponse_sourceAccountId:
+			v.SourceAccountId = new(string)
+			return d.ReadString(schemas.GetModelCopyJobResponse_sourceAccountId, v.SourceAccountId)
+		case schemas.GetModelCopyJobResponse_sourceModelArn:
+			v.SourceModelArn = new(string)
+			return d.ReadString(schemas.GetModelCopyJobResponse_sourceModelArn, v.SourceModelArn)
+		case schemas.GetModelCopyJobResponse_sourceModelName:
+			v.SourceModelName = new(string)
+			return d.ReadString(schemas.GetModelCopyJobResponse_sourceModelName, v.SourceModelName)
+		case schemas.GetModelCopyJobResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetModelCopyJobResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelCopyJobStatus(ev)
+			return nil
+		case schemas.GetModelCopyJobResponse_targetModelArn:
+			v.TargetModelArn = new(string)
+			return d.ReadString(schemas.GetModelCopyJobResponse_targetModelArn, v.TargetModelArn)
+		case schemas.GetModelCopyJobResponse_targetModelKmsKeyArn:
+			v.TargetModelKmsKeyArn = new(string)
+			return d.ReadString(schemas.GetModelCopyJobResponse_targetModelKmsKeyArn, v.TargetModelKmsKeyArn)
+		case schemas.GetModelCopyJobResponse_targetModelName:
+			v.TargetModelName = new(string)
+			return d.ReadString(schemas.GetModelCopyJobResponse_targetModelName, v.TargetModelName)
+		case schemas.GetModelCopyJobResponse_targetModelTags:
+			return deserializeTagList(d, schemas.GetModelCopyJobResponse_targetModelTags, &v.TargetModelTags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetModelCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelCopyJob, schemas.GetModelCopyJobRequest, schemas.GetModelCopyJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetModelCopyJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetModelCopyJob, schemas.GetModelCopyJobRequest, schemas.GetModelCopyJobResponse), output: &GetModelCopyJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetModelCopyJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetModelCopyJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetModelCopyJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetModelCopyJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +224,8 @@ func (c *Client) addOperationGetModelCopyJobMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetModelCopyJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetModelCopyJob",
-	}
 }

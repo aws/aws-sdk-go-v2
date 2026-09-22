@@ -5,14 +5,20 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	Use this API to define a Custom Metric published by your devices to Device
+// The IoT Device Defender detect feature will no longer be available to new
+// customers starting August 31, 2026. If you would like to use the detect feature,
+// sign up prior to August 31, 2026. To learn about alternatives to IoT Device
+// Defender detect, see IoT Device Defender detect feature availability change in
+// the IoT Device Defender Developer Guide. There is no change to IoT Device
+// Defender audit availability.
 //
+// Use this API to define a Custom Metric published by your devices to Device
 // Defender.
 //
 // Requires permission to access the [CreateCustomMetric] action.
@@ -70,6 +76,28 @@ type CreateCustomMetricInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomMetricInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomMetricRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomMetricInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateCustomMetricRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateCustomMetricRequest_displayName, *v.DisplayName)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateCustomMetricRequest_metricName, *v.MetricName)
+	}
+	if v.MetricType != "" {
+		s.WriteString(schemas.CreateCustomMetricRequest_metricType, string(v.MetricType))
+	}
+	serializeTagList(s, schemas.CreateCustomMetricRequest_tags, v.Tags)
+}
+
 type CreateCustomMetricOutput struct {
 
 	//  The Amazon Resource Number (ARN) of the custom metric. For example,
@@ -85,65 +113,48 @@ type CreateCustomMetricOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomMetricOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomMetricResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomMetricOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricArn != nil {
+		s.WriteString(schemas.CreateCustomMetricResponse_metricArn, *v.MetricArn)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateCustomMetricResponse_metricName, *v.MetricName)
+	}
+}
+func (v *CreateCustomMetricOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomMetricResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomMetricResponse_metricArn:
+			v.MetricArn = new(string)
+			return d.ReadString(schemas.CreateCustomMetricResponse_metricArn, v.MetricArn)
+		case schemas.CreateCustomMetricResponse_metricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.CreateCustomMetricResponse_metricName, v.MetricName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomMetric, schemas.CreateCustomMetricRequest, schemas.CreateCustomMetricResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomMetric{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomMetric, schemas.CreateCustomMetricRequest, schemas.CreateCustomMetricResponse), output: &CreateCustomMetricOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomMetric{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomMetric"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -153,12 +164,6 @@ func (c *Client) addOperationCreateCustomMetricMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateCustomMetricValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomMetric(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +176,6 @@ func (c *Client) addOperationCreateCustomMetricMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -216,12 +215,4 @@ func (m *idempotencyToken_initializeOpCreateCustomMetric) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateCustomMetricMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCustomMetric{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCustomMetric(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCustomMetric",
-	}
 }

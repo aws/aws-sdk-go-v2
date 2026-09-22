@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"messageTemplateVersionSummaries":[{"channel":"__Channel__","channelSubtype":"EMAIL","isActive":true,"knowledgeBaseArn":"__KnowledgeBaseArn__","knowledgeBaseId":"__KnowledgeBaseId__","messageTemplateArn":"__MessageTemplateArn__","messageTemplateId":"__MessageTemplateId__","name":"__Name__","versionNumber":1},{"channel":"__Channel__","channelSubtype":"EMAIL","isActive":true,"knowledgeBaseArn":"__KnowledgeBaseArn__","knowledgeBaseId":"__KnowledgeBaseId__","messageTemplateArn":"__MessageTemplateArn__","messageTemplateId":"__MessageTemplateId__","name":"__Name__","versionNumber":1}],"nextToken":"__NextToken__"}

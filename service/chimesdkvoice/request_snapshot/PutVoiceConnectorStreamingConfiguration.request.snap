@@ -1,0 +1,5 @@
+PUT /voice-connectors/__VoiceConnectorId__/streaming-configuration
+
+Content-Type: application/json
+
+{"StreamingConfiguration":{"DataRetentionInHours":1,"Disabled":true,"MediaInsightsConfiguration":{"ConfigurationArn":"__ConfigurationArn__","Disabled":true},"StreamingNotificationTargets":[{"NotificationTarget":"EventBridge"},{"NotificationTarget":"EventBridge"}]}}

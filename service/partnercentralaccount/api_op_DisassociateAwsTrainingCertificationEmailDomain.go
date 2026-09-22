@@ -5,9 +5,9 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the association between an email domain and AWS training and
@@ -51,6 +51,27 @@ type DisassociateAwsTrainingCertificationEmailDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAwsTrainingCertificationEmailDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAwsTrainingCertificationEmailDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAwsTrainingCertificationEmailDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.DisassociateAwsTrainingCertificationEmailDomainRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DisassociateAwsTrainingCertificationEmailDomainRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.DisassociateAwsTrainingCertificationEmailDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.DisassociateAwsTrainingCertificationEmailDomainRequest_Identifier, *v.Identifier)
+	}
+}
+
 type DisassociateAwsTrainingCertificationEmailDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -58,65 +79,36 @@ type DisassociateAwsTrainingCertificationEmailDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAwsTrainingCertificationEmailDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAwsTrainingCertificationEmailDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAwsTrainingCertificationEmailDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DisassociateAwsTrainingCertificationEmailDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAwsTrainingCertificationEmailDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAwsTrainingCertificationEmailDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAwsTrainingCertificationEmailDomain, schemas.DisassociateAwsTrainingCertificationEmailDomainRequest, schemas.DisassociateAwsTrainingCertificationEmailDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateAwsTrainingCertificationEmailDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAwsTrainingCertificationEmailDomain, schemas.DisassociateAwsTrainingCertificationEmailDomainRequest, schemas.DisassociateAwsTrainingCertificationEmailDomainResponse), output: &DisassociateAwsTrainingCertificationEmailDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateAwsTrainingCertificationEmailDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateAwsTrainingCertificationEmailDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -126,12 +118,6 @@ func (c *Client) addOperationDisassociateAwsTrainingCertificationEmailDomainMidd
 		return err
 	}
 	if err = addOpDisassociateAwsTrainingCertificationEmailDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateAwsTrainingCertificationEmailDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +130,6 @@ func (c *Client) addOperationDisassociateAwsTrainingCertificationEmailDomainMidd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -189,12 +169,4 @@ func (m *idempotencyToken_initializeOpDisassociateAwsTrainingCertificationEmailD
 }
 func addIdempotencyToken_opDisassociateAwsTrainingCertificationEmailDomainMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDisassociateAwsTrainingCertificationEmailDomain{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDisassociateAwsTrainingCertificationEmailDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateAwsTrainingCertificationEmailDomain",
-	}
 }

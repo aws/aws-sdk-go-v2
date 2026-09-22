@@ -1,0 +1,3 @@
+GET /groundstation/__GroundStationId__/reservation?endTime=946684800&maxResults=1&nextToken=__NextToken__&reservationTypes=MAINTENANCE&reservationTypes=MAINTENANCE&startTime=946684800
+
+

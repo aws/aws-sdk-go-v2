@@ -5,10 +5,10 @@ package appintegrations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of event integration associations in the account.
@@ -44,6 +44,24 @@ type ListEventIntegrationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventIntegrationAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventIntegrationAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventIntegrationAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventIntegrationName != nil {
+		s.WriteString(schemas.ListEventIntegrationAssociationsRequest_EventIntegrationName, *v.EventIntegrationName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventIntegrationAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventIntegrationAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEventIntegrationAssociationsOutput struct {
 
 	// The event integration associations.
@@ -58,77 +76,51 @@ type ListEventIntegrationAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventIntegrationAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventIntegrationAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventIntegrationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventIntegrationAssociationsList(s, schemas.ListEventIntegrationAssociationsResponse_EventIntegrationAssociations, v.EventIntegrationAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventIntegrationAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventIntegrationAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventIntegrationAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventIntegrationAssociationsResponse_EventIntegrationAssociations:
+			return deserializeEventIntegrationAssociationsList(d, schemas.ListEventIntegrationAssociationsResponse_EventIntegrationAssociations, &v.EventIntegrationAssociations)
+		case schemas.ListEventIntegrationAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventIntegrationAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventIntegrationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventIntegrationAssociations, schemas.ListEventIntegrationAssociationsRequest, schemas.ListEventIntegrationAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEventIntegrationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventIntegrationAssociations, schemas.ListEventIntegrationAssociationsRequest, schemas.ListEventIntegrationAssociationsResponse), output: &ListEventIntegrationAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEventIntegrationAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEventIntegrationAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEventIntegrationAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventIntegrationAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +133,6 @@ func (c *Client) addOperationListEventIntegrationAssociationsMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +236,3 @@ type ListEventIntegrationAssociationsAPIClient interface {
 }
 
 var _ ListEventIntegrationAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEventIntegrationAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEventIntegrationAssociations",
-	}
-}

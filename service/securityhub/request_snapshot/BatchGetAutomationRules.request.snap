@@ -1,0 +1,5 @@
+POST /automationrules/get
+
+Content-Type: application/json
+
+{"AutomationRulesArns":["__Member__","__Member__"]}

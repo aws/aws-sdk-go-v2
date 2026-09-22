@@ -1,0 +1,7 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.StartMessageMoveTask
+X-Amzn-Query-Mode: true
+
+{"DestinationArn":"__DestinationArn__","MaxNumberOfMessagesPerSecond":1,"SourceArn":"__SourceArn__"}

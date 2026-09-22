@@ -4,11 +4,10 @@ package directoryservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,6 +40,18 @@ type DescribeCAEnrollmentPolicyInput struct {
 	DirectoryId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeCAEnrollmentPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCAEnrollmentPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCAEnrollmentPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeCAEnrollmentPolicyRequest_DirectoryId, *v.DirectoryId)
+	}
 }
 
 // Contains the results of the DescribeCAEnrollmentPolicy operation.
@@ -89,77 +100,76 @@ type DescribeCAEnrollmentPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCAEnrollmentPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCAEnrollmentPolicyResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCAEnrollmentPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CaEnrollmentPolicyStatus != "" {
+		s.WriteString(schemas.DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatus, string(v.CaEnrollmentPolicyStatus))
+	}
+	if v.CaEnrollmentPolicyStatusReason != nil {
+		s.WriteString(schemas.DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatusReason, *v.CaEnrollmentPolicyStatusReason)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DescribeCAEnrollmentPolicyResult_DirectoryId, *v.DirectoryId)
+	}
+	if v.LastUpdatedDateTime != nil {
+		s.WriteTime(schemas.DescribeCAEnrollmentPolicyResult_LastUpdatedDateTime, *v.LastUpdatedDateTime)
+	}
+	if v.PcaConnectorArn != nil {
+		s.WriteString(schemas.DescribeCAEnrollmentPolicyResult_PcaConnectorArn, *v.PcaConnectorArn)
+	}
+}
+func (v *DescribeCAEnrollmentPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCAEnrollmentPolicyResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatus, &ev); err != nil {
+				return err
+			}
+			v.CaEnrollmentPolicyStatus = types.CaEnrollmentPolicyStatus(ev)
+			return nil
+		case schemas.DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatusReason:
+			v.CaEnrollmentPolicyStatusReason = new(string)
+			return d.ReadString(schemas.DescribeCAEnrollmentPolicyResult_CaEnrollmentPolicyStatusReason, v.CaEnrollmentPolicyStatusReason)
+		case schemas.DescribeCAEnrollmentPolicyResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.DescribeCAEnrollmentPolicyResult_DirectoryId, v.DirectoryId)
+		case schemas.DescribeCAEnrollmentPolicyResult_LastUpdatedDateTime:
+			v.LastUpdatedDateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCAEnrollmentPolicyResult_LastUpdatedDateTime, v.LastUpdatedDateTime)
+		case schemas.DescribeCAEnrollmentPolicyResult_PcaConnectorArn:
+			v.PcaConnectorArn = new(string)
+			return d.ReadString(schemas.DescribeCAEnrollmentPolicyResult_PcaConnectorArn, v.PcaConnectorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCAEnrollmentPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCAEnrollmentPolicy, schemas.DescribeCAEnrollmentPolicyRequest, schemas.DescribeCAEnrollmentPolicyResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCAEnrollmentPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCAEnrollmentPolicy, schemas.DescribeCAEnrollmentPolicyRequest, schemas.DescribeCAEnrollmentPolicyResult), output: &DescribeCAEnrollmentPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCAEnrollmentPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCAEnrollmentPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeCAEnrollmentPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCAEnrollmentPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +184,8 @@ func (c *Client) addOperationDescribeCAEnrollmentPolicyMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeCAEnrollmentPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeCAEnrollmentPolicy",
-	}
 }

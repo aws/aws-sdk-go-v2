@@ -5,10 +5,10 @@ package billingconductor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This is a paginated call to list linked accounts that are linked to the payer
@@ -52,6 +52,42 @@ type ListAccountAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListAccountAssociationsInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListAccountAssociationsInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountAssociationsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAccountAssociationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountAssociationsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountAssociationsInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListAccountAssociationsInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListAccountAssociationsInput_Filters:
+			v.Filters = &types.ListAccountAssociationsFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListAccountAssociationsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountAssociationsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAccountAssociationsOutput struct {
 
 	//  The list of linked accounts in the payer account.
@@ -66,74 +102,48 @@ type ListAccountAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountAssociationsList(s, schemas.ListAccountAssociationsOutput_LinkedAccounts, v.LinkedAccounts)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountAssociationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAccountAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountAssociationsOutput_LinkedAccounts:
+			return deserializeAccountAssociationsList(d, schemas.ListAccountAssociationsOutput_LinkedAccounts, &v.LinkedAccounts)
+		case schemas.ListAccountAssociationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountAssociationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssociations, schemas.ListAccountAssociationsInput, schemas.ListAccountAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAccountAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountAssociations, schemas.ListAccountAssociationsInput, schemas.ListAccountAssociationsOutput), output: &ListAccountAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAccountAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccountAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccountAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +156,6 @@ func (c *Client) addOperationListAccountAssociationsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -242,11 +246,3 @@ type ListAccountAssociationsAPIClient interface {
 }
 
 var _ ListAccountAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAccountAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAccountAssociations",
-	}
-}

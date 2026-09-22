@@ -5,10 +5,10 @@ package outposts
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the instance types for the specified Outpost.
@@ -43,6 +43,24 @@ type GetOutpostInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutpostInstanceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutpostInstanceTypesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutpostInstanceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetOutpostInstanceTypesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesInput_NextToken, *v.NextToken)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesInput_OutpostId, *v.OutpostId)
+	}
+}
+
 type GetOutpostInstanceTypesOutput struct {
 
 	// Information about the instance types.
@@ -63,77 +81,63 @@ type GetOutpostInstanceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutpostInstanceTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutpostInstanceTypesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutpostInstanceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceTypeListDefinition(s, schemas.GetOutpostInstanceTypesOutput_InstanceTypes, v.InstanceTypes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesOutput_NextToken, *v.NextToken)
+	}
+	if v.OutpostArn != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesOutput_OutpostArn, *v.OutpostArn)
+	}
+	if v.OutpostId != nil {
+		s.WriteString(schemas.GetOutpostInstanceTypesOutput_OutpostId, *v.OutpostId)
+	}
+}
+func (v *GetOutpostInstanceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOutpostInstanceTypesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOutpostInstanceTypesOutput_InstanceTypes:
+			return deserializeInstanceTypeListDefinition(d, schemas.GetOutpostInstanceTypesOutput_InstanceTypes, &v.InstanceTypes)
+		case schemas.GetOutpostInstanceTypesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetOutpostInstanceTypesOutput_NextToken, v.NextToken)
+		case schemas.GetOutpostInstanceTypesOutput_OutpostArn:
+			v.OutpostArn = new(string)
+			return d.ReadString(schemas.GetOutpostInstanceTypesOutput_OutpostArn, v.OutpostArn)
+		case schemas.GetOutpostInstanceTypesOutput_OutpostId:
+			v.OutpostId = new(string)
+			return d.ReadString(schemas.GetOutpostInstanceTypesOutput_OutpostId, v.OutpostId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOutpostInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutpostInstanceTypes, schemas.GetOutpostInstanceTypesInput, schemas.GetOutpostInstanceTypesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOutpostInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOutpostInstanceTypes, schemas.GetOutpostInstanceTypesInput, schemas.GetOutpostInstanceTypesOutput), output: &GetOutpostInstanceTypesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetOutpostInstanceTypes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOutpostInstanceTypes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOutpostInstanceTypesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOutpostInstanceTypes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +150,6 @@ func (c *Client) addOperationGetOutpostInstanceTypesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +252,3 @@ type GetOutpostInstanceTypesAPIClient interface {
 }
 
 var _ GetOutpostInstanceTypesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetOutpostInstanceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOutpostInstanceTypes",
-	}
-}

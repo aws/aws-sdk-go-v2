@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.CreateDetectorVersion
+
+{"description":"__Description__","detectorId":"__DetectorId__","externalModelEndpoints":["__Member__","__Member__"],"modelVersions":[{"arn":"__Arn__","modelId":"__ModelId__","modelType":"ONLINE_FRAUD_INSIGHTS","modelVersionNumber":"__ModelVersionNumber__"},{"arn":"__Arn__","modelId":"__ModelId__","modelType":"ONLINE_FRAUD_INSIGHTS","modelVersionNumber":"__ModelVersionNumber__"}],"ruleExecutionMode":"ALL_MATCHED","rules":[{"detectorId":"__DetectorId__","ruleId":"__RuleId__","ruleVersion":"__RuleVersion__"},{"detectorId":"__DetectorId__","ruleId":"__RuleId__","ruleVersion":"__RuleVersion__"}],"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

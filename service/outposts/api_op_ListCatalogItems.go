@@ -5,10 +5,10 @@ package outposts
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the items in the catalog.
@@ -52,6 +52,24 @@ type ListCatalogItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCatalogItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCatalogItemsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCatalogItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEC2FamilyList(s, schemas.ListCatalogItemsInput_EC2FamilyFilter, v.EC2FamilyFilter)
+	serializeCatalogItemClassList(s, schemas.ListCatalogItemsInput_ItemClassFilter, v.ItemClassFilter)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCatalogItemsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCatalogItemsInput_NextToken, *v.NextToken)
+	}
+	serializeSupportedStorageList(s, schemas.ListCatalogItemsInput_SupportedStorageFilter, v.SupportedStorageFilter)
+}
+
 type ListCatalogItemsOutput struct {
 
 	// Information about the catalog items.
@@ -66,74 +84,48 @@ type ListCatalogItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCatalogItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCatalogItemsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCatalogItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCatalogItemListDefinition(s, schemas.ListCatalogItemsOutput_CatalogItems, v.CatalogItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCatalogItemsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCatalogItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCatalogItemsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCatalogItemsOutput_CatalogItems:
+			return deserializeCatalogItemListDefinition(d, schemas.ListCatalogItemsOutput_CatalogItems, &v.CatalogItems)
+		case schemas.ListCatalogItemsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCatalogItemsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCatalogItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCatalogItems, schemas.ListCatalogItemsInput, schemas.ListCatalogItemsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCatalogItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCatalogItems, schemas.ListCatalogItemsInput, schemas.ListCatalogItemsOutput), output: &ListCatalogItemsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCatalogItems{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCatalogItems"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCatalogItems(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +138,6 @@ func (c *Client) addOperationListCatalogItemsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +238,3 @@ type ListCatalogItemsAPIClient interface {
 }
 
 var _ ListCatalogItemsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCatalogItems(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCatalogItems",
-	}
-}

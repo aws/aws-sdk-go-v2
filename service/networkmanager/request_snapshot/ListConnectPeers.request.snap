@@ -1,0 +1,3 @@
+GET /connect-peers?connectAttachmentId=__ConnectAttachmentId__&coreNetworkId=__CoreNetworkId__&maxResults=1&nextToken=__NextToken__
+
+

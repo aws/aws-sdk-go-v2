@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the list of component build versions for the specified component
@@ -34,14 +34,32 @@ type ListComponentBuildVersionsInput struct {
 	// list.
 	ComponentVersionArn *string
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListComponentBuildVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentBuildVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentBuildVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentVersionArn != nil {
+		s.WriteString(schemas.ListComponentBuildVersionsRequest_componentVersionArn, *v.ComponentVersionArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListComponentBuildVersionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentBuildVersionsRequest_nextToken, *v.NextToken)
+	}
 }
 
 type ListComponentBuildVersionsOutput struct {
@@ -63,74 +81,54 @@ type ListComponentBuildVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListComponentBuildVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListComponentBuildVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListComponentBuildVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComponentSummaryList(s, schemas.ListComponentBuildVersionsResponse_componentSummaryList, v.ComponentSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListComponentBuildVersionsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListComponentBuildVersionsResponse_requestId, *v.RequestId)
+	}
+}
+func (v *ListComponentBuildVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListComponentBuildVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListComponentBuildVersionsResponse_componentSummaryList:
+			return deserializeComponentSummaryList(d, schemas.ListComponentBuildVersionsResponse_componentSummaryList, &v.ComponentSummaryList)
+		case schemas.ListComponentBuildVersionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListComponentBuildVersionsResponse_nextToken, v.NextToken)
+		case schemas.ListComponentBuildVersionsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListComponentBuildVersionsResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListComponentBuildVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentBuildVersions, schemas.ListComponentBuildVersionsRequest, schemas.ListComponentBuildVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListComponentBuildVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListComponentBuildVersions, schemas.ListComponentBuildVersionsRequest, schemas.ListComponentBuildVersionsResponse), output: &ListComponentBuildVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListComponentBuildVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListComponentBuildVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListComponentBuildVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +143,6 @@ func (c *Client) addOperationListComponentBuildVersionsMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -160,7 +152,7 @@ func (c *Client) addOperationListComponentBuildVersionsMiddlewares(stack *middle
 // ListComponentBuildVersionsPaginatorOptions is the paginator options for
 // ListComponentBuildVersions
 type ListComponentBuildVersionsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -252,11 +244,3 @@ type ListComponentBuildVersionsAPIClient interface {
 }
 
 var _ ListComponentBuildVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListComponentBuildVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListComponentBuildVersions",
-	}
-}

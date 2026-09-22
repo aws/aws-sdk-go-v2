@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateIntegrationResourceProperty
+
+{"ResourceArn":"__ResourceArn__","SourceProcessingProperties":{"RoleArn":"__RoleArn__"},"Tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"TargetProcessingProperties":{"ConnectionName":"__ConnectionName__","EventBusArn":"__EventBusArn__","KmsArn":"__KmsArn__","RoleArn":"__RoleArn__"}}

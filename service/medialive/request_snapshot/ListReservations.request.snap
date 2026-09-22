@@ -1,0 +1,3 @@
+GET /prod/reservations?channelClass=__ChannelClass__&codec=__Codec__&maxResults=1&maximumBitrate=__MaximumBitrate__&maximumFramerate=__MaximumFramerate__&nextToken=__NextToken__&resolution=__Resolution__&resourceType=__ResourceType__&specialFeature=__SpecialFeature__&videoQuality=__VideoQuality__
+
+

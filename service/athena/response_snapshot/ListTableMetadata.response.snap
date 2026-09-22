@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.ListTableMetadata
+
+{"NextToken":"__NextToken__","TableMetadataList":[{"Columns":[{"Comment":"__Comment__","Name":"__Name__","Type":"__Type__"},{"Comment":"__Comment__","Name":"__Name__","Type":"__Type__"}],"CreateTime":946684800,"LastAccessTime":946684800,"Name":"__Name__","Parameters":{"key0":"__Value__"},"PartitionKeys":[{"Comment":"__Comment__","Name":"__Name__","Type":"__Type__"},{"Comment":"__Comment__","Name":"__Name__","Type":"__Type__"}],"TableType":"__TableType__"},{"Columns":[{"Comment":"__Comment__","Name":"__Name__","Type":"__Type__"},{"Comment":"__Comment__","Name":"__Name__","Type":"__Type__"}],"CreateTime":946684800,"LastAccessTime":946684800,"Name":"__Name__","Parameters":{"key0":"__Value__"},"PartitionKeys":[{"Comment":"__Comment__","Name":"__Name__","Type":"__Type__"},{"Comment":"__Comment__","Name":"__Name__","Type":"__Type__"}],"TableType":"__TableType__"}]}

@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -93,6 +94,51 @@ type UpdateQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAllowedStorageProfileIds(s, schemas.UpdateQueueRequest_allowedStorageProfileIdsToAdd, v.AllowedStorageProfileIdsToAdd)
+	serializeAllowedStorageProfileIds(s, schemas.UpdateQueueRequest_allowedStorageProfileIdsToRemove, v.AllowedStorageProfileIdsToRemove)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateQueueRequest_clientToken, *v.ClientToken)
+	}
+	if v.DefaultBudgetAction != "" {
+		s.WriteString(schemas.UpdateQueueRequest_defaultBudgetAction, string(v.DefaultBudgetAction))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateQueueRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateQueueRequest_displayName, *v.DisplayName)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateQueueRequest_farmId, *v.FarmId)
+	}
+	if v.JobAttachmentSettings != nil {
+		s.WriteStruct(schemas.UpdateQueueRequest_jobAttachmentSettings)
+		v.JobAttachmentSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobRunAsUser != nil {
+		s.WriteStruct(schemas.UpdateQueueRequest_jobRunAsUser)
+		v.JobRunAsUser.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.UpdateQueueRequest_queueId, *v.QueueId)
+	}
+	serializeRequiredFileSystemLocationNames(s, schemas.UpdateQueueRequest_requiredFileSystemLocationNamesToAdd, v.RequiredFileSystemLocationNamesToAdd)
+	serializeRequiredFileSystemLocationNames(s, schemas.UpdateQueueRequest_requiredFileSystemLocationNamesToRemove, v.RequiredFileSystemLocationNamesToRemove)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateQueueRequest_roleArn, *v.RoleArn)
+	}
+	serializeSchedulingConfiguration(s, schemas.UpdateQueueRequest_schedulingConfiguration, v.SchedulingConfiguration)
+}
+
 type UpdateQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -100,65 +146,36 @@ type UpdateQueueOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQueueOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQueueResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQueueOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateQueueOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQueueResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueue, schemas.UpdateQueueRequest, schemas.UpdateQueueResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQueue{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQueue, schemas.UpdateQueueRequest, schemas.UpdateQueueResponse), output: &UpdateQueueOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQueue{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQueue"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -173,12 +190,6 @@ func (c *Client) addOperationUpdateQueueMiddlewares(stack *middleware.Stack, opt
 	if err = addOpUpdateQueueValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateQueue(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -189,12 +200,6 @@ func (c *Client) addOperationUpdateQueueMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,12 +266,4 @@ func (m *idempotencyToken_initializeOpUpdateQueue) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opUpdateQueueMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateQueue{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateQueue(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateQueue",
-	}
 }

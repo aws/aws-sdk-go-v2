@@ -5,10 +5,10 @@ package bcmpricingcalculator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the usage associated with a workload estimate.
@@ -46,6 +46,25 @@ type ListWorkloadEstimateUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadEstimateUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadEstimateUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListUsageFilters(s, schemas.ListWorkloadEstimateUsageRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkloadEstimateUsageRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadEstimateUsageRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkloadEstimateId != nil {
+		s.WriteString(schemas.ListWorkloadEstimateUsageRequest_workloadEstimateId, *v.WorkloadEstimateId)
+	}
+}
+
 type ListWorkloadEstimateUsageOutput struct {
 
 	//  The list of usage items associated with the workload estimate.
@@ -60,77 +79,51 @@ type ListWorkloadEstimateUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadEstimateUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadEstimateUsageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadEstimateUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkloadEstimateUsageItems(s, schemas.ListWorkloadEstimateUsageResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadEstimateUsageResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListWorkloadEstimateUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkloadEstimateUsageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkloadEstimateUsageResponse_items:
+			return deserializeWorkloadEstimateUsageItems(d, schemas.ListWorkloadEstimateUsageResponse_items, &v.Items)
+		case schemas.ListWorkloadEstimateUsageResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkloadEstimateUsageResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkloadEstimateUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadEstimateUsage, schemas.ListWorkloadEstimateUsageRequest, schemas.ListWorkloadEstimateUsageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadEstimateUsage, schemas.ListWorkloadEstimateUsageRequest, schemas.ListWorkloadEstimateUsageResponse), output: &ListWorkloadEstimateUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkloadEstimateUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListWorkloadEstimateUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkloadEstimateUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +136,6 @@ func (c *Client) addOperationListWorkloadEstimateUsageMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +238,3 @@ type ListWorkloadEstimateUsageAPIClient interface {
 }
 
 var _ ListWorkloadEstimateUsageAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListWorkloadEstimateUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListWorkloadEstimateUsage",
-	}
-}

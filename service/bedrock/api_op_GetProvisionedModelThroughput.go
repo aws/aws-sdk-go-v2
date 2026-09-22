@@ -4,11 +4,10 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,18 @@ type GetProvisionedModelThroughputInput struct {
 	ProvisionedModelId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProvisionedModelThroughputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedModelThroughputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedModelThroughputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProvisionedModelId != nil {
+		s.WriteString(schemas.GetProvisionedModelThroughputRequest_provisionedModelId, *v.ProvisionedModelId)
+	}
 }
 
 type GetProvisionedModelThroughputOutput struct {
@@ -116,77 +127,128 @@ type GetProvisionedModelThroughputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisionedModelThroughputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisionedModelThroughputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisionedModelThroughputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitmentDuration != "" {
+		s.WriteString(schemas.GetProvisionedModelThroughputResponse_commitmentDuration, string(v.CommitmentDuration))
+	}
+	if v.CommitmentExpirationTime != nil {
+		s.WriteTime(schemas.GetProvisionedModelThroughputResponse_commitmentExpirationTime, *v.CommitmentExpirationTime)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetProvisionedModelThroughputResponse_creationTime, *v.CreationTime)
+	}
+	if v.DesiredModelArn != nil {
+		s.WriteString(schemas.GetProvisionedModelThroughputResponse_desiredModelArn, *v.DesiredModelArn)
+	}
+	if v.DesiredModelUnits != nil {
+		s.WriteInt32(schemas.GetProvisionedModelThroughputResponse_desiredModelUnits, *v.DesiredModelUnits)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetProvisionedModelThroughputResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.FoundationModelArn != nil {
+		s.WriteString(schemas.GetProvisionedModelThroughputResponse_foundationModelArn, *v.FoundationModelArn)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.GetProvisionedModelThroughputResponse_lastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.GetProvisionedModelThroughputResponse_modelArn, *v.ModelArn)
+	}
+	if v.ModelUnits != nil {
+		s.WriteInt32(schemas.GetProvisionedModelThroughputResponse_modelUnits, *v.ModelUnits)
+	}
+	if v.ProvisionedModelArn != nil {
+		s.WriteString(schemas.GetProvisionedModelThroughputResponse_provisionedModelArn, *v.ProvisionedModelArn)
+	}
+	if v.ProvisionedModelName != nil {
+		s.WriteString(schemas.GetProvisionedModelThroughputResponse_provisionedModelName, *v.ProvisionedModelName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetProvisionedModelThroughputResponse_status, string(v.Status))
+	}
+}
+func (v *GetProvisionedModelThroughputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProvisionedModelThroughputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProvisionedModelThroughputResponse_commitmentDuration:
+			var ev string
+			if err := d.ReadString(schemas.GetProvisionedModelThroughputResponse_commitmentDuration, &ev); err != nil {
+				return err
+			}
+			v.CommitmentDuration = types.CommitmentDuration(ev)
+			return nil
+		case schemas.GetProvisionedModelThroughputResponse_commitmentExpirationTime:
+			v.CommitmentExpirationTime = new(time.Time)
+			return d.ReadTime(schemas.GetProvisionedModelThroughputResponse_commitmentExpirationTime, v.CommitmentExpirationTime)
+		case schemas.GetProvisionedModelThroughputResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetProvisionedModelThroughputResponse_creationTime, v.CreationTime)
+		case schemas.GetProvisionedModelThroughputResponse_desiredModelArn:
+			v.DesiredModelArn = new(string)
+			return d.ReadString(schemas.GetProvisionedModelThroughputResponse_desiredModelArn, v.DesiredModelArn)
+		case schemas.GetProvisionedModelThroughputResponse_desiredModelUnits:
+			v.DesiredModelUnits = new(int32)
+			return d.ReadInt32(schemas.GetProvisionedModelThroughputResponse_desiredModelUnits, v.DesiredModelUnits)
+		case schemas.GetProvisionedModelThroughputResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetProvisionedModelThroughputResponse_failureMessage, v.FailureMessage)
+		case schemas.GetProvisionedModelThroughputResponse_foundationModelArn:
+			v.FoundationModelArn = new(string)
+			return d.ReadString(schemas.GetProvisionedModelThroughputResponse_foundationModelArn, v.FoundationModelArn)
+		case schemas.GetProvisionedModelThroughputResponse_lastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.GetProvisionedModelThroughputResponse_lastModifiedTime, v.LastModifiedTime)
+		case schemas.GetProvisionedModelThroughputResponse_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.GetProvisionedModelThroughputResponse_modelArn, v.ModelArn)
+		case schemas.GetProvisionedModelThroughputResponse_modelUnits:
+			v.ModelUnits = new(int32)
+			return d.ReadInt32(schemas.GetProvisionedModelThroughputResponse_modelUnits, v.ModelUnits)
+		case schemas.GetProvisionedModelThroughputResponse_provisionedModelArn:
+			v.ProvisionedModelArn = new(string)
+			return d.ReadString(schemas.GetProvisionedModelThroughputResponse_provisionedModelArn, v.ProvisionedModelArn)
+		case schemas.GetProvisionedModelThroughputResponse_provisionedModelName:
+			v.ProvisionedModelName = new(string)
+			return d.ReadString(schemas.GetProvisionedModelThroughputResponse_provisionedModelName, v.ProvisionedModelName)
+		case schemas.GetProvisionedModelThroughputResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetProvisionedModelThroughputResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProvisionedModelStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProvisionedModelThroughputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedModelThroughput, schemas.GetProvisionedModelThroughputRequest, schemas.GetProvisionedModelThroughputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisionedModelThroughput, schemas.GetProvisionedModelThroughputRequest, schemas.GetProvisionedModelThroughputResponse), output: &GetProvisionedModelThroughputOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProvisionedModelThroughput"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetProvisionedModelThroughputValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProvisionedModelThroughput(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,22 +263,8 @@ func (c *Client) addOperationGetProvisionedModelThroughputMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetProvisionedModelThroughput(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetProvisionedModelThroughput",
-	}
 }

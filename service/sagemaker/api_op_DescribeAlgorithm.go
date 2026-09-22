@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeAlgorithmInput struct {
 	AlgorithmName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAlgorithmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAlgorithmInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAlgorithmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmName != nil {
+		s.WriteString(schemas.DescribeAlgorithmInput_AlgorithmName, *v.AlgorithmName)
+	}
 }
 
 type DescribeAlgorithmOutput struct {
@@ -93,77 +104,120 @@ type DescribeAlgorithmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAlgorithmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAlgorithmOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAlgorithmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmArn != nil {
+		s.WriteString(schemas.DescribeAlgorithmOutput_AlgorithmArn, *v.AlgorithmArn)
+	}
+	if v.AlgorithmDescription != nil {
+		s.WriteString(schemas.DescribeAlgorithmOutput_AlgorithmDescription, *v.AlgorithmDescription)
+	}
+	if v.AlgorithmName != nil {
+		s.WriteString(schemas.DescribeAlgorithmOutput_AlgorithmName, *v.AlgorithmName)
+	}
+	if v.AlgorithmStatus != "" {
+		s.WriteString(schemas.DescribeAlgorithmOutput_AlgorithmStatus, string(v.AlgorithmStatus))
+	}
+	if v.AlgorithmStatusDetails != nil {
+		s.WriteStruct(schemas.DescribeAlgorithmOutput_AlgorithmStatusDetails)
+		v.AlgorithmStatusDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CertifyForMarketplace != nil {
+		s.WriteBool(schemas.DescribeAlgorithmOutput_CertifyForMarketplace, *v.CertifyForMarketplace)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeAlgorithmOutput_CreationTime, *v.CreationTime)
+	}
+	if v.InferenceSpecification != nil {
+		s.WriteStruct(schemas.DescribeAlgorithmOutput_InferenceSpecification)
+		v.InferenceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.DescribeAlgorithmOutput_ProductId, *v.ProductId)
+	}
+	if v.TrainingSpecification != nil {
+		s.WriteStruct(schemas.DescribeAlgorithmOutput_TrainingSpecification)
+		v.TrainingSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidationSpecification != nil {
+		s.WriteStruct(schemas.DescribeAlgorithmOutput_ValidationSpecification)
+		v.ValidationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeAlgorithmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAlgorithmOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAlgorithmOutput_AlgorithmArn:
+			v.AlgorithmArn = new(string)
+			return d.ReadString(schemas.DescribeAlgorithmOutput_AlgorithmArn, v.AlgorithmArn)
+		case schemas.DescribeAlgorithmOutput_AlgorithmDescription:
+			v.AlgorithmDescription = new(string)
+			return d.ReadString(schemas.DescribeAlgorithmOutput_AlgorithmDescription, v.AlgorithmDescription)
+		case schemas.DescribeAlgorithmOutput_AlgorithmName:
+			v.AlgorithmName = new(string)
+			return d.ReadString(schemas.DescribeAlgorithmOutput_AlgorithmName, v.AlgorithmName)
+		case schemas.DescribeAlgorithmOutput_AlgorithmStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAlgorithmOutput_AlgorithmStatus, &ev); err != nil {
+				return err
+			}
+			v.AlgorithmStatus = types.AlgorithmStatus(ev)
+			return nil
+		case schemas.DescribeAlgorithmOutput_AlgorithmStatusDetails:
+			v.AlgorithmStatusDetails = &types.AlgorithmStatusDetails{}
+			return v.AlgorithmStatusDetails.Deserialize(d)
+		case schemas.DescribeAlgorithmOutput_CertifyForMarketplace:
+			v.CertifyForMarketplace = new(bool)
+			return d.ReadBool(schemas.DescribeAlgorithmOutput_CertifyForMarketplace, v.CertifyForMarketplace)
+		case schemas.DescribeAlgorithmOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAlgorithmOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeAlgorithmOutput_InferenceSpecification:
+			v.InferenceSpecification = &types.InferenceSpecification{}
+			return v.InferenceSpecification.Deserialize(d)
+		case schemas.DescribeAlgorithmOutput_ProductId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.DescribeAlgorithmOutput_ProductId, v.ProductId)
+		case schemas.DescribeAlgorithmOutput_TrainingSpecification:
+			v.TrainingSpecification = &types.TrainingSpecification{}
+			return v.TrainingSpecification.Deserialize(d)
+		case schemas.DescribeAlgorithmOutput_ValidationSpecification:
+			v.ValidationSpecification = &types.AlgorithmValidationSpecification{}
+			return v.ValidationSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlgorithm, schemas.DescribeAlgorithmInput, schemas.DescribeAlgorithmOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAlgorithm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlgorithm, schemas.DescribeAlgorithmInput, schemas.DescribeAlgorithmOutput), output: &DescribeAlgorithmOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAlgorithm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAlgorithm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAlgorithmValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAlgorithm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +232,8 @@ func (c *Client) addOperationDescribeAlgorithmMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAlgorithm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAlgorithm",
-	}
 }

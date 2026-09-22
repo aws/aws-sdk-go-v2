@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.ListThirdPartyFirewallFirewallPolicies
+
+{"NextToken":"__NextToken__","ThirdPartyFirewallFirewallPolicies":[{"FirewallPolicyId":"__FirewallPolicyId__","FirewallPolicyName":"__FirewallPolicyName__"},{"FirewallPolicyId":"__FirewallPolicyId__","FirewallPolicyName":"__FirewallPolicyName__"}]}

@@ -87,13 +87,17 @@ type ChannelListConfiguration struct {
 	// This member is required.
 	ModifiedAt *time.Time
 
+	// The multiview channels, in the same channel group, that list this channel as an
+	// available source. This is a read-only field.
+	AttachedMultiviewChannels []string
+
 	// Any descriptive information that you want to add to the channel for future
 	// identification purposes.
 	Description *string
 
-	// The input type will be an immutable field which will be used to define whether
-	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
-	// to HLS to preserve current behavior.
+	// The input type is an immutable field. It defines whether the channel allows
+	// CMAF ingest, HLS ingest, or server-side multiview output. Multiview channels
+	// receive no ingest of their own. If unprovided, the value defaults to HLS.
 	//
 	// The allowed values are:
 	//
@@ -102,7 +106,27 @@ type ChannelListConfiguration struct {
 	//
 	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
 	//   with optional DASH manifests).
+	//
+	//   - MULTIVIEW – Server-side multiview. The channel receives no ingest of its
+	//   own. Instead, it composites video from the source channels in its
+	//   MultiviewConfiguration into a single tiled output stream.
 	InputType InputType
+
+	// The multiview configuration for the channel. This is present only when InputType
+	// is MULTIVIEW .
+	MultiviewConfiguration *MultiviewConfiguration
+
+	// The output locking mode configured for the channel.
+	//
+	// The allowed values are:
+	//
+	//   - EPOCH_LOCKED - The channel uses epoch-locked behavior with deterministic
+	//   sequence numbering and fixed segment boundaries aligned to epoch time.
+	//
+	//   - NON_EPOCH_LOCKED - The channel uses non-epoch-locked behavior with
+	//   duration-based segment combining and monotonically increasing sequence numbers
+	//   starting from 0.
+	OutputLockingMode OutputLockingMode
 
 	noSmithyDocumentSerde
 }
@@ -115,6 +139,22 @@ type CreateDashManifestConfiguration struct {
 	//
 	// This member is required.
 	ManifestName *string
+
+	// How MediaPackage represents the audio timeline in the DASH manifest. This
+	// setting applies DASH Segment Duration Patternization, as defined in the
+	// MPEG-DASH specification, to audio adaptation sets. When set to PATTERNED ,
+	// MediaPackage uses a pattern-based segment template for audio, which reduces
+	// manifest size by expressing repeating segment durations as a pattern instead of
+	// listing each segment individually. When set to NONE , the manifest contains an
+	// explicit timeline that lists each audio segment.
+	//
+	// Valid values: NONE | PATTERNED
+	//
+	// For information about audio timeline patterns, see [DASH audio timeline pattern] in the Elemental
+	// MediaPackage v2 User Guide.
+	//
+	// [DASH audio timeline pattern]: https://docs.aws.amazon.com/mediapackage/latest/userguide/dash-audio-timeline-pattern.html
+	AudioTimelinePattern DashAudioTimelinePattern
 
 	// The configuration for the DASH availabilityStartTime attribute of the Media
 	// Presentation Description (MPD). If you don't specify a value, MediaPackage uses
@@ -757,6 +797,13 @@ type GetDashManifestConfiguration struct {
 	// This member is required.
 	Url *string
 
+	// How MediaPackage represents the audio timeline in the DASH manifest, using DASH
+	// Segment Duration Patternization for audio adaptation sets. PATTERNED indicates
+	// that MediaPackage uses a pattern-based segment template for audio, reducing
+	// manifest size. NONE indicates that the manifest contains an explicit timeline
+	// for each audio segment.
+	AudioTimelinePattern DashAudioTimelinePattern
+
 	// The configuration for the DASH availabilityStartTime attribute of the Media
 	// Presentation Description (MPD).
 	AvailabilityStartTimeConfiguration DashAvailabilityStartTimeConfiguration
@@ -1253,6 +1300,31 @@ type ListMssManifestConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The multiview configuration for a channel. A multiview channel composites video
+// from several source channels into a single tiled output stream. Players receive
+// one standard HLS or DASH stream instead of several separate streams. This
+// setting is required when InputType is MULTIVIEW , and can't be set for any other
+// input type.
+type MultiviewConfiguration struct {
+
+	// The tile layouts that players can request from this multiview channel's origin
+	// endpoints. Only the layouts that you list here are available. Each layout must
+	// appear at most once.
+	//
+	// This member is required.
+	AvailableLayouts []MultiviewLayoutType
+
+	// The channels that players can use as tiles in this multiview channel's output.
+	// Each source channel must be in the same channel group as the multiview channel,
+	// and must have an InputType of CMAF . Only the channels that you list here are
+	// available as tiles.
+	//
+	// This member is required.
+	AvailableSources []string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the origin endpoint.
 type OriginEndpointListConfiguration struct {
 
@@ -1314,6 +1386,9 @@ type OriginEndpointListConfiguration struct {
 	// with the origin endpoint. Each configuration represents a different MSS
 	// streaming option available from this endpoint.
 	MssManifests []ListMssManifestConfiguration
+
+	// The output mode for stream names in egress manifests for this origin endpoint.
+	StreamNameOutputMode StreamNameOutputMode
 
 	// The separator character used in generated URIs for this origin endpoint.
 	UriSeparator UriSeparator
@@ -1455,6 +1530,20 @@ type Segment struct {
 	// generates and includes an I-frames only playlist in the stream. This playlist
 	// permits player functionality like fast forward and rewind.
 	IncludeIframeOnlyStreams *bool
+
+	// The output timestamp mode for the origin endpoint's segments. This setting is
+	// only configurable on channels with OutputLockingMode set to NON_EPOCH_LOCKED .
+	// This value is immutable after endpoint creation. If you don't specify a value,
+	// the default is PASSTHROUGH .
+	//
+	// The allowed values are:
+	//
+	//   - PASSTHROUGH - Output PTS (Presentation Timestamp) values pass through
+	//   unchanged from the input.
+	//
+	//   - REBASED_TO_CHANNEL_START - Output PTS is rebased relative to the channel
+	//   start time.
+	OutputTimestampMode OutputTimestampMode
 
 	// The SCTE configuration options in the segment settings.
 	Scte *Scte

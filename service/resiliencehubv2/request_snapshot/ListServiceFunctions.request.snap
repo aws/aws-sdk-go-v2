@@ -1,0 +1,3 @@
+GET /v2/list-functions?maxResults=1&nextToken=__NextToken__&serviceArn=__ServiceArn__
+
+

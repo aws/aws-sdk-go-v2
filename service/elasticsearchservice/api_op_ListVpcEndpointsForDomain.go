@@ -4,11 +4,10 @@ package elasticsearchservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves all Amazon OpenSearch Service-managed VPC endpoints associated with a
@@ -43,6 +42,21 @@ type ListVpcEndpointsForDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointsForDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointsForDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointsForDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.ListVpcEndpointsForDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointsForDomainRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Container for response parameters to the ListVpcEndpointsForDomain operation. Returns a list containing
 // summarized details of the VPC endpoints.
 type ListVpcEndpointsForDomainOutput struct {
@@ -63,77 +77,51 @@ type ListVpcEndpointsForDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointsForDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointsForDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointsForDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointsForDomainResponse_NextToken, *v.NextToken)
+	}
+	serializeVpcEndpointSummaryList(s, schemas.ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList, v.VpcEndpointSummaryList)
+}
+func (v *ListVpcEndpointsForDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcEndpointsForDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcEndpointsForDomainResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVpcEndpointsForDomainResponse_NextToken, v.NextToken)
+		case schemas.ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList:
+			return deserializeVpcEndpointSummaryList(d, schemas.ListVpcEndpointsForDomainResponse_VpcEndpointSummaryList, &v.VpcEndpointSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVpcEndpointsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointsForDomain, schemas.ListVpcEndpointsForDomainRequest, schemas.ListVpcEndpointsForDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVpcEndpointsForDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointsForDomain, schemas.ListVpcEndpointsForDomainRequest, schemas.ListVpcEndpointsForDomainResponse), output: &ListVpcEndpointsForDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVpcEndpointsForDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVpcEndpointsForDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListVpcEndpointsForDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVpcEndpointsForDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +136,8 @@ func (c *Client) addOperationListVpcEndpointsForDomainMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListVpcEndpointsForDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListVpcEndpointsForDomain",
-	}
 }

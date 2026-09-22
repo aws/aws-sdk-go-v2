@@ -5,10 +5,10 @@ package health
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/health/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of entities that have been affected by the specified events,
@@ -68,6 +68,29 @@ type DescribeAffectedEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAffectedEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAffectedEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAffectedEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.DescribeAffectedEntitiesRequest_filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.DescribeAffectedEntitiesRequest_locale, *v.Locale)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeAffectedEntitiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAffectedEntitiesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type DescribeAffectedEntitiesOutput struct {
 
 	// The entities that match the filter criteria.
@@ -86,77 +109,51 @@ type DescribeAffectedEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAffectedEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAffectedEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAffectedEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityList(s, schemas.DescribeAffectedEntitiesResponse_entities, v.Entities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeAffectedEntitiesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeAffectedEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAffectedEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAffectedEntitiesResponse_entities:
+			return deserializeEntityList(d, schemas.DescribeAffectedEntitiesResponse_entities, &v.Entities)
+		case schemas.DescribeAffectedEntitiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeAffectedEntitiesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAffectedEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAffectedEntities, schemas.DescribeAffectedEntitiesRequest, schemas.DescribeAffectedEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAffectedEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAffectedEntities, schemas.DescribeAffectedEntitiesRequest, schemas.DescribeAffectedEntitiesResponse), output: &DescribeAffectedEntitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAffectedEntities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAffectedEntities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAffectedEntitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAffectedEntities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +166,6 @@ func (c *Client) addOperationDescribeAffectedEntitiesMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +269,3 @@ type DescribeAffectedEntitiesAPIClient interface {
 }
 
 var _ DescribeAffectedEntitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeAffectedEntities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAffectedEntities",
-	}
-}

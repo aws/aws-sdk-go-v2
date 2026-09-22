@@ -123,6 +123,37 @@ type ActorSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A session affected by a detected failure pattern, including root cause details.
+type AffectedSession struct {
+
+	// An explanation of how the failure manifested in this session.
+	//
+	// This member is required.
+	Explanation *string
+
+	// The list of spans where failures were detected in this session.
+	//
+	// This member is required.
+	FailureSpans []FailureSpanDetail
+
+	// The type of fix recommended for this failure.
+	//
+	// This member is required.
+	FixType *string
+
+	// The specific fix recommendation for this session.
+	//
+	// This member is required.
+	Recommendation *string
+
+	// The unique identifier of the affected session.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
 //	The agent card definition for A2A descriptors, including the schema version
 //
 // and inline content that describes the agent's capabilities.
@@ -156,11 +187,22 @@ type AgentSkillsDescriptor struct {
 //
 // The following types satisfy this interface:
 //
+//	AgentTracesConfigMemberBatchEvaluation
 //	AgentTracesConfigMemberCloudwatchLogs
+//	AgentTracesConfigMemberOnlineEvaluation
 //	AgentTracesConfigMemberSessionSpans
 type AgentTracesConfig interface {
 	isAgentTracesConfig()
 }
+
+// Use a completed batch evaluation as the source of agent traces.
+type AgentTracesConfigMemberBatchEvaluation struct {
+	Value BatchEvaluationTraceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTracesConfigMemberBatchEvaluation) isAgentTracesConfig() {}
 
 // Agent traces read from CloudWatch Logs.
 type AgentTracesConfigMemberCloudwatchLogs struct {
@@ -170,6 +212,16 @@ type AgentTracesConfigMemberCloudwatchLogs struct {
 }
 
 func (*AgentTracesConfigMemberCloudwatchLogs) isAgentTracesConfig() {}
+
+// Agent traces from an online evaluation configuration over a specified time
+// range.
+type AgentTracesConfigMemberOnlineEvaluation struct {
+	Value OnlineEvaluationTraceConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*AgentTracesConfigMemberOnlineEvaluation) isAgentTracesConfig() {}
 
 // Agent traces provided as inline session spans in OpenTelemetry format.
 type AgentTracesConfigMemberSessionSpans struct {
@@ -301,8 +353,26 @@ type BatchEvaluationSummary struct {
 	// The list of evaluators applied during the batch evaluation.
 	Evaluators []Evaluator
 
+	// The list of insight analyses applied during the batch evaluation.
+	Insights []Insight
+
+	// The ARN of the KMS key used to encrypt evaluation data.
+	KmsKeyArn *string
+
 	// The timestamp when the batch evaluation was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for using a batch evaluation as the source of agent traces for
+// recommendations.
+type BatchEvaluationTraceConfig struct {
+
+	// The ARN of the completed batch evaluation to use as the trace source.
+	//
+	// This member is required.
+	BatchEvaluationArn *string
 
 	noSmithyDocumentSerde
 }
@@ -655,6 +725,11 @@ type CloudWatchFilterConfig struct {
 	// are included in the evaluation.
 	SessionIds []string
 
+	// A list of session and trace ID pairs that restrict evaluation to specific
+	// traces within a session. If specified, only the listed traces are evaluated
+	// instead of the entire session.
+	SessionTraceIds []SessionTraceIds
+
 	// The time range filter for selecting sessions to evaluate.
 	TimeRange *SessionFilterConfig
 
@@ -695,12 +770,6 @@ type CloudWatchLogsRule struct {
 // The configuration for reading agent traces from CloudWatch Logs.
 type CloudWatchLogsSource struct {
 
-	// The list of CloudWatch log group names to read agent traces from. Maximum of 5
-	// log groups.
-	//
-	// This member is required.
-	LogGroupNames []string
-
 	// The list of agent service names to filter traces within the specified log
 	// groups.
 	//
@@ -709,6 +778,16 @@ type CloudWatchLogsSource struct {
 
 	// Optional filter configuration to narrow down which sessions to evaluate.
 	FilterConfig *CloudWatchFilterConfig
+
+	// The list of CloudWatch log group name prefixes to read agent traces from.
+	// Specify this instead of logGroupNames to match log groups by prefix. Maximum of
+	// 5 prefixes. Specify either logGroupNames or logGroupNamePrefixes , not both. One
+	// of the two is required.
+	LogGroupNamePrefixes []string
+
+	// The list of CloudWatch log group names to read agent traces from. Maximum of 10
+	// log groups.
+	LogGroupNames []string
 
 	noSmithyDocumentSerde
 }
@@ -747,14 +826,28 @@ type CloudWatchLogsTraceConfig struct {
 type CloudWatchOutputConfig struct {
 
 	// The name of the CloudWatch log group where evaluation results will be written.
-	//
-	// This member is required.
+	// This value doesn't apply when resultDestination is SOURCE_LOG_GROUP , because
+	// results are written back to the trace source log group. The name can't be under
+	// the service-reserved /aws/bedrock-agentcore/evaluations/ namespace, apart from
+	// the service-managed default group.
 	LogGroupName *string
 
 	// The name of the CloudWatch log stream where evaluation results will be written.
-	//
-	// This member is required.
 	LogStreamName *string
+
+	// The CloudWatch metrics namespace where evaluation result metrics are published.
+	// If you omit this value, the service publishes metrics to
+	// Bedrock-AgentCore/Evaluations . This value can't begin with AWS/ .
+	MetricsNamespace *string
+
+	// The destination where evaluation results are written. Valid values:
+	//
+	//   - DEDICATED_LOG_GROUP (default) – Writes results to a dedicated result log
+	//   group.
+	//
+	//   - SOURCE_LOG_GROUP – Writes results back to the log group that the agent
+	//   traces were read from. If you use this value, don't specify logGroupName .
+	ResultDestination ResultDestination
 
 	noSmithyDocumentSerde
 }
@@ -1003,6 +1096,24 @@ type ContentDeltaEvent struct {
 	noSmithyDocumentSerde
 }
 
+// The source of the content to ingest. Only inline content is supported.
+//
+// The following types satisfy this interface:
+//
+//	ContentSourceMemberInline
+type ContentSource interface {
+	isContentSource()
+}
+
+// The content included directly in the request.
+type ContentSourceMemberInline struct {
+	Value InlineMemoryContent
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentSourceMemberInline) isContentSource() {}
+
 // An event that signals the start of content streaming from a command execution.
 // This event is sent when the command begins producing output.
 type ContentStartEvent struct {
@@ -1105,6 +1216,19 @@ type CryptoX402PaymentInput struct {
 	// This member is required.
 	Version *string
 
+	// The maximum on-chain Permit2 allowance to grant before signing the payment
+	// authorization, in the asset's smallest denomination. This field is valid only
+	// for the upto (metered) scheme; supplying it for the exact scheme returns a
+	// validation error.
+	//
+	// When set, the service approves an ERC-20 allowance for this amount before
+	// processing the payment. The approval sets, rather than adds to, the wallet's
+	// allowance. Set this field only when the wallet needs approving, for example on
+	// its first upto payment, to avoid a redundant on-chain transaction. Omit the
+	// field to skip allowance handling. This is the default, and the only behavior for
+	// the exact scheme.
+	Permit2AllowanceLimit *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1138,11 +1262,12 @@ type CustomDescriptor struct {
 // The following types satisfy this interface:
 //
 //	DataSourceConfigMemberCloudWatchLogs
+//	DataSourceConfigMemberOnlineEvaluationConfigSource
 type DataSourceConfig interface {
 	isDataSourceConfig()
 }
 
-// Pull session spans from CloudWatch
+// Configuration for pulling agent session traces from CloudWatch Logs.
 type DataSourceConfigMemberCloudWatchLogs struct {
 	Value CloudWatchLogsSource
 
@@ -1150,6 +1275,15 @@ type DataSourceConfigMemberCloudWatchLogs struct {
 }
 
 func (*DataSourceConfigMemberCloudWatchLogs) isDataSourceConfig() {}
+
+// Reference an existing OnlineEvaluationConfig as session source
+type DataSourceConfigMemberOnlineEvaluationConfigSource struct {
+	Value OnlineEvaluationConfigSource
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceConfigMemberOnlineEvaluationConfigSource) isDataSourceConfig() {}
 
 //	Contains the descriptor configuration for a registry record. Only the field
 //
@@ -1171,6 +1305,32 @@ type Descriptors struct {
 	//  The MCP (Model Context Protocol) descriptor configuration. Populated when the
 	// record's descriptorType is MCP .
 	Mcp *McpDescriptor
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for mounting an Amazon Elastic File System (Amazon EFS)
+// access point that you own into a session.
+type EfsConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Elastic File System (Amazon EFS)
+	// access point to mount.
+	//
+	// This member is required.
+	AccessPointArn *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Elastic File System (Amazon EFS)
+	// file system that owns the access point.
+	//
+	// This member is required.
+	FileSystemArn *string
+
+	// The absolute path within the session at which the access point is mounted, for
+	// example /mnt/efs . Each mount path must be unique across all file system
+	// configurations in the session.
+	//
+	// This member is required.
+	MountPath *string
 
 	noSmithyDocumentSerde
 }
@@ -1304,9 +1464,8 @@ func (*EvaluationMetadataMemberSessionMetadata) isEvaluationMetadata() {}
 // specific context level (session or trace) through its span context.
 type EvaluationReferenceInput struct {
 
-	//  The contextual information associated with an evaluation, including span
-	// context details that identify the specific traces and sessions being evaluated
-	// within the agent's execution flow.
+	//  The span context that identifies which session or trace this reference input
+	// applies to, used for correlating ground truth with agent output.
 	//
 	// This member is required.
 	Context Context
@@ -1441,7 +1600,7 @@ type EvaluationTargetMemberTraceIds struct {
 
 func (*EvaluationTargetMemberTraceIds) isEvaluationTarget() {}
 
-// An evaluator to run against sessions.
+// An evaluator to run against sessions during batch evaluation.
 type Evaluator struct {
 
 	// The unique identifier of the evaluator. Can reference built-in evaluators
@@ -1564,6 +1723,70 @@ type EventMetadataFilterExpression struct {
 	noSmithyDocumentSerde
 }
 
+// A session associated with an execution summary cluster.
+type ExecutionSummaryAffectedSession struct {
+
+	// The approach taken by the agent during this session.
+	//
+	// This member is required.
+	ApproachTaken *string
+
+	// The final outcome of the session.
+	//
+	// This member is required.
+	FinalOutcome *string
+
+	// The unique identifier of the session.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// A cluster of similar execution patterns identified across sessions.
+type ExecutionSummaryCluster struct {
+
+	// The number of sessions with this execution pattern.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The list of sessions with this execution pattern.
+	//
+	// This member is required.
+	AffectedSessions []ExecutionSummaryAffectedSession
+
+	// The unique identifier of the execution summary cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// A description of the execution pattern.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the execution pattern cluster.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The execution summary clustering result containing grouped execution patterns
+// identified across evaluated sessions.
+type ExecutionSummaryClusteringResultContent struct {
+
+	// The list of execution summary clusters identified across analyzed sessions.
+	//
+	// This member is required.
+	ExecutionSummaries []ExecutionSummaryCluster
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for a customer-managed external proxy server. Includes server
 // location, optional domain-based routing patterns, and authentication
 // credentials.
@@ -1590,6 +1813,19 @@ type ExternalProxy struct {
 	// acts as a catch-all for domains not matched by other proxies. Maximum 100
 	// patterns per proxy, each up to 253 characters.
 	DomainPatterns []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for extraction behavior. Use this structure to specify
+// namespace variable keys and their values for namespace substitution during
+// long-term memory extraction.
+type ExtractionConfig struct {
+
+	// A map of namespaceKeys to their values. The service substitutes these values
+	// into namespaceTemplates during long-term memory extraction to control namespace
+	// hierarchy.
+	NamespaceVariables map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -1677,6 +1913,102 @@ type ExtractionJobMetadata struct {
 	noSmithyDocumentSerde
 }
 
+// The failure analysis clustering result containing categorized failure clusters
+// with root causes and remediation recommendations.
+type FailureAnalysisResultContent struct {
+
+	// The list of failure category clusters identified across analyzed sessions.
+	//
+	// This member is required.
+	Failures []FailureCategoryCluster
+
+	noSmithyDocumentSerde
+}
+
+// A top-level failure category identified by clustering similar failure patterns
+// across sessions.
+type FailureCategoryCluster struct {
+
+	// The number of sessions affected by this failure category.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The unique identifier of the failure category cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// A description of the failure category pattern.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the failure category.
+	//
+	// This member is required.
+	Name *string
+
+	// The list of failure subcategories within this category.
+	//
+	// This member is required.
+	SubCategories []FailureSubCategoryCluster
+
+	noSmithyDocumentSerde
+}
+
+// Details about a specific span where a failure was detected.
+type FailureSpanDetail struct {
+
+	// The failure signals detected in this span.
+	//
+	// This member is required.
+	Signals []InsightsFailureSignal
+
+	// The unique identifier of the span where the failure occurred.
+	//
+	// This member is required.
+	SpanId *string
+
+	// The trace identifier associated with the failure span.
+	//
+	// This member is required.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// A subcategory of failures within a top-level failure category.
+type FailureSubCategoryCluster struct {
+
+	// The number of sessions affected by this failure subcategory.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The unique identifier of the failure subcategory cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// A description of the failure subcategory pattern.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the failure subcategory.
+	//
+	// This member is required.
+	Name *string
+
+	// The list of root cause clusters identified within this subcategory.
+	//
+	// This member is required.
+	RootCauses []RootCauseCluster
+
+	noSmithyDocumentSerde
+}
+
 // Contains filter criteria for listing events.
 type FilterInput struct {
 
@@ -1745,7 +2077,7 @@ type GroundTruthSource interface {
 	isGroundTruthSource()
 }
 
-// Provide ground truth inline
+// Inline ground truth data provided directly in the request.
 type GroundTruthSourceMemberInline struct {
 	Value InlineGroundTruth
 
@@ -1825,6 +2157,12 @@ type HarnessBedrockModelConfig struct {
 	// This member is required.
 	ModelId *string
 
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The API format to use when calling the Bedrock provider.
+	ApiFormat HarnessBedrockApiFormat
+
 	// The maximum number of tokens to allow in the generated response per iteration.
 	MaxTokens *int32
 
@@ -1892,6 +2230,7 @@ func (*HarnessContentBlockMemberToolUse) isHarnessContentBlock() {}
 //	HarnessContentBlockDeltaMemberReasoningContent
 //	HarnessContentBlockDeltaMemberText
 //	HarnessContentBlockDeltaMemberToolResult
+//	HarnessContentBlockDeltaMemberToolResultMetadata
 //	HarnessContentBlockDeltaMemberToolUse
 type HarnessContentBlockDelta interface {
 	isHarnessContentBlockDelta()
@@ -1923,6 +2262,15 @@ type HarnessContentBlockDeltaMemberToolResult struct {
 }
 
 func (*HarnessContentBlockDeltaMemberToolResult) isHarnessContentBlockDelta() {}
+
+// A tool result metadata delta.
+type HarnessContentBlockDeltaMemberToolResultMetadata struct {
+	Value HarnessToolResultMetadataBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessContentBlockDeltaMemberToolResultMetadata) isHarnessContentBlockDelta() {}
 
 // A tool use input delta.
 type HarnessContentBlockDeltaMemberToolUse struct {
@@ -2056,6 +2404,10 @@ type HarnessGeminiModelConfig struct {
 	// This member is required.
 	ModelId *string
 
+	// Provider-specific parameters passed through to the Gemini model provider
+	// unchanged.
+	AdditionalParams document.Interface
+
 	// The maximum number of tokens to allow in the generated response per iteration.
 	MaxTokens *int32
 
@@ -2067,6 +2419,35 @@ type HarnessGeminiModelConfig struct {
 
 	// The topP set when calling the model.
 	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// A lifecycle hook event emitted in the invocation stream for visibility into
+// hook decisions.
+type HarnessHookEvent struct {
+
+	// The unique identifier for this hook event.
+	//
+	// This member is required.
+	HookEventId *string
+
+	// The name of the hook that ran.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of lifecycle hook event.
+	//
+	// This member is required.
+	Type HarnessHookEventType
+
+	// The decision applied to the hook event. This field is present only for blocking
+	// Lambda targets.
+	Decision HarnessHookDecision
+
+	// The optional reason for the applied decision.
+	Reason *string
 
 	noSmithyDocumentSerde
 }
@@ -2084,6 +2465,37 @@ type HarnessInlineFunctionConfig struct {
 	//
 	// This member is required.
 	InputSchema document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for a LiteLLM model provider, enabling connection to third-party
+// model providers.
+type HarnessLiteLlmModelConfig struct {
+
+	// The LiteLLM model identifier (e.g., "anthropic/claude-3-sonnet").
+	//
+	// This member is required.
+	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The base URL for the model provider's API endpoint.
+	ApiBase *string
+
+	// The ARN of the API key in AgentCore Identity for authenticating with the model
+	// provider.
+	ApiKeyArn *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topP set when calling the model.
+	TopP *float32
 
 	noSmithyDocumentSerde
 }
@@ -2148,6 +2560,7 @@ type HarnessMetadataEvent struct {
 //
 //	HarnessModelConfigurationMemberBedrockModelConfig
 //	HarnessModelConfigurationMemberGeminiModelConfig
+//	HarnessModelConfigurationMemberLiteLlmModelConfig
 //	HarnessModelConfigurationMemberOpenAiModelConfig
 type HarnessModelConfiguration interface {
 	isHarnessModelConfiguration()
@@ -2171,6 +2584,15 @@ type HarnessModelConfigurationMemberGeminiModelConfig struct {
 
 func (*HarnessModelConfigurationMemberGeminiModelConfig) isHarnessModelConfiguration() {}
 
+// The LiteLLM model configuration for connecting to third-party model providers.
+type HarnessModelConfigurationMemberLiteLlmModelConfig struct {
+	Value HarnessLiteLlmModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberLiteLlmModelConfig) isHarnessModelConfiguration() {}
+
 // Configuration for an OpenAI model.
 type HarnessModelConfigurationMemberOpenAiModelConfig struct {
 	Value HarnessOpenAiModelConfig
@@ -2193,6 +2615,15 @@ type HarnessOpenAiModelConfig struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// Optional custom endpoint URL for an OpenAI-compatible endpoint.
+	ApiBase *string
+
+	// The API format to use when calling the OpenAI provider.
+	ApiFormat HarnessOpenAiApiFormat
 
 	// The maximum number of tokens to allow in the generated response per iteration.
 	MaxTokens *int32
@@ -2305,10 +2736,31 @@ type HarnessRemoteMcpConfig struct {
 //
 // The following types satisfy this interface:
 //
+//	HarnessSkillMemberAwsSkills
+//	HarnessSkillMemberGit
 //	HarnessSkillMemberPath
+//	HarnessSkillMemberS3
 type HarnessSkill interface {
 	isHarnessSkill()
 }
+
+// AWS Skills baked into the Harness's underlying Runtime.
+type HarnessSkillMemberAwsSkills struct {
+	Value HarnessSkillAwsSkillsSource
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberAwsSkills) isHarnessSkill() {}
+
+// A git repository containing the skill.
+type HarnessSkillMemberGit struct {
+	Value HarnessSkillGitSource
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberGit) isHarnessSkill() {}
 
 // The filesystem path to the skill definition.
 type HarnessSkillMemberPath struct {
@@ -2318,6 +2770,67 @@ type HarnessSkillMemberPath struct {
 }
 
 func (*HarnessSkillMemberPath) isHarnessSkill() {}
+
+// An S3 source containing the skill.
+type HarnessSkillMemberS3 struct {
+	Value HarnessSkillS3Source
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberS3) isHarnessSkill() {}
+
+// Passed to show that AWS Skills should be included.
+type HarnessSkillAwsSkillsSource struct {
+
+	// Optionally filter allowed skills with glob syntax, e.g., ['core-skills/*'].
+	Paths []string
+
+	noSmithyDocumentSerde
+}
+
+// Authentication configuration for accessing a private git repository.
+type HarnessSkillGitAuth struct {
+
+	// The ARN of the credential in AgentCore Identity containing the password or
+	// personal access token.
+	//
+	// This member is required.
+	CredentialArn *string
+
+	// Username for authentication. Defaults to 'oauth2' if not specified.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// A git repository source for a skill.
+type HarnessSkillGitSource struct {
+
+	// The HTTPS URL of the git repository.
+	//
+	// This member is required.
+	Url *string
+
+	// Authentication configuration for private repositories.
+	Auth *HarnessSkillGitAuth
+
+	// Subdirectory within the repository containing the skill.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// An S3 source for a skill.
+type HarnessSkillS3Source struct {
+
+	// The S3 URI pointing to the skill directory (e.g., s3://bucket/skills/my-skill/).
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
 
 // Latency metrics for the invocation.
 type HarnessStreamMetrics struct {
@@ -2542,6 +3055,17 @@ type HarnessToolResultContentBlockMemberText struct {
 
 func (*HarnessToolResultContentBlockMemberText) isHarnessToolResultContentBlock() {}
 
+// Delta payload for a tool result metadata.
+type HarnessToolResultMetadataBlockDelta struct {
+
+	// The partial JSON-string fragment of the tool result metadata.
+	//
+	// This member is required.
+	Metadata *string
+
+	noSmithyDocumentSerde
+}
+
 // A tool use request from the model.
 type HarnessToolUseBlock struct {
 
@@ -2602,6 +3126,35 @@ type HarnessToolUseBlockStart struct {
 	noSmithyDocumentSerde
 }
 
+// A single content payload item to ingest. A payload item contains either
+// conversational or JSON content.
+//
+// The following types satisfy this interface:
+//
+//	IngestPayloadTypeMemberConversational
+//	IngestPayloadTypeMemberJson
+type IngestPayloadType interface {
+	isIngestPayloadType()
+}
+
+// The conversational content for this payload item.
+type IngestPayloadTypeMemberConversational struct {
+	Value Conversational
+
+	noSmithyDocumentSerde
+}
+
+func (*IngestPayloadTypeMemberConversational) isIngestPayloadType() {}
+
+// The JSON content for this payload item.
+type IngestPayloadTypeMemberJson struct {
+	Value MemoryJsonData
+
+	noSmithyDocumentSerde
+}
+
+func (*IngestPayloadTypeMemberJson) isIngestPayloadType() {}
+
 // Inline ground truth data containing assertions, expected trajectories, and
 // per-turn expected responses.
 type InlineGroundTruth struct {
@@ -2609,13 +3162,23 @@ type InlineGroundTruth struct {
 	// Assertions for evaluation, reuses common model EvaluationContentList.
 	Assertions []EvaluationContent
 
-	// expectedTrajectory for evaluation, reuses common model
-	// EvaluationExpectedTrajectory
+	// The expected tool call sequence for trajectory evaluation.
 	ExpectedTrajectory *EvaluationExpectedTrajectory
 
 	// A list of per-turn ground truth data, each containing an input prompt and
 	// expected response.
 	Turns []GroundTruthTurn
+
+	noSmithyDocumentSerde
+}
+
+// The content included directly in the request as one or more payload items.
+type InlineMemoryContent struct {
+
+	// The list of content payload items to ingest.
+	//
+	// This member is required.
+	Payload []IngestPayloadType
 
 	noSmithyDocumentSerde
 }
@@ -2633,6 +3196,41 @@ type InputContentBlock struct {
 
 	// The text input content.
 	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// A reference to an insight analysis to run against sessions during batch
+// evaluation. Insights provide deeper analysis beyond individual evaluator scores,
+// including failure detection, user intent clustering, and execution
+// summarization.
+type Insight struct {
+
+	// The unique identifier of the insight to run.
+	//
+	// This member is required.
+	InsightId *string
+
+	noSmithyDocumentSerde
+}
+
+// A signal indicating a detected failure within a span.
+type InsightsFailureSignal struct {
+
+	// The failure category classification for this signal.
+	//
+	// This member is required.
+	Category InsightsFailureCategory
+
+	// The confidence score of the failure detection.
+	//
+	// This member is required.
+	Confidence *float64
+
+	// The evidence supporting the failure detection.
+	//
+	// This member is required.
+	Evidence *string
 
 	noSmithyDocumentSerde
 }
@@ -2683,6 +3281,7 @@ func (*InvokeAgentRuntimeCommandStreamOutputMemberChunk) isInvokeAgentRuntimeCom
 //	InvokeHarnessStreamOutputMemberContentBlockDelta
 //	InvokeHarnessStreamOutputMemberContentBlockStart
 //	InvokeHarnessStreamOutputMemberContentBlockStop
+//	InvokeHarnessStreamOutputMemberHookEvent
 //	InvokeHarnessStreamOutputMemberMessageStart
 //	InvokeHarnessStreamOutputMemberMessageStop
 //	InvokeHarnessStreamOutputMemberMetadata
@@ -2716,6 +3315,15 @@ type InvokeHarnessStreamOutputMemberContentBlockStop struct {
 }
 
 func (*InvokeHarnessStreamOutputMemberContentBlockStop) isInvokeHarnessStreamOutput() {}
+
+// A lifecycle hook event emitted when a configured hook runs.
+type InvokeHarnessStreamOutputMemberHookEvent struct {
+	Value HarnessHookEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*InvokeHarnessStreamOutputMemberHookEvent) isInvokeHarnessStreamOutput() {}
 
 // Indicates the start of a new message from the agent.
 type InvokeHarnessStreamOutputMemberMessageStart struct {
@@ -3037,6 +3645,19 @@ type MemoryContentMemberText struct {
 
 func (*MemoryContentMemberText) isMemoryContent() {}
 
+// Contains non-conversational, JSON-formatted content for an event payload. JSON
+// payloads are extracted into long-term memory.
+type MemoryJsonData struct {
+
+	// The JSON content of the payload. Accepts any JSON value, including objects,
+	// arrays, strings, numbers, booleans, and null. The maximum size is 100 KB.
+	//
+	// This member is required.
+	Content document.Interface
+
+	noSmithyDocumentSerde
+}
+
 // Filters to apply to metadata associated with a memory. Specify the metadata key
 // and value in the left and right fields and use the operator field to define the
 // relationship to match.
@@ -3134,6 +3755,10 @@ type MemoryRecordDeleteInput struct {
 	//
 	// This member is required.
 	MemoryRecordId *string
+
+	// The namespace of the memory record being deleted. This value is used for IAM
+	// condition key authorization.
+	Namespace *string
 
 	noSmithyDocumentSerde
 }
@@ -3311,6 +3936,10 @@ type MemoryRecordUpdateInput struct {
 
 	// The updated list of namespace identifiers for categorizing the memory record.
 	Namespaces []string
+
+	// The namespaces of the source memory record being updated. This value is used
+	// for IAM condition key authorization.
+	SourceNamespaces []string
 
 	noSmithyDocumentSerde
 }
@@ -3495,6 +4124,63 @@ type MouseScrollResult struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the payment challenge from a 402 Payment Required response. Forward
+// the raw WWW-Authenticate: Payment header value verbatim. In response, you
+// receive a payment credential that satisfies the challenge. Provide exactly one
+// challenge per request.
+type MppPaymentInput struct {
+
+	// The MPP protocol version, for example "1" or "2".
+	//
+	// This member is required.
+	Version *string
+
+	// The raw WWW-Authenticate: Payment header value from the 402 response, passed
+	// verbatim. Provide exactly one entry. The service uses this value to generate the
+	// payment credential.
+	//
+	// This member is required.
+	WwwAuthenticateHeaders []string
+
+	// Authorizes the service to sign a payment whose blockchain network (gas) fees
+	// are charged to your wallet, on top of the payment amount.
+	//
+	// The challenge indicates who sponsors the network fees. When the challenge does
+	// not sponsor them, the service signs the payment only if this field is true .
+	// Otherwise it returns a validation error, so you can decide whether to pay the
+	// fees or obtain a challenge that sponsors them.
+	//
+	// Optional. When omitted or false , you decline to pay network fees. This field
+	// has no effect on challenges that already sponsor the fees.
+	BuyerPaysGasFees *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains the payment credential, ready to retry the request.
+type MppPaymentOutput struct {
+
+	// Ready-to-send value for the Authorization header, in the form "Payment
+	// <base64url-token>". Attach this header and retry the original request. To
+	// inspect the full credential, base64url-decode the token.
+	//
+	// This member is required.
+	PaymentCredential *string
+
+	// The id of the challenge that was paid, echoed from the input challenge so you
+	// can correlate the result without decoding the credential.
+	//
+	// This member is required.
+	SelectedPaymentId *string
+
+	// The MPP protocol version, for example "1" or "2".
+	//
+	// This member is required.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // OAuth2 authentication information for third-party providers.
 type OAuth2Authentication struct {
 
@@ -3542,6 +4228,49 @@ type OAuthCredentialProvider struct {
 	noSmithyDocumentSerde
 }
 
+// A reference to an existing online evaluation configuration to use as the data
+// source for batch evaluation.
+type OnlineEvaluationConfigSource struct {
+
+	// The Amazon Resource Name (ARN) of the online evaluation configuration to use as
+	// the session source.
+	//
+	// This member is required.
+	OnlineEvaluationConfigArn *string
+
+	// Optional session filter configuration to narrow down which sessions from the
+	// online evaluation configuration to include.
+	TimeRange *SessionFilterConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration for reusing agent traces from an online evaluation
+// configuration for recommendation analysis. Because online evaluation is a
+// continuous stream, a time range specifies which evaluated sessions the
+// recommendation includes.
+type OnlineEvaluationTraceConfig struct {
+
+	// The end time of the time range. Only sessions evaluated before this timestamp
+	// are included.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The ARN of the online evaluation configuration to reuse sessions from.
+	//
+	// This member is required.
+	OnlineEvaluationConfigArn *string
+
+	// The start time of the time range. Only sessions evaluated at or after this
+	// timestamp are included.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Output destination configuration.
 //
 // The following types satisfy this interface:
@@ -3566,6 +4295,7 @@ func (*OutputConfigMemberCloudWatchConfig) isOutputConfig() {}
 //
 //	PayloadTypeMemberBlob
 //	PayloadTypeMemberConversational
+//	PayloadTypeMemberJson
 type PayloadType interface {
 	isPayloadType()
 }
@@ -3588,11 +4318,22 @@ type PayloadTypeMemberConversational struct {
 
 func (*PayloadTypeMemberConversational) isPayloadType() {}
 
+// The JSON content of the payload. Use this type to store non-conversational,
+// JSON-formatted data, such as behavioral events, activity logs, or system events.
+type PayloadTypeMemberJson struct {
+	Value MemoryJsonData
+
+	noSmithyDocumentSerde
+}
+
+func (*PayloadTypeMemberJson) isPayloadType() {}
+
 // The payment input details, which vary by payment type.
 //
 // The following types satisfy this interface:
 //
 //	PaymentInputMemberCryptoX402
+//	PaymentInputMemberMpp
 type PaymentInput interface {
 	isPaymentInput()
 }
@@ -3605,6 +4346,18 @@ type PaymentInputMemberCryptoX402 struct {
 }
 
 func (*PaymentInputMemberCryptoX402) isPaymentInput() {}
+
+// Contains the payment challenge from a 402 Payment Required response. Forward
+// the raw WWW-Authenticate: Payment header value verbatim. In response, you
+// receive a payment credential that satisfies the challenge. Provide exactly one
+// challenge per request.
+type PaymentInputMemberMpp struct {
+	Value MppPaymentInput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentInputMemberMpp) isPaymentInput() {}
 
 // Represents a payment instrument.
 type PaymentInstrument struct {
@@ -3726,6 +4479,7 @@ type PaymentInstrumentSummary struct {
 // The following types satisfy this interface:
 //
 //	PaymentOutputMemberCryptoX402
+//	PaymentOutputMemberMpp
 type PaymentOutput interface {
 	isPaymentOutput()
 }
@@ -3738,6 +4492,15 @@ type PaymentOutputMemberCryptoX402 struct {
 }
 
 func (*PaymentOutputMemberCryptoX402) isPaymentOutput() {}
+
+// Contains the payment credential, ready to retry the request.
+type PaymentOutputMemberMpp struct {
+	Value MppPaymentOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*PaymentOutputMemberMpp) isPaymentOutput() {}
 
 // A payment session for managing payment transactions.
 type PaymentSession struct {
@@ -4241,6 +5004,68 @@ type RightExpressionMemberMetadataValue struct {
 
 func (*RightExpressionMemberMetadataValue) isRightExpression() {}
 
+// A cluster of similar root causes identified within a failure subcategory.
+type RootCauseCluster struct {
+
+	// The number of sessions affected by this root cause.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The list of sessions affected by this root cause.
+	//
+	// This member is required.
+	AffectedSessions []AffectedSession
+
+	// The unique identifier of the root cause cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// The name of the root cause cluster.
+	//
+	// This member is required.
+	Name *string
+
+	// The recommended fix for this root cause.
+	//
+	// This member is required.
+	Recommendation *string
+
+	// The root cause explanation for this cluster of failures.
+	//
+	// This member is required.
+	RootCause *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for mounting an Amazon Simple Storage Service (Amazon S3)
+// Files access point that you own into a session.
+type S3FilesConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Simple Storage Service (Amazon S3)
+	// Files access point to mount.
+	//
+	// This member is required.
+	AccessPointArn *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Simple Storage Service (Amazon S3)
+	// Files file system that owns the access point.
+	//
+	// This member is required.
+	FileSystemArn *string
+
+	// The absolute path within the session at which the access point is mounted, for
+	// example /mnt/s3data . Each mount path must be unique across all file system
+	// configurations in the session.
+	//
+	// This member is required.
+	MountPath *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon S3 location configuration of a resource.
 type S3Location struct {
 
@@ -4414,6 +5239,23 @@ type SessionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A pairing of a session with the specific trace IDs to evaluate within that
+// session. Use this to evaluate individual traces rather than an entire session.
+type SessionTraceIds struct {
+
+	// The unique identifier of the session that contains the traces to evaluate.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The list of trace IDs within the session to evaluate.
+	//
+	// This member is required.
+	TraceIds []string
+
+	noSmithyDocumentSerde
+}
+
 // The structured skill definition with a schema version and inline content.
 type SkillDefinition struct {
 
@@ -4583,16 +5425,14 @@ type SystemPromptRecommendationConfig struct {
 	// This member is required.
 	AgentTraces AgentTracesConfig
 
-	// The evaluation configuration specifying which evaluator to use for assessing
-	// recommendation quality.
-	//
-	// This member is required.
-	EvaluationConfig *RecommendationEvaluationConfig
-
 	// The current system prompt to optimize.
 	//
 	// This member is required.
 	SystemPrompt SystemPromptConfig
+
+	// The evaluation configuration specifying which evaluator to use for assessing
+	// recommendation quality.
+	EvaluationConfig *RecommendationEvaluationConfig
 
 	noSmithyDocumentSerde
 }
@@ -4609,6 +5449,10 @@ type SystemPromptRecommendationResult struct {
 
 	// The error message if the recommendation failed.
 	ErrorMessage *string
+
+	// An explanation of why the recommendation was generated and what patterns were
+	// identified in the agent traces.
+	Explanation *string
 
 	// The optimized system prompt text generated by the recommendation.
 	RecommendedSystemPrompt *string
@@ -4790,6 +5634,10 @@ type ToolDescriptionOutput struct {
 	// This member is required.
 	ToolName *string
 
+	// An explanation of why the recommendation was generated for this tool and what
+	// patterns were identified in the agent traces.
+	Explanation *string
+
 	// The optimized tool description text generated by the recommendation.
 	RecommendedToolDescription *string
 
@@ -4914,6 +5762,43 @@ type ToolsDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies a file system to mount into the session by providing exactly one of
+// the following:
+//
+//   - s3FilesConfiguration - Mounts an Amazon Simple Storage Service (Amazon S3)
+//     Files access point.
+//
+//   - efsConfiguration - Mounts an Amazon Elastic File System (Amazon EFS) access
+//     point.
+//
+// The following types satisfy this interface:
+//
+//	ToolsFileSystemConfigurationMemberEfsConfiguration
+//	ToolsFileSystemConfigurationMemberS3FilesConfiguration
+type ToolsFileSystemConfiguration interface {
+	isToolsFileSystemConfiguration()
+}
+
+// The configuration for mounting your own Amazon Elastic File System (Amazon EFS)
+// access point into the session.
+type ToolsFileSystemConfigurationMemberEfsConfiguration struct {
+	Value EfsConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolsFileSystemConfigurationMemberEfsConfiguration) isToolsFileSystemConfiguration() {}
+
+// The configuration for mounting your own Amazon Simple Storage Service (Amazon
+// S3) Files access point into the session.
+type ToolsFileSystemConfigurationMemberS3FilesConfiguration struct {
+	Value S3FilesConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolsFileSystemConfigurationMemberS3FilesConfiguration) isToolsFileSystemConfiguration() {}
+
 // The OAuth2.0 token or user ID that was used to generate the workload access
 // token used for initiating the user authorization flow to retrieve OAuth2.0
 // tokens.
@@ -4944,6 +5829,65 @@ type UserIdentifierMemberUserToken struct {
 }
 
 func (*UserIdentifierMemberUserToken) isUserIdentifier() {}
+
+// A session associated with a user intent cluster.
+type UserIntentAffectedSession struct {
+
+	// The unique identifier of the session.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The user messages from this session that contributed to the intent cluster.
+	//
+	// This member is required.
+	UserMessages []string
+
+	noSmithyDocumentSerde
+}
+
+// A cluster of similar user intents identified across sessions.
+type UserIntentCluster struct {
+
+	// The number of sessions with this user intent.
+	//
+	// This member is required.
+	AffectedSessionCount *int32
+
+	// The list of sessions with this user intent.
+	//
+	// This member is required.
+	AffectedSessions []UserIntentAffectedSession
+
+	// The unique identifier of the user intent cluster.
+	//
+	// This member is required.
+	ClusterId *int32
+
+	// A description of the user intent pattern.
+	//
+	// This member is required.
+	Description *string
+
+	// The name of the user intent cluster.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The user intent clustering result containing grouped user intents identified
+// across evaluated sessions.
+type UserIntentClusteringResultContent struct {
+
+	// The list of user intent clusters identified across analyzed sessions.
+	//
+	// This member is required.
+	UserIntents []UserIntentCluster
+
+	noSmithyDocumentSerde
+}
 
 // Stores information about a field passed inside a request that resulted in an
 // exception.
@@ -5079,6 +6023,7 @@ func (*UnknownUnionMember) isBrowserActionResult()                   {}
 func (*UnknownUnionMember) isCertificateLocation()                   {}
 func (*UnknownUnionMember) isCodeInterpreterStreamOutput()           {}
 func (*UnknownUnionMember) isContent()                               {}
+func (*UnknownUnionMember) isContentSource()                         {}
 func (*UnknownUnionMember) isContext()                               {}
 func (*UnknownUnionMember) isDataSourceConfig()                      {}
 func (*UnknownUnionMember) isEvaluationContent()                     {}
@@ -5101,6 +6046,7 @@ func (*UnknownUnionMember) isHarnessSystemContentBlock()             {}
 func (*UnknownUnionMember) isHarnessToolConfiguration()              {}
 func (*UnknownUnionMember) isHarnessToolResultBlockDelta()           {}
 func (*UnknownUnionMember) isHarnessToolResultContentBlock()         {}
+func (*UnknownUnionMember) isIngestPayloadType()                     {}
 func (*UnknownUnionMember) isInvokeAgentRuntimeCommandStreamOutput() {}
 func (*UnknownUnionMember) isInvokeHarnessStreamOutput()             {}
 func (*UnknownUnionMember) isLeftExpression()                        {}
@@ -5128,4 +6074,5 @@ func (*UnknownUnionMember) isStreamUpdate()                          {}
 func (*UnknownUnionMember) isSystemPromptConfig()                    {}
 func (*UnknownUnionMember) isToolDescriptionConfig()                 {}
 func (*UnknownUnionMember) isToolDescriptionSource()                 {}
+func (*UnknownUnionMember) isToolsFileSystemConfiguration()          {}
 func (*UnknownUnionMember) isUserIdentifier()                        {}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"jobs":[{"completedAt":946684800,"createdAt":946684800,"isConcurrent":true,"jobArn":"__JobArn__","jobId":"__JobId__","lastUpdatedAt":946684800,"status":"IN_PROGRESS","targetSelection":"CONTINUOUS","thingGroupId":"__ThingGroupId__"},{"completedAt":946684800,"createdAt":946684800,"isConcurrent":true,"jobArn":"__JobArn__","jobId":"__JobId__","lastUpdatedAt":946684800,"status":"IN_PROGRESS","targetSelection":"CONTINUOUS","thingGroupId":"__ThingGroupId__"}],"nextToken":"__NextToken__"}

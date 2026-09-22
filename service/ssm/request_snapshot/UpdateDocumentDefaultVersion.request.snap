@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.UpdateDocumentDefaultVersion
+
+{"DocumentVersion":"__DocumentVersion__","Name":"__Name__"}

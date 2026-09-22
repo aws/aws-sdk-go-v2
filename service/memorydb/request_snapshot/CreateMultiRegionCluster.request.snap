@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.CreateMultiRegionCluster
+
+{"Description":"__Description__","Engine":"__Engine__","EngineVersion":"__EngineVersion__","MultiRegionClusterNameSuffix":"__MultiRegionClusterNameSuffix__","MultiRegionParameterGroupName":"__MultiRegionParameterGroupName__","NodeType":"__NodeType__","NumShards":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TLSEnabled":true}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","TaskTemplates":[{"Arn":"__Arn__","CreatedTime":946684800,"Description":"__Description__","Id":"__Id__","LastModifiedTime":946684800,"Name":"__Name__","Status":"ACTIVE"},{"Arn":"__Arn__","CreatedTime":946684800,"Description":"__Description__","Id":"__Id__","LastModifiedTime":946684800,"Name":"__Name__","Status":"ACTIVE"}]}

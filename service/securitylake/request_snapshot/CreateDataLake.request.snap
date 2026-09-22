@@ -1,0 +1,5 @@
+POST /v1/datalake
+
+Content-Type: application/json
+
+{"configurations":[{"encryptionConfiguration":{"kmsKeyId":"__KmsKeyId__"},"lifecycleConfiguration":{"expiration":{"days":1},"transitions":[{"days":1,"storageClass":"__StorageClass__"},{"days":1,"storageClass":"__StorageClass__"}]},"region":"__Region__","replicationConfiguration":{"regions":["__Member__","__Member__"],"roleArn":"__RoleArn__"}},{"encryptionConfiguration":{"kmsKeyId":"__KmsKeyId__"},"lifecycleConfiguration":{"expiration":{"days":1},"transitions":[{"days":1,"storageClass":"__StorageClass__"},{"days":1,"storageClass":"__StorageClass__"}]},"region":"__Region__","replicationConfiguration":{"regions":["__Member__","__Member__"],"roleArn":"__RoleArn__"}}],"metaStoreManagerRoleArn":"__MetaStoreManagerRoleArn__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

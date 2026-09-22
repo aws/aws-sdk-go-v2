@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/dax/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -91,6 +93,143 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Cluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Cluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveNodes != nil {
+		s.WriteInt32(schemas.Cluster_ActiveNodes, *v.ActiveNodes)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.Cluster_ClusterArn, *v.ClusterArn)
+	}
+	if v.ClusterDiscoveryEndpoint != nil {
+		s.WriteStruct(schemas.Cluster_ClusterDiscoveryEndpoint)
+		v.ClusterDiscoveryEndpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterEndpointEncryptionType != "" {
+		s.WriteString(schemas.Cluster_ClusterEndpointEncryptionType, string(v.ClusterEndpointEncryptionType))
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.Cluster_ClusterName, *v.ClusterName)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Cluster_Description, *v.Description)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.Cluster_IamRoleArn, *v.IamRoleArn)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.Cluster_NetworkType, string(v.NetworkType))
+	}
+	serializeNodeIdentifierList(s, schemas.Cluster_NodeIdsToRemove, v.NodeIdsToRemove)
+	if v.NodeType != nil {
+		s.WriteString(schemas.Cluster_NodeType, *v.NodeType)
+	}
+	serializeNodeList(s, schemas.Cluster_Nodes, v.Nodes)
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.Cluster_NotificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParameterGroup != nil {
+		s.WriteStruct(schemas.Cluster_ParameterGroup)
+		v.ParameterGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.Cluster_PreferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.SSEDescription != nil {
+		s.WriteStruct(schemas.Cluster_SSEDescription)
+		v.SSEDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSecurityGroupMembershipList(s, schemas.Cluster_SecurityGroups, v.SecurityGroups)
+	if v.Status != nil {
+		s.WriteString(schemas.Cluster_Status, *v.Status)
+	}
+	if v.SubnetGroup != nil {
+		s.WriteString(schemas.Cluster_SubnetGroup, *v.SubnetGroup)
+	}
+	if v.TotalNodes != nil {
+		s.WriteInt32(schemas.Cluster_TotalNodes, *v.TotalNodes)
+	}
+}
+func (v *Cluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Cluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Cluster_ActiveNodes:
+			v.ActiveNodes = new(int32)
+			return d.ReadInt32(schemas.Cluster_ActiveNodes, v.ActiveNodes)
+		case schemas.Cluster_ClusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.Cluster_ClusterArn, v.ClusterArn)
+		case schemas.Cluster_ClusterDiscoveryEndpoint:
+			v.ClusterDiscoveryEndpoint = &Endpoint{}
+			return v.ClusterDiscoveryEndpoint.Deserialize(d)
+		case schemas.Cluster_ClusterEndpointEncryptionType:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_ClusterEndpointEncryptionType, &ev); err != nil {
+				return err
+			}
+			v.ClusterEndpointEncryptionType = ClusterEndpointEncryptionType(ev)
+			return nil
+		case schemas.Cluster_ClusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.Cluster_ClusterName, v.ClusterName)
+		case schemas.Cluster_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Cluster_Description, v.Description)
+		case schemas.Cluster_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.Cluster_IamRoleArn, v.IamRoleArn)
+		case schemas.Cluster_NetworkType:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_NetworkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = NetworkType(ev)
+			return nil
+		case schemas.Cluster_NodeIdsToRemove:
+			return deserializeNodeIdentifierList(d, schemas.Cluster_NodeIdsToRemove, &v.NodeIdsToRemove)
+		case schemas.Cluster_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.Cluster_NodeType, v.NodeType)
+		case schemas.Cluster_Nodes:
+			return deserializeNodeList(d, schemas.Cluster_Nodes, &v.Nodes)
+		case schemas.Cluster_NotificationConfiguration:
+			v.NotificationConfiguration = &NotificationConfiguration{}
+			return v.NotificationConfiguration.Deserialize(d)
+		case schemas.Cluster_ParameterGroup:
+			v.ParameterGroup = &ParameterGroupStatus{}
+			return v.ParameterGroup.Deserialize(d)
+		case schemas.Cluster_PreferredMaintenanceWindow:
+			v.PreferredMaintenanceWindow = new(string)
+			return d.ReadString(schemas.Cluster_PreferredMaintenanceWindow, v.PreferredMaintenanceWindow)
+		case schemas.Cluster_SSEDescription:
+			v.SSEDescription = &SSEDescription{}
+			return v.SSEDescription.Deserialize(d)
+		case schemas.Cluster_SecurityGroups:
+			return deserializeSecurityGroupMembershipList(d, schemas.Cluster_SecurityGroups, &v.SecurityGroups)
+		case schemas.Cluster_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.Cluster_Status, v.Status)
+		case schemas.Cluster_SubnetGroup:
+			v.SubnetGroup = new(string)
+			return d.ReadString(schemas.Cluster_SubnetGroup, v.SubnetGroup)
+		case schemas.Cluster_TotalNodes:
+			v.TotalNodes = new(int32)
+			return d.ReadInt32(schemas.Cluster_TotalNodes, v.TotalNodes)
+		}
+		return nil
+	})
+}
+
 // Represents the information required for client programs to connect to the
 // endpoint for a DAX cluster.
 type Endpoint struct {
@@ -106,6 +245,39 @@ type Endpoint struct {
 	URL *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Endpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.Endpoint_Address, *v.Address)
+	}
+	if v.Port != 0 {
+		s.WriteInt32(schemas.Endpoint_Port, v.Port)
+	}
+	if v.URL != nil {
+		s.WriteString(schemas.Endpoint_URL, *v.URL)
+	}
+}
+func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Endpoint_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.Endpoint_Address, v.Address)
+		case schemas.Endpoint_Port:
+			return d.ReadInt32(schemas.Endpoint_Port, &v.Port)
+		case schemas.Endpoint_URL:
+			v.URL = new(string)
+			return d.ReadString(schemas.Endpoint_URL, v.URL)
+		}
+		return nil
+	})
 }
 
 // Represents a single occurrence of something interesting within the system. Some
@@ -128,6 +300,50 @@ type Event struct {
 	SourceType SourceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Event) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Event)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Event) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Date != nil {
+		s.WriteTime(schemas.Event_Date, *v.Date)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.Event_Message, *v.Message)
+	}
+	if v.SourceName != nil {
+		s.WriteString(schemas.Event_SourceName, *v.SourceName)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.Event_SourceType, string(v.SourceType))
+	}
+}
+func (v *Event) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Event, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Event_Date:
+			v.Date = new(time.Time)
+			return d.ReadTime(schemas.Event_Date, v.Date)
+		case schemas.Event_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.Event_Message, v.Message)
+		case schemas.Event_SourceName:
+			v.SourceName = new(string)
+			return d.ReadString(schemas.Event_SourceName, v.SourceName)
+		case schemas.Event_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.Event_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = SourceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents an individual node within a DAX cluster.
@@ -158,6 +374,60 @@ type Node struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Node) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Node)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Node) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.Node_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.Endpoint != nil {
+		s.WriteStruct(schemas.Node_Endpoint)
+		v.Endpoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NodeCreateTime != nil {
+		s.WriteTime(schemas.Node_NodeCreateTime, *v.NodeCreateTime)
+	}
+	if v.NodeId != nil {
+		s.WriteString(schemas.Node_NodeId, *v.NodeId)
+	}
+	if v.NodeStatus != nil {
+		s.WriteString(schemas.Node_NodeStatus, *v.NodeStatus)
+	}
+	if v.ParameterGroupStatus != nil {
+		s.WriteString(schemas.Node_ParameterGroupStatus, *v.ParameterGroupStatus)
+	}
+}
+func (v *Node) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Node, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Node_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.Node_AvailabilityZone, v.AvailabilityZone)
+		case schemas.Node_Endpoint:
+			v.Endpoint = &Endpoint{}
+			return v.Endpoint.Deserialize(d)
+		case schemas.Node_NodeCreateTime:
+			v.NodeCreateTime = new(time.Time)
+			return d.ReadTime(schemas.Node_NodeCreateTime, v.NodeCreateTime)
+		case schemas.Node_NodeId:
+			v.NodeId = new(string)
+			return d.ReadString(schemas.Node_NodeId, v.NodeId)
+		case schemas.Node_NodeStatus:
+			v.NodeStatus = new(string)
+			return d.ReadString(schemas.Node_NodeStatus, v.NodeStatus)
+		case schemas.Node_ParameterGroupStatus:
+			v.ParameterGroupStatus = new(string)
+			return d.ReadString(schemas.Node_ParameterGroupStatus, v.ParameterGroupStatus)
+		}
+		return nil
+	})
+}
+
 // Represents a parameter value that is applicable to a particular node type.
 type NodeTypeSpecificValue struct {
 
@@ -168,6 +438,34 @@ type NodeTypeSpecificValue struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NodeTypeSpecificValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NodeTypeSpecificValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NodeTypeSpecificValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NodeType != nil {
+		s.WriteString(schemas.NodeTypeSpecificValue_NodeType, *v.NodeType)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.NodeTypeSpecificValue_Value, *v.Value)
+	}
+}
+func (v *NodeTypeSpecificValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NodeTypeSpecificValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NodeTypeSpecificValue_NodeType:
+			v.NodeType = new(string)
+			return d.ReadString(schemas.NodeTypeSpecificValue_NodeType, v.NodeType)
+		case schemas.NodeTypeSpecificValue_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.NodeTypeSpecificValue_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes a notification topic and its status. Notification topics are used for
@@ -184,6 +482,34 @@ type NotificationConfiguration struct {
 	TopicStatus *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TopicArn != nil {
+		s.WriteString(schemas.NotificationConfiguration_TopicArn, *v.TopicArn)
+	}
+	if v.TopicStatus != nil {
+		s.WriteString(schemas.NotificationConfiguration_TopicStatus, *v.TopicStatus)
+	}
+}
+func (v *NotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationConfiguration_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.NotificationConfiguration_TopicArn, v.TopicArn)
+		case schemas.NotificationConfiguration_TopicStatus:
+			v.TopicStatus = new(string)
+			return d.ReadString(schemas.NotificationConfiguration_TopicStatus, v.TopicStatus)
+		}
+		return nil
+	})
 }
 
 // Describes an individual setting that controls some aspect of DAX behavior.
@@ -226,6 +552,91 @@ type Parameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Parameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Parameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Parameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowedValues != nil {
+		s.WriteString(schemas.Parameter_AllowedValues, *v.AllowedValues)
+	}
+	if v.ChangeType != "" {
+		s.WriteString(schemas.Parameter_ChangeType, string(v.ChangeType))
+	}
+	if v.DataType != nil {
+		s.WriteString(schemas.Parameter_DataType, *v.DataType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Parameter_Description, *v.Description)
+	}
+	if v.IsModifiable != "" {
+		s.WriteString(schemas.Parameter_IsModifiable, string(v.IsModifiable))
+	}
+	serializeNodeTypeSpecificValueList(s, schemas.Parameter_NodeTypeSpecificValues, v.NodeTypeSpecificValues)
+	if v.ParameterName != nil {
+		s.WriteString(schemas.Parameter_ParameterName, *v.ParameterName)
+	}
+	if v.ParameterType != "" {
+		s.WriteString(schemas.Parameter_ParameterType, string(v.ParameterType))
+	}
+	if v.ParameterValue != nil {
+		s.WriteString(schemas.Parameter_ParameterValue, *v.ParameterValue)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.Parameter_Source, *v.Source)
+	}
+}
+func (v *Parameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Parameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Parameter_AllowedValues:
+			v.AllowedValues = new(string)
+			return d.ReadString(schemas.Parameter_AllowedValues, v.AllowedValues)
+		case schemas.Parameter_ChangeType:
+			var ev string
+			if err := d.ReadString(schemas.Parameter_ChangeType, &ev); err != nil {
+				return err
+			}
+			v.ChangeType = ChangeType(ev)
+			return nil
+		case schemas.Parameter_DataType:
+			v.DataType = new(string)
+			return d.ReadString(schemas.Parameter_DataType, v.DataType)
+		case schemas.Parameter_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Parameter_Description, v.Description)
+		case schemas.Parameter_IsModifiable:
+			var ev string
+			if err := d.ReadString(schemas.Parameter_IsModifiable, &ev); err != nil {
+				return err
+			}
+			v.IsModifiable = IsModifiable(ev)
+			return nil
+		case schemas.Parameter_NodeTypeSpecificValues:
+			return deserializeNodeTypeSpecificValueList(d, schemas.Parameter_NodeTypeSpecificValues, &v.NodeTypeSpecificValues)
+		case schemas.Parameter_ParameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.Parameter_ParameterName, v.ParameterName)
+		case schemas.Parameter_ParameterType:
+			var ev string
+			if err := d.ReadString(schemas.Parameter_ParameterType, &ev); err != nil {
+				return err
+			}
+			v.ParameterType = ParameterType(ev)
+			return nil
+		case schemas.Parameter_ParameterValue:
+			v.ParameterValue = new(string)
+			return d.ReadString(schemas.Parameter_ParameterValue, v.ParameterValue)
+		case schemas.Parameter_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.Parameter_Source, v.Source)
+		}
+		return nil
+	})
+}
+
 // A named set of parameters that are applied to all of the nodes in a DAX cluster.
 type ParameterGroup struct {
 
@@ -236,6 +647,34 @@ type ParameterGroup struct {
 	ParameterGroupName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParameterGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ParameterGroup_Description, *v.Description)
+	}
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.ParameterGroup_ParameterGroupName, *v.ParameterGroupName)
+	}
+}
+func (v *ParameterGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterGroup_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ParameterGroup_Description, v.Description)
+		case schemas.ParameterGroup_ParameterGroupName:
+			v.ParameterGroupName = new(string)
+			return d.ReadString(schemas.ParameterGroup_ParameterGroupName, v.ParameterGroupName)
+		}
+		return nil
+	})
 }
 
 // The status of a parameter group.
@@ -253,6 +692,37 @@ type ParameterGroupStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParameterGroupStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterGroupStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterGroupStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNodeIdentifierList(s, schemas.ParameterGroupStatus_NodeIdsToReboot, v.NodeIdsToReboot)
+	if v.ParameterApplyStatus != nil {
+		s.WriteString(schemas.ParameterGroupStatus_ParameterApplyStatus, *v.ParameterApplyStatus)
+	}
+	if v.ParameterGroupName != nil {
+		s.WriteString(schemas.ParameterGroupStatus_ParameterGroupName, *v.ParameterGroupName)
+	}
+}
+func (v *ParameterGroupStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterGroupStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterGroupStatus_NodeIdsToReboot:
+			return deserializeNodeIdentifierList(d, schemas.ParameterGroupStatus_NodeIdsToReboot, &v.NodeIdsToReboot)
+		case schemas.ParameterGroupStatus_ParameterApplyStatus:
+			v.ParameterApplyStatus = new(string)
+			return d.ReadString(schemas.ParameterGroupStatus_ParameterApplyStatus, v.ParameterApplyStatus)
+		case schemas.ParameterGroupStatus_ParameterGroupName:
+			v.ParameterGroupName = new(string)
+			return d.ReadString(schemas.ParameterGroupStatus_ParameterGroupName, v.ParameterGroupName)
+		}
+		return nil
+	})
+}
+
 // An individual DAX parameter.
 type ParameterNameValue struct {
 
@@ -265,6 +735,34 @@ type ParameterNameValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParameterNameValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterNameValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterNameValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ParameterName != nil {
+		s.WriteString(schemas.ParameterNameValue_ParameterName, *v.ParameterName)
+	}
+	if v.ParameterValue != nil {
+		s.WriteString(schemas.ParameterNameValue_ParameterValue, *v.ParameterValue)
+	}
+}
+func (v *ParameterNameValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterNameValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterNameValue_ParameterName:
+			v.ParameterName = new(string)
+			return d.ReadString(schemas.ParameterNameValue_ParameterName, v.ParameterName)
+		case schemas.ParameterNameValue_ParameterValue:
+			v.ParameterValue = new(string)
+			return d.ReadString(schemas.ParameterNameValue_ParameterValue, v.ParameterValue)
+		}
+		return nil
+	})
+}
+
 // An individual VPC security group and its status.
 type SecurityGroupMembership struct {
 
@@ -275,6 +773,34 @@ type SecurityGroupMembership struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SecurityGroupMembership) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SecurityGroupMembership)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SecurityGroupMembership) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecurityGroupIdentifier != nil {
+		s.WriteString(schemas.SecurityGroupMembership_SecurityGroupIdentifier, *v.SecurityGroupIdentifier)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.SecurityGroupMembership_Status, *v.Status)
+	}
+}
+func (v *SecurityGroupMembership) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SecurityGroupMembership, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SecurityGroupMembership_SecurityGroupIdentifier:
+			v.SecurityGroupIdentifier = new(string)
+			return d.ReadString(schemas.SecurityGroupMembership_SecurityGroupIdentifier, v.SecurityGroupIdentifier)
+		case schemas.SecurityGroupMembership_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.SecurityGroupMembership_Status, v.Status)
+		}
+		return nil
+	})
 }
 
 // The description of the server-side encryption status on the specified DAX
@@ -295,6 +821,32 @@ type SSEDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SSEDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SSEDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SSEDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.SSEDescription_Status, string(v.Status))
+	}
+}
+func (v *SSEDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SSEDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SSEDescription_Status:
+			var ev string
+			if err := d.ReadString(schemas.SSEDescription_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SSEStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents the settings used to enable server-side encryption.
 type SSESpecification struct {
 
@@ -305,6 +857,28 @@ type SSESpecification struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SSESpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SSESpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SSESpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SSESpecification_Enabled, *v.Enabled)
+	}
+}
+func (v *SSESpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SSESpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SSESpecification_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SSESpecification_Enabled, v.Enabled)
+		}
+		return nil
+	})
 }
 
 // Represents the subnet associated with a DAX cluster. This parameter refers to
@@ -323,6 +897,37 @@ type Subnet struct {
 	SupportedNetworkTypes []NetworkType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Subnet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subnet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subnet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubnetAvailabilityZone != nil {
+		s.WriteString(schemas.Subnet_SubnetAvailabilityZone, *v.SubnetAvailabilityZone)
+	}
+	if v.SubnetIdentifier != nil {
+		s.WriteString(schemas.Subnet_SubnetIdentifier, *v.SubnetIdentifier)
+	}
+	serializeNetworkTypeList(s, schemas.Subnet_SupportedNetworkTypes, v.SupportedNetworkTypes)
+}
+func (v *Subnet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subnet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subnet_SubnetAvailabilityZone:
+			v.SubnetAvailabilityZone = new(string)
+			return d.ReadString(schemas.Subnet_SubnetAvailabilityZone, v.SubnetAvailabilityZone)
+		case schemas.Subnet_SubnetIdentifier:
+			v.SubnetIdentifier = new(string)
+			return d.ReadString(schemas.Subnet_SubnetIdentifier, v.SubnetIdentifier)
+		case schemas.Subnet_SupportedNetworkTypes:
+			return deserializeNetworkTypeList(d, schemas.Subnet_SupportedNetworkTypes, &v.SupportedNetworkTypes)
+		}
+		return nil
+	})
 }
 
 // Represents the output of one of the following actions:
@@ -352,6 +957,46 @@ type SubnetGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubnetGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubnetGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubnetGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.SubnetGroup_Description, *v.Description)
+	}
+	if v.SubnetGroupName != nil {
+		s.WriteString(schemas.SubnetGroup_SubnetGroupName, *v.SubnetGroupName)
+	}
+	serializeSubnetList(s, schemas.SubnetGroup_Subnets, v.Subnets)
+	serializeNetworkTypeList(s, schemas.SubnetGroup_SupportedNetworkTypes, v.SupportedNetworkTypes)
+	if v.VpcId != nil {
+		s.WriteString(schemas.SubnetGroup_VpcId, *v.VpcId)
+	}
+}
+func (v *SubnetGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubnetGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubnetGroup_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SubnetGroup_Description, v.Description)
+		case schemas.SubnetGroup_SubnetGroupName:
+			v.SubnetGroupName = new(string)
+			return d.ReadString(schemas.SubnetGroup_SubnetGroupName, v.SubnetGroupName)
+		case schemas.SubnetGroup_Subnets:
+			return deserializeSubnetList(d, schemas.SubnetGroup_Subnets, &v.Subnets)
+		case schemas.SubnetGroup_SupportedNetworkTypes:
+			return deserializeNetworkTypeList(d, schemas.SubnetGroup_SupportedNetworkTypes, &v.SupportedNetworkTypes)
+		case schemas.SubnetGroup_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.SubnetGroup_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // A description of a tag. Every tag is a key-value pair. You can add up to 50
 // tags to a single DAX cluster.
 //
@@ -372,6 +1017,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/glossaries
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","name":"__Name__","owningProjectIdentifier":"__OwningProjectIdentifier__","status":"DISABLED","usageRestrictions":["ASSET_GOVERNED_TERMS","ASSET_GOVERNED_TERMS"]}

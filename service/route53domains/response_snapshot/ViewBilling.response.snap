@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Domains_v20140515.ViewBilling
+
+{"BillingRecords":[{"BillDate":946684800,"DomainName":"__DomainName__","InvoiceId":"__InvoiceId__","Operation":"REGISTER_DOMAIN","Price":1},{"BillDate":946684800,"DomainName":"__DomainName__","InvoiceId":"__InvoiceId__","Operation":"REGISTER_DOMAIN","Price":1}],"NextPageMarker":"__NextPageMarker__"}

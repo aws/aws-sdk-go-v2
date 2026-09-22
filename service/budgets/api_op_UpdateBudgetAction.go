@@ -4,11 +4,10 @@ package budgets
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a budget action.
@@ -42,6 +41,9 @@ type UpdateBudgetActionInput struct {
 	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
+	// Budget names are validated for content. Names that contain phone numbers, URLs,
+	// or email addresses combined with certain terms may be rejected.
+	//
 	// This member is required.
 	BudgetName *string
 
@@ -67,6 +69,44 @@ type UpdateBudgetActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBudgetActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBudgetActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBudgetActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateBudgetActionRequest_AccountId, *v.AccountId)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.UpdateBudgetActionRequest_ActionId, *v.ActionId)
+	}
+	if v.ActionThreshold != nil {
+		s.WriteStruct(schemas.UpdateBudgetActionRequest_ActionThreshold)
+		v.ActionThreshold.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApprovalModel != "" {
+		s.WriteString(schemas.UpdateBudgetActionRequest_ApprovalModel, string(v.ApprovalModel))
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.UpdateBudgetActionRequest_BudgetName, *v.BudgetName)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.UpdateBudgetActionRequest_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateBudgetActionRequest_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.NotificationType != "" {
+		s.WriteString(schemas.UpdateBudgetActionRequest_NotificationType, string(v.NotificationType))
+	}
+	serializeSubscribers(s, schemas.UpdateBudgetActionRequest_Subscribers, v.Subscribers)
+}
+
 type UpdateBudgetActionOutput struct {
 
 	// The account ID of the user. It's a 12-digit number.
@@ -76,6 +116,9 @@ type UpdateBudgetActionOutput struct {
 
 	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
+	//
+	// Budget names are validated for content. Names that contain phone numbers, URLs,
+	// or email addresses combined with certain terms may be rejected.
 	//
 	// This member is required.
 	BudgetName *string
@@ -96,77 +139,70 @@ type UpdateBudgetActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBudgetActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBudgetActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBudgetActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.UpdateBudgetActionResponse_AccountId, *v.AccountId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.UpdateBudgetActionResponse_BudgetName, *v.BudgetName)
+	}
+	if v.NewAction != nil {
+		s.WriteStruct(schemas.UpdateBudgetActionResponse_NewAction)
+		v.NewAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OldAction != nil {
+		s.WriteStruct(schemas.UpdateBudgetActionResponse_OldAction)
+		v.OldAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateBudgetActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBudgetActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBudgetActionResponse_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.UpdateBudgetActionResponse_AccountId, v.AccountId)
+		case schemas.UpdateBudgetActionResponse_BudgetName:
+			v.BudgetName = new(string)
+			return d.ReadString(schemas.UpdateBudgetActionResponse_BudgetName, v.BudgetName)
+		case schemas.UpdateBudgetActionResponse_NewAction:
+			v.NewAction = &types.Action{}
+			return v.NewAction.Deserialize(d)
+		case schemas.UpdateBudgetActionResponse_OldAction:
+			v.OldAction = &types.Action{}
+			return v.OldAction.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBudgetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBudgetAction, schemas.UpdateBudgetActionRequest, schemas.UpdateBudgetActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateBudgetAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBudgetAction, schemas.UpdateBudgetActionRequest, schemas.UpdateBudgetActionResponse), output: &UpdateBudgetActionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateBudgetAction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBudgetAction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateBudgetActionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBudgetAction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +217,8 @@ func (c *Client) addOperationUpdateBudgetActionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateBudgetAction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateBudgetAction",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonAthena.StartSession
+
+{"ClientRequestToken":"__ClientRequestToken__","CopyWorkGroupTags":true,"Description":"__Description__","EngineConfiguration":{"AdditionalConfigs":{"key0":"__Value__"},"Classifications":[{"Name":"__Name__","Properties":{"key0":"__Value__"}},{"Name":"__Name__","Properties":{"key0":"__Value__"}}],"CoordinatorDpuSize":1,"DefaultExecutorDpuSize":1,"MaxConcurrentDpus":1,"SparkProperties":{"key0":"__Value__"}},"ExecutionRole":"__ExecutionRole__","MonitoringConfiguration":{"CloudWatchLoggingConfiguration":{"Enabled":true,"LogGroup":"__LogGroup__","LogStreamNamePrefix":"__LogStreamNamePrefix__","LogTypes":{"key0":["__Member__","__Member__"]}},"ManagedLoggingConfiguration":{"Enabled":true,"KmsKey":"__KmsKey__"},"S3LoggingConfiguration":{"Enabled":true,"KmsKey":"__KmsKey__","LogLocation":"__LogLocation__"}},"NotebookVersion":"__NotebookVersion__","SessionIdleTimeoutInMinutes":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"WorkGroup":"__WorkGroup__"}

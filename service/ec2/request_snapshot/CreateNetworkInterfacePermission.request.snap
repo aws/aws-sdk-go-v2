@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateNetworkInterfacePermission&AwsAccountId=__AwsAccountId__&AwsService=__AwsService__&DryRun=true&NetworkInterfaceId=__NetworkInterfaceId__&Permission=INSTANCE-ATTACH&Version=2016-11-15

@@ -4,11 +4,10 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds one or more pieces of evidence to a control in an Audit Manager
@@ -73,6 +72,25 @@ type BatchImportEvidenceToAssessmentControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchImportEvidenceToAssessmentControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchImportEvidenceToAssessmentControlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchImportEvidenceToAssessmentControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentId != nil {
+		s.WriteString(schemas.BatchImportEvidenceToAssessmentControlRequest_assessmentId, *v.AssessmentId)
+	}
+	if v.ControlId != nil {
+		s.WriteString(schemas.BatchImportEvidenceToAssessmentControlRequest_controlId, *v.ControlId)
+	}
+	if v.ControlSetId != nil {
+		s.WriteString(schemas.BatchImportEvidenceToAssessmentControlRequest_controlSetId, *v.ControlSetId)
+	}
+	serializeManualEvidenceList(s, schemas.BatchImportEvidenceToAssessmentControlRequest_manualEvidence, v.ManualEvidence)
+}
+
 type BatchImportEvidenceToAssessmentControlOutput struct {
 
 	//  A list of errors that the BatchImportEvidenceToAssessmentControl API returned.
@@ -84,77 +102,45 @@ type BatchImportEvidenceToAssessmentControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchImportEvidenceToAssessmentControlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchImportEvidenceToAssessmentControlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchImportEvidenceToAssessmentControlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchImportEvidenceToAssessmentControlErrors(s, schemas.BatchImportEvidenceToAssessmentControlResponse_errors, v.Errors)
+}
+func (v *BatchImportEvidenceToAssessmentControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchImportEvidenceToAssessmentControlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchImportEvidenceToAssessmentControlResponse_errors:
+			return deserializeBatchImportEvidenceToAssessmentControlErrors(d, schemas.BatchImportEvidenceToAssessmentControlResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchImportEvidenceToAssessmentControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchImportEvidenceToAssessmentControl, schemas.BatchImportEvidenceToAssessmentControlRequest, schemas.BatchImportEvidenceToAssessmentControlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchImportEvidenceToAssessmentControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchImportEvidenceToAssessmentControl, schemas.BatchImportEvidenceToAssessmentControlRequest, schemas.BatchImportEvidenceToAssessmentControlResponse), output: &BatchImportEvidenceToAssessmentControlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchImportEvidenceToAssessmentControl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchImportEvidenceToAssessmentControl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchImportEvidenceToAssessmentControlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchImportEvidenceToAssessmentControl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +155,8 @@ func (c *Client) addOperationBatchImportEvidenceToAssessmentControlMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchImportEvidenceToAssessmentControl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchImportEvidenceToAssessmentControl",
-	}
 }

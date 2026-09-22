@@ -1,0 +1,5 @@
+POST /service/SmithyRpcV2CborDataPlane/operation/Healthcheck
+
+Accept: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+

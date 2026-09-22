@@ -4,10 +4,9 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets an account level monthly spend limit override for sending notify messages.
@@ -38,6 +37,18 @@ type SetNotifyMessageSpendLimitOverrideInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetNotifyMessageSpendLimitOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetNotifyMessageSpendLimitOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetNotifyMessageSpendLimitOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonthlyLimit != nil {
+		s.WriteInt64(schemas.SetNotifyMessageSpendLimitOverrideRequest_MonthlyLimit, *v.MonthlyLimit)
+	}
+}
+
 type SetNotifyMessageSpendLimitOverrideOutput struct {
 
 	// The current monthly limit, in US dollars.
@@ -49,77 +60,48 @@ type SetNotifyMessageSpendLimitOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetNotifyMessageSpendLimitOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetNotifyMessageSpendLimitOverrideResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetNotifyMessageSpendLimitOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonthlyLimit != nil {
+		s.WriteInt64(schemas.SetNotifyMessageSpendLimitOverrideResult_MonthlyLimit, *v.MonthlyLimit)
+	}
+}
+func (v *SetNotifyMessageSpendLimitOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetNotifyMessageSpendLimitOverrideResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetNotifyMessageSpendLimitOverrideResult_MonthlyLimit:
+			v.MonthlyLimit = new(int64)
+			return d.ReadInt64(schemas.SetNotifyMessageSpendLimitOverrideResult_MonthlyLimit, v.MonthlyLimit)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetNotifyMessageSpendLimitOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetNotifyMessageSpendLimitOverride, schemas.SetNotifyMessageSpendLimitOverrideRequest, schemas.SetNotifyMessageSpendLimitOverrideResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSetNotifyMessageSpendLimitOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetNotifyMessageSpendLimitOverride, schemas.SetNotifyMessageSpendLimitOverrideRequest, schemas.SetNotifyMessageSpendLimitOverrideResult), output: &SetNotifyMessageSpendLimitOverrideOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSetNotifyMessageSpendLimitOverride{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SetNotifyMessageSpendLimitOverride"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSetNotifyMessageSpendLimitOverrideValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetNotifyMessageSpendLimitOverride(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +116,8 @@ func (c *Client) addOperationSetNotifyMessageSpendLimitOverrideMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSetNotifyMessageSpendLimitOverride(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SetNotifyMessageSpendLimitOverride",
-	}
 }

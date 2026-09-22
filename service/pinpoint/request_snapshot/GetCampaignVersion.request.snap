@@ -1,0 +1,3 @@
+GET /v1/apps/__ApplicationId__/campaigns/__CampaignId__/versions/__Version__
+
+

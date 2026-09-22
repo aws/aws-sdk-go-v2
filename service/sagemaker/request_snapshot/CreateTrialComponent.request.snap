@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateTrialComponent
+
+{"DisplayName":"__DisplayName__","EndTime":946684800,"InputArtifacts":{"key0":{"MediaType":"__MediaType__","Value":"__Value__"}},"MetadataProperties":{"CommitId":"__CommitId__","GeneratedBy":"__GeneratedBy__","ProjectId":"__ProjectId__","Repository":"__Repository__"},"OutputArtifacts":{"key0":{"MediaType":"__MediaType__","Value":"__Value__"}},"Parameters":{"key0":{"StringValue":"__TrialComponentParameterValueMemberStringValue__"}},"StartTime":946684800,"Status":{"Message":"__Message__","PrimaryStatus":"InProgress"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TrialComponentName":"__TrialComponentName__"}

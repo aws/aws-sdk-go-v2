@@ -1,0 +1,3 @@
+GET /v1/templates/__TemplateName__/__TemplateType__/versions?next-token=__NextToken__&page-size=__PageSize__
+
+

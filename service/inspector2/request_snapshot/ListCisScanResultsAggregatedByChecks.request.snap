@@ -1,0 +1,5 @@
+POST /cis/scan-result/check/list
+
+Content-Type: application/json
+
+{"filterCriteria":{"accountIdFilters":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"checkIdFilters":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"failedResourcesFilters":[{"lowerInclusive":1,"upperInclusive":1},{"lowerInclusive":1,"upperInclusive":1}],"platformFilters":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}],"securityLevelFilters":[{"comparison":"EQUALS","value":"LEVEL_1"},{"comparison":"EQUALS","value":"LEVEL_1"}],"titleFilters":[{"comparison":"EQUALS","value":"__Value__"},{"comparison":"EQUALS","value":"__Value__"}]},"maxResults":1,"nextToken":"__NextToken__","scanArn":"__ScanArn__","sortBy":"CHECK_ID","sortOrder":"ASC"}

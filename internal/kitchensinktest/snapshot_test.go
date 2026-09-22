@@ -73,11 +73,59 @@ func TestCheckSnapshot_GetItem(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_PutCompressedData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutCompressedData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutCompressedData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SubscribeEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SubscribeEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SubscribeEvents")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_GetItem(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetItem(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetItem")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutCompressedData(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutCompressedData(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutCompressedData")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SubscribeEvents(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SubscribeEvents(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SubscribeEvents")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

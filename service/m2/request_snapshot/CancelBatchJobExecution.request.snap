@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/batch-job-executions/__ExecutionId__/cancel
+
+Content-Type: application/json
+
+{"authSecretsManagerArn":"__AuthSecretsManagerArn__"}

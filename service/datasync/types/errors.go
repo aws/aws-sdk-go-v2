@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,33 @@ func (e *InternalException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode_ != nil {
+		s.WriteString(schemas.InternalException_errorCode, *v.ErrorCode_)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InternalException_message, *v.Message)
+	}
+}
+func (v *InternalException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalException_errorCode:
+			v.ErrorCode_ = new(string)
+			return d.ReadString(schemas.InternalException_errorCode, v.ErrorCode_)
+		case schemas.InternalException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This exception is thrown when the client submits a malformed request.
 type InvalidRequestException struct {
@@ -63,3 +91,36 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasyncErrorCode != nil {
+		s.WriteString(schemas.InvalidRequestException_datasyncErrorCode, *v.DatasyncErrorCode)
+	}
+	if v.ErrorCode_ != nil {
+		s.WriteString(schemas.InvalidRequestException_errorCode, *v.ErrorCode_)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_message, *v.Message)
+	}
+}
+func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestException_datasyncErrorCode:
+			v.DatasyncErrorCode = new(string)
+			return d.ReadString(schemas.InvalidRequestException_datasyncErrorCode, v.DatasyncErrorCode)
+		case schemas.InvalidRequestException_errorCode:
+			v.ErrorCode_ = new(string)
+			return d.ReadString(schemas.InvalidRequestException_errorCode, v.ErrorCode_)
+		case schemas.InvalidRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestException_message, v.Message)
+		}
+		return nil
+	})
+}

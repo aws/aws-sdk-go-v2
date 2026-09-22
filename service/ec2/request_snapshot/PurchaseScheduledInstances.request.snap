@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PurchaseScheduledInstances&ClientToken=__ClientToken__&DryRun=true&PurchaseRequest.1.InstanceCount=1&PurchaseRequest.1.PurchaseToken=__PurchaseToken__&PurchaseRequest.2.InstanceCount=1&PurchaseRequest.2.PurchaseToken=__PurchaseToken__&Version=2016-11-15

@@ -170,6 +170,18 @@ func TestCheckSnapshot_ListAvailableResourceMetrics(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListPerformanceAnalysisReportRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPerformanceAnalysisReportRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListPerformanceAnalysisReportRecommendations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListPerformanceAnalysisReports(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListPerformanceAnalysisReports(context.Background(), nil, func(o *Options) {
@@ -318,6 +330,18 @@ func TestUpdateSnapshot_ListAvailableResourceMetrics(t *testing.T) {
 	_, err := svc.ListAvailableResourceMetrics(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListAvailableResourceMetrics")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListPerformanceAnalysisReportRecommendations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListPerformanceAnalysisReportRecommendations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListPerformanceAnalysisReportRecommendations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

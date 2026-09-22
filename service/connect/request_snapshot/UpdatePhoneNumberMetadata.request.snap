@@ -1,0 +1,5 @@
+PUT /phone-number/__PhoneNumberId__/metadata
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","PhoneNumberDescription":"__PhoneNumberDescription__"}

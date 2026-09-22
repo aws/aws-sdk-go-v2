@@ -4,11 +4,10 @@ package outposts
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an order for an Outpost.
@@ -45,7 +44,38 @@ type CreateOrderInput struct {
 	// The payment terms.
 	PaymentTerm types.PaymentTerm
 
+	// The ID of the quote to use for the order.
+	QuoteIdentifier *string
+
+	// The ID of the quote option to use for the order.
+	QuoteOptionIdentifier *string
+
 	noSmithyDocumentSerde
+}
+
+func (v *CreateOrderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLineItemRequestListDefinition(s, schemas.CreateOrderInput_LineItems, v.LineItems)
+	if v.OutpostIdentifier != nil {
+		s.WriteString(schemas.CreateOrderInput_OutpostIdentifier, *v.OutpostIdentifier)
+	}
+	if v.PaymentOption != "" {
+		s.WriteString(schemas.CreateOrderInput_PaymentOption, string(v.PaymentOption))
+	}
+	if v.PaymentTerm != "" {
+		s.WriteString(schemas.CreateOrderInput_PaymentTerm, string(v.PaymentTerm))
+	}
+	if v.QuoteIdentifier != nil {
+		s.WriteString(schemas.CreateOrderInput_QuoteIdentifier, *v.QuoteIdentifier)
+	}
+	if v.QuoteOptionIdentifier != nil {
+		s.WriteString(schemas.CreateOrderInput_QuoteOptionIdentifier, *v.QuoteOptionIdentifier)
+	}
 }
 
 type CreateOrderOutput struct {
@@ -59,77 +89,50 @@ type CreateOrderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOrderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOrderOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOrderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Order != nil {
+		s.WriteStruct(schemas.CreateOrderOutput_Order)
+		v.Order.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateOrderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOrderOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOrderOutput_Order:
+			v.Order = &types.Order{}
+			return v.Order.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateOrderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrder, schemas.CreateOrderInput, schemas.CreateOrderOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateOrder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateOrder, schemas.CreateOrderInput, schemas.CreateOrderOutput), output: &CreateOrderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateOrder{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateOrder"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateOrderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOrder(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +147,8 @@ func (c *Client) addOperationCreateOrderMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateOrder(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateOrder",
-	}
 }

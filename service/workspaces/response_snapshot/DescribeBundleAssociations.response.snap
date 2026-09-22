@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.DescribeBundleAssociations
+
+{"Associations":[{"AssociatedResourceId":"__AssociatedResourceId__","AssociatedResourceType":"APPLICATION","BundleId":"__BundleId__","Created":946684800,"LastUpdatedTime":946684800,"State":"PENDING_INSTALL","StateReason":{"ErrorCode":"ValidationError.InsufficientDiskSpace","ErrorMessage":"__ErrorMessage__"}},{"AssociatedResourceId":"__AssociatedResourceId__","AssociatedResourceType":"APPLICATION","BundleId":"__BundleId__","Created":946684800,"LastUpdatedTime":946684800,"State":"PENDING_INSTALL","StateReason":{"ErrorCode":"ValidationError.InsufficientDiskSpace","ErrorMessage":"__ErrorMessage__"}}]}

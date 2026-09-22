@@ -4,13 +4,36 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies converted database objects to your target database.
+// Queues an export of the selected converted metadata models (database objects
+// such as tables, views, and procedures) to your target database. If other
+// requests created by Start* operations are already in the migration project's
+// queue, the export begins after they complete.
+//
+// This operation requires a non-virtual target data provider.
+//
+// The export applies only metadata models created by conversion. Metadata models
+// imported from the database are skipped.
+//
+// If objects with the same name already exist on the target database, the export
+// overwrites them.
+//
+// The operation installs the extension pack on the target database. For more
+// information, see [Using extension packs in DMS Schema Conversion].
+//
+// To check the status of the export request, call [DescribeMetadataModelExportsToTarget] using the returned
+// RequestIdentifier as a filter.
+//
+// Required permissions: dms:StartMetadataModelExportToTarget . For more
+// information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Using extension packs in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/extension-pack.html
+// [DescribeMetadataModelExportsToTarget]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelExportsToTarget.html
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) StartMetadataModelExportToTarget(ctx context.Context, params *StartMetadataModelExportToTargetInput, optFns ...func(*Options)) (*StartMetadataModelExportToTargetOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelExportToTargetInput{}
@@ -33,22 +56,49 @@ type StartMetadataModelExportToTargetInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// A value that specifies the database objects to export.
+	// A JSON string that identifies the metadata models to export to the target
+	// database. For the selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts only target selection rules, where server-name in the object locator
+	//   matches the target data provider.
+	//
+	//   - Supports explicit , include , and exclude rule actions.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
 
-	// Whether to overwrite the migration project extension pack. An extension pack is
-	// an add-on module that emulates functions present in a source database that are
-	// required when converting objects to the target database.
+	// Specifies whether to overwrite the extension pack if one already exists on the
+	// target database. The default value is true .
 	OverwriteExtensionPack *bool
 
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelExportToTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelExportToTargetMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelExportToTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelExportToTargetMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.OverwriteExtensionPack != nil {
+		s.WriteBool(schemas.StartMetadataModelExportToTargetMessage_OverwriteExtensionPack, *v.OverwriteExtensionPack)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelExportToTargetMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelExportToTargetOutput struct {
 
-	// The identifier for the export operation.
+	// The identifier for the export request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.
@@ -57,77 +107,48 @@ type StartMetadataModelExportToTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelExportToTargetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelExportToTargetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelExportToTargetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelExportToTargetResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelExportToTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelExportToTargetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelExportToTargetResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelExportToTargetResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelExportToTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelExportToTarget, schemas.StartMetadataModelExportToTargetMessage, schemas.StartMetadataModelExportToTargetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelExportToTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelExportToTarget, schemas.StartMetadataModelExportToTargetMessage, schemas.StartMetadataModelExportToTargetResponse), output: &StartMetadataModelExportToTargetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelExportToTarget{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMetadataModelExportToTarget"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMetadataModelExportToTargetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMetadataModelExportToTarget(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +163,8 @@ func (c *Client) addOperationStartMetadataModelExportToTargetMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMetadataModelExportToTarget(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMetadataModelExportToTarget",
-	}
 }

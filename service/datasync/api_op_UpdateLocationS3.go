@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the following configuration parameters of the Amazon S3 transfer
@@ -82,6 +81,29 @@ type UpdateLocationS3Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationS3Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationS3Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationS3Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.UpdateLocationS3Request_LocationArn, *v.LocationArn)
+	}
+	if v.S3Config != nil {
+		s.WriteStruct(schemas.UpdateLocationS3Request_S3Config)
+		v.S3Config.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3StorageClass != "" {
+		s.WriteString(schemas.UpdateLocationS3Request_S3StorageClass, string(v.S3StorageClass))
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.UpdateLocationS3Request_Subdirectory, *v.Subdirectory)
+	}
+}
+
 type UpdateLocationS3Output struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -89,77 +111,42 @@ type UpdateLocationS3Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLocationS3Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLocationS3Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLocationS3Output) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateLocationS3Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLocationS3Response, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLocationS3Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationS3, schemas.UpdateLocationS3Request, schemas.UpdateLocationS3Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLocationS3{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLocationS3, schemas.UpdateLocationS3Request, schemas.UpdateLocationS3Response), output: &UpdateLocationS3Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLocationS3{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLocationS3"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateLocationS3ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLocationS3(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +161,8 @@ func (c *Client) addOperationUpdateLocationS3Middlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateLocationS3(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateLocationS3",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralAccount.StartVerification
+
+{"ClientToken":"__ClientToken__","VerificationDetails":{"BusinessVerificationDetails":{"CountryCode":"__CountryCode__","JurisdictionOfIncorporation":"__JurisdictionOfIncorporation__","LegalName":"__LegalName__","RegistrationId":"__RegistrationId__"}}}

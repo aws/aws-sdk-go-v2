@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteVerifiedAccessTrustProvider&ClientToken=__ClientToken__&DryRun=true&VerifiedAccessTrustProviderId=__VerifiedAccessTrustProviderId__&Version=2016-11-15

@@ -1,0 +1,3 @@
+GET /evaluations/batch-evaluate?maxResults=1&nextToken=__NextToken__
+
+

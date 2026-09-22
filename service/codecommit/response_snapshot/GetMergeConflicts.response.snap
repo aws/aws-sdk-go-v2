@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.GetMergeConflicts
+
+{"baseCommitId":"__BaseCommitId__","conflictMetadataList":[{"contentConflict":true,"fileModeConflict":true,"fileModes":{"base":"EXECUTABLE","destination":"EXECUTABLE","source":"EXECUTABLE"},"filePath":"__FilePath__","fileSizes":{"base":1,"destination":1,"source":1},"isBinaryFile":{"base":true,"destination":true,"source":true},"mergeOperations":{"destination":"A","source":"A"},"numberOfConflicts":1,"objectTypeConflict":true,"objectTypes":{"base":"FILE","destination":"FILE","source":"FILE"}},{"contentConflict":true,"fileModeConflict":true,"fileModes":{"base":"EXECUTABLE","destination":"EXECUTABLE","source":"EXECUTABLE"},"filePath":"__FilePath__","fileSizes":{"base":1,"destination":1,"source":1},"isBinaryFile":{"base":true,"destination":true,"source":true},"mergeOperations":{"destination":"A","source":"A"},"numberOfConflicts":1,"objectTypeConflict":true,"objectTypes":{"base":"FILE","destination":"FILE","source":"FILE"}}],"destinationCommitId":"__DestinationCommitId__","mergeable":true,"nextToken":"__NextToken__","sourceCommitId":"__SourceCommitId__"}

@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the specified stateless or stateful rule group, which includes the
@@ -157,6 +156,57 @@ type CreateRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzeRuleGroup != false {
+		s.WriteBool(schemas.CreateRuleGroupRequest_AnalyzeRuleGroup, v.AnalyzeRuleGroup)
+	}
+	if v.Capacity != nil {
+		s.WriteInt32(schemas.CreateRuleGroupRequest_Capacity, *v.Capacity)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRuleGroupRequest_Description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateRuleGroupRequest_DryRun, v.DryRun)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateRuleGroupRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleGroup != nil {
+		s.WriteStruct(schemas.CreateRuleGroupRequest_RuleGroup)
+		v.RuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleGroupName != nil {
+		s.WriteString(schemas.CreateRuleGroupRequest_RuleGroupName, *v.RuleGroupName)
+	}
+	if v.Rules != nil {
+		s.WriteString(schemas.CreateRuleGroupRequest_Rules, *v.Rules)
+	}
+	if v.SourceMetadata != nil {
+		s.WriteStruct(schemas.CreateRuleGroupRequest_SourceMetadata)
+		v.SourceMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SummaryConfiguration != nil {
+		s.WriteStruct(schemas.CreateRuleGroupRequest_SummaryConfiguration)
+		v.SummaryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateRuleGroupRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateRuleGroupRequest_Type, string(v.Type))
+	}
+}
+
 type CreateRuleGroupOutput struct {
 
 	// The high-level properties of a rule group. This, along with the RuleGroup, define the
@@ -185,77 +235,56 @@ type CreateRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleGroupResponse != nil {
+		s.WriteStruct(schemas.CreateRuleGroupResponse_RuleGroupResponse)
+		v.RuleGroupResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.CreateRuleGroupResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *CreateRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRuleGroupResponse_RuleGroupResponse:
+			v.RuleGroupResponse = &types.RuleGroupResponse{}
+			return v.RuleGroupResponse.Deserialize(d)
+		case schemas.CreateRuleGroupResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.CreateRuleGroupResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRuleGroup, schemas.CreateRuleGroupRequest, schemas.CreateRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRuleGroup, schemas.CreateRuleGroupRequest, schemas.CreateRuleGroupResponse), output: &CreateRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateRuleGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRuleGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRuleGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRuleGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -270,22 +299,8 @@ func (c *Client) addOperationCreateRuleGroupMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRuleGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRuleGroup",
-	}
 }

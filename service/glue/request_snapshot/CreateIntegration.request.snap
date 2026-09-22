@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateIntegration
+
+{"AdditionalEncryptionContext":{"key0":"__Value__"},"DataFilter":"__DataFilter__","Description":"__Description__","IntegrationConfig":{"ContinuousSync":true,"RefreshInterval":"__RefreshInterval__","SourceProperties":{"key0":"__Value__"}},"IntegrationName":"__IntegrationName__","KmsKeyId":"__KmsKeyId__","SourceArn":"__SourceArn__","Tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"TargetArn":"__TargetArn__"}

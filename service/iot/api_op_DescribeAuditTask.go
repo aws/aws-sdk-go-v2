@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,18 @@ type DescribeAuditTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuditTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuditTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuditTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.DescribeAuditTaskRequest_taskId, *v.TaskId)
+	}
+}
+
 type DescribeAuditTaskOutput struct {
 
 	// Detailed information about each check performed during this audit.
@@ -69,77 +80,85 @@ type DescribeAuditTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAuditTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAuditTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAuditTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditDetails(s, schemas.DescribeAuditTaskResponse_auditDetails, v.AuditDetails)
+	if v.ScheduledAuditName != nil {
+		s.WriteString(schemas.DescribeAuditTaskResponse_scheduledAuditName, *v.ScheduledAuditName)
+	}
+	if v.TaskStartTime != nil {
+		s.WriteTime(schemas.DescribeAuditTaskResponse_taskStartTime, *v.TaskStartTime)
+	}
+	if v.TaskStatistics != nil {
+		s.WriteStruct(schemas.DescribeAuditTaskResponse_taskStatistics)
+		v.TaskStatistics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.DescribeAuditTaskResponse_taskStatus, string(v.TaskStatus))
+	}
+	if v.TaskType != "" {
+		s.WriteString(schemas.DescribeAuditTaskResponse_taskType, string(v.TaskType))
+	}
+}
+func (v *DescribeAuditTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAuditTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAuditTaskResponse_auditDetails:
+			return deserializeAuditDetails(d, schemas.DescribeAuditTaskResponse_auditDetails, &v.AuditDetails)
+		case schemas.DescribeAuditTaskResponse_scheduledAuditName:
+			v.ScheduledAuditName = new(string)
+			return d.ReadString(schemas.DescribeAuditTaskResponse_scheduledAuditName, v.ScheduledAuditName)
+		case schemas.DescribeAuditTaskResponse_taskStartTime:
+			v.TaskStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeAuditTaskResponse_taskStartTime, v.TaskStartTime)
+		case schemas.DescribeAuditTaskResponse_taskStatistics:
+			v.TaskStatistics = &types.TaskStatistics{}
+			return v.TaskStatistics.Deserialize(d)
+		case schemas.DescribeAuditTaskResponse_taskStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAuditTaskResponse_taskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = types.AuditTaskStatus(ev)
+			return nil
+		case schemas.DescribeAuditTaskResponse_taskType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAuditTaskResponse_taskType, &ev); err != nil {
+				return err
+			}
+			v.TaskType = types.AuditTaskType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAuditTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuditTask, schemas.DescribeAuditTaskRequest, schemas.DescribeAuditTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAuditTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAuditTask, schemas.DescribeAuditTaskRequest, schemas.DescribeAuditTaskResponse), output: &DescribeAuditTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAuditTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAuditTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeAuditTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAuditTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +173,8 @@ func (c *Client) addOperationDescribeAuditTaskMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeAuditTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeAuditTask",
-	}
 }

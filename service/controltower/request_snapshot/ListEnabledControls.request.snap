@@ -1,0 +1,5 @@
+POST /list-enabled-controls
+
+Content-Type: application/json
+
+{"filter":{"controlIdentifiers":["__Member__","__Member__"],"driftStatuses":["DRIFTED","DRIFTED"],"inheritanceDriftStatuses":["DRIFTED","DRIFTED"],"parentIdentifiers":["__Member__","__Member__"],"resourceDriftStatuses":["DRIFTED","DRIFTED"],"statuses":["SUCCEEDED","SUCCEEDED"]},"includeChildren":true,"maxResults":1,"nextToken":"__NextToken__","targetIdentifier":"__TargetIdentifier__"}

@@ -432,6 +432,201 @@
                 "smithy.api#documentation": "<p>Amazon Application Recovery Controller (ARC) Region switch helps you to quickly and reliably shift traffic away from an impaired Amazon Web Services Region to a healthy Region. With Region switch, you can create plans that define the steps to shift traffic for your application from one Amazon Web Services Region to another.</p> <p>Region switch provides a structured approach to multi-Region failover, helping you to meet your recovery time objectives (RTOs) and maintain business continuity during regional disruptions.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/region-switch.html\">Region switch in ARC</a> in the <i>Amazon Application Recovery Controller User Guide</i>.</p>",
                 "smithy.api#title": "ARC - Region switch",
                 "smithy.protocols#rpcv2Cbor": {},
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseControlPlaneEndpoint": {
+                            "required": false,
+                            "documentation": "Whether the operation is a control plane operation. Control plane operations are routed to a centralized endpoint in the partition leader.",
+                            "type": "boolean"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "coalesce",
+                                    "argv": [
+                                        {
+                                            "ref": "UseControlPlaneEndpoint"
+                                        },
+                                        false
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-cn"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://arc-region-switch-control-plane.cn-north-1.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "arc-region-switch",
+                                            "signingRegion": "cn-north-1"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS is not supported in this partition",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://arc-region-switch-control-plane-fips.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "arc-region-switch",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://arc-region-switch-control-plane.{PartitionResult#implicitGlobalRegion}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4",
+                                            "signingName": "arc-region-switch",
+                                            "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://arc-region-switch-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://arc-region-switch.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 10,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAoAAAADAAAAAQAAAAQF9eEJAAAAAgAAAAUF9eEJAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEIAAAABQX14QEF9eEEAAAABAAAAAkF9eEHAAAABQX14QIF9eEDAAAAAwX14QUF9eEG"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1368,6 +1563,114 @@
                 "target": "com.amazonaws.arcregionswitch#AuroraClusterArn"
             }
         },
+        "com.amazonaws.arcregionswitch#AuroraInstanceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:db:[A-Za-z][0-9A-Za-z-]{0,62}$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#AuroraProvisionedScalingConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The timeout value specified for the configuration.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "crossAccountRole": {
+                    "target": "com.amazonaws.arcregionswitch#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross account role for the configuration.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID (secret key) for the configuration.</p>"
+                    }
+                },
+                "globalClusterIdentifier": {
+                    "target": "com.amazonaws.arcregionswitch#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global cluster identifier for a global database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regionDatabaseClusterArns": {
+                    "target": "com.amazonaws.arcregionswitch#RegionAuroraClusterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per-Region configuration that maps each Region to the Aurora database cluster ARN for scaling.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "instanceArns": {
+                    "target": "com.amazonaws.arcregionswitch#RegionAuroraInstanceArnMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per-Region configuration that maps each Region to the Aurora database instance ARN for scaling.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Amazon Aurora provisioned cluster scaling used in a Region switch plan.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#AuroraServerlessScalingConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The timeout value specified for the configuration.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "crossAccountRole": {
+                    "target": "com.amazonaws.arcregionswitch#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross account role for the configuration.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID (secret key) for the configuration.</p>"
+                    }
+                },
+                "globalClusterIdentifier": {
+                    "target": "com.amazonaws.arcregionswitch#GlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global cluster identifier for a global database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regionDatabaseClusterArns": {
+                    "target": "com.amazonaws.arcregionswitch#RegionAuroraClusterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per-Region configuration that maps each Region to the Aurora database cluster ARN for scaling.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "targetPercent": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The target capacity percentage for Aurora Serverless scaling.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Amazon Aurora Serverless scaling used in a Region switch plan.</p>"
+            }
+        },
         "com.amazonaws.arcregionswitch#CancelPlanExecution": {
             "type": "operation",
             "input": {
@@ -1424,6 +1727,34 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.arcregionswitch#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the resource involved in the client token conflict.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource involved in the client token conflict.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client token was already used with different request parameters. A client token must map to the same parameters for every request. To retry this operation, provide a new client token.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
             }
         },
         "com.amazonaws.arcregionswitch#CreatePlan": {
@@ -2301,6 +2632,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A Lambda event source mapping execution block.</p>"
                     }
+                },
+                "auroraServerlessScalingConfig": {
+                    "target": "com.amazonaws.arcregionswitch#AuroraServerlessScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Aurora Serverless scaling execution block.</p>"
+                    }
+                },
+                "auroraProvisionedScalingConfig": {
+                    "target": "com.amazonaws.arcregionswitch#AuroraProvisionedScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Aurora provisioned cluster scaling execution block.</p>"
+                    }
+                },
+                "neptuneGlobalDatabaseConfig": {
+                    "target": "com.amazonaws.arcregionswitch#NeptuneGlobalDatabaseConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Neptune global database execution block.</p>"
+                    }
+                },
+                "rdsSwitchoverReadReplicaConfig": {
+                    "target": "com.amazonaws.arcregionswitch#RdsSwitchoverReadReplicaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon RDS switchover read replica execution block.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2392,6 +2747,30 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "LambdaEventSourceMapping"
+                    }
+                },
+                "AURORA_SERVERLESS_SCALING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraServerlessScaling"
+                    }
+                },
+                "AURORA_PROVISIONED_SCALING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AuroraProvisionedScaling"
+                    }
+                },
+                "NEPTUNE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NeptuneGlobalDatabase"
+                    }
+                },
+                "RDS_SWITCHOVER_READ_REPLICA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RdsSwitchoverReadReplica"
                     }
                 }
             }
@@ -4028,6 +4407,9 @@
                     "target": "com.amazonaws.arcregionswitch#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.arcregionswitch#IllegalArgumentException"
+                },
+                {
                     "target": "com.amazonaws.arcregionswitch#InternalServerException"
                 },
                 {
@@ -4144,7 +4526,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.arcregionswitch#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -4174,7 +4556,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.arcregionswitch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>"
+                        "smithy.api#documentation": "<p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>"
                     }
                 }
             },
@@ -4207,9 +4589,9 @@
                 "maxResults": {
                     "target": "com.amazonaws.arcregionswitch#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#range": {
-                            "min": 10,
+                            "min": 1,
                             "max": 100
                         }
                     }
@@ -4237,7 +4619,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.arcregionswitch#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>nextToken</code> response in the previous request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous call's <code>nextToken</code> response to request the next page of results.</p>"
+                        "smithy.api#documentation": "<p>A pagination token. A response may contain no results while still including a <code>nextToken</code>. Continue paginating until <code>nextToken</code> is null to retrieve all results.</p>"
                     }
                 }
             },
@@ -4333,6 +4715,122 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A simplified representation of a workflow in a Region switch plan.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#NeptuneClusterArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:rds:[a-z0-9-]+:\\d{12}:cluster:[A-Za-z][0-9A-Za-z-]{0,62}$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#NeptuneDefaultBehavior": {
+            "type": "enum",
+            "members": {
+                "SWITCHOVER_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "switchoverOnly"
+                    }
+                },
+                "FAILOVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failover"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#NeptuneGlobalClusterIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[A-Za-z][0-9A-Za-z-]*$"
+            }
+        },
+        "com.amazonaws.arcregionswitch#NeptuneGlobalDatabaseConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The timeout value specified for the configuration.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "crossAccountRole": {
+                    "target": "com.amazonaws.arcregionswitch#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross account role for the configuration.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID (secret key) for the configuration.</p>"
+                    }
+                },
+                "behavior": {
+                    "target": "com.amazonaws.arcregionswitch#NeptuneDefaultBehavior",
+                    "traits": {
+                        "smithy.api#default": "switchoverOnly",
+                        "smithy.api#documentation": "<p>The behavior for a global database, that is, only allow switchover or also allow failover.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ungraceful": {
+                    "target": "com.amazonaws.arcregionswitch#NeptuneUngraceful",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for ungraceful execution.</p>"
+                    }
+                },
+                "globalClusterIdentifier": {
+                    "target": "com.amazonaws.arcregionswitch#NeptuneGlobalClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The global cluster identifier for a Neptune global database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "regionDatabaseClusterArns": {
+                    "target": "com.amazonaws.arcregionswitch#RegionNeptuneClusterArnMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The database cluster Amazon Resource Names (ARNs) for a Neptune global database.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for Amazon Neptune global databases used in a Region switch plan.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#NeptuneUngraceful": {
+            "type": "structure",
+            "members": {
+                "ungraceful": {
+                    "target": "com.amazonaws.arcregionswitch#NeptuneUngracefulBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for ungraceful execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for handling failures when performing operations on Neptune global databases.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#NeptuneUngracefulBehavior": {
+            "type": "enum",
+            "members": {
+                "FAILOVER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failover"
+                    }
+                }
             }
         },
         "com.amazonaws.arcregionswitch#NextToken": {
@@ -4599,6 +5097,77 @@
                 "smithy.api#documentation": "<p>Configuration for promoting an Amazon RDS read replica to a standalone database instance during a Region switch.</p>"
             }
         },
+        "com.amazonaws.arcregionswitch#RdsSwitchoverReadReplicaConfiguration": {
+            "type": "structure",
+            "members": {
+                "timeoutMinutes": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": 60,
+                        "smithy.api#documentation": "<p>The timeout value specified for the configuration.</p>",
+                        "smithy.api#range": {
+                            "min": 1
+                        }
+                    }
+                },
+                "crossAccountRole": {
+                    "target": "com.amazonaws.arcregionswitch#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cross-account role for the configuration.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external ID (secret key) for the configuration.</p>"
+                    }
+                },
+                "dbInstanceArnMap": {
+                    "target": "com.amazonaws.arcregionswitch#RdsDbInstanceArnMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of database instance ARNs for each Region in the plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ungraceful": {
+                    "target": "com.amazonaws.arcregionswitch#RdsUngraceful",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ungraceful execution settings for the configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for switching over an Amazon RDS read replica to become the new primary database instance during a Region switch.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#RdsUngraceful": {
+            "type": "structure",
+            "members": {
+                "ungraceful": {
+                    "target": "com.amazonaws.arcregionswitch#RdsUngracefulBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ungraceful behavior to perform if switching to ungraceful execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ungraceful execution settings for an Amazon RDS switchover read replica execution block.</p>"
+            }
+        },
+        "com.amazonaws.arcregionswitch#RdsUngracefulBehavior": {
+            "type": "enum",
+            "members": {
+                "PROMOTE_READ_REPLICA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "promoteReadReplica"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ungraceful behavior for an Amazon RDS switchover read replica, that is, promote the read replica to a standalone primary.</p>"
+            }
+        },
         "com.amazonaws.arcregionswitch#RecoveryApproach": {
             "type": "enum",
             "members": {
@@ -4637,6 +5206,37 @@
                 "target": "com.amazonaws.arcregionswitch#ArcRoutingControlStates"
             }
         },
+        "com.amazonaws.arcregionswitch#RegionAuroraClusterMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.arcregionswitch#Region"
+            },
+            "value": {
+                "target": "com.amazonaws.arcregionswitch#AuroraClusterArn"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of Region to Aurora database cluster ARN for Aurora Serverless scaling configuration.</p>",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#RegionAuroraInstanceArnMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.arcregionswitch#Region"
+            },
+            "value": {
+                "target": "com.amazonaws.arcregionswitch#AuroraInstanceArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.arcregionswitch#RegionEventSourceMappingMap": {
             "type": "map",
             "key": {
@@ -4658,6 +5258,22 @@
                 "target": "com.amazonaws.arcregionswitch#Region"
             },
             "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.arcregionswitch#RegionNeptuneClusterArnMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.arcregionswitch#Region"
+            },
+            "value": {
+                "target": "com.amazonaws.arcregionswitch#NeptuneClusterArn"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A map of Region to Neptune database cluster ARN for Neptune global database configuration.</p>",
                 "smithy.api#length": {
                     "min": 2,
                     "max": 2
@@ -5239,6 +5855,9 @@
                     "target": "com.amazonaws.arcregionswitch#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.arcregionswitch#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.arcregionswitch#IllegalArgumentException"
                 },
                 {
@@ -5302,6 +5921,18 @@
                     "target": "com.amazonaws.arcregionswitch#RecoveryExecutionId",
                     "traits": {
                         "smithy.api#documentation": "<p>The execution identifier of the recovery execution that ran in the opposite region post-recovery is ran in. Required when starting a post-recovery execution.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request and returns the result of the original successful request. If you don't provide a client token, the service automatically generates one. For more information about idempotency, see <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[\\x21-\\x7E]+$"
                     }
                 }
             },

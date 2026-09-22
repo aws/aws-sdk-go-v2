@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceUser":{"AppInstanceUserArn":"__AppInstanceUserArn__","CreatedTimestamp":946684800,"ExpirationSettings":{"ExpirationCriterion":"CREATED_TIMESTAMP","ExpirationDays":1},"LastUpdatedTimestamp":946684800,"Metadata":"__Metadata__","Name":"__Name__"}}

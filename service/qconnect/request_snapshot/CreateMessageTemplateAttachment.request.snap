@@ -1,0 +1,5 @@
+POST /knowledgeBases/__KnowledgeBaseId__/messageTemplates/__MessageTemplateId__/attachments
+
+Content-Type: application/json
+
+{"body":"__Body__","clientToken":"__ClientToken__","contentDisposition":"ATTACHMENT","name":"__Name__"}

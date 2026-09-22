@@ -1,0 +1,5 @@
+POST /v1/updatequotashare
+
+Content-Type: application/json
+
+{"capacityLimits":[{"capacityUnit":"__CapacityUnit__","maxCapacity":1},{"capacityUnit":"__CapacityUnit__","maxCapacity":1}],"preemptionConfiguration":{"inSharePreemption":"ENABLED"},"quotaShareArn":"__QuotaShareArn__","resourceSharingConfiguration":{"borrowLimit":1,"strategy":"RESERVE"},"state":"ENABLED"}

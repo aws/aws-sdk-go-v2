@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Defines the information that's necessary to populate an ID mapping table.
@@ -62,6 +61,24 @@ type PopulateIdMappingTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PopulateIdMappingTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PopulateIdMappingTableInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PopulateIdMappingTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdMappingTableIdentifier != nil {
+		s.WriteString(schemas.PopulateIdMappingTableInput_idMappingTableIdentifier, *v.IdMappingTableIdentifier)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.PopulateIdMappingTableInput_jobType, string(v.JobType))
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.PopulateIdMappingTableInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type PopulateIdMappingTableOutput struct {
 
 	// The unique identifier of the mapping job that will populate the ID mapping
@@ -76,77 +93,48 @@ type PopulateIdMappingTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PopulateIdMappingTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PopulateIdMappingTableOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PopulateIdMappingTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdMappingJobId != nil {
+		s.WriteString(schemas.PopulateIdMappingTableOutput_idMappingJobId, *v.IdMappingJobId)
+	}
+}
+func (v *PopulateIdMappingTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PopulateIdMappingTableOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PopulateIdMappingTableOutput_idMappingJobId:
+			v.IdMappingJobId = new(string)
+			return d.ReadString(schemas.PopulateIdMappingTableOutput_idMappingJobId, v.IdMappingJobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPopulateIdMappingTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PopulateIdMappingTable, schemas.PopulateIdMappingTableInput, schemas.PopulateIdMappingTableOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPopulateIdMappingTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PopulateIdMappingTable, schemas.PopulateIdMappingTableInput, schemas.PopulateIdMappingTableOutput), output: &PopulateIdMappingTableOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPopulateIdMappingTable{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PopulateIdMappingTable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPopulateIdMappingTableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPopulateIdMappingTable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +149,8 @@ func (c *Client) addOperationPopulateIdMappingTableMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPopulateIdMappingTable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PopulateIdMappingTable",
-	}
 }

@@ -1,0 +1,3 @@
+GET /wireless-devices/__Identifier__?identifierType=WirelessDeviceId
+
+

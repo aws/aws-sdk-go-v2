@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.DescribeComplianceByResource
+
+{"ComplianceByResources":[{"Compliance":{"ComplianceContributorCount":{"CapExceeded":true,"CappedCount":1},"ComplianceType":"COMPLIANT"},"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"},{"Compliance":{"ComplianceContributorCount":{"CapExceeded":true,"CappedCount":1},"ComplianceType":"COMPLIANT"},"ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}],"NextToken":"__NextToken__"}

@@ -5,10 +5,10 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the executions of a Region switch plan. This operation returns
@@ -51,6 +51,27 @@ type ListPlanExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlanExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlanExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlanExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlanExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlanExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.ListPlanExecutionsRequest_planArn, *v.PlanArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListPlanExecutionsRequest_state, string(v.State))
+	}
+}
+
 type ListPlanExecutionsOutput struct {
 
 	// The items in the plan execution to return.
@@ -68,65 +89,45 @@ type ListPlanExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlanExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlanExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlanExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAbbreviatedExecutionsList(s, schemas.ListPlanExecutionsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlanExecutionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListPlanExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlanExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlanExecutionsResponse_items:
+			return deserializeAbbreviatedExecutionsList(d, schemas.ListPlanExecutionsResponse_items, &v.Items)
+		case schemas.ListPlanExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlanExecutionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlanExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlanExecutions, schemas.ListPlanExecutionsRequest, schemas.ListPlanExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListPlanExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlanExecutions, schemas.ListPlanExecutionsRequest, schemas.ListPlanExecutionsResponse), output: &ListPlanExecutionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListPlanExecutions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPlanExecutions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -136,12 +137,6 @@ func (c *Client) addOperationListPlanExecutionsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpListPlanExecutionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlanExecutions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +149,6 @@ func (c *Client) addOperationListPlanExecutionsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +250,3 @@ type ListPlanExecutionsAPIClient interface {
 }
 
 var _ ListPlanExecutionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPlanExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPlanExecutions",
-	}
-}

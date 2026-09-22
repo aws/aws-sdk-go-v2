@@ -1,0 +1,5 @@
+PUT /v2/email/configuration-sets/__ConfigurationSetName__/delivery-options
+
+Content-Type: application/json
+
+{"MaxDeliverySeconds":1,"SendingPoolName":"__SendingPoolName__","TlsPolicy":"REQUIRE"}

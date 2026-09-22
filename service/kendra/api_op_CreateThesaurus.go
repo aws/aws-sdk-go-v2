@@ -5,10 +5,10 @@ package kendra
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a thesaurus for an index. The thesaurus contains a list of synonyms in
@@ -74,6 +74,36 @@ type CreateThesaurusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThesaurusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThesaurusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThesaurusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_Description, *v.Description)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_IndexId, *v.IndexId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateThesaurusRequest_RoleArn, *v.RoleArn)
+	}
+	if v.SourceS3Path != nil {
+		s.WriteStruct(schemas.CreateThesaurusRequest_SourceS3Path)
+		v.SourceS3Path.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateThesaurusRequest_Tags, v.Tags)
+}
+
 type CreateThesaurusOutput struct {
 
 	// The identifier of the thesaurus.
@@ -85,65 +115,42 @@ type CreateThesaurusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThesaurusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThesaurusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThesaurusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateThesaurusResponse_Id, *v.Id)
+	}
+}
+func (v *CreateThesaurusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThesaurusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThesaurusResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateThesaurusResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThesaurus, schemas.CreateThesaurusRequest, schemas.CreateThesaurusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateThesaurus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThesaurus, schemas.CreateThesaurusRequest, schemas.CreateThesaurusResponse), output: &CreateThesaurusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateThesaurus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateThesaurus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -153,12 +160,6 @@ func (c *Client) addOperationCreateThesaurusMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpCreateThesaurusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateThesaurus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +172,6 @@ func (c *Client) addOperationCreateThesaurusMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -216,12 +211,4 @@ func (m *idempotencyToken_initializeOpCreateThesaurus) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opCreateThesaurusMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateThesaurus{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateThesaurus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateThesaurus",
-	}
 }

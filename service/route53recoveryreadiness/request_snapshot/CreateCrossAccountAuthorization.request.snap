@@ -1,0 +1,5 @@
+POST /crossaccountauthorizations
+
+Content-Type: application/json
+
+{"crossAccountAuthorization":"__CrossAccountAuthorization__"}

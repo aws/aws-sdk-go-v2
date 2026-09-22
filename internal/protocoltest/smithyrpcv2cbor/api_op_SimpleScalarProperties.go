@@ -4,10 +4,9 @@ package smithyrpcv2cbor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) SimpleScalarProperties(ctx context.Context, params *SimpleScalarPropertiesInput, optFns ...func(*Options)) (*SimpleScalarPropertiesOutput, error) {
@@ -49,6 +48,81 @@ type SimpleScalarPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleScalarPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleScalarStructure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlobValue != nil {
+		s.WriteBlob(schemas.SimpleScalarStructure_blobValue, v.BlobValue)
+	}
+	if v.ByteValue != nil {
+		s.WriteInt8(schemas.SimpleScalarStructure_byteValue, *v.ByteValue)
+	}
+	if v.DoubleValue != nil {
+		s.WriteFloat64(schemas.SimpleScalarStructure_doubleValue, *v.DoubleValue)
+	}
+	if v.FalseBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarStructure_falseBooleanValue, *v.FalseBooleanValue)
+	}
+	if v.FloatValue != nil {
+		s.WriteFloat32(schemas.SimpleScalarStructure_floatValue, *v.FloatValue)
+	}
+	if v.IntegerValue != nil {
+		s.WriteInt32(schemas.SimpleScalarStructure_integerValue, *v.IntegerValue)
+	}
+	if v.LongValue != nil {
+		s.WriteInt64(schemas.SimpleScalarStructure_longValue, *v.LongValue)
+	}
+	if v.ShortValue != nil {
+		s.WriteInt16(schemas.SimpleScalarStructure_shortValue, *v.ShortValue)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.SimpleScalarStructure_stringValue, *v.StringValue)
+	}
+	if v.TrueBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarStructure_trueBooleanValue, *v.TrueBooleanValue)
+	}
+}
+func (v *SimpleScalarPropertiesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleScalarStructure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleScalarStructure_blobValue:
+			return d.ReadBlob(schemas.SimpleScalarStructure_blobValue, &v.BlobValue)
+		case schemas.SimpleScalarStructure_byteValue:
+			v.ByteValue = new(int8)
+			return d.ReadInt8(schemas.SimpleScalarStructure_byteValue, v.ByteValue)
+		case schemas.SimpleScalarStructure_doubleValue:
+			v.DoubleValue = new(float64)
+			return d.ReadFloat64(schemas.SimpleScalarStructure_doubleValue, v.DoubleValue)
+		case schemas.SimpleScalarStructure_falseBooleanValue:
+			v.FalseBooleanValue = new(bool)
+			return d.ReadBool(schemas.SimpleScalarStructure_falseBooleanValue, v.FalseBooleanValue)
+		case schemas.SimpleScalarStructure_floatValue:
+			v.FloatValue = new(float32)
+			return d.ReadFloat32(schemas.SimpleScalarStructure_floatValue, v.FloatValue)
+		case schemas.SimpleScalarStructure_integerValue:
+			v.IntegerValue = new(int32)
+			return d.ReadInt32(schemas.SimpleScalarStructure_integerValue, v.IntegerValue)
+		case schemas.SimpleScalarStructure_longValue:
+			v.LongValue = new(int64)
+			return d.ReadInt64(schemas.SimpleScalarStructure_longValue, v.LongValue)
+		case schemas.SimpleScalarStructure_shortValue:
+			v.ShortValue = new(int16)
+			return d.ReadInt16(schemas.SimpleScalarStructure_shortValue, v.ShortValue)
+		case schemas.SimpleScalarStructure_stringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.SimpleScalarStructure_stringValue, v.StringValue)
+		case schemas.SimpleScalarStructure_trueBooleanValue:
+			v.TrueBooleanValue = new(bool)
+			return d.ReadBool(schemas.SimpleScalarStructure_trueBooleanValue, v.TrueBooleanValue)
+		}
+		return nil
+	})
+}
+
 type SimpleScalarPropertiesOutput struct {
 	BlobValue []byte
 
@@ -76,71 +150,95 @@ type SimpleScalarPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleScalarPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleScalarStructure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlobValue != nil {
+		s.WriteBlob(schemas.SimpleScalarStructure_blobValue, v.BlobValue)
+	}
+	if v.ByteValue != nil {
+		s.WriteInt8(schemas.SimpleScalarStructure_byteValue, *v.ByteValue)
+	}
+	if v.DoubleValue != nil {
+		s.WriteFloat64(schemas.SimpleScalarStructure_doubleValue, *v.DoubleValue)
+	}
+	if v.FalseBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarStructure_falseBooleanValue, *v.FalseBooleanValue)
+	}
+	if v.FloatValue != nil {
+		s.WriteFloat32(schemas.SimpleScalarStructure_floatValue, *v.FloatValue)
+	}
+	if v.IntegerValue != nil {
+		s.WriteInt32(schemas.SimpleScalarStructure_integerValue, *v.IntegerValue)
+	}
+	if v.LongValue != nil {
+		s.WriteInt64(schemas.SimpleScalarStructure_longValue, *v.LongValue)
+	}
+	if v.ShortValue != nil {
+		s.WriteInt16(schemas.SimpleScalarStructure_shortValue, *v.ShortValue)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.SimpleScalarStructure_stringValue, *v.StringValue)
+	}
+	if v.TrueBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarStructure_trueBooleanValue, *v.TrueBooleanValue)
+	}
+}
+func (v *SimpleScalarPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleScalarStructure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleScalarStructure_blobValue:
+			return d.ReadBlob(schemas.SimpleScalarStructure_blobValue, &v.BlobValue)
+		case schemas.SimpleScalarStructure_byteValue:
+			v.ByteValue = new(int8)
+			return d.ReadInt8(schemas.SimpleScalarStructure_byteValue, v.ByteValue)
+		case schemas.SimpleScalarStructure_doubleValue:
+			v.DoubleValue = new(float64)
+			return d.ReadFloat64(schemas.SimpleScalarStructure_doubleValue, v.DoubleValue)
+		case schemas.SimpleScalarStructure_falseBooleanValue:
+			v.FalseBooleanValue = new(bool)
+			return d.ReadBool(schemas.SimpleScalarStructure_falseBooleanValue, v.FalseBooleanValue)
+		case schemas.SimpleScalarStructure_floatValue:
+			v.FloatValue = new(float32)
+			return d.ReadFloat32(schemas.SimpleScalarStructure_floatValue, v.FloatValue)
+		case schemas.SimpleScalarStructure_integerValue:
+			v.IntegerValue = new(int32)
+			return d.ReadInt32(schemas.SimpleScalarStructure_integerValue, v.IntegerValue)
+		case schemas.SimpleScalarStructure_longValue:
+			v.LongValue = new(int64)
+			return d.ReadInt64(schemas.SimpleScalarStructure_longValue, v.LongValue)
+		case schemas.SimpleScalarStructure_shortValue:
+			v.ShortValue = new(int16)
+			return d.ReadInt16(schemas.SimpleScalarStructure_shortValue, v.ShortValue)
+		case schemas.SimpleScalarStructure_stringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.SimpleScalarStructure_stringValue, v.StringValue)
+		case schemas.SimpleScalarStructure_trueBooleanValue:
+			v.TrueBooleanValue = new(bool)
+			return d.ReadBool(schemas.SimpleScalarStructure_trueBooleanValue, v.TrueBooleanValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSimpleScalarPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleScalarProperties, schemas.SimpleScalarStructure, schemas.SimpleScalarStructure)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpSimpleScalarProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleScalarProperties, schemas.SimpleScalarStructure, schemas.SimpleScalarStructure), output: &SimpleScalarPropertiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpSimpleScalarProperties{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SimpleScalarProperties"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarProperties(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +253,8 @@ func (c *Client) addOperationSimpleScalarPropertiesMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSimpleScalarProperties(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SimpleScalarProperties",
-	}
 }

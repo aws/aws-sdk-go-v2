@@ -4,10 +4,9 @@ package workmail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Assumes an impersonation role for the given WorkMail organization. This method
@@ -42,6 +41,21 @@ type AssumeImpersonationRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeImpersonationRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeImpersonationRoleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeImpersonationRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpersonationRoleId != nil {
+		s.WriteString(schemas.AssumeImpersonationRoleRequest_ImpersonationRoleId, *v.ImpersonationRoleId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.AssumeImpersonationRoleRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type AssumeImpersonationRoleOutput struct {
 
 	// The authentication token's validity, in seconds.
@@ -56,77 +70,54 @@ type AssumeImpersonationRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeImpersonationRoleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeImpersonationRoleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeImpersonationRoleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiresIn != nil {
+		s.WriteInt64(schemas.AssumeImpersonationRoleResponse_ExpiresIn, *v.ExpiresIn)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.AssumeImpersonationRoleResponse_Token, *v.Token)
+	}
+}
+func (v *AssumeImpersonationRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssumeImpersonationRoleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssumeImpersonationRoleResponse_ExpiresIn:
+			v.ExpiresIn = new(int64)
+			return d.ReadInt64(schemas.AssumeImpersonationRoleResponse_ExpiresIn, v.ExpiresIn)
+		case schemas.AssumeImpersonationRoleResponse_Token:
+			v.Token = new(string)
+			return d.ReadString(schemas.AssumeImpersonationRoleResponse_Token, v.Token)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssumeImpersonationRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeImpersonationRole, schemas.AssumeImpersonationRoleRequest, schemas.AssumeImpersonationRoleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssumeImpersonationRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeImpersonationRole, schemas.AssumeImpersonationRoleRequest, schemas.AssumeImpersonationRoleResponse), output: &AssumeImpersonationRoleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssumeImpersonationRole{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssumeImpersonationRole"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssumeImpersonationRoleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssumeImpersonationRole(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +132,8 @@ func (c *Client) addOperationAssumeImpersonationRoleMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssumeImpersonationRole(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssumeImpersonationRole",
-	}
 }

@@ -4,11 +4,10 @@ package kendra
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the specific permissions of users or groups in your IAM Identity Center
@@ -53,6 +52,22 @@ type DisassociatePersonasFromEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePersonasFromEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePersonasFromEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePersonasFromEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityIdsList(s, schemas.DisassociatePersonasFromEntitiesRequest_EntityIds, v.EntityIds)
+	if v.Id != nil {
+		s.WriteString(schemas.DisassociatePersonasFromEntitiesRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DisassociatePersonasFromEntitiesRequest_IndexId, *v.IndexId)
+	}
+}
+
 type DisassociatePersonasFromEntitiesOutput struct {
 
 	// Lists the users or groups in your IAM Identity Center identity source that
@@ -65,77 +80,45 @@ type DisassociatePersonasFromEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePersonasFromEntitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePersonasFromEntitiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePersonasFromEntitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedEntityList(s, schemas.DisassociatePersonasFromEntitiesResponse_FailedEntityList, v.FailedEntityList)
+}
+func (v *DisassociatePersonasFromEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociatePersonasFromEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociatePersonasFromEntitiesResponse_FailedEntityList:
+			return deserializeFailedEntityList(d, schemas.DisassociatePersonasFromEntitiesResponse_FailedEntityList, &v.FailedEntityList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociatePersonasFromEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePersonasFromEntities, schemas.DisassociatePersonasFromEntitiesRequest, schemas.DisassociatePersonasFromEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociatePersonasFromEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePersonasFromEntities, schemas.DisassociatePersonasFromEntitiesRequest, schemas.DisassociatePersonasFromEntitiesResponse), output: &DisassociatePersonasFromEntitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociatePersonasFromEntities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociatePersonasFromEntities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociatePersonasFromEntitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociatePersonasFromEntities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +133,8 @@ func (c *Client) addOperationDisassociatePersonasFromEntitiesMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociatePersonasFromEntities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociatePersonasFromEntities",
-	}
 }

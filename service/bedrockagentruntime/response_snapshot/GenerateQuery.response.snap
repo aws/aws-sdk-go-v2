@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"queries":[{"sql":"__Sql__","type":"REDSHIFT_SQL"},{"sql":"__Sql__","type":"REDSHIFT_SQL"}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.CreateComponent
+
+{"clientToken":"__ClientToken__","description":"__Description__","environmentName":"__EnvironmentName__","manifest":"__Manifest__","name":"__Name__","serviceInstanceName":"__ServiceInstanceName__","serviceName":"__ServiceName__","serviceSpec":"__ServiceSpec__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"templateFile":"__TemplateFile__"}

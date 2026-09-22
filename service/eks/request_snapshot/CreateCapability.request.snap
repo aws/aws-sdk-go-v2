@@ -1,0 +1,5 @@
+POST /clusters/__ClusterName__/capabilities
+
+Content-Type: application/json
+
+{"capabilityName":"__CapabilityName__","clientRequestToken":"__ClientRequestToken__","configuration":{"argoCd":{"awsIdc":{"idcInstanceArn":"__IdcInstanceArn__","idcRegion":"__IdcRegion__"},"namespace":"__Namespace__","networkAccess":{"vpceIds":["__Member__","__Member__"]},"rbacRoleMappings":[{"identities":[{"id":"__Id__","type":"SSO_USER"},{"id":"__Id__","type":"SSO_USER"}],"role":"ADMIN"},{"identities":[{"id":"__Id__","type":"SSO_USER"},{"id":"__Id__","type":"SSO_USER"}],"role":"ADMIN"}]}},"deletePropagationPolicy":"RETAIN","roleArn":"__RoleArn__","tags":{"key0":"__Value__"},"type":"ACK"}

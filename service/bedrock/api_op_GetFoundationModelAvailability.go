@@ -4,11 +4,10 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get information about the Foundation model availability.
@@ -35,6 +34,18 @@ type GetFoundationModelAvailabilityInput struct {
 	ModelId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFoundationModelAvailabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFoundationModelAvailabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFoundationModelAvailabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetFoundationModelAvailabilityRequest_modelId, *v.ModelId)
+	}
 }
 
 type GetFoundationModelAvailabilityOutput struct {
@@ -70,77 +81,86 @@ type GetFoundationModelAvailabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFoundationModelAvailabilityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFoundationModelAvailabilityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFoundationModelAvailabilityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementAvailability != nil {
+		s.WriteStruct(schemas.GetFoundationModelAvailabilityResponse_agreementAvailability)
+		v.AgreementAvailability.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthorizationStatus != "" {
+		s.WriteString(schemas.GetFoundationModelAvailabilityResponse_authorizationStatus, string(v.AuthorizationStatus))
+	}
+	if v.EntitlementAvailability != "" {
+		s.WriteString(schemas.GetFoundationModelAvailabilityResponse_entitlementAvailability, string(v.EntitlementAvailability))
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.GetFoundationModelAvailabilityResponse_modelId, *v.ModelId)
+	}
+	if v.RegionAvailability != "" {
+		s.WriteString(schemas.GetFoundationModelAvailabilityResponse_regionAvailability, string(v.RegionAvailability))
+	}
+}
+func (v *GetFoundationModelAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFoundationModelAvailabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFoundationModelAvailabilityResponse_agreementAvailability:
+			v.AgreementAvailability = &types.AgreementAvailability{}
+			return v.AgreementAvailability.Deserialize(d)
+		case schemas.GetFoundationModelAvailabilityResponse_authorizationStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetFoundationModelAvailabilityResponse_authorizationStatus, &ev); err != nil {
+				return err
+			}
+			v.AuthorizationStatus = types.AuthorizationStatus(ev)
+			return nil
+		case schemas.GetFoundationModelAvailabilityResponse_entitlementAvailability:
+			var ev string
+			if err := d.ReadString(schemas.GetFoundationModelAvailabilityResponse_entitlementAvailability, &ev); err != nil {
+				return err
+			}
+			v.EntitlementAvailability = types.EntitlementAvailability(ev)
+			return nil
+		case schemas.GetFoundationModelAvailabilityResponse_modelId:
+			v.ModelId = new(string)
+			return d.ReadString(schemas.GetFoundationModelAvailabilityResponse_modelId, v.ModelId)
+		case schemas.GetFoundationModelAvailabilityResponse_regionAvailability:
+			var ev string
+			if err := d.ReadString(schemas.GetFoundationModelAvailabilityResponse_regionAvailability, &ev); err != nil {
+				return err
+			}
+			v.RegionAvailability = types.RegionAvailability(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFoundationModelAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFoundationModelAvailability, schemas.GetFoundationModelAvailabilityRequest, schemas.GetFoundationModelAvailabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFoundationModelAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFoundationModelAvailability, schemas.GetFoundationModelAvailabilityRequest, schemas.GetFoundationModelAvailabilityResponse), output: &GetFoundationModelAvailabilityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFoundationModelAvailability{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFoundationModelAvailability"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFoundationModelAvailabilityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFoundationModelAvailability(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +175,8 @@ func (c *Client) addOperationGetFoundationModelAvailabilityMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFoundationModelAvailability(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFoundationModelAvailability",
-	}
 }

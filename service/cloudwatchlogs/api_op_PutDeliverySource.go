@@ -4,11 +4,10 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates a logical delivery source. A delivery source represents an
@@ -69,10 +68,14 @@ type PutDeliverySourceInput struct {
 
 	// Defines the type of log that the source is sending.
 	//
+	//   - For Application Load Balancer, the valid values are ALB_ACCESS_LOGS ,
+	//   ALB_CONNECTION_LOGS , and ALB_HEALTH_CHECK_LOGS .
+	//
 	//   - For Amazon Bedrock Agents, the valid values are APPLICATION_LOGS and
 	//   EVENT_LOGS .
 	//
-	//   - For Amazon Bedrock Knowledge Bases, the valid value is APPLICATION_LOGS .
+	//   - For Amazon Bedrock Knowledge Bases, the valid values are APPLICATION_LOGS
+	//   and TRACES .
 	//
 	//   - For Amazon Bedrock AgentCore Runtime, the valid values are APPLICATION_LOGS
 	//   , USAGE_LOGS and TRACES .
@@ -87,6 +90,9 @@ type PutDeliverySourceInput struct {
 	//   and TRACES .
 	//
 	//   - For Amazon Bedrock AgentCore Gateway, the valid values are APPLICATION_LOGS
+	//   and TRACES .
+	//
+	//   - For Amazon Bedrock AgentCore Payments, the valid values are APPLICATION_LOGS
 	//   and TRACES .
 	//
 	//   - For CloudFront, the valid value is ACCESS_LOGS .
@@ -105,6 +111,13 @@ type PutDeliverySourceInput struct {
 	//   , AUTO_MODE_COMPUTE_LOGS , AUTO_MODE_IPAM_LOGS , and
 	//   AUTO_MODE_LOAD_BALANCING_LOGS .
 	//
+	//   - For Amazon EKS Capability Logs, the valid values are EKS_CAPABILITY_ACK_LOGS
+	//   , EKS_CAPABILITY_ARGOCD_APPLICATION_LOGS ,
+	//   EKS_CAPABILITY_ARGOCD_APPLICATIONSET_LOGS ,
+	//   EKS_CAPABILITY_ARGOCD_COMMITSERVER_LOGS ,
+	//   EKS_CAPABILITY_ARGOCD_REPOSERVER_LOGS , EKS_CAPABILITY_ARGOCD_SERVER_LOGS ,
+	//   and EKS_CAPABILITY_KRO_LOGS .
+	//
 	//   - For Entity Resolution, the valid value is WORKFLOW_LOGS .
 	//
 	//   - For IAM Identity Center, the valid value is ERROR_LOGS .
@@ -117,11 +130,14 @@ type PutDeliverySourceInput struct {
 	//   - For PCS, the valid values are PCS_SCHEDULER_LOGS , PCS_JOBCOMP_LOGS , and
 	//   PCS_SCHEDULER_AUDIT_LOGS .
 	//
-	//   - For Quick, the valid values are CHAT_LOGS and FEEDBACK_LOGS .
+	//   - For Quick, the valid values are AGENT_HOURS_LOGS , CHAT_LOGS , FEEDBACK_LOGS
+	//   , and INDEX_USAGE_LOGS .
 	//
 	//   - For Amazon Web Services RTB Fabric, the valid values is APPLICATION_LOGS .
 	//
 	//   - For Amazon Q, the valid values are EVENT_LOGS and SYNC_JOB_LOGS .
+	//
+	//   - For Amazon S3, the valid value is S3_SERVER_ACCESS_LOGS .
 	//
 	//   - For Amazon Web Services Security Hub CSPM, the valid value is
 	//   SECURITY_FINDING_LOGS .
@@ -174,6 +190,26 @@ type PutDeliverySourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeliverySourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDeliverySourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDeliverySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeliverySourceConfiguration(s, schemas.PutDeliverySourceRequest_deliverySourceConfiguration, v.DeliverySourceConfiguration)
+	if v.LogType != nil {
+		s.WriteString(schemas.PutDeliverySourceRequest_logType, *v.LogType)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutDeliverySourceRequest_name, *v.Name)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PutDeliverySourceRequest_resourceArn, *v.ResourceArn)
+	}
+	serializeTags(s, schemas.PutDeliverySourceRequest_tags, v.Tags)
+}
+
 type PutDeliverySourceOutput struct {
 
 	// A structure containing information about the delivery source that was just
@@ -186,77 +222,50 @@ type PutDeliverySourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutDeliverySourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutDeliverySourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutDeliverySourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeliverySource != nil {
+		s.WriteStruct(schemas.PutDeliverySourceResponse_deliverySource)
+		v.DeliverySource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutDeliverySourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutDeliverySourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutDeliverySourceResponse_deliverySource:
+			v.DeliverySource = &types.DeliverySource{}
+			return v.DeliverySource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutDeliverySourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeliverySource, schemas.PutDeliverySourceRequest, schemas.PutDeliverySourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutDeliverySource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutDeliverySource, schemas.PutDeliverySourceRequest, schemas.PutDeliverySourceResponse), output: &PutDeliverySourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutDeliverySource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutDeliverySource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutDeliverySourceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutDeliverySource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -271,22 +280,8 @@ func (c *Client) addOperationPutDeliverySourceMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutDeliverySource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutDeliverySource",
-	}
 }

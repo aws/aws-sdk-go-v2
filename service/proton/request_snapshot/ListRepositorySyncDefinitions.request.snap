@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.ListRepositorySyncDefinitions
+
+{"nextToken":"__NextToken__","repositoryName":"__RepositoryName__","repositoryProvider":"GITHUB","syncType":"TEMPLATE_SYNC"}

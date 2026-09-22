@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates dedicated throughput for a base or custom model with the model units
@@ -94,6 +94,31 @@ type CreateProvisionedModelThroughputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisionedModelThroughputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisionedModelThroughputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisionedModelThroughputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateProvisionedModelThroughputRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CommitmentDuration != "" {
+		s.WriteString(schemas.CreateProvisionedModelThroughputRequest_commitmentDuration, string(v.CommitmentDuration))
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.CreateProvisionedModelThroughputRequest_modelId, *v.ModelId)
+	}
+	if v.ModelUnits != nil {
+		s.WriteInt32(schemas.CreateProvisionedModelThroughputRequest_modelUnits, *v.ModelUnits)
+	}
+	if v.ProvisionedModelName != nil {
+		s.WriteString(schemas.CreateProvisionedModelThroughputRequest_provisionedModelName, *v.ProvisionedModelName)
+	}
+	serializeTagList(s, schemas.CreateProvisionedModelThroughputRequest_tags, v.Tags)
+}
+
 type CreateProvisionedModelThroughputOutput struct {
 
 	// The Amazon Resource Name (ARN) for this Provisioned Throughput.
@@ -107,65 +132,42 @@ type CreateProvisionedModelThroughputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProvisionedModelThroughputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProvisionedModelThroughputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProvisionedModelThroughputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProvisionedModelArn != nil {
+		s.WriteString(schemas.CreateProvisionedModelThroughputResponse_provisionedModelArn, *v.ProvisionedModelArn)
+	}
+}
+func (v *CreateProvisionedModelThroughputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProvisionedModelThroughputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProvisionedModelThroughputResponse_provisionedModelArn:
+			v.ProvisionedModelArn = new(string)
+			return d.ReadString(schemas.CreateProvisionedModelThroughputResponse_provisionedModelArn, v.ProvisionedModelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisionedModelThroughput, schemas.CreateProvisionedModelThroughputRequest, schemas.CreateProvisionedModelThroughputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProvisionedModelThroughput, schemas.CreateProvisionedModelThroughputRequest, schemas.CreateProvisionedModelThroughputResponse), output: &CreateProvisionedModelThroughputOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateProvisionedModelThroughput{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProvisionedModelThroughput"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -175,12 +177,6 @@ func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *
 		return err
 	}
 	if err = addOpCreateProvisionedModelThroughputValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProvisionedModelThroughput(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +189,6 @@ func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -238,12 +228,4 @@ func (m *idempotencyToken_initializeOpCreateProvisionedModelThroughput) HandleIn
 }
 func addIdempotencyToken_opCreateProvisionedModelThroughputMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateProvisionedModelThroughput{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateProvisionedModelThroughput(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateProvisionedModelThroughput",
-	}
 }

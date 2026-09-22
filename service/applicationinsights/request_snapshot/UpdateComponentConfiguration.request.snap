@@ -1,0 +1,7 @@
+POST /service/EC2WindowsBarleyService/operation/UpdateComponentConfiguration
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¦mComponentNameq__ComponentName__gMonitorõdTierfCUSTOMvComponentConfigurationx__ComponentConfiguration__qAutoConfigEnabledõqResourceGroupNameu__ResourceGroupName__

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: VerifiedPermissions.ListPolicies
+
+{"filter":{"policyTemplateId":"__PolicyTemplateId__","policyType":"STATIC","principal":{"unspecified":true},"resource":{"unspecified":true}},"maxResults":1,"nextToken":"__NextToken__","policyStoreId":"__PolicyStoreId__"}

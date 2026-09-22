@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","syncResources":[{"externalId":"__ExternalId__","resourceId":"__ResourceId__","resourceType":"ENTITY","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"INITIALIZING"},"updateDateTime":946684800},{"externalId":"__ExternalId__","resourceId":"__ResourceId__","resourceType":"ENTITY","status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"INITIALIZING"},"updateDateTime":946684800}]}

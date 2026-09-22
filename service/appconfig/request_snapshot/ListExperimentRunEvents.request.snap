@@ -1,0 +1,3 @@
+GET /applications/__ApplicationIdentifier__/experimentdefinitions/__ExperimentDefinitionIdentifier__/experimentruns/1/events?max_results=1&next_token=__NextToken__
+
+

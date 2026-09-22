@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"KeyArn":"__KeyArn__","KeyCheckValue":"__KeyCheckValue__","Mac":"__Mac__"}

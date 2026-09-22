@@ -1,0 +1,5 @@
+POST /delete-custom-action
+
+Content-Type: application/json
+
+{"CustomActionArn":"__CustomActionArn__"}

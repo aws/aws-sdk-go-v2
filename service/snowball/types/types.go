@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/snowball/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -65,6 +67,115 @@ type Address struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Address) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Address)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Address) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressId != nil {
+		s.WriteString(schemas.Address_AddressId, *v.AddressId)
+	}
+	if v.City != nil {
+		s.WriteString(schemas.Address_City, *v.City)
+	}
+	if v.Company != nil {
+		s.WriteString(schemas.Address_Company, *v.Company)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.Address_Country, *v.Country)
+	}
+	if v.IsRestricted != false {
+		s.WriteBool(schemas.Address_IsRestricted, v.IsRestricted)
+	}
+	if v.Landmark != nil {
+		s.WriteString(schemas.Address_Landmark, *v.Landmark)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Address_Name, *v.Name)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.Address_PhoneNumber, *v.PhoneNumber)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.Address_PostalCode, *v.PostalCode)
+	}
+	if v.PrefectureOrDistrict != nil {
+		s.WriteString(schemas.Address_PrefectureOrDistrict, *v.PrefectureOrDistrict)
+	}
+	if v.StateOrProvince != nil {
+		s.WriteString(schemas.Address_StateOrProvince, *v.StateOrProvince)
+	}
+	if v.Street1 != nil {
+		s.WriteString(schemas.Address_Street1, *v.Street1)
+	}
+	if v.Street2 != nil {
+		s.WriteString(schemas.Address_Street2, *v.Street2)
+	}
+	if v.Street3 != nil {
+		s.WriteString(schemas.Address_Street3, *v.Street3)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Address_Type, string(v.Type))
+	}
+}
+func (v *Address) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Address, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Address_AddressId:
+			v.AddressId = new(string)
+			return d.ReadString(schemas.Address_AddressId, v.AddressId)
+		case schemas.Address_City:
+			v.City = new(string)
+			return d.ReadString(schemas.Address_City, v.City)
+		case schemas.Address_Company:
+			v.Company = new(string)
+			return d.ReadString(schemas.Address_Company, v.Company)
+		case schemas.Address_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.Address_Country, v.Country)
+		case schemas.Address_IsRestricted:
+			return d.ReadBool(schemas.Address_IsRestricted, &v.IsRestricted)
+		case schemas.Address_Landmark:
+			v.Landmark = new(string)
+			return d.ReadString(schemas.Address_Landmark, v.Landmark)
+		case schemas.Address_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Address_Name, v.Name)
+		case schemas.Address_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.Address_PhoneNumber, v.PhoneNumber)
+		case schemas.Address_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.Address_PostalCode, v.PostalCode)
+		case schemas.Address_PrefectureOrDistrict:
+			v.PrefectureOrDistrict = new(string)
+			return d.ReadString(schemas.Address_PrefectureOrDistrict, v.PrefectureOrDistrict)
+		case schemas.Address_StateOrProvince:
+			v.StateOrProvince = new(string)
+			return d.ReadString(schemas.Address_StateOrProvince, v.StateOrProvince)
+		case schemas.Address_Street1:
+			v.Street1 = new(string)
+			return d.ReadString(schemas.Address_Street1, v.Street1)
+		case schemas.Address_Street2:
+			v.Street2 = new(string)
+			return d.ReadString(schemas.Address_Street2, v.Street2)
+		case schemas.Address_Street3:
+			v.Street3 = new(string)
+			return d.ReadString(schemas.Address_Street3, v.Street3)
+		case schemas.Address_Type:
+			var ev string
+			if err := d.ReadString(schemas.Address_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = AddressType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains a cluster's state, a cluster's ID, and other important information.
 type ClusterListEntry struct {
 
@@ -84,6 +195,50 @@ type ClusterListEntry struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusterListEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterListEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterListEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ClusterListEntry_ClusterId, *v.ClusterId)
+	}
+	if v.ClusterState != "" {
+		s.WriteString(schemas.ClusterListEntry_ClusterState, string(v.ClusterState))
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ClusterListEntry_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ClusterListEntry_Description, *v.Description)
+	}
+}
+func (v *ClusterListEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterListEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterListEntry_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.ClusterListEntry_ClusterId, v.ClusterId)
+		case schemas.ClusterListEntry_ClusterState:
+			var ev string
+			if err := d.ReadString(schemas.ClusterListEntry_ClusterState, &ev); err != nil {
+				return err
+			}
+			v.ClusterState = ClusterState(ev)
+			return nil
+		case schemas.ClusterListEntry_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ClusterListEntry_CreationDate, v.CreationDate)
+		case schemas.ClusterListEntry_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ClusterListEntry_Description, v.Description)
+		}
+		return nil
+	})
 }
 
 // Contains metadata about a specific cluster.
@@ -165,6 +320,136 @@ type ClusterMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClusterMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressId != nil {
+		s.WriteString(schemas.ClusterMetadata_AddressId, *v.AddressId)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.ClusterMetadata_ClusterId, *v.ClusterId)
+	}
+	if v.ClusterState != "" {
+		s.WriteString(schemas.ClusterMetadata_ClusterState, string(v.ClusterState))
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.ClusterMetadata_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ClusterMetadata_Description, *v.Description)
+	}
+	if v.ForwardingAddressId != nil {
+		s.WriteString(schemas.ClusterMetadata_ForwardingAddressId, *v.ForwardingAddressId)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.ClusterMetadata_JobType, string(v.JobType))
+	}
+	if v.KmsKeyARN != nil {
+		s.WriteString(schemas.ClusterMetadata_KmsKeyARN, *v.KmsKeyARN)
+	}
+	if v.Notification != nil {
+		s.WriteStruct(schemas.ClusterMetadata_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		s.WriteStruct(schemas.ClusterMetadata_OnDeviceServiceConfiguration)
+		v.OnDeviceServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resources != nil {
+		s.WriteStruct(schemas.ClusterMetadata_Resources)
+		v.Resources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.ClusterMetadata_RoleARN, *v.RoleARN)
+	}
+	if v.ShippingOption != "" {
+		s.WriteString(schemas.ClusterMetadata_ShippingOption, string(v.ShippingOption))
+	}
+	if v.SnowballType != "" {
+		s.WriteString(schemas.ClusterMetadata_SnowballType, string(v.SnowballType))
+	}
+	if v.TaxDocuments != nil {
+		s.WriteStruct(schemas.ClusterMetadata_TaxDocuments)
+		v.TaxDocuments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ClusterMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterMetadata_AddressId:
+			v.AddressId = new(string)
+			return d.ReadString(schemas.ClusterMetadata_AddressId, v.AddressId)
+		case schemas.ClusterMetadata_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.ClusterMetadata_ClusterId, v.ClusterId)
+		case schemas.ClusterMetadata_ClusterState:
+			var ev string
+			if err := d.ReadString(schemas.ClusterMetadata_ClusterState, &ev); err != nil {
+				return err
+			}
+			v.ClusterState = ClusterState(ev)
+			return nil
+		case schemas.ClusterMetadata_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.ClusterMetadata_CreationDate, v.CreationDate)
+		case schemas.ClusterMetadata_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ClusterMetadata_Description, v.Description)
+		case schemas.ClusterMetadata_ForwardingAddressId:
+			v.ForwardingAddressId = new(string)
+			return d.ReadString(schemas.ClusterMetadata_ForwardingAddressId, v.ForwardingAddressId)
+		case schemas.ClusterMetadata_JobType:
+			var ev string
+			if err := d.ReadString(schemas.ClusterMetadata_JobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = JobType(ev)
+			return nil
+		case schemas.ClusterMetadata_KmsKeyARN:
+			v.KmsKeyARN = new(string)
+			return d.ReadString(schemas.ClusterMetadata_KmsKeyARN, v.KmsKeyARN)
+		case schemas.ClusterMetadata_Notification:
+			v.Notification = &Notification{}
+			return v.Notification.Deserialize(d)
+		case schemas.ClusterMetadata_OnDeviceServiceConfiguration:
+			v.OnDeviceServiceConfiguration = &OnDeviceServiceConfiguration{}
+			return v.OnDeviceServiceConfiguration.Deserialize(d)
+		case schemas.ClusterMetadata_Resources:
+			v.Resources = &JobResource{}
+			return v.Resources.Deserialize(d)
+		case schemas.ClusterMetadata_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.ClusterMetadata_RoleARN, v.RoleARN)
+		case schemas.ClusterMetadata_ShippingOption:
+			var ev string
+			if err := d.ReadString(schemas.ClusterMetadata_ShippingOption, &ev); err != nil {
+				return err
+			}
+			v.ShippingOption = ShippingOption(ev)
+			return nil
+		case schemas.ClusterMetadata_SnowballType:
+			var ev string
+			if err := d.ReadString(schemas.ClusterMetadata_SnowballType, &ev); err != nil {
+				return err
+			}
+			v.SnowballType = SnowballType(ev)
+			return nil
+		case schemas.ClusterMetadata_TaxDocuments:
+			v.TaxDocuments = &TaxDocuments{}
+			return v.TaxDocuments.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A JSON-formatted object that describes a compatible Amazon Machine Image (AMI),
 // including the ID and name for a Snow device AMI. This AMI is compatible with the
 // device's physical hardware requirements, and it should be able to be run in an
@@ -178,6 +463,34 @@ type CompatibleImage struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CompatibleImage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CompatibleImage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CompatibleImage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiId != nil {
+		s.WriteString(schemas.CompatibleImage_AmiId, *v.AmiId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CompatibleImage_Name, *v.Name)
+	}
+}
+func (v *CompatibleImage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CompatibleImage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CompatibleImage_AmiId:
+			v.AmiId = new(string)
+			return d.ReadString(schemas.CompatibleImage_AmiId, v.AmiId)
+		case schemas.CompatibleImage_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CompatibleImage_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Defines the real-time status of a Snow device's data transfer while the device
@@ -204,6 +517,42 @@ type DataTransfer struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataTransfer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataTransfer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataTransfer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BytesTransferred != 0 {
+		s.WriteInt64(schemas.DataTransfer_BytesTransferred, v.BytesTransferred)
+	}
+	if v.ObjectsTransferred != 0 {
+		s.WriteInt64(schemas.DataTransfer_ObjectsTransferred, v.ObjectsTransferred)
+	}
+	if v.TotalBytes != 0 {
+		s.WriteInt64(schemas.DataTransfer_TotalBytes, v.TotalBytes)
+	}
+	if v.TotalObjects != 0 {
+		s.WriteInt64(schemas.DataTransfer_TotalObjects, v.TotalObjects)
+	}
+}
+func (v *DataTransfer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataTransfer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataTransfer_BytesTransferred:
+			return d.ReadInt64(schemas.DataTransfer_BytesTransferred, &v.BytesTransferred)
+		case schemas.DataTransfer_ObjectsTransferred:
+			return d.ReadInt64(schemas.DataTransfer_ObjectsTransferred, &v.ObjectsTransferred)
+		case schemas.DataTransfer_TotalBytes:
+			return d.ReadInt64(schemas.DataTransfer_TotalBytes, &v.TotalBytes)
+		case schemas.DataTransfer_TotalObjects:
+			return d.ReadInt64(schemas.DataTransfer_TotalObjects, &v.TotalObjects)
+		}
+		return nil
+	})
+}
+
 // The name and version of the service dependant on the requested service.
 type DependentService struct {
 
@@ -216,6 +565,40 @@ type DependentService struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DependentService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DependentService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DependentService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceName != "" {
+		s.WriteString(schemas.DependentService_ServiceName, string(v.ServiceName))
+	}
+	if v.ServiceVersion != nil {
+		s.WriteStruct(schemas.DependentService_ServiceVersion)
+		v.ServiceVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DependentService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DependentService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DependentService_ServiceName:
+			var ev string
+			if err := d.ReadString(schemas.DependentService_ServiceName, &ev); err != nil {
+				return err
+			}
+			v.ServiceName = ServiceName(ev)
+			return nil
+		case schemas.DependentService_ServiceVersion:
+			v.ServiceVersion = &ServiceVersion{}
+			return v.ServiceVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The container for SnowconeDeviceConfiguration .
 type DeviceConfiguration struct {
 
@@ -223,6 +606,30 @@ type DeviceConfiguration struct {
 	SnowconeDeviceConfiguration *SnowconeDeviceConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeviceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnowconeDeviceConfiguration != nil {
+		s.WriteStruct(schemas.DeviceConfiguration_SnowconeDeviceConfiguration)
+		v.SnowconeDeviceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeviceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceConfiguration_SnowconeDeviceConfiguration:
+			v.SnowconeDeviceConfiguration = &SnowconeDeviceConfiguration{}
+			return v.SnowconeDeviceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A JSON-formatted object that contains the IDs for an Amazon Machine Image
@@ -242,6 +649,34 @@ type Ec2AmiResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Ec2AmiResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ec2AmiResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ec2AmiResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmiId != nil {
+		s.WriteString(schemas.Ec2AmiResource_AmiId, *v.AmiId)
+	}
+	if v.SnowballAmiId != nil {
+		s.WriteString(schemas.Ec2AmiResource_SnowballAmiId, *v.SnowballAmiId)
+	}
+}
+func (v *Ec2AmiResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ec2AmiResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ec2AmiResource_AmiId:
+			v.AmiId = new(string)
+			return d.ReadString(schemas.Ec2AmiResource_AmiId, v.AmiId)
+		case schemas.Ec2AmiResource_SnowballAmiId:
+			v.SnowballAmiId = new(string)
+			return d.ReadString(schemas.Ec2AmiResource_SnowballAmiId, v.SnowballAmiId)
+		}
+		return nil
+	})
+}
+
 // An object representing the metadata and configuration settings of EKS Anywhere
 // on the Snow Family device.
 type EKSOnDeviceServiceConfiguration struct {
@@ -255,6 +690,34 @@ type EKSOnDeviceServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EKSOnDeviceServiceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EKSOnDeviceServiceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EKSOnDeviceServiceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EKSAnywhereVersion != nil {
+		s.WriteString(schemas.EKSOnDeviceServiceConfiguration_EKSAnywhereVersion, *v.EKSAnywhereVersion)
+	}
+	if v.KubernetesVersion != nil {
+		s.WriteString(schemas.EKSOnDeviceServiceConfiguration_KubernetesVersion, *v.KubernetesVersion)
+	}
+}
+func (v *EKSOnDeviceServiceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EKSOnDeviceServiceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EKSOnDeviceServiceConfiguration_EKSAnywhereVersion:
+			v.EKSAnywhereVersion = new(string)
+			return d.ReadString(schemas.EKSOnDeviceServiceConfiguration_EKSAnywhereVersion, v.EKSAnywhereVersion)
+		case schemas.EKSOnDeviceServiceConfiguration_KubernetesVersion:
+			v.KubernetesVersion = new(string)
+			return d.ReadString(schemas.EKSOnDeviceServiceConfiguration_KubernetesVersion, v.KubernetesVersion)
+		}
+		return nil
+	})
+}
+
 // The container for the EventTriggerDefinition$EventResourceARN.
 type EventTriggerDefinition struct {
 
@@ -265,6 +728,28 @@ type EventTriggerDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EventTriggerDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventTriggerDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventTriggerDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventResourceARN != nil {
+		s.WriteString(schemas.EventTriggerDefinition_EventResourceARN, *v.EventResourceARN)
+	}
+}
+func (v *EventTriggerDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventTriggerDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventTriggerDefinition_EventResourceARN:
+			v.EventResourceARN = new(string)
+			return d.ReadString(schemas.EventTriggerDefinition_EventResourceARN, v.EventResourceARN)
+		}
+		return nil
+	})
+}
+
 // The tax documents required in Amazon Web Services Region in India.
 type INDTaxDocuments struct {
 
@@ -273,6 +758,28 @@ type INDTaxDocuments struct {
 	GSTIN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *INDTaxDocuments) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.INDTaxDocuments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *INDTaxDocuments) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GSTIN != nil {
+		s.WriteString(schemas.INDTaxDocuments_GSTIN, *v.GSTIN)
+	}
+}
+func (v *INDTaxDocuments) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.INDTaxDocuments, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.INDTaxDocuments_GSTIN:
+			v.GSTIN = new(string)
+			return d.ReadString(schemas.INDTaxDocuments_GSTIN, v.GSTIN)
+		}
+		return nil
+	})
 }
 
 // Each JobListEntry object contains a job's state, a job's ID, and a value that
@@ -310,6 +817,75 @@ type JobListEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobListEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobListEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobListEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.JobListEntry_CreationDate, *v.CreationDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.JobListEntry_Description, *v.Description)
+	}
+	if v.IsMaster != false {
+		s.WriteBool(schemas.JobListEntry_IsMaster, v.IsMaster)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.JobListEntry_JobId, *v.JobId)
+	}
+	if v.JobState != "" {
+		s.WriteString(schemas.JobListEntry_JobState, string(v.JobState))
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.JobListEntry_JobType, string(v.JobType))
+	}
+	if v.SnowballType != "" {
+		s.WriteString(schemas.JobListEntry_SnowballType, string(v.SnowballType))
+	}
+}
+func (v *JobListEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobListEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobListEntry_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.JobListEntry_CreationDate, v.CreationDate)
+		case schemas.JobListEntry_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.JobListEntry_Description, v.Description)
+		case schemas.JobListEntry_IsMaster:
+			return d.ReadBool(schemas.JobListEntry_IsMaster, &v.IsMaster)
+		case schemas.JobListEntry_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.JobListEntry_JobId, v.JobId)
+		case schemas.JobListEntry_JobState:
+			var ev string
+			if err := d.ReadString(schemas.JobListEntry_JobState, &ev); err != nil {
+				return err
+			}
+			v.JobState = JobState(ev)
+			return nil
+		case schemas.JobListEntry_JobType:
+			var ev string
+			if err := d.ReadString(schemas.JobListEntry_JobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = JobType(ev)
+			return nil
+		case schemas.JobListEntry_SnowballType:
+			var ev string
+			if err := d.ReadString(schemas.JobListEntry_SnowballType, &ev); err != nil {
+				return err
+			}
+			v.SnowballType = SnowballType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains job logs. Whenever a Snow device is used to import data into or export
 // data out of Amazon S3, you'll have the option of downloading a PDF job report.
 // Job logs are returned as a part of the response syntax of the DescribeJob
@@ -341,6 +917,40 @@ type JobLogs struct {
 	JobSuccessLogURI *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobLogs) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobLogs)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobLogs) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobCompletionReportURI != nil {
+		s.WriteString(schemas.JobLogs_JobCompletionReportURI, *v.JobCompletionReportURI)
+	}
+	if v.JobFailureLogURI != nil {
+		s.WriteString(schemas.JobLogs_JobFailureLogURI, *v.JobFailureLogURI)
+	}
+	if v.JobSuccessLogURI != nil {
+		s.WriteString(schemas.JobLogs_JobSuccessLogURI, *v.JobSuccessLogURI)
+	}
+}
+func (v *JobLogs) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobLogs, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobLogs_JobCompletionReportURI:
+			v.JobCompletionReportURI = new(string)
+			return d.ReadString(schemas.JobLogs_JobCompletionReportURI, v.JobCompletionReportURI)
+		case schemas.JobLogs_JobFailureLogURI:
+			v.JobFailureLogURI = new(string)
+			return d.ReadString(schemas.JobLogs_JobFailureLogURI, v.JobFailureLogURI)
+		case schemas.JobLogs_JobSuccessLogURI:
+			v.JobSuccessLogURI = new(string)
+			return d.ReadString(schemas.JobLogs_JobSuccessLogURI, v.JobSuccessLogURI)
+		}
+		return nil
+	})
 }
 
 // Contains information about a specific job including shipping information, job
@@ -458,6 +1068,214 @@ type JobMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressId != nil {
+		s.WriteString(schemas.JobMetadata_AddressId, *v.AddressId)
+	}
+	if v.ClusterId != nil {
+		s.WriteString(schemas.JobMetadata_ClusterId, *v.ClusterId)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.JobMetadata_CreationDate, *v.CreationDate)
+	}
+	if v.DataTransferProgress != nil {
+		s.WriteStruct(schemas.JobMetadata_DataTransferProgress)
+		v.DataTransferProgress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.JobMetadata_Description, *v.Description)
+	}
+	if v.DeviceConfiguration != nil {
+		s.WriteStruct(schemas.JobMetadata_DeviceConfiguration)
+		v.DeviceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ForwardingAddressId != nil {
+		s.WriteString(schemas.JobMetadata_ForwardingAddressId, *v.ForwardingAddressId)
+	}
+	if v.ImpactLevel != "" {
+		s.WriteString(schemas.JobMetadata_ImpactLevel, string(v.ImpactLevel))
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.JobMetadata_JobId, *v.JobId)
+	}
+	if v.JobLogInfo != nil {
+		s.WriteStruct(schemas.JobMetadata_JobLogInfo)
+		v.JobLogInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobState != "" {
+		s.WriteString(schemas.JobMetadata_JobState, string(v.JobState))
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.JobMetadata_JobType, string(v.JobType))
+	}
+	if v.KmsKeyARN != nil {
+		s.WriteString(schemas.JobMetadata_KmsKeyARN, *v.KmsKeyARN)
+	}
+	if v.LongTermPricingId != nil {
+		s.WriteString(schemas.JobMetadata_LongTermPricingId, *v.LongTermPricingId)
+	}
+	if v.Notification != nil {
+		s.WriteStruct(schemas.JobMetadata_Notification)
+		v.Notification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		s.WriteStruct(schemas.JobMetadata_OnDeviceServiceConfiguration)
+		v.OnDeviceServiceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PickupDetails != nil {
+		s.WriteStruct(schemas.JobMetadata_PickupDetails)
+		v.PickupDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RemoteManagement != "" {
+		s.WriteString(schemas.JobMetadata_RemoteManagement, string(v.RemoteManagement))
+	}
+	if v.Resources != nil {
+		s.WriteStruct(schemas.JobMetadata_Resources)
+		v.Resources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.JobMetadata_RoleARN, *v.RoleARN)
+	}
+	if v.ShippingDetails != nil {
+		s.WriteStruct(schemas.JobMetadata_ShippingDetails)
+		v.ShippingDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnowballCapacityPreference != "" {
+		s.WriteString(schemas.JobMetadata_SnowballCapacityPreference, string(v.SnowballCapacityPreference))
+	}
+	if v.SnowballId != nil {
+		s.WriteString(schemas.JobMetadata_SnowballId, *v.SnowballId)
+	}
+	if v.SnowballType != "" {
+		s.WriteString(schemas.JobMetadata_SnowballType, string(v.SnowballType))
+	}
+	if v.TaxDocuments != nil {
+		s.WriteStruct(schemas.JobMetadata_TaxDocuments)
+		v.TaxDocuments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *JobMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobMetadata_AddressId:
+			v.AddressId = new(string)
+			return d.ReadString(schemas.JobMetadata_AddressId, v.AddressId)
+		case schemas.JobMetadata_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.JobMetadata_ClusterId, v.ClusterId)
+		case schemas.JobMetadata_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.JobMetadata_CreationDate, v.CreationDate)
+		case schemas.JobMetadata_DataTransferProgress:
+			v.DataTransferProgress = &DataTransfer{}
+			return v.DataTransferProgress.Deserialize(d)
+		case schemas.JobMetadata_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.JobMetadata_Description, v.Description)
+		case schemas.JobMetadata_DeviceConfiguration:
+			v.DeviceConfiguration = &DeviceConfiguration{}
+			return v.DeviceConfiguration.Deserialize(d)
+		case schemas.JobMetadata_ForwardingAddressId:
+			v.ForwardingAddressId = new(string)
+			return d.ReadString(schemas.JobMetadata_ForwardingAddressId, v.ForwardingAddressId)
+		case schemas.JobMetadata_ImpactLevel:
+			var ev string
+			if err := d.ReadString(schemas.JobMetadata_ImpactLevel, &ev); err != nil {
+				return err
+			}
+			v.ImpactLevel = ImpactLevel(ev)
+			return nil
+		case schemas.JobMetadata_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.JobMetadata_JobId, v.JobId)
+		case schemas.JobMetadata_JobLogInfo:
+			v.JobLogInfo = &JobLogs{}
+			return v.JobLogInfo.Deserialize(d)
+		case schemas.JobMetadata_JobState:
+			var ev string
+			if err := d.ReadString(schemas.JobMetadata_JobState, &ev); err != nil {
+				return err
+			}
+			v.JobState = JobState(ev)
+			return nil
+		case schemas.JobMetadata_JobType:
+			var ev string
+			if err := d.ReadString(schemas.JobMetadata_JobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = JobType(ev)
+			return nil
+		case schemas.JobMetadata_KmsKeyARN:
+			v.KmsKeyARN = new(string)
+			return d.ReadString(schemas.JobMetadata_KmsKeyARN, v.KmsKeyARN)
+		case schemas.JobMetadata_LongTermPricingId:
+			v.LongTermPricingId = new(string)
+			return d.ReadString(schemas.JobMetadata_LongTermPricingId, v.LongTermPricingId)
+		case schemas.JobMetadata_Notification:
+			v.Notification = &Notification{}
+			return v.Notification.Deserialize(d)
+		case schemas.JobMetadata_OnDeviceServiceConfiguration:
+			v.OnDeviceServiceConfiguration = &OnDeviceServiceConfiguration{}
+			return v.OnDeviceServiceConfiguration.Deserialize(d)
+		case schemas.JobMetadata_PickupDetails:
+			v.PickupDetails = &PickupDetails{}
+			return v.PickupDetails.Deserialize(d)
+		case schemas.JobMetadata_RemoteManagement:
+			var ev string
+			if err := d.ReadString(schemas.JobMetadata_RemoteManagement, &ev); err != nil {
+				return err
+			}
+			v.RemoteManagement = RemoteManagement(ev)
+			return nil
+		case schemas.JobMetadata_Resources:
+			v.Resources = &JobResource{}
+			return v.Resources.Deserialize(d)
+		case schemas.JobMetadata_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.JobMetadata_RoleARN, v.RoleARN)
+		case schemas.JobMetadata_ShippingDetails:
+			v.ShippingDetails = &ShippingDetails{}
+			return v.ShippingDetails.Deserialize(d)
+		case schemas.JobMetadata_SnowballCapacityPreference:
+			var ev string
+			if err := d.ReadString(schemas.JobMetadata_SnowballCapacityPreference, &ev); err != nil {
+				return err
+			}
+			v.SnowballCapacityPreference = SnowballCapacity(ev)
+			return nil
+		case schemas.JobMetadata_SnowballId:
+			v.SnowballId = new(string)
+			return d.ReadString(schemas.JobMetadata_SnowballId, v.SnowballId)
+		case schemas.JobMetadata_SnowballType:
+			var ev string
+			if err := d.ReadString(schemas.JobMetadata_SnowballType, &ev); err != nil {
+				return err
+			}
+			v.SnowballType = SnowballType(ev)
+			return nil
+		case schemas.JobMetadata_TaxDocuments:
+			v.TaxDocuments = &TaxDocuments{}
+			return v.TaxDocuments.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains an array of Amazon Web Services resource objects. Each object
 // represents an Amazon S3 bucket, an Lambda function, or an Amazon Machine Image
 // (AMI) based on Amazon EC2 that is associated with a particular job.
@@ -473,6 +1291,31 @@ type JobResource struct {
 	S3Resources []S3Resource
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobResource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEc2AmiResourceList(s, schemas.JobResource_Ec2AmiResources, v.Ec2AmiResources)
+	serializeLambdaResourceList(s, schemas.JobResource_LambdaResources, v.LambdaResources)
+	serializeS3ResourceList(s, schemas.JobResource_S3Resources, v.S3Resources)
+}
+func (v *JobResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobResource_Ec2AmiResources:
+			return deserializeEc2AmiResourceList(d, schemas.JobResource_Ec2AmiResources, &v.Ec2AmiResources)
+		case schemas.JobResource_LambdaResources:
+			return deserializeLambdaResourceList(d, schemas.JobResource_LambdaResources, &v.LambdaResources)
+		case schemas.JobResource_S3Resources:
+			return deserializeS3ResourceList(d, schemas.JobResource_S3Resources, &v.S3Resources)
+		}
+		return nil
+	})
 }
 
 // Contains a key range. For export jobs, a S3Resource object can have an optional
@@ -492,6 +1335,34 @@ type KeyRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeyRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginMarker != nil {
+		s.WriteString(schemas.KeyRange_BeginMarker, *v.BeginMarker)
+	}
+	if v.EndMarker != nil {
+		s.WriteString(schemas.KeyRange_EndMarker, *v.EndMarker)
+	}
+}
+func (v *KeyRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyRange_BeginMarker:
+			v.BeginMarker = new(string)
+			return d.ReadString(schemas.KeyRange_BeginMarker, v.BeginMarker)
+		case schemas.KeyRange_EndMarker:
+			v.EndMarker = new(string)
+			return d.ReadString(schemas.KeyRange_EndMarker, v.EndMarker)
+		}
+		return nil
+	})
+}
+
 // Identifies
 type LambdaResource struct {
 
@@ -503,6 +1374,31 @@ type LambdaResource struct {
 	LambdaArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaResource) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventTriggerDefinitionList(s, schemas.LambdaResource_EventTriggers, v.EventTriggers)
+	if v.LambdaArn != nil {
+		s.WriteString(schemas.LambdaResource_LambdaArn, *v.LambdaArn)
+	}
+}
+func (v *LambdaResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaResource_EventTriggers:
+			return deserializeEventTriggerDefinitionList(d, schemas.LambdaResource_EventTriggers, &v.EventTriggers)
+		case schemas.LambdaResource_LambdaArn:
+			v.LambdaArn = new(string)
+			return d.ReadString(schemas.LambdaResource_LambdaArn, v.LambdaArn)
+		}
+		return nil
+	})
 }
 
 // Each LongTermPricingListEntry object contains information about a long-term
@@ -544,6 +1440,87 @@ type LongTermPricingListEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LongTermPricingListEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LongTermPricingListEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LongTermPricingListEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentActiveJob != nil {
+		s.WriteString(schemas.LongTermPricingListEntry_CurrentActiveJob, *v.CurrentActiveJob)
+	}
+	if v.IsLongTermPricingAutoRenew != nil {
+		s.WriteBool(schemas.LongTermPricingListEntry_IsLongTermPricingAutoRenew, *v.IsLongTermPricingAutoRenew)
+	}
+	serializeLongTermPricingAssociatedJobIdList(s, schemas.LongTermPricingListEntry_JobIds, v.JobIds)
+	if v.LongTermPricingEndDate != nil {
+		s.WriteTime(schemas.LongTermPricingListEntry_LongTermPricingEndDate, *v.LongTermPricingEndDate)
+	}
+	if v.LongTermPricingId != nil {
+		s.WriteString(schemas.LongTermPricingListEntry_LongTermPricingId, *v.LongTermPricingId)
+	}
+	if v.LongTermPricingStartDate != nil {
+		s.WriteTime(schemas.LongTermPricingListEntry_LongTermPricingStartDate, *v.LongTermPricingStartDate)
+	}
+	if v.LongTermPricingStatus != nil {
+		s.WriteString(schemas.LongTermPricingListEntry_LongTermPricingStatus, *v.LongTermPricingStatus)
+	}
+	if v.LongTermPricingType != "" {
+		s.WriteString(schemas.LongTermPricingListEntry_LongTermPricingType, string(v.LongTermPricingType))
+	}
+	if v.ReplacementJob != nil {
+		s.WriteString(schemas.LongTermPricingListEntry_ReplacementJob, *v.ReplacementJob)
+	}
+	if v.SnowballType != "" {
+		s.WriteString(schemas.LongTermPricingListEntry_SnowballType, string(v.SnowballType))
+	}
+}
+func (v *LongTermPricingListEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LongTermPricingListEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LongTermPricingListEntry_CurrentActiveJob:
+			v.CurrentActiveJob = new(string)
+			return d.ReadString(schemas.LongTermPricingListEntry_CurrentActiveJob, v.CurrentActiveJob)
+		case schemas.LongTermPricingListEntry_IsLongTermPricingAutoRenew:
+			v.IsLongTermPricingAutoRenew = new(bool)
+			return d.ReadBool(schemas.LongTermPricingListEntry_IsLongTermPricingAutoRenew, v.IsLongTermPricingAutoRenew)
+		case schemas.LongTermPricingListEntry_JobIds:
+			return deserializeLongTermPricingAssociatedJobIdList(d, schemas.LongTermPricingListEntry_JobIds, &v.JobIds)
+		case schemas.LongTermPricingListEntry_LongTermPricingEndDate:
+			v.LongTermPricingEndDate = new(time.Time)
+			return d.ReadTime(schemas.LongTermPricingListEntry_LongTermPricingEndDate, v.LongTermPricingEndDate)
+		case schemas.LongTermPricingListEntry_LongTermPricingId:
+			v.LongTermPricingId = new(string)
+			return d.ReadString(schemas.LongTermPricingListEntry_LongTermPricingId, v.LongTermPricingId)
+		case schemas.LongTermPricingListEntry_LongTermPricingStartDate:
+			v.LongTermPricingStartDate = new(time.Time)
+			return d.ReadTime(schemas.LongTermPricingListEntry_LongTermPricingStartDate, v.LongTermPricingStartDate)
+		case schemas.LongTermPricingListEntry_LongTermPricingStatus:
+			v.LongTermPricingStatus = new(string)
+			return d.ReadString(schemas.LongTermPricingListEntry_LongTermPricingStatus, v.LongTermPricingStatus)
+		case schemas.LongTermPricingListEntry_LongTermPricingType:
+			var ev string
+			if err := d.ReadString(schemas.LongTermPricingListEntry_LongTermPricingType, &ev); err != nil {
+				return err
+			}
+			v.LongTermPricingType = LongTermPricingType(ev)
+			return nil
+		case schemas.LongTermPricingListEntry_ReplacementJob:
+			v.ReplacementJob = new(string)
+			return d.ReadString(schemas.LongTermPricingListEntry_ReplacementJob, v.ReplacementJob)
+		case schemas.LongTermPricingListEntry_SnowballType:
+			var ev string
+			if err := d.ReadString(schemas.LongTermPricingListEntry_SnowballType, &ev); err != nil {
+				return err
+			}
+			v.SnowballType = SnowballType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An object that represents the metadata and configuration settings for the NFS
 // (Network File System) service on an Amazon Web Services Snow Family device.
 type NFSOnDeviceServiceConfiguration struct {
@@ -557,6 +1534,37 @@ type NFSOnDeviceServiceConfiguration struct {
 	StorageUnit StorageUnit
 
 	noSmithyDocumentSerde
+}
+
+func (v *NFSOnDeviceServiceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NFSOnDeviceServiceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NFSOnDeviceServiceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageLimit != 0 {
+		s.WriteInt32(schemas.NFSOnDeviceServiceConfiguration_StorageLimit, v.StorageLimit)
+	}
+	if v.StorageUnit != "" {
+		s.WriteString(schemas.NFSOnDeviceServiceConfiguration_StorageUnit, string(v.StorageUnit))
+	}
+}
+func (v *NFSOnDeviceServiceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NFSOnDeviceServiceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NFSOnDeviceServiceConfiguration_StorageLimit:
+			return d.ReadInt32(schemas.NFSOnDeviceServiceConfiguration_StorageLimit, &v.StorageLimit)
+		case schemas.NFSOnDeviceServiceConfiguration_StorageUnit:
+			var ev string
+			if err := d.ReadString(schemas.NFSOnDeviceServiceConfiguration_StorageUnit, &ev); err != nil {
+				return err
+			}
+			v.StorageUnit = StorageUnit(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) notification settings
@@ -593,6 +1601,42 @@ type Notification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Notification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Notification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Notification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DevicePickupSnsTopicARN != nil {
+		s.WriteString(schemas.Notification_DevicePickupSnsTopicARN, *v.DevicePickupSnsTopicARN)
+	}
+	serializeJobStateList(s, schemas.Notification_JobStatesToNotify, v.JobStatesToNotify)
+	if v.NotifyAll != false {
+		s.WriteBool(schemas.Notification_NotifyAll, v.NotifyAll)
+	}
+	if v.SnsTopicARN != nil {
+		s.WriteString(schemas.Notification_SnsTopicARN, *v.SnsTopicARN)
+	}
+}
+func (v *Notification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Notification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Notification_DevicePickupSnsTopicARN:
+			v.DevicePickupSnsTopicARN = new(string)
+			return d.ReadString(schemas.Notification_DevicePickupSnsTopicARN, v.DevicePickupSnsTopicARN)
+		case schemas.Notification_JobStatesToNotify:
+			return deserializeJobStateList(d, schemas.Notification_JobStatesToNotify, &v.JobStatesToNotify)
+		case schemas.Notification_NotifyAll:
+			return d.ReadBool(schemas.Notification_NotifyAll, &v.NotifyAll)
+		case schemas.Notification_SnsTopicARN:
+			v.SnsTopicARN = new(string)
+			return d.ReadString(schemas.Notification_SnsTopicARN, v.SnsTopicARN)
+		}
+		return nil
+	})
+}
+
 // An object that represents the metadata and configuration settings for services
 // on an Amazon Web Services Snow Family device.
 type OnDeviceServiceConfiguration struct {
@@ -611,6 +1655,54 @@ type OnDeviceServiceConfiguration struct {
 	TGWOnDeviceService *TGWOnDeviceServiceConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *OnDeviceServiceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OnDeviceServiceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OnDeviceServiceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EKSOnDeviceService != nil {
+		s.WriteStruct(schemas.OnDeviceServiceConfiguration_EKSOnDeviceService)
+		v.EKSOnDeviceService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NFSOnDeviceService != nil {
+		s.WriteStruct(schemas.OnDeviceServiceConfiguration_NFSOnDeviceService)
+		v.NFSOnDeviceService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3OnDeviceService != nil {
+		s.WriteStruct(schemas.OnDeviceServiceConfiguration_S3OnDeviceService)
+		v.S3OnDeviceService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TGWOnDeviceService != nil {
+		s.WriteStruct(schemas.OnDeviceServiceConfiguration_TGWOnDeviceService)
+		v.TGWOnDeviceService.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *OnDeviceServiceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OnDeviceServiceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OnDeviceServiceConfiguration_EKSOnDeviceService:
+			v.EKSOnDeviceService = &EKSOnDeviceServiceConfiguration{}
+			return v.EKSOnDeviceService.Deserialize(d)
+		case schemas.OnDeviceServiceConfiguration_NFSOnDeviceService:
+			v.NFSOnDeviceService = &NFSOnDeviceServiceConfiguration{}
+			return v.NFSOnDeviceService.Deserialize(d)
+		case schemas.OnDeviceServiceConfiguration_S3OnDeviceService:
+			v.S3OnDeviceService = &S3OnDeviceServiceConfiguration{}
+			return v.S3OnDeviceService.Deserialize(d)
+		case schemas.OnDeviceServiceConfiguration_TGWOnDeviceService:
+			v.TGWOnDeviceService = &TGWOnDeviceServiceConfiguration{}
+			return v.TGWOnDeviceService.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information identifying the person picking up the device.
@@ -641,6 +1733,64 @@ type PickupDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PickupDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PickupDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PickupDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DevicePickupId != nil {
+		s.WriteString(schemas.PickupDetails_DevicePickupId, *v.DevicePickupId)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.PickupDetails_Email, *v.Email)
+	}
+	if v.IdentificationExpirationDate != nil {
+		s.WriteTime(schemas.PickupDetails_IdentificationExpirationDate, *v.IdentificationExpirationDate)
+	}
+	if v.IdentificationIssuingOrg != nil {
+		s.WriteString(schemas.PickupDetails_IdentificationIssuingOrg, *v.IdentificationIssuingOrg)
+	}
+	if v.IdentificationNumber != nil {
+		s.WriteString(schemas.PickupDetails_IdentificationNumber, *v.IdentificationNumber)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PickupDetails_Name, *v.Name)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.PickupDetails_PhoneNumber, *v.PhoneNumber)
+	}
+}
+func (v *PickupDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PickupDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PickupDetails_DevicePickupId:
+			v.DevicePickupId = new(string)
+			return d.ReadString(schemas.PickupDetails_DevicePickupId, v.DevicePickupId)
+		case schemas.PickupDetails_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.PickupDetails_Email, v.Email)
+		case schemas.PickupDetails_IdentificationExpirationDate:
+			v.IdentificationExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.PickupDetails_IdentificationExpirationDate, v.IdentificationExpirationDate)
+		case schemas.PickupDetails_IdentificationIssuingOrg:
+			v.IdentificationIssuingOrg = new(string)
+			return d.ReadString(schemas.PickupDetails_IdentificationIssuingOrg, v.IdentificationIssuingOrg)
+		case schemas.PickupDetails_IdentificationNumber:
+			v.IdentificationNumber = new(string)
+			return d.ReadString(schemas.PickupDetails_IdentificationNumber, v.IdentificationNumber)
+		case schemas.PickupDetails_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PickupDetails_Name, v.Name)
+		case schemas.PickupDetails_PhoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.PickupDetails_PhoneNumber, v.PhoneNumber)
+		}
+		return nil
+	})
+}
+
 // Amazon S3 compatible storage on Snow family devices configuration items.
 type S3OnDeviceServiceConfiguration struct {
 
@@ -668,6 +1818,50 @@ type S3OnDeviceServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3OnDeviceServiceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3OnDeviceServiceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3OnDeviceServiceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FaultTolerance != nil {
+		s.WriteInt32(schemas.S3OnDeviceServiceConfiguration_FaultTolerance, *v.FaultTolerance)
+	}
+	if v.ServiceSize != nil {
+		s.WriteInt32(schemas.S3OnDeviceServiceConfiguration_ServiceSize, *v.ServiceSize)
+	}
+	if v.StorageLimit != nil {
+		s.WriteFloat64(schemas.S3OnDeviceServiceConfiguration_StorageLimit, *v.StorageLimit)
+	}
+	if v.StorageUnit != "" {
+		s.WriteString(schemas.S3OnDeviceServiceConfiguration_StorageUnit, string(v.StorageUnit))
+	}
+}
+func (v *S3OnDeviceServiceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3OnDeviceServiceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3OnDeviceServiceConfiguration_FaultTolerance:
+			v.FaultTolerance = new(int32)
+			return d.ReadInt32(schemas.S3OnDeviceServiceConfiguration_FaultTolerance, v.FaultTolerance)
+		case schemas.S3OnDeviceServiceConfiguration_ServiceSize:
+			v.ServiceSize = new(int32)
+			return d.ReadInt32(schemas.S3OnDeviceServiceConfiguration_ServiceSize, v.ServiceSize)
+		case schemas.S3OnDeviceServiceConfiguration_StorageLimit:
+			v.StorageLimit = new(float64)
+			return d.ReadFloat64(schemas.S3OnDeviceServiceConfiguration_StorageLimit, v.StorageLimit)
+		case schemas.S3OnDeviceServiceConfiguration_StorageUnit:
+			var ev string
+			if err := d.ReadString(schemas.S3OnDeviceServiceConfiguration_StorageUnit, &ev); err != nil {
+				return err
+			}
+			v.StorageUnit = StorageUnit(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Each S3Resource object represents an Amazon S3 bucket that your transferred
 // data will be exported from or imported into. For export jobs, this object can
 // have an optional KeyRange value. The length of the range is defined at job
@@ -692,6 +1886,39 @@ type S3Resource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketArn != nil {
+		s.WriteString(schemas.S3Resource_BucketArn, *v.BucketArn)
+	}
+	if v.KeyRange != nil {
+		s.WriteStruct(schemas.S3Resource_KeyRange)
+		v.KeyRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTargetOnDeviceServiceList(s, schemas.S3Resource_TargetOnDeviceServices, v.TargetOnDeviceServices)
+}
+func (v *S3Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Resource_BucketArn:
+			v.BucketArn = new(string)
+			return d.ReadString(schemas.S3Resource_BucketArn, v.BucketArn)
+		case schemas.S3Resource_KeyRange:
+			v.KeyRange = &KeyRange{}
+			return v.KeyRange.Deserialize(d)
+		case schemas.S3Resource_TargetOnDeviceServices:
+			return deserializeTargetOnDeviceServiceList(d, schemas.S3Resource_TargetOnDeviceServices, &v.TargetOnDeviceServices)
+		}
+		return nil
+	})
+}
+
 // The version of the requested service.
 type ServiceVersion struct {
 
@@ -699,6 +1926,28 @@ type ServiceVersion struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Version != nil {
+		s.WriteString(schemas.ServiceVersion_Version, *v.Version)
+	}
+}
+func (v *ServiceVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceVersion_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.ServiceVersion_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // The Status and TrackingNumber information for an inbound or outbound shipment.
@@ -715,6 +1964,34 @@ type Shipment struct {
 	TrackingNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Shipment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Shipment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Shipment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.Shipment_Status, *v.Status)
+	}
+	if v.TrackingNumber != nil {
+		s.WriteString(schemas.Shipment_TrackingNumber, *v.TrackingNumber)
+	}
+}
+func (v *Shipment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Shipment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Shipment_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.Shipment_Status, v.Status)
+		case schemas.Shipment_TrackingNumber:
+			v.TrackingNumber = new(string)
+			return d.ReadString(schemas.Shipment_TrackingNumber, v.TrackingNumber)
+		}
+		return nil
+	})
 }
 
 // A job's shipping information, including inbound and outbound tracking numbers
@@ -751,6 +2028,48 @@ type ShippingDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShippingDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShippingDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShippingDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InboundShipment != nil {
+		s.WriteStruct(schemas.ShippingDetails_InboundShipment)
+		v.InboundShipment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutboundShipment != nil {
+		s.WriteStruct(schemas.ShippingDetails_OutboundShipment)
+		v.OutboundShipment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShippingOption != "" {
+		s.WriteString(schemas.ShippingDetails_ShippingOption, string(v.ShippingOption))
+	}
+}
+func (v *ShippingDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShippingDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShippingDetails_InboundShipment:
+			v.InboundShipment = &Shipment{}
+			return v.InboundShipment.Deserialize(d)
+		case schemas.ShippingDetails_OutboundShipment:
+			v.OutboundShipment = &Shipment{}
+			return v.OutboundShipment.Deserialize(d)
+		case schemas.ShippingDetails_ShippingOption:
+			var ev string
+			if err := d.ReadString(schemas.ShippingDetails_ShippingOption, &ev); err != nil {
+				return err
+			}
+			v.ShippingOption = ShippingOption(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Specifies the device configuration for an Snowball Edge job.
 type SnowconeDeviceConfiguration struct {
 
@@ -758,6 +2077,30 @@ type SnowconeDeviceConfiguration struct {
 	WirelessConnection *WirelessConnection
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnowconeDeviceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnowconeDeviceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnowconeDeviceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WirelessConnection != nil {
+		s.WriteStruct(schemas.SnowconeDeviceConfiguration_WirelessConnection)
+		v.WirelessConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SnowconeDeviceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnowconeDeviceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnowconeDeviceConfiguration_WirelessConnection:
+			v.WirelessConnection = &WirelessConnection{}
+			return v.WirelessConnection.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents the service or services on the Snow Family device
@@ -776,6 +2119,42 @@ type TargetOnDeviceService struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetOnDeviceService) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetOnDeviceService)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetOnDeviceService) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceName != "" {
+		s.WriteString(schemas.TargetOnDeviceService_ServiceName, string(v.ServiceName))
+	}
+	if v.TransferOption != "" {
+		s.WriteString(schemas.TargetOnDeviceService_TransferOption, string(v.TransferOption))
+	}
+}
+func (v *TargetOnDeviceService) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetOnDeviceService, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetOnDeviceService_ServiceName:
+			var ev string
+			if err := d.ReadString(schemas.TargetOnDeviceService_ServiceName, &ev); err != nil {
+				return err
+			}
+			v.ServiceName = DeviceServiceName(ev)
+			return nil
+		case schemas.TargetOnDeviceService_TransferOption:
+			var ev string
+			if err := d.ReadString(schemas.TargetOnDeviceService_TransferOption, &ev); err != nil {
+				return err
+			}
+			v.TransferOption = TransferOption(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The tax documents required in your Amazon Web Services Region.
 type TaxDocuments struct {
 
@@ -783,6 +2162,30 @@ type TaxDocuments struct {
 	IND *INDTaxDocuments
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaxDocuments) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxDocuments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxDocuments) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IND != nil {
+		s.WriteStruct(schemas.TaxDocuments_IND)
+		v.IND.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TaxDocuments) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxDocuments, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxDocuments_IND:
+			v.IND = &INDTaxDocuments{}
+			return v.IND.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An object that represents the metadata and configuration settings for the
@@ -800,6 +2203,37 @@ type TGWOnDeviceServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TGWOnDeviceServiceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TGWOnDeviceServiceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TGWOnDeviceServiceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageLimit != 0 {
+		s.WriteInt32(schemas.TGWOnDeviceServiceConfiguration_StorageLimit, v.StorageLimit)
+	}
+	if v.StorageUnit != "" {
+		s.WriteString(schemas.TGWOnDeviceServiceConfiguration_StorageUnit, string(v.StorageUnit))
+	}
+}
+func (v *TGWOnDeviceServiceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TGWOnDeviceServiceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TGWOnDeviceServiceConfiguration_StorageLimit:
+			return d.ReadInt32(schemas.TGWOnDeviceServiceConfiguration_StorageLimit, &v.StorageLimit)
+		case schemas.TGWOnDeviceServiceConfiguration_StorageUnit:
+			var ev string
+			if err := d.ReadString(schemas.TGWOnDeviceServiceConfiguration_StorageUnit, &ev); err != nil {
+				return err
+			}
+			v.StorageUnit = StorageUnit(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configures the wireless connection on an Snowball Edge device.
 type WirelessConnection struct {
 
@@ -807,6 +2241,27 @@ type WirelessConnection struct {
 	IsWifiEnabled bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *WirelessConnection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WirelessConnection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WirelessConnection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsWifiEnabled != false {
+		s.WriteBool(schemas.WirelessConnection_IsWifiEnabled, v.IsWifiEnabled)
+	}
+}
+func (v *WirelessConnection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WirelessConnection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WirelessConnection_IsWifiEnabled:
+			return d.ReadBool(schemas.WirelessConnection_IsWifiEnabled, &v.IsWifiEnabled)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

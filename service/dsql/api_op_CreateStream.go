@@ -5,10 +5,10 @@ package dsql
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dsql/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dsql/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -85,6 +85,29 @@ type CreateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateStreamInput_clientToken, *v.ClientToken)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.CreateStreamInput_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateStreamInput_format, string(v.Format))
+	}
+	if v.Ordering != "" {
+		s.WriteString(schemas.CreateStreamInput_ordering, string(v.Ordering))
+	}
+	serializeTagMap(s, schemas.CreateStreamInput_tags, v.Tags)
+	serializeTargetDefinition(s, schemas.CreateStreamInput_targetDefinition, v.TargetDefinition)
+}
+
 // The output of a created stream.
 type CreateStreamOutput struct {
 
@@ -129,65 +152,90 @@ type CreateStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateStreamOutput_arn, *v.Arn)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.CreateStreamOutput_clusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateStreamOutput_creationTime, *v.CreationTime)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CreateStreamOutput_format, string(v.Format))
+	}
+	if v.Ordering != "" {
+		s.WriteString(schemas.CreateStreamOutput_ordering, string(v.Ordering))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateStreamOutput_status, string(v.Status))
+	}
+	if v.StreamIdentifier != nil {
+		s.WriteString(schemas.CreateStreamOutput_streamIdentifier, *v.StreamIdentifier)
+	}
+}
+func (v *CreateStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateStreamOutput_arn, v.Arn)
+		case schemas.CreateStreamOutput_clusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.CreateStreamOutput_clusterIdentifier, v.ClusterIdentifier)
+		case schemas.CreateStreamOutput_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateStreamOutput_creationTime, v.CreationTime)
+		case schemas.CreateStreamOutput_format:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamOutput_format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.StreamFormat(ev)
+			return nil
+		case schemas.CreateStreamOutput_ordering:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamOutput_ordering, &ev); err != nil {
+				return err
+			}
+			v.Ordering = types.StreamOrdering(ev)
+			return nil
+		case schemas.CreateStreamOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StreamStatus(ev)
+			return nil
+		case schemas.CreateStreamOutput_streamIdentifier:
+			v.StreamIdentifier = new(string)
+			return d.ReadString(schemas.CreateStreamOutput_streamIdentifier, v.StreamIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamInput, schemas.CreateStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStream, schemas.CreateStreamInput, schemas.CreateStreamOutput), output: &CreateStreamOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStream{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStream"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -197,12 +245,6 @@ func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpCreateStreamValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStream(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -215,12 +257,6 @@ func (c *Client) addOperationCreateStreamMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,12 +296,4 @@ func (m *idempotencyToken_initializeOpCreateStream) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opCreateStreamMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateStream{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateStream(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateStream",
-	}
 }

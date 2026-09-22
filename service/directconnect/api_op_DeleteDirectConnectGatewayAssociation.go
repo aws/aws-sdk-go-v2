@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the association between the specified Direct Connect gateway and
@@ -47,6 +46,24 @@ type DeleteDirectConnectGatewayAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectConnectGatewayAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDirectConnectGatewayAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDirectConnectGatewayAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DeleteDirectConnectGatewayAssociationRequest_associationId, *v.AssociationId)
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.DeleteDirectConnectGatewayAssociationRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.VirtualGatewayId != nil {
+		s.WriteString(schemas.DeleteDirectConnectGatewayAssociationRequest_virtualGatewayId, *v.VirtualGatewayId)
+	}
+}
+
 type DeleteDirectConnectGatewayAssociationOutput struct {
 
 	// Information about the deleted association.
@@ -58,74 +75,47 @@ type DeleteDirectConnectGatewayAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectConnectGatewayAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDirectConnectGatewayAssociationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDirectConnectGatewayAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectConnectGatewayAssociation != nil {
+		s.WriteStruct(schemas.DeleteDirectConnectGatewayAssociationResult_directConnectGatewayAssociation)
+		v.DirectConnectGatewayAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDirectConnectGatewayAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDirectConnectGatewayAssociationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDirectConnectGatewayAssociationResult_directConnectGatewayAssociation:
+			v.DirectConnectGatewayAssociation = &types.DirectConnectGatewayAssociation{}
+			return v.DirectConnectGatewayAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDirectConnectGatewayAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectConnectGatewayAssociation, schemas.DeleteDirectConnectGatewayAssociationRequest, schemas.DeleteDirectConnectGatewayAssociationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDirectConnectGatewayAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectConnectGatewayAssociation, schemas.DeleteDirectConnectGatewayAssociationRequest, schemas.DeleteDirectConnectGatewayAssociationResult), output: &DeleteDirectConnectGatewayAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDirectConnectGatewayAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDirectConnectGatewayAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDirectConnectGatewayAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +130,8 @@ func (c *Client) addOperationDeleteDirectConnectGatewayAssociationMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteDirectConnectGatewayAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDirectConnectGatewayAssociation",
-	}
 }

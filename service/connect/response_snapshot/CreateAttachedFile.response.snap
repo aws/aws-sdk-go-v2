@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"CreationTime":"__CreationTime__","FileArn":"__FileArn__","FileId":"__FileId__","FileStatus":"APPROVED"}

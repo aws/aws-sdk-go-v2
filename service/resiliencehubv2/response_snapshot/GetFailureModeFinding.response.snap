@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"finding":{"comment":"__Comment__","description":"__Description__","failureCategory":"SHARED_FATE","findingId":"__FindingId__","infrastructureAndCodeRecommendations":[{"suggestedChanges":["__Member__","__Member__"]},{"suggestedChanges":["__Member__","__Member__"]}],"name":"__Name__","observabilityRecommendations":[{"suggestedChanges":["__Member__","__Member__"]},{"suggestedChanges":["__Member__","__Member__"]}],"policyComponent":"AVAILABILITY_SLO","reasoning":"__Reasoning__","serviceFunctions":["__Member__","__Member__"],"severity":"LOW","status":"OPEN","testingRecommendations":[{"suggestedChanges":["__Member__","__Member__"]},{"suggestedChanges":["__Member__","__Member__"]}],"updatedAt":946684800}}

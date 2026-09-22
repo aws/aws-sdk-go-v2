@@ -1,0 +1,5 @@
+PATCH /firewall-rules/__FirewallRuleId__
+
+Content-Type: application/json
+
+{"action":"ALLOW","blockOverrideDnsType":"CNAME","blockOverrideDomain":"__BlockOverrideDomain__","blockOverrideTtl":1,"blockResponse":"NODATA","clientToken":"__ClientToken__","confidenceThreshold":"LOW","description":"__Description__","dnsAdvancedProtection":"DGA","name":"__Name__","priority":1}

@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -61,6 +60,27 @@ type StartBotResourceGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBotResourceGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBotResourceGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBotResourceGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.StartBotResourceGenerationRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StartBotResourceGenerationRequest_botVersion, *v.BotVersion)
+	}
+	if v.GenerationInputPrompt != nil {
+		s.WriteString(schemas.StartBotResourceGenerationRequest_generationInputPrompt, *v.GenerationInputPrompt)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StartBotResourceGenerationRequest_localeId, *v.LocaleId)
+	}
+}
+
 type StartBotResourceGenerationOutput struct {
 
 	// The unique identifier of the bot for which the generation request was made.
@@ -90,77 +110,88 @@ type StartBotResourceGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartBotResourceGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartBotResourceGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartBotResourceGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.StartBotResourceGenerationResponse_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.StartBotResourceGenerationResponse_botVersion, *v.BotVersion)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.StartBotResourceGenerationResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.GenerationId != nil {
+		s.WriteString(schemas.StartBotResourceGenerationResponse_generationId, *v.GenerationId)
+	}
+	if v.GenerationInputPrompt != nil {
+		s.WriteString(schemas.StartBotResourceGenerationResponse_generationInputPrompt, *v.GenerationInputPrompt)
+	}
+	if v.GenerationStatus != "" {
+		s.WriteString(schemas.StartBotResourceGenerationResponse_generationStatus, string(v.GenerationStatus))
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.StartBotResourceGenerationResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *StartBotResourceGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartBotResourceGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartBotResourceGenerationResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.StartBotResourceGenerationResponse_botId, v.BotId)
+		case schemas.StartBotResourceGenerationResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.StartBotResourceGenerationResponse_botVersion, v.BotVersion)
+		case schemas.StartBotResourceGenerationResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.StartBotResourceGenerationResponse_creationDateTime, v.CreationDateTime)
+		case schemas.StartBotResourceGenerationResponse_generationId:
+			v.GenerationId = new(string)
+			return d.ReadString(schemas.StartBotResourceGenerationResponse_generationId, v.GenerationId)
+		case schemas.StartBotResourceGenerationResponse_generationInputPrompt:
+			v.GenerationInputPrompt = new(string)
+			return d.ReadString(schemas.StartBotResourceGenerationResponse_generationInputPrompt, v.GenerationInputPrompt)
+		case schemas.StartBotResourceGenerationResponse_generationStatus:
+			var ev string
+			if err := d.ReadString(schemas.StartBotResourceGenerationResponse_generationStatus, &ev); err != nil {
+				return err
+			}
+			v.GenerationStatus = types.GenerationStatus(ev)
+			return nil
+		case schemas.StartBotResourceGenerationResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.StartBotResourceGenerationResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartBotResourceGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBotResourceGeneration, schemas.StartBotResourceGenerationRequest, schemas.StartBotResourceGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartBotResourceGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartBotResourceGeneration, schemas.StartBotResourceGenerationRequest, schemas.StartBotResourceGenerationResponse), output: &StartBotResourceGenerationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartBotResourceGeneration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartBotResourceGeneration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartBotResourceGenerationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartBotResourceGeneration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +206,8 @@ func (c *Client) addOperationStartBotResourceGenerationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartBotResourceGeneration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartBotResourceGeneration",
-	}
 }

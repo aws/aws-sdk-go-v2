@@ -1,0 +1,4 @@
+POST /api/v1/users/__UserId__/activation
+
+Authentication: __AuthenticationToken__
+

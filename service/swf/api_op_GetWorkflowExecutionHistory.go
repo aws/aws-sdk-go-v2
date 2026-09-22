@@ -5,10 +5,10 @@ package swf
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the history of the specified workflow execution. The results may be
@@ -85,6 +85,32 @@ type GetWorkflowExecutionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowExecutionHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowExecutionHistoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowExecutionHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.GetWorkflowExecutionHistoryInput_domain, *v.Domain)
+	}
+	if v.Execution != nil {
+		s.WriteStruct(schemas.GetWorkflowExecutionHistoryInput_execution)
+		v.Execution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumPageSize != 0 {
+		s.WriteInt32(schemas.GetWorkflowExecutionHistoryInput_maximumPageSize, v.MaximumPageSize)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetWorkflowExecutionHistoryInput_nextPageToken, *v.NextPageToken)
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.GetWorkflowExecutionHistoryInput_reverseOrder, v.ReverseOrder)
+	}
+}
+
 // Paginated representation of a workflow history for a workflow execution. This
 // is the up to date, complete and authoritative record of the events related to
 // all tasks and events in the life of the workflow execution.
@@ -109,77 +135,51 @@ type GetWorkflowExecutionHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowExecutionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.History)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowExecutionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHistoryEventList(s, schemas.History_events, v.Events)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.History_nextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetWorkflowExecutionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.History, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.History_events:
+			return deserializeHistoryEventList(d, schemas.History_events, &v.Events)
+		case schemas.History_nextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.History_nextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowExecutionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowExecutionHistory, schemas.GetWorkflowExecutionHistoryInput, schemas.History)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetWorkflowExecutionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowExecutionHistory, schemas.GetWorkflowExecutionHistoryInput, schemas.History), output: &GetWorkflowExecutionHistoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetWorkflowExecutionHistory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkflowExecutionHistory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetWorkflowExecutionHistoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWorkflowExecutionHistory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +192,6 @@ func (c *Client) addOperationGetWorkflowExecutionHistoryMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -298,11 +292,3 @@ type GetWorkflowExecutionHistoryAPIClient interface {
 }
 
 var _ GetWorkflowExecutionHistoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetWorkflowExecutionHistory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWorkflowExecutionHistory",
-	}
-}

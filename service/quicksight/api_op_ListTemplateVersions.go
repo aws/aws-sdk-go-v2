@@ -5,10 +5,10 @@ package quicksight
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the versions of the templates in the current Amazon Quick Sight
@@ -50,6 +50,27 @@ type ListTemplateVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.ListTemplateVersionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTemplateVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateVersionsRequest_NextToken, *v.NextToken)
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.ListTemplateVersionsRequest_TemplateId, *v.TemplateId)
+	}
+}
+
 type ListTemplateVersionsOutput struct {
 
 	// The token for the next set of results, or null if there are no more results.
@@ -70,77 +91,62 @@ type ListTemplateVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplateVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplateVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplateVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplateVersionsResponse_NextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListTemplateVersionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListTemplateVersionsResponse_Status, v.Status)
+	}
+	serializeTemplateVersionSummaryList(s, schemas.ListTemplateVersionsResponse_TemplateVersionSummaryList, v.TemplateVersionSummaryList)
+}
+func (v *ListTemplateVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplateVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplateVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTemplateVersionsResponse_NextToken, v.NextToken)
+		case schemas.ListTemplateVersionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListTemplateVersionsResponse_RequestId, v.RequestId)
+		case schemas.ListTemplateVersionsResponse_Status:
+			return d.ReadInt32(schemas.ListTemplateVersionsResponse_Status, &v.Status)
+		case schemas.ListTemplateVersionsResponse_TemplateVersionSummaryList:
+			return deserializeTemplateVersionSummaryList(d, schemas.ListTemplateVersionsResponse_TemplateVersionSummaryList, &v.TemplateVersionSummaryList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateVersions, schemas.ListTemplateVersionsRequest, schemas.ListTemplateVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplateVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplateVersions, schemas.ListTemplateVersionsRequest, schemas.ListTemplateVersionsResponse), output: &ListTemplateVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTemplateVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTemplateVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTemplateVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTemplateVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +159,6 @@ func (c *Client) addOperationListTemplateVersionsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +260,3 @@ type ListTemplateVersionsAPIClient interface {
 }
 
 var _ ListTemplateVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTemplateVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTemplateVersions",
-	}
-}

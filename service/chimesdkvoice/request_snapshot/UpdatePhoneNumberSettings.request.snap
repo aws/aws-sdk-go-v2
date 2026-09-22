@@ -1,0 +1,5 @@
+PUT /settings/phone-number
+
+Content-Type: application/json
+
+{"CallingName":"__CallingName__"}

@@ -114,6 +114,25 @@ func (EndpointType) Values() []EndpointType {
 	}
 }
 
+type ExecutionPolicy string
+
+// Enum values for ExecutionPolicy
+const (
+	ExecutionPolicyFirstBootOnly ExecutionPolicy = "FIRST_BOOT_ONLY"
+	ExecutionPolicyEveryBoot     ExecutionPolicy = "EVERY_BOOT"
+)
+
+// Values returns all known values for ExecutionPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionPolicy) Values() []ExecutionPolicy {
+	return []ExecutionPolicy{
+		"FIRST_BOOT_ONLY",
+		"EVERY_BOOT",
+	}
+}
+
 type NetworkType string
 
 // Enum values for NetworkType
@@ -130,6 +149,27 @@ func (NetworkType) Values() []NetworkType {
 	return []NetworkType{
 		"IPV4",
 		"IPV6",
+	}
+}
+
+type OnError string
+
+// Enum values for OnError
+const (
+	OnErrorTerminate    OnError = "TERMINATE"
+	OnErrorStopSequence OnError = "STOP_SEQUENCE"
+	OnErrorContinue     OnError = "CONTINUE"
+)
+
+// Values returns all known values for OnError. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OnError) Values() []OnError {
+	return []OnError{
+		"TERMINATE",
+		"STOP_SEQUENCE",
+		"CONTINUE",
 	}
 }
 
@@ -205,6 +245,25 @@ const (
 func (SchedulerType) Values() []SchedulerType {
 	return []SchedulerType{
 		"SLURM",
+	}
+}
+
+type ScriptCachingPolicy string
+
+// Enum values for ScriptCachingPolicy
+const (
+	ScriptCachingPolicyCacheOnce       ScriptCachingPolicy = "CACHE_ONCE"
+	ScriptCachingPolicyRefreshOnReboot ScriptCachingPolicy = "REFRESH_ON_REBOOT"
+)
+
+// Values returns all known values for ScriptCachingPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScriptCachingPolicy) Values() []ScriptCachingPolicy {
+	return []ScriptCachingPolicy{
+		"CACHE_ONCE",
+		"REFRESH_ON_REBOOT",
 	}
 }
 

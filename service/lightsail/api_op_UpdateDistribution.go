@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing Amazon Lightsail content delivery network (CDN)
@@ -59,8 +58,35 @@ type UpdateDistributionInput struct {
 	// [GetCertificates]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html
 	CertificateName *string
 
+	// An array of objects that describe the custom error responses for the
+	// distribution. With a custom error response, you can specify the page to return
+	// when the origin responds with a given HTTP error code. You can also specify the
+	// HTTP status code to send to the viewer.
+	CustomErrorResponses []types.DistributionCustomErrorResponse
+
 	// An object that describes the default cache behavior for the distribution.
 	DefaultCacheBehavior *types.CacheBehavior
+
+	// The object (for example, index.html ) that the distribution returns when a
+	// viewer requests the root URL of the distribution ( / ) instead of a specific
+	// object. The object that you specify must be available from the origin.
+	DefaultRootObject *string
+
+	// Specifies whether to enable private origin access for the distribution. With
+	// private origin access, the distribution can serve objects that aren't publicly
+	// accessible from a Lightsail bucket.
+	//
+	// Lightsail grants the distribution permission to read the bucket's objects.
+	// Enabling private origin access doesn't change the bucket's access settings, and
+	// you can still retrieve publicly accessible objects directly from the bucket's
+	// endpoint.
+	//
+	// When you include this parameter, you must also include the origin parameter
+	// with the resource name, even if the origin is not changing.
+	//
+	// You can enable private origin access only when the distribution's origin is a
+	// Lightsail bucket. If the origin is another resource type, the request fails.
+	EnablePrivateOriginAccess *bool
 
 	// Indicates whether to enable the distribution.
 	IsEnabled *bool
@@ -85,6 +111,53 @@ type UpdateDistributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDistributionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDistributionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDistributionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CacheBehaviorSettings != nil {
+		s.WriteStruct(schemas.UpdateDistributionRequest_cacheBehaviorSettings)
+		v.CacheBehaviorSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCacheBehaviorList(s, schemas.UpdateDistributionRequest_cacheBehaviors, v.CacheBehaviors)
+	if v.CertificateName != nil {
+		s.WriteString(schemas.UpdateDistributionRequest_certificateName, *v.CertificateName)
+	}
+	serializeDistributionCustomErrorResponseList(s, schemas.UpdateDistributionRequest_customErrorResponses, v.CustomErrorResponses)
+	if v.DefaultCacheBehavior != nil {
+		s.WriteStruct(schemas.UpdateDistributionRequest_defaultCacheBehavior)
+		v.DefaultCacheBehavior.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultRootObject != nil {
+		s.WriteString(schemas.UpdateDistributionRequest_defaultRootObject, *v.DefaultRootObject)
+	}
+	if v.DistributionName != nil {
+		s.WriteString(schemas.UpdateDistributionRequest_distributionName, *v.DistributionName)
+	}
+	if v.EnablePrivateOriginAccess != nil {
+		s.WriteBool(schemas.UpdateDistributionRequest_enablePrivateOriginAccess, *v.EnablePrivateOriginAccess)
+	}
+	if v.IsEnabled != nil {
+		s.WriteBool(schemas.UpdateDistributionRequest_isEnabled, *v.IsEnabled)
+	}
+	if v.Origin != nil {
+		s.WriteStruct(schemas.UpdateDistributionRequest_origin)
+		v.Origin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UseDefaultCertificate != nil {
+		s.WriteBool(schemas.UpdateDistributionRequest_useDefaultCertificate, *v.UseDefaultCertificate)
+	}
+	if v.ViewerMinimumTlsProtocolVersion != "" {
+		s.WriteString(schemas.UpdateDistributionRequest_viewerMinimumTlsProtocolVersion, string(v.ViewerMinimumTlsProtocolVersion))
+	}
+}
+
 type UpdateDistributionOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -98,77 +171,50 @@ type UpdateDistributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDistributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDistributionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDistributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Operation != nil {
+		s.WriteStruct(schemas.UpdateDistributionResult_operation)
+		v.Operation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDistributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDistributionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDistributionResult_operation:
+			v.Operation = &types.Operation{}
+			return v.Operation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDistribution, schemas.UpdateDistributionRequest, schemas.UpdateDistributionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDistribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDistribution, schemas.UpdateDistributionRequest, schemas.UpdateDistributionResult), output: &UpdateDistributionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDistribution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDistribution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDistributionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDistribution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +229,8 @@ func (c *Client) addOperationUpdateDistributionMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDistribution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDistribution",
-	}
 }

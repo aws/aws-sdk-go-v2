@@ -4,10 +4,9 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) MalformedFloat(ctx context.Context, params *MalformedFloatInput, optFns ...func(*Options)) (*MalformedFloatOutput, error) {
@@ -39,6 +38,46 @@ type MalformedFloatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedFloatInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedFloatInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedFloatInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FloatInBody != nil {
+		s.WriteFloat32(schemas.MalformedFloatInput_floatInBody, *v.FloatInBody)
+	}
+	if v.FloatInHeader != nil {
+		s.WriteFloat32(schemas.MalformedFloatInput_floatInHeader, *v.FloatInHeader)
+	}
+	if v.FloatInPath != nil {
+		s.WriteFloat32(schemas.MalformedFloatInput_floatInPath, *v.FloatInPath)
+	}
+	if v.FloatInQuery != nil {
+		s.WriteFloat32(schemas.MalformedFloatInput_floatInQuery, *v.FloatInQuery)
+	}
+}
+func (v *MalformedFloatInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedFloatInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedFloatInput_floatInBody:
+			v.FloatInBody = new(float32)
+			return d.ReadFloat32(schemas.MalformedFloatInput_floatInBody, v.FloatInBody)
+		case schemas.MalformedFloatInput_floatInHeader:
+			v.FloatInHeader = new(float32)
+			return d.ReadFloat32(schemas.MalformedFloatInput_floatInHeader, v.FloatInHeader)
+		case schemas.MalformedFloatInput_floatInPath:
+			v.FloatInPath = new(float32)
+			return d.ReadFloat32(schemas.MalformedFloatInput_floatInPath, v.FloatInPath)
+		case schemas.MalformedFloatInput_floatInQuery:
+			v.FloatInQuery = new(float32)
+			return d.ReadFloat32(schemas.MalformedFloatInput_floatInQuery, v.FloatInQuery)
+		}
+		return nil
+	})
+}
+
 type MalformedFloatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,77 +85,42 @@ type MalformedFloatOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedFloatOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedFloatOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedFloatOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedFloatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedFloat, schemas.MalformedFloatInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedFloat{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedFloat, schemas.MalformedFloatInput, nil), output: &MalformedFloatOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedFloat{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedFloat"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpMalformedFloatValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedFloat(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,22 +135,8 @@ func (c *Client) addOperationMalformedFloatMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opMalformedFloat(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "MalformedFloat",
-	}
 }

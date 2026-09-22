@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.PutImageTagMutability
+
+{"imageTagMutability":"MUTABLE","imageTagMutabilityExclusionFilters":[{"filter":"__Filter__","filterType":"WILDCARD"},{"filter":"__Filter__","filterType":"WILDCARD"}],"registryId":"__RegistryId__","repositoryName":"__RepositoryName__"}

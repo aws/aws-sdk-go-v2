@@ -1,0 +1,6 @@
+POST /2023-10-12/farms/__FarmId__/limits
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"amountRequirementName":"__AmountRequirementName__","description":"__Description__","displayName":"__DisplayName__","maxCount":1}

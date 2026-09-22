@@ -5,10 +5,10 @@ package appintegrations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of DataIntegration associations in the account.
@@ -50,6 +50,24 @@ type ListDataIntegrationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataIntegrationAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataIntegrationAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataIntegrationAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataIntegrationIdentifier != nil {
+		s.WriteString(schemas.ListDataIntegrationAssociationsRequest_DataIntegrationIdentifier, *v.DataIntegrationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataIntegrationAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataIntegrationAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDataIntegrationAssociationsOutput struct {
 
 	// The Amazon Resource Name (ARN) and unique ID of the DataIntegration association.
@@ -64,77 +82,51 @@ type ListDataIntegrationAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataIntegrationAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataIntegrationAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataIntegrationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataIntegrationAssociationsList(s, schemas.ListDataIntegrationAssociationsResponse_DataIntegrationAssociations, v.DataIntegrationAssociations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataIntegrationAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDataIntegrationAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataIntegrationAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataIntegrationAssociationsResponse_DataIntegrationAssociations:
+			return deserializeDataIntegrationAssociationsList(d, schemas.ListDataIntegrationAssociationsResponse_DataIntegrationAssociations, &v.DataIntegrationAssociations)
+		case schemas.ListDataIntegrationAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataIntegrationAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataIntegrationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationAssociations, schemas.ListDataIntegrationAssociationsRequest, schemas.ListDataIntegrationAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataIntegrationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataIntegrationAssociations, schemas.ListDataIntegrationAssociationsRequest, schemas.ListDataIntegrationAssociationsResponse), output: &ListDataIntegrationAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataIntegrationAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataIntegrationAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDataIntegrationAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataIntegrationAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +139,6 @@ func (c *Client) addOperationListDataIntegrationAssociationsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +242,3 @@ type ListDataIntegrationAssociationsAPIClient interface {
 }
 
 var _ ListDataIntegrationAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDataIntegrationAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDataIntegrationAssociations",
-	}
-}

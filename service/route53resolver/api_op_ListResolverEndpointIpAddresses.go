@@ -5,10 +5,10 @@ package route53resolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the IP addresses for a specified Resolver endpoint.
@@ -50,6 +50,24 @@ type ListResolverEndpointIpAddressesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverEndpointIpAddressesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverEndpointIpAddressesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverEndpointIpAddressesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverEndpointIpAddressesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverEndpointIpAddressesRequest_NextToken, *v.NextToken)
+	}
+	if v.ResolverEndpointId != nil {
+		s.WriteString(schemas.ListResolverEndpointIpAddressesRequest_ResolverEndpointId, *v.ResolverEndpointId)
+	}
+}
+
 type ListResolverEndpointIpAddressesOutput struct {
 
 	// Information about the IP addresses in your VPC that DNS queries originate from
@@ -72,77 +90,57 @@ type ListResolverEndpointIpAddressesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResolverEndpointIpAddressesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResolverEndpointIpAddressesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResolverEndpointIpAddressesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpAddressesResponse(s, schemas.ListResolverEndpointIpAddressesResponse_IpAddresses, v.IpAddresses)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResolverEndpointIpAddressesResponse_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResolverEndpointIpAddressesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListResolverEndpointIpAddressesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResolverEndpointIpAddressesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResolverEndpointIpAddressesResponse_IpAddresses:
+			return deserializeIpAddressesResponse(d, schemas.ListResolverEndpointIpAddressesResponse_IpAddresses, &v.IpAddresses)
+		case schemas.ListResolverEndpointIpAddressesResponse_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListResolverEndpointIpAddressesResponse_MaxResults, v.MaxResults)
+		case schemas.ListResolverEndpointIpAddressesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResolverEndpointIpAddressesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResolverEndpointIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverEndpointIpAddresses, schemas.ListResolverEndpointIpAddressesRequest, schemas.ListResolverEndpointIpAddressesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListResolverEndpointIpAddresses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResolverEndpointIpAddresses, schemas.ListResolverEndpointIpAddressesRequest, schemas.ListResolverEndpointIpAddressesResponse), output: &ListResolverEndpointIpAddressesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListResolverEndpointIpAddresses{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResolverEndpointIpAddresses"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListResolverEndpointIpAddressesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverEndpointIpAddresses(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +153,6 @@ func (c *Client) addOperationListResolverEndpointIpAddressesMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +258,3 @@ type ListResolverEndpointIpAddressesAPIClient interface {
 }
 
 var _ ListResolverEndpointIpAddressesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResolverEndpointIpAddresses(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResolverEndpointIpAddresses",
-	}
-}

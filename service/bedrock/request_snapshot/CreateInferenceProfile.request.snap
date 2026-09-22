@@ -1,0 +1,5 @@
+POST /inference-profiles
+
+Content-Type: application/json
+
+{"clientRequestToken":"__ClientRequestToken__","description":"__Description__","inferenceProfileName":"__InferenceProfileName__","modelSource":{"copyFrom":"__InferenceProfileModelSourceMemberCopyFrom__"},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

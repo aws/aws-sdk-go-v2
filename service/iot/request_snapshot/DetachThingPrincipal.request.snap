@@ -1,0 +1,4 @@
+DELETE /things/__ThingName__/principals
+
+X-Amzn-Principal: __Principal__
+

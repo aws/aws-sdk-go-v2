@@ -54,6 +54,12 @@ const (
 	BusinessValidationCodeInvalidAccountState                     BusinessValidationCode = "INVALID_ACCOUNT_STATE"
 	BusinessValidationCodeIncompatibleDomain                      BusinessValidationCode = "INCOMPATIBLE_DOMAIN"
 	BusinessValidationCodeIneligibleAccountTier                   BusinessValidationCode = "INELIGIBLE_ACCOUNT_TIER"
+	BusinessValidationCodeMissingActiveSubsidiaryConnection       BusinessValidationCode = "MISSING_ACTIVE_SUBSIDIARY_CONNECTION"
+	BusinessValidationCodeIncompatibleSubsidiaryConnection        BusinessValidationCode = "INCOMPATIBLE_SUBSIDIARY_CONNECTION"
+	BusinessValidationCodeIncompatiblePrimaryPartner              BusinessValidationCode = "INCOMPATIBLE_PRIMARY_PARTNER"
+	BusinessValidationCodeQualificationsAssociationLimitExceeded  BusinessValidationCode = "QUALIFICATIONS_ASSOCIATION_LIMIT_EXCEEDED"
+	BusinessValidationCodeQualificationsAssociationNotFound       BusinessValidationCode = "QUALIFICATIONS_ASSOCIATION_NOT_FOUND"
+	BusinessValidationCodeQualificationsAssociationExists         BusinessValidationCode = "QUALIFICATIONS_ASSOCIATION_EXISTS"
 )
 
 // Values returns all known values for BusinessValidationCode. Note that this can
@@ -70,6 +76,12 @@ func (BusinessValidationCode) Values() []BusinessValidationCode {
 		"INVALID_ACCOUNT_STATE",
 		"INCOMPATIBLE_DOMAIN",
 		"INELIGIBLE_ACCOUNT_TIER",
+		"MISSING_ACTIVE_SUBSIDIARY_CONNECTION",
+		"INCOMPATIBLE_SUBSIDIARY_CONNECTION",
+		"INCOMPATIBLE_PRIMARY_PARTNER",
+		"QUALIFICATIONS_ASSOCIATION_LIMIT_EXCEEDED",
+		"QUALIFICATIONS_ASSOCIATION_NOT_FOUND",
+		"QUALIFICATIONS_ASSOCIATION_EXISTS",
 	}
 }
 
@@ -77,18 +89,19 @@ type ConflictExceptionReason string
 
 // Enum values for ConflictExceptionReason
 const (
-	ConflictExceptionReasonConflictClientToken                       ConflictExceptionReason = "CONFLICT_CLIENT_TOKEN"
-	ConflictExceptionReasonDuplicatePartner                          ConflictExceptionReason = "DUPLICATE_PARTNER"
-	ConflictExceptionReasonIncompatibleProfileState                  ConflictExceptionReason = "INCOMPATIBLE_PROFILE_STATE"
-	ConflictExceptionReasonIncompatiblePartnerProfileTaskState       ConflictExceptionReason = "INCOMPATIBLE_PARTNER_PROFILE_TASK_STATE"
-	ConflictExceptionReasonDuplicateConnectionInvitation             ConflictExceptionReason = "DUPLICATE_CONNECTION_INVITATION"
-	ConflictExceptionReasonIncompatibleConnectionInvitationState     ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_INVITATION_STATE"
-	ConflictExceptionReasonIncompatibleConnectionInvitationReceiver  ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_INVITATION_RECEIVER"
-	ConflictExceptionReasonDuplicateConnection                       ConflictExceptionReason = "DUPLICATE_CONNECTION"
-	ConflictExceptionReasonIncompatibleConnectionState               ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_STATE"
-	ConflictExceptionReasonIncompatibleConnectionPreferencesRevision ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION"
-	ConflictExceptionReasonAccountAlreadyVerified                    ConflictExceptionReason = "ACCOUNT_ALREADY_VERIFIED"
-	ConflictExceptionReasonVerificationAlreadyInProgress             ConflictExceptionReason = "VERIFICATION_ALREADY_IN_PROGRESS"
+	ConflictExceptionReasonConflictClientToken                            ConflictExceptionReason = "CONFLICT_CLIENT_TOKEN"
+	ConflictExceptionReasonDuplicatePartner                               ConflictExceptionReason = "DUPLICATE_PARTNER"
+	ConflictExceptionReasonIncompatibleProfileState                       ConflictExceptionReason = "INCOMPATIBLE_PROFILE_STATE"
+	ConflictExceptionReasonIncompatiblePartnerProfileTaskState            ConflictExceptionReason = "INCOMPATIBLE_PARTNER_PROFILE_TASK_STATE"
+	ConflictExceptionReasonDuplicateConnectionInvitation                  ConflictExceptionReason = "DUPLICATE_CONNECTION_INVITATION"
+	ConflictExceptionReasonIncompatibleConnectionInvitationState          ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_INVITATION_STATE"
+	ConflictExceptionReasonIncompatibleConnectionInvitationReceiver       ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_INVITATION_RECEIVER"
+	ConflictExceptionReasonDuplicateConnection                            ConflictExceptionReason = "DUPLICATE_CONNECTION"
+	ConflictExceptionReasonIncompatibleConnectionState                    ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_STATE"
+	ConflictExceptionReasonIncompatibleConnectionPreferencesRevision      ConflictExceptionReason = "INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION"
+	ConflictExceptionReasonAccountAlreadyVerified                         ConflictExceptionReason = "ACCOUNT_ALREADY_VERIFIED"
+	ConflictExceptionReasonVerificationAlreadyInProgress                  ConflictExceptionReason = "VERIFICATION_ALREADY_IN_PROGRESS"
+	ConflictExceptionReasonIncompatibleQualificationsAssociationTaskState ConflictExceptionReason = "INCOMPATIBLE_QUALIFICATIONS_ASSOCIATION_TASK_STATE"
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
@@ -109,6 +122,7 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 		"INCOMPATIBLE_CONNECTION_PREFERENCES_REVISION",
 		"ACCOUNT_ALREADY_VERIFIED",
 		"VERIFICATION_ALREADY_IN_PROGRESS",
+		"INCOMPATIBLE_QUALIFICATIONS_ASSOCIATION_TASK_STATE",
 	}
 }
 
@@ -415,19 +429,81 @@ func (ProfileVisibility) Values() []ProfileVisibility {
 	}
 }
 
+type QualificationsAssociationStatus string
+
+// Enum values for QualificationsAssociationStatus
+const (
+	QualificationsAssociationStatusAssociated    QualificationsAssociationStatus = "ASSOCIATED"
+	QualificationsAssociationStatusNotAssociated QualificationsAssociationStatus = "NOT_ASSOCIATED"
+)
+
+// Values returns all known values for QualificationsAssociationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QualificationsAssociationStatus) Values() []QualificationsAssociationStatus {
+	return []QualificationsAssociationStatus{
+		"ASSOCIATED",
+		"NOT_ASSOCIATED",
+	}
+}
+
+type QualificationsAssociationTaskStatus string
+
+// Enum values for QualificationsAssociationTaskStatus
+const (
+	QualificationsAssociationTaskStatusInProgress QualificationsAssociationTaskStatus = "IN_PROGRESS"
+	QualificationsAssociationTaskStatusSucceeded  QualificationsAssociationTaskStatus = "SUCCEEDED"
+)
+
+// Values returns all known values for QualificationsAssociationTaskStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QualificationsAssociationTaskStatus) Values() []QualificationsAssociationTaskStatus {
+	return []QualificationsAssociationTaskStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+	}
+}
+
+type QualificationsDisassociationTaskStatus string
+
+// Enum values for QualificationsDisassociationTaskStatus
+const (
+	QualificationsDisassociationTaskStatusInProgress QualificationsDisassociationTaskStatus = "IN_PROGRESS"
+	QualificationsDisassociationTaskStatusSucceeded  QualificationsDisassociationTaskStatus = "SUCCEEDED"
+)
+
+// Values returns all known values for QualificationsDisassociationTaskStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QualificationsDisassociationTaskStatus) Values() []QualificationsDisassociationTaskStatus {
+	return []QualificationsDisassociationTaskStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+	}
+}
+
 type ResourceNotFoundExceptionReason string
 
 // Enum values for ResourceNotFoundExceptionReason
 const (
-	ResourceNotFoundExceptionReasonPartnerNotFound              ResourceNotFoundExceptionReason = "PARTNER_NOT_FOUND"
-	ResourceNotFoundExceptionReasonPartnerProfileNotFound       ResourceNotFoundExceptionReason = "PARTNER_PROFILE_NOT_FOUND"
-	ResourceNotFoundExceptionReasonPartnerProfileTaskNotFound   ResourceNotFoundExceptionReason = "PARTNER_PROFILE_TASK_NOT_FOUND"
-	ResourceNotFoundExceptionReasonPartnerDomainNotFound        ResourceNotFoundExceptionReason = "PARTNER_DOMAIN_NOT_FOUND"
-	ResourceNotFoundExceptionReasonSenderProfileNotFound        ResourceNotFoundExceptionReason = "SENDER_PROFILE_NOT_FOUND"
-	ResourceNotFoundExceptionReasonReceiverProfileNotFound      ResourceNotFoundExceptionReason = "RECEIVER_PROFILE_NOT_FOUND"
-	ResourceNotFoundExceptionReasonConnectionInvitationNotFound ResourceNotFoundExceptionReason = "CONNECTION_INVITATION_NOT_FOUND"
-	ResourceNotFoundExceptionReasonConnectionNotFound           ResourceNotFoundExceptionReason = "CONNECTION_NOT_FOUND"
-	ResourceNotFoundExceptionReasonVerificationNotFound         ResourceNotFoundExceptionReason = "VERIFICATION_NOT_FOUND"
+	ResourceNotFoundExceptionReasonPartnerNotFound                          ResourceNotFoundExceptionReason = "PARTNER_NOT_FOUND"
+	ResourceNotFoundExceptionReasonPartnerProfileNotFound                   ResourceNotFoundExceptionReason = "PARTNER_PROFILE_NOT_FOUND"
+	ResourceNotFoundExceptionReasonPartnerProfileTaskNotFound               ResourceNotFoundExceptionReason = "PARTNER_PROFILE_TASK_NOT_FOUND"
+	ResourceNotFoundExceptionReasonPartnerDomainNotFound                    ResourceNotFoundExceptionReason = "PARTNER_DOMAIN_NOT_FOUND"
+	ResourceNotFoundExceptionReasonSenderProfileNotFound                    ResourceNotFoundExceptionReason = "SENDER_PROFILE_NOT_FOUND"
+	ResourceNotFoundExceptionReasonReceiverProfileNotFound                  ResourceNotFoundExceptionReason = "RECEIVER_PROFILE_NOT_FOUND"
+	ResourceNotFoundExceptionReasonConnectionInvitationNotFound             ResourceNotFoundExceptionReason = "CONNECTION_INVITATION_NOT_FOUND"
+	ResourceNotFoundExceptionReasonConnectionNotFound                       ResourceNotFoundExceptionReason = "CONNECTION_NOT_FOUND"
+	ResourceNotFoundExceptionReasonVerificationNotFound                     ResourceNotFoundExceptionReason = "VERIFICATION_NOT_FOUND"
+	ResourceNotFoundExceptionReasonQualificationsAssociationTaskNotFound    ResourceNotFoundExceptionReason = "QUALIFICATIONS_ASSOCIATION_TASK_NOT_FOUND"
+	ResourceNotFoundExceptionReasonQualificationsDisassociationTaskNotFound ResourceNotFoundExceptionReason = "QUALIFICATIONS_DISASSOCIATION_TASK_NOT_FOUND"
 )
 
 // Values returns all known values for ResourceNotFoundExceptionReason. Note that
@@ -446,6 +522,8 @@ func (ResourceNotFoundExceptionReason) Values() []ResourceNotFoundExceptionReaso
 		"CONNECTION_INVITATION_NOT_FOUND",
 		"CONNECTION_NOT_FOUND",
 		"VERIFICATION_NOT_FOUND",
+		"QUALIFICATIONS_ASSOCIATION_TASK_NOT_FOUND",
+		"QUALIFICATIONS_DISASSOCIATION_TASK_NOT_FOUND",
 	}
 }
 

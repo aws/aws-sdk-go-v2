@@ -44,6 +44,7 @@ public class RetryModeUserAgent implements GoIntegration {
         return List.of(
                 RuntimeClientPlugin.builder()
                         .registerMiddleware(MIDDLEWARE)
+                        .isCommon(true)
                         .build()
         );
     }

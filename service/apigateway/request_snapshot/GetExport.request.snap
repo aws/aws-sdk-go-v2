@@ -1,0 +1,4 @@
+GET /restapis/__RestApiId__/stages/__StageName__/exports/__ExportType__?key0=__Value__
+
+Accept: application/json
+

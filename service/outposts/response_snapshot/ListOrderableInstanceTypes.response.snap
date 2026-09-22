@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"InstanceTypes":[{"FormFactorConfigs":[{"FormFactor":"RACK","OutpostGeneration":"GENERATION_2"},{"FormFactor":"RACK","OutpostGeneration":"GENERATION_2"}],"InstanceType":"__InstanceType__","MemoryInMib":1,"NetworkPerformance":"__NetworkPerformance__","VCPUs":1},{"FormFactorConfigs":[{"FormFactor":"RACK","OutpostGeneration":"GENERATION_2"},{"FormFactor":"RACK","OutpostGeneration":"GENERATION_2"}],"InstanceType":"__InstanceType__","MemoryInMib":1,"NetworkPerformance":"__NetworkPerformance__","VCPUs":1}],"NextToken":"__NextToken__"}

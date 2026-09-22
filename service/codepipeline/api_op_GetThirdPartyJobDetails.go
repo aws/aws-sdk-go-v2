@@ -4,11 +4,10 @@ package codepipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codepipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Requests the details of a job for a third party action. Used for partner
@@ -50,6 +49,21 @@ type GetThirdPartyJobDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetThirdPartyJobDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThirdPartyJobDetailsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThirdPartyJobDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.GetThirdPartyJobDetailsInput_clientToken, *v.ClientToken)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetThirdPartyJobDetailsInput_jobId, *v.JobId)
+	}
+}
+
 // Represents the output of a GetThirdPartyJobDetails action.
 type GetThirdPartyJobDetailsOutput struct {
 
@@ -62,77 +76,50 @@ type GetThirdPartyJobDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetThirdPartyJobDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetThirdPartyJobDetailsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetThirdPartyJobDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobDetails != nil {
+		s.WriteStruct(schemas.GetThirdPartyJobDetailsOutput_jobDetails)
+		v.JobDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetThirdPartyJobDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetThirdPartyJobDetailsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetThirdPartyJobDetailsOutput_jobDetails:
+			v.JobDetails = &types.ThirdPartyJobDetails{}
+			return v.JobDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetThirdPartyJobDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThirdPartyJobDetails, schemas.GetThirdPartyJobDetailsInput, schemas.GetThirdPartyJobDetailsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetThirdPartyJobDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetThirdPartyJobDetails, schemas.GetThirdPartyJobDetailsInput, schemas.GetThirdPartyJobDetailsOutput), output: &GetThirdPartyJobDetailsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetThirdPartyJobDetails{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetThirdPartyJobDetails"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetThirdPartyJobDetailsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetThirdPartyJobDetails(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +134,8 @@ func (c *Client) addOperationGetThirdPartyJobDetailsMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetThirdPartyJobDetails(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetThirdPartyJobDetails",
-	}
 }

@@ -5,9 +5,9 @@ package workmail
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a mailbox export job to export MIME-format email messages and calendar
@@ -87,6 +87,39 @@ type StartMailboxExportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMailboxExportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMailboxExportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMailboxExportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_Description, *v.Description)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_EntityId, *v.EntityId)
+	}
+	if v.KmsKeyArn != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_KmsKeyArn, *v.KmsKeyArn)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_S3BucketName, *v.S3BucketName)
+	}
+	if v.S3Prefix != nil {
+		s.WriteString(schemas.StartMailboxExportJobRequest_S3Prefix, *v.S3Prefix)
+	}
+}
+
 type StartMailboxExportJobOutput struct {
 
 	// The job ID.
@@ -98,65 +131,42 @@ type StartMailboxExportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMailboxExportJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMailboxExportJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMailboxExportJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartMailboxExportJobResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartMailboxExportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMailboxExportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMailboxExportJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartMailboxExportJobResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMailboxExportJob, schemas.StartMailboxExportJobRequest, schemas.StartMailboxExportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMailboxExportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMailboxExportJob, schemas.StartMailboxExportJobRequest, schemas.StartMailboxExportJobResponse), output: &StartMailboxExportJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMailboxExportJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMailboxExportJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -166,12 +176,6 @@ func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpStartMailboxExportJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMailboxExportJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,12 +188,6 @@ func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -229,12 +227,4 @@ func (m *idempotencyToken_initializeOpStartMailboxExportJob) HandleInitialize(ct
 }
 func addIdempotencyToken_opStartMailboxExportJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartMailboxExportJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartMailboxExportJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMailboxExportJob",
-	}
 }

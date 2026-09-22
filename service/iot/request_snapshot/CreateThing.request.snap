@@ -1,0 +1,5 @@
+POST /things/__ThingName__
+
+Content-Type: application/json
+
+{"attributePayload":{"attributes":{"key0":"__Value__"},"merge":true},"billingGroupName":"__BillingGroupName__","thingTypeName":"__ThingTypeName__"}

@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about all the message templates that are associated with
@@ -52,6 +51,27 @@ type ListTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTemplatesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteString(schemas.ListTemplatesRequest_PageSize, *v.PageSize)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ListTemplatesRequest_Prefix, *v.Prefix)
+	}
+	if v.TemplateType != nil {
+		s.WriteString(schemas.ListTemplatesRequest_TemplateType, *v.TemplateType)
+	}
+}
+
 type ListTemplatesOutput struct {
 
 	// Provides information about all the message templates that are associated with
@@ -66,74 +86,47 @@ type ListTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTemplatesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplatesResponse != nil {
+		s.WriteStruct(schemas.ListTemplatesResponse_TemplatesResponse)
+		v.TemplatesResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTemplatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTemplatesResponse_TemplatesResponse:
+			v.TemplatesResponse = &types.TemplatesResponse{}
+			return v.TemplatesResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplates, schemas.ListTemplatesRequest, schemas.ListTemplatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTemplates, schemas.ListTemplatesRequest, schemas.ListTemplatesResponse), output: &ListTemplatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTemplates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTemplates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTemplates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +141,8 @@ func (c *Client) addOperationListTemplatesMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTemplates",
-	}
 }

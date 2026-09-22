@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListCodeRepositories
+
+{"CodeRepositorySummaryList":[{"CodeRepositoryArn":"__CodeRepositoryArn__","CodeRepositoryName":"__CodeRepositoryName__","CreationTime":946684800,"GitConfig":{"Branch":"__Branch__","RepositoryUrl":"__RepositoryUrl__","SecretArn":"__SecretArn__"},"LastModifiedTime":946684800},{"CodeRepositoryArn":"__CodeRepositoryArn__","CodeRepositoryName":"__CodeRepositoryName__","CreationTime":946684800,"GitConfig":{"Branch":"__Branch__","RepositoryUrl":"__RepositoryUrl__","SecretArn":"__SecretArn__"},"LastModifiedTime":946684800}],"NextToken":"__NextToken__"}

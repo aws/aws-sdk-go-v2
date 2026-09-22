@@ -622,6 +622,78 @@
                     "traits": {
                         "smithy.api#enumValue": "NumericGreaterThanEquals"
                     }
+                },
+                "STRING_EQUALS_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringEqualsIfExists"
+                    }
+                },
+                "STRING_NOT_EQUALS_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringNotEqualsIfExists"
+                    }
+                },
+                "STRING_EQUALS_IGNORE_CASE_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringEqualsIgnoreCaseIfExists"
+                    }
+                },
+                "STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringNotEqualsIgnoreCaseIfExists"
+                    }
+                },
+                "STRING_LIKE_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringLikeIfExists"
+                    }
+                },
+                "STRING_NOT_LIKE_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringNotLikeIfExists"
+                    }
+                },
+                "NUMERIC_EQUALS_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NumericEqualsIfExists"
+                    }
+                },
+                "NUMERIC_NOT_EQUALS_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NumericNotEqualsIfExists"
+                    }
+                },
+                "NUMERIC_LESS_THAN_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NumericLessThanIfExists"
+                    }
+                },
+                "NUMERIC_LESS_THAN_EQUALS_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NumericLessThanEqualsIfExists"
+                    }
+                },
+                "NUMERIC_GREATER_THAN_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NumericGreaterThanIfExists"
+                    }
+                },
+                "NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NumericGreaterThanEqualsIfExists"
+                    }
                 }
             }
         },
@@ -712,6 +784,194 @@
                 "smithy.api#documentation": "<p> Automation is a feature within Amazon Web Services Compute Optimizer that enables you to apply optimization recommendations to your Amazon Web Services resources, reducing costs and improving performance. You can apply recommended actions directly or create automation rules that implement recommendations on a recurring schedule when they match your specified criteria. With automation rules, set criteria such as Amazon Web Services Region and Resource Tags to target specific geographies and workloads. Configure rules to run daily, weekly, or monthly, and Compute Optimizer continuously evaluates new recommendations against your criteria. Track automation events over time, examine detailed step history, estimate savings achieved, and reverse actions directly from Compute Optimizer when needed. </p>",
                 "smithy.api#title": "Compute Optimizer Automation",
                 "smithy.protocols#rpcv2Cbor": {},
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://aco-automation-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://aco-automation-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://aco-automation.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://aco-automation.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1781,7 +2041,7 @@
                 "comparison": {
                     "target": "com.amazonaws.computeoptimizerautomation#ComparisonOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator to use, such as equals, greater than, less than, etc.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values.</p>"
                     }
                 },
                 "values": {
@@ -2467,7 +2727,7 @@
                 "comparison": {
                     "target": "com.amazonaws.computeoptimizerautomation#ComparisonOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator to use, such as equals, greater than, less than, etc.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values.</p>"
                     }
                 },
                 "values": {
@@ -3985,7 +4245,7 @@
                 "comparison": {
                     "target": "com.amazonaws.computeoptimizerautomation#ComparisonOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the tag criteria, such as equals, not equals, or contains.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values.</p>"
                     }
                 },
                 "key": {
@@ -4468,7 +4728,7 @@
                 "comparison": {
                     "target": "com.amazonaws.computeoptimizerautomation#ComparisonOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the string criteria, such as equals, not equals, or contains.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator used to evaluate the attribute against the specified values.</p>"
                     }
                 },
                 "values": {

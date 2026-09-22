@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"TransitGatewayPeering":{"Peering":{"CoreNetworkArn":"__CoreNetworkArn__","CoreNetworkId":"__CoreNetworkId__","CreatedAt":946684800,"EdgeLocation":"__EdgeLocation__","LastModificationErrors":[{"Code":"TRANSIT_GATEWAY_NOT_FOUND","Message":"__Message__","MissingPermissionsContext":{"MissingPermission":"__MissingPermission__"},"RequestId":"__RequestId__","ResourceArn":"__ResourceArn__"},{"Code":"TRANSIT_GATEWAY_NOT_FOUND","Message":"__Message__","MissingPermissionsContext":{"MissingPermission":"__MissingPermission__"},"RequestId":"__RequestId__","ResourceArn":"__ResourceArn__"}],"OwnerAccountId":"__OwnerAccountId__","PeeringId":"__PeeringId__","PeeringType":"TRANSIT_GATEWAY","ResourceArn":"__ResourceArn__","State":"CREATING","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]},"TransitGatewayArn":"__TransitGatewayArn__","TransitGatewayPeeringAttachmentId":"__TransitGatewayPeeringAttachmentId__"}}

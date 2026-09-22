@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/findings/create
+
+Content-Type: application/json
+
+{"findingTypes":["__Member__","__Member__"]}

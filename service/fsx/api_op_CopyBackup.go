@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Copies an existing backup within the same Amazon Web Services account to
@@ -110,6 +110,31 @@ type CopyBackupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyBackupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyBackupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyBackupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CopyBackupRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.CopyTags != nil {
+		s.WriteBool(schemas.CopyBackupRequest_CopyTags, *v.CopyTags)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CopyBackupRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SourceBackupId != nil {
+		s.WriteString(schemas.CopyBackupRequest_SourceBackupId, *v.SourceBackupId)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.CopyBackupRequest_SourceRegion, *v.SourceRegion)
+	}
+	serializeTags(s, schemas.CopyBackupRequest_Tags, v.Tags)
+}
+
 type CopyBackupOutput struct {
 
 	// A backup of an Amazon FSx for Windows File Server, Amazon FSx for Lustre file
@@ -123,65 +148,44 @@ type CopyBackupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyBackupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyBackupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyBackupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Backup != nil {
+		s.WriteStruct(schemas.CopyBackupResponse_Backup)
+		v.Backup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CopyBackupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyBackupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyBackupResponse_Backup:
+			v.Backup = &types.Backup{}
+			return v.Backup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyBackup, schemas.CopyBackupRequest, schemas.CopyBackupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyBackup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyBackup, schemas.CopyBackupRequest, schemas.CopyBackupResponse), output: &CopyBackupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopyBackup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyBackup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -191,12 +195,6 @@ func (c *Client) addOperationCopyBackupMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpCopyBackupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyBackup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,12 +207,6 @@ func (c *Client) addOperationCopyBackupMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,12 +246,4 @@ func (m *idempotencyToken_initializeOpCopyBackup) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opCopyBackupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCopyBackup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCopyBackup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CopyBackup",
-	}
 }

@@ -4,11 +4,8 @@ package geomaps
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/geomaps/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // GetStyleDescriptor returns information about the style.
@@ -72,6 +69,61 @@ type GetStyleDescriptorInput struct {
 	// Optional: The API key to be used for authorization. Either an API key or valid
 	// SigV4 signature must be provided when making a request.
 	Key *string
+
+	// Renders only the specified categories of points of interest. When you omit this
+	// parameter, the map renders all categories.
+	//
+	// The following categories are currently supported:
+	//
+	//   - FoodAndDrink
+	//
+	//   - Entertainment
+	//
+	//   - SightsAndMuseums
+	//
+	//   - Transportation
+	//
+	//   - Accommodations
+	//
+	//   - LeisureAndOutdoor
+	//
+	//   - Shopping
+	//
+	//   - BusinessAndServices
+	//
+	//   - FacilitiesAndBuildings
+	//
+	// Specify each category as a separate poi-categories query parameter. Duplicate
+	// values are rejected.
+	//
+	// This parameter has no effect when poi-density is set to Off , which hides all
+	// points of interest regardless of category.
+	//
+	// This parameter is valid only for the Standard and Hybrid map styles. In
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers, this parameter is
+	// valid only for the Standard map style.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+	PoiCategories []types.PoiCategory
+
+	// Controls how densely points of interest are rendered on the map. The density
+	// value controls the zoom level at which each category of points of interest
+	// appears, and how quickly less prominent points of interest are revealed as you
+	// zoom in. Denser values display more points of interest at lower zoom levels.
+	//
+	// Use Off to hide all points of interest. When you omit this parameter, the map
+	// renders at Default density.
+	//
+	// The difference between density values is most noticeable at mid-range zoom
+	// levels. At high zoom levels, all density values converge on displaying every
+	// available point of interest.
+	//
+	// This parameter is valid only for the Standard and Hybrid map styles. In
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers, this parameter is
+	// valid only for the Standard map style.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
+	PoiDensity types.PoiDensity
 
 	// Specifies the political view using ISO 3166-2 or ISO 3166-3 country code
 	// format. Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
@@ -172,9 +224,6 @@ type GetStyleDescriptorOutput struct {
 }
 
 func (c *Client) addOperationGetStyleDescriptorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetStyleDescriptor{}, middleware.After)
 	if err != nil {
 		return err
@@ -183,65 +232,20 @@ func (c *Client) addOperationGetStyleDescriptorMiddlewares(stack *middleware.Sta
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStyleDescriptor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetStyleDescriptorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetStyleDescriptor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -256,22 +260,8 @@ func (c *Client) addOperationGetStyleDescriptorMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetStyleDescriptor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetStyleDescriptor",
-	}
 }

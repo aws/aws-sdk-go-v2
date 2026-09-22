@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified Firewall and its FirewallStatus. This operation requires the firewall's
@@ -54,6 +53,21 @@ type DeleteFirewallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.DeleteFirewallRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.DeleteFirewallRequest_FirewallName, *v.FirewallName)
+	}
+}
+
 type DeleteFirewallOutput struct {
 
 	// A firewall defines the behavior of a firewall, the main VPC where the firewall
@@ -86,74 +100,55 @@ type DeleteFirewallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Firewall != nil {
+		s.WriteStruct(schemas.DeleteFirewallResponse_Firewall)
+		v.Firewall.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallStatus != nil {
+		s.WriteStruct(schemas.DeleteFirewallResponse_FirewallStatus)
+		v.FirewallStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteFirewallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFirewallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFirewallResponse_Firewall:
+			v.Firewall = &types.Firewall{}
+			return v.Firewall.Deserialize(d)
+		case schemas.DeleteFirewallResponse_FirewallStatus:
+			v.FirewallStatus = &types.FirewallStatus{}
+			return v.FirewallStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFirewallMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewall, schemas.DeleteFirewallRequest, schemas.DeleteFirewallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteFirewall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewall, schemas.DeleteFirewallRequest, schemas.DeleteFirewallResponse), output: &DeleteFirewallOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteFirewall{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteFirewall"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFirewall(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +163,8 @@ func (c *Client) addOperationDeleteFirewallMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteFirewall(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteFirewall",
-	}
 }

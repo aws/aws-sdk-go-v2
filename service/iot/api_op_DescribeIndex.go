@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes a search index.
@@ -39,6 +38,18 @@ type DescribeIndexInput struct {
 	IndexName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexName != nil {
+		s.WriteString(schemas.DescribeIndexRequest_indexName, *v.IndexName)
+	}
 }
 
 type DescribeIndexOutput struct {
@@ -75,77 +86,64 @@ type DescribeIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexName != nil {
+		s.WriteString(schemas.DescribeIndexResponse_indexName, *v.IndexName)
+	}
+	if v.IndexStatus != "" {
+		s.WriteString(schemas.DescribeIndexResponse_indexStatus, string(v.IndexStatus))
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.DescribeIndexResponse_schema, *v.Schema)
+	}
+}
+func (v *DescribeIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeIndexResponse_indexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_indexName, v.IndexName)
+		case schemas.DescribeIndexResponse_indexStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeIndexResponse_indexStatus, &ev); err != nil {
+				return err
+			}
+			v.IndexStatus = types.IndexStatus(ev)
+			return nil
+		case schemas.DescribeIndexResponse_schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.DescribeIndexResponse_schema, v.Schema)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndex, schemas.DescribeIndexRequest, schemas.DescribeIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeIndex, schemas.DescribeIndexRequest, schemas.DescribeIndexResponse), output: &DescribeIndexOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeIndex{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeIndex"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeIndexValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeIndex(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +158,8 @@ func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeIndex(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeIndex",
-	}
 }

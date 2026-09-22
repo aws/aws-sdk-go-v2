@@ -1,0 +1,3 @@
+GET /workspaces/__WorkspaceId__/anomalydetectors/__AnomalyDetectorId__
+
+

@@ -4,11 +4,10 @@ package medialive
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Changes the class of the channel.
@@ -46,6 +45,22 @@ type UpdateChannelClassInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelClassInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelClassRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelClassInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelClass != "" {
+		s.WriteString(schemas.UpdateChannelClassRequest_ChannelClass, string(v.ChannelClass))
+	}
+	if v.ChannelId != nil {
+		s.WriteString(schemas.UpdateChannelClassRequest_ChannelId, *v.ChannelId)
+	}
+	serialize__listOfOutputDestination(s, schemas.UpdateChannelClassRequest_Destinations, v.Destinations)
+}
+
 // Placeholder documentation for UpdateChannelClassResponse
 type UpdateChannelClassOutput struct {
 
@@ -58,77 +73,50 @@ type UpdateChannelClassOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChannelClassOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChannelClassResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChannelClassOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Channel != nil {
+		s.WriteStruct(schemas.UpdateChannelClassResponse_Channel)
+		v.Channel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateChannelClassOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChannelClassResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateChannelClassResponse_Channel:
+			v.Channel = &types.Channel{}
+			return v.Channel.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChannelClassMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannelClass, schemas.UpdateChannelClassRequest, schemas.UpdateChannelClassResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChannelClass{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChannelClass, schemas.UpdateChannelClassRequest, schemas.UpdateChannelClassResponse), output: &UpdateChannelClassOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChannelClass{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateChannelClass"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateChannelClassValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChannelClass(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +131,8 @@ func (c *Client) addOperationUpdateChannelClassMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateChannelClass(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateChannelClass",
-	}
 }

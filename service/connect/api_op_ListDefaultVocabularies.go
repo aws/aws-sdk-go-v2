@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the default vocabularies for the specified Connect Customer instance.
@@ -53,6 +53,27 @@ type ListDefaultVocabulariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDefaultVocabulariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDefaultVocabulariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDefaultVocabulariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListDefaultVocabulariesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.ListDefaultVocabulariesRequest_LanguageCode, string(v.LanguageCode))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDefaultVocabulariesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDefaultVocabulariesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListDefaultVocabulariesOutput struct {
 
 	// A list of default vocabularies.
@@ -69,77 +90,51 @@ type ListDefaultVocabulariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDefaultVocabulariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDefaultVocabulariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDefaultVocabulariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDefaultVocabularyList(s, schemas.ListDefaultVocabulariesResponse_DefaultVocabularyList, v.DefaultVocabularyList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDefaultVocabulariesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDefaultVocabulariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDefaultVocabulariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDefaultVocabulariesResponse_DefaultVocabularyList:
+			return deserializeDefaultVocabularyList(d, schemas.ListDefaultVocabulariesResponse_DefaultVocabularyList, &v.DefaultVocabularyList)
+		case schemas.ListDefaultVocabulariesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDefaultVocabulariesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDefaultVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDefaultVocabularies, schemas.ListDefaultVocabulariesRequest, schemas.ListDefaultVocabulariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDefaultVocabularies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDefaultVocabularies, schemas.ListDefaultVocabulariesRequest, schemas.ListDefaultVocabulariesResponse), output: &ListDefaultVocabulariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDefaultVocabularies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDefaultVocabularies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDefaultVocabulariesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDefaultVocabularies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +147,6 @@ func (c *Client) addOperationListDefaultVocabulariesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +249,3 @@ type ListDefaultVocabulariesAPIClient interface {
 }
 
 var _ ListDefaultVocabulariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDefaultVocabularies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDefaultVocabularies",
-	}
-}

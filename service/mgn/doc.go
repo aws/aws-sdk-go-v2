@@ -3,5 +3,5 @@
 // Package mgn provides the API client, operations, and parameter types for
 // Application Migration Service.
 //
-// The Application Migration Service service.
+// Application Migration Service.
 package mgn

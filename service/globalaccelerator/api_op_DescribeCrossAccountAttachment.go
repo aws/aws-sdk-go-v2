@@ -4,11 +4,10 @@ package globalaccelerator
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets configuration information about a cross-account attachment.
@@ -37,6 +36,18 @@ type DescribeCrossAccountAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCrossAccountAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCrossAccountAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCrossAccountAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentArn != nil {
+		s.WriteString(schemas.DescribeCrossAccountAttachmentRequest_AttachmentArn, *v.AttachmentArn)
+	}
+}
+
 type DescribeCrossAccountAttachmentOutput struct {
 
 	// Information about the cross-account attachment.
@@ -48,77 +59,50 @@ type DescribeCrossAccountAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCrossAccountAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCrossAccountAttachmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCrossAccountAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountAttachment != nil {
+		s.WriteStruct(schemas.DescribeCrossAccountAttachmentResponse_CrossAccountAttachment)
+		v.CrossAccountAttachment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCrossAccountAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCrossAccountAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCrossAccountAttachmentResponse_CrossAccountAttachment:
+			v.CrossAccountAttachment = &types.Attachment{}
+			return v.CrossAccountAttachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCrossAccountAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCrossAccountAttachment, schemas.DescribeCrossAccountAttachmentRequest, schemas.DescribeCrossAccountAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCrossAccountAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCrossAccountAttachment, schemas.DescribeCrossAccountAttachmentRequest, schemas.DescribeCrossAccountAttachmentResponse), output: &DescribeCrossAccountAttachmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCrossAccountAttachment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCrossAccountAttachment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeCrossAccountAttachmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCrossAccountAttachment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -133,22 +117,8 @@ func (c *Client) addOperationDescribeCrossAccountAttachmentMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeCrossAccountAttachment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeCrossAccountAttachment",
-	}
 }

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.GetAggregateConfigRuleComplianceSummary
+
+{"AggregateComplianceCounts":[{"ComplianceSummary":{"ComplianceSummaryTimestamp":946684800,"CompliantResourceCount":{"CapExceeded":true,"CappedCount":1},"NonCompliantResourceCount":{"CapExceeded":true,"CappedCount":1}},"GroupName":"__GroupName__"},{"ComplianceSummary":{"ComplianceSummaryTimestamp":946684800,"CompliantResourceCount":{"CapExceeded":true,"CappedCount":1},"NonCompliantResourceCount":{"CapExceeded":true,"CappedCount":1}},"GroupName":"__GroupName__"}],"GroupByKey":"__GroupByKey__","NextToken":"__NextToken__"}

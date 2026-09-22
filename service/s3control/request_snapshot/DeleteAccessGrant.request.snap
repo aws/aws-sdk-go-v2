@@ -1,0 +1,4 @@
+DELETE /v20180820/accessgrantsinstance/grant/__AccessGrantId__
+
+X-Amz-Account-Id: AccountId-value
+

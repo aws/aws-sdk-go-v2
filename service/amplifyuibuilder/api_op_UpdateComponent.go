@@ -5,10 +5,10 @@ package amplifyuibuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing component.
@@ -55,6 +55,54 @@ type UpdateComponentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComponentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComponentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComponentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateComponentRequest_appId, *v.AppId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateComponentRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.UpdateComponentRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateComponentRequest_id, *v.Id)
+	}
+	if v.UpdatedComponent != nil {
+		s.WriteStruct(schemas.UpdateComponentRequest_updatedComponent)
+		v.UpdatedComponent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateComponentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateComponentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateComponentRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UpdateComponentRequest_appId, v.AppId)
+		case schemas.UpdateComponentRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateComponentRequest_clientToken, v.ClientToken)
+		case schemas.UpdateComponentRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.UpdateComponentRequest_environmentName, v.EnvironmentName)
+		case schemas.UpdateComponentRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateComponentRequest_id, v.Id)
+		case schemas.UpdateComponentRequest_updatedComponent:
+			v.UpdatedComponent = &types.UpdateComponentData{}
+			return v.UpdatedComponent.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type UpdateComponentOutput struct {
 
 	// Describes the configuration of the updated component.
@@ -66,65 +114,44 @@ type UpdateComponentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComponentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComponentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComponentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.UpdateComponentResponse_entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateComponentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateComponentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateComponentResponse_entity:
+			v.Entity = &types.Component{}
+			return v.Entity.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComponent, schemas.UpdateComponentRequest, schemas.UpdateComponentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateComponent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComponent, schemas.UpdateComponentRequest, schemas.UpdateComponentResponse), output: &UpdateComponentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateComponent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateComponent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -134,12 +161,6 @@ func (c *Client) addOperationUpdateComponentMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpUpdateComponentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateComponent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +173,6 @@ func (c *Client) addOperationUpdateComponentMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -197,12 +212,4 @@ func (m *idempotencyToken_initializeOpUpdateComponent) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opUpdateComponentMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateComponent{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateComponent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateComponent",
-	}
 }

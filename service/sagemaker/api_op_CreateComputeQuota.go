@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create compute allocation definition. This defines how compute is allocated,
@@ -67,6 +66,38 @@ type CreateComputeQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputeQuotaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputeQuotaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputeQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationState != "" {
+		s.WriteString(schemas.CreateComputeQuotaRequest_ActivationState, string(v.ActivationState))
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateComputeQuotaRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.ComputeQuotaConfig != nil {
+		s.WriteStruct(schemas.CreateComputeQuotaRequest_ComputeQuotaConfig)
+		v.ComputeQuotaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ComputeQuotaTarget != nil {
+		s.WriteStruct(schemas.CreateComputeQuotaRequest_ComputeQuotaTarget)
+		v.ComputeQuotaTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateComputeQuotaRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateComputeQuotaRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateComputeQuotaRequest_Tags, v.Tags)
+}
+
 type CreateComputeQuotaOutput struct {
 
 	// ARN of the compute allocation definition.
@@ -85,77 +116,54 @@ type CreateComputeQuotaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComputeQuotaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComputeQuotaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComputeQuotaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeQuotaArn != nil {
+		s.WriteString(schemas.CreateComputeQuotaResponse_ComputeQuotaArn, *v.ComputeQuotaArn)
+	}
+	if v.ComputeQuotaId != nil {
+		s.WriteString(schemas.CreateComputeQuotaResponse_ComputeQuotaId, *v.ComputeQuotaId)
+	}
+}
+func (v *CreateComputeQuotaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComputeQuotaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComputeQuotaResponse_ComputeQuotaArn:
+			v.ComputeQuotaArn = new(string)
+			return d.ReadString(schemas.CreateComputeQuotaResponse_ComputeQuotaArn, v.ComputeQuotaArn)
+		case schemas.CreateComputeQuotaResponse_ComputeQuotaId:
+			v.ComputeQuotaId = new(string)
+			return d.ReadString(schemas.CreateComputeQuotaResponse_ComputeQuotaId, v.ComputeQuotaId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComputeQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeQuota, schemas.CreateComputeQuotaRequest, schemas.CreateComputeQuotaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateComputeQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComputeQuota, schemas.CreateComputeQuotaRequest, schemas.CreateComputeQuotaResponse), output: &CreateComputeQuotaOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateComputeQuota{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComputeQuota"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateComputeQuotaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComputeQuota(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +178,8 @@ func (c *Client) addOperationCreateComputeQuotaMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateComputeQuota(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateComputeQuota",
-	}
 }

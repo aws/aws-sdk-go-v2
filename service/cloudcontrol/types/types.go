@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -57,6 +59,70 @@ type HookProgressEvent struct {
 	InvocationPoint *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HookProgressEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HookProgressEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HookProgressEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureMode != nil {
+		s.WriteString(schemas.HookProgressEvent_FailureMode, *v.FailureMode)
+	}
+	if v.HookEventTime != nil {
+		s.WriteTime(schemas.HookProgressEvent_HookEventTime, *v.HookEventTime)
+	}
+	if v.HookStatus != nil {
+		s.WriteString(schemas.HookProgressEvent_HookStatus, *v.HookStatus)
+	}
+	if v.HookStatusMessage != nil {
+		s.WriteString(schemas.HookProgressEvent_HookStatusMessage, *v.HookStatusMessage)
+	}
+	if v.HookTypeArn != nil {
+		s.WriteString(schemas.HookProgressEvent_HookTypeArn, *v.HookTypeArn)
+	}
+	if v.HookTypeName != nil {
+		s.WriteString(schemas.HookProgressEvent_HookTypeName, *v.HookTypeName)
+	}
+	if v.HookTypeVersionId != nil {
+		s.WriteString(schemas.HookProgressEvent_HookTypeVersionId, *v.HookTypeVersionId)
+	}
+	if v.InvocationPoint != nil {
+		s.WriteString(schemas.HookProgressEvent_InvocationPoint, *v.InvocationPoint)
+	}
+}
+func (v *HookProgressEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HookProgressEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HookProgressEvent_FailureMode:
+			v.FailureMode = new(string)
+			return d.ReadString(schemas.HookProgressEvent_FailureMode, v.FailureMode)
+		case schemas.HookProgressEvent_HookEventTime:
+			v.HookEventTime = new(time.Time)
+			return d.ReadTime(schemas.HookProgressEvent_HookEventTime, v.HookEventTime)
+		case schemas.HookProgressEvent_HookStatus:
+			v.HookStatus = new(string)
+			return d.ReadString(schemas.HookProgressEvent_HookStatus, v.HookStatus)
+		case schemas.HookProgressEvent_HookStatusMessage:
+			v.HookStatusMessage = new(string)
+			return d.ReadString(schemas.HookProgressEvent_HookStatusMessage, v.HookStatusMessage)
+		case schemas.HookProgressEvent_HookTypeArn:
+			v.HookTypeArn = new(string)
+			return d.ReadString(schemas.HookProgressEvent_HookTypeArn, v.HookTypeArn)
+		case schemas.HookProgressEvent_HookTypeName:
+			v.HookTypeName = new(string)
+			return d.ReadString(schemas.HookProgressEvent_HookTypeName, v.HookTypeName)
+		case schemas.HookProgressEvent_HookTypeVersionId:
+			v.HookTypeVersionId = new(string)
+			return d.ReadString(schemas.HookProgressEvent_HookTypeVersionId, v.HookTypeVersionId)
+		case schemas.HookProgressEvent_InvocationPoint:
+			v.InvocationPoint = new(string)
+			return d.ReadString(schemas.HookProgressEvent_InvocationPoint, v.InvocationPoint)
+		}
+		return nil
+	})
 }
 
 // Represents the current status of a resource operation request. For more
@@ -129,6 +195,100 @@ type ProgressEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProgressEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProgressEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProgressEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.ProgressEvent_ErrorCode, string(v.ErrorCode))
+	}
+	if v.EventTime != nil {
+		s.WriteTime(schemas.ProgressEvent_EventTime, *v.EventTime)
+	}
+	if v.HooksRequestToken != nil {
+		s.WriteString(schemas.ProgressEvent_HooksRequestToken, *v.HooksRequestToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.ProgressEvent_Identifier, *v.Identifier)
+	}
+	if v.Operation != "" {
+		s.WriteString(schemas.ProgressEvent_Operation, string(v.Operation))
+	}
+	if v.OperationStatus != "" {
+		s.WriteString(schemas.ProgressEvent_OperationStatus, string(v.OperationStatus))
+	}
+	if v.RequestToken != nil {
+		s.WriteString(schemas.ProgressEvent_RequestToken, *v.RequestToken)
+	}
+	if v.ResourceModel != nil {
+		s.WriteString(schemas.ProgressEvent_ResourceModel, *v.ResourceModel)
+	}
+	if v.RetryAfter != nil {
+		s.WriteTime(schemas.ProgressEvent_RetryAfter, *v.RetryAfter)
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ProgressEvent_StatusMessage, *v.StatusMessage)
+	}
+	if v.TypeName != nil {
+		s.WriteString(schemas.ProgressEvent_TypeName, *v.TypeName)
+	}
+}
+func (v *ProgressEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProgressEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProgressEvent_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.ProgressEvent_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = HandlerErrorCode(ev)
+			return nil
+		case schemas.ProgressEvent_EventTime:
+			v.EventTime = new(time.Time)
+			return d.ReadTime(schemas.ProgressEvent_EventTime, v.EventTime)
+		case schemas.ProgressEvent_HooksRequestToken:
+			v.HooksRequestToken = new(string)
+			return d.ReadString(schemas.ProgressEvent_HooksRequestToken, v.HooksRequestToken)
+		case schemas.ProgressEvent_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.ProgressEvent_Identifier, v.Identifier)
+		case schemas.ProgressEvent_Operation:
+			var ev string
+			if err := d.ReadString(schemas.ProgressEvent_Operation, &ev); err != nil {
+				return err
+			}
+			v.Operation = Operation(ev)
+			return nil
+		case schemas.ProgressEvent_OperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ProgressEvent_OperationStatus, &ev); err != nil {
+				return err
+			}
+			v.OperationStatus = OperationStatus(ev)
+			return nil
+		case schemas.ProgressEvent_RequestToken:
+			v.RequestToken = new(string)
+			return d.ReadString(schemas.ProgressEvent_RequestToken, v.RequestToken)
+		case schemas.ProgressEvent_ResourceModel:
+			v.ResourceModel = new(string)
+			return d.ReadString(schemas.ProgressEvent_ResourceModel, v.ResourceModel)
+		case schemas.ProgressEvent_RetryAfter:
+			v.RetryAfter = new(time.Time)
+			return d.ReadTime(schemas.ProgressEvent_RetryAfter, v.RetryAfter)
+		case schemas.ProgressEvent_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ProgressEvent_StatusMessage, v.StatusMessage)
+		case schemas.ProgressEvent_TypeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.ProgressEvent_TypeName, v.TypeName)
+		}
+		return nil
+	})
+}
+
 // Represents information about a provisioned resource.
 type ResourceDescription struct {
 
@@ -144,6 +304,34 @@ type ResourceDescription struct {
 	Properties *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.ResourceDescription_Identifier, *v.Identifier)
+	}
+	if v.Properties != nil {
+		s.WriteString(schemas.ResourceDescription_Properties, *v.Properties)
+	}
+}
+func (v *ResourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceDescription_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.ResourceDescription_Identifier, v.Identifier)
+		case schemas.ResourceDescription_Properties:
+			v.Properties = new(string)
+			return d.ReadString(schemas.ResourceDescription_Properties, v.Properties)
+		}
+		return nil
+	})
 }
 
 // The filter criteria to use in determining the requests returned.
@@ -168,6 +356,28 @@ type ResourceRequestStatusFilter struct {
 	Operations []Operation
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceRequestStatusFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceRequestStatusFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceRequestStatusFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationStatuses(s, schemas.ResourceRequestStatusFilter_OperationStatuses, v.OperationStatuses)
+	serializeOperations(s, schemas.ResourceRequestStatusFilter_Operations, v.Operations)
+}
+func (v *ResourceRequestStatusFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceRequestStatusFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceRequestStatusFilter_OperationStatuses:
+			return deserializeOperationStatuses(d, schemas.ResourceRequestStatusFilter_OperationStatuses, &v.OperationStatuses)
+		case schemas.ResourceRequestStatusFilter_Operations:
+			return deserializeOperations(d, schemas.ResourceRequestStatusFilter_Operations, &v.Operations)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

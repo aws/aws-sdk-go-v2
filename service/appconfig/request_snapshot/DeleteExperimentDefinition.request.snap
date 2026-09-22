@@ -1,0 +1,3 @@
+DELETE /applications/__ApplicationIdentifier__/experimentdefinitions/__ExperimentDefinitionIdentifier__?delete_type=ARCHIVE
+
+

@@ -5,10 +5,10 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -58,6 +58,33 @@ type ListInferenceExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataEndTimeBefore != nil {
+		s.WriteTime(schemas.ListInferenceExecutionsRequest_DataEndTimeBefore, *v.DataEndTimeBefore)
+	}
+	if v.DataStartTimeAfter != nil {
+		s.WriteTime(schemas.ListInferenceExecutionsRequest_DataStartTimeAfter, *v.DataStartTimeAfter)
+	}
+	if v.InferenceSchedulerName != nil {
+		s.WriteString(schemas.ListInferenceExecutionsRequest_InferenceSchedulerName, *v.InferenceSchedulerName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInferenceExecutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceExecutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListInferenceExecutionsRequest_Status, string(v.Status))
+	}
+}
+
 type ListInferenceExecutionsOutput struct {
 
 	// Provides an array of information about the individual inference executions
@@ -79,77 +106,51 @@ type ListInferenceExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInferenceExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInferenceExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInferenceExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInferenceExecutionSummaries(s, schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries, v.InferenceExecutionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInferenceExecutionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListInferenceExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInferenceExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries:
+			return deserializeInferenceExecutionSummaries(d, schemas.ListInferenceExecutionsResponse_InferenceExecutionSummaries, &v.InferenceExecutionSummaries)
+		case schemas.ListInferenceExecutionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInferenceExecutionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInferenceExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceExecutions, schemas.ListInferenceExecutionsRequest, schemas.ListInferenceExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListInferenceExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInferenceExecutions, schemas.ListInferenceExecutionsRequest, schemas.ListInferenceExecutionsResponse), output: &ListInferenceExecutionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListInferenceExecutions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInferenceExecutions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListInferenceExecutionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInferenceExecutions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +163,6 @@ func (c *Client) addOperationListInferenceExecutionsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -270,11 +265,3 @@ type ListInferenceExecutionsAPIClient interface {
 }
 
 var _ ListInferenceExecutionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListInferenceExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListInferenceExecutions",
-	}
-}

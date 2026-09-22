@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IotThingsGraphFrontEndService.SearchThings
+
+{"nextToken":"__NextToken__","things":[{"thingArn":"__ThingArn__","thingName":"__ThingName__"},{"thingArn":"__ThingArn__","thingName":"__ThingName__"}]}

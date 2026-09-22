@@ -1,0 +1,5 @@
+POST /DeleteView
+
+Content-Type: application/json
+
+{"ViewArn":"__ViewArn__"}

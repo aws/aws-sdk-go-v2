@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/DeleteIngressPoint
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡nIngressPointIdr__IngressPointId__

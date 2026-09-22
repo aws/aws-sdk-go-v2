@@ -5,10 +5,10 @@ package appintegrations
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and persists an Application resource.
@@ -49,6 +49,10 @@ type CreateApplicationInput struct {
 
 	// The type of application.
 	ApplicationType types.ApplicationType
+
+	// The authentication settings that Connect Customer uses when calling the
+	// external application.
+	AuthConfig *types.AuthConfig
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
@@ -92,6 +96,60 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationConfig != nil {
+		s.WriteStruct(schemas.CreateApplicationRequest_ApplicationConfig)
+		v.ApplicationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSourceConfig != nil {
+		s.WriteStruct(schemas.CreateApplicationRequest_ApplicationSourceConfig)
+		v.ApplicationSourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationType != "" {
+		s.WriteString(schemas.CreateApplicationRequest_ApplicationType, string(v.ApplicationType))
+	}
+	if v.AuthConfig != nil {
+		s.WriteStruct(schemas.CreateApplicationRequest_AuthConfig)
+		v.AuthConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateApplicationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApplicationRequest_Description, *v.Description)
+	}
+	if v.IframeConfig != nil {
+		s.WriteStruct(schemas.CreateApplicationRequest_IframeConfig)
+		v.IframeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitializationTimeout != nil {
+		s.WriteInt32(schemas.CreateApplicationRequest_InitializationTimeout, *v.InitializationTimeout)
+	}
+	if v.IsService != false {
+		s.WriteBool(schemas.CreateApplicationRequest_IsService, v.IsService)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApplicationRequest_Name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.CreateApplicationRequest_Namespace, *v.Namespace)
+	}
+	serializePermissionList(s, schemas.CreateApplicationRequest_Permissions, v.Permissions)
+	serializePublicationList(s, schemas.CreateApplicationRequest_Publications, v.Publications)
+	serializeSubscriptionList(s, schemas.CreateApplicationRequest_Subscriptions, v.Subscriptions)
+	serializeTagMap(s, schemas.CreateApplicationRequest_Tags, v.Tags)
+}
+
 type CreateApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Application.
@@ -106,65 +164,48 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateApplicationResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateApplicationResponse_Id, *v.Id)
+	}
+}
+func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_Arn, v.Arn)
+		case schemas.CreateApplicationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateApplicationResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationRequest, schemas.CreateApplicationResponse), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -174,12 +215,6 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,12 +227,6 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -237,12 +266,4 @@ func (m *idempotencyToken_initializeOpCreateApplication) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateApplicationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateApplication{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateApplication",
-	}
 }

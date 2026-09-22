@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -110,6 +110,48 @@ type ListRestoreJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByAccountId != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_ByAccountId, *v.ByAccountId)
+	}
+	if v.ByCompleteAfter != nil {
+		s.WriteTime(schemas.ListRestoreJobsInput_ByCompleteAfter, *v.ByCompleteAfter)
+	}
+	if v.ByCompleteBefore != nil {
+		s.WriteTime(schemas.ListRestoreJobsInput_ByCompleteBefore, *v.ByCompleteBefore)
+	}
+	if v.ByCreatedAfter != nil {
+		s.WriteTime(schemas.ListRestoreJobsInput_ByCreatedAfter, *v.ByCreatedAfter)
+	}
+	if v.ByCreatedBefore != nil {
+		s.WriteTime(schemas.ListRestoreJobsInput_ByCreatedBefore, *v.ByCreatedBefore)
+	}
+	if v.ByParentJobId != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_ByParentJobId, *v.ByParentJobId)
+	}
+	if v.ByResourceType != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_ByResourceType, *v.ByResourceType)
+	}
+	if v.ByRestoreTestingPlanArn != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_ByRestoreTestingPlanArn, *v.ByRestoreTestingPlanArn)
+	}
+	if v.ByStatus != "" {
+		s.WriteString(schemas.ListRestoreJobsInput_ByStatus, string(v.ByStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRestoreJobsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreJobsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListRestoreJobsOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
@@ -128,74 +170,48 @@ type ListRestoreJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRestoreJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRestoreJobsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRestoreJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRestoreJobsOutput_NextToken, *v.NextToken)
+	}
+	serializeRestoreJobsList(s, schemas.ListRestoreJobsOutput_RestoreJobs, v.RestoreJobs)
+}
+func (v *ListRestoreJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRestoreJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRestoreJobsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRestoreJobsOutput_NextToken, v.NextToken)
+		case schemas.ListRestoreJobsOutput_RestoreJobs:
+			return deserializeRestoreJobsList(d, schemas.ListRestoreJobsOutput_RestoreJobs, &v.RestoreJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRestoreJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreJobs, schemas.ListRestoreJobsInput, schemas.ListRestoreJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRestoreJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRestoreJobs, schemas.ListRestoreJobsInput, schemas.ListRestoreJobsOutput), output: &ListRestoreJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRestoreJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRestoreJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRestoreJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,12 +224,6 @@ func (c *Client) addOperationListRestoreJobsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -314,11 +324,3 @@ type ListRestoreJobsAPIClient interface {
 }
 
 var _ ListRestoreJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRestoreJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRestoreJobs",
-	}
-}

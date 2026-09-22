@@ -4,11 +4,10 @@ package chimesdkvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the countries that you can order phone numbers from.
@@ -37,6 +36,18 @@ type ListSupportedPhoneNumberCountriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupportedPhoneNumberCountriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupportedPhoneNumberCountriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupportedPhoneNumberCountriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductType != "" {
+		s.WriteString(schemas.ListSupportedPhoneNumberCountriesRequest_ProductType, string(v.ProductType))
+	}
+}
+
 type ListSupportedPhoneNumberCountriesOutput struct {
 
 	// The supported phone number countries.
@@ -48,77 +59,45 @@ type ListSupportedPhoneNumberCountriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSupportedPhoneNumberCountriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSupportedPhoneNumberCountriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSupportedPhoneNumberCountriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePhoneNumberCountriesList(s, schemas.ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries, v.PhoneNumberCountries)
+}
+func (v *ListSupportedPhoneNumberCountriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSupportedPhoneNumberCountriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries:
+			return deserializePhoneNumberCountriesList(d, schemas.ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries, &v.PhoneNumberCountries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSupportedPhoneNumberCountriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupportedPhoneNumberCountries, schemas.ListSupportedPhoneNumberCountriesRequest, schemas.ListSupportedPhoneNumberCountriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSupportedPhoneNumberCountries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSupportedPhoneNumberCountries, schemas.ListSupportedPhoneNumberCountriesRequest, schemas.ListSupportedPhoneNumberCountriesResponse), output: &ListSupportedPhoneNumberCountriesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSupportedPhoneNumberCountries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSupportedPhoneNumberCountries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSupportedPhoneNumberCountriesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSupportedPhoneNumberCountries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -133,22 +112,8 @@ func (c *Client) addOperationListSupportedPhoneNumberCountriesMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListSupportedPhoneNumberCountries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSupportedPhoneNumberCountries",
-	}
 }

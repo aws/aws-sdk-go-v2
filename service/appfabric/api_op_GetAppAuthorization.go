@@ -4,11 +4,10 @@ package appfabric
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about an app authorization.
@@ -44,6 +43,21 @@ type GetAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppAuthorizationIdentifier != nil {
+		s.WriteString(schemas.GetAppAuthorizationRequest_appAuthorizationIdentifier, *v.AppAuthorizationIdentifier)
+	}
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.GetAppAuthorizationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+}
+
 type GetAppAuthorizationOutput struct {
 
 	// Contains information about an app authorization.
@@ -57,77 +71,50 @@ type GetAppAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppAuthorizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppAuthorizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppAuthorizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppAuthorization != nil {
+		s.WriteStruct(schemas.GetAppAuthorizationResponse_appAuthorization)
+		v.AppAuthorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAppAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppAuthorizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppAuthorizationResponse_appAuthorization:
+			v.AppAuthorization = &types.AppAuthorization{}
+			return v.AppAuthorization.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAppAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppAuthorization, schemas.GetAppAuthorizationRequest, schemas.GetAppAuthorizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppAuthorization, schemas.GetAppAuthorizationRequest, schemas.GetAppAuthorizationResponse), output: &GetAppAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAppAuthorization{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAppAuthorization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAppAuthorizationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAppAuthorization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +129,8 @@ func (c *Client) addOperationGetAppAuthorizationMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAppAuthorization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAppAuthorization",
-	}
 }

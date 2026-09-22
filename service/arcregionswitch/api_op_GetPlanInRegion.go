@@ -4,11 +4,10 @@ package arcregionswitch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a Region switch plan in a specific Amazon Web
@@ -39,6 +38,18 @@ type GetPlanInRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanInRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanInRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanInRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetPlanInRegionRequest_arn, *v.Arn)
+	}
+}
+
 type GetPlanInRegionOutput struct {
 
 	// The details of the Region switch plan.
@@ -50,65 +61,44 @@ type GetPlanInRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanInRegionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanInRegionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanInRegionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Plan != nil {
+		s.WriteStruct(schemas.GetPlanInRegionResponse_plan)
+		v.Plan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetPlanInRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlanInRegionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlanInRegionResponse_plan:
+			v.Plan = &types.Plan{}
+			return v.Plan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlanInRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanInRegion, schemas.GetPlanInRegionRequest, schemas.GetPlanInRegionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetPlanInRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanInRegion, schemas.GetPlanInRegionRequest, schemas.GetPlanInRegionResponse), output: &GetPlanInRegionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetPlanInRegion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlanInRegion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -118,12 +108,6 @@ func (c *Client) addOperationGetPlanInRegionMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpGetPlanInRegionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlanInRegion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +122,8 @@ func (c *Client) addOperationGetPlanInRegionMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetPlanInRegion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPlanInRegion",
-	}
 }

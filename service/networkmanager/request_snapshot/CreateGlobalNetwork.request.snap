@@ -1,0 +1,5 @@
+POST /global-networks
+
+Content-Type: application/json
+
+{"Description":"__Description__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

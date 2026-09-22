@@ -4,11 +4,10 @@ package frauddetector
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a detector version. The detector version starts in a DRAFT status.
@@ -69,6 +68,28 @@ type CreateDetectorVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDetectorVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDetectorVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDetectorVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDetectorVersionRequest_description, *v.Description)
+	}
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateDetectorVersionRequest_detectorId, *v.DetectorId)
+	}
+	serializeListOfStrings(s, schemas.CreateDetectorVersionRequest_externalModelEndpoints, v.ExternalModelEndpoints)
+	serializeListOfModelVersions(s, schemas.CreateDetectorVersionRequest_modelVersions, v.ModelVersions)
+	if v.RuleExecutionMode != "" {
+		s.WriteString(schemas.CreateDetectorVersionRequest_ruleExecutionMode, string(v.RuleExecutionMode))
+	}
+	serializeRuleList(s, schemas.CreateDetectorVersionRequest_rules, v.Rules)
+	serializetagList(s, schemas.CreateDetectorVersionRequest_tags, v.Tags)
+}
+
 type CreateDetectorVersionOutput struct {
 
 	// The ID for the created version's parent detector.
@@ -86,77 +107,64 @@ type CreateDetectorVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDetectorVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDetectorVersionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDetectorVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.CreateDetectorVersionResult_detectorId, *v.DetectorId)
+	}
+	if v.DetectorVersionId != nil {
+		s.WriteString(schemas.CreateDetectorVersionResult_detectorVersionId, *v.DetectorVersionId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateDetectorVersionResult_status, string(v.Status))
+	}
+}
+func (v *CreateDetectorVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDetectorVersionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDetectorVersionResult_detectorId:
+			v.DetectorId = new(string)
+			return d.ReadString(schemas.CreateDetectorVersionResult_detectorId, v.DetectorId)
+		case schemas.CreateDetectorVersionResult_detectorVersionId:
+			v.DetectorVersionId = new(string)
+			return d.ReadString(schemas.CreateDetectorVersionResult_detectorVersionId, v.DetectorVersionId)
+		case schemas.CreateDetectorVersionResult_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDetectorVersionResult_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DetectorVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDetectorVersion, schemas.CreateDetectorVersionRequest, schemas.CreateDetectorVersionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDetectorVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDetectorVersion, schemas.CreateDetectorVersionRequest, schemas.CreateDetectorVersionResult), output: &CreateDetectorVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDetectorVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDetectorVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDetectorVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDetectorVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +179,8 @@ func (c *Client) addOperationCreateDetectorVersionMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDetectorVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDetectorVersion",
-	}
 }

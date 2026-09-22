@@ -1,0 +1,5 @@
+POST /sol/nslcm/v1/ns_instances
+
+Content-Type: application/json
+
+{"nsDescription":"__NsDescription__","nsdInfoId":"__NsdInfoId__","nsName":"__NsName__","tags":{"key0":"__Value__"}}

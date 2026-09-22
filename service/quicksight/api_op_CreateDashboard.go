@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a dashboard from either a template or directly with a
@@ -124,7 +123,9 @@ type CreateDashboardInput struct {
 	//
 	// Use the DataSetReferences entity within SourceTemplate to list the replacement
 	// datasets for the placeholders listed in the original. The schema in each dataset
-	// must match its placeholder.
+	// must match its placeholder. Use the TopicReferences entity to list the
+	// replacement topics for the topic placeholders listed in the original. The schema
+	// in each topic must match its placeholder.
 	//
 	// Either a SourceEntity or a Definition must be provided in order for the request
 	// to be valid.
@@ -150,6 +151,64 @@ type CreateDashboardInput struct {
 	VersionDescription *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateDashboardRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.CreateDashboardRequest_DashboardId, *v.DashboardId)
+	}
+	if v.DashboardPublishOptions != nil {
+		s.WriteStruct(schemas.CreateDashboardRequest_DashboardPublishOptions)
+		v.DashboardPublishOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.CreateDashboardRequest_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFolderArnList(s, schemas.CreateDashboardRequest_FolderArns, v.FolderArns)
+	serializeLinkEntityArnList(s, schemas.CreateDashboardRequest_LinkEntities, v.LinkEntities)
+	if v.LinkSharingConfiguration != nil {
+		s.WriteStruct(schemas.CreateDashboardRequest_LinkSharingConfiguration)
+		v.LinkSharingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDashboardRequest_Name, *v.Name)
+	}
+	if v.Parameters != nil {
+		s.WriteStruct(schemas.CreateDashboardRequest_Parameters)
+		v.Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourcePermissionList(s, schemas.CreateDashboardRequest_Permissions, v.Permissions)
+	if v.SourceEntity != nil {
+		s.WriteStruct(schemas.CreateDashboardRequest_SourceEntity)
+		v.SourceEntity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateDashboardRequest_Tags, v.Tags)
+	if v.ThemeArn != nil {
+		s.WriteString(schemas.CreateDashboardRequest_ThemeArn, *v.ThemeArn)
+	}
+	if v.ValidationStrategy != nil {
+		s.WriteStruct(schemas.CreateDashboardRequest_ValidationStrategy)
+		v.ValidationStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VersionDescription != nil {
+		s.WriteString(schemas.CreateDashboardRequest_VersionDescription, *v.VersionDescription)
+	}
 }
 
 type CreateDashboardOutput struct {
@@ -179,77 +238,81 @@ type CreateDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDashboardOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDashboardResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDashboardOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateDashboardResponse_Arn, *v.Arn)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.CreateDashboardResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.CreateDashboardResponse_DashboardId, *v.DashboardId)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateDashboardResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateDashboardResponse_Status, v.Status)
+	}
+	if v.VersionArn != nil {
+		s.WriteString(schemas.CreateDashboardResponse_VersionArn, *v.VersionArn)
+	}
+}
+func (v *CreateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDashboardResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDashboardResponse_Arn, v.Arn)
+		case schemas.CreateDashboardResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateDashboardResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateDashboardResponse_DashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.CreateDashboardResponse_DashboardId, v.DashboardId)
+		case schemas.CreateDashboardResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateDashboardResponse_RequestId, v.RequestId)
+		case schemas.CreateDashboardResponse_Status:
+			return d.ReadInt32(schemas.CreateDashboardResponse_Status, &v.Status)
+		case schemas.CreateDashboardResponse_VersionArn:
+			v.VersionArn = new(string)
+			return d.ReadString(schemas.CreateDashboardResponse_VersionArn, v.VersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDashboard, schemas.CreateDashboardRequest, schemas.CreateDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDashboard, schemas.CreateDashboardRequest, schemas.CreateDashboardResponse), output: &CreateDashboardOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDashboard{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDashboard"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDashboardValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDashboard(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -264,22 +327,8 @@ func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDashboard(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDashboard",
-	}
 }

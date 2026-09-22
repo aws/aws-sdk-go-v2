@@ -4,10 +4,9 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified data quality ruleset.
@@ -43,6 +42,24 @@ type UpdateDataQualityRulesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataQualityRulesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataQualityRulesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataQualityRulesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetRequest_Name, *v.Name)
+	}
+	if v.Ruleset != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetRequest_Ruleset, *v.Ruleset)
+	}
+}
+
 type UpdateDataQualityRulesetOutput struct {
 
 	// A description of the ruleset.
@@ -61,77 +78,60 @@ type UpdateDataQualityRulesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataQualityRulesetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataQualityRulesetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataQualityRulesetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetResponse_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetResponse_Name, *v.Name)
+	}
+	if v.Ruleset != nil {
+		s.WriteString(schemas.UpdateDataQualityRulesetResponse_Ruleset, *v.Ruleset)
+	}
+}
+func (v *UpdateDataQualityRulesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataQualityRulesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataQualityRulesetResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateDataQualityRulesetResponse_Description, v.Description)
+		case schemas.UpdateDataQualityRulesetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDataQualityRulesetResponse_Name, v.Name)
+		case schemas.UpdateDataQualityRulesetResponse_Ruleset:
+			v.Ruleset = new(string)
+			return d.ReadString(schemas.UpdateDataQualityRulesetResponse_Ruleset, v.Ruleset)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataQualityRulesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataQualityRuleset, schemas.UpdateDataQualityRulesetRequest, schemas.UpdateDataQualityRulesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDataQualityRuleset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataQualityRuleset, schemas.UpdateDataQualityRulesetRequest, schemas.UpdateDataQualityRulesetResponse), output: &UpdateDataQualityRulesetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDataQualityRuleset{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataQualityRuleset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDataQualityRulesetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataQualityRuleset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +146,8 @@ func (c *Client) addOperationUpdateDataQualityRulesetMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDataQualityRuleset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDataQualityRuleset",
-	}
 }

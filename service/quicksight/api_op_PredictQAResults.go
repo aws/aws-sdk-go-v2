@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Predicts existing visuals or generates new visuals to answer a given query.
@@ -68,6 +67,30 @@ type PredictQAResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictQAResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictQAResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictQAResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.PredictQAResultsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.IncludeGeneratedAnswer != "" {
+		s.WriteString(schemas.PredictQAResultsRequest_IncludeGeneratedAnswer, string(v.IncludeGeneratedAnswer))
+	}
+	if v.IncludeQuickSightQIndex != "" {
+		s.WriteString(schemas.PredictQAResultsRequest_IncludeQuickSightQIndex, string(v.IncludeQuickSightQIndex))
+	}
+	if v.MaxTopicsToConsider != nil {
+		s.WriteInt32(schemas.PredictQAResultsRequest_MaxTopicsToConsider, *v.MaxTopicsToConsider)
+	}
+	if v.QueryText != nil {
+		s.WriteString(schemas.PredictQAResultsRequest_QueryText, *v.QueryText)
+	}
+}
+
 type PredictQAResultsOutput struct {
 
 	// Additional visual responses.
@@ -88,77 +111,64 @@ type PredictQAResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictQAResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictQAResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictQAResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQAResults(s, schemas.PredictQAResultsResponse_AdditionalResults, v.AdditionalResults)
+	if v.PrimaryResult != nil {
+		s.WriteStruct(schemas.PredictQAResultsResponse_PrimaryResult)
+		v.PrimaryResult.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.PredictQAResultsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.PredictQAResultsResponse_Status, v.Status)
+	}
+}
+func (v *PredictQAResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictQAResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictQAResultsResponse_AdditionalResults:
+			return deserializeQAResults(d, schemas.PredictQAResultsResponse_AdditionalResults, &v.AdditionalResults)
+		case schemas.PredictQAResultsResponse_PrimaryResult:
+			v.PrimaryResult = &types.QAResult{}
+			return v.PrimaryResult.Deserialize(d)
+		case schemas.PredictQAResultsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.PredictQAResultsResponse_RequestId, v.RequestId)
+		case schemas.PredictQAResultsResponse_Status:
+			return d.ReadInt32(schemas.PredictQAResultsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPredictQAResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PredictQAResults, schemas.PredictQAResultsRequest, schemas.PredictQAResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPredictQAResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PredictQAResults, schemas.PredictQAResultsRequest, schemas.PredictQAResultsResponse), output: &PredictQAResultsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPredictQAResults{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PredictQAResults"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPredictQAResultsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPredictQAResults(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +183,8 @@ func (c *Client) addOperationPredictQAResultsMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPredictQAResults(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PredictQAResults",
-	}
 }

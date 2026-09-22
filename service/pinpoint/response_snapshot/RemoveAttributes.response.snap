@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","AttributeType":"__AttributeType__","Attributes":["__Member__","__Member__"]}

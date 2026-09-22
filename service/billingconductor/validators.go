@@ -310,6 +310,26 @@ func (m *validateOpGetBillingGroupCostReport) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetBillingTransferPreference struct {
+}
+
+func (*validateOpGetBillingTransferPreference) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBillingTransferPreference) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBillingTransferPreferenceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBillingTransferPreferenceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListBillingGroups struct {
 }
 
@@ -490,6 +510,26 @@ func (m *validateOpUpdateBillingGroup) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateBillingTransferPreference struct {
+}
+
+func (*validateOpUpdateBillingTransferPreference) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBillingTransferPreference) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBillingTransferPreferenceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBillingTransferPreferenceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCustomLineItem struct {
 }
 
@@ -610,6 +650,10 @@ func addOpGetBillingGroupCostReportValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetBillingGroupCostReport{}, middleware.After)
 }
 
+func addOpGetBillingTransferPreferenceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBillingTransferPreference{}, middleware.After)
+}
+
 func addOpListBillingGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBillingGroups{}, middleware.After)
 }
@@ -646,6 +690,10 @@ func addOpUpdateBillingGroupValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateBillingGroup{}, middleware.After)
 }
 
+func addOpUpdateBillingTransferPreferenceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBillingTransferPreference{}, middleware.After)
+}
+
 func addOpUpdateCustomLineItemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCustomLineItem{}, middleware.After)
 }
@@ -656,6 +704,21 @@ func addOpUpdatePricingPlanValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdatePricingRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePricingRule{}, middleware.After)
+}
+
+func validateAutoTransferBillingGroupCreationPreference(v *types.AutoTransferBillingGroupCreationPreference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutoTransferBillingGroupCreationPreference"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateBillingPeriodRange(v *types.BillingPeriodRange) error {
@@ -711,11 +774,14 @@ func validateCreateTieringInput(v *types.CreateTieringInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTieringInput"}
-	if v.FreeTier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FreeTier"))
-	} else if v.FreeTier != nil {
+	if v.FreeTier != nil {
 		if err := validateCreateFreeTierConfig(v.FreeTier); err != nil {
 			invalidParams.AddNested("FreeTier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomTiers != nil {
+		if err := validateCustomTiersList(v.CustomTiers); err != nil {
+			invalidParams.AddNested("CustomTiers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -792,6 +858,41 @@ func validateCustomLineItemPercentageChargeDetails(v *types.CustomLineItemPercen
 	invalidParams := smithy.InvalidParamsError{Context: "CustomLineItemPercentageChargeDetails"}
 	if v.PercentageValue == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PercentageValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomTier(v *types.CustomTier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomTier"}
+	if v.BeginRangeInclusive == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BeginRangeInclusive"))
+	}
+	if v.RateValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RateValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomTiersList(v []types.CustomTier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomTiersList"}
+	for i := range v {
+		if err := validateCustomTier(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -979,11 +1080,14 @@ func validateUpdateTieringInput(v *types.UpdateTieringInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTieringInput"}
-	if v.FreeTier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FreeTier"))
-	} else if v.FreeTier != nil {
+	if v.FreeTier != nil {
 		if err := validateUpdateFreeTierConfig(v.FreeTier); err != nil {
 			invalidParams.AddNested("FreeTier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomTiers != nil {
+		if err := validateCustomTiersList(v.CustomTiers); err != nil {
+			invalidParams.AddNested("CustomTiers", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1300,6 +1404,21 @@ func validateOpGetBillingGroupCostReportInput(v *GetBillingGroupCostReportInput)
 	}
 }
 
+func validateOpGetBillingTransferPreferenceInput(v *GetBillingTransferPreferenceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBillingTransferPreferenceInput"}
+	if v.ResponsibilityTransferArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponsibilityTransferArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListBillingGroupsInput(v *ListBillingGroupsInput) error {
 	if v == nil {
 		return nil
@@ -1439,6 +1558,28 @@ func validateOpUpdateBillingGroupInput(v *UpdateBillingGroupInput) error {
 	if v.ComputationPreference != nil {
 		if err := validateComputationPreference(v.ComputationPreference); err != nil {
 			invalidParams.AddNested("ComputationPreference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBillingTransferPreferenceInput(v *UpdateBillingTransferPreferenceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBillingTransferPreferenceInput"}
+	if v.ResponsibilityTransferArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponsibilityTransferArn"))
+	}
+	if v.AutoBillingTransferBillingGroupCreation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoBillingTransferBillingGroupCreation"))
+	} else if v.AutoBillingTransferBillingGroupCreation != nil {
+		if err := validateAutoTransferBillingGroupCreationPreference(v.AutoBillingTransferBillingGroupCreation); err != nil {
+			invalidParams.AddNested("AutoBillingTransferBillingGroupCreation", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

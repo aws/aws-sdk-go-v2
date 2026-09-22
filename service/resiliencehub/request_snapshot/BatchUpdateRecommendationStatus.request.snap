@@ -1,0 +1,5 @@
+POST /batch-update-recommendation-status
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","requestEntries":[{"appComponentId":"__AppComponentId__","entryId":"__EntryId__","excluded":true,"excludeReason":"AlreadyImplemented","item":{"resourceId":"__ResourceId__","targetAccountId":"__TargetAccountId__","targetRegion":"__TargetRegion__"},"referenceId":"__ReferenceId__"},{"appComponentId":"__AppComponentId__","entryId":"__EntryId__","excluded":true,"excludeReason":"AlreadyImplemented","item":{"resourceId":"__ResourceId__","targetAccountId":"__TargetAccountId__","targetRegion":"__TargetRegion__"},"referenceId":"__ReferenceId__"}]}

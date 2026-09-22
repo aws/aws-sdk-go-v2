@@ -1,0 +1,5 @@
+POST /configuration-bundles/__BundleId__/versions?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"filter":{"branchName":"__BranchName__","createdByName":"__CreatedByName__","latestPerBranch":true}}

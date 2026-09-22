@@ -5,10 +5,10 @@ package configservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts a structured query language (SQL) SELECT command and an aggregator to
@@ -71,6 +71,30 @@ type SelectAggregateResourceConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SelectAggregateResourceConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelectAggregateResourceConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelectAggregateResourceConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationAggregatorName != nil {
+		s.WriteString(schemas.SelectAggregateResourceConfigRequest_ConfigurationAggregatorName, *v.ConfigurationAggregatorName)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.SelectAggregateResourceConfigRequest_Expression, *v.Expression)
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.SelectAggregateResourceConfigRequest_Limit, v.Limit)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.SelectAggregateResourceConfigRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SelectAggregateResourceConfigRequest_NextToken, *v.NextToken)
+	}
+}
+
 type SelectAggregateResourceConfigOutput struct {
 
 	// The nextToken string returned in a previous request that you use to request the
@@ -89,77 +113,59 @@ type SelectAggregateResourceConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SelectAggregateResourceConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelectAggregateResourceConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelectAggregateResourceConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.SelectAggregateResourceConfigResponse_NextToken, *v.NextToken)
+	}
+	if v.QueryInfo != nil {
+		s.WriteStruct(schemas.SelectAggregateResourceConfigResponse_QueryInfo)
+		v.QueryInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResults(s, schemas.SelectAggregateResourceConfigResponse_Results, v.Results)
+}
+func (v *SelectAggregateResourceConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelectAggregateResourceConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelectAggregateResourceConfigResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SelectAggregateResourceConfigResponse_NextToken, v.NextToken)
+		case schemas.SelectAggregateResourceConfigResponse_QueryInfo:
+			v.QueryInfo = &types.QueryInfo{}
+			return v.QueryInfo.Deserialize(d)
+		case schemas.SelectAggregateResourceConfigResponse_Results:
+			return deserializeResults(d, schemas.SelectAggregateResourceConfigResponse_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSelectAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SelectAggregateResourceConfig, schemas.SelectAggregateResourceConfigRequest, schemas.SelectAggregateResourceConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSelectAggregateResourceConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SelectAggregateResourceConfig, schemas.SelectAggregateResourceConfigRequest, schemas.SelectAggregateResourceConfigResponse), output: &SelectAggregateResourceConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSelectAggregateResourceConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SelectAggregateResourceConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSelectAggregateResourceConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSelectAggregateResourceConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +178,6 @@ func (c *Client) addOperationSelectAggregateResourceConfigMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -277,11 +277,3 @@ type SelectAggregateResourceConfigAPIClient interface {
 }
 
 var _ SelectAggregateResourceConfigAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSelectAggregateResourceConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SelectAggregateResourceConfig",
-	}
-}

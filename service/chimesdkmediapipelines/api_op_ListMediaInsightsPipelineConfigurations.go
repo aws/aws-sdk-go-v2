@@ -5,10 +5,10 @@ package chimesdkmediapipelines
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the available media insights pipeline configurations.
@@ -38,6 +38,21 @@ type ListMediaInsightsPipelineConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMediaInsightsPipelineConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMediaInsightsPipelineConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMediaInsightsPipelineConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMediaInsightsPipelineConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMediaInsightsPipelineConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListMediaInsightsPipelineConfigurationsOutput struct {
 
 	// The requested list of media insights pipeline configurations.
@@ -52,74 +67,48 @@ type ListMediaInsightsPipelineConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMediaInsightsPipelineConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMediaInsightsPipelineConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMediaInsightsPipelineConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMediaInsightsPipelineConfigurationSummaryList(s, schemas.ListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations, v.MediaInsightsPipelineConfigurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMediaInsightsPipelineConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMediaInsightsPipelineConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMediaInsightsPipelineConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations:
+			return deserializeMediaInsightsPipelineConfigurationSummaryList(d, schemas.ListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations, &v.MediaInsightsPipelineConfigurations)
+		case schemas.ListMediaInsightsPipelineConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMediaInsightsPipelineConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMediaInsightsPipelineConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMediaInsightsPipelineConfigurations, schemas.ListMediaInsightsPipelineConfigurationsRequest, schemas.ListMediaInsightsPipelineConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListMediaInsightsPipelineConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMediaInsightsPipelineConfigurations, schemas.ListMediaInsightsPipelineConfigurationsRequest, schemas.ListMediaInsightsPipelineConfigurationsResponse), output: &ListMediaInsightsPipelineConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListMediaInsightsPipelineConfigurations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMediaInsightsPipelineConfigurations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMediaInsightsPipelineConfigurations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,12 +121,6 @@ func (c *Client) addOperationListMediaInsightsPipelineConfigurationsMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -241,11 +224,3 @@ type ListMediaInsightsPipelineConfigurationsAPIClient interface {
 }
 
 var _ ListMediaInsightsPipelineConfigurationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMediaInsightsPipelineConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMediaInsightsPipelineConfigurations",
-	}
-}

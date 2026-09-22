@@ -1,0 +1,5 @@
+POST /2013-04-01/healthcheck/__HealthCheckId__
+
+Content-Type: application/xml
+
+<UpdateHealthCheckRequest xmlns="https://route53.amazonaws.com/doc/2013-04-01/"><AlarmIdentifier><Name>__Name__</Name><Region>us-east-1</Region></AlarmIdentifier><ChildHealthChecks><ChildHealthCheck>__Member__</ChildHealthCheck><ChildHealthCheck>__Member__</ChildHealthCheck></ChildHealthChecks><Disabled>true</Disabled><EnableSNI>true</EnableSNI><FailureThreshold>1</FailureThreshold><FullyQualifiedDomainName>__FullyQualifiedDomainName__</FullyQualifiedDomainName><HealthCheckVersion>1</HealthCheckVersion><HealthThreshold>1</HealthThreshold><InsufficientDataHealthStatus>Healthy</InsufficientDataHealthStatus><Inverted>true</Inverted><IPAddress>__IPAddress__</IPAddress><Port>1</Port><Regions><Region>us-east-1</Region><Region>us-east-1</Region></Regions><ResetElements><ResettableElementName>FullyQualifiedDomainName</ResettableElementName><ResettableElementName>FullyQualifiedDomainName</ResettableElementName></ResetElements><ResourcePath>__ResourcePath__</ResourcePath><SearchString>__SearchString__</SearchString></UpdateHealthCheckRequest>

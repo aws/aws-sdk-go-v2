@@ -4,11 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Reboots the specified WorkSpaces.
@@ -43,6 +42,16 @@ type RebootWorkspacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootWorkspacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootWorkspacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootWorkspacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRebootWorkspaceRequests(s, schemas.RebootWorkspacesRequest_RebootWorkspaceRequests, v.RebootWorkspaceRequests)
+}
+
 type RebootWorkspacesOutput struct {
 
 	// Information about the WorkSpaces that could not be rebooted.
@@ -54,77 +63,45 @@ type RebootWorkspacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RebootWorkspacesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RebootWorkspacesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RebootWorkspacesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedRebootWorkspaceRequests(s, schemas.RebootWorkspacesResult_FailedRequests, v.FailedRequests)
+}
+func (v *RebootWorkspacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RebootWorkspacesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RebootWorkspacesResult_FailedRequests:
+			return deserializeFailedRebootWorkspaceRequests(d, schemas.RebootWorkspacesResult_FailedRequests, &v.FailedRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRebootWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootWorkspaces, schemas.RebootWorkspacesRequest, schemas.RebootWorkspacesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRebootWorkspaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RebootWorkspaces, schemas.RebootWorkspacesRequest, schemas.RebootWorkspacesResult), output: &RebootWorkspacesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRebootWorkspaces{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RebootWorkspaces"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRebootWorkspacesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRebootWorkspaces(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +116,8 @@ func (c *Client) addOperationRebootWorkspacesMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRebootWorkspaces(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RebootWorkspaces",
-	}
 }

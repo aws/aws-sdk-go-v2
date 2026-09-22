@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"accounts":[{"accountId":"__AccountId__","freeTrialInfo":[{"cloudProvider":"AWS","end":946684800,"start":946684800,"status":"ACTIVE","type":"EC2"},{"cloudProvider":"AWS","end":946684800,"start":946684800,"status":"ACTIVE","type":"EC2"}]},{"accountId":"__AccountId__","freeTrialInfo":[{"cloudProvider":"AWS","end":946684800,"start":946684800,"status":"ACTIVE","type":"EC2"},{"cloudProvider":"AWS","end":946684800,"start":946684800,"status":"ACTIVE","type":"EC2"}]}],"failedAccounts":[{"accountId":"__AccountId__","code":"ACCESS_DENIED","message":"__Message__"},{"accountId":"__AccountId__","code":"ACCESS_DENIED","message":"__Message__"}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.DetachRuleGroupsFromProxyConfiguration
+
+{"ProxyConfigurationArn":"__ProxyConfigurationArn__","ProxyConfigurationName":"__ProxyConfigurationName__","RuleGroupArns":["__Member__","__Member__"],"RuleGroupNames":["__Member__","__Member__"],"UpdateToken":"__UpdateToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"source":{"attributes":{"crawlerArn":"__CrawlerArn__","databaseArn":"__DatabaseArn__","tableArn":"__TableArn__"},"provider":{"location":"__Location__","roleArn":"__RoleArn__"},"sourceName":"__SourceName__","sourceVersion":"__SourceVersion__"}}

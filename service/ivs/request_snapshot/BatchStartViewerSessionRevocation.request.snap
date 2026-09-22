@@ -1,0 +1,5 @@
+POST /BatchStartViewerSessionRevocation
+
+Content-Type: application/json
+
+{"viewerSessions":[{"channelArn":"__ChannelArn__","viewerId":"__ViewerId__","viewerSessionVersionsLessThanOrEqualTo":1},{"channelArn":"__ChannelArn__","viewerId":"__ViewerId__","viewerSessionVersionsLessThanOrEqualTo":1}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"actionsExecutions":[{"actionId":"__ActionId__","actionName":"__ActionName__","endTime":946684800,"errorCode":"__ErrorCode__","findingId":"__FindingId__","message":"__Message__","startTime":946684800,"status":"IN_PROGRESS","taskId":"__TaskId__"},{"actionId":"__ActionId__","actionName":"__ActionName__","endTime":946684800,"errorCode":"__ErrorCode__","findingId":"__FindingId__","message":"__Message__","startTime":946684800,"status":"IN_PROGRESS","taskId":"__TaskId__"}],"nextToken":"__NextToken__"}

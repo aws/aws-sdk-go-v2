@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SpencerFrontendService.DescribeRepositories
+
+{"nextToken":"__NextToken__","repositories":[{"createdAt":946684800,"registryId":"__RegistryId__","repositoryArn":"__RepositoryArn__","repositoryName":"__RepositoryName__","repositoryUri":"__RepositoryUri__"},{"createdAt":946684800,"registryId":"__RegistryId__","repositoryArn":"__RepositoryArn__","repositoryName":"__RepositoryName__","repositoryUri":"__RepositoryUri__"}]}

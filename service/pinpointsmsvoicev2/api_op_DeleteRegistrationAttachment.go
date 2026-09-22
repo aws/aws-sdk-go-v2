@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DeleteRegistrationAttachmentInput struct {
 	RegistrationAttachmentId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteRegistrationAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistrationAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistrationAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistrationAttachmentId != nil {
+		s.WriteString(schemas.DeleteRegistrationAttachmentRequest_RegistrationAttachmentId, *v.RegistrationAttachmentId)
+	}
 }
 
 type DeleteRegistrationAttachmentOutput struct {
@@ -79,77 +90,80 @@ type DeleteRegistrationAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegistrationAttachmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegistrationAttachmentResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegistrationAttachmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentStatus != "" {
+		s.WriteString(schemas.DeleteRegistrationAttachmentResult_AttachmentStatus, string(v.AttachmentStatus))
+	}
+	if v.AttachmentUploadErrorReason != "" {
+		s.WriteString(schemas.DeleteRegistrationAttachmentResult_AttachmentUploadErrorReason, string(v.AttachmentUploadErrorReason))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteRegistrationAttachmentResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.RegistrationAttachmentArn != nil {
+		s.WriteString(schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentArn, *v.RegistrationAttachmentArn)
+	}
+	if v.RegistrationAttachmentId != nil {
+		s.WriteString(schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentId, *v.RegistrationAttachmentId)
+	}
+}
+func (v *DeleteRegistrationAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRegistrationAttachmentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRegistrationAttachmentResult_AttachmentStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRegistrationAttachmentResult_AttachmentStatus, &ev); err != nil {
+				return err
+			}
+			v.AttachmentStatus = types.AttachmentStatus(ev)
+			return nil
+		case schemas.DeleteRegistrationAttachmentResult_AttachmentUploadErrorReason:
+			var ev string
+			if err := d.ReadString(schemas.DeleteRegistrationAttachmentResult_AttachmentUploadErrorReason, &ev); err != nil {
+				return err
+			}
+			v.AttachmentUploadErrorReason = types.AttachmentUploadErrorReason(ev)
+			return nil
+		case schemas.DeleteRegistrationAttachmentResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteRegistrationAttachmentResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentArn:
+			v.RegistrationAttachmentArn = new(string)
+			return d.ReadString(schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentArn, v.RegistrationAttachmentArn)
+		case schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentId:
+			v.RegistrationAttachmentId = new(string)
+			return d.ReadString(schemas.DeleteRegistrationAttachmentResult_RegistrationAttachmentId, v.RegistrationAttachmentId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRegistrationAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistrationAttachment, schemas.DeleteRegistrationAttachmentRequest, schemas.DeleteRegistrationAttachmentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteRegistrationAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegistrationAttachment, schemas.DeleteRegistrationAttachmentRequest, schemas.DeleteRegistrationAttachmentResult), output: &DeleteRegistrationAttachmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteRegistrationAttachment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRegistrationAttachment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteRegistrationAttachmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRegistrationAttachment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +178,8 @@ func (c *Client) addOperationDeleteRegistrationAttachmentMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteRegistrationAttachment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteRegistrationAttachment",
-	}
 }

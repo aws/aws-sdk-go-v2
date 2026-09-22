@@ -1,0 +1,3 @@
+GET /v2/list-user-journeys?maxResults=1&nextToken=__NextToken__&systemArn=__SystemArn__
+
+

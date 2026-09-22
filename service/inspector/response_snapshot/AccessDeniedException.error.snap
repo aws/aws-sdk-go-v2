@@ -1,0 +1,5 @@
+403
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: InspectorService.AddAttributesToFindings
+
+{"__type":"AccessDeniedException","canRetry":true,"errorCode":"ACCESS_DENIED_TO_ASSESSMENT_TARGET","message":"__Message__"}

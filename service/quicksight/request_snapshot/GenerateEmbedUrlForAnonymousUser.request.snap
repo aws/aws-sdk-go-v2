@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/embed-url/anonymous-user
+
+Content-Type: application/json
+
+{"AllowedDomains":["__Member__","__Member__"],"AuthorizedResourceArns":["__Member__","__Member__"],"ExperienceConfiguration":{"Dashboard":{"DisabledFeatures":["SHARED_VIEW","SHARED_VIEW"],"EnabledFeatures":["SHARED_VIEW","SHARED_VIEW"],"FeatureConfigurations":{"SharedView":{"Enabled":true}},"InitialDashboardId":"__InitialDashboardId__"},"DashboardVisual":{"InitialDashboardVisualId":{"DashboardId":"__DashboardId__","SheetId":"__SheetId__","VisualId":"__VisualId__"}},"GenerativeQnA":{"InitialTopicId":"__InitialTopicId__"},"QSearchBar":{"InitialTopicId":"__InitialTopicId__"}},"Namespace":"__Namespace__","SessionLifetimeInMinutes":1,"SessionTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

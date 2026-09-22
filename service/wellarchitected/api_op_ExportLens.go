@@ -4,10 +4,9 @@ package wellarchitected
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Export an existing lens.
@@ -68,6 +67,21 @@ type ExportLensInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLensInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLensInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLensInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensAlias != nil {
+		s.WriteString(schemas.ExportLensInput_LensAlias, *v.LensAlias)
+	}
+	if v.LensVersion != nil {
+		s.WriteString(schemas.ExportLensInput_LensVersion, *v.LensVersion)
+	}
+}
+
 type ExportLensOutput struct {
 
 	// The JSON representation of a lens.
@@ -79,77 +93,48 @@ type ExportLensOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExportLensOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExportLensOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExportLensOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LensJSON != nil {
+		s.WriteString(schemas.ExportLensOutput_LensJSON, *v.LensJSON)
+	}
+}
+func (v *ExportLensOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExportLensOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExportLensOutput_LensJSON:
+			v.LensJSON = new(string)
+			return d.ReadString(schemas.ExportLensOutput_LensJSON, v.LensJSON)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExportLensMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLens, schemas.ExportLensInput, schemas.ExportLensOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExportLens{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExportLens, schemas.ExportLensInput, schemas.ExportLensOutput), output: &ExportLensOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExportLens{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExportLens"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpExportLensValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExportLens(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +149,8 @@ func (c *Client) addOperationExportLensMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opExportLens(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExportLens",
-	}
 }

@@ -1,0 +1,3 @@
+GET /memberships/__MembershipIdentifier__/protectedQueries?maxResults=1&nextToken=__NextToken__&status=SUBMITTED
+
+

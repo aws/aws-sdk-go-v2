@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"indexName":"__IndexName__","queryString":"__QueryString__","queryVersion":"__QueryVersion__","thingGroupArn":"__ThingGroupArn__","thingGroupId":"__ThingGroupId__","thingGroupName":"__ThingGroupName__"}

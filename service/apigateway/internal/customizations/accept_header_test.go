@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"testing"
 
@@ -22,7 +22,7 @@ type mockClient struct {
 func (m *mockClient) Do(*http.Request) (*http.Response, error) {
 	return &http.Response{
 		StatusCode: 200,
-		Body: ioutil.NopCloser(bytes.NewReader([]byte(`{
+		Body: io.NopCloser(bytes.NewReader([]byte(`{
 	"_links": {
 		"curies": {
 			"href": "https://docs.aws.amazon.com/apigateway/latest/developerguide/account-apigateway-{rel}.html",

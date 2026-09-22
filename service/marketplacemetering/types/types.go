@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,6 +27,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Usage allocations allow you to split usage into buckets by tags.
 //
 // Each UsageAllocation indicates the usage quantity for a specific set of tags.
@@ -40,6 +70,31 @@ type UsageAllocation struct {
 	Tags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *UsageAllocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsageAllocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsageAllocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocatedUsageQuantity != nil {
+		s.WriteInt32(schemas.UsageAllocation_AllocatedUsageQuantity, *v.AllocatedUsageQuantity)
+	}
+	serializeTagList(s, schemas.UsageAllocation_Tags, v.Tags)
+}
+func (v *UsageAllocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsageAllocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsageAllocation_AllocatedUsageQuantity:
+			v.AllocatedUsageQuantity = new(int32)
+			return d.ReadInt32(schemas.UsageAllocation_AllocatedUsageQuantity, v.AllocatedUsageQuantity)
+		case schemas.UsageAllocation_Tags:
+			return deserializeTagList(d, schemas.UsageAllocation_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // A UsageRecord indicates a quantity of usage for a given product, customer,
@@ -58,22 +113,32 @@ type UsageRecord struct {
 
 	// Timestamp, in UTC, for which the usage is being reported.
 	//
-	// Your application can meter usage for up to six hours in the past. Make sure the
+	// Your application can meter usage for up to 24 hours in the past. Make sure the
 	// timestamp value is not before the start of the software usage.
+	//
+	// At the end of each billing cycle, you have a 6-hour grace period to submit
+	// usage records for the previous billing month before 06:00 UTC on the first day
+	// of the next month.
 	//
 	// This member is required.
 	Timestamp *time.Time
 
 	// The CustomerAWSAccountId parameter specifies the AWS account ID of the buyer.
 	//
-	// For existing integrations, to access your CustomerIdentifier to
-	// CustomerAWSAccountId mapping, see [Account Feeds].
+	// If you have an existing integration and need the CustomerAWSAccountId that
+	// corresponds to a CustomerIdentifier , contact [AWS Marketplace Seller Operations] to obtain the mapping. Do not
+	// request the CustomerAWSAccountId directly from buyers. We cannot verify that a
+	// buyer-provided account ID is authentic, which can result in incorrect metering
+	// or billing.
 	//
-	// [Account Feeds]: https://docs.aws.amazon.com/marketplace/latest/userguide/data-feed-account.html
+	// [AWS Marketplace Seller Operations]: https://aws.amazon.com/marketplace/management/contact-us/
 	CustomerAWSAccountId *string
 
 	// The CustomerIdentifier is obtained through the ResolveCustomer operation and
 	// represents an individual buyer in your application.
+	//
+	// CustomerIdentifier is not supported for new SaaS product integrations. Use
+	// CustomerAWSAccountId to identify the buyer.
 	CustomerIdentifier *string
 
 	// The LicenseArn is a unique identifier for a specific granted license. These are
@@ -93,6 +158,61 @@ type UsageRecord struct {
 	UsageAllocations []UsageAllocation
 
 	noSmithyDocumentSerde
+}
+
+func (v *UsageRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsageRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsageRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomerAWSAccountId != nil {
+		s.WriteString(schemas.UsageRecord_CustomerAWSAccountId, *v.CustomerAWSAccountId)
+	}
+	if v.CustomerIdentifier != nil {
+		s.WriteString(schemas.UsageRecord_CustomerIdentifier, *v.CustomerIdentifier)
+	}
+	if v.Dimension != nil {
+		s.WriteString(schemas.UsageRecord_Dimension, *v.Dimension)
+	}
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.UsageRecord_LicenseArn, *v.LicenseArn)
+	}
+	if v.Quantity != nil {
+		s.WriteInt32(schemas.UsageRecord_Quantity, *v.Quantity)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.UsageRecord_Timestamp, *v.Timestamp)
+	}
+	serializeUsageAllocations(s, schemas.UsageRecord_UsageAllocations, v.UsageAllocations)
+}
+func (v *UsageRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsageRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsageRecord_CustomerAWSAccountId:
+			v.CustomerAWSAccountId = new(string)
+			return d.ReadString(schemas.UsageRecord_CustomerAWSAccountId, v.CustomerAWSAccountId)
+		case schemas.UsageRecord_CustomerIdentifier:
+			v.CustomerIdentifier = new(string)
+			return d.ReadString(schemas.UsageRecord_CustomerIdentifier, v.CustomerIdentifier)
+		case schemas.UsageRecord_Dimension:
+			v.Dimension = new(string)
+			return d.ReadString(schemas.UsageRecord_Dimension, v.Dimension)
+		case schemas.UsageRecord_LicenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.UsageRecord_LicenseArn, v.LicenseArn)
+		case schemas.UsageRecord_Quantity:
+			v.Quantity = new(int32)
+			return d.ReadInt32(schemas.UsageRecord_Quantity, v.Quantity)
+		case schemas.UsageRecord_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.UsageRecord_Timestamp, v.Timestamp)
+		case schemas.UsageRecord_UsageAllocations:
+			return deserializeUsageAllocations(d, schemas.UsageRecord_UsageAllocations, &v.UsageAllocations)
+		}
+		return nil
+	})
 }
 
 // A UsageRecordResult indicates the status of a given UsageRecord processed by
@@ -128,6 +248,46 @@ type UsageRecordResult struct {
 	UsageRecord *UsageRecord
 
 	noSmithyDocumentSerde
+}
+
+func (v *UsageRecordResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsageRecordResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsageRecordResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeteringRecordId != nil {
+		s.WriteString(schemas.UsageRecordResult_MeteringRecordId, *v.MeteringRecordId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UsageRecordResult_Status, string(v.Status))
+	}
+	if v.UsageRecord != nil {
+		s.WriteStruct(schemas.UsageRecordResult_UsageRecord)
+		v.UsageRecord.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UsageRecordResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsageRecordResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsageRecordResult_MeteringRecordId:
+			v.MeteringRecordId = new(string)
+			return d.ReadString(schemas.UsageRecordResult_MeteringRecordId, v.MeteringRecordId)
+		case schemas.UsageRecordResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.UsageRecordResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = UsageRecordResultStatus(ev)
+			return nil
+		case schemas.UsageRecordResult_UsageRecord:
+			v.UsageRecord = &UsageRecord{}
+			return v.UsageRecord.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

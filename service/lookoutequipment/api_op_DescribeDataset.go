@@ -4,11 +4,10 @@ package lookoutequipment
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -37,6 +36,18 @@ type DescribeDatasetInput struct {
 	DatasetName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DescribeDatasetRequest_DatasetName, *v.DatasetName)
+	}
 }
 
 type DescribeDatasetOutput struct {
@@ -102,77 +113,136 @@ type DescribeDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataEndTime != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_DataEndTime, *v.DataEndTime)
+	}
+	if v.DataQualitySummary != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_DataQualitySummary)
+		v.DataQualitySummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataStartTime != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_DataStartTime, *v.DataStartTime)
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_DatasetName, *v.DatasetName)
+	}
+	if v.IngestedFilesSummary != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_IngestedFilesSummary)
+		v.IngestedFilesSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngestionInputConfiguration != nil {
+		s.WriteStruct(schemas.DescribeDatasetResponse_IngestionInputConfiguration)
+		v.IngestionInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.DescribeDatasetResponse_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_Schema, *v.Schema)
+	}
+	if v.ServerSideKmsKeyId != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
+	}
+	if v.SourceDatasetArn != nil {
+		s.WriteString(schemas.DescribeDatasetResponse_SourceDatasetArn, *v.SourceDatasetArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeDatasetResponse_Status, string(v.Status))
+	}
+}
+func (v *DescribeDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDatasetResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeDatasetResponse_DataEndTime:
+			v.DataEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_DataEndTime, v.DataEndTime)
+		case schemas.DescribeDatasetResponse_DataQualitySummary:
+			v.DataQualitySummary = &types.DataQualitySummary{}
+			return v.DataQualitySummary.Deserialize(d)
+		case schemas.DescribeDatasetResponse_DataStartTime:
+			v.DataStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_DataStartTime, v.DataStartTime)
+		case schemas.DescribeDatasetResponse_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_DatasetArn, v.DatasetArn)
+		case schemas.DescribeDatasetResponse_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_DatasetName, v.DatasetName)
+		case schemas.DescribeDatasetResponse_IngestedFilesSummary:
+			v.IngestedFilesSummary = &types.IngestedFilesSummary{}
+			return v.IngestedFilesSummary.Deserialize(d)
+		case schemas.DescribeDatasetResponse_IngestionInputConfiguration:
+			v.IngestionInputConfiguration = &types.IngestionInputConfiguration{}
+			return v.IngestionInputConfiguration.Deserialize(d)
+		case schemas.DescribeDatasetResponse_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeDatasetResponse_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DescribeDatasetResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeDatasetResponse_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_Schema, v.Schema)
+		case schemas.DescribeDatasetResponse_ServerSideKmsKeyId:
+			v.ServerSideKmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_ServerSideKmsKeyId, v.ServerSideKmsKeyId)
+		case schemas.DescribeDatasetResponse_SourceDatasetArn:
+			v.SourceDatasetArn = new(string)
+			return d.ReadString(schemas.DescribeDatasetResponse_SourceDatasetArn, v.SourceDatasetArn)
+		case schemas.DescribeDatasetResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeDatasetResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DatasetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataset, schemas.DescribeDatasetRequest, schemas.DescribeDatasetResponse), output: &DescribeDatasetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeDataset{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDataset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDatasetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +257,8 @@ func (c *Client) addOperationDescribeDatasetMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDataset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDataset",
-	}
 }

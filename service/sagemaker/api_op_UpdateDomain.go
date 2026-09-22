@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the default settings for new user profiles in the domain.
@@ -65,6 +64,11 @@ type UpdateDomainInput struct {
 	// A collection of DomainSettings configuration values to update.
 	DomainSettingsForUpdate *types.DomainSettingsForUpdate
 
+	// Indicates whether to create a home EFS file system for the domain. You can
+	// change from Disabled to Enabled to provision EFS on demand, but you cannot
+	// change from Enabled to Disabled .
+	HomeEfsFileSystemCreation types.HomeEfsFileSystemCreation
+
 	// The VPC subnets that Studio uses for communication.
 	//
 	// If removing subnets, ensure there are no apps in the InService , Pending , or
@@ -85,6 +89,49 @@ type UpdateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppNetworkAccessType != "" {
+		s.WriteString(schemas.UpdateDomainRequest_AppNetworkAccessType, string(v.AppNetworkAccessType))
+	}
+	if v.AppSecurityGroupManagement != "" {
+		s.WriteString(schemas.UpdateDomainRequest_AppSecurityGroupManagement, string(v.AppSecurityGroupManagement))
+	}
+	if v.DefaultSpaceSettings != nil {
+		s.WriteStruct(schemas.UpdateDomainRequest_DefaultSpaceSettings)
+		v.DefaultSpaceSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultUserSettings != nil {
+		s.WriteStruct(schemas.UpdateDomainRequest_DefaultUserSettings)
+		v.DefaultUserSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.UpdateDomainRequest_DomainId, *v.DomainId)
+	}
+	if v.DomainSettingsForUpdate != nil {
+		s.WriteStruct(schemas.UpdateDomainRequest_DomainSettingsForUpdate)
+		v.DomainSettingsForUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HomeEfsFileSystemCreation != "" {
+		s.WriteString(schemas.UpdateDomainRequest_HomeEfsFileSystemCreation, string(v.HomeEfsFileSystemCreation))
+	}
+	serializeSubnets(s, schemas.UpdateDomainRequest_SubnetIds, v.SubnetIds)
+	if v.TagPropagation != "" {
+		s.WriteString(schemas.UpdateDomainRequest_TagPropagation, string(v.TagPropagation))
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.UpdateDomainRequest_VpcId, *v.VpcId)
+	}
+}
+
 type UpdateDomainOutput struct {
 
 	// The Amazon Resource Name (ARN) of the domain.
@@ -96,77 +143,48 @@ type UpdateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainArn != nil {
+		s.WriteString(schemas.UpdateDomainResponse_DomainArn, *v.DomainArn)
+	}
+}
+func (v *UpdateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainResponse_DomainArn:
+			v.DomainArn = new(string)
+			return d.ReadString(schemas.UpdateDomainResponse_DomainArn, v.DomainArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomain, schemas.UpdateDomainRequest, schemas.UpdateDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomain, schemas.UpdateDomainRequest, schemas.UpdateDomainResponse), output: &UpdateDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +199,8 @@ func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDomain",
-	}
 }

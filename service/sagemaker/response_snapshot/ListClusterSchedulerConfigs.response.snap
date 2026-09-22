@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListClusterSchedulerConfigs
+
+{"ClusterSchedulerConfigSummaries":[{"ClusterArn":"__ClusterArn__","ClusterSchedulerConfigArn":"__ClusterSchedulerConfigArn__","ClusterSchedulerConfigId":"__ClusterSchedulerConfigId__","ClusterSchedulerConfigVersion":1,"CreationTime":946684800,"LastModifiedTime":946684800,"Name":"__Name__","Status":"Creating"},{"ClusterArn":"__ClusterArn__","ClusterSchedulerConfigArn":"__ClusterSchedulerConfigArn__","ClusterSchedulerConfigId":"__ClusterSchedulerConfigId__","ClusterSchedulerConfigVersion":1,"CreationTime":946684800,"LastModifiedTime":946684800,"Name":"__Name__","Status":"Creating"}],"NextToken":"__NextToken__"}

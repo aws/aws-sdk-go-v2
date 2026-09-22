@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"memoryContents":[{"sessionSummary":{"memoryId":"__MemoryId__","sessionExpiryTime":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","sessionStartTime":"2000-01-01T00:00:00Z","summaryText":"__SummaryText__"}},{"sessionSummary":{"memoryId":"__MemoryId__","sessionExpiryTime":"2000-01-01T00:00:00Z","sessionId":"__SessionId__","sessionStartTime":"2000-01-01T00:00:00Z","summaryText":"__SummaryText__"}}],"nextToken":"__NextToken__"}

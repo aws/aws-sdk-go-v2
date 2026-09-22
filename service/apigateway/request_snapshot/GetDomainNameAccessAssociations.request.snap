@@ -1,0 +1,4 @@
+GET /domainnameaccessassociations?limit=1&position=__Position__&resourceOwner=SELF
+
+Accept: application/json
+

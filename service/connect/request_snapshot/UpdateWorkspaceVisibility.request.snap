@@ -1,0 +1,5 @@
+POST /workspaces/__InstanceId__/__WorkspaceId__/visibility
+
+Content-Type: application/json
+
+{"Visibility":"ALL"}

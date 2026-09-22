@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a public virtual interface. A virtual interface is the VLAN that
@@ -48,6 +47,23 @@ type CreatePublicVirtualInterfaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePublicVirtualInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePublicVirtualInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePublicVirtualInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.CreatePublicVirtualInterfaceRequest_connectionId, *v.ConnectionId)
+	}
+	if v.NewPublicVirtualInterface != nil {
+		s.WriteStruct(schemas.CreatePublicVirtualInterfaceRequest_newPublicVirtualInterface)
+		v.NewPublicVirtualInterface.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Information about a virtual interface.
 type CreatePublicVirtualInterfaceOutput struct {
 
@@ -64,22 +80,34 @@ type CreatePublicVirtualInterfaceOutput struct {
 	// Border Gateway Protocol (BGP) configuration. If you provide a number greater
 	// than the maximum, an error is returned. Use asnLong instead.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
-	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
+	//
+	//   - If you enter a 4-byte ASN for the asn parameter, the API returns an error.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	Asn int32
 
 	// The long ASN for the virtual interface. The valid range is from 1 to 4294967294
 	// for BGP configuration.
 	//
-	// You can use asnLong or asn , but not both. We recommend using asnLong as it
-	// supports a greater pool of numbers.
+	// Note the following limitations when using asnLong :
 	//
-	//   - The asnLong attribute accepts both ASN and long ASN ranges.
+	//   - You can use asnLong or asn , but not both. We recommend using asnLong as it
+	//   supports a greater pool of numbers.
+	//
+	//   - asnLong accepts any valid ASN value, regardless if it's 2-byte or 4-byte.
+	//
+	//   - When using a 4-byte asnLong , the API response returns 0 for the legacy asn
+	//   attribute since 4-byte ASN values exceed the maximum supported value of
+	//   2,147,483,647.
+	//
+	//   - If you are using a 2-byte ASN, the API response will include the 2-byte
+	//   value for both the asn and asnLong fields.
 	//
 	//   - If you provide a value in the same API call for both asn and asnLong , the
 	//   API will only accept the value for asnLong .
@@ -123,6 +151,28 @@ type CreatePublicVirtualInterfaceOutput struct {
 
 	// The ID of the Amazon Web Services account that owns the virtual interface.
 	OwnerAccount *string
+
+	// The number of inbound IPv4 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv4 *int32
+
+	// The number of inbound IPv6 route prefixes allocated to the virtual interface.
+	// Not applicable to public virtual interfaces.
+	PrefixPoolAllocatedCountIpv6 *int32
+
+	// The rate limit (bandwidth allocation) applied to the virtual interface. The
+	// value must be one of the supported bandwidth values and cannot exceed the
+	// bandwidth of the parent connection or LAG. Supported values: 50Mbps , 100Mbps ,
+	// 200Mbps , 300Mbps , 400Mbps , 500Mbps , 600Mbps , 700Mbps , 800Mbps , 900Mbps ,
+	// 1Gbps , 1.2Gbps , 1.5Gbps , 1.8Gbps , 2Gbps , 2.1Gbps , 2.4Gbps , 2.7Gbps ,
+	// 3Gbps , 3.2Gbps , 3.6Gbps , 4Gbps , 5Gbps , 6Gbps , 7Gbps , 8Gbps , 9Gbps ,
+	// 10Gbps , 12Gbps , 15Gbps , 18Gbps , 20Gbps , 21Gbps , 24Gbps , 27Gbps , 30Gbps ,
+	// 32Gbps , 36Gbps , 40Gbps , 50Gbps , 60Gbps , 70Gbps , 80Gbps , 100Gbps , 120Gbps
+	// , 150Gbps , 180Gbps , 200Gbps , 210Gbps , 240Gbps , 270Gbps , 300Gbps , 320Gbps
+	// , 360Gbps , 400Gbps , 450Gbps , 480Gbps , 500Gbps , 540Gbps , 600Gbps , 700Gbps
+	// , 800Gbps , 900Gbps , 1Tbps , 1.1Tbps , 1.2Tbps , 1.3Tbps , 1.4Tbps , 1.5Tbps ,
+	// 1.6Tbps .
+	RateLimit *string
 
 	// The Amazon Web Services Region where the virtual interface is located.
 	Region *string
@@ -196,77 +246,219 @@ type CreatePublicVirtualInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePublicVirtualInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePublicVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.VirtualInterface_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.VirtualInterface_amazonAddress, *v.AmazonAddress)
+	}
+	if v.AmazonSideAsn != nil {
+		s.WriteInt64(schemas.VirtualInterface_amazonSideAsn, *v.AmazonSideAsn)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.VirtualInterface_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.VirtualInterface_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.VirtualInterface_authKey, *v.AuthKey)
+	}
+	if v.AwsDeviceV2 != nil {
+		s.WriteString(schemas.VirtualInterface_awsDeviceV2, *v.AwsDeviceV2)
+	}
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.VirtualInterface_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	serializeBGPPeerList(s, schemas.VirtualInterface_bgpPeers, v.BgpPeers)
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.VirtualInterface_connectionId, *v.ConnectionId)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.VirtualInterface_customerAddress, *v.CustomerAddress)
+	}
+	if v.CustomerRouterConfig != nil {
+		s.WriteString(schemas.VirtualInterface_customerRouterConfig, *v.CustomerRouterConfig)
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.VirtualInterface_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.JumboFrameCapable != nil {
+		s.WriteBool(schemas.VirtualInterface_jumboFrameCapable, *v.JumboFrameCapable)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.VirtualInterface_location, *v.Location)
+	}
+	if v.Mtu != nil {
+		s.WriteInt32(schemas.VirtualInterface_mtu, *v.Mtu)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.VirtualInterface_ownerAccount, *v.OwnerAccount)
+	}
+	if v.PrefixPoolAllocatedCountIpv4 != nil {
+		s.WriteInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv4, *v.PrefixPoolAllocatedCountIpv4)
+	}
+	if v.PrefixPoolAllocatedCountIpv6 != nil {
+		s.WriteInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv6, *v.PrefixPoolAllocatedCountIpv6)
+	}
+	if v.RateLimit != nil {
+		s.WriteString(schemas.VirtualInterface_rateLimit, *v.RateLimit)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.VirtualInterface_region, *v.Region)
+	}
+	serializeRouteFilterPrefixList(s, schemas.VirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
+	if v.SiteLinkEnabled != nil {
+		s.WriteBool(schemas.VirtualInterface_siteLinkEnabled, *v.SiteLinkEnabled)
+	}
+	serializeTagList(s, schemas.VirtualInterface_tags, v.Tags)
+	if v.VirtualGatewayId != nil {
+		s.WriteString(schemas.VirtualInterface_virtualGatewayId, *v.VirtualGatewayId)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+	if v.VirtualInterfaceState != "" {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceState, string(v.VirtualInterfaceState))
+	}
+	if v.VirtualInterfaceType != nil {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceType, *v.VirtualInterfaceType)
+	}
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.VirtualInterface_vlan, v.Vlan)
+	}
+}
+func (v *CreatePublicVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualInterface_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.VirtualInterface_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = types.AddressFamily(ev)
+			return nil
+		case schemas.VirtualInterface_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.VirtualInterface_amazonAddress, v.AmazonAddress)
+		case schemas.VirtualInterface_amazonSideAsn:
+			v.AmazonSideAsn = new(int64)
+			return d.ReadInt64(schemas.VirtualInterface_amazonSideAsn, v.AmazonSideAsn)
+		case schemas.VirtualInterface_asn:
+			return d.ReadInt32(schemas.VirtualInterface_asn, &v.Asn)
+		case schemas.VirtualInterface_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.VirtualInterface_asnLong, v.AsnLong)
+		case schemas.VirtualInterface_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.VirtualInterface_authKey, v.AuthKey)
+		case schemas.VirtualInterface_awsDeviceV2:
+			v.AwsDeviceV2 = new(string)
+			return d.ReadString(schemas.VirtualInterface_awsDeviceV2, v.AwsDeviceV2)
+		case schemas.VirtualInterface_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.VirtualInterface_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.VirtualInterface_bgpPeers:
+			return deserializeBGPPeerList(d, schemas.VirtualInterface_bgpPeers, &v.BgpPeers)
+		case schemas.VirtualInterface_connectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.VirtualInterface_connectionId, v.ConnectionId)
+		case schemas.VirtualInterface_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.VirtualInterface_customerAddress, v.CustomerAddress)
+		case schemas.VirtualInterface_customerRouterConfig:
+			v.CustomerRouterConfig = new(string)
+			return d.ReadString(schemas.VirtualInterface_customerRouterConfig, v.CustomerRouterConfig)
+		case schemas.VirtualInterface_directConnectGatewayId:
+			v.DirectConnectGatewayId = new(string)
+			return d.ReadString(schemas.VirtualInterface_directConnectGatewayId, v.DirectConnectGatewayId)
+		case schemas.VirtualInterface_jumboFrameCapable:
+			v.JumboFrameCapable = new(bool)
+			return d.ReadBool(schemas.VirtualInterface_jumboFrameCapable, v.JumboFrameCapable)
+		case schemas.VirtualInterface_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.VirtualInterface_location, v.Location)
+		case schemas.VirtualInterface_mtu:
+			v.Mtu = new(int32)
+			return d.ReadInt32(schemas.VirtualInterface_mtu, v.Mtu)
+		case schemas.VirtualInterface_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.VirtualInterface_ownerAccount, v.OwnerAccount)
+		case schemas.VirtualInterface_prefixPoolAllocatedCountIpv4:
+			v.PrefixPoolAllocatedCountIpv4 = new(int32)
+			return d.ReadInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv4, v.PrefixPoolAllocatedCountIpv4)
+		case schemas.VirtualInterface_prefixPoolAllocatedCountIpv6:
+			v.PrefixPoolAllocatedCountIpv6 = new(int32)
+			return d.ReadInt32(schemas.VirtualInterface_prefixPoolAllocatedCountIpv6, v.PrefixPoolAllocatedCountIpv6)
+		case schemas.VirtualInterface_rateLimit:
+			v.RateLimit = new(string)
+			return d.ReadString(schemas.VirtualInterface_rateLimit, v.RateLimit)
+		case schemas.VirtualInterface_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.VirtualInterface_region, v.Region)
+		case schemas.VirtualInterface_routeFilterPrefixes:
+			return deserializeRouteFilterPrefixList(d, schemas.VirtualInterface_routeFilterPrefixes, &v.RouteFilterPrefixes)
+		case schemas.VirtualInterface_siteLinkEnabled:
+			v.SiteLinkEnabled = new(bool)
+			return d.ReadBool(schemas.VirtualInterface_siteLinkEnabled, v.SiteLinkEnabled)
+		case schemas.VirtualInterface_tags:
+			return deserializeTagList(d, schemas.VirtualInterface_tags, &v.Tags)
+		case schemas.VirtualInterface_virtualGatewayId:
+			v.VirtualGatewayId = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualGatewayId, v.VirtualGatewayId)
+		case schemas.VirtualInterface_virtualInterfaceId:
+			v.VirtualInterfaceId = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualInterfaceId, v.VirtualInterfaceId)
+		case schemas.VirtualInterface_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualInterfaceName, v.VirtualInterfaceName)
+		case schemas.VirtualInterface_virtualInterfaceState:
+			var ev string
+			if err := d.ReadString(schemas.VirtualInterface_virtualInterfaceState, &ev); err != nil {
+				return err
+			}
+			v.VirtualInterfaceState = types.VirtualInterfaceState(ev)
+			return nil
+		case schemas.VirtualInterface_virtualInterfaceType:
+			v.VirtualInterfaceType = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualInterfaceType, v.VirtualInterfaceType)
+		case schemas.VirtualInterface_vlan:
+			return d.ReadInt32(schemas.VirtualInterface_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePublicVirtualInterface, schemas.CreatePublicVirtualInterfaceRequest, schemas.VirtualInterface)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePublicVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePublicVirtualInterface, schemas.CreatePublicVirtualInterfaceRequest, schemas.VirtualInterface), output: &CreatePublicVirtualInterfaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePublicVirtualInterface{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePublicVirtualInterface"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePublicVirtualInterfaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePublicVirtualInterface(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -281,22 +473,8 @@ func (c *Client) addOperationCreatePublicVirtualInterfaceMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePublicVirtualInterface(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePublicVirtualInterface",
-	}
 }

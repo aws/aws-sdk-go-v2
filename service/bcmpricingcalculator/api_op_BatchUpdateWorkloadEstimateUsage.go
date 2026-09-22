@@ -4,11 +4,10 @@ package bcmpricingcalculator
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Update a newly added or existing usage lines. You can update the usage amounts
@@ -50,6 +49,19 @@ type BatchUpdateWorkloadEstimateUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateWorkloadEstimateUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateWorkloadEstimateUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateWorkloadEstimateUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchUpdateWorkloadEstimateUsageEntries(s, schemas.BatchUpdateWorkloadEstimateUsageRequest_usage, v.Usage)
+	if v.WorkloadEstimateId != nil {
+		s.WriteString(schemas.BatchUpdateWorkloadEstimateUsageRequest_workloadEstimateId, *v.WorkloadEstimateId)
+	}
+}
+
 type BatchUpdateWorkloadEstimateUsageOutput struct {
 
 	//  Returns the list of error reasons and usage line item IDs that could not be
@@ -66,77 +78,48 @@ type BatchUpdateWorkloadEstimateUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateWorkloadEstimateUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateWorkloadEstimateUsageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateWorkloadEstimateUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchUpdateWorkloadEstimateUsageErrors(s, schemas.BatchUpdateWorkloadEstimateUsageResponse_errors, v.Errors)
+	serializeWorkloadEstimateUsageItems(s, schemas.BatchUpdateWorkloadEstimateUsageResponse_items, v.Items)
+}
+func (v *BatchUpdateWorkloadEstimateUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateWorkloadEstimateUsageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateWorkloadEstimateUsageResponse_errors:
+			return deserializeBatchUpdateWorkloadEstimateUsageErrors(d, schemas.BatchUpdateWorkloadEstimateUsageResponse_errors, &v.Errors)
+		case schemas.BatchUpdateWorkloadEstimateUsageResponse_items:
+			return deserializeWorkloadEstimateUsageItems(d, schemas.BatchUpdateWorkloadEstimateUsageResponse_items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateWorkloadEstimateUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateWorkloadEstimateUsage, schemas.BatchUpdateWorkloadEstimateUsageRequest, schemas.BatchUpdateWorkloadEstimateUsageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchUpdateWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateWorkloadEstimateUsage, schemas.BatchUpdateWorkloadEstimateUsageRequest, schemas.BatchUpdateWorkloadEstimateUsageResponse), output: &BatchUpdateWorkloadEstimateUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchUpdateWorkloadEstimateUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateWorkloadEstimateUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchUpdateWorkloadEstimateUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateWorkloadEstimateUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +134,8 @@ func (c *Client) addOperationBatchUpdateWorkloadEstimateUsageMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchUpdateWorkloadEstimateUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchUpdateWorkloadEstimateUsage",
-	}
 }

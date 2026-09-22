@@ -1,0 +1,5 @@
+POST /sessions/__SessionIdentifier__/invocationSteps/?maxResults=1&nextToken=__NextToken__
+
+Content-Type: application/json
+
+{"invocationIdentifier":"__InvocationIdentifier__"}

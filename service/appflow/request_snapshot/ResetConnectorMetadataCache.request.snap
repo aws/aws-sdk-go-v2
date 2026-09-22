@@ -1,0 +1,5 @@
+POST /reset-connector-metadata-cache
+
+Content-Type: application/json
+
+{"apiVersion":"__ApiVersion__","connectorEntityName":"__ConnectorEntityName__","connectorProfileName":"__ConnectorProfileName__","connectorType":"Salesforce","entitiesPath":"__EntitiesPath__"}

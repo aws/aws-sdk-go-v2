@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.UpdateLicenseManagerReportGenerator
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","LicenseManagerReportGeneratorArn":"__LicenseManagerReportGeneratorArn__","ReportContext":{"licenseAssetGroupArns":["__Member__","__Member__"],"licenseConfigurationArns":["__Member__","__Member__"],"reportEndDate":946684800,"reportStartDate":946684800},"ReportFrequency":{"period":"DAY","value":1},"ReportGeneratorName":"__ReportGeneratorName__","Type":["LicenseConfigurationSummaryReport","LicenseConfigurationSummaryReport"]}

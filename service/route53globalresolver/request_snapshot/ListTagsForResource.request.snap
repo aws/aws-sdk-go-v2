@@ -1,0 +1,5 @@
+POST /get-all-tags
+
+Content-Type: application/json
+
+{"resourceArn":"__ResourceArn__"}

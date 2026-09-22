@@ -1,0 +1,5 @@
+PUT /thing-groups/addThingToThingGroup
+
+Content-Type: application/json
+
+{"overrideDynamicGroups":true,"thingArn":"__ThingArn__","thingGroupArn":"__ThingGroupArn__","thingGroupName":"__ThingGroupName__","thingName":"__ThingName__"}

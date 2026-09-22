@@ -5,13 +5,18 @@ package route53resolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a FirewallRuleGroup with a VPC, to provide DNS filtering for the VPC.
+//
+// If the rule group contains any rule configured with the PartnerThreatProtection
+// rule type, the calling account must hold an active AWS Marketplace subscription
+// to the named partner. If the subscription is missing, the association request is
+// rejected.
 func (c *Client) AssociateFirewallRuleGroup(ctx context.Context, params *AssociateFirewallRuleGroupInput, optFns ...func(*Options)) (*AssociateFirewallRuleGroupOutput, error) {
 	if params == nil {
 		params = &AssociateFirewallRuleGroupInput{}
@@ -78,6 +83,34 @@ type AssociateFirewallRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFirewallRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFirewallRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFirewallRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.AssociateFirewallRuleGroupRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.AssociateFirewallRuleGroupRequest_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.MutationProtection != "" {
+		s.WriteString(schemas.AssociateFirewallRuleGroupRequest_MutationProtection, string(v.MutationProtection))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.AssociateFirewallRuleGroupRequest_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.AssociateFirewallRuleGroupRequest_Priority, *v.Priority)
+	}
+	serializeTagList(s, schemas.AssociateFirewallRuleGroupRequest_Tags, v.Tags)
+	if v.VpcId != nil {
+		s.WriteString(schemas.AssociateFirewallRuleGroupRequest_VpcId, *v.VpcId)
+	}
+}
+
 type AssociateFirewallRuleGroupOutput struct {
 
 	// The association that you just created. The association has an ID that you can
@@ -90,65 +123,44 @@ type AssociateFirewallRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFirewallRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFirewallRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFirewallRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleGroupAssociation != nil {
+		s.WriteStruct(schemas.AssociateFirewallRuleGroupResponse_FirewallRuleGroupAssociation)
+		v.FirewallRuleGroupAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateFirewallRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFirewallRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFirewallRuleGroupResponse_FirewallRuleGroupAssociation:
+			v.FirewallRuleGroupAssociation = &types.FirewallRuleGroupAssociation{}
+			return v.FirewallRuleGroupAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFirewallRuleGroup, schemas.AssociateFirewallRuleGroupRequest, schemas.AssociateFirewallRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateFirewallRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFirewallRuleGroup, schemas.AssociateFirewallRuleGroupRequest, schemas.AssociateFirewallRuleGroupResponse), output: &AssociateFirewallRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateFirewallRuleGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateFirewallRuleGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -158,12 +170,6 @@ func (c *Client) addOperationAssociateFirewallRuleGroupMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpAssociateFirewallRuleGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateFirewallRuleGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,12 +182,6 @@ func (c *Client) addOperationAssociateFirewallRuleGroupMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -221,12 +221,4 @@ func (m *idempotencyToken_initializeOpAssociateFirewallRuleGroup) HandleInitiali
 }
 func addIdempotencyToken_opAssociateFirewallRuleGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpAssociateFirewallRuleGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opAssociateFirewallRuleGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateFirewallRuleGroup",
-	}
 }

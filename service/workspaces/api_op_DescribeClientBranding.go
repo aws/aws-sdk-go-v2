@@ -4,11 +4,10 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the specified client branding. Client branding allows you to
@@ -44,6 +43,18 @@ type DescribeClientBrandingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClientBrandingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClientBrandingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClientBrandingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceId != nil {
+		s.WriteString(schemas.DescribeClientBrandingRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type DescribeClientBrandingOutput struct {
 
 	// The branding information for Android devices.
@@ -70,77 +81,90 @@ type DescribeClientBrandingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClientBrandingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClientBrandingResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClientBrandingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceTypeAndroid != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeAndroid)
+		v.DeviceTypeAndroid.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeIos != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeIos)
+		v.DeviceTypeIos.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeLinux != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeLinux)
+		v.DeviceTypeLinux.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeOsx != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeOsx)
+		v.DeviceTypeOsx.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeWeb != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeWeb)
+		v.DeviceTypeWeb.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceTypeWindows != nil {
+		s.WriteStruct(schemas.DescribeClientBrandingResult_DeviceTypeWindows)
+		v.DeviceTypeWindows.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeClientBrandingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClientBrandingResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClientBrandingResult_DeviceTypeAndroid:
+			v.DeviceTypeAndroid = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeAndroid.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeIos:
+			v.DeviceTypeIos = &types.IosClientBrandingAttributes{}
+			return v.DeviceTypeIos.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeLinux:
+			v.DeviceTypeLinux = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeLinux.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeOsx:
+			v.DeviceTypeOsx = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeOsx.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeWeb:
+			v.DeviceTypeWeb = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeWeb.Deserialize(d)
+		case schemas.DescribeClientBrandingResult_DeviceTypeWindows:
+			v.DeviceTypeWindows = &types.DefaultClientBrandingAttributes{}
+			return v.DeviceTypeWindows.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClientBrandingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClientBranding, schemas.DescribeClientBrandingRequest, schemas.DescribeClientBrandingResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeClientBranding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClientBranding, schemas.DescribeClientBrandingRequest, schemas.DescribeClientBrandingResult), output: &DescribeClientBrandingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeClientBranding{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeClientBranding"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeClientBrandingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClientBranding(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +179,8 @@ func (c *Client) addOperationDescribeClientBrandingMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeClientBranding(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeClientBranding",
-	}
 }

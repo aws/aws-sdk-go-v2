@@ -1,0 +1,5 @@
+POST /identities/GetWorkloadIdentity
+
+Content-Type: application/json
+
+{"name":"__Name__"}

@@ -5,9 +5,9 @@ package networkmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Applies a routing policy label to an attachment for traffic routing decisions.
@@ -50,6 +50,27 @@ type PutAttachmentRoutingPolicyLabelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttachmentRoutingPolicyLabelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttachmentRoutingPolicyLabelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttachmentRoutingPolicyLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelRequest_AttachmentId, *v.AttachmentId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelRequest_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+}
+
 type PutAttachmentRoutingPolicyLabelOutput struct {
 
 	// The ID of the attachment that received the routing policy label.
@@ -67,65 +88,54 @@ type PutAttachmentRoutingPolicyLabelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAttachmentRoutingPolicyLabelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAttachmentRoutingPolicyLabelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAttachmentRoutingPolicyLabelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelResponse_AttachmentId, *v.AttachmentId)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelResponse_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.RoutingPolicyLabel != nil {
+		s.WriteString(schemas.PutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel, *v.RoutingPolicyLabel)
+	}
+}
+func (v *PutAttachmentRoutingPolicyLabelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAttachmentRoutingPolicyLabelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAttachmentRoutingPolicyLabelResponse_AttachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.PutAttachmentRoutingPolicyLabelResponse_AttachmentId, v.AttachmentId)
+		case schemas.PutAttachmentRoutingPolicyLabelResponse_CoreNetworkId:
+			v.CoreNetworkId = new(string)
+			return d.ReadString(schemas.PutAttachmentRoutingPolicyLabelResponse_CoreNetworkId, v.CoreNetworkId)
+		case schemas.PutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel:
+			v.RoutingPolicyLabel = new(string)
+			return d.ReadString(schemas.PutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel, v.RoutingPolicyLabel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAttachmentRoutingPolicyLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttachmentRoutingPolicyLabel, schemas.PutAttachmentRoutingPolicyLabelRequest, schemas.PutAttachmentRoutingPolicyLabelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAttachmentRoutingPolicyLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAttachmentRoutingPolicyLabel, schemas.PutAttachmentRoutingPolicyLabelRequest, schemas.PutAttachmentRoutingPolicyLabelResponse), output: &PutAttachmentRoutingPolicyLabelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAttachmentRoutingPolicyLabel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAttachmentRoutingPolicyLabel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -135,12 +145,6 @@ func (c *Client) addOperationPutAttachmentRoutingPolicyLabelMiddlewares(stack *m
 		return err
 	}
 	if err = addOpPutAttachmentRoutingPolicyLabelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAttachmentRoutingPolicyLabel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +157,6 @@ func (c *Client) addOperationPutAttachmentRoutingPolicyLabelMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -198,12 +196,4 @@ func (m *idempotencyToken_initializeOpPutAttachmentRoutingPolicyLabel) HandleIni
 }
 func addIdempotencyToken_opPutAttachmentRoutingPolicyLabelMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpPutAttachmentRoutingPolicyLabel{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opPutAttachmentRoutingPolicyLabel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutAttachmentRoutingPolicyLabel",
-	}
 }

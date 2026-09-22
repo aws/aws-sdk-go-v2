@@ -5,10 +5,10 @@ package workmail
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List all the AvailabilityConfiguration 's for the given WorkMail organization.
@@ -45,6 +45,24 @@ type ListAvailabilityConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailabilityConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailabilityConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailabilityConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAvailabilityConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailabilityConfigurationsRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListAvailabilityConfigurationsRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type ListAvailabilityConfigurationsOutput struct {
 
 	// The list of AvailabilityConfiguration 's that exist for the specified WorkMail
@@ -61,77 +79,51 @@ type ListAvailabilityConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailabilityConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailabilityConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailabilityConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityConfigurationList(s, schemas.ListAvailabilityConfigurationsResponse_AvailabilityConfigurations, v.AvailabilityConfigurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailabilityConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAvailabilityConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailabilityConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailabilityConfigurationsResponse_AvailabilityConfigurations:
+			return deserializeAvailabilityConfigurationList(d, schemas.ListAvailabilityConfigurationsResponse_AvailabilityConfigurations, &v.AvailabilityConfigurations)
+		case schemas.ListAvailabilityConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAvailabilityConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailabilityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailabilityConfigurations, schemas.ListAvailabilityConfigurationsRequest, schemas.ListAvailabilityConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailabilityConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailabilityConfigurations, schemas.ListAvailabilityConfigurationsRequest, schemas.ListAvailabilityConfigurationsResponse), output: &ListAvailabilityConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailabilityConfigurations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAvailabilityConfigurations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAvailabilityConfigurationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAvailabilityConfigurations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +136,6 @@ func (c *Client) addOperationListAvailabilityConfigurationsMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +239,3 @@ type ListAvailabilityConfigurationsAPIClient interface {
 }
 
 var _ ListAvailabilityConfigurationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAvailabilityConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAvailabilityConfigurations",
-	}
-}

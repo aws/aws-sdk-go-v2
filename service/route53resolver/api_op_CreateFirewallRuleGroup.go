@@ -5,10 +5,10 @@ package route53resolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an empty DNS Firewall rule group for filtering DNS network traffic in a
@@ -49,6 +49,22 @@ type CreateFirewallRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateFirewallRuleGroupRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFirewallRuleGroupRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateFirewallRuleGroupRequest_Tags, v.Tags)
+}
+
 type CreateFirewallRuleGroupOutput struct {
 
 	// A collection of rules used to filter DNS network traffic.
@@ -60,65 +76,44 @@ type CreateFirewallRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallRuleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRuleGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallRuleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRuleGroup != nil {
+		s.WriteStruct(schemas.CreateFirewallRuleGroupResponse_FirewallRuleGroup)
+		v.FirewallRuleGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFirewallRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFirewallRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFirewallRuleGroupResponse_FirewallRuleGroup:
+			v.FirewallRuleGroup = &types.FirewallRuleGroup{}
+			return v.FirewallRuleGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallRuleGroup, schemas.CreateFirewallRuleGroupRequest, schemas.CreateFirewallRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFirewallRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallRuleGroup, schemas.CreateFirewallRuleGroupRequest, schemas.CreateFirewallRuleGroupResponse), output: &CreateFirewallRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFirewallRuleGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFirewallRuleGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -128,12 +123,6 @@ func (c *Client) addOperationCreateFirewallRuleGroupMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpCreateFirewallRuleGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFirewallRuleGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +135,6 @@ func (c *Client) addOperationCreateFirewallRuleGroupMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -191,12 +174,4 @@ func (m *idempotencyToken_initializeOpCreateFirewallRuleGroup) HandleInitialize(
 }
 func addIdempotencyToken_opCreateFirewallRuleGroupMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateFirewallRuleGroup{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateFirewallRuleGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFirewallRuleGroup",
-	}
 }

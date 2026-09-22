@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ComposeEnvironments&ApplicationName=__ApplicationName__&GroupName=__GroupName__&Version=2010-12-01&VersionLabels.member.1=__Member__&VersionLabels.member.2=__Member__

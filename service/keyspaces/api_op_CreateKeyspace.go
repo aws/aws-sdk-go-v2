@@ -4,11 +4,10 @@ package keyspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The CreateKeyspace operation adds a new keyspace to your account. In an Amazon
@@ -61,6 +60,39 @@ type CreateKeyspaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyspaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyspaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyspaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.CreateKeyspaceRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.ReplicationSpecification != nil {
+		s.WriteStruct(schemas.CreateKeyspaceRequest_replicationSpecification)
+		v.ReplicationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateKeyspaceRequest_tags, v.Tags)
+}
+func (v *CreateKeyspaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKeyspaceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKeyspaceRequest_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.CreateKeyspaceRequest_keyspaceName, v.KeyspaceName)
+		case schemas.CreateKeyspaceRequest_replicationSpecification:
+			v.ReplicationSpecification = &types.ReplicationSpecification{}
+			return v.ReplicationSpecification.Deserialize(d)
+		case schemas.CreateKeyspaceRequest_tags:
+			return deserializeTagList(d, schemas.CreateKeyspaceRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateKeyspaceOutput struct {
 
 	// The unique identifier of the keyspace in the format of an Amazon Resource Name
@@ -75,77 +107,48 @@ type CreateKeyspaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKeyspaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKeyspaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKeyspaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateKeyspaceResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *CreateKeyspaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKeyspaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKeyspaceResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.CreateKeyspaceResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKeyspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKeyspace, schemas.CreateKeyspaceRequest, schemas.CreateKeyspaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateKeyspace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKeyspace, schemas.CreateKeyspaceRequest, schemas.CreateKeyspaceResponse), output: &CreateKeyspaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateKeyspace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKeyspace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateKeyspaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKeyspace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +163,8 @@ func (c *Client) addOperationCreateKeyspaceMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateKeyspace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateKeyspace",
-	}
 }

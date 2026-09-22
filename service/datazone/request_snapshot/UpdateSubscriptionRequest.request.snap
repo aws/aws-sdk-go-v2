@@ -1,0 +1,5 @@
+PATCH /v2/domains/__DomainIdentifier__/subscription-requests/__Identifier__
+
+Content-Type: application/json
+
+{"requestReason":"__RequestReason__"}

@@ -442,6 +442,38 @@ func addOpUpdateCanaryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCanary{}, middleware.After)
 }
 
+func validateAddReplicaLocationInput(v *types.AddReplicaLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddReplicaLocationInput"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddReplicaLocations(v []types.AddReplicaLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddReplicaLocations"}
+	for i := range v {
+		if err := validateAddReplicaLocationInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateBaseScreenshot(v *types.BaseScreenshot) error {
 	if v == nil {
 		return nil
@@ -643,6 +675,11 @@ func validateOpCreateCanaryInput(v *CreateCanaryInput) error {
 	}
 	if v.RuntimeVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuntimeVersion"))
+	}
+	if v.AddReplicaLocations != nil {
+		if err := validateAddReplicaLocations(v.AddReplicaLocations); err != nil {
+			invalidParams.AddNested("AddReplicaLocations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -926,6 +963,11 @@ func validateOpUpdateCanaryInput(v *UpdateCanaryInput) error {
 	if v.VisualReferences != nil {
 		if err := validateVisualReferences(v.VisualReferences); err != nil {
 			invalidParams.AddNested("VisualReferences", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AddReplicaLocations != nil {
+		if err := validateAddReplicaLocations(v.AddReplicaLocations); err != nil {
+			invalidParams.AddNested("AddReplicaLocations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

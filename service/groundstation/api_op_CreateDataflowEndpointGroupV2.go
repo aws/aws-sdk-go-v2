@@ -4,11 +4,10 @@ package groundstation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/groundstation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a DataflowEndpoint group containing the specified list of Ground
@@ -61,6 +60,23 @@ type CreateDataflowEndpointGroupV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataflowEndpointGroupV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataflowEndpointGroupV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataflowEndpointGroupV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactPostPassDurationSeconds != nil {
+		s.WriteInt32(schemas.CreateDataflowEndpointGroupV2Request_contactPostPassDurationSeconds, *v.ContactPostPassDurationSeconds)
+	}
+	if v.ContactPrePassDurationSeconds != nil {
+		s.WriteInt32(schemas.CreateDataflowEndpointGroupV2Request_contactPrePassDurationSeconds, *v.ContactPrePassDurationSeconds)
+	}
+	serializeCreateEndpointDetailsList(s, schemas.CreateDataflowEndpointGroupV2Request_endpoints, v.Endpoints)
+	serializeTagsMap(s, schemas.CreateDataflowEndpointGroupV2Request_tags, v.Tags)
+}
+
 type CreateDataflowEndpointGroupV2Output struct {
 
 	// Dataflow endpoint group ID
@@ -72,77 +88,48 @@ type CreateDataflowEndpointGroupV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataflowEndpointGroupV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataflowEndpointGroupV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataflowEndpointGroupV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataflowEndpointGroupId != nil {
+		s.WriteString(schemas.CreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId, *v.DataflowEndpointGroupId)
+	}
+}
+func (v *CreateDataflowEndpointGroupV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataflowEndpointGroupV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId:
+			v.DataflowEndpointGroupId = new(string)
+			return d.ReadString(schemas.CreateDataflowEndpointGroupV2Response_dataflowEndpointGroupId, v.DataflowEndpointGroupId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataflowEndpointGroupV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataflowEndpointGroupV2, schemas.CreateDataflowEndpointGroupV2Request, schemas.CreateDataflowEndpointGroupV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataflowEndpointGroupV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataflowEndpointGroupV2, schemas.CreateDataflowEndpointGroupV2Request, schemas.CreateDataflowEndpointGroupV2Response), output: &CreateDataflowEndpointGroupV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataflowEndpointGroupV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataflowEndpointGroupV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDataflowEndpointGroupV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataflowEndpointGroupV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +144,8 @@ func (c *Client) addOperationCreateDataflowEndpointGroupV2Middlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDataflowEndpointGroupV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataflowEndpointGroupV2",
-	}
 }

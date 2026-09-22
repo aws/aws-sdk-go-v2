@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/q-personalization-configuration
+
+Content-Type: application/json
+
+{"PersonalizationMode":"ENABLED"}

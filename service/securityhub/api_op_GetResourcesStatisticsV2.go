@@ -4,11 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves statistical information about Amazon Web Services resources and their
@@ -18,6 +17,11 @@ import (
 // Currently, Scopes supports AwsOrganizations , which lets you aggregate resources
 // from your entire organization or from specific organizational units. Only the
 // delegated administrator account can use Scopes .
+//
+// If you set GroupByField to ResourceSubCategory ,
+// ResourceInfo.AIDetails.HostResourceType , or ResourceInfo.AIDetails.CanonicalId
+// , you must include a ResourceCategory string filter with comparison set to
+// EQUALS and value AI/ML in the corresponding ResourceGroupByRule .
 func (c *Client) GetResourcesStatisticsV2(ctx context.Context, params *GetResourcesStatisticsV2Input, optFns ...func(*Options)) (*GetResourcesStatisticsV2Output, error) {
 	if params == nil {
 		params = &GetResourcesStatisticsV2Input{}
@@ -61,6 +65,27 @@ type GetResourcesStatisticsV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesStatisticsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesStatisticsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesStatisticsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceGroupByRules(s, schemas.GetResourcesStatisticsV2Request_GroupByRules, v.GroupByRules)
+	if v.MaxStatisticResults != nil {
+		s.WriteInt32(schemas.GetResourcesStatisticsV2Request_MaxStatisticResults, *v.MaxStatisticResults)
+	}
+	if v.Scopes != nil {
+		s.WriteStruct(schemas.GetResourcesStatisticsV2Request_Scopes)
+		v.Scopes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.GetResourcesStatisticsV2Request_SortOrder, string(v.SortOrder))
+	}
+}
+
 type GetResourcesStatisticsV2Output struct {
 
 	// The aggregated statistics about resources based on the specified grouping rule.
@@ -74,77 +99,45 @@ type GetResourcesStatisticsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourcesStatisticsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourcesStatisticsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourcesStatisticsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupByResults(s, schemas.GetResourcesStatisticsV2Response_GroupByResults, v.GroupByResults)
+}
+func (v *GetResourcesStatisticsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourcesStatisticsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourcesStatisticsV2Response_GroupByResults:
+			return deserializeGroupByResults(d, schemas.GetResourcesStatisticsV2Response_GroupByResults, &v.GroupByResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourcesStatisticsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesStatisticsV2, schemas.GetResourcesStatisticsV2Request, schemas.GetResourcesStatisticsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourcesStatisticsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourcesStatisticsV2, schemas.GetResourcesStatisticsV2Request, schemas.GetResourcesStatisticsV2Response), output: &GetResourcesStatisticsV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourcesStatisticsV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourcesStatisticsV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetResourcesStatisticsV2ValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourcesStatisticsV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +152,8 @@ func (c *Client) addOperationGetResourcesStatisticsV2Middlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetResourcesStatisticsV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetResourcesStatisticsV2",
-	}
 }

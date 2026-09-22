@@ -74,6 +74,18 @@ func TestCheckSnapshot_AcceptDelegationRequest(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AcquireRole(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcquireRole(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcquireRole")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AddClientIDToOpenIDConnectProvider(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AddClientIDToOpenIDConnectProvider(context.Background(), nil, func(o *Options) {
@@ -830,6 +842,18 @@ func TestCheckSnapshot_GetAccountPasswordPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetAccountProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAccountProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetAccountSummary(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccountSummary(context.Background(), nil, func(o *Options) {
@@ -1039,6 +1063,18 @@ func TestCheckSnapshot_GetRolePolicy(t *testing.T) {
 	_, err := svc.GetRolePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetRolePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRoleTemplateVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRoleTemplateVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRoleTemplateVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1567,6 +1603,18 @@ func TestCheckSnapshot_ListVirtualMFADevices(t *testing.T) {
 	_, err := svc.ListVirtualMFADevices(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListVirtualMFADevices")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutAccountProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutAccountProperties")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2178,6 +2226,18 @@ func TestUpdateSnapshot_AcceptDelegationRequest(t *testing.T) {
 	_, err := svc.AcceptDelegationRequest(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AcceptDelegationRequest")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AcquireRole(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcquireRole(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcquireRole")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2941,6 +3001,18 @@ func TestUpdateSnapshot_GetAccountPasswordPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetAccountProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAccountProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAccountProperties")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetAccountSummary(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetAccountSummary(context.Background(), nil, func(o *Options) {
@@ -3150,6 +3222,18 @@ func TestUpdateSnapshot_GetRolePolicy(t *testing.T) {
 	_, err := svc.GetRolePolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetRolePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRoleTemplateVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRoleTemplateVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRoleTemplateVersion")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3678,6 +3762,18 @@ func TestUpdateSnapshot_ListVirtualMFADevices(t *testing.T) {
 	_, err := svc.ListVirtualMFADevices(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListVirtualMFADevices")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutAccountProperties(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutAccountProperties(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutAccountProperties")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

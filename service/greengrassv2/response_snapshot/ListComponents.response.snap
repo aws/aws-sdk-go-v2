@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"components":[{"arn":"__Arn__","componentName":"__ComponentName__","latestVersion":{"arn":"__Arn__","componentVersion":"__ComponentVersion__","creationTimestamp":946684800,"description":"__Description__","platforms":[{"attributes":{"key0":"__Value__"},"name":"__Name__"},{"attributes":{"key0":"__Value__"},"name":"__Name__"}],"publisher":"__Publisher__"}},{"arn":"__Arn__","componentName":"__ComponentName__","latestVersion":{"arn":"__Arn__","componentVersion":"__ComponentVersion__","creationTimestamp":946684800,"description":"__Description__","platforms":[{"attributes":{"key0":"__Value__"},"name":"__Name__"},{"attributes":{"key0":"__Value__"},"name":"__Name__"}],"publisher":"__Publisher__"}}],"nextToken":"__NextToken__"}

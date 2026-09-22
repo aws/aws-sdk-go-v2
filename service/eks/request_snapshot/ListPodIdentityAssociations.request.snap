@@ -1,0 +1,3 @@
+GET /clusters/__ClusterName__/pod-identity-associations?maxResults=1&namespace=__Namespace__&nextToken=__NextToken__&serviceAccount=__ServiceAccount__
+
+

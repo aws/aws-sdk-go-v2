@@ -1382,6 +1382,18 @@ func TestCheckSnapshot_GetOperationsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRegions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRegions(context.Background(), nil, func(o *Options) {
@@ -3306,6 +3318,18 @@ func TestUpdateSnapshot_GetOperationsForResource(t *testing.T) {
 	_, err := svc.GetOperationsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetOperationsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetProfile(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetProfile(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetProfile")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

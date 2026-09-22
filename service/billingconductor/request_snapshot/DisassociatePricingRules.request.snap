@@ -1,0 +1,5 @@
+PUT /disassociate-pricing-rules
+
+Content-Type: application/json
+
+{"Arn":"__Arn__","PricingRuleArns":["__Member__","__Member__"]}

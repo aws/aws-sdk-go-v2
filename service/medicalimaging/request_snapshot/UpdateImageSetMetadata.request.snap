@@ -1,0 +1,5 @@
+POST /datastore/__DatastoreId__/imageSet/__ImageSetId__/updateImageSetMetadata?force=true&includeStudyImageSets=true&latestVersion=__LatestVersionId__
+
+Content-Type: application/json
+
+{"DICOMUpdates":{"removableAttributes":"YmxvYg==","updatableAttributes":"YmxvYg=="}}

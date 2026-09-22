@@ -1,0 +1,5 @@
+POST /earth-observation-jobs/stop
+
+Content-Type: application/json
+
+{"Arn":"__Arn__"}

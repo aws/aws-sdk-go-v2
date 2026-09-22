@@ -4,11 +4,10 @@ package swf
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/swf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers a new workflow type and its configuration settings in the specified
@@ -160,6 +159,47 @@ type RegisterWorkflowTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterWorkflowTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterWorkflowTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterWorkflowTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultChildPolicy != "" {
+		s.WriteString(schemas.RegisterWorkflowTypeInput_defaultChildPolicy, string(v.DefaultChildPolicy))
+	}
+	if v.DefaultExecutionStartToCloseTimeout != nil {
+		s.WriteString(schemas.RegisterWorkflowTypeInput_defaultExecutionStartToCloseTimeout, *v.DefaultExecutionStartToCloseTimeout)
+	}
+	if v.DefaultLambdaRole != nil {
+		s.WriteString(schemas.RegisterWorkflowTypeInput_defaultLambdaRole, *v.DefaultLambdaRole)
+	}
+	if v.DefaultTaskList != nil {
+		s.WriteStruct(schemas.RegisterWorkflowTypeInput_defaultTaskList)
+		v.DefaultTaskList.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultTaskPriority != nil {
+		s.WriteString(schemas.RegisterWorkflowTypeInput_defaultTaskPriority, *v.DefaultTaskPriority)
+	}
+	if v.DefaultTaskStartToCloseTimeout != nil {
+		s.WriteString(schemas.RegisterWorkflowTypeInput_defaultTaskStartToCloseTimeout, *v.DefaultTaskStartToCloseTimeout)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RegisterWorkflowTypeInput_description, *v.Description)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.RegisterWorkflowTypeInput_domain, *v.Domain)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RegisterWorkflowTypeInput_name, *v.Name)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.RegisterWorkflowTypeInput_version, *v.Version)
+	}
+}
+
 type RegisterWorkflowTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -167,77 +207,42 @@ type RegisterWorkflowTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterWorkflowTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterWorkflowTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RegisterWorkflowTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterWorkflowType, schemas.RegisterWorkflowTypeInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRegisterWorkflowType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterWorkflowType, schemas.RegisterWorkflowTypeInput, nil), output: &RegisterWorkflowTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRegisterWorkflowType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterWorkflowType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterWorkflowTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterWorkflowType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -252,22 +257,8 @@ func (c *Client) addOperationRegisterWorkflowTypeMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterWorkflowType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterWorkflowType",
-	}
 }

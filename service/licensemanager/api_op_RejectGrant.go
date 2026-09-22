@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Rejects the specified grant.
@@ -37,6 +36,18 @@ type RejectGrantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectGrantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrantArn != nil {
+		s.WriteString(schemas.RejectGrantRequest_GrantArn, *v.GrantArn)
+	}
+}
+
 type RejectGrantOutput struct {
 
 	// Grant ARN.
@@ -54,77 +65,64 @@ type RejectGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectGrantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectGrantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectGrantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GrantArn != nil {
+		s.WriteString(schemas.RejectGrantResponse_GrantArn, *v.GrantArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RejectGrantResponse_Status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.RejectGrantResponse_Version, *v.Version)
+	}
+}
+func (v *RejectGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectGrantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectGrantResponse_GrantArn:
+			v.GrantArn = new(string)
+			return d.ReadString(schemas.RejectGrantResponse_GrantArn, v.GrantArn)
+		case schemas.RejectGrantResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.RejectGrantResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.GrantStatus(ev)
+			return nil
+		case schemas.RejectGrantResponse_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.RejectGrantResponse_Version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectGrant, schemas.RejectGrantRequest, schemas.RejectGrantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRejectGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectGrant, schemas.RejectGrantRequest, schemas.RejectGrantResponse), output: &RejectGrantOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRejectGrant{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RejectGrant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRejectGrantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRejectGrant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +137,8 @@ func (c *Client) addOperationRejectGrantMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRejectGrant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RejectGrant",
-	}
 }

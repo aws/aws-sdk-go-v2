@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type DescribeModelInput struct {
 	ModelName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.DescribeModelInput_ModelName, *v.ModelName)
+	}
 }
 
 type DescribeModelOutput struct {
@@ -88,77 +99,107 @@ type DescribeModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContainerDefinitionList(s, schemas.DescribeModelOutput_Containers, v.Containers)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeModelOutput_CreationTime, *v.CreationTime)
+	}
+	if v.DeploymentRecommendation != nil {
+		s.WriteStruct(schemas.DescribeModelOutput_DeploymentRecommendation)
+		v.DeploymentRecommendation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnableNetworkIsolation != nil {
+		s.WriteBool(schemas.DescribeModelOutput_EnableNetworkIsolation, *v.EnableNetworkIsolation)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.DescribeModelOutput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.InferenceExecutionConfig != nil {
+		s.WriteStruct(schemas.DescribeModelOutput_InferenceExecutionConfig)
+		v.InferenceExecutionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.DescribeModelOutput_ModelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.DescribeModelOutput_ModelName, *v.ModelName)
+	}
+	if v.PrimaryContainer != nil {
+		s.WriteStruct(schemas.DescribeModelOutput_PrimaryContainer)
+		v.PrimaryContainer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.DescribeModelOutput_VpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeModelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeModelOutput_Containers:
+			return deserializeContainerDefinitionList(d, schemas.DescribeModelOutput_Containers, &v.Containers)
+		case schemas.DescribeModelOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeModelOutput_DeploymentRecommendation:
+			v.DeploymentRecommendation = &types.DeploymentRecommendation{}
+			return v.DeploymentRecommendation.Deserialize(d)
+		case schemas.DescribeModelOutput_EnableNetworkIsolation:
+			v.EnableNetworkIsolation = new(bool)
+			return d.ReadBool(schemas.DescribeModelOutput_EnableNetworkIsolation, v.EnableNetworkIsolation)
+		case schemas.DescribeModelOutput_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.DescribeModelOutput_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.DescribeModelOutput_InferenceExecutionConfig:
+			v.InferenceExecutionConfig = &types.InferenceExecutionConfig{}
+			return v.InferenceExecutionConfig.Deserialize(d)
+		case schemas.DescribeModelOutput_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.DescribeModelOutput_ModelArn, v.ModelArn)
+		case schemas.DescribeModelOutput_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.DescribeModelOutput_ModelName, v.ModelName)
+		case schemas.DescribeModelOutput_PrimaryContainer:
+			v.PrimaryContainer = &types.ContainerDefinition{}
+			return v.PrimaryContainer.Deserialize(d)
+		case schemas.DescribeModelOutput_VpcConfig:
+			v.VpcConfig = &types.VpcConfig{}
+			return v.VpcConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModel, schemas.DescribeModelInput, schemas.DescribeModelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModel, schemas.DescribeModelInput, schemas.DescribeModelOutput), output: &DescribeModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +214,8 @@ func (c *Client) addOperationDescribeModelMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeModel",
-	}
 }

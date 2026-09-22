@@ -1,0 +1,4 @@
+DELETE /apikeys/__ApiKey__
+
+Accept: application/json
+

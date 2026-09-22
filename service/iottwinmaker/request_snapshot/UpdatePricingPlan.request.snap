@@ -1,0 +1,5 @@
+POST /pricingplan
+
+Content-Type: application/json
+
+{"bundleNames":["__Member__","__Member__"],"pricingMode":"BASIC"}

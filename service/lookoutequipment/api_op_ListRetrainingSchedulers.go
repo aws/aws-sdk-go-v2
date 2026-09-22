@@ -5,10 +5,10 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all retraining schedulers in your account, filtering by model name prefix
@@ -48,6 +48,27 @@ type ListRetrainingSchedulersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRetrainingSchedulersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRetrainingSchedulersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRetrainingSchedulersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRetrainingSchedulersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ModelNameBeginsWith != nil {
+		s.WriteString(schemas.ListRetrainingSchedulersRequest_ModelNameBeginsWith, *v.ModelNameBeginsWith)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRetrainingSchedulersRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListRetrainingSchedulersRequest_Status, string(v.Status))
+	}
+}
+
 type ListRetrainingSchedulersOutput struct {
 
 	// If the number of results exceeds the maximum, this pagination token is
@@ -65,74 +86,48 @@ type ListRetrainingSchedulersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRetrainingSchedulersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRetrainingSchedulersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRetrainingSchedulersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRetrainingSchedulersResponse_NextToken, *v.NextToken)
+	}
+	serializeRetrainingSchedulerSummaries(s, schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries, v.RetrainingSchedulerSummaries)
+}
+func (v *ListRetrainingSchedulersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRetrainingSchedulersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRetrainingSchedulersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRetrainingSchedulersResponse_NextToken, v.NextToken)
+		case schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries:
+			return deserializeRetrainingSchedulerSummaries(d, schemas.ListRetrainingSchedulersResponse_RetrainingSchedulerSummaries, &v.RetrainingSchedulerSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRetrainingSchedulersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRetrainingSchedulers, schemas.ListRetrainingSchedulersRequest, schemas.ListRetrainingSchedulersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListRetrainingSchedulers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRetrainingSchedulers, schemas.ListRetrainingSchedulersRequest, schemas.ListRetrainingSchedulersResponse), output: &ListRetrainingSchedulersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListRetrainingSchedulers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRetrainingSchedulers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRetrainingSchedulers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +140,6 @@ func (c *Client) addOperationListRetrainingSchedulersMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +242,3 @@ type ListRetrainingSchedulersAPIClient interface {
 }
 
 var _ ListRetrainingSchedulersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRetrainingSchedulers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRetrainingSchedulers",
-	}
-}

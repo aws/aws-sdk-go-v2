@@ -1,0 +1,3 @@
+GET /model-invocation-jobs?maxResults=1&nameContains=__NameContains__&nextToken=__NextToken__&sortBy=CreationTime&sortOrder=Ascending&statusEquals=Submitted&submitTimeAfter=2000-01-01T00%3A00%3A00Z&submitTimeBefore=2000-01-01T00%3A00%3A00Z
+
+

@@ -5,10 +5,10 @@ package amplifyuibuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing form.
@@ -55,6 +55,54 @@ type UpdateFormInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFormRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFormInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.UpdateFormRequest_appId, *v.AppId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateFormRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.UpdateFormRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateFormRequest_id, *v.Id)
+	}
+	if v.UpdatedForm != nil {
+		s.WriteStruct(schemas.UpdateFormRequest_updatedForm)
+		v.UpdatedForm.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFormInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFormRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFormRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UpdateFormRequest_appId, v.AppId)
+		case schemas.UpdateFormRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateFormRequest_clientToken, v.ClientToken)
+		case schemas.UpdateFormRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.UpdateFormRequest_environmentName, v.EnvironmentName)
+		case schemas.UpdateFormRequest_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateFormRequest_id, v.Id)
+		case schemas.UpdateFormRequest_updatedForm:
+			v.UpdatedForm = &types.UpdateFormData{}
+			return v.UpdatedForm.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type UpdateFormOutput struct {
 
 	// Describes the configuration of the updated form.
@@ -66,65 +114,44 @@ type UpdateFormOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFormOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFormResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFormOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.UpdateFormResponse_entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFormOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFormResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFormResponse_entity:
+			v.Entity = &types.Form{}
+			return v.Entity.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFormMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateForm, schemas.UpdateFormRequest, schemas.UpdateFormResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateForm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateForm, schemas.UpdateFormRequest, schemas.UpdateFormResponse), output: &UpdateFormOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateForm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateForm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -134,12 +161,6 @@ func (c *Client) addOperationUpdateFormMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpUpdateFormValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateForm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +173,6 @@ func (c *Client) addOperationUpdateFormMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -197,12 +212,4 @@ func (m *idempotencyToken_initializeOpUpdateForm) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opUpdateFormMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateForm{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateForm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateForm",
-	}
 }

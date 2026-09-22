@@ -5,14 +5,14 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This request obtains a list of copy jobs created or running within the the most
-// recent 30 days. You can include parameters AccountID, State, ResourceType,
+// recent 14 days. You can include parameters AccountID, State, ResourceType,
 // MessageCategory, AggregationPeriod, MaxResults, or NextToken to filter results.
 //
 // This request returns a summary that contains Region, Account, State,
@@ -101,6 +101,36 @@ type ListCopyJobSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCopyJobSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCopyJobSummariesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCopyJobSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListCopyJobSummariesInput_AccountId, *v.AccountId)
+	}
+	if v.AggregationPeriod != "" {
+		s.WriteString(schemas.ListCopyJobSummariesInput_AggregationPeriod, string(v.AggregationPeriod))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCopyJobSummariesInput_MaxResults, *v.MaxResults)
+	}
+	if v.MessageCategory != nil {
+		s.WriteString(schemas.ListCopyJobSummariesInput_MessageCategory, *v.MessageCategory)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCopyJobSummariesInput_NextToken, *v.NextToken)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListCopyJobSummariesInput_ResourceType, *v.ResourceType)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ListCopyJobSummariesInput_State, string(v.State))
+	}
+}
+
 type ListCopyJobSummariesOutput struct {
 
 	// The period for the returned results.
@@ -128,74 +158,54 @@ type ListCopyJobSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCopyJobSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCopyJobSummariesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCopyJobSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationPeriod != nil {
+		s.WriteString(schemas.ListCopyJobSummariesOutput_AggregationPeriod, *v.AggregationPeriod)
+	}
+	serializeCopyJobSummaryList(s, schemas.ListCopyJobSummariesOutput_CopyJobSummaries, v.CopyJobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCopyJobSummariesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCopyJobSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCopyJobSummariesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCopyJobSummariesOutput_AggregationPeriod:
+			v.AggregationPeriod = new(string)
+			return d.ReadString(schemas.ListCopyJobSummariesOutput_AggregationPeriod, v.AggregationPeriod)
+		case schemas.ListCopyJobSummariesOutput_CopyJobSummaries:
+			return deserializeCopyJobSummaryList(d, schemas.ListCopyJobSummariesOutput_CopyJobSummaries, &v.CopyJobSummaries)
+		case schemas.ListCopyJobSummariesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCopyJobSummariesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCopyJobSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCopyJobSummaries, schemas.ListCopyJobSummariesInput, schemas.ListCopyJobSummariesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCopyJobSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCopyJobSummaries, schemas.ListCopyJobSummariesInput, schemas.ListCopyJobSummariesOutput), output: &ListCopyJobSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCopyJobSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCopyJobSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCopyJobSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,12 +218,6 @@ func (c *Client) addOperationListCopyJobSummariesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -317,11 +321,3 @@ type ListCopyJobSummariesAPIClient interface {
 }
 
 var _ ListCopyJobSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCopyJobSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCopyJobSummaries",
-	}
-}

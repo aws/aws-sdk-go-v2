@@ -4,11 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Contributor Insights rule. Rules evaluate log events in a CloudWatch
@@ -89,6 +88,28 @@ type PutInsightRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInsightRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInsightRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInsightRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplyOnTransformedLogs != nil {
+		s.WriteBool(schemas.PutInsightRuleInput_ApplyOnTransformedLogs, *v.ApplyOnTransformedLogs)
+	}
+	if v.RuleDefinition != nil {
+		s.WriteString(schemas.PutInsightRuleInput_RuleDefinition, *v.RuleDefinition)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.PutInsightRuleInput_RuleName, *v.RuleName)
+	}
+	if v.RuleState != nil {
+		s.WriteString(schemas.PutInsightRuleInput_RuleState, *v.RuleState)
+	}
+	serializeTagList(s, schemas.PutInsightRuleInput_Tags, v.Tags)
+}
+
 type PutInsightRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -96,65 +117,36 @@ type PutInsightRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInsightRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInsightRuleOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInsightRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutInsightRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutInsightRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutInsightRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInsightRule, schemas.PutInsightRuleInput, schemas.PutInsightRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutInsightRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInsightRule, schemas.PutInsightRuleInput, schemas.PutInsightRuleOutput), output: &PutInsightRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutInsightRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutInsightRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -164,12 +156,6 @@ func (c *Client) addOperationPutInsightRuleMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpPutInsightRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutInsightRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,22 +170,8 @@ func (c *Client) addOperationPutInsightRuleMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutInsightRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutInsightRule",
-	}
 }

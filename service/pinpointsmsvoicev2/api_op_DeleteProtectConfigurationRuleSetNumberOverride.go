@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,6 +40,21 @@ type DeleteProtectConfigurationRuleSetNumberOverrideInput struct {
 	ProtectConfigurationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
 }
 
 type DeleteProtectConfigurationRuleSetNumberOverrideOutput struct {
@@ -86,77 +100,88 @@ type DeleteProtectConfigurationRuleSetNumberOverrideOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_Action, string(v.Action))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.ExpirationTimestamp != nil {
+		s.WriteTime(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp, *v.ExpirationTimestamp)
+	}
+	if v.IsoCountryCode != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode, *v.IsoCountryCode)
+	}
+	if v.ProtectConfigurationArn != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn, *v.ProtectConfigurationArn)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+func (v *DeleteProtectConfigurationRuleSetNumberOverrideOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_Action:
+			var ev string
+			if err := d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.ProtectConfigurationRuleOverrideAction(ev)
+			return nil
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber:
+			v.DestinationPhoneNumber = new(string)
+			return d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_DestinationPhoneNumber, v.DestinationPhoneNumber)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp:
+			v.ExpirationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ExpirationTimestamp, v.ExpirationTimestamp)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode:
+			v.IsoCountryCode = new(string)
+			return d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_IsoCountryCode, v.IsoCountryCode)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn:
+			v.ProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationArn, v.ProtectConfigurationArn)
+		case schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId:
+			v.ProtectConfigurationId = new(string)
+			return d.ReadString(schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult_ProtectConfigurationId, v.ProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProtectConfigurationRuleSetNumberOverrideMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProtectConfigurationRuleSetNumberOverride, schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest, schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteProtectConfigurationRuleSetNumberOverride{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProtectConfigurationRuleSetNumberOverride, schemas.DeleteProtectConfigurationRuleSetNumberOverrideRequest, schemas.DeleteProtectConfigurationRuleSetNumberOverrideResult), output: &DeleteProtectConfigurationRuleSetNumberOverrideOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteProtectConfigurationRuleSetNumberOverride{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteProtectConfigurationRuleSetNumberOverride"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteProtectConfigurationRuleSetNumberOverrideValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProtectConfigurationRuleSetNumberOverride(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +196,8 @@ func (c *Client) addOperationDeleteProtectConfigurationRuleSetNumberOverrideMidd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteProtectConfigurationRuleSetNumberOverride(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteProtectConfigurationRuleSetNumberOverride",
-	}
 }

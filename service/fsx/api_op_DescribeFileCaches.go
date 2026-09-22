@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the description of a specific Amazon File Cache resource, if a
@@ -67,6 +67,22 @@ type DescribeFileCachesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileCachesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileCachesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileCachesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileCacheIds(s, schemas.DescribeFileCachesRequest_FileCacheIds, v.FileCacheIds)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeFileCachesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFileCachesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeFileCachesOutput struct {
 
 	// The response object for the DescribeFileCaches operation.
@@ -83,74 +99,48 @@ type DescribeFileCachesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFileCachesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFileCachesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFileCachesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFileCaches(s, schemas.DescribeFileCachesResponse_FileCaches, v.FileCaches)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeFileCachesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeFileCachesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFileCachesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFileCachesResponse_FileCaches:
+			return deserializeFileCaches(d, schemas.DescribeFileCachesResponse_FileCaches, &v.FileCaches)
+		case schemas.DescribeFileCachesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeFileCachesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFileCachesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileCaches, schemas.DescribeFileCachesRequest, schemas.DescribeFileCachesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeFileCaches{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFileCaches, schemas.DescribeFileCachesRequest, schemas.DescribeFileCachesResponse), output: &DescribeFileCachesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeFileCaches{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFileCaches"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFileCaches(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +153,6 @@ func (c *Client) addOperationDescribeFileCachesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -271,11 +255,3 @@ type DescribeFileCachesAPIClient interface {
 }
 
 var _ DescribeFileCachesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeFileCaches(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFileCaches",
-	}
-}

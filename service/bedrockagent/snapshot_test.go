@@ -338,6 +338,18 @@ func TestCheckSnapshot_DeletePrompt(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisassociateAgentCollaborator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateAgentCollaborator(context.Background(), nil, func(o *Options) {
@@ -523,6 +535,18 @@ func TestCheckSnapshot_GetPrompt(t *testing.T) {
 	_, err := svc.GetPrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetPrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -739,6 +763,18 @@ func TestCheckSnapshot_PrepareFlow(t *testing.T) {
 	_, err := svc.PrepareFlow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PrepareFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1201,6 +1237,18 @@ func TestUpdateSnapshot_DeletePrompt(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisassociateAgentCollaborator(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisassociateAgentCollaborator(context.Background(), nil, func(o *Options) {
@@ -1386,6 +1434,18 @@ func TestUpdateSnapshot_GetPrompt(t *testing.T) {
 	_, err := svc.GetPrompt(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPrompt")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1602,6 +1662,18 @@ func TestUpdateSnapshot_PrepareFlow(t *testing.T) {
 	_, err := svc.PrepareFlow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PrepareFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

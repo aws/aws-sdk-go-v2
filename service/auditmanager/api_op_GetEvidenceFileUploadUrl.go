@@ -4,10 +4,9 @@ package auditmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a presigned Amazon S3 URL that can be used to upload a file as manual
@@ -55,6 +54,18 @@ type GetEvidenceFileUploadUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvidenceFileUploadUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvidenceFileUploadUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvidenceFileUploadUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileName != nil {
+		s.WriteString(schemas.GetEvidenceFileUploadUrlRequest_fileName, *v.FileName)
+	}
+}
+
 type GetEvidenceFileUploadUrlOutput struct {
 
 	// The name of the uploaded manual evidence file that the presigned URL was
@@ -70,77 +81,54 @@ type GetEvidenceFileUploadUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEvidenceFileUploadUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEvidenceFileUploadUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEvidenceFileUploadUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvidenceFileName != nil {
+		s.WriteString(schemas.GetEvidenceFileUploadUrlResponse_evidenceFileName, *v.EvidenceFileName)
+	}
+	if v.UploadUrl != nil {
+		s.WriteString(schemas.GetEvidenceFileUploadUrlResponse_uploadUrl, *v.UploadUrl)
+	}
+}
+func (v *GetEvidenceFileUploadUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEvidenceFileUploadUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEvidenceFileUploadUrlResponse_evidenceFileName:
+			v.EvidenceFileName = new(string)
+			return d.ReadString(schemas.GetEvidenceFileUploadUrlResponse_evidenceFileName, v.EvidenceFileName)
+		case schemas.GetEvidenceFileUploadUrlResponse_uploadUrl:
+			v.UploadUrl = new(string)
+			return d.ReadString(schemas.GetEvidenceFileUploadUrlResponse_uploadUrl, v.UploadUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEvidenceFileUploadUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvidenceFileUploadUrl, schemas.GetEvidenceFileUploadUrlRequest, schemas.GetEvidenceFileUploadUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEvidenceFileUploadUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEvidenceFileUploadUrl, schemas.GetEvidenceFileUploadUrlRequest, schemas.GetEvidenceFileUploadUrlResponse), output: &GetEvidenceFileUploadUrlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEvidenceFileUploadUrl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEvidenceFileUploadUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEvidenceFileUploadUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEvidenceFileUploadUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +143,8 @@ func (c *Client) addOperationGetEvidenceFileUploadUrlMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEvidenceFileUploadUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEvidenceFileUploadUrl",
-	}
 }

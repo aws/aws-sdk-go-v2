@@ -1,0 +1,5 @@
+PUT /fuota-tasks/__Id__/wireless-device
+
+Content-Type: application/json
+
+{"WirelessDeviceId":"__WirelessDeviceId__"}

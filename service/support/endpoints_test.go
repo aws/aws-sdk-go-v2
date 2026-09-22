@@ -41,7 +41,7 @@ func TestEndpointCase0(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -205,7 +205,7 @@ func TestEndpointCase4(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -258,7 +258,7 @@ func TestEndpointCase5(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -422,7 +422,7 @@ func TestEndpointCase9(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -475,7 +475,7 @@ func TestEndpointCase10(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -528,7 +528,7 @@ func TestEndpointCase11(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -618,7 +618,7 @@ func TestEndpointCase13(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -708,7 +708,7 @@ func TestEndpointCase15(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -761,7 +761,7 @@ func TestEndpointCase16(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -851,7 +851,7 @@ func TestEndpointCase18(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -904,7 +904,7 @@ func TestEndpointCase19(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")
@@ -994,7 +994,7 @@ func TestEndpointCase21(t *testing.T) {
 			var out smithy.Properties
 			smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 				{
-					SchemeID: "aws.auth#sigv4",
+					SchemeID: "sigv4",
 					SignerProperties: func() smithy.Properties {
 						var sp smithy.Properties
 						smithyhttp.SetSigV4SigningName(&sp, "support")

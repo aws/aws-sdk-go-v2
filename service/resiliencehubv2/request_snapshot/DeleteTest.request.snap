@@ -1,0 +1,5 @@
+POST /v2/delete-test
+
+Content-Type: application/json
+
+{"serviceArn":"__ServiceArn__","testId":"__TestId__"}

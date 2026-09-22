@@ -1,0 +1,5 @@
+PUT /greengrass/servicerole
+
+Content-Type: application/json
+
+{"RoleArn":"__RoleArn__"}

@@ -4,11 +4,10 @@ package servicequotas
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the default value for the specified quota. The default value does not
@@ -46,6 +45,21 @@ type GetAWSDefaultServiceQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAWSDefaultServiceQuotaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAWSDefaultServiceQuotaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAWSDefaultServiceQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.GetAWSDefaultServiceQuotaRequest_QuotaCode, *v.QuotaCode)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.GetAWSDefaultServiceQuotaRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type GetAWSDefaultServiceQuotaOutput struct {
 
 	// Information about the quota.
@@ -57,77 +71,50 @@ type GetAWSDefaultServiceQuotaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAWSDefaultServiceQuotaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAWSDefaultServiceQuotaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAWSDefaultServiceQuotaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Quota != nil {
+		s.WriteStruct(schemas.GetAWSDefaultServiceQuotaResponse_Quota)
+		v.Quota.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAWSDefaultServiceQuotaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAWSDefaultServiceQuotaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAWSDefaultServiceQuotaResponse_Quota:
+			v.Quota = &types.ServiceQuota{}
+			return v.Quota.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAWSDefaultServiceQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAWSDefaultServiceQuota, schemas.GetAWSDefaultServiceQuotaRequest, schemas.GetAWSDefaultServiceQuotaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAWSDefaultServiceQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAWSDefaultServiceQuota, schemas.GetAWSDefaultServiceQuotaRequest, schemas.GetAWSDefaultServiceQuotaResponse), output: &GetAWSDefaultServiceQuotaOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAWSDefaultServiceQuota{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAWSDefaultServiceQuota"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAWSDefaultServiceQuotaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAWSDefaultServiceQuota(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +129,8 @@ func (c *Client) addOperationGetAWSDefaultServiceQuotaMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAWSDefaultServiceQuota(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAWSDefaultServiceQuota",
-	}
 }

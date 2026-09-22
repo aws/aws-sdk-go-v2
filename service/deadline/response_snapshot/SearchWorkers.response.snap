@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextItemOffset":1,"totalResults":1,"workers":[{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","fleetId":"__FleetId__","hostProperties":{"ec2InstanceArn":"__Ec2InstanceArn__","ec2InstanceType":"__Ec2InstanceType__","hostName":"__HostName__","ipAddresses":{"ipV4Addresses":["__Member__","__Member__"],"ipV6Addresses":["__Member__","__Member__"]}},"status":"CREATED","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__","workerId":"__WorkerId__"},{"createdAt":"2000-01-01T00:00:00Z","createdBy":"__CreatedBy__","fleetId":"__FleetId__","hostProperties":{"ec2InstanceArn":"__Ec2InstanceArn__","ec2InstanceType":"__Ec2InstanceType__","hostName":"__HostName__","ipAddresses":{"ipV4Addresses":["__Member__","__Member__"],"ipV6Addresses":["__Member__","__Member__"]}},"status":"CREATED","updatedAt":"2000-01-01T00:00:00Z","updatedBy":"__UpdatedBy__","workerId":"__WorkerId__"}]}

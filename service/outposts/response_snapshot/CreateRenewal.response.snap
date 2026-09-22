@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Currency":"USD","MonthlyRecurringPrice":1,"OutpostId":"__OutpostId__","PaymentOption":"ALL_UPFRONT","PaymentTerm":"THREE_YEARS","UpfrontPrice":1}

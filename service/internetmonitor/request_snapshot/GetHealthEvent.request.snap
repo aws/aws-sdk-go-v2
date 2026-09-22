@@ -1,0 +1,3 @@
+GET /v20210603/Monitors/__MonitorName__/HealthEvents/__EventId__?LinkedAccountId=__LinkedAccountId__
+
+

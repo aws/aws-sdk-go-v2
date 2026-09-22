@@ -4,11 +4,10 @@ package ivs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a stream key, used to initiate a stream, for the specified channel ARN.
@@ -50,6 +49,31 @@ type CreateStreamKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.CreateStreamKeyRequest_channelArn, *v.ChannelArn)
+	}
+	serializeTags(s, schemas.CreateStreamKeyRequest_tags, v.Tags)
+}
+func (v *CreateStreamKeyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamKeyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamKeyRequest_channelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.CreateStreamKeyRequest_channelArn, v.ChannelArn)
+		case schemas.CreateStreamKeyRequest_tags:
+			return deserializeTags(d, schemas.CreateStreamKeyRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateStreamKeyOutput struct {
 
 	// Stream key used to authenticate an RTMPS stream for ingestion.
@@ -61,77 +85,50 @@ type CreateStreamKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StreamKey != nil {
+		s.WriteStruct(schemas.CreateStreamKeyResponse_streamKey)
+		v.StreamKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateStreamKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamKeyResponse_streamKey:
+			v.StreamKey = &types.StreamKey{}
+			return v.StreamKey.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamKey, schemas.CreateStreamKeyRequest, schemas.CreateStreamKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStreamKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamKey, schemas.CreateStreamKeyRequest, schemas.CreateStreamKeyResponse), output: &CreateStreamKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStreamKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStreamKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateStreamKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStreamKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +143,8 @@ func (c *Client) addOperationCreateStreamKeyMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateStreamKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateStreamKey",
-	}
 }

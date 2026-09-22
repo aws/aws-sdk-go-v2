@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/conversations/__ConversationId__/messages/__MessageId__/feedback?userId=__UserId__
+
+Content-Type: application/json
+
+{"messageCopiedAt":946684800,"messageUsefulness":{"comment":"__Comment__","reason":"NOT_FACTUALLY_CORRECT","submittedAt":946684800,"usefulness":"USEFUL"}}

@@ -4,11 +4,10 @@ package accessanalyzer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about the specified analyzer.
@@ -38,6 +37,28 @@ type GetAnalyzerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalyzerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalyzerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalyzerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalyzerName != nil {
+		s.WriteString(schemas.GetAnalyzerRequest_analyzerName, *v.AnalyzerName)
+	}
+}
+func (v *GetAnalyzerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnalyzerRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnalyzerRequest_analyzerName:
+			v.AnalyzerName = new(string)
+			return d.ReadString(schemas.GetAnalyzerRequest_analyzerName, v.AnalyzerName)
+		}
+		return nil
+	})
+}
+
 // The response to the request.
 type GetAnalyzerOutput struct {
 
@@ -52,77 +73,50 @@ type GetAnalyzerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnalyzerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnalyzerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnalyzerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Analyzer != nil {
+		s.WriteStruct(schemas.GetAnalyzerResponse_analyzer)
+		v.Analyzer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAnalyzerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnalyzerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnalyzerResponse_analyzer:
+			v.Analyzer = &types.AnalyzerSummary{}
+			return v.Analyzer.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalyzer, schemas.GetAnalyzerRequest, schemas.GetAnalyzerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAnalyzer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnalyzer, schemas.GetAnalyzerRequest, schemas.GetAnalyzerResponse), output: &GetAnalyzerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAnalyzer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAnalyzer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAnalyzerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAnalyzer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +131,8 @@ func (c *Client) addOperationGetAnalyzerMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAnalyzer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAnalyzer",
-	}
 }

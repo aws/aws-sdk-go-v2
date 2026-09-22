@@ -4,11 +4,10 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Grants permission to retrieve a list of connectorsV2 and their metadata for the
@@ -33,6 +32,9 @@ type ListConnectorsV2Input struct {
 	// The status for the connectorV2.
 	ConnectorStatus types.ConnectorStatus
 
+	// The enablement status to filter connectors by.
+	EnablementStatus types.EnablementStatus
+
 	// The maximum number of results to be returned.
 	MaxResults *int32
 
@@ -43,6 +45,30 @@ type ListConnectorsV2Input struct {
 	ProviderName types.ConnectorProviderName
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListConnectorsV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorsV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorsV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorStatus != "" {
+		s.WriteString(schemas.ListConnectorsV2Request_ConnectorStatus, string(v.ConnectorStatus))
+	}
+	if v.EnablementStatus != "" {
+		s.WriteString(schemas.ListConnectorsV2Request_EnablementStatus, string(v.EnablementStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConnectorsV2Request_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorsV2Request_NextToken, *v.NextToken)
+	}
+	if v.ProviderName != "" {
+		s.WriteString(schemas.ListConnectorsV2Request_ProviderName, string(v.ProviderName))
+	}
 }
 
 type ListConnectorsV2Output struct {
@@ -62,74 +88,48 @@ type ListConnectorsV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConnectorsV2Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConnectorsV2Response)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConnectorsV2Output) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorSummaryList(s, schemas.ListConnectorsV2Response_Connectors, v.Connectors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConnectorsV2Response_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConnectorsV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConnectorsV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConnectorsV2Response_Connectors:
+			return deserializeConnectorSummaryList(d, schemas.ListConnectorsV2Response_Connectors, &v.Connectors)
+		case schemas.ListConnectorsV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConnectorsV2Response_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConnectorsV2Middlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorsV2, schemas.ListConnectorsV2Request, schemas.ListConnectorsV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConnectorsV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConnectorsV2, schemas.ListConnectorsV2Request, schemas.ListConnectorsV2Response), output: &ListConnectorsV2Output{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConnectorsV2{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConnectorsV2"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConnectorsV2(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +144,8 @@ func (c *Client) addOperationListConnectorsV2Middlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListConnectorsV2(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListConnectorsV2",
-	}
 }

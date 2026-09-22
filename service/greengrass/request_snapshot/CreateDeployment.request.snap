@@ -1,0 +1,6 @@
+POST /greengrass/groups/__GroupId__/deployments
+
+Content-Type: application/json
+X-Amzn-Client-Token: __AmznClientToken__
+
+{"DeploymentId":"__DeploymentId__","DeploymentType":"NewDeployment","GroupVersionId":"__GroupVersionId__"}

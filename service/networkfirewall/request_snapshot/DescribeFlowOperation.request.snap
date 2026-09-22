@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.DescribeFlowOperation
+
+{"AvailabilityZone":"__AvailabilityZone__","FirewallArn":"__FirewallArn__","FlowOperationId":"__FlowOperationId__","VpcEndpointAssociationArn":"__VpcEndpointAssociationArn__","VpcEndpointId":"__VpcEndpointId__"}

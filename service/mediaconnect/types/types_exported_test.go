@@ -143,6 +143,24 @@ func ExampleMergeRouterInputProtocolConfiguration_outputUsage() {
 var _ *types.RistRouterInputConfiguration
 var _ *types.RtpRouterInputConfiguration
 
+func ExampleRouterContentQualityAnalysisConfiguration_outputUsage() {
+	var union types.RouterContentQualityAnalysisConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RouterContentQualityAnalysisConfigurationMemberContentLevel:
+		_ = v.Value // Value is types.ContentQualityAnalysisFeatureConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ContentQualityAnalysisFeatureConfiguration
+
 func ExampleRouterInputConfiguration_outputUsage() {
 	var union types.RouterInputConfiguration
 	// type switches can be used to check the union value

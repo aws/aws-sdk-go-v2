@@ -1,0 +1,5 @@
+POST /InsightEvents
+
+Content-Type: application/json
+
+{"InsightId":"__InsightId__","MaxResults":1,"NextToken":"__NextToken__"}

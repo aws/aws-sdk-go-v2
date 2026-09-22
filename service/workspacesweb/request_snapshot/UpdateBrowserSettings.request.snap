@@ -1,0 +1,5 @@
+PATCH /browserSettings/__BrowserSettingsArn__
+
+Content-Type: application/json
+
+{"browserPolicy":"__BrowserPolicy__","clientToken":"__ClientToken__","webContentFilteringPolicy":{"allowedUrls":["__Member__","__Member__"],"blockedCategories":["Cults","Cults"],"blockedUrls":["__Member__","__Member__"]}}

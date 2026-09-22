@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,18 @@ type DescribeProvisioningTemplateInput struct {
 	TemplateName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeProvisioningTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProvisioningTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProvisioningTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateRequest_templateName, *v.TemplateName)
+	}
 }
 
 type DescribeProvisioningTemplateOutput struct {
@@ -89,77 +100,114 @@ type DescribeProvisioningTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProvisioningTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProvisioningTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProvisioningTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.DescribeProvisioningTemplateResponse_creationDate, *v.CreationDate)
+	}
+	if v.DefaultVersionId != nil {
+		s.WriteInt32(schemas.DescribeProvisioningTemplateResponse_defaultVersionId, *v.DefaultVersionId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_description, *v.Description)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.DescribeProvisioningTemplateResponse_enabled, *v.Enabled)
+	}
+	if v.LastModifiedDate != nil {
+		s.WriteTime(schemas.DescribeProvisioningTemplateResponse_lastModifiedDate, *v.LastModifiedDate)
+	}
+	if v.PreProvisioningHook != nil {
+		s.WriteStruct(schemas.DescribeProvisioningTemplateResponse_preProvisioningHook)
+		v.PreProvisioningHook.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProvisioningRoleArn != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_provisioningRoleArn, *v.ProvisioningRoleArn)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_templateArn, *v.TemplateArn)
+	}
+	if v.TemplateBody != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_templateBody, *v.TemplateBody)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_templateName, *v.TemplateName)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.DescribeProvisioningTemplateResponse_type, string(v.Type))
+	}
+}
+func (v *DescribeProvisioningTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProvisioningTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProvisioningTemplateResponse_creationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeProvisioningTemplateResponse_creationDate, v.CreationDate)
+		case schemas.DescribeProvisioningTemplateResponse_defaultVersionId:
+			v.DefaultVersionId = new(int32)
+			return d.ReadInt32(schemas.DescribeProvisioningTemplateResponse_defaultVersionId, v.DefaultVersionId)
+		case schemas.DescribeProvisioningTemplateResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_description, v.Description)
+		case schemas.DescribeProvisioningTemplateResponse_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.DescribeProvisioningTemplateResponse_enabled, v.Enabled)
+		case schemas.DescribeProvisioningTemplateResponse_lastModifiedDate:
+			v.LastModifiedDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeProvisioningTemplateResponse_lastModifiedDate, v.LastModifiedDate)
+		case schemas.DescribeProvisioningTemplateResponse_preProvisioningHook:
+			v.PreProvisioningHook = &types.ProvisioningHook{}
+			return v.PreProvisioningHook.Deserialize(d)
+		case schemas.DescribeProvisioningTemplateResponse_provisioningRoleArn:
+			v.ProvisioningRoleArn = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_provisioningRoleArn, v.ProvisioningRoleArn)
+		case schemas.DescribeProvisioningTemplateResponse_templateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_templateArn, v.TemplateArn)
+		case schemas.DescribeProvisioningTemplateResponse_templateBody:
+			v.TemplateBody = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_templateBody, v.TemplateBody)
+		case schemas.DescribeProvisioningTemplateResponse_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.DescribeProvisioningTemplateResponse_templateName, v.TemplateName)
+		case schemas.DescribeProvisioningTemplateResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.DescribeProvisioningTemplateResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.TemplateType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningTemplate, schemas.DescribeProvisioningTemplateRequest, schemas.DescribeProvisioningTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeProvisioningTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningTemplate, schemas.DescribeProvisioningTemplateRequest, schemas.DescribeProvisioningTemplateResponse), output: &DescribeProvisioningTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeProvisioningTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProvisioningTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeProvisioningTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProvisioningTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +222,8 @@ func (c *Client) addOperationDescribeProvisioningTemplateMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeProvisioningTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeProvisioningTemplate",
-	}
 }

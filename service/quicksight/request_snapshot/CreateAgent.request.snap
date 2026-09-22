@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/agents
+
+Content-Type: application/json
+
+{"ActionConnectors":["__Member__","__Member__"],"AgentId":"__AgentId__","AgentLifecycle":"PREVIEW","CustomPromptInput":{"ExistingPrompt":{"ModelProfileId":"__ModelProfileId__","QbsAwsAccountId":"__QbsAwsAccountId__","SubscriptionId":"__SubscriptionId__"}},"Description":"__Description__","IconId":"__IconId__","Name":"__Name__","Spaces":["__Member__","__Member__"],"StarterPrompts":["__Member__","__Member__"],"WelcomeMessage":"__WelcomeMessage__"}

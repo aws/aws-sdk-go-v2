@@ -4,10 +4,9 @@ package kinesisanalyticsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes a VPC configuration from a Managed Service for Apache Flink application.
@@ -54,6 +53,27 @@ type DeleteApplicationVpcConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationVpcConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationVpcConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationVpcConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.ConditionalToken != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationRequest_ConditionalToken, *v.ConditionalToken)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.DeleteApplicationVpcConfigurationRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+	if v.VpcConfigurationId != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationRequest_VpcConfigurationId, *v.VpcConfigurationId)
+	}
+}
+
 type DeleteApplicationVpcConfigurationOutput struct {
 
 	// The ARN of the Managed Service for Apache Flink application.
@@ -71,77 +91,60 @@ type DeleteApplicationVpcConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationVpcConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationVpcConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationVpcConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationResponse_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.DeleteApplicationVpcConfigurationResponse_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.DeleteApplicationVpcConfigurationResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *DeleteApplicationVpcConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApplicationVpcConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteApplicationVpcConfigurationResponse_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.DeleteApplicationVpcConfigurationResponse_ApplicationARN, v.ApplicationARN)
+		case schemas.DeleteApplicationVpcConfigurationResponse_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.DeleteApplicationVpcConfigurationResponse_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.DeleteApplicationVpcConfigurationResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.DeleteApplicationVpcConfigurationResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApplicationVpcConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationVpcConfiguration, schemas.DeleteApplicationVpcConfigurationRequest, schemas.DeleteApplicationVpcConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationVpcConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationVpcConfiguration, schemas.DeleteApplicationVpcConfigurationRequest, schemas.DeleteApplicationVpcConfigurationResponse), output: &DeleteApplicationVpcConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteApplicationVpcConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteApplicationVpcConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteApplicationVpcConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApplicationVpcConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +159,8 @@ func (c *Client) addOperationDeleteApplicationVpcConfigurationMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteApplicationVpcConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteApplicationVpcConfiguration",
-	}
 }

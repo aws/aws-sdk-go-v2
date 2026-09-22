@@ -1,0 +1,3 @@
+DELETE /FeatureGroup/__FeatureGroupName__?DeletionMode=SoftDelete&EventTime=__EventTime__&RecordIdentifierValueAsString=__RecordIdentifierValueAsString__&TargetStores=OnlineStore&TargetStores=OnlineStore
+
+

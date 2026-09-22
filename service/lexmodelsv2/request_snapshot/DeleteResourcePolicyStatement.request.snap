@@ -1,0 +1,3 @@
+DELETE /policy/__ResourceArn__/statements/__StatementId__?expectedRevisionId=__ExpectedRevisionId__
+
+

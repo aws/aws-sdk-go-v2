@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an Amazon EKS add-on.
@@ -98,6 +98,37 @@ type UpdateAddonInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAddonInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAddonRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAddonInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.UpdateAddonRequest_addonName, *v.AddonName)
+	}
+	if v.AddonVersion != nil {
+		s.WriteString(schemas.UpdateAddonRequest_addonVersion, *v.AddonVersion)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateAddonRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UpdateAddonRequest_clusterName, *v.ClusterName)
+	}
+	if v.ConfigurationValues != nil {
+		s.WriteString(schemas.UpdateAddonRequest_configurationValues, *v.ConfigurationValues)
+	}
+	serializeAddonPodIdentityAssociationsList(s, schemas.UpdateAddonRequest_podIdentityAssociations, v.PodIdentityAssociations)
+	if v.ResolveConflicts != "" {
+		s.WriteString(schemas.UpdateAddonRequest_resolveConflicts, string(v.ResolveConflicts))
+	}
+	if v.ServiceAccountRoleArn != nil {
+		s.WriteString(schemas.UpdateAddonRequest_serviceAccountRoleArn, *v.ServiceAccountRoleArn)
+	}
+}
+
 type UpdateAddonOutput struct {
 
 	// An object representing an asynchronous update.
@@ -109,65 +140,44 @@ type UpdateAddonOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAddonOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAddonResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAddonOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Update != nil {
+		s.WriteStruct(schemas.UpdateAddonResponse_update)
+		v.Update.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAddonOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAddonResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAddonResponse_update:
+			v.Update = &types.Update{}
+			return v.Update.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAddon, schemas.UpdateAddonRequest, schemas.UpdateAddonResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAddon{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAddon, schemas.UpdateAddonRequest, schemas.UpdateAddonResponse), output: &UpdateAddonOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAddon{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAddon"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -177,12 +187,6 @@ func (c *Client) addOperationUpdateAddonMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpUpdateAddonValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAddon(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,12 +199,6 @@ func (c *Client) addOperationUpdateAddonMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -240,12 +238,4 @@ func (m *idempotencyToken_initializeOpUpdateAddon) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opUpdateAddonMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateAddon{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateAddon(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAddon",
-	}
 }

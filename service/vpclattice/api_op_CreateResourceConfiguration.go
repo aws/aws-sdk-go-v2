@@ -5,10 +5,10 @@ package vpclattice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -51,6 +51,13 @@ type CreateResourceConfigurationInput struct {
 	//
 	//   - ARN - An Amazon Web Services resource.
 	//
+	//   - CIDR - A network segment, expressed as a range of IP addresses (a CIDR
+	//   block). Use this type to share a portion of your network rather than an
+	//   individual resource. A consumer accesses the resources within the CIDR range
+	//   through a Tunnel VPC endpoint. You can't add a CIDR resource configuration to
+	//   a service network. A CIDR resource configuration must be associated with a
+	//   resource gateway whose DNS resolution is set to IN_VPC .
+	//
 	// This member is required.
 	Type types.ResourceConfigurationType
 
@@ -77,12 +84,16 @@ type CreateResourceConfigurationInput struct {
 	// resources inherit the verification status of the domain.
 	GroupDomain *string
 
-	// (SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a
-	// resource configuration (for example: 1-65535). You can separate port ranges
-	// using commas (for example: 1,2,22-30).
+	// (SINGLE, GROUP, CHILD, CIDR) The port ranges that a consumer can use to access
+	// a resource configuration (for example: 1-65535). You can separate port ranges
+	// using commas (for example: 1,2,22-30). To resolve DNS through a CIDR resource
+	// configuration, include port 53 in the port ranges.
 	PortRanges []string
 
-	// (SINGLE, GROUP) The protocol accepted by the resource configuration.
+	// (SINGLE, GROUP, CIDR) The protocol accepted by the resource configuration. The
+	// default is TCP . TCP_UDP is supported only for CIDR resource configurations;
+	// specify it for a CIDR resource configuration to allow DNS resolution, which uses
+	// UDP.
 	Protocol types.ProtocolType
 
 	// Identifies the resource configuration in one of the following ways:
@@ -94,6 +105,14 @@ type CreateResourceConfigurationInput struct {
 	//   - Domain name - Any domain name that is publicly resolvable.
 	//
 	//   - IP address - For IPv4 and IPv6, only IP addresses in the VPC are supported.
+	//
+	//   - CIDR range - For a resource configuration of type CIDR, specify a
+	//   cidrResource with one or more cidrRanges (for example, 10.0.0.0/16 ) that
+	//   cover the IP addresses of the resources you want to make accessible. You can
+	//   specify up to 10 ranges, using IPv4, IPv6, or both, and each range must include
+	//   a prefix length. To represent your entire network, specify 0.0.0.0/0 (IPv4) or
+	//   ::/0 (IPv6) as the only range. You can't use reserved ranges such as
+	//   169.254.0.0/16 , 100.64.0.0/10 , 224.0.0.0/4 , fe80::/10 , or ff00::/8 .
 	ResourceConfigurationDefinition types.ResourceConfigurationDefinition
 
 	// (CHILD) The ID or ARN of the parent resource configuration of type GROUP . This
@@ -101,15 +120,59 @@ type CreateResourceConfigurationInput struct {
 	// configuration.
 	ResourceConfigurationGroupIdentifier *string
 
-	// (SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to
-	// the resource configuration. For a child resource configuration, this value is
-	// inherited from the parent resource configuration.
+	// (SINGLE, GROUP, ARN, CIDR) The ID or ARN of the resource gateway used to
+	// connect to the resource configuration. For a child resource configuration, this
+	// value is inherited from the parent resource configuration. For a CIDR resource
+	// configuration, the associated resource gateway must have its DNS resolution set
+	// to IN_VPC so that DNS queries resolve in the context of your VPC.
 	ResourceGatewayIdentifier *string
 
 	// The tags for the resource configuration.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateResourceConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowAssociationToShareableServiceNetwork != nil {
+		s.WriteBool(schemas.CreateResourceConfigurationRequest_allowAssociationToShareableServiceNetwork, *v.AllowAssociationToShareableServiceNetwork)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateResourceConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.CreateResourceConfigurationRequest_customDomainName, *v.CustomDomainName)
+	}
+	if v.DomainVerificationIdentifier != nil {
+		s.WriteString(schemas.CreateResourceConfigurationRequest_domainVerificationIdentifier, *v.DomainVerificationIdentifier)
+	}
+	if v.GroupDomain != nil {
+		s.WriteString(schemas.CreateResourceConfigurationRequest_groupDomain, *v.GroupDomain)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateResourceConfigurationRequest_name, *v.Name)
+	}
+	serializePortRangeList(s, schemas.CreateResourceConfigurationRequest_portRanges, v.PortRanges)
+	if v.Protocol != "" {
+		s.WriteString(schemas.CreateResourceConfigurationRequest_protocol, string(v.Protocol))
+	}
+	serializeResourceConfigurationDefinition(s, schemas.CreateResourceConfigurationRequest_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	if v.ResourceConfigurationGroupIdentifier != nil {
+		s.WriteString(schemas.CreateResourceConfigurationRequest_resourceConfigurationGroupIdentifier, *v.ResourceConfigurationGroupIdentifier)
+	}
+	if v.ResourceGatewayIdentifier != nil {
+		s.WriteString(schemas.CreateResourceConfigurationRequest_resourceGatewayIdentifier, *v.ResourceGatewayIdentifier)
+	}
+	serializeTagMap(s, schemas.CreateResourceConfigurationRequest_tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateResourceConfigurationRequest_type, string(v.Type))
+	}
 }
 
 type CreateResourceConfigurationOutput struct {
@@ -185,6 +248,11 @@ type CreateResourceConfigurationOutput struct {
 	//   - CHILD - A single resource that is part of a group resource configuration.
 	//
 	//   - ARN - An Amazon Web Services resource.
+	//
+	//   - CIDR - A network segment, expressed as a range of IP addresses (a CIDR
+	//   block). A consumer accesses the resources within the CIDR range through a
+	//   Tunnel VPC endpoint. A CIDR resource configuration must be associated with a
+	//   resource gateway whose DNS resolution is set to IN_VPC .
 	Type types.ResourceConfigurationType
 
 	// Metadata pertaining to the operation's result.
@@ -193,65 +261,144 @@ type CreateResourceConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowAssociationToShareableServiceNetwork != nil {
+		s.WriteBool(schemas.CreateResourceConfigurationResponse_allowAssociationToShareableServiceNetwork, *v.AllowAssociationToShareableServiceNetwork)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateResourceConfigurationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomDomainName != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_customDomainName, *v.CustomDomainName)
+	}
+	if v.DomainVerificationArn != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_domainVerificationArn, *v.DomainVerificationArn)
+	}
+	if v.DomainVerificationId != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_domainVerificationId, *v.DomainVerificationId)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_failureReason, *v.FailureReason)
+	}
+	if v.GroupDomain != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_groupDomain, *v.GroupDomain)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_name, *v.Name)
+	}
+	serializePortRangeList(s, schemas.CreateResourceConfigurationResponse_portRanges, v.PortRanges)
+	if v.Protocol != "" {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_protocol, string(v.Protocol))
+	}
+	serializeResourceConfigurationDefinition(s, schemas.CreateResourceConfigurationResponse_resourceConfigurationDefinition, v.ResourceConfigurationDefinition)
+	if v.ResourceConfigurationGroupId != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_resourceConfigurationGroupId, *v.ResourceConfigurationGroupId)
+	}
+	if v.ResourceGatewayId != nil {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_resourceGatewayId, *v.ResourceGatewayId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateResourceConfigurationResponse_type, string(v.Type))
+	}
+}
+func (v *CreateResourceConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceConfigurationResponse_allowAssociationToShareableServiceNetwork:
+			v.AllowAssociationToShareableServiceNetwork = new(bool)
+			return d.ReadBool(schemas.CreateResourceConfigurationResponse_allowAssociationToShareableServiceNetwork, v.AllowAssociationToShareableServiceNetwork)
+		case schemas.CreateResourceConfigurationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_arn, v.Arn)
+		case schemas.CreateResourceConfigurationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateResourceConfigurationResponse_createdAt, v.CreatedAt)
+		case schemas.CreateResourceConfigurationResponse_customDomainName:
+			v.CustomDomainName = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_customDomainName, v.CustomDomainName)
+		case schemas.CreateResourceConfigurationResponse_domainVerificationArn:
+			v.DomainVerificationArn = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_domainVerificationArn, v.DomainVerificationArn)
+		case schemas.CreateResourceConfigurationResponse_domainVerificationId:
+			v.DomainVerificationId = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_domainVerificationId, v.DomainVerificationId)
+		case schemas.CreateResourceConfigurationResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_failureReason, v.FailureReason)
+		case schemas.CreateResourceConfigurationResponse_groupDomain:
+			v.GroupDomain = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_groupDomain, v.GroupDomain)
+		case schemas.CreateResourceConfigurationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_id, v.Id)
+		case schemas.CreateResourceConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_name, v.Name)
+		case schemas.CreateResourceConfigurationResponse_portRanges:
+			return deserializePortRangeList(d, schemas.CreateResourceConfigurationResponse_portRanges, &v.PortRanges)
+		case schemas.CreateResourceConfigurationResponse_protocol:
+			var ev string
+			if err := d.ReadString(schemas.CreateResourceConfigurationResponse_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.ProtocolType(ev)
+			return nil
+		case schemas.CreateResourceConfigurationResponse_resourceConfigurationDefinition:
+			return deserializeResourceConfigurationDefinition(d, schemas.CreateResourceConfigurationResponse_resourceConfigurationDefinition, &v.ResourceConfigurationDefinition)
+		case schemas.CreateResourceConfigurationResponse_resourceConfigurationGroupId:
+			v.ResourceConfigurationGroupId = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_resourceConfigurationGroupId, v.ResourceConfigurationGroupId)
+		case schemas.CreateResourceConfigurationResponse_resourceGatewayId:
+			v.ResourceGatewayId = new(string)
+			return d.ReadString(schemas.CreateResourceConfigurationResponse_resourceGatewayId, v.ResourceGatewayId)
+		case schemas.CreateResourceConfigurationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateResourceConfigurationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceConfigurationStatus(ev)
+			return nil
+		case schemas.CreateResourceConfigurationResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.CreateResourceConfigurationResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ResourceConfigurationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceConfiguration, schemas.CreateResourceConfigurationRequest, schemas.CreateResourceConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResourceConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceConfiguration, schemas.CreateResourceConfigurationRequest, schemas.CreateResourceConfigurationResponse), output: &CreateResourceConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateResourceConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateResourceConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -261,12 +408,6 @@ func (c *Client) addOperationCreateResourceConfigurationMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpCreateResourceConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResourceConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -279,12 +420,6 @@ func (c *Client) addOperationCreateResourceConfigurationMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -324,12 +459,4 @@ func (m *idempotencyToken_initializeOpCreateResourceConfiguration) HandleInitial
 }
 func addIdempotencyToken_opCreateResourceConfigurationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateResourceConfiguration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateResourceConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateResourceConfiguration",
-	}
 }

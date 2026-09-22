@@ -1,0 +1,3 @@
+GET /assessments/__AssessmentId__/changelogs?controlId=__ControlId__&controlSetId=__ControlSetId__&maxResults=1&nextToken=__NextToken__
+
+

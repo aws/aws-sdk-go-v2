@@ -4,14 +4,20 @@ package workspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// End of support notice: On December 31, 2027, Amazon Web Services will end
+// support for Amazon WorkSpaces Pools. After December 31, 2027, you will no longer
+// be able to access the Amazon WorkSpaces Pools console or Amazon WorkSpaces Pools
+// resources. For more information, see [Amazon WorkSpaces Pools end of support].
+//
 // Updates the specified pool.
+//
+// [Amazon WorkSpaces Pools end of support]: https://docs.aws.amazon.com/workspaces/latest/adminguide/wsp-pools-end-of-support.html
 func (c *Client) UpdateWorkspacesPool(ctx context.Context, params *UpdateWorkspacesPoolInput, optFns ...func(*Options)) (*UpdateWorkspacesPoolOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspacesPoolInput{}
@@ -59,6 +65,45 @@ type UpdateWorkspacesPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspacesPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspacesPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspacesPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationSettings != nil {
+		s.WriteStruct(schemas.UpdateWorkspacesPoolRequest_ApplicationSettings)
+		v.ApplicationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BundleId != nil {
+		s.WriteString(schemas.UpdateWorkspacesPoolRequest_BundleId, *v.BundleId)
+	}
+	if v.Capacity != nil {
+		s.WriteStruct(schemas.UpdateWorkspacesPoolRequest_Capacity)
+		v.Capacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWorkspacesPoolRequest_Description, *v.Description)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.UpdateWorkspacesPoolRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.UpdateWorkspacesPoolRequest_PoolId, *v.PoolId)
+	}
+	if v.RunningMode != "" {
+		s.WriteString(schemas.UpdateWorkspacesPoolRequest_RunningMode, string(v.RunningMode))
+	}
+	if v.TimeoutSettings != nil {
+		s.WriteStruct(schemas.UpdateWorkspacesPoolRequest_TimeoutSettings)
+		v.TimeoutSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateWorkspacesPoolOutput struct {
 
 	// Describes the specified pool.
@@ -70,77 +115,50 @@ type UpdateWorkspacesPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkspacesPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkspacesPoolResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkspacesPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkspacesPool != nil {
+		s.WriteStruct(schemas.UpdateWorkspacesPoolResult_WorkspacesPool)
+		v.WorkspacesPool.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkspacesPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkspacesPoolResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkspacesPoolResult_WorkspacesPool:
+			v.WorkspacesPool = &types.WorkspacesPool{}
+			return v.WorkspacesPool.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkspacesPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspacesPool, schemas.UpdateWorkspacesPoolRequest, schemas.UpdateWorkspacesPoolResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkspacesPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkspacesPool, schemas.UpdateWorkspacesPoolRequest, schemas.UpdateWorkspacesPoolResult), output: &UpdateWorkspacesPoolOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWorkspacesPool{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkspacesPool"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateWorkspacesPoolValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspacesPool(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +173,8 @@ func (c *Client) addOperationUpdateWorkspacesPoolMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateWorkspacesPool(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWorkspacesPool",
-	}
 }

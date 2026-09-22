@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.ListDevices
+
+{"AccessToken":"__AccessToken__","Limit":1,"PaginationToken":"__PaginationToken__"}

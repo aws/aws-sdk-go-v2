@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeImportImageTasks&DryRun=true&Filters.1.Name=__Name__&Filters.1.Value.1=__Member__&Filters.1.Value.2=__Member__&Filters.2.Name=__Name__&Filters.2.Value.1=__Member__&Filters.2.Value.2=__Member__&ImportTaskId.1=__Member__&ImportTaskId.2=__Member__&MaxResults=1&NextToken=__NextToken__&Version=2016-11-15

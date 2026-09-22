@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.CreateCloudConnector
+
+{"ConfigConnectorArn":"__ConfigConnectorArn__","Configuration":{"AzureConfiguration":{"ApplicationDisplayName":"__ApplicationDisplayName__","ApplicationId":"__ApplicationId__","Targets":{"Subscriptions":[{"DisplayName":"__DisplayName__","Id":"__Id__"},{"DisplayName":"__DisplayName__","Id":"__Id__"}]},"TenantDisplayName":"__TenantDisplayName__","TenantId":"__TenantId__"}},"Description":"__Description__","DisplayName":"__DisplayName__","RoleArn":"__RoleArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

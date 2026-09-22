@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.StartImportLabelsTaskRun
+
+{"InputS3Path":"__InputS3Path__","ReplaceAllLabels":true,"TransformId":"__TransformId__"}

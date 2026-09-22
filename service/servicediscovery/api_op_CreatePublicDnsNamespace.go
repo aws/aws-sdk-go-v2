@@ -5,10 +5,10 @@ package servicediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a public namespace based on DNS, which is visible on the internet. The
@@ -69,6 +69,30 @@ type CreatePublicDnsNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePublicDnsNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePublicDnsNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePublicDnsNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreatePublicDnsNamespaceRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePublicDnsNamespaceRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePublicDnsNamespaceRequest_Name, *v.Name)
+	}
+	if v.Properties != nil {
+		s.WriteStruct(schemas.CreatePublicDnsNamespaceRequest_Properties)
+		v.Properties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreatePublicDnsNamespaceRequest_Tags, v.Tags)
+}
+
 type CreatePublicDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
@@ -83,65 +107,42 @@ type CreatePublicDnsNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePublicDnsNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePublicDnsNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePublicDnsNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OperationId != nil {
+		s.WriteString(schemas.CreatePublicDnsNamespaceResponse_OperationId, *v.OperationId)
+	}
+}
+func (v *CreatePublicDnsNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePublicDnsNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePublicDnsNamespaceResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.CreatePublicDnsNamespaceResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePublicDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePublicDnsNamespace, schemas.CreatePublicDnsNamespaceRequest, schemas.CreatePublicDnsNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePublicDnsNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePublicDnsNamespace, schemas.CreatePublicDnsNamespaceRequest, schemas.CreatePublicDnsNamespaceResponse), output: &CreatePublicDnsNamespaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePublicDnsNamespace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePublicDnsNamespace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -151,12 +152,6 @@ func (c *Client) addOperationCreatePublicDnsNamespaceMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpCreatePublicDnsNamespaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePublicDnsNamespace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +164,6 @@ func (c *Client) addOperationCreatePublicDnsNamespaceMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -214,12 +203,4 @@ func (m *idempotencyToken_initializeOpCreatePublicDnsNamespace) HandleInitialize
 }
 func addIdempotencyToken_opCreatePublicDnsNamespaceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePublicDnsNamespace{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePublicDnsNamespace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePublicDnsNamespace",
-	}
 }

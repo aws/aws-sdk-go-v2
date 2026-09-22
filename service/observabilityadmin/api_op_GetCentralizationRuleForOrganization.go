@@ -4,11 +4,8 @@ package observabilityadmin
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the details of a specific organization centralization rule. This
@@ -45,6 +42,12 @@ type GetCentralizationRuleForOrganizationOutput struct {
 	// The configuration details for the organization centralization rule.
 	CentralizationRule *types.CentralizationRule
 
+	// The status of context graph centralization for this rule. Returns Provisioning
+	// while the context graph is being set up, Healthy once it is active, or Unhealthy
+	// if provisioning failed. This status is independent of the overall RuleHealth
+	// for log delivery.
+	ContextGraphStatus types.ContextGraphStatus
+
 	// The Amazon Web Services region where the organization centralization rule was
 	// created.
 	CreatedRegion *string
@@ -71,6 +74,16 @@ type GetCentralizationRuleForOrganizationOutput struct {
 	// The name of the organization centralization rule.
 	RuleName *string
 
+	// The reason tag propagation is unhealthy for this rule. Only present when
+	// TagPropagationStatus is Unhealthy .
+	TagPropagationFailureReason types.TagPropagationFailureReason
+
+	// The health status of tag propagation for this rule. This status is independent
+	// of the overall RuleHealth for log delivery. Returns Healthy when the most
+	// recent tag-propagation attempt succeeded, or Unhealthy when the most recent
+	// attempt failed.
+	TagPropagationStatus types.TagPropagationStatus
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -78,9 +91,6 @@ type GetCentralizationRuleForOrganizationOutput struct {
 }
 
 func (c *Client) addOperationGetCentralizationRuleForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCentralizationRuleForOrganization{}, middleware.After)
 	if err != nil {
 		return err
@@ -89,65 +99,20 @@ func (c *Client) addOperationGetCentralizationRuleForOrganizationMiddlewares(sta
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCentralizationRuleForOrganization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCentralizationRuleForOrganizationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCentralizationRuleForOrganization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +127,8 @@ func (c *Client) addOperationGetCentralizationRuleForOrganizationMiddlewares(sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCentralizationRuleForOrganization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCentralizationRuleForOrganization",
-	}
 }

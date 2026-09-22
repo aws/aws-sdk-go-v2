@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"ebsSnapshots":["__Member__","__Member__"],"expectedTimestamp":"__ExpectedTimestamp__","snapshotID":"__SnapshotID__","sourceServerID":"__SourceServerID__","timestamp":"__Timestamp__"},{"ebsSnapshots":["__Member__","__Member__"],"expectedTimestamp":"__ExpectedTimestamp__","snapshotID":"__SnapshotID__","sourceServerID":"__SourceServerID__","timestamp":"__Timestamp__"}],"nextToken":"__NextToken__"}

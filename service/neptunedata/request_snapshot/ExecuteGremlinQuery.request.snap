@@ -1,0 +1,6 @@
+POST /gremlin
+
+Accept: __Serializer__
+Content-Type: application/json
+
+{"gremlin":"__GremlinQuery__"}

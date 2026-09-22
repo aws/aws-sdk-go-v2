@@ -1,0 +1,3 @@
+GET /workloads/__WorkloadId__/shares?MaxResults=1&NextToken=__NextToken__&SharedWithPrefix=__SharedWithPrefix__&Status=ACCEPTED
+
+

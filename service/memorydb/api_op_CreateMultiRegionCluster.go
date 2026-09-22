@@ -4,11 +4,10 @@ package memorydb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new multi-Region cluster.
@@ -68,6 +67,40 @@ type CreateMultiRegionClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiRegionClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiRegionClusterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiRegionClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_Description, *v.Description)
+	}
+	if v.Engine != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.MultiRegionClusterNameSuffix != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_MultiRegionClusterNameSuffix, *v.MultiRegionClusterNameSuffix)
+	}
+	if v.MultiRegionParameterGroupName != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_MultiRegionParameterGroupName, *v.MultiRegionParameterGroupName)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.CreateMultiRegionClusterRequest_NodeType, *v.NodeType)
+	}
+	if v.NumShards != nil {
+		s.WriteInt32(schemas.CreateMultiRegionClusterRequest_NumShards, *v.NumShards)
+	}
+	if v.TLSEnabled != nil {
+		s.WriteBool(schemas.CreateMultiRegionClusterRequest_TLSEnabled, *v.TLSEnabled)
+	}
+	serializeTagList(s, schemas.CreateMultiRegionClusterRequest_Tags, v.Tags)
+}
+
 type CreateMultiRegionClusterOutput struct {
 
 	// Details about the newly created multi-Region cluster.
@@ -79,77 +112,50 @@ type CreateMultiRegionClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMultiRegionClusterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMultiRegionClusterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMultiRegionClusterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultiRegionCluster != nil {
+		s.WriteStruct(schemas.CreateMultiRegionClusterResponse_MultiRegionCluster)
+		v.MultiRegionCluster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMultiRegionClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMultiRegionClusterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMultiRegionClusterResponse_MultiRegionCluster:
+			v.MultiRegionCluster = &types.MultiRegionCluster{}
+			return v.MultiRegionCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMultiRegionClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiRegionCluster, schemas.CreateMultiRegionClusterRequest, schemas.CreateMultiRegionClusterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMultiRegionCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMultiRegionCluster, schemas.CreateMultiRegionClusterRequest, schemas.CreateMultiRegionClusterResponse), output: &CreateMultiRegionClusterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMultiRegionCluster{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMultiRegionCluster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateMultiRegionClusterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMultiRegionCluster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +170,8 @@ func (c *Client) addOperationCreateMultiRegionClusterMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateMultiRegionCluster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMultiRegionCluster",
-	}
 }

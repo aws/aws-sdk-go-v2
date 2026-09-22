@@ -1,0 +1,3 @@
+GET /collaborations/__CollaborationIdentifier__/ml-input-channels?maxResults=1&nextToken=__NextToken__
+
+

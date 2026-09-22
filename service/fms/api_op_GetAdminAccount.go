@@ -4,11 +4,10 @@ package fms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the Organizations account that is associated with Firewall Manager as
@@ -32,6 +31,15 @@ type GetAdminAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdminAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdminAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdminAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetAdminAccountOutput struct {
 
 	// The account that is set as the Firewall Manager default administrator.
@@ -47,74 +55,55 @@ type GetAdminAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAdminAccountOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAdminAccountResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAdminAccountOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminAccount != nil {
+		s.WriteString(schemas.GetAdminAccountResponse_AdminAccount, *v.AdminAccount)
+	}
+	if v.RoleStatus != "" {
+		s.WriteString(schemas.GetAdminAccountResponse_RoleStatus, string(v.RoleStatus))
+	}
+}
+func (v *GetAdminAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAdminAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAdminAccountResponse_AdminAccount:
+			v.AdminAccount = new(string)
+			return d.ReadString(schemas.GetAdminAccountResponse_AdminAccount, v.AdminAccount)
+		case schemas.GetAdminAccountResponse_RoleStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetAdminAccountResponse_RoleStatus, &ev); err != nil {
+				return err
+			}
+			v.RoleStatus = types.AccountRoleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdminAccount, schemas.GetAdminAccountRequest, schemas.GetAdminAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAdminAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAdminAccount, schemas.GetAdminAccountRequest, schemas.GetAdminAccountResponse), output: &GetAdminAccountOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAdminAccount{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAdminAccount"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAdminAccount(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -129,22 +118,8 @@ func (c *Client) addOperationGetAdminAccountMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAdminAccount(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAdminAccount",
-	}
 }

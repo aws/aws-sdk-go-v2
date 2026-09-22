@@ -1,0 +1,5 @@
+POST /listresourcesharepermissions
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","resourceShareArn":"__ResourceShareArn__"}

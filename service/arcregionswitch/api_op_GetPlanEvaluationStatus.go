@@ -5,11 +5,11 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -52,6 +52,24 @@ type GetPlanEvaluationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanEvaluationStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanEvaluationStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanEvaluationStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetPlanEvaluationStatusRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPlanEvaluationStatusRequest_nextToken, *v.NextToken)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.GetPlanEvaluationStatusRequest_planArn, *v.PlanArn)
+	}
+}
+
 type GetPlanEvaluationStatusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the plan.
@@ -86,65 +104,79 @@ type GetPlanEvaluationStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPlanEvaluationStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPlanEvaluationStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPlanEvaluationStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluationState != "" {
+		s.WriteString(schemas.GetPlanEvaluationStatusResponse_evaluationState, string(v.EvaluationState))
+	}
+	if v.LastEvaluatedVersion != nil {
+		s.WriteString(schemas.GetPlanEvaluationStatusResponse_lastEvaluatedVersion, *v.LastEvaluatedVersion)
+	}
+	if v.LastEvaluationTime != nil {
+		s.WriteTime(schemas.GetPlanEvaluationStatusResponse_lastEvaluationTime, *v.LastEvaluationTime)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetPlanEvaluationStatusResponse_nextToken, *v.NextToken)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.GetPlanEvaluationStatusResponse_planArn, *v.PlanArn)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.GetPlanEvaluationStatusResponse_region, *v.Region)
+	}
+	serializePlanWarnings(s, schemas.GetPlanEvaluationStatusResponse_warnings, v.Warnings)
+}
+func (v *GetPlanEvaluationStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPlanEvaluationStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPlanEvaluationStatusResponse_evaluationState:
+			var ev string
+			if err := d.ReadString(schemas.GetPlanEvaluationStatusResponse_evaluationState, &ev); err != nil {
+				return err
+			}
+			v.EvaluationState = types.EvaluationStatus(ev)
+			return nil
+		case schemas.GetPlanEvaluationStatusResponse_lastEvaluatedVersion:
+			v.LastEvaluatedVersion = new(string)
+			return d.ReadString(schemas.GetPlanEvaluationStatusResponse_lastEvaluatedVersion, v.LastEvaluatedVersion)
+		case schemas.GetPlanEvaluationStatusResponse_lastEvaluationTime:
+			v.LastEvaluationTime = new(time.Time)
+			return d.ReadTime(schemas.GetPlanEvaluationStatusResponse_lastEvaluationTime, v.LastEvaluationTime)
+		case schemas.GetPlanEvaluationStatusResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetPlanEvaluationStatusResponse_nextToken, v.NextToken)
+		case schemas.GetPlanEvaluationStatusResponse_planArn:
+			v.PlanArn = new(string)
+			return d.ReadString(schemas.GetPlanEvaluationStatusResponse_planArn, v.PlanArn)
+		case schemas.GetPlanEvaluationStatusResponse_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.GetPlanEvaluationStatusResponse_region, v.Region)
+		case schemas.GetPlanEvaluationStatusResponse_warnings:
+			return deserializePlanWarnings(d, schemas.GetPlanEvaluationStatusResponse_warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPlanEvaluationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanEvaluationStatus, schemas.GetPlanEvaluationStatusRequest, schemas.GetPlanEvaluationStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetPlanEvaluationStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlanEvaluationStatus, schemas.GetPlanEvaluationStatusRequest, schemas.GetPlanEvaluationStatusResponse), output: &GetPlanEvaluationStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetPlanEvaluationStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlanEvaluationStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -154,12 +186,6 @@ func (c *Client) addOperationGetPlanEvaluationStatusMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpGetPlanEvaluationStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlanEvaluationStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +198,6 @@ func (c *Client) addOperationGetPlanEvaluationStatusMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -479,11 +499,3 @@ type GetPlanEvaluationStatusAPIClient interface {
 }
 
 var _ GetPlanEvaluationStatusAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetPlanEvaluationStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetPlanEvaluationStatus",
-	}
-}

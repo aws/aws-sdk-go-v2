@@ -1,0 +1,3 @@
+GET /tables/__TableBucketARN__?continuationToken=__ContinuationToken__&maxTables=1&namespace=__Namespace__&prefix=__Prefix__
+
+

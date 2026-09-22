@@ -4,19 +4,23 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the configuration of a user pool. To avoid setting parameters to Amazon
 // Cognito defaults, construct this API request to pass the existing configuration
 // of your user pool, modified to include the changes that you want to make.
 //
-// With the exception of UserPoolTier , if you don't provide a value for an
-// attribute, Amazon Cognito sets it to its default value.
+// If you don't provide a value for an attribute, Amazon Cognito sets it to its
+// default value.
+//
+// In secondary regions for user pools with multi-region replication, regional
+// configurations for email, SMS, Lambda functions, and tags can be updated. Both
+// global and regional settings must be provided as inputs, with global settings
+// required to match existing values to maintain consistency across replicas.
 //
 // This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
@@ -127,6 +131,14 @@ type UpdateUserPoolInput struct {
 	// This parameter is no longer used.
 	EmailVerificationSubject *string
 
+	// The issuer configuration for the user pool. In secondary regions, this
+	// parameter must match the existing configuration and cannot be modified.
+	IssuerConfiguration *types.IssuerConfigurationType
+
+	// The key configuration for the user pool. In secondary regions, this parameter
+	// must match the existing configuration and cannot be modified.
+	KeyConfiguration *types.KeyConfigurationType
+
 	// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at
 	// several possible stages of authentication operations. Triggers can modify the
 	// outcome of the operations that invoked them.
@@ -215,6 +227,104 @@ type UpdateUserPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountRecoverySetting != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_AccountRecoverySetting)
+		v.AccountRecoverySetting.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AdminCreateUserConfig != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_AdminCreateUserConfig)
+		v.AdminCreateUserConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVerifiedAttributesListType(s, schemas.UpdateUserPoolRequest_AutoVerifiedAttributes, v.AutoVerifiedAttributes)
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.UpdateUserPoolRequest_DeletionProtection, string(v.DeletionProtection))
+	}
+	if v.DeviceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_DeviceConfiguration)
+		v.DeviceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_EmailConfiguration)
+		v.EmailConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EmailVerificationMessage != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_EmailVerificationMessage, *v.EmailVerificationMessage)
+	}
+	if v.EmailVerificationSubject != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_EmailVerificationSubject, *v.EmailVerificationSubject)
+	}
+	if v.IssuerConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_IssuerConfiguration)
+		v.IssuerConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_KeyConfiguration)
+		v.KeyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaConfig != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_LambdaConfig)
+		v.LambdaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MfaConfiguration != "" {
+		s.WriteString(schemas.UpdateUserPoolRequest_MfaConfiguration, string(v.MfaConfiguration))
+	}
+	if v.Policies != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_Policies)
+		v.Policies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PoolName != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_PoolName, *v.PoolName)
+	}
+	if v.SmsAuthenticationMessage != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_SmsAuthenticationMessage, *v.SmsAuthenticationMessage)
+	}
+	if v.SmsConfiguration != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_SmsConfiguration)
+		v.SmsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SmsVerificationMessage != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_SmsVerificationMessage, *v.SmsVerificationMessage)
+	}
+	if v.UserAttributeUpdateSettings != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_UserAttributeUpdateSettings)
+		v.UserAttributeUpdateSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolAddOns != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_UserPoolAddOns)
+		v.UserPoolAddOns.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.UpdateUserPoolRequest_UserPoolId, *v.UserPoolId)
+	}
+	serializeUserPoolTagsType(s, schemas.UpdateUserPoolRequest_UserPoolTags, v.UserPoolTags)
+	if v.UserPoolTier != "" {
+		s.WriteString(schemas.UpdateUserPoolRequest_UserPoolTier, string(v.UserPoolTier))
+	}
+	if v.VerificationMessageTemplate != nil {
+		s.WriteStruct(schemas.UpdateUserPoolRequest_VerificationMessageTemplate)
+		v.VerificationMessageTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Represents the response from the server when you make a request to update the
 // user pool.
 type UpdateUserPoolOutput struct {
@@ -224,77 +334,42 @@ type UpdateUserPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateUserPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateUserPoolResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateUserPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateUserPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateUserPoolResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateUserPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPool, schemas.UpdateUserPoolRequest, schemas.UpdateUserPoolResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateUserPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateUserPool, schemas.UpdateUserPoolRequest, schemas.UpdateUserPoolResponse), output: &UpdateUserPoolOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateUserPool{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateUserPool"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateUserPoolValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserPool(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -309,22 +384,8 @@ func (c *Client) addOperationUpdateUserPoolMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateUserPool(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateUserPool",
-	}
 }

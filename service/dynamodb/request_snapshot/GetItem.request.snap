@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.GetItem
+
+{"AttributesToGet":["__Member__","__Member__"],"ConsistentRead":true,"ExpressionAttributeNames":{"key0":"__Value__"},"Key":{"key0":{"S":"__AttributeValueMemberS__"}},"ProjectionExpression":"__ProjectionExpression__","ReturnConsumedCapacity":"INDEXES","TableName":"__TableName__"}

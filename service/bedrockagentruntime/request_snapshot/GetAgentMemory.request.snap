@@ -1,0 +1,3 @@
+GET /agents/__AgentId__/agentAliases/__AgentAliasId__/memories?maxItems=1&memoryId=__MemoryId__&memoryType=SESSION_SUMMARY&nextToken=__NextToken__
+
+

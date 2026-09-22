@@ -1,0 +1,4 @@
+DELETE /api/v1/documentVersions/__DocumentId__/versions/__VersionId__?deletePriorVersions=true
+
+Authentication: __AuthenticationToken__
+

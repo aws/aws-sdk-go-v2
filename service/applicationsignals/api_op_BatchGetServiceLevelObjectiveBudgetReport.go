@@ -4,11 +4,10 @@ package applicationsignals
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -59,6 +58,19 @@ type BatchGetServiceLevelObjectiveBudgetReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetServiceLevelObjectiveBudgetReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetServiceLevelObjectiveBudgetReportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetServiceLevelObjectiveBudgetReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceLevelObjectiveIds(s, schemas.BatchGetServiceLevelObjectiveBudgetReportInput_SloIds, v.SloIds)
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.BatchGetServiceLevelObjectiveBudgetReportInput_Timestamp, *v.Timestamp)
+	}
+}
+
 type BatchGetServiceLevelObjectiveBudgetReportOutput struct {
 
 	// An array of structures, where each structure includes an error indicating that
@@ -84,77 +96,54 @@ type BatchGetServiceLevelObjectiveBudgetReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetServiceLevelObjectiveBudgetReportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetServiceLevelObjectiveBudgetReportOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetServiceLevelObjectiveBudgetReportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeServiceLevelObjectiveBudgetReportErrors(s, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Errors, v.Errors)
+	serializeServiceLevelObjectiveBudgetReports(s, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Reports, v.Reports)
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp, *v.Timestamp)
+	}
+}
+func (v *BatchGetServiceLevelObjectiveBudgetReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Errors:
+			return deserializeServiceLevelObjectiveBudgetReportErrors(d, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Errors, &v.Errors)
+		case schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Reports:
+			return deserializeServiceLevelObjectiveBudgetReports(d, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Reports, &v.Reports)
+		case schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.BatchGetServiceLevelObjectiveBudgetReportOutput_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetServiceLevelObjectiveBudgetReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetServiceLevelObjectiveBudgetReport, schemas.BatchGetServiceLevelObjectiveBudgetReportInput, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetServiceLevelObjectiveBudgetReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetServiceLevelObjectiveBudgetReport, schemas.BatchGetServiceLevelObjectiveBudgetReportInput, schemas.BatchGetServiceLevelObjectiveBudgetReportOutput), output: &BatchGetServiceLevelObjectiveBudgetReportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetServiceLevelObjectiveBudgetReport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetServiceLevelObjectiveBudgetReport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetServiceLevelObjectiveBudgetReportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetServiceLevelObjectiveBudgetReport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +158,8 @@ func (c *Client) addOperationBatchGetServiceLevelObjectiveBudgetReportMiddleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetServiceLevelObjectiveBudgetReport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetServiceLevelObjectiveBudgetReport",
-	}
 }

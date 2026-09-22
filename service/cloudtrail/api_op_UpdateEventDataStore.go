@@ -4,14 +4,17 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Updates an event data store. The required EventDataStore value is an ARN or the
 // ID portion of the ARN. Other parameters are optional, but at least one optional
 // parameter must be specified, or CloudTrail throws an error. RetentionPeriod is
@@ -27,6 +30,7 @@ import (
 // items, Audit Manager evidence, or non-Amazon Web Services events,
 // AdvancedEventSelectors includes events of that type in your event data store.
 //
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 // [AdvancedEventSelectors]: https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_AdvancedEventSelector.html
 func (c *Client) UpdateEventDataStore(ctx context.Context, params *UpdateEventDataStoreInput, optFns ...func(*Options)) (*UpdateEventDataStoreOutput, error) {
 	if params == nil {
@@ -147,6 +151,40 @@ type UpdateEventDataStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventDataStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventDataStoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventDataStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedEventSelectors(s, schemas.UpdateEventDataStoreRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.BillingMode != "" {
+		s.WriteString(schemas.UpdateEventDataStoreRequest_BillingMode, string(v.BillingMode))
+	}
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.UpdateEventDataStoreRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateEventDataStoreRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MultiRegionEnabled != nil {
+		s.WriteBool(schemas.UpdateEventDataStoreRequest_MultiRegionEnabled, *v.MultiRegionEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEventDataStoreRequest_Name, *v.Name)
+	}
+	if v.OrganizationEnabled != nil {
+		s.WriteBool(schemas.UpdateEventDataStoreRequest_OrganizationEnabled, *v.OrganizationEnabled)
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteInt32(schemas.UpdateEventDataStoreRequest_RetentionPeriod, *v.RetentionPeriod)
+	}
+	if v.TerminationProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdateEventDataStoreRequest_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
+	}
+}
+
 type UpdateEventDataStoreOutput struct {
 
 	// The advanced event selectors that are applied to the event data store.
@@ -209,77 +247,135 @@ type UpdateEventDataStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventDataStoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventDataStoreResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventDataStoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedEventSelectors(s, schemas.UpdateEventDataStoreResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	if v.BillingMode != "" {
+		s.WriteString(schemas.UpdateEventDataStoreResponse_BillingMode, string(v.BillingMode))
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.UpdateEventDataStoreResponse_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.EventDataStoreArn != nil {
+		s.WriteString(schemas.UpdateEventDataStoreResponse_EventDataStoreArn, *v.EventDataStoreArn)
+	}
+	if v.FederationRoleArn != nil {
+		s.WriteString(schemas.UpdateEventDataStoreResponse_FederationRoleArn, *v.FederationRoleArn)
+	}
+	if v.FederationStatus != "" {
+		s.WriteString(schemas.UpdateEventDataStoreResponse_FederationStatus, string(v.FederationStatus))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.UpdateEventDataStoreResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.MultiRegionEnabled != nil {
+		s.WriteBool(schemas.UpdateEventDataStoreResponse_MultiRegionEnabled, *v.MultiRegionEnabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEventDataStoreResponse_Name, *v.Name)
+	}
+	if v.OrganizationEnabled != nil {
+		s.WriteBool(schemas.UpdateEventDataStoreResponse_OrganizationEnabled, *v.OrganizationEnabled)
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteInt32(schemas.UpdateEventDataStoreResponse_RetentionPeriod, *v.RetentionPeriod)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateEventDataStoreResponse_Status, string(v.Status))
+	}
+	if v.TerminationProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdateEventDataStoreResponse_TerminationProtectionEnabled, *v.TerminationProtectionEnabled)
+	}
+	if v.UpdatedTimestamp != nil {
+		s.WriteTime(schemas.UpdateEventDataStoreResponse_UpdatedTimestamp, *v.UpdatedTimestamp)
+	}
+}
+func (v *UpdateEventDataStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventDataStoreResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEventDataStoreResponse_AdvancedEventSelectors:
+			return deserializeAdvancedEventSelectors(d, schemas.UpdateEventDataStoreResponse_AdvancedEventSelectors, &v.AdvancedEventSelectors)
+		case schemas.UpdateEventDataStoreResponse_BillingMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEventDataStoreResponse_BillingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = types.BillingMode(ev)
+			return nil
+		case schemas.UpdateEventDataStoreResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateEventDataStoreResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.UpdateEventDataStoreResponse_EventDataStoreArn:
+			v.EventDataStoreArn = new(string)
+			return d.ReadString(schemas.UpdateEventDataStoreResponse_EventDataStoreArn, v.EventDataStoreArn)
+		case schemas.UpdateEventDataStoreResponse_FederationRoleArn:
+			v.FederationRoleArn = new(string)
+			return d.ReadString(schemas.UpdateEventDataStoreResponse_FederationRoleArn, v.FederationRoleArn)
+		case schemas.UpdateEventDataStoreResponse_FederationStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEventDataStoreResponse_FederationStatus, &ev); err != nil {
+				return err
+			}
+			v.FederationStatus = types.FederationStatus(ev)
+			return nil
+		case schemas.UpdateEventDataStoreResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.UpdateEventDataStoreResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.UpdateEventDataStoreResponse_MultiRegionEnabled:
+			v.MultiRegionEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateEventDataStoreResponse_MultiRegionEnabled, v.MultiRegionEnabled)
+		case schemas.UpdateEventDataStoreResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateEventDataStoreResponse_Name, v.Name)
+		case schemas.UpdateEventDataStoreResponse_OrganizationEnabled:
+			v.OrganizationEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateEventDataStoreResponse_OrganizationEnabled, v.OrganizationEnabled)
+		case schemas.UpdateEventDataStoreResponse_RetentionPeriod:
+			v.RetentionPeriod = new(int32)
+			return d.ReadInt32(schemas.UpdateEventDataStoreResponse_RetentionPeriod, v.RetentionPeriod)
+		case schemas.UpdateEventDataStoreResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateEventDataStoreResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EventDataStoreStatus(ev)
+			return nil
+		case schemas.UpdateEventDataStoreResponse_TerminationProtectionEnabled:
+			v.TerminationProtectionEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateEventDataStoreResponse_TerminationProtectionEnabled, v.TerminationProtectionEnabled)
+		case schemas.UpdateEventDataStoreResponse_UpdatedTimestamp:
+			v.UpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateEventDataStoreResponse_UpdatedTimestamp, v.UpdatedTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventDataStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventDataStore, schemas.UpdateEventDataStoreRequest, schemas.UpdateEventDataStoreResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateEventDataStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventDataStore, schemas.UpdateEventDataStoreRequest, schemas.UpdateEventDataStoreResponse), output: &UpdateEventDataStoreOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateEventDataStore{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEventDataStore"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateEventDataStoreValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEventDataStore(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -294,22 +390,8 @@ func (c *Client) addOperationUpdateEventDataStoreMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateEventDataStore(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateEventDataStore",
-	}
 }

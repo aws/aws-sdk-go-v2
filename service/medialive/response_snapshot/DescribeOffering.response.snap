@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","currencyCode":"__CurrencyCode__","duration":1,"durationUnits":"MONTHS","fixedPrice":1,"offeringDescription":"__OfferingDescription__","offeringId":"__OfferingId__","offeringType":"NO_UPFRONT","region":"__Region__","resourceSpecification":{"channelClass":"STANDARD","codec":"MPEG2","maximumBitrate":"MAX_10_MBPS","maximumFramerate":"MAX_30_FPS","resolution":"SD","resourceType":"INPUT","specialFeature":"ADVANCED_AUDIO","videoQuality":"STANDARD"},"usagePrice":1}

@@ -4,11 +4,10 @@ package proton
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // If no other minor versions of an environment template exist, delete a major
@@ -58,6 +57,40 @@ type DeleteEnvironmentTemplateVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentTemplateVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentTemplateVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentTemplateVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MajorVersion != nil {
+		s.WriteString(schemas.DeleteEnvironmentTemplateVersionInput_majorVersion, *v.MajorVersion)
+	}
+	if v.MinorVersion != nil {
+		s.WriteString(schemas.DeleteEnvironmentTemplateVersionInput_minorVersion, *v.MinorVersion)
+	}
+	if v.TemplateName != nil {
+		s.WriteString(schemas.DeleteEnvironmentTemplateVersionInput_templateName, *v.TemplateName)
+	}
+}
+func (v *DeleteEnvironmentTemplateVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentTemplateVersionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentTemplateVersionInput_majorVersion:
+			v.MajorVersion = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentTemplateVersionInput_majorVersion, v.MajorVersion)
+		case schemas.DeleteEnvironmentTemplateVersionInput_minorVersion:
+			v.MinorVersion = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentTemplateVersionInput_minorVersion, v.MinorVersion)
+		case schemas.DeleteEnvironmentTemplateVersionInput_templateName:
+			v.TemplateName = new(string)
+			return d.ReadString(schemas.DeleteEnvironmentTemplateVersionInput_templateName, v.TemplateName)
+		}
+		return nil
+	})
+}
+
 type DeleteEnvironmentTemplateVersionOutput struct {
 
 	// The detailed data of the environment template version being deleted.
@@ -69,77 +102,50 @@ type DeleteEnvironmentTemplateVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentTemplateVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentTemplateVersionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentTemplateVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentTemplateVersion != nil {
+		s.WriteStruct(schemas.DeleteEnvironmentTemplateVersionOutput_environmentTemplateVersion)
+		v.EnvironmentTemplateVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteEnvironmentTemplateVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentTemplateVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentTemplateVersionOutput_environmentTemplateVersion:
+			v.EnvironmentTemplateVersion = &types.EnvironmentTemplateVersion{}
+			return v.EnvironmentTemplateVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentTemplateVersion, schemas.DeleteEnvironmentTemplateVersionInput, schemas.DeleteEnvironmentTemplateVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEnvironmentTemplateVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentTemplateVersion, schemas.DeleteEnvironmentTemplateVersionInput, schemas.DeleteEnvironmentTemplateVersionOutput), output: &DeleteEnvironmentTemplateVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteEnvironmentTemplateVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEnvironmentTemplateVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteEnvironmentTemplateVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEnvironmentTemplateVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +160,8 @@ func (c *Client) addOperationDeleteEnvironmentTemplateVersionMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteEnvironmentTemplateVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteEnvironmentTemplateVersion",
-	}
 }

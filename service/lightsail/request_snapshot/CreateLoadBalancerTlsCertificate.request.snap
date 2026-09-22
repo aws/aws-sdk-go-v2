@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.CreateLoadBalancerTlsCertificate
+
+{"certificateAlternativeNames":["__Member__","__Member__"],"certificateDomainName":"__CertificateDomainName__","certificateName":"__CertificateName__","loadBalancerName":"__LoadBalancerName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

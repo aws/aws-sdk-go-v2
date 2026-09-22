@@ -1,0 +1,4 @@
+GET /vpclinks/__VpcLinkId__
+
+Accept: application/json
+

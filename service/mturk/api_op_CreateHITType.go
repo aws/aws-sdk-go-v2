@@ -4,11 +4,10 @@ package mturk
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	The CreateHITType operation creates a new HIT type. This operation allows you
@@ -83,6 +82,34 @@ type CreateHITTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHITTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHITTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHITTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssignmentDurationInSeconds != nil {
+		s.WriteInt64(schemas.CreateHITTypeRequest_AssignmentDurationInSeconds, *v.AssignmentDurationInSeconds)
+	}
+	if v.AutoApprovalDelayInSeconds != nil {
+		s.WriteInt64(schemas.CreateHITTypeRequest_AutoApprovalDelayInSeconds, *v.AutoApprovalDelayInSeconds)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateHITTypeRequest_Description, *v.Description)
+	}
+	if v.Keywords != nil {
+		s.WriteString(schemas.CreateHITTypeRequest_Keywords, *v.Keywords)
+	}
+	serializeQualificationRequirementList(s, schemas.CreateHITTypeRequest_QualificationRequirements, v.QualificationRequirements)
+	if v.Reward != nil {
+		s.WriteString(schemas.CreateHITTypeRequest_Reward, *v.Reward)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateHITTypeRequest_Title, *v.Title)
+	}
+}
+
 type CreateHITTypeOutput struct {
 
 	//  The ID of the newly registered HIT type.
@@ -94,77 +121,48 @@ type CreateHITTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateHITTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateHITTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateHITTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HITTypeId != nil {
+		s.WriteString(schemas.CreateHITTypeResponse_HITTypeId, *v.HITTypeId)
+	}
+}
+func (v *CreateHITTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateHITTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateHITTypeResponse_HITTypeId:
+			v.HITTypeId = new(string)
+			return d.ReadString(schemas.CreateHITTypeResponse_HITTypeId, v.HITTypeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateHITTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHITType, schemas.CreateHITTypeRequest, schemas.CreateHITTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateHITType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateHITType, schemas.CreateHITTypeRequest, schemas.CreateHITTypeResponse), output: &CreateHITTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateHITType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateHITType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateHITTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHITType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +177,8 @@ func (c *Client) addOperationCreateHITTypeMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateHITType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateHITType",
-	}
 }

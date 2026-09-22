@@ -1,0 +1,3 @@
+GET /things/__ThingName__/shadow?name=__ShadowName__
+
+

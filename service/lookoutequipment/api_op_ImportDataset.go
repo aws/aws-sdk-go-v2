@@ -5,10 +5,10 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Imports a dataset.
@@ -55,6 +55,28 @@ type ImportDatasetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ImportDatasetRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.ImportDatasetRequest_DatasetName, *v.DatasetName)
+	}
+	if v.ServerSideKmsKeyId != nil {
+		s.WriteString(schemas.ImportDatasetRequest_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
+	}
+	if v.SourceDatasetArn != nil {
+		s.WriteString(schemas.ImportDatasetRequest_SourceDatasetArn, *v.SourceDatasetArn)
+	}
+	serializeTagList(s, schemas.ImportDatasetRequest_Tags, v.Tags)
+}
+
 type ImportDatasetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dataset that was imported.
@@ -75,65 +97,64 @@ type ImportDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDatasetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDatasetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDatasetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.ImportDatasetResponse_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.ImportDatasetResponse_DatasetName, *v.DatasetName)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ImportDatasetResponse_JobId, *v.JobId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ImportDatasetResponse_Status, string(v.Status))
+	}
+}
+func (v *ImportDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportDatasetResponse_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.ImportDatasetResponse_DatasetArn, v.DatasetArn)
+		case schemas.ImportDatasetResponse_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.ImportDatasetResponse_DatasetName, v.DatasetName)
+		case schemas.ImportDatasetResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ImportDatasetResponse_JobId, v.JobId)
+		case schemas.ImportDatasetResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.ImportDatasetResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DatasetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDataset, schemas.ImportDatasetRequest, schemas.ImportDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpImportDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDataset, schemas.ImportDatasetRequest, schemas.ImportDatasetResponse), output: &ImportDatasetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpImportDataset{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportDataset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -143,12 +164,6 @@ func (c *Client) addOperationImportDatasetMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addOpImportDatasetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportDataset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +176,6 @@ func (c *Client) addOperationImportDatasetMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -206,12 +215,4 @@ func (m *idempotencyToken_initializeOpImportDataset) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opImportDatasetMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpImportDataset{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opImportDataset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportDataset",
-	}
 }

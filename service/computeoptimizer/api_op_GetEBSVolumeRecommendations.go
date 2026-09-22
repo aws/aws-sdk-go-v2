@@ -4,11 +4,10 @@ package computeoptimizer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations.
@@ -65,6 +64,24 @@ type GetEBSVolumeRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEBSVolumeRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEBSVolumeRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEBSVolumeRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIds(s, schemas.GetEBSVolumeRecommendationsRequest_accountIds, v.AccountIds)
+	serializeEBSFilters(s, schemas.GetEBSVolumeRecommendationsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetEBSVolumeRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEBSVolumeRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	serializeVolumeArns(s, schemas.GetEBSVolumeRecommendationsRequest_volumeArns, v.VolumeArns)
+}
+
 type GetEBSVolumeRecommendationsOutput struct {
 
 	// An array of objects that describe errors of the request.
@@ -88,77 +105,54 @@ type GetEBSVolumeRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEBSVolumeRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEBSVolumeRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEBSVolumeRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGetRecommendationErrors(s, schemas.GetEBSVolumeRecommendationsResponse_errors, v.Errors)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetEBSVolumeRecommendationsResponse_nextToken, *v.NextToken)
+	}
+	serializeVolumeRecommendations(s, schemas.GetEBSVolumeRecommendationsResponse_volumeRecommendations, v.VolumeRecommendations)
+}
+func (v *GetEBSVolumeRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEBSVolumeRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEBSVolumeRecommendationsResponse_errors:
+			return deserializeGetRecommendationErrors(d, schemas.GetEBSVolumeRecommendationsResponse_errors, &v.Errors)
+		case schemas.GetEBSVolumeRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetEBSVolumeRecommendationsResponse_nextToken, v.NextToken)
+		case schemas.GetEBSVolumeRecommendationsResponse_volumeRecommendations:
+			return deserializeVolumeRecommendations(d, schemas.GetEBSVolumeRecommendationsResponse_volumeRecommendations, &v.VolumeRecommendations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEBSVolumeRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEBSVolumeRecommendations, schemas.GetEBSVolumeRecommendationsRequest, schemas.GetEBSVolumeRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEBSVolumeRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEBSVolumeRecommendations, schemas.GetEBSVolumeRecommendationsRequest, schemas.GetEBSVolumeRecommendationsResponse), output: &GetEBSVolumeRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEBSVolumeRecommendations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEBSVolumeRecommendations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEBSVolumeRecommendations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +167,8 @@ func (c *Client) addOperationGetEBSVolumeRecommendationsMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEBSVolumeRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEBSVolumeRecommendations",
-	}
 }

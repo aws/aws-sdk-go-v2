@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Frameworks":[{"CreationTime":946684800,"DeploymentStatus":"__DeploymentStatus__","FrameworkArn":"__FrameworkArn__","FrameworkDescription":"__FrameworkDescription__","FrameworkName":"__FrameworkName__","NumberOfControls":1},{"CreationTime":946684800,"DeploymentStatus":"__DeploymentStatus__","FrameworkArn":"__FrameworkArn__","FrameworkDescription":"__FrameworkDescription__","FrameworkName":"__FrameworkName__","NumberOfControls":1}],"NextToken":"__NextToken__"}

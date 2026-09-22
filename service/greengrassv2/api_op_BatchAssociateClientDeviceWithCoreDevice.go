@@ -4,11 +4,10 @@ package greengrassv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a list of client devices with a core device. Use this API operation
@@ -53,6 +52,19 @@ type BatchAssociateClientDeviceWithCoreDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateClientDeviceWithCoreDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateClientDeviceWithCoreDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateClientDeviceWithCoreDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreDeviceThingName != nil {
+		s.WriteString(schemas.BatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName, *v.CoreDeviceThingName)
+	}
+	serializeAssociateClientDeviceWithCoreDeviceEntryList(s, schemas.BatchAssociateClientDeviceWithCoreDeviceRequest_entries, v.Entries)
+}
+
 type BatchAssociateClientDeviceWithCoreDeviceOutput struct {
 
 	// The list of any errors for the entries in the request. Each error entry
@@ -65,77 +77,45 @@ type BatchAssociateClientDeviceWithCoreDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateClientDeviceWithCoreDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateClientDeviceWithCoreDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateClientDeviceWithCoreDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociateClientDeviceWithCoreDeviceErrorList(s, schemas.BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries, v.ErrorEntries)
+}
+func (v *BatchAssociateClientDeviceWithCoreDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateClientDeviceWithCoreDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries:
+			return deserializeAssociateClientDeviceWithCoreDeviceErrorList(d, schemas.BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries, &v.ErrorEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateClientDeviceWithCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateClientDeviceWithCoreDevice, schemas.BatchAssociateClientDeviceWithCoreDeviceRequest, schemas.BatchAssociateClientDeviceWithCoreDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateClientDeviceWithCoreDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateClientDeviceWithCoreDevice, schemas.BatchAssociateClientDeviceWithCoreDeviceRequest, schemas.BatchAssociateClientDeviceWithCoreDeviceResponse), output: &BatchAssociateClientDeviceWithCoreDeviceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAssociateClientDeviceWithCoreDevice{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAssociateClientDeviceWithCoreDevice"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchAssociateClientDeviceWithCoreDeviceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateClientDeviceWithCoreDevice(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +130,8 @@ func (c *Client) addOperationBatchAssociateClientDeviceWithCoreDeviceMiddlewares
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchAssociateClientDeviceWithCoreDevice(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchAssociateClientDeviceWithCoreDevice",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /2021-01-01/opensearch/directQueryDataSource/__DataSourceName__
+
+Content-Type: application/json
+
+{"DataSourceAccessPolicy":"__DataSourceAccessPolicy__","DataSourceType":{"CloudWatchLog":{"RoleArn":"__RoleArn__"}},"Description":"__Description__","OpenSearchArns":["__Member__","__Member__"]}

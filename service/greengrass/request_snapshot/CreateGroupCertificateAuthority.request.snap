@@ -1,0 +1,4 @@
+POST /greengrass/groups/__GroupId__/certificateauthorities
+
+X-Amzn-Client-Token: __AmznClientToken__
+

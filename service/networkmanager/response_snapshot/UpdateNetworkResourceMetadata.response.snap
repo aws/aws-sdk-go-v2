@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Metadata":{"key0":"__Value__"},"ResourceArn":"__ResourceArn__"}

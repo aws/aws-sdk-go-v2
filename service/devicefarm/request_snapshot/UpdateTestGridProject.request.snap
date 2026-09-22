@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DeviceFarm_20150623.UpdateTestGridProject
+
+{"description":"__Description__","name":"__Name__","projectArn":"__ProjectArn__","vpcConfig":{"securityGroupIds":["__Member__","__Member__"],"subnetIds":["__Member__","__Member__"],"vpcId":"__VpcId__"}}

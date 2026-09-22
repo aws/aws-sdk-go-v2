@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MetricSummaryList":[{"Arn":"__Arn__","Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","Status":"PUBLISHED","Type":"AWS_MANAGED"},{"Arn":"__Arn__","Id":"__Id__","LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","Status":"PUBLISHED","Type":"AWS_MANAGED"}],"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+POST /outposts/__OutpostIdentifier__/capacity
+
+Content-Type: application/json
+
+{"AssetId":"__AssetId__","DryRun":true,"InstancePools":[{"Count":1,"InstanceType":"__InstanceType__"},{"Count":1,"InstanceType":"__InstanceType__"}],"InstancesToExclude":{"AccountIds":["__Member__","__Member__"],"Instances":["__Member__","__Member__"],"Services":["AWS","AWS"]},"OrderId":"__OrderId__","TaskActionOnBlockingInstances":"WAIT_FOR_EVACUATION"}

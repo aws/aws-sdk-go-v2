@@ -4,11 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes all resource types specified in the ResourceTypes list from the [RecordingGroup] of
@@ -50,6 +49,19 @@ type DisassociateResourceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResourceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResourceTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResourceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationRecorderArn != nil {
+		s.WriteString(schemas.DisassociateResourceTypesRequest_ConfigurationRecorderArn, *v.ConfigurationRecorderArn)
+	}
+	serializeResourceTypeList(s, schemas.DisassociateResourceTypesRequest_ResourceTypes, v.ResourceTypes)
+}
+
 type DisassociateResourceTypesOutput struct {
 
 	// Records configuration changes to the resource types in scope.
@@ -68,77 +80,50 @@ type DisassociateResourceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateResourceTypesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateResourceTypesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateResourceTypesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationRecorder != nil {
+		s.WriteStruct(schemas.DisassociateResourceTypesResponse_ConfigurationRecorder)
+		v.ConfigurationRecorder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisassociateResourceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateResourceTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateResourceTypesResponse_ConfigurationRecorder:
+			v.ConfigurationRecorder = &types.ConfigurationRecorder{}
+			return v.ConfigurationRecorder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResourceTypes, schemas.DisassociateResourceTypesRequest, schemas.DisassociateResourceTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDisassociateResourceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateResourceTypes, schemas.DisassociateResourceTypesRequest, schemas.DisassociateResourceTypesResponse), output: &DisassociateResourceTypesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDisassociateResourceTypes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateResourceTypes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociateResourceTypesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateResourceTypes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +138,8 @@ func (c *Client) addOperationDisassociateResourceTypesMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociateResourceTypes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociateResourceTypes",
-	}
 }

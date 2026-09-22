@@ -5,10 +5,10 @@ package mediastoredata
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of metadata entries about folders and objects in the specified
@@ -55,6 +55,24 @@ type ListItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListItemsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListItemsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListItemsRequest_NextToken, *v.NextToken)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.ListItemsRequest_Path, *v.Path)
+	}
+}
+
 type ListItemsOutput struct {
 
 	// The metadata entries for the folders and objects at the requested path.
@@ -72,74 +90,48 @@ type ListItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListItemsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListItemsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListItemsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeItemList(s, schemas.ListItemsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListItemsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListItemsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListItemsResponse_Items:
+			return deserializeItemList(d, schemas.ListItemsResponse_Items, &v.Items)
+		case schemas.ListItemsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListItemsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListItems, schemas.ListItemsRequest, schemas.ListItemsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListItems, schemas.ListItemsRequest, schemas.ListItemsResponse), output: &ListItemsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListItems{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListItems"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListItems(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +144,6 @@ func (c *Client) addOperationListItemsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -264,11 +250,3 @@ type ListItemsAPIClient interface {
 }
 
 var _ ListItemsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListItems(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListItems",
-	}
-}

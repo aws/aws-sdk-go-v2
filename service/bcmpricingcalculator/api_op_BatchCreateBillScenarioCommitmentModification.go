@@ -5,10 +5,10 @@ package bcmpricingcalculator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Create Compute Savings Plans, EC2 Instance Savings Plans, or EC2 Reserved
@@ -54,6 +54,22 @@ type BatchCreateBillScenarioCommitmentModificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateBillScenarioCommitmentModificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateBillScenarioCommitmentModificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateBillScenarioCommitmentModificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillScenarioId != nil {
+		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationRequest_billScenarioId, *v.BillScenarioId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchCreateBillScenarioCommitmentModificationRequest_clientToken, *v.ClientToken)
+	}
+	serializeBatchCreateBillScenarioCommitmentModificationEntries(s, schemas.BatchCreateBillScenarioCommitmentModificationRequest_commitmentModifications, v.CommitmentModifications)
+}
+
 type BatchCreateBillScenarioCommitmentModificationOutput struct {
 
 	//  Returns the list of errors reason and the commitment item keys that cannot be
@@ -70,65 +86,42 @@ type BatchCreateBillScenarioCommitmentModificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateBillScenarioCommitmentModificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateBillScenarioCommitmentModificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateBillScenarioCommitmentModificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchCreateBillScenarioCommitmentModificationErrors(s, schemas.BatchCreateBillScenarioCommitmentModificationResponse_errors, v.Errors)
+	serializeBatchCreateBillScenarioCommitmentModificationItems(s, schemas.BatchCreateBillScenarioCommitmentModificationResponse_items, v.Items)
+}
+func (v *BatchCreateBillScenarioCommitmentModificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateBillScenarioCommitmentModificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateBillScenarioCommitmentModificationResponse_errors:
+			return deserializeBatchCreateBillScenarioCommitmentModificationErrors(d, schemas.BatchCreateBillScenarioCommitmentModificationResponse_errors, &v.Errors)
+		case schemas.BatchCreateBillScenarioCommitmentModificationResponse_items:
+			return deserializeBatchCreateBillScenarioCommitmentModificationItems(d, schemas.BatchCreateBillScenarioCommitmentModificationResponse_items, &v.Items)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchCreateBillScenarioCommitmentModificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateBillScenarioCommitmentModification, schemas.BatchCreateBillScenarioCommitmentModificationRequest, schemas.BatchCreateBillScenarioCommitmentModificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpBatchCreateBillScenarioCommitmentModification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchCreateBillScenarioCommitmentModification, schemas.BatchCreateBillScenarioCommitmentModificationRequest, schemas.BatchCreateBillScenarioCommitmentModificationResponse), output: &BatchCreateBillScenarioCommitmentModificationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpBatchCreateBillScenarioCommitmentModification{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchCreateBillScenarioCommitmentModification"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -138,12 +131,6 @@ func (c *Client) addOperationBatchCreateBillScenarioCommitmentModificationMiddle
 		return err
 	}
 	if err = addOpBatchCreateBillScenarioCommitmentModificationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreateBillScenarioCommitmentModification(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +143,6 @@ func (c *Client) addOperationBatchCreateBillScenarioCommitmentModificationMiddle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -201,12 +182,4 @@ func (m *idempotencyToken_initializeOpBatchCreateBillScenarioCommitmentModificat
 }
 func addIdempotencyToken_opBatchCreateBillScenarioCommitmentModificationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpBatchCreateBillScenarioCommitmentModification{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opBatchCreateBillScenarioCommitmentModification(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchCreateBillScenarioCommitmentModification",
-	}
 }

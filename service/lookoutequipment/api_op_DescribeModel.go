@@ -4,11 +4,10 @@ package lookoutequipment
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type DescribeModelInput struct {
 	ModelName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.DescribeModelRequest_ModelName, *v.ModelName)
+	}
 }
 
 type DescribeModelOutput struct {
@@ -233,77 +244,316 @@ type DescribeModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccumulatedInferenceDataEndTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_AccumulatedInferenceDataEndTime, *v.AccumulatedInferenceDataEndTime)
+	}
+	if v.AccumulatedInferenceDataStartTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_AccumulatedInferenceDataStartTime, *v.AccumulatedInferenceDataStartTime)
+	}
+	if v.ActiveModelVersion != nil {
+		s.WriteInt64(schemas.DescribeModelResponse_ActiveModelVersion, *v.ActiveModelVersion)
+	}
+	if v.ActiveModelVersionArn != nil {
+		s.WriteString(schemas.DescribeModelResponse_ActiveModelVersionArn, *v.ActiveModelVersionArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeModelResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DataPreProcessingConfiguration != nil {
+		s.WriteStruct(schemas.DescribeModelResponse_DataPreProcessingConfiguration)
+		v.DataPreProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.DescribeModelResponse_DatasetArn, *v.DatasetArn)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.DescribeModelResponse_DatasetName, *v.DatasetName)
+	}
+	if v.EvaluationDataEndTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_EvaluationDataEndTime, *v.EvaluationDataEndTime)
+	}
+	if v.EvaluationDataStartTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_EvaluationDataStartTime, *v.EvaluationDataStartTime)
+	}
+	if v.FailedReason != nil {
+		s.WriteString(schemas.DescribeModelResponse_FailedReason, *v.FailedReason)
+	}
+	if v.ImportJobEndTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_ImportJobEndTime, *v.ImportJobEndTime)
+	}
+	if v.ImportJobStartTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_ImportJobStartTime, *v.ImportJobStartTime)
+	}
+	if v.LabelsInputConfiguration != nil {
+		s.WriteStruct(schemas.DescribeModelResponse_LabelsInputConfiguration)
+		v.LabelsInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.LatestScheduledRetrainingAvailableDataInDays != nil {
+		s.WriteInt32(schemas.DescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays, *v.LatestScheduledRetrainingAvailableDataInDays)
+	}
+	if v.LatestScheduledRetrainingFailedReason != nil {
+		s.WriteString(schemas.DescribeModelResponse_LatestScheduledRetrainingFailedReason, *v.LatestScheduledRetrainingFailedReason)
+	}
+	if v.LatestScheduledRetrainingModelVersion != nil {
+		s.WriteInt64(schemas.DescribeModelResponse_LatestScheduledRetrainingModelVersion, *v.LatestScheduledRetrainingModelVersion)
+	}
+	if v.LatestScheduledRetrainingStartTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_LatestScheduledRetrainingStartTime, *v.LatestScheduledRetrainingStartTime)
+	}
+	if v.LatestScheduledRetrainingStatus != "" {
+		s.WriteString(schemas.DescribeModelResponse_LatestScheduledRetrainingStatus, string(v.LatestScheduledRetrainingStatus))
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.DescribeModelResponse_ModelArn, *v.ModelArn)
+	}
+	if v.ModelDiagnosticsOutputConfiguration != nil {
+		s.WriteStruct(schemas.DescribeModelResponse_ModelDiagnosticsOutputConfiguration)
+		v.ModelDiagnosticsOutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelMetrics != nil {
+		s.WriteString(schemas.DescribeModelResponse_ModelMetrics, *v.ModelMetrics)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.DescribeModelResponse_ModelName, *v.ModelName)
+	}
+	if v.ModelQuality != "" {
+		s.WriteString(schemas.DescribeModelResponse_ModelQuality, string(v.ModelQuality))
+	}
+	if v.ModelVersionActivatedAt != nil {
+		s.WriteTime(schemas.DescribeModelResponse_ModelVersionActivatedAt, *v.ModelVersionActivatedAt)
+	}
+	if v.NextScheduledRetrainingStartDate != nil {
+		s.WriteTime(schemas.DescribeModelResponse_NextScheduledRetrainingStartDate, *v.NextScheduledRetrainingStartDate)
+	}
+	if v.OffCondition != nil {
+		s.WriteString(schemas.DescribeModelResponse_OffCondition, *v.OffCondition)
+	}
+	if v.PreviousActiveModelVersion != nil {
+		s.WriteInt64(schemas.DescribeModelResponse_PreviousActiveModelVersion, *v.PreviousActiveModelVersion)
+	}
+	if v.PreviousActiveModelVersionArn != nil {
+		s.WriteString(schemas.DescribeModelResponse_PreviousActiveModelVersionArn, *v.PreviousActiveModelVersionArn)
+	}
+	if v.PreviousModelVersionActivatedAt != nil {
+		s.WriteTime(schemas.DescribeModelResponse_PreviousModelVersionActivatedAt, *v.PreviousModelVersionActivatedAt)
+	}
+	if v.PriorModelMetrics != nil {
+		s.WriteString(schemas.DescribeModelResponse_PriorModelMetrics, *v.PriorModelMetrics)
+	}
+	if v.RetrainingSchedulerStatus != "" {
+		s.WriteString(schemas.DescribeModelResponse_RetrainingSchedulerStatus, string(v.RetrainingSchedulerStatus))
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeModelResponse_RoleArn, *v.RoleArn)
+	}
+	if v.Schema != nil {
+		s.WriteString(schemas.DescribeModelResponse_Schema, *v.Schema)
+	}
+	if v.ServerSideKmsKeyId != nil {
+		s.WriteString(schemas.DescribeModelResponse_ServerSideKmsKeyId, *v.ServerSideKmsKeyId)
+	}
+	if v.SourceModelVersionArn != nil {
+		s.WriteString(schemas.DescribeModelResponse_SourceModelVersionArn, *v.SourceModelVersionArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeModelResponse_Status, string(v.Status))
+	}
+	if v.TrainingDataEndTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_TrainingDataEndTime, *v.TrainingDataEndTime)
+	}
+	if v.TrainingDataStartTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_TrainingDataStartTime, *v.TrainingDataStartTime)
+	}
+	if v.TrainingExecutionEndTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_TrainingExecutionEndTime, *v.TrainingExecutionEndTime)
+	}
+	if v.TrainingExecutionStartTime != nil {
+		s.WriteTime(schemas.DescribeModelResponse_TrainingExecutionStartTime, *v.TrainingExecutionStartTime)
+	}
+}
+func (v *DescribeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeModelResponse_AccumulatedInferenceDataEndTime:
+			v.AccumulatedInferenceDataEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_AccumulatedInferenceDataEndTime, v.AccumulatedInferenceDataEndTime)
+		case schemas.DescribeModelResponse_AccumulatedInferenceDataStartTime:
+			v.AccumulatedInferenceDataStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_AccumulatedInferenceDataStartTime, v.AccumulatedInferenceDataStartTime)
+		case schemas.DescribeModelResponse_ActiveModelVersion:
+			v.ActiveModelVersion = new(int64)
+			return d.ReadInt64(schemas.DescribeModelResponse_ActiveModelVersion, v.ActiveModelVersion)
+		case schemas.DescribeModelResponse_ActiveModelVersionArn:
+			v.ActiveModelVersionArn = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_ActiveModelVersionArn, v.ActiveModelVersionArn)
+		case schemas.DescribeModelResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeModelResponse_DataPreProcessingConfiguration:
+			v.DataPreProcessingConfiguration = &types.DataPreProcessingConfiguration{}
+			return v.DataPreProcessingConfiguration.Deserialize(d)
+		case schemas.DescribeModelResponse_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_DatasetArn, v.DatasetArn)
+		case schemas.DescribeModelResponse_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_DatasetName, v.DatasetName)
+		case schemas.DescribeModelResponse_EvaluationDataEndTime:
+			v.EvaluationDataEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_EvaluationDataEndTime, v.EvaluationDataEndTime)
+		case schemas.DescribeModelResponse_EvaluationDataStartTime:
+			v.EvaluationDataStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_EvaluationDataStartTime, v.EvaluationDataStartTime)
+		case schemas.DescribeModelResponse_FailedReason:
+			v.FailedReason = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_FailedReason, v.FailedReason)
+		case schemas.DescribeModelResponse_ImportJobEndTime:
+			v.ImportJobEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_ImportJobEndTime, v.ImportJobEndTime)
+		case schemas.DescribeModelResponse_ImportJobStartTime:
+			v.ImportJobStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_ImportJobStartTime, v.ImportJobStartTime)
+		case schemas.DescribeModelResponse_LabelsInputConfiguration:
+			v.LabelsInputConfiguration = &types.LabelsInputConfiguration{}
+			return v.LabelsInputConfiguration.Deserialize(d)
+		case schemas.DescribeModelResponse_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.DescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays:
+			v.LatestScheduledRetrainingAvailableDataInDays = new(int32)
+			return d.ReadInt32(schemas.DescribeModelResponse_LatestScheduledRetrainingAvailableDataInDays, v.LatestScheduledRetrainingAvailableDataInDays)
+		case schemas.DescribeModelResponse_LatestScheduledRetrainingFailedReason:
+			v.LatestScheduledRetrainingFailedReason = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_LatestScheduledRetrainingFailedReason, v.LatestScheduledRetrainingFailedReason)
+		case schemas.DescribeModelResponse_LatestScheduledRetrainingModelVersion:
+			v.LatestScheduledRetrainingModelVersion = new(int64)
+			return d.ReadInt64(schemas.DescribeModelResponse_LatestScheduledRetrainingModelVersion, v.LatestScheduledRetrainingModelVersion)
+		case schemas.DescribeModelResponse_LatestScheduledRetrainingStartTime:
+			v.LatestScheduledRetrainingStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_LatestScheduledRetrainingStartTime, v.LatestScheduledRetrainingStartTime)
+		case schemas.DescribeModelResponse_LatestScheduledRetrainingStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelResponse_LatestScheduledRetrainingStatus, &ev); err != nil {
+				return err
+			}
+			v.LatestScheduledRetrainingStatus = types.ModelVersionStatus(ev)
+			return nil
+		case schemas.DescribeModelResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_ModelArn, v.ModelArn)
+		case schemas.DescribeModelResponse_ModelDiagnosticsOutputConfiguration:
+			v.ModelDiagnosticsOutputConfiguration = &types.ModelDiagnosticsOutputConfiguration{}
+			return v.ModelDiagnosticsOutputConfiguration.Deserialize(d)
+		case schemas.DescribeModelResponse_ModelMetrics:
+			v.ModelMetrics = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_ModelMetrics, v.ModelMetrics)
+		case schemas.DescribeModelResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_ModelName, v.ModelName)
+		case schemas.DescribeModelResponse_ModelQuality:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelResponse_ModelQuality, &ev); err != nil {
+				return err
+			}
+			v.ModelQuality = types.ModelQuality(ev)
+			return nil
+		case schemas.DescribeModelResponse_ModelVersionActivatedAt:
+			v.ModelVersionActivatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_ModelVersionActivatedAt, v.ModelVersionActivatedAt)
+		case schemas.DescribeModelResponse_NextScheduledRetrainingStartDate:
+			v.NextScheduledRetrainingStartDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_NextScheduledRetrainingStartDate, v.NextScheduledRetrainingStartDate)
+		case schemas.DescribeModelResponse_OffCondition:
+			v.OffCondition = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_OffCondition, v.OffCondition)
+		case schemas.DescribeModelResponse_PreviousActiveModelVersion:
+			v.PreviousActiveModelVersion = new(int64)
+			return d.ReadInt64(schemas.DescribeModelResponse_PreviousActiveModelVersion, v.PreviousActiveModelVersion)
+		case schemas.DescribeModelResponse_PreviousActiveModelVersionArn:
+			v.PreviousActiveModelVersionArn = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_PreviousActiveModelVersionArn, v.PreviousActiveModelVersionArn)
+		case schemas.DescribeModelResponse_PreviousModelVersionActivatedAt:
+			v.PreviousModelVersionActivatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_PreviousModelVersionActivatedAt, v.PreviousModelVersionActivatedAt)
+		case schemas.DescribeModelResponse_PriorModelMetrics:
+			v.PriorModelMetrics = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_PriorModelMetrics, v.PriorModelMetrics)
+		case schemas.DescribeModelResponse_RetrainingSchedulerStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelResponse_RetrainingSchedulerStatus, &ev); err != nil {
+				return err
+			}
+			v.RetrainingSchedulerStatus = types.RetrainingSchedulerStatus(ev)
+			return nil
+		case schemas.DescribeModelResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeModelResponse_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_Schema, v.Schema)
+		case schemas.DescribeModelResponse_ServerSideKmsKeyId:
+			v.ServerSideKmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_ServerSideKmsKeyId, v.ServerSideKmsKeyId)
+		case schemas.DescribeModelResponse_SourceModelVersionArn:
+			v.SourceModelVersionArn = new(string)
+			return d.ReadString(schemas.DescribeModelResponse_SourceModelVersionArn, v.SourceModelVersionArn)
+		case schemas.DescribeModelResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelStatus(ev)
+			return nil
+		case schemas.DescribeModelResponse_TrainingDataEndTime:
+			v.TrainingDataEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_TrainingDataEndTime, v.TrainingDataEndTime)
+		case schemas.DescribeModelResponse_TrainingDataStartTime:
+			v.TrainingDataStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_TrainingDataStartTime, v.TrainingDataStartTime)
+		case schemas.DescribeModelResponse_TrainingExecutionEndTime:
+			v.TrainingExecutionEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_TrainingExecutionEndTime, v.TrainingExecutionEndTime)
+		case schemas.DescribeModelResponse_TrainingExecutionStartTime:
+			v.TrainingExecutionStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelResponse_TrainingExecutionStartTime, v.TrainingExecutionStartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModel, schemas.DescribeModelRequest, schemas.DescribeModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModel, schemas.DescribeModelRequest, schemas.DescribeModelResponse), output: &DescribeModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -318,22 +568,8 @@ func (c *Client) addOperationDescribeModelMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeModel",
-	}
 }

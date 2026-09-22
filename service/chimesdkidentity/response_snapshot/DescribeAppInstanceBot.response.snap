@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceBot":{"AppInstanceBotArn":"__AppInstanceBotArn__","Configuration":{"Lex":{"InvokedBy":{"StandardMessages":"AUTO","TargetedMessages":"ALL"},"LexBotAliasArn":"__LexBotAliasArn__","LocaleId":"__LocaleId__","RespondsTo":"STANDARD_MESSAGES","WelcomeIntent":"__WelcomeIntent__"}},"CreatedTimestamp":946684800,"LastUpdatedTimestamp":946684800,"Metadata":"__Metadata__","Name":"__Name__"}}

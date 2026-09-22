@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"KinesisVideoStreamPools":[{"PoolArn":"__PoolArn__","PoolId":"__PoolId__","PoolName":"__PoolName__"},{"PoolArn":"__PoolArn__","PoolId":"__PoolId__","PoolName":"__PoolName__"}],"NextToken":"__NextToken__"}

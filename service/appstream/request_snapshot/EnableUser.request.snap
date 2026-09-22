@@ -1,0 +1,7 @@
+POST /service/PhotonAdminProxyService/operation/EnableUser
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢hUserNamel__UserName__rAuthenticationTypecAPI

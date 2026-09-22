@@ -16,14 +16,18 @@
 package software.amazon.smithy.aws.go.codegen.customization.auth;
 
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
+import software.amazon.smithy.aws.traits.auth.SigV4ATrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.ChainWritable;
 import software.amazon.smithy.go.codegen.Writable;
+import software.amazon.smithy.go.codegen.auth.AuthParameter;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
+import software.amazon.smithy.go.codegen.integration.Replaces;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
+import software.amazon.smithy.go.codegen.integration.auth.SigV4AuthScheme;
 import software.amazon.smithy.go.codegen.integration.auth.SigV4Definition;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.aws.go.codegen.AwsGoDependency;
@@ -39,13 +43,23 @@ import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 /**
  * Adds auth scheme codegen support for aws.auth#sigv4. Region as a config and SDK-specific auth params/resolution are
  * supplied by other integrations. Includes config helpers to set caller overrides for signing name and region.
+ *
+ * <p>Replaces smithy-go's generic {@link SigV4AuthScheme}: the SDK supplies its own scheme definition (bound to the
+ * SDK runtime signer) and its own Region/Credentials config, so the generic default is removed wholesale. Because
+ * the generic integration also contributed the Region auth parameter, it is re-added here.
  */
+@Replaces(SigV4AuthScheme.class)
 public class AwsSigV4AuthScheme implements GoIntegration {
     @Override
     public List<RuntimeClientPlugin> getClientPlugins() {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
                         .addAuthSchemeDefinition(SigV4Trait.ID, new AwsSigV4())
+                        .build(),
+                RuntimeClientPlugin.builder()
+                        .servicePredicate((model, service) ->
+                                service.hasTrait(SigV4Trait.class) || service.hasTrait(SigV4ATrait.class))
+                        .addAuthParameter(AuthParameter.REGION)
                         .build()
         );
     }

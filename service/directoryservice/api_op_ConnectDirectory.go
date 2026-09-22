@@ -4,11 +4,10 @@ package directoryservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an AD Connector to connect to a self-managed directory.
@@ -73,6 +72,39 @@ type ConnectDirectoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectDirectoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectDirectoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectDirectoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectSettings != nil {
+		s.WriteStruct(schemas.ConnectDirectoryRequest_ConnectSettings)
+		v.ConnectSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ConnectDirectoryRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ConnectDirectoryRequest_Name, *v.Name)
+	}
+	if v.NetworkType != "" {
+		s.WriteString(schemas.ConnectDirectoryRequest_NetworkType, string(v.NetworkType))
+	}
+	if v.Password != nil {
+		s.WriteString(schemas.ConnectDirectoryRequest_Password, *v.Password)
+	}
+	if v.ShortName != nil {
+		s.WriteString(schemas.ConnectDirectoryRequest_ShortName, *v.ShortName)
+	}
+	if v.Size != "" {
+		s.WriteString(schemas.ConnectDirectoryRequest_Size, string(v.Size))
+	}
+	serializeTags(s, schemas.ConnectDirectoryRequest_Tags, v.Tags)
+}
+
 // Contains the results of the ConnectDirectory operation.
 type ConnectDirectoryOutput struct {
 
@@ -85,77 +117,48 @@ type ConnectDirectoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectDirectoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectDirectoryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectDirectoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ConnectDirectoryResult_DirectoryId, *v.DirectoryId)
+	}
+}
+func (v *ConnectDirectoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectDirectoryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectDirectoryResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.ConnectDirectoryResult_DirectoryId, v.DirectoryId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConnectDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConnectDirectory, schemas.ConnectDirectoryRequest, schemas.ConnectDirectoryResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConnectDirectory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConnectDirectory, schemas.ConnectDirectoryRequest, schemas.ConnectDirectoryResult), output: &ConnectDirectoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConnectDirectory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ConnectDirectory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpConnectDirectoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConnectDirectory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +173,8 @@ func (c *Client) addOperationConnectDirectoryMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConnectDirectory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ConnectDirectory",
-	}
 }

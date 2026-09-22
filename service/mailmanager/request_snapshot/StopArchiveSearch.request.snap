@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/StopArchiveSearch
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡hSearchIdl__SearchId__

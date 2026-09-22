@@ -1,0 +1,13 @@
+PUT /__Key__?renameObject=
+
+If-Match: __DestinationIfMatch__
+If-Modified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+If-None-Match: __DestinationIfNoneMatch__
+If-Unmodified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Client-Token: __ClientToken__
+X-Amz-Rename-Source: __RenameSource__
+X-Amz-Rename-Source-If-Match: __SourceIfMatch__
+X-Amz-Rename-Source-If-Modified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Rename-Source-If-None-Match: __SourceIfNoneMatch__
+X-Amz-Rename-Source-If-Unmodified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+

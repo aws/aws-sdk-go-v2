@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.BatchExecuteStatement
+
+{"ReturnConsumedCapacity":"INDEXES","Statements":[{"ConsistentRead":true,"Parameters":[{"S":"__AttributeValueMemberS__"},{"S":"__AttributeValueMemberS__"}],"ReturnValuesOnConditionCheckFailure":"ALL_OLD","Statement":"__Statement__"},{"ConsistentRead":true,"Parameters":[{"S":"__AttributeValueMemberS__"},{"S":"__AttributeValueMemberS__"}],"ReturnValuesOnConditionCheckFailure":"ALL_OLD","Statement":"__Statement__"}]}

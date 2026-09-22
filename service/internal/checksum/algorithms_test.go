@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"crypto/sha1"
 	"crypto/sha256"
+	"crypto/sha512"
 	"encoding/base64"
 	"fmt"
 	"hash/crc32"
@@ -74,6 +75,13 @@ func TestComputeChecksumReader(t *testing.T) {
 			ExpectChecksumLen: base64.StdEncoding.EncodedLen(crc64.Size),
 			ExpectRead:        "hello world",
 			ExpectChecksum:    "jSnVw/bqjr4=",
+		},
+		"sha512": {
+			Input:             strings.NewReader("hello world"),
+			Algorithm:         AlgorithmSHA512,
+			ExpectChecksumLen: base64.StdEncoding.EncodedLen(sha512.Size),
+			ExpectRead:        "hello world",
+			ExpectChecksum:    "MJ7MSJwS1utMxA9QyQLytNDtd+5RGnx6m808qG1M2G+YndNbxf9JlnDaNCVbRbDP2DDoH2Bdz33FVC6TrpzXbw==",
 		},
 	}
 
@@ -326,6 +334,14 @@ func TestParseAlgorithm(t *testing.T) {
 			Value:           "SHA256",
 			expectAlgorithm: AlgorithmSHA256,
 		},
+		"sha512": {
+			Value:           "sha512",
+			expectAlgorithm: AlgorithmSHA512,
+		},
+		"SHA512": {
+			Value:           "SHA512",
+			expectAlgorithm: AlgorithmSHA512,
+		},
 		"empty": {
 			Value:     "",
 			expectErr: "unknown checksum algorithm",
@@ -452,6 +468,10 @@ func TestAlgorithmChecksumLength(t *testing.T) {
 		"crc64nvme": {
 			algorithm:    AlgorithmCRC64NVME,
 			expectLength: crc64.Size,
+		},
+		"sha512": {
+			algorithm:    AlgorithmSHA512,
+			expectLength: sha512.Size,
 		},
 	}
 

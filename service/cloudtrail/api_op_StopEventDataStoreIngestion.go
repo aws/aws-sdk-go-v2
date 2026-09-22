@@ -4,16 +4,21 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Stops the ingestion of live events on an event data store specified as either
 // an ARN or the ID portion of the ARN. To stop ingestion, the event data store
 // Status must be ENABLED and the eventCategory must be Management , Data ,
 // NetworkActivity , or ConfigurationItem .
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) StopEventDataStoreIngestion(ctx context.Context, params *StopEventDataStoreIngestionInput, optFns ...func(*Options)) (*StopEventDataStoreIngestionOutput, error) {
 	if params == nil {
 		params = &StopEventDataStoreIngestionInput{}
@@ -40,6 +45,18 @@ type StopEventDataStoreIngestionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEventDataStoreIngestionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEventDataStoreIngestionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEventDataStoreIngestionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.StopEventDataStoreIngestionRequest_EventDataStore, *v.EventDataStore)
+	}
+}
+
 type StopEventDataStoreIngestionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,77 +64,42 @@ type StopEventDataStoreIngestionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopEventDataStoreIngestionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopEventDataStoreIngestionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopEventDataStoreIngestionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopEventDataStoreIngestionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopEventDataStoreIngestionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopEventDataStoreIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEventDataStoreIngestion, schemas.StopEventDataStoreIngestionRequest, schemas.StopEventDataStoreIngestionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopEventDataStoreIngestion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopEventDataStoreIngestion, schemas.StopEventDataStoreIngestionRequest, schemas.StopEventDataStoreIngestionResponse), output: &StopEventDataStoreIngestionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopEventDataStoreIngestion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopEventDataStoreIngestion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopEventDataStoreIngestionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopEventDataStoreIngestion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,22 +114,8 @@ func (c *Client) addOperationStopEventDataStoreIngestionMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopEventDataStoreIngestion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopEventDataStoreIngestion",
-	}
 }

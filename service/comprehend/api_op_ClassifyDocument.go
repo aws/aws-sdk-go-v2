@@ -4,11 +4,10 @@ package comprehend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a classification request to analyze a single document in real-time.
@@ -99,6 +98,29 @@ type ClassifyDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClassifyDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClassifyDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClassifyDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bytes != nil {
+		s.WriteBlob(schemas.ClassifyDocumentRequest_Bytes, v.Bytes)
+	}
+	if v.DocumentReaderConfig != nil {
+		s.WriteStruct(schemas.ClassifyDocumentRequest_DocumentReaderConfig)
+		v.DocumentReaderConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointArn != nil {
+		s.WriteString(schemas.ClassifyDocumentRequest_EndpointArn, *v.EndpointArn)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.ClassifyDocumentRequest_Text, *v.Text)
+	}
+}
+
 type ClassifyDocumentOutput struct {
 
 	// The classes used by the document being analyzed. These are used for models
@@ -145,77 +167,65 @@ type ClassifyDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClassifyDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClassifyDocumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClassifyDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListOfClasses(s, schemas.ClassifyDocumentResponse_Classes, v.Classes)
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.ClassifyDocumentResponse_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListOfDocumentType(s, schemas.ClassifyDocumentResponse_DocumentType, v.DocumentType)
+	serializeListOfErrors(s, schemas.ClassifyDocumentResponse_Errors, v.Errors)
+	serializeListOfLabels(s, schemas.ClassifyDocumentResponse_Labels, v.Labels)
+	serializeListOfWarnings(s, schemas.ClassifyDocumentResponse_Warnings, v.Warnings)
+}
+func (v *ClassifyDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClassifyDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClassifyDocumentResponse_Classes:
+			return deserializeListOfClasses(d, schemas.ClassifyDocumentResponse_Classes, &v.Classes)
+		case schemas.ClassifyDocumentResponse_DocumentMetadata:
+			v.DocumentMetadata = &types.DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.ClassifyDocumentResponse_DocumentType:
+			return deserializeListOfDocumentType(d, schemas.ClassifyDocumentResponse_DocumentType, &v.DocumentType)
+		case schemas.ClassifyDocumentResponse_Errors:
+			return deserializeListOfErrors(d, schemas.ClassifyDocumentResponse_Errors, &v.Errors)
+		case schemas.ClassifyDocumentResponse_Labels:
+			return deserializeListOfLabels(d, schemas.ClassifyDocumentResponse_Labels, &v.Labels)
+		case schemas.ClassifyDocumentResponse_Warnings:
+			return deserializeListOfWarnings(d, schemas.ClassifyDocumentResponse_Warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationClassifyDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClassifyDocument, schemas.ClassifyDocumentRequest, schemas.ClassifyDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpClassifyDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ClassifyDocument, schemas.ClassifyDocumentRequest, schemas.ClassifyDocumentResponse), output: &ClassifyDocumentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpClassifyDocument{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ClassifyDocument"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpClassifyDocumentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opClassifyDocument(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,22 +240,8 @@ func (c *Client) addOperationClassifyDocumentMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opClassifyDocument(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ClassifyDocument",
-	}
 }

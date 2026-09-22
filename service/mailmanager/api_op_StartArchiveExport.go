@@ -4,11 +4,10 @@ package mailmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -63,6 +62,36 @@ type StartArchiveExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartArchiveExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartArchiveExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartArchiveExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.StartArchiveExportRequest_ArchiveId, *v.ArchiveId)
+	}
+	serializeExportDestinationConfiguration(s, schemas.StartArchiveExportRequest_ExportDestinationConfiguration, v.ExportDestinationConfiguration)
+	if v.Filters != nil {
+		s.WriteStruct(schemas.StartArchiveExportRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromTimestamp != nil {
+		s.WriteTime(schemas.StartArchiveExportRequest_FromTimestamp, *v.FromTimestamp)
+	}
+	if v.IncludeMetadata != nil {
+		s.WriteBool(schemas.StartArchiveExportRequest_IncludeMetadata, *v.IncludeMetadata)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.StartArchiveExportRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ToTimestamp != nil {
+		s.WriteTime(schemas.StartArchiveExportRequest_ToTimestamp, *v.ToTimestamp)
+	}
+}
+
 // The response from initiating an archive export.
 type StartArchiveExportOutput struct {
 
@@ -75,77 +104,51 @@ type StartArchiveExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartArchiveExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartArchiveExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartArchiveExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportId != nil {
+		s.WriteString(schemas.StartArchiveExportResponse_ExportId, *v.ExportId)
+	}
+}
+func (v *StartArchiveExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartArchiveExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartArchiveExportResponse_ExportId:
+			v.ExportId = new(string)
+			return d.ReadString(schemas.StartArchiveExportResponse_ExportId, v.ExportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartArchiveExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartArchiveExport, schemas.StartArchiveExportRequest, schemas.StartArchiveExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartArchiveExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartArchiveExport, schemas.StartArchiveExportRequest, schemas.StartArchiveExportResponse), output: &StartArchiveExportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartArchiveExport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartArchiveExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartArchiveExportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartArchiveExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +163,8 @@ func (c *Client) addOperationStartArchiveExportMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartArchiveExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartArchiveExport",
-	}
 }

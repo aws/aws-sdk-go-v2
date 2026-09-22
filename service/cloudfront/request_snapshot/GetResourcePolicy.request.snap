@@ -1,0 +1,5 @@
+POST /2020-05-31/get-resource-policy
+
+Content-Type: application/xml
+
+<GetResourcePolicyRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><ResourceArn>__ResourceArn__</ResourceArn></GetResourcePolicyRequest>

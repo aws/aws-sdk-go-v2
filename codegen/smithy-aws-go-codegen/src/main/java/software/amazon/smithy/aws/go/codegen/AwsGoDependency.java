@@ -33,6 +33,7 @@ public class AwsGoDependency {
     public static final GoDependency AWS_SIGNER_V4 = aws("aws/signer/v4");
     public static final GoDependency AWS_XML = aws("aws/protocol/xml", "awsxml");
     public static final GoDependency AWS_HTTP_TRANSPORT = aws("aws/transport/http", "awshttp");
+    public static final GoDependency INTERNAL_TIMEOUTS = aws("internal/timeouts");
     public static final GoDependency AWSTESTING_UNIT = aws("internal/awstesting/unit");
     public static final GoDependency SERVICE_INTERNAL_EVENTSTREAM = awsModuleDep("aws/protocol/eventstream",
             null, Versions.AWS_PROTOCOL_EVENTSTREAM, "eventstream");
@@ -62,6 +63,9 @@ public class AwsGoDependency {
     public static final GoDependency S3_INTERNAL_ARN = aws("service/internal/s3shared/arn", "s3arn");
     public static final GoDependency AWS_ARN = aws("aws/arn", "awsarn");
     public static final GoDependency AWS_PROTOCOL_TEST_HTTP_CLIENT = aws("internal/protocoltest", "protocoltesthttp");
+    public static final GoDependency AWS_PROTOCOL_TEST_EVENTSTREAM = awsModuleDep(
+            "internal/protocoltest/eventstreamtest", null, "v0.0.0-00010101000000-000000000000",
+            "eventstreamtest");
 
     public static final GoDependency REGEXP = SmithyGoDependency.stdlib("regexp");
 

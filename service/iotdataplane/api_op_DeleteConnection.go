@@ -4,15 +4,16 @@ package iotdataplane
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disconnects a connected MQTT client from Amazon Web Services IoT Core. When you
 // disconnect a client, Amazon Web Services IoT Core closes the client's network
 // connection and optionally cleans the session state.
+//
+// Requires permission to access the [DeleteConnection] action.
+//
+// [DeleteConnection]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteConnection(ctx context.Context, params *DeleteConnectionInput, optFns ...func(*Options)) (*DeleteConnectionOutput, error) {
 	if params == nil {
 		params = &DeleteConnectionInput{}
@@ -33,19 +34,26 @@ type DeleteConnectionInput struct {
 	// The unique identifier of the MQTT client to disconnect. The client ID can't
 	// start with a dollar sign ($).
 	//
+	// MQTT client IDs must be URL encoded (percent-encoded) when they contain
+	// characters that are not valid in HTTP requests, such as spaces, forward slashes
+	// (/), and UTF-8 characters.
+	//
 	// This member is required.
 	ClientId *string
 
-	// Specifies whether to remove the client's session state when disconnecting. Set
-	// to TRUE to delete all session information, including subscriptions and queued
-	// messages. Set to FALSE to preserve the session state. By default, this is set
-	// to FALSE (preserves the session state).
+	// Specifies whether to remove the client's persistent session state when
+	// disconnecting. Set to TRUE to delete all session information, including
+	// subscriptions and queued messages. Set to FALSE to preserve the session state
+	// for [persistent sessions]. For clean sessions this parameter will be ignored. By default, this is
+	// set to FALSE (preserves the session state).
+	//
+	// [persistent sessions]: https://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html#mqtt-persistent-sessions
 	CleanSession bool
 
 	// Controls if Amazon Web Services IoT Core publishes the client's Last Will and
 	// Testament (LWT) message upon disconnection. Set to TRUE to prevent publishing
-	// the LWT message. Set to FALSE to allow publishing. By default, this is set to
-	// FALSE (allows publishing the LWT message).
+	// the LWT message. Set to FALSE to ensure that LWT is published. By default, this
+	// is set to FALSE (LWT message is published).
 	PreventWillMessage bool
 
 	noSmithyDocumentSerde
@@ -59,9 +67,6 @@ type DeleteConnectionOutput struct {
 }
 
 func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConnection{}, middleware.After)
 	if err != nil {
 		return err
@@ -70,65 +75,20 @@ func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +103,8 @@ func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteConnection",
-	}
 }

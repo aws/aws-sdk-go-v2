@@ -1,0 +1,3 @@
+GET /2020-05-31/distributionsByTrustStore?Marker=__Marker__&MaxItems=1&TrustStoreIdentifier=__TrustStoreIdentifier__
+
+

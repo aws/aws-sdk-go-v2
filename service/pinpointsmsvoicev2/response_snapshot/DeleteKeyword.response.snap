@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.DeleteKeyword
+
+{"Keyword":"__Keyword__","KeywordAction":"AUTOMATIC_RESPONSE","KeywordMessage":"__KeywordMessage__","OriginationIdentity":"__OriginationIdentity__","OriginationIdentityArn":"__OriginationIdentityArn__"}

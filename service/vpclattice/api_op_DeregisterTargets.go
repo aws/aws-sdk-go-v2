@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deregisters the specified targets from the specified target group.
@@ -42,6 +41,31 @@ type DeregisterTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetGroupIdentifier != nil {
+		s.WriteString(schemas.DeregisterTargetsRequest_targetGroupIdentifier, *v.TargetGroupIdentifier)
+	}
+	serializeTargetList(s, schemas.DeregisterTargetsRequest_targets, v.Targets)
+}
+func (v *DeregisterTargetsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterTargetsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterTargetsRequest_targetGroupIdentifier:
+			v.TargetGroupIdentifier = new(string)
+			return d.ReadString(schemas.DeregisterTargetsRequest_targetGroupIdentifier, v.TargetGroupIdentifier)
+		case schemas.DeregisterTargetsRequest_targets:
+			return deserializeTargetList(d, schemas.DeregisterTargetsRequest_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 type DeregisterTargetsOutput struct {
 
 	// The targets that were successfully deregistered.
@@ -56,77 +80,48 @@ type DeregisterTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTargetList(s, schemas.DeregisterTargetsResponse_successful, v.Successful)
+	serializeTargetFailureList(s, schemas.DeregisterTargetsResponse_unsuccessful, v.Unsuccessful)
+}
+func (v *DeregisterTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterTargetsResponse_successful:
+			return deserializeTargetList(d, schemas.DeregisterTargetsResponse_successful, &v.Successful)
+		case schemas.DeregisterTargetsResponse_unsuccessful:
+			return deserializeTargetFailureList(d, schemas.DeregisterTargetsResponse_unsuccessful, &v.Unsuccessful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTargets, schemas.DeregisterTargetsRequest, schemas.DeregisterTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterTargets, schemas.DeregisterTargetsRequest, schemas.DeregisterTargetsResponse), output: &DeregisterTargetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterTargets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeregisterTargets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeregisterTargetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterTargets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +136,8 @@ func (c *Client) addOperationDeregisterTargetsMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeregisterTargets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeregisterTargets",
-	}
 }

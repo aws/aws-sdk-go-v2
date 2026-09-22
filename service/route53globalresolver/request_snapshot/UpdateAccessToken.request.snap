@@ -1,0 +1,5 @@
+PATCH /tokens/__AccessTokenId__
+
+Content-Type: application/json
+
+{"name":"__Name__"}

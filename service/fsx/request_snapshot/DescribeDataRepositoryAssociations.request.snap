@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.DescribeDataRepositoryAssociations
+
+{"AssociationIds":["__Member__","__Member__"],"Filters":[{"Name":"file-system-id","Values":["__Member__","__Member__"]},{"Name":"file-system-id","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__"}

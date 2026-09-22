@@ -1,0 +1,5 @@
+POST /2018-10-31/layers/__LayerName__/versions
+
+Content-Type: application/json
+
+{"CompatibleArchitectures":["x86_64","x86_64"],"CompatibleRuntimes":["nodejs","nodejs"],"Content":{"S3Bucket":"__S3Bucket__","S3Key":"__S3Key__","S3ObjectStorageMode":"COPY","S3ObjectVersion":"__S3ObjectVersion__","ZipFile":"YmxvYg=="},"Description":"__Description__","LicenseInfo":"__LicenseInfo__"}

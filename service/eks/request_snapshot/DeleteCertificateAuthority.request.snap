@@ -1,0 +1,3 @@
+DELETE /clusters/__ClusterName__/certificate-authorities/__CertificateAuthorityId__?clientRequestToken=__ClientRequestToken__
+
+

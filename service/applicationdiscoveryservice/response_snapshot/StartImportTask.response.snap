@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.StartImportTask
+
+{"task":{"applicationImportFailure":1,"applicationImportSuccess":1,"clientRequestToken":"__ClientRequestToken__","errorsAndFailedEntriesZip":"__ErrorsAndFailedEntriesZip__","fileClassification":"MODELIZEIT_EXPORT","importCompletionTime":946684800,"importDeletedTime":946684800,"importRequestTime":946684800,"importTaskId":"__ImportTaskId__","importUrl":"__ImportUrl__","name":"__Name__","serverImportFailure":1,"serverImportSuccess":1,"status":"IMPORT_IN_PROGRESS"}}

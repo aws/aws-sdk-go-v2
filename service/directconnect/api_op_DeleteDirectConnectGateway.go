@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified Direct Connect gateway. You must first delete all virtual
@@ -39,6 +38,18 @@ type DeleteDirectConnectGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectConnectGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDirectConnectGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDirectConnectGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.DeleteDirectConnectGatewayRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+}
+
 type DeleteDirectConnectGatewayOutput struct {
 
 	// The Direct Connect gateway.
@@ -50,77 +61,50 @@ type DeleteDirectConnectGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDirectConnectGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDirectConnectGatewayResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDirectConnectGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectConnectGateway != nil {
+		s.WriteStruct(schemas.DeleteDirectConnectGatewayResult_directConnectGateway)
+		v.DirectConnectGateway.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDirectConnectGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDirectConnectGatewayResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDirectConnectGatewayResult_directConnectGateway:
+			v.DirectConnectGateway = &types.DirectConnectGateway{}
+			return v.DirectConnectGateway.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDirectConnectGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectConnectGateway, schemas.DeleteDirectConnectGatewayRequest, schemas.DeleteDirectConnectGatewayResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDirectConnectGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDirectConnectGateway, schemas.DeleteDirectConnectGatewayRequest, schemas.DeleteDirectConnectGatewayResult), output: &DeleteDirectConnectGatewayOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDirectConnectGateway{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDirectConnectGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteDirectConnectGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDirectConnectGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +119,8 @@ func (c *Client) addOperationDeleteDirectConnectGatewayMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteDirectConnectGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDirectConnectGateway",
-	}
 }

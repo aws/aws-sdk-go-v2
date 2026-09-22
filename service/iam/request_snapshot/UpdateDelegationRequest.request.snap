@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateDelegationRequest&DelegationRequestId=__DelegationRequestId__&Notes=__Notes__&Version=2010-05-08

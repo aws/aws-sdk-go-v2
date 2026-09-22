@@ -1,0 +1,5 @@
+POST /prod/sdiSources
+
+Content-Type: application/json
+
+{"mode":"QUADRANT","name":"__Name__","requestId":"__RequestId__","tags":{"key0":"__Value__"},"type":"SINGLE"}

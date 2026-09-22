@@ -1,0 +1,5 @@
+POST /cis/scan/report/get
+
+Content-Type: application/json
+
+{"reportFormat":"PDF","scanArn":"__ScanArn__","targetAccounts":["__Member__","__Member__"]}

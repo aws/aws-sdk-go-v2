@@ -4167,9 +4167,43 @@ func awsRestjson1_serializeDocumentCallingSettings(v *types.CallingSettings, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConsentPopupConfig(v *types.ConsentPopupConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloseButtonLabel != nil {
+		ok := object.Key("closeButtonLabel")
+		ok.String(*v.CloseButtonLabel)
+	}
+
+	if v.Content != nil {
+		ok := object.Key("content")
+		ok.String(*v.Content)
+	}
+
+	if v.Enabled != nil {
+		ok := object.Key("enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.Header != nil {
+		ok := object.Key("header")
+		ok.String(*v.Header)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNetworkSettings(v *types.NetworkSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ConsentPopup != nil {
+		ok := object.Key("consentPopup")
+		if err := awsRestjson1_serializeDocumentConsentPopupConfig(v.ConsentPopup, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DataRetention != nil {
 		ok := object.Key("dataRetention")
@@ -4418,6 +4452,11 @@ func awsRestjson1_serializeDocumentSecurityGroupSettings(v *types.SecurityGroupS
 	if v.MaxBor != nil {
 		ok := object.Key("maxBor")
 		ok.Integer(*v.MaxBor)
+	}
+
+	if v.MaxNonSsoSessionMinutes != nil {
+		ok := object.Key("maxNonSsoSessionMinutes")
+		ok.Integer(*v.MaxNonSsoSessionMinutes)
 	}
 
 	if v.MaxTtl != nil {

@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This request lists the protected resources corresponding to each backup vault.
@@ -51,6 +51,27 @@ type ListProtectedResourcesByBackupVaultInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedResourcesByBackupVaultInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedResourcesByBackupVaultInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedResourcesByBackupVaultInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackupVaultAccountId != nil {
+		s.WriteString(schemas.ListProtectedResourcesByBackupVaultInput_BackupVaultAccountId, *v.BackupVaultAccountId)
+	}
+	if v.BackupVaultName != nil {
+		s.WriteString(schemas.ListProtectedResourcesByBackupVaultInput_BackupVaultName, *v.BackupVaultName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProtectedResourcesByBackupVaultInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedResourcesByBackupVaultInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListProtectedResourcesByBackupVaultOutput struct {
 
 	// The next item following a partial list of returned items. For example, if a
@@ -69,77 +90,51 @@ type ListProtectedResourcesByBackupVaultOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProtectedResourcesByBackupVaultOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProtectedResourcesByBackupVaultOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProtectedResourcesByBackupVaultOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProtectedResourcesByBackupVaultOutput_NextToken, *v.NextToken)
+	}
+	serializeProtectedResourcesList(s, schemas.ListProtectedResourcesByBackupVaultOutput_Results, v.Results)
+}
+func (v *ListProtectedResourcesByBackupVaultOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProtectedResourcesByBackupVaultOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProtectedResourcesByBackupVaultOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProtectedResourcesByBackupVaultOutput_NextToken, v.NextToken)
+		case schemas.ListProtectedResourcesByBackupVaultOutput_Results:
+			return deserializeProtectedResourcesList(d, schemas.ListProtectedResourcesByBackupVaultOutput_Results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProtectedResourcesByBackupVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedResourcesByBackupVault, schemas.ListProtectedResourcesByBackupVaultInput, schemas.ListProtectedResourcesByBackupVaultOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProtectedResourcesByBackupVault{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProtectedResourcesByBackupVault, schemas.ListProtectedResourcesByBackupVaultInput, schemas.ListProtectedResourcesByBackupVaultOutput), output: &ListProtectedResourcesByBackupVaultOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProtectedResourcesByBackupVault{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProtectedResourcesByBackupVault"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListProtectedResourcesByBackupVaultValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProtectedResourcesByBackupVault(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +147,6 @@ func (c *Client) addOperationListProtectedResourcesByBackupVaultMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -261,11 +250,3 @@ type ListProtectedResourcesByBackupVaultAPIClient interface {
 }
 
 var _ ListProtectedResourcesByBackupVaultAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListProtectedResourcesByBackupVault(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProtectedResourcesByBackupVault",
-	}
-}

@@ -1,0 +1,6 @@
+POST /apps.updateQAppPermissions
+
+Content-Type: application/json
+Instance-Id: __InstanceId__
+
+{"appId":"__AppId__","grantPermissions":[{"action":"read","principal":"__Principal__"},{"action":"read","principal":"__Principal__"}],"revokePermissions":[{"action":"read","principal":"__Principal__"},{"action":"read","principal":"__Principal__"}]}

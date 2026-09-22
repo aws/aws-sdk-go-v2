@@ -160,6 +160,9 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-northeast-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "ap-northeast-3",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -175,7 +178,13 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-central-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-south-1",
@@ -338,6 +347,14 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-iso-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "us-iso-west-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso-b",

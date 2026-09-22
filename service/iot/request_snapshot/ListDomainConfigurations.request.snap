@@ -1,0 +1,3 @@
+GET /domainConfigurations?marker=__Marker__&pageSize=1&serviceType=DATA
+
+

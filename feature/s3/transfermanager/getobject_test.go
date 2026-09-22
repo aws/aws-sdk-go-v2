@@ -3,6 +3,7 @@ package transfermanager
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"fmt"
 	"io"
 	"reflect"
@@ -25,21 +26,23 @@ var vID string = "myversion"
 
 func TestGetObject(t *testing.T) {
 	cases := map[string]struct {
-		data              []byte
-		errReaders        []s3testing.TestErrReader
-		getObjectFn       func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
-		optFn             func(*Options)
-		versionID         string
-		checksumType      s3types.ChecksumType
-		expectInvocations int
-		expectRanges      []string
-		expectVersions    []string
-		expectETags       []string
-		partsCount        int32
-		expectParts       []int32
-		expectGetErr      string
-		expectReadErr     string
-		dataValidationFn  func(*testing.T, []byte)
+		data               []byte
+		errReaders         []s3testing.TestErrReader
+		getObjectFn        func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+		optFn              func(*Options)
+		rng                string
+		versionID          string
+		checksumType       s3types.ChecksumType
+		expectInvocations  int
+		expectRanges       []string
+		expectContentRange string
+		expectVersions     []string
+		expectETags        []string
+		partsCount         int32
+		expectParts        []int32
+		expectGetErr       string
+		expectReadErr      string
+		dataValidationFn   func(*testing.T, []byte)
 	}{
 		"range download in order": {
 			data:        buf20MB,
@@ -51,6 +54,39 @@ func TestGetObject(t *testing.T) {
 			expectInvocations: 3,
 			expectRanges:      []string{"bytes=0-8388607", "bytes=8388608-16777215", "bytes=16777216-20971519"},
 			expectETags:       []string{etag, etag, etag},
+		},
+		"range download a limited range in single chunk": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			},
+			rng:                "bytes=2-8388609",
+			expectInvocations:  1,
+			expectRanges:       []string{"bytes=2-8388609"},
+			expectContentRange: "bytes 2-8388609/20971520",
+			expectETags:        []string{etag},
+		},
+		"range download a limited range sequentially in multiple chunks": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+				o.Concurrency = 1
+			},
+			rng:               "bytes=2-16777218",
+			expectInvocations: 3,
+			expectRanges:      []string{"bytes=2-8388609", "bytes=8388610-16777217", "bytes=16777218-16777218"},
+			expectETags:       []string{etag, etag, etag},
+		},
+		"range download a limited range with invalid range input": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			},
+			rng:          "bytes=2--8388609",
+			expectGetErr: "invalid range format",
 		},
 		"range download zero": {
 			data:        []byte{},
@@ -176,10 +212,11 @@ func TestGetObject(t *testing.T) {
 			optFn: func(o *Options) {
 				o.Concurrency = 1
 			},
-			partsCount:        3,
-			expectInvocations: 3,
-			expectETags:       []string{etag, etag, etag},
-			expectParts:       []int32{1, 2, 3},
+			partsCount:         3,
+			expectInvocations:  3,
+			expectContentRange: "bytes 0-2097151/2097152",
+			expectETags:        []string{etag, etag, etag},
+			expectParts:        []int32{1, 2, 3},
 		},
 		"parts download with composite checksum type": {
 			data:        buf2MB,
@@ -288,6 +325,7 @@ func TestGetObject(t *testing.T) {
 			input := &GetObjectInput{
 				Bucket: aws.String("bucket"),
 				Key:    aws.String("key"),
+				Range:  aws.String(c.rng),
 			}
 			input.VersionID = nzstring(c.versionID)
 
@@ -334,6 +372,11 @@ func TestGetObject(t *testing.T) {
 			if len(c.expectRanges) > 0 {
 				if e, a := c.expectRanges, *ranges; !reflect.DeepEqual(e, a) {
 					t.Errorf("expect %v ranges, got %v", e, a)
+				}
+			}
+			if c.expectContentRange != "" {
+				if e, a := c.expectContentRange, aws.ToString(out.ContentRange); e != a {
+					t.Errorf("expect ContentRange %q, got %q", e, a)
 				}
 			}
 			if len(c.expectVersions) > 0 {
@@ -469,6 +512,171 @@ func TestGetObjectWithContextCanceled(t *testing.T) {
 			}
 			if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
 				t.Errorf("expected error message to contain %q, but did not %q", e, a)
+			}
+		})
+	}
+}
+
+func TestGetObject_HeadObjectForwardsRequiredFields(t *testing.T) {
+	cases := map[string]struct {
+		getObjectType types.GetObjectType
+		partsCount    int32
+	}{
+		"GetObjectRanges": {
+			getObjectType: types.GetObjectRanges,
+		},
+		"GetObjectParts": {
+			getObjectType: types.GetObjectParts,
+			partsCount:    3,
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			s3Client, _, _, _, _, _ := s3testing.NewDownloadClient()
+			s3Client.Data = buf2MB
+			s3Client.GetObjectFn = s3testing.RangeGetObjectFn
+			s3Client.PartsCount = c.partsCount
+
+			if c.getObjectType == types.GetObjectParts {
+				s3Client.GetObjectFn = s3testing.PartGetObjectFn
+			}
+
+			mgr := New(s3Client, func(o *Options) {
+				o.GetObjectType = c.getObjectType
+			})
+
+			// 32 bytes encoded as base64 — the value SSE-C requires
+			sseKey := base64.StdEncoding.EncodeToString([]byte("01234567890123456789012345678901"))
+			sseKeyMD5 := base64.StdEncoding.EncodeToString([]byte("md5-of-the-key!!"))
+			modifiedSince := time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC)
+			unmodifiedSince := time.Date(2026, 7, 1, 0, 0, 0, 0, time.UTC)
+
+			input := &GetObjectInput{
+				Bucket:               aws.String("bucket"),
+				Key:                  aws.String("key"),
+				SSECustomerAlgorithm: aws.String("AES256"),
+				SSECustomerKey:       aws.String(sseKey),
+				SSECustomerKeyMD5:    aws.String(sseKeyMD5),
+				ExpectedBucketOwner:  aws.String("123456789012"),
+				RequestPayer:         "requester",
+				VersionID:            aws.String("version-abc"),
+				IfModifiedSince:      &modifiedSince,
+				IfUnmodifiedSince:    &unmodifiedSince,
+			}
+
+			out, err := mgr.GetObject(context.Background(), input)
+			if err != nil {
+				t.Fatalf("expected no error, got %v", err)
+			}
+			// drain the body
+			io.Copy(io.Discard, out.Body)
+
+			if len(s3Client.HeadObjectInputs) == 0 {
+				t.Fatal("expected HeadObject to be called, but it was not")
+			}
+
+			headInput := s3Client.HeadObjectInputs[0]
+
+			// SSE-C fields
+			if e, a := "AES256", aws.ToString(headInput.SSECustomerAlgorithm); e != a {
+				t.Errorf("HeadObject SSECustomerAlgorithm: expected %q, got %q", e, a)
+			}
+			if e, a := sseKey, aws.ToString(headInput.SSECustomerKey); e != a {
+				t.Errorf("HeadObject SSECustomerKey: expected %q, got %q", e, a)
+			}
+			if e, a := sseKeyMD5, aws.ToString(headInput.SSECustomerKeyMD5); e != a {
+				t.Errorf("HeadObject SSECustomerKeyMD5: expected %q, got %q", e, a)
+			}
+
+			// Requester-pays
+			if e, a := s3types.RequestPayerRequester, headInput.RequestPayer; e != a {
+				t.Errorf("HeadObject RequestPayer: expected %q, got %q", e, a)
+			}
+
+			// Account safety
+			if e, a := "123456789012", aws.ToString(headInput.ExpectedBucketOwner); e != a {
+				t.Errorf("HeadObject ExpectedBucketOwner: expected %q, got %q", e, a)
+			}
+
+			// Version
+			if e, a := "version-abc", aws.ToString(headInput.VersionId); e != a {
+				t.Errorf("HeadObject VersionId: expected %q, got %q", e, a)
+			}
+
+			// Conditional request fields
+			if headInput.IfModifiedSince == nil || !headInput.IfModifiedSince.Equal(modifiedSince) {
+				t.Errorf("HeadObject IfModifiedSince: expected %v, got %v", modifiedSince, headInput.IfModifiedSince)
+			}
+			if headInput.IfUnmodifiedSince == nil || !headInput.IfUnmodifiedSince.Equal(unmodifiedSince) {
+				t.Errorf("HeadObject IfUnmodifiedSince: expected %v, got %v", unmodifiedSince, headInput.IfUnmodifiedSince)
+			}
+		})
+	}
+}
+
+// TestGetObjectUnequalParts exercises the full GetObject -> HeadObject ->
+// concurrentReader.partRead path for multipart objects whose parts have unequal
+// sizes (#3526). partRead must reassemble the stream in order regardless of part
+// layout, arrival order, or the memory budget. It also covers a tight
+// GetObjectBufferSize so the byte-throttled dispatch path is exercised end to end.
+func TestGetObjectUnequalParts(t *testing.T) {
+	const mib = 1024 * 1024
+	cases := map[string]struct {
+		sizes       []int
+		concurrency int
+		bufferSize  int64
+	}{
+		"single goroutine":       {sizes: []int{6 * mib, 5 * mib, 1 * mib}, concurrency: 1},
+		"multiple goroutines":    {sizes: []int{6 * mib, 5 * mib, 1 * mib}, concurrency: 5},
+		"largest middle part":    {sizes: []int{2 * mib, 9 * mib, 1 * mib, 4 * mib}, concurrency: 5},
+		"single part":            {sizes: []int{3 * mib}, concurrency: 5},
+		"tight buffer throttles": {sizes: []int{2 * mib, 9 * mib, 1 * mib, 4 * mib}, concurrency: 5, bufferSize: 3 * mib},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			partsData := make([][]byte, len(c.sizes))
+			var expect []byte
+			for i, s := range c.sizes {
+				// distinct byte per part so any misordering corrupts the result
+				b := bytes.Repeat([]byte{byte('A' + i)}, s)
+				partsData[i] = b
+				expect = append(expect, b...)
+			}
+
+			s3Client, _, _, _, _, _ := s3testing.NewDownloadClient()
+			s3Client.Data = expect
+			s3Client.PartsData = partsData
+			s3Client.PartsCount = int32(len(c.sizes))
+			s3Client.GetObjectFn = s3testing.UnequalPartGetObjectFn
+
+			mgr := New(s3Client, func(o *Options) {
+				o.GetObjectType = types.GetObjectParts
+				o.Concurrency = c.concurrency
+				if c.bufferSize != 0 {
+					o.GetObjectBufferSize = c.bufferSize
+				}
+			})
+
+			out, err := mgr.GetObject(context.Background(), &GetObjectInput{
+				Bucket: aws.String("bucket"),
+				Key:    aws.String("key"),
+			})
+			if err != nil {
+				t.Fatalf("expect no error getting object, got %v", err)
+			}
+
+			got, err := io.ReadAll(out.Body)
+			if err != nil {
+				t.Fatalf("expect no error reading body, got %v", err)
+			}
+
+			if e, a := len(expect), len(got); e != a {
+				t.Fatalf("expect %d bytes, got %d", e, a)
+			}
+			if !bytes.Equal(expect, got) {
+				t.Fatalf("expect downloaded object to equal the assembled parts")
 			}
 		})
 	}

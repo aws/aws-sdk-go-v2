@@ -4,11 +4,10 @@ package connectcases
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcases/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the case event publishing configuration.
@@ -37,6 +36,28 @@ type GetCaseEventConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseEventConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseEventConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseEventConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetCaseEventConfigurationRequest_domainId, *v.DomainId)
+	}
+}
+func (v *GetCaseEventConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCaseEventConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCaseEventConfigurationRequest_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetCaseEventConfigurationRequest_domainId, v.DomainId)
+		}
+		return nil
+	})
+}
+
 type GetCaseEventConfigurationOutput struct {
 
 	// Configuration to enable EventBridge case event delivery and determine what data
@@ -51,77 +72,50 @@ type GetCaseEventConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCaseEventConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCaseEventConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCaseEventConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBridge != nil {
+		s.WriteStruct(schemas.GetCaseEventConfigurationResponse_eventBridge)
+		v.EventBridge.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCaseEventConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCaseEventConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCaseEventConfigurationResponse_eventBridge:
+			v.EventBridge = &types.EventBridgeConfiguration{}
+			return v.EventBridge.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCaseEventConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseEventConfiguration, schemas.GetCaseEventConfigurationRequest, schemas.GetCaseEventConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCaseEventConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCaseEventConfiguration, schemas.GetCaseEventConfigurationRequest, schemas.GetCaseEventConfigurationResponse), output: &GetCaseEventConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCaseEventConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCaseEventConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCaseEventConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCaseEventConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +130,8 @@ func (c *Client) addOperationGetCaseEventConfigurationMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCaseEventConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCaseEventConfiguration",
-	}
 }

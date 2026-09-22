@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonMemoryDB.DescribeServiceUpdates
+
+{"NextToken":"__NextToken__","ServiceUpdates":[{"AutoUpdateStartDate":946684800,"ClusterName":"__ClusterName__","Description":"__Description__","Engine":"__Engine__","NodesUpdated":"__NodesUpdated__","ReleaseDate":946684800,"ServiceUpdateName":"__ServiceUpdateName__","Status":"available","Type":"security-update"},{"AutoUpdateStartDate":946684800,"ClusterName":"__ClusterName__","Description":"__Description__","Engine":"__Engine__","NodesUpdated":"__NodesUpdated__","ReleaseDate":946684800,"ServiceUpdateName":"__ServiceUpdateName__","Status":"available","Type":"security-update"}]}

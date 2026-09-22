@@ -5,10 +5,10 @@ package partnercentralselling
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralselling/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of Partner Solutions that the partner registered on Partner
@@ -39,6 +39,9 @@ type ListSolutionsInput struct {
 	//
 	// This member is required.
 	Catalog *string
+
+	// Filters results by AWS Marketplace solution ARN. You can provide up to 10 ARNs.
+	AwsMarketplaceSolutionArn []string
 
 	// Filters the solutions based on the category to which they belong. This allows
 	// partners to search for solutions within specific categories, such as Software ,
@@ -72,6 +75,33 @@ type ListSolutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAwsMarketplaceSolutionArnList(s, schemas.ListSolutionsRequest_AwsMarketplaceSolutionArn, v.AwsMarketplaceSolutionArn)
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListSolutionsRequest_Catalog, *v.Catalog)
+	}
+	serializeStringList(s, schemas.ListSolutionsRequest_Category, v.Category)
+	serializeSolutionIdentifiers(s, schemas.ListSolutionsRequest_Identifier, v.Identifier)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSolutionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSolutionsRequest_NextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.ListSolutionsRequest_Sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFilterStatus(s, schemas.ListSolutionsRequest_Status, v.Status)
+}
+
 type ListSolutionsOutput struct {
 
 	// An array with minimal details for solutions matching the request criteria.
@@ -90,77 +120,51 @@ type ListSolutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSolutionsResponse_NextToken, *v.NextToken)
+	}
+	serializeSolutionList(s, schemas.ListSolutionsResponse_SolutionSummaries, v.SolutionSummaries)
+}
+func (v *ListSolutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolutionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSolutionsResponse_NextToken, v.NextToken)
+		case schemas.ListSolutionsResponse_SolutionSummaries:
+			return deserializeSolutionList(d, schemas.ListSolutionsResponse_SolutionSummaries, &v.SolutionSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSolutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolutions, schemas.ListSolutionsRequest, schemas.ListSolutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSolutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSolutions, schemas.ListSolutionsRequest, schemas.ListSolutionsResponse), output: &ListSolutionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSolutions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSolutions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSolutionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSolutions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,12 +177,6 @@ func (c *Client) addOperationListSolutionsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +279,3 @@ type ListSolutionsAPIClient interface {
 }
 
 var _ ListSolutionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSolutions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSolutions",
-	}
-}

@@ -1,0 +1,5 @@
+POST /ListParticipantReplicas
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","participantId":"__ParticipantId__","sourceStageArn":"__SourceStageArn__"}

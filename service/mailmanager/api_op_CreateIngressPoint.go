@@ -5,10 +5,10 @@ package mailmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provision a new ingress endpoint resource.
@@ -75,6 +75,36 @@ type CreateIngressPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIngressPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIngressPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIngressPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateIngressPointRequest_ClientToken, *v.ClientToken)
+	}
+	serializeIngressPointConfiguration(s, schemas.CreateIngressPointRequest_IngressPointConfiguration, v.IngressPointConfiguration)
+	if v.IngressPointName != nil {
+		s.WriteString(schemas.CreateIngressPointRequest_IngressPointName, *v.IngressPointName)
+	}
+	serializeNetworkConfiguration(s, schemas.CreateIngressPointRequest_NetworkConfiguration, v.NetworkConfiguration)
+	if v.RuleSetId != nil {
+		s.WriteString(schemas.CreateIngressPointRequest_RuleSetId, *v.RuleSetId)
+	}
+	serializeTagList(s, schemas.CreateIngressPointRequest_Tags, v.Tags)
+	if v.TlsPolicy != "" {
+		s.WriteString(schemas.CreateIngressPointRequest_TlsPolicy, string(v.TlsPolicy))
+	}
+	if v.TrafficPolicyId != nil {
+		s.WriteString(schemas.CreateIngressPointRequest_TrafficPolicyId, *v.TrafficPolicyId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateIngressPointRequest_Type, string(v.Type))
+	}
+}
+
 type CreateIngressPointOutput struct {
 
 	// The unique identifier for a previously created ingress endpoint.
@@ -88,65 +118,45 @@ type CreateIngressPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIngressPointOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIngressPointResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIngressPointOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IngressPointId != nil {
+		s.WriteString(schemas.CreateIngressPointResponse_IngressPointId, *v.IngressPointId)
+	}
+}
+func (v *CreateIngressPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIngressPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIngressPointResponse_IngressPointId:
+			v.IngressPointId = new(string)
+			return d.ReadString(schemas.CreateIngressPointResponse_IngressPointId, v.IngressPointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIngressPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngressPoint, schemas.CreateIngressPointRequest, schemas.CreateIngressPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateIngressPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngressPoint, schemas.CreateIngressPointRequest, schemas.CreateIngressPointResponse), output: &CreateIngressPointOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateIngressPoint{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIngressPoint"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -156,12 +166,6 @@ func (c *Client) addOperationCreateIngressPointMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateIngressPointValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIngressPoint(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +178,6 @@ func (c *Client) addOperationCreateIngressPointMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -219,12 +217,4 @@ func (m *idempotencyToken_initializeOpCreateIngressPoint) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateIngressPointMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateIngressPoint{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateIngressPoint(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateIngressPoint",
-	}
 }

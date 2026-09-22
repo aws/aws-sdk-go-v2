@@ -1,0 +1,5 @@
+POST /transit-gateway-route-table-attachments
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","PeeringId":"__PeeringId__","RoutingPolicyLabel":"__RoutingPolicyLabel__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TransitGatewayRouteTableArn":"__TransitGatewayRouteTableArn__"}

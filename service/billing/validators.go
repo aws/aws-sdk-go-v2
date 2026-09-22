@@ -90,6 +90,26 @@ func (m *validateOpDisassociateSourceViews) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetBillingPreferences struct {
+}
+
+func (*validateOpGetBillingPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBillingPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBillingPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBillingPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetBillingView struct {
 }
 
@@ -105,6 +125,86 @@ func (m *validateOpGetBillingView) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetBillingViewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCreditAllocationHistory struct {
+}
+
+func (*validateOpGetCreditAllocationHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCreditAllocationHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCreditAllocationHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCreditAllocationHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCredits struct {
+}
+
+func (*validateOpGetCredits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCredits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCreditsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCreditsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEnterpriseSupportChargeSummary struct {
+}
+
+func (*validateOpGetEnterpriseSupportChargeSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEnterpriseSupportChargeSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEnterpriseSupportChargeSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEnterpriseSupportChargeSummaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEnterpriseSupportContractDetails struct {
+}
+
+func (*validateOpGetEnterpriseSupportContractDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEnterpriseSupportContractDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEnterpriseSupportContractDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEnterpriseSupportContractDetailsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +250,26 @@ func (m *validateOpListBillingViews) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEnterpriseSupportLinkedAccountCharges struct {
+}
+
+func (*validateOpListEnterpriseSupportLinkedAccountCharges) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEnterpriseSupportLinkedAccountCharges) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEnterpriseSupportLinkedAccountChargesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEnterpriseSupportLinkedAccountChargesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListSourceViewsForBillingView struct {
 }
 
@@ -185,6 +305,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRedeemCredits struct {
+}
+
+func (*validateOpRedeemCredits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRedeemCredits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RedeemCreditsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRedeemCreditsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +370,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateBillingPreferences struct {
+}
+
+func (*validateOpUpdateBillingPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBillingPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBillingPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBillingPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateBillingView struct {
 }
 
@@ -266,8 +426,28 @@ func addOpDisassociateSourceViewsValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDisassociateSourceViews{}, middleware.After)
 }
 
+func addOpGetBillingPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBillingPreferences{}, middleware.After)
+}
+
 func addOpGetBillingViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBillingView{}, middleware.After)
+}
+
+func addOpGetCreditAllocationHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCreditAllocationHistory{}, middleware.After)
+}
+
+func addOpGetCreditsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCredits{}, middleware.After)
+}
+
+func addOpGetEnterpriseSupportChargeSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEnterpriseSupportChargeSummary{}, middleware.After)
+}
+
+func addOpGetEnterpriseSupportContractDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEnterpriseSupportContractDetails{}, middleware.After)
 }
 
 func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -278,6 +458,10 @@ func addOpListBillingViewsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListBillingViews{}, middleware.After)
 }
 
+func addOpListEnterpriseSupportLinkedAccountChargesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEnterpriseSupportLinkedAccountCharges{}, middleware.After)
+}
+
 func addOpListSourceViewsForBillingViewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSourceViewsForBillingView{}, middleware.After)
 }
@@ -286,12 +470,20 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpRedeemCreditsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRedeemCredits{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateBillingPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBillingPreferences{}, middleware.After)
 }
 
 func addOpUpdateBillingViewValidationMiddleware(stack *middleware.Stack) error {
@@ -308,6 +500,41 @@ func validateActiveTimeRange(v *types.ActiveTimeRange) error {
 	}
 	if v.ActiveBeforeInclusive == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActiveBeforeInclusive"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBillingPreferenceForKey(v *types.BillingPreferenceForKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BillingPreferenceForKey"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if len(v.Value) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBillingPreferencesPerKey(v []types.BillingPreferenceForKey) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BillingPreferencesPerKey"}
+	for i := range v {
+		if err := validateBillingPreferenceForKey(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -543,6 +770,21 @@ func validateOpDisassociateSourceViewsInput(v *DisassociateSourceViewsInput) err
 	}
 }
 
+func validateOpGetBillingPreferencesInput(v *GetBillingPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBillingPreferencesInput"}
+	if v.Features == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Features"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetBillingViewInput(v *GetBillingViewInput) error {
 	if v == nil {
 		return nil
@@ -550,6 +792,75 @@ func validateOpGetBillingViewInput(v *GetBillingViewInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetBillingViewInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCreditAllocationHistoryInput(v *GetCreditAllocationHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCreditAllocationHistoryInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if v.EndDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCreditsInput(v *GetCreditsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCreditsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.StartDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEnterpriseSupportChargeSummaryInput(v *GetEnterpriseSupportChargeSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEnterpriseSupportChargeSummaryInput"}
+	if v.BillingMonth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BillingMonth"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEnterpriseSupportContractDetailsInput(v *GetEnterpriseSupportContractDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEnterpriseSupportContractDetailsInput"}
+	if v.BillingMonth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BillingMonth"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -595,6 +906,21 @@ func validateOpListBillingViewsInput(v *ListBillingViewsInput) error {
 	}
 }
 
+func validateOpListEnterpriseSupportLinkedAccountChargesInput(v *ListEnterpriseSupportLinkedAccountChargesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEnterpriseSupportLinkedAccountChargesInput"}
+	if v.BillingMonth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BillingMonth"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListSourceViewsForBillingViewInput(v *ListSourceViewsForBillingViewInput) error {
 	if v == nil {
 		return nil
@@ -617,6 +943,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRedeemCreditsInput(v *RedeemCreditsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedeemCreditsInput"}
+	if v.PromoCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PromoCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -657,6 +998,28 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.ResourceTagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceTagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBillingPreferencesInput(v *UpdateBillingPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBillingPreferencesInput"}
+	if len(v.Feature) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Feature"))
+	}
+	if v.BillingPreferencesPerKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BillingPreferencesPerKey"))
+	} else if v.BillingPreferencesPerKey != nil {
+		if err := validateBillingPreferencesPerKey(v.BillingPreferencesPerKey); err != nil {
+			invalidParams.AddNested("BillingPreferencesPerKey", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -4,10 +4,9 @@ package iotthingsgraph
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the latest version of the user's namespace and the public version that it
@@ -37,6 +36,18 @@ type DescribeNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.DescribeNamespaceRequest_namespaceName, *v.NamespaceName)
+	}
+}
+
 type DescribeNamespaceOutput struct {
 
 	// The ARN of the namespace.
@@ -60,74 +71,69 @@ type DescribeNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNamespaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamespaceArn != nil {
+		s.WriteString(schemas.DescribeNamespaceResponse_namespaceArn, *v.NamespaceArn)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.DescribeNamespaceResponse_namespaceName, *v.NamespaceName)
+	}
+	if v.NamespaceVersion != nil {
+		s.WriteInt64(schemas.DescribeNamespaceResponse_namespaceVersion, *v.NamespaceVersion)
+	}
+	if v.TrackingNamespaceName != nil {
+		s.WriteString(schemas.DescribeNamespaceResponse_trackingNamespaceName, *v.TrackingNamespaceName)
+	}
+	if v.TrackingNamespaceVersion != nil {
+		s.WriteInt64(schemas.DescribeNamespaceResponse_trackingNamespaceVersion, *v.TrackingNamespaceVersion)
+	}
+}
+func (v *DescribeNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNamespaceResponse_namespaceArn:
+			v.NamespaceArn = new(string)
+			return d.ReadString(schemas.DescribeNamespaceResponse_namespaceArn, v.NamespaceArn)
+		case schemas.DescribeNamespaceResponse_namespaceName:
+			v.NamespaceName = new(string)
+			return d.ReadString(schemas.DescribeNamespaceResponse_namespaceName, v.NamespaceName)
+		case schemas.DescribeNamespaceResponse_namespaceVersion:
+			v.NamespaceVersion = new(int64)
+			return d.ReadInt64(schemas.DescribeNamespaceResponse_namespaceVersion, v.NamespaceVersion)
+		case schemas.DescribeNamespaceResponse_trackingNamespaceName:
+			v.TrackingNamespaceName = new(string)
+			return d.ReadString(schemas.DescribeNamespaceResponse_trackingNamespaceName, v.TrackingNamespaceName)
+		case schemas.DescribeNamespaceResponse_trackingNamespaceVersion:
+			v.TrackingNamespaceVersion = new(int64)
+			return d.ReadInt64(schemas.DescribeNamespaceResponse_trackingNamespaceVersion, v.TrackingNamespaceVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNamespace, schemas.DescribeNamespaceRequest, schemas.DescribeNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNamespace, schemas.DescribeNamespaceRequest, schemas.DescribeNamespaceResponse), output: &DescribeNamespaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeNamespace{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeNamespace"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeNamespace(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +148,8 @@ func (c *Client) addOperationDescribeNamespaceMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeNamespace(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeNamespace",
-	}
 }

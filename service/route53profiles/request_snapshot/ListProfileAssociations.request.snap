@@ -1,0 +1,3 @@
+GET /profileassociations?maxResults=1&nextToken=__NextToken__&profileId=__ProfileId__&resourceId=__ResourceId__
+
+

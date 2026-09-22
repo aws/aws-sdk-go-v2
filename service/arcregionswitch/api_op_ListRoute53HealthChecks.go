@@ -5,11 +5,11 @@ package arcregionswitch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the Amazon Route 53 health checks.
@@ -38,7 +38,7 @@ type ListRoute53HealthChecksInput struct {
 	// The hosted zone ID for the health checks.
 	HostedZoneId *string
 
-	// The number of objects that you want to return with this call.
+	// The maximum number of results to return in the response.
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
@@ -53,6 +53,29 @@ type ListRoute53HealthChecksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoute53HealthChecksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoute53HealthChecksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoute53HealthChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListRoute53HealthChecksRequest_arn, *v.Arn)
+	}
+	if v.HostedZoneId != nil {
+		s.WriteString(schemas.ListRoute53HealthChecksRequest_hostedZoneId, *v.HostedZoneId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoute53HealthChecksRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoute53HealthChecksRequest_nextToken, *v.NextToken)
+	}
+	if v.RecordName != nil {
+		s.WriteString(schemas.ListRoute53HealthChecksRequest_recordName, *v.RecordName)
+	}
+}
 func (in *ListRoute53HealthChecksInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.UseControlPlaneEndpoint = ptr.Bool(true)
@@ -63,10 +86,8 @@ type ListRoute53HealthChecksOutput struct {
 	// List of the health checks requested.
 	HealthChecks []types.Route53HealthCheck
 
-	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a nextToken response in the previous request. If you did, it indicates
-	// that more output is available. Set this parameter to the value provided by the
-	// previous call's nextToken response to request the next page of results.
+	// A pagination token. A response may contain no results while still including a
+	// nextToken . Continue paginating until nextToken is null to retrieve all results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -75,65 +96,45 @@ type ListRoute53HealthChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoute53HealthChecksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoute53HealthChecksResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoute53HealthChecksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRoute53HealthCheckList(s, schemas.ListRoute53HealthChecksResponse_healthChecks, v.HealthChecks)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoute53HealthChecksResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListRoute53HealthChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoute53HealthChecksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoute53HealthChecksResponse_healthChecks:
+			return deserializeRoute53HealthCheckList(d, schemas.ListRoute53HealthChecksResponse_healthChecks, &v.HealthChecks)
+		case schemas.ListRoute53HealthChecksResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoute53HealthChecksResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoute53HealthChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoute53HealthChecks, schemas.ListRoute53HealthChecksRequest, schemas.ListRoute53HealthChecksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListRoute53HealthChecks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoute53HealthChecks, schemas.ListRoute53HealthChecksRequest, schemas.ListRoute53HealthChecksResponse), output: &ListRoute53HealthChecksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListRoute53HealthChecks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRoute53HealthChecks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -143,12 +144,6 @@ func (c *Client) addOperationListRoute53HealthChecksMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addOpListRoute53HealthChecksValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRoute53HealthChecks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +158,6 @@ func (c *Client) addOperationListRoute53HealthChecksMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -178,7 +167,7 @@ func (c *Client) addOperationListRoute53HealthChecksMiddlewares(stack *middlewar
 // ListRoute53HealthChecksPaginatorOptions is the paginator options for
 // ListRoute53HealthChecks
 type ListRoute53HealthChecksPaginatorOptions struct {
-	// The number of objects that you want to return with this call.
+	// The maximum number of results to return in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -269,11 +258,3 @@ type ListRoute53HealthChecksAPIClient interface {
 }
 
 var _ ListRoute53HealthChecksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRoute53HealthChecks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRoute53HealthChecks",
-	}
-}

@@ -5,10 +5,10 @@ package memorydb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/memorydb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists available reserved node offerings.
@@ -61,6 +61,33 @@ type DescribeReservedNodesOfferingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedNodesOfferingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedNodesOfferingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedNodesOfferingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteString(schemas.DescribeReservedNodesOfferingsRequest_Duration, *v.Duration)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeReservedNodesOfferingsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedNodesOfferingsRequest_NextToken, *v.NextToken)
+	}
+	if v.NodeType != nil {
+		s.WriteString(schemas.DescribeReservedNodesOfferingsRequest_NodeType, *v.NodeType)
+	}
+	if v.OfferingType != nil {
+		s.WriteString(schemas.DescribeReservedNodesOfferingsRequest_OfferingType, *v.OfferingType)
+	}
+	if v.ReservedNodesOfferingId != nil {
+		s.WriteString(schemas.DescribeReservedNodesOfferingsRequest_ReservedNodesOfferingId, *v.ReservedNodesOfferingId)
+	}
+}
+
 type DescribeReservedNodesOfferingsOutput struct {
 
 	// An optional marker returned from a prior request. Use this marker for
@@ -78,74 +105,48 @@ type DescribeReservedNodesOfferingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReservedNodesOfferingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReservedNodesOfferingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReservedNodesOfferingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeReservedNodesOfferingsResponse_NextToken, *v.NextToken)
+	}
+	serializeReservedNodesOfferingList(s, schemas.DescribeReservedNodesOfferingsResponse_ReservedNodesOfferings, v.ReservedNodesOfferings)
+}
+func (v *DescribeReservedNodesOfferingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReservedNodesOfferingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReservedNodesOfferingsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeReservedNodesOfferingsResponse_NextToken, v.NextToken)
+		case schemas.DescribeReservedNodesOfferingsResponse_ReservedNodesOfferings:
+			return deserializeReservedNodesOfferingList(d, schemas.DescribeReservedNodesOfferingsResponse_ReservedNodesOfferings, &v.ReservedNodesOfferings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReservedNodesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedNodesOfferings, schemas.DescribeReservedNodesOfferingsRequest, schemas.DescribeReservedNodesOfferingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReservedNodesOfferings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReservedNodesOfferings, schemas.DescribeReservedNodesOfferingsRequest, schemas.DescribeReservedNodesOfferingsResponse), output: &DescribeReservedNodesOfferingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReservedNodesOfferings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeReservedNodesOfferings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedNodesOfferings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +159,6 @@ func (c *Client) addOperationDescribeReservedNodesOfferingsMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +264,3 @@ type DescribeReservedNodesOfferingsAPIClient interface {
 }
 
 var _ DescribeReservedNodesOfferingsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeReservedNodesOfferings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeReservedNodesOfferings",
-	}
-}

@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -53,6 +53,30 @@ type ListHumanTaskUisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHumanTaskUisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHumanTaskUisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHumanTaskUisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListHumanTaskUisRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListHumanTaskUisRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHumanTaskUisRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHumanTaskUisRequest_NextToken, *v.NextToken)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListHumanTaskUisRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListHumanTaskUisOutput struct {
 
 	// An array of objects describing the human task user interfaces.
@@ -69,74 +93,48 @@ type ListHumanTaskUisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHumanTaskUisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHumanTaskUisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHumanTaskUisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHumanTaskUiSummaries(s, schemas.ListHumanTaskUisResponse_HumanTaskUiSummaries, v.HumanTaskUiSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHumanTaskUisResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListHumanTaskUisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHumanTaskUisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHumanTaskUisResponse_HumanTaskUiSummaries:
+			return deserializeHumanTaskUiSummaries(d, schemas.ListHumanTaskUisResponse_HumanTaskUiSummaries, &v.HumanTaskUiSummaries)
+		case schemas.ListHumanTaskUisResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHumanTaskUisResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHumanTaskUisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHumanTaskUis, schemas.ListHumanTaskUisRequest, schemas.ListHumanTaskUisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHumanTaskUis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHumanTaskUis, schemas.ListHumanTaskUisRequest, schemas.ListHumanTaskUisResponse), output: &ListHumanTaskUisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHumanTaskUis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHumanTaskUis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHumanTaskUis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +147,6 @@ func (c *Client) addOperationListHumanTaskUisMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,11 +249,3 @@ type ListHumanTaskUisAPIClient interface {
 }
 
 var _ ListHumanTaskUisAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListHumanTaskUis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListHumanTaskUis",
-	}
-}

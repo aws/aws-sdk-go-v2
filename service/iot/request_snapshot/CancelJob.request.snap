@@ -1,0 +1,5 @@
+PUT /jobs/__JobId__/cancel?force=true
+
+Content-Type: application/json
+
+{"comment":"__Comment__","reasonCode":"__ReasonCode__"}

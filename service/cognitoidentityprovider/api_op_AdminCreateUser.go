@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new user in the specified user pool.
@@ -225,6 +224,34 @@ type AdminCreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminCreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminCreateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminCreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeClientMetadataType(s, schemas.AdminCreateUserRequest_ClientMetadata, v.ClientMetadata)
+	serializeDeliveryMediumListType(s, schemas.AdminCreateUserRequest_DesiredDeliveryMediums, v.DesiredDeliveryMediums)
+	if v.ForceAliasCreation != false {
+		s.WriteBool(schemas.AdminCreateUserRequest_ForceAliasCreation, v.ForceAliasCreation)
+	}
+	if v.MessageAction != "" {
+		s.WriteString(schemas.AdminCreateUserRequest_MessageAction, string(v.MessageAction))
+	}
+	if v.TemporaryPassword != nil {
+		s.WriteString(schemas.AdminCreateUserRequest_TemporaryPassword, *v.TemporaryPassword)
+	}
+	serializeAttributeListType(s, schemas.AdminCreateUserRequest_UserAttributes, v.UserAttributes)
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.AdminCreateUserRequest_UserPoolId, *v.UserPoolId)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.AdminCreateUserRequest_Username, *v.Username)
+	}
+	serializeAttributeListType(s, schemas.AdminCreateUserRequest_ValidationData, v.ValidationData)
+}
+
 // Represents the response from the server to the request to create the user.
 type AdminCreateUserOutput struct {
 
@@ -237,77 +264,50 @@ type AdminCreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AdminCreateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdminCreateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdminCreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.User != nil {
+		s.WriteStruct(schemas.AdminCreateUserResponse_User)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdminCreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdminCreateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdminCreateUserResponse_User:
+			v.User = &types.UserType{}
+			return v.User.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAdminCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminCreateUser, schemas.AdminCreateUserRequest, schemas.AdminCreateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAdminCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AdminCreateUser, schemas.AdminCreateUserRequest, schemas.AdminCreateUserResponse), output: &AdminCreateUserOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAdminCreateUser{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AdminCreateUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAdminCreateUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAdminCreateUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -322,22 +322,8 @@ func (c *Client) addOperationAdminCreateUserMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAdminCreateUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AdminCreateUser",
-	}
 }

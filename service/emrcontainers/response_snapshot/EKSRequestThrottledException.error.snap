@@ -1,0 +1,4 @@
+429
+Content-Type: application/json
+
+{"__type":"EKSRequestThrottledException","message":"__Message__"}

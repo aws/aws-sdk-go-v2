@@ -1,0 +1,3 @@
+GET /v1/checks?awsService=__AwsService__&language=en&maxResults=1&nextToken=__NextToken__&pillar=cost_optimizing&source=aws_config
+
+

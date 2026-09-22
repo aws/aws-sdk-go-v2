@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","resourceTypes":[{"resourceRegionScope":"REGIONAL","resourceType":"__ResourceType__","serviceName":"__ServiceName__"},{"resourceRegionScope":"REGIONAL","resourceType":"__ResourceType__","serviceName":"__ServiceName__"}]}

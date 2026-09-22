@@ -1,0 +1,5 @@
+POST /describe-connectors
+
+Content-Type: application/json
+
+{"connectorTypes":["Salesforce","Salesforce"],"maxResults":1,"nextToken":"__NextToken__"}

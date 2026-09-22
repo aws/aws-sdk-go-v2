@@ -5,19 +5,25 @@ package cloudtrail
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Returns a list of queries and query statuses for the past seven days. You must
 // specify an ARN value for EventDataStore . Optionally, to shorten the list of
 // results, you can specify a time range, formatted as timestamps, by adding
 // StartTime and EndTime parameters, and a QueryStatus value. Valid values for
 // QueryStatus include QUEUED , RUNNING , FINISHED , FAILED , TIMED_OUT , or
 // CANCELLED .
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) ListQueries(ctx context.Context, params *ListQueriesInput, optFns ...func(*Options)) (*ListQueriesOutput, error) {
 	if params == nil {
 		params = &ListQueriesInput{}
@@ -63,6 +69,33 @@ type ListQueriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListQueriesRequest_EndTime, *v.EndTime)
+	}
+	if v.EventDataStore != nil {
+		s.WriteString(schemas.ListQueriesRequest_EventDataStore, *v.EventDataStore)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQueriesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueriesRequest_NextToken, *v.NextToken)
+	}
+	if v.QueryStatus != "" {
+		s.WriteString(schemas.ListQueriesRequest_QueryStatus, string(v.QueryStatus))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListQueriesRequest_StartTime, *v.StartTime)
+	}
+}
+
 type ListQueriesOutput struct {
 
 	// A token you can use to get the next page of results.
@@ -78,77 +111,51 @@ type ListQueriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQueriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQueriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQueriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQueriesResponse_NextToken, *v.NextToken)
+	}
+	serializeQueries(s, schemas.ListQueriesResponse_Queries, v.Queries)
+}
+func (v *ListQueriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQueriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQueriesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQueriesResponse_NextToken, v.NextToken)
+		case schemas.ListQueriesResponse_Queries:
+			return deserializeQueries(d, schemas.ListQueriesResponse_Queries, &v.Queries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueries, schemas.ListQueriesRequest, schemas.ListQueriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListQueries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQueries, schemas.ListQueriesRequest, schemas.ListQueriesResponse), output: &ListQueriesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListQueries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListQueries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListQueriesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListQueries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +168,6 @@ func (c *Client) addOperationListQueriesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +267,3 @@ type ListQueriesAPIClient interface {
 }
 
 var _ ListQueriesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListQueries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListQueries",
-	}
-}

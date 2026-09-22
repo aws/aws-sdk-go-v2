@@ -1,0 +1,5 @@
+POST /connectorscanconfigurations/list
+
+Content-Type: application/json
+
+{"awsConfigConnectorArns":["__Member__","__Member__"],"maxResults":1,"nextToken":"__NextToken__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ElasticMapReduce.PutManagedScalingPolicy
+
+{"ClusterId":"__ClusterId__","ManagedScalingPolicy":{"ComputeLimits":{"MaximumCapacityUnits":1,"MaximumCoreCapacityUnits":1,"MaximumOnDemandCapacityUnits":1,"MinimumCapacityUnits":1,"UnitType":"InstanceFleetUnits"},"ScalingStrategy":"DEFAULT","UtilizationPerformanceIndex":1}}

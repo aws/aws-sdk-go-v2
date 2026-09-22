@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a membership.
@@ -49,6 +48,9 @@ type UpdateMembershipInput struct {
 	// DISABLED .
 	JobLogStatus types.MembershipJobLogStatus
 
+	// The payment configuration to update for the membership.
+	MembershipPaymentConfiguration *types.UpdateMembershipPaymentConfiguration
+
 	// An indicator as to whether query logging has been enabled or disabled for the
 	// membership.
 	//
@@ -58,6 +60,72 @@ type UpdateMembershipInput struct {
 	QueryLogStatus types.MembershipQueryLogStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMembershipInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultJobResultConfiguration != nil {
+		s.WriteStruct(schemas.UpdateMembershipInput_defaultJobResultConfiguration)
+		v.DefaultJobResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DefaultResultConfiguration != nil {
+		s.WriteStruct(schemas.UpdateMembershipInput_defaultResultConfiguration)
+		v.DefaultResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobLogStatus != "" {
+		s.WriteString(schemas.UpdateMembershipInput_jobLogStatus, string(v.JobLogStatus))
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.UpdateMembershipInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.MembershipPaymentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateMembershipInput_membershipPaymentConfiguration)
+		v.MembershipPaymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryLogStatus != "" {
+		s.WriteString(schemas.UpdateMembershipInput_queryLogStatus, string(v.QueryLogStatus))
+	}
+}
+func (v *UpdateMembershipInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMembershipInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMembershipInput_defaultJobResultConfiguration:
+			v.DefaultJobResultConfiguration = &types.MembershipProtectedJobResultConfiguration{}
+			return v.DefaultJobResultConfiguration.Deserialize(d)
+		case schemas.UpdateMembershipInput_defaultResultConfiguration:
+			v.DefaultResultConfiguration = &types.MembershipProtectedQueryResultConfiguration{}
+			return v.DefaultResultConfiguration.Deserialize(d)
+		case schemas.UpdateMembershipInput_jobLogStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMembershipInput_jobLogStatus, &ev); err != nil {
+				return err
+			}
+			v.JobLogStatus = types.MembershipJobLogStatus(ev)
+			return nil
+		case schemas.UpdateMembershipInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.UpdateMembershipInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.UpdateMembershipInput_membershipPaymentConfiguration:
+			v.MembershipPaymentConfiguration = &types.UpdateMembershipPaymentConfiguration{}
+			return v.MembershipPaymentConfiguration.Deserialize(d)
+		case schemas.UpdateMembershipInput_queryLogStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateMembershipInput_queryLogStatus, &ev); err != nil {
+				return err
+			}
+			v.QueryLogStatus = types.MembershipQueryLogStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type UpdateMembershipOutput struct {
@@ -73,77 +141,50 @@ type UpdateMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMembershipOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMembershipOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMembershipOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Membership != nil {
+		s.WriteStruct(schemas.UpdateMembershipOutput_membership)
+		v.Membership.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMembershipOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMembershipOutput_membership:
+			v.Membership = &types.Membership{}
+			return v.Membership.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMembership, schemas.UpdateMembershipInput, schemas.UpdateMembershipOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMembership, schemas.UpdateMembershipInput, schemas.UpdateMembershipOutput), output: &UpdateMembershipOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMembership{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMembership"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateMembershipValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMembership(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +199,8 @@ func (c *Client) addOperationUpdateMembershipMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateMembership(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateMembership",
-	}
 }

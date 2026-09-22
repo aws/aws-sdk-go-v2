@@ -4,11 +4,10 @@ package odb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the tenancy activation link and onboarding status for your Amazon Web
@@ -32,10 +31,32 @@ type GetOciOnboardingStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOciOnboardingStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOciOnboardingStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOciOnboardingStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetOciOnboardingStatusOutput struct {
+
+	// The list of Amazon Web Services Identity and Access Management (IAM) service
+	// roles used for Autonomous Database integration with Oracle Cloud Infrastructure
+	// (OCI).
+	AutonomousDatabaseOciIntegrationIamRoles []types.OciIamRole
 
 	// The existing OCI tenancy activation link for your Amazon Web Services account.
 	ExistingTenancyActivationLink *string
+
+	// The unique identifier of the Oracle Cloud Infrastructure (OCI) compartment that
+	// is linked to your Amazon Web Services account.
+	LinkedOciCompartmentId *string
+
+	// The unique identifier of the Oracle Cloud Infrastructure (OCI) tenancy that is
+	// linked to your Amazon Web Services account.
+	LinkedOciTenancyId *string
 
 	// A new OCI tenancy activation link for your Amazon Web Services account.
 	NewTenancyActivationLink *string
@@ -47,80 +68,97 @@ type GetOciOnboardingStatusOutput struct {
 	//
 	Status types.OciOnboardingStatus
 
+	// The list of errors that occurred during the subscription process for your
+	// Amazon Web Services account, if any.
+	SubscriptionErrors []types.SubscriptionError
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
+func (v *GetOciOnboardingStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOciOnboardingStatusOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOciOnboardingStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOciIamRoleList(s, schemas.GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles, v.AutonomousDatabaseOciIntegrationIamRoles)
+	if v.ExistingTenancyActivationLink != nil {
+		s.WriteString(schemas.GetOciOnboardingStatusOutput_existingTenancyActivationLink, *v.ExistingTenancyActivationLink)
+	}
+	if v.LinkedOciCompartmentId != nil {
+		s.WriteString(schemas.GetOciOnboardingStatusOutput_linkedOciCompartmentId, *v.LinkedOciCompartmentId)
+	}
+	if v.LinkedOciTenancyId != nil {
+		s.WriteString(schemas.GetOciOnboardingStatusOutput_linkedOciTenancyId, *v.LinkedOciTenancyId)
+	}
+	if v.NewTenancyActivationLink != nil {
+		s.WriteString(schemas.GetOciOnboardingStatusOutput_newTenancyActivationLink, *v.NewTenancyActivationLink)
+	}
+	if v.OciIdentityDomain != nil {
+		s.WriteStruct(schemas.GetOciOnboardingStatusOutput_ociIdentityDomain)
+		v.OciIdentityDomain.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetOciOnboardingStatusOutput_status, string(v.Status))
+	}
+	serializeSubscriptionErrors(s, schemas.GetOciOnboardingStatusOutput_subscriptionErrors, v.SubscriptionErrors)
+}
+func (v *GetOciOnboardingStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOciOnboardingStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles:
+			return deserializeOciIamRoleList(d, schemas.GetOciOnboardingStatusOutput_autonomousDatabaseOciIntegrationIamRoles, &v.AutonomousDatabaseOciIntegrationIamRoles)
+		case schemas.GetOciOnboardingStatusOutput_existingTenancyActivationLink:
+			v.ExistingTenancyActivationLink = new(string)
+			return d.ReadString(schemas.GetOciOnboardingStatusOutput_existingTenancyActivationLink, v.ExistingTenancyActivationLink)
+		case schemas.GetOciOnboardingStatusOutput_linkedOciCompartmentId:
+			v.LinkedOciCompartmentId = new(string)
+			return d.ReadString(schemas.GetOciOnboardingStatusOutput_linkedOciCompartmentId, v.LinkedOciCompartmentId)
+		case schemas.GetOciOnboardingStatusOutput_linkedOciTenancyId:
+			v.LinkedOciTenancyId = new(string)
+			return d.ReadString(schemas.GetOciOnboardingStatusOutput_linkedOciTenancyId, v.LinkedOciTenancyId)
+		case schemas.GetOciOnboardingStatusOutput_newTenancyActivationLink:
+			v.NewTenancyActivationLink = new(string)
+			return d.ReadString(schemas.GetOciOnboardingStatusOutput_newTenancyActivationLink, v.NewTenancyActivationLink)
+		case schemas.GetOciOnboardingStatusOutput_ociIdentityDomain:
+			v.OciIdentityDomain = &types.OciIdentityDomain{}
+			return v.OciIdentityDomain.Deserialize(d)
+		case schemas.GetOciOnboardingStatusOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetOciOnboardingStatusOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.OciOnboardingStatus(ev)
+			return nil
+		case schemas.GetOciOnboardingStatusOutput_subscriptionErrors:
+			return deserializeSubscriptionErrors(d, schemas.GetOciOnboardingStatusOutput_subscriptionErrors, &v.SubscriptionErrors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOciOnboardingStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOciOnboardingStatus, schemas.GetOciOnboardingStatusInput, schemas.GetOciOnboardingStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetOciOnboardingStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOciOnboardingStatus, schemas.GetOciOnboardingStatusInput, schemas.GetOciOnboardingStatusOutput), output: &GetOciOnboardingStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetOciOnboardingStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOciOnboardingStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOciOnboardingStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +173,8 @@ func (c *Client) addOperationGetOciOnboardingStatusMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetOciOnboardingStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOciOnboardingStatus",
-	}
 }

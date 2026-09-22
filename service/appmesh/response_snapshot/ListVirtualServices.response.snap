@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","virtualServices":[{"arn":"__Arn__","createdAt":946684800,"lastUpdatedAt":946684800,"meshName":"__MeshName__","meshOwner":"__MeshOwner__","resourceOwner":"__ResourceOwner__","version":1,"virtualServiceName":"__VirtualServiceName__"},{"arn":"__Arn__","createdAt":946684800,"lastUpdatedAt":946684800,"meshName":"__MeshName__","meshOwner":"__MeshOwner__","resourceOwner":"__ResourceOwner__","version":1,"virtualServiceName":"__VirtualServiceName__"}]}

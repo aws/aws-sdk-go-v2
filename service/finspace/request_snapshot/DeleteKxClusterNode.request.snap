@@ -1,0 +1,3 @@
+DELETE /kx/environments/__EnvironmentId__/clusters/__ClusterName__/nodes/__NodeId__
+
+

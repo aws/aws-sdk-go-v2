@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"invocationStepSummaries":[{"invocationId":"__InvocationId__","invocationStepId":"__InvocationStepId__","invocationStepTime":"2000-01-01T00:00:00Z","sessionId":"__SessionId__"},{"invocationId":"__InvocationId__","invocationStepId":"__InvocationStepId__","invocationStepTime":"2000-01-01T00:00:00Z","sessionId":"__SessionId__"}],"nextToken":"__NextToken__"}

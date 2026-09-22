@@ -1,0 +1,3 @@
+PUT /v1/spaces/__SpaceName__/projects/__ProjectName__/devEnvironments/__Id__/stop
+
+

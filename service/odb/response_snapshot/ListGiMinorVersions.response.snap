@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.ListGiMinorVersions
+
+{"giMinorVersions":[{"gridImageId":"__GridImageId__","version":"__Version__"},{"gridImageId":"__GridImageId__","version":"__Version__"}],"nextToken":"__NextToken__"}

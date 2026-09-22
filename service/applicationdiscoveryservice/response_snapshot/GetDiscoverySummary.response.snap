@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.GetDiscoverySummary
+
+{"agentSummary":{"activeAgents":1,"blackListedAgents":1,"healthyAgents":1,"shutdownAgents":1,"totalAgents":1,"unhealthyAgents":1,"unknownAgents":1},"agentlessCollectorSummary":{"activeAgentlessCollectors":1,"denyListedAgentlessCollectors":1,"healthyAgentlessCollectors":1,"shutdownAgentlessCollectors":1,"totalAgentlessCollectors":1,"unhealthyAgentlessCollectors":1,"unknownAgentlessCollectors":1},"applications":1,"connectorSummary":{"activeConnectors":1,"blackListedConnectors":1,"healthyConnectors":1,"shutdownConnectors":1,"totalConnectors":1,"unhealthyConnectors":1,"unknownConnectors":1},"meCollectorSummary":{"activeMeCollectors":1,"denyListedMeCollectors":1,"healthyMeCollectors":1,"shutdownMeCollectors":1,"totalMeCollectors":1,"unhealthyMeCollectors":1,"unknownMeCollectors":1},"servers":1,"serversMappedToApplications":1,"serversMappedtoTags":1}

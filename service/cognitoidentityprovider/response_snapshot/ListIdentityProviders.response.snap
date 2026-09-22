@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.ListIdentityProviders
+
+{"NextToken":"__NextToken__","Providers":[{"CreationDate":946684800,"LastModifiedDate":946684800,"ProviderName":"__ProviderName__","ProviderType":"SAML"},{"CreationDate":946684800,"LastModifiedDate":946684800,"ProviderName":"__ProviderName__","ProviderType":"SAML"}]}

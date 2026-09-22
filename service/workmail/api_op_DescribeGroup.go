@@ -4,11 +4,10 @@ package workmail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -53,6 +52,21 @@ type DescribeGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeGroupRequest_GroupId, *v.GroupId)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.DescribeGroupRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type DescribeGroupOutput struct {
 
 	// The date and time when a user was deregistered from WorkMail, in UNIX epoch
@@ -85,77 +99,87 @@ type DescribeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisabledDate != nil {
+		s.WriteTime(schemas.DescribeGroupResponse_DisabledDate, *v.DisabledDate)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.DescribeGroupResponse_Email, *v.Email)
+	}
+	if v.EnabledDate != nil {
+		s.WriteTime(schemas.DescribeGroupResponse_EnabledDate, *v.EnabledDate)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeGroupResponse_GroupId, *v.GroupId)
+	}
+	if v.HiddenFromGlobalAddressList != false {
+		s.WriteBool(schemas.DescribeGroupResponse_HiddenFromGlobalAddressList, v.HiddenFromGlobalAddressList)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeGroupResponse_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.DescribeGroupResponse_State, string(v.State))
+	}
+}
+func (v *DescribeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGroupResponse_DisabledDate:
+			v.DisabledDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupResponse_DisabledDate, v.DisabledDate)
+		case schemas.DescribeGroupResponse_Email:
+			v.Email = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_Email, v.Email)
+		case schemas.DescribeGroupResponse_EnabledDate:
+			v.EnabledDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupResponse_EnabledDate, v.EnabledDate)
+		case schemas.DescribeGroupResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_GroupId, v.GroupId)
+		case schemas.DescribeGroupResponse_HiddenFromGlobalAddressList:
+			return d.ReadBool(schemas.DescribeGroupResponse_HiddenFromGlobalAddressList, &v.HiddenFromGlobalAddressList)
+		case schemas.DescribeGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_Name, v.Name)
+		case schemas.DescribeGroupResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeGroupResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EntityState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResponse), output: &DescribeGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +194,8 @@ func (c *Client) addOperationDescribeGroupMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeGroup",
-	}
 }

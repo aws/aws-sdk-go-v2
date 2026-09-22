@@ -1,0 +1,5 @@
+PUT /resource-collections
+
+Content-Type: application/json
+
+{"Action":"ADD","ResourceCollection":{"CloudFormation":{"StackNames":["__Member__","__Member__"]},"Tags":[{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]},{"AppBoundaryKey":"__AppBoundaryKey__","TagValues":["__Member__","__Member__"]}]}}

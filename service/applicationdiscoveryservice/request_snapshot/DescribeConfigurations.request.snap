@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSPoseidonService_V2015_11_01.DescribeConfigurations
+
+{"configurationIds":["__Member__","__Member__"]}

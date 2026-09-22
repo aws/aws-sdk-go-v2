@@ -5,10 +5,10 @@ package proton
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/proton/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List service templates with detail data.
@@ -41,6 +41,34 @@ type ListServiceTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceTemplatesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceTemplatesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceTemplatesInput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListServiceTemplatesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceTemplatesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceTemplatesInput_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListServiceTemplatesInput_maxResults, v.MaxResults)
+		case schemas.ListServiceTemplatesInput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceTemplatesInput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListServiceTemplatesOutput struct {
 
 	// An array of service templates with detail data.
@@ -58,74 +86,48 @@ type ListServiceTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceTemplatesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceTemplatesOutput_nextToken, *v.NextToken)
+	}
+	serializeServiceTemplateSummaryList(s, schemas.ListServiceTemplatesOutput_templates, v.Templates)
+}
+func (v *ListServiceTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceTemplatesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceTemplatesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceTemplatesOutput_nextToken, v.NextToken)
+		case schemas.ListServiceTemplatesOutput_templates:
+			return deserializeServiceTemplateSummaryList(d, schemas.ListServiceTemplatesOutput_templates, &v.Templates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceTemplates, schemas.ListServiceTemplatesInput, schemas.ListServiceTemplatesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListServiceTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceTemplates, schemas.ListServiceTemplatesInput, schemas.ListServiceTemplatesOutput), output: &ListServiceTemplatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListServiceTemplates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceTemplates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceTemplates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,12 +140,6 @@ func (c *Client) addOperationListServiceTemplatesMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,11 +241,3 @@ type ListServiceTemplatesAPIClient interface {
 }
 
 var _ ListServiceTemplatesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListServiceTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListServiceTemplates",
-	}
-}

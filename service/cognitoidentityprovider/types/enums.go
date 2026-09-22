@@ -185,10 +185,11 @@ type AuthFactorType string
 
 // Enum values for AuthFactorType
 const (
-	AuthFactorTypePassword AuthFactorType = "PASSWORD"
-	AuthFactorTypeEmailOtp AuthFactorType = "EMAIL_OTP"
-	AuthFactorTypeSmsOtp   AuthFactorType = "SMS_OTP"
-	AuthFactorTypeWebAuthn AuthFactorType = "WEB_AUTHN"
+	AuthFactorTypePassword      AuthFactorType = "PASSWORD"
+	AuthFactorTypeEmailOtp      AuthFactorType = "EMAIL_OTP"
+	AuthFactorTypeSmsOtp        AuthFactorType = "SMS_OTP"
+	AuthFactorTypeWebAuthn      AuthFactorType = "WEB_AUTHN"
+	AuthFactorTypeSoftwareToken AuthFactorType = "SOFTWARE_TOKEN"
 )
 
 // Values returns all known values for AuthFactorType. Note that this can be
@@ -201,6 +202,7 @@ func (AuthFactorType) Values() []AuthFactorType {
 		"EMAIL_OTP",
 		"SMS_OTP",
 		"WEB_AUTHN",
+		"SOFTWARE_TOKEN",
 	}
 }
 
@@ -517,6 +519,25 @@ func (EmailSendingAccountType) Values() []EmailSendingAccountType {
 	}
 }
 
+type EncryptionKeyType string
+
+// Enum values for EncryptionKeyType
+const (
+	EncryptionKeyTypeAwsOwnedKey        EncryptionKeyType = "AWS_OWNED_KEY"
+	EncryptionKeyTypeCustomerManagedKey EncryptionKeyType = "CUSTOMER_MANAGED_KEY"
+)
+
+// Values returns all known values for EncryptionKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionKeyType) Values() []EncryptionKeyType {
+	return []EncryptionKeyType{
+		"AWS_OWNED_KEY",
+		"CUSTOMER_MANAGED_KEY",
+	}
+}
+
 type EventFilterType string
 
 // Enum values for EventFilterType
@@ -719,6 +740,42 @@ func (InboundFederationLambdaVersionType) Values() []InboundFederationLambdaVers
 	}
 }
 
+type IssuerType string
+
+// Enum values for IssuerType
+const (
+	IssuerTypeOriginal IssuerType = "ORIGINAL"
+	IssuerTypeUpdated  IssuerType = "UPDATED"
+)
+
+// Values returns all known values for IssuerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IssuerType) Values() []IssuerType {
+	return []IssuerType{
+		"ORIGINAL",
+		"UPDATED",
+	}
+}
+
+type LimitClass string
+
+// Enum values for LimitClass
+const (
+	LimitClassApiCategory LimitClass = "API_CATEGORY"
+)
+
+// Values returns all known values for LimitClass. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LimitClass) Values() []LimitClass {
+	return []LimitClass{
+		"API_CATEGORY",
+	}
+}
+
 type LogLevel string
 
 // Enum values for LogLevel
@@ -775,6 +832,30 @@ func (OAuthFlowType) Values() []OAuthFlowType {
 		"code",
 		"implicit",
 		"client_credentials",
+	}
+}
+
+type PasswordHashingAlgorithmType string
+
+// Enum values for PasswordHashingAlgorithmType
+const (
+	PasswordHashingAlgorithmTypeBcrypt       PasswordHashingAlgorithmType = "BCRYPT"
+	PasswordHashingAlgorithmTypeScrypt       PasswordHashingAlgorithmType = "SCRYPT"
+	PasswordHashingAlgorithmTypeArgon2id     PasswordHashingAlgorithmType = "ARGON2ID"
+	PasswordHashingAlgorithmTypePbkdf2Sha256 PasswordHashingAlgorithmType = "PBKDF2_SHA256"
+)
+
+// Values returns all known values for PasswordHashingAlgorithmType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PasswordHashingAlgorithmType) Values() []PasswordHashingAlgorithmType {
+	return []PasswordHashingAlgorithmType{
+		"BCRYPT",
+		"SCRYPT",
+		"ARGON2ID",
+		"PBKDF2_SHA256",
 	}
 }
 
@@ -841,6 +922,48 @@ func (RecoveryOptionNameType) Values() []RecoveryOptionNameType {
 	}
 }
 
+type ReplicaRoleType string
+
+// Enum values for ReplicaRoleType
+const (
+	ReplicaRoleTypePrimary   ReplicaRoleType = "PRIMARY"
+	ReplicaRoleTypeSecondary ReplicaRoleType = "SECONDARY"
+)
+
+// Values returns all known values for ReplicaRoleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicaRoleType) Values() []ReplicaRoleType {
+	return []ReplicaRoleType{
+		"PRIMARY",
+		"SECONDARY",
+	}
+}
+
+type ReplicaStatusType string
+
+// Enum values for ReplicaStatusType
+const (
+	ReplicaStatusTypeCreating ReplicaStatusType = "CREATING"
+	ReplicaStatusTypeActive   ReplicaStatusType = "ACTIVE"
+	ReplicaStatusTypeInactive ReplicaStatusType = "INACTIVE"
+	ReplicaStatusTypeDeleting ReplicaStatusType = "DELETING"
+)
+
+// Values returns all known values for ReplicaStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicaStatusType) Values() []ReplicaStatusType {
+	return []ReplicaStatusType{
+		"CREATING",
+		"ACTIVE",
+		"INACTIVE",
+		"DELETING",
+	}
+}
+
 type RiskDecisionType string
 
 // Enum values for RiskDecisionType
@@ -880,6 +1003,27 @@ func (RiskLevelType) Values() []RiskLevelType {
 		"Low",
 		"Medium",
 		"High",
+	}
+}
+
+type SecurityPolicyType string
+
+// Enum values for SecurityPolicyType
+const (
+	SecurityPolicyTypeTlsV1      SecurityPolicyType = "TLS_V1"
+	SecurityPolicyTypeTlsV122021 SecurityPolicyType = "TLS_V1_2_2021"
+	SecurityPolicyTypeTlsV132025 SecurityPolicyType = "TLS_V1_3_2025"
+)
+
+// Values returns all known values for SecurityPolicyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityPolicyType) Values() []SecurityPolicyType {
+	return []SecurityPolicyType{
+		"TLS_V1",
+		"TLS_V1_2_2021",
+		"TLS_V1_3_2025",
 	}
 }
 
@@ -956,6 +1100,25 @@ func (TimeUnitsType) Values() []TimeUnitsType {
 		"minutes",
 		"hours",
 		"days",
+	}
+}
+
+type UpdateReplicaStatusType string
+
+// Enum values for UpdateReplicaStatusType
+const (
+	UpdateReplicaStatusTypeActive   UpdateReplicaStatusType = "ACTIVE"
+	UpdateReplicaStatusTypeInactive UpdateReplicaStatusType = "INACTIVE"
+)
+
+// Values returns all known values for UpdateReplicaStatusType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UpdateReplicaStatusType) Values() []UpdateReplicaStatusType {
+	return []UpdateReplicaStatusType{
+		"ACTIVE",
+		"INACTIVE",
 	}
 }
 

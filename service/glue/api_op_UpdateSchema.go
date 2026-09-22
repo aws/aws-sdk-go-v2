@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the description, compatibility setting, or version checkpoint for a
@@ -66,6 +65,31 @@ type UpdateSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSchemaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compatibility != "" {
+		s.WriteString(schemas.UpdateSchemaInput_Compatibility, string(v.Compatibility))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateSchemaInput_Description, *v.Description)
+	}
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.UpdateSchemaInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaVersionNumber != nil {
+		s.WriteStruct(schemas.UpdateSchemaInput_SchemaVersionNumber)
+		v.SchemaVersionNumber.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSchemaOutput struct {
 
 	// The name of the registry that contains the schema.
@@ -83,77 +107,60 @@ type UpdateSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegistryName != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.UpdateSchemaResponse_SchemaName, *v.SchemaName)
+	}
+}
+func (v *UpdateSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSchemaResponse_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_RegistryName, v.RegistryName)
+		case schemas.UpdateSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaArn, v.SchemaArn)
+		case schemas.UpdateSchemaResponse_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.UpdateSchemaResponse_SchemaName, v.SchemaName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaInput, schemas.UpdateSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSchema, schemas.UpdateSchemaInput, schemas.UpdateSchemaResponse), output: &UpdateSchemaOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateSchema{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSchema"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateSchemaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSchema(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +175,8 @@ func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateSchema(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateSchema",
-	}
 }

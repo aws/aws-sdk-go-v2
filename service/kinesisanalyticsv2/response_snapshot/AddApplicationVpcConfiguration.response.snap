@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.AddApplicationVpcConfiguration
+
+{"ApplicationARN":"__ApplicationARN__","ApplicationVersionId":1,"OperationId":"__OperationId__","VpcConfigurationDescription":{"SecurityGroupIds":["__Member__","__Member__"],"SubnetIds":["__Member__","__Member__"],"VpcConfigurationId":"__VpcConfigurationId__","VpcId":"__VpcId__"}}

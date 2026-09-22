@@ -3513,6 +3513,11 @@ func awsAwsjson10_serializeOpDocumentDeletePolicyStoreAliasInput(v *DeletePolicy
 		ok.String(*v.AliasName)
 	}
 
+	if len(v.DeletionMode) > 0 {
+		ok := object.Key("deletionMode")
+		ok.String(string(v.DeletionMode))
+	}
+
 	return nil
 }
 

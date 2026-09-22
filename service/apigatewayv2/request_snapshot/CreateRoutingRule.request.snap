@@ -1,0 +1,5 @@
+POST /v2/domainnames/__DomainName__/routingrules?domainNameId=__DomainNameId__
+
+Content-Type: application/json
+
+{"actions":[{"invokeApi":{"apiId":"__ApiId__","stage":"__Stage__","stripBasePath":true}},{"invokeApi":{"apiId":"__ApiId__","stage":"__Stage__","stripBasePath":true}}],"conditions":[{"matchBasePaths":{"anyOf":["__Member__","__Member__"]},"matchHeaders":{"anyOf":[{"header":"__Header__","valueGlob":"__ValueGlob__"},{"header":"__Header__","valueGlob":"__ValueGlob__"}]}},{"matchBasePaths":{"anyOf":["__Member__","__Member__"]},"matchHeaders":{"anyOf":[{"header":"__Header__","valueGlob":"__ValueGlob__"},{"header":"__Header__","valueGlob":"__ValueGlob__"}]}}],"priority":1}

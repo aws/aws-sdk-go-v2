@@ -1,0 +1,7 @@
+POST /service/ComprehendMedical_20181030/operation/DetectPHI
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡dTexth__Text__

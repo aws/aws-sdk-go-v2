@@ -1,0 +1,5 @@
+PUT /views/__InstanceId__/__ViewId__/versions
+
+Content-Type: application/json
+
+{"VersionDescription":"__VersionDescription__","ViewContentSha256":"__ViewContentSha256__"}

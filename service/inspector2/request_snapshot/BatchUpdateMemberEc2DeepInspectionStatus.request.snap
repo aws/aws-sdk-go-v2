@@ -1,0 +1,5 @@
+POST /ec2deepinspectionstatus/member/batch/update
+
+Content-Type: application/json
+
+{"accountIds":[{"accountId":"__AccountId__","activateDeepInspection":true},{"accountId":"__AccountId__","activateDeepInspection":true}]}

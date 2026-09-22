@@ -4,11 +4,10 @@ package batch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/batch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a service environment. You can update the state of a service
@@ -46,6 +45,22 @@ type UpdateServiceEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCapacityLimits(s, schemas.UpdateServiceEnvironmentRequest_capacityLimits, v.CapacityLimits)
+	if v.ServiceEnvironment != nil {
+		s.WriteString(schemas.UpdateServiceEnvironmentRequest_serviceEnvironment, *v.ServiceEnvironment)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.UpdateServiceEnvironmentRequest_state, string(v.State))
+	}
+}
+
 type UpdateServiceEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the service environment that was updated.
@@ -64,77 +79,54 @@ type UpdateServiceEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceEnvironmentArn != nil {
+		s.WriteString(schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentArn, *v.ServiceEnvironmentArn)
+	}
+	if v.ServiceEnvironmentName != nil {
+		s.WriteString(schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentName, *v.ServiceEnvironmentName)
+	}
+}
+func (v *UpdateServiceEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentArn:
+			v.ServiceEnvironmentArn = new(string)
+			return d.ReadString(schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentArn, v.ServiceEnvironmentArn)
+		case schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentName:
+			v.ServiceEnvironmentName = new(string)
+			return d.ReadString(schemas.UpdateServiceEnvironmentResponse_serviceEnvironmentName, v.ServiceEnvironmentName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceEnvironment, schemas.UpdateServiceEnvironmentRequest, schemas.UpdateServiceEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateServiceEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceEnvironment, schemas.UpdateServiceEnvironmentRequest, schemas.UpdateServiceEnvironmentResponse), output: &UpdateServiceEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateServiceEnvironment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateServiceEnvironment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateServiceEnvironmentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceEnvironment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +141,8 @@ func (c *Client) addOperationUpdateServiceEnvironmentMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateServiceEnvironment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateServiceEnvironment",
-	}
 }

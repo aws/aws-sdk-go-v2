@@ -5,10 +5,10 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns detailed information about the privacy budgets in a specified
@@ -57,6 +57,30 @@ type ListPrivacyBudgetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrivacyBudgetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrivacyBudgetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrivacyBudgetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessBudgetResourceArn != nil {
+		s.WriteString(schemas.ListPrivacyBudgetsInput_accessBudgetResourceArn, *v.AccessBudgetResourceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPrivacyBudgetsInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListPrivacyBudgetsInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrivacyBudgetsInput_nextToken, *v.NextToken)
+	}
+	if v.PrivacyBudgetType != "" {
+		s.WriteString(schemas.ListPrivacyBudgetsInput_privacyBudgetType, string(v.PrivacyBudgetType))
+	}
+}
+
 type ListPrivacyBudgetsOutput struct {
 
 	// An array that summarizes the privacy budgets. The summary includes
@@ -75,77 +99,51 @@ type ListPrivacyBudgetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrivacyBudgetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrivacyBudgetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrivacyBudgetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPrivacyBudgetsOutput_nextToken, *v.NextToken)
+	}
+	serializePrivacyBudgetSummaryList(s, schemas.ListPrivacyBudgetsOutput_privacyBudgetSummaries, v.PrivacyBudgetSummaries)
+}
+func (v *ListPrivacyBudgetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrivacyBudgetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrivacyBudgetsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPrivacyBudgetsOutput_nextToken, v.NextToken)
+		case schemas.ListPrivacyBudgetsOutput_privacyBudgetSummaries:
+			return deserializePrivacyBudgetSummaryList(d, schemas.ListPrivacyBudgetsOutput_privacyBudgetSummaries, &v.PrivacyBudgetSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPrivacyBudgetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrivacyBudgets, schemas.ListPrivacyBudgetsInput, schemas.ListPrivacyBudgetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrivacyBudgets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrivacyBudgets, schemas.ListPrivacyBudgetsInput, schemas.ListPrivacyBudgetsOutput), output: &ListPrivacyBudgetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPrivacyBudgets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPrivacyBudgets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPrivacyBudgetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPrivacyBudgets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +156,6 @@ func (c *Client) addOperationListPrivacyBudgetsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +259,3 @@ type ListPrivacyBudgetsAPIClient interface {
 }
 
 var _ ListPrivacyBudgetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPrivacyBudgets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPrivacyBudgets",
-	}
-}

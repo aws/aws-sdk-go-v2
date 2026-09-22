@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -33,6 +34,27 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Resource being accessed is in use.
 type ResourceInUse struct {
@@ -59,6 +81,27 @@ func (e *ResourceInUse) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInUse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInUse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceInUse_Message, *v.Message)
+	}
+}
+func (v *ResourceInUse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUse_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 //	You have exceeded an SageMaker resource limit. For example, you might have too
 //
@@ -87,6 +130,27 @@ func (e *ResourceLimitExceeded) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceLimitExceeded) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceLimitExceeded)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceLimitExceeded) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceLimitExceeded_Message, *v.Message)
+	}
+}
+func (v *ResourceLimitExceeded) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceLimitExceeded, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceLimitExceeded_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceLimitExceeded_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Resource being access is not found.
 type ResourceNotFound struct {
@@ -113,3 +177,24 @@ func (e *ResourceNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFound) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFound)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFound) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFound_Message, *v.Message)
+	}
+}
+func (v *ResourceNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFound, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFound_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFound_Message, v.Message)
+		}
+		return nil
+	})
+}

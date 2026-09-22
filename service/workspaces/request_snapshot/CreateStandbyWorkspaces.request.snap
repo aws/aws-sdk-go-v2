@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.CreateStandbyWorkspaces
+
+{"PrimaryRegion":"__PrimaryRegion__","StandbyWorkspaces":[{"DataReplication":"NO_REPLICATION","DirectoryId":"__DirectoryId__","PrimaryWorkspaceId":"__PrimaryWorkspaceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeEncryptionKey":"__VolumeEncryptionKey__"},{"DataReplication":"NO_REPLICATION","DirectoryId":"__DirectoryId__","PrimaryWorkspaceId":"__PrimaryWorkspaceId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VolumeEncryptionKey":"__VolumeEncryptionKey__"}]}

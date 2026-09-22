@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/notebook-syncs
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","description":"__Description__","gitMetadata":{"branch":"__Branch__","commitHash":"__CommitHash__","commitMessage":"__CommitMessage__","committedAt":946684800,"connectionId":"__ConnectionId__","fileName":"__FileName__","repository":"__Repository__"},"name":"__Name__","notebookId":"__NotebookId__","owningProjectIdentifier":"__OwningProjectIdentifier__","sourceLocation":{"s3":"__SourceLocationMemberS3__"}}

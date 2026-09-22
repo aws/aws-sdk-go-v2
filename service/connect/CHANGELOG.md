@@ -1,3 +1,194 @@
+# v1.201.0 (2026-09-18)
+
+* **Feature**: This release adds the ListSecurityProfileAIAgents API and updates the CreateSecurityProfile and UpdateSecurityProfile APIs to support the AllowedAIAgents field on security profiles, allowing customers to manage the 3P AI agents associated with a security profile for Agent-to-Agent interactions.
+
+# v1.200.0 (2026-09-17)
+
+* **Feature**: Made the replicaAlias attribute optional in the ReplicateInstance API to support Global routing for Amazon Connect Global Resiliency (ACGR) instances. This change maintains backward compatibility. When onboarding to ACGR without Global routing, you must specify a custom replicaAlias in your API call
+
+# v1.199.0 (2026-09-16)
+
+* **Feature**: Adds support for ContactAnalysis via ListContactReferences.
+
+# v1.198.0 (2026-09-09)
+
+* **Feature**: Add metric configuration field to evaluation forms and ListEvaluationFormAIVersions API for retrieving AI-generated evaluation form versions
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.197.0 (2026-09-08)
+
+* **Feature**: Releasing workload types feature. A proper launch announcement or details will follow up.
+
+# v1.196.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.195.0 (2026-09-03)
+
+* **Feature**: This release enables TagOnCreate for Rule resource on CreateRule API. It also introduces a new field called PreEvaluationFilters to Rule resource, thereby impacting all Create, Update, Describe and Search APIs for Rules
+
+# v1.194.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
+# v1.193.0 (2026-08-31)
+
+* **Feature**: Added support for global routing on Amazon Connect Global Resiliency instances. New APIs GetCrossRegionRouting and UpdateCrossRegionRouting allow you to view and control cross-region contact routing between linked instances, so both Regions are active at all times.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.192.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.192.0 (2026-08-27)
+
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.191.0 (2026-08-26)
+
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.190.1 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.190.0 (2026-08-24)
+
+* **Feature**: This release adds the ExtractedInformation segment to the ListRealtimeContactAnalysisSegmentsV2 API, enabling customers to retrieve information extracted from real-time contact analysis.
+
+# v1.189.1 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.189.0 (2026-08-17)
+
+* **Feature**: This release adds new APIs to create, describe, update, delete, and list extraction definitions, enabling customers to manage lifecycle of extraction definition resources. Additionally, this release adds new event sources for Rules related to ACW and new action to Extract Information.
+
+# v1.188.1 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.188.0 (2026-08-13)
+
+* **Feature**: Adds the StartAssistantContact API to start chat contacts handled by an AI agent. Adds SegmentAttributes to StartWebRTCContact, and corrects its error response to now receive AccessDeniedException (previously returned as an internal server error due to a missing error declaration).
+
+# v1.187.0 (2026-08-11)
+
+* **Feature**: Seven new APIs for managing custom metrics, including create, describe, update, and delete. Using Custom Metrics, customers of Amazon Connect Customer can tailor analytics dashboards to their needs by applying custom thresholds, filters, and calculations to one or more out of the box measurements.
+
+# v1.186.0 (2026-08-10)
+
+* **Feature**: Added Malay language option to use AI to automatically fill evaluation forms in Malay
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.185.0 (2026-08-07)
+
+* **Feature**: Supports updating the task template associated with in-progress task contacts using the new UpdateContactTaskTemplate API. This enables supervisors and developers to dynamically reassign task templates without creating a new task.
+
+# v1.184.4 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.184.3 (2026-07-31.2)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
+# v1.184.2 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.184.1 (2026-07-28)
+
+* **Documentation**: Documentation updates for SearchRules, AssociateRoutingProfileQueues, CreateRoutingProfile, AssociateContactWithUser CreateTaskTemplate, and UpdateTaskTemplate
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.184.0 (2026-07-21)
+
+* **Feature**: Add an option to clients to disable clock skew
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.183.0 (2026-07-14)
+
+* **Feature**: This release adds SearchRules API which can be used to search for rules within an Amazon Connect instance.
+
+# v1.182.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.182.0 (2026-07-09)
+
+* **Feature**: Amazon Connect - Added DeleteContactData API to support PII deletion of customer endpoint, additional email recipients and email subject.
+
+# v1.181.0 (2026-07-07)
+
+* **Feature**: Adds support for CreateAuthCode and DeleteSession APIs.
+
+# v1.180.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.179.0 (2026-07-01)
+
+* **Feature**: Adds a new Amazon Connect Service API, SendOutboundWebNotification, that delivers web notifications to end-customer chat widget sessions. Callable only by the Amazon Connect Outbound Campaigns service principal.
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.178.0 (2026-06-30)
+
+* **Feature**: Amazon Connect - Added CreateAttachedFile and StartContactConversationalAnalyticsJob APIs to import call recordings and run conversational analytics.
+
+# v1.177.1 (2026-06-29)
+
+* No change notes available for this release.
+
+# v1.177.0 (2026-06-19)
+
+* **Feature**: This is the release for point based scoring system and the evaluation form validation project
+
+# v1.176.2 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.176.1 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.176.0 (2026-06-03.2)
+
+* **Feature**: SearchContacts Connect API now supports filtering contacts by the AI Agents involved in handling them
+
+# v1.175.4 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.175.3 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.175.2 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.175.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.175.0 (2026-05-21)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.174.0 (2026-05-18)
 
 * **Feature**: Amazon Connect Cases now supports SLA durations of up to 2 years (1,051,200 minutes), increased from the previous maximum of 90 days (129,600 minutes). This enables you to track long-running service level agreements for cases that require extended resolution timelines.

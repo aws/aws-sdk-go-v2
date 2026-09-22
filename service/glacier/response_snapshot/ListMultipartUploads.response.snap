@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Marker":"__Marker__","UploadsList":[{"ArchiveDescription":"__ArchiveDescription__","CreationDate":"__CreationDate__","MultipartUploadId":"__MultipartUploadId__","PartSizeInBytes":1,"VaultARN":"__VaultARN__"},{"ArchiveDescription":"__ArchiveDescription__","CreationDate":"__CreationDate__","MultipartUploadId":"__MultipartUploadId__","PartSizeInBytes":1,"VaultARN":"__VaultARN__"}]}

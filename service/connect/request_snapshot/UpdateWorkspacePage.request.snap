@@ -1,0 +1,5 @@
+POST /workspaces/__InstanceId__/__WorkspaceId__/pages/__Page__
+
+Content-Type: application/json
+
+{"InputData":"__InputData__","NewPage":"__NewPage__","ResourceArn":"__ResourceArn__","Slug":"__Slug__"}

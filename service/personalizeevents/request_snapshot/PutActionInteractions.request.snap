@@ -1,0 +1,5 @@
+POST /action-interactions
+
+Content-Type: application/json
+
+{"actionInteractions":[{"actionId":"__ActionId__","eventId":"__EventId__","eventType":"__EventType__","impression":["__Member__","__Member__"],"properties":"__Properties__","recommendationId":"__RecommendationId__","sessionId":"__SessionId__","timestamp":946684800,"userId":"__UserId__"},{"actionId":"__ActionId__","eventId":"__EventId__","eventType":"__EventType__","impression":["__Member__","__Member__"],"properties":"__Properties__","recommendationId":"__RecommendationId__","sessionId":"__SessionId__","timestamp":946684800,"userId":"__UserId__"}],"trackingId":"__TrackingId__"}

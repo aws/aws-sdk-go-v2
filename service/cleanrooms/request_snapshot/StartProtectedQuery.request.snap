@@ -1,0 +1,5 @@
+POST /memberships/__MembershipIdentifier__/protectedQueries
+
+Content-Type: application/json
+
+{"computeConfiguration":{"worker":{"number":1,"properties":{"spark":{"key0":"__Value__"}},"type":"CR.1X"}},"queryComputePayerAccountId":"__QueryComputePayerAccountId__","resultConfiguration":{"outputConfiguration":{"s3":{"bucket":"__Bucket__","keyPrefix":"__KeyPrefix__","resultFormat":"CSV","singleFileOutput":true}}},"sqlParameters":{"analysisTemplateArn":"__AnalysisTemplateArn__","parameters":{"key0":"__Value__"},"queryString":"__QueryString__"},"type":"SQL"}

@@ -1,0 +1,5 @@
+POST /CancelTraceRetrieval
+
+Content-Type: application/json
+
+{"RetrievalToken":"__RetrievalToken__"}

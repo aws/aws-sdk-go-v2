@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CloudTrail_20131101.ListInsightsMetricData
+
+{"DataType":"FillWithZeros","EndTime":946684800,"ErrorCode":"__ErrorCode__","EventName":"__EventName__","EventSource":"__EventSource__","InsightType":"ApiCallRateInsight","MaxResults":1,"NextToken":"__NextToken__","Period":1,"StartTime":946684800,"TrailName":"__TrailName__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","PackageDetailsList":[{"AvailablePackageVersion":"__AvailablePackageVersion__","CreatedAt":946684800,"ErrorDetails":{"ErrorMessage":"__ErrorMessage__","ErrorType":"__ErrorType__"},"LastUpdatedAt":946684800,"PackageDescription":"__PackageDescription__","PackageID":"__PackageID__","PackageName":"__PackageName__","PackageStatus":"COPYING","PackageType":"TXT-DICTIONARY"},{"AvailablePackageVersion":"__AvailablePackageVersion__","CreatedAt":946684800,"ErrorDetails":{"ErrorMessage":"__ErrorMessage__","ErrorType":"__ErrorType__"},"LastUpdatedAt":946684800,"PackageDescription":"__PackageDescription__","PackageID":"__PackageID__","PackageName":"__PackageName__","PackageStatus":"COPYING","PackageType":"TXT-DICTIONARY"}]}

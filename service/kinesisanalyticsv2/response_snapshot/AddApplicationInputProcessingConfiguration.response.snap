@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20180523.AddApplicationInputProcessingConfiguration
+
+{"ApplicationARN":"__ApplicationARN__","ApplicationVersionId":1,"InputId":"__InputId__","InputProcessingConfigurationDescription":{"InputLambdaProcessorDescription":{"ResourceARN":"__ResourceARN__","RoleARN":"__RoleARN__"}}}

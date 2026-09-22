@@ -1,0 +1,5 @@
+PUT /workflow-definitions/__WorkflowDefinitionName__/workflow-runs
+
+Content-Type: application/json
+
+{"clientInfo":{"compatibilityVersion":1,"sdkVersion":"__SdkVersion__"},"clientToken":"__ClientToken__","logGroupName":"__LogGroupName__","modelId":"__ModelId__"}

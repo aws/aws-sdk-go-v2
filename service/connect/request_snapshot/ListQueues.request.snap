@@ -1,0 +1,3 @@
+GET /queues-summary/__InstanceId__?maxResults=1&nextToken=__NextToken__&queueTypes=STANDARD&queueTypes=STANDARD
+
+

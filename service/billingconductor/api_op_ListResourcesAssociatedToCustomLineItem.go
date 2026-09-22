@@ -5,10 +5,10 @@ package billingconductor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the resources that are associated to a custom line item.
@@ -51,6 +51,54 @@ type ListResourcesAssociatedToCustomLineItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourcesAssociatedToCustomLineItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesAssociatedToCustomLineItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesAssociatedToCustomLineItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemInput_Arn, *v.Arn)
+	}
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListResourcesAssociatedToCustomLineItemInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourcesAssociatedToCustomLineItemInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListResourcesAssociatedToCustomLineItemInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourcesAssociatedToCustomLineItemInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourcesAssociatedToCustomLineItemInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListResourcesAssociatedToCustomLineItemInput_Arn, v.Arn)
+		case schemas.ListResourcesAssociatedToCustomLineItemInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListResourcesAssociatedToCustomLineItemInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListResourcesAssociatedToCustomLineItemInput_Filters:
+			v.Filters = &types.ListResourcesAssociatedToCustomLineItemFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListResourcesAssociatedToCustomLineItemInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListResourcesAssociatedToCustomLineItemInput_MaxResults, v.MaxResults)
+		case schemas.ListResourcesAssociatedToCustomLineItemInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourcesAssociatedToCustomLineItemInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListResourcesAssociatedToCustomLineItemOutput struct {
 
 	//  The custom line item ARN for which the resource associations are listed.
@@ -70,77 +118,57 @@ type ListResourcesAssociatedToCustomLineItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourcesAssociatedToCustomLineItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourcesAssociatedToCustomLineItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourcesAssociatedToCustomLineItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemOutput_Arn, *v.Arn)
+	}
+	serializeListResourcesAssociatedToCustomLineItemResponseList(s, schemas.ListResourcesAssociatedToCustomLineItemOutput_AssociatedResources, v.AssociatedResources)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourcesAssociatedToCustomLineItemOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListResourcesAssociatedToCustomLineItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourcesAssociatedToCustomLineItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourcesAssociatedToCustomLineItemOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListResourcesAssociatedToCustomLineItemOutput_Arn, v.Arn)
+		case schemas.ListResourcesAssociatedToCustomLineItemOutput_AssociatedResources:
+			return deserializeListResourcesAssociatedToCustomLineItemResponseList(d, schemas.ListResourcesAssociatedToCustomLineItemOutput_AssociatedResources, &v.AssociatedResources)
+		case schemas.ListResourcesAssociatedToCustomLineItemOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourcesAssociatedToCustomLineItemOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourcesAssociatedToCustomLineItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcesAssociatedToCustomLineItem, schemas.ListResourcesAssociatedToCustomLineItemInput, schemas.ListResourcesAssociatedToCustomLineItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourcesAssociatedToCustomLineItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourcesAssociatedToCustomLineItem, schemas.ListResourcesAssociatedToCustomLineItemInput, schemas.ListResourcesAssociatedToCustomLineItemOutput), output: &ListResourcesAssociatedToCustomLineItemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourcesAssociatedToCustomLineItem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResourcesAssociatedToCustomLineItem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListResourcesAssociatedToCustomLineItemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourcesAssociatedToCustomLineItem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +181,6 @@ func (c *Client) addOperationListResourcesAssociatedToCustomLineItemMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +284,3 @@ type ListResourcesAssociatedToCustomLineItemAPIClient interface {
 }
 
 var _ ListResourcesAssociatedToCustomLineItemAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResourcesAssociatedToCustomLineItem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResourcesAssociatedToCustomLineItem",
-	}
-}

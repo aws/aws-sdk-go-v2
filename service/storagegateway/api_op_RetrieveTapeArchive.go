@@ -4,10 +4,9 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves an archived virtual tape from the virtual tape shelf (VTS) to a tape
@@ -57,6 +56,21 @@ type RetrieveTapeArchiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveTapeArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveTapeArchiveInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveTapeArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.RetrieveTapeArchiveInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.TapeARN != nil {
+		s.WriteString(schemas.RetrieveTapeArchiveInput_TapeARN, *v.TapeARN)
+	}
+}
+
 // RetrieveTapeArchiveOutput
 type RetrieveTapeArchiveOutput struct {
 
@@ -69,77 +83,48 @@ type RetrieveTapeArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RetrieveTapeArchiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RetrieveTapeArchiveOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RetrieveTapeArchiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TapeARN != nil {
+		s.WriteString(schemas.RetrieveTapeArchiveOutput_TapeARN, *v.TapeARN)
+	}
+}
+func (v *RetrieveTapeArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetrieveTapeArchiveOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetrieveTapeArchiveOutput_TapeARN:
+			v.TapeARN = new(string)
+			return d.ReadString(schemas.RetrieveTapeArchiveOutput_TapeARN, v.TapeARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRetrieveTapeArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveTapeArchive, schemas.RetrieveTapeArchiveInput, schemas.RetrieveTapeArchiveOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRetrieveTapeArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RetrieveTapeArchive, schemas.RetrieveTapeArchiveInput, schemas.RetrieveTapeArchiveOutput), output: &RetrieveTapeArchiveOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRetrieveTapeArchive{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RetrieveTapeArchive"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRetrieveTapeArchiveValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRetrieveTapeArchive(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +139,8 @@ func (c *Client) addOperationRetrieveTapeArchiveMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRetrieveTapeArchive(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RetrieveTapeArchive",
-	}
 }

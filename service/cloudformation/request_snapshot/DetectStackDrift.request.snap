@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DetectStackDrift&LogicalResourceIds.member.1=__Member__&LogicalResourceIds.member.2=__Member__&StackName=__StackName__&Version=2010-05-15

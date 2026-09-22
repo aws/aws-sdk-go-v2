@@ -4,11 +4,10 @@ package athena
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the details of a single prepared statement or a list of up to 256
@@ -46,6 +45,19 @@ type BatchGetPreparedStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetPreparedStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetPreparedStatementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetPreparedStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePreparedStatementNameList(s, schemas.BatchGetPreparedStatementInput_PreparedStatementNames, v.PreparedStatementNames)
+	if v.WorkGroup != nil {
+		s.WriteString(schemas.BatchGetPreparedStatementInput_WorkGroup, *v.WorkGroup)
+	}
+}
+
 type BatchGetPreparedStatementOutput struct {
 
 	// The list of prepared statements returned.
@@ -61,77 +73,48 @@ type BatchGetPreparedStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetPreparedStatementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetPreparedStatementOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetPreparedStatementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePreparedStatementDetailsList(s, schemas.BatchGetPreparedStatementOutput_PreparedStatements, v.PreparedStatements)
+	serializeUnprocessedPreparedStatementNameList(s, schemas.BatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames, v.UnprocessedPreparedStatementNames)
+}
+func (v *BatchGetPreparedStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetPreparedStatementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetPreparedStatementOutput_PreparedStatements:
+			return deserializePreparedStatementDetailsList(d, schemas.BatchGetPreparedStatementOutput_PreparedStatements, &v.PreparedStatements)
+		case schemas.BatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames:
+			return deserializeUnprocessedPreparedStatementNameList(d, schemas.BatchGetPreparedStatementOutput_UnprocessedPreparedStatementNames, &v.UnprocessedPreparedStatementNames)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetPreparedStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetPreparedStatement, schemas.BatchGetPreparedStatementInput, schemas.BatchGetPreparedStatementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetPreparedStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetPreparedStatement, schemas.BatchGetPreparedStatementInput, schemas.BatchGetPreparedStatementOutput), output: &BatchGetPreparedStatementOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetPreparedStatement{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetPreparedStatement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetPreparedStatementValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetPreparedStatement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +129,8 @@ func (c *Client) addOperationBatchGetPreparedStatementMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetPreparedStatement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetPreparedStatement",
-	}
 }

@@ -5,10 +5,10 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Lists decoder manifests.
@@ -56,6 +56,50 @@ type ListDecoderManifestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDecoderManifestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDecoderManifestsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDecoderManifestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ListResponseScope != "" {
+		s.WriteString(schemas.ListDecoderManifestsRequest_listResponseScope, string(v.ListResponseScope))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDecoderManifestsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelManifestArn != nil {
+		s.WriteString(schemas.ListDecoderManifestsRequest_modelManifestArn, *v.ModelManifestArn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDecoderManifestsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDecoderManifestsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDecoderManifestsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDecoderManifestsRequest_listResponseScope:
+			var ev string
+			if err := d.ReadString(schemas.ListDecoderManifestsRequest_listResponseScope, &ev); err != nil {
+				return err
+			}
+			v.ListResponseScope = types.ListResponseScope(ev)
+			return nil
+		case schemas.ListDecoderManifestsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListDecoderManifestsRequest_maxResults, v.MaxResults)
+		case schemas.ListDecoderManifestsRequest_modelManifestArn:
+			v.ModelManifestArn = new(string)
+			return d.ReadString(schemas.ListDecoderManifestsRequest_modelManifestArn, v.ModelManifestArn)
+		case schemas.ListDecoderManifestsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDecoderManifestsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListDecoderManifestsOutput struct {
 
 	//  The token to retrieve the next set of results, or null if there are no more
@@ -71,74 +115,48 @@ type ListDecoderManifestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDecoderManifestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDecoderManifestsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDecoderManifestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDecoderManifestsResponse_nextToken, *v.NextToken)
+	}
+	serializedecoderManifestSummaries(s, schemas.ListDecoderManifestsResponse_summaries, v.Summaries)
+}
+func (v *ListDecoderManifestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDecoderManifestsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDecoderManifestsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDecoderManifestsResponse_nextToken, v.NextToken)
+		case schemas.ListDecoderManifestsResponse_summaries:
+			return deserializedecoderManifestSummaries(d, schemas.ListDecoderManifestsResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDecoderManifestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDecoderManifests, schemas.ListDecoderManifestsRequest, schemas.ListDecoderManifestsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListDecoderManifests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDecoderManifests, schemas.ListDecoderManifestsRequest, schemas.ListDecoderManifestsResponse), output: &ListDecoderManifestsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListDecoderManifests{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDecoderManifests"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDecoderManifests(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +169,6 @@ func (c *Client) addOperationListDecoderManifestsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +270,3 @@ type ListDecoderManifestsAPIClient interface {
 }
 
 var _ ListDecoderManifestsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDecoderManifests(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDecoderManifests",
-	}
-}

@@ -4,11 +4,10 @@ package keyspaces
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -165,6 +164,90 @@ type RestoreTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingSpecification != nil {
+		s.WriteStruct(schemas.RestoreTableRequest_autoScalingSpecification)
+		v.AutoScalingSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CapacitySpecificationOverride != nil {
+		s.WriteStruct(schemas.RestoreTableRequest_capacitySpecificationOverride)
+		v.CapacitySpecificationOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionSpecificationOverride != nil {
+		s.WriteStruct(schemas.RestoreTableRequest_encryptionSpecificationOverride)
+		v.EncryptionSpecificationOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PointInTimeRecoveryOverride != nil {
+		s.WriteStruct(schemas.RestoreTableRequest_pointInTimeRecoveryOverride)
+		v.PointInTimeRecoveryOverride.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeReplicaSpecificationList(s, schemas.RestoreTableRequest_replicaSpecifications, v.ReplicaSpecifications)
+	if v.RestoreTimestamp != nil {
+		s.WriteTime(schemas.RestoreTableRequest_restoreTimestamp, *v.RestoreTimestamp)
+	}
+	if v.SourceKeyspaceName != nil {
+		s.WriteString(schemas.RestoreTableRequest_sourceKeyspaceName, *v.SourceKeyspaceName)
+	}
+	if v.SourceTableName != nil {
+		s.WriteString(schemas.RestoreTableRequest_sourceTableName, *v.SourceTableName)
+	}
+	serializeTagList(s, schemas.RestoreTableRequest_tagsOverride, v.TagsOverride)
+	if v.TargetKeyspaceName != nil {
+		s.WriteString(schemas.RestoreTableRequest_targetKeyspaceName, *v.TargetKeyspaceName)
+	}
+	if v.TargetTableName != nil {
+		s.WriteString(schemas.RestoreTableRequest_targetTableName, *v.TargetTableName)
+	}
+}
+func (v *RestoreTableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTableRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTableRequest_autoScalingSpecification:
+			v.AutoScalingSpecification = &types.AutoScalingSpecification{}
+			return v.AutoScalingSpecification.Deserialize(d)
+		case schemas.RestoreTableRequest_capacitySpecificationOverride:
+			v.CapacitySpecificationOverride = &types.CapacitySpecification{}
+			return v.CapacitySpecificationOverride.Deserialize(d)
+		case schemas.RestoreTableRequest_encryptionSpecificationOverride:
+			v.EncryptionSpecificationOverride = &types.EncryptionSpecification{}
+			return v.EncryptionSpecificationOverride.Deserialize(d)
+		case schemas.RestoreTableRequest_pointInTimeRecoveryOverride:
+			v.PointInTimeRecoveryOverride = &types.PointInTimeRecovery{}
+			return v.PointInTimeRecoveryOverride.Deserialize(d)
+		case schemas.RestoreTableRequest_replicaSpecifications:
+			return deserializeReplicaSpecificationList(d, schemas.RestoreTableRequest_replicaSpecifications, &v.ReplicaSpecifications)
+		case schemas.RestoreTableRequest_restoreTimestamp:
+			v.RestoreTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RestoreTableRequest_restoreTimestamp, v.RestoreTimestamp)
+		case schemas.RestoreTableRequest_sourceKeyspaceName:
+			v.SourceKeyspaceName = new(string)
+			return d.ReadString(schemas.RestoreTableRequest_sourceKeyspaceName, v.SourceKeyspaceName)
+		case schemas.RestoreTableRequest_sourceTableName:
+			v.SourceTableName = new(string)
+			return d.ReadString(schemas.RestoreTableRequest_sourceTableName, v.SourceTableName)
+		case schemas.RestoreTableRequest_tagsOverride:
+			return deserializeTagList(d, schemas.RestoreTableRequest_tagsOverride, &v.TagsOverride)
+		case schemas.RestoreTableRequest_targetKeyspaceName:
+			v.TargetKeyspaceName = new(string)
+			return d.ReadString(schemas.RestoreTableRequest_targetKeyspaceName, v.TargetKeyspaceName)
+		case schemas.RestoreTableRequest_targetTableName:
+			v.TargetTableName = new(string)
+			return d.ReadString(schemas.RestoreTableRequest_targetTableName, v.TargetTableName)
+		}
+		return nil
+	})
+}
+
 type RestoreTableOutput struct {
 
 	// The Amazon Resource Name (ARN) of the restored table.
@@ -178,77 +261,48 @@ type RestoreTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RestoredTableARN != nil {
+		s.WriteString(schemas.RestoreTableResponse_restoredTableARN, *v.RestoredTableARN)
+	}
+}
+func (v *RestoreTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTableResponse_restoredTableARN:
+			v.RestoredTableARN = new(string)
+			return d.ReadString(schemas.RestoreTableResponse_restoredTableARN, v.RestoredTableARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreTable, schemas.RestoreTableRequest, schemas.RestoreTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRestoreTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreTable, schemas.RestoreTableRequest, schemas.RestoreTableResponse), output: &RestoreTableOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRestoreTable{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreTable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRestoreTableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreTable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -263,22 +317,8 @@ func (c *Client) addOperationRestoreTableMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRestoreTable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RestoreTable",
-	}
 }

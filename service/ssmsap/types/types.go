@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -44,6 +46,88 @@ type Application struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Application) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Application)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Application) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppRegistryArn != nil {
+		s.WriteString(schemas.Application_AppRegistryArn, *v.AppRegistryArn)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Application_Arn, *v.Arn)
+	}
+	serializeApplicationArnList(s, schemas.Application_AssociatedApplicationArns, v.AssociatedApplicationArns)
+	serializeComponentIdList(s, schemas.Application_Components, v.Components)
+	if v.DiscoveryStatus != "" {
+		s.WriteString(schemas.Application_DiscoveryStatus, string(v.DiscoveryStatus))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Application_Id, *v.Id)
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.Application_LastUpdated, *v.LastUpdated)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Application_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.Application_StatusMessage, *v.StatusMessage)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Application_Type, string(v.Type))
+	}
+}
+func (v *Application) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Application, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Application_AppRegistryArn:
+			v.AppRegistryArn = new(string)
+			return d.ReadString(schemas.Application_AppRegistryArn, v.AppRegistryArn)
+		case schemas.Application_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Application_Arn, v.Arn)
+		case schemas.Application_AssociatedApplicationArns:
+			return deserializeApplicationArnList(d, schemas.Application_AssociatedApplicationArns, &v.AssociatedApplicationArns)
+		case schemas.Application_Components:
+			return deserializeComponentIdList(d, schemas.Application_Components, &v.Components)
+		case schemas.Application_DiscoveryStatus:
+			var ev string
+			if err := d.ReadString(schemas.Application_DiscoveryStatus, &ev); err != nil {
+				return err
+			}
+			v.DiscoveryStatus = ApplicationDiscoveryStatus(ev)
+			return nil
+		case schemas.Application_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Application_Id, v.Id)
+		case schemas.Application_LastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.Application_LastUpdated, v.LastUpdated)
+		case schemas.Application_Status:
+			var ev string
+			if err := d.ReadString(schemas.Application_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ApplicationStatus(ev)
+			return nil
+		case schemas.Application_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.Application_StatusMessage, v.StatusMessage)
+		case schemas.Application_Type:
+			var ev string
+			if err := d.ReadString(schemas.Application_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ApplicationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The credentials of your SAP application.
 type ApplicationCredential struct {
 
@@ -64,6 +148,44 @@ type ApplicationCredential struct {
 	SecretId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationCredential) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationCredential)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationCredential) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialType != "" {
+		s.WriteString(schemas.ApplicationCredential_CredentialType, string(v.CredentialType))
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.ApplicationCredential_DatabaseName, *v.DatabaseName)
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.ApplicationCredential_SecretId, *v.SecretId)
+	}
+}
+func (v *ApplicationCredential) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationCredential, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationCredential_CredentialType:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationCredential_CredentialType, &ev); err != nil {
+				return err
+			}
+			v.CredentialType = CredentialType(ev)
+			return nil
+		case schemas.ApplicationCredential_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.ApplicationCredential_DatabaseName, v.DatabaseName)
+		case schemas.ApplicationCredential_SecretId:
+			v.SecretId = new(string)
+			return d.ReadString(schemas.ApplicationCredential_SecretId, v.SecretId)
+		}
+		return nil
+	})
 }
 
 // The summary of the SAP application registered with AWS Systems Manager for SAP.
@@ -87,6 +209,57 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ApplicationSummary_Arn, *v.Arn)
+	}
+	if v.DiscoveryStatus != "" {
+		s.WriteString(schemas.ApplicationSummary_DiscoveryStatus, string(v.DiscoveryStatus))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ApplicationSummary_Id, *v.Id)
+	}
+	serializeTagMap(s, schemas.ApplicationSummary_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.ApplicationSummary_Type, string(v.Type))
+	}
+}
+func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ApplicationSummary_Arn, v.Arn)
+		case schemas.ApplicationSummary_DiscoveryStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSummary_DiscoveryStatus, &ev); err != nil {
+				return err
+			}
+			v.DiscoveryStatus = ApplicationDiscoveryStatus(ev)
+			return nil
+		case schemas.ApplicationSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ApplicationSummary_Id, v.Id)
+		case schemas.ApplicationSummary_Tags:
+			return deserializeTagMap(d, schemas.ApplicationSummary_Tags, &v.Tags)
+		case schemas.ApplicationSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ApplicationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the properties of the associated host.
 type AssociatedHost struct {
 
@@ -105,6 +278,43 @@ type AssociatedHost struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatedHost) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatedHost)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatedHost) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ec2InstanceId != nil {
+		s.WriteString(schemas.AssociatedHost_Ec2InstanceId, *v.Ec2InstanceId)
+	}
+	if v.Hostname != nil {
+		s.WriteString(schemas.AssociatedHost_Hostname, *v.Hostname)
+	}
+	serializeIpAddressList(s, schemas.AssociatedHost_IpAddresses, v.IpAddresses)
+	if v.OsVersion != nil {
+		s.WriteString(schemas.AssociatedHost_OsVersion, *v.OsVersion)
+	}
+}
+func (v *AssociatedHost) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatedHost, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatedHost_Ec2InstanceId:
+			v.Ec2InstanceId = new(string)
+			return d.ReadString(schemas.AssociatedHost_Ec2InstanceId, v.Ec2InstanceId)
+		case schemas.AssociatedHost_Hostname:
+			v.Hostname = new(string)
+			return d.ReadString(schemas.AssociatedHost_Hostname, v.Hostname)
+		case schemas.AssociatedHost_IpAddresses:
+			return deserializeIpAddressList(d, schemas.AssociatedHost_IpAddresses, &v.IpAddresses)
+		case schemas.AssociatedHost_OsVersion:
+			v.OsVersion = new(string)
+			return d.ReadString(schemas.AssociatedHost_OsVersion, v.OsVersion)
+		}
+		return nil
+	})
+}
+
 // Configuration parameters for AWS Backint Agent for SAP HANA. You can backup
 // your SAP HANA database with AWS Backup or Amazon S3.
 type BackintConfig struct {
@@ -120,6 +330,38 @@ type BackintConfig struct {
 	EnsureNoBackupInProcess *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *BackintConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BackintConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BackintConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BackintMode != "" {
+		s.WriteString(schemas.BackintConfig_BackintMode, string(v.BackintMode))
+	}
+	if v.EnsureNoBackupInProcess != nil {
+		s.WriteBool(schemas.BackintConfig_EnsureNoBackupInProcess, *v.EnsureNoBackupInProcess)
+	}
+}
+func (v *BackintConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BackintConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BackintConfig_BackintMode:
+			var ev string
+			if err := d.ReadString(schemas.BackintConfig_BackintMode, &ev); err != nil {
+				return err
+			}
+			v.BackintMode = BackintMode(ev)
+			return nil
+		case schemas.BackintConfig_EnsureNoBackupInProcess:
+			v.EnsureNoBackupInProcess = new(bool)
+			return d.ReadBool(schemas.BackintConfig_EnsureNoBackupInProcess, v.EnsureNoBackupInProcess)
+		}
+		return nil
+	})
 }
 
 // The SAP component of your application.
@@ -214,6 +456,147 @@ type Component struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Component) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Component)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Component) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.Component_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Component_Arn, *v.Arn)
+	}
+	if v.AssociatedHost != nil {
+		s.WriteStruct(schemas.Component_AssociatedHost)
+		v.AssociatedHost.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeComponentIdList(s, schemas.Component_ChildComponents, v.ChildComponents)
+	if v.ComponentId != nil {
+		s.WriteString(schemas.Component_ComponentId, *v.ComponentId)
+	}
+	if v.ComponentType != "" {
+		s.WriteString(schemas.Component_ComponentType, string(v.ComponentType))
+	}
+	if v.DatabaseConnection != nil {
+		s.WriteStruct(schemas.Component_DatabaseConnection)
+		v.DatabaseConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDatabaseIdList(s, schemas.Component_Databases, v.Databases)
+	if v.HdbVersion != nil {
+		s.WriteString(schemas.Component_HdbVersion, *v.HdbVersion)
+	}
+	serializeHostList(s, schemas.Component_Hosts, v.Hosts)
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.Component_LastUpdated, *v.LastUpdated)
+	}
+	if v.ParentComponent != nil {
+		s.WriteString(schemas.Component_ParentComponent, *v.ParentComponent)
+	}
+	if v.PrimaryHost != nil {
+		s.WriteString(schemas.Component_PrimaryHost, *v.PrimaryHost)
+	}
+	if v.Resilience != nil {
+		s.WriteStruct(schemas.Component_Resilience)
+		v.Resilience.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SapFeature != nil {
+		s.WriteString(schemas.Component_SapFeature, *v.SapFeature)
+	}
+	if v.SapHostname != nil {
+		s.WriteString(schemas.Component_SapHostname, *v.SapHostname)
+	}
+	if v.SapKernelVersion != nil {
+		s.WriteString(schemas.Component_SapKernelVersion, *v.SapKernelVersion)
+	}
+	if v.Sid != nil {
+		s.WriteString(schemas.Component_Sid, *v.Sid)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Component_Status, string(v.Status))
+	}
+	if v.SystemNumber != nil {
+		s.WriteString(schemas.Component_SystemNumber, *v.SystemNumber)
+	}
+}
+func (v *Component) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Component, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Component_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.Component_ApplicationId, v.ApplicationId)
+		case schemas.Component_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Component_Arn, v.Arn)
+		case schemas.Component_AssociatedHost:
+			v.AssociatedHost = &AssociatedHost{}
+			return v.AssociatedHost.Deserialize(d)
+		case schemas.Component_ChildComponents:
+			return deserializeComponentIdList(d, schemas.Component_ChildComponents, &v.ChildComponents)
+		case schemas.Component_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.Component_ComponentId, v.ComponentId)
+		case schemas.Component_ComponentType:
+			var ev string
+			if err := d.ReadString(schemas.Component_ComponentType, &ev); err != nil {
+				return err
+			}
+			v.ComponentType = ComponentType(ev)
+			return nil
+		case schemas.Component_DatabaseConnection:
+			v.DatabaseConnection = &DatabaseConnection{}
+			return v.DatabaseConnection.Deserialize(d)
+		case schemas.Component_Databases:
+			return deserializeDatabaseIdList(d, schemas.Component_Databases, &v.Databases)
+		case schemas.Component_HdbVersion:
+			v.HdbVersion = new(string)
+			return d.ReadString(schemas.Component_HdbVersion, v.HdbVersion)
+		case schemas.Component_Hosts:
+			return deserializeHostList(d, schemas.Component_Hosts, &v.Hosts)
+		case schemas.Component_LastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.Component_LastUpdated, v.LastUpdated)
+		case schemas.Component_ParentComponent:
+			v.ParentComponent = new(string)
+			return d.ReadString(schemas.Component_ParentComponent, v.ParentComponent)
+		case schemas.Component_PrimaryHost:
+			v.PrimaryHost = new(string)
+			return d.ReadString(schemas.Component_PrimaryHost, v.PrimaryHost)
+		case schemas.Component_Resilience:
+			v.Resilience = &Resilience{}
+			return v.Resilience.Deserialize(d)
+		case schemas.Component_SapFeature:
+			v.SapFeature = new(string)
+			return d.ReadString(schemas.Component_SapFeature, v.SapFeature)
+		case schemas.Component_SapHostname:
+			v.SapHostname = new(string)
+			return d.ReadString(schemas.Component_SapHostname, v.SapHostname)
+		case schemas.Component_SapKernelVersion:
+			v.SapKernelVersion = new(string)
+			return d.ReadString(schemas.Component_SapKernelVersion, v.SapKernelVersion)
+		case schemas.Component_Sid:
+			v.Sid = new(string)
+			return d.ReadString(schemas.Component_Sid, v.Sid)
+		case schemas.Component_Status:
+			var ev string
+			if err := d.ReadString(schemas.Component_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ComponentStatus(ev)
+			return nil
+		case schemas.Component_SystemNumber:
+			v.SystemNumber = new(string)
+			return d.ReadString(schemas.Component_SystemNumber, v.SystemNumber)
+		}
+		return nil
+	})
+}
+
 // This is information about the component of your SAP application, such as Web
 // Dispatcher.
 type ComponentInfo struct {
@@ -242,6 +625,44 @@ type ComponentInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComponentInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComponentInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComponentInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentType != "" {
+		s.WriteString(schemas.ComponentInfo_ComponentType, string(v.ComponentType))
+	}
+	if v.Ec2InstanceId != nil {
+		s.WriteString(schemas.ComponentInfo_Ec2InstanceId, *v.Ec2InstanceId)
+	}
+	if v.Sid != nil {
+		s.WriteString(schemas.ComponentInfo_Sid, *v.Sid)
+	}
+}
+func (v *ComponentInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComponentInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComponentInfo_ComponentType:
+			var ev string
+			if err := d.ReadString(schemas.ComponentInfo_ComponentType, &ev); err != nil {
+				return err
+			}
+			v.ComponentType = ComponentType(ev)
+			return nil
+		case schemas.ComponentInfo_Ec2InstanceId:
+			v.Ec2InstanceId = new(string)
+			return d.ReadString(schemas.ComponentInfo_Ec2InstanceId, v.Ec2InstanceId)
+		case schemas.ComponentInfo_Sid:
+			v.Sid = new(string)
+			return d.ReadString(schemas.ComponentInfo_Sid, v.Sid)
+		}
+		return nil
+	})
+}
+
 // The summary of the component.
 type ComponentSummary struct {
 
@@ -263,6 +684,53 @@ type ComponentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComponentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComponentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComponentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ComponentSummary_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ComponentSummary_Arn, *v.Arn)
+	}
+	if v.ComponentId != nil {
+		s.WriteString(schemas.ComponentSummary_ComponentId, *v.ComponentId)
+	}
+	if v.ComponentType != "" {
+		s.WriteString(schemas.ComponentSummary_ComponentType, string(v.ComponentType))
+	}
+	serializeTagMap(s, schemas.ComponentSummary_Tags, v.Tags)
+}
+func (v *ComponentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComponentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComponentSummary_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ComponentSummary_ApplicationId, v.ApplicationId)
+		case schemas.ComponentSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ComponentSummary_Arn, v.Arn)
+		case schemas.ComponentSummary_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.ComponentSummary_ComponentId, v.ComponentId)
+		case schemas.ComponentSummary_ComponentType:
+			var ev string
+			if err := d.ReadString(schemas.ComponentSummary_ComponentType, &ev); err != nil {
+				return err
+			}
+			v.ComponentType = ComponentType(ev)
+			return nil
+		case schemas.ComponentSummary_Tags:
+			return deserializeTagMap(d, schemas.ComponentSummary_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Represents a configuration check definition supported by AWS Systems Manager
 // for SAP.
 type ConfigurationCheckDefinition struct {
@@ -281,6 +749,47 @@ type ConfigurationCheckDefinition struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfigurationCheckDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationCheckDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationCheckDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationTypeList(s, schemas.ConfigurationCheckDefinition_ApplicableApplicationTypes, v.ApplicableApplicationTypes)
+	if v.Description != nil {
+		s.WriteString(schemas.ConfigurationCheckDefinition_Description, *v.Description)
+	}
+	if v.Id != "" {
+		s.WriteString(schemas.ConfigurationCheckDefinition_Id, string(v.Id))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ConfigurationCheckDefinition_Name, *v.Name)
+	}
+}
+func (v *ConfigurationCheckDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationCheckDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationCheckDefinition_ApplicableApplicationTypes:
+			return deserializeApplicationTypeList(d, schemas.ConfigurationCheckDefinition_ApplicableApplicationTypes, &v.ApplicableApplicationTypes)
+		case schemas.ConfigurationCheckDefinition_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ConfigurationCheckDefinition_Description, v.Description)
+		case schemas.ConfigurationCheckDefinition_Id:
+			var ev string
+			if err := d.ReadString(schemas.ConfigurationCheckDefinition_Id, &ev); err != nil {
+				return err
+			}
+			v.Id = ConfigurationCheckType(ev)
+			return nil
+		case schemas.ConfigurationCheckDefinition_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ConfigurationCheckDefinition_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Represents a configuration check operation that has been executed against an
@@ -319,6 +828,92 @@ type ConfigurationCheckOperation struct {
 	StatusMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfigurationCheckOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurationCheckOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurationCheckOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ConfigurationCheckOperation_ApplicationId, *v.ApplicationId)
+	}
+	if v.ConfigurationCheckDescription != nil {
+		s.WriteString(schemas.ConfigurationCheckOperation_ConfigurationCheckDescription, *v.ConfigurationCheckDescription)
+	}
+	if v.ConfigurationCheckId != "" {
+		s.WriteString(schemas.ConfigurationCheckOperation_ConfigurationCheckId, string(v.ConfigurationCheckId))
+	}
+	if v.ConfigurationCheckName != nil {
+		s.WriteString(schemas.ConfigurationCheckOperation_ConfigurationCheckName, *v.ConfigurationCheckName)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ConfigurationCheckOperation_EndTime, *v.EndTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigurationCheckOperation_Id, *v.Id)
+	}
+	if v.RuleStatusCounts != nil {
+		s.WriteStruct(schemas.ConfigurationCheckOperation_RuleStatusCounts)
+		v.RuleStatusCounts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ConfigurationCheckOperation_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ConfigurationCheckOperation_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ConfigurationCheckOperation_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ConfigurationCheckOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurationCheckOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurationCheckOperation_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ConfigurationCheckOperation_ApplicationId, v.ApplicationId)
+		case schemas.ConfigurationCheckOperation_ConfigurationCheckDescription:
+			v.ConfigurationCheckDescription = new(string)
+			return d.ReadString(schemas.ConfigurationCheckOperation_ConfigurationCheckDescription, v.ConfigurationCheckDescription)
+		case schemas.ConfigurationCheckOperation_ConfigurationCheckId:
+			var ev string
+			if err := d.ReadString(schemas.ConfigurationCheckOperation_ConfigurationCheckId, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationCheckId = ConfigurationCheckType(ev)
+			return nil
+		case schemas.ConfigurationCheckOperation_ConfigurationCheckName:
+			v.ConfigurationCheckName = new(string)
+			return d.ReadString(schemas.ConfigurationCheckOperation_ConfigurationCheckName, v.ConfigurationCheckName)
+		case schemas.ConfigurationCheckOperation_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ConfigurationCheckOperation_EndTime, v.EndTime)
+		case schemas.ConfigurationCheckOperation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigurationCheckOperation_Id, v.Id)
+		case schemas.ConfigurationCheckOperation_RuleStatusCounts:
+			v.RuleStatusCounts = &RuleStatusCounts{}
+			return v.RuleStatusCounts.Deserialize(d)
+		case schemas.ConfigurationCheckOperation_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ConfigurationCheckOperation_StartTime, v.StartTime)
+		case schemas.ConfigurationCheckOperation_Status:
+			var ev string
+			if err := d.ReadString(schemas.ConfigurationCheckOperation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OperationStatus(ev)
+			return nil
+		case schemas.ConfigurationCheckOperation_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ConfigurationCheckOperation_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
 }
 
 // The SAP HANA database of the application registered with AWS Systems Manager
@@ -365,6 +960,96 @@ type Database struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Database) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Database)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Database) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.Database_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Database_Arn, *v.Arn)
+	}
+	if v.ComponentId != nil {
+		s.WriteString(schemas.Database_ComponentId, *v.ComponentId)
+	}
+	serializeComponentArnList(s, schemas.Database_ConnectedComponentArns, v.ConnectedComponentArns)
+	serializeApplicationCredentialList(s, schemas.Database_Credentials, v.Credentials)
+	if v.DatabaseId != nil {
+		s.WriteString(schemas.Database_DatabaseId, *v.DatabaseId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.Database_DatabaseName, *v.DatabaseName)
+	}
+	if v.DatabaseType != "" {
+		s.WriteString(schemas.Database_DatabaseType, string(v.DatabaseType))
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.Database_LastUpdated, *v.LastUpdated)
+	}
+	if v.PrimaryHost != nil {
+		s.WriteString(schemas.Database_PrimaryHost, *v.PrimaryHost)
+	}
+	if v.SQLPort != nil {
+		s.WriteInt32(schemas.Database_SQLPort, *v.SQLPort)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Database_Status, string(v.Status))
+	}
+}
+func (v *Database) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Database, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Database_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.Database_ApplicationId, v.ApplicationId)
+		case schemas.Database_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Database_Arn, v.Arn)
+		case schemas.Database_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.Database_ComponentId, v.ComponentId)
+		case schemas.Database_ConnectedComponentArns:
+			return deserializeComponentArnList(d, schemas.Database_ConnectedComponentArns, &v.ConnectedComponentArns)
+		case schemas.Database_Credentials:
+			return deserializeApplicationCredentialList(d, schemas.Database_Credentials, &v.Credentials)
+		case schemas.Database_DatabaseId:
+			v.DatabaseId = new(string)
+			return d.ReadString(schemas.Database_DatabaseId, v.DatabaseId)
+		case schemas.Database_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.Database_DatabaseName, v.DatabaseName)
+		case schemas.Database_DatabaseType:
+			var ev string
+			if err := d.ReadString(schemas.Database_DatabaseType, &ev); err != nil {
+				return err
+			}
+			v.DatabaseType = DatabaseType(ev)
+			return nil
+		case schemas.Database_LastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.Database_LastUpdated, v.LastUpdated)
+		case schemas.Database_PrimaryHost:
+			v.PrimaryHost = new(string)
+			return d.ReadString(schemas.Database_PrimaryHost, v.PrimaryHost)
+		case schemas.Database_SQLPort:
+			v.SQLPort = new(int32)
+			return d.ReadInt32(schemas.Database_SQLPort, v.SQLPort)
+		case schemas.Database_Status:
+			var ev string
+			if err := d.ReadString(schemas.Database_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DatabaseStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The connection specifications for the database.
 type DatabaseConnection struct {
 
@@ -378,6 +1063,44 @@ type DatabaseConnection struct {
 	DatabaseConnectionMethod DatabaseConnectionMethod
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatabaseConnection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseConnection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseConnection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionIp != nil {
+		s.WriteString(schemas.DatabaseConnection_ConnectionIp, *v.ConnectionIp)
+	}
+	if v.DatabaseArn != nil {
+		s.WriteString(schemas.DatabaseConnection_DatabaseArn, *v.DatabaseArn)
+	}
+	if v.DatabaseConnectionMethod != "" {
+		s.WriteString(schemas.DatabaseConnection_DatabaseConnectionMethod, string(v.DatabaseConnectionMethod))
+	}
+}
+func (v *DatabaseConnection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseConnection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseConnection_ConnectionIp:
+			v.ConnectionIp = new(string)
+			return d.ReadString(schemas.DatabaseConnection_ConnectionIp, v.ConnectionIp)
+		case schemas.DatabaseConnection_DatabaseArn:
+			v.DatabaseArn = new(string)
+			return d.ReadString(schemas.DatabaseConnection_DatabaseArn, v.DatabaseArn)
+		case schemas.DatabaseConnection_DatabaseConnectionMethod:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseConnection_DatabaseConnectionMethod, &ev); err != nil {
+				return err
+			}
+			v.DatabaseConnectionMethod = DatabaseConnectionMethod(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The summary of the database.
@@ -404,6 +1127,59 @@ type DatabaseSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DatabaseSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.DatabaseSummary_ApplicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.DatabaseSummary_Arn, *v.Arn)
+	}
+	if v.ComponentId != nil {
+		s.WriteString(schemas.DatabaseSummary_ComponentId, *v.ComponentId)
+	}
+	if v.DatabaseId != nil {
+		s.WriteString(schemas.DatabaseSummary_DatabaseId, *v.DatabaseId)
+	}
+	if v.DatabaseType != "" {
+		s.WriteString(schemas.DatabaseSummary_DatabaseType, string(v.DatabaseType))
+	}
+	serializeTagMap(s, schemas.DatabaseSummary_Tags, v.Tags)
+}
+func (v *DatabaseSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseSummary_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.DatabaseSummary_ApplicationId, v.ApplicationId)
+		case schemas.DatabaseSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DatabaseSummary_Arn, v.Arn)
+		case schemas.DatabaseSummary_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.DatabaseSummary_ComponentId, v.ComponentId)
+		case schemas.DatabaseSummary_DatabaseId:
+			v.DatabaseId = new(string)
+			return d.ReadString(schemas.DatabaseSummary_DatabaseId, v.DatabaseId)
+		case schemas.DatabaseSummary_DatabaseType:
+			var ev string
+			if err := d.ReadString(schemas.DatabaseSummary_DatabaseType, &ev); err != nil {
+				return err
+			}
+			v.DatabaseType = DatabaseType(ev)
+			return nil
+		case schemas.DatabaseSummary_Tags:
+			return deserializeTagMap(d, schemas.DatabaseSummary_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // A specific result obtained by specifying the name, value, and operator.
 type Filter struct {
 
@@ -425,6 +1201,44 @@ type Filter struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Filter_Name, *v.Name)
+	}
+	if v.Operator != "" {
+		s.WriteString(schemas.Filter_Operator, string(v.Operator))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Filter_Value, *v.Value)
+	}
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Filter_Name, v.Name)
+		case schemas.Filter_Operator:
+			var ev string
+			if err := d.ReadString(schemas.Filter_Operator, &ev); err != nil {
+				return err
+			}
+			v.Operator = FilterOperator(ev)
+			return nil
+		case schemas.Filter_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Filter_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes the properties of the Dedicated Host.
@@ -451,6 +1265,62 @@ type Host struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Host) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Host)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Host) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2InstanceId != nil {
+		s.WriteString(schemas.Host_EC2InstanceId, *v.EC2InstanceId)
+	}
+	if v.HostIp != nil {
+		s.WriteString(schemas.Host_HostIp, *v.HostIp)
+	}
+	if v.HostName != nil {
+		s.WriteString(schemas.Host_HostName, *v.HostName)
+	}
+	if v.HostRole != "" {
+		s.WriteString(schemas.Host_HostRole, string(v.HostRole))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.Host_InstanceId, *v.InstanceId)
+	}
+	if v.OsVersion != nil {
+		s.WriteString(schemas.Host_OsVersion, *v.OsVersion)
+	}
+}
+func (v *Host) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Host, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Host_EC2InstanceId:
+			v.EC2InstanceId = new(string)
+			return d.ReadString(schemas.Host_EC2InstanceId, v.EC2InstanceId)
+		case schemas.Host_HostIp:
+			v.HostIp = new(string)
+			return d.ReadString(schemas.Host_HostIp, v.HostIp)
+		case schemas.Host_HostName:
+			v.HostName = new(string)
+			return d.ReadString(schemas.Host_HostName, v.HostName)
+		case schemas.Host_HostRole:
+			var ev string
+			if err := d.ReadString(schemas.Host_HostRole, &ev); err != nil {
+				return err
+			}
+			v.HostRole = HostRole(ev)
+			return nil
+		case schemas.Host_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.Host_InstanceId, v.InstanceId)
+		case schemas.Host_OsVersion:
+			v.OsVersion = new(string)
+			return d.ReadString(schemas.Host_OsVersion, v.OsVersion)
+		}
+		return nil
+	})
+}
+
 // Provides information of the IP address.
 type IpAddressMember struct {
 
@@ -464,6 +1334,44 @@ type IpAddressMember struct {
 	Primary *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *IpAddressMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IpAddressMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IpAddressMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationType != "" {
+		s.WriteString(schemas.IpAddressMember_AllocationType, string(v.AllocationType))
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.IpAddressMember_IpAddress, *v.IpAddress)
+	}
+	if v.Primary != nil {
+		s.WriteBool(schemas.IpAddressMember_Primary, *v.Primary)
+	}
+}
+func (v *IpAddressMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IpAddressMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IpAddressMember_AllocationType:
+			var ev string
+			if err := d.ReadString(schemas.IpAddressMember_AllocationType, &ev); err != nil {
+				return err
+			}
+			v.AllocationType = AllocationType(ev)
+			return nil
+		case schemas.IpAddressMember_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.IpAddressMember_IpAddress, v.IpAddress)
+		case schemas.IpAddressMember_Primary:
+			v.Primary = new(bool)
+			return d.ReadBool(schemas.IpAddressMember_Primary, v.Primary)
+		}
+		return nil
+	})
 }
 
 // The operations performed by AWS Systems Manager for SAP.
@@ -503,6 +1411,89 @@ type Operation struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Operation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Operation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Operation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Operation_EndTime, *v.EndTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Operation_Id, *v.Id)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.Operation_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	serializeOperationProperties(s, schemas.Operation_Properties, v.Properties)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.Operation_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.Operation_ResourceId, *v.ResourceId)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.Operation_ResourceType, *v.ResourceType)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Operation_StartTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Operation_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.Operation_StatusMessage, *v.StatusMessage)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Operation_Type, *v.Type)
+	}
+}
+func (v *Operation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Operation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Operation_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Operation_EndTime, v.EndTime)
+		case schemas.Operation_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Operation_Id, v.Id)
+		case schemas.Operation_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.Operation_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.Operation_Properties:
+			return deserializeOperationProperties(d, schemas.Operation_Properties, &v.Properties)
+		case schemas.Operation_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.Operation_ResourceArn, v.ResourceArn)
+		case schemas.Operation_ResourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.Operation_ResourceId, v.ResourceId)
+		case schemas.Operation_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.Operation_ResourceType, v.ResourceType)
+		case schemas.Operation_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Operation_StartTime, v.StartTime)
+		case schemas.Operation_Status:
+			var ev string
+			if err := d.ReadString(schemas.Operation_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OperationStatus(ev)
+			return nil
+		case schemas.Operation_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.Operation_StatusMessage, v.StatusMessage)
+		case schemas.Operation_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Operation_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // An operation event returns details for an operation, including key milestones
@@ -545,6 +1536,58 @@ type OperationEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.OperationEvent_Description, *v.Description)
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.OperationEvent_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OperationEvent_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.OperationEvent_StatusMessage, *v.StatusMessage)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.OperationEvent_Timestamp, *v.Timestamp)
+	}
+}
+func (v *OperationEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationEvent_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.OperationEvent_Description, v.Description)
+		case schemas.OperationEvent_Resource:
+			v.Resource = &Resource{}
+			return v.Resource.Deserialize(d)
+		case schemas.OperationEvent_Status:
+			var ev string
+			if err := d.ReadString(schemas.OperationEvent_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OperationEventStatus(ev)
+			return nil
+		case schemas.OperationEvent_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.OperationEvent_StatusMessage, v.StatusMessage)
+		case schemas.OperationEvent_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.OperationEvent_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
+}
+
 // Details of the SAP HANA system replication for the instance.
 type Resilience struct {
 
@@ -566,6 +1609,64 @@ type Resilience struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Resilience) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resilience)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resilience) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterStatus != "" {
+		s.WriteString(schemas.Resilience_ClusterStatus, string(v.ClusterStatus))
+	}
+	if v.EnqueueReplication != nil {
+		s.WriteBool(schemas.Resilience_EnqueueReplication, *v.EnqueueReplication)
+	}
+	if v.HsrOperationMode != "" {
+		s.WriteString(schemas.Resilience_HsrOperationMode, string(v.HsrOperationMode))
+	}
+	if v.HsrReplicationMode != "" {
+		s.WriteString(schemas.Resilience_HsrReplicationMode, string(v.HsrReplicationMode))
+	}
+	if v.HsrTier != nil {
+		s.WriteString(schemas.Resilience_HsrTier, *v.HsrTier)
+	}
+}
+func (v *Resilience) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resilience, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resilience_ClusterStatus:
+			var ev string
+			if err := d.ReadString(schemas.Resilience_ClusterStatus, &ev); err != nil {
+				return err
+			}
+			v.ClusterStatus = ClusterStatus(ev)
+			return nil
+		case schemas.Resilience_EnqueueReplication:
+			v.EnqueueReplication = new(bool)
+			return d.ReadBool(schemas.Resilience_EnqueueReplication, v.EnqueueReplication)
+		case schemas.Resilience_HsrOperationMode:
+			var ev string
+			if err := d.ReadString(schemas.Resilience_HsrOperationMode, &ev); err != nil {
+				return err
+			}
+			v.HsrOperationMode = OperationMode(ev)
+			return nil
+		case schemas.Resilience_HsrReplicationMode:
+			var ev string
+			if err := d.ReadString(schemas.Resilience_HsrReplicationMode, &ev); err != nil {
+				return err
+			}
+			v.HsrReplicationMode = ReplicationMode(ev)
+			return nil
+		case schemas.Resilience_HsrTier:
+			v.HsrTier = new(string)
+			return d.ReadString(schemas.Resilience_HsrTier, v.HsrTier)
+		}
+		return nil
+	})
+}
+
 // The resource contains a ResourceArn and the ResourceType .
 type Resource struct {
 
@@ -582,6 +1683,34 @@ type Resource struct {
 	ResourceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.Resource_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.Resource_ResourceType, *v.ResourceType)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.Resource_ResourceArn, v.ResourceArn)
+		case schemas.Resource_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.Resource_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // Represents the result of a single rule within a configuration check.
@@ -605,6 +1734,53 @@ type RuleResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.RuleResult_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RuleResult_Id, *v.Id)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RuleResult_Message, *v.Message)
+	}
+	serializeRuleResultMetadata(s, schemas.RuleResult_Metadata, v.Metadata)
+	if v.Status != "" {
+		s.WriteString(schemas.RuleResult_Status, string(v.Status))
+	}
+}
+func (v *RuleResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleResult_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RuleResult_Description, v.Description)
+		case schemas.RuleResult_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RuleResult_Id, v.Id)
+		case schemas.RuleResult_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RuleResult_Message, v.Message)
+		case schemas.RuleResult_Metadata:
+			return deserializeRuleResultMetadata(d, schemas.RuleResult_Metadata, &v.Metadata)
+		case schemas.RuleResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.RuleResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = RuleResultStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A summary of rule results, providing counts for each status type.
 type RuleStatusCounts struct {
 
@@ -626,6 +1802,52 @@ type RuleStatusCounts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleStatusCounts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleStatusCounts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleStatusCounts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Failed != nil {
+		s.WriteInt32(schemas.RuleStatusCounts_Failed, *v.Failed)
+	}
+	if v.Info != nil {
+		s.WriteInt32(schemas.RuleStatusCounts_Info, *v.Info)
+	}
+	if v.Passed != nil {
+		s.WriteInt32(schemas.RuleStatusCounts_Passed, *v.Passed)
+	}
+	if v.Unknown != nil {
+		s.WriteInt32(schemas.RuleStatusCounts_Unknown, *v.Unknown)
+	}
+	if v.Warning != nil {
+		s.WriteInt32(schemas.RuleStatusCounts_Warning, *v.Warning)
+	}
+}
+func (v *RuleStatusCounts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleStatusCounts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleStatusCounts_Failed:
+			v.Failed = new(int32)
+			return d.ReadInt32(schemas.RuleStatusCounts_Failed, v.Failed)
+		case schemas.RuleStatusCounts_Info:
+			v.Info = new(int32)
+			return d.ReadInt32(schemas.RuleStatusCounts_Info, v.Info)
+		case schemas.RuleStatusCounts_Passed:
+			v.Passed = new(int32)
+			return d.ReadInt32(schemas.RuleStatusCounts_Passed, v.Passed)
+		case schemas.RuleStatusCounts_Unknown:
+			v.Unknown = new(int32)
+			return d.ReadInt32(schemas.RuleStatusCounts_Unknown, v.Unknown)
+		case schemas.RuleStatusCounts_Warning:
+			v.Warning = new(int32)
+			return d.ReadInt32(schemas.RuleStatusCounts_Warning, v.Warning)
+		}
+		return nil
+	})
+}
+
 // Represents the result of a sub-check within a configuration check operation.
 type SubCheckResult struct {
 
@@ -642,6 +1864,43 @@ type SubCheckResult struct {
 	References []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubCheckResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubCheckResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubCheckResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.SubCheckResult_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.SubCheckResult_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SubCheckResult_Name, *v.Name)
+	}
+	serializeSubCheckReferencesList(s, schemas.SubCheckResult_References, v.References)
+}
+func (v *SubCheckResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubCheckResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubCheckResult_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.SubCheckResult_Description, v.Description)
+		case schemas.SubCheckResult_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SubCheckResult_Id, v.Id)
+		case schemas.SubCheckResult_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SubCheckResult_Name, v.Name)
+		case schemas.SubCheckResult_References:
+			return deserializeSubCheckReferencesList(d, schemas.SubCheckResult_References, &v.References)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

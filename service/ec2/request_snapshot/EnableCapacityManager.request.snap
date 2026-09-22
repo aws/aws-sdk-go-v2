@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=EnableCapacityManager&ClientToken=__ClientToken__&DryRun=true&OrganizationsAccess=true&Version=2016-11-15

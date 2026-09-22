@@ -1,0 +1,4 @@
+GET /usageplans?keyId=__KeyId__&limit=1&position=__Position__
+
+Accept: application/json
+

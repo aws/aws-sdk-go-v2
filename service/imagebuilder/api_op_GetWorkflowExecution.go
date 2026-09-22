@@ -4,15 +4,13 @@ package imagebuilder
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the runtime information that was logged for a specific runtime instance of
-// the workflow.
+// Retrieves runtime information for a specific runtime instance of the workflow.
 func (c *Client) GetWorkflowExecution(ctx context.Context, params *GetWorkflowExecutionInput, optFns ...func(*Options)) (*GetWorkflowExecutionOutput, error) {
 	if params == nil {
 		params = &GetWorkflowExecutionInput{}
@@ -37,6 +35,18 @@ type GetWorkflowExecutionInput struct {
 	WorkflowExecutionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWorkflowExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkflowExecutionId != nil {
+		s.WriteString(schemas.GetWorkflowExecutionRequest_workflowExecutionId, *v.WorkflowExecutionId)
+	}
 }
 
 type GetWorkflowExecutionOutput struct {
@@ -100,77 +110,130 @@ type GetWorkflowExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_endTime, *v.EndTime)
+	}
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_message, *v.Message)
+	}
+	if v.ParallelGroup != nil {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_parallelGroup, *v.ParallelGroup)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_requestId, *v.RequestId)
+	}
+	if v.StartTime != nil {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_status, string(v.Status))
+	}
+	if v.TotalStepCount != 0 {
+		s.WriteInt32(schemas.GetWorkflowExecutionResponse_totalStepCount, v.TotalStepCount)
+	}
+	if v.TotalStepsFailed != 0 {
+		s.WriteInt32(schemas.GetWorkflowExecutionResponse_totalStepsFailed, v.TotalStepsFailed)
+	}
+	if v.TotalStepsSkipped != 0 {
+		s.WriteInt32(schemas.GetWorkflowExecutionResponse_totalStepsSkipped, v.TotalStepsSkipped)
+	}
+	if v.TotalStepsSucceeded != 0 {
+		s.WriteInt32(schemas.GetWorkflowExecutionResponse_totalStepsSucceeded, v.TotalStepsSucceeded)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_type, string(v.Type))
+	}
+	if v.WorkflowBuildVersionArn != nil {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_workflowBuildVersionArn, *v.WorkflowBuildVersionArn)
+	}
+	if v.WorkflowExecutionId != nil {
+		s.WriteString(schemas.GetWorkflowExecutionResponse_workflowExecutionId, *v.WorkflowExecutionId)
+	}
+}
+func (v *GetWorkflowExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowExecutionResponse_endTime:
+			v.EndTime = new(string)
+			return d.ReadString(schemas.GetWorkflowExecutionResponse_endTime, v.EndTime)
+		case schemas.GetWorkflowExecutionResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.GetWorkflowExecutionResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.GetWorkflowExecutionResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetWorkflowExecutionResponse_message, v.Message)
+		case schemas.GetWorkflowExecutionResponse_parallelGroup:
+			v.ParallelGroup = new(string)
+			return d.ReadString(schemas.GetWorkflowExecutionResponse_parallelGroup, v.ParallelGroup)
+		case schemas.GetWorkflowExecutionResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetWorkflowExecutionResponse_requestId, v.RequestId)
+		case schemas.GetWorkflowExecutionResponse_startTime:
+			v.StartTime = new(string)
+			return d.ReadString(schemas.GetWorkflowExecutionResponse_startTime, v.StartTime)
+		case schemas.GetWorkflowExecutionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowExecutionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkflowExecutionStatus(ev)
+			return nil
+		case schemas.GetWorkflowExecutionResponse_totalStepCount:
+			return d.ReadInt32(schemas.GetWorkflowExecutionResponse_totalStepCount, &v.TotalStepCount)
+		case schemas.GetWorkflowExecutionResponse_totalStepsFailed:
+			return d.ReadInt32(schemas.GetWorkflowExecutionResponse_totalStepsFailed, &v.TotalStepsFailed)
+		case schemas.GetWorkflowExecutionResponse_totalStepsSkipped:
+			return d.ReadInt32(schemas.GetWorkflowExecutionResponse_totalStepsSkipped, &v.TotalStepsSkipped)
+		case schemas.GetWorkflowExecutionResponse_totalStepsSucceeded:
+			return d.ReadInt32(schemas.GetWorkflowExecutionResponse_totalStepsSucceeded, &v.TotalStepsSucceeded)
+		case schemas.GetWorkflowExecutionResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowExecutionResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.WorkflowType(ev)
+			return nil
+		case schemas.GetWorkflowExecutionResponse_workflowBuildVersionArn:
+			v.WorkflowBuildVersionArn = new(string)
+			return d.ReadString(schemas.GetWorkflowExecutionResponse_workflowBuildVersionArn, v.WorkflowBuildVersionArn)
+		case schemas.GetWorkflowExecutionResponse_workflowExecutionId:
+			v.WorkflowExecutionId = new(string)
+			return d.ReadString(schemas.GetWorkflowExecutionResponse_workflowExecutionId, v.WorkflowExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowExecution, schemas.GetWorkflowExecutionRequest, schemas.GetWorkflowExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkflowExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflowExecution, schemas.GetWorkflowExecutionRequest, schemas.GetWorkflowExecutionResponse), output: &GetWorkflowExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkflowExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkflowExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetWorkflowExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWorkflowExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +248,8 @@ func (c *Client) addOperationGetWorkflowExecutionMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetWorkflowExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWorkflowExecution",
-	}
 }

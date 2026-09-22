@@ -1,0 +1,5 @@
+409
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSOrganizationsV20161128.AcceptHandshake
+
+{"__type":"ConstraintViolationException","Message":"__Message__","Reason":"ACCOUNT_NUMBER_LIMIT_EXCEEDED"}

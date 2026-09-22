@@ -4,11 +4,10 @@ package glacier
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
+	"github.com/aws/aws-sdk-go-v2/service/glacier/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation retrieves the following attributes from the lock-policy
@@ -67,6 +66,21 @@ type GetVaultLockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVaultLockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVaultLockInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVaultLockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.GetVaultLockInput_accountId, *v.AccountId)
+	}
+	if v.VaultName != nil {
+		s.WriteString(schemas.GetVaultLockInput_vaultName, *v.VaultName)
+	}
+}
+
 // Contains the Amazon Glacier response to your request.
 type GetVaultLockOutput struct {
 
@@ -89,77 +103,66 @@ type GetVaultLockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVaultLockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVaultLockOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVaultLockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationDate != nil {
+		s.WriteString(schemas.GetVaultLockOutput_CreationDate, *v.CreationDate)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteString(schemas.GetVaultLockOutput_ExpirationDate, *v.ExpirationDate)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.GetVaultLockOutput_Policy, *v.Policy)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.GetVaultLockOutput_State, *v.State)
+	}
+}
+func (v *GetVaultLockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVaultLockOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVaultLockOutput_CreationDate:
+			v.CreationDate = new(string)
+			return d.ReadString(schemas.GetVaultLockOutput_CreationDate, v.CreationDate)
+		case schemas.GetVaultLockOutput_ExpirationDate:
+			v.ExpirationDate = new(string)
+			return d.ReadString(schemas.GetVaultLockOutput_ExpirationDate, v.ExpirationDate)
+		case schemas.GetVaultLockOutput_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetVaultLockOutput_Policy, v.Policy)
+		case schemas.GetVaultLockOutput_State:
+			v.State = new(string)
+			return d.ReadString(schemas.GetVaultLockOutput_State, v.State)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVaultLockMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVaultLock, schemas.GetVaultLockInput, schemas.GetVaultLockOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVaultLock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVaultLock, schemas.GetVaultLockInput, schemas.GetVaultLockOutput), output: &GetVaultLockOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVaultLock{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVaultLock"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetVaultLockValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVaultLock(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +186,8 @@ func (c *Client) addOperationGetVaultLockMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetVaultLock(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetVaultLock",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.CreateNFSFileShare
+
+{"AuditDestinationARN":"__AuditDestinationARN__","BucketRegion":"__BucketRegion__","CacheAttributes":{"CacheStaleTimeoutInSeconds":1},"ClientList":["__Member__","__Member__"],"ClientToken":"__ClientToken__","DefaultStorageClass":"__DefaultStorageClass__","EncryptionType":"SseS3","FileShareName":"__FileShareName__","GatewayARN":"__GatewayARN__","GuessMIMETypeEnabled":true,"KMSEncrypted":true,"KMSKey":"__KMSKey__","LocationARN":"__LocationARN__","NFSFileShareDefaults":{"DirectoryMode":"__DirectoryMode__","FileMode":"__FileMode__","GroupId":1,"OwnerId":1},"NotificationPolicy":"__NotificationPolicy__","ObjectACL":"private","ReadOnly":true,"RequesterPays":true,"Role":"__Role__","Squash":"__Squash__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VPCEndpointDNSName":"__VPCEndpointDNSName__"}

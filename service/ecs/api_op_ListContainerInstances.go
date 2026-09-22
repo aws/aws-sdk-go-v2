@@ -5,10 +5,10 @@ package ecs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of container instances in a specified cluster. You can filter
@@ -76,6 +76,30 @@ type ListContainerInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.ListContainerInstancesRequest_cluster, *v.Cluster)
+	}
+	if v.Filter != nil {
+		s.WriteString(schemas.ListContainerInstancesRequest_filter, *v.Filter)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContainerInstancesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerInstancesRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListContainerInstancesRequest_status, string(v.Status))
+	}
+}
+
 type ListContainerInstancesOutput struct {
 
 	// The list of container instances with full ARN entries for each container
@@ -94,74 +118,48 @@ type ListContainerInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContainerInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContainerInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContainerInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.ListContainerInstancesResponse_containerInstanceArns, v.ContainerInstanceArns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContainerInstancesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListContainerInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContainerInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContainerInstancesResponse_containerInstanceArns:
+			return deserializeStringList(d, schemas.ListContainerInstancesResponse_containerInstanceArns, &v.ContainerInstanceArns)
+		case schemas.ListContainerInstancesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContainerInstancesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContainerInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerInstances, schemas.ListContainerInstancesRequest, schemas.ListContainerInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListContainerInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContainerInstances, schemas.ListContainerInstancesRequest, schemas.ListContainerInstancesResponse), output: &ListContainerInstancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListContainerInstances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContainerInstances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContainerInstances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +172,6 @@ func (c *Client) addOperationListContainerInstancesMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -288,11 +280,3 @@ type ListContainerInstancesAPIClient interface {
 }
 
 var _ ListContainerInstancesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListContainerInstances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListContainerInstances",
-	}
-}

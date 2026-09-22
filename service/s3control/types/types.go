@@ -2317,6 +2317,15 @@ type S3CopyObjectOperation struct {
 	// This functionality is not supported by directory buckets.
 	AccessControlGrants []S3Grant
 
+	// Specifies whether the Batch Operations copy job copies object annotations from
+	// the source object or skips them. If this property isn't specified, COPY is the
+	// default behavior.
+	//
+	// Valid Values: COPY | EXCLUDE
+	//
+	// This functionality is not supported by directory buckets.
+	AnnotationDirective S3AnnotationDirective
+
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
 	// with server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting
 	// this header to true causes Amazon S3 to use an S3 Bucket Key for object
@@ -2363,6 +2372,19 @@ type S3CopyObjectOperation struct {
 	// empty tag set in the NewObjectTagging field to prevent copying the source
 	// object tags to the directory bucket.
 	NewObjectTagging []S3Tag
+
+	// The event hold status to be applied to all objects in the Batch Operations copy
+	// job. Set to ON to enable an event hold or OFF to disable it.
+	//
+	// This functionality is not supported by directory buckets.
+	ObjectLockEventHold S3ObjectLockEventHold
+
+	// The event hold duration to be applied to all objects in the Batch Operations
+	// copy job. The duration specifies how long the object remains protected after the
+	// event hold is released.
+	//
+	// This functionality is not supported by directory buckets.
+	ObjectLockEventHoldDuration *S3ObjectLockEventHoldDuration
 
 	// The legal hold status to be applied to all objects in the Batch Operations job.
 	//
@@ -2548,8 +2570,8 @@ type S3JobManifestGenerator struct {
 	// This member is required.
 	SourceBucket *string
 
-	// The Amazon Web Services account ID that owns the bucket the generated manifest
-	// is written to. If provided the generated manifest bucket's owner Amazon Web
+	// The Amazon Web Services account ID that owns the source bucket specified in
+	// SourceBucket . If provided, the manifest source bucket owner's Amazon Web
 	// Services account ID must match this value, else the job fails.
 	ExpectedBucketOwner *string
 
@@ -2596,6 +2618,21 @@ type S3ManifestOutputLocation struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the duration configuration for an event hold, specified in either days
+// or years.
+type S3ObjectLockEventHoldDuration struct {
+
+	// The number of days for the event hold duration. The minimum value is 1 and the
+	// maximum value is 36,500.
+	Days *int32
+
+	// The number of years for the event hold duration. The minimum value is 1 and the
+	// maximum value is 100.
+	Years *int32
+
+	noSmithyDocumentSerde
+}
+
 // Whether S3 Object Lock legal hold will be applied to objects in an S3 Batch
 // Operations job.
 type S3ObjectLockLegalHold struct {
@@ -2605,6 +2642,21 @@ type S3ObjectLockLegalHold struct {
 	//
 	// This member is required.
 	Status S3ObjectLockLegalHoldStatus
+
+	noSmithyDocumentSerde
+}
+
+// Contains the duration configuration for an event hold, specified in either days
+// or years.
+type S3ObjectLockRetentionEventHoldDuration struct {
+
+	// The number of days for the event hold duration. The minimum value is 1 and the
+	// maximum value is 36,500.
+	Days *int32
+
+	// The number of years for the event hold duration. The minimum value is 1 and the
+	// maximum value is 100.
+	Years *int32
 
 	noSmithyDocumentSerde
 }
@@ -2680,6 +2732,15 @@ type S3ReplicateObjectOperation struct {
 //
 // [Using S3 Object Lock retention with S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
 type S3Retention struct {
+
+	// The event hold status to be applied to all objects in the Batch Operations job.
+	// Set to ON to enable an event hold or OFF to disable it.
+	EventHold S3ObjectLockRetentionEventHold
+
+	// The event hold duration to be applied to all objects in the Batch Operations
+	// job. The duration specifies how long the object remains protected after the
+	// event hold is released.
+	EventHoldDuration *S3ObjectLockRetentionEventHoldDuration
 
 	// The Object Lock retention mode to be applied to all objects in the Batch
 	// Operations job.
@@ -2839,9 +2900,8 @@ type SelectionCriteria struct {
 	// The max depth of the selection criteria
 	MaxDepth *int32
 
-	// The minimum number of storage bytes percentage whose metrics will be selected.
-	//
-	// You must choose a value greater than or equal to 1.0 .
+	// The minimum percentage of total bucket storage that a prefix must hold for its
+	// metrics to be included.
 	MinStorageBytesPercentage *float64
 
 	noSmithyDocumentSerde

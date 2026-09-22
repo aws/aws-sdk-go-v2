@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configuration":"__Configuration__","grafanaVersion":"__GrafanaVersion__"}

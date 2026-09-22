@@ -1,0 +1,5 @@
+GET /__Key__?acl=&versionId=__VersionId__
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+

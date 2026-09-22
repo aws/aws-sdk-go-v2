@@ -5,10 +5,10 @@ package odb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the ODB networks owned by your Amazon Web Services
@@ -43,6 +43,21 @@ type ListOdbNetworksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOdbNetworksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOdbNetworksInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOdbNetworksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOdbNetworksInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOdbNetworksInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListOdbNetworksOutput struct {
 
 	// The list of ODB networks.
@@ -60,74 +75,48 @@ type ListOdbNetworksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOdbNetworksOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOdbNetworksOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOdbNetworksOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOdbNetworksOutput_nextToken, *v.NextToken)
+	}
+	serializeOdbNetworkList(s, schemas.ListOdbNetworksOutput_odbNetworks, v.OdbNetworks)
+}
+func (v *ListOdbNetworksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOdbNetworksOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOdbNetworksOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOdbNetworksOutput_nextToken, v.NextToken)
+		case schemas.ListOdbNetworksOutput_odbNetworks:
+			return deserializeOdbNetworkList(d, schemas.ListOdbNetworksOutput_odbNetworks, &v.OdbNetworks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOdbNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOdbNetworks, schemas.ListOdbNetworksInput, schemas.ListOdbNetworksOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListOdbNetworks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOdbNetworks, schemas.ListOdbNetworksInput, schemas.ListOdbNetworksOutput), output: &ListOdbNetworksOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListOdbNetworks{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOdbNetworks"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOdbNetworks(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +129,6 @@ func (c *Client) addOperationListOdbNetworksMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +232,3 @@ type ListOdbNetworksAPIClient interface {
 }
 
 var _ ListOdbNetworksAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListOdbNetworks(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListOdbNetworks",
-	}
-}

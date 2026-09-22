@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the quick connect.
@@ -45,6 +44,21 @@ type DescribeQuickConnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQuickConnectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuickConnectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuickConnectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.DescribeQuickConnectRequest_InstanceId, *v.InstanceId)
+	}
+	if v.QuickConnectId != nil {
+		s.WriteString(schemas.DescribeQuickConnectRequest_QuickConnectId, *v.QuickConnectId)
+	}
+}
+
 type DescribeQuickConnectOutput struct {
 
 	// Information about the quick connect.
@@ -56,77 +70,50 @@ type DescribeQuickConnectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQuickConnectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuickConnectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuickConnectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QuickConnect != nil {
+		s.WriteStruct(schemas.DescribeQuickConnectResponse_QuickConnect)
+		v.QuickConnect.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeQuickConnectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQuickConnectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQuickConnectResponse_QuickConnect:
+			v.QuickConnect = &types.QuickConnect{}
+			return v.QuickConnect.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQuickConnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuickConnect, schemas.DescribeQuickConnectRequest, schemas.DescribeQuickConnectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeQuickConnect{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuickConnect, schemas.DescribeQuickConnectRequest, schemas.DescribeQuickConnectResponse), output: &DescribeQuickConnectOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeQuickConnect{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeQuickConnect"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeQuickConnectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeQuickConnect(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +128,8 @@ func (c *Client) addOperationDescribeQuickConnectMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeQuickConnect(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeQuickConnect",
-	}
 }

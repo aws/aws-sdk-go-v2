@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Databases":[{"ApplicationId":"__ApplicationId__","Arn":"__Arn__","ComponentId":"__ComponentId__","DatabaseId":"__DatabaseId__","DatabaseType":"SYSTEM","Tags":{"key0":"__Value__"}},{"ApplicationId":"__ApplicationId__","Arn":"__Arn__","ComponentId":"__ComponentId__","DatabaseId":"__DatabaseId__","DatabaseType":"SYSTEM","Tags":{"key0":"__Value__"}}],"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+PUT /bots/__BotId__/botversions/__BotVersion__/botlocales/__LocaleId__/customvocabulary/DEFAULT/batchupdate
+
+Content-Type: application/json
+
+{"customVocabularyItemList":[{"displayAs":"__DisplayAs__","itemId":"__ItemId__","phrase":"__Phrase__","weight":1},{"displayAs":"__DisplayAs__","itemId":"__ItemId__","phrase":"__Phrase__","weight":1}]}

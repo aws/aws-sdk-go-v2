@@ -1,0 +1,5 @@
+PUT /testsets/__TestSetId__
+
+Content-Type: application/json
+
+{"description":"__Description__","testSetName":"__TestSetName__"}

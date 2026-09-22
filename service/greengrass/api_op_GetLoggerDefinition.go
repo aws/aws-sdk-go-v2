@@ -4,10 +4,9 @@ package greengrass
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a logger definition.
@@ -34,6 +33,18 @@ type GetLoggerDefinitionInput struct {
 	LoggerDefinitionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLoggerDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoggerDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoggerDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoggerDefinitionId != nil {
+		s.WriteString(schemas.GetLoggerDefinitionRequest_LoggerDefinitionId, *v.LoggerDefinitionId)
+	}
 }
 
 type GetLoggerDefinitionOutput struct {
@@ -68,77 +79,87 @@ type GetLoggerDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLoggerDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLoggerDefinitionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLoggerDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetLoggerDefinitionResponse_Arn, *v.Arn)
+	}
+	if v.CreationTimestamp != nil {
+		s.WriteString(schemas.GetLoggerDefinitionResponse_CreationTimestamp, *v.CreationTimestamp)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetLoggerDefinitionResponse_Id, *v.Id)
+	}
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteString(schemas.GetLoggerDefinitionResponse_LastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.LatestVersion != nil {
+		s.WriteString(schemas.GetLoggerDefinitionResponse_LatestVersion, *v.LatestVersion)
+	}
+	if v.LatestVersionArn != nil {
+		s.WriteString(schemas.GetLoggerDefinitionResponse_LatestVersionArn, *v.LatestVersionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetLoggerDefinitionResponse_Name, *v.Name)
+	}
+	serializeTags(s, schemas.GetLoggerDefinitionResponse_tags, v.Tags)
+}
+func (v *GetLoggerDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLoggerDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLoggerDefinitionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionResponse_Arn, v.Arn)
+		case schemas.GetLoggerDefinitionResponse_CreationTimestamp:
+			v.CreationTimestamp = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionResponse_CreationTimestamp, v.CreationTimestamp)
+		case schemas.GetLoggerDefinitionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionResponse_Id, v.Id)
+		case schemas.GetLoggerDefinitionResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetLoggerDefinitionResponse_LatestVersion:
+			v.LatestVersion = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionResponse_LatestVersion, v.LatestVersion)
+		case schemas.GetLoggerDefinitionResponse_LatestVersionArn:
+			v.LatestVersionArn = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionResponse_LatestVersionArn, v.LatestVersionArn)
+		case schemas.GetLoggerDefinitionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetLoggerDefinitionResponse_Name, v.Name)
+		case schemas.GetLoggerDefinitionResponse_tags:
+			return deserializeTags(d, schemas.GetLoggerDefinitionResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoggerDefinition, schemas.GetLoggerDefinitionRequest, schemas.GetLoggerDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLoggerDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLoggerDefinition, schemas.GetLoggerDefinitionRequest, schemas.GetLoggerDefinitionResponse), output: &GetLoggerDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLoggerDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLoggerDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLoggerDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLoggerDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +174,8 @@ func (c *Client) addOperationGetLoggerDefinitionMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLoggerDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLoggerDefinition",
-	}
 }

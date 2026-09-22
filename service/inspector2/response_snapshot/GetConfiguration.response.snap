@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ec2Configuration":{"scanModeState":{"scanMode":"EC2_SSM_AGENT_BASED","scanModeStatus":"SUCCESS"},"vmScannerState":{"activated":true,"activatedAt":946684800,"status":"SUCCESS"}},"ecrConfiguration":{"rescanDurationState":{"pullDateRescanDuration":"DAYS_14","pullDateRescanMode":"LAST_PULL_DATE","rescanDuration":"LIFETIME","status":"SUCCESS","updatedAt":946684800}}}

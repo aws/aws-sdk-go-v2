@@ -1,0 +1,3 @@
+POST /applications/__ApplicationId__/indices/__IndexId__/datasources/__DataSourceId__/stopsync
+
+

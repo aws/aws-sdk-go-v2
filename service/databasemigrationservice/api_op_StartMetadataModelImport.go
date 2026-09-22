@@ -4,17 +4,24 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Loads the metadata for all the dependent database objects of the parent object.
+// Queues an import of metadata models (database objects such as tables, views,
+// and procedures) from your data provider into the metadata tree. If other
+// requests created by Start* operations are already in the migration project's
+// queue, the import begins after they complete.
 //
-// This operation uses your project's Amazon S3 bucket as a metadata cache to
-// improve performance.
+// To check the status of the import request, call [DescribeMetadataModelImports] using the returned
+// RequestIdentifier as a filter.
+//
+// Required permissions: dms:StartMetadataModelImport . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
+// [DescribeMetadataModelImports]: https://docs.aws.amazon.com/dms/latest/APIReference/API_DescribeMetadataModelImports.html
 func (c *Client) StartMetadataModelImport(ctx context.Context, params *StartMetadataModelImportInput, optFns ...func(*Options)) (*StartMetadataModelImportOutput, error) {
 	if params == nil {
 		params = &StartMetadataModelImportInput{}
@@ -37,25 +44,66 @@ type StartMetadataModelImportInput struct {
 	// This member is required.
 	MigrationProjectIdentifier *string
 
-	// Whether to load metadata to the source or target database.
+	// Specifies the metadata tree to import into.
+	//
+	// You cannot import from a virtual target data provider.
 	//
 	// This member is required.
 	Origin types.OriginTypeValue
 
-	// A value that specifies the database objects to import.
+	// A JSON string that identifies the metadata models to import from the data
+	// provider. For the selection rule format and examples, see [Selection rules in DMS Schema Conversion].
+	//
+	// Usage:
+	//
+	//   - Accepts source or target selection rules depending on the Origin parameter.
+	//   The server-name in the object locator must match the corresponding data
+	//   provider.
+	//
+	//   - Supports explicit , include , and exclude rule actions.
+	//
+	// [Selection rules in DMS Schema Conversion]: https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html
 	//
 	// This member is required.
 	SelectionRules *string
 
-	// If true , DMS loads metadata for the specified objects from the source database.
+	// Specifies whether to refresh the selected metadata models from the data
+	// provider.
+	//
+	// When true , the import reloads the selected metadata models with current
+	// definitions and removes their existing subtree.
+	//
+	// When false (default), the import loads the full subtree that has not yet been
+	// loaded into the metadata tree.
 	Refresh bool
 
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelImportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelImportMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelImportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelImportMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.Origin != "" {
+		s.WriteString(schemas.StartMetadataModelImportMessage_Origin, string(v.Origin))
+	}
+	if v.Refresh != false {
+		s.WriteBool(schemas.StartMetadataModelImportMessage_Refresh, v.Refresh)
+	}
+	if v.SelectionRules != nil {
+		s.WriteString(schemas.StartMetadataModelImportMessage_SelectionRules, *v.SelectionRules)
+	}
+}
+
 type StartMetadataModelImportOutput struct {
 
-	// The identifier for the import operation.
+	// The identifier for the import request.
 	RequestIdentifier *string
 
 	// Metadata pertaining to the operation's result.
@@ -64,77 +112,48 @@ type StartMetadataModelImportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMetadataModelImportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMetadataModelImportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMetadataModelImportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.StartMetadataModelImportResponse_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+func (v *StartMetadataModelImportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMetadataModelImportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMetadataModelImportResponse_RequestIdentifier:
+			v.RequestIdentifier = new(string)
+			return d.ReadString(schemas.StartMetadataModelImportResponse_RequestIdentifier, v.RequestIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMetadataModelImportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelImport, schemas.StartMetadataModelImportMessage, schemas.StartMetadataModelImportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMetadataModelImport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMetadataModelImport, schemas.StartMetadataModelImportMessage, schemas.StartMetadataModelImportResponse), output: &StartMetadataModelImportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMetadataModelImport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMetadataModelImport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMetadataModelImportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMetadataModelImport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +168,8 @@ func (c *Client) addOperationStartMetadataModelImportMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMetadataModelImport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMetadataModelImport",
-	}
 }

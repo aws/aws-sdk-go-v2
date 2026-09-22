@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2
@@ -91,6 +90,32 @@ type UpdateScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScriptInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateScriptInput_Name, *v.Name)
+	}
+	if v.ScriptId != nil {
+		s.WriteString(schemas.UpdateScriptInput_ScriptId, *v.ScriptId)
+	}
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.UpdateScriptInput_StorageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.UpdateScriptInput_Version, *v.Version)
+	}
+	if v.ZipFile != nil {
+		s.WriteBlob(schemas.UpdateScriptInput_ZipFile, v.ZipFile)
+	}
+}
+
 type UpdateScriptOutput struct {
 
 	// The newly created script record with a unique script ID. The new script's
@@ -107,65 +132,44 @@ type UpdateScriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateScriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateScriptOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateScriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Script != nil {
+		s.WriteStruct(schemas.UpdateScriptOutput_Script)
+		v.Script.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateScriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateScriptOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateScriptOutput_Script:
+			v.Script = &types.Script{}
+			return v.Script.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScript, schemas.UpdateScriptInput, schemas.UpdateScriptOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateScript, schemas.UpdateScriptInput, schemas.UpdateScriptOutput), output: &UpdateScriptOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateScript{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateScript"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -175,12 +179,6 @@ func (c *Client) addOperationUpdateScriptMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpUpdateScriptValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateScript(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,22 +193,8 @@ func (c *Client) addOperationUpdateScriptMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateScript(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateScript",
-	}
 }

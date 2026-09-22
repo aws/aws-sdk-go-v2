@@ -1,8 +1,5 @@
 SendMessage
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -11,16 +8,12 @@ SendMessage
 	Build stack step
 		EventStreamBuildMiddleware
 		ClientRequestID
-		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2

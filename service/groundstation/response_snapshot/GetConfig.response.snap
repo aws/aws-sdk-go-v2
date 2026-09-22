@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"configArn":"__ConfigArn__","configData":{"antennaDownlinkConfig":{"spectrumConfig":{"bandwidth":{"units":"GHz","value":1},"centerFrequency":{"units":"GHz","value":1},"polarization":"RIGHT_HAND"}}},"configId":"__ConfigId__","configType":"antenna-downlink","name":"__Name__","tags":{"key0":"__Value__"}}

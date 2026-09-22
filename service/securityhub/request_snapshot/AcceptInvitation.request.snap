@@ -1,0 +1,5 @@
+POST /master
+
+Content-Type: application/json
+
+{"InvitationId":"__InvitationId__","MasterId":"__MasterId__"}

@@ -1,0 +1,4 @@
+DELETE /v20180820/accesspoint/__Name__/scope
+
+X-Amz-Account-Id: AccountId-value
+

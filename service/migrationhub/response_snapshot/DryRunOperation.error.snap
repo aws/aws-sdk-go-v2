@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.AssociateCreatedArtifact
+
+{"__type":"DryRunOperation","Message":"__Message__"}

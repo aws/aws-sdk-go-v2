@@ -1,0 +1,5 @@
+PATCH /v1/account-customizations
+
+Content-Type: application/json
+
+{"accountColor":"none","visibleRegions":["__Member__","__Member__"],"visibleServices":["__Member__","__Member__"]}

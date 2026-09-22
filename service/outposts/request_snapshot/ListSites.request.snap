@@ -1,0 +1,3 @@
+GET /sites?MaxResults=1&NextToken=__NextToken__&OperatingAddressCityFilter=__Member__&OperatingAddressCityFilter=__Member__&OperatingAddressCountryCodeFilter=__Member__&OperatingAddressCountryCodeFilter=__Member__&OperatingAddressStateOrRegionFilter=__Member__&OperatingAddressStateOrRegionFilter=__Member__
+
+

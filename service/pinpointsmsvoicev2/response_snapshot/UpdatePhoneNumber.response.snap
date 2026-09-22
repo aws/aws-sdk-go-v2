@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.UpdatePhoneNumber
+
+{"CreatedTimestamp":946684800,"DeletionProtectionEnabled":true,"InternationalSendingEnabled":true,"IsoCountryCode":"__IsoCountryCode__","MessageType":"TRANSACTIONAL","MonthlyLeasingPrice":"__MonthlyLeasingPrice__","NumberCapabilities":["SMS","SMS"],"NumberType":"SHORT_CODE","OptOutListName":"__OptOutListName__","PhoneNumber":"__PhoneNumber__","PhoneNumberArn":"__PhoneNumberArn__","PhoneNumberId":"__PhoneNumberId__","RegistrationId":"__RegistrationId__","SelfManagedOptOutsEnabled":true,"Status":"PENDING","TwoWayChannelArn":"__TwoWayChannelArn__","TwoWayChannelRole":"__TwoWayChannelRole__","TwoWayEnabled":true}

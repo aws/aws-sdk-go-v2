@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Creates a new flow. The request must include one source. The request
@@ -88,6 +87,60 @@ type CreateFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateFlowRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.EncodingConfig != nil {
+		s.WriteStruct(schemas.CreateFlowRequest_EncodingConfig)
+		v.EncodingConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfGrantEntitlementRequest(s, schemas.CreateFlowRequest_Entitlements, v.Entitlements)
+	if v.FlowSize != "" {
+		s.WriteString(schemas.CreateFlowRequest_FlowSize, string(v.FlowSize))
+	}
+	serialize__mapOfString(s, schemas.CreateFlowRequest_FlowTags, v.FlowTags)
+	if v.Maintenance != nil {
+		s.WriteStruct(schemas.CreateFlowRequest_Maintenance)
+		v.Maintenance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfAddMediaStreamRequest(s, schemas.CreateFlowRequest_MediaStreams, v.MediaStreams)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFlowRequest_Name, *v.Name)
+	}
+	if v.NdiConfig != nil {
+		s.WriteStruct(schemas.CreateFlowRequest_NdiConfig)
+		v.NdiConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfAddOutputRequest(s, schemas.CreateFlowRequest_Outputs, v.Outputs)
+	if v.Source != nil {
+		s.WriteStruct(schemas.CreateFlowRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceFailoverConfig != nil {
+		s.WriteStruct(schemas.CreateFlowRequest_SourceFailoverConfig)
+		v.SourceFailoverConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceMonitoringConfig != nil {
+		s.WriteStruct(schemas.CreateFlowRequest_SourceMonitoringConfig)
+		v.SourceMonitoringConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfSetSourceRequest(s, schemas.CreateFlowRequest_Sources, v.Sources)
+	serialize__listOfVpcInterfaceRequest(s, schemas.CreateFlowRequest_VpcInterfaces, v.VpcInterfaces)
+}
+
 type CreateFlowOutput struct {
 
 	//  The flow that you created.
@@ -99,77 +152,50 @@ type CreateFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFlowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Flow != nil {
+		s.WriteStruct(schemas.CreateFlowResponse_Flow)
+		v.Flow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFlowResponse_Flow:
+			v.Flow = &types.Flow{}
+			return v.Flow.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlow, schemas.CreateFlowRequest, schemas.CreateFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlow, schemas.CreateFlowRequest, schemas.CreateFlowResponse), output: &CreateFlowOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFlow{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFlow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateFlowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFlow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,22 +210,8 @@ func (c *Client) addOperationCreateFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateFlow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFlow",
-	}
 }

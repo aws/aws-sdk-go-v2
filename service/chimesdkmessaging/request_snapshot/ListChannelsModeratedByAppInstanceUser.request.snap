@@ -1,0 +1,4 @@
+GET /channels?app-instance-user-arn=__AppInstanceUserArn__&max-results=1&next-token=__NextToken__&scope=app-instance-user-moderated-channels
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

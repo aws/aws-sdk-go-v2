@@ -1,0 +1,5 @@
+POST /policy-engines/__PolicyEngineId__/policies
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","definition":{"cedar":{"statement":"__Statement__"}},"description":"__Description__","enforcementMode":"ACTIVE","name":"__Name__","validationMode":"FAIL_ON_ANY_FINDINGS"}

@@ -4,11 +4,10 @@ package computeoptimizerautomation
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -34,6 +33,15 @@ type GetEnrollmentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnrollmentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnrollmentConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnrollmentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetEnrollmentConfigurationOutput struct {
 
 	//  The current enrollment status.
@@ -57,77 +65,74 @@ type GetEnrollmentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnrollmentConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnrollmentConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnrollmentConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdatedTimestamp != nil {
+		s.WriteTime(schemas.GetEnrollmentConfigurationResponse_lastUpdatedTimestamp, *v.LastUpdatedTimestamp)
+	}
+	if v.OrganizationRuleMode != "" {
+		s.WriteString(schemas.GetEnrollmentConfigurationResponse_organizationRuleMode, string(v.OrganizationRuleMode))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetEnrollmentConfigurationResponse_status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetEnrollmentConfigurationResponse_statusReason, *v.StatusReason)
+	}
+}
+func (v *GetEnrollmentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnrollmentConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnrollmentConfigurationResponse_lastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetEnrollmentConfigurationResponse_lastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetEnrollmentConfigurationResponse_organizationRuleMode:
+			var ev string
+			if err := d.ReadString(schemas.GetEnrollmentConfigurationResponse_organizationRuleMode, &ev); err != nil {
+				return err
+			}
+			v.OrganizationRuleMode = types.OrganizationRuleMode(ev)
+			return nil
+		case schemas.GetEnrollmentConfigurationResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetEnrollmentConfigurationResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EnrollmentStatus(ev)
+			return nil
+		case schemas.GetEnrollmentConfigurationResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetEnrollmentConfigurationResponse_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnrollmentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnrollmentConfiguration, schemas.GetEnrollmentConfigurationRequest, schemas.GetEnrollmentConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEnrollmentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnrollmentConfiguration, schemas.GetEnrollmentConfigurationRequest, schemas.GetEnrollmentConfigurationResponse), output: &GetEnrollmentConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEnrollmentConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnrollmentConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnrollmentConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +147,8 @@ func (c *Client) addOperationGetEnrollmentConfigurationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEnrollmentConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEnrollmentConfiguration",
-	}
 }

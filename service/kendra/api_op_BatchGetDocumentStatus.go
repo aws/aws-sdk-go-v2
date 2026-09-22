@@ -4,11 +4,10 @@ package kendra
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the indexing status for one or more documents submitted with the [BatchPutDocument] API.
@@ -57,6 +56,19 @@ type BatchGetDocumentStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDocumentStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDocumentStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDocumentStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentInfoList(s, schemas.BatchGetDocumentStatusRequest_DocumentInfoList, v.DocumentInfoList)
+	if v.IndexId != nil {
+		s.WriteString(schemas.BatchGetDocumentStatusRequest_IndexId, *v.IndexId)
+	}
+}
+
 type BatchGetDocumentStatusOutput struct {
 
 	// The status of documents. The status indicates if the document is waiting to be
@@ -75,77 +87,48 @@ type BatchGetDocumentStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDocumentStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDocumentStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDocumentStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentStatusList(s, schemas.BatchGetDocumentStatusResponse_DocumentStatusList, v.DocumentStatusList)
+	serializeBatchGetDocumentStatusResponseErrors(s, schemas.BatchGetDocumentStatusResponse_Errors, v.Errors)
+}
+func (v *BatchGetDocumentStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDocumentStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDocumentStatusResponse_DocumentStatusList:
+			return deserializeDocumentStatusList(d, schemas.BatchGetDocumentStatusResponse_DocumentStatusList, &v.DocumentStatusList)
+		case schemas.BatchGetDocumentStatusResponse_Errors:
+			return deserializeBatchGetDocumentStatusResponseErrors(d, schemas.BatchGetDocumentStatusResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetDocumentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDocumentStatus, schemas.BatchGetDocumentStatusRequest, schemas.BatchGetDocumentStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetDocumentStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetDocumentStatus, schemas.BatchGetDocumentStatusRequest, schemas.BatchGetDocumentStatusResponse), output: &BatchGetDocumentStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetDocumentStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetDocumentStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetDocumentStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetDocumentStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +143,8 @@ func (c *Client) addOperationBatchGetDocumentStatusMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetDocumentStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetDocumentStatus",
-	}
 }

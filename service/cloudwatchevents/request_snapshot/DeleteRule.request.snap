@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.DeleteRule
+
+{"EventBusName":"__EventBusName__","Force":true,"Name":"__Name__"}

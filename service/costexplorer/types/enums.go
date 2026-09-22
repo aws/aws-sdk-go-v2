@@ -46,8 +46,9 @@ type AnalysisType string
 
 // Enum values for AnalysisType
 const (
-	AnalysisTypeMaxSavings       AnalysisType = "MAX_SAVINGS"
-	AnalysisTypeCustomCommitment AnalysisType = "CUSTOM_COMMITMENT"
+	AnalysisTypeMaxSavings            AnalysisType = "MAX_SAVINGS"
+	AnalysisTypeCustomCommitment      AnalysisType = "CUSTOM_COMMITMENT"
+	AnalysisTypeTargetAverageCoverage AnalysisType = "TARGET_AVERAGE_COVERAGE"
 )
 
 // Values returns all known values for AnalysisType. Note that this can be
@@ -58,6 +59,7 @@ func (AnalysisType) Values() []AnalysisType {
 	return []AnalysisType{
 		"MAX_SAVINGS",
 		"CUSTOM_COMMITMENT",
+		"TARGET_AVERAGE_COVERAGE",
 	}
 }
 

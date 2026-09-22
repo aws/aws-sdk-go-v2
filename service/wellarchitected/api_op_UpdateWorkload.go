@@ -4,11 +4,10 @@ package wellarchitected
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update an existing workload.
@@ -159,6 +158,63 @@ type UpdateWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkloadInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWorkloadAccountIds(s, schemas.UpdateWorkloadInput_AccountIds, v.AccountIds)
+	serializeWorkloadApplications(s, schemas.UpdateWorkloadInput_Applications, v.Applications)
+	if v.ArchitecturalDesign != nil {
+		s.WriteString(schemas.UpdateWorkloadInput_ArchitecturalDesign, *v.ArchitecturalDesign)
+	}
+	serializeWorkloadAwsRegions(s, schemas.UpdateWorkloadInput_AwsRegions, v.AwsRegions)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateWorkloadInput_Description, *v.Description)
+	}
+	if v.DiscoveryConfig != nil {
+		s.WriteStruct(schemas.UpdateWorkloadInput_DiscoveryConfig)
+		v.DiscoveryConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Environment != "" {
+		s.WriteString(schemas.UpdateWorkloadInput_Environment, string(v.Environment))
+	}
+	if v.ImprovementStatus != "" {
+		s.WriteString(schemas.UpdateWorkloadInput_ImprovementStatus, string(v.ImprovementStatus))
+	}
+	if v.Industry != nil {
+		s.WriteString(schemas.UpdateWorkloadInput_Industry, *v.Industry)
+	}
+	if v.IndustryType != nil {
+		s.WriteString(schemas.UpdateWorkloadInput_IndustryType, *v.IndustryType)
+	}
+	if v.IsReviewOwnerUpdateAcknowledged != nil {
+		s.WriteBool(schemas.UpdateWorkloadInput_IsReviewOwnerUpdateAcknowledged, *v.IsReviewOwnerUpdateAcknowledged)
+	}
+	if v.JiraConfiguration != nil {
+		s.WriteStruct(schemas.UpdateWorkloadInput_JiraConfiguration)
+		v.JiraConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWorkloadNonAwsRegions(s, schemas.UpdateWorkloadInput_NonAwsRegions, v.NonAwsRegions)
+	if v.Notes != nil {
+		s.WriteString(schemas.UpdateWorkloadInput_Notes, *v.Notes)
+	}
+	serializeWorkloadPillarPriorities(s, schemas.UpdateWorkloadInput_PillarPriorities, v.PillarPriorities)
+	if v.ReviewOwner != nil {
+		s.WriteString(schemas.UpdateWorkloadInput_ReviewOwner, *v.ReviewOwner)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.UpdateWorkloadInput_WorkloadId, *v.WorkloadId)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.UpdateWorkloadInput_WorkloadName, *v.WorkloadName)
+	}
+}
+
 // Output of an update workload call.
 type UpdateWorkloadOutput struct {
 
@@ -171,77 +227,50 @@ type UpdateWorkloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkloadOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Workload != nil {
+		s.WriteStruct(schemas.UpdateWorkloadOutput_Workload)
+		v.Workload.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWorkloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkloadOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkloadOutput_Workload:
+			v.Workload = &types.Workload{}
+			return v.Workload.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkload, schemas.UpdateWorkloadInput, schemas.UpdateWorkloadOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkload, schemas.UpdateWorkloadInput, schemas.UpdateWorkloadOutput), output: &UpdateWorkloadOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkload{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkload"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateWorkloadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkload(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -256,22 +285,8 @@ func (c *Client) addOperationUpdateWorkloadMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateWorkload(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWorkload",
-	}
 }

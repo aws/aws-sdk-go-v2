@@ -5,8 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -74,6 +75,70 @@ type CreateComponentTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComponentTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComponentTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComponentTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentTypeId != nil {
+		s.WriteString(schemas.CreateComponentTypeRequest_componentTypeId, *v.ComponentTypeId)
+	}
+	if v.ComponentTypeName != nil {
+		s.WriteString(schemas.CreateComponentTypeRequest_componentTypeName, *v.ComponentTypeName)
+	}
+	serializeCompositeComponentTypesRequest(s, schemas.CreateComponentTypeRequest_compositeComponentTypes, v.CompositeComponentTypes)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateComponentTypeRequest_description, *v.Description)
+	}
+	serializeExtendsFrom(s, schemas.CreateComponentTypeRequest_extendsFrom, v.ExtendsFrom)
+	serializeFunctionsRequest(s, schemas.CreateComponentTypeRequest_functions, v.Functions)
+	if v.IsSingleton != nil {
+		s.WriteBool(schemas.CreateComponentTypeRequest_isSingleton, *v.IsSingleton)
+	}
+	serializePropertyDefinitionsRequest(s, schemas.CreateComponentTypeRequest_propertyDefinitions, v.PropertyDefinitions)
+	serializePropertyGroupsRequest(s, schemas.CreateComponentTypeRequest_propertyGroups, v.PropertyGroups)
+	serializeTagMap(s, schemas.CreateComponentTypeRequest_tags, v.Tags)
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.CreateComponentTypeRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *CreateComponentTypeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComponentTypeRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComponentTypeRequest_componentTypeId:
+			v.ComponentTypeId = new(string)
+			return d.ReadString(schemas.CreateComponentTypeRequest_componentTypeId, v.ComponentTypeId)
+		case schemas.CreateComponentTypeRequest_componentTypeName:
+			v.ComponentTypeName = new(string)
+			return d.ReadString(schemas.CreateComponentTypeRequest_componentTypeName, v.ComponentTypeName)
+		case schemas.CreateComponentTypeRequest_compositeComponentTypes:
+			return deserializeCompositeComponentTypesRequest(d, schemas.CreateComponentTypeRequest_compositeComponentTypes, &v.CompositeComponentTypes)
+		case schemas.CreateComponentTypeRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateComponentTypeRequest_description, v.Description)
+		case schemas.CreateComponentTypeRequest_extendsFrom:
+			return deserializeExtendsFrom(d, schemas.CreateComponentTypeRequest_extendsFrom, &v.ExtendsFrom)
+		case schemas.CreateComponentTypeRequest_functions:
+			return deserializeFunctionsRequest(d, schemas.CreateComponentTypeRequest_functions, &v.Functions)
+		case schemas.CreateComponentTypeRequest_isSingleton:
+			v.IsSingleton = new(bool)
+			return d.ReadBool(schemas.CreateComponentTypeRequest_isSingleton, v.IsSingleton)
+		case schemas.CreateComponentTypeRequest_propertyDefinitions:
+			return deserializePropertyDefinitionsRequest(d, schemas.CreateComponentTypeRequest_propertyDefinitions, &v.PropertyDefinitions)
+		case schemas.CreateComponentTypeRequest_propertyGroups:
+			return deserializePropertyGroupsRequest(d, schemas.CreateComponentTypeRequest_propertyGroups, &v.PropertyGroups)
+		case schemas.CreateComponentTypeRequest_tags:
+			return deserializeTagMap(d, schemas.CreateComponentTypeRequest_tags, &v.Tags)
+		case schemas.CreateComponentTypeRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.CreateComponentTypeRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type CreateComponentTypeOutput struct {
 
 	// The ARN of the component type.
@@ -97,65 +162,58 @@ type CreateComponentTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComponentTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComponentTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComponentTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateComponentTypeResponse_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteTime(schemas.CreateComponentTypeResponse_creationDateTime, *v.CreationDateTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateComponentTypeResponse_state, string(v.State))
+	}
+}
+func (v *CreateComponentTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComponentTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComponentTypeResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateComponentTypeResponse_arn, v.Arn)
+		case schemas.CreateComponentTypeResponse_creationDateTime:
+			v.CreationDateTime = new(time.Time)
+			return d.ReadTime(schemas.CreateComponentTypeResponse_creationDateTime, v.CreationDateTime)
+		case schemas.CreateComponentTypeResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.CreateComponentTypeResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.State(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComponentTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponentType, schemas.CreateComponentTypeRequest, schemas.CreateComponentTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComponentType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponentType, schemas.CreateComponentTypeRequest, schemas.CreateComponentTypeResponse), output: &CreateComponentTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComponentType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComponentType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -165,12 +223,6 @@ func (c *Client) addOperationCreateComponentTypeMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpCreateComponentTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComponentType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,12 +235,6 @@ func (c *Client) addOperationCreateComponentTypeMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -222,12 +268,4 @@ func (m *endpointPrefix_opCreateComponentTypeMiddleware) HandleFinalize(ctx cont
 }
 func addEndpointPrefix_opCreateComponentTypeMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opCreateComponentTypeMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opCreateComponentType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateComponentType",
-	}
 }

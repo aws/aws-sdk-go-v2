@@ -1,0 +1,5 @@
+PATCH /global-resolver/__GlobalResolverId__
+
+Content-Type: application/json
+
+{"description":"__Description__","ipAddressType":"IPV4","name":"__Name__","observabilityRegion":"__ObservabilityRegion__","regions":["__Member__","__Member__"]}

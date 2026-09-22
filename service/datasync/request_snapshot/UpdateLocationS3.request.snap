@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.UpdateLocationS3
+
+{"LocationArn":"__LocationArn__","S3Config":{"BucketAccessRoleArn":"__BucketAccessRoleArn__"},"S3StorageClass":"STANDARD","Subdirectory":"__Subdirectory__"}

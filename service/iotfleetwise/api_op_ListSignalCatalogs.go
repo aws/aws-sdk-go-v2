@@ -5,10 +5,10 @@ package iotfleetwise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Lists all the created signal catalogs in an Amazon Web Services account.
@@ -50,6 +50,34 @@ type ListSignalCatalogsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSignalCatalogsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSignalCatalogsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSignalCatalogsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSignalCatalogsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSignalCatalogsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListSignalCatalogsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSignalCatalogsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSignalCatalogsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListSignalCatalogsRequest_maxResults, v.MaxResults)
+		case schemas.ListSignalCatalogsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSignalCatalogsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListSignalCatalogsOutput struct {
 
 	//  The token to retrieve the next set of results, or null if there are no more
@@ -65,74 +93,48 @@ type ListSignalCatalogsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSignalCatalogsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSignalCatalogsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSignalCatalogsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSignalCatalogsResponse_nextToken, *v.NextToken)
+	}
+	serializesignalCatalogSummaries(s, schemas.ListSignalCatalogsResponse_summaries, v.Summaries)
+}
+func (v *ListSignalCatalogsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSignalCatalogsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSignalCatalogsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSignalCatalogsResponse_nextToken, v.NextToken)
+		case schemas.ListSignalCatalogsResponse_summaries:
+			return deserializesignalCatalogSummaries(d, schemas.ListSignalCatalogsResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSignalCatalogsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSignalCatalogs, schemas.ListSignalCatalogsRequest, schemas.ListSignalCatalogsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSignalCatalogs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSignalCatalogs, schemas.ListSignalCatalogsRequest, schemas.ListSignalCatalogsResponse), output: &ListSignalCatalogsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSignalCatalogs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSignalCatalogs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSignalCatalogs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +147,6 @@ func (c *Client) addOperationListSignalCatalogsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +248,3 @@ type ListSignalCatalogsAPIClient interface {
 }
 
 var _ ListSignalCatalogsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSignalCatalogs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSignalCatalogs",
-	}
-}

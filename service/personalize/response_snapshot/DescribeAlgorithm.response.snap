@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.DescribeAlgorithm
+
+{"algorithm":{"algorithmArn":"__AlgorithmArn__","algorithmImage":{"dockerURI":"__DockerURI__","name":"__Name__"},"creationDateTime":946684800,"defaultHyperParameterRanges":{"categoricalHyperParameterRanges":[{"isTunable":true,"name":"__Name__","values":["__Member__","__Member__"]},{"isTunable":true,"name":"__Name__","values":["__Member__","__Member__"]}],"continuousHyperParameterRanges":[{"isTunable":true,"maxValue":1,"minValue":1,"name":"__Name__"},{"isTunable":true,"maxValue":1,"minValue":1,"name":"__Name__"}],"integerHyperParameterRanges":[{"isTunable":true,"maxValue":1,"minValue":1,"name":"__Name__"},{"isTunable":true,"maxValue":1,"minValue":1,"name":"__Name__"}]},"defaultHyperParameters":{"key0":"__Value__"},"defaultResourceConfig":{"key0":"__Value__"},"lastUpdatedDateTime":946684800,"name":"__Name__","roleArn":"__RoleArn__","trainingInputMode":"__TrainingInputMode__"}}

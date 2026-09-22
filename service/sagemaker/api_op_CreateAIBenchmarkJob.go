@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a benchmark job that runs performance benchmarks against inference
@@ -73,6 +72,36 @@ type CreateAIBenchmarkJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIBenchmarkJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIBenchmarkJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIBenchmarkJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobName != nil {
+		s.WriteString(schemas.CreateAIBenchmarkJobRequest_AIBenchmarkJobName, *v.AIBenchmarkJobName)
+	}
+	if v.AIWorkloadConfigIdentifier != nil {
+		s.WriteString(schemas.CreateAIBenchmarkJobRequest_AIWorkloadConfigIdentifier, *v.AIWorkloadConfigIdentifier)
+	}
+	serializeAIBenchmarkTarget(s, schemas.CreateAIBenchmarkJobRequest_BenchmarkTarget, v.BenchmarkTarget)
+	if v.NetworkConfig != nil {
+		s.WriteStruct(schemas.CreateAIBenchmarkJobRequest_NetworkConfig)
+		v.NetworkConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateAIBenchmarkJobRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateAIBenchmarkJobRequest_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateAIBenchmarkJobRequest_Tags, v.Tags)
+}
+
 type CreateAIBenchmarkJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created benchmark job.
@@ -86,77 +115,48 @@ type CreateAIBenchmarkJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAIBenchmarkJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAIBenchmarkJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAIBenchmarkJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIBenchmarkJobArn != nil {
+		s.WriteString(schemas.CreateAIBenchmarkJobResponse_AIBenchmarkJobArn, *v.AIBenchmarkJobArn)
+	}
+}
+func (v *CreateAIBenchmarkJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAIBenchmarkJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAIBenchmarkJobResponse_AIBenchmarkJobArn:
+			v.AIBenchmarkJobArn = new(string)
+			return d.ReadString(schemas.CreateAIBenchmarkJobResponse_AIBenchmarkJobArn, v.AIBenchmarkJobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAIBenchmarkJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIBenchmarkJob, schemas.CreateAIBenchmarkJobRequest, schemas.CreateAIBenchmarkJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateAIBenchmarkJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAIBenchmarkJob, schemas.CreateAIBenchmarkJobRequest, schemas.CreateAIBenchmarkJobResponse), output: &CreateAIBenchmarkJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateAIBenchmarkJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAIBenchmarkJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAIBenchmarkJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAIBenchmarkJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +171,8 @@ func (c *Client) addOperationCreateAIBenchmarkJobMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAIBenchmarkJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAIBenchmarkJob",
-	}
 }

@@ -4,10 +4,9 @@ package mq
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mq/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,21 @@ type DescribeConfigurationRevisionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRevisionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationId != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionRequest_ConfigurationId, *v.ConfigurationId)
+	}
+	if v.ConfigurationRevision != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionRequest_ConfigurationRevision, *v.ConfigurationRevision)
+	}
+}
+
 type DescribeConfigurationRevisionOutput struct {
 
 	// Required. The unique ID that Amazon MQ generates for the configuration.
@@ -63,77 +77,66 @@ type DescribeConfigurationRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConfigurationRevisionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConfigurationRevisionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConfigurationRevisionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationId != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionResponse_ConfigurationId, *v.ConfigurationId)
+	}
+	if v.Created != nil {
+		s.WriteTime(schemas.DescribeConfigurationRevisionResponse_Created, *v.Created)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionResponse_Data, *v.Data)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeConfigurationRevisionResponse_Description, *v.Description)
+	}
+}
+func (v *DescribeConfigurationRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConfigurationRevisionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConfigurationRevisionResponse_ConfigurationId:
+			v.ConfigurationId = new(string)
+			return d.ReadString(schemas.DescribeConfigurationRevisionResponse_ConfigurationId, v.ConfigurationId)
+		case schemas.DescribeConfigurationRevisionResponse_Created:
+			v.Created = new(time.Time)
+			return d.ReadTime(schemas.DescribeConfigurationRevisionResponse_Created, v.Created)
+		case schemas.DescribeConfigurationRevisionResponse_Data:
+			v.Data = new(string)
+			return d.ReadString(schemas.DescribeConfigurationRevisionResponse_Data, v.Data)
+		case schemas.DescribeConfigurationRevisionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeConfigurationRevisionResponse_Description, v.Description)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConfigurationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationRevision, schemas.DescribeConfigurationRevisionRequest, schemas.DescribeConfigurationRevisionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConfigurationRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConfigurationRevision, schemas.DescribeConfigurationRevisionRequest, schemas.DescribeConfigurationRevisionResponse), output: &DescribeConfigurationRevisionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConfigurationRevision{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConfigurationRevision"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeConfigurationRevisionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigurationRevision(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +151,8 @@ func (c *Client) addOperationDescribeConfigurationRevisionMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeConfigurationRevision(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConfigurationRevision",
-	}
 }

@@ -5,10 +5,10 @@ package amplifyuibuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of themes for a specified Amplify app and backend environment.
@@ -48,6 +48,46 @@ type ListThemesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThemesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThemesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThemesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ListThemesRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.ListThemesRequest_environmentName, *v.EnvironmentName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListThemesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThemesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListThemesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThemesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThemesRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.ListThemesRequest_appId, v.AppId)
+		case schemas.ListThemesRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.ListThemesRequest_environmentName, v.EnvironmentName)
+		case schemas.ListThemesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListThemesRequest_maxResults, v.MaxResults)
+		case schemas.ListThemesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThemesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListThemesOutput struct {
 
 	// The list of themes for the Amplify app.
@@ -64,77 +104,51 @@ type ListThemesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListThemesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListThemesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListThemesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeThemeSummaryList(s, schemas.ListThemesResponse_entities, v.Entities)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListThemesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListThemesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListThemesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListThemesResponse_entities:
+			return deserializeThemeSummaryList(d, schemas.ListThemesResponse_entities, &v.Entities)
+		case schemas.ListThemesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListThemesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListThemesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThemes, schemas.ListThemesRequest, schemas.ListThemesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListThemes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListThemes, schemas.ListThemesRequest, schemas.ListThemesResponse), output: &ListThemesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListThemes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListThemes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListThemesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListThemes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +161,6 @@ func (c *Client) addOperationListThemesMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +260,3 @@ type ListThemesAPIClient interface {
 }
 
 var _ ListThemesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListThemes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListThemes",
-	}
-}

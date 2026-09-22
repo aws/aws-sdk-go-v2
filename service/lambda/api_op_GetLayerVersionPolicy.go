@@ -4,10 +4,9 @@ package lambda
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the permission policy for a version of an [Lambda layer]. For more information, see AddLayerVersionPermission.
@@ -43,6 +42,21 @@ type GetLayerVersionPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLayerVersionPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLayerVersionPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLayerVersionPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LayerName != nil {
+		s.WriteString(schemas.GetLayerVersionPolicyRequest_LayerName, *v.LayerName)
+	}
+	if v.VersionNumber != nil {
+		s.WriteInt64(schemas.GetLayerVersionPolicyRequest_VersionNumber, *v.VersionNumber)
+	}
+}
+
 type GetLayerVersionPolicyOutput struct {
 
 	// The policy document.
@@ -57,77 +71,54 @@ type GetLayerVersionPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLayerVersionPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLayerVersionPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLayerVersionPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.GetLayerVersionPolicyResponse_Policy, *v.Policy)
+	}
+	if v.RevisionId != nil {
+		s.WriteString(schemas.GetLayerVersionPolicyResponse_RevisionId, *v.RevisionId)
+	}
+}
+func (v *GetLayerVersionPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLayerVersionPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLayerVersionPolicyResponse_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetLayerVersionPolicyResponse_Policy, v.Policy)
+		case schemas.GetLayerVersionPolicyResponse_RevisionId:
+			v.RevisionId = new(string)
+			return d.ReadString(schemas.GetLayerVersionPolicyResponse_RevisionId, v.RevisionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLayerVersionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLayerVersionPolicy, schemas.GetLayerVersionPolicyRequest, schemas.GetLayerVersionPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLayerVersionPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLayerVersionPolicy, schemas.GetLayerVersionPolicyRequest, schemas.GetLayerVersionPolicyResponse), output: &GetLayerVersionPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLayerVersionPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLayerVersionPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetLayerVersionPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLayerVersionPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +133,8 @@ func (c *Client) addOperationGetLayerVersionPolicyMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetLayerVersionPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetLayerVersionPolicy",
-	}
 }

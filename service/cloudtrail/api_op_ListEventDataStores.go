@@ -5,14 +5,20 @@ package cloudtrail
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// CloudTrail Lake will no longer be open to new customers starting May 31, 2026.
+// If you would like to use CloudTrail Lake, sign up prior to that date. Existing
+// customers can continue to use the service as normal. For more information, see [CloudTrail Lake availability change].
+//
 // Returns information about all event data stores in the account, in the current
 // Region.
+//
+// [CloudTrail Lake availability change]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-lake-service-availability-change.html
 func (c *Client) ListEventDataStores(ctx context.Context, params *ListEventDataStoresInput, optFns ...func(*Options)) (*ListEventDataStoresOutput, error) {
 	if params == nil {
 		params = &ListEventDataStoresInput{}
@@ -39,6 +45,21 @@ type ListEventDataStoresInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventDataStoresInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventDataStoresRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventDataStoresInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEventDataStoresRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventDataStoresRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEventDataStoresOutput struct {
 
 	// Contains information about event data stores in the account, in the current
@@ -54,74 +75,48 @@ type ListEventDataStoresOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEventDataStoresOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEventDataStoresResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEventDataStoresOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventDataStores(s, schemas.ListEventDataStoresResponse_EventDataStores, v.EventDataStores)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEventDataStoresResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListEventDataStoresOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEventDataStoresResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEventDataStoresResponse_EventDataStores:
+			return deserializeEventDataStores(d, schemas.ListEventDataStoresResponse_EventDataStores, &v.EventDataStores)
+		case schemas.ListEventDataStoresResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEventDataStoresResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEventDataStoresMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventDataStores, schemas.ListEventDataStoresRequest, schemas.ListEventDataStoresResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListEventDataStores{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEventDataStores, schemas.ListEventDataStoresRequest, schemas.ListEventDataStoresResponse), output: &ListEventDataStoresOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListEventDataStores{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEventDataStores"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventDataStores(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,12 +129,6 @@ func (c *Client) addOperationListEventDataStoresMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -241,11 +230,3 @@ type ListEventDataStoresAPIClient interface {
 }
 
 var _ ListEventDataStoresAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEventDataStores(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEventDataStores",
-	}
-}

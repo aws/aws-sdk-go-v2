@@ -5,10 +5,10 @@ package cloudtrail
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,6 +43,11 @@ import (
 //     the ListInsightsMetricData API operation is linked to the
 //     cloudtrail:LookupEvents action only. To use this operation, you must have
 //     permissions to perform the cloudtrail:LookupEvents action.
+//
+// For data event Insights on organization trails, only the management account and
+// delegated administrator accounts can call ListInsightsMetricData . For these
+// callers, the API returns Insights metrics only for the caller's own account.
+// Member accounts cannot call this API on organization trails.
 func (c *Client) ListInsightsMetricData(ctx context.Context, params *ListInsightsMetricDataInput, optFns ...func(*Options)) (*ListInsightsMetricDataOutput, error) {
 	if params == nil {
 		params = &ListInsightsMetricDataInput{}
@@ -130,6 +135,48 @@ type ListInsightsMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInsightsMetricDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInsightsMetricDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInsightsMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataType != "" {
+		s.WriteString(schemas.ListInsightsMetricDataRequest_DataType, string(v.DataType))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListInsightsMetricDataRequest_EndTime, *v.EndTime)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.ListInsightsMetricDataRequest_ErrorCode, *v.ErrorCode)
+	}
+	if v.EventName != nil {
+		s.WriteString(schemas.ListInsightsMetricDataRequest_EventName, *v.EventName)
+	}
+	if v.EventSource != nil {
+		s.WriteString(schemas.ListInsightsMetricDataRequest_EventSource, *v.EventSource)
+	}
+	if v.InsightType != "" {
+		s.WriteString(schemas.ListInsightsMetricDataRequest_InsightType, string(v.InsightType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInsightsMetricDataRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInsightsMetricDataRequest_NextToken, *v.NextToken)
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.ListInsightsMetricDataRequest_Period, *v.Period)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListInsightsMetricDataRequest_StartTime, *v.StartTime)
+	}
+	if v.TrailName != nil {
+		s.WriteString(schemas.ListInsightsMetricDataRequest_TrailName, *v.TrailName)
+	}
+}
+
 type ListInsightsMetricDataOutput struct {
 
 	// Only returned if InsightType parameter was set to ApiErrorRateInsight .
@@ -175,77 +222,88 @@ type ListInsightsMetricDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInsightsMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInsightsMetricDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInsightsMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.ListInsightsMetricDataResponse_ErrorCode, *v.ErrorCode)
+	}
+	if v.EventName != nil {
+		s.WriteString(schemas.ListInsightsMetricDataResponse_EventName, *v.EventName)
+	}
+	if v.EventSource != nil {
+		s.WriteString(schemas.ListInsightsMetricDataResponse_EventSource, *v.EventSource)
+	}
+	if v.InsightType != "" {
+		s.WriteString(schemas.ListInsightsMetricDataResponse_InsightType, string(v.InsightType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInsightsMetricDataResponse_NextToken, *v.NextToken)
+	}
+	serializeTimestamps(s, schemas.ListInsightsMetricDataResponse_Timestamps, v.Timestamps)
+	if v.TrailARN != nil {
+		s.WriteString(schemas.ListInsightsMetricDataResponse_TrailARN, *v.TrailARN)
+	}
+	serializeInsightsMetricValues(s, schemas.ListInsightsMetricDataResponse_Values, v.Values)
+}
+func (v *ListInsightsMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInsightsMetricDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInsightsMetricDataResponse_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.ListInsightsMetricDataResponse_ErrorCode, v.ErrorCode)
+		case schemas.ListInsightsMetricDataResponse_EventName:
+			v.EventName = new(string)
+			return d.ReadString(schemas.ListInsightsMetricDataResponse_EventName, v.EventName)
+		case schemas.ListInsightsMetricDataResponse_EventSource:
+			v.EventSource = new(string)
+			return d.ReadString(schemas.ListInsightsMetricDataResponse_EventSource, v.EventSource)
+		case schemas.ListInsightsMetricDataResponse_InsightType:
+			var ev string
+			if err := d.ReadString(schemas.ListInsightsMetricDataResponse_InsightType, &ev); err != nil {
+				return err
+			}
+			v.InsightType = types.InsightType(ev)
+			return nil
+		case schemas.ListInsightsMetricDataResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInsightsMetricDataResponse_NextToken, v.NextToken)
+		case schemas.ListInsightsMetricDataResponse_Timestamps:
+			return deserializeTimestamps(d, schemas.ListInsightsMetricDataResponse_Timestamps, &v.Timestamps)
+		case schemas.ListInsightsMetricDataResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.ListInsightsMetricDataResponse_TrailARN, v.TrailARN)
+		case schemas.ListInsightsMetricDataResponse_Values:
+			return deserializeInsightsMetricValues(d, schemas.ListInsightsMetricDataResponse_Values, &v.Values)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInsightsMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInsightsMetricData, schemas.ListInsightsMetricDataRequest, schemas.ListInsightsMetricDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInsightsMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInsightsMetricData, schemas.ListInsightsMetricDataRequest, schemas.ListInsightsMetricDataResponse), output: &ListInsightsMetricDataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInsightsMetricData{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInsightsMetricData"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListInsightsMetricDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInsightsMetricData(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -258,12 +316,6 @@ func (c *Client) addOperationListInsightsMetricDataMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -366,11 +418,3 @@ type ListInsightsMetricDataAPIClient interface {
 }
 
 var _ ListInsightsMetricDataAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListInsightsMetricData(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListInsightsMetricData",
-	}
-}

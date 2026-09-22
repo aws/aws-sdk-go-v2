@@ -4,14 +4,16 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified firewall rule.
+// Updates the specified firewall rule. The rule's FirewallRuleType ,
+// FirewallDomainListId , and top-level DnsThreatProtection match source cannot be
+// changed after creation. Rules whose Status is CREATING or CREATION_FAILED
+// cannot be updated; remove a failed rule with DeleteFirewallRule.
 func (c *Client) UpdateFirewallRule(ctx context.Context, params *UpdateFirewallRuleInput, optFns ...func(*Options)) (*UpdateFirewallRuleOutput, error) {
 	if params == nil {
 		params = &UpdateFirewallRuleInput{}
@@ -87,14 +89,19 @@ type UpdateFirewallRuleInput struct {
 	//   false positives.
 	ConfidenceThreshold types.ConfidenceThreshold
 
-	//  The type of the DNS Firewall Advanced rule. Valid values are:
+	//  The type of the DNS Firewall Advanced rule. This setting is mutually exclusive
+	// with FirewallDomainListId and FirewallRuleType . Valid values are:
 	//
 	//   - DGA : Domain generation algorithms detection. DGAs are used by attackers to
-	//   generate a large number of domains to to launch malware attacks.
+	//   generate a large number of domains to launch malware attacks.
 	//
 	//   - DNS_TUNNELING : DNS tunneling detection. DNS tunneling is used by attackers
 	//   to exfiltrate data from the client by using the DNS tunnel without making a
 	//   network connection to the client.
+	//
+	//   - DICTIONARY_DGA : Dictionary-based domain generation algorithms detection.
+	//   Dictionary DGAs use wordlists to generate domains that appear more legitimate,
+	//   making them harder to detect than traditional DGAs.
 	DnsThreatProtection types.DnsThreatProtection
 
 	// The ID of the domain list to use in the rule.
@@ -111,6 +118,26 @@ type UpdateFirewallRuleInput struct {
 	// chain. You don't need to add the subsequent domains in the domain in the
 	// redirection list to the domain list.
 	FirewallDomainRedirectionAction types.FirewallDomainRedirectionAction
+
+	// The rule type configuration for the firewall rule. This is a tagged union — set
+	// exactly one of its members. This setting is mutually exclusive with the
+	// top-level FirewallDomainListId and DnsThreatProtection fields. Use one of:
+	//
+	//   - FirewallAdvancedContentCategory — match an AWS-managed content category (for
+	//   example, VIOLENCE_AND_HATE_SPEECH ).
+	//
+	//   - FirewallAdvancedThreatCategory — match an AWS-managed advanced threat
+	//   category (for example, PHISHING ).
+	//
+	//   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
+	//   ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
+	//
+	//   - PartnerThreatProtection — match a third-party threat feed delivered through
+	//   AWS Marketplace. The selected partner must be an active subscription on the
+	//   calling account.
+	//
+	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
+	FirewallRuleType *types.FirewallRuleType
 
 	//  The DNS Firewall Advanced rule ID.
 	FirewallThreatProtectionId *string
@@ -157,7 +184,7 @@ type UpdateFirewallRuleInput struct {
 	//   - TXT: Verifies email senders and application-specific values.
 	//
 	//   - A query type you define by using the DNS type ID, for example 28 for AAAA.
-	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for
+	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65534, for
 	//   example, TYPE28. For more information, see [List of DNS record types].
 	//
 	// If you set up a firewall BLOCK rule with action NXDOMAIN on query type equals
@@ -168,6 +195,62 @@ type UpdateFirewallRuleInput struct {
 	Qtype *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_Action, string(v.Action))
+	}
+	if v.BlockOverrideDnsType != "" {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_BlockOverrideDnsType, string(v.BlockOverrideDnsType))
+	}
+	if v.BlockOverrideDomain != nil {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_BlockOverrideDomain, *v.BlockOverrideDomain)
+	}
+	if v.BlockOverrideTtl != nil {
+		s.WriteInt32(schemas.UpdateFirewallRuleRequest_BlockOverrideTtl, *v.BlockOverrideTtl)
+	}
+	if v.BlockResponse != "" {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_BlockResponse, string(v.BlockResponse))
+	}
+	if v.ConfidenceThreshold != "" {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_ConfidenceThreshold, string(v.ConfidenceThreshold))
+	}
+	if v.DnsThreatProtection != "" {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_DnsThreatProtection, string(v.DnsThreatProtection))
+	}
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.FirewallDomainRedirectionAction != "" {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_FirewallDomainRedirectionAction, string(v.FirewallDomainRedirectionAction))
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallRuleType != nil {
+		s.WriteStruct(schemas.UpdateFirewallRuleRequest_FirewallRuleType)
+		v.FirewallRuleType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FirewallThreatProtectionId != nil {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_FirewallThreatProtectionId, *v.FirewallThreatProtectionId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateFirewallRuleRequest_Priority, *v.Priority)
+	}
+	if v.Qtype != nil {
+		s.WriteString(schemas.UpdateFirewallRuleRequest_Qtype, *v.Qtype)
+	}
 }
 
 type UpdateFirewallRuleOutput struct {
@@ -181,77 +264,50 @@ type UpdateFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRule != nil {
+		s.WriteStruct(schemas.UpdateFirewallRuleResponse_FirewallRule)
+		v.FirewallRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFirewallRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFirewallRuleResponse_FirewallRule:
+			v.FirewallRule = &types.FirewallRule{}
+			return v.FirewallRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallRule, schemas.UpdateFirewallRuleRequest, schemas.UpdateFirewallRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallRule, schemas.UpdateFirewallRuleRequest, schemas.UpdateFirewallRuleResponse), output: &UpdateFirewallRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateFirewallRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFirewallRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateFirewallRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFirewallRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -266,22 +322,8 @@ func (c *Client) addOperationUpdateFirewallRuleMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateFirewallRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateFirewallRule",
-	}
 }

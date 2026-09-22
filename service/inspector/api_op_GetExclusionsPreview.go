@@ -5,10 +5,10 @@ package inspector
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the exclusions preview (a list of ExclusionPreview objects) specified
@@ -59,6 +59,30 @@ type GetExclusionsPreviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExclusionsPreviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExclusionsPreviewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExclusionsPreviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentTemplateArn != nil {
+		s.WriteString(schemas.GetExclusionsPreviewRequest_assessmentTemplateArn, *v.AssessmentTemplateArn)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.GetExclusionsPreviewRequest_locale, string(v.Locale))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetExclusionsPreviewRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExclusionsPreviewRequest_nextToken, *v.NextToken)
+	}
+	if v.PreviewToken != nil {
+		s.WriteString(schemas.GetExclusionsPreviewRequest_previewToken, *v.PreviewToken)
+	}
+}
+
 type GetExclusionsPreviewOutput struct {
 
 	// Specifies the status of the request to generate an exclusions preview.
@@ -81,77 +105,61 @@ type GetExclusionsPreviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExclusionsPreviewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExclusionsPreviewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExclusionsPreviewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExclusionPreviewList(s, schemas.GetExclusionsPreviewResponse_exclusionPreviews, v.ExclusionPreviews)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExclusionsPreviewResponse_nextToken, *v.NextToken)
+	}
+	if v.PreviewStatus != "" {
+		s.WriteString(schemas.GetExclusionsPreviewResponse_previewStatus, string(v.PreviewStatus))
+	}
+}
+func (v *GetExclusionsPreviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExclusionsPreviewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExclusionsPreviewResponse_exclusionPreviews:
+			return deserializeExclusionPreviewList(d, schemas.GetExclusionsPreviewResponse_exclusionPreviews, &v.ExclusionPreviews)
+		case schemas.GetExclusionsPreviewResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetExclusionsPreviewResponse_nextToken, v.NextToken)
+		case schemas.GetExclusionsPreviewResponse_previewStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetExclusionsPreviewResponse_previewStatus, &ev); err != nil {
+				return err
+			}
+			v.PreviewStatus = types.PreviewStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExclusionsPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExclusionsPreview, schemas.GetExclusionsPreviewRequest, schemas.GetExclusionsPreviewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetExclusionsPreview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExclusionsPreview, schemas.GetExclusionsPreviewRequest, schemas.GetExclusionsPreviewResponse), output: &GetExclusionsPreviewOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetExclusionsPreview{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetExclusionsPreview"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetExclusionsPreviewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExclusionsPreview(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +172,6 @@ func (c *Client) addOperationGetExclusionsPreviewMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +274,3 @@ type GetExclusionsPreviewAPIClient interface {
 }
 
 var _ GetExclusionsPreviewAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetExclusionsPreview(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetExclusionsPreview",
-	}
-}

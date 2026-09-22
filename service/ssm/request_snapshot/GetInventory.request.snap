@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.GetInventory
+
+{"Aggregators":[{"Aggregators":[{},{}],"Expression":"__Expression__","Groups":[{"Filters":[{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]},{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]}],"Name":"__Name__"},{"Filters":[{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]},{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]}],"Name":"__Name__"}]},{"Aggregators":[{},{}],"Expression":"__Expression__","Groups":[{"Filters":[{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]},{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]}],"Name":"__Name__"},{"Filters":[{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]},{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]}],"Name":"__Name__"}]}],"Filters":[{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]},{"Key":"__Key__","Type":"Equal","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","ResultAttributes":[{"TypeName":"__TypeName__"},{"TypeName":"__TypeName__"}]}

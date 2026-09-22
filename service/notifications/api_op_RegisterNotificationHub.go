@@ -4,18 +4,17 @@ package notifications
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Registers a NotificationConfiguration in the specified Region.
+// Registers a NotificationHub in the specified Region.
 //
-// There is a maximum of one NotificationConfiguration per Region. You can have a
-// maximum of 3 NotificationHub resources at a time.
+// There is a maximum of one NotificationHub per Region. You can have a maximum of
+// 3 NotificationHub resources at a time.
 func (c *Client) RegisterNotificationHub(ctx context.Context, params *RegisterNotificationHubInput, optFns ...func(*Options)) (*RegisterNotificationHubOutput, error) {
 	if params == nil {
 		params = &RegisterNotificationHubInput{}
@@ -41,6 +40,18 @@ type RegisterNotificationHubInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterNotificationHubInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterNotificationHubRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterNotificationHubInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationHubRegion != nil {
+		s.WriteString(schemas.RegisterNotificationHubRequest_notificationHubRegion, *v.NotificationHubRegion)
+	}
+}
+
 type RegisterNotificationHubOutput struct {
 
 	// The date the resource was created.
@@ -53,8 +64,8 @@ type RegisterNotificationHubOutput struct {
 	// This member is required.
 	NotificationHubRegion *string
 
-	// Provides additional information about the current NotificationConfiguration
-	// status information.
+	// Provides additional information about the current NotificationHub status
+	// information.
 	//
 	// This member is required.
 	StatusSummary *types.NotificationHubStatusSummary
@@ -68,77 +79,68 @@ type RegisterNotificationHubOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterNotificationHubOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterNotificationHubResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterNotificationHubOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.RegisterNotificationHubResponse_creationTime, *v.CreationTime)
+	}
+	if v.LastActivationTime != nil {
+		s.WriteTime(schemas.RegisterNotificationHubResponse_lastActivationTime, *v.LastActivationTime)
+	}
+	if v.NotificationHubRegion != nil {
+		s.WriteString(schemas.RegisterNotificationHubResponse_notificationHubRegion, *v.NotificationHubRegion)
+	}
+	if v.StatusSummary != nil {
+		s.WriteStruct(schemas.RegisterNotificationHubResponse_statusSummary)
+		v.StatusSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterNotificationHubOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterNotificationHubResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterNotificationHubResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.RegisterNotificationHubResponse_creationTime, v.CreationTime)
+		case schemas.RegisterNotificationHubResponse_lastActivationTime:
+			v.LastActivationTime = new(time.Time)
+			return d.ReadTime(schemas.RegisterNotificationHubResponse_lastActivationTime, v.LastActivationTime)
+		case schemas.RegisterNotificationHubResponse_notificationHubRegion:
+			v.NotificationHubRegion = new(string)
+			return d.ReadString(schemas.RegisterNotificationHubResponse_notificationHubRegion, v.NotificationHubRegion)
+		case schemas.RegisterNotificationHubResponse_statusSummary:
+			v.StatusSummary = &types.NotificationHubStatusSummary{}
+			return v.StatusSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterNotificationHubMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterNotificationHub, schemas.RegisterNotificationHubRequest, schemas.RegisterNotificationHubResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterNotificationHub{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterNotificationHub, schemas.RegisterNotificationHubRequest, schemas.RegisterNotificationHubResponse), output: &RegisterNotificationHubOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterNotificationHub{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterNotificationHub"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterNotificationHubValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterNotificationHub(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +155,8 @@ func (c *Client) addOperationRegisterNotificationHubMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterNotificationHub(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterNotificationHub",
-	}
 }

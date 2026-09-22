@@ -4,11 +4,10 @@ package detective
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the indicators from an investigation. You can use the information from the
@@ -61,6 +60,30 @@ type ListIndicatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIndicatorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIndicatorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIndicatorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.ListIndicatorsRequest_GraphArn, *v.GraphArn)
+	}
+	if v.IndicatorType != "" {
+		s.WriteString(schemas.ListIndicatorsRequest_IndicatorType, string(v.IndicatorType))
+	}
+	if v.InvestigationId != nil {
+		s.WriteString(schemas.ListIndicatorsRequest_InvestigationId, *v.InvestigationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIndicatorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIndicatorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIndicatorsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the behavior graph.
@@ -86,77 +109,63 @@ type ListIndicatorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIndicatorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIndicatorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIndicatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GraphArn != nil {
+		s.WriteString(schemas.ListIndicatorsResponse_GraphArn, *v.GraphArn)
+	}
+	serializeIndicators(s, schemas.ListIndicatorsResponse_Indicators, v.Indicators)
+	if v.InvestigationId != nil {
+		s.WriteString(schemas.ListIndicatorsResponse_InvestigationId, *v.InvestigationId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIndicatorsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIndicatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIndicatorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIndicatorsResponse_GraphArn:
+			v.GraphArn = new(string)
+			return d.ReadString(schemas.ListIndicatorsResponse_GraphArn, v.GraphArn)
+		case schemas.ListIndicatorsResponse_Indicators:
+			return deserializeIndicators(d, schemas.ListIndicatorsResponse_Indicators, &v.Indicators)
+		case schemas.ListIndicatorsResponse_InvestigationId:
+			v.InvestigationId = new(string)
+			return d.ReadString(schemas.ListIndicatorsResponse_InvestigationId, v.InvestigationId)
+		case schemas.ListIndicatorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIndicatorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIndicatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndicators, schemas.ListIndicatorsRequest, schemas.ListIndicatorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIndicators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIndicators, schemas.ListIndicatorsRequest, schemas.ListIndicatorsResponse), output: &ListIndicatorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIndicators{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIndicators"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIndicatorsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIndicators(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +180,8 @@ func (c *Client) addOperationListIndicatorsMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListIndicators(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIndicators",
-	}
 }

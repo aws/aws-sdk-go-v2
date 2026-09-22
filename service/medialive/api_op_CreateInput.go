@@ -5,10 +5,10 @@ package medialive
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create an input
@@ -97,6 +97,62 @@ type CreateInputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInputRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfInputDestinationRequest(s, schemas.CreateInputRequest_Destinations, v.Destinations)
+	serialize__listOfInputDeviceSettings(s, schemas.CreateInputRequest_InputDevices, v.InputDevices)
+	if v.InputNetworkLocation != "" {
+		s.WriteString(schemas.CreateInputRequest_InputNetworkLocation, string(v.InputNetworkLocation))
+	}
+	serialize__listOf__string(s, schemas.CreateInputRequest_InputSecurityGroups, v.InputSecurityGroups)
+	serialize__listOfMediaConnectFlowRequest(s, schemas.CreateInputRequest_MediaConnectFlows, v.MediaConnectFlows)
+	if v.MulticastSettings != nil {
+		s.WriteStruct(schemas.CreateInputRequest_MulticastSettings)
+		v.MulticastSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateInputRequest_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateInputRequest_RequestId, *v.RequestId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateInputRequest_RoleArn, *v.RoleArn)
+	}
+	if v.RouterSettings != nil {
+		s.WriteStruct(schemas.CreateInputRequest_RouterSettings)
+		v.RouterSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeInputSdiSources(s, schemas.CreateInputRequest_SdiSources, v.SdiSources)
+	if v.Smpte2110ReceiverGroupSettings != nil {
+		s.WriteStruct(schemas.CreateInputRequest_Smpte2110ReceiverGroupSettings)
+		v.Smpte2110ReceiverGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOfInputSourceRequest(s, schemas.CreateInputRequest_Sources, v.Sources)
+	if v.SrtSettings != nil {
+		s.WriteStruct(schemas.CreateInputRequest_SrtSettings)
+		v.SrtSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateInputRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateInputRequest_Type, string(v.Type))
+	}
+	if v.Vpc != nil {
+		s.WriteStruct(schemas.CreateInputRequest_Vpc)
+		v.Vpc.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // Placeholder documentation for CreateInputResponse
 type CreateInputOutput struct {
 
@@ -109,65 +165,44 @@ type CreateInputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInputOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInputResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInputOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteStruct(schemas.CreateInputResponse_Input)
+		v.Input.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateInputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInputResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInputResponse_Input:
+			v.Input = &types.Input{}
+			return v.Input.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInputMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInput, schemas.CreateInputRequest, schemas.CreateInputResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInput, schemas.CreateInputRequest, schemas.CreateInputResponse), output: &CreateInputOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInput{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInput"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -177,12 +212,6 @@ func (c *Client) addOperationCreateInputMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addOpCreateInputValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInput(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,12 +224,6 @@ func (c *Client) addOperationCreateInputMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -240,12 +263,4 @@ func (m *idempotencyToken_initializeOpCreateInput) HandleInitialize(ctx context.
 }
 func addIdempotencyToken_opCreateInputMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateInput{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateInput(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateInput",
-	}
 }

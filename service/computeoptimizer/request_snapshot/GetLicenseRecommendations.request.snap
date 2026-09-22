@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerService/operation/GetLicenseRecommendations
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¥lresourceArns‚j__Member__j__Member__inextTokenm__NextToken__jmaxResultsgfilters‚¢dnamegFindingfvalues‚j__Member__j__Member__¢fvalues‚j__Member__j__Member__dnamegFindingjaccountIds‚j__Member__j__Member__

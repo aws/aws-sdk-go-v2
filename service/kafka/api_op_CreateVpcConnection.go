@@ -4,11 +4,10 @@ package kafka
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -61,6 +60,27 @@ type CreateVpcConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authentication != nil {
+		s.WriteString(schemas.CreateVpcConnectionRequest_Authentication, *v.Authentication)
+	}
+	serialize__listOf__string(s, schemas.CreateVpcConnectionRequest_ClientSubnets, v.ClientSubnets)
+	serialize__listOf__string(s, schemas.CreateVpcConnectionRequest_SecurityGroups, v.SecurityGroups)
+	serialize__mapOf__string(s, schemas.CreateVpcConnectionRequest_Tags, v.Tags)
+	if v.TargetClusterArn != nil {
+		s.WriteString(schemas.CreateVpcConnectionRequest_TargetClusterArn, *v.TargetClusterArn)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateVpcConnectionRequest_VpcId, *v.VpcId)
+	}
+}
+
 type CreateVpcConnectionOutput struct {
 
 	// The authentication type of VPC connection.
@@ -93,77 +113,85 @@ type CreateVpcConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVpcConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVpcConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVpcConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authentication != nil {
+		s.WriteString(schemas.CreateVpcConnectionResponse_Authentication, *v.Authentication)
+	}
+	serialize__listOf__string(s, schemas.CreateVpcConnectionResponse_ClientSubnets, v.ClientSubnets)
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.CreateVpcConnectionResponse_CreationTime, *v.CreationTime)
+	}
+	serialize__listOf__string(s, schemas.CreateVpcConnectionResponse_SecurityGroups, v.SecurityGroups)
+	if v.State != "" {
+		s.WriteString(schemas.CreateVpcConnectionResponse_State, string(v.State))
+	}
+	serialize__mapOf__string(s, schemas.CreateVpcConnectionResponse_Tags, v.Tags)
+	if v.VpcConnectionArn != nil {
+		s.WriteString(schemas.CreateVpcConnectionResponse_VpcConnectionArn, *v.VpcConnectionArn)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.CreateVpcConnectionResponse_VpcId, *v.VpcId)
+	}
+}
+func (v *CreateVpcConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVpcConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVpcConnectionResponse_Authentication:
+			v.Authentication = new(string)
+			return d.ReadString(schemas.CreateVpcConnectionResponse_Authentication, v.Authentication)
+		case schemas.CreateVpcConnectionResponse_ClientSubnets:
+			return deserialize__listOf__string(d, schemas.CreateVpcConnectionResponse_ClientSubnets, &v.ClientSubnets)
+		case schemas.CreateVpcConnectionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateVpcConnectionResponse_CreationTime, v.CreationTime)
+		case schemas.CreateVpcConnectionResponse_SecurityGroups:
+			return deserialize__listOf__string(d, schemas.CreateVpcConnectionResponse_SecurityGroups, &v.SecurityGroups)
+		case schemas.CreateVpcConnectionResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateVpcConnectionResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.VpcConnectionState(ev)
+			return nil
+		case schemas.CreateVpcConnectionResponse_Tags:
+			return deserialize__mapOf__string(d, schemas.CreateVpcConnectionResponse_Tags, &v.Tags)
+		case schemas.CreateVpcConnectionResponse_VpcConnectionArn:
+			v.VpcConnectionArn = new(string)
+			return d.ReadString(schemas.CreateVpcConnectionResponse_VpcConnectionArn, v.VpcConnectionArn)
+		case schemas.CreateVpcConnectionResponse_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.CreateVpcConnectionResponse_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVpcConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcConnection, schemas.CreateVpcConnectionRequest, schemas.CreateVpcConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVpcConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVpcConnection, schemas.CreateVpcConnectionRequest, schemas.CreateVpcConnectionResponse), output: &CreateVpcConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVpcConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVpcConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateVpcConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVpcConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +206,8 @@ func (c *Client) addOperationCreateVpcConnectionMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateVpcConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVpcConnection",
-	}
 }

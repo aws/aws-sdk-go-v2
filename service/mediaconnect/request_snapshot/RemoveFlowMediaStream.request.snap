@@ -1,0 +1,3 @@
+DELETE /v1/flows/__FlowArn__/mediaStreams/__MediaStreamName__
+
+

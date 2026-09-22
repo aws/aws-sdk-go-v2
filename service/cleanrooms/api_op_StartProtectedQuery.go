@@ -4,11 +4,10 @@ package cleanrooms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a protected query that is started by Clean Rooms.
@@ -48,10 +47,70 @@ type StartProtectedQueryInput struct {
 	//  The compute configuration for the protected query.
 	ComputeConfiguration types.ComputeConfiguration
 
+	// The account ID of the member that pays for the query compute costs.
+	QueryComputePayerAccountId *string
+
 	// The details needed to write the query results.
 	ResultConfiguration *types.ProtectedQueryResultConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartProtectedQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProtectedQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProtectedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComputeConfiguration(s, schemas.StartProtectedQueryInput_computeConfiguration, v.ComputeConfiguration)
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.StartProtectedQueryInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.QueryComputePayerAccountId != nil {
+		s.WriteString(schemas.StartProtectedQueryInput_queryComputePayerAccountId, *v.QueryComputePayerAccountId)
+	}
+	if v.ResultConfiguration != nil {
+		s.WriteStruct(schemas.StartProtectedQueryInput_resultConfiguration)
+		v.ResultConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqlParameters != nil {
+		s.WriteStruct(schemas.StartProtectedQueryInput_sqlParameters)
+		v.SqlParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.StartProtectedQueryInput_type, string(v.Type))
+	}
+}
+func (v *StartProtectedQueryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProtectedQueryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProtectedQueryInput_computeConfiguration:
+			return deserializeComputeConfiguration(d, schemas.StartProtectedQueryInput_computeConfiguration, &v.ComputeConfiguration)
+		case schemas.StartProtectedQueryInput_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.StartProtectedQueryInput_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.StartProtectedQueryInput_queryComputePayerAccountId:
+			v.QueryComputePayerAccountId = new(string)
+			return d.ReadString(schemas.StartProtectedQueryInput_queryComputePayerAccountId, v.QueryComputePayerAccountId)
+		case schemas.StartProtectedQueryInput_resultConfiguration:
+			v.ResultConfiguration = &types.ProtectedQueryResultConfiguration{}
+			return v.ResultConfiguration.Deserialize(d)
+		case schemas.StartProtectedQueryInput_sqlParameters:
+			v.SqlParameters = &types.ProtectedQuerySQLParameters{}
+			return v.SqlParameters.Deserialize(d)
+		case schemas.StartProtectedQueryInput_type:
+			var ev string
+			if err := d.ReadString(schemas.StartProtectedQueryInput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.ProtectedQueryType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type StartProtectedQueryOutput struct {
@@ -67,77 +126,50 @@ type StartProtectedQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProtectedQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProtectedQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProtectedQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProtectedQuery != nil {
+		s.WriteStruct(schemas.StartProtectedQueryOutput_protectedQuery)
+		v.ProtectedQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartProtectedQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProtectedQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProtectedQueryOutput_protectedQuery:
+			v.ProtectedQuery = &types.ProtectedQuery{}
+			return v.ProtectedQuery.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartProtectedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProtectedQuery, schemas.StartProtectedQueryInput, schemas.StartProtectedQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartProtectedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProtectedQuery, schemas.StartProtectedQueryInput, schemas.StartProtectedQueryOutput), output: &StartProtectedQueryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartProtectedQuery{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartProtectedQuery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartProtectedQueryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartProtectedQuery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +184,8 @@ func (c *Client) addOperationStartProtectedQueryMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartProtectedQuery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartProtectedQuery",
-	}
 }

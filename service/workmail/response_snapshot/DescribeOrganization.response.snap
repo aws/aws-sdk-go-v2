@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.DescribeOrganization
+
+{"ARN":"__ARN__","Alias":"__Alias__","CompletedDate":946684800,"DefaultMailDomain":"__DefaultMailDomain__","DirectoryId":"__DirectoryId__","DirectoryType":"__DirectoryType__","ErrorMessage":"__ErrorMessage__","InteroperabilityEnabled":true,"MigrationAdmin":"__MigrationAdmin__","OrganizationId":"__OrganizationId__","State":"__State__"}

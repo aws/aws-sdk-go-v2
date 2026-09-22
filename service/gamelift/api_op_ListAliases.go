@@ -5,10 +5,10 @@ package gamelift
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -73,6 +73,27 @@ type ListAliasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListAliasesInput_Limit, *v.Limit)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListAliasesInput_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesInput_NextToken, *v.NextToken)
+	}
+	if v.RoutingStrategyType != "" {
+		s.WriteString(schemas.ListAliasesInput_RoutingStrategyType, string(v.RoutingStrategyType))
+	}
+}
+
 type ListAliasesOutput struct {
 
 	// A collection of alias resources that match the request parameters.
@@ -89,77 +110,51 @@ type ListAliasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAliasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAliasesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAliasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAliasList(s, schemas.ListAliasesOutput_Aliases, v.Aliases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAliasesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAliasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAliasesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAliasesOutput_Aliases:
+			return deserializeAliasList(d, schemas.ListAliasesOutput_Aliases, &v.Aliases)
+		case schemas.ListAliasesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAliasesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesInput, schemas.ListAliasesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAliases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAliases, schemas.ListAliasesInput, schemas.ListAliasesOutput), output: &ListAliasesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAliases{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAliases"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAliases(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +167,6 @@ func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +267,3 @@ type ListAliasesAPIClient interface {
 }
 
 var _ ListAliasesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAliases(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAliases",
-	}
-}

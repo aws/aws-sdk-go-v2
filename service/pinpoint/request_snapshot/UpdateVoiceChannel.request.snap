@@ -1,0 +1,5 @@
+PUT /v1/apps/__ApplicationId__/channels/voice
+
+Content-Type: application/json
+
+{"Enabled":true}

@@ -4,15 +4,14 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get information about a specific tenant, including the tenant's name, ID, ARN,
-// creation timestamp, tags, and sending status.
+// creation timestamp, tags, sending status, and suppression attributes.
 func (c *Client) GetTenant(ctx context.Context, params *GetTenantInput, optFns ...func(*Options)) (*GetTenantOutput, error) {
 	if params == nil {
 		params = &GetTenantInput{}
@@ -39,6 +38,18 @@ type GetTenantInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTenantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTenantRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTenantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TenantName != nil {
+		s.WriteString(schemas.GetTenantRequest_TenantName, *v.TenantName)
+	}
+}
+
 // Information about a specific tenant.
 type GetTenantOutput struct {
 
@@ -51,77 +62,50 @@ type GetTenantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTenantOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTenantResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTenantOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Tenant != nil {
+		s.WriteStruct(schemas.GetTenantResponse_Tenant)
+		v.Tenant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetTenantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTenantResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTenantResponse_Tenant:
+			v.Tenant = &types.Tenant{}
+			return v.Tenant.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTenantMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTenant, schemas.GetTenantRequest, schemas.GetTenantResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTenant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTenant, schemas.GetTenantRequest, schemas.GetTenantResponse), output: &GetTenantOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTenant{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTenant"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTenantValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTenant(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +120,8 @@ func (c *Client) addOperationGetTenantMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTenant(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTenant",
-	}
 }

@@ -5,10 +5,10 @@ package sfn
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sfn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the history of the specified execution as a list of events. By default,
@@ -69,6 +69,30 @@ type GetExecutionHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExecutionHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExecutionHistoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExecutionHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionArn != nil {
+		s.WriteString(schemas.GetExecutionHistoryInput_executionArn, *v.ExecutionArn)
+	}
+	if v.IncludeExecutionData != nil {
+		s.WriteBool(schemas.GetExecutionHistoryInput_includeExecutionData, *v.IncludeExecutionData)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.GetExecutionHistoryInput_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExecutionHistoryInput_nextToken, *v.NextToken)
+	}
+	if v.ReverseOrder != false {
+		s.WriteBool(schemas.GetExecutionHistoryInput_reverseOrder, v.ReverseOrder)
+	}
+}
+
 type GetExecutionHistoryOutput struct {
 
 	// The list of events that occurred in the execution.
@@ -89,77 +113,51 @@ type GetExecutionHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetExecutionHistoryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetExecutionHistoryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetExecutionHistoryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHistoryEventList(s, schemas.GetExecutionHistoryOutput_events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetExecutionHistoryOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *GetExecutionHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetExecutionHistoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetExecutionHistoryOutput_events:
+			return deserializeHistoryEventList(d, schemas.GetExecutionHistoryOutput_events, &v.Events)
+		case schemas.GetExecutionHistoryOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetExecutionHistoryOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExecutionHistory, schemas.GetExecutionHistoryInput, schemas.GetExecutionHistoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetExecutionHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetExecutionHistory, schemas.GetExecutionHistoryInput, schemas.GetExecutionHistoryOutput), output: &GetExecutionHistoryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetExecutionHistory{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetExecutionHistory"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetExecutionHistoryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExecutionHistory(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +170,6 @@ func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -280,11 +272,3 @@ type GetExecutionHistoryAPIClient interface {
 }
 
 var _ GetExecutionHistoryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetExecutionHistory(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetExecutionHistory",
-	}
-}

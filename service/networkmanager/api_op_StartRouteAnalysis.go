@@ -4,11 +4,10 @@ package networkmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts analyzing the routing path between the specified source and destination.
@@ -57,6 +56,34 @@ type StartRouteAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRouteAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRouteAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRouteAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.StartRouteAnalysisRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.StartRouteAnalysisRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.IncludeReturnPath != false {
+		s.WriteBool(schemas.StartRouteAnalysisRequest_IncludeReturnPath, v.IncludeReturnPath)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.StartRouteAnalysisRequest_Source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UseMiddleboxes != false {
+		s.WriteBool(schemas.StartRouteAnalysisRequest_UseMiddleboxes, v.UseMiddleboxes)
+	}
+}
+
 type StartRouteAnalysisOutput struct {
 
 	// The route analysis.
@@ -68,77 +95,50 @@ type StartRouteAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartRouteAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartRouteAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartRouteAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RouteAnalysis != nil {
+		s.WriteStruct(schemas.StartRouteAnalysisResponse_RouteAnalysis)
+		v.RouteAnalysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartRouteAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartRouteAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartRouteAnalysisResponse_RouteAnalysis:
+			v.RouteAnalysis = &types.RouteAnalysis{}
+			return v.RouteAnalysis.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartRouteAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRouteAnalysis, schemas.StartRouteAnalysisRequest, schemas.StartRouteAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRouteAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartRouteAnalysis, schemas.StartRouteAnalysisRequest, schemas.StartRouteAnalysisResponse), output: &StartRouteAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartRouteAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartRouteAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartRouteAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartRouteAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +153,8 @@ func (c *Client) addOperationStartRouteAnalysisMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartRouteAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartRouteAnalysis",
-	}
 }

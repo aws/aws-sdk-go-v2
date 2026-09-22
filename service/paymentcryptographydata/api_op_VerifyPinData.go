@@ -4,11 +4,10 @@ package paymentcryptographydata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Verifies pin-related data such as PIN and PIN Offset using algorithms including
@@ -25,8 +24,8 @@ import (
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -36,6 +35,7 @@ import (
 //
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 // [Verify PIN data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/verify-pin-data.html
 func (c *Client) VerifyPinData(ctx context.Context, params *VerifyPinDataInput, optFns ...func(*Options)) (*VerifyPinDataOutput, error) {
 	if params == nil {
@@ -105,6 +105,44 @@ type VerifyPinDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyPinDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyPinDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyPinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DukptAttributes != nil {
+		s.WriteStruct(schemas.VerifyPinDataInput_DukptAttributes)
+		v.DukptAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptedPinBlock != nil {
+		s.WriteString(schemas.VerifyPinDataInput_EncryptedPinBlock, *v.EncryptedPinBlock)
+	}
+	if v.EncryptionKeyIdentifier != nil {
+		s.WriteString(schemas.VerifyPinDataInput_EncryptionKeyIdentifier, *v.EncryptionKeyIdentifier)
+	}
+	if v.EncryptionWrappedKey != nil {
+		s.WriteStruct(schemas.VerifyPinDataInput_EncryptionWrappedKey)
+		v.EncryptionWrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PinBlockFormat != "" {
+		s.WriteString(schemas.VerifyPinDataInput_PinBlockFormat, string(v.PinBlockFormat))
+	}
+	if v.PinDataLength != nil {
+		s.WriteInt32(schemas.VerifyPinDataInput_PinDataLength, *v.PinDataLength)
+	}
+	if v.PrimaryAccountNumber != nil {
+		s.WriteString(schemas.VerifyPinDataInput_PrimaryAccountNumber, *v.PrimaryAccountNumber)
+	}
+	serializePinVerificationAttributes(s, schemas.VerifyPinDataInput_VerificationAttributes, v.VerificationAttributes)
+	if v.VerificationKeyIdentifier != nil {
+		s.WriteString(schemas.VerifyPinDataInput_VerificationKeyIdentifier, *v.VerificationKeyIdentifier)
+	}
+}
+
 type VerifyPinDataOutput struct {
 
 	// The keyARN of the PEK that Amazon Web Services Payment Cryptography uses for
@@ -145,77 +183,66 @@ type VerifyPinDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VerifyPinDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VerifyPinDataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VerifyPinDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.VerifyPinDataOutput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionKeyCheckValue != nil {
+		s.WriteString(schemas.VerifyPinDataOutput_EncryptionKeyCheckValue, *v.EncryptionKeyCheckValue)
+	}
+	if v.VerificationKeyArn != nil {
+		s.WriteString(schemas.VerifyPinDataOutput_VerificationKeyArn, *v.VerificationKeyArn)
+	}
+	if v.VerificationKeyCheckValue != nil {
+		s.WriteString(schemas.VerifyPinDataOutput_VerificationKeyCheckValue, *v.VerificationKeyCheckValue)
+	}
+}
+func (v *VerifyPinDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VerifyPinDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VerifyPinDataOutput_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.VerifyPinDataOutput_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.VerifyPinDataOutput_EncryptionKeyCheckValue:
+			v.EncryptionKeyCheckValue = new(string)
+			return d.ReadString(schemas.VerifyPinDataOutput_EncryptionKeyCheckValue, v.EncryptionKeyCheckValue)
+		case schemas.VerifyPinDataOutput_VerificationKeyArn:
+			v.VerificationKeyArn = new(string)
+			return d.ReadString(schemas.VerifyPinDataOutput_VerificationKeyArn, v.VerificationKeyArn)
+		case schemas.VerifyPinDataOutput_VerificationKeyCheckValue:
+			v.VerificationKeyCheckValue = new(string)
+			return d.ReadString(schemas.VerifyPinDataOutput_VerificationKeyCheckValue, v.VerificationKeyCheckValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationVerifyPinDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyPinData, schemas.VerifyPinDataInput, schemas.VerifyPinDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyPinData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.VerifyPinData, schemas.VerifyPinDataInput, schemas.VerifyPinDataOutput), output: &VerifyPinDataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyPinData{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "VerifyPinData"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpVerifyPinDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyPinData(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -230,22 +257,8 @@ func (c *Client) addOperationVerifyPinDataMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opVerifyPinData(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "VerifyPinData",
-	}
 }

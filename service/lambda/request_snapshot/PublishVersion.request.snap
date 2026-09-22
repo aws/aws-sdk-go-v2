@@ -1,0 +1,5 @@
+POST /2015-03-31/functions/__FunctionName__/versions
+
+Content-Type: application/json
+
+{"CodeSha256":"__CodeSha256__","Description":"__Description__","PublishTo":"LATEST_PUBLISHED","RevisionId":"__RevisionId__"}

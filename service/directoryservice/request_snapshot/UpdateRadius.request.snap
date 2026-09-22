@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: DirectoryService_20150416.UpdateRadius
+
+{"DirectoryId":"__DirectoryId__","RadiusSettings":{"AuthenticationProtocol":"PAP","DisplayLabel":"__DisplayLabel__","RadiusPort":1,"RadiusRetries":1,"RadiusServers":["__Member__","__Member__"],"RadiusServersIpv6":["__Member__","__Member__"],"RadiusTimeout":1,"SharedSecret":"__SharedSecret__","UseSameUsername":true}}

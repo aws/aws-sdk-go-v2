@@ -1,0 +1,7 @@
+POST /service/EC2WindowsBarleyService/operation/DescribeObservation
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¢mObservationIdq__ObservationId__iAccountIdm__AccountId__

@@ -1,0 +1,5 @@
+POST /bots/__BotId__/analytics/intentpaths
+
+Content-Type: application/json
+
+{"endDateTime":946684800,"filters":[{"name":"BotAliasId","operator":"EQ","values":["__Member__","__Member__"]},{"name":"BotAliasId","operator":"EQ","values":["__Member__","__Member__"]}],"intentPath":"__IntentPath__","startDateTime":946684800}

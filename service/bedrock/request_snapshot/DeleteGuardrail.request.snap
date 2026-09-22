@@ -1,0 +1,3 @@
+DELETE /guardrails/__GuardrailIdentifier__?guardrailVersion=__GuardrailVersion__
+
+

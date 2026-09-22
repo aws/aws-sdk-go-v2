@@ -4,11 +4,10 @@ package machinelearning
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new MLModel using the DataSource and the recipe as information
@@ -125,6 +124,34 @@ type CreateMLModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMLModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMLModelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMLModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.CreateMLModelInput_MLModelId, *v.MLModelId)
+	}
+	if v.MLModelName != nil {
+		s.WriteString(schemas.CreateMLModelInput_MLModelName, *v.MLModelName)
+	}
+	if v.MLModelType != "" {
+		s.WriteString(schemas.CreateMLModelInput_MLModelType, string(v.MLModelType))
+	}
+	serializeTrainingParameters(s, schemas.CreateMLModelInput_Parameters, v.Parameters)
+	if v.Recipe != nil {
+		s.WriteString(schemas.CreateMLModelInput_Recipe, *v.Recipe)
+	}
+	if v.RecipeUri != nil {
+		s.WriteString(schemas.CreateMLModelInput_RecipeUri, *v.RecipeUri)
+	}
+	if v.TrainingDataSourceId != nil {
+		s.WriteString(schemas.CreateMLModelInput_TrainingDataSourceId, *v.TrainingDataSourceId)
+	}
+}
+
 //	Represents the output of a CreateMLModel operation, and is an acknowledgement
 //
 // that Amazon ML received the request.
@@ -143,77 +170,48 @@ type CreateMLModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMLModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMLModelOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMLModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MLModelId != nil {
+		s.WriteString(schemas.CreateMLModelOutput_MLModelId, *v.MLModelId)
+	}
+}
+func (v *CreateMLModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMLModelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMLModelOutput_MLModelId:
+			v.MLModelId = new(string)
+			return d.ReadString(schemas.CreateMLModelOutput_MLModelId, v.MLModelId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLModel, schemas.CreateMLModelInput, schemas.CreateMLModelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMLModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMLModel, schemas.CreateMLModelInput, schemas.CreateMLModelOutput), output: &CreateMLModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMLModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMLModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateMLModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMLModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +226,8 @@ func (c *Client) addOperationCreateMLModelMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateMLModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMLModel",
-	}
 }

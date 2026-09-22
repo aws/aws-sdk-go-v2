@@ -4,11 +4,10 @@ package pinpointsmsvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update an event destination in a configuration set. An event destination is a
@@ -48,6 +47,26 @@ type UpdateConfigurationSetEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetEventDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationSetEventDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetEventDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.UpdateConfigurationSetEventDestinationRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestination != nil {
+		s.WriteStruct(schemas.UpdateConfigurationSetEventDestinationRequest_EventDestination)
+		v.EventDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.UpdateConfigurationSetEventDestinationRequest_EventDestinationName, *v.EventDestinationName)
+	}
+}
+
 // An empty object that indicates that the event destination was updated
 // successfully.
 type UpdateConfigurationSetEventDestinationOutput struct {
@@ -57,77 +76,42 @@ type UpdateConfigurationSetEventDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfigurationSetEventDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfigurationSetEventDestinationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfigurationSetEventDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateConfigurationSetEventDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfigurationSetEventDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetEventDestination, schemas.UpdateConfigurationSetEventDestinationRequest, schemas.UpdateConfigurationSetEventDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfigurationSetEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfigurationSetEventDestination, schemas.UpdateConfigurationSetEventDestinationRequest, schemas.UpdateConfigurationSetEventDestinationResponse), output: &UpdateConfigurationSetEventDestinationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfigurationSetEventDestination{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConfigurationSetEventDestination"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateConfigurationSetEventDestinationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConfigurationSetEventDestination(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +126,8 @@ func (c *Client) addOperationUpdateConfigurationSetEventDestinationMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateConfigurationSetEventDestination(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateConfigurationSetEventDestination",
-	}
 }

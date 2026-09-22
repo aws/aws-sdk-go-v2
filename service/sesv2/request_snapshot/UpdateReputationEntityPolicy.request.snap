@@ -1,0 +1,5 @@
+PUT /v2/email/reputation/entities/RESOURCE/__ReputationEntityReference__/policy
+
+Content-Type: application/json
+
+{"ReputationEntityPolicy":"__ReputationEntityPolicy__"}

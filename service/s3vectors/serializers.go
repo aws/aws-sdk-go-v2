@@ -1635,6 +1635,11 @@ func awsRestjson1_serializeOpDocumentQueryVectorsInput(v *QueryVectorsInput, val
 		ok.String(*v.IndexName)
 	}
 
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
 	if v.QueryVector != nil {
 		ok := object.Key("queryVector")
 		if err := awsRestjson1_serializeDocumentVectorData(v.QueryVector, ok); err != nil {

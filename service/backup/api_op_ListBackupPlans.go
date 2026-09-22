@@ -5,10 +5,10 @@ package backup
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backup/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the active backup plans for the account.
@@ -45,6 +45,24 @@ type ListBackupPlansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupPlansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupPlansInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupPlansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeDeleted != nil {
+		s.WriteBool(schemas.ListBackupPlansInput_IncludeDeleted, *v.IncludeDeleted)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBackupPlansInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupPlansInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListBackupPlansOutput struct {
 
 	// Information about the backup plans.
@@ -62,74 +80,48 @@ type ListBackupPlansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBackupPlansOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBackupPlansOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBackupPlansOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBackupPlansList(s, schemas.ListBackupPlansOutput_BackupPlansList, v.BackupPlansList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBackupPlansOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListBackupPlansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBackupPlansOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBackupPlansOutput_BackupPlansList:
+			return deserializeBackupPlansList(d, schemas.ListBackupPlansOutput_BackupPlansList, &v.BackupPlansList)
+		case schemas.ListBackupPlansOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBackupPlansOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBackupPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupPlans, schemas.ListBackupPlansInput, schemas.ListBackupPlansOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBackupPlans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBackupPlans, schemas.ListBackupPlansInput, schemas.ListBackupPlansOutput), output: &ListBackupPlansOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBackupPlans{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBackupPlans"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBackupPlans(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +134,6 @@ func (c *Client) addOperationListBackupPlansMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +234,3 @@ type ListBackupPlansAPIClient interface {
 }
 
 var _ ListBackupPlansAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBackupPlans(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBackupPlans",
-	}
-}

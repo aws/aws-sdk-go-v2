@@ -4,11 +4,10 @@ package secretsmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // For a secret that is replicated to other Regions, deletes the secret replicas
@@ -54,6 +53,19 @@ type RemoveRegionsFromReplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRegionsFromReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveRegionsFromReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRegionsFromReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRemoveReplicaRegionListType(s, schemas.RemoveRegionsFromReplicationRequest_RemoveReplicaRegions, v.RemoveReplicaRegions)
+	if v.SecretId != nil {
+		s.WriteString(schemas.RemoveRegionsFromReplicationRequest_SecretId, *v.SecretId)
+	}
+}
+
 type RemoveRegionsFromReplicationOutput struct {
 
 	// The ARN of the primary secret.
@@ -68,77 +80,51 @@ type RemoveRegionsFromReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveRegionsFromReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveRegionsFromReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveRegionsFromReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RemoveRegionsFromReplicationResponse_ARN, *v.ARN)
+	}
+	serializeReplicationStatusListType(s, schemas.RemoveRegionsFromReplicationResponse_ReplicationStatus, v.ReplicationStatus)
+}
+func (v *RemoveRegionsFromReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveRegionsFromReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveRegionsFromReplicationResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RemoveRegionsFromReplicationResponse_ARN, v.ARN)
+		case schemas.RemoveRegionsFromReplicationResponse_ReplicationStatus:
+			return deserializeReplicationStatusListType(d, schemas.RemoveRegionsFromReplicationResponse_ReplicationStatus, &v.ReplicationStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveRegionsFromReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRegionsFromReplication, schemas.RemoveRegionsFromReplicationRequest, schemas.RemoveRegionsFromReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveRegionsFromReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveRegionsFromReplication, schemas.RemoveRegionsFromReplicationRequest, schemas.RemoveRegionsFromReplicationResponse), output: &RemoveRegionsFromReplicationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveRegionsFromReplication{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveRegionsFromReplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRemoveRegionsFromReplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveRegionsFromReplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +139,8 @@ func (c *Client) addOperationRemoveRegionsFromReplicationMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRemoveRegionsFromReplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RemoveRegionsFromReplication",
-	}
 }

@@ -5,10 +5,10 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -126,6 +126,35 @@ type ListUtteranceMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUtteranceMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUtteranceMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUtteranceMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyticsUtteranceAttributes(s, schemas.ListUtteranceMetricsRequest_attributes, v.Attributes)
+	serializeAnalyticsBinByList(s, schemas.ListUtteranceMetricsRequest_binBy, v.BinBy)
+	if v.BotId != nil {
+		s.WriteString(schemas.ListUtteranceMetricsRequest_botId, *v.BotId)
+	}
+	if v.EndDateTime != nil {
+		s.WriteTime(schemas.ListUtteranceMetricsRequest_endDateTime, *v.EndDateTime)
+	}
+	serializeAnalyticsUtteranceFilters(s, schemas.ListUtteranceMetricsRequest_filters, v.Filters)
+	serializeAnalyticsUtteranceGroupByList(s, schemas.ListUtteranceMetricsRequest_groupBy, v.GroupBy)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUtteranceMetricsRequest_maxResults, *v.MaxResults)
+	}
+	serializeAnalyticsUtteranceMetrics(s, schemas.ListUtteranceMetricsRequest_metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUtteranceMetricsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartDateTime != nil {
+		s.WriteTime(schemas.ListUtteranceMetricsRequest_startDateTime, *v.StartDateTime)
+	}
+}
+
 type ListUtteranceMetricsOutput struct {
 
 	// The identifier for the bot for which you retrieved utterance metrics.
@@ -149,77 +178,57 @@ type ListUtteranceMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUtteranceMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUtteranceMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUtteranceMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListUtteranceMetricsResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUtteranceMetricsResponse_nextToken, *v.NextToken)
+	}
+	serializeAnalyticsUtteranceResults(s, schemas.ListUtteranceMetricsResponse_results, v.Results)
+}
+func (v *ListUtteranceMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUtteranceMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUtteranceMetricsResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListUtteranceMetricsResponse_botId, v.BotId)
+		case schemas.ListUtteranceMetricsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUtteranceMetricsResponse_nextToken, v.NextToken)
+		case schemas.ListUtteranceMetricsResponse_results:
+			return deserializeAnalyticsUtteranceResults(d, schemas.ListUtteranceMetricsResponse_results, &v.Results)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUtteranceMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUtteranceMetrics, schemas.ListUtteranceMetricsRequest, schemas.ListUtteranceMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUtteranceMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUtteranceMetrics, schemas.ListUtteranceMetricsRequest, schemas.ListUtteranceMetricsResponse), output: &ListUtteranceMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUtteranceMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUtteranceMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListUtteranceMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUtteranceMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -232,12 +241,6 @@ func (c *Client) addOperationListUtteranceMetricsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -341,11 +344,3 @@ type ListUtteranceMetricsAPIClient interface {
 }
 
 var _ ListUtteranceMetricsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListUtteranceMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListUtteranceMetrics",
-	}
-}

@@ -4,11 +4,10 @@ package interconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/interconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/interconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the details of a connection proposal generated at a partner's portal.
@@ -36,6 +35,18 @@ type DescribeConnectionProposalInput struct {
 	ActivationKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeConnectionProposalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionProposalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationKey != nil {
+		s.WriteString(schemas.DescribeConnectionProposalRequest_activationKey, *v.ActivationKey)
+	}
 }
 
 type DescribeConnectionProposalOutput struct {
@@ -67,65 +78,57 @@ type DescribeConnectionProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionProposalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionProposalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionProposalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bandwidth != nil {
+		s.WriteString(schemas.DescribeConnectionProposalResponse_bandwidth, *v.Bandwidth)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DescribeConnectionProposalResponse_environmentId, *v.EnvironmentId)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.DescribeConnectionProposalResponse_location, *v.Location)
+	}
+	serializeProvider(s, schemas.DescribeConnectionProposalResponse_provider, v.Provider)
+}
+func (v *DescribeConnectionProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectionProposalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectionProposalResponse_bandwidth:
+			v.Bandwidth = new(string)
+			return d.ReadString(schemas.DescribeConnectionProposalResponse_bandwidth, v.Bandwidth)
+		case schemas.DescribeConnectionProposalResponse_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.DescribeConnectionProposalResponse_environmentId, v.EnvironmentId)
+		case schemas.DescribeConnectionProposalResponse_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.DescribeConnectionProposalResponse_location, v.Location)
+		case schemas.DescribeConnectionProposalResponse_provider:
+			return deserializeProvider(d, schemas.DescribeConnectionProposalResponse_provider, &v.Provider)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectionProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionProposal, schemas.DescribeConnectionProposalRequest, schemas.DescribeConnectionProposalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeConnectionProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionProposal, schemas.DescribeConnectionProposalRequest, schemas.DescribeConnectionProposalResponse), output: &DescribeConnectionProposalOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeConnectionProposal{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnectionProposal"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -135,12 +138,6 @@ func (c *Client) addOperationDescribeConnectionProposalMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpDescribeConnectionProposalValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConnectionProposal(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +152,8 @@ func (c *Client) addOperationDescribeConnectionProposalMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeConnectionProposal(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConnectionProposal",
-	}
 }

@@ -4,11 +4,10 @@ package applicationcostprofiler
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates existing report in AWS Application Cost Profiler.
@@ -58,6 +57,32 @@ type UpdateReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReportDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReportDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReportDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationS3Location != nil {
+		s.WriteStruct(schemas.UpdateReportDefinitionRequest_destinationS3Location)
+		v.DestinationS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.UpdateReportDefinitionRequest_format, string(v.Format))
+	}
+	if v.ReportDescription != nil {
+		s.WriteString(schemas.UpdateReportDefinitionRequest_reportDescription, *v.ReportDescription)
+	}
+	if v.ReportFrequency != "" {
+		s.WriteString(schemas.UpdateReportDefinitionRequest_reportFrequency, string(v.ReportFrequency))
+	}
+	if v.ReportId != nil {
+		s.WriteString(schemas.UpdateReportDefinitionRequest_reportId, *v.ReportId)
+	}
+}
+
 type UpdateReportDefinitionOutput struct {
 
 	// ID of the report.
@@ -69,77 +94,48 @@ type UpdateReportDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateReportDefinitionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateReportDefinitionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateReportDefinitionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.UpdateReportDefinitionResult_reportId, *v.ReportId)
+	}
+}
+func (v *UpdateReportDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateReportDefinitionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateReportDefinitionResult_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.UpdateReportDefinitionResult_reportId, v.ReportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReportDefinition, schemas.UpdateReportDefinitionRequest, schemas.UpdateReportDefinitionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateReportDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateReportDefinition, schemas.UpdateReportDefinitionRequest, schemas.UpdateReportDefinitionResult), output: &UpdateReportDefinitionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateReportDefinition{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateReportDefinition"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateReportDefinitionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateReportDefinition(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +150,8 @@ func (c *Client) addOperationUpdateReportDefinitionMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateReportDefinition(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateReportDefinition",
-	}
 }

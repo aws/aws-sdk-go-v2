@@ -4,11 +4,10 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Aggregates on indexed data with search queries pertaining to particular fields.
@@ -58,6 +57,32 @@ type GetBucketsAggregationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketsAggregationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketsAggregationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketsAggregationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationField != nil {
+		s.WriteString(schemas.GetBucketsAggregationRequest_aggregationField, *v.AggregationField)
+	}
+	if v.BucketsAggregationType != nil {
+		s.WriteStruct(schemas.GetBucketsAggregationRequest_bucketsAggregationType)
+		v.BucketsAggregationType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.GetBucketsAggregationRequest_indexName, *v.IndexName)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.GetBucketsAggregationRequest_queryString, *v.QueryString)
+	}
+	if v.QueryVersion != nil {
+		s.WriteString(schemas.GetBucketsAggregationRequest_queryVersion, *v.QueryVersion)
+	}
+}
+
 type GetBucketsAggregationOutput struct {
 
 	// The main part of the response with a list of buckets. Each bucket contains a
@@ -77,77 +102,50 @@ type GetBucketsAggregationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBucketsAggregationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBucketsAggregationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBucketsAggregationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuckets(s, schemas.GetBucketsAggregationResponse_buckets, v.Buckets)
+	if v.TotalCount != 0 {
+		s.WriteInt32(schemas.GetBucketsAggregationResponse_totalCount, v.TotalCount)
+	}
+}
+func (v *GetBucketsAggregationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBucketsAggregationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBucketsAggregationResponse_buckets:
+			return deserializeBuckets(d, schemas.GetBucketsAggregationResponse_buckets, &v.Buckets)
+		case schemas.GetBucketsAggregationResponse_totalCount:
+			return d.ReadInt32(schemas.GetBucketsAggregationResponse_totalCount, &v.TotalCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBucketsAggregationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketsAggregation, schemas.GetBucketsAggregationRequest, schemas.GetBucketsAggregationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBucketsAggregation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBucketsAggregation, schemas.GetBucketsAggregationRequest, schemas.GetBucketsAggregationResponse), output: &GetBucketsAggregationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBucketsAggregation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBucketsAggregation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBucketsAggregationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketsAggregation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +160,8 @@ func (c *Client) addOperationGetBucketsAggregationMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBucketsAggregation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBucketsAggregation",
-	}
 }

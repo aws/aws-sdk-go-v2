@@ -4,10 +4,9 @@ package ivs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Inserts an ad marker in the playlist for the specified channel and duration
@@ -41,12 +40,27 @@ type InsertAdBreakInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// Maximum duration of the ad break, in seconds.
+	// Duration of the ad break, in seconds.
 	//
 	// This member is required.
 	DurationSeconds *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InsertAdBreakInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsertAdBreakRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsertAdBreakInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.InsertAdBreakRequest_channelArn, *v.ChannelArn)
+	}
+	if v.DurationSeconds != nil {
+		s.WriteInt32(schemas.InsertAdBreakRequest_durationSeconds, *v.DurationSeconds)
+	}
 }
 
 type InsertAdBreakOutput struct {
@@ -60,77 +74,48 @@ type InsertAdBreakOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InsertAdBreakOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InsertAdBreakResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InsertAdBreakOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdBreakId != nil {
+		s.WriteString(schemas.InsertAdBreakResponse_adBreakId, *v.AdBreakId)
+	}
+}
+func (v *InsertAdBreakOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InsertAdBreakResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InsertAdBreakResponse_adBreakId:
+			v.AdBreakId = new(string)
+			return d.ReadString(schemas.InsertAdBreakResponse_adBreakId, v.AdBreakId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInsertAdBreakMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InsertAdBreak, schemas.InsertAdBreakRequest, schemas.InsertAdBreakResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInsertAdBreak{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InsertAdBreak, schemas.InsertAdBreakRequest, schemas.InsertAdBreakResponse), output: &InsertAdBreakOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInsertAdBreak{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "InsertAdBreak"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpInsertAdBreakValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInsertAdBreak(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +130,8 @@ func (c *Client) addOperationInsertAdBreakMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opInsertAdBreak(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "InsertAdBreak",
-	}
 }

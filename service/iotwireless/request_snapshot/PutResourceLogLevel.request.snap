@@ -1,0 +1,5 @@
+PUT /log-levels/__ResourceIdentifier__?resourceType=__ResourceType__
+
+Content-Type: application/json
+
+{"LogLevel":"INFO"}

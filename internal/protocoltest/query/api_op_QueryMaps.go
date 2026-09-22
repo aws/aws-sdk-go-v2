@@ -4,11 +4,10 @@ package query
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This test serializes simple and complex maps.
@@ -47,6 +46,51 @@ type QueryMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryMapsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryMapsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplexMap(s, schemas.QueryMapsInput_ComplexMapArg, v.ComplexMapArg)
+	serializeStringMap(s, schemas.QueryMapsInput_FlattenedMap, v.FlattenedMap)
+	serializeMapWithXmlName(s, schemas.QueryMapsInput_FlattenedMapWithXmlName, v.FlattenedMapWithXmlName)
+	serializeStringMap(s, schemas.QueryMapsInput_MapArg, v.MapArg)
+	serializeMapOfLists(s, schemas.QueryMapsInput_MapOfLists, v.MapOfLists)
+	serializeMapWithXmlName(s, schemas.QueryMapsInput_MapWithXmlMemberName, v.MapWithXmlMemberName)
+	if v.NestedStructWithMap != nil {
+		s.WriteStruct(schemas.QueryMapsInput_NestedStructWithMap)
+		v.NestedStructWithMap.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeStringMap(s, schemas.QueryMapsInput_RenamedMapArg, v.RenamedMapArg)
+}
+func (v *QueryMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryMapsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryMapsInput_ComplexMapArg:
+			return deserializeComplexMap(d, schemas.QueryMapsInput_ComplexMapArg, &v.ComplexMapArg)
+		case schemas.QueryMapsInput_FlattenedMap:
+			return deserializeStringMap(d, schemas.QueryMapsInput_FlattenedMap, &v.FlattenedMap)
+		case schemas.QueryMapsInput_FlattenedMapWithXmlName:
+			return deserializeMapWithXmlName(d, schemas.QueryMapsInput_FlattenedMapWithXmlName, &v.FlattenedMapWithXmlName)
+		case schemas.QueryMapsInput_MapArg:
+			return deserializeStringMap(d, schemas.QueryMapsInput_MapArg, &v.MapArg)
+		case schemas.QueryMapsInput_MapOfLists:
+			return deserializeMapOfLists(d, schemas.QueryMapsInput_MapOfLists, &v.MapOfLists)
+		case schemas.QueryMapsInput_MapWithXmlMemberName:
+			return deserializeMapWithXmlName(d, schemas.QueryMapsInput_MapWithXmlMemberName, &v.MapWithXmlMemberName)
+		case schemas.QueryMapsInput_NestedStructWithMap:
+			v.NestedStructWithMap = &types.NestedStructWithMap{}
+			return v.NestedStructWithMap.Deserialize(d)
+		case schemas.QueryMapsInput_RenamedMapArg:
+			return deserializeStringMap(d, schemas.QueryMapsInput_RenamedMapArg, &v.RenamedMapArg)
+		}
+		return nil
+	})
+}
+
 type QueryMapsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,74 +98,39 @@ type QueryMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryMapsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *QueryMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryMaps, schemas.QueryMapsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpQueryMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryMaps, schemas.QueryMapsInput, nil), output: &QueryMapsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpQueryMaps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryMaps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryMaps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +145,8 @@ func (c *Client) addOperationQueryMapsMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opQueryMaps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "QueryMaps",
-	}
 }

@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,28 @@ type GetAuthPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAuthPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAuthPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAuthPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.GetAuthPolicyRequest_resourceIdentifier, *v.ResourceIdentifier)
+	}
+}
+func (v *GetAuthPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAuthPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAuthPolicyRequest_resourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.GetAuthPolicyRequest_resourceIdentifier, v.ResourceIdentifier)
+		}
+		return nil
+	})
+}
+
 type GetAuthPolicyOutput struct {
 
 	// The date and time that the auth policy was created, in ISO-8601 format.
@@ -65,77 +86,70 @@ type GetAuthPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAuthPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAuthPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAuthPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAuthPolicyResponse_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetAuthPolicyResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.GetAuthPolicyResponse_policy, *v.Policy)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GetAuthPolicyResponse_state, string(v.State))
+	}
+}
+func (v *GetAuthPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAuthPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAuthPolicyResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAuthPolicyResponse_createdAt, v.CreatedAt)
+		case schemas.GetAuthPolicyResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAuthPolicyResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetAuthPolicyResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetAuthPolicyResponse_policy, v.Policy)
+		case schemas.GetAuthPolicyResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.GetAuthPolicyResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.AuthPolicyState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAuthPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAuthPolicy, schemas.GetAuthPolicyRequest, schemas.GetAuthPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAuthPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAuthPolicy, schemas.GetAuthPolicyRequest, schemas.GetAuthPolicyResponse), output: &GetAuthPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAuthPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAuthPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAuthPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAuthPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +164,8 @@ func (c *Client) addOperationGetAuthPolicyMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAuthPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAuthPolicy",
-	}
 }

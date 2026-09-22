@@ -5,7 +5,6 @@ package omics
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/omics/document"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
@@ -101,8 +100,8 @@ type StartRunInput struct {
 	// A service role for the run. The roleArn requires access to Amazon Web Services
 	// HealthOmics, S3, Cloudwatch logs, and EC2. An example roleArn is
 	// arn:aws:iam::123456789012:role/omics-service-role-serviceRole-W8O1XMPL7QZ . In
-	// this example, the AWS account ID is 123456789012 and the role name is
-	// omics-service-role-serviceRole-W8O1XMPL7QZ .
+	// this example, the Amazon Web Services account ID is 123456789012 and the role
+	// name is omics-service-role-serviceRole-W8O1XMPL7QZ .
 	//
 	// This member is required.
 	RoleArn *string
@@ -121,6 +120,11 @@ type StartRunInput struct {
 
 	// Optional configuration name to use for the workflow run.
 	ConfigurationName *string
+
+	// Engine-specific settings for the workflow run. Use this field to specify
+	// configuration options that are specific to the workflow engine (for example,
+	// Nextflow profiles).
+	EngineSettings document.Interface
 
 	// A log level for the run.
 	LogLevel types.RunLogLevel
@@ -171,6 +175,15 @@ type StartRunInput struct {
 
 	// The ID of a run to duplicate.
 	RunId *string
+
+	// Optional configuration for enabling scratch ephemeral storage mounted at /tmp.
+	// If not specified, this will default to SHARED. This configuration is applicable
+	// only for CPU tasks. For tasks using GPUs, scratch storage is always LOCAL.
+	ScratchStorageMode types.ScratchStorageMode
+
+	// Optional inline policy json for scoping down permissions via a session policy
+	// on the IAM role provided in the roleArn parameter.
+	SessionPolicy *string
 
 	// The STATIC storage capacity (in gibibytes, GiB) for this run. The default run
 	// storage capacity is 1200 GiB. If your requested storage capacity is unavailable,
@@ -252,9 +265,6 @@ type StartRunOutput struct {
 }
 
 func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartRun{}, middleware.After)
 	if err != nil {
 		return err
@@ -263,53 +273,14 @@ func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, option
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -324,12 +295,6 @@ func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, option
 	if err = addOpStartRunValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -340,12 +305,6 @@ func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -412,12 +371,4 @@ func (m *idempotencyToken_initializeOpStartRun) HandleInitialize(ctx context.Con
 }
 func addIdempotencyToken_opStartRunMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartRun{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartRun",
-	}
 }

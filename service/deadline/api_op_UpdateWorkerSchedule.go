@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +51,25 @@ type UpdateWorkerScheduleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkerScheduleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkerScheduleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkerScheduleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateWorkerScheduleRequest_farmId, *v.FarmId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateWorkerScheduleRequest_fleetId, *v.FleetId)
+	}
+	serializeUpdatedSessionActions(s, schemas.UpdateWorkerScheduleRequest_updatedSessionActions, v.UpdatedSessionActions)
+	if v.WorkerId != nil {
+		s.WriteString(schemas.UpdateWorkerScheduleRequest_workerId, *v.WorkerId)
+	}
+}
+
 type UpdateWorkerScheduleOutput struct {
 
 	// The assigned sessions to update.
@@ -76,65 +96,58 @@ type UpdateWorkerScheduleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkerScheduleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkerScheduleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkerScheduleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssignedSessions(s, schemas.UpdateWorkerScheduleResponse_assignedSessions, v.AssignedSessions)
+	serializeCancelSessionActions(s, schemas.UpdateWorkerScheduleResponse_cancelSessionActions, v.CancelSessionActions)
+	if v.DesiredWorkerStatus != "" {
+		s.WriteString(schemas.UpdateWorkerScheduleResponse_desiredWorkerStatus, string(v.DesiredWorkerStatus))
+	}
+	if v.UpdateIntervalSeconds != nil {
+		s.WriteInt32(schemas.UpdateWorkerScheduleResponse_updateIntervalSeconds, *v.UpdateIntervalSeconds)
+	}
+}
+func (v *UpdateWorkerScheduleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkerScheduleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkerScheduleResponse_assignedSessions:
+			return deserializeAssignedSessions(d, schemas.UpdateWorkerScheduleResponse_assignedSessions, &v.AssignedSessions)
+		case schemas.UpdateWorkerScheduleResponse_cancelSessionActions:
+			return deserializeCancelSessionActions(d, schemas.UpdateWorkerScheduleResponse_cancelSessionActions, &v.CancelSessionActions)
+		case schemas.UpdateWorkerScheduleResponse_desiredWorkerStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateWorkerScheduleResponse_desiredWorkerStatus, &ev); err != nil {
+				return err
+			}
+			v.DesiredWorkerStatus = types.DesiredWorkerStatus(ev)
+			return nil
+		case schemas.UpdateWorkerScheduleResponse_updateIntervalSeconds:
+			v.UpdateIntervalSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateWorkerScheduleResponse_updateIntervalSeconds, v.UpdateIntervalSeconds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkerSchedule, schemas.UpdateWorkerScheduleRequest, schemas.UpdateWorkerScheduleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkerSchedule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkerSchedule, schemas.UpdateWorkerScheduleRequest, schemas.UpdateWorkerScheduleResponse), output: &UpdateWorkerScheduleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkerSchedule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkerSchedule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -144,12 +157,6 @@ func (c *Client) addOperationUpdateWorkerScheduleMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpUpdateWorkerScheduleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkerSchedule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +169,6 @@ func (c *Client) addOperationUpdateWorkerScheduleMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -201,12 +202,4 @@ func (m *endpointPrefix_opUpdateWorkerScheduleMiddleware) HandleFinalize(ctx con
 }
 func addEndpointPrefix_opUpdateWorkerScheduleMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opUpdateWorkerScheduleMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opUpdateWorkerSchedule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateWorkerSchedule",
-	}
 }

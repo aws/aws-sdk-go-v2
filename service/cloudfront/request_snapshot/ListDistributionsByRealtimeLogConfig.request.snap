@@ -1,0 +1,5 @@
+POST /2020-05-31/distributionsByRealtimeLogConfig
+
+Content-Type: application/xml
+
+<ListDistributionsByRealtimeLogConfigRequest xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><Marker>__Marker__</Marker><MaxItems>1</MaxItems><RealtimeLogConfigArn>__RealtimeLogConfigArn__</RealtimeLogConfigArn><RealtimeLogConfigName>__RealtimeLogConfigName__</RealtimeLogConfigName></ListDistributionsByRealtimeLogConfigRequest>

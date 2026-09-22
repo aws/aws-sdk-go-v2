@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.ListDatasetEntries
+
+{"ContainsLabels":["__Member__","__Member__"],"DatasetArn":"__DatasetArn__","HasErrors":true,"Labeled":true,"MaxResults":1,"NextToken":"__NextToken__","SourceRefContains":"__SourceRefContains__"}

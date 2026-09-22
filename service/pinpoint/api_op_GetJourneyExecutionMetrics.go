@@ -4,11 +4,10 @@ package pinpoint
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpoint/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves (queries) pre-aggregated data for a standard execution metric that
@@ -53,6 +52,27 @@ type GetJourneyExecutionMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJourneyExecutionMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJourneyExecutionMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJourneyExecutionMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetJourneyExecutionMetricsRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.JourneyId != nil {
+		s.WriteString(schemas.GetJourneyExecutionMetricsRequest_JourneyId, *v.JourneyId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetJourneyExecutionMetricsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteString(schemas.GetJourneyExecutionMetricsRequest_PageSize, *v.PageSize)
+	}
+}
+
 type GetJourneyExecutionMetricsOutput struct {
 
 	// Provides the results of a query that retrieved the data for a standard
@@ -68,77 +88,50 @@ type GetJourneyExecutionMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetJourneyExecutionMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetJourneyExecutionMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetJourneyExecutionMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JourneyExecutionMetricsResponse != nil {
+		s.WriteStruct(schemas.GetJourneyExecutionMetricsResponse_JourneyExecutionMetricsResponse)
+		v.JourneyExecutionMetricsResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetJourneyExecutionMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetJourneyExecutionMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetJourneyExecutionMetricsResponse_JourneyExecutionMetricsResponse:
+			v.JourneyExecutionMetricsResponse = &types.JourneyExecutionMetricsResponse{}
+			return v.JourneyExecutionMetricsResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetJourneyExecutionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJourneyExecutionMetrics, schemas.GetJourneyExecutionMetricsRequest, schemas.GetJourneyExecutionMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetJourneyExecutionMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetJourneyExecutionMetrics, schemas.GetJourneyExecutionMetricsRequest, schemas.GetJourneyExecutionMetricsResponse), output: &GetJourneyExecutionMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetJourneyExecutionMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetJourneyExecutionMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetJourneyExecutionMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetJourneyExecutionMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +146,8 @@ func (c *Client) addOperationGetJourneyExecutionMetricsMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetJourneyExecutionMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetJourneyExecutionMetrics",
-	}
 }

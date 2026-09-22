@@ -1,0 +1,5 @@
+POST /get-transaction
+
+Content-Type: application/json
+
+{"network":"ETHEREUM_MAINNET","transactionHash":"__TransactionHash__","transactionId":"__TransactionId__"}

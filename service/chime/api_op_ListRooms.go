@@ -5,10 +5,10 @@ package chime
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the room details for the specified Amazon Chime Enterprise account.
@@ -48,6 +48,27 @@ type ListRoomsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoomsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoomsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoomsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListRoomsRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoomsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MemberId != nil {
+		s.WriteString(schemas.ListRoomsRequest_MemberId, *v.MemberId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoomsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRoomsOutput struct {
 
 	// The token to use to retrieve the next page of results.
@@ -62,77 +83,51 @@ type ListRoomsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoomsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoomsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoomsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoomsResponse_NextToken, *v.NextToken)
+	}
+	serializeRoomList(s, schemas.ListRoomsResponse_Rooms, v.Rooms)
+}
+func (v *ListRoomsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoomsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoomsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoomsResponse_NextToken, v.NextToken)
+		case schemas.ListRoomsResponse_Rooms:
+			return deserializeRoomList(d, schemas.ListRoomsResponse_Rooms, &v.Rooms)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoomsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRooms, schemas.ListRoomsRequest, schemas.ListRoomsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRooms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRooms, schemas.ListRoomsRequest, schemas.ListRoomsResponse), output: &ListRoomsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRooms{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRooms"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRoomsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRooms(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +140,6 @@ func (c *Client) addOperationListRoomsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +239,3 @@ type ListRoomsAPIClient interface {
 }
 
 var _ ListRoomsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRooms(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRooms",
-	}
-}

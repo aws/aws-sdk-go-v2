@@ -4,10 +4,9 @@ package lookoutequipment
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the active model version for a given machine learning model.
@@ -43,6 +42,21 @@ type UpdateActiveModelVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActiveModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActiveModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActiveModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionRequest_ModelName, *v.ModelName)
+	}
+	if v.ModelVersion != nil {
+		s.WriteInt64(schemas.UpdateActiveModelVersionRequest_ModelVersion, *v.ModelVersion)
+	}
+}
+
 type UpdateActiveModelVersionOutput struct {
 
 	// The version that is currently active of the machine learning model for which
@@ -75,77 +89,78 @@ type UpdateActiveModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateActiveModelVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateActiveModelVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateActiveModelVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentActiveVersion != nil {
+		s.WriteInt64(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersion, *v.CurrentActiveVersion)
+	}
+	if v.CurrentActiveVersionArn != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersionArn, *v.CurrentActiveVersionArn)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionResponse_ModelArn, *v.ModelArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionResponse_ModelName, *v.ModelName)
+	}
+	if v.PreviousActiveVersion != nil {
+		s.WriteInt64(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersion, *v.PreviousActiveVersion)
+	}
+	if v.PreviousActiveVersionArn != nil {
+		s.WriteString(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersionArn, *v.PreviousActiveVersionArn)
+	}
+}
+func (v *UpdateActiveModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateActiveModelVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateActiveModelVersionResponse_CurrentActiveVersion:
+			v.CurrentActiveVersion = new(int64)
+			return d.ReadInt64(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersion, v.CurrentActiveVersion)
+		case schemas.UpdateActiveModelVersionResponse_CurrentActiveVersionArn:
+			v.CurrentActiveVersionArn = new(string)
+			return d.ReadString(schemas.UpdateActiveModelVersionResponse_CurrentActiveVersionArn, v.CurrentActiveVersionArn)
+		case schemas.UpdateActiveModelVersionResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.UpdateActiveModelVersionResponse_ModelArn, v.ModelArn)
+		case schemas.UpdateActiveModelVersionResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.UpdateActiveModelVersionResponse_ModelName, v.ModelName)
+		case schemas.UpdateActiveModelVersionResponse_PreviousActiveVersion:
+			v.PreviousActiveVersion = new(int64)
+			return d.ReadInt64(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersion, v.PreviousActiveVersion)
+		case schemas.UpdateActiveModelVersionResponse_PreviousActiveVersionArn:
+			v.PreviousActiveVersionArn = new(string)
+			return d.ReadString(schemas.UpdateActiveModelVersionResponse_PreviousActiveVersionArn, v.PreviousActiveVersionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateActiveModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActiveModelVersion, schemas.UpdateActiveModelVersionRequest, schemas.UpdateActiveModelVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateActiveModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateActiveModelVersion, schemas.UpdateActiveModelVersionRequest, schemas.UpdateActiveModelVersionResponse), output: &UpdateActiveModelVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateActiveModelVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateActiveModelVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateActiveModelVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateActiveModelVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +175,8 @@ func (c *Client) addOperationUpdateActiveModelVersionMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateActiveModelVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateActiveModelVersion",
-	}
 }

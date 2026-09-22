@@ -1,0 +1,4 @@
+400
+Content-Type: application/json
+
+{"__type":"BadRequestException","Code":"BadRequestException","Message":"__Message__","RequestId":"__RequestId__"}

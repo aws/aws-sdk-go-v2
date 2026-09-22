@@ -1,0 +1,3 @@
+GET /assistants/__AssistantId__/sessions/__SessionId__/recommendations?maxResults=1&nextChunkToken=__NextChunkToken__&recommendationType=KNOWLEDGE_CONTENT&waitTimeSeconds=1
+
+

@@ -4,11 +4,10 @@ package chimesdkvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the emergency calling configuration details for the specified Voice
@@ -38,6 +37,18 @@ type GetVoiceConnectorEmergencyCallingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceConnectorEmergencyCallingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceConnectorEmergencyCallingConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceConnectorEmergencyCallingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.GetVoiceConnectorEmergencyCallingConfigurationRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type GetVoiceConnectorEmergencyCallingConfigurationOutput struct {
 
 	// The details of the emergency calling configuration.
@@ -49,77 +60,50 @@ type GetVoiceConnectorEmergencyCallingConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetVoiceConnectorEmergencyCallingConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetVoiceConnectorEmergencyCallingConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmergencyCallingConfiguration != nil {
+		s.WriteStruct(schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration)
+		v.EmergencyCallingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetVoiceConnectorEmergencyCallingConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse_EmergencyCallingConfiguration:
+			v.EmergencyCallingConfiguration = &types.EmergencyCallingConfiguration{}
+			return v.EmergencyCallingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetVoiceConnectorEmergencyCallingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceConnectorEmergencyCallingConfiguration, schemas.GetVoiceConnectorEmergencyCallingConfigurationRequest, schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetVoiceConnectorEmergencyCallingConfiguration, schemas.GetVoiceConnectorEmergencyCallingConfigurationRequest, schemas.GetVoiceConnectorEmergencyCallingConfigurationResponse), output: &GetVoiceConnectorEmergencyCallingConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetVoiceConnectorEmergencyCallingConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetVoiceConnectorEmergencyCallingConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetVoiceConnectorEmergencyCallingConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVoiceConnectorEmergencyCallingConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +118,8 @@ func (c *Client) addOperationGetVoiceConnectorEmergencyCallingConfigurationMiddl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetVoiceConnectorEmergencyCallingConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetVoiceConnectorEmergencyCallingConfiguration",
-	}
 }

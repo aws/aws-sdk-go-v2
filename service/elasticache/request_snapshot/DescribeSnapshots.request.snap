@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeSnapshots&CacheClusterId=__CacheClusterId__&Marker=__Marker__&MaxRecords=1&ReplicationGroupId=__ReplicationGroupId__&ShowNodeGroupConfig=true&SnapshotName=__SnapshotName__&SnapshotSource=__SnapshotSource__&Version=2015-02-02

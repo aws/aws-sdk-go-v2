@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2 (FleetIQ)
@@ -198,6 +197,46 @@ type CreateGameServerGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGameServerGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGameServerGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGameServerGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingPolicy != nil {
+		s.WriteStruct(schemas.CreateGameServerGroupInput_AutoScalingPolicy)
+		v.AutoScalingPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BalancingStrategy != "" {
+		s.WriteString(schemas.CreateGameServerGroupInput_BalancingStrategy, string(v.BalancingStrategy))
+	}
+	if v.GameServerGroupName != nil {
+		s.WriteString(schemas.CreateGameServerGroupInput_GameServerGroupName, *v.GameServerGroupName)
+	}
+	if v.GameServerProtectionPolicy != "" {
+		s.WriteString(schemas.CreateGameServerGroupInput_GameServerProtectionPolicy, string(v.GameServerProtectionPolicy))
+	}
+	serializeInstanceDefinitions(s, schemas.CreateGameServerGroupInput_InstanceDefinitions, v.InstanceDefinitions)
+	if v.LaunchTemplate != nil {
+		s.WriteStruct(schemas.CreateGameServerGroupInput_LaunchTemplate)
+		v.LaunchTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.CreateGameServerGroupInput_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.CreateGameServerGroupInput_MinSize, *v.MinSize)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateGameServerGroupInput_RoleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateGameServerGroupInput_Tags, v.Tags)
+	serializeVpcSubnets(s, schemas.CreateGameServerGroupInput_VpcSubnets, v.VpcSubnets)
+}
+
 type CreateGameServerGroupOutput struct {
 
 	// The newly created game server group object, including the new ARN value for the
@@ -213,65 +252,44 @@ type CreateGameServerGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGameServerGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGameServerGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGameServerGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameServerGroup != nil {
+		s.WriteStruct(schemas.CreateGameServerGroupOutput_GameServerGroup)
+		v.GameServerGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGameServerGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGameServerGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGameServerGroupOutput_GameServerGroup:
+			v.GameServerGroup = &types.GameServerGroup{}
+			return v.GameServerGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGameServerGroup, schemas.CreateGameServerGroupInput, schemas.CreateGameServerGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateGameServerGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGameServerGroup, schemas.CreateGameServerGroupInput, schemas.CreateGameServerGroupOutput), output: &CreateGameServerGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateGameServerGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGameServerGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -281,12 +299,6 @@ func (c *Client) addOperationCreateGameServerGroupMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateGameServerGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGameServerGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -301,22 +313,8 @@ func (c *Client) addOperationCreateGameServerGroupMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGameServerGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGameServerGroup",
-	}
 }

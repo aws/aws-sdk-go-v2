@@ -1,0 +1,5 @@
+POST /datastore/__DatastoreId__/imageSet/__SourceImageSetId__/copyImageSet?force=true&promoteToPrimary=true
+
+Content-Type: application/json
+
+{"destinationImageSet":{"imageSetId":"__ImageSetId__","latestVersionId":"__LatestVersionId__"},"sourceImageSet":{"DICOMCopies":{"copiableAttributes":"__CopiableAttributes__"},"latestVersionId":"__LatestVersionId__"}}

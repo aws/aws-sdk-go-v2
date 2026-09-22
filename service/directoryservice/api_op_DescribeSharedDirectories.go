@@ -5,10 +5,10 @@ package directoryservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the shared directories in your account.
@@ -47,6 +47,25 @@ type DescribeSharedDirectoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSharedDirectoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSharedDirectoriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSharedDirectoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeSharedDirectoriesRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSharedDirectoriesRequest_NextToken, *v.NextToken)
+	}
+	if v.OwnerDirectoryId != nil {
+		s.WriteString(schemas.DescribeSharedDirectoriesRequest_OwnerDirectoryId, *v.OwnerDirectoryId)
+	}
+	serializeDirectoryIds(s, schemas.DescribeSharedDirectoriesRequest_SharedDirectoryIds, v.SharedDirectoryIds)
+}
+
 type DescribeSharedDirectoriesOutput struct {
 
 	// If not null, token that indicates that more results are available. Pass this
@@ -63,77 +82,51 @@ type DescribeSharedDirectoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSharedDirectoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSharedDirectoriesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSharedDirectoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSharedDirectoriesResult_NextToken, *v.NextToken)
+	}
+	serializeSharedDirectories(s, schemas.DescribeSharedDirectoriesResult_SharedDirectories, v.SharedDirectories)
+}
+func (v *DescribeSharedDirectoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSharedDirectoriesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSharedDirectoriesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSharedDirectoriesResult_NextToken, v.NextToken)
+		case schemas.DescribeSharedDirectoriesResult_SharedDirectories:
+			return deserializeSharedDirectories(d, schemas.DescribeSharedDirectoriesResult_SharedDirectories, &v.SharedDirectories)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSharedDirectories, schemas.DescribeSharedDirectoriesRequest, schemas.DescribeSharedDirectoriesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeSharedDirectories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSharedDirectories, schemas.DescribeSharedDirectoriesRequest, schemas.DescribeSharedDirectoriesResult), output: &DescribeSharedDirectoriesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeSharedDirectories{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSharedDirectories"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeSharedDirectoriesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSharedDirectories(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +139,6 @@ func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +241,3 @@ type DescribeSharedDirectoriesAPIClient interface {
 }
 
 var _ DescribeSharedDirectoriesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeSharedDirectories(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeSharedDirectories",
-	}
-}

@@ -4,11 +4,10 @@ package forecast
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -49,6 +48,18 @@ type DescribeForecastInput struct {
 	ForecastArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeForecastInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeForecastRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeForecastInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.DescribeForecastRequest_ForecastArn, *v.ForecastArn)
+	}
 }
 
 type DescribeForecastOutput struct {
@@ -114,77 +125,107 @@ type DescribeForecastOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeForecastOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeForecastResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeForecastOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeForecastResponse_CreationTime, *v.CreationTime)
+	}
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.DescribeForecastResponse_DatasetGroupArn, *v.DatasetGroupArn)
+	}
+	if v.EstimatedTimeRemainingInMinutes != nil {
+		s.WriteInt64(schemas.DescribeForecastResponse_EstimatedTimeRemainingInMinutes, *v.EstimatedTimeRemainingInMinutes)
+	}
+	if v.ForecastArn != nil {
+		s.WriteString(schemas.DescribeForecastResponse_ForecastArn, *v.ForecastArn)
+	}
+	if v.ForecastName != nil {
+		s.WriteString(schemas.DescribeForecastResponse_ForecastName, *v.ForecastName)
+	}
+	serializeForecastTypes(s, schemas.DescribeForecastResponse_ForecastTypes, v.ForecastTypes)
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.DescribeForecastResponse_LastModificationTime, *v.LastModificationTime)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.DescribeForecastResponse_Message, *v.Message)
+	}
+	if v.PredictorArn != nil {
+		s.WriteString(schemas.DescribeForecastResponse_PredictorArn, *v.PredictorArn)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.DescribeForecastResponse_Status, *v.Status)
+	}
+	if v.TimeSeriesSelector != nil {
+		s.WriteStruct(schemas.DescribeForecastResponse_TimeSeriesSelector)
+		v.TimeSeriesSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeForecastOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeForecastResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeForecastResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeForecastResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeForecastResponse_DatasetGroupArn:
+			v.DatasetGroupArn = new(string)
+			return d.ReadString(schemas.DescribeForecastResponse_DatasetGroupArn, v.DatasetGroupArn)
+		case schemas.DescribeForecastResponse_EstimatedTimeRemainingInMinutes:
+			v.EstimatedTimeRemainingInMinutes = new(int64)
+			return d.ReadInt64(schemas.DescribeForecastResponse_EstimatedTimeRemainingInMinutes, v.EstimatedTimeRemainingInMinutes)
+		case schemas.DescribeForecastResponse_ForecastArn:
+			v.ForecastArn = new(string)
+			return d.ReadString(schemas.DescribeForecastResponse_ForecastArn, v.ForecastArn)
+		case schemas.DescribeForecastResponse_ForecastName:
+			v.ForecastName = new(string)
+			return d.ReadString(schemas.DescribeForecastResponse_ForecastName, v.ForecastName)
+		case schemas.DescribeForecastResponse_ForecastTypes:
+			return deserializeForecastTypes(d, schemas.DescribeForecastResponse_ForecastTypes, &v.ForecastTypes)
+		case schemas.DescribeForecastResponse_LastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeForecastResponse_LastModificationTime, v.LastModificationTime)
+		case schemas.DescribeForecastResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DescribeForecastResponse_Message, v.Message)
+		case schemas.DescribeForecastResponse_PredictorArn:
+			v.PredictorArn = new(string)
+			return d.ReadString(schemas.DescribeForecastResponse_PredictorArn, v.PredictorArn)
+		case schemas.DescribeForecastResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DescribeForecastResponse_Status, v.Status)
+		case schemas.DescribeForecastResponse_TimeSeriesSelector:
+			v.TimeSeriesSelector = &types.TimeSeriesSelector{}
+			return v.TimeSeriesSelector.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeForecast, schemas.DescribeForecastRequest, schemas.DescribeForecastResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeForecast{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeForecast, schemas.DescribeForecastRequest, schemas.DescribeForecastResponse), output: &DescribeForecastOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeForecast{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeForecast"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeForecastValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeForecast(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -199,22 +240,8 @@ func (c *Client) addOperationDescribeForecastMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeForecast(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeForecast",
-	}
 }

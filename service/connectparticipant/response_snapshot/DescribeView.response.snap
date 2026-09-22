@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"View":{"Arn":"__Arn__","Content":{"Actions":["__Member__","__Member__"],"InputSchema":"__InputSchema__","Template":"__Template__"},"Id":"__Id__","Name":"__Name__","Version":1}}

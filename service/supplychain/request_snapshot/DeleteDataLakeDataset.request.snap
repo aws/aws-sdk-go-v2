@@ -1,0 +1,3 @@
+DELETE /api/datalake/instance/__InstanceId__/namespaces/__Namespace__/datasets/__Name__
+
+

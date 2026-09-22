@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSEvents.DescribeArchive
+
+{"ArchiveArn":"__ArchiveArn__","ArchiveName":"__ArchiveName__","CreationTime":946684800,"Description":"__Description__","EventCount":1,"EventPattern":"__EventPattern__","EventSourceArn":"__EventSourceArn__","KmsKeyIdentifier":"__KmsKeyIdentifier__","RetentionDays":1,"SizeBytes":1,"State":"ENABLED","StateReason":"__StateReason__"}

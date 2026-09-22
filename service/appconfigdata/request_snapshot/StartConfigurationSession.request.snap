@@ -1,0 +1,5 @@
+POST /configurationsessions
+
+Content-Type: application/json
+
+{"ApplicationIdentifier":"__ApplicationIdentifier__","ConfigurationProfileIdentifier":"__ConfigurationProfileIdentifier__","EnvironmentIdentifier":"__EnvironmentIdentifier__","RequiredMinimumPollIntervalInSeconds":1}

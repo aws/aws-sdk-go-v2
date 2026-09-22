@@ -5,10 +5,10 @@ package configservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the evaluation results for the specified Config rule. The results
@@ -56,6 +56,25 @@ type GetComplianceDetailsByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailsByConfigRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailsByConfigRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailsByConfigRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeComplianceTypes(s, schemas.GetComplianceDetailsByConfigRuleRequest_ComplianceTypes, v.ComplianceTypes)
+	if v.ConfigRuleName != nil {
+		s.WriteString(schemas.GetComplianceDetailsByConfigRuleRequest_ConfigRuleName, *v.ConfigRuleName)
+	}
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.GetComplianceDetailsByConfigRuleRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetComplianceDetailsByConfigRuleRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetComplianceDetailsByConfigRuleOutput struct {
 
 	// Indicates whether the Amazon Web Services resource complies with the specified
@@ -72,77 +91,51 @@ type GetComplianceDetailsByConfigRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComplianceDetailsByConfigRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComplianceDetailsByConfigRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComplianceDetailsByConfigRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEvaluationResults(s, schemas.GetComplianceDetailsByConfigRuleResponse_EvaluationResults, v.EvaluationResults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetComplianceDetailsByConfigRuleResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetComplianceDetailsByConfigRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComplianceDetailsByConfigRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComplianceDetailsByConfigRuleResponse_EvaluationResults:
+			return deserializeEvaluationResults(d, schemas.GetComplianceDetailsByConfigRuleResponse_EvaluationResults, &v.EvaluationResults)
+		case schemas.GetComplianceDetailsByConfigRuleResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetComplianceDetailsByConfigRuleResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComplianceDetailsByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetailsByConfigRule, schemas.GetComplianceDetailsByConfigRuleRequest, schemas.GetComplianceDetailsByConfigRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetComplianceDetailsByConfigRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComplianceDetailsByConfigRule, schemas.GetComplianceDetailsByConfigRuleRequest, schemas.GetComplianceDetailsByConfigRuleResponse), output: &GetComplianceDetailsByConfigRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetComplianceDetailsByConfigRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComplianceDetailsByConfigRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetComplianceDetailsByConfigRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComplianceDetailsByConfigRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +148,6 @@ func (c *Client) addOperationGetComplianceDetailsByConfigRuleMiddlewares(stack *
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,11 +249,3 @@ type GetComplianceDetailsByConfigRuleAPIClient interface {
 }
 
 var _ GetComplianceDetailsByConfigRuleAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetComplianceDetailsByConfigRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetComplianceDetailsByConfigRule",
-	}
-}

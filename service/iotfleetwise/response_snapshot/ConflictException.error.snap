@@ -1,0 +1,5 @@
+409
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.CreateCampaign
+
+{"__type":"ConflictException","message":"__Message__","resource":"__Resource__","resourceType":"__ResourceType__"}

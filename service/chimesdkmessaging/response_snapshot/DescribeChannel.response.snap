@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Channel":{"ChannelArn":"__ChannelArn__","ChannelFlowArn":"__ChannelFlowArn__","CreatedBy":{"Arn":"__Arn__","Name":"__Name__"},"CreatedTimestamp":946684800,"ElasticChannelConfiguration":{"MaximumSubChannels":1,"MinimumMembershipPercentage":1,"TargetMembershipsPerSubChannel":1},"ExpirationSettings":{"ExpirationCriterion":"CREATED_TIMESTAMP","ExpirationDays":1},"LastMessageTimestamp":946684800,"LastUpdatedTimestamp":946684800,"Metadata":"__Metadata__","Mode":"UNRESTRICTED","Name":"__Name__","Privacy":"PUBLIC"}}

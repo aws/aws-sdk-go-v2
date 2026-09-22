@@ -35,8 +35,14 @@ func ExampleAgentTracesConfig_outputUsage() {
 	var union types.AgentTracesConfig
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.AgentTracesConfigMemberBatchEvaluation:
+		_ = v.Value // Value is types.BatchEvaluationTraceConfig
+
 	case *types.AgentTracesConfigMemberCloudwatchLogs:
 		_ = v.Value // Value is types.CloudWatchLogsTraceConfig
+
+	case *types.AgentTracesConfigMemberOnlineEvaluation:
+		_ = v.Value // Value is types.OnlineEvaluationTraceConfig
 
 	case *types.AgentTracesConfigMemberSessionSpans:
 		_ = v.Value // Value is []document.Interface
@@ -51,6 +57,8 @@ func ExampleAgentTracesConfig_outputUsage() {
 }
 
 var _ *types.CloudWatchLogsTraceConfig
+var _ *types.BatchEvaluationTraceConfig
+var _ *types.OnlineEvaluationTraceConfig
 var _ []document.Interface
 
 func ExampleBrowserAction_outputUsage() {
@@ -199,6 +207,24 @@ func ExampleContent_outputUsage() {
 
 var _ *string
 
+func ExampleContentSource_outputUsage() {
+	var union types.ContentSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ContentSourceMemberInline:
+		_ = v.Value // Value is types.InlineMemoryContent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.InlineMemoryContent
+
 func ExampleContext_outputUsage() {
 	var union types.Context
 	// type switches can be used to check the union value
@@ -224,6 +250,9 @@ func ExampleDataSourceConfig_outputUsage() {
 	case *types.DataSourceConfigMemberCloudWatchLogs:
 		_ = v.Value // Value is types.CloudWatchLogsSource
 
+	case *types.DataSourceConfigMemberOnlineEvaluationConfigSource:
+		_ = v.Value // Value is types.OnlineEvaluationConfigSource
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -233,6 +262,7 @@ func ExampleDataSourceConfig_outputUsage() {
 	}
 }
 
+var _ *types.OnlineEvaluationConfigSource
 var _ *types.CloudWatchLogsSource
 
 func ExampleEvaluationContent_outputUsage() {
@@ -434,6 +464,9 @@ func ExampleHarnessContentBlockDelta_outputUsage() {
 	case *types.HarnessContentBlockDeltaMemberToolResult:
 		_ = v.Value // Value is []types.HarnessToolResultBlockDelta
 
+	case *types.HarnessContentBlockDeltaMemberToolResultMetadata:
+		_ = v.Value // Value is types.HarnessToolResultMetadataBlockDelta
+
 	case *types.HarnessContentBlockDeltaMemberToolUse:
 		_ = v.Value // Value is types.HarnessToolUseBlockDelta
 
@@ -446,6 +479,7 @@ func ExampleHarnessContentBlockDelta_outputUsage() {
 	}
 }
 
+var _ *types.HarnessToolResultMetadataBlockDelta
 var _ *types.HarnessToolUseBlockDelta
 var _ types.HarnessReasoningContentBlockDelta
 var _ *string
@@ -508,6 +542,9 @@ func ExampleHarnessModelConfiguration_outputUsage() {
 	case *types.HarnessModelConfigurationMemberGeminiModelConfig:
 		_ = v.Value // Value is types.HarnessGeminiModelConfig
 
+	case *types.HarnessModelConfigurationMemberLiteLlmModelConfig:
+		_ = v.Value // Value is types.HarnessLiteLlmModelConfig
+
 	case *types.HarnessModelConfigurationMemberOpenAiModelConfig:
 		_ = v.Value // Value is types.HarnessOpenAiModelConfig
 
@@ -523,6 +560,7 @@ func ExampleHarnessModelConfiguration_outputUsage() {
 var _ *types.HarnessGeminiModelConfig
 var _ *types.HarnessOpenAiModelConfig
 var _ *types.HarnessBedrockModelConfig
+var _ *types.HarnessLiteLlmModelConfig
 
 func ExampleHarnessReasoningContentBlock_outputUsage() {
 	var union types.HarnessReasoningContentBlock
@@ -575,8 +613,17 @@ func ExampleHarnessSkill_outputUsage() {
 	var union types.HarnessSkill
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.HarnessSkillMemberAwsSkills:
+		_ = v.Value // Value is types.HarnessSkillAwsSkillsSource
+
+	case *types.HarnessSkillMemberGit:
+		_ = v.Value // Value is types.HarnessSkillGitSource
+
 	case *types.HarnessSkillMemberPath:
 		_ = v.Value // Value is string
+
+	case *types.HarnessSkillMemberS3:
+		_ = v.Value // Value is types.HarnessSkillS3Source
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -588,6 +635,9 @@ func ExampleHarnessSkill_outputUsage() {
 }
 
 var _ *string
+var _ *types.HarnessSkillGitSource
+var _ *types.HarnessSkillAwsSkillsSource
+var _ *types.HarnessSkillS3Source
 
 func ExampleHarnessSystemContentBlock_outputUsage() {
 	var union types.HarnessSystemContentBlock
@@ -685,6 +735,28 @@ func ExampleHarnessToolResultContentBlock_outputUsage() {
 var _ *string
 var _ document.Interface
 
+func ExampleIngestPayloadType_outputUsage() {
+	var union types.IngestPayloadType
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.IngestPayloadTypeMemberConversational:
+		_ = v.Value // Value is types.Conversational
+
+	case *types.IngestPayloadTypeMemberJson:
+		_ = v.Value // Value is types.MemoryJsonData
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MemoryJsonData
+var _ *types.Conversational
+
 func ExampleInvokeAgentRuntimeCommandStreamOutput_outputUsage() {
 	var union types.InvokeAgentRuntimeCommandStreamOutput
 	// type switches can be used to check the union value
@@ -716,6 +788,9 @@ func ExampleInvokeHarnessStreamOutput_outputUsage() {
 	case *types.InvokeHarnessStreamOutputMemberContentBlockStop:
 		_ = v.Value // Value is types.HarnessContentBlockStopEvent
 
+	case *types.InvokeHarnessStreamOutputMemberHookEvent:
+		_ = v.Value // Value is types.HarnessHookEvent
+
 	case *types.InvokeHarnessStreamOutputMemberMessageStart:
 		_ = v.Value // Value is types.HarnessMessageStartEvent
 
@@ -738,6 +813,7 @@ var _ *types.HarnessContentBlockDeltaEvent
 var _ *types.HarnessMetadataEvent
 var _ *types.HarnessContentBlockStartEvent
 var _ *types.HarnessMessageStopEvent
+var _ *types.HarnessHookEvent
 var _ *types.HarnessContentBlockStopEvent
 var _ *types.HarnessMessageStartEvent
 
@@ -949,6 +1025,9 @@ func ExamplePayloadType_outputUsage() {
 	case *types.PayloadTypeMemberConversational:
 		_ = v.Value // Value is types.Conversational
 
+	case *types.PayloadTypeMemberJson:
+		_ = v.Value // Value is types.MemoryJsonData
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -958,6 +1037,7 @@ func ExamplePayloadType_outputUsage() {
 	}
 }
 
+var _ *types.MemoryJsonData
 var _ document.Interface
 var _ *types.Conversational
 
@@ -968,6 +1048,9 @@ func ExamplePaymentInput_outputUsage() {
 	case *types.PaymentInputMemberCryptoX402:
 		_ = v.Value // Value is types.CryptoX402PaymentInput
 
+	case *types.PaymentInputMemberMpp:
+		_ = v.Value // Value is types.MppPaymentInput
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -977,6 +1060,7 @@ func ExamplePaymentInput_outputUsage() {
 	}
 }
 
+var _ *types.MppPaymentInput
 var _ *types.CryptoX402PaymentInput
 
 func ExamplePaymentInstrumentDetails_outputUsage() {
@@ -1004,6 +1088,9 @@ func ExamplePaymentOutput_outputUsage() {
 	case *types.PaymentOutputMemberCryptoX402:
 		_ = v.Value // Value is types.CryptoX402PaymentOutput
 
+	case *types.PaymentOutputMemberMpp:
+		_ = v.Value // Value is types.MppPaymentOutput
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -1014,6 +1101,7 @@ func ExamplePaymentOutput_outputUsage() {
 }
 
 var _ *types.CryptoX402PaymentOutput
+var _ *types.MppPaymentOutput
 
 func ExamplePaymentTokenRequestInput_outputUsage() {
 	var union types.PaymentTokenRequestInput
@@ -1254,6 +1342,28 @@ func ExampleToolDescriptionSource_outputUsage() {
 
 var _ *types.ToolDescriptionConfigurationBundle
 var _ *types.ToolDescriptionTextInput
+
+func ExampleToolsFileSystemConfiguration_outputUsage() {
+	var union types.ToolsFileSystemConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolsFileSystemConfigurationMemberEfsConfiguration:
+		_ = v.Value // Value is types.EfsConfiguration
+
+	case *types.ToolsFileSystemConfigurationMemberS3FilesConfiguration:
+		_ = v.Value // Value is types.S3FilesConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.S3FilesConfiguration
+var _ *types.EfsConfiguration
 
 func ExampleUserIdentifier_outputUsage() {
 	var union types.UserIdentifier

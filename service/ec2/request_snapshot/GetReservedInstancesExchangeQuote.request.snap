@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetReservedInstancesExchangeQuote&DryRun=true&ReservedInstanceId.1=__Member__&ReservedInstanceId.2=__Member__&TargetConfiguration.1.InstanceCount=1&TargetConfiguration.1.OfferingId=__OfferingId__&TargetConfiguration.2.InstanceCount=1&TargetConfiguration.2.OfferingId=__OfferingId__&Version=2016-11-15

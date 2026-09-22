@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"MonitorArn":"__MonitorArn__","Status":"PENDING"}

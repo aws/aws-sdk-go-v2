@@ -5,10 +5,10 @@ package workmail
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the mobile device access overrides for any given combination of
@@ -59,6 +59,30 @@ type ListMobileDeviceAccessOverridesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMobileDeviceAccessOverridesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMobileDeviceAccessOverridesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMobileDeviceAccessOverridesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesRequest_DeviceId, *v.DeviceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMobileDeviceAccessOverridesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesRequest_NextToken, *v.NextToken)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesRequest_OrganizationId, *v.OrganizationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesRequest_UserId, *v.UserId)
+	}
+}
+
 type ListMobileDeviceAccessOverridesOutput struct {
 
 	// The token to use to retrieve the next page of results. The value is “null” when
@@ -75,77 +99,51 @@ type ListMobileDeviceAccessOverridesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMobileDeviceAccessOverridesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMobileDeviceAccessOverridesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMobileDeviceAccessOverridesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMobileDeviceAccessOverridesResponse_NextToken, *v.NextToken)
+	}
+	serializeMobileDeviceAccessOverridesList(s, schemas.ListMobileDeviceAccessOverridesResponse_Overrides, v.Overrides)
+}
+func (v *ListMobileDeviceAccessOverridesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMobileDeviceAccessOverridesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMobileDeviceAccessOverridesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMobileDeviceAccessOverridesResponse_NextToken, v.NextToken)
+		case schemas.ListMobileDeviceAccessOverridesResponse_Overrides:
+			return deserializeMobileDeviceAccessOverridesList(d, schemas.ListMobileDeviceAccessOverridesResponse_Overrides, &v.Overrides)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMobileDeviceAccessOverridesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMobileDeviceAccessOverrides, schemas.ListMobileDeviceAccessOverridesRequest, schemas.ListMobileDeviceAccessOverridesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMobileDeviceAccessOverrides{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMobileDeviceAccessOverrides, schemas.ListMobileDeviceAccessOverridesRequest, schemas.ListMobileDeviceAccessOverridesResponse), output: &ListMobileDeviceAccessOverridesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMobileDeviceAccessOverrides{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMobileDeviceAccessOverrides"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListMobileDeviceAccessOverridesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMobileDeviceAccessOverrides(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +156,6 @@ func (c *Client) addOperationListMobileDeviceAccessOverridesMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +259,3 @@ type ListMobileDeviceAccessOverridesAPIClient interface {
 }
 
 var _ ListMobileDeviceAccessOverridesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMobileDeviceAccessOverrides(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMobileDeviceAccessOverrides",
-	}
-}

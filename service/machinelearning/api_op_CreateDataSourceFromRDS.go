@@ -4,11 +4,10 @@ package machinelearning
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/machinelearning/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a DataSource object from an [Amazon Relational Database Service] (Amazon RDS). A DataSource references data
@@ -115,6 +114,32 @@ type CreateDataSourceFromRDSInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceFromRDSInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceFromRDSInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceFromRDSInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeStatistics != false {
+		s.WriteBool(schemas.CreateDataSourceFromRDSInput_ComputeStatistics, v.ComputeStatistics)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceFromRDSInput_DataSourceId, *v.DataSourceId)
+	}
+	if v.DataSourceName != nil {
+		s.WriteString(schemas.CreateDataSourceFromRDSInput_DataSourceName, *v.DataSourceName)
+	}
+	if v.RDSData != nil {
+		s.WriteStruct(schemas.CreateDataSourceFromRDSInput_RDSData)
+		v.RDSData.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CreateDataSourceFromRDSInput_RoleARN, *v.RoleARN)
+	}
+}
+
 //	Represents the output of a CreateDataSourceFromRDS operation, and is an
 //
 // acknowledgement that Amazon ML received the request.
@@ -137,77 +162,48 @@ type CreateDataSourceFromRDSOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceFromRDSOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceFromRDSOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceFromRDSOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.CreateDataSourceFromRDSOutput_DataSourceId, *v.DataSourceId)
+	}
+}
+func (v *CreateDataSourceFromRDSOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSourceFromRDSOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSourceFromRDSOutput_DataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.CreateDataSourceFromRDSOutput_DataSourceId, v.DataSourceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSourceFromRDSMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSourceFromRDS, schemas.CreateDataSourceFromRDSInput, schemas.CreateDataSourceFromRDSOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDataSourceFromRDS{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSourceFromRDS, schemas.CreateDataSourceFromRDSInput, schemas.CreateDataSourceFromRDSOutput), output: &CreateDataSourceFromRDSOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDataSourceFromRDS{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataSourceFromRDS"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDataSourceFromRDSValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSourceFromRDS(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -222,22 +218,8 @@ func (c *Client) addOperationCreateDataSourceFromRDSMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDataSourceFromRDS(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataSourceFromRDS",
-	}
 }

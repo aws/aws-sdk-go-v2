@@ -1,0 +1,5 @@
+POST /connector/delete
+
+Content-Type: application/json
+
+{"connectorArn":"__ConnectorArn__"}

@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/data-sources?connectionIdentifier=__ConnectionIdentifier__&environmentIdentifier=__EnvironmentIdentifier__&maxResults=1&name=__Name__&nextToken=__NextToken__&projectIdentifier=__ProjectIdentifier__&status=CREATING&type=__Type__
+
+

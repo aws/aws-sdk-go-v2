@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.Retrieve
+
+{"QueryId":"__QueryId__","ResultItems":[{"Content":"__Content__","DocumentAttributes":[{"Key":"__Key__","Value":{"DateValue":946684800,"LongValue":1,"StringListValue":["__Member__","__Member__"],"StringValue":"__StringValue__"}},{"Key":"__Key__","Value":{"DateValue":946684800,"LongValue":1,"StringListValue":["__Member__","__Member__"],"StringValue":"__StringValue__"}}],"DocumentId":"__DocumentId__","DocumentTitle":"__DocumentTitle__","DocumentURI":"__DocumentURI__","Id":"__Id__","ScoreAttributes":{"ScoreConfidence":"VERY_HIGH"}},{"Content":"__Content__","DocumentAttributes":[{"Key":"__Key__","Value":{"DateValue":946684800,"LongValue":1,"StringListValue":["__Member__","__Member__"],"StringValue":"__StringValue__"}},{"Key":"__Key__","Value":{"DateValue":946684800,"LongValue":1,"StringListValue":["__Member__","__Member__"],"StringValue":"__StringValue__"}}],"DocumentId":"__DocumentId__","DocumentTitle":"__DocumentTitle__","DocumentURI":"__DocumentURI__","Id":"__Id__","ScoreAttributes":{"ScoreConfidence":"VERY_HIGH"}}]}

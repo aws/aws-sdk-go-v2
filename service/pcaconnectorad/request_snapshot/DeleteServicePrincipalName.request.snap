@@ -1,0 +1,3 @@
+DELETE /directoryRegistrations/__DirectoryRegistrationArn__/servicePrincipalNames/__ConnectorArn__
+
+

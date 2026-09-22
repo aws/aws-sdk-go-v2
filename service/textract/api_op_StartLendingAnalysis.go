@@ -4,11 +4,10 @@ package textract
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/textract/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts the classification and analysis of an input document.
@@ -117,6 +116,39 @@ type StartLendingAnalysisInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartLendingAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartLendingAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartLendingAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartLendingAnalysisRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DocumentLocation != nil {
+		s.WriteStruct(schemas.StartLendingAnalysisRequest_DocumentLocation)
+		v.DocumentLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobTag != nil {
+		s.WriteString(schemas.StartLendingAnalysisRequest_JobTag, *v.JobTag)
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.StartLendingAnalysisRequest_KMSKeyId, *v.KMSKeyId)
+	}
+	if v.NotificationChannel != nil {
+		s.WriteStruct(schemas.StartLendingAnalysisRequest_NotificationChannel)
+		v.NotificationChannel.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.StartLendingAnalysisRequest_OutputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartLendingAnalysisOutput struct {
 
 	// A unique identifier for the lending or text-detection job. The JobId is
@@ -129,77 +161,48 @@ type StartLendingAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartLendingAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartLendingAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartLendingAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartLendingAnalysisResponse_JobId, *v.JobId)
+	}
+}
+func (v *StartLendingAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartLendingAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartLendingAnalysisResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartLendingAnalysisResponse_JobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartLendingAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLendingAnalysis, schemas.StartLendingAnalysisRequest, schemas.StartLendingAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartLendingAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartLendingAnalysis, schemas.StartLendingAnalysisRequest, schemas.StartLendingAnalysisResponse), output: &StartLendingAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartLendingAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartLendingAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartLendingAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartLendingAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,22 +217,8 @@ func (c *Client) addOperationStartLendingAnalysisMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartLendingAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartLendingAnalysis",
-	}
 }

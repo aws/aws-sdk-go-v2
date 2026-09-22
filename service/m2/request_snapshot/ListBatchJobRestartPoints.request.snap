@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/batch-job-executions/__ExecutionId__/steps?authSecretsManagerArn=__AuthSecretsManagerArn__
+
+

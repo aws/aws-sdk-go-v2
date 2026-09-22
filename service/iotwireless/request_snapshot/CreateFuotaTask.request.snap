@@ -1,0 +1,5 @@
+POST /fuota-tasks
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","Description":"__Description__","Descriptor":"__Descriptor__","FirmwareUpdateImage":"__FirmwareUpdateImage__","FirmwareUpdateRole":"__FirmwareUpdateRole__","FragmentIntervalMS":1,"FragmentSizeBytes":1,"LoRaWAN":{"RfRegion":"EU868"},"Name":"__Name__","RedundancyPercent":1,"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

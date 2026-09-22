@@ -1,0 +1,3 @@
+GET /securityControls/definitions?MaxResults=1&NextToken=__NextToken__&Providers=AWS&Providers=AWS&StandardsArn=__StandardsArn__
+
+

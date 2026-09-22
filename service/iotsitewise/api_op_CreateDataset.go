@@ -5,13 +5,15 @@ package iotsitewise
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a dataset to connect an external datasource.
+// Creates a dataset. Session and curated datasets are created in a workspace. A
+// session dataset contains data segments of time series data, and a curated
+// dataset curates data segments selected from source session datasets. A dataset
+// that connects to an external datasource is created outside of a workspace.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -44,17 +46,32 @@ type CreateDatasetInput struct {
 	// request is required.
 	ClientToken *string
 
+	// The configuration for the dataset.
+	DatasetConfig *types.DatasetConfig
+
 	// A description about the dataset, and its functionality.
 	DatasetDescription *string
 
 	// The ID of the dataset.
 	DatasetId *string
 
+	// The type of dataset: a session dataset, a curated dataset, or a connection to
+	// an external datasource.
+	DatasetType types.DatasetTypeEnum
+
+	// The metadata for the dataset, provided as key-value pairs.
+	Metadata map[string]string
+
 	// A list of key-value pairs that contain metadata for the access policy. For more
 	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
 	//
 	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
+
+	// The name of the workspace that contains the dataset. Required for session and
+	// curated datasets. Omit this field for datasets that connect to an external
+	// datasource.
+	WorkspaceName *string
 
 	noSmithyDocumentSerde
 }
@@ -88,9 +105,6 @@ type CreateDatasetOutput struct {
 }
 
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataset{}, middleware.After)
 	if err != nil {
 		return err
@@ -99,53 +113,14 @@ func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, o
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataset"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -160,12 +135,6 @@ func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addOpCreateDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataset(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -176,12 +145,6 @@ func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,12 +211,4 @@ func (m *idempotencyToken_initializeOpCreateDataset) HandleInitialize(ctx contex
 }
 func addIdempotencyToken_opCreateDatasetMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDataset{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateDataset(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDataset",
-	}
 }

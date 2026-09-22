@@ -5,10 +5,10 @@ package medialive
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create the Register Node script for all the nodes intended for a specific
@@ -64,6 +64,31 @@ type CreateNodeRegistrationScriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNodeRegistrationScriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNodeRegistrationScriptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNodeRegistrationScriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_ClusterId, *v.ClusterId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_Name, *v.Name)
+	}
+	serialize__listOfNodeInterfaceMapping(s, schemas.CreateNodeRegistrationScriptRequest_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_RequestId, *v.RequestId)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.CreateNodeRegistrationScriptRequest_Role, string(v.Role))
+	}
+}
+
 // Placeholder documentation for CreateNodeRegistrationScriptResponse
 type CreateNodeRegistrationScriptOutput struct {
 
@@ -77,65 +102,42 @@ type CreateNodeRegistrationScriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNodeRegistrationScriptOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNodeRegistrationScriptResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNodeRegistrationScriptOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NodeRegistrationScript != nil {
+		s.WriteString(schemas.CreateNodeRegistrationScriptResponse_NodeRegistrationScript, *v.NodeRegistrationScript)
+	}
+}
+func (v *CreateNodeRegistrationScriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNodeRegistrationScriptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNodeRegistrationScriptResponse_NodeRegistrationScript:
+			v.NodeRegistrationScript = new(string)
+			return d.ReadString(schemas.CreateNodeRegistrationScriptResponse_NodeRegistrationScript, v.NodeRegistrationScript)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNodeRegistrationScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNodeRegistrationScript, schemas.CreateNodeRegistrationScriptRequest, schemas.CreateNodeRegistrationScriptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNodeRegistrationScript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNodeRegistrationScript, schemas.CreateNodeRegistrationScriptRequest, schemas.CreateNodeRegistrationScriptResponse), output: &CreateNodeRegistrationScriptOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNodeRegistrationScript{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNodeRegistrationScript"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -145,12 +147,6 @@ func (c *Client) addOperationCreateNodeRegistrationScriptMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpCreateNodeRegistrationScriptValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNodeRegistrationScript(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,12 +159,6 @@ func (c *Client) addOperationCreateNodeRegistrationScriptMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -208,12 +198,4 @@ func (m *idempotencyToken_initializeOpCreateNodeRegistrationScript) HandleInitia
 }
 func addIdempotencyToken_opCreateNodeRegistrationScriptMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateNodeRegistrationScript{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateNodeRegistrationScript(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateNodeRegistrationScript",
-	}
 }

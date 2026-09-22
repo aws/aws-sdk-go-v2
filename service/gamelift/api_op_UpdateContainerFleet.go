@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: Container
@@ -175,6 +174,57 @@ type UpdateContainerFleetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContainerFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerFleetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentConfiguration != nil {
+		s.WriteStruct(schemas.UpdateContainerFleetInput_DeploymentConfiguration)
+		v.DeploymentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateContainerFleetInput_Description, *v.Description)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.UpdateContainerFleetInput_FleetId, *v.FleetId)
+	}
+	if v.GameServerContainerGroupDefinitionName != nil {
+		s.WriteString(schemas.UpdateContainerFleetInput_GameServerContainerGroupDefinitionName, *v.GameServerContainerGroupDefinitionName)
+	}
+	if v.GameServerContainerGroupsPerInstance != nil {
+		s.WriteInt32(schemas.UpdateContainerFleetInput_GameServerContainerGroupsPerInstance, *v.GameServerContainerGroupsPerInstance)
+	}
+	if v.GameSessionCreationLimitPolicy != nil {
+		s.WriteStruct(schemas.UpdateContainerFleetInput_GameSessionCreationLimitPolicy)
+		v.GameSessionCreationLimitPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceConnectionPortRange != nil {
+		s.WriteStruct(schemas.UpdateContainerFleetInput_InstanceConnectionPortRange)
+		v.InstanceConnectionPortRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeIpPermissionsList(s, schemas.UpdateContainerFleetInput_InstanceInboundPermissionAuthorizations, v.InstanceInboundPermissionAuthorizations)
+	serializeIpPermissionsList(s, schemas.UpdateContainerFleetInput_InstanceInboundPermissionRevocations, v.InstanceInboundPermissionRevocations)
+	if v.LogConfiguration != nil {
+		s.WriteStruct(schemas.UpdateContainerFleetInput_LogConfiguration)
+		v.LogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetricGroupList(s, schemas.UpdateContainerFleetInput_MetricGroups, v.MetricGroups)
+	if v.NewGameSessionProtectionPolicy != "" {
+		s.WriteString(schemas.UpdateContainerFleetInput_NewGameSessionProtectionPolicy, string(v.NewGameSessionProtectionPolicy))
+	}
+	if v.PerInstanceContainerGroupDefinitionName != nil {
+		s.WriteString(schemas.UpdateContainerFleetInput_PerInstanceContainerGroupDefinitionName, *v.PerInstanceContainerGroupDefinitionName)
+	}
+	serializeContainerFleetRemoveAttributeList(s, schemas.UpdateContainerFleetInput_RemoveAttributes, v.RemoveAttributes)
+}
+
 type UpdateContainerFleetOutput struct {
 
 	// A collection of container fleet objects for all fleets that match the request
@@ -187,65 +237,44 @@ type UpdateContainerFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateContainerFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateContainerFleetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateContainerFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerFleet != nil {
+		s.WriteStruct(schemas.UpdateContainerFleetOutput_ContainerFleet)
+		v.ContainerFleet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateContainerFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateContainerFleetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateContainerFleetOutput_ContainerFleet:
+			v.ContainerFleet = &types.ContainerFleet{}
+			return v.ContainerFleet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateContainerFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerFleet, schemas.UpdateContainerFleetInput, schemas.UpdateContainerFleetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateContainerFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateContainerFleet, schemas.UpdateContainerFleetInput, schemas.UpdateContainerFleetOutput), output: &UpdateContainerFleetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateContainerFleet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateContainerFleet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -255,12 +284,6 @@ func (c *Client) addOperationUpdateContainerFleetMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpUpdateContainerFleetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContainerFleet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -275,22 +298,8 @@ func (c *Client) addOperationUpdateContainerFleetMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateContainerFleet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateContainerFleet",
-	}
 }

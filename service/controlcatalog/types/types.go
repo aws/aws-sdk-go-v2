@@ -102,6 +102,10 @@ type CommonControlSummary struct {
 // implementation details.
 type ControlFilter struct {
 
+	// A filter that narrows the results to controls that govern a specific provider's
+	// resources.
+	GovernedProviders []string
+
 	// A filter that narrows the results to controls with specific implementation
 	// types or identifiers. This field allows you to find controls that are
 	// implemented by specific Amazon Web Services services or with specific service
@@ -207,6 +211,10 @@ type ControlParameter struct {
 	// This member is required.
 	Name *string
 
+	// Indicates whether the parameter is required or optional when you enable the
+	// control.
+	Requirement ControlParameterRequirement
+
 	noSmithyDocumentSerde
 }
 
@@ -241,17 +249,27 @@ type ControlSummary struct {
 	// life) as a governance capability in Amazon Web Services.
 	CreateTime *time.Time
 
-	// A list of Amazon Web Services resource types that are governed by this control.
-	// This information helps you understand which controls can govern certain types of
-	// resources, and conversely, which resources are affected when the control is
-	// implemented. The resources are represented as Amazon Web Services CloudFormation
-	// resource types. If GovernedResources cannot be represented by available
-	// CloudFormation resource types, it’s returned as an empty list.
+	// A list of providers whose resources are governed by this control. For example,
+	// a value of AWS indicates that the control governs Amazon Web Services resources.
+	GovernedProviders []string
+
+	// A list of resource types that are governed by this control. This information
+	// helps you understand which controls can govern certain types of resources, and
+	// conversely, which resources are affected when the control is implemented. For
+	// Amazon Web Services controls, the resources are represented as CloudFormation
+	// resource types. For non-Amazon Web Services controls, the resources are
+	// represented in a provider-specific format. If GovernedResources cannot be
+	// represented by available resource types, it’s returned as an empty list.
 	GovernedResources []string
 
 	// An object of type ImplementationSummary that describes how the control is
 	// implemented.
 	Implementation *ImplementationSummary
+
+	// A summary that indicates whether the control requires parameters, accepts
+	// optional parameters, or does not support parameters. Use this field to determine
+	// whether you need to supply parameter values when you enable the control.
+	ParameterRequirementSummary ParameterRequirementSummary
 
 	// An enumerated type, with the following possible values:
 	Severity ControlSeverity

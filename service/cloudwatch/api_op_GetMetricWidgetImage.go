@@ -4,10 +4,9 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // You can use the GetMetricWidgetImage API to retrieve a snapshot graph of one or
@@ -52,7 +51,7 @@ type GetMetricWidgetImageInput struct {
 	// If any metric on the graph could not load all the requested data points, an
 	// orange triangle with an exclamation point appears next to the graph legend.
 	//
-	// [GetMetricWidgetImage: Metric Widget Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/CloudWatch-Metric-Widget-Structure.html
+	// [GetMetricWidgetImage: Metric Widget Structure and Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Widget-Structure.html
 	//
 	// This member is required.
 	MetricWidget *string
@@ -78,6 +77,21 @@ type GetMetricWidgetImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricWidgetImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricWidgetImageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricWidgetImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricWidget != nil {
+		s.WriteString(schemas.GetMetricWidgetImageInput_MetricWidget, *v.MetricWidget)
+	}
+	if v.OutputFormat != nil {
+		s.WriteString(schemas.GetMetricWidgetImageInput_OutputFormat, *v.OutputFormat)
+	}
+}
+
 type GetMetricWidgetImageOutput struct {
 
 	// The image of the graph, in the output format specified. The output is
@@ -90,65 +104,41 @@ type GetMetricWidgetImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricWidgetImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricWidgetImageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricWidgetImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricWidgetImage != nil {
+		s.WriteBlob(schemas.GetMetricWidgetImageOutput_MetricWidgetImage, v.MetricWidgetImage)
+	}
+}
+func (v *GetMetricWidgetImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetricWidgetImageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetricWidgetImageOutput_MetricWidgetImage:
+			return d.ReadBlob(schemas.GetMetricWidgetImageOutput_MetricWidgetImage, &v.MetricWidgetImage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetricWidgetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricWidgetImage, schemas.GetMetricWidgetImageInput, schemas.GetMetricWidgetImageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetMetricWidgetImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricWidgetImage, schemas.GetMetricWidgetImageInput, schemas.GetMetricWidgetImageOutput), output: &GetMetricWidgetImageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetMetricWidgetImage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMetricWidgetImage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -158,12 +148,6 @@ func (c *Client) addOperationGetMetricWidgetImageMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addOpGetMetricWidgetImageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMetricWidgetImage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +162,8 @@ func (c *Client) addOperationGetMetricWidgetImageMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMetricWidgetImage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMetricWidgetImage",
-	}
 }

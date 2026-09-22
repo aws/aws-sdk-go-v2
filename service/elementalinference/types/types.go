@@ -4,13 +4,75 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
+
+// The width and height of the output video. Used in SubtitlingConfig to determine
+// subtitle layout.
+type AspectRatio struct {
+
+	// The height component of the aspect ratio (for example, 9 in a 16:9 ratio).
+	//
+	// This member is required.
+	Height *int32
+
+	// The width component of the aspect ratio (for example, 16 in a 16:9 ratio).
+	//
+	// This member is required.
+	Width *int32
+
+	noSmithyDocumentSerde
+}
 
 // A type of OutputConfig, used when the output in a feed is for the clip feature.
 type ClippingConfig struct {
 
-	// The metadata that is the result of the clip request to Elemental Inference.
+	// A string that you want Elemental Inference to always include in the event
+	// clipping metadata for this output. The string might identify the sports event in
+	// the source media, for example.
 	CallbackMetadata *string
+
+	// The data source to map onto this clipping output. This parameter is optional.
+	// When you include this parameter, Elemental Inference reads the event data for
+	// the fixture that you specify, and includes that data in the event clipping
+	// metadata for this output.
+	//
+	// If you omit this parameter, Elemental Inference doesn't map a data source onto
+	// this output.
+	DataSourceConfiguration *DataSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about one competitor in a fixture. It is used in the
+// FixtureSummary that is in the SearchFixtures response.
+type Competitor struct {
+
+	// Specifies whether this competitor is the home side in the fixture. If true,
+	// this competitor is the home side. If false, this competitor is the away side.
+	IsHome *bool
+
+	// The name of the competitor, as provided by the data source.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The output configuration settings for the contextual metadata feature. Use this
+// structure when the feed output generates metadata that describes the media
+// content.
+type ContextualMetadataConfig struct {
+
+	// Specifies whether Elemental Inference generates a descriptive summary of the
+	// media content for this output.
+	//
+	// Valid values:
+	//
+	//   - ENABLED (default) – Elemental Inference generates a descriptive summary
+	//   along with IAB taxonomy and GARM suitability classifications.
+	//
+	//   - DISABLED – No descriptive summary is generated.
+	SummaryGeneration SummaryGenerationMode
 
 	noSmithyDocumentSerde
 }
@@ -24,10 +86,10 @@ type CreateOutput struct {
 	// This member is required.
 	Name *string
 
-	// A typed property for an output in a feed. It is used in the CreateFeed and
-	// AssociateFeed actions. It identifies the action for Elemental Inference to
-	// perform. It also provides a repository for the results of that action. For
-	// example, CroppingConfig output will contain the metadata for the crop feature.
+	// A typed property for an output in a feed. It identifies the action for
+	// Elemental Inference to perform. It also provides a repository for the results of
+	// that action. For example, CroppingConfig output will contain the metadata for
+	// the crop feature.
 	//
 	// This member is required.
 	OutputConfig OutputConfig
@@ -45,6 +107,62 @@ type CreateOutput struct {
 
 // A type of OutputConfig, used when the output in a feed is for the crop feature.
 type CroppingConfig struct {
+
+	// An array of template groups for the crop output. Each template group provides
+	// the graphics-compositing templates that Elemental Inference applies to the
+	// cropped video. You can specify from 1 to 4 template groups.
+	TemplateGroups []TemplateGroup
+
+	noSmithyDocumentSerde
+}
+
+// Contains the data source configuration for a clipping output. It identifies the
+// fixture whose event data Elemental Inference maps onto the clipping metadata. It
+// is used in the dataSourceConfiguration property of a ClippingConfig.
+type DataSourceConfiguration struct {
+
+	// The ID of the fixture whose event data you want Elemental Inference to map onto
+	// this clipping output. The fixture should be the sports event in the source media
+	// that the feed is processing.
+	//
+	// To obtain this ID, use the SearchFixtures operation to find the fixture, then
+	// use the fixtureId from the matching FixtureSummary.
+	//
+	// This member is required.
+	FixtureId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information about a dictionary. Used in the ListDictionaries
+// response.
+type DictionarySummary struct {
+
+	// The ARN of the dictionary.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the dictionary.
+	//
+	// This member is required.
+	Id *string
+
+	// The language of the dictionary.
+	//
+	// This member is required.
+	Language DictionaryLanguage
+
+	// The name of the dictionary.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the dictionary.
+	//
+	// This member is required.
+	Status DictionaryStatus
+
 	noSmithyDocumentSerde
 }
 
@@ -61,7 +179,7 @@ type FeedAssociation struct {
 }
 
 // Contains configuration information about a feed. It is used in the ListFeeds
-// action.
+// response.
 type FeedSummary struct {
 
 	// The ARN of the feed.
@@ -90,19 +208,61 @@ type FeedSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains configuration information about one output in a feed. It is used in
-// the GetFeed action.
-type GetOutput struct {
+// Contains information about one fixture. It is used in the SearchFixtures
+// response.
+//
+// Elemental Inference relays the information in this structure from the data
+// source, so that you can identify the fixture that matches your source media.
+type FixtureSummary struct {
 
-	// The ARN of the output.
+	// An array of the competitors (the teams or individuals) in the fixture.
+	//
+	// This member is required.
+	Competitors []Competitor
+
+	// The ID of the fixture. Specify this ID in the clipping output of a feed, to
+	// identify the fixture whose event data you want Elemental Inference to map onto
+	// the clipping metadata.
+	//
+	// This member is required.
+	FixtureId *string
+
+	// The name of the fixture, as provided by the data source. For example, the names
+	// of the two competing teams.
 	//
 	// This member is required.
 	Name *string
 
-	// A typed property for an output in a feed. It is used in the GetFeed action. It
-	// identifies the action for Elemental Inference to perform. It also provides a
-	// repository for the results of that action. For example, CroppingConfig output
-	// will contain the metadata for the crop feature.
+	// The status of the fixture in its lifecycle, as provided by the data source. For
+	// example, Scheduled or Completed.
+	//
+	// This member is required.
+	Status *string
+
+	// The group that the fixture belongs to, such as the competition, league, or
+	// tournament. The data source doesn't provide this information for every fixture.
+	FixtureGroup *string
+
+	// The scheduled start time of the fixture, as provided by the data source. The
+	// actual start time might differ.
+	ScheduledStart *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration information about one output in a feed. It is used in
+// the GetFeed response.
+type GetOutput struct {
+
+	// The name of the output.
+	//
+	// This member is required.
+	Name *string
+
+	// A typed property for an output in a feed. It identifies the action for
+	// Elemental Inference to perform. It also provides a repository for the results of
+	// that action. For example, CroppingConfig output will contain the metadata for
+	// the crop feature.
 	//
 	// This member is required.
 	OutputConfig OutputConfig
@@ -115,10 +275,11 @@ type GetOutput struct {
 	// The description of the output.
 	Description *string
 
-	// True means that the output was originally created in the feed by the
-	// AssociateFeed operation. False means it was created using CreateFeed or
-	// UpdateFeed. You will need this value if you use the UpdateFeed operation to
-	// modify the list of outputs in the feed.
+	// True means that the output was originally created in the feed using
+	// AssociateFeed. False means it was created using CreateFeed or UpdateFeed.
+	//
+	// You will need this value if you use UpdateFeed to modify the list of outputs in
+	// the feed.
 	FromAssociation *bool
 
 	noSmithyDocumentSerde
@@ -130,7 +291,9 @@ type GetOutput struct {
 // The following types satisfy this interface:
 //
 //	OutputConfigMemberClipping
+//	OutputConfigMemberContextualMetadata
 //	OutputConfigMemberCropping
+//	OutputConfigMemberSubtitling
 type OutputConfig interface {
 	isOutputConfig()
 }
@@ -144,6 +307,15 @@ type OutputConfigMemberClipping struct {
 
 func (*OutputConfigMemberClipping) isOutputConfig() {}
 
+// The output config type that applies to the contextual metadata feature.
+type OutputConfigMemberContextualMetadata struct {
+	Value ContextualMetadataConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OutputConfigMemberContextualMetadata) isOutputConfig() {}
+
 // The output config type that applies to the cropping feature.
 type OutputConfigMemberCropping struct {
 	Value CroppingConfig
@@ -153,19 +325,98 @@ type OutputConfigMemberCropping struct {
 
 func (*OutputConfigMemberCropping) isOutputConfig() {}
 
-// Contains configuration information about one output in a feed. It is used in
-// the UpdateFeed action.
-type UpdateOutput struct {
+// The output config type that applies to the smart subtitling feature.
+type OutputConfigMemberSubtitling struct {
+	Value SubtitlingConfig
 
-	// The name start here
+	noSmithyDocumentSerde
+}
+
+func (*OutputConfigMemberSubtitling) isOutputConfig() {}
+
+// A filter for a fixture search. It is used in the filters array of a
+// SearchFixtures request.
+type SearchFilter struct {
+
+	// The dimension of the fixture to filter on. Valid values: COMPETITOR.
+	//
+	// This member is required.
+	Name FilterName
+
+	// An array of values to match in the dimension that you specified in name. You
+	// can specify up to 10 values. A fixture appears in the results if it matches at
+	// least one of these values.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// A type of OutputConfig, used when the output in a feed is for the smart
+// subtitling feature. smart subtitling uses automatic speech recognition (ASR) to
+// generate live TTML subtitles from the audio in your source media.
+type SubtitlingConfig struct {
+
+	// The language of the audio in the source media. Elemental Inference uses this
+	// setting to optimize transcription accuracy. Specify the language using an ISO
+	// 639-2/T three-letter code, optionally with a region subtag. Supported values:
+	// eng, eng-au, eng-gb, eng-us, fra, ita, deu, spa, por.
+	//
+	// This member is required.
+	Language TranscriptionLanguage
+
+	// The aspect ratio of the output video, specified as width and height integer
+	// values. Elemental Inference uses the aspect ratio to determine subtitle layout
+	// and line lengths.
+	AspectRatio *AspectRatio
+
+	// The ID of a custom dictionary to improve transcription accuracy for
+	// domain-specific terminology. Use the CreateDictionary operation to create a
+	// dictionary.
+	Dictionary *string
+
+	// Controls how profanity is handled in the generated subtitles. Valid values:
+	// DISABLED (no filtering, default), CENSOR (replace profanity with asterisks),
+	// DROP (remove profanity from the transcript).
+	ProfanityFilter ProfanityFilterMode
+
+	noSmithyDocumentSerde
+}
+
+// A named set of graphics-compositing templates used by the crop feature,
+// specified in the templateGroups array of a CroppingConfig.
+type TemplateGroup struct {
+
+	// A name for the template group.
 	//
 	// This member is required.
 	Name *string
 
-	// A typed property for an output in a feed. It is used in the UpdateFeed action.
-	// It identifies the action for Elemental Inference to perform. It also provides a
-	// repository for the results of that action. For example, CroppingConfig output
-	// will contain the metadata for the crop feature.
+	// An array of Amazon S3 URIs that point to the graphics-compositing templates for
+	// this group. You can specify 1 or 2 URIs. Each URI must be in the form
+	// s3://bucket-name/key . Elemental Inference reads these templates using the IAM
+	// role that you specify in accessRoleArn.
+	//
+	// This member is required.
+	TemplateUris []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration information about one output in a feed. It is used in
+// the UpdateFeed action.
+type UpdateOutput struct {
+
+	// The name of the output.
+	//
+	// This member is required.
+	Name *string
+
+	// A typed property for an output in a feed. It identifies the action for
+	// Elemental Inference to perform. It also provides a repository for the results of
+	// that action. For example, CroppingConfig output will contain the metadata for
+	// the crop feature.
 	//
 	// This member is required.
 	OutputConfig OutputConfig
@@ -178,11 +429,13 @@ type UpdateOutput struct {
 	// A description of the output.
 	Description *string
 
-	// This property is set by the service when you add the output to the feed, and
-	// indicates how you added the output. True means that you used the AssociateFeed
-	// operation. False means that you used the CreateFeed or UpdateFeed operation. Use
-	// GetFeed to obtain the value. If the value is True, include this field here with
-	// a value of True. If the value is False, omit the field here.
+	// Elemental Inference originally sets this parameter to True if this output was
+	// created by AssociateFeed or to False if this output was created by CreateFeed or
+	// UpdateFeed.
+	//
+	// You must not change this value. Therefore, use GetFeed to determine the current
+	// value. Then in the UpdateFeed request, if the current value is True, include
+	// this parameter with a value of True. If it's False, omit the parameter.
 	FromAssociation *bool
 
 	noSmithyDocumentSerde

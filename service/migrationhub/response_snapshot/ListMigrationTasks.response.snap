@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.ListMigrationTasks
+
+{"MigrationTaskSummaryList":[{"MigrationTaskName":"__MigrationTaskName__","ProgressPercent":1,"ProgressUpdateStream":"__ProgressUpdateStream__","Status":"NOT_STARTED","StatusDetail":"__StatusDetail__","UpdateDateTime":946684800},{"MigrationTaskName":"__MigrationTaskName__","ProgressPercent":1,"ProgressUpdateStream":"__ProgressUpdateStream__","Status":"NOT_STARTED","StatusDetail":"__StatusDetail__","UpdateDateTime":946684800}],"NextToken":"__NextToken__"}

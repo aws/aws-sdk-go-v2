@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/coverage
+
+Content-Type: application/json
+
+{"filterCriteria":{"filterCriterion":[{"criterionKey":"ACCOUNT_ID","filterCondition":{"equals":["__Member__","__Member__"],"notEquals":["__Member__","__Member__"]}},{"criterionKey":"ACCOUNT_ID","filterCondition":{"equals":["__Member__","__Member__"],"notEquals":["__Member__","__Member__"]}}]},"maxResults":1,"nextToken":"__NextToken__","sortCriteria":{"attributeName":"ACCOUNT_ID","orderBy":"ASC"}}

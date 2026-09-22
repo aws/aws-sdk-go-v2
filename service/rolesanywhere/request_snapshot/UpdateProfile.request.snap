@@ -1,0 +1,5 @@
+PATCH /profile/__ProfileId__
+
+Content-Type: application/json
+
+{"acceptRoleSessionName":true,"durationSeconds":1,"managedPolicyArns":["__Member__","__Member__"],"name":"__Name__","roleArns":["__Member__","__Member__"],"sessionPolicy":"__SessionPolicy__"}

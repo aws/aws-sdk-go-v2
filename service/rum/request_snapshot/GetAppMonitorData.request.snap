@@ -1,0 +1,5 @@
+POST /appmonitor/__Name__/data
+
+Content-Type: application/json
+
+{"Filters":[{"Name":"__Name__","Values":["__Member__","__Member__"]},{"Name":"__Name__","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","TimeRange":{"After":1,"Before":1}}

@@ -4,11 +4,10 @@ package comprehend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the properties associated with a targeted sentiment detection job. Use
@@ -40,6 +39,18 @@ type DescribeTargetedSentimentDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTargetedSentimentDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTargetedSentimentDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTargetedSentimentDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeTargetedSentimentDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type DescribeTargetedSentimentDetectionJobOutput struct {
 
 	// An object that contains the properties associated with a targeted sentiment
@@ -52,77 +63,50 @@ type DescribeTargetedSentimentDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeTargetedSentimentDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeTargetedSentimentDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeTargetedSentimentDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetedSentimentDetectionJobProperties != nil {
+		s.WriteStruct(schemas.DescribeTargetedSentimentDetectionJobResponse_TargetedSentimentDetectionJobProperties)
+		v.TargetedSentimentDetectionJobProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeTargetedSentimentDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeTargetedSentimentDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeTargetedSentimentDetectionJobResponse_TargetedSentimentDetectionJobProperties:
+			v.TargetedSentimentDetectionJobProperties = &types.TargetedSentimentDetectionJobProperties{}
+			return v.TargetedSentimentDetectionJobProperties.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeTargetedSentimentDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTargetedSentimentDetectionJob, schemas.DescribeTargetedSentimentDetectionJobRequest, schemas.DescribeTargetedSentimentDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeTargetedSentimentDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeTargetedSentimentDetectionJob, schemas.DescribeTargetedSentimentDetectionJobRequest, schemas.DescribeTargetedSentimentDetectionJobResponse), output: &DescribeTargetedSentimentDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeTargetedSentimentDetectionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeTargetedSentimentDetectionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeTargetedSentimentDetectionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTargetedSentimentDetectionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +121,8 @@ func (c *Client) addOperationDescribeTargetedSentimentDetectionJobMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeTargetedSentimentDetectionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeTargetedSentimentDetectionJob",
-	}
 }

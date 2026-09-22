@@ -1,0 +1,24 @@
+POST /__Key__?uploadId=__UploadId__
+
+Content-Type: application/xml
+If-Match: __IfMatch__
+If-None-Match: __IfNoneMatch__
+X-Amz-Checksum-Crc32: __ChecksumCRC32__
+X-Amz-Checksum-Crc32c: __ChecksumCRC32C__
+X-Amz-Checksum-Crc64nvme: __ChecksumCRC64NVME__
+X-Amz-Checksum-Md5: __ChecksumMD5__
+X-Amz-Checksum-Sha1: __ChecksumSHA1__
+X-Amz-Checksum-Sha256: __ChecksumSHA256__
+X-Amz-Checksum-Sha512: __ChecksumSHA512__
+X-Amz-Checksum-Type: COMPOSITE
+X-Amz-Checksum-Xxhash128: __ChecksumXXHASH128__
+X-Amz-Checksum-Xxhash3: __ChecksumXXHASH3__
+X-Amz-Checksum-Xxhash64: __ChecksumXXHASH64__
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Mp-Object-Size: 1
+X-Amz-Request-Payer: requester
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key: __SSECustomerKey__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+
+<CompleteMultipartUpload xmlns="http://s3.amazonaws.com/doc/2006-03-01/"><Part><ChecksumCRC32>__ChecksumCRC32__</ChecksumCRC32><ChecksumCRC32C>__ChecksumCRC32C__</ChecksumCRC32C><ChecksumCRC64NVME>__ChecksumCRC64NVME__</ChecksumCRC64NVME><ChecksumMD5>__ChecksumMD5__</ChecksumMD5><ChecksumSHA1>__ChecksumSHA1__</ChecksumSHA1><ChecksumSHA256>__ChecksumSHA256__</ChecksumSHA256><ChecksumSHA512>__ChecksumSHA512__</ChecksumSHA512><ChecksumXXHASH128>__ChecksumXXHASH128__</ChecksumXXHASH128><ChecksumXXHASH3>__ChecksumXXHASH3__</ChecksumXXHASH3><ChecksumXXHASH64>__ChecksumXXHASH64__</ChecksumXXHASH64><ETag>__ETag__</ETag><PartNumber>1</PartNumber></Part><Part><ChecksumCRC32>__ChecksumCRC32__</ChecksumCRC32><ChecksumCRC32C>__ChecksumCRC32C__</ChecksumCRC32C><ChecksumCRC64NVME>__ChecksumCRC64NVME__</ChecksumCRC64NVME><ChecksumMD5>__ChecksumMD5__</ChecksumMD5><ChecksumSHA1>__ChecksumSHA1__</ChecksumSHA1><ChecksumSHA256>__ChecksumSHA256__</ChecksumSHA256><ChecksumSHA512>__ChecksumSHA512__</ChecksumSHA512><ChecksumXXHASH128>__ChecksumXXHASH128__</ChecksumXXHASH128><ChecksumXXHASH3>__ChecksumXXHASH3__</ChecksumXXHASH3><ChecksumXXHASH64>__ChecksumXXHASH64__</ChecksumXXHASH64><ETag>__ETag__</ETag><PartNumber>1</PartNumber></Part></CompleteMultipartUpload>

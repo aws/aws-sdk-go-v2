@@ -1,0 +1,5 @@
+POST /StartCutover
+
+Content-Type: application/json
+
+{"accountID":"__AccountID__","sourceServerIDs":["__Member__","__Member__"],"tags":{"key0":"__Value__"}}

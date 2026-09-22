@@ -1,0 +1,5 @@
+POST /delete-app-input-source
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","clientToken":"__ClientToken__","eksSourceClusterNamespace":{"eksClusterArn":"__EksClusterArn__","namespace":"__Namespace__"},"sourceArn":"__SourceArn__","terraformSource":{"s3StateFileUrl":"__S3StateFileUrl__"}}

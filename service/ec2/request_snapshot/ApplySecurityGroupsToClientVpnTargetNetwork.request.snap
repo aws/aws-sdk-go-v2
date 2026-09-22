@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ApplySecurityGroupsToClientVpnTargetNetwork&ClientVpnEndpointId=__ClientVpnEndpointId__&DryRun=true&SecurityGroupId.1=__Member__&SecurityGroupId.2=__Member__&Version=2016-11-15&VpcId=__VpcId__

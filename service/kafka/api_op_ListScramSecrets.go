@@ -5,9 +5,9 @@ package kafka
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
@@ -42,6 +42,24 @@ type ListScramSecretsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScramSecretsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScramSecretsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScramSecretsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ListScramSecretsRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListScramSecretsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScramSecretsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListScramSecretsOutput struct {
 
 	// Paginated results marker.
@@ -56,77 +74,51 @@ type ListScramSecretsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScramSecretsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScramSecretsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScramSecretsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScramSecretsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOf__string(s, schemas.ListScramSecretsResponse_SecretArnList, v.SecretArnList)
+}
+func (v *ListScramSecretsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScramSecretsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScramSecretsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScramSecretsResponse_NextToken, v.NextToken)
+		case schemas.ListScramSecretsResponse_SecretArnList:
+			return deserialize__listOf__string(d, schemas.ListScramSecretsResponse_SecretArnList, &v.SecretArnList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListScramSecretsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScramSecrets, schemas.ListScramSecretsRequest, schemas.ListScramSecretsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScramSecrets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScramSecrets, schemas.ListScramSecretsRequest, schemas.ListScramSecretsResponse), output: &ListScramSecretsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListScramSecrets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListScramSecrets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListScramSecretsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScramSecrets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,12 +131,6 @@ func (c *Client) addOperationListScramSecretsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,11 +231,3 @@ type ListScramSecretsAPIClient interface {
 }
 
 var _ ListScramSecretsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListScramSecrets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListScramSecrets",
-	}
-}

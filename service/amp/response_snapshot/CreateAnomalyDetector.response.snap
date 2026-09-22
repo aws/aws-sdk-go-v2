@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"anomalyDetectorId":"__AnomalyDetectorId__","arn":"__Arn__","status":{"statusCode":"CREATING","statusReason":"__StatusReason__"},"tags":{"key0":"__Value__"}}

@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/domain-units?maxResults=1&nextToken=__NextToken__&parentDomainUnitIdentifier=__ParentDomainUnitIdentifier__
+
+

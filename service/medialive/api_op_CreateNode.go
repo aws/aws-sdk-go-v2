@@ -5,10 +5,10 @@ package medialive
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a Node in the specified Cluster. You can also create Nodes using the
@@ -58,6 +58,29 @@ type CreateNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CreateNodeRequest_ClusterId, *v.ClusterId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNodeRequest_Name, *v.Name)
+	}
+	serialize__listOfNodeInterfaceMappingCreateRequest(s, schemas.CreateNodeRequest_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateNodeRequest_RequestId, *v.RequestId)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.CreateNodeRequest_Role, string(v.Role))
+	}
+	serializeTags(s, schemas.CreateNodeRequest_Tags, v.Tags)
+}
+
 // Placeholder documentation for CreateNodeResponse
 type CreateNodeOutput struct {
 
@@ -105,65 +128,105 @@ type CreateNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateNodeResponse_Arn, *v.Arn)
+	}
+	serialize__listOf__string(s, schemas.CreateNodeResponse_ChannelPlacementGroups, v.ChannelPlacementGroups)
+	if v.ClusterId != nil {
+		s.WriteString(schemas.CreateNodeResponse_ClusterId, *v.ClusterId)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.CreateNodeResponse_ConnectionState, string(v.ConnectionState))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateNodeResponse_Id, *v.Id)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.CreateNodeResponse_InstanceArn, *v.InstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateNodeResponse_Name, *v.Name)
+	}
+	serialize__listOfNodeInterfaceMapping(s, schemas.CreateNodeResponse_NodeInterfaceMappings, v.NodeInterfaceMappings)
+	if v.Role != "" {
+		s.WriteString(schemas.CreateNodeResponse_Role, string(v.Role))
+	}
+	serializeSdiSourceMappings(s, schemas.CreateNodeResponse_SdiSourceMappings, v.SdiSourceMappings)
+	if v.State != "" {
+		s.WriteString(schemas.CreateNodeResponse_State, string(v.State))
+	}
+}
+func (v *CreateNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNodeResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateNodeResponse_Arn, v.Arn)
+		case schemas.CreateNodeResponse_ChannelPlacementGroups:
+			return deserialize__listOf__string(d, schemas.CreateNodeResponse_ChannelPlacementGroups, &v.ChannelPlacementGroups)
+		case schemas.CreateNodeResponse_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.CreateNodeResponse_ClusterId, v.ClusterId)
+		case schemas.CreateNodeResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.CreateNodeResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.NodeConnectionState(ev)
+			return nil
+		case schemas.CreateNodeResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateNodeResponse_Id, v.Id)
+		case schemas.CreateNodeResponse_InstanceArn:
+			v.InstanceArn = new(string)
+			return d.ReadString(schemas.CreateNodeResponse_InstanceArn, v.InstanceArn)
+		case schemas.CreateNodeResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateNodeResponse_Name, v.Name)
+		case schemas.CreateNodeResponse_NodeInterfaceMappings:
+			return deserialize__listOfNodeInterfaceMapping(d, schemas.CreateNodeResponse_NodeInterfaceMappings, &v.NodeInterfaceMappings)
+		case schemas.CreateNodeResponse_Role:
+			var ev string
+			if err := d.ReadString(schemas.CreateNodeResponse_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = types.NodeRole(ev)
+			return nil
+		case schemas.CreateNodeResponse_SdiSourceMappings:
+			return deserializeSdiSourceMappings(d, schemas.CreateNodeResponse_SdiSourceMappings, &v.SdiSourceMappings)
+		case schemas.CreateNodeResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateNodeResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.NodeState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNode, schemas.CreateNodeRequest, schemas.CreateNodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNode, schemas.CreateNodeRequest, schemas.CreateNodeResponse), output: &CreateNodeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateNode{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNode"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -173,12 +236,6 @@ func (c *Client) addOperationCreateNodeMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpCreateNodeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNode(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -191,12 +248,6 @@ func (c *Client) addOperationCreateNodeMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -236,12 +287,4 @@ func (m *idempotencyToken_initializeOpCreateNode) HandleInitialize(ctx context.C
 }
 func addIdempotencyToken_opCreateNodeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateNode{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateNode(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateNode",
-	}
 }

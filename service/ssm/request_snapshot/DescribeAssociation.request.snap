@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.DescribeAssociation
+
+{"AssociationId":"__AssociationId__","AssociationVersion":"__AssociationVersion__","InstanceId":"__InstanceId__","Name":"__Name__"}

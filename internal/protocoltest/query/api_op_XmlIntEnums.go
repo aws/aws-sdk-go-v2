@@ -4,11 +4,10 @@ package query
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This example serializes enums as top level properties, in lists, sets, and maps.
@@ -31,6 +30,22 @@ type XmlIntEnumsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlIntEnumsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlIntEnumsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *XmlIntEnumsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type XmlIntEnumsOutput struct {
 	IntEnum1 types.IntegerEnum
 
@@ -50,74 +65,78 @@ type XmlIntEnumsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlIntEnumsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlIntEnumsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlIntEnumsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntEnum1 != 0 {
+		s.WriteInt32(schemas.XmlIntEnumsOutput_intEnum1, int32(v.IntEnum1))
+	}
+	if v.IntEnum2 != 0 {
+		s.WriteInt32(schemas.XmlIntEnumsOutput_intEnum2, int32(v.IntEnum2))
+	}
+	if v.IntEnum3 != 0 {
+		s.WriteInt32(schemas.XmlIntEnumsOutput_intEnum3, int32(v.IntEnum3))
+	}
+	serializeIntegerEnumList(s, schemas.XmlIntEnumsOutput_intEnumList, v.IntEnumList)
+	serializeIntegerEnumMap(s, schemas.XmlIntEnumsOutput_intEnumMap, v.IntEnumMap)
+	serializeIntegerEnumSet(s, schemas.XmlIntEnumsOutput_intEnumSet, v.IntEnumSet)
+}
+func (v *XmlIntEnumsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlIntEnumsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlIntEnumsOutput_intEnum1:
+			var ev int32
+			if err := d.ReadInt32(schemas.XmlIntEnumsOutput_intEnum1, &ev); err != nil {
+				return err
+			}
+			v.IntEnum1 = types.IntegerEnum(ev)
+			return nil
+		case schemas.XmlIntEnumsOutput_intEnum2:
+			var ev int32
+			if err := d.ReadInt32(schemas.XmlIntEnumsOutput_intEnum2, &ev); err != nil {
+				return err
+			}
+			v.IntEnum2 = types.IntegerEnum(ev)
+			return nil
+		case schemas.XmlIntEnumsOutput_intEnum3:
+			var ev int32
+			if err := d.ReadInt32(schemas.XmlIntEnumsOutput_intEnum3, &ev); err != nil {
+				return err
+			}
+			v.IntEnum3 = types.IntegerEnum(ev)
+			return nil
+		case schemas.XmlIntEnumsOutput_intEnumList:
+			return deserializeIntegerEnumList(d, schemas.XmlIntEnumsOutput_intEnumList, &v.IntEnumList)
+		case schemas.XmlIntEnumsOutput_intEnumMap:
+			return deserializeIntegerEnumMap(d, schemas.XmlIntEnumsOutput_intEnumMap, &v.IntEnumMap)
+		case schemas.XmlIntEnumsOutput_intEnumSet:
+			return deserializeIntegerEnumSet(d, schemas.XmlIntEnumsOutput_intEnumSet, &v.IntEnumSet)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlIntEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlIntEnums, nil, schemas.XmlIntEnumsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpXmlIntEnums{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlIntEnums, nil, schemas.XmlIntEnumsOutput), output: &XmlIntEnumsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpXmlIntEnums{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlIntEnums"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opXmlIntEnums(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,22 +151,8 @@ func (c *Client) addOperationXmlIntEnumsMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opXmlIntEnums(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "XmlIntEnums",
-	}
 }

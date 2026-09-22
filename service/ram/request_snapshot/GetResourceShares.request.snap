@@ -1,0 +1,5 @@
+POST /getresourceshares
+
+Content-Type: application/json
+
+{"maxResults":1,"name":"__Name__","nextToken":"__NextToken__","permissionArn":"__PermissionArn__","permissionVersion":1,"resourceOwner":"SELF","resourceShareArns":["__Member__","__Member__"],"resourceShareStatus":"PENDING","tagFilters":[{"tagKey":"__TagKey__","tagValues":["__Member__","__Member__"]},{"tagKey":"__TagKey__","tagValues":["__Member__","__Member__"]}]}

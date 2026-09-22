@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.ListBackups
+
+{"BackupType":"USER","ExclusiveStartBackupArn":"__ExclusiveStartBackupArn__","Limit":1,"TableName":"__TableName__","TimeRangeLowerBound":946684800,"TimeRangeUpperBound":946684800}

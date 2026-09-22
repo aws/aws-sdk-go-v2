@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.DeleteDataTransformationProfile
+
+{"ProfileId":"__ProfileId__"}

@@ -4,11 +4,10 @@ package autoscalingplans
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a scaling plan.
@@ -57,6 +56,24 @@ type CreateScalingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScalingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScalingPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScalingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationSource != nil {
+		s.WriteStruct(schemas.CreateScalingPlanRequest_ApplicationSource)
+		v.ApplicationSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeScalingInstructions(s, schemas.CreateScalingPlanRequest_ScalingInstructions, v.ScalingInstructions)
+	if v.ScalingPlanName != nil {
+		s.WriteString(schemas.CreateScalingPlanRequest_ScalingPlanName, *v.ScalingPlanName)
+	}
+}
+
 type CreateScalingPlanOutput struct {
 
 	// The version number of the scaling plan. This value is always 1 . Currently, you
@@ -71,77 +88,48 @@ type CreateScalingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateScalingPlanOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateScalingPlanResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateScalingPlanOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScalingPlanVersion != nil {
+		s.WriteInt64(schemas.CreateScalingPlanResponse_ScalingPlanVersion, *v.ScalingPlanVersion)
+	}
+}
+func (v *CreateScalingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateScalingPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateScalingPlanResponse_ScalingPlanVersion:
+			v.ScalingPlanVersion = new(int64)
+			return d.ReadInt64(schemas.CreateScalingPlanResponse_ScalingPlanVersion, v.ScalingPlanVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScalingPlan, schemas.CreateScalingPlanRequest, schemas.CreateScalingPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateScalingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateScalingPlan, schemas.CreateScalingPlanRequest, schemas.CreateScalingPlanResponse), output: &CreateScalingPlanOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateScalingPlan{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateScalingPlan"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateScalingPlanValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScalingPlan(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +144,8 @@ func (c *Client) addOperationCreateScalingPlanMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateScalingPlan(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateScalingPlan",
-	}
 }

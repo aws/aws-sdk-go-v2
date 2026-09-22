@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -90,6 +90,48 @@ type ListCustomModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelArnEquals != nil {
+		s.WriteString(schemas.ListCustomModelsRequest_baseModelArnEquals, *v.BaseModelArnEquals)
+	}
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListCustomModelsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListCustomModelsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.FoundationModelArnEquals != nil {
+		s.WriteString(schemas.ListCustomModelsRequest_foundationModelArnEquals, *v.FoundationModelArnEquals)
+	}
+	if v.IsOwned != nil {
+		s.WriteBool(schemas.ListCustomModelsRequest_isOwned, *v.IsOwned)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomModelsRequest_maxResults, *v.MaxResults)
+	}
+	if v.ModelStatus != "" {
+		s.WriteString(schemas.ListCustomModelsRequest_modelStatus, string(v.ModelStatus))
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListCustomModelsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomModelsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListCustomModelsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListCustomModelsRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListCustomModelsOutput struct {
 
 	// Model summaries.
@@ -106,74 +148,48 @@ type ListCustomModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomModelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomModelsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomModelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomModelSummaryList(s, schemas.ListCustomModelsResponse_modelSummaries, v.ModelSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomModelsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomModelsResponse_modelSummaries:
+			return deserializeCustomModelSummaryList(d, schemas.ListCustomModelsResponse_modelSummaries, &v.ModelSummaries)
+		case schemas.ListCustomModelsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomModelsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomModels, schemas.ListCustomModelsRequest, schemas.ListCustomModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCustomModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomModels, schemas.ListCustomModelsRequest, schemas.ListCustomModelsResponse), output: &ListCustomModelsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCustomModels{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCustomModels"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomModels(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +202,6 @@ func (c *Client) addOperationListCustomModelsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -295,11 +305,3 @@ type ListCustomModelsAPIClient interface {
 }
 
 var _ ListCustomModelsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCustomModels(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCustomModels",
-	}
-}

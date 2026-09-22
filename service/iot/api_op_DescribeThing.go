@@ -4,10 +4,9 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the specified thing.
@@ -39,6 +38,18 @@ type DescribeThingInput struct {
 	ThingName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ThingName != nil {
+		s.WriteString(schemas.DescribeThingRequest_thingName, *v.ThingName)
+	}
 }
 
 // The output from the DescribeThing operation.
@@ -85,77 +96,86 @@ type DescribeThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributes(s, schemas.DescribeThingResponse_attributes, v.Attributes)
+	if v.BillingGroupName != nil {
+		s.WriteString(schemas.DescribeThingResponse_billingGroupName, *v.BillingGroupName)
+	}
+	if v.DefaultClientId != nil {
+		s.WriteString(schemas.DescribeThingResponse_defaultClientId, *v.DefaultClientId)
+	}
+	if v.ThingArn != nil {
+		s.WriteString(schemas.DescribeThingResponse_thingArn, *v.ThingArn)
+	}
+	if v.ThingId != nil {
+		s.WriteString(schemas.DescribeThingResponse_thingId, *v.ThingId)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.DescribeThingResponse_thingName, *v.ThingName)
+	}
+	if v.ThingTypeName != nil {
+		s.WriteString(schemas.DescribeThingResponse_thingTypeName, *v.ThingTypeName)
+	}
+	if v.Version != 0 {
+		s.WriteInt64(schemas.DescribeThingResponse_version, v.Version)
+	}
+}
+func (v *DescribeThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThingResponse_attributes:
+			return deserializeAttributes(d, schemas.DescribeThingResponse_attributes, &v.Attributes)
+		case schemas.DescribeThingResponse_billingGroupName:
+			v.BillingGroupName = new(string)
+			return d.ReadString(schemas.DescribeThingResponse_billingGroupName, v.BillingGroupName)
+		case schemas.DescribeThingResponse_defaultClientId:
+			v.DefaultClientId = new(string)
+			return d.ReadString(schemas.DescribeThingResponse_defaultClientId, v.DefaultClientId)
+		case schemas.DescribeThingResponse_thingArn:
+			v.ThingArn = new(string)
+			return d.ReadString(schemas.DescribeThingResponse_thingArn, v.ThingArn)
+		case schemas.DescribeThingResponse_thingId:
+			v.ThingId = new(string)
+			return d.ReadString(schemas.DescribeThingResponse_thingId, v.ThingId)
+		case schemas.DescribeThingResponse_thingName:
+			v.ThingName = new(string)
+			return d.ReadString(schemas.DescribeThingResponse_thingName, v.ThingName)
+		case schemas.DescribeThingResponse_thingTypeName:
+			v.ThingTypeName = new(string)
+			return d.ReadString(schemas.DescribeThingResponse_thingTypeName, v.ThingTypeName)
+		case schemas.DescribeThingResponse_version:
+			return d.ReadInt64(schemas.DescribeThingResponse_version, &v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThing, schemas.DescribeThingRequest, schemas.DescribeThingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThing, schemas.DescribeThingRequest, schemas.DescribeThingResponse), output: &DescribeThingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeThing{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeThing"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeThingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeThing(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +190,8 @@ func (c *Client) addOperationDescribeThingMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeThing(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeThing",
-	}
 }

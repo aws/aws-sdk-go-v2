@@ -5,10 +5,10 @@ package kms
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the key materials associated with the specified KMS
@@ -104,6 +104,27 @@ type ListKeyRotationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeyRotationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeyRotationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeyRotationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeKeyMaterial != "" {
+		s.WriteString(schemas.ListKeyRotationsRequest_IncludeKeyMaterial, string(v.IncludeKeyMaterial))
+	}
+	if v.KeyId != nil {
+		s.WriteString(schemas.ListKeyRotationsRequest_KeyId, *v.KeyId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListKeyRotationsRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListKeyRotationsRequest_Marker, *v.Marker)
+	}
+}
+
 type ListKeyRotationsOutput struct {
 
 	// When Truncated is true, this element is present and contains the value to use
@@ -127,77 +148,56 @@ type ListKeyRotationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeyRotationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeyRotationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeyRotationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListKeyRotationsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeRotationsList(s, schemas.ListKeyRotationsResponse_Rotations, v.Rotations)
+	if v.Truncated != false {
+		s.WriteBool(schemas.ListKeyRotationsResponse_Truncated, v.Truncated)
+	}
+}
+func (v *ListKeyRotationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeyRotationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeyRotationsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListKeyRotationsResponse_NextMarker, v.NextMarker)
+		case schemas.ListKeyRotationsResponse_Rotations:
+			return deserializeRotationsList(d, schemas.ListKeyRotationsResponse_Rotations, &v.Rotations)
+		case schemas.ListKeyRotationsResponse_Truncated:
+			return d.ReadBool(schemas.ListKeyRotationsResponse_Truncated, &v.Truncated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKeyRotationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeyRotations, schemas.ListKeyRotationsRequest, schemas.ListKeyRotationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListKeyRotations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKeyRotations, schemas.ListKeyRotationsRequest, schemas.ListKeyRotationsResponse), output: &ListKeyRotationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListKeyRotations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListKeyRotations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListKeyRotationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKeyRotations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -210,12 +210,6 @@ func (c *Client) addOperationListKeyRotationsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -321,11 +315,3 @@ type ListKeyRotationsAPIClient interface {
 }
 
 var _ ListKeyRotationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListKeyRotations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListKeyRotations",
-	}
-}

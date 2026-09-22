@@ -98,8 +98,220 @@
                     "name": "execute-api"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Participant_Service.html\">Participant Service actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Participant_Service.html\">Participant Service data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Amazon Connect is an easy-to-use omnichannel cloud contact center service that\n            enables companies of any size to deliver superior customer service at a lower cost.\n                Amazon Connect communications capabilities make it easy for companies to deliver\n            personalized interactions across communication channels, including chat. </p>\n         <p>Use the Amazon Connect Participant Service to manage participants (for example,\n            agents, customers, and managers listening in), and to send messages and events within a\n            chat contact. The APIs in the service enable the following: sending chat messages,\n            attachment sharing, managing a participant's connection state and message events, and\n            retrieving chat transcripts.</p>",
+                "smithy.api#documentation": "<ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Participant_Service.html\">Participant Service actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Participant_Service.html\">Participant Service data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Connect Customer is an easy-to-use omnichannel cloud contact center service that\n            enables companies of any size to deliver superior customer service at a lower cost.\n                Connect Customer communications capabilities make it easy for companies to deliver\n            personalized interactions across communication channels, including chat. </p>\n         <p>Use the Connect Customer Participant Service to manage participants (for example,\n            agents, customers, and managers listening in), and to send messages and events within a\n            chat contact. The APIs in the service enable the following: sending chat messages,\n            attachment sharing, managing a participant's connection state and message events, and\n            retrieving chat transcripts.</p>",
                 "smithy.api#title": "Amazon Connect Participant Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://participant.connect-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://participant.connect.{Region}.amazonaws.com",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://participant.connect-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://participant.connect.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://participant.connect.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 14,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -1089,7 +1301,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL\n            provided in StartAttachmentUpload API. A conflict exception is thrown when an attachment\n            with that identifier is already being uploaded.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL\n            provided in StartAttachmentUpload API. A conflict exception is thrown when an attachment\n            with that identifier is already being uploaded.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/complete-attachment-upload",
@@ -1246,7 +1458,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the participant's connection. </p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>. </p>\n         <p>For WebRTC security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security\">Amazon Connect WebRTC security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ParticipantToken</code> is used for invoking this API instead of\n                    <code>ConnectionToken</code>.</p>\n         </note>\n         <p>The participant token is valid for the lifetime of the participant – until they are\n            part of a contact. For WebRTC participants, if they leave or are disconnected for 60\n            seconds, a new participant needs to be created using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateParticipant.html\">CreateParticipant</a> API. </p>\n         <p>\n            <b>For <code>WEBSOCKET</code> Type</b>: </p>\n         <p>The response URL for has a connect expiry timeout of 100s. Clients must manually\n            connect to the returned websocket URL and subscribe to the desired topic. </p>\n         <p>For chat, you need to publish the following on the established websocket\n            connection:</p>\n         <p>\n            <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code>\n         </p>\n         <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter,\n            clients need to call this API again to obtain a new websocket URL and perform the same\n            steps as before.</p>\n         <p>The expiry time for the connection token is different than the\n                <code>ChatDurationInMinutes</code>. Expiry time for the connection token is 1\n            day.</p>\n         <p>\n            <b>For <code>WEBRTC_CONNECTION</code> Type</b>: </p>\n         <p>The response includes connection data required for the client application to join the\n            call using the Amazon Chime SDK client libraries. The WebRTCConnection response contains\n            Meeting and Attendee information needed to establish the media connection. </p>\n         <p>The attendee join token in WebRTCConnection response is valid for the lifetime of the\n            participant in the call. If a participant leaves or is disconnected for 60 seconds,\n            their participant credentials will no longer be valid, and a new participant will need\n            to be created to rejoin the call. </p>\n         <p>\n            <b>Message streaming support</b>: This API can also be used\n            together with the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html\">StartContactStreaming</a> API to create a participant connection for chat\n            contacts that are not using a websocket. For more information about message streaming,\n                <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html\">Enable real-time chat\n                message streaming</a> in the <i>Amazon Connect Administrator\n            Guide</i>.</p>\n         <p>\n            <b>Multi-user web, in-app, video calling support</b>: </p>\n         <p>For WebRTC calls, this API is used in conjunction with the CreateParticipant API to\n            enable multi-party calling. The StartWebRTCContact API creates the initial contact and\n            routes it to an agent, while CreateParticipant adds additional participants to the\n            ongoing call. For more information about multi-party WebRTC calls, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html\">Enable multi-user web, in-app, and video calling</a> in the <i>Amazon Connect\n                Administrator Guide</i>. </p>\n         <p>\n            <b>Feature specifications</b>: For information about feature\n            specifications, such as the allowed number of open websocket connections per participant\n            or maximum number of WebRTC participants, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator\n                Guide</i>. </p>\n         <note>\n            <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates the participant's connection. </p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>. </p>\n         <p>For WebRTC security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security\">Connect Customer WebRTC security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ParticipantToken</code> is used for invoking this API instead of\n                    <code>ConnectionToken</code>.</p>\n         </note>\n         <p>The participant token is valid for the lifetime of the participant – until they are\n            part of a contact. For WebRTC participants, if they leave or are disconnected for 60\n            seconds, a new participant needs to be created using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateParticipant.html\">CreateParticipant</a> API. </p>\n         <p>\n            <b>For <code>WEBSOCKET</code> Type</b>: </p>\n         <p>The response URL for has a connect expiry timeout of 100s. Clients must manually\n            connect to the returned websocket URL and subscribe to the desired topic. </p>\n         <p>For chat, you need to publish the following on the established websocket\n            connection:</p>\n         <p>\n            <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code>\n         </p>\n         <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter,\n            clients need to call this API again to obtain a new websocket URL and perform the same\n            steps as before.</p>\n         <p>The expiry time for the connection token is different than the\n                <code>ChatDurationInMinutes</code>. Expiry time for the connection token is 1\n            day.</p>\n         <p>\n            <b>For <code>WEBRTC_CONNECTION</code> Type</b>: </p>\n         <p>The response includes connection data required for the client application to join the\n            call using the Amazon Chime SDK client libraries. The WebRTCConnection response contains\n            Meeting and Attendee information needed to establish the media connection. </p>\n         <p>The attendee join token in WebRTCConnection response is valid for the lifetime of the\n            participant in the call. If a participant leaves or is disconnected for 60 seconds,\n            their participant credentials will no longer be valid, and a new participant will need\n            to be created to rejoin the call. </p>\n         <p>\n            <b>Message streaming support</b>: This API can also be used\n            together with the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html\">StartContactStreaming</a> API to create a participant connection for chat\n            contacts that are not using a websocket. For more information about message streaming,\n                <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html\">Enable real-time chat\n                message streaming</a> in the <i>Amazon Connect Administrator\n            Guide</i>.</p>\n         <p>\n            <b>Multi-user web, in-app, video calling support</b>: </p>\n         <p>For WebRTC calls, this API is used in conjunction with the CreateParticipant API to\n            enable multi-party calling. The StartWebRTCContact API creates the initial contact and\n            routes it to an agent, while CreateParticipant adds additional participants to the\n            ongoing call. For more information about multi-party WebRTC calls, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html\">Enable multi-user web, in-app, and video calling</a> in the <i>Amazon Connect\n                Administrator Guide</i>. </p>\n         <p>\n            <b>Feature specifications</b>: For information about feature\n            specifications, such as the allowed number of open websocket connections per participant\n            or maximum number of WebRTC participants, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator\n                Guide</i>. </p>\n         <note>\n            <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/connection",
@@ -1334,7 +1546,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the view for the specified view token.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>. </p>",
+                "smithy.api#documentation": "<p>Retrieves the view for the specified view token.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/participant/views/{ViewToken}",
@@ -1403,7 +1615,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disconnects a participant. </p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Disconnects a participant. </p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/disconnect",
@@ -1473,7 +1685,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a pre-signed URL for download of a completed attachment. This is an\n            asynchronous API for use with active contacts.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>. </p>\n         <note>\n            <ul>\n               <li>\n                  <p>The participant role <code>CUSTOM_BOT</code> is not permitted to access\n                        attachments customers may upload. An <code>AccessDeniedException</code> can\n                        indicate that the participant may be a CUSTOM_BOT, and it doesn't have\n                        access to attachments.</p>\n               </li>\n               <li>\n                  <p>\n                     <code>ConnectionToken</code> is used for invoking this API instead of\n                            <code>ParticipantToken</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Provides a pre-signed URL for download of a completed attachment. This is an\n            asynchronous API for use with active contacts.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>. </p>\n         <note>\n            <ul>\n               <li>\n                  <p>The participant role <code>CUSTOM_BOT</code> is not permitted to access\n                        attachments customers may upload. An <code>AccessDeniedException</code> can\n                        indicate that the participant may be a CUSTOM_BOT, and it doesn't have\n                        access to attachments.</p>\n               </li>\n               <li>\n                  <p>\n                     <code>ConnectionToken</code> is used for invoking this API instead of\n                            <code>ParticipantToken</code>.</p>\n               </li>\n            </ul>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/attachment",
@@ -1561,7 +1773,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the AuthenticationUrl for the current authentication session for the\n            AuthenticateCustomer flow block. </p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This API can only be called within one minute of receiving the\n                        authenticationInitiated event.</p>\n               </li>\n               <li>\n                  <p>The current supported channel is chat. This API is not supported for Apple\n                        Messages for Business, WhatsApp, or SMS chats.</p>\n               </li>\n            </ul>\n         </note>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves the AuthenticationUrl for the current authentication session for the\n            AuthenticateCustomer flow block. </p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>.</p>\n         <note>\n            <ul>\n               <li>\n                  <p>This API can only be called within one minute of receiving the\n                        authenticationInitiated event.</p>\n               </li>\n               <li>\n                  <p>The current supported channel is chat. This API is not supported for Apple\n                        Messages for Business, WhatsApp, or SMS chats.</p>\n               </li>\n            </ul>\n         </note>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/authentication-url",
@@ -1636,7 +1848,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a transcript of the session, including details about any attachments. For\n            information about accessing past chat contact transcripts for a persistent chat, see\n                <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a>. </p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>. </p>\n         <p>If you have a process that consumes events in the transcript of an chat that has\n            ended, note that chat transcripts contain the following event content types if the event\n            has occurred during the chat session:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.participant.invited</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.participant.joined</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.participant.left</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.chat.ended</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.transfer.succeeded</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.transfer.failed</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a transcript of the session, including details about any attachments. For\n            information about accessing past chat contact transcripts for a persistent chat, see\n                <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a>. </p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>. </p>\n         <p>If you have a process that consumes events in the transcript of an chat that has\n            ended, note that chat transcripts contain the following event content types if the event\n            has occurred during the chat session:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.participant.invited</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.participant.joined</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.participant.left</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.chat.ended</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.transfer.succeeded</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.transfer.failed</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/transcript",
@@ -2122,7 +2334,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.connectparticipant#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Amazon Connect resource.</p>"
+                        "smithy.api#documentation": "<p>The type of Connect Customer resource.</p>"
                     }
                 }
             },
@@ -2228,7 +2440,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The <code>application/vnd.amazonaws.connect.event.connection.acknowledged</code>\n                ContentType is no longer maintained since December 31, 2024. This event has been\n                migrated to the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API using the\n                    <code>ConnectParticipant</code> field.</p>\n         </note>\n         <p>Sends an event. Message receipts are not supported when there are more than two active\n            participants in the chat. Using the SendEvent API for message receipts when a supervisor\n            is barged-in will result in a conflict exception.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<note>\n            <p>The <code>application/vnd.amazonaws.connect.event.connection.acknowledged</code>\n                ContentType is no longer maintained since December 31, 2024. This event has been\n                migrated to the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API using the\n                    <code>ConnectParticipant</code> field.</p>\n         </note>\n         <p>Sends an event. Message receipts are not supported when there are more than two active\n            participants in the chat. Using the SendEvent API for message receipts when a supervisor\n            is barged-in will result in a conflict exception.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/event",
@@ -2315,7 +2527,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a message.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Sends a message.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/message",
@@ -2454,7 +2666,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to\n            S3.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Amazon Connect Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to\n            S3.</p>\n         <p>For security recommendations, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat\">Connect Customer Chat security best practices</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/start-attachment-upload",

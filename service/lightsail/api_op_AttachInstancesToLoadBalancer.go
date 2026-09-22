@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches one or more Lightsail instances to a load balancer.
@@ -58,6 +57,19 @@ type AttachInstancesToLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachInstancesToLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachInstancesToLoadBalancerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachInstancesToLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceNameList(s, schemas.AttachInstancesToLoadBalancerRequest_instanceNames, v.InstanceNames)
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.AttachInstancesToLoadBalancerRequest_loadBalancerName, *v.LoadBalancerName)
+	}
+}
+
 type AttachInstancesToLoadBalancerOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -71,77 +83,45 @@ type AttachInstancesToLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachInstancesToLoadBalancerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachInstancesToLoadBalancerResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachInstancesToLoadBalancerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.AttachInstancesToLoadBalancerResult_operations, v.Operations)
+}
+func (v *AttachInstancesToLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachInstancesToLoadBalancerResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachInstancesToLoadBalancerResult_operations:
+			return deserializeOperationList(d, schemas.AttachInstancesToLoadBalancerResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachInstancesToLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachInstancesToLoadBalancer, schemas.AttachInstancesToLoadBalancerRequest, schemas.AttachInstancesToLoadBalancerResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachInstancesToLoadBalancer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachInstancesToLoadBalancer, schemas.AttachInstancesToLoadBalancerRequest, schemas.AttachInstancesToLoadBalancerResult), output: &AttachInstancesToLoadBalancerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAttachInstancesToLoadBalancer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AttachInstancesToLoadBalancer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAttachInstancesToLoadBalancerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachInstancesToLoadBalancer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +136,8 @@ func (c *Client) addOperationAttachInstancesToLoadBalancerMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAttachInstancesToLoadBalancer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AttachInstancesToLoadBalancer",
-	}
 }

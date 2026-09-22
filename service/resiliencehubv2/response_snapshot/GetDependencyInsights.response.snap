@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"createdAt":946684800,"errorCode":"INSUFFICIENT_DATA","errorMessage":"__ErrorMessage__","insights":[{"category":"CROSS_REGION","description":"__Description__"},{"category":"CROSS_REGION","description":"__Description__"}],"overview":"__Overview__","status":"IN_PROGRESS"}

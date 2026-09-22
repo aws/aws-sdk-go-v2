@@ -1,0 +1,5 @@
+POST /start-assessment
+
+Content-Type: application/json
+
+{"assessmentDataSourceType":"StrategyRecommendationsApplicationDataCollector","assessmentTargets":[{"condition":"EQUALS","name":"__Name__","values":["__Member__","__Member__"]},{"condition":"EQUALS","name":"__Name__","values":["__Member__","__Member__"]}],"s3bucketForAnalysisData":"__S3bucketForAnalysisData__","s3bucketForReportData":"__S3bucketForReportData__"}

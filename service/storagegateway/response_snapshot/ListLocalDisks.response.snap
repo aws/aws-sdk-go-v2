@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StorageGateway_20130630.ListLocalDisks
+
+{"Disks":[{"DiskAllocationResource":"__DiskAllocationResource__","DiskAllocationType":"__DiskAllocationType__","DiskAttributeList":["__Member__","__Member__"],"DiskId":"__DiskId__","DiskNode":"__DiskNode__","DiskPath":"__DiskPath__","DiskSizeInBytes":1,"DiskStatus":"__DiskStatus__"},{"DiskAllocationResource":"__DiskAllocationResource__","DiskAllocationType":"__DiskAllocationType__","DiskAttributeList":["__Member__","__Member__"],"DiskId":"__DiskId__","DiskNode":"__DiskNode__","DiskPath":"__DiskPath__","DiskSizeInBytes":1,"DiskStatus":"__DiskStatus__"}],"GatewayARN":"__GatewayARN__"}

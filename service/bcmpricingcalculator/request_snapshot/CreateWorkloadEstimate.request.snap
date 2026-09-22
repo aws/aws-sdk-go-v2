@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBCMPricingCalculator.CreateWorkloadEstimate
+
+{"clientToken":"__ClientToken__","name":"__Name__","rateType":"BEFORE_DISCOUNTS","tags":{"key0":"__Value__"}}

@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -16,7 +15,10 @@ import (
 // SageMaker models or list them on Amazon Web Services Marketplace.
 //
 // If you provided a KMS Key ID when you created your model package, you will see
-// the [KMS Decrypt]API call in your CloudTrail logs when you use this API.
+// the [KMS Decrypt]API call in your CloudTrail logs when you use this API. To call this
+// operation without requiring kms:Decrypt permission on the customer-managed key,
+// set IncludedData to MetadataOnly ; the response is returned with the embedded
+// ModelCard.ModelCardContent field sanitized.
 //
 // To create models in SageMaker, buyers can subscribe to model packages listed on
 // Amazon Web Services Marketplace.
@@ -47,7 +49,45 @@ type DescribeModelPackageInput struct {
 	// This member is required.
 	ModelPackageName *string
 
+	// Specifies the level of model package data to include in the response. Use this
+	// parameter to call DescribeModelPackage on a model package that has an
+	// associated model card without requiring kms:Decrypt permission on the
+	// customer-managed KMS key associated with the embedded model card.
+	//
+	//   - AllData : Returns the full model package response, including the unredacted
+	//   ModelCard.ModelCardContent . This option requires kms:Decrypt permission on
+	//   the customer-managed key, if one is associated with the embedded model card.
+	//   This is the default.
+	//
+	//   - MetadataOnly : Returns the full model package response, but with the
+	//   embedded ModelCard.ModelCardContent sanitized to include only a small set of
+	//   unencrypted metadata fields. This option does not require kms:Decrypt
+	//   permission. All other top-level response fields, including
+	//   InferenceSpecification , ModelMetrics , DriftCheckBaselines , and
+	//   SecurityConfig , are returned unchanged. For the list of fields preserved
+	//   within ModelCardContent , see [ModelCard].
+	//
+	// If you don't specify a value, SageMaker returns AllData .
+	//
+	// [ModelCard]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeModelPackage.html#sagemaker-DescribeModelPackage-response-ModelCard
+	IncludedData types.IncludedData
+
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeModelPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelPackageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludedData != "" {
+		s.WriteString(schemas.DescribeModelPackageInput_IncludedData, string(v.IncludedData))
+	}
+	if v.ModelPackageName != nil {
+		s.WriteString(schemas.DescribeModelPackageInput_ModelPackageName, *v.ModelPackageName)
+	}
 }
 
 type DescribeModelPackageOutput struct {
@@ -134,6 +174,27 @@ type DescribeModelPackageOutput struct {
 	// For more information about the model package model card schema, see [Model package model card schema]. For more
 	// information about the model card associated with the model package, see [View the Details of a Model Version].
 	//
+	// When you set IncludedData to MetadataOnly in the request, ModelCardStatus is
+	// preserved and ModelCardContent is sanitized to include only the following JSON
+	// paths, when present in the model card:
+	//
+	//   - model_overview.model_id
+	//
+	//   - model_overview.model_name
+	//
+	//   - intended_uses.risk_rating
+	//
+	//   - model_package_details.model_package_group_name
+	//
+	//   - model_package_details.model_package_arn
+	//
+	// Because the ModelPackageModelCard schema does not include model_package_details
+	// and limits model_overview to model_creator and model_artifact , the sanitized
+	// ModelCardContent for a model package typically contains only
+	// intended_uses.risk_rating if it was provided when the model card was created. To
+	// retrieve the complete ModelCardContent , set IncludedData to AllData or omit
+	// the parameter.
+	//
 	// [Model package model card schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
 	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
 	ModelCard *types.ModelPackageModelCard
@@ -188,77 +249,272 @@ type DescribeModelPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelPackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelPackageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalInferenceSpecifications(s, schemas.DescribeModelPackageOutput_AdditionalInferenceSpecifications, v.AdditionalInferenceSpecifications)
+	if v.ApprovalDescription != nil {
+		s.WriteString(schemas.DescribeModelPackageOutput_ApprovalDescription, *v.ApprovalDescription)
+	}
+	if v.CertifyForMarketplace != nil {
+		s.WriteBool(schemas.DescribeModelPackageOutput_CertifyForMarketplace, *v.CertifyForMarketplace)
+	}
+	if v.CreatedBy != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_CreatedBy)
+		v.CreatedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeModelPackageOutput_CreationTime, *v.CreationTime)
+	}
+	serializeCustomerMetadataMap(s, schemas.DescribeModelPackageOutput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeModelPackageOutput_Domain, *v.Domain)
+	}
+	if v.DriftCheckBaselines != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_DriftCheckBaselines)
+		v.DriftCheckBaselines.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InferenceSpecification != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_InferenceSpecification)
+		v.InferenceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedBy != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_LastModifiedBy)
+		v.LastModifiedBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeModelPackageOutput_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.ManagedStorageType != "" {
+		s.WriteString(schemas.DescribeModelPackageOutput_ManagedStorageType, string(v.ManagedStorageType))
+	}
+	if v.MetadataProperties != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_MetadataProperties)
+		v.MetadataProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelApprovalStatus != "" {
+		s.WriteString(schemas.DescribeModelPackageOutput_ModelApprovalStatus, string(v.ModelApprovalStatus))
+	}
+	if v.ModelCard != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_ModelCard)
+		v.ModelCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelLifeCycle != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_ModelLifeCycle)
+		v.ModelLifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelMetrics != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_ModelMetrics)
+		v.ModelMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageArn != nil {
+		s.WriteString(schemas.DescribeModelPackageOutput_ModelPackageArn, *v.ModelPackageArn)
+	}
+	if v.ModelPackageDescription != nil {
+		s.WriteString(schemas.DescribeModelPackageOutput_ModelPackageDescription, *v.ModelPackageDescription)
+	}
+	if v.ModelPackageGroupName != nil {
+		s.WriteString(schemas.DescribeModelPackageOutput_ModelPackageGroupName, *v.ModelPackageGroupName)
+	}
+	if v.ModelPackageName != nil {
+		s.WriteString(schemas.DescribeModelPackageOutput_ModelPackageName, *v.ModelPackageName)
+	}
+	if v.ModelPackageRegistrationType != "" {
+		s.WriteString(schemas.DescribeModelPackageOutput_ModelPackageRegistrationType, string(v.ModelPackageRegistrationType))
+	}
+	if v.ModelPackageStatus != "" {
+		s.WriteString(schemas.DescribeModelPackageOutput_ModelPackageStatus, string(v.ModelPackageStatus))
+	}
+	if v.ModelPackageStatusDetails != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_ModelPackageStatusDetails)
+		v.ModelPackageStatusDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageVersion != nil {
+		s.WriteInt32(schemas.DescribeModelPackageOutput_ModelPackageVersion, *v.ModelPackageVersion)
+	}
+	if v.SamplePayloadUrl != nil {
+		s.WriteString(schemas.DescribeModelPackageOutput_SamplePayloadUrl, *v.SamplePayloadUrl)
+	}
+	if v.SecurityConfig != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_SecurityConfig)
+		v.SecurityConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SkipModelValidation != "" {
+		s.WriteString(schemas.DescribeModelPackageOutput_SkipModelValidation, string(v.SkipModelValidation))
+	}
+	if v.SourceAlgorithmSpecification != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_SourceAlgorithmSpecification)
+		v.SourceAlgorithmSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceUri != nil {
+		s.WriteString(schemas.DescribeModelPackageOutput_SourceUri, *v.SourceUri)
+	}
+	if v.Task != nil {
+		s.WriteString(schemas.DescribeModelPackageOutput_Task, *v.Task)
+	}
+	if v.ValidationSpecification != nil {
+		s.WriteStruct(schemas.DescribeModelPackageOutput_ValidationSpecification)
+		v.ValidationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeModelPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeModelPackageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeModelPackageOutput_AdditionalInferenceSpecifications:
+			return deserializeAdditionalInferenceSpecifications(d, schemas.DescribeModelPackageOutput_AdditionalInferenceSpecifications, &v.AdditionalInferenceSpecifications)
+		case schemas.DescribeModelPackageOutput_ApprovalDescription:
+			v.ApprovalDescription = new(string)
+			return d.ReadString(schemas.DescribeModelPackageOutput_ApprovalDescription, v.ApprovalDescription)
+		case schemas.DescribeModelPackageOutput_CertifyForMarketplace:
+			v.CertifyForMarketplace = new(bool)
+			return d.ReadBool(schemas.DescribeModelPackageOutput_CertifyForMarketplace, v.CertifyForMarketplace)
+		case schemas.DescribeModelPackageOutput_CreatedBy:
+			v.CreatedBy = &types.UserContext{}
+			return v.CreatedBy.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelPackageOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeModelPackageOutput_CustomerMetadataProperties:
+			return deserializeCustomerMetadataMap(d, schemas.DescribeModelPackageOutput_CustomerMetadataProperties, &v.CustomerMetadataProperties)
+		case schemas.DescribeModelPackageOutput_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.DescribeModelPackageOutput_Domain, v.Domain)
+		case schemas.DescribeModelPackageOutput_DriftCheckBaselines:
+			v.DriftCheckBaselines = &types.DriftCheckBaselines{}
+			return v.DriftCheckBaselines.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_InferenceSpecification:
+			v.InferenceSpecification = &types.InferenceSpecification{}
+			return v.InferenceSpecification.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_LastModifiedBy:
+			v.LastModifiedBy = &types.UserContext{}
+			return v.LastModifiedBy.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelPackageOutput_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeModelPackageOutput_ManagedStorageType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelPackageOutput_ManagedStorageType, &ev); err != nil {
+				return err
+			}
+			v.ManagedStorageType = types.ManagedStorageType(ev)
+			return nil
+		case schemas.DescribeModelPackageOutput_MetadataProperties:
+			v.MetadataProperties = &types.MetadataProperties{}
+			return v.MetadataProperties.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_ModelApprovalStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelPackageOutput_ModelApprovalStatus, &ev); err != nil {
+				return err
+			}
+			v.ModelApprovalStatus = types.ModelApprovalStatus(ev)
+			return nil
+		case schemas.DescribeModelPackageOutput_ModelCard:
+			v.ModelCard = &types.ModelPackageModelCard{}
+			return v.ModelCard.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_ModelLifeCycle:
+			v.ModelLifeCycle = &types.ModelLifeCycle{}
+			return v.ModelLifeCycle.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_ModelMetrics:
+			v.ModelMetrics = &types.ModelMetrics{}
+			return v.ModelMetrics.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_ModelPackageArn:
+			v.ModelPackageArn = new(string)
+			return d.ReadString(schemas.DescribeModelPackageOutput_ModelPackageArn, v.ModelPackageArn)
+		case schemas.DescribeModelPackageOutput_ModelPackageDescription:
+			v.ModelPackageDescription = new(string)
+			return d.ReadString(schemas.DescribeModelPackageOutput_ModelPackageDescription, v.ModelPackageDescription)
+		case schemas.DescribeModelPackageOutput_ModelPackageGroupName:
+			v.ModelPackageGroupName = new(string)
+			return d.ReadString(schemas.DescribeModelPackageOutput_ModelPackageGroupName, v.ModelPackageGroupName)
+		case schemas.DescribeModelPackageOutput_ModelPackageName:
+			v.ModelPackageName = new(string)
+			return d.ReadString(schemas.DescribeModelPackageOutput_ModelPackageName, v.ModelPackageName)
+		case schemas.DescribeModelPackageOutput_ModelPackageRegistrationType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelPackageOutput_ModelPackageRegistrationType, &ev); err != nil {
+				return err
+			}
+			v.ModelPackageRegistrationType = types.ModelPackageRegistrationType(ev)
+			return nil
+		case schemas.DescribeModelPackageOutput_ModelPackageStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelPackageOutput_ModelPackageStatus, &ev); err != nil {
+				return err
+			}
+			v.ModelPackageStatus = types.ModelPackageStatus(ev)
+			return nil
+		case schemas.DescribeModelPackageOutput_ModelPackageStatusDetails:
+			v.ModelPackageStatusDetails = &types.ModelPackageStatusDetails{}
+			return v.ModelPackageStatusDetails.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_ModelPackageVersion:
+			v.ModelPackageVersion = new(int32)
+			return d.ReadInt32(schemas.DescribeModelPackageOutput_ModelPackageVersion, v.ModelPackageVersion)
+		case schemas.DescribeModelPackageOutput_SamplePayloadUrl:
+			v.SamplePayloadUrl = new(string)
+			return d.ReadString(schemas.DescribeModelPackageOutput_SamplePayloadUrl, v.SamplePayloadUrl)
+		case schemas.DescribeModelPackageOutput_SecurityConfig:
+			v.SecurityConfig = &types.ModelPackageSecurityConfig{}
+			return v.SecurityConfig.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_SkipModelValidation:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelPackageOutput_SkipModelValidation, &ev); err != nil {
+				return err
+			}
+			v.SkipModelValidation = types.SkipModelValidation(ev)
+			return nil
+		case schemas.DescribeModelPackageOutput_SourceAlgorithmSpecification:
+			v.SourceAlgorithmSpecification = &types.SourceAlgorithmSpecification{}
+			return v.SourceAlgorithmSpecification.Deserialize(d)
+		case schemas.DescribeModelPackageOutput_SourceUri:
+			v.SourceUri = new(string)
+			return d.ReadString(schemas.DescribeModelPackageOutput_SourceUri, v.SourceUri)
+		case schemas.DescribeModelPackageOutput_Task:
+			v.Task = new(string)
+			return d.ReadString(schemas.DescribeModelPackageOutput_Task, v.Task)
+		case schemas.DescribeModelPackageOutput_ValidationSpecification:
+			v.ValidationSpecification = &types.ModelPackageValidationSpecification{}
+			return v.ValidationSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelPackage, schemas.DescribeModelPackageInput, schemas.DescribeModelPackageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeModelPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelPackage, schemas.DescribeModelPackageInput, schemas.DescribeModelPackageOutput), output: &DescribeModelPackageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeModelPackage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeModelPackage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeModelPackageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeModelPackage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -273,22 +529,8 @@ func (c *Client) addOperationDescribeModelPackageMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeModelPackage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeModelPackage",
-	}
 }

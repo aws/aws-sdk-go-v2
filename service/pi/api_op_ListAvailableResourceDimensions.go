@@ -5,10 +5,10 @@ package pi
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieve the dimensions that can be queried for each specified metric type on a
@@ -71,6 +71,29 @@ type ListAvailableResourceDimensionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableResourceDimensionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableResourceDimensionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableResourceDimensionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuthorizedActionsList(s, schemas.ListAvailableResourceDimensionsRequest_AuthorizedActions, v.AuthorizedActions)
+	if v.Identifier != nil {
+		s.WriteString(schemas.ListAvailableResourceDimensionsRequest_Identifier, *v.Identifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAvailableResourceDimensionsRequest_MaxResults, *v.MaxResults)
+	}
+	serializeDimensionsMetricList(s, schemas.ListAvailableResourceDimensionsRequest_Metrics, v.Metrics)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableResourceDimensionsRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.ListAvailableResourceDimensionsRequest_ServiceType, string(v.ServiceType))
+	}
+}
+
 type ListAvailableResourceDimensionsOutput struct {
 
 	// The dimension information returned for requested metric types.
@@ -87,77 +110,51 @@ type ListAvailableResourceDimensionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableResourceDimensionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableResourceDimensionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableResourceDimensionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetricDimensionsList(s, schemas.ListAvailableResourceDimensionsResponse_MetricDimensions, v.MetricDimensions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAvailableResourceDimensionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListAvailableResourceDimensionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableResourceDimensionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableResourceDimensionsResponse_MetricDimensions:
+			return deserializeMetricDimensionsList(d, schemas.ListAvailableResourceDimensionsResponse_MetricDimensions, &v.MetricDimensions)
+		case schemas.ListAvailableResourceDimensionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAvailableResourceDimensionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableResourceDimensionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableResourceDimensions, schemas.ListAvailableResourceDimensionsRequest, schemas.ListAvailableResourceDimensionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableResourceDimensions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableResourceDimensions, schemas.ListAvailableResourceDimensionsRequest, schemas.ListAvailableResourceDimensionsResponse), output: &ListAvailableResourceDimensionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableResourceDimensions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAvailableResourceDimensions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAvailableResourceDimensionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAvailableResourceDimensions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +167,6 @@ func (c *Client) addOperationListAvailableResourceDimensionsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -281,11 +272,3 @@ type ListAvailableResourceDimensionsAPIClient interface {
 }
 
 var _ ListAvailableResourceDimensionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAvailableResourceDimensions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAvailableResourceDimensions",
-	}
-}

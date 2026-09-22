@@ -1,0 +1,5 @@
+POST /v2/email/import-jobs/list
+
+Content-Type: application/json
+
+{"ImportDestinationType":"SUPPRESSION_LIST","NextToken":"__NextToken__","PageSize":1}

@@ -4,18 +4,17 @@ package connectparticipant
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the participant's connection.
 //
-// For security recommendations, see [Amazon Connect Chat security best practices].
+// For security recommendations, see [Connect Customer Chat security best practices].
 //
-// For WebRTC security recommendations, see [Amazon Connect WebRTC security best practices].
+// For WebRTC security recommendations, see [Connect Customer WebRTC security best practices].
 //
 // ParticipantToken is used for invoking this API instead of ConnectionToken .
 //
@@ -75,12 +74,12 @@ import (
 //
 // [Feature specifications]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits
 // [StartContactStreaming]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html
+// [Connect Customer WebRTC security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security
 // [CreateParticipant]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateParticipant.html
-// [Amazon Connect WebRTC security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security
 // [Enable real-time chat message streaming]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 // [Enable multi-user web, in-app, and video calling]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-multiuser-inapp.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) CreateParticipantConnection(ctx context.Context, params *CreateParticipantConnectionInput, optFns ...func(*Options)) (*CreateParticipantConnectionOutput, error) {
 	if params == nil {
 		params = &CreateParticipantConnectionInput{}
@@ -120,6 +119,22 @@ type CreateParticipantConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateParticipantConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateParticipantConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateParticipantConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectParticipant != nil {
+		s.WriteBool(schemas.CreateParticipantConnectionRequest_ConnectParticipant, *v.ConnectParticipant)
+	}
+	if v.ParticipantToken != nil {
+		s.WriteString(schemas.CreateParticipantConnectionRequest_ParticipantToken, *v.ParticipantToken)
+	}
+	serializeConnectionTypeList(s, schemas.CreateParticipantConnectionRequest_Type, v.Type)
+}
+
 type CreateParticipantConnectionOutput struct {
 
 	// Creates the participant's connection credentials. The authentication token
@@ -139,77 +154,66 @@ type CreateParticipantConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateParticipantConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateParticipantConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateParticipantConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionCredentials != nil {
+		s.WriteStruct(schemas.CreateParticipantConnectionResponse_ConnectionCredentials)
+		v.ConnectionCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebRTCConnection != nil {
+		s.WriteStruct(schemas.CreateParticipantConnectionResponse_WebRTCConnection)
+		v.WebRTCConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Websocket != nil {
+		s.WriteStruct(schemas.CreateParticipantConnectionResponse_Websocket)
+		v.Websocket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateParticipantConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateParticipantConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateParticipantConnectionResponse_ConnectionCredentials:
+			v.ConnectionCredentials = &types.ConnectionCredentials{}
+			return v.ConnectionCredentials.Deserialize(d)
+		case schemas.CreateParticipantConnectionResponse_WebRTCConnection:
+			v.WebRTCConnection = &types.WebRTCConnection{}
+			return v.WebRTCConnection.Deserialize(d)
+		case schemas.CreateParticipantConnectionResponse_Websocket:
+			v.Websocket = &types.Websocket{}
+			return v.Websocket.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateParticipantConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateParticipantConnection, schemas.CreateParticipantConnectionRequest, schemas.CreateParticipantConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateParticipantConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateParticipantConnection, schemas.CreateParticipantConnectionRequest, schemas.CreateParticipantConnectionResponse), output: &CreateParticipantConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateParticipantConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateParticipantConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateParticipantConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateParticipantConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -224,22 +228,8 @@ func (c *Client) addOperationCreateParticipantConnectionMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateParticipantConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateParticipantConnection",
-	}
 }

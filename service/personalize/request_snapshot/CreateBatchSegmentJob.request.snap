@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonPersonalize.CreateBatchSegmentJob
+
+{"filterArn":"__FilterArn__","jobInput":{"s3DataSource":{"kmsKeyArn":"__KmsKeyArn__","path":"__Path__"}},"jobName":"__JobName__","jobOutput":{"s3DataDestination":{"kmsKeyArn":"__KmsKeyArn__","path":"__Path__"}},"numResults":1,"roleArn":"__RoleArn__","solutionVersionArn":"__SolutionVersionArn__","tags":[{"tagKey":"__TagKey__","tagValue":"__TagValue__"},{"tagKey":"__TagKey__","tagValue":"__TagValue__"}]}

@@ -1,0 +1,3 @@
+DELETE /entitlements/__EntitlementId__?applicationArn=__ApplicationArn__
+
+

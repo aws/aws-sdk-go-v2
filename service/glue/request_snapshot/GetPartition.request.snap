@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.GetPartition
+
+{"AuditContext":{"AdditionalAuditContext":"__AdditionalAuditContext__","AllColumnsRequested":true,"RequestedColumns":["__Member__","__Member__"]},"CatalogId":"__CatalogId__","DatabaseName":"__DatabaseName__","PartitionValues":["__Member__","__Member__"],"TableName":"__TableName__"}

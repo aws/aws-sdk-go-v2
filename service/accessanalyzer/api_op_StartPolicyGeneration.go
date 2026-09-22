@@ -5,10 +5,10 @@ package accessanalyzer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts the policy generation request.
@@ -52,6 +52,44 @@ type StartPolicyGenerationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPolicyGenerationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPolicyGenerationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPolicyGenerationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartPolicyGenerationRequest_clientToken, *v.ClientToken)
+	}
+	if v.CloudTrailDetails != nil {
+		s.WriteStruct(schemas.StartPolicyGenerationRequest_cloudTrailDetails)
+		v.CloudTrailDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PolicyGenerationDetails != nil {
+		s.WriteStruct(schemas.StartPolicyGenerationRequest_policyGenerationDetails)
+		v.PolicyGenerationDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartPolicyGenerationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPolicyGenerationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPolicyGenerationRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartPolicyGenerationRequest_clientToken, v.ClientToken)
+		case schemas.StartPolicyGenerationRequest_cloudTrailDetails:
+			v.CloudTrailDetails = &types.CloudTrailDetails{}
+			return v.CloudTrailDetails.Deserialize(d)
+		case schemas.StartPolicyGenerationRequest_policyGenerationDetails:
+			v.PolicyGenerationDetails = &types.PolicyGenerationDetails{}
+			return v.PolicyGenerationDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type StartPolicyGenerationOutput struct {
 
 	// The JobId that is returned by the StartPolicyGeneration operation. The JobId
@@ -67,65 +105,42 @@ type StartPolicyGenerationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPolicyGenerationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPolicyGenerationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPolicyGenerationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartPolicyGenerationResponse_jobId, *v.JobId)
+	}
+}
+func (v *StartPolicyGenerationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPolicyGenerationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPolicyGenerationResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartPolicyGenerationResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPolicyGeneration, schemas.StartPolicyGenerationRequest, schemas.StartPolicyGenerationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPolicyGeneration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPolicyGeneration, schemas.StartPolicyGenerationRequest, schemas.StartPolicyGenerationResponse), output: &StartPolicyGenerationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartPolicyGeneration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartPolicyGeneration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -135,12 +150,6 @@ func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpStartPolicyGenerationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartPolicyGeneration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +162,6 @@ func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -198,12 +201,4 @@ func (m *idempotencyToken_initializeOpStartPolicyGeneration) HandleInitialize(ct
 }
 func addIdempotencyToken_opStartPolicyGenerationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartPolicyGeneration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartPolicyGeneration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartPolicyGeneration",
-	}
 }

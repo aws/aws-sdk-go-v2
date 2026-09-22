@@ -4,11 +4,10 @@ package datasync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datasync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a transfer location for an Amazon FSx for NetApp ONTAP file system.
@@ -83,6 +82,28 @@ type CreateLocationFsxOntapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxOntapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxOntapRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxOntapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Protocol != nil {
+		s.WriteStruct(schemas.CreateLocationFsxOntapRequest_Protocol)
+		v.Protocol.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEc2SecurityGroupArnList(s, schemas.CreateLocationFsxOntapRequest_SecurityGroupArns, v.SecurityGroupArns)
+	if v.StorageVirtualMachineArn != nil {
+		s.WriteString(schemas.CreateLocationFsxOntapRequest_StorageVirtualMachineArn, *v.StorageVirtualMachineArn)
+	}
+	if v.Subdirectory != nil {
+		s.WriteString(schemas.CreateLocationFsxOntapRequest_Subdirectory, *v.Subdirectory)
+	}
+	serializeInputTagList(s, schemas.CreateLocationFsxOntapRequest_Tags, v.Tags)
+}
+
 type CreateLocationFsxOntapOutput struct {
 
 	// Specifies the ARN of the FSx for ONTAP file system location that you create.
@@ -94,77 +115,48 @@ type CreateLocationFsxOntapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLocationFsxOntapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLocationFsxOntapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLocationFsxOntapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocationArn != nil {
+		s.WriteString(schemas.CreateLocationFsxOntapResponse_LocationArn, *v.LocationArn)
+	}
+}
+func (v *CreateLocationFsxOntapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLocationFsxOntapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLocationFsxOntapResponse_LocationArn:
+			v.LocationArn = new(string)
+			return d.ReadString(schemas.CreateLocationFsxOntapResponse_LocationArn, v.LocationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLocationFsxOntapMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxOntap, schemas.CreateLocationFsxOntapRequest, schemas.CreateLocationFsxOntapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLocationFsxOntap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLocationFsxOntap, schemas.CreateLocationFsxOntapRequest, schemas.CreateLocationFsxOntapResponse), output: &CreateLocationFsxOntapOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLocationFsxOntap{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLocationFsxOntap"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLocationFsxOntapValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationFsxOntap(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,22 +171,8 @@ func (c *Client) addOperationCreateLocationFsxOntapMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLocationFsxOntap(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLocationFsxOntap",
-	}
 }

@@ -1,0 +1,5 @@
+POST /get-asset-contract
+
+Content-Type: application/json
+
+{"contractIdentifier":{"contractAddress":"__ContractAddress__","network":"ETHEREUM_MAINNET"}}

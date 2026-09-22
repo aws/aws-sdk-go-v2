@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ProvisionIpamByoasn&Asn=__Asn__&AsnAuthorizationContext.Message=__Message__&AsnAuthorizationContext.Signature=__Signature__&DryRun=true&IpamId=__IpamId__&Version=2016-11-15

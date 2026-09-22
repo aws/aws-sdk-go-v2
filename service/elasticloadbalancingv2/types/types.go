@@ -550,6 +550,14 @@ type ListenerAttribute struct {
 	//   - tcp.idle_timeout.seconds - The tcp idle timeout value, in seconds. The valid
 	//   range is 60-6000 seconds. The default is 350 seconds.
 	//
+	// The following attribute is only supported by Gateway Load Balancers:
+	//
+	//   - send_tcp_reset.on_idle_timeout.enabled – Specifies whether the Gateway Load
+	//   Balancer sends a TCP Reset to the sender of traffic when a TCP flow's idle
+	//   timeout expires. This attribute also applies to non-SYN TCP packets received for
+	//   flows that are not in the flow table. The value is true or false . The default
+	//   is false .
+	//
 	// The following attributes are only supported by Application Load Balancers.
 	//
 	//   - routing.http.request.x_amzn_mtls_clientcert_serial_number.header_name -
@@ -1118,24 +1126,30 @@ type Rule struct {
 // http-header and query-string . Note that the value for a condition can't be
 // empty.
 //
+// For Network Load Balancer listener rules, the only supported condition is
+// source-ip . Use SourceIpConfig with IpAddressType to match on the IP address
+// type of the source traffic ( ipv4 or ipv6 ).
+//
 // For more information, see [Quotas for your Application Load Balancers].
 //
 // [Quotas for your Application Load Balancers]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
 type RuleCondition struct {
 
-	// The field in the HTTP request. The following are the possible values:
+	// The name of the field. The possible values are:
 	//
-	//   - http-header
+	//   - http-header – [ALB] Matches on an HTTP header field.
 	//
-	//   - http-request-method
+	//   - http-request-method – [ALB] Matches on the HTTP request method.
 	//
-	//   - host-header
+	//   - host-header – [ALB] Matches on the host header.
 	//
-	//   - path-pattern
+	//   - path-pattern – [ALB] Matches on the URL path of the request.
 	//
-	//   - query-string
+	//   - query-string – [ALB] Matches on a query string parameter.
 	//
-	//   - source-ip
+	//   - source-ip – [ALB, NLB] Matches on the source IP address. For ALB, use
+	//   SourceIpConfig with Values to specify CIDR ranges. For NLB, use SourceIpConfig
+	//   with IpAddressType to match the IP address type ( ipv4 or ipv6 ).
 	Field *string
 
 	// Information for a host header condition. Specify only when Field is host-header .
@@ -1242,7 +1256,20 @@ type RuleTransform struct {
 // You can use this condition to route based on the IP address of the source that
 // connects to the load balancer. If a client is behind a proxy, this is the IP
 // address of the proxy not the IP address of the client.
+//
+// For Application Load Balancers, use Values to specify CIDR ranges. For Network
+// Load Balancers, use IpAddressType to match on the IP address type of the source
+// traffic.
 type SourceIpConditionConfig struct {
+
+	// The IP address type for Network Load Balancers.
+	//
+	// The valid values are:
+	//
+	//   - ipv4 – IPv4 addresses only.
+	//
+	//   - ipv6 – IPv6 addresses only.
+	IpAddressType SourceIpAddressTypeEnum
 
 	// The source IP addresses, in CIDR format. You can use both IPv4 and IPv6
 	// addresses. Wildcards are not supported.
@@ -1604,6 +1631,22 @@ type TargetGroupAttribute struct {
 	//   rebalance and no_rebalance . The default is no_rebalance . The two attributes (
 	//   target_failover.on_deregistration and target_failover.on_unhealthy ) can't be
 	//   set independently. The value you set for both attributes must be the same.
+	//
+	//   - send_tcp_reset.on_unhealthy.enabled – Specifies whether the Gateway Load
+	//   Balancer sends a TCP Reset to the sender of traffic when a target becomes
+	//   unhealthy. After sending the reset, the Gateway Load Balancer removes the flow
+	//   entry from its flow table. The value is true or false . The default is false .
+	//   This attribute does not apply when target_failover.on_unhealthy is set to
+	//   rebalance . This feature requires 5-tuple flow stickiness, which the target
+	//   group uses by default when stickiness.enabled is set to false .
+	//
+	//   - send_tcp_reset.on_deregistration.enabled – Specifies whether the Gateway
+	//   Load Balancer sends a TCP Reset to the sender of traffic when a target is
+	//   deregistered. The reset occurs after the connection drain time has elapsed. The
+	//   value is true or false . The default is false . This attribute does not apply
+	//   when target_failover.on_deregistration is set to rebalance . This feature
+	//   requires 5-tuple flow stickiness, which the target group uses by default when
+	//   stickiness.enabled is set to false .
 	Key *string
 
 	// The value of the attribute.

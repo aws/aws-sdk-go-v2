@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.UpdateMonitoringAlert
+
+{"DatapointsToAlert":1,"EvaluationPeriod":1,"MonitoringAlertName":"__MonitoringAlertName__","MonitoringScheduleName":"__MonitoringScheduleName__"}

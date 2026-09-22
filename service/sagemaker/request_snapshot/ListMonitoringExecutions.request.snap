@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.ListMonitoringExecutions
+
+{"CreationTimeAfter":946684800,"CreationTimeBefore":946684800,"EndpointName":"__EndpointName__","LastModifiedTimeAfter":946684800,"LastModifiedTimeBefore":946684800,"MaxResults":1,"MonitoringJobDefinitionName":"__MonitoringJobDefinitionName__","MonitoringScheduleName":"__MonitoringScheduleName__","MonitoringTypeEquals":"DataQuality","NextToken":"__NextToken__","ScheduledTimeAfter":946684800,"ScheduledTimeBefore":946684800,"SortBy":"CreationTime","SortOrder":"Ascending","StatusEquals":"Pending"}

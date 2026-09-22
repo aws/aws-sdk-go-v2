@@ -1,0 +1,5 @@
+PUT /tables/__TableBucketARN__/__Namespace__/__Name__/metadata-location
+
+Content-Type: application/json
+
+{"metadataLocation":"__MetadataLocation__","versionToken":"__VersionToken__"}

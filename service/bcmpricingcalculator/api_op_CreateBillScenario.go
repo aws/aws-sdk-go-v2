@@ -5,10 +5,10 @@ package bcmpricingcalculator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -53,6 +53,28 @@ type CreateBillScenarioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBillScenarioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBillScenarioRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBillScenarioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBillScenarioRequest_clientToken, *v.ClientToken)
+	}
+	if v.CostCategoryGroupSharingPreferenceArn != nil {
+		s.WriteString(schemas.CreateBillScenarioRequest_costCategoryGroupSharingPreferenceArn, *v.CostCategoryGroupSharingPreferenceArn)
+	}
+	if v.GroupSharingPreference != "" {
+		s.WriteString(schemas.CreateBillScenarioRequest_groupSharingPreference, string(v.GroupSharingPreference))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBillScenarioRequest_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateBillScenarioRequest_tags, v.Tags)
+}
+
 type CreateBillScenarioOutput struct {
 
 	//  The unique identifier for the created bill scenario.
@@ -91,65 +113,100 @@ type CreateBillScenarioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBillScenarioOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBillScenarioResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBillScenarioOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillInterval != nil {
+		s.WriteStruct(schemas.CreateBillScenarioResponse_billInterval)
+		v.BillInterval.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CostCategoryGroupSharingPreferenceArn != nil {
+		s.WriteString(schemas.CreateBillScenarioResponse_costCategoryGroupSharingPreferenceArn, *v.CostCategoryGroupSharingPreferenceArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateBillScenarioResponse_createdAt, *v.CreatedAt)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.CreateBillScenarioResponse_expiresAt, *v.ExpiresAt)
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.CreateBillScenarioResponse_failureMessage, *v.FailureMessage)
+	}
+	if v.GroupSharingPreference != "" {
+		s.WriteString(schemas.CreateBillScenarioResponse_groupSharingPreference, string(v.GroupSharingPreference))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateBillScenarioResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBillScenarioResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateBillScenarioResponse_status, string(v.Status))
+	}
+}
+func (v *CreateBillScenarioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBillScenarioResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBillScenarioResponse_billInterval:
+			v.BillInterval = &types.BillInterval{}
+			return v.BillInterval.Deserialize(d)
+		case schemas.CreateBillScenarioResponse_costCategoryGroupSharingPreferenceArn:
+			v.CostCategoryGroupSharingPreferenceArn = new(string)
+			return d.ReadString(schemas.CreateBillScenarioResponse_costCategoryGroupSharingPreferenceArn, v.CostCategoryGroupSharingPreferenceArn)
+		case schemas.CreateBillScenarioResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateBillScenarioResponse_createdAt, v.CreatedAt)
+		case schemas.CreateBillScenarioResponse_expiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.CreateBillScenarioResponse_expiresAt, v.ExpiresAt)
+		case schemas.CreateBillScenarioResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.CreateBillScenarioResponse_failureMessage, v.FailureMessage)
+		case schemas.CreateBillScenarioResponse_groupSharingPreference:
+			var ev string
+			if err := d.ReadString(schemas.CreateBillScenarioResponse_groupSharingPreference, &ev); err != nil {
+				return err
+			}
+			v.GroupSharingPreference = types.GroupSharingPreferenceEnum(ev)
+			return nil
+		case schemas.CreateBillScenarioResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateBillScenarioResponse_id, v.Id)
+		case schemas.CreateBillScenarioResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateBillScenarioResponse_name, v.Name)
+		case schemas.CreateBillScenarioResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateBillScenarioResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BillScenarioStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBillScenarioMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillScenario, schemas.CreateBillScenarioRequest, schemas.CreateBillScenarioResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateBillScenario{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillScenario, schemas.CreateBillScenarioRequest, schemas.CreateBillScenarioResponse), output: &CreateBillScenarioOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateBillScenario{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBillScenario"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -159,12 +216,6 @@ func (c *Client) addOperationCreateBillScenarioMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateBillScenarioValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBillScenario(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,12 +228,6 @@ func (c *Client) addOperationCreateBillScenarioMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -222,12 +267,4 @@ func (m *idempotencyToken_initializeOpCreateBillScenario) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateBillScenarioMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateBillScenario{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateBillScenario(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateBillScenario",
-	}
 }

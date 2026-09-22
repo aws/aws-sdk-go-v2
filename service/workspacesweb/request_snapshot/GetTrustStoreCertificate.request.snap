@@ -1,0 +1,3 @@
+GET /trustStores/__TrustStoreArn__/certificate?thumbprint=__Thumbprint__
+
+

@@ -5,10 +5,10 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the job executions for the specified thing.
@@ -67,6 +67,33 @@ type ListJobExecutionsForThingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobExecutionsForThingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobExecutionsForThingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobExecutionsForThingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_jobId, *v.JobId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListJobExecutionsForThingRequest_maxResults, *v.MaxResults)
+	}
+	if v.NamespaceId != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_namespaceId, *v.NamespaceId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_status, string(v.Status))
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingRequest_thingName, *v.ThingName)
+	}
+}
+
 type ListJobExecutionsForThingOutput struct {
 
 	// A list of job execution summaries.
@@ -82,77 +109,51 @@ type ListJobExecutionsForThingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobExecutionsForThingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobExecutionsForThingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobExecutionsForThingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeJobExecutionSummaryForThingList(s, schemas.ListJobExecutionsForThingResponse_executionSummaries, v.ExecutionSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListJobExecutionsForThingResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListJobExecutionsForThingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobExecutionsForThingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobExecutionsForThingResponse_executionSummaries:
+			return deserializeJobExecutionSummaryForThingList(d, schemas.ListJobExecutionsForThingResponse_executionSummaries, &v.ExecutionSummaries)
+		case schemas.ListJobExecutionsForThingResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListJobExecutionsForThingResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListJobExecutionsForThingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobExecutionsForThing, schemas.ListJobExecutionsForThingRequest, schemas.ListJobExecutionsForThingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListJobExecutionsForThing{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListJobExecutionsForThing, schemas.ListJobExecutionsForThingRequest, schemas.ListJobExecutionsForThingResponse), output: &ListJobExecutionsForThingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListJobExecutionsForThing{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListJobExecutionsForThing"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListJobExecutionsForThingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListJobExecutionsForThing(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +166,6 @@ func (c *Client) addOperationListJobExecutionsForThingMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -273,11 +268,3 @@ type ListJobExecutionsForThingAPIClient interface {
 }
 
 var _ ListJobExecutionsForThingAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListJobExecutionsForThing(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListJobExecutionsForThing",
-	}
-}

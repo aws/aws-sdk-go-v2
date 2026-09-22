@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,18 @@ type GetCodeSecurityScanConfigurationInput struct {
 	ScanConfigurationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCodeSecurityScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeSecurityScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeSecurityScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.GetCodeSecurityScanConfigurationRequest_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
 }
 
 type GetCodeSecurityScanConfigurationOutput struct {
@@ -72,77 +83,95 @@ type GetCodeSecurityScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeSecurityScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeSecurityScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeSecurityScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.GetCodeSecurityScanConfigurationResponse_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetCodeSecurityScanConfigurationResponse_createdAt, *v.CreatedAt)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetCodeSecurityScanConfigurationResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Level != "" {
+		s.WriteString(schemas.GetCodeSecurityScanConfigurationResponse_level, string(v.Level))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetCodeSecurityScanConfigurationResponse_name, *v.Name)
+	}
+	if v.ScanConfigurationArn != nil {
+		s.WriteString(schemas.GetCodeSecurityScanConfigurationResponse_scanConfigurationArn, *v.ScanConfigurationArn)
+	}
+	if v.ScopeSettings != nil {
+		s.WriteStruct(schemas.GetCodeSecurityScanConfigurationResponse_scopeSettings)
+		v.ScopeSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.GetCodeSecurityScanConfigurationResponse_tags, v.Tags)
+}
+func (v *GetCodeSecurityScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCodeSecurityScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCodeSecurityScanConfigurationResponse_configuration:
+			v.Configuration = &types.CodeSecurityScanConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.GetCodeSecurityScanConfigurationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCodeSecurityScanConfigurationResponse_createdAt, v.CreatedAt)
+		case schemas.GetCodeSecurityScanConfigurationResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCodeSecurityScanConfigurationResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetCodeSecurityScanConfigurationResponse_level:
+			var ev string
+			if err := d.ReadString(schemas.GetCodeSecurityScanConfigurationResponse_level, &ev); err != nil {
+				return err
+			}
+			v.Level = types.ConfigurationLevel(ev)
+			return nil
+		case schemas.GetCodeSecurityScanConfigurationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCodeSecurityScanConfigurationResponse_name, v.Name)
+		case schemas.GetCodeSecurityScanConfigurationResponse_scanConfigurationArn:
+			v.ScanConfigurationArn = new(string)
+			return d.ReadString(schemas.GetCodeSecurityScanConfigurationResponse_scanConfigurationArn, v.ScanConfigurationArn)
+		case schemas.GetCodeSecurityScanConfigurationResponse_scopeSettings:
+			v.ScopeSettings = &types.ScopeSettings{}
+			return v.ScopeSettings.Deserialize(d)
+		case schemas.GetCodeSecurityScanConfigurationResponse_tags:
+			return deserializeTagMap(d, schemas.GetCodeSecurityScanConfigurationResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCodeSecurityScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeSecurityScanConfiguration, schemas.GetCodeSecurityScanConfigurationRequest, schemas.GetCodeSecurityScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeSecurityScanConfiguration, schemas.GetCodeSecurityScanConfigurationRequest, schemas.GetCodeSecurityScanConfigurationResponse), output: &GetCodeSecurityScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCodeSecurityScanConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCodeSecurityScanConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCodeSecurityScanConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +186,8 @@ func (c *Client) addOperationGetCodeSecurityScanConfigurationMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCodeSecurityScanConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCodeSecurityScanConfiguration",
-	}
 }

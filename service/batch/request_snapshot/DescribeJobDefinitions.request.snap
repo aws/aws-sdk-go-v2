@@ -1,0 +1,5 @@
+POST /v1/describejobdefinitions
+
+Content-Type: application/json
+
+{"jobDefinitionName":"__JobDefinitionName__","jobDefinitions":["__Member__","__Member__"],"maxResults":1,"nextToken":"__NextToken__","status":"__Status__"}

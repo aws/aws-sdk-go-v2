@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns all the available versions for the specified Connect Customer instance
@@ -51,6 +51,27 @@ type ListContactFlowVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactFlowVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactFlowVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactFlowVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.ListContactFlowVersionsRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListContactFlowVersionsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContactFlowVersionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactFlowVersionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListContactFlowVersionsOutput struct {
 
 	// A list of flow version summaries.
@@ -65,77 +86,51 @@ type ListContactFlowVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactFlowVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactFlowVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactFlowVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeContactFlowVersionSummaryList(s, schemas.ListContactFlowVersionsResponse_ContactFlowVersionSummaryList, v.ContactFlowVersionSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactFlowVersionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListContactFlowVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContactFlowVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContactFlowVersionsResponse_ContactFlowVersionSummaryList:
+			return deserializeContactFlowVersionSummaryList(d, schemas.ListContactFlowVersionsResponse_ContactFlowVersionSummaryList, &v.ContactFlowVersionSummaryList)
+		case schemas.ListContactFlowVersionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContactFlowVersionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContactFlowVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactFlowVersions, schemas.ListContactFlowVersionsRequest, schemas.ListContactFlowVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListContactFlowVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactFlowVersions, schemas.ListContactFlowVersionsRequest, schemas.ListContactFlowVersionsResponse), output: &ListContactFlowVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListContactFlowVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContactFlowVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListContactFlowVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContactFlowVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +143,6 @@ func (c *Client) addOperationListContactFlowVersionsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,11 +246,3 @@ type ListContactFlowVersionsAPIClient interface {
 }
 
 var _ ListContactFlowVersionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListContactFlowVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListContactFlowVersions",
-	}
-}

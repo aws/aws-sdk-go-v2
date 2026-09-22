@@ -1,0 +1,3 @@
+GET /v2/get-test?serviceArn=__ServiceArn__&testId=__TestId__
+
+

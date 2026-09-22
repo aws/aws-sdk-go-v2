@@ -4,10 +4,9 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a presigned URL to access an Amazon SageMaker Partner AI App.
@@ -43,6 +42,24 @@ type CreatePartnerAppPresignedUrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerAppPresignedUrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerAppPresignedUrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerAppPresignedUrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePartnerAppPresignedUrlRequest_Arn, *v.Arn)
+	}
+	if v.ExpiresInSeconds != nil {
+		s.WriteInt32(schemas.CreatePartnerAppPresignedUrlRequest_ExpiresInSeconds, *v.ExpiresInSeconds)
+	}
+	if v.SessionExpirationDurationInSeconds != nil {
+		s.WriteInt32(schemas.CreatePartnerAppPresignedUrlRequest_SessionExpirationDurationInSeconds, *v.SessionExpirationDurationInSeconds)
+	}
+}
+
 type CreatePartnerAppPresignedUrlOutput struct {
 
 	// The presigned URL that you can use to access the SageMaker Partner AI App.
@@ -54,77 +71,48 @@ type CreatePartnerAppPresignedUrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerAppPresignedUrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerAppPresignedUrlResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerAppPresignedUrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Url != nil {
+		s.WriteString(schemas.CreatePartnerAppPresignedUrlResponse_Url, *v.Url)
+	}
+}
+func (v *CreatePartnerAppPresignedUrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePartnerAppPresignedUrlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePartnerAppPresignedUrlResponse_Url:
+			v.Url = new(string)
+			return d.ReadString(schemas.CreatePartnerAppPresignedUrlResponse_Url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePartnerAppPresignedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerAppPresignedUrl, schemas.CreatePartnerAppPresignedUrlRequest, schemas.CreatePartnerAppPresignedUrlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePartnerAppPresignedUrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartnerAppPresignedUrl, schemas.CreatePartnerAppPresignedUrlRequest, schemas.CreatePartnerAppPresignedUrlResponse), output: &CreatePartnerAppPresignedUrlOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePartnerAppPresignedUrl{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePartnerAppPresignedUrl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePartnerAppPresignedUrlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePartnerAppPresignedUrl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +127,8 @@ func (c *Client) addOperationCreatePartnerAppPresignedUrlMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePartnerAppPresignedUrl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePartnerAppPresignedUrl",
-	}
 }

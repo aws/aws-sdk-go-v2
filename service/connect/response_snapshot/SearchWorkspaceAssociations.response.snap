@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApproximateTotalCount":1,"NextToken":"__NextToken__","WorkspaceAssociations":[{"ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceName":"__ResourceName__","ResourceType":"__ResourceType__","WorkspaceArn":"__WorkspaceArn__","WorkspaceId":"__WorkspaceId__"},{"ResourceArn":"__ResourceArn__","ResourceId":"__ResourceId__","ResourceName":"__ResourceName__","ResourceType":"__ResourceType__","WorkspaceArn":"__WorkspaceArn__","WorkspaceId":"__WorkspaceId__"}]}

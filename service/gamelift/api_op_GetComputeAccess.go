@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Container
@@ -74,6 +73,21 @@ type GetComputeAccessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComputeAccessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComputeAccessInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComputeAccessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeName != nil {
+		s.WriteString(schemas.GetComputeAccessInput_ComputeName, *v.ComputeName)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetComputeAccessInput_FleetId, *v.FleetId)
+	}
+}
+
 type GetComputeAccessOutput struct {
 
 	// The Amazon Resource Name ([ARN] ) that is assigned to an Amazon GameLift Servers
@@ -115,65 +129,77 @@ type GetComputeAccessOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComputeAccessOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComputeAccessOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComputeAccessOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeArn != nil {
+		s.WriteString(schemas.GetComputeAccessOutput_ComputeArn, *v.ComputeArn)
+	}
+	if v.ComputeName != nil {
+		s.WriteString(schemas.GetComputeAccessOutput_ComputeName, *v.ComputeName)
+	}
+	serializeContainerIdentifierList(s, schemas.GetComputeAccessOutput_ContainerIdentifiers, v.ContainerIdentifiers)
+	if v.Credentials != nil {
+		s.WriteStruct(schemas.GetComputeAccessOutput_Credentials)
+		v.Credentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FleetArn != nil {
+		s.WriteString(schemas.GetComputeAccessOutput_FleetArn, *v.FleetArn)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetComputeAccessOutput_FleetId, *v.FleetId)
+	}
+	if v.Target != nil {
+		s.WriteString(schemas.GetComputeAccessOutput_Target, *v.Target)
+	}
+}
+func (v *GetComputeAccessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComputeAccessOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComputeAccessOutput_ComputeArn:
+			v.ComputeArn = new(string)
+			return d.ReadString(schemas.GetComputeAccessOutput_ComputeArn, v.ComputeArn)
+		case schemas.GetComputeAccessOutput_ComputeName:
+			v.ComputeName = new(string)
+			return d.ReadString(schemas.GetComputeAccessOutput_ComputeName, v.ComputeName)
+		case schemas.GetComputeAccessOutput_ContainerIdentifiers:
+			return deserializeContainerIdentifierList(d, schemas.GetComputeAccessOutput_ContainerIdentifiers, &v.ContainerIdentifiers)
+		case schemas.GetComputeAccessOutput_Credentials:
+			v.Credentials = &types.AwsCredentials{}
+			return v.Credentials.Deserialize(d)
+		case schemas.GetComputeAccessOutput_FleetArn:
+			v.FleetArn = new(string)
+			return d.ReadString(schemas.GetComputeAccessOutput_FleetArn, v.FleetArn)
+		case schemas.GetComputeAccessOutput_FleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GetComputeAccessOutput_FleetId, v.FleetId)
+		case schemas.GetComputeAccessOutput_Target:
+			v.Target = new(string)
+			return d.ReadString(schemas.GetComputeAccessOutput_Target, v.Target)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComputeAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComputeAccess, schemas.GetComputeAccessInput, schemas.GetComputeAccessOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetComputeAccess{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComputeAccess, schemas.GetComputeAccessInput, schemas.GetComputeAccessOutput), output: &GetComputeAccessOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetComputeAccess{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComputeAccess"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -183,12 +209,6 @@ func (c *Client) addOperationGetComputeAccessMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpGetComputeAccessValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComputeAccess(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,22 +223,8 @@ func (c *Client) addOperationGetComputeAccessMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetComputeAccess(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetComputeAccess",
-	}
 }

@@ -1,8 +1,5 @@
 InputStreamWithInitialRequest
 	Initialize stack step
-		RegisterServiceMetadata
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -10,17 +7,14 @@ InputStreamWithInitialRequest
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step
 		ComputePayloadHash
 		SigV4ContentSHA256Header
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2

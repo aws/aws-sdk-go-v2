@@ -137,11 +137,6 @@ func (m *Modifier) UnmarshalJSON(data []byte) error {
 // BaseConfiguration is the set of configuration keys and their deserialized json value.
 type BaseConfiguration map[string]interface{}
 
-// SchemaVersion is a versioned JSON document.
-type SchemaVersion struct {
-	Version int `json:"version"`
-}
-
 // SDKDefaultConfig is a default configuration descriptor.
 type SDKDefaultConfig struct {
 	Base          BaseConfiguration      `json:"base"`
@@ -150,8 +145,6 @@ type SDKDefaultConfig struct {
 		Modes         map[string]string `json:"modes"`
 		Configuration map[string]string `json:"configuration"`
 	} `json:"documentation"`
-
-	SchemaVersion
 }
 
 func numberToBigFloat(value json.Number) (*big.Float, error) {

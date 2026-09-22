@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -37,6 +38,27 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.AccessDeniedException_message, *v.Message)
+	}
+}
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // This exception is thrown if the request contains a semantic error. The precise
 // meaning will depend on the API, and will be documented in the error message.
@@ -64,6 +86,27 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequestException_message, *v.Message)
+	}
+}
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // These errors are usually caused by a client action. Actions can include using
 // an action or resource on behalf of an [IAM principal]that doesn't have permissions to use the
@@ -99,6 +142,51 @@ func (e *ClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ClientException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.ClientException_addonName, *v.AddonName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ClientException_clusterName, *v.ClusterName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ClientException_message, *v.Message)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.ClientException_nodegroupName, *v.NodegroupName)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.ClientException_subscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *ClientException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientException_addonName:
+			v.AddonName = new(string)
+			return d.ReadString(schemas.ClientException_addonName, v.AddonName)
+		case schemas.ClientException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ClientException_clusterName, v.ClusterName)
+		case schemas.ClientException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ClientException_message, v.Message)
+		case schemas.ClientException_nodegroupName:
+			v.NodegroupName = new(string)
+			return d.ReadString(schemas.ClientException_nodegroupName, v.NodegroupName)
+		case schemas.ClientException_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.ClientException_subscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
 
 // The specified parameter is invalid. Review the available parameters for the API
 // request.
@@ -132,6 +220,57 @@ func (e *InvalidParameterException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.InvalidParameterException_addonName, *v.AddonName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.InvalidParameterException_clusterName, *v.ClusterName)
+	}
+	if v.FargateProfileName != nil {
+		s.WriteString(schemas.InvalidParameterException_fargateProfileName, *v.FargateProfileName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterException_message, *v.Message)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.InvalidParameterException_nodegroupName, *v.NodegroupName)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.InvalidParameterException_subscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *InvalidParameterException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterException_addonName:
+			v.AddonName = new(string)
+			return d.ReadString(schemas.InvalidParameterException_addonName, v.AddonName)
+		case schemas.InvalidParameterException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.InvalidParameterException_clusterName, v.ClusterName)
+		case schemas.InvalidParameterException_fargateProfileName:
+			v.FargateProfileName = new(string)
+			return d.ReadString(schemas.InvalidParameterException_fargateProfileName, v.FargateProfileName)
+		case schemas.InvalidParameterException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterException_message, v.Message)
+		case schemas.InvalidParameterException_nodegroupName:
+			v.NodegroupName = new(string)
+			return d.ReadString(schemas.InvalidParameterException_nodegroupName, v.NodegroupName)
+		case schemas.InvalidParameterException_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.InvalidParameterException_subscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
 
 // The request is invalid given the state of the cluster. Check the state of the
 // cluster and the associated operations.
@@ -164,6 +303,51 @@ func (e *InvalidRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.InvalidRequestException_addonName, *v.AddonName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.InvalidRequestException_clusterName, *v.ClusterName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestException_message, *v.Message)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.InvalidRequestException_nodegroupName, *v.NodegroupName)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.InvalidRequestException_subscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *InvalidRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestException_addonName:
+			v.AddonName = new(string)
+			return d.ReadString(schemas.InvalidRequestException_addonName, v.AddonName)
+		case schemas.InvalidRequestException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.InvalidRequestException_clusterName, v.ClusterName)
+		case schemas.InvalidRequestException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestException_message, v.Message)
+		case schemas.InvalidRequestException_nodegroupName:
+			v.NodegroupName = new(string)
+			return d.ReadString(schemas.InvalidRequestException_nodegroupName, v.NodegroupName)
+		case schemas.InvalidRequestException_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.InvalidRequestException_subscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
 
 // Amazon EKS detected upgrade readiness issues. Call the [ListInsights]ListInsights API to view
 // detected upgrade blocking issues. Pass the [force]force flag when updating to override
@@ -197,6 +381,33 @@ func (e *InvalidStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.InvalidStateException_clusterName, *v.ClusterName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidStateException_message, *v.Message)
+	}
+}
+func (v *InvalidStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidStateException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.InvalidStateException_clusterName, v.ClusterName)
+		case schemas.InvalidStateException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidStateException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A service resource associated with the request could not be found. Clients
 // should not retry such requests.
@@ -224,6 +435,27 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_message, *v.Message)
+	}
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource is in use.
 type ResourceInUseException struct {
@@ -254,6 +486,45 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.ResourceInUseException_addonName, *v.AddonName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ResourceInUseException_clusterName, *v.ClusterName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceInUseException_message, *v.Message)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.ResourceInUseException_nodegroupName, *v.NodegroupName)
+	}
+}
+func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUseException_addonName:
+			v.AddonName = new(string)
+			return d.ReadString(schemas.ResourceInUseException_addonName, v.AddonName)
+		case schemas.ResourceInUseException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ResourceInUseException_clusterName, v.ClusterName)
+		case schemas.ResourceInUseException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUseException_message, v.Message)
+		case schemas.ResourceInUseException_nodegroupName:
+			v.NodegroupName = new(string)
+			return d.ReadString(schemas.ResourceInUseException_nodegroupName, v.NodegroupName)
+		}
+		return nil
+	})
+}
 
 // You have encountered a service limit on the specified resource.
 type ResourceLimitExceededException struct {
@@ -284,6 +555,45 @@ func (e *ResourceLimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ResourceLimitExceededException_clusterName, *v.ClusterName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceLimitExceededException_message, *v.Message)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.ResourceLimitExceededException_nodegroupName, *v.NodegroupName)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.ResourceLimitExceededException_subscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *ResourceLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceLimitExceededException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ResourceLimitExceededException_clusterName, v.ClusterName)
+		case schemas.ResourceLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceLimitExceededException_message, v.Message)
+		case schemas.ResourceLimitExceededException_nodegroupName:
+			v.NodegroupName = new(string)
+			return d.ReadString(schemas.ResourceLimitExceededException_nodegroupName, v.NodegroupName)
+		case schemas.ResourceLimitExceededException_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.ResourceLimitExceededException_subscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
 
 // The specified resource could not be found. You can view your available clusters
 // with ListClusters . You can view your available managed node groups with
@@ -319,6 +629,57 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.ResourceNotFoundException_addonName, *v.AddonName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ResourceNotFoundException_clusterName, *v.ClusterName)
+	}
+	if v.FargateProfileName != nil {
+		s.WriteString(schemas.ResourceNotFoundException_fargateProfileName, *v.FargateProfileName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_message, *v.Message)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.ResourceNotFoundException_nodegroupName, *v.NodegroupName)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.ResourceNotFoundException_subscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_addonName:
+			v.AddonName = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_addonName, v.AddonName)
+		case schemas.ResourceNotFoundException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_clusterName, v.ClusterName)
+		case schemas.ResourceNotFoundException_fargateProfileName:
+			v.FargateProfileName = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_fargateProfileName, v.FargateProfileName)
+		case schemas.ResourceNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_message, v.Message)
+		case schemas.ResourceNotFoundException_nodegroupName:
+			v.NodegroupName = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_nodegroupName, v.NodegroupName)
+		case schemas.ResourceNotFoundException_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_subscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
 
 // Required resources (such as service-linked roles) were created and are still
 // propagating. Retry later.
@@ -346,6 +707,27 @@ func (e *ResourcePropagationDelayException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourcePropagationDelayException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourcePropagationDelayException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePropagationDelayException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePropagationDelayException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourcePropagationDelayException_message, *v.Message)
+	}
+}
+func (v *ResourcePropagationDelayException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePropagationDelayException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePropagationDelayException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourcePropagationDelayException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // These errors are usually caused by a server-side issue.
 type ServerException struct {
@@ -377,6 +759,51 @@ func (e *ServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddonName != nil {
+		s.WriteString(schemas.ServerException_addonName, *v.AddonName)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ServerException_clusterName, *v.ClusterName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ServerException_message, *v.Message)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.ServerException_nodegroupName, *v.NodegroupName)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.ServerException_subscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *ServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServerException_addonName:
+			v.AddonName = new(string)
+			return d.ReadString(schemas.ServerException_addonName, v.AddonName)
+		case schemas.ServerException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ServerException_clusterName, v.ClusterName)
+		case schemas.ServerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServerException_message, v.Message)
+		case schemas.ServerException_nodegroupName:
+			v.NodegroupName = new(string)
+			return d.ReadString(schemas.ServerException_nodegroupName, v.NodegroupName)
+		case schemas.ServerException_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.ServerException_subscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
 
 // The service is unavailable. Back off and retry the operation.
 type ServiceUnavailableException struct {
@@ -403,6 +830,27 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceUnavailableException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceUnavailableException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceUnavailableException_message, *v.Message)
+	}
+}
+func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request or operation couldn't be performed because a service is throttling
 // requests.
@@ -432,6 +880,33 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThrottlingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThrottlingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ThrottlingException_clusterName, *v.ClusterName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ThrottlingException_message, *v.Message)
+	}
+}
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ThrottlingException_clusterName, v.ClusterName)
+		case schemas.ThrottlingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // At least one of your specified cluster subnets is in an Availability Zone that
 // does not support Amazon EKS. The exception output specifies the supported
@@ -466,4 +941,40 @@ func (e *UnsupportedAvailabilityZoneException) ErrorCode() string {
 }
 func (e *UnsupportedAvailabilityZoneException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *UnsupportedAvailabilityZoneException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedAvailabilityZoneException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedAvailabilityZoneException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.UnsupportedAvailabilityZoneException_clusterName, *v.ClusterName)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedAvailabilityZoneException_message, *v.Message)
+	}
+	if v.NodegroupName != nil {
+		s.WriteString(schemas.UnsupportedAvailabilityZoneException_nodegroupName, *v.NodegroupName)
+	}
+	serializeStringList(s, schemas.UnsupportedAvailabilityZoneException_validZones, v.ValidZones)
+}
+func (v *UnsupportedAvailabilityZoneException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedAvailabilityZoneException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedAvailabilityZoneException_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.UnsupportedAvailabilityZoneException_clusterName, v.ClusterName)
+		case schemas.UnsupportedAvailabilityZoneException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedAvailabilityZoneException_message, v.Message)
+		case schemas.UnsupportedAvailabilityZoneException_nodegroupName:
+			v.NodegroupName = new(string)
+			return d.ReadString(schemas.UnsupportedAvailabilityZoneException_nodegroupName, v.NodegroupName)
+		case schemas.UnsupportedAvailabilityZoneException_validZones:
+			return deserializeStringList(d, schemas.UnsupportedAvailabilityZoneException_validZones, &v.ValidZones)
+		}
+		return nil
+	})
 }

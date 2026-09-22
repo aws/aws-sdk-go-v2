@@ -5,10 +5,10 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -51,6 +51,29 @@ type StartProfileUpdateTaskInput struct {
 	ClientToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartProfileUpdateTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProfileUpdateTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProfileUpdateTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartProfileUpdateTaskRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartProfileUpdateTaskRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.StartProfileUpdateTaskRequest_Identifier, *v.Identifier)
+	}
+	if v.TaskDetails != nil {
+		s.WriteStruct(schemas.StartProfileUpdateTaskRequest_TaskDetails)
+		v.TaskDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type StartProfileUpdateTaskOutput struct {
@@ -102,65 +125,93 @@ type StartProfileUpdateTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartProfileUpdateTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartProfileUpdateTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartProfileUpdateTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StartProfileUpdateTaskResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.StartProfileUpdateTaskResponse_Catalog, *v.Catalog)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.StartProfileUpdateTaskResponse_EndedAt, *v.EndedAt)
+	}
+	serializeErrorDetailList(s, schemas.StartProfileUpdateTaskResponse_ErrorDetailList, v.ErrorDetailList)
+	if v.Id != nil {
+		s.WriteString(schemas.StartProfileUpdateTaskResponse_Id, *v.Id)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.StartProfileUpdateTaskResponse_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartProfileUpdateTaskResponse_Status, string(v.Status))
+	}
+	if v.TaskDetails != nil {
+		s.WriteStruct(schemas.StartProfileUpdateTaskResponse_TaskDetails)
+		v.TaskDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.StartProfileUpdateTaskResponse_TaskId, *v.TaskId)
+	}
+}
+func (v *StartProfileUpdateTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartProfileUpdateTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartProfileUpdateTaskResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartProfileUpdateTaskResponse_Arn, v.Arn)
+		case schemas.StartProfileUpdateTaskResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.StartProfileUpdateTaskResponse_Catalog, v.Catalog)
+		case schemas.StartProfileUpdateTaskResponse_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.StartProfileUpdateTaskResponse_EndedAt, v.EndedAt)
+		case schemas.StartProfileUpdateTaskResponse_ErrorDetailList:
+			return deserializeErrorDetailList(d, schemas.StartProfileUpdateTaskResponse_ErrorDetailList, &v.ErrorDetailList)
+		case schemas.StartProfileUpdateTaskResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartProfileUpdateTaskResponse_Id, v.Id)
+		case schemas.StartProfileUpdateTaskResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartProfileUpdateTaskResponse_StartedAt, v.StartedAt)
+		case schemas.StartProfileUpdateTaskResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartProfileUpdateTaskResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProfileTaskStatus(ev)
+			return nil
+		case schemas.StartProfileUpdateTaskResponse_TaskDetails:
+			v.TaskDetails = &types.TaskDetails{}
+			return v.TaskDetails.Deserialize(d)
+		case schemas.StartProfileUpdateTaskResponse_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.StartProfileUpdateTaskResponse_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartProfileUpdateTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProfileUpdateTask, schemas.StartProfileUpdateTaskRequest, schemas.StartProfileUpdateTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartProfileUpdateTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartProfileUpdateTask, schemas.StartProfileUpdateTaskRequest, schemas.StartProfileUpdateTaskResponse), output: &StartProfileUpdateTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartProfileUpdateTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartProfileUpdateTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -170,12 +221,6 @@ func (c *Client) addOperationStartProfileUpdateTaskMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpStartProfileUpdateTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartProfileUpdateTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,12 +233,6 @@ func (c *Client) addOperationStartProfileUpdateTaskMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -233,12 +272,4 @@ func (m *idempotencyToken_initializeOpStartProfileUpdateTask) HandleInitialize(c
 }
 func addIdempotencyToken_opStartProfileUpdateTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartProfileUpdateTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartProfileUpdateTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartProfileUpdateTask",
-	}
 }

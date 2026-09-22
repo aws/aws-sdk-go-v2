@@ -4,11 +4,10 @@ package b2bi
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -49,6 +48,30 @@ type UpdateProfileInput struct {
 	Phone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessName != nil {
+		s.WriteString(schemas.UpdateProfileRequest_businessName, *v.BusinessName)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.UpdateProfileRequest_email, *v.Email)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProfileRequest_name, *v.Name)
+	}
+	if v.Phone != nil {
+		s.WriteString(schemas.UpdateProfileRequest_phone, *v.Phone)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.UpdateProfileRequest_profileId, *v.ProfileId)
+	}
 }
 
 type UpdateProfileOutput struct {
@@ -101,77 +124,106 @@ type UpdateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessName != nil {
+		s.WriteString(schemas.UpdateProfileResponse_businessName, *v.BusinessName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UpdateProfileResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.UpdateProfileResponse_email, *v.Email)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.UpdateProfileResponse_logGroupName, *v.LogGroupName)
+	}
+	if v.Logging != "" {
+		s.WriteString(schemas.UpdateProfileResponse_logging, string(v.Logging))
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.UpdateProfileResponse_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProfileResponse_name, *v.Name)
+	}
+	if v.Phone != nil {
+		s.WriteString(schemas.UpdateProfileResponse_phone, *v.Phone)
+	}
+	if v.ProfileArn != nil {
+		s.WriteString(schemas.UpdateProfileResponse_profileArn, *v.ProfileArn)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.UpdateProfileResponse_profileId, *v.ProfileId)
+	}
+}
+func (v *UpdateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProfileResponse_businessName:
+			v.BusinessName = new(string)
+			return d.ReadString(schemas.UpdateProfileResponse_businessName, v.BusinessName)
+		case schemas.UpdateProfileResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateProfileResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateProfileResponse_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.UpdateProfileResponse_email, v.Email)
+		case schemas.UpdateProfileResponse_logGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.UpdateProfileResponse_logGroupName, v.LogGroupName)
+		case schemas.UpdateProfileResponse_logging:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProfileResponse_logging, &ev); err != nil {
+				return err
+			}
+			v.Logging = types.Logging(ev)
+			return nil
+		case schemas.UpdateProfileResponse_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateProfileResponse_modifiedAt, v.ModifiedAt)
+		case schemas.UpdateProfileResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateProfileResponse_name, v.Name)
+		case schemas.UpdateProfileResponse_phone:
+			v.Phone = new(string)
+			return d.ReadString(schemas.UpdateProfileResponse_phone, v.Phone)
+		case schemas.UpdateProfileResponse_profileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.UpdateProfileResponse_profileArn, v.ProfileArn)
+		case schemas.UpdateProfileResponse_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.UpdateProfileResponse_profileId, v.ProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfile, schemas.UpdateProfileRequest, schemas.UpdateProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfile, schemas.UpdateProfileRequest, schemas.UpdateProfileResponse), output: &UpdateProfileOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProfile{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProfile"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateProfileValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProfile(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +238,8 @@ func (c *Client) addOperationUpdateProfileMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateProfile(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateProfile",
-	}
 }

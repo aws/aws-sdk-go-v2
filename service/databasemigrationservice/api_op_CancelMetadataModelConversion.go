@@ -4,15 +4,19 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels a single metadata model conversion operation that was started with
 // StartMetadataModelConversion .
+//
+// Required permissions: dms:CancelMetadataModelConversion . For more information,
+// see [Actions, resources, and condition keys for Database Migration Service].
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) CancelMetadataModelConversion(ctx context.Context, params *CancelMetadataModelConversionInput, optFns ...func(*Options)) (*CancelMetadataModelConversionOutput, error) {
 	if params == nil {
 		params = &CancelMetadataModelConversionInput{}
@@ -44,9 +48,26 @@ type CancelMetadataModelConversionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMetadataModelConversionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMetadataModelConversionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMetadataModelConversionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.CancelMetadataModelConversionMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+	if v.RequestIdentifier != nil {
+		s.WriteString(schemas.CancelMetadataModelConversionMessage_RequestIdentifier, *v.RequestIdentifier)
+	}
+}
+
 type CancelMetadataModelConversionOutput struct {
 
-	// Provides information about a schema conversion action.
+	// The metadata model conversion request.
+	//
+	// DMS never populates the ExportSqlDetails field for this operation.
 	Request *types.SchemaConversionRequest
 
 	// Metadata pertaining to the operation's result.
@@ -55,77 +76,50 @@ type CancelMetadataModelConversionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelMetadataModelConversionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelMetadataModelConversionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelMetadataModelConversionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Request != nil {
+		s.WriteStruct(schemas.CancelMetadataModelConversionResponse_Request)
+		v.Request.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CancelMetadataModelConversionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelMetadataModelConversionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelMetadataModelConversionResponse_Request:
+			v.Request = &types.SchemaConversionRequest{}
+			return v.Request.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelMetadataModelConversionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMetadataModelConversion, schemas.CancelMetadataModelConversionMessage, schemas.CancelMetadataModelConversionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCancelMetadataModelConversion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelMetadataModelConversion, schemas.CancelMetadataModelConversionMessage, schemas.CancelMetadataModelConversionResponse), output: &CancelMetadataModelConversionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCancelMetadataModelConversion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelMetadataModelConversion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCancelMetadataModelConversionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelMetadataModelConversion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +134,8 @@ func (c *Client) addOperationCancelMetadataModelConversionMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCancelMetadataModelConversion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelMetadataModelConversion",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /feedback
+
+Content-Type: application/json
+
+{"InsightFeedback":{"Feedback":"VALID_COLLECTION","Id":"__Id__"}}

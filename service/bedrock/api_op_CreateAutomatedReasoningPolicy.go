@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -70,6 +70,33 @@ type CreateAutomatedReasoningPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomatedReasoningPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomatedReasoningPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomatedReasoningPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyRequest_description, *v.Description)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyRequest_name, *v.Name)
+	}
+	if v.PolicyDefinition != nil {
+		s.WriteStruct(schemas.CreateAutomatedReasoningPolicyRequest_policyDefinition)
+		v.PolicyDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateAutomatedReasoningPolicyRequest_tags, v.Tags)
+}
+
 type CreateAutomatedReasoningPolicyOutput struct {
 
 	// The timestamp when the policy was created.
@@ -112,65 +139,78 @@ type CreateAutomatedReasoningPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAutomatedReasoningPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAutomatedReasoningPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAutomatedReasoningPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateAutomatedReasoningPolicyResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DefinitionHash != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyResponse_definitionHash, *v.DefinitionHash)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyResponse_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyResponse_name, *v.Name)
+	}
+	if v.PolicyArn != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyResponse_policyArn, *v.PolicyArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CreateAutomatedReasoningPolicyResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateAutomatedReasoningPolicyResponse_version, *v.Version)
+	}
+}
+func (v *CreateAutomatedReasoningPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAutomatedReasoningPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAutomatedReasoningPolicyResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAutomatedReasoningPolicyResponse_createdAt, v.CreatedAt)
+		case schemas.CreateAutomatedReasoningPolicyResponse_definitionHash:
+			v.DefinitionHash = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyResponse_definitionHash, v.DefinitionHash)
+		case schemas.CreateAutomatedReasoningPolicyResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyResponse_description, v.Description)
+		case schemas.CreateAutomatedReasoningPolicyResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyResponse_name, v.Name)
+		case schemas.CreateAutomatedReasoningPolicyResponse_policyArn:
+			v.PolicyArn = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyResponse_policyArn, v.PolicyArn)
+		case schemas.CreateAutomatedReasoningPolicyResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAutomatedReasoningPolicyResponse_updatedAt, v.UpdatedAt)
+		case schemas.CreateAutomatedReasoningPolicyResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateAutomatedReasoningPolicyResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAutomatedReasoningPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomatedReasoningPolicy, schemas.CreateAutomatedReasoningPolicyRequest, schemas.CreateAutomatedReasoningPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAutomatedReasoningPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAutomatedReasoningPolicy, schemas.CreateAutomatedReasoningPolicyRequest, schemas.CreateAutomatedReasoningPolicyResponse), output: &CreateAutomatedReasoningPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAutomatedReasoningPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAutomatedReasoningPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -180,12 +220,6 @@ func (c *Client) addOperationCreateAutomatedReasoningPolicyMiddlewares(stack *mi
 		return err
 	}
 	if err = addOpCreateAutomatedReasoningPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutomatedReasoningPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -198,12 +232,6 @@ func (c *Client) addOperationCreateAutomatedReasoningPolicyMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -243,12 +271,4 @@ func (m *idempotencyToken_initializeOpCreateAutomatedReasoningPolicy) HandleInit
 }
 func addIdempotencyToken_opCreateAutomatedReasoningPolicyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAutomatedReasoningPolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAutomatedReasoningPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAutomatedReasoningPolicy",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","QueryErrors":[{"ErrorCode":"CLOUDFORMATION_STACK_INACTIVE","Message":"__Message__"},{"ErrorCode":"CLOUDFORMATION_STACK_INACTIVE","Message":"__Message__"}],"ResourceIdentifiers":[{"ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__"},{"ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__"}],"Resources":[{"Identifier":{"ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__"},"Status":{"Name":"PENDING"}},{"Identifier":{"ResourceArn":"__ResourceArn__","ResourceType":"__ResourceType__"},"Status":{"Name":"PENDING"}}]}

@@ -4,11 +4,10 @@ package forecast
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/forecast/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Exports an Explainability resource created by the CreateExplainability operation. Exported files
@@ -87,6 +86,30 @@ type CreateExplainabilityExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExplainabilityExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExplainabilityExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExplainabilityExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteStruct(schemas.CreateExplainabilityExportRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExplainabilityArn != nil {
+		s.WriteString(schemas.CreateExplainabilityExportRequest_ExplainabilityArn, *v.ExplainabilityArn)
+	}
+	if v.ExplainabilityExportName != nil {
+		s.WriteString(schemas.CreateExplainabilityExportRequest_ExplainabilityExportName, *v.ExplainabilityExportName)
+	}
+	if v.Format != nil {
+		s.WriteString(schemas.CreateExplainabilityExportRequest_Format, *v.Format)
+	}
+	serializeTags(s, schemas.CreateExplainabilityExportRequest_Tags, v.Tags)
+}
+
 type CreateExplainabilityExportOutput struct {
 
 	// The Amazon Resource Name (ARN) of the export.
@@ -98,77 +121,48 @@ type CreateExplainabilityExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExplainabilityExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExplainabilityExportResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExplainabilityExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExplainabilityExportArn != nil {
+		s.WriteString(schemas.CreateExplainabilityExportResponse_ExplainabilityExportArn, *v.ExplainabilityExportArn)
+	}
+}
+func (v *CreateExplainabilityExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExplainabilityExportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExplainabilityExportResponse_ExplainabilityExportArn:
+			v.ExplainabilityExportArn = new(string)
+			return d.ReadString(schemas.CreateExplainabilityExportResponse_ExplainabilityExportArn, v.ExplainabilityExportArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExplainabilityExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExplainabilityExport, schemas.CreateExplainabilityExportRequest, schemas.CreateExplainabilityExportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateExplainabilityExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExplainabilityExport, schemas.CreateExplainabilityExportRequest, schemas.CreateExplainabilityExportResponse), output: &CreateExplainabilityExportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateExplainabilityExport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateExplainabilityExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateExplainabilityExportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExplainabilityExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,22 +177,8 @@ func (c *Client) addOperationCreateExplainabilityExportMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateExplainabilityExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateExplainabilityExport",
-	}
 }

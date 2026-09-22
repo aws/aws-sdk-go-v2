@@ -1,0 +1,3 @@
+GET /foundation-models?byCustomizationType=FINE_TUNING&byInferenceType=ON_DEMAND&byOutputModality=TEXT&byProvider=__ByProvider__
+
+

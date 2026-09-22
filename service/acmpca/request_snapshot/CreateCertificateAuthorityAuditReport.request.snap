@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: ACMPrivateCA.CreateCertificateAuthorityAuditReport
+
+{"AuditReportResponseFormat":"JSON","CertificateAuthorityArn":"__CertificateAuthorityArn__","S3BucketName":"__S3BucketName__"}

@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a versioned model.
@@ -94,6 +93,51 @@ type UpdateModelPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelPackageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalInferenceSpecifications(s, schemas.UpdateModelPackageInput_AdditionalInferenceSpecificationsToAdd, v.AdditionalInferenceSpecificationsToAdd)
+	if v.ApprovalDescription != nil {
+		s.WriteString(schemas.UpdateModelPackageInput_ApprovalDescription, *v.ApprovalDescription)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateModelPackageInput_ClientToken, *v.ClientToken)
+	}
+	serializeCustomerMetadataMap(s, schemas.UpdateModelPackageInput_CustomerMetadataProperties, v.CustomerMetadataProperties)
+	serializeCustomerMetadataKeyList(s, schemas.UpdateModelPackageInput_CustomerMetadataPropertiesToRemove, v.CustomerMetadataPropertiesToRemove)
+	if v.InferenceSpecification != nil {
+		s.WriteStruct(schemas.UpdateModelPackageInput_InferenceSpecification)
+		v.InferenceSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelApprovalStatus != "" {
+		s.WriteString(schemas.UpdateModelPackageInput_ModelApprovalStatus, string(v.ModelApprovalStatus))
+	}
+	if v.ModelCard != nil {
+		s.WriteStruct(schemas.UpdateModelPackageInput_ModelCard)
+		v.ModelCard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelLifeCycle != nil {
+		s.WriteStruct(schemas.UpdateModelPackageInput_ModelLifeCycle)
+		v.ModelLifeCycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelPackageArn != nil {
+		s.WriteString(schemas.UpdateModelPackageInput_ModelPackageArn, *v.ModelPackageArn)
+	}
+	if v.ModelPackageRegistrationType != "" {
+		s.WriteString(schemas.UpdateModelPackageInput_ModelPackageRegistrationType, string(v.ModelPackageRegistrationType))
+	}
+	if v.SourceUri != nil {
+		s.WriteString(schemas.UpdateModelPackageInput_SourceUri, *v.SourceUri)
+	}
+}
+
 type UpdateModelPackageOutput struct {
 
 	// The Amazon Resource Name (ARN) of the model.
@@ -107,77 +151,48 @@ type UpdateModelPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateModelPackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateModelPackageOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateModelPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelPackageArn != nil {
+		s.WriteString(schemas.UpdateModelPackageOutput_ModelPackageArn, *v.ModelPackageArn)
+	}
+}
+func (v *UpdateModelPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateModelPackageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateModelPackageOutput_ModelPackageArn:
+			v.ModelPackageArn = new(string)
+			return d.ReadString(schemas.UpdateModelPackageOutput_ModelPackageArn, v.ModelPackageArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateModelPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelPackage, schemas.UpdateModelPackageInput, schemas.UpdateModelPackageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateModelPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateModelPackage, schemas.UpdateModelPackageInput, schemas.UpdateModelPackageOutput), output: &UpdateModelPackageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateModelPackage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateModelPackage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateModelPackageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateModelPackage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,22 +207,8 @@ func (c *Client) addOperationUpdateModelPackageMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateModelPackage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateModelPackage",
-	}
 }

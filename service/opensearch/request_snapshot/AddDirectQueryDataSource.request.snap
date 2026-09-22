@@ -1,0 +1,5 @@
+POST /2021-01-01/opensearch/directQueryDataSource
+
+Content-Type: application/json
+
+{"DataSourceAccessPolicy":"__DataSourceAccessPolicy__","DataSourceName":"__DataSourceName__","DataSourceType":{"CloudWatchLog":{"RoleArn":"__RoleArn__"}},"Description":"__Description__","OpenSearchArns":["__Member__","__Member__"],"TagList":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -5,10 +5,8 @@ package marketplacediscovery
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the terms attached to an offer, such as pricing terms (usage-based,
@@ -65,9 +63,6 @@ type GetOfferTermsOutput struct {
 }
 
 func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOfferTerms{}, middleware.After)
 	if err != nil {
 		return err
@@ -76,65 +71,20 @@ func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, o
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOfferTerms"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOfferTermsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOfferTerms(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +99,6 @@ func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -163,6 +107,10 @@ func (c *Client) addOperationGetOfferTermsMiddlewares(stack *middleware.Stack, o
 
 // GetOfferTermsPaginatorOptions is the paginator options for GetOfferTerms
 type GetOfferTermsPaginatorOptions struct {
+	// The maximum number of results that are returned per call. You can use nextToken
+	// to get more results.
+	Limit int32
+
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
@@ -184,6 +132,9 @@ func NewGetOfferTermsPaginator(client GetOfferTermsAPIClient, params *GetOfferTe
 	}
 
 	options := GetOfferTermsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -211,6 +162,12 @@ func (p *GetOfferTermsPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	params := *p.params
 	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	optFns = append([]func(*Options){
 		addIsPaginatorUserAgent,
@@ -240,11 +197,3 @@ type GetOfferTermsAPIClient interface {
 }
 
 var _ GetOfferTermsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetOfferTerms(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOfferTerms",
-	}
-}

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/cloud9/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -73,6 +75,90 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Environment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Environment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Environment_arn, *v.Arn)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.Environment_connectionType, string(v.ConnectionType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Environment_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Environment_id, *v.Id)
+	}
+	if v.Lifecycle != nil {
+		s.WriteStruct(schemas.Environment_lifecycle)
+		v.Lifecycle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ManagedCredentialsStatus != "" {
+		s.WriteString(schemas.Environment_managedCredentialsStatus, string(v.ManagedCredentialsStatus))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Environment_name, *v.Name)
+	}
+	if v.OwnerArn != nil {
+		s.WriteString(schemas.Environment_ownerArn, *v.OwnerArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Environment_type, string(v.Type))
+	}
+}
+func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Environment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Environment_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Environment_arn, v.Arn)
+		case schemas.Environment_connectionType:
+			var ev string
+			if err := d.ReadString(schemas.Environment_connectionType, &ev); err != nil {
+				return err
+			}
+			v.ConnectionType = ConnectionType(ev)
+			return nil
+		case schemas.Environment_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Environment_description, v.Description)
+		case schemas.Environment_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Environment_id, v.Id)
+		case schemas.Environment_lifecycle:
+			v.Lifecycle = &EnvironmentLifecycle{}
+			return v.Lifecycle.Deserialize(d)
+		case schemas.Environment_managedCredentialsStatus:
+			var ev string
+			if err := d.ReadString(schemas.Environment_managedCredentialsStatus, &ev); err != nil {
+				return err
+			}
+			v.ManagedCredentialsStatus = ManagedCredentialsStatus(ev)
+			return nil
+		case schemas.Environment_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Environment_name, v.Name)
+		case schemas.Environment_ownerArn:
+			v.OwnerArn = new(string)
+			return d.ReadString(schemas.Environment_ownerArn, v.OwnerArn)
+		case schemas.Environment_type:
+			var ev string
+			if err := d.ReadString(schemas.Environment_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EnvironmentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the current creation or deletion lifecycle state of an Cloud9
 // development environment.
 type EnvironmentLifecycle struct {
@@ -98,6 +184,44 @@ type EnvironmentLifecycle struct {
 	Status EnvironmentLifecycleStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnvironmentLifecycle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentLifecycle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnvironmentLifecycle) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureResource != nil {
+		s.WriteString(schemas.EnvironmentLifecycle_failureResource, *v.FailureResource)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.EnvironmentLifecycle_reason, *v.Reason)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.EnvironmentLifecycle_status, string(v.Status))
+	}
+}
+func (v *EnvironmentLifecycle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentLifecycle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentLifecycle_failureResource:
+			v.FailureResource = new(string)
+			return d.ReadString(schemas.EnvironmentLifecycle_failureResource, v.FailureResource)
+		case schemas.EnvironmentLifecycle_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.EnvironmentLifecycle_reason, v.Reason)
+		case schemas.EnvironmentLifecycle_status:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentLifecycle_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EnvironmentLifecycleStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about an environment member for an Cloud9 development environment.
@@ -137,6 +261,56 @@ type EnvironmentMember struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnvironmentMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnvironmentMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.EnvironmentMember_environmentId, *v.EnvironmentId)
+	}
+	if v.LastAccess != nil {
+		s.WriteTime(schemas.EnvironmentMember_lastAccess, *v.LastAccess)
+	}
+	if v.Permissions != "" {
+		s.WriteString(schemas.EnvironmentMember_permissions, string(v.Permissions))
+	}
+	if v.UserArn != nil {
+		s.WriteString(schemas.EnvironmentMember_userArn, *v.UserArn)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.EnvironmentMember_userId, *v.UserId)
+	}
+}
+func (v *EnvironmentMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentMember_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.EnvironmentMember_environmentId, v.EnvironmentId)
+		case schemas.EnvironmentMember_lastAccess:
+			v.LastAccess = new(time.Time)
+			return d.ReadTime(schemas.EnvironmentMember_lastAccess, v.LastAccess)
+		case schemas.EnvironmentMember_permissions:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentMember_permissions, &ev); err != nil {
+				return err
+			}
+			v.Permissions = Permissions(ev)
+			return nil
+		case schemas.EnvironmentMember_userArn:
+			v.UserArn = new(string)
+			return d.ReadString(schemas.EnvironmentMember_userArn, v.UserArn)
+		case schemas.EnvironmentMember_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.EnvironmentMember_userId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // Metadata that is associated with Amazon Web Services resources. In particular,
 // a name-value pair that can be associated with an Cloud9 development environment.
 // There are two types of tags: user tags and system tags. A user tag is created by
@@ -155,6 +329,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

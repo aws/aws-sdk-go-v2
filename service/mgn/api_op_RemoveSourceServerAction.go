@@ -4,10 +4,9 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Remove source server post migration custom action.
@@ -44,6 +43,40 @@ type RemoveSourceServerActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveSourceServerActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveSourceServerActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveSourceServerActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.RemoveSourceServerActionRequest_accountID, *v.AccountID)
+	}
+	if v.ActionID != nil {
+		s.WriteString(schemas.RemoveSourceServerActionRequest_actionID, *v.ActionID)
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.RemoveSourceServerActionRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *RemoveSourceServerActionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveSourceServerActionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveSourceServerActionRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.RemoveSourceServerActionRequest_accountID, v.AccountID)
+		case schemas.RemoveSourceServerActionRequest_actionID:
+			v.ActionID = new(string)
+			return d.ReadString(schemas.RemoveSourceServerActionRequest_actionID, v.ActionID)
+		case schemas.RemoveSourceServerActionRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.RemoveSourceServerActionRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
+}
+
 type RemoveSourceServerActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,77 +84,42 @@ type RemoveSourceServerActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveSourceServerActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveSourceServerActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveSourceServerActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveSourceServerActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveSourceServerActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveSourceServerActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveSourceServerAction, schemas.RemoveSourceServerActionRequest, schemas.RemoveSourceServerActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveSourceServerAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveSourceServerAction, schemas.RemoveSourceServerActionRequest, schemas.RemoveSourceServerActionResponse), output: &RemoveSourceServerActionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveSourceServerAction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveSourceServerAction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRemoveSourceServerActionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveSourceServerAction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +134,8 @@ func (c *Client) addOperationRemoveSourceServerActionMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRemoveSourceServerAction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RemoveSourceServerAction",
-	}
 }

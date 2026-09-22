@@ -1,0 +1,5 @@
+POST /networks/__NetworkId__/oidc/save
+
+Content-Type: application/json
+
+{"companyId":"__CompanyId__","customUsername":"__CustomUsername__","extraAuthParams":"__ExtraAuthParams__","issuer":"__Issuer__","scopes":"__Scopes__","secret":"__Secret__","ssoTokenBufferMinutes":1,"userId":"__UserId__"}

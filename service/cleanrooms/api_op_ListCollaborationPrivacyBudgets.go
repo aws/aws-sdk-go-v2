@@ -5,10 +5,10 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns an array that summarizes each privacy budget in a specified
@@ -56,6 +56,30 @@ type ListCollaborationPrivacyBudgetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationPrivacyBudgetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationPrivacyBudgetsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationPrivacyBudgetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessBudgetResourceArn != nil {
+		s.WriteString(schemas.ListCollaborationPrivacyBudgetsInput_accessBudgetResourceArn, *v.AccessBudgetResourceArn)
+	}
+	if v.CollaborationIdentifier != nil {
+		s.WriteString(schemas.ListCollaborationPrivacyBudgetsInput_collaborationIdentifier, *v.CollaborationIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCollaborationPrivacyBudgetsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationPrivacyBudgetsInput_nextToken, *v.NextToken)
+	}
+	if v.PrivacyBudgetType != "" {
+		s.WriteString(schemas.ListCollaborationPrivacyBudgetsInput_privacyBudgetType, string(v.PrivacyBudgetType))
+	}
+}
+
 type ListCollaborationPrivacyBudgetsOutput struct {
 
 	// Summaries of the collaboration privacy budgets.
@@ -72,77 +96,51 @@ type ListCollaborationPrivacyBudgetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCollaborationPrivacyBudgetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCollaborationPrivacyBudgetsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCollaborationPrivacyBudgetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCollaborationPrivacyBudgetSummaryList(s, schemas.ListCollaborationPrivacyBudgetsOutput_collaborationPrivacyBudgetSummaries, v.CollaborationPrivacyBudgetSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCollaborationPrivacyBudgetsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListCollaborationPrivacyBudgetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCollaborationPrivacyBudgetsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCollaborationPrivacyBudgetsOutput_collaborationPrivacyBudgetSummaries:
+			return deserializeCollaborationPrivacyBudgetSummaryList(d, schemas.ListCollaborationPrivacyBudgetsOutput_collaborationPrivacyBudgetSummaries, &v.CollaborationPrivacyBudgetSummaries)
+		case schemas.ListCollaborationPrivacyBudgetsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCollaborationPrivacyBudgetsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCollaborationPrivacyBudgetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationPrivacyBudgets, schemas.ListCollaborationPrivacyBudgetsInput, schemas.ListCollaborationPrivacyBudgetsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCollaborationPrivacyBudgets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCollaborationPrivacyBudgets, schemas.ListCollaborationPrivacyBudgetsInput, schemas.ListCollaborationPrivacyBudgetsOutput), output: &ListCollaborationPrivacyBudgetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCollaborationPrivacyBudgets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCollaborationPrivacyBudgets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListCollaborationPrivacyBudgetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCollaborationPrivacyBudgets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +153,6 @@ func (c *Client) addOperationListCollaborationPrivacyBudgetsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +258,3 @@ type ListCollaborationPrivacyBudgetsAPIClient interface {
 }
 
 var _ ListCollaborationPrivacyBudgetsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCollaborationPrivacyBudgets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCollaborationPrivacyBudgets",
-	}
-}

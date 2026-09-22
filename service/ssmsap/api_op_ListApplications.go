@@ -5,10 +5,10 @@ package ssmsap
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the applications registered with AWS Systems Manager for SAP.
@@ -42,6 +42,37 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListApplicationsInput_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApplicationsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationsInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListApplicationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationsInput_Filters:
+			return deserializeFilterList(d, schemas.ListApplicationsInput_Filters, &v.Filters)
+		case schemas.ListApplicationsInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListApplicationsInput_MaxResults, v.MaxResults)
+		case schemas.ListApplicationsInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationsInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListApplicationsOutput struct {
 
 	// The applications registered with AWS Systems Manager for SAP.
@@ -57,77 +88,51 @@ type ListApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationSummaryList(s, schemas.ListApplicationsOutput_Applications, v.Applications)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationsOutput_Applications:
+			return deserializeApplicationSummaryList(d, schemas.ListApplicationsOutput_Applications, &v.Applications)
+		case schemas.ListApplicationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsInput, schemas.ListApplicationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplications, schemas.ListApplicationsInput, schemas.ListApplicationsOutput), output: &ListApplicationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplications{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplications"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListApplicationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplications(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +145,6 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +246,3 @@ type ListApplicationsAPIClient interface {
 }
 
 var _ ListApplicationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListApplications(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListApplications",
-	}
-}

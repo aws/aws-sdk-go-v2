@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreatePolicyVersion&PolicyArn=__PolicyArn__&PolicyDocument=__PolicyDocument__&SetAsDefault=true&Version=2010-05-08

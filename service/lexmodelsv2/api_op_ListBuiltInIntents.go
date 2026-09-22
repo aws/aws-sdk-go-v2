@@ -5,10 +5,10 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of built-in intents provided by Amazon Lex that you can use in your
@@ -63,6 +63,29 @@ type ListBuiltInIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuiltInIntentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuiltInIntentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuiltInIntentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBuiltInIntentsRequest_localeId, *v.LocaleId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBuiltInIntentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuiltInIntentsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != nil {
+		s.WriteStruct(schemas.ListBuiltInIntentsRequest_sortBy)
+		v.SortBy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListBuiltInIntentsOutput struct {
 
 	// Summary information for the built-in intents that meet the filter criteria
@@ -86,77 +109,57 @@ type ListBuiltInIntentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuiltInIntentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuiltInIntentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuiltInIntentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuiltInIntentSummaryList(s, schemas.ListBuiltInIntentsResponse_builtInIntentSummaries, v.BuiltInIntentSummaries)
+	if v.LocaleId != nil {
+		s.WriteString(schemas.ListBuiltInIntentsResponse_localeId, *v.LocaleId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuiltInIntentsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBuiltInIntentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBuiltInIntentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBuiltInIntentsResponse_builtInIntentSummaries:
+			return deserializeBuiltInIntentSummaryList(d, schemas.ListBuiltInIntentsResponse_builtInIntentSummaries, &v.BuiltInIntentSummaries)
+		case schemas.ListBuiltInIntentsResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.ListBuiltInIntentsResponse_localeId, v.LocaleId)
+		case schemas.ListBuiltInIntentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBuiltInIntentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBuiltInIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuiltInIntents, schemas.ListBuiltInIntentsRequest, schemas.ListBuiltInIntentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBuiltInIntents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuiltInIntents, schemas.ListBuiltInIntentsRequest, schemas.ListBuiltInIntentsResponse), output: &ListBuiltInIntentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBuiltInIntents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBuiltInIntents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListBuiltInIntentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBuiltInIntents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +172,6 @@ func (c *Client) addOperationListBuiltInIntentsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +275,3 @@ type ListBuiltInIntentsAPIClient interface {
 }
 
 var _ ListBuiltInIntentsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBuiltInIntents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBuiltInIntents",
-	}
-}

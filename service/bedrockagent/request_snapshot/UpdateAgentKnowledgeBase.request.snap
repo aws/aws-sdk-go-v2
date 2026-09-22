@@ -1,0 +1,5 @@
+PUT /agents/__AgentId__/agentversions/__AgentVersion__/knowledgebases/__KnowledgeBaseId__/
+
+Content-Type: application/json
+
+{"description":"__Description__","knowledgeBaseState":"ENABLED"}

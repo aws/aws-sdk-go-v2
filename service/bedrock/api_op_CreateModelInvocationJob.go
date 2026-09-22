@@ -5,10 +5,10 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a batch inference job to invoke a model on multiple prompts. Format
@@ -94,6 +94,41 @@ type CreateModelInvocationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelInvocationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelInvocationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelInvocationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	serializeModelInvocationJobInputDataConfig(s, schemas.CreateModelInvocationJobRequest_inputDataConfig, v.InputDataConfig)
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_jobName, *v.JobName)
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_modelId, *v.ModelId)
+	}
+	if v.ModelInvocationType != "" {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_modelInvocationType, string(v.ModelInvocationType))
+	}
+	serializeModelInvocationJobOutputDataConfig(s, schemas.CreateModelInvocationJobRequest_outputDataConfig, v.OutputDataConfig)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateModelInvocationJobRequest_roleArn, *v.RoleArn)
+	}
+	serializeTagList(s, schemas.CreateModelInvocationJobRequest_tags, v.Tags)
+	if v.TimeoutDurationInHours != nil {
+		s.WriteInt32(schemas.CreateModelInvocationJobRequest_timeoutDurationInHours, *v.TimeoutDurationInHours)
+	}
+	if v.VpcConfig != nil {
+		s.WriteStruct(schemas.CreateModelInvocationJobRequest_vpcConfig)
+		v.VpcConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateModelInvocationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the batch inference job.
@@ -107,65 +142,42 @@ type CreateModelInvocationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateModelInvocationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateModelInvocationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateModelInvocationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateModelInvocationJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateModelInvocationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateModelInvocationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateModelInvocationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateModelInvocationJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateModelInvocationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelInvocationJob, schemas.CreateModelInvocationJobRequest, schemas.CreateModelInvocationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateModelInvocationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateModelInvocationJob, schemas.CreateModelInvocationJobRequest, schemas.CreateModelInvocationJobResponse), output: &CreateModelInvocationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateModelInvocationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateModelInvocationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -175,12 +187,6 @@ func (c *Client) addOperationCreateModelInvocationJobMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpCreateModelInvocationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelInvocationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +199,6 @@ func (c *Client) addOperationCreateModelInvocationJobMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -238,12 +238,4 @@ func (m *idempotencyToken_initializeOpCreateModelInvocationJob) HandleInitialize
 }
 func addIdempotencyToken_opCreateModelInvocationJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateModelInvocationJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateModelInvocationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateModelInvocationJob",
-	}
 }

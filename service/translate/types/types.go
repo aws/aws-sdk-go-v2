@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,6 +26,31 @@ type AppliedTerminology struct {
 	Terms []Term
 
 	noSmithyDocumentSerde
+}
+
+func (v *AppliedTerminology) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AppliedTerminology)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AppliedTerminology) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AppliedTerminology_Name, *v.Name)
+	}
+	serializeTermList(s, schemas.AppliedTerminology_Terms, v.Terms)
+}
+func (v *AppliedTerminology) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AppliedTerminology, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AppliedTerminology_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AppliedTerminology_Name, v.Name)
+		case schemas.AppliedTerminology_Terms:
+			return deserializeTermList(d, schemas.AppliedTerminology_Terms, &v.Terms)
+		}
+		return nil
+	})
 }
 
 // The content and content type of a document.
@@ -54,6 +81,33 @@ type Document struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Document) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Document)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Document) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteBlob(schemas.Document_Content, v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.Document_ContentType, *v.ContentType)
+	}
+}
+func (v *Document) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Document, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Document_Content:
+			return d.ReadBlob(schemas.Document_Content, &v.Content)
+		case schemas.Document_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.Document_ContentType, v.ContentType)
+		}
+		return nil
+	})
+}
+
 // The encryption key used to encrypt this object.
 type EncryptionKey struct {
 
@@ -69,6 +123,38 @@ type EncryptionKey struct {
 	Type EncryptionKeyType
 
 	noSmithyDocumentSerde
+}
+
+func (v *EncryptionKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.EncryptionKey_Id, *v.Id)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EncryptionKey_Type, string(v.Type))
+	}
+}
+func (v *EncryptionKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionKey_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.EncryptionKey_Id, v.Id)
+		case schemas.EncryptionKey_Type:
+			var ev string
+			if err := d.ReadString(schemas.EncryptionKey_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = EncryptionKeyType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The input configuration properties for requesting a batch translation job.
@@ -116,6 +202,34 @@ type InputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.InputDataConfig_ContentType, *v.ContentType)
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.InputDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *InputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputDataConfig_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.InputDataConfig_ContentType, v.ContentType)
+		case schemas.InputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.InputDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // The number of documents successfully and unsuccessfully processed during a
 // translation job.
 type JobDetails struct {
@@ -130,6 +244,40 @@ type JobDetails struct {
 	TranslatedDocumentsCount *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DocumentsWithErrorsCount != nil {
+		s.WriteInt32(schemas.JobDetails_DocumentsWithErrorsCount, *v.DocumentsWithErrorsCount)
+	}
+	if v.InputDocumentsCount != nil {
+		s.WriteInt32(schemas.JobDetails_InputDocumentsCount, *v.InputDocumentsCount)
+	}
+	if v.TranslatedDocumentsCount != nil {
+		s.WriteInt32(schemas.JobDetails_TranslatedDocumentsCount, *v.TranslatedDocumentsCount)
+	}
+}
+func (v *JobDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobDetails_DocumentsWithErrorsCount:
+			v.DocumentsWithErrorsCount = new(int32)
+			return d.ReadInt32(schemas.JobDetails_DocumentsWithErrorsCount, v.DocumentsWithErrorsCount)
+		case schemas.JobDetails_InputDocumentsCount:
+			v.InputDocumentsCount = new(int32)
+			return d.ReadInt32(schemas.JobDetails_InputDocumentsCount, v.InputDocumentsCount)
+		case schemas.JobDetails_TranslatedDocumentsCount:
+			v.TranslatedDocumentsCount = new(int32)
+			return d.ReadInt32(schemas.JobDetails_TranslatedDocumentsCount, v.TranslatedDocumentsCount)
+		}
+		return nil
+	})
 }
 
 // A supported language.
@@ -148,6 +296,34 @@ type Language struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Language) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Language)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Language) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LanguageCode != nil {
+		s.WriteString(schemas.Language_LanguageCode, *v.LanguageCode)
+	}
+	if v.LanguageName != nil {
+		s.WriteString(schemas.Language_LanguageName, *v.LanguageName)
+	}
+}
+func (v *Language) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Language, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Language_LanguageCode:
+			v.LanguageCode = new(string)
+			return d.ReadString(schemas.Language_LanguageCode, v.LanguageCode)
+		case schemas.Language_LanguageName:
+			v.LanguageName = new(string)
+			return d.ReadString(schemas.Language_LanguageName, v.LanguageName)
+		}
+		return nil
+	})
+}
+
 // The output configuration properties for a batch translation job.
 type OutputDataConfig struct {
 
@@ -163,6 +339,36 @@ type OutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionKey != nil {
+		s.WriteStruct(schemas.OutputDataConfig_EncryptionKey)
+		v.EncryptionKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.OutputDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *OutputDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputDataConfig_EncryptionKey:
+			v.EncryptionKey = &EncryptionKey{}
+			return v.EncryptionKey.Deserialize(d)
+		case schemas.OutputDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.OutputDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
+}
+
 // Specifies the format and S3 location of the parallel data input file.
 type ParallelDataConfig struct {
 
@@ -174,6 +380,38 @@ type ParallelDataConfig struct {
 	S3Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParallelDataConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParallelDataConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParallelDataConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.ParallelDataConfig_Format, string(v.Format))
+	}
+	if v.S3Uri != nil {
+		s.WriteString(schemas.ParallelDataConfig_S3Uri, *v.S3Uri)
+	}
+}
+func (v *ParallelDataConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParallelDataConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParallelDataConfig_Format:
+			var ev string
+			if err := d.ReadString(schemas.ParallelDataConfig_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = ParallelDataFormat(ev)
+			return nil
+		case schemas.ParallelDataConfig_S3Uri:
+			v.S3Uri = new(string)
+			return d.ReadString(schemas.ParallelDataConfig_S3Uri, v.S3Uri)
+		}
+		return nil
+	})
 }
 
 // The location of the most recent parallel data input file that was successfully
@@ -203,6 +441,34 @@ type ParallelDataDataLocation struct {
 	RepositoryType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParallelDataDataLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParallelDataDataLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParallelDataDataLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteString(schemas.ParallelDataDataLocation_Location, *v.Location)
+	}
+	if v.RepositoryType != nil {
+		s.WriteString(schemas.ParallelDataDataLocation_RepositoryType, *v.RepositoryType)
+	}
+}
+func (v *ParallelDataDataLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParallelDataDataLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParallelDataDataLocation_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.ParallelDataDataLocation_Location, v.Location)
+		case schemas.ParallelDataDataLocation_RepositoryType:
+			v.RepositoryType = new(string)
+			return d.ReadString(schemas.ParallelDataDataLocation_RepositoryType, v.RepositoryType)
+		}
+		return nil
+	})
 }
 
 // The properties of a parallel data resource.
@@ -270,6 +536,133 @@ type ParallelDataProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParallelDataProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParallelDataProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParallelDataProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ParallelDataProperties_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ParallelDataProperties_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ParallelDataProperties_Description, *v.Description)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteStruct(schemas.ParallelDataProperties_EncryptionKey)
+		v.EncryptionKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailedRecordCount != nil {
+		s.WriteInt64(schemas.ParallelDataProperties_FailedRecordCount, *v.FailedRecordCount)
+	}
+	if v.ImportedDataSize != nil {
+		s.WriteInt64(schemas.ParallelDataProperties_ImportedDataSize, *v.ImportedDataSize)
+	}
+	if v.ImportedRecordCount != nil {
+		s.WriteInt64(schemas.ParallelDataProperties_ImportedRecordCount, *v.ImportedRecordCount)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.ParallelDataProperties_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LatestUpdateAttemptAt != nil {
+		s.WriteTime(schemas.ParallelDataProperties_LatestUpdateAttemptAt, *v.LatestUpdateAttemptAt)
+	}
+	if v.LatestUpdateAttemptStatus != "" {
+		s.WriteString(schemas.ParallelDataProperties_LatestUpdateAttemptStatus, string(v.LatestUpdateAttemptStatus))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ParallelDataProperties_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ParallelDataProperties_Name, *v.Name)
+	}
+	if v.ParallelDataConfig != nil {
+		s.WriteStruct(schemas.ParallelDataProperties_ParallelDataConfig)
+		v.ParallelDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SkippedRecordCount != nil {
+		s.WriteInt64(schemas.ParallelDataProperties_SkippedRecordCount, *v.SkippedRecordCount)
+	}
+	if v.SourceLanguageCode != nil {
+		s.WriteString(schemas.ParallelDataProperties_SourceLanguageCode, *v.SourceLanguageCode)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ParallelDataProperties_Status, string(v.Status))
+	}
+	serializeLanguageCodeStringList(s, schemas.ParallelDataProperties_TargetLanguageCodes, v.TargetLanguageCodes)
+}
+func (v *ParallelDataProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParallelDataProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParallelDataProperties_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ParallelDataProperties_Arn, v.Arn)
+		case schemas.ParallelDataProperties_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ParallelDataProperties_CreatedAt, v.CreatedAt)
+		case schemas.ParallelDataProperties_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ParallelDataProperties_Description, v.Description)
+		case schemas.ParallelDataProperties_EncryptionKey:
+			v.EncryptionKey = &EncryptionKey{}
+			return v.EncryptionKey.Deserialize(d)
+		case schemas.ParallelDataProperties_FailedRecordCount:
+			v.FailedRecordCount = new(int64)
+			return d.ReadInt64(schemas.ParallelDataProperties_FailedRecordCount, v.FailedRecordCount)
+		case schemas.ParallelDataProperties_ImportedDataSize:
+			v.ImportedDataSize = new(int64)
+			return d.ReadInt64(schemas.ParallelDataProperties_ImportedDataSize, v.ImportedDataSize)
+		case schemas.ParallelDataProperties_ImportedRecordCount:
+			v.ImportedRecordCount = new(int64)
+			return d.ReadInt64(schemas.ParallelDataProperties_ImportedRecordCount, v.ImportedRecordCount)
+		case schemas.ParallelDataProperties_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ParallelDataProperties_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.ParallelDataProperties_LatestUpdateAttemptAt:
+			v.LatestUpdateAttemptAt = new(time.Time)
+			return d.ReadTime(schemas.ParallelDataProperties_LatestUpdateAttemptAt, v.LatestUpdateAttemptAt)
+		case schemas.ParallelDataProperties_LatestUpdateAttemptStatus:
+			var ev string
+			if err := d.ReadString(schemas.ParallelDataProperties_LatestUpdateAttemptStatus, &ev); err != nil {
+				return err
+			}
+			v.LatestUpdateAttemptStatus = ParallelDataStatus(ev)
+			return nil
+		case schemas.ParallelDataProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ParallelDataProperties_Message, v.Message)
+		case schemas.ParallelDataProperties_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ParallelDataProperties_Name, v.Name)
+		case schemas.ParallelDataProperties_ParallelDataConfig:
+			v.ParallelDataConfig = &ParallelDataConfig{}
+			return v.ParallelDataConfig.Deserialize(d)
+		case schemas.ParallelDataProperties_SkippedRecordCount:
+			v.SkippedRecordCount = new(int64)
+			return d.ReadInt64(schemas.ParallelDataProperties_SkippedRecordCount, v.SkippedRecordCount)
+		case schemas.ParallelDataProperties_SourceLanguageCode:
+			v.SourceLanguageCode = new(string)
+			return d.ReadString(schemas.ParallelDataProperties_SourceLanguageCode, v.SourceLanguageCode)
+		case schemas.ParallelDataProperties_Status:
+			var ev string
+			if err := d.ReadString(schemas.ParallelDataProperties_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ParallelDataStatus(ev)
+			return nil
+		case schemas.ParallelDataProperties_TargetLanguageCodes:
+			return deserializeLanguageCodeStringList(d, schemas.ParallelDataProperties_TargetLanguageCodes, &v.TargetLanguageCodes)
+		}
+		return nil
+	})
+}
+
 // A key-value pair that adds as a metadata to a resource used by Amazon
 // Translate.
 type Tag struct {
@@ -289,6 +682,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // The term being translated by the custom terminology.
 type Term struct {
 
@@ -299,6 +720,34 @@ type Term struct {
 	TargetText *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Term) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Term)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Term) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceText != nil {
+		s.WriteString(schemas.Term_SourceText, *v.SourceText)
+	}
+	if v.TargetText != nil {
+		s.WriteString(schemas.Term_TargetText, *v.TargetText)
+	}
+}
+func (v *Term) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Term, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Term_SourceText:
+			v.SourceText = new(string)
+			return d.ReadString(schemas.Term_SourceText, v.SourceText)
+		case schemas.Term_TargetText:
+			v.TargetText = new(string)
+			return d.ReadString(schemas.Term_TargetText, v.TargetText)
+		}
+		return nil
+	})
 }
 
 // The data associated with the custom terminology. For information about the
@@ -339,6 +788,47 @@ type TerminologyData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminologyData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminologyData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminologyData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Directionality != "" {
+		s.WriteString(schemas.TerminologyData_Directionality, string(v.Directionality))
+	}
+	if v.File != nil {
+		s.WriteBlob(schemas.TerminologyData_File, v.File)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.TerminologyData_Format, string(v.Format))
+	}
+}
+func (v *TerminologyData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminologyData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminologyData_Directionality:
+			var ev string
+			if err := d.ReadString(schemas.TerminologyData_Directionality, &ev); err != nil {
+				return err
+			}
+			v.Directionality = Directionality(ev)
+			return nil
+		case schemas.TerminologyData_File:
+			return d.ReadBlob(schemas.TerminologyData_File, &v.File)
+		case schemas.TerminologyData_Format:
+			var ev string
+			if err := d.ReadString(schemas.TerminologyData_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = TerminologyDataFormat(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The location of the custom terminology data.
 type TerminologyDataLocation struct {
 
@@ -366,6 +856,34 @@ type TerminologyDataLocation struct {
 	RepositoryType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TerminologyDataLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminologyDataLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminologyDataLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Location != nil {
+		s.WriteString(schemas.TerminologyDataLocation_Location, *v.Location)
+	}
+	if v.RepositoryType != nil {
+		s.WriteString(schemas.TerminologyDataLocation_RepositoryType, *v.RepositoryType)
+	}
+}
+func (v *TerminologyDataLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminologyDataLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminologyDataLocation_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.TerminologyDataLocation_Location, v.Location)
+		case schemas.TerminologyDataLocation_RepositoryType:
+			v.RepositoryType = new(string)
+			return d.ReadString(schemas.TerminologyDataLocation_RepositoryType, v.RepositoryType)
+		}
+		return nil
+	})
 }
 
 // The properties of the custom terminology.
@@ -426,6 +944,113 @@ type TerminologyProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminologyProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminologyProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminologyProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.TerminologyProperties_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.TerminologyProperties_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.TerminologyProperties_Description, *v.Description)
+	}
+	if v.Directionality != "" {
+		s.WriteString(schemas.TerminologyProperties_Directionality, string(v.Directionality))
+	}
+	if v.EncryptionKey != nil {
+		s.WriteStruct(schemas.TerminologyProperties_EncryptionKey)
+		v.EncryptionKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.TerminologyProperties_Format, string(v.Format))
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.TerminologyProperties_LastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TerminologyProperties_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TerminologyProperties_Name, *v.Name)
+	}
+	if v.SizeBytes != nil {
+		s.WriteInt32(schemas.TerminologyProperties_SizeBytes, *v.SizeBytes)
+	}
+	if v.SkippedTermCount != nil {
+		s.WriteInt32(schemas.TerminologyProperties_SkippedTermCount, *v.SkippedTermCount)
+	}
+	if v.SourceLanguageCode != nil {
+		s.WriteString(schemas.TerminologyProperties_SourceLanguageCode, *v.SourceLanguageCode)
+	}
+	serializeLanguageCodeStringList(s, schemas.TerminologyProperties_TargetLanguageCodes, v.TargetLanguageCodes)
+	if v.TermCount != nil {
+		s.WriteInt32(schemas.TerminologyProperties_TermCount, *v.TermCount)
+	}
+}
+func (v *TerminologyProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminologyProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminologyProperties_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.TerminologyProperties_Arn, v.Arn)
+		case schemas.TerminologyProperties_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.TerminologyProperties_CreatedAt, v.CreatedAt)
+		case schemas.TerminologyProperties_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.TerminologyProperties_Description, v.Description)
+		case schemas.TerminologyProperties_Directionality:
+			var ev string
+			if err := d.ReadString(schemas.TerminologyProperties_Directionality, &ev); err != nil {
+				return err
+			}
+			v.Directionality = Directionality(ev)
+			return nil
+		case schemas.TerminologyProperties_EncryptionKey:
+			v.EncryptionKey = &EncryptionKey{}
+			return v.EncryptionKey.Deserialize(d)
+		case schemas.TerminologyProperties_Format:
+			var ev string
+			if err := d.ReadString(schemas.TerminologyProperties_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = TerminologyDataFormat(ev)
+			return nil
+		case schemas.TerminologyProperties_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.TerminologyProperties_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.TerminologyProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TerminologyProperties_Message, v.Message)
+		case schemas.TerminologyProperties_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TerminologyProperties_Name, v.Name)
+		case schemas.TerminologyProperties_SizeBytes:
+			v.SizeBytes = new(int32)
+			return d.ReadInt32(schemas.TerminologyProperties_SizeBytes, v.SizeBytes)
+		case schemas.TerminologyProperties_SkippedTermCount:
+			v.SkippedTermCount = new(int32)
+			return d.ReadInt32(schemas.TerminologyProperties_SkippedTermCount, v.SkippedTermCount)
+		case schemas.TerminologyProperties_SourceLanguageCode:
+			v.SourceLanguageCode = new(string)
+			return d.ReadString(schemas.TerminologyProperties_SourceLanguageCode, v.SourceLanguageCode)
+		case schemas.TerminologyProperties_TargetLanguageCodes:
+			return deserializeLanguageCodeStringList(d, schemas.TerminologyProperties_TargetLanguageCodes, &v.TargetLanguageCodes)
+		case schemas.TerminologyProperties_TermCount:
+			v.TermCount = new(int32)
+			return d.ReadInt32(schemas.TerminologyProperties_TermCount, v.TermCount)
+		}
+		return nil
+	})
+}
+
 // Provides information for filtering a list of translation jobs. For more
 // information, see ListTextTranslationJobs.
 type TextTranslationJobFilter struct {
@@ -447,6 +1072,50 @@ type TextTranslationJobFilter struct {
 	SubmittedBeforeTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TextTranslationJobFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextTranslationJobFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextTranslationJobFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.TextTranslationJobFilter_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.TextTranslationJobFilter_JobStatus, string(v.JobStatus))
+	}
+	if v.SubmittedAfterTime != nil {
+		s.WriteTime(schemas.TextTranslationJobFilter_SubmittedAfterTime, *v.SubmittedAfterTime)
+	}
+	if v.SubmittedBeforeTime != nil {
+		s.WriteTime(schemas.TextTranslationJobFilter_SubmittedBeforeTime, *v.SubmittedBeforeTime)
+	}
+}
+func (v *TextTranslationJobFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextTranslationJobFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextTranslationJobFilter_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.TextTranslationJobFilter_JobName, v.JobName)
+		case schemas.TextTranslationJobFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TextTranslationJobFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.TextTranslationJobFilter_SubmittedAfterTime:
+			v.SubmittedAfterTime = new(time.Time)
+			return d.ReadTime(schemas.TextTranslationJobFilter_SubmittedAfterTime, v.SubmittedAfterTime)
+		case schemas.TextTranslationJobFilter_SubmittedBeforeTime:
+			v.SubmittedBeforeTime = new(time.Time)
+			return d.ReadTime(schemas.TextTranslationJobFilter_SubmittedBeforeTime, v.SubmittedBeforeTime)
+		}
+		return nil
+	})
 }
 
 // Provides information about a translation job.
@@ -508,6 +1177,115 @@ type TextTranslationJobProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextTranslationJobProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextTranslationJobProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextTranslationJobProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.TextTranslationJobProperties_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TextTranslationJobProperties_EndTime, *v.EndTime)
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.TextTranslationJobProperties_InputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobDetails != nil {
+		s.WriteStruct(schemas.TextTranslationJobProperties_JobDetails)
+		v.JobDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.TextTranslationJobProperties_JobId, *v.JobId)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.TextTranslationJobProperties_JobName, *v.JobName)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.TextTranslationJobProperties_JobStatus, string(v.JobStatus))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TextTranslationJobProperties_Message, *v.Message)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.TextTranslationJobProperties_OutputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceNameList(s, schemas.TextTranslationJobProperties_ParallelDataNames, v.ParallelDataNames)
+	if v.Settings != nil {
+		s.WriteStruct(schemas.TextTranslationJobProperties_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceLanguageCode != nil {
+		s.WriteString(schemas.TextTranslationJobProperties_SourceLanguageCode, *v.SourceLanguageCode)
+	}
+	if v.SubmittedTime != nil {
+		s.WriteTime(schemas.TextTranslationJobProperties_SubmittedTime, *v.SubmittedTime)
+	}
+	serializeTargetLanguageCodeStringList(s, schemas.TextTranslationJobProperties_TargetLanguageCodes, v.TargetLanguageCodes)
+	serializeResourceNameList(s, schemas.TextTranslationJobProperties_TerminologyNames, v.TerminologyNames)
+}
+func (v *TextTranslationJobProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextTranslationJobProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextTranslationJobProperties_DataAccessRoleArn:
+			v.DataAccessRoleArn = new(string)
+			return d.ReadString(schemas.TextTranslationJobProperties_DataAccessRoleArn, v.DataAccessRoleArn)
+		case schemas.TextTranslationJobProperties_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TextTranslationJobProperties_EndTime, v.EndTime)
+		case schemas.TextTranslationJobProperties_InputDataConfig:
+			v.InputDataConfig = &InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.TextTranslationJobProperties_JobDetails:
+			v.JobDetails = &JobDetails{}
+			return v.JobDetails.Deserialize(d)
+		case schemas.TextTranslationJobProperties_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.TextTranslationJobProperties_JobId, v.JobId)
+		case schemas.TextTranslationJobProperties_JobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.TextTranslationJobProperties_JobName, v.JobName)
+		case schemas.TextTranslationJobProperties_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.TextTranslationJobProperties_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		case schemas.TextTranslationJobProperties_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TextTranslationJobProperties_Message, v.Message)
+		case schemas.TextTranslationJobProperties_OutputDataConfig:
+			v.OutputDataConfig = &OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.TextTranslationJobProperties_ParallelDataNames:
+			return deserializeResourceNameList(d, schemas.TextTranslationJobProperties_ParallelDataNames, &v.ParallelDataNames)
+		case schemas.TextTranslationJobProperties_Settings:
+			v.Settings = &TranslationSettings{}
+			return v.Settings.Deserialize(d)
+		case schemas.TextTranslationJobProperties_SourceLanguageCode:
+			v.SourceLanguageCode = new(string)
+			return d.ReadString(schemas.TextTranslationJobProperties_SourceLanguageCode, v.SourceLanguageCode)
+		case schemas.TextTranslationJobProperties_SubmittedTime:
+			v.SubmittedTime = new(time.Time)
+			return d.ReadTime(schemas.TextTranslationJobProperties_SubmittedTime, v.SubmittedTime)
+		case schemas.TextTranslationJobProperties_TargetLanguageCodes:
+			return deserializeTargetLanguageCodeStringList(d, schemas.TextTranslationJobProperties_TargetLanguageCodes, &v.TargetLanguageCodes)
+		case schemas.TextTranslationJobProperties_TerminologyNames:
+			return deserializeResourceNameList(d, schemas.TextTranslationJobProperties_TerminologyNames, &v.TerminologyNames)
+		}
+		return nil
+	})
+}
+
 // The translated content.
 type TranslatedDocument struct {
 
@@ -517,6 +1295,27 @@ type TranslatedDocument struct {
 	Content []byte
 
 	noSmithyDocumentSerde
+}
+
+func (v *TranslatedDocument) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslatedDocument)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslatedDocument) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteBlob(schemas.TranslatedDocument_Content, v.Content)
+	}
+}
+func (v *TranslatedDocument) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranslatedDocument, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranslatedDocument_Content:
+			return d.ReadBlob(schemas.TranslatedDocument_Content, &v.Content)
+		}
+		return nil
+	})
 }
 
 // Settings to configure your translation output. You can configure the following
@@ -580,6 +1379,52 @@ type TranslationSettings struct {
 	Profanity Profanity
 
 	noSmithyDocumentSerde
+}
+
+func (v *TranslationSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslationSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslationSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Brevity != "" {
+		s.WriteString(schemas.TranslationSettings_Brevity, string(v.Brevity))
+	}
+	if v.Formality != "" {
+		s.WriteString(schemas.TranslationSettings_Formality, string(v.Formality))
+	}
+	if v.Profanity != "" {
+		s.WriteString(schemas.TranslationSettings_Profanity, string(v.Profanity))
+	}
+}
+func (v *TranslationSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranslationSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranslationSettings_Brevity:
+			var ev string
+			if err := d.ReadString(schemas.TranslationSettings_Brevity, &ev); err != nil {
+				return err
+			}
+			v.Brevity = Brevity(ev)
+			return nil
+		case schemas.TranslationSettings_Formality:
+			var ev string
+			if err := d.ReadString(schemas.TranslationSettings_Formality, &ev); err != nil {
+				return err
+			}
+			v.Formality = Formality(ev)
+			return nil
+		case schemas.TranslationSettings_Profanity:
+			var ev string
+			if err := d.ReadString(schemas.TranslationSettings_Profanity, &ev); err != nil {
+				return err
+			}
+			v.Profanity = Profanity(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

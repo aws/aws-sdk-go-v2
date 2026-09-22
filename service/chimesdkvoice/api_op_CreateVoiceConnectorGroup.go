@@ -4,11 +4,10 @@ package chimesdkvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Chime SDK Voice Connector group under the administrator's AWS
@@ -39,10 +38,28 @@ type CreateVoiceConnectorGroupInput struct {
 	// This member is required.
 	Name *string
 
+	CallDistributionType types.CallDistributionType
+
 	// Lists the Voice Connectors that inbound calls are routed to.
 	VoiceConnectorItems []types.VoiceConnectorItem
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateVoiceConnectorGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceConnectorGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceConnectorGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallDistributionType != "" {
+		s.WriteString(schemas.CreateVoiceConnectorGroupRequest_CallDistributionType, string(v.CallDistributionType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVoiceConnectorGroupRequest_Name, *v.Name)
+	}
+	serializeVoiceConnectorItemList(s, schemas.CreateVoiceConnectorGroupRequest_VoiceConnectorItems, v.VoiceConnectorItems)
 }
 
 type CreateVoiceConnectorGroupOutput struct {
@@ -56,77 +73,50 @@ type CreateVoiceConnectorGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVoiceConnectorGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceConnectorGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceConnectorGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VoiceConnectorGroup != nil {
+		s.WriteStruct(schemas.CreateVoiceConnectorGroupResponse_VoiceConnectorGroup)
+		v.VoiceConnectorGroup.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateVoiceConnectorGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVoiceConnectorGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVoiceConnectorGroupResponse_VoiceConnectorGroup:
+			v.VoiceConnectorGroup = &types.VoiceConnectorGroup{}
+			return v.VoiceConnectorGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnectorGroup, schemas.CreateVoiceConnectorGroupRequest, schemas.CreateVoiceConnectorGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVoiceConnectorGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnectorGroup, schemas.CreateVoiceConnectorGroupRequest, schemas.CreateVoiceConnectorGroupResponse), output: &CreateVoiceConnectorGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVoiceConnectorGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVoiceConnectorGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateVoiceConnectorGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVoiceConnectorGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +131,8 @@ func (c *Client) addOperationCreateVoiceConnectorGroupMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateVoiceConnectorGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVoiceConnectorGroup",
-	}
 }

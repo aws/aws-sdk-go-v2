@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes a locale from a bot.
@@ -53,6 +52,24 @@ type DeleteBotLocaleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotLocaleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotLocaleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotLocaleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotLocaleRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DeleteBotLocaleRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DeleteBotLocaleRequest_localeId, *v.LocaleId)
+	}
+}
+
 type DeleteBotLocaleOutput struct {
 
 	// The identifier of the bot that contained the deleted locale.
@@ -75,77 +92,70 @@ type DeleteBotLocaleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBotLocaleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBotLocaleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.DeleteBotLocaleResponse_botId, *v.BotId)
+	}
+	if v.BotLocaleStatus != "" {
+		s.WriteString(schemas.DeleteBotLocaleResponse_botLocaleStatus, string(v.BotLocaleStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.DeleteBotLocaleResponse_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.DeleteBotLocaleResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *DeleteBotLocaleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBotLocaleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBotLocaleResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.DeleteBotLocaleResponse_botId, v.BotId)
+		case schemas.DeleteBotLocaleResponse_botLocaleStatus:
+			var ev string
+			if err := d.ReadString(schemas.DeleteBotLocaleResponse_botLocaleStatus, &ev); err != nil {
+				return err
+			}
+			v.BotLocaleStatus = types.BotLocaleStatus(ev)
+			return nil
+		case schemas.DeleteBotLocaleResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.DeleteBotLocaleResponse_botVersion, v.BotVersion)
+		case schemas.DeleteBotLocaleResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.DeleteBotLocaleResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotLocale, schemas.DeleteBotLocaleRequest, schemas.DeleteBotLocaleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBotLocale{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBotLocale, schemas.DeleteBotLocaleRequest, schemas.DeleteBotLocaleResponse), output: &DeleteBotLocaleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBotLocale{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBotLocale"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteBotLocaleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBotLocale(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +170,8 @@ func (c *Client) addOperationDeleteBotLocaleMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteBotLocale(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteBotLocale",
-	}
 }

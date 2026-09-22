@@ -1,0 +1,5 @@
+POST /organization/overview
+
+Content-Type: application/json
+
+{"AccountIds":["__Member__","__Member__"],"FromTime":946684800,"OrganizationalUnitIds":["__Member__","__Member__"],"ToTime":946684800}

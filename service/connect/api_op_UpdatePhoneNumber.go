@@ -5,9 +5,9 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates your claimed phone number from its current Connect Customer instance or
@@ -68,6 +68,27 @@ type UpdatePhoneNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePhoneNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePhoneNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePhoneNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_ClientToken, *v.ClientToken)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_InstanceId, *v.InstanceId)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_PhoneNumberId, *v.PhoneNumberId)
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.UpdatePhoneNumberRequest_TargetArn, *v.TargetArn)
+	}
+}
+
 type UpdatePhoneNumberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the phone number.
@@ -82,65 +103,48 @@ type UpdatePhoneNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePhoneNumberOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePhoneNumberResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePhoneNumberOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PhoneNumberArn != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResponse_PhoneNumberArn, *v.PhoneNumberArn)
+	}
+	if v.PhoneNumberId != nil {
+		s.WriteString(schemas.UpdatePhoneNumberResponse_PhoneNumberId, *v.PhoneNumberId)
+	}
+}
+func (v *UpdatePhoneNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePhoneNumberResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePhoneNumberResponse_PhoneNumberArn:
+			v.PhoneNumberArn = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResponse_PhoneNumberArn, v.PhoneNumberArn)
+		case schemas.UpdatePhoneNumberResponse_PhoneNumberId:
+			v.PhoneNumberId = new(string)
+			return d.ReadString(schemas.UpdatePhoneNumberResponse_PhoneNumberId, v.PhoneNumberId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePhoneNumber, schemas.UpdatePhoneNumberRequest, schemas.UpdatePhoneNumberResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdatePhoneNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePhoneNumber, schemas.UpdatePhoneNumberRequest, schemas.UpdatePhoneNumberResponse), output: &UpdatePhoneNumberOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdatePhoneNumber{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePhoneNumber"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -150,12 +154,6 @@ func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpUpdatePhoneNumberValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePhoneNumber(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,12 +166,6 @@ func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -213,12 +205,4 @@ func (m *idempotencyToken_initializeOpUpdatePhoneNumber) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opUpdatePhoneNumberMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdatePhoneNumber{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdatePhoneNumber(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdatePhoneNumber",
-	}
 }

@@ -5,10 +5,10 @@ package schemas
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/schemas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/schemas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the discoverers.
@@ -47,6 +47,27 @@ type ListDiscoverersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoverersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDiscoverersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDiscoverersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DiscovererIdPrefix != nil {
+		s.WriteString(schemas.ListDiscoverersRequest_DiscovererIdPrefix, *v.DiscovererIdPrefix)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListDiscoverersRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDiscoverersRequest_NextToken, *v.NextToken)
+	}
+	if v.SourceArnPrefix != nil {
+		s.WriteString(schemas.ListDiscoverersRequest_SourceArnPrefix, *v.SourceArnPrefix)
+	}
+}
+
 type ListDiscoverersOutput struct {
 
 	// An array of DiscovererSummary information.
@@ -63,74 +84,48 @@ type ListDiscoverersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoverersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDiscoverersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDiscoverersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfDiscovererSummary(s, schemas.ListDiscoverersResponse_Discoverers, v.Discoverers)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDiscoverersResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDiscoverersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDiscoverersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDiscoverersResponse_Discoverers:
+			return deserialize__listOfDiscovererSummary(d, schemas.ListDiscoverersResponse_Discoverers, &v.Discoverers)
+		case schemas.ListDiscoverersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDiscoverersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDiscoverersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoverers, schemas.ListDiscoverersRequest, schemas.ListDiscoverersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDiscoverers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoverers, schemas.ListDiscoverersRequest, schemas.ListDiscoverersResponse), output: &ListDiscoverersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDiscoverers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDiscoverers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDiscoverers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +138,6 @@ func (c *Client) addOperationListDiscoverersMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +237,3 @@ type ListDiscoverersAPIClient interface {
 }
 
 var _ ListDiscoverersAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDiscoverers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDiscoverers",
-	}
-}

@@ -1,0 +1,5 @@
+PUT /v2/email/account/pricing-attributes
+
+Content-Type: application/json
+
+{"Plan":"NONE"}

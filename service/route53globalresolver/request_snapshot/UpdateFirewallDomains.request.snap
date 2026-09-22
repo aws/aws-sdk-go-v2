@@ -1,0 +1,5 @@
+PATCH /firewall-domain-lists/__FirewallDomainListId__/domains
+
+Content-Type: application/json
+
+{"domains":["__Member__","__Member__"],"operation":"__Operation__"}

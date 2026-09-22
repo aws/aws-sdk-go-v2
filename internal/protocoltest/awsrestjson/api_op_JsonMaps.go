@@ -4,11 +4,10 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The example tests basic map serialization.
@@ -41,6 +40,37 @@ type JsonMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonMapsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonMapsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDenseBooleanMap(s, schemas.JsonMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
+	serializeDenseNumberMap(s, schemas.JsonMapsInputOutput_denseNumberMap, v.DenseNumberMap)
+	serializeDenseSetMap(s, schemas.JsonMapsInputOutput_denseSetMap, v.DenseSetMap)
+	serializeDenseStringMap(s, schemas.JsonMapsInputOutput_denseStringMap, v.DenseStringMap)
+	serializeDenseStructMap(s, schemas.JsonMapsInputOutput_denseStructMap, v.DenseStructMap)
+}
+func (v *JsonMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonMapsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonMapsInputOutput_denseBooleanMap:
+			return deserializeDenseBooleanMap(d, schemas.JsonMapsInputOutput_denseBooleanMap, &v.DenseBooleanMap)
+		case schemas.JsonMapsInputOutput_denseNumberMap:
+			return deserializeDenseNumberMap(d, schemas.JsonMapsInputOutput_denseNumberMap, &v.DenseNumberMap)
+		case schemas.JsonMapsInputOutput_denseSetMap:
+			return deserializeDenseSetMap(d, schemas.JsonMapsInputOutput_denseSetMap, &v.DenseSetMap)
+		case schemas.JsonMapsInputOutput_denseStringMap:
+			return deserializeDenseStringMap(d, schemas.JsonMapsInputOutput_denseStringMap, &v.DenseStringMap)
+		case schemas.JsonMapsInputOutput_denseStructMap:
+			return deserializeDenseStructMap(d, schemas.JsonMapsInputOutput_denseStructMap, &v.DenseStructMap)
+		}
+		return nil
+	})
+}
+
 type JsonMapsOutput struct {
 	DenseBooleanMap map[string]bool
 
@@ -58,74 +88,54 @@ type JsonMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonMapsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonMapsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDenseBooleanMap(s, schemas.JsonMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
+	serializeDenseNumberMap(s, schemas.JsonMapsInputOutput_denseNumberMap, v.DenseNumberMap)
+	serializeDenseSetMap(s, schemas.JsonMapsInputOutput_denseSetMap, v.DenseSetMap)
+	serializeDenseStringMap(s, schemas.JsonMapsInputOutput_denseStringMap, v.DenseStringMap)
+	serializeDenseStructMap(s, schemas.JsonMapsInputOutput_denseStructMap, v.DenseStructMap)
+}
+func (v *JsonMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonMapsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonMapsInputOutput_denseBooleanMap:
+			return deserializeDenseBooleanMap(d, schemas.JsonMapsInputOutput_denseBooleanMap, &v.DenseBooleanMap)
+		case schemas.JsonMapsInputOutput_denseNumberMap:
+			return deserializeDenseNumberMap(d, schemas.JsonMapsInputOutput_denseNumberMap, &v.DenseNumberMap)
+		case schemas.JsonMapsInputOutput_denseSetMap:
+			return deserializeDenseSetMap(d, schemas.JsonMapsInputOutput_denseSetMap, &v.DenseSetMap)
+		case schemas.JsonMapsInputOutput_denseStringMap:
+			return deserializeDenseStringMap(d, schemas.JsonMapsInputOutput_denseStringMap, &v.DenseStringMap)
+		case schemas.JsonMapsInputOutput_denseStructMap:
+			return deserializeDenseStructMap(d, schemas.JsonMapsInputOutput_denseStructMap, &v.DenseStructMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJsonMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonMaps, schemas.JsonMapsInputOutput, schemas.JsonMapsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonMaps, schemas.JsonMapsInputOutput, schemas.JsonMapsInputOutput), output: &JsonMapsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonMaps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "JsonMaps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJsonMaps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +150,8 @@ func (c *Client) addOperationJsonMapsMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opJsonMaps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "JsonMaps",
-	}
 }

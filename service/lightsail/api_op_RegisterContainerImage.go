@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers a container image to your Amazon Lightsail container service.
@@ -72,6 +71,24 @@ type RegisterContainerImageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterContainerImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterContainerImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterContainerImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Digest != nil {
+		s.WriteString(schemas.RegisterContainerImageRequest_digest, *v.Digest)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.RegisterContainerImageRequest_label, *v.Label)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.RegisterContainerImageRequest_serviceName, *v.ServiceName)
+	}
+}
+
 type RegisterContainerImageOutput struct {
 
 	// An object that describes a container image that is registered to a Lightsail
@@ -84,77 +101,50 @@ type RegisterContainerImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterContainerImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterContainerImageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterContainerImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainerImage != nil {
+		s.WriteStruct(schemas.RegisterContainerImageResult_containerImage)
+		v.ContainerImage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegisterContainerImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterContainerImageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterContainerImageResult_containerImage:
+			v.ContainerImage = &types.ContainerImage{}
+			return v.ContainerImage.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterContainerImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterContainerImage, schemas.RegisterContainerImageRequest, schemas.RegisterContainerImageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterContainerImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterContainerImage, schemas.RegisterContainerImageRequest, schemas.RegisterContainerImageResult), output: &RegisterContainerImageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterContainerImage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterContainerImage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterContainerImageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterContainerImage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +159,8 @@ func (c *Client) addOperationRegisterContainerImageMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterContainerImage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterContainerImage",
-	}
 }

@@ -4,11 +4,10 @@ package appstream
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appstream/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an app block builder.
@@ -42,6 +41,18 @@ type StartAppBlockBuilderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAppBlockBuilderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAppBlockBuilderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAppBlockBuilderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.StartAppBlockBuilderRequest_Name, *v.Name)
+	}
+}
+
 type StartAppBlockBuilderOutput struct {
 
 	// Describes an app block builder.
@@ -53,77 +64,53 @@ type StartAppBlockBuilderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAppBlockBuilderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAppBlockBuilderResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAppBlockBuilderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBlockBuilder != nil {
+		s.WriteStruct(schemas.StartAppBlockBuilderResult_AppBlockBuilder)
+		v.AppBlockBuilder.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartAppBlockBuilderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAppBlockBuilderResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAppBlockBuilderResult_AppBlockBuilder:
+			v.AppBlockBuilder = &types.AppBlockBuilder{}
+			return v.AppBlockBuilder.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAppBlockBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAppBlockBuilder, schemas.StartAppBlockBuilderRequest, schemas.StartAppBlockBuilderResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartAppBlockBuilder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAppBlockBuilder, schemas.StartAppBlockBuilderRequest, schemas.StartAppBlockBuilderResult), output: &StartAppBlockBuilderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartAppBlockBuilder{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartAppBlockBuilder"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartAppBlockBuilderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartAppBlockBuilder(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +125,8 @@ func (c *Client) addOperationStartAppBlockBuilderMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartAppBlockBuilder(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartAppBlockBuilder",
-	}
 }

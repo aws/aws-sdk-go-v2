@@ -26,6 +26,7 @@ import java.util.logging.Logger;
 
 import software.amazon.smithy.aws.go.codegen.customization.AccountIDEndpointRouting;
 import software.amazon.smithy.aws.go.codegen.customization.auth.AwsHttpBearerAuthScheme;
+import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoDelegator;
@@ -36,7 +37,9 @@ import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
+import software.amazon.smithy.go.codegen.integration.DefaultHTTPClient;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
+import software.amazon.smithy.go.codegen.integration.Replaces;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.go.codegen.requestcompression.RequestCompression;
 import software.amazon.smithy.model.Model;
@@ -49,7 +52,12 @@ import static software.amazon.smithy.go.codegen.SymbolUtils.sliceOf;
 
 /**
  * Registers additional AWS specific client configuration fields
+ *
+ * <p>Replaces smithy-go's generic {@link DefaultHTTPClient}: the SDK supplies its own HTTPClient config field and
+ * {@code resolveHTTPClient} default (a buildable client with AWS transport defaults), so the generic default is
+ * removed to avoid a duplicate resolver.
  */
+@Replaces(DefaultHTTPClient.class)
 public class AddAwsConfigFields implements GoIntegration {
     private static final Logger LOGGER = Logger.getLogger(AddAwsConfigFields.class.getName());
 
@@ -88,6 +96,8 @@ public class AddAwsConfigFields implements GoIntegration {
     private static final String REQUEST_CHECKSUM_CALCULATION = "RequestChecksumCalculation";
 
     private static final String RESPONSE_CHECKSUM_VALIDATION = "ResponseChecksumValidation";
+
+    private static final String DISABLE_CLOCK_SKEW_CORRECTION = "DisableClockSkewCorrection";
 
     private static final List<AwsConfigField> AWS_CONFIG_FIELDS = ListUtils.of(
             AwsConfigField.builder()
@@ -245,6 +255,13 @@ public class AddAwsConfigFields implements GoIntegration {
                     .generatedOnClient(false)
                     .build(),
             AwsConfigField.builder()
+                    .name(DISABLE_CLOCK_SKEW_CORRECTION)
+                    .type(getUniversalSymbol("bool"))
+                    .documentation("Disables SDK clock skew correction. When set, the SDK will not "
+                            + "adjust request signing timestamps to compensate for clock drift "
+                            + "between the client and the service.")
+                    .build(),
+            AwsConfigField.builder()
                     .name(SDK_ACCOUNTID_ENDPOINT_MODE)
                     .type(AwsGoDependency.AWS_CORE.func("AccountIDEndpointMode"))
                     .documentation("Indicates how aws account ID is applied in endpoint2.0 routing")
@@ -317,7 +334,7 @@ public class AddAwsConfigFields implements GoIntegration {
         ServiceShape serviceShape = settings.getService(model);
         goDelegator.useShapeWriter(serviceShape, w -> {
             writeAwsConfigConstructor(model, serviceShape, w);
-            writeAwsDefaultResolvers(w);
+            writeAwsDefaultResolvers(serviceShape, w);
         });
         goDelegator.useShapeTestWriter(serviceShape, w -> {
             writerAwsDefaultResolversTests(w);
@@ -331,9 +348,9 @@ public class AddAwsConfigFields implements GoIntegration {
                 .resolver(resolver);
     }
 
-    private void writeAwsDefaultResolvers(GoWriter writer) {
+    private void writeAwsDefaultResolvers(ServiceShape serviceShape, GoWriter writer) {
         writeHttpClientResolver(writer);
-        writeRetryerResolvers(writer);
+        writeRetryerResolvers(serviceShape, writer);
         writeRetryMaxAttemptsFinalizers(writer);
         writeAwsConfigEndpointResolver(writer);
         writeInterceptorResolver(writer);
@@ -351,7 +368,7 @@ public class AddAwsConfigFields implements GoIntegration {
         writeRetryResolverTests(writer);
     }
 
-    private void writeRetryerResolvers(GoWriter writer) {
+    private void writeRetryerResolvers(ServiceShape serviceShape, GoWriter writer) {
         writer.pushState();
 
         writer.putContext("resolvedDefaultsMode",
@@ -380,6 +397,31 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.putContext("adaptiveModeOptions", SymbolUtils.createValueSymbolBuilder("AdaptiveModeOptions",
                 AwsGoDependency.AWS_RETRY).build());
 
+        // Determine service-specific retry configuration.
+        String sdkId = serviceShape.expectTrait(ServiceTrait.class).getSdkId();
+        boolean isDynamoDB = sdkId.equals("DynamoDB") || sdkId.equals("DynamoDB Streams");
+
+        String serviceSpecificRetryOptions;
+        if (isDynamoDB) {
+            writer.addUseImports(SmithyGoDependency.TIME);
+            writer.addUseImports(SmithyGoDependency.OS);
+
+            serviceSpecificRetryOptions = """
+                    if os.Getenv("AWS_NEW_RETRIES_2026") == "true" {
+                        // DynamoDB uses a shorter base backoff (25ms) and one additional
+                        // retry attempt (4 total) by default.
+                        standardOptions = append(standardOptions, func(so *$standardOptions:T) {
+                            if o.$retryMaxAttemptsOption:L == 0 {
+                                so.MaxAttempts = 4
+                            }
+                            so.BaseDelay = 25 * time.Millisecond
+                        })
+                    }
+                    """;
+        } else {
+            serviceSpecificRetryOptions = "";
+        }
+
         writer.write("""
                 func $resolverName:L(o *Options) {
                     if o.$retryerOption:L != nil {
@@ -402,6 +444,7 @@ public class AddAwsConfigFields implements GoIntegration {
                             so.MaxAttempts = v
                         })
                     }
+                    """ + serviceSpecificRetryOptions + """
 
                     switch o.$retryModeOption:L {
                     case $retryModeAdaptive:T:
@@ -500,7 +543,7 @@ public class AddAwsConfigFields implements GoIntegration {
         writer.putContext("newStringReader", SymbolUtils.createValueSymbolBuilder("NewReader",
                 SmithyGoDependency.STRINGS).build());
         writer.putContext("nopCloser", SymbolUtils.createValueSymbolBuilder("NopCloser",
-                SmithyGoDependency.IOUTIL).build());
+                SmithyGoDependency.IO).build());
 
         writer.addUseImports(SmithyGoDependency.TESTING);
         writer.write("""
@@ -639,6 +682,8 @@ public class AddAwsConfigFields implements GoIntegration {
                 SmithyGoDependency.NET_HTTP).build());
         writer.putContext("errorf", SymbolUtils.createPointableSymbolBuilder("Errorf",
                 SmithyGoDependency.FMT).build());
+        writer.putContext("getServiceReadTimeout", SymbolUtils.createValueSymbolBuilder("GetServiceReadTimeout",
+                AwsGoDependency.INTERNAL_TIMEOUTS).build());
 
         writer.write("""
                 func $resolverName:L(o *Options) {
@@ -667,6 +712,12 @@ public class AddAwsConfigFields implements GoIntegration {
                                 transport.TLSHandshakeTimeout = tlsHandshakeTimeout
                             }
                         })
+                    }
+
+                    if _, ok := buildable.GetReadTimeout(); !ok {
+                        if timeout, ok := $getServiceReadTimeout:T(ServiceID); ok {
+                            buildable = buildable.WithReadTimeout(timeout)
+                        }
                     }
 
                     o.$optionName:L = buildable

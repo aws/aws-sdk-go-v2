@@ -4,11 +4,10 @@ package applicationsignals
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a service level objective (SLO), which can help you ensure that your
@@ -164,6 +163,44 @@ type CreateServiceLevelObjectiveInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceLevelObjectiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceLevelObjectiveInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceLevelObjectiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoInvestigationEnabled != nil {
+		s.WriteBool(schemas.CreateServiceLevelObjectiveInput_AutoInvestigationEnabled, *v.AutoInvestigationEnabled)
+	}
+	serializeBurnRateConfigurations(s, schemas.CreateServiceLevelObjectiveInput_BurnRateConfigurations, v.BurnRateConfigurations)
+	if v.CreateRecommendedSlo != false {
+		s.WriteBool(schemas.CreateServiceLevelObjectiveInput_CreateRecommendedSlo, v.CreateRecommendedSlo)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateServiceLevelObjectiveInput_Description, *v.Description)
+	}
+	if v.Goal != nil {
+		s.WriteStruct(schemas.CreateServiceLevelObjectiveInput_Goal)
+		v.Goal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateServiceLevelObjectiveInput_Name, *v.Name)
+	}
+	if v.RequestBasedSliConfig != nil {
+		s.WriteStruct(schemas.CreateServiceLevelObjectiveInput_RequestBasedSliConfig)
+		v.RequestBasedSliConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SliConfig != nil {
+		s.WriteStruct(schemas.CreateServiceLevelObjectiveInput_SliConfig)
+		v.SliConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateServiceLevelObjectiveInput_Tags, v.Tags)
+}
+
 type CreateServiceLevelObjectiveOutput struct {
 
 	// A structure that contains information about the SLO that you just created.
@@ -177,77 +214,50 @@ type CreateServiceLevelObjectiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServiceLevelObjectiveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServiceLevelObjectiveOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServiceLevelObjectiveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Slo != nil {
+		s.WriteStruct(schemas.CreateServiceLevelObjectiveOutput_Slo)
+		v.Slo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateServiceLevelObjectiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServiceLevelObjectiveOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServiceLevelObjectiveOutput_Slo:
+			v.Slo = &types.ServiceLevelObjective{}
+			return v.Slo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServiceLevelObjectiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceLevelObjective, schemas.CreateServiceLevelObjectiveInput, schemas.CreateServiceLevelObjectiveOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateServiceLevelObjective{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServiceLevelObjective, schemas.CreateServiceLevelObjectiveInput, schemas.CreateServiceLevelObjectiveOutput), output: &CreateServiceLevelObjectiveOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateServiceLevelObjective{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateServiceLevelObjective"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateServiceLevelObjectiveValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateServiceLevelObjective(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -262,22 +272,8 @@ func (c *Client) addOperationCreateServiceLevelObjectiveMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateServiceLevelObjective(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateServiceLevelObjective",
-	}
 }

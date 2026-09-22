@@ -4,11 +4,10 @@ package storagegateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a Network File System (NFS) file share. This operation is only
@@ -183,6 +182,65 @@ type UpdateNFSFileShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNFSFileShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNFSFileShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNFSFileShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditDestinationARN != nil {
+		s.WriteString(schemas.UpdateNFSFileShareInput_AuditDestinationARN, *v.AuditDestinationARN)
+	}
+	if v.CacheAttributes != nil {
+		s.WriteStruct(schemas.UpdateNFSFileShareInput_CacheAttributes)
+		v.CacheAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFileShareClientList(s, schemas.UpdateNFSFileShareInput_ClientList, v.ClientList)
+	if v.DefaultStorageClass != nil {
+		s.WriteString(schemas.UpdateNFSFileShareInput_DefaultStorageClass, *v.DefaultStorageClass)
+	}
+	if v.EncryptionType != "" {
+		s.WriteString(schemas.UpdateNFSFileShareInput_EncryptionType, string(v.EncryptionType))
+	}
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.UpdateNFSFileShareInput_FileShareARN, *v.FileShareARN)
+	}
+	if v.FileShareName != nil {
+		s.WriteString(schemas.UpdateNFSFileShareInput_FileShareName, *v.FileShareName)
+	}
+	if v.GuessMIMETypeEnabled != nil {
+		s.WriteBool(schemas.UpdateNFSFileShareInput_GuessMIMETypeEnabled, *v.GuessMIMETypeEnabled)
+	}
+	if v.KMSEncrypted != nil {
+		s.WriteBool(schemas.UpdateNFSFileShareInput_KMSEncrypted, *v.KMSEncrypted)
+	}
+	if v.KMSKey != nil {
+		s.WriteString(schemas.UpdateNFSFileShareInput_KMSKey, *v.KMSKey)
+	}
+	if v.NFSFileShareDefaults != nil {
+		s.WriteStruct(schemas.UpdateNFSFileShareInput_NFSFileShareDefaults)
+		v.NFSFileShareDefaults.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationPolicy != nil {
+		s.WriteString(schemas.UpdateNFSFileShareInput_NotificationPolicy, *v.NotificationPolicy)
+	}
+	if v.ObjectACL != "" {
+		s.WriteString(schemas.UpdateNFSFileShareInput_ObjectACL, string(v.ObjectACL))
+	}
+	if v.ReadOnly != nil {
+		s.WriteBool(schemas.UpdateNFSFileShareInput_ReadOnly, *v.ReadOnly)
+	}
+	if v.RequesterPays != nil {
+		s.WriteBool(schemas.UpdateNFSFileShareInput_RequesterPays, *v.RequesterPays)
+	}
+	if v.Squash != nil {
+		s.WriteString(schemas.UpdateNFSFileShareInput_Squash, *v.Squash)
+	}
+}
+
 // UpdateNFSFileShareOutput
 type UpdateNFSFileShareOutput struct {
 
@@ -195,77 +253,48 @@ type UpdateNFSFileShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNFSFileShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNFSFileShareOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNFSFileShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileShareARN != nil {
+		s.WriteString(schemas.UpdateNFSFileShareOutput_FileShareARN, *v.FileShareARN)
+	}
+}
+func (v *UpdateNFSFileShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNFSFileShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNFSFileShareOutput_FileShareARN:
+			v.FileShareARN = new(string)
+			return d.ReadString(schemas.UpdateNFSFileShareOutput_FileShareARN, v.FileShareARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNFSFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNFSFileShare, schemas.UpdateNFSFileShareInput, schemas.UpdateNFSFileShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNFSFileShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNFSFileShare, schemas.UpdateNFSFileShareInput, schemas.UpdateNFSFileShareOutput), output: &UpdateNFSFileShareOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateNFSFileShare{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateNFSFileShare"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateNFSFileShareValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNFSFileShare(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -280,22 +309,8 @@ func (c *Client) addOperationUpdateNFSFileShareMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateNFSFileShare(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateNFSFileShare",
-	}
 }

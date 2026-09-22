@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AnyScaleFrontendService.PutScheduledAction
+
+{"EndTime":946684800,"ResourceId":"__ResourceId__","ScalableDimension":"ecs:service:DesiredCount","ScalableTargetAction":{"MaxCapacity":1,"MinCapacity":1},"Schedule":"__Schedule__","ScheduledActionName":"__ScheduledActionName__","ServiceNamespace":"ecs","StartTime":946684800,"Timezone":"__Timezone__"}

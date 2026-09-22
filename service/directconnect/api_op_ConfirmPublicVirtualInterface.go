@@ -4,11 +4,10 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts ownership of a public virtual interface created by another Amazon Web
@@ -39,6 +38,18 @@ type ConfirmPublicVirtualInterfaceInput struct {
 	VirtualInterfaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfirmPublicVirtualInterfaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmPublicVirtualInterfaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmPublicVirtualInterfaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.ConfirmPublicVirtualInterfaceRequest_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
 }
 
 type ConfirmPublicVirtualInterfaceOutput struct {
@@ -83,77 +94,52 @@ type ConfirmPublicVirtualInterfaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmPublicVirtualInterfaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmPublicVirtualInterfaceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmPublicVirtualInterfaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualInterfaceState != "" {
+		s.WriteString(schemas.ConfirmPublicVirtualInterfaceResponse_virtualInterfaceState, string(v.VirtualInterfaceState))
+	}
+}
+func (v *ConfirmPublicVirtualInterfaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmPublicVirtualInterfaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmPublicVirtualInterfaceResponse_virtualInterfaceState:
+			var ev string
+			if err := d.ReadString(schemas.ConfirmPublicVirtualInterfaceResponse_virtualInterfaceState, &ev); err != nil {
+				return err
+			}
+			v.VirtualInterfaceState = types.VirtualInterfaceState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmPublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmPublicVirtualInterface, schemas.ConfirmPublicVirtualInterfaceRequest, schemas.ConfirmPublicVirtualInterfaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmPublicVirtualInterface{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmPublicVirtualInterface, schemas.ConfirmPublicVirtualInterfaceRequest, schemas.ConfirmPublicVirtualInterfaceResponse), output: &ConfirmPublicVirtualInterfaceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmPublicVirtualInterface{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ConfirmPublicVirtualInterface"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpConfirmPublicVirtualInterfaceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmPublicVirtualInterface(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +154,8 @@ func (c *Client) addOperationConfirmPublicVirtualInterfaceMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConfirmPublicVirtualInterface(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ConfirmPublicVirtualInterface",
-	}
 }

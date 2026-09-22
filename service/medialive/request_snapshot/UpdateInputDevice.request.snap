@@ -1,0 +1,5 @@
+PUT /prod/inputDevices/__InputDeviceId__
+
+Content-Type: application/json
+
+{"availabilityZone":"__AvailabilityZone__","hdDeviceSettings":{"audioChannelPairs":[{"id":1,"profile":"DISABLED"},{"id":1,"profile":"DISABLED"}],"codec":"HEVC","configuredInput":"AUTO","inputResolution":"__InputResolution__","latencyMs":1,"maxBitrate":1,"mediaconnectSettings":{"flowArn":"__FlowArn__","roleArn":"__RoleArn__","secretArn":"__SecretArn__","sourceName":"__SourceName__"}},"name":"__Name__","uhdDeviceSettings":{"audioChannelPairs":[{"id":1,"profile":"DISABLED"},{"id":1,"profile":"DISABLED"}],"codec":"HEVC","configuredInput":"AUTO","inputResolution":"__InputResolution__","latencyMs":1,"maxBitrate":1,"mediaconnectSettings":{"flowArn":"__FlowArn__","roleArn":"__RoleArn__","secretArn":"__SecretArn__","sourceName":"__SourceName__"}}}

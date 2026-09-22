@@ -5,10 +5,10 @@ package chime
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the membership details for the specified room in an Amazon Chime
@@ -49,6 +49,27 @@ type ListRoomMembershipsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoomMembershipsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoomMembershipsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoomMembershipsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListRoomMembershipsRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRoomMembershipsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoomMembershipsRequest_NextToken, *v.NextToken)
+	}
+	if v.RoomId != nil {
+		s.WriteString(schemas.ListRoomMembershipsRequest_RoomId, *v.RoomId)
+	}
+}
+
 type ListRoomMembershipsOutput struct {
 
 	// The token to use to retrieve the next page of results.
@@ -63,77 +84,51 @@ type ListRoomMembershipsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRoomMembershipsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRoomMembershipsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRoomMembershipsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRoomMembershipsResponse_NextToken, *v.NextToken)
+	}
+	serializeRoomMembershipList(s, schemas.ListRoomMembershipsResponse_RoomMemberships, v.RoomMemberships)
+}
+func (v *ListRoomMembershipsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRoomMembershipsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRoomMembershipsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRoomMembershipsResponse_NextToken, v.NextToken)
+		case schemas.ListRoomMembershipsResponse_RoomMemberships:
+			return deserializeRoomMembershipList(d, schemas.ListRoomMembershipsResponse_RoomMemberships, &v.RoomMemberships)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRoomMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoomMemberships, schemas.ListRoomMembershipsRequest, schemas.ListRoomMembershipsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRoomMemberships{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRoomMemberships, schemas.ListRoomMembershipsRequest, schemas.ListRoomMembershipsResponse), output: &ListRoomMembershipsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRoomMemberships{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRoomMemberships"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRoomMembershipsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRoomMemberships(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +141,6 @@ func (c *Client) addOperationListRoomMembershipsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +242,3 @@ type ListRoomMembershipsAPIClient interface {
 }
 
 var _ ListRoomMembershipsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRoomMemberships(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRoomMemberships",
-	}
-}

@@ -4,16 +4,19 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified migration project.
 //
+// Required permissions: dms:DeleteMigrationProject . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
 // The migration project must be closed before you can delete it.
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DeleteMigrationProject(ctx context.Context, params *DeleteMigrationProjectInput, optFns ...func(*Options)) (*DeleteMigrationProjectOutput, error) {
 	if params == nil {
 		params = &DeleteMigrationProjectInput{}
@@ -39,6 +42,18 @@ type DeleteMigrationProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMigrationProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMigrationProjectMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMigrationProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProjectIdentifier != nil {
+		s.WriteString(schemas.DeleteMigrationProjectMessage_MigrationProjectIdentifier, *v.MigrationProjectIdentifier)
+	}
+}
+
 type DeleteMigrationProjectOutput struct {
 
 	// The migration project that was deleted.
@@ -50,77 +65,50 @@ type DeleteMigrationProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMigrationProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMigrationProjectResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMigrationProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MigrationProject != nil {
+		s.WriteStruct(schemas.DeleteMigrationProjectResponse_MigrationProject)
+		v.MigrationProject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteMigrationProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteMigrationProjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteMigrationProjectResponse_MigrationProject:
+			v.MigrationProject = &types.MigrationProject{}
+			return v.MigrationProject.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMigrationProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMigrationProject, schemas.DeleteMigrationProjectMessage, schemas.DeleteMigrationProjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteMigrationProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMigrationProject, schemas.DeleteMigrationProjectMessage, schemas.DeleteMigrationProjectResponse), output: &DeleteMigrationProjectOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteMigrationProject{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMigrationProject"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteMigrationProjectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMigrationProject(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +123,8 @@ func (c *Client) addOperationDeleteMigrationProjectMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteMigrationProject(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteMigrationProject",
-	}
 }

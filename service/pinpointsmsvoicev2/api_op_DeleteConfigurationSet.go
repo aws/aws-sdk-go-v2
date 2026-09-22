@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,6 +43,18 @@ type DeleteConfigurationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigurationSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DeleteConfigurationSetRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+}
+
 type DeleteConfigurationSetOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted configuration set.
@@ -77,77 +88,85 @@ type DeleteConfigurationSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConfigurationSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConfigurationSetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConfigurationSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetArn != nil {
+		s.WriteString(schemas.DeleteConfigurationSetResult_ConfigurationSetArn, *v.ConfigurationSetArn)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DeleteConfigurationSetResult_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DeleteConfigurationSetResult_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.DefaultMessageFeedbackEnabled != nil {
+		s.WriteBool(schemas.DeleteConfigurationSetResult_DefaultMessageFeedbackEnabled, *v.DefaultMessageFeedbackEnabled)
+	}
+	if v.DefaultMessageType != "" {
+		s.WriteString(schemas.DeleteConfigurationSetResult_DefaultMessageType, string(v.DefaultMessageType))
+	}
+	if v.DefaultSenderId != nil {
+		s.WriteString(schemas.DeleteConfigurationSetResult_DefaultSenderId, *v.DefaultSenderId)
+	}
+	serializeEventDestinationList(s, schemas.DeleteConfigurationSetResult_EventDestinations, v.EventDestinations)
+}
+func (v *DeleteConfigurationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConfigurationSetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConfigurationSetResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.DeleteConfigurationSetResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.DeleteConfigurationSetResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.DeleteConfigurationSetResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.DeleteConfigurationSetResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteConfigurationSetResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteConfigurationSetResult_DefaultMessageFeedbackEnabled:
+			v.DefaultMessageFeedbackEnabled = new(bool)
+			return d.ReadBool(schemas.DeleteConfigurationSetResult_DefaultMessageFeedbackEnabled, v.DefaultMessageFeedbackEnabled)
+		case schemas.DeleteConfigurationSetResult_DefaultMessageType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteConfigurationSetResult_DefaultMessageType, &ev); err != nil {
+				return err
+			}
+			v.DefaultMessageType = types.MessageType(ev)
+			return nil
+		case schemas.DeleteConfigurationSetResult_DefaultSenderId:
+			v.DefaultSenderId = new(string)
+			return d.ReadString(schemas.DeleteConfigurationSetResult_DefaultSenderId, v.DefaultSenderId)
+		case schemas.DeleteConfigurationSetResult_EventDestinations:
+			return deserializeEventDestinationList(d, schemas.DeleteConfigurationSetResult_EventDestinations, &v.EventDestinations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationSet, schemas.DeleteConfigurationSetRequest, schemas.DeleteConfigurationSetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteConfigurationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConfigurationSet, schemas.DeleteConfigurationSetRequest, schemas.DeleteConfigurationSetResult), output: &DeleteConfigurationSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteConfigurationSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteConfigurationSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteConfigurationSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConfigurationSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +181,8 @@ func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteConfigurationSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteConfigurationSet",
-	}
 }

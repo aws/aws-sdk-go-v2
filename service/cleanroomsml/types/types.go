@@ -409,6 +409,9 @@ type CollaborationMLInputChannelSummary struct {
 	// The description of the ML input channel.
 	Description *string
 
+	// The payer configuration for the ML input channel.
+	PayerConfiguration *PayerConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -550,6 +553,10 @@ type CollaborationTrainedModelInferenceJobSummary struct {
 	// Details about the metrics status for trained model inference job.
 	MetricsStatusDetails *string
 
+	// The account ID of the member that is responsible for paying for model inference
+	// costs.
+	MlModelInferencePayerAccountId *string
+
 	// The version identifier of the trained model that was used for inference in this
 	// job.
 	TrainedModelVersionIdentifier *string
@@ -612,6 +619,10 @@ type CollaborationTrainedModelSummary struct {
 	// Information about the incremental training data channels used to create this
 	// version of the trained model.
 	IncrementalTrainingDataChannels []IncrementalTrainingDataChannelOutput
+
+	// The account ID of the member that is responsible for paying for model training
+	// costs.
+	MlModelTrainingPayerAccountId *string
 
 	// The version identifier of this trained model version.
 	VersionIdentifier *string
@@ -1233,6 +1244,9 @@ type MLInputChannelSummary struct {
 	// The description of the ML input channel.
 	Description *string
 
+	// The payer configuration for the ML input channel.
+	PayerConfiguration *PayerConfiguration
+
 	// The ID of the protected query that was used to create the ML input channel.
 	ProtectedQueryIdentifier *string
 
@@ -1318,6 +1332,20 @@ type ModelTrainingDataChannel struct {
 	//   on Amazon S3 key names. This is suitable for larger datasets and distributed
 	//   training scenarios where each instance processes a subset of the data.
 	S3DataDistributionType S3DataDistributionType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies which member accounts are responsible for paying for compute and
+// synthetic data generation costs in a Clean Rooms ML collaboration.
+type PayerConfiguration struct {
+
+	// The account ID of the member that is responsible for paying compute costs.
+	ComputePayerAccountId *string
+
+	// The account ID of the member that is responsible for paying synthetic data
+	// generation costs.
+	SyntheticDataPayerAccountId *string
 
 	noSmithyDocumentSerde
 }
@@ -1700,6 +1728,10 @@ type TrainedModelInferenceJobSummary struct {
 	// Details about the metrics status for the trained model inference job.
 	MetricsStatusDetails *string
 
+	// The account ID of the member that is responsible for paying for model inference
+	// costs.
+	MlModelInferencePayerAccountId *string
+
 	// The version identifier of the trained model that was used for inference in this
 	// job.
 	TrainedModelVersionIdentifier *string
@@ -1790,6 +1822,10 @@ type TrainedModelSummary struct {
 	// Information about the incremental training data channels used to create this
 	// version of the trained model.
 	IncrementalTrainingDataChannels []IncrementalTrainingDataChannelOutput
+
+	// The account ID of the member that is responsible for paying for model training
+	// costs.
+	MlModelTrainingPayerAccountId *string
 
 	// The version identifier of this trained model version.
 	VersionIdentifier *string

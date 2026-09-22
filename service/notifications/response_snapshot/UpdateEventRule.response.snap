@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","notificationConfigurationArn":"__NotificationConfigurationArn__","statusSummaryByRegion":{"key0":{"reason":"__Reason__","status":"ACTIVE"}}}

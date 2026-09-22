@@ -5,13 +5,17 @@ package rtbfabric
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a responder gateway.
+// Updates the description, Auto Scaling group managed endpoint configuration,
+// trust store configuration, and client routing policy of a responder gateway.
+// This operation also updates the protocols list in the listener configuration.
+//
+// You cannot change the domainName , port , and protocol values that you set when
+// you create a responder gateway. To change any of them, delete the gateway and
+// create a new one.
 func (c *Client) UpdateResponderGateway(ctx context.Context, params *UpdateResponderGatewayInput, optFns ...func(*Options)) (*UpdateResponderGatewayOutput, error) {
 	if params == nil {
 		params = &UpdateResponderGatewayInput{}
@@ -29,7 +33,19 @@ func (c *Client) UpdateResponderGateway(ctx context.Context, params *UpdateRespo
 
 type UpdateResponderGatewayInput struct {
 
-	// The unique client token.
+	// Specifies a unique, case-sensitive identifier that you provide to ensure the
+	// idempotency of the request. This lets you safely retry the request without
+	// accidentally performing the same operation a second time. Passing the same value
+	// to a later call to an operation requires that you also pass the same value for
+	// all other parameters. We recommend that you use a [UUID type of value].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same clientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value]: https://wikipedia.org/wiki/Universally_unique_identifier
 	//
 	// This member is required.
 	ClientToken *string
@@ -39,20 +55,47 @@ type UpdateResponderGatewayInput struct {
 	// This member is required.
 	GatewayId *string
 
-	// The networking port to use.
+	// Networking port to use. This operation does not change the port of an existing
+	// gateway. To use a different port, delete the gateway and create a new one.
 	//
 	// This member is required.
 	Port *int32
 
-	// The networking protocol to use.
+	// Networking protocol to use. This operation does not change the protocol of an
+	// existing gateway. To use a different protocol, delete the gateway and create a
+	// new one.
 	//
 	// This member is required.
 	Protocol types.Protocol
 
+	// The client routing policy of the gateway. This policy controls which
+	// Availability Zones RTB Fabric uses to reach the gateway for the requester
+	// gateways that send traffic to it. Valid values are the following:
+	//
+	//   - AVAILABILITY_ZONE_AFFINITY : RTB Fabric routes each requester's traffic to
+	//   gateway capacity in the requester's own Availability Zone when the gateway has
+	//   capacity available there. Otherwise, RTB Fabric routes the traffic to gateway
+	//   capacity in the other Availability Zones of the gateway.
+	//
+	//   - ANY_AVAILABILITY_ZONE : RTB Fabric routes each requester's traffic to
+	//   gateway capacity in every Availability Zone that the subnets of the gateway
+	//   span. The Availability Zone that the requester is in does not change this.
+	//
+	// If you don't specify a value, the gateway keeps its current client routing
+	// policy. Changing the policy sets the gateway status to PENDING_UPDATE until the
+	// change is complete. RTB Fabric does not support partial Availability Zone
+	// affinity, so PARTIAL_AVAILABILITY_ZONE_AFFINITY is not a valid value. For more
+	// information, see [Configuring Availability Zone affinity]in the Amazon Web Services RTB Fabric User Guide.
+	//
+	// [Configuring Availability Zone affinity]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
+	ClientRoutingPolicy types.ClientRoutingPolicy
+
 	// An optional description for the responder gateway.
 	Description *string
 
-	// The domain name for the responder gateway.
+	// Domain name for the responder gateway. This operation does not change the
+	// domain name of an existing gateway. To use a different domain name, delete the
+	// gateway and create a new one.
 	DomainName *string
 
 	// The listener configuration for the responder gateway.
@@ -79,6 +122,13 @@ type UpdateResponderGatewayOutput struct {
 	// This member is required.
 	Status types.ResponderGatewayStatus
 
+	// The client routing policy of the gateway. If the operation changed this policy,
+	// the gateway uses the new policy after its status returns to ACTIVE . For more
+	// information, see [Configuring Availability Zone affinity]in the Amazon Web Services RTB Fabric User Guide.
+	//
+	// [Configuring Availability Zone affinity]: https://docs.aws.amazon.com/rtb-fabric/latest/userguide/working-with-responder-gateways.html#configuring-availability-zone-affinity
+	ClientRoutingPolicy types.ClientRoutingPolicy
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -86,9 +136,6 @@ type UpdateResponderGatewayOutput struct {
 }
 
 func (c *Client) addOperationUpdateResponderGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResponderGateway{}, middleware.After)
 	if err != nil {
 		return err
@@ -97,53 +144,14 @@ func (c *Client) addOperationUpdateResponderGatewayMiddlewares(stack *middleware
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateResponderGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -153,12 +161,6 @@ func (c *Client) addOperationUpdateResponderGatewayMiddlewares(stack *middleware
 		return err
 	}
 	if err = addOpUpdateResponderGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResponderGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +173,6 @@ func (c *Client) addOperationUpdateResponderGatewayMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -216,12 +212,4 @@ func (m *idempotencyToken_initializeOpUpdateResponderGateway) HandleInitialize(c
 }
 func addIdempotencyToken_opUpdateResponderGatewayMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateResponderGateway{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateResponderGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateResponderGateway",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.PutAccessControlRule
+
+{"Actions":["__Member__","__Member__"],"Description":"__Description__","Effect":"ALLOW","ImpersonationRoleIds":["__Member__","__Member__"],"IpRanges":["__Member__","__Member__"],"Name":"__Name__","NotActions":["__Member__","__Member__"],"NotImpersonationRoleIds":["__Member__","__Member__"],"NotIpRanges":["__Member__","__Member__"],"NotUserIds":["__Member__","__Member__"],"OrganizationId":"__OrganizationId__","UserIds":["__Member__","__Member__"]}

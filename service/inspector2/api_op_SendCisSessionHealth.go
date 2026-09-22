@@ -4,10 +4,9 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Sends a CIS session health. This API is used by the Amazon Inspector SSM
@@ -45,6 +44,21 @@ type SendCisSessionHealthInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCisSessionHealthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCisSessionHealthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCisSessionHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScanJobId != nil {
+		s.WriteString(schemas.SendCisSessionHealthRequest_scanJobId, *v.ScanJobId)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.SendCisSessionHealthRequest_sessionToken, *v.SessionToken)
+	}
+}
+
 type SendCisSessionHealthOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -52,77 +66,42 @@ type SendCisSessionHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendCisSessionHealthOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendCisSessionHealthResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendCisSessionHealthOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SendCisSessionHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendCisSessionHealthResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendCisSessionHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCisSessionHealth, schemas.SendCisSessionHealthRequest, schemas.SendCisSessionHealthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendCisSessionHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendCisSessionHealth, schemas.SendCisSessionHealthRequest, schemas.SendCisSessionHealthResponse), output: &SendCisSessionHealthOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendCisSessionHealth{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendCisSessionHealth"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendCisSessionHealthValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendCisSessionHealth(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -137,22 +116,8 @@ func (c *Client) addOperationSendCisSessionHealthMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendCisSessionHealth(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendCisSessionHealth",
-	}
 }

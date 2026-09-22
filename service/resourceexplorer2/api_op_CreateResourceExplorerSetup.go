@@ -4,10 +4,9 @@ package resourceexplorer2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Resource Explorer setup configuration across multiple Amazon Web
@@ -51,6 +50,20 @@ type CreateResourceExplorerSetupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceExplorerSetupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceExplorerSetupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceExplorerSetupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRegionList(s, schemas.CreateResourceExplorerSetupInput_AggregatorRegions, v.AggregatorRegions)
+	serializeRegionList(s, schemas.CreateResourceExplorerSetupInput_RegionList, v.RegionList)
+	if v.ViewName != nil {
+		s.WriteString(schemas.CreateResourceExplorerSetupInput_ViewName, *v.ViewName)
+	}
+}
+
 type CreateResourceExplorerSetupOutput struct {
 
 	// The unique identifier for the setup task. Use this ID with
@@ -65,77 +78,48 @@ type CreateResourceExplorerSetupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateResourceExplorerSetupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateResourceExplorerSetupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateResourceExplorerSetupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskId != nil {
+		s.WriteString(schemas.CreateResourceExplorerSetupOutput_TaskId, *v.TaskId)
+	}
+}
+func (v *CreateResourceExplorerSetupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateResourceExplorerSetupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateResourceExplorerSetupOutput_TaskId:
+			v.TaskId = new(string)
+			return d.ReadString(schemas.CreateResourceExplorerSetupOutput_TaskId, v.TaskId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateResourceExplorerSetupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceExplorerSetup, schemas.CreateResourceExplorerSetupInput, schemas.CreateResourceExplorerSetupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateResourceExplorerSetup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateResourceExplorerSetup, schemas.CreateResourceExplorerSetupInput, schemas.CreateResourceExplorerSetupOutput), output: &CreateResourceExplorerSetupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateResourceExplorerSetup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateResourceExplorerSetup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateResourceExplorerSetupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResourceExplorerSetup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +134,8 @@ func (c *Client) addOperationCreateResourceExplorerSetupMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateResourceExplorerSetup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateResourceExplorerSetup",
-	}
 }

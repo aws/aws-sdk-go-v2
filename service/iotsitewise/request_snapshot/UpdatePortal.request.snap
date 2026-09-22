@@ -1,0 +1,5 @@
+PUT /portals/__PortalId__
+
+Content-Type: application/json
+
+{"alarms":{"alarmRoleArn":"__AlarmRoleArn__","notificationLambdaArn":"__NotificationLambdaArn__"},"clientToken":"__ClientToken__","notificationSenderEmail":"__NotificationSenderEmail__","portalContactEmail":"__PortalContactEmail__","portalDescription":"__PortalDescription__","portalLogoImage":{"file":{"data":"YmxvYg==","type":"PNG"},"id":"__Id__"},"portalName":"__PortalName__","portalType":"SITEWISE_PORTAL_V1","portalTypeConfiguration":{"key0":{"portalTools":["__Member__","__Member__"]}},"roleArn":"__RoleArn__"}

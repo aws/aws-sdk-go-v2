@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"session":{"description":"__Description__","integrationConfiguration":{"topicIntegrationArn":"__TopicIntegrationArn__"},"name":"__Name__","sessionArn":"__SessionArn__","sessionId":"__SessionId__","tags":{"key0":"__Value__"}}}

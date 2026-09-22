@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Confirms a device that a user wants to remember. A remembered device is a
@@ -66,6 +65,29 @@ type ConfirmDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.ConfirmDeviceRequest_AccessToken, *v.AccessToken)
+	}
+	if v.DeviceKey != nil {
+		s.WriteString(schemas.ConfirmDeviceRequest_DeviceKey, *v.DeviceKey)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.ConfirmDeviceRequest_DeviceName, *v.DeviceName)
+	}
+	if v.DeviceSecretVerifierConfig != nil {
+		s.WriteStruct(schemas.ConfirmDeviceRequest_DeviceSecretVerifierConfig)
+		v.DeviceSecretVerifierConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The confirm-device response.
 type ConfirmDeviceOutput struct {
 
@@ -87,74 +109,44 @@ type ConfirmDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserConfirmationNecessary != false {
+		s.WriteBool(schemas.ConfirmDeviceResponse_UserConfirmationNecessary, v.UserConfirmationNecessary)
+	}
+}
+func (v *ConfirmDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmDeviceResponse_UserConfirmationNecessary:
+			return d.ReadBool(schemas.ConfirmDeviceResponse_UserConfirmationNecessary, &v.UserConfirmationNecessary)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmDevice, schemas.ConfirmDeviceRequest, schemas.ConfirmDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmDevice, schemas.ConfirmDeviceRequest, schemas.ConfirmDeviceResponse), output: &ConfirmDeviceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmDevice{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ConfirmDevice"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpConfirmDeviceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmDevice(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +161,8 @@ func (c *Client) addOperationConfirmDeviceMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConfirmDevice(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ConfirmDevice",
-	}
 }

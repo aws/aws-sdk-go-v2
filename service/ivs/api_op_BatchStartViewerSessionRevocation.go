@@ -4,11 +4,10 @@ package ivs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Performs StartViewerSessionRevocation on multiple channel ARN and viewer ID pairs simultaneously.
@@ -35,6 +34,25 @@ type BatchStartViewerSessionRevocationInput struct {
 	ViewerSessions []types.BatchStartViewerSessionRevocationViewerSession
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchStartViewerSessionRevocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStartViewerSessionRevocationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStartViewerSessionRevocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchStartViewerSessionRevocationViewerSessionList(s, schemas.BatchStartViewerSessionRevocationRequest_viewerSessions, v.ViewerSessions)
+}
+func (v *BatchStartViewerSessionRevocationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchStartViewerSessionRevocationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchStartViewerSessionRevocationRequest_viewerSessions:
+			return deserializeBatchStartViewerSessionRevocationViewerSessionList(d, schemas.BatchStartViewerSessionRevocationRequest_viewerSessions, &v.ViewerSessions)
+		}
+		return nil
+	})
 }
 
 type BatchStartViewerSessionRevocationOutput struct {
@@ -84,77 +102,87 @@ type BatchStartViewerSessionRevocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchStartViewerSessionRevocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchStartViewerSessionRevocationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchStartViewerSessionRevocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.BatchStartViewerSessionRevocationResponse_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.BatchStartViewerSessionRevocationResponse_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.BatchStartViewerSessionRevocationResponse_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.BatchStartViewerSessionRevocationResponse_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	serializeBatchStartViewerSessionRevocationErrors(s, schemas.BatchStartViewerSessionRevocationResponse_errors, v.Errors)
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.BatchStartViewerSessionRevocationResponse_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.BatchStartViewerSessionRevocationResponse_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.BatchStartViewerSessionRevocationResponse_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *BatchStartViewerSessionRevocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchStartViewerSessionRevocationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchStartViewerSessionRevocationResponse_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.BatchStartViewerSessionRevocationResponse_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.BatchStartViewerSessionRevocationResponse_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.BatchStartViewerSessionRevocationResponse_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.BatchStartViewerSessionRevocationResponse_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.BatchStartViewerSessionRevocationResponse_cacheControl, v.CacheControl)
+		case schemas.BatchStartViewerSessionRevocationResponse_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.BatchStartViewerSessionRevocationResponse_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.BatchStartViewerSessionRevocationResponse_errors:
+			return deserializeBatchStartViewerSessionRevocationErrors(d, schemas.BatchStartViewerSessionRevocationResponse_errors, &v.Errors)
+		case schemas.BatchStartViewerSessionRevocationResponse_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.BatchStartViewerSessionRevocationResponse_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.BatchStartViewerSessionRevocationResponse_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.BatchStartViewerSessionRevocationResponse_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.BatchStartViewerSessionRevocationResponse_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.BatchStartViewerSessionRevocationResponse_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchStartViewerSessionRevocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStartViewerSessionRevocation, schemas.BatchStartViewerSessionRevocationRequest, schemas.BatchStartViewerSessionRevocationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchStartViewerSessionRevocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchStartViewerSessionRevocation, schemas.BatchStartViewerSessionRevocationRequest, schemas.BatchStartViewerSessionRevocationResponse), output: &BatchStartViewerSessionRevocationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchStartViewerSessionRevocation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchStartViewerSessionRevocation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchStartViewerSessionRevocationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchStartViewerSessionRevocation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +197,8 @@ func (c *Client) addOperationBatchStartViewerSessionRevocationMiddlewares(stack 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchStartViewerSessionRevocation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchStartViewerSessionRevocation",
-	}
 }

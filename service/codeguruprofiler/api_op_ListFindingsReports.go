@@ -5,10 +5,10 @@ package codeguruprofiler
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -77,6 +77,58 @@ type ListFindingsReportsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsReportsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingsReportsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingsReportsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DailyReportsOnly != nil {
+		s.WriteBool(schemas.ListFindingsReportsRequest_dailyReportsOnly, *v.DailyReportsOnly)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListFindingsReportsRequest_endTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFindingsReportsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingsReportsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.ListFindingsReportsRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListFindingsReportsRequest_startTime, *v.StartTime)
+	}
+}
+func (v *ListFindingsReportsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingsReportsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingsReportsRequest_dailyReportsOnly:
+			v.DailyReportsOnly = new(bool)
+			return d.ReadBool(schemas.ListFindingsReportsRequest_dailyReportsOnly, v.DailyReportsOnly)
+		case schemas.ListFindingsReportsRequest_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ListFindingsReportsRequest_endTime, v.EndTime)
+		case schemas.ListFindingsReportsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFindingsReportsRequest_maxResults, v.MaxResults)
+		case schemas.ListFindingsReportsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingsReportsRequest_nextToken, v.NextToken)
+		case schemas.ListFindingsReportsRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.ListFindingsReportsRequest_profilingGroupName, v.ProfilingGroupName)
+		case schemas.ListFindingsReportsRequest_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListFindingsReportsRequest_startTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // The structure representing the ListFindingsReportsResponse.
 type ListFindingsReportsOutput struct {
 
@@ -97,77 +149,51 @@ type ListFindingsReportsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingsReportsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingsReportsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingsReportsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFindingsReportSummaries(s, schemas.ListFindingsReportsResponse_findingsReportSummaries, v.FindingsReportSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingsReportsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFindingsReportsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingsReportsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingsReportsResponse_findingsReportSummaries:
+			return deserializeFindingsReportSummaries(d, schemas.ListFindingsReportsResponse_findingsReportSummaries, &v.FindingsReportSummaries)
+		case schemas.ListFindingsReportsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingsReportsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingsReports, schemas.ListFindingsReportsRequest, schemas.ListFindingsReportsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFindingsReports{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingsReports, schemas.ListFindingsReportsRequest, schemas.ListFindingsReportsResponse), output: &ListFindingsReportsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFindingsReports{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFindingsReports"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFindingsReportsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFindingsReports(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +206,6 @@ func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -291,11 +311,3 @@ type ListFindingsReportsAPIClient interface {
 }
 
 var _ ListFindingsReportsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFindingsReports(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFindingsReports",
-	}
-}

@@ -1,0 +1,5 @@
+POST /describe-resiliency-policy
+
+Content-Type: application/json
+
+{"policyArn":"__PolicyArn__"}

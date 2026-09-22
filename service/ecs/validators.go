@@ -2014,6 +2014,11 @@ func validateDeploymentCircuitBreaker(v *types.DeploymentCircuitBreaker) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeploymentCircuitBreaker"}
+	if v.ThresholdConfiguration != nil {
+		if err := validateThresholdConfiguration(v.ThresholdConfiguration); err != nil {
+			invalidParams.AddNested("ThresholdConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2036,6 +2041,11 @@ func validateDeploymentConfiguration(v *types.DeploymentConfiguration) error {
 			invalidParams.AddNested("Alarms", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EarlySuccessCriteria != nil {
+		if err := validateDeploymentEarlySuccessCriteria(v.EarlySuccessCriteria); err != nil {
+			invalidParams.AddNested("EarlySuccessCriteria", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2051,6 +2061,18 @@ func validateDeploymentController(v *types.DeploymentController) error {
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeploymentEarlySuccessCriteria(v *types.DeploymentEarlySuccessCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentEarlySuccessCriteria"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2523,6 +2545,58 @@ func validateMemoryMiBRequest(v *types.MemoryMiBRequest) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MemoryMiBRequest"}
 	if v.Min == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Min"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricConfiguration(v *types.MetricConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricConfiguration"}
+	if v.MetricNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricNames"))
+	}
+	if v.ResolutionSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResolutionSeconds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricConfigurationList(v []types.MetricConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricConfigurationList"}
+	for i := range v {
+		if err := validateMetricConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMonitoringConfiguration(v *types.MonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MonitoringConfiguration"}
+	if v.MetricConfigurations != nil {
+		if err := validateMetricConfigurationList(v.MetricConfigurations); err != nil {
+			invalidParams.AddNested("MetricConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3044,6 +3118,21 @@ func validateTaskVolumeConfigurations(v []types.TaskVolumeConfiguration) error {
 	}
 }
 
+func validateThresholdConfiguration(v *types.ThresholdConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ThresholdConfiguration"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTmpfs(v *types.Tmpfs) error {
 	if v == nil {
 		return nil
@@ -3318,15 +3407,10 @@ func validateOpCreateExpressGatewayServiceInput(v *CreateExpressGatewayServiceIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateExpressGatewayServiceInput"}
-	if v.ExecutionRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
-	}
 	if v.InfrastructureRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InfrastructureRoleArn"))
 	}
-	if v.PrimaryContainer == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PrimaryContainer"))
-	} else if v.PrimaryContainer != nil {
+	if v.PrimaryContainer != nil {
 		if err := validateExpressGatewayContainer(v.PrimaryContainer); err != nil {
 			invalidParams.AddNested("PrimaryContainer", err.(smithy.InvalidParamsError))
 		}
@@ -3379,6 +3463,11 @@ func validateOpCreateServiceInput(v *CreateServiceInput) error {
 	if v.VpcLatticeConfigurations != nil {
 		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
 			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Monitoring != nil {
+		if err := validateMonitoringConfiguration(v.Monitoring); err != nil {
+			invalidParams.AddNested("Monitoring", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4414,6 +4503,11 @@ func validateOpUpdateServiceInput(v *UpdateServiceInput) error {
 	if v.VpcLatticeConfigurations != nil {
 		if err := validateVpcLatticeConfigurations(v.VpcLatticeConfigurations); err != nil {
 			invalidParams.AddNested("VpcLatticeConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Monitoring != nil {
+		if err := validateMonitoringConfiguration(v.Monitoring); err != nil {
+			invalidParams.AddNested("Monitoring", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

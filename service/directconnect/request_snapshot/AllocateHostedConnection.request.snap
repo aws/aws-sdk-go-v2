@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.AllocateHostedConnection
+
+{"bandwidth":"__Bandwidth__","connectionId":"__ConnectionId__","connectionName":"__ConnectionName__","ownerAccount":"__OwnerAccount__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"vlan":1}

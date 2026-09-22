@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"arn":"__Arn__","creationDateTime":946684800,"status":{"error":{"code":"VALIDATION_ERROR","message":"__Message__"},"state":"CREATING"},"syncRole":"__SyncRole__","syncSource":"__SyncSource__","updateDateTime":946684800,"workspaceId":"__WorkspaceId__"}

@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Updates a vehicle.
@@ -71,6 +70,62 @@ type UpdateVehicleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVehicleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVehicleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVehicleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeUpdateMode != "" {
+		s.WriteString(schemas.UpdateVehicleRequest_attributeUpdateMode, string(v.AttributeUpdateMode))
+	}
+	serializeattributesMap(s, schemas.UpdateVehicleRequest_attributes, v.Attributes)
+	if v.DecoderManifestArn != nil {
+		s.WriteString(schemas.UpdateVehicleRequest_decoderManifestArn, *v.DecoderManifestArn)
+	}
+	if v.ModelManifestArn != nil {
+		s.WriteString(schemas.UpdateVehicleRequest_modelManifestArn, *v.ModelManifestArn)
+	}
+	serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequest_stateTemplatesToAdd, v.StateTemplatesToAdd)
+	serializeStateTemplateAssociationIdentifiers(s, schemas.UpdateVehicleRequest_stateTemplatesToRemove, v.StateTemplatesToRemove)
+	serializeStateTemplateAssociations(s, schemas.UpdateVehicleRequest_stateTemplatesToUpdate, v.StateTemplatesToUpdate)
+	if v.VehicleName != nil {
+		s.WriteString(schemas.UpdateVehicleRequest_vehicleName, *v.VehicleName)
+	}
+}
+func (v *UpdateVehicleInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVehicleRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVehicleRequest_attributeUpdateMode:
+			var ev string
+			if err := d.ReadString(schemas.UpdateVehicleRequest_attributeUpdateMode, &ev); err != nil {
+				return err
+			}
+			v.AttributeUpdateMode = types.UpdateMode(ev)
+			return nil
+		case schemas.UpdateVehicleRequest_attributes:
+			return deserializeattributesMap(d, schemas.UpdateVehicleRequest_attributes, &v.Attributes)
+		case schemas.UpdateVehicleRequest_decoderManifestArn:
+			v.DecoderManifestArn = new(string)
+			return d.ReadString(schemas.UpdateVehicleRequest_decoderManifestArn, v.DecoderManifestArn)
+		case schemas.UpdateVehicleRequest_modelManifestArn:
+			v.ModelManifestArn = new(string)
+			return d.ReadString(schemas.UpdateVehicleRequest_modelManifestArn, v.ModelManifestArn)
+		case schemas.UpdateVehicleRequest_stateTemplatesToAdd:
+			return deserializeStateTemplateAssociations(d, schemas.UpdateVehicleRequest_stateTemplatesToAdd, &v.StateTemplatesToAdd)
+		case schemas.UpdateVehicleRequest_stateTemplatesToRemove:
+			return deserializeStateTemplateAssociationIdentifiers(d, schemas.UpdateVehicleRequest_stateTemplatesToRemove, &v.StateTemplatesToRemove)
+		case schemas.UpdateVehicleRequest_stateTemplatesToUpdate:
+			return deserializeStateTemplateAssociations(d, schemas.UpdateVehicleRequest_stateTemplatesToUpdate, &v.StateTemplatesToUpdate)
+		case schemas.UpdateVehicleRequest_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.UpdateVehicleRequest_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
+}
+
 type UpdateVehicleOutput struct {
 
 	// The ARN of the updated vehicle.
@@ -85,77 +140,54 @@ type UpdateVehicleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateVehicleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateVehicleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateVehicleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateVehicleResponse_arn, *v.Arn)
+	}
+	if v.VehicleName != nil {
+		s.WriteString(schemas.UpdateVehicleResponse_vehicleName, *v.VehicleName)
+	}
+}
+func (v *UpdateVehicleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateVehicleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateVehicleResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateVehicleResponse_arn, v.Arn)
+		case schemas.UpdateVehicleResponse_vehicleName:
+			v.VehicleName = new(string)
+			return d.ReadString(schemas.UpdateVehicleResponse_vehicleName, v.VehicleName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateVehicleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVehicle, schemas.UpdateVehicleRequest, schemas.UpdateVehicleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateVehicle{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateVehicle, schemas.UpdateVehicleRequest, schemas.UpdateVehicleResponse), output: &UpdateVehicleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateVehicle{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateVehicle"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateVehicleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVehicle(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,22 +202,8 @@ func (c *Client) addOperationUpdateVehicleMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateVehicle(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateVehicle",
-	}
 }

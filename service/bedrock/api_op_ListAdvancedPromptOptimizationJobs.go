@@ -5,13 +5,13 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all advanced prompt optimization jobs for the account.
+// Lists the advanced prompt optimization jobs in your account.
 func (c *Client) ListAdvancedPromptOptimizationJobs(ctx context.Context, params *ListAdvancedPromptOptimizationJobsInput, optFns ...func(*Options)) (*ListAdvancedPromptOptimizationJobsOutput, error) {
 	if params == nil {
 		params = &ListAdvancedPromptOptimizationJobsInput{}
@@ -30,28 +30,53 @@ func (c *Client) ListAdvancedPromptOptimizationJobs(ctx context.Context, params 
 // List Advanced Prompt Optimization Jobs Request
 type ListAdvancedPromptOptimizationJobsInput struct {
 
-	// Maximum number of results to return.
+	// The maximum number of results to return in the response.
 	MaxResults *int32
 
-	// Pagination token for the next page of results.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token in a subsequent request to get the next set of
+	// results.
 	NextToken *string
 
-	// Field to sort by in the returned list of jobs.
+	// The field to sort the results by.
 	SortBy types.SortJobsBy
 
-	// Sort order for the results.
+	// The sort order for the results.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdvancedPromptOptimizationJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdvancedPromptOptimizationJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdvancedPromptOptimizationJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAdvancedPromptOptimizationJobsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdvancedPromptOptimizationJobsRequest_nextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListAdvancedPromptOptimizationJobsRequest_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListAdvancedPromptOptimizationJobsRequest_sortOrder, string(v.SortOrder))
+	}
+}
+
 // List Advanced Prompt Optimization Jobs Response
 type ListAdvancedPromptOptimizationJobsOutput struct {
 
-	// List of advanced prompt optimization job summaries.
+	// A list of advanced prompt optimization job summaries.
 	JobSummaries []types.AdvancedPromptOptimizationJobSummary
 
-	// Pagination token for the next page of results.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token in a subsequent request to get the next set of
+	// results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -60,74 +85,48 @@ type ListAdvancedPromptOptimizationJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAdvancedPromptOptimizationJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAdvancedPromptOptimizationJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAdvancedPromptOptimizationJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedPromptOptimizationJobSummaries(s, schemas.ListAdvancedPromptOptimizationJobsResponse_jobSummaries, v.JobSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAdvancedPromptOptimizationJobsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAdvancedPromptOptimizationJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAdvancedPromptOptimizationJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAdvancedPromptOptimizationJobsResponse_jobSummaries:
+			return deserializeAdvancedPromptOptimizationJobSummaries(d, schemas.ListAdvancedPromptOptimizationJobsResponse_jobSummaries, &v.JobSummaries)
+		case schemas.ListAdvancedPromptOptimizationJobsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAdvancedPromptOptimizationJobsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAdvancedPromptOptimizationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdvancedPromptOptimizationJobs, schemas.ListAdvancedPromptOptimizationJobsRequest, schemas.ListAdvancedPromptOptimizationJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAdvancedPromptOptimizationJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAdvancedPromptOptimizationJobs, schemas.ListAdvancedPromptOptimizationJobsRequest, schemas.ListAdvancedPromptOptimizationJobsResponse), output: &ListAdvancedPromptOptimizationJobsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAdvancedPromptOptimizationJobs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAdvancedPromptOptimizationJobs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAdvancedPromptOptimizationJobs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +141,6 @@ func (c *Client) addOperationListAdvancedPromptOptimizationJobsMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -157,7 +150,7 @@ func (c *Client) addOperationListAdvancedPromptOptimizationJobsMiddlewares(stack
 // ListAdvancedPromptOptimizationJobsPaginatorOptions is the paginator options for
 // ListAdvancedPromptOptimizationJobs
 type ListAdvancedPromptOptimizationJobsPaginatorOptions struct {
-	// Maximum number of results to return.
+	// The maximum number of results to return in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -249,11 +242,3 @@ type ListAdvancedPromptOptimizationJobsAPIClient interface {
 }
 
 var _ ListAdvancedPromptOptimizationJobsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAdvancedPromptOptimizationJobs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAdvancedPromptOptimizationJobs",
-	}
-}

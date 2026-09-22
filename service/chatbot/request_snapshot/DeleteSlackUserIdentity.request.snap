@@ -1,0 +1,5 @@
+POST /delete-slack-user-identity
+
+Content-Type: application/json
+
+{"ChatConfigurationArn":"__ChatConfigurationArn__","SlackTeamId":"__SlackTeamId__","SlackUserId":"__SlackUserId__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: KeyspacesStreams.GetShardIterator
+
+{"sequenceNumber":"__SequenceNumber__","shardId":"__ShardId__","shardIteratorType":"TRIM_HORIZON","streamArn":"__StreamArn__"}

@@ -1,0 +1,5 @@
+POST /template/__Id__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","templateDescription":"__TemplateDescription__","templateName":"__TemplateName__"}

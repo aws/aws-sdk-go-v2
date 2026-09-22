@@ -23,6 +23,44 @@ func (AddressRoleType) Values() []AddressRoleType {
 	}
 }
 
+type ChileDocumentType string
+
+// Enum values for ChileDocumentType
+const (
+	ChileDocumentTypeInvoice ChileDocumentType = "Invoice"
+	ChileDocumentTypeReceipt ChileDocumentType = "Receipt"
+)
+
+// Values returns all known values for ChileDocumentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ChileDocumentType) Values() []ChileDocumentType {
+	return []ChileDocumentType{
+		"Invoice",
+		"Receipt",
+	}
+}
+
+type CustomerType string
+
+// Enum values for CustomerType
+const (
+	CustomerTypeBusiness   CustomerType = "Business"
+	CustomerTypeIndividual CustomerType = "Individual"
+)
+
+// Values returns all known values for CustomerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomerType) Values() []CustomerType {
+	return []CustomerType{
+		"Business",
+		"Individual",
+	}
+}
+
 type EntityExemptionAccountStatus string
 
 // Enum values for EntityExemptionAccountStatus
@@ -199,6 +237,28 @@ func (PersonType) Values() []PersonType {
 	}
 }
 
+type PolandTaxRegistrationNumberType string
+
+// Enum values for PolandTaxRegistrationNumberType
+const (
+	PolandTaxRegistrationNumberTypeEuTaxRegistrationNumber    PolandTaxRegistrationNumberType = "EUTaxRegistrationNumber"
+	PolandTaxRegistrationNumberTypeLocalTaxRegistrationNumber PolandTaxRegistrationNumberType = "LocalTaxRegistrationNumber"
+	PolandTaxRegistrationNumberTypeLocalRegistrationNumber    PolandTaxRegistrationNumberType = "LocalRegistrationNumber"
+)
+
+// Values returns all known values for PolandTaxRegistrationNumberType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolandTaxRegistrationNumberType) Values() []PolandTaxRegistrationNumberType {
+	return []PolandTaxRegistrationNumberType{
+		"EUTaxRegistrationNumber",
+		"LocalTaxRegistrationNumber",
+		"LocalRegistrationNumber",
+	}
+}
+
 type RegistrationType string
 
 // Enum values for RegistrationType
@@ -332,6 +392,8 @@ const (
 	TaxRegistrationTypeSst  TaxRegistrationType = "SST"
 	TaxRegistrationTypeTin  TaxRegistrationType = "TIN"
 	TaxRegistrationTypeNric TaxRegistrationType = "NRIC"
+	TaxRegistrationTypePan  TaxRegistrationType = "PAN"
+	TaxRegistrationTypeNip  TaxRegistrationType = "NIP"
 )
 
 // Values returns all known values for TaxRegistrationType. Note that this can be
@@ -347,6 +409,8 @@ func (TaxRegistrationType) Values() []TaxRegistrationType {
 		"SST",
 		"TIN",
 		"NRIC",
+		"PAN",
+		"NIP",
 	}
 }
 
@@ -393,11 +457,13 @@ type ValidationExceptionErrorCode string
 
 // Enum values for ValidationExceptionErrorCode
 const (
-	ValidationExceptionErrorCodeMalformedToken        ValidationExceptionErrorCode = "MalformedToken"
-	ValidationExceptionErrorCodeExpiredToken          ValidationExceptionErrorCode = "ExpiredToken"
-	ValidationExceptionErrorCodeInvalidToken          ValidationExceptionErrorCode = "InvalidToken"
-	ValidationExceptionErrorCodeFieldValidationFailed ValidationExceptionErrorCode = "FieldValidationFailed"
-	ValidationExceptionErrorCodeMissingInput          ValidationExceptionErrorCode = "MissingInput"
+	ValidationExceptionErrorCodeMalformedToken               ValidationExceptionErrorCode = "MalformedToken"
+	ValidationExceptionErrorCodeExpiredToken                 ValidationExceptionErrorCode = "ExpiredToken"
+	ValidationExceptionErrorCodeInvalidToken                 ValidationExceptionErrorCode = "InvalidToken"
+	ValidationExceptionErrorCodeFieldValidationFailed        ValidationExceptionErrorCode = "FieldValidationFailed"
+	ValidationExceptionErrorCodeMissingInput                 ValidationExceptionErrorCode = "MissingInput"
+	ValidationExceptionErrorCodeNonIndiaCustomerCanNotSetPan ValidationExceptionErrorCode = "NonIndiaCustomerCanNotSetPAN"
+	ValidationExceptionErrorCodeGstExistenceBlockSetPan      ValidationExceptionErrorCode = "GSTExistenceBlockSetPAN"
 )
 
 // Values returns all known values for ValidationExceptionErrorCode. Note that
@@ -412,5 +478,7 @@ func (ValidationExceptionErrorCode) Values() []ValidationExceptionErrorCode {
 		"InvalidToken",
 		"FieldValidationFailed",
 		"MissingInput",
+		"NonIndiaCustomerCanNotSetPAN",
+		"GSTExistenceBlockSetPAN",
 	}
 }

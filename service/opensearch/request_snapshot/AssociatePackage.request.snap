@@ -1,0 +1,5 @@
+POST /2021-01-01/packages/associate/__PackageID__/__DomainName__
+
+Content-Type: application/json
+
+{"AssociationConfiguration":{"KeyStoreAccessOption":{"KeyAccessRoleArn":"__KeyAccessRoleArn__","KeyStoreAccessEnabled":true}},"PrerequisitePackageIDList":["__Member__","__Member__"]}

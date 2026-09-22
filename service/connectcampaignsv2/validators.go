@@ -898,6 +898,30 @@ func addOpUpdateCampaignSourceValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpUpdateCampaignSource{}, middleware.After)
 }
 
+func validateAbandonmentRatePacingConfig(v *types.AbandonmentRatePacingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AbandonmentRatePacingConfig"}
+	if v.TargetRate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetRate"))
+	}
+	if len(v.ConnectionStartPoint) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionStartPoint"))
+	}
+	if v.ConnectionThresholdSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionThresholdSeconds"))
+	}
+	if v.EvaluationWindow == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationWindow"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAnswerMachineDetectionConfig(v *types.AnswerMachineDetectionConfig) error {
 	if v == nil {
 		return nil
@@ -1427,6 +1451,42 @@ func validateOutboundRequestList(v []types.OutboundRequest) error {
 	}
 }
 
+func validatePacingStrategy(v types.PacingStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PacingStrategy"}
+	switch uv := v.(type) {
+	case *types.PacingStrategyMemberAbandonmentRate:
+		if err := validateAbandonmentRatePacingConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[abandonmentRate]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePacingStrategyList(v []types.PacingStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PacingStrategyList"}
+	for i := range v {
+		if err := validatePacingStrategy(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePredictiveConfig(v *types.PredictiveConfig) error {
 	if v == nil {
 		return nil
@@ -1434,6 +1494,11 @@ func validatePredictiveConfig(v *types.PredictiveConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PredictiveConfig"}
 	if v.BandwidthAllocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BandwidthAllocation"))
+	}
+	if v.PacingStrategies != nil {
+		if err := validatePacingStrategyList(v.PacingStrategies); err != nil {
+			invalidParams.AddNested("PacingStrategies", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

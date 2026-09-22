@@ -1,0 +1,7 @@
+POST /amazonclouddirectory/2017-01-11/object/parent
+
+Content-Type: application/json
+X-Amz-Consistency-Level: SERIALIZABLE
+X-Amz-Data-Partition: __DirectoryArn__
+
+{"IncludeAllLinksToEachParent":true,"MaxResults":1,"NextToken":"__NextToken__","ObjectReference":{"Selector":"__Selector__"}}

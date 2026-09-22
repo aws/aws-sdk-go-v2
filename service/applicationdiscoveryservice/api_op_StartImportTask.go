@@ -5,10 +5,10 @@ package applicationdiscoveryservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an import task, which allows you to import details of your on-premises
@@ -88,6 +88,24 @@ type StartImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartImportTaskRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ImportUrl != nil {
+		s.WriteString(schemas.StartImportTaskRequest_importUrl, *v.ImportUrl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartImportTaskRequest_name, *v.Name)
+	}
+}
+
 type StartImportTaskOutput struct {
 
 	// An array of information related to the import task request including status
@@ -100,65 +118,44 @@ type StartImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartImportTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartImportTaskResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartImportTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Task != nil {
+		s.WriteStruct(schemas.StartImportTaskResponse_task)
+		v.Task.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *StartImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartImportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartImportTaskResponse_task:
+			v.Task = &types.ImportTask{}
+			return v.Task.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportTask, schemas.StartImportTaskRequest, schemas.StartImportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartImportTask, schemas.StartImportTaskRequest, schemas.StartImportTaskResponse), output: &StartImportTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartImportTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartImportTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -168,12 +165,6 @@ func (c *Client) addOperationStartImportTaskMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpStartImportTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartImportTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,12 +177,6 @@ func (c *Client) addOperationStartImportTaskMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -231,12 +216,4 @@ func (m *idempotencyToken_initializeOpStartImportTask) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opStartImportTaskMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartImportTask{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartImportTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartImportTask",
-	}
 }

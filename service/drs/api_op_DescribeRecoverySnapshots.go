@@ -5,10 +5,10 @@ package drs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all Recovery Snapshots for a single Source Server.
@@ -49,6 +49,58 @@ type DescribeRecoverySnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecoverySnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecoverySnapshotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecoverySnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.DescribeRecoverySnapshotsRequest_filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeRecoverySnapshotsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRecoverySnapshotsRequest_nextToken, *v.NextToken)
+	}
+	if v.Order != "" {
+		s.WriteString(schemas.DescribeRecoverySnapshotsRequest_order, string(v.Order))
+	}
+	if v.SourceServerID != nil {
+		s.WriteString(schemas.DescribeRecoverySnapshotsRequest_sourceServerID, *v.SourceServerID)
+	}
+}
+func (v *DescribeRecoverySnapshotsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecoverySnapshotsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecoverySnapshotsRequest_filters:
+			v.Filters = &types.DescribeRecoverySnapshotsRequestFilters{}
+			return v.Filters.Deserialize(d)
+		case schemas.DescribeRecoverySnapshotsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.DescribeRecoverySnapshotsRequest_maxResults, v.MaxResults)
+		case schemas.DescribeRecoverySnapshotsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRecoverySnapshotsRequest_nextToken, v.NextToken)
+		case schemas.DescribeRecoverySnapshotsRequest_order:
+			var ev string
+			if err := d.ReadString(schemas.DescribeRecoverySnapshotsRequest_order, &ev); err != nil {
+				return err
+			}
+			v.Order = types.RecoverySnapshotsOrder(ev)
+			return nil
+		case schemas.DescribeRecoverySnapshotsRequest_sourceServerID:
+			v.SourceServerID = new(string)
+			return d.ReadString(schemas.DescribeRecoverySnapshotsRequest_sourceServerID, v.SourceServerID)
+		}
+		return nil
+	})
+}
+
 type DescribeRecoverySnapshotsOutput struct {
 
 	// An array of Recovery Snapshots.
@@ -63,77 +115,51 @@ type DescribeRecoverySnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRecoverySnapshotsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRecoverySnapshotsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRecoverySnapshotsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecoverySnapshotsList(s, schemas.DescribeRecoverySnapshotsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeRecoverySnapshotsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeRecoverySnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRecoverySnapshotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRecoverySnapshotsResponse_items:
+			return deserializeRecoverySnapshotsList(d, schemas.DescribeRecoverySnapshotsResponse_items, &v.Items)
+		case schemas.DescribeRecoverySnapshotsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeRecoverySnapshotsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRecoverySnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecoverySnapshots, schemas.DescribeRecoverySnapshotsRequest, schemas.DescribeRecoverySnapshotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRecoverySnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRecoverySnapshots, schemas.DescribeRecoverySnapshotsRequest, schemas.DescribeRecoverySnapshotsResponse), output: &DescribeRecoverySnapshotsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRecoverySnapshots{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRecoverySnapshots"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeRecoverySnapshotsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRecoverySnapshots(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +172,6 @@ func (c *Client) addOperationDescribeRecoverySnapshotsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +274,3 @@ type DescribeRecoverySnapshotsAPIClient interface {
 }
 
 var _ DescribeRecoverySnapshotsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeRecoverySnapshots(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeRecoverySnapshots",
-	}
-}

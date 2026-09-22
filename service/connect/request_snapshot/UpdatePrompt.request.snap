@@ -1,0 +1,5 @@
+POST /prompts/__InstanceId__/__PromptId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Name":"__Name__","S3Uri":"__S3Uri__"}

@@ -1,0 +1,5 @@
+POST /list-billing-groups
+
+Content-Type: application/json
+
+{"BillingPeriod":"__BillingPeriod__","Filters":{"Arns":["__Member__","__Member__"],"AutoAssociate":true,"BillingGroupTypes":["STANDARD","STANDARD"],"Names":[{"SearchOption":"STARTS_WITH","SearchValue":"__SearchValue__"},{"SearchOption":"STARTS_WITH","SearchValue":"__SearchValue__"}],"PricingPlan":"__PricingPlan__","PrimaryAccountIds":["__Member__","__Member__"],"ResponsibilityTransferArns":["__Member__","__Member__"],"Statuses":["ACTIVE","ACTIVE"]},"MaxResults":1,"NextToken":"__NextToken__"}

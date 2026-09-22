@@ -5,10 +5,10 @@ package costexplorer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get a list of cost allocation tags. All inputs in the API are optional and
@@ -54,6 +54,28 @@ type ListCostAllocationTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCostAllocationTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCostAllocationTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCostAllocationTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCostAllocationTagsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCostAllocationTagsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListCostAllocationTagsRequest_Status, string(v.Status))
+	}
+	serializeCostAllocationTagKeyList(s, schemas.ListCostAllocationTagsRequest_TagKeys, v.TagKeys)
+	if v.Type != "" {
+		s.WriteString(schemas.ListCostAllocationTagsRequest_Type, string(v.Type))
+	}
+}
+
 type ListCostAllocationTagsOutput struct {
 
 	// A list of cost allocation tags that includes the detailed metadata for each
@@ -71,74 +93,48 @@ type ListCostAllocationTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCostAllocationTagsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCostAllocationTagsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCostAllocationTagsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCostAllocationTagList(s, schemas.ListCostAllocationTagsResponse_CostAllocationTags, v.CostAllocationTags)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCostAllocationTagsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCostAllocationTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCostAllocationTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCostAllocationTagsResponse_CostAllocationTags:
+			return deserializeCostAllocationTagList(d, schemas.ListCostAllocationTagsResponse_CostAllocationTags, &v.CostAllocationTags)
+		case schemas.ListCostAllocationTagsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCostAllocationTagsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCostAllocationTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCostAllocationTags, schemas.ListCostAllocationTagsRequest, schemas.ListCostAllocationTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCostAllocationTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCostAllocationTags, schemas.ListCostAllocationTagsRequest, schemas.ListCostAllocationTagsResponse), output: &ListCostAllocationTagsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCostAllocationTags{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCostAllocationTags"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCostAllocationTags(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +147,6 @@ func (c *Client) addOperationListCostAllocationTagsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +249,3 @@ type ListCostAllocationTagsAPIClient interface {
 }
 
 var _ ListCostAllocationTagsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCostAllocationTags(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCostAllocationTags",
-	}
-}

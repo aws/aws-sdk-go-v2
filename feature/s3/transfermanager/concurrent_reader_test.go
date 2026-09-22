@@ -1,16 +1,20 @@
 package transfermanager
 
 import (
+	"bufio"
 	"bytes"
 	"context"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
-	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
-	"github.com/aws/aws-sdk-go-v2/service/s3"
+	"errors"
 	"io"
 	"math"
 	"math/rand"
 	"testing"
+	"time"
+
+	"github.com/aws/aws-sdk-go-v2/aws"
+	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
+	"github.com/aws/aws-sdk-go-v2/service/s3"
 )
 
 func TestConcurrentReader(t *testing.T) {
@@ -211,5 +215,302 @@ func TestConcurrentReader(t *testing.T) {
 				t.Errorf("expect data sent to be %v, got %v", e, a)
 			}
 		})
+	}
+}
+
+func TestConcurrentReaderReadRepeatAfterError(t *testing.T) {
+	ctx := context.Background()
+	s3Client := &s3testing.TransferManagerLoggingClient{}
+	s3Client.GetObjectFn = s3testing.ErrRangeGetObjectFn
+	s3Client.Data = []byte("abcdefghijkl")
+
+	r := &concurrentReader{
+		partSize:     4,
+		partsCount:   3,
+		sectionParts: 3,
+		options: Options{
+			GetObjectType: types.GetObjectRanges,
+			Concurrency:   1,
+			S3:            s3Client,
+		},
+		in: &GetObjectInput{
+			Bucket: aws.String("bucket"),
+			Key:    aws.String("key"),
+		},
+		capacity:   3,
+		buf:        make(map[int32]*outChunk),
+		ctx:        ctx,
+		ch:         make(chan outChunk, 1),
+		totalBytes: int64(len(s3Client.Data)),
+	}
+
+	buf := make([]byte, 4)
+	_, err := r.Read(buf)
+	if err == nil {
+		t.Fatal("expected first read to return an error")
+	}
+	if !errors.Is(err, r.getErr()) {
+		t.Fatalf("expected first read to return stored error, got %v and stored %v", err, r.getErr())
+	}
+
+	firstReadInvocations := s3Client.GetObjectInvocations
+	if firstReadInvocations != 2 {
+		t.Fatalf("expected first read to schedule 2 GetObject calls, got %d", firstReadInvocations)
+	}
+
+	_, err = r.Read(buf)
+	if !errors.Is(err, r.getErr()) {
+		t.Fatalf("expected repeated read to return stored error, got %v and stored %v", err, r.getErr())
+	}
+
+	if got := s3Client.GetObjectInvocations; got != firstReadInvocations {
+		t.Fatalf("expected repeated read not to schedule more downloads, got %d GetObject calls after %d on first read", got, firstReadInvocations)
+	}
+}
+
+// TestConcurrentReaderPartUnequalSizes exercises the parts-mode read path
+// (partRead) with multipart objects whose parts have unequal sizes (#3526).
+// The existing TestConcurrentReader cases don't set getType/bufferThreshold, so
+// they route through rangeRead; these cases set both to drive partRead directly,
+// covering large and small memory thresholds and single/multi goroutine paths.
+func TestConcurrentReaderPartUnequalSizes(t *testing.T) {
+	cases := map[string]struct {
+		sizes           []int
+		concurrency     int
+		bufferThreshold int64
+	}{
+		"conc1 large threshold":  {sizes: []int{60, 50, 10}, concurrency: 1, bufferThreshold: 1 << 20},
+		"conc5 large threshold":  {sizes: []int{60, 50, 10}, concurrency: 5, bufferThreshold: 1 << 20},
+		"conc5 small threshold":  {sizes: []int{60, 50, 49, 2}, concurrency: 5, bufferThreshold: 50},
+		"conc5 first part small": {sizes: []int{8, 50, 49, 2}, concurrency: 5, bufferThreshold: 50},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			partsData := make([][]byte, len(c.sizes))
+			var expect []byte
+			for i, s := range c.sizes {
+				b := bytes.Repeat([]byte{byte('A' + i)}, s)
+				partsData[i] = b
+				expect = append(expect, b...)
+			}
+
+			s3Client := &s3testing.TransferManagerLoggingClient{}
+			s3Client.GetObjectFn = s3testing.UnequalPartGetObjectFn
+			s3Client.PartsData = partsData
+			s3Client.PartsCount = int32(len(c.sizes))
+			s3Client.Data = expect
+
+			partSize := int64(c.sizes[0])
+			sectionParts := int32(c.bufferThreshold / partSize)
+			if sectionParts < 1 {
+				sectionParts = 1
+			}
+			partsCount := int32(len(c.sizes))
+			capacity := sectionParts
+			if capacity > partsCount {
+				capacity = partsCount
+			}
+
+			r := &concurrentReader{
+				partSize:        partSize,
+				partsCount:      partsCount,
+				sectionParts:    sectionParts,
+				getType:         types.GetObjectParts,
+				bufferThreshold: c.bufferThreshold,
+				options: Options{
+					GetObjectType: types.GetObjectParts,
+					Concurrency:   c.concurrency,
+					S3:            s3Client,
+				},
+				in:         &GetObjectInput{Bucket: aws.String("bucket"), Key: aws.String("key")},
+				capacity:   capacity,
+				buf:        make(map[int32]*outChunk),
+				ctx:        context.Background(),
+				ch:         make(chan outChunk, c.concurrency),
+				totalBytes: int64(len(expect)),
+			}
+
+			got, err := io.ReadAll(r)
+			if err != nil {
+				t.Fatalf("read error: %v", err)
+			}
+			if e, a := len(expect), len(got); e != a {
+				t.Fatalf("expect %d bytes, got %d", e, a)
+			}
+			if !bytes.Equal(expect, got) {
+				t.Fatalf("expect downloaded stream to equal assembled parts")
+			}
+		})
+	}
+}
+
+// TestConcurrentReaderPartMemoryThrottleNoDeadlock guards against the parts-mode
+// deadlock where bounding memory by breaking out of the receive loop orphaned an
+// in-flight download producer on a full r.ch and hung Read's r.wg.Wait() (#3526
+// follow-up). It reproduces the trigger conditions: sectionParts > Concurrency
+// (more parts dispatched than r.ch can buffer), unequal parts where later parts
+// are much larger than part 1, and a delayed part 0 so a large later part is
+// received first. Memory must be bounded by throttling dispatch, not by
+// abandoning received parts, so this must complete rather than hang.
+func TestConcurrentReaderPartMemoryThrottleNoDeadlock(t *testing.T) {
+	sizes := []int{10, 200, 200, 200, 200, 200}
+	partsData := make([][]byte, len(sizes))
+	var expect []byte
+	for i, s := range sizes {
+		b := bytes.Repeat([]byte{byte('A' + i)}, s)
+		partsData[i] = b
+		expect = append(expect, b...)
+	}
+
+	s3Client := &s3testing.TransferManagerLoggingClient{}
+	s3Client.PartsData = partsData
+	s3Client.PartsCount = int32(len(sizes))
+	s3Client.Data = expect
+	// Delay part 0 so a later, larger part is received first and would trip the
+	// memory budget before the consecutive part arrives.
+	s3Client.GetObjectFn = func(c *s3testing.TransferManagerLoggingClient, in *s3.GetObjectInput) (*s3.GetObjectOutput, error) {
+		if aws.ToInt32(in.PartNumber) == 1 {
+			time.Sleep(200 * time.Millisecond)
+		}
+		return s3testing.UnequalPartGetObjectFn(c, in)
+	}
+
+	partSize := int64(sizes[0]) // 10
+	bufferThreshold := int64(100)
+	sectionParts := int32(bufferThreshold / partSize) // 10, > Concurrency below
+	partsCount := int32(len(sizes))
+	capacity := sectionParts
+	if capacity > partsCount {
+		capacity = partsCount
+	}
+
+	r := &concurrentReader{
+		partSize:        partSize,
+		partsCount:      partsCount,
+		sectionParts:    sectionParts,
+		getType:         types.GetObjectParts,
+		bufferThreshold: bufferThreshold,
+		options: Options{
+			GetObjectType: types.GetObjectParts,
+			Concurrency:   2, // < sectionParts and < in-flight parts
+			S3:            s3Client,
+		},
+		in:         &GetObjectInput{Bucket: aws.String("bucket"), Key: aws.String("key")},
+		capacity:   capacity,
+		buf:        make(map[int32]*outChunk),
+		ctx:        context.Background(),
+		ch:         make(chan outChunk, 2),
+		totalBytes: int64(len(expect)),
+	}
+
+	done := make(chan struct{})
+	var got []byte
+	var err error
+	go func() {
+		got, err = io.ReadAll(r)
+		close(done)
+	}()
+
+	select {
+	case <-done:
+	case <-time.After(15 * time.Second):
+		t.Fatal("Read did not complete: likely deadlocked on r.wg.Wait() with an orphaned download producer")
+	}
+
+	if err != nil {
+		t.Fatalf("read error: %v", err)
+	}
+	if !bytes.Equal(expect, got) {
+		t.Fatalf("expect %d bytes equal to assembled parts, got %d", len(expect), len(got))
+	}
+}
+
+// TestConcurrentReaderSmallReadsNoDeadlock guards against the parts-mode
+// deadlock (#3552) where partRead's replay loop returned as soon as the
+// caller's buffer was full, without draining r.ch. When every Read call is
+// satisfied entirely from previously buffered parts (small, part-size-aligned
+// reads via bufio.Reader are the common trigger), the receive loop that drains
+// r.ch never runs, so once enough already-downloaded parts pile up to fill
+// r.ch, a download producer blocks forever on its send while Read's
+// r.wg.Wait() blocks forever waiting for it. It reproduces the trigger
+// conditions from the issue: GetObjectParts, partsCount comfortably exceeding
+// sectionParts+Concurrency+1, and reads smaller than and evenly dividing the
+// part size.
+func TestConcurrentReaderSmallReadsNoDeadlock(t *testing.T) {
+	const (
+		partSize        = 1 << 10 // 1KiB parts, mirrors default 8MiB in proportion
+		bufferThreshold = 6 * partSize
+		sectionParts    = 6 // bufferThreshold / partSize, matches real GetObject wiring
+		concurrency     = 5
+		partsCount      = sectionParts + concurrency + 4 // > sectionParts+Concurrency+1
+		readSize        = 128                            // divides partSize evenly, smaller than partSize
+	)
+
+	s3Client := &s3testing.TransferManagerLoggingClient{}
+	s3Client.GetObjectFn = s3testing.ReaderPartGetObjectFn
+	s3Client.PartsCount = partsCount
+
+	var expect []byte
+	partsData := make([][]byte, partsCount)
+	for i := int32(0); i < partsCount; i++ {
+		b := bytes.Repeat([]byte{byte('A' + i%26)}, partSize)
+		expect = append(expect, b...)
+		partsData[i] = b
+	}
+	s3Client.Data = expect
+	s3Client.PartsData = partsData
+
+	r := &concurrentReader{
+		partSize:        partSize,
+		partsCount:      partsCount,
+		sectionParts:    sectionParts,
+		getType:         types.GetObjectParts,
+		bufferThreshold: bufferThreshold,
+		options: Options{
+			GetObjectType: types.GetObjectParts,
+			Concurrency:   concurrency,
+			S3:            s3Client,
+		},
+		in:         &GetObjectInput{Bucket: aws.String("bucket"), Key: aws.String("key")},
+		capacity:   sectionParts,
+		buf:        make(map[int32]*outChunk),
+		ctx:        context.Background(),
+		ch:         make(chan outChunk, concurrency),
+		totalBytes: int64(len(expect)),
+	}
+
+	done := make(chan error, 1)
+	var got []byte
+	go func() {
+		br := bufio.NewReaderSize(r, readSize)
+		buf := make([]byte, readSize)
+		for {
+			n, err := br.Read(buf)
+			got = append(got, buf[:n]...)
+			if err != nil {
+				if err == io.EOF {
+					err = nil
+				}
+				done <- err
+				return
+			}
+		}
+	}()
+
+	select {
+	case err := <-done:
+		if err != nil {
+			t.Fatalf("read error: %v", err)
+		}
+	case <-time.After(15 * time.Second):
+		t.Fatal("DEADLOCK: Read did not complete within 15s (GH #3552)")
+	}
+
+	if e, a := len(expect), len(got); e != a {
+		t.Fatalf("expect %d bytes, got %d", e, a)
+	}
+	if !bytes.Equal(expect, got) {
+		t.Fatalf("expect downloaded stream to equal assembled parts")
 	}
 }

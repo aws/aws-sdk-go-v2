@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botAliasId":"__BotAliasId__","botAliasStatus":"Creating","botId":"__BotId__"}

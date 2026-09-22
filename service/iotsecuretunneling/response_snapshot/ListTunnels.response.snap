@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IoTSecuredTunneling.ListTunnels
+
+{"nextToken":"__NextToken__","tunnelSummaries":[{"createdAt":946684800,"description":"__Description__","lastUpdatedAt":946684800,"status":"OPEN","tunnelArn":"__TunnelArn__","tunnelId":"__TunnelId__"},{"createdAt":946684800,"description":"__Description__","lastUpdatedAt":946684800,"status":"OPEN","tunnelArn":"__TunnelArn__","tunnelId":"__TunnelId__"}]}

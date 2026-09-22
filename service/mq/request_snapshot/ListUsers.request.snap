@@ -1,0 +1,3 @@
+GET /v1/brokers/__BrokerId__/users?maxResults=1&nextToken=__NextToken__
+
+

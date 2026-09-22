@@ -1,0 +1,3 @@
+GET /computation-models?computationModelType=ANOMALY_DETECTION&maxResults=1&nextToken=__NextToken__
+
+

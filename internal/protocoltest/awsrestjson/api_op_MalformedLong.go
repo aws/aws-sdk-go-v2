@@ -4,10 +4,9 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) MalformedLong(ctx context.Context, params *MalformedLongInput, optFns ...func(*Options)) (*MalformedLongOutput, error) {
@@ -39,6 +38,46 @@ type MalformedLongInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedLongInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedLongInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedLongInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LongInBody != nil {
+		s.WriteInt64(schemas.MalformedLongInput_longInBody, *v.LongInBody)
+	}
+	if v.LongInHeader != nil {
+		s.WriteInt64(schemas.MalformedLongInput_longInHeader, *v.LongInHeader)
+	}
+	if v.LongInPath != nil {
+		s.WriteInt64(schemas.MalformedLongInput_longInPath, *v.LongInPath)
+	}
+	if v.LongInQuery != nil {
+		s.WriteInt64(schemas.MalformedLongInput_longInQuery, *v.LongInQuery)
+	}
+}
+func (v *MalformedLongInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedLongInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedLongInput_longInBody:
+			v.LongInBody = new(int64)
+			return d.ReadInt64(schemas.MalformedLongInput_longInBody, v.LongInBody)
+		case schemas.MalformedLongInput_longInHeader:
+			v.LongInHeader = new(int64)
+			return d.ReadInt64(schemas.MalformedLongInput_longInHeader, v.LongInHeader)
+		case schemas.MalformedLongInput_longInPath:
+			v.LongInPath = new(int64)
+			return d.ReadInt64(schemas.MalformedLongInput_longInPath, v.LongInPath)
+		case schemas.MalformedLongInput_longInQuery:
+			v.LongInQuery = new(int64)
+			return d.ReadInt64(schemas.MalformedLongInput_longInQuery, v.LongInQuery)
+		}
+		return nil
+	})
+}
+
 type MalformedLongOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,77 +85,42 @@ type MalformedLongOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedLongOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedLongOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedLongOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedLongMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedLong, schemas.MalformedLongInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedLong{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedLong, schemas.MalformedLongInput, nil), output: &MalformedLongOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedLong{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedLong"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpMalformedLongValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMalformedLong(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,22 +135,8 @@ func (c *Client) addOperationMalformedLongMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opMalformedLong(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "MalformedLong",
-	}
 }

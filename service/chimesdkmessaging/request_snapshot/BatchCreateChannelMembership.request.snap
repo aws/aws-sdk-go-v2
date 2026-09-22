@@ -1,0 +1,6 @@
+POST /channels/__ChannelArn__/memberships?operation=batch-create
+
+Content-Type: application/json
+X-Amz-Chime-Bearer: __ChimeBearer__
+
+{"MemberArns":["__Member__","__Member__"],"SubChannelId":"__SubChannelId__","Type":"DEFAULT"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: Odb.UpdateExadbVmCluster
+
+{"dataCollectionOptions":{"isDiagnosticsEventsEnabled":true,"isHealthMonitoringEnabled":true,"isIncidentLogsEnabled":true},"displayName":"__DisplayName__","enabledEcpuCount":1,"exadbVmClusterId":"__ExadbVmClusterId__","gridImageId":"__GridImageId__","licenseModel":"BRING_YOUR_OWN_LICENSE","sshPublicKeys":["__Member__","__Member__"],"systemVersion":"__SystemVersion__","totalEcpuCount":1,"updateAction":"ROLLING_APPLY","vmFileSystemStorageTotalSizeInGBs":1}

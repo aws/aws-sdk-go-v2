@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Textract.GetLendingAnalysisSummary
+
+{"AnalyzeLendingModelVersion":"__AnalyzeLendingModelVersion__","DocumentMetadata":{"Pages":1},"JobStatus":"IN_PROGRESS","StatusMessage":"__StatusMessage__","Summary":{"DocumentGroups":[{"DetectedSignatures":[{"Page":1},{"Page":1}],"SplitDocuments":[{"Index":1,"Pages":[1,1]},{"Index":1,"Pages":[1,1]}],"Type":"__Type__","UndetectedSignatures":[{"Page":1},{"Page":1}]},{"DetectedSignatures":[{"Page":1},{"Page":1}],"SplitDocuments":[{"Index":1,"Pages":[1,1]},{"Index":1,"Pages":[1,1]}],"Type":"__Type__","UndetectedSignatures":[{"Page":1},{"Page":1}]}],"UndetectedDocumentTypes":["__Member__","__Member__"]},"Warnings":[{"ErrorCode":"__ErrorCode__","Pages":[1,1]},{"ErrorCode":"__ErrorCode__","Pages":[1,1]}]}

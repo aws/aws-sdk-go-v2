@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -53,6 +55,37 @@ type AgentConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AgentConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentParameters(s, schemas.AgentConfiguration_agentParameters, v.AgentParameters)
+	if v.PeriodInSeconds != nil {
+		s.WriteInt32(schemas.AgentConfiguration_periodInSeconds, *v.PeriodInSeconds)
+	}
+	if v.ShouldProfile != nil {
+		s.WriteBool(schemas.AgentConfiguration_shouldProfile, *v.ShouldProfile)
+	}
+}
+func (v *AgentConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentConfiguration_agentParameters:
+			return deserializeAgentParameters(d, schemas.AgentConfiguration_agentParameters, &v.AgentParameters)
+		case schemas.AgentConfiguration_periodInSeconds:
+			v.PeriodInSeconds = new(int32)
+			return d.ReadInt32(schemas.AgentConfiguration_periodInSeconds, v.PeriodInSeconds)
+		case schemas.AgentConfiguration_shouldProfile:
+			v.ShouldProfile = new(bool)
+			return d.ReadBool(schemas.AgentConfiguration_shouldProfile, v.ShouldProfile)
+		}
+		return nil
+	})
+}
+
 //	Specifies whether profiling is enabled or disabled for a profiling group. It
 //
 // is used by [ConfigureAgent]ConfigureAgent to enable or disable profiling for a profiling group.
@@ -67,6 +100,28 @@ type AgentOrchestrationConfig struct {
 	ProfilingEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *AgentOrchestrationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgentOrchestrationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgentOrchestrationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilingEnabled != nil {
+		s.WriteBool(schemas.AgentOrchestrationConfig_profilingEnabled, *v.ProfilingEnabled)
+	}
+}
+func (v *AgentOrchestrationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgentOrchestrationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgentOrchestrationConfig_profilingEnabled:
+			v.ProfilingEnabled = new(bool)
+			return d.ReadBool(schemas.AgentOrchestrationConfig_profilingEnabled, v.ProfilingEnabled)
+		}
+		return nil
+	})
 }
 
 //	Specifies the aggregation period and aggregation start time for an aggregated
@@ -99,6 +154,38 @@ type AggregatedProfileTime struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AggregatedProfileTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AggregatedProfileTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AggregatedProfileTime) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Period != "" {
+		s.WriteString(schemas.AggregatedProfileTime_period, string(v.Period))
+	}
+	if v.Start != nil {
+		s.WriteTime(schemas.AggregatedProfileTime_start, *v.Start)
+	}
+}
+func (v *AggregatedProfileTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AggregatedProfileTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AggregatedProfileTime_period:
+			var ev string
+			if err := d.ReadString(schemas.AggregatedProfileTime_period, &ev); err != nil {
+				return err
+			}
+			v.Period = AggregationPeriod(ev)
+			return nil
+		case schemas.AggregatedProfileTime_start:
+			v.Start = new(time.Time)
+			return d.ReadTime(schemas.AggregatedProfileTime_start, v.Start)
+		}
+		return nil
+	})
+}
+
 //	Details about an anomaly in a specific metric of application profile. The
 //
 // anomaly is detected using analysis of the metric data over a period of time.
@@ -122,6 +209,39 @@ type Anomaly struct {
 	Reason *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Anomaly) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Anomaly)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Anomaly) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalyInstances(s, schemas.Anomaly_instances, v.Instances)
+	if v.Metric != nil {
+		s.WriteStruct(schemas.Anomaly_metric)
+		v.Metric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.Anomaly_reason, *v.Reason)
+	}
+}
+func (v *Anomaly) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Anomaly, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Anomaly_instances:
+			return deserializeAnomalyInstances(d, schemas.Anomaly_instances, &v.Instances)
+		case schemas.Anomaly_metric:
+			v.Metric = &Metric{}
+			return v.Metric.Deserialize(d)
+		case schemas.Anomaly_reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.Anomaly_reason, v.Reason)
+		}
+		return nil
+	})
 }
 
 // The specific duration in which the metric is flagged as anomalous.
@@ -153,6 +273,48 @@ type AnomalyInstance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AnomalyInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AnomalyInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AnomalyInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.AnomalyInstance_endTime, *v.EndTime)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AnomalyInstance_id, *v.Id)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AnomalyInstance_startTime, *v.StartTime)
+	}
+	if v.UserFeedback != nil {
+		s.WriteStruct(schemas.AnomalyInstance_userFeedback)
+		v.UserFeedback.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AnomalyInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AnomalyInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AnomalyInstance_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.AnomalyInstance_endTime, v.EndTime)
+		case schemas.AnomalyInstance_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AnomalyInstance_id, v.Id)
+		case schemas.AnomalyInstance_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AnomalyInstance_startTime, v.StartTime)
+		case schemas.AnomalyInstance_userFeedback:
+			v.UserFeedback = &UserFeedback{}
+			return v.UserFeedback.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Notification medium for users to get alerted for events that occur in
 // application profile. We support SNS topic as a notification channel.
 type Channel struct {
@@ -176,6 +338,37 @@ type Channel struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Channel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Channel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Channel) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventPublishers(s, schemas.Channel_eventPublishers, v.EventPublishers)
+	if v.Id != nil {
+		s.WriteString(schemas.Channel_id, *v.Id)
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.Channel_uri, *v.Uri)
+	}
+}
+func (v *Channel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Channel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Channel_eventPublishers:
+			return deserializeEventPublishers(d, schemas.Channel_eventPublishers, &v.EventPublishers)
+		case schemas.Channel_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Channel_id, v.Id)
+		case schemas.Channel_uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.Channel_uri, v.Uri)
+		}
+		return nil
+	})
 }
 
 //	Information about potential recommendations that might be created from the
@@ -206,6 +399,52 @@ type FindingsReportSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FindingsReportSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FindingsReportSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FindingsReportSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.FindingsReportSummary_id, *v.Id)
+	}
+	if v.ProfileEndTime != nil {
+		s.WriteTime(schemas.FindingsReportSummary_profileEndTime, *v.ProfileEndTime)
+	}
+	if v.ProfileStartTime != nil {
+		s.WriteTime(schemas.FindingsReportSummary_profileStartTime, *v.ProfileStartTime)
+	}
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.FindingsReportSummary_profilingGroupName, *v.ProfilingGroupName)
+	}
+	if v.TotalNumberOfFindings != nil {
+		s.WriteInt32(schemas.FindingsReportSummary_totalNumberOfFindings, *v.TotalNumberOfFindings)
+	}
+}
+func (v *FindingsReportSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FindingsReportSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FindingsReportSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FindingsReportSummary_id, v.Id)
+		case schemas.FindingsReportSummary_profileEndTime:
+			v.ProfileEndTime = new(time.Time)
+			return d.ReadTime(schemas.FindingsReportSummary_profileEndTime, v.ProfileEndTime)
+		case schemas.FindingsReportSummary_profileStartTime:
+			v.ProfileStartTime = new(time.Time)
+			return d.ReadTime(schemas.FindingsReportSummary_profileStartTime, v.ProfileStartTime)
+		case schemas.FindingsReportSummary_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.FindingsReportSummary_profilingGroupName, v.ProfilingGroupName)
+		case schemas.FindingsReportSummary_totalNumberOfFindings:
+			v.TotalNumberOfFindings = new(int32)
+			return d.ReadInt32(schemas.FindingsReportSummary_totalNumberOfFindings, v.TotalNumberOfFindings)
+		}
+		return nil
+	})
+}
+
 //	The frame name, metric type, and thread states. These are used to derive the
 //
 // value of the metric for the frame.
@@ -234,6 +473,41 @@ type FrameMetric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FrameMetric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameMetric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FrameMetric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameName != nil {
+		s.WriteString(schemas.FrameMetric_frameName, *v.FrameName)
+	}
+	serializeThreadStates(s, schemas.FrameMetric_threadStates, v.ThreadStates)
+	if v.Type != "" {
+		s.WriteString(schemas.FrameMetric_type, string(v.Type))
+	}
+}
+func (v *FrameMetric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FrameMetric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FrameMetric_frameName:
+			v.FrameName = new(string)
+			return d.ReadString(schemas.FrameMetric_frameName, v.FrameName)
+		case schemas.FrameMetric_threadStates:
+			return deserializeThreadStates(d, schemas.FrameMetric_threadStates, &v.ThreadStates)
+		case schemas.FrameMetric_type:
+			var ev string
+			if err := d.ReadString(schemas.FrameMetric_type, &ev); err != nil {
+				return err
+			}
+			v.Type = MetricType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about a frame metric and its values.
 type FrameMetricDatum struct {
 
@@ -251,6 +525,33 @@ type FrameMetricDatum struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FrameMetricDatum) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FrameMetricDatum)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FrameMetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameMetric != nil {
+		s.WriteStruct(schemas.FrameMetricDatum_frameMetric)
+		v.FrameMetric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFrameMetricValues(s, schemas.FrameMetricDatum_values, v.Values)
+}
+func (v *FrameMetricDatum) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FrameMetricDatum, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FrameMetricDatum_frameMetric:
+			v.FrameMetric = &FrameMetric{}
+			return v.FrameMetric.Deserialize(d)
+		case schemas.FrameMetricDatum_values:
+			return deserializeFrameMetricValues(d, schemas.FrameMetricDatum_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // The part of a profile that contains a recommendation found during analysis.
 type Match struct {
 
@@ -265,6 +566,40 @@ type Match struct {
 	ThresholdBreachValue *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Match) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Match)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Match) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameAddress != nil {
+		s.WriteString(schemas.Match_frameAddress, *v.FrameAddress)
+	}
+	if v.TargetFramesIndex != nil {
+		s.WriteInt32(schemas.Match_targetFramesIndex, *v.TargetFramesIndex)
+	}
+	if v.ThresholdBreachValue != nil {
+		s.WriteFloat64(schemas.Match_thresholdBreachValue, *v.ThresholdBreachValue)
+	}
+}
+func (v *Match) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Match, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Match_frameAddress:
+			v.FrameAddress = new(string)
+			return d.ReadString(schemas.Match_frameAddress, v.FrameAddress)
+		case schemas.Match_targetFramesIndex:
+			v.TargetFramesIndex = new(int32)
+			return d.ReadInt32(schemas.Match_targetFramesIndex, v.TargetFramesIndex)
+		case schemas.Match_thresholdBreachValue:
+			v.ThresholdBreachValue = new(float64)
+			return d.ReadFloat64(schemas.Match_thresholdBreachValue, v.ThresholdBreachValue)
+		}
+		return nil
+	})
 }
 
 //	Details about the metric that the analysis used when it detected the anomaly.
@@ -295,6 +630,41 @@ type Metric struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Metric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Metric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Metric) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FrameName != nil {
+		s.WriteString(schemas.Metric_frameName, *v.FrameName)
+	}
+	serializeStrings(s, schemas.Metric_threadStates, v.ThreadStates)
+	if v.Type != "" {
+		s.WriteString(schemas.Metric_type, string(v.Type))
+	}
+}
+func (v *Metric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Metric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Metric_frameName:
+			v.FrameName = new(string)
+			return d.ReadString(schemas.Metric_frameName, v.FrameName)
+		case schemas.Metric_threadStates:
+			return deserializeStrings(d, schemas.Metric_threadStates, &v.ThreadStates)
+		case schemas.Metric_type:
+			var ev string
+			if err := d.ReadString(schemas.Metric_type, &ev); err != nil {
+				return err
+			}
+			v.Type = MetricType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The configuration for notifications stored for each profiling group. This
 // includes up to to two channels and a list of event publishers associated with
 // each channel.
@@ -305,6 +675,25 @@ type NotificationConfiguration struct {
 	Channels []Channel
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannels(s, schemas.NotificationConfiguration_channels, v.Channels)
+}
+func (v *NotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationConfiguration_channels:
+			return deserializeChannels(d, schemas.NotificationConfiguration_channels, &v.Channels)
+		}
+		return nil
+	})
 }
 
 // A set of rules used to make a recommendation during an analysis.
@@ -339,6 +728,57 @@ type Pattern struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Pattern) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Pattern)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Pattern) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStrings(s, schemas.Pattern_countersToAggregate, v.CountersToAggregate)
+	if v.Description != nil {
+		s.WriteString(schemas.Pattern_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Pattern_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Pattern_name, *v.Name)
+	}
+	if v.ResolutionSteps != nil {
+		s.WriteString(schemas.Pattern_resolutionSteps, *v.ResolutionSteps)
+	}
+	serializeTargetFrames(s, schemas.Pattern_targetFrames, v.TargetFrames)
+	if v.ThresholdPercent != 0 {
+		s.WriteFloat64(schemas.Pattern_thresholdPercent, v.ThresholdPercent)
+	}
+}
+func (v *Pattern) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Pattern, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Pattern_countersToAggregate:
+			return deserializeStrings(d, schemas.Pattern_countersToAggregate, &v.CountersToAggregate)
+		case schemas.Pattern_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Pattern_description, v.Description)
+		case schemas.Pattern_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Pattern_id, v.Id)
+		case schemas.Pattern_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Pattern_name, v.Name)
+		case schemas.Pattern_resolutionSteps:
+			v.ResolutionSteps = new(string)
+			return d.ReadString(schemas.Pattern_resolutionSteps, v.ResolutionSteps)
+		case schemas.Pattern_targetFrames:
+			return deserializeTargetFrames(d, schemas.Pattern_targetFrames, &v.TargetFrames)
+		case schemas.Pattern_thresholdPercent:
+			return d.ReadFloat64(schemas.Pattern_thresholdPercent, &v.ThresholdPercent)
+		}
+		return nil
+	})
+}
+
 // Contains the start time of a profile.
 type ProfileTime struct {
 
@@ -348,6 +788,28 @@ type ProfileTime struct {
 	Start *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProfileTime) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileTime)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileTime) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Start != nil {
+		s.WriteTime(schemas.ProfileTime_start, *v.Start)
+	}
+}
+func (v *ProfileTime) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileTime, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileTime_start:
+			v.Start = new(time.Time)
+			return d.ReadTime(schemas.ProfileTime_start, v.Start)
+		}
+		return nil
+	})
 }
 
 // Contains information about a profiling group.
@@ -395,6 +857,75 @@ type ProfilingGroupDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProfilingGroupDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfilingGroupDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfilingGroupDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentOrchestrationConfig != nil {
+		s.WriteStruct(schemas.ProfilingGroupDescription_agentOrchestrationConfig)
+		v.AgentOrchestrationConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.ProfilingGroupDescription_arn, *v.Arn)
+	}
+	if v.ComputePlatform != "" {
+		s.WriteString(schemas.ProfilingGroupDescription_computePlatform, string(v.ComputePlatform))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ProfilingGroupDescription_createdAt, *v.CreatedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ProfilingGroupDescription_name, *v.Name)
+	}
+	if v.ProfilingStatus != nil {
+		s.WriteStruct(schemas.ProfilingGroupDescription_profilingStatus)
+		v.ProfilingStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.ProfilingGroupDescription_tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ProfilingGroupDescription_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ProfilingGroupDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfilingGroupDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfilingGroupDescription_agentOrchestrationConfig:
+			v.AgentOrchestrationConfig = &AgentOrchestrationConfig{}
+			return v.AgentOrchestrationConfig.Deserialize(d)
+		case schemas.ProfilingGroupDescription_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ProfilingGroupDescription_arn, v.Arn)
+		case schemas.ProfilingGroupDescription_computePlatform:
+			var ev string
+			if err := d.ReadString(schemas.ProfilingGroupDescription_computePlatform, &ev); err != nil {
+				return err
+			}
+			v.ComputePlatform = ComputePlatform(ev)
+			return nil
+		case schemas.ProfilingGroupDescription_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ProfilingGroupDescription_createdAt, v.CreatedAt)
+		case schemas.ProfilingGroupDescription_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProfilingGroupDescription_name, v.Name)
+		case schemas.ProfilingGroupDescription_profilingStatus:
+			v.ProfilingStatus = &ProfilingStatus{}
+			return v.ProfilingStatus.Deserialize(d)
+		case schemas.ProfilingGroupDescription_tags:
+			return deserializeTagsMap(d, schemas.ProfilingGroupDescription_tags, &v.Tags)
+		case schemas.ProfilingGroupDescription_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ProfilingGroupDescription_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 //	Profiling status includes information about the last time a profile agent
 //
 // pinged back, the last time a profile was received, and the aggregation period
@@ -418,6 +949,42 @@ type ProfilingStatus struct {
 	LatestAggregatedProfile *AggregatedProfileTime
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProfilingStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfilingStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfilingStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LatestAgentOrchestratedAt != nil {
+		s.WriteTime(schemas.ProfilingStatus_latestAgentOrchestratedAt, *v.LatestAgentOrchestratedAt)
+	}
+	if v.LatestAgentProfileReportedAt != nil {
+		s.WriteTime(schemas.ProfilingStatus_latestAgentProfileReportedAt, *v.LatestAgentProfileReportedAt)
+	}
+	if v.LatestAggregatedProfile != nil {
+		s.WriteStruct(schemas.ProfilingStatus_latestAggregatedProfile)
+		v.LatestAggregatedProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ProfilingStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfilingStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfilingStatus_latestAgentOrchestratedAt:
+			v.LatestAgentOrchestratedAt = new(time.Time)
+			return d.ReadTime(schemas.ProfilingStatus_latestAgentOrchestratedAt, v.LatestAgentOrchestratedAt)
+		case schemas.ProfilingStatus_latestAgentProfileReportedAt:
+			v.LatestAgentProfileReportedAt = new(time.Time)
+			return d.ReadTime(schemas.ProfilingStatus_latestAgentProfileReportedAt, v.LatestAgentProfileReportedAt)
+		case schemas.ProfilingStatus_latestAggregatedProfile:
+			v.LatestAggregatedProfile = &AggregatedProfileTime{}
+			return v.LatestAggregatedProfile.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A potential improvement that was found from analyzing the profiling data.
@@ -460,6 +1027,57 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Recommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Recommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllMatchesCount != nil {
+		s.WriteInt32(schemas.Recommendation_allMatchesCount, *v.AllMatchesCount)
+	}
+	if v.AllMatchesSum != nil {
+		s.WriteFloat64(schemas.Recommendation_allMatchesSum, *v.AllMatchesSum)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.Recommendation_endTime, *v.EndTime)
+	}
+	if v.Pattern != nil {
+		s.WriteStruct(schemas.Recommendation_pattern)
+		v.Pattern.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.Recommendation_startTime, *v.StartTime)
+	}
+	serializeMatches(s, schemas.Recommendation_topMatches, v.TopMatches)
+}
+func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Recommendation_allMatchesCount:
+			v.AllMatchesCount = new(int32)
+			return d.ReadInt32(schemas.Recommendation_allMatchesCount, v.AllMatchesCount)
+		case schemas.Recommendation_allMatchesSum:
+			v.AllMatchesSum = new(float64)
+			return d.ReadFloat64(schemas.Recommendation_allMatchesSum, v.AllMatchesSum)
+		case schemas.Recommendation_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.Recommendation_endTime, v.EndTime)
+		case schemas.Recommendation_pattern:
+			v.Pattern = &Pattern{}
+			return v.Pattern.Deserialize(d)
+		case schemas.Recommendation_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.Recommendation_startTime, v.StartTime)
+		case schemas.Recommendation_topMatches:
+			return deserializeMatches(d, schemas.Recommendation_topMatches, &v.TopMatches)
+		}
+		return nil
+	})
+}
+
 //	A data type that contains a Timestamp object. This is specified using the ISO
 //
 // 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond past
@@ -476,6 +1094,28 @@ type TimestampStructure struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimestampStructure) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestampStructure)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestampStructure) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteTime(schemas.TimestampStructure_value, *v.Value)
+	}
+}
+func (v *TimestampStructure) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestampStructure, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestampStructure_value:
+			v.Value = new(time.Time)
+			return d.ReadTime(schemas.TimestampStructure_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Feedback that can be submitted for each instance of an anomaly by the user.
 // Feedback is be used for improvements in generating recommendations for the
 // application.
@@ -488,6 +1128,32 @@ type UserFeedback struct {
 	Type FeedbackType
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserFeedback) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserFeedback)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserFeedback) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.UserFeedback_type, string(v.Type))
+	}
+}
+func (v *UserFeedback) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserFeedback, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserFeedback_type:
+			var ev string
+			if err := d.ReadString(schemas.UserFeedback_type, &ev); err != nil {
+				return err
+			}
+			v.Type = FeedbackType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

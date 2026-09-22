@@ -4,10 +4,9 @@ package backupgateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This action sends a request to sync metadata across the specified virtual
@@ -37,6 +36,28 @@ type StartVirtualMachinesMetadataSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartVirtualMachinesMetadataSyncInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartVirtualMachinesMetadataSyncInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartVirtualMachinesMetadataSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.StartVirtualMachinesMetadataSyncInput_HypervisorArn, *v.HypervisorArn)
+	}
+}
+func (v *StartVirtualMachinesMetadataSyncInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartVirtualMachinesMetadataSyncInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartVirtualMachinesMetadataSyncInput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.StartVirtualMachinesMetadataSyncInput_HypervisorArn, v.HypervisorArn)
+		}
+		return nil
+	})
+}
+
 type StartVirtualMachinesMetadataSyncOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor.
@@ -48,77 +69,51 @@ type StartVirtualMachinesMetadataSyncOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartVirtualMachinesMetadataSyncOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartVirtualMachinesMetadataSyncOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartVirtualMachinesMetadataSyncOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.StartVirtualMachinesMetadataSyncOutput_HypervisorArn, *v.HypervisorArn)
+	}
+}
+func (v *StartVirtualMachinesMetadataSyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartVirtualMachinesMetadataSyncOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartVirtualMachinesMetadataSyncOutput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.StartVirtualMachinesMetadataSyncOutput_HypervisorArn, v.HypervisorArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartVirtualMachinesMetadataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVirtualMachinesMetadataSync, schemas.StartVirtualMachinesMetadataSyncInput, schemas.StartVirtualMachinesMetadataSyncOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartVirtualMachinesMetadataSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartVirtualMachinesMetadataSync, schemas.StartVirtualMachinesMetadataSyncInput, schemas.StartVirtualMachinesMetadataSyncOutput), output: &StartVirtualMachinesMetadataSyncOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartVirtualMachinesMetadataSync{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartVirtualMachinesMetadataSync"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartVirtualMachinesMetadataSyncValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartVirtualMachinesMetadataSync(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -133,22 +128,8 @@ func (c *Client) addOperationStartVirtualMachinesMetadataSyncMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartVirtualMachinesMetadataSync(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartVirtualMachinesMetadataSync",
-	}
 }

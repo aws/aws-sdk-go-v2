@@ -5,10 +5,10 @@ package configservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides organization conformance pack deployment status for an organization.
@@ -55,6 +55,22 @@ type DescribeOrganizationConformancePackStatusesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConformancePackStatusesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConformancePackStatusesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConformancePackStatusesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.DescribeOrganizationConformancePackStatusesRequest_Limit, v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOrganizationConformancePackStatusesRequest_NextToken, *v.NextToken)
+	}
+	serializeOrganizationConformancePackNames(s, schemas.DescribeOrganizationConformancePackStatusesRequest_OrganizationConformancePackNames, v.OrganizationConformancePackNames)
+}
+
 type DescribeOrganizationConformancePackStatusesOutput struct {
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -70,74 +86,48 @@ type DescribeOrganizationConformancePackStatusesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeOrganizationConformancePackStatusesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeOrganizationConformancePackStatusesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeOrganizationConformancePackStatusesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeOrganizationConformancePackStatusesResponse_NextToken, *v.NextToken)
+	}
+	serializeOrganizationConformancePackStatuses(s, schemas.DescribeOrganizationConformancePackStatusesResponse_OrganizationConformancePackStatuses, v.OrganizationConformancePackStatuses)
+}
+func (v *DescribeOrganizationConformancePackStatusesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeOrganizationConformancePackStatusesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeOrganizationConformancePackStatusesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeOrganizationConformancePackStatusesResponse_NextToken, v.NextToken)
+		case schemas.DescribeOrganizationConformancePackStatusesResponse_OrganizationConformancePackStatuses:
+			return deserializeOrganizationConformancePackStatuses(d, schemas.DescribeOrganizationConformancePackStatusesResponse_OrganizationConformancePackStatuses, &v.OrganizationConformancePackStatuses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeOrganizationConformancePackStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConformancePackStatuses, schemas.DescribeOrganizationConformancePackStatusesRequest, schemas.DescribeOrganizationConformancePackStatusesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeOrganizationConformancePackStatuses{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeOrganizationConformancePackStatuses, schemas.DescribeOrganizationConformancePackStatusesRequest, schemas.DescribeOrganizationConformancePackStatusesResponse), output: &DescribeOrganizationConformancePackStatusesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeOrganizationConformancePackStatuses{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeOrganizationConformancePackStatuses"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationConformancePackStatuses(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +140,6 @@ func (c *Client) addOperationDescribeOrganizationConformancePackStatusesMiddlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -257,11 +241,3 @@ type DescribeOrganizationConformancePackStatusesAPIClient interface {
 }
 
 var _ DescribeOrganizationConformancePackStatusesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeOrganizationConformancePackStatuses(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeOrganizationConformancePackStatuses",
-	}
-}

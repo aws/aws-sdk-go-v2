@@ -4,10 +4,9 @@ package comprehend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Start the flywheel iteration.This operation uses any new datasets to train a
@@ -44,6 +43,21 @@ type StartFlywheelIterationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlywheelIterationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlywheelIterationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlywheelIterationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartFlywheelIterationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.StartFlywheelIterationRequest_FlywheelArn, *v.FlywheelArn)
+	}
+}
+
 type StartFlywheelIterationOutput struct {
 
 	//
@@ -58,77 +72,54 @@ type StartFlywheelIterationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartFlywheelIterationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartFlywheelIterationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartFlywheelIterationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FlywheelArn != nil {
+		s.WriteString(schemas.StartFlywheelIterationResponse_FlywheelArn, *v.FlywheelArn)
+	}
+	if v.FlywheelIterationId != nil {
+		s.WriteString(schemas.StartFlywheelIterationResponse_FlywheelIterationId, *v.FlywheelIterationId)
+	}
+}
+func (v *StartFlywheelIterationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartFlywheelIterationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartFlywheelIterationResponse_FlywheelArn:
+			v.FlywheelArn = new(string)
+			return d.ReadString(schemas.StartFlywheelIterationResponse_FlywheelArn, v.FlywheelArn)
+		case schemas.StartFlywheelIterationResponse_FlywheelIterationId:
+			v.FlywheelIterationId = new(string)
+			return d.ReadString(schemas.StartFlywheelIterationResponse_FlywheelIterationId, v.FlywheelIterationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartFlywheelIterationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlywheelIteration, schemas.StartFlywheelIterationRequest, schemas.StartFlywheelIterationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartFlywheelIteration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartFlywheelIteration, schemas.StartFlywheelIterationRequest, schemas.StartFlywheelIterationResponse), output: &StartFlywheelIterationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartFlywheelIteration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartFlywheelIteration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartFlywheelIterationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartFlywheelIteration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +134,8 @@ func (c *Client) addOperationStartFlywheelIterationMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartFlywheelIteration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartFlywheelIteration",
-	}
 }

@@ -1,0 +1,6 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AmazonSQS.CancelMessageMoveTask
+X-Amzn-Query-Mode: true
+
+{"ApproximateNumberOfMessagesMoved":1}

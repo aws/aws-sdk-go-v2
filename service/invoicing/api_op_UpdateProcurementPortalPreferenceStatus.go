@@ -5,10 +5,10 @@ package invoicing
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This feature API is subject to changing at any time. For more information, see
@@ -41,6 +41,10 @@ type UpdateProcurementPortalPreferenceStatusInput struct {
 	// This member is required.
 	ProcurementPortalPreferenceArn *string
 
+	// A unique, case-sensitive identifier that you provide to ensure idempotency of
+	// the request.
+	ClientToken *string
+
 	// The updated status of the e-invoice delivery preference.
 	EinvoiceDeliveryPreferenceStatus types.ProcurementPortalPreferenceStatus
 
@@ -58,6 +62,33 @@ type UpdateProcurementPortalPreferenceStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProcurementPortalPreferenceStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProcurementPortalPreferenceStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProcurementPortalPreferenceStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EinvoiceDeliveryPreferenceStatus != "" {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatus, string(v.EinvoiceDeliveryPreferenceStatus))
+	}
+	if v.EinvoiceDeliveryPreferenceStatusReason != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_EinvoiceDeliveryPreferenceStatusReason, *v.EinvoiceDeliveryPreferenceStatusReason)
+	}
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+	if v.PurchaseOrderRetrievalPreferenceStatus != "" {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatus, string(v.PurchaseOrderRetrievalPreferenceStatus))
+	}
+	if v.PurchaseOrderRetrievalPreferenceStatusReason != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusRequest_PurchaseOrderRetrievalPreferenceStatusReason, *v.PurchaseOrderRetrievalPreferenceStatusReason)
+	}
+}
+
 type UpdateProcurementPortalPreferenceStatusOutput struct {
 
 	// The Amazon Resource Name (ARN) of the procurement portal preference with
@@ -72,77 +103,51 @@ type UpdateProcurementPortalPreferenceStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProcurementPortalPreferenceStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProcurementPortalPreferenceStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProcurementPortalPreferenceStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+}
+func (v *UpdateProcurementPortalPreferenceStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProcurementPortalPreferenceStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn:
+			v.ProcurementPortalPreferenceArn = new(string)
+			return d.ReadString(schemas.UpdateProcurementPortalPreferenceStatusResponse_ProcurementPortalPreferenceArn, v.ProcurementPortalPreferenceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProcurementPortalPreferenceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProcurementPortalPreferenceStatus, schemas.UpdateProcurementPortalPreferenceStatusRequest, schemas.UpdateProcurementPortalPreferenceStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProcurementPortalPreferenceStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProcurementPortalPreferenceStatus, schemas.UpdateProcurementPortalPreferenceStatusRequest, schemas.UpdateProcurementPortalPreferenceStatusResponse), output: &UpdateProcurementPortalPreferenceStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProcurementPortalPreferenceStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProcurementPortalPreferenceStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateProcurementPortalPreferenceStatusMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateProcurementPortalPreferenceStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProcurementPortalPreferenceStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +162,41 @@ func (c *Client) addOperationUpdateProcurementPortalPreferenceStatusMiddlewares(
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
 }
 
-func newServiceMetadataMiddleware_opUpdateProcurementPortalPreferenceStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateProcurementPortalPreferenceStatus",
+type idempotencyToken_initializeOpUpdateProcurementPortalPreferenceStatus struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateProcurementPortalPreferenceStatus) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateProcurementPortalPreferenceStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
 	}
+
+	input, ok := in.Parameters.(*UpdateProcurementPortalPreferenceStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateProcurementPortalPreferenceStatusInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateProcurementPortalPreferenceStatusMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateProcurementPortalPreferenceStatus{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }

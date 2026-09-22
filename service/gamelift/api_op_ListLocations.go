@@ -5,10 +5,10 @@ package gamelift
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -58,6 +58,22 @@ type ListLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLocationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLocationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLocationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationFilterList(s, schemas.ListLocationsInput_Filters, v.Filters)
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListLocationsInput_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLocationsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListLocationsOutput struct {
 
 	// A collection of locations, including both Amazon Web Services and custom
@@ -76,77 +92,51 @@ type ListLocationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLocationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLocationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLocationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLocationModelList(s, schemas.ListLocationsOutput_Locations, v.Locations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLocationsOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLocationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLocationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLocationsOutput_Locations:
+			return deserializeLocationModelList(d, schemas.ListLocationsOutput_Locations, &v.Locations)
+		case schemas.ListLocationsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLocationsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLocations, schemas.ListLocationsInput, schemas.ListLocationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListLocations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLocations, schemas.ListLocationsInput, schemas.ListLocationsOutput), output: &ListLocationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListLocations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLocations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLocations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,12 +149,6 @@ func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +249,3 @@ type ListLocationsAPIClient interface {
 }
 
 var _ ListLocationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLocations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLocations",
-	}
-}

@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches views based on name, description, or tags.
@@ -53,6 +53,34 @@ type SearchViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchViewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchViewsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SearchViewsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchViewsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchViewsRequest_NextToken, *v.NextToken)
+	}
+	if v.SearchCriteria != nil {
+		s.WriteStruct(schemas.SearchViewsRequest_SearchCriteria)
+		v.SearchCriteria.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.SearchViewsRequest_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchViewsOutput struct {
 
 	// The approximate total number of views that match the search criteria.
@@ -70,77 +98,57 @@ type SearchViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchViewsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchViewsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchViewsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximateTotalCount != nil {
+		s.WriteInt64(schemas.SearchViewsResponse_ApproximateTotalCount, *v.ApproximateTotalCount)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchViewsResponse_NextToken, *v.NextToken)
+	}
+	serializeViewSearchSummaryList(s, schemas.SearchViewsResponse_Views, v.Views)
+}
+func (v *SearchViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchViewsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchViewsResponse_ApproximateTotalCount:
+			v.ApproximateTotalCount = new(int64)
+			return d.ReadInt64(schemas.SearchViewsResponse_ApproximateTotalCount, v.ApproximateTotalCount)
+		case schemas.SearchViewsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchViewsResponse_NextToken, v.NextToken)
+		case schemas.SearchViewsResponse_Views:
+			return deserializeViewSearchSummaryList(d, schemas.SearchViewsResponse_Views, &v.Views)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchViews, schemas.SearchViewsRequest, schemas.SearchViewsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchViews, schemas.SearchViewsRequest, schemas.SearchViewsResponse), output: &SearchViewsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchViews{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchViews"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSearchViewsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchViews(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +161,6 @@ func (c *Client) addOperationSearchViewsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +260,3 @@ type SearchViewsAPIClient interface {
 }
 
 var _ SearchViewsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchViews(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchViews",
-	}
-}

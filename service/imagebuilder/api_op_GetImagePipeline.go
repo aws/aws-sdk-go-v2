@@ -4,14 +4,13 @@ package imagebuilder
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an image pipeline.
+// Retrieves an image pipeline.
 func (c *Client) GetImagePipeline(ctx context.Context, params *GetImagePipelineInput, optFns ...func(*Options)) (*GetImagePipelineOutput, error) {
 	if params == nil {
 		params = &GetImagePipelineInput{}
@@ -37,6 +36,18 @@ type GetImagePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImagePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImagePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImagePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImagePipelineArn != nil {
+		s.WriteString(schemas.GetImagePipelineRequest_imagePipelineArn, *v.ImagePipelineArn)
+	}
+}
+
 type GetImagePipelineOutput struct {
 
 	// The image pipeline object.
@@ -51,77 +62,56 @@ type GetImagePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetImagePipelineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetImagePipelineResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetImagePipelineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImagePipeline != nil {
+		s.WriteStruct(schemas.GetImagePipelineResponse_imagePipeline)
+		v.ImagePipeline.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.GetImagePipelineResponse_requestId, *v.RequestId)
+	}
+}
+func (v *GetImagePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetImagePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetImagePipelineResponse_imagePipeline:
+			v.ImagePipeline = &types.ImagePipeline{}
+			return v.ImagePipeline.Deserialize(d)
+		case schemas.GetImagePipelineResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.GetImagePipelineResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetImagePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImagePipeline, schemas.GetImagePipelineRequest, schemas.GetImagePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetImagePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetImagePipeline, schemas.GetImagePipelineRequest, schemas.GetImagePipelineResponse), output: &GetImagePipelineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetImagePipeline{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetImagePipeline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetImagePipelineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetImagePipeline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +126,8 @@ func (c *Client) addOperationGetImagePipelineMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetImagePipeline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetImagePipeline",
-	}
 }

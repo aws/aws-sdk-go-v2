@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteAutoScalingGroup&AutoScalingGroupName=__AutoScalingGroupName__&ForceDelete=true&Version=2011-01-01

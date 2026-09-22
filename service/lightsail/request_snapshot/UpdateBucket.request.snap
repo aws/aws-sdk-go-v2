@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.UpdateBucket
+
+{"accessLogConfig":{"destination":"__Destination__","enabled":true,"prefix":"__Prefix__"},"accessRules":{"allowPublicOverrides":true,"getObject":"public"},"bucketName":"__BucketName__","cors":{"rules":[{"allowedHeaders":["__Member__","__Member__"],"allowedMethods":["__Member__","__Member__"],"allowedOrigins":["__Member__","__Member__"],"exposeHeaders":["__Member__","__Member__"],"id":"__Id__","maxAgeSeconds":1},{"allowedHeaders":["__Member__","__Member__"],"allowedMethods":["__Member__","__Member__"],"allowedOrigins":["__Member__","__Member__"],"exposeHeaders":["__Member__","__Member__"],"id":"__Id__","maxAgeSeconds":1}]},"readonlyAccessAccounts":["__Member__","__Member__"],"versioning":"__Versioning__"}

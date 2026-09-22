@@ -4,10 +4,9 @@ package backupgateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a gateway's name. Specify which gateway to update using the Amazon
@@ -40,6 +39,34 @@ type UpdateGatewayInformationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayInformationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayInformationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayInformationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.UpdateGatewayInformationInput_GatewayArn, *v.GatewayArn)
+	}
+	if v.GatewayDisplayName != nil {
+		s.WriteString(schemas.UpdateGatewayInformationInput_GatewayDisplayName, *v.GatewayDisplayName)
+	}
+}
+func (v *UpdateGatewayInformationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayInformationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayInformationInput_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayInformationInput_GatewayArn, v.GatewayArn)
+		case schemas.UpdateGatewayInformationInput_GatewayDisplayName:
+			v.GatewayDisplayName = new(string)
+			return d.ReadString(schemas.UpdateGatewayInformationInput_GatewayDisplayName, v.GatewayDisplayName)
+		}
+		return nil
+	})
+}
+
 type UpdateGatewayInformationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway you updated.
@@ -51,77 +78,51 @@ type UpdateGatewayInformationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayInformationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayInformationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayInformationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.UpdateGatewayInformationOutput_GatewayArn, *v.GatewayArn)
+	}
+}
+func (v *UpdateGatewayInformationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayInformationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayInformationOutput_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayInformationOutput_GatewayArn, v.GatewayArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGatewayInformationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayInformation, schemas.UpdateGatewayInformationInput, schemas.UpdateGatewayInformationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateGatewayInformation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayInformation, schemas.UpdateGatewayInformationInput, schemas.UpdateGatewayInformationOutput), output: &UpdateGatewayInformationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateGatewayInformation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGatewayInformation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateGatewayInformationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGatewayInformation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +137,8 @@ func (c *Client) addOperationUpdateGatewayInformationMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGatewayInformation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGatewayInformation",
-	}
 }

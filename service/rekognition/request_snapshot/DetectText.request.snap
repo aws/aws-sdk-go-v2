@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: RekognitionService.DetectText
+
+{"Filters":{"RegionsOfInterest":[{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Polygon":[{"X":1,"Y":1},{"X":1,"Y":1}]},{"BoundingBox":{"Height":1,"Left":1,"Top":1,"Width":1},"Polygon":[{"X":1,"Y":1},{"X":1,"Y":1}]}],"WordFilter":{"MinBoundingBoxHeight":1,"MinBoundingBoxWidth":1,"MinConfidence":1}},"Image":{"Bytes":"YmxvYg==","S3Object":{"Bucket":"__Bucket__","Name":"__Name__","Version":"__Version__"}}}

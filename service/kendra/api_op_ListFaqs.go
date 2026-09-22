@@ -5,10 +5,10 @@ package kendra
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of FAQs associated with an index.
@@ -46,6 +46,24 @@ type ListFaqsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFaqsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFaqsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFaqsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListFaqsRequest_IndexId, *v.IndexId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFaqsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFaqsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListFaqsOutput struct {
 
 	// Summary information about the FAQs for a specified index.
@@ -61,77 +79,51 @@ type ListFaqsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFaqsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFaqsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFaqsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFaqSummaryItems(s, schemas.ListFaqsResponse_FaqSummaryItems, v.FaqSummaryItems)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFaqsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFaqsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFaqsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFaqsResponse_FaqSummaryItems:
+			return deserializeFaqSummaryItems(d, schemas.ListFaqsResponse_FaqSummaryItems, &v.FaqSummaryItems)
+		case schemas.ListFaqsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFaqsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFaqsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFaqs, schemas.ListFaqsRequest, schemas.ListFaqsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFaqs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFaqs, schemas.ListFaqsRequest, schemas.ListFaqsResponse), output: &ListFaqsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFaqs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFaqs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFaqsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFaqs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +136,6 @@ func (c *Client) addOperationListFaqsMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +236,3 @@ type ListFaqsAPIClient interface {
 }
 
 var _ ListFaqsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFaqs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFaqs",
-	}
-}

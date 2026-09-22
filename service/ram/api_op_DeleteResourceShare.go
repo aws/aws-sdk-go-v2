@@ -4,10 +4,9 @@ package ram
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified resource share.
@@ -56,6 +55,21 @@ type DeleteResourceShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceShareRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteResourceShareRequest_clientToken, *v.ClientToken)
+	}
+	if v.ResourceShareArn != nil {
+		s.WriteString(schemas.DeleteResourceShareRequest_resourceShareArn, *v.ResourceShareArn)
+	}
+}
+
 type DeleteResourceShareOutput struct {
 
 	// The idempotency identifier associated with this request. If you want to repeat
@@ -74,77 +88,54 @@ type DeleteResourceShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourceShareOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourceShareResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourceShareOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteResourceShareResponse_clientToken, *v.ClientToken)
+	}
+	if v.ReturnValue != nil {
+		s.WriteBool(schemas.DeleteResourceShareResponse_returnValue, *v.ReturnValue)
+	}
+}
+func (v *DeleteResourceShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourceShareResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourceShareResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteResourceShareResponse_clientToken, v.ClientToken)
+		case schemas.DeleteResourceShareResponse_returnValue:
+			v.ReturnValue = new(bool)
+			return d.ReadBool(schemas.DeleteResourceShareResponse_returnValue, v.ReturnValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceShare, schemas.DeleteResourceShareRequest, schemas.DeleteResourceShareResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourceShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourceShare, schemas.DeleteResourceShareRequest, schemas.DeleteResourceShareResponse), output: &DeleteResourceShareOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResourceShare{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteResourceShare"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteResourceShareValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteResourceShare(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +150,8 @@ func (c *Client) addOperationDeleteResourceShareMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteResourceShare(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteResourceShare",
-	}
 }

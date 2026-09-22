@@ -1,3 +1,169 @@
+# v1.132.0 (2026-09-22)
+
+* **Feature**: Adds support for granular custom permissions on 28 action connectors, including Gmail, Google Drive, Google Sheets, Airtable, and Dropbox. Administrators can now allow or deny individual connector operations instead of all action connectors at once.
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.131.0 (2026-09-21)
+
+* **Feature**: Enable schema-based (de)serialization for this service.
+
+# v1.130.0 (2026-09-09)
+
+* **Feature**: Stop registering the `retry.MetricsHeader` middleware in generated clients. The `Amz-Sdk-Request` header is now set by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.129.0 (2026-09-04)
+
+* **Feature**: Stop registering the `spanRetryLoop` middleware in generated clients. The retry loop's tracing span is now opened by the retry middleware itself.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.128.0 (2026-08-31.2)
+
+* **Feature**: Stop registering the `SetCredentialSourceMiddleware` middleware in generated clients. Credential source user agent features are now set when the client's middleware stack is constructed.
+
+# v1.127.0 (2026-08-31)
+
+* **Feature**: This release adds support for managing apps in Amazon QuickSight with ListApps, SearchApps, DescribeApp, DescribeAppPermissions, UpdateAppPermissions, and DeleteApp
+
+# v1.126.1 (2026-08-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.126.0 (2026-08-27)
+
+* **Feature**: Support connection read timeouts in the SDK. This is currently available on an opt-in basis by setting env `AWS_ENABLE_DEFAULT_SOCKET_TIMEOUT_2026=true`.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.125.0 (2026-08-26)
+
+* **Feature**: Stop registering the `ComputeContentLength` middleware in generated clients. `Content-Length` is now set when the request body is set via `SetStream`.
+* **Dependency Update**: Update to smithy-go v1.28.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.124.3 (2026-08-25)
+
+* **Dependency Update**: Update to smithy-go v1.27.10.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.124.2 (2026-08-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.124.1 (2026-08-14)
+
+* **Dependency Update**: Update to smithy-go v1.27.8.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.124.0 (2026-08-12)
+
+* **Feature**: Added APIs for DLP with Microsoft Purview (manage configs with label enforcement across Spaces, Chat, Knowledge Bases), Approval Workflows (CRUD for policies on asset sharing for Agents, Knowledge Bases, Spaces), and Limits Management (limit profiles for index storage and agent hours per user).
+
+# v1.123.2 (2026-08-10)
+
+* **Dependency Update**: Update to smithy-go v1.27.7.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.123.1 (2026-08-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.123.0 (2026-07-31.2)
+
+* **Feature**: Adding TopicV2 management APIs, adding possibility to use Topics in Analysis
+* **Dependency Update**: Updated to the latest SDK module versions
+* **Dependency Update**: Upgrade to smithy-go v1.27.6 to fix various serde issues in HTTP binding services.
+
+# v1.122.2 (2026-07-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.122.1 (2026-07-28)
+
+* **Dependency Update**: Update to smithy-go v1.27.5.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.122.0 (2026-07-27)
+
+* **Feature**: Added new Governance fields to Custom Permissions API to support Deny By Default functionality.
+
+# v1.121.0 (2026-07-23)
+
+* **Feature**: Added new capabilities to custom permissions profiles to control access to Amazon Quick through the browser extension and Microsoft Word, Outlook, Excel, and PowerPoint add-ins.
+
+# v1.120.0 (2026-07-21)
+
+* **Feature**: Add an option to clients to disable clock skew
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.119.0 (2026-07-20)
+
+* **Feature**: Adds support for custom permissions for Triggers, allowing administrators to control user access to Schedule, Inbound Email and Quick Event triggers.
+
+# v1.118.1 (2026-07-13)
+
+* No change notes available for this release.
+
+# v1.118.0 (2026-07-10)
+
+* **Feature**: Provides CreateKnowledgeBase and UpdateKnowledgeBase APIs
+
+# v1.117.0 (2026-07-06)
+
+* **Feature**: Add request serialization snapshot tests.
+
+# v1.116.0 (2026-07-01)
+
+* **Feature**: Adding support for FileSource PhysicalTables.  This adds support for datasets with file sources.
+* **Bug Fix**: Bump smithy-go to 1.27.3, fix JSON encorder for document.Number, endpoint host label format validation and CBOR union serialization on new serde
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.115.1 (2026-06-29)
+
+* No change notes available for this release.
+
+# v1.115.0 (2026-06-22)
+
+* **Feature**: Updated the Amazon Quick Spaces API to remove unsupported SPACE and ARTIFACT values from the SpaceQuickSightResourceType enum.
+
+# v1.114.1 (2026-06-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.114.0 (2026-06-05)
+
+* **Feature**: Adds support for Knowledge Base APIs and Index Capacity API
+
+# v1.113.3 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.113.2 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.113.1 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.113.0 (2026-06-01)
+
+* **Feature**: This release adds public APIs for Amazon QuickSight Spaces, Agents, and Flows. Spaces APIs enable management of curated resource collections. Agents APIs provide lifecycle control over AI-powered agents that leverage Spaces. Flows APIs add CRUDL APIs for automated workflows.
+
+# v1.112.0 (2026-05-29)
+
+* **Feature**: Adds support for creating, updating, describing, listing, and deleting an OAuthClientApplication resource, a new quicksight resource that allows customers to store OAuth configurations to connect to their databases via 3 Legged OAuth.
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.111.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.111.0 (2026-05-21)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.110.0 (2026-05-18)
 
 * **Feature**: Support for dataset enrichment and geo spatial in new data preparation experience

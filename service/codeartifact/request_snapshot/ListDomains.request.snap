@@ -1,0 +1,5 @@
+POST /v1/domains
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

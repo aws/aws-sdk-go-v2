@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configures threat protection for a user pool or app client. Sets configuration
@@ -28,6 +27,11 @@ import (
 // parameters only. To change threat protection to audit-only or off, update the
 // value of UserPoolAddOns in an UpdateUserPool request. To activate this setting,
 // your user pool must be on the [Plus tier].
+//
+// In secondary regions for user pools with multi-region replication, only the
+// SourceARN and From attributes of NotifyConfiguration can be modified to
+// configure region-specific SES integration. All other risk configuration settings
+// must match the existing values to maintain consistency across replicas.
 //
 // [Plus tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
 func (c *Client) SetRiskConfiguration(ctx context.Context, params *SetRiskConfigurationInput, optFns ...func(*Options)) (*SetRiskConfigurationOutput, error) {
@@ -82,6 +86,36 @@ type SetRiskConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetRiskConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetRiskConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetRiskConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountTakeoverRiskConfiguration != nil {
+		s.WriteStruct(schemas.SetRiskConfigurationRequest_AccountTakeoverRiskConfiguration)
+		v.AccountTakeoverRiskConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientId != nil {
+		s.WriteString(schemas.SetRiskConfigurationRequest_ClientId, *v.ClientId)
+	}
+	if v.CompromisedCredentialsRiskConfiguration != nil {
+		s.WriteStruct(schemas.SetRiskConfigurationRequest_CompromisedCredentialsRiskConfiguration)
+		v.CompromisedCredentialsRiskConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RiskExceptionConfiguration != nil {
+		s.WriteStruct(schemas.SetRiskConfigurationRequest_RiskExceptionConfiguration)
+		v.RiskExceptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.SetRiskConfigurationRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type SetRiskConfigurationOutput struct {
 
 	// The API response that contains the risk configuration that you set and the
@@ -96,77 +130,50 @@ type SetRiskConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetRiskConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetRiskConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetRiskConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RiskConfiguration != nil {
+		s.WriteStruct(schemas.SetRiskConfigurationResponse_RiskConfiguration)
+		v.RiskConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SetRiskConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetRiskConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetRiskConfigurationResponse_RiskConfiguration:
+			v.RiskConfiguration = &types.RiskConfigurationType{}
+			return v.RiskConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetRiskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetRiskConfiguration, schemas.SetRiskConfigurationRequest, schemas.SetRiskConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetRiskConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetRiskConfiguration, schemas.SetRiskConfigurationRequest, schemas.SetRiskConfigurationResponse), output: &SetRiskConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetRiskConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SetRiskConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSetRiskConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetRiskConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,22 +188,8 @@ func (c *Client) addOperationSetRiskConfigurationMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSetRiskConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SetRiskConfiguration",
-	}
 }

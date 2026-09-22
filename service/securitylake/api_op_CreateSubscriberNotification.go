@@ -4,11 +4,10 @@ package securitylake
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securitylake/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Notifies the subscriber when new data is written to the data lake for the
@@ -45,6 +44,19 @@ type CreateSubscriberNotificationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriberNotificationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriberNotificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriberNotificationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotificationConfiguration(s, schemas.CreateSubscriberNotificationRequest_configuration, v.Configuration)
+	if v.SubscriberId != nil {
+		s.WriteString(schemas.CreateSubscriberNotificationRequest_subscriberId, *v.SubscriberId)
+	}
+}
+
 type CreateSubscriberNotificationOutput struct {
 
 	// The subscriber endpoint to which exception messages are posted.
@@ -56,77 +68,48 @@ type CreateSubscriberNotificationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSubscriberNotificationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSubscriberNotificationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSubscriberNotificationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriberEndpoint != nil {
+		s.WriteString(schemas.CreateSubscriberNotificationResponse_subscriberEndpoint, *v.SubscriberEndpoint)
+	}
+}
+func (v *CreateSubscriberNotificationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSubscriberNotificationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSubscriberNotificationResponse_subscriberEndpoint:
+			v.SubscriberEndpoint = new(string)
+			return d.ReadString(schemas.CreateSubscriberNotificationResponse_subscriberEndpoint, v.SubscriberEndpoint)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSubscriberNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriberNotification, schemas.CreateSubscriberNotificationRequest, schemas.CreateSubscriberNotificationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSubscriberNotification{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSubscriberNotification, schemas.CreateSubscriberNotificationRequest, schemas.CreateSubscriberNotificationResponse), output: &CreateSubscriberNotificationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSubscriberNotification{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSubscriberNotification"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSubscriberNotificationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSubscriberNotification(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +124,8 @@ func (c *Client) addOperationCreateSubscriberNotificationMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSubscriberNotification(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSubscriberNotification",
-	}
 }

@@ -235,6 +235,9 @@ const (
 	ConnectionTypeWorkflowsMwaa ConnectionType = "WORKFLOWS_MWAA"
 	ConnectionTypeAmazonQ       ConnectionType = "AMAZON_Q"
 	ConnectionTypeMlflow        ConnectionType = "MLFLOW"
+	ConnectionTypeVpc           ConnectionType = "VPC"
+	// A Git connection type.
+	ConnectionTypeGit ConnectionType = "GIT"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -265,6 +268,8 @@ func (ConnectionType) Values() []ConnectionType {
 		"WORKFLOWS_MWAA",
 		"AMAZON_Q",
 		"MLFLOW",
+		"VPC",
+		"GIT",
 	}
 }
 
@@ -1351,6 +1356,10 @@ const (
 	NotebookStatusActive NotebookStatus = "ACTIVE"
 	// The notebook is archived.
 	NotebookStatusArchived NotebookStatus = "ARCHIVED"
+	// The notebook sync is in progress.
+	NotebookStatusSyncInProgress NotebookStatus = "SYNC_IN_PROGRESS"
+	// The notebook sync failed.
+	NotebookStatusSyncFailed NotebookStatus = "SYNC_FAILED"
 )
 
 // Values returns all known values for NotebookStatus. Note that this can be
@@ -1361,6 +1370,29 @@ func (NotebookStatus) Values() []NotebookStatus {
 	return []NotebookStatus{
 		"ACTIVE",
 		"ARCHIVED",
+		"SYNC_IN_PROGRESS",
+		"SYNC_FAILED",
+	}
+}
+
+type NotebookType string
+
+// Enum values for NotebookType
+const (
+	// A data notebook.
+	NotebookTypeData NotebookType = "DATA"
+	// A SQL notebook.
+	NotebookTypeSql NotebookType = "SQL"
+)
+
+// Values returns all known values for NotebookType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotebookType) Values() []NotebookType {
+	return []NotebookType{
+		"DATA",
+		"SQL",
 	}
 }
 

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Firehose_20150804.ListTagsForDeliveryStream
+
+{"DeliveryStreamName":"__DeliveryStreamName__","ExclusiveStartTagKey":"__ExclusiveStartTagKey__","Limit":1}

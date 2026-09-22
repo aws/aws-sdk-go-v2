@@ -5,10 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all associated origination identities in your pool.
@@ -54,6 +54,25 @@ type ListPoolOriginationIdentitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoolOriginationIdentitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoolOriginationIdentitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoolOriginationIdentitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePoolOriginationIdentitiesFilterList(s, schemas.ListPoolOriginationIdentitiesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPoolOriginationIdentitiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoolOriginationIdentitiesRequest_NextToken, *v.NextToken)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.ListPoolOriginationIdentitiesRequest_PoolId, *v.PoolId)
+	}
+}
+
 type ListPoolOriginationIdentitiesOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -75,77 +94,63 @@ type ListPoolOriginationIdentitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPoolOriginationIdentitiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPoolOriginationIdentitiesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPoolOriginationIdentitiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPoolOriginationIdentitiesResult_NextToken, *v.NextToken)
+	}
+	serializeOriginationIdentityMetadataList(s, schemas.ListPoolOriginationIdentitiesResult_OriginationIdentities, v.OriginationIdentities)
+	if v.PoolArn != nil {
+		s.WriteString(schemas.ListPoolOriginationIdentitiesResult_PoolArn, *v.PoolArn)
+	}
+	if v.PoolId != nil {
+		s.WriteString(schemas.ListPoolOriginationIdentitiesResult_PoolId, *v.PoolId)
+	}
+}
+func (v *ListPoolOriginationIdentitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPoolOriginationIdentitiesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPoolOriginationIdentitiesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPoolOriginationIdentitiesResult_NextToken, v.NextToken)
+		case schemas.ListPoolOriginationIdentitiesResult_OriginationIdentities:
+			return deserializeOriginationIdentityMetadataList(d, schemas.ListPoolOriginationIdentitiesResult_OriginationIdentities, &v.OriginationIdentities)
+		case schemas.ListPoolOriginationIdentitiesResult_PoolArn:
+			v.PoolArn = new(string)
+			return d.ReadString(schemas.ListPoolOriginationIdentitiesResult_PoolArn, v.PoolArn)
+		case schemas.ListPoolOriginationIdentitiesResult_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.ListPoolOriginationIdentitiesResult_PoolId, v.PoolId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPoolOriginationIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoolOriginationIdentities, schemas.ListPoolOriginationIdentitiesRequest, schemas.ListPoolOriginationIdentitiesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListPoolOriginationIdentities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPoolOriginationIdentities, schemas.ListPoolOriginationIdentitiesRequest, schemas.ListPoolOriginationIdentitiesResult), output: &ListPoolOriginationIdentitiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListPoolOriginationIdentities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPoolOriginationIdentities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPoolOriginationIdentitiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPoolOriginationIdentities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +163,6 @@ func (c *Client) addOperationListPoolOriginationIdentitiesMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -267,11 +266,3 @@ type ListPoolOriginationIdentitiesAPIClient interface {
 }
 
 var _ ListPoolOriginationIdentitiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPoolOriginationIdentities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPoolOriginationIdentities",
-	}
-}

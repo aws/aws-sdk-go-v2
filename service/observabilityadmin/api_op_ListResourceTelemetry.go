@@ -5,10 +5,8 @@ package observabilityadmin
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns a list of telemetry configurations for Amazon Web Services resources
@@ -51,8 +49,21 @@ type ListResourceTelemetryInput struct {
 	ResourceTags map[string]string
 
 	//  A list of resource types used to filter resources supported by telemetry
-	// config. If this parameter is provided, the resources will be returned in the
-	// same order used in the request.
+	// config. If this parameter is provided, the service returns the resources in the
+	// same order as specified in the request. Currently supported resource types for
+	// discovery are:
+	//
+	//   - AWS::EC2::Instance
+	//
+	//   - AWS::EC2::VPC
+	//
+	//   - AWS::Lambda::Function
+	//
+	//   - AWS::EKS::Cluster
+	//
+	//   - AWS::WAFv2::WebACL
+	//
+	//   - AWS::ElasticLoadBalancingV2::LoadBalancer (Network Load Balancers only)
 	ResourceTypes []types.ResourceType
 
 	//  A key-value pair to filter resources based on the telemetry type and the state
@@ -80,9 +91,6 @@ type ListResourceTelemetryOutput struct {
 }
 
 func (c *Client) addOperationListResourceTelemetryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceTelemetry{}, middleware.After)
 	if err != nil {
 		return err
@@ -91,62 +99,17 @@ func (c *Client) addOperationListResourceTelemetryMiddlewares(stack *middleware.
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResourceTelemetry"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourceTelemetry(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,12 +122,6 @@ func (c *Client) addOperationListResourceTelemetryMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +223,3 @@ type ListResourceTelemetryAPIClient interface {
 }
 
 var _ ListResourceTelemetryAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListResourceTelemetry(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListResourceTelemetry",
-	}
-}

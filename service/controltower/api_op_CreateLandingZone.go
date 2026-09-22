@@ -4,12 +4,12 @@ package controltower
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/document"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new landing zone. This API call starts an asynchronous operation that
@@ -53,6 +53,23 @@ type CreateLandingZoneInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLandingZoneInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLandingZoneInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLandingZoneInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Manifest != nil {
+		s.WriteDocument(schemas.CreateLandingZoneInput_manifest, &smithydocument.Opaque{Value: v.Manifest})
+	}
+	serializeRemediationTypes(s, schemas.CreateLandingZoneInput_remediationTypes, v.RemediationTypes)
+	serializeTagMap(s, schemas.CreateLandingZoneInput_tags, v.Tags)
+	if v.Version != nil {
+		s.WriteString(schemas.CreateLandingZoneInput_version, *v.Version)
+	}
+}
+
 type CreateLandingZoneOutput struct {
 
 	// The ARN of the landing zone resource.
@@ -73,77 +90,54 @@ type CreateLandingZoneOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLandingZoneOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLandingZoneOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLandingZoneOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateLandingZoneOutput_arn, *v.Arn)
+	}
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.CreateLandingZoneOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *CreateLandingZoneOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLandingZoneOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLandingZoneOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateLandingZoneOutput_arn, v.Arn)
+		case schemas.CreateLandingZoneOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.CreateLandingZoneOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLandingZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLandingZone, schemas.CreateLandingZoneInput, schemas.CreateLandingZoneOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateLandingZone{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLandingZone, schemas.CreateLandingZoneInput, schemas.CreateLandingZoneOutput), output: &CreateLandingZoneOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateLandingZone{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLandingZone"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateLandingZoneValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLandingZone(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +152,8 @@ func (c *Client) addOperationCreateLandingZoneMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateLandingZone(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateLandingZone",
-	}
 }

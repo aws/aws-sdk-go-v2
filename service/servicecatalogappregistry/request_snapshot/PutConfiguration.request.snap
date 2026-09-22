@@ -1,0 +1,5 @@
+PUT /configuration
+
+Content-Type: application/json
+
+{"configuration":{"tagQueryConfiguration":{"tagKey":"__TagKey__"}}}

@@ -4,10 +4,9 @@ package wisdom
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wisdom/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -55,6 +54,40 @@ type StartContentUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContentUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContentUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContentUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.StartContentUploadRequest_contentType, *v.ContentType)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.StartContentUploadRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.PresignedUrlTimeToLive != nil {
+		s.WriteInt32(schemas.StartContentUploadRequest_presignedUrlTimeToLive, *v.PresignedUrlTimeToLive)
+	}
+}
+func (v *StartContentUploadInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContentUploadRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContentUploadRequest_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.StartContentUploadRequest_contentType, v.ContentType)
+		case schemas.StartContentUploadRequest_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.StartContentUploadRequest_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.StartContentUploadRequest_presignedUrlTimeToLive:
+			v.PresignedUrlTimeToLive = new(int32)
+			return d.ReadInt32(schemas.StartContentUploadRequest_presignedUrlTimeToLive, v.PresignedUrlTimeToLive)
+		}
+		return nil
+	})
+}
+
 type StartContentUploadOutput struct {
 
 	// The headers to include in the upload.
@@ -83,77 +116,63 @@ type StartContentUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartContentUploadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartContentUploadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartContentUploadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeHeaders(s, schemas.StartContentUploadResponse_headersToInclude, v.HeadersToInclude)
+	if v.UploadId != nil {
+		s.WriteString(schemas.StartContentUploadResponse_uploadId, *v.UploadId)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.StartContentUploadResponse_url, *v.Url)
+	}
+	if v.UrlExpiry != nil {
+		s.WriteTime(schemas.StartContentUploadResponse_urlExpiry, *v.UrlExpiry)
+	}
+}
+func (v *StartContentUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartContentUploadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartContentUploadResponse_headersToInclude:
+			return deserializeHeaders(d, schemas.StartContentUploadResponse_headersToInclude, &v.HeadersToInclude)
+		case schemas.StartContentUploadResponse_uploadId:
+			v.UploadId = new(string)
+			return d.ReadString(schemas.StartContentUploadResponse_uploadId, v.UploadId)
+		case schemas.StartContentUploadResponse_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.StartContentUploadResponse_url, v.Url)
+		case schemas.StartContentUploadResponse_urlExpiry:
+			v.UrlExpiry = new(time.Time)
+			return d.ReadTime(schemas.StartContentUploadResponse_urlExpiry, v.UrlExpiry)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartContentUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContentUpload, schemas.StartContentUploadRequest, schemas.StartContentUploadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartContentUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartContentUpload, schemas.StartContentUploadRequest, schemas.StartContentUploadResponse), output: &StartContentUploadOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartContentUpload{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartContentUpload"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartContentUploadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartContentUpload(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +187,8 @@ func (c *Client) addOperationStartContentUploadMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartContentUpload(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartContentUpload",
-	}
 }

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -17,6 +19,7 @@ import (
 //	AcceptedTermMemberFixedUpfrontPricingTerm
 //	AcceptedTermMemberFreeTrialPricingTerm
 //	AcceptedTermMemberLegalTerm
+//	AcceptedTermMemberNetPaymentTerm
 //	AcceptedTermMemberPaymentScheduleTerm
 //	AcceptedTermMemberRecurringPaymentTerm
 //	AcceptedTermMemberRenewalTerm
@@ -38,6 +41,14 @@ type AcceptedTermMemberByolPricingTerm struct {
 }
 
 func (*AcceptedTermMemberByolPricingTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberByolPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_byolPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberByolPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a prepaid payment model that allows buyers to configure the
 // entitlements they want to purchase and the duration.
@@ -48,6 +59,14 @@ type AcceptedTermMemberConfigurableUpfrontPricingTerm struct {
 }
 
 func (*AcceptedTermMemberConfigurableUpfrontPricingTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberConfigurableUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_configurableUpfrontPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberConfigurableUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a pre-paid pricing model where the customers are charged a fixed
 // upfront amount.
@@ -58,6 +77,14 @@ type AcceptedTermMemberFixedUpfrontPricingTerm struct {
 }
 
 func (*AcceptedTermMemberFixedUpfrontPricingTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberFixedUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_fixedUpfrontPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberFixedUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a short-term free pricing model where the buyers aren’t charged
 // anything within a specified limit.
@@ -68,6 +95,14 @@ type AcceptedTermMemberFreeTrialPricingTerm struct {
 }
 
 func (*AcceptedTermMemberFreeTrialPricingTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberFreeTrialPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_freeTrialPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberFreeTrialPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines the list of text agreements proposed to the acceptors. An example is
 // the end user license agreement (EULA).
@@ -78,6 +113,32 @@ type AcceptedTermMemberLegalTerm struct {
 }
 
 func (*AcceptedTermMemberLegalTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberLegalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_legalTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberLegalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// Defines the net payment due period for the agreement, specifying when payment
+// is due after an invoice is issued.
+type AcceptedTermMemberNetPaymentTerm struct {
+	Value NetPaymentTerm
+
+	noSmithyDocumentSerde
+}
+
+func (*AcceptedTermMemberNetPaymentTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberNetPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_netPaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberNetPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines an installment-based pricing model where customers are charged a fixed
 // price on different dates during the agreement validity period. This is used most
@@ -89,6 +150,14 @@ type AcceptedTermMemberPaymentScheduleTerm struct {
 }
 
 func (*AcceptedTermMemberPaymentScheduleTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberPaymentScheduleTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_paymentScheduleTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberPaymentScheduleTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a pricing model where customers are charged a fixed recurring price at
 // the end of each billing period.
@@ -99,14 +168,24 @@ type AcceptedTermMemberRecurringPaymentTerm struct {
 }
 
 func (*AcceptedTermMemberRecurringPaymentTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberRecurringPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_recurringPaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberRecurringPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines that on graceful expiration of the agreement (when the agreement ends
 // on its pre-defined end date), a new agreement will be created using the accepted
 // terms on the existing agreement. In other words, the agreement will be renewed.
 // Presence of RenewalTerm in the offer document means that auto-renewal is
-// allowed. Buyers will have the option to accept or decline auto-renewal at the
-// offer acceptance/agreement creation. Buyers can also change this flag from True
-// to False or False to True at anytime during the agreement's lifecycle.
+// allowed. The acceptor will have the option to accept or decline auto-renewal at
+// the offer acceptance/agreement creation. The acceptor can also change this flag
+// from True to False or False to True , within the limits set by LockoutPeriod
+// and MaxRenewals . Setting the flag to True doesn't by itself guarantee that the
+// agreement renews, because the proposer can also opt out.
 type AcceptedTermMemberRenewalTerm struct {
 	Value RenewalTerm
 
@@ -114,6 +193,14 @@ type AcceptedTermMemberRenewalTerm struct {
 }
 
 func (*AcceptedTermMemberRenewalTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberRenewalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_renewalTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberRenewalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines the customer support available for the acceptors when they purchase the
 // software.
@@ -124,6 +211,14 @@ type AcceptedTermMemberSupportTerm struct {
 }
 
 func (*AcceptedTermMemberSupportTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberSupportTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_supportTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberSupportTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a usage-based pricing model (typically, pay-as-you-go pricing), where
 // the customers are charged based on product usage.
@@ -134,6 +229,14 @@ type AcceptedTermMemberUsageBasedPricingTerm struct {
 }
 
 func (*AcceptedTermMemberUsageBasedPricingTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberUsageBasedPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_usageBasedPricingTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberUsageBasedPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines the conditions that will keep an agreement created from this offer
 // valid.
@@ -144,6 +247,14 @@ type AcceptedTermMemberValidityTerm struct {
 }
 
 func (*AcceptedTermMemberValidityTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberValidityTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_validityTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberValidityTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Defines a payment model where sellers can submit variable payment requests up
 // to a maximum charge amount, with configurable approval strategies and expiration
@@ -155,6 +266,14 @@ type AcceptedTermMemberVariablePaymentTerm struct {
 }
 
 func (*AcceptedTermMemberVariablePaymentTerm) isAcceptedTerm() {}
+func (v *AcceptedTermMemberVariablePaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptedTerm_variablePaymentTerm)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *AcceptedTermMemberVariablePaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The details of the party accepting the agreement terms. This is commonly the
 // buyer for PurchaseAgreement .
@@ -164,6 +283,28 @@ type Acceptor struct {
 	AccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Acceptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Acceptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Acceptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Acceptor_accountId, *v.AccountId)
+	}
+}
+func (v *Acceptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Acceptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Acceptor_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Acceptor_accountId, v.AccountId)
+		}
+		return nil
+	})
 }
 
 // Summary view of an agreement cancellation request.
@@ -198,6 +339,78 @@ type AgreementCancellationRequestSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AgreementCancellationRequestSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementCancellationRequestSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementCancellationRequestSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementCancellationRequestId != nil {
+		s.WriteString(schemas.AgreementCancellationRequestSummary_agreementCancellationRequestId, *v.AgreementCancellationRequestId)
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.AgreementCancellationRequestSummary_agreementId, *v.AgreementId)
+	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.AgreementCancellationRequestSummary_agreementType, *v.AgreementType)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.AgreementCancellationRequestSummary_catalog, *v.Catalog)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AgreementCancellationRequestSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.AgreementCancellationRequestSummary_reasonCode, string(v.ReasonCode))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AgreementCancellationRequestSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AgreementCancellationRequestSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AgreementCancellationRequestSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementCancellationRequestSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementCancellationRequestSummary_agreementCancellationRequestId:
+			v.AgreementCancellationRequestId = new(string)
+			return d.ReadString(schemas.AgreementCancellationRequestSummary_agreementCancellationRequestId, v.AgreementCancellationRequestId)
+		case schemas.AgreementCancellationRequestSummary_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.AgreementCancellationRequestSummary_agreementId, v.AgreementId)
+		case schemas.AgreementCancellationRequestSummary_agreementType:
+			v.AgreementType = new(string)
+			return d.ReadString(schemas.AgreementCancellationRequestSummary_agreementType, v.AgreementType)
+		case schemas.AgreementCancellationRequestSummary_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.AgreementCancellationRequestSummary_catalog, v.Catalog)
+		case schemas.AgreementCancellationRequestSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AgreementCancellationRequestSummary_createdAt, v.CreatedAt)
+		case schemas.AgreementCancellationRequestSummary_reasonCode:
+			var ev string
+			if err := d.ReadString(schemas.AgreementCancellationRequestSummary_reasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = AgreementCancellationRequestReasonCode(ev)
+			return nil
+		case schemas.AgreementCancellationRequestSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AgreementCancellationRequestSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AgreementCancellationRequestStatus(ev)
+			return nil
+		case schemas.AgreementCancellationRequestSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AgreementCancellationRequestSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Represents an entitlement associated with an agreement, including the
 // provisioning status, resource, and type.
 type AgreementEntitlement struct {
@@ -224,6 +437,68 @@ type AgreementEntitlement struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AgreementEntitlement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementEntitlement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementEntitlement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.AgreementEntitlement_licenseArn, *v.LicenseArn)
+	}
+	if v.RegistrationToken != nil {
+		s.WriteString(schemas.AgreementEntitlement_registrationToken, *v.RegistrationToken)
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.AgreementEntitlement_resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AgreementEntitlement_status, string(v.Status))
+	}
+	if v.StatusReasonCode != "" {
+		s.WriteString(schemas.AgreementEntitlement_statusReasonCode, string(v.StatusReasonCode))
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.AgreementEntitlement_type, *v.Type)
+	}
+}
+func (v *AgreementEntitlement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementEntitlement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementEntitlement_licenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.AgreementEntitlement_licenseArn, v.LicenseArn)
+		case schemas.AgreementEntitlement_registrationToken:
+			v.RegistrationToken = new(string)
+			return d.ReadString(schemas.AgreementEntitlement_registrationToken, v.RegistrationToken)
+		case schemas.AgreementEntitlement_resource:
+			v.Resource = &Resource{}
+			return v.Resource.Deserialize(d)
+		case schemas.AgreementEntitlement_status:
+			var ev string
+			if err := d.ReadString(schemas.AgreementEntitlement_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AgreementEntitlementStatus(ev)
+			return nil
+		case schemas.AgreementEntitlement_statusReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.AgreementEntitlement_statusReasonCode, &ev); err != nil {
+				return err
+			}
+			v.StatusReasonCode = AgreementEntitlementStatusReasonCode(ev)
+			return nil
+		case schemas.AgreementEntitlement_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.AgreementEntitlement_type, v.Type)
+		}
+		return nil
+	})
 }
 
 // A summary of grouped billing data for an agreement invoice line item.
@@ -253,6 +528,74 @@ type AgreementInvoiceLineItemGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AgreementInvoiceLineItemGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementInvoiceLineItemGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementInvoiceLineItemGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.AgreementInvoiceLineItemGroupSummary_agreementId, *v.AgreementId)
+	}
+	if v.InvoiceBillingPeriod != nil {
+		s.WriteStruct(schemas.AgreementInvoiceLineItemGroupSummary_invoiceBillingPeriod)
+		v.InvoiceBillingPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InvoiceId != nil {
+		s.WriteString(schemas.AgreementInvoiceLineItemGroupSummary_invoiceId, *v.InvoiceId)
+	}
+	if v.InvoiceType != "" {
+		s.WriteString(schemas.AgreementInvoiceLineItemGroupSummary_invoiceType, string(v.InvoiceType))
+	}
+	if v.InvoicingEntity != nil {
+		s.WriteStruct(schemas.AgreementInvoiceLineItemGroupSummary_invoicingEntity)
+		v.InvoicingEntity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IssuedTime != nil {
+		s.WriteTime(schemas.AgreementInvoiceLineItemGroupSummary_issuedTime, *v.IssuedTime)
+	}
+	if v.PricingCurrencyAmount != nil {
+		s.WriteStruct(schemas.AgreementInvoiceLineItemGroupSummary_pricingCurrencyAmount)
+		v.PricingCurrencyAmount.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AgreementInvoiceLineItemGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementInvoiceLineItemGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementInvoiceLineItemGroupSummary_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.AgreementInvoiceLineItemGroupSummary_agreementId, v.AgreementId)
+		case schemas.AgreementInvoiceLineItemGroupSummary_invoiceBillingPeriod:
+			v.InvoiceBillingPeriod = &InvoiceBillingPeriod{}
+			return v.InvoiceBillingPeriod.Deserialize(d)
+		case schemas.AgreementInvoiceLineItemGroupSummary_invoiceId:
+			v.InvoiceId = new(string)
+			return d.ReadString(schemas.AgreementInvoiceLineItemGroupSummary_invoiceId, v.InvoiceId)
+		case schemas.AgreementInvoiceLineItemGroupSummary_invoiceType:
+			var ev string
+			if err := d.ReadString(schemas.AgreementInvoiceLineItemGroupSummary_invoiceType, &ev); err != nil {
+				return err
+			}
+			v.InvoiceType = InvoiceType(ev)
+			return nil
+		case schemas.AgreementInvoiceLineItemGroupSummary_invoicingEntity:
+			v.InvoicingEntity = &InvoicingEntity{}
+			return v.InvoicingEntity.Deserialize(d)
+		case schemas.AgreementInvoiceLineItemGroupSummary_issuedTime:
+			v.IssuedTime = new(time.Time)
+			return d.ReadTime(schemas.AgreementInvoiceLineItemGroupSummary_issuedTime, v.IssuedTime)
+		case schemas.AgreementInvoiceLineItemGroupSummary_pricingCurrencyAmount:
+			v.PricingCurrencyAmount = &PricingCurrencyAmount{}
+			return v.PricingCurrencyAmount.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A summary of the agreement, including top-level attributes (for example, the
 // agreement ID, proposer, and acceptor).
 type AgreementViewSummary struct {
@@ -274,6 +617,64 @@ type AgreementViewSummary struct {
 	// agreements, which don’t have end dates.
 	EndTime *time.Time
 
+	// The reason why the agreement doesn't renew at its end date. The field is null
+	// when the agreement renews.
+	//
+	// More than one reason can apply to the same agreement. When that happens, the
+	// operation returns only one reason code, and PROPOSER_RENEW_OPTED_OUT takes
+	// precedence over all others.
+	//
+	// The EnableAutoRenew field reflects only the acceptor's preference, and doesn't
+	// reflect the other reasons an agreement might not renew.
+	//
+	// Reason codes include:
+	//
+	//   - PROPOSER_RENEW_OPTED_OUT – The proposer opted out of renewing the agreement.
+	//
+	//   - ACCEPTOR_RENEW_OPTED_OUT – The acceptor opted out of renewing the agreement.
+	//
+	//   - NO_RENEWAL_TERM – The accepted terms of the agreement don't include a
+	//   renewal term, which is required for an agreement to renew.
+	//
+	//   - RENEWAL_LIMIT_EXHAUSTED – The agreement reached the maximum number of
+	//   renewals allowed by its renewal term.
+	EndTimeBehaviorReasonCode EndTimeBehaviorReasonCode
+
+	// The behavior of the agreement when it reaches its end date. The field is null
+	// for agreements that have no end date, because those agreements never reach an
+	// end time.
+	//
+	// Types include:
+	//
+	//   - RENEW – A new agreement is created from the accepted terms of this agreement.
+	//
+	//   - REPLACE – A new agreement is created from a different offer than the one
+	//   this agreement was created from. This happens, for example, when a private offer
+	//   reaches its end date and the acceptor transitions to the public offer for the
+	//   product.
+	//
+	//   - EXPIRE – The agreement ends and isn't renewed or replaced.
+	EndTimeBehaviorType EndTimeBehaviorType
+
+	// A list of entitlements associated with the agreement.
+	Entitlements []Entitlement
+
+	// The unique identifier of the very first agreement in a chain of related
+	// agreements, such as renewals or replacements. It stays the same across all
+	// agreements in that chain, which lets you trace an agreement back to the
+	// original. You can also use it as the InitialAgreementId filter value to return
+	// every agreement in the same chain.
+	InitialAgreementId *string
+
+	// The date and time when the agreement was last updated. An agreement is updated
+	// when any of its attributes or accepted terms change. Amendments, renewals, and a
+	// party changing whether the agreement renews are all examples.
+	//
+	// Use the BeforeLastUpdateTime and AfterLastUpdateTime filters to search on this
+	// value, and LastUpdateTime as the SortBy value to sort by it. Sorting by
+	// LastUpdateTime is supported only when PartyType is Proposer .
+	LastUpdateTime *time.Time
+
 	// A summary of the proposal
 	ProposalSummary *ProposalSummary
 
@@ -288,6 +689,121 @@ type AgreementViewSummary struct {
 	Status AgreementStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *AgreementViewSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AgreementViewSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AgreementViewSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptanceTime != nil {
+		s.WriteTime(schemas.AgreementViewSummary_acceptanceTime, *v.AcceptanceTime)
+	}
+	if v.Acceptor != nil {
+		s.WriteStruct(schemas.AgreementViewSummary_acceptor)
+		v.Acceptor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.AgreementViewSummary_agreementId, *v.AgreementId)
+	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.AgreementViewSummary_agreementType, *v.AgreementType)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.AgreementViewSummary_endTime, *v.EndTime)
+	}
+	if v.EndTimeBehaviorReasonCode != "" {
+		s.WriteString(schemas.AgreementViewSummary_endTimeBehaviorReasonCode, string(v.EndTimeBehaviorReasonCode))
+	}
+	if v.EndTimeBehaviorType != "" {
+		s.WriteString(schemas.AgreementViewSummary_endTimeBehaviorType, string(v.EndTimeBehaviorType))
+	}
+	serializeEntitlementList(s, schemas.AgreementViewSummary_entitlements, v.Entitlements)
+	if v.InitialAgreementId != nil {
+		s.WriteString(schemas.AgreementViewSummary_initialAgreementId, *v.InitialAgreementId)
+	}
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.AgreementViewSummary_lastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.ProposalSummary != nil {
+		s.WriteStruct(schemas.AgreementViewSummary_proposalSummary)
+		v.ProposalSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Proposer != nil {
+		s.WriteStruct(schemas.AgreementViewSummary_proposer)
+		v.Proposer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.AgreementViewSummary_startTime, *v.StartTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AgreementViewSummary_status, string(v.Status))
+	}
+}
+func (v *AgreementViewSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AgreementViewSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AgreementViewSummary_acceptanceTime:
+			v.AcceptanceTime = new(time.Time)
+			return d.ReadTime(schemas.AgreementViewSummary_acceptanceTime, v.AcceptanceTime)
+		case schemas.AgreementViewSummary_acceptor:
+			v.Acceptor = &Acceptor{}
+			return v.Acceptor.Deserialize(d)
+		case schemas.AgreementViewSummary_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.AgreementViewSummary_agreementId, v.AgreementId)
+		case schemas.AgreementViewSummary_agreementType:
+			v.AgreementType = new(string)
+			return d.ReadString(schemas.AgreementViewSummary_agreementType, v.AgreementType)
+		case schemas.AgreementViewSummary_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.AgreementViewSummary_endTime, v.EndTime)
+		case schemas.AgreementViewSummary_endTimeBehaviorReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.AgreementViewSummary_endTimeBehaviorReasonCode, &ev); err != nil {
+				return err
+			}
+			v.EndTimeBehaviorReasonCode = EndTimeBehaviorReasonCode(ev)
+			return nil
+		case schemas.AgreementViewSummary_endTimeBehaviorType:
+			var ev string
+			if err := d.ReadString(schemas.AgreementViewSummary_endTimeBehaviorType, &ev); err != nil {
+				return err
+			}
+			v.EndTimeBehaviorType = EndTimeBehaviorType(ev)
+			return nil
+		case schemas.AgreementViewSummary_entitlements:
+			return deserializeEntitlementList(d, schemas.AgreementViewSummary_entitlements, &v.Entitlements)
+		case schemas.AgreementViewSummary_initialAgreementId:
+			v.InitialAgreementId = new(string)
+			return d.ReadString(schemas.AgreementViewSummary_initialAgreementId, v.InitialAgreementId)
+		case schemas.AgreementViewSummary_lastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.AgreementViewSummary_lastUpdateTime, v.LastUpdateTime)
+		case schemas.AgreementViewSummary_proposalSummary:
+			v.ProposalSummary = &ProposalSummary{}
+			return v.ProposalSummary.Deserialize(d)
+		case schemas.AgreementViewSummary_proposer:
+			v.Proposer = &Proposer{}
+			return v.Proposer.Deserialize(d)
+		case schemas.AgreementViewSummary_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.AgreementViewSummary_startTime, v.StartTime)
+		case schemas.AgreementViewSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.AgreementViewSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = AgreementStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An error for a billing adjustment request entry that failed validation.
@@ -311,6 +827,44 @@ type BatchCreateBillingAdjustmentError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchCreateBillingAdjustmentError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateBillingAdjustmentError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateBillingAdjustmentError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentError_clientToken, *v.ClientToken)
+	}
+	if v.Code != "" {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentError_code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentError_message, *v.Message)
+	}
+}
+func (v *BatchCreateBillingAdjustmentError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateBillingAdjustmentError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateBillingAdjustmentError_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentError_clientToken, v.ClientToken)
+		case schemas.BatchCreateBillingAdjustmentError_code:
+			var ev string
+			if err := d.ReadString(schemas.BatchCreateBillingAdjustmentError_code, &ev); err != nil {
+				return err
+			}
+			v.Code = BillingAdjustmentErrorCode(ev)
+			return nil
+		case schemas.BatchCreateBillingAdjustmentError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentError_message, v.Message)
+		}
+		return nil
+	})
+}
+
 // A successfully created billing adjustment request item.
 type BatchCreateBillingAdjustmentItem struct {
 
@@ -325,6 +879,34 @@ type BatchCreateBillingAdjustmentItem struct {
 	ClientToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateBillingAdjustmentItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateBillingAdjustmentItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateBillingAdjustmentItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingAdjustmentRequestId != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentItem_billingAdjustmentRequestId, *v.BillingAdjustmentRequestId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentItem_clientToken, *v.ClientToken)
+	}
+}
+func (v *BatchCreateBillingAdjustmentItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateBillingAdjustmentItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateBillingAdjustmentItem_billingAdjustmentRequestId:
+			v.BillingAdjustmentRequestId = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentItem_billingAdjustmentRequestId, v.BillingAdjustmentRequestId)
+		case schemas.BatchCreateBillingAdjustmentItem_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentItem_clientToken, v.ClientToken)
+		}
+		return nil
+	})
 }
 
 // An individual entry in a batch billing adjustment request, specifying the
@@ -368,6 +950,68 @@ type BatchCreateBillingAdjustmentRequestEntry struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateBillingAdjustmentRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateBillingAdjustmentRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateBillingAdjustmentRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentAmount != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentRequestEntry_adjustmentAmount, *v.AdjustmentAmount)
+	}
+	if v.AdjustmentReasonCode != "" {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentRequestEntry_adjustmentReasonCode, string(v.AdjustmentReasonCode))
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentRequestEntry_agreementId, *v.AgreementId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentRequestEntry_clientToken, *v.ClientToken)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentRequestEntry_currencyCode, *v.CurrencyCode)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentRequestEntry_description, *v.Description)
+	}
+	if v.OriginalInvoiceId != nil {
+		s.WriteString(schemas.BatchCreateBillingAdjustmentRequestEntry_originalInvoiceId, *v.OriginalInvoiceId)
+	}
+}
+func (v *BatchCreateBillingAdjustmentRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateBillingAdjustmentRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateBillingAdjustmentRequestEntry_adjustmentAmount:
+			v.AdjustmentAmount = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentRequestEntry_adjustmentAmount, v.AdjustmentAmount)
+		case schemas.BatchCreateBillingAdjustmentRequestEntry_adjustmentReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.BatchCreateBillingAdjustmentRequestEntry_adjustmentReasonCode, &ev); err != nil {
+				return err
+			}
+			v.AdjustmentReasonCode = BillingAdjustmentReasonCode(ev)
+			return nil
+		case schemas.BatchCreateBillingAdjustmentRequestEntry_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentRequestEntry_agreementId, v.AgreementId)
+		case schemas.BatchCreateBillingAdjustmentRequestEntry_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentRequestEntry_clientToken, v.ClientToken)
+		case schemas.BatchCreateBillingAdjustmentRequestEntry_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentRequestEntry_currencyCode, v.CurrencyCode)
+		case schemas.BatchCreateBillingAdjustmentRequestEntry_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentRequestEntry_description, v.Description)
+		case schemas.BatchCreateBillingAdjustmentRequestEntry_originalInvoiceId:
+			v.OriginalInvoiceId = new(string)
+			return d.ReadString(schemas.BatchCreateBillingAdjustmentRequestEntry_originalInvoiceId, v.OriginalInvoiceId)
+		}
+		return nil
+	})
 }
 
 // Summary view of a billing adjustment request.
@@ -427,6 +1071,86 @@ type BillingAdjustmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BillingAdjustmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingAdjustmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingAdjustmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentAmount != nil {
+		s.WriteString(schemas.BillingAdjustmentSummary_adjustmentAmount, *v.AdjustmentAmount)
+	}
+	if v.AgreementId != nil {
+		s.WriteString(schemas.BillingAdjustmentSummary_agreementId, *v.AgreementId)
+	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.BillingAdjustmentSummary_agreementType, *v.AgreementType)
+	}
+	if v.BillingAdjustmentRequestId != nil {
+		s.WriteString(schemas.BillingAdjustmentSummary_billingAdjustmentRequestId, *v.BillingAdjustmentRequestId)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.BillingAdjustmentSummary_catalog, *v.Catalog)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.BillingAdjustmentSummary_createdAt, *v.CreatedAt)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.BillingAdjustmentSummary_currencyCode, *v.CurrencyCode)
+	}
+	if v.OriginalInvoiceId != nil {
+		s.WriteString(schemas.BillingAdjustmentSummary_originalInvoiceId, *v.OriginalInvoiceId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.BillingAdjustmentSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.BillingAdjustmentSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *BillingAdjustmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingAdjustmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingAdjustmentSummary_adjustmentAmount:
+			v.AdjustmentAmount = new(string)
+			return d.ReadString(schemas.BillingAdjustmentSummary_adjustmentAmount, v.AdjustmentAmount)
+		case schemas.BillingAdjustmentSummary_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.BillingAdjustmentSummary_agreementId, v.AgreementId)
+		case schemas.BillingAdjustmentSummary_agreementType:
+			v.AgreementType = new(string)
+			return d.ReadString(schemas.BillingAdjustmentSummary_agreementType, v.AgreementType)
+		case schemas.BillingAdjustmentSummary_billingAdjustmentRequestId:
+			v.BillingAdjustmentRequestId = new(string)
+			return d.ReadString(schemas.BillingAdjustmentSummary_billingAdjustmentRequestId, v.BillingAdjustmentRequestId)
+		case schemas.BillingAdjustmentSummary_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.BillingAdjustmentSummary_catalog, v.Catalog)
+		case schemas.BillingAdjustmentSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.BillingAdjustmentSummary_createdAt, v.CreatedAt)
+		case schemas.BillingAdjustmentSummary_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.BillingAdjustmentSummary_currencyCode, v.CurrencyCode)
+		case schemas.BillingAdjustmentSummary_originalInvoiceId:
+			v.OriginalInvoiceId = new(string)
+			return d.ReadString(schemas.BillingAdjustmentSummary_originalInvoiceId, v.OriginalInvoiceId)
+		case schemas.BillingAdjustmentSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.BillingAdjustmentSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = BillingAdjustmentStatus(ev)
+			return nil
+		case schemas.BillingAdjustmentSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.BillingAdjustmentSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Enables you and your customers to move your existing agreements to AWS
 // Marketplace. The customer won't be charged for product usage in AWS Marketplace
 // because they already paid for the product outside of AWS Marketplace.
@@ -439,6 +1163,34 @@ type ByolPricingTerm struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ByolPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByolPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByolPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ByolPricingTerm_id, *v.Id)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ByolPricingTerm_type, *v.Type)
+	}
+}
+func (v *ByolPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByolPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByolPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ByolPricingTerm_id, v.Id)
+		case schemas.ByolPricingTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ByolPricingTerm_type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Represents a charge associated with an agreement, including amount, timing, and
@@ -472,6 +1224,70 @@ type Charge struct {
 	Time *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *Charge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Charge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Charge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.Charge_agreementId, *v.AgreementId)
+	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.Charge_agreementType, *v.AgreementType)
+	}
+	if v.Amount != nil {
+		s.WriteString(schemas.Charge_amount, *v.Amount)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.Charge_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Charge_id, *v.Id)
+	}
+	if v.PurchaseOrderReference != nil {
+		s.WriteString(schemas.Charge_purchaseOrderReference, *v.PurchaseOrderReference)
+	}
+	if v.Revision != nil {
+		s.WriteInt64(schemas.Charge_revision, *v.Revision)
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.Charge_time, *v.Time)
+	}
+}
+func (v *Charge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Charge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Charge_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.Charge_agreementId, v.AgreementId)
+		case schemas.Charge_agreementType:
+			v.AgreementType = new(string)
+			return d.ReadString(schemas.Charge_agreementType, v.AgreementType)
+		case schemas.Charge_amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.Charge_amount, v.Amount)
+		case schemas.Charge_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.Charge_currencyCode, v.CurrencyCode)
+		case schemas.Charge_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Charge_id, v.Id)
+		case schemas.Charge_purchaseOrderReference:
+			v.PurchaseOrderReference = new(string)
+			return d.ReadString(schemas.Charge_purchaseOrderReference, v.PurchaseOrderReference)
+		case schemas.Charge_revision:
+			v.Revision = new(int64)
+			return d.ReadInt64(schemas.Charge_revision, v.Revision)
+		case schemas.Charge_time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.Charge_time, v.Time)
+		}
+		return nil
+	})
 }
 
 // The ChargeSummary provides a detailed breakdown of charges that are associated
@@ -515,6 +1331,62 @@ type ChargeSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChargeSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChargeSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChargeSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.ChargeSummary_currencyCode, *v.CurrencyCode)
+	}
+	if v.EstimatedTaxes != nil {
+		s.WriteStruct(schemas.ChargeSummary_estimatedTaxes)
+		v.EstimatedTaxes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExpectedChargeList(s, schemas.ChargeSummary_expectedCharges, v.ExpectedCharges)
+	if v.InvoicingEntity != nil {
+		s.WriteStruct(schemas.ChargeSummary_invoicingEntity)
+		v.InvoicingEntity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeItemizedChargeList(s, schemas.ChargeSummary_itemizedCharges, v.ItemizedCharges)
+	if v.NewAgreementValue != nil {
+		s.WriteString(schemas.ChargeSummary_newAgreementValue, *v.NewAgreementValue)
+	}
+	if v.NewAgreementValueAfterTax != nil {
+		s.WriteString(schemas.ChargeSummary_newAgreementValueAfterTax, *v.NewAgreementValueAfterTax)
+	}
+}
+func (v *ChargeSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChargeSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChargeSummary_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.ChargeSummary_currencyCode, v.CurrencyCode)
+		case schemas.ChargeSummary_estimatedTaxes:
+			v.EstimatedTaxes = &EstimatedTaxes{}
+			return v.EstimatedTaxes.Deserialize(d)
+		case schemas.ChargeSummary_expectedCharges:
+			return deserializeExpectedChargeList(d, schemas.ChargeSummary_expectedCharges, &v.ExpectedCharges)
+		case schemas.ChargeSummary_invoicingEntity:
+			v.InvoicingEntity = &InvoicingEntity{}
+			return v.InvoicingEntity.Deserialize(d)
+		case schemas.ChargeSummary_itemizedCharges:
+			return deserializeItemizedChargeList(d, schemas.ChargeSummary_itemizedCharges, &v.ItemizedCharges)
+		case schemas.ChargeSummary_newAgreementValue:
+			v.NewAgreementValue = new(string)
+			return d.ReadString(schemas.ChargeSummary_newAgreementValue, v.NewAgreementValue)
+		case schemas.ChargeSummary_newAgreementValueAfterTax:
+			v.NewAgreementValueAfterTax = new(string)
+			return d.ReadString(schemas.ChargeSummary_newAgreementValueAfterTax, v.NewAgreementValueAfterTax)
+		}
+		return nil
+	})
+}
+
 // Defines a prepaid payment model that allows buyers to configure the
 // entitlements they want to purchase and the duration.
 type ConfigurableUpfrontPricingTerm struct {
@@ -537,6 +1409,51 @@ type ConfigurableUpfrontPricingTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigurableUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurableUpfrontPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurableUpfrontPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.ConfigurableUpfrontPricingTerm_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_id, *v.Id)
+	}
+	serializeConfigurableUpfrontRateCardList(s, schemas.ConfigurableUpfrontPricingTerm_rateCards, v.RateCards)
+	if v.Type != nil {
+		s.WriteString(schemas.ConfigurableUpfrontPricingTerm_type, *v.Type)
+	}
+}
+func (v *ConfigurableUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurableUpfrontPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurableUpfrontPricingTerm_configuration:
+			v.Configuration = &ConfigurableUpfrontPricingTermConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.ConfigurableUpfrontPricingTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.ConfigurableUpfrontPricingTerm_currencyCode, v.CurrencyCode)
+		case schemas.ConfigurableUpfrontPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ConfigurableUpfrontPricingTerm_id, v.Id)
+		case schemas.ConfigurableUpfrontPricingTerm_rateCards:
+			return deserializeConfigurableUpfrontRateCardList(d, schemas.ConfigurableUpfrontPricingTerm_rateCards, &v.RateCards)
+		case schemas.ConfigurableUpfrontPricingTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ConfigurableUpfrontPricingTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Defines a prepaid payment model that allows buyers to configure the
 // entitlements they want to purchase and the duration.
 type ConfigurableUpfrontPricingTermConfiguration struct {
@@ -554,6 +1471,31 @@ type ConfigurableUpfrontPricingTermConfiguration struct {
 	SelectorValue *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConfigurableUpfrontPricingTermConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurableUpfrontPricingTermConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurableUpfrontPricingTermConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensionList(s, schemas.ConfigurableUpfrontPricingTermConfiguration_dimensions, v.Dimensions)
+	if v.SelectorValue != nil {
+		s.WriteString(schemas.ConfigurableUpfrontPricingTermConfiguration_selectorValue, *v.SelectorValue)
+	}
+}
+func (v *ConfigurableUpfrontPricingTermConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurableUpfrontPricingTermConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurableUpfrontPricingTermConfiguration_dimensions:
+			return deserializeDimensionList(d, schemas.ConfigurableUpfrontPricingTermConfiguration_dimensions, &v.Dimensions)
+		case schemas.ConfigurableUpfrontPricingTermConfiguration_selectorValue:
+			v.SelectorValue = new(string)
+			return d.ReadString(schemas.ConfigurableUpfrontPricingTermConfiguration_selectorValue, v.SelectorValue)
+		}
+		return nil
+	})
 }
 
 // Within the prepaid payment model defined under ConfigurableUpfrontPricingTerm ,
@@ -574,6 +1516,41 @@ type ConfigurableUpfrontRateCardItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfigurableUpfrontRateCardItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfigurableUpfrontRateCardItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfigurableUpfrontRateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Constraints != nil {
+		s.WriteStruct(schemas.ConfigurableUpfrontRateCardItem_constraints)
+		v.Constraints.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRateCardList(s, schemas.ConfigurableUpfrontRateCardItem_rateCard, v.RateCard)
+	if v.Selector != nil {
+		s.WriteStruct(schemas.ConfigurableUpfrontRateCardItem_selector)
+		v.Selector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConfigurableUpfrontRateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfigurableUpfrontRateCardItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfigurableUpfrontRateCardItem_constraints:
+			v.Constraints = &Constraints{}
+			return v.Constraints.Deserialize(d)
+		case schemas.ConfigurableUpfrontRateCardItem_rateCard:
+			return deserializeRateCardList(d, schemas.ConfigurableUpfrontRateCardItem_rateCard, &v.RateCard)
+		case schemas.ConfigurableUpfrontRateCardItem_selector:
+			v.Selector = &Selector{}
+			return v.Selector.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines limits on how the term can be configured by acceptors.
 type Constraints struct {
 
@@ -588,6 +1565,34 @@ type Constraints struct {
 	QuantityConfiguration *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Constraints) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Constraints)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Constraints) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MultipleDimensionSelection != nil {
+		s.WriteString(schemas.Constraints_multipleDimensionSelection, *v.MultipleDimensionSelection)
+	}
+	if v.QuantityConfiguration != nil {
+		s.WriteString(schemas.Constraints_quantityConfiguration, *v.QuantityConfiguration)
+	}
+}
+func (v *Constraints) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Constraints, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Constraints_multipleDimensionSelection:
+			v.MultipleDimensionSelection = new(string)
+			return d.ReadString(schemas.Constraints_multipleDimensionSelection, v.MultipleDimensionSelection)
+		case schemas.Constraints_quantityConfiguration:
+			v.QuantityConfiguration = new(string)
+			return d.ReadString(schemas.Constraints_quantityConfiguration, v.QuantityConfiguration)
+		}
+		return nil
+	})
 }
 
 // Defines the dimensions that the acceptor has purchased from the overall set of
@@ -610,6 +1615,31 @@ type Dimension struct {
 	DimensionValue int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Dimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DimensionKey != nil {
+		s.WriteString(schemas.Dimension_dimensionKey, *v.DimensionKey)
+	}
+	s.WriteInt32(schemas.Dimension_dimensionValue, v.DimensionValue)
+}
+func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dimension_dimensionKey:
+			v.DimensionKey = new(string)
+			return d.ReadString(schemas.Dimension_dimensionKey, v.DimensionKey)
+		case schemas.Dimension_dimensionValue:
+			return d.ReadInt32(schemas.Dimension_dimensionValue, &v.DimensionValue)
+		}
+		return nil
+	})
 }
 
 // Includes the list of references to legal resources proposed by the proposer to
@@ -645,6 +1675,169 @@ type DocumentItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.DocumentItem_type, *v.Type)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.DocumentItem_url, *v.Url)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.DocumentItem_version, *v.Version)
+	}
+}
+func (v *DocumentItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentItem_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.DocumentItem_type, v.Type)
+		case schemas.DocumentItem_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.DocumentItem_url, v.Url)
+		case schemas.DocumentItem_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.DocumentItem_version, v.Version)
+		}
+		return nil
+	})
+}
+
+// The behavior of an agreement when it reaches its end date. For example, whether
+// the agreement renews, and if it doesn't, the reason why.
+type EndTimeBehavior struct {
+
+	// The behavior of the agreement when it reaches its end date.
+	//
+	// Types include:
+	//
+	//   - RENEW – A new agreement is created from the accepted terms of this agreement.
+	//
+	//   - REPLACE – A new agreement is created from a different offer than the one
+	//   this agreement was created from. This happens, for example, when a private offer
+	//   reaches its end date and the acceptor transitions to the public offer for the
+	//   product.
+	//
+	//   - EXPIRE – The agreement ends and isn't renewed or replaced.
+	//
+	// This member is required.
+	Type EndTimeBehaviorType
+
+	// The reason why the agreement doesn't renew at its end date. The field is null
+	// when the agreement renews.
+	//
+	// More than one reason can apply to the same agreement. When that happens, the
+	// operation returns only one reason code, and PROPOSER_RENEW_OPTED_OUT takes
+	// precedence over all others.
+	//
+	// The EnableAutoRenew field reflects only the acceptor's preference, and doesn't
+	// reflect the other reasons an agreement might not renew.
+	//
+	// Reason codes include:
+	//
+	//   - PROPOSER_RENEW_OPTED_OUT – The proposer opted out of renewing the agreement.
+	//
+	//   - ACCEPTOR_RENEW_OPTED_OUT – The acceptor opted out of renewing the agreement.
+	//
+	//   - NO_RENEWAL_TERM – The accepted terms of the agreement don't include a
+	//   renewal term, which is required for an agreement to renew.
+	//
+	//   - RENEWAL_LIMIT_EXHAUSTED – The agreement reached the maximum number of
+	//   renewals allowed by its renewal term.
+	ReasonCode EndTimeBehaviorReasonCode
+
+	// The details of the renewal that applies at the end date of the agreement. This
+	// field is present when Type is RENEW . It is also present when ReasonCode is
+	// PROPOSER_RENEW_OPTED_OUT or ACCEPTOR_RENEW_OPTED_OUT . In those cases, it
+	// identifies the offer that the agreement would otherwise have renewed from. The
+	// field is null in all other cases.
+	RenewalSummary *RenewalSummary
+
+	noSmithyDocumentSerde
+}
+
+func (v *EndTimeBehavior) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EndTimeBehavior)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndTimeBehavior) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReasonCode != "" {
+		s.WriteString(schemas.EndTimeBehavior_reasonCode, string(v.ReasonCode))
+	}
+	if v.RenewalSummary != nil {
+		s.WriteStruct(schemas.EndTimeBehavior_renewalSummary)
+		v.RenewalSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.EndTimeBehavior_type, string(v.Type))
+	}
+}
+func (v *EndTimeBehavior) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EndTimeBehavior, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EndTimeBehavior_reasonCode:
+			var ev string
+			if err := d.ReadString(schemas.EndTimeBehavior_reasonCode, &ev); err != nil {
+				return err
+			}
+			v.ReasonCode = EndTimeBehaviorReasonCode(ev)
+			return nil
+		case schemas.EndTimeBehavior_renewalSummary:
+			v.RenewalSummary = &RenewalSummary{}
+			return v.RenewalSummary.Deserialize(d)
+		case schemas.EndTimeBehavior_type:
+			var ev string
+			if err := d.ReadString(schemas.EndTimeBehavior_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EndTimeBehaviorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Represents an entitlement associated with an agreement.
+type Entitlement struct {
+
+	// The Amazon Resource Name (ARN) of the AWS License Manager license associated
+	// with the entitlement.
+	LicenseArn *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *Entitlement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Entitlement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Entitlement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseArn != nil {
+		s.WriteString(schemas.Entitlement_licenseArn, *v.LicenseArn)
+	}
+}
+func (v *Entitlement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Entitlement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Entitlement_licenseArn:
+			v.LicenseArn = new(string)
+			return d.ReadString(schemas.Entitlement_licenseArn, v.LicenseArn)
+		}
+		return nil
+	})
+}
+
 // Estimated cost of the agreement.
 type EstimatedCharges struct {
 
@@ -677,6 +1870,34 @@ type EstimatedCharges struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EstimatedCharges) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EstimatedCharges)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EstimatedCharges) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementValue != nil {
+		s.WriteString(schemas.EstimatedCharges_agreementValue, *v.AgreementValue)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.EstimatedCharges_currencyCode, *v.CurrencyCode)
+	}
+}
+func (v *EstimatedCharges) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EstimatedCharges, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EstimatedCharges_agreementValue:
+			v.AgreementValue = new(string)
+			return d.ReadString(schemas.EstimatedCharges_agreementValue, v.AgreementValue)
+		case schemas.EstimatedCharges_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.EstimatedCharges_currencyCode, v.CurrencyCode)
+		}
+		return nil
+	})
+}
+
 // Provides an aggregated view of estimated tax information.
 type EstimatedTaxes struct {
 
@@ -687,6 +1908,31 @@ type EstimatedTaxes struct {
 	TotalAmount *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EstimatedTaxes) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EstimatedTaxes)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EstimatedTaxes) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTaxBreakdown(s, schemas.EstimatedTaxes_breakdown, v.Breakdown)
+	if v.TotalAmount != nil {
+		s.WriteString(schemas.EstimatedTaxes_totalAmount, *v.TotalAmount)
+	}
+}
+func (v *EstimatedTaxes) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EstimatedTaxes, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EstimatedTaxes_breakdown:
+			return deserializeTaxBreakdown(d, schemas.EstimatedTaxes_breakdown, &v.Breakdown)
+		case schemas.EstimatedTaxes_totalAmount:
+			v.TotalAmount = new(string)
+			return d.ReadString(schemas.EstimatedTaxes_totalAmount, v.TotalAmount)
+		}
+		return nil
+	})
 }
 
 // Estimated charge for the request.
@@ -720,6 +1966,64 @@ type ExpectedCharge struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExpectedCharge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpectedCharge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpectedCharge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.ExpectedCharge_amount, *v.Amount)
+	}
+	if v.AmountAfterTax != nil {
+		s.WriteString(schemas.ExpectedCharge_amountAfterTax, *v.AmountAfterTax)
+	}
+	if v.EstimatedTaxes != nil {
+		s.WriteStruct(schemas.ExpectedCharge_estimatedTaxes)
+		v.EstimatedTaxes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ExpectedCharge_id, *v.Id)
+	}
+	if v.Time != nil {
+		s.WriteTime(schemas.ExpectedCharge_time, *v.Time)
+	}
+	if v.Timing != "" {
+		s.WriteString(schemas.ExpectedCharge_timing, string(v.Timing))
+	}
+}
+func (v *ExpectedCharge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpectedCharge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpectedCharge_amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.ExpectedCharge_amount, v.Amount)
+		case schemas.ExpectedCharge_amountAfterTax:
+			v.AmountAfterTax = new(string)
+			return d.ReadString(schemas.ExpectedCharge_amountAfterTax, v.AmountAfterTax)
+		case schemas.ExpectedCharge_estimatedTaxes:
+			v.EstimatedTaxes = &EstimatedTaxes{}
+			return v.EstimatedTaxes.Deserialize(d)
+		case schemas.ExpectedCharge_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExpectedCharge_id, v.Id)
+		case schemas.ExpectedCharge_time:
+			v.Time = new(time.Time)
+			return d.ReadTime(schemas.ExpectedCharge_time, v.Time)
+		case schemas.ExpectedCharge_timing:
+			var ev string
+			if err := d.ReadString(schemas.ExpectedCharge_timing, &ev); err != nil {
+				return err
+			}
+			v.Timing = Timing(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The filter name and value pair that is used to return a more specific list of
 // results. Filters can be used to match a set of resources by various criteria,
 // such as offerId or productId .
@@ -732,6 +2036,64 @@ type Filter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Filter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Filter_name, *v.Name)
+	}
+	serializeFilterValueList(s, schemas.Filter_values, v.Values)
+}
+func (v *Filter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filter_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Filter_name, v.Name)
+		case schemas.Filter_values:
+			return deserializeFilterValueList(d, schemas.Filter_values, &v.Values)
+		}
+		return nil
+	})
+}
+
+// A fixed price increase that is applied each time the agreement renews.
+type FixedPercentage struct {
+
+	// The percentage by which the price increases at each renewal, from 0.00 to 100.00
+	// with up to two decimal places. A value of 0.00 means that the agreement renews
+	// at the same price.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *FixedPercentage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FixedPercentage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FixedPercentage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.FixedPercentage_value, *v.Value)
+	}
+}
+func (v *FixedPercentage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FixedPercentage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FixedPercentage_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.FixedPercentage_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Defines a prepaid pricing model where the customers are charged a fixed upfront
@@ -760,6 +2122,55 @@ type FixedUpfrontPricingTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FixedUpfrontPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FixedUpfrontPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FixedUpfrontPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Duration != nil {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_duration, *v.Duration)
+	}
+	serializeGrantList(s, schemas.FixedUpfrontPricingTerm_grants, v.Grants)
+	if v.Id != nil {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_id, *v.Id)
+	}
+	if v.Price != nil {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_price, *v.Price)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.FixedUpfrontPricingTerm_type, *v.Type)
+	}
+}
+func (v *FixedUpfrontPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FixedUpfrontPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FixedUpfrontPricingTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.FixedUpfrontPricingTerm_currencyCode, v.CurrencyCode)
+		case schemas.FixedUpfrontPricingTerm_duration:
+			v.Duration = new(string)
+			return d.ReadString(schemas.FixedUpfrontPricingTerm_duration, v.Duration)
+		case schemas.FixedUpfrontPricingTerm_grants:
+			return deserializeGrantList(d, schemas.FixedUpfrontPricingTerm_grants, &v.Grants)
+		case schemas.FixedUpfrontPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FixedUpfrontPricingTerm_id, v.Id)
+		case schemas.FixedUpfrontPricingTerm_price:
+			v.Price = new(string)
+			return d.ReadString(schemas.FixedUpfrontPricingTerm_price, v.Price)
+		case schemas.FixedUpfrontPricingTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.FixedUpfrontPricingTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Defines a short-term free pricing model where the buyers aren’t charged
 // anything within a specified limit.
 type FreeTrialPricingTerm struct {
@@ -780,6 +2191,43 @@ type FreeTrialPricingTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FreeTrialPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FreeTrialPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FreeTrialPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Duration != nil {
+		s.WriteString(schemas.FreeTrialPricingTerm_duration, *v.Duration)
+	}
+	serializeGrantList(s, schemas.FreeTrialPricingTerm_grants, v.Grants)
+	if v.Id != nil {
+		s.WriteString(schemas.FreeTrialPricingTerm_id, *v.Id)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.FreeTrialPricingTerm_type, *v.Type)
+	}
+}
+func (v *FreeTrialPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FreeTrialPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FreeTrialPricingTerm_duration:
+			v.Duration = new(string)
+			return d.ReadString(schemas.FreeTrialPricingTerm_duration, v.Duration)
+		case schemas.FreeTrialPricingTerm_grants:
+			return deserializeGrantList(d, schemas.FreeTrialPricingTerm_grants, &v.Grants)
+		case schemas.FreeTrialPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FreeTrialPricingTerm_id, v.Id)
+		case schemas.FreeTrialPricingTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.FreeTrialPricingTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Entitlements granted to the acceptor of fixed upfront as part of agreement
 // execution.
 type GrantItem struct {
@@ -795,6 +2243,34 @@ type GrantItem struct {
 	MaxQuantity *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GrantItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GrantItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GrantItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DimensionKey != nil {
+		s.WriteString(schemas.GrantItem_dimensionKey, *v.DimensionKey)
+	}
+	if v.MaxQuantity != nil {
+		s.WriteInt32(schemas.GrantItem_maxQuantity, *v.MaxQuantity)
+	}
+}
+func (v *GrantItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GrantItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GrantItem_dimensionKey:
+			v.DimensionKey = new(string)
+			return d.ReadString(schemas.GrantItem_dimensionKey, v.DimensionKey)
+		case schemas.GrantItem_maxQuantity:
+			v.MaxQuantity = new(int32)
+			return d.ReadInt32(schemas.GrantItem_maxQuantity, v.MaxQuantity)
+		}
+		return nil
+	})
 }
 
 // The billing period for an invoice, specified by month and year.
@@ -813,6 +2289,34 @@ type InvoiceBillingPeriod struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvoiceBillingPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoiceBillingPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoiceBillingPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Month != nil {
+		s.WriteInt32(schemas.InvoiceBillingPeriod_month, *v.Month)
+	}
+	if v.Year != nil {
+		s.WriteInt32(schemas.InvoiceBillingPeriod_year, *v.Year)
+	}
+}
+func (v *InvoiceBillingPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoiceBillingPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoiceBillingPeriod_month:
+			v.Month = new(int32)
+			return d.ReadInt32(schemas.InvoiceBillingPeriod_month, v.Month)
+		case schemas.InvoiceBillingPeriod_year:
+			v.Year = new(int32)
+			return d.ReadInt32(schemas.InvoiceBillingPeriod_year, v.Year)
+		}
+		return nil
+	})
+}
+
 // The entity responsible for issuing the invoice.
 type InvoicingEntity struct {
 
@@ -823,6 +2327,34 @@ type InvoicingEntity struct {
 	LegalName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvoicingEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvoicingEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvoicingEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.InvoicingEntity_branchName, *v.BranchName)
+	}
+	if v.LegalName != nil {
+		s.WriteString(schemas.InvoicingEntity_legalName, *v.LegalName)
+	}
+}
+func (v *InvoicingEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvoicingEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvoicingEntity_branchName:
+			v.BranchName = new(string)
+			return d.ReadString(schemas.InvoicingEntity_branchName, v.BranchName)
+		case schemas.InvoicingEntity_legalName:
+			v.LegalName = new(string)
+			return d.ReadString(schemas.InvoicingEntity_legalName, v.LegalName)
+		}
+		return nil
+	})
 }
 
 // A breakdown of individual charges or line items within a billing or pricing
@@ -848,6 +2380,52 @@ type ItemizedCharge struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ItemizedCharge) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ItemizedCharge)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ItemizedCharge) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeReference != nil {
+		s.WriteString(schemas.ItemizedCharge_chargeReference, *v.ChargeReference)
+	}
+	if v.DimensionKey != nil {
+		s.WriteString(schemas.ItemizedCharge_dimensionKey, *v.DimensionKey)
+	}
+	if v.IncrementalChargeAmount != nil {
+		s.WriteString(schemas.ItemizedCharge_incrementalChargeAmount, *v.IncrementalChargeAmount)
+	}
+	if v.NewQuantity != nil {
+		s.WriteInt32(schemas.ItemizedCharge_newQuantity, *v.NewQuantity)
+	}
+	if v.OldQuantity != nil {
+		s.WriteInt32(schemas.ItemizedCharge_oldQuantity, *v.OldQuantity)
+	}
+}
+func (v *ItemizedCharge) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ItemizedCharge, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ItemizedCharge_chargeReference:
+			v.ChargeReference = new(string)
+			return d.ReadString(schemas.ItemizedCharge_chargeReference, v.ChargeReference)
+		case schemas.ItemizedCharge_dimensionKey:
+			v.DimensionKey = new(string)
+			return d.ReadString(schemas.ItemizedCharge_dimensionKey, v.DimensionKey)
+		case schemas.ItemizedCharge_incrementalChargeAmount:
+			v.IncrementalChargeAmount = new(string)
+			return d.ReadString(schemas.ItemizedCharge_incrementalChargeAmount, v.IncrementalChargeAmount)
+		case schemas.ItemizedCharge_newQuantity:
+			v.NewQuantity = new(int32)
+			return d.ReadInt32(schemas.ItemizedCharge_newQuantity, v.NewQuantity)
+		case schemas.ItemizedCharge_oldQuantity:
+			v.OldQuantity = new(int32)
+			return d.ReadInt32(schemas.ItemizedCharge_oldQuantity, v.OldQuantity)
+		}
+		return nil
+	})
+}
+
 // Defines the list of text agreements proposed to the acceptors. An example is
 // the end user license agreement (EULA).
 type LegalTerm struct {
@@ -863,6 +2441,89 @@ type LegalTerm struct {
 	Type *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LegalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LegalTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LegalTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentList(s, schemas.LegalTerm_documents, v.Documents)
+	if v.Id != nil {
+		s.WriteString(schemas.LegalTerm_id, *v.Id)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.LegalTerm_type, *v.Type)
+	}
+}
+func (v *LegalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LegalTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LegalTerm_documents:
+			return deserializeDocumentList(d, schemas.LegalTerm_documents, &v.Documents)
+		case schemas.LegalTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.LegalTerm_id, v.Id)
+		case schemas.LegalTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.LegalTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
+// Defines the net payment due period for the agreement, specifying when payment
+// is due after an invoice is issued.
+type NetPaymentTerm struct {
+
+	// The unique identifier for the term.
+	Id *string
+
+	// The duration after an invoice is issued within which the payment is due. The
+	// duration is represented in the ISO 8601 format (for example, P30D for 30 days
+	// or P60D for 60 days).
+	PaymentDuePeriod *string
+
+	// Type of the term being updated.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *NetPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetPaymentTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetPaymentTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.NetPaymentTerm_id, *v.Id)
+	}
+	if v.PaymentDuePeriod != nil {
+		s.WriteString(schemas.NetPaymentTerm_paymentDuePeriod, *v.PaymentDuePeriod)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.NetPaymentTerm_type, *v.Type)
+	}
+}
+func (v *NetPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetPaymentTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetPaymentTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.NetPaymentTerm_id, v.Id)
+		case schemas.NetPaymentTerm_paymentDuePeriod:
+			v.PaymentDuePeriod = new(string)
+			return d.ReadString(schemas.NetPaymentTerm_paymentDuePeriod, v.PaymentDuePeriod)
+		case schemas.NetPaymentTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.NetPaymentTerm_type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Summary view of a payment request.
@@ -900,6 +2561,140 @@ type PaymentRequestSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PaymentRequestSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentRequestSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentRequestSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.PaymentRequestSummary_agreementId, *v.AgreementId)
+	}
+	if v.ChargeAmount != nil {
+		s.WriteString(schemas.PaymentRequestSummary_chargeAmount, *v.ChargeAmount)
+	}
+	if v.ChargeId != nil {
+		s.WriteString(schemas.PaymentRequestSummary_chargeId, *v.ChargeId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PaymentRequestSummary_createdAt, *v.CreatedAt)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.PaymentRequestSummary_currencyCode, *v.CurrencyCode)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PaymentRequestSummary_name, *v.Name)
+	}
+	if v.PaymentRequestId != nil {
+		s.WriteString(schemas.PaymentRequestSummary_paymentRequestId, *v.PaymentRequestId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PaymentRequestSummary_status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.PaymentRequestSummary_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *PaymentRequestSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentRequestSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentRequestSummary_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.PaymentRequestSummary_agreementId, v.AgreementId)
+		case schemas.PaymentRequestSummary_chargeAmount:
+			v.ChargeAmount = new(string)
+			return d.ReadString(schemas.PaymentRequestSummary_chargeAmount, v.ChargeAmount)
+		case schemas.PaymentRequestSummary_chargeId:
+			v.ChargeId = new(string)
+			return d.ReadString(schemas.PaymentRequestSummary_chargeId, v.ChargeId)
+		case schemas.PaymentRequestSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PaymentRequestSummary_createdAt, v.CreatedAt)
+		case schemas.PaymentRequestSummary_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.PaymentRequestSummary_currencyCode, v.CurrencyCode)
+		case schemas.PaymentRequestSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PaymentRequestSummary_name, v.Name)
+		case schemas.PaymentRequestSummary_paymentRequestId:
+			v.PaymentRequestId = new(string)
+			return d.ReadString(schemas.PaymentRequestSummary_paymentRequestId, v.PaymentRequestId)
+		case schemas.PaymentRequestSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.PaymentRequestSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PaymentRequestStatus(ev)
+			return nil
+		case schemas.PaymentRequestSummary_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.PaymentRequestSummary_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
+// A single installment in a payment schedule template. Because the start date of
+// the renewed agreement isn't known when the offer is created, the charge date of
+// each installment is expressed as an offset from that start date rather than as
+// an absolute date.
+type PaymentScheduleEntry struct {
+
+	// The time between the start date of the renewed agreement and the date this
+	// installment is charged. The duration is represented in the ISO 8601 format in
+	// either whole months or whole days (for example, P1M for 1 month or P30D for 30
+	// days). All installments in a schedule use the same unit.
+	ChargeDateOffset *string
+
+	// The percentage of the total contract value of the renewed agreement that is
+	// charged in this installment. Valid values range from 0.01 to 100.00 , with up to
+	// two decimal places.
+	ChargePercentage *string
+
+	// The day of the month on which this installment is charged, from 1 to 31 . Use
+	// this field to anchor the charge to a specific calendar day within the month
+	// identified by ChargeDateOffset . This field is supported only when
+	// ChargeDateOffset is expressed in months.
+	DayOfMonth *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *PaymentScheduleEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentScheduleEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentScheduleEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeDateOffset != nil {
+		s.WriteString(schemas.PaymentScheduleEntry_chargeDateOffset, *v.ChargeDateOffset)
+	}
+	if v.ChargePercentage != nil {
+		s.WriteString(schemas.PaymentScheduleEntry_chargePercentage, *v.ChargePercentage)
+	}
+	if v.DayOfMonth != nil {
+		s.WriteInt32(schemas.PaymentScheduleEntry_dayOfMonth, *v.DayOfMonth)
+	}
+}
+func (v *PaymentScheduleEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentScheduleEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentScheduleEntry_chargeDateOffset:
+			v.ChargeDateOffset = new(string)
+			return d.ReadString(schemas.PaymentScheduleEntry_chargeDateOffset, v.ChargeDateOffset)
+		case schemas.PaymentScheduleEntry_chargePercentage:
+			v.ChargePercentage = new(string)
+			return d.ReadString(schemas.PaymentScheduleEntry_chargePercentage, v.ChargePercentage)
+		case schemas.PaymentScheduleEntry_dayOfMonth:
+			v.DayOfMonth = new(int32)
+			return d.ReadInt32(schemas.PaymentScheduleEntry_dayOfMonth, v.DayOfMonth)
+		}
+		return nil
+	})
+}
+
 // Defines an installment-based pricing model where customers are charged a fixed
 // price on different dates during the agreement validity period. This is used most
 // commonly for flexible payment schedule pricing.
@@ -921,6 +2716,176 @@ type PaymentScheduleTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PaymentScheduleTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentScheduleTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentScheduleTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.PaymentScheduleTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.PaymentScheduleTerm_id, *v.Id)
+	}
+	serializeScheduleList(s, schemas.PaymentScheduleTerm_schedule, v.Schedule)
+	if v.Type != nil {
+		s.WriteString(schemas.PaymentScheduleTerm_type, *v.Type)
+	}
+}
+func (v *PaymentScheduleTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentScheduleTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentScheduleTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.PaymentScheduleTerm_currencyCode, v.CurrencyCode)
+		case schemas.PaymentScheduleTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.PaymentScheduleTerm_id, v.Id)
+		case schemas.PaymentScheduleTerm_schedule:
+			return deserializeScheduleList(d, schemas.PaymentScheduleTerm_schedule, &v.Schedule)
+		case schemas.PaymentScheduleTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.PaymentScheduleTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
+// Defines the payment schedule that is applied to the renewed agreement.
+type PaymentScheduleTermTemplate struct {
+
+	// The installments that make up the payment schedule of the renewed agreement.
+	// The ChargePercentage values of all installments add up to 100 .
+	Schedule []PaymentScheduleEntry
+
+	noSmithyDocumentSerde
+}
+
+func (v *PaymentScheduleTermTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PaymentScheduleTermTemplate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PaymentScheduleTermTemplate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePaymentScheduleEntryList(s, schemas.PaymentScheduleTermTemplate_schedule, v.Schedule)
+}
+func (v *PaymentScheduleTermTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PaymentScheduleTermTemplate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PaymentScheduleTermTemplate_schedule:
+			return deserializePaymentScheduleEntryList(d, schemas.PaymentScheduleTermTemplate_schedule, &v.Schedule)
+		}
+		return nil
+	})
+}
+
+// A range of price increase percentages that the proposer can choose from before
+// the adjustment deadline of the agreement.
+//
+// MinValue will be less than MaxValue , and DefaultValue will fall within the
+// range. When the proposer authorizes a single percentage instead of a range,
+// PriceIncrease is a FixedPercentage rather than a PercentageRange .
+type PercentageRange struct {
+
+	// The percentage that is applied if the proposer doesn't choose a value before
+	// the adjustment deadline. Valid values range from 0.00 to 100.00 , with up to two
+	// decimal places.
+	DefaultValue *string
+
+	// The highest percentage that the proposer can choose, from 0.00 to 100.00 with
+	// up to two decimal places.
+	MaxValue *string
+
+	// The lowest percentage that the proposer can choose, from 0.00 to 100.00 with up
+	// to two decimal places.
+	MinValue *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *PercentageRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PercentageRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PercentageRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.PercentageRange_defaultValue, *v.DefaultValue)
+	}
+	if v.MaxValue != nil {
+		s.WriteString(schemas.PercentageRange_maxValue, *v.MaxValue)
+	}
+	if v.MinValue != nil {
+		s.WriteString(schemas.PercentageRange_minValue, *v.MinValue)
+	}
+}
+func (v *PercentageRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PercentageRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PercentageRange_defaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.PercentageRange_defaultValue, v.DefaultValue)
+		case schemas.PercentageRange_maxValue:
+			v.MaxValue = new(string)
+			return d.ReadString(schemas.PercentageRange_maxValue, v.MaxValue)
+		case schemas.PercentageRange_minValue:
+			v.MinValue = new(string)
+			return d.ReadString(schemas.PercentageRange_minValue, v.MinValue)
+		}
+		return nil
+	})
+}
+
+// The price increase that is applied each time the agreement renews. Exactly one
+// of the following fields is set.
+//
+// The following types satisfy this interface:
+//
+//	PriceIncreaseMemberFixedPercentage
+//	PriceIncreaseMemberPercentageRange
+type PriceIncrease interface {
+	isPriceIncrease()
+}
+
+// A fixed price increase percentage that is applied at each renewal.
+type PriceIncreaseMemberFixedPercentage struct {
+	Value FixedPercentage
+
+	noSmithyDocumentSerde
+}
+
+func (*PriceIncreaseMemberFixedPercentage) isPriceIncrease() {}
+func (v *PriceIncreaseMemberFixedPercentage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriceIncrease_fixedPercentage)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PriceIncreaseMemberFixedPercentage) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A range of price increase percentages that the proposer can choose from before
+// the adjustment deadline of the agreement.
+type PriceIncreaseMemberPercentageRange struct {
+	Value PercentageRange
+
+	noSmithyDocumentSerde
+}
+
+func (*PriceIncreaseMemberPercentageRange) isPriceIncrease() {}
+func (v *PriceIncreaseMemberPercentageRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PriceIncrease_percentageRange)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *PriceIncreaseMemberPercentageRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
 // Monetary amounts associated with an invoice line item group.
 type PricingCurrencyAmount struct {
 
@@ -934,6 +2899,40 @@ type PricingCurrencyAmount struct {
 	MaxAdjustmentAmount *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PricingCurrencyAmount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PricingCurrencyAmount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PricingCurrencyAmount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.PricingCurrencyAmount_amount, *v.Amount)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.PricingCurrencyAmount_currencyCode, *v.CurrencyCode)
+	}
+	if v.MaxAdjustmentAmount != nil {
+		s.WriteString(schemas.PricingCurrencyAmount_maxAdjustmentAmount, *v.MaxAdjustmentAmount)
+	}
+}
+func (v *PricingCurrencyAmount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PricingCurrencyAmount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PricingCurrencyAmount_amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.PricingCurrencyAmount_amount, v.Amount)
+		case schemas.PricingCurrencyAmount_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.PricingCurrencyAmount_currencyCode, v.CurrencyCode)
+		case schemas.PricingCurrencyAmount_maxAdjustmentAmount:
+			v.MaxAdjustmentAmount = new(string)
+			return d.ReadString(schemas.PricingCurrencyAmount_maxAdjustmentAmount, v.MaxAdjustmentAmount)
+		}
+		return nil
+	})
 }
 
 // A summary of the proposal received from the proposer.
@@ -952,6 +2951,37 @@ type ProposalSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProposalSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProposalSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProposalSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferId != nil {
+		s.WriteString(schemas.ProposalSummary_offerId, *v.OfferId)
+	}
+	if v.OfferSetId != nil {
+		s.WriteString(schemas.ProposalSummary_offerSetId, *v.OfferSetId)
+	}
+	serializeResources(s, schemas.ProposalSummary_resources, v.Resources)
+}
+func (v *ProposalSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProposalSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProposalSummary_offerId:
+			v.OfferId = new(string)
+			return d.ReadString(schemas.ProposalSummary_offerId, v.OfferId)
+		case schemas.ProposalSummary_offerSetId:
+			v.OfferSetId = new(string)
+			return d.ReadString(schemas.ProposalSummary_offerSetId, v.OfferSetId)
+		case schemas.ProposalSummary_resources:
+			return deserializeResources(d, schemas.ProposalSummary_resources, &v.Resources)
+		}
+		return nil
+	})
+}
+
 // Details of the party proposing the agreement terms,. This is commonly the
 // seller for PurchaseAgreement .
 type Proposer struct {
@@ -960,6 +2990,28 @@ type Proposer struct {
 	AccountId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Proposer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Proposer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Proposer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.Proposer_accountId, *v.AccountId)
+	}
+}
+func (v *Proposer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Proposer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Proposer_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.Proposer_accountId, v.AccountId)
+		}
+		return nil
+	})
 }
 
 // Contains information about a purchase order association to a charge within an
@@ -983,6 +3035,46 @@ type PurchaseOrder struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PurchaseOrder) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PurchaseOrder)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PurchaseOrder) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.PurchaseOrder_agreementId, *v.AgreementId)
+	}
+	if v.ChargeId != nil {
+		s.WriteString(schemas.PurchaseOrder_chargeId, *v.ChargeId)
+	}
+	if v.ChargeRevision != nil {
+		s.WriteInt64(schemas.PurchaseOrder_chargeRevision, *v.ChargeRevision)
+	}
+	if v.PurchaseOrderReference != nil {
+		s.WriteString(schemas.PurchaseOrder_purchaseOrderReference, *v.PurchaseOrderReference)
+	}
+}
+func (v *PurchaseOrder) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PurchaseOrder, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PurchaseOrder_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.PurchaseOrder_agreementId, v.AgreementId)
+		case schemas.PurchaseOrder_chargeId:
+			v.ChargeId = new(string)
+			return d.ReadString(schemas.PurchaseOrder_chargeId, v.ChargeId)
+		case schemas.PurchaseOrder_chargeRevision:
+			v.ChargeRevision = new(int64)
+			return d.ReadInt64(schemas.PurchaseOrder_chargeRevision, v.ChargeRevision)
+		case schemas.PurchaseOrder_purchaseOrderReference:
+			v.PurchaseOrderReference = new(string)
+			return d.ReadString(schemas.PurchaseOrder_purchaseOrderReference, v.PurchaseOrderReference)
+		}
+		return nil
+	})
+}
+
 // Defines the per unit rates for each individual product dimension.
 type RateCardItem struct {
 
@@ -996,6 +3088,34 @@ type RateCardItem struct {
 	Price *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RateCardItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateCardItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DimensionKey != nil {
+		s.WriteString(schemas.RateCardItem_dimensionKey, *v.DimensionKey)
+	}
+	if v.Price != nil {
+		s.WriteString(schemas.RateCardItem_price, *v.Price)
+	}
+}
+func (v *RateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateCardItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateCardItem_dimensionKey:
+			v.DimensionKey = new(string)
+			return d.ReadString(schemas.RateCardItem_dimensionKey, v.DimensionKey)
+		case schemas.RateCardItem_price:
+			v.Price = new(string)
+			return d.ReadString(schemas.RateCardItem_price, v.Price)
+		}
+		return nil
+	})
 }
 
 // Defines a pricing model where customers are charged a fixed recurring price at
@@ -1020,14 +3140,109 @@ type RecurringPaymentTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecurringPaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecurringPaymentTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecurringPaymentTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.RecurringPaymentTerm_billingPeriod, *v.BillingPeriod)
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.RecurringPaymentTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RecurringPaymentTerm_id, *v.Id)
+	}
+	if v.Price != nil {
+		s.WriteString(schemas.RecurringPaymentTerm_price, *v.Price)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.RecurringPaymentTerm_type, *v.Type)
+	}
+}
+func (v *RecurringPaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecurringPaymentTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecurringPaymentTerm_billingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.RecurringPaymentTerm_billingPeriod, v.BillingPeriod)
+		case schemas.RecurringPaymentTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.RecurringPaymentTerm_currencyCode, v.CurrencyCode)
+		case schemas.RecurringPaymentTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RecurringPaymentTerm_id, v.Id)
+		case schemas.RecurringPaymentTerm_price:
+			v.Price = new(string)
+			return d.ReadString(schemas.RecurringPaymentTerm_price, v.Price)
+		case schemas.RecurringPaymentTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RecurringPaymentTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
+// The details of the renewal that applies at the end date of an agreement.
+type RenewalSummary struct {
+
+	// The unique identifier of the offer that provides the terms for the next renewal
+	// cycle. For most renewals, this is the same offer that the agreement was created
+	// from.
+	OfferId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *RenewalSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewalSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewalSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OfferId != nil {
+		s.WriteString(schemas.RenewalSummary_offerId, *v.OfferId)
+	}
+}
+func (v *RenewalSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenewalSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenewalSummary_offerId:
+			v.OfferId = new(string)
+			return d.ReadString(schemas.RenewalSummary_offerId, v.OfferId)
+		}
+		return nil
+	})
+}
+
 // Defines that on graceful expiration of the agreement (when the agreement ends
 // on its pre-defined end date), a new agreement will be created using the accepted
 // terms on the existing agreement. In other words, the agreement will be renewed.
-// The presence of RenewalTerm in the offer document means that auto-renewal is
-// allowed. Buyers will have the option to accept or decline auto-renewal at the
-// offer acceptance/agreement creation. Buyers can also change this flag from True
-// to False or False to True at anytime during the agreement's lifecycle.
+// Presence of RenewalTerm in the offer document means that auto-renewal is
+// allowed. The acceptor will have the option to accept or decline auto-renewal at
+// the offer acceptance/agreement creation. The acceptor can also change this flag
+// from True to False or False to True , within the limits set by LockoutPeriod
+// and MaxRenewals . Setting the flag to True doesn't by itself guarantee that the
+// agreement renews, because the proposer can also opt out.
 type RenewalTerm struct {
+
+	// The date by which the proposer must finalize the price increase for the next
+	// renewal, measured back from the end date of the agreement. The duration is
+	// represented in the ISO 8601 format in whole days (for example, P30D for 30 days
+	// or P60D for 60 days).
+	//
+	// This field applies only when PriceIncrease is a PercentageRange . The field is
+	// null when PriceIncrease is a FixedPercentage , because the price increase is
+	// already fixed and there is nothing for the proposer to finalize. If the proposer
+	// doesn't finalize a value by the adjustment deadline, the DefaultValue of the
+	// range applies.
+	//
+	// AdjustmentDeadline must be greater than LockoutPeriod .
+	AdjustmentDeadline *string
 
 	// Additional parameters specified by the acceptor while accepting the term.
 	Configuration *RenewalTermConfiguration
@@ -1035,22 +3250,130 @@ type RenewalTerm struct {
 	// The unique identifier for the term.
 	Id *string
 
+	// The renewal decision deadline, measured back from the end date of the
+	// agreement. This is the last day either party can opt in to or opt out of the
+	// renewal. The duration is represented in the ISO 8601 format in whole days (for
+	// example, P30D for 30 days or P60D for 60 days).
+	//
+	// The field is null when no renewal decision deadline is set. In that case,
+	// either party can change the auto-renewal decision up to the end date of the
+	// agreement.
+	LockoutPeriod *string
+
+	// The maximum number of times the agreement can be renewed. The field is null
+	// when the number of renewals is unlimited.
+	//
+	// After the agreement reaches this limit, it expires on its end date instead of
+	// renewing.
+	MaxRenewals *int32
+
+	// The price increase that is applied each time the agreement renews. The field is
+	// null when the price doesn't change at renewal.
+	PriceIncrease PriceIncrease
+
+	// Defines how specific terms change each time the agreement renews. The field is
+	// null when no terms change at renewal.
+	TermTemplates []TermTemplate
+
 	// Category of the term being updated.
 	Type *string
 
 	noSmithyDocumentSerde
 }
 
+func (v *RenewalTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewalTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewalTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdjustmentDeadline != nil {
+		s.WriteString(schemas.RenewalTerm_adjustmentDeadline, *v.AdjustmentDeadline)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.RenewalTerm_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RenewalTerm_id, *v.Id)
+	}
+	if v.LockoutPeriod != nil {
+		s.WriteString(schemas.RenewalTerm_lockoutPeriod, *v.LockoutPeriod)
+	}
+	if v.MaxRenewals != nil {
+		s.WriteInt32(schemas.RenewalTerm_maxRenewals, *v.MaxRenewals)
+	}
+	serializePriceIncrease(s, schemas.RenewalTerm_priceIncrease, v.PriceIncrease)
+	serializeTermTemplateList(s, schemas.RenewalTerm_termTemplates, v.TermTemplates)
+	if v.Type != nil {
+		s.WriteString(schemas.RenewalTerm_type, *v.Type)
+	}
+}
+func (v *RenewalTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenewalTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenewalTerm_adjustmentDeadline:
+			v.AdjustmentDeadline = new(string)
+			return d.ReadString(schemas.RenewalTerm_adjustmentDeadline, v.AdjustmentDeadline)
+		case schemas.RenewalTerm_configuration:
+			v.Configuration = &RenewalTermConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.RenewalTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RenewalTerm_id, v.Id)
+		case schemas.RenewalTerm_lockoutPeriod:
+			v.LockoutPeriod = new(string)
+			return d.ReadString(schemas.RenewalTerm_lockoutPeriod, v.LockoutPeriod)
+		case schemas.RenewalTerm_maxRenewals:
+			v.MaxRenewals = new(int32)
+			return d.ReadInt32(schemas.RenewalTerm_maxRenewals, v.MaxRenewals)
+		case schemas.RenewalTerm_priceIncrease:
+			return deserializePriceIncrease(d, schemas.RenewalTerm_priceIncrease, &v.PriceIncrease)
+		case schemas.RenewalTerm_termTemplates:
+			return deserializeTermTemplateList(d, schemas.RenewalTerm_termTemplates, &v.TermTemplates)
+		case schemas.RenewalTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RenewalTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Additional parameters specified by the acceptor while accepting the term.
 type RenewalTermConfiguration struct {
 
-	// Defines whether the acceptor has chosen to auto-renew the agreement at the end
-	// of its lifecycle. Can be set to True or False .
+	// Defines whether the acceptor has chosen to auto-renew the agreement when it
+	// reaches its end date. Can be set to True or False . The acceptor can change this
+	// value within the limits set by LockoutPeriod and MaxRenewals .
 	//
 	// This member is required.
 	EnableAutoRenew *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *RenewalTermConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RenewalTermConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RenewalTermConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableAutoRenew != nil {
+		s.WriteBool(schemas.RenewalTermConfiguration_enableAutoRenew, *v.EnableAutoRenew)
+	}
+}
+func (v *RenewalTermConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RenewalTermConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RenewalTermConfiguration_enableAutoRenew:
+			v.EnableAutoRenew = new(bool)
+			return d.ReadBool(schemas.RenewalTermConfiguration_enableAutoRenew, v.EnableAutoRenew)
+		}
+		return nil
+	})
 }
 
 // Defines what is being accepted as part of the agreement creation or update
@@ -1068,6 +3391,31 @@ type RequestedTerm struct {
 	Configuration RequestedTermConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *RequestedTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestedTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestedTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRequestedTermConfiguration(s, schemas.RequestedTerm_configuration, v.Configuration)
+	if v.Id != nil {
+		s.WriteString(schemas.RequestedTerm_id, *v.Id)
+	}
+}
+func (v *RequestedTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestedTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestedTerm_configuration:
+			return deserializeRequestedTermConfiguration(d, schemas.RequestedTerm_configuration, &v.Configuration)
+		case schemas.RequestedTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RequestedTerm_id, v.Id)
+		}
+		return nil
+	})
 }
 
 // A tagged union that represents the term configuration provided by the acceptor.
@@ -1092,6 +3440,14 @@ type RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration
 
 func (*RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration) isRequestedTermConfiguration() {
 }
+func (v *RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestedTermConfiguration_configurableUpfrontPricingTermConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Additional parameters specified by the acceptor while accepting the term.
 type RequestedTermConfigurationMemberRenewalTermConfiguration struct {
@@ -1101,6 +3457,14 @@ type RequestedTermConfigurationMemberRenewalTermConfiguration struct {
 }
 
 func (*RequestedTermConfigurationMemberRenewalTermConfiguration) isRequestedTermConfiguration() {}
+func (v *RequestedTermConfigurationMemberRenewalTermConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestedTermConfiguration_renewalTermConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RequestedTermConfigurationMemberRenewalTermConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Additional parameters specified by the acceptor while accepting the variable
 // payment term.
@@ -1111,6 +3475,14 @@ type RequestedTermConfigurationMemberVariablePaymentTermConfiguration struct {
 }
 
 func (*RequestedTermConfigurationMemberVariablePaymentTermConfiguration) isRequestedTermConfiguration() {
+}
+func (v *RequestedTermConfigurationMemberVariablePaymentTermConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestedTermConfiguration_variablePaymentTermConfiguration)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RequestedTermConfigurationMemberVariablePaymentTermConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // The list of resources involved in the agreement.
@@ -1129,6 +3501,34 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.Resource_id, *v.Id)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.Resource_type, *v.Type)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Resource_id, v.Id)
+		case schemas.Resource_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Resource_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // An individual installment of the payment that includes the date and amount of
 // the charge.
 type ScheduleItem struct {
@@ -1141,6 +3541,34 @@ type ScheduleItem struct {
 	ChargeDate *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduleItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChargeAmount != nil {
+		s.WriteString(schemas.ScheduleItem_chargeAmount, *v.ChargeAmount)
+	}
+	if v.ChargeDate != nil {
+		s.WriteTime(schemas.ScheduleItem_chargeDate, *v.ChargeDate)
+	}
+}
+func (v *ScheduleItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleItem_chargeAmount:
+			v.ChargeAmount = new(string)
+			return d.ReadString(schemas.ScheduleItem_chargeAmount, v.ChargeAmount)
+		case schemas.ScheduleItem_chargeDate:
+			v.ChargeDate = new(time.Time)
+			return d.ReadTime(schemas.ScheduleItem_chargeDate, v.ChargeDate)
+		}
+		return nil
+	})
 }
 
 // Differentiates between the mutually exclusive rate cards in the same pricing
@@ -1156,18 +3584,79 @@ type Selector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Selector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Selector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Selector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.Selector_type, *v.Type)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Selector_value, *v.Value)
+	}
+}
+func (v *Selector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Selector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Selector_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.Selector_type, v.Type)
+		case schemas.Selector_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Selector_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // An object that contains the SortBy and SortOrder attributes.
 type Sort struct {
 
-	// The attribute on which the data is grouped, which can be by StartTime and
-	// EndTime . The default value is EndTime .
+	// The attribute on which the data is grouped, which can be EndTime , StartTime ,
+	// or LastUpdateTime . StartTime and LastUpdateTime are supported only when
+	// PartyType is Proposer . The default value is EndTime .
 	SortBy *string
 
 	// The sorting order, which can be ASCENDING or DESCENDING . The default value is
-	// DESCENDING .
+	// ASCENDING .
 	SortOrder SortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (v *Sort) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Sort)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Sort) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SortBy != nil {
+		s.WriteString(schemas.Sort_sortBy, *v.SortBy)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.Sort_sortOrder, string(v.SortOrder))
+	}
+}
+func (v *Sort) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Sort, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Sort_sortBy:
+			v.SortBy = new(string)
+			return d.ReadString(schemas.Sort_sortBy, v.SortBy)
+		case schemas.Sort_sortOrder:
+			var ev string
+			if err := d.ReadString(schemas.Sort_sortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines the customer support available for the acceptors when they purchase the
@@ -1187,6 +3676,40 @@ type SupportTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupportTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.SupportTerm_id, *v.Id)
+	}
+	if v.RefundPolicy != nil {
+		s.WriteString(schemas.SupportTerm_refundPolicy, *v.RefundPolicy)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SupportTerm_type, *v.Type)
+	}
+}
+func (v *SupportTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SupportTerm_id, v.Id)
+		case schemas.SupportTerm_refundPolicy:
+			v.RefundPolicy = new(string)
+			return d.ReadString(schemas.SupportTerm_refundPolicy, v.RefundPolicy)
+		case schemas.SupportTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SupportTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Represents a single tax breakdown entry with amount, rate, and type.
 type TaxBreakdownItem struct {
 
@@ -1202,6 +3725,40 @@ type TaxBreakdownItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TaxBreakdownItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxBreakdownItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxBreakdownItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Amount != nil {
+		s.WriteString(schemas.TaxBreakdownItem_amount, *v.Amount)
+	}
+	if v.Rate != nil {
+		s.WriteString(schemas.TaxBreakdownItem_rate, *v.Rate)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.TaxBreakdownItem_type, *v.Type)
+	}
+}
+func (v *TaxBreakdownItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxBreakdownItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxBreakdownItem_amount:
+			v.Amount = new(string)
+			return d.ReadString(schemas.TaxBreakdownItem_amount, v.Amount)
+		case schemas.TaxBreakdownItem_rate:
+			v.Rate = new(string)
+			return d.ReadString(schemas.TaxBreakdownItem_rate, v.Rate)
+		case schemas.TaxBreakdownItem_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.TaxBreakdownItem_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Configuration controls for tax estimation in the agreement request.
 type TaxConfiguration struct {
 
@@ -1210,6 +3767,59 @@ type TaxConfiguration struct {
 	TaxEstimation TaxEstimation
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaxConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaxConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaxConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaxEstimation != "" {
+		s.WriteString(schemas.TaxConfiguration_taxEstimation, string(v.TaxEstimation))
+	}
+}
+func (v *TaxConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaxConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaxConfiguration_taxEstimation:
+			var ev string
+			if err := d.ReadString(schemas.TaxConfiguration_taxEstimation, &ev); err != nil {
+				return err
+			}
+			v.TaxEstimation = TaxEstimation(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
+// Defines how a specific type of term changes each time the agreement renews.
+// Exactly one of the following fields is set.
+//
+// The following types satisfy this interface:
+//
+//	TermTemplateMemberPaymentScheduleTermTemplate
+type TermTemplate interface {
+	isTermTemplate()
+}
+
+// Defines the payment schedule that is applied to the renewed agreement.
+type TermTemplateMemberPaymentScheduleTermTemplate struct {
+	Value PaymentScheduleTermTemplate
+
+	noSmithyDocumentSerde
+}
+
+func (*TermTemplateMemberPaymentScheduleTermTemplate) isTermTemplate() {}
+func (v *TermTemplateMemberPaymentScheduleTermTemplate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TermTemplate_paymentScheduleTermTemplate)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TermTemplateMemberPaymentScheduleTermTemplate) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
 }
 
 // Defines a usage-based pricing model (typically, pay-as-you-go pricing), where
@@ -1231,6 +3841,43 @@ type UsageBasedPricingTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UsageBasedPricingTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsageBasedPricingTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsageBasedPricingTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.UsageBasedPricingTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UsageBasedPricingTerm_id, *v.Id)
+	}
+	serializeUsageBasedRateCardList(s, schemas.UsageBasedPricingTerm_rateCards, v.RateCards)
+	if v.Type != nil {
+		s.WriteString(schemas.UsageBasedPricingTerm_type, *v.Type)
+	}
+}
+func (v *UsageBasedPricingTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsageBasedPricingTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsageBasedPricingTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.UsageBasedPricingTerm_currencyCode, v.CurrencyCode)
+		case schemas.UsageBasedPricingTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UsageBasedPricingTerm_id, v.Id)
+		case schemas.UsageBasedPricingTerm_rateCards:
+			return deserializeUsageBasedRateCardList(d, schemas.UsageBasedPricingTerm_rateCards, &v.RateCards)
+		case schemas.UsageBasedPricingTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.UsageBasedPricingTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Within the pay-as-you-go model defined under UsageBasedPricingTerm , the
 // UsageBasedRateCardItem defines an individual rate for a product dimension.
 type UsageBasedRateCardItem struct {
@@ -1239,6 +3886,25 @@ type UsageBasedRateCardItem struct {
 	RateCard []RateCardItem
 
 	noSmithyDocumentSerde
+}
+
+func (v *UsageBasedRateCardItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UsageBasedRateCardItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UsageBasedRateCardItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRateCardList(s, schemas.UsageBasedRateCardItem_rateCard, v.RateCard)
+}
+func (v *UsageBasedRateCardItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UsageBasedRateCardItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UsageBasedRateCardItem_rateCard:
+			return deserializeRateCardList(d, schemas.UsageBasedRateCardItem_rateCard, &v.RateCard)
+		}
+		return nil
+	})
 }
 
 // The input fails to satisfy the constraints specified by the service.
@@ -1255,6 +3921,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Defines the conditions that will keep an agreement created from this offer
@@ -1285,6 +3979,52 @@ type ValidityTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidityTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidityTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidityTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementDuration != nil {
+		s.WriteString(schemas.ValidityTerm_agreementDuration, *v.AgreementDuration)
+	}
+	if v.AgreementEndDate != nil {
+		s.WriteTime(schemas.ValidityTerm_agreementEndDate, *v.AgreementEndDate)
+	}
+	if v.AgreementStartDate != nil {
+		s.WriteTime(schemas.ValidityTerm_agreementStartDate, *v.AgreementStartDate)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ValidityTerm_id, *v.Id)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ValidityTerm_type, *v.Type)
+	}
+}
+func (v *ValidityTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidityTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidityTerm_agreementDuration:
+			v.AgreementDuration = new(string)
+			return d.ReadString(schemas.ValidityTerm_agreementDuration, v.AgreementDuration)
+		case schemas.ValidityTerm_agreementEndDate:
+			v.AgreementEndDate = new(time.Time)
+			return d.ReadTime(schemas.ValidityTerm_agreementEndDate, v.AgreementEndDate)
+		case schemas.ValidityTerm_agreementStartDate:
+			v.AgreementStartDate = new(time.Time)
+			return d.ReadTime(schemas.ValidityTerm_agreementStartDate, v.AgreementStartDate)
+		case schemas.ValidityTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ValidityTerm_id, v.Id)
+		case schemas.ValidityTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ValidityTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Defines a payment model where sellers can submit variable payment requests up
 // to a maximum charge amount, with configurable approval strategies and expiration
 // timelines.
@@ -1309,6 +4049,54 @@ type VariablePaymentTerm struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VariablePaymentTerm) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VariablePaymentTerm)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VariablePaymentTerm) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.VariablePaymentTerm_configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.VariablePaymentTerm_currencyCode, *v.CurrencyCode)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.VariablePaymentTerm_id, *v.Id)
+	}
+	if v.MaxTotalChargeAmount != nil {
+		s.WriteString(schemas.VariablePaymentTerm_maxTotalChargeAmount, *v.MaxTotalChargeAmount)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.VariablePaymentTerm_type, *v.Type)
+	}
+}
+func (v *VariablePaymentTerm) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VariablePaymentTerm, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VariablePaymentTerm_configuration:
+			v.Configuration = &VariablePaymentTermConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.VariablePaymentTerm_currencyCode:
+			v.CurrencyCode = new(string)
+			return d.ReadString(schemas.VariablePaymentTerm_currencyCode, v.CurrencyCode)
+		case schemas.VariablePaymentTerm_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.VariablePaymentTerm_id, v.Id)
+		case schemas.VariablePaymentTerm_maxTotalChargeAmount:
+			v.MaxTotalChargeAmount = new(string)
+			return d.ReadString(schemas.VariablePaymentTerm_maxTotalChargeAmount, v.MaxTotalChargeAmount)
+		case schemas.VariablePaymentTerm_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.VariablePaymentTerm_type, v.Type)
+		}
+		return nil
+	})
+}
+
 // Additional parameters specified by the acceptor while accepting the variable
 // payment term.
 type VariablePaymentTermConfiguration struct {
@@ -1328,6 +4116,38 @@ type VariablePaymentTermConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VariablePaymentTermConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VariablePaymentTermConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VariablePaymentTermConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpirationDuration != nil {
+		s.WriteString(schemas.VariablePaymentTermConfiguration_expirationDuration, *v.ExpirationDuration)
+	}
+	if v.PaymentRequestApprovalStrategy != "" {
+		s.WriteString(schemas.VariablePaymentTermConfiguration_paymentRequestApprovalStrategy, string(v.PaymentRequestApprovalStrategy))
+	}
+}
+func (v *VariablePaymentTermConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VariablePaymentTermConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VariablePaymentTermConfiguration_expirationDuration:
+			v.ExpirationDuration = new(string)
+			return d.ReadString(schemas.VariablePaymentTermConfiguration_expirationDuration, v.ExpirationDuration)
+		case schemas.VariablePaymentTermConfiguration_paymentRequestApprovalStrategy:
+			var ev string
+			if err := d.ReadString(schemas.VariablePaymentTermConfiguration_paymentRequestApprovalStrategy, &ev); err != nil {
+				return err
+			}
+			v.PaymentRequestApprovalStrategy = PaymentRequestApprovalStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -1340,4 +4160,6 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAcceptedTerm()               {}
+func (*UnknownUnionMember) isPriceIncrease()              {}
 func (*UnknownUnionMember) isRequestedTermConfiguration() {}
+func (*UnknownUnionMember) isTermTemplate()               {}

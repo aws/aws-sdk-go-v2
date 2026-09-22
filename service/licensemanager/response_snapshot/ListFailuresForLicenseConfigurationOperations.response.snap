@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSLicenseManager.ListFailuresForLicenseConfigurationOperations
+
+{"LicenseOperationFailureList":[{"ErrorMessage":"__ErrorMessage__","FailureTime":946684800,"MetadataList":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"OperationName":"__OperationName__","OperationRequestedBy":"__OperationRequestedBy__","ResourceArn":"__ResourceArn__","ResourceOwnerId":"__ResourceOwnerId__","ResourceType":"EC2_INSTANCE"},{"ErrorMessage":"__ErrorMessage__","FailureTime":946684800,"MetadataList":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"OperationName":"__OperationName__","OperationRequestedBy":"__OperationRequestedBy__","ResourceArn":"__ResourceArn__","ResourceOwnerId":"__ResourceOwnerId__","ResourceType":"EC2_INSTANCE"}],"NextToken":"__NextToken__"}

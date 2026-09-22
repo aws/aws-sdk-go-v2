@@ -4,11 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,7 +37,8 @@ type GetOauth2CredentialProviderInput struct {
 
 type GetOauth2CredentialProviderOutput struct {
 
-	// The Amazon Resource Name (ARN) of the client secret in AWS Secrets Manager.
+	// The Amazon Resource Name (ARN) of the client secret in Amazon Web Services
+	// Secrets Manager.
 	//
 	// This member is required.
 	ClientSecretArn *types.Secret
@@ -80,6 +78,15 @@ type GetOauth2CredentialProviderOutput struct {
 	// after they complete the authorization flow.
 	CallbackUrl *string
 
+	// The JSON key used to extract the client secret value from the Amazon Web
+	// Services Secrets Manager secret.
+	ClientSecretJsonKey *string
+
+	// The source type of the client secret. Either MANAGED if the secret is managed
+	// by the service, or EXTERNAL if managed by the user in Amazon Web Services
+	// Secrets Manager.
+	ClientSecretSource types.SecretSourceType
+
 	// The reason for failure if the OAuth2 credential provider is in a failed state.
 	FailureReason *string
 
@@ -93,9 +100,6 @@ type GetOauth2CredentialProviderOutput struct {
 }
 
 func (c *Client) addOperationGetOauth2CredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetOauth2CredentialProvider{}, middleware.After)
 	if err != nil {
 		return err
@@ -104,65 +108,20 @@ func (c *Client) addOperationGetOauth2CredentialProviderMiddlewares(stack *middl
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOauth2CredentialProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetOauth2CredentialProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOauth2CredentialProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +136,8 @@ func (c *Client) addOperationGetOauth2CredentialProviderMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetOauth2CredentialProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetOauth2CredentialProvider",
-	}
 }

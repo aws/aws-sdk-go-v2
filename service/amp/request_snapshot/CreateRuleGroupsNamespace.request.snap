@@ -1,0 +1,5 @@
+POST /workspaces/__WorkspaceId__/rulegroupsnamespaces
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","data":"YmxvYg==","name":"__Name__","tags":{"key0":"__Value__"}}

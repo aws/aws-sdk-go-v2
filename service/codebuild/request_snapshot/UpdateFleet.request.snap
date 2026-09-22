@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeBuild_20161006.UpdateFleet
+
+{"arn":"__Arn__","baseCapacity":1,"computeConfiguration":{"disk":1,"instanceType":"__InstanceType__","machineType":"GENERAL","memory":1,"vCpu":1},"computeType":"BUILD_GENERAL1_SMALL","environmentType":"WINDOWS_CONTAINER","fleetServiceRole":"__FleetServiceRole__","imageId":"__ImageId__","overflowBehavior":"QUEUE","proxyConfiguration":{"defaultBehavior":"ALLOW_ALL","orderedProxyRules":[{"effect":"ALLOW","entities":["__Member__","__Member__"],"type":"DOMAIN"},{"effect":"ALLOW","entities":["__Member__","__Member__"],"type":"DOMAIN"}]},"scalingConfiguration":{"maxCapacity":1,"scalingType":"TARGET_TRACKING_SCALING","targetTrackingScalingConfigs":[{"metricType":"FLEET_UTILIZATION_RATE","targetValue":1},{"metricType":"FLEET_UTILIZATION_RATE","targetValue":1}]},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"vpcConfig":{"securityGroupIds":["__Member__","__Member__"],"subnets":["__Member__","__Member__"],"vpcId":"__VpcId__"}}

@@ -1,0 +1,6 @@
+POST /v1/CancelSubscription
+
+Content-Type: application/json
+If-Match: __IfMatch__
+
+{"arn":"__Arn__","clientToken":"__ClientToken__"}

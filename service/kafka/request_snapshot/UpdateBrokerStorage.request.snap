@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/nodes/storage
+
+Content-Type: application/json
+
+{"currentVersion":"__CurrentVersion__","targetBrokerEBSVolumeInfo":[{"kafkaBrokerNodeId":"__KafkaBrokerNodeId__","provisionedThroughput":{"enabled":true,"volumeThroughput":1},"volumeSizeGB":1},{"kafkaBrokerNodeId":"__KafkaBrokerNodeId__","provisionedThroughput":{"enabled":true,"volumeThroughput":1},"volumeSizeGB":1}]}

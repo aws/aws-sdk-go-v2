@@ -1,0 +1,5 @@
+POST /v1/event-actions
+
+Content-Type: application/json
+
+{"Action":{"ExportRevisionToS3":{"Encryption":{"KmsKeyArn":"__KmsKeyArn__","Type":"aws:kms"},"RevisionDestination":{"Bucket":"__Bucket__","KeyPattern":"__KeyPattern__"}}},"Event":{"RevisionPublished":{"DataSetId":"__DataSetId__"}},"Tags":{"key0":"__Value__"}}

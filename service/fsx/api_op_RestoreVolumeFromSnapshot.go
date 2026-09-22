@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns an Amazon FSx for OpenZFS volume to the state saved by the specified
@@ -60,6 +60,25 @@ type RestoreVolumeFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreVolumeFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreVolumeFromSnapshotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreVolumeFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.RestoreVolumeFromSnapshotRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	serializeRestoreOpenZFSVolumeOptions(s, schemas.RestoreVolumeFromSnapshotRequest_Options, v.Options)
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.RestoreVolumeFromSnapshotRequest_SnapshotId, *v.SnapshotId)
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.RestoreVolumeFromSnapshotRequest_VolumeId, *v.VolumeId)
+	}
+}
+
 type RestoreVolumeFromSnapshotOutput struct {
 
 	// A list of administrative actions for the file system that are in process or
@@ -79,65 +98,55 @@ type RestoreVolumeFromSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreVolumeFromSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreVolumeFromSnapshotResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreVolumeFromSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdministrativeActions(s, schemas.RestoreVolumeFromSnapshotResponse_AdministrativeActions, v.AdministrativeActions)
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.RestoreVolumeFromSnapshotResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.RestoreVolumeFromSnapshotResponse_VolumeId, *v.VolumeId)
+	}
+}
+func (v *RestoreVolumeFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreVolumeFromSnapshotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreVolumeFromSnapshotResponse_AdministrativeActions:
+			return deserializeAdministrativeActions(d, schemas.RestoreVolumeFromSnapshotResponse_AdministrativeActions, &v.AdministrativeActions)
+		case schemas.RestoreVolumeFromSnapshotResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.RestoreVolumeFromSnapshotResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.VolumeLifecycle(ev)
+			return nil
+		case schemas.RestoreVolumeFromSnapshotResponse_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.RestoreVolumeFromSnapshotResponse_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreVolumeFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreVolumeFromSnapshot, schemas.RestoreVolumeFromSnapshotRequest, schemas.RestoreVolumeFromSnapshotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreVolumeFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreVolumeFromSnapshot, schemas.RestoreVolumeFromSnapshotRequest, schemas.RestoreVolumeFromSnapshotResponse), output: &RestoreVolumeFromSnapshotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRestoreVolumeFromSnapshot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreVolumeFromSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -147,12 +156,6 @@ func (c *Client) addOperationRestoreVolumeFromSnapshotMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpRestoreVolumeFromSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreVolumeFromSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +168,6 @@ func (c *Client) addOperationRestoreVolumeFromSnapshotMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -210,12 +207,4 @@ func (m *idempotencyToken_initializeOpRestoreVolumeFromSnapshot) HandleInitializ
 }
 func addIdempotencyToken_opRestoreVolumeFromSnapshotMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpRestoreVolumeFromSnapshot{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opRestoreVolumeFromSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RestoreVolumeFromSnapshot",
-	}
 }

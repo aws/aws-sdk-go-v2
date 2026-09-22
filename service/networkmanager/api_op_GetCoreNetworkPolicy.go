@@ -4,11 +4,10 @@ package networkmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns details about a core network policy. You can get details about your
@@ -44,6 +43,24 @@ type GetCoreNetworkPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoreNetworkPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreNetworkPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreNetworkPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != "" {
+		s.WriteString(schemas.GetCoreNetworkPolicyRequest_Alias, string(v.Alias))
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.GetCoreNetworkPolicyRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	if v.PolicyVersionId != nil {
+		s.WriteInt32(schemas.GetCoreNetworkPolicyRequest_PolicyVersionId, *v.PolicyVersionId)
+	}
+}
+
 type GetCoreNetworkPolicyOutput struct {
 
 	// The details about a core network policy.
@@ -55,77 +72,50 @@ type GetCoreNetworkPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCoreNetworkPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCoreNetworkPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCoreNetworkPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CoreNetworkPolicy != nil {
+		s.WriteStruct(schemas.GetCoreNetworkPolicyResponse_CoreNetworkPolicy)
+		v.CoreNetworkPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCoreNetworkPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCoreNetworkPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCoreNetworkPolicyResponse_CoreNetworkPolicy:
+			v.CoreNetworkPolicy = &types.CoreNetworkPolicy{}
+			return v.CoreNetworkPolicy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCoreNetworkPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreNetworkPolicy, schemas.GetCoreNetworkPolicyRequest, schemas.GetCoreNetworkPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCoreNetworkPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCoreNetworkPolicy, schemas.GetCoreNetworkPolicyRequest, schemas.GetCoreNetworkPolicyResponse), output: &GetCoreNetworkPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCoreNetworkPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCoreNetworkPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCoreNetworkPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCoreNetworkPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +130,8 @@ func (c *Client) addOperationGetCoreNetworkPolicyMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCoreNetworkPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCoreNetworkPolicy",
-	}
 }

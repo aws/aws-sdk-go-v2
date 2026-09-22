@@ -1,0 +1,6 @@
+PATCH /2023-10-12/farms/__FarmId__/storage-profiles/__StorageProfileId__
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"displayName":"__DisplayName__","fileSystemLocationsToAdd":[{"name":"__Name__","path":"__Path__","type":"SHARED"},{"name":"__Name__","path":"__Path__","type":"SHARED"}],"fileSystemLocationsToRemove":[{"name":"__Name__","path":"__Path__","type":"SHARED"},{"name":"__Name__","path":"__Path__","type":"SHARED"}],"osFamily":"WINDOWS"}

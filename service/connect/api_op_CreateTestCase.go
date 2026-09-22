@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -76,6 +75,48 @@ type CreateTestCaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestCaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestCaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestCaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_Content, *v.Content)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_Description, *v.Description)
+	}
+	if v.EntryPoint != nil {
+		s.WriteStruct(schemas.CreateTestCaseRequest_EntryPoint)
+		v.EntryPoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InitializationData != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_InitializationData, *v.InitializationData)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_InstanceId, *v.InstanceId)
+	}
+	if v.LastModifiedRegion != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_LastModifiedRegion, *v.LastModifiedRegion)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.CreateTestCaseRequest_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateTestCaseRequest_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.CreateTestCaseRequest_Tags, v.Tags)
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.CreateTestCaseRequest_TestCaseId, *v.TestCaseId)
+	}
+}
+
 type CreateTestCaseOutput struct {
 
 	// The Amazon Resource Name (ARN) of the test.
@@ -90,77 +131,54 @@ type CreateTestCaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTestCaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTestCaseResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTestCaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestCaseArn != nil {
+		s.WriteString(schemas.CreateTestCaseResponse_TestCaseArn, *v.TestCaseArn)
+	}
+	if v.TestCaseId != nil {
+		s.WriteString(schemas.CreateTestCaseResponse_TestCaseId, *v.TestCaseId)
+	}
+}
+func (v *CreateTestCaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTestCaseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTestCaseResponse_TestCaseArn:
+			v.TestCaseArn = new(string)
+			return d.ReadString(schemas.CreateTestCaseResponse_TestCaseArn, v.TestCaseArn)
+		case schemas.CreateTestCaseResponse_TestCaseId:
+			v.TestCaseId = new(string)
+			return d.ReadString(schemas.CreateTestCaseResponse_TestCaseId, v.TestCaseId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTestCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestCase, schemas.CreateTestCaseRequest, schemas.CreateTestCaseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTestCase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTestCase, schemas.CreateTestCaseRequest, schemas.CreateTestCaseResponse), output: &CreateTestCaseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTestCase{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTestCase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateTestCaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTestCase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +193,8 @@ func (c *Client) addOperationCreateTestCaseMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateTestCase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTestCase",
-	}
 }

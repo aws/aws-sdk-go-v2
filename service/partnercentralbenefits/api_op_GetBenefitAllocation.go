@@ -4,11 +4,10 @@ package partnercentralbenefits
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,21 @@ type GetBenefitAllocationInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBenefitAllocationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBenefitAllocationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBenefitAllocationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetBenefitAllocationInput_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetBenefitAllocationInput_Identifier, *v.Identifier)
+	}
 }
 
 type GetBenefitAllocationOutput struct {
@@ -100,77 +114,140 @@ type GetBenefitAllocationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBenefitAllocationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBenefitAllocationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBenefitAllocationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBenefitIdentifiers(s, schemas.GetBenefitAllocationOutput_ApplicableBenefitIds, v.ApplicableBenefitIds)
+	if v.Arn != nil {
+		s.WriteString(schemas.GetBenefitAllocationOutput_Arn, *v.Arn)
+	}
+	if v.BenefitApplicationId != nil {
+		s.WriteString(schemas.GetBenefitAllocationOutput_BenefitApplicationId, *v.BenefitApplicationId)
+	}
+	if v.BenefitId != nil {
+		s.WriteString(schemas.GetBenefitAllocationOutput_BenefitId, *v.BenefitId)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetBenefitAllocationOutput_Catalog, *v.Catalog)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetBenefitAllocationOutput_CreatedAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetBenefitAllocationOutput_Description, *v.Description)
+	}
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.GetBenefitAllocationOutput_ExpiresAt, *v.ExpiresAt)
+	}
+	serializeFulfillmentDetails(s, schemas.GetBenefitAllocationOutput_FulfillmentDetail, v.FulfillmentDetail)
+	if v.FulfillmentType != "" {
+		s.WriteString(schemas.GetBenefitAllocationOutput_FulfillmentType, string(v.FulfillmentType))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetBenefitAllocationOutput_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBenefitAllocationOutput_Name, *v.Name)
+	}
+	if v.StartsAt != nil {
+		s.WriteTime(schemas.GetBenefitAllocationOutput_StartsAt, *v.StartsAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetBenefitAllocationOutput_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.GetBenefitAllocationOutput_StatusReason, *v.StatusReason)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetBenefitAllocationOutput_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetBenefitAllocationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBenefitAllocationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBenefitAllocationOutput_ApplicableBenefitIds:
+			return deserializeBenefitIdentifiers(d, schemas.GetBenefitAllocationOutput_ApplicableBenefitIds, &v.ApplicableBenefitIds)
+		case schemas.GetBenefitAllocationOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetBenefitAllocationOutput_Arn, v.Arn)
+		case schemas.GetBenefitAllocationOutput_BenefitApplicationId:
+			v.BenefitApplicationId = new(string)
+			return d.ReadString(schemas.GetBenefitAllocationOutput_BenefitApplicationId, v.BenefitApplicationId)
+		case schemas.GetBenefitAllocationOutput_BenefitId:
+			v.BenefitId = new(string)
+			return d.ReadString(schemas.GetBenefitAllocationOutput_BenefitId, v.BenefitId)
+		case schemas.GetBenefitAllocationOutput_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetBenefitAllocationOutput_Catalog, v.Catalog)
+		case schemas.GetBenefitAllocationOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBenefitAllocationOutput_CreatedAt, v.CreatedAt)
+		case schemas.GetBenefitAllocationOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBenefitAllocationOutput_Description, v.Description)
+		case schemas.GetBenefitAllocationOutput_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.GetBenefitAllocationOutput_ExpiresAt, v.ExpiresAt)
+		case schemas.GetBenefitAllocationOutput_FulfillmentDetail:
+			return deserializeFulfillmentDetails(d, schemas.GetBenefitAllocationOutput_FulfillmentDetail, &v.FulfillmentDetail)
+		case schemas.GetBenefitAllocationOutput_FulfillmentType:
+			var ev string
+			if err := d.ReadString(schemas.GetBenefitAllocationOutput_FulfillmentType, &ev); err != nil {
+				return err
+			}
+			v.FulfillmentType = types.FulfillmentType(ev)
+			return nil
+		case schemas.GetBenefitAllocationOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetBenefitAllocationOutput_Id, v.Id)
+		case schemas.GetBenefitAllocationOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBenefitAllocationOutput_Name, v.Name)
+		case schemas.GetBenefitAllocationOutput_StartsAt:
+			v.StartsAt = new(time.Time)
+			return d.ReadTime(schemas.GetBenefitAllocationOutput_StartsAt, v.StartsAt)
+		case schemas.GetBenefitAllocationOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetBenefitAllocationOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BenefitAllocationStatus(ev)
+			return nil
+		case schemas.GetBenefitAllocationOutput_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.GetBenefitAllocationOutput_StatusReason, v.StatusReason)
+		case schemas.GetBenefitAllocationOutput_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBenefitAllocationOutput_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBenefitAllocationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBenefitAllocation, schemas.GetBenefitAllocationInput, schemas.GetBenefitAllocationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetBenefitAllocation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBenefitAllocation, schemas.GetBenefitAllocationInput, schemas.GetBenefitAllocationOutput), output: &GetBenefitAllocationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetBenefitAllocation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBenefitAllocation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBenefitAllocationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBenefitAllocation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,22 +262,8 @@ func (c *Client) addOperationGetBenefitAllocationMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBenefitAllocation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBenefitAllocation",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: IoTAutobahnControlPlane.UpdateVehicle
+
+{"attributes":{"key0":"__Value__"},"attributeUpdateMode":"Overwrite","decoderManifestArn":"__DecoderManifestArn__","modelManifestArn":"__ModelManifestArn__","stateTemplatesToAdd":[{"identifier":"__Identifier__","stateTemplateUpdateStrategy":{"periodic":{"stateTemplateUpdateRate":{"unit":"MILLISECOND","value":1}}}},{"identifier":"__Identifier__","stateTemplateUpdateStrategy":{"periodic":{"stateTemplateUpdateRate":{"unit":"MILLISECOND","value":1}}}}],"stateTemplatesToRemove":["__Member__","__Member__"],"stateTemplatesToUpdate":[{"identifier":"__Identifier__","stateTemplateUpdateStrategy":{"periodic":{"stateTemplateUpdateRate":{"unit":"MILLISECOND","value":1}}}},{"identifier":"__Identifier__","stateTemplateUpdateStrategy":{"periodic":{"stateTemplateUpdateRate":{"unit":"MILLISECOND","value":1}}}}],"vehicleName":"__VehicleName__"}

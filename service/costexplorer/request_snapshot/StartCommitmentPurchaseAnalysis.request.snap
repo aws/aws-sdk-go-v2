@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.StartCommitmentPurchaseAnalysis
+
+{"CommitmentPurchaseAnalysisConfiguration":{"SavingsPlansPurchaseAnalysisConfiguration":{"AccountId":"__AccountId__","AccountScope":"PAYER","AnalysisType":"MAX_SAVINGS","LookBackTimePeriod":{"End":"__End__","Start":"__Start__"},"SavingsPlansTargetCoverage":1,"SavingsPlansToAdd":[{"InstanceFamily":"__InstanceFamily__","OfferingId":"__OfferingId__","PaymentOption":"NO_UPFRONT","Region":"__Region__","SavingsPlansCommitment":1,"SavingsPlansType":"COMPUTE_SP","TermInYears":"ONE_YEAR"},{"InstanceFamily":"__InstanceFamily__","OfferingId":"__OfferingId__","PaymentOption":"NO_UPFRONT","Region":"__Region__","SavingsPlansCommitment":1,"SavingsPlansType":"COMPUTE_SP","TermInYears":"ONE_YEAR"}],"SavingsPlansToExclude":["__Member__","__Member__"]}}}

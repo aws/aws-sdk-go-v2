@@ -4,11 +4,10 @@ package route53domains
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53domains/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,18 @@ type GetDomainDetailInput struct {
 	DomainName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDomainDetailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainDetailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainDetailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDomainDetailRequest_DomainName, *v.DomainName)
+	}
 }
 
 // The GetDomainDetail response includes the following elements.
@@ -154,77 +165,185 @@ type GetDomainDetailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainDetailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainDetailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainDetailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbuseContactEmail != nil {
+		s.WriteString(schemas.GetDomainDetailResponse_AbuseContactEmail, *v.AbuseContactEmail)
+	}
+	if v.AbuseContactPhone != nil {
+		s.WriteString(schemas.GetDomainDetailResponse_AbuseContactPhone, *v.AbuseContactPhone)
+	}
+	if v.AdminContact != nil {
+		s.WriteStruct(schemas.GetDomainDetailResponse_AdminContact)
+		v.AdminContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AdminPrivacy != nil {
+		s.WriteBool(schemas.GetDomainDetailResponse_AdminPrivacy, *v.AdminPrivacy)
+	}
+	if v.AutoRenew != nil {
+		s.WriteBool(schemas.GetDomainDetailResponse_AutoRenew, *v.AutoRenew)
+	}
+	if v.BillingContact != nil {
+		s.WriteStruct(schemas.GetDomainDetailResponse_BillingContact)
+		v.BillingContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BillingPrivacy != nil {
+		s.WriteBool(schemas.GetDomainDetailResponse_BillingPrivacy, *v.BillingPrivacy)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetDomainDetailResponse_CreationDate, *v.CreationDate)
+	}
+	if v.DnsSec != nil {
+		s.WriteString(schemas.GetDomainDetailResponse_DnsSec, *v.DnsSec)
+	}
+	serializeDnssecKeyList(s, schemas.GetDomainDetailResponse_DnssecKeys, v.DnssecKeys)
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetDomainDetailResponse_DomainName, *v.DomainName)
+	}
+	if v.ExpirationDate != nil {
+		s.WriteTime(schemas.GetDomainDetailResponse_ExpirationDate, *v.ExpirationDate)
+	}
+	serializeNameserverList(s, schemas.GetDomainDetailResponse_Nameservers, v.Nameservers)
+	if v.RegistrantContact != nil {
+		s.WriteStruct(schemas.GetDomainDetailResponse_RegistrantContact)
+		v.RegistrantContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegistrantPrivacy != nil {
+		s.WriteBool(schemas.GetDomainDetailResponse_RegistrantPrivacy, *v.RegistrantPrivacy)
+	}
+	if v.RegistrarName != nil {
+		s.WriteString(schemas.GetDomainDetailResponse_RegistrarName, *v.RegistrarName)
+	}
+	if v.RegistrarUrl != nil {
+		s.WriteString(schemas.GetDomainDetailResponse_RegistrarUrl, *v.RegistrarUrl)
+	}
+	if v.RegistryDomainId != nil {
+		s.WriteString(schemas.GetDomainDetailResponse_RegistryDomainId, *v.RegistryDomainId)
+	}
+	if v.Reseller != nil {
+		s.WriteString(schemas.GetDomainDetailResponse_Reseller, *v.Reseller)
+	}
+	serializeDomainStatusList(s, schemas.GetDomainDetailResponse_StatusList, v.StatusList)
+	if v.TechContact != nil {
+		s.WriteStruct(schemas.GetDomainDetailResponse_TechContact)
+		v.TechContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TechPrivacy != nil {
+		s.WriteBool(schemas.GetDomainDetailResponse_TechPrivacy, *v.TechPrivacy)
+	}
+	if v.UpdatedDate != nil {
+		s.WriteTime(schemas.GetDomainDetailResponse_UpdatedDate, *v.UpdatedDate)
+	}
+	if v.WhoIsServer != nil {
+		s.WriteString(schemas.GetDomainDetailResponse_WhoIsServer, *v.WhoIsServer)
+	}
+}
+func (v *GetDomainDetailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainDetailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainDetailResponse_AbuseContactEmail:
+			v.AbuseContactEmail = new(string)
+			return d.ReadString(schemas.GetDomainDetailResponse_AbuseContactEmail, v.AbuseContactEmail)
+		case schemas.GetDomainDetailResponse_AbuseContactPhone:
+			v.AbuseContactPhone = new(string)
+			return d.ReadString(schemas.GetDomainDetailResponse_AbuseContactPhone, v.AbuseContactPhone)
+		case schemas.GetDomainDetailResponse_AdminContact:
+			v.AdminContact = &types.ContactDetail{}
+			return v.AdminContact.Deserialize(d)
+		case schemas.GetDomainDetailResponse_AdminPrivacy:
+			v.AdminPrivacy = new(bool)
+			return d.ReadBool(schemas.GetDomainDetailResponse_AdminPrivacy, v.AdminPrivacy)
+		case schemas.GetDomainDetailResponse_AutoRenew:
+			v.AutoRenew = new(bool)
+			return d.ReadBool(schemas.GetDomainDetailResponse_AutoRenew, v.AutoRenew)
+		case schemas.GetDomainDetailResponse_BillingContact:
+			v.BillingContact = &types.ContactDetail{}
+			return v.BillingContact.Deserialize(d)
+		case schemas.GetDomainDetailResponse_BillingPrivacy:
+			v.BillingPrivacy = new(bool)
+			return d.ReadBool(schemas.GetDomainDetailResponse_BillingPrivacy, v.BillingPrivacy)
+		case schemas.GetDomainDetailResponse_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetDomainDetailResponse_CreationDate, v.CreationDate)
+		case schemas.GetDomainDetailResponse_DnsSec:
+			v.DnsSec = new(string)
+			return d.ReadString(schemas.GetDomainDetailResponse_DnsSec, v.DnsSec)
+		case schemas.GetDomainDetailResponse_DnssecKeys:
+			return deserializeDnssecKeyList(d, schemas.GetDomainDetailResponse_DnssecKeys, &v.DnssecKeys)
+		case schemas.GetDomainDetailResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetDomainDetailResponse_DomainName, v.DomainName)
+		case schemas.GetDomainDetailResponse_ExpirationDate:
+			v.ExpirationDate = new(time.Time)
+			return d.ReadTime(schemas.GetDomainDetailResponse_ExpirationDate, v.ExpirationDate)
+		case schemas.GetDomainDetailResponse_Nameservers:
+			return deserializeNameserverList(d, schemas.GetDomainDetailResponse_Nameservers, &v.Nameservers)
+		case schemas.GetDomainDetailResponse_RegistrantContact:
+			v.RegistrantContact = &types.ContactDetail{}
+			return v.RegistrantContact.Deserialize(d)
+		case schemas.GetDomainDetailResponse_RegistrantPrivacy:
+			v.RegistrantPrivacy = new(bool)
+			return d.ReadBool(schemas.GetDomainDetailResponse_RegistrantPrivacy, v.RegistrantPrivacy)
+		case schemas.GetDomainDetailResponse_RegistrarName:
+			v.RegistrarName = new(string)
+			return d.ReadString(schemas.GetDomainDetailResponse_RegistrarName, v.RegistrarName)
+		case schemas.GetDomainDetailResponse_RegistrarUrl:
+			v.RegistrarUrl = new(string)
+			return d.ReadString(schemas.GetDomainDetailResponse_RegistrarUrl, v.RegistrarUrl)
+		case schemas.GetDomainDetailResponse_RegistryDomainId:
+			v.RegistryDomainId = new(string)
+			return d.ReadString(schemas.GetDomainDetailResponse_RegistryDomainId, v.RegistryDomainId)
+		case schemas.GetDomainDetailResponse_Reseller:
+			v.Reseller = new(string)
+			return d.ReadString(schemas.GetDomainDetailResponse_Reseller, v.Reseller)
+		case schemas.GetDomainDetailResponse_StatusList:
+			return deserializeDomainStatusList(d, schemas.GetDomainDetailResponse_StatusList, &v.StatusList)
+		case schemas.GetDomainDetailResponse_TechContact:
+			v.TechContact = &types.ContactDetail{}
+			return v.TechContact.Deserialize(d)
+		case schemas.GetDomainDetailResponse_TechPrivacy:
+			v.TechPrivacy = new(bool)
+			return d.ReadBool(schemas.GetDomainDetailResponse_TechPrivacy, v.TechPrivacy)
+		case schemas.GetDomainDetailResponse_UpdatedDate:
+			v.UpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetDomainDetailResponse_UpdatedDate, v.UpdatedDate)
+		case schemas.GetDomainDetailResponse_WhoIsServer:
+			v.WhoIsServer = new(string)
+			return d.ReadString(schemas.GetDomainDetailResponse_WhoIsServer, v.WhoIsServer)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainDetailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainDetail, schemas.GetDomainDetailRequest, schemas.GetDomainDetailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDomainDetail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainDetail, schemas.GetDomainDetailRequest, schemas.GetDomainDetailResponse), output: &GetDomainDetailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDomainDetail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDomainDetail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetDomainDetailValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainDetail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -239,22 +358,8 @@ func (c *Client) addOperationGetDomainDetailMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetDomainDetail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetDomainDetail",
-	}
 }

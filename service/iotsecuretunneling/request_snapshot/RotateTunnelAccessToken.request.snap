@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IoTSecuredTunneling.RotateTunnelAccessToken
+
+{"clientMode":"SOURCE","destinationConfig":{"services":["__Member__","__Member__"],"thingName":"__ThingName__"},"tunnelId":"__TunnelId__"}

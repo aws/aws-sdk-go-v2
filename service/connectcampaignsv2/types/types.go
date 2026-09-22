@@ -7,6 +7,32 @@ import (
 	"time"
 )
 
+// Configuration for abandonment-rate-based dialer throttling.
+type AbandonmentRatePacingConfig struct {
+
+	// Event from which connectionThresholdSeconds is measured.
+	//
+	// This member is required.
+	ConnectionStartPoint ConnectionStartPoint
+
+	// Seconds after connectionStartPoint before a contact counts as abandoned.
+	//
+	// This member is required.
+	ConnectionThresholdSeconds *int32
+
+	// Rolling window over which abandonmentRate is computed.
+	//
+	// This member is required.
+	EvaluationWindow *string
+
+	// Target abandonment rate.
+	//
+	// This member is required.
+	TargetRate *float64
+
+	noSmithyDocumentSerde
+}
+
 // Agentless config
 type AgentlessConfig struct {
 	noSmithyDocumentSerde
@@ -127,6 +153,15 @@ type CampaignSummary struct {
 
 	// The type of campaign externally exposed in APIs.
 	Type ExternalCampaignType
+
+	noSmithyDocumentSerde
+}
+
+// Additional metadata related to the event trigger context
+type ChannelContext struct {
+
+	// Context metadata for the web notification type channel
+	WebNotificationContext *WebNotificationContext
 
 	noSmithyDocumentSerde
 }
@@ -440,6 +475,18 @@ type EventTrigger struct {
 
 	// Amazon Resource Names(ARN)
 	CustomerProfilesDomainArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Event trigger context data
+type EventTriggerContext struct {
+
+	// Additional metadata related to the event trigger context
+	ChannelContext *ChannelContext
+
+	// Source event object for event triggers
+	SourceEvent *string
 
 	noSmithyDocumentSerde
 }
@@ -759,6 +806,24 @@ type OutboundRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Pacing constraint the dialer may enforce.
+//
+// The following types satisfy this interface:
+//
+//	PacingStrategyMemberAbandonmentRate
+type PacingStrategy interface {
+	isPacingStrategy()
+}
+
+// Configuration for abandonment-rate-based dialer throttling.
+type PacingStrategyMemberAbandonmentRate struct {
+	Value AbandonmentRatePacingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*PacingStrategyMemberAbandonmentRate) isPacingStrategy() {}
+
 // Predictive config
 type PredictiveConfig struct {
 
@@ -766,6 +831,9 @@ type PredictiveConfig struct {
 	//
 	// This member is required.
 	BandwidthAllocation *float64
+
+	// Pacing strategies the dialer enforces simultaneously.
+	PacingStrategies []PacingStrategy
 
 	noSmithyDocumentSerde
 }
@@ -802,6 +870,9 @@ type ProfileOutboundRequest struct {
 	//
 	// This member is required.
 	ProfileId *string
+
+	// Event trigger context data
+	EventTriggerContext *EventTriggerContext
 
 	// Timestamp with no UTC offset or timezone
 	ExpirationTime *time.Time
@@ -1217,6 +1288,18 @@ type TimeWindow struct {
 	noSmithyDocumentSerde
 }
 
+// Context metadata for the web notification type channel
+type WebNotificationContext struct {
+
+	// Browser Id for web notification event trigger
+	BrowserId *string
+
+	// Session Id for web notification event trigger
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
 // WhatsApp Channel Subtype config
 type WhatsAppChannelSubtypeConfig struct {
 
@@ -1313,6 +1396,7 @@ func (*UnknownUnionMember) isIntegrationConfig()        {}
 func (*UnknownUnionMember) isIntegrationIdentifier()    {}
 func (*UnknownUnionMember) isIntegrationSummary()       {}
 func (*UnknownUnionMember) isOpenHours()                {}
+func (*UnknownUnionMember) isPacingStrategy()           {}
 func (*UnknownUnionMember) isRestrictedPeriods()        {}
 func (*UnknownUnionMember) isSmsOutboundMode()          {}
 func (*UnknownUnionMember) isSource()                   {}

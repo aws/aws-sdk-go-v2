@@ -4,11 +4,10 @@ package wafv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the available versions for the specified managed rule group.
@@ -69,6 +68,30 @@ type ListAvailableManagedRuleGroupVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableManagedRuleGroupVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableManagedRuleGroupVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableManagedRuleGroupVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListAvailableManagedRuleGroupVersionsRequest_Limit, *v.Limit)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsRequest_Name, *v.Name)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsRequest_NextMarker, *v.NextMarker)
+	}
+	if v.Scope != "" {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsRequest_Scope, string(v.Scope))
+	}
+	if v.VendorName != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsRequest_VendorName, *v.VendorName)
+	}
+}
+
 type ListAvailableManagedRuleGroupVersionsOutput struct {
 
 	// The name of the version that's currently set as the default.
@@ -90,77 +113,57 @@ type ListAvailableManagedRuleGroupVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAvailableManagedRuleGroupVersionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAvailableManagedRuleGroupVersionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAvailableManagedRuleGroupVersionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentDefaultVersion != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsResponse_CurrentDefaultVersion, *v.CurrentDefaultVersion)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListAvailableManagedRuleGroupVersionsResponse_NextMarker, *v.NextMarker)
+	}
+	serializeManagedRuleGroupVersions(s, schemas.ListAvailableManagedRuleGroupVersionsResponse_Versions, v.Versions)
+}
+func (v *ListAvailableManagedRuleGroupVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAvailableManagedRuleGroupVersionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAvailableManagedRuleGroupVersionsResponse_CurrentDefaultVersion:
+			v.CurrentDefaultVersion = new(string)
+			return d.ReadString(schemas.ListAvailableManagedRuleGroupVersionsResponse_CurrentDefaultVersion, v.CurrentDefaultVersion)
+		case schemas.ListAvailableManagedRuleGroupVersionsResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListAvailableManagedRuleGroupVersionsResponse_NextMarker, v.NextMarker)
+		case schemas.ListAvailableManagedRuleGroupVersionsResponse_Versions:
+			return deserializeManagedRuleGroupVersions(d, schemas.ListAvailableManagedRuleGroupVersionsResponse_Versions, &v.Versions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAvailableManagedRuleGroupVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableManagedRuleGroupVersions, schemas.ListAvailableManagedRuleGroupVersionsRequest, schemas.ListAvailableManagedRuleGroupVersionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAvailableManagedRuleGroupVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAvailableManagedRuleGroupVersions, schemas.ListAvailableManagedRuleGroupVersionsRequest, schemas.ListAvailableManagedRuleGroupVersionsResponse), output: &ListAvailableManagedRuleGroupVersionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAvailableManagedRuleGroupVersions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAvailableManagedRuleGroupVersions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAvailableManagedRuleGroupVersionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAvailableManagedRuleGroupVersions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,22 +178,8 @@ func (c *Client) addOperationListAvailableManagedRuleGroupVersionsMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListAvailableManagedRuleGroupVersions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAvailableManagedRuleGroupVersions",
-	}
 }

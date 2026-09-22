@@ -1,0 +1,3 @@
+GET /memberships/__MembershipIdentifier__/analysislogexports?analysisIdentifier=__AnalysisIdentifier__&maxResults=1&nextToken=__NextToken__&status=IN_PROGRESS
+
+

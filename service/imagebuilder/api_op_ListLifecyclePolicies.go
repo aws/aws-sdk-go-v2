@@ -5,13 +5,13 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a list of lifecycle policies in your Amazon Web Services account.
+// Retrieves a list of lifecycle policies in your Amazon Web Services account.
 func (c *Client) ListLifecyclePolicies(ctx context.Context, params *ListLifecyclePoliciesInput, optFns ...func(*Options)) (*ListLifecyclePoliciesOutput, error) {
 	if params == nil {
 		params = &ListLifecyclePoliciesInput{}
@@ -32,14 +32,30 @@ type ListLifecyclePoliciesInput struct {
 	// Streamline results based on one of the following values: Name , Status .
 	Filters []types.Filter
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListLifecyclePoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecyclePoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecyclePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListLifecyclePoliciesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLifecyclePoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecyclePoliciesRequest_nextToken, *v.NextToken)
+	}
 }
 
 type ListLifecyclePoliciesOutput struct {
@@ -59,74 +75,48 @@ type ListLifecyclePoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecyclePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecyclePoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecyclePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecyclePolicySummaryList(s, schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaryList, v.LifecyclePolicySummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecyclePoliciesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLifecyclePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLifecyclePoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaryList:
+			return deserializeLifecyclePolicySummaryList(d, schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaryList, &v.LifecyclePolicySummaryList)
+		case schemas.ListLifecyclePoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLifecyclePoliciesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecyclePolicies, schemas.ListLifecyclePoliciesRequest, schemas.ListLifecyclePoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLifecyclePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecyclePolicies, schemas.ListLifecyclePoliciesRequest, schemas.ListLifecyclePoliciesResponse), output: &ListLifecyclePoliciesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLifecyclePolicies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLifecyclePolicies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLifecyclePolicies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +131,6 @@ func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -156,7 +140,7 @@ func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.
 // ListLifecyclePoliciesPaginatorOptions is the paginator options for
 // ListLifecyclePolicies
 type ListLifecyclePoliciesPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -246,11 +230,3 @@ type ListLifecyclePoliciesAPIClient interface {
 }
 
 var _ ListLifecyclePoliciesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLifecyclePolicies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLifecyclePolicies",
-	}
-}

@@ -4,11 +4,10 @@ package globalaccelerator
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update an accelerator to make changes, such as the following:
@@ -77,6 +76,28 @@ type UpdateAcceleratorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAcceleratorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAcceleratorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAcceleratorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceleratorArn != nil {
+		s.WriteString(schemas.UpdateAcceleratorRequest_AcceleratorArn, *v.AcceleratorArn)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.UpdateAcceleratorRequest_Enabled, *v.Enabled)
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.UpdateAcceleratorRequest_IpAddressType, string(v.IpAddressType))
+	}
+	serializeIpAddresses(s, schemas.UpdateAcceleratorRequest_IpAddresses, v.IpAddresses)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAcceleratorRequest_Name, *v.Name)
+	}
+}
+
 type UpdateAcceleratorOutput struct {
 
 	// Information about the updated accelerator.
@@ -88,77 +109,50 @@ type UpdateAcceleratorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAcceleratorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAcceleratorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAcceleratorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accelerator != nil {
+		s.WriteStruct(schemas.UpdateAcceleratorResponse_Accelerator)
+		v.Accelerator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAcceleratorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAcceleratorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAcceleratorResponse_Accelerator:
+			v.Accelerator = &types.Accelerator{}
+			return v.Accelerator.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccelerator, schemas.UpdateAcceleratorRequest, schemas.UpdateAcceleratorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAccelerator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccelerator, schemas.UpdateAcceleratorRequest, schemas.UpdateAcceleratorResponse), output: &UpdateAcceleratorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAccelerator{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccelerator"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAcceleratorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccelerator(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,22 +167,8 @@ func (c *Client) addOperationUpdateAcceleratorMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAccelerator(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAccelerator",
-	}
 }

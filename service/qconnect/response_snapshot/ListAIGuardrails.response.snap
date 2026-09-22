@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"aiGuardrailSummaries":[{"aiGuardrailArn":"__AiGuardrailArn__","aiGuardrailId":"__AiGuardrailId__","assistantArn":"__AssistantArn__","assistantId":"__AssistantId__","description":"__Description__","modifiedTime":946684800,"name":"__Name__","status":"CREATE_IN_PROGRESS","tags":{"key0":"__Value__"},"visibilityStatus":"SAVED"},{"aiGuardrailArn":"__AiGuardrailArn__","aiGuardrailId":"__AiGuardrailId__","assistantArn":"__AssistantArn__","assistantId":"__AssistantId__","description":"__Description__","modifiedTime":946684800,"name":"__Name__","status":"CREATE_IN_PROGRESS","tags":{"key0":"__Value__"},"visibilityStatus":"SAVED"}],"nextToken":"__NextToken__"}

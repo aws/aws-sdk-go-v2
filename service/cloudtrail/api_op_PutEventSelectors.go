@@ -4,11 +4,10 @@ package cloudtrail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configures event selectors (also referred to as basic event selectors) or
@@ -146,6 +145,20 @@ type PutEventSelectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventSelectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventSelectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventSelectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedEventSelectors(s, schemas.PutEventSelectorsRequest_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	serializeEventSelectors(s, schemas.PutEventSelectorsRequest_EventSelectors, v.EventSelectors)
+	if v.TrailName != nil {
+		s.WriteString(schemas.PutEventSelectorsRequest_TrailName, *v.TrailName)
+	}
+}
+
 type PutEventSelectorsOutput struct {
 
 	// Specifies the advanced event selectors configured for your trail.
@@ -166,77 +179,54 @@ type PutEventSelectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEventSelectorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEventSelectorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEventSelectorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdvancedEventSelectors(s, schemas.PutEventSelectorsResponse_AdvancedEventSelectors, v.AdvancedEventSelectors)
+	serializeEventSelectors(s, schemas.PutEventSelectorsResponse_EventSelectors, v.EventSelectors)
+	if v.TrailARN != nil {
+		s.WriteString(schemas.PutEventSelectorsResponse_TrailARN, *v.TrailARN)
+	}
+}
+func (v *PutEventSelectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEventSelectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEventSelectorsResponse_AdvancedEventSelectors:
+			return deserializeAdvancedEventSelectors(d, schemas.PutEventSelectorsResponse_AdvancedEventSelectors, &v.AdvancedEventSelectors)
+		case schemas.PutEventSelectorsResponse_EventSelectors:
+			return deserializeEventSelectors(d, schemas.PutEventSelectorsResponse_EventSelectors, &v.EventSelectors)
+		case schemas.PutEventSelectorsResponse_TrailARN:
+			v.TrailARN = new(string)
+			return d.ReadString(schemas.PutEventSelectorsResponse_TrailARN, v.TrailARN)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEventSelectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventSelectors, schemas.PutEventSelectorsRequest, schemas.PutEventSelectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutEventSelectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEventSelectors, schemas.PutEventSelectorsRequest, schemas.PutEventSelectorsResponse), output: &PutEventSelectorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutEventSelectors{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutEventSelectors"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutEventSelectorsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutEventSelectors(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -251,22 +241,8 @@ func (c *Client) addOperationPutEventSelectorsMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutEventSelectors(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutEventSelectors",
-	}
 }

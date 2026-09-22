@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.SetUserPoolMfaConfig
+
+{"EmailMfaConfiguration":{"Message":"__Message__","Subject":"__Subject__"},"MfaConfiguration":"OFF","SmsMfaConfiguration":{"SmsAuthenticationMessage":"__SmsAuthenticationMessage__","SmsConfiguration":{"EumsSms":{"CallerArn":"__CallerArn__","ConfigurationSetName":"__ConfigurationSetName__","ExternalId":"__ExternalId__","InEntityId":"__InEntityId__","InTemplateId":"__InTemplateId__","OriginationIdentity":"__OriginationIdentity__","Region":"__Region__"},"ExternalId":"__ExternalId__","SnsCallerArn":"__SnsCallerArn__","SnsRegion":"__SnsRegion__"}},"SoftwareTokenMfaConfiguration":{"Enabled":true},"WebAuthnConfiguration":{"FactorConfiguration":"SINGLE_FACTOR","RelyingPartyId":"__RelyingPartyId__","UserVerification":"required"}}

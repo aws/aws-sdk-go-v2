@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.DescribeRouterConfiguration
+
+{"routerTypeIdentifier":"__RouterTypeIdentifier__","virtualInterfaceId":"__VirtualInterfaceId__"}

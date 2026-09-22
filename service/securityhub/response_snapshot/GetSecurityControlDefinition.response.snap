@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"SecurityControlDefinition":{"CurrentRegionAvailability":"AVAILABLE","CustomizableProperties":["Parameters","Parameters"],"Description":"__Description__","ParameterDefinitions":{"key0":{"ConfigurationOptions":{"Integer":{"DefaultValue":1,"Max":1,"Min":1}},"Description":"__Description__"}},"Provider":"AWS","RemediationUrl":"__RemediationUrl__","SecurityControlId":"__SecurityControlId__","SeverityRating":"LOW","Title":"__Title__"}}

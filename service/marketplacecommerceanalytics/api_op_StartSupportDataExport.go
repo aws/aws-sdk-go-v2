@@ -4,11 +4,10 @@ package marketplacecommerceanalytics
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -106,6 +105,34 @@ type StartSupportDataExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSupportDataExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSupportDataExportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSupportDataExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomerDefinedValues(s, schemas.StartSupportDataExportRequest_customerDefinedValues, v.CustomerDefinedValues)
+	if v.DataSetType != "" {
+		s.WriteString(schemas.StartSupportDataExportRequest_dataSetType, string(v.DataSetType))
+	}
+	if v.DestinationS3BucketName != nil {
+		s.WriteString(schemas.StartSupportDataExportRequest_destinationS3BucketName, *v.DestinationS3BucketName)
+	}
+	if v.DestinationS3Prefix != nil {
+		s.WriteString(schemas.StartSupportDataExportRequest_destinationS3Prefix, *v.DestinationS3Prefix)
+	}
+	if v.FromDate != nil {
+		s.WriteTime(schemas.StartSupportDataExportRequest_fromDate, *v.FromDate)
+	}
+	if v.RoleNameArn != nil {
+		s.WriteString(schemas.StartSupportDataExportRequest_roleNameArn, *v.RoleNameArn)
+	}
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.StartSupportDataExportRequest_snsTopicArn, *v.SnsTopicArn)
+	}
+}
+
 // This target has been deprecated. Container for the result of the
 // StartSupportDataExport operation.
 type StartSupportDataExportOutput struct {
@@ -121,77 +148,48 @@ type StartSupportDataExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSupportDataExportOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSupportDataExportResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSupportDataExportOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSetRequestId != nil {
+		s.WriteString(schemas.StartSupportDataExportResult_dataSetRequestId, *v.DataSetRequestId)
+	}
+}
+func (v *StartSupportDataExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSupportDataExportResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSupportDataExportResult_dataSetRequestId:
+			v.DataSetRequestId = new(string)
+			return d.ReadString(schemas.StartSupportDataExportResult_dataSetRequestId, v.DataSetRequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSupportDataExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSupportDataExport, schemas.StartSupportDataExportRequest, schemas.StartSupportDataExportResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartSupportDataExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSupportDataExport, schemas.StartSupportDataExportRequest, schemas.StartSupportDataExportResult), output: &StartSupportDataExportOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartSupportDataExport{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSupportDataExport"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartSupportDataExportValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSupportDataExport(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,22 +204,8 @@ func (c *Client) addOperationStartSupportDataExportMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartSupportDataExport(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartSupportDataExport",
-	}
 }

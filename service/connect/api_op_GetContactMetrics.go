@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves contact metric data for a specified contact.
@@ -83,6 +82,22 @@ type GetContactMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.GetContactMetricsRequest_ContactId, *v.ContactId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetContactMetricsRequest_InstanceId, *v.InstanceId)
+	}
+	serializeContactMetrics(s, schemas.GetContactMetricsRequest_Metrics, v.Metrics)
+}
+
 type GetContactMetricsOutput struct {
 
 	// The ARN of the contact for which metrics were retrieved.
@@ -105,77 +120,57 @@ type GetContactMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetContactMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetContactMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetContactMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetContactMetricsResponse_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetContactMetricsResponse_Id, *v.Id)
+	}
+	serializeContactMetricResults(s, schemas.GetContactMetricsResponse_MetricResults, v.MetricResults)
+}
+func (v *GetContactMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetContactMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetContactMetricsResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetContactMetricsResponse_Arn, v.Arn)
+		case schemas.GetContactMetricsResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetContactMetricsResponse_Id, v.Id)
+		case schemas.GetContactMetricsResponse_MetricResults:
+			return deserializeContactMetricResults(d, schemas.GetContactMetricsResponse_MetricResults, &v.MetricResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetContactMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactMetrics, schemas.GetContactMetricsRequest, schemas.GetContactMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetContactMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetContactMetrics, schemas.GetContactMetricsRequest, schemas.GetContactMetricsResponse), output: &GetContactMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetContactMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetContactMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetContactMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContactMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,22 +185,8 @@ func (c *Client) addOperationGetContactMetricsMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetContactMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetContactMetrics",
-	}
 }

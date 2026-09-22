@@ -650,6 +650,7 @@ func awsRestjson1_serializeDocumentArrayOfArray(v []types.ArrayValue, value smit
 	for i := range v {
 		av := array.Value()
 		if vv := v[i]; vv == nil {
+			av.Null()
 			continue
 		}
 		if err := awsRestjson1_serializeDocumentArrayValue(v[i], av); err != nil {
@@ -701,35 +702,43 @@ func awsRestjson1_serializeDocumentArrayValue(v types.ArrayValue, value smithyjs
 	return nil
 }
 
-func awsRestjson1_serializeDocumentBooleanArray(v []bool, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentBooleanArray(v []*bool, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		av.Boolean(v[i])
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.Boolean(*v[i])
 	}
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDoubleArray(v []float64, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentDoubleArray(v []*float64, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
 		switch {
-		case math.IsNaN(v[i]):
+		case math.IsNaN(*v[i]):
 			av.String("NaN")
 
-		case math.IsInf(v[i], 1):
+		case math.IsInf(*v[i], 1):
 			av.String("Infinity")
 
-		case math.IsInf(v[i], -1):
+		case math.IsInf(*v[i], -1):
 			av.String("-Infinity")
 
 		default:
-			av.Double(v[i])
+			av.Double(*v[i])
 
 		}
 	}
@@ -791,13 +800,17 @@ func awsRestjson1_serializeDocumentField(v types.Field, value smithyjson.Value) 
 	return nil
 }
 
-func awsRestjson1_serializeDocumentLongArray(v []int64, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentLongArray(v []*int64, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		av.Long(v[i])
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.Long(*v[i])
 	}
 	return nil
 }
@@ -872,13 +885,17 @@ func awsRestjson1_serializeDocumentSqlParametersList(v []types.SqlParameter, val
 	return nil
 }
 
-func awsRestjson1_serializeDocumentStringArray(v []string, value smithyjson.Value) error {
+func awsRestjson1_serializeDocumentStringArray(v []*string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
 	for i := range v {
 		av := array.Value()
-		av.String(v[i])
+		if vv := v[i]; vv == nil {
+			av.Null()
+			continue
+		}
+		av.String(*v[i])
 	}
 	return nil
 }

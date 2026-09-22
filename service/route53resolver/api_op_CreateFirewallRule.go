@@ -5,14 +5,33 @@ package route53resolver
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a single DNS Firewall rule in the specified rule group, using the
-// specified domain list.
+// Creates a single DNS Firewall rule in the specified rule group. The rule can
+// use any one of the following match sources, and the chosen source must be
+// supplied through the matching request field — they are mutually exclusive:
+//
+//   - FirewallDomainListId — match a customer-managed or AWS-managed domain list.
+//
+//   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
+//     ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
+//
+//   - FirewallRuleType — match one of the rule-type variants returned by ListFirewallRuleTypes:
+//     FirewallAdvancedContentCategory , FirewallAdvancedThreatCategory ,
+//     DnsThreatProtection , or PartnerThreatProtection . The PartnerThreatProtection
+//     variant requires an active AWS Marketplace subscription to the named partner
+//     product.
+//
+// For rules that require asynchronous provisioning (today, the
+// PartnerThreatProtection rule type), the rule's Status begins at CREATING and
+// transitions to COMPLETE once the rule is provisioned and the marketplace
+// entitlement is verified. If provisioning fails, Status becomes CREATION_FAILED
+// and StatusMessage contains a human-readable reason; the rule is then immutable
+// and must be removed with DeleteFirewallRule.
 func (c *Client) CreateFirewallRule(ctx context.Context, params *CreateFirewallRuleInput, optFns ...func(*Options)) (*CreateFirewallRuleOutput, error) {
 	if params == nil {
 		params = &CreateFirewallRuleInput{}
@@ -123,7 +142,19 @@ type CreateFirewallRuleInput struct {
 	//   false positives.
 	ConfidenceThreshold types.ConfidenceThreshold
 
-	//  Use to create a DNS Firewall Advanced rule.
+	//  The type of the DNS Firewall Advanced rule. This setting is mutually exclusive
+	// with FirewallDomainListId and FirewallRuleType . Valid values are:
+	//
+	//   - DGA : Domain generation algorithms detection. DGAs are used by attackers to
+	//   generate a large number of domains to launch malware attacks.
+	//
+	//   - DNS_TUNNELING : DNS tunneling detection. DNS tunneling is used by attackers
+	//   to exfiltrate data from the client by using the DNS tunnel without making a
+	//   network connection to the client.
+	//
+	//   - DICTIONARY_DGA : Dictionary-based domain generation algorithms detection.
+	//   Dictionary DGAs use wordlists to generate domains that appear more legitimate,
+	//   making them harder to detect than traditional DGAs.
 	DnsThreatProtection types.DnsThreatProtection
 
 	// The ID of the domain list that you want to use in the rule. Can't be used
@@ -141,6 +172,26 @@ type CreateFirewallRuleInput struct {
 	// chain. You don't need to add the subsequent domains in the domain in the
 	// redirection list to the domain list.
 	FirewallDomainRedirectionAction types.FirewallDomainRedirectionAction
+
+	// The rule type configuration for the firewall rule. This is a tagged union — set
+	// exactly one of its members. This setting is mutually exclusive with the
+	// top-level FirewallDomainListId and DnsThreatProtection fields. Use one of:
+	//
+	//   - FirewallAdvancedContentCategory — match an AWS-managed content category (for
+	//   example, VIOLENCE_AND_HATE_SPEECH ).
+	//
+	//   - FirewallAdvancedThreatCategory — match an AWS-managed advanced threat
+	//   category (for example, PHISHING ).
+	//
+	//   - DnsThreatProtection — match a built-in DNS Firewall Advanced threat detector
+	//   ( DGA , DNS_TUNNELING , or DICTIONARY_DGA ).
+	//
+	//   - PartnerThreatProtection — match a third-party threat feed delivered through
+	//   AWS Marketplace. The selected partner must be an active subscription on the
+	//   calling account.
+	//
+	// To enumerate the values supported in your account, call ListFirewallRuleTypes.
+	FirewallRuleType *types.FirewallRuleType
 
 	//  The DNS query type you want the rule to evaluate. Allowed values are;
 	//
@@ -171,13 +222,69 @@ type CreateFirewallRuleInput struct {
 	//   - TXT: Verifies email senders and application-specific values.
 	//
 	//   - A query type you define by using the DNS type ID, for example 28 for AAAA.
-	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for
+	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65534, for
 	//   example, TYPE28. For more information, see [List of DNS record types].
 	//
 	// [List of DNS record types]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
 	Qtype *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_Action, string(v.Action))
+	}
+	if v.BlockOverrideDnsType != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_BlockOverrideDnsType, string(v.BlockOverrideDnsType))
+	}
+	if v.BlockOverrideDomain != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_BlockOverrideDomain, *v.BlockOverrideDomain)
+	}
+	if v.BlockOverrideTtl != nil {
+		s.WriteInt32(schemas.CreateFirewallRuleRequest_BlockOverrideTtl, *v.BlockOverrideTtl)
+	}
+	if v.BlockResponse != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_BlockResponse, string(v.BlockResponse))
+	}
+	if v.ConfidenceThreshold != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_ConfidenceThreshold, string(v.ConfidenceThreshold))
+	}
+	if v.CreatorRequestId != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_CreatorRequestId, *v.CreatorRequestId)
+	}
+	if v.DnsThreatProtection != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_DnsThreatProtection, string(v.DnsThreatProtection))
+	}
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.FirewallDomainRedirectionAction != "" {
+		s.WriteString(schemas.CreateFirewallRuleRequest_FirewallDomainRedirectionAction, string(v.FirewallDomainRedirectionAction))
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallRuleType != nil {
+		s.WriteStruct(schemas.CreateFirewallRuleRequest_FirewallRuleType)
+		v.FirewallRuleType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_Name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.CreateFirewallRuleRequest_Priority, *v.Priority)
+	}
+	if v.Qtype != nil {
+		s.WriteString(schemas.CreateFirewallRuleRequest_Qtype, *v.Qtype)
+	}
 }
 
 type CreateFirewallRuleOutput struct {
@@ -191,65 +298,44 @@ type CreateFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFirewallRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFirewallRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFirewallRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRule != nil {
+		s.WriteStruct(schemas.CreateFirewallRuleResponse_FirewallRule)
+		v.FirewallRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFirewallRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFirewallRuleResponse_FirewallRule:
+			v.FirewallRule = &types.FirewallRule{}
+			return v.FirewallRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallRule, schemas.CreateFirewallRuleRequest, schemas.CreateFirewallRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFirewallRule, schemas.CreateFirewallRuleRequest, schemas.CreateFirewallRuleResponse), output: &CreateFirewallRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateFirewallRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFirewallRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -259,12 +345,6 @@ func (c *Client) addOperationCreateFirewallRuleMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpCreateFirewallRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFirewallRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -277,12 +357,6 @@ func (c *Client) addOperationCreateFirewallRuleMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -322,12 +396,4 @@ func (m *idempotencyToken_initializeOpCreateFirewallRule) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opCreateFirewallRuleMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateFirewallRule{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateFirewallRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFirewallRule",
-	}
 }

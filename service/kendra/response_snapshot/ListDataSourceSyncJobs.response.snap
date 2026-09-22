@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.ListDataSourceSyncJobs
+
+{"History":[{"DataSourceErrorCode":"__DataSourceErrorCode__","EndTime":946684800,"ErrorCode":"InternalError","ErrorMessage":"__ErrorMessage__","ExecutionId":"__ExecutionId__","Metrics":{"DocumentsAdded":"__DocumentsAdded__","DocumentsDeleted":"__DocumentsDeleted__","DocumentsFailed":"__DocumentsFailed__","DocumentsModified":"__DocumentsModified__","DocumentsScanned":"__DocumentsScanned__"},"StartTime":946684800,"Status":"FAILED"},{"DataSourceErrorCode":"__DataSourceErrorCode__","EndTime":946684800,"ErrorCode":"InternalError","ErrorMessage":"__ErrorMessage__","ExecutionId":"__ExecutionId__","Metrics":{"DocumentsAdded":"__DocumentsAdded__","DocumentsDeleted":"__DocumentsDeleted__","DocumentsFailed":"__DocumentsFailed__","DocumentsModified":"__DocumentsModified__","DocumentsScanned":"__DocumentsScanned__"},"StartTime":946684800,"Status":"FAILED"}],"NextToken":"__NextToken__"}

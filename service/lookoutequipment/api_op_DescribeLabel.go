@@ -4,11 +4,10 @@ package lookoutequipment
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -41,6 +40,21 @@ type DescribeLabelInput struct {
 	LabelId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeLabelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLabelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLabelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LabelGroupName != nil {
+		s.WriteString(schemas.DescribeLabelRequest_LabelGroupName, *v.LabelGroupName)
+	}
+	if v.LabelId != nil {
+		s.WriteString(schemas.DescribeLabelRequest_LabelId, *v.LabelId)
+	}
 }
 
 type DescribeLabelOutput struct {
@@ -87,77 +101,106 @@ type DescribeLabelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLabelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLabelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLabelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeLabelResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.DescribeLabelResponse_EndTime, *v.EndTime)
+	}
+	if v.Equipment != nil {
+		s.WriteString(schemas.DescribeLabelResponse_Equipment, *v.Equipment)
+	}
+	if v.FaultCode != nil {
+		s.WriteString(schemas.DescribeLabelResponse_FaultCode, *v.FaultCode)
+	}
+	if v.LabelGroupArn != nil {
+		s.WriteString(schemas.DescribeLabelResponse_LabelGroupArn, *v.LabelGroupArn)
+	}
+	if v.LabelGroupName != nil {
+		s.WriteString(schemas.DescribeLabelResponse_LabelGroupName, *v.LabelGroupName)
+	}
+	if v.LabelId != nil {
+		s.WriteString(schemas.DescribeLabelResponse_LabelId, *v.LabelId)
+	}
+	if v.Notes != nil {
+		s.WriteString(schemas.DescribeLabelResponse_Notes, *v.Notes)
+	}
+	if v.Rating != "" {
+		s.WriteString(schemas.DescribeLabelResponse_Rating, string(v.Rating))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.DescribeLabelResponse_StartTime, *v.StartTime)
+	}
+}
+func (v *DescribeLabelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLabelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLabelResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeLabelResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeLabelResponse_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLabelResponse_EndTime, v.EndTime)
+		case schemas.DescribeLabelResponse_Equipment:
+			v.Equipment = new(string)
+			return d.ReadString(schemas.DescribeLabelResponse_Equipment, v.Equipment)
+		case schemas.DescribeLabelResponse_FaultCode:
+			v.FaultCode = new(string)
+			return d.ReadString(schemas.DescribeLabelResponse_FaultCode, v.FaultCode)
+		case schemas.DescribeLabelResponse_LabelGroupArn:
+			v.LabelGroupArn = new(string)
+			return d.ReadString(schemas.DescribeLabelResponse_LabelGroupArn, v.LabelGroupArn)
+		case schemas.DescribeLabelResponse_LabelGroupName:
+			v.LabelGroupName = new(string)
+			return d.ReadString(schemas.DescribeLabelResponse_LabelGroupName, v.LabelGroupName)
+		case schemas.DescribeLabelResponse_LabelId:
+			v.LabelId = new(string)
+			return d.ReadString(schemas.DescribeLabelResponse_LabelId, v.LabelId)
+		case schemas.DescribeLabelResponse_Notes:
+			v.Notes = new(string)
+			return d.ReadString(schemas.DescribeLabelResponse_Notes, v.Notes)
+		case schemas.DescribeLabelResponse_Rating:
+			var ev string
+			if err := d.ReadString(schemas.DescribeLabelResponse_Rating, &ev); err != nil {
+				return err
+			}
+			v.Rating = types.LabelRating(ev)
+			return nil
+		case schemas.DescribeLabelResponse_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeLabelResponse_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLabel, schemas.DescribeLabelRequest, schemas.DescribeLabelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeLabel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLabel, schemas.DescribeLabelRequest, schemas.DescribeLabelResponse), output: &DescribeLabelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeLabel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLabel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeLabelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLabel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +215,8 @@ func (c *Client) addOperationDescribeLabelMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeLabel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeLabel",
-	}
 }

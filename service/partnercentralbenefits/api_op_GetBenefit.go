@@ -4,12 +4,13 @@ package partnercentralbenefits
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves detailed information about a specific benefit available in the
@@ -42,6 +43,21 @@ type GetBenefitInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBenefitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBenefitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBenefitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetBenefitInput_Catalog, *v.Catalog)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetBenefitInput_Identifier, *v.Identifier)
+	}
 }
 
 type GetBenefitOutput struct {
@@ -81,77 +97,100 @@ type GetBenefitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBenefitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBenefitOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBenefitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetBenefitOutput_Arn, *v.Arn)
+	}
+	if v.BenefitRequestSchema != nil {
+		s.WriteDocument(schemas.GetBenefitOutput_BenefitRequestSchema, &smithydocument.Opaque{Value: v.BenefitRequestSchema})
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.GetBenefitOutput_Catalog, *v.Catalog)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetBenefitOutput_Description, *v.Description)
+	}
+	serializeFulfillmentTypes(s, schemas.GetBenefitOutput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.Id != nil {
+		s.WriteString(schemas.GetBenefitOutput_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetBenefitOutput_Name, *v.Name)
+	}
+	serializePrograms(s, schemas.GetBenefitOutput_Programs, v.Programs)
+	if v.Status != "" {
+		s.WriteString(schemas.GetBenefitOutput_Status, string(v.Status))
+	}
+}
+func (v *GetBenefitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBenefitOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBenefitOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetBenefitOutput_Arn, v.Arn)
+		case schemas.GetBenefitOutput_BenefitRequestSchema:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.GetBenefitOutput_BenefitRequestSchema, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.BenefitRequestSchema = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.GetBenefitOutput_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetBenefitOutput_Catalog, v.Catalog)
+		case schemas.GetBenefitOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBenefitOutput_Description, v.Description)
+		case schemas.GetBenefitOutput_FulfillmentTypes:
+			return deserializeFulfillmentTypes(d, schemas.GetBenefitOutput_FulfillmentTypes, &v.FulfillmentTypes)
+		case schemas.GetBenefitOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetBenefitOutput_Id, v.Id)
+		case schemas.GetBenefitOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBenefitOutput_Name, v.Name)
+		case schemas.GetBenefitOutput_Programs:
+			return deserializePrograms(d, schemas.GetBenefitOutput_Programs, &v.Programs)
+		case schemas.GetBenefitOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetBenefitOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BenefitStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBenefitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBenefit, schemas.GetBenefitInput, schemas.GetBenefitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetBenefit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBenefit, schemas.GetBenefitInput, schemas.GetBenefitOutput), output: &GetBenefitOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetBenefit{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBenefit"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetBenefitValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBenefit(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +205,8 @@ func (c *Client) addOperationGetBenefitMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetBenefit(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetBenefit",
-	}
 }

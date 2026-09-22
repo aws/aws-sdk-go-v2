@@ -1,0 +1,5 @@
+PUT /multicast-groups/__Id__/wireless-device
+
+Content-Type: application/json
+
+{"WirelessDeviceId":"__WirelessDeviceId__"}

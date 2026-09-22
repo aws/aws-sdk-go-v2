@@ -1,0 +1,3 @@
+GET /v2/get-failure-mode-finding?findingId=__FindingId__&serviceArn=__ServiceArn__
+
+

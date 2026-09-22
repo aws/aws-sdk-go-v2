@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"DlpSetting":{"Arn":"__Arn__","CreatedAt":946684800,"DlpSettingId":"__DlpSettingId__","Name":"__Name__","ProviderConfig":{"MicrosoftPurview":{"Credentials":{"SecretArn":"__SecretArn__"},"LabelActionMappings":[{"Action":"ALLOW","LabelId":"__LabelId__","LabelName":"__LabelName__"},{"Action":"ALLOW","LabelId":"__LabelId__","LabelName":"__LabelName__"}],"UnmappedAction":"ALLOW"}},"ProviderOutageAction":"ALLOW","ProviderType":"MICROSOFT_PURVIEW","Status":"ACTIVE","UpdatedAt":946684800},"RequestId":"__RequestId__"}

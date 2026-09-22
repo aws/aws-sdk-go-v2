@@ -1,0 +1,5 @@
+POST /UpdateTraceSegmentDestination
+
+Content-Type: application/json
+
+{"Destination":"XRay"}

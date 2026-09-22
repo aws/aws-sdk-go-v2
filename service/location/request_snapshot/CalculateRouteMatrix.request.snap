@@ -1,0 +1,5 @@
+POST /routes/v0/calculators/__CalculatorName__/calculate/route-matrix?key=__Key__
+
+Content-Type: application/json
+
+{"CarModeOptions":{"AvoidFerries":true,"AvoidTolls":true},"DepartNow":true,"DeparturePositions":[[1,1],[1,1]],"DepartureTime":"2000-01-01T00:00:00Z","DestinationPositions":[[1,1],[1,1]],"DistanceUnit":"Kilometers","TravelMode":"Car","TruckModeOptions":{"AvoidFerries":true,"AvoidTolls":true,"Dimensions":{"Height":1,"Length":1,"Unit":"Meters","Width":1},"Weight":{"Total":1,"Unit":"Kilograms"}}}

@@ -4,11 +4,10 @@ package serverlessapplicationrepository
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an AWS CloudFormation template.
@@ -42,6 +41,21 @@ type CreateCloudFormationTemplateInput struct {
 	SemanticVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateCloudFormationTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudFormationTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudFormationTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateCloudFormationTemplateRequest_ApplicationId, *v.ApplicationId)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateCloudFormationTemplateRequest_SemanticVersion, *v.SemanticVersion)
+	}
 }
 
 type CreateCloudFormationTemplateOutput struct {
@@ -83,77 +97,88 @@ type CreateCloudFormationTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudFormationTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudFormationTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudFormationTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateCloudFormationTemplateResponse_ApplicationId, *v.ApplicationId)
+	}
+	if v.CreationTime != nil {
+		s.WriteString(schemas.CreateCloudFormationTemplateResponse_CreationTime, *v.CreationTime)
+	}
+	if v.ExpirationTime != nil {
+		s.WriteString(schemas.CreateCloudFormationTemplateResponse_ExpirationTime, *v.ExpirationTime)
+	}
+	if v.SemanticVersion != nil {
+		s.WriteString(schemas.CreateCloudFormationTemplateResponse_SemanticVersion, *v.SemanticVersion)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateCloudFormationTemplateResponse_Status, string(v.Status))
+	}
+	if v.TemplateId != nil {
+		s.WriteString(schemas.CreateCloudFormationTemplateResponse_TemplateId, *v.TemplateId)
+	}
+	if v.TemplateUrl != nil {
+		s.WriteString(schemas.CreateCloudFormationTemplateResponse_TemplateUrl, *v.TemplateUrl)
+	}
+}
+func (v *CreateCloudFormationTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCloudFormationTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCloudFormationTemplateResponse_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.CreateCloudFormationTemplateResponse_ApplicationId, v.ApplicationId)
+		case schemas.CreateCloudFormationTemplateResponse_CreationTime:
+			v.CreationTime = new(string)
+			return d.ReadString(schemas.CreateCloudFormationTemplateResponse_CreationTime, v.CreationTime)
+		case schemas.CreateCloudFormationTemplateResponse_ExpirationTime:
+			v.ExpirationTime = new(string)
+			return d.ReadString(schemas.CreateCloudFormationTemplateResponse_ExpirationTime, v.ExpirationTime)
+		case schemas.CreateCloudFormationTemplateResponse_SemanticVersion:
+			v.SemanticVersion = new(string)
+			return d.ReadString(schemas.CreateCloudFormationTemplateResponse_SemanticVersion, v.SemanticVersion)
+		case schemas.CreateCloudFormationTemplateResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateCloudFormationTemplateResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.CreateCloudFormationTemplateResponse_TemplateId:
+			v.TemplateId = new(string)
+			return d.ReadString(schemas.CreateCloudFormationTemplateResponse_TemplateId, v.TemplateId)
+		case schemas.CreateCloudFormationTemplateResponse_TemplateUrl:
+			v.TemplateUrl = new(string)
+			return d.ReadString(schemas.CreateCloudFormationTemplateResponse_TemplateUrl, v.TemplateUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCloudFormationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudFormationTemplate, schemas.CreateCloudFormationTemplateRequest, schemas.CreateCloudFormationTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCloudFormationTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudFormationTemplate, schemas.CreateCloudFormationTemplateRequest, schemas.CreateCloudFormationTemplateResponse), output: &CreateCloudFormationTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCloudFormationTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCloudFormationTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateCloudFormationTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCloudFormationTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +193,8 @@ func (c *Client) addOperationCreateCloudFormationTemplateMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateCloudFormationTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCloudFormationTemplate",
-	}
 }

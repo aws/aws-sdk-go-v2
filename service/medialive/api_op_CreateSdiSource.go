@@ -5,10 +5,10 @@ package medialive
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/medialive/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/medialive/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create an SdiSource for each video source that uses the SDI protocol. You will
@@ -57,6 +57,28 @@ type CreateSdiSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSdiSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSdiSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSdiSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.CreateSdiSourceRequest_Mode, string(v.Mode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateSdiSourceRequest_Name, *v.Name)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateSdiSourceRequest_RequestId, *v.RequestId)
+	}
+	serializeTags(s, schemas.CreateSdiSourceRequest_Tags, v.Tags)
+	if v.Type != "" {
+		s.WriteString(schemas.CreateSdiSourceRequest_Type, string(v.Type))
+	}
+}
+
 // Placeholder documentation for CreateSdiSourceResponse
 type CreateSdiSourceOutput struct {
 
@@ -69,77 +91,50 @@ type CreateSdiSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSdiSourceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSdiSourceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSdiSourceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SdiSource != nil {
+		s.WriteStruct(schemas.CreateSdiSourceResponse_SdiSource)
+		v.SdiSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSdiSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSdiSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSdiSourceResponse_SdiSource:
+			v.SdiSource = &types.SdiSource{}
+			return v.SdiSource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSdiSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSdiSource, schemas.CreateSdiSourceRequest, schemas.CreateSdiSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSdiSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSdiSource, schemas.CreateSdiSourceRequest, schemas.CreateSdiSourceResponse), output: &CreateSdiSourceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSdiSource{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSdiSource"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addIdempotencyToken_opCreateSdiSourceMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSdiSource(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +147,6 @@ func (c *Client) addOperationCreateSdiSourceMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -197,12 +186,4 @@ func (m *idempotencyToken_initializeOpCreateSdiSource) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opCreateSdiSourceMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateSdiSource{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateSdiSource(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSdiSource",
-	}
 }

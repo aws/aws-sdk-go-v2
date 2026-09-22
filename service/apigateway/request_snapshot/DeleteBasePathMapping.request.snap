@@ -1,0 +1,4 @@
+DELETE /domainnames/__DomainName__/basepathmappings/__BasePath__?domainNameId=__DomainNameId__
+
+Accept: application/json
+

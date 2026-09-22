@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"bridgePlacement":"AVAILABLE","gatewayInstanceArn":"__GatewayInstanceArn__"}

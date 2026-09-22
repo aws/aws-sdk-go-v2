@@ -1,0 +1,5 @@
+POST /DeleteChannel
+
+Content-Type: application/json
+
+{"arn":"__Arn__"}

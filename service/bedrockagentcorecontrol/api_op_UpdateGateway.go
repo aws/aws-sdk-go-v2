@@ -4,11 +4,8 @@ package bedrockagentcorecontrol
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -54,6 +51,10 @@ type UpdateGatewayInput struct {
 	// The updated authorizer configuration for the gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
+	// The updated custom transformation configuration for the gateway. This
+	// configuration defines how the gateway transforms requests and responses.
+	CustomTransformConfiguration *types.CustomTransformConfiguration
+
 	// The updated description for the gateway.
 	Description *string
 
@@ -84,6 +85,9 @@ type UpdateGatewayInput struct {
 
 	// The updated protocol type for the gateway.
 	ProtocolType types.GatewayProtocolType
+
+	// The updated Amazon Web Services WAF configuration for the gateway.
+	WafConfiguration *types.WafConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -128,6 +132,10 @@ type UpdateGatewayOutput struct {
 	// The updated authorizer configuration for the gateway.
 	AuthorizerConfiguration types.AuthorizerConfiguration
 
+	// The custom transformation configuration for the gateway. This configuration
+	// defines how the gateway transforms requests and responses.
+	CustomTransformConfiguration *types.CustomTransformConfiguration
+
 	// The updated description of the gateway.
 	Description *string
 
@@ -165,6 +173,13 @@ type UpdateGatewayOutput struct {
 	// The reasons for the current status of the updated gateway.
 	StatusReasons []string
 
+	// The Amazon Web Services WAF configuration for the gateway.
+	WafConfiguration *types.WafConfiguration
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services WAF web ACL
+	// associated with the gateway.
+	WebAclArn *string
+
 	// The workload identity details for the updated gateway.
 	WorkloadIdentityDetails *types.WorkloadIdentityDetails
 
@@ -175,9 +190,6 @@ type UpdateGatewayOutput struct {
 }
 
 func (c *Client) addOperationUpdateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGateway{}, middleware.After)
 	if err != nil {
 		return err
@@ -186,65 +198,20 @@ func (c *Client) addOperationUpdateGatewayMiddlewares(stack *middleware.Stack, o
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGateway"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateGatewayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGateway(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -259,22 +226,8 @@ func (c *Client) addOperationUpdateGatewayMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGateway(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGateway",
-	}
 }

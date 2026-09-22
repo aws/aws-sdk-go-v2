@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.DescribeWorkspacesConnectionStatus
+
+{"NextToken":"__NextToken__","WorkspacesConnectionStatus":[{"ConnectionState":"CONNECTED","ConnectionStateCheckTimestamp":946684800,"LastKnownUserConnectionTimestamp":946684800,"WorkspaceId":"__WorkspaceId__"},{"ConnectionState":"CONNECTED","ConnectionStateCheckTimestamp":946684800,"LastKnownUserConnectionTimestamp":946684800,"WorkspaceId":"__WorkspaceId__"}]}

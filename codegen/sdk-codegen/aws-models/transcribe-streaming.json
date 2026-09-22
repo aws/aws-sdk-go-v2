@@ -1513,7 +1513,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length\n      limit. Break your audio stream into smaller chunks and try your request again.</p>",
+                "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream\n      service quota. This error can also occur if a stream exceeds the maximum session duration. In rare\n      cases, this error can also occur if you increase your number of concurrent streams too quickly.\n      Reduce your number of concurrent streams and try your request again using an exponential backoff\n      strategy.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
@@ -1549,6 +1549,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "flac"
+                    }
+                },
+                "G711_ALAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g711-alaw"
+                    }
+                },
+                "G711_ULAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g711-ulaw"
+                    }
+                },
+                "G729": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "g729"
                     }
                 }
             }
@@ -3738,6 +3756,13 @@
                         "smithy.api#documentation": "<p>Specify the time window, in minutes, during which your transcription session can be resumed,\n       measured from the stream start time. This optional parameter accepts integer values from 1 to 300 (5 hours).</p>\n         <p> For example, if your stream starts at 1 PM and you specify a <code>SessionResumeWindow</code> of 30 minutes,\n      you can reconnect to the session as many times as you want until 1:30 PM. </p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-session-resume-window"
                     }
+                },
+                "TranscriptFormat": {
+                    "target": "com.amazonaws.transcribestreaming#TranscriptFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify how numbers, dates, and other alphanumeric entities are rendered in your\n      transcription results.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>WRITTEN</code> renders these entities in their standard written form\n        (for example, <code>$50</code>, <code>10:30 AM</code>, and <code>101</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>SPOKEN</code> renders these entities as words, exactly as they were\n        spoken (for example, <code>fifty dollars</code>, <code>ten thirty a m</code>, and\n        <code>one oh one</code>).</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value, Amazon Transcribe uses <code>WRITTEN</code> by default.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-transcript-format"
+                    }
                 }
             },
             "traits": {
@@ -3926,6 +3951,13 @@
                         "smithy.api#documentation": "<p>Provides the session resume window, in minutes, that you specified in your request.</p>",
                         "smithy.api#httpHeader": "x-amzn-transcribe-session-resume-window"
                     }
+                },
+                "TranscriptFormat": {
+                    "target": "com.amazonaws.transcribestreaming#TranscriptFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the transcript format that you specified in your request.</p>",
+                        "smithy.api#httpHeader": "x-amzn-transcribe-transcript-format"
+                    }
                 }
             },
             "traits": {
@@ -4009,6 +4041,194 @@
                 },
                 "smithy.api#documentation": "<p>Amazon Transcribe streaming offers four main types of real-time transcription:\n      <b>Standard</b>, <b>Medical</b>,\n      <b>Call Analytics</b>,\n      and <b>Health Scribe</b>.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Standard transcriptions</b> are the most common option. Refer\n      to  for details.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Medical transcriptions</b> are tailored to medical professionals \n      and incorporate medical terms. A common use case for this service is transcribing doctor-patient \n      dialogue in real time, so doctors can focus on their patient instead of taking notes. Refer to\n       for details.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Call Analytics transcriptions</b> are designed for use with call\n          center audio on two different channels; if you're looking for insight into customer service calls, use this \n          option. Refer to  for details.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HealthScribe transcriptions</b> are designed to\n          automatically create clinical notes from patient-clinician conversations using generative AI.\n          Refer to [here] for details.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Transcribe Streaming Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transcribestreaming-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transcribestreaming-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transcribestreaming.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://transcribestreaming.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -4779,6 +4999,23 @@
                 "smithy.api#documentation": "<p>The <code>TranscriptEvent</code> associated with a \n      <code>TranscriptResultStream</code>.</p>\n         <p>Contains a set of transcription results from one or more audio segments, along with additional \n      information per your request parameters.</p>"
             }
         },
+        "com.amazonaws.transcribestreaming#TranscriptFormat": {
+            "type": "enum",
+            "members": {
+                "SPOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "spoken"
+                    }
+                },
+                "WRITTEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "written"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transcribestreaming#TranscriptResultStream": {
             "type": "union",
             "members": {
@@ -4797,7 +5034,7 @@
                 "LimitExceededException": {
                     "target": "com.amazonaws.transcribestreaming#LimitExceededException",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits. This is typically the audio length\n      limit. Break your audio stream into smaller chunks and try your request again.</p>"
+                        "smithy.api#documentation": "<p>Your client has exceeded one of the Amazon Transcribe limits, typically the concurrent stream\n      service quota. This error can also occur if a stream exceeds the maximum session duration. In rare\n      cases, this error can also occur if you increase your number of concurrent streams too quickly.\n      Reduce your number of concurrent streams and try your request again using an exponential backoff\n      strategy.</p>"
                     }
                 },
                 "InternalFailureException": {

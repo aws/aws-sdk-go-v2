@@ -4,11 +4,10 @@ package eventbridge
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type DeleteConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteConnectionRequest_Name, *v.Name)
+	}
+}
+
 type DeleteConnectionOutput struct {
 
 	// The ARN of the connection that was deleted.
@@ -63,77 +74,76 @@ type DeleteConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.DeleteConnectionResponse_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.DeleteConnectionResponse_ConnectionState, string(v.ConnectionState))
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DeleteConnectionResponse_CreationTime, *v.CreationTime)
+	}
+	if v.LastAuthorizedTime != nil {
+		s.WriteTime(schemas.DeleteConnectionResponse_LastAuthorizedTime, *v.LastAuthorizedTime)
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DeleteConnectionResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+}
+func (v *DeleteConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConnectionResponse_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.DeleteConnectionResponse_ConnectionArn, v.ConnectionArn)
+		case schemas.DeleteConnectionResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.DeleteConnectionResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.ConnectionState(ev)
+			return nil
+		case schemas.DeleteConnectionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteConnectionResponse_CreationTime, v.CreationTime)
+		case schemas.DeleteConnectionResponse_LastAuthorizedTime:
+			v.LastAuthorizedTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteConnectionResponse_LastAuthorizedTime, v.LastAuthorizedTime)
+		case schemas.DeleteConnectionResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteConnectionResponse_LastModifiedTime, v.LastModifiedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnection, schemas.DeleteConnectionRequest, schemas.DeleteConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnection, schemas.DeleteConnectionRequest, schemas.DeleteConnectionResponse), output: &DeleteConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +158,8 @@ func (c *Client) addOperationDeleteConnectionMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteConnection",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /voice-connectors/__VoiceConnectorId__
+
+Content-Type: application/json
+
+{"Name":"__Name__","RequireEncryption":true}

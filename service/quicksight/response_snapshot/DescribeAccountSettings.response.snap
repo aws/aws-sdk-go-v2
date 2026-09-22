@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccountSettings":{"AccountName":"__AccountName__","DefaultNamespace":"__DefaultNamespace__","Edition":"STANDARD","NotificationEmail":"__NotificationEmail__","PublicSharingEnabled":true,"TerminationProtectionEnabled":true},"RequestId":"__RequestId__","Status":200}

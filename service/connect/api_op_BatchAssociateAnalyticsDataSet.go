@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a list of analytics datasets for a given Connect Customer instance
@@ -52,6 +51,22 @@ type BatchAssociateAnalyticsDataSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateAnalyticsDataSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateAnalyticsDataSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateAnalyticsDataSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataSetIds(s, schemas.BatchAssociateAnalyticsDataSetRequest_DataSetIds, v.DataSetIds)
+	if v.InstanceId != nil {
+		s.WriteString(schemas.BatchAssociateAnalyticsDataSetRequest_InstanceId, *v.InstanceId)
+	}
+	if v.TargetAccountId != nil {
+		s.WriteString(schemas.BatchAssociateAnalyticsDataSetRequest_TargetAccountId, *v.TargetAccountId)
+	}
+}
+
 type BatchAssociateAnalyticsDataSetOutput struct {
 
 	// Information about associations that are successfully created: DataSetId ,
@@ -68,77 +83,48 @@ type BatchAssociateAnalyticsDataSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateAnalyticsDataSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateAnalyticsDataSetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateAnalyticsDataSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalyticsDataAssociationResults(s, schemas.BatchAssociateAnalyticsDataSetResponse_Created, v.Created)
+	serializeErrorResults(s, schemas.BatchAssociateAnalyticsDataSetResponse_Errors, v.Errors)
+}
+func (v *BatchAssociateAnalyticsDataSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateAnalyticsDataSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateAnalyticsDataSetResponse_Created:
+			return deserializeAnalyticsDataAssociationResults(d, schemas.BatchAssociateAnalyticsDataSetResponse_Created, &v.Created)
+		case schemas.BatchAssociateAnalyticsDataSetResponse_Errors:
+			return deserializeErrorResults(d, schemas.BatchAssociateAnalyticsDataSetResponse_Errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateAnalyticsDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateAnalyticsDataSet, schemas.BatchAssociateAnalyticsDataSetRequest, schemas.BatchAssociateAnalyticsDataSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateAnalyticsDataSet, schemas.BatchAssociateAnalyticsDataSetRequest, schemas.BatchAssociateAnalyticsDataSetResponse), output: &BatchAssociateAnalyticsDataSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAssociateAnalyticsDataSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAssociateAnalyticsDataSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchAssociateAnalyticsDataSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateAnalyticsDataSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +139,8 @@ func (c *Client) addOperationBatchAssociateAnalyticsDataSetMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchAssociateAnalyticsDataSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchAssociateAnalyticsDataSet",
-	}
 }

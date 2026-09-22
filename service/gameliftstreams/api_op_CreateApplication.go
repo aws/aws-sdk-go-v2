@@ -5,10 +5,8 @@ package gameliftstreams
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -23,6 +21,10 @@ import (
 // Make sure that your files in the Amazon S3 bucket are the correct version you
 // want to use. If you change the files at a later time, you will need to create a
 // new Amazon GameLift Streams application.
+//
+// Creating an application is the only time Amazon GameLift Streams accesses your
+// Amazon S3 bucket. After the application reaches READY status, you can delete
+// the original files from your Amazon S3 bucket without affecting the application.
 //
 // If the request is successful, Amazon GameLift Streams begins to create an
 // application and sets the status to INITIALIZED . When an application reaches
@@ -113,11 +115,25 @@ type CreateApplicationInput struct {
 	ApplicationLogOutputUri *string
 
 	// Locations of log files that your content generates during a stream session.
-	// Enter path values that are relative to the ApplicationSourceUri location. You
-	// can specify up to 10 log paths. Amazon GameLift Streams uploads designated log
-	// files to the Amazon S3 bucket that you specify in ApplicationLogOutputUri at
-	// the end of a stream session. To retrieve stored log files, call [GetStreamSession]and get the
-	// LogFileLocationUri .
+	// Enter path values that are relative to the ApplicationSourceUri location, or
+	// relative to the user's home directory when using a supported path variable. You
+	// can specify up to 10 log paths. Each individual log file cannot exceed 50 MB in
+	// size.
+	//
+	// Each path can be a directory or an exact file path. When you specify a
+	// directory, Amazon GameLift Streams collects only files with the following
+	// extensions: .txt , .log , and .utrace . To collect files with other extensions,
+	// specify the exact file path. The copy operation is not performed recursively in
+	// subfolders.
+	//
+	// The following path variables are recognized when they appear as the first
+	// component of a path: %USERPROFILE% (Windows and Proton), $HOME or ~ (Linux).
+	// Use a path variable when your application writes logs outside of the application
+	// directory.
+	//
+	// Amazon GameLift Streams uploads designated log files to the Amazon S3 bucket
+	// that you specify in ApplicationLogOutputUri at the end of a stream session. To
+	// retrieve stored log files, call [GetStreamSession]and get the LogFileLocationUri .
 	//
 	// [GetStreamSession]: https://docs.aws.amazon.com/gameliftstreams/latest/apireference/API_GetStreamSession.html
 	ApplicationLogPaths []string
@@ -246,9 +262,6 @@ type CreateApplicationOutput struct {
 }
 
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
 	if err != nil {
 		return err
@@ -257,53 +270,14 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -313,12 +287,6 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateApplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -331,12 +299,6 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -376,12 +338,4 @@ func (m *idempotencyToken_initializeOpCreateApplication) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateApplicationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateApplication{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateApplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateApplication",
-	}
 }

@@ -4,11 +4,10 @@ package personalize
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalize/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a metric attribution. A metric attribution creates reports on the data
@@ -62,6 +61,27 @@ type CreateMetricAttributionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMetricAttributionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMetricAttributionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMetricAttributionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetGroupArn != nil {
+		s.WriteString(schemas.CreateMetricAttributionRequest_datasetGroupArn, *v.DatasetGroupArn)
+	}
+	serializeMetricAttributes(s, schemas.CreateMetricAttributionRequest_metrics, v.Metrics)
+	if v.MetricsOutputConfig != nil {
+		s.WriteStruct(schemas.CreateMetricAttributionRequest_metricsOutputConfig)
+		v.MetricsOutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMetricAttributionRequest_name, *v.Name)
+	}
+}
+
 type CreateMetricAttributionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the new metric attribution.
@@ -73,77 +93,48 @@ type CreateMetricAttributionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMetricAttributionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMetricAttributionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMetricAttributionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricAttributionArn != nil {
+		s.WriteString(schemas.CreateMetricAttributionResponse_metricAttributionArn, *v.MetricAttributionArn)
+	}
+}
+func (v *CreateMetricAttributionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMetricAttributionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMetricAttributionResponse_metricAttributionArn:
+			v.MetricAttributionArn = new(string)
+			return d.ReadString(schemas.CreateMetricAttributionResponse_metricAttributionArn, v.MetricAttributionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMetricAttributionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMetricAttribution, schemas.CreateMetricAttributionRequest, schemas.CreateMetricAttributionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateMetricAttribution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMetricAttribution, schemas.CreateMetricAttributionRequest, schemas.CreateMetricAttributionResponse), output: &CreateMetricAttributionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateMetricAttribution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMetricAttribution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateMetricAttributionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMetricAttribution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +149,8 @@ func (c *Client) addOperationCreateMetricAttributionMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateMetricAttribution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMetricAttribution",
-	}
 }

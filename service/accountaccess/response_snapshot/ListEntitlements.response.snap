@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"entitlements":[{"createdAt":"2000-01-01T00:00:00Z","entitlement":{"principalRole":{"account":"__Account__","accountName":"__AccountName__","principal":{"identityCenter":{"userId":"__IdentityCenterPrincipalMemberUserId__"}},"roleArn":"__RoleArn__"}},"entitlementId":"__EntitlementId__"},{"createdAt":"2000-01-01T00:00:00Z","entitlement":{"principalRole":{"account":"__Account__","accountName":"__AccountName__","principal":{"identityCenter":{"userId":"__IdentityCenterPrincipalMemberUserId__"}},"roleArn":"__RoleArn__"}},"entitlementId":"__EntitlementId__"}],"nextToken":"__NextToken__"}

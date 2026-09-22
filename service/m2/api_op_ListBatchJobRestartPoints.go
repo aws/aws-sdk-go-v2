@@ -4,11 +4,10 @@ package m2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/m2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the job steps for a JCL file to restart a batch job. This is only
@@ -47,6 +46,24 @@ type ListBatchJobRestartPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchJobRestartPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchJobRestartPointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchJobRestartPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListBatchJobRestartPointsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.AuthSecretsManagerArn != nil {
+		s.WriteString(schemas.ListBatchJobRestartPointsRequest_authSecretsManagerArn, *v.AuthSecretsManagerArn)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ListBatchJobRestartPointsRequest_executionId, *v.ExecutionId)
+	}
+}
+
 type ListBatchJobRestartPointsOutput struct {
 
 	// Returns all the batch job steps and related information for a batch job that
@@ -59,77 +76,45 @@ type ListBatchJobRestartPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchJobRestartPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchJobRestartPointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchJobRestartPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBatchJobStepList(s, schemas.ListBatchJobRestartPointsResponse_batchJobSteps, v.BatchJobSteps)
+}
+func (v *ListBatchJobRestartPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBatchJobRestartPointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBatchJobRestartPointsResponse_batchJobSteps:
+			return deserializeBatchJobStepList(d, schemas.ListBatchJobRestartPointsResponse_batchJobSteps, &v.BatchJobSteps)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBatchJobRestartPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchJobRestartPoints, schemas.ListBatchJobRestartPointsRequest, schemas.ListBatchJobRestartPointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBatchJobRestartPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchJobRestartPoints, schemas.ListBatchJobRestartPointsRequest, schemas.ListBatchJobRestartPointsResponse), output: &ListBatchJobRestartPointsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBatchJobRestartPoints{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBatchJobRestartPoints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListBatchJobRestartPointsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBatchJobRestartPoints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +129,8 @@ func (c *Client) addOperationListBatchJobRestartPointsMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListBatchJobRestartPoints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBatchJobRestartPoints",
-	}
 }

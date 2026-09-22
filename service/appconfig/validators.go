@@ -90,6 +90,26 @@ func (m *validateOpCreateEnvironment) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateExperimentDefinition struct {
+}
+
+func (*validateOpCreateExperimentDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateExperimentDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateExperimentDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateExperimentDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateExtensionAssociation struct {
 }
 
@@ -225,6 +245,26 @@ func (m *validateOpDeleteEnvironment) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteExperimentDefinition struct {
+}
+
+func (*validateOpDeleteExperimentDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteExperimentDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteExperimentDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteExperimentDefinitionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +450,46 @@ func (m *validateOpGetEnvironment) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetExperimentDefinition struct {
+}
+
+func (*validateOpGetExperimentDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExperimentDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExperimentDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExperimentDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetExperimentRun struct {
+}
+
+func (*validateOpGetExperimentRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetExperimentRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetExperimentRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetExperimentRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetExtensionAssociation struct {
 }
 
@@ -530,6 +610,46 @@ func (m *validateOpListEnvironments) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListExperimentRunEvents struct {
+}
+
+func (*validateOpListExperimentRunEvents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExperimentRunEvents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExperimentRunEventsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExperimentRunEventsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListExperimentRuns struct {
+}
+
+func (*validateOpListExperimentRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExperimentRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExperimentRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExperimentRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListHostedConfigurationVersions struct {
 }
 
@@ -590,6 +710,26 @@ func (m *validateOpStartDeployment) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartExperimentRun struct {
+}
+
+func (*validateOpStartExperimentRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartExperimentRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartExperimentRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartExperimentRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopDeployment struct {
 }
 
@@ -605,6 +745,26 @@ func (m *validateOpStopDeployment) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopExperimentRun struct {
+}
+
+func (*validateOpStopExperimentRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopExperimentRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopExperimentRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopExperimentRunInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +890,46 @@ func (m *validateOpUpdateEnvironment) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateExperimentDefinition struct {
+}
+
+func (*validateOpUpdateExperimentDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateExperimentDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateExperimentDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateExperimentDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateExperimentRun struct {
+}
+
+func (*validateOpUpdateExperimentRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateExperimentRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateExperimentRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateExperimentRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateExtensionAssociation struct {
 }
 
@@ -806,6 +1006,10 @@ func addOpCreateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEnvironment{}, middleware.After)
 }
 
+func addOpCreateExperimentDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateExperimentDefinition{}, middleware.After)
+}
+
 func addOpCreateExtensionAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateExtensionAssociation{}, middleware.After)
 }
@@ -832,6 +1036,10 @@ func addOpDeleteDeploymentStrategyValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEnvironment{}, middleware.After)
+}
+
+func addOpDeleteExperimentDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteExperimentDefinition{}, middleware.After)
 }
 
 func addOpDeleteExtensionAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -870,6 +1078,14 @@ func addOpGetEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEnvironment{}, middleware.After)
 }
 
+func addOpGetExperimentDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExperimentDefinition{}, middleware.After)
+}
+
+func addOpGetExperimentRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetExperimentRun{}, middleware.After)
+}
+
 func addOpGetExtensionAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetExtensionAssociation{}, middleware.After)
 }
@@ -894,6 +1110,14 @@ func addOpListEnvironmentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEnvironments{}, middleware.After)
 }
 
+func addOpListExperimentRunEventsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExperimentRunEvents{}, middleware.After)
+}
+
+func addOpListExperimentRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExperimentRuns{}, middleware.After)
+}
+
 func addOpListHostedConfigurationVersionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListHostedConfigurationVersions{}, middleware.After)
 }
@@ -906,8 +1130,16 @@ func addOpStartDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartDeployment{}, middleware.After)
 }
 
+func addOpStartExperimentRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartExperimentRun{}, middleware.After)
+}
+
 func addOpStopDeploymentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopDeployment{}, middleware.After)
+}
+
+func addOpStopExperimentRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopExperimentRun{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -934,6 +1166,14 @@ func addOpUpdateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnvironment{}, middleware.After)
 }
 
+func addOpUpdateExperimentDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateExperimentDefinition{}, middleware.After)
+}
+
+func addOpUpdateExperimentRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateExperimentRun{}, middleware.After)
+}
+
 func addOpUpdateExtensionAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateExtensionAssociation{}, middleware.After)
 }
@@ -944,6 +1184,18 @@ func addOpUpdateExtensionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpValidateConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpValidateConfiguration{}, middleware.After)
+}
+
+func validateFlagValue(v *types.FlagValue) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlagValue"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateMonitor(v *types.Monitor) error {
@@ -968,6 +1220,42 @@ func validateMonitorList(v []types.Monitor) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MonitorList"}
 	for i := range v {
 		if err := validateMonitor(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTreatmentInput(v *types.TreatmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TreatmentInput"}
+	if v.FlagValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlagValue"))
+	} else if v.FlagValue != nil {
+		if err := validateFlagValue(v.FlagValue); err != nil {
+			invalidParams.AddNested("FlagValue", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTreatmentInputList(v []types.TreatmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TreatmentInputList"}
+	for i := range v {
+		if err := validateTreatmentInput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1098,6 +1386,50 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	}
 }
 
+func validateOpCreateExperimentDefinitionInput(v *CreateExperimentDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateExperimentDefinitionInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConfigurationProfileIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationProfileIdentifier"))
+	}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
+	}
+	if v.FlagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlagKey"))
+	}
+	if v.Treatments == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Treatments"))
+	} else if v.Treatments != nil {
+		if err := validateTreatmentInputList(v.Treatments); err != nil {
+			invalidParams.AddNested("Treatments", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Control == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Control"))
+	} else if v.Control != nil {
+		if err := validateTreatmentInput(v.Control); err != nil {
+			invalidParams.AddNested("Control", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AudienceRule == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AudienceRule"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateExtensionAssociationInput(v *CreateExtensionAssociationInput) error {
 	if v == nil {
 		return nil
@@ -1216,6 +1548,24 @@ func validateOpDeleteEnvironmentInput(v *DeleteEnvironmentInput) error {
 	}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteExperimentDefinitionInput(v *DeleteExperimentDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteExperimentDefinitionInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.ExperimentDefinitionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentDefinitionIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1386,6 +1736,45 @@ func validateOpGetEnvironmentInput(v *GetEnvironmentInput) error {
 	}
 }
 
+func validateOpGetExperimentDefinitionInput(v *GetExperimentDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExperimentDefinitionInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.ExperimentDefinitionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentDefinitionIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetExperimentRunInput(v *GetExperimentRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetExperimentRunInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.ExperimentDefinitionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentDefinitionIdentifier"))
+	}
+	if v.Run == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Run"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetExtensionAssociationInput(v *GetExtensionAssociationInput) error {
 	if v == nil {
 		return nil
@@ -1485,6 +1874,45 @@ func validateOpListEnvironmentsInput(v *ListEnvironmentsInput) error {
 	}
 }
 
+func validateOpListExperimentRunEventsInput(v *ListExperimentRunEventsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExperimentRunEventsInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.ExperimentDefinitionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentDefinitionIdentifier"))
+	}
+	if v.Run == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Run"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListExperimentRunsInput(v *ListExperimentRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExperimentRunsInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.ExperimentDefinitionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentDefinitionIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListHostedConfigurationVersionsInput(v *ListHostedConfigurationVersionsInput) error {
 	if v == nil {
 		return nil
@@ -1545,6 +1973,24 @@ func validateOpStartDeploymentInput(v *StartDeploymentInput) error {
 	}
 }
 
+func validateOpStartExperimentRunInput(v *StartExperimentRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartExperimentRunInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.ExperimentDefinitionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentDefinitionIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopDeploymentInput(v *StopDeploymentInput) error {
 	if v == nil {
 		return nil
@@ -1558,6 +2004,27 @@ func validateOpStopDeploymentInput(v *StopDeploymentInput) error {
 	}
 	if v.DeploymentNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DeploymentNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopExperimentRunInput(v *StopExperimentRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopExperimentRunInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.ExperimentDefinitionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentDefinitionIdentifier"))
+	}
+	if v.Run == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Run"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1670,6 +2137,55 @@ func validateOpUpdateEnvironmentInput(v *UpdateEnvironmentInput) error {
 		if err := validateMonitorList(v.Monitors); err != nil {
 			invalidParams.AddNested("Monitors", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateExperimentDefinitionInput(v *UpdateExperimentDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExperimentDefinitionInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.ExperimentDefinitionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentDefinitionIdentifier"))
+	}
+	if v.Treatments != nil {
+		if err := validateTreatmentInputList(v.Treatments); err != nil {
+			invalidParams.AddNested("Treatments", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Control != nil {
+		if err := validateTreatmentInput(v.Control); err != nil {
+			invalidParams.AddNested("Control", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateExperimentRunInput(v *UpdateExperimentRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateExperimentRunInput"}
+	if v.ApplicationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIdentifier"))
+	}
+	if v.ExperimentDefinitionIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExperimentDefinitionIdentifier"))
+	}
+	if v.Run == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Run"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

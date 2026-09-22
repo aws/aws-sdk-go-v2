@@ -4,11 +4,10 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Creates a decoder manifest using your existing CAN DBC file from your local
@@ -47,6 +46,31 @@ type ImportDecoderManifestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDecoderManifestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDecoderManifestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDecoderManifestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ImportDecoderManifestRequest_name, *v.Name)
+	}
+	serializeNetworkFileDefinitions(s, schemas.ImportDecoderManifestRequest_networkFileDefinitions, v.NetworkFileDefinitions)
+}
+func (v *ImportDecoderManifestInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportDecoderManifestRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportDecoderManifestRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImportDecoderManifestRequest_name, v.Name)
+		case schemas.ImportDecoderManifestRequest_networkFileDefinitions:
+			return deserializeNetworkFileDefinitions(d, schemas.ImportDecoderManifestRequest_networkFileDefinitions, &v.NetworkFileDefinitions)
+		}
+		return nil
+	})
+}
+
 type ImportDecoderManifestOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the decoder manifest that was imported.
@@ -65,77 +89,54 @@ type ImportDecoderManifestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportDecoderManifestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportDecoderManifestResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportDecoderManifestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ImportDecoderManifestResponse_arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ImportDecoderManifestResponse_name, *v.Name)
+	}
+}
+func (v *ImportDecoderManifestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportDecoderManifestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportDecoderManifestResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ImportDecoderManifestResponse_arn, v.Arn)
+		case schemas.ImportDecoderManifestResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ImportDecoderManifestResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportDecoderManifestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDecoderManifest, schemas.ImportDecoderManifestRequest, schemas.ImportDecoderManifestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpImportDecoderManifest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportDecoderManifest, schemas.ImportDecoderManifestRequest, schemas.ImportDecoderManifestResponse), output: &ImportDecoderManifestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpImportDecoderManifest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportDecoderManifest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpImportDecoderManifestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportDecoderManifest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +151,8 @@ func (c *Client) addOperationImportDecoderManifestMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opImportDecoderManifest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportDecoderManifest",
-	}
 }

@@ -4,11 +4,10 @@ package guardduty
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/guardduty/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -42,6 +41,21 @@ type GetTrustedEntitySetInput struct {
 	TrustedEntitySetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetTrustedEntitySetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrustedEntitySetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrustedEntitySetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetTrustedEntitySetRequest_DetectorId, *v.DetectorId)
+	}
+	if v.TrustedEntitySetId != nil {
+		s.WriteString(schemas.GetTrustedEntitySetRequest_TrustedEntitySetId, *v.TrustedEntitySetId)
+	}
 }
 
 type GetTrustedEntitySetOutput struct {
@@ -89,77 +103,101 @@ type GetTrustedEntitySetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTrustedEntitySetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTrustedEntitySetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTrustedEntitySetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetTrustedEntitySetResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.ErrorDetails != nil {
+		s.WriteString(schemas.GetTrustedEntitySetResponse_ErrorDetails, *v.ErrorDetails)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.GetTrustedEntitySetResponse_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.GetTrustedEntitySetResponse_Format, string(v.Format))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.GetTrustedEntitySetResponse_Location, *v.Location)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetTrustedEntitySetResponse_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetTrustedEntitySetResponse_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.GetTrustedEntitySetResponse_Tags, v.Tags)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetTrustedEntitySetResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetTrustedEntitySetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTrustedEntitySetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTrustedEntitySetResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTrustedEntitySetResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetTrustedEntitySetResponse_ErrorDetails:
+			v.ErrorDetails = new(string)
+			return d.ReadString(schemas.GetTrustedEntitySetResponse_ErrorDetails, v.ErrorDetails)
+		case schemas.GetTrustedEntitySetResponse_ExpectedBucketOwner:
+			v.ExpectedBucketOwner = new(string)
+			return d.ReadString(schemas.GetTrustedEntitySetResponse_ExpectedBucketOwner, v.ExpectedBucketOwner)
+		case schemas.GetTrustedEntitySetResponse_Format:
+			var ev string
+			if err := d.ReadString(schemas.GetTrustedEntitySetResponse_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = types.TrustedEntitySetFormat(ev)
+			return nil
+		case schemas.GetTrustedEntitySetResponse_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.GetTrustedEntitySetResponse_Location, v.Location)
+		case schemas.GetTrustedEntitySetResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetTrustedEntitySetResponse_Name, v.Name)
+		case schemas.GetTrustedEntitySetResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetTrustedEntitySetResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.TrustedEntitySetStatus(ev)
+			return nil
+		case schemas.GetTrustedEntitySetResponse_Tags:
+			return deserializeTagMap(d, schemas.GetTrustedEntitySetResponse_Tags, &v.Tags)
+		case schemas.GetTrustedEntitySetResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetTrustedEntitySetResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTrustedEntitySetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrustedEntitySet, schemas.GetTrustedEntitySetRequest, schemas.GetTrustedEntitySetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTrustedEntitySet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTrustedEntitySet, schemas.GetTrustedEntitySetRequest, schemas.GetTrustedEntitySetResponse), output: &GetTrustedEntitySetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTrustedEntitySet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTrustedEntitySet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTrustedEntitySetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTrustedEntitySet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,22 +212,8 @@ func (c *Client) addOperationGetTrustedEntitySetMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetTrustedEntitySet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTrustedEntitySet",
-	}
 }

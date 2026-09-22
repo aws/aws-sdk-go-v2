@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -32,6 +33,27 @@ func (e *DirectConnectClientException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectConnectClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DirectConnectClientException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectConnectClientException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectConnectClientException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DirectConnectClientException_message, *v.Message)
+	}
+}
+func (v *DirectConnectClientException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectConnectClientException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectConnectClientException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectConnectClientException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A server-side error occurred.
 type DirectConnectServerException struct {
@@ -58,6 +80,27 @@ func (e *DirectConnectServerException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectConnectServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *DirectConnectServerException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectConnectServerException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectConnectServerException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DirectConnectServerException_message, *v.Message)
+	}
+}
+func (v *DirectConnectServerException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectConnectServerException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectConnectServerException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectConnectServerException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
@@ -84,6 +127,75 @@ func (e *DuplicateTagKeysException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DuplicateTagKeysException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DuplicateTagKeysException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DuplicateTagKeysException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DuplicateTagKeysException_message, *v.Message)
+	}
+}
+func (v *DuplicateTagKeysException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DuplicateTagKeysException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DuplicateTagKeysException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DuplicateTagKeysException_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The rate limiter limit has been exceeded for the connection. You cannot add
+// more rate limiters to virtual interfaces on this connection.
+type LimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *LimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *LimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *LimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.LimitExceededException_message, *v.Message)
+	}
+}
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // You have reached the limit on the number of tags that can be assigned.
 type TooManyTagsException struct {
@@ -110,3 +222,24 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyTagsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyTagsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyTagsException_message, *v.Message)
+	}
+}
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_message, v.Message)
+		}
+		return nil
+	})
+}

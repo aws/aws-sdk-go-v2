@@ -5,10 +5,10 @@ package glue
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List all task runs for a particular account.
@@ -44,10 +44,34 @@ type ListMaterializedViewRefreshTaskRunsInput struct {
 	// A continuation token, if this is a continuation call.
 	NextToken *string
 
-	// The name of the table for which statistics is generated.
+	// The name of the materialized view.
 	TableName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListMaterializedViewRefreshTaskRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMaterializedViewRefreshTaskRunsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMaterializedViewRefreshTaskRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListMaterializedViewRefreshTaskRunsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsRequest_NextToken, *v.NextToken)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsRequest_TableName, *v.TableName)
+	}
 }
 
 type ListMaterializedViewRefreshTaskRunsOutput struct {
@@ -64,77 +88,51 @@ type ListMaterializedViewRefreshTaskRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListMaterializedViewRefreshTaskRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMaterializedViewRefreshTaskRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMaterializedViewRefreshTaskRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMaterializedViewRefreshTaskRunsList(s, schemas.ListMaterializedViewRefreshTaskRunsResponse_MaterializedViewRefreshTaskRuns, v.MaterializedViewRefreshTaskRuns)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListMaterializedViewRefreshTaskRunsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListMaterializedViewRefreshTaskRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMaterializedViewRefreshTaskRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMaterializedViewRefreshTaskRunsResponse_MaterializedViewRefreshTaskRuns:
+			return deserializeMaterializedViewRefreshTaskRunsList(d, schemas.ListMaterializedViewRefreshTaskRunsResponse_MaterializedViewRefreshTaskRuns, &v.MaterializedViewRefreshTaskRuns)
+		case schemas.ListMaterializedViewRefreshTaskRunsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListMaterializedViewRefreshTaskRunsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListMaterializedViewRefreshTaskRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMaterializedViewRefreshTaskRuns, schemas.ListMaterializedViewRefreshTaskRunsRequest, schemas.ListMaterializedViewRefreshTaskRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListMaterializedViewRefreshTaskRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListMaterializedViewRefreshTaskRuns, schemas.ListMaterializedViewRefreshTaskRunsRequest, schemas.ListMaterializedViewRefreshTaskRunsResponse), output: &ListMaterializedViewRefreshTaskRunsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListMaterializedViewRefreshTaskRuns{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListMaterializedViewRefreshTaskRuns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListMaterializedViewRefreshTaskRunsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMaterializedViewRefreshTaskRuns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +145,6 @@ func (c *Client) addOperationListMaterializedViewRefreshTaskRunsMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +248,3 @@ type ListMaterializedViewRefreshTaskRunsAPIClient interface {
 }
 
 var _ ListMaterializedViewRefreshTaskRunsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListMaterializedViewRefreshTaskRuns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListMaterializedViewRefreshTaskRuns",
-	}
-}

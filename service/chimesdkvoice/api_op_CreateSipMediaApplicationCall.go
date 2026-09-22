@@ -4,11 +4,10 @@ package chimesdkvoice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an outbound call to a phone number from the phone number specified in
@@ -56,6 +55,26 @@ type CreateSipMediaApplicationCallInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSipMediaApplicationCallInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSipMediaApplicationCallRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSipMediaApplicationCallInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSMACreateCallArgumentsMap(s, schemas.CreateSipMediaApplicationCallRequest_ArgumentsMap, v.ArgumentsMap)
+	if v.FromPhoneNumber != nil {
+		s.WriteString(schemas.CreateSipMediaApplicationCallRequest_FromPhoneNumber, *v.FromPhoneNumber)
+	}
+	serializeSipHeadersMap(s, schemas.CreateSipMediaApplicationCallRequest_SipHeaders, v.SipHeaders)
+	if v.SipMediaApplicationId != nil {
+		s.WriteString(schemas.CreateSipMediaApplicationCallRequest_SipMediaApplicationId, *v.SipMediaApplicationId)
+	}
+	if v.ToPhoneNumber != nil {
+		s.WriteString(schemas.CreateSipMediaApplicationCallRequest_ToPhoneNumber, *v.ToPhoneNumber)
+	}
+}
+
 type CreateSipMediaApplicationCallOutput struct {
 
 	// The actual call.
@@ -67,77 +86,50 @@ type CreateSipMediaApplicationCallOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSipMediaApplicationCallOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSipMediaApplicationCallResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSipMediaApplicationCallOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SipMediaApplicationCall != nil {
+		s.WriteStruct(schemas.CreateSipMediaApplicationCallResponse_SipMediaApplicationCall)
+		v.SipMediaApplicationCall.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateSipMediaApplicationCallOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSipMediaApplicationCallResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSipMediaApplicationCallResponse_SipMediaApplicationCall:
+			v.SipMediaApplicationCall = &types.SipMediaApplicationCall{}
+			return v.SipMediaApplicationCall.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSipMediaApplicationCallMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSipMediaApplicationCall, schemas.CreateSipMediaApplicationCallRequest, schemas.CreateSipMediaApplicationCallResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSipMediaApplicationCall{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSipMediaApplicationCall, schemas.CreateSipMediaApplicationCallRequest, schemas.CreateSipMediaApplicationCallResponse), output: &CreateSipMediaApplicationCallOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSipMediaApplicationCall{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSipMediaApplicationCall"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateSipMediaApplicationCallValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSipMediaApplicationCall(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +144,8 @@ func (c *Client) addOperationCreateSipMediaApplicationCallMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateSipMediaApplicationCall(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateSipMediaApplicationCall",
-	}
 }

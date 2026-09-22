@@ -4,11 +4,10 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Instantiates an auto-scaling virtual server based on the selected file transfer
@@ -304,6 +303,73 @@ type CreateServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Certificate != nil {
+		s.WriteString(schemas.CreateServerRequest_Certificate, *v.Certificate)
+	}
+	if v.Domain != "" {
+		s.WriteString(schemas.CreateServerRequest_Domain, string(v.Domain))
+	}
+	if v.EndpointDetails != nil {
+		s.WriteStruct(schemas.CreateServerRequest_EndpointDetails)
+		v.EndpointDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointType != "" {
+		s.WriteString(schemas.CreateServerRequest_EndpointType, string(v.EndpointType))
+	}
+	if v.HostKey != nil {
+		s.WriteString(schemas.CreateServerRequest_HostKey, *v.HostKey)
+	}
+	if v.IdentityProviderDetails != nil {
+		s.WriteStruct(schemas.CreateServerRequest_IdentityProviderDetails)
+		v.IdentityProviderDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdentityProviderType != "" {
+		s.WriteString(schemas.CreateServerRequest_IdentityProviderType, string(v.IdentityProviderType))
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.CreateServerRequest_IpAddressType, string(v.IpAddressType))
+	}
+	if v.LoggingRole != nil {
+		s.WriteString(schemas.CreateServerRequest_LoggingRole, *v.LoggingRole)
+	}
+	if v.PostAuthenticationLoginBanner != nil {
+		s.WriteString(schemas.CreateServerRequest_PostAuthenticationLoginBanner, *v.PostAuthenticationLoginBanner)
+	}
+	if v.PreAuthenticationLoginBanner != nil {
+		s.WriteString(schemas.CreateServerRequest_PreAuthenticationLoginBanner, *v.PreAuthenticationLoginBanner)
+	}
+	if v.ProtocolDetails != nil {
+		s.WriteStruct(schemas.CreateServerRequest_ProtocolDetails)
+		v.ProtocolDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProtocols(s, schemas.CreateServerRequest_Protocols, v.Protocols)
+	if v.S3StorageOptions != nil {
+		s.WriteStruct(schemas.CreateServerRequest_S3StorageOptions)
+		v.S3StorageOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecurityPolicyName != nil {
+		s.WriteString(schemas.CreateServerRequest_SecurityPolicyName, *v.SecurityPolicyName)
+	}
+	serializeStructuredLogDestinations(s, schemas.CreateServerRequest_StructuredLogDestinations, v.StructuredLogDestinations)
+	serializeTags(s, schemas.CreateServerRequest_Tags, v.Tags)
+	if v.WorkflowDetails != nil {
+		s.WriteStruct(schemas.CreateServerRequest_WorkflowDetails)
+		v.WorkflowDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateServerOutput struct {
 
 	// The service-assigned identifier of the server that is created.
@@ -317,77 +383,48 @@ type CreateServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateServerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServerId != nil {
+		s.WriteString(schemas.CreateServerResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *CreateServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateServerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateServerResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.CreateServerResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServer, schemas.CreateServerRequest, schemas.CreateServerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateServer, schemas.CreateServerRequest, schemas.CreateServerResponse), output: &CreateServerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateServer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateServer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateServerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateServer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -402,22 +439,8 @@ func (c *Client) addOperationCreateServerMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateServer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateServer",
-	}
 }

@@ -5,10 +5,10 @@ package sagemaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -63,6 +63,42 @@ type ListFeatureGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFeatureGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFeatureGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFeatureGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListFeatureGroupsRequest_CreationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListFeatureGroupsRequest_CreationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.FeatureGroupStatusEquals != "" {
+		s.WriteString(schemas.ListFeatureGroupsRequest_FeatureGroupStatusEquals, string(v.FeatureGroupStatusEquals))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFeatureGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.ListFeatureGroupsRequest_NameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFeatureGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.OfflineStoreStatusEquals != "" {
+		s.WriteString(schemas.ListFeatureGroupsRequest_OfflineStoreStatusEquals, string(v.OfflineStoreStatusEquals))
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListFeatureGroupsRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListFeatureGroupsRequest_SortOrder, string(v.SortOrder))
+	}
+}
+
 type ListFeatureGroupsOutput struct {
 
 	// A summary of feature groups.
@@ -79,74 +115,48 @@ type ListFeatureGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFeatureGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFeatureGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFeatureGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeatureGroupSummaries(s, schemas.ListFeatureGroupsResponse_FeatureGroupSummaries, v.FeatureGroupSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFeatureGroupsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFeatureGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFeatureGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFeatureGroupsResponse_FeatureGroupSummaries:
+			return deserializeFeatureGroupSummaries(d, schemas.ListFeatureGroupsResponse_FeatureGroupSummaries, &v.FeatureGroupSummaries)
+		case schemas.ListFeatureGroupsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFeatureGroupsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFeatureGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFeatureGroups, schemas.ListFeatureGroupsRequest, schemas.ListFeatureGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFeatureGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFeatureGroups, schemas.ListFeatureGroupsRequest, schemas.ListFeatureGroupsResponse), output: &ListFeatureGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFeatureGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFeatureGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFeatureGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,12 +169,6 @@ func (c *Client) addOperationListFeatureGroupsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -265,11 +269,3 @@ type ListFeatureGroupsAPIClient interface {
 }
 
 var _ ListFeatureGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFeatureGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFeatureGroups",
-	}
-}

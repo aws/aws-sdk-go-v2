@@ -4,11 +4,10 @@ package odb
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the specified Exadata infrastructure.
@@ -37,6 +36,18 @@ type GetCloudExadataInfrastructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudExadataInfrastructureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudExadataInfrastructureInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudExadataInfrastructureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.GetCloudExadataInfrastructureInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
+	}
+}
+
 type GetCloudExadataInfrastructureOutput struct {
 
 	// The Exadata infrastructure.
@@ -48,77 +59,50 @@ type GetCloudExadataInfrastructureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudExadataInfrastructureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudExadataInfrastructureOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudExadataInfrastructureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudExadataInfrastructure != nil {
+		s.WriteStruct(schemas.GetCloudExadataInfrastructureOutput_cloudExadataInfrastructure)
+		v.CloudExadataInfrastructure.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetCloudExadataInfrastructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCloudExadataInfrastructureOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCloudExadataInfrastructureOutput_cloudExadataInfrastructure:
+			v.CloudExadataInfrastructure = &types.CloudExadataInfrastructure{}
+			return v.CloudExadataInfrastructure.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCloudExadataInfrastructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudExadataInfrastructure, schemas.GetCloudExadataInfrastructureInput, schemas.GetCloudExadataInfrastructureOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCloudExadataInfrastructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudExadataInfrastructure, schemas.GetCloudExadataInfrastructureInput, schemas.GetCloudExadataInfrastructureOutput), output: &GetCloudExadataInfrastructureOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCloudExadataInfrastructure{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCloudExadataInfrastructure"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCloudExadataInfrastructureValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCloudExadataInfrastructure(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -133,22 +117,8 @@ func (c *Client) addOperationGetCloudExadataInfrastructureMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCloudExadataInfrastructure(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCloudExadataInfrastructure",
-	}
 }

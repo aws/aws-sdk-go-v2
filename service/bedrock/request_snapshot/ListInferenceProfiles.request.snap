@@ -1,0 +1,3 @@
+GET /inference-profiles?maxResults=1&nextToken=__NextToken__&type=SYSTEM_DEFINED
+
+

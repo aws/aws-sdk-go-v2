@@ -1,0 +1,5 @@
+POST /users/__InstanceId__/__UserId__/proficiencies
+
+Content-Type: application/json
+
+{"UserProficiencies":[{"AttributeName":"__AttributeName__","AttributeValue":"__AttributeValue__","Level":1},{"AttributeName":"__AttributeName__","AttributeValue":"__AttributeValue__","Level":1}]}

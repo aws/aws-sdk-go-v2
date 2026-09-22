@@ -5,15 +5,15 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Begin asynchronous resource state update for lifecycle changes to the specified
-// image resources.
+// Begins an asynchronous resource state update for lifecycle changes to the
+// specified image resources.
 func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartResourceStateUpdateInput, optFns ...func(*Options)) (*StartResourceStateUpdateOutput, error) {
 	if params == nil {
 		params = &StartResourceStateUpdateInput{}
@@ -31,21 +31,27 @@ func (c *Client) StartResourceStateUpdate(ctx context.Context, params *StartReso
 
 type StartResourceStateUpdateInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the Image Builder resource that is updated.
-	// The state update might also impact associated resources.
+	// The Amazon Resource Name (ARN) of the image build version to update. The image
+	// must be in one of these terminal states: AVAILABLE , DEPRECATED , DISABLED ,
+	// FAILED , or CANCELLED . Images with FAILED or CANCELLED status can transition
+	// only to DELETED .
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Indicates the lifecycle action to take for this request.
+	// Specifies the lifecycle action to take for this request. For AMI-based images,
+	// valid values are AVAILABLE , DEPRECATED , DISABLED , and DELETED . For
+	// container-based images, only DELETED is supported.
 	//
 	// This member is required.
 	State *types.ResourceState
@@ -58,13 +64,57 @@ type StartResourceStateUpdateInput struct {
 	// image state.
 	ExecutionRole *string
 
-	// A list of image resources to update state for.
+	// Specifies which image resources to include in the state update. When specified,
+	// the lifecycle action applies to underlying resources. These resources include
+	// AMIs, snapshots, and containers in addition to the Image Builder image resource.
+	// Requires executionRole to also be specified. To delete an image and its
+	// underlying resources, you must specify includeResources . To delete only the
+	// Image Builder image record without affecting underlying resources, use the
+	// DeleteImage API instead.
 	IncludeResources *types.ResourceStateUpdateIncludeResources
 
-	// The timestamp that indicates when resources are updated by a lifecycle action.
+	// Specifies the timestamp when the state transition takes effect. Use this
+	// parameter only when the target status is DEPRECATED . The value must be a future
+	// time.
 	UpdateAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *StartResourceStateUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceStateUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceStateUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartResourceStateUpdateRequest_clientToken, *v.ClientToken)
+	}
+	if v.ExclusionRules != nil {
+		s.WriteStruct(schemas.StartResourceStateUpdateRequest_exclusionRules)
+		v.ExclusionRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRole != nil {
+		s.WriteString(schemas.StartResourceStateUpdateRequest_executionRole, *v.ExecutionRole)
+	}
+	if v.IncludeResources != nil {
+		s.WriteStruct(schemas.StartResourceStateUpdateRequest_includeResources)
+		v.IncludeResources.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StartResourceStateUpdateRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.State != nil {
+		s.WriteStruct(schemas.StartResourceStateUpdateRequest_state)
+		v.State.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateAt != nil {
+		s.WriteTime(schemas.StartResourceStateUpdateRequest_updateAt, *v.UpdateAt)
+	}
 }
 
 type StartResourceStateUpdateOutput struct {
@@ -83,65 +133,48 @@ type StartResourceStateUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceStateUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceStateUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceStateUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.StartResourceStateUpdateResponse_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.StartResourceStateUpdateResponse_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *StartResourceStateUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartResourceStateUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartResourceStateUpdateResponse_lifecycleExecutionId:
+			v.LifecycleExecutionId = new(string)
+			return d.ReadString(schemas.StartResourceStateUpdateResponse_lifecycleExecutionId, v.LifecycleExecutionId)
+		case schemas.StartResourceStateUpdateResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.StartResourceStateUpdateResponse_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartResourceStateUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceStateUpdate, schemas.StartResourceStateUpdateRequest, schemas.StartResourceStateUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartResourceStateUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceStateUpdate, schemas.StartResourceStateUpdateRequest, schemas.StartResourceStateUpdateResponse), output: &StartResourceStateUpdateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartResourceStateUpdate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartResourceStateUpdate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -151,12 +184,6 @@ func (c *Client) addOperationStartResourceStateUpdateMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpStartResourceStateUpdateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartResourceStateUpdate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,12 +196,6 @@ func (c *Client) addOperationStartResourceStateUpdateMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -214,12 +235,4 @@ func (m *idempotencyToken_initializeOpStartResourceStateUpdate) HandleInitialize
 }
 func addIdempotencyToken_opStartResourceStateUpdateMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartResourceStateUpdate{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartResourceStateUpdate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartResourceStateUpdate",
-	}
 }

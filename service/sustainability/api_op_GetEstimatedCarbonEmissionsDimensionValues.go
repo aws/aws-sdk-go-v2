@@ -5,10 +5,8 @@ package sustainability
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/sustainability/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the possible dimension values available for a customer's account. We
@@ -36,12 +34,14 @@ type GetEstimatedCarbonEmissionsDimensionValuesInput struct {
 	// This member is required.
 	Dimensions []types.Dimension
 
-	// The date range for fetching the dimension values.
+	//  The date range for fetching the dimension values. The range must include the
+	// start date of a month for that month's dimensions to be included in the
+	// response.
 	//
 	// This member is required.
 	TimePeriod *types.TimePeriod
 
-	// The maximum number of results to return in a single call. Default is 40.
+	// The maximum number of results to return in a single call. Default is 1000.
 	MaxResults *int32
 
 	// The pagination token specifying which page of results to return in the
@@ -67,9 +67,6 @@ type GetEstimatedCarbonEmissionsDimensionValuesOutput struct {
 }
 
 func (c *Client) addOperationGetEstimatedCarbonEmissionsDimensionValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEstimatedCarbonEmissionsDimensionValues{}, middleware.After)
 	if err != nil {
 		return err
@@ -78,65 +75,20 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsDimensionValuesMiddlewar
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEstimatedCarbonEmissionsDimensionValues"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEstimatedCarbonEmissionsDimensionValuesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEstimatedCarbonEmissionsDimensionValues(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +103,6 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsDimensionValuesMiddlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -166,7 +112,7 @@ func (c *Client) addOperationGetEstimatedCarbonEmissionsDimensionValuesMiddlewar
 // GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions is the paginator
 // options for GetEstimatedCarbonEmissionsDimensionValues
 type GetEstimatedCarbonEmissionsDimensionValuesPaginatorOptions struct {
-	// The maximum number of results to return in a single call. Default is 40.
+	// The maximum number of results to return in a single call. Default is 1000.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -258,11 +204,3 @@ type GetEstimatedCarbonEmissionsDimensionValuesAPIClient interface {
 }
 
 var _ GetEstimatedCarbonEmissionsDimensionValuesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetEstimatedCarbonEmissionsDimensionValues(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEstimatedCarbonEmissionsDimensionValues",
-	}
-}

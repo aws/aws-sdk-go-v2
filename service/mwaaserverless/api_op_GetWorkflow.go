@@ -4,11 +4,10 @@ package mwaaserverless
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -43,12 +42,35 @@ type GetWorkflowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.GetWorkflowRequest_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.GetWorkflowRequest_WorkflowVersion, *v.WorkflowVersion)
+	}
+}
+
 type GetWorkflowOutput struct {
 
 	// The Amazon Resource Name (ARN) of the workflow.
 	//
 	// This member is required.
 	WorkflowArn *string
+
+	// The Amazon S3 location of the code artifacts provided during workflow creation
+	// or update.
+	Code types.Code
+
+	// The time at which the code artifacts were copied for this workflow, in ISO 8601
+	// date-time format.
+	CodeSnapshottedAt *time.Time
 
 	// The timestamp when the workflow was created, in ISO 8601 date-time format.
 	CreatedAt *time.Time
@@ -107,77 +129,165 @@ type GetWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCode(s, schemas.GetWorkflowResponse_Code, v.Code)
+	if v.CodeSnapshottedAt != nil {
+		s.WriteTime(schemas.GetWorkflowResponse_CodeSnapshottedAt, *v.CodeSnapshottedAt)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetWorkflowResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DefinitionS3Location != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_DefinitionS3Location)
+		v.DefinitionS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetWorkflowResponse_Description, *v.Description)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngineVersion != 0 {
+		s.WriteInt32(schemas.GetWorkflowResponse_EngineVersion, int32(v.EngineVersion))
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_LoggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.GetWorkflowResponse_ModifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetWorkflowResponse_Name, *v.Name)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_NetworkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetWorkflowResponse_RoleArn, *v.RoleArn)
+	}
+	if v.ScheduleConfiguration != nil {
+		s.WriteStruct(schemas.GetWorkflowResponse_ScheduleConfiguration)
+		v.ScheduleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TriggerMode != nil {
+		s.WriteString(schemas.GetWorkflowResponse_TriggerMode, *v.TriggerMode)
+	}
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.GetWorkflowResponse_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowDefinition != nil {
+		s.WriteString(schemas.GetWorkflowResponse_WorkflowDefinition, *v.WorkflowDefinition)
+	}
+	if v.WorkflowStatus != "" {
+		s.WriteString(schemas.GetWorkflowResponse_WorkflowStatus, string(v.WorkflowStatus))
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.GetWorkflowResponse_WorkflowVersion, *v.WorkflowVersion)
+	}
+}
+func (v *GetWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowResponse_Code:
+			return deserializeCode(d, schemas.GetWorkflowResponse_Code, &v.Code)
+		case schemas.GetWorkflowResponse_CodeSnapshottedAt:
+			v.CodeSnapshottedAt = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowResponse_CodeSnapshottedAt, v.CodeSnapshottedAt)
+		case schemas.GetWorkflowResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetWorkflowResponse_DefinitionS3Location:
+			v.DefinitionS3Location = &types.DefinitionS3Location{}
+			return v.DefinitionS3Location.Deserialize(d)
+		case schemas.GetWorkflowResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_Description, v.Description)
+		case schemas.GetWorkflowResponse_EncryptionConfiguration:
+			v.EncryptionConfiguration = &types.EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.GetWorkflowResponse_EngineVersion:
+			var ev int32
+			if err := d.ReadInt32(schemas.GetWorkflowResponse_EngineVersion, &ev); err != nil {
+				return err
+			}
+			v.EngineVersion = types.EngineVersion(ev)
+			return nil
+		case schemas.GetWorkflowResponse_LoggingConfiguration:
+			v.LoggingConfiguration = &types.LoggingConfiguration{}
+			return v.LoggingConfiguration.Deserialize(d)
+		case schemas.GetWorkflowResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.GetWorkflowResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_Name, v.Name)
+		case schemas.GetWorkflowResponse_NetworkConfiguration:
+			v.NetworkConfiguration = &types.NetworkConfiguration{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.GetWorkflowResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_RoleArn, v.RoleArn)
+		case schemas.GetWorkflowResponse_ScheduleConfiguration:
+			v.ScheduleConfiguration = &types.ScheduleConfiguration{}
+			return v.ScheduleConfiguration.Deserialize(d)
+		case schemas.GetWorkflowResponse_TriggerMode:
+			v.TriggerMode = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_TriggerMode, v.TriggerMode)
+		case schemas.GetWorkflowResponse_WorkflowArn:
+			v.WorkflowArn = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_WorkflowArn, v.WorkflowArn)
+		case schemas.GetWorkflowResponse_WorkflowDefinition:
+			v.WorkflowDefinition = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_WorkflowDefinition, v.WorkflowDefinition)
+		case schemas.GetWorkflowResponse_WorkflowStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowResponse_WorkflowStatus, &ev); err != nil {
+				return err
+			}
+			v.WorkflowStatus = types.WorkflowStatus(ev)
+			return nil
+		case schemas.GetWorkflowResponse_WorkflowVersion:
+			v.WorkflowVersion = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_WorkflowVersion, v.WorkflowVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse), output: &GetWorkflowOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetWorkflow{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkflow"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetWorkflowValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWorkflow(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,22 +302,8 @@ func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetWorkflow(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetWorkflow",
-	}
 }

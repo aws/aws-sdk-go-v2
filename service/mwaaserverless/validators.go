@@ -346,6 +346,25 @@ func addOpUpdateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkflow{}, middleware.After)
 }
 
+func validateCode(v types.Code) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Code"}
+	switch uv := v.(type) {
+	case *types.CodeMemberS3Location:
+		if err := validateS3Location(&uv.Value); err != nil {
+			invalidParams.AddNested("[S3Location]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDefinitionS3Location(v *types.DefinitionS3Location) error {
 	if v == nil {
 		return nil
@@ -394,6 +413,24 @@ func validateLoggingConfiguration(v *types.LoggingConfiguration) error {
 	}
 }
 
+func validateS3Location(v *types.S3Location) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Location"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if v.ObjectKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
 	if v == nil {
 		return nil
@@ -407,6 +444,11 @@ func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
 	} else if v.DefinitionS3Location != nil {
 		if err := validateDefinitionS3Location(v.DefinitionS3Location); err != nil {
 			invalidParams.AddNested("DefinitionS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Code != nil {
+		if err := validateCode(v.Code); err != nil {
+			invalidParams.AddNested("Code", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RoleArn == nil {
@@ -643,6 +685,11 @@ func validateOpUpdateWorkflowInput(v *UpdateWorkflowInput) error {
 	} else if v.DefinitionS3Location != nil {
 		if err := validateDefinitionS3Location(v.DefinitionS3Location); err != nil {
 			invalidParams.AddNested("DefinitionS3Location", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Code != nil {
+		if err := validateCode(v.Code); err != nil {
+			invalidParams.AddNested("Code", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RoleArn == nil {

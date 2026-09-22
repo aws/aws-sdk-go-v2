@@ -4,11 +4,10 @@ package lexmodelsv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -57,6 +56,24 @@ type BuildBotLocaleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BuildBotLocaleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuildBotLocaleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuildBotLocaleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.BuildBotLocaleRequest_botId, *v.BotId)
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.BuildBotLocaleRequest_botVersion, *v.BotVersion)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.BuildBotLocaleRequest_localeId, *v.LocaleId)
+	}
+}
+
 type BuildBotLocaleOutput struct {
 
 	// The identifier of the specified bot.
@@ -84,77 +101,76 @@ type BuildBotLocaleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BuildBotLocaleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BuildBotLocaleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BuildBotLocaleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.BuildBotLocaleResponse_botId, *v.BotId)
+	}
+	if v.BotLocaleStatus != "" {
+		s.WriteString(schemas.BuildBotLocaleResponse_botLocaleStatus, string(v.BotLocaleStatus))
+	}
+	if v.BotVersion != nil {
+		s.WriteString(schemas.BuildBotLocaleResponse_botVersion, *v.BotVersion)
+	}
+	if v.LastBuildSubmittedDateTime != nil {
+		s.WriteTime(schemas.BuildBotLocaleResponse_lastBuildSubmittedDateTime, *v.LastBuildSubmittedDateTime)
+	}
+	if v.LocaleId != nil {
+		s.WriteString(schemas.BuildBotLocaleResponse_localeId, *v.LocaleId)
+	}
+}
+func (v *BuildBotLocaleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BuildBotLocaleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BuildBotLocaleResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.BuildBotLocaleResponse_botId, v.BotId)
+		case schemas.BuildBotLocaleResponse_botLocaleStatus:
+			var ev string
+			if err := d.ReadString(schemas.BuildBotLocaleResponse_botLocaleStatus, &ev); err != nil {
+				return err
+			}
+			v.BotLocaleStatus = types.BotLocaleStatus(ev)
+			return nil
+		case schemas.BuildBotLocaleResponse_botVersion:
+			v.BotVersion = new(string)
+			return d.ReadString(schemas.BuildBotLocaleResponse_botVersion, v.BotVersion)
+		case schemas.BuildBotLocaleResponse_lastBuildSubmittedDateTime:
+			v.LastBuildSubmittedDateTime = new(time.Time)
+			return d.ReadTime(schemas.BuildBotLocaleResponse_lastBuildSubmittedDateTime, v.LastBuildSubmittedDateTime)
+		case schemas.BuildBotLocaleResponse_localeId:
+			v.LocaleId = new(string)
+			return d.ReadString(schemas.BuildBotLocaleResponse_localeId, v.LocaleId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBuildBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BuildBotLocale, schemas.BuildBotLocaleRequest, schemas.BuildBotLocaleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBuildBotLocale{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BuildBotLocale, schemas.BuildBotLocaleRequest, schemas.BuildBotLocaleResponse), output: &BuildBotLocaleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBuildBotLocale{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BuildBotLocale"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBuildBotLocaleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBuildBotLocale(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,22 +185,8 @@ func (c *Client) addOperationBuildBotLocaleMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBuildBotLocale(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BuildBotLocale",
-	}
 }

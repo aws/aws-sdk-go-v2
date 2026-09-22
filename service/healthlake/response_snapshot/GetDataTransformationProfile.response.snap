@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.GetDataTransformationProfile
+
+{"ChangeDescription":"__ChangeDescription__","LastUpdatedAt":946684800,"ProfileDescription":"__ProfileDescription__","ProfileId":"__ProfileId__","ProfileMapping":{"key0":"__Value__"},"ProfileName":"__ProfileName__","SourceFormat":"CCDA","TargetFormat":"FHIR_R4","Version":1}

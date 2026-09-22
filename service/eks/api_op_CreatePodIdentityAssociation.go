@@ -5,10 +5,10 @@ package eks
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eks/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an EKS Pod Identity association between a service account in an Amazon
@@ -173,6 +173,40 @@ type CreatePodIdentityAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePodIdentityAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePodIdentityAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePodIdentityAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreatePodIdentityAssociationRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.CreatePodIdentityAssociationRequest_clusterName, *v.ClusterName)
+	}
+	if v.DisableSessionTags != nil {
+		s.WriteBool(schemas.CreatePodIdentityAssociationRequest_disableSessionTags, *v.DisableSessionTags)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.CreatePodIdentityAssociationRequest_namespace, *v.Namespace)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.CreatePodIdentityAssociationRequest_policy, *v.Policy)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreatePodIdentityAssociationRequest_roleArn, *v.RoleArn)
+	}
+	if v.ServiceAccount != nil {
+		s.WriteString(schemas.CreatePodIdentityAssociationRequest_serviceAccount, *v.ServiceAccount)
+	}
+	serializeTagMap(s, schemas.CreatePodIdentityAssociationRequest_tags, v.Tags)
+	if v.TargetRoleArn != nil {
+		s.WriteString(schemas.CreatePodIdentityAssociationRequest_targetRoleArn, *v.TargetRoleArn)
+	}
+}
+
 type CreatePodIdentityAssociationOutput struct {
 
 	// The full description of your new association.
@@ -187,65 +221,44 @@ type CreatePodIdentityAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePodIdentityAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePodIdentityAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePodIdentityAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Association != nil {
+		s.WriteStruct(schemas.CreatePodIdentityAssociationResponse_association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreatePodIdentityAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePodIdentityAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePodIdentityAssociationResponse_association:
+			v.Association = &types.PodIdentityAssociation{}
+			return v.Association.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePodIdentityAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePodIdentityAssociation, schemas.CreatePodIdentityAssociationRequest, schemas.CreatePodIdentityAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePodIdentityAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePodIdentityAssociation, schemas.CreatePodIdentityAssociationRequest, schemas.CreatePodIdentityAssociationResponse), output: &CreatePodIdentityAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePodIdentityAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePodIdentityAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -255,12 +268,6 @@ func (c *Client) addOperationCreatePodIdentityAssociationMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpCreatePodIdentityAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePodIdentityAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -273,12 +280,6 @@ func (c *Client) addOperationCreatePodIdentityAssociationMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -318,12 +319,4 @@ func (m *idempotencyToken_initializeOpCreatePodIdentityAssociation) HandleInitia
 }
 func addIdempotencyToken_opCreatePodIdentityAssociationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreatePodIdentityAssociation{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreatePodIdentityAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePodIdentityAssociation",
-	}
 }

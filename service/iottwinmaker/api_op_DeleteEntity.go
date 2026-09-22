@@ -5,8 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +46,40 @@ type DeleteEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityId != nil {
+		s.WriteString(schemas.DeleteEntityRequest_entityId, *v.EntityId)
+	}
+	if v.IsRecursive != nil {
+		s.WriteBool(schemas.DeleteEntityRequest_isRecursive, *v.IsRecursive)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.DeleteEntityRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+func (v *DeleteEntityInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEntityRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEntityRequest_entityId:
+			v.EntityId = new(string)
+			return d.ReadString(schemas.DeleteEntityRequest_entityId, v.EntityId)
+		case schemas.DeleteEntityRequest_isRecursive:
+			v.IsRecursive = new(bool)
+			return d.ReadBool(schemas.DeleteEntityRequest_isRecursive, v.IsRecursive)
+		case schemas.DeleteEntityRequest_workspaceId:
+			v.WorkspaceId = new(string)
+			return d.ReadString(schemas.DeleteEntityRequest_workspaceId, v.WorkspaceId)
+		}
+		return nil
+	})
+}
+
 type DeleteEntityOutput struct {
 
 	// The current state of the deleted entity.
@@ -58,65 +93,46 @@ type DeleteEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.State != "" {
+		s.WriteString(schemas.DeleteEntityResponse_state, string(v.State))
+	}
+}
+func (v *DeleteEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEntityResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.DeleteEntityResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.State(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntity, schemas.DeleteEntityRequest, schemas.DeleteEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEntity, schemas.DeleteEntityRequest, schemas.DeleteEntityResponse), output: &DeleteEntityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEntity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEntity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -126,12 +142,6 @@ func (c *Client) addOperationDeleteEntityMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpDeleteEntityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEntity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +154,6 @@ func (c *Client) addOperationDeleteEntityMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -183,12 +187,4 @@ func (m *endpointPrefix_opDeleteEntityMiddleware) HandleFinalize(ctx context.Con
 }
 func addEndpointPrefix_opDeleteEntityMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opDeleteEntityMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opDeleteEntity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteEntity",
-	}
 }

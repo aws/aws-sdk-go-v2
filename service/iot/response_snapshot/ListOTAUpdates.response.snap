@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","otaUpdates":[{"creationDate":946684800,"otaUpdateArn":"__OtaUpdateArn__","otaUpdateId":"__OtaUpdateId__"},{"creationDate":946684800,"otaUpdateArn":"__OtaUpdateArn__","otaUpdateId":"__OtaUpdateId__"}]}

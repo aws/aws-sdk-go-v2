@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CreateLoadBalancer&AvailabilityZones.member.1=__Member__&AvailabilityZones.member.2=__Member__&Listeners.member.1.InstancePort=1&Listeners.member.1.InstanceProtocol=__InstanceProtocol__&Listeners.member.1.LoadBalancerPort=1&Listeners.member.1.Protocol=__Protocol__&Listeners.member.1.SSLCertificateId=__SSLCertificateId__&Listeners.member.2.InstancePort=1&Listeners.member.2.InstanceProtocol=__InstanceProtocol__&Listeners.member.2.LoadBalancerPort=1&Listeners.member.2.Protocol=__Protocol__&Listeners.member.2.SSLCertificateId=__SSLCertificateId__&LoadBalancerName=__LoadBalancerName__&Scheme=__Scheme__&SecurityGroups.member.1=__Member__&SecurityGroups.member.2=__Member__&Subnets.member.1=__Member__&Subnets.member.2=__Member__&Tags.member.1.Key=__Key__&Tags.member.1.Value=__Value__&Tags.member.2.Key=__Key__&Tags.member.2.Value=__Value__&Version=2012-06-01

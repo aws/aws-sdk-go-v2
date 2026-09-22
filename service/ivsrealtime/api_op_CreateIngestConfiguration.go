@@ -4,11 +4,10 @@ package ivsrealtime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new IngestConfiguration resource, used to specify the ingest protocol
@@ -76,10 +75,74 @@ type CreateIngestConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIngestConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIngestConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIngestConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeParticipantAttributes(s, schemas.CreateIngestConfigurationRequest_attributes, v.Attributes)
+	if v.IngestProtocol != "" {
+		s.WriteString(schemas.CreateIngestConfigurationRequest_ingestProtocol, string(v.IngestProtocol))
+	}
+	if v.InsecureIngest != false {
+		s.WriteBool(schemas.CreateIngestConfigurationRequest_insecureIngest, v.InsecureIngest)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateIngestConfigurationRequest_name, *v.Name)
+	}
+	if v.RedundantIngest != false {
+		s.WriteBool(schemas.CreateIngestConfigurationRequest_redundantIngest, v.RedundantIngest)
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.CreateIngestConfigurationRequest_stageArn, *v.StageArn)
+	}
+	serializeTags(s, schemas.CreateIngestConfigurationRequest_tags, v.Tags)
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateIngestConfigurationRequest_userId, *v.UserId)
+	}
+}
+
 type CreateIngestConfigurationOutput struct {
+
+	// See [Access-Control-Allow-Origin] in the MDN Web Docs.
+	//
+	// [Access-Control-Allow-Origin]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
+	AccessControlAllowOrigin *string
+
+	// See [Access-Control-Expose-Headers] in the MDN Web Docs.
+	//
+	// [Access-Control-Expose-Headers]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers
+	AccessControlExposeHeaders *string
+
+	// See [Cache-Control] in the MDN Web Docs.
+	//
+	// [Cache-Control]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
+	CacheControl *string
+
+	// See [Content-Security-Policy] in the MDN Web Docs.
+	//
+	// [Content-Security-Policy]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
+	ContentSecurityPolicy *string
 
 	// The IngestConfiguration that was created.
 	IngestConfiguration *types.IngestConfiguration
+
+	// See [Strict-Transport-Security] in the MDN Web Docs.
+	//
+	// [Strict-Transport-Security]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
+	StrictTransportSecurity *string
+
+	// See [X-Content-Type-Options] in the MDN Web Docs.
+	//
+	// [X-Content-Type-Options]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options
+	XContentTypeOptions *string
+
+	// See [X-Frame-Options] in the MDN Web Docs.
+	//
+	// [X-Frame-Options]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options
+	XFrameOptions *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -87,77 +150,92 @@ type CreateIngestConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIngestConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIngestConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIngestConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	if v.IngestConfiguration != nil {
+		s.WriteStruct(schemas.CreateIngestConfigurationResponse_ingestConfiguration)
+		v.IngestConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.CreateIngestConfigurationResponse_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *CreateIngestConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIngestConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIngestConfigurationResponse_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.CreateIngestConfigurationResponse_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.CreateIngestConfigurationResponse_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_cacheControl, v.CacheControl)
+		case schemas.CreateIngestConfigurationResponse_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.CreateIngestConfigurationResponse_ingestConfiguration:
+			v.IngestConfiguration = &types.IngestConfiguration{}
+			return v.IngestConfiguration.Deserialize(d)
+		case schemas.CreateIngestConfigurationResponse_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.CreateIngestConfigurationResponse_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.CreateIngestConfigurationResponse_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.CreateIngestConfigurationResponse_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIngestConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngestConfiguration, schemas.CreateIngestConfigurationRequest, schemas.CreateIngestConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIngestConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngestConfiguration, schemas.CreateIngestConfigurationRequest, schemas.CreateIngestConfigurationResponse), output: &CreateIngestConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIngestConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIngestConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateIngestConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIngestConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +250,8 @@ func (c *Client) addOperationCreateIngestConfigurationMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateIngestConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateIngestConfiguration",
-	}
 }

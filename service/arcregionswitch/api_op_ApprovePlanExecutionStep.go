@@ -4,11 +4,10 @@ package arcregionswitch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Approves a step in a plan execution that requires manual approval. When you
@@ -61,6 +60,30 @@ type ApprovePlanExecutionStepInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApprovePlanExecutionStepInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovePlanExecutionStepRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovePlanExecutionStepInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Approval != "" {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_approval, string(v.Approval))
+	}
+	if v.Comment != nil {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_comment, *v.Comment)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_executionId, *v.ExecutionId)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_planArn, *v.PlanArn)
+	}
+	if v.StepName != nil {
+		s.WriteString(schemas.ApprovePlanExecutionStepRequest_stepName, *v.StepName)
+	}
+}
+
 type ApprovePlanExecutionStepOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,65 +91,36 @@ type ApprovePlanExecutionStepOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApprovePlanExecutionStepOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApprovePlanExecutionStepResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApprovePlanExecutionStepOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *ApprovePlanExecutionStepOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApprovePlanExecutionStepResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationApprovePlanExecutionStepMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApprovePlanExecutionStep, schemas.ApprovePlanExecutionStepRequest, schemas.ApprovePlanExecutionStepResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpApprovePlanExecutionStep{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApprovePlanExecutionStep, schemas.ApprovePlanExecutionStepRequest, schemas.ApprovePlanExecutionStepResponse), output: &ApprovePlanExecutionStepOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpApprovePlanExecutionStep{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ApprovePlanExecutionStep"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -136,12 +130,6 @@ func (c *Client) addOperationApprovePlanExecutionStepMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpApprovePlanExecutionStepValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opApprovePlanExecutionStep(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +144,8 @@ func (c *Client) addOperationApprovePlanExecutionStepMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opApprovePlanExecutionStep(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ApprovePlanExecutionStep",
-	}
 }

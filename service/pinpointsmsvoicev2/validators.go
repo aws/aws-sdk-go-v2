@@ -1130,6 +1130,26 @@ func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAvailablePhoneNumbers struct {
+}
+
+func (*validateOpListAvailablePhoneNumbers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAvailablePhoneNumbers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAvailablePhoneNumbersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAvailablePhoneNumbersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPoolOriginationIdentities struct {
 }
 
@@ -1490,6 +1510,26 @@ func (m *validateOpSendNotifyVoiceMessage) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendRcsMessage struct {
+}
+
+func (*validateOpSendRcsMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendRcsMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendRcsMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendRcsMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendTextMessage struct {
 }
 
@@ -1645,6 +1685,26 @@ func (m *validateOpSetNotifyMessageSpendLimitOverride) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSetNotifyMessageSpendLimitOverrideInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSetRcsMessageSpendLimitOverride struct {
+}
+
+func (*validateOpSetRcsMessageSpendLimitOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetRcsMessageSpendLimitOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetRcsMessageSpendLimitOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetRcsMessageSpendLimitOverrideInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2154,6 +2214,10 @@ func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
 }
 
+func addOpListAvailablePhoneNumbersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAvailablePhoneNumbers{}, middleware.After)
+}
+
 func addOpListPoolOriginationIdentitiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPoolOriginationIdentities{}, middleware.After)
 }
@@ -2226,6 +2290,10 @@ func addOpSendNotifyVoiceMessageValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpSendNotifyVoiceMessage{}, middleware.After)
 }
 
+func addOpSendRcsMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendRcsMessage{}, middleware.After)
+}
+
 func addOpSendTextMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendTextMessage{}, middleware.After)
 }
@@ -2256,6 +2324,10 @@ func addOpSetMediaMessageSpendLimitOverrideValidationMiddleware(stack *middlewar
 
 func addOpSetNotifyMessageSpendLimitOverrideValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetNotifyMessageSpendLimitOverride{}, middleware.After)
+}
+
+func addOpSetRcsMessageSpendLimitOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetRcsMessageSpendLimitOverride{}, middleware.After)
 }
 
 func addOpSetTextMessageSpendLimitOverrideValidationMiddleware(stack *middleware.Stack) error {
@@ -2559,6 +2631,41 @@ func validateNotifyTemplateFilterList(v []types.NotifyTemplateFilter) error {
 	}
 }
 
+func validateNumberPreferenceItem(v *types.NumberPreferenceItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NumberPreferenceItem"}
+	if v.PreferenceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PreferenceType"))
+	}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNumberPreferenceList(v []types.NumberPreferenceItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NumberPreferenceList"}
+	for i := range v {
+		if err := validateNumberPreferenceItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOptedOutFilter(v *types.OptedOutFilter) error {
 	if v == nil {
 		return nil
@@ -2812,6 +2919,451 @@ func validateRcsAgentFilterList(v []types.RcsAgentFilter) error {
 		if err := validateRcsAgentFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsCardContent(v *types.RcsCardContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsCardContent"}
+	if v.Media != nil {
+		if err := validateRcsCardMedia(v.Media); err != nil {
+			invalidParams.AddNested("Media", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Suggestions != nil {
+		if err := validateRcsCardSuggestedActionList(v.Suggestions); err != nil {
+			invalidParams.AddNested("Suggestions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsCardMedia(v *types.RcsCardMedia) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsCardMedia"}
+	if v.FileUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsCardSuggestedActionList(v []types.RcsSuggestedAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsCardSuggestedActionList"}
+	for i := range v {
+		if err := validateRcsSuggestedAction(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsCarousel(v *types.RcsCarousel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsCarousel"}
+	if v.CardWidth == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CardWidth"))
+	}
+	if v.CardContents == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CardContents"))
+	} else if v.CardContents != nil {
+		if err := validateRcsCarouselCardContentList(v.CardContents); err != nil {
+			invalidParams.AddNested("CardContents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsCarouselCardContent(v *types.RcsCarouselCardContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsCarouselCardContent"}
+	if v.Media != nil {
+		if err := validateRcsCarouselCardMedia(v.Media); err != nil {
+			invalidParams.AddNested("Media", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Suggestions != nil {
+		if err := validateRcsCardSuggestedActionList(v.Suggestions); err != nil {
+			invalidParams.AddNested("Suggestions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsCarouselCardContentList(v []types.RcsCarouselCardContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsCarouselCardContentList"}
+	for i := range v {
+		if err := validateRcsCarouselCardContent(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsCarouselCardMedia(v *types.RcsCarouselCardMedia) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsCarouselCardMedia"}
+	if v.FileUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsContent(v types.RcsContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsContent"}
+	switch uv := v.(type) {
+	case *types.RcsContentMemberCarousel:
+		if err := validateRcsCarousel(&uv.Value); err != nil {
+			invalidParams.AddNested("[Carousel]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RcsContentMemberFileMessage:
+		if err := validateRcsFileMessage(&uv.Value); err != nil {
+			invalidParams.AddNested("[FileMessage]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RcsContentMemberRichCard:
+		if err := validateRcsStandaloneCard(&uv.Value); err != nil {
+			invalidParams.AddNested("[RichCard]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RcsContentMemberTextMessage:
+		if err := validateRcsTextMessage(&uv.Value); err != nil {
+			invalidParams.AddNested("[TextMessage]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsCreateCalendarEventAction(v *types.RcsCreateCalendarEventAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsCreateCalendarEventAction"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if v.PostbackData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostbackData"))
+	}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsDialPhoneAction(v *types.RcsDialPhoneAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsDialPhoneAction"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if v.PostbackData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostbackData"))
+	}
+	if v.PhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsFallbackConfiguration(v *types.RcsFallbackConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsFallbackConfiguration"}
+	if len(v.Channel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Channel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsFileMessage(v *types.RcsFileMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsFileMessage"}
+	if v.FileUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsMessageContent(v *types.RcsMessageContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsMessageContent"}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	} else if v.Content != nil {
+		if err := validateRcsContent(v.Content); err != nil {
+			invalidParams.AddNested("Content", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Suggestions != nil {
+		if err := validateRcsSuggestedActionList(v.Suggestions); err != nil {
+			invalidParams.AddNested("Suggestions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsOpenUrlAction(v *types.RcsOpenUrlAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsOpenUrlAction"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if v.PostbackData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostbackData"))
+	}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsReplyAction(v *types.RcsReplyAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsReplyAction"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if v.PostbackData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostbackData"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsRequestLocationAction(v *types.RcsRequestLocationAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsRequestLocationAction"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if v.PostbackData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostbackData"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsShowLocationAction(v *types.RcsShowLocationAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsShowLocationAction"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if v.PostbackData == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PostbackData"))
+	}
+	if v.Latitude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Latitude"))
+	}
+	if v.Longitude == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Longitude"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsStandaloneCard(v *types.RcsStandaloneCard) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsStandaloneCard"}
+	if v.CardOrientation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CardOrientation"))
+	}
+	if v.CardContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CardContent"))
+	} else if v.CardContent != nil {
+		if err := validateRcsCardContent(v.CardContent); err != nil {
+			invalidParams.AddNested("CardContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsSuggestedAction(v types.RcsSuggestedAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsSuggestedAction"}
+	switch uv := v.(type) {
+	case *types.RcsSuggestedActionMemberCreateCalendarEvent:
+		if err := validateRcsCreateCalendarEventAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[CreateCalendarEvent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RcsSuggestedActionMemberDialPhone:
+		if err := validateRcsDialPhoneAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[DialPhone]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RcsSuggestedActionMemberOpenUrl:
+		if err := validateRcsOpenUrlAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[OpenUrl]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RcsSuggestedActionMemberReply:
+		if err := validateRcsReplyAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[Reply]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RcsSuggestedActionMemberRequestLocation:
+		if err := validateRcsRequestLocationAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[RequestLocation]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RcsSuggestedActionMemberShowLocation:
+		if err := validateRcsShowLocationAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[ShowLocation]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsSuggestedActionList(v []types.RcsSuggestedAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsSuggestedActionList"}
+	for i := range v {
+		if err := validateRcsSuggestedAction(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsTextMessage(v *types.RcsTextMessage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsTextMessage"}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4138,6 +4690,32 @@ func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	}
 }
 
+func validateOpListAvailablePhoneNumbersInput(v *ListAvailablePhoneNumbersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAvailablePhoneNumbersInput"}
+	if v.IsoCountryCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IsoCountryCode"))
+	}
+	if v.NumberCapabilities == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberCapabilities"))
+	}
+	if len(v.NumberType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("NumberType"))
+	}
+	if v.NumberPreference != nil {
+		if err := validateNumberPreferenceList(v.NumberPreference); err != nil {
+			invalidParams.AddNested("NumberPreference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPoolOriginationIdentitiesInput(v *ListPoolOriginationIdentitiesInput) error {
 	if v == nil {
 		return nil
@@ -4377,6 +4955,11 @@ func validateOpRequestPhoneNumberInput(v *RequestPhoneNumberInput) error {
 	if len(v.NumberType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("NumberType"))
 	}
+	if v.NumberPreference != nil {
+		if err := validateNumberPreferenceList(v.NumberPreference); err != nil {
+			invalidParams.AddNested("NumberPreference", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -4482,6 +5065,34 @@ func validateOpSendNotifyVoiceMessageInput(v *SendNotifyVoiceMessageInput) error
 	}
 	if v.TemplateVariables == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateVariables"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendRcsMessageInput(v *SendRcsMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendRcsMessageInput"}
+	if v.DestinationPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
+	}
+	if v.OriginationIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OriginationIdentity"))
+	}
+	if v.RcsMessageContent != nil {
+		if err := validateRcsMessageContent(v.RcsMessageContent); err != nil {
+			invalidParams.AddNested("RcsMessageContent", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FallbackConfiguration != nil {
+		if err := validateRcsFallbackConfiguration(v.FallbackConfiguration); err != nil {
+			invalidParams.AddNested("FallbackConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4612,6 +5223,21 @@ func validateOpSetNotifyMessageSpendLimitOverrideInput(v *SetNotifyMessageSpendL
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetNotifyMessageSpendLimitOverrideInput"}
+	if v.MonthlyLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonthlyLimit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetRcsMessageSpendLimitOverrideInput(v *SetRcsMessageSpendLimitOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetRcsMessageSpendLimitOverrideInput"}
 	if v.MonthlyLimit == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MonthlyLimit"))
 	}

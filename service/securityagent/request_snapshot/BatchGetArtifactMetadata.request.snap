@@ -1,0 +1,5 @@
+POST /BatchGetArtifactMetadata
+
+Content-Type: application/json
+
+{"agentSpaceId":"__AgentSpaceId__","artifactIds":["__Member__","__Member__"]}

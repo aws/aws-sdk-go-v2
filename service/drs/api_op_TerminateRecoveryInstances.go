@@ -4,11 +4,10 @@ package drs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/drs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a Job for terminating the EC2 resources associated with the specified
@@ -39,6 +38,25 @@ type TerminateRecoveryInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateRecoveryInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateRecoveryInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateRecoveryInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecoveryInstancesForTerminationRequest(s, schemas.TerminateRecoveryInstancesRequest_recoveryInstanceIDs, v.RecoveryInstanceIDs)
+}
+func (v *TerminateRecoveryInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateRecoveryInstancesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateRecoveryInstancesRequest_recoveryInstanceIDs:
+			return deserializeRecoveryInstancesForTerminationRequest(d, schemas.TerminateRecoveryInstancesRequest_recoveryInstanceIDs, &v.RecoveryInstanceIDs)
+		}
+		return nil
+	})
+}
+
 type TerminateRecoveryInstancesOutput struct {
 
 	// The Job for terminating the Recovery Instances.
@@ -50,77 +68,50 @@ type TerminateRecoveryInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TerminateRecoveryInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TerminateRecoveryInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TerminateRecoveryInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Job != nil {
+		s.WriteStruct(schemas.TerminateRecoveryInstancesResponse_job)
+		v.Job.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TerminateRecoveryInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TerminateRecoveryInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TerminateRecoveryInstancesResponse_job:
+			v.Job = &types.Job{}
+			return v.Job.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTerminateRecoveryInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateRecoveryInstances, schemas.TerminateRecoveryInstancesRequest, schemas.TerminateRecoveryInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTerminateRecoveryInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TerminateRecoveryInstances, schemas.TerminateRecoveryInstancesRequest, schemas.TerminateRecoveryInstancesResponse), output: &TerminateRecoveryInstancesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTerminateRecoveryInstances{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TerminateRecoveryInstances"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTerminateRecoveryInstancesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateRecoveryInstances(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,22 +126,8 @@ func (c *Client) addOperationTerminateRecoveryInstancesMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTerminateRecoveryInstances(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TerminateRecoveryInstances",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDBStreams_20120810.ListStreams
+
+{"ExclusiveStartStreamArn":"__ExclusiveStartStreamArn__","Limit":1,"TableName":"__TableName__"}

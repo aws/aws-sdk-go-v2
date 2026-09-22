@@ -4,11 +4,10 @@ package cloudhsm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This is documentation for AWS CloudHSM Classic. For more information, see [AWS CloudHSM Classic FAQs], the [AWS CloudHSM Classic User Guide]
@@ -63,6 +62,22 @@ type GetConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientArn != nil {
+		s.WriteString(schemas.GetConfigRequest_ClientArn, *v.ClientArn)
+	}
+	if v.ClientVersion != "" {
+		s.WriteString(schemas.GetConfigRequest_ClientVersion, string(v.ClientVersion))
+	}
+	serializeHapgList(s, schemas.GetConfigRequest_HapgList, v.HapgList)
+}
+
 type GetConfigOutput struct {
 
 	// The certificate file containing the server.pem files of the HSMs.
@@ -80,77 +95,60 @@ type GetConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigCred != nil {
+		s.WriteString(schemas.GetConfigResponse_ConfigCred, *v.ConfigCred)
+	}
+	if v.ConfigFile != nil {
+		s.WriteString(schemas.GetConfigResponse_ConfigFile, *v.ConfigFile)
+	}
+	if v.ConfigType != nil {
+		s.WriteString(schemas.GetConfigResponse_ConfigType, *v.ConfigType)
+	}
+}
+func (v *GetConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfigResponse_ConfigCred:
+			v.ConfigCred = new(string)
+			return d.ReadString(schemas.GetConfigResponse_ConfigCred, v.ConfigCred)
+		case schemas.GetConfigResponse_ConfigFile:
+			v.ConfigFile = new(string)
+			return d.ReadString(schemas.GetConfigResponse_ConfigFile, v.ConfigFile)
+		case schemas.GetConfigResponse_ConfigType:
+			v.ConfigType = new(string)
+			return d.ReadString(schemas.GetConfigResponse_ConfigType, v.ConfigType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfig, schemas.GetConfigRequest, schemas.GetConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfig, schemas.GetConfigRequest, schemas.GetConfigResponse), output: &GetConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +163,8 @@ func (c *Client) addOperationGetConfigMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetConfig",
-	}
 }

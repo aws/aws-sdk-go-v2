@@ -5,10 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the specified notify templates or all notify templates in your
@@ -54,6 +54,23 @@ type DescribeNotifyTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotifyTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotifyTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotifyTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotifyTemplateFilterList(s, schemas.DescribeNotifyTemplatesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeNotifyTemplatesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeNotifyTemplatesRequest_NextToken, *v.NextToken)
+	}
+	serializeNotifyTemplateIdList(s, schemas.DescribeNotifyTemplatesRequest_TemplateIds, v.TemplateIds)
+}
+
 type DescribeNotifyTemplatesOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -69,77 +86,51 @@ type DescribeNotifyTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotifyTemplatesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotifyTemplatesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotifyTemplatesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeNotifyTemplatesResult_NextToken, *v.NextToken)
+	}
+	serializeNotifyTemplateInformationList(s, schemas.DescribeNotifyTemplatesResult_NotifyTemplates, v.NotifyTemplates)
+}
+func (v *DescribeNotifyTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotifyTemplatesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotifyTemplatesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeNotifyTemplatesResult_NextToken, v.NextToken)
+		case schemas.DescribeNotifyTemplatesResult_NotifyTemplates:
+			return deserializeNotifyTemplateInformationList(d, schemas.DescribeNotifyTemplatesResult_NotifyTemplates, &v.NotifyTemplates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotifyTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotifyTemplates, schemas.DescribeNotifyTemplatesRequest, schemas.DescribeNotifyTemplatesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeNotifyTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotifyTemplates, schemas.DescribeNotifyTemplatesRequest, schemas.DescribeNotifyTemplatesResult), output: &DescribeNotifyTemplatesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeNotifyTemplates{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeNotifyTemplates"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeNotifyTemplatesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeNotifyTemplates(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +143,6 @@ func (c *Client) addOperationDescribeNotifyTemplatesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +245,3 @@ type DescribeNotifyTemplatesAPIClient interface {
 }
 
 var _ DescribeNotifyTemplatesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeNotifyTemplates(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeNotifyTemplates",
-	}
-}

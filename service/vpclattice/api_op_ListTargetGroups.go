@@ -5,10 +5,10 @@ package vpclattice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists your target groups. You can narrow your search by using the filters below
@@ -45,6 +45,50 @@ type ListTargetGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTargetGroupsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetGroupsRequest_nextToken, *v.NextToken)
+	}
+	if v.TargetGroupType != "" {
+		s.WriteString(schemas.ListTargetGroupsRequest_targetGroupType, string(v.TargetGroupType))
+	}
+	if v.VpcIdentifier != nil {
+		s.WriteString(schemas.ListTargetGroupsRequest_vpcIdentifier, *v.VpcIdentifier)
+	}
+}
+func (v *ListTargetGroupsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetGroupsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetGroupsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListTargetGroupsRequest_maxResults, v.MaxResults)
+		case schemas.ListTargetGroupsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTargetGroupsRequest_nextToken, v.NextToken)
+		case schemas.ListTargetGroupsRequest_targetGroupType:
+			var ev string
+			if err := d.ReadString(schemas.ListTargetGroupsRequest_targetGroupType, &ev); err != nil {
+				return err
+			}
+			v.TargetGroupType = types.TargetGroupType(ev)
+			return nil
+		case schemas.ListTargetGroupsRequest_vpcIdentifier:
+			v.VpcIdentifier = new(string)
+			return d.ReadString(schemas.ListTargetGroupsRequest_vpcIdentifier, v.VpcIdentifier)
+		}
+		return nil
+	})
+}
+
 type ListTargetGroupsOutput struct {
 
 	// Information about the target groups.
@@ -60,74 +104,48 @@ type ListTargetGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetGroupsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetGroupsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetGroupsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTargetGroupList(s, schemas.ListTargetGroupsResponse_items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetGroupsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTargetGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetGroupsResponse_items:
+			return deserializeTargetGroupList(d, schemas.ListTargetGroupsResponse_items, &v.Items)
+		case schemas.ListTargetGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTargetGroupsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetGroups, schemas.ListTargetGroupsRequest, schemas.ListTargetGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTargetGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetGroups, schemas.ListTargetGroupsRequest, schemas.ListTargetGroupsResponse), output: &ListTargetGroupsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTargetGroups{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTargetGroups"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTargetGroups(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +158,6 @@ func (c *Client) addOperationListTargetGroupsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,11 +258,3 @@ type ListTargetGroupsAPIClient interface {
 }
 
 var _ ListTargetGroupsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTargetGroups(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTargetGroups",
-	}
-}

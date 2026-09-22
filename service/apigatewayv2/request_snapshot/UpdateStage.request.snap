@@ -1,0 +1,5 @@
+PATCH /v2/apis/__ApiId__/stages/__StageName__
+
+Content-Type: application/json
+
+{"accessLogSettings":{"destinationArn":"__DestinationArn__","format":"__Format__"},"autoDeploy":true,"clientCertificateId":"__ClientCertificateId__","defaultRouteSettings":{"dataTraceEnabled":true,"detailedMetricsEnabled":true,"loggingLevel":"ERROR","throttlingBurstLimit":1,"throttlingRateLimit":1},"deploymentId":"__DeploymentId__","description":"__Description__","routeSettings":{"key0":{"dataTraceEnabled":true,"detailedMetricsEnabled":true,"loggingLevel":"ERROR","throttlingBurstLimit":1,"throttlingRateLimit":1}},"stageVariables":{"key0":"__Value__"}}

@@ -4,11 +4,10 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a job to apply customer modifications to network migration mappings,
@@ -49,6 +48,23 @@ type StartNetworkMigrationMappingUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationMappingUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationMappingUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationMappingUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStartNetworkMigrationMappingUpdateConstructs(s, schemas.StartNetworkMigrationMappingUpdateRequest_constructs, v.Constructs)
+	if v.NetworkMigrationDefinitionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationMappingUpdateRequest_networkMigrationDefinitionID, *v.NetworkMigrationDefinitionID)
+	}
+	if v.NetworkMigrationExecutionID != nil {
+		s.WriteString(schemas.StartNetworkMigrationMappingUpdateRequest_networkMigrationExecutionID, *v.NetworkMigrationExecutionID)
+	}
+	serializeStartNetworkMigrationMappingUpdateSegments(s, schemas.StartNetworkMigrationMappingUpdateRequest_segments, v.Segments)
+}
+
 type StartNetworkMigrationMappingUpdateOutput struct {
 
 	// The unique identifier of the mapping update job that was started.
@@ -60,77 +76,48 @@ type StartNetworkMigrationMappingUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNetworkMigrationMappingUpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNetworkMigrationMappingUpdateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNetworkMigrationMappingUpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobID != nil {
+		s.WriteString(schemas.StartNetworkMigrationMappingUpdateResponse_jobID, *v.JobID)
+	}
+}
+func (v *StartNetworkMigrationMappingUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNetworkMigrationMappingUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNetworkMigrationMappingUpdateResponse_jobID:
+			v.JobID = new(string)
+			return d.ReadString(schemas.StartNetworkMigrationMappingUpdateResponse_jobID, v.JobID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNetworkMigrationMappingUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationMappingUpdate, schemas.StartNetworkMigrationMappingUpdateRequest, schemas.StartNetworkMigrationMappingUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNetworkMigrationMappingUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNetworkMigrationMappingUpdate, schemas.StartNetworkMigrationMappingUpdateRequest, schemas.StartNetworkMigrationMappingUpdateResponse), output: &StartNetworkMigrationMappingUpdateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNetworkMigrationMappingUpdate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartNetworkMigrationMappingUpdate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartNetworkMigrationMappingUpdateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartNetworkMigrationMappingUpdate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +132,8 @@ func (c *Client) addOperationStartNetworkMigrationMappingUpdateMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartNetworkMigrationMappingUpdate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartNetworkMigrationMappingUpdate",
-	}
 }

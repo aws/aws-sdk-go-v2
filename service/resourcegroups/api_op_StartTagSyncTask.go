@@ -4,11 +4,10 @@ package resourcegroups
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new tag-sync task to onboard and sync resources tagged with a
@@ -113,6 +112,32 @@ type StartTagSyncTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTagSyncTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTagSyncTaskInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTagSyncTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Group != nil {
+		s.WriteString(schemas.StartTagSyncTaskInput_Group, *v.Group)
+	}
+	if v.ResourceQuery != nil {
+		s.WriteStruct(schemas.StartTagSyncTaskInput_ResourceQuery)
+		v.ResourceQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartTagSyncTaskInput_RoleArn, *v.RoleArn)
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.StartTagSyncTaskInput_TagKey, *v.TagKey)
+	}
+	if v.TagValue != nil {
+		s.WriteString(schemas.StartTagSyncTaskInput_TagValue, *v.TagValue)
+	}
+}
+
 type StartTagSyncTaskOutput struct {
 
 	// The Amazon resource name (ARN) of the application group for which you want to
@@ -171,77 +196,86 @@ type StartTagSyncTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartTagSyncTaskOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartTagSyncTaskOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartTagSyncTaskOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupArn != nil {
+		s.WriteString(schemas.StartTagSyncTaskOutput_GroupArn, *v.GroupArn)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.StartTagSyncTaskOutput_GroupName, *v.GroupName)
+	}
+	if v.ResourceQuery != nil {
+		s.WriteStruct(schemas.StartTagSyncTaskOutput_ResourceQuery)
+		v.ResourceQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartTagSyncTaskOutput_RoleArn, *v.RoleArn)
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.StartTagSyncTaskOutput_TagKey, *v.TagKey)
+	}
+	if v.TagValue != nil {
+		s.WriteString(schemas.StartTagSyncTaskOutput_TagValue, *v.TagValue)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.StartTagSyncTaskOutput_TaskArn, *v.TaskArn)
+	}
+}
+func (v *StartTagSyncTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartTagSyncTaskOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartTagSyncTaskOutput_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.StartTagSyncTaskOutput_GroupArn, v.GroupArn)
+		case schemas.StartTagSyncTaskOutput_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.StartTagSyncTaskOutput_GroupName, v.GroupName)
+		case schemas.StartTagSyncTaskOutput_ResourceQuery:
+			v.ResourceQuery = &types.ResourceQuery{}
+			return v.ResourceQuery.Deserialize(d)
+		case schemas.StartTagSyncTaskOutput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.StartTagSyncTaskOutput_RoleArn, v.RoleArn)
+		case schemas.StartTagSyncTaskOutput_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.StartTagSyncTaskOutput_TagKey, v.TagKey)
+		case schemas.StartTagSyncTaskOutput_TagValue:
+			v.TagValue = new(string)
+			return d.ReadString(schemas.StartTagSyncTaskOutput_TagValue, v.TagValue)
+		case schemas.StartTagSyncTaskOutput_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.StartTagSyncTaskOutput_TaskArn, v.TaskArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartTagSyncTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTagSyncTask, schemas.StartTagSyncTaskInput, schemas.StartTagSyncTaskOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartTagSyncTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartTagSyncTask, schemas.StartTagSyncTaskInput, schemas.StartTagSyncTaskOutput), output: &StartTagSyncTaskOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartTagSyncTask{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartTagSyncTask"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartTagSyncTaskValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartTagSyncTask(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -256,22 +290,8 @@ func (c *Client) addOperationStartTagSyncTaskMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartTagSyncTask(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartTagSyncTask",
-	}
 }

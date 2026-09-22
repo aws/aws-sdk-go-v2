@@ -2,6 +2,30 @@
 
 package types
 
+type BatchDeleteErrorCode string
+
+// Enum values for BatchDeleteErrorCode
+const (
+	// Configuration already deleted or expired.
+	BatchDeleteErrorCodeResourceNotFound BatchDeleteErrorCode = "ResourceNotFoundException"
+	// Insufficient permissions to delete the configuration.
+	BatchDeleteErrorCodeAccessDenied BatchDeleteErrorCode = "AccessDeniedException"
+	// Internal service error for this item.
+	BatchDeleteErrorCodeInternalServiceError BatchDeleteErrorCode = "InternalServiceException"
+)
+
+// Values returns all known values for BatchDeleteErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchDeleteErrorCode) Values() []BatchDeleteErrorCode {
+	return []BatchDeleteErrorCode{
+		"ResourceNotFoundException",
+		"AccessDeniedException",
+		"InternalServiceException",
+	}
+}
+
 type ChangeEventType string
 
 // Enum values for ChangeEventType
@@ -82,6 +106,42 @@ func (DurationUnit) Values() []DurationUnit {
 	}
 }
 
+type DynamicInstrumentationDeletionStatus string
+
+// Enum values for DynamicInstrumentationDeletionStatus
+const (
+	DynamicInstrumentationDeletionStatusDeleted DynamicInstrumentationDeletionStatus = "DELETED"
+)
+
+// Values returns all known values for DynamicInstrumentationDeletionStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DynamicInstrumentationDeletionStatus) Values() []DynamicInstrumentationDeletionStatus {
+	return []DynamicInstrumentationDeletionStatus{
+		"DELETED",
+	}
+}
+
+type DynamicInstrumentationSignalType string
+
+// Enum values for DynamicInstrumentationSignalType
+const (
+	DynamicInstrumentationSignalTypeSnapshot DynamicInstrumentationSignalType = "SNAPSHOT"
+)
+
+// Values returns all known values for DynamicInstrumentationSignalType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DynamicInstrumentationSignalType) Values() []DynamicInstrumentationSignalType {
+	return []DynamicInstrumentationSignalType{
+		"SNAPSHOT",
+	}
+}
+
 type EvaluationType string
 
 // Enum values for EvaluationType
@@ -98,6 +158,78 @@ func (EvaluationType) Values() []EvaluationType {
 	return []EvaluationType{
 		"PeriodBased",
 		"RequestBased",
+	}
+}
+
+type InstrumentationConfigurationStatus string
+
+// Enum values for InstrumentationConfigurationStatus
+const (
+	InstrumentationConfigurationStatusReady    InstrumentationConfigurationStatus = "READY"
+	InstrumentationConfigurationStatusError    InstrumentationConfigurationStatus = "ERROR"
+	InstrumentationConfigurationStatusActive   InstrumentationConfigurationStatus = "ACTIVE"
+	InstrumentationConfigurationStatusDisabled InstrumentationConfigurationStatus = "DISABLED"
+)
+
+// Values returns all known values for InstrumentationConfigurationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstrumentationConfigurationStatus) Values() []InstrumentationConfigurationStatus {
+	return []InstrumentationConfigurationStatus{
+		"READY",
+		"ERROR",
+		"ACTIVE",
+		"DISABLED",
+	}
+}
+
+type InstrumentationErrorCause string
+
+// Enum values for InstrumentationErrorCause
+const (
+	InstrumentationErrorCauseFileNotFound      InstrumentationErrorCause = "FILE_NOT_FOUND"
+	InstrumentationErrorCauseMethodNotFound    InstrumentationErrorCause = "METHOD_NOT_FOUND"
+	InstrumentationErrorCauseLineNotExecutable InstrumentationErrorCause = "LINE_NOT_EXECUTABLE"
+	InstrumentationErrorCauseOverloadedMethods InstrumentationErrorCause = "OVERLOADED_METHODS"
+	InstrumentationErrorCauseLanguageMismatch  InstrumentationErrorCause = "LANGUAGE_MISMATCH"
+	InstrumentationErrorCauseRuntimeError      InstrumentationErrorCause = "RUNTIME_ERROR"
+)
+
+// Values returns all known values for InstrumentationErrorCause. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstrumentationErrorCause) Values() []InstrumentationErrorCause {
+	return []InstrumentationErrorCause{
+		"FILE_NOT_FOUND",
+		"METHOD_NOT_FOUND",
+		"LINE_NOT_EXECUTABLE",
+		"OVERLOADED_METHODS",
+		"LANGUAGE_MISMATCH",
+		"RUNTIME_ERROR",
+	}
+}
+
+type InstrumentationType string
+
+// Enum values for InstrumentationType
+const (
+	// Temporary instrumentation that expires automatically (default 24 hours)
+	InstrumentationTypeBreakpoint InstrumentationType = "BREAKPOINT"
+	// Permanent instrumentation that persists until explicitly deleted
+	InstrumentationTypeProbe InstrumentationType = "PROBE"
+)
+
+// Values returns all known values for InstrumentationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InstrumentationType) Values() []InstrumentationType {
+	return []InstrumentationType{
+		"BREAKPOINT",
+		"PROBE",
 	}
 }
 
@@ -125,6 +257,27 @@ func (MetricSourceType) Values() []MetricSourceType {
 		"AppMonitor",
 		"Canary",
 		"Service",
+	}
+}
+
+type ProgrammingLanguage string
+
+// Enum values for ProgrammingLanguage
+const (
+	ProgrammingLanguageJava       ProgrammingLanguage = "Java"
+	ProgrammingLanguagePython     ProgrammingLanguage = "Python"
+	ProgrammingLanguageJavascript ProgrammingLanguage = "Javascript"
+)
+
+// Values returns all known values for ProgrammingLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProgrammingLanguage) Values() []ProgrammingLanguage {
+	return []ProgrammingLanguage{
+		"Java",
+		"Python",
+		"Javascript",
 	}
 }
 
@@ -308,5 +461,27 @@ func (StandardUnit) Values() []StandardUnit {
 		"Terabits/Second",
 		"Count/Second",
 		"None",
+	}
+}
+
+type UnprocessedStatusEventFailureReason string
+
+// Enum values for UnprocessedStatusEventFailureReason
+const (
+	UnprocessedStatusEventFailureReasonThrottled       UnprocessedStatusEventFailureReason = "THROTTLED"
+	UnprocessedStatusEventFailureReasonInternalError   UnprocessedStatusEventFailureReason = "INTERNAL_ERROR"
+	UnprocessedStatusEventFailureReasonValidationError UnprocessedStatusEventFailureReason = "VALIDATION_ERROR"
+)
+
+// Values returns all known values for UnprocessedStatusEventFailureReason. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (UnprocessedStatusEventFailureReason) Values() []UnprocessedStatusEventFailureReason {
+	return []UnprocessedStatusEventFailureReason{
+		"THROTTLED",
+		"INTERNAL_ERROR",
+		"VALIDATION_ERROR",
 	}
 }

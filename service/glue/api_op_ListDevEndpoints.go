@@ -5,9 +5,9 @@ package glue
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the names of all DevEndpoint resources in this Amazon Web Services
@@ -46,6 +46,22 @@ type ListDevEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevEndpointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDevEndpointsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevEndpointsRequest_NextToken, *v.NextToken)
+	}
+	serializeTagsMap(s, schemas.ListDevEndpointsRequest_Tags, v.Tags)
+}
+
 type ListDevEndpointsOutput struct {
 
 	// The names of all the DevEndpoint s in the account, or the DevEndpoint s with the
@@ -62,74 +78,48 @@ type ListDevEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevEndpointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevEndpointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevEndpointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDevEndpointNameList(s, schemas.ListDevEndpointsResponse_DevEndpointNames, v.DevEndpointNames)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevEndpointsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDevEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevEndpointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevEndpointsResponse_DevEndpointNames:
+			return deserializeDevEndpointNameList(d, schemas.ListDevEndpointsResponse_DevEndpointNames, &v.DevEndpointNames)
+		case schemas.ListDevEndpointsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevEndpointsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEndpoints, schemas.ListDevEndpointsRequest, schemas.ListDevEndpointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDevEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevEndpoints, schemas.ListDevEndpointsRequest, schemas.ListDevEndpointsResponse), output: &ListDevEndpointsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDevEndpoints{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevEndpoints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDevEndpoints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +132,6 @@ func (c *Client) addOperationListDevEndpointsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -248,11 +232,3 @@ type ListDevEndpointsAPIClient interface {
 }
 
 var _ ListDevEndpointsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDevEndpoints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDevEndpoints",
-	}
-}

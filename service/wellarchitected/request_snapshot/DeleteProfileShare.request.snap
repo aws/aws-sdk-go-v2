@@ -1,0 +1,3 @@
+DELETE /profiles/__ProfileArn__/shares/__ShareId__?ClientRequestToken=__ClientRequestToken__
+
+

@@ -1,0 +1,4 @@
+200
+Content-Type: application/x-www-form-urlencoded
+
+Action=GetItem&ConsumedCapacity.CapacityUnits=1&ConsumedCapacity.ReadCapacityUnits=1&ConsumedCapacity.TableName=__TableName__&ConsumedCapacity.WriteCapacityUnits=1&Item.entry.1.value.1.key=key0&Item.entry.1.value.1.value.value.S=__AttributeValueMemberS__&Version=1999-12-31

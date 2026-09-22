@@ -1,0 +1,5 @@
+PATCH /dns-views/__DnsViewId__
+
+Content-Type: application/json
+
+{"description":"__Description__","dnssecValidation":"ENABLED","ednsClientSubnet":"ENABLED","firewallRulesFailOpen":"ENABLED","name":"__Name__"}

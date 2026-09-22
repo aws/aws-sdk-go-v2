@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateGlossaryTerm
+
+{"ClientToken":"__ClientToken__","GlossaryIdentifier":"__GlossaryIdentifier__","LongDescription":"__LongDescription__","Name":"__Name__","ShortDescription":"__ShortDescription__"}

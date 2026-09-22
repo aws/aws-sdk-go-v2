@@ -1,0 +1,5 @@
+PUT /2025-09-09/microvm-images/__ImageIdentifier__
+
+Content-Type: application/json
+
+{"additionalOsCapabilities":["ALL","ALL"],"baseImageArn":"__BaseImageArn__","baseImageVersion":"__BaseImageVersion__","buildRoleArn":"__BuildRoleArn__","clientToken":"__ClientToken__","codeArtifact":{"uri":"__CodeArtifactMemberUri__"},"cpuConfigurations":[{"architecture":"ARM_64"},{"architecture":"ARM_64"}],"description":"__Description__","egressNetworkConnectors":["__Member__","__Member__"],"environmentVariables":{"key0":"__Value__"},"hooks":{"microvmHooks":{"resume":"DISABLED","resumeTimeoutInSeconds":1,"run":"DISABLED","runTimeoutInSeconds":1,"suspend":"DISABLED","suspendTimeoutInSeconds":1,"terminate":"DISABLED","terminateTimeoutInSeconds":1},"microvmImageHooks":{"ready":"DISABLED","readyTimeoutInSeconds":1,"validate":"DISABLED","validateTimeoutInSeconds":1},"port":1},"logging":{"disabled":{}},"resources":[{"minimumMemoryInMiB":1},{"minimumMemoryInMiB":1}]}

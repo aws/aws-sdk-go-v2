@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are
@@ -75,6 +74,22 @@ type AddJobFlowStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddJobFlowStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddJobFlowStepsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddJobFlowStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.AddJobFlowStepsInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.JobFlowId != nil {
+		s.WriteString(schemas.AddJobFlowStepsInput_JobFlowId, *v.JobFlowId)
+	}
+	serializeStepConfigList(s, schemas.AddJobFlowStepsInput_Steps, v.Steps)
+}
+
 // The output for the AddJobFlowSteps operation.
 type AddJobFlowStepsOutput struct {
 
@@ -87,77 +102,45 @@ type AddJobFlowStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddJobFlowStepsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddJobFlowStepsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddJobFlowStepsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStepIdsList(s, schemas.AddJobFlowStepsOutput_StepIds, v.StepIds)
+}
+func (v *AddJobFlowStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddJobFlowStepsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddJobFlowStepsOutput_StepIds:
+			return deserializeStepIdsList(d, schemas.AddJobFlowStepsOutput_StepIds, &v.StepIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddJobFlowStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddJobFlowSteps, schemas.AddJobFlowStepsInput, schemas.AddJobFlowStepsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAddJobFlowSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddJobFlowSteps, schemas.AddJobFlowStepsInput, schemas.AddJobFlowStepsOutput), output: &AddJobFlowStepsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAddJobFlowSteps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AddJobFlowSteps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAddJobFlowStepsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddJobFlowSteps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +155,8 @@ func (c *Client) addOperationAddJobFlowStepsMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAddJobFlowSteps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AddJobFlowSteps",
-	}
 }

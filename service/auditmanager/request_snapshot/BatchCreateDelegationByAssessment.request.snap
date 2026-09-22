@@ -1,0 +1,5 @@
+POST /assessments/__AssessmentId__/delegations
+
+Content-Type: application/json
+
+{"createDelegationRequests":[{"comment":"__Comment__","controlSetId":"__ControlSetId__","roleArn":"__RoleArn__","roleType":"PROCESS_OWNER"},{"comment":"__Comment__","controlSetId":"__ControlSetId__","roleArn":"__RoleArn__","roleType":"PROCESS_OWNER"}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateCompilationJob
+
+{"CompilationJobName":"__CompilationJobName__","InputConfig":{"DataInputConfig":"__DataInputConfig__","Framework":"TENSORFLOW","FrameworkVersion":"__FrameworkVersion__","S3Uri":"__S3Uri__"},"ModelPackageVersionArn":"__ModelPackageVersionArn__","OutputConfig":{"CompilerOptions":"__CompilerOptions__","KmsKeyId":"__KmsKeyId__","S3OutputLocation":"__S3OutputLocation__","TargetDevice":"lambda","TargetPlatform":{"Accelerator":"INTEL_GRAPHICS","Arch":"X86_64","Os":"ANDROID"}},"RoleArn":"__RoleArn__","StoppingCondition":{"MaxPendingTimeInSeconds":1,"MaxRuntimeInSeconds":1,"MaxWaitTimeInSeconds":1},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}}

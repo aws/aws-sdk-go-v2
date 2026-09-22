@@ -1,0 +1,5 @@
+PATCH /reviewTemplates/__TemplateArn__
+
+Content-Type: application/json
+
+{"Description":"__Description__","LensesToAssociate":["__Member__","__Member__"],"LensesToDisassociate":["__Member__","__Member__"],"Notes":"__Notes__","TemplateName":"__TemplateName__"}

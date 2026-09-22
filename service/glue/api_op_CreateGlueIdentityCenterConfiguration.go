@@ -4,10 +4,9 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Glue Identity Center configuration to enable integration between
@@ -48,6 +47,22 @@ type CreateGlueIdentityCenterConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlueIdentityCenterConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlueIdentityCenterConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlueIdentityCenterConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.CreateGlueIdentityCenterConfigurationRequest_InstanceArn, *v.InstanceArn)
+	}
+	serializeIdentityCenterScopesList(s, schemas.CreateGlueIdentityCenterConfigurationRequest_Scopes, v.Scopes)
+	if v.UserBackgroundSessionsEnabled != nil {
+		s.WriteBool(schemas.CreateGlueIdentityCenterConfigurationRequest_UserBackgroundSessionsEnabled, *v.UserBackgroundSessionsEnabled)
+	}
+}
+
 // Response from creating a new Glue Identity Center configuration.
 type CreateGlueIdentityCenterConfigurationOutput struct {
 
@@ -61,77 +76,48 @@ type CreateGlueIdentityCenterConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGlueIdentityCenterConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGlueIdentityCenterConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGlueIdentityCenterConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.CreateGlueIdentityCenterConfigurationResponse_ApplicationArn, *v.ApplicationArn)
+	}
+}
+func (v *CreateGlueIdentityCenterConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGlueIdentityCenterConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGlueIdentityCenterConfigurationResponse_ApplicationArn:
+			v.ApplicationArn = new(string)
+			return d.ReadString(schemas.CreateGlueIdentityCenterConfigurationResponse_ApplicationArn, v.ApplicationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGlueIdentityCenterConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlueIdentityCenterConfiguration, schemas.CreateGlueIdentityCenterConfigurationRequest, schemas.CreateGlueIdentityCenterConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGlueIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGlueIdentityCenterConfiguration, schemas.CreateGlueIdentityCenterConfigurationRequest, schemas.CreateGlueIdentityCenterConfigurationResponse), output: &CreateGlueIdentityCenterConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGlueIdentityCenterConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGlueIdentityCenterConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateGlueIdentityCenterConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGlueIdentityCenterConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +132,8 @@ func (c *Client) addOperationCreateGlueIdentityCenterConfigurationMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGlueIdentityCenterConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGlueIdentityCenterConfiguration",
-	}
 }

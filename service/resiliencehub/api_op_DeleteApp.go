@@ -5,9 +5,9 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an Resilience Hub application. This is a destructive action that can't
@@ -50,6 +50,40 @@ type DeleteAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppRequest_appArn, *v.AppArn)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAppRequest_clientToken, *v.ClientToken)
+	}
+	if v.ForceDelete != nil {
+		s.WriteBool(schemas.DeleteAppRequest_forceDelete, *v.ForceDelete)
+	}
+}
+func (v *DeleteAppInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppRequest_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppRequest_appArn, v.AppArn)
+		case schemas.DeleteAppRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteAppRequest_clientToken, v.ClientToken)
+		case schemas.DeleteAppRequest_forceDelete:
+			v.ForceDelete = new(bool)
+			return d.ReadBool(schemas.DeleteAppRequest_forceDelete, v.ForceDelete)
+		}
+		return nil
+	})
+}
+
 type DeleteAppOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -68,65 +102,42 @@ type DeleteAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.DeleteAppResponse_appArn, *v.AppArn)
+	}
+}
+func (v *DeleteAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAppResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.DeleteAppResponse_appArn, v.AppArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApp, schemas.DeleteAppRequest, schemas.DeleteAppResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApp, schemas.DeleteAppRequest, schemas.DeleteAppResponse), output: &DeleteAppOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteApp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteApp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -136,12 +147,6 @@ func (c *Client) addOperationDeleteAppMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpDeleteAppValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +159,6 @@ func (c *Client) addOperationDeleteAppMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -199,12 +198,4 @@ func (m *idempotencyToken_initializeOpDeleteApp) HandleInitialize(ctx context.Co
 }
 func addIdempotencyToken_opDeleteAppMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteApp{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteApp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteApp",
-	}
 }

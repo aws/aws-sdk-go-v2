@@ -1,0 +1,5 @@
+PUT /backup-vaults/__BackupVaultName__/vault-lock
+
+Content-Type: application/json
+
+{"ChangeableForDays":1,"MaxRetentionDays":1,"MinRetentionDays":1}

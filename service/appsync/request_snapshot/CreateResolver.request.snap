@@ -1,0 +1,5 @@
+POST /v1/apis/__ApiId__/types/__TypeName__/resolvers
+
+Content-Type: application/json
+
+{"cachingConfig":{"cachingKeys":["__Member__","__Member__"],"ttl":1},"code":"__Code__","dataSourceName":"__DataSourceName__","fieldName":"__FieldName__","kind":"UNIT","maxBatchSize":1,"metricsConfig":"ENABLED","pipelineConfig":{"functions":["__Member__","__Member__"]},"requestMappingTemplate":"__RequestMappingTemplate__","responseMappingTemplate":"__ResponseMappingTemplate__","runtime":{"name":"APPSYNC_JS","runtimeVersion":"__RuntimeVersion__"},"syncConfig":{"conflictDetection":"VERSION","conflictHandler":"OPTIMISTIC_CONCURRENCY","lambdaConflictHandlerConfig":{"lambdaConflictHandlerArn":"__LambdaConflictHandlerArn__"}}}

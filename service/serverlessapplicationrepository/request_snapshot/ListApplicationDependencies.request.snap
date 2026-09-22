@@ -1,0 +1,3 @@
+GET /applications/__ApplicationId__/dependencies?maxItems=1&nextToken=__NextToken__&semanticVersion=__SemanticVersion__
+
+

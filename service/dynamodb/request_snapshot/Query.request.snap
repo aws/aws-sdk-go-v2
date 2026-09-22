@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.Query
+
+{"AttributesToGet":["__Member__","__Member__"],"ConditionalOperator":"AND","ConsistentRead":true,"ExclusiveStartKey":{"key0":{"S":"__AttributeValueMemberS__"}},"ExpressionAttributeNames":{"key0":"__Value__"},"ExpressionAttributeValues":{"key0":{"S":"__AttributeValueMemberS__"}},"FilterExpression":"__FilterExpression__","IndexName":"__IndexName__","KeyConditionExpression":"__KeyConditionExpression__","KeyConditions":{"key0":{"AttributeValueList":[{"S":"__AttributeValueMemberS__"},{"S":"__AttributeValueMemberS__"}],"ComparisonOperator":"EQ"}},"Limit":1,"ProjectionExpression":"__ProjectionExpression__","QueryFilter":{"key0":{"AttributeValueList":[{"S":"__AttributeValueMemberS__"},{"S":"__AttributeValueMemberS__"}],"ComparisonOperator":"EQ"}},"ReturnConsumedCapacity":"INDEXES","ScanIndexForward":true,"Select":"ALL_ATTRIBUTES","TableName":"__TableName__"}

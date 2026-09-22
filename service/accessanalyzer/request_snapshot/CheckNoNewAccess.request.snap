@@ -1,0 +1,5 @@
+POST /policy/check-no-new-access
+
+Content-Type: application/json
+
+{"existingPolicyDocument":"__ExistingPolicyDocument__","newPolicyDocument":"__NewPolicyDocument__","policyType":"IDENTITY_POLICY"}

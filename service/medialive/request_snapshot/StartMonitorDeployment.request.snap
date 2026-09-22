@@ -1,0 +1,5 @@
+POST /prod/signal-maps/__Identifier__/monitor-deployment
+
+Content-Type: application/json
+
+{"dryRun":true}

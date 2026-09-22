@@ -1,0 +1,5 @@
+POST /v1/describequotashare
+
+Content-Type: application/json
+
+{"quotaShareArn":"__QuotaShareArn__"}

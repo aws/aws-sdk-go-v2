@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2, Anywhere, Container
@@ -141,8 +140,9 @@ type CreateGameSessionInput struct {
 	// are processed only once. Subsequent requests with the same string return the
 	// original GameSession object, with an updated status. Maximum token length is 48
 	// characters. If provided, this string is included in the new game session's ID.
-	// The value is always a full ARN in the following format:
-	// arn:aws:gamelift:::gamesession// . Idempotency tokens remain in use for 30 days
+	// The value is always a full ARN in the following format: For Home Region game
+	// session - arn:aws:gamelift:::gamesession// . For Remote Location game session -
+	// arn:aws:gamelift:::gamesession/// . Idempotency tokens remain in use for 30 days
 	// after a game session has ended; game session objects are retained for this time
 	// period and then deleted.
 	IdempotencyToken *string
@@ -161,6 +161,43 @@ type CreateGameSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGameSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGameSessionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGameSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasId != nil {
+		s.WriteString(schemas.CreateGameSessionInput_AliasId, *v.AliasId)
+	}
+	if v.CreatorId != nil {
+		s.WriteString(schemas.CreateGameSessionInput_CreatorId, *v.CreatorId)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.CreateGameSessionInput_FleetId, *v.FleetId)
+	}
+	serializeGamePropertyList(s, schemas.CreateGameSessionInput_GameProperties, v.GameProperties)
+	if v.GameSessionData != nil {
+		s.WriteString(schemas.CreateGameSessionInput_GameSessionData, *v.GameSessionData)
+	}
+	if v.GameSessionId != nil {
+		s.WriteString(schemas.CreateGameSessionInput_GameSessionId, *v.GameSessionId)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateGameSessionInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.CreateGameSessionInput_Location, *v.Location)
+	}
+	if v.MaximumPlayerSessionCount != nil {
+		s.WriteInt32(schemas.CreateGameSessionInput_MaximumPlayerSessionCount, *v.MaximumPlayerSessionCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateGameSessionInput_Name, *v.Name)
+	}
+}
+
 type CreateGameSessionOutput struct {
 
 	// Object that describes the newly created game session record.
@@ -172,65 +209,44 @@ type CreateGameSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGameSessionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGameSessionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGameSessionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GameSession != nil {
+		s.WriteStruct(schemas.CreateGameSessionOutput_GameSession)
+		v.GameSession.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateGameSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGameSessionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGameSessionOutput_GameSession:
+			v.GameSession = &types.GameSession{}
+			return v.GameSession.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGameSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGameSession, schemas.CreateGameSessionInput, schemas.CreateGameSessionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateGameSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGameSession, schemas.CreateGameSessionInput, schemas.CreateGameSessionOutput), output: &CreateGameSessionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateGameSession{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGameSession"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -240,12 +256,6 @@ func (c *Client) addOperationCreateGameSessionMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateGameSessionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGameSession(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -260,22 +270,8 @@ func (c *Client) addOperationCreateGameSessionMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateGameSession(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateGameSession",
-	}
 }

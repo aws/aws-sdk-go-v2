@@ -4,11 +4,10 @@ package cloudsearchdomain
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
@@ -70,6 +69,25 @@ type UploadDocumentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadDocumentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadDocumentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadDocumentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != "" {
+		s.WriteString(schemas.UploadDocumentsRequest_contentType, string(v.ContentType))
+	}
+}
+func (v *UploadDocumentsInput) GetPayloadStream() io.Reader { return v.Documents }
+
+var _ smithy.StreamingInput = (*UploadDocumentsInput)(nil)
+
+func (v *UploadDocumentsInput) SetPayloadStream(r io.ReadCloser) { v.Documents = r }
+
+var _ smithy.StreamingOutput = (*UploadDocumentsInput)(nil)
+
 // Contains the response to an UploadDocuments request.
 type UploadDocumentsOutput struct {
 
@@ -92,77 +110,61 @@ type UploadDocumentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UploadDocumentsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadDocumentsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadDocumentsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Adds != 0 {
+		s.WriteInt64(schemas.UploadDocumentsResponse_adds, v.Adds)
+	}
+	if v.Deletes != 0 {
+		s.WriteInt64(schemas.UploadDocumentsResponse_deletes, v.Deletes)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UploadDocumentsResponse_status, *v.Status)
+	}
+	serializeDocumentServiceWarnings(s, schemas.UploadDocumentsResponse_warnings, v.Warnings)
+}
+func (v *UploadDocumentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UploadDocumentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UploadDocumentsResponse_adds:
+			return d.ReadInt64(schemas.UploadDocumentsResponse_adds, &v.Adds)
+		case schemas.UploadDocumentsResponse_deletes:
+			return d.ReadInt64(schemas.UploadDocumentsResponse_deletes, &v.Deletes)
+		case schemas.UploadDocumentsResponse_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UploadDocumentsResponse_status, v.Status)
+		case schemas.UploadDocumentsResponse_warnings:
+			return deserializeDocumentServiceWarnings(d, schemas.UploadDocumentsResponse_warnings, &v.Warnings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUploadDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadDocuments, schemas.UploadDocumentsRequest, schemas.UploadDocumentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUploadDocuments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UploadDocuments, schemas.UploadDocumentsRequest, schemas.UploadDocumentsResponse), output: &UploadDocumentsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUploadDocuments{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UploadDocuments"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUploadDocumentsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUploadDocuments(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +179,8 @@ func (c *Client) addOperationUploadDocumentsMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUploadDocuments(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UploadDocuments",
-	}
 }

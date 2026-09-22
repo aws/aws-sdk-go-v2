@@ -4,11 +4,10 @@ package smithyrpcv2cbor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) RpcV2CborSparseMaps(ctx context.Context, params *RpcV2CborSparseMapsInput, optFns ...func(*Options)) (*RpcV2CborSparseMapsOutput, error) {
@@ -40,6 +39,37 @@ type RpcV2CborSparseMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RpcV2CborSparseMapsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RpcV2CborSparseMapsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RpcV2CborSparseMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSparseBooleanMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseBooleanMap, v.SparseBooleanMap)
+	serializeSparseNumberMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseNumberMap, v.SparseNumberMap)
+	serializeSparseSetMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseSetMap, v.SparseSetMap)
+	serializeSparseStringMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseStringMap, v.SparseStringMap)
+	serializeSparseStructMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseStructMap, v.SparseStructMap)
+}
+func (v *RpcV2CborSparseMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RpcV2CborSparseMapsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseBooleanMap:
+			return deserializeSparseBooleanMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseBooleanMap, &v.SparseBooleanMap)
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseNumberMap:
+			return deserializeSparseNumberMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseNumberMap, &v.SparseNumberMap)
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseSetMap:
+			return deserializeSparseSetMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseSetMap, &v.SparseSetMap)
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseStringMap:
+			return deserializeSparseStringMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseStringMap, &v.SparseStringMap)
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseStructMap:
+			return deserializeSparseStructMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseStructMap, &v.SparseStructMap)
+		}
+		return nil
+	})
+}
+
 type RpcV2CborSparseMapsOutput struct {
 	SparseBooleanMap map[string]*bool
 
@@ -57,71 +87,51 @@ type RpcV2CborSparseMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RpcV2CborSparseMapsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RpcV2CborSparseMapsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RpcV2CborSparseMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSparseBooleanMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseBooleanMap, v.SparseBooleanMap)
+	serializeSparseNumberMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseNumberMap, v.SparseNumberMap)
+	serializeSparseSetMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseSetMap, v.SparseSetMap)
+	serializeSparseStringMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseStringMap, v.SparseStringMap)
+	serializeSparseStructMap(s, schemas.RpcV2CborSparseMapsInputOutput_sparseStructMap, v.SparseStructMap)
+}
+func (v *RpcV2CborSparseMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RpcV2CborSparseMapsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseBooleanMap:
+			return deserializeSparseBooleanMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseBooleanMap, &v.SparseBooleanMap)
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseNumberMap:
+			return deserializeSparseNumberMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseNumberMap, &v.SparseNumberMap)
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseSetMap:
+			return deserializeSparseSetMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseSetMap, &v.SparseSetMap)
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseStringMap:
+			return deserializeSparseStringMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseStringMap, &v.SparseStringMap)
+		case schemas.RpcV2CborSparseMapsInputOutput_sparseStructMap:
+			return deserializeSparseStructMap(d, schemas.RpcV2CborSparseMapsInputOutput_sparseStructMap, &v.SparseStructMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRpcV2CborSparseMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RpcV2CborSparseMaps, schemas.RpcV2CborSparseMapsInputOutput, schemas.RpcV2CborSparseMapsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRpcV2CborSparseMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RpcV2CborSparseMaps, schemas.RpcV2CborSparseMapsInputOutput, schemas.RpcV2CborSparseMapsInputOutput), output: &RpcV2CborSparseMapsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRpcV2CborSparseMaps{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RpcV2CborSparseMaps"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRpcV2CborSparseMaps(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +146,8 @@ func (c *Client) addOperationRpcV2CborSparseMapsMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRpcV2CborSparseMaps(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RpcV2CborSparseMaps",
-	}
 }

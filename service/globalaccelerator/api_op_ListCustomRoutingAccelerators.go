@@ -5,10 +5,10 @@ package globalaccelerator
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List the custom routing accelerators for an Amazon Web Services account.
@@ -40,6 +40,21 @@ type ListCustomRoutingAcceleratorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomRoutingAcceleratorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomRoutingAcceleratorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomRoutingAcceleratorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCustomRoutingAcceleratorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomRoutingAcceleratorsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCustomRoutingAcceleratorsOutput struct {
 
 	// The list of custom routing accelerators for a customer account.
@@ -55,74 +70,48 @@ type ListCustomRoutingAcceleratorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCustomRoutingAcceleratorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCustomRoutingAcceleratorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCustomRoutingAcceleratorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomRoutingAccelerators(s, schemas.ListCustomRoutingAcceleratorsResponse_Accelerators, v.Accelerators)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCustomRoutingAcceleratorsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCustomRoutingAcceleratorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCustomRoutingAcceleratorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCustomRoutingAcceleratorsResponse_Accelerators:
+			return deserializeCustomRoutingAccelerators(d, schemas.ListCustomRoutingAcceleratorsResponse_Accelerators, &v.Accelerators)
+		case schemas.ListCustomRoutingAcceleratorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCustomRoutingAcceleratorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCustomRoutingAcceleratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomRoutingAccelerators, schemas.ListCustomRoutingAcceleratorsRequest, schemas.ListCustomRoutingAcceleratorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCustomRoutingAccelerators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCustomRoutingAccelerators, schemas.ListCustomRoutingAcceleratorsRequest, schemas.ListCustomRoutingAcceleratorsResponse), output: &ListCustomRoutingAcceleratorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCustomRoutingAccelerators{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCustomRoutingAccelerators"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomRoutingAccelerators(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -135,12 +124,6 @@ func (c *Client) addOperationListCustomRoutingAcceleratorsMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -245,11 +228,3 @@ type ListCustomRoutingAcceleratorsAPIClient interface {
 }
 
 var _ ListCustomRoutingAcceleratorsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCustomRoutingAccelerators(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCustomRoutingAccelerators",
-	}
-}

@@ -5,130 +5,15 @@ package marketplaceagreement
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches across all agreements that a proposer or an acceptor has in AWS
 // Marketplace. The search returns a list of agreements with basic agreement
 // information.
-//
-// The following filter combinations are supported when the PartyType is Proposer :
-//
-//   - AgreementType
-//
-//   - AgreementType + EndTime
-//
-//   - AgreementType + ResourceType
-//
-//   - AgreementType + ResourceType + EndTime
-//
-//   - AgreementType + ResourceType + Status
-//
-//   - AgreementType + ResourceType + Status + EndTime
-//
-//   - AgreementType + ResourceIdentifier
-//
-//   - AgreementType + ResourceIdentifier + EndTime
-//
-//   - AgreementType + ResourceIdentifier + Status
-//
-//   - AgreementType + ResourceIdentifier + Status + EndTime
-//
-//   - AgreementType + AcceptorAccountId
-//
-//   - AgreementType + AcceptorAccountId + EndTime
-//
-//   - AgreementType + AcceptorAccountId + Status
-//
-//   - AgreementType + AcceptorAccountId + Status + EndTime
-//
-//   - AgreementType + AcceptorAccountId + OfferId
-//
-//   - AgreementType + AcceptorAccountId + OfferId + Status
-//
-//   - AgreementType + AcceptorAccountId + OfferId + EndTime
-//
-//   - AgreementType + AcceptorAccountId + OfferId + Status + EndTime
-//
-//   - AgreementType + AcceptorAccountId + ResourceIdentifier
-//
-//   - AgreementType + AcceptorAccountId + ResourceIdentifier + Status
-//
-//   - AgreementType + AcceptorAccountId + ResourceIdentifier + EndTime
-//
-//   - AgreementType + AcceptorAccountId + ResourceIdentifier + Status + EndTime
-//
-//   - AgreementType + AcceptorAccountId + ResourceType
-//
-//   - AgreementType + AcceptorAccountId + ResourceType + EndTime
-//
-//   - AgreementType + AcceptorAccountId + ResourceType + Status
-//
-//   - AgreementType + AcceptorAccountId + ResourceType + Status + EndTime
-//
-//   - AgreementType + Status
-//
-//   - AgreementType + Status + EndTime
-//
-//   - AgreementType + OfferId
-//
-//   - AgreementType + OfferId + EndTime
-//
-//   - AgreementType + OfferId + Status
-//
-//   - AgreementType + OfferId + Status + EndTime
-//
-//   - AgreementType + OfferSetId
-//
-//   - AgreementType + OfferSetId + EndTime
-//
-//   - AgreementType + OfferSetId + Status
-//
-//   - AgreementType + OfferSetId + Status + EndTime
-//
-// To filter by EndTime , you can use BeforeEndTime and/or AfterEndTime . Only
-// EndTime is supported for sorting.
-//
-// The following filter combinations are supported when the PartyType is Acceptor :
-//
-//   - AgreementType
-//
-//   - AgreementType + Status
-//
-//   - AgreementType + EndTime
-//
-//   - AgreementType + Status + EndTime
-//
-//   - AgreementType + ResourceIdentifier
-//
-//   - AgreementType + ResourceIdentifier + EndTime
-//
-//   - AgreementType + ResourceIdentifier + Status
-//
-//   - AgreementType + ResourceIdentifier + Status + EndTime
-//
-//   - AgreementType + ResourceType
-//
-//   - AgreementType + ResourceType + EndTime
-//
-//   - AgreementType + OfferId
-//
-//   - AgreementType + OfferId + EndTime
-//
-//   - AgreementType + OfferId + Status
-//
-//   - AgreementType + OfferId + Status + EndTime
-//
-//   - AgreementType + OfferSetId
-//
-//   - AgreementType + OfferSetId + EndTime
-//
-//   - AgreementType + OfferSetId + Status
-//
-//   - AgreementType + OfferSetId + Status + EndTime
 func (c *Client) SearchAgreements(ctx context.Context, params *SearchAgreementsInput, optFns ...func(*Options)) (*SearchAgreementsOutput, error) {
 	if params == nil {
 		params = &SearchAgreementsInput{}
@@ -168,7 +53,7 @@ type SearchAgreementsInput struct {
 	//   registered in the agreement token.
 	//
 	//   - Status – The current status of the agreement. Values include ACTIVE ,
-	//   ARCHIVED , CANCELLED , EXPIRED , RENEWED , REPLACED , and TERMINATED .
+	//   CANCELLED , EXPIRED , RENEWED , REPLACED , and TERMINATED .
 	//
 	//   - BeforeEndTime – A date used to filter agreements with a date before the
 	//   endTime of an agreement.
@@ -176,12 +61,81 @@ type SearchAgreementsInput struct {
 	//   - AfterEndTime – A date used to filter agreements with a date after the
 	//   endTime of an agreement.
 	//
+	//   - BeforeStartTime – A date used to filter agreements with a date before the
+	//   startTime of an agreement.
+	//
+	//   - AfterStartTime – A date used to filter agreements with a date after the
+	//   startTime of an agreement.
+	//
+	//   - BeforeLastUpdateTime – A date used to filter agreements with a date before
+	//   the lastUpdateTime of an agreement.
+	//
+	//   - AfterLastUpdateTime – A date used to filter agreements with a date after the
+	//   lastUpdateTime of an agreement.
+	//
 	//   - AgreementType – The type of agreement. Supported value includes
 	//   PurchaseAgreement .
 	//
 	//   - OfferSetId – A unique identifier for the offer set containing this offer.
 	//   All agreements created from offers in this set include this identifier as
 	//   context.
+	//
+	//   - EndTimeBehaviorType – What happens to the agreement when it reaches its end
+	//   date. Values include RENEW , REPLACE , and EXPIRE .
+	//
+	//   - EndTimeBehaviorReasonCode – The reason why the agreement doesn't renew at
+	//   its end date. Values include PROPOSER_RENEW_OPTED_OUT ,
+	//   ACCEPTOR_RENEW_OPTED_OUT , NO_RENEWAL_TERM , and RENEWAL_LIMIT_EXHAUSTED .
+	//
+	//   - InitialAgreementId – The unique identifier of the very first agreement in a
+	//   chain of related agreements. Use this filter to return every agreement in the
+	//   same chain.
+	//
+	//   - LicenseArn – The Amazon Resource Name (ARN) of the AWS License Manager
+	//   license associated with an entitlement granted by the agreement.
+	//
+	// A proposer can use any combination of the preceding filters along with
+	// AgreementType , which is required.
+	//
+	// The following filter combinations are supported when the PartyType is Acceptor :
+	//
+	//   - AgreementType
+	//
+	//   - AgreementType + Status
+	//
+	//   - AgreementType + EndTime
+	//
+	//   - AgreementType + Status + EndTime
+	//
+	//   - AgreementType + ResourceIdentifier
+	//
+	//   - AgreementType + ResourceIdentifier + EndTime
+	//
+	//   - AgreementType + ResourceIdentifier + Status
+	//
+	//   - AgreementType + ResourceIdentifier + Status + EndTime
+	//
+	//   - AgreementType + ResourceType
+	//
+	//   - AgreementType + ResourceType + EndTime
+	//
+	//   - AgreementType + OfferId
+	//
+	//   - AgreementType + OfferId + EndTime
+	//
+	//   - AgreementType + OfferId + Status
+	//
+	//   - AgreementType + OfferId + Status + EndTime
+	//
+	//   - AgreementType + OfferSetId
+	//
+	//   - AgreementType + OfferSetId + EndTime
+	//
+	//   - AgreementType + OfferSetId + Status
+	//
+	//   - AgreementType + OfferSetId + Status + EndTime
+	//
+	// To filter by EndTime , you can use BeforeEndTime , AfterEndTime , or both.
 	Filters []types.Filter
 
 	// The maximum number of agreements to return in the response.
@@ -190,11 +144,37 @@ type SearchAgreementsInput struct {
 	// A token to specify where to start pagination.
 	NextToken *string
 
-	// An object that contains the SortBy and SortOrder attributes. Only EndTime is
-	// supported for SearchAgreements . The default sort is EndTime descending.
+	// An object that contains the SortBy and SortOrder attributes. For
+	// SearchAgreements , SortBy supports EndTime for both party types, and StartTime
+	// and LastUpdateTime only when PartyType is Proposer . The default SortBy value
+	// is EndTime .
 	Sort *types.Sort
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchAgreementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAgreementsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAgreementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.SearchAgreementsInput_catalog, *v.Catalog)
+	}
+	serializeFilterList(s, schemas.SearchAgreementsInput_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchAgreementsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAgreementsInput_nextToken, *v.NextToken)
+	}
+	if v.Sort != nil {
+		s.WriteStruct(schemas.SearchAgreementsInput_sort)
+		v.Sort.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type SearchAgreementsOutput struct {
@@ -212,74 +192,48 @@ type SearchAgreementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchAgreementsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchAgreementsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchAgreementsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgreementViewSummaryList(s, schemas.SearchAgreementsOutput_agreementViewSummaries, v.AgreementViewSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchAgreementsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *SearchAgreementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchAgreementsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchAgreementsOutput_agreementViewSummaries:
+			return deserializeAgreementViewSummaryList(d, schemas.SearchAgreementsOutput_agreementViewSummaries, &v.AgreementViewSummaries)
+		case schemas.SearchAgreementsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchAgreementsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchAgreementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAgreements, schemas.SearchAgreementsInput, schemas.SearchAgreementsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSearchAgreements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchAgreements, schemas.SearchAgreementsInput, schemas.SearchAgreementsOutput), output: &SearchAgreementsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSearchAgreements{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchAgreements"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchAgreements(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -292,12 +246,6 @@ func (c *Client) addOperationSearchAgreementsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -398,11 +346,3 @@ type SearchAgreementsAPIClient interface {
 }
 
 var _ SearchAgreementsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opSearchAgreements(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SearchAgreements",
-	}
-}

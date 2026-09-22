@@ -4,11 +4,10 @@ package fms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -70,6 +69,33 @@ type GetProtectionStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProtectionStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectionStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectionStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetProtectionStatusRequest_EndTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetProtectionStatusRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MemberAccountId != nil {
+		s.WriteString(schemas.GetProtectionStatusRequest_MemberAccountId, *v.MemberAccountId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetProtectionStatusRequest_NextToken, *v.NextToken)
+	}
+	if v.PolicyId != nil {
+		s.WriteString(schemas.GetProtectionStatusRequest_PolicyId, *v.PolicyId)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetProtectionStatusRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetProtectionStatusOutput struct {
 
 	// The ID of the Firewall Manager administrator account for this policy.
@@ -111,77 +137,70 @@ type GetProtectionStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProtectionStatusOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectionStatusResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectionStatusOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminAccountId != nil {
+		s.WriteString(schemas.GetProtectionStatusResponse_AdminAccountId, *v.AdminAccountId)
+	}
+	if v.Data != nil {
+		s.WriteString(schemas.GetProtectionStatusResponse_Data, *v.Data)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetProtectionStatusResponse_NextToken, *v.NextToken)
+	}
+	if v.ServiceType != "" {
+		s.WriteString(schemas.GetProtectionStatusResponse_ServiceType, string(v.ServiceType))
+	}
+}
+func (v *GetProtectionStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProtectionStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProtectionStatusResponse_AdminAccountId:
+			v.AdminAccountId = new(string)
+			return d.ReadString(schemas.GetProtectionStatusResponse_AdminAccountId, v.AdminAccountId)
+		case schemas.GetProtectionStatusResponse_Data:
+			v.Data = new(string)
+			return d.ReadString(schemas.GetProtectionStatusResponse_Data, v.Data)
+		case schemas.GetProtectionStatusResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetProtectionStatusResponse_NextToken, v.NextToken)
+		case schemas.GetProtectionStatusResponse_ServiceType:
+			var ev string
+			if err := d.ReadString(schemas.GetProtectionStatusResponse_ServiceType, &ev); err != nil {
+				return err
+			}
+			v.ServiceType = types.SecurityServiceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProtectionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectionStatus, schemas.GetProtectionStatusRequest, schemas.GetProtectionStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetProtectionStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectionStatus, schemas.GetProtectionStatusRequest, schemas.GetProtectionStatusResponse), output: &GetProtectionStatusOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetProtectionStatus{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProtectionStatus"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetProtectionStatusValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProtectionStatus(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,22 +215,8 @@ func (c *Client) addOperationGetProtectionStatusMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetProtectionStatus(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetProtectionStatus",
-	}
 }

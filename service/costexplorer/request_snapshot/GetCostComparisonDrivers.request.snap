@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.GetCostComparisonDrivers
+
+{"BaselineTimePeriod":{"End":"__End__","Start":"__Start__"},"BillingViewArn":"__BillingViewArn__","ComparisonTimePeriod":{"End":"__End__","Start":"__Start__"},"Filter":{"And":[{},{}],"CostCategories":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Dimensions":{"Key":"AZ","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Or":[{},{}],"Tags":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]}},"GroupBy":[{"Key":"__Key__","Type":"DIMENSION"},{"Key":"__Key__","Type":"DIMENSION"}],"MaxResults":1,"MetricForComparison":"__MetricForComparison__","NextPageToken":"__NextPageToken__"}

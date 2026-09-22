@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: CostOptimizationHubService.ListEfficiencyMetrics
+
+{"efficiencyMetricsByGroup":[{"group":"__Group__","message":"__Message__","metricsByTime":[{"savings":1,"score":1,"spend":1,"timestamp":"__Timestamp__"},{"savings":1,"score":1,"spend":1,"timestamp":"__Timestamp__"}]},{"group":"__Group__","message":"__Message__","metricsByTime":[{"savings":1,"score":1,"spend":1,"timestamp":"__Timestamp__"},{"savings":1,"score":1,"spend":1,"timestamp":"__Timestamp__"}]}],"nextToken":"__NextToken__"}

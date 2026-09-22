@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApproximateTotalCount":1,"NextToken":"__NextToken__","PredefinedAttributes":[{"AttributeConfiguration":{"EnableValueValidationOnAssociation":true,"IsReadOnly":true},"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","Purposes":["__Member__","__Member__"],"Values":{"StringList":["__Member__","__Member__"]}},{"AttributeConfiguration":{"EnableValueValidationOnAssociation":true,"IsReadOnly":true},"LastModifiedRegion":"__LastModifiedRegion__","LastModifiedTime":946684800,"Name":"__Name__","Purposes":["__Member__","__Member__"],"Values":{"StringList":["__Member__","__Member__"]}}]}

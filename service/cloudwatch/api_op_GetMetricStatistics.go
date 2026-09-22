@@ -4,11 +4,10 @@ package cloudwatch
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -187,6 +186,36 @@ type GetMetricStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricStatisticsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensions(s, schemas.GetMetricStatisticsInput_Dimensions, v.Dimensions)
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetMetricStatisticsInput_EndTime, *v.EndTime)
+	}
+	serializeExtendedStatistics(s, schemas.GetMetricStatisticsInput_ExtendedStatistics, v.ExtendedStatistics)
+	if v.MetricName != nil {
+		s.WriteString(schemas.GetMetricStatisticsInput_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.GetMetricStatisticsInput_Namespace, *v.Namespace)
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.GetMetricStatisticsInput_Period, *v.Period)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetMetricStatisticsInput_StartTime, *v.StartTime)
+	}
+	serializeStatistics(s, schemas.GetMetricStatisticsInput_Statistics, v.Statistics)
+	if v.Unit != "" {
+		s.WriteString(schemas.GetMetricStatisticsInput_Unit, string(v.Unit))
+	}
+}
+
 type GetMetricStatisticsOutput struct {
 
 	// The data points for the specified metric.
@@ -201,65 +230,45 @@ type GetMetricStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetricStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetricStatisticsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetricStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatapoints(s, schemas.GetMetricStatisticsOutput_Datapoints, v.Datapoints)
+	if v.Label != nil {
+		s.WriteString(schemas.GetMetricStatisticsOutput_Label, *v.Label)
+	}
+}
+func (v *GetMetricStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetricStatisticsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetricStatisticsOutput_Datapoints:
+			return deserializeDatapoints(d, schemas.GetMetricStatisticsOutput_Datapoints, &v.Datapoints)
+		case schemas.GetMetricStatisticsOutput_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.GetMetricStatisticsOutput_Label, v.Label)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetricStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricStatistics, schemas.GetMetricStatisticsInput, schemas.GetMetricStatisticsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetMetricStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetricStatistics, schemas.GetMetricStatisticsInput, schemas.GetMetricStatisticsOutput), output: &GetMetricStatisticsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetMetricStatistics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMetricStatistics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -269,12 +278,6 @@ func (c *Client) addOperationGetMetricStatisticsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpGetMetricStatisticsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMetricStatistics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -289,22 +292,8 @@ func (c *Client) addOperationGetMetricStatisticsMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMetricStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMetricStatistics",
-	}
 }

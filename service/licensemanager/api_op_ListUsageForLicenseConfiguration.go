@@ -4,11 +4,10 @@ package licensemanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all license usage records for a license configuration, displaying license
@@ -57,6 +56,25 @@ type ListUsageForLicenseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsageForLicenseConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsageForLicenseConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsageForLicenseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilters(s, schemas.ListUsageForLicenseConfigurationRequest_Filters, v.Filters)
+	if v.LicenseConfigurationArn != nil {
+		s.WriteString(schemas.ListUsageForLicenseConfigurationRequest_LicenseConfigurationArn, *v.LicenseConfigurationArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUsageForLicenseConfigurationRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsageForLicenseConfigurationRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListUsageForLicenseConfigurationOutput struct {
 
 	// Information about the license configurations.
@@ -71,77 +89,51 @@ type ListUsageForLicenseConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsageForLicenseConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsageForLicenseConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsageForLicenseConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLicenseConfigurationUsageList(s, schemas.ListUsageForLicenseConfigurationResponse_LicenseConfigurationUsageList, v.LicenseConfigurationUsageList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsageForLicenseConfigurationResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListUsageForLicenseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsageForLicenseConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsageForLicenseConfigurationResponse_LicenseConfigurationUsageList:
+			return deserializeLicenseConfigurationUsageList(d, schemas.ListUsageForLicenseConfigurationResponse_LicenseConfigurationUsageList, &v.LicenseConfigurationUsageList)
+		case schemas.ListUsageForLicenseConfigurationResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsageForLicenseConfigurationResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsageForLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsageForLicenseConfiguration, schemas.ListUsageForLicenseConfigurationRequest, schemas.ListUsageForLicenseConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListUsageForLicenseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsageForLicenseConfiguration, schemas.ListUsageForLicenseConfigurationRequest, schemas.ListUsageForLicenseConfigurationResponse), output: &ListUsageForLicenseConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListUsageForLicenseConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUsageForLicenseConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListUsageForLicenseConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUsageForLicenseConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +148,8 @@ func (c *Client) addOperationListUsageForLicenseConfigurationMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListUsageForLicenseConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListUsageForLicenseConfiguration",
-	}
 }

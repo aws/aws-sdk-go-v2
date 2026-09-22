@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"KinesisVideoStreamPoolConfiguration":{"CreatedTimestamp":"2000-01-01T00:00:00Z","PoolArn":"__PoolArn__","PoolId":"__PoolId__","PoolName":"__PoolName__","PoolSize":1,"PoolStatus":"CREATING","StreamConfiguration":{"DataRetentionInHours":1,"Region":"__Region__"},"UpdatedTimestamp":"2000-01-01T00:00:00Z"}}

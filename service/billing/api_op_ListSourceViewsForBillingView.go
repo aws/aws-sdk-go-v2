@@ -5,9 +5,9 @@ package billing
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the source views (managed Amazon Web Services billing views) associated
@@ -44,6 +44,24 @@ type ListSourceViewsForBillingViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceViewsForBillingViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceViewsForBillingViewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceViewsForBillingViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListSourceViewsForBillingViewRequest_arn, *v.Arn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSourceViewsForBillingViewRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceViewsForBillingViewRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListSourceViewsForBillingViewOutput struct {
 
 	// A list of billing views used as the data source for the custom billing view.
@@ -60,77 +78,51 @@ type ListSourceViewsForBillingViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSourceViewsForBillingViewOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSourceViewsForBillingViewResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSourceViewsForBillingViewOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSourceViewsForBillingViewResponse_nextToken, *v.NextToken)
+	}
+	serializeBillingViewSourceViewsList(s, schemas.ListSourceViewsForBillingViewResponse_sourceViews, v.SourceViews)
+}
+func (v *ListSourceViewsForBillingViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSourceViewsForBillingViewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSourceViewsForBillingViewResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSourceViewsForBillingViewResponse_nextToken, v.NextToken)
+		case schemas.ListSourceViewsForBillingViewResponse_sourceViews:
+			return deserializeBillingViewSourceViewsList(d, schemas.ListSourceViewsForBillingViewResponse_sourceViews, &v.SourceViews)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSourceViewsForBillingViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceViewsForBillingView, schemas.ListSourceViewsForBillingViewRequest, schemas.ListSourceViewsForBillingViewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListSourceViewsForBillingView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSourceViewsForBillingView, schemas.ListSourceViewsForBillingViewRequest, schemas.ListSourceViewsForBillingViewResponse), output: &ListSourceViewsForBillingViewOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListSourceViewsForBillingView{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSourceViewsForBillingView"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListSourceViewsForBillingViewValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSourceViewsForBillingView(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +135,6 @@ func (c *Client) addOperationListSourceViewsForBillingViewMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -252,11 +238,3 @@ type ListSourceViewsForBillingViewAPIClient interface {
 }
 
 var _ ListSourceViewsForBillingViewAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListSourceViewsForBillingView(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListSourceViewsForBillingView",
-	}
-}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateTrial
+
+{"DisplayName":"__DisplayName__","ExperimentName":"__ExperimentName__","MetadataProperties":{"CommitId":"__CommitId__","GeneratedBy":"__GeneratedBy__","ProjectId":"__ProjectId__","Repository":"__Repository__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TrialName":"__TrialName__"}

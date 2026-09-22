@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","TransitGatewayConnectPeerAssociations":[{"DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkId":"__LinkId__","State":"PENDING","TransitGatewayConnectPeerArn":"__TransitGatewayConnectPeerArn__"},{"DeviceId":"__DeviceId__","GlobalNetworkId":"__GlobalNetworkId__","LinkId":"__LinkId__","State":"PENDING","TransitGatewayConnectPeerArn":"__TransitGatewayConnectPeerArn__"}]}

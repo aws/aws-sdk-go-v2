@@ -4,11 +4,10 @@ package marketplaceagreement
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts an agreement request to finalize the agreement. The acceptor can
@@ -42,6 +41,19 @@ type AcceptAgreementRequestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptAgreementRequestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptAgreementRequestInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptAgreementRequestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementRequestId != nil {
+		s.WriteString(schemas.AcceptAgreementRequestInput_agreementRequestId, *v.AgreementRequestId)
+	}
+	serializePurchaseOrders(s, schemas.AcceptAgreementRequestInput_purchaseOrders, v.PurchaseOrders)
+}
+
 type AcceptAgreementRequestOutput struct {
 
 	// The unique identifier of the agreement created or modified by accepting the
@@ -54,77 +66,48 @@ type AcceptAgreementRequestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptAgreementRequestOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptAgreementRequestOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptAgreementRequestOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.AcceptAgreementRequestOutput_agreementId, *v.AgreementId)
+	}
+}
+func (v *AcceptAgreementRequestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptAgreementRequestOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptAgreementRequestOutput_agreementId:
+			v.AgreementId = new(string)
+			return d.ReadString(schemas.AcceptAgreementRequestOutput_agreementId, v.AgreementId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptAgreementRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAgreementRequest, schemas.AcceptAgreementRequestInput, schemas.AcceptAgreementRequestOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAcceptAgreementRequest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptAgreementRequest, schemas.AcceptAgreementRequestInput, schemas.AcceptAgreementRequestOutput), output: &AcceptAgreementRequestOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAcceptAgreementRequest{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptAgreementRequest"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAcceptAgreementRequestValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptAgreementRequest(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +122,8 @@ func (c *Client) addOperationAcceptAgreementRequestMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAcceptAgreementRequest(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AcceptAgreementRequest",
-	}
 }

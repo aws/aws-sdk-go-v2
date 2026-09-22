@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.ListDomains
+
+{"maximumPageSize":1,"nextPageToken":"__NextPageToken__","registrationStatus":"REGISTERED","reverseOrder":true}

@@ -101,6 +101,9 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberAthenaProperties:
 		_ = v.Value // Value is types.AthenaPropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberGitProperties:
+		_ = v.Value // Value is types.GitPropertiesInput
+
 	case *types.ConnectionPropertiesInputMemberGlueProperties:
 		_ = v.Value // Value is types.GluePropertiesInput
 
@@ -122,11 +125,17 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 	case *types.ConnectionPropertiesInputMemberS3Properties:
 		_ = v.Value // Value is types.S3PropertiesInput
 
+	case *types.ConnectionPropertiesInputMemberSnowflakeProperties:
+		_ = v.Value // Value is types.SnowflakePropertiesInput
+
 	case *types.ConnectionPropertiesInputMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesInput
 
 	case *types.ConnectionPropertiesInputMemberSparkGlueProperties:
 		_ = v.Value // Value is types.SparkGluePropertiesInput
+
+	case *types.ConnectionPropertiesInputMemberVpcProperties:
+		_ = v.Value // Value is types.VpcPropertiesInput
 
 	case *types.ConnectionPropertiesInputMemberWorkflowsMwaaProperties:
 		_ = v.Value // Value is types.WorkflowsMwaaPropertiesInput
@@ -145,12 +154,15 @@ func ExampleConnectionPropertiesInput_outputUsage() {
 
 var _ *types.SparkEmrPropertiesInput
 var _ *types.LakehousePropertiesInput
+var _ *types.VpcPropertiesInput
 var _ *types.AthenaPropertiesInput
 var _ *types.SparkGluePropertiesInput
 var _ *types.HyperPodPropertiesInput
 var _ *types.WorkflowsServerlessPropertiesInput
 var _ *types.WorkflowsMwaaPropertiesInput
+var _ *types.GitPropertiesInput
 var _ *types.AmazonQPropertiesInput
+var _ *types.SnowflakePropertiesInput
 var _ *types.GluePropertiesInput
 var _ *types.S3PropertiesInput
 var _ *types.IamPropertiesInput
@@ -166,6 +178,9 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 
 	case *types.ConnectionPropertiesOutputMemberAthenaProperties:
 		_ = v.Value // Value is types.AthenaPropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberGitProperties:
+		_ = v.Value // Value is types.GitPropertiesOutput
 
 	case *types.ConnectionPropertiesOutputMemberGlueProperties:
 		_ = v.Value // Value is types.GluePropertiesOutput
@@ -188,11 +203,17 @@ func ExampleConnectionPropertiesOutput_outputUsage() {
 	case *types.ConnectionPropertiesOutputMemberS3Properties:
 		_ = v.Value // Value is types.S3PropertiesOutput
 
+	case *types.ConnectionPropertiesOutputMemberSnowflakeProperties:
+		_ = v.Value // Value is types.SnowflakePropertiesOutput
+
 	case *types.ConnectionPropertiesOutputMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesOutput
 
 	case *types.ConnectionPropertiesOutputMemberSparkGlueProperties:
 		_ = v.Value // Value is types.SparkGluePropertiesOutput
+
+	case *types.ConnectionPropertiesOutputMemberVpcProperties:
+		_ = v.Value // Value is types.VpcPropertiesOutput
 
 	case *types.ConnectionPropertiesOutputMemberWorkflowsMwaaProperties:
 		_ = v.Value // Value is types.WorkflowsMwaaPropertiesOutput
@@ -214,11 +235,14 @@ var _ *types.S3PropertiesOutput
 var _ *types.WorkflowsMwaaPropertiesOutput
 var _ *types.AthenaPropertiesOutput
 var _ *types.SparkGluePropertiesOutput
+var _ *types.GitPropertiesOutput
 var _ *types.AmazonQPropertiesOutput
 var _ *types.HyperPodPropertiesOutput
 var _ *types.SparkEmrPropertiesOutput
 var _ *types.LakehousePropertiesOutput
+var _ *types.VpcPropertiesOutput
 var _ *types.IamPropertiesOutput
+var _ *types.SnowflakePropertiesOutput
 var _ *types.WorkflowsServerlessPropertiesOutput
 var _ *types.RedshiftPropertiesOutput
 var _ *types.GluePropertiesOutput
@@ -232,6 +256,9 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 
 	case *types.ConnectionPropertiesPatchMemberAthenaProperties:
 		_ = v.Value // Value is types.AthenaPropertiesPatch
+
+	case *types.ConnectionPropertiesPatchMemberGitProperties:
+		_ = v.Value // Value is types.GitPropertiesPatch
 
 	case *types.ConnectionPropertiesPatchMemberGlueProperties:
 		_ = v.Value // Value is types.GluePropertiesPatch
@@ -251,8 +278,14 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 	case *types.ConnectionPropertiesPatchMemberS3Properties:
 		_ = v.Value // Value is types.S3PropertiesPatch
 
+	case *types.ConnectionPropertiesPatchMemberSnowflakeProperties:
+		_ = v.Value // Value is types.SnowflakePropertiesPatch
+
 	case *types.ConnectionPropertiesPatchMemberSparkEmrProperties:
 		_ = v.Value // Value is types.SparkEmrPropertiesPatch
+
+	case *types.ConnectionPropertiesPatchMemberVpcProperties:
+		_ = v.Value // Value is types.VpcPropertiesPatch
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -264,6 +297,7 @@ func ExampleConnectionPropertiesPatch_outputUsage() {
 }
 
 var _ *types.AmazonQPropertiesPatch
+var _ *types.GitPropertiesPatch
 var _ *types.SparkEmrPropertiesPatch
 var _ *types.MlflowPropertiesPatch
 var _ *types.IamPropertiesPatch
@@ -271,7 +305,9 @@ var _ *types.RedshiftPropertiesPatch
 var _ *types.AthenaPropertiesPatch
 var _ *types.GluePropertiesPatch
 var _ *types.LakehousePropertiesPatch
+var _ *types.SnowflakePropertiesPatch
 var _ *types.S3PropertiesPatch
+var _ *types.VpcPropertiesPatch
 
 func ExampleDataSourceConfigurationInput_outputUsage() {
 	var union types.DataSourceConfigurationInput

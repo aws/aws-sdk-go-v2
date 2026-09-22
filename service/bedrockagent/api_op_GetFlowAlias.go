@@ -4,11 +4,10 @@ package bedrockagent
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -44,6 +43,21 @@ type GetFlowAliasInput struct {
 	FlowIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFlowAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasIdentifier != nil {
+		s.WriteString(schemas.GetFlowAliasRequest_aliasIdentifier, *v.AliasIdentifier)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.GetFlowAliasRequest_flowIdentifier, *v.FlowIdentifier)
+	}
 }
 
 type GetFlowAliasOutput struct {
@@ -95,77 +109,95 @@ type GetFlowAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFlowAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFlowAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFlowAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFlowAliasResponse_arn, *v.Arn)
+	}
+	if v.ConcurrencyConfiguration != nil {
+		s.WriteStruct(schemas.GetFlowAliasResponse_concurrencyConfiguration)
+		v.ConcurrencyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetFlowAliasResponse_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFlowAliasResponse_description, *v.Description)
+	}
+	if v.FlowId != nil {
+		s.WriteString(schemas.GetFlowAliasResponse_flowId, *v.FlowId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFlowAliasResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetFlowAliasResponse_name, *v.Name)
+	}
+	serializeFlowAliasRoutingConfiguration(s, schemas.GetFlowAliasResponse_routingConfiguration, v.RoutingConfiguration)
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetFlowAliasResponse_updatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GetFlowAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFlowAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFlowAliasResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFlowAliasResponse_arn, v.Arn)
+		case schemas.GetFlowAliasResponse_concurrencyConfiguration:
+			v.ConcurrencyConfiguration = &types.FlowAliasConcurrencyConfiguration{}
+			return v.ConcurrencyConfiguration.Deserialize(d)
+		case schemas.GetFlowAliasResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFlowAliasResponse_createdAt, v.CreatedAt)
+		case schemas.GetFlowAliasResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFlowAliasResponse_description, v.Description)
+		case schemas.GetFlowAliasResponse_flowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.GetFlowAliasResponse_flowId, v.FlowId)
+		case schemas.GetFlowAliasResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFlowAliasResponse_id, v.Id)
+		case schemas.GetFlowAliasResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFlowAliasResponse_name, v.Name)
+		case schemas.GetFlowAliasResponse_routingConfiguration:
+			return deserializeFlowAliasRoutingConfiguration(d, schemas.GetFlowAliasResponse_routingConfiguration, &v.RoutingConfiguration)
+		case schemas.GetFlowAliasResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFlowAliasResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFlowAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowAlias, schemas.GetFlowAliasRequest, schemas.GetFlowAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFlowAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFlowAlias, schemas.GetFlowAliasRequest, schemas.GetFlowAliasResponse), output: &GetFlowAliasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFlowAlias{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFlowAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFlowAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFlowAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,22 +212,8 @@ func (c *Client) addOperationGetFlowAliasMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFlowAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFlowAlias",
-	}
 }

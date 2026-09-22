@@ -1,0 +1,5 @@
+POST /DeleteReplicationConfigurationTemplate
+
+Content-Type: application/json
+
+{"replicationConfigurationTemplateID":"__ReplicationConfigurationTemplateID__"}

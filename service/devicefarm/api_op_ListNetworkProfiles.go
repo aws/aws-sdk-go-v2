@@ -4,11 +4,10 @@ package devicefarm
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the list of available network profiles.
@@ -46,6 +45,24 @@ type ListNetworkProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListNetworkProfilesRequest_arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkProfilesRequest_nextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListNetworkProfilesRequest_type, string(v.Type))
+	}
+}
+
 type ListNetworkProfilesOutput struct {
 
 	// A list of the available network profiles.
@@ -61,77 +78,51 @@ type ListNetworkProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNetworkProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNetworkProfilesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNetworkProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNetworkProfiles(s, schemas.ListNetworkProfilesResult_networkProfiles, v.NetworkProfiles)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNetworkProfilesResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListNetworkProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNetworkProfilesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNetworkProfilesResult_networkProfiles:
+			return deserializeNetworkProfiles(d, schemas.ListNetworkProfilesResult_networkProfiles, &v.NetworkProfiles)
+		case schemas.ListNetworkProfilesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNetworkProfilesResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNetworkProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkProfiles, schemas.ListNetworkProfilesRequest, schemas.ListNetworkProfilesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListNetworkProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNetworkProfiles, schemas.ListNetworkProfilesRequest, schemas.ListNetworkProfilesResult), output: &ListNetworkProfilesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListNetworkProfiles{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNetworkProfiles"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListNetworkProfilesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNetworkProfiles(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,22 +137,8 @@ func (c *Client) addOperationListNetworkProfilesMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListNetworkProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListNetworkProfiles",
-	}
 }

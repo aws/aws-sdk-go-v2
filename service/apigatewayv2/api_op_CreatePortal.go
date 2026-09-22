@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -62,6 +61,38 @@ type CreatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.CreatePortalRequest_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointConfiguration != nil {
+		s.WriteStruct(schemas.CreatePortalRequest_EndpointConfiguration)
+		v.EndpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__stringMin20Max2048(s, schemas.CreatePortalRequest_IncludedPortalProductArns, v.IncludedPortalProductArns)
+	if v.LogoUri != nil {
+		s.WriteString(schemas.CreatePortalRequest_LogoUri, *v.LogoUri)
+	}
+	if v.PortalContent != nil {
+		s.WriteStruct(schemas.CreatePortalRequest_PortalContent)
+		v.PortalContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RumAppMonitorName != nil {
+		s.WriteString(schemas.CreatePortalRequest_RumAppMonitorName, *v.RumAppMonitorName)
+	}
+	serializeTags(s, schemas.CreatePortalRequest_Tags, v.Tags)
+}
+
 type CreatePortalOutput struct {
 
 	// The authorization for the portal. Supports Cognito-based user authentication or
@@ -112,77 +143,126 @@ type CreatePortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePortalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePortalResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePortalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.CreatePortalResponse_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndpointConfiguration != nil {
+		s.WriteStruct(schemas.CreatePortalResponse_EndpointConfiguration)
+		v.EndpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__stringMin20Max2048(s, schemas.CreatePortalResponse_IncludedPortalProductArns, v.IncludedPortalProductArns)
+	if v.LastModified != nil {
+		s.WriteTime(schemas.CreatePortalResponse_LastModified, *v.LastModified)
+	}
+	if v.LastPublished != nil {
+		s.WriteTime(schemas.CreatePortalResponse_LastPublished, *v.LastPublished)
+	}
+	if v.LastPublishedDescription != nil {
+		s.WriteString(schemas.CreatePortalResponse_LastPublishedDescription, *v.LastPublishedDescription)
+	}
+	if v.PortalArn != nil {
+		s.WriteString(schemas.CreatePortalResponse_PortalArn, *v.PortalArn)
+	}
+	if v.PortalContent != nil {
+		s.WriteStruct(schemas.CreatePortalResponse_PortalContent)
+		v.PortalContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PortalId != nil {
+		s.WriteString(schemas.CreatePortalResponse_PortalId, *v.PortalId)
+	}
+	if v.PublishStatus != "" {
+		s.WriteString(schemas.CreatePortalResponse_PublishStatus, string(v.PublishStatus))
+	}
+	if v.RumAppMonitorName != nil {
+		s.WriteString(schemas.CreatePortalResponse_RumAppMonitorName, *v.RumAppMonitorName)
+	}
+	if v.StatusException != nil {
+		s.WriteStruct(schemas.CreatePortalResponse_StatusException)
+		v.StatusException.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreatePortalResponse_Tags, v.Tags)
+}
+func (v *CreatePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePortalResponse_Authorization:
+			v.Authorization = &types.Authorization{}
+			return v.Authorization.Deserialize(d)
+		case schemas.CreatePortalResponse_EndpointConfiguration:
+			v.EndpointConfiguration = &types.EndpointConfigurationResponse{}
+			return v.EndpointConfiguration.Deserialize(d)
+		case schemas.CreatePortalResponse_IncludedPortalProductArns:
+			return deserialize__listOf__stringMin20Max2048(d, schemas.CreatePortalResponse_IncludedPortalProductArns, &v.IncludedPortalProductArns)
+		case schemas.CreatePortalResponse_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.CreatePortalResponse_LastModified, v.LastModified)
+		case schemas.CreatePortalResponse_LastPublished:
+			v.LastPublished = new(time.Time)
+			return d.ReadTime(schemas.CreatePortalResponse_LastPublished, v.LastPublished)
+		case schemas.CreatePortalResponse_LastPublishedDescription:
+			v.LastPublishedDescription = new(string)
+			return d.ReadString(schemas.CreatePortalResponse_LastPublishedDescription, v.LastPublishedDescription)
+		case schemas.CreatePortalResponse_PortalArn:
+			v.PortalArn = new(string)
+			return d.ReadString(schemas.CreatePortalResponse_PortalArn, v.PortalArn)
+		case schemas.CreatePortalResponse_PortalContent:
+			v.PortalContent = &types.PortalContent{}
+			return v.PortalContent.Deserialize(d)
+		case schemas.CreatePortalResponse_PortalId:
+			v.PortalId = new(string)
+			return d.ReadString(schemas.CreatePortalResponse_PortalId, v.PortalId)
+		case schemas.CreatePortalResponse_PublishStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreatePortalResponse_PublishStatus, &ev); err != nil {
+				return err
+			}
+			v.PublishStatus = types.PublishStatus(ev)
+			return nil
+		case schemas.CreatePortalResponse_RumAppMonitorName:
+			v.RumAppMonitorName = new(string)
+			return d.ReadString(schemas.CreatePortalResponse_RumAppMonitorName, v.RumAppMonitorName)
+		case schemas.CreatePortalResponse_StatusException:
+			v.StatusException = &types.StatusException{}
+			return v.StatusException.Deserialize(d)
+		case schemas.CreatePortalResponse_Tags:
+			return deserializeTags(d, schemas.CreatePortalResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortal, schemas.CreatePortalRequest, schemas.CreatePortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortal, schemas.CreatePortalRequest, schemas.CreatePortalResponse), output: &CreatePortalOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePortal{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePortal"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePortalValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePortal(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,22 +277,8 @@ func (c *Client) addOperationCreatePortalMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePortal(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePortal",
-	}
 }

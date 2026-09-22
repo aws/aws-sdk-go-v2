@@ -1,0 +1,5 @@
+POST /v1/revoke?x-amz-client-auth-method=iam
+
+Content-Type: application/json
+
+{"token":"__Token__"}

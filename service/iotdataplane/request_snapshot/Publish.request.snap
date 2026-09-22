@@ -1,0 +1,8 @@
+POST /topics/__Topic__?contentType=__ContentType__&messageExpiry=1&qos=1&responseTopic=__ResponseTopic__&retain=true
+
+Content-Type: application/octet-stream
+X-Amz-Mqtt5-Correlation-Data: __CorrelationData__
+X-Amz-Mqtt5-Payload-Format-Indicator: UNSPECIFIED_BYTES
+X-Amz-Mqtt5-User-Properties: X19Vc2VyUHJvcGVydGllc19f
+
+blob

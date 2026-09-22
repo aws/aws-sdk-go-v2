@@ -35,14 +35,17 @@ func (m *awsRestjson1_deserializeOpAutocomplete) HandleDeserialize(ctx context.C
 		return out, metadata, err
 	}
 
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorAutocomplete(response, &metadata)
@@ -213,14 +216,17 @@ func (m *awsRestjson1_deserializeOpGeocode) HandleDeserialize(ctx context.Contex
 		return out, metadata, err
 	}
 
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorGeocode(response, &metadata)
@@ -391,14 +397,17 @@ func (m *awsRestjson1_deserializeOpGetPlace) HandleDeserialize(ctx context.Conte
 		return out, metadata, err
 	}
 
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorGetPlace(response, &metadata)
@@ -579,6 +588,20 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 				return err
 			}
 
+		case "CrossReferences":
+			if err := awsRestjson1_deserializeDocumentCrossReferenceList(&sv.CrossReferences, value); err != nil {
+				return err
+			}
+
+		case "EstimatedPointAddress":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EstimatedPointAddress = ptr.Bool(jtv)
+			}
+
 		case "FoodTypes":
 			if err := awsRestjson1_deserializeDocumentFoodTypeList(&sv.FoodTypes, value); err != nil {
 				return err
@@ -601,6 +624,11 @@ func awsRestjson1_deserializeOpDocumentGetPlaceOutput(v **GetPlaceOutput, value 
 
 		case "Phonemes":
 			if err := awsRestjson1_deserializeDocumentPhonemeDetails(&sv.Phonemes, value); err != nil {
+				return err
+			}
+
+		case "PlaceAttributes":
+			if err := awsRestjson1_deserializeDocumentPlaceAttributeList(&sv.PlaceAttributes, value); err != nil {
 				return err
 			}
 
@@ -684,14 +712,17 @@ func (m *awsRestjson1_deserializeOpReverseGeocode) HandleDeserialize(ctx context
 		return out, metadata, err
 	}
 
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorReverseGeocode(response, &metadata)
@@ -862,14 +893,17 @@ func (m *awsRestjson1_deserializeOpSearchNearby) HandleDeserialize(ctx context.C
 		return out, metadata, err
 	}
 
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorSearchNearby(response, &metadata)
@@ -1049,14 +1083,17 @@ func (m *awsRestjson1_deserializeOpSearchText) HandleDeserialize(ctx context.Con
 		return out, metadata, err
 	}
 
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorSearchText(response, &metadata)
@@ -1236,14 +1273,17 @@ func (m *awsRestjson1_deserializeOpSuggest) HandleDeserialize(ctx context.Contex
 		return out, metadata, err
 	}
 
-	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
-	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
-	defer endTimer()
-	defer span.End()
 	response, ok := out.RawResponse.(*smithyhttp.Response)
 	if !ok {
 		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
 	}
+
+	defer func() { smithyhttp.CloseResponseBody(ctx, response, false, err) }()
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
 
 	if response.StatusCode < 200 || response.StatusCode >= 300 {
 		return out, metadata, awsRestjson1_deserializeOpErrorSuggest(response, &metadata)
@@ -1610,9 +1650,36 @@ func awsRestjson1_deserializeDocumentAccessPoint(v **types.AccessPoint, value in
 
 	for key, value := range shape {
 		switch key {
+		case "Label":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Label = ptr.String(jtv)
+			}
+
 		case "Position":
 			if err := awsRestjson1_deserializeDocumentPosition(&sv.Position, value); err != nil {
 				return err
+			}
+
+		case "Primary":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Primary = ptr.Bool(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessPointType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.AccessPointType(jtv)
 			}
 
 		default:
@@ -2379,6 +2446,85 @@ func awsRestjson1_deserializeDocumentAddressComponentPhonemes(v **types.AddressC
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAdminNames(v **types.AdminNames, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdminNames
+	if *v == nil {
+		sv = &types.AdminNames{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Names":
+			if err := awsRestjson1_deserializeDocumentTranslationNameList(&sv.Names, value); err != nil {
+				return err
+			}
+
+		case "Preference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdminNamesPreference to be of type string, got %T instead", value)
+				}
+				sv.Preference = types.AdminNamesPreference(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdminNamesList(v *[]types.AdminNames, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdminNames
+	if *v == nil {
+		cv = []types.AdminNames{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdminNames
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAdminNames(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAutocompleteAddressHighlights(v **types.AutocompleteAddressHighlights, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2559,6 +2705,15 @@ func awsRestjson1_deserializeDocumentAutocompleteResultItem(v **types.Autocomple
 					return err
 				}
 				sv.Distance = i64
+			}
+
+		case "EstimatedPointAddress":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EstimatedPointAddress = ptr.Bool(jtv)
 			}
 
 		case "Highlights":
@@ -3207,6 +3362,94 @@ func awsRestjson1_deserializeDocumentCountryHighlights(v **types.CountryHighligh
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCrossReference(v **types.CrossReference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CrossReference
+	if *v == nil {
+		sv = &types.CrossReference{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Source = ptr.String(jtv)
+			}
+
+		case "SourceCategories":
+			if err := awsRestjson1_deserializeDocumentCategoryList(&sv.SourceCategories, value); err != nil {
+				return err
+			}
+
+		case "SourcePlaceId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.SourcePlaceId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCrossReferenceList(v *[]types.CrossReference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CrossReference
+	if *v == nil {
+		cv = []types.CrossReference{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CrossReference
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCrossReference(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFoodType(v **types.FoodType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3392,6 +3635,11 @@ func awsRestjson1_deserializeDocumentGeocodeParsedQueryAddressComponents(v **typ
 				return err
 			}
 
+		case "OtherComponents":
+			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.OtherComponents, value); err != nil {
+				return err
+			}
+
 		case "PostalCode":
 			if err := awsRestjson1_deserializeDocumentParsedQueryComponentList(&sv.PostalCode, value); err != nil {
 				return err
@@ -3495,6 +3743,15 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 				sv.Distance = i64
 			}
 
+		case "EstimatedPointAddress":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EstimatedPointAddress = ptr.Bool(jtv)
+			}
+
 		case "FoodTypes":
 			if err := awsRestjson1_deserializeDocumentFoodTypeList(&sv.FoodTypes, value); err != nil {
 				return err
@@ -3579,6 +3836,11 @@ func awsRestjson1_deserializeDocumentGeocodeResultItem(v **types.GeocodeResultIt
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Title = ptr.String(jtv)
+			}
+
+		case "Translations":
+			if err := awsRestjson1_deserializeDocumentTranslationDetails(&sv.Translations, value); err != nil {
+				return err
 			}
 
 		default:
@@ -4669,6 +4931,42 @@ func awsRestjson1_deserializeDocumentPhonemeTranscriptionList(v *[]types.Phoneme
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentPlaceAttributeList(v *[]types.PlaceAttribute, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PlaceAttribute
+	if *v == nil {
+		cv = []types.PlaceAttribute{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PlaceAttribute
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PlaceAttribute to be of type string, got %T instead", value)
+			}
+			col = types.PlaceAttribute(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentPosition(v *[]float64, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5197,6 +5495,15 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 				sv.Distance = i64
 			}
 
+		case "EstimatedPointAddress":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.EstimatedPointAddress = ptr.Bool(jtv)
+			}
+
 		case "FoodTypes":
 			if err := awsRestjson1_deserializeDocumentFoodTypeList(&sv.FoodTypes, value); err != nil {
 				return err
@@ -5204,6 +5511,11 @@ func awsRestjson1_deserializeDocumentReverseGeocodeResultItem(v **types.ReverseG
 
 		case "Intersections":
 			if err := awsRestjson1_deserializeDocumentIntersectionList(&sv.Intersections, value); err != nil {
+				return err
+			}
+
+		case "MainAddress":
+			if err := awsRestjson1_deserializeDocumentRelatedPlace(&sv.MainAddress, value); err != nil {
 				return err
 			}
 
@@ -5367,6 +5679,11 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 				return err
 			}
 
+		case "CrossReferences":
+			if err := awsRestjson1_deserializeDocumentCrossReferenceList(&sv.CrossReferences, value); err != nil {
+				return err
+			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5397,6 +5714,11 @@ func awsRestjson1_deserializeDocumentSearchNearbyResultItem(v **types.SearchNear
 
 		case "Phonemes":
 			if err := awsRestjson1_deserializeDocumentPhonemeDetails(&sv.Phonemes, value); err != nil {
+				return err
+			}
+
+		case "PlaceAttributes":
+			if err := awsRestjson1_deserializeDocumentPlaceAttributeList(&sv.PlaceAttributes, value); err != nil {
 				return err
 			}
 
@@ -5550,6 +5872,11 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 				return err
 			}
 
+		case "CrossReferences":
+			if err := awsRestjson1_deserializeDocumentCrossReferenceList(&sv.CrossReferences, value); err != nil {
+				return err
+			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -5580,6 +5907,11 @@ func awsRestjson1_deserializeDocumentSearchTextResultItem(v **types.SearchTextRe
 
 		case "Phonemes":
 			if err := awsRestjson1_deserializeDocumentPhonemeDetails(&sv.Phonemes, value); err != nil {
+				return err
+			}
+
+		case "PlaceAttributes":
+			if err := awsRestjson1_deserializeDocumentPlaceAttributeList(&sv.PlaceAttributes, value); err != nil {
 				return err
 			}
 
@@ -6205,6 +6537,11 @@ func awsRestjson1_deserializeDocumentSuggestPlaceResult(v **types.SuggestPlaceRe
 				return err
 			}
 
+		case "CrossReferences":
+			if err := awsRestjson1_deserializeDocumentCrossReferenceList(&sv.CrossReferences, value); err != nil {
+				return err
+			}
+
 		case "Distance":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6230,6 +6567,11 @@ func awsRestjson1_deserializeDocumentSuggestPlaceResult(v **types.SuggestPlaceRe
 
 		case "Phonemes":
 			if err := awsRestjson1_deserializeDocumentPhonemeDetails(&sv.Phonemes, value); err != nil {
+				return err
+			}
+
+		case "PlaceAttributes":
+			if err := awsRestjson1_deserializeDocumentPlaceAttributeList(&sv.PlaceAttributes, value); err != nil {
 				return err
 			}
 
@@ -6525,6 +6867,167 @@ func awsRestjson1_deserializeDocumentTimeZone(v **types.TimeZone, value interfac
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTranslationDetails(v **types.TranslationDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TranslationDetails
+	if *v == nil {
+		sv = &types.TranslationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "District":
+			if err := awsRestjson1_deserializeDocumentAdminNamesList(&sv.District, value); err != nil {
+				return err
+			}
+
+		case "Locality":
+			if err := awsRestjson1_deserializeDocumentAdminNamesList(&sv.Locality, value); err != nil {
+				return err
+			}
+
+		case "Region":
+			if err := awsRestjson1_deserializeDocumentAdminNamesList(&sv.Region, value); err != nil {
+				return err
+			}
+
+		case "SubRegion":
+			if err := awsRestjson1_deserializeDocumentAdminNamesList(&sv.SubRegion, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTranslationName(v **types.TranslationName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TranslationName
+	if *v == nil {
+		sv = &types.TranslationName{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Language":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LanguageTag to be of type string, got %T instead", value)
+				}
+				sv.Language = ptr.String(jtv)
+			}
+
+		case "Primary":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Primary = ptr.Bool(jtv)
+			}
+
+		case "Transliterated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected SensitiveBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Transliterated = ptr.Bool(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TranslationNameType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.TranslationNameType(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTranslationNameList(v *[]types.TranslationName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TranslationName
+	if *v == nil {
+		cv = []types.TranslationName{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TranslationName
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTranslationName(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

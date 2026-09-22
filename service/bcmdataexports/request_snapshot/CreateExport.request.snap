@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSBillingAndCostManagementDataExports.CreateExport
+
+{"Export":{"DataQuery":{"QueryStatement":"__QueryStatement__","TableConfigurations":{"key0":{"key0":"__Value__"}}},"Description":"__Description__","DestinationConfigurations":{"S3Destination":{"S3Bucket":"__S3Bucket__","S3BucketOwner":"__S3BucketOwner__","S3OutputConfigurations":{"Compression":"GZIP","Format":"TEXT_OR_CSV","OutputType":"CUSTOM","Overwrite":"CREATE_NEW_REPORT"},"S3Prefix":"__S3Prefix__","S3Region":"__S3Region__"}},"ExportArn":"__ExportArn__","Name":"__Name__","RefreshCadence":{"Frequency":"SYNCHRONOUS"}},"ResourceTags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

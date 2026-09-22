@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing cost anomaly subscription. Specify the fields that you want
@@ -105,6 +104,34 @@ type UpdateAnomalySubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnomalySubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnomalySubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnomalySubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Frequency != "" {
+		s.WriteString(schemas.UpdateAnomalySubscriptionRequest_Frequency, string(v.Frequency))
+	}
+	serializeMonitorArnList(s, schemas.UpdateAnomalySubscriptionRequest_MonitorArnList, v.MonitorArnList)
+	serializeSubscribers(s, schemas.UpdateAnomalySubscriptionRequest_Subscribers, v.Subscribers)
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.UpdateAnomalySubscriptionRequest_SubscriptionArn, *v.SubscriptionArn)
+	}
+	if v.SubscriptionName != nil {
+		s.WriteString(schemas.UpdateAnomalySubscriptionRequest_SubscriptionName, *v.SubscriptionName)
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.UpdateAnomalySubscriptionRequest_Threshold, *v.Threshold)
+	}
+	if v.ThresholdExpression != nil {
+		s.WriteStruct(schemas.UpdateAnomalySubscriptionRequest_ThresholdExpression)
+		v.ThresholdExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAnomalySubscriptionOutput struct {
 
 	// A cost anomaly subscription ARN.
@@ -118,77 +145,48 @@ type UpdateAnomalySubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAnomalySubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAnomalySubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAnomalySubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubscriptionArn != nil {
+		s.WriteString(schemas.UpdateAnomalySubscriptionResponse_SubscriptionArn, *v.SubscriptionArn)
+	}
+}
+func (v *UpdateAnomalySubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAnomalySubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAnomalySubscriptionResponse_SubscriptionArn:
+			v.SubscriptionArn = new(string)
+			return d.ReadString(schemas.UpdateAnomalySubscriptionResponse_SubscriptionArn, v.SubscriptionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAnomalySubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnomalySubscription, schemas.UpdateAnomalySubscriptionRequest, schemas.UpdateAnomalySubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateAnomalySubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAnomalySubscription, schemas.UpdateAnomalySubscriptionRequest, schemas.UpdateAnomalySubscriptionResponse), output: &UpdateAnomalySubscriptionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateAnomalySubscription{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAnomalySubscription"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAnomalySubscriptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAnomalySubscription(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,22 +201,8 @@ func (c *Client) addOperationUpdateAnomalySubscriptionMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAnomalySubscription(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAnomalySubscription",
-	}
 }

@@ -4,10 +4,9 @@ package restxml
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This example serializes a blob shape in the payload.
@@ -37,6 +36,33 @@ type HttpPayloadTraitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadTraitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadTraitsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadTraitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.HttpPayloadTraitsInputOutput_blob, v.Blob)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpPayloadTraitsInputOutput_foo, *v.Foo)
+	}
+}
+func (v *HttpPayloadTraitsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadTraitsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadTraitsInputOutput_blob:
+			return d.ReadBlob(schemas.HttpPayloadTraitsInputOutput_blob, &v.Blob)
+		case schemas.HttpPayloadTraitsInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.HttpPayloadTraitsInputOutput_foo, v.Foo)
+		}
+		return nil
+	})
+}
+
 type HttpPayloadTraitsOutput struct {
 	Blob []byte
 
@@ -48,74 +74,50 @@ type HttpPayloadTraitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadTraitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadTraitsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadTraitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.HttpPayloadTraitsInputOutput_blob, v.Blob)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpPayloadTraitsInputOutput_foo, *v.Foo)
+	}
+}
+func (v *HttpPayloadTraitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadTraitsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadTraitsInputOutput_blob:
+			return d.ReadBlob(schemas.HttpPayloadTraitsInputOutput_blob, &v.Blob)
+		case schemas.HttpPayloadTraitsInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.HttpPayloadTraitsInputOutput_foo, v.Foo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpPayloadTraitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadTraits, schemas.HttpPayloadTraitsInputOutput, schemas.HttpPayloadTraitsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadTraits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadTraits, schemas.HttpPayloadTraitsInputOutput, schemas.HttpPayloadTraitsInputOutput), output: &HttpPayloadTraitsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPayloadTraits{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpPayloadTraits"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opHttpPayloadTraits(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -130,22 +132,8 @@ func (c *Client) addOperationHttpPayloadTraitsMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opHttpPayloadTraits(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "HttpPayloadTraits",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /assessments/__AssessmentId__
+
+Content-Type: application/json
+
+{"assessmentDescription":"__AssessmentDescription__","assessmentName":"__AssessmentName__","assessmentReportsDestination":{"destination":"__Destination__","destinationType":"S3"},"roles":[{"roleArn":"__RoleArn__","roleType":"PROCESS_OWNER"},{"roleArn":"__RoleArn__","roleType":"PROCESS_OWNER"}],"scope":{"awsAccounts":[{"emailAddress":"__EmailAddress__","id":"__Id__","name":"__Name__"},{"emailAddress":"__EmailAddress__","id":"__Id__","name":"__Name__"}],"awsServices":[{"serviceName":"__ServiceName__"},{"serviceName":"__ServiceName__"}]}}

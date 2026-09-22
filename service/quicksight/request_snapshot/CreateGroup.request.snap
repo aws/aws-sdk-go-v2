@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/namespaces/__Namespace__/groups
+
+Content-Type: application/json
+
+{"Description":"__Description__","GroupName":"__GroupName__"}

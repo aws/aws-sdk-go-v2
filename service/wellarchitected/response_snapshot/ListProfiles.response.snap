@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","ProfileSummaries":[{"CreatedAt":946684800,"Owner":"__Owner__","ProfileArn":"__ProfileArn__","ProfileDescription":"__ProfileDescription__","ProfileName":"__ProfileName__","ProfileVersion":"__ProfileVersion__","UpdatedAt":946684800},{"CreatedAt":946684800,"Owner":"__Owner__","ProfileArn":"__ProfileArn__","ProfileDescription":"__ProfileDescription__","ProfileName":"__ProfileName__","ProfileVersion":"__ProfileVersion__","UpdatedAt":946684800}]}

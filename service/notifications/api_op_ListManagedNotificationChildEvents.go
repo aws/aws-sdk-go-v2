@@ -5,10 +5,10 @@ package notifications
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -66,6 +66,39 @@ type ListManagedNotificationChildEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationChildEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationChildEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationChildEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregateManagedNotificationEventArn != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_aggregateManagedNotificationEventArn, *v.AggregateManagedNotificationEventArn)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListManagedNotificationChildEventsRequest_endTime, *v.EndTime)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_locale, string(v.Locale))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedNotificationChildEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.RelatedAccount != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsRequest_relatedAccount, *v.RelatedAccount)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListManagedNotificationChildEventsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListManagedNotificationChildEventsOutput struct {
 
 	// A pagination token. If a non-null pagination token is returned in a result,
@@ -84,77 +117,51 @@ type ListManagedNotificationChildEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationChildEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationChildEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationChildEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedNotificationChildEvents(s, schemas.ListManagedNotificationChildEventsResponse_managedNotificationChildEvents, v.ManagedNotificationChildEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationChildEventsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedNotificationChildEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedNotificationChildEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedNotificationChildEventsResponse_managedNotificationChildEvents:
+			return deserializeManagedNotificationChildEvents(d, schemas.ListManagedNotificationChildEventsResponse_managedNotificationChildEvents, &v.ManagedNotificationChildEvents)
+		case schemas.ListManagedNotificationChildEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedNotificationChildEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedNotificationChildEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationChildEvents, schemas.ListManagedNotificationChildEventsRequest, schemas.ListManagedNotificationChildEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedNotificationChildEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationChildEvents, schemas.ListManagedNotificationChildEventsRequest, schemas.ListManagedNotificationChildEventsResponse), output: &ListManagedNotificationChildEventsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedNotificationChildEvents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListManagedNotificationChildEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListManagedNotificationChildEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListManagedNotificationChildEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,12 +174,6 @@ func (c *Client) addOperationListManagedNotificationChildEventsMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -276,11 +277,3 @@ type ListManagedNotificationChildEventsAPIClient interface {
 }
 
 var _ ListManagedNotificationChildEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListManagedNotificationChildEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListManagedNotificationChildEvents",
-	}
-}

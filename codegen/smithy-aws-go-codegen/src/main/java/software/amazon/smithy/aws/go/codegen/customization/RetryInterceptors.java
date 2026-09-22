@@ -18,6 +18,7 @@ public class RetryInterceptors implements GoIntegration {
                                 .useClientOptions()
                                 .build()
                 )
+                .isCommon(true)
                 .build();
     }
 

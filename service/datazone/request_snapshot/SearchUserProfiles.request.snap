@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/search-user-profiles
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__","searchText":"__SearchText__","userType":"SSO_USER"}

@@ -5,10 +5,10 @@ package databasemigrationservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of premigration assessment runs based on filter
@@ -57,6 +57,22 @@ type DescribeReplicationTaskAssessmentRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTaskAssessmentRunsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTaskAssessmentRunsMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTaskAssessmentRunsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.DescribeReplicationTaskAssessmentRunsMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTaskAssessmentRunsMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeReplicationTaskAssessmentRunsMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeReplicationTaskAssessmentRunsOutput struct {
 
 	// A pagination token returned for you to pass to a subsequent request. If you
@@ -74,77 +90,51 @@ type DescribeReplicationTaskAssessmentRunsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeReplicationTaskAssessmentRunsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeReplicationTaskAssessmentRunsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeReplicationTaskAssessmentRunsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeReplicationTaskAssessmentRunsResponse_Marker, *v.Marker)
+	}
+	serializeReplicationTaskAssessmentRunList(s, schemas.DescribeReplicationTaskAssessmentRunsResponse_ReplicationTaskAssessmentRuns, v.ReplicationTaskAssessmentRuns)
+}
+func (v *DescribeReplicationTaskAssessmentRunsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeReplicationTaskAssessmentRunsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeReplicationTaskAssessmentRunsResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeReplicationTaskAssessmentRunsResponse_Marker, v.Marker)
+		case schemas.DescribeReplicationTaskAssessmentRunsResponse_ReplicationTaskAssessmentRuns:
+			return deserializeReplicationTaskAssessmentRunList(d, schemas.DescribeReplicationTaskAssessmentRunsResponse_ReplicationTaskAssessmentRuns, &v.ReplicationTaskAssessmentRuns)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTaskAssessmentRuns, schemas.DescribeReplicationTaskAssessmentRunsMessage, schemas.DescribeReplicationTaskAssessmentRunsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeReplicationTaskAssessmentRuns{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeReplicationTaskAssessmentRuns, schemas.DescribeReplicationTaskAssessmentRunsMessage, schemas.DescribeReplicationTaskAssessmentRunsResponse), output: &DescribeReplicationTaskAssessmentRunsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeReplicationTaskAssessmentRuns{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeReplicationTaskAssessmentRuns"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeReplicationTaskAssessmentRunsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationTaskAssessmentRuns(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +147,6 @@ func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(st
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +252,3 @@ type DescribeReplicationTaskAssessmentRunsAPIClient interface {
 }
 
 var _ DescribeReplicationTaskAssessmentRunsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeReplicationTaskAssessmentRuns(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeReplicationTaskAssessmentRuns",
-	}
-}

@@ -3153,6 +3153,46 @@ func awsRestjson1_serializeOpDocumentUpdateCampaignSourceInput(v *UpdateCampaign
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAbandonmentRatePacingConfig(v *types.AbandonmentRatePacingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ConnectionStartPoint) > 0 {
+		ok := object.Key("connectionStartPoint")
+		ok.String(string(v.ConnectionStartPoint))
+	}
+
+	if v.ConnectionThresholdSeconds != nil {
+		ok := object.Key("connectionThresholdSeconds")
+		ok.Integer(*v.ConnectionThresholdSeconds)
+	}
+
+	if v.EvaluationWindow != nil {
+		ok := object.Key("evaluationWindow")
+		ok.String(*v.EvaluationWindow)
+	}
+
+	if v.TargetRate != nil {
+		ok := object.Key("targetRate")
+		switch {
+		case math.IsNaN(*v.TargetRate):
+			ok.String("NaN")
+
+		case math.IsInf(*v.TargetRate, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.TargetRate, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.TargetRate)
+
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAgentActions(v []types.AgentAction, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3221,6 +3261,20 @@ func awsRestjson1_serializeDocumentCampaignIdList(v []string, value smithyjson.V
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChannelContext(v *types.ChannelContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.WebNotificationContext != nil {
+		ok := object.Key("webNotificationContext")
+		if err := awsRestjson1_serializeDocumentWebNotificationContext(v.WebNotificationContext, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3615,6 +3669,25 @@ func awsRestjson1_serializeDocumentEventTrigger(v *types.EventTrigger, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEventTriggerContext(v *types.EventTriggerContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelContext != nil {
+		ok := object.Key("channelContext")
+		if err := awsRestjson1_serializeDocumentChannelContext(v.ChannelContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceEvent != nil {
+		ok := object.Key("sourceEvent")
+		ok.String(*v.SourceEvent)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInstanceCommunicationLimitsConfig(v *types.InstanceCommunicationLimitsConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3831,6 +3904,40 @@ func awsRestjson1_serializeDocumentOutboundRequestList(v []types.OutboundRequest
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPacingStrategy(v types.PacingStrategy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.PacingStrategyMemberAbandonmentRate:
+		av := object.Key("abandonmentRate")
+		if err := awsRestjson1_serializeDocumentAbandonmentRatePacingConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPacingStrategyList(v []types.PacingStrategy, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentPacingStrategy(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPredictiveConfig(v *types.PredictiveConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3850,6 +3957,13 @@ func awsRestjson1_serializeDocumentPredictiveConfig(v *types.PredictiveConfig, v
 		default:
 			ok.Double(*v.BandwidthAllocation)
 
+		}
+	}
+
+	if v.PacingStrategies != nil {
+		ok := object.Key("pacingStrategies")
+		if err := awsRestjson1_serializeDocumentPacingStrategyList(v.PacingStrategies, ok); err != nil {
+			return err
 		}
 	}
 
@@ -3902,6 +4016,13 @@ func awsRestjson1_serializeDocumentProfileOutboundRequest(v *types.ProfileOutbou
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if v.EventTriggerContext != nil {
+		ok := object.Key("eventTriggerContext")
+		if err := awsRestjson1_serializeDocumentEventTriggerContext(v.EventTriggerContext, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ExpirationTime != nil {
@@ -4393,6 +4514,23 @@ func awsRestjson1_serializeDocumentTimeWindow(v *types.TimeWindow, value smithyj
 		if err := awsRestjson1_serializeDocumentRestrictedPeriods(v.RestrictedPeriods, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWebNotificationContext(v *types.WebNotificationContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BrowserId != nil {
+		ok := object.Key("browserId")
+		ok.String(*v.BrowserId)
+	}
+
+	if v.SessionId != nil {
+		ok := object.Key("sessionId")
+		ok.String(*v.SessionId)
 	}
 
 	return nil

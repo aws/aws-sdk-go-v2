@@ -1,0 +1,5 @@
+PUT /SendWorkflowStepAction
+
+Content-Type: application/json
+
+{"action":"RESUME","clientToken":"__ClientToken__","imageBuildVersionArn":"__ImageBuildVersionArn__","reason":"__Reason__","stepExecutionId":"__StepExecutionId__"}

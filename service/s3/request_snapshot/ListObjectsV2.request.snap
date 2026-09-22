@@ -1,0 +1,7 @@
+GET /?continuation-token=__ContinuationToken__&delimiter=__Delimiter__&encoding-type=url&fetch-owner=true&list-type=2&max-keys=1&prefix=__Prefix__&start-after=__StartAfter__
+
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Optional-Object-Attributes: RestoreStatus
+X-Amz-Optional-Object-Attributes: RestoreStatus
+X-Amz-Request-Payer: requester
+

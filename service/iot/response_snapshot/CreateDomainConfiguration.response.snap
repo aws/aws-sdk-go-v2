@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"domainConfigurationArn":"__DomainConfigurationArn__","domainConfigurationName":"__DomainConfigurationName__"}

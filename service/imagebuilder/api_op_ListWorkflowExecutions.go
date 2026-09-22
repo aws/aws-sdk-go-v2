@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of workflow runtime instance metadata objects for a specific
@@ -36,14 +36,32 @@ type ListWorkflowExecutionsInput struct {
 	// This member is required.
 	ImageBuildVersionArn *string
 
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	MaxResults *int32
 
-	// A token to specify where to start paginating. This is the nextToken from a
+	// A token to specify where to start paginating. Use the nextToken value from a
 	// previously truncated response.
 	NextToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListWorkflowExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.ListWorkflowExecutionsRequest_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkflowExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowExecutionsRequest_nextToken, *v.NextToken)
+	}
 }
 
 type ListWorkflowExecutionsOutput struct {
@@ -73,77 +91,69 @@ type ListWorkflowExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkflowExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkflowExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkflowExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageBuildVersionArn != nil {
+		s.WriteString(schemas.ListWorkflowExecutionsResponse_imageBuildVersionArn, *v.ImageBuildVersionArn)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ListWorkflowExecutionsResponse_message, *v.Message)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkflowExecutionsResponse_nextToken, *v.NextToken)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.ListWorkflowExecutionsResponse_requestId, *v.RequestId)
+	}
+	serializeWorkflowExecutionsList(s, schemas.ListWorkflowExecutionsResponse_workflowExecutions, v.WorkflowExecutions)
+}
+func (v *ListWorkflowExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkflowExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkflowExecutionsResponse_imageBuildVersionArn:
+			v.ImageBuildVersionArn = new(string)
+			return d.ReadString(schemas.ListWorkflowExecutionsResponse_imageBuildVersionArn, v.ImageBuildVersionArn)
+		case schemas.ListWorkflowExecutionsResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ListWorkflowExecutionsResponse_message, v.Message)
+		case schemas.ListWorkflowExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkflowExecutionsResponse_nextToken, v.NextToken)
+		case schemas.ListWorkflowExecutionsResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ListWorkflowExecutionsResponse_requestId, v.RequestId)
+		case schemas.ListWorkflowExecutionsResponse_workflowExecutions:
+			return deserializeWorkflowExecutionsList(d, schemas.ListWorkflowExecutionsResponse_workflowExecutions, &v.WorkflowExecutions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowExecutions, schemas.ListWorkflowExecutionsRequest, schemas.ListWorkflowExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListWorkflowExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkflowExecutions, schemas.ListWorkflowExecutionsRequest, schemas.ListWorkflowExecutionsResponse), output: &ListWorkflowExecutionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListWorkflowExecutions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkflowExecutions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListWorkflowExecutionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkflowExecutions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +168,6 @@ func (c *Client) addOperationListWorkflowExecutionsMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
@@ -173,7 +177,7 @@ func (c *Client) addOperationListWorkflowExecutionsMiddlewares(stack *middleware
 // ListWorkflowExecutionsPaginatorOptions is the paginator options for
 // ListWorkflowExecutions
 type ListWorkflowExecutionsPaginatorOptions struct {
-	// Specify the maximum number of items to return in a request.
+	// The maximum number of items to return in a single request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -263,11 +267,3 @@ type ListWorkflowExecutionsAPIClient interface {
 }
 
 var _ ListWorkflowExecutionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListWorkflowExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListWorkflowExecutions",
-	}
-}

@@ -5,10 +5,10 @@ package mediatailor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediatailor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves existing playback configurations. For information about MediaTailor
@@ -57,6 +57,34 @@ type ListPlaybackConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlaybackConfigurationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackConfigurationsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPlaybackConfigurationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaybackConfigurationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaybackConfigurationsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPlaybackConfigurationsRequest_MaxResults, v.MaxResults)
+		case schemas.ListPlaybackConfigurationsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaybackConfigurationsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListPlaybackConfigurationsOutput struct {
 
 	// Array of playback configurations. This might be all the available
@@ -74,74 +102,48 @@ type ListPlaybackConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlaybackConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaybackConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaybackConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfPlaybackConfiguration(s, schemas.ListPlaybackConfigurationsResponse_Items, v.Items)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlaybackConfigurationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPlaybackConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaybackConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaybackConfigurationsResponse_Items:
+			return deserialize__listOfPlaybackConfiguration(d, schemas.ListPlaybackConfigurationsResponse_Items, &v.Items)
+		case schemas.ListPlaybackConfigurationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlaybackConfigurationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlaybackConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackConfigurations, schemas.ListPlaybackConfigurationsRequest, schemas.ListPlaybackConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPlaybackConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlaybackConfigurations, schemas.ListPlaybackConfigurationsRequest, schemas.ListPlaybackConfigurationsResponse), output: &ListPlaybackConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPlaybackConfigurations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPlaybackConfigurations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlaybackConfigurations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +156,6 @@ func (c *Client) addOperationListPlaybackConfigurationsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +268,3 @@ type ListPlaybackConfigurationsAPIClient interface {
 }
 
 var _ ListPlaybackConfigurationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPlaybackConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPlaybackConfigurations",
-	}
-}

@@ -1,0 +1,5 @@
+POST /getDASHStreamingSessionURL
+
+Content-Type: application/json
+
+{"DASHFragmentSelector":{"FragmentSelectorType":"PRODUCER_TIMESTAMP","TimestampRange":{"EndTimestamp":946684800,"StartTimestamp":946684800}},"DisplayFragmentNumber":"ALWAYS","DisplayFragmentTimestamp":"ALWAYS","Expires":1,"MaxManifestFragmentResults":1,"PlaybackMode":"LIVE","StreamARN":"__StreamARN__","StreamName":"__StreamName__"}

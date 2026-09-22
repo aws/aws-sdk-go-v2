@@ -138,6 +138,67 @@ func (m *awsAwsjson11_serializeOpAddCommunicationToCase) HandleSerialize(ctx con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCompleteAttachmentUpload struct {
+}
+
+func (*awsAwsjson11_serializeOpCompleteAttachmentUpload) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCompleteAttachmentUpload) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CompleteAttachmentUploadInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.CompleteAttachmentUpload")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCompleteAttachmentUploadInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateCase struct {
 }
 
@@ -243,6 +304,67 @@ func (m *awsAwsjson11_serializeOpDescribeAttachment) HandleSerialize(ctx context
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeAttachmentInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeAttachmentUploadStatus struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeAttachmentUploadStatus) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeAttachmentUploadStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAttachmentUploadStatusInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.DescribeAttachmentUploadStatus")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeAttachmentUploadStatusInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -870,6 +992,128 @@ func (m *awsAwsjson11_serializeOpDescribeTrustedAdvisorCheckSummaries) HandleSer
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetAttachmentDownloadLink struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAttachmentDownloadLink) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAttachmentDownloadLink) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAttachmentDownloadLinkInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.GetAttachmentDownloadLink")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAttachmentDownloadLinkInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetAttachmentUploadLinks struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAttachmentUploadLinks) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAttachmentUploadLinks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAttachmentUploadLinksInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSupport_20130415.GetAttachmentUploadLinks")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAttachmentUploadLinksInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpRefreshTrustedAdvisorCheck struct {
 }
 
@@ -1043,6 +1287,36 @@ func awsAwsjson11_serializeDocumentCcEmailAddressList(v []string, value smithyjs
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCompletedUpload(v *types.CompletedUpload, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ETag != nil {
+		ok := object.Key("eTag")
+		ok.String(*v.ETag)
+	}
+
+	if v.PartIndex != nil {
+		ok := object.Key("partIndex")
+		ok.Integer(*v.PartIndex)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCompletedUploadList(v []types.CompletedUpload, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCompletedUpload(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentServiceCodeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1069,6 +1343,34 @@ func awsAwsjson11_serializeDocumentStringList(v []*string, value smithyjson.Valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentUploadIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUploadRange(v *types.UploadRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EndIndex != nil {
+		ok := object.Key("endIndex")
+		ok.Integer(*v.EndIndex)
+	}
+
+	if v.StartIndex != nil {
+		ok := object.Key("startIndex")
+		ok.Integer(*v.StartIndex)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentAddAttachmentsToSetInput(v *AddAttachmentsToSetInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1083,6 +1385,11 @@ func awsAwsjson11_serializeOpDocumentAddAttachmentsToSetInput(v *AddAttachmentsT
 	if v.AttachmentSetId != nil {
 		ok := object.Key("attachmentSetId")
 		ok.String(*v.AttachmentSetId)
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
 	}
 
 	return nil
@@ -1114,6 +1421,42 @@ func awsAwsjson11_serializeOpDocumentAddCommunicationToCaseInput(v *AddCommunica
 		ok.String(*v.CommunicationBody)
 	}
 
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
+	if v.UploadIds != nil {
+		ok := object.Key("uploadIds")
+		if err := awsAwsjson11_serializeDocumentUploadIds(v.UploadIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCompleteAttachmentUploadInput(v *CompleteAttachmentUploadInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CompletedUploads != nil {
+		ok := object.Key("completedUploads")
+		if err := awsAwsjson11_serializeDocumentCompletedUploadList(v.CompletedUploads, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
+	if v.UploadId != nil {
+		ok := object.Key("uploadId")
+		ok.String(*v.UploadId)
+	}
+
 	return nil
 }
 
@@ -1143,6 +1486,11 @@ func awsAwsjson11_serializeOpDocumentCreateCaseInput(v *CreateCaseInput, value s
 		ok.String(*v.CommunicationBody)
 	}
 
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
 	if v.IssueType != nil {
 		ok := object.Key("issueType")
 		ok.String(*v.IssueType)
@@ -1168,6 +1516,13 @@ func awsAwsjson11_serializeOpDocumentCreateCaseInput(v *CreateCaseInput, value s
 		ok.String(*v.Subject)
 	}
 
+	if v.UploadIds != nil {
+		ok := object.Key("uploadIds")
+		if err := awsAwsjson11_serializeDocumentUploadIds(v.UploadIds, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1178,6 +1533,28 @@ func awsAwsjson11_serializeOpDocumentDescribeAttachmentInput(v *DescribeAttachme
 	if v.AttachmentId != nil {
 		ok := object.Key("attachmentId")
 		ok.String(*v.AttachmentId)
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeAttachmentUploadStatusInput(v *DescribeAttachmentUploadStatusInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
+	if v.UploadId != nil {
+		ok := object.Key("uploadId")
+		ok.String(*v.UploadId)
 	}
 
 	return nil
@@ -1207,6 +1584,11 @@ func awsAwsjson11_serializeOpDocumentDescribeCasesInput(v *DescribeCasesInput, v
 	if v.DisplayId != nil {
 		ok := object.Key("displayId")
 		ok.String(*v.DisplayId)
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
 	}
 
 	if v.IncludeCommunications != nil {
@@ -1256,6 +1638,11 @@ func awsAwsjson11_serializeOpDocumentDescribeCommunicationsInput(v *DescribeComm
 		ok.String(*v.CaseId)
 	}
 
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -1276,6 +1663,11 @@ func awsAwsjson11_serializeOpDocumentDescribeCreateCaseOptionsInput(v *DescribeC
 	if v.CategoryCode != nil {
 		ok := object.Key("categoryCode")
 		ok.String(*v.CategoryCode)
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
 	}
 
 	if v.IssueType != nil {
@@ -1300,6 +1692,11 @@ func awsAwsjson11_serializeOpDocumentDescribeServicesInput(v *DescribeServicesIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
 	if v.Language != nil {
 		ok := object.Key("language")
 		ok.String(*v.Language)
@@ -1319,6 +1716,11 @@ func awsAwsjson11_serializeOpDocumentDescribeSeverityLevelsInput(v *DescribeSeve
 	object := value.Object()
 	defer object.Close()
 
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
 	if v.Language != nil {
 		ok := object.Key("language")
 		ok.String(*v.Language)
@@ -1334,6 +1736,11 @@ func awsAwsjson11_serializeOpDocumentDescribeSupportedLanguagesInput(v *Describe
 	if v.CategoryCode != nil {
 		ok := object.Key("categoryCode")
 		ok.String(*v.CategoryCode)
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
 	}
 
 	if v.IssueType != nil {
@@ -1406,6 +1813,57 @@ func awsAwsjson11_serializeOpDocumentDescribeTrustedAdvisorCheckSummariesInput(v
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetAttachmentDownloadLinkInput(v *GetAttachmentDownloadLinkInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttachmentId != nil {
+		ok := object.Key("attachmentId")
+		ok.String(*v.AttachmentId)
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetAttachmentUploadLinksInput(v *GetAttachmentUploadLinksInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
+	if v.FileName != nil {
+		ok := object.Key("fileName")
+		ok.String(*v.FileName)
+	}
+
+	if v.FileSizeBytes != nil {
+		ok := object.Key("fileSizeBytes")
+		ok.Long(*v.FileSizeBytes)
+	}
+
+	if v.UploadId != nil {
+		ok := object.Key("uploadId")
+		ok.String(*v.UploadId)
+	}
+
+	if v.UploadRange != nil {
+		ok := object.Key("uploadRange")
+		if err := awsAwsjson11_serializeDocumentUploadRange(v.UploadRange, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentRefreshTrustedAdvisorCheckInput(v *RefreshTrustedAdvisorCheckInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1425,6 +1883,11 @@ func awsAwsjson11_serializeOpDocumentResolveCaseInput(v *ResolveCaseInput, value
 	if v.CaseId != nil {
 		ok := object.Key("caseId")
 		ok.String(*v.CaseId)
+	}
+
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
 	}
 
 	return nil

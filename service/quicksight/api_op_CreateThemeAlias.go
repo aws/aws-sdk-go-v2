@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a theme alias for a theme.
@@ -55,6 +54,27 @@ type CreateThemeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThemeAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThemeAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThemeAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.CreateThemeAliasRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateThemeAliasRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.CreateThemeAliasRequest_ThemeId, *v.ThemeId)
+	}
+	if v.ThemeVersionNumber != nil {
+		s.WriteInt64(schemas.CreateThemeAliasRequest_ThemeVersionNumber, *v.ThemeVersionNumber)
+	}
+}
+
 type CreateThemeAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -72,77 +92,61 @@ type CreateThemeAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateThemeAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateThemeAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateThemeAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateThemeAliasResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateThemeAliasResponse_Status, v.Status)
+	}
+	if v.ThemeAlias != nil {
+		s.WriteStruct(schemas.CreateThemeAliasResponse_ThemeAlias)
+		v.ThemeAlias.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateThemeAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateThemeAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateThemeAliasResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateThemeAliasResponse_RequestId, v.RequestId)
+		case schemas.CreateThemeAliasResponse_Status:
+			return d.ReadInt32(schemas.CreateThemeAliasResponse_Status, &v.Status)
+		case schemas.CreateThemeAliasResponse_ThemeAlias:
+			v.ThemeAlias = &types.ThemeAlias{}
+			return v.ThemeAlias.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThemeAlias, schemas.CreateThemeAliasRequest, schemas.CreateThemeAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateThemeAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateThemeAlias, schemas.CreateThemeAliasRequest, schemas.CreateThemeAliasResponse), output: &CreateThemeAliasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateThemeAlias{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateThemeAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateThemeAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateThemeAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +161,8 @@ func (c *Client) addOperationCreateThemeAliasMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateThemeAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateThemeAlias",
-	}
 }

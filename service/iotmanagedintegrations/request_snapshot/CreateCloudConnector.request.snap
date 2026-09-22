@@ -1,0 +1,5 @@
+POST /cloud-connectors
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","EndpointConfig":{"lambda":{"arn":"__Arn__"}},"EndpointType":"LAMBDA","Name":"__Name__"}

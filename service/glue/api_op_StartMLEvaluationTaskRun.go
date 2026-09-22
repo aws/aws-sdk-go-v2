@@ -4,10 +4,9 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a task to estimate the quality of the transform.
@@ -43,6 +42,18 @@ type StartMLEvaluationTaskRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLEvaluationTaskRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLEvaluationTaskRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLEvaluationTaskRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransformId != nil {
+		s.WriteString(schemas.StartMLEvaluationTaskRunRequest_TransformId, *v.TransformId)
+	}
+}
+
 type StartMLEvaluationTaskRunOutput struct {
 
 	// The unique identifier associated with this run.
@@ -54,77 +65,48 @@ type StartMLEvaluationTaskRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartMLEvaluationTaskRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartMLEvaluationTaskRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartMLEvaluationTaskRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TaskRunId != nil {
+		s.WriteString(schemas.StartMLEvaluationTaskRunResponse_TaskRunId, *v.TaskRunId)
+	}
+}
+func (v *StartMLEvaluationTaskRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartMLEvaluationTaskRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartMLEvaluationTaskRunResponse_TaskRunId:
+			v.TaskRunId = new(string)
+			return d.ReadString(schemas.StartMLEvaluationTaskRunResponse_TaskRunId, v.TaskRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartMLEvaluationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLEvaluationTaskRun, schemas.StartMLEvaluationTaskRunRequest, schemas.StartMLEvaluationTaskRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMLEvaluationTaskRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartMLEvaluationTaskRun, schemas.StartMLEvaluationTaskRunRequest, schemas.StartMLEvaluationTaskRunResponse), output: &StartMLEvaluationTaskRunOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMLEvaluationTaskRun{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartMLEvaluationTaskRun"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartMLEvaluationTaskRunValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMLEvaluationTaskRun(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +121,8 @@ func (c *Client) addOperationStartMLEvaluationTaskRunMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartMLEvaluationTaskRun(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartMLEvaluationTaskRun",
-	}
 }

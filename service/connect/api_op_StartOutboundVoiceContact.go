@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Places an outbound call to a contact, and then initiates the flow. It performs
@@ -151,6 +151,63 @@ type StartOutboundVoiceContactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundVoiceContactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundVoiceContactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundVoiceContactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnswerMachineDetectionConfig != nil {
+		s.WriteStruct(schemas.StartOutboundVoiceContactRequest_AnswerMachineDetectionConfig)
+		v.AnswerMachineDetectionConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributes(s, schemas.StartOutboundVoiceContactRequest_Attributes, v.Attributes)
+	if v.CampaignId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_CampaignId, *v.CampaignId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ContactFlowId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_ContactFlowId, *v.ContactFlowId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_Description, *v.Description)
+	}
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_InstanceId, *v.InstanceId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_Name, *v.Name)
+	}
+	if v.OutboundStrategy != nil {
+		s.WriteStruct(schemas.StartOutboundVoiceContactRequest_OutboundStrategy)
+		v.OutboundStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_QueueId, *v.QueueId)
+	}
+	serializeContactReferences(s, schemas.StartOutboundVoiceContactRequest_References, v.References)
+	if v.RelatedContactId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_RelatedContactId, *v.RelatedContactId)
+	}
+	if v.RingTimeoutInSeconds != nil {
+		s.WriteInt32(schemas.StartOutboundVoiceContactRequest_RingTimeoutInSeconds, *v.RingTimeoutInSeconds)
+	}
+	if v.SourcePhoneNumber != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_SourcePhoneNumber, *v.SourcePhoneNumber)
+	}
+	if v.TrafficType != "" {
+		s.WriteString(schemas.StartOutboundVoiceContactRequest_TrafficType, string(v.TrafficType))
+	}
+}
+
 type StartOutboundVoiceContactOutput struct {
 
 	// The identifier of this contact within the Connect Customer instance.
@@ -162,65 +219,42 @@ type StartOutboundVoiceContactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartOutboundVoiceContactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartOutboundVoiceContactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartOutboundVoiceContactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.StartOutboundVoiceContactResponse_ContactId, *v.ContactId)
+	}
+}
+func (v *StartOutboundVoiceContactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartOutboundVoiceContactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartOutboundVoiceContactResponse_ContactId:
+			v.ContactId = new(string)
+			return d.ReadString(schemas.StartOutboundVoiceContactResponse_ContactId, v.ContactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartOutboundVoiceContactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundVoiceContact, schemas.StartOutboundVoiceContactRequest, schemas.StartOutboundVoiceContactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartOutboundVoiceContact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartOutboundVoiceContact, schemas.StartOutboundVoiceContactRequest, schemas.StartOutboundVoiceContactResponse), output: &StartOutboundVoiceContactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartOutboundVoiceContact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartOutboundVoiceContact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -230,12 +264,6 @@ func (c *Client) addOperationStartOutboundVoiceContactMiddlewares(stack *middlew
 		return err
 	}
 	if err = addOpStartOutboundVoiceContactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartOutboundVoiceContact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -248,12 +276,6 @@ func (c *Client) addOperationStartOutboundVoiceContactMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -293,12 +315,4 @@ func (m *idempotencyToken_initializeOpStartOutboundVoiceContact) HandleInitializ
 }
 func addIdempotencyToken_opStartOutboundVoiceContactMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartOutboundVoiceContact{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartOutboundVoiceContact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartOutboundVoiceContact",
-	}
 }

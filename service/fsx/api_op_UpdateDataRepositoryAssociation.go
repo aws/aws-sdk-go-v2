@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the configuration of an existing data repository association on an
@@ -61,6 +61,29 @@ type UpdateDataRepositoryAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataRepositoryAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataRepositoryAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataRepositoryAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationId != nil {
+		s.WriteString(schemas.UpdateDataRepositoryAssociationRequest_AssociationId, *v.AssociationId)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.UpdateDataRepositoryAssociationRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ImportedFileChunkSize != nil {
+		s.WriteInt32(schemas.UpdateDataRepositoryAssociationRequest_ImportedFileChunkSize, *v.ImportedFileChunkSize)
+	}
+	if v.S3 != nil {
+		s.WriteStruct(schemas.UpdateDataRepositoryAssociationRequest_S3)
+		v.S3.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDataRepositoryAssociationOutput struct {
 
 	// The response object returned after the data repository association is updated.
@@ -72,65 +95,44 @@ type UpdateDataRepositoryAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataRepositoryAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataRepositoryAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataRepositoryAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Association != nil {
+		s.WriteStruct(schemas.UpdateDataRepositoryAssociationResponse_Association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateDataRepositoryAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataRepositoryAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataRepositoryAssociationResponse_Association:
+			v.Association = &types.DataRepositoryAssociation{}
+			return v.Association.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataRepositoryAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataRepositoryAssociation, schemas.UpdateDataRepositoryAssociationRequest, schemas.UpdateDataRepositoryAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateDataRepositoryAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataRepositoryAssociation, schemas.UpdateDataRepositoryAssociationRequest, schemas.UpdateDataRepositoryAssociationResponse), output: &UpdateDataRepositoryAssociationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateDataRepositoryAssociation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataRepositoryAssociation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -140,12 +142,6 @@ func (c *Client) addOperationUpdateDataRepositoryAssociationMiddlewares(stack *m
 		return err
 	}
 	if err = addOpUpdateDataRepositoryAssociationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataRepositoryAssociation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +154,6 @@ func (c *Client) addOperationUpdateDataRepositoryAssociationMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -203,12 +193,4 @@ func (m *idempotencyToken_initializeOpUpdateDataRepositoryAssociation) HandleIni
 }
 func addIdempotencyToken_opUpdateDataRepositoryAssociationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateDataRepositoryAssociation{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateDataRepositoryAssociation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateDataRepositoryAssociation",
-	}
 }

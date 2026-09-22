@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an existing event destination.
@@ -50,6 +49,21 @@ type DeleteEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DeleteEventDestinationRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.DeleteEventDestinationRequest_EventDestinationName, *v.EventDestinationName)
+	}
+}
+
 type DeleteEventDestinationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configuration set.
@@ -67,77 +81,62 @@ type DeleteEventDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEventDestinationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEventDestinationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEventDestinationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetArn != nil {
+		s.WriteString(schemas.DeleteEventDestinationResult_ConfigurationSetArn, *v.ConfigurationSetArn)
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.DeleteEventDestinationResult_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.EventDestination != nil {
+		s.WriteStruct(schemas.DeleteEventDestinationResult_EventDestination)
+		v.EventDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteEventDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEventDestinationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEventDestinationResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.DeleteEventDestinationResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.DeleteEventDestinationResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.DeleteEventDestinationResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.DeleteEventDestinationResult_EventDestination:
+			v.EventDestination = &types.EventDestination{}
+			return v.EventDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventDestination, schemas.DeleteEventDestinationRequest, schemas.DeleteEventDestinationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEventDestination, schemas.DeleteEventDestinationRequest, schemas.DeleteEventDestinationResult), output: &DeleteEventDestinationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteEventDestination{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEventDestination"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteEventDestinationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEventDestination(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +151,8 @@ func (c *Client) addOperationDeleteEventDestinationMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteEventDestination(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteEventDestination",
-	}
 }

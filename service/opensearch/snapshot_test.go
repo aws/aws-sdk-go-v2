@@ -134,6 +134,18 @@ func TestCheckSnapshot_AssociatePackages(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AttachDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AttachDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AuthorizeVpcEndpointAccess(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AuthorizeVpcEndpointAccess(context.Background(), nil, func(o *Options) {
@@ -362,6 +374,18 @@ func TestCheckSnapshot_DeregisterCapability(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeDataSourceAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataSourceAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeDataSourceAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomain(context.Background(), nil, func(o *Options) {
@@ -554,6 +578,18 @@ func TestCheckSnapshot_DescribeVpcEndpoints(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DetachDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DetachDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DissociatePackage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DissociatePackage(context.Background(), nil, func(o *Options) {
@@ -674,6 +710,18 @@ func TestCheckSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPackageVersionHistory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPackageVersionHistory(context.Background(), nil, func(o *Options) {
@@ -710,11 +758,35 @@ func TestCheckSnapshot_GetUpgradeStatus(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_InsightFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InsightFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InsightFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListApplications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDataSourceAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataSourceAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDataSourceAttachments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -799,6 +871,18 @@ func TestCheckSnapshot_ListInstanceTypeDetails(t *testing.T) {
 	_, err := svc.ListInstanceTypeDetails(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListInstanceTypeDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListMigrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMigrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListMigrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -979,6 +1063,18 @@ func TestCheckSnapshot_StartDomainMaintenance(t *testing.T) {
 	_, err := svc.StartDomainMaintenance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartDomainMaintenance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartMigration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1182,6 +1278,18 @@ func TestUpdateSnapshot_AssociatePackages(t *testing.T) {
 	_, err := svc.AssociatePackages(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociatePackages")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AttachDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AttachDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AttachDataSource")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1417,6 +1525,18 @@ func TestUpdateSnapshot_DeregisterCapability(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeDataSourceAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeDataSourceAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeDataSourceAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomain(context.Background(), nil, func(o *Options) {
@@ -1609,6 +1729,18 @@ func TestUpdateSnapshot_DescribeVpcEndpoints(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DetachDataSource(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DetachDataSource(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DetachDataSource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DissociatePackage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DissociatePackage(context.Background(), nil, func(o *Options) {
@@ -1729,6 +1861,18 @@ func TestUpdateSnapshot_GetIndex(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMigration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetPackageVersionHistory(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPackageVersionHistory(context.Background(), nil, func(o *Options) {
@@ -1765,11 +1909,35 @@ func TestUpdateSnapshot_GetUpgradeStatus(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_InsightFeedback(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InsightFeedback(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InsightFeedback")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListApplications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListApplications")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDataSourceAttachments(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDataSourceAttachments(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDataSourceAttachments")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1854,6 +2022,18 @@ func TestUpdateSnapshot_ListInstanceTypeDetails(t *testing.T) {
 	_, err := svc.ListInstanceTypeDetails(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListInstanceTypeDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListMigrations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListMigrations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListMigrations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2034,6 +2214,18 @@ func TestUpdateSnapshot_StartDomainMaintenance(t *testing.T) {
 	_, err := svc.StartDomainMaintenance(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartDomainMaintenance")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartMigration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartMigration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartMigration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

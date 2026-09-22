@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: FmrsService.ListLocations
+
+{"Locations":[{"LocationArn":"__LocationArn__","LocationUri":"__LocationUri__"},{"LocationArn":"__LocationArn__","LocationUri":"__LocationUri__"}],"NextToken":"__NextToken__"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"authorizers":[{"authorizerArn":"__AuthorizerArn__","authorizerName":"__AuthorizerName__"},{"authorizerArn":"__AuthorizerArn__","authorizerName":"__AuthorizerName__"}],"nextMarker":"__NextMarker__"}

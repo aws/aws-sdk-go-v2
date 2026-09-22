@@ -26,6 +26,9 @@ func ExampleAcceptedTerm_outputUsage() {
 	case *types.AcceptedTermMemberLegalTerm:
 		_ = v.Value // Value is types.LegalTerm
 
+	case *types.AcceptedTermMemberNetPaymentTerm:
+		_ = v.Value // Value is types.NetPaymentTerm
+
 	case *types.AcceptedTermMemberPaymentScheduleTerm:
 		_ = v.Value // Value is types.PaymentScheduleTerm
 
@@ -56,18 +59,41 @@ func ExampleAcceptedTerm_outputUsage() {
 	}
 }
 
-var _ *types.PaymentScheduleTerm
 var _ *types.FixedUpfrontPricingTerm
-var _ *types.ValidityTerm
-var _ *types.RecurringPaymentTerm
 var _ *types.UsageBasedPricingTerm
 var _ *types.RenewalTerm
-var _ *types.VariablePaymentTerm
 var _ *types.FreeTrialPricingTerm
 var _ *types.LegalTerm
-var _ *types.ConfigurableUpfrontPricingTerm
 var _ *types.ByolPricingTerm
 var _ *types.SupportTerm
+var _ *types.PaymentScheduleTerm
+var _ *types.ValidityTerm
+var _ *types.RecurringPaymentTerm
+var _ *types.NetPaymentTerm
+var _ *types.VariablePaymentTerm
+var _ *types.ConfigurableUpfrontPricingTerm
+
+func ExamplePriceIncrease_outputUsage() {
+	var union types.PriceIncrease
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PriceIncreaseMemberFixedPercentage:
+		_ = v.Value // Value is types.FixedPercentage
+
+	case *types.PriceIncreaseMemberPercentageRange:
+		_ = v.Value // Value is types.PercentageRange
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PercentageRange
+var _ *types.FixedPercentage
 
 func ExampleRequestedTermConfiguration_outputUsage() {
 	var union types.RequestedTermConfiguration
@@ -94,3 +120,21 @@ func ExampleRequestedTermConfiguration_outputUsage() {
 var _ *types.VariablePaymentTermConfiguration
 var _ *types.ConfigurableUpfrontPricingTermConfiguration
 var _ *types.RenewalTermConfiguration
+
+func ExampleTermTemplate_outputUsage() {
+	var union types.TermTemplate
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TermTemplateMemberPaymentScheduleTermTemplate:
+		_ = v.Value // Value is types.PaymentScheduleTermTemplate
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.PaymentScheduleTermTemplate

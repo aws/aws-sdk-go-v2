@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Domains_v20140515.ListPrices
+
+{"NextPageMarker":"__NextPageMarker__","Prices":[{"ChangeOwnershipPrice":{"Currency":"__Currency__","Price":1},"Name":"__Name__","RegistrationPrice":{"Currency":"__Currency__","Price":1},"RenewalPrice":{"Currency":"__Currency__","Price":1},"RestorationPrice":{"Currency":"__Currency__","Price":1},"TransferPrice":{"Currency":"__Currency__","Price":1}},{"ChangeOwnershipPrice":{"Currency":"__Currency__","Price":1},"Name":"__Name__","RegistrationPrice":{"Currency":"__Currency__","Price":1},"RenewalPrice":{"Currency":"__Currency__","Price":1},"RestorationPrice":{"Currency":"__Currency__","Price":1},"TransferPrice":{"Currency":"__Currency__","Price":1}}]}

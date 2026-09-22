@@ -4,11 +4,10 @@ package controltower
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/controltower/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/controltower/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enable (apply) a Baseline to a Target. This API starts an asynchronous
@@ -59,6 +58,26 @@ type EnableBaselineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableBaselineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableBaselineInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableBaselineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaselineIdentifier != nil {
+		s.WriteString(schemas.EnableBaselineInput_baselineIdentifier, *v.BaselineIdentifier)
+	}
+	if v.BaselineVersion != nil {
+		s.WriteString(schemas.EnableBaselineInput_baselineVersion, *v.BaselineVersion)
+	}
+	serializeEnabledBaselineParameters(s, schemas.EnableBaselineInput_parameters, v.Parameters)
+	serializeTagMap(s, schemas.EnableBaselineInput_tags, v.Tags)
+	if v.TargetIdentifier != nil {
+		s.WriteString(schemas.EnableBaselineInput_targetIdentifier, *v.TargetIdentifier)
+	}
+}
+
 type EnableBaselineOutput struct {
 
 	// The ARN of the EnabledBaseline resource.
@@ -79,77 +98,54 @@ type EnableBaselineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableBaselineOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableBaselineOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableBaselineOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.EnableBaselineOutput_arn, *v.Arn)
+	}
+	if v.OperationIdentifier != nil {
+		s.WriteString(schemas.EnableBaselineOutput_operationIdentifier, *v.OperationIdentifier)
+	}
+}
+func (v *EnableBaselineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableBaselineOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableBaselineOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.EnableBaselineOutput_arn, v.Arn)
+		case schemas.EnableBaselineOutput_operationIdentifier:
+			v.OperationIdentifier = new(string)
+			return d.ReadString(schemas.EnableBaselineOutput_operationIdentifier, v.OperationIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableBaselineMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableBaseline, schemas.EnableBaselineInput, schemas.EnableBaselineOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableBaseline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableBaseline, schemas.EnableBaselineInput, schemas.EnableBaselineOutput), output: &EnableBaselineOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableBaseline{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableBaseline"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpEnableBaselineValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableBaseline(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +160,8 @@ func (c *Client) addOperationEnableBaselineMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opEnableBaseline(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EnableBaseline",
-	}
 }

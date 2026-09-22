@@ -1,0 +1,5 @@
+PUT /v1/clusters/__ClusterArn__/configuration
+
+Content-Type: application/json
+
+{"configurationInfo":{"arn":"__Arn__","revision":1},"currentVersion":"__CurrentVersion__"}

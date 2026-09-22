@@ -4,14 +4,13 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: EC2
+//	This API works with the following fleet types: EC2, Container
 //
 // Creates or updates a scaling policy for a fleet. Scaling policies are used to
 // automatically scale a fleet's hosting capacity to meet player demand. An active
@@ -197,6 +196,47 @@ type PutScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScalingPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScalingPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScalingPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.PutScalingPolicyInput_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.EvaluationPeriods != nil {
+		s.WriteInt32(schemas.PutScalingPolicyInput_EvaluationPeriods, *v.EvaluationPeriods)
+	}
+	if v.FleetId != nil {
+		s.WriteString(schemas.PutScalingPolicyInput_FleetId, *v.FleetId)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.PutScalingPolicyInput_MetricName, string(v.MetricName))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PutScalingPolicyInput_Name, *v.Name)
+	}
+	if v.PolicyType != "" {
+		s.WriteString(schemas.PutScalingPolicyInput_PolicyType, string(v.PolicyType))
+	}
+	if v.ScalingAdjustment != nil {
+		s.WriteInt32(schemas.PutScalingPolicyInput_ScalingAdjustment, *v.ScalingAdjustment)
+	}
+	if v.ScalingAdjustmentType != "" {
+		s.WriteString(schemas.PutScalingPolicyInput_ScalingAdjustmentType, string(v.ScalingAdjustmentType))
+	}
+	if v.TargetConfiguration != nil {
+		s.WriteStruct(schemas.PutScalingPolicyInput_TargetConfiguration)
+		v.TargetConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Threshold != nil {
+		s.WriteFloat64(schemas.PutScalingPolicyInput_Threshold, *v.Threshold)
+	}
+}
+
 type PutScalingPolicyOutput struct {
 
 	// A descriptive label that is associated with a fleet's scaling policy. Policy
@@ -209,65 +249,42 @@ type PutScalingPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutScalingPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutScalingPolicyOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutScalingPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.PutScalingPolicyOutput_Name, *v.Name)
+	}
+}
+func (v *PutScalingPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutScalingPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutScalingPolicyOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PutScalingPolicyOutput_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScalingPolicy, schemas.PutScalingPolicyInput, schemas.PutScalingPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutScalingPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutScalingPolicy, schemas.PutScalingPolicyInput, schemas.PutScalingPolicyOutput), output: &PutScalingPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutScalingPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutScalingPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -277,12 +294,6 @@ func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpPutScalingPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutScalingPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -297,22 +308,8 @@ func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutScalingPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutScalingPolicy",
-	}
 }

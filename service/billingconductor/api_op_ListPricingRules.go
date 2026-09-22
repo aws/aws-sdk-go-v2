@@ -5,10 +5,10 @@ package billingconductor
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Describes a pricing rule that can be associated to a pricing plan, or set of
@@ -47,6 +47,48 @@ type ListPricingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListPricingRulesInput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListPricingRulesInput_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPricingRulesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPricingRulesInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListPricingRulesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingRulesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingRulesInput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListPricingRulesInput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListPricingRulesInput_Filters:
+			v.Filters = &types.ListPricingRulesFilter{}
+			return v.Filters.Deserialize(d)
+		case schemas.ListPricingRulesInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListPricingRulesInput_MaxResults, v.MaxResults)
+		case schemas.ListPricingRulesInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPricingRulesInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListPricingRulesOutput struct {
 
 	//  The billing period for which the described pricing rules are applicable.
@@ -64,74 +106,54 @@ type ListPricingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPricingRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPricingRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPricingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingPeriod != nil {
+		s.WriteString(schemas.ListPricingRulesOutput_BillingPeriod, *v.BillingPeriod)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPricingRulesOutput_NextToken, *v.NextToken)
+	}
+	serializePricingRuleList(s, schemas.ListPricingRulesOutput_PricingRules, v.PricingRules)
+}
+func (v *ListPricingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPricingRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPricingRulesOutput_BillingPeriod:
+			v.BillingPeriod = new(string)
+			return d.ReadString(schemas.ListPricingRulesOutput_BillingPeriod, v.BillingPeriod)
+		case schemas.ListPricingRulesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPricingRulesOutput_NextToken, v.NextToken)
+		case schemas.ListPricingRulesOutput_PricingRules:
+			return deserializePricingRuleList(d, schemas.ListPricingRulesOutput_PricingRules, &v.PricingRules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPricingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPricingRules, schemas.ListPricingRulesInput, schemas.ListPricingRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPricingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPricingRules, schemas.ListPricingRulesInput, schemas.ListPricingRulesOutput), output: &ListPricingRulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPricingRules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPricingRules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPricingRules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +166,6 @@ func (c *Client) addOperationListPricingRulesMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +266,3 @@ type ListPricingRulesAPIClient interface {
 }
 
 var _ ListPricingRulesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPricingRules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPricingRules",
-	}
-}

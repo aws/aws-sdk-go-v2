@@ -4,11 +4,10 @@ package voiceid
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/voiceid/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the specified fraudster.
@@ -42,6 +41,34 @@ type DescribeFraudsterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFraudsterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFraudsterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFraudsterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.DescribeFraudsterRequest_DomainId, *v.DomainId)
+	}
+	if v.FraudsterId != nil {
+		s.WriteString(schemas.DescribeFraudsterRequest_FraudsterId, *v.FraudsterId)
+	}
+}
+func (v *DescribeFraudsterInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFraudsterRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFraudsterRequest_DomainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.DescribeFraudsterRequest_DomainId, v.DomainId)
+		case schemas.DescribeFraudsterRequest_FraudsterId:
+			v.FraudsterId = new(string)
+			return d.ReadString(schemas.DescribeFraudsterRequest_FraudsterId, v.FraudsterId)
+		}
+		return nil
+	})
+}
+
 type DescribeFraudsterOutput struct {
 
 	// Information about the specified fraudster.
@@ -53,77 +80,50 @@ type DescribeFraudsterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFraudsterOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFraudsterResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFraudsterOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fraudster != nil {
+		s.WriteStruct(schemas.DescribeFraudsterResponse_Fraudster)
+		v.Fraudster.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeFraudsterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFraudsterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFraudsterResponse_Fraudster:
+			v.Fraudster = &types.Fraudster{}
+			return v.Fraudster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFraudsterMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFraudster, schemas.DescribeFraudsterRequest, schemas.DescribeFraudsterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeFraudster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFraudster, schemas.DescribeFraudsterRequest, schemas.DescribeFraudsterResponse), output: &DescribeFraudsterOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeFraudster{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFraudster"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeFraudsterValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFraudster(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +138,8 @@ func (c *Client) addOperationDescribeFraudsterMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeFraudster(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeFraudster",
-	}
 }

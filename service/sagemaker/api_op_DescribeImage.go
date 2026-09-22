@@ -6,12 +6,11 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	smithywaiter "github.com/aws/smithy-go/waiter"
 	"time"
 )
@@ -40,6 +39,18 @@ type DescribeImageInput struct {
 	ImageName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeImageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageName != nil {
+		s.WriteString(schemas.DescribeImageRequest_ImageName, *v.ImageName)
+	}
 }
 
 type DescribeImageOutput struct {
@@ -78,77 +89,100 @@ type DescribeImageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeImageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeImageResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeImageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeImageResponse_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeImageResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeImageResponse_DisplayName, *v.DisplayName)
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.DescribeImageResponse_FailureReason, *v.FailureReason)
+	}
+	if v.ImageArn != nil {
+		s.WriteString(schemas.DescribeImageResponse_ImageArn, *v.ImageArn)
+	}
+	if v.ImageName != nil {
+		s.WriteString(schemas.DescribeImageResponse_ImageName, *v.ImageName)
+	}
+	if v.ImageStatus != "" {
+		s.WriteString(schemas.DescribeImageResponse_ImageStatus, string(v.ImageStatus))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.DescribeImageResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeImageResponse_RoleArn, *v.RoleArn)
+	}
+}
+func (v *DescribeImageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeImageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeImageResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeImageResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeImageResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_Description, v.Description)
+		case schemas.DescribeImageResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeImageResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_FailureReason, v.FailureReason)
+		case schemas.DescribeImageResponse_ImageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_ImageArn, v.ImageArn)
+		case schemas.DescribeImageResponse_ImageName:
+			v.ImageName = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_ImageName, v.ImageName)
+		case schemas.DescribeImageResponse_ImageStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeImageResponse_ImageStatus, &ev); err != nil {
+				return err
+			}
+			v.ImageStatus = types.ImageStatus(ev)
+			return nil
+		case schemas.DescribeImageResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeImageResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeImageResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeImageResponse_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeImageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImage, schemas.DescribeImageRequest, schemas.DescribeImageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeImage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeImage, schemas.DescribeImageRequest, schemas.DescribeImageResponse), output: &DescribeImageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeImage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeImage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeImageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeImage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +195,6 @@ func (c *Client) addOperationDescribeImageMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -771,11 +799,3 @@ type DescribeImageAPIClient interface {
 }
 
 var _ DescribeImageAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeImage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeImage",
-	}
-}

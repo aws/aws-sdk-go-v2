@@ -1,0 +1,5 @@
+PUT /v1/bridges/__BridgeArn__/sources/__SourceName__
+
+Content-Type: application/json
+
+{"flowSource":{"flowArn":"__FlowArn__","flowVpcInterfaceAttachment":{"vpcInterfaceName":"__VpcInterfaceName__"}},"networkSource":{"multicastIp":"__MulticastIp__","multicastSourceSettings":{"multicastSourceIp":"__MulticastSourceIp__"},"networkName":"__NetworkName__","port":1,"protocol":"zixi-push"}}

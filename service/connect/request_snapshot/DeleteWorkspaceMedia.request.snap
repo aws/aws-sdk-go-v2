@@ -1,0 +1,3 @@
+DELETE /workspaces/__InstanceId__/__WorkspaceId__/media?mediaType=IMAGE_LOGO_LIGHT_FAVICON
+
+

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetCloudFormationStackRecords
+
+{"cloudFormationStackRecords":[{"arn":"__Arn__","createdAt":946684800,"destinationInfo":{"id":"__Id__","service":"__Service__"},"location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"name":"__Name__","resourceType":"ContainerService","sourceInfo":[{"arn":"__Arn__","name":"__Name__","resourceType":"ExportSnapshotRecord"},{"arn":"__Arn__","name":"__Name__","resourceType":"ExportSnapshotRecord"}],"state":"Started"},{"arn":"__Arn__","createdAt":946684800,"destinationInfo":{"id":"__Id__","service":"__Service__"},"location":{"availabilityZone":"__AvailabilityZone__","regionName":"us-east-1"},"name":"__Name__","resourceType":"ContainerService","sourceInfo":[{"arn":"__Arn__","name":"__Name__","resourceType":"ExportSnapshotRecord"},{"arn":"__Arn__","name":"__Name__","resourceType":"ExportSnapshotRecord"}],"state":"Started"}],"nextPageToken":"__NextPageToken__"}

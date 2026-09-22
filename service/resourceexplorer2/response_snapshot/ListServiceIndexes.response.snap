@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Indexes":[{"Arn":"__Arn__","Region":"__Region__","Type":"LOCAL"},{"Arn":"__Arn__","Region":"__Region__","Type":"LOCAL"}],"NextToken":"__NextToken__"}

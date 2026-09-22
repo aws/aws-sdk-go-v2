@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/profiles/delete
+
+Content-Type: application/json
+
+{"ProfileId":"__ProfileId__"}

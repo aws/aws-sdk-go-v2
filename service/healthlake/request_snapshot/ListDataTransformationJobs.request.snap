@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: HealthLake.ListDataTransformationJobs
+
+{"JobName":"__JobName__","JobStatus":"SUBMITTED","MaxResults":1,"NextToken":"__NextToken__","SubmittedAfter":946684800,"SubmittedBefore":946684800}

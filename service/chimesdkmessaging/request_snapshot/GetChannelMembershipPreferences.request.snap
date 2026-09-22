@@ -1,0 +1,4 @@
+GET /channels/__ChannelArn__/memberships/__MemberArn__/preferences
+
+X-Amz-Chime-Bearer: __ChimeBearer__
+

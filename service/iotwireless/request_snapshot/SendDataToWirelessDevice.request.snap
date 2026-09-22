@@ -1,0 +1,5 @@
+POST /wireless-devices/__Id__/data
+
+Content-Type: application/json
+
+{"PayloadData":"__PayloadData__","TransmitMode":1,"WirelessMetadata":{"LoRaWAN":{"FPort":1,"ParticipatingGateways":{"DownlinkMode":"SEQUENTIAL","GatewayList":[{"DownlinkFrequency":1,"GatewayId":"__GatewayId__"},{"DownlinkFrequency":1,"GatewayId":"__GatewayId__"}],"TransmissionInterval":1}},"Sidewalk":{"AckModeRetryDurationSecs":1,"MessageType":"CUSTOM_COMMAND_ID_NOTIFY","Seq":1}}}

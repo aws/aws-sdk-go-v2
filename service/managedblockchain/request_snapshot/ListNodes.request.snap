@@ -1,0 +1,3 @@
+GET /networks/__NetworkId__/nodes?maxResults=1&memberId=__MemberId__&nextToken=__NextToken__&status=CREATING
+
+

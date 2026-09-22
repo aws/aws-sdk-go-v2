@@ -1235,6 +1235,63 @@ func validateAvailMatchingCriteria(v *types.AvailMatchingCriteria) error {
 	}
 }
 
+func validateAwsServiceRequestConfiguration(v *types.AwsServiceRequestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AwsServiceRequestConfiguration"}
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	}
+	if len(v.MethodType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MethodType"))
+	}
+	if v.RequestTimeoutMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestTimeoutMilliseconds"))
+	}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.TargetService == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetService"))
+	}
+	if v.TargetRegion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConcurrentExecutorConfiguration(v *types.ConcurrentExecutorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConcurrentExecutorConfiguration"}
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	}
+	if v.Output == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Output"))
+	}
+	if v.FunctionList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionList"))
+	}
+	if v.TimeoutMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeoutMilliseconds"))
+	}
+	if v.MaxConcurrency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxConcurrency"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomOutputConfiguration(v *types.CustomOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -1522,6 +1579,54 @@ func validateTransition(v *types.Transition) error {
 	}
 	if v.Type == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVastRequestConfiguration(v *types.VastRequestConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VastRequestConfiguration"}
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
+	}
+	if len(v.MethodType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MethodType"))
+	}
+	if v.RequestTimeoutMilliseconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestTimeoutMilliseconds"))
+	}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateYieldOptimizationConfiguration(v *types.YieldOptimizationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "YieldOptimizationConfiguration"}
+	if v.MinimumUnfilledDuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinimumUnfilledDuration"))
+	}
+	if v.PublisherId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublisherId"))
+	}
+	if len(v.Region) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.OpenRtbTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OpenRtbTemplate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2154,14 +2259,29 @@ func validateOpPutFunctionInput(v *PutFunctionInput) error {
 			invalidParams.AddNested("HttpRequestConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AwsServiceRequestConfiguration != nil {
+		if err := validateAwsServiceRequestConfiguration(v.AwsServiceRequestConfiguration); err != nil {
+			invalidParams.AddNested("AwsServiceRequestConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.CustomOutputConfiguration != nil {
 		if err := validateCustomOutputConfiguration(v.CustomOutputConfiguration); err != nil {
 			invalidParams.AddNested("CustomOutputConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ConcurrentExecutorConfiguration != nil {
+		if err := validateConcurrentExecutorConfiguration(v.ConcurrentExecutorConfiguration); err != nil {
+			invalidParams.AddNested("ConcurrentExecutorConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.SequentialExecutorConfiguration != nil {
 		if err := validateSequentialExecutorConfiguration(v.SequentialExecutorConfiguration); err != nil {
 			invalidParams.AddNested("SequentialExecutorConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.VastRequestConfiguration != nil {
+		if err := validateVastRequestConfiguration(v.VastRequestConfiguration); err != nil {
+			invalidParams.AddNested("VastRequestConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2182,6 +2302,11 @@ func validateOpPutPlaybackConfigurationInput(v *PutPlaybackConfigurationInput) e
 	if v.AdConditioningConfiguration != nil {
 		if err := validateAdConditioningConfiguration(v.AdConditioningConfiguration); err != nil {
 			invalidParams.AddNested("AdConditioningConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.YieldOptimizationConfiguration != nil {
+		if err := validateYieldOptimizationConfiguration(v.YieldOptimizationConfiguration); err != nil {
+			invalidParams.AddNested("YieldOptimizationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

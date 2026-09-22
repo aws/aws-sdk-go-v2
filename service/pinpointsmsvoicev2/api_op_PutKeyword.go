@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates a keyword configuration on an origination phone number or
@@ -70,6 +69,27 @@ type PutKeywordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutKeywordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutKeywordRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutKeywordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Keyword != nil {
+		s.WriteString(schemas.PutKeywordRequest_Keyword, *v.Keyword)
+	}
+	if v.KeywordAction != "" {
+		s.WriteString(schemas.PutKeywordRequest_KeywordAction, string(v.KeywordAction))
+	}
+	if v.KeywordMessage != nil {
+		s.WriteString(schemas.PutKeywordRequest_KeywordMessage, *v.KeywordMessage)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.PutKeywordRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+}
+
 type PutKeywordOutput struct {
 
 	// The keyword that was added.
@@ -93,77 +113,76 @@ type PutKeywordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutKeywordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutKeywordResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutKeywordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Keyword != nil {
+		s.WriteString(schemas.PutKeywordResult_Keyword, *v.Keyword)
+	}
+	if v.KeywordAction != "" {
+		s.WriteString(schemas.PutKeywordResult_KeywordAction, string(v.KeywordAction))
+	}
+	if v.KeywordMessage != nil {
+		s.WriteString(schemas.PutKeywordResult_KeywordMessage, *v.KeywordMessage)
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.PutKeywordResult_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.OriginationIdentityArn != nil {
+		s.WriteString(schemas.PutKeywordResult_OriginationIdentityArn, *v.OriginationIdentityArn)
+	}
+}
+func (v *PutKeywordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutKeywordResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutKeywordResult_Keyword:
+			v.Keyword = new(string)
+			return d.ReadString(schemas.PutKeywordResult_Keyword, v.Keyword)
+		case schemas.PutKeywordResult_KeywordAction:
+			var ev string
+			if err := d.ReadString(schemas.PutKeywordResult_KeywordAction, &ev); err != nil {
+				return err
+			}
+			v.KeywordAction = types.KeywordAction(ev)
+			return nil
+		case schemas.PutKeywordResult_KeywordMessage:
+			v.KeywordMessage = new(string)
+			return d.ReadString(schemas.PutKeywordResult_KeywordMessage, v.KeywordMessage)
+		case schemas.PutKeywordResult_OriginationIdentity:
+			v.OriginationIdentity = new(string)
+			return d.ReadString(schemas.PutKeywordResult_OriginationIdentity, v.OriginationIdentity)
+		case schemas.PutKeywordResult_OriginationIdentityArn:
+			v.OriginationIdentityArn = new(string)
+			return d.ReadString(schemas.PutKeywordResult_OriginationIdentityArn, v.OriginationIdentityArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutKeywordMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKeyword, schemas.PutKeywordRequest, schemas.PutKeywordResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutKeyword{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutKeyword, schemas.PutKeywordRequest, schemas.PutKeywordResult), output: &PutKeywordOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutKeyword{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutKeyword"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutKeywordValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutKeyword(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +197,8 @@ func (c *Client) addOperationPutKeywordMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutKeyword(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutKeyword",
-	}
 }

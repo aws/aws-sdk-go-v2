@@ -5,10 +5,10 @@ package lexmodelsv2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The action to list the replicated bots created from the source bot alias.
@@ -52,6 +52,27 @@ type ListBotAliasReplicasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotAliasReplicasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotAliasReplicasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotAliasReplicasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotAliasReplicasRequest_botId, *v.BotId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBotAliasReplicasRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotAliasReplicasRequest_nextToken, *v.NextToken)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.ListBotAliasReplicasRequest_replicaRegion, *v.ReplicaRegion)
+	}
+}
+
 type ListBotAliasReplicasOutput struct {
 
 	// The summary information of the replicated bot created from the source bot alias.
@@ -75,77 +96,69 @@ type ListBotAliasReplicasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBotAliasReplicasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBotAliasReplicasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBotAliasReplicasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBotAliasReplicaSummaryList(s, schemas.ListBotAliasReplicasResponse_botAliasReplicaSummaries, v.BotAliasReplicaSummaries)
+	if v.BotId != nil {
+		s.WriteString(schemas.ListBotAliasReplicasResponse_botId, *v.BotId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBotAliasReplicasResponse_nextToken, *v.NextToken)
+	}
+	if v.ReplicaRegion != nil {
+		s.WriteString(schemas.ListBotAliasReplicasResponse_replicaRegion, *v.ReplicaRegion)
+	}
+	if v.SourceRegion != nil {
+		s.WriteString(schemas.ListBotAliasReplicasResponse_sourceRegion, *v.SourceRegion)
+	}
+}
+func (v *ListBotAliasReplicasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBotAliasReplicasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBotAliasReplicasResponse_botAliasReplicaSummaries:
+			return deserializeBotAliasReplicaSummaryList(d, schemas.ListBotAliasReplicasResponse_botAliasReplicaSummaries, &v.BotAliasReplicaSummaries)
+		case schemas.ListBotAliasReplicasResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.ListBotAliasReplicasResponse_botId, v.BotId)
+		case schemas.ListBotAliasReplicasResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBotAliasReplicasResponse_nextToken, v.NextToken)
+		case schemas.ListBotAliasReplicasResponse_replicaRegion:
+			v.ReplicaRegion = new(string)
+			return d.ReadString(schemas.ListBotAliasReplicasResponse_replicaRegion, v.ReplicaRegion)
+		case schemas.ListBotAliasReplicasResponse_sourceRegion:
+			v.SourceRegion = new(string)
+			return d.ReadString(schemas.ListBotAliasReplicasResponse_sourceRegion, v.SourceRegion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBotAliasReplicasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotAliasReplicas, schemas.ListBotAliasReplicasRequest, schemas.ListBotAliasReplicasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBotAliasReplicas{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBotAliasReplicas, schemas.ListBotAliasReplicasRequest, schemas.ListBotAliasReplicasResponse), output: &ListBotAliasReplicasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBotAliasReplicas{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBotAliasReplicas"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListBotAliasReplicasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBotAliasReplicas(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +171,6 @@ func (c *Client) addOperationListBotAliasReplicasMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +273,3 @@ type ListBotAliasReplicasAPIClient interface {
 }
 
 var _ ListBotAliasReplicasAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBotAliasReplicas(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBotAliasReplicas",
-	}
-}

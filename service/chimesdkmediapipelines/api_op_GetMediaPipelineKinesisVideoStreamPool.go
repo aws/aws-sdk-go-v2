@@ -4,11 +4,10 @@ package chimesdkmediapipelines
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets an Kinesis video stream pool.
@@ -38,6 +37,18 @@ type GetMediaPipelineKinesisVideoStreamPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaPipelineKinesisVideoStreamPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaPipelineKinesisVideoStreamPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaPipelineKinesisVideoStreamPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetMediaPipelineKinesisVideoStreamPoolRequest_Identifier, *v.Identifier)
+	}
+}
+
 type GetMediaPipelineKinesisVideoStreamPoolOutput struct {
 
 	// The video stream pool configuration object.
@@ -49,77 +60,50 @@ type GetMediaPipelineKinesisVideoStreamPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMediaPipelineKinesisVideoStreamPoolOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMediaPipelineKinesisVideoStreamPoolResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMediaPipelineKinesisVideoStreamPoolOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KinesisVideoStreamPoolConfiguration != nil {
+		s.WriteStruct(schemas.GetMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration)
+		v.KinesisVideoStreamPoolConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetMediaPipelineKinesisVideoStreamPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMediaPipelineKinesisVideoStreamPoolResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration:
+			v.KinesisVideoStreamPoolConfiguration = &types.KinesisVideoStreamPoolConfiguration{}
+			return v.KinesisVideoStreamPoolConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMediaPipelineKinesisVideoStreamPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaPipelineKinesisVideoStreamPool, schemas.GetMediaPipelineKinesisVideoStreamPoolRequest, schemas.GetMediaPipelineKinesisVideoStreamPoolResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMediaPipelineKinesisVideoStreamPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMediaPipelineKinesisVideoStreamPool, schemas.GetMediaPipelineKinesisVideoStreamPoolRequest, schemas.GetMediaPipelineKinesisVideoStreamPoolResponse), output: &GetMediaPipelineKinesisVideoStreamPoolOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMediaPipelineKinesisVideoStreamPool{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMediaPipelineKinesisVideoStreamPool"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetMediaPipelineKinesisVideoStreamPoolValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMediaPipelineKinesisVideoStreamPool(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -134,22 +118,8 @@ func (c *Client) addOperationGetMediaPipelineKinesisVideoStreamPoolMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetMediaPipelineKinesisVideoStreamPool(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMediaPipelineKinesisVideoStreamPool",
-	}
 }

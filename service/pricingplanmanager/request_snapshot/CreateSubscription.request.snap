@@ -1,0 +1,5 @@
+POST /v1/CreateSubscription
+
+Content-Type: application/json
+
+{"approvalMode":"MANUAL","clientToken":"__ClientToken__","planFamily":"__PlanFamily__","planTier":"__PlanTier__","resourceArns":["__Member__","__Member__"],"usageLevel":"__UsageLevel__"}

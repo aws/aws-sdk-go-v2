@@ -5,10 +5,10 @@ package inspector2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists aggregated finding data for your environment based on specific criteria.
@@ -57,6 +57,50 @@ type ListFindingAggregationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingAggregationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingAggregationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingAggregationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringFilterList(s, schemas.ListFindingAggregationsRequest_accountIds, v.AccountIds)
+	serializeAggregationRequest(s, schemas.ListFindingAggregationsRequest_aggregationRequest, v.AggregationRequest)
+	if v.AggregationType != "" {
+		s.WriteString(schemas.ListFindingAggregationsRequest_aggregationType, string(v.AggregationType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFindingAggregationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingAggregationsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListFindingAggregationsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingAggregationsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingAggregationsRequest_accountIds:
+			return deserializeStringFilterList(d, schemas.ListFindingAggregationsRequest_accountIds, &v.AccountIds)
+		case schemas.ListFindingAggregationsRequest_aggregationRequest:
+			return deserializeAggregationRequest(d, schemas.ListFindingAggregationsRequest_aggregationRequest, &v.AggregationRequest)
+		case schemas.ListFindingAggregationsRequest_aggregationType:
+			var ev string
+			if err := d.ReadString(schemas.ListFindingAggregationsRequest_aggregationType, &ev); err != nil {
+				return err
+			}
+			v.AggregationType = types.AggregationType(ev)
+			return nil
+		case schemas.ListFindingAggregationsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListFindingAggregationsRequest_maxResults, v.MaxResults)
+		case schemas.ListFindingAggregationsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingAggregationsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListFindingAggregationsOutput struct {
 
 	// The type of aggregation to perform.
@@ -79,77 +123,61 @@ type ListFindingAggregationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFindingAggregationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFindingAggregationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFindingAggregationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationType != "" {
+		s.WriteString(schemas.ListFindingAggregationsResponse_aggregationType, string(v.AggregationType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFindingAggregationsResponse_nextToken, *v.NextToken)
+	}
+	serializeAggregationResponseList(s, schemas.ListFindingAggregationsResponse_responses, v.Responses)
+}
+func (v *ListFindingAggregationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFindingAggregationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFindingAggregationsResponse_aggregationType:
+			var ev string
+			if err := d.ReadString(schemas.ListFindingAggregationsResponse_aggregationType, &ev); err != nil {
+				return err
+			}
+			v.AggregationType = types.AggregationType(ev)
+			return nil
+		case schemas.ListFindingAggregationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFindingAggregationsResponse_nextToken, v.NextToken)
+		case schemas.ListFindingAggregationsResponse_responses:
+			return deserializeAggregationResponseList(d, schemas.ListFindingAggregationsResponse_responses, &v.Responses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFindingAggregationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingAggregations, schemas.ListFindingAggregationsRequest, schemas.ListFindingAggregationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFindingAggregations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFindingAggregations, schemas.ListFindingAggregationsRequest, schemas.ListFindingAggregationsResponse), output: &ListFindingAggregationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFindingAggregations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFindingAggregations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFindingAggregationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFindingAggregations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,12 +190,6 @@ func (c *Client) addOperationListFindingAggregationsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +294,3 @@ type ListFindingAggregationsAPIClient interface {
 }
 
 var _ ListFindingAggregationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFindingAggregations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFindingAggregations",
-	}
-}

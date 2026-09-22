@@ -4,11 +4,10 @@ package mturk
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	The CreateQualificationType operation creates a new Qualification type, which
@@ -105,6 +104,45 @@ type CreateQualificationTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQualificationTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQualificationTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQualificationTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnswerKey != nil {
+		s.WriteString(schemas.CreateQualificationTypeRequest_AnswerKey, *v.AnswerKey)
+	}
+	if v.AutoGranted != nil {
+		s.WriteBool(schemas.CreateQualificationTypeRequest_AutoGranted, *v.AutoGranted)
+	}
+	if v.AutoGrantedValue != nil {
+		s.WriteInt32(schemas.CreateQualificationTypeRequest_AutoGrantedValue, *v.AutoGrantedValue)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateQualificationTypeRequest_Description, *v.Description)
+	}
+	if v.Keywords != nil {
+		s.WriteString(schemas.CreateQualificationTypeRequest_Keywords, *v.Keywords)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateQualificationTypeRequest_Name, *v.Name)
+	}
+	if v.QualificationTypeStatus != "" {
+		s.WriteString(schemas.CreateQualificationTypeRequest_QualificationTypeStatus, string(v.QualificationTypeStatus))
+	}
+	if v.RetryDelayInSeconds != nil {
+		s.WriteInt64(schemas.CreateQualificationTypeRequest_RetryDelayInSeconds, *v.RetryDelayInSeconds)
+	}
+	if v.Test != nil {
+		s.WriteString(schemas.CreateQualificationTypeRequest_Test, *v.Test)
+	}
+	if v.TestDurationInSeconds != nil {
+		s.WriteInt64(schemas.CreateQualificationTypeRequest_TestDurationInSeconds, *v.TestDurationInSeconds)
+	}
+}
+
 type CreateQualificationTypeOutput struct {
 
 	// The created Qualification type, returned as a QualificationType data structure.
@@ -116,77 +154,50 @@ type CreateQualificationTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQualificationTypeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQualificationTypeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQualificationTypeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QualificationType != nil {
+		s.WriteStruct(schemas.CreateQualificationTypeResponse_QualificationType)
+		v.QualificationType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateQualificationTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateQualificationTypeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateQualificationTypeResponse_QualificationType:
+			v.QualificationType = &types.QualificationType{}
+			return v.QualificationType.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQualificationType, schemas.CreateQualificationTypeRequest, schemas.CreateQualificationTypeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateQualificationType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQualificationType, schemas.CreateQualificationTypeRequest, schemas.CreateQualificationTypeResponse), output: &CreateQualificationTypeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateQualificationType{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateQualificationType"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateQualificationTypeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateQualificationType(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -201,22 +212,8 @@ func (c *Client) addOperationCreateQualificationTypeMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateQualificationType(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateQualificationType",
-	}
 }

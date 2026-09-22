@@ -1,0 +1,5 @@
+POST /investigations/updateInvestigationState
+
+Content-Type: application/json
+
+{"GraphArn":"__GraphArn__","InvestigationId":"__InvestigationId__","State":"ACTIVE"}

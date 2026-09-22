@@ -1,0 +1,5 @@
+POST /useraccess/batchget
+
+Content-Type: application/json
+
+{"appBundleIdentifier":"__AppBundleIdentifier__","taskIdList":["__Member__","__Member__"]}

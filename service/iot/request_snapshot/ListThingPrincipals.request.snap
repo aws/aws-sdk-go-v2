@@ -1,0 +1,3 @@
+GET /things/__ThingName__/principals?maxResults=1&nextToken=__NextToken__
+
+

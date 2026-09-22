@@ -5,10 +5,10 @@ package invoicing
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This creates a new invoice unit with the provided definition.
@@ -48,6 +48,10 @@ type CreateInvoiceUnitInput struct {
 	// This member is required.
 	Rule *types.InvoiceUnitRule
 
+	//  A unique, case-sensitive identifier that you provide to ensure idempotency of
+	// the request.
+	ClientToken *string
+
 	//  The invoice unit's description. This can be changed at a later time.
 	Description *string
 
@@ -59,6 +63,36 @@ type CreateInvoiceUnitInput struct {
 	TaxInheritanceDisabled bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateInvoiceUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInvoiceUnitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInvoiceUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInvoiceUnitRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateInvoiceUnitRequest_Description, *v.Description)
+	}
+	if v.InvoiceReceiver != nil {
+		s.WriteString(schemas.CreateInvoiceUnitRequest_InvoiceReceiver, *v.InvoiceReceiver)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateInvoiceUnitRequest_Name, *v.Name)
+	}
+	serializeResourceTagList(s, schemas.CreateInvoiceUnitRequest_ResourceTags, v.ResourceTags)
+	if v.Rule != nil {
+		s.WriteStruct(schemas.CreateInvoiceUnitRequest_Rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaxInheritanceDisabled != false {
+		s.WriteBool(schemas.CreateInvoiceUnitRequest_TaxInheritanceDisabled, v.TaxInheritanceDisabled)
+	}
 }
 
 type CreateInvoiceUnitOutput struct {
@@ -73,77 +107,51 @@ type CreateInvoiceUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInvoiceUnitOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInvoiceUnitResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInvoiceUnitOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvoiceUnitArn != nil {
+		s.WriteString(schemas.CreateInvoiceUnitResponse_InvoiceUnitArn, *v.InvoiceUnitArn)
+	}
+}
+func (v *CreateInvoiceUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInvoiceUnitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInvoiceUnitResponse_InvoiceUnitArn:
+			v.InvoiceUnitArn = new(string)
+			return d.ReadString(schemas.CreateInvoiceUnitResponse_InvoiceUnitArn, v.InvoiceUnitArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInvoiceUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvoiceUnit, schemas.CreateInvoiceUnitRequest, schemas.CreateInvoiceUnitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateInvoiceUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInvoiceUnit, schemas.CreateInvoiceUnitRequest, schemas.CreateInvoiceUnitResponse), output: &CreateInvoiceUnitOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateInvoiceUnit{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInvoiceUnit"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateInvoiceUnitMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateInvoiceUnitValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInvoiceUnit(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +166,41 @@ func (c *Client) addOperationCreateInvoiceUnitMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
 }
 
-func newServiceMetadataMiddleware_opCreateInvoiceUnit(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateInvoiceUnit",
+type idempotencyToken_initializeOpCreateInvoiceUnit struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateInvoiceUnit) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateInvoiceUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
 	}
+
+	input, ok := in.Parameters.(*CreateInvoiceUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateInvoiceUnitInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateInvoiceUnitMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateInvoiceUnit{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }

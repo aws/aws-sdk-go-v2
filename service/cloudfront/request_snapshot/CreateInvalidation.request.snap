@@ -1,0 +1,5 @@
+POST /2020-05-31/distribution/__DistributionId__/invalidation
+
+Content-Type: application/xml
+
+<InvalidationBatch xmlns="http://cloudfront.amazonaws.com/doc/2020-05-31/"><CallerReference>__CallerReference__</CallerReference><Paths><Items><Path>__Member__</Path><Path>__Member__</Path></Items><Quantity>1</Quantity></Paths></InvalidationBatch>

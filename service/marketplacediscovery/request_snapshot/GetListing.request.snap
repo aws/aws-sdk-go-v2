@@ -1,0 +1,5 @@
+POST /2026-02-05/getListing
+
+Content-Type: application/json
+
+{"listingId":"__ListingId__"}

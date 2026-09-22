@@ -1,0 +1,3 @@
+DELETE /applications/__ApplicationId__/jobruns/__JobRunId__?shutdownGracePeriodInSeconds=1
+
+

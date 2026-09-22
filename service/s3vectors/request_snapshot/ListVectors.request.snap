@@ -1,0 +1,5 @@
+POST /ListVectors
+
+Content-Type: application/json
+
+{"indexArn":"__IndexArn__","indexName":"__IndexName__","maxResults":1,"nextToken":"__NextToken__","returnData":true,"returnMetadata":true,"segmentCount":1,"segmentIndex":1,"vectorBucketName":"__VectorBucketName__"}

@@ -5,10 +5,10 @@ package partnercentralaccount
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -61,6 +61,30 @@ type CancelConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelConnectionRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelConnectionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectionType != "" {
+		s.WriteString(schemas.CancelConnectionRequest_ConnectionType, string(v.ConnectionType))
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CancelConnectionRequest_Identifier, *v.Identifier)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.CancelConnectionRequest_Reason, *v.Reason)
+	}
+}
+
 type CancelConnectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the canceled connection.
@@ -99,65 +123,69 @@ type CancelConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelConnectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelConnectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelConnectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CancelConnectionResponse_Arn, *v.Arn)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelConnectionResponse_Catalog, *v.Catalog)
+	}
+	serializeConnectionTypeDetailMap(s, schemas.CancelConnectionResponse_ConnectionTypes, v.ConnectionTypes)
+	if v.Id != nil {
+		s.WriteString(schemas.CancelConnectionResponse_Id, *v.Id)
+	}
+	if v.OtherParticipantAccountId != nil {
+		s.WriteString(schemas.CancelConnectionResponse_OtherParticipantAccountId, *v.OtherParticipantAccountId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.CancelConnectionResponse_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *CancelConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelConnectionResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CancelConnectionResponse_Arn, v.Arn)
+		case schemas.CancelConnectionResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.CancelConnectionResponse_Catalog, v.Catalog)
+		case schemas.CancelConnectionResponse_ConnectionTypes:
+			return deserializeConnectionTypeDetailMap(d, schemas.CancelConnectionResponse_ConnectionTypes, &v.ConnectionTypes)
+		case schemas.CancelConnectionResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CancelConnectionResponse_Id, v.Id)
+		case schemas.CancelConnectionResponse_OtherParticipantAccountId:
+			v.OtherParticipantAccountId = new(string)
+			return d.ReadString(schemas.CancelConnectionResponse_OtherParticipantAccountId, v.OtherParticipantAccountId)
+		case schemas.CancelConnectionResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CancelConnectionResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelConnection, schemas.CancelConnectionRequest, schemas.CancelConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelConnection, schemas.CancelConnectionRequest, schemas.CancelConnectionResponse), output: &CancelConnectionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelConnection{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelConnection"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -167,12 +195,6 @@ func (c *Client) addOperationCancelConnectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpCancelConnectionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelConnection(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -185,12 +207,6 @@ func (c *Client) addOperationCancelConnectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -230,12 +246,4 @@ func (m *idempotencyToken_initializeOpCancelConnection) HandleInitialize(ctx con
 }
 func addIdempotencyToken_opCancelConnectionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCancelConnection{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCancelConnection(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelConnection",
-	}
 }

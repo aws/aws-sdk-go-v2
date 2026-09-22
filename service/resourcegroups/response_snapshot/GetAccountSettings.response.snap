@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AccountSettings":{"GroupLifecycleEventsDesiredStatus":"ACTIVE","GroupLifecycleEventsStatus":"ACTIVE","GroupLifecycleEventsStatusMessage":"__GroupLifecycleEventsStatusMessage__"}}

@@ -5,12 +5,12 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancel a specific image lifecycle policy runtime instance.
+// Cancels a specific image lifecycle policy runtime instance.
 func (c *Client) CancelLifecycleExecution(ctx context.Context, params *CancelLifecycleExecutionInput, optFns ...func(*Options)) (*CancelLifecycleExecutionOutput, error) {
 	if params == nil {
 		params = &CancelLifecycleExecutionInput{}
@@ -28,8 +28,10 @@ func (c *Client) CancelLifecycleExecution(ctx context.Context, params *CancelLif
 
 type CancelLifecycleExecutionInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -44,6 +46,21 @@ type CancelLifecycleExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelLifecycleExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelLifecycleExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelLifecycleExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelLifecycleExecutionRequest_clientToken, *v.ClientToken)
+	}
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.CancelLifecycleExecutionRequest_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+}
+
 type CancelLifecycleExecutionOutput struct {
 
 	// The unique identifier for the image lifecycle runtime instance that was
@@ -56,65 +73,42 @@ type CancelLifecycleExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelLifecycleExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelLifecycleExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelLifecycleExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LifecycleExecutionId != nil {
+		s.WriteString(schemas.CancelLifecycleExecutionResponse_lifecycleExecutionId, *v.LifecycleExecutionId)
+	}
+}
+func (v *CancelLifecycleExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelLifecycleExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CancelLifecycleExecutionResponse_lifecycleExecutionId:
+			v.LifecycleExecutionId = new(string)
+			return d.ReadString(schemas.CancelLifecycleExecutionResponse_lifecycleExecutionId, v.LifecycleExecutionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelLifecycleExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelLifecycleExecution, schemas.CancelLifecycleExecutionRequest, schemas.CancelLifecycleExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelLifecycleExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelLifecycleExecution, schemas.CancelLifecycleExecutionRequest, schemas.CancelLifecycleExecutionResponse), output: &CancelLifecycleExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelLifecycleExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelLifecycleExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -124,12 +118,6 @@ func (c *Client) addOperationCancelLifecycleExecutionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpCancelLifecycleExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelLifecycleExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,12 +130,6 @@ func (c *Client) addOperationCancelLifecycleExecutionMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -187,12 +169,4 @@ func (m *idempotencyToken_initializeOpCancelLifecycleExecution) HandleInitialize
 }
 func addIdempotencyToken_opCancelLifecycleExecutionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCancelLifecycleExecution{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCancelLifecycleExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CancelLifecycleExecution",
-	}
 }

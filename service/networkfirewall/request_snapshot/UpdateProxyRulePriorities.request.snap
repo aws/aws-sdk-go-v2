@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.UpdateProxyRulePriorities
+
+{"ProxyRuleGroupArn":"__ProxyRuleGroupArn__","ProxyRuleGroupName":"__ProxyRuleGroupName__","RuleGroupRequestPhase":"PRE_DNS","Rules":[{"NewPosition":1,"ProxyRuleName":"__ProxyRuleName__"},{"NewPosition":1,"ProxyRuleName":"__ProxyRuleName__"}],"UpdateToken":"__UpdateToken__"}

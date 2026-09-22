@@ -4,10 +4,9 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates a client SDK for a RestApi and Stage.
@@ -55,6 +54,25 @@ type GetSdkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSdkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSdkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSdkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfStringToString(s, schemas.GetSdkRequest_parameters, v.Parameters)
+	if v.RestApiId != nil {
+		s.WriteString(schemas.GetSdkRequest_restApiId, *v.RestApiId)
+	}
+	if v.SdkType != nil {
+		s.WriteString(schemas.GetSdkRequest_sdkType, *v.SdkType)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.GetSdkRequest_stageName, *v.StageName)
+	}
+}
+
 // The binary blob response to GetSdk, which contains the generated SDK.
 type GetSdkOutput struct {
 
@@ -73,77 +91,59 @@ type GetSdkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSdkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SdkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSdkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteBlob(schemas.SdkResponse_body, v.Body)
+	}
+	if v.ContentDisposition != nil {
+		s.WriteString(schemas.SdkResponse_contentDisposition, *v.ContentDisposition)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.SdkResponse_contentType, *v.ContentType)
+	}
+}
+func (v *GetSdkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SdkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SdkResponse_body:
+			return d.ReadBlob(schemas.SdkResponse_body, &v.Body)
+		case schemas.SdkResponse_contentDisposition:
+			v.ContentDisposition = new(string)
+			return d.ReadString(schemas.SdkResponse_contentDisposition, v.ContentDisposition)
+		case schemas.SdkResponse_contentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.SdkResponse_contentType, v.ContentType)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSdkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSdk, schemas.GetSdkRequest, schemas.SdkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSdk{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSdk, schemas.GetSdkRequest, schemas.SdkResponse), output: &GetSdkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSdk{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSdk"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSdkValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSdk(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +161,8 @@ func (c *Client) addOperationGetSdkMiddlewares(stack *middleware.Stack, options 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSdk(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSdk",
-	}
 }

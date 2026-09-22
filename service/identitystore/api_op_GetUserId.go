@@ -4,11 +4,10 @@ package identitystore
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the UserId in an identity store.
@@ -50,6 +49,31 @@ type GetUserIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserIdRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlternateIdentifier(s, schemas.GetUserIdRequest_AlternateIdentifier, v.AlternateIdentifier)
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.GetUserIdRequest_IdentityStoreId, *v.IdentityStoreId)
+	}
+}
+func (v *GetUserIdInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserIdRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserIdRequest_AlternateIdentifier:
+			return deserializeAlternateIdentifier(d, schemas.GetUserIdRequest_AlternateIdentifier, &v.AlternateIdentifier)
+		case schemas.GetUserIdRequest_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.GetUserIdRequest_IdentityStoreId, v.IdentityStoreId)
+		}
+		return nil
+	})
+}
+
 type GetUserIdOutput struct {
 
 	// The globally unique identifier for the identity store.
@@ -68,77 +92,54 @@ type GetUserIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUserIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUserIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUserIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.GetUserIdResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetUserIdResponse_UserId, *v.UserId)
+	}
+}
+func (v *GetUserIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUserIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUserIdResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.GetUserIdResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.GetUserIdResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.GetUserIdResponse_UserId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUserIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserId, schemas.GetUserIdRequest, schemas.GetUserIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetUserId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUserId, schemas.GetUserIdRequest, schemas.GetUserIdResponse), output: &GetUserIdOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetUserId{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUserId"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetUserIdValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUserId(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +154,8 @@ func (c *Client) addOperationGetUserIdMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetUserId(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetUserId",
-	}
 }

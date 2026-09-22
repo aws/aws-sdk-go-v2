@@ -5,10 +5,10 @@ package lambda
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Saves the progress of a [durable function] execution during runtime. This API is used by the
@@ -65,6 +65,25 @@ type CheckpointDurableExecutionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckpointDurableExecutionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckpointDurableExecutionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckpointDurableExecutionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckpointToken != nil {
+		s.WriteString(schemas.CheckpointDurableExecutionRequest_CheckpointToken, *v.CheckpointToken)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CheckpointDurableExecutionRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DurableExecutionArn != nil {
+		s.WriteString(schemas.CheckpointDurableExecutionRequest_DurableExecutionArn, *v.DurableExecutionArn)
+	}
+	serializeOperationUpdates(s, schemas.CheckpointDurableExecutionRequest_Updates, v.Updates)
+}
+
 // The response from the CheckpointDurableExecution operation.
 type CheckpointDurableExecutionOutput struct {
 
@@ -86,65 +105,50 @@ type CheckpointDurableExecutionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckpointDurableExecutionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckpointDurableExecutionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckpointDurableExecutionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckpointToken != nil {
+		s.WriteString(schemas.CheckpointDurableExecutionResponse_CheckpointToken, *v.CheckpointToken)
+	}
+	if v.NewExecutionState != nil {
+		s.WriteStruct(schemas.CheckpointDurableExecutionResponse_NewExecutionState)
+		v.NewExecutionState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CheckpointDurableExecutionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckpointDurableExecutionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckpointDurableExecutionResponse_CheckpointToken:
+			v.CheckpointToken = new(string)
+			return d.ReadString(schemas.CheckpointDurableExecutionResponse_CheckpointToken, v.CheckpointToken)
+		case schemas.CheckpointDurableExecutionResponse_NewExecutionState:
+			v.NewExecutionState = &types.CheckpointUpdatedExecutionState{}
+			return v.NewExecutionState.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCheckpointDurableExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckpointDurableExecution, schemas.CheckpointDurableExecutionRequest, schemas.CheckpointDurableExecutionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCheckpointDurableExecution{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CheckpointDurableExecution, schemas.CheckpointDurableExecutionRequest, schemas.CheckpointDurableExecutionResponse), output: &CheckpointDurableExecutionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCheckpointDurableExecution{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CheckpointDurableExecution"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -154,12 +158,6 @@ func (c *Client) addOperationCheckpointDurableExecutionMiddlewares(stack *middle
 		return err
 	}
 	if err = addOpCheckpointDurableExecutionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCheckpointDurableExecution(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,12 +170,6 @@ func (c *Client) addOperationCheckpointDurableExecutionMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -217,12 +209,4 @@ func (m *idempotencyToken_initializeOpCheckpointDurableExecution) HandleInitiali
 }
 func addIdempotencyToken_opCheckpointDurableExecutionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCheckpointDurableExecution{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCheckpointDurableExecution(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CheckpointDurableExecution",
-	}
 }

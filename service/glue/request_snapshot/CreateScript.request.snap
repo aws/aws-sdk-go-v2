@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.CreateScript
+
+{"DagEdges":[{"Source":"__Source__","Target":"__Target__","TargetParameter":"__TargetParameter__"},{"Source":"__Source__","Target":"__Target__","TargetParameter":"__TargetParameter__"}],"DagNodes":[{"Args":[{"Name":"__Name__","Param":true,"Value":"__Value__"},{"Name":"__Name__","Param":true,"Value":"__Value__"}],"Id":"__Id__","LineNumber":1,"NodeType":"__NodeType__"},{"Args":[{"Name":"__Name__","Param":true,"Value":"__Value__"},{"Name":"__Name__","Param":true,"Value":"__Value__"}],"Id":"__Id__","LineNumber":1,"NodeType":"__NodeType__"}],"Language":"PYTHON"}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"UserErrors":[{"ErrorCode":"BadRequest","ErrorMessage":"__ErrorMessage__","UserId":"__UserId__"},{"ErrorCode":"BadRequest","ErrorMessage":"__ErrorMessage__","UserId":"__UserId__"}]}

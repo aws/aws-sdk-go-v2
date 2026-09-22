@@ -1,0 +1,5 @@
+PUT /assets/__AssetId__/properties/__PropertyId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","propertyAlias":"__PropertyAlias__","propertyNotificationState":"ENABLED","propertyUnit":"__PropertyUnit__"}

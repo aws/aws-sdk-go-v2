@@ -5,10 +5,10 @@ package migrationhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists discovered resources associated with the given MigrationTask .
@@ -50,6 +50,27 @@ type ListDiscoveredResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoveredResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDiscoveredResourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDiscoveredResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDiscoveredResourcesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MigrationTaskName != nil {
+		s.WriteString(schemas.ListDiscoveredResourcesRequest_MigrationTaskName, *v.MigrationTaskName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDiscoveredResourcesRequest_NextToken, *v.NextToken)
+	}
+	if v.ProgressUpdateStream != nil {
+		s.WriteString(schemas.ListDiscoveredResourcesRequest_ProgressUpdateStream, *v.ProgressUpdateStream)
+	}
+}
+
 type ListDiscoveredResourcesOutput struct {
 
 	// Returned list of discovered resources associated with the given MigrationTask.
@@ -65,77 +86,51 @@ type ListDiscoveredResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoveredResourcesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDiscoveredResourcesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDiscoveredResourcesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDiscoveredResourceList(s, schemas.ListDiscoveredResourcesResult_DiscoveredResourceList, v.DiscoveredResourceList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDiscoveredResourcesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDiscoveredResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDiscoveredResourcesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDiscoveredResourcesResult_DiscoveredResourceList:
+			return deserializeDiscoveredResourceList(d, schemas.ListDiscoveredResourcesResult_DiscoveredResourceList, &v.DiscoveredResourceList)
+		case schemas.ListDiscoveredResourcesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDiscoveredResourcesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredResources, schemas.ListDiscoveredResourcesRequest, schemas.ListDiscoveredResourcesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListDiscoveredResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredResources, schemas.ListDiscoveredResourcesRequest, schemas.ListDiscoveredResourcesResult), output: &ListDiscoveredResourcesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListDiscoveredResources{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDiscoveredResources"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDiscoveredResourcesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDiscoveredResources(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +143,6 @@ func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +245,3 @@ type ListDiscoveredResourcesAPIClient interface {
 }
 
 var _ ListDiscoveredResourcesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDiscoveredResources(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDiscoveredResources",
-	}
-}

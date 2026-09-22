@@ -5,10 +5,10 @@ package detective
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/detective/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the list of behavior graphs that the calling account is an
@@ -46,6 +46,21 @@ type ListGraphsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGraphsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListGraphsOutput struct {
 
 	// A list of behavior graphs that the account is an administrator account for.
@@ -61,74 +76,48 @@ type ListGraphsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGraphsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGraphsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGraphsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGraphList(s, schemas.ListGraphsResponse_GraphList, v.GraphList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGraphsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGraphsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGraphsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGraphsResponse_GraphList:
+			return deserializeGraphList(d, schemas.ListGraphsResponse_GraphList, &v.GraphList)
+		case schemas.ListGraphsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGraphsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGraphsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphs, schemas.ListGraphsRequest, schemas.ListGraphsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGraphs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGraphs, schemas.ListGraphsRequest, schemas.ListGraphsResponse), output: &ListGraphsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGraphs{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGraphs"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGraphs(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +130,6 @@ func (c *Client) addOperationListGraphsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +230,3 @@ type ListGraphsAPIClient interface {
 }
 
 var _ ListGraphsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListGraphs(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListGraphs",
-	}
-}

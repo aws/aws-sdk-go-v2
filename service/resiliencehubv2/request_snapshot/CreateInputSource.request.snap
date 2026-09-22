@@ -1,0 +1,5 @@
+POST /v2/create-input-source
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","resourceConfiguration":{"resourceTags":[{"key":"__Key__","values":["__Member__","__Member__"]},{"key":"__Key__","values":["__Member__","__Member__"]}]},"serviceArn":"__ServiceArn__"}

@@ -1,0 +1,5 @@
+PUT /v2/campaigns/__Id__/outbound-requests
+
+Content-Type: application/json
+
+{"outboundRequests":[{"channelSubtypeParameters":{"telephony":{"answerMachineDetectionConfig":{"awaitAnswerMachinePrompt":true,"enableAnswerMachineDetection":true},"attributes":{"key0":"__Value__"},"connectSourcePhoneNumber":"__ConnectSourcePhoneNumber__","destinationPhoneNumber":"__DestinationPhoneNumber__","ringTimeout":1}},"clientToken":"__ClientToken__","expirationTime":"2000-01-01T00:00:00Z"},{"channelSubtypeParameters":{"telephony":{"answerMachineDetectionConfig":{"awaitAnswerMachinePrompt":true,"enableAnswerMachineDetection":true},"attributes":{"key0":"__Value__"},"connectSourcePhoneNumber":"__ConnectSourcePhoneNumber__","destinationPhoneNumber":"__DestinationPhoneNumber__","ringTimeout":1}},"clientToken":"__ClientToken__","expirationTime":"2000-01-01T00:00:00Z"}]}

@@ -5,10 +5,10 @@ package chimesdkvoice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the specified voice profile domains in the administrator's AWS account.
@@ -38,6 +38,21 @@ type ListVoiceProfileDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVoiceProfileDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVoiceProfileDomainsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVoiceProfileDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVoiceProfileDomainsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVoiceProfileDomainsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListVoiceProfileDomainsOutput struct {
 
 	// The token used to return the next page of results.
@@ -52,74 +67,48 @@ type ListVoiceProfileDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVoiceProfileDomainsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVoiceProfileDomainsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVoiceProfileDomainsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVoiceProfileDomainsResponse_NextToken, *v.NextToken)
+	}
+	serializeVoiceProfileDomainSummaryList(s, schemas.ListVoiceProfileDomainsResponse_VoiceProfileDomains, v.VoiceProfileDomains)
+}
+func (v *ListVoiceProfileDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVoiceProfileDomainsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVoiceProfileDomainsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVoiceProfileDomainsResponse_NextToken, v.NextToken)
+		case schemas.ListVoiceProfileDomainsResponse_VoiceProfileDomains:
+			return deserializeVoiceProfileDomainSummaryList(d, schemas.ListVoiceProfileDomainsResponse_VoiceProfileDomains, &v.VoiceProfileDomains)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVoiceProfileDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVoiceProfileDomains, schemas.ListVoiceProfileDomainsRequest, schemas.ListVoiceProfileDomainsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVoiceProfileDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVoiceProfileDomains, schemas.ListVoiceProfileDomainsRequest, schemas.ListVoiceProfileDomainsResponse), output: &ListVoiceProfileDomainsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVoiceProfileDomains{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVoiceProfileDomains"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVoiceProfileDomains(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -132,12 +121,6 @@ func (c *Client) addOperationListVoiceProfileDomainsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -240,11 +223,3 @@ type ListVoiceProfileDomainsAPIClient interface {
 }
 
 var _ ListVoiceProfileDomainsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListVoiceProfileDomains(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListVoiceProfileDomains",
-	}
-}

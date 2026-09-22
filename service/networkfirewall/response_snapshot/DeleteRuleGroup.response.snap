@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.DeleteRuleGroup
+
+{"RuleGroupResponse":{"AnalysisResults":[{"AnalysisDetail":"__AnalysisDetail__","IdentifiedRuleIds":["__Member__","__Member__"],"IdentifiedType":"STATELESS_RULE_FORWARDING_ASYMMETRICALLY"},{"AnalysisDetail":"__AnalysisDetail__","IdentifiedRuleIds":["__Member__","__Member__"],"IdentifiedType":"STATELESS_RULE_FORWARDING_ASYMMETRICALLY"}],"Capacity":1,"ConsumedCapacity":1,"Description":"__Description__","EncryptionConfiguration":{"KeyId":"__KeyId__","Type":"CUSTOMER_KMS"},"LastModifiedTime":946684800,"NumberOfAssociations":1,"RuleGroupArn":"__RuleGroupArn__","RuleGroupId":"__RuleGroupId__","RuleGroupName":"__RuleGroupName__","RuleGroupStatus":"ACTIVE","SnsTopic":"__SnsTopic__","SourceMetadata":{"SourceArn":"__SourceArn__","SourceUpdateToken":"__SourceUpdateToken__"},"SummaryConfiguration":{"RuleOptions":["SID","SID"]},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Type":"STATELESS"}}

@@ -5,10 +5,10 @@ package securityhub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Provides information about the associations for your configuration policies
@@ -56,6 +56,26 @@ type ListConfigurationPolicyAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationPolicyAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationPolicyAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationPolicyAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filters != nil {
+		s.WriteStruct(schemas.ListConfigurationPolicyAssociationsRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfigurationPolicyAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationPolicyAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListConfigurationPolicyAssociationsOutput struct {
 
 	//  An object that contains the details of each configuration policy association
@@ -74,74 +94,48 @@ type ListConfigurationPolicyAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationPolicyAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationPolicyAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationPolicyAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfigurationPolicyAssociationSummaryList(s, schemas.ListConfigurationPolicyAssociationsResponse_ConfigurationPolicyAssociationSummaries, v.ConfigurationPolicyAssociationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationPolicyAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListConfigurationPolicyAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationPolicyAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationPolicyAssociationsResponse_ConfigurationPolicyAssociationSummaries:
+			return deserializeConfigurationPolicyAssociationSummaryList(d, schemas.ListConfigurationPolicyAssociationsResponse_ConfigurationPolicyAssociationSummaries, &v.ConfigurationPolicyAssociationSummaries)
+		case schemas.ListConfigurationPolicyAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationPolicyAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationPolicyAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationPolicyAssociations, schemas.ListConfigurationPolicyAssociationsRequest, schemas.ListConfigurationPolicyAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigurationPolicyAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationPolicyAssociations, schemas.ListConfigurationPolicyAssociationsRequest, schemas.ListConfigurationPolicyAssociationsResponse), output: &ListConfigurationPolicyAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigurationPolicyAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConfigurationPolicyAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigurationPolicyAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +148,6 @@ func (c *Client) addOperationListConfigurationPolicyAssociationsMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -269,11 +257,3 @@ type ListConfigurationPolicyAssociationsAPIClient interface {
 }
 
 var _ ListConfigurationPolicyAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListConfigurationPolicyAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListConfigurationPolicyAssociations",
-	}
-}

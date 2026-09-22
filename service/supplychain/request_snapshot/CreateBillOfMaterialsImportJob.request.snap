@@ -1,0 +1,5 @@
+POST /api/configuration/instances/__InstanceId__/bill-of-materials-import-jobs
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","s3uri":"__S3uri__"}

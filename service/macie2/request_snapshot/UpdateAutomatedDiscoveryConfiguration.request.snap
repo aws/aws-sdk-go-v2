@@ -1,0 +1,5 @@
+PUT /automated-discovery/configuration
+
+Content-Type: application/json
+
+{"autoEnableOrganizationMembers":"ALL","status":"ENABLED"}

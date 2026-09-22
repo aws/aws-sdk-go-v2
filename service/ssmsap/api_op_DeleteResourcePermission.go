@@ -4,11 +4,10 @@ package ssmsap
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes permissions associated with the target database.
@@ -43,6 +42,44 @@ type DeleteResourcePermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePermissionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != "" {
+		s.WriteString(schemas.DeleteResourcePermissionInput_ActionType, string(v.ActionType))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePermissionInput_ResourceArn, *v.ResourceArn)
+	}
+	if v.SourceResourceArn != nil {
+		s.WriteString(schemas.DeleteResourcePermissionInput_SourceResourceArn, *v.SourceResourceArn)
+	}
+}
+func (v *DeleteResourcePermissionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePermissionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourcePermissionInput_ActionType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteResourcePermissionInput_ActionType, &ev); err != nil {
+				return err
+			}
+			v.ActionType = types.PermissionActionType(ev)
+			return nil
+		case schemas.DeleteResourcePermissionInput_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DeleteResourcePermissionInput_ResourceArn, v.ResourceArn)
+		case schemas.DeleteResourcePermissionInput_SourceResourceArn:
+			v.SourceResourceArn = new(string)
+			return d.ReadString(schemas.DeleteResourcePermissionInput_SourceResourceArn, v.SourceResourceArn)
+		}
+		return nil
+	})
+}
+
 type DeleteResourcePermissionOutput struct {
 
 	// The policy that removes permissions on the target database.
@@ -54,77 +91,48 @@ type DeleteResourcePermissionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResourcePermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResourcePermissionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResourcePermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Policy != nil {
+		s.WriteString(schemas.DeleteResourcePermissionOutput_Policy, *v.Policy)
+	}
+}
+func (v *DeleteResourcePermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResourcePermissionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResourcePermissionOutput_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.DeleteResourcePermissionOutput_Policy, v.Policy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResourcePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePermission, schemas.DeleteResourcePermissionInput, schemas.DeleteResourcePermissionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResourcePermission{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResourcePermission, schemas.DeleteResourcePermissionInput, schemas.DeleteResourcePermissionOutput), output: &DeleteResourcePermissionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResourcePermission{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteResourcePermission"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteResourcePermissionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteResourcePermission(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +147,8 @@ func (c *Client) addOperationDeleteResourcePermissionMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteResourcePermission(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteResourcePermission",
-	}
 }

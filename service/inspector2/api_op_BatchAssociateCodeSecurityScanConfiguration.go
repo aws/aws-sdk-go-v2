@@ -4,11 +4,10 @@ package inspector2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates multiple code repositories with an Amazon Inspector code security
@@ -38,6 +37,16 @@ type BatchAssociateCodeSecurityScanConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateCodeSecurityScanConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateCodeSecurityScanConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateCodeSecurityScanConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociateConfigurationRequestList(s, schemas.BatchAssociateCodeSecurityScanConfigurationRequest_associateConfigurationRequests, v.AssociateConfigurationRequests)
+}
+
 type BatchAssociateCodeSecurityScanConfigurationOutput struct {
 
 	// Details of any code repositories that failed to be associated with the scan
@@ -54,77 +63,48 @@ type BatchAssociateCodeSecurityScanConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAssociateCodeSecurityScanConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAssociateCodeSecurityScanConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAssociateCodeSecurityScanConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFailedAssociationResultList(s, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_failedAssociations, v.FailedAssociations)
+	serializeSuccessfulAssociationResultList(s, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_successfulAssociations, v.SuccessfulAssociations)
+}
+func (v *BatchAssociateCodeSecurityScanConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAssociateCodeSecurityScanConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAssociateCodeSecurityScanConfigurationResponse_failedAssociations:
+			return deserializeFailedAssociationResultList(d, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_failedAssociations, &v.FailedAssociations)
+		case schemas.BatchAssociateCodeSecurityScanConfigurationResponse_successfulAssociations:
+			return deserializeSuccessfulAssociationResultList(d, schemas.BatchAssociateCodeSecurityScanConfigurationResponse_successfulAssociations, &v.SuccessfulAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAssociateCodeSecurityScanConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateCodeSecurityScanConfiguration, schemas.BatchAssociateCodeSecurityScanConfigurationRequest, schemas.BatchAssociateCodeSecurityScanConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAssociateCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAssociateCodeSecurityScanConfiguration, schemas.BatchAssociateCodeSecurityScanConfigurationRequest, schemas.BatchAssociateCodeSecurityScanConfigurationResponse), output: &BatchAssociateCodeSecurityScanConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAssociateCodeSecurityScanConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAssociateCodeSecurityScanConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchAssociateCodeSecurityScanConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchAssociateCodeSecurityScanConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +119,8 @@ func (c *Client) addOperationBatchAssociateCodeSecurityScanConfigurationMiddlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchAssociateCodeSecurityScanConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchAssociateCodeSecurityScanConfiguration",
-	}
 }

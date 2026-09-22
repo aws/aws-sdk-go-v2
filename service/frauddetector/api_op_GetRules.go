@@ -5,10 +5,10 @@ package frauddetector
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/frauddetector/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get all rules for a detector (paginated) if ruleId and ruleVersion are not
@@ -58,6 +58,30 @@ type GetRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DetectorId != nil {
+		s.WriteString(schemas.GetRulesRequest_detectorId, *v.DetectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetRulesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRulesRequest_nextToken, *v.NextToken)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.GetRulesRequest_ruleId, *v.RuleId)
+	}
+	if v.RuleVersion != nil {
+		s.WriteString(schemas.GetRulesRequest_ruleVersion, *v.RuleVersion)
+	}
+}
+
 type GetRulesOutput struct {
 
 	// The next page token to be used in subsequent requests.
@@ -72,77 +96,51 @@ type GetRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRulesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetRulesResult_nextToken, *v.NextToken)
+	}
+	serializeRuleDetailList(s, schemas.GetRulesResult_ruleDetails, v.RuleDetails)
+}
+func (v *GetRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRulesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRulesResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetRulesResult_nextToken, v.NextToken)
+		case schemas.GetRulesResult_ruleDetails:
+			return deserializeRuleDetailList(d, schemas.GetRulesResult_ruleDetails, &v.RuleDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRules, schemas.GetRulesRequest, schemas.GetRulesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRules, schemas.GetRulesRequest, schemas.GetRulesResult), output: &GetRulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetRules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetRulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +153,6 @@ func (c *Client) addOperationGetRulesMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +252,3 @@ type GetRulesAPIClient interface {
 }
 
 var _ GetRulesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetRules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRules",
-	}
-}

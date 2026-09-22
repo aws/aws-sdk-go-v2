@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/apprunner/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,34 @@ type AuthenticationConfiguration struct {
 	ConnectionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AuthenticationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuthenticationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuthenticationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRoleArn != nil {
+		s.WriteString(schemas.AuthenticationConfiguration_AccessRoleArn, *v.AccessRoleArn)
+	}
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.AuthenticationConfiguration_ConnectionArn, *v.ConnectionArn)
+	}
+}
+func (v *AuthenticationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuthenticationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuthenticationConfiguration_AccessRoleArn:
+			v.AccessRoleArn = new(string)
+			return d.ReadString(schemas.AuthenticationConfiguration_AccessRoleArn, v.AccessRoleArn)
+		case schemas.AuthenticationConfiguration_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.AuthenticationConfiguration_ConnectionArn, v.ConnectionArn)
+		}
+		return nil
+	})
 }
 
 // Describes an App Runner automatic scaling configuration resource.
@@ -104,6 +134,98 @@ type AutoScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfigurationArn != nil {
+		s.WriteString(schemas.AutoScalingConfiguration_AutoScalingConfigurationArn, *v.AutoScalingConfigurationArn)
+	}
+	if v.AutoScalingConfigurationName != nil {
+		s.WriteString(schemas.AutoScalingConfiguration_AutoScalingConfigurationName, *v.AutoScalingConfigurationName)
+	}
+	if v.AutoScalingConfigurationRevision != nil {
+		s.WriteInt32(schemas.AutoScalingConfiguration_AutoScalingConfigurationRevision, *v.AutoScalingConfigurationRevision)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AutoScalingConfiguration_CreatedAt, *v.CreatedAt)
+	}
+	if v.DeletedAt != nil {
+		s.WriteTime(schemas.AutoScalingConfiguration_DeletedAt, *v.DeletedAt)
+	}
+	if v.HasAssociatedService != nil {
+		s.WriteBool(schemas.AutoScalingConfiguration_HasAssociatedService, *v.HasAssociatedService)
+	}
+	if v.IsDefault != nil {
+		s.WriteBool(schemas.AutoScalingConfiguration_IsDefault, *v.IsDefault)
+	}
+	if v.Latest != nil {
+		s.WriteBool(schemas.AutoScalingConfiguration_Latest, *v.Latest)
+	}
+	if v.MaxConcurrency != nil {
+		s.WriteInt32(schemas.AutoScalingConfiguration_MaxConcurrency, *v.MaxConcurrency)
+	}
+	if v.MaxSize != nil {
+		s.WriteInt32(schemas.AutoScalingConfiguration_MaxSize, *v.MaxSize)
+	}
+	if v.MinSize != nil {
+		s.WriteInt32(schemas.AutoScalingConfiguration_MinSize, *v.MinSize)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutoScalingConfiguration_Status, string(v.Status))
+	}
+}
+func (v *AutoScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingConfiguration_AutoScalingConfigurationArn:
+			v.AutoScalingConfigurationArn = new(string)
+			return d.ReadString(schemas.AutoScalingConfiguration_AutoScalingConfigurationArn, v.AutoScalingConfigurationArn)
+		case schemas.AutoScalingConfiguration_AutoScalingConfigurationName:
+			v.AutoScalingConfigurationName = new(string)
+			return d.ReadString(schemas.AutoScalingConfiguration_AutoScalingConfigurationName, v.AutoScalingConfigurationName)
+		case schemas.AutoScalingConfiguration_AutoScalingConfigurationRevision:
+			v.AutoScalingConfigurationRevision = new(int32)
+			return d.ReadInt32(schemas.AutoScalingConfiguration_AutoScalingConfigurationRevision, v.AutoScalingConfigurationRevision)
+		case schemas.AutoScalingConfiguration_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutoScalingConfiguration_CreatedAt, v.CreatedAt)
+		case schemas.AutoScalingConfiguration_DeletedAt:
+			v.DeletedAt = new(time.Time)
+			return d.ReadTime(schemas.AutoScalingConfiguration_DeletedAt, v.DeletedAt)
+		case schemas.AutoScalingConfiguration_HasAssociatedService:
+			v.HasAssociatedService = new(bool)
+			return d.ReadBool(schemas.AutoScalingConfiguration_HasAssociatedService, v.HasAssociatedService)
+		case schemas.AutoScalingConfiguration_IsDefault:
+			v.IsDefault = new(bool)
+			return d.ReadBool(schemas.AutoScalingConfiguration_IsDefault, v.IsDefault)
+		case schemas.AutoScalingConfiguration_Latest:
+			v.Latest = new(bool)
+			return d.ReadBool(schemas.AutoScalingConfiguration_Latest, v.Latest)
+		case schemas.AutoScalingConfiguration_MaxConcurrency:
+			v.MaxConcurrency = new(int32)
+			return d.ReadInt32(schemas.AutoScalingConfiguration_MaxConcurrency, v.MaxConcurrency)
+		case schemas.AutoScalingConfiguration_MaxSize:
+			v.MaxSize = new(int32)
+			return d.ReadInt32(schemas.AutoScalingConfiguration_MaxSize, v.MaxSize)
+		case schemas.AutoScalingConfiguration_MinSize:
+			v.MinSize = new(int32)
+			return d.ReadInt32(schemas.AutoScalingConfiguration_MinSize, v.MinSize)
+		case schemas.AutoScalingConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutoScalingConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides summary information about an App Runner automatic scaling
 // configuration resource.
 //
@@ -150,6 +272,67 @@ type AutoScalingConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutoScalingConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutoScalingConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutoScalingConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfigurationArn != nil {
+		s.WriteString(schemas.AutoScalingConfigurationSummary_AutoScalingConfigurationArn, *v.AutoScalingConfigurationArn)
+	}
+	if v.AutoScalingConfigurationName != nil {
+		s.WriteString(schemas.AutoScalingConfigurationSummary_AutoScalingConfigurationName, *v.AutoScalingConfigurationName)
+	}
+	if v.AutoScalingConfigurationRevision != 0 {
+		s.WriteInt32(schemas.AutoScalingConfigurationSummary_AutoScalingConfigurationRevision, v.AutoScalingConfigurationRevision)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AutoScalingConfigurationSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.HasAssociatedService != nil {
+		s.WriteBool(schemas.AutoScalingConfigurationSummary_HasAssociatedService, *v.HasAssociatedService)
+	}
+	if v.IsDefault != nil {
+		s.WriteBool(schemas.AutoScalingConfigurationSummary_IsDefault, *v.IsDefault)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.AutoScalingConfigurationSummary_Status, string(v.Status))
+	}
+}
+func (v *AutoScalingConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutoScalingConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutoScalingConfigurationSummary_AutoScalingConfigurationArn:
+			v.AutoScalingConfigurationArn = new(string)
+			return d.ReadString(schemas.AutoScalingConfigurationSummary_AutoScalingConfigurationArn, v.AutoScalingConfigurationArn)
+		case schemas.AutoScalingConfigurationSummary_AutoScalingConfigurationName:
+			v.AutoScalingConfigurationName = new(string)
+			return d.ReadString(schemas.AutoScalingConfigurationSummary_AutoScalingConfigurationName, v.AutoScalingConfigurationName)
+		case schemas.AutoScalingConfigurationSummary_AutoScalingConfigurationRevision:
+			return d.ReadInt32(schemas.AutoScalingConfigurationSummary_AutoScalingConfigurationRevision, &v.AutoScalingConfigurationRevision)
+		case schemas.AutoScalingConfigurationSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AutoScalingConfigurationSummary_CreatedAt, v.CreatedAt)
+		case schemas.AutoScalingConfigurationSummary_HasAssociatedService:
+			v.HasAssociatedService = new(bool)
+			return d.ReadBool(schemas.AutoScalingConfigurationSummary_HasAssociatedService, v.HasAssociatedService)
+		case schemas.AutoScalingConfigurationSummary_IsDefault:
+			v.IsDefault = new(bool)
+			return d.ReadBool(schemas.AutoScalingConfigurationSummary_IsDefault, v.IsDefault)
+		case schemas.AutoScalingConfigurationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.AutoScalingConfigurationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = AutoScalingConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a certificate CNAME record to add to your DNS. For more information,
 // see [AssociateCustomDomain].
 //
@@ -170,6 +353,50 @@ type CertificateValidationRecord struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CertificateValidationRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateValidationRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateValidationRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CertificateValidationRecord_Name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CertificateValidationRecord_Status, string(v.Status))
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CertificateValidationRecord_Type, *v.Type)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CertificateValidationRecord_Value, *v.Value)
+	}
+}
+func (v *CertificateValidationRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateValidationRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateValidationRecord_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CertificateValidationRecord_Name, v.Name)
+		case schemas.CertificateValidationRecord_Status:
+			var ev string
+			if err := d.ReadString(schemas.CertificateValidationRecord_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CertificateValidationRecordStatus(ev)
+			return nil
+		case schemas.CertificateValidationRecord_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CertificateValidationRecord_Type, v.Type)
+		case schemas.CertificateValidationRecord_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CertificateValidationRecord_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes the configuration that App Runner uses to build and run an App Runner
@@ -194,6 +421,40 @@ type CodeConfiguration struct {
 	CodeConfigurationValues *CodeConfigurationValues
 
 	noSmithyDocumentSerde
+}
+
+func (v *CodeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeConfigurationValues != nil {
+		s.WriteStruct(schemas.CodeConfiguration_CodeConfigurationValues)
+		v.CodeConfigurationValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfigurationSource != "" {
+		s.WriteString(schemas.CodeConfiguration_ConfigurationSource, string(v.ConfigurationSource))
+	}
+}
+func (v *CodeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeConfiguration_CodeConfigurationValues:
+			v.CodeConfigurationValues = &CodeConfigurationValues{}
+			return v.CodeConfigurationValues.Deserialize(d)
+		case schemas.CodeConfiguration_ConfigurationSource:
+			var ev string
+			if err := d.ReadString(schemas.CodeConfiguration_ConfigurationSource, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationSource = ConfigurationSource(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the basic configuration needed for building and running an App Runner
@@ -241,6 +502,56 @@ type CodeConfigurationValues struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CodeConfigurationValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeConfigurationValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeConfigurationValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildCommand != nil {
+		s.WriteString(schemas.CodeConfigurationValues_BuildCommand, *v.BuildCommand)
+	}
+	if v.Port != nil {
+		s.WriteString(schemas.CodeConfigurationValues_Port, *v.Port)
+	}
+	if v.Runtime != "" {
+		s.WriteString(schemas.CodeConfigurationValues_Runtime, string(v.Runtime))
+	}
+	serializeRuntimeEnvironmentSecrets(s, schemas.CodeConfigurationValues_RuntimeEnvironmentSecrets, v.RuntimeEnvironmentSecrets)
+	serializeRuntimeEnvironmentVariables(s, schemas.CodeConfigurationValues_RuntimeEnvironmentVariables, v.RuntimeEnvironmentVariables)
+	if v.StartCommand != nil {
+		s.WriteString(schemas.CodeConfigurationValues_StartCommand, *v.StartCommand)
+	}
+}
+func (v *CodeConfigurationValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeConfigurationValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeConfigurationValues_BuildCommand:
+			v.BuildCommand = new(string)
+			return d.ReadString(schemas.CodeConfigurationValues_BuildCommand, v.BuildCommand)
+		case schemas.CodeConfigurationValues_Port:
+			v.Port = new(string)
+			return d.ReadString(schemas.CodeConfigurationValues_Port, v.Port)
+		case schemas.CodeConfigurationValues_Runtime:
+			var ev string
+			if err := d.ReadString(schemas.CodeConfigurationValues_Runtime, &ev); err != nil {
+				return err
+			}
+			v.Runtime = Runtime(ev)
+			return nil
+		case schemas.CodeConfigurationValues_RuntimeEnvironmentSecrets:
+			return deserializeRuntimeEnvironmentSecrets(d, schemas.CodeConfigurationValues_RuntimeEnvironmentSecrets, &v.RuntimeEnvironmentSecrets)
+		case schemas.CodeConfigurationValues_RuntimeEnvironmentVariables:
+			return deserializeRuntimeEnvironmentVariables(d, schemas.CodeConfigurationValues_RuntimeEnvironmentVariables, &v.RuntimeEnvironmentVariables)
+		case schemas.CodeConfigurationValues_StartCommand:
+			v.StartCommand = new(string)
+			return d.ReadString(schemas.CodeConfigurationValues_StartCommand, v.StartCommand)
+		}
+		return nil
+	})
+}
+
 // Describes a source code repository.
 type CodeRepository struct {
 
@@ -268,6 +579,50 @@ type CodeRepository struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CodeRepository) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeRepository)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeRepository) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeConfiguration != nil {
+		s.WriteStruct(schemas.CodeRepository_CodeConfiguration)
+		v.CodeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RepositoryUrl != nil {
+		s.WriteString(schemas.CodeRepository_RepositoryUrl, *v.RepositoryUrl)
+	}
+	if v.SourceCodeVersion != nil {
+		s.WriteStruct(schemas.CodeRepository_SourceCodeVersion)
+		v.SourceCodeVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceDirectory != nil {
+		s.WriteString(schemas.CodeRepository_SourceDirectory, *v.SourceDirectory)
+	}
+}
+func (v *CodeRepository) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeRepository, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeRepository_CodeConfiguration:
+			v.CodeConfiguration = &CodeConfiguration{}
+			return v.CodeConfiguration.Deserialize(d)
+		case schemas.CodeRepository_RepositoryUrl:
+			v.RepositoryUrl = new(string)
+			return d.ReadString(schemas.CodeRepository_RepositoryUrl, v.RepositoryUrl)
+		case schemas.CodeRepository_SourceCodeVersion:
+			v.SourceCodeVersion = &SourceCodeVersion{}
+			return v.SourceCodeVersion.Deserialize(d)
+		case schemas.CodeRepository_SourceDirectory:
+			v.SourceDirectory = new(string)
+			return d.ReadString(schemas.CodeRepository_SourceDirectory, v.SourceDirectory)
+		}
+		return nil
+	})
+}
+
 // Describes an App Runner connection resource.
 type Connection struct {
 
@@ -290,6 +645,60 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Connection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.Connection_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.Connection_ConnectionName, *v.ConnectionName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Connection_CreatedAt, *v.CreatedAt)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.Connection_ProviderType, string(v.ProviderType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Connection_Status, string(v.Status))
+	}
+}
+func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connection_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.Connection_ConnectionArn, v.ConnectionArn)
+		case schemas.Connection_ConnectionName:
+			v.ConnectionName = new(string)
+			return d.ReadString(schemas.Connection_ConnectionName, v.ConnectionName)
+		case schemas.Connection_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Connection_CreatedAt, v.CreatedAt)
+		case schemas.Connection_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.Connection_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.Connection_Status:
+			var ev string
+			if err := d.ReadString(schemas.Connection_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ConnectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides summary information about an App Runner connection resource.
 type ConnectionSummary struct {
 
@@ -310,6 +719,60 @@ type ConnectionSummary struct {
 	Status ConnectionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.ConnectionSummary_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.ConnectionSummary_ConnectionName, *v.ConnectionName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ConnectionSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.ConnectionSummary_ProviderType, string(v.ProviderType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ConnectionSummary_Status, string(v.Status))
+	}
+}
+func (v *ConnectionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionSummary_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.ConnectionSummary_ConnectionArn, v.ConnectionArn)
+		case schemas.ConnectionSummary_ConnectionName:
+			v.ConnectionName = new(string)
+			return d.ReadString(schemas.ConnectionSummary_ConnectionName, v.ConnectionName)
+		case schemas.ConnectionSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectionSummary_CreatedAt, v.CreatedAt)
+		case schemas.ConnectionSummary_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.ConnectionSummary_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.ConnectionSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ConnectionSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ConnectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a custom domain that's associated with an App Runner service.
@@ -339,6 +802,47 @@ type CustomDomain struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomDomain) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomDomain)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomDomain) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCertificateValidationRecordList(s, schemas.CustomDomain_CertificateValidationRecords, v.CertificateValidationRecords)
+	if v.DomainName != nil {
+		s.WriteString(schemas.CustomDomain_DomainName, *v.DomainName)
+	}
+	if v.EnableWWWSubdomain != nil {
+		s.WriteBool(schemas.CustomDomain_EnableWWWSubdomain, *v.EnableWWWSubdomain)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CustomDomain_Status, string(v.Status))
+	}
+}
+func (v *CustomDomain) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomDomain, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomDomain_CertificateValidationRecords:
+			return deserializeCertificateValidationRecordList(d, schemas.CustomDomain_CertificateValidationRecords, &v.CertificateValidationRecords)
+		case schemas.CustomDomain_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.CustomDomain_DomainName, v.DomainName)
+		case schemas.CustomDomain_EnableWWWSubdomain:
+			v.EnableWWWSubdomain = new(bool)
+			return d.ReadBool(schemas.CustomDomain_EnableWWWSubdomain, v.EnableWWWSubdomain)
+		case schemas.CustomDomain_Status:
+			var ev string
+			if err := d.ReadString(schemas.CustomDomain_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CustomDomainAssociationStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes configuration settings related to outbound network traffic of an App
 // Runner service.
 type EgressConfiguration struct {
@@ -358,6 +862,38 @@ type EgressConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EgressConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EgressConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EgressConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EgressType != "" {
+		s.WriteString(schemas.EgressConfiguration_EgressType, string(v.EgressType))
+	}
+	if v.VpcConnectorArn != nil {
+		s.WriteString(schemas.EgressConfiguration_VpcConnectorArn, *v.VpcConnectorArn)
+	}
+}
+func (v *EgressConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EgressConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EgressConfiguration_EgressType:
+			var ev string
+			if err := d.ReadString(schemas.EgressConfiguration_EgressType, &ev); err != nil {
+				return err
+			}
+			v.EgressType = EgressType(ev)
+			return nil
+		case schemas.EgressConfiguration_VpcConnectorArn:
+			v.VpcConnectorArn = new(string)
+			return d.ReadString(schemas.EgressConfiguration_VpcConnectorArn, v.VpcConnectorArn)
+		}
+		return nil
+	})
+}
+
 // Describes a custom encryption key that App Runner uses to encrypt copies of the
 // source repository and service logs.
 type EncryptionConfiguration struct {
@@ -368,6 +904,28 @@ type EncryptionConfiguration struct {
 	KmsKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KmsKey != nil {
+		s.WriteString(schemas.EncryptionConfiguration_KmsKey, *v.KmsKey)
+	}
+}
+func (v *EncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptionConfiguration_KmsKey:
+			v.KmsKey = new(string)
+			return d.ReadString(schemas.EncryptionConfiguration_KmsKey, v.KmsKey)
+		}
+		return nil
+	})
 }
 
 // Describes the settings for the health check that App Runner performs to monitor
@@ -415,6 +973,62 @@ type HealthCheckConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HealthCheckConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HealthCheckConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthCheckConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HealthyThreshold != nil {
+		s.WriteInt32(schemas.HealthCheckConfiguration_HealthyThreshold, *v.HealthyThreshold)
+	}
+	if v.Interval != nil {
+		s.WriteInt32(schemas.HealthCheckConfiguration_Interval, *v.Interval)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.HealthCheckConfiguration_Path, *v.Path)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.HealthCheckConfiguration_Protocol, string(v.Protocol))
+	}
+	if v.Timeout != nil {
+		s.WriteInt32(schemas.HealthCheckConfiguration_Timeout, *v.Timeout)
+	}
+	if v.UnhealthyThreshold != nil {
+		s.WriteInt32(schemas.HealthCheckConfiguration_UnhealthyThreshold, *v.UnhealthyThreshold)
+	}
+}
+func (v *HealthCheckConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthCheckConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthCheckConfiguration_HealthyThreshold:
+			v.HealthyThreshold = new(int32)
+			return d.ReadInt32(schemas.HealthCheckConfiguration_HealthyThreshold, v.HealthyThreshold)
+		case schemas.HealthCheckConfiguration_Interval:
+			v.Interval = new(int32)
+			return d.ReadInt32(schemas.HealthCheckConfiguration_Interval, v.Interval)
+		case schemas.HealthCheckConfiguration_Path:
+			v.Path = new(string)
+			return d.ReadString(schemas.HealthCheckConfiguration_Path, v.Path)
+		case schemas.HealthCheckConfiguration_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.HealthCheckConfiguration_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = HealthCheckProtocol(ev)
+			return nil
+		case schemas.HealthCheckConfiguration_Timeout:
+			v.Timeout = new(int32)
+			return d.ReadInt32(schemas.HealthCheckConfiguration_Timeout, v.Timeout)
+		case schemas.HealthCheckConfiguration_UnhealthyThreshold:
+			v.UnhealthyThreshold = new(int32)
+			return d.ReadInt32(schemas.HealthCheckConfiguration_UnhealthyThreshold, v.UnhealthyThreshold)
+		}
+		return nil
+	})
+}
+
 // Describes the configuration that App Runner uses to run an App Runner service
 // using an image pulled from a source image repository.
 type ImageConfiguration struct {
@@ -451,6 +1065,40 @@ type ImageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImageConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Port != nil {
+		s.WriteString(schemas.ImageConfiguration_Port, *v.Port)
+	}
+	serializeRuntimeEnvironmentSecrets(s, schemas.ImageConfiguration_RuntimeEnvironmentSecrets, v.RuntimeEnvironmentSecrets)
+	serializeRuntimeEnvironmentVariables(s, schemas.ImageConfiguration_RuntimeEnvironmentVariables, v.RuntimeEnvironmentVariables)
+	if v.StartCommand != nil {
+		s.WriteString(schemas.ImageConfiguration_StartCommand, *v.StartCommand)
+	}
+}
+func (v *ImageConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageConfiguration_Port:
+			v.Port = new(string)
+			return d.ReadString(schemas.ImageConfiguration_Port, v.Port)
+		case schemas.ImageConfiguration_RuntimeEnvironmentSecrets:
+			return deserializeRuntimeEnvironmentSecrets(d, schemas.ImageConfiguration_RuntimeEnvironmentSecrets, &v.RuntimeEnvironmentSecrets)
+		case schemas.ImageConfiguration_RuntimeEnvironmentVariables:
+			return deserializeRuntimeEnvironmentVariables(d, schemas.ImageConfiguration_RuntimeEnvironmentVariables, &v.RuntimeEnvironmentVariables)
+		case schemas.ImageConfiguration_StartCommand:
+			v.StartCommand = new(string)
+			return d.ReadString(schemas.ImageConfiguration_StartCommand, v.StartCommand)
+		}
+		return nil
+	})
+}
+
 // Describes a source image repository.
 type ImageRepository struct {
 
@@ -476,6 +1124,46 @@ type ImageRepository struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImageRepository) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImageRepository)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImageRepository) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageConfiguration != nil {
+		s.WriteStruct(schemas.ImageRepository_ImageConfiguration)
+		v.ImageConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageIdentifier != nil {
+		s.WriteString(schemas.ImageRepository_ImageIdentifier, *v.ImageIdentifier)
+	}
+	if v.ImageRepositoryType != "" {
+		s.WriteString(schemas.ImageRepository_ImageRepositoryType, string(v.ImageRepositoryType))
+	}
+}
+func (v *ImageRepository) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImageRepository, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImageRepository_ImageConfiguration:
+			v.ImageConfiguration = &ImageConfiguration{}
+			return v.ImageConfiguration.Deserialize(d)
+		case schemas.ImageRepository_ImageIdentifier:
+			v.ImageIdentifier = new(string)
+			return d.ReadString(schemas.ImageRepository_ImageIdentifier, v.ImageIdentifier)
+		case schemas.ImageRepository_ImageRepositoryType:
+			var ev string
+			if err := d.ReadString(schemas.ImageRepository_ImageRepositoryType, &ev); err != nil {
+				return err
+			}
+			v.ImageRepositoryType = ImageRepositoryType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Network configuration settings for inbound network traffic.
 type IngressConfiguration struct {
 
@@ -485,6 +1173,27 @@ type IngressConfiguration struct {
 	IsPubliclyAccessible bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *IngressConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngressConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngressConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsPubliclyAccessible != false {
+		s.WriteBool(schemas.IngressConfiguration_IsPubliclyAccessible, v.IsPubliclyAccessible)
+	}
+}
+func (v *IngressConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngressConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngressConfiguration_IsPubliclyAccessible:
+			return d.ReadBool(schemas.IngressConfiguration_IsPubliclyAccessible, &v.IsPubliclyAccessible)
+		}
+		return nil
+	})
 }
 
 // The configuration of your VPC and the associated VPC endpoint. The VPC endpoint
@@ -499,6 +1208,34 @@ type IngressVpcConfiguration struct {
 	VpcId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IngressVpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IngressVpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IngressVpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.IngressVpcConfiguration_VpcEndpointId, *v.VpcEndpointId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.IngressVpcConfiguration_VpcId, *v.VpcId)
+	}
+}
+func (v *IngressVpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IngressVpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IngressVpcConfiguration_VpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.IngressVpcConfiguration_VpcEndpointId, v.VpcEndpointId)
+		case schemas.IngressVpcConfiguration_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.IngressVpcConfiguration_VpcId, v.VpcId)
+		}
+		return nil
+	})
 }
 
 // Describes the runtime configuration of an App Runner service instance (scaling
@@ -524,6 +1261,40 @@ type InstanceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cpu != nil {
+		s.WriteString(schemas.InstanceConfiguration_Cpu, *v.Cpu)
+	}
+	if v.InstanceRoleArn != nil {
+		s.WriteString(schemas.InstanceConfiguration_InstanceRoleArn, *v.InstanceRoleArn)
+	}
+	if v.Memory != nil {
+		s.WriteString(schemas.InstanceConfiguration_Memory, *v.Memory)
+	}
+}
+func (v *InstanceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceConfiguration_Cpu:
+			v.Cpu = new(string)
+			return d.ReadString(schemas.InstanceConfiguration_Cpu, v.Cpu)
+		case schemas.InstanceConfiguration_InstanceRoleArn:
+			v.InstanceRoleArn = new(string)
+			return d.ReadString(schemas.InstanceConfiguration_InstanceRoleArn, v.InstanceRoleArn)
+		case schemas.InstanceConfiguration_Memory:
+			v.Memory = new(string)
+			return d.ReadString(schemas.InstanceConfiguration_Memory, v.Memory)
+		}
+		return nil
+	})
+}
+
 // Returns a list of VPC Ingress Connections based on the filter provided. It can
 // return either ServiceArn or VpcEndpointId , or both.
 type ListVpcIngressConnectionsFilter struct {
@@ -535,6 +1306,34 @@ type ListVpcIngressConnectionsFilter struct {
 	VpcEndpointId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListVpcIngressConnectionsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcIngressConnectionsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcIngressConnectionsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListVpcIngressConnectionsFilter_ServiceArn, *v.ServiceArn)
+	}
+	if v.VpcEndpointId != nil {
+		s.WriteString(schemas.ListVpcIngressConnectionsFilter_VpcEndpointId, *v.VpcEndpointId)
+	}
+}
+func (v *ListVpcIngressConnectionsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcIngressConnectionsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcIngressConnectionsFilter_ServiceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.ListVpcIngressConnectionsFilter_ServiceArn, v.ServiceArn)
+		case schemas.ListVpcIngressConnectionsFilter_VpcEndpointId:
+			v.VpcEndpointId = new(string)
+			return d.ReadString(schemas.ListVpcIngressConnectionsFilter_VpcEndpointId, v.VpcEndpointId)
+		}
+		return nil
+	})
 }
 
 // Describes configuration settings related to network traffic of an App Runner
@@ -553,6 +1352,48 @@ type NetworkConfiguration struct {
 	IpAddressType IpAddressType
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EgressConfiguration != nil {
+		s.WriteStruct(schemas.NetworkConfiguration_EgressConfiguration)
+		v.EgressConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IngressConfiguration != nil {
+		s.WriteStruct(schemas.NetworkConfiguration_IngressConfiguration)
+		v.IngressConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.NetworkConfiguration_IpAddressType, string(v.IpAddressType))
+	}
+}
+func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfiguration_EgressConfiguration:
+			v.EgressConfiguration = &EgressConfiguration{}
+			return v.EgressConfiguration.Deserialize(d)
+		case schemas.NetworkConfiguration_IngressConfiguration:
+			v.IngressConfiguration = &IngressConfiguration{}
+			return v.IngressConfiguration.Deserialize(d)
+		case schemas.NetworkConfiguration_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.NetworkConfiguration_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = IpAddressType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes an App Runner observability configuration resource. Multiple
@@ -603,6 +1444,74 @@ type ObservabilityConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ObservabilityConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObservabilityConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObservabilityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ObservabilityConfiguration_CreatedAt, *v.CreatedAt)
+	}
+	if v.DeletedAt != nil {
+		s.WriteTime(schemas.ObservabilityConfiguration_DeletedAt, *v.DeletedAt)
+	}
+	if v.Latest != false {
+		s.WriteBool(schemas.ObservabilityConfiguration_Latest, v.Latest)
+	}
+	if v.ObservabilityConfigurationArn != nil {
+		s.WriteString(schemas.ObservabilityConfiguration_ObservabilityConfigurationArn, *v.ObservabilityConfigurationArn)
+	}
+	if v.ObservabilityConfigurationName != nil {
+		s.WriteString(schemas.ObservabilityConfiguration_ObservabilityConfigurationName, *v.ObservabilityConfigurationName)
+	}
+	if v.ObservabilityConfigurationRevision != 0 {
+		s.WriteInt32(schemas.ObservabilityConfiguration_ObservabilityConfigurationRevision, v.ObservabilityConfigurationRevision)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ObservabilityConfiguration_Status, string(v.Status))
+	}
+	if v.TraceConfiguration != nil {
+		s.WriteStruct(schemas.ObservabilityConfiguration_TraceConfiguration)
+		v.TraceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ObservabilityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObservabilityConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObservabilityConfiguration_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ObservabilityConfiguration_CreatedAt, v.CreatedAt)
+		case schemas.ObservabilityConfiguration_DeletedAt:
+			v.DeletedAt = new(time.Time)
+			return d.ReadTime(schemas.ObservabilityConfiguration_DeletedAt, v.DeletedAt)
+		case schemas.ObservabilityConfiguration_Latest:
+			return d.ReadBool(schemas.ObservabilityConfiguration_Latest, &v.Latest)
+		case schemas.ObservabilityConfiguration_ObservabilityConfigurationArn:
+			v.ObservabilityConfigurationArn = new(string)
+			return d.ReadString(schemas.ObservabilityConfiguration_ObservabilityConfigurationArn, v.ObservabilityConfigurationArn)
+		case schemas.ObservabilityConfiguration_ObservabilityConfigurationName:
+			v.ObservabilityConfigurationName = new(string)
+			return d.ReadString(schemas.ObservabilityConfiguration_ObservabilityConfigurationName, v.ObservabilityConfigurationName)
+		case schemas.ObservabilityConfiguration_ObservabilityConfigurationRevision:
+			return d.ReadInt32(schemas.ObservabilityConfiguration_ObservabilityConfigurationRevision, &v.ObservabilityConfigurationRevision)
+		case schemas.ObservabilityConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.ObservabilityConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ObservabilityConfigurationStatus(ev)
+			return nil
+		case schemas.ObservabilityConfiguration_TraceConfiguration:
+			v.TraceConfiguration = &TraceConfiguration{}
+			return v.TraceConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides summary information about an App Runner observability configuration
 // resource.
 //
@@ -625,6 +1534,39 @@ type ObservabilityConfigurationSummary struct {
 	ObservabilityConfigurationRevision int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ObservabilityConfigurationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ObservabilityConfigurationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ObservabilityConfigurationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfigurationArn != nil {
+		s.WriteString(schemas.ObservabilityConfigurationSummary_ObservabilityConfigurationArn, *v.ObservabilityConfigurationArn)
+	}
+	if v.ObservabilityConfigurationName != nil {
+		s.WriteString(schemas.ObservabilityConfigurationSummary_ObservabilityConfigurationName, *v.ObservabilityConfigurationName)
+	}
+	if v.ObservabilityConfigurationRevision != 0 {
+		s.WriteInt32(schemas.ObservabilityConfigurationSummary_ObservabilityConfigurationRevision, v.ObservabilityConfigurationRevision)
+	}
+}
+func (v *ObservabilityConfigurationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObservabilityConfigurationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObservabilityConfigurationSummary_ObservabilityConfigurationArn:
+			v.ObservabilityConfigurationArn = new(string)
+			return d.ReadString(schemas.ObservabilityConfigurationSummary_ObservabilityConfigurationArn, v.ObservabilityConfigurationArn)
+		case schemas.ObservabilityConfigurationSummary_ObservabilityConfigurationName:
+			v.ObservabilityConfigurationName = new(string)
+			return d.ReadString(schemas.ObservabilityConfigurationSummary_ObservabilityConfigurationName, v.ObservabilityConfigurationName)
+		case schemas.ObservabilityConfigurationSummary_ObservabilityConfigurationRevision:
+			return d.ReadInt32(schemas.ObservabilityConfigurationSummary_ObservabilityConfigurationRevision, &v.ObservabilityConfigurationRevision)
+		}
+		return nil
+	})
 }
 
 // Provides summary information for an operation that occurred on an App Runner
@@ -656,6 +1598,72 @@ type OperationSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *OperationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.OperationSummary_EndedAt, *v.EndedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.OperationSummary_Id, *v.Id)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.OperationSummary_StartedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OperationSummary_Status, string(v.Status))
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.OperationSummary_TargetArn, *v.TargetArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.OperationSummary_Type, string(v.Type))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.OperationSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *OperationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationSummary_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.OperationSummary_EndedAt, v.EndedAt)
+		case schemas.OperationSummary_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.OperationSummary_Id, v.Id)
+		case schemas.OperationSummary_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.OperationSummary_StartedAt, v.StartedAt)
+		case schemas.OperationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.OperationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = OperationStatus(ev)
+			return nil
+		case schemas.OperationSummary_TargetArn:
+			v.TargetArn = new(string)
+			return d.ReadString(schemas.OperationSummary_TargetArn, v.TargetArn)
+		case schemas.OperationSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.OperationSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = OperationType(ev)
+			return nil
+		case schemas.OperationSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.OperationSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // Describes an App Runner service. It can describe a service in any state,
@@ -762,6 +1770,130 @@ type Service struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Service) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Service)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Service) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingConfigurationSummary != nil {
+		s.WriteStruct(schemas.Service_AutoScalingConfigurationSummary)
+		v.AutoScalingConfigurationSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Service_CreatedAt, *v.CreatedAt)
+	}
+	if v.DeletedAt != nil {
+		s.WriteTime(schemas.Service_DeletedAt, *v.DeletedAt)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.Service_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HealthCheckConfiguration != nil {
+		s.WriteStruct(schemas.Service_HealthCheckConfiguration)
+		v.HealthCheckConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceConfiguration != nil {
+		s.WriteStruct(schemas.Service_InstanceConfiguration)
+		v.InstanceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.Service_NetworkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ObservabilityConfiguration != nil {
+		s.WriteStruct(schemas.Service_ObservabilityConfiguration)
+		v.ObservabilityConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.Service_ServiceArn, *v.ServiceArn)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.Service_ServiceId, *v.ServiceId)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.Service_ServiceName, *v.ServiceName)
+	}
+	if v.ServiceUrl != nil {
+		s.WriteString(schemas.Service_ServiceUrl, *v.ServiceUrl)
+	}
+	if v.SourceConfiguration != nil {
+		s.WriteStruct(schemas.Service_SourceConfiguration)
+		v.SourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Service_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Service_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *Service) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Service, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Service_AutoScalingConfigurationSummary:
+			v.AutoScalingConfigurationSummary = &AutoScalingConfigurationSummary{}
+			return v.AutoScalingConfigurationSummary.Deserialize(d)
+		case schemas.Service_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Service_CreatedAt, v.CreatedAt)
+		case schemas.Service_DeletedAt:
+			v.DeletedAt = new(time.Time)
+			return d.ReadTime(schemas.Service_DeletedAt, v.DeletedAt)
+		case schemas.Service_EncryptionConfiguration:
+			v.EncryptionConfiguration = &EncryptionConfiguration{}
+			return v.EncryptionConfiguration.Deserialize(d)
+		case schemas.Service_HealthCheckConfiguration:
+			v.HealthCheckConfiguration = &HealthCheckConfiguration{}
+			return v.HealthCheckConfiguration.Deserialize(d)
+		case schemas.Service_InstanceConfiguration:
+			v.InstanceConfiguration = &InstanceConfiguration{}
+			return v.InstanceConfiguration.Deserialize(d)
+		case schemas.Service_NetworkConfiguration:
+			v.NetworkConfiguration = &NetworkConfiguration{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.Service_ObservabilityConfiguration:
+			v.ObservabilityConfiguration = &ServiceObservabilityConfiguration{}
+			return v.ObservabilityConfiguration.Deserialize(d)
+		case schemas.Service_ServiceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.Service_ServiceArn, v.ServiceArn)
+		case schemas.Service_ServiceId:
+			v.ServiceId = new(string)
+			return d.ReadString(schemas.Service_ServiceId, v.ServiceId)
+		case schemas.Service_ServiceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.Service_ServiceName, v.ServiceName)
+		case schemas.Service_ServiceUrl:
+			v.ServiceUrl = new(string)
+			return d.ReadString(schemas.Service_ServiceUrl, v.ServiceUrl)
+		case schemas.Service_SourceConfiguration:
+			v.SourceConfiguration = &SourceConfiguration{}
+			return v.SourceConfiguration.Deserialize(d)
+		case schemas.Service_Status:
+			var ev string
+			if err := d.ReadString(schemas.Service_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ServiceStatus(ev)
+			return nil
+		case schemas.Service_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Service_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Describes the observability configuration of an App Runner service. These are
 // additional observability features, like tracing, that you choose to enable.
 // They're configured in a separate resource that you associate with your service.
@@ -785,6 +1917,31 @@ type ServiceObservabilityConfiguration struct {
 	ObservabilityConfigurationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceObservabilityConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceObservabilityConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceObservabilityConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ObservabilityConfigurationArn != nil {
+		s.WriteString(schemas.ServiceObservabilityConfiguration_ObservabilityConfigurationArn, *v.ObservabilityConfigurationArn)
+	}
+	s.WriteBool(schemas.ServiceObservabilityConfiguration_ObservabilityEnabled, v.ObservabilityEnabled)
+}
+func (v *ServiceObservabilityConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceObservabilityConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceObservabilityConfiguration_ObservabilityConfigurationArn:
+			v.ObservabilityConfigurationArn = new(string)
+			return d.ReadString(schemas.ServiceObservabilityConfiguration_ObservabilityConfigurationArn, v.ObservabilityConfigurationArn)
+		case schemas.ServiceObservabilityConfiguration_ObservabilityEnabled:
+			return d.ReadBool(schemas.ServiceObservabilityConfiguration_ObservabilityEnabled, &v.ObservabilityEnabled)
+		}
+		return nil
+	})
 }
 
 // Provides summary information for an App Runner service.
@@ -838,6 +1995,68 @@ type ServiceSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ServiceSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ServiceSummary_ServiceArn, *v.ServiceArn)
+	}
+	if v.ServiceId != nil {
+		s.WriteString(schemas.ServiceSummary_ServiceId, *v.ServiceId)
+	}
+	if v.ServiceName != nil {
+		s.WriteString(schemas.ServiceSummary_ServiceName, *v.ServiceName)
+	}
+	if v.ServiceUrl != nil {
+		s.WriteString(schemas.ServiceSummary_ServiceUrl, *v.ServiceUrl)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ServiceSummary_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ServiceSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ServiceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ServiceSummary_CreatedAt, v.CreatedAt)
+		case schemas.ServiceSummary_ServiceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.ServiceSummary_ServiceArn, v.ServiceArn)
+		case schemas.ServiceSummary_ServiceId:
+			v.ServiceId = new(string)
+			return d.ReadString(schemas.ServiceSummary_ServiceId, v.ServiceId)
+		case schemas.ServiceSummary_ServiceName:
+			v.ServiceName = new(string)
+			return d.ReadString(schemas.ServiceSummary_ServiceName, v.ServiceName)
+		case schemas.ServiceSummary_ServiceUrl:
+			v.ServiceUrl = new(string)
+			return d.ReadString(schemas.ServiceSummary_ServiceUrl, v.ServiceUrl)
+		case schemas.ServiceSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ServiceSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ServiceStatus(ev)
+			return nil
+		case schemas.ServiceSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ServiceSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Identifies a version of code that App Runner refers to within a source code
 // repository.
 type SourceCodeVersion struct {
@@ -858,6 +2077,38 @@ type SourceCodeVersion struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SourceCodeVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceCodeVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceCodeVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.SourceCodeVersion_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.SourceCodeVersion_Value, *v.Value)
+	}
+}
+func (v *SourceCodeVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceCodeVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceCodeVersion_Type:
+			var ev string
+			if err := d.ReadString(schemas.SourceCodeVersion_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = SourceCodeVersionType(ev)
+			return nil
+		case schemas.SourceCodeVersion_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SourceCodeVersion_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes the source deployed to an App Runner service. It can be a code or an
@@ -892,6 +2143,52 @@ type SourceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationConfiguration != nil {
+		s.WriteStruct(schemas.SourceConfiguration_AuthenticationConfiguration)
+		v.AuthenticationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoDeploymentsEnabled != nil {
+		s.WriteBool(schemas.SourceConfiguration_AutoDeploymentsEnabled, *v.AutoDeploymentsEnabled)
+	}
+	if v.CodeRepository != nil {
+		s.WriteStruct(schemas.SourceConfiguration_CodeRepository)
+		v.CodeRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageRepository != nil {
+		s.WriteStruct(schemas.SourceConfiguration_ImageRepository)
+		v.ImageRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceConfiguration_AuthenticationConfiguration:
+			v.AuthenticationConfiguration = &AuthenticationConfiguration{}
+			return v.AuthenticationConfiguration.Deserialize(d)
+		case schemas.SourceConfiguration_AutoDeploymentsEnabled:
+			v.AutoDeploymentsEnabled = new(bool)
+			return d.ReadBool(schemas.SourceConfiguration_AutoDeploymentsEnabled, v.AutoDeploymentsEnabled)
+		case schemas.SourceConfiguration_CodeRepository:
+			v.CodeRepository = &CodeRepository{}
+			return v.CodeRepository.Deserialize(d)
+		case schemas.SourceConfiguration_ImageRepository:
+			v.ImageRepository = &ImageRepository{}
+			return v.ImageRepository.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes a tag that is applied to an App Runner resource. A tag is a metadata
 // item consisting of a key-value pair.
 type Tag struct {
@@ -905,6 +2202,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes the configuration of the tracing feature within an App Runner
 // observability configuration.
 type TraceConfiguration struct {
@@ -915,6 +2240,32 @@ type TraceConfiguration struct {
 	Vendor TracingVendor
 
 	noSmithyDocumentSerde
+}
+
+func (v *TraceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TraceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TraceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Vendor != "" {
+		s.WriteString(schemas.TraceConfiguration_Vendor, string(v.Vendor))
+	}
+}
+func (v *TraceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TraceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TraceConfiguration_Vendor:
+			var ev string
+			if err := d.ReadString(schemas.TraceConfiguration_Vendor, &ev); err != nil {
+				return err
+			}
+			v.Vendor = TracingVendor(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes an App Runner VPC connector resource. A VPC connector describes the
@@ -963,6 +2314,67 @@ type VpcConnector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcConnector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConnector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConnector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.VpcConnector_CreatedAt, *v.CreatedAt)
+	}
+	if v.DeletedAt != nil {
+		s.WriteTime(schemas.VpcConnector_DeletedAt, *v.DeletedAt)
+	}
+	serializeStringList(s, schemas.VpcConnector_SecurityGroups, v.SecurityGroups)
+	if v.Status != "" {
+		s.WriteString(schemas.VpcConnector_Status, string(v.Status))
+	}
+	serializeStringList(s, schemas.VpcConnector_Subnets, v.Subnets)
+	if v.VpcConnectorArn != nil {
+		s.WriteString(schemas.VpcConnector_VpcConnectorArn, *v.VpcConnectorArn)
+	}
+	if v.VpcConnectorName != nil {
+		s.WriteString(schemas.VpcConnector_VpcConnectorName, *v.VpcConnectorName)
+	}
+	if v.VpcConnectorRevision != 0 {
+		s.WriteInt32(schemas.VpcConnector_VpcConnectorRevision, v.VpcConnectorRevision)
+	}
+}
+func (v *VpcConnector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConnector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConnector_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.VpcConnector_CreatedAt, v.CreatedAt)
+		case schemas.VpcConnector_DeletedAt:
+			v.DeletedAt = new(time.Time)
+			return d.ReadTime(schemas.VpcConnector_DeletedAt, v.DeletedAt)
+		case schemas.VpcConnector_SecurityGroups:
+			return deserializeStringList(d, schemas.VpcConnector_SecurityGroups, &v.SecurityGroups)
+		case schemas.VpcConnector_Status:
+			var ev string
+			if err := d.ReadString(schemas.VpcConnector_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcConnectorStatus(ev)
+			return nil
+		case schemas.VpcConnector_Subnets:
+			return deserializeStringList(d, schemas.VpcConnector_Subnets, &v.Subnets)
+		case schemas.VpcConnector_VpcConnectorArn:
+			v.VpcConnectorArn = new(string)
+			return d.ReadString(schemas.VpcConnector_VpcConnectorArn, v.VpcConnectorArn)
+		case schemas.VpcConnector_VpcConnectorName:
+			v.VpcConnectorName = new(string)
+			return d.ReadString(schemas.VpcConnector_VpcConnectorName, v.VpcConnectorName)
+		case schemas.VpcConnector_VpcConnectorRevision:
+			return d.ReadInt32(schemas.VpcConnector_VpcConnectorRevision, &v.VpcConnectorRevision)
+		}
+		return nil
+	})
+}
+
 // DNS Target record for a custom domain of this Amazon VPC.
 type VpcDNSTarget struct {
 
@@ -978,6 +2390,40 @@ type VpcDNSTarget struct {
 	VpcIngressConnectionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcDNSTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcDNSTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcDNSTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.VpcDNSTarget_DomainName, *v.DomainName)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcDNSTarget_VpcId, *v.VpcId)
+	}
+	if v.VpcIngressConnectionArn != nil {
+		s.WriteString(schemas.VpcDNSTarget_VpcIngressConnectionArn, *v.VpcIngressConnectionArn)
+	}
+}
+func (v *VpcDNSTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcDNSTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcDNSTarget_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.VpcDNSTarget_DomainName, v.DomainName)
+		case schemas.VpcDNSTarget_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcDNSTarget_VpcId, v.VpcId)
+		case schemas.VpcDNSTarget_VpcIngressConnectionArn:
+			v.VpcIngressConnectionArn = new(string)
+			return d.ReadString(schemas.VpcDNSTarget_VpcIngressConnectionArn, v.VpcIngressConnectionArn)
+		}
+		return nil
+	})
 }
 
 // The App Runner resource that specifies an App Runner endpoint for incoming
@@ -1031,6 +2477,82 @@ type VpcIngressConnection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcIngressConnection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcIngressConnection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcIngressConnection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.VpcIngressConnection_AccountId, *v.AccountId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.VpcIngressConnection_CreatedAt, *v.CreatedAt)
+	}
+	if v.DeletedAt != nil {
+		s.WriteTime(schemas.VpcIngressConnection_DeletedAt, *v.DeletedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.VpcIngressConnection_DomainName, *v.DomainName)
+	}
+	if v.IngressVpcConfiguration != nil {
+		s.WriteStruct(schemas.VpcIngressConnection_IngressVpcConfiguration)
+		v.IngressVpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.VpcIngressConnection_ServiceArn, *v.ServiceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VpcIngressConnection_Status, string(v.Status))
+	}
+	if v.VpcIngressConnectionArn != nil {
+		s.WriteString(schemas.VpcIngressConnection_VpcIngressConnectionArn, *v.VpcIngressConnectionArn)
+	}
+	if v.VpcIngressConnectionName != nil {
+		s.WriteString(schemas.VpcIngressConnection_VpcIngressConnectionName, *v.VpcIngressConnectionName)
+	}
+}
+func (v *VpcIngressConnection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcIngressConnection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcIngressConnection_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.VpcIngressConnection_AccountId, v.AccountId)
+		case schemas.VpcIngressConnection_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.VpcIngressConnection_CreatedAt, v.CreatedAt)
+		case schemas.VpcIngressConnection_DeletedAt:
+			v.DeletedAt = new(time.Time)
+			return d.ReadTime(schemas.VpcIngressConnection_DeletedAt, v.DeletedAt)
+		case schemas.VpcIngressConnection_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.VpcIngressConnection_DomainName, v.DomainName)
+		case schemas.VpcIngressConnection_IngressVpcConfiguration:
+			v.IngressVpcConfiguration = &IngressVpcConfiguration{}
+			return v.IngressVpcConfiguration.Deserialize(d)
+		case schemas.VpcIngressConnection_ServiceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.VpcIngressConnection_ServiceArn, v.ServiceArn)
+		case schemas.VpcIngressConnection_Status:
+			var ev string
+			if err := d.ReadString(schemas.VpcIngressConnection_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = VpcIngressConnectionStatus(ev)
+			return nil
+		case schemas.VpcIngressConnection_VpcIngressConnectionArn:
+			v.VpcIngressConnectionArn = new(string)
+			return d.ReadString(schemas.VpcIngressConnection_VpcIngressConnectionArn, v.VpcIngressConnectionArn)
+		case schemas.VpcIngressConnection_VpcIngressConnectionName:
+			v.VpcIngressConnectionName = new(string)
+			return d.ReadString(schemas.VpcIngressConnection_VpcIngressConnectionName, v.VpcIngressConnectionName)
+		}
+		return nil
+	})
+}
+
 // Provides summary information about an VPC Ingress Connection, which includes
 // its VPC Ingress Connection ARN and its associated Service ARN.
 type VpcIngressConnectionSummary struct {
@@ -1043,6 +2565,34 @@ type VpcIngressConnectionSummary struct {
 	VpcIngressConnectionArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcIngressConnectionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcIngressConnectionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcIngressConnectionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.VpcIngressConnectionSummary_ServiceArn, *v.ServiceArn)
+	}
+	if v.VpcIngressConnectionArn != nil {
+		s.WriteString(schemas.VpcIngressConnectionSummary_VpcIngressConnectionArn, *v.VpcIngressConnectionArn)
+	}
+}
+func (v *VpcIngressConnectionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcIngressConnectionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcIngressConnectionSummary_ServiceArn:
+			v.ServiceArn = new(string)
+			return d.ReadString(schemas.VpcIngressConnectionSummary_ServiceArn, v.ServiceArn)
+		case schemas.VpcIngressConnectionSummary_VpcIngressConnectionArn:
+			v.VpcIngressConnectionArn = new(string)
+			return d.ReadString(schemas.VpcIngressConnectionSummary_VpcIngressConnectionArn, v.VpcIngressConnectionArn)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -1,0 +1,3 @@
+GET /memberships/__MembershipIdentifier__/trained-model-inference-jobs?maxResults=1&nextToken=__NextToken__&trainedModelArn=__TrainedModelArn__&trainedModelVersionIdentifier=__TrainedModelVersionIdentifier__
+
+

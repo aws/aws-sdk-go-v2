@@ -1,0 +1,5 @@
+POST /v1/registries/name/__RegistryName__/schemas/name/__SchemaName__
+
+Content-Type: application/json
+
+{"Content":"__Content__","Description":"__Description__","tags":{"key0":"__Value__"},"Type":"OpenApi3"}

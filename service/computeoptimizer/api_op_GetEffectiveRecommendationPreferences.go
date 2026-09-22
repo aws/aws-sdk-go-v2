@@ -4,11 +4,10 @@ package computeoptimizer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the recommendation preferences that are in effect for a given resource,
@@ -43,6 +42,18 @@ type GetEffectiveRecommendationPreferencesInput struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEffectiveRecommendationPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEffectiveRecommendationPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEffectiveRecommendationPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetEffectiveRecommendationPreferencesRequest_resourceArn, *v.ResourceArn)
+	}
 }
 
 type GetEffectiveRecommendationPreferencesOutput struct {
@@ -87,8 +98,9 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	//
 	// To validate that the preference is applied to your last generated set of
 	// recommendations, review the effectiveRecommendationPreferences value in the
-	// response of the GetAutoScalingGroupRecommendations or
-	// GetEC2InstanceRecommendations actions.
+	// response of the GetAutoScalingGroupRecommendations,
+	// GetEC2InstanceRecommendations, GetEBSVolumeRecommendations,
+	// GetECSServiceRecommendations, or GetRDSDatabaseRecommendations actions.
 	LookBackPeriod types.LookBackPeriodPreference
 
 	//  The resource type values that are considered as candidates when generating
@@ -120,65 +132,70 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEffectiveRecommendationPreferencesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEffectiveRecommendationPreferencesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEffectiveRecommendationPreferencesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnhancedInfrastructureMetrics != "" {
+		s.WriteString(schemas.GetEffectiveRecommendationPreferencesResponse_enhancedInfrastructureMetrics, string(v.EnhancedInfrastructureMetrics))
+	}
+	if v.ExternalMetricsPreference != nil {
+		s.WriteStruct(schemas.GetEffectiveRecommendationPreferencesResponse_externalMetricsPreference)
+		v.ExternalMetricsPreference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LookBackPeriod != "" {
+		s.WriteString(schemas.GetEffectiveRecommendationPreferencesResponse_lookBackPeriod, string(v.LookBackPeriod))
+	}
+	serializeEffectivePreferredResources(s, schemas.GetEffectiveRecommendationPreferencesResponse_preferredResources, v.PreferredResources)
+	serializeUtilizationPreferences(s, schemas.GetEffectiveRecommendationPreferencesResponse_utilizationPreferences, v.UtilizationPreferences)
+}
+func (v *GetEffectiveRecommendationPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEffectiveRecommendationPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEffectiveRecommendationPreferencesResponse_enhancedInfrastructureMetrics:
+			var ev string
+			if err := d.ReadString(schemas.GetEffectiveRecommendationPreferencesResponse_enhancedInfrastructureMetrics, &ev); err != nil {
+				return err
+			}
+			v.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(ev)
+			return nil
+		case schemas.GetEffectiveRecommendationPreferencesResponse_externalMetricsPreference:
+			v.ExternalMetricsPreference = &types.ExternalMetricsPreference{}
+			return v.ExternalMetricsPreference.Deserialize(d)
+		case schemas.GetEffectiveRecommendationPreferencesResponse_lookBackPeriod:
+			var ev string
+			if err := d.ReadString(schemas.GetEffectiveRecommendationPreferencesResponse_lookBackPeriod, &ev); err != nil {
+				return err
+			}
+			v.LookBackPeriod = types.LookBackPeriodPreference(ev)
+			return nil
+		case schemas.GetEffectiveRecommendationPreferencesResponse_preferredResources:
+			return deserializeEffectivePreferredResources(d, schemas.GetEffectiveRecommendationPreferencesResponse_preferredResources, &v.PreferredResources)
+		case schemas.GetEffectiveRecommendationPreferencesResponse_utilizationPreferences:
+			return deserializeUtilizationPreferences(d, schemas.GetEffectiveRecommendationPreferencesResponse_utilizationPreferences, &v.UtilizationPreferences)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEffectiveRecommendationPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEffectiveRecommendationPreferences, schemas.GetEffectiveRecommendationPreferencesRequest, schemas.GetEffectiveRecommendationPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetEffectiveRecommendationPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEffectiveRecommendationPreferences, schemas.GetEffectiveRecommendationPreferencesRequest, schemas.GetEffectiveRecommendationPreferencesResponse), output: &GetEffectiveRecommendationPreferencesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetEffectiveRecommendationPreferences{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEffectiveRecommendationPreferences"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -188,12 +205,6 @@ func (c *Client) addOperationGetEffectiveRecommendationPreferencesMiddlewares(st
 		return err
 	}
 	if err = addOpGetEffectiveRecommendationPreferencesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEffectiveRecommendationPreferences(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,22 +219,8 @@ func (c *Client) addOperationGetEffectiveRecommendationPreferencesMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEffectiveRecommendationPreferences(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEffectiveRecommendationPreferences",
-	}
 }

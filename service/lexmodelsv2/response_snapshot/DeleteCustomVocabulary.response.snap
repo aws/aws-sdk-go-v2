@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"botId":"__BotId__","botVersion":"__BotVersion__","customVocabularyStatus":"Ready","localeId":"__LocaleId__"}

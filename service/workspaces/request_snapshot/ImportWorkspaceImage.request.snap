@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.ImportWorkspaceImage
+
+{"Applications":["Microsoft_Office_2016","Microsoft_Office_2016"],"Ec2ImageId":"__Ec2ImageId__","ImageDescription":"__ImageDescription__","ImageName":"__ImageName__","IngestionProcess":"BYOL_REGULAR","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,5 @@
+POST /data-tables/__InstanceId__/__DataTableId__/values/delete
+
+Content-Type: application/json
+
+{"Values":[{"AttributeName":"__AttributeName__","LockVersion":{"Attribute":"__Attribute__","DataTable":"__DataTable__","PrimaryValues":"__PrimaryValues__","Value":"__Value__"},"PrimaryValues":[{"AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeName":"__AttributeName__","Value":"__Value__"}]},{"AttributeName":"__AttributeName__","LockVersion":{"Attribute":"__Attribute__","DataTable":"__DataTable__","PrimaryValues":"__PrimaryValues__","Value":"__Value__"},"PrimaryValues":[{"AttributeName":"__AttributeName__","Value":"__Value__"},{"AttributeName":"__AttributeName__","Value":"__Value__"}]}]}

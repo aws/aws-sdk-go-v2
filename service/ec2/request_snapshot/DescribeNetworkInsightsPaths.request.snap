@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeNetworkInsightsPaths&DryRun=true&Filter.1.Name=__Name__&Filter.1.Value.1=__Member__&Filter.1.Value.2=__Member__&Filter.2.Name=__Name__&Filter.2.Value.1=__Member__&Filter.2.Value.2=__Member__&MaxResults=1&NetworkInsightsPathId.1=__Member__&NetworkInsightsPathId.2=__Member__&NextToken=__NextToken__&Version=2016-11-15

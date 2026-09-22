@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"fileUploadUrls":{"key0":"__Value__"},"jobId":"__JobId__","zipUploadUrl":"__ZipUploadUrl__"}

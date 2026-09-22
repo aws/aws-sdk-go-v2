@@ -4,11 +4,10 @@ package comprehendmedical
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Inspects the clinical text for protected health information (PHI) entities and
@@ -40,6 +39,18 @@ type DetectPHIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectPHIInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectPHIRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectPHIInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Text != nil {
+		s.WriteString(schemas.DetectPHIRequest_Text, *v.Text)
+	}
+}
+
 type DetectPHIOutput struct {
 
 	// The collection of PHI entities extracted from the input text and their
@@ -67,65 +78,51 @@ type DetectPHIOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetectPHIOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetectPHIResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetectPHIOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityList(s, schemas.DetectPHIResponse_Entities, v.Entities)
+	if v.ModelVersion != nil {
+		s.WriteString(schemas.DetectPHIResponse_ModelVersion, *v.ModelVersion)
+	}
+	if v.PaginationToken != nil {
+		s.WriteString(schemas.DetectPHIResponse_PaginationToken, *v.PaginationToken)
+	}
+}
+func (v *DetectPHIOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetectPHIResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetectPHIResponse_Entities:
+			return deserializeEntityList(d, schemas.DetectPHIResponse_Entities, &v.Entities)
+		case schemas.DetectPHIResponse_ModelVersion:
+			v.ModelVersion = new(string)
+			return d.ReadString(schemas.DetectPHIResponse_ModelVersion, v.ModelVersion)
+		case schemas.DetectPHIResponse_PaginationToken:
+			v.PaginationToken = new(string)
+			return d.ReadString(schemas.DetectPHIResponse_PaginationToken, v.PaginationToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetectPHIMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectPHI, schemas.DetectPHIRequest, schemas.DetectPHIResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDetectPHI{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetectPHI, schemas.DetectPHIRequest, schemas.DetectPHIResponse), output: &DetectPHIOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDetectPHI{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DetectPHI"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -135,12 +132,6 @@ func (c *Client) addOperationDetectPHIMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addOpDetectPHIValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectPHI(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +146,8 @@ func (c *Client) addOperationDetectPHIMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDetectPHI(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DetectPHI",
-	}
 }

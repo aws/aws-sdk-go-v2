@@ -5,11 +5,11 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Edits an existing item's attributes, or adds a new item to the table if it does
@@ -284,6 +284,43 @@ type UpdateItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeUpdates(s, schemas.UpdateItemInput_AttributeUpdates, v.AttributeUpdates)
+	if v.ConditionExpression != nil {
+		s.WriteString(schemas.UpdateItemInput_ConditionExpression, *v.ConditionExpression)
+	}
+	if v.ConditionalOperator != "" {
+		s.WriteString(schemas.UpdateItemInput_ConditionalOperator, string(v.ConditionalOperator))
+	}
+	serializeExpectedAttributeMap(s, schemas.UpdateItemInput_Expected, v.Expected)
+	serializeExpressionAttributeNameMap(s, schemas.UpdateItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	serializeExpressionAttributeValueMap(s, schemas.UpdateItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	serializeKey(s, schemas.UpdateItemInput_Key, v.Key)
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.UpdateItemInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	if v.ReturnItemCollectionMetrics != "" {
+		s.WriteString(schemas.UpdateItemInput_ReturnItemCollectionMetrics, string(v.ReturnItemCollectionMetrics))
+	}
+	if v.ReturnValues != "" {
+		s.WriteString(schemas.UpdateItemInput_ReturnValues, string(v.ReturnValues))
+	}
+	if v.ReturnValuesOnConditionCheckFailure != "" {
+		s.WriteString(schemas.UpdateItemInput_ReturnValuesOnConditionCheckFailure, string(v.ReturnValuesOnConditionCheckFailure))
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateItemInput_TableName, *v.TableName)
+	}
+	if v.UpdateExpression != nil {
+		s.WriteString(schemas.UpdateItemInput_UpdateExpression, *v.UpdateExpression)
+	}
+}
 func (in *UpdateItemInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ResourceArn = in.TableName
@@ -306,6 +343,9 @@ type UpdateItemOutput struct {
 	// the table and any indexes involved in the operation. ConsumedCapacity is only
 	// returned if the ReturnConsumedCapacity parameter was specified. For more
 	// information, see [Capacity unity consumption for write operations]in the Amazon DynamoDB Developer Guide.
+	//
+	// If the table has vector indexes, the response includes a VectorIndexes field
+	// with VectorWriteRequestBytes consumed for each affected vector index.
 	//
 	// [Capacity unity consumption for write operations]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html#write-operation-consumption
 	ConsumedCapacity *types.ConsumedCapacity
@@ -337,68 +377,58 @@ type UpdateItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeMap(s, schemas.UpdateItemOutput_Attributes, v.Attributes)
+	if v.ConsumedCapacity != nil {
+		s.WriteStruct(schemas.UpdateItemOutput_ConsumedCapacity)
+		v.ConsumedCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ItemCollectionMetrics != nil {
+		s.WriteStruct(schemas.UpdateItemOutput_ItemCollectionMetrics)
+		v.ItemCollectionMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateItemOutput_Attributes:
+			return deserializeAttributeMap(d, schemas.UpdateItemOutput_Attributes, &v.Attributes)
+		case schemas.UpdateItemOutput_ConsumedCapacity:
+			v.ConsumedCapacity = &types.ConsumedCapacity{}
+			return v.ConsumedCapacity.Deserialize(d)
+		case schemas.UpdateItemOutput_ItemCollectionMetrics:
+			v.ItemCollectionMetrics = &types.ItemCollectionMetrics{}
+			return v.ItemCollectionMetrics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateItem, schemas.UpdateItemInput, schemas.UpdateItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateItem, schemas.UpdateItemInput, schemas.UpdateItemOutput), output: &UpdateItemOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateItem{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateItem"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateItemDiscoverEndpointMiddleware(stack, options, c); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -408,12 +438,6 @@ func (c *Client) addOperationUpdateItemMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpUpdateItemValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateItem(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -432,12 +456,6 @@ func (c *Client) addOperationUpdateItemMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -487,12 +505,4 @@ func (c *Client) fetchOpUpdateItemDiscoverEndpoint(ctx context.Context, region s
 
 	go c.handleEndpointDiscoveryFromService(ctx, discoveryOperationInput, region, key, opt)
 	return internalEndpointDiscovery.WeightedAddress{}, nil
-}
-
-func newServiceMetadataMiddleware_opUpdateItem(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateItem",
-	}
 }

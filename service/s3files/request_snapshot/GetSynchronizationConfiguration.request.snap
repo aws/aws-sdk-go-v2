@@ -1,0 +1,3 @@
+GET /file-systems/__FileSystemId__/synchronization-configuration
+
+

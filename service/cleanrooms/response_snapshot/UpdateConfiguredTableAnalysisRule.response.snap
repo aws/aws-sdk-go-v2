@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"analysisRule":{"configuredTableArn":"__ConfiguredTableArn__","configuredTableId":"__ConfiguredTableId__","createTime":946684800,"policy":{"v1":{"list":{"additionalAnalyses":"ALLOWED","allowedJoinOperators":["OR","OR"],"joinColumns":["__Member__","__Member__"],"listColumns":["__Member__","__Member__"]}}},"type":"AGGREGATION","updateTime":946684800}}

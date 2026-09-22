@@ -1,0 +1,5 @@
+POST /runGroup
+
+Content-Type: application/json
+
+{"maxCpus":1,"maxDuration":1,"maxGpus":1,"maxRuns":1,"name":"__Name__","requestId":"__RequestId__","tags":{"key0":"__Value__"}}

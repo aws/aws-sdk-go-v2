@@ -4,11 +4,10 @@ package connect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Processes chat integration events from Amazon Web Services or external
@@ -76,6 +75,34 @@ type SendChatIntegrationEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendChatIntegrationEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendChatIntegrationEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendChatIntegrationEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationId != nil {
+		s.WriteString(schemas.SendChatIntegrationEventRequest_DestinationId, *v.DestinationId)
+	}
+	if v.Event != nil {
+		s.WriteStruct(schemas.SendChatIntegrationEventRequest_Event)
+		v.Event.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NewSessionDetails != nil {
+		s.WriteStruct(schemas.SendChatIntegrationEventRequest_NewSessionDetails)
+		v.NewSessionDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceId != nil {
+		s.WriteString(schemas.SendChatIntegrationEventRequest_SourceId, *v.SourceId)
+	}
+	if v.Subtype != nil {
+		s.WriteString(schemas.SendChatIntegrationEventRequest_Subtype, *v.Subtype)
+	}
+}
+
 type SendChatIntegrationEventOutput struct {
 
 	// Identifier of chat contact used to handle integration event. This may be null
@@ -92,77 +119,54 @@ type SendChatIntegrationEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendChatIntegrationEventOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendChatIntegrationEventResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendChatIntegrationEventOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitialContactId != nil {
+		s.WriteString(schemas.SendChatIntegrationEventResponse_InitialContactId, *v.InitialContactId)
+	}
+	if v.NewChatCreated != nil {
+		s.WriteBool(schemas.SendChatIntegrationEventResponse_NewChatCreated, *v.NewChatCreated)
+	}
+}
+func (v *SendChatIntegrationEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendChatIntegrationEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendChatIntegrationEventResponse_InitialContactId:
+			v.InitialContactId = new(string)
+			return d.ReadString(schemas.SendChatIntegrationEventResponse_InitialContactId, v.InitialContactId)
+		case schemas.SendChatIntegrationEventResponse_NewChatCreated:
+			v.NewChatCreated = new(bool)
+			return d.ReadBool(schemas.SendChatIntegrationEventResponse_NewChatCreated, v.NewChatCreated)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendChatIntegrationEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendChatIntegrationEvent, schemas.SendChatIntegrationEventRequest, schemas.SendChatIntegrationEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendChatIntegrationEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendChatIntegrationEvent, schemas.SendChatIntegrationEventRequest, schemas.SendChatIntegrationEventResponse), output: &SendChatIntegrationEventOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendChatIntegrationEvent{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendChatIntegrationEvent"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendChatIntegrationEventValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendChatIntegrationEvent(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +181,8 @@ func (c *Client) addOperationSendChatIntegrationEventMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendChatIntegrationEvent(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendChatIntegrationEvent",
-	}
 }

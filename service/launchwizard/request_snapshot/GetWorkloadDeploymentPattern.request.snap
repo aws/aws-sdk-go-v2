@@ -1,0 +1,5 @@
+POST /getWorkloadDeploymentPattern
+
+Content-Type: application/json
+
+{"deploymentPatternName":"__DeploymentPatternName__","workloadName":"__WorkloadName__"}

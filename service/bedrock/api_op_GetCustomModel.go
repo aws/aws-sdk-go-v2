@@ -4,11 +4,10 @@ package bedrock
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -40,6 +39,18 @@ type GetCustomModelInput struct {
 	ModelIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetCustomModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelIdentifier != nil {
+		s.WriteString(schemas.GetCustomModelRequest_modelIdentifier, *v.ModelIdentifier)
+	}
 }
 
 type GetCustomModelOutput struct {
@@ -121,77 +132,151 @@ type GetCustomModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCustomModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCustomModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCustomModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseModelArn != nil {
+		s.WriteString(schemas.GetCustomModelResponse_baseModelArn, *v.BaseModelArn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetCustomModelResponse_creationTime, *v.CreationTime)
+	}
+	serializeCustomizationConfig(s, schemas.GetCustomModelResponse_customizationConfig, v.CustomizationConfig)
+	if v.CustomizationType != "" {
+		s.WriteString(schemas.GetCustomModelResponse_customizationType, string(v.CustomizationType))
+	}
+	if v.FailureMessage != nil {
+		s.WriteString(schemas.GetCustomModelResponse_failureMessage, *v.FailureMessage)
+	}
+	serializeModelCustomizationHyperParameters(s, schemas.GetCustomModelResponse_hyperParameters, v.HyperParameters)
+	if v.JobArn != nil {
+		s.WriteString(schemas.GetCustomModelResponse_jobArn, *v.JobArn)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.GetCustomModelResponse_jobName, *v.JobName)
+	}
+	if v.ModelArn != nil {
+		s.WriteString(schemas.GetCustomModelResponse_modelArn, *v.ModelArn)
+	}
+	if v.ModelKmsKeyArn != nil {
+		s.WriteString(schemas.GetCustomModelResponse_modelKmsKeyArn, *v.ModelKmsKeyArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.GetCustomModelResponse_modelName, *v.ModelName)
+	}
+	if v.ModelStatus != "" {
+		s.WriteString(schemas.GetCustomModelResponse_modelStatus, string(v.ModelStatus))
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.GetCustomModelResponse_outputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingDataConfig != nil {
+		s.WriteStruct(schemas.GetCustomModelResponse_trainingDataConfig)
+		v.TrainingDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TrainingMetrics != nil {
+		s.WriteStruct(schemas.GetCustomModelResponse_trainingMetrics)
+		v.TrainingMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidationDataConfig != nil {
+		s.WriteStruct(schemas.GetCustomModelResponse_validationDataConfig)
+		v.ValidationDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeValidationMetrics(s, schemas.GetCustomModelResponse_validationMetrics, v.ValidationMetrics)
+}
+func (v *GetCustomModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCustomModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCustomModelResponse_baseModelArn:
+			v.BaseModelArn = new(string)
+			return d.ReadString(schemas.GetCustomModelResponse_baseModelArn, v.BaseModelArn)
+		case schemas.GetCustomModelResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetCustomModelResponse_creationTime, v.CreationTime)
+		case schemas.GetCustomModelResponse_customizationConfig:
+			return deserializeCustomizationConfig(d, schemas.GetCustomModelResponse_customizationConfig, &v.CustomizationConfig)
+		case schemas.GetCustomModelResponse_customizationType:
+			var ev string
+			if err := d.ReadString(schemas.GetCustomModelResponse_customizationType, &ev); err != nil {
+				return err
+			}
+			v.CustomizationType = types.CustomizationType(ev)
+			return nil
+		case schemas.GetCustomModelResponse_failureMessage:
+			v.FailureMessage = new(string)
+			return d.ReadString(schemas.GetCustomModelResponse_failureMessage, v.FailureMessage)
+		case schemas.GetCustomModelResponse_hyperParameters:
+			return deserializeModelCustomizationHyperParameters(d, schemas.GetCustomModelResponse_hyperParameters, &v.HyperParameters)
+		case schemas.GetCustomModelResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetCustomModelResponse_jobArn, v.JobArn)
+		case schemas.GetCustomModelResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.GetCustomModelResponse_jobName, v.JobName)
+		case schemas.GetCustomModelResponse_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.GetCustomModelResponse_modelArn, v.ModelArn)
+		case schemas.GetCustomModelResponse_modelKmsKeyArn:
+			v.ModelKmsKeyArn = new(string)
+			return d.ReadString(schemas.GetCustomModelResponse_modelKmsKeyArn, v.ModelKmsKeyArn)
+		case schemas.GetCustomModelResponse_modelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.GetCustomModelResponse_modelName, v.ModelName)
+		case schemas.GetCustomModelResponse_modelStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetCustomModelResponse_modelStatus, &ev); err != nil {
+				return err
+			}
+			v.ModelStatus = types.ModelStatus(ev)
+			return nil
+		case schemas.GetCustomModelResponse_outputDataConfig:
+			v.OutputDataConfig = &types.OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.GetCustomModelResponse_trainingDataConfig:
+			v.TrainingDataConfig = &types.TrainingDataConfig{}
+			return v.TrainingDataConfig.Deserialize(d)
+		case schemas.GetCustomModelResponse_trainingMetrics:
+			v.TrainingMetrics = &types.TrainingMetrics{}
+			return v.TrainingMetrics.Deserialize(d)
+		case schemas.GetCustomModelResponse_validationDataConfig:
+			v.ValidationDataConfig = &types.ValidationDataConfig{}
+			return v.ValidationDataConfig.Deserialize(d)
+		case schemas.GetCustomModelResponse_validationMetrics:
+			return deserializeValidationMetrics(d, schemas.GetCustomModelResponse_validationMetrics, &v.ValidationMetrics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCustomModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomModel, schemas.GetCustomModelRequest, schemas.GetCustomModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCustomModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCustomModel, schemas.GetCustomModelRequest, schemas.GetCustomModelResponse), output: &GetCustomModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCustomModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCustomModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetCustomModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCustomModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -206,22 +291,8 @@ func (c *Client) addOperationGetCustomModelMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetCustomModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetCustomModel",
-	}
 }

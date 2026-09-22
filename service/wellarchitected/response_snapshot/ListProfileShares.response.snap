@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"NextToken":"__NextToken__","ProfileShareSummaries":[{"ShareId":"__ShareId__","SharedWith":"__SharedWith__","Status":"ACCEPTED","StatusMessage":"__StatusMessage__"},{"ShareId":"__ShareId__","SharedWith":"__SharedWith__","Status":"ACCEPTED","StatusMessage":"__StatusMessage__"}]}

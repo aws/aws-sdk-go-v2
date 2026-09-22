@@ -158,6 +158,74 @@
                 "smithy.api#documentation": "<p>Used to associate a configuration set with a MailManager archive.</p>"
             }
         },
+        "com.amazonaws.sesv2#AssociateEmailIdentityCertificate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#AssociateEmailIdentityCertificateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#AssociateEmailIdentityCertificateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an S/MIME certificate with an email identity. After the certificate is\n            active, Amazon SES API v2 can add an S/MIME signature to messages that you send from the associated\n            address when signing is enabled on the configuration set used to send the message.</p>\n         <p>The certificate is an X.509 certificate that you manage in Certificate Manager\n            (ACM). You identify it by its Amazon Resource Name (ARN).</p>\n         <ul>\n            <li>\n               <p>If the email identity is a domain, you must specify a <code>FromAddress</code>\n                    that belongs to that domain or one of its subdomains. The certificate applies to\n                    messages sent from that address.</p>\n            </li>\n            <li>\n               <p>If the email identity is an email address, <code>FromAddress</code> is\n                    optional. If you specify it, it must exactly match the email identity.</p>\n            </li>\n         </ul>\n         <p>When the association is created, the certificate begins provisioning and its status is\n            <code>PROVISIONING</code>. The status changes to <code>ACTIVE</code> when the certificate\n            is ready to use for signing. Each email address can have only one certificate\n            association. If an association already exists for the address, this operation returns an\n            error, unless the existing association is in the <code>DEPROVISIONING</code> state.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/identity/certificates",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#AssociateEmailIdentityCertificateRequest": {
+            "type": "structure",
+            "members": {
+                "EmailIdentity": {
+                    "target": "com.amazonaws.sesv2#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email identity, either an email address or a domain, to associate the certificate\n            with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FromAddress": {
+                    "target": "com.amazonaws.sesv2#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address that the certificate applies to. This value is required when the\n            email identity is a domain, and the address must belong to that domain or one of its\n            subdomains. When the email identity is an email address, this value is optional. If you\n            specify it, it must exactly match the email identity.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.sesv2#CertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Certificate Manager (ACM) certificate to\n            associate with the email identity.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to associate an S/MIME certificate with an email identity.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#AssociateEmailIdentityCertificateResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#Attachment": {
             "type": "structure",
             "members": {
@@ -833,6 +901,16 @@
         "com.amazonaws.sesv2#CaseId": {
             "type": "string"
         },
+        "com.amazonaws.sesv2#CertificateArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:certificate/[\\w+=,.@-]+$"
+            }
+        },
         "com.amazonaws.sesv2#Charset": {
             "type": "string"
         },
@@ -857,7 +935,7 @@
                 "DimensionName": {
                     "target": "com.amazonaws.sesv2#DimensionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an Amazon CloudWatch dimension associated with an email sending metric. The name has to\n            meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9),\n                    underscores (_), or dashes (-).</p>\n            </li>\n            <li>\n               <p>It can contain no more than 256 characters.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of an Amazon CloudWatch dimension associated with an email sending metric. The name has to\n            meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9),\n                    underscores (_), or dashes (-).</p>\n            </li>\n            <li>\n               <p>It can contain no more than 255 characters.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -871,7 +949,7 @@
                 "DefaultDimensionValue": {
                     "target": "com.amazonaws.sesv2#DefaultDimensionValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default value of the dimension that is published to Amazon CloudWatch if you don't provide the\n            value of the dimension when you send an email. This value has to meet the following\n            criteria:</p>\n         <ul>\n            <li>\n               <p>Can only contain ASCII letters (a–z, A–Z), numbers (0–9),\n                    underscores (_), or dashes (-), at signs (@), and periods (.).</p>\n            </li>\n            <li>\n               <p>It can contain no more than 256 characters.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The default value of the dimension that is published to Amazon CloudWatch if you don't provide the\n            value of the dimension when you send an email. This value has to meet the following\n            criteria:</p>\n         <ul>\n            <li>\n               <p>Can only contain ASCII letters (a–z, A–Z), numbers (0–9),\n                    underscores (_), or dashes (-), at signs (@), and periods (.).</p>\n            </li>\n            <li>\n               <p>It can contain no more than 255 characters.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -923,6 +1001,20 @@
                 "smithy.api#documentation": "<p>The resource is being modified by another operation or thread.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.sesv2#ConfigurationOverrides": {
+            "type": "structure",
+            "members": {
+                "Tracking": {
+                    "target": "com.amazonaws.sesv2#TrackingConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that overrides the open and click tracking settings that would otherwise\n            apply to the message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that overrides settings for a single email sending request. An override\n            applies only to the message or messages in the request that contains it. It doesn't\n            change your account-level settings, and it doesn't change the configuration set that the\n            request uses.</p>\n         <p>A setting that you don't override keeps the value that would otherwise apply to the\n            message. Depending on the setting, that value comes from the configuration set that the\n            message uses, from your account-level settings, or from the Amazon SES default.</p>"
             }
         },
         "com.amazonaws.sesv2#ConfigurationSetName": {
@@ -1246,7 +1338,10 @@
                     }
                 },
                 "SuppressionOptions": {
-                    "target": "com.amazonaws.sesv2#SuppressionOptions"
+                    "target": "com.amazonaws.sesv2#SuppressionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about the suppression list preferences for the\n            configuration set. You can optionally include a <code>SuppressionScope</code> to override the\n            tenant or account suppression scope for emails sent using this configuration set.</p>"
+                    }
                 },
                 "VdmOptions": {
                     "target": "com.amazonaws.sesv2#VdmOptions",
@@ -1258,6 +1353,12 @@
                     "target": "com.amazonaws.sesv2#ArchivingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that defines the MailManager archiving options for emails that you send\n            using the configuration set.</p>"
+                    }
+                },
+                "MessageSecurityOptions": {
+                    "target": "com.amazonaws.sesv2#MessageSecurityOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message security options to apply to the configuration set, such as the signing\n            scheme used for messages that you send with the configuration set.</p>"
                     }
                 }
             },
@@ -2097,7 +2198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a multi-region endpoint (global-endpoint).</p>\n         <p>The primary region is going to be the AWS-Region where the operation is executed.\n            The secondary region has to be provided in request's parameters.\n            From the data flow standpoint there is no difference between primary\n            and secondary regions - sending traffic will be split equally between the two.\n            The primary region is the region where the resource has been created and where it can be managed.\n        </p>",
+                "smithy.api#documentation": "<p>Creates a multi-region endpoint (global-endpoint).</p>\n         <p>The primary region is going to be the AWS-Region where the operation is executed.\n            The secondary region has to be provided in request's parameters.\n            From the data flow standpoint there is no difference between primary\n            and secondary regions - sending traffic is divided between the two.\n            The primary region is the region where the resource has been created and where it can be managed.\n        </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/multi-region-endpoints",
@@ -2178,7 +2279,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a tenant.</p>\n         <p>\n            <i>Tenants</i> are logical containers that group related SES resources together.\n            Each tenant can have its own set of resources like email identities, configuration sets,\n            and templates, along with reputation metrics and sending status. This helps isolate and manage\n            email sending for different customers or business units within your Amazon SES API v2 account.</p>",
+                "smithy.api#documentation": "<p>Create a tenant.</p>\n         <p>\n            <i>Tenants</i> are logical containers that group related SES resources together.\n            Each tenant can have its own set of resources like email identities, configuration sets,\n            and templates, along with reputation metrics and sending status. This helps isolate and manage\n            email sending for different customers or business units within your Amazon SES API v2 account.</p>\n         <p>You can optionally specify <code>SuppressionAttributes</code> to configure tenant-level\n            suppression at creation time. When tenant-level suppression is enabled, Amazon SES maintains a\n            separate suppression list for the tenant instead of using the account-level suppression list.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/tenants",
@@ -2200,6 +2301,12 @@
                     "target": "com.amazonaws.sesv2#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) to associate with the tenant</p>"
+                    }
+                },
+                "SuppressionAttributes": {
+                    "target": "com.amazonaws.sesv2#TenantSuppressionAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about the suppression list preferences for the tenant.\n            Use this to configure tenant-level suppression at creation time.</p>"
                     }
                 }
             },
@@ -2308,6 +2415,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of email sending capability for the tenant.</p>"
                     }
+                },
+                "SuppressionAttributes": {
+                    "target": "com.amazonaws.sesv2#TenantSuppressionAttributes"
                 }
             },
             "traits": {
@@ -2517,7 +2627,14 @@
         "com.amazonaws.sesv2#DefaultDimensionValue": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The default value of the dimension that is published to Amazon CloudWatch if you don't provide the\n            value of the dimension when you send an email. This value has to meet the following\n            criteria:</p>\n         <ul>\n            <li>\n               <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9),\n                    underscores (_), or dashes (-).</p>\n            </li>\n            <li>\n               <p>It can contain no more than 256 characters.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The default value of the dimension that is published to Amazon CloudWatch if you don't provide the\n            value of the dimension when you send an email. This value has to meet the following\n            criteria:</p>\n         <ul>\n            <li>\n               <p>It can only contain ASCII letters (a–z, A–Z), numbers (0–9),\n                    underscores (_), or dashes (-).</p>\n            </li>\n            <li>\n               <p>It can contain no more than 255 characters.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sesv2#DefaultSigningScheme": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the default signing scheme, in which Amazon SES API v2 doesn't apply S/MIME signing to\n            messages sent with the configuration set.</p>"
             }
         },
         "com.amazonaws.sesv2#DeleteConfigurationSet": {
@@ -3112,7 +3229,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes an email address from the suppression list for your account.</p>",
+                "smithy.api#documentation": "<p>Removes an email address from the suppression list for your account or for a specific\n            tenant. To target a tenant's suppression list, specify the <code>TenantName</code>\n            parameter. If you omit <code>TenantName</code>, the address is removed from the\n            account-level suppression list.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/v2/email/suppression/addresses/{EmailAddress}",
@@ -3126,14 +3243,21 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.sesv2#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The suppressed email destination to remove from the account suppression list.</p>",
+                        "smithy.api#documentation": "<p>The suppressed email destination to remove from the suppression list for your account\n            or for the specified tenant.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant whose suppression list you want to remove the address from. If\n            you omit this parameter, the address is removed from the account-level suppression\n            list.</p>",
+                        "smithy.api#httpQuery": "TenantName"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to remove an email address from the suppression list for your\n            account.</p>",
+                "smithy.api#documentation": "<p>A request to remove an email address from the suppression list for your account or\n            for a specific tenant.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -3478,7 +3602,7 @@
         "com.amazonaws.sesv2#DimensionName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The name of an Amazon CloudWatch dimension associated with an email sending metric. The name has to\n            meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>It can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_),\n                    or dashes (-).</p>\n            </li>\n            <li>\n               <p>It can contain no more than 256 characters.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The name of an Amazon CloudWatch dimension associated with an email sending metric. The name has to\n            meet the following criteria:</p>\n         <ul>\n            <li>\n               <p>It can only contain ASCII letters (a-z, A-Z), numbers (0-9), underscores (_),\n                    or dashes (-).</p>\n            </li>\n            <li>\n               <p>It can contain no more than 255 characters.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#DimensionValueSource": {
@@ -3522,6 +3646,64 @@
                 }
             }
         },
+        "com.amazonaws.sesv2#DisassociateEmailIdentityCertificate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#DisassociateEmailIdentityCertificateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#DisassociateEmailIdentityCertificateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the association between an S/MIME certificate and an email identity. After the\n            association is removed, Amazon SES API v2 stops adding an S/MIME signature to messages sent from\n            that address.</p>\n         <p>If the email identity is a domain, specify the <code>FromAddress</code> whose\n            certificate association you want to remove.</p>\n         <p>This operation is idempotent. If the specified email identity exists but there's no\n            matching certificate association, the operation succeeds without making any changes.\n            Amazon SES API v2 returns a <code>NotFoundException</code> only when the specified email identity\n            doesn't exist.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/identity/certificates/delete",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#DisassociateEmailIdentityCertificateRequest": {
+            "type": "structure",
+            "members": {
+                "EmailIdentity": {
+                    "target": "com.amazonaws.sesv2#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email identity whose certificate association you want to remove.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FromAddress": {
+                    "target": "com.amazonaws.sesv2#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address whose certificate association you want to remove. This value is\n            required when the email identity is a domain. When the email identity is an email\n            address, this value is optional.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to remove the association between an S/MIME certificate and an email\n            identity.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#DisassociateEmailIdentityCertificateResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#DisplayName": {
             "type": "string"
         },
@@ -3556,7 +3738,7 @@
                 "SigningAttributesOrigin": {
                     "target": "com.amazonaws.sesv2#DkimSigningAttributesOrigin",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that indicates how DKIM was configured for the identity. These are the\n            possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Indicates that DKIM was configured for the\n                    identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Indicates that DKIM was configured for the\n                    identity by using Bring Your Own DKIM (BYODKIM).</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AF_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Africa (Cape Town) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_NORTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Stockholm) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Hyderabad) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (London) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Middle East (UAE) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Middle East (Bahrain) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_IL_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_SA_EAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in South America (São Paulo) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Canada (Calgary) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_5</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Malaysia) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Zurich) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US East (N. Virginia) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US West (N. California) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A string that indicates how DKIM was configured for the identity. These are the\n            possible values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Indicates that DKIM was configured for the\n                    identity by using <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Indicates that DKIM was configured for the\n                    identity by using Bring Your Own DKIM (BYODKIM).</p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AF_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Africa (Cape Town) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_NORTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Stockholm) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Hyderabad) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (London) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Middle East (UAE) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_SOUTH_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Middle East (Bahrain) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_IL_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_SA_EAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in South America (São Paulo) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Canada (Calgary) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_3</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_5</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Asia Pacific (Malaysia) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in Europe (Zurich) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US East (N. Virginia) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US West (N. California) region using Deterministic Easy-DKIM\n                    (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_2</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_GOV_EAST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in AWS GovCloud (US-East) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_GOV_WEST_1</code> – Indicates that DKIM was configured for the identity by\n                    replicating signing attributes from a parent identity in AWS GovCloud (US-West) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextSigningKeyLength": {
@@ -3606,7 +3788,7 @@
                 "DomainSigningAttributesOrigin": {
                     "target": "com.amazonaws.sesv2#DkimSigningAttributesOrigin",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attribute to use for configuring DKIM for the identity depends on the\n            operation:\n        </p>\n         <ol>\n            <li>\n               <p>For <code>PutEmailIdentityDkimSigningAttributes</code>:\n                </p>\n               <ul>\n                  <li>\n                     <p>None of the values are allowed - use the\n                            <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutEmailIdentityDkimSigningAttributes.html#SES-PutEmailIdentityDkimSigningAttributes-request-SigningAttributesOrigin\">\n                           <code>SigningAttributesOrigin</code>\n                        </a>\n                            parameter instead\n                        </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <code>CreateEmailIdentity</code> when replicating a parent identity's DKIM\n                    configuration:\n                </p>\n               <ul>\n                  <li>\n                     <p>Allowed values: All values except <code>AWS_SES</code> and\n                            <code>EXTERNAL</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ol>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Configure DKIM for the identity by using Easy DKIM.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Configure DKIM for the identity by using Bring Your Own DKIM\n                    (BYODKIM).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AF_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Africa (Cape Town) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_NORTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Stockholm) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Asia Pacific (Hyderabad) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_3</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (London) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_3</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_2</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Middle East (UAE) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Middle East (Bahrain) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_IL_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_SA_EAST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in South America (São Paulo) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Canada (Calgary) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_2</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_3</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_5</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Asia Pacific (Malaysia) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Zurich) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US East (N. Virginia) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US West (N. California) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The attribute to use for configuring DKIM for the identity depends on the\n            operation:\n        </p>\n         <ol>\n            <li>\n               <p>For <code>PutEmailIdentityDkimSigningAttributes</code>:\n                </p>\n               <ul>\n                  <li>\n                     <p>None of the values are allowed - use the\n                            <a href=\"https://docs.aws.amazon.com/ses/latest/APIReference-V2/API_PutEmailIdentityDkimSigningAttributes.html#SES-PutEmailIdentityDkimSigningAttributes-request-SigningAttributesOrigin\">\n                           <code>SigningAttributesOrigin</code>\n                        </a>\n                            parameter instead\n                        </p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>For <code>CreateEmailIdentity</code> when replicating a parent identity's DKIM\n                    configuration:\n                </p>\n               <ul>\n                  <li>\n                     <p>Allowed values: All values except <code>AWS_SES</code> and\n                            <code>EXTERNAL</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ol>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_SES</code> – Configure DKIM for the identity by using Easy DKIM.\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>EXTERNAL</code> – Configure DKIM for the identity by using Bring Your Own DKIM\n                    (BYODKIM).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AF_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Africa (Cape Town) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_NORTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Stockholm) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Asia Pacific (Mumbai) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTH_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Asia Pacific (Hyderabad) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_3</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Paris) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (London) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Milan) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Ireland) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_3</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Osaka) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_2</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Seoul) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Middle East (UAE) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_ME_SOUTH_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Middle East (Bahrain) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_NORTHEAST_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Tokyo) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_IL_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Israel (Tel Aviv) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_SA_EAST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in South America (São Paulo) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Canada (Central) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_CA_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Canada (Calgary) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Singapore) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_2</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Sydney) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_3</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Asia Pacific (Jakarta) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_AP_SOUTHEAST_5</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Asia Pacific (Malaysia) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_1</code> – Configure DKIM for the identity by replicating from a\n                    parent identity in Europe (Frankfurt) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_EU_CENTRAL_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in Europe (Zurich) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US East (N. Virginia) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_EAST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US East (Ohio) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US West (N. California) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_WEST_2</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in US West (Oregon) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_GOV_EAST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in AWS GovCloud (US-East) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS_SES_US_GOV_WEST_1</code> – Configure DKIM for the identity by replicating from a parent\n                    identity in AWS GovCloud (US-West) region using Deterministic Easy-DKIM (DEED).\n                </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3789,6 +3971,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "AWS_SES_CA_WEST_1"
+                    }
+                },
+                "AWS_SES_US_GOV_EAST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_GOV_EAST_1"
+                    }
+                },
+                "AWS_SES_US_GOV_WEST_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SES_US_GOV_WEST_1"
                     }
                 }
             }
@@ -4925,6 +5119,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VDM attributes that apply to your Amazon SES account.</p>"
                     }
+                },
+                "PricingAttributes": {
+                    "target": "com.amazonaws.sesv2#PricingAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing attributes that apply to your Amazon SES account, including the currently active\n            pricing plan and any scheduled change.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5140,7 +5340,7 @@
                 "SuppressionOptions": {
                     "target": "com.amazonaws.sesv2#SuppressionOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about the suppression list preferences for your\n            account.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about the suppression list preferences for your\n            account or for a specific tenant.</p>"
                     }
                 },
                 "VdmOptions": {
@@ -5153,6 +5353,12 @@
                     "target": "com.amazonaws.sesv2#ArchivingOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>An object that defines the MailManager archive where sent emails are archived that you send\n            using the configuration set.</p>"
+                    }
+                },
+                "MessageSecurityOptions": {
+                    "target": "com.amazonaws.sesv2#MessageSecurityOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message security options that are applied to the configuration set, such as the\n            signing scheme used for messages that you send with the configuration set.</p>"
                     }
                 }
             },
@@ -6255,7 +6461,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays the template object (which includes the subject line, HTML part and text\n            part) for the template you specify.</p>\n         <p>You can execute this operation no more than once per second.</p>",
+                "smithy.api#documentation": "<p>Displays the template object (which includes the subject line, HTML part and text\n            part) for the template you specify.</p>\n         <p>You can execute this operation no more than 50 times per second.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/templates/{TemplateName}",
@@ -6787,7 +6993,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about a specific email address that's on the suppression list\n            for your account.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about a specific email address that's on the suppression list\n            for your account or for a specific tenant. To target a tenant's suppression list,\n            specify the <code>TenantName</code> parameter. If you omit <code>TenantName</code>,\n            the operation targets the account-level suppression list.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/suppression/addresses/{EmailAddress}",
@@ -6801,14 +7007,21 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.sesv2#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email address that's on the account suppression list.</p>",
+                        "smithy.api#documentation": "<p>The email address that's on the suppression list for your account or for the\n            specified tenant.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant whose suppression list you want to query. If you omit this\n            parameter, the operation targets the account-level suppression list.</p>",
+                        "smithy.api#httpQuery": "TenantName"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to retrieve information about an email address that's on the suppression\n            list for your account.</p>",
+                "smithy.api#documentation": "<p>A request to retrieve information about an email address that's on the suppression\n            list for your account or for a specific tenant.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -6848,7 +7061,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get information about a specific tenant, including the tenant's name, ID, ARN,\n            creation timestamp, tags, and sending status.</p>",
+                "smithy.api#documentation": "<p>Get information about a specific tenant, including the tenant's name, ID, ARN,\n            creation timestamp, tags, sending status, and suppression attributes.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/tenants/get",
@@ -6950,6 +7163,82 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.sesv2#IdentityCertificate": {
+            "type": "structure",
+            "members": {
+                "FromAddress": {
+                    "target": "com.amazonaws.sesv2#EmailAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address that the certificate applies to.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.sesv2#IdentityCertificateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the certificate association. A status of <code>ACTIVE</code> indicates\n            that the certificate is ready to use for signing.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.sesv2#CertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Certificate Manager (ACM) certificate that's\n            associated with the email identity.</p>"
+                    }
+                },
+                "CertificateExpiryTime": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp after which the certificate is no longer valid.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about an S/MIME certificate that's associated with\n            an email identity.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#IdentityCertificateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#IdentityCertificate"
+            }
+        },
+        "com.amazonaws.sesv2#IdentityCertificateStatus": {
+            "type": "enum",
+            "members": {
+                "PROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROVISIONING"
+                    }
+                },
+                "INACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE"
+                    }
+                },
+                "DEPROVISIONING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEPROVISIONING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an S/MIME certificate that's associated with an email identity. The\n            status can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PROVISIONING</code> – The certificate association was created and\n                    the certificate is being prepared for use.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> – The certificate is ready to use for signing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> – The certificate is no longer used \n                for signing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPROVISIONING</code> – The certificate association is being\n                    cleaned up.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> – The certificate couldn't be prepared for use, or\n                    the certificate has expired.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#IdentityInfo": {
@@ -8044,6 +8333,89 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#ListEmailIdentityCertificates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#ListEmailIdentityCertificatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#ListEmailIdentityCertificatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the S/MIME certificates that are associated with the specified email identity.\n            The results include certificates in all states, such as <code>PROVISIONING</code>,\n            <code>ACTIVE</code>, <code>INACTIVE</code>, <code>DEPROVISIONING</code>, and\n            <code>FAILED</code>.</p>\n         <p>If a certificate has passed its expiration time, it's returned with a status of\n            <code>FAILED</code>.</p>\n         <p>We recommend using pagination to ensure that the operation returns quickly and\n            successfully. When there are more results than fit in a single response, the response\n            includes a <code>NextToken</code> value that you use in a subsequent call to retrieve\n            the next set of results.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/identity/certificates/list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Certificates",
+                    "pageSize": "PageSize"
+                }
+            }
+        },
+        "com.amazonaws.sesv2#ListEmailIdentityCertificatesRequest": {
+            "type": "structure",
+            "members": {
+                "EmailIdentity": {
+                    "target": "com.amazonaws.sesv2#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email identity whose certificate associations you want to list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from a previous call to <code>ListEmailIdentityCertificates</code> to\n            indicate the position in the list of certificates.</p>"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.sesv2#MaxItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of results to show in a single call to\n            <code>ListEmailIdentityCertificates</code>. If the number of results is larger than the\n            number you specified in this parameter, then the response includes a\n            <code>NextToken</code> element, which you can use to obtain additional results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to list the S/MIME certificates that are associated with an email\n            identity.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#ListEmailIdentityCertificatesResponse": {
+            "type": "structure",
+            "members": {
+                "Certificates": {
+                    "target": "com.amazonaws.sesv2#IdentityCertificateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains the certificate associations for the email identity. Each entry\n            includes the from address, the certificate's status, its Amazon Resource Name (ARN),\n            and its expiry time.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates that there are additional certificates to list. To view\n            additional certificates, issue another request to\n            <code>ListEmailIdentityCertificates</code>, and pass this token in the\n            <code>NextToken</code> parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the S/MIME certificates that are associated with an email\n            identity.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.sesv2#ListEmailTemplates": {
             "type": "operation",
             "input": {
@@ -8713,11 +9085,14 @@
                     "target": "com.amazonaws.sesv2#InvalidNextTokenException"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
                     "target": "com.amazonaws.sesv2#TooManyRequestsException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of email addresses that are on the suppression list for your\n            account.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of email addresses that are on the suppression list for your\n            account or for a specific tenant. To target a tenant's suppression list, specify the\n            <code>TenantName</code> parameter. If you omit <code>TenantName</code>, the operation\n            targets the account-level suppression list.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v2/email/suppression/addresses",
@@ -8733,10 +9108,17 @@
         "com.amazonaws.sesv2#ListSuppressedDestinationsRequest": {
             "type": "structure",
             "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant whose suppression list you want to retrieve. If you omit this\n            parameter, the operation targets the account-level suppression list.</p>",
+                        "smithy.api#httpQuery": "TenantName"
+                    }
+                },
                 "Reasons": {
                     "target": "com.amazonaws.sesv2#SuppressionListReasons",
                     "traits": {
-                        "smithy.api#documentation": "<p>The factors that caused the email address to be added to .</p>",
+                        "smithy.api#documentation": "<p>The factors that caused the email address to be added to the suppression list for\n            your account or for a specific tenant.</p>",
                         "smithy.api#httpQuery": "Reason"
                     }
                 },
@@ -8770,7 +9152,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to obtain a list of email destinations that are on the suppression list for\n            your account.</p>",
+                "smithy.api#documentation": "<p>A request to obtain a list of email destinations that are on the suppression list for\n            your account or for a specific tenant.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -8786,7 +9168,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sesv2#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that indicates that there are additional email addresses on the suppression\n            list for your account. To view additional suppressed addresses, issue another request to\n                <code>ListSuppressedDestinations</code>, and pass this token in the\n                <code>NextToken</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>A token that indicates that there are additional email addresses on the suppression\n            list for your account or for the specified tenant. To view additional suppressed\n            addresses, issue another request to <code>ListSuppressedDestinations</code>, and pass\n            this token in the <code>NextToken</code> parameter.</p>"
                     }
                 }
             },
@@ -9325,7 +9707,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sesv2#MessageInsightsExportMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results.</p>\n         <note>\n            <p>If you don't specify <code>MaxResults</code>, the export returns a maximum of\n                1,000 results.</p>\n         </note>"
                     }
                 }
             },
@@ -9369,6 +9751,12 @@
                         "smithy.api#documentation": "<p>The recipient's ISP (e.g., <code>Gmail</code>, <code>Yahoo</code>,\n            etc.).</p>"
                     }
                 },
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantNameFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant used when sending the message.</p>"
+                    }
+                },
                 "LastDeliveryEvent": {
                     "target": "com.amazonaws.sesv2#LastDeliveryEventList",
                     "traits": {
@@ -9397,6 +9785,20 @@
                 "smithy.api#documentation": "<p>The message can't be sent because it contains invalid content.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.sesv2#MessageSecurityOptions": {
+            "type": "structure",
+            "members": {
+                "SigningScheme": {
+                    "target": "com.amazonaws.sesv2#SigningScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The signing scheme that Amazon SES API v2 applies to messages sent with the configuration\n            set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that defines the message-level security options that apply to messages that\n            you send using the configuration set. Currently, these options determine whether Amazon SES API v2\n            adds an S/MIME signature to your messages and, if so, the format of that\n            signature.</p>"
             }
         },
         "com.amazonaws.sesv2#MessageTag": {
@@ -9614,10 +10016,16 @@
                     "traits": {
                         "smithy.api#enumValue": "ISP"
                     }
+                },
+                "TENANT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TENANT_NAME"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>BatchGetMetricDataQuery</code> dimension name. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EMAIL_IDENTITY</code> – The email identity used when sending messages.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONFIGURATION_SET</code> – The configuration set used when sending messages\n                    (if one was used).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ISP</code> – The recipient ISP (e.g. <code>Gmail</code>, <code>Yahoo</code>,\n                    etc.).</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The <code>BatchGetMetricDataQuery</code> dimension name. This can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>EMAIL_IDENTITY</code> – The email identity used when sending messages.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONFIGURATION_SET</code> – The configuration set used when sending messages\n                    (if one was used).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ISP</code> – The recipient ISP (e.g. <code>Gmail</code>, <code>Yahoo</code>,\n                    etc.).</p>\n            </li>\n            <li>\n               <p>\n                  <code>TENANT_NAME</code> – The name of the tenant used when sending messages\n                    (if one was used).</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#MetricDimensionValue": {
@@ -9898,6 +10306,58 @@
                 "smithy.api#documentation": "<p>The name of a dedicated IP pool.</p>"
             }
         },
+        "com.amazonaws.sesv2#PricingAttributes": {
+            "type": "structure",
+            "members": {
+                "CurrentPlan": {
+                    "target": "com.amazonaws.sesv2#PricingPlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing plan that is currently active on your Amazon SES account.</p>"
+                    }
+                },
+                "NextPlan": {
+                    "target": "com.amazonaws.sesv2#PricingPlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing plan that will become active at the start of the next monthly cycle, if a\n            scheduled change has been requested. This field is empty when no scheduled change is\n            pending.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The pricing attributes that apply to your Amazon SES account, including the currently active\n            pricing plan and any scheduled change.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#PricingPlan": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                },
+                "ESSENTIALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ESSENTIALS"
+                    }
+                },
+                "PRO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRO"
+                    }
+                },
+                "ENTERPRISE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENTERPRISE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies an Amazon SES pricing plan. See\n            <code>PutAccountPricingAttributesRequest$Plan</code> for the list of supported values and\n            their meanings.</p>"
+            }
+        },
         "com.amazonaws.sesv2#PrimaryNameServer": {
             "type": "string"
         },
@@ -10044,6 +10504,58 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountPricingAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#PutAccountPricingAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#PutAccountPricingAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Set the pricing plan for your Amazon SES account.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/email/account/pricing-attributes",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountPricingAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "Plan": {
+                    "target": "com.amazonaws.sesv2#PricingPlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pricing plan to apply to your Amazon SES account. For details about each plan, see <a href=\"http://aws.amazon.com/ses/pricing/\">Amazon SES Pricing</a>. Can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NONE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ESSENTIALS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PRO</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENTERPRISE</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to set the pricing plan for your Amazon SES account.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#PutAccountPricingAttributesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error response if the request\n            fails.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -10480,7 +10992,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specify the account suppression list preferences for a configuration set.</p>",
+                "smithy.api#documentation": "<p>Specify the suppression list preferences for a configuration set. You can\n            also use this operation to specify a <code>SuppressionScope</code> to override the\n            suppression scope of the tenant or account for emails sent using this configuration\n            set.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/configuration-sets/{ConfigurationSetName}/suppression-options",
@@ -10499,10 +11011,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "SuppressionScope": {
+                    "target": "com.amazonaws.sesv2#SuppressionListScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suppression scope for the configuration set. This overrides the tenant or account\n            suppression scope for emails sent using this configuration set. Can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TENANT</code> – Use the tenant's suppression list.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT</code> – Use the account-level suppression list.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "SuppressedReasons": {
                     "target": "com.amazonaws.sesv2#SuppressionListReasons",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for your account. This list can contain any or all of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for your account or for a specific tenant. This list can contain any or all of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account or for a specific tenant when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account or for a specific tenant when a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ValidationOptions": {
@@ -10513,7 +11031,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to change the account suppression list preferences for a specific\n            configuration set.</p>",
+                "smithy.api#documentation": "<p>A request to change the suppression list preferences for a specific\n            configuration set.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -11248,11 +11766,14 @@
                     "target": "com.amazonaws.sesv2#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
                     "target": "com.amazonaws.sesv2#TooManyRequestsException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an email address to the suppression list for your account.</p>",
+                "smithy.api#documentation": "<p>Adds an email address to the suppression list for your account or for a specific\n            tenant. To target a tenant's suppression list, specify the <code>TenantName</code>\n            parameter. If you omit <code>TenantName</code>, the address is added to the\n            account-level suppression list.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/v2/email/suppression/addresses",
@@ -11266,20 +11787,26 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.sesv2#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email address that should be added to the suppression list for your\n            account.</p>",
+                        "smithy.api#documentation": "<p>The email address that should be added to the suppression list for your account or\n            for the specified tenant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Reason": {
                     "target": "com.amazonaws.sesv2#SuppressionListReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The factors that should cause the email address to be added to the suppression list\n            for your account.</p>",
+                        "smithy.api#documentation": "<p>The factors that should cause the email address to be added to the suppression list\n            for your account or for the specified tenant.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant whose suppression list you want to add the address to. If you\n            omit this parameter, the address is added to the account-level suppression list.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A request to add an email destination to the suppression list for your account.</p>",
+                "smithy.api#documentation": "<p>A request to add an email destination to the suppression list for your account or\n            for a specific tenant.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -11288,6 +11815,70 @@
             "members": {},
             "traits": {
                 "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#PutTenantSuppressionAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#PutTenantSuppressionAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#PutTenantSuppressionAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Configure the suppression list preferences for a tenant. Use this operation to enable\n            or disable tenant-level suppression, or to change the suppressed reasons for a tenant.</p>\n         <p>When you set the suppression scope to <code>TENANT</code>, Amazon SES maintains a separate\n            suppression list for the tenant. When you set the scope to <code>ACCOUNT</code>, the tenant\n            uses the account-level suppression list.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/tenant/suppression",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#PutTenantSuppressionAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant to configure suppression list preferences for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SuppressedReasons": {
+                    "target": "com.amazonaws.sesv2#SuppressionListReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for the tenant. This list can contain any or all of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list when a message sent to that address results in a complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list when a message sent to that address results in a hard bounce.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SuppressionScope": {
+                    "target": "com.amazonaws.sesv2#SuppressionListScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suppression scope for the tenant. Specify <code>TENANT</code> to use the tenant's\n            own suppression list, or <code>ACCOUNT</code> to use the account-level suppression list.</p>\n         <note>\n            <p>If you don't specify a suppression scope, the tenant defaults to <code>ACCOUNT</code> scope\n                and uses the account-level suppression list.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to configure the suppression list preferences for a tenant.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#PutTenantSuppressionAttributesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty\n            HTTP body.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -12052,6 +12643,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the tenant through which this bulk email will be sent.</p>\n         <note>\n            <p>\n                The email sending operation will only succeed if all referenced resources\n                (identities, configuration sets, and templates) are associated with this tenant.\n            </p>\n         </note>"
                     }
+                },
+                "ConfigurationOverrides": {
+                    "target": "com.amazonaws.sesv2#ConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that overrides, for the messages in this request only, settings that would\n            otherwise apply to them. The overrides apply to every message in the request. Each\n            setting that you don't override keeps the value that already applies.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12280,6 +12877,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object used to specify a list or topic to which an email belongs, which will be\n            used when a contact chooses to unsubscribe.</p>"
                     }
+                },
+                "ConfigurationOverrides": {
+                    "target": "com.amazonaws.sesv2#ConfigurationOverrides",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that overrides, for this message only, settings that would otherwise apply to\n            it. Each setting that you don't override keeps the value that already applies.</p>"
+                    }
                 }
             },
             "traits": {
@@ -12403,10 +13006,47 @@
                 "smithy.api#default": 0
             }
         },
+        "com.amazonaws.sesv2#SignatureFormat": {
+            "type": "enum",
+            "members": {
+                "DETACHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DETACHED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The format of the S/MIME signature that's applied to a message. The following value is\n            supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DETACHED</code> – The signature is carried in a separate MIME part\n                    alongside the signed content.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.sesv2#SigningScheme": {
+            "type": "union",
+            "members": {
+                "DefaultScheme": {
+                    "target": "com.amazonaws.sesv2#DefaultSigningScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the default signing behavior. When you select this option, Amazon SES API v2 doesn't add an\n            S/MIME signature to messages sent with the configuration set.</p>"
+                    }
+                },
+                "SmimeScheme": {
+                    "target": "com.amazonaws.sesv2#SmimeSigningScheme",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sign messages sent with the configuration set using S/MIME. For signing to apply, the\n            email identity used to send a message must have an active S/MIME certificate\n            association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the signing scheme to apply to messages sent with a configuration set. This\n            is a union type, so you specify exactly one of its members.</p>"
+            }
+        },
         "com.amazonaws.sesv2#SimpleEmailService_v2": {
             "type": "service",
             "version": "2019-09-27",
             "operations": [
+                {
+                    "target": "com.amazonaws.sesv2#AssociateEmailIdentityCertificate"
+                },
                 {
                     "target": "com.amazonaws.sesv2#BatchGetMetricData"
                 },
@@ -12496,6 +13136,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#DeleteTenantResourceAssociation"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#DisassociateEmailIdentityCertificate"
                 },
                 {
                     "target": "com.amazonaws.sesv2#GetAccount"
@@ -12597,6 +13240,9 @@
                     "target": "com.amazonaws.sesv2#ListEmailIdentities"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#ListEmailIdentityCertificates"
+                },
+                {
                     "target": "com.amazonaws.sesv2#ListEmailTemplates"
                 },
                 {
@@ -12634,6 +13280,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutAccountDetails"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#PutAccountPricingAttributes"
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutAccountSendingAttributes"
@@ -12696,6 +13345,9 @@
                     "target": "com.amazonaws.sesv2#PutSuppressedDestination"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#PutTenantSuppressionAttributes"
+                },
+                {
                     "target": "com.amazonaws.sesv2#SendBulkEmail"
                 },
                 {
@@ -12712,6 +13364,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#UpdateConfigurationSet"
                 },
                 {
                     "target": "com.amazonaws.sesv2#UpdateConfigurationSetEventDestination"
@@ -12752,6 +13407,338 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<fullname>Amazon SES API v2</fullname>\n         <p>\n            <a href=\"http://aws.amazon.com/ses\">Amazon SES</a> is an Amazon Web Services service that\n            you can use to send email messages to your customers.</p>\n         <p>If you're new to Amazon SES API v2, you might find it helpful to review the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/\">Amazon Simple Email Service Developer\n                Guide</a>. The <i>Amazon SES Developer Guide</i> provides information\n            and code samples that demonstrate how to use Amazon SES API v2 features programmatically.</p>",
                 "smithy.api#title": "Amazon Simple Email Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "EndpointId": {
+                            "required": false,
+                            "documentation": "Operation parameter for EndpointId",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "EndpointId"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isValidHostLabel",
+                            "argv": [
+                                {
+                                    "ref": "EndpointId"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4a",
+                                            "signingName": "ses",
+                                            "signingRegionSet": [
+                                                "*"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{EndpointId}.endpoints.email.us-gov.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4a",
+                                            "signingName": "ses",
+                                            "signingRegionSet": [
+                                                "*"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{EndpointId}.endpoints.email.us-gov.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4a",
+                                            "signingName": "ses",
+                                            "signingRegionSet": [
+                                                "*"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{EndpointId}.endpoints.email.global.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4a",
+                                            "signingName": "ses",
+                                            "signingRegionSet": [
+                                                "*"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://{EndpointId}.endpoints.email.{PartitionResult#dnsSuffix}",
+                                "properties": {
+                                    "authSchemes": [
+                                        {
+                                            "name": "sigv4a",
+                                            "signingName": "ses",
+                                            "signingRegionSet": [
+                                                "*"
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "EndpointId must be a valid host label",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://email-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://email-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://email.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://email.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 23,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAMAAAAEAAAAAQAAAAUAAAAEAAAABAAAAA4F9eESAAAAAgAAABAAAAAGAAAABAAAAA4AAAAHAAAABQAAAAoAAAAIAAAABgAAAAkF9eERAAAABwX14RAF9eEDAAAABgAAAAwAAAALAAAACQX14Q4F9eEPAAAABwAAAA0F9eENAAAACQX14QwF9eENAAAABQX14QkAAAAPAAAABgX14QoF9eELAAAAAwAAABEF9eEIAAAABAAAABcAAAASAAAABQX14QcAAAATAAAABgAAABUAAAAUAAAACAX14QQF9eEGAAAABwAAABYF9eEDAAAACAX14QIF9eEFAAAABQX14QcF9eEB"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -12876,6 +13863,138 @@
                                                 {
                                                     "conditions": [
                                                         {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "endpoint": {
+                                                                        "url": "https://{EndpointId}.endpoints.email.us-gov.{PartitionResult#dualStackDnsSuffix}",
+                                                                        "properties": {
+                                                                            "authSchemes": [
+                                                                                {
+                                                                                    "name": "sigv4a",
+                                                                                    "signingName": "ses",
+                                                                                    "signingRegionSet": [
+                                                                                        "*"
+                                                                                    ]
+                                                                                }
+                                                                            ]
+                                                                        },
+                                                                        "headers": {}
+                                                                    },
+                                                                    "type": "endpoint"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://{EndpointId}.endpoints.email.us-gov.{PartitionResult#dnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4a",
+                                                                    "signingName": "ses",
+                                                                    "signingRegionSet": [
+                                                                        "*"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "not",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        },
+                                                                        "aws-us-gov"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
                                                             "fn": "booleanEquals",
                                                             "argv": [
                                                                 {
@@ -12936,7 +14055,28 @@
                                                     "type": "tree"
                                                 },
                                                 {
-                                                    "conditions": [],
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "not",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        },
+                                                                        "aws-us-gov"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
                                                     "endpoint": {
                                                         "url": "https://{EndpointId}.endpoints.email.{PartitionResult#dnsSuffix}",
                                                         "properties": {
@@ -13954,10 +15094,237 @@
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
+                        },
+                        {
+                            "documentation": "Gov IPv4 only: us-gov-west-1 primary, dualstack and FIPS disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://abc123.456def.endpoints.email.us-gov.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "Gov IPv4 only: us-gov-east-1, dualstack and FIPS disabled (proves both gov regions resolve identically)",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://abc123.456def.endpoints.email.us-gov.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "Gov dualstack: us-gov-west-1, dualstack enabled, FIPS disabled (no global. prefix; api.aws not global.api.aws)",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://abc123.456def.endpoints.email.us-gov.api.aws"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "Gov FIPS: us-gov-west-1, FIPS enabled, dualstack disabled — FIPS not supported with multi-region endpoints",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "Gov FIPS+dualstack: us-gov-west-1, both FIPS and dualstack enabled — FIPS check precedes dualstack branch selection",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "Gov custom SDK endpoint: us-gov-west-1, EndpointId set, custom Endpoint — passes through unchanged with SigV4a",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "China IPv4 regression: cn-north-1, dualstack disabled — endpoint uses aws-cn dnsSuffix (amazonaws.com.cn)",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://abc123.456def.endpoints.email.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "China dualstack regression: cn-north-1, dualstack enabled — uses global. prefix with aws-cn dualStackDnsSuffix (api.amazonwebservices.com.cn)",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://abc123.456def.endpoints.email.global.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "Gov custom SDK endpoint with FIPS: FIPS guard sits above the SDK passthrough, so error wins",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS is not supported with multi-region endpoints"
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Gov dualstack OSU (us-gov-east-1) matches PDT dualstack output (us-gov.api.aws, no global. prefix)",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingName": "ses",
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://abc123.456def.endpoints.email.us-gov.api.aws"
+                                }
+                            },
+                            "params": {
+                                "EndpointId": "abc123.456def",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
                         }
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.sesv2#SmimeSigningScheme": {
+            "type": "structure",
+            "members": {
+                "SignatureFormat": {
+                    "target": "com.amazonaws.sesv2#SignatureFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the S/MIME signature that Amazon SES API v2 applies to messages.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies that Amazon SES API v2 signs messages sent with the configuration set using\n            S/MIME.</p>"
             }
         },
         "com.amazonaws.sesv2#SnsDestination": {
@@ -14075,14 +15442,14 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.sesv2#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email address that is on the suppression list for your account.</p>",
+                        "smithy.api#documentation": "<p>The email address that is on the suppression list for your account or for a specific\n            tenant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Reason": {
                     "target": "com.amazonaws.sesv2#SuppressionListReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason that the address was added to the suppression list for your account.</p>",
+                        "smithy.api#documentation": "<p>The reason that the address was added to the suppression list for your account or for\n            a specific tenant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14096,12 +15463,18 @@
                 "Attributes": {
                     "target": "com.amazonaws.sesv2#SuppressedDestinationAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional value that can contain additional information about the reasons that the\n            address was added to the suppression list for your account.</p>"
+                        "smithy.api#documentation": "<p>An optional value that can contain additional information about the reasons that the\n            address was added to the suppression list for your account or for a specific\n            tenant.</p>"
+                    }
+                },
+                "TenantName": {
+                    "target": "com.amazonaws.sesv2#TenantName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tenant that the suppressed destination belongs to. This field is\n            present only when the suppressed destination is on a tenant's suppression list.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains information about an email address that is on the suppression\n            list for your account.</p>"
+                "smithy.api#documentation": "<p>An object that contains information about an email address that is on the suppression\n            list for your account or for a specific tenant.</p>"
             }
         },
         "com.amazonaws.sesv2#SuppressedDestinationAttributes": {
@@ -14110,18 +15483,18 @@
                 "MessageId": {
                     "target": "com.amazonaws.sesv2#OutboundMessageId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the email message that caused the email address to be added\n            to the suppression list for your account.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the email message that caused the email address to be added\n            to the suppression list for your account or for a specific tenant.</p>"
                     }
                 },
                 "FeedbackId": {
                     "target": "com.amazonaws.sesv2#FeedbackId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier that's generated when an email address is added to the suppression\n            list for your account.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier that's generated when an email address is added to the suppression\n            list for your account or for a specific tenant.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains additional attributes that are related an email address that\n            is on the suppression list for your account.</p>"
+                "smithy.api#documentation": "<p>An object that contains additional attributes that are related an email address that\n            is on the suppression list for your account or for a specific tenant.</p>"
             }
         },
         "com.amazonaws.sesv2#SuppressedDestinationSummaries": {
@@ -14136,14 +15509,14 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.sesv2#EmailAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The email address that's on the suppression list for your account.</p>",
+                        "smithy.api#documentation": "<p>The email address that's on the suppression list for your account or for a specific\n            tenant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Reason": {
                     "target": "com.amazonaws.sesv2#SuppressionListReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason that the address was added to the suppression list for your account.</p>",
+                        "smithy.api#documentation": "<p>The reason that the address was added to the suppression list for your account or for\n            a specific tenant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -14290,7 +15663,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The reason that the address was added to the suppression list for your account. The\n            value can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES added an email address to the suppression\n                    list for your account because a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES added an email address to the suppression\n                    list for your account because a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>The reason that the address was added to the suppression list for your account or for\n            a specific tenant. The value can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES added an email address to the suppression\n                    list for your account or for a specific tenant because a message sent to that\n                    address results in a complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES added an email address to the suppression\n                    list for your account or for a specific tenant because a message sent to that\n                    address results in a hard bounce.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.sesv2#SuppressionListReasons": {
@@ -14299,13 +15672,39 @@
                 "target": "com.amazonaws.sesv2#SuppressionListReason"
             }
         },
+        "com.amazonaws.sesv2#SuppressionListScope": {
+            "type": "enum",
+            "members": {
+                "ACCOUNT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCOUNT"
+                    }
+                },
+                "TENANT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TENANT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The suppression scope that determines which suppression list Amazon SES uses. Can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TENANT</code> – Use the tenant's own suppression list.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT</code> – Use the account-level suppression list.</p>\n            </li>\n         </ul>"
+            }
+        },
         "com.amazonaws.sesv2#SuppressionOptions": {
             "type": "structure",
             "members": {
                 "SuppressedReasons": {
                     "target": "com.amazonaws.sesv2#SuppressionListReasons",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for your account. This list can contain any or all of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account when a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for your account or for a specific tenant. This list can contain any or all of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list for your account or for a specific tenant when a message sent to that address results in a\n                    complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list for your account or for a specific tenant when a message sent to that address results in a hard\n                    bounce.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SuppressionScope": {
+                    "target": "com.amazonaws.sesv2#SuppressionListScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suppression scope for the configuration set. This overrides the tenant or account\n            suppression scope for emails sent using this configuration set. Can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TENANT</code> – Use the tenant's suppression list.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT</code> – Use the account-level suppression list.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ValidationOptions": {
@@ -14313,7 +15712,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains information about the suppression list preferences for your\n            account.</p>"
+                "smithy.api#documentation": "<p>An object that contains information about the suppression list preferences for your\n            account or for a specific tenant.</p>"
             }
         },
         "com.amazonaws.sesv2#SuppressionValidationAttributes": {
@@ -14534,6 +15933,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of sending capability for the tenant.</p>"
                     }
+                },
+                "SuppressionAttributes": {
+                    "target": "com.amazonaws.sesv2#TenantSuppressionAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains information about the suppression list preferences for the tenant.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14593,6 +15998,18 @@
                 }
             }
         },
+        "com.amazonaws.sesv2#TenantNameFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sesv2#TenantName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.sesv2#TenantResource": {
             "type": "structure",
             "members": {
@@ -14620,6 +16037,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A list of resources associated with a tenant.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#TenantSuppressionAttributes": {
+            "type": "structure",
+            "members": {
+                "SuppressedReasons": {
+                    "target": "com.amazonaws.sesv2#SuppressionListReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that contains the reasons that email addresses are automatically added to the\n            suppression list for the tenant. This list can contain any or all of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COMPLAINT</code> – Amazon SES adds an email address to the suppression\n                    list when a message sent to that address results in a complaint.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BOUNCE</code> – Amazon SES adds an email address to the suppression\n                    list when a message sent to that address results in a hard bounce.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "SuppressionScope": {
+                    "target": "com.amazonaws.sesv2#SuppressionListScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The suppression scope for the tenant. Can be one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TENANT</code> – The tenant uses its own suppression list.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACCOUNT</code> – The tenant uses the account-level suppression list.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you don't specify a suppression scope, the tenant defaults to <code>ACCOUNT</code> scope\n                and uses the account-level suppression list.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains the suppression list preferences for a tenant.</p>"
             }
         },
         "com.amazonaws.sesv2#TestRenderEmailTemplate": {
@@ -14825,6 +16262,26 @@
                 "target": "com.amazonaws.sesv2#Topic"
             }
         },
+        "com.amazonaws.sesv2#TrackingConfigurationOverrides": {
+            "type": "structure",
+            "members": {
+                "OpenTrackingEnabled": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon SES tracks when the recipient opens this message. Can be one of the\n            following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – Amazon SES tracks opens for this message, even when\n                    your account-level and configuration set settings don't enable open\n                    tracking.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – Amazon SES doesn't track opens for this message, even\n                    when your account-level or configuration set settings enable open tracking. Amazon SES\n                    doesn't add the tracking image to the message.</p>\n            </li>\n         </ul>\n         <p>If you don't specify this value, Amazon SES uses the open tracking setting that would\n            otherwise apply to the message.</p>"
+                    }
+                },
+                "ClickTrackingEnabled": {
+                    "target": "com.amazonaws.sesv2#FeatureStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Amazon SES tracks when the recipient clicks a link in this message. Can be\n            one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code> – Amazon SES tracks clicks for this message, even when\n                    your account-level and configuration set settings don't enable click\n                    tracking.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> – Amazon SES doesn't track clicks for this message, even\n                    when your account-level or configuration set settings enable click tracking.\n                    Amazon SES doesn't rewrite the links in the message.</p>\n            </li>\n         </ul>\n         <p>If you don't specify this value, Amazon SES uses the click tracking setting that would\n            otherwise apply to the message.</p>\n         <note>\n            <p>Enabling open or click tracking with an override doesn't create an event\n                destination. Amazon SES records the resulting open and click events in VDM, where you can\n                review them using VDM metrics and Message Insights. To also receive these events at\n                a destination that you own, the configuration set that the message uses must have an\n                event destination that publishes open and click events.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that overrides, for a single email sending request, the engagement tracking\n            settings that would otherwise apply. Use these overrides to turn open tracking or click\n            tracking on or off for an individual message, for example to suppress tracking in a\n            transactional message that you send from an account or a configuration set that has\n            tracking enabled.</p>\n         <p>Without an override, engagement tracking is determined by your account-level\n            <code>EngagementMetrics</code> setting, which you configure using the\n                <code>PutAccountVdmAttributes</code> operation, by the\n                <code>EngagementMetrics</code> setting of the configuration set that the message\n            uses, which you configure using the <code>PutConfigurationSetVdmOptions</code> operation,\n            and by whether that configuration set has an event destination whose\n                <code>MatchingEventTypes</code> include the <code>OPEN</code> or <code>CLICK</code>\n            event types.</p>\n         <p>For more information about tracking open and click events, see the <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/event-publishing.html\">Amazon SES\n                Developer Guide</a>.</p>"
+            }
+        },
         "com.amazonaws.sesv2#TrackingOptions": {
             "type": "structure",
             "members": {
@@ -14914,6 +16371,34 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.sesv2#UpdateConfigurationSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#UpdateConfigurationSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#UpdateConfigurationSetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing configuration set.</p>\n         <p>This operation performs a partial update. Only the attributes that you include in the\n            request are updated; any omitted attribute is left unchanged.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v2/email/update-configuration-sets",
+                    "code": 200
+                }
+            }
+        },
         "com.amazonaws.sesv2#UpdateConfigurationSetEventDestination": {
             "type": "operation",
             "input": {
@@ -14975,6 +16460,36 @@
             }
         },
         "com.amazonaws.sesv2#UpdateConfigurationSetEventDestinationResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sesv2#UpdateConfigurationSetRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.sesv2#ConfigurationSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration set to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MessageSecurityOptions": {
+                    "target": "com.amazonaws.sesv2#MessageSecurityOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security options that apply to the MIME message itself for messages sent with the\n            configuration set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to update the configuration of an existing configuration set.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sesv2#UpdateConfigurationSetResponse": {
             "type": "structure",
             "members": {},
             "traits": {

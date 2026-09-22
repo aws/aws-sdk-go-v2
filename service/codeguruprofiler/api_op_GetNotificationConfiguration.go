@@ -4,11 +4,10 @@ package codeguruprofiler
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the current configuration for anomaly notifications for a profiling group.
@@ -39,6 +38,28 @@ type GetNotificationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProfilingGroupName != nil {
+		s.WriteString(schemas.GetNotificationConfigurationRequest_profilingGroupName, *v.ProfilingGroupName)
+	}
+}
+func (v *GetNotificationConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotificationConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotificationConfigurationRequest_profilingGroupName:
+			v.ProfilingGroupName = new(string)
+			return d.ReadString(schemas.GetNotificationConfigurationRequest_profilingGroupName, v.ProfilingGroupName)
+		}
+		return nil
+	})
+}
+
 // The structure representing the GetNotificationConfigurationResponse.
 type GetNotificationConfigurationOutput struct {
 
@@ -53,77 +74,50 @@ type GetNotificationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetNotificationConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetNotificationConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetNotificationConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.GetNotificationConfigurationResponse_notificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetNotificationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetNotificationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetNotificationConfigurationResponse_notificationConfiguration:
+			v.NotificationConfiguration = &types.NotificationConfiguration{}
+			return v.NotificationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationConfiguration, schemas.GetNotificationConfigurationRequest, schemas.GetNotificationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetNotificationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetNotificationConfiguration, schemas.GetNotificationConfigurationRequest, schemas.GetNotificationConfigurationResponse), output: &GetNotificationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetNotificationConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetNotificationConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetNotificationConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetNotificationConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +132,8 @@ func (c *Client) addOperationGetNotificationConfigurationMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetNotificationConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetNotificationConfiguration",
-	}
 }

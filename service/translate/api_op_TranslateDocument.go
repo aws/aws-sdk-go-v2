@@ -4,11 +4,10 @@ package translate
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Translates the input document from the source language to the target language.
@@ -97,6 +96,32 @@ type TranslateDocumentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranslateDocumentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslateDocumentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslateDocumentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteStruct(schemas.TranslateDocumentRequest_Document)
+		v.Document.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Settings != nil {
+		s.WriteStruct(schemas.TranslateDocumentRequest_Settings)
+		v.Settings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceLanguageCode != nil {
+		s.WriteString(schemas.TranslateDocumentRequest_SourceLanguageCode, *v.SourceLanguageCode)
+	}
+	if v.TargetLanguageCode != nil {
+		s.WriteString(schemas.TranslateDocumentRequest_TargetLanguageCode, *v.TargetLanguageCode)
+	}
+	serializeResourceNameList(s, schemas.TranslateDocumentRequest_TerminologyNames, v.TerminologyNames)
+}
+
 type TranslateDocumentOutput struct {
 
 	// The language code of the source document.
@@ -136,77 +161,73 @@ type TranslateDocumentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TranslateDocumentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TranslateDocumentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TranslateDocumentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppliedSettings != nil {
+		s.WriteStruct(schemas.TranslateDocumentResponse_AppliedSettings)
+		v.AppliedSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAppliedTerminologyList(s, schemas.TranslateDocumentResponse_AppliedTerminologies, v.AppliedTerminologies)
+	if v.SourceLanguageCode != nil {
+		s.WriteString(schemas.TranslateDocumentResponse_SourceLanguageCode, *v.SourceLanguageCode)
+	}
+	if v.TargetLanguageCode != nil {
+		s.WriteString(schemas.TranslateDocumentResponse_TargetLanguageCode, *v.TargetLanguageCode)
+	}
+	if v.TranslatedDocument != nil {
+		s.WriteStruct(schemas.TranslateDocumentResponse_TranslatedDocument)
+		v.TranslatedDocument.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TranslateDocumentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TranslateDocumentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TranslateDocumentResponse_AppliedSettings:
+			v.AppliedSettings = &types.TranslationSettings{}
+			return v.AppliedSettings.Deserialize(d)
+		case schemas.TranslateDocumentResponse_AppliedTerminologies:
+			return deserializeAppliedTerminologyList(d, schemas.TranslateDocumentResponse_AppliedTerminologies, &v.AppliedTerminologies)
+		case schemas.TranslateDocumentResponse_SourceLanguageCode:
+			v.SourceLanguageCode = new(string)
+			return d.ReadString(schemas.TranslateDocumentResponse_SourceLanguageCode, v.SourceLanguageCode)
+		case schemas.TranslateDocumentResponse_TargetLanguageCode:
+			v.TargetLanguageCode = new(string)
+			return d.ReadString(schemas.TranslateDocumentResponse_TargetLanguageCode, v.TargetLanguageCode)
+		case schemas.TranslateDocumentResponse_TranslatedDocument:
+			v.TranslatedDocument = &types.TranslatedDocument{}
+			return v.TranslatedDocument.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTranslateDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslateDocument, schemas.TranslateDocumentRequest, schemas.TranslateDocumentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTranslateDocument{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TranslateDocument, schemas.TranslateDocumentRequest, schemas.TranslateDocumentResponse), output: &TranslateDocumentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTranslateDocument{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TranslateDocument"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTranslateDocumentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTranslateDocument(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,22 +242,8 @@ func (c *Client) addOperationTranslateDocumentMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTranslateDocument(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TranslateDocument",
-	}
 }

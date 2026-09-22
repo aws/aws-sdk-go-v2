@@ -86,6 +86,18 @@ func TestCheckSnapshot_DeleteThingShadow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetConnection")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetRetainedMessage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetRetainedMessage(context.Background(), nil, func(o *Options) {
@@ -134,11 +146,35 @@ func TestCheckSnapshot_ListRetainedMessages(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListSubscriptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSubscriptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSubscriptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_Publish(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.Publish(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "Publish")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_SendDirectMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDirectMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "SendDirectMessage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -174,6 +210,18 @@ func TestUpdateSnapshot_DeleteThingShadow(t *testing.T) {
 	_, err := svc.DeleteThingShadow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteThingShadow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetConnection(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetConnection(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetConnection")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -229,11 +277,35 @@ func TestUpdateSnapshot_ListRetainedMessages(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListSubscriptions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSubscriptions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSubscriptions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_Publish(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.Publish(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "Publish")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_SendDirectMessage(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.SendDirectMessage(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "SendDirectMessage")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

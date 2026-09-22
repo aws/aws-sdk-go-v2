@@ -1,0 +1,5 @@
+PATCH /configuredTables/__ConfiguredTableIdentifier__/analysisRule/AGGREGATION
+
+Content-Type: application/json
+
+{"analysisRulePolicy":{"v1":{"list":{"additionalAnalyses":"ALLOWED","allowedJoinOperators":["OR","OR"],"joinColumns":["__Member__","__Member__"],"listColumns":["__Member__","__Member__"]}}}}

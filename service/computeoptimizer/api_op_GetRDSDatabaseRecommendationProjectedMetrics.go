@@ -4,11 +4,10 @@ package computeoptimizer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -66,6 +65,33 @@ type GetRDSDatabaseRecommendationProjectedMetricsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRDSDatabaseRecommendationProjectedMetricsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRDSDatabaseRecommendationProjectedMetricsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_endTime, *v.EndTime)
+	}
+	s.WriteInt32(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_period, v.Period)
+	if v.RecommendationPreferences != nil {
+		s.WriteStruct(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_recommendationPreferences)
+		v.RecommendationPreferences.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_resourceArn, *v.ResourceArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_startTime, *v.StartTime)
+	}
+	if v.Stat != "" {
+		s.WriteString(schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest_stat, string(v.Stat))
+	}
+}
+
 type GetRDSDatabaseRecommendationProjectedMetricsOutput struct {
 
 	//  An array of objects that describes the projected metrics.
@@ -77,65 +103,39 @@ type GetRDSDatabaseRecommendationProjectedMetricsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRDSDatabaseRecommendationProjectedMetricsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRDSDatabaseRecommendationProjectedMetricsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRDSDatabaseRecommendedOptionProjectedMetrics(s, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, v.RecommendedOptionProjectedMetrics)
+}
+func (v *GetRDSDatabaseRecommendationProjectedMetricsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics:
+			return deserializeRDSDatabaseRecommendedOptionProjectedMetrics(d, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse_recommendedOptionProjectedMetrics, &v.RecommendedOptionProjectedMetrics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRDSDatabaseRecommendationProjectedMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRDSDatabaseRecommendationProjectedMetrics, schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetRDSDatabaseRecommendationProjectedMetrics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRDSDatabaseRecommendationProjectedMetrics, schemas.GetRDSDatabaseRecommendationProjectedMetricsRequest, schemas.GetRDSDatabaseRecommendationProjectedMetricsResponse), output: &GetRDSDatabaseRecommendationProjectedMetricsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetRDSDatabaseRecommendationProjectedMetrics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRDSDatabaseRecommendationProjectedMetrics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -145,12 +145,6 @@ func (c *Client) addOperationGetRDSDatabaseRecommendationProjectedMetricsMiddlew
 		return err
 	}
 	if err = addOpGetRDSDatabaseRecommendationProjectedMetricsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRDSDatabaseRecommendationProjectedMetrics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,22 +159,8 @@ func (c *Client) addOperationGetRDSDatabaseRecommendationProjectedMetricsMiddlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetRDSDatabaseRecommendationProjectedMetrics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetRDSDatabaseRecommendationProjectedMetrics",
-	}
 }

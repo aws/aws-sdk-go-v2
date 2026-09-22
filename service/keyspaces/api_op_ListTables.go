@@ -5,10 +5,10 @@ package keyspaces
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/keyspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The ListTables operation returns a list of tables for a specified keyspace.
@@ -50,6 +50,40 @@ type ListTablesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTablesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTablesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTablesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyspaceName != nil {
+		s.WriteString(schemas.ListTablesRequest_keyspaceName, *v.KeyspaceName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTablesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTablesRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTablesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTablesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTablesRequest_keyspaceName:
+			v.KeyspaceName = new(string)
+			return d.ReadString(schemas.ListTablesRequest_keyspaceName, v.KeyspaceName)
+		case schemas.ListTablesRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListTablesRequest_maxResults, v.MaxResults)
+		case schemas.ListTablesRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTablesRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListTablesOutput struct {
 
 	// A token to specify where to start paginating. This is the NextToken from a
@@ -65,77 +99,51 @@ type ListTablesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTablesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTablesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTablesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTablesResponse_nextToken, *v.NextToken)
+	}
+	serializeTableSummaryList(s, schemas.ListTablesResponse_tables, v.Tables)
+}
+func (v *ListTablesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTablesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTablesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTablesResponse_nextToken, v.NextToken)
+		case schemas.ListTablesResponse_tables:
+			return deserializeTableSummaryList(d, schemas.ListTablesResponse_tables, &v.Tables)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTables, schemas.ListTablesRequest, schemas.ListTablesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListTables{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTables, schemas.ListTablesRequest, schemas.ListTablesResponse), output: &ListTablesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListTables{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTables"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTablesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTables(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +156,6 @@ func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +258,3 @@ type ListTablesAPIClient interface {
 }
 
 var _ ListTablesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTables(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTables",
-	}
-}

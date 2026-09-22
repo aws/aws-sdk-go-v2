@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the contents of a SageMaker hub for a ModelReference resource. A
@@ -69,6 +68,27 @@ type UpdateHubContentReferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHubContentReferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHubContentReferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHubContentReferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubContentName != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceRequest_HubContentName, *v.HubContentName)
+	}
+	if v.HubContentType != "" {
+		s.WriteString(schemas.UpdateHubContentReferenceRequest_HubContentType, string(v.HubContentType))
+	}
+	if v.HubName != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceRequest_HubName, *v.HubName)
+	}
+	if v.MinVersion != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceRequest_MinVersion, *v.MinVersion)
+	}
+}
+
 type UpdateHubContentReferenceOutput struct {
 
 	// The ARN of the private model hub that contains the updated hub content.
@@ -87,77 +107,54 @@ type UpdateHubContentReferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHubContentReferenceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHubContentReferenceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHubContentReferenceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HubArn != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceResponse_HubArn, *v.HubArn)
+	}
+	if v.HubContentArn != nil {
+		s.WriteString(schemas.UpdateHubContentReferenceResponse_HubContentArn, *v.HubContentArn)
+	}
+}
+func (v *UpdateHubContentReferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHubContentReferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateHubContentReferenceResponse_HubArn:
+			v.HubArn = new(string)
+			return d.ReadString(schemas.UpdateHubContentReferenceResponse_HubArn, v.HubArn)
+		case schemas.UpdateHubContentReferenceResponse_HubContentArn:
+			v.HubContentArn = new(string)
+			return d.ReadString(schemas.UpdateHubContentReferenceResponse_HubContentArn, v.HubContentArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHubContentReferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHubContentReference, schemas.UpdateHubContentReferenceRequest, schemas.UpdateHubContentReferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHubContentReference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHubContentReference, schemas.UpdateHubContentReferenceRequest, schemas.UpdateHubContentReferenceResponse), output: &UpdateHubContentReferenceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateHubContentReference{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHubContentReference"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateHubContentReferenceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateHubContentReference(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +169,8 @@ func (c *Client) addOperationUpdateHubContentReferenceMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateHubContentReference(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateHubContentReference",
-	}
 }

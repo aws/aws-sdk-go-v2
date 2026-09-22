@@ -4,10 +4,9 @@ package marketplacemetering
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -88,6 +87,24 @@ type RegisterUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterUsageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterUsageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterUsageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nonce != nil {
+		s.WriteString(schemas.RegisterUsageRequest_Nonce, *v.Nonce)
+	}
+	if v.ProductCode != nil {
+		s.WriteString(schemas.RegisterUsageRequest_ProductCode, *v.ProductCode)
+	}
+	if v.PublicKeyVersion != nil {
+		s.WriteInt32(schemas.RegisterUsageRequest_PublicKeyVersion, *v.PublicKeyVersion)
+	}
+}
+
 type RegisterUsageOutput struct {
 
 	// (Optional) Only included when public key version has expired
@@ -102,77 +119,54 @@ type RegisterUsageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterUsageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterUsageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterUsageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PublicKeyRotationTimestamp != nil {
+		s.WriteTime(schemas.RegisterUsageResult_PublicKeyRotationTimestamp, *v.PublicKeyRotationTimestamp)
+	}
+	if v.Signature != nil {
+		s.WriteString(schemas.RegisterUsageResult_Signature, *v.Signature)
+	}
+}
+func (v *RegisterUsageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterUsageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterUsageResult_PublicKeyRotationTimestamp:
+			v.PublicKeyRotationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RegisterUsageResult_PublicKeyRotationTimestamp, v.PublicKeyRotationTimestamp)
+		case schemas.RegisterUsageResult_Signature:
+			v.Signature = new(string)
+			return d.ReadString(schemas.RegisterUsageResult_Signature, v.Signature)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterUsage, schemas.RegisterUsageRequest, schemas.RegisterUsageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRegisterUsage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterUsage, schemas.RegisterUsageRequest, schemas.RegisterUsageResult), output: &RegisterUsageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRegisterUsage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterUsage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterUsageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterUsage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +181,8 @@ func (c *Client) addOperationRegisterUsageMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterUsage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterUsage",
-	}
 }

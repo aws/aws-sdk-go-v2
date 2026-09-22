@@ -4,11 +4,10 @@ package organizations
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/organizations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists transfers that allow you to manage the specified responsibilities for
@@ -59,6 +58,27 @@ type ListInboundResponsibilityTransfersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInboundResponsibilityTransfersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInboundResponsibilityTransfersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInboundResponsibilityTransfersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ListInboundResponsibilityTransfersRequest_Id, *v.Id)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInboundResponsibilityTransfersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInboundResponsibilityTransfersRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListInboundResponsibilityTransfersRequest_Type, string(v.Type))
+	}
+}
+
 type ListInboundResponsibilityTransfersOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -76,77 +96,51 @@ type ListInboundResponsibilityTransfersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInboundResponsibilityTransfersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInboundResponsibilityTransfersResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInboundResponsibilityTransfersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInboundResponsibilityTransfersResponse_NextToken, *v.NextToken)
+	}
+	serializeResponsibilityTransfers(s, schemas.ListInboundResponsibilityTransfersResponse_ResponsibilityTransfers, v.ResponsibilityTransfers)
+}
+func (v *ListInboundResponsibilityTransfersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInboundResponsibilityTransfersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInboundResponsibilityTransfersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInboundResponsibilityTransfersResponse_NextToken, v.NextToken)
+		case schemas.ListInboundResponsibilityTransfersResponse_ResponsibilityTransfers:
+			return deserializeResponsibilityTransfers(d, schemas.ListInboundResponsibilityTransfersResponse_ResponsibilityTransfers, &v.ResponsibilityTransfers)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInboundResponsibilityTransfersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInboundResponsibilityTransfers, schemas.ListInboundResponsibilityTransfersRequest, schemas.ListInboundResponsibilityTransfersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListInboundResponsibilityTransfers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInboundResponsibilityTransfers, schemas.ListInboundResponsibilityTransfersRequest, schemas.ListInboundResponsibilityTransfersResponse), output: &ListInboundResponsibilityTransfersOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListInboundResponsibilityTransfers{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInboundResponsibilityTransfers"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListInboundResponsibilityTransfersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInboundResponsibilityTransfers(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +155,8 @@ func (c *Client) addOperationListInboundResponsibilityTransfersMiddlewares(stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opListInboundResponsibilityTransfers(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListInboundResponsibilityTransfers",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.PutAppsList
+
+{"AppsList":{"AppsList":[{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"},{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"}],"CreateTime":946684800,"LastUpdateTime":946684800,"ListId":"__ListId__","ListName":"__ListName__","ListUpdateToken":"__ListUpdateToken__","PreviousAppsList":{"key0":[{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"},{"AppName":"__AppName__","Port":1,"Protocol":"__Protocol__"}]}},"TagList":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"BackupVaultArn":"__BackupVaultArn__","RecoveryPointArn":"__RecoveryPointArn__","ResourceType":"__ResourceType__","RestoreMetadata":{"key0":"__Value__"}}

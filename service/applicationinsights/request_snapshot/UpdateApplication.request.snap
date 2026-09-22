@@ -1,0 +1,7 @@
+POST /service/EC2WindowsBarleyService/operation/UpdateApplication
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¨qCWEMonitorEnabledõrOpsItemSNSTopicArnv__OpsItemSNSTopicArn__rSNSNotificationArnv__SNSNotificationArn__nRemoveSNSTopicõqAutoConfigEnabledõwAttachMissingPermissionõqResourceGroupNameu__ResourceGroupName__pOpsCenterEnabledõ

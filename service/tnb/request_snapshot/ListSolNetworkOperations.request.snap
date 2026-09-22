@@ -1,0 +1,3 @@
+GET /sol/nslcm/v1/ns_lcm_op_occs?max_results=1&nextpage_opaque_marker=__NextToken__&nsInstanceId=__NsInstanceId__
+
+

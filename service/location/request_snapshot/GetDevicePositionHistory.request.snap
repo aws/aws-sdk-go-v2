@@ -1,0 +1,5 @@
+POST /tracking/v0/trackers/__TrackerName__/devices/__DeviceId__/list-positions
+
+Content-Type: application/json
+
+{"EndTimeExclusive":"2000-01-01T00:00:00Z","MaxResults":1,"NextToken":"__NextToken__","StartTimeInclusive":"2000-01-01T00:00:00Z"}

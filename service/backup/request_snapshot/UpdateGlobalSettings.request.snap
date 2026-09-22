@@ -1,0 +1,5 @@
+PUT /global-settings
+
+Content-Type: application/json
+
+{"GlobalSettings":{"key0":"__Value__"}}

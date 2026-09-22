@@ -1,0 +1,5 @@
+POST /GetDeviceRegistration
+
+Content-Type: application/json
+
+{"DeviceFleetName":"__DeviceFleetName__","DeviceName":"__DeviceName__"}

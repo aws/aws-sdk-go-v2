@@ -5,10 +5,10 @@ package mturk
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	The ListQualificationRequests operation retrieves requests for Qualifications
@@ -47,6 +47,24 @@ type ListQualificationRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQualificationRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQualificationRequestsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQualificationRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListQualificationRequestsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQualificationRequestsRequest_NextToken, *v.NextToken)
+	}
+	if v.QualificationTypeId != nil {
+		s.WriteString(schemas.ListQualificationRequestsRequest_QualificationTypeId, *v.QualificationTypeId)
+	}
+}
+
 type ListQualificationRequestsOutput struct {
 
 	// If the previous response was incomplete (because there is more data to
@@ -68,74 +86,54 @@ type ListQualificationRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListQualificationRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListQualificationRequestsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListQualificationRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListQualificationRequestsResponse_NextToken, *v.NextToken)
+	}
+	if v.NumResults != nil {
+		s.WriteInt32(schemas.ListQualificationRequestsResponse_NumResults, *v.NumResults)
+	}
+	serializeQualificationRequestList(s, schemas.ListQualificationRequestsResponse_QualificationRequests, v.QualificationRequests)
+}
+func (v *ListQualificationRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListQualificationRequestsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListQualificationRequestsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListQualificationRequestsResponse_NextToken, v.NextToken)
+		case schemas.ListQualificationRequestsResponse_NumResults:
+			v.NumResults = new(int32)
+			return d.ReadInt32(schemas.ListQualificationRequestsResponse_NumResults, v.NumResults)
+		case schemas.ListQualificationRequestsResponse_QualificationRequests:
+			return deserializeQualificationRequestList(d, schemas.ListQualificationRequestsResponse_QualificationRequests, &v.QualificationRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListQualificationRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQualificationRequests, schemas.ListQualificationRequestsRequest, schemas.ListQualificationRequestsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListQualificationRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListQualificationRequests, schemas.ListQualificationRequestsRequest, schemas.ListQualificationRequestsResponse), output: &ListQualificationRequestsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListQualificationRequests{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListQualificationRequests"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListQualificationRequests(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +146,6 @@ func (c *Client) addOperationListQualificationRequestsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +248,3 @@ type ListQualificationRequestsAPIClient interface {
 }
 
 var _ ListQualificationRequestsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListQualificationRequests(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListQualificationRequests",
-	}
-}

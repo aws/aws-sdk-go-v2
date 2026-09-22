@@ -5,10 +5,10 @@ package chimesdkmessaging
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A list of the channels moderated by an AppInstanceUser .
@@ -51,6 +51,27 @@ type ListChannelsModeratedByAppInstanceUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsModeratedByAppInstanceUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsModeratedByAppInstanceUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsModeratedByAppInstanceUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.ListChannelsModeratedByAppInstanceUserRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.ListChannelsModeratedByAppInstanceUserRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChannelsModeratedByAppInstanceUserRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsModeratedByAppInstanceUserRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListChannelsModeratedByAppInstanceUserOutput struct {
 
 	// The moderated channels in the request.
@@ -66,77 +87,51 @@ type ListChannelsModeratedByAppInstanceUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelsModeratedByAppInstanceUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelsModeratedByAppInstanceUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelsModeratedByAppInstanceUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannelModeratedByAppInstanceUserSummaryList(s, schemas.ListChannelsModeratedByAppInstanceUserResponse_Channels, v.Channels)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelsModeratedByAppInstanceUserResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListChannelsModeratedByAppInstanceUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChannelsModeratedByAppInstanceUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChannelsModeratedByAppInstanceUserResponse_Channels:
+			return deserializeChannelModeratedByAppInstanceUserSummaryList(d, schemas.ListChannelsModeratedByAppInstanceUserResponse_Channels, &v.Channels)
+		case schemas.ListChannelsModeratedByAppInstanceUserResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChannelsModeratedByAppInstanceUserResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelsModeratedByAppInstanceUser, schemas.ListChannelsModeratedByAppInstanceUserRequest, schemas.ListChannelsModeratedByAppInstanceUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChannelsModeratedByAppInstanceUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelsModeratedByAppInstanceUser, schemas.ListChannelsModeratedByAppInstanceUserRequest, schemas.ListChannelsModeratedByAppInstanceUserResponse), output: &ListChannelsModeratedByAppInstanceUserOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChannelsModeratedByAppInstanceUser{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChannelsModeratedByAppInstanceUser"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListChannelsModeratedByAppInstanceUserValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListChannelsModeratedByAppInstanceUser(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,12 +144,6 @@ func (c *Client) addOperationListChannelsModeratedByAppInstanceUserMiddlewares(s
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -258,11 +247,3 @@ type ListChannelsModeratedByAppInstanceUserAPIClient interface {
 }
 
 var _ ListChannelsModeratedByAppInstanceUserAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListChannelsModeratedByAppInstanceUser(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListChannelsModeratedByAppInstanceUser",
-	}
-}

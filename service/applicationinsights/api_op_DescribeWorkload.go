@@ -4,11 +4,10 @@ package applicationinsights
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes a workload and its configuration.
@@ -50,6 +49,27 @@ type DescribeWorkloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkloadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeWorkloadRequest_AccountId, *v.AccountId)
+	}
+	if v.ComponentName != nil {
+		s.WriteString(schemas.DescribeWorkloadRequest_ComponentName, *v.ComponentName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.DescribeWorkloadRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.DescribeWorkloadRequest_WorkloadId, *v.WorkloadId)
+	}
+}
+
 type DescribeWorkloadOutput struct {
 
 	// The configuration settings of the workload. The value is the escaped JSON of
@@ -69,77 +89,65 @@ type DescribeWorkloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeWorkloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeWorkloadResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeWorkloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkloadConfiguration != nil {
+		s.WriteStruct(schemas.DescribeWorkloadResponse_WorkloadConfiguration)
+		v.WorkloadConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkloadId != nil {
+		s.WriteString(schemas.DescribeWorkloadResponse_WorkloadId, *v.WorkloadId)
+	}
+	if v.WorkloadRemarks != nil {
+		s.WriteString(schemas.DescribeWorkloadResponse_WorkloadRemarks, *v.WorkloadRemarks)
+	}
+}
+func (v *DescribeWorkloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeWorkloadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeWorkloadResponse_WorkloadConfiguration:
+			v.WorkloadConfiguration = &types.WorkloadConfiguration{}
+			return v.WorkloadConfiguration.Deserialize(d)
+		case schemas.DescribeWorkloadResponse_WorkloadId:
+			v.WorkloadId = new(string)
+			return d.ReadString(schemas.DescribeWorkloadResponse_WorkloadId, v.WorkloadId)
+		case schemas.DescribeWorkloadResponse_WorkloadRemarks:
+			v.WorkloadRemarks = new(string)
+			return d.ReadString(schemas.DescribeWorkloadResponse_WorkloadRemarks, v.WorkloadRemarks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkload, schemas.DescribeWorkloadRequest, schemas.DescribeWorkloadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeWorkload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeWorkload, schemas.DescribeWorkloadRequest, schemas.DescribeWorkloadResponse), output: &DescribeWorkloadOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeWorkload{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeWorkload"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeWorkloadValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkload(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +162,8 @@ func (c *Client) addOperationDescribeWorkloadMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeWorkload(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeWorkload",
-	}
 }

@@ -1,0 +1,3 @@
+GET /2015-01-01/es/reservedInstances?maxResults=1&nextToken=__NextToken__&reservationId=__ReservedElasticsearchInstanceId__
+
+

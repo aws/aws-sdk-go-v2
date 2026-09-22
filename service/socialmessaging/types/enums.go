@@ -2,6 +2,39 @@
 
 package types
 
+type MetaFlowCategory string
+
+// Enum values for MetaFlowCategory
+const (
+	MetaFlowCategorySignUp             MetaFlowCategory = "SIGN_UP"
+	MetaFlowCategorySignIn             MetaFlowCategory = "SIGN_IN"
+	MetaFlowCategoryAppointmentBooking MetaFlowCategory = "APPOINTMENT_BOOKING"
+	MetaFlowCategoryLeadGeneration     MetaFlowCategory = "LEAD_GENERATION"
+	MetaFlowCategoryShopping           MetaFlowCategory = "SHOPPING"
+	MetaFlowCategoryContactUs          MetaFlowCategory = "CONTACT_US"
+	MetaFlowCategoryCustomerSupport    MetaFlowCategory = "CUSTOMER_SUPPORT"
+	MetaFlowCategorySurvey             MetaFlowCategory = "SURVEY"
+	MetaFlowCategoryOther              MetaFlowCategory = "OTHER"
+)
+
+// Values returns all known values for MetaFlowCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetaFlowCategory) Values() []MetaFlowCategory {
+	return []MetaFlowCategory{
+		"SIGN_UP",
+		"SIGN_IN",
+		"APPOINTMENT_BOOKING",
+		"LEAD_GENERATION",
+		"SHOPPING",
+		"CONTACT_US",
+		"CUSTOMER_SUPPORT",
+		"SURVEY",
+		"OTHER",
+	}
+}
+
 type RegistrationStatus string
 
 // Enum values for RegistrationStatus
@@ -18,5 +51,34 @@ func (RegistrationStatus) Values() []RegistrationStatus {
 	return []RegistrationStatus{
 		"COMPLETE",
 		"INCOMPLETE",
+	}
+}
+
+type WhatsAppDayOfWeek string
+
+// Enum values for WhatsAppDayOfWeek
+const (
+	WhatsAppDayOfWeekMonday    WhatsAppDayOfWeek = "MONDAY"
+	WhatsAppDayOfWeekTuesday   WhatsAppDayOfWeek = "TUESDAY"
+	WhatsAppDayOfWeekWednesday WhatsAppDayOfWeek = "WEDNESDAY"
+	WhatsAppDayOfWeekThursday  WhatsAppDayOfWeek = "THURSDAY"
+	WhatsAppDayOfWeekFriday    WhatsAppDayOfWeek = "FRIDAY"
+	WhatsAppDayOfWeekSaturday  WhatsAppDayOfWeek = "SATURDAY"
+	WhatsAppDayOfWeekSunday    WhatsAppDayOfWeek = "SUNDAY"
+)
+
+// Values returns all known values for WhatsAppDayOfWeek. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WhatsAppDayOfWeek) Values() []WhatsAppDayOfWeek {
+	return []WhatsAppDayOfWeek{
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+		"SUNDAY",
 	}
 }

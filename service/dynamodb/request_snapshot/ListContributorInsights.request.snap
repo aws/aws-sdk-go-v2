@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: DynamoDB_20120810.ListContributorInsights
+
+{"MaxResults":1,"NextToken":"__NextToken__","TableName":"__TableName__"}

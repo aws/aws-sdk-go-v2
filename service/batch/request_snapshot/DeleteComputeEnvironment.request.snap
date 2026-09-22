@@ -1,0 +1,5 @@
+POST /v1/deletecomputeenvironment
+
+Content-Type: application/json
+
+{"computeEnvironment":"__ComputeEnvironment__"}

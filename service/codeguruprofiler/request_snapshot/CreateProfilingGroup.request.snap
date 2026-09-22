@@ -1,0 +1,5 @@
+POST /profilingGroups?clientToken=__ClientToken__
+
+Content-Type: application/json
+
+{"agentOrchestrationConfig":{"profilingEnabled":true},"computePlatform":"Default","profilingGroupName":"__ProfilingGroupName__","tags":{"key0":"__Value__"}}

@@ -4,11 +4,10 @@ package mediapackagevod
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new MediaPackage VOD PackagingGroup resource.
@@ -47,6 +46,29 @@ type CreatePackagingGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePackagingGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePackagingGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePackagingGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.CreatePackagingGroupRequest_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.CreatePackagingGroupRequest_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreatePackagingGroupRequest_Id, *v.Id)
+	}
+	serializeTags(s, schemas.CreatePackagingGroupRequest_Tags, v.Tags)
+}
+
 type CreatePackagingGroupOutput struct {
 
 	// The ARN of the PackagingGroup.
@@ -76,77 +98,85 @@ type CreatePackagingGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePackagingGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePackagingGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePackagingGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreatePackagingGroupResponse_Arn, *v.Arn)
+	}
+	if v.Authorization != nil {
+		s.WriteStruct(schemas.CreatePackagingGroupResponse_Authorization)
+		v.Authorization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteString(schemas.CreatePackagingGroupResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreatePackagingGroupResponse_DomainName, *v.DomainName)
+	}
+	if v.EgressAccessLogs != nil {
+		s.WriteStruct(schemas.CreatePackagingGroupResponse_EgressAccessLogs)
+		v.EgressAccessLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreatePackagingGroupResponse_Id, *v.Id)
+	}
+	serializeTags(s, schemas.CreatePackagingGroupResponse_Tags, v.Tags)
+}
+func (v *CreatePackagingGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePackagingGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePackagingGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreatePackagingGroupResponse_Arn, v.Arn)
+		case schemas.CreatePackagingGroupResponse_Authorization:
+			v.Authorization = &types.Authorization{}
+			return v.Authorization.Deserialize(d)
+		case schemas.CreatePackagingGroupResponse_CreatedAt:
+			v.CreatedAt = new(string)
+			return d.ReadString(schemas.CreatePackagingGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreatePackagingGroupResponse_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.CreatePackagingGroupResponse_DomainName, v.DomainName)
+		case schemas.CreatePackagingGroupResponse_EgressAccessLogs:
+			v.EgressAccessLogs = &types.EgressAccessLogs{}
+			return v.EgressAccessLogs.Deserialize(d)
+		case schemas.CreatePackagingGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreatePackagingGroupResponse_Id, v.Id)
+		case schemas.CreatePackagingGroupResponse_Tags:
+			return deserializeTags(d, schemas.CreatePackagingGroupResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackagingGroup, schemas.CreatePackagingGroupRequest, schemas.CreatePackagingGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePackagingGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePackagingGroup, schemas.CreatePackagingGroupRequest, schemas.CreatePackagingGroupResponse), output: &CreatePackagingGroupOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePackagingGroup{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePackagingGroup"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreatePackagingGroupValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePackagingGroup(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +191,8 @@ func (c *Client) addOperationCreatePackagingGroupMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreatePackagingGroup(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreatePackagingGroup",
-	}
 }

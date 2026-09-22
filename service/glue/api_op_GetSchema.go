@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the specified schema in detail.
@@ -42,6 +41,20 @@ type GetSchemaInput struct {
 	SchemaId *types.SchemaId
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaId != nil {
+		s.WriteStruct(schemas.GetSchemaInput_SchemaId)
+		v.SchemaId.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type GetSchemaOutput struct {
@@ -93,77 +106,132 @@ type GetSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSchemaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSchemaResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSchemaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Compatibility != "" {
+		s.WriteString(schemas.GetSchemaResponse_Compatibility, string(v.Compatibility))
+	}
+	if v.CreatedTime != nil {
+		s.WriteString(schemas.GetSchemaResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.DataFormat != "" {
+		s.WriteString(schemas.GetSchemaResponse_DataFormat, string(v.DataFormat))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetSchemaResponse_Description, *v.Description)
+	}
+	if v.LatestSchemaVersion != nil {
+		s.WriteInt64(schemas.GetSchemaResponse_LatestSchemaVersion, *v.LatestSchemaVersion)
+	}
+	if v.NextSchemaVersion != nil {
+		s.WriteInt64(schemas.GetSchemaResponse_NextSchemaVersion, *v.NextSchemaVersion)
+	}
+	if v.RegistryArn != nil {
+		s.WriteString(schemas.GetSchemaResponse_RegistryArn, *v.RegistryArn)
+	}
+	if v.RegistryName != nil {
+		s.WriteString(schemas.GetSchemaResponse_RegistryName, *v.RegistryName)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.GetSchemaResponse_SchemaArn, *v.SchemaArn)
+	}
+	if v.SchemaCheckpoint != nil {
+		s.WriteInt64(schemas.GetSchemaResponse_SchemaCheckpoint, *v.SchemaCheckpoint)
+	}
+	if v.SchemaName != nil {
+		s.WriteString(schemas.GetSchemaResponse_SchemaName, *v.SchemaName)
+	}
+	if v.SchemaStatus != "" {
+		s.WriteString(schemas.GetSchemaResponse_SchemaStatus, string(v.SchemaStatus))
+	}
+	if v.UpdatedTime != nil {
+		s.WriteString(schemas.GetSchemaResponse_UpdatedTime, *v.UpdatedTime)
+	}
+}
+func (v *GetSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSchemaResponse_Compatibility:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaResponse_Compatibility, &ev); err != nil {
+				return err
+			}
+			v.Compatibility = types.Compatibility(ev)
+			return nil
+		case schemas.GetSchemaResponse_CreatedTime:
+			v.CreatedTime = new(string)
+			return d.ReadString(schemas.GetSchemaResponse_CreatedTime, v.CreatedTime)
+		case schemas.GetSchemaResponse_DataFormat:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaResponse_DataFormat, &ev); err != nil {
+				return err
+			}
+			v.DataFormat = types.DataFormat(ev)
+			return nil
+		case schemas.GetSchemaResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSchemaResponse_Description, v.Description)
+		case schemas.GetSchemaResponse_LatestSchemaVersion:
+			v.LatestSchemaVersion = new(int64)
+			return d.ReadInt64(schemas.GetSchemaResponse_LatestSchemaVersion, v.LatestSchemaVersion)
+		case schemas.GetSchemaResponse_NextSchemaVersion:
+			v.NextSchemaVersion = new(int64)
+			return d.ReadInt64(schemas.GetSchemaResponse_NextSchemaVersion, v.NextSchemaVersion)
+		case schemas.GetSchemaResponse_RegistryArn:
+			v.RegistryArn = new(string)
+			return d.ReadString(schemas.GetSchemaResponse_RegistryArn, v.RegistryArn)
+		case schemas.GetSchemaResponse_RegistryName:
+			v.RegistryName = new(string)
+			return d.ReadString(schemas.GetSchemaResponse_RegistryName, v.RegistryName)
+		case schemas.GetSchemaResponse_SchemaArn:
+			v.SchemaArn = new(string)
+			return d.ReadString(schemas.GetSchemaResponse_SchemaArn, v.SchemaArn)
+		case schemas.GetSchemaResponse_SchemaCheckpoint:
+			v.SchemaCheckpoint = new(int64)
+			return d.ReadInt64(schemas.GetSchemaResponse_SchemaCheckpoint, v.SchemaCheckpoint)
+		case schemas.GetSchemaResponse_SchemaName:
+			v.SchemaName = new(string)
+			return d.ReadString(schemas.GetSchemaResponse_SchemaName, v.SchemaName)
+		case schemas.GetSchemaResponse_SchemaStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSchemaResponse_SchemaStatus, &ev); err != nil {
+				return err
+			}
+			v.SchemaStatus = types.SchemaStatus(ev)
+			return nil
+		case schemas.GetSchemaResponse_UpdatedTime:
+			v.UpdatedTime = new(string)
+			return d.ReadString(schemas.GetSchemaResponse_UpdatedTime, v.UpdatedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchema, schemas.GetSchemaInput, schemas.GetSchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSchema, schemas.GetSchemaInput, schemas.GetSchemaResponse), output: &GetSchemaOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSchema{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSchema"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetSchemaValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSchema(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,22 +246,8 @@ func (c *Client) addOperationGetSchemaMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetSchema(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetSchema",
-	}
 }

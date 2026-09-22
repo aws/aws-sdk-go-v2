@@ -4,11 +4,10 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a configuration and trust relationship between a third-party identity
@@ -181,6 +180,27 @@ type CreateIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIdentityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeMappingType(s, schemas.CreateIdentityProviderRequest_AttributeMapping, v.AttributeMapping)
+	serializeIdpIdentifiersListType(s, schemas.CreateIdentityProviderRequest_IdpIdentifiers, v.IdpIdentifiers)
+	serializeProviderDetailsType(s, schemas.CreateIdentityProviderRequest_ProviderDetails, v.ProviderDetails)
+	if v.ProviderName != nil {
+		s.WriteString(schemas.CreateIdentityProviderRequest_ProviderName, *v.ProviderName)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.CreateIdentityProviderRequest_ProviderType, string(v.ProviderType))
+	}
+	if v.UserPoolId != nil {
+		s.WriteString(schemas.CreateIdentityProviderRequest_UserPoolId, *v.UserPoolId)
+	}
+}
+
 type CreateIdentityProviderOutput struct {
 
 	// The details of the new user pool IdP.
@@ -194,77 +214,50 @@ type CreateIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIdentityProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIdentityProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIdentityProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityProvider != nil {
+		s.WriteStruct(schemas.CreateIdentityProviderResponse_IdentityProvider)
+		v.IdentityProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIdentityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIdentityProviderResponse_IdentityProvider:
+			v.IdentityProvider = &types.IdentityProviderType{}
+			return v.IdentityProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentityProvider, schemas.CreateIdentityProviderRequest, schemas.CreateIdentityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentityProvider, schemas.CreateIdentityProviderRequest, schemas.CreateIdentityProviderResponse), output: &CreateIdentityProviderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateIdentityProvider{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIdentityProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateIdentityProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIdentityProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -279,22 +272,8 @@ func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateIdentityProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateIdentityProvider",
-	}
 }

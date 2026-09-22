@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","scheduledAudits":[{"dayOfMonth":"__DayOfMonth__","dayOfWeek":"SUN","frequency":"DAILY","scheduledAuditArn":"__ScheduledAuditArn__","scheduledAuditName":"__ScheduledAuditName__"},{"dayOfMonth":"__DayOfMonth__","dayOfWeek":"SUN","frequency":"DAILY","scheduledAuditArn":"__ScheduledAuditArn__","scheduledAuditName":"__ScheduledAuditName__"}]}

@@ -5,10 +5,10 @@ package devicefarm
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of the actions taken in a TestGridSession.
@@ -43,6 +43,24 @@ type ListTestGridSessionActionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestGridSessionActionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestGridSessionActionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestGridSessionActionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResult != nil {
+		s.WriteInt32(schemas.ListTestGridSessionActionsRequest_maxResult, *v.MaxResult)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestGridSessionActionsRequest_nextToken, *v.NextToken)
+	}
+	if v.SessionArn != nil {
+		s.WriteString(schemas.ListTestGridSessionActionsRequest_sessionArn, *v.SessionArn)
+	}
+}
+
 type ListTestGridSessionActionsOutput struct {
 
 	// The action taken by the session.
@@ -57,77 +75,51 @@ type ListTestGridSessionActionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestGridSessionActionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestGridSessionActionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestGridSessionActionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTestGridSessionActions(s, schemas.ListTestGridSessionActionsResult_actions, v.Actions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestGridSessionActionsResult_nextToken, *v.NextToken)
+	}
+}
+func (v *ListTestGridSessionActionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestGridSessionActionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestGridSessionActionsResult_actions:
+			return deserializeTestGridSessionActions(d, schemas.ListTestGridSessionActionsResult_actions, &v.Actions)
+		case schemas.ListTestGridSessionActionsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestGridSessionActionsResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestGridSessionActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessionActions, schemas.ListTestGridSessionActionsRequest, schemas.ListTestGridSessionActionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTestGridSessionActions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessionActions, schemas.ListTestGridSessionActionsRequest, schemas.ListTestGridSessionActionsResult), output: &ListTestGridSessionActionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTestGridSessionActions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTestGridSessionActions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTestGridSessionActionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTestGridSessionActions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +132,6 @@ func (c *Client) addOperationListTestGridSessionActionsMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +235,3 @@ type ListTestGridSessionActionsAPIClient interface {
 }
 
 var _ ListTestGridSessionActionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTestGridSessionActions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTestGridSessionActions",
-	}
-}

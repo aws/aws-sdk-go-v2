@@ -5,10 +5,10 @@ package costexplorer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the cost anomaly subscription objects for your account. You can
@@ -47,6 +47,25 @@ type GetAnomalySubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnomalySubscriptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnomalySubscriptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnomalySubscriptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAnomalySubscriptionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.GetAnomalySubscriptionsRequest_MonitorArn, *v.MonitorArn)
+	}
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetAnomalySubscriptionsRequest_NextPageToken, *v.NextPageToken)
+	}
+	serializeValues(s, schemas.GetAnomalySubscriptionsRequest_SubscriptionArnList, v.SubscriptionArnList)
+}
+
 type GetAnomalySubscriptionsOutput struct {
 
 	// A list of cost anomaly subscriptions that includes the detailed metadata for
@@ -66,74 +85,48 @@ type GetAnomalySubscriptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAnomalySubscriptionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAnomalySubscriptionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAnomalySubscriptionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnomalySubscriptions(s, schemas.GetAnomalySubscriptionsResponse_AnomalySubscriptions, v.AnomalySubscriptions)
+	if v.NextPageToken != nil {
+		s.WriteString(schemas.GetAnomalySubscriptionsResponse_NextPageToken, *v.NextPageToken)
+	}
+}
+func (v *GetAnomalySubscriptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAnomalySubscriptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAnomalySubscriptionsResponse_AnomalySubscriptions:
+			return deserializeAnomalySubscriptions(d, schemas.GetAnomalySubscriptionsResponse_AnomalySubscriptions, &v.AnomalySubscriptions)
+		case schemas.GetAnomalySubscriptionsResponse_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.GetAnomalySubscriptionsResponse_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAnomalySubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnomalySubscriptions, schemas.GetAnomalySubscriptionsRequest, schemas.GetAnomalySubscriptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetAnomalySubscriptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAnomalySubscriptions, schemas.GetAnomalySubscriptionsRequest, schemas.GetAnomalySubscriptionsResponse), output: &GetAnomalySubscriptionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetAnomalySubscriptions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAnomalySubscriptions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAnomalySubscriptions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +139,6 @@ func (c *Client) addOperationGetAnomalySubscriptionsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -254,11 +241,3 @@ type GetAnomalySubscriptionsAPIClient interface {
 }
 
 var _ GetAnomalySubscriptionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetAnomalySubscriptions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAnomalySubscriptions",
-	}
-}

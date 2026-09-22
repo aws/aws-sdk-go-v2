@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.CreateModel
+
+{"ClientToken":"__ClientToken__","DataPreProcessingConfiguration":{"TargetSamplingRate":"PT1S"},"DatasetName":"__DatasetName__","DatasetSchema":{"InlineDataSchema":"__InlineDataSchema__"},"EvaluationDataEndTime":946684800,"EvaluationDataStartTime":946684800,"LabelsInputConfiguration":{"LabelGroupName":"__LabelGroupName__","S3InputConfiguration":{"Bucket":"__Bucket__","Prefix":"__Prefix__"}},"ModelDiagnosticsOutputConfiguration":{"KmsKeyId":"__KmsKeyId__","S3OutputConfiguration":{"Bucket":"__Bucket__","Prefix":"__Prefix__"}},"ModelName":"__ModelName__","OffCondition":"__OffCondition__","RoleArn":"__RoleArn__","ServerSideKmsKeyId":"__ServerSideKmsKeyId__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"TrainingDataEndTime":946684800,"TrainingDataStartTime":946684800}

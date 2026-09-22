@@ -5,10 +5,10 @@ package networkmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a transit gateway peering connection.
@@ -48,6 +48,25 @@ type CreateTransitGatewayPeeringInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTransitGatewayPeeringInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTransitGatewayPeeringRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTransitGatewayPeeringInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateTransitGatewayPeeringRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CoreNetworkId != nil {
+		s.WriteString(schemas.CreateTransitGatewayPeeringRequest_CoreNetworkId, *v.CoreNetworkId)
+	}
+	serializeTagList(s, schemas.CreateTransitGatewayPeeringRequest_Tags, v.Tags)
+	if v.TransitGatewayArn != nil {
+		s.WriteString(schemas.CreateTransitGatewayPeeringRequest_TransitGatewayArn, *v.TransitGatewayArn)
+	}
+}
+
 type CreateTransitGatewayPeeringOutput struct {
 
 	// Returns information about the transit gateway peering connection request.
@@ -59,65 +78,44 @@ type CreateTransitGatewayPeeringOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateTransitGatewayPeeringOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateTransitGatewayPeeringResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateTransitGatewayPeeringOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransitGatewayPeering != nil {
+		s.WriteStruct(schemas.CreateTransitGatewayPeeringResponse_TransitGatewayPeering)
+		v.TransitGatewayPeering.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateTransitGatewayPeeringOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateTransitGatewayPeeringResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateTransitGatewayPeeringResponse_TransitGatewayPeering:
+			v.TransitGatewayPeering = &types.TransitGatewayPeering{}
+			return v.TransitGatewayPeering.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateTransitGatewayPeeringMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTransitGatewayPeering, schemas.CreateTransitGatewayPeeringRequest, schemas.CreateTransitGatewayPeeringResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateTransitGatewayPeering{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateTransitGatewayPeering, schemas.CreateTransitGatewayPeeringRequest, schemas.CreateTransitGatewayPeeringResponse), output: &CreateTransitGatewayPeeringOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateTransitGatewayPeering{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateTransitGatewayPeering"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -127,12 +125,6 @@ func (c *Client) addOperationCreateTransitGatewayPeeringMiddlewares(stack *middl
 		return err
 	}
 	if err = addOpCreateTransitGatewayPeeringValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTransitGatewayPeering(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +137,6 @@ func (c *Client) addOperationCreateTransitGatewayPeeringMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -190,12 +176,4 @@ func (m *idempotencyToken_initializeOpCreateTransitGatewayPeering) HandleInitial
 }
 func addIdempotencyToken_opCreateTransitGatewayPeeringMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateTransitGatewayPeering{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateTransitGatewayPeering(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateTransitGatewayPeering",
-	}
 }

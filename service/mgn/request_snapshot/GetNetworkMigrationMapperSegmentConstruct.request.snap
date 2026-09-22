@@ -1,0 +1,5 @@
+POST /network-migration/GetNetworkMigrationMapperSegmentConstruct
+
+Content-Type: application/json
+
+{"constructID":"__ConstructID__","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","segmentID":"__SegmentID__"}

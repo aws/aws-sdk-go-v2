@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","thingPrincipalObjects":[{"principal":"__Principal__","thingPrincipalType":"EXCLUSIVE_THING"},{"principal":"__Principal__","thingPrincipalType":"EXCLUSIVE_THING"}]}

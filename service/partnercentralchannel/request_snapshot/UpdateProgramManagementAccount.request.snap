@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PartnerCentralChannel.UpdateProgramManagementAccount
+
+{"catalog":"__Catalog__","displayName":"__DisplayName__","identifier":"__Identifier__","revision":"__Revision__"}

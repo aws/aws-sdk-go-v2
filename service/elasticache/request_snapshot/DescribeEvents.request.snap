@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeEvents&Duration=1&EndTime=2000-01-01T00%3A00%3A00Z&Marker=__Marker__&MaxRecords=1&SourceIdentifier=__SourceIdentifier__&SourceType=cache-cluster&StartTime=2000-01-01T00%3A00%3A00Z&Version=2015-02-02

@@ -4,11 +4,10 @@ package greengrassv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the pre-signed URL to download a public or a Lambda component artifact.
@@ -66,6 +65,27 @@ type GetComponentVersionArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentVersionArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentVersionArtifactRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentVersionArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetComponentVersionArtifactRequest_arn, *v.Arn)
+	}
+	if v.ArtifactName != nil {
+		s.WriteString(schemas.GetComponentVersionArtifactRequest_artifactName, *v.ArtifactName)
+	}
+	if v.IotEndpointType != "" {
+		s.WriteString(schemas.GetComponentVersionArtifactRequest_iotEndpointType, string(v.IotEndpointType))
+	}
+	if v.S3EndpointType != "" {
+		s.WriteString(schemas.GetComponentVersionArtifactRequest_s3EndpointType, string(v.S3EndpointType))
+	}
+}
+
 type GetComponentVersionArtifactOutput struct {
 
 	// The URL of the artifact.
@@ -79,77 +99,48 @@ type GetComponentVersionArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetComponentVersionArtifactOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetComponentVersionArtifactResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetComponentVersionArtifactOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PreSignedUrl != nil {
+		s.WriteString(schemas.GetComponentVersionArtifactResponse_preSignedUrl, *v.PreSignedUrl)
+	}
+}
+func (v *GetComponentVersionArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetComponentVersionArtifactResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetComponentVersionArtifactResponse_preSignedUrl:
+			v.PreSignedUrl = new(string)
+			return d.ReadString(schemas.GetComponentVersionArtifactResponse_preSignedUrl, v.PreSignedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetComponentVersionArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponentVersionArtifact, schemas.GetComponentVersionArtifactRequest, schemas.GetComponentVersionArtifactResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetComponentVersionArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetComponentVersionArtifact, schemas.GetComponentVersionArtifactRequest, schemas.GetComponentVersionArtifactResponse), output: &GetComponentVersionArtifactOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetComponentVersionArtifact{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetComponentVersionArtifact"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetComponentVersionArtifactValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComponentVersionArtifact(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,22 +155,8 @@ func (c *Client) addOperationGetComponentVersionArtifactMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetComponentVersionArtifact(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetComponentVersionArtifact",
-	}
 }

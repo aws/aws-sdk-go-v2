@@ -1,0 +1,5 @@
+PUT /prod/accountConfiguration
+
+Content-Type: application/json
+
+{"accountConfiguration":{"kmsKeyId":"__KmsKeyId__"}}

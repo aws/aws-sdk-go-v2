@@ -5,10 +5,10 @@ package pinpointsmsvoicev2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists countries that support notify messaging. You can optionally filter by
@@ -49,6 +49,26 @@ type ListNotifyCountriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotifyCountriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotifyCountriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotifyCountriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotifyEnabledChannelsList(s, schemas.ListNotifyCountriesRequest_Channels, v.Channels)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListNotifyCountriesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotifyCountriesRequest_NextToken, *v.NextToken)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.ListNotifyCountriesRequest_Tier, string(v.Tier))
+	}
+	serializeNotifyUseCaseList(s, schemas.ListNotifyCountriesRequest_UseCases, v.UseCases)
+}
+
 type ListNotifyCountriesOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -64,74 +84,48 @@ type ListNotifyCountriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNotifyCountriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNotifyCountriesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNotifyCountriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNotifyCountriesResult_NextToken, *v.NextToken)
+	}
+	serializeNotifyCountryInformationList(s, schemas.ListNotifyCountriesResult_NotifyCountries, v.NotifyCountries)
+}
+func (v *ListNotifyCountriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNotifyCountriesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNotifyCountriesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNotifyCountriesResult_NextToken, v.NextToken)
+		case schemas.ListNotifyCountriesResult_NotifyCountries:
+			return deserializeNotifyCountryInformationList(d, schemas.ListNotifyCountriesResult_NotifyCountries, &v.NotifyCountries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNotifyCountriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotifyCountries, schemas.ListNotifyCountriesRequest, schemas.ListNotifyCountriesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListNotifyCountries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNotifyCountries, schemas.ListNotifyCountriesRequest, schemas.ListNotifyCountriesResult), output: &ListNotifyCountriesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListNotifyCountries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNotifyCountries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNotifyCountries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +138,6 @@ func (c *Client) addOperationListNotifyCountriesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -251,11 +239,3 @@ type ListNotifyCountriesAPIClient interface {
 }
 
 var _ ListNotifyCountriesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListNotifyCountries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListNotifyCountries",
-	}
-}

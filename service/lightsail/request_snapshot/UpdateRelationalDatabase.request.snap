@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.UpdateRelationalDatabase
+
+{"applyImmediately":true,"caCertificateIdentifier":"__CaCertificateIdentifier__","disableBackupRetention":true,"enableBackupRetention":true,"masterUserPassword":"__MasterUserPassword__","preferredBackupWindow":"__PreferredBackupWindow__","preferredMaintenanceWindow":"__PreferredMaintenanceWindow__","publiclyAccessible":true,"relationalDatabaseBlueprintId":"__RelationalDatabaseBlueprintId__","relationalDatabaseName":"__RelationalDatabaseName__","rotateMasterUserPassword":true}

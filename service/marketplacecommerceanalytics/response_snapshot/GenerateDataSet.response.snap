@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: MarketplaceCommerceAnalytics20150701.GenerateDataSet
+
+{"dataSetRequestId":"__DataSetRequestId__"}

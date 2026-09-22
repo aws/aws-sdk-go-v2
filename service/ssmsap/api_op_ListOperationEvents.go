@@ -5,10 +5,10 @@ package ssmsap
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of operations events.
@@ -57,6 +57,25 @@ type ListOperationEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOperationEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOperationEventsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOperationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListOperationEventsInput_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOperationEventsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOperationEventsInput_NextToken, *v.NextToken)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ListOperationEventsInput_OperationId, *v.OperationId)
+	}
+}
+
 type ListOperationEventsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -72,77 +91,51 @@ type ListOperationEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOperationEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOperationEventsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOperationEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOperationEventsOutput_NextToken, *v.NextToken)
+	}
+	serializeOperationEventList(s, schemas.ListOperationEventsOutput_OperationEvents, v.OperationEvents)
+}
+func (v *ListOperationEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOperationEventsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOperationEventsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOperationEventsOutput_NextToken, v.NextToken)
+		case schemas.ListOperationEventsOutput_OperationEvents:
+			return deserializeOperationEventList(d, schemas.ListOperationEventsOutput_OperationEvents, &v.OperationEvents)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOperationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOperationEvents, schemas.ListOperationEventsInput, schemas.ListOperationEventsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOperationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOperationEvents, schemas.ListOperationEventsInput, schemas.ListOperationEventsOutput), output: &ListOperationEventsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOperationEvents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOperationEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListOperationEventsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOperationEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +148,6 @@ func (c *Client) addOperationListOperationEventsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +253,3 @@ type ListOperationEventsAPIClient interface {
 }
 
 var _ ListOperationEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListOperationEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListOperationEvents",
-	}
-}

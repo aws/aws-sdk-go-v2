@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.GetAggregateResourceConfig
+
+{"ConfigurationAggregatorName":"__ConfigurationAggregatorName__","ResourceIdentifier":{"ResourceId":"__ResourceId__","ResourceName":"__ResourceName__","ResourceType":"AWS::EC2::CustomerGateway","SourceAccountId":"__SourceAccountId__","SourceRegion":"__SourceRegion__"}}

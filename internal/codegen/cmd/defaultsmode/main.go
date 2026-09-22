@@ -26,7 +26,7 @@ func init() {
 }
 
 type Configuration struct {
-	Version       int64               `json:"version"`
+	Version       json.RawMessage     `json:"version"` // unused, accept any type
 	Modes         map[string]struct{} `json:"modes"`
 	Documentation struct {
 		Modes map[string]string `json:"modes"`

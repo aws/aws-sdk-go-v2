@@ -1,0 +1,5 @@
+POST /describe-connector-profiles
+
+Content-Type: application/json
+
+{"connectorLabel":"__ConnectorLabel__","connectorProfileNames":["__Member__","__Member__"],"connectorType":"Salesforce","maxResults":1,"nextToken":"__NextToken__"}

@@ -5,10 +5,10 @@ package directoryservice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the address blocks that you have added to a directory.
@@ -46,6 +46,24 @@ type ListIpRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIpRoutesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIpRoutesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIpRoutesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ListIpRoutesRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListIpRoutesRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIpRoutesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIpRoutesOutput struct {
 
 	// A list of IpRoutes.
@@ -61,77 +79,51 @@ type ListIpRoutesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIpRoutesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIpRoutesResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIpRoutesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIpRoutesInfo(s, schemas.ListIpRoutesResult_IpRoutesInfo, v.IpRoutesInfo)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIpRoutesResult_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIpRoutesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIpRoutesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIpRoutesResult_IpRoutesInfo:
+			return deserializeIpRoutesInfo(d, schemas.ListIpRoutesResult_IpRoutesInfo, &v.IpRoutesInfo)
+		case schemas.ListIpRoutesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIpRoutesResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIpRoutes, schemas.ListIpRoutesRequest, schemas.ListIpRoutesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListIpRoutes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIpRoutes, schemas.ListIpRoutesRequest, schemas.ListIpRoutesResult), output: &ListIpRoutesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListIpRoutes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIpRoutes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIpRoutesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIpRoutes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,12 +136,6 @@ func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -250,11 +236,3 @@ type ListIpRoutesAPIClient interface {
 }
 
 var _ ListIpRoutesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListIpRoutes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIpRoutes",
-	}
-}

@@ -4,11 +4,10 @@ package configservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/configservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Runs an on-demand evaluation for the specified resource to determine whether
@@ -80,6 +79,34 @@ type StartResourceEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceEvaluationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceEvaluationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceEvaluationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartResourceEvaluationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EvaluationContext != nil {
+		s.WriteStruct(schemas.StartResourceEvaluationRequest_EvaluationContext)
+		v.EvaluationContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationMode != "" {
+		s.WriteString(schemas.StartResourceEvaluationRequest_EvaluationMode, string(v.EvaluationMode))
+	}
+	if v.EvaluationTimeout != 0 {
+		s.WriteInt32(schemas.StartResourceEvaluationRequest_EvaluationTimeout, v.EvaluationTimeout)
+	}
+	if v.ResourceDetails != nil {
+		s.WriteStruct(schemas.StartResourceEvaluationRequest_ResourceDetails)
+		v.ResourceDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartResourceEvaluationOutput struct {
 
 	// A unique ResourceEvaluationId that is associated with a single execution.
@@ -91,77 +118,48 @@ type StartResourceEvaluationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartResourceEvaluationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartResourceEvaluationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartResourceEvaluationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceEvaluationId != nil {
+		s.WriteString(schemas.StartResourceEvaluationResponse_ResourceEvaluationId, *v.ResourceEvaluationId)
+	}
+}
+func (v *StartResourceEvaluationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartResourceEvaluationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartResourceEvaluationResponse_ResourceEvaluationId:
+			v.ResourceEvaluationId = new(string)
+			return d.ReadString(schemas.StartResourceEvaluationResponse_ResourceEvaluationId, v.ResourceEvaluationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartResourceEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceEvaluation, schemas.StartResourceEvaluationRequest, schemas.StartResourceEvaluationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartResourceEvaluation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartResourceEvaluation, schemas.StartResourceEvaluationRequest, schemas.StartResourceEvaluationResponse), output: &StartResourceEvaluationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartResourceEvaluation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartResourceEvaluation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartResourceEvaluationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartResourceEvaluation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +174,8 @@ func (c *Client) addOperationStartResourceEvaluationMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartResourceEvaluation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartResourceEvaluation",
-	}
 }

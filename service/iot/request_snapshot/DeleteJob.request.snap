@@ -1,0 +1,3 @@
+DELETE /jobs/__JobId__?force=true&namespaceId=__NamespaceId__
+
+

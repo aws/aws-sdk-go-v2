@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"OrganizationStatus":{"AccountStatusList":[{"AccountId":"__AccountId__","SLRDeploymentStatus":"__SLRDeploymentStatus__"},{"AccountId":"__AccountId__","SLRDeploymentStatus":"__SLRDeploymentStatus__"}],"OrganizationAwsServiceAccessStatus":"__OrganizationAwsServiceAccessStatus__","OrganizationId":"__OrganizationId__","SLRDeploymentStatus":"__SLRDeploymentStatus__"}}

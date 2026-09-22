@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHub.DescribeMigrationTask
+
+{"MigrationTask":{"MigrationTaskName":"__MigrationTaskName__","ProgressUpdateStream":"__ProgressUpdateStream__","ResourceAttributeList":[{"Type":"IPV4_ADDRESS","Value":"__Value__"},{"Type":"IPV4_ADDRESS","Value":"__Value__"}],"Task":{"ProgressPercent":1,"Status":"NOT_STARTED","StatusDetail":"__StatusDetail__"},"UpdateDateTime":946684800}}

@@ -5,10 +5,10 @@ package opensearch
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the list of optimizations that Auto-Tune has made to an Amazon
@@ -50,6 +50,24 @@ type DescribeDomainAutoTunesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainAutoTunesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainAutoTunesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainAutoTunesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DescribeDomainAutoTunesRequest_DomainName, *v.DomainName)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeDomainAutoTunesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDomainAutoTunesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // The result of a DescribeDomainAutoTunes request.
 type DescribeDomainAutoTunesOutput struct {
 
@@ -67,77 +85,51 @@ type DescribeDomainAutoTunesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDomainAutoTunesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDomainAutoTunesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDomainAutoTunesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutoTuneList(s, schemas.DescribeDomainAutoTunesResponse_AutoTunes, v.AutoTunes)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDomainAutoTunesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDomainAutoTunesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDomainAutoTunesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDomainAutoTunesResponse_AutoTunes:
+			return deserializeAutoTuneList(d, schemas.DescribeDomainAutoTunesResponse_AutoTunes, &v.AutoTunes)
+		case schemas.DescribeDomainAutoTunesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDomainAutoTunesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainAutoTunes, schemas.DescribeDomainAutoTunesRequest, schemas.DescribeDomainAutoTunesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDomainAutoTunes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDomainAutoTunes, schemas.DescribeDomainAutoTunesRequest, schemas.DescribeDomainAutoTunesResponse), output: &DescribeDomainAutoTunesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDomainAutoTunes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDomainAutoTunes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDomainAutoTunesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomainAutoTunes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,12 +142,6 @@ func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -255,11 +241,3 @@ type DescribeDomainAutoTunesAPIClient interface {
 }
 
 var _ DescribeDomainAutoTunesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeDomainAutoTunes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDomainAutoTunes",
-	}
-}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.GetReservationPurchaseRecommendation
+
+{"AccountId":"__AccountId__","AccountScope":"PAYER","Filter":{"And":[{},{}],"CostCategories":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Dimensions":{"Key":"AZ","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]},"Or":[{},{}],"Tags":{"Key":"__Key__","MatchOptions":["EQUALS","EQUALS"],"Values":["__Member__","__Member__"]}},"LookbackPeriodInDays":"SEVEN_DAYS","NextPageToken":"__NextPageToken__","PageSize":1,"PaymentOption":"NO_UPFRONT","Service":"__Service__","ServiceSpecification":{"EC2Specification":{"OfferingClass":"STANDARD"}},"TermInYears":"ONE_YEAR"}

@@ -1,0 +1,5 @@
+POST /v1/domainnames/__DomainName__
+
+Content-Type: application/json
+
+{"description":"__Description__"}

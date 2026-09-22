@@ -30,6 +30,194 @@
                 },
                 "smithy.api#documentation": "<p>The Amazon Web Services Marketplace <code>GetBuyerDashboard</code> API enables you to get a procurement insights\n      dashboard programmatically. The API gets the agreement and cost analysis dashboards with\n      data for all of the Amazon Web Services accounts in your Amazon Web Services Organization. </p>\n         <p>To use the Amazon Web Services Marketplace Reporting API, you must complete the following prerequisites:</p>\n         <ul>\n            <li>\n               <p>Enable all features for your organization. For more information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">Enabling all features for an organization with Organizations</a>, in the\n          <i>Organizations User Guide</i>.</p>\n            </li>\n            <li>\n               <p>Call the service as the Organizations management account or an account registered\n          as a delegated administrator for the procurement insights service.</p>\n               <p>For more information about management accounts, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tutorials_basic.html\">Tutorial:\n          Creating and configuring an organization</a> and <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs-manage_accounts_management.html\">Managing the management account with Organizations</a>, both in the\n          <i>Organizations User Guide</i>.</p>\n               <p>For more information about delegated administrators, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/management-delegates.html\">Using\n          delegated administrators</a>, in the <i>Amazon Web Services Marketplace Buyer\n            Guide</i>.</p>\n            </li>\n            <li>\n               <p>Create an IAM policy that enables the\n          <code>aws-marketplace:GetBuyerDashboard</code> and\n          <code>organizations:DescribeOrganization</code> permissions. In addition,\n          the management account requires the\n          <code>organizations:EnableAWSServiceAccess</code> and\n          <code>iam:CreateServiceLinkedRole</code> permissions to create. For more\n          information about creating the policy, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html\">Policies and permissions in\n            Identity and Access Management</a>, in the <i>IAM User Guide</i>.</p>\n               <note>\n                  <p>Access can be shared only by registering the desired linked account as a\n            delegated administrator. That requires\n            <code>organizations:RegisterDelegatedAdministrator</code>\n                     <code>organizations:ListDelegatedAdministrators</code> and\n            <code>organizations:DeregisterDelegatedAdministrator</code>\n            permissions.</p>\n               </note>\n            </li>\n            <li>\n               <p>Use the Amazon Web Services Marketplace console to create the\n          <code>AWSServiceRoleForProcurementInsightsPolicy</code> service-linked role.\n          The role enables Amazon Web Services Marketplace procurement visibility integration. The management\n          account requires an IAM policy with the\n          <code>organizations:EnableAWSServiceAccess</code> and\n          <code>iam:CreateServiceLinkedRole</code> permissions to create the\n          service-linked role and enable the service access. For more information, see\n          <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/orgs-access-slr.html\">Granting access to\n            Organizations</a> and <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/buyer-service-linked-role-procurement.html\">Service-linked role to share procurement data</a> in the\n          <i>Amazon Web Services Marketplace Buyer Guide</i>.</p>\n            </li>\n            <li>\n               <p>After creating the service-linked role, you must enable trusted access that\n          grants Amazon Web Services Marketplace permission to access data from your Organizations. For more information,\n          see <a href=\"https://docs.aws.amazon.com/marketplace/latest/buyerguide/orgs-access-slr.html\">Granting access to\n            Organizations</a> in the <i>Amazon Web Services Marketplace Buyer Guide</i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Marketplace Reporting Service",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://reporting-marketplace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://reporting-marketplace-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://reporting-marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://reporting-marketplace.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

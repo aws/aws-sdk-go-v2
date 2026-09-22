@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the description of specific Amazon FSx for Lustre or Amazon File Cache
@@ -68,6 +68,23 @@ type DescribeDataRepositoryAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataRepositoryAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataRepositoryAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataRepositoryAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataRepositoryAssociationIds(s, schemas.DescribeDataRepositoryAssociationsRequest_AssociationIds, v.AssociationIds)
+	serializeFilters(s, schemas.DescribeDataRepositoryAssociationsRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeDataRepositoryAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataRepositoryAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeDataRepositoryAssociationsOutput struct {
 
 	// An array of one or more data repository association descriptions.
@@ -84,74 +101,48 @@ type DescribeDataRepositoryAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDataRepositoryAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDataRepositoryAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDataRepositoryAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataRepositoryAssociations(s, schemas.DescribeDataRepositoryAssociationsResponse_Associations, v.Associations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeDataRepositoryAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *DescribeDataRepositoryAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDataRepositoryAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDataRepositoryAssociationsResponse_Associations:
+			return deserializeDataRepositoryAssociations(d, schemas.DescribeDataRepositoryAssociationsResponse_Associations, &v.Associations)
+		case schemas.DescribeDataRepositoryAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeDataRepositoryAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDataRepositoryAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataRepositoryAssociations, schemas.DescribeDataRepositoryAssociationsRequest, schemas.DescribeDataRepositoryAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeDataRepositoryAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDataRepositoryAssociations, schemas.DescribeDataRepositoryAssociationsRequest, schemas.DescribeDataRepositoryAssociationsResponse), output: &DescribeDataRepositoryAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeDataRepositoryAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDataRepositoryAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataRepositoryAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +155,6 @@ func (c *Client) addOperationDescribeDataRepositoryAssociationsMiddlewares(stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -274,11 +259,3 @@ type DescribeDataRepositoryAssociationsAPIClient interface {
 }
 
 var _ DescribeDataRepositoryAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeDataRepositoryAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDataRepositoryAssociations",
-	}
-}

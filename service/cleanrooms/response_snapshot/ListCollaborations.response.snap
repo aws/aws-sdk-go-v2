@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"collaborationList":[{"analyticsEngine":"SPARK","arn":"__Arn__","createTime":946684800,"creatorAccountId":"__CreatorAccountId__","creatorDisplayName":"__CreatorDisplayName__","id":"__Id__","memberStatus":"INVITED","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","updateTime":946684800},{"analyticsEngine":"SPARK","arn":"__Arn__","createTime":946684800,"creatorAccountId":"__CreatorAccountId__","creatorDisplayName":"__CreatorDisplayName__","id":"__Id__","memberStatus":"INVITED","membershipArn":"__MembershipArn__","membershipId":"__MembershipId__","name":"__Name__","updateTime":946684800}],"nextToken":"__NextToken__"}

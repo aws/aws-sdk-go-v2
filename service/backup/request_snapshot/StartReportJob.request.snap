@@ -1,0 +1,5 @@
+POST /audit/report-jobs/__ReportPlanName__
+
+Content-Type: application/json
+
+{"IdempotencyToken":"__IdempotencyToken__"}

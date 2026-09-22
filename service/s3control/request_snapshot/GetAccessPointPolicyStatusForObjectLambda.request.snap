@@ -1,0 +1,4 @@
+GET /v20180820/accesspointforobjectlambda/__Name__/policyStatus
+
+X-Amz-Account-Id: AccountId-value
+

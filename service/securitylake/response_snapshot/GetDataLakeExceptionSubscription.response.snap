@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"exceptionTimeToLive":1,"notificationEndpoint":"__NotificationEndpoint__","subscriptionProtocol":"__SubscriptionProtocol__"}

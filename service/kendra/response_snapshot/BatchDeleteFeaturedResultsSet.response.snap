@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.BatchDeleteFeaturedResultsSet
+
+{"Errors":[{"ErrorCode":"InternalError","ErrorMessage":"__ErrorMessage__","Id":"__Id__"},{"ErrorCode":"InternalError","ErrorMessage":"__ErrorMessage__","Id":"__Id__"}]}

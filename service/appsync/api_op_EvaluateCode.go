@@ -4,11 +4,10 @@ package appsync
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appsync/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Evaluates the given code and returns the response. The code definition
@@ -60,6 +59,29 @@ type EvaluateCodeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateCodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateCodeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateCodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.EvaluateCodeRequest_code, *v.Code)
+	}
+	if v.Context != nil {
+		s.WriteString(schemas.EvaluateCodeRequest_context, *v.Context)
+	}
+	if v.Function != nil {
+		s.WriteString(schemas.EvaluateCodeRequest_function, *v.Function)
+	}
+	if v.Runtime != nil {
+		s.WriteStruct(schemas.EvaluateCodeRequest_runtime)
+		v.Runtime.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type EvaluateCodeOutput struct {
 
 	// Contains the payload of the response error.
@@ -87,77 +109,71 @@ type EvaluateCodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EvaluateCodeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EvaluateCodeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EvaluateCodeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteStruct(schemas.EvaluateCodeResponse_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EvaluationResult != nil {
+		s.WriteString(schemas.EvaluateCodeResponse_evaluationResult, *v.EvaluationResult)
+	}
+	serializeLogs(s, schemas.EvaluateCodeResponse_logs, v.Logs)
+	if v.OutErrors != nil {
+		s.WriteString(schemas.EvaluateCodeResponse_outErrors, *v.OutErrors)
+	}
+	if v.Stash != nil {
+		s.WriteString(schemas.EvaluateCodeResponse_stash, *v.Stash)
+	}
+}
+func (v *EvaluateCodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EvaluateCodeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EvaluateCodeResponse_error:
+			v.Error = &types.EvaluateCodeErrorDetail{}
+			return v.Error.Deserialize(d)
+		case schemas.EvaluateCodeResponse_evaluationResult:
+			v.EvaluationResult = new(string)
+			return d.ReadString(schemas.EvaluateCodeResponse_evaluationResult, v.EvaluationResult)
+		case schemas.EvaluateCodeResponse_logs:
+			return deserializeLogs(d, schemas.EvaluateCodeResponse_logs, &v.Logs)
+		case schemas.EvaluateCodeResponse_outErrors:
+			v.OutErrors = new(string)
+			return d.ReadString(schemas.EvaluateCodeResponse_outErrors, v.OutErrors)
+		case schemas.EvaluateCodeResponse_stash:
+			v.Stash = new(string)
+			return d.ReadString(schemas.EvaluateCodeResponse_stash, v.Stash)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEvaluateCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateCode, schemas.EvaluateCodeRequest, schemas.EvaluateCodeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEvaluateCode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EvaluateCode, schemas.EvaluateCodeRequest, schemas.EvaluateCodeResponse), output: &EvaluateCodeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEvaluateCode{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EvaluateCode"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpEvaluateCodeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEvaluateCode(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,22 +188,8 @@ func (c *Client) addOperationEvaluateCodeMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opEvaluateCode(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EvaluateCode",
-	}
 }

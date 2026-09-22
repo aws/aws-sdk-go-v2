@@ -1,0 +1,3 @@
+GET /flows/__FlowIdentifier__/aliases/__AliasIdentifier__
+
+

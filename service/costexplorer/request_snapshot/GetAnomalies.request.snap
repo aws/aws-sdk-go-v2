@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSInsightsIndexService.GetAnomalies
+
+{"DateInterval":{"EndDate":"__EndDate__","StartDate":"__StartDate__"},"Feedback":"YES","MaxResults":1,"MonitorArn":"__MonitorArn__","NextPageToken":"__NextPageToken__","TotalImpact":{"EndValue":1,"NumericOperator":"EQUAL","StartValue":1}}

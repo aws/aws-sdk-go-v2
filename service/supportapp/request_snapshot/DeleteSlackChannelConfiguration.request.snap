@@ -1,0 +1,5 @@
+POST /control/delete-slack-channel-configuration
+
+Content-Type: application/json
+
+{"channelId":"__ChannelId__","teamId":"__TeamId__"}

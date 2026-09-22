@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.GetResourceConfigHistory
+
+{"chronologicalOrder":"Reverse","earlierTime":946684800,"laterTime":946684800,"limit":1,"nextToken":"__NextToken__","resourceId":"__ResourceId__","resourceType":"AWS::EC2::CustomerGateway"}

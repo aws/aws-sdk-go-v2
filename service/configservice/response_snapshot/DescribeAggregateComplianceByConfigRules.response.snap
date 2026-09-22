@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: StarlingDoveService.DescribeAggregateComplianceByConfigRules
+
+{"AggregateComplianceByConfigRules":[{"AccountId":"__AccountId__","AwsRegion":"__AwsRegion__","Compliance":{"ComplianceContributorCount":{"CapExceeded":true,"CappedCount":1},"ComplianceType":"COMPLIANT"},"ConfigRuleName":"__ConfigRuleName__"},{"AccountId":"__AccountId__","AwsRegion":"__AwsRegion__","Compliance":{"ComplianceContributorCount":{"CapExceeded":true,"CappedCount":1},"ComplianceType":"COMPLIANT"},"ConfigRuleName":"__ConfigRuleName__"}],"NextToken":"__NextToken__"}

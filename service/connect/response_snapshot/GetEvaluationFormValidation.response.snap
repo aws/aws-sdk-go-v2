@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EvaluationFormId":"__EvaluationFormId__","EvaluationFormVersion":1,"FailureReason":"__FailureReason__","Findings":[{"Description":"__Description__","IssueCode":"__IssueCode__","Items":[{"Property":"__Property__","RefId":"__RefId__"},{"Property":"__Property__","RefId":"__RefId__"}],"Severity":"WARNING","Suggestion":"__Suggestion__"},{"Description":"__Description__","IssueCode":"__IssueCode__","Items":[{"Property":"__Property__","RefId":"__RefId__"},{"Property":"__Property__","RefId":"__RefId__"}],"Severity":"WARNING","Suggestion":"__Suggestion__"}],"StartedTime":946684800,"Status":"IN_PROGRESS"}

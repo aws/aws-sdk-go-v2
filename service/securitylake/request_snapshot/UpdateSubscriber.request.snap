@@ -1,0 +1,5 @@
+PUT /v1/subscribers/__SubscriberId__
+
+Content-Type: application/json
+
+{"sources":[{"awsLogSource":{"sourceName":"ROUTE53","sourceVersion":"__SourceVersion__"}},{"awsLogSource":{"sourceName":"ROUTE53","sourceVersion":"__SourceVersion__"}}],"subscriberDescription":"__SubscriberDescription__","subscriberIdentity":{"externalId":"__ExternalId__","principal":"__Principal__"},"subscriberName":"__SubscriberName__"}

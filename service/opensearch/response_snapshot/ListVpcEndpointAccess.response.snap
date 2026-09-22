@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AuthorizedPrincipalList":[{"Principal":"__Principal__","PrincipalType":"AWS_ACCOUNT","ServiceOptions":{"SupportedRegions":["__Member__","__Member__"]}},{"Principal":"__Principal__","PrincipalType":"AWS_ACCOUNT","ServiceOptions":{"SupportedRegions":["__Member__","__Member__"]}}],"NextToken":"__NextToken__"}

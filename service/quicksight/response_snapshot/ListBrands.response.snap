@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Brands":[{"Arn":"__Arn__","BrandId":"__BrandId__","BrandName":"__BrandName__","BrandStatus":"CREATE_IN_PROGRESS","CreatedTime":946684800,"Description":"__Description__","LastUpdatedTime":946684800},{"Arn":"__Arn__","BrandId":"__BrandId__","BrandName":"__BrandName__","BrandStatus":"CREATE_IN_PROGRESS","CreatedTime":946684800,"Description":"__Description__","LastUpdatedTime":946684800}],"NextToken":"__NextToken__"}

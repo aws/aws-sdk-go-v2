@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"EventsConfiguration":{"BotId":"__BotId__","LambdaFunctionArn":"__LambdaFunctionArn__","OutboundEventsHTTPSEndpoint":"__OutboundEventsHTTPSEndpoint__"}}

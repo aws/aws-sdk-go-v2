@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.ModifyStreamingProperties
+
+{"ResourceId":"__ResourceId__","StreamingProperties":{"GlobalAccelerator":{"Mode":"ENABLED_AUTO","PreferredProtocol":"TCP"},"StorageConnectors":[{"ConnectorType":"HOME_FOLDER","Status":"ENABLED"},{"ConnectorType":"HOME_FOLDER","Status":"ENABLED"}],"StreamingExperiencePreferredProtocol":"TCP","UserSettings":[{"Action":"CLIPBOARD_COPY_FROM_LOCAL_DEVICE","MaximumLength":1,"Permission":"ENABLED"},{"Action":"CLIPBOARD_COPY_FROM_LOCAL_DEVICE","MaximumLength":1,"Permission":"ENABLED"}]}}

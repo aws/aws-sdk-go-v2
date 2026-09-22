@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=ModifyLoadBalancerAttributes&LoadBalancerAttributes.AccessLog.EmitInterval=1&LoadBalancerAttributes.AccessLog.Enabled=true&LoadBalancerAttributes.AccessLog.S3BucketName=__S3BucketName__&LoadBalancerAttributes.AccessLog.S3BucketPrefix=__S3BucketPrefix__&LoadBalancerAttributes.AdditionalAttributes.member.1.Key=__Key__&LoadBalancerAttributes.AdditionalAttributes.member.1.Value=__Value__&LoadBalancerAttributes.AdditionalAttributes.member.2.Key=__Key__&LoadBalancerAttributes.AdditionalAttributes.member.2.Value=__Value__&LoadBalancerAttributes.ConnectionDraining.Enabled=true&LoadBalancerAttributes.ConnectionDraining.Timeout=1&LoadBalancerAttributes.ConnectionSettings.IdleTimeout=1&LoadBalancerAttributes.CrossZoneLoadBalancing.Enabled=true&LoadBalancerName=__LoadBalancerName__&Version=2012-06-01

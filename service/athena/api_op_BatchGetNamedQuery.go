@@ -4,11 +4,10 @@ package athena
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/athena/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the details of a single named query or a list of up to 50 queries,
@@ -44,6 +43,16 @@ type BatchGetNamedQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetNamedQueryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetNamedQueryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetNamedQueryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNamedQueryIdList(s, schemas.BatchGetNamedQueryInput_NamedQueryIds, v.NamedQueryIds)
+}
+
 type BatchGetNamedQueryOutput struct {
 
 	// Information about the named query IDs submitted.
@@ -58,77 +67,48 @@ type BatchGetNamedQueryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetNamedQueryOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetNamedQueryOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetNamedQueryOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNamedQueryList(s, schemas.BatchGetNamedQueryOutput_NamedQueries, v.NamedQueries)
+	serializeUnprocessedNamedQueryIdList(s, schemas.BatchGetNamedQueryOutput_UnprocessedNamedQueryIds, v.UnprocessedNamedQueryIds)
+}
+func (v *BatchGetNamedQueryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetNamedQueryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetNamedQueryOutput_NamedQueries:
+			return deserializeNamedQueryList(d, schemas.BatchGetNamedQueryOutput_NamedQueries, &v.NamedQueries)
+		case schemas.BatchGetNamedQueryOutput_UnprocessedNamedQueryIds:
+			return deserializeUnprocessedNamedQueryIdList(d, schemas.BatchGetNamedQueryOutput_UnprocessedNamedQueryIds, &v.UnprocessedNamedQueryIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetNamedQuery, schemas.BatchGetNamedQueryInput, schemas.BatchGetNamedQueryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchGetNamedQuery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetNamedQuery, schemas.BatchGetNamedQueryInput, schemas.BatchGetNamedQueryOutput), output: &BatchGetNamedQueryOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchGetNamedQuery{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetNamedQuery"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchGetNamedQueryValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetNamedQuery(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +123,8 @@ func (c *Client) addOperationBatchGetNamedQueryMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchGetNamedQuery(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchGetNamedQuery",
-	}
 }

@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the alias for a theme.
@@ -48,6 +47,24 @@ type DescribeThemeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemeAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemeAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemeAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DescribeThemeAliasRequest_AliasName, *v.AliasName)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeThemeAliasRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.ThemeId != nil {
+		s.WriteString(schemas.DescribeThemeAliasRequest_ThemeId, *v.ThemeId)
+	}
+}
+
 type DescribeThemeAliasOutput struct {
 
 	// The Amazon Web Services request ID for this operation.
@@ -65,77 +82,61 @@ type DescribeThemeAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThemeAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThemeAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThemeAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeThemeAliasResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeThemeAliasResponse_Status, v.Status)
+	}
+	if v.ThemeAlias != nil {
+		s.WriteStruct(schemas.DescribeThemeAliasResponse_ThemeAlias)
+		v.ThemeAlias.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeThemeAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThemeAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThemeAliasResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeThemeAliasResponse_RequestId, v.RequestId)
+		case schemas.DescribeThemeAliasResponse_Status:
+			return d.ReadInt32(schemas.DescribeThemeAliasResponse_Status, &v.Status)
+		case schemas.DescribeThemeAliasResponse_ThemeAlias:
+			v.ThemeAlias = &types.ThemeAlias{}
+			return v.ThemeAlias.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThemeAlias, schemas.DescribeThemeAliasRequest, schemas.DescribeThemeAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeThemeAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThemeAlias, schemas.DescribeThemeAliasRequest, schemas.DescribeThemeAliasResponse), output: &DescribeThemeAliasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeThemeAlias{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeThemeAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeThemeAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeThemeAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +151,8 @@ func (c *Client) addOperationDescribeThemeAliasMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeThemeAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeThemeAlias",
-	}
 }

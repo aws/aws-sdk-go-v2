@@ -5,10 +5,10 @@ package interconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/interconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/interconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all Attach Points the caller has access to that are valid for the
@@ -45,6 +45,24 @@ type ListAttachPointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachPointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachPointsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachPointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ListAttachPointsRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAttachPointsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttachPointsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAttachPointsOutput struct {
 
 	// The valid AttachPoint
@@ -61,65 +79,45 @@ type ListAttachPointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttachPointsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttachPointsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttachPointsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttachPointDescriptorList(s, schemas.ListAttachPointsResponse_attachPoints, v.AttachPoints)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttachPointsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAttachPointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttachPointsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttachPointsResponse_attachPoints:
+			return deserializeAttachPointDescriptorList(d, schemas.ListAttachPointsResponse_attachPoints, &v.AttachPoints)
+		case schemas.ListAttachPointsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAttachPointsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttachPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachPoints, schemas.ListAttachPointsRequest, schemas.ListAttachPointsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAttachPoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttachPoints, schemas.ListAttachPointsRequest, schemas.ListAttachPointsResponse), output: &ListAttachPointsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAttachPoints{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAttachPoints"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -129,12 +127,6 @@ func (c *Client) addOperationListAttachPointsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addOpListAttachPointsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAttachPoints(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +139,6 @@ func (c *Client) addOperationListAttachPointsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +239,3 @@ type ListAttachPointsAPIClient interface {
 }
 
 var _ ListAttachPointsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAttachPoints(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAttachPoints",
-	}
-}

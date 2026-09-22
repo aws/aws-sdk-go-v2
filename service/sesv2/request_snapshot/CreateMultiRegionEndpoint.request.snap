@@ -1,0 +1,5 @@
+POST /v2/email/multi-region-endpoints
+
+Content-Type: application/json
+
+{"Details":{"RoutesDetails":[{"Region":"__Region__"},{"Region":"__Region__"}]},"EndpointName":"__EndpointName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

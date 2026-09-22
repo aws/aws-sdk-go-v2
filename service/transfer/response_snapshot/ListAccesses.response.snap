@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.ListAccesses
+
+{"Accesses":[{"ExternalId":"__ExternalId__","HomeDirectory":"__HomeDirectory__","HomeDirectoryType":"PATH","Role":"__Role__"},{"ExternalId":"__ExternalId__","HomeDirectory":"__HomeDirectory__","HomeDirectoryType":"PATH","Role":"__Role__"}],"NextToken":"__NextToken__","ServerId":"__ServerId__"}

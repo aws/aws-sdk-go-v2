@@ -1,0 +1,5 @@
+POST /GetQueryState
+
+Content-Type: application/json
+
+{"QueryId":"__QueryId__"}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.UpdateAvailabilityConfiguration
+
+{"DomainName":"__DomainName__","EwsProvider":{"EwsEndpoint":"__EwsEndpoint__","EwsPassword":"__EwsPassword__","EwsUsername":"__EwsUsername__"},"LambdaProvider":{"LambdaArn":"__LambdaArn__"},"OrganizationId":"__OrganizationId__"}

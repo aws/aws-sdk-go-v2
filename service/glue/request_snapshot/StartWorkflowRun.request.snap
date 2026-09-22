@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.StartWorkflowRun
+
+{"Name":"__Name__","RunProperties":{"key0":"__Value__"}}

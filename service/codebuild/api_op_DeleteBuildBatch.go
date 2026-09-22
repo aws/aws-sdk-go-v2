@@ -4,11 +4,10 @@ package codebuild
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a batch build.
@@ -37,6 +36,18 @@ type DeleteBuildBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBuildBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBuildBatchInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBuildBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteBuildBatchInput_id, *v.Id)
+	}
+}
+
 type DeleteBuildBatchOutput struct {
 
 	// An array of strings that contain the identifiers of the builds that were
@@ -56,77 +67,54 @@ type DeleteBuildBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBuildBatchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBuildBatchOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBuildBatchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuildIds(s, schemas.DeleteBuildBatchOutput_buildsDeleted, v.BuildsDeleted)
+	serializeBuildsNotDeleted(s, schemas.DeleteBuildBatchOutput_buildsNotDeleted, v.BuildsNotDeleted)
+	if v.StatusCode != nil {
+		s.WriteString(schemas.DeleteBuildBatchOutput_statusCode, *v.StatusCode)
+	}
+}
+func (v *DeleteBuildBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBuildBatchOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBuildBatchOutput_buildsDeleted:
+			return deserializeBuildIds(d, schemas.DeleteBuildBatchOutput_buildsDeleted, &v.BuildsDeleted)
+		case schemas.DeleteBuildBatchOutput_buildsNotDeleted:
+			return deserializeBuildsNotDeleted(d, schemas.DeleteBuildBatchOutput_buildsNotDeleted, &v.BuildsNotDeleted)
+		case schemas.DeleteBuildBatchOutput_statusCode:
+			v.StatusCode = new(string)
+			return d.ReadString(schemas.DeleteBuildBatchOutput_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBuildBatch, schemas.DeleteBuildBatchInput, schemas.DeleteBuildBatchOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteBuildBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBuildBatch, schemas.DeleteBuildBatchInput, schemas.DeleteBuildBatchOutput), output: &DeleteBuildBatchOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteBuildBatch{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBuildBatch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteBuildBatchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBuildBatch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,22 +129,8 @@ func (c *Client) addOperationDeleteBuildBatchMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteBuildBatch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteBuildBatch",
-	}
 }

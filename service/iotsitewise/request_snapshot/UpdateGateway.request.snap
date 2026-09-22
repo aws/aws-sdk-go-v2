@@ -1,0 +1,5 @@
+PUT /20200301/gateways/__GatewayId__
+
+Content-Type: application/json
+
+{"gatewayName":"__GatewayName__"}

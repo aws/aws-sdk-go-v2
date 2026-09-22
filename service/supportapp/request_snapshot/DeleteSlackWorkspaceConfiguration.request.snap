@@ -1,0 +1,5 @@
+POST /control/delete-slack-workspace-configuration
+
+Content-Type: application/json
+
+{"teamId":"__TeamId__"}

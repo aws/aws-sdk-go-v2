@@ -293,8 +293,7 @@
                 "EndTime": {
                     "target": "com.amazonaws.pi#ISOTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time defined for the analysis report.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The end time defined for the analysis report.</p>"
                     }
                 },
                 "Tags": {
@@ -1558,6 +1557,102 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pi#ListPerformanceAnalysisReportRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pi#ListPerformanceAnalysisReportRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pi#ListPerformanceAnalysisReportRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pi#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.pi#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.pi#NotAuthorizedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves recommendations for a performance analysis report.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Recommendations",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.pi#ListPerformanceAnalysisReportRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceType": {
+                    "target": "com.amazonaws.pi#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services service for which Performance Insights returns metrics. Valid value is\n            <code>RDS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Identifier": {
+                    "target": "com.amazonaws.pi#IdentifierString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An immutable identifier for a data source that is unique for an Amazon Web Services Region. Performance Insights gathers metrics from this data source. In the\n            console, the identifier is shown as <i>ResourceID</i>. When you call <code>DescribeDBInstances</code>, the identifier is\n            returned as <code>DbiResourceId</code>.</p>\n         <p>To use a DB instance as a data source, specify its <code>DbiResourceId</code> value. For example, specify\n            <code>db-ABCDEFGHIJKLMNOPQRSTU1VW2X</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnalysisReportId": {
+                    "target": "com.amazonaws.pi#AnalysisReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the created analysis report. For example,\n            <code>report-12345678901234567</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommendationIds": {
+                    "target": "com.amazonaws.pi#RecommendationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recommendation identifiers to filter the results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pi#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return in the response. If more items exist than the specified <code>MaxResults</code> value, a\n            pagination token is included in the response so that the remaining results can be retrieved. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pi#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. \n            If this parameter is specified, the response includes only records beyond\n            the token, up to the value specified by <code>MaxResults</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pi#ListPerformanceAnalysisReportRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "Recommendations": {
+                    "target": "com.amazonaws.pi#RecommendationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of recommendations for the analysis report.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pi#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. \n            If this parameter is specified, the response includes only records beyond the token, \n            up to the value specified by <code>MaxResults</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pi#ListPerformanceAnalysisReports": {
             "type": "operation",
             "input": {
@@ -1929,6 +2024,9 @@
                     "target": "com.amazonaws.pi#ListAvailableResourceMetrics"
                 },
                 {
+                    "target": "com.amazonaws.pi#ListPerformanceAnalysisReportRecommendations"
+                },
+                {
                     "target": "com.amazonaws.pi#ListPerformanceAnalysisReports"
                 },
                 {
@@ -1957,6 +2055,194 @@
                 "smithy.api#title": "AWS Performance Insights",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://pi.amazonaws.com/doc/2018-02-27/"
+                },
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://pi-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://pi-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://pi.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://pi.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
                 },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2848,10 +3134,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The recommendation details to help resolve the performance issue. For example, \n            <code>Investigate the following SQLs that contributed to 100% of the total DBLoad during that time period: sql-id</code>\n         </p>"
                     }
+                },
+                "RecommendationDetails": {
+                    "target": "com.amazonaws.pi#MarkdownString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed information about the recommendation, including steps to resolve the performance issue.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The list of recommendations for the insight.</p>"
+            }
+        },
+        "com.amazonaws.pi#RecommendationIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pi#String"
             }
         },
         "com.amazonaws.pi#RecommendationList": {

@@ -4,10 +4,9 @@ package chime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Uses the join token and call metadata in a meeting request (From number, To
@@ -63,6 +62,27 @@ type CreateMeetingDialOutInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMeetingDialOutInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMeetingDialOutRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMeetingDialOutInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FromPhoneNumber != nil {
+		s.WriteString(schemas.CreateMeetingDialOutRequest_FromPhoneNumber, *v.FromPhoneNumber)
+	}
+	if v.JoinToken != nil {
+		s.WriteString(schemas.CreateMeetingDialOutRequest_JoinToken, *v.JoinToken)
+	}
+	if v.MeetingId != nil {
+		s.WriteString(schemas.CreateMeetingDialOutRequest_MeetingId, *v.MeetingId)
+	}
+	if v.ToPhoneNumber != nil {
+		s.WriteString(schemas.CreateMeetingDialOutRequest_ToPhoneNumber, *v.ToPhoneNumber)
+	}
+}
+
 type CreateMeetingDialOutOutput struct {
 
 	// Unique ID that tracks API calls.
@@ -74,77 +94,48 @@ type CreateMeetingDialOutOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMeetingDialOutOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMeetingDialOutResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMeetingDialOutOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransactionId != nil {
+		s.WriteString(schemas.CreateMeetingDialOutResponse_TransactionId, *v.TransactionId)
+	}
+}
+func (v *CreateMeetingDialOutOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMeetingDialOutResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMeetingDialOutResponse_TransactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.CreateMeetingDialOutResponse_TransactionId, v.TransactionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMeetingDialOutMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMeetingDialOut, schemas.CreateMeetingDialOutRequest, schemas.CreateMeetingDialOutResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMeetingDialOut{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMeetingDialOut, schemas.CreateMeetingDialOutRequest, schemas.CreateMeetingDialOutResponse), output: &CreateMeetingDialOutOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMeetingDialOut{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMeetingDialOut"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateMeetingDialOutValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMeetingDialOut(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +150,8 @@ func (c *Client) addOperationCreateMeetingDialOutMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateMeetingDialOut(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMeetingDialOut",
-	}
 }

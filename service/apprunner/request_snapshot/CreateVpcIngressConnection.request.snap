@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AppRunner.CreateVpcIngressConnection
+
+{"IngressVpcConfiguration":{"VpcEndpointId":"__VpcEndpointId__","VpcId":"__VpcId__"},"ServiceArn":"__ServiceArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"VpcIngressConnectionName":"__VpcIngressConnectionName__"}

@@ -1,0 +1,5 @@
+POST /metrics/contact
+
+Content-Type: application/json
+
+{"ContactId":"__ContactId__","InstanceId":"__InstanceId__","Metrics":[{"Name":"ESTIMATED_WAIT_TIME"},{"Name":"ESTIMATED_WAIT_TIME"}]}

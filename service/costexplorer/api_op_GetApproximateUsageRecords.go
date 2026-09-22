@@ -4,11 +4,10 @@ package costexplorer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costexplorer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves estimated usage records for hourly granularity or resource-level data
@@ -50,6 +49,22 @@ type GetApproximateUsageRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApproximateUsageRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApproximateUsageRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApproximateUsageRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproximationDimension != "" {
+		s.WriteString(schemas.GetApproximateUsageRecordsRequest_ApproximationDimension, string(v.ApproximationDimension))
+	}
+	if v.Granularity != "" {
+		s.WriteString(schemas.GetApproximateUsageRecordsRequest_Granularity, string(v.Granularity))
+	}
+	serializeUsageServices(s, schemas.GetApproximateUsageRecordsRequest_Services, v.Services)
+}
+
 type GetApproximateUsageRecordsOutput struct {
 
 	// The lookback period that's used for the estimation.
@@ -67,77 +82,58 @@ type GetApproximateUsageRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApproximateUsageRecordsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApproximateUsageRecordsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApproximateUsageRecordsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LookbackPeriod != nil {
+		s.WriteStruct(schemas.GetApproximateUsageRecordsResponse_LookbackPeriod)
+		v.LookbackPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeApproximateUsageRecordsPerService(s, schemas.GetApproximateUsageRecordsResponse_Services, v.Services)
+	if v.TotalRecords != 0 {
+		s.WriteInt64(schemas.GetApproximateUsageRecordsResponse_TotalRecords, v.TotalRecords)
+	}
+}
+func (v *GetApproximateUsageRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApproximateUsageRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApproximateUsageRecordsResponse_LookbackPeriod:
+			v.LookbackPeriod = &types.DateInterval{}
+			return v.LookbackPeriod.Deserialize(d)
+		case schemas.GetApproximateUsageRecordsResponse_Services:
+			return deserializeApproximateUsageRecordsPerService(d, schemas.GetApproximateUsageRecordsResponse_Services, &v.Services)
+		case schemas.GetApproximateUsageRecordsResponse_TotalRecords:
+			return d.ReadInt64(schemas.GetApproximateUsageRecordsResponse_TotalRecords, &v.TotalRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApproximateUsageRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApproximateUsageRecords, schemas.GetApproximateUsageRecordsRequest, schemas.GetApproximateUsageRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetApproximateUsageRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApproximateUsageRecords, schemas.GetApproximateUsageRecordsRequest, schemas.GetApproximateUsageRecordsResponse), output: &GetApproximateUsageRecordsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetApproximateUsageRecords{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApproximateUsageRecords"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetApproximateUsageRecordsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetApproximateUsageRecords(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,22 +148,8 @@ func (c *Client) addOperationGetApproximateUsageRecordsMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetApproximateUsageRecords(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetApproximateUsageRecords",
-	}
 }

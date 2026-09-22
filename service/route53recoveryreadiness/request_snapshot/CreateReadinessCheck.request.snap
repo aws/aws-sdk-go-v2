@@ -1,0 +1,5 @@
+POST /readinesschecks
+
+Content-Type: application/json
+
+{"readinessCheckName":"__ReadinessCheckName__","resourceSetName":"__ResourceSetName__","tags":{"key0":"__Value__"}}

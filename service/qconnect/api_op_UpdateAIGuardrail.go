@@ -5,10 +5,10 @@ package qconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an AI Guardrail.
@@ -83,6 +83,61 @@ type UpdateAIGuardrailInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAIGuardrailInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAIGuardrailRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAIGuardrailInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiGuardrailId != nil {
+		s.WriteString(schemas.UpdateAIGuardrailRequest_aiGuardrailId, *v.AiGuardrailId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.UpdateAIGuardrailRequest_assistantId, *v.AssistantId)
+	}
+	if v.BlockedInputMessaging != nil {
+		s.WriteString(schemas.UpdateAIGuardrailRequest_blockedInputMessaging, *v.BlockedInputMessaging)
+	}
+	if v.BlockedOutputsMessaging != nil {
+		s.WriteString(schemas.UpdateAIGuardrailRequest_blockedOutputsMessaging, *v.BlockedOutputsMessaging)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAIGuardrailRequest_clientToken, *v.ClientToken)
+	}
+	if v.ContentPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateAIGuardrailRequest_contentPolicyConfig)
+		v.ContentPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContextualGroundingPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateAIGuardrailRequest_contextualGroundingPolicyConfig)
+		v.ContextualGroundingPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAIGuardrailRequest_description, *v.Description)
+	}
+	if v.SensitiveInformationPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateAIGuardrailRequest_sensitiveInformationPolicyConfig)
+		v.SensitiveInformationPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TopicPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateAIGuardrailRequest_topicPolicyConfig)
+		v.TopicPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VisibilityStatus != "" {
+		s.WriteString(schemas.UpdateAIGuardrailRequest_visibilityStatus, string(v.VisibilityStatus))
+	}
+	if v.WordPolicyConfig != nil {
+		s.WriteStruct(schemas.UpdateAIGuardrailRequest_wordPolicyConfig)
+		v.WordPolicyConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateAIGuardrailOutput struct {
 
 	// The data of the updated Amazon Q in Connect AI Guardrail.
@@ -94,65 +149,44 @@ type UpdateAIGuardrailOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAIGuardrailOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAIGuardrailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAIGuardrailOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiGuardrail != nil {
+		s.WriteStruct(schemas.UpdateAIGuardrailResponse_aiGuardrail)
+		v.AiGuardrail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAIGuardrailOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAIGuardrailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAIGuardrailResponse_aiGuardrail:
+			v.AiGuardrail = &types.AIGuardrailData{}
+			return v.AiGuardrail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAIGuardrailMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAIGuardrail, schemas.UpdateAIGuardrailRequest, schemas.UpdateAIGuardrailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAIGuardrail{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAIGuardrail, schemas.UpdateAIGuardrailRequest, schemas.UpdateAIGuardrailResponse), output: &UpdateAIGuardrailOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAIGuardrail{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAIGuardrail"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -162,12 +196,6 @@ func (c *Client) addOperationUpdateAIGuardrailMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpUpdateAIGuardrailValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAIGuardrail(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,12 +208,6 @@ func (c *Client) addOperationUpdateAIGuardrailMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -225,12 +247,4 @@ func (m *idempotencyToken_initializeOpUpdateAIGuardrail) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opUpdateAIGuardrailMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateAIGuardrail{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateAIGuardrail(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAIGuardrail",
-	}
 }

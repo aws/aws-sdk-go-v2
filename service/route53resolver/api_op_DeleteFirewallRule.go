@@ -4,14 +4,19 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified firewall rule.
+// Deletes the specified firewall rule. Identify the rule using either
+// FirewallDomainListId (for domain-list and DNS Firewall Advanced rules) or
+// FirewallThreatProtectionId (for partner-managed and DNS Firewall Advanced rules)
+// — together with FirewallRuleGroupId .
+//
+// DeleteFirewallRule is the only operation that succeeds against a rule whose
+// Status is CREATION_FAILED .
 func (c *Client) DeleteFirewallRule(ctx context.Context, params *DeleteFirewallRuleInput, optFns ...func(*Options)) (*DeleteFirewallRuleOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallRuleInput{}
@@ -71,13 +76,34 @@ type DeleteFirewallRuleInput struct {
 	//   - TXT: Verifies email senders and application-specific values.
 	//
 	//   - A query type you define by using the DNS type ID, for example 28 for AAAA.
-	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for
+	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65534, for
 	//   example, TYPE28. For more information, see [List of DNS record types].
 	//
 	// [List of DNS record types]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
 	Qtype *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteFirewallRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleRequest_FirewallDomainListId, *v.FirewallDomainListId)
+	}
+	if v.FirewallRuleGroupId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleRequest_FirewallRuleGroupId, *v.FirewallRuleGroupId)
+	}
+	if v.FirewallThreatProtectionId != nil {
+		s.WriteString(schemas.DeleteFirewallRuleRequest_FirewallThreatProtectionId, *v.FirewallThreatProtectionId)
+	}
+	if v.Qtype != nil {
+		s.WriteString(schemas.DeleteFirewallRuleRequest_Qtype, *v.Qtype)
+	}
 }
 
 type DeleteFirewallRuleOutput struct {
@@ -91,77 +117,50 @@ type DeleteFirewallRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteFirewallRuleOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteFirewallRuleResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteFirewallRuleOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallRule != nil {
+		s.WriteStruct(schemas.DeleteFirewallRuleResponse_FirewallRule)
+		v.FirewallRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteFirewallRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteFirewallRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteFirewallRuleResponse_FirewallRule:
+			v.FirewallRule = &types.FirewallRule{}
+			return v.FirewallRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallRule, schemas.DeleteFirewallRuleRequest, schemas.DeleteFirewallRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteFirewallRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteFirewallRule, schemas.DeleteFirewallRuleRequest, schemas.DeleteFirewallRuleResponse), output: &DeleteFirewallRuleOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteFirewallRule{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteFirewallRule"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteFirewallRuleValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFirewallRule(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -176,22 +175,8 @@ func (c *Client) addOperationDeleteFirewallRuleMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteFirewallRule(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteFirewallRule",
-	}
 }

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.CreateMobileDeviceAccessRule
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","DeviceModels":["__Member__","__Member__"],"DeviceOperatingSystems":["__Member__","__Member__"],"DeviceTypes":["__Member__","__Member__"],"DeviceUserAgents":["__Member__","__Member__"],"Effect":"ALLOW","Name":"__Name__","NotDeviceModels":["__Member__","__Member__"],"NotDeviceOperatingSystems":["__Member__","__Member__"],"NotDeviceTypes":["__Member__","__Member__"],"NotDeviceUserAgents":["__Member__","__Member__"],"OrganizationId":"__OrganizationId__"}

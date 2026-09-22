@@ -1,0 +1,3 @@
+GET /accounts?max-results=1&name=__Name__&next-token=__NextToken__&user-email=__UserEmail__
+
+

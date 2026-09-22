@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=BatchStopUpdateAction&CacheClusterIds.member.1=__Member__&CacheClusterIds.member.2=__Member__&ReplicationGroupIds.member.1=__Member__&ReplicationGroupIds.member.2=__Member__&ServiceUpdateName=__ServiceUpdateName__&Version=2015-02-02

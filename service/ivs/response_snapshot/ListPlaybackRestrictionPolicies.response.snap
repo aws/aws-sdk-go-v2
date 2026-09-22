@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","playbackRestrictionPolicies":[{"allowedCountries":["__Member__","__Member__"],"allowedOrigins":["__Member__","__Member__"],"arn":"__Arn__","enableStrictOriginEnforcement":true,"name":"__Name__","tags":{"key0":"__Value__"}},{"allowedCountries":["__Member__","__Member__"],"allowedOrigins":["__Member__","__Member__"],"arn":"__Arn__","enableStrictOriginEnforcement":true,"name":"__Name__","tags":{"key0":"__Value__"}}]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: PerformanceInsightsv20180227.ListAvailableResourceDimensions
+
+{"AuthorizedActions":["DescribeDimensionKeys","DescribeDimensionKeys"],"Identifier":"__Identifier__","MaxResults":1,"Metrics":["__Member__","__Member__"],"NextToken":"__NextToken__","ServiceType":"RDS"}

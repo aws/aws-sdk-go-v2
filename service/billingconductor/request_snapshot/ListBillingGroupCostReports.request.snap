@@ -1,0 +1,5 @@
+POST /list-billing-group-cost-reports
+
+Content-Type: application/json
+
+{"BillingPeriod":"__BillingPeriod__","Filters":{"BillingGroupArns":["__Member__","__Member__"]},"MaxResults":1,"NextToken":"__NextToken__"}

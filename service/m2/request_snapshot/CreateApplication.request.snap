@@ -1,0 +1,5 @@
+POST /applications
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","definition":{"s3Location":"__DefinitionMemberS3Location__"},"description":"__Description__","engineType":"microfocus","kmsKeyId":"__KmsKeyId__","name":"__Name__","roleArn":"__RoleArn__","tags":{"key0":"__Value__"}}

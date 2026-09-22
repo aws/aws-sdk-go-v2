@@ -23,6 +23,25 @@ func (ControlBehavior) Values() []ControlBehavior {
 	}
 }
 
+type ControlParameterRequirement string
+
+// Enum values for ControlParameterRequirement
+const (
+	ControlParameterRequirementRequired ControlParameterRequirement = "REQUIRED"
+	ControlParameterRequirementOptional ControlParameterRequirement = "OPTIONAL"
+)
+
+// Values returns all known values for ControlParameterRequirement. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ControlParameterRequirement) Values() []ControlParameterRequirement {
+	return []ControlParameterRequirement{
+		"REQUIRED",
+		"OPTIONAL",
+	}
+}
+
 type ControlRelationType string
 
 // Enum values for ControlRelationType
@@ -104,5 +123,26 @@ func (MappingType) Values() []MappingType {
 		"FRAMEWORK",
 		"COMMON_CONTROL",
 		"RELATED_CONTROL",
+	}
+}
+
+type ParameterRequirementSummary string
+
+// Enum values for ParameterRequirementSummary
+const (
+	ParameterRequirementSummaryRequired ParameterRequirementSummary = "REQUIRED"
+	ParameterRequirementSummaryOptional ParameterRequirementSummary = "OPTIONAL"
+	ParameterRequirementSummaryNone     ParameterRequirementSummary = "NONE"
+)
+
+// Values returns all known values for ParameterRequirementSummary. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterRequirementSummary) Values() []ParameterRequirementSummary {
+	return []ParameterRequirementSummary{
+		"REQUIRED",
+		"OPTIONAL",
+		"NONE",
 	}
 }

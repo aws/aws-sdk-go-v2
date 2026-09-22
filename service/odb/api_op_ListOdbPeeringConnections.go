@@ -5,10 +5,10 @@ package odb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all ODB peering connections or those associated with a specific ODB
@@ -50,6 +50,24 @@ type ListOdbPeeringConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOdbPeeringConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOdbPeeringConnectionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOdbPeeringConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOdbPeeringConnectionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOdbPeeringConnectionsInput_nextToken, *v.NextToken)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.ListOdbPeeringConnectionsInput_odbNetworkId, *v.OdbNetworkId)
+	}
+}
+
 type ListOdbPeeringConnectionsOutput struct {
 
 	// The list of ODB peering connections.
@@ -66,74 +84,48 @@ type ListOdbPeeringConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOdbPeeringConnectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOdbPeeringConnectionsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOdbPeeringConnectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOdbPeeringConnectionsOutput_nextToken, *v.NextToken)
+	}
+	serializeOdbPeeringConnectionList(s, schemas.ListOdbPeeringConnectionsOutput_odbPeeringConnections, v.OdbPeeringConnections)
+}
+func (v *ListOdbPeeringConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOdbPeeringConnectionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOdbPeeringConnectionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOdbPeeringConnectionsOutput_nextToken, v.NextToken)
+		case schemas.ListOdbPeeringConnectionsOutput_odbPeeringConnections:
+			return deserializeOdbPeeringConnectionList(d, schemas.ListOdbPeeringConnectionsOutput_odbPeeringConnections, &v.OdbPeeringConnections)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOdbPeeringConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOdbPeeringConnections, schemas.ListOdbPeeringConnectionsInput, schemas.ListOdbPeeringConnectionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListOdbPeeringConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOdbPeeringConnections, schemas.ListOdbPeeringConnectionsInput, schemas.ListOdbPeeringConnectionsOutput), output: &ListOdbPeeringConnectionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListOdbPeeringConnections{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOdbPeeringConnections"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOdbPeeringConnections(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,12 +138,6 @@ func (c *Client) addOperationListOdbPeeringConnectionsMiddlewares(stack *middlew
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +246,3 @@ type ListOdbPeeringConnectionsAPIClient interface {
 }
 
 var _ ListOdbPeeringConnectionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListOdbPeeringConnections(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListOdbPeeringConnections",
-	}
-}

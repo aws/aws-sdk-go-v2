@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/settings
+
+Content-Type: application/json
+
+{"DefaultNamespace":"__DefaultNamespace__","NotificationEmail":"__NotificationEmail__","TerminationProtectionEnabled":true}

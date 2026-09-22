@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonSSM.ListOpsItemRelatedItems
+
+{"Filters":[{"Key":"ResourceType","Operator":"Equal","Values":["__Member__","__Member__"]},{"Key":"ResourceType","Operator":"Equal","Values":["__Member__","__Member__"]}],"MaxResults":1,"NextToken":"__NextToken__","OpsItemId":"__OpsItemId__"}

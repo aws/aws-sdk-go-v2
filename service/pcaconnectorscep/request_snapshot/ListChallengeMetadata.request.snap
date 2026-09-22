@@ -1,0 +1,3 @@
+GET /challengeMetadata?ConnectorArn=__ConnectorArn__&MaxResults=1&NextToken=__NextToken__
+
+

@@ -5,26 +5,24 @@ package bedrockagentcorecontrol
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Initiates the AI-powered generation of Cedar policies from natural language
+// Initiates the AI-powered generation of Dogwood policies from natural language
 // descriptions within the AgentCore Policy system. This feature enables both
 // technical and non-technical users to create policies by describing their
 // authorization requirements in plain English, which is then automatically
-// translated into formal Cedar policy statements. The generation process analyzes
-// the natural language input along with the Gateway's tool context to produce
-// validated policy options. Generated policy assets are automatically deleted
-// after 7 days, so you should review and create policies from the generated assets
-// within this timeframe. Once created, policies are permanent and not subject to
-// this expiration. Generated policies should be reviewed and tested in log-only
-// mode before deploying to production. Use this when you want to describe policy
-// intent naturally rather than learning Cedar syntax, though generated policies
-// may require refinement for complex scenarios.
+// translated into formal Dogwood policy statements. The generation process
+// analyzes the natural language input along with the Gateway's tool context to
+// produce validated policy options. Generated policy assets are automatically
+// deleted after 7 days, so you should review and create policies from the
+// generated assets within this timeframe. Once created, policies are permanent and
+// not subject to this expiration. Generated policies should be reviewed and tested
+// in log-only mode before deploying to production. Use this when you want to
+// describe policy intent naturally rather than learning Dogwood syntax, though
+// generated policies may require refinement for complex scenarios.
 func (c *Client) StartPolicyGeneration(ctx context.Context, params *StartPolicyGenerationInput, optFns ...func(*Options)) (*StartPolicyGenerationOutput, error) {
 	if params == nil {
 		params = &StartPolicyGenerationInput{}
@@ -43,8 +41,8 @@ func (c *Client) StartPolicyGeneration(ctx context.Context, params *StartPolicyG
 type StartPolicyGenerationInput struct {
 
 	// The natural language description of the desired policy behavior. This content
-	// is processed by AI to generate corresponding Cedar policy statements that match
-	// the described intent.
+	// is processed by AI to generate corresponding Dogwood policy statements that
+	// match the described intent.
 	//
 	// This member is required.
 	Content types.Content
@@ -138,9 +136,6 @@ type StartPolicyGenerationOutput struct {
 }
 
 func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPolicyGeneration{}, middleware.After)
 	if err != nil {
 		return err
@@ -149,53 +144,14 @@ func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartPolicyGeneration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -205,12 +161,6 @@ func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpStartPolicyGenerationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartPolicyGeneration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -223,12 +173,6 @@ func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,12 +212,4 @@ func (m *idempotencyToken_initializeOpStartPolicyGeneration) HandleInitialize(ct
 }
 func addIdempotencyToken_opStartPolicyGenerationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartPolicyGeneration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartPolicyGeneration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartPolicyGeneration",
-	}
 }

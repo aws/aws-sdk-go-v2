@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the published version of the brand.
@@ -42,6 +41,21 @@ type DescribeBrandPublishedVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBrandPublishedVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBrandPublishedVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBrandPublishedVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeBrandPublishedVersionRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.BrandId != nil {
+		s.WriteString(schemas.DescribeBrandPublishedVersionRequest_BrandId, *v.BrandId)
+	}
+}
+
 type DescribeBrandPublishedVersionOutput struct {
 
 	// The definition of the brand.
@@ -59,77 +73,64 @@ type DescribeBrandPublishedVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBrandPublishedVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBrandPublishedVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBrandPublishedVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrandDefinition != nil {
+		s.WriteStruct(schemas.DescribeBrandPublishedVersionResponse_BrandDefinition)
+		v.BrandDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.BrandDetail != nil {
+		s.WriteStruct(schemas.DescribeBrandPublishedVersionResponse_BrandDetail)
+		v.BrandDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeBrandPublishedVersionResponse_RequestId, *v.RequestId)
+	}
+}
+func (v *DescribeBrandPublishedVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBrandPublishedVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBrandPublishedVersionResponse_BrandDefinition:
+			v.BrandDefinition = &types.BrandDefinition{}
+			return v.BrandDefinition.Deserialize(d)
+		case schemas.DescribeBrandPublishedVersionResponse_BrandDetail:
+			v.BrandDetail = &types.BrandDetail{}
+			return v.BrandDetail.Deserialize(d)
+		case schemas.DescribeBrandPublishedVersionResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeBrandPublishedVersionResponse_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBrandPublishedVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBrandPublishedVersion, schemas.DescribeBrandPublishedVersionRequest, schemas.DescribeBrandPublishedVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeBrandPublishedVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBrandPublishedVersion, schemas.DescribeBrandPublishedVersionRequest, schemas.DescribeBrandPublishedVersionResponse), output: &DescribeBrandPublishedVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeBrandPublishedVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBrandPublishedVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeBrandPublishedVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBrandPublishedVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,22 +145,8 @@ func (c *Client) addOperationDescribeBrandPublishedVersionMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeBrandPublishedVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeBrandPublishedVersion",
-	}
 }

@@ -5,10 +5,10 @@ package cleanrooms
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists information about requested configured audience model associations.
@@ -46,6 +46,24 @@ type ListConfiguredAudienceModelAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredAudienceModelAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredAudienceModelAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredAudienceModelAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfiguredAudienceModelAssociationsInput_maxResults, *v.MaxResults)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.ListConfiguredAudienceModelAssociationsInput_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredAudienceModelAssociationsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListConfiguredAudienceModelAssociationsOutput struct {
 
 	// Summaries of the configured audience model associations that you requested.
@@ -62,77 +80,51 @@ type ListConfiguredAudienceModelAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfiguredAudienceModelAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfiguredAudienceModelAssociationsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfiguredAudienceModelAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConfiguredAudienceModelAssociationSummaryList(s, schemas.ListConfiguredAudienceModelAssociationsOutput_configuredAudienceModelAssociationSummaries, v.ConfiguredAudienceModelAssociationSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfiguredAudienceModelAssociationsOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListConfiguredAudienceModelAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfiguredAudienceModelAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfiguredAudienceModelAssociationsOutput_configuredAudienceModelAssociationSummaries:
+			return deserializeConfiguredAudienceModelAssociationSummaryList(d, schemas.ListConfiguredAudienceModelAssociationsOutput_configuredAudienceModelAssociationSummaries, &v.ConfiguredAudienceModelAssociationSummaries)
+		case schemas.ListConfiguredAudienceModelAssociationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfiguredAudienceModelAssociationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfiguredAudienceModelAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredAudienceModelAssociations, schemas.ListConfiguredAudienceModelAssociationsInput, schemas.ListConfiguredAudienceModelAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfiguredAudienceModelAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfiguredAudienceModelAssociations, schemas.ListConfiguredAudienceModelAssociationsInput, schemas.ListConfiguredAudienceModelAssociationsOutput), output: &ListConfiguredAudienceModelAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfiguredAudienceModelAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConfiguredAudienceModelAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListConfiguredAudienceModelAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfiguredAudienceModelAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +137,6 @@ func (c *Client) addOperationListConfiguredAudienceModelAssociationsMiddlewares(
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +242,3 @@ type ListConfiguredAudienceModelAssociationsAPIClient interface {
 }
 
 var _ ListConfiguredAudienceModelAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListConfiguredAudienceModelAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListConfiguredAudienceModelAssociations",
-	}
-}

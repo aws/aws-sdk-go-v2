@@ -4,11 +4,10 @@ package translate
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops an asynchronous batch translation job that is in progress.
@@ -45,6 +44,18 @@ type StopTextTranslationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTextTranslationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTextTranslationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTextTranslationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopTextTranslationJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopTextTranslationJobOutput struct {
 
 	// The job ID of the stopped batch translation job.
@@ -60,77 +71,58 @@ type StopTextTranslationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopTextTranslationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopTextTranslationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopTextTranslationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopTextTranslationJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StopTextTranslationJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StopTextTranslationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopTextTranslationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopTextTranslationJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopTextTranslationJobResponse_JobId, v.JobId)
+		case schemas.StopTextTranslationJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopTextTranslationJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTextTranslationJob, schemas.StopTextTranslationJobRequest, schemas.StopTextTranslationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopTextTranslationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopTextTranslationJob, schemas.StopTextTranslationJobRequest, schemas.StopTextTranslationJobResponse), output: &StopTextTranslationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopTextTranslationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopTextTranslationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopTextTranslationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopTextTranslationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,22 +137,8 @@ func (c *Client) addOperationStopTextTranslationJobMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopTextTranslationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopTextTranslationJob",
-	}
 }

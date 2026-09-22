@@ -1,0 +1,3 @@
+GET /2013-04-01/geolocation?continentcode=__ContinentCode__&countrycode=__CountryCode__&subdivisioncode=__SubdivisionCode__
+
+

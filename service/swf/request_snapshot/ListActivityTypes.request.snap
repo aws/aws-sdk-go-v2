@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: SimpleWorkflowService.ListActivityTypes
+
+{"domain":"__Domain__","maximumPageSize":1,"name":"__Name__","nextPageToken":"__NextPageToken__","registrationStatus":"REGISTERED","reverseOrder":true}

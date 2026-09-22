@@ -1,0 +1,5 @@
+POST /BatchExecute
+
+Content-Type: application/json
+
+{"database":"__Database__","parameterSets":[[{"name":"__Name__","typeHint":"JSON","value":{"isNull":true}},{"name":"__Name__","typeHint":"JSON","value":{"isNull":true}}],[{"name":"__Name__","typeHint":"JSON","value":{"isNull":true}},{"name":"__Name__","typeHint":"JSON","value":{"isNull":true}}]],"resourceArn":"__ResourceArn__","schema":"__Schema__","secretArn":"__SecretArn__","sql":"__Sql__","transactionId":"__TransactionId__"}

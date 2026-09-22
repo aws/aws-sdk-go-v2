@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API is used to provide optional override properties for the the tables
@@ -59,6 +58,31 @@ type CreateIntegrationTablePropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationTablePropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationTablePropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationTablePropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.CreateIntegrationTablePropertiesRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.SourceTableConfig != nil {
+		s.WriteStruct(schemas.CreateIntegrationTablePropertiesRequest_SourceTableConfig)
+		v.SourceTableConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.CreateIntegrationTablePropertiesRequest_TableName, *v.TableName)
+	}
+	if v.TargetTableConfig != nil {
+		s.WriteStruct(schemas.CreateIntegrationTablePropertiesRequest_TargetTableConfig)
+		v.TargetTableConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateIntegrationTablePropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -66,77 +90,42 @@ type CreateIntegrationTablePropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIntegrationTablePropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIntegrationTablePropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIntegrationTablePropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateIntegrationTablePropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIntegrationTablePropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIntegrationTablePropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegrationTableProperties, schemas.CreateIntegrationTablePropertiesRequest, schemas.CreateIntegrationTablePropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateIntegrationTableProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIntegrationTableProperties, schemas.CreateIntegrationTablePropertiesRequest, schemas.CreateIntegrationTablePropertiesResponse), output: &CreateIntegrationTablePropertiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateIntegrationTableProperties{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIntegrationTableProperties"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateIntegrationTablePropertiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIntegrationTableProperties(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +140,8 @@ func (c *Client) addOperationCreateIntegrationTablePropertiesMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateIntegrationTableProperties(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateIntegrationTableProperties",
-	}
 }

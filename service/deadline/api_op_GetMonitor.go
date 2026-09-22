@@ -5,7 +5,8 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +37,18 @@ type GetMonitorInput struct {
 	MonitorId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMonitorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MonitorId != nil {
+		s.WriteString(schemas.GetMonitorRequest_monitorId, *v.MonitorId)
+	}
 }
 
 // Mixin that adds an optional ARN field to response structures. Apply to
@@ -96,7 +109,7 @@ type GetMonitorOutput struct {
 	// This member is required.
 	Url *string
 
-	// The AWS Region where IAM Identity Center is enabled.
+	// The Region where IAM Identity Center is enabled.
 	IdentityCenterRegion *string
 
 	// The UNIX timestamp of the last date and time that the monitor was updated.
@@ -111,65 +124,108 @@ type GetMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMonitorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetMonitorResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.GetMonitorResponse_createdBy, *v.CreatedBy)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GetMonitorResponse_displayName, *v.DisplayName)
+	}
+	if v.IdentityCenterApplicationArn != nil {
+		s.WriteString(schemas.GetMonitorResponse_identityCenterApplicationArn, *v.IdentityCenterApplicationArn)
+	}
+	if v.IdentityCenterInstanceArn != nil {
+		s.WriteString(schemas.GetMonitorResponse_identityCenterInstanceArn, *v.IdentityCenterInstanceArn)
+	}
+	if v.IdentityCenterRegion != nil {
+		s.WriteString(schemas.GetMonitorResponse_identityCenterRegion, *v.IdentityCenterRegion)
+	}
+	if v.MonitorId != nil {
+		s.WriteString(schemas.GetMonitorResponse_monitorId, *v.MonitorId)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.GetMonitorResponse_roleArn, *v.RoleArn)
+	}
+	if v.Subdomain != nil {
+		s.WriteString(schemas.GetMonitorResponse_subdomain, *v.Subdomain)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GetMonitorResponse_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.GetMonitorResponse_updatedBy, *v.UpdatedBy)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.GetMonitorResponse_url, *v.Url)
+	}
+}
+func (v *GetMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMonitorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMonitorResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMonitorResponse_createdAt, v.CreatedAt)
+		case schemas.GetMonitorResponse_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_createdBy, v.CreatedBy)
+		case schemas.GetMonitorResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_displayName, v.DisplayName)
+		case schemas.GetMonitorResponse_identityCenterApplicationArn:
+			v.IdentityCenterApplicationArn = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_identityCenterApplicationArn, v.IdentityCenterApplicationArn)
+		case schemas.GetMonitorResponse_identityCenterInstanceArn:
+			v.IdentityCenterInstanceArn = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_identityCenterInstanceArn, v.IdentityCenterInstanceArn)
+		case schemas.GetMonitorResponse_identityCenterRegion:
+			v.IdentityCenterRegion = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_identityCenterRegion, v.IdentityCenterRegion)
+		case schemas.GetMonitorResponse_monitorId:
+			v.MonitorId = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_monitorId, v.MonitorId)
+		case schemas.GetMonitorResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_roleArn, v.RoleArn)
+		case schemas.GetMonitorResponse_subdomain:
+			v.Subdomain = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_subdomain, v.Subdomain)
+		case schemas.GetMonitorResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMonitorResponse_updatedAt, v.UpdatedAt)
+		case schemas.GetMonitorResponse_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_updatedBy, v.UpdatedBy)
+		case schemas.GetMonitorResponse_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.GetMonitorResponse_url, v.Url)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMonitor, schemas.GetMonitorRequest, schemas.GetMonitorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMonitor, schemas.GetMonitorRequest, schemas.GetMonitorResponse), output: &GetMonitorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMonitor{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMonitor"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -179,12 +235,6 @@ func (c *Client) addOperationGetMonitorMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addOpGetMonitorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMonitor(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -197,12 +247,6 @@ func (c *Client) addOperationGetMonitorMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -236,12 +280,4 @@ func (m *endpointPrefix_opGetMonitorMiddleware) HandleFinalize(ctx context.Conte
 }
 func addEndpointPrefix_opGetMonitorMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opGetMonitorMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opGetMonitor(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetMonitor",
-	}
 }

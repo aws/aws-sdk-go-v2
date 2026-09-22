@@ -1,0 +1,3 @@
+DELETE /2019-09-25/functions/__FunctionName__/event-invoke-config?Qualifier=__Qualifier__
+
+

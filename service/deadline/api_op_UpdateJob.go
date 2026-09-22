@@ -5,8 +5,9 @@ package deadline
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/deadline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/deadline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -94,6 +95,51 @@ type UpdateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateJobRequest_description, *v.Description)
+	}
+	if v.FarmId != nil {
+		s.WriteString(schemas.UpdateJobRequest_farmId, *v.FarmId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.UpdateJobRequest_jobId, *v.JobId)
+	}
+	if v.LifecycleStatus != "" {
+		s.WriteString(schemas.UpdateJobRequest_lifecycleStatus, string(v.LifecycleStatus))
+	}
+	if v.MaxFailedTasksCount != nil {
+		s.WriteInt32(schemas.UpdateJobRequest_maxFailedTasksCount, *v.MaxFailedTasksCount)
+	}
+	if v.MaxRetriesPerTask != nil {
+		s.WriteInt32(schemas.UpdateJobRequest_maxRetriesPerTask, *v.MaxRetriesPerTask)
+	}
+	if v.MaxWorkerCount != nil {
+		s.WriteInt32(schemas.UpdateJobRequest_maxWorkerCount, *v.MaxWorkerCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateJobRequest_name, *v.Name)
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.UpdateJobRequest_priority, *v.Priority)
+	}
+	if v.QueueId != nil {
+		s.WriteString(schemas.UpdateJobRequest_queueId, *v.QueueId)
+	}
+	if v.TargetTaskRunStatus != "" {
+		s.WriteString(schemas.UpdateJobRequest_targetTaskRunStatus, string(v.TargetTaskRunStatus))
+	}
+}
+
 type UpdateJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -101,65 +147,36 @@ type UpdateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJob, schemas.UpdateJobRequest, schemas.UpdateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateJob, schemas.UpdateJobRequest, schemas.UpdateJobResponse), output: &UpdateJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -174,12 +191,6 @@ func (c *Client) addOperationUpdateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addOpUpdateJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
-		return err
-	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
 		return err
 	}
@@ -190,12 +201,6 @@ func (c *Client) addOperationUpdateJobMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -262,12 +267,4 @@ func (m *idempotencyToken_initializeOpUpdateJob) HandleInitialize(ctx context.Co
 }
 func addIdempotencyToken_opUpdateJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateJob",
-	}
 }

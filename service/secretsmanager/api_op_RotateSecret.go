@@ -5,10 +5,10 @@ package secretsmanager
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configures and starts the asynchronous process of rotating the secret. For
@@ -150,6 +150,36 @@ type RotateSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.RotateSecretRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	serializeExternalSecretRotationMetadataType(s, schemas.RotateSecretRequest_ExternalSecretRotationMetadata, v.ExternalSecretRotationMetadata)
+	if v.ExternalSecretRotationRoleArn != nil {
+		s.WriteString(schemas.RotateSecretRequest_ExternalSecretRotationRoleArn, *v.ExternalSecretRotationRoleArn)
+	}
+	if v.RotateImmediately != nil {
+		s.WriteBool(schemas.RotateSecretRequest_RotateImmediately, *v.RotateImmediately)
+	}
+	if v.RotationLambdaARN != nil {
+		s.WriteString(schemas.RotateSecretRequest_RotationLambdaARN, *v.RotationLambdaARN)
+	}
+	if v.RotationRules != nil {
+		s.WriteStruct(schemas.RotateSecretRequest_RotationRules)
+		v.RotationRules.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.RotateSecretRequest_SecretId, *v.SecretId)
+	}
+}
+
 type RotateSecretOutput struct {
 
 	// The ARN of the secret.
@@ -167,65 +197,54 @@ type RotateSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RotateSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RotateSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RotateSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.RotateSecretResponse_ARN, *v.ARN)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RotateSecretResponse_Name, *v.Name)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.RotateSecretResponse_VersionId, *v.VersionId)
+	}
+}
+func (v *RotateSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RotateSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RotateSecretResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.RotateSecretResponse_ARN, v.ARN)
+		case schemas.RotateSecretResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RotateSecretResponse_Name, v.Name)
+		case schemas.RotateSecretResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.RotateSecretResponse_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRotateSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateSecret, schemas.RotateSecretRequest, schemas.RotateSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRotateSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RotateSecret, schemas.RotateSecretRequest, schemas.RotateSecretResponse), output: &RotateSecretOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRotateSecret{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RotateSecret"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -235,12 +254,6 @@ func (c *Client) addOperationRotateSecretMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpRotateSecretValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRotateSecret(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -253,12 +266,6 @@ func (c *Client) addOperationRotateSecretMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -298,12 +305,4 @@ func (m *idempotencyToken_initializeOpRotateSecret) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opRotateSecretMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpRotateSecret{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opRotateSecret(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RotateSecret",
-	}
 }

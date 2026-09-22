@@ -4,10 +4,9 @@ package cloudwatchevents
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Tests whether the specified event pattern matches the provided event.
@@ -66,6 +65,21 @@ type TestEventPatternInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestEventPatternInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestEventPatternRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestEventPatternInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != nil {
+		s.WriteString(schemas.TestEventPatternRequest_Event, *v.Event)
+	}
+	if v.EventPattern != nil {
+		s.WriteString(schemas.TestEventPatternRequest_EventPattern, *v.EventPattern)
+	}
+}
+
 type TestEventPatternOutput struct {
 
 	// Indicates whether the event matches the event pattern.
@@ -77,77 +91,47 @@ type TestEventPatternOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestEventPatternOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestEventPatternResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestEventPatternOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Result != false {
+		s.WriteBool(schemas.TestEventPatternResponse_Result, v.Result)
+	}
+}
+func (v *TestEventPatternOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestEventPatternResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestEventPatternResponse_Result:
+			return d.ReadBool(schemas.TestEventPatternResponse_Result, &v.Result)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestEventPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestEventPattern, schemas.TestEventPatternRequest, schemas.TestEventPatternResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestEventPattern{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestEventPattern, schemas.TestEventPatternRequest, schemas.TestEventPatternResponse), output: &TestEventPatternOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTestEventPattern{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestEventPattern"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTestEventPatternValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestEventPattern(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,22 +146,8 @@ func (c *Client) addOperationTestEventPatternMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTestEventPattern(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TestEventPattern",
-	}
 }

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -13,8 +15,46 @@ type ComplexNestedErrorData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ComplexNestedErrorData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComplexNestedErrorData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComplexNestedErrorData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.ComplexNestedErrorData_Foo, *v.Foo)
+	}
+}
+func (v *ComplexNestedErrorData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComplexNestedErrorData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComplexNestedErrorData_Foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.ComplexNestedErrorData_Foo, v.Foo)
+		}
+		return nil
+	})
+}
+
 type EmptyStruct struct {
 	noSmithyDocumentSerde
+}
+
+func (v *EmptyStruct) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EmptyStruct)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EmptyStruct) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EmptyStruct) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EmptyStruct, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type KitchenSink struct {
@@ -74,6 +114,155 @@ type KitchenSink struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KitchenSink) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KitchenSink)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KitchenSink) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Blob != nil {
+		s.WriteBlob(schemas.KitchenSink_Blob, v.Blob)
+	}
+	if v.Boolean != nil {
+		s.WriteBool(schemas.KitchenSink_Boolean, *v.Boolean)
+	}
+	if v.Double != nil {
+		s.WriteFloat64(schemas.KitchenSink_Double, *v.Double)
+	}
+	if v.EmptyStruct != nil {
+		s.WriteStruct(schemas.KitchenSink_EmptyStruct)
+		v.EmptyStruct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Float != nil {
+		s.WriteFloat32(schemas.KitchenSink_Float, *v.Float)
+	}
+	if v.HttpdateTimestamp != nil {
+		s.WriteTime(schemas.KitchenSink_HttpdateTimestamp, *v.HttpdateTimestamp)
+	}
+	if v.Integer != nil {
+		s.WriteInt32(schemas.KitchenSink_Integer, *v.Integer)
+	}
+	if v.Iso8601Timestamp != nil {
+		s.WriteTime(schemas.KitchenSink_Iso8601Timestamp, *v.Iso8601Timestamp)
+	}
+	if v.JsonValue != nil {
+		s.WriteString(schemas.KitchenSink_JsonValue, *v.JsonValue)
+	}
+	serializeListOfListOfStrings(s, schemas.KitchenSink_ListOfLists, v.ListOfLists)
+	serializeListOfMapsOfStrings(s, schemas.KitchenSink_ListOfMapsOfStrings, v.ListOfMapsOfStrings)
+	serializeListOfStrings(s, schemas.KitchenSink_ListOfStrings, v.ListOfStrings)
+	serializeListOfStructs(s, schemas.KitchenSink_ListOfStructs, v.ListOfStructs)
+	if v.Long != nil {
+		s.WriteInt64(schemas.KitchenSink_Long, *v.Long)
+	}
+	serializeMapOfListsOfStrings(s, schemas.KitchenSink_MapOfListsOfStrings, v.MapOfListsOfStrings)
+	serializeMapOfMapOfStrings(s, schemas.KitchenSink_MapOfMaps, v.MapOfMaps)
+	serializeMapOfStrings(s, schemas.KitchenSink_MapOfStrings, v.MapOfStrings)
+	serializeMapOfStructs(s, schemas.KitchenSink_MapOfStructs, v.MapOfStructs)
+	serializeListOfKitchenSinks(s, schemas.KitchenSink_RecursiveList, v.RecursiveList)
+	serializeMapOfKitchenSinks(s, schemas.KitchenSink_RecursiveMap, v.RecursiveMap)
+	if v.RecursiveStruct != nil {
+		s.WriteStruct(schemas.KitchenSink_RecursiveStruct)
+		v.RecursiveStruct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SimpleStruct != nil {
+		s.WriteStruct(schemas.KitchenSink_SimpleStruct)
+		v.SimpleStruct.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.String_ != nil {
+		s.WriteString(schemas.KitchenSink_String, *v.String_)
+	}
+	if v.StructWithJsonName != nil {
+		s.WriteStruct(schemas.KitchenSink_StructWithJsonName)
+		v.StructWithJsonName.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.KitchenSink_Timestamp, *v.Timestamp)
+	}
+	if v.UnixTimestamp != nil {
+		s.WriteTime(schemas.KitchenSink_UnixTimestamp, *v.UnixTimestamp)
+	}
+}
+func (v *KitchenSink) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KitchenSink, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KitchenSink_Blob:
+			return d.ReadBlob(schemas.KitchenSink_Blob, &v.Blob)
+		case schemas.KitchenSink_Boolean:
+			v.Boolean = new(bool)
+			return d.ReadBool(schemas.KitchenSink_Boolean, v.Boolean)
+		case schemas.KitchenSink_Double:
+			v.Double = new(float64)
+			return d.ReadFloat64(schemas.KitchenSink_Double, v.Double)
+		case schemas.KitchenSink_EmptyStruct:
+			v.EmptyStruct = &EmptyStruct{}
+			return v.EmptyStruct.Deserialize(d)
+		case schemas.KitchenSink_Float:
+			v.Float = new(float32)
+			return d.ReadFloat32(schemas.KitchenSink_Float, v.Float)
+		case schemas.KitchenSink_HttpdateTimestamp:
+			v.HttpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_HttpdateTimestamp, v.HttpdateTimestamp)
+		case schemas.KitchenSink_Integer:
+			v.Integer = new(int32)
+			return d.ReadInt32(schemas.KitchenSink_Integer, v.Integer)
+		case schemas.KitchenSink_Iso8601Timestamp:
+			v.Iso8601Timestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_Iso8601Timestamp, v.Iso8601Timestamp)
+		case schemas.KitchenSink_JsonValue:
+			v.JsonValue = new(string)
+			return d.ReadString(schemas.KitchenSink_JsonValue, v.JsonValue)
+		case schemas.KitchenSink_ListOfLists:
+			return deserializeListOfListOfStrings(d, schemas.KitchenSink_ListOfLists, &v.ListOfLists)
+		case schemas.KitchenSink_ListOfMapsOfStrings:
+			return deserializeListOfMapsOfStrings(d, schemas.KitchenSink_ListOfMapsOfStrings, &v.ListOfMapsOfStrings)
+		case schemas.KitchenSink_ListOfStrings:
+			return deserializeListOfStrings(d, schemas.KitchenSink_ListOfStrings, &v.ListOfStrings)
+		case schemas.KitchenSink_ListOfStructs:
+			return deserializeListOfStructs(d, schemas.KitchenSink_ListOfStructs, &v.ListOfStructs)
+		case schemas.KitchenSink_Long:
+			v.Long = new(int64)
+			return d.ReadInt64(schemas.KitchenSink_Long, v.Long)
+		case schemas.KitchenSink_MapOfListsOfStrings:
+			return deserializeMapOfListsOfStrings(d, schemas.KitchenSink_MapOfListsOfStrings, &v.MapOfListsOfStrings)
+		case schemas.KitchenSink_MapOfMaps:
+			return deserializeMapOfMapOfStrings(d, schemas.KitchenSink_MapOfMaps, &v.MapOfMaps)
+		case schemas.KitchenSink_MapOfStrings:
+			return deserializeMapOfStrings(d, schemas.KitchenSink_MapOfStrings, &v.MapOfStrings)
+		case schemas.KitchenSink_MapOfStructs:
+			return deserializeMapOfStructs(d, schemas.KitchenSink_MapOfStructs, &v.MapOfStructs)
+		case schemas.KitchenSink_RecursiveList:
+			return deserializeListOfKitchenSinks(d, schemas.KitchenSink_RecursiveList, &v.RecursiveList)
+		case schemas.KitchenSink_RecursiveMap:
+			return deserializeMapOfKitchenSinks(d, schemas.KitchenSink_RecursiveMap, &v.RecursiveMap)
+		case schemas.KitchenSink_RecursiveStruct:
+			v.RecursiveStruct = &KitchenSink{}
+			return v.RecursiveStruct.Deserialize(d)
+		case schemas.KitchenSink_SimpleStruct:
+			v.SimpleStruct = &SimpleStruct{}
+			return v.SimpleStruct.Deserialize(d)
+		case schemas.KitchenSink_String:
+			v.String_ = new(string)
+			return d.ReadString(schemas.KitchenSink_String, v.String_)
+		case schemas.KitchenSink_StructWithJsonName:
+			v.StructWithJsonName = &StructWithJsonName{}
+			return v.StructWithJsonName.Deserialize(d)
+		case schemas.KitchenSink_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_Timestamp, v.Timestamp)
+		case schemas.KitchenSink_UnixTimestamp:
+			v.UnixTimestamp = new(time.Time)
+			return d.ReadTime(schemas.KitchenSink_UnixTimestamp, v.UnixTimestamp)
+		}
+		return nil
+	})
+}
+
 // A union with a representative set of types for members.
 //
 // The following types satisfy this interface:
@@ -98,6 +287,12 @@ type MyUnionMemberBlobValue struct {
 }
 
 func (*MyUnionMemberBlobValue) isMyUnion() {}
+func (v *MyUnionMemberBlobValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBlob(schemas.MyUnion_blobValue, v.Value)
+}
+func (v *MyUnionMemberBlobValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBlob(schemas.MyUnion_blobValue, &v.Value)
+}
 
 type MyUnionMemberBooleanValue struct {
 	Value bool
@@ -106,6 +301,12 @@ type MyUnionMemberBooleanValue struct {
 }
 
 func (*MyUnionMemberBooleanValue) isMyUnion() {}
+func (v *MyUnionMemberBooleanValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.MyUnion_booleanValue, v.Value)
+}
+func (v *MyUnionMemberBooleanValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.MyUnion_booleanValue, &v.Value)
+}
 
 type MyUnionMemberEnumValue struct {
 	Value FooEnum
@@ -114,6 +315,17 @@ type MyUnionMemberEnumValue struct {
 }
 
 func (*MyUnionMemberEnumValue) isMyUnion() {}
+func (v *MyUnionMemberEnumValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.MyUnion_enumValue, string(v.Value))
+}
+func (v *MyUnionMemberEnumValue) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.MyUnion_enumValue, &s); err != nil {
+		return err
+	}
+	v.Value = FooEnum(s)
+	return nil
+}
 
 type MyUnionMemberListValue struct {
 	Value []string
@@ -122,6 +334,12 @@ type MyUnionMemberListValue struct {
 }
 
 func (*MyUnionMemberListValue) isMyUnion() {}
+func (v *MyUnionMemberListValue) Serialize(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.MyUnion_listValue, v.Value)
+}
+func (v *MyUnionMemberListValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringList(d, schemas.MyUnion_listValue, &v.Value)
+}
 
 type MyUnionMemberMapValue struct {
 	Value map[string]string
@@ -130,6 +348,12 @@ type MyUnionMemberMapValue struct {
 }
 
 func (*MyUnionMemberMapValue) isMyUnion() {}
+func (v *MyUnionMemberMapValue) Serialize(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.MyUnion_mapValue, v.Value)
+}
+func (v *MyUnionMemberMapValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringMap(d, schemas.MyUnion_mapValue, &v.Value)
+}
 
 type MyUnionMemberNumberValue struct {
 	Value int32
@@ -138,6 +362,12 @@ type MyUnionMemberNumberValue struct {
 }
 
 func (*MyUnionMemberNumberValue) isMyUnion() {}
+func (v *MyUnionMemberNumberValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt32(schemas.MyUnion_numberValue, v.Value)
+}
+func (v *MyUnionMemberNumberValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt32(schemas.MyUnion_numberValue, &v.Value)
+}
 
 type MyUnionMemberStringValue struct {
 	Value string
@@ -146,6 +376,12 @@ type MyUnionMemberStringValue struct {
 }
 
 func (*MyUnionMemberStringValue) isMyUnion() {}
+func (v *MyUnionMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.MyUnion_stringValue, v.Value)
+}
+func (v *MyUnionMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.MyUnion_stringValue, &v.Value)
+}
 
 type MyUnionMemberStructureValue struct {
 	Value GreetingStruct
@@ -154,6 +390,14 @@ type MyUnionMemberStructureValue struct {
 }
 
 func (*MyUnionMemberStructureValue) isMyUnion() {}
+func (v *MyUnionMemberStructureValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MyUnion_structureValue)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *MyUnionMemberStructureValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 type MyUnionMemberTimestampValue struct {
 	Value time.Time
@@ -162,11 +406,39 @@ type MyUnionMemberTimestampValue struct {
 }
 
 func (*MyUnionMemberTimestampValue) isMyUnion() {}
+func (v *MyUnionMemberTimestampValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteTime(schemas.MyUnion_timestampValue, v.Value)
+}
+func (v *MyUnionMemberTimestampValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadTime(schemas.MyUnion_timestampValue, &v.Value)
+}
 
 type SimpleStruct struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SimpleStruct) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleStruct)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleStruct) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.SimpleStruct_Value, *v.Value)
+	}
+}
+func (v *SimpleStruct) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleStruct, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleStruct_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.SimpleStruct_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 type StructWithJsonName struct {
@@ -175,10 +447,54 @@ type StructWithJsonName struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StructWithJsonName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StructWithJsonName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StructWithJsonName) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.StructWithJsonName_Value, *v.Value)
+	}
+}
+func (v *StructWithJsonName) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StructWithJsonName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StructWithJsonName_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.StructWithJsonName_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 type GreetingStruct struct {
 	Hi *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GreetingStruct) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GreetingStruct)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GreetingStruct) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hi != nil {
+		s.WriteString(schemas.GreetingStruct_hi, *v.Hi)
+	}
+}
+func (v *GreetingStruct) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GreetingStruct, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GreetingStruct_hi:
+			v.Hi = new(string)
+			return d.ReadString(schemas.GreetingStruct_hi, v.Hi)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

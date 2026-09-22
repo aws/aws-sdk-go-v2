@@ -339,6 +339,13 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoE,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "eu-isoe-west-1",
+			}: endpoints.Endpoint{
+				Deprecated: aws.TrueTernary,
+			},
+		},
 	},
 	{
 		ID: "aws-iso-f",
@@ -360,6 +367,13 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoF,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-isof-south-1",
+			}: endpoints.Endpoint{
+				Deprecated: aws.TrueTernary,
+			},
+		},
 	},
 	{
 		ID: "aws-us-gov",

@@ -4,11 +4,10 @@ package applicationinsights
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the monitoring configuration of the component.
@@ -45,6 +44,24 @@ type DescribeComponentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComponentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComponentConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComponentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeComponentConfigurationRequest_AccountId, *v.AccountId)
+	}
+	if v.ComponentName != nil {
+		s.WriteString(schemas.DescribeComponentConfigurationRequest_ComponentName, *v.ComponentName)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.DescribeComponentConfigurationRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+}
+
 type DescribeComponentConfigurationOutput struct {
 
 	// The configuration settings of the component. The value is the escaped JSON of
@@ -64,77 +81,67 @@ type DescribeComponentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeComponentConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeComponentConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeComponentConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentConfiguration != nil {
+		s.WriteString(schemas.DescribeComponentConfigurationResponse_ComponentConfiguration, *v.ComponentConfiguration)
+	}
+	if v.Monitor != nil {
+		s.WriteBool(schemas.DescribeComponentConfigurationResponse_Monitor, *v.Monitor)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.DescribeComponentConfigurationResponse_Tier, string(v.Tier))
+	}
+}
+func (v *DescribeComponentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeComponentConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeComponentConfigurationResponse_ComponentConfiguration:
+			v.ComponentConfiguration = new(string)
+			return d.ReadString(schemas.DescribeComponentConfigurationResponse_ComponentConfiguration, v.ComponentConfiguration)
+		case schemas.DescribeComponentConfigurationResponse_Monitor:
+			v.Monitor = new(bool)
+			return d.ReadBool(schemas.DescribeComponentConfigurationResponse_Monitor, v.Monitor)
+		case schemas.DescribeComponentConfigurationResponse_Tier:
+			var ev string
+			if err := d.ReadString(schemas.DescribeComponentConfigurationResponse_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = types.Tier(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeComponentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponentConfiguration, schemas.DescribeComponentConfigurationRequest, schemas.DescribeComponentConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeComponentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeComponentConfiguration, schemas.DescribeComponentConfigurationRequest, schemas.DescribeComponentConfigurationResponse), output: &DescribeComponentConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeComponentConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeComponentConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeComponentConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComponentConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +156,8 @@ func (c *Client) addOperationDescribeComponentConfigurationMiddlewares(stack *mi
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeComponentConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeComponentConfiguration",
-	}
 }

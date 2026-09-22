@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: BaldrApiService.DeleteHsm
+
+{"ClusterId":"__ClusterId__","EniId":"__EniId__","EniIp":"__EniIp__","HsmId":"__HsmId__"}

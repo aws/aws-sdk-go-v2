@@ -4,11 +4,10 @@ package gamelift
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gamelift/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	This API works with the following fleet types: EC2
@@ -56,6 +55,18 @@ type RequestUploadCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestUploadCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestUploadCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestUploadCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildId != nil {
+		s.WriteString(schemas.RequestUploadCredentialsInput_BuildId, *v.BuildId)
+	}
+}
+
 type RequestUploadCredentialsOutput struct {
 
 	// Amazon S3 path and key, identifying where the game build files are stored.
@@ -72,65 +83,52 @@ type RequestUploadCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestUploadCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestUploadCredentialsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestUploadCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageLocation != nil {
+		s.WriteStruct(schemas.RequestUploadCredentialsOutput_StorageLocation)
+		v.StorageLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UploadCredentials != nil {
+		s.WriteStruct(schemas.RequestUploadCredentialsOutput_UploadCredentials)
+		v.UploadCredentials.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RequestUploadCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestUploadCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestUploadCredentialsOutput_StorageLocation:
+			v.StorageLocation = &types.S3Location{}
+			return v.StorageLocation.Deserialize(d)
+		case schemas.RequestUploadCredentialsOutput_UploadCredentials:
+			v.UploadCredentials = &types.AwsCredentials{}
+			return v.UploadCredentials.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRequestUploadCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestUploadCredentials, schemas.RequestUploadCredentialsInput, schemas.RequestUploadCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRequestUploadCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RequestUploadCredentials, schemas.RequestUploadCredentialsInput, schemas.RequestUploadCredentialsOutput), output: &RequestUploadCredentialsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRequestUploadCredentials{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RequestUploadCredentials"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -140,12 +138,6 @@ func (c *Client) addOperationRequestUploadCredentialsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addOpRequestUploadCredentialsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRequestUploadCredentials(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +152,8 @@ func (c *Client) addOperationRequestUploadCredentialsMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRequestUploadCredentials(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RequestUploadCredentials",
-	}
 }

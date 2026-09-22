@@ -5,10 +5,10 @@ package transfer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Returns real-time updates and detailed information on the status of each
@@ -61,6 +61,27 @@ type ListFileTransferResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileTransferResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileTransferResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileTransferResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.ListFileTransferResultsRequest_ConnectorId, *v.ConnectorId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFileTransferResultsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFileTransferResultsRequest_NextToken, *v.NextToken)
+	}
+	if v.TransferId != nil {
+		s.WriteString(schemas.ListFileTransferResultsRequest_TransferId, *v.TransferId)
+	}
+}
+
 type ListFileTransferResultsOutput struct {
 
 	// Returns the details for the files transferred in the transfer identified by the
@@ -91,77 +112,51 @@ type ListFileTransferResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFileTransferResultsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFileTransferResultsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFileTransferResultsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorFileTransferResults(s, schemas.ListFileTransferResultsResponse_FileTransferResults, v.FileTransferResults)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFileTransferResultsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListFileTransferResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFileTransferResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFileTransferResultsResponse_FileTransferResults:
+			return deserializeConnectorFileTransferResults(d, schemas.ListFileTransferResultsResponse_FileTransferResults, &v.FileTransferResults)
+		case schemas.ListFileTransferResultsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFileTransferResultsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFileTransferResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileTransferResults, schemas.ListFileTransferResultsRequest, schemas.ListFileTransferResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListFileTransferResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFileTransferResults, schemas.ListFileTransferResultsRequest, schemas.ListFileTransferResultsResponse), output: &ListFileTransferResultsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListFileTransferResults{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFileTransferResults"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListFileTransferResultsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFileTransferResults(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,12 +169,6 @@ func (c *Client) addOperationListFileTransferResultsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -286,11 +275,3 @@ type ListFileTransferResultsAPIClient interface {
 }
 
 var _ ListFileTransferResultsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListFileTransferResults(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListFileTransferResults",
-	}
-}

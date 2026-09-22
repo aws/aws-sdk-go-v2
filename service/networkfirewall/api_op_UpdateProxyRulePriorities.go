@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates proxy rule priorities within a proxy rule group.
@@ -68,6 +67,28 @@ type UpdateProxyRulePrioritiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProxyRulePrioritiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProxyRulePrioritiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProxyRulePrioritiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyRuleGroupArn != nil {
+		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_ProxyRuleGroupArn, *v.ProxyRuleGroupArn)
+	}
+	if v.ProxyRuleGroupName != nil {
+		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_ProxyRuleGroupName, *v.ProxyRuleGroupName)
+	}
+	if v.RuleGroupRequestPhase != "" {
+		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_RuleGroupRequestPhase, string(v.RuleGroupRequestPhase))
+	}
+	serializeProxyRulePriorityList(s, schemas.UpdateProxyRulePrioritiesRequest_Rules, v.Rules)
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateProxyRulePrioritiesRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateProxyRulePrioritiesOutput struct {
 
 	// The Amazon Resource Name (ARN) of a proxy rule group.
@@ -102,77 +123,73 @@ type UpdateProxyRulePrioritiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProxyRulePrioritiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProxyRulePrioritiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProxyRulePrioritiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyRuleGroupArn != nil {
+		s.WriteString(schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn, *v.ProxyRuleGroupArn)
+	}
+	if v.ProxyRuleGroupName != nil {
+		s.WriteString(schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupName, *v.ProxyRuleGroupName)
+	}
+	if v.RuleGroupRequestPhase != "" {
+		s.WriteString(schemas.UpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase, string(v.RuleGroupRequestPhase))
+	}
+	serializeProxyRulePriorityList(s, schemas.UpdateProxyRulePrioritiesResponse_Rules, v.Rules)
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateProxyRulePrioritiesResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *UpdateProxyRulePrioritiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProxyRulePrioritiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn:
+			v.ProxyRuleGroupArn = new(string)
+			return d.ReadString(schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupArn, v.ProxyRuleGroupArn)
+		case schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupName:
+			v.ProxyRuleGroupName = new(string)
+			return d.ReadString(schemas.UpdateProxyRulePrioritiesResponse_ProxyRuleGroupName, v.ProxyRuleGroupName)
+		case schemas.UpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase:
+			var ev string
+			if err := d.ReadString(schemas.UpdateProxyRulePrioritiesResponse_RuleGroupRequestPhase, &ev); err != nil {
+				return err
+			}
+			v.RuleGroupRequestPhase = types.RuleGroupRequestPhase(ev)
+			return nil
+		case schemas.UpdateProxyRulePrioritiesResponse_Rules:
+			return deserializeProxyRulePriorityList(d, schemas.UpdateProxyRulePrioritiesResponse_Rules, &v.Rules)
+		case schemas.UpdateProxyRulePrioritiesResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateProxyRulePrioritiesResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProxyRulePrioritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyRulePriorities, schemas.UpdateProxyRulePrioritiesRequest, schemas.UpdateProxyRulePrioritiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProxyRulePriorities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProxyRulePriorities, schemas.UpdateProxyRulePrioritiesRequest, schemas.UpdateProxyRulePrioritiesResponse), output: &UpdateProxyRulePrioritiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProxyRulePriorities{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProxyRulePriorities"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateProxyRulePrioritiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProxyRulePriorities(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,22 +204,8 @@ func (c *Client) addOperationUpdateProxyRulePrioritiesMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateProxyRulePriorities(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateProxyRulePriorities",
-	}
 }

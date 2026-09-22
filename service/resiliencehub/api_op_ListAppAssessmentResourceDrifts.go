@@ -5,10 +5,10 @@ package resiliencehub
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List of resource drifts that were detected while running an assessment.
@@ -49,6 +49,24 @@ type ListAppAssessmentResourceDriftsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAssessmentResourceDriftsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppAssessmentResourceDriftsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppAssessmentResourceDriftsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssessmentArn != nil {
+		s.WriteString(schemas.ListAppAssessmentResourceDriftsRequest_assessmentArn, *v.AssessmentArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppAssessmentResourceDriftsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppAssessmentResourceDriftsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAppAssessmentResourceDriftsOutput struct {
 
 	// Indicates all the resource drifts detected for an assessed entity.
@@ -65,77 +83,51 @@ type ListAppAssessmentResourceDriftsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppAssessmentResourceDriftsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppAssessmentResourceDriftsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppAssessmentResourceDriftsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppAssessmentResourceDriftsResponse_nextToken, *v.NextToken)
+	}
+	serializeResourceDriftList(s, schemas.ListAppAssessmentResourceDriftsResponse_resourceDrifts, v.ResourceDrifts)
+}
+func (v *ListAppAssessmentResourceDriftsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppAssessmentResourceDriftsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppAssessmentResourceDriftsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppAssessmentResourceDriftsResponse_nextToken, v.NextToken)
+		case schemas.ListAppAssessmentResourceDriftsResponse_resourceDrifts:
+			return deserializeResourceDriftList(d, schemas.ListAppAssessmentResourceDriftsResponse_resourceDrifts, &v.ResourceDrifts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppAssessmentResourceDriftsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAssessmentResourceDrifts, schemas.ListAppAssessmentResourceDriftsRequest, schemas.ListAppAssessmentResourceDriftsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppAssessmentResourceDrifts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppAssessmentResourceDrifts, schemas.ListAppAssessmentResourceDriftsRequest, schemas.ListAppAssessmentResourceDriftsResponse), output: &ListAppAssessmentResourceDriftsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppAssessmentResourceDrifts{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppAssessmentResourceDrifts"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListAppAssessmentResourceDriftsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAppAssessmentResourceDrifts(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +140,6 @@ func (c *Client) addOperationListAppAssessmentResourceDriftsMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -259,11 +245,3 @@ type ListAppAssessmentResourceDriftsAPIClient interface {
 }
 
 var _ ListAppAssessmentResourceDriftsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAppAssessmentResourceDrifts(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAppAssessmentResourceDrifts",
-	}
-}

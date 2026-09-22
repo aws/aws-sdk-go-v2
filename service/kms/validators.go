@@ -650,26 +650,6 @@ func (m *validateOpListResourceTags) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListRetirableGrants struct {
-}
-
-func (*validateOpListRetirableGrants) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListRetirableGrants) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListRetirableGrantsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListRetirableGrantsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpPutKeyPolicy struct {
 }
 
@@ -1098,10 +1078,6 @@ func addOpListResourceTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListResourceTags{}, middleware.After)
 }
 
-func addOpListRetirableGrantsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListRetirableGrants{}, middleware.After)
-}
-
 func addOpPutKeyPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutKeyPolicy{}, middleware.After)
 }
@@ -1290,9 +1266,6 @@ func validateOpCreateGrantInput(v *CreateGrantInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGrantInput"}
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
-	if v.GranteePrincipal == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GranteePrincipal"))
 	}
 	if v.Operations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Operations"))
@@ -1736,21 +1709,6 @@ func validateOpListResourceTagsInput(v *ListResourceTagsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListResourceTagsInput"}
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpListRetirableGrantsInput(v *ListRetirableGrantsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListRetirableGrantsInput"}
-	if v.RetiringPrincipal == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RetiringPrincipal"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

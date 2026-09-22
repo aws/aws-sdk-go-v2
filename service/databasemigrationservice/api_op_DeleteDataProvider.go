@@ -4,17 +4,20 @@ package databasemigrationservice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified data provider.
 //
+// Required permissions: dms:DeleteDataProvider . For more information, see [Actions, resources, and condition keys for Database Migration Service].
+//
 // All migration projects associated with the data provider must be deleted or
 // modified before you can delete the data provider.
+//
+// [Actions, resources, and condition keys for Database Migration Service]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsdatabasemigrationservice.html
 func (c *Client) DeleteDataProvider(ctx context.Context, params *DeleteDataProviderInput, optFns ...func(*Options)) (*DeleteDataProviderOutput, error) {
 	if params == nil {
 		params = &DeleteDataProviderInput{}
@@ -40,6 +43,18 @@ type DeleteDataProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataProviderMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataProviderIdentifier != nil {
+		s.WriteString(schemas.DeleteDataProviderMessage_DataProviderIdentifier, *v.DataProviderIdentifier)
+	}
+}
+
 type DeleteDataProviderOutput struct {
 
 	// The data provider that was deleted.
@@ -51,77 +66,50 @@ type DeleteDataProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataProviderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataProviderResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataProviderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataProvider != nil {
+		s.WriteStruct(schemas.DeleteDataProviderResponse_DataProvider)
+		v.DataProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteDataProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataProviderResponse_DataProvider:
+			v.DataProvider = &types.DataProvider{}
+			return v.DataProvider.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataProvider, schemas.DeleteDataProviderMessage, schemas.DeleteDataProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteDataProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataProvider, schemas.DeleteDataProviderMessage, schemas.DeleteDataProviderResponse), output: &DeleteDataProviderOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteDataProvider{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataProvider"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteDataProviderValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataProvider(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -136,22 +124,8 @@ func (c *Client) addOperationDeleteDataProviderMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteDataProvider(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteDataProvider",
-	}
 }

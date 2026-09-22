@@ -1,0 +1,5 @@
+POST /networks
+
+Content-Type: application/json
+
+{"accessLevel":"STANDARD","enablePremiumFreeTrial":true,"encryptionKeyArn":"__EncryptionKeyArn__","networkName":"__NetworkName__"}

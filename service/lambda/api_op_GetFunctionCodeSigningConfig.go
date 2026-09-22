@@ -4,10 +4,9 @@ package lambda
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the code signing configuration for the specified function.
@@ -47,6 +46,18 @@ type GetFunctionCodeSigningConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionCodeSigningConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionCodeSigningConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionCodeSigningConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionName != nil {
+		s.WriteString(schemas.GetFunctionCodeSigningConfigRequest_FunctionName, *v.FunctionName)
+	}
+}
+
 type GetFunctionCodeSigningConfigOutput struct {
 
 	// The The Amazon Resource Name (ARN) of the code signing configuration.
@@ -76,77 +87,54 @@ type GetFunctionCodeSigningConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFunctionCodeSigningConfigOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFunctionCodeSigningConfigResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFunctionCodeSigningConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeSigningConfigArn != nil {
+		s.WriteString(schemas.GetFunctionCodeSigningConfigResponse_CodeSigningConfigArn, *v.CodeSigningConfigArn)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.GetFunctionCodeSigningConfigResponse_FunctionName, *v.FunctionName)
+	}
+}
+func (v *GetFunctionCodeSigningConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFunctionCodeSigningConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFunctionCodeSigningConfigResponse_CodeSigningConfigArn:
+			v.CodeSigningConfigArn = new(string)
+			return d.ReadString(schemas.GetFunctionCodeSigningConfigResponse_CodeSigningConfigArn, v.CodeSigningConfigArn)
+		case schemas.GetFunctionCodeSigningConfigResponse_FunctionName:
+			v.FunctionName = new(string)
+			return d.ReadString(schemas.GetFunctionCodeSigningConfigResponse_FunctionName, v.FunctionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFunctionCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionCodeSigningConfig, schemas.GetFunctionCodeSigningConfigRequest, schemas.GetFunctionCodeSigningConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFunctionCodeSigningConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFunctionCodeSigningConfig, schemas.GetFunctionCodeSigningConfigRequest, schemas.GetFunctionCodeSigningConfigResponse), output: &GetFunctionCodeSigningConfigOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFunctionCodeSigningConfig{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFunctionCodeSigningConfig"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFunctionCodeSigningConfigValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFunctionCodeSigningConfig(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,22 +149,8 @@ func (c *Client) addOperationGetFunctionCodeSigningConfigMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFunctionCodeSigningConfig(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFunctionCodeSigningConfig",
-	}
 }

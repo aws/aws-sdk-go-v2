@@ -1,0 +1,5 @@
+PUT /FeatureGroup/__FeatureGroupName__
+
+Content-Type: application/json
+
+{"Record":[{"FeatureName":"__FeatureName__","ValueAsString":"__ValueAsString__","ValueAsStringList":["__Member__","__Member__"]},{"FeatureName":"__FeatureName__","ValueAsString":"__ValueAsString__","ValueAsStringList":["__Member__","__Member__"]}],"TargetStores":["OnlineStore","OnlineStore"],"TtlDuration":{"Unit":"Seconds","Value":1}}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateAutoMLJobV2
+
+{"AutoMLComputeConfig":{"EmrServerlessComputeConfig":{"ExecutionRoleARN":"__ExecutionRoleARN__"}},"AutoMLJobInputDataConfig":[{"ChannelType":"training","CompressionType":"None","ContentType":"__ContentType__","DataSource":{"S3DataSource":{"S3DataType":"ManifestFile","S3Uri":"__S3Uri__"}}},{"ChannelType":"training","CompressionType":"None","ContentType":"__ContentType__","DataSource":{"S3DataSource":{"S3DataType":"ManifestFile","S3Uri":"__S3Uri__"}}}],"AutoMLJobName":"__AutoMLJobName__","AutoMLJobObjective":{"MetricName":"Accuracy"},"AutoMLProblemTypeConfig":{"ImageClassificationJobConfig":{"CompletionCriteria":{"MaxAutoMLJobRuntimeInSeconds":1,"MaxCandidates":1,"MaxRuntimePerTrainingJobInSeconds":1}}},"DataSplitConfig":{"ValidationFraction":1},"ModelDeployConfig":{"AutoGenerateEndpointName":true,"EndpointName":"__EndpointName__"},"OutputDataConfig":{"KmsKeyId":"__KmsKeyId__","S3OutputPath":"__S3OutputPath__"},"RoleArn":"__RoleArn__","SecurityConfig":{"EnableInterContainerTrafficEncryption":true,"VolumeKmsKeyId":"__VolumeKmsKeyId__","VpcConfig":{"SecurityGroupIds":["__Member__","__Member__"],"Subnets":["__Member__","__Member__"]}},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

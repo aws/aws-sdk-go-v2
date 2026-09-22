@@ -1,0 +1,5 @@
+PUT /v2/email/identities/__EmailIdentity__/dkim/signing
+
+Content-Type: application/json
+
+{"SigningAttributes":{"DomainSigningAttributesOrigin":"AWS_SES","DomainSigningPrivateKey":"__DomainSigningPrivateKey__","DomainSigningSelector":"__DomainSigningSelector__","NextSigningKeyLength":"RSA_1024_BIT"},"SigningAttributesOrigin":"AWS_SES"}

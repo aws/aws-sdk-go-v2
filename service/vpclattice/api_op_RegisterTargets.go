@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Registers the targets with the target group. If it's a Lambda target, you can
@@ -43,6 +42,31 @@ type RegisterTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TargetGroupIdentifier != nil {
+		s.WriteString(schemas.RegisterTargetsRequest_targetGroupIdentifier, *v.TargetGroupIdentifier)
+	}
+	serializeTargetList(s, schemas.RegisterTargetsRequest_targets, v.Targets)
+}
+func (v *RegisterTargetsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterTargetsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterTargetsRequest_targetGroupIdentifier:
+			v.TargetGroupIdentifier = new(string)
+			return d.ReadString(schemas.RegisterTargetsRequest_targetGroupIdentifier, v.TargetGroupIdentifier)
+		case schemas.RegisterTargetsRequest_targets:
+			return deserializeTargetList(d, schemas.RegisterTargetsRequest_targets, &v.Targets)
+		}
+		return nil
+	})
+}
+
 type RegisterTargetsOutput struct {
 
 	// The targets that were successfully registered.
@@ -57,77 +81,48 @@ type RegisterTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTargetList(s, schemas.RegisterTargetsResponse_successful, v.Successful)
+	serializeTargetFailureList(s, schemas.RegisterTargetsResponse_unsuccessful, v.Unsuccessful)
+}
+func (v *RegisterTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterTargetsResponse_successful:
+			return deserializeTargetList(d, schemas.RegisterTargetsResponse_successful, &v.Successful)
+		case schemas.RegisterTargetsResponse_unsuccessful:
+			return deserializeTargetFailureList(d, schemas.RegisterTargetsResponse_unsuccessful, &v.Unsuccessful)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterTargets, schemas.RegisterTargetsRequest, schemas.RegisterTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterTargets, schemas.RegisterTargetsRequest, schemas.RegisterTargetsResponse), output: &RegisterTargetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterTargets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterTargets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRegisterTargetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterTargets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,22 +137,8 @@ func (c *Client) addOperationRegisterTargetsMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRegisterTargets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RegisterTargets",
-	}
 }

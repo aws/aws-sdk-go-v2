@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new database in Amazon Lightsail.
@@ -231,6 +230,46 @@ type CreateRelationalDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelationalDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelationalDatabaseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelationalDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.MasterDatabaseName != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_masterDatabaseName, *v.MasterDatabaseName)
+	}
+	if v.MasterUserPassword != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_masterUserPassword, *v.MasterUserPassword)
+	}
+	if v.MasterUsername != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_masterUsername, *v.MasterUsername)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_preferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.CreateRelationalDatabaseRequest_publiclyAccessible, *v.PubliclyAccessible)
+	}
+	if v.RelationalDatabaseBlueprintId != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_relationalDatabaseBlueprintId, *v.RelationalDatabaseBlueprintId)
+	}
+	if v.RelationalDatabaseBundleId != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_relationalDatabaseBundleId, *v.RelationalDatabaseBundleId)
+	}
+	if v.RelationalDatabaseName != nil {
+		s.WriteString(schemas.CreateRelationalDatabaseRequest_relationalDatabaseName, *v.RelationalDatabaseName)
+	}
+	serializeTagList(s, schemas.CreateRelationalDatabaseRequest_tags, v.Tags)
+}
+
 type CreateRelationalDatabaseOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -244,77 +283,45 @@ type CreateRelationalDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRelationalDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRelationalDatabaseResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRelationalDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.CreateRelationalDatabaseResult_operations, v.Operations)
+}
+func (v *CreateRelationalDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRelationalDatabaseResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRelationalDatabaseResult_operations:
+			return deserializeOperationList(d, schemas.CreateRelationalDatabaseResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationalDatabase, schemas.CreateRelationalDatabaseRequest, schemas.CreateRelationalDatabaseResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRelationalDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRelationalDatabase, schemas.CreateRelationalDatabaseRequest, schemas.CreateRelationalDatabaseResult), output: &CreateRelationalDatabaseOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRelationalDatabase{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRelationalDatabase"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateRelationalDatabaseValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRelationalDatabase(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -329,22 +336,8 @@ func (c *Client) addOperationCreateRelationalDatabaseMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateRelationalDatabase(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateRelationalDatabase",
-	}
 }

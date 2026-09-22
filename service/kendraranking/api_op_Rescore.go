@@ -4,11 +4,10 @@ package kendraranking
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendraranking/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendraranking/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Rescores or re-ranks search results from a search service such as OpenSearch
@@ -52,6 +51,22 @@ type RescoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RescoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RescoreRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RescoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDocumentList(s, schemas.RescoreRequest_Documents, v.Documents)
+	if v.RescoreExecutionPlanId != nil {
+		s.WriteString(schemas.RescoreRequest_RescoreExecutionPlanId, *v.RescoreExecutionPlanId)
+	}
+	if v.SearchQuery != nil {
+		s.WriteString(schemas.RescoreRequest_SearchQuery, *v.SearchQuery)
+	}
+}
+
 type RescoreOutput struct {
 
 	// The identifier associated with the scores that Amazon Kendra Intelligent
@@ -69,77 +84,54 @@ type RescoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RescoreOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RescoreResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RescoreOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RescoreId != nil {
+		s.WriteString(schemas.RescoreResult_RescoreId, *v.RescoreId)
+	}
+	serializeRescoreResultItemList(s, schemas.RescoreResult_ResultItems, v.ResultItems)
+}
+func (v *RescoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RescoreResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RescoreResult_RescoreId:
+			v.RescoreId = new(string)
+			return d.ReadString(schemas.RescoreResult_RescoreId, v.RescoreId)
+		case schemas.RescoreResult_ResultItems:
+			return deserializeRescoreResultItemList(d, schemas.RescoreResult_ResultItems, &v.ResultItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRescoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Rescore, schemas.RescoreRequest, schemas.RescoreResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpRescore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Rescore, schemas.RescoreRequest, schemas.RescoreResult), output: &RescoreOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpRescore{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Rescore"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRescoreValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRescore(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +146,8 @@ func (c *Client) addOperationRescoreMiddlewares(stack *middleware.Stack, options
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRescore(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Rescore",
-	}
 }

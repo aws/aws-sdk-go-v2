@@ -1,0 +1,5 @@
+POST /ListSecurityRequirementPacks
+
+Content-Type: application/json
+
+{"filter":{"managementType":"AWS_MANAGED","status":"ENABLED"},"maxResults":1,"nextToken":"__NextToken__"}

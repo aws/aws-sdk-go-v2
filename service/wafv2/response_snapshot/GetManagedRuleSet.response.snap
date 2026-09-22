@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSWAF_20190729.GetManagedRuleSet
+
+{"LockToken":"__LockToken__","ManagedRuleSet":{"ARN":"__ARN__","Description":"__Description__","Id":"__Id__","LabelNamespace":"__LabelNamespace__","Name":"__Name__","PublishedVersions":{"key0":{"AssociatedRuleGroupArn":"__AssociatedRuleGroupArn__","Capacity":1,"ExpiryTimestamp":946684800,"ForecastedLifetime":1,"LastUpdateTimestamp":946684800,"PublishTimestamp":946684800}},"RecommendedVersion":"__RecommendedVersion__"}}

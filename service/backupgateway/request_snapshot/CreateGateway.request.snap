@@ -1,0 +1,7 @@
+POST /service/BackupOnPremises_v20210101/operation/CreateGateway
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¤mActivationKeyq__ActivationKey__rGatewayDisplayNamev__GatewayDisplayName__kGatewayTypeiBACKUP_VMdTags‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__

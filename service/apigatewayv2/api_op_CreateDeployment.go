@@ -4,11 +4,10 @@ package apigatewayv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -45,6 +44,24 @@ type CreateDeploymentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiId != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_ApiId, *v.ApiId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_Description, *v.Description)
+	}
+	if v.StageName != nil {
+		s.WriteString(schemas.CreateDeploymentRequest_StageName, *v.StageName)
+	}
+}
+
 type CreateDeploymentOutput struct {
 
 	// Specifies whether a deployment was automatically released.
@@ -71,77 +88,82 @@ type CreateDeploymentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeploymentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeploymentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeploymentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoDeployed != nil {
+		s.WriteBool(schemas.CreateDeploymentResponse_AutoDeployed, *v.AutoDeployed)
+	}
+	if v.CreatedDate != nil {
+		s.WriteTime(schemas.CreateDeploymentResponse_CreatedDate, *v.CreatedDate)
+	}
+	if v.DeploymentId != nil {
+		s.WriteString(schemas.CreateDeploymentResponse_DeploymentId, *v.DeploymentId)
+	}
+	if v.DeploymentStatus != "" {
+		s.WriteString(schemas.CreateDeploymentResponse_DeploymentStatus, string(v.DeploymentStatus))
+	}
+	if v.DeploymentStatusMessage != nil {
+		s.WriteString(schemas.CreateDeploymentResponse_DeploymentStatusMessage, *v.DeploymentStatusMessage)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDeploymentResponse_Description, *v.Description)
+	}
+}
+func (v *CreateDeploymentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeploymentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeploymentResponse_AutoDeployed:
+			v.AutoDeployed = new(bool)
+			return d.ReadBool(schemas.CreateDeploymentResponse_AutoDeployed, v.AutoDeployed)
+		case schemas.CreateDeploymentResponse_CreatedDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreateDeploymentResponse_CreatedDate, v.CreatedDate)
+		case schemas.CreateDeploymentResponse_DeploymentId:
+			v.DeploymentId = new(string)
+			return d.ReadString(schemas.CreateDeploymentResponse_DeploymentId, v.DeploymentId)
+		case schemas.CreateDeploymentResponse_DeploymentStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateDeploymentResponse_DeploymentStatus, &ev); err != nil {
+				return err
+			}
+			v.DeploymentStatus = types.DeploymentStatus(ev)
+			return nil
+		case schemas.CreateDeploymentResponse_DeploymentStatusMessage:
+			v.DeploymentStatusMessage = new(string)
+			return d.ReadString(schemas.CreateDeploymentResponse_DeploymentStatusMessage, v.DeploymentStatusMessage)
+		case schemas.CreateDeploymentResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateDeploymentResponse_Description, v.Description)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDeployment, schemas.CreateDeploymentRequest, schemas.CreateDeploymentResponse), output: &CreateDeploymentOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDeployment{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDeployment"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDeploymentValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeployment(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +178,8 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDeployment(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDeployment",
-	}
 }

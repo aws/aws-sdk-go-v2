@@ -1,0 +1,5 @@
+POST /monitors
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","localResources":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}],"monitorName":"__MonitorName__","remoteResources":[{"identifier":"__Identifier__","type":"AWS::EC2::VPC"},{"identifier":"__Identifier__","type":"AWS::EC2::VPC"}],"scopeArn":"__ScopeArn__","tags":{"key0":"__Value__"}}

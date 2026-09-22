@@ -1,0 +1,5 @@
+PUT /data-automation-libraries/__LibraryArn__/library-ingestion-jobs/
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","entityType":"VOCABULARY","inputConfiguration":{"inlinePayload":{"upsertEntitiesInfo":[{"vocabulary":{"description":"__Description__","entityId":"__EntityId__","language":"EN","phrases":[{"displayAsText":"__DisplayAsText__","text":"__Text__"},{"displayAsText":"__DisplayAsText__","text":"__Text__"}]}},{"vocabulary":{"description":"__Description__","entityId":"__EntityId__","language":"EN","phrases":[{"displayAsText":"__DisplayAsText__","text":"__Text__"},{"displayAsText":"__DisplayAsText__","text":"__Text__"}]}}]},"s3Object":{"s3Uri":"__S3Uri__","version":"__Version__"}},"notificationConfiguration":{"eventBridgeConfiguration":{"eventBridgeEnabled":true}},"operationType":"UPSERT","outputConfiguration":{"s3Uri":"__S3Uri__"},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

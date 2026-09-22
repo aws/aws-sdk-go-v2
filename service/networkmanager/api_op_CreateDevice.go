@@ -4,11 +4,10 @@ package networkmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new device in a global network. If you specify both a site ID and a
@@ -75,6 +74,47 @@ type CreateDeviceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AWSLocation != nil {
+		s.WriteStruct(schemas.CreateDeviceRequest_AWSLocation)
+		v.AWSLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDeviceRequest_Description, *v.Description)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.CreateDeviceRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.CreateDeviceRequest_Location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Model != nil {
+		s.WriteString(schemas.CreateDeviceRequest_Model, *v.Model)
+	}
+	if v.SerialNumber != nil {
+		s.WriteString(schemas.CreateDeviceRequest_SerialNumber, *v.SerialNumber)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.CreateDeviceRequest_SiteId, *v.SiteId)
+	}
+	serializeTagList(s, schemas.CreateDeviceRequest_Tags, v.Tags)
+	if v.Type != nil {
+		s.WriteString(schemas.CreateDeviceRequest_Type, *v.Type)
+	}
+	if v.Vendor != nil {
+		s.WriteString(schemas.CreateDeviceRequest_Vendor, *v.Vendor)
+	}
+}
+
 type CreateDeviceOutput struct {
 
 	// Information about the device.
@@ -86,77 +126,50 @@ type CreateDeviceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDeviceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDeviceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDeviceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Device != nil {
+		s.WriteStruct(schemas.CreateDeviceResponse_Device)
+		v.Device.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateDeviceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDeviceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDeviceResponse_Device:
+			v.Device = &types.Device{}
+			return v.Device.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevice, schemas.CreateDeviceRequest, schemas.CreateDeviceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDevice{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDevice, schemas.CreateDeviceRequest, schemas.CreateDeviceResponse), output: &CreateDeviceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDevice{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDevice"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateDeviceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDevice(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +184,8 @@ func (c *Client) addOperationCreateDeviceMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateDevice(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateDevice",
-	}
 }

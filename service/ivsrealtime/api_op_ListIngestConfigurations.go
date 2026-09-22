@@ -5,10 +5,10 @@ package ivsrealtime
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all IngestConfigurations in your account, in the AWS region where the API
@@ -48,6 +48,27 @@ type ListIngestConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIngestConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIngestConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIngestConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterByStageArn != nil {
+		s.WriteString(schemas.ListIngestConfigurationsRequest_filterByStageArn, *v.FilterByStageArn)
+	}
+	if v.FilterByState != "" {
+		s.WriteString(schemas.ListIngestConfigurationsRequest_filterByState, string(v.FilterByState))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIngestConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIngestConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListIngestConfigurationsOutput struct {
 
 	// List of the matching ingest configurations (summary information only).
@@ -65,74 +86,48 @@ type ListIngestConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIngestConfigurationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIngestConfigurationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIngestConfigurationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIngestConfigurationList(s, schemas.ListIngestConfigurationsResponse_ingestConfigurations, v.IngestConfigurations)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIngestConfigurationsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListIngestConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIngestConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIngestConfigurationsResponse_ingestConfigurations:
+			return deserializeIngestConfigurationList(d, schemas.ListIngestConfigurationsResponse_ingestConfigurations, &v.IngestConfigurations)
+		case schemas.ListIngestConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIngestConfigurationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIngestConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestConfigurations, schemas.ListIngestConfigurationsRequest, schemas.ListIngestConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIngestConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIngestConfigurations, schemas.ListIngestConfigurationsRequest, schemas.ListIngestConfigurationsResponse), output: &ListIngestConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIngestConfigurations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIngestConfigurations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIngestConfigurations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,12 +140,6 @@ func (c *Client) addOperationListIngestConfigurationsMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,11 +242,3 @@ type ListIngestConfigurationsAPIClient interface {
 }
 
 var _ ListIngestConfigurationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListIngestConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIngestConfigurations",
-	}
-}

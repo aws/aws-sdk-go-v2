@@ -1,0 +1,5 @@
+POST /event-log-configurations
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","EventLogLevel":"DEBUG","ResourceId":"__ResourceId__","ResourceType":"__ResourceType__"}

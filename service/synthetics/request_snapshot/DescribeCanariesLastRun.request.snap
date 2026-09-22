@@ -1,0 +1,5 @@
+POST /canaries/last-run
+
+Content-Type: application/json
+
+{"BrowserType":"CHROME","MaxResults":1,"Names":["__Member__","__Member__"],"NextToken":"__NextToken__"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.AdminInitiateAuth
+
+{"AuthenticationResult":{"AccessToken":"__AccessToken__","ExpiresIn":1,"IdToken":"__IdToken__","NewDeviceMetadata":{"DeviceGroupKey":"__DeviceGroupKey__","DeviceKey":"__DeviceKey__"},"RefreshToken":"__RefreshToken__","TokenType":"__TokenType__"},"AvailableChallenges":["SMS_MFA","SMS_MFA"],"ChallengeName":"SMS_MFA","ChallengeParameters":{"key0":"__Value__"},"Session":"__Session__"}

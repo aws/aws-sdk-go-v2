@@ -1,0 +1,5 @@
+POST /domains/__DomainName__/calculated-attributes/__CalculatedAttributeName__
+
+Content-Type: application/json
+
+{"AttributeDetails":{"Attributes":[{"Name":"__Name__"},{"Name":"__Name__"}],"Expression":"__Expression__"},"Conditions":{"ObjectCount":1,"Range":{"TimestampFormat":"__TimestampFormat__","TimestampSource":"__TimestampSource__","Unit":"DAYS","Value":1,"ValueRange":{"End":1,"Start":1}},"Threshold":{"Operator":"EQUAL_TO","Value":"__Value__"}},"Description":"__Description__","DisplayName":"__DisplayName__","Filter":{"Groups":[{"Dimensions":[{"Attributes":{"key0":{"DimensionType":"INCLUSIVE","Values":["__Member__","__Member__"]}}},{"Attributes":{"key0":{"DimensionType":"INCLUSIVE","Values":["__Member__","__Member__"]}}}],"Type":"ALL"},{"Dimensions":[{"Attributes":{"key0":{"DimensionType":"INCLUSIVE","Values":["__Member__","__Member__"]}}},{"Attributes":{"key0":{"DimensionType":"INCLUSIVE","Values":["__Member__","__Member__"]}}}],"Type":"ALL"}],"Include":"ALL"},"Statistic":"FIRST_OCCURRENCE","Tags":{"key0":"__Value__"},"UseHistoricalData":true}

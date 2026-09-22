@@ -5,10 +5,10 @@ package storagegateway
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a description of virtual tape library (VTL) devices for the specified
@@ -58,6 +58,25 @@ type DescribeVTLDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVTLDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVTLDevicesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVTLDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeVTLDevicesInput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeVTLDevicesInput_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeVTLDevicesInput_Marker, *v.Marker)
+	}
+	serializeVTLDeviceARNs(s, schemas.DescribeVTLDevicesInput_VTLDeviceARNs, v.VTLDeviceARNs)
+}
+
 // DescribeVTLDevicesOutput
 type DescribeVTLDevicesOutput struct {
 
@@ -81,77 +100,57 @@ type DescribeVTLDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeVTLDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeVTLDevicesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeVTLDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayARN != nil {
+		s.WriteString(schemas.DescribeVTLDevicesOutput_GatewayARN, *v.GatewayARN)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeVTLDevicesOutput_Marker, *v.Marker)
+	}
+	serializeVTLDevices(s, schemas.DescribeVTLDevicesOutput_VTLDevices, v.VTLDevices)
+}
+func (v *DescribeVTLDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeVTLDevicesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeVTLDevicesOutput_GatewayARN:
+			v.GatewayARN = new(string)
+			return d.ReadString(schemas.DescribeVTLDevicesOutput_GatewayARN, v.GatewayARN)
+		case schemas.DescribeVTLDevicesOutput_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeVTLDevicesOutput_Marker, v.Marker)
+		case schemas.DescribeVTLDevicesOutput_VTLDevices:
+			return deserializeVTLDevices(d, schemas.DescribeVTLDevicesOutput_VTLDevices, &v.VTLDevices)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVTLDevices, schemas.DescribeVTLDevicesInput, schemas.DescribeVTLDevicesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeVTLDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeVTLDevices, schemas.DescribeVTLDevicesInput, schemas.DescribeVTLDevicesOutput), output: &DescribeVTLDevicesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeVTLDevices{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeVTLDevices"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeVTLDevicesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVTLDevices(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,12 +163,6 @@ func (c *Client) addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -272,11 +265,3 @@ type DescribeVTLDevicesAPIClient interface {
 }
 
 var _ DescribeVTLDevicesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opDescribeVTLDevices(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeVTLDevices",
-	}
-}

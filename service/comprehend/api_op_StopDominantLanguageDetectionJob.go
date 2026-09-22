@@ -4,11 +4,10 @@ package comprehend
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/comprehend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops a dominant language detection job in progress.
@@ -49,6 +48,18 @@ type StopDominantLanguageDetectionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDominantLanguageDetectionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDominantLanguageDetectionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDominantLanguageDetectionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopDominantLanguageDetectionJobRequest_JobId, *v.JobId)
+	}
+}
+
 type StopDominantLanguageDetectionJobOutput struct {
 
 	// The identifier of the dominant language detection job to stop.
@@ -64,77 +75,58 @@ type StopDominantLanguageDetectionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopDominantLanguageDetectionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopDominantLanguageDetectionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopDominantLanguageDetectionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StopDominantLanguageDetectionJobResponse_JobId, *v.JobId)
+	}
+	if v.JobStatus != "" {
+		s.WriteString(schemas.StopDominantLanguageDetectionJobResponse_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *StopDominantLanguageDetectionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopDominantLanguageDetectionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopDominantLanguageDetectionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StopDominantLanguageDetectionJobResponse_JobId, v.JobId)
+		case schemas.StopDominantLanguageDetectionJobResponse_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.StopDominantLanguageDetectionJobResponse_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDominantLanguageDetectionJob, schemas.StopDominantLanguageDetectionJobRequest, schemas.StopDominantLanguageDetectionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStopDominantLanguageDetectionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopDominantLanguageDetectionJob, schemas.StopDominantLanguageDetectionJobRequest, schemas.StopDominantLanguageDetectionJobResponse), output: &StopDominantLanguageDetectionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStopDominantLanguageDetectionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopDominantLanguageDetectionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopDominantLanguageDetectionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopDominantLanguageDetectionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +141,8 @@ func (c *Client) addOperationStopDominantLanguageDetectionJobMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopDominantLanguageDetectionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopDominantLanguageDetectionJob",
-	}
 }

@@ -4,11 +4,10 @@ package workmail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workmail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workmail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Performs a test on an availability provider to ensure that access is allowed.
@@ -57,6 +56,31 @@ type TestAvailabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestAvailabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestAvailabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestAvailabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.TestAvailabilityConfigurationRequest_DomainName, *v.DomainName)
+	}
+	if v.EwsProvider != nil {
+		s.WriteStruct(schemas.TestAvailabilityConfigurationRequest_EwsProvider)
+		v.EwsProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaProvider != nil {
+		s.WriteStruct(schemas.TestAvailabilityConfigurationRequest_LambdaProvider)
+		v.LambdaProvider.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.TestAvailabilityConfigurationRequest_OrganizationId, *v.OrganizationId)
+	}
+}
+
 type TestAvailabilityConfigurationOutput struct {
 
 	// String containing the reason for a failed test if TestPassed is false.
@@ -71,77 +95,53 @@ type TestAvailabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestAvailabilityConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestAvailabilityConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestAvailabilityConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != nil {
+		s.WriteString(schemas.TestAvailabilityConfigurationResponse_FailureReason, *v.FailureReason)
+	}
+	if v.TestPassed != false {
+		s.WriteBool(schemas.TestAvailabilityConfigurationResponse_TestPassed, v.TestPassed)
+	}
+}
+func (v *TestAvailabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestAvailabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestAvailabilityConfigurationResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.TestAvailabilityConfigurationResponse_FailureReason, v.FailureReason)
+		case schemas.TestAvailabilityConfigurationResponse_TestPassed:
+			return d.ReadBool(schemas.TestAvailabilityConfigurationResponse_TestPassed, &v.TestPassed)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestAvailabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestAvailabilityConfiguration, schemas.TestAvailabilityConfigurationRequest, schemas.TestAvailabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTestAvailabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestAvailabilityConfiguration, schemas.TestAvailabilityConfigurationRequest, schemas.TestAvailabilityConfigurationResponse), output: &TestAvailabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTestAvailabilityConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestAvailabilityConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTestAvailabilityConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestAvailabilityConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,22 +156,8 @@ func (c *Client) addOperationTestAvailabilityConfigurationMiddlewares(stack *mid
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTestAvailabilityConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TestAvailabilityConfiguration",
-	}
 }

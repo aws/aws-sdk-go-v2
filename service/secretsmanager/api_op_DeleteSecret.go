@@ -4,10 +4,9 @@ package secretsmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/secretsmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -105,6 +104,24 @@ type DeleteSecretInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecretInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSecretRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecretInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ForceDeleteWithoutRecovery != nil {
+		s.WriteBool(schemas.DeleteSecretRequest_ForceDeleteWithoutRecovery, *v.ForceDeleteWithoutRecovery)
+	}
+	if v.RecoveryWindowInDays != nil {
+		s.WriteInt64(schemas.DeleteSecretRequest_RecoveryWindowInDays, *v.RecoveryWindowInDays)
+	}
+	if v.SecretId != nil {
+		s.WriteString(schemas.DeleteSecretRequest_SecretId, *v.SecretId)
+	}
+}
+
 type DeleteSecretOutput struct {
 
 	// The ARN of the secret.
@@ -124,77 +141,60 @@ type DeleteSecretOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSecretOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSecretResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSecretOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ARN != nil {
+		s.WriteString(schemas.DeleteSecretResponse_ARN, *v.ARN)
+	}
+	if v.DeletionDate != nil {
+		s.WriteTime(schemas.DeleteSecretResponse_DeletionDate, *v.DeletionDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteSecretResponse_Name, *v.Name)
+	}
+}
+func (v *DeleteSecretOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSecretResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSecretResponse_ARN:
+			v.ARN = new(string)
+			return d.ReadString(schemas.DeleteSecretResponse_ARN, v.ARN)
+		case schemas.DeleteSecretResponse_DeletionDate:
+			v.DeletionDate = new(time.Time)
+			return d.ReadTime(schemas.DeleteSecretResponse_DeletionDate, v.DeletionDate)
+		case schemas.DeleteSecretResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteSecretResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecret, schemas.DeleteSecretRequest, schemas.DeleteSecretResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteSecret{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSecret, schemas.DeleteSecretRequest, schemas.DeleteSecretResponse), output: &DeleteSecretOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteSecret{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSecret"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteSecretValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSecret(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -209,22 +209,8 @@ func (c *Client) addOperationDeleteSecretMiddlewares(stack *middleware.Stack, op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteSecret(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteSecret",
-	}
 }

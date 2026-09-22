@@ -5,10 +5,10 @@ package translate
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/translate/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of languages (RFC-5646 codes and names) that Amazon Translate
@@ -43,6 +43,24 @@ type ListLanguagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLanguagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLanguagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLanguagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayLanguageCode != "" {
+		s.WriteString(schemas.ListLanguagesRequest_DisplayLanguageCode, string(v.DisplayLanguageCode))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLanguagesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLanguagesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLanguagesOutput struct {
 
 	// The language code passed in with the request.
@@ -61,74 +79,58 @@ type ListLanguagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLanguagesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLanguagesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLanguagesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayLanguageCode != "" {
+		s.WriteString(schemas.ListLanguagesResponse_DisplayLanguageCode, string(v.DisplayLanguageCode))
+	}
+	serializeLanguagesList(s, schemas.ListLanguagesResponse_Languages, v.Languages)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLanguagesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLanguagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLanguagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLanguagesResponse_DisplayLanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.ListLanguagesResponse_DisplayLanguageCode, &ev); err != nil {
+				return err
+			}
+			v.DisplayLanguageCode = types.DisplayLanguageCode(ev)
+			return nil
+		case schemas.ListLanguagesResponse_Languages:
+			return deserializeLanguagesList(d, schemas.ListLanguagesResponse_Languages, &v.Languages)
+		case schemas.ListLanguagesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLanguagesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLanguagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLanguages, schemas.ListLanguagesRequest, schemas.ListLanguagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLanguages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLanguages, schemas.ListLanguagesRequest, schemas.ListLanguagesResponse), output: &ListLanguagesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLanguages{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLanguages"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLanguages(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -141,12 +143,6 @@ func (c *Client) addOperationListLanguagesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -246,11 +242,3 @@ type ListLanguagesAPIClient interface {
 }
 
 var _ ListLanguagesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLanguages(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLanguages",
-	}
-}

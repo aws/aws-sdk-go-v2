@@ -4,10 +4,9 @@ package ec2query
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleScalarXmlPropertiesInput, optFns ...func(*Options)) (*SimpleScalarXmlPropertiesOutput, error) {
@@ -27,6 +26,22 @@ func (c *Client) SimpleScalarXmlProperties(ctx context.Context, params *SimpleSc
 
 type SimpleScalarXmlPropertiesInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *SimpleScalarXmlPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarXmlPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SimpleScalarXmlPropertiesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type SimpleScalarXmlPropertiesOutput struct {
@@ -56,74 +71,99 @@ type SimpleScalarXmlPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SimpleScalarXmlPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SimpleScalarXmlPropertiesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SimpleScalarXmlPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByteValue != nil {
+		s.WriteInt8(schemas.SimpleScalarXmlPropertiesOutput_byteValue, *v.ByteValue)
+	}
+	if v.DoubleValue != nil {
+		s.WriteFloat64(schemas.SimpleScalarXmlPropertiesOutput_doubleValue, *v.DoubleValue)
+	}
+	if v.EmptyStringValue != nil {
+		s.WriteString(schemas.SimpleScalarXmlPropertiesOutput_emptyStringValue, *v.EmptyStringValue)
+	}
+	if v.FalseBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarXmlPropertiesOutput_falseBooleanValue, *v.FalseBooleanValue)
+	}
+	if v.FloatValue != nil {
+		s.WriteFloat32(schemas.SimpleScalarXmlPropertiesOutput_floatValue, *v.FloatValue)
+	}
+	if v.IntegerValue != nil {
+		s.WriteInt32(schemas.SimpleScalarXmlPropertiesOutput_integerValue, *v.IntegerValue)
+	}
+	if v.LongValue != nil {
+		s.WriteInt64(schemas.SimpleScalarXmlPropertiesOutput_longValue, *v.LongValue)
+	}
+	if v.ShortValue != nil {
+		s.WriteInt16(schemas.SimpleScalarXmlPropertiesOutput_shortValue, *v.ShortValue)
+	}
+	if v.StringValue != nil {
+		s.WriteString(schemas.SimpleScalarXmlPropertiesOutput_stringValue, *v.StringValue)
+	}
+	if v.TrueBooleanValue != nil {
+		s.WriteBool(schemas.SimpleScalarXmlPropertiesOutput_trueBooleanValue, *v.TrueBooleanValue)
+	}
+}
+func (v *SimpleScalarXmlPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SimpleScalarXmlPropertiesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SimpleScalarXmlPropertiesOutput_byteValue:
+			v.ByteValue = new(int8)
+			return d.ReadInt8(schemas.SimpleScalarXmlPropertiesOutput_byteValue, v.ByteValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_doubleValue:
+			v.DoubleValue = new(float64)
+			return d.ReadFloat64(schemas.SimpleScalarXmlPropertiesOutput_doubleValue, v.DoubleValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_emptyStringValue:
+			v.EmptyStringValue = new(string)
+			return d.ReadString(schemas.SimpleScalarXmlPropertiesOutput_emptyStringValue, v.EmptyStringValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_falseBooleanValue:
+			v.FalseBooleanValue = new(bool)
+			return d.ReadBool(schemas.SimpleScalarXmlPropertiesOutput_falseBooleanValue, v.FalseBooleanValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_floatValue:
+			v.FloatValue = new(float32)
+			return d.ReadFloat32(schemas.SimpleScalarXmlPropertiesOutput_floatValue, v.FloatValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_integerValue:
+			v.IntegerValue = new(int32)
+			return d.ReadInt32(schemas.SimpleScalarXmlPropertiesOutput_integerValue, v.IntegerValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_longValue:
+			v.LongValue = new(int64)
+			return d.ReadInt64(schemas.SimpleScalarXmlPropertiesOutput_longValue, v.LongValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_shortValue:
+			v.ShortValue = new(int16)
+			return d.ReadInt16(schemas.SimpleScalarXmlPropertiesOutput_shortValue, v.ShortValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_stringValue:
+			v.StringValue = new(string)
+			return d.ReadString(schemas.SimpleScalarXmlPropertiesOutput_stringValue, v.StringValue)
+		case schemas.SimpleScalarXmlPropertiesOutput_trueBooleanValue:
+			v.TrueBooleanValue = new(bool)
+			return d.ReadBool(schemas.SimpleScalarXmlPropertiesOutput_trueBooleanValue, v.TrueBooleanValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSimpleScalarXmlPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleScalarXmlProperties, nil, schemas.SimpleScalarXmlPropertiesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsEc2query_serializeOpSimpleScalarXmlProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SimpleScalarXmlProperties, nil, schemas.SimpleScalarXmlPropertiesOutput), output: &SimpleScalarXmlPropertiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpSimpleScalarXmlProperties{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SimpleScalarXmlProperties"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSimpleScalarXmlProperties(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -138,22 +178,8 @@ func (c *Client) addOperationSimpleScalarXmlPropertiesMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSimpleScalarXmlProperties(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SimpleScalarXmlProperties",
-	}
 }

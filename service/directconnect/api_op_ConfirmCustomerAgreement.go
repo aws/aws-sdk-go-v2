@@ -4,10 +4,9 @@ package directconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	The confirmation of the terms of agreement when creating the connection/link
@@ -36,6 +35,18 @@ type ConfirmCustomerAgreementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmCustomerAgreementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmCustomerAgreementRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmCustomerAgreementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementName != nil {
+		s.WriteString(schemas.ConfirmCustomerAgreementRequest_agreementName, *v.AgreementName)
+	}
+}
+
 type ConfirmCustomerAgreementOutput struct {
 
 	//  The status of the customer agreement when the connection was created. This
@@ -48,74 +59,45 @@ type ConfirmCustomerAgreementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConfirmCustomerAgreementOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConfirmCustomerAgreementResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConfirmCustomerAgreementOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != nil {
+		s.WriteString(schemas.ConfirmCustomerAgreementResponse_status, *v.Status)
+	}
+}
+func (v *ConfirmCustomerAgreementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConfirmCustomerAgreementResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConfirmCustomerAgreementResponse_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ConfirmCustomerAgreementResponse_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationConfirmCustomerAgreementMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmCustomerAgreement, schemas.ConfirmCustomerAgreementRequest, schemas.ConfirmCustomerAgreementResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpConfirmCustomerAgreement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ConfirmCustomerAgreement, schemas.ConfirmCustomerAgreementRequest, schemas.ConfirmCustomerAgreementResponse), output: &ConfirmCustomerAgreementOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpConfirmCustomerAgreement{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ConfirmCustomerAgreement"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmCustomerAgreement(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -130,22 +112,8 @@ func (c *Client) addOperationConfirmCustomerAgreementMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opConfirmCustomerAgreement(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ConfirmCustomerAgreement",
-	}
 }

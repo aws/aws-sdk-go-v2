@@ -1,0 +1,3 @@
+GET /v2/domains/__DomainIdentifier__/environment-blueprints?managed=true&maxResults=1&name=__Name__&nextToken=__NextToken__
+
+

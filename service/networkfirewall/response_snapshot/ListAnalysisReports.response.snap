@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: NetworkFirewall_20201112.ListAnalysisReports
+
+{"AnalysisReports":[{"AnalysisReportId":"__AnalysisReportId__","AnalysisType":"TLS_SNI","ReportTime":946684800,"Status":"__Status__"},{"AnalysisReportId":"__AnalysisReportId__","AnalysisType":"TLS_SNI","ReportTime":946684800,"Status":"__Status__"}],"NextToken":"__NextToken__"}

@@ -1,0 +1,18 @@
+PUT /__Key__?partNumber=1&uploadId=__UploadId__&x-id=UploadPartCopy
+
+X-Amz-Copy-Source: __CopySource__
+X-Amz-Copy-Source-If-Match: __CopySourceIfMatch__
+X-Amz-Copy-Source-If-Modified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Copy-Source-If-None-Match: __CopySourceIfNoneMatch__
+X-Amz-Copy-Source-If-Unmodified-Since: Sat, 01 Jan 2000 00:00:00 GMT
+X-Amz-Copy-Source-Range: __CopySourceRange__
+X-Amz-Copy-Source-Server-Side-Encryption-Customer-Algorithm: __CopySourceSSECustomerAlgorithm__
+X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key: __CopySourceSSECustomerKey__
+X-Amz-Copy-Source-Server-Side-Encryption-Customer-Key-Md5: __CopySourceSSECustomerKeyMD5__
+X-Amz-Expected-Bucket-Owner: __ExpectedBucketOwner__
+X-Amz-Request-Payer: requester
+X-Amz-Server-Side-Encryption-Customer-Algorithm: __SSECustomerAlgorithm__
+X-Amz-Server-Side-Encryption-Customer-Key: __SSECustomerKey__
+X-Amz-Server-Side-Encryption-Customer-Key-Md5: __SSECustomerKeyMD5__
+X-Amz-Source-Expected-Bucket-Owner: __ExpectedSourceBucketOwner__
+

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSMigrationHubMultiAccountService.DescribeHomeRegionControls
+
+{"ControlId":"__ControlId__","HomeRegion":"__HomeRegion__","MaxResults":1,"NextToken":"__NextToken__","Target":{"Id":"__Id__","Type":"ACCOUNT"}}

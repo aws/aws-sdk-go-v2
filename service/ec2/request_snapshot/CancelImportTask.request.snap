@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=CancelImportTask&CancelReason=__CancelReason__&DryRun=true&ImportTaskId=__ImportTaskId__&Version=2016-11-15

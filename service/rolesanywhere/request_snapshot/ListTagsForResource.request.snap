@@ -1,0 +1,3 @@
+GET /ListTagsForResource?resourceArn=__ResourceArn__
+
+

@@ -5,10 +5,10 @@ package chimesdkmessaging
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Calls back Amazon Chime SDK messaging with a processing response message. This
@@ -61,6 +61,29 @@ type ChannelFlowCallbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelFlowCallbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelFlowCallbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelFlowCallbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallbackId != nil {
+		s.WriteString(schemas.ChannelFlowCallbackRequest_CallbackId, *v.CallbackId)
+	}
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.ChannelFlowCallbackRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChannelMessage != nil {
+		s.WriteStruct(schemas.ChannelFlowCallbackRequest_ChannelMessage)
+		v.ChannelMessage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeleteResource != false {
+		s.WriteBool(schemas.ChannelFlowCallbackRequest_DeleteResource, v.DeleteResource)
+	}
+}
+
 type ChannelFlowCallbackOutput struct {
 
 	// The call back ID passed in the request.
@@ -75,65 +98,48 @@ type ChannelFlowCallbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChannelFlowCallbackOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChannelFlowCallbackResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChannelFlowCallbackOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallbackId != nil {
+		s.WriteString(schemas.ChannelFlowCallbackResponse_CallbackId, *v.CallbackId)
+	}
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.ChannelFlowCallbackResponse_ChannelArn, *v.ChannelArn)
+	}
+}
+func (v *ChannelFlowCallbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChannelFlowCallbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChannelFlowCallbackResponse_CallbackId:
+			v.CallbackId = new(string)
+			return d.ReadString(schemas.ChannelFlowCallbackResponse_CallbackId, v.CallbackId)
+		case schemas.ChannelFlowCallbackResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.ChannelFlowCallbackResponse_ChannelArn, v.ChannelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationChannelFlowCallbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChannelFlowCallback, schemas.ChannelFlowCallbackRequest, schemas.ChannelFlowCallbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpChannelFlowCallback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChannelFlowCallback, schemas.ChannelFlowCallbackRequest, schemas.ChannelFlowCallbackResponse), output: &ChannelFlowCallbackOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpChannelFlowCallback{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ChannelFlowCallback"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -143,12 +149,6 @@ func (c *Client) addOperationChannelFlowCallbackMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addOpChannelFlowCallbackValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opChannelFlowCallback(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +161,6 @@ func (c *Client) addOperationChannelFlowCallbackMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -206,12 +200,4 @@ func (m *idempotencyToken_initializeOpChannelFlowCallback) HandleInitialize(ctx 
 }
 func addIdempotencyToken_opChannelFlowCallbackMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpChannelFlowCallback{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opChannelFlowCallback(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ChannelFlowCallback",
-	}
 }

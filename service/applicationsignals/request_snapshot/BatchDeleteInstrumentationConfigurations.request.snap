@@ -1,0 +1,5 @@
+POST /batch-delete-instrumentation-configurations
+
+Content-Type: application/json
+
+{"DeletionTarget":{"Scope":{"Environment":"__Environment__","InstrumentationType":"BREAKPOINT","Service":"__Service__"}}}

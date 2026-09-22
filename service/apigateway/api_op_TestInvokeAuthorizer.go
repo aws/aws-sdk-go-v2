@@ -4,10 +4,9 @@ package apigateway
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/apigateway/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Simulate the execution of an Authorizer in your RestApi with headers,
@@ -66,6 +65,31 @@ type TestInvokeAuthorizerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestInvokeAuthorizerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestInvokeAuthorizerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestInvokeAuthorizerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerRequest_additionalContext, v.AdditionalContext)
+	if v.AuthorizerId != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerRequest_authorizerId, *v.AuthorizerId)
+	}
+	if v.Body != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerRequest_body, *v.Body)
+	}
+	serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerRequest_headers, v.Headers)
+	serializeMapOfStringToList(s, schemas.TestInvokeAuthorizerRequest_multiValueHeaders, v.MultiValueHeaders)
+	if v.PathWithQueryString != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerRequest_pathWithQueryString, *v.PathWithQueryString)
+	}
+	if v.RestApiId != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerRequest_restApiId, *v.RestApiId)
+	}
+	serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerRequest_stageVariables, v.StageVariables)
+}
+
 // Represents the response of the test invoke request for a custom Authorizer
 type TestInvokeAuthorizerOutput struct {
 
@@ -98,77 +122,76 @@ type TestInvokeAuthorizerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestInvokeAuthorizerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestInvokeAuthorizerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestInvokeAuthorizerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMapOfStringToList(s, schemas.TestInvokeAuthorizerResponse_authorization, v.Authorization)
+	serializeMapOfStringToString(s, schemas.TestInvokeAuthorizerResponse_claims, v.Claims)
+	if v.ClientStatus != 0 {
+		s.WriteInt32(schemas.TestInvokeAuthorizerResponse_clientStatus, v.ClientStatus)
+	}
+	if v.Latency != 0 {
+		s.WriteInt64(schemas.TestInvokeAuthorizerResponse_latency, v.Latency)
+	}
+	if v.Log != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerResponse_log, *v.Log)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerResponse_policy, *v.Policy)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.TestInvokeAuthorizerResponse_principalId, *v.PrincipalId)
+	}
+}
+func (v *TestInvokeAuthorizerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestInvokeAuthorizerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestInvokeAuthorizerResponse_authorization:
+			return deserializeMapOfStringToList(d, schemas.TestInvokeAuthorizerResponse_authorization, &v.Authorization)
+		case schemas.TestInvokeAuthorizerResponse_claims:
+			return deserializeMapOfStringToString(d, schemas.TestInvokeAuthorizerResponse_claims, &v.Claims)
+		case schemas.TestInvokeAuthorizerResponse_clientStatus:
+			return d.ReadInt32(schemas.TestInvokeAuthorizerResponse_clientStatus, &v.ClientStatus)
+		case schemas.TestInvokeAuthorizerResponse_latency:
+			return d.ReadInt64(schemas.TestInvokeAuthorizerResponse_latency, &v.Latency)
+		case schemas.TestInvokeAuthorizerResponse_log:
+			v.Log = new(string)
+			return d.ReadString(schemas.TestInvokeAuthorizerResponse_log, v.Log)
+		case schemas.TestInvokeAuthorizerResponse_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.TestInvokeAuthorizerResponse_policy, v.Policy)
+		case schemas.TestInvokeAuthorizerResponse_principalId:
+			v.PrincipalId = new(string)
+			return d.ReadString(schemas.TestInvokeAuthorizerResponse_principalId, v.PrincipalId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestInvokeAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestInvokeAuthorizer, schemas.TestInvokeAuthorizerRequest, schemas.TestInvokeAuthorizerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestInvokeAuthorizer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestInvokeAuthorizer, schemas.TestInvokeAuthorizerRequest, schemas.TestInvokeAuthorizerResponse), output: &TestInvokeAuthorizerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestInvokeAuthorizer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestInvokeAuthorizer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpTestInvokeAuthorizerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestInvokeAuthorizer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -186,22 +209,8 @@ func (c *Client) addOperationTestInvokeAuthorizerMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTestInvokeAuthorizer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TestInvokeAuthorizer",
-	}
 }

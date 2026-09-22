@@ -5,10 +5,10 @@ package signer
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/signer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a signing job to be performed on the code provided. Signing jobs are
@@ -83,6 +83,34 @@ type StartSigningJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSigningJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSigningJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSigningJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartSigningJobRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.StartSigningJobRequest_destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProfileName != nil {
+		s.WriteString(schemas.StartSigningJobRequest_profileName, *v.ProfileName)
+	}
+	if v.ProfileOwner != nil {
+		s.WriteString(schemas.StartSigningJobRequest_profileOwner, *v.ProfileOwner)
+	}
+	if v.Source != nil {
+		s.WriteStruct(schemas.StartSigningJobRequest_source)
+		v.Source.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartSigningJobOutput struct {
 
 	// The ID of your signing job.
@@ -97,65 +125,48 @@ type StartSigningJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSigningJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSigningJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSigningJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartSigningJobResponse_jobId, *v.JobId)
+	}
+	if v.JobOwner != nil {
+		s.WriteString(schemas.StartSigningJobResponse_jobOwner, *v.JobOwner)
+	}
+}
+func (v *StartSigningJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSigningJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSigningJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartSigningJobResponse_jobId, v.JobId)
+		case schemas.StartSigningJobResponse_jobOwner:
+			v.JobOwner = new(string)
+			return d.ReadString(schemas.StartSigningJobResponse_jobOwner, v.JobOwner)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSigningJob, schemas.StartSigningJobRequest, schemas.StartSigningJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSigningJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSigningJob, schemas.StartSigningJobRequest, schemas.StartSigningJobResponse), output: &StartSigningJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSigningJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSigningJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -165,12 +176,6 @@ func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addOpStartSigningJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSigningJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -183,12 +188,6 @@ func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -228,12 +227,4 @@ func (m *idempotencyToken_initializeOpStartSigningJob) HandleInitialize(ctx cont
 }
 func addIdempotencyToken_opStartSigningJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartSigningJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartSigningJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartSigningJob",
-	}
 }

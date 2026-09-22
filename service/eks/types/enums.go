@@ -190,6 +190,27 @@ func (AuthenticationMode) Values() []AuthenticationMode {
 	}
 }
 
+type CancellationStatus string
+
+// Enum values for CancellationStatus
+const (
+	CancellationStatusInProgress CancellationStatus = "InProgress"
+	CancellationStatusFailed     CancellationStatus = "Failed"
+	CancellationStatusSuccessful CancellationStatus = "Successful"
+)
+
+// Values returns all known values for CancellationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CancellationStatus) Values() []CancellationStatus {
+	return []CancellationStatus{
+		"InProgress",
+		"Failed",
+		"Successful",
+	}
+}
+
 type CapabilityDeletePropagationPolicy string
 
 // Enum values for CapabilityDeletePropagationPolicy
@@ -302,8 +323,9 @@ type Category string
 
 // Enum values for Category
 const (
-	CategoryUpgradeReadiness Category = "UPGRADE_READINESS"
-	CategoryMisconfiguration Category = "MISCONFIGURATION"
+	CategoryUpgradeReadiness  Category = "UPGRADE_READINESS"
+	CategoryMisconfiguration  Category = "MISCONFIGURATION"
+	CategoryRollbackReadiness Category = "ROLLBACK_READINESS"
 )
 
 // Values returns all known values for Category. Note that this can be expanded in
@@ -314,6 +336,93 @@ func (Category) Values() []Category {
 	return []Category{
 		"UPGRADE_READINESS",
 		"MISCONFIGURATION",
+		"ROLLBACK_READINESS",
+	}
+}
+
+type CertificateAuthorityActivatedBy string
+
+// Enum values for CertificateAuthorityActivatedBy
+const (
+	CertificateAuthorityActivatedByEks      CertificateAuthorityActivatedBy = "EKS"
+	CertificateAuthorityActivatedByCustomer CertificateAuthorityActivatedBy = "CUSTOMER"
+)
+
+// Values returns all known values for CertificateAuthorityActivatedBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthorityActivatedBy) Values() []CertificateAuthorityActivatedBy {
+	return []CertificateAuthorityActivatedBy{
+		"EKS",
+		"CUSTOMER",
+	}
+}
+
+type CertificateAuthorityCreatedBy string
+
+// Enum values for CertificateAuthorityCreatedBy
+const (
+	CertificateAuthorityCreatedByEks      CertificateAuthorityCreatedBy = "EKS"
+	CertificateAuthorityCreatedByCustomer CertificateAuthorityCreatedBy = "CUSTOMER"
+)
+
+// Values returns all known values for CertificateAuthorityCreatedBy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthorityCreatedBy) Values() []CertificateAuthorityCreatedBy {
+	return []CertificateAuthorityCreatedBy{
+		"EKS",
+		"CUSTOMER",
+	}
+}
+
+type CertificateAuthorityDistributionStatus string
+
+// Enum values for CertificateAuthorityDistributionStatus
+const (
+	CertificateAuthorityDistributionStatusInProgress CertificateAuthorityDistributionStatus = "IN_PROGRESS"
+	CertificateAuthorityDistributionStatusComplete   CertificateAuthorityDistributionStatus = "COMPLETE"
+	CertificateAuthorityDistributionStatusFailed     CertificateAuthorityDistributionStatus = "FAILED"
+	CertificateAuthorityDistributionStatusDeleting   CertificateAuthorityDistributionStatus = "DELETING"
+)
+
+// Values returns all known values for CertificateAuthorityDistributionStatus.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthorityDistributionStatus) Values() []CertificateAuthorityDistributionStatus {
+	return []CertificateAuthorityDistributionStatus{
+		"IN_PROGRESS",
+		"COMPLETE",
+		"FAILED",
+		"DELETING",
+	}
+}
+
+type CertificateAuthoritySigningStatus string
+
+// Enum values for CertificateAuthoritySigningStatus
+const (
+	CertificateAuthoritySigningStatusNotUsed    CertificateAuthoritySigningStatus = "NOT_USED"
+	CertificateAuthoritySigningStatusActivating CertificateAuthoritySigningStatus = "ACTIVATING"
+	CertificateAuthoritySigningStatusInUse      CertificateAuthoritySigningStatus = "IN_USE"
+)
+
+// Values returns all known values for CertificateAuthoritySigningStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateAuthoritySigningStatus) Values() []CertificateAuthoritySigningStatus {
+	return []CertificateAuthoritySigningStatus{
+		"NOT_USED",
+		"ACTIVATING",
+		"IN_USE",
 	}
 }
 
@@ -469,6 +578,27 @@ func (ConnectorConfigProvider) Values() []ConnectorConfigProvider {
 		"RANCHER",
 		"EC2",
 		"OTHER",
+	}
+}
+
+type ControlPlaneEgressModeType string
+
+// Enum values for ControlPlaneEgressModeType
+const (
+	ControlPlaneEgressModeTypeAwsManaged       ControlPlaneEgressModeType = "AWS_MANAGED"
+	ControlPlaneEgressModeTypeCustomerRouted   ControlPlaneEgressModeType = "CUSTOMER_ROUTED"
+	ControlPlaneEgressModeTypeCustomerIsolated ControlPlaneEgressModeType = "CUSTOMER_ISOLATED"
+)
+
+// Values returns all known values for ControlPlaneEgressModeType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ControlPlaneEgressModeType) Values() []ControlPlaneEgressModeType {
+	return []ControlPlaneEgressModeType{
+		"AWS_MANAGED",
+		"CUSTOMER_ROUTED",
+		"CUSTOMER_ISOLATED",
 	}
 }
 
@@ -923,6 +1053,44 @@ func (ResolveConflicts) Values() []ResolveConflicts {
 	}
 }
 
+type ScoringStrategyType string
+
+// Enum values for ScoringStrategyType
+const (
+	ScoringStrategyTypeLeastAllocated ScoringStrategyType = "LeastAllocated"
+	ScoringStrategyTypeMostAllocated  ScoringStrategyType = "MostAllocated"
+)
+
+// Values returns all known values for ScoringStrategyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScoringStrategyType) Values() []ScoringStrategyType {
+	return []ScoringStrategyType{
+		"LeastAllocated",
+		"MostAllocated",
+	}
+}
+
+type SpreadLevel string
+
+// Enum values for SpreadLevel
+const (
+	SpreadLevelHost SpreadLevel = "host"
+	SpreadLevelRack SpreadLevel = "rack"
+)
+
+// Values returns all known values for SpreadLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpreadLevel) Values() []SpreadLevel {
+	return []SpreadLevel{
+		"host",
+		"rack",
+	}
+}
+
 type SsoIdentityType string
 
 // Enum values for SsoIdentityType
@@ -1024,6 +1192,10 @@ const (
 	UpdateParamTypeRemoteNetworkConfig              UpdateParamType = "RemoteNetworkConfig"
 	UpdateParamTypeDeletionProtection               UpdateParamType = "DeletionProtection"
 	UpdateParamTypeNodeRepairConfig                 UpdateParamType = "NodeRepairConfig"
+	UpdateParamTypeRoleArn                          UpdateParamType = "RoleArn"
+	UpdateParamTypeRoleMappingsToAddOrUpdate        UpdateParamType = "RoleMappingsToAddOrUpdate"
+	UpdateParamTypeRoleMappingsToRemove             UpdateParamType = "RoleMappingsToRemove"
+	UpdateParamTypeNetworkAccess                    UpdateParamType = "NetworkAccess"
 	UpdateParamTypeVendedLogs                       UpdateParamType = "VendedLogs"
 	UpdateParamTypeUpdatedTier                      UpdateParamType = "UpdatedTier"
 	UpdateParamTypePreviousTier                     UpdateParamType = "PreviousTier"
@@ -1032,6 +1204,14 @@ const (
 	UpdateParamTypeWarmPoolMinSize                  UpdateParamType = "WarmPoolMinSize"
 	UpdateParamTypeWarmPoolState                    UpdateParamType = "WarmPoolState"
 	UpdateParamTypeWarmPoolReuseOnScaleIn           UpdateParamType = "WarmPoolReuseOnScaleIn"
+	UpdateParamTypeControlPlaneEgressMode           UpdateParamType = "ControlPlaneEgressMode"
+	UpdateParamTypeKubeApiServerConfig              UpdateParamType = "KubeApiServerConfig"
+	UpdateParamTypeKubeSchedulerConfig              UpdateParamType = "KubeSchedulerConfig"
+	UpdateParamTypeKubeControllerManagerConfig      UpdateParamType = "KubeControllerManagerConfig"
+	UpdateParamTypeActiveCertificateAuthority       UpdateParamType = "ActiveCertificateAuthority"
+	UpdateParamTypeTrustedCertificateAuthorities    UpdateParamType = "TrustedCertificateAuthorities"
+	UpdateParamTypeCertificateAuthorityId           UpdateParamType = "CertificateAuthorityId"
+	UpdateParamTypeSigningStatus                    UpdateParamType = "SigningStatus"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -1078,6 +1258,10 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"RemoteNetworkConfig",
 		"DeletionProtection",
 		"NodeRepairConfig",
+		"RoleArn",
+		"RoleMappingsToAddOrUpdate",
+		"RoleMappingsToRemove",
+		"NetworkAccess",
 		"VendedLogs",
 		"UpdatedTier",
 		"PreviousTier",
@@ -1086,6 +1270,14 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"WarmPoolMinSize",
 		"WarmPoolState",
 		"WarmPoolReuseOnScaleIn",
+		"ControlPlaneEgressMode",
+		"KubeApiServerConfig",
+		"KubeSchedulerConfig",
+		"KubeControllerManagerConfig",
+		"ActiveCertificateAuthority",
+		"TrustedCertificateAuthorities",
+		"CertificateAuthorityId",
+		"SigningStatus",
 	}
 }
 
@@ -1131,8 +1323,13 @@ const (
 	UpdateTypeAutoModeUpdate                     UpdateType = "AutoModeUpdate"
 	UpdateTypeRemoteNetworkConfigUpdate          UpdateType = "RemoteNetworkConfigUpdate"
 	UpdateTypeDeletionProtectionUpdate           UpdateType = "DeletionProtectionUpdate"
+	UpdateTypeCapabilityUpdate                   UpdateType = "CapabilityUpdate"
 	UpdateTypeControlPlaneScalingConfigUpdate    UpdateType = "ControlPlaneScalingConfigUpdate"
 	UpdateTypeVendedLogsUpdate                   UpdateType = "VendedLogsUpdate"
+	UpdateTypeControlPlaneEgressUpdate           UpdateType = "ControlPlaneEgressUpdate"
+	UpdateTypeVersionRollback                    UpdateType = "VersionRollback"
+	UpdateTypeControlPlaneComponentConfigUpdate  UpdateType = "ControlPlaneComponentConfigUpdate"
+	UpdateTypeCertificateAuthorityUpdate         UpdateType = "CertificateAuthorityUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -1156,8 +1353,13 @@ func (UpdateType) Values() []UpdateType {
 		"AutoModeUpdate",
 		"RemoteNetworkConfigUpdate",
 		"DeletionProtectionUpdate",
+		"CapabilityUpdate",
 		"ControlPlaneScalingConfigUpdate",
 		"VendedLogsUpdate",
+		"ControlPlaneEgressUpdate",
+		"VersionRollback",
+		"ControlPlaneComponentConfigUpdate",
+		"CertificateAuthorityUpdate",
 	}
 }
 

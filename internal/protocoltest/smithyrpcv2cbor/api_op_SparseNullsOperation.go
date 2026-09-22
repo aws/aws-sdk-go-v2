@@ -4,10 +4,9 @@ package smithyrpcv2cbor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 func (c *Client) SparseNullsOperation(ctx context.Context, params *SparseNullsOperationInput, optFns ...func(*Options)) (*SparseNullsOperationOutput, error) {
@@ -33,6 +32,28 @@ type SparseNullsOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SparseNullsOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SparseNullsOperationInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SparseNullsOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSparseStringList(s, schemas.SparseNullsOperationInputOutput_sparseStringList, v.SparseStringList)
+	serializeSparseStringMap(s, schemas.SparseNullsOperationInputOutput_sparseStringMap, v.SparseStringMap)
+}
+func (v *SparseNullsOperationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SparseNullsOperationInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SparseNullsOperationInputOutput_sparseStringList:
+			return deserializeSparseStringList(d, schemas.SparseNullsOperationInputOutput_sparseStringList, &v.SparseStringList)
+		case schemas.SparseNullsOperationInputOutput_sparseStringMap:
+			return deserializeSparseStringMap(d, schemas.SparseNullsOperationInputOutput_sparseStringMap, &v.SparseStringMap)
+		}
+		return nil
+	})
+}
+
 type SparseNullsOperationOutput struct {
 	SparseStringList []*string
 
@@ -44,71 +65,42 @@ type SparseNullsOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SparseNullsOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SparseNullsOperationInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SparseNullsOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSparseStringList(s, schemas.SparseNullsOperationInputOutput_sparseStringList, v.SparseStringList)
+	serializeSparseStringMap(s, schemas.SparseNullsOperationInputOutput_sparseStringMap, v.SparseStringMap)
+}
+func (v *SparseNullsOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SparseNullsOperationInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SparseNullsOperationInputOutput_sparseStringList:
+			return deserializeSparseStringList(d, schemas.SparseNullsOperationInputOutput_sparseStringList, &v.SparseStringList)
+		case schemas.SparseNullsOperationInputOutput_sparseStringMap:
+			return deserializeSparseStringMap(d, schemas.SparseNullsOperationInputOutput_sparseStringMap, &v.SparseStringMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSparseNullsOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SparseNullsOperation, schemas.SparseNullsOperationInputOutput, schemas.SparseNullsOperationInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpSparseNullsOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SparseNullsOperation, schemas.SparseNullsOperationInputOutput, schemas.SparseNullsOperationInputOutput), output: &SparseNullsOperationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpSparseNullsOperation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SparseNullsOperation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSparseNullsOperation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -123,22 +115,8 @@ func (c *Client) addOperationSparseNullsOperationMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSparseNullsOperation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SparseNullsOperation",
-	}
 }

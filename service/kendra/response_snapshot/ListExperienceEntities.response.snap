@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.ListExperienceEntities
+
+{"NextToken":"__NextToken__","SummaryItems":[{"DisplayData":{"FirstName":"__FirstName__","GroupName":"__GroupName__","IdentifiedUserName":"__IdentifiedUserName__","LastName":"__LastName__","UserName":"__UserName__"},"EntityId":"__EntityId__","EntityType":"USER"},{"DisplayData":{"FirstName":"__FirstName__","GroupName":"__GroupName__","IdentifiedUserName":"__IdentifiedUserName__","LastName":"__LastName__","UserName":"__UserName__"},"EntityId":"__EntityId__","EntityType":"USER"}]}

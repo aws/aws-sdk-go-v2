@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: OpenSearchServerless.CreateCollection
+
+{"createCollectionDetail":{"arn":"__Arn__","collectionGroupName":"__CollectionGroupName__","createdDate":1,"deletionProtection":"ENABLED","description":"__Description__","id":"__Id__","kmsKeyArn":"__KmsKeyArn__","lastModifiedDate":1,"name":"__Name__","standbyReplicas":"ENABLED","status":"CREATING","type":"SEARCH","vectorOptions":{"ServerlessVectorAcceleration":"ENABLED"}}}

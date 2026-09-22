@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides summary information about the Amazon Web Services resource
@@ -54,6 +54,30 @@ type ListIntegrationAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListIntegrationAssociationsRequest_InstanceId, *v.InstanceId)
+	}
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.ListIntegrationAssociationsRequest_IntegrationArn, *v.IntegrationArn)
+	}
+	if v.IntegrationType != "" {
+		s.WriteString(schemas.ListIntegrationAssociationsRequest_IntegrationType, string(v.IntegrationType))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIntegrationAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntegrationAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListIntegrationAssociationsOutput struct {
 
 	// The associations.
@@ -68,77 +92,51 @@ type ListIntegrationAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIntegrationAssociationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIntegrationAssociationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIntegrationAssociationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIntegrationAssociationSummaryList(s, schemas.ListIntegrationAssociationsResponse_IntegrationAssociationSummaryList, v.IntegrationAssociationSummaryList)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIntegrationAssociationsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListIntegrationAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIntegrationAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIntegrationAssociationsResponse_IntegrationAssociationSummaryList:
+			return deserializeIntegrationAssociationSummaryList(d, schemas.ListIntegrationAssociationsResponse_IntegrationAssociationSummaryList, &v.IntegrationAssociationSummaryList)
+		case schemas.ListIntegrationAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIntegrationAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIntegrationAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrationAssociations, schemas.ListIntegrationAssociationsRequest, schemas.ListIntegrationAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIntegrationAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIntegrationAssociations, schemas.ListIntegrationAssociationsRequest, schemas.ListIntegrationAssociationsResponse), output: &ListIntegrationAssociationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIntegrationAssociations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIntegrationAssociations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListIntegrationAssociationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIntegrationAssociations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,12 +149,6 @@ func (c *Client) addOperationListIntegrationAssociationsMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +252,3 @@ type ListIntegrationAssociationsAPIClient interface {
 }
 
 var _ ListIntegrationAssociationsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListIntegrationAssociations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListIntegrationAssociations",
-	}
-}

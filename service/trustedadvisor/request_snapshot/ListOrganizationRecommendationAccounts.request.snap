@@ -1,0 +1,3 @@
+GET /v1/organization-recommendations/__OrganizationRecommendationIdentifier__/accounts?affectedAccountId=__AffectedAccountId__&maxResults=1&nextToken=__NextToken__
+
+

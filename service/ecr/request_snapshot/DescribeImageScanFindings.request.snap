@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonEC2ContainerRegistry_V20150921.DescribeImageScanFindings
+
+{"imageId":{"imageDigest":"__ImageDigest__","imageTag":"__ImageTag__"},"maxResults":1,"nextToken":"__NextToken__","registryId":"__RegistryId__","repositoryName":"__RepositoryName__"}

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/greengrass/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,30 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeErrorDetails(s, schemas.BadRequestException_ErrorDetails, v.ErrorDetails)
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequestException_Message, *v.Message)
+	}
+}
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_ErrorDetails:
+			return deserializeErrorDetails(d, schemas.BadRequestException_ErrorDetails, &v.ErrorDetails)
+		case schemas.BadRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // General error information.
 type InternalServerErrorException struct {
@@ -62,3 +87,27 @@ func (e *InternalServerErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeErrorDetails(s, schemas.InternalServerErrorException_ErrorDetails, v.ErrorDetails)
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerErrorException_Message, *v.Message)
+	}
+}
+func (v *InternalServerErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerErrorException_ErrorDetails:
+			return deserializeErrorDetails(d, schemas.InternalServerErrorException_ErrorDetails, &v.ErrorDetails)
+		case schemas.InternalServerErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerErrorException_Message, v.Message)
+		}
+		return nil
+	})
+}

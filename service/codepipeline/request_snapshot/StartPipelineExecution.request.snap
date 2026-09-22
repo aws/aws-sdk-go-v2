@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodePipeline_20150709.StartPipelineExecution
+
+{"clientRequestToken":"__ClientRequestToken__","name":"__Name__","sourceRevisions":[{"actionName":"__ActionName__","revisionType":"COMMIT_ID","revisionValue":"__RevisionValue__"},{"actionName":"__ActionName__","revisionType":"COMMIT_ID","revisionValue":"__RevisionValue__"}],"variables":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}]}

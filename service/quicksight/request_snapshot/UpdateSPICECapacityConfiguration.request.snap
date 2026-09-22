@@ -1,0 +1,5 @@
+POST /accounts/__AwsAccountId__/spice-capacity-configuration
+
+Content-Type: application/json
+
+{"PurchaseMode":"MANUAL"}

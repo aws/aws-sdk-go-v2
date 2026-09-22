@@ -44,6 +44,11 @@ type Options struct {
 	// clients initial default settings.
 	DefaultsMode aws.DefaultsMode
 
+	// Disables SDK clock skew correction. When set, the SDK will not adjust request
+	// signing timestamps to compensate for clock drift between the client and the
+	// service.
+	DisableClockSkewCorrection bool
+
 	// The endpoint options to be used when attempting to resolve an endpoint.
 	EndpointOptions EndpointResolverOptions
 
@@ -63,6 +68,10 @@ type Options struct {
 
 	// Signature Version 4 (SigV4) Signer
 	HTTPSignerV4 HTTPSignerV4
+
+	// Provides idempotency tokens values that will be automatically populated into
+	// idempotent API operations.
+	IdempotencyTokenProvider IdempotencyTokenProvider
 
 	// The logger writer interface to write logging messages to.
 	Logger logging.Logger
@@ -104,6 +113,9 @@ type Options struct {
 	// within your applications.
 	RuntimeEnvironment aws.RuntimeEnvironment
 
+	// The service type: ACM or ACM-ACME. Injected via @staticContextParams.
+	ServiceType *string
+
 	// The client tracer provider.
 	TracerProvider tracing.TracerProvider
 
@@ -113,6 +125,8 @@ type Options struct {
 	//
 	// Currently does not support per operation call overrides, may in the future.
 	resolvedDefaultsMode aws.DefaultsMode
+
+	Protocol smithyhttp.ClientProtocol
 
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
 	// implementation if nil.

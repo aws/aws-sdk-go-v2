@@ -4,11 +4,10 @@ package sagemaker
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -38,6 +37,18 @@ type DescribeHumanTaskUiInput struct {
 	HumanTaskUiName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeHumanTaskUiInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHumanTaskUiRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHumanTaskUiInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HumanTaskUiName != nil {
+		s.WriteString(schemas.DescribeHumanTaskUiRequest_HumanTaskUiName, *v.HumanTaskUiName)
+	}
 }
 
 type DescribeHumanTaskUiOutput struct {
@@ -73,77 +84,78 @@ type DescribeHumanTaskUiOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeHumanTaskUiOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeHumanTaskUiResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeHumanTaskUiOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeHumanTaskUiResponse_CreationTime, *v.CreationTime)
+	}
+	if v.HumanTaskUiArn != nil {
+		s.WriteString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiArn, *v.HumanTaskUiArn)
+	}
+	if v.HumanTaskUiName != nil {
+		s.WriteString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiName, *v.HumanTaskUiName)
+	}
+	if v.HumanTaskUiStatus != "" {
+		s.WriteString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiStatus, string(v.HumanTaskUiStatus))
+	}
+	if v.UiTemplate != nil {
+		s.WriteStruct(schemas.DescribeHumanTaskUiResponse_UiTemplate)
+		v.UiTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeHumanTaskUiOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeHumanTaskUiResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeHumanTaskUiResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeHumanTaskUiResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeHumanTaskUiResponse_HumanTaskUiArn:
+			v.HumanTaskUiArn = new(string)
+			return d.ReadString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiArn, v.HumanTaskUiArn)
+		case schemas.DescribeHumanTaskUiResponse_HumanTaskUiName:
+			v.HumanTaskUiName = new(string)
+			return d.ReadString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiName, v.HumanTaskUiName)
+		case schemas.DescribeHumanTaskUiResponse_HumanTaskUiStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeHumanTaskUiResponse_HumanTaskUiStatus, &ev); err != nil {
+				return err
+			}
+			v.HumanTaskUiStatus = types.HumanTaskUiStatus(ev)
+			return nil
+		case schemas.DescribeHumanTaskUiResponse_UiTemplate:
+			v.UiTemplate = &types.UiTemplateInfo{}
+			return v.UiTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHumanTaskUi, schemas.DescribeHumanTaskUiRequest, schemas.DescribeHumanTaskUiResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeHumanTaskUi{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeHumanTaskUi, schemas.DescribeHumanTaskUiRequest, schemas.DescribeHumanTaskUiResponse), output: &DescribeHumanTaskUiOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeHumanTaskUi{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeHumanTaskUi"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeHumanTaskUiValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHumanTaskUi(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,22 +170,8 @@ func (c *Client) addOperationDescribeHumanTaskUiMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeHumanTaskUi(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeHumanTaskUi",
-	}
 }

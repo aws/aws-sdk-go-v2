@@ -5,10 +5,10 @@ package fsx
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/fsx/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS volume.
@@ -51,6 +51,31 @@ type DeleteVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.DeleteVolumeRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.OntapConfiguration != nil {
+		s.WriteStruct(schemas.DeleteVolumeRequest_OntapConfiguration)
+		v.OntapConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OpenZFSConfiguration != nil {
+		s.WriteStruct(schemas.DeleteVolumeRequest_OpenZFSConfiguration)
+		v.OpenZFSConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.DeleteVolumeRequest_VolumeId, *v.VolumeId)
+	}
+}
+
 type DeleteVolumeOutput struct {
 
 	// The lifecycle state of the volume being deleted. If the DeleteVolume operation
@@ -69,65 +94,60 @@ type DeleteVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteVolumeOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteVolumeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteVolumeOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lifecycle != "" {
+		s.WriteString(schemas.DeleteVolumeResponse_Lifecycle, string(v.Lifecycle))
+	}
+	if v.OntapResponse != nil {
+		s.WriteStruct(schemas.DeleteVolumeResponse_OntapResponse)
+		v.OntapResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.DeleteVolumeResponse_VolumeId, *v.VolumeId)
+	}
+}
+func (v *DeleteVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteVolumeResponse_Lifecycle:
+			var ev string
+			if err := d.ReadString(schemas.DeleteVolumeResponse_Lifecycle, &ev); err != nil {
+				return err
+			}
+			v.Lifecycle = types.VolumeLifecycle(ev)
+			return nil
+		case schemas.DeleteVolumeResponse_OntapResponse:
+			v.OntapResponse = &types.DeleteVolumeOntapResponse{}
+			return v.OntapResponse.Deserialize(d)
+		case schemas.DeleteVolumeResponse_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.DeleteVolumeResponse_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVolume, schemas.DeleteVolumeRequest, schemas.DeleteVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteVolume, schemas.DeleteVolumeRequest, schemas.DeleteVolumeResponse), output: &DeleteVolumeOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteVolume{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteVolume"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -137,12 +157,6 @@ func (c *Client) addOperationDeleteVolumeMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addOpDeleteVolumeValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVolume(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,12 +169,6 @@ func (c *Client) addOperationDeleteVolumeMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -200,12 +208,4 @@ func (m *idempotencyToken_initializeOpDeleteVolume) HandleInitialize(ctx context
 }
 func addIdempotencyToken_opDeleteVolumeMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteVolume{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteVolume(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteVolume",
-	}
 }

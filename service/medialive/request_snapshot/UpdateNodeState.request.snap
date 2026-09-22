@@ -1,0 +1,5 @@
+PUT /prod/clusters/__ClusterId__/nodes/__NodeId__/state
+
+Content-Type: application/json
+
+{"state":"ACTIVE"}

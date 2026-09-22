@@ -4,10 +4,9 @@ package securityhub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityhub/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The aggregation Region is now called the home Region.
@@ -41,6 +40,18 @@ type GetFindingAggregatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingAggregatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingAggregatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingAggregatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingAggregatorArn != nil {
+		s.WriteString(schemas.GetFindingAggregatorRequest_FindingAggregatorArn, *v.FindingAggregatorArn)
+	}
+}
+
 type GetFindingAggregatorOutput struct {
 
 	// The home Region. Findings generated in linked Regions are replicated and sent
@@ -63,77 +74,63 @@ type GetFindingAggregatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFindingAggregatorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFindingAggregatorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFindingAggregatorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingAggregationRegion != nil {
+		s.WriteString(schemas.GetFindingAggregatorResponse_FindingAggregationRegion, *v.FindingAggregationRegion)
+	}
+	if v.FindingAggregatorArn != nil {
+		s.WriteString(schemas.GetFindingAggregatorResponse_FindingAggregatorArn, *v.FindingAggregatorArn)
+	}
+	if v.RegionLinkingMode != nil {
+		s.WriteString(schemas.GetFindingAggregatorResponse_RegionLinkingMode, *v.RegionLinkingMode)
+	}
+	serializeStringList(s, schemas.GetFindingAggregatorResponse_Regions, v.Regions)
+}
+func (v *GetFindingAggregatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFindingAggregatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFindingAggregatorResponse_FindingAggregationRegion:
+			v.FindingAggregationRegion = new(string)
+			return d.ReadString(schemas.GetFindingAggregatorResponse_FindingAggregationRegion, v.FindingAggregationRegion)
+		case schemas.GetFindingAggregatorResponse_FindingAggregatorArn:
+			v.FindingAggregatorArn = new(string)
+			return d.ReadString(schemas.GetFindingAggregatorResponse_FindingAggregatorArn, v.FindingAggregatorArn)
+		case schemas.GetFindingAggregatorResponse_RegionLinkingMode:
+			v.RegionLinkingMode = new(string)
+			return d.ReadString(schemas.GetFindingAggregatorResponse_RegionLinkingMode, v.RegionLinkingMode)
+		case schemas.GetFindingAggregatorResponse_Regions:
+			return deserializeStringList(d, schemas.GetFindingAggregatorResponse_Regions, &v.Regions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFindingAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingAggregator, schemas.GetFindingAggregatorRequest, schemas.GetFindingAggregatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFindingAggregator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFindingAggregator, schemas.GetFindingAggregatorRequest, schemas.GetFindingAggregatorResponse), output: &GetFindingAggregatorOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFindingAggregator{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFindingAggregator"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFindingAggregatorValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFindingAggregator(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +145,8 @@ func (c *Client) addOperationGetFindingAggregatorMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFindingAggregator(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFindingAggregator",
-	}
 }

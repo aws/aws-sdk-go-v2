@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.PostCommentForPullRequest
+
+{"afterCommitId":"__AfterCommitId__","beforeCommitId":"__BeforeCommitId__","clientRequestToken":"__ClientRequestToken__","content":"__Content__","location":{"filePath":"__FilePath__","filePosition":1,"relativeFileVersion":"BEFORE"},"pullRequestId":"__PullRequestId__","repositoryName":"__RepositoryName__"}

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,6 +26,34 @@ type BranchDiffSourceCodeType struct {
 	SourceBranchName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BranchDiffSourceCodeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BranchDiffSourceCodeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BranchDiffSourceCodeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationBranchName != nil {
+		s.WriteString(schemas.BranchDiffSourceCodeType_DestinationBranchName, *v.DestinationBranchName)
+	}
+	if v.SourceBranchName != nil {
+		s.WriteString(schemas.BranchDiffSourceCodeType_SourceBranchName, *v.SourceBranchName)
+	}
+}
+func (v *BranchDiffSourceCodeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BranchDiffSourceCodeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BranchDiffSourceCodeType_DestinationBranchName:
+			v.DestinationBranchName = new(string)
+			return d.ReadString(schemas.BranchDiffSourceCodeType_DestinationBranchName, v.DestinationBranchName)
+		case schemas.BranchDiffSourceCodeType_SourceBranchName:
+			v.SourceBranchName = new(string)
+			return d.ReadString(schemas.BranchDiffSourceCodeType_SourceBranchName, v.SourceBranchName)
+		}
+		return nil
+	})
 }
 
 // Code artifacts are source code artifacts and build artifacts used in a
@@ -51,6 +81,34 @@ type CodeArtifacts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CodeArtifacts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeArtifacts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeArtifacts) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BuildArtifactsObjectKey != nil {
+		s.WriteString(schemas.CodeArtifacts_BuildArtifactsObjectKey, *v.BuildArtifactsObjectKey)
+	}
+	if v.SourceCodeArtifactsObjectKey != nil {
+		s.WriteString(schemas.CodeArtifacts_SourceCodeArtifactsObjectKey, *v.SourceCodeArtifactsObjectKey)
+	}
+}
+func (v *CodeArtifacts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeArtifacts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeArtifacts_BuildArtifactsObjectKey:
+			v.BuildArtifactsObjectKey = new(string)
+			return d.ReadString(schemas.CodeArtifacts_BuildArtifactsObjectKey, v.BuildArtifactsObjectKey)
+		case schemas.CodeArtifacts_SourceCodeArtifactsObjectKey:
+			v.SourceCodeArtifactsObjectKey = new(string)
+			return d.ReadString(schemas.CodeArtifacts_SourceCodeArtifactsObjectKey, v.SourceCodeArtifactsObjectKey)
+		}
+		return nil
+	})
+}
+
 // Information about an Amazon Web Services CodeCommit repository. The CodeCommit
 // repository must be in the same Amazon Web Services Region and Amazon Web
 // Services account where its CodeGuru Reviewer code reviews are configured.
@@ -65,6 +123,28 @@ type CodeCommitRepository struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CodeCommitRepository) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeCommitRepository)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeCommitRepository) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CodeCommitRepository_Name, *v.Name)
+	}
+}
+func (v *CodeCommitRepository) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeCommitRepository, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeCommitRepository_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CodeCommitRepository_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Information about a code review. A code review belongs to the associated
@@ -145,6 +225,135 @@ type CodeReview struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CodeReview) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeReview)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeReview) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisTypes(s, schemas.CodeReview_AnalysisTypes, v.AnalysisTypes)
+	if v.AssociationArn != nil {
+		s.WriteString(schemas.CodeReview_AssociationArn, *v.AssociationArn)
+	}
+	if v.CodeReviewArn != nil {
+		s.WriteString(schemas.CodeReview_CodeReviewArn, *v.CodeReviewArn)
+	}
+	if v.ConfigFileState != "" {
+		s.WriteString(schemas.CodeReview_ConfigFileState, string(v.ConfigFileState))
+	}
+	if v.CreatedTimeStamp != nil {
+		s.WriteTime(schemas.CodeReview_CreatedTimeStamp, *v.CreatedTimeStamp)
+	}
+	if v.LastUpdatedTimeStamp != nil {
+		s.WriteTime(schemas.CodeReview_LastUpdatedTimeStamp, *v.LastUpdatedTimeStamp)
+	}
+	if v.Metrics != nil {
+		s.WriteStruct(schemas.CodeReview_Metrics)
+		v.Metrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CodeReview_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.CodeReview_Owner, *v.Owner)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.CodeReview_ProviderType, string(v.ProviderType))
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.CodeReview_PullRequestId, *v.PullRequestId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CodeReview_RepositoryName, *v.RepositoryName)
+	}
+	if v.SourceCodeType != nil {
+		s.WriteStruct(schemas.CodeReview_SourceCodeType)
+		v.SourceCodeType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CodeReview_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.CodeReview_StateReason, *v.StateReason)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CodeReview_Type, string(v.Type))
+	}
+}
+func (v *CodeReview) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeReview, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeReview_AnalysisTypes:
+			return deserializeAnalysisTypes(d, schemas.CodeReview_AnalysisTypes, &v.AnalysisTypes)
+		case schemas.CodeReview_AssociationArn:
+			v.AssociationArn = new(string)
+			return d.ReadString(schemas.CodeReview_AssociationArn, v.AssociationArn)
+		case schemas.CodeReview_CodeReviewArn:
+			v.CodeReviewArn = new(string)
+			return d.ReadString(schemas.CodeReview_CodeReviewArn, v.CodeReviewArn)
+		case schemas.CodeReview_ConfigFileState:
+			var ev string
+			if err := d.ReadString(schemas.CodeReview_ConfigFileState, &ev); err != nil {
+				return err
+			}
+			v.ConfigFileState = ConfigFileState(ev)
+			return nil
+		case schemas.CodeReview_CreatedTimeStamp:
+			v.CreatedTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.CodeReview_CreatedTimeStamp, v.CreatedTimeStamp)
+		case schemas.CodeReview_LastUpdatedTimeStamp:
+			v.LastUpdatedTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.CodeReview_LastUpdatedTimeStamp, v.LastUpdatedTimeStamp)
+		case schemas.CodeReview_Metrics:
+			v.Metrics = &Metrics{}
+			return v.Metrics.Deserialize(d)
+		case schemas.CodeReview_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CodeReview_Name, v.Name)
+		case schemas.CodeReview_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.CodeReview_Owner, v.Owner)
+		case schemas.CodeReview_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.CodeReview_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.CodeReview_PullRequestId:
+			v.PullRequestId = new(string)
+			return d.ReadString(schemas.CodeReview_PullRequestId, v.PullRequestId)
+		case schemas.CodeReview_RepositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.CodeReview_RepositoryName, v.RepositoryName)
+		case schemas.CodeReview_SourceCodeType:
+			v.SourceCodeType = &SourceCodeType{}
+			return v.SourceCodeType.Deserialize(d)
+		case schemas.CodeReview_State:
+			var ev string
+			if err := d.ReadString(schemas.CodeReview_State, &ev); err != nil {
+				return err
+			}
+			v.State = JobState(ev)
+			return nil
+		case schemas.CodeReview_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.CodeReview_StateReason, v.StateReason)
+		case schemas.CodeReview_Type:
+			var ev string
+			if err := d.ReadString(schemas.CodeReview_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about the summary of the code review.
 type CodeReviewSummary struct {
 
@@ -204,6 +413,110 @@ type CodeReviewSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CodeReviewSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeReviewSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeReviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReviewArn != nil {
+		s.WriteString(schemas.CodeReviewSummary_CodeReviewArn, *v.CodeReviewArn)
+	}
+	if v.CreatedTimeStamp != nil {
+		s.WriteTime(schemas.CodeReviewSummary_CreatedTimeStamp, *v.CreatedTimeStamp)
+	}
+	if v.LastUpdatedTimeStamp != nil {
+		s.WriteTime(schemas.CodeReviewSummary_LastUpdatedTimeStamp, *v.LastUpdatedTimeStamp)
+	}
+	if v.MetricsSummary != nil {
+		s.WriteStruct(schemas.CodeReviewSummary_MetricsSummary)
+		v.MetricsSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CodeReviewSummary_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.CodeReviewSummary_Owner, *v.Owner)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.CodeReviewSummary_ProviderType, string(v.ProviderType))
+	}
+	if v.PullRequestId != nil {
+		s.WriteString(schemas.CodeReviewSummary_PullRequestId, *v.PullRequestId)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.CodeReviewSummary_RepositoryName, *v.RepositoryName)
+	}
+	if v.SourceCodeType != nil {
+		s.WriteStruct(schemas.CodeReviewSummary_SourceCodeType)
+		v.SourceCodeType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CodeReviewSummary_State, string(v.State))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CodeReviewSummary_Type, string(v.Type))
+	}
+}
+func (v *CodeReviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeReviewSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeReviewSummary_CodeReviewArn:
+			v.CodeReviewArn = new(string)
+			return d.ReadString(schemas.CodeReviewSummary_CodeReviewArn, v.CodeReviewArn)
+		case schemas.CodeReviewSummary_CreatedTimeStamp:
+			v.CreatedTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.CodeReviewSummary_CreatedTimeStamp, v.CreatedTimeStamp)
+		case schemas.CodeReviewSummary_LastUpdatedTimeStamp:
+			v.LastUpdatedTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.CodeReviewSummary_LastUpdatedTimeStamp, v.LastUpdatedTimeStamp)
+		case schemas.CodeReviewSummary_MetricsSummary:
+			v.MetricsSummary = &MetricsSummary{}
+			return v.MetricsSummary.Deserialize(d)
+		case schemas.CodeReviewSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CodeReviewSummary_Name, v.Name)
+		case schemas.CodeReviewSummary_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.CodeReviewSummary_Owner, v.Owner)
+		case schemas.CodeReviewSummary_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.CodeReviewSummary_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.CodeReviewSummary_PullRequestId:
+			v.PullRequestId = new(string)
+			return d.ReadString(schemas.CodeReviewSummary_PullRequestId, v.PullRequestId)
+		case schemas.CodeReviewSummary_RepositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.CodeReviewSummary_RepositoryName, v.RepositoryName)
+		case schemas.CodeReviewSummary_SourceCodeType:
+			v.SourceCodeType = &SourceCodeType{}
+			return v.SourceCodeType.Deserialize(d)
+		case schemas.CodeReviewSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.CodeReviewSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = JobState(ev)
+			return nil
+		case schemas.CodeReviewSummary_Type:
+			var ev string
+			if err := d.ReadString(schemas.CodeReviewSummary_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = Type(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The type of a code review. There are two code review types:
 //
 //   - PullRequest - A code review that is automatically triggered by a pull
@@ -231,6 +544,33 @@ type CodeReviewType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CodeReviewType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeReviewType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeReviewType) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnalysisTypes(s, schemas.CodeReviewType_AnalysisTypes, v.AnalysisTypes)
+	if v.RepositoryAnalysis != nil {
+		s.WriteStruct(schemas.CodeReviewType_RepositoryAnalysis)
+		v.RepositoryAnalysis.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CodeReviewType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeReviewType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeReviewType_AnalysisTypes:
+			return deserializeAnalysisTypes(d, schemas.CodeReviewType_AnalysisTypes, &v.AnalysisTypes)
+		case schemas.CodeReviewType_RepositoryAnalysis:
+			v.RepositoryAnalysis = &RepositoryAnalysis{}
+			return v.RepositoryAnalysis.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A type of [SourceCodeType] that specifies the commit diff for a pull request on an associated
 // repository. The SourceCommit and DestinationCommit fields are required to do a
 // pull request code review.
@@ -252,6 +592,40 @@ type CommitDiffSourceCodeType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CommitDiffSourceCodeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CommitDiffSourceCodeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CommitDiffSourceCodeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationCommit != nil {
+		s.WriteString(schemas.CommitDiffSourceCodeType_DestinationCommit, *v.DestinationCommit)
+	}
+	if v.MergeBaseCommit != nil {
+		s.WriteString(schemas.CommitDiffSourceCodeType_MergeBaseCommit, *v.MergeBaseCommit)
+	}
+	if v.SourceCommit != nil {
+		s.WriteString(schemas.CommitDiffSourceCodeType_SourceCommit, *v.SourceCommit)
+	}
+}
+func (v *CommitDiffSourceCodeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CommitDiffSourceCodeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CommitDiffSourceCodeType_DestinationCommit:
+			v.DestinationCommit = new(string)
+			return d.ReadString(schemas.CommitDiffSourceCodeType_DestinationCommit, v.DestinationCommit)
+		case schemas.CommitDiffSourceCodeType_MergeBaseCommit:
+			v.MergeBaseCommit = new(string)
+			return d.ReadString(schemas.CommitDiffSourceCodeType_MergeBaseCommit, v.MergeBaseCommit)
+		case schemas.CommitDiffSourceCodeType_SourceCommit:
+			v.SourceCommit = new(string)
+			return d.ReadString(schemas.CommitDiffSourceCodeType_SourceCommit, v.SourceCommit)
+		}
+		return nil
+	})
+}
+
 // Information about an event. The event might be a push, pull request, scheduled
 // request, or another type of event.
 type EventInfo struct {
@@ -264,6 +638,34 @@ type EventInfo struct {
 	State *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.EventInfo_Name, *v.Name)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.EventInfo_State, *v.State)
+	}
+}
+func (v *EventInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventInfo_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.EventInfo_Name, v.Name)
+		case schemas.EventInfo_State:
+			v.State = new(string)
+			return d.ReadString(schemas.EventInfo_State, v.State)
+		}
+		return nil
+	})
 }
 
 // An object that contains:
@@ -288,6 +690,38 @@ type KMSKeyDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KMSKeyDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KMSKeyDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KMSKeyDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionOption != "" {
+		s.WriteString(schemas.KMSKeyDetails_EncryptionOption, string(v.EncryptionOption))
+	}
+	if v.KMSKeyId != nil {
+		s.WriteString(schemas.KMSKeyDetails_KMSKeyId, *v.KMSKeyId)
+	}
+}
+func (v *KMSKeyDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KMSKeyDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KMSKeyDetails_EncryptionOption:
+			var ev string
+			if err := d.ReadString(schemas.KMSKeyDetails_EncryptionOption, &ev); err != nil {
+				return err
+			}
+			v.EncryptionOption = EncryptionOption(ev)
+			return nil
+		case schemas.KMSKeyDetails_KMSKeyId:
+			v.KMSKeyId = new(string)
+			return d.ReadString(schemas.KMSKeyDetails_KMSKeyId, v.KMSKeyId)
+		}
+		return nil
+	})
+}
+
 // Information about the statistics from the code review.
 type Metrics struct {
 
@@ -307,6 +741,40 @@ type Metrics struct {
 	SuppressedLinesOfCodeCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Metrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Metrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Metrics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingsCount != nil {
+		s.WriteInt64(schemas.Metrics_FindingsCount, *v.FindingsCount)
+	}
+	if v.MeteredLinesOfCodeCount != nil {
+		s.WriteInt64(schemas.Metrics_MeteredLinesOfCodeCount, *v.MeteredLinesOfCodeCount)
+	}
+	if v.SuppressedLinesOfCodeCount != nil {
+		s.WriteInt64(schemas.Metrics_SuppressedLinesOfCodeCount, *v.SuppressedLinesOfCodeCount)
+	}
+}
+func (v *Metrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Metrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Metrics_FindingsCount:
+			v.FindingsCount = new(int64)
+			return d.ReadInt64(schemas.Metrics_FindingsCount, v.FindingsCount)
+		case schemas.Metrics_MeteredLinesOfCodeCount:
+			v.MeteredLinesOfCodeCount = new(int64)
+			return d.ReadInt64(schemas.Metrics_MeteredLinesOfCodeCount, v.MeteredLinesOfCodeCount)
+		case schemas.Metrics_SuppressedLinesOfCodeCount:
+			v.SuppressedLinesOfCodeCount = new(int64)
+			return d.ReadInt64(schemas.Metrics_SuppressedLinesOfCodeCount, v.SuppressedLinesOfCodeCount)
+		}
+		return nil
+	})
 }
 
 // Information about metrics summaries.
@@ -347,6 +815,40 @@ type MetricsSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricsSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricsSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricsSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingsCount != nil {
+		s.WriteInt64(schemas.MetricsSummary_FindingsCount, *v.FindingsCount)
+	}
+	if v.MeteredLinesOfCodeCount != nil {
+		s.WriteInt64(schemas.MetricsSummary_MeteredLinesOfCodeCount, *v.MeteredLinesOfCodeCount)
+	}
+	if v.SuppressedLinesOfCodeCount != nil {
+		s.WriteInt64(schemas.MetricsSummary_SuppressedLinesOfCodeCount, *v.SuppressedLinesOfCodeCount)
+	}
+}
+func (v *MetricsSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricsSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricsSummary_FindingsCount:
+			v.FindingsCount = new(int64)
+			return d.ReadInt64(schemas.MetricsSummary_FindingsCount, v.FindingsCount)
+		case schemas.MetricsSummary_MeteredLinesOfCodeCount:
+			v.MeteredLinesOfCodeCount = new(int64)
+			return d.ReadInt64(schemas.MetricsSummary_MeteredLinesOfCodeCount, v.MeteredLinesOfCodeCount)
+		case schemas.MetricsSummary_SuppressedLinesOfCodeCount:
+			v.SuppressedLinesOfCodeCount = new(int64)
+			return d.ReadInt64(schemas.MetricsSummary_SuppressedLinesOfCodeCount, v.SuppressedLinesOfCodeCount)
+		}
+		return nil
+	})
+}
+
 // Information about the recommendation feedback.
 type RecommendationFeedback struct {
 
@@ -381,6 +883,55 @@ type RecommendationFeedback struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendationFeedback) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationFeedback)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationFeedback) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeReviewArn != nil {
+		s.WriteString(schemas.RecommendationFeedback_CodeReviewArn, *v.CodeReviewArn)
+	}
+	if v.CreatedTimeStamp != nil {
+		s.WriteTime(schemas.RecommendationFeedback_CreatedTimeStamp, *v.CreatedTimeStamp)
+	}
+	if v.LastUpdatedTimeStamp != nil {
+		s.WriteTime(schemas.RecommendationFeedback_LastUpdatedTimeStamp, *v.LastUpdatedTimeStamp)
+	}
+	serializeReactions(s, schemas.RecommendationFeedback_Reactions, v.Reactions)
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.RecommendationFeedback_RecommendationId, *v.RecommendationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.RecommendationFeedback_UserId, *v.UserId)
+	}
+}
+func (v *RecommendationFeedback) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationFeedback, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationFeedback_CodeReviewArn:
+			v.CodeReviewArn = new(string)
+			return d.ReadString(schemas.RecommendationFeedback_CodeReviewArn, v.CodeReviewArn)
+		case schemas.RecommendationFeedback_CreatedTimeStamp:
+			v.CreatedTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.RecommendationFeedback_CreatedTimeStamp, v.CreatedTimeStamp)
+		case schemas.RecommendationFeedback_LastUpdatedTimeStamp:
+			v.LastUpdatedTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.RecommendationFeedback_LastUpdatedTimeStamp, v.LastUpdatedTimeStamp)
+		case schemas.RecommendationFeedback_Reactions:
+			return deserializeReactions(d, schemas.RecommendationFeedback_Reactions, &v.Reactions)
+		case schemas.RecommendationFeedback_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.RecommendationFeedback_RecommendationId, v.RecommendationId)
+		case schemas.RecommendationFeedback_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.RecommendationFeedback_UserId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // Information about recommendation feedback summaries.
 type RecommendationFeedbackSummary struct {
 
@@ -401,6 +952,37 @@ type RecommendationFeedbackSummary struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecommendationFeedbackSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationFeedbackSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationFeedbackSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeReactions(s, schemas.RecommendationFeedbackSummary_Reactions, v.Reactions)
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.RecommendationFeedbackSummary_RecommendationId, *v.RecommendationId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.RecommendationFeedbackSummary_UserId, *v.UserId)
+	}
+}
+func (v *RecommendationFeedbackSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationFeedbackSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationFeedbackSummary_Reactions:
+			return deserializeReactions(d, schemas.RecommendationFeedbackSummary_Reactions, &v.Reactions)
+		case schemas.RecommendationFeedbackSummary_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.RecommendationFeedbackSummary_RecommendationId, v.RecommendationId)
+		case schemas.RecommendationFeedbackSummary_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.RecommendationFeedbackSummary_UserId, v.UserId)
+		}
+		return nil
+	})
 }
 
 // Information about recommendations.
@@ -441,6 +1023,80 @@ type RecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.RecommendationSummary_Description, *v.Description)
+	}
+	if v.EndLine != nil {
+		s.WriteInt32(schemas.RecommendationSummary_EndLine, *v.EndLine)
+	}
+	if v.FilePath != nil {
+		s.WriteString(schemas.RecommendationSummary_FilePath, *v.FilePath)
+	}
+	if v.RecommendationCategory != "" {
+		s.WriteString(schemas.RecommendationSummary_RecommendationCategory, string(v.RecommendationCategory))
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.RecommendationSummary_RecommendationId, *v.RecommendationId)
+	}
+	if v.RuleMetadata != nil {
+		s.WriteStruct(schemas.RecommendationSummary_RuleMetadata)
+		v.RuleMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Severity != "" {
+		s.WriteString(schemas.RecommendationSummary_Severity, string(v.Severity))
+	}
+	if v.StartLine != nil {
+		s.WriteInt32(schemas.RecommendationSummary_StartLine, *v.StartLine)
+	}
+}
+func (v *RecommendationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationSummary_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RecommendationSummary_Description, v.Description)
+		case schemas.RecommendationSummary_EndLine:
+			v.EndLine = new(int32)
+			return d.ReadInt32(schemas.RecommendationSummary_EndLine, v.EndLine)
+		case schemas.RecommendationSummary_FilePath:
+			v.FilePath = new(string)
+			return d.ReadString(schemas.RecommendationSummary_FilePath, v.FilePath)
+		case schemas.RecommendationSummary_RecommendationCategory:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationSummary_RecommendationCategory, &ev); err != nil {
+				return err
+			}
+			v.RecommendationCategory = RecommendationCategory(ev)
+			return nil
+		case schemas.RecommendationSummary_RecommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.RecommendationSummary_RecommendationId, v.RecommendationId)
+		case schemas.RecommendationSummary_RuleMetadata:
+			v.RuleMetadata = &RuleMetadata{}
+			return v.RuleMetadata.Deserialize(d)
+		case schemas.RecommendationSummary_Severity:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationSummary_Severity, &ev); err != nil {
+				return err
+			}
+			v.Severity = Severity(ev)
+			return nil
+		case schemas.RecommendationSummary_StartLine:
+			v.StartLine = new(int32)
+			return d.ReadInt32(schemas.RecommendationSummary_StartLine, v.StartLine)
+		}
+		return nil
+	})
+}
+
 // Information about an associated Amazon Web Services CodeCommit repository or an
 // associated repository that is managed by Amazon Web Services CodeStar
 // Connections (for example, Bitbucket). This Repository object is not used if
@@ -462,6 +1118,54 @@ type Repository struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Repository) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Repository)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Repository) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bitbucket != nil {
+		s.WriteStruct(schemas.Repository_Bitbucket)
+		v.Bitbucket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeCommit != nil {
+		s.WriteStruct(schemas.Repository_CodeCommit)
+		v.CodeCommit.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GitHubEnterpriseServer != nil {
+		s.WriteStruct(schemas.Repository_GitHubEnterpriseServer)
+		v.GitHubEnterpriseServer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3Bucket != nil {
+		s.WriteStruct(schemas.Repository_S3Bucket)
+		v.S3Bucket.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Repository) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Repository, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Repository_Bitbucket:
+			v.Bitbucket = &ThirdPartySourceRepository{}
+			return v.Bitbucket.Deserialize(d)
+		case schemas.Repository_CodeCommit:
+			v.CodeCommit = &CodeCommitRepository{}
+			return v.CodeCommit.Deserialize(d)
+		case schemas.Repository_GitHubEnterpriseServer:
+			v.GitHubEnterpriseServer = &ThirdPartySourceRepository{}
+			return v.GitHubEnterpriseServer.Deserialize(d)
+		case schemas.Repository_S3Bucket:
+			v.S3Bucket = &S3Repository{}
+			return v.S3Bucket.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A code review type that analyzes all code under a specified branch in an
 // associated repository. The associated repository is specified using its ARN when
 // you call [CreateCodeReview].
@@ -478,6 +1182,38 @@ type RepositoryAnalysis struct {
 	SourceCodeType *SourceCodeType
 
 	noSmithyDocumentSerde
+}
+
+func (v *RepositoryAnalysis) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryAnalysis)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryAnalysis) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryHead != nil {
+		s.WriteStruct(schemas.RepositoryAnalysis_RepositoryHead)
+		v.RepositoryHead.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SourceCodeType != nil {
+		s.WriteStruct(schemas.RepositoryAnalysis_SourceCodeType)
+		v.SourceCodeType.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RepositoryAnalysis) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryAnalysis, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryAnalysis_RepositoryHead:
+			v.RepositoryHead = &RepositoryHeadSourceCodeType{}
+			return v.RepositoryHead.Deserialize(d)
+		case schemas.RepositoryAnalysis_SourceCodeType:
+			v.SourceCodeType = &SourceCodeType{}
+			return v.SourceCodeType.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about a repository association. The [DescribeRepositoryAssociation] operation returns a
@@ -576,6 +1312,106 @@ type RepositoryAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RepositoryAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationArn != nil {
+		s.WriteString(schemas.RepositoryAssociation_AssociationArn, *v.AssociationArn)
+	}
+	if v.AssociationId != nil {
+		s.WriteString(schemas.RepositoryAssociation_AssociationId, *v.AssociationId)
+	}
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.RepositoryAssociation_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.CreatedTimeStamp != nil {
+		s.WriteTime(schemas.RepositoryAssociation_CreatedTimeStamp, *v.CreatedTimeStamp)
+	}
+	if v.KMSKeyDetails != nil {
+		s.WriteStruct(schemas.RepositoryAssociation_KMSKeyDetails)
+		v.KMSKeyDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdatedTimeStamp != nil {
+		s.WriteTime(schemas.RepositoryAssociation_LastUpdatedTimeStamp, *v.LastUpdatedTimeStamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RepositoryAssociation_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.RepositoryAssociation_Owner, *v.Owner)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.RepositoryAssociation_ProviderType, string(v.ProviderType))
+	}
+	if v.S3RepositoryDetails != nil {
+		s.WriteStruct(schemas.RepositoryAssociation_S3RepositoryDetails)
+		v.S3RepositoryDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RepositoryAssociation_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.RepositoryAssociation_StateReason, *v.StateReason)
+	}
+}
+func (v *RepositoryAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryAssociation_AssociationArn:
+			v.AssociationArn = new(string)
+			return d.ReadString(schemas.RepositoryAssociation_AssociationArn, v.AssociationArn)
+		case schemas.RepositoryAssociation_AssociationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.RepositoryAssociation_AssociationId, v.AssociationId)
+		case schemas.RepositoryAssociation_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.RepositoryAssociation_ConnectionArn, v.ConnectionArn)
+		case schemas.RepositoryAssociation_CreatedTimeStamp:
+			v.CreatedTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.RepositoryAssociation_CreatedTimeStamp, v.CreatedTimeStamp)
+		case schemas.RepositoryAssociation_KMSKeyDetails:
+			v.KMSKeyDetails = &KMSKeyDetails{}
+			return v.KMSKeyDetails.Deserialize(d)
+		case schemas.RepositoryAssociation_LastUpdatedTimeStamp:
+			v.LastUpdatedTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.RepositoryAssociation_LastUpdatedTimeStamp, v.LastUpdatedTimeStamp)
+		case schemas.RepositoryAssociation_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RepositoryAssociation_Name, v.Name)
+		case schemas.RepositoryAssociation_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.RepositoryAssociation_Owner, v.Owner)
+		case schemas.RepositoryAssociation_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.RepositoryAssociation_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.RepositoryAssociation_S3RepositoryDetails:
+			v.S3RepositoryDetails = &S3RepositoryDetails{}
+			return v.S3RepositoryDetails.Deserialize(d)
+		case schemas.RepositoryAssociation_State:
+			var ev string
+			if err := d.ReadString(schemas.RepositoryAssociation_State, &ev); err != nil {
+				return err
+			}
+			v.State = RepositoryAssociationState(ev)
+			return nil
+		case schemas.RepositoryAssociation_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.RepositoryAssociation_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
+
 // Summary information about a repository association. The [ListRepositoryAssociations] operation returns a
 // list of RepositoryAssociationSummary objects.
 //
@@ -654,6 +1490,78 @@ type RepositoryAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RepositoryAssociationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryAssociationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryAssociationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationArn != nil {
+		s.WriteString(schemas.RepositoryAssociationSummary_AssociationArn, *v.AssociationArn)
+	}
+	if v.AssociationId != nil {
+		s.WriteString(schemas.RepositoryAssociationSummary_AssociationId, *v.AssociationId)
+	}
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.RepositoryAssociationSummary_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.LastUpdatedTimeStamp != nil {
+		s.WriteTime(schemas.RepositoryAssociationSummary_LastUpdatedTimeStamp, *v.LastUpdatedTimeStamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RepositoryAssociationSummary_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.RepositoryAssociationSummary_Owner, *v.Owner)
+	}
+	if v.ProviderType != "" {
+		s.WriteString(schemas.RepositoryAssociationSummary_ProviderType, string(v.ProviderType))
+	}
+	if v.State != "" {
+		s.WriteString(schemas.RepositoryAssociationSummary_State, string(v.State))
+	}
+}
+func (v *RepositoryAssociationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryAssociationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryAssociationSummary_AssociationArn:
+			v.AssociationArn = new(string)
+			return d.ReadString(schemas.RepositoryAssociationSummary_AssociationArn, v.AssociationArn)
+		case schemas.RepositoryAssociationSummary_AssociationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.RepositoryAssociationSummary_AssociationId, v.AssociationId)
+		case schemas.RepositoryAssociationSummary_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.RepositoryAssociationSummary_ConnectionArn, v.ConnectionArn)
+		case schemas.RepositoryAssociationSummary_LastUpdatedTimeStamp:
+			v.LastUpdatedTimeStamp = new(time.Time)
+			return d.ReadTime(schemas.RepositoryAssociationSummary_LastUpdatedTimeStamp, v.LastUpdatedTimeStamp)
+		case schemas.RepositoryAssociationSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RepositoryAssociationSummary_Name, v.Name)
+		case schemas.RepositoryAssociationSummary_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.RepositoryAssociationSummary_Owner, v.Owner)
+		case schemas.RepositoryAssociationSummary_ProviderType:
+			var ev string
+			if err := d.ReadString(schemas.RepositoryAssociationSummary_ProviderType, &ev); err != nil {
+				return err
+			}
+			v.ProviderType = ProviderType(ev)
+			return nil
+		case schemas.RepositoryAssociationSummary_State:
+			var ev string
+			if err := d.ReadString(schemas.RepositoryAssociationSummary_State, &ev); err != nil {
+				return err
+			}
+			v.State = RepositoryAssociationState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A [SourceCodeType] that specifies the tip of a branch in an associated repository.
 //
 // [SourceCodeType]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType
@@ -666,6 +1574,28 @@ type RepositoryHeadSourceCodeType struct {
 	BranchName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RepositoryHeadSourceCodeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryHeadSourceCodeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryHeadSourceCodeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchName != nil {
+		s.WriteString(schemas.RepositoryHeadSourceCodeType_BranchName, *v.BranchName)
+	}
+}
+func (v *RepositoryHeadSourceCodeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryHeadSourceCodeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryHeadSourceCodeType_BranchName:
+			v.BranchName = new(string)
+			return d.ReadString(schemas.RepositoryHeadSourceCodeType_BranchName, v.BranchName)
+		}
+		return nil
+	})
 }
 
 // Metadata that is associated with a code review. This applies to both pull
@@ -696,6 +1626,52 @@ type RequestMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RequestMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventInfo != nil {
+		s.WriteStruct(schemas.RequestMetadata_EventInfo)
+		v.EventInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.RequestMetadata_RequestId, *v.RequestId)
+	}
+	if v.Requester != nil {
+		s.WriteString(schemas.RequestMetadata_Requester, *v.Requester)
+	}
+	if v.VendorName != "" {
+		s.WriteString(schemas.RequestMetadata_VendorName, string(v.VendorName))
+	}
+}
+func (v *RequestMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestMetadata_EventInfo:
+			v.EventInfo = &EventInfo{}
+			return v.EventInfo.Deserialize(d)
+		case schemas.RequestMetadata_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.RequestMetadata_RequestId, v.RequestId)
+		case schemas.RequestMetadata_Requester:
+			v.Requester = new(string)
+			return d.ReadString(schemas.RequestMetadata_Requester, v.Requester)
+		case schemas.RequestMetadata_VendorName:
+			var ev string
+			if err := d.ReadString(schemas.RequestMetadata_VendorName, &ev); err != nil {
+				return err
+			}
+			v.VendorName = VendorName(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Metadata about a rule. Rule metadata includes an ID, a name, a list of tags,
 // and a short and long description. CodeGuru Reviewer uses rules to analyze code.
 // A rule's recommendation is included in analysis results if code is detected that
@@ -720,6 +1696,49 @@ type RuleMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LongDescription != nil {
+		s.WriteString(schemas.RuleMetadata_LongDescription, *v.LongDescription)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.RuleMetadata_RuleId, *v.RuleId)
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.RuleMetadata_RuleName, *v.RuleName)
+	}
+	serializeRuleTags(s, schemas.RuleMetadata_RuleTags, v.RuleTags)
+	if v.ShortDescription != nil {
+		s.WriteString(schemas.RuleMetadata_ShortDescription, *v.ShortDescription)
+	}
+}
+func (v *RuleMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleMetadata_LongDescription:
+			v.LongDescription = new(string)
+			return d.ReadString(schemas.RuleMetadata_LongDescription, v.LongDescription)
+		case schemas.RuleMetadata_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.RuleMetadata_RuleId, v.RuleId)
+		case schemas.RuleMetadata_RuleName:
+			v.RuleName = new(string)
+			return d.ReadString(schemas.RuleMetadata_RuleName, v.RuleName)
+		case schemas.RuleMetadata_RuleTags:
+			return deserializeRuleTags(d, schemas.RuleMetadata_RuleTags, &v.RuleTags)
+		case schemas.RuleMetadata_ShortDescription:
+			v.ShortDescription = new(string)
+			return d.ReadString(schemas.RuleMetadata_ShortDescription, v.ShortDescription)
+		}
+		return nil
+	})
+}
+
 // Information about an associated repository in an S3 bucket. The associated
 // repository contains a source code .zip file and a build artifacts .zip file that
 // contains .jar or .class files.
@@ -736,6 +1755,36 @@ type S3BucketRepository struct {
 	Details *S3RepositoryDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3BucketRepository) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3BucketRepository)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3BucketRepository) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Details != nil {
+		s.WriteStruct(schemas.S3BucketRepository_Details)
+		v.Details.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.S3BucketRepository_Name, *v.Name)
+	}
+}
+func (v *S3BucketRepository) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3BucketRepository, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3BucketRepository_Details:
+			v.Details = &S3RepositoryDetails{}
+			return v.Details.Deserialize(d)
+		case schemas.S3BucketRepository_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.S3BucketRepository_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Information about a repository in an S3 bucket.
@@ -755,6 +1804,34 @@ type S3Repository struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Repository) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Repository)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Repository) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Repository_BucketName, *v.BucketName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.S3Repository_Name, *v.Name)
+	}
+}
+func (v *S3Repository) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Repository, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Repository_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Repository_BucketName, v.BucketName)
+		case schemas.S3Repository_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.S3Repository_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Specifies the name of an S3 bucket and a CodeArtifacts object that contains the
 // S3 object keys for a source code .zip file and for a build artifacts .zip file
 // that contains .jar or .class files.
@@ -770,6 +1847,36 @@ type S3RepositoryDetails struct {
 	CodeArtifacts *CodeArtifacts
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3RepositoryDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3RepositoryDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3RepositoryDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3RepositoryDetails_BucketName, *v.BucketName)
+	}
+	if v.CodeArtifacts != nil {
+		s.WriteStruct(schemas.S3RepositoryDetails_CodeArtifacts)
+		v.CodeArtifacts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *S3RepositoryDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3RepositoryDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3RepositoryDetails_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3RepositoryDetails_BucketName, v.BucketName)
+		case schemas.S3RepositoryDetails_CodeArtifacts:
+			v.CodeArtifacts = &CodeArtifacts{}
+			return v.CodeArtifacts.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the source code that is analyzed in a code review.
@@ -810,6 +1917,62 @@ type SourceCodeType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceCodeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceCodeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceCodeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BranchDiff != nil {
+		s.WriteStruct(schemas.SourceCodeType_BranchDiff)
+		v.BranchDiff.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CommitDiff != nil {
+		s.WriteStruct(schemas.SourceCodeType_CommitDiff)
+		v.CommitDiff.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RepositoryHead != nil {
+		s.WriteStruct(schemas.SourceCodeType_RepositoryHead)
+		v.RepositoryHead.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestMetadata != nil {
+		s.WriteStruct(schemas.SourceCodeType_RequestMetadata)
+		v.RequestMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BucketRepository != nil {
+		s.WriteStruct(schemas.SourceCodeType_S3BucketRepository)
+		v.S3BucketRepository.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceCodeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceCodeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceCodeType_BranchDiff:
+			v.BranchDiff = &BranchDiffSourceCodeType{}
+			return v.BranchDiff.Deserialize(d)
+		case schemas.SourceCodeType_CommitDiff:
+			v.CommitDiff = &CommitDiffSourceCodeType{}
+			return v.CommitDiff.Deserialize(d)
+		case schemas.SourceCodeType_RepositoryHead:
+			v.RepositoryHead = &RepositoryHeadSourceCodeType{}
+			return v.RepositoryHead.Deserialize(d)
+		case schemas.SourceCodeType_RequestMetadata:
+			v.RequestMetadata = &RequestMetadata{}
+			return v.RequestMetadata.Deserialize(d)
+		case schemas.SourceCodeType_S3BucketRepository:
+			v.S3BucketRepository = &S3BucketRepository{}
+			return v.S3BucketRepository.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about a third-party source repository connected to CodeGuru
 // Reviewer.
 type ThirdPartySourceRepository struct {
@@ -838,6 +2001,40 @@ type ThirdPartySourceRepository struct {
 	Owner *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ThirdPartySourceRepository) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ThirdPartySourceRepository)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ThirdPartySourceRepository) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.ThirdPartySourceRepository_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ThirdPartySourceRepository_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.ThirdPartySourceRepository_Owner, *v.Owner)
+	}
+}
+func (v *ThirdPartySourceRepository) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThirdPartySourceRepository, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThirdPartySourceRepository_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.ThirdPartySourceRepository_ConnectionArn, v.ConnectionArn)
+		case schemas.ThirdPartySourceRepository_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ThirdPartySourceRepository_Name, v.Name)
+		case schemas.ThirdPartySourceRepository_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.ThirdPartySourceRepository_Owner, v.Owner)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

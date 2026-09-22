@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"VoiceConnector":{"AwsRegion":"us-east-1","CreatedTimestamp":"2000-01-01T00:00:00Z","IntegrationType":"CONNECT_CALL_TRANSFER_CONNECTOR","Name":"__Name__","NetworkType":"IPV4_ONLY","OutboundHostName":"__OutboundHostName__","RequireEncryption":true,"UpdatedTimestamp":"2000-01-01T00:00:00Z","VoiceConnectorArn":"__VoiceConnectorArn__","VoiceConnectorId":"__VoiceConnectorId__"}}

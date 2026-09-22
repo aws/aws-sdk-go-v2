@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.StartReplicationTaskAssessmentRun
+
+{"AssessmentRunName":"__AssessmentRunName__","Exclude":["__Member__","__Member__"],"IncludeOnly":["__Member__","__Member__"],"ReplicationTaskArn":"__ReplicationTaskArn__","ResultEncryptionMode":"__ResultEncryptionMode__","ResultKmsKeyArn":"__ResultKmsKeyArn__","ResultLocationBucket":"__ResultLocationBucket__","ResultLocationFolder":"__ResultLocationFolder__","ServiceAccessRoleArn":"__ServiceAccessRoleArn__","Tags":[{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"},{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"}]}

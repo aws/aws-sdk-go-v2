@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"analysisLogExports":[{"analysisId":"__AnalysisId__","analysisLogExportId":"__AnalysisLogExportId__","analysisType":"PROTECTED_QUERY","createTime":946684800,"status":"IN_PROGRESS"},{"analysisId":"__AnalysisId__","analysisLogExportId":"__AnalysisLogExportId__","analysisType":"PROTECTED_QUERY","createTime":946684800,"status":"IN_PROGRESS"}],"nextToken":"__NextToken__"}

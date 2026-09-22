@@ -912,6 +912,37 @@ func (ScalingStrategy) Values() []ScalingStrategy {
 	}
 }
 
+type SessionState string
+
+// Enum values for SessionState
+const (
+	SessionStateSubmitted   SessionState = "SUBMITTED"
+	SessionStateStarting    SessionState = "STARTING"
+	SessionStateStarted     SessionState = "STARTED"
+	SessionStateIdle        SessionState = "IDLE"
+	SessionStateBusy        SessionState = "BUSY"
+	SessionStateTerminating SessionState = "TERMINATING"
+	SessionStateTerminated  SessionState = "TERMINATED"
+	SessionStateFailed      SessionState = "FAILED"
+)
+
+// Values returns all known values for SessionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionState) Values() []SessionState {
+	return []SessionState{
+		"SUBMITTED",
+		"STARTING",
+		"STARTED",
+		"IDLE",
+		"BUSY",
+		"TERMINATING",
+		"TERMINATED",
+		"FAILED",
+	}
+}
+
 type SpotProvisioningAllocationStrategy string
 
 // Enum values for SpotProvisioningAllocationStrategy

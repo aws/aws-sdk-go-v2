@@ -1,0 +1,5 @@
+POST /contact/delete/__InstanceId__/__ContactId__
+
+Content-Type: application/json
+
+{"ContactFields":["CUSTOMER_ENDPOINT","CUSTOMER_ENDPOINT"]}

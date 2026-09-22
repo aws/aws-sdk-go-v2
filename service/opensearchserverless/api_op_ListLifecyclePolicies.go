@@ -5,10 +5,10 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of OpenSearch Serverless lifecycle policies. For more
@@ -53,6 +53,25 @@ type ListLifecyclePoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecyclePoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecyclePoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecyclePoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLifecyclePoliciesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecyclePoliciesRequest_nextToken, *v.NextToken)
+	}
+	serializeLifecycleResourceFilter(s, schemas.ListLifecyclePoliciesRequest_resources, v.Resources)
+	if v.Type != "" {
+		s.WriteString(schemas.ListLifecyclePoliciesRequest_type, string(v.Type))
+	}
+}
+
 type ListLifecyclePoliciesOutput struct {
 
 	// Details about the requested lifecycle policies.
@@ -69,77 +88,51 @@ type ListLifecyclePoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLifecyclePoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLifecyclePoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLifecyclePoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLifecyclePolicySummaries(s, schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaries, v.LifecyclePolicySummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLifecyclePoliciesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListLifecyclePoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLifecyclePoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaries:
+			return deserializeLifecyclePolicySummaries(d, schemas.ListLifecyclePoliciesResponse_lifecyclePolicySummaries, &v.LifecyclePolicySummaries)
+		case schemas.ListLifecyclePoliciesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLifecyclePoliciesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecyclePolicies, schemas.ListLifecyclePoliciesRequest, schemas.ListLifecyclePoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListLifecyclePolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLifecyclePolicies, schemas.ListLifecyclePoliciesRequest, schemas.ListLifecyclePoliciesResponse), output: &ListLifecyclePoliciesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListLifecyclePolicies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLifecyclePolicies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListLifecyclePoliciesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLifecyclePolicies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,12 +145,6 @@ func (c *Client) addOperationListLifecyclePoliciesMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +234,3 @@ type ListLifecyclePoliciesAPIClient interface {
 }
 
 var _ ListLifecyclePoliciesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListLifecyclePolicies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListLifecyclePolicies",
-	}
-}

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"AppInstanceArn":"__AppInstanceArn__","AppInstanceBots":[{"AppInstanceBotArn":"__AppInstanceBotArn__","Metadata":"__Metadata__","Name":"__Name__"},{"AppInstanceBotArn":"__AppInstanceBotArn__","Metadata":"__Metadata__","Name":"__Name__"}],"NextToken":"__NextToken__"}

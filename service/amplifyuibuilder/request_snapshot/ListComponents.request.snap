@@ -1,0 +1,3 @@
+GET /app/__AppId__/environment/__EnvironmentName__/components?maxResults=1&nextToken=__NextToken__
+
+

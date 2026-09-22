@@ -5,10 +5,10 @@ package notifications
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/notifications/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/notifications/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -33,6 +33,11 @@ type ListManagedNotificationEventsInput struct {
 
 	// Latest time of events to return from this call.
 	EndTime *time.Time
+
+	// Specifies whether to include sensitive events in the result. By default, only
+	// non-sensitive events are returned. The notifications:AccessSensitiveEvents
+	// permission controls access to sensitive events.
+	IncludeSensitiveEvents *bool
 
 	// The locale code of the language used for the retrieved NotificationEvent. The
 	// default locale is English (en_US).
@@ -62,6 +67,42 @@ type ListManagedNotificationEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListManagedNotificationEventsRequest_endTime, *v.EndTime)
+	}
+	if v.IncludeSensitiveEvents != nil {
+		s.WriteBool(schemas.ListManagedNotificationEventsRequest_includeSensitiveEvents, *v.IncludeSensitiveEvents)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_locale, string(v.Locale))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedNotificationEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.OrganizationalUnitId != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_organizationalUnitId, *v.OrganizationalUnitId)
+	}
+	if v.RelatedAccount != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_relatedAccount, *v.RelatedAccount)
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsRequest_source, *v.Source)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListManagedNotificationEventsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListManagedNotificationEventsOutput struct {
 
 	// A list of Managed Notification Events matching the request criteria.
@@ -79,74 +120,48 @@ type ListManagedNotificationEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedNotificationEventsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedNotificationEventsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedNotificationEventsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeManagedNotificationEvents(s, schemas.ListManagedNotificationEventsResponse_managedNotificationEvents, v.ManagedNotificationEvents)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedNotificationEventsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListManagedNotificationEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedNotificationEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedNotificationEventsResponse_managedNotificationEvents:
+			return deserializeManagedNotificationEvents(d, schemas.ListManagedNotificationEventsResponse_managedNotificationEvents, &v.ManagedNotificationEvents)
+		case schemas.ListManagedNotificationEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedNotificationEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedNotificationEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationEvents, schemas.ListManagedNotificationEventsRequest, schemas.ListManagedNotificationEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedNotificationEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedNotificationEvents, schemas.ListManagedNotificationEventsRequest, schemas.ListManagedNotificationEventsResponse), output: &ListManagedNotificationEventsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedNotificationEvents{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListManagedNotificationEvents"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListManagedNotificationEvents(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,12 +174,6 @@ func (c *Client) addOperationListManagedNotificationEventsMiddlewares(stack *mid
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -268,11 +277,3 @@ type ListManagedNotificationEventsAPIClient interface {
 }
 
 var _ ListManagedNotificationEventsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListManagedNotificationEvents(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListManagedNotificationEvents",
-	}
-}

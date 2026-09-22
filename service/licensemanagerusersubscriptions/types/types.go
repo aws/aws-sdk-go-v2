@@ -330,6 +330,14 @@ type ProductUserSummary struct {
 	// the product subscription.
 	Domain *string
 
+	// The expiration date of the license associated with this subscription, in ISO
+	// 8601 UTC format (for example, 2025-03-15T00:00:00Z ).
+	//
+	// This field applies only to subscriptions that use license server endpoints,
+	// such as Remote Desktop Services (RDS) Subscriber Access License (SAL). It
+	// returns null for products that don't use license-based subscriptions.
+	LicenseExpirationDate *string
+
 	// The Amazon Resource Name (ARN) for this product user.
 	ProductUserArn *string
 

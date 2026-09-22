@@ -1,0 +1,5 @@
+POST /sessions/__SessionIdentifier__/invocationSteps/__InvocationStepId__
+
+Content-Type: application/json
+
+{"invocationIdentifier":"__InvocationIdentifier__"}

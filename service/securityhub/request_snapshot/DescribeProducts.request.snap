@@ -1,0 +1,3 @@
+GET /products?MaxResults=1&NextToken=__NextToken__&ProductArn=__ProductArn__
+
+

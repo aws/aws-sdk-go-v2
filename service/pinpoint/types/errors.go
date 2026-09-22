@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/pinpoint/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,33 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BadRequestException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BadRequestException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.BadRequestException_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.BadRequestException_RequestID, *v.RequestID)
+	}
+}
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_Message, v.Message)
+		case schemas.BadRequestException_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.BadRequestException_RequestID, v.RequestID)
+		}
+		return nil
+	})
+}
 
 // Provides information about an API request or response.
 type ConflictException struct {
@@ -62,6 +90,33 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ConflictException_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.ConflictException_RequestID, *v.RequestID)
+	}
+}
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		case schemas.ConflictException_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.ConflictException_RequestID, v.RequestID)
+		}
+		return nil
+	})
+}
 
 // Provides information about an API request or response.
 type ForbiddenException struct {
@@ -90,6 +145,33 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ForbiddenException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForbiddenException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForbiddenException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ForbiddenException_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.ForbiddenException_RequestID, *v.RequestID)
+	}
+}
+func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForbiddenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForbiddenException_Message, v.Message)
+		case schemas.ForbiddenException_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.ForbiddenException_RequestID, v.RequestID)
+		}
+		return nil
+	})
+}
 
 // Provides information about an API request or response.
 type InternalServerErrorException struct {
@@ -118,6 +200,33 @@ func (e *InternalServerErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerErrorException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InternalServerErrorException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InternalServerErrorException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InternalServerErrorException_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.InternalServerErrorException_RequestID, *v.RequestID)
+	}
+}
+func (v *InternalServerErrorException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerErrorException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerErrorException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerErrorException_Message, v.Message)
+		case schemas.InternalServerErrorException_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.InternalServerErrorException_RequestID, v.RequestID)
+		}
+		return nil
+	})
+}
 
 // Provides information about an API request or response.
 type MethodNotAllowedException struct {
@@ -146,6 +255,33 @@ func (e *MethodNotAllowedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *MethodNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *MethodNotAllowedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MethodNotAllowedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MethodNotAllowedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.MethodNotAllowedException_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.MethodNotAllowedException_RequestID, *v.RequestID)
+	}
+}
+func (v *MethodNotAllowedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MethodNotAllowedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MethodNotAllowedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.MethodNotAllowedException_Message, v.Message)
+		case schemas.MethodNotAllowedException_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.MethodNotAllowedException_RequestID, v.RequestID)
+		}
+		return nil
+	})
+}
 
 // Provides information about an API request or response.
 type NotFoundException struct {
@@ -174,6 +310,33 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NotFoundException_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.NotFoundException_RequestID, *v.RequestID)
+	}
+}
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_Message, v.Message)
+		case schemas.NotFoundException_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.NotFoundException_RequestID, v.RequestID)
+		}
+		return nil
+	})
+}
 
 // Provides information about an API request or response.
 type PayloadTooLargeException struct {
@@ -202,6 +365,33 @@ func (e *PayloadTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PayloadTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PayloadTooLargeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PayloadTooLargeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PayloadTooLargeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PayloadTooLargeException_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.PayloadTooLargeException_RequestID, *v.RequestID)
+	}
+}
+func (v *PayloadTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PayloadTooLargeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PayloadTooLargeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PayloadTooLargeException_Message, v.Message)
+		case schemas.PayloadTooLargeException_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.PayloadTooLargeException_RequestID, v.RequestID)
+		}
+		return nil
+	})
+}
 
 // Provides information about an API request or response.
 type TooManyRequestsException struct {
@@ -230,3 +420,30 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyRequestsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyRequestsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyRequestsException_Message, *v.Message)
+	}
+	if v.RequestID != nil {
+		s.WriteString(schemas.TooManyRequestsException_RequestID, *v.RequestID)
+	}
+}
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Message, v.Message)
+		case schemas.TooManyRequestsException_RequestID:
+			v.RequestID = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_RequestID, v.RequestID)
+		}
+		return nil
+	})
+}

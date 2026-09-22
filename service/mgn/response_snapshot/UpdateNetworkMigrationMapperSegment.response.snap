@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"checksum":{"encryptionAlgorithm":"SHA256","hash":"__Hash__"},"createdAt":946684800,"description":"__Description__","jobID":"__JobID__","logicalID":"__LogicalID__","name":"__Name__","networkMigrationDefinitionID":"__NetworkMigrationDefinitionID__","networkMigrationExecutionID":"__NetworkMigrationExecutionID__","outputS3Configuration":{"s3Bucket":"__S3Bucket__","s3BucketOwner":"__S3BucketOwner__","s3Key":"__S3Key__"},"referencedSegments":["__Member__","__Member__"],"scopeTags":{"key0":"__Value__"},"segmentID":"__SegmentID__","segmentType":"WORKLOAD","targetAccount":"__TargetAccount__","updatedAt":946684800}

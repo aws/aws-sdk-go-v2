@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PinpointSMSVoiceV2.CreateRcsAgent
+
+{"ClientToken":"__ClientToken__","DeletionProtectionEnabled":true,"OptOutListName":"__OptOutListName__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

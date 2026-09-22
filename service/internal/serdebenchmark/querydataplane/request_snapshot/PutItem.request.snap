@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=PutItem&ConditionExpression=__ConditionExpression__&ConditionalOperator=__ConditionalOperator__&Expected.entry.1.key=key0&Expected.entry.1.value.AttributeValueList=&Expected.entry.1.value.AttributeValueList.member.member.S=__AttributeValueMemberS__&Expected.entry.1.value.AttributeValueList.member.member.S=__AttributeValueMemberS__&Expected.entry.1.value.ComparisonOperator=__ComparisonOperator__&Expected.entry.1.value.Exists=true&Expected.entry.1.value.Value.S=__AttributeValueMemberS__&ExpressionAttributeNames.entry.1.key=key0&ExpressionAttributeNames.entry.1.value=__Value__&ExpressionAttributeValues.entry.1.value.1.key=key0&ExpressionAttributeValues.entry.1.value.1.value.value.S=__AttributeValueMemberS__&Item.entry.1.value.1.key=key0&Item.entry.1.value.1.value.value.S=__AttributeValueMemberS__&ReturnConsumedCapacity=__ReturnConsumedCapacity__&ReturnItemCollectionMetrics=__ReturnItemCollectionMetrics__&ReturnValues=__ReturnValues__&ReturnValuesOnConditionCheckFailure=__ReturnValuesOnConditionCheckFailure__&TableName=__TableName__&Version=1999-12-31

@@ -1,0 +1,4 @@
+409
+Content-Type: application/json
+
+{"__type":"ConflictException","message":"__Message__","reason":"ALREADY_EXISTS","resourceId":"__ResourceId__","resourceType":"CONFIGURED_TABLE"}

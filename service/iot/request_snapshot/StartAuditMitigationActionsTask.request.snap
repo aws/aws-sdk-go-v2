@@ -1,0 +1,5 @@
+POST /audit/mitigationactions/tasks/__TaskId__
+
+Content-Type: application/json
+
+{"auditCheckToActionsMapping":{"key0":["__Member__","__Member__"]},"clientRequestToken":"__ClientRequestToken__","target":{"auditCheckToReasonCodeFilter":{"key0":["__Member__","__Member__"]},"auditTaskId":"__AuditTaskId__","findingIds":["__Member__","__Member__"]}}

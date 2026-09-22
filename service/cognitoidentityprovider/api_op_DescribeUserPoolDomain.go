@@ -4,15 +4,19 @@ package cognitoidentityprovider
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Given a user pool domain name, returns information about the domain
 // configuration.
+//
+// This operation doesn't return results when you query a prefix domain in a
+// secondary Region. Prefix domains are Region-specific and can only be described
+// in the Region where they were created. To describe a prefix domain for a replica
+// user pool, make the request to the primary Region's endpoint.
 //
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
@@ -54,6 +58,18 @@ type DescribeUserPoolDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserPoolDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserPoolDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserPoolDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DescribeUserPoolDomainRequest_Domain, *v.Domain)
+	}
+}
+
 type DescribeUserPoolDomainOutput struct {
 
 	// The details of the requested user pool domain.
@@ -65,77 +81,50 @@ type DescribeUserPoolDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeUserPoolDomainOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeUserPoolDomainResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeUserPoolDomainOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainDescription != nil {
+		s.WriteStruct(schemas.DescribeUserPoolDomainResponse_DomainDescription)
+		v.DomainDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeUserPoolDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeUserPoolDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeUserPoolDomainResponse_DomainDescription:
+			v.DomainDescription = &types.DomainDescriptionType{}
+			return v.DomainDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserPoolDomain, schemas.DescribeUserPoolDomainRequest, schemas.DescribeUserPoolDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeUserPoolDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeUserPoolDomain, schemas.DescribeUserPoolDomainRequest, schemas.DescribeUserPoolDomainResponse), output: &DescribeUserPoolDomainOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeUserPoolDomain{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeUserPoolDomain"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeUserPoolDomainValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUserPoolDomain(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,22 +139,8 @@ func (c *Client) addOperationDescribeUserPoolDomainMiddlewares(stack *middleware
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeUserPoolDomain(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeUserPoolDomain",
-	}
 }

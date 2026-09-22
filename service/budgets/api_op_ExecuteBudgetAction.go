@@ -4,11 +4,10 @@ package budgets
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Executes a budget action.
@@ -42,6 +41,9 @@ type ExecuteBudgetActionInput struct {
 	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
+	// Budget names are validated for content. Names that contain phone numbers, URLs,
+	// or email addresses combined with certain terms may be rejected.
+	//
 	// This member is required.
 	BudgetName *string
 
@@ -51,6 +53,27 @@ type ExecuteBudgetActionInput struct {
 	ExecutionType types.ExecutionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecuteBudgetActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteBudgetActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteBudgetActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ExecuteBudgetActionRequest_AccountId, *v.AccountId)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.ExecuteBudgetActionRequest_ActionId, *v.ActionId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.ExecuteBudgetActionRequest_BudgetName, *v.BudgetName)
+	}
+	if v.ExecutionType != "" {
+		s.WriteString(schemas.ExecuteBudgetActionRequest_ExecutionType, string(v.ExecutionType))
+	}
 }
 
 type ExecuteBudgetActionOutput struct {
@@ -68,6 +91,9 @@ type ExecuteBudgetActionOutput struct {
 	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
+	// Budget names are validated for content. Names that contain phone numbers, URLs,
+	// or email addresses combined with certain terms may be rejected.
+	//
 	// This member is required.
 	BudgetName *string
 
@@ -82,77 +108,70 @@ type ExecuteBudgetActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteBudgetActionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteBudgetActionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteBudgetActionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ExecuteBudgetActionResponse_AccountId, *v.AccountId)
+	}
+	if v.ActionId != nil {
+		s.WriteString(schemas.ExecuteBudgetActionResponse_ActionId, *v.ActionId)
+	}
+	if v.BudgetName != nil {
+		s.WriteString(schemas.ExecuteBudgetActionResponse_BudgetName, *v.BudgetName)
+	}
+	if v.ExecutionType != "" {
+		s.WriteString(schemas.ExecuteBudgetActionResponse_ExecutionType, string(v.ExecutionType))
+	}
+}
+func (v *ExecuteBudgetActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteBudgetActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteBudgetActionResponse_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.ExecuteBudgetActionResponse_AccountId, v.AccountId)
+		case schemas.ExecuteBudgetActionResponse_ActionId:
+			v.ActionId = new(string)
+			return d.ReadString(schemas.ExecuteBudgetActionResponse_ActionId, v.ActionId)
+		case schemas.ExecuteBudgetActionResponse_BudgetName:
+			v.BudgetName = new(string)
+			return d.ReadString(schemas.ExecuteBudgetActionResponse_BudgetName, v.BudgetName)
+		case schemas.ExecuteBudgetActionResponse_ExecutionType:
+			var ev string
+			if err := d.ReadString(schemas.ExecuteBudgetActionResponse_ExecutionType, &ev); err != nil {
+				return err
+			}
+			v.ExecutionType = types.ExecutionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteBudgetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteBudgetAction, schemas.ExecuteBudgetActionRequest, schemas.ExecuteBudgetActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExecuteBudgetAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteBudgetAction, schemas.ExecuteBudgetActionRequest, schemas.ExecuteBudgetActionResponse), output: &ExecuteBudgetActionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpExecuteBudgetAction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteBudgetAction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpExecuteBudgetActionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteBudgetAction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +186,8 @@ func (c *Client) addOperationExecuteBudgetActionMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opExecuteBudgetAction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExecuteBudgetAction",
-	}
 }

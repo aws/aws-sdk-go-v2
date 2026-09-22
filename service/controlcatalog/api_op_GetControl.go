@@ -4,11 +4,8 @@ package controlcatalog
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/controlcatalog/types"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -110,17 +107,27 @@ type GetControlOutput struct {
 	// life) as a governance capability in Amazon Web Services.
 	CreateTime *time.Time
 
-	// A list of Amazon Web Services resource types that are governed by this control.
-	// This information helps you understand which controls can govern certain types of
-	// resources, and conversely, which resources are affected when the control is
-	// implemented. The resources are represented as Amazon Web Services CloudFormation
-	// resource types. If GovernedResources cannot be represented by available
-	// CloudFormation resource types, it’s returned as an empty list.
+	// A list of providers whose resources are governed by this control. For example,
+	// a value of AWS indicates that the control governs Amazon Web Services resources.
+	GovernedProviders []string
+
+	// A list of resource types that are governed by this control. This information
+	// helps you understand which controls can govern certain types of resources, and
+	// conversely, which resources are affected when the control is implemented. For
+	// Amazon Web Services controls, the resources are represented as CloudFormation
+	// resource types. For non-Amazon Web Services controls, the resources are
+	// represented in a provider-specific format. If GovernedResources cannot be
+	// represented by available resource types, it’s returned as an empty list.
 	GovernedResources []string
 
 	// Returns information about the control, as an ImplementationDetails object that
 	// shows the underlying implementation type for a control.
 	Implementation *types.ImplementationDetails
+
+	// A summary that indicates whether the control requires parameters, accepts
+	// optional parameters, or does not support parameters. Use this field to determine
+	// whether you need to supply parameter values when you enable the control.
+	ParameterRequirementSummary types.ParameterRequirementSummary
 
 	// Returns an array of ControlParameter objects that specify the parameters a
 	// control supports. An empty list is returned for controls that don’t support
@@ -137,9 +144,6 @@ type GetControlOutput struct {
 }
 
 func (c *Client) addOperationGetControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
-		return err
-	}
 	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetControl{}, middleware.After)
 	if err != nil {
 		return err
@@ -148,65 +152,20 @@ func (c *Client) addOperationGetControlMiddlewares(stack *middleware.Stack, opti
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetControl"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
-	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetControlValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetControl(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -221,22 +180,8 @@ func (c *Client) addOperationGetControlMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetControl(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetControl",
-	}
 }

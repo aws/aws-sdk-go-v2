@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an analysis in Amazon Quick Sight. Analyses can be created either from
@@ -74,7 +73,7 @@ type CreateAnalysisInput struct {
 
 	// A source entity to use for the analysis that you're creating. This metadata
 	// structure contains details that describe a source template and one or more
-	// datasets.
+	// datasets or topics.
 	//
 	// Either a SourceEntity or a Definition must be provided in order for the request
 	// to be valid.
@@ -93,6 +92,50 @@ type CreateAnalysisInput struct {
 	ValidationStrategy *types.ValidationStrategy
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateAnalysisInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnalysisRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnalysisInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.CreateAnalysisRequest_AnalysisId, *v.AnalysisId)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.CreateAnalysisRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.CreateAnalysisRequest_Definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFolderArnList(s, schemas.CreateAnalysisRequest_FolderArns, v.FolderArns)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAnalysisRequest_Name, *v.Name)
+	}
+	if v.Parameters != nil {
+		s.WriteStruct(schemas.CreateAnalysisRequest_Parameters)
+		v.Parameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourcePermissionList(s, schemas.CreateAnalysisRequest_Permissions, v.Permissions)
+	if v.SourceEntity != nil {
+		s.WriteStruct(schemas.CreateAnalysisRequest_SourceEntity)
+		v.SourceEntity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateAnalysisRequest_Tags, v.Tags)
+	if v.ThemeArn != nil {
+		s.WriteString(schemas.CreateAnalysisRequest_ThemeArn, *v.ThemeArn)
+	}
+	if v.ValidationStrategy != nil {
+		s.WriteStruct(schemas.CreateAnalysisRequest_ValidationStrategy)
+		v.ValidationStrategy.SerializeMembers(s)
+		s.CloseStruct()
+	}
 }
 
 type CreateAnalysisOutput struct {
@@ -118,77 +161,75 @@ type CreateAnalysisOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAnalysisOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAnalysisResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAnalysisOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisId != nil {
+		s.WriteString(schemas.CreateAnalysisResponse_AnalysisId, *v.AnalysisId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateAnalysisResponse_Arn, *v.Arn)
+	}
+	if v.CreationStatus != "" {
+		s.WriteString(schemas.CreateAnalysisResponse_CreationStatus, string(v.CreationStatus))
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateAnalysisResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.CreateAnalysisResponse_Status, v.Status)
+	}
+}
+func (v *CreateAnalysisOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAnalysisResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAnalysisResponse_AnalysisId:
+			v.AnalysisId = new(string)
+			return d.ReadString(schemas.CreateAnalysisResponse_AnalysisId, v.AnalysisId)
+		case schemas.CreateAnalysisResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateAnalysisResponse_Arn, v.Arn)
+		case schemas.CreateAnalysisResponse_CreationStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateAnalysisResponse_CreationStatus, &ev); err != nil {
+				return err
+			}
+			v.CreationStatus = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateAnalysisResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateAnalysisResponse_RequestId, v.RequestId)
+		case schemas.CreateAnalysisResponse_Status:
+			return d.ReadInt32(schemas.CreateAnalysisResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnalysis, schemas.CreateAnalysisRequest, schemas.CreateAnalysisResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAnalysis{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAnalysis, schemas.CreateAnalysisRequest, schemas.CreateAnalysisResponse), output: &CreateAnalysisOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAnalysis{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAnalysis"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateAnalysisValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAnalysis(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -203,22 +244,8 @@ func (c *Client) addOperationCreateAnalysisMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateAnalysis(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAnalysis",
-	}
 }

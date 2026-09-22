@@ -1,0 +1,5 @@
+POST /organization/configuration
+
+Content-Type: application/json
+
+{"AutoEnable":true,"AutoEnableStandards":"NONE","OrganizationConfiguration":{"ConfigurationType":"CENTRAL","Status":"PENDING","StatusMessage":"__StatusMessage__"}}

@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates Amazon Quick Sight customizations. Currently, the only customization
@@ -53,6 +52,26 @@ type UpdateAccountCustomizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountCustomizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountCustomizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountCustomizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountCustomization != nil {
+		s.WriteStruct(schemas.UpdateAccountCustomizationRequest_AccountCustomization)
+		v.AccountCustomization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateAccountCustomizationRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.UpdateAccountCustomizationRequest_Namespace, *v.Namespace)
+	}
+}
+
 type UpdateAccountCustomizationOutput struct {
 
 	// The Quick Sight customizations you're updating.
@@ -81,77 +100,79 @@ type UpdateAccountCustomizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccountCustomizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccountCustomizationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccountCustomizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountCustomization != nil {
+		s.WriteStruct(schemas.UpdateAccountCustomizationResponse_AccountCustomization)
+		v.AccountCustomization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateAccountCustomizationResponse_Arn, *v.Arn)
+	}
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateAccountCustomizationResponse_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.UpdateAccountCustomizationResponse_Namespace, *v.Namespace)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.UpdateAccountCustomizationResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.UpdateAccountCustomizationResponse_Status, v.Status)
+	}
+}
+func (v *UpdateAccountCustomizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccountCustomizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccountCustomizationResponse_AccountCustomization:
+			v.AccountCustomization = &types.AccountCustomization{}
+			return v.AccountCustomization.Deserialize(d)
+		case schemas.UpdateAccountCustomizationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateAccountCustomizationResponse_Arn, v.Arn)
+		case schemas.UpdateAccountCustomizationResponse_AwsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.UpdateAccountCustomizationResponse_AwsAccountId, v.AwsAccountId)
+		case schemas.UpdateAccountCustomizationResponse_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.UpdateAccountCustomizationResponse_Namespace, v.Namespace)
+		case schemas.UpdateAccountCustomizationResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UpdateAccountCustomizationResponse_RequestId, v.RequestId)
+		case schemas.UpdateAccountCustomizationResponse_Status:
+			return d.ReadInt32(schemas.UpdateAccountCustomizationResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccountCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountCustomization, schemas.UpdateAccountCustomizationRequest, schemas.UpdateAccountCustomizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAccountCustomization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccountCustomization, schemas.UpdateAccountCustomizationRequest, schemas.UpdateAccountCustomizationResponse), output: &UpdateAccountCustomizationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAccountCustomization{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccountCustomization"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateAccountCustomizationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountCustomization(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,22 +187,8 @@ func (c *Client) addOperationUpdateAccountCustomizationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateAccountCustomization(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAccountCustomization",
-	}
 }

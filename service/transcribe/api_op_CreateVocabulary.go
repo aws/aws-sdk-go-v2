@@ -4,11 +4,10 @@ package transcribe
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -72,8 +71,9 @@ type CreateVocabularyInput struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access
 	// the Amazon S3 bucket that contains your input files (in this case, your custom
-	// vocabulary). If the role that you specify doesn’t have the appropriate
-	// permissions to access the specified Amazon S3 location, your request fails.
+	// vocabulary). If you include EncryptionConfiguration in your request, this role
+	// must also have permissions to access the specified KMS key. If the role that you
+	// specify doesn’t have the appropriate permissions, your request fails.
 	//
 	// IAM role ARNs have the format
 	// arn:partition:iam::account:role/role-name-with-path . For example:
@@ -83,6 +83,11 @@ type CreateVocabularyInput struct {
 	//
 	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
 	DataAccessRoleArn *string
+
+	// Specifies the encryption configuration for your custom vocabulary. Your
+	// vocabulary artifacts are encrypted with the specified KMS key or with an
+	// AWS-owned key if a key is not supplied.
+	EncryptionConfiguration *types.EncryptionConfiguration
 
 	// Use this parameter if you want to create your custom vocabulary by including
 	// all desired terms, as comma-separated values, within your request. The other
@@ -121,6 +126,34 @@ type CreateVocabularyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVocabularyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVocabularyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVocabularyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataAccessRoleArn != nil {
+		s.WriteString(schemas.CreateVocabularyRequest_DataAccessRoleArn, *v.DataAccessRoleArn)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.CreateVocabularyRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateVocabularyRequest_LanguageCode, string(v.LanguageCode))
+	}
+	serializePhrases(s, schemas.CreateVocabularyRequest_Phrases, v.Phrases)
+	serializeTagList(s, schemas.CreateVocabularyRequest_Tags, v.Tags)
+	if v.VocabularyFileUri != nil {
+		s.WriteString(schemas.CreateVocabularyRequest_VocabularyFileUri, *v.VocabularyFileUri)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.CreateVocabularyRequest_VocabularyName, *v.VocabularyName)
+	}
+}
+
 type CreateVocabularyOutput struct {
 
 	// If VocabularyState is FAILED , FailureReason contains information about why the
@@ -151,77 +184,80 @@ type CreateVocabularyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVocabularyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVocabularyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVocabularyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FailureReason != nil {
+		s.WriteString(schemas.CreateVocabularyResponse_FailureReason, *v.FailureReason)
+	}
+	if v.LanguageCode != "" {
+		s.WriteString(schemas.CreateVocabularyResponse_LanguageCode, string(v.LanguageCode))
+	}
+	if v.LastModifiedTime != nil {
+		s.WriteTime(schemas.CreateVocabularyResponse_LastModifiedTime, *v.LastModifiedTime)
+	}
+	if v.VocabularyName != nil {
+		s.WriteString(schemas.CreateVocabularyResponse_VocabularyName, *v.VocabularyName)
+	}
+	if v.VocabularyState != "" {
+		s.WriteString(schemas.CreateVocabularyResponse_VocabularyState, string(v.VocabularyState))
+	}
+}
+func (v *CreateVocabularyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVocabularyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVocabularyResponse_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.CreateVocabularyResponse_FailureReason, v.FailureReason)
+		case schemas.CreateVocabularyResponse_LanguageCode:
+			var ev string
+			if err := d.ReadString(schemas.CreateVocabularyResponse_LanguageCode, &ev); err != nil {
+				return err
+			}
+			v.LanguageCode = types.LanguageCode(ev)
+			return nil
+		case schemas.CreateVocabularyResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.CreateVocabularyResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.CreateVocabularyResponse_VocabularyName:
+			v.VocabularyName = new(string)
+			return d.ReadString(schemas.CreateVocabularyResponse_VocabularyName, v.VocabularyName)
+		case schemas.CreateVocabularyResponse_VocabularyState:
+			var ev string
+			if err := d.ReadString(schemas.CreateVocabularyResponse_VocabularyState, &ev); err != nil {
+				return err
+			}
+			v.VocabularyState = types.VocabularyState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVocabulary, schemas.CreateVocabularyRequest, schemas.CreateVocabularyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateVocabulary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVocabulary, schemas.CreateVocabularyRequest, schemas.CreateVocabularyResponse), output: &CreateVocabularyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateVocabulary{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVocabulary"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpCreateVocabularyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVocabulary(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -236,22 +272,8 @@ func (c *Client) addOperationCreateVocabularyMiddlewares(stack *middleware.Stack
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opCreateVocabulary(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateVocabulary",
-	}
 }

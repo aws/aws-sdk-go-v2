@@ -1,0 +1,5 @@
+POST /v2/domains/__DomainIdentifier__/listings/change-set
+
+Content-Type: application/json
+
+{"action":"PUBLISH","clientToken":"__ClientToken__","entityIdentifier":"__EntityIdentifier__","entityRevision":"__EntityRevision__","entityType":"ASSET"}

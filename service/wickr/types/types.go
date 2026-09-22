@@ -249,6 +249,28 @@ type CallingSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Consent popup configuration displayed to users on login.
+type ConsentPopupConfig struct {
+
+	// Whether the consent popup is enabled. When set to true, the popup is displayed
+	// to users on login.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// Label for the close button on the consent popup. Maximum 20 characters.
+	// Defaults to "Acknowledge" if not provided.
+	CloseButtonLabel *string
+
+	// Body content of the consent popup in Markdown format. Maximum 5000 characters.
+	Content *string
+
+	// Header text displayed at the top of the consent popup. Maximum 100 characters.
+	Header *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains detailed error information explaining why an operation failed,
 // including which field caused the error and the reason for the failure.
 type ErrorDetail struct {
@@ -351,6 +373,9 @@ type Network struct {
 // Contains network-level configuration settings that apply to all users and
 // security groups within a Wickr network.
 type NetworkSettings struct {
+
+	// Consent popup configuration for the network, displayed to users on login.
+	ConsentPopup *ConsentPopupConfig
 
 	// Indicates whether the data retention feature is enabled for the network. When
 	// true, messages are captured by the data retention bot for compliance and
@@ -673,6 +698,10 @@ type SecurityGroupSettings struct {
 	// messages remain visible before auto-deletion after being read.
 	MaxBor *int32
 
+	// Maximum session duration in minutes for non-SSO users. Set to 0 to disable.
+	// Valid range is 60 to 525600 (1 hour to 365 days).
+	MaxNonSsoSessionMinutes *int32
+
 	// The maximum time-to-live (TTL) in seconds for messages, after which they will
 	// be automatically deleted from all devices.
 	MaxTtl *int64
@@ -782,15 +811,22 @@ type Setting struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for the message shredder feature, which securely deletes messages
-// and files from devices to prevent data recovery.
+// Configuration for the Wickr shredder feature, which writes random data over
+// free memory and disk space on client devices. You can configure your Wickr
+// shredder intensity using the parameters below.
+//
+// Secure Shredder will not write over files that are permanently stored on the
+// device or saved outside of the Wickr client. Wickr Network Administrators are
+// able to disable file downloads within Security Group Settings.
 type ShredderSettings struct {
 
 	// Specifies whether users can manually trigger the shredder to delete content.
 	CanProcessManually *bool
 
-	// Prevents Wickr data from being recovered by overwriting deleted Wickr data.
-	// Valid Values: Must be one of [0, 20, 60, 100]
+	// Controls the rate (MB/minute) at which the shredder function runs on clients.
+	// Valid Values: Must be one of [0, 20, 60, 100].
+	//
+	// A higher intensity setting could lead to higher battery usage on mobile devices.
 	Intensity *int32
 
 	noSmithyDocumentSerde

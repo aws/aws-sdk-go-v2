@@ -4,10 +4,9 @@ package billingconductor
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billingconductor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates a list of pricing rules from a pricing plan.
@@ -43,6 +42,31 @@ type DisassociatePricingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePricingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePricingRulesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePricingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociatePricingRulesInput_Arn, *v.Arn)
+	}
+	serializePricingRuleArnsNonEmptyInput(s, schemas.DisassociatePricingRulesInput_PricingRuleArns, v.PricingRuleArns)
+}
+func (v *DisassociatePricingRulesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociatePricingRulesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociatePricingRulesInput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociatePricingRulesInput_Arn, v.Arn)
+		case schemas.DisassociatePricingRulesInput_PricingRuleArns:
+			return deserializePricingRuleArnsNonEmptyInput(d, schemas.DisassociatePricingRulesInput_PricingRuleArns, &v.PricingRuleArns)
+		}
+		return nil
+	})
+}
+
 type DisassociatePricingRulesOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the pricing plan that the pricing rules
@@ -55,77 +79,48 @@ type DisassociatePricingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociatePricingRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociatePricingRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociatePricingRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DisassociatePricingRulesOutput_Arn, *v.Arn)
+	}
+}
+func (v *DisassociatePricingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociatePricingRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociatePricingRulesOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociatePricingRulesOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociatePricingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePricingRules, schemas.DisassociatePricingRulesInput, schemas.DisassociatePricingRulesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociatePricingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociatePricingRules, schemas.DisassociatePricingRulesInput, schemas.DisassociatePricingRulesOutput), output: &DisassociatePricingRulesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociatePricingRules{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociatePricingRules"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDisassociatePricingRulesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociatePricingRules(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +135,8 @@ func (c *Client) addOperationDisassociatePricingRulesMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDisassociatePricingRules(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DisassociatePricingRules",
-	}
 }

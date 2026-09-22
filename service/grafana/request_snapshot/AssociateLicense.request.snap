@@ -1,0 +1,4 @@
+POST /workspaces/__WorkspaceId__/licenses/ENTERPRISE
+
+Grafana-Token: __GrafanaToken__
+

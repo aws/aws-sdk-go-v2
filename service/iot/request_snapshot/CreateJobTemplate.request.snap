@@ -1,0 +1,5 @@
+PUT /job-templates/__JobTemplateId__
+
+Content-Type: application/json
+
+{"abortConfig":{"criteriaList":[{"action":"CANCEL","failureType":"FAILED","minNumberOfExecutedThings":1,"thresholdPercentage":1},{"action":"CANCEL","failureType":"FAILED","minNumberOfExecutedThings":1,"thresholdPercentage":1}]},"description":"__Description__","destinationPackageVersions":["__Member__","__Member__"],"document":"__Document__","documentSource":"__DocumentSource__","jobArn":"__JobArn__","jobExecutionsRetryConfig":{"criteriaList":[{"failureType":"FAILED","numberOfRetries":1},{"failureType":"FAILED","numberOfRetries":1}]},"jobExecutionsRolloutConfig":{"exponentialRate":{"baseRatePerMinute":1,"incrementFactor":1,"rateIncreaseCriteria":{"numberOfNotifiedThings":1,"numberOfSucceededThings":1}},"maximumPerMinute":1},"maintenanceWindows":[{"durationInMinutes":1,"startTime":"__StartTime__"},{"durationInMinutes":1,"startTime":"__StartTime__"}],"presignedUrlConfig":{"expiresInSec":1,"roleArn":"__RoleArn__"},"tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"timeoutConfig":{"inProgressTimeoutInMinutes":1}}

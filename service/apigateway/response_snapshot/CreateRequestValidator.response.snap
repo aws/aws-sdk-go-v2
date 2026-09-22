@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"id":"__Id__","name":"__Name__","validateRequestBody":true,"validateRequestParameters":true}

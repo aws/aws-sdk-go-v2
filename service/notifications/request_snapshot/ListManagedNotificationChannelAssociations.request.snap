@@ -1,0 +1,3 @@
+GET /channels/list-managed-notification-channel-associations?managedNotificationConfigurationArn=__ManagedNotificationConfigurationArn__&maxResults=1&nextToken=__NextToken__
+
+

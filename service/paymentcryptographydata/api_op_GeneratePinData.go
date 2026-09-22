@@ -4,11 +4,10 @@ package paymentcryptographydata
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates pin-related data such as PIN, PIN Verification Value (PVV), PIN
@@ -31,8 +30,8 @@ import (
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -45,6 +44,7 @@ import (
 // [Generate PIN data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/generate-pin-data.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 // [Generating keys]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/create-keys.html
 func (c *Client) GeneratePinData(ctx context.Context, params *GeneratePinDataInput, optFns ...func(*Options)) (*GeneratePinDataOutput, error) {
 	if params == nil {
@@ -109,6 +109,36 @@ type GeneratePinDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeneratePinDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneratePinDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeneratePinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionKeyIdentifier != nil {
+		s.WriteString(schemas.GeneratePinDataInput_EncryptionKeyIdentifier, *v.EncryptionKeyIdentifier)
+	}
+	if v.EncryptionWrappedKey != nil {
+		s.WriteStruct(schemas.GeneratePinDataInput_EncryptionWrappedKey)
+		v.EncryptionWrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePinGenerationAttributes(s, schemas.GeneratePinDataInput_GenerationAttributes, v.GenerationAttributes)
+	if v.GenerationKeyIdentifier != nil {
+		s.WriteString(schemas.GeneratePinDataInput_GenerationKeyIdentifier, *v.GenerationKeyIdentifier)
+	}
+	if v.PinBlockFormat != "" {
+		s.WriteString(schemas.GeneratePinDataInput_PinBlockFormat, string(v.PinBlockFormat))
+	}
+	if v.PinDataLength != nil {
+		s.WriteInt32(schemas.GeneratePinDataInput_PinDataLength, *v.PinDataLength)
+	}
+	if v.PrimaryAccountNumber != nil {
+		s.WriteString(schemas.GeneratePinDataInput_PrimaryAccountNumber, *v.PrimaryAccountNumber)
+	}
+}
+
 type GeneratePinDataOutput struct {
 
 	// The PIN block encrypted under PEK from Amazon Web Services Payment
@@ -164,77 +194,75 @@ type GeneratePinDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeneratePinDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneratePinDataOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeneratePinDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptedPinBlock != nil {
+		s.WriteString(schemas.GeneratePinDataOutput_EncryptedPinBlock, *v.EncryptedPinBlock)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.GeneratePinDataOutput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionKeyCheckValue != nil {
+		s.WriteString(schemas.GeneratePinDataOutput_EncryptionKeyCheckValue, *v.EncryptionKeyCheckValue)
+	}
+	if v.GenerationKeyArn != nil {
+		s.WriteString(schemas.GeneratePinDataOutput_GenerationKeyArn, *v.GenerationKeyArn)
+	}
+	if v.GenerationKeyCheckValue != nil {
+		s.WriteString(schemas.GeneratePinDataOutput_GenerationKeyCheckValue, *v.GenerationKeyCheckValue)
+	}
+	serializePinData(s, schemas.GeneratePinDataOutput_PinData, v.PinData)
+}
+func (v *GeneratePinDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeneratePinDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeneratePinDataOutput_EncryptedPinBlock:
+			v.EncryptedPinBlock = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_EncryptedPinBlock, v.EncryptedPinBlock)
+		case schemas.GeneratePinDataOutput_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.GeneratePinDataOutput_EncryptionKeyCheckValue:
+			v.EncryptionKeyCheckValue = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_EncryptionKeyCheckValue, v.EncryptionKeyCheckValue)
+		case schemas.GeneratePinDataOutput_GenerationKeyArn:
+			v.GenerationKeyArn = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_GenerationKeyArn, v.GenerationKeyArn)
+		case schemas.GeneratePinDataOutput_GenerationKeyCheckValue:
+			v.GenerationKeyCheckValue = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_GenerationKeyCheckValue, v.GenerationKeyCheckValue)
+		case schemas.GeneratePinDataOutput_PinData:
+			return deserializePinData(d, schemas.GeneratePinDataOutput_PinData, &v.PinData)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGeneratePinDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GeneratePinData, schemas.GeneratePinDataInput, schemas.GeneratePinDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGeneratePinData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GeneratePinData, schemas.GeneratePinDataInput, schemas.GeneratePinDataOutput), output: &GeneratePinDataOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGeneratePinData{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GeneratePinData"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGeneratePinDataValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGeneratePinData(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -249,22 +277,8 @@ func (c *Client) addOperationGeneratePinDataMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGeneratePinData(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GeneratePinData",
-	}
 }

@@ -1,0 +1,5 @@
+PUT /PutImagePolicy
+
+Content-Type: application/json
+
+{"imageArn":"__ImageArn__","policy":"__Policy__"}

@@ -4,12 +4,11 @@ package neptunegraph
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -39,6 +38,17 @@ type DeleteGraphSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGraphSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGraphSnapshotInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGraphSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.DeleteGraphSnapshotInput_snapshotIdentifier, *v.SnapshotIdentifier)
+	}
+}
 func (in *DeleteGraphSnapshotInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.ApiType = ptr.String("ControlPlane")
@@ -83,77 +93,88 @@ type DeleteGraphSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGraphSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGraphSnapshotOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGraphSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteGraphSnapshotOutput_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteGraphSnapshotOutput_id, *v.Id)
+	}
+	if v.KmsKeyIdentifier != nil {
+		s.WriteString(schemas.DeleteGraphSnapshotOutput_kmsKeyIdentifier, *v.KmsKeyIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteGraphSnapshotOutput_name, *v.Name)
+	}
+	if v.SnapshotCreateTime != nil {
+		s.WriteTime(schemas.DeleteGraphSnapshotOutput_snapshotCreateTime, *v.SnapshotCreateTime)
+	}
+	if v.SourceGraphId != nil {
+		s.WriteString(schemas.DeleteGraphSnapshotOutput_sourceGraphId, *v.SourceGraphId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DeleteGraphSnapshotOutput_status, string(v.Status))
+	}
+}
+func (v *DeleteGraphSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGraphSnapshotOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGraphSnapshotOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteGraphSnapshotOutput_arn, v.Arn)
+		case schemas.DeleteGraphSnapshotOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteGraphSnapshotOutput_id, v.Id)
+		case schemas.DeleteGraphSnapshotOutput_kmsKeyIdentifier:
+			v.KmsKeyIdentifier = new(string)
+			return d.ReadString(schemas.DeleteGraphSnapshotOutput_kmsKeyIdentifier, v.KmsKeyIdentifier)
+		case schemas.DeleteGraphSnapshotOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteGraphSnapshotOutput_name, v.Name)
+		case schemas.DeleteGraphSnapshotOutput_snapshotCreateTime:
+			v.SnapshotCreateTime = new(time.Time)
+			return d.ReadTime(schemas.DeleteGraphSnapshotOutput_snapshotCreateTime, v.SnapshotCreateTime)
+		case schemas.DeleteGraphSnapshotOutput_sourceGraphId:
+			v.SourceGraphId = new(string)
+			return d.ReadString(schemas.DeleteGraphSnapshotOutput_sourceGraphId, v.SourceGraphId)
+		case schemas.DeleteGraphSnapshotOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteGraphSnapshotOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SnapshotStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGraphSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGraphSnapshot, schemas.DeleteGraphSnapshotInput, schemas.DeleteGraphSnapshotOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGraphSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGraphSnapshot, schemas.DeleteGraphSnapshotInput, schemas.DeleteGraphSnapshotOutput), output: &DeleteGraphSnapshotOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGraphSnapshot{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteGraphSnapshot"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteGraphSnapshotValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteGraphSnapshot(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +189,8 @@ func (c *Client) addOperationDeleteGraphSnapshotMiddlewares(stack *middleware.St
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteGraphSnapshot(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteGraphSnapshot",
-	}
 }

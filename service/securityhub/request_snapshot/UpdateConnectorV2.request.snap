@@ -1,0 +1,5 @@
+PATCH /connectorsv2/__ConnectorId__
+
+Content-Type: application/json
+
+{"Description":"__Description__","Provider":{"JiraCloud":{"ProjectKey":"__ProjectKey__"}}}

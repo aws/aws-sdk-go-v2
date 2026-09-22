@@ -374,6 +374,30 @@ func TestCheckSnapshot_GetPersistentAppUIPresignedURL(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetSessionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSessionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetStudioSessionMapping(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetStudioSessionMapping(context.Background(), nil, func(o *Options) {
@@ -475,6 +499,18 @@ func TestCheckSnapshot_ListSecurityConfigurations(t *testing.T) {
 	_, err := svc.ListSecurityConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListSecurityConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -734,6 +770,18 @@ func TestCheckSnapshot_StartNotebookExecution(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopNotebookExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopNotebookExecution(context.Background(), nil, func(o *Options) {
@@ -751,6 +799,18 @@ func TestCheckSnapshot_TerminateJobFlows(t *testing.T) {
 	_, err := svc.TerminateJobFlows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "TerminateJobFlows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TerminateSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TerminateSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1093,6 +1153,30 @@ func TestUpdateSnapshot_GetPersistentAppUIPresignedURL(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSessionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSessionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetStudioSessionMapping(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetStudioSessionMapping(context.Background(), nil, func(o *Options) {
@@ -1194,6 +1278,18 @@ func TestUpdateSnapshot_ListSecurityConfigurations(t *testing.T) {
 	_, err := svc.ListSecurityConfigurations(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListSecurityConfigurations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1453,6 +1549,18 @@ func TestUpdateSnapshot_StartNotebookExecution(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopNotebookExecution(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopNotebookExecution(context.Background(), nil, func(o *Options) {
@@ -1470,6 +1578,18 @@ func TestUpdateSnapshot_TerminateJobFlows(t *testing.T) {
 	_, err := svc.TerminateJobFlows(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TerminateJobFlows")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TerminateSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TerminateSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieve the CountryRuleSet for the specified NumberCapability from a protect
@@ -42,6 +41,21 @@ type GetProtectConfigurationCountryRuleSetInput struct {
 	ProtectConfigurationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProtectConfigurationCountryRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectConfigurationCountryRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectConfigurationCountryRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NumberCapability != "" {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetRequest_NumberCapability, string(v.NumberCapability))
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
 }
 
 type GetProtectConfigurationCountryRuleSetOutput struct {
@@ -78,77 +92,67 @@ type GetProtectConfigurationCountryRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProtectConfigurationCountryRuleSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProtectConfigurationCountryRuleSetResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProtectConfigurationCountryRuleSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeProtectConfigurationCountryRuleSet(s, schemas.GetProtectConfigurationCountryRuleSetResult_CountryRuleSet, v.CountryRuleSet)
+	if v.NumberCapability != "" {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetResult_NumberCapability, string(v.NumberCapability))
+	}
+	if v.ProtectConfigurationArn != nil {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationArn, *v.ProtectConfigurationArn)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+}
+func (v *GetProtectConfigurationCountryRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProtectConfigurationCountryRuleSetResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProtectConfigurationCountryRuleSetResult_CountryRuleSet:
+			return deserializeProtectConfigurationCountryRuleSet(d, schemas.GetProtectConfigurationCountryRuleSetResult_CountryRuleSet, &v.CountryRuleSet)
+		case schemas.GetProtectConfigurationCountryRuleSetResult_NumberCapability:
+			var ev string
+			if err := d.ReadString(schemas.GetProtectConfigurationCountryRuleSetResult_NumberCapability, &ev); err != nil {
+				return err
+			}
+			v.NumberCapability = types.NumberCapability(ev)
+			return nil
+		case schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationArn:
+			v.ProtectConfigurationArn = new(string)
+			return d.ReadString(schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationArn, v.ProtectConfigurationArn)
+		case schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationId:
+			v.ProtectConfigurationId = new(string)
+			return d.ReadString(schemas.GetProtectConfigurationCountryRuleSetResult_ProtectConfigurationId, v.ProtectConfigurationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProtectConfigurationCountryRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectConfigurationCountryRuleSet, schemas.GetProtectConfigurationCountryRuleSetRequest, schemas.GetProtectConfigurationCountryRuleSetResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetProtectConfigurationCountryRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProtectConfigurationCountryRuleSet, schemas.GetProtectConfigurationCountryRuleSetRequest, schemas.GetProtectConfigurationCountryRuleSetResult), output: &GetProtectConfigurationCountryRuleSetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetProtectConfigurationCountryRuleSet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProtectConfigurationCountryRuleSet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetProtectConfigurationCountryRuleSetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProtectConfigurationCountryRuleSet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,22 +167,8 @@ func (c *Client) addOperationGetProtectConfigurationCountryRuleSetMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetProtectConfigurationCountryRuleSet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetProtectConfigurationCountryRuleSet",
-	}
 }

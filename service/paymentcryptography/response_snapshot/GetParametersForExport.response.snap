@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: PaymentCryptographyControlPlane.GetParametersForExport
+
+{"ExportToken":"__ExportToken__","ParametersValidUntilTimestamp":946684800,"SigningKeyAlgorithm":"TDES_2KEY","SigningKeyCertificate":"__SigningKeyCertificate__","SigningKeyCertificateChain":"__SigningKeyCertificateChain__"}

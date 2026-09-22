@@ -5,15 +5,21 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-//	Lists mitigation actions executions for a Device Defender ML Detect Security
+// The IoT Device Defender detect feature will no longer be available to new
+// customers starting August 31, 2026. If you would like to use the detect feature,
+// sign up prior to August 31, 2026. To learn about alternatives to IoT Device
+// Defender detect, see IoT Device Defender detect feature availability change in
+// the IoT Device Defender Developer Guide. There is no change to IoT Device
+// Defender audit availability.
 //
+// Lists mitigation actions executions for a Device Defender ML Detect Security
 // Profile.
 //
 // Requires permission to access the [ListDetectMitigationActionsExecutions] action.
@@ -62,6 +68,36 @@ type ListDetectMitigationActionsExecutionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDetectMitigationActionsExecutionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDetectMitigationActionsExecutionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDetectMitigationActionsExecutionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListDetectMitigationActionsExecutionsRequest_endTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDetectMitigationActionsExecutionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsRequest_nextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListDetectMitigationActionsExecutionsRequest_startTime, *v.StartTime)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsRequest_taskId, *v.TaskId)
+	}
+	if v.ThingName != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsRequest_thingName, *v.ThingName)
+	}
+	if v.ViolationId != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsRequest_violationId, *v.ViolationId)
+	}
+}
+
 type ListDetectMitigationActionsExecutionsOutput struct {
 
 	//  List of actions executions.
@@ -77,74 +113,48 @@ type ListDetectMitigationActionsExecutionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDetectMitigationActionsExecutionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDetectMitigationActionsExecutionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDetectMitigationActionsExecutionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDetectMitigationActionExecutionList(s, schemas.ListDetectMitigationActionsExecutionsResponse_actionsExecutions, v.ActionsExecutions)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDetectMitigationActionsExecutionsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListDetectMitigationActionsExecutionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDetectMitigationActionsExecutionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDetectMitigationActionsExecutionsResponse_actionsExecutions:
+			return deserializeDetectMitigationActionExecutionList(d, schemas.ListDetectMitigationActionsExecutionsResponse_actionsExecutions, &v.ActionsExecutions)
+		case schemas.ListDetectMitigationActionsExecutionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDetectMitigationActionsExecutionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDetectMitigationActionsExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDetectMitigationActionsExecutions, schemas.ListDetectMitigationActionsExecutionsRequest, schemas.ListDetectMitigationActionsExecutionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDetectMitigationActionsExecutions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDetectMitigationActionsExecutions, schemas.ListDetectMitigationActionsExecutionsRequest, schemas.ListDetectMitigationActionsExecutionsResponse), output: &ListDetectMitigationActionsExecutionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDetectMitigationActionsExecutions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDetectMitigationActionsExecutions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDetectMitigationActionsExecutions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,12 +167,6 @@ func (c *Client) addOperationListDetectMitigationActionsExecutionsMiddlewares(st
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +270,3 @@ type ListDetectMitigationActionsExecutionsAPIClient interface {
 }
 
 var _ ListDetectMitigationActionsExecutionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDetectMitigationActionsExecutions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDetectMitigationActionsExecutions",
-	}
-}

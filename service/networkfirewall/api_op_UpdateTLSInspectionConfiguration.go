@@ -4,11 +4,10 @@ package networkfirewall
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the TLS inspection configuration settings for the specified TLS
@@ -89,6 +88,37 @@ type UpdateTLSInspectionConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTLSInspectionConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTLSInspectionConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTLSInspectionConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateTLSInspectionConfigurationRequest_Description, *v.Description)
+	}
+	if v.EncryptionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateTLSInspectionConfigurationRequest_EncryptionConfiguration)
+		v.EncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TLSInspectionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateTLSInspectionConfigurationRequest_TLSInspectionConfiguration)
+		v.TLSInspectionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TLSInspectionConfigurationArn != nil {
+		s.WriteString(schemas.UpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationArn, *v.TLSInspectionConfigurationArn)
+	}
+	if v.TLSInspectionConfigurationName != nil {
+		s.WriteString(schemas.UpdateTLSInspectionConfigurationRequest_TLSInspectionConfigurationName, *v.TLSInspectionConfigurationName)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateTLSInspectionConfigurationRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateTLSInspectionConfigurationOutput struct {
 
 	// The high-level properties of a TLS inspection configuration. This, along with
@@ -119,77 +149,56 @@ type UpdateTLSInspectionConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTLSInspectionConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTLSInspectionConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTLSInspectionConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TLSInspectionConfigurationResponse != nil {
+		s.WriteStruct(schemas.UpdateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse)
+		v.TLSInspectionConfigurationResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateTLSInspectionConfigurationResponse_UpdateToken, *v.UpdateToken)
+	}
+}
+func (v *UpdateTLSInspectionConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTLSInspectionConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTLSInspectionConfigurationResponse_TLSInspectionConfigurationResponse:
+			v.TLSInspectionConfigurationResponse = &types.TLSInspectionConfigurationResponse{}
+			return v.TLSInspectionConfigurationResponse.Deserialize(d)
+		case schemas.UpdateTLSInspectionConfigurationResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateTLSInspectionConfigurationResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTLSInspectionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTLSInspectionConfiguration, schemas.UpdateTLSInspectionConfigurationRequest, schemas.UpdateTLSInspectionConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTLSInspectionConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTLSInspectionConfiguration, schemas.UpdateTLSInspectionConfigurationRequest, schemas.UpdateTLSInspectionConfigurationResponse), output: &UpdateTLSInspectionConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateTLSInspectionConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTLSInspectionConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateTLSInspectionConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTLSInspectionConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,22 +213,8 @@ func (c *Client) addOperationUpdateTLSInspectionConfigurationMiddlewares(stack *
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateTLSInspectionConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateTLSInspectionConfiguration",
-	}
 }

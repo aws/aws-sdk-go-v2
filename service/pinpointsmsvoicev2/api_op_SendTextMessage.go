@@ -4,11 +4,10 @@ package pinpointsmsvoicev2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new text message and sends it to a recipient's phone number.
@@ -101,7 +100,8 @@ type SendTextMessageInput struct {
 	MessageType types.MessageType
 
 	// The origination identity of the message. This can be either the PhoneNumber,
-	// PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.
+	// PhoneNumberId, PhoneNumberArn, RcsAgentId, RcsAgentArn, SenderId, SenderIdArn,
+	// PoolId, or PoolArn.
 	//
 	// If you are using a shared End User Messaging SMS resource then you must use the
 	// full Amazon Resource Name(ARN).
@@ -118,6 +118,50 @@ type SendTextMessageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendTextMessageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendTextMessageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendTextMessageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SendTextMessageRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	serializeContextMap(s, schemas.SendTextMessageRequest_Context, v.Context)
+	serializeDestinationCountryParameters(s, schemas.SendTextMessageRequest_DestinationCountryParameters, v.DestinationCountryParameters)
+	if v.DestinationPhoneNumber != nil {
+		s.WriteString(schemas.SendTextMessageRequest_DestinationPhoneNumber, *v.DestinationPhoneNumber)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.SendTextMessageRequest_DryRun, v.DryRun)
+	}
+	if v.Keyword != nil {
+		s.WriteString(schemas.SendTextMessageRequest_Keyword, *v.Keyword)
+	}
+	if v.MaxPrice != nil {
+		s.WriteString(schemas.SendTextMessageRequest_MaxPrice, *v.MaxPrice)
+	}
+	if v.MessageBody != nil {
+		s.WriteString(schemas.SendTextMessageRequest_MessageBody, *v.MessageBody)
+	}
+	if v.MessageFeedbackEnabled != nil {
+		s.WriteBool(schemas.SendTextMessageRequest_MessageFeedbackEnabled, *v.MessageFeedbackEnabled)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.SendTextMessageRequest_MessageType, string(v.MessageType))
+	}
+	if v.OriginationIdentity != nil {
+		s.WriteString(schemas.SendTextMessageRequest_OriginationIdentity, *v.OriginationIdentity)
+	}
+	if v.ProtectConfigurationId != nil {
+		s.WriteString(schemas.SendTextMessageRequest_ProtectConfigurationId, *v.ProtectConfigurationId)
+	}
+	if v.TimeToLive != nil {
+		s.WriteInt32(schemas.SendTextMessageRequest_TimeToLive, *v.TimeToLive)
+	}
+}
+
 type SendTextMessageOutput struct {
 
 	// The unique identifier for the message.
@@ -129,77 +173,48 @@ type SendTextMessageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendTextMessageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendTextMessageResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendTextMessageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageId != nil {
+		s.WriteString(schemas.SendTextMessageResult_MessageId, *v.MessageId)
+	}
+}
+func (v *SendTextMessageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendTextMessageResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendTextMessageResult_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.SendTextMessageResult_MessageId, v.MessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendTextMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTextMessage, schemas.SendTextMessageRequest, schemas.SendTextMessageResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSendTextMessage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendTextMessage, schemas.SendTextMessageRequest, schemas.SendTextMessageResult), output: &SendTextMessageOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSendTextMessage{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "SendTextMessage"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSendTextMessageValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendTextMessage(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,22 +229,8 @@ func (c *Client) addOperationSendTextMessageMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSendTextMessage(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "SendTextMessage",
-	}
 }

@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"Group":"__Group__","GroupingStatuses":[{"Action":"GROUP","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ResourceArn":"__ResourceArn__","Status":"SUCCESS","UpdatedAt":946684800},{"Action":"GROUP","ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__","ResourceArn":"__ResourceArn__","Status":"SUCCESS","UpdatedAt":946684800}],"NextToken":"__NextToken__"}

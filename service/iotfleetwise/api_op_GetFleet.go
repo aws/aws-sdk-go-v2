@@ -4,10 +4,9 @@ package iotfleetwise
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -35,6 +34,28 @@ type GetFleetInput struct {
 	FleetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFleetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFleetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFleetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FleetId != nil {
+		s.WriteString(schemas.GetFleetRequest_fleetId, *v.FleetId)
+	}
+}
+func (v *GetFleetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFleetRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFleetRequest_fleetId:
+			v.FleetId = new(string)
+			return d.ReadString(schemas.GetFleetRequest_fleetId, v.FleetId)
+		}
+		return nil
+	})
 }
 
 type GetFleetOutput struct {
@@ -75,77 +96,78 @@ type GetFleetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFleetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFleetResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFleetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetFleetResponse_arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.GetFleetResponse_creationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GetFleetResponse_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetFleetResponse_id, *v.Id)
+	}
+	if v.LastModificationTime != nil {
+		s.WriteTime(schemas.GetFleetResponse_lastModificationTime, *v.LastModificationTime)
+	}
+	if v.SignalCatalogArn != nil {
+		s.WriteString(schemas.GetFleetResponse_signalCatalogArn, *v.SignalCatalogArn)
+	}
+}
+func (v *GetFleetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFleetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFleetResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFleetResponse_arn, v.Arn)
+		case schemas.GetFleetResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetFleetResponse_creationTime, v.CreationTime)
+		case schemas.GetFleetResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFleetResponse_description, v.Description)
+		case schemas.GetFleetResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFleetResponse_id, v.Id)
+		case schemas.GetFleetResponse_lastModificationTime:
+			v.LastModificationTime = new(time.Time)
+			return d.ReadTime(schemas.GetFleetResponse_lastModificationTime, v.LastModificationTime)
+		case schemas.GetFleetResponse_signalCatalogArn:
+			v.SignalCatalogArn = new(string)
+			return d.ReadString(schemas.GetFleetResponse_signalCatalogArn, v.SignalCatalogArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFleet, schemas.GetFleetRequest, schemas.GetFleetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetFleet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFleet, schemas.GetFleetRequest, schemas.GetFleetResponse), output: &GetFleetOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetFleet{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFleet"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetFleetValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFleet(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +182,8 @@ func (c *Client) addOperationGetFleetMiddlewares(stack *middleware.Stack, option
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetFleet(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetFleet",
-	}
 }

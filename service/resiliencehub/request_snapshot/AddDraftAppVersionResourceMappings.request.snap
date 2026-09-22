@@ -1,0 +1,5 @@
+POST /add-draft-app-version-resource-mappings
+
+Content-Type: application/json
+
+{"appArn":"__AppArn__","resourceMappings":[{"appRegistryAppName":"__AppRegistryAppName__","eksSourceName":"__EksSourceName__","logicalStackName":"__LogicalStackName__","mappingType":"CfnStack","physicalResourceId":{"awsAccountId":"__AwsAccountId__","awsRegion":"__AwsRegion__","identifier":"__Identifier__","type":"Arn"},"resourceGroupName":"__ResourceGroupName__","resourceName":"__ResourceName__","terraformSourceName":"__TerraformSourceName__"},{"appRegistryAppName":"__AppRegistryAppName__","eksSourceName":"__EksSourceName__","logicalStackName":"__LogicalStackName__","mappingType":"CfnStack","physicalResourceId":{"awsAccountId":"__AwsAccountId__","awsRegion":"__AwsRegion__","identifier":"__Identifier__","type":"Arn"},"resourceGroupName":"__ResourceGroupName__","resourceName":"__ResourceName__","terraformSourceName":"__TerraformSourceName__"}]}

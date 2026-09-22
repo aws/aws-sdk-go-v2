@@ -1,0 +1,5 @@
+POST /RollbackTransaction
+
+Content-Type: application/json
+
+{"resourceArn":"__ResourceArn__","secretArn":"__SecretArn__","transactionId":"__TransactionId__"}

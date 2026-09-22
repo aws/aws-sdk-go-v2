@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"QuickSetupTypeList":[{"LatestVersion":"__LatestVersion__","Type":"__Type__"},{"LatestVersion":"__LatestVersion__","Type":"__Type__"}]}

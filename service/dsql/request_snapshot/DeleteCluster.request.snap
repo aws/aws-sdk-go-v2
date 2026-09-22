@@ -1,0 +1,3 @@
+DELETE /cluster/__Identifier__?client-token=__ClientToken__
+
+

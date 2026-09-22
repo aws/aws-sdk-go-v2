@@ -1,0 +1,5 @@
+POST /media-insights-pipelines/__Identifier__/speaker-search-tasks?operation=start
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","KinesisVideoStreamSourceTaskConfiguration":{"ChannelId":1,"FragmentNumber":"__FragmentNumber__","StreamArn":"__StreamArn__"},"VoiceProfileDomainArn":"__VoiceProfileDomainArn__"}

@@ -1,0 +1,5 @@
+PUT /v1/cases/__CaseId__/update-case-comment/__CommentId__
+
+Content-Type: application/json
+
+{"body":"__Body__"}

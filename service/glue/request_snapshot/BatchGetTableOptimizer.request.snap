@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSGlue.BatchGetTableOptimizer
+
+{"Entries":[{"catalogId":"__CatalogId__","databaseName":"__DatabaseName__","tableName":"__TableName__","type":"compaction"},{"catalogId":"__CatalogId__","databaseName":"__DatabaseName__","tableName":"__TableName__","type":"compaction"}]}

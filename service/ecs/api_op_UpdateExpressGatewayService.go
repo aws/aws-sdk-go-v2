@@ -4,11 +4,10 @@ package ecs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ecs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing Express service configuration. Modifies container settings,
@@ -46,6 +45,27 @@ type UpdateExpressGatewayServiceInput struct {
 	// The number of CPU units used by the task.
 	Cpu *string
 
+	// The CPU architecture that the tasks in the Express service run on. Amazon ECS
+	// applies this value to the task definition revision that it registers for the
+	// service. If you don't specify a value, the service keeps the architecture that
+	// it currently runs on.
+	//
+	// Valid values:
+	//
+	//   - X86_64 - The x86 64-bit architecture.
+	//
+	//   - ARM64 - The 64-bit ARM architecture.
+	//
+	// Changing the architecture starts a new deployment that replaces the running
+	// tasks. Make sure that the container image that the service uses supports the
+	// architecture that you choose. The operating system family for an Express service
+	// is always LINUX .
+	//
+	// You can't specify cpuArchitecture when you also specify taskDefinitionArn ,
+	// because this value applies only to a task definition that Amazon ECS registers
+	// on your behalf.
+	CpuArchitecture types.ExpressCpuArchitecture
+
 	// The Amazon Resource Name (ARN) of the task execution role for the Express
 	// service.
 	ExecutionRoleArn *string
@@ -66,10 +86,71 @@ type UpdateExpressGatewayServiceInput struct {
 	// The auto-scaling configuration for the Express service.
 	ScalingTarget *types.ExpressGatewayScalingTarget
 
+	// The Amazon Resource Name (ARN) of a task definition to use to update the
+	// Express Gateway service. This allows you to manage your own task definition,
+	// giving you more control over the service configuration such as adding sidecar
+	// containers.
+	//
+	// The task definition must have a container named Main with a single TCP port
+	// mapping that includes a container port and port name. The task definition must
+	// also have FARGATE compatibility.
+	//
+	// If you provide a task definition ARN, you cannot also specify primaryContainer ,
+	// executionRoleArn , taskRoleArn , cpu , memory , or cpuArchitecture .
+	TaskDefinitionArn *string
+
 	// The Amazon Resource Name (ARN) of the IAM role for containers in this task.
 	TaskRoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateExpressGatewayServiceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExpressGatewayServiceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cpu != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_cpu, *v.Cpu)
+	}
+	if v.CpuArchitecture != "" {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_cpuArchitecture, string(v.CpuArchitecture))
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.HealthCheckPath != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_healthCheckPath, *v.HealthCheckPath)
+	}
+	if v.Memory != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_memory, *v.Memory)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrimaryContainer != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest_primaryContainer)
+		v.PrimaryContainer.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScalingTarget != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceRequest_scalingTarget)
+		v.ScalingTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.TaskDefinitionArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_taskDefinitionArn, *v.TaskDefinitionArn)
+	}
+	if v.TaskRoleArn != nil {
+		s.WriteString(schemas.UpdateExpressGatewayServiceRequest_taskRoleArn, *v.TaskRoleArn)
+	}
 }
 
 type UpdateExpressGatewayServiceOutput struct {
@@ -83,77 +164,50 @@ type UpdateExpressGatewayServiceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateExpressGatewayServiceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateExpressGatewayServiceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateExpressGatewayServiceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Service != nil {
+		s.WriteStruct(schemas.UpdateExpressGatewayServiceResponse_service)
+		v.Service.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateExpressGatewayServiceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateExpressGatewayServiceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateExpressGatewayServiceResponse_service:
+			v.Service = &types.UpdatedExpressGatewayService{}
+			return v.Service.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateExpressGatewayServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExpressGatewayService, schemas.UpdateExpressGatewayServiceRequest, schemas.UpdateExpressGatewayServiceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateExpressGatewayService{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateExpressGatewayService, schemas.UpdateExpressGatewayServiceRequest, schemas.UpdateExpressGatewayServiceResponse), output: &UpdateExpressGatewayServiceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateExpressGatewayService{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateExpressGatewayService"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateExpressGatewayServiceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateExpressGatewayService(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,22 +222,8 @@ func (c *Client) addOperationUpdateExpressGatewayServiceMiddlewares(stack *middl
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateExpressGatewayService(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateExpressGatewayService",
-	}
 }

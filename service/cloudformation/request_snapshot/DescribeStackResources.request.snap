@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DescribeStackResources&LogicalResourceId=__LogicalResourceId__&PhysicalResourceId=__PhysicalResourceId__&StackName=__StackName__&Version=2010-05-15

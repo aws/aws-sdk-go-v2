@@ -1,0 +1,6 @@
+POST /v1/UpdateSubscription
+
+Content-Type: application/json
+If-Match: __IfMatch__
+
+{"arn":"__Arn__","clientToken":"__ClientToken__","planTier":"__PlanTier__","usageLevel":"__UsageLevel__"}

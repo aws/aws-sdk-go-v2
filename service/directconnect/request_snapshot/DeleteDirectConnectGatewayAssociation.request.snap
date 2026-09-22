@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: OvertureService.DeleteDirectConnectGatewayAssociation
+
+{"associationId":"__AssociationId__","directConnectGatewayId":"__DirectConnectGatewayId__","virtualGatewayId":"__VirtualGatewayId__"}

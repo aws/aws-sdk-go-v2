@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.GetEvent
+
+{"event":{"currentLabel":"__CurrentLabel__","entities":[{"entityId":"__EntityId__","entityType":"__EntityType__"},{"entityId":"__EntityId__","entityType":"__EntityType__"}],"eventId":"__EventId__","eventTimestamp":"__EventTimestamp__","eventTypeName":"__EventTypeName__","eventVariables":{"key0":"__Value__"},"labelTimestamp":"__LabelTimestamp__"}}

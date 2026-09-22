@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: TransferService.ImportCertificate
+
+{"ActiveDate":946684800,"Certificate":"__Certificate__","CertificateChain":"__CertificateChain__","Description":"__Description__","InactiveDate":946684800,"PrivateKey":"__PrivateKey__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"Usage":"SIGNING"}

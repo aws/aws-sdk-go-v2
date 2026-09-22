@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Transcribe.ListMedicalTranscriptionJobs
+
+{"MedicalTranscriptionJobSummaries":[{"CompletionTime":946684800,"ContentIdentificationType":"PHI","CreationTime":946684800,"FailureReason":"__FailureReason__","LanguageCode":"af-ZA","MedicalTranscriptionJobName":"__MedicalTranscriptionJobName__","OutputLocationType":"CUSTOMER_BUCKET","Specialty":"PRIMARYCARE","StartTime":946684800,"TranscriptionJobStatus":"QUEUED","Type":"CONVERSATION"},{"CompletionTime":946684800,"ContentIdentificationType":"PHI","CreationTime":946684800,"FailureReason":"__FailureReason__","LanguageCode":"af-ZA","MedicalTranscriptionJobName":"__MedicalTranscriptionJobName__","OutputLocationType":"CUSTOMER_BUCKET","Specialty":"PRIMARYCARE","StartTime":946684800,"TranscriptionJobStatus":"QUEUED","Type":"CONVERSATION"}],"NextToken":"__NextToken__","Status":"QUEUED"}

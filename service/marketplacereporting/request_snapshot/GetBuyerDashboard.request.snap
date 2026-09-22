@@ -1,0 +1,5 @@
+POST /getBuyerDashboard
+
+Content-Type: application/json
+
+{"dashboardIdentifier":"__DashboardIdentifier__","embeddingDomains":["__Member__","__Member__"]}

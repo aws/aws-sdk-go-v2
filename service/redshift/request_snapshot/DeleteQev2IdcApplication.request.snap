@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=DeleteQev2IdcApplication&Qev2IdcApplicationArn=__Qev2IdcApplicationArn__&Version=2012-12-01

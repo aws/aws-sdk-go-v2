@@ -198,19 +198,19 @@
                 "s3Uri": {
                     "target": "com.amazonaws.bedrock#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "S3 URI of the input JSONL file.",
+                        "smithy.api#documentation": "<p>The S3 URI of the JSONL input file containing prompt templates and evaluation samples.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Input data configuration for the advanced prompt optimization job."
+                "smithy.api#documentation": "<p>Contains the input data configuration for an advanced prompt optimization job.</p>"
             }
         },
         "com.amazonaws.bedrock#AdvancedPromptOptimizationJobArn": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "ARN of the advanced prompt optimization job.",
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an advanced prompt optimization job.</p>",
                 "smithy.api#length": {
                     "max": 1011
                 },
@@ -220,7 +220,7 @@
         "com.amazonaws.bedrock#AdvancedPromptOptimizationJobDescription": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Description of the advanced prompt optimization job.",
+                "smithy.api#documentation": "<p>The description of an advanced prompt optimization job.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 500
@@ -230,7 +230,7 @@
         "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "ARN or ID of the advanced prompt optimization job.",
+                "smithy.api#documentation": "<p>The ARN or ID of an advanced prompt optimization job.</p>",
                 "smithy.api#length": {
                     "max": 1011
                 },
@@ -243,7 +243,7 @@
                 "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier"
             },
             "traits": {
-                "smithy.api#documentation": "List of advanced prompt optimization job identifiers.",
+                "smithy.api#documentation": "<p>A list of advanced prompt optimization job identifiers.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 25
@@ -253,7 +253,7 @@
         "com.amazonaws.bedrock#AdvancedPromptOptimizationJobName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Name of the advanced prompt optimization job.",
+                "smithy.api#documentation": "<p>The name of an advanced prompt optimization job.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
@@ -328,7 +328,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Status of the advanced prompt optimization job."
+                "smithy.api#documentation": "<p>The status of an advanced prompt optimization job.</p>"
             }
         },
         "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummaries": {
@@ -337,7 +337,7 @@
                 "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummary"
             },
             "traits": {
-                "smithy.api#documentation": "List of advanced prompt optimization job summaries."
+                "smithy.api#documentation": "<p>A list of advanced prompt optimization job summaries.</p>"
             }
         },
         "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummary": {
@@ -346,40 +346,49 @@
                 "jobArn": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobArn",
                     "traits": {
-                        "smithy.api#documentation": "ARN of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobName": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobName",
                     "traits": {
-                        "smithy.api#documentation": "Name of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The name of the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobStatus": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "Status of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The status of the job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "creationTime": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "Creation time of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The time at which the job was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "lastModifiedTime": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "Last modified time of the advanced prompt optimization job."
+                        "smithy.api#documentation": "<p>The time at which the job was last modified.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Summary of an advanced prompt optimization job."
+                "smithy.api#documentation": "<p>Contains a summary of an advanced prompt optimization job.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AdvancedPromptOptimizationModelIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2}(/[a-z0-9]{12}|))|(arn:aws(|-us-gov|-cn|-iso|-iso-b|-iso-f):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:application-inference-profile/[a-zA-Z0-9-:.]+)|(arn:aws(|-us-gov|-cn|-iso|-iso-b|-iso-f):bedrock:[a-z0-9-]{1,20}:([0-9]{12})?:inference-profile/[a-zA-Z0-9-:.]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63})))$"
             }
         },
         "com.amazonaws.bedrock#AdvancedPromptOptimizationOutputConfig": {
@@ -388,13 +397,13 @@
                 "s3Uri": {
                     "target": "com.amazonaws.bedrock#S3UriFolder",
                     "traits": {
-                        "smithy.api#documentation": "S3 URI prefix for the output location.",
+                        "smithy.api#documentation": "<p>The S3 URI prefix where the optimization results will be written.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Output data configuration for the advanced prompt optimization job."
+                "smithy.api#documentation": "<p>Contains the output data configuration for an advanced prompt optimization job.</p>"
             }
         },
         "com.amazonaws.bedrock#AgreementAvailability": {
@@ -481,6 +490,9 @@
                     "target": "com.amazonaws.bedrock#CustomModelResource"
                 },
                 {
+                    "target": "com.amazonaws.bedrock#DataRetentionResource"
+                },
+                {
                     "target": "com.amazonaws.bedrock#EnforcedGuardrailConfigurationResource"
                 },
                 {
@@ -542,6 +554,194 @@
                 "smithy.api#documentation": "<p>Describes the API operations for creating, managing, fine-turning, and evaluating Amazon Bedrock models.</p>",
                 "smithy.api#httpBearerAuth": {},
                 "smithy.api#title": "Amazon Bedrock",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://bedrock-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://bedrock-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://bedrock.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://bedrock.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -2288,6 +2488,15 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildFeedback": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildLog": {
             "type": "structure",
             "members": {
@@ -2860,6 +3069,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GENERATE_POLICY_SCENARIOS"
+                    }
+                },
+                "RESOLVE_POLICY_AMBIGUITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOLVE_POLICY_AMBIGUITIES"
+                    }
+                },
+                "ITERATIVELY_REFINE_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITERATIVELY_REFINE_POLICY"
                     }
                 }
             }
@@ -3652,6 +3873,39 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An annotation for processing and incorporating new content into an Automated Reasoning policy.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementContent": {
+            "type": "structure",
+            "members": {
+                "documents": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementDocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source documents used for iterative policy refinement. These documents provide context for refining the policy definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "feedback": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildFeedback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional feedback to guide the iterative refinement workflow. Provide specific instructions or constraints for policy refinement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for an iterative policy refinement workflow, including source documents to process and optional feedback to guide the refinement.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementDocumentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildWorkflowDocument"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationList": {
@@ -4730,6 +4984,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The content configuration for generating a fidelity report workflow. This can include source documents to analyze or an existing fidelity report to update with a new policy definition.</p>"
                     }
+                },
+                "iterativeRefinementContent": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Content configuration to start an iterative policy refinement workflow that uses generative AI to automatically make changes to the policy based on test results and the optional feedback provided.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4769,7 +5029,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Batch delete the specified advanced prompt optimization jobs.",
+                "smithy.api#documentation": "<p>Deletes one or more advanced prompt optimization jobs.</p>",
                 "smithy.api#http": {
                     "code": 202,
                     "method": "POST",
@@ -4783,26 +5043,26 @@
                 "jobIdentifier": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "Identifier of the job that failed to delete.",
+                        "smithy.api#documentation": "<p>The identifier of the job that could not be deleted.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "code": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Error code for the deletion failure.",
+                        "smithy.api#documentation": "<p>The error code for the deletion failure.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Error message describing the deletion failure."
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Batch deletion error for an advanced prompt optimization job."
+                "smithy.api#documentation": "<p>Contains information about an error that occurred when deleting an advanced prompt optimization job.</p>"
             }
         },
         "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobErrors": {
@@ -4811,7 +5071,7 @@
                 "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobError"
             },
             "traits": {
-                "smithy.api#documentation": "List of batch deletion errors for advanced prompt optimization jobs.",
+                "smithy.api#documentation": "<p>A list of errors from a batch delete operation on advanced prompt optimization jobs.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 25
@@ -4824,20 +5084,20 @@
                 "jobIdentifier": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "Identifier of the deleted job.",
+                        "smithy.api#documentation": "<p>The identifier of the deleted job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobStatus": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "Status of the deleted job.",
+                        "smithy.api#documentation": "<p>The status of the deleted job.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Successfully deleted advanced prompt optimization job."
+                "smithy.api#documentation": "<p>Contains information about a successfully deleted advanced prompt optimization job.</p>"
             }
         },
         "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobItems": {
@@ -4846,7 +5106,7 @@
                 "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobItem"
             },
             "traits": {
-                "smithy.api#documentation": "List of successfully deleted advanced prompt optimization jobs.",
+                "smithy.api#documentation": "<p>A list of successfully deleted advanced prompt optimization jobs.</p>",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 25
@@ -4859,13 +5119,13 @@
                 "jobIdentifiers": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifiers",
                     "traits": {
-                        "smithy.api#documentation": "List of advanced prompt optimization job identifiers to delete.",
+                        "smithy.api#documentation": "<p>A list of advanced prompt optimization job identifiers (ARNs or IDs) to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Batch Delete Advanced Prompt Optimization Jobs Request",
+                "smithy.api#documentation": "<p>Batch Delete Advanced Prompt Optimization Jobs Request</p>",
                 "smithy.api#input": {}
             }
         },
@@ -4875,20 +5135,20 @@
                 "errors": {
                     "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobErrors",
                     "traits": {
-                        "smithy.api#documentation": "List of errors encountered during batch deletion.",
+                        "smithy.api#documentation": "<p>A list of errors encountered during batch deletion.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "advancedPromptOptimizationJobs": {
                     "target": "com.amazonaws.bedrock#BatchDeleteAdvancedPromptOptimizationJobItems",
                     "traits": {
-                        "smithy.api#documentation": "List of successfully deleted advanced prompt optimization jobs.",
+                        "smithy.api#documentation": "<p>A list of successfully deleted advanced prompt optimization jobs.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Batch Delete Advanced Prompt Optimization Jobs Response",
+                "smithy.api#documentation": "<p>Batch Delete Advanced Prompt Optimization Jobs Response</p>",
                 "smithy.api#output": {}
             }
         },
@@ -5383,7 +5643,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Creates an asynchronous batch job for advanced prompt optimization.",
+                "smithy.api#documentation": "<p>Creates an advanced prompt optimization job. The job optimizes your prompt templates for specific models using your evaluation dataset and criteria.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -5398,59 +5658,59 @@
                 "jobName": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobName",
                     "traits": {
-                        "smithy.api#documentation": "Name of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>A name for the advanced prompt optimization job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobDescription": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobDescription",
                     "traits": {
-                        "smithy.api#documentation": "Description of the advanced prompt optimization job."
+                        "smithy.api#documentation": "<p>A description of the advanced prompt optimization job.</p>"
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.bedrock#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "Idempotency token for the request.",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but does not return an error.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "inputConfig": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationInputConfig",
                     "traits": {
-                        "smithy.api#documentation": "Input data configuration for the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>Specifies the S3 location of your JSONL input file containing prompt templates and evaluation samples.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "outputConfig": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationOutputConfig",
                     "traits": {
-                        "smithy.api#documentation": "Output data configuration for the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>Specifies the S3 location where optimization results will be stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "encryptionKeyArn": {
                     "target": "com.amazonaws.bedrock#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "KMS key ARN for encrypting output data."
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used for encrypting the output data. If not specified, the output is encrypted with an Amazon-owned KMS key.</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.bedrock#TagList",
                     "traits": {
-                        "smithy.api#documentation": "Tags to associate with the job."
+                        "smithy.api#documentation": "<p>Tags to associate with the advanced prompt optimization job.</p>"
                     }
                 },
                 "modelConfigurations": {
                     "target": "com.amazonaws.bedrock#ModelConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "Model configurations for advanced prompt optimization.",
+                        "smithy.api#documentation": "<p>A list of model configurations specifying the target models for prompt optimization. You can specify up to 5 models.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Create Advanced Prompt Optimization Job Request",
+                "smithy.api#documentation": "<p>Create Advanced Prompt Optimization Job Request</p>",
                 "smithy.api#input": {}
             }
         },
@@ -5460,13 +5720,13 @@
                 "jobArn": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobArn",
                     "traits": {
-                        "smithy.api#documentation": "ARN of the created advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created advanced prompt optimization job.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Create Advanced Prompt Optimization Job Response",
+                "smithy.api#documentation": "<p>Create Advanced Prompt Optimization Job Response</p>",
                 "smithy.api#output": {}
             }
         },
@@ -5891,7 +6151,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new custom model in Amazon Bedrock. After the model is active, you can use it for inference.</p> <p>To use the model for inference, you must purchase Provisioned Throughput for it. You can't use On-demand inference with these custom models. For more information about Provisioned Throughput, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html\">Provisioned Throughput</a>.</p> <p>The model appears in <code>ListCustomModels</code> with a <code>customizationType</code> of <code>imported</code>. To track the status of the new model, you use the <code>GetCustomModel</code> API operation. The model can be in the following states:</p> <ul> <li> <p> <code>Creating</code> - Initial state during validation and registration</p> </li> <li> <p> <code>Active</code> - Model is ready for use in inference</p> </li> <li> <p> <code>Failed</code> - Creation process encountered an error</p> </li> </ul> <p> <b>Related APIs</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModel.html\">GetCustomModel</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModels.html\">ListCustomModels</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModel.html\">DeleteCustomModel</a> </p> </li> </ul>",
+                "smithy.api#documentation": "<p>Creates a new custom model in Amazon Bedrock. After the model is active, you can use it for inference.</p> <p>You can provide the model data source in one of the following ways:</p> <ul> <li> <p> <code>customModelDataSource</code> — Specify a SageMaker AI model package ARN. Amazon Bedrock resolves the model package to retrieve the model artifacts. This is the preferred method for new SageMaker AI training outputs.</p> </li> <li> <p> <code>modelSourceConfig</code> — Specify an Amazon S3 URI pointing to the Amazon-managed Amazon S3 bucket containing your model artifacts.</p> </li> </ul> <p>To use the model for inference, you must purchase Provisioned Throughput for it. You can't use On-demand inference with these custom models. For more information about Provisioned Throughput, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html\">Provisioned Throughput</a>.</p> <p>The model appears in <code>ListCustomModels</code> with a <code>customizationType</code> of <code>imported</code>. To track the status of the new model, you use the <code>GetCustomModel</code> API operation. The model can be in the following states:</p> <ul> <li> <p> <code>Creating</code> - Initial state during validation and registration</p> </li> <li> <p> <code>Active</code> - Model is ready for use in inference</p> </li> <li> <p> <code>Failed</code> - Creation process encountered an error</p> </li> </ul> <p> <b>Related APIs</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModel.html\">GetCustomModel</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModels.html\">ListCustomModels</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModel.html\">DeleteCustomModel</a> </p> </li> </ul>",
                 "smithy.api#examples": [
                     {
                         "title": "Successful CreateCustomModel API call",
@@ -6039,8 +6299,13 @@
                 "modelSourceConfig": {
                     "target": "com.amazonaws.bedrock#ModelDataSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data source for the model. The Amazon S3 URI in the model source must be for the Amazon-managed Amazon S3 bucket containing your model artifacts.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The data source for the model. The Amazon S3 URI in the model source must be for the Amazon-managed Amazon S3 bucket containing your model artifacts.</p>"
+                    }
+                },
+                "customModelDataSource": {
+                    "target": "com.amazonaws.bedrock#CustomModelDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source for the custom model. Use this field to specify a SageMaker AI model package ARN as the source for your custom model. Amazon Bedrock resolves the model package to retrieve the model artifacts.</p> <p>You can specify either <code>customModelDataSource</code> or <code>modelSourceConfig</code>, but not both.</p>"
                     }
                 },
                 "modelKmsKeyArn": {
@@ -6052,7 +6317,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.bedrock#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock assumes to perform tasks on your behalf. This role must have permissions to access the Amazon S3 bucket containing your model artifacts and the KMS key (if specified). For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html\">Setting up an IAM service role for importing models</a> in the Amazon Bedrock User Guide.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock assumes to perform tasks on your behalf. This role must have permissions to access the Amazon S3 bucket containing your model artifacts and the KMS key (if specified). For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html\">Setting up an IAM service role for importing models</a> in the Amazon Bedrock User Guide.</p> <p>This field is required when you use <code>modelSourceConfig</code> with an Amazon S3 data source. It is not required when you use <code>customModelDataSource</code> with a model package ARN, because Amazon Bedrock uses its own credentials to access the model artifacts.</p>"
                     }
                 },
                 "modelTags": {
@@ -7583,6 +7848,20 @@
                 "smithy.api#pattern": "^arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:[a-z0-9-]{1,20}:[0-9]{12}:custom-model/(imported|[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})/[a-z0-9]{12}$"
             }
         },
+        "com.amazonaws.bedrock#CustomModelDataSource": {
+            "type": "union",
+            "members": {
+                "modelPackageArnDataSource": {
+                    "target": "com.amazonaws.bedrock#ModelPackageArnDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A SageMaker AI model package ARN as the data source for the custom model. When you specify a model package ARN, Amazon Bedrock resolves the model package to retrieve the model artifacts.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data source for a custom model. This is a union type that supports the following member:</p> <ul> <li> <p> <code>modelPackageArnDataSource</code> — Specifies a SageMaker AI model package as the data source.</p> </li> </ul>"
+            }
+        },
         "com.amazonaws.bedrock#CustomModelDeploymentArn": {
             "type": "string",
             "traits": {
@@ -7961,6 +8240,55 @@
             "traits": {
                 "smithy.api#documentation": "<p>For a Distillation job, the status details for the data processing sub-task of the job.</p>"
             }
+        },
+        "com.amazonaws.bedrock#DataRetentionMode": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "AWS_REVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws_review"
+                    }
+                },
+                "PROVIDER_DATA_SHARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "provider_data_share"
+                    }
+                },
+                "INHERIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "inherit"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data retention mode for the account. Valid values are:</p> <ul> <li> <p> <code>default</code> – The standard data handling for the model applies.</p> </li> <li> <p> <code>none</code> – Zero data retention.</p> </li> <li> <p> <code>aws_review</code> – Amazon Web Services may review the request data. The data is not shared with the model provider. A model must support this mode to be invoked under it.</p> </li> <li> <p> <code>provider_data_share</code> – Data may be shared with the model provider.</p> </li> <li> <p> <code>inherit</code> – No data retention mode is set at this scope.</p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.bedrock#DataRetentionResource": {
+            "type": "resource",
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrock#GetAccountDataRetention"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#PutAccountDataRetention"
+                }
+            ]
         },
         "com.amazonaws.bedrock#DeleteAutomatedReasoningPolicy": {
             "type": "operation",
@@ -10430,6 +10758,66 @@
                 "smithy.api#documentation": "<p>The configuration details for response generation based on retrieved text chunks.</p>"
             }
         },
+        "com.amazonaws.bedrock#GetAccountDataRetention": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#GetAccountDataRetentionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#GetAccountDataRetentionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the account-wide data retention mode for Amazon Bedrock.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/data-retention"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetentionRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#GetAccountDataRetentionResponse": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data retention mode configured for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the data retention mode was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrock#GetAdvancedPromptOptimizationJob": {
             "type": "operation",
             "input": {
@@ -10456,7 +10844,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Retrieves the details and status of an advanced prompt optimization job.",
+                "smithy.api#documentation": "<p>Gets information about an advanced prompt optimization job.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -10471,14 +10859,14 @@
                 "jobIdentifier": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "ARN or ID of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The ARN or ID of the advanced prompt optimization job.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Get Advanced Prompt Optimization Job Request",
+                "smithy.api#documentation": "<p>Get Advanced Prompt Optimization Job Request</p>",
                 "smithy.api#input": {}
             }
         },
@@ -10488,79 +10876,79 @@
                 "jobArn": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobArn",
                     "traits": {
-                        "smithy.api#documentation": "ARN of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the advanced prompt optimization job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobName": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobName",
                     "traits": {
-                        "smithy.api#documentation": "Name of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The name of the advanced prompt optimization job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "jobDescription": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobDescription",
                     "traits": {
-                        "smithy.api#documentation": "Description of the advanced prompt optimization job."
+                        "smithy.api#documentation": "<p>The description of the advanced prompt optimization job.</p>"
                     }
                 },
                 "jobStatus": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "Status of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The status of the advanced prompt optimization job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "inputConfig": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationInputConfig",
                     "traits": {
-                        "smithy.api#documentation": "Input data configuration for the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The input data configuration for the optimization job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "outputConfig": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationOutputConfig",
                     "traits": {
-                        "smithy.api#documentation": "Output data configuration for the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The output data configuration for the optimization job.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "encryptionKeyArn": {
                     "target": "com.amazonaws.bedrock#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "KMS key ARN used for encrypting output data."
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the output data.</p>"
                     }
                 },
                 "creationTime": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "Creation time of the advanced prompt optimization job.",
+                        "smithy.api#documentation": "<p>The time at which the advanced prompt optimization job was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "lastModifiedTime": {
                     "target": "com.amazonaws.bedrock#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "Last modified time of the advanced prompt optimization job."
+                        "smithy.api#documentation": "<p>The time at which the advanced prompt optimization job was last modified.</p>"
                     }
                 },
                 "failureMessage": {
                     "target": "com.amazonaws.bedrock#ErrorMessage",
                     "traits": {
-                        "smithy.api#documentation": "Failure message if the advanced prompt optimization job failed."
+                        "smithy.api#documentation": "<p>If the job failed, a message describing the reason for the failure.</p>"
                     }
                 },
                 "modelConfigurations": {
                     "target": "com.amazonaws.bedrock#ModelConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "Model configurations for advanced prompt optimization.",
+                        "smithy.api#documentation": "<p>The model configurations used in the optimization job.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Get Advanced Prompt Optimization Job Response",
+                "smithy.api#documentation": "<p>Get Advanced Prompt Optimization Job Response</p>",
                 "smithy.api#output": {}
             }
         },
@@ -15824,7 +16212,7 @@
                 "maxTokens": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "The maximum number of tokens to generate.",
+                        "smithy.api#documentation": "<p>The maximum number of tokens to allow in the generated response. The default value is the maximum allowed value for the model that you are using.</p>",
                         "smithy.api#range": {
                             "min": 1
                         }
@@ -15833,7 +16221,7 @@
                 "temperature": {
                     "target": "smithy.api#Float",
                     "traits": {
-                        "smithy.api#documentation": "The temperature for sampling.",
+                        "smithy.api#documentation": "<p>The likelihood of the model selecting higher-probability options while generating a response. A lower value makes the model more likely to choose higher-probability options, while a higher value makes the model more likely to choose lower-probability options.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 1
@@ -15843,7 +16231,7 @@
                 "topP": {
                     "target": "smithy.api#Float",
                     "traits": {
-                        "smithy.api#documentation": "The top-p value for nucleus sampling.",
+                        "smithy.api#documentation": "<p>The percentage of most-likely candidates that the model considers for the next token. For example, if you choose a value of 0.8 for <code>topP</code>, the model selects from the top 80% of the probability distribution of tokens that could be next in the sequence.</p>",
                         "smithy.api#range": {
                             "min": 0,
                             "max": 1
@@ -15853,7 +16241,7 @@
                 "stopSequences": {
                     "target": "com.amazonaws.bedrock#NonEmptyStringList",
                     "traits": {
-                        "smithy.api#documentation": "Stop sequences that end generation.",
+                        "smithy.api#documentation": "<p>A list of stop sequences. A stop sequence is a sequence of characters that causes the model to stop generating the response.</p>",
                         "smithy.api#length": {
                             "max": 2500
                         }
@@ -15861,7 +16249,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Inference configuration for a model."
+                "smithy.api#documentation": "<p>Base inference parameters to pass to a model. For more information, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html\">Inference parameters for foundation models</a>.</p>"
             }
         },
         "com.amazonaws.bedrock#InferenceProfileArn": {
@@ -16488,7 +16876,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Lists all advanced prompt optimization jobs for the account.",
+                "smithy.api#documentation": "<p>Lists the advanced prompt optimization jobs in your account.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -16509,34 +16897,34 @@
                 "maxResults": {
                     "target": "com.amazonaws.bedrock#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "Maximum number of results to return.",
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.bedrock#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "Pagination token for the next page of results.",
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token in a subsequent request to get the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "sortBy": {
                     "target": "com.amazonaws.bedrock#SortJobsBy",
                     "traits": {
-                        "smithy.api#documentation": "Field to sort by in the returned list of jobs.",
+                        "smithy.api#documentation": "<p>The field to sort the results by.</p>",
                         "smithy.api#httpQuery": "sortBy"
                     }
                 },
                 "sortOrder": {
                     "target": "com.amazonaws.bedrock#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "Sort order for the results.",
+                        "smithy.api#documentation": "<p>The sort order for the results.</p>",
                         "smithy.api#httpQuery": "sortOrder"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "List Advanced Prompt Optimization Jobs Request",
+                "smithy.api#documentation": "<p>List Advanced Prompt Optimization Jobs Request</p>",
                 "smithy.api#input": {}
             }
         },
@@ -16546,18 +16934,18 @@
                 "jobSummaries": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobSummaries",
                     "traits": {
-                        "smithy.api#documentation": "List of advanced prompt optimization job summaries."
+                        "smithy.api#documentation": "<p>A list of advanced prompt optimization job summaries.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.bedrock#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "Pagination token for the next page of results."
+                        "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token in a subsequent request to get the next set of results.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "List Advanced Prompt Optimization Jobs Response",
+                "smithy.api#documentation": "<p>List Advanced Prompt Optimization Jobs Response</p>",
                 "smithy.api#output": {}
             }
         },
@@ -19088,27 +19476,27 @@
             "type": "structure",
             "members": {
                 "modelId": {
-                    "target": "com.amazonaws.bedrock#BedrockModelId",
+                    "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationModelIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "The model ID.",
+                        "smithy.api#documentation": "<p>The model to use for optimization. The value depends on the resource that you use:</p> <ul> <li> <p>If you use a base model, specify the model ID or its ARN. For a list of model IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-cards.html\">Models at a glance</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use a cross-Region (system-defined) inference profile, specify the inference profile ID or its ARN. For a list of inference profile IDs, see <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference-support.html\">Supported Regions and models for inference profiles</a> in the Amazon Bedrock User Guide.</p> </li> <li> <p>If you use an application inference profile, specify its full ARN, including the account ID and Region.</p> </li> </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "inferenceConfig": {
                     "target": "com.amazonaws.bedrock#InferenceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "Inference configuration for the model."
+                        "smithy.api#documentation": "<p>The inference configuration for the model, including parameters such as maximum tokens, temperature, and top-p.</p>"
                     }
                 },
                 "additionalModelRequestFields": {
                     "target": "com.amazonaws.bedrock#AdditionalModelRequestFields",
                     "traits": {
-                        "smithy.api#documentation": "Additional model request fields."
+                        "smithy.api#documentation": "<p>Additional model request fields. Use this to pass model-specific parameters that are not included in the standard inference configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Configuration for a model used in advanced prompt optimization."
+                "smithy.api#documentation": "<p>Contains the configuration for a model used in an advanced prompt optimization job, including the model ID and inference parameters.</p>"
             }
         },
         "com.amazonaws.bedrock#ModelConfigurations": {
@@ -19117,7 +19505,7 @@
                 "target": "com.amazonaws.bedrock#ModelConfiguration"
             },
             "traits": {
-                "smithy.api#documentation": "Model configurations for advanced prompt optimization.",
+                "smithy.api#documentation": "<p>A list of model configurations for advanced prompt optimization.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5
@@ -20036,6 +20424,27 @@
                 "smithy.api#pattern": "^([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63})$"
             }
         },
+        "com.amazonaws.bedrock#ModelPackageArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]{9,16}:[0-9]{12}:model-package/[\\S]{1,2048}$"
+            }
+        },
+        "com.amazonaws.bedrock#ModelPackageArnDataSource": {
+            "type": "structure",
+            "members": {
+                "modelPackageArn": {
+                    "target": "com.amazonaws.bedrock#ModelPackageArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SageMaker AI model package. The ARN must be for a model package of <code>restricted</code> type.</p> <p>To use a model package ARN, you must have the <code>sagemaker:DescribeModelPackage</code> and <code>sagemaker:AccessModelPackageData</code> permissions on the model package resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the Amazon Resource Name (ARN) of a SageMaker AI model package to use as the data source for a custom model.</p>"
+            }
+        },
         "com.amazonaws.bedrock#ModelResource": {
             "type": "resource",
             "operations": [
@@ -20096,7 +20505,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A list of non-empty strings."
+                "smithy.api#documentation": "<p>A list of non-empty strings.</p>"
             }
         },
         "com.amazonaws.bedrock#NonNegativeLong": {
@@ -20637,6 +21046,74 @@
                     "target": "com.amazonaws.bedrock#UpdateProvisionedModelThroughput"
                 }
             ]
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetention": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrock#PutAccountDataRetentionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrock#PutAccountDataRetentionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrock#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrock#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the account-wide data retention mode for Amazon Bedrock.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/data-retention"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetentionRequest": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data retention mode to set for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrock#PutAccountDataRetentionResponse": {
+            "type": "structure",
+            "members": {
+                "mode": {
+                    "target": "com.amazonaws.bedrock#DataRetentionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data retention mode set for the account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "com.amazonaws.bedrock#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the data retention mode was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.bedrock#PutEnforcedGuardrailConfiguration": {
             "type": "operation",
@@ -22228,7 +22705,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Stops an in-progress advanced prompt optimization job.",
+                "smithy.api#documentation": "<p>Stops an advanced prompt optimization job that is in progress.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -22242,14 +22719,14 @@
                 "jobIdentifier": {
                     "target": "com.amazonaws.bedrock#AdvancedPromptOptimizationJobIdentifier",
                     "traits": {
-                        "smithy.api#documentation": "ARN or ID of the advanced prompt optimization job to stop.",
+                        "smithy.api#documentation": "<p>The ARN or ID of the advanced prompt optimization job to stop.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Stop Advanced Prompt Optimization Job Request",
+                "smithy.api#documentation": "<p>Stop Advanced Prompt Optimization Job Request</p>",
                 "smithy.api#input": {}
             }
         },
@@ -22257,7 +22734,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "Stop Advanced Prompt Optimization Job Response",
+                "smithy.api#documentation": "<p>Stop Advanced Prompt Optimization Job Response</p>",
                 "smithy.api#output": {}
             }
         },

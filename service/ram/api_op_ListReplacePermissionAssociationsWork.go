@@ -5,10 +5,10 @@ package ram
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ram/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the current status of the asynchronous tasks performed by RAM when
@@ -63,6 +63,25 @@ type ListReplacePermissionAssociationsWorkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplacePermissionAssociationsWorkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplacePermissionAssociationsWorkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplacePermissionAssociationsWorkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReplacePermissionAssociationsWorkRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplacePermissionAssociationsWorkRequest_nextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListReplacePermissionAssociationsWorkRequest_status, string(v.Status))
+	}
+	serializeReplacePermissionAssociationsWorkIdList(s, schemas.ListReplacePermissionAssociationsWorkRequest_workIds, v.WorkIds)
+}
+
 type ListReplacePermissionAssociationsWorkOutput struct {
 
 	// If present, this value indicates that more output is available than is included
@@ -81,74 +100,48 @@ type ListReplacePermissionAssociationsWorkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplacePermissionAssociationsWorkOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplacePermissionAssociationsWorkResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplacePermissionAssociationsWorkOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplacePermissionAssociationsWorkResponse_nextToken, *v.NextToken)
+	}
+	serializeReplacePermissionAssociationsWorkList(s, schemas.ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks, v.ReplacePermissionAssociationsWorks)
+}
+func (v *ListReplacePermissionAssociationsWorkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReplacePermissionAssociationsWorkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReplacePermissionAssociationsWorkResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReplacePermissionAssociationsWorkResponse_nextToken, v.NextToken)
+		case schemas.ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks:
+			return deserializeReplacePermissionAssociationsWorkList(d, schemas.ListReplacePermissionAssociationsWorkResponse_replacePermissionAssociationsWorks, &v.ReplacePermissionAssociationsWorks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReplacePermissionAssociationsWorkMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplacePermissionAssociationsWork, schemas.ListReplacePermissionAssociationsWorkRequest, schemas.ListReplacePermissionAssociationsWorkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReplacePermissionAssociationsWork{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplacePermissionAssociationsWork, schemas.ListReplacePermissionAssociationsWorkRequest, schemas.ListReplacePermissionAssociationsWorkResponse), output: &ListReplacePermissionAssociationsWorkOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReplacePermissionAssociationsWork{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReplacePermissionAssociationsWork"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReplacePermissionAssociationsWork(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +154,6 @@ func (c *Client) addOperationListReplacePermissionAssociationsWorkMiddlewares(st
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -278,11 +265,3 @@ type ListReplacePermissionAssociationsWorkAPIClient interface {
 }
 
 var _ ListReplacePermissionAssociationsWorkAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListReplacePermissionAssociationsWork(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListReplacePermissionAssociationsWork",
-	}
-}

@@ -5,10 +5,10 @@ package kafka
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafka/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafka/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the replicators.
@@ -44,6 +44,24 @@ type ListReplicatorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplicatorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplicatorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplicatorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReplicatorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplicatorsRequest_NextToken, *v.NextToken)
+	}
+	if v.ReplicatorNameFilter != nil {
+		s.WriteString(schemas.ListReplicatorsRequest_ReplicatorNameFilter, *v.ReplicatorNameFilter)
+	}
+}
+
 type ListReplicatorsOutput struct {
 
 	// If the response of ListReplicators is truncated, it returns a NextToken in the
@@ -60,74 +78,48 @@ type ListReplicatorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReplicatorsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReplicatorsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReplicatorsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReplicatorsResponse_NextToken, *v.NextToken)
+	}
+	serialize__listOfReplicatorSummary(s, schemas.ListReplicatorsResponse_Replicators, v.Replicators)
+}
+func (v *ListReplicatorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReplicatorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReplicatorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReplicatorsResponse_NextToken, v.NextToken)
+		case schemas.ListReplicatorsResponse_Replicators:
+			return deserialize__listOfReplicatorSummary(d, schemas.ListReplicatorsResponse_Replicators, &v.Replicators)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReplicatorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplicators, schemas.ListReplicatorsRequest, schemas.ListReplicatorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReplicators{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReplicators, schemas.ListReplicatorsRequest, schemas.ListReplicatorsResponse), output: &ListReplicatorsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReplicators{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReplicators"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReplicators(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,12 +132,6 @@ func (c *Client) addOperationListReplicatorsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -247,11 +233,3 @@ type ListReplicatorsAPIClient interface {
 }
 
 var _ ListReplicatorsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListReplicators(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListReplicators",
-	}
-}

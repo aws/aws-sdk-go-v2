@@ -1,0 +1,5 @@
+POST /useraccess/start
+
+Content-Type: application/json
+
+{"appBundleIdentifier":"__AppBundleIdentifier__","email":"__Email__"}

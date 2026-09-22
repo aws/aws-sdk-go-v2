@@ -1,0 +1,5 @@
+POST /share
+
+Content-Type: application/json
+
+{"principalSubscriber":"__PrincipalSubscriber__","resourceArn":"__ResourceArn__","shareName":"__ShareName__"}

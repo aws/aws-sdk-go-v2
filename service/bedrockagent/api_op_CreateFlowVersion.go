@@ -5,10 +5,10 @@ package bedrockagent
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -49,6 +49,24 @@ type CreateFlowVersionInput struct {
 	Description *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateFlowVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlowVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlowVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateFlowVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFlowVersionRequest_description, *v.Description)
+	}
+	if v.FlowIdentifier != nil {
+		s.WriteString(schemas.CreateFlowVersionRequest_flowIdentifier, *v.FlowIdentifier)
+	}
 }
 
 type CreateFlowVersionOutput struct {
@@ -107,65 +125,102 @@ type CreateFlowVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateFlowVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateFlowVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateFlowVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateFlowVersionResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CreateFlowVersionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.CustomerEncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateFlowVersionResponse_customerEncryptionKeyArn, *v.CustomerEncryptionKeyArn)
+	}
+	if v.Definition != nil {
+		s.WriteStruct(schemas.CreateFlowVersionResponse_definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateFlowVersionResponse_description, *v.Description)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.CreateFlowVersionResponse_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CreateFlowVersionResponse_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateFlowVersionResponse_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.CreateFlowVersionResponse_status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.CreateFlowVersionResponse_version, *v.Version)
+	}
+}
+func (v *CreateFlowVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateFlowVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateFlowVersionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateFlowVersionResponse_arn, v.Arn)
+		case schemas.CreateFlowVersionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateFlowVersionResponse_createdAt, v.CreatedAt)
+		case schemas.CreateFlowVersionResponse_customerEncryptionKeyArn:
+			v.CustomerEncryptionKeyArn = new(string)
+			return d.ReadString(schemas.CreateFlowVersionResponse_customerEncryptionKeyArn, v.CustomerEncryptionKeyArn)
+		case schemas.CreateFlowVersionResponse_definition:
+			v.Definition = &types.FlowDefinition{}
+			return v.Definition.Deserialize(d)
+		case schemas.CreateFlowVersionResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateFlowVersionResponse_description, v.Description)
+		case schemas.CreateFlowVersionResponse_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.CreateFlowVersionResponse_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.CreateFlowVersionResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateFlowVersionResponse_id, v.Id)
+		case schemas.CreateFlowVersionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateFlowVersionResponse_name, v.Name)
+		case schemas.CreateFlowVersionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateFlowVersionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.FlowStatus(ev)
+			return nil
+		case schemas.CreateFlowVersionResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.CreateFlowVersionResponse_version, v.Version)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateFlowVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlowVersion, schemas.CreateFlowVersionRequest, schemas.CreateFlowVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateFlowVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateFlowVersion, schemas.CreateFlowVersionRequest, schemas.CreateFlowVersionResponse), output: &CreateFlowVersionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateFlowVersion{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateFlowVersion"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -175,12 +230,6 @@ func (c *Client) addOperationCreateFlowVersionMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateFlowVersionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFlowVersion(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,12 +242,6 @@ func (c *Client) addOperationCreateFlowVersionMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -238,12 +281,4 @@ func (m *idempotencyToken_initializeOpCreateFlowVersion) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateFlowVersionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateFlowVersion{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateFlowVersion(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateFlowVersion",
-	}
 }

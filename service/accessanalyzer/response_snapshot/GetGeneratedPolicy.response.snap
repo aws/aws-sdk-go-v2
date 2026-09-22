@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"generatedPolicyResult":{"generatedPolicies":[{"policy":"__Policy__"},{"policy":"__Policy__"}],"properties":{"cloudTrailProperties":{"endTime":"2000-01-01T00:00:00Z","startTime":"2000-01-01T00:00:00Z","trailProperties":[{"allRegions":true,"cloudTrailArn":"__CloudTrailArn__","regions":["__Member__","__Member__"]},{"allRegions":true,"cloudTrailArn":"__CloudTrailArn__","regions":["__Member__","__Member__"]}]},"isComplete":true,"principalArn":"__PrincipalArn__"}},"jobDetails":{"completedOn":"2000-01-01T00:00:00Z","jobError":{"code":"AUTHORIZATION_ERROR","message":"__Message__"},"jobId":"__JobId__","startedOn":"2000-01-01T00:00:00Z","status":"IN_PROGRESS"}}

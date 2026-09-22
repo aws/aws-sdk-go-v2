@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSSimbaAPIService_v20180301.CopySnapshotAndUpdateVolume
+
+{"ClientRequestToken":"__ClientRequestToken__","CopyStrategy":"CLONE","Options":["DELETE_INTERMEDIATE_SNAPSHOTS","DELETE_INTERMEDIATE_SNAPSHOTS"],"SourceSnapshotARN":"__SourceSnapshotARN__","VolumeId":"__VolumeId__"}

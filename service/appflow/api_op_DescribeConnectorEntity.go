@@ -4,11 +4,10 @@ package appflow
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appflow/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Provides details regarding the entity used with the connector, with a
@@ -49,6 +48,27 @@ type DescribeConnectorEntityInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorEntityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorEntityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorEntityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiVersion != nil {
+		s.WriteString(schemas.DescribeConnectorEntityRequest_apiVersion, *v.ApiVersion)
+	}
+	if v.ConnectorEntityName != nil {
+		s.WriteString(schemas.DescribeConnectorEntityRequest_connectorEntityName, *v.ConnectorEntityName)
+	}
+	if v.ConnectorProfileName != nil {
+		s.WriteString(schemas.DescribeConnectorEntityRequest_connectorProfileName, *v.ConnectorProfileName)
+	}
+	if v.ConnectorType != "" {
+		s.WriteString(schemas.DescribeConnectorEntityRequest_connectorType, string(v.ConnectorType))
+	}
+}
+
 type DescribeConnectorEntityOutput struct {
 
 	//  Describes the fields for that connector entity. For example, for an account
@@ -63,77 +83,45 @@ type DescribeConnectorEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorEntityOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorEntityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorEntityOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectorEntityFieldList(s, schemas.DescribeConnectorEntityResponse_connectorEntityFields, v.ConnectorEntityFields)
+}
+func (v *DescribeConnectorEntityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectorEntityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectorEntityResponse_connectorEntityFields:
+			return deserializeConnectorEntityFieldList(d, schemas.DescribeConnectorEntityResponse_connectorEntityFields, &v.ConnectorEntityFields)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectorEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorEntity, schemas.DescribeConnectorEntityRequest, schemas.DescribeConnectorEntityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConnectorEntity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorEntity, schemas.DescribeConnectorEntityRequest, schemas.DescribeConnectorEntityResponse), output: &DescribeConnectorEntityOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConnectorEntity{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnectorEntity"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeConnectorEntityValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConnectorEntity(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +136,8 @@ func (c *Client) addOperationDescribeConnectorEntityMiddlewares(stack *middlewar
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeConnectorEntity(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeConnectorEntity",
-	}
 }

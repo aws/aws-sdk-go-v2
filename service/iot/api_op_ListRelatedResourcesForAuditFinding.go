@@ -5,10 +5,10 @@ package iot
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The related resources of an Audit finding. The following resources can be
@@ -72,6 +72,24 @@ type ListRelatedResourcesForAuditFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRelatedResourcesForAuditFindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRelatedResourcesForAuditFindingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRelatedResourcesForAuditFindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingId != nil {
+		s.WriteString(schemas.ListRelatedResourcesForAuditFindingRequest_findingId, *v.FindingId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRelatedResourcesForAuditFindingRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRelatedResourcesForAuditFindingRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListRelatedResourcesForAuditFindingOutput struct {
 
 	// A token that can be used to retrieve the next set of results, or null for the
@@ -87,77 +105,51 @@ type ListRelatedResourcesForAuditFindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRelatedResourcesForAuditFindingOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRelatedResourcesForAuditFindingResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRelatedResourcesForAuditFindingOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRelatedResourcesForAuditFindingResponse_nextToken, *v.NextToken)
+	}
+	serializeRelatedResources(s, schemas.ListRelatedResourcesForAuditFindingResponse_relatedResources, v.RelatedResources)
+}
+func (v *ListRelatedResourcesForAuditFindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRelatedResourcesForAuditFindingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRelatedResourcesForAuditFindingResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRelatedResourcesForAuditFindingResponse_nextToken, v.NextToken)
+		case schemas.ListRelatedResourcesForAuditFindingResponse_relatedResources:
+			return deserializeRelatedResources(d, schemas.ListRelatedResourcesForAuditFindingResponse_relatedResources, &v.RelatedResources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRelatedResourcesForAuditFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelatedResourcesForAuditFinding, schemas.ListRelatedResourcesForAuditFindingRequest, schemas.ListRelatedResourcesForAuditFindingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListRelatedResourcesForAuditFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRelatedResourcesForAuditFinding, schemas.ListRelatedResourcesForAuditFindingRequest, schemas.ListRelatedResourcesForAuditFindingResponse), output: &ListRelatedResourcesForAuditFindingOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListRelatedResourcesForAuditFinding{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRelatedResourcesForAuditFinding"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListRelatedResourcesForAuditFindingValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRelatedResourcesForAuditFinding(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,12 +162,6 @@ func (c *Client) addOperationListRelatedResourcesForAuditFindingMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -279,11 +265,3 @@ type ListRelatedResourcesForAuditFindingAPIClient interface {
 }
 
 var _ ListRelatedResourcesForAuditFindingAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListRelatedResourcesForAuditFinding(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListRelatedResourcesForAuditFinding",
-	}
-}

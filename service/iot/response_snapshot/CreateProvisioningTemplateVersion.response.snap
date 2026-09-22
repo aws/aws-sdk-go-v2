@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"isDefaultVersion":true,"templateArn":"__TemplateArn__","templateName":"__TemplateName__","versionId":1}

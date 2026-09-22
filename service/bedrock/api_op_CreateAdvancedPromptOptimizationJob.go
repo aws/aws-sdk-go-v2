@@ -5,13 +5,14 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an asynchronous batch job for advanced prompt optimization.
+// Creates an advanced prompt optimization job. The job optimizes your prompt
+// templates for specific models using your evaluation dataset and criteria.
 func (c *Client) CreateAdvancedPromptOptimizationJob(ctx context.Context, params *CreateAdvancedPromptOptimizationJobInput, optFns ...func(*Options)) (*CreateAdvancedPromptOptimizationJobOutput, error) {
 	if params == nil {
 		params = &CreateAdvancedPromptOptimizationJobInput{}
@@ -30,45 +31,83 @@ func (c *Client) CreateAdvancedPromptOptimizationJob(ctx context.Context, params
 // Create Advanced Prompt Optimization Job Request
 type CreateAdvancedPromptOptimizationJobInput struct {
 
-	// Input data configuration for the advanced prompt optimization job.
+	// Specifies the S3 location of your JSONL input file containing prompt templates
+	// and evaluation samples.
 	//
 	// This member is required.
 	InputConfig *types.AdvancedPromptOptimizationInputConfig
 
-	// Name of the advanced prompt optimization job.
+	// A name for the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobName *string
 
-	// Model configurations for advanced prompt optimization.
+	// A list of model configurations specifying the target models for prompt
+	// optimization. You can specify up to 5 models.
 	//
 	// This member is required.
 	ModelConfigurations []types.ModelConfiguration
 
-	// Output data configuration for the advanced prompt optimization job.
+	// Specifies the S3 location where optimization results will be stored.
 	//
 	// This member is required.
 	OutputConfig *types.AdvancedPromptOptimizationOutputConfig
 
-	// Idempotency token for the request.
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request but does not return an error.
 	ClientToken *string
 
-	// KMS key ARN for encrypting output data.
+	// The Amazon Resource Name (ARN) of the KMS key used for encrypting the output
+	// data. If not specified, the output is encrypted with an Amazon-owned KMS key.
 	EncryptionKeyArn *string
 
-	// Description of the advanced prompt optimization job.
+	// A description of the advanced prompt optimization job.
 	JobDescription *string
 
-	// Tags to associate with the job.
+	// Tags to associate with the advanced prompt optimization job.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAdvancedPromptOptimizationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdvancedPromptOptimizationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdvancedPromptOptimizationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAdvancedPromptOptimizationJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.CreateAdvancedPromptOptimizationJobRequest_encryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.InputConfig != nil {
+		s.WriteStruct(schemas.CreateAdvancedPromptOptimizationJobRequest_inputConfig)
+		v.InputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobDescription != nil {
+		s.WriteString(schemas.CreateAdvancedPromptOptimizationJobRequest_jobDescription, *v.JobDescription)
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateAdvancedPromptOptimizationJobRequest_jobName, *v.JobName)
+	}
+	serializeModelConfigurations(s, schemas.CreateAdvancedPromptOptimizationJobRequest_modelConfigurations, v.ModelConfigurations)
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.CreateAdvancedPromptOptimizationJobRequest_outputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateAdvancedPromptOptimizationJobRequest_tags, v.Tags)
+}
+
 // Create Advanced Prompt Optimization Job Response
 type CreateAdvancedPromptOptimizationJobOutput struct {
 
-	// ARN of the created advanced prompt optimization job.
+	// The Amazon Resource Name (ARN) of the created advanced prompt optimization job.
 	//
 	// This member is required.
 	JobArn *string
@@ -79,65 +118,42 @@ type CreateAdvancedPromptOptimizationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAdvancedPromptOptimizationJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAdvancedPromptOptimizationJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAdvancedPromptOptimizationJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateAdvancedPromptOptimizationJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateAdvancedPromptOptimizationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAdvancedPromptOptimizationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAdvancedPromptOptimizationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateAdvancedPromptOptimizationJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAdvancedPromptOptimizationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdvancedPromptOptimizationJob, schemas.CreateAdvancedPromptOptimizationJobRequest, schemas.CreateAdvancedPromptOptimizationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAdvancedPromptOptimizationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAdvancedPromptOptimizationJob, schemas.CreateAdvancedPromptOptimizationJobRequest, schemas.CreateAdvancedPromptOptimizationJobResponse), output: &CreateAdvancedPromptOptimizationJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAdvancedPromptOptimizationJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAdvancedPromptOptimizationJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -147,12 +163,6 @@ func (c *Client) addOperationCreateAdvancedPromptOptimizationJobMiddlewares(stac
 		return err
 	}
 	if err = addOpCreateAdvancedPromptOptimizationJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAdvancedPromptOptimizationJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,12 +175,6 @@ func (c *Client) addOperationCreateAdvancedPromptOptimizationJobMiddlewares(stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -210,12 +214,4 @@ func (m *idempotencyToken_initializeOpCreateAdvancedPromptOptimizationJob) Handl
 }
 func addIdempotencyToken_opCreateAdvancedPromptOptimizationJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateAdvancedPromptOptimizationJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateAdvancedPromptOptimizationJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateAdvancedPromptOptimizationJob",
-	}
 }

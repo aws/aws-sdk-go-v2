@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkMailService.PutIdentityProviderConfiguration
+
+{"AuthenticationMode":"IDENTITY_PROVIDER_ONLY","IdentityCenterConfiguration":{"ApplicationArn":"__ApplicationArn__","InstanceArn":"__InstanceArn__"},"OrganizationId":"__OrganizationId__","PersonalAccessTokenConfiguration":{"LifetimeInDays":1,"Status":"ACTIVE"}}

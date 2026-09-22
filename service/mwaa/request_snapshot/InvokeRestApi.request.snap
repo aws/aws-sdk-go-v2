@@ -1,0 +1,5 @@
+POST /restapi/__Name__
+
+Content-Type: application/json
+
+{"Body":"__Document__","Method":"GET","Path":"__Path__","QueryParameters":"__Document__"}

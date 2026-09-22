@@ -3,7 +3,6 @@ package customizations_test
 import (
 	"context"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"strings"
 	"testing"
@@ -31,7 +30,51 @@ func (m *mockHTTPClient) Do(*http.Request) (*http.Response, error) {
 var _ s3.HTTPClient = &mockHTTPClient{}
 
 func asReadCloser(s string) io.ReadCloser {
-	return ioutil.NopCloser(strings.NewReader(s))
+	return io.NopCloser(strings.NewReader(s))
+}
+
+// bodyCloseTracker records whether Close was called on the underlying body.
+type bodyCloseTracker struct {
+	io.Reader
+	closed bool
+}
+
+func (b *bodyCloseTracker) Close() error {
+	b.closed = true
+	return nil
+}
+
+// TestResponseBodyClosedFor200 verifies the 200-error customization forwards
+// Close to the original response body.
+func TestResponseBodyClosedFor200(t *testing.T) {
+	cases := map[string]string{
+		"success": `<CompleteMultipartUploadResult><Bucket>bucket</Bucket></CompleteMultipartUploadResult>`,
+		"error":   `<Error><Code>InvalidGreeting</Code></Error>`,
+	}
+
+	for name, body := range cases {
+		t.Run(name, func(t *testing.T) {
+			tracked := &bodyCloseTracker{Reader: strings.NewReader(body)}
+			options := s3.Options{
+				Credentials:  unit.StubCredentialsProvider{},
+				Retryer:      aws.NopRetryer{},
+				Region:       "mock-region",
+				UsePathStyle: true,
+				HTTPClient:   &mockHTTPClient{&http.Response{StatusCode: 200, Body: tracked}},
+			}
+
+			svc := s3.New(options)
+			_, _ = svc.CompleteMultipartUpload(context.Background(), &s3.CompleteMultipartUploadInput{
+				UploadId: aws.String("mockID"),
+				Bucket:   aws.String("bucket"),
+				Key:      aws.String("mockKey"),
+			})
+
+			if !tracked.closed {
+				t.Error("original response body was not closed")
+			}
+		})
+	}
 }
 
 func TestErrorResponseWith200StatusCode(t *testing.T) {
@@ -60,7 +103,7 @@ func TestErrorResponseWith200StatusCode(t *testing.T) {
 				StatusCode: 200,
 				Body:       asReadCloser(""),
 			},
-			expectedError: "received empty response payload",
+			expectedError: "",
 		},
 		"200InvalidResponse": {
 			response: &http.Response{

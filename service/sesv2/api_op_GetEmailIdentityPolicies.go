@@ -4,10 +4,9 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the requested sending authorization policies for the given identity (an
@@ -50,6 +49,18 @@ type GetEmailIdentityPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailIdentityPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailIdentityPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailIdentityPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.GetEmailIdentityPoliciesRequest_EmailIdentity, *v.EmailIdentity)
+	}
+}
+
 // Identity policies associated with email identity.
 type GetEmailIdentityPoliciesOutput struct {
 
@@ -62,77 +73,45 @@ type GetEmailIdentityPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEmailIdentityPoliciesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEmailIdentityPoliciesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEmailIdentityPoliciesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePolicyMap(s, schemas.GetEmailIdentityPoliciesResponse_Policies, v.Policies)
+}
+func (v *GetEmailIdentityPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEmailIdentityPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEmailIdentityPoliciesResponse_Policies:
+			return deserializePolicyMap(d, schemas.GetEmailIdentityPoliciesResponse_Policies, &v.Policies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEmailIdentityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailIdentityPolicies, schemas.GetEmailIdentityPoliciesRequest, schemas.GetEmailIdentityPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEmailIdentityPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEmailIdentityPolicies, schemas.GetEmailIdentityPoliciesRequest, schemas.GetEmailIdentityPoliciesResponse), output: &GetEmailIdentityPoliciesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEmailIdentityPolicies{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEmailIdentityPolicies"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetEmailIdentityPoliciesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEmailIdentityPolicies(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +126,8 @@ func (c *Client) addOperationGetEmailIdentityPoliciesMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetEmailIdentityPolicies(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetEmailIdentityPolicies",
-	}
 }

@@ -4,11 +4,10 @@ package emr
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -47,6 +46,21 @@ type GetClusterSessionCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClusterSessionCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClusterSessionCredentialsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClusterSessionCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.GetClusterSessionCredentialsInput_ClusterId, *v.ClusterId)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.GetClusterSessionCredentialsInput_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+}
+
 type GetClusterSessionCredentialsOutput struct {
 
 	// The credentials that you can use to connect to cluster endpoints that support
@@ -63,77 +77,51 @@ type GetClusterSessionCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetClusterSessionCredentialsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetClusterSessionCredentialsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetClusterSessionCredentialsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCredentials(s, schemas.GetClusterSessionCredentialsOutput_Credentials, v.Credentials)
+	if v.ExpiresAt != nil {
+		s.WriteTime(schemas.GetClusterSessionCredentialsOutput_ExpiresAt, *v.ExpiresAt)
+	}
+}
+func (v *GetClusterSessionCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetClusterSessionCredentialsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetClusterSessionCredentialsOutput_Credentials:
+			return deserializeCredentials(d, schemas.GetClusterSessionCredentialsOutput_Credentials, &v.Credentials)
+		case schemas.GetClusterSessionCredentialsOutput_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.GetClusterSessionCredentialsOutput_ExpiresAt, v.ExpiresAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetClusterSessionCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClusterSessionCredentials, schemas.GetClusterSessionCredentialsInput, schemas.GetClusterSessionCredentialsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetClusterSessionCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetClusterSessionCredentials, schemas.GetClusterSessionCredentialsInput, schemas.GetClusterSessionCredentialsOutput), output: &GetClusterSessionCredentialsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetClusterSessionCredentials{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetClusterSessionCredentials"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetClusterSessionCredentialsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetClusterSessionCredentials(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,22 +136,8 @@ func (c *Client) addOperationGetClusterSessionCredentialsMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetClusterSessionCredentials(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetClusterSessionCredentials",
-	}
 }

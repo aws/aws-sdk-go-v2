@@ -5,7 +5,7 @@ package restxml
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,6 +35,28 @@ type EndpointWithHostLabelHeaderOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointWithHostLabelHeaderOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HostLabelHeaderInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointWithHostLabelHeaderOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.HostLabelHeaderInput_accountId, *v.AccountId)
+	}
+}
+func (v *EndpointWithHostLabelHeaderOperationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HostLabelHeaderInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HostLabelHeaderInput_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.HostLabelHeaderInput_accountId, v.AccountId)
+		}
+		return nil
+	})
+}
+
 type EndpointWithHostLabelHeaderOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -42,65 +64,36 @@ type EndpointWithHostLabelHeaderOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EndpointWithHostLabelHeaderOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EndpointWithHostLabelHeaderOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *EndpointWithHostLabelHeaderOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndpointWithHostLabelHeaderOperation, schemas.HostLabelHeaderInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpEndpointWithHostLabelHeaderOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EndpointWithHostLabelHeaderOperation, schemas.HostLabelHeaderInput, nil), output: &EndpointWithHostLabelHeaderOperationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpEndpointWithHostLabelHeaderOperation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "EndpointWithHostLabelHeaderOperation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -110,12 +103,6 @@ func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(sta
 		return err
 	}
 	if err = addOpEndpointWithHostLabelHeaderOperationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEndpointWithHostLabelHeaderOperation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -128,12 +115,6 @@ func (c *Client) addOperationEndpointWithHostLabelHeaderOperationMiddlewares(sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -182,12 +163,4 @@ func (m *endpointPrefix_opEndpointWithHostLabelHeaderOperationMiddleware) Handle
 }
 func addEndpointPrefix_opEndpointWithHostLabelHeaderOperationMiddleware(stack *middleware.Stack) error {
 	return stack.Finalize.Insert(&endpointPrefix_opEndpointWithHostLabelHeaderOperationMiddleware{}, "ResolveEndpointV2", middleware.After)
-}
-
-func newServiceMetadataMiddleware_opEndpointWithHostLabelHeaderOperation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "EndpointWithHostLabelHeaderOperation",
-	}
 }

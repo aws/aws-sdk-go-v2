@@ -5,10 +5,10 @@ package codecommit
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecommit/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of pull requests for a specified repository. The return list can
@@ -54,6 +54,30 @@ type ListPullRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPullRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPullRequestsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPullRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthorArn != nil {
+		s.WriteString(schemas.ListPullRequestsInput_authorArn, *v.AuthorArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPullRequestsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPullRequestsInput_nextToken, *v.NextToken)
+	}
+	if v.PullRequestStatus != "" {
+		s.WriteString(schemas.ListPullRequestsInput_pullRequestStatus, string(v.PullRequestStatus))
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.ListPullRequestsInput_repositoryName, *v.RepositoryName)
+	}
+}
+
 type ListPullRequestsOutput struct {
 
 	// The system-generated IDs of the pull requests.
@@ -71,77 +95,51 @@ type ListPullRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPullRequestsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPullRequestsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPullRequestsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPullRequestsOutput_nextToken, *v.NextToken)
+	}
+	serializePullRequestIdList(s, schemas.ListPullRequestsOutput_pullRequestIds, v.PullRequestIds)
+}
+func (v *ListPullRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPullRequestsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPullRequestsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPullRequestsOutput_nextToken, v.NextToken)
+		case schemas.ListPullRequestsOutput_pullRequestIds:
+			return deserializePullRequestIdList(d, schemas.ListPullRequestsOutput_pullRequestIds, &v.PullRequestIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPullRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPullRequests, schemas.ListPullRequestsInput, schemas.ListPullRequestsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPullRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPullRequests, schemas.ListPullRequestsInput, schemas.ListPullRequestsOutput), output: &ListPullRequestsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPullRequests{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPullRequests"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListPullRequestsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPullRequests(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +152,6 @@ func (c *Client) addOperationListPullRequestsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +252,3 @@ type ListPullRequestsAPIClient interface {
 }
 
 var _ ListPullRequestsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListPullRequests(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListPullRequests",
-	}
-}

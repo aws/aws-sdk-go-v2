@@ -5,10 +5,10 @@ package transcribe
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transcribe/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of Call Analytics categories, including all rules that make up
@@ -49,6 +49,21 @@ type ListCallAnalyticsCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCallAnalyticsCategoriesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCallAnalyticsCategoriesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCallAnalyticsCategoriesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCallAnalyticsCategoriesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCallAnalyticsCategoriesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListCallAnalyticsCategoriesOutput struct {
 
 	// Provides detailed information about your Call Analytics categories, including
@@ -68,74 +83,48 @@ type ListCallAnalyticsCategoriesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCallAnalyticsCategoriesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCallAnalyticsCategoriesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCallAnalyticsCategoriesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCategoryPropertiesList(s, schemas.ListCallAnalyticsCategoriesResponse_Categories, v.Categories)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCallAnalyticsCategoriesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListCallAnalyticsCategoriesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCallAnalyticsCategoriesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCallAnalyticsCategoriesResponse_Categories:
+			return deserializeCategoryPropertiesList(d, schemas.ListCallAnalyticsCategoriesResponse_Categories, &v.Categories)
+		case schemas.ListCallAnalyticsCategoriesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCallAnalyticsCategoriesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCallAnalyticsCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCallAnalyticsCategories, schemas.ListCallAnalyticsCategoriesRequest, schemas.ListCallAnalyticsCategoriesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListCallAnalyticsCategories{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCallAnalyticsCategories, schemas.ListCallAnalyticsCategoriesRequest, schemas.ListCallAnalyticsCategoriesResponse), output: &ListCallAnalyticsCategoriesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListCallAnalyticsCategories{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCallAnalyticsCategories"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCallAnalyticsCategories(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -148,12 +137,6 @@ func (c *Client) addOperationListCallAnalyticsCategoriesMiddlewares(stack *middl
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -260,11 +243,3 @@ type ListCallAnalyticsCategoriesAPIClient interface {
 }
 
 var _ ListCallAnalyticsCategoriesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListCallAnalyticsCategories(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListCallAnalyticsCategories",
-	}
-}

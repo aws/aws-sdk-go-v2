@@ -5,8 +5,9 @@ package iottwinmaker
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +57,33 @@ type ListPropertiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPropertiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPropertiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPropertiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentName != nil {
+		s.WriteString(schemas.ListPropertiesRequest_componentName, *v.ComponentName)
+	}
+	if v.ComponentPath != nil {
+		s.WriteString(schemas.ListPropertiesRequest_componentPath, *v.ComponentPath)
+	}
+	if v.EntityId != nil {
+		s.WriteString(schemas.ListPropertiesRequest_entityId, *v.EntityId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPropertiesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPropertiesRequest_nextToken, *v.NextToken)
+	}
+	if v.WorkspaceId != nil {
+		s.WriteString(schemas.ListPropertiesRequest_workspaceId, *v.WorkspaceId)
+	}
+}
+
 type ListPropertiesOutput struct {
 
 	// A list of objects that contain information about the properties.
@@ -72,65 +100,45 @@ type ListPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPropertiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPropertiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPropertiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPropertiesResponse_nextToken, *v.NextToken)
+	}
+	serializePropertySummaries(s, schemas.ListPropertiesResponse_propertySummaries, v.PropertySummaries)
+}
+func (v *ListPropertiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPropertiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPropertiesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPropertiesResponse_nextToken, v.NextToken)
+		case schemas.ListPropertiesResponse_propertySummaries:
+			return deserializePropertySummaries(d, schemas.ListPropertiesResponse_propertySummaries, &v.PropertySummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProperties, schemas.ListPropertiesRequest, schemas.ListPropertiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProperties{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProperties, schemas.ListPropertiesRequest, schemas.ListPropertiesResponse), output: &ListPropertiesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProperties{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProperties"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -140,12 +148,6 @@ func (c *Client) addOperationListPropertiesMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addOpListPropertiesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProperties(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,12 +160,6 @@ func (c *Client) addOperationListPropertiesMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -291,11 +287,3 @@ type ListPropertiesAPIClient interface {
 }
 
 var _ ListPropertiesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListProperties(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProperties",
-	}
-}

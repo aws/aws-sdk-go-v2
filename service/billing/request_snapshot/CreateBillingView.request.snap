@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSBilling.CreateBillingView
+
+{"clientToken":"__ClientToken__","dataFilterExpression":{"costCategories":{"key":"__Key__","values":["__Member__","__Member__"]},"dimensions":{"key":"LINKED_ACCOUNT","values":["__Member__","__Member__"]},"tags":{"key":"__Key__","values":["__Member__","__Member__"]},"timeRange":{"beginDateInclusive":946684800,"endDateInclusive":946684800}},"description":"__Description__","name":"__Name__","resourceTags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"sourceViews":["__Member__","__Member__"]}

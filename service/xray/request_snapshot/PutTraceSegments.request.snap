@@ -1,0 +1,5 @@
+POST /TraceSegments
+
+Content-Type: application/json
+
+{"TraceSegmentDocuments":["__Member__","__Member__"]}

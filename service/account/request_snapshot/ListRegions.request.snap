@@ -1,0 +1,5 @@
+POST /listRegions
+
+Content-Type: application/json
+
+{"AccountId":"__AccountId__","MaxResults":1,"NextToken":"__NextToken__","RegionOptStatusContains":["ENABLED","ENABLED"]}

@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Route53Domains_v20140515.UpdateDomainNameservers
+
+{"DomainName":"__DomainName__","FIAuthKey":"__FIAuthKey__","Nameservers":[{"GlueIps":["__Member__","__Member__"],"Name":"__Name__"},{"GlueIps":["__Member__","__Member__"],"Name":"__Name__"}]}

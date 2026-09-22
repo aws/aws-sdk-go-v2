@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/aiagents/__AiAgentId__
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","configuration":{"manualSearchAIAgentConfiguration":{"answerGenerationAIGuardrailId":"__AnswerGenerationAIGuardrailId__","answerGenerationAIPromptId":"__AnswerGenerationAIPromptId__","associationConfigurations":[{"associationConfigurationData":{"knowledgeBaseAssociationConfigurationData":{"contentTagFilter":{"tagCondition":{"key":"__Key__","value":"__Value__"}},"maxResults":1,"overrideKnowledgeBaseSearchType":"HYBRID"}},"associationId":"__AssociationId__","associationType":"KNOWLEDGE_BASE"},{"associationConfigurationData":{"knowledgeBaseAssociationConfigurationData":{"contentTagFilter":{"tagCondition":{"key":"__Key__","value":"__Value__"}},"maxResults":1,"overrideKnowledgeBaseSearchType":"HYBRID"}},"associationId":"__AssociationId__","associationType":"KNOWLEDGE_BASE"}],"locale":"__Locale__"}},"description":"__Description__","visibilityStatus":"SAVED"}

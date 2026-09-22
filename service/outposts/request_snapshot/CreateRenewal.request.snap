@@ -1,0 +1,5 @@
+POST /renewals
+
+Content-Type: application/json
+
+{"ClientToken":"__ClientToken__","OutpostIdentifier":"__OutpostIdentifier__","PaymentOption":"ALL_UPFRONT","PaymentTerm":"THREE_YEARS"}

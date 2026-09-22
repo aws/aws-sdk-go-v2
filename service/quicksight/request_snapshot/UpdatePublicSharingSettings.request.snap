@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/public-sharing-settings
+
+Content-Type: application/json
+
+{"PublicSharingEnabled":true}

@@ -5,10 +5,10 @@ package lambda
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -54,8 +54,8 @@ type ListDurableExecutionsByFunctionInput struct {
 	// $LATEST version.
 	Qualifier *string
 
-	// Set to true to return results in reverse chronological order (newest first).
-	// Default is false.
+	// Set to true to return results in chronological order (oldest first). Default is
+	// false.
 	ReverseOrder *bool
 
 	// Filter executions that started after this timestamp (ISO 8601 format).
@@ -69,6 +69,40 @@ type ListDurableExecutionsByFunctionInput struct {
 	Statuses []types.ExecutionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListDurableExecutionsByFunctionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDurableExecutionsByFunctionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDurableExecutionsByFunctionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DurableExecutionName != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionRequest_DurableExecutionName, *v.DurableExecutionName)
+	}
+	if v.FunctionName != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionRequest_FunctionName, *v.FunctionName)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionRequest_Marker, *v.Marker)
+	}
+	if v.MaxItems != 0 {
+		s.WriteInt32(schemas.ListDurableExecutionsByFunctionRequest_MaxItems, v.MaxItems)
+	}
+	if v.Qualifier != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionRequest_Qualifier, *v.Qualifier)
+	}
+	if v.ReverseOrder != nil {
+		s.WriteBool(schemas.ListDurableExecutionsByFunctionRequest_ReverseOrder, *v.ReverseOrder)
+	}
+	if v.StartedAfter != nil {
+		s.WriteTime(schemas.ListDurableExecutionsByFunctionRequest_StartedAfter, *v.StartedAfter)
+	}
+	if v.StartedBefore != nil {
+		s.WriteTime(schemas.ListDurableExecutionsByFunctionRequest_StartedBefore, *v.StartedBefore)
+	}
+	serializeExecutionStatusList(s, schemas.ListDurableExecutionsByFunctionRequest_Statuses, v.Statuses)
 }
 
 // The response from the ListDurableExecutionsByFunction operation, containing a
@@ -88,77 +122,51 @@ type ListDurableExecutionsByFunctionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDurableExecutionsByFunctionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDurableExecutionsByFunctionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDurableExecutionsByFunctionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDurableExecutions(s, schemas.ListDurableExecutionsByFunctionResponse_DurableExecutions, v.DurableExecutions)
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListDurableExecutionsByFunctionResponse_NextMarker, *v.NextMarker)
+	}
+}
+func (v *ListDurableExecutionsByFunctionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDurableExecutionsByFunctionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDurableExecutionsByFunctionResponse_DurableExecutions:
+			return deserializeDurableExecutions(d, schemas.ListDurableExecutionsByFunctionResponse_DurableExecutions, &v.DurableExecutions)
+		case schemas.ListDurableExecutionsByFunctionResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListDurableExecutionsByFunctionResponse_NextMarker, v.NextMarker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDurableExecutionsByFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDurableExecutionsByFunction, schemas.ListDurableExecutionsByFunctionRequest, schemas.ListDurableExecutionsByFunctionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDurableExecutionsByFunction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDurableExecutionsByFunction, schemas.ListDurableExecutionsByFunctionRequest, schemas.ListDurableExecutionsByFunctionResponse), output: &ListDurableExecutionsByFunctionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDurableExecutionsByFunction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDurableExecutionsByFunction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListDurableExecutionsByFunctionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDurableExecutionsByFunction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,12 +179,6 @@ func (c *Client) addOperationListDurableExecutionsByFunctionMiddlewares(stack *m
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -276,11 +278,3 @@ type ListDurableExecutionsByFunctionAPIClient interface {
 }
 
 var _ ListDurableExecutionsByFunctionAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListDurableExecutionsByFunction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListDurableExecutionsByFunction",
-	}
-}

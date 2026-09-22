@@ -1,0 +1,5 @@
+POST /members/associate
+
+Content-Type: application/json
+
+{"accountId":"__AccountId__"}

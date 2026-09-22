@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"layouts":[{"layoutArn":"__LayoutArn__","layoutId":"__LayoutId__","name":"__Name__"},{"layoutArn":"__LayoutArn__","layoutId":"__LayoutId__","name":"__Name__"}],"nextToken":"__NextToken__"}

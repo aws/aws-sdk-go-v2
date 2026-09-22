@@ -5,13 +5,20 @@ package chimesdkvoice
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the proxy sessions for the specified Amazon Chime SDK Voice Connector.
+//
+// End of support notice: On April 7, 2026, AWS will end support for Amazon Chime
+// SDK proxy sessions.
+//
+// Deprecated: End of support notice: On April 7, 2026, AWS ended support for
+// Amazon Chime SDK proxy sessions. For more information, refer to
+// https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListProxySessions.html
 func (c *Client) ListProxySessions(ctx context.Context, params *ListProxySessionsInput, optFns ...func(*Options)) (*ListProxySessionsOutput, error) {
 	if params == nil {
 		params = &ListProxySessionsInput{}
@@ -46,6 +53,27 @@ type ListProxySessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxySessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProxySessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProxySessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProxySessionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProxySessionsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListProxySessionsRequest_Status, string(v.Status))
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.ListProxySessionsRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type ListProxySessionsOutput struct {
 
 	// The token used to retrieve the next page of results.
@@ -60,77 +88,51 @@ type ListProxySessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxySessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProxySessionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProxySessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProxySessionsResponse_NextToken, *v.NextToken)
+	}
+	serializeProxySessions(s, schemas.ListProxySessionsResponse_ProxySessions, v.ProxySessions)
+}
+func (v *ListProxySessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProxySessionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProxySessionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProxySessionsResponse_NextToken, v.NextToken)
+		case schemas.ListProxySessionsResponse_ProxySessions:
+			return deserializeProxySessions(d, schemas.ListProxySessionsResponse_ProxySessions, &v.ProxySessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProxySessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxySessions, schemas.ListProxySessionsRequest, schemas.ListProxySessionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProxySessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxySessions, schemas.ListProxySessionsRequest, schemas.ListProxySessionsResponse), output: &ListProxySessionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProxySessions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProxySessions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListProxySessionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProxySessions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,12 +145,6 @@ func (c *Client) addOperationListProxySessionsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,11 +245,3 @@ type ListProxySessionsAPIClient interface {
 }
 
 var _ ListProxySessionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListProxySessions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListProxySessions",
-	}
-}

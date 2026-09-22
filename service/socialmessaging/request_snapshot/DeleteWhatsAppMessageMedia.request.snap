@@ -1,0 +1,3 @@
+DELETE /v1/whatsapp/media?mediaId=__MediaId__&originationPhoneNumberId=__OriginationPhoneNumberId__
+
+

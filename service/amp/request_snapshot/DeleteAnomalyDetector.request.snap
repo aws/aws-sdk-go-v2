@@ -1,0 +1,3 @@
+DELETE /workspaces/__WorkspaceId__/anomalydetectors/__AnomalyDetectorId__?clientToken=__ClientToken__
+
+

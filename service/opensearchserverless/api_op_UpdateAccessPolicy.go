@@ -5,10 +5,10 @@ package opensearchserverless
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an OpenSearch Serverless access policy. For more information, see [Data access control for Amazon OpenSearch Serverless].
@@ -59,6 +59,62 @@ type UpdateAccessPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAccessPolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAccessPolicyRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAccessPolicyRequest_name, *v.Name)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.UpdateAccessPolicyRequest_policy, *v.Policy)
+	}
+	if v.PolicyVersion != nil {
+		s.WriteString(schemas.UpdateAccessPolicyRequest_policyVersion, *v.PolicyVersion)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateAccessPolicyRequest_type, string(v.Type))
+	}
+}
+func (v *UpdateAccessPolicyInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccessPolicyRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccessPolicyRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.UpdateAccessPolicyRequest_clientToken, v.ClientToken)
+		case schemas.UpdateAccessPolicyRequest_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateAccessPolicyRequest_description, v.Description)
+		case schemas.UpdateAccessPolicyRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAccessPolicyRequest_name, v.Name)
+		case schemas.UpdateAccessPolicyRequest_policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.UpdateAccessPolicyRequest_policy, v.Policy)
+		case schemas.UpdateAccessPolicyRequest_policyVersion:
+			v.PolicyVersion = new(string)
+			return d.ReadString(schemas.UpdateAccessPolicyRequest_policyVersion, v.PolicyVersion)
+		case schemas.UpdateAccessPolicyRequest_type:
+			var ev string
+			if err := d.ReadString(schemas.UpdateAccessPolicyRequest_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.AccessPolicyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type UpdateAccessPolicyOutput struct {
 
 	// Details about the updated access policy.
@@ -70,65 +126,44 @@ type UpdateAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAccessPolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAccessPolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAccessPolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyDetail != nil {
+		s.WriteStruct(schemas.UpdateAccessPolicyResponse_accessPolicyDetail)
+		v.AccessPolicyDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAccessPolicyResponse_accessPolicyDetail:
+			v.AccessPolicyDetail = &types.AccessPolicyDetail{}
+			return v.AccessPolicyDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessPolicy, schemas.UpdateAccessPolicyRequest, schemas.UpdateAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAccessPolicy, schemas.UpdateAccessPolicyRequest, schemas.UpdateAccessPolicyResponse), output: &UpdateAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateAccessPolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAccessPolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -138,12 +173,6 @@ func (c *Client) addOperationUpdateAccessPolicyMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpUpdateAccessPolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccessPolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +185,6 @@ func (c *Client) addOperationUpdateAccessPolicyMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -201,12 +224,4 @@ func (m *idempotencyToken_initializeOpUpdateAccessPolicy) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opUpdateAccessPolicyMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateAccessPolicy{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opUpdateAccessPolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateAccessPolicy",
-	}
 }

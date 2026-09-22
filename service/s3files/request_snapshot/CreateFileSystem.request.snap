@@ -1,0 +1,5 @@
+PUT /file-systems
+
+Content-Type: application/json
+
+{"acceptBucketWarning":true,"bucket":"__Bucket__","clientToken":"__ClientToken__","kmsKeyId":"__KmsKeyId__","prefix":"__Prefix__","roleArn":"__RoleArn__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}]}

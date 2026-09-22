@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"items":[{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","isDefault":true,"lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","priority":1},{"arn":"__Arn__","createdAt":"2000-01-01T00:00:00Z","id":"__Id__","isDefault":true,"lastUpdatedAt":"2000-01-01T00:00:00Z","name":"__Name__","priority":1}],"nextToken":"__NextToken__"}

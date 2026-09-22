@@ -4,10 +4,9 @@ package ivsrealtime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops a replicated participant session.
@@ -47,6 +46,24 @@ type StopParticipantReplicationInput struct {
 	SourceStageArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *StopParticipantReplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopParticipantReplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopParticipantReplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationStageArn != nil {
+		s.WriteString(schemas.StopParticipantReplicationRequest_destinationStageArn, *v.DestinationStageArn)
+	}
+	if v.ParticipantId != nil {
+		s.WriteString(schemas.StopParticipantReplicationRequest_participantId, *v.ParticipantId)
+	}
+	if v.SourceStageArn != nil {
+		s.WriteString(schemas.StopParticipantReplicationRequest_sourceStageArn, *v.SourceStageArn)
+	}
 }
 
 type StopParticipantReplicationOutput struct {
@@ -92,77 +109,84 @@ type StopParticipantReplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopParticipantReplicationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopParticipantReplicationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopParticipantReplicationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessControlAllowOrigin != nil {
+		s.WriteString(schemas.StopParticipantReplicationResponse_accessControlAllowOrigin, *v.AccessControlAllowOrigin)
+	}
+	if v.AccessControlExposeHeaders != nil {
+		s.WriteString(schemas.StopParticipantReplicationResponse_accessControlExposeHeaders, *v.AccessControlExposeHeaders)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.StopParticipantReplicationResponse_cacheControl, *v.CacheControl)
+	}
+	if v.ContentSecurityPolicy != nil {
+		s.WriteString(schemas.StopParticipantReplicationResponse_contentSecurityPolicy, *v.ContentSecurityPolicy)
+	}
+	if v.StrictTransportSecurity != nil {
+		s.WriteString(schemas.StopParticipantReplicationResponse_strictTransportSecurity, *v.StrictTransportSecurity)
+	}
+	if v.XContentTypeOptions != nil {
+		s.WriteString(schemas.StopParticipantReplicationResponse_xContentTypeOptions, *v.XContentTypeOptions)
+	}
+	if v.XFrameOptions != nil {
+		s.WriteString(schemas.StopParticipantReplicationResponse_xFrameOptions, *v.XFrameOptions)
+	}
+}
+func (v *StopParticipantReplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopParticipantReplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopParticipantReplicationResponse_accessControlAllowOrigin:
+			v.AccessControlAllowOrigin = new(string)
+			return d.ReadString(schemas.StopParticipantReplicationResponse_accessControlAllowOrigin, v.AccessControlAllowOrigin)
+		case schemas.StopParticipantReplicationResponse_accessControlExposeHeaders:
+			v.AccessControlExposeHeaders = new(string)
+			return d.ReadString(schemas.StopParticipantReplicationResponse_accessControlExposeHeaders, v.AccessControlExposeHeaders)
+		case schemas.StopParticipantReplicationResponse_cacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.StopParticipantReplicationResponse_cacheControl, v.CacheControl)
+		case schemas.StopParticipantReplicationResponse_contentSecurityPolicy:
+			v.ContentSecurityPolicy = new(string)
+			return d.ReadString(schemas.StopParticipantReplicationResponse_contentSecurityPolicy, v.ContentSecurityPolicy)
+		case schemas.StopParticipantReplicationResponse_strictTransportSecurity:
+			v.StrictTransportSecurity = new(string)
+			return d.ReadString(schemas.StopParticipantReplicationResponse_strictTransportSecurity, v.StrictTransportSecurity)
+		case schemas.StopParticipantReplicationResponse_xContentTypeOptions:
+			v.XContentTypeOptions = new(string)
+			return d.ReadString(schemas.StopParticipantReplicationResponse_xContentTypeOptions, v.XContentTypeOptions)
+		case schemas.StopParticipantReplicationResponse_xFrameOptions:
+			v.XFrameOptions = new(string)
+			return d.ReadString(schemas.StopParticipantReplicationResponse_xFrameOptions, v.XFrameOptions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopParticipantReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopParticipantReplication, schemas.StopParticipantReplicationRequest, schemas.StopParticipantReplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopParticipantReplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopParticipantReplication, schemas.StopParticipantReplicationRequest, schemas.StopParticipantReplicationResponse), output: &StopParticipantReplicationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopParticipantReplication{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StopParticipantReplication"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStopParticipantReplicationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopParticipantReplication(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +201,8 @@ func (c *Client) addOperationStopParticipantReplicationMiddlewares(stack *middle
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStopParticipantReplication(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StopParticipantReplication",
-	}
 }

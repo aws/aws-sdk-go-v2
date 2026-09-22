@@ -330,6 +330,194 @@
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#documentation": "<p>You can use the Cost Optimization Hub API to programmatically identify, filter, aggregate, and quantify savings for your cost optimization recommendations across multiple Amazon Web Services Regions and Amazon Web Services accounts in your organization.</p> <p>The Cost Optimization Hub API provides the following endpoint:</p> <ul> <li> <p> https://cost-optimization-hub.us-east-1.amazonaws.com </p> </li> </ul>",
                 "smithy.api#title": "Cost Optimization Hub",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cost-optimization-hub-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cost-optimization-hub-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cost-optimization-hub.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cost-optimization-hub.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -969,6 +1157,20 @@
                 "smithy.api#documentation": "<p>The DB instance configuration used for recommendations.</p>"
             }
         },
+        "com.amazonaws.costoptimizationhub#DocumentDbCluster": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon DocumentDB cluster recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
+            }
+        },
         "com.amazonaws.costoptimizationhub#DynamoDbReservedCapacity": {
             "type": "structure",
             "members": {
@@ -1046,6 +1248,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The DynamoDB reserved capacity configuration used for recommendations.</p>"
+            }
+        },
+        "com.amazonaws.costoptimizationhub#DynamoDbTable": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DynamoDB table recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#EbsVolume": {
@@ -1460,6 +1676,20 @@
                 "smithy.api#documentation": "<p>A list of cost efficiency metrics grouped by the specified dimension.</p>",
                 "smithy.api#tags": [
                     "cost_efficiency"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#ElastiCacheCluster": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ElastiCache cluster recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
                 ]
             }
         },
@@ -2138,7 +2368,7 @@
                         "smithy.api#documentation": "<p>The maximum number of groups to return in the response. Valid values range from 0 to 1000. Use in conjunction with <code>nextToken</code> to paginate through results when the total number of groups exceeds this limit.</p>",
                         "smithy.api#range": {
                             "min": 0,
-                            "max": 100
+                            "max": 1000
                         }
                     }
                 },
@@ -2514,6 +2744,20 @@
                         "smithy.api#enumValue": "None"
                     }
                 }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#MemoryDbCluster": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The MemoryDB cluster recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#MemoryDbReservedInstances": {
@@ -3627,6 +3871,60 @@
                             "nat_gateway"
                         ]
                     }
+                },
+                "dynamoDbTable": {
+                    "target": "com.amazonaws.costoptimizationhub#DynamoDbTable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DynamoDB table recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "elastiCacheCluster": {
+                    "target": "com.amazonaws.costoptimizationhub#ElastiCacheCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ElastiCache cluster recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "memoryDbCluster": {
+                    "target": "com.amazonaws.costoptimizationhub#MemoryDbCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MemoryDB cluster recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "documentDbCluster": {
+                    "target": "com.amazonaws.costoptimizationhub#DocumentDbCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon DocumentDB cluster recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "workSpaces": {
+                    "target": "com.amazonaws.costoptimizationhub#WorkSpaces",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkSpaces recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "sageMakerEndpoint": {
+                    "target": "com.amazonaws.costoptimizationhub#SageMakerEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SageMaker endpoint recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
                 }
             },
             "traits": {
@@ -3819,6 +4117,60 @@
                             "nat_gateway"
                         ]
                     }
+                },
+                "DYNAMO_DB_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DynamoDBTable",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "ELASTI_CACHE_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCacheCluster",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "MEMORY_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MemoryDBCluster",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "DOCUMENT_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DocumentDBCluster",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "WORK_SPACES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WorkSpaces",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "SAGE_MAKER_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SageMakerEndpoint",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
                 }
             }
         },
@@ -3832,6 +4184,20 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#SageMakerEndpoint": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SageMaker endpoint recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#SageMakerSavingsPlans": {
@@ -4364,6 +4730,20 @@
                         "smithy.api#enumValue": "Other"
                     }
                 }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#WorkSpaces": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The WorkSpaces recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         }
     }

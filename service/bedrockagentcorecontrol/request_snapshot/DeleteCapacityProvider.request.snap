@@ -1,0 +1,3 @@
+DELETE /capacity-providers/__CapacityProviderId__?clientToken=__ClientToken__
+
+

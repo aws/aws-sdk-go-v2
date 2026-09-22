@@ -1,0 +1,5 @@
+POST /listDeploymentEvents
+
+Content-Type: application/json
+
+{"deploymentId":"__DeploymentId__","maxResults":1,"nextToken":"__NextToken__"}

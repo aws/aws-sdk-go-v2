@@ -4,11 +4,10 @@ package mgn
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mgn/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mgn/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Unarchive wave.
@@ -38,6 +37,34 @@ type UnarchiveWaveInput struct {
 	AccountID *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UnarchiveWaveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnarchiveWaveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnarchiveWaveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountID != nil {
+		s.WriteString(schemas.UnarchiveWaveRequest_accountID, *v.AccountID)
+	}
+	if v.WaveID != nil {
+		s.WriteString(schemas.UnarchiveWaveRequest_waveID, *v.WaveID)
+	}
+}
+func (v *UnarchiveWaveInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnarchiveWaveRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnarchiveWaveRequest_accountID:
+			v.AccountID = new(string)
+			return d.ReadString(schemas.UnarchiveWaveRequest_accountID, v.AccountID)
+		case schemas.UnarchiveWaveRequest_waveID:
+			v.WaveID = new(string)
+			return d.ReadString(schemas.UnarchiveWaveRequest_waveID, v.WaveID)
+		}
+		return nil
+	})
 }
 
 type UnarchiveWaveOutput struct {
@@ -75,77 +102,95 @@ type UnarchiveWaveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UnarchiveWaveOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Wave)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnarchiveWaveOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Wave_arn, *v.Arn)
+	}
+	if v.CreationDateTime != nil {
+		s.WriteString(schemas.Wave_creationDateTime, *v.CreationDateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Wave_description, *v.Description)
+	}
+	if v.IsArchived != nil {
+		s.WriteBool(schemas.Wave_isArchived, *v.IsArchived)
+	}
+	if v.LastModifiedDateTime != nil {
+		s.WriteString(schemas.Wave_lastModifiedDateTime, *v.LastModifiedDateTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Wave_name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.Wave_tags, v.Tags)
+	if v.WaveAggregatedStatus != nil {
+		s.WriteStruct(schemas.Wave_waveAggregatedStatus)
+		v.WaveAggregatedStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WaveID != nil {
+		s.WriteString(schemas.Wave_waveID, *v.WaveID)
+	}
+}
+func (v *UnarchiveWaveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Wave, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Wave_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Wave_arn, v.Arn)
+		case schemas.Wave_creationDateTime:
+			v.CreationDateTime = new(string)
+			return d.ReadString(schemas.Wave_creationDateTime, v.CreationDateTime)
+		case schemas.Wave_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Wave_description, v.Description)
+		case schemas.Wave_isArchived:
+			v.IsArchived = new(bool)
+			return d.ReadBool(schemas.Wave_isArchived, v.IsArchived)
+		case schemas.Wave_lastModifiedDateTime:
+			v.LastModifiedDateTime = new(string)
+			return d.ReadString(schemas.Wave_lastModifiedDateTime, v.LastModifiedDateTime)
+		case schemas.Wave_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Wave_name, v.Name)
+		case schemas.Wave_tags:
+			return deserializeTagsMap(d, schemas.Wave_tags, &v.Tags)
+		case schemas.Wave_waveAggregatedStatus:
+			v.WaveAggregatedStatus = &types.WaveAggregatedStatus{}
+			return v.WaveAggregatedStatus.Deserialize(d)
+		case schemas.Wave_waveID:
+			v.WaveID = new(string)
+			return d.ReadString(schemas.Wave_waveID, v.WaveID)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUnarchiveWaveMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnarchiveWave, schemas.UnarchiveWaveRequest, schemas.Wave)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUnarchiveWave{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UnarchiveWave, schemas.UnarchiveWaveRequest, schemas.Wave), output: &UnarchiveWaveOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUnarchiveWave{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UnarchiveWave"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUnarchiveWaveValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUnarchiveWave(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,22 +205,8 @@ func (c *Client) addOperationUnarchiveWaveMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUnarchiveWave(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UnarchiveWave",
-	}
 }

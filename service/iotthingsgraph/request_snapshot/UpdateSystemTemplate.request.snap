@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IotThingsGraphFrontEndService.UpdateSystemTemplate
+
+{"compatibleNamespaceVersion":1,"definition":{"language":"GRAPHQL","text":"__Text__"},"id":"__Id__"}

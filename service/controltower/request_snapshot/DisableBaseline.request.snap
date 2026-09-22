@@ -1,0 +1,5 @@
+POST /disable-baseline
+
+Content-Type: application/json
+
+{"enabledBaselineIdentifier":"__EnabledBaselineIdentifier__"}

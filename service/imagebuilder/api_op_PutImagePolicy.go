@@ -4,16 +4,14 @@ package imagebuilder
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies a policy to an image. We recommend that you call the RAM API [CreateResourceShare] to share
-// resources. If you call the Image Builder API PutImagePolicy , you must also call
-// the RAM API [PromoteResourceShareCreatedFromPolicy]in order for the resource to be visible to all principals with whom
-// the resource is shared.
+// Applies a policy to an image. To share resources, call the RAM API [CreateResourceShare]. If you
+// call this API, you must also call the RAM API [PromoteResourceShareCreatedFromPolicy]so that the resource is visible
+// to all principals with whom the resource is shared.
 //
 // [PromoteResourceShareCreatedFromPolicy]: https://docs.aws.amazon.com/ram/latest/APIReference/API_PromoteResourceShareCreatedFromPolicy.html
 // [CreateResourceShare]: https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html
@@ -48,6 +46,21 @@ type PutImagePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImagePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImagePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImagePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageArn != nil {
+		s.WriteString(schemas.PutImagePolicyRequest_imageArn, *v.ImageArn)
+	}
+	if v.Policy != nil {
+		s.WriteString(schemas.PutImagePolicyRequest_policy, *v.Policy)
+	}
+}
+
 type PutImagePolicyOutput struct {
 
 	// The Amazon Resource Name (ARN) of the image that this policy was applied to.
@@ -62,77 +75,54 @@ type PutImagePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutImagePolicyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutImagePolicyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutImagePolicyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImageArn != nil {
+		s.WriteString(schemas.PutImagePolicyResponse_imageArn, *v.ImageArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.PutImagePolicyResponse_requestId, *v.RequestId)
+	}
+}
+func (v *PutImagePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutImagePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutImagePolicyResponse_imageArn:
+			v.ImageArn = new(string)
+			return d.ReadString(schemas.PutImagePolicyResponse_imageArn, v.ImageArn)
+		case schemas.PutImagePolicyResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.PutImagePolicyResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutImagePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImagePolicy, schemas.PutImagePolicyRequest, schemas.PutImagePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutImagePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutImagePolicy, schemas.PutImagePolicyRequest, schemas.PutImagePolicyResponse), output: &PutImagePolicyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutImagePolicy{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutImagePolicy"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutImagePolicyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutImagePolicy(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,22 +137,8 @@ func (c *Client) addOperationPutImagePolicyMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutImagePolicy(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutImagePolicy",
-	}
 }

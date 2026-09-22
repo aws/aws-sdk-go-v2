@@ -40,6 +40,25 @@ func (LakehouseRegistration) Values() []LakehouseRegistration {
 	}
 }
 
+type LogDestinationType string
+
+// Enum values for LogDestinationType
+const (
+	LogDestinationTypeS3table    LogDestinationType = "s3table"
+	LogDestinationTypeCloudwatch LogDestinationType = "cloudwatch"
+)
+
+// Values returns all known values for LogDestinationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LogDestinationType) Values() []LogDestinationType {
+	return []LogDestinationType{
+		"s3table",
+		"cloudwatch",
+	}
+}
+
 type LogExport string
 
 // Enum values for LogExport
@@ -142,6 +161,44 @@ func (PerformanceTargetStatus) Values() []PerformanceTargetStatus {
 	return []PerformanceTargetStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type S3TableAction string
+
+// Enum values for S3TableAction
+const (
+	S3TableActionEnable  S3TableAction = "Enable"
+	S3TableActionDisable S3TableAction = "Disable"
+)
+
+// Values returns all known values for S3TableAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3TableAction) Values() []S3TableAction {
+	return []S3TableAction{
+		"Enable",
+		"Disable",
+	}
+}
+
+type S3TableGranularity string
+
+// Enum values for S3TableGranularity
+const (
+	S3TableGranularityNamespace S3TableGranularity = "namespace"
+	S3TableGranularityAccount   S3TableGranularity = "account"
+)
+
+// Values returns all known values for S3TableGranularity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (S3TableGranularity) Values() []S3TableGranularity {
+	return []S3TableGranularity{
+		"namespace",
+		"account",
 	}
 }
 

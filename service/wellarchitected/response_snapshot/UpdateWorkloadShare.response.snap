@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"WorkloadId":"__WorkloadId__","WorkloadShare":{"PermissionType":"READONLY","ShareId":"__ShareId__","SharedBy":"__SharedBy__","SharedWith":"__SharedWith__","Status":"ACCEPTED","WorkloadId":"__WorkloadId__","WorkloadName":"__WorkloadName__"}}

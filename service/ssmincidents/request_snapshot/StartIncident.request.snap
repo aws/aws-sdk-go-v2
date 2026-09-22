@@ -1,0 +1,5 @@
+POST /startIncident
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","impact":1,"relatedItems":[{"generatedId":"__GeneratedId__","identifier":{"type":"ANALYSIS","value":{"arn":"__ItemValueMemberArn__"}},"title":"__Title__"},{"generatedId":"__GeneratedId__","identifier":{"type":"ANALYSIS","value":{"arn":"__ItemValueMemberArn__"}},"title":"__Title__"}],"responsePlanArn":"__ResponsePlanArn__","title":"__Title__","triggerDetails":{"rawData":"__RawData__","source":"__Source__","timestamp":946684800,"triggerArn":"__TriggerArn__"}}

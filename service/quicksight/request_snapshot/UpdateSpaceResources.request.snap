@@ -1,0 +1,5 @@
+PUT /v1/accounts/__AwsAccountId__/spaces/__SpaceId__/resources
+
+Content-Type: application/json
+
+{"AddResources":[{"ResourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"ResourceType":"TOPIC"},{"ResourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"ResourceType":"TOPIC"}],"RemoveResources":[{"ResourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"ResourceType":"TOPIC"},{"ResourceDetails":{"resourceArn":"__SpaceQuickSightResourceDetailsMemberResourceArn__"},"ResourceType":"TOPIC"}]}

@@ -4,11 +4,10 @@ package quicksight
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes read and write permissions for a dashboard.
@@ -43,6 +42,21 @@ type DescribeDashboardPermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardPermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardPermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardPermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsRequest_AwsAccountId, *v.AwsAccountId)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsRequest_DashboardId, *v.DashboardId)
+	}
+}
+
 type DescribeDashboardPermissionsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the dashboard.
@@ -74,77 +88,76 @@ type DescribeDashboardPermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDashboardPermissionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDashboardPermissionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDashboardPermissionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DashboardArn != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsResponse_DashboardArn, *v.DashboardArn)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsResponse_DashboardId, *v.DashboardId)
+	}
+	if v.LinkSharingConfiguration != nil {
+		s.WriteStruct(schemas.DescribeDashboardPermissionsResponse_LinkSharingConfiguration)
+		v.LinkSharingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeUpdateResourcePermissionList(s, schemas.DescribeDashboardPermissionsResponse_Permissions, v.Permissions)
+	if v.RequestId != nil {
+		s.WriteString(schemas.DescribeDashboardPermissionsResponse_RequestId, *v.RequestId)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.DescribeDashboardPermissionsResponse_Status, v.Status)
+	}
+}
+func (v *DescribeDashboardPermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeDashboardPermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeDashboardPermissionsResponse_DashboardArn:
+			v.DashboardArn = new(string)
+			return d.ReadString(schemas.DescribeDashboardPermissionsResponse_DashboardArn, v.DashboardArn)
+		case schemas.DescribeDashboardPermissionsResponse_DashboardId:
+			v.DashboardId = new(string)
+			return d.ReadString(schemas.DescribeDashboardPermissionsResponse_DashboardId, v.DashboardId)
+		case schemas.DescribeDashboardPermissionsResponse_LinkSharingConfiguration:
+			v.LinkSharingConfiguration = &types.LinkSharingConfiguration{}
+			return v.LinkSharingConfiguration.Deserialize(d)
+		case schemas.DescribeDashboardPermissionsResponse_Permissions:
+			return deserializeUpdateResourcePermissionList(d, schemas.DescribeDashboardPermissionsResponse_Permissions, &v.Permissions)
+		case schemas.DescribeDashboardPermissionsResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.DescribeDashboardPermissionsResponse_RequestId, v.RequestId)
+		case schemas.DescribeDashboardPermissionsResponse_Status:
+			return d.ReadInt32(schemas.DescribeDashboardPermissionsResponse_Status, &v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDashboardPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardPermissions, schemas.DescribeDashboardPermissionsRequest, schemas.DescribeDashboardPermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeDashboardPermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDashboardPermissions, schemas.DescribeDashboardPermissionsRequest, schemas.DescribeDashboardPermissionsResponse), output: &DescribeDashboardPermissionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeDashboardPermissions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDashboardPermissions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDescribeDashboardPermissionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDashboardPermissions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,22 +172,8 @@ func (c *Client) addOperationDescribeDashboardPermissionsMiddlewares(stack *midd
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDescribeDashboardPermissions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DescribeDashboardPermissions",
-	}
 }

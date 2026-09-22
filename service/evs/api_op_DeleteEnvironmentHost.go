@@ -5,10 +5,10 @@ package evs
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a host from an Amazon EVS environment.
@@ -54,6 +54,24 @@ type DeleteEnvironmentHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentHostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentHostRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentHostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteEnvironmentHostRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.DeleteEnvironmentHostRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.HostName != nil {
+		s.WriteString(schemas.DeleteEnvironmentHostRequest_hostName, *v.HostName)
+	}
+}
+
 type DeleteEnvironmentHostOutput struct {
 
 	// A summary of the environment that the host was deleted from.
@@ -68,65 +86,52 @@ type DeleteEnvironmentHostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEnvironmentHostOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEnvironmentHostResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEnvironmentHostOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentSummary != nil {
+		s.WriteStruct(schemas.DeleteEnvironmentHostResponse_environmentSummary)
+		v.EnvironmentSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Host != nil {
+		s.WriteStruct(schemas.DeleteEnvironmentHostResponse_host)
+		v.Host.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeleteEnvironmentHostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEnvironmentHostResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEnvironmentHostResponse_environmentSummary:
+			v.EnvironmentSummary = &types.EnvironmentSummary{}
+			return v.EnvironmentSummary.Deserialize(d)
+		case schemas.DeleteEnvironmentHostResponse_host:
+			v.Host = &types.Host{}
+			return v.Host.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEnvironmentHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentHost, schemas.DeleteEnvironmentHostRequest, schemas.DeleteEnvironmentHostResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteEnvironmentHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEnvironmentHost, schemas.DeleteEnvironmentHostRequest, schemas.DeleteEnvironmentHostResponse), output: &DeleteEnvironmentHostOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteEnvironmentHost{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEnvironmentHost"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -136,12 +141,6 @@ func (c *Client) addOperationDeleteEnvironmentHostMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpDeleteEnvironmentHostValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEnvironmentHost(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,12 +153,6 @@ func (c *Client) addOperationDeleteEnvironmentHostMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -199,12 +192,4 @@ func (m *idempotencyToken_initializeOpDeleteEnvironmentHost) HandleInitialize(ct
 }
 func addIdempotencyToken_opDeleteEnvironmentHostMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteEnvironmentHost{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opDeleteEnvironmentHost(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteEnvironmentHost",
-	}
 }

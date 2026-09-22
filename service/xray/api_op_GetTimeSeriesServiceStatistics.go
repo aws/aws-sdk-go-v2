@@ -5,10 +5,10 @@ package xray
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/xray/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -64,6 +64,39 @@ type GetTimeSeriesServiceStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTimeSeriesServiceStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTimeSeriesServiceStatisticsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTimeSeriesServiceStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.GetTimeSeriesServiceStatisticsRequest_EndTime, *v.EndTime)
+	}
+	if v.EntitySelectorExpression != nil {
+		s.WriteString(schemas.GetTimeSeriesServiceStatisticsRequest_EntitySelectorExpression, *v.EntitySelectorExpression)
+	}
+	if v.ForecastStatistics != nil {
+		s.WriteBool(schemas.GetTimeSeriesServiceStatisticsRequest_ForecastStatistics, *v.ForecastStatistics)
+	}
+	if v.GroupARN != nil {
+		s.WriteString(schemas.GetTimeSeriesServiceStatisticsRequest_GroupARN, *v.GroupARN)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GetTimeSeriesServiceStatisticsRequest_GroupName, *v.GroupName)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTimeSeriesServiceStatisticsRequest_NextToken, *v.NextToken)
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.GetTimeSeriesServiceStatisticsRequest_Period, *v.Period)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.GetTimeSeriesServiceStatisticsRequest_StartTime, *v.StartTime)
+	}
+}
+
 type GetTimeSeriesServiceStatisticsOutput struct {
 
 	// A flag indicating whether or not a group's filter expression has been
@@ -83,77 +116,56 @@ type GetTimeSeriesServiceStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTimeSeriesServiceStatisticsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTimeSeriesServiceStatisticsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTimeSeriesServiceStatisticsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContainsOldGroupVersions != false {
+		s.WriteBool(schemas.GetTimeSeriesServiceStatisticsResult_ContainsOldGroupVersions, v.ContainsOldGroupVersions)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTimeSeriesServiceStatisticsResult_NextToken, *v.NextToken)
+	}
+	serializeTimeSeriesServiceStatisticsList(s, schemas.GetTimeSeriesServiceStatisticsResult_TimeSeriesServiceStatistics, v.TimeSeriesServiceStatistics)
+}
+func (v *GetTimeSeriesServiceStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTimeSeriesServiceStatisticsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTimeSeriesServiceStatisticsResult_ContainsOldGroupVersions:
+			return d.ReadBool(schemas.GetTimeSeriesServiceStatisticsResult_ContainsOldGroupVersions, &v.ContainsOldGroupVersions)
+		case schemas.GetTimeSeriesServiceStatisticsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTimeSeriesServiceStatisticsResult_NextToken, v.NextToken)
+		case schemas.GetTimeSeriesServiceStatisticsResult_TimeSeriesServiceStatistics:
+			return deserializeTimeSeriesServiceStatisticsList(d, schemas.GetTimeSeriesServiceStatisticsResult_TimeSeriesServiceStatistics, &v.TimeSeriesServiceStatistics)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTimeSeriesServiceStatistics, schemas.GetTimeSeriesServiceStatisticsRequest, schemas.GetTimeSeriesServiceStatisticsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTimeSeriesServiceStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTimeSeriesServiceStatistics, schemas.GetTimeSeriesServiceStatisticsRequest, schemas.GetTimeSeriesServiceStatisticsResult), output: &GetTimeSeriesServiceStatisticsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTimeSeriesServiceStatistics{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTimeSeriesServiceStatistics"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetTimeSeriesServiceStatisticsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTimeSeriesServiceStatistics(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,12 +178,6 @@ func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *mi
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +269,3 @@ type GetTimeSeriesServiceStatisticsAPIClient interface {
 }
 
 var _ GetTimeSeriesServiceStatisticsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opGetTimeSeriesServiceStatistics(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetTimeSeriesServiceStatistics",
-	}
-}

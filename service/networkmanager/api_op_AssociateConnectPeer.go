@@ -4,11 +4,10 @@ package networkmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a core network Connect peer with a device and optionally, with a
@@ -55,6 +54,27 @@ type AssociateConnectPeerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateConnectPeerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateConnectPeerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateConnectPeerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectPeerId != nil {
+		s.WriteString(schemas.AssociateConnectPeerRequest_ConnectPeerId, *v.ConnectPeerId)
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.AssociateConnectPeerRequest_DeviceId, *v.DeviceId)
+	}
+	if v.GlobalNetworkId != nil {
+		s.WriteString(schemas.AssociateConnectPeerRequest_GlobalNetworkId, *v.GlobalNetworkId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.AssociateConnectPeerRequest_LinkId, *v.LinkId)
+	}
+}
+
 type AssociateConnectPeerOutput struct {
 
 	// The response to the Connect peer request.
@@ -66,77 +86,50 @@ type AssociateConnectPeerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateConnectPeerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateConnectPeerResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateConnectPeerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectPeerAssociation != nil {
+		s.WriteStruct(schemas.AssociateConnectPeerResponse_ConnectPeerAssociation)
+		v.ConnectPeerAssociation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AssociateConnectPeerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateConnectPeerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateConnectPeerResponse_ConnectPeerAssociation:
+			v.ConnectPeerAssociation = &types.ConnectPeerAssociation{}
+			return v.ConnectPeerAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateConnectPeer, schemas.AssociateConnectPeerRequest, schemas.AssociateConnectPeerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateConnectPeer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateConnectPeer, schemas.AssociateConnectPeerRequest, schemas.AssociateConnectPeerResponse), output: &AssociateConnectPeerOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateConnectPeer{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateConnectPeer"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateConnectPeerValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateConnectPeer(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,22 +144,8 @@ func (c *Client) addOperationAssociateConnectPeerMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateConnectPeer(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateConnectPeer",
-	}
 }

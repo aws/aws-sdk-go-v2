@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSStepFunctions.StartSyncExecution
+
+{"includedData":"ALL_DATA","input":"__Input__","name":"__Name__","stateMachineArn":"__StateMachineArn__","traceHeader":"__TraceHeader__"}

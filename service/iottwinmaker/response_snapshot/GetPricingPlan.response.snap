@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"currentPricingPlan":{"billableEntityCount":1,"bundleInformation":{"bundleNames":["__Member__","__Member__"],"pricingTier":"TIER_1"},"effectiveDateTime":946684800,"pricingMode":"BASIC","updateDateTime":946684800,"updateReason":"DEFAULT"},"pendingPricingPlan":{"billableEntityCount":1,"bundleInformation":{"bundleNames":["__Member__","__Member__"],"pricingTier":"TIER_1"},"effectiveDateTime":946684800,"pricingMode":"BASIC","updateDateTime":946684800,"updateReason":"DEFAULT"}}

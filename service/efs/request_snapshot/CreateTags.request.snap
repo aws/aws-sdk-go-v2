@@ -1,0 +1,5 @@
+POST /2015-02-01/create-tags/__FileSystemId__
+
+Content-Type: application/json
+
+{"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

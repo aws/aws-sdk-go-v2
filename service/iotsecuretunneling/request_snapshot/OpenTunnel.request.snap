@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: IoTSecuredTunneling.OpenTunnel
+
+{"description":"__Description__","destinationConfig":{"services":["__Member__","__Member__"],"thingName":"__ThingName__"},"tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"timeoutConfig":{"maxLifetimeTimeoutMinutes":1}}

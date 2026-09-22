@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: WorkspacesService.DescribeCustomWorkspaceImageImport
+
+{"Created":946684800,"ErrorDetails":[{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"},{"ErrorCode":"__ErrorCode__","ErrorMessage":"__ErrorMessage__"}],"ImageBuilderInstanceId":"__ImageBuilderInstanceId__","ImageId":"__ImageId__","ImageSource":{"Ec2ImportTaskId":"__ImageSourceIdentifierMemberEc2ImportTaskId__"},"InfrastructureConfigurationArn":"__InfrastructureConfigurationArn__","LastUpdatedTime":946684800,"ProgressPercentage":1,"State":"PENDING","StateMessage":"__StateMessage__"}

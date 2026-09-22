@@ -1,0 +1,5 @@
+PATCH /environments/__EnvironmentIdentifier__/applications/__ApplicationIdentifier__/routes/__RouteIdentifier__
+
+Content-Type: application/json
+
+{"ActivationState":"ACTIVE"}

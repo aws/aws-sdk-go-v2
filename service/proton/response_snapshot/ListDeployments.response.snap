@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AwsProton20200720.ListDeployments
+
+{"deployments":[{"arn":"__Arn__","completedAt":946684800,"componentName":"__ComponentName__","createdAt":946684800,"deploymentStatus":"IN_PROGRESS","environmentName":"__EnvironmentName__","id":"__Id__","lastAttemptedDeploymentId":"__LastAttemptedDeploymentId__","lastModifiedAt":946684800,"lastSucceededDeploymentId":"__LastSucceededDeploymentId__","serviceInstanceName":"__ServiceInstanceName__","serviceName":"__ServiceName__","targetArn":"__TargetArn__","targetResourceCreatedAt":946684800,"targetResourceType":"ENVIRONMENT"},{"arn":"__Arn__","completedAt":946684800,"componentName":"__ComponentName__","createdAt":946684800,"deploymentStatus":"IN_PROGRESS","environmentName":"__EnvironmentName__","id":"__Id__","lastAttemptedDeploymentId":"__LastAttemptedDeploymentId__","lastModifiedAt":946684800,"lastSucceededDeploymentId":"__LastSucceededDeploymentId__","serviceInstanceName":"__ServiceInstanceName__","serviceName":"__ServiceName__","targetArn":"__TargetArn__","targetResourceCreatedAt":946684800,"targetResourceType":"ENVIRONMENT"}],"nextToken":"__NextToken__"}

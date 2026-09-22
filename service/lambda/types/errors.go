@@ -4,8 +4,68 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/lambda/schemas"
 	smithy "github.com/aws/smithy-go"
 )
+
+// Lambda couldn't create the alias because your Amazon Web Services account has
+// exceeded the maximum number of aliases allowed per Lambda function. For more
+// information, see [Lambda quotas].
+//
+// [Lambda quotas]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
+type AliasLimitExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AliasLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AliasLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AliasLimitExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "AliasLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *AliasLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AliasLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AliasLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AliasLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.AliasLimitExceededException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.AliasLimitExceededException_message, *v.Message)
+	}
+}
+func (v *AliasLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AliasLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AliasLimitExceededException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.AliasLimitExceededException_Type, v.Type)
+		case schemas.AliasLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AliasLimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The callback ID token has either expired or the callback associated with the
 // token has already been closed.
@@ -35,6 +95,33 @@ func (e *CallbackTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CallbackTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CallbackTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CallbackTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CallbackTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CallbackTimeoutException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CallbackTimeoutException_Type, *v.Type)
+	}
+}
+func (v *CallbackTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CallbackTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CallbackTimeoutException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CallbackTimeoutException_Message, v.Message)
+		case schemas.CallbackTimeoutException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CallbackTimeoutException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The maximum number of capacity providers for your account has been exceeded.
 // For more information, see [Lambda quotas]
@@ -68,6 +155,204 @@ func (e *CapacityProviderLimitExceededException) ErrorCode() string {
 func (e *CapacityProviderLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *CapacityProviderLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityProviderLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityProviderLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.CapacityProviderLimitExceededException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CapacityProviderLimitExceededException_message, *v.Message)
+	}
+}
+func (v *CapacityProviderLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityProviderLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityProviderLimitExceededException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CapacityProviderLimitExceededException_Type, v.Type)
+		case schemas.CapacityProviderLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CapacityProviderLimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The Lambda function couldn't be invoked because its code artifact user has been
+// deleted. Wait for Lambda to provision a new code artifact user, or update the
+// function's code package to recreate it.
+type CodeArtifactUserDeletedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CodeArtifactUserDeletedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CodeArtifactUserDeletedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CodeArtifactUserDeletedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CodeArtifactUserDeletedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CodeArtifactUserDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CodeArtifactUserDeletedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeArtifactUserDeletedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeArtifactUserDeletedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.CodeArtifactUserDeletedException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CodeArtifactUserDeletedException_message, *v.Message)
+	}
+}
+func (v *CodeArtifactUserDeletedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeArtifactUserDeletedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeArtifactUserDeletedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CodeArtifactUserDeletedException_Type, v.Type)
+		case schemas.CodeArtifactUserDeletedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CodeArtifactUserDeletedException_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The Lambda function couldn't be invoked because provisioning of its code
+// artifact user failed. Update the function's code package or check the Lambda
+// function's State and StateReasonCode for additional context.
+type CodeArtifactUserFailedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CodeArtifactUserFailedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CodeArtifactUserFailedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CodeArtifactUserFailedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CodeArtifactUserFailedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CodeArtifactUserFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CodeArtifactUserFailedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeArtifactUserFailedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeArtifactUserFailedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.CodeArtifactUserFailedException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CodeArtifactUserFailedException_message, *v.Message)
+	}
+}
+func (v *CodeArtifactUserFailedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeArtifactUserFailedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeArtifactUserFailedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CodeArtifactUserFailedException_Type, v.Type)
+		case schemas.CodeArtifactUserFailedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CodeArtifactUserFailedException_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The Lambda function couldn't be invoked because its code artifact user is still
+// being provisioned. Wait for the function's State to become Active and try the
+// request again.
+type CodeArtifactUserPendingException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *CodeArtifactUserPendingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CodeArtifactUserPendingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CodeArtifactUserPendingException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "CodeArtifactUserPendingException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *CodeArtifactUserPendingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CodeArtifactUserPendingException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeArtifactUserPendingException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeArtifactUserPendingException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.CodeArtifactUserPendingException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CodeArtifactUserPendingException_message, *v.Message)
+	}
+}
+func (v *CodeArtifactUserPendingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeArtifactUserPendingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeArtifactUserPendingException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CodeArtifactUserPendingException_Type, v.Type)
+		case schemas.CodeArtifactUserPendingException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CodeArtifactUserPendingException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified code signing configuration does not exist.
 type CodeSigningConfigNotFoundException struct {
@@ -97,6 +382,33 @@ func (e *CodeSigningConfigNotFoundException) ErrorCode() string {
 }
 func (e *CodeSigningConfigNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
+}
+func (v *CodeSigningConfigNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeSigningConfigNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeSigningConfigNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CodeSigningConfigNotFoundException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CodeSigningConfigNotFoundException_Type, *v.Type)
+	}
+}
+func (v *CodeSigningConfigNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeSigningConfigNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeSigningConfigNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CodeSigningConfigNotFoundException_Message, v.Message)
+		case schemas.CodeSigningConfigNotFoundException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CodeSigningConfigNotFoundException_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // Your Amazon Web Services account has exceeded its maximum total code size. For
@@ -129,6 +441,33 @@ func (e *CodeStorageExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CodeStorageExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CodeStorageExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeStorageExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeStorageExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.CodeStorageExceededException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.CodeStorageExceededException_message, *v.Message)
+	}
+}
+func (v *CodeStorageExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeStorageExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeStorageExceededException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CodeStorageExceededException_Type, v.Type)
+		case schemas.CodeStorageExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CodeStorageExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The code signature failed one or more of the validation checks for signature
 // mismatch or expiry, and the code signing policy is set to ENFORCE. Lambda blocks
@@ -159,6 +498,33 @@ func (e *CodeVerificationFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CodeVerificationFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CodeVerificationFailedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeVerificationFailedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeVerificationFailedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.CodeVerificationFailedException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CodeVerificationFailedException_Type, *v.Type)
+	}
+}
+func (v *CodeVerificationFailedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeVerificationFailedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeVerificationFailedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CodeVerificationFailedException_Message, v.Message)
+		case schemas.CodeVerificationFailedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.CodeVerificationFailedException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The durable execution with the specified name has already been started. Each
 // durable execution name must be unique within the function. Use a different name
@@ -191,6 +557,33 @@ func (e *DurableExecutionAlreadyStartedException) ErrorCode() string {
 func (e *DurableExecutionAlreadyStartedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *DurableExecutionAlreadyStartedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DurableExecutionAlreadyStartedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DurableExecutionAlreadyStartedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DurableExecutionAlreadyStartedException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.DurableExecutionAlreadyStartedException_Type, *v.Type)
+	}
+}
+func (v *DurableExecutionAlreadyStartedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DurableExecutionAlreadyStartedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DurableExecutionAlreadyStartedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DurableExecutionAlreadyStartedException_Message, v.Message)
+		case schemas.DurableExecutionAlreadyStartedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.DurableExecutionAlreadyStartedException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Need additional permissions to configure VPC settings.
 type EC2AccessDeniedException struct {
@@ -219,6 +612,33 @@ func (e *EC2AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EC2AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *EC2AccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2AccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2AccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EC2AccessDeniedException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.EC2AccessDeniedException_Type, *v.Type)
+	}
+}
+func (v *EC2AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EC2AccessDeniedException_Message, v.Message)
+		case schemas.EC2AccessDeniedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.EC2AccessDeniedException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Amazon EC2 throttled Lambda during Lambda function initialization using the
 // execution role provided for the function.
@@ -248,6 +668,33 @@ func (e *EC2ThrottledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EC2ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *EC2ThrottledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2ThrottledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2ThrottledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EC2ThrottledException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.EC2ThrottledException_Type, *v.Type)
+	}
+}
+func (v *EC2ThrottledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2ThrottledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2ThrottledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EC2ThrottledException_Message, v.Message)
+		case schemas.EC2ThrottledException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.EC2ThrottledException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda received an unexpected Amazon EC2 client exception while setting up for
 // the Lambda function.
@@ -278,6 +725,39 @@ func (e *EC2UnexpectedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EC2UnexpectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *EC2UnexpectedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2UnexpectedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2UnexpectedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2ErrorCode != nil {
+		s.WriteString(schemas.EC2UnexpectedException_EC2ErrorCode, *v.EC2ErrorCode)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.EC2UnexpectedException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.EC2UnexpectedException_Type, *v.Type)
+	}
+}
+func (v *EC2UnexpectedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2UnexpectedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2UnexpectedException_EC2ErrorCode:
+			v.EC2ErrorCode = new(string)
+			return d.ReadString(schemas.EC2UnexpectedException_EC2ErrorCode, v.EC2ErrorCode)
+		case schemas.EC2UnexpectedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EC2UnexpectedException_Message, v.Message)
+		case schemas.EC2UnexpectedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.EC2UnexpectedException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // An error occurred when reading from or writing to a connected file system.
 type EFSIOException struct {
@@ -306,6 +786,33 @@ func (e *EFSIOException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EFSIOException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EFSIOException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EFSIOException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EFSIOException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EFSIOException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.EFSIOException_Type, *v.Type)
+	}
+}
+func (v *EFSIOException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EFSIOException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EFSIOException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EFSIOException_Message, v.Message)
+		case schemas.EFSIOException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.EFSIOException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The Lambda function couldn't make a network connection to the configured file
 // system.
@@ -335,6 +842,33 @@ func (e *EFSMountConnectivityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EFSMountConnectivityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EFSMountConnectivityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EFSMountConnectivityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EFSMountConnectivityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EFSMountConnectivityException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.EFSMountConnectivityException_Type, *v.Type)
+	}
+}
+func (v *EFSMountConnectivityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EFSMountConnectivityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EFSMountConnectivityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EFSMountConnectivityException_Message, v.Message)
+		case schemas.EFSMountConnectivityException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.EFSMountConnectivityException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The Lambda function couldn't mount the configured file system due to a
 // permission or configuration issue.
@@ -364,6 +898,33 @@ func (e *EFSMountFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EFSMountFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EFSMountFailureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EFSMountFailureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EFSMountFailureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EFSMountFailureException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.EFSMountFailureException_Type, *v.Type)
+	}
+}
+func (v *EFSMountFailureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EFSMountFailureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EFSMountFailureException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EFSMountFailureException_Message, v.Message)
+		case schemas.EFSMountFailureException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.EFSMountFailureException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The Lambda function made a network connection to the configured file system,
 // but the mount operation timed out.
@@ -393,6 +954,33 @@ func (e *EFSMountTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *EFSMountTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *EFSMountTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EFSMountTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EFSMountTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.EFSMountTimeoutException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.EFSMountTimeoutException_Type, *v.Type)
+	}
+}
+func (v *EFSMountTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EFSMountTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EFSMountTimeoutException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.EFSMountTimeoutException_Message, v.Message)
+		case schemas.EFSMountTimeoutException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.EFSMountTimeoutException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda couldn't create an elastic network interface in the VPC, specified as
 // part of Lambda function configuration, because the limit for network interfaces
@@ -425,6 +1013,93 @@ func (e *ENILimitReachedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ENILimitReachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ENILimitReachedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ENILimitReachedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ENILimitReachedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ENILimitReachedException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ENILimitReachedException_Type, *v.Type)
+	}
+}
+func (v *ENILimitReachedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ENILimitReachedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ENILimitReachedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ENILimitReachedException_Message, v.Message)
+		case schemas.ENILimitReachedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ENILimitReachedException_Type, v.Type)
+		}
+		return nil
+	})
+}
+
+// Lambda couldn't invoke the Lambda function because the elastic network
+// interface (ENI) configured for its VPC connection isn't ready yet. Wait a few
+// moments and try the request again. For more information about VPC configuration,
+// see [Configuring a Lambda function to access resources in a VPC].
+//
+// [Configuring a Lambda function to access resources in a VPC]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
+type ENINotReadyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ENINotReadyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ENINotReadyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ENINotReadyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ENINotReadyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ENINotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ENINotReadyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ENINotReadyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ENINotReadyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ENINotReadyException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ENINotReadyException_Type, *v.Type)
+	}
+}
+func (v *ENINotReadyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ENINotReadyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ENINotReadyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ENINotReadyException_Message, v.Message)
+		case schemas.ENINotReadyException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ENINotReadyException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The maximum number of function versions that can be associated with a single
 // capacity provider has been exceeded. For more information, see [Lambda quotas].
@@ -458,6 +1133,33 @@ func (e *FunctionVersionsPerCapacityProviderLimitExceededException) ErrorCode() 
 func (e *FunctionVersionsPerCapacityProviderLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *FunctionVersionsPerCapacityProviderLimitExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionVersionsPerCapacityProviderLimitExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FunctionVersionsPerCapacityProviderLimitExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.FunctionVersionsPerCapacityProviderLimitExceededException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.FunctionVersionsPerCapacityProviderLimitExceededException_message, *v.Message)
+	}
+}
+func (v *FunctionVersionsPerCapacityProviderLimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FunctionVersionsPerCapacityProviderLimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FunctionVersionsPerCapacityProviderLimitExceededException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.FunctionVersionsPerCapacityProviderLimitExceededException_Type, v.Type)
+		case schemas.FunctionVersionsPerCapacityProviderLimitExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FunctionVersionsPerCapacityProviderLimitExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The code signature failed the integrity check. If the integrity check fails,
 // then Lambda blocks deployment, even if the code signing policy is set to WARN.
@@ -487,6 +1189,33 @@ func (e *InvalidCodeSignatureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidCodeSignatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidCodeSignatureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidCodeSignatureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidCodeSignatureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidCodeSignatureException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.InvalidCodeSignatureException_Type, *v.Type)
+	}
+}
+func (v *InvalidCodeSignatureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidCodeSignatureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidCodeSignatureException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidCodeSignatureException_Message, v.Message)
+		case schemas.InvalidCodeSignatureException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InvalidCodeSignatureException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // One of the parameters in the request is not valid.
 type InvalidParameterValueException struct {
@@ -515,6 +1244,33 @@ func (e *InvalidParameterValueException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidParameterValueException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidParameterValueException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidParameterValueException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.InvalidParameterValueException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidParameterValueException_message, *v.Message)
+	}
+}
+func (v *InvalidParameterValueException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidParameterValueException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidParameterValueException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InvalidParameterValueException_Type, v.Type)
+		case schemas.InvalidParameterValueException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidParameterValueException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request body could not be parsed as JSON, or a request header is invalid.
 // For example, the 'x-amzn-RequestId' header is not a valid UUID string.
@@ -544,6 +1300,33 @@ func (e *InvalidRequestContentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRequestContentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRequestContentException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRequestContentException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRequestContentException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.InvalidRequestContentException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRequestContentException_message, *v.Message)
+	}
+}
+func (v *InvalidRequestContentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRequestContentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRequestContentException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InvalidRequestContentException_Type, v.Type)
+		case schemas.InvalidRequestContentException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRequestContentException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The runtime or runtime version specified is not supported.
 type InvalidRuntimeException struct {
@@ -572,6 +1355,33 @@ func (e *InvalidRuntimeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRuntimeException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InvalidRuntimeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidRuntimeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidRuntimeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidRuntimeException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.InvalidRuntimeException_Type, *v.Type)
+	}
+}
+func (v *InvalidRuntimeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRuntimeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRuntimeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRuntimeException_Message, v.Message)
+		case schemas.InvalidRuntimeException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InvalidRuntimeException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The security group ID provided in the Lambda function VPC configuration is not
 // valid.
@@ -601,6 +1411,33 @@ func (e *InvalidSecurityGroupIDException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSecurityGroupIDException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InvalidSecurityGroupIDException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidSecurityGroupIDException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidSecurityGroupIDException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidSecurityGroupIDException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.InvalidSecurityGroupIDException_Type, *v.Type)
+	}
+}
+func (v *InvalidSecurityGroupIDException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSecurityGroupIDException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSecurityGroupIDException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSecurityGroupIDException_Message, v.Message)
+		case schemas.InvalidSecurityGroupIDException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InvalidSecurityGroupIDException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The subnet ID provided in the Lambda function VPC configuration is not valid.
 type InvalidSubnetIDException struct {
@@ -629,6 +1466,33 @@ func (e *InvalidSubnetIDException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSubnetIDException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InvalidSubnetIDException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidSubnetIDException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidSubnetIDException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidSubnetIDException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.InvalidSubnetIDException_Type, *v.Type)
+	}
+}
+func (v *InvalidSubnetIDException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSubnetIDException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSubnetIDException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSubnetIDException_Message, v.Message)
+		case schemas.InvalidSubnetIDException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InvalidSubnetIDException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda could not unzip the deployment package.
 type InvalidZipFileException struct {
@@ -657,6 +1521,33 @@ func (e *InvalidZipFileException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidZipFileException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InvalidZipFileException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvalidZipFileException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvalidZipFileException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.InvalidZipFileException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.InvalidZipFileException_Type, *v.Type)
+	}
+}
+func (v *InvalidZipFileException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidZipFileException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidZipFileException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidZipFileException_Message, v.Message)
+		case schemas.InvalidZipFileException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.InvalidZipFileException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda couldn't decrypt the environment variables because KMS access was
 // denied. Check the Lambda function's KMS permissions.
@@ -686,6 +1577,33 @@ func (e *KMSAccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KMSAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *KMSAccessDeniedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KMSAccessDeniedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KMSAccessDeniedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.KMSAccessDeniedException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.KMSAccessDeniedException_Type, *v.Type)
+	}
+}
+func (v *KMSAccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KMSAccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KMSAccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KMSAccessDeniedException_Message, v.Message)
+		case schemas.KMSAccessDeniedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.KMSAccessDeniedException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda couldn't decrypt the environment variables because the KMS key used is
 // disabled. Check the Lambda function's KMS key settings.
@@ -715,6 +1633,33 @@ func (e *KMSDisabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *KMSDisabledException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KMSDisabledException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KMSDisabledException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.KMSDisabledException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.KMSDisabledException_Type, *v.Type)
+	}
+}
+func (v *KMSDisabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KMSDisabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KMSDisabledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KMSDisabledException_Message, v.Message)
+		case schemas.KMSDisabledException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.KMSDisabledException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda couldn't decrypt the environment variables because the state of the KMS
 // key used is not valid for Decrypt. Check the function's KMS key settings.
@@ -744,6 +1689,33 @@ func (e *KMSInvalidStateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *KMSInvalidStateException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KMSInvalidStateException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KMSInvalidStateException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.KMSInvalidStateException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.KMSInvalidStateException_Type, *v.Type)
+	}
+}
+func (v *KMSInvalidStateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KMSInvalidStateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KMSInvalidStateException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KMSInvalidStateException_Message, v.Message)
+		case schemas.KMSInvalidStateException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.KMSInvalidStateException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda couldn't decrypt the environment variables because the KMS key was not
 // found. Check the function's KMS key settings.
@@ -773,6 +1745,93 @@ func (e *KMSNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *KMSNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KMSNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KMSNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.KMSNotFoundException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.KMSNotFoundException_Type, *v.Type)
+	}
+}
+func (v *KMSNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KMSNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KMSNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.KMSNotFoundException_Message, v.Message)
+		case schemas.KMSNotFoundException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.KMSNotFoundException_Type, v.Type)
+		}
+		return nil
+	})
+}
+
+// The Lambda function doesn't support the invocation mode requested. For example,
+// calling Invoke with InvocationType=RequestResponse on a function configured for
+// asynchronous-only invocation, or vice versa. For more information about
+// invocation types, see [Invoking Lambda functions].
+//
+// [Invoking Lambda functions]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-options.html
+type ModeNotSupportedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ModeNotSupportedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ModeNotSupportedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ModeNotSupportedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ModeNotSupportedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ModeNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ModeNotSupportedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModeNotSupportedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModeNotSupportedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.ModeNotSupportedException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ModeNotSupportedException_message, *v.Message)
+	}
+}
+func (v *ModeNotSupportedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModeNotSupportedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModeNotSupportedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ModeNotSupportedException_Type, v.Type)
+		case schemas.ModeNotSupportedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ModeNotSupportedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The function has no published versions available.
 type NoPublishedVersionException struct {
@@ -801,6 +1860,33 @@ func (e *NoPublishedVersionException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NoPublishedVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NoPublishedVersionException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NoPublishedVersionException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NoPublishedVersionException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.NoPublishedVersionException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.NoPublishedVersionException_Type, *v.Type)
+	}
+}
+func (v *NoPublishedVersionException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NoPublishedVersionException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NoPublishedVersionException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NoPublishedVersionException_Message, v.Message)
+		case schemas.NoPublishedVersionException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.NoPublishedVersionException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The permissions policy for the resource is too large. For more information, see [Lambda quotas]
 // .
@@ -832,6 +1918,33 @@ func (e *PolicyLengthExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PolicyLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PolicyLengthExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PolicyLengthExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PolicyLengthExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.PolicyLengthExceededException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PolicyLengthExceededException_message, *v.Message)
+	}
+}
+func (v *PolicyLengthExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PolicyLengthExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PolicyLengthExceededException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.PolicyLengthExceededException_Type, v.Type)
+		case schemas.PolicyLengthExceededException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PolicyLengthExceededException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The RevisionId provided does not match the latest RevisionId for the Lambda
 // function or alias.
@@ -867,6 +1980,33 @@ func (e *PreconditionFailedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PreconditionFailedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PreconditionFailedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PreconditionFailedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.PreconditionFailedException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.PreconditionFailedException_message, *v.Message)
+	}
+}
+func (v *PreconditionFailedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PreconditionFailedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PreconditionFailedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.PreconditionFailedException_Type, v.Type)
+		case schemas.PreconditionFailedException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PreconditionFailedException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified configuration does not exist.
 type ProvisionedConcurrencyConfigNotFoundException struct {
@@ -897,6 +2037,89 @@ func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorCode() string {
 func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *ProvisionedConcurrencyConfigNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvisionedConcurrencyConfigNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvisionedConcurrencyConfigNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.ProvisionedConcurrencyConfigNotFoundException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ProvisionedConcurrencyConfigNotFoundException_message, *v.Message)
+	}
+}
+func (v *ProvisionedConcurrencyConfigNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvisionedConcurrencyConfigNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvisionedConcurrencyConfigNotFoundException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ProvisionedConcurrencyConfigNotFoundException_Type, v.Type)
+		case schemas.ProvisionedConcurrencyConfigNotFoundException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ProvisionedConcurrencyConfigNotFoundException_message, v.Message)
+		}
+		return nil
+	})
+}
+
+// The resource-based policy you tried to add to the Lambda resource would grant
+// public access to it, which isn't allowed.
+type PublicPolicyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PublicPolicyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PublicPolicyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PublicPolicyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "PublicPolicyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *PublicPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *PublicPolicyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PublicPolicyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PublicPolicyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.PublicPolicyException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.PublicPolicyException_Type, *v.Type)
+	}
+}
+func (v *PublicPolicyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PublicPolicyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PublicPolicyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.PublicPolicyException_Message, v.Message)
+		case schemas.PublicPolicyException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.PublicPolicyException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda has detected your function being invoked in a recursive loop with other
 // Amazon Web Services resources and stopped your function's invocation.
@@ -926,6 +2149,33 @@ func (e *RecursiveInvocationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RecursiveInvocationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RecursiveInvocationException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecursiveInvocationException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecursiveInvocationException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.RecursiveInvocationException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.RecursiveInvocationException_Type, *v.Type)
+	}
+}
+func (v *RecursiveInvocationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecursiveInvocationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecursiveInvocationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RecursiveInvocationException_Message, v.Message)
+		case schemas.RecursiveInvocationException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RecursiveInvocationException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The request payload exceeded the Invoke request body JSON input quota. For more
 // information, see [Lambda quotas].
@@ -957,6 +2207,33 @@ func (e *RequestTooLargeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RequestTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RequestTooLargeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RequestTooLargeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RequestTooLargeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.RequestTooLargeException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RequestTooLargeException_message, *v.Message)
+	}
+}
+func (v *RequestTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RequestTooLargeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RequestTooLargeException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.RequestTooLargeException_Type, v.Type)
+		case schemas.RequestTooLargeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RequestTooLargeException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The resource already exists, or another operation is in progress.
 type ResourceConflictException struct {
@@ -985,6 +2262,33 @@ func (e *ResourceConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceConflictException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceConflictException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceConflictException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.ResourceConflictException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceConflictException_message, *v.Message)
+	}
+}
+func (v *ResourceConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceConflictException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResourceConflictException_Type, v.Type)
+		case schemas.ResourceConflictException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceConflictException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The operation conflicts with the resource's availability. For example, you
 // tried to update an event source mapping in the CREATING state, or you tried to
@@ -1015,6 +2319,33 @@ func (e *ResourceInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceInUseException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInUseException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInUseException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceInUseException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ResourceInUseException_Type, *v.Type)
+	}
+}
+func (v *ResourceInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceInUseException_Message, v.Message)
+		case schemas.ResourceInUseException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResourceInUseException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The resource specified in the request does not exist.
 type ResourceNotFoundException struct {
@@ -1043,6 +2374,33 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotFoundException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotFoundException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ResourceNotFoundException_Type, *v.Type)
+	}
+}
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		case schemas.ResourceNotFoundException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The function is inactive and its VPC connection is no longer available. Wait
 // for the VPC connection to reestablish and try again.
@@ -1072,6 +2430,33 @@ func (e *ResourceNotReadyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ResourceNotReadyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceNotReadyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceNotReadyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.ResourceNotReadyException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.ResourceNotReadyException_message, *v.Message)
+	}
+}
+func (v *ResourceNotReadyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotReadyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotReadyException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ResourceNotReadyException_Type, v.Type)
+		case schemas.ResourceNotReadyException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotReadyException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Lambda function couldn't make a network connection to the configured S3
 // Files access point.
@@ -1101,6 +2486,33 @@ func (e *S3FilesMountConnectivityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *S3FilesMountConnectivityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *S3FilesMountConnectivityException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3FilesMountConnectivityException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3FilesMountConnectivityException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.S3FilesMountConnectivityException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.S3FilesMountConnectivityException_Type, *v.Type)
+	}
+}
+func (v *S3FilesMountConnectivityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3FilesMountConnectivityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3FilesMountConnectivityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.S3FilesMountConnectivityException_Message, v.Message)
+		case schemas.S3FilesMountConnectivityException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.S3FilesMountConnectivityException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The Lambda function couldn't mount the configured S3 Files access point due to
 // a permission or configuration issue.
@@ -1130,6 +2542,33 @@ func (e *S3FilesMountFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *S3FilesMountFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *S3FilesMountFailureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3FilesMountFailureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3FilesMountFailureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.S3FilesMountFailureException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.S3FilesMountFailureException_Type, *v.Type)
+	}
+}
+func (v *S3FilesMountFailureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3FilesMountFailureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3FilesMountFailureException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.S3FilesMountFailureException_Message, v.Message)
+		case schemas.S3FilesMountFailureException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.S3FilesMountFailureException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The Lambda function made a network connection to the configured S3 Files access
 // point, but the mount operation timed out.
@@ -1159,6 +2598,33 @@ func (e *S3FilesMountTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *S3FilesMountTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *S3FilesMountTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3FilesMountTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3FilesMountTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.S3FilesMountTimeoutException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.S3FilesMountTimeoutException_Type, *v.Type)
+	}
+}
+func (v *S3FilesMountTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3FilesMountTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3FilesMountTimeoutException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.S3FilesMountTimeoutException_Message, v.Message)
+		case schemas.S3FilesMountTimeoutException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.S3FilesMountTimeoutException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The request payload exceeded the maximum allowed size for serialized request
 // entities.
@@ -1190,6 +2656,33 @@ func (e *SerializedRequestEntityTooLargeException) ErrorCode() string {
 func (e *SerializedRequestEntityTooLargeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+func (v *SerializedRequestEntityTooLargeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SerializedRequestEntityTooLargeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SerializedRequestEntityTooLargeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.SerializedRequestEntityTooLargeException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.SerializedRequestEntityTooLargeException_message, *v.Message)
+	}
+}
+func (v *SerializedRequestEntityTooLargeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SerializedRequestEntityTooLargeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SerializedRequestEntityTooLargeException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SerializedRequestEntityTooLargeException_Type, v.Type)
+		case schemas.SerializedRequestEntityTooLargeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SerializedRequestEntityTooLargeException_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Lambda service encountered an internal error.
 type ServiceException struct {
@@ -1218,6 +2711,93 @@ func (e *ServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ServiceException_Type, *v.Type)
+	}
+}
+func (v *ServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceException_Message, v.Message)
+		case schemas.ServiceException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ServiceException_Type, v.Type)
+		}
+		return nil
+	})
+}
+
+// The request would exceed a service quota. For more information about Lambda
+// service quotas, see [Lambda quotas]. To request a quota increase, see [Requesting a quota increase] in the Service Quotas
+// User Guide.
+//
+// [Requesting a quota increase]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
+// [Lambda quotas]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ServiceQuotaExceededException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceQuotaExceededException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceQuotaExceededException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.ServiceQuotaExceededException_Type, *v.Type)
+	}
+}
+func (v *ServiceQuotaExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceQuotaExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceQuotaExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Message, v.Message)
+		case schemas.ServiceQuotaExceededException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.ServiceQuotaExceededException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // The afterRestore()[runtime hook] encountered an error. For more information, check the Amazon
 // CloudWatch logs.
@@ -1249,6 +2829,33 @@ func (e *SnapStartException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SnapStartException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SnapStartException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapStartException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapStartException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SnapStartException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SnapStartException_Type, *v.Type)
+	}
+}
+func (v *SnapStartException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapStartException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapStartException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SnapStartException_Message, v.Message)
+		case schemas.SnapStartException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SnapStartException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda is initializing your function. You can invoke the function when the [function state]
 // becomes Active .
@@ -1280,6 +2887,96 @@ func (e *SnapStartNotReadyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SnapStartNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SnapStartNotReadyException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapStartNotReadyException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapStartNotReadyException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SnapStartNotReadyException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SnapStartNotReadyException_Type, *v.Type)
+	}
+}
+func (v *SnapStartNotReadyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapStartNotReadyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapStartNotReadyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SnapStartNotReadyException_Message, v.Message)
+		case schemas.SnapStartNotReadyException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SnapStartNotReadyException_Type, v.Type)
+		}
+		return nil
+	})
+}
+
+// Lambda couldn't regenerate the SnapStart snapshot for the function.
+// SnapStart-enabled functions periodically regenerate snapshots when their
+// underlying runtime or dependencies change; this regeneration failed. Wait for
+// Lambda to retry, or update the function's configuration to trigger a new
+// snapshot. For more information, see [Lambda SnapStart].
+//
+// [Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
+type SnapStartRegenerationFailureException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SnapStartRegenerationFailureException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SnapStartRegenerationFailureException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SnapStartRegenerationFailureException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SnapStartRegenerationFailureException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SnapStartRegenerationFailureException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+func (v *SnapStartRegenerationFailureException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapStartRegenerationFailureException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapStartRegenerationFailureException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SnapStartRegenerationFailureException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SnapStartRegenerationFailureException_Type, *v.Type)
+	}
+}
+func (v *SnapStartRegenerationFailureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapStartRegenerationFailureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapStartRegenerationFailureException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SnapStartRegenerationFailureException_Message, v.Message)
+		case schemas.SnapStartRegenerationFailureException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SnapStartRegenerationFailureException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda couldn't restore the snapshot within the timeout limit.
 type SnapStartTimeoutException struct {
@@ -1308,6 +3005,33 @@ func (e *SnapStartTimeoutException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SnapStartTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SnapStartTimeoutException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapStartTimeoutException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapStartTimeoutException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SnapStartTimeoutException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SnapStartTimeoutException_Type, *v.Type)
+	}
+}
+func (v *SnapStartTimeoutException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapStartTimeoutException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapStartTimeoutException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SnapStartTimeoutException_Message, v.Message)
+		case schemas.SnapStartTimeoutException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SnapStartTimeoutException_Type, v.Type)
+		}
+		return nil
+	})
+}
 
 // Lambda couldn't set up VPC access for the Lambda function because one or more
 // configured subnets has no available IP addresses.
@@ -1338,6 +3062,33 @@ func (e *SubnetIPAddressLimitReachedException) ErrorCode() string {
 }
 func (e *SubnetIPAddressLimitReachedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+func (v *SubnetIPAddressLimitReachedException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubnetIPAddressLimitReachedException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubnetIPAddressLimitReachedException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.SubnetIPAddressLimitReachedException_Message, *v.Message)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.SubnetIPAddressLimitReachedException_Type, *v.Type)
+	}
+}
+func (v *SubnetIPAddressLimitReachedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubnetIPAddressLimitReachedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubnetIPAddressLimitReachedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SubnetIPAddressLimitReachedException_Message, v.Message)
+		case schemas.SubnetIPAddressLimitReachedException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.SubnetIPAddressLimitReachedException_Type, v.Type)
+		}
+		return nil
+	})
 }
 
 // The request throughput limit was exceeded. For more information, see [Lambda quotas].
@@ -1371,6 +3122,49 @@ func (e *TooManyRequestsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyRequestsException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TooManyRequestsException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TooManyRequestsException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Reason != "" {
+		s.WriteString(schemas.TooManyRequestsException_Reason, string(v.Reason))
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.TooManyRequestsException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.TooManyRequestsException_message, *v.Message)
+	}
+	if v.RetryAfterSeconds != nil {
+		s.WriteString(schemas.TooManyRequestsException_retryAfterSeconds, *v.RetryAfterSeconds)
+	}
+}
+func (v *TooManyRequestsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyRequestsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyRequestsException_Reason:
+			var ev string
+			if err := d.ReadString(schemas.TooManyRequestsException_Reason, &ev); err != nil {
+				return err
+			}
+			v.Reason = ThrottleReason(ev)
+			return nil
+		case schemas.TooManyRequestsException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_Type, v.Type)
+		case schemas.TooManyRequestsException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_message, v.Message)
+		case schemas.TooManyRequestsException_retryAfterSeconds:
+			v.RetryAfterSeconds = new(string)
+			return d.ReadString(schemas.TooManyRequestsException_retryAfterSeconds, v.RetryAfterSeconds)
+		}
+		return nil
+	})
+}
 
 // The content type of the Invoke request body is not JSON.
 type UnsupportedMediaTypeException struct {
@@ -1399,3 +3193,30 @@ func (e *UnsupportedMediaTypeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedMediaTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedMediaTypeException) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UnsupportedMediaTypeException)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UnsupportedMediaTypeException) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != nil {
+		s.WriteString(schemas.UnsupportedMediaTypeException_Type, *v.Type)
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.UnsupportedMediaTypeException_message, *v.Message)
+	}
+}
+func (v *UnsupportedMediaTypeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedMediaTypeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedMediaTypeException_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.UnsupportedMediaTypeException_Type, v.Type)
+		case schemas.UnsupportedMediaTypeException_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedMediaTypeException_message, v.Message)
+		}
+		return nil
+	})
+}

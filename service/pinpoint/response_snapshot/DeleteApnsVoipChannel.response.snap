@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"ApplicationId":"__ApplicationId__","CreationDate":"__CreationDate__","DefaultAuthenticationMethod":"__DefaultAuthenticationMethod__","Enabled":true,"HasCredential":true,"HasTokenKey":true,"Id":"__Id__","IsArchived":true,"LastModifiedBy":"__LastModifiedBy__","LastModifiedDate":"__LastModifiedDate__","Platform":"__Platform__","Version":1}

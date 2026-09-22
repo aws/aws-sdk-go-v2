@@ -1,0 +1,6 @@
+PATCH /networks/__NetworkId__/users/__UserId__/devices
+
+Content-Type: application/json
+X-Client-Token: __ClientToken__
+
+{"appIds":["__Member__","__Member__"]}

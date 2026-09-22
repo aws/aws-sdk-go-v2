@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"nextToken":"__NextToken__","workspaces":[{"alias":"__Alias__","arn":"__Arn__","createdAt":946684800,"kmsKeyArn":"__KmsKeyArn__","status":{"statusCode":"CREATING"},"tags":{"key0":"__Value__"},"workspaceId":"__WorkspaceId__"},{"alias":"__Alias__","arn":"__Arn__","createdAt":946684800,"kmsKeyArn":"__KmsKeyArn__","status":{"statusCode":"CREATING"},"tags":{"key0":"__Value__"},"workspaceId":"__WorkspaceId__"}]}

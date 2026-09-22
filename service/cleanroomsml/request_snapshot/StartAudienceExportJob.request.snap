@@ -1,0 +1,5 @@
+POST /audience-export-job
+
+Content-Type: application/json
+
+{"audienceGenerationJobArn":"__AudienceGenerationJobArn__","audienceSize":{"type":"ABSOLUTE","value":1},"description":"__Description__","name":"__Name__"}

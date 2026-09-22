@@ -4,10 +4,9 @@ package iot
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a role alias.
@@ -56,6 +55,24 @@ type UpdateRoleAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoleAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoleAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoleAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialDurationSeconds != nil {
+		s.WriteInt32(schemas.UpdateRoleAliasRequest_credentialDurationSeconds, *v.CredentialDurationSeconds)
+	}
+	if v.RoleAlias != nil {
+		s.WriteString(schemas.UpdateRoleAliasRequest_roleAlias, *v.RoleAlias)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateRoleAliasRequest_roleArn, *v.RoleArn)
+	}
+}
+
 type UpdateRoleAliasOutput struct {
 
 	// The role alias.
@@ -70,77 +87,54 @@ type UpdateRoleAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRoleAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRoleAliasResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRoleAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleAlias != nil {
+		s.WriteString(schemas.UpdateRoleAliasResponse_roleAlias, *v.RoleAlias)
+	}
+	if v.RoleAliasArn != nil {
+		s.WriteString(schemas.UpdateRoleAliasResponse_roleAliasArn, *v.RoleAliasArn)
+	}
+}
+func (v *UpdateRoleAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRoleAliasResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRoleAliasResponse_roleAlias:
+			v.RoleAlias = new(string)
+			return d.ReadString(schemas.UpdateRoleAliasResponse_roleAlias, v.RoleAlias)
+		case schemas.UpdateRoleAliasResponse_roleAliasArn:
+			v.RoleAliasArn = new(string)
+			return d.ReadString(schemas.UpdateRoleAliasResponse_roleAliasArn, v.RoleAliasArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoleAlias, schemas.UpdateRoleAliasRequest, schemas.UpdateRoleAliasResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRoleAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRoleAlias, schemas.UpdateRoleAliasRequest, schemas.UpdateRoleAliasResponse), output: &UpdateRoleAliasOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRoleAlias{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRoleAlias"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateRoleAliasValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRoleAlias(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,22 +149,8 @@ func (c *Client) addOperationUpdateRoleAliasMiddlewares(stack *middleware.Stack,
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateRoleAlias(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateRoleAlias",
-	}
 }

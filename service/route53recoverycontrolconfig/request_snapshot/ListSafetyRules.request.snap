@@ -1,0 +1,3 @@
+GET /controlpanel/__ControlPanelArn__/safetyrules?MaxResults=1&NextToken=__NextToken__
+
+

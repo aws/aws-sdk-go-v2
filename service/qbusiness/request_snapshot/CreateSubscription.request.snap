@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/subscriptions
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","principal":{"user":"__SubscriptionPrincipalMemberUser__"},"type":"Q_LITE"}

@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSFMS_20180101.BatchDisassociateResource
+
+{"FailedItems":[{"Reason":"NOT_VALID_ARN","URI":"__URI__"},{"Reason":"NOT_VALID_ARN","URI":"__URI__"}],"ResourceSetIdentifier":"__ResourceSetIdentifier__"}

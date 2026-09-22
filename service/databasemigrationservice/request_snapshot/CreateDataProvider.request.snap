@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AmazonDMSv20160101.CreateDataProvider
+
+{"DataProviderName":"__DataProviderName__","Description":"__Description__","Engine":"__Engine__","Settings":{"RedshiftSettings":{"DatabaseName":"__DatabaseName__","Port":1,"S3AccessRoleArn":"__S3AccessRoleArn__","S3Path":"__S3Path__","ServerName":"__ServerName__"}},"Tags":[{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"},{"Key":"__Key__","ResourceArn":"__ResourceArn__","Value":"__Value__"}],"Virtual":true}

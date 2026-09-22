@@ -1,0 +1,5 @@
+POST /macie
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","findingPublishingFrequency":"FIFTEEN_MINUTES","status":"PAUSED"}

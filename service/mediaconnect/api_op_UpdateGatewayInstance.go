@@ -4,11 +4,10 @@ package mediaconnect
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mediaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing gateway instance.
@@ -40,6 +39,21 @@ type UpdateGatewayInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgePlacement != "" {
+		s.WriteString(schemas.UpdateGatewayInstanceRequest_BridgePlacement, string(v.BridgePlacement))
+	}
+	if v.GatewayInstanceArn != nil {
+		s.WriteString(schemas.UpdateGatewayInstanceRequest_GatewayInstanceArn, *v.GatewayInstanceArn)
+	}
+}
+
 type UpdateGatewayInstanceOutput struct {
 
 	// The state of the instance. ACTIVE or INACTIVE .
@@ -54,77 +68,58 @@ type UpdateGatewayInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BridgePlacement != "" {
+		s.WriteString(schemas.UpdateGatewayInstanceResponse_BridgePlacement, string(v.BridgePlacement))
+	}
+	if v.GatewayInstanceArn != nil {
+		s.WriteString(schemas.UpdateGatewayInstanceResponse_GatewayInstanceArn, *v.GatewayInstanceArn)
+	}
+}
+func (v *UpdateGatewayInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayInstanceResponse_BridgePlacement:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGatewayInstanceResponse_BridgePlacement, &ev); err != nil {
+				return err
+			}
+			v.BridgePlacement = types.BridgePlacement(ev)
+			return nil
+		case schemas.UpdateGatewayInstanceResponse_GatewayInstanceArn:
+			v.GatewayInstanceArn = new(string)
+			return d.ReadString(schemas.UpdateGatewayInstanceResponse_GatewayInstanceArn, v.GatewayInstanceArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGatewayInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayInstance, schemas.UpdateGatewayInstanceRequest, schemas.UpdateGatewayInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGatewayInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayInstance, schemas.UpdateGatewayInstanceRequest, schemas.UpdateGatewayInstanceResponse), output: &UpdateGatewayInstanceOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGatewayInstance{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGatewayInstance"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateGatewayInstanceValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGatewayInstance(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -139,22 +134,8 @@ func (c *Client) addOperationUpdateGatewayInstanceMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateGatewayInstance(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateGatewayInstance",
-	}
 }

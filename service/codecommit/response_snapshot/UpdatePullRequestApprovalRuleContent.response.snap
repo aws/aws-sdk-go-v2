@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.UpdatePullRequestApprovalRuleContent
+
+{"approvalRule":{"approvalRuleContent":"__ApprovalRuleContent__","approvalRuleId":"__ApprovalRuleId__","approvalRuleName":"__ApprovalRuleName__","creationDate":946684800,"lastModifiedDate":946684800,"lastModifiedUser":"__LastModifiedUser__","originApprovalRuleTemplate":{"approvalRuleTemplateId":"__ApprovalRuleTemplateId__","approvalRuleTemplateName":"__ApprovalRuleTemplateName__"},"ruleContentSha256":"__RuleContentSha256__"}}

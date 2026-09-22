@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSCognitoIdentityProviderService.GetDevice
+
+{"Device":{"DeviceAttributes":[{"Name":"__Name__","Value":"__Value__"},{"Name":"__Name__","Value":"__Value__"}],"DeviceCreateDate":946684800,"DeviceKey":"__DeviceKey__","DeviceLastAuthenticatedDate":946684800,"DeviceLastModifiedDate":946684800}}

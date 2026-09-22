@@ -1,0 +1,7 @@
+POST /service/ComputeOptimizerAutomationService/operation/ListTagsForResource
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡kresourceArno__ResourceArn__

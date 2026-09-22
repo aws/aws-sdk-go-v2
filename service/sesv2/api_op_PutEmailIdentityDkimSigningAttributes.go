@@ -4,11 +4,10 @@ package sesv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Used to configure or change the DKIM authentication settings for an email
@@ -70,6 +69,26 @@ type PutEmailIdentityDkimSigningAttributesInput struct {
 	SigningAttributes *types.DkimSigningAttributes
 
 	noSmithyDocumentSerde
+}
+
+func (v *PutEmailIdentityDkimSigningAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEmailIdentityDkimSigningAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEmailIdentityDkimSigningAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailIdentity != nil {
+		s.WriteString(schemas.PutEmailIdentityDkimSigningAttributesRequest_EmailIdentity, *v.EmailIdentity)
+	}
+	if v.SigningAttributes != nil {
+		s.WriteStruct(schemas.PutEmailIdentityDkimSigningAttributesRequest_SigningAttributes)
+		v.SigningAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigningAttributesOrigin != "" {
+		s.WriteString(schemas.PutEmailIdentityDkimSigningAttributesRequest_SigningAttributesOrigin, string(v.SigningAttributesOrigin))
+	}
 }
 
 // If the action is successful, the service sends back an HTTP 200 response.
@@ -143,77 +162,61 @@ type PutEmailIdentityDkimSigningAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutEmailIdentityDkimSigningAttributesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutEmailIdentityDkimSigningAttributesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutEmailIdentityDkimSigningAttributesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DkimStatus != "" {
+		s.WriteString(schemas.PutEmailIdentityDkimSigningAttributesResponse_DkimStatus, string(v.DkimStatus))
+	}
+	serializeDnsTokenList(s, schemas.PutEmailIdentityDkimSigningAttributesResponse_DkimTokens, v.DkimTokens)
+	if v.SigningHostedZone != nil {
+		s.WriteString(schemas.PutEmailIdentityDkimSigningAttributesResponse_SigningHostedZone, *v.SigningHostedZone)
+	}
+}
+func (v *PutEmailIdentityDkimSigningAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutEmailIdentityDkimSigningAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutEmailIdentityDkimSigningAttributesResponse_DkimStatus:
+			var ev string
+			if err := d.ReadString(schemas.PutEmailIdentityDkimSigningAttributesResponse_DkimStatus, &ev); err != nil {
+				return err
+			}
+			v.DkimStatus = types.DkimStatus(ev)
+			return nil
+		case schemas.PutEmailIdentityDkimSigningAttributesResponse_DkimTokens:
+			return deserializeDnsTokenList(d, schemas.PutEmailIdentityDkimSigningAttributesResponse_DkimTokens, &v.DkimTokens)
+		case schemas.PutEmailIdentityDkimSigningAttributesResponse_SigningHostedZone:
+			v.SigningHostedZone = new(string)
+			return d.ReadString(schemas.PutEmailIdentityDkimSigningAttributesResponse_SigningHostedZone, v.SigningHostedZone)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutEmailIdentityDkimSigningAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailIdentityDkimSigningAttributes, schemas.PutEmailIdentityDkimSigningAttributesRequest, schemas.PutEmailIdentityDkimSigningAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutEmailIdentityDkimSigningAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutEmailIdentityDkimSigningAttributes, schemas.PutEmailIdentityDkimSigningAttributesRequest, schemas.PutEmailIdentityDkimSigningAttributesResponse), output: &PutEmailIdentityDkimSigningAttributesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutEmailIdentityDkimSigningAttributes{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutEmailIdentityDkimSigningAttributes"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutEmailIdentityDkimSigningAttributesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutEmailIdentityDkimSigningAttributes(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -228,22 +231,8 @@ func (c *Client) addOperationPutEmailIdentityDkimSigningAttributesMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutEmailIdentityDkimSigningAttributes(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutEmailIdentityDkimSigningAttributes",
-	}
 }

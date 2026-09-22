@@ -5,10 +5,10 @@ package imagebuilder
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new infrastructure configuration. An infrastructure configuration
@@ -30,8 +30,10 @@ func (c *Client) CreateInfrastructureConfiguration(ctx context.Context, params *
 
 type CreateInfrastructureConfigurationInput struct {
 
-	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	// A unique, case-sensitive identifier you provide to ensure that the operation
+	// completes no more than one time. If this token matches a previous request, the
+	// service ignores the request, but does not return an error. For more information,
+	// see [Ensuring idempotency]in the Amazon EC2 API Reference.
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
@@ -52,12 +54,17 @@ type CreateInfrastructureConfigurationInput struct {
 	// The description of the infrastructure configuration.
 	Description *string
 
+	// Validates the required permissions and request parameters without making the
+	// request. If validation succeeds, the operation returns a
+	// DryRunOperationException error response.
+	DryRun bool
+
 	// The instance metadata options that you can set for the HTTP requests that
 	// pipeline builds use to launch EC2 build and test instances.
 	InstanceMetadataOptions *types.InstanceMetadataOptions
 
 	// The instance types of the infrastructure configuration. You can specify one or
-	// more instance types to use for this build. The service will pick one of these
+	// more instance types to use for this build. Image Builder picks one of these
 	// instance types based on availability.
 	InstanceTypes []string
 
@@ -69,7 +76,7 @@ type CreateInfrastructureConfigurationInput struct {
 	Logging *types.Logging
 
 	// The instance placement settings that define where the instances that are
-	// launched from your image will run.
+	// launched from your image run.
 	Placement *types.Placement
 
 	// The metadata tags to assign to the Amazon EC2 instance that Image Builder
@@ -80,8 +87,8 @@ type CreateInfrastructureConfigurationInput struct {
 	// Amazon EC2 AMI.
 	SecurityGroupIds []string
 
-	// The Amazon Resource Name (ARN) for the SNS topic to which we send image build
-	// event notifications.
+	// The Amazon Resource Name (ARN) of the SNS topic to which Image Builder sends
+	// image build event notifications.
 	//
 	// EC2 Image Builder is unable to send notifications to SNS topics that are
 	// encrypted using keys from other accounts. The key that is used to encrypt the
@@ -96,12 +103,67 @@ type CreateInfrastructureConfigurationInput struct {
 	// Image Builder creates as output. Tags are formatted as key value pairs.
 	Tags map[string]string
 
-	// The terminate instance on failure setting of the infrastructure configuration.
-	// Set to false if you want Image Builder to retain the instance used to configure
-	// your AMI if the build or test phase of your workflow fails.
+	// Specifies whether to terminate the instance on failure. Set to false if you
+	// want Image Builder to retain the instance used to configure your AMI if the
+	// build or test phase of your workflow fails. Defaults to true .
 	TerminateInstanceOnFailure *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateInfrastructureConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInfrastructureConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_description, *v.Description)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.CreateInfrastructureConfigurationRequest_dryRun, v.DryRun)
+	}
+	if v.InstanceMetadataOptions != nil {
+		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_instanceMetadataOptions)
+		v.InstanceMetadataOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceProfileName != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_instanceProfileName, *v.InstanceProfileName)
+	}
+	serializeInstanceTypeList(s, schemas.CreateInfrastructureConfigurationRequest_instanceTypes, v.InstanceTypes)
+	if v.KeyPair != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_keyPair, *v.KeyPair)
+	}
+	if v.Logging != nil {
+		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_logging)
+		v.Logging.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_name, *v.Name)
+	}
+	if v.Placement != nil {
+		s.WriteStruct(schemas.CreateInfrastructureConfigurationRequest_placement)
+		v.Placement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeResourceTagMap(s, schemas.CreateInfrastructureConfigurationRequest_resourceTags, v.ResourceTags)
+	serializeSecurityGroupIds(s, schemas.CreateInfrastructureConfigurationRequest_securityGroupIds, v.SecurityGroupIds)
+	if v.SnsTopicArn != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_snsTopicArn, *v.SnsTopicArn)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationRequest_subnetId, *v.SubnetId)
+	}
+	serializeTagMap(s, schemas.CreateInfrastructureConfigurationRequest_tags, v.Tags)
+	if v.TerminateInstanceOnFailure != nil {
+		s.WriteBool(schemas.CreateInfrastructureConfigurationRequest_terminateInstanceOnFailure, *v.TerminateInstanceOnFailure)
+	}
 }
 
 type CreateInfrastructureConfigurationOutput struct {
@@ -122,65 +184,54 @@ type CreateInfrastructureConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInfrastructureConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInfrastructureConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInfrastructureConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationResponse_clientToken, *v.ClientToken)
+	}
+	if v.InfrastructureConfigurationArn != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationResponse_infrastructureConfigurationArn, *v.InfrastructureConfigurationArn)
+	}
+	if v.RequestId != nil {
+		s.WriteString(schemas.CreateInfrastructureConfigurationResponse_requestId, *v.RequestId)
+	}
+}
+func (v *CreateInfrastructureConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInfrastructureConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInfrastructureConfigurationResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateInfrastructureConfigurationResponse_clientToken, v.ClientToken)
+		case schemas.CreateInfrastructureConfigurationResponse_infrastructureConfigurationArn:
+			v.InfrastructureConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateInfrastructureConfigurationResponse_infrastructureConfigurationArn, v.InfrastructureConfigurationArn)
+		case schemas.CreateInfrastructureConfigurationResponse_requestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.CreateInfrastructureConfigurationResponse_requestId, v.RequestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInfrastructureConfiguration, schemas.CreateInfrastructureConfigurationRequest, schemas.CreateInfrastructureConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInfrastructureConfiguration, schemas.CreateInfrastructureConfigurationRequest, schemas.CreateInfrastructureConfigurationResponse), output: &CreateInfrastructureConfigurationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInfrastructureConfiguration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInfrastructureConfiguration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -190,12 +241,6 @@ func (c *Client) addOperationCreateInfrastructureConfigurationMiddlewares(stack 
 		return err
 	}
 	if err = addOpCreateInfrastructureConfigurationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInfrastructureConfiguration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -208,12 +253,6 @@ func (c *Client) addOperationCreateInfrastructureConfigurationMiddlewares(stack 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -253,12 +292,4 @@ func (m *idempotencyToken_initializeOpCreateInfrastructureConfiguration) HandleI
 }
 func addIdempotencyToken_opCreateInfrastructureConfigurationMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateInfrastructureConfiguration{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateInfrastructureConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateInfrastructureConfiguration",
-	}
 }

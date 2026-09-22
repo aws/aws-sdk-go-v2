@@ -1,0 +1,5 @@
+PUT /2023-10-12/farms/__FarmId__/queue-limit-associations
+
+Content-Type: application/json
+
+{"limitId":"__LimitId__","queueId":"__QueueId__"}

@@ -1,0 +1,5 @@
+POST /api-data/data-integration/instance/__InstanceId__/data-integration-events
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","data":"__Data__","datasetTarget":{"datasetIdentifier":"__DatasetIdentifier__","operationType":"APPEND"},"eventGroupId":"__EventGroupId__","eventTimestamp":946684800,"eventType":"scn.data.forecast"}

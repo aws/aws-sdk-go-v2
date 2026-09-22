@@ -1,0 +1,5 @@
+POST /assistants/__AssistantId__/aiagents/__AiAgentId__/versions
+
+Content-Type: application/json
+
+{"clientToken":"__ClientToken__","modifiedTime":946684800}

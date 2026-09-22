@@ -4,10 +4,9 @@ package datapipeline
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Task runners call ReportTaskRunnerHeartbeat every 15 minutes to indicate that
@@ -68,6 +67,24 @@ type ReportTaskRunnerHeartbeatInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportTaskRunnerHeartbeatInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportTaskRunnerHeartbeatInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportTaskRunnerHeartbeatInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hostname != nil {
+		s.WriteString(schemas.ReportTaskRunnerHeartbeatInput_hostname, *v.Hostname)
+	}
+	if v.TaskrunnerId != nil {
+		s.WriteString(schemas.ReportTaskRunnerHeartbeatInput_taskrunnerId, *v.TaskrunnerId)
+	}
+	if v.WorkerGroup != nil {
+		s.WriteString(schemas.ReportTaskRunnerHeartbeatInput_workerGroup, *v.WorkerGroup)
+	}
+}
+
 // Contains the output of ReportTaskRunnerHeartbeat.
 type ReportTaskRunnerHeartbeatOutput struct {
 
@@ -82,77 +99,45 @@ type ReportTaskRunnerHeartbeatOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReportTaskRunnerHeartbeatOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReportTaskRunnerHeartbeatOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReportTaskRunnerHeartbeatOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.ReportTaskRunnerHeartbeatOutput_terminate, v.Terminate)
+}
+func (v *ReportTaskRunnerHeartbeatOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReportTaskRunnerHeartbeatOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReportTaskRunnerHeartbeatOutput_terminate:
+			return d.ReadBool(schemas.ReportTaskRunnerHeartbeatOutput_terminate, &v.Terminate)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationReportTaskRunnerHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReportTaskRunnerHeartbeat, schemas.ReportTaskRunnerHeartbeatInput, schemas.ReportTaskRunnerHeartbeatOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpReportTaskRunnerHeartbeat{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ReportTaskRunnerHeartbeat, schemas.ReportTaskRunnerHeartbeatInput, schemas.ReportTaskRunnerHeartbeatOutput), output: &ReportTaskRunnerHeartbeatOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpReportTaskRunnerHeartbeat{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ReportTaskRunnerHeartbeat"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpReportTaskRunnerHeartbeatValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReportTaskRunnerHeartbeat(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,22 +152,8 @@ func (c *Client) addOperationReportTaskRunnerHeartbeatMiddlewares(stack *middlew
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opReportTaskRunnerHeartbeat(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ReportTaskRunnerHeartbeat",
-	}
 }

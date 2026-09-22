@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.0
+X-Amz-Target: AWSLookoutEquipmentFrontendService.ListInferenceSchedulers
+
+{"InferenceSchedulerNameBeginsWith":"__InferenceSchedulerNameBeginsWith__","MaxResults":1,"ModelName":"__ModelName__","NextToken":"__NextToken__","Status":"PENDING"}

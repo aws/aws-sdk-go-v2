@@ -4,11 +4,10 @@ package lightsail
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lightsail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches a static IP address to a specific Amazon Lightsail instance.
@@ -42,6 +41,21 @@ type AttachStaticIpInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachStaticIpInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachStaticIpRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachStaticIpInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceName != nil {
+		s.WriteString(schemas.AttachStaticIpRequest_instanceName, *v.InstanceName)
+	}
+	if v.StaticIpName != nil {
+		s.WriteString(schemas.AttachStaticIpRequest_staticIpName, *v.StaticIpName)
+	}
+}
+
 type AttachStaticIpOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
@@ -55,77 +69,45 @@ type AttachStaticIpOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachStaticIpOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachStaticIpResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachStaticIpOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOperationList(s, schemas.AttachStaticIpResult_operations, v.Operations)
+}
+func (v *AttachStaticIpOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachStaticIpResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachStaticIpResult_operations:
+			return deserializeOperationList(d, schemas.AttachStaticIpResult_operations, &v.Operations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachStaticIp, schemas.AttachStaticIpRequest, schemas.AttachStaticIpResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAttachStaticIp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachStaticIp, schemas.AttachStaticIpRequest, schemas.AttachStaticIpResult), output: &AttachStaticIpOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAttachStaticIp{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AttachStaticIp"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAttachStaticIpValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachStaticIp(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +122,8 @@ func (c *Client) addOperationAttachStaticIpMiddlewares(stack *middleware.Stack, 
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAttachStaticIp(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AttachStaticIp",
-	}
 }

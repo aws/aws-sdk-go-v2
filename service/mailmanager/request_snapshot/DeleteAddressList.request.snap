@@ -1,0 +1,7 @@
+POST /service/MailManagerSvc/operation/DeleteAddressList
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+
+¡mAddressListIdq__AddressListId__

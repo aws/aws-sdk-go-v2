@@ -4,11 +4,10 @@ package cloudwatchevents
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds the specified targets to the specified rule, or updates the targets if
@@ -178,6 +177,22 @@ type PutTargetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTargetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTargetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTargetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBusName != nil {
+		s.WriteString(schemas.PutTargetsRequest_EventBusName, *v.EventBusName)
+	}
+	if v.Rule != nil {
+		s.WriteString(schemas.PutTargetsRequest_Rule, *v.Rule)
+	}
+	serializeTargetList(s, schemas.PutTargetsRequest_Targets, v.Targets)
+}
+
 type PutTargetsOutput struct {
 
 	// The failed target entries.
@@ -192,77 +207,50 @@ type PutTargetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutTargetsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutTargetsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutTargetsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePutTargetsResultEntryList(s, schemas.PutTargetsResponse_FailedEntries, v.FailedEntries)
+	if v.FailedEntryCount != 0 {
+		s.WriteInt32(schemas.PutTargetsResponse_FailedEntryCount, v.FailedEntryCount)
+	}
+}
+func (v *PutTargetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutTargetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutTargetsResponse_FailedEntries:
+			return deserializePutTargetsResultEntryList(d, schemas.PutTargetsResponse_FailedEntries, &v.FailedEntries)
+		case schemas.PutTargetsResponse_FailedEntryCount:
+			return d.ReadInt32(schemas.PutTargetsResponse_FailedEntryCount, &v.FailedEntryCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTargets, schemas.PutTargetsRequest, schemas.PutTargetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutTargets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutTargets, schemas.PutTargetsRequest, schemas.PutTargetsResponse), output: &PutTargetsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutTargets{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutTargets"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutTargetsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutTargets(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -277,22 +265,8 @@ func (c *Client) addOperationPutTargetsMiddlewares(stack *middleware.Stack, opti
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutTargets(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutTargets",
-	}
 }

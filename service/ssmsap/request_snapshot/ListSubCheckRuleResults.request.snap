@@ -1,0 +1,5 @@
+POST /list-sub-check-rule-results
+
+Content-Type: application/json
+
+{"MaxResults":1,"NextToken":"__NextToken__","SubCheckResultId":"__SubCheckResultId__"}

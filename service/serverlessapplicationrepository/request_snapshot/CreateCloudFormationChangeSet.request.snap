@@ -1,0 +1,5 @@
+POST /applications/__ApplicationId__/changesets
+
+Content-Type: application/json
+
+{"capabilities":["__Member__","__Member__"],"changeSetName":"__ChangeSetName__","clientToken":"__ClientToken__","description":"__Description__","notificationArns":["__Member__","__Member__"],"parameterOverrides":[{"name":"__Name__","value":"__Value__"},{"name":"__Name__","value":"__Value__"}],"resourceTypes":["__Member__","__Member__"],"rollbackConfiguration":{"monitoringTimeInMinutes":1,"rollbackTriggers":[{"arn":"__Arn__","type":"__Type__"},{"arn":"__Arn__","type":"__Type__"}]},"semanticVersion":"__SemanticVersion__","stackName":"__StackName__","tags":[{"key":"__Key__","value":"__Value__"},{"key":"__Key__","value":"__Value__"}],"templateId":"__TemplateId__"}

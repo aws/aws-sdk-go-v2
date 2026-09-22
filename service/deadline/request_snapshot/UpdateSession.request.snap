@@ -1,0 +1,6 @@
+PATCH /2023-10-12/farms/__FarmId__/queues/__QueueId__/jobs/__JobId__/sessions/__SessionId__
+
+Content-Type: application/json
+X-Amz-Client-Token: __ClientToken__
+
+{"targetLifecycleStatus":"ENDED"}

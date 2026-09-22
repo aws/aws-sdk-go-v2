@@ -4,11 +4,10 @@ package awsrestjson
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This example operation serializes a structure in the HTTP body.
@@ -38,6 +37,36 @@ type TestBodyStructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestBodyStructureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestBodyStructureInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestBodyStructureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestConfig != nil {
+		s.WriteStruct(schemas.TestBodyStructureInputOutput_testConfig)
+		v.TestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.TestBodyStructureInputOutput_testId, *v.TestId)
+	}
+}
+func (v *TestBodyStructureInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestBodyStructureInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestBodyStructureInputOutput_testConfig:
+			v.TestConfig = &types.TestConfig{}
+			return v.TestConfig.Deserialize(d)
+		case schemas.TestBodyStructureInputOutput_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.TestBodyStructureInputOutput_testId, v.TestId)
+		}
+		return nil
+	})
+}
+
 type TestBodyStructureOutput struct {
 	TestConfig *types.TestConfig
 
@@ -49,74 +78,53 @@ type TestBodyStructureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestBodyStructureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestBodyStructureInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestBodyStructureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestConfig != nil {
+		s.WriteStruct(schemas.TestBodyStructureInputOutput_testConfig)
+		v.TestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.TestBodyStructureInputOutput_testId, *v.TestId)
+	}
+}
+func (v *TestBodyStructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestBodyStructureInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestBodyStructureInputOutput_testConfig:
+			v.TestConfig = &types.TestConfig{}
+			return v.TestConfig.Deserialize(d)
+		case schemas.TestBodyStructureInputOutput_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.TestBodyStructureInputOutput_testId, v.TestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestBodyStructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestBodyStructure, schemas.TestBodyStructureInputOutput, schemas.TestBodyStructureInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestBodyStructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestBodyStructure, schemas.TestBodyStructureInputOutput, schemas.TestBodyStructureInputOutput), output: &TestBodyStructureOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestBodyStructure{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "TestBodyStructure"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestBodyStructure(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,22 +139,8 @@ func (c *Client) addOperationTestBodyStructureMiddlewares(stack *middleware.Stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opTestBodyStructure(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "TestBodyStructure",
-	}
 }

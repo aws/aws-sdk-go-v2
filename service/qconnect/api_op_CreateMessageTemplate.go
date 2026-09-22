@@ -5,10 +5,10 @@ package qconnect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Q in Connect message template. The name of the message
@@ -84,6 +84,46 @@ type CreateMessageTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMessageTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMessageTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMessageTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelSubtype != "" {
+		s.WriteString(schemas.CreateMessageTemplateRequest_channelSubtype, string(v.ChannelSubtype))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMessageTemplateRequest_clientToken, *v.ClientToken)
+	}
+	serializeMessageTemplateContentProvider(s, schemas.CreateMessageTemplateRequest_content, v.Content)
+	if v.DefaultAttributes != nil {
+		s.WriteStruct(schemas.CreateMessageTemplateRequest_defaultAttributes)
+		v.DefaultAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateMessageTemplateRequest_description, *v.Description)
+	}
+	if v.GroupingConfiguration != nil {
+		s.WriteStruct(schemas.CreateMessageTemplateRequest_groupingConfiguration)
+		v.GroupingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.CreateMessageTemplateRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.CreateMessageTemplateRequest_language, *v.Language)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateMessageTemplateRequest_name, *v.Name)
+	}
+	serializeMessageTemplateSourceConfiguration(s, schemas.CreateMessageTemplateRequest_sourceConfiguration, v.SourceConfiguration)
+	serializeTags(s, schemas.CreateMessageTemplateRequest_tags, v.Tags)
+}
+
 type CreateMessageTemplateOutput struct {
 
 	// The message template.
@@ -95,65 +135,44 @@ type CreateMessageTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMessageTemplateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMessageTemplateResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMessageTemplateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageTemplate != nil {
+		s.WriteStruct(schemas.CreateMessageTemplateResponse_messageTemplate)
+		v.MessageTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateMessageTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMessageTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMessageTemplateResponse_messageTemplate:
+			v.MessageTemplate = &types.MessageTemplateData{}
+			return v.MessageTemplate.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMessageTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMessageTemplate, schemas.CreateMessageTemplateRequest, schemas.CreateMessageTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMessageTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMessageTemplate, schemas.CreateMessageTemplateRequest, schemas.CreateMessageTemplateResponse), output: &CreateMessageTemplateOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMessageTemplate{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMessageTemplate"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -163,12 +182,6 @@ func (c *Client) addOperationCreateMessageTemplateMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpCreateMessageTemplateValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMessageTemplate(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,12 +194,6 @@ func (c *Client) addOperationCreateMessageTemplateMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -226,12 +233,4 @@ func (m *idempotencyToken_initializeOpCreateMessageTemplate) HandleInitialize(ct
 }
 func addIdempotencyToken_opCreateMessageTemplateMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateMessageTemplate{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateMessageTemplate(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateMessageTemplate",
-	}
 }

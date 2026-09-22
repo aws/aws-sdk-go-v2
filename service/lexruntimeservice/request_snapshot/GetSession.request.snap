@@ -1,0 +1,3 @@
+GET /bot/__BotName__/alias/__BotAlias__/user/__UserId__/session?checkpointLabelFilter=__CheckpointLabelFilter__
+
+

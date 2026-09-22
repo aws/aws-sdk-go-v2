@@ -1,0 +1,8 @@
+POST /service/GraniteServiceVersion20100801/operation/PutManagedInsightRules
+
+Accept: application/cbor
+Content-Type: application/cbor
+Smithy-Protocol: rpc-v2-cbor
+X-Amzn-Query-Mode: true
+
+¡lManagedRules‚£lTemplateNamep__TemplateName__kResourceARNo__ResourceARN__dTags‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__£dTags‚¢cKeyg__Key__eValuei__Value__¢cKeyg__Key__eValuei__Value__lTemplateNamep__TemplateName__kResourceARNo__ResourceARN__

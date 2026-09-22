@@ -1,0 +1,5 @@
+POST /ReorderRecoveryPlanSteps
+
+Content-Type: application/json
+
+{"orderedStepArns":["__Member__","__Member__"],"recoveryPlanArn":"__RecoveryPlanArn__"}

@@ -1,0 +1,5 @@
+PATCH /api/v1/agent-recommendations/__RecommendationArn__/status
+
+Content-Type: application/json
+
+{"status":"ACTIVE","updateReason":"__UpdateReason__"}

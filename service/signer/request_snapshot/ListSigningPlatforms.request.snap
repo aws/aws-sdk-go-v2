@@ -1,0 +1,3 @@
+GET /signing-platforms?category=__Category__&maxResults=1&nextToken=__NextToken__&partner=__Partner__&target=__Target__
+
+

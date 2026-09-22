@@ -4,11 +4,10 @@ package route53resolver
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53resolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // You can use UpdateOutpostResolver to update the instance count, type, or name
@@ -47,6 +46,27 @@ type UpdateOutpostResolverInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOutpostResolverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutpostResolverRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutpostResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateOutpostResolverRequest_Id, *v.Id)
+	}
+	if v.InstanceCount != nil {
+		s.WriteInt32(schemas.UpdateOutpostResolverRequest_InstanceCount, *v.InstanceCount)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateOutpostResolverRequest_Name, *v.Name)
+	}
+	if v.PreferredInstanceType != nil {
+		s.WriteString(schemas.UpdateOutpostResolverRequest_PreferredInstanceType, *v.PreferredInstanceType)
+	}
+}
+
 type UpdateOutpostResolverOutput struct {
 
 	// The response to an UpdateOutpostResolver request.
@@ -58,77 +78,50 @@ type UpdateOutpostResolverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateOutpostResolverOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutpostResolverResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutpostResolverOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutpostResolver != nil {
+		s.WriteStruct(schemas.UpdateOutpostResolverResponse_OutpostResolver)
+		v.OutpostResolver.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateOutpostResolverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOutpostResolverResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOutpostResolverResponse_OutpostResolver:
+			v.OutpostResolver = &types.OutpostResolver{}
+			return v.OutpostResolver.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateOutpostResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOutpostResolver, schemas.UpdateOutpostResolverRequest, schemas.UpdateOutpostResolverResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateOutpostResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateOutpostResolver, schemas.UpdateOutpostResolverRequest, schemas.UpdateOutpostResolverResponse), output: &UpdateOutpostResolverOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateOutpostResolver{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateOutpostResolver"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpUpdateOutpostResolverValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOutpostResolver(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +136,8 @@ func (c *Client) addOperationUpdateOutpostResolverMiddlewares(stack *middleware.
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opUpdateOutpostResolver(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "UpdateOutpostResolver",
-	}
 }

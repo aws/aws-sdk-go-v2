@@ -1,0 +1,3 @@
+DELETE /signing-profiles/__ProfileName__/permissions/__StatementId__?revisionId=__RevisionId__
+
+

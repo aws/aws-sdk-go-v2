@@ -1,0 +1,5 @@
+POST /cis/scan-configuration/delete
+
+Content-Type: application/json
+
+{"scanConfigurationArn":"__ScanConfigurationArn__"}

@@ -1,0 +1,5 @@
+PUT /enforcedGuardrailsConfiguration
+
+Content-Type: application/json
+
+{"configId":"__ConfigId__","guardrailInferenceConfig":{"guardrailIdentifier":"__GuardrailIdentifier__","guardrailVersion":"__GuardrailVersion__","modelEnforcement":{"excludedModels":["__Member__","__Member__"],"includedModels":["__Member__","__Member__"]},"selectiveContentGuarding":{"messages":"SELECTIVE","system":"SELECTIVE"}}}

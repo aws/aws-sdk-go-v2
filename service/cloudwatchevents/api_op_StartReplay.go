@@ -4,11 +4,10 @@ package cloudwatchevents
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -72,6 +71,35 @@ type StartReplayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.StartReplayRequest_Description, *v.Description)
+	}
+	if v.Destination != nil {
+		s.WriteStruct(schemas.StartReplayRequest_Destination)
+		v.Destination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EventEndTime != nil {
+		s.WriteTime(schemas.StartReplayRequest_EventEndTime, *v.EventEndTime)
+	}
+	if v.EventSourceArn != nil {
+		s.WriteString(schemas.StartReplayRequest_EventSourceArn, *v.EventSourceArn)
+	}
+	if v.EventStartTime != nil {
+		s.WriteTime(schemas.StartReplayRequest_EventStartTime, *v.EventStartTime)
+	}
+	if v.ReplayName != nil {
+		s.WriteString(schemas.StartReplayRequest_ReplayName, *v.ReplayName)
+	}
+}
+
 type StartReplayOutput struct {
 
 	// The ARN of the replay.
@@ -92,77 +120,70 @@ type StartReplayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartReplayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartReplayResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartReplayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplayArn != nil {
+		s.WriteString(schemas.StartReplayResponse_ReplayArn, *v.ReplayArn)
+	}
+	if v.ReplayStartTime != nil {
+		s.WriteTime(schemas.StartReplayResponse_ReplayStartTime, *v.ReplayStartTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.StartReplayResponse_State, string(v.State))
+	}
+	if v.StateReason != nil {
+		s.WriteString(schemas.StartReplayResponse_StateReason, *v.StateReason)
+	}
+}
+func (v *StartReplayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartReplayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartReplayResponse_ReplayArn:
+			v.ReplayArn = new(string)
+			return d.ReadString(schemas.StartReplayResponse_ReplayArn, v.ReplayArn)
+		case schemas.StartReplayResponse_ReplayStartTime:
+			v.ReplayStartTime = new(time.Time)
+			return d.ReadTime(schemas.StartReplayResponse_ReplayStartTime, v.ReplayStartTime)
+		case schemas.StartReplayResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.StartReplayResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ReplayState(ev)
+			return nil
+		case schemas.StartReplayResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.StartReplayResponse_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplay, schemas.StartReplayRequest, schemas.StartReplayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartReplay{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartReplay, schemas.StartReplayRequest, schemas.StartReplayResponse), output: &StartReplayOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartReplay{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartReplay"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartReplayValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartReplay(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -177,22 +198,8 @@ func (c *Client) addOperationStartReplayMiddlewares(stack *middleware.Stack, opt
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartReplay(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartReplay",
-	}
 }

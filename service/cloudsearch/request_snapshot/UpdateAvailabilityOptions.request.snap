@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UpdateAvailabilityOptions&DomainName=__DomainName__&MultiAZ=true&Version=2013-01-01

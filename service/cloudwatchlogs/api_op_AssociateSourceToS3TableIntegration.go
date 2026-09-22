@@ -4,11 +4,10 @@ package cloudwatchlogs
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a data source with an S3 Table Integration for query access in the
@@ -46,6 +45,23 @@ type AssociateSourceToS3TableIntegrationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceToS3TableIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceToS3TableIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceToS3TableIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteStruct(schemas.AssociateSourceToS3TableIntegrationRequest_dataSource)
+		v.DataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntegrationArn != nil {
+		s.WriteString(schemas.AssociateSourceToS3TableIntegrationRequest_integrationArn, *v.IntegrationArn)
+	}
+}
+
 type AssociateSourceToS3TableIntegrationOutput struct {
 
 	// The unique identifier for the association between the data source and S3 Table
@@ -58,77 +74,48 @@ type AssociateSourceToS3TableIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSourceToS3TableIntegrationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSourceToS3TableIntegrationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSourceToS3TableIntegrationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.AssociateSourceToS3TableIntegrationResponse_identifier, *v.Identifier)
+	}
+}
+func (v *AssociateSourceToS3TableIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSourceToS3TableIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSourceToS3TableIntegrationResponse_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.AssociateSourceToS3TableIntegrationResponse_identifier, v.Identifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSourceToS3TableIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceToS3TableIntegration, schemas.AssociateSourceToS3TableIntegrationRequest, schemas.AssociateSourceToS3TableIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAssociateSourceToS3TableIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSourceToS3TableIntegration, schemas.AssociateSourceToS3TableIntegrationRequest, schemas.AssociateSourceToS3TableIntegrationResponse), output: &AssociateSourceToS3TableIntegrationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAssociateSourceToS3TableIntegration{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateSourceToS3TableIntegration"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpAssociateSourceToS3TableIntegrationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateSourceToS3TableIntegration(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,22 +130,8 @@ func (c *Client) addOperationAssociateSourceToS3TableIntegrationMiddlewares(stac
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opAssociateSourceToS3TableIntegration(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "AssociateSourceToS3TableIntegration",
-	}
 }

@@ -4,11 +4,10 @@ package resiliencehub
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Rejects resource grouping recommendations.
@@ -48,6 +47,19 @@ type RejectResourceGroupingRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectResourceGroupingRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectResourceGroupingRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectResourceGroupingRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.RejectResourceGroupingRecommendationsRequest_appArn, *v.AppArn)
+	}
+	serializeRejectGroupingRecommendationEntries(s, schemas.RejectResourceGroupingRecommendationsRequest_entries, v.Entries)
+}
+
 type RejectResourceGroupingRecommendationsOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
@@ -72,77 +84,51 @@ type RejectResourceGroupingRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RejectResourceGroupingRecommendationsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RejectResourceGroupingRecommendationsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RejectResourceGroupingRecommendationsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.RejectResourceGroupingRecommendationsResponse_appArn, *v.AppArn)
+	}
+	serializeFailedGroupingRecommendationEntries(s, schemas.RejectResourceGroupingRecommendationsResponse_failedEntries, v.FailedEntries)
+}
+func (v *RejectResourceGroupingRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RejectResourceGroupingRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RejectResourceGroupingRecommendationsResponse_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.RejectResourceGroupingRecommendationsResponse_appArn, v.AppArn)
+		case schemas.RejectResourceGroupingRecommendationsResponse_failedEntries:
+			return deserializeFailedGroupingRecommendationEntries(d, schemas.RejectResourceGroupingRecommendationsResponse_failedEntries, &v.FailedEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRejectResourceGroupingRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectResourceGroupingRecommendations, schemas.RejectResourceGroupingRecommendationsRequest, schemas.RejectResourceGroupingRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRejectResourceGroupingRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RejectResourceGroupingRecommendations, schemas.RejectResourceGroupingRecommendationsRequest, schemas.RejectResourceGroupingRecommendationsResponse), output: &RejectResourceGroupingRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRejectResourceGroupingRecommendations{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "RejectResourceGroupingRecommendations"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpRejectResourceGroupingRecommendationsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRejectResourceGroupingRecommendations(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,22 +143,8 @@ func (c *Client) addOperationRejectResourceGroupingRecommendationsMiddlewares(st
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opRejectResourceGroupingRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "RejectResourceGroupingRecommendations",
-	}
 }

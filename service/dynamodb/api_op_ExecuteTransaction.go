@@ -5,10 +5,10 @@ package dynamodb
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/dynamodb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation allows you to perform transactional reads or writes on data
@@ -56,6 +56,22 @@ type ExecuteTransactionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteTransactionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteTransactionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteTransactionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.ExecuteTransactionInput_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.ReturnConsumedCapacity != "" {
+		s.WriteString(schemas.ExecuteTransactionInput_ReturnConsumedCapacity, string(v.ReturnConsumedCapacity))
+	}
+	serializeParameterizedStatements(s, schemas.ExecuteTransactionInput_TransactStatements, v.TransactStatements)
+}
+
 type ExecuteTransactionOutput struct {
 
 	// The capacity units consumed by the entire operation. The values of the list are
@@ -71,65 +87,42 @@ type ExecuteTransactionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteTransactionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteTransactionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteTransactionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConsumedCapacityMultiple(s, schemas.ExecuteTransactionOutput_ConsumedCapacity, v.ConsumedCapacity)
+	serializeItemResponseList(s, schemas.ExecuteTransactionOutput_Responses, v.Responses)
+}
+func (v *ExecuteTransactionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteTransactionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteTransactionOutput_ConsumedCapacity:
+			return deserializeConsumedCapacityMultiple(d, schemas.ExecuteTransactionOutput_ConsumedCapacity, &v.ConsumedCapacity)
+		case schemas.ExecuteTransactionOutput_Responses:
+			return deserializeItemResponseList(d, schemas.ExecuteTransactionOutput_Responses, &v.Responses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteTransaction, schemas.ExecuteTransactionInput, schemas.ExecuteTransactionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExecuteTransaction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteTransaction, schemas.ExecuteTransactionInput, schemas.ExecuteTransactionOutput), output: &ExecuteTransactionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpExecuteTransaction{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteTransaction"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentAccountIDEndpointMode(stack, options); err != nil {
@@ -142,12 +135,6 @@ func (c *Client) addOperationExecuteTransactionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addOpExecuteTransactionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteTransaction(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,12 +153,6 @@ func (c *Client) addOperationExecuteTransactionMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -211,12 +192,4 @@ func (m *idempotencyToken_initializeOpExecuteTransaction) HandleInitialize(ctx c
 }
 func addIdempotencyToken_opExecuteTransactionMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpExecuteTransaction{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opExecuteTransaction(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ExecuteTransaction",
-	}
 }

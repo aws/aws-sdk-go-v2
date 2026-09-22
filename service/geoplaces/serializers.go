@@ -239,6 +239,18 @@ func awsRestjson1_serializeOpDocumentGeocodeInput(v *GeocodeInput, value smithyj
 		}
 	}
 
+	if len(v.AddressNamesMode) > 0 {
+		ok := object.Key("AddressNamesMode")
+		ok.String(string(v.AddressNamesMode))
+	}
+
+	if v.AddressTranslations != nil {
+		ok := object.Key("AddressTranslations")
+		if err := awsRestjson1_serializeDocumentAddressTranslationComponentList(v.AddressTranslations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BiasPosition != nil {
 		ok := object.Key("BiasPosition")
 		if err := awsRestjson1_serializeDocumentPosition(v.BiasPosition, ok); err != nil {
@@ -271,6 +283,11 @@ func awsRestjson1_serializeOpDocumentGeocodeInput(v *GeocodeInput, value smithyj
 	if v.PoliticalView != nil {
 		ok := object.Key("PoliticalView")
 		ok.String(*v.PoliticalView)
+	}
+
+	if len(v.PostalCodeMode) > 0 {
+		ok := object.Key("PostalCodeMode")
+		ok.String(string(v.PostalCodeMode))
 	}
 
 	if v.QueryComponents != nil {
@@ -351,6 +368,10 @@ func awsRestjson1_serializeOpHttpBindingsGetPlaceInput(v *GetPlaceInput, encoder
 		for i := range v.AdditionalFeatures {
 			encoder.AddQuery("additional-features").String(string(v.AdditionalFeatures[i]))
 		}
+	}
+
+	if len(v.AddressNamesMode) > 0 {
+		encoder.SetQuery("address-names-mode").String(string(v.AddressNamesMode))
 	}
 
 	if len(v.IntendedUse) > 0 {
@@ -467,6 +488,11 @@ func awsRestjson1_serializeOpDocumentReverseGeocodeInput(v *ReverseGeocodeInput,
 		if err := awsRestjson1_serializeDocumentReverseGeocodeAdditionalFeatureList(v.AdditionalFeatures, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.AddressNamesMode) > 0 {
+		ok := object.Key("AddressNamesMode")
+		ok.String(string(v.AddressNamesMode))
 	}
 
 	if v.Filter != nil {
@@ -801,6 +827,11 @@ func awsRestjson1_serializeOpDocumentSearchTextInput(v *SearchTextInput, value s
 		ok.String(*v.QueryText)
 	}
 
+	if len(v.TravelMode) > 0 {
+		ok := object.Key("TravelMode")
+		ok.String(string(v.TravelMode))
+	}
+
 	return nil
 }
 
@@ -936,6 +967,22 @@ func awsRestjson1_serializeOpDocumentSuggestInput(v *SuggestInput, value smithyj
 		ok.String(*v.QueryText)
 	}
 
+	if len(v.TravelMode) > 0 {
+		ok := object.Key("TravelMode")
+		ok.String(string(v.TravelMode))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddressTranslationComponentList(v []types.AddressTranslationComponent, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

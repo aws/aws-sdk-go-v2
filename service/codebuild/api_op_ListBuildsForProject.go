@@ -5,10 +5,10 @@ package codebuild
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codebuild/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of build identifiers for the specified build project, with each
@@ -60,6 +60,24 @@ type ListBuildsForProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuildsForProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuildsForProjectInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuildsForProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuildsForProjectInput_nextToken, *v.NextToken)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.ListBuildsForProjectInput_projectName, *v.ProjectName)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListBuildsForProjectInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type ListBuildsForProjectOutput struct {
 
 	// A list of build identifiers for the specified build project, with each build ID
@@ -78,77 +96,51 @@ type ListBuildsForProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBuildsForProjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBuildsForProjectOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBuildsForProjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBuildIds(s, schemas.ListBuildsForProjectOutput_ids, v.Ids)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBuildsForProjectOutput_nextToken, *v.NextToken)
+	}
+}
+func (v *ListBuildsForProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBuildsForProjectOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBuildsForProjectOutput_ids:
+			return deserializeBuildIds(d, schemas.ListBuildsForProjectOutput_ids, &v.Ids)
+		case schemas.ListBuildsForProjectOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBuildsForProjectOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBuildsForProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuildsForProject, schemas.ListBuildsForProjectInput, schemas.ListBuildsForProjectOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListBuildsForProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBuildsForProject, schemas.ListBuildsForProjectInput, schemas.ListBuildsForProjectOutput), output: &ListBuildsForProjectOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListBuildsForProject{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBuildsForProject"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListBuildsForProjectValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBuildsForProject(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,12 +153,6 @@ func (c *Client) addOperationListBuildsForProjectMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -256,11 +242,3 @@ type ListBuildsForProjectAPIClient interface {
 }
 
 var _ ListBuildsForProjectAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListBuildsForProject(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListBuildsForProject",
-	}
-}

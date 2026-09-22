@@ -1,0 +1,5 @@
+PUT /PutImageRecipePolicy
+
+Content-Type: application/json
+
+{"imageRecipeArn":"__ImageRecipeArn__","policy":"__Policy__"}

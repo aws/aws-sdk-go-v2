@@ -1,0 +1,5 @@
+POST /associations
+
+Content-Type: application/json
+
+{"ClientRequestToken":"__ClientRequestToken__","KMSKeyDetails":{"EncryptionOption":"AWS_OWNED_CMK","KMSKeyId":"__KMSKeyId__"},"Repository":{"Bitbucket":{"ConnectionArn":"__ConnectionArn__","Name":"__Name__","Owner":"__Owner__"},"CodeCommit":{"Name":"__Name__"},"GitHubEnterpriseServer":{"ConnectionArn":"__ConnectionArn__","Name":"__Name__","Owner":"__Owner__"},"S3Bucket":{"BucketName":"__BucketName__","Name":"__Name__"}},"Tags":{"key0":"__Value__"}}

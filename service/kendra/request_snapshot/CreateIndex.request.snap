@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSKendraFrontendService.CreateIndex
+
+{"ClientToken":"__ClientToken__","Description":"__Description__","Edition":"DEVELOPER_EDITION","Name":"__Name__","RoleArn":"__RoleArn__","ServerSideEncryptionConfiguration":{"KmsKeyId":"__KmsKeyId__"},"Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}],"UserContextPolicy":"ATTRIBUTE_FILTER","UserGroupResolutionConfiguration":{"UserGroupResolutionMode":"AWS_SSO"},"UserTokenConfigurations":[{"JsonTokenTypeConfiguration":{"GroupAttributeField":"__GroupAttributeField__","UserNameAttributeField":"__UserNameAttributeField__"},"JwtTokenTypeConfiguration":{"ClaimRegex":"__ClaimRegex__","GroupAttributeField":"__GroupAttributeField__","Issuer":"__Issuer__","KeyLocation":"URL","SecretManagerArn":"__SecretManagerArn__","URL":"__URL__","UserNameAttributeField":"__UserNameAttributeField__"}},{"JsonTokenTypeConfiguration":{"GroupAttributeField":"__GroupAttributeField__","UserNameAttributeField":"__UserNameAttributeField__"},"JwtTokenTypeConfiguration":{"ClaimRegex":"__ClaimRegex__","GroupAttributeField":"__GroupAttributeField__","Issuer":"__Issuer__","KeyLocation":"URL","SecretManagerArn":"__SecretManagerArn__","URL":"__URL__","UserNameAttributeField":"__UserNameAttributeField__"}}]}

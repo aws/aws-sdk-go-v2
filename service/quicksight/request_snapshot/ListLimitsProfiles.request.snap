@@ -1,0 +1,3 @@
+GET /governance/limits/accounts/__AccountId__/profiles?maxResults=1&nextToken=__NextToken__&resourceType=INDEX_STORAGE
+
+

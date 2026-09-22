@@ -5,10 +5,10 @@ package lookoutequipment
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a data ingestion job. Amazon Lookout for Equipment returns the job
@@ -56,6 +56,29 @@ type StartDataIngestionJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataIngestionJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataIngestionJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataIngestionJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartDataIngestionJobRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DatasetName != nil {
+		s.WriteString(schemas.StartDataIngestionJobRequest_DatasetName, *v.DatasetName)
+	}
+	if v.IngestionInputConfiguration != nil {
+		s.WriteStruct(schemas.StartDataIngestionJobRequest_IngestionInputConfiguration)
+		v.IngestionInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.StartDataIngestionJobRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type StartDataIngestionJobOutput struct {
 
 	// Indicates the job ID of the data ingestion job.
@@ -70,65 +93,52 @@ type StartDataIngestionJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartDataIngestionJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartDataIngestionJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartDataIngestionJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.StartDataIngestionJobResponse_JobId, *v.JobId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.StartDataIngestionJobResponse_Status, string(v.Status))
+	}
+}
+func (v *StartDataIngestionJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartDataIngestionJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartDataIngestionJobResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartDataIngestionJobResponse_JobId, v.JobId)
+		case schemas.StartDataIngestionJobResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartDataIngestionJobResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IngestionJobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataIngestionJob, schemas.StartDataIngestionJobRequest, schemas.StartDataIngestionJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartDataIngestionJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartDataIngestionJob, schemas.StartDataIngestionJobRequest, schemas.StartDataIngestionJobResponse), output: &StartDataIngestionJobOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartDataIngestionJob{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartDataIngestionJob"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -138,12 +148,6 @@ func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addOpStartDataIngestionJobValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDataIngestionJob(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +160,6 @@ func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -201,12 +199,4 @@ func (m *idempotencyToken_initializeOpStartDataIngestionJob) HandleInitialize(ct
 }
 func addIdempotencyToken_opStartDataIngestionJobMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpStartDataIngestionJob{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opStartDataIngestionJob(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartDataIngestionJob",
-	}
 }

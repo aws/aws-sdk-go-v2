@@ -5,10 +5,10 @@ package computeoptimizerautomation
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a summary of automation events based on specified filters. Only events
@@ -52,6 +52,28 @@ type ListAutomationEventSummariesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationEventSummariesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationEventSummariesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationEventSummariesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndDateExclusive != nil {
+		s.WriteString(schemas.ListAutomationEventSummariesRequest_endDateExclusive, *v.EndDateExclusive)
+	}
+	serializeAutomationEventFilterList(s, schemas.ListAutomationEventSummariesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomationEventSummariesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationEventSummariesRequest_nextToken, *v.NextToken)
+	}
+	if v.StartDateInclusive != nil {
+		s.WriteString(schemas.ListAutomationEventSummariesRequest_startDateInclusive, *v.StartDateInclusive)
+	}
+}
+
 type ListAutomationEventSummariesOutput struct {
 
 	//  The list of automation event summaries that match the specified criteria.
@@ -67,65 +89,45 @@ type ListAutomationEventSummariesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationEventSummariesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationEventSummariesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationEventSummariesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutomationEventSummaryList(s, schemas.ListAutomationEventSummariesResponse_automationEventSummaries, v.AutomationEventSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationEventSummariesResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAutomationEventSummariesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomationEventSummariesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomationEventSummariesResponse_automationEventSummaries:
+			return deserializeAutomationEventSummaryList(d, schemas.ListAutomationEventSummariesResponse_automationEventSummaries, &v.AutomationEventSummaries)
+		case schemas.ListAutomationEventSummariesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomationEventSummariesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomationEventSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationEventSummaries, schemas.ListAutomationEventSummariesRequest, schemas.ListAutomationEventSummariesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAutomationEventSummaries{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationEventSummaries, schemas.ListAutomationEventSummariesRequest, schemas.ListAutomationEventSummariesResponse), output: &ListAutomationEventSummariesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAutomationEventSummaries{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutomationEventSummaries"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
@@ -135,12 +137,6 @@ func (c *Client) addOperationListAutomationEventSummariesMiddlewares(stack *midd
 		return err
 	}
 	if err = addOpListAutomationEventSummariesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAutomationEventSummaries(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,12 +149,6 @@ func (c *Client) addOperationListAutomationEventSummariesMiddlewares(stack *midd
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +253,3 @@ type ListAutomationEventSummariesAPIClient interface {
 }
 
 var _ ListAutomationEventSummariesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListAutomationEventSummaries(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListAutomationEventSummaries",
-	}
-}

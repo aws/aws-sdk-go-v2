@@ -4,11 +4,10 @@ package vpclattice
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/vpclattice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -36,6 +35,28 @@ type GetAccessLogSubscriptionInput struct {
 	AccessLogSubscriptionIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAccessLogSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessLogSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessLogSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessLogSubscriptionIdentifier != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionRequest_accessLogSubscriptionIdentifier, *v.AccessLogSubscriptionIdentifier)
+	}
+}
+func (v *GetAccessLogSubscriptionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessLogSubscriptionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessLogSubscriptionRequest_accessLogSubscriptionIdentifier:
+			v.AccessLogSubscriptionIdentifier = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionRequest_accessLogSubscriptionIdentifier, v.AccessLogSubscriptionIdentifier)
+		}
+		return nil
+	})
 }
 
 type GetAccessLogSubscriptionOutput struct {
@@ -86,77 +107,94 @@ type GetAccessLogSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessLogSubscriptionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessLogSubscriptionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessLogSubscriptionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetAccessLogSubscriptionResponse_createdAt, *v.CreatedAt)
+	}
+	if v.DestinationArn != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_destinationArn, *v.DestinationArn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.GetAccessLogSubscriptionResponse_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_resourceArn, *v.ResourceArn)
+	}
+	if v.ResourceId != nil {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_resourceId, *v.ResourceId)
+	}
+	if v.ServiceNetworkLogType != "" {
+		s.WriteString(schemas.GetAccessLogSubscriptionResponse_serviceNetworkLogType, string(v.ServiceNetworkLogType))
+	}
+}
+func (v *GetAccessLogSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessLogSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessLogSubscriptionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_arn, v.Arn)
+		case schemas.GetAccessLogSubscriptionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAccessLogSubscriptionResponse_createdAt, v.CreatedAt)
+		case schemas.GetAccessLogSubscriptionResponse_destinationArn:
+			v.DestinationArn = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_destinationArn, v.DestinationArn)
+		case schemas.GetAccessLogSubscriptionResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_id, v.Id)
+		case schemas.GetAccessLogSubscriptionResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAccessLogSubscriptionResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetAccessLogSubscriptionResponse_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_resourceArn, v.ResourceArn)
+		case schemas.GetAccessLogSubscriptionResponse_resourceId:
+			v.ResourceId = new(string)
+			return d.ReadString(schemas.GetAccessLogSubscriptionResponse_resourceId, v.ResourceId)
+		case schemas.GetAccessLogSubscriptionResponse_serviceNetworkLogType:
+			var ev string
+			if err := d.ReadString(schemas.GetAccessLogSubscriptionResponse_serviceNetworkLogType, &ev); err != nil {
+				return err
+			}
+			v.ServiceNetworkLogType = types.ServiceNetworkLogType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccessLogSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessLogSubscription, schemas.GetAccessLogSubscriptionRequest, schemas.GetAccessLogSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccessLogSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessLogSubscription, schemas.GetAccessLogSubscriptionRequest, schemas.GetAccessLogSubscriptionResponse), output: &GetAccessLogSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccessLogSubscription{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccessLogSubscription"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpGetAccessLogSubscriptionValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccessLogSubscription(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,22 +209,8 @@ func (c *Client) addOperationGetAccessLogSubscriptionMiddlewares(stack *middlewa
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opGetAccessLogSubscription(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "GetAccessLogSubscription",
-	}
 }

@@ -4,11 +4,10 @@ package glue
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/glue/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Annotate datapoints over time for a specific data quality statistic. The API
@@ -44,6 +43,19 @@ type BatchPutDataQualityStatisticAnnotationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutDataQualityStatisticAnnotationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutDataQualityStatisticAnnotationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutDataQualityStatisticAnnotationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.BatchPutDataQualityStatisticAnnotationRequest_ClientToken, *v.ClientToken)
+	}
+	serializeInclusionAnnotationList(s, schemas.BatchPutDataQualityStatisticAnnotationRequest_InclusionAnnotations, v.InclusionAnnotations)
+}
+
 type BatchPutDataQualityStatisticAnnotationOutput struct {
 
 	// A list of AnnotationError 's.
@@ -55,77 +67,45 @@ type BatchPutDataQualityStatisticAnnotationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutDataQualityStatisticAnnotationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutDataQualityStatisticAnnotationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutDataQualityStatisticAnnotationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAnnotationErrorList(s, schemas.BatchPutDataQualityStatisticAnnotationResponse_FailedInclusionAnnotations, v.FailedInclusionAnnotations)
+}
+func (v *BatchPutDataQualityStatisticAnnotationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutDataQualityStatisticAnnotationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutDataQualityStatisticAnnotationResponse_FailedInclusionAnnotations:
+			return deserializeAnnotationErrorList(d, schemas.BatchPutDataQualityStatisticAnnotationResponse_FailedInclusionAnnotations, &v.FailedInclusionAnnotations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchPutDataQualityStatisticAnnotationMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutDataQualityStatisticAnnotation, schemas.BatchPutDataQualityStatisticAnnotationRequest, schemas.BatchPutDataQualityStatisticAnnotationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpBatchPutDataQualityStatisticAnnotation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchPutDataQualityStatisticAnnotation, schemas.BatchPutDataQualityStatisticAnnotationRequest, schemas.BatchPutDataQualityStatisticAnnotationResponse), output: &BatchPutDataQualityStatisticAnnotationOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpBatchPutDataQualityStatisticAnnotation{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchPutDataQualityStatisticAnnotation"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpBatchPutDataQualityStatisticAnnotationValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchPutDataQualityStatisticAnnotation(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,22 +120,8 @@ func (c *Client) addOperationBatchPutDataQualityStatisticAnnotationMiddlewares(s
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opBatchPutDataQualityStatisticAnnotation(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "BatchPutDataQualityStatisticAnnotation",
-	}
 }

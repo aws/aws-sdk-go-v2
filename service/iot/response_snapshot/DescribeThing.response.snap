@@ -1,0 +1,4 @@
+200
+Content-Type: application/json
+
+{"attributes":{"key0":"__Value__"},"billingGroupName":"__BillingGroupName__","defaultClientId":"__DefaultClientId__","thingArn":"__ThingArn__","thingId":"__ThingId__","thingName":"__ThingName__","thingTypeName":"__ThingTypeName__","version":1}

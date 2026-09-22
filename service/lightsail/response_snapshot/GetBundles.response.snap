@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: Lightsail_20161128.GetBundles
+
+{"bundles":[{"bundleId":"__BundleId__","cpuCount":1,"diskSizeInGb":1,"instanceType":"__InstanceType__","isActive":true,"name":"__Name__","power":1,"price":1,"publicIpv4AddressCount":1,"ramSizeInGb":1,"supportedAppCategories":["LfR","LfR"],"supportedPlatforms":["LINUX_UNIX","LINUX_UNIX"],"transferPerMonthInGb":1},{"bundleId":"__BundleId__","cpuCount":1,"diskSizeInGb":1,"instanceType":"__InstanceType__","isActive":true,"name":"__Name__","power":1,"price":1,"publicIpv4AddressCount":1,"ramSizeInGb":1,"supportedAppCategories":["LfR","LfR"],"supportedPlatforms":["LINUX_UNIX","LINUX_UNIX"],"transferPerMonthInGb":1}],"nextPageToken":"__NextPageToken__"}

@@ -1,0 +1,5 @@
+POST /ListPrivateConnections
+
+Content-Type: application/json
+
+{"maxResults":1,"nextToken":"__NextToken__"}

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,6 +25,48 @@ type AccountSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupLifecycleEventsDesiredStatus != "" {
+		s.WriteString(schemas.AccountSettings_GroupLifecycleEventsDesiredStatus, string(v.GroupLifecycleEventsDesiredStatus))
+	}
+	if v.GroupLifecycleEventsStatus != "" {
+		s.WriteString(schemas.AccountSettings_GroupLifecycleEventsStatus, string(v.GroupLifecycleEventsStatus))
+	}
+	if v.GroupLifecycleEventsStatusMessage != nil {
+		s.WriteString(schemas.AccountSettings_GroupLifecycleEventsStatusMessage, *v.GroupLifecycleEventsStatusMessage)
+	}
+}
+func (v *AccountSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSettings_GroupLifecycleEventsDesiredStatus:
+			var ev string
+			if err := d.ReadString(schemas.AccountSettings_GroupLifecycleEventsDesiredStatus, &ev); err != nil {
+				return err
+			}
+			v.GroupLifecycleEventsDesiredStatus = GroupLifecycleEventsDesiredStatus(ev)
+			return nil
+		case schemas.AccountSettings_GroupLifecycleEventsStatus:
+			var ev string
+			if err := d.ReadString(schemas.AccountSettings_GroupLifecycleEventsStatus, &ev); err != nil {
+				return err
+			}
+			v.GroupLifecycleEventsStatus = GroupLifecycleEventsStatus(ev)
+			return nil
+		case schemas.AccountSettings_GroupLifecycleEventsStatusMessage:
+			v.GroupLifecycleEventsStatusMessage = new(string)
+			return d.ReadString(schemas.AccountSettings_GroupLifecycleEventsStatusMessage, v.GroupLifecycleEventsStatusMessage)
+		}
+		return nil
+	})
+}
+
 // A resource that failed to be added to or removed from a group.
 type FailedResource struct {
 
@@ -37,6 +81,40 @@ type FailedResource struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FailedResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FailedResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FailedResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.FailedResource_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.FailedResource_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.FailedResource_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *FailedResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FailedResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FailedResource_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.FailedResource_ErrorCode, v.ErrorCode)
+		case schemas.FailedResource_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.FailedResource_ErrorMessage, v.ErrorMessage)
+		case schemas.FailedResource_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.FailedResource_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // A resource group that contains Amazon Web Services resources. You can assign
@@ -86,6 +164,61 @@ type Group struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Group) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Group)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Group) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationTag(s, schemas.Group_ApplicationTag, v.ApplicationTag)
+	if v.Criticality != nil {
+		s.WriteInt32(schemas.Group_Criticality, *v.Criticality)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Group_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.Group_DisplayName, *v.DisplayName)
+	}
+	if v.GroupArn != nil {
+		s.WriteString(schemas.Group_GroupArn, *v.GroupArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Group_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.Group_Owner, *v.Owner)
+	}
+}
+func (v *Group) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Group, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Group_ApplicationTag:
+			return deserializeApplicationTag(d, schemas.Group_ApplicationTag, &v.ApplicationTag)
+		case schemas.Group_Criticality:
+			v.Criticality = new(int32)
+			return d.ReadInt32(schemas.Group_Criticality, v.Criticality)
+		case schemas.Group_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Group_Description, v.Description)
+		case schemas.Group_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.Group_DisplayName, v.DisplayName)
+		case schemas.Group_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.Group_GroupArn, v.GroupArn)
+		case schemas.Group_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Group_Name, v.Name)
+		case schemas.Group_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.Group_Owner, v.Owner)
+		}
+		return nil
+	})
+}
+
 // A service configuration associated with a resource group. The configuration
 // options are determined by the Amazon Web Services service that defines the Type
 // , and specifies which resources can be included in the group. You can add a
@@ -109,6 +242,44 @@ type GroupConfiguration struct {
 	Status GroupConfigurationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupConfigurationList(s, schemas.GroupConfiguration_Configuration, v.Configuration)
+	if v.FailureReason != nil {
+		s.WriteString(schemas.GroupConfiguration_FailureReason, *v.FailureReason)
+	}
+	serializeGroupConfigurationList(s, schemas.GroupConfiguration_ProposedConfiguration, v.ProposedConfiguration)
+	if v.Status != "" {
+		s.WriteString(schemas.GroupConfiguration_Status, string(v.Status))
+	}
+}
+func (v *GroupConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupConfiguration_Configuration:
+			return deserializeGroupConfigurationList(d, schemas.GroupConfiguration_Configuration, &v.Configuration)
+		case schemas.GroupConfiguration_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GroupConfiguration_FailureReason, v.FailureReason)
+		case schemas.GroupConfiguration_ProposedConfiguration:
+			return deserializeGroupConfigurationList(d, schemas.GroupConfiguration_ProposedConfiguration, &v.ProposedConfiguration)
+		case schemas.GroupConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.GroupConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = GroupConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // An item in a group configuration. A group service configuration can have one or
@@ -135,6 +306,31 @@ type GroupConfigurationItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupConfigurationItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupConfigurationItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupParameterList(s, schemas.GroupConfigurationItem_Parameters, v.Parameters)
+	if v.Type != nil {
+		s.WriteString(schemas.GroupConfigurationItem_Type, *v.Type)
+	}
+}
+func (v *GroupConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupConfigurationItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupConfigurationItem_Parameters:
+			return deserializeGroupParameterList(d, schemas.GroupConfigurationItem_Parameters, &v.Parameters)
+		case schemas.GroupConfigurationItem_Type:
+			v.Type = new(string)
+			return d.ReadString(schemas.GroupConfigurationItem_Type, v.Type)
+		}
+		return nil
+	})
+}
+
 // A parameter for a group configuration item. For details about group service
 // configuration syntax, see [Service configurations for resource groups].
 //
@@ -158,6 +354,31 @@ type GroupConfigurationParameter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupConfigurationParameter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupConfigurationParameter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupConfigurationParameter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GroupConfigurationParameter_Name, *v.Name)
+	}
+	serializeGroupConfigurationParameterValueList(s, schemas.GroupConfigurationParameter_Values, v.Values)
+}
+func (v *GroupConfigurationParameter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupConfigurationParameter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupConfigurationParameter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GroupConfigurationParameter_Name, v.Name)
+		case schemas.GroupConfigurationParameter_Values:
+			return deserializeGroupConfigurationParameterValueList(d, schemas.GroupConfigurationParameter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A filter collection that you can use to restrict the results from a List
 // operation to only those you want to include.
 type GroupFilter struct {
@@ -174,6 +395,35 @@ type GroupFilter struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.GroupFilter_Name, string(v.Name))
+	}
+	serializeGroupFilterValues(s, schemas.GroupFilter_Values, v.Values)
+}
+func (v *GroupFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.GroupFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = GroupFilterName(ev)
+			return nil
+		case schemas.GroupFilter_Values:
+			return deserializeGroupFilterValues(d, schemas.GroupFilter_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // The unique identifiers for a resource group.
@@ -202,6 +452,58 @@ type GroupIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Criticality != nil {
+		s.WriteInt32(schemas.GroupIdentifier_Criticality, *v.Criticality)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.GroupIdentifier_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.GroupIdentifier_DisplayName, *v.DisplayName)
+	}
+	if v.GroupArn != nil {
+		s.WriteString(schemas.GroupIdentifier_GroupArn, *v.GroupArn)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.GroupIdentifier_GroupName, *v.GroupName)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.GroupIdentifier_Owner, *v.Owner)
+	}
+}
+func (v *GroupIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupIdentifier_Criticality:
+			v.Criticality = new(int32)
+			return d.ReadInt32(schemas.GroupIdentifier_Criticality, v.Criticality)
+		case schemas.GroupIdentifier_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GroupIdentifier_Description, v.Description)
+		case schemas.GroupIdentifier_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GroupIdentifier_DisplayName, v.DisplayName)
+		case schemas.GroupIdentifier_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.GroupIdentifier_GroupArn, v.GroupArn)
+		case schemas.GroupIdentifier_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.GroupIdentifier_GroupName, v.GroupName)
+		case schemas.GroupIdentifier_Owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.GroupIdentifier_Owner, v.Owner)
+		}
+		return nil
+	})
+}
+
 // The information about a grouping or ungrouping resource action.
 type GroupingStatusesItem struct {
 
@@ -227,6 +529,66 @@ type GroupingStatusesItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupingStatusesItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupingStatusesItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupingStatusesItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GroupingStatusesItem_Action, string(v.Action))
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.GroupingStatusesItem_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.GroupingStatusesItem_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.GroupingStatusesItem_ResourceArn, *v.ResourceArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GroupingStatusesItem_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.GroupingStatusesItem_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *GroupingStatusesItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupingStatusesItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupingStatusesItem_Action:
+			var ev string
+			if err := d.ReadString(schemas.GroupingStatusesItem_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = GroupingType(ev)
+			return nil
+		case schemas.GroupingStatusesItem_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.GroupingStatusesItem_ErrorCode, v.ErrorCode)
+		case schemas.GroupingStatusesItem_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.GroupingStatusesItem_ErrorMessage, v.ErrorMessage)
+		case schemas.GroupingStatusesItem_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.GroupingStatusesItem_ResourceArn, v.ResourceArn)
+		case schemas.GroupingStatusesItem_Status:
+			var ev string
+			if err := d.ReadString(schemas.GroupingStatusesItem_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = GroupingStatus(ev)
+			return nil
+		case schemas.GroupingStatusesItem_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GroupingStatusesItem_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // A mapping of a query attached to a resource group that determines the Amazon
 // Web Services resources that are members of the group.
 type GroupQuery struct {
@@ -244,6 +606,36 @@ type GroupQuery struct {
 	ResourceQuery *ResourceQuery
 
 	noSmithyDocumentSerde
+}
+
+func (v *GroupQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupName != nil {
+		s.WriteString(schemas.GroupQuery_GroupName, *v.GroupName)
+	}
+	if v.ResourceQuery != nil {
+		s.WriteStruct(schemas.GroupQuery_ResourceQuery)
+		v.ResourceQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GroupQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupQuery_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.GroupQuery_GroupName, v.GroupName)
+		case schemas.GroupQuery_ResourceQuery:
+			v.ResourceQuery = &ResourceQuery{}
+			return v.ResourceQuery.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A filter name and value pair that is used to obtain more specific results from
@@ -264,6 +656,35 @@ type ListGroupingStatusesFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupingStatusesFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupingStatusesFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupingStatusesFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ListGroupingStatusesFilter_Name, string(v.Name))
+	}
+	serializeListGroupingStatusesFilterValues(s, schemas.ListGroupingStatusesFilter_Values, v.Values)
+}
+func (v *ListGroupingStatusesFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupingStatusesFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupingStatusesFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.ListGroupingStatusesFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ListGroupingStatusesFilterName(ev)
+			return nil
+		case schemas.ListGroupingStatusesFilter_Values:
+			return deserializeListGroupingStatusesFilterValues(d, schemas.ListGroupingStatusesFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A structure returned by the ListGroupResources operation that contains identity and group
 // membership status information for one of the resources in the group.
 type ListGroupResourcesItem struct {
@@ -280,6 +701,38 @@ type ListGroupResourcesItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupResourcesItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupResourcesItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupResourcesItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteStruct(schemas.ListGroupResourcesItem_Identifier)
+		v.Identifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteStruct(schemas.ListGroupResourcesItem_Status)
+		v.Status.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ListGroupResourcesItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupResourcesItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupResourcesItem_Identifier:
+			v.Identifier = &ResourceIdentifier{}
+			return v.Identifier.Deserialize(d)
+		case schemas.ListGroupResourcesItem_Status:
+			v.Status = &ResourceStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Returns tag-sync tasks filtered by the Amazon resource name (ARN) or name of a
 // specified application group.
 type ListTagSyncTasksFilter struct {
@@ -293,6 +746,34 @@ type ListTagSyncTasksFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTagSyncTasksFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTagSyncTasksFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTagSyncTasksFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupArn != nil {
+		s.WriteString(schemas.ListTagSyncTasksFilter_GroupArn, *v.GroupArn)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.ListTagSyncTasksFilter_GroupName, *v.GroupName)
+	}
+}
+func (v *ListTagSyncTasksFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTagSyncTasksFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTagSyncTasksFilter_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.ListTagSyncTasksFilter_GroupArn, v.GroupArn)
+		case schemas.ListTagSyncTasksFilter_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.ListTagSyncTasksFilter_GroupName, v.GroupName)
+		}
+		return nil
+	})
+}
+
 // A structure that identifies a resource that is currently pending addition to
 // the group as a member. Adding a resource to a resource group happens
 // asynchronously as a background task and this one isn't completed yet.
@@ -302,6 +783,28 @@ type PendingResource struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PendingResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PendingResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PendingResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.PendingResource_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *PendingResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PendingResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PendingResource_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.PendingResource_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // A two-part error structure that can occur in ListGroupResources or
@@ -315,6 +818,38 @@ type QueryError struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueryError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.QueryError_ErrorCode, string(v.ErrorCode))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.QueryError_Message, *v.Message)
+	}
+}
+func (v *QueryError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryError_ErrorCode:
+			var ev string
+			if err := d.ReadString(schemas.QueryError_ErrorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = QueryErrorCode(ev)
+			return nil
+		case schemas.QueryError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.QueryError_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // A filter name and value pair that is used to obtain more specific results from
@@ -335,6 +870,35 @@ type ResourceFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ResourceFilter_Name, string(v.Name))
+	}
+	serializeResourceFilterValues(s, schemas.ResourceFilter_Values, v.Values)
+}
+func (v *ResourceFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceFilter_Name:
+			var ev string
+			if err := d.ReadString(schemas.ResourceFilter_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ResourceFilterName(ev)
+			return nil
+		case schemas.ResourceFilter_Values:
+			return deserializeResourceFilterValues(d, schemas.ResourceFilter_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A structure that contains the ARN of a resource and its resource type.
 type ResourceIdentifier struct {
 
@@ -345,6 +909,34 @@ type ResourceIdentifier struct {
 	ResourceType *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceIdentifier)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceIdentifier) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourceIdentifier_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ResourceIdentifier_ResourceType, *v.ResourceType)
+	}
+}
+func (v *ResourceIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceIdentifier, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceIdentifier_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourceIdentifier_ResourceArn, v.ResourceArn)
+		case schemas.ResourceIdentifier_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ResourceIdentifier_ResourceType, v.ResourceType)
+		}
+		return nil
+	})
 }
 
 // The query you can use to define a resource group or a search for resources. A
@@ -458,6 +1050,38 @@ type ResourceQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Query != nil {
+		s.WriteString(schemas.ResourceQuery_Query, *v.Query)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ResourceQuery_Type, string(v.Type))
+	}
+}
+func (v *ResourceQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceQuery_Query:
+			v.Query = new(string)
+			return d.ReadString(schemas.ResourceQuery_Query, v.Query)
+		case schemas.ResourceQuery_Type:
+			var ev string
+			if err := d.ReadString(schemas.ResourceQuery_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = QueryType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structure that identifies the current group membership status for a resource.
 // Adding a resource to a resource group is performed asynchronously as a
 // background task. A PENDING status indicates, for this resource, that the
@@ -468,6 +1092,32 @@ type ResourceStatus struct {
 	Name ResourceStatusValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.ResourceStatus_Name, string(v.Name))
+	}
+}
+func (v *ResourceStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceStatus_Name:
+			var ev string
+			if err := d.ReadString(schemas.ResourceStatus_Name, &ev); err != nil {
+				return err
+			}
+			v.Name = ResourceStatusValue(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The Amazon resource name (ARN) of the tag-sync task.
@@ -542,6 +1192,88 @@ type TagSyncTaskItem struct {
 	TaskArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagSyncTaskItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagSyncTaskItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagSyncTaskItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.TagSyncTaskItem_CreatedAt, *v.CreatedAt)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.TagSyncTaskItem_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.GroupArn != nil {
+		s.WriteString(schemas.TagSyncTaskItem_GroupArn, *v.GroupArn)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.TagSyncTaskItem_GroupName, *v.GroupName)
+	}
+	if v.ResourceQuery != nil {
+		s.WriteStruct(schemas.TagSyncTaskItem_ResourceQuery)
+		v.ResourceQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.TagSyncTaskItem_RoleArn, *v.RoleArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TagSyncTaskItem_Status, string(v.Status))
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.TagSyncTaskItem_TagKey, *v.TagKey)
+	}
+	if v.TagValue != nil {
+		s.WriteString(schemas.TagSyncTaskItem_TagValue, *v.TagValue)
+	}
+	if v.TaskArn != nil {
+		s.WriteString(schemas.TagSyncTaskItem_TaskArn, *v.TaskArn)
+	}
+}
+func (v *TagSyncTaskItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagSyncTaskItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagSyncTaskItem_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.TagSyncTaskItem_CreatedAt, v.CreatedAt)
+		case schemas.TagSyncTaskItem_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.TagSyncTaskItem_ErrorMessage, v.ErrorMessage)
+		case schemas.TagSyncTaskItem_GroupArn:
+			v.GroupArn = new(string)
+			return d.ReadString(schemas.TagSyncTaskItem_GroupArn, v.GroupArn)
+		case schemas.TagSyncTaskItem_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.TagSyncTaskItem_GroupName, v.GroupName)
+		case schemas.TagSyncTaskItem_ResourceQuery:
+			v.ResourceQuery = &ResourceQuery{}
+			return v.ResourceQuery.Deserialize(d)
+		case schemas.TagSyncTaskItem_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.TagSyncTaskItem_RoleArn, v.RoleArn)
+		case schemas.TagSyncTaskItem_Status:
+			var ev string
+			if err := d.ReadString(schemas.TagSyncTaskItem_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TagSyncTaskStatus(ev)
+			return nil
+		case schemas.TagSyncTaskItem_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.TagSyncTaskItem_TagKey, v.TagKey)
+		case schemas.TagSyncTaskItem_TagValue:
+			v.TagValue = new(string)
+			return d.ReadString(schemas.TagSyncTaskItem_TagValue, v.TagValue)
+		case schemas.TagSyncTaskItem_TaskArn:
+			v.TaskArn = new(string)
+			return d.ReadString(schemas.TagSyncTaskItem_TaskArn, v.TaskArn)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

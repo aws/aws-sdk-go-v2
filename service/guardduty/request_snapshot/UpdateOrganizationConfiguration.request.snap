@@ -1,0 +1,5 @@
+POST /detector/__DetectorId__/admin
+
+Content-Type: application/json
+
+{"autoEnable":true,"autoEnableOrganizationMembers":"NEW","dataSources":{"kubernetes":{"auditLogs":{"autoEnable":true}},"malwareProtection":{"scanEc2InstanceWithFindings":{"ebsVolumes":{"autoEnable":true}}},"s3Logs":{"autoEnable":true}},"features":[{"additionalConfiguration":[{"autoEnable":"NEW","name":"EKS_ADDON_MANAGEMENT"},{"autoEnable":"NEW","name":"EKS_ADDON_MANAGEMENT"}],"autoEnable":"NEW","name":"S3_DATA_EVENTS"},{"additionalConfiguration":[{"autoEnable":"NEW","name":"EKS_ADDON_MANAGEMENT"},{"autoEnable":"NEW","name":"EKS_ADDON_MANAGEMENT"}],"autoEnable":"NEW","name":"S3_DATA_EVENTS"}]}

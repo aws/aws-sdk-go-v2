@@ -1,0 +1,5 @@
+PUT /accounts/__AwsAccountId__/dashboards/__DashboardId__/linked-entities
+
+Content-Type: application/json
+
+{"LinkEntities":["__Member__","__Member__"]}

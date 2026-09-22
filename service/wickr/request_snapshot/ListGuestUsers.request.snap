@@ -1,0 +1,3 @@
+GET /networks/__NetworkId__/guest-users?billingPeriod=__BillingPeriod__&maxResults=1&nextToken=__NextToken__&sortDirection=ASC&sortFields=__SortFields__&username=__Username__
+
+

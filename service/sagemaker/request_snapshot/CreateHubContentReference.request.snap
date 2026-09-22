@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: SageMaker.CreateHubContentReference
+
+{"HubContentName":"__HubContentName__","HubName":"__HubName__","MinVersion":"__MinVersion__","SageMakerPublicHubContentArn":"__SageMakerPublicHubContentArn__","Tags":[{"Key":"__Key__","Value":"__Value__"},{"Key":"__Key__","Value":"__Value__"}]}

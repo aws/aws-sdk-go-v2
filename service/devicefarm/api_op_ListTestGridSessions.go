@@ -5,10 +5,10 @@ package devicefarm
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -59,6 +59,39 @@ type ListTestGridSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestGridSessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestGridSessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestGridSessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTimeAfter != nil {
+		s.WriteTime(schemas.ListTestGridSessionsRequest_creationTimeAfter, *v.CreationTimeAfter)
+	}
+	if v.CreationTimeBefore != nil {
+		s.WriteTime(schemas.ListTestGridSessionsRequest_creationTimeBefore, *v.CreationTimeBefore)
+	}
+	if v.EndTimeAfter != nil {
+		s.WriteTime(schemas.ListTestGridSessionsRequest_endTimeAfter, *v.EndTimeAfter)
+	}
+	if v.EndTimeBefore != nil {
+		s.WriteTime(schemas.ListTestGridSessionsRequest_endTimeBefore, *v.EndTimeBefore)
+	}
+	if v.MaxResult != nil {
+		s.WriteInt32(schemas.ListTestGridSessionsRequest_maxResult, *v.MaxResult)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestGridSessionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.ListTestGridSessionsRequest_projectArn, *v.ProjectArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListTestGridSessionsRequest_status, string(v.Status))
+	}
+}
+
 type ListTestGridSessionsOutput struct {
 
 	// Pagination token.
@@ -73,77 +106,51 @@ type ListTestGridSessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTestGridSessionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTestGridSessionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTestGridSessionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTestGridSessionsResult_nextToken, *v.NextToken)
+	}
+	serializeTestGridSessions(s, schemas.ListTestGridSessionsResult_testGridSessions, v.TestGridSessions)
+}
+func (v *ListTestGridSessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTestGridSessionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTestGridSessionsResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTestGridSessionsResult_nextToken, v.NextToken)
+		case schemas.ListTestGridSessionsResult_testGridSessions:
+			return deserializeTestGridSessions(d, schemas.ListTestGridSessionsResult_testGridSessions, &v.TestGridSessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTestGridSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessions, schemas.ListTestGridSessionsRequest, schemas.ListTestGridSessionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTestGridSessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTestGridSessions, schemas.ListTestGridSessionsRequest, schemas.ListTestGridSessionsResult), output: &ListTestGridSessionsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTestGridSessions{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTestGridSessions"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListTestGridSessionsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTestGridSessions(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +163,6 @@ func (c *Client) addOperationListTestGridSessionsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -263,11 +264,3 @@ type ListTestGridSessionsAPIClient interface {
 }
 
 var _ ListTestGridSessionsAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListTestGridSessions(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListTestGridSessions",
-	}
-}

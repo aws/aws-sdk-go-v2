@@ -5,14 +5,23 @@ package bedrock
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrock/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new custom model in Amazon Bedrock. After the model is active, you
 // can use it for inference.
+//
+// You can provide the model data source in one of the following ways:
+//
+//   - customModelDataSource — Specify a SageMaker AI model package ARN. Amazon
+//     Bedrock resolves the model package to retrieve the model artifacts. This is the
+//     preferred method for new SageMaker AI training outputs.
+//
+//   - modelSourceConfig — Specify an Amazon S3 URI pointing to the Amazon-managed
+//     Amazon S3 bucket containing your model artifacts.
 //
 // To use the model for inference, you must purchase Provisioned Throughput for
 // it. You can't use On-demand inference with these custom models. For more
@@ -62,18 +71,19 @@ type CreateCustomModelInput struct {
 	// This member is required.
 	ModelName *string
 
-	// The data source for the model. The Amazon S3 URI in the model source must be
-	// for the Amazon-managed Amazon S3 bucket containing your model artifacts.
-	//
-	// This member is required.
-	ModelSourceConfig types.ModelDataSource
-
 	// A unique, case-sensitive identifier to ensure that the API request completes no
 	// more than one time. If this token matches a previous request, Amazon Bedrock
 	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
 	//
 	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
+
+	// The data source for the custom model. Use this field to specify a SageMaker AI
+	// model package ARN as the source for your custom model. Amazon Bedrock resolves
+	// the model package to retrieve the model artifacts.
+	//
+	// You can specify either customModelDataSource or modelSourceConfig , but not both.
+	CustomModelDataSource types.CustomModelDataSource
 
 	// The Amazon Resource Name (ARN) of the customer managed KMS key to encrypt the
 	// custom model. If you don't provide a KMS key, Amazon Bedrock uses an Amazon Web
@@ -84,6 +94,10 @@ type CreateCustomModelInput struct {
 	//
 	// [Encryption of imported models]: https://docs.aws.amazon.com/bedrock/latest/userguide/encryption-import-model.html
 	ModelKmsKeyArn *string
+
+	// The data source for the model. The Amazon S3 URI in the model source must be
+	// for the Amazon-managed Amazon S3 bucket containing your model artifacts.
+	ModelSourceConfig types.ModelDataSource
 
 	// A list of key-value pairs to associate with the custom model resource. You can
 	// use these tags to organize and identify your resources.
@@ -99,10 +113,39 @@ type CreateCustomModelInput struct {
 	// access the Amazon S3 bucket containing your model artifacts and the KMS key (if
 	// specified). For more information, see [Setting up an IAM service role for importing models]in the Amazon Bedrock User Guide.
 	//
+	// This field is required when you use modelSourceConfig with an Amazon S3 data
+	// source. It is not required when you use customModelDataSource with a model
+	// package ARN, because Amazon Bedrock uses its own credentials to access the model
+	// artifacts.
+	//
 	// [Setting up an IAM service role for importing models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html
 	RoleArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateCustomModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateCustomModelRequest_clientRequestToken, *v.ClientRequestToken)
+	}
+	serializeCustomModelDataSource(s, schemas.CreateCustomModelRequest_customModelDataSource, v.CustomModelDataSource)
+	if v.ModelKmsKeyArn != nil {
+		s.WriteString(schemas.CreateCustomModelRequest_modelKmsKeyArn, *v.ModelKmsKeyArn)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.CreateCustomModelRequest_modelName, *v.ModelName)
+	}
+	serializeModelDataSource(s, schemas.CreateCustomModelRequest_modelSourceConfig, v.ModelSourceConfig)
+	serializeTagList(s, schemas.CreateCustomModelRequest_modelTags, v.ModelTags)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateCustomModelRequest_roleArn, *v.RoleArn)
+	}
 }
 
 type CreateCustomModelOutput struct {
@@ -118,65 +161,42 @@ type CreateCustomModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomModelOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomModelResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomModelOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelArn != nil {
+		s.WriteString(schemas.CreateCustomModelResponse_modelArn, *v.ModelArn)
+	}
+}
+func (v *CreateCustomModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomModelResponse_modelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.CreateCustomModelResponse_modelArn, v.ModelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomModel, schemas.CreateCustomModelRequest, schemas.CreateCustomModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomModel, schemas.CreateCustomModelRequest, schemas.CreateCustomModelResponse), output: &CreateCustomModelOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomModel{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomModel"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -186,12 +206,6 @@ func (c *Client) addOperationCreateCustomModelMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addOpCreateCustomModelValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomModel(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -204,12 +218,6 @@ func (c *Client) addOperationCreateCustomModelMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -249,12 +257,4 @@ func (m *idempotencyToken_initializeOpCreateCustomModel) HandleInitialize(ctx co
 }
 func addIdempotencyToken_opCreateCustomModelMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateCustomModel{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opCreateCustomModel(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "CreateCustomModel",
-	}
 }

@@ -5,10 +5,10 @@ package inspector2
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/inspector2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/inspector2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables Amazon Inspector scans for one or more Amazon Web Services accounts.
@@ -43,6 +43,34 @@ type EnableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdSet(s, schemas.EnableRequest_accountIds, v.AccountIds)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.EnableRequest_clientToken, *v.ClientToken)
+	}
+	serializeEnableResourceTypeList(s, schemas.EnableRequest_resourceTypes, v.ResourceTypes)
+}
+func (v *EnableInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableRequest_accountIds:
+			return deserializeAccountIdSet(d, schemas.EnableRequest_accountIds, &v.AccountIds)
+		case schemas.EnableRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.EnableRequest_clientToken, v.ClientToken)
+		case schemas.EnableRequest_resourceTypes:
+			return deserializeEnableResourceTypeList(d, schemas.EnableRequest_resourceTypes, &v.ResourceTypes)
+		}
+		return nil
+	})
+}
+
 type EnableOutput struct {
 
 	// Information on the accounts that have had Amazon Inspector scans successfully
@@ -61,65 +89,42 @@ type EnableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountList(s, schemas.EnableResponse_accounts, v.Accounts)
+	serializeFailedAccountList(s, schemas.EnableResponse_failedAccounts, v.FailedAccounts)
+}
+func (v *EnableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableResponse_accounts:
+			return deserializeAccountList(d, schemas.EnableResponse_accounts, &v.Accounts)
+		case schemas.EnableResponse_failedAccounts:
+			return deserializeFailedAccountList(d, schemas.EnableResponse_failedAccounts, &v.FailedAccounts)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Enable, schemas.EnableRequest, schemas.EnableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Enable, schemas.EnableRequest, schemas.EnableResponse), output: &EnableOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnable{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Enable"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
@@ -129,12 +134,6 @@ func (c *Client) addOperationEnableMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	if err = addOpEnableValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnable(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,12 +146,6 @@ func (c *Client) addOperationEnableMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -192,12 +185,4 @@ func (m *idempotencyToken_initializeOpEnable) HandleInitialize(ctx context.Conte
 }
 func addIdempotencyToken_opEnableMiddleware(stack *middleware.Stack, cfg Options) error {
 	return stack.Initialize.Add(&idempotencyToken_initializeOpEnable{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
-}
-
-func newServiceMetadataMiddleware_opEnable(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Enable",
-	}
 }

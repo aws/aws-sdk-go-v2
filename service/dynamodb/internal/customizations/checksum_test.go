@@ -3,7 +3,6 @@ package customizations
 import (
 	"bytes"
 	"io"
-	"io/ioutil"
 	"strings"
 	"testing"
 )
@@ -15,11 +14,11 @@ func TestCRC32ChecksumValidate(t *testing.T) {
 		ExpectErr   string
 	}{
 		"empty reader": {
-			Reader:      ioutil.NopCloser(&bytes.Buffer{}),
+			Reader:      io.NopCloser(&bytes.Buffer{}),
 			ExpectCRC32: 0,
 		},
 		"wrong checksum": {
-			Reader:      ioutil.NopCloser(bytes.NewBuffer([]byte("abc123"))),
+			Reader:      io.NopCloser(bytes.NewBuffer([]byte("abc123"))),
 			ExpectCRC32: 123456,
 			ExpectErr:   "did not match",
 		},
@@ -30,7 +29,7 @@ func TestCRC32ChecksumValidate(t *testing.T) {
 			ExpectCRC32: 0xcf02bb5c,
 		},
 		"without closer": {
-			Reader:      ioutil.NopCloser(bytes.NewBuffer([]byte("abc123"))),
+			Reader:      io.NopCloser(bytes.NewBuffer([]byte("abc123"))),
 			ExpectCRC32: 0xcf02bb5c,
 		},
 	}
@@ -40,7 +39,7 @@ func TestCRC32ChecksumValidate(t *testing.T) {
 
 			reader := wrapCRC32ChecksumValidate(c.ExpectCRC32, c.Reader)
 			// Asserts
-			io.Copy(ioutil.Discard, reader)
+			io.Copy(io.Discard, reader)
 
 			err := reader.Close()
 			if len(c.ExpectErr) != 0 {

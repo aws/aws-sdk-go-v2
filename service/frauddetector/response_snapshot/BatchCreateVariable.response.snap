@@ -1,0 +1,5 @@
+200
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: AWSHawksNestServiceFacade.BatchCreateVariable
+
+{"errors":[{"code":1,"message":"__Message__","name":"__Name__"},{"code":1,"message":"__Message__","name":"__Name__"}]}

@@ -4,11 +4,10 @@ package kms
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kms/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kms/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a [digital signature] for a message or message digest by using the private key in an
@@ -203,6 +202,31 @@ type SignInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DryRun != nil {
+		s.WriteBool(schemas.SignRequest_DryRun, *v.DryRun)
+	}
+	serializeGrantTokenList(s, schemas.SignRequest_GrantTokens, v.GrantTokens)
+	if v.KeyId != nil {
+		s.WriteString(schemas.SignRequest_KeyId, *v.KeyId)
+	}
+	if v.Message != nil {
+		s.WriteBlob(schemas.SignRequest_Message, v.Message)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.SignRequest_MessageType, string(v.MessageType))
+	}
+	if v.SigningAlgorithm != "" {
+		s.WriteString(schemas.SignRequest_SigningAlgorithm, string(v.SigningAlgorithm))
+	}
+}
+
 type SignOutput struct {
 
 	// The Amazon Resource Name ([key ARN] ) of the asymmetric KMS key that was used to sign the
@@ -237,77 +261,63 @@ type SignOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.SignResponse_KeyId, *v.KeyId)
+	}
+	if v.Signature != nil {
+		s.WriteBlob(schemas.SignResponse_Signature, v.Signature)
+	}
+	if v.SigningAlgorithm != "" {
+		s.WriteString(schemas.SignResponse_SigningAlgorithm, string(v.SigningAlgorithm))
+	}
+}
+func (v *SignOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignResponse_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.SignResponse_KeyId, v.KeyId)
+		case schemas.SignResponse_Signature:
+			return d.ReadBlob(schemas.SignResponse_Signature, &v.Signature)
+		case schemas.SignResponse_SigningAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.SignResponse_SigningAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.SigningAlgorithm = types.SigningAlgorithmSpec(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSignMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Sign, schemas.SignRequest, schemas.SignResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSign{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Sign, schemas.SignRequest, schemas.SignResponse), output: &SignOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSign{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "Sign"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpSignValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSign(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -322,22 +332,8 @@ func (c *Client) addOperationSignMiddlewares(stack *middleware.Stack, options Op
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opSign(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "Sign",
-	}
 }

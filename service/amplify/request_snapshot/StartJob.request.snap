@@ -1,0 +1,5 @@
+POST /apps/__AppId__/branches/__BranchName__/jobs
+
+Content-Type: application/json
+
+{"commitId":"__CommitId__","commitMessage":"__CommitMessage__","commitTime":946684800,"jobId":"__JobId__","jobReason":"__JobReason__","jobType":"RELEASE"}

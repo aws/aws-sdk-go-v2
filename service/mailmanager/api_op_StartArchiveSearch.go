@@ -4,11 +4,10 @@ package mailmanager
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -57,6 +56,32 @@ type StartArchiveSearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartArchiveSearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartArchiveSearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartArchiveSearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveId != nil {
+		s.WriteString(schemas.StartArchiveSearchRequest_ArchiveId, *v.ArchiveId)
+	}
+	if v.Filters != nil {
+		s.WriteStruct(schemas.StartArchiveSearchRequest_Filters)
+		v.Filters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FromTimestamp != nil {
+		s.WriteTime(schemas.StartArchiveSearchRequest_FromTimestamp, *v.FromTimestamp)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.StartArchiveSearchRequest_MaxResults, *v.MaxResults)
+	}
+	if v.ToTimestamp != nil {
+		s.WriteTime(schemas.StartArchiveSearchRequest_ToTimestamp, *v.ToTimestamp)
+	}
+}
+
 // The response from initiating an archive search.
 type StartArchiveSearchOutput struct {
 
@@ -69,77 +94,51 @@ type StartArchiveSearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartArchiveSearchOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartArchiveSearchResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartArchiveSearchOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SearchId != nil {
+		s.WriteString(schemas.StartArchiveSearchResponse_SearchId, *v.SearchId)
+	}
+}
+func (v *StartArchiveSearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartArchiveSearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartArchiveSearchResponse_SearchId:
+			v.SearchId = new(string)
+			return d.ReadString(schemas.StartArchiveSearchResponse_SearchId, v.SearchId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartArchiveSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartArchiveSearch, schemas.StartArchiveSearchRequest, schemas.StartArchiveSearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartArchiveSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartArchiveSearch, schemas.StartArchiveSearchRequest, schemas.StartArchiveSearchResponse), output: &StartArchiveSearchOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartArchiveSearch{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "StartArchiveSearch"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartArchiveSearchValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartArchiveSearch(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +153,8 @@ func (c *Client) addOperationStartArchiveSearchMiddlewares(stack *middleware.Sta
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opStartArchiveSearch(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "StartArchiveSearch",
-	}
 }

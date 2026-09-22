@@ -4,10 +4,9 @@ package cloudhsmv2
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified HSM. To specify an HSM, you can use its identifier (ID),
@@ -53,6 +52,27 @@ type DeleteHsmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHsmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHsmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHsmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterId != nil {
+		s.WriteString(schemas.DeleteHsmRequest_ClusterId, *v.ClusterId)
+	}
+	if v.EniId != nil {
+		s.WriteString(schemas.DeleteHsmRequest_EniId, *v.EniId)
+	}
+	if v.EniIp != nil {
+		s.WriteString(schemas.DeleteHsmRequest_EniIp, *v.EniIp)
+	}
+	if v.HsmId != nil {
+		s.WriteString(schemas.DeleteHsmRequest_HsmId, *v.HsmId)
+	}
+}
+
 type DeleteHsmOutput struct {
 
 	// The identifier (ID) of the HSM that was deleted.
@@ -64,77 +84,48 @@ type DeleteHsmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteHsmOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteHsmResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteHsmOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HsmId != nil {
+		s.WriteString(schemas.DeleteHsmResponse_HsmId, *v.HsmId)
+	}
+}
+func (v *DeleteHsmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteHsmResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteHsmResponse_HsmId:
+			v.HsmId = new(string)
+			return d.ReadString(schemas.DeleteHsmResponse_HsmId, v.HsmId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHsm, schemas.DeleteHsmRequest, schemas.DeleteHsmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteHsm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteHsm, schemas.DeleteHsmRequest, schemas.DeleteHsmResponse), output: &DeleteHsmOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteHsm{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteHsm"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpDeleteHsmValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteHsm(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,22 +140,8 @@ func (c *Client) addOperationDeleteHsmMiddlewares(stack *middleware.Stack, optio
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opDeleteHsm(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "DeleteHsm",
-	}
 }

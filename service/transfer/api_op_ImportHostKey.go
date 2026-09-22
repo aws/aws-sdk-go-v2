@@ -4,11 +4,10 @@ package transfer
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/transfer/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a host key to the server that's specified by the ServerId parameter.
@@ -50,6 +49,25 @@ type ImportHostKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportHostKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportHostKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportHostKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.ImportHostKeyRequest_Description, *v.Description)
+	}
+	if v.HostKeyBody != nil {
+		s.WriteString(schemas.ImportHostKeyRequest_HostKeyBody, *v.HostKeyBody)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.ImportHostKeyRequest_ServerId, *v.ServerId)
+	}
+	serializeTags(s, schemas.ImportHostKeyRequest_Tags, v.Tags)
+}
+
 type ImportHostKeyOutput struct {
 
 	// Returns the host key identifier for the imported key.
@@ -68,77 +86,54 @@ type ImportHostKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportHostKeyOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportHostKeyResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportHostKeyOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HostKeyId != nil {
+		s.WriteString(schemas.ImportHostKeyResponse_HostKeyId, *v.HostKeyId)
+	}
+	if v.ServerId != nil {
+		s.WriteString(schemas.ImportHostKeyResponse_ServerId, *v.ServerId)
+	}
+}
+func (v *ImportHostKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportHostKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportHostKeyResponse_HostKeyId:
+			v.HostKeyId = new(string)
+			return d.ReadString(schemas.ImportHostKeyResponse_HostKeyId, v.HostKeyId)
+		case schemas.ImportHostKeyResponse_ServerId:
+			v.ServerId = new(string)
+			return d.ReadString(schemas.ImportHostKeyResponse_ServerId, v.ServerId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportHostKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportHostKey, schemas.ImportHostKeyRequest, schemas.ImportHostKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpImportHostKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportHostKey, schemas.ImportHostKeyRequest, schemas.ImportHostKeyResponse), output: &ImportHostKeyOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpImportHostKey{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportHostKey"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpImportHostKeyValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportHostKey(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,22 +148,8 @@ func (c *Client) addOperationImportHostKeyMiddlewares(stack *middleware.Stack, o
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opImportHostKey(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ImportHostKey",
-	}
 }

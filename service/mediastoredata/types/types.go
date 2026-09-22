@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -29,6 +31,62 @@ type Item struct {
 	Type ItemType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Item) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Item)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Item) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentLength != nil {
+		s.WriteInt64(schemas.Item_ContentLength, *v.ContentLength)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.Item_ContentType, *v.ContentType)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.Item_ETag, *v.ETag)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.Item_LastModified, *v.LastModified)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Item_Name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Item_Type, string(v.Type))
+	}
+}
+func (v *Item) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Item, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Item_ContentLength:
+			v.ContentLength = new(int64)
+			return d.ReadInt64(schemas.Item_ContentLength, v.ContentLength)
+		case schemas.Item_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.Item_ContentType, v.ContentType)
+		case schemas.Item_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.Item_ETag, v.ETag)
+		case schemas.Item_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.Item_LastModified, v.LastModified)
+		case schemas.Item_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Item_Name, v.Name)
+		case schemas.Item_Type:
+			var ev string
+			if err := d.ReadString(schemas.Item_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ItemType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

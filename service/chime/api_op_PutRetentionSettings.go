@@ -4,11 +4,10 @@ package chime
 
 import (
 	"context"
-	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
@@ -54,6 +53,23 @@ type PutRetentionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRetentionSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRetentionSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRetentionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.PutRetentionSettingsRequest_AccountId, *v.AccountId)
+	}
+	if v.RetentionSettings != nil {
+		s.WriteStruct(schemas.PutRetentionSettingsRequest_RetentionSettings)
+		v.RetentionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutRetentionSettingsOutput struct {
 
 	// The timestamp representing the time at which the specified items are
@@ -69,77 +85,56 @@ type PutRetentionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutRetentionSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutRetentionSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutRetentionSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InitiateDeletionTimestamp != nil {
+		s.WriteTime(schemas.PutRetentionSettingsResponse_InitiateDeletionTimestamp, *v.InitiateDeletionTimestamp)
+	}
+	if v.RetentionSettings != nil {
+		s.WriteStruct(schemas.PutRetentionSettingsResponse_RetentionSettings)
+		v.RetentionSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutRetentionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutRetentionSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutRetentionSettingsResponse_InitiateDeletionTimestamp:
+			v.InitiateDeletionTimestamp = new(time.Time)
+			return d.ReadTime(schemas.PutRetentionSettingsResponse_InitiateDeletionTimestamp, v.InitiateDeletionTimestamp)
+		case schemas.PutRetentionSettingsResponse_RetentionSettings:
+			v.RetentionSettings = &types.RetentionSettings{}
+			return v.RetentionSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutRetentionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRetentionSettings, schemas.PutRetentionSettingsRequest, schemas.PutRetentionSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutRetentionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutRetentionSettings, schemas.PutRetentionSettingsRequest, schemas.PutRetentionSettingsResponse), output: &PutRetentionSettingsOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutRetentionSettings{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "PutRetentionSettings"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpPutRetentionSettingsValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRetentionSettings(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,22 +149,8 @@ func (c *Client) addOperationPutRetentionSettingsMiddlewares(stack *middleware.S
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
-		return err
-	}
 	if err = addInterceptors(stack, options); err != nil {
 		return err
 	}
 	return nil
-}
-
-func newServiceMetadataMiddleware_opPutRetentionSettings(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "PutRetentionSettings",
-	}
 }

@@ -1,0 +1,5 @@
+400
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: KinesisAnalytics_20150814.DiscoverInputSchema
+
+{"__type":"UnableToDetectSchemaException","ProcessedInputRecords":["__Member__","__Member__"],"RawInputRecords":["__Member__","__Member__"],"message":"__Message__"}

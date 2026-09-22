@@ -1,0 +1,5 @@
+POST /
+
+Content-Type: application/x-www-form-urlencoded
+
+Action=UnassignPrivateNatGatewayAddress&DryRun=true&MaxDrainDurationSeconds=1&NatGatewayId=__NatGatewayId__&PrivateIpAddress.1=__Member__&PrivateIpAddress.2=__Member__&Version=2016-11-15

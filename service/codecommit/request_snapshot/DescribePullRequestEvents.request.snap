@@ -1,0 +1,6 @@
+POST /
+
+Content-Type: application/x-amz-json-1.1
+X-Amz-Target: CodeCommit_20150413.DescribePullRequestEvents
+
+{"actorArn":"__ActorArn__","maxResults":1,"nextToken":"__NextToken__","pullRequestEventType":"PULL_REQUEST_CREATED","pullRequestId":"__PullRequestId__"}

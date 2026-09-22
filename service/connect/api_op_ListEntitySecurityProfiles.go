@@ -5,10 +5,10 @@ package connect
 import (
 	"context"
 	"fmt"
-	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 //	Lists all security profiles attached to a Q in Connect AIAgent Entity in an
@@ -58,6 +58,30 @@ type ListEntitySecurityProfilesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitySecurityProfilesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitySecurityProfilesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitySecurityProfilesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EntityArn != nil {
+		s.WriteString(schemas.ListEntitySecurityProfilesRequest_EntityArn, *v.EntityArn)
+	}
+	if v.EntityType != "" {
+		s.WriteString(schemas.ListEntitySecurityProfilesRequest_EntityType, string(v.EntityType))
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListEntitySecurityProfilesRequest_InstanceId, *v.InstanceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEntitySecurityProfilesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitySecurityProfilesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListEntitySecurityProfilesOutput struct {
 
 	//  The token for the next set of results. Use the value returned in the previous
@@ -73,77 +97,51 @@ type ListEntitySecurityProfilesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEntitySecurityProfilesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEntitySecurityProfilesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEntitySecurityProfilesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEntitySecurityProfilesResponse_NextToken, *v.NextToken)
+	}
+	serializeSecurityProfiles100(s, schemas.ListEntitySecurityProfilesResponse_SecurityProfiles, v.SecurityProfiles)
+}
+func (v *ListEntitySecurityProfilesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEntitySecurityProfilesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEntitySecurityProfilesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEntitySecurityProfilesResponse_NextToken, v.NextToken)
+		case schemas.ListEntitySecurityProfilesResponse_SecurityProfiles:
+			return deserializeSecurityProfiles100(d, schemas.ListEntitySecurityProfilesResponse_SecurityProfiles, &v.SecurityProfiles)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEntitySecurityProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitySecurityProfiles, schemas.ListEntitySecurityProfilesRequest, schemas.ListEntitySecurityProfilesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListEntitySecurityProfiles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEntitySecurityProfiles, schemas.ListEntitySecurityProfilesRequest, schemas.ListEntitySecurityProfilesResponse), output: &ListEntitySecurityProfilesOutput{}}, middleware.After); err != nil {
 		return err
-	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListEntitySecurityProfiles{}, middleware.After)
-	if err != nil {
-		return err
-	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEntitySecurityProfiles"); err != nil {
-		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
-	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addSetLoggerMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addClientRequestID(stack); err != nil {
-		return err
-	}
-	if err = addComputeContentLength(stack); err != nil {
-		return err
-	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options, c); err != nil {
-		return err
-	}
-	if err = addRawResponseToMetadata(stack); err != nil {
-		return err
-	}
-	if err = addRecordResponseTiming(stack); err != nil {
-		return err
-	}
-	if err = addSpanRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addClientUserAgent(stack, options); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddErrorCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addRecordResponseTiming(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
 	if err = addOpListEntitySecurityProfilesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEntitySecurityProfiles(options.Region), middleware.Before); err != nil {
-		return err
-	}
-	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,12 +154,6 @@ func (c *Client) addOperationListEntitySecurityProfilesMiddlewares(stack *middle
 		return err
 	}
 	if err = addDisableHTTPSMiddleware(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptBeforeRetryLoop(stack, options); err != nil {
-		return err
-	}
-	if err = addInterceptAttempt(stack, options); err != nil {
 		return err
 	}
 	if err = addInterceptors(stack, options); err != nil {
@@ -266,11 +258,3 @@ type ListEntitySecurityProfilesAPIClient interface {
 }
 
 var _ ListEntitySecurityProfilesAPIClient = (*Client)(nil)
-
-func newServiceMetadataMiddleware_opListEntitySecurityProfiles(region string) *awsmiddleware.RegisterServiceMetadata {
-	return &awsmiddleware.RegisterServiceMetadata{
-		Region:        region,
-		ServiceID:     ServiceID,
-		OperationName: "ListEntitySecurityProfiles",
-	}
-}

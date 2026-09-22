@@ -1,9 +1,6 @@
 ImportTable
 	Initialize stack step
-		RegisterServiceMetadata
 		OperationIdempotencyTokenAutoFill
-		legacyEndpointContextSetter
-		SetLogger
 		OperationInputValidation
 	Serialize stack step
 		setOperationInput
@@ -11,17 +8,13 @@ ImportTable
 		OperationSerializer
 	Build stack step
 		ClientRequestID
-		ComputeContentLength
-		SetCredentialSourceMiddleware
 		UserAgent
 		RecursionDetection
 	Finalize stack step
 		DisableAcceptEncodingGzip
-		spanRetryLoop
 		InterceptBeforeRetryLoop
 		Retry
 		InterceptAttempt
-		RetryMetricsHeader
 		ResolveAuthScheme
 		GetIdentity
 		ResolveEndpointV2
@@ -31,8 +24,6 @@ ImportTable
 		Signing
 	Deserialize stack step
 		AddRawResponseToMetadata
-		ErrorCloseResponseBody
-		CloseResponseBody
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
